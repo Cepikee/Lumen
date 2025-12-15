@@ -8,6 +8,7 @@ export async function GET(req: Request) {
     const sources = searchParams.get("sources");
     const startDate = searchParams.get("startDate");
     const endDate = searchParams.get("endDate");
+    const categories = searchParams.get("categories"); // 🔹 új
 
     let intervalValue: number | null = null;
     let intervalUnit = "DAY";
@@ -15,6 +16,7 @@ export async function GET(req: Request) {
     if (period === "24h") intervalValue = 1;
     else if (period === "7d") intervalValue = 7;
     else if (period === "30d") intervalValue = 30;
+    else if (period === "365d") intervalValue = 365;
 
     const connection = await mysql.createConnection({
       host: "localhost",
@@ -24,6 +26,7 @@ export async function GET(req: Request) {
     });
 
     const sourceList = sources ? sources.split(",").filter(s => s.trim() !== "") : [];
+    const categoryList = categories ? categories.split(",").filter(c => c.trim() !== "") : [];
 
     let whereParts: string[] = [];
     const params: any[] = [];
@@ -40,11 +43,17 @@ export async function GET(req: Request) {
       params.push(...sourceList);
     }
 
+    if (categoryList.length > 0) {
+      whereParts.push(`t.category IN (${categoryList.map(() => "?").join(",")})`);
+      params.push(...categoryList);
+    }
+
     const whereClause = whereParts.length > 0 ? `WHERE ${whereParts.join(" AND ")}` : "";
 
     const [rows] = await connection.execute<any[]>(
       `SELECT 
           t.keyword,
+          t.category,
           COUNT(*) AS freq,
           MIN(t.created_at) AS first_seen,
           MAX(t.created_at) AS last_seen,
@@ -69,9 +78,8 @@ export async function GET(req: Request) {
           }
        FROM trends t
        ${whereClause}
-       GROUP BY t.keyword
-       ORDER BY freq DESC
-       LIMIT 20`,
+       GROUP BY t.keyword, t.category
+       ORDER BY freq DESC`,
       params
     );
 

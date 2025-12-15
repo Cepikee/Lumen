@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 interface Filters {
   period: string;
   sources: string[];
@@ -12,7 +14,7 @@ interface Filters {
 
 interface Props {
   filters: Filters;
-  setFilters: (f: Filters) => void;
+  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
 }
 
 export default function TrendsFilters({ filters, setFilters }: Props) {
@@ -20,6 +22,14 @@ export default function TrendsFilters({ filters, setFilters }: Props) {
   const allCategories = ["Politika", "Sport", "Gazdaság", "Tech"];
 
   const isAllSources = filters.sources.length === 0;
+
+  // Segédfüggvény: normalizáljuk a kategória értékeket (kisbetű, ékezetek eltávolítása)
+  const normalize = (s: string) =>
+    s
+      .normalize?.("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .trim();
 
   return (
     <form className="d-flex flex-column gap-3 px-0 mx-0">
@@ -99,22 +109,27 @@ export default function TrendsFilters({ filters, setFilters }: Props) {
       {/* Kategóriák */}
       <div className="m-0 p-0">
         <label className="form-label fw-bold">📂 Kategóriák</label>
-        {allCategories.map((cat) => (
-          <div key={cat} className="form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              checked={filters.categories.includes(cat)}
-              onChange={(e) => {
-                const newCats = e.target.checked
-                  ? [...filters.categories, cat]
-                  : filters.categories.filter((c) => c !== cat);
-                setFilters({ ...filters, categories: newCats });
-              }}
-            />
-            <label className="form-check-label">{cat}</label>
-          </div>
-        ))}
+        {allCategories.map((cat) => {
+          const value = normalize(cat); // belső érték
+          const checked = filters.categories.map((c) => normalize(c)).includes(value);
+
+          return (
+            <div key={cat} className="form-check">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                checked={checked}
+                onChange={(e) => {
+                  const newCats = e.target.checked
+                    ? [...filters.categories, value]
+                    : filters.categories.filter((c) => normalize(c) !== value);
+                  setFilters({ ...filters, categories: newCats });
+                }}
+              />
+              <label className="form-check-label">{cat}</label>
+            </div>
+          );
+        })}
       </div>
 
       {/* Rendezés */}

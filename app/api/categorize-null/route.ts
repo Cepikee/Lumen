@@ -1,0 +1,121 @@
+import { NextResponse } from "next/server";
+import mysql from "mysql2/promise";
+
+export async function GET() {
+  console.log(">>> categorize-null route elindult!");
+
+  try {
+    const connection = await mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "jelszo",
+      database: "projekt2025"
+    });
+
+    // 🔧 Először megszámoljuk, mennyi NULL kategóriás sor van
+    const [countRows] = await connection.execute<any[]>(
+      "SELECT COUNT(*) AS cnt FROM trends WHERE category IS NULL"
+    );
+    const totalNulls = countRows[0].cnt;
+    console.log(">>> NULL kategóriás sorok száma:", totalNulls);
+
+    if (totalNulls === 0) {
+      await connection.end();
+      return NextResponse.json({
+        status: "ok",
+        message: "Nincs feldolgozandó NULL kategóriás kulcsszó",
+        processed: 0
+      });
+    }
+
+    // 🔧 Lekérjük pontosan annyi sort, amennyi NULL kategóriás van
+    const [rows] = await connection.query<any[]>(
+      `SELECT id, keyword FROM trends WHERE category IS NULL LIMIT ${totalNulls}`
+    );
+
+    console.log(">>> Feldolgozandó kulcsszavak száma:", rows.length);
+
+    const results: { keyword: string; category: string }[] = [];
+
+    for (const row of rows) {
+      console.log(">>> Kulcsszó feldolgozás:", row.keyword);
+
+      // Ellenőrizzük, van-e már kategória ehhez a kulcsszóhoz
+      const [existing] = await connection.execute<any[]>(
+        "SELECT category FROM trends WHERE keyword = ? AND category IS NOT NULL LIMIT 1",
+        [row.keyword]
+      );
+
+      let category = "";
+
+      if (existing.length > 0) {
+        // 🔧 Már van kategória → azt használjuk
+        category = existing[0].category;
+        console.log(`>>> Fix kategória: ${row.keyword} → ${category}`);
+      } else {
+        // 🔧 Nincs kategória → AI hívás
+        const prompt = `Adj meg egyetlen kategóriát az alábbi listából:
+[politika, gazdaság, technológia, kultúra, sport, egészségügy].
+Csak a kategória nevét írd vissza:
+
+${row.keyword}`;
+
+        try {
+          const res = await fetch("http://127.0.0.1:11434/api/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              model: "llama3:latest",
+              prompt,
+              stream: false
+            })
+          });
+
+          const text = await res.text();
+          let parsedCategory = "ismeretlen";
+          try {
+            const data = JSON.parse(text);
+            parsedCategory = (data.response ?? "").trim().toLowerCase();
+
+            const validCategories = [
+              "politika",
+              "gazdaság",
+              "technológia",
+              "kultúra",
+              "sport",
+              "egészségügy"
+            ];
+            if (!validCategories.includes(parsedCategory)) {
+              parsedCategory = "ismeretlen";
+            }
+          } catch (err) {
+            console.error(">>> JSON parse hiba kategóriánál:", err);
+            parsedCategory = "ismeretlen";
+          }
+          category = parsedCategory;
+        } catch (err: any) {
+          console.error(">>> Hiba AI kategorizálásnál:", err.message);
+          category = "ismeretlen";
+        }
+      }
+
+      // 🔧 Frissítjük minden NULL rekordot ehhez a kulcsszóhoz
+      await connection.execute(
+        "UPDATE trends SET category = ? WHERE keyword = ? AND category IS NULL",
+        [category, row.keyword]
+      );
+
+      results.push({ keyword: row.keyword, category });
+    }
+
+    await connection.end();
+    return NextResponse.json({
+      status: "ok",
+      message: "NULL kategóriás kulcsszavak újrakategorizálva",
+      processed: results.length
+    });
+  } catch (err: any) {
+    console.error("API /categorize-null hiba:", err.message);
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
+}

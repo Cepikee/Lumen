@@ -1,17 +1,13 @@
+// components/TrendsList.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import SparklineMini from "./SparklineMini";
 import SparklineDetailed from "./SparklineDetailed";
-import SpikeBadge from "./SpikeBadge"; // külön komponens
+import SpikeBadge from "./SpikeBadge";
 import { Modal, Button } from "react-bootstrap";
 
-interface Article {
-  id: number;
-  url: string;
-  content: string;
-  source: string;
-}
+interface Article { id: number; url: string; content: string; source: string; }
 
 interface Trend {
   keyword: string;
@@ -21,6 +17,8 @@ interface Trend {
   last_seen?: string;
   articles?: Article[];
   status?: "new" | "recurring" | "decreasing" | "stable" | "periodic" | "international";
+  // 🔹 csak ez az egy új mező került be, hogy tudjunk kategóriára szűrni
+  category?: string;
 }
 
 interface Props {
@@ -33,18 +31,25 @@ interface Props {
     startDate?: string;
     endDate?: string;
   };
+  trends?: Trend[]; // opcionális: ha a page adja, használjuk; ha nincs, fetch-elünk
 }
 
 type HistoryRow = { day: string; freq: number };
 
-export default function TrendsList({ filters }: Props) {
-  const [trends, setTrends] = useState<Trend[]>([]);
+export default function TrendsList({ filters, trends: externalTrends }: Props) {
+  const [trends, setTrends] = useState<Trend[]>(externalTrends ?? []);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [historyMap, setHistoryMap] = useState<Record<string, HistoryRow[]>>({});
   const [showChart, setShowChart] = useState<string | null>(null);
 
   useEffect(() => {
+    if (Array.isArray(externalTrends)) {
+      setTrends(externalTrends);
+      setHistoryMap({});
+      return;
+    }
+
     let mounted = true;
     setLoading(true);
     setError(false);
@@ -94,10 +99,12 @@ export default function TrendsList({ filters }: Props) {
         if (mounted) setLoading(false);
       });
 
-    return () => {
-      mounted = false;
-    };
-  }, [filters]);
+    return () => { mounted = false; };
+  }, [filters, externalTrends]);
+
+  useEffect(() => {
+    if (Array.isArray(externalTrends)) setTrends(externalTrends);
+  }, [externalTrends]);
 
   if (loading) return <p className="text-muted">Betöltés folyamatban…</p>;
   if (error) return <p className="text-danger">Hiba történt a trendek betöltésekor.</p>;
@@ -118,25 +125,34 @@ export default function TrendsList({ filters }: Props) {
     if (filters.period === "custom") return filterByCustomPeriod(base);
     return base;
   }
-function isIncreasing(history: HistoryRow[]): boolean {
-  if (!history || history.length < 2) return false;
-  const last = history[history.length - 1].freq;
-  const prev = history[history.length - 2].freq;
-  return last > prev; // csak akkor növekvő, ha tényleg nagyobb lett
-}
+
+  function isIncreasing(history: HistoryRow[]): boolean {
+    if (!history || history.length < 2) return false;
+    const last = history[history.length - 1].freq;
+    const prev = history[history.length - 2].freq;
+    return last > prev;
+  }
 
   function isDecreasing(history: HistoryRow[]): boolean {
-  if (!history || history.length < 2) return false;
-  const last = history[history.length - 1].freq;
-  const prev = history[history.length - 2].freq;
-  return last < prev; // csak akkor csökkenő, ha tényleg kisebb lett
-}
-  // Frontend filter: ha van keresőszöveg, csak azok a trendek jelennek meg
-  const visibleTrends = trends.filter((t) =>
-    filters.keyword && filters.keyword.trim().length > 0
-      ? t.keyword.toLowerCase().includes(filters.keyword.trim().toLowerCase())
-      : true
-  );
+    if (!history || history.length < 2) return false;
+    const last = history[history.length - 1].freq;
+    const prev = history[history.length - 2].freq;
+    return last < prev;
+  }
+
+  // 🔹 Szűrés: kulcsszó + kategória (ha van)
+  // 🔹 Szűrés: kulcsszó + kategória
+const visibleTrends = trends.filter((t) => {
+  const matchKeyword =
+    filters.keyword.trim().length === 0 ||
+    t.keyword.toLowerCase().includes(filters.keyword.trim().toLowerCase());
+
+  const matchCategory =
+    filters.categories.length === 0 ||
+    (t.category ? filters.categories.includes(t.category.toLowerCase()) : true);
+
+  return matchKeyword && matchCategory;
+});
 
   return (
     <>
@@ -201,18 +217,19 @@ function isIncreasing(history: HistoryRow[]): boolean {
                   <span className="badge bg-info">{t.freq}×</span>
 
                   {/* Új */}
-                 {t.first_seen && t.last_seen && t.first_seen === t.last_seen && (historyMap[t.keyword]?.length ?? 0) <= 1 && (
+                  {t.first_seen && t.last_seen && t.first_seen === t.last_seen && (historyMap[t.keyword]?.length ?? 0) <= 1 && (
                     <span className="badge badge-new">Új</span>
                   )}
 
-                {isIncreasing(displayHistory) && (
-  <span className="badge badge-increasing">Növekvő</span>
-)}
+                  {/* Növekvő */}
+                  {isIncreasing(displayHistory) && (
+                    <span className="badge badge-increasing">Növekvő</span>
+                  )}
 
-{/* Csökkenő */}
-{isDecreasing(displayHistory) && (
-  <span className="badge badge-decreasing">Csökkenő</span>
-)}
+                  {/* Csökkenő */}
+                  {isDecreasing(displayHistory) && (
+                    <span className="badge badge-decreasing">Csökkenő</span>
+                  )}
 
                   {/* Stabil */}
                   {(t.growth ?? 0) === 0 && t.freq > 5 && (
@@ -267,12 +284,12 @@ function isIncreasing(history: HistoryRow[]): boolean {
         </Modal.Body>
         <Modal.Footer>
           <Button
-  variant="secondary"
-  onClick={() => setShowChart(null)}
-  style={{ color: "#fff", fontWeight: 600 }}
-> 
-  Bezárás
-</Button>
+            variant="secondary"
+            onClick={() => setShowChart(null)}
+            style={{ color: "#fff", fontWeight: 600 }}
+          >
+            Bezárás
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

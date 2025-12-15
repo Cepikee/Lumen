@@ -182,12 +182,20 @@ ${article.content_text}`,
         });
 
         const catText = await catRes.text();
-        try {
-          const catData = JSON.parse(catText);
-          category = (catData.response ?? "").trim().toLowerCase();
-        } catch (err) {
-          console.error(">>> JSON parse hiba kategóriánál:", err);
-        }
+try {
+  const catData = JSON.parse(catText);
+  category = (catData.response ?? "").trim().toLowerCase();
+
+  // 🔧 fallback: ha üres vagy nem illeszkedik a listára
+  const validCategories = ["politika","gazdaság","technológia","kultúra","sport","egészségügy"];
+  if (!validCategories.includes(category)) {
+    category = "ismeretlen";
+  }
+} catch (err) {
+  console.error(">>> JSON parse hiba kategóriánál:", err);
+  category = "ismeretlen"; // 🔧 fallback hiba esetén
+}
+
 
         console.log(">>> Kategória:", category);
 
@@ -212,6 +220,7 @@ ${article.content_text}`,
             [summary, rawSummary, category, plagiarismScore, source, article.summary_id]
           );
           console.log(">>> Frissítve az adatbázisban:", article.url_canonical);
+          
         } else {
           await connection.execute(
             "INSERT INTO summaries (article_id, url, language, content, detailed_content, category, plagiarism_score, ai_clean, source) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
