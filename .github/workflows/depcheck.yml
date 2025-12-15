@@ -1,0 +1,21 @@
+name: Depcheck
+
+on: [push]
+
+jobs:
+  depcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kód letöltése
+        uses: actions/checkout@v2
+
+      - name: Node.js beállítása
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Függőségek telepítése
+        run: npm install
+
+      - name: Depcheck futtatása
+        run: npx depcheck
