@@ -70,3 +70,18 @@ Hibakezelés API hívásokhoz.
 README bővítése telepítési és futtatási instrukciókkal.
 
 Automatizált tesztelés bevezetése.
+
+📓 Fejlesztési napló – 2025. december 15.
+✅ Elkészült feladatok
+GitHub Actions CI workflow létrehozása (.github/workflows/ci.yml).
+
+Automatizált depcheck, lint és build futtatás minden push/pull request után.
+
+Node.js környezet beállítása cache‑eléssel a gyorsabb futásért.
+
+🎯 Eredmény
+A projekt mostantól automatikusan ellenőrzött minden commitnál.
+
+Hibás build vagy lint hiba nem kerülhet be a main branch‑be.
+
+Megalapozva a további CI/CD bővítések (tesztek, deploy).

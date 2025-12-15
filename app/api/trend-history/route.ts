@@ -17,7 +17,7 @@ export async function GET(req: Request) {
   try {
     // időszak értelmezése
     let intervalValue: number | null = null;
-    let intervalUnit = "DAY";
+    const intervalUnit = "DAY";
 
     if (period === "24h") intervalValue = 1;
     else if (period === "7d") intervalValue = 7;
@@ -35,7 +35,7 @@ export async function GET(req: Request) {
     });
 
     // WHERE feltételek összeállítása
-    let whereParts: string[] = ["keyword = ?"];
+    const whereParts: string[] = ["keyword = ?"];
     const params: any[] = [keyword];
 
     if (period !== "custom" && intervalValue) {
