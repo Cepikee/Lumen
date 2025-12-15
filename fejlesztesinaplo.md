@@ -1,87 +1,73 @@
-📖 V1.0 – Alap projekt dokumentáció
-🔧 Projekt célja
-React + Next.js alapú webalkalmazás.
+Nap: 2025. december 1.
+Cím: V1.0 – Alap projekt dokumentáció
 
-Cél: analitikai platform fejlesztése, amely tanítja és segíti a felhasználót az adatok értelmezésében.
+Elkészült feladatok:
 
-Ez az első stabil verzió, amely az alapokat lefekteti.
+Projekt inicializálása React + Next.js alapokon.
 
-🗂 Projekt szerkezete
-app/ mappa
+Alap szerkezet kialakítása: app/, lib/, konfigurációs fájlok.
 
-layout.tsx: fő layout komponens, minden oldal kerete.
+Globális stílusok (globals.css) hozzáadása.
 
-page.tsx: kezdőoldal, alap tartalom.
+GitHub repo létrehozása, .gitignore beállítása.
 
-globals.css: globális stílusok.
+Eredmény:
 
-lib/ mappa
+Az első stabil verzió elkészült, lefektetve az alapokat.
 
-.gitignore: belső könyvtárak kizárása.
+A projekt futtatható, alap layout és kezdőoldal működik.
 
-Konfigurációs fájlok
+Hibák?:
 
-next.config.ts: Next.js beállítások.
+Nem volt jelentős hiba, csak kisebb konfigurációs finomítások.
 
-tsconfig.json: TypeScript konfiguráció.
+Terv (előző napból):
 
-eslint.config.mjs: lint szabályok.
+Nincs, mivel ez volt az első nap.
 
-Csomagkezelés
+Nap: 2025. december 15.
+Cím: CI workflow és API fejlesztés
 
-package.json: függőségek és script-ek.
+Elkészült feladatok:
 
-package-lock.json: pontos verziók.
-
-⚙️ Függőségek (dependencies)
-React – komponens alapú UI.
-
-Next.js – keretrendszer SSR/SSG támogatással.
-
-TypeScript – típusbiztos fejlesztés.
-
-ESLint – kódminőség ellenőrzés.
-
-🎨 Funkciók ebben a verzióban
-Alap layout és kezdőoldal.
-
-Globális stílusok beállítása.
-
-Projekt inicializálva GitHubra.
-
-.gitignore beállítva (node_modules, build fájlok kizárva).
-
-Alap fejlesztési workflow: git add → git commit → git push.
-
-📝 Fejlesztési napló – V1.0
-Initial commit: projekt inicializálása, alap fájlok feltöltése.
-
-Struktúra kialakítása: app/, lib/, konfigurációs fájlok.
-
-Stílusok: globális CSS hozzáadva.
-
-GitHub integráció: repo létrehozva, privát beállítás.
-
-🚀 Következő lépések (V1.1 tervek)
-Új komponens: grafikon modul.
-
-Hibakezelés API hívásokhoz.
-
-README bővítése telepítési és futtatási instrukciókkal.
-
-Automatizált tesztelés bevezetése.
-
-📓 Fejlesztési napló – 2025. december 15.
-✅ Elkészült feladatok
 GitHub Actions CI workflow létrehozása (.github/workflows/ci.yml).
 
 Automatizált depcheck, lint és build futtatás minden push/pull request után.
 
-Node.js környezet beállítása cache‑eléssel a gyorsabb futásért.
+Node.js környezet cache‑eléssel a gyorsabb futásért.
 
-🎯 Eredmény
+API /trends endpoint frissítése:
+
+A lekérdezés most már visszaadja a category mezőt.
+
+Beépítettük a kategória szűrést (WHERE t.category IN (...)).
+
+Eltávolítottuk a LIMIT‑et, így az adott időszakban előforduló összes kulcsszó megjelenik.
+
+Frontend oldalon a TrendsList.tsx szűrési logikája most már helyesen működik a category mezővel.
+
+Eredmény:
+
 A projekt mostantól automatikusan ellenőrzött minden commitnál.
 
 Hibás build vagy lint hiba nem kerülhet be a main branch‑be.
 
-Megalapozva a további CI/CD bővítések (tesztek, deploy).
+A felhasználó bármely kategóriára szűrhet, és az adott időszakban előforduló összes kulcsszót látja.
+
+Az analitikai platform pontosabb képet ad a trendekről.
+
+Hibák?:
+
+SQL ONLY_FULL_GROUP_BY mód miatt kezdetben hibát dobott a GROUP BY használat.
+
+Javítva: GROUP BY t.keyword, t.category vagy MAX(t.category) megoldással.
+
+Terv (előző napból):
+
+Grafikon modul hozzáadása → nem valósult meg.
+
+Hibakezelés API hívásokhoz → részben, az SQL hibát kezeltük.
+
+README bővítése telepítési instrukciókkal → nem valósult meg.
+
+Automatizált tesztelés bevezetése → nem valósult meg.

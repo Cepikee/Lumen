@@ -12,7 +12,10 @@ export async function GET() {
       database: "projekt2025"
     });
 
-    // 🔧 Először megszámoljuk, mennyi NULL kategóriás sor van
+    // 🔧 Első lépés: minden kategóriát NULL-ra állítunk
+    await connection.execute("UPDATE trends SET category = NULL WHERE category IS NOT NULL");
+
+    // 🔧 Megszámoljuk, mennyi NULL kategóriás sor van
     const [countRows] = await connection.execute<any[]>(
       "SELECT COUNT(*) AS cnt FROM trends WHERE category IS NULL"
     );
@@ -28,7 +31,7 @@ export async function GET() {
       });
     }
 
-    // 🔧 Lekérjük pontosan annyi sort, amennyi NULL kategóriás van
+    // 🔧 Lekérjük a NULL kategóriás sorokat
     const [rows] = await connection.query<any[]>(
       `SELECT id, keyword FROM trends WHERE category IS NULL LIMIT ${totalNulls}`
     );
@@ -36,6 +39,7 @@ export async function GET() {
     console.log(">>> Feldolgozandó kulcsszavak száma:", rows.length);
 
     const results: { keyword: string; category: string }[] = [];
+    const validCategories = ["Politika", "Sport", "Gazdaság", "Tech"];
 
     for (const row of rows) {
       console.log(">>> Kulcsszó feldolgozás:", row.keyword);
@@ -49,14 +53,14 @@ export async function GET() {
       let category = "";
 
       if (existing.length > 0) {
-        // 🔧 Már van kategória → azt használjuk
+        // 🔧 Már van kategória → nem írjuk át
         category = existing[0].category;
-        console.log(`>>> Fix kategória: ${row.keyword} → ${category}`);
+        console.log(`>>> Már van kategória: ${row.keyword} → ${category}`);
       } else {
         // 🔧 Nincs kategória → AI hívás
         const prompt = `Adj meg egyetlen kategóriát az alábbi listából:
-[politika, gazdaság, technológia, kultúra, sport, egészségügy].
-Csak a kategória nevét írd vissza:
+[Politika, Sport, Gazdaság, Tech].
+Csak a kategória nevét írd vissza, nagybetűvel kezdve:
 
 ${row.keyword}`;
 
@@ -72,38 +76,32 @@ ${row.keyword}`;
           });
 
           const text = await res.text();
-          let parsedCategory = "ismeretlen";
           try {
             const data = JSON.parse(text);
-            parsedCategory = (data.response ?? "").trim().toLowerCase();
+            const parsedCategory = (data.response ?? "").trim();
 
-            const validCategories = [
-              "politika",
-              "gazdaság",
-              "technológia",
-              "kultúra",
-              "sport",
-              "egészségügy"
-            ];
-            if (!validCategories.includes(parsedCategory)) {
-              parsedCategory = "ismeretlen";
+            if (validCategories.includes(parsedCategory)) {
+              category = parsedCategory;
+            } else {
+              category = "";
             }
           } catch (err) {
             console.error(">>> JSON parse hiba kategóriánál:", err);
-            parsedCategory = "ismeretlen";
+            category = "";
           }
-          category = parsedCategory;
         } catch (err: any) {
           console.error(">>> Hiba AI kategorizálásnál:", err.message);
-          category = "ismeretlen";
+          category = "";
+        }
+
+        // 🔧 Csak akkor frissítünk, ha tényleg kaptunk érvényes kategóriát
+        if (category) {
+          await connection.execute(
+            "UPDATE trends SET category = ? WHERE keyword = ? AND category IS NULL",
+            [category, row.keyword]
+          );
         }
       }
-
-      // 🔧 Frissítjük minden NULL rekordot ehhez a kulcsszóhoz
-      await connection.execute(
-        "UPDATE trends SET category = ? WHERE keyword = ? AND category IS NULL",
-        [category, row.keyword]
-      );
 
       results.push({ keyword: row.keyword, category });
     }
@@ -112,7 +110,8 @@ ${row.keyword}`;
     return NextResponse.json({
       status: "ok",
       message: "NULL kategóriás kulcsszavak újrakategorizálva",
-      processed: results.length
+      processed: results.length,
+      details: results
     });
   } catch (err: any) {
     console.error("API /categorize-null hiba:", err.message);

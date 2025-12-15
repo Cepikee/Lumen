@@ -206,6 +206,7 @@ html, body {
 }
 
 
+
 /* 6–7: kék, pulzáló outline */
 .blue {
   background-color: #3B82F6; /* kék */
@@ -295,4 +296,48 @@ html, body {
   border-radius: 6px;
   font-weight: 600;
   color: #fff;
+}
+
+.badge-new {
+  background-color: #8B5E3C;   /* gesztenyepüré árnyalat */
+  border: 2px solid #000;      /* fekete keret */
+  border-radius: 6px;          /* lekerekített sarkok */
+  font-weight: 600;            /* félkövér betű */
+  color: #fff;                 /* fehér szöveg */
+}
+ 
+.badge.pending {
+  border: 2px solid #000;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;   /* kisebb betűméret */
+  color: #fff;
+  padding: 6px 12px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  /* Barna árnyalatok */
+  background: linear-gradient(
+    270deg,
+    #5C4033,   /* sötét csokoládébarna */
+    #A0522D,   /* karamell-barna */
+    #5C4033    /* vissza sötét barna */
+  );
+  background-size: 600% 600%;
+
+  /* Hullámzó animáció */
+  animation: waveBrown 4s ease infinite;
+}
+
+@keyframes waveBrown {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

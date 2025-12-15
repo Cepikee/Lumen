@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
+import CategoryHeatMap from "./CategoryHeatMap"; // 🔹 ha kell, használható
 
-interface Filters {
+// 🔹 Exportáljuk az interface-t, hogy máshol is használható legyen
+export interface Filters {
   period: string;
   sources: string[];
   categories: string[];
@@ -23,14 +25,6 @@ export default function TrendsFilters({ filters, setFilters }: Props) {
 
   const isAllSources = filters.sources.length === 0;
 
-  // Segédfüggvény: normalizáljuk a kategória értékeket (kisbetű, ékezetek eltávolítása)
-  const normalize = (s: string) =>
-    s
-      .normalize?.("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .trim();
-
   return (
     <form className="d-flex flex-column gap-3 px-0 mx-0">
       {/* Időszak */}
@@ -48,7 +42,6 @@ export default function TrendsFilters({ filters, setFilters }: Props) {
           <option value="custom">Egyedi</option>
         </select>
 
-        {/* Egyedi időszak dátumválasztó */}
         {filters.period === "custom" && (
           <div className="d-flex align-items-center gap-2 mt-2">
             <input
@@ -75,8 +68,6 @@ export default function TrendsFilters({ filters, setFilters }: Props) {
       {/* Források */}
       <div className="m-0 p-0">
         <label className="form-label fw-bold">📰 Források</label>
-
-        {/* 🔹 Mind opció */}
         <div className="form-check">
           <input
             type="checkbox"
@@ -87,7 +78,6 @@ export default function TrendsFilters({ filters, setFilters }: Props) {
           <label className="form-check-label">Mind</label>
         </div>
 
-        {/* 🔹 Egyedi források */}
         {allSources.map((src) => (
           <div key={src} className="form-check">
             <input
@@ -110,8 +100,7 @@ export default function TrendsFilters({ filters, setFilters }: Props) {
       <div className="m-0 p-0">
         <label className="form-label fw-bold">📂 Kategóriák</label>
         {allCategories.map((cat) => {
-          const value = normalize(cat); // belső érték
-          const checked = filters.categories.map((c) => normalize(c)).includes(value);
+          const checked = filters.categories.includes(cat);
 
           return (
             <div key={cat} className="form-check">
@@ -121,8 +110,8 @@ export default function TrendsFilters({ filters, setFilters }: Props) {
                 checked={checked}
                 onChange={(e) => {
                   const newCats = e.target.checked
-                    ? [...filters.categories, value]
-                    : filters.categories.filter((c) => normalize(c) !== value);
+                    ? [...filters.categories, cat]
+                    : filters.categories.filter((c) => c !== cat);
                   setFilters({ ...filters, categories: newCats });
                 }}
               />

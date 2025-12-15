@@ -216,10 +216,9 @@ const visibleTrends = trends.filter((t) => {
                 <div className="d-flex flex-wrap align-items-center gap-2 mt-2">
                   <span className="badge bg-info">{t.freq}×</span>
 
-                  {/* Új */}
-                  {t.first_seen && t.last_seen && t.first_seen === t.last_seen && (historyMap[t.keyword]?.length ?? 0) <= 1 && (
-                    <span className="badge badge-new">Új</span>
-                  )}
+                  {(historyMap[t.keyword]?.length ?? 0) === 1 && (
+  <span className="badge badge-new">Új</span>
+)}
 
                   {/* Növekvő */}
                   {isIncreasing(displayHistory) && (
