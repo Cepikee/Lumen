@@ -1,0 +1,121 @@
+Checklist — Projekt haladás
+
+📅 1. Hét — Stabil alapok
+
+[x] Adatbázis táblák rendberakása (articles tábla létrehozva és használatban)
+
+[x] API endpoint: /fetch-rss javítása (betölti az RSS-t)
+
+[x] AI hosszú elemzés stabilizálása (retry logika beépítve)
+
+[x] AI rövid verzió generálás stabilizálása
+
+[x] Cikk státuszok bevezetése (pending → processing → ready)
+
+[x] Frontend: főoldal listanézet, loading állapotok
+
+📅 2. Hét — Plágium és “biztonsági AI kör”
+
+[x] Plágium hash rendszer (SHA256 hash mentés az adatbázisba)
+
+[x] Összehasonlító logika (hash + simhash ellenőrzés, újrafogalmazás AI kör)
+
+[ ✅] “Zero plagiarism prompt” megírása (AI mindig 100% új szöveget gyárt)
+
+[✅ ] Backend: /ai-clean endpoint
+
+[✅ ] Frontend: jelzés a cikk mellett (“100% AI–fogalmazás”)
+
+📅 3. Hét — Felhasználói rendszer
+
+[ ] MySQL user tábla (id, email, password, subscription_type)
+
+[ ] Backend login
+
+[ ] Backend regisztráció
+
+[ ] JWT token kezelés
+
+[ ] Frontend login/reg form
+
+[ ] UI tisztítás, logout gomb
+
+📅 4. Hét — Előfizetés rendszer
+
+[ ] Stripe account létrehozása
+
+[ ] Termék: “AI Digest Pro – 3€/hó”
+
+[ ] Backend: /subscribe endpoint
+
+[ ] Webhook: Stripe értesítés → user subscription frissítése
+
+[ ] Frontend: előfizetési oldal
+
+[ ] Tartalom korlátozás előfizetőknek
+
+📅 5. Hét — Kommentek / Like rendszer
+
+[ ] MySQL: comments tábla
+
+[ ] Backend: POST /comment
+
+[ ] Backend: GET /comments/:articleId
+
+[ ] Likes tábla + API
+
+[ ] Frontend: komment lista, komment küldése, like gomb
+
+📅 6. Hét — Trendek / AI Insight rendszer
+
+[x] AI kulcsszó kinyerés (summary_long → 5 kulcsszó)
+
+[x] trend_keywords oszlop hozzáadása minden cikkhez
+
+[ ] Trend aggregator cron job (top 10 kulcsszó éjjel)
+
+[ ] Backend /trends endpoint
+
+[ ] Frontend trend oldal (TOP 10 téma, források)
+
+📅 7. Hét — AI Digest (napi email összefoglaló)
+
+[ ] Email küldő rendszer (SendGrid)
+
+[ ] AI digest prompt (5 mondatos összefoglaló)
+
+[ ] Backend: digest generálás
+
+[ ] Cron job: minden nap reggel 8:00
+
+[ ] Előfizetők emailje automatikusan kiküldve
+
+📅 8. Hét — Szerverre költözés + optimalizálás
+
+[ ] VPS kiválasztása, Node.js + MySQL telepítés
+
+[ ] Projekt feltöltése
+
+[ ] PM2 process manager
+
+[ ] SSL (Let’s Encrypt)
+
+[ ] Domain összekötése
+
+[ ] Tesztelés, bugfix
+
+🎉 Végcél:
+
+[x] AI-hírösszefoglaló oldal alap működik
+
+[ ] Előfizetés rendszer
+
+[ ] Napi digest
+
+[ ] Komment/lájk rendszer
+
+[ ] Trendgyűjtő teljes
+
+[x] Plágium–biztonság alap működik
+
+[ ] Teljes startup funkciókészlet
