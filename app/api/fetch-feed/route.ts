@@ -26,14 +26,14 @@ export async function GET() {
       );
 
       if (rows.length === 0) {
+        // mindig a mostani dátumot mentjük published_at mezőbe
         await connection.execute(
           `INSERT INTO articles (title, url_canonical, content_text, published_at, language)
-           VALUES (?, ?, ?, ?, ?)`,
+           VALUES (?, ?, ?, NOW(), ?)`,
           [
             item.title || "",
             item.link,
             item.contentSnippet || "",
-            item.pubDate ? new Date(item.pubDate) : new Date(),
             "hu",
           ]
         );

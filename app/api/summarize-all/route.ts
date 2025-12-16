@@ -15,17 +15,18 @@ Cikk:
 
 ${originalText}`;
 
-  const res = await fetch("http://127.0.0.1:11434/api/generate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "llama3:latest", prompt, stream: false })
-  });
-
-  const text = await res.text();
   try {
+    const res = await fetch("http://127.0.0.1:11434/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "llama3:latest", prompt, stream: false })
+    });
+
+    const text = await res.text();
     const data = JSON.parse(text);
     return (data.response ?? "").trim();
-  } catch {
+  } catch (err) {
+    console.error(">>> runOllamaShortSummary hiba:", err);
     return "";
   }
 }
@@ -44,17 +45,18 @@ Cikk:
 
 ${originalText}`;
 
-  const res = await fetch("http://127.0.0.1:11434/api/generate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "llama3:latest", prompt, stream: false })
-  });
-
-  const text = await res.text();
   try {
+    const res = await fetch("http://127.0.0.1:11434/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "llama3:latest", prompt, stream: false })
+    });
+
+    const text = await res.text();
     const data = JSON.parse(text);
     return (data.response ?? "").trim();
-  } catch {
+  } catch (err) {
+    console.error(">>> runOllamaLongAnalysis hiba:", err);
     return "";
   }
 }
@@ -70,14 +72,14 @@ Cikk:
 
 ${originalText}`;
 
-  const res = await fetch("http://127.0.0.1:11434/api/generate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "llama3:latest", prompt, stream: false })
-  });
-
-  const text = await res.text();
   try {
+    const res = await fetch("http://127.0.0.1:11434/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "llama3:latest", prompt, stream: false })
+    });
+
+    const text = await res.text();
     const data = JSON.parse(text);
     let raw = (data.response ?? "").trim();
 
@@ -94,12 +96,58 @@ ${originalText}`;
     }
 
     return keywords.slice(0, 10);
-  } catch {
+  } catch (err) {
+    console.error(">>> runOllamaKeywords hiba:", err);
     return [];
   }
 }
 
-// Forrás meghatározása URL alapján (TLD nélkül)
+// Kategorizáló függvény – csak Politika, Sport, Gazdaság, Tech
+function toTitleCase(str: string) {
+  const s = str.trim().toLowerCase();
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+const VALID_CATEGORIES = ["Politika", "Sport", "Gazdaság", "Tech"];
+
+async function runOllamaCategory(text: string) {
+  const prompt = `Adj meg egyetlen kategóriát az alábbi listából:
+${VALID_CATEGORIES.join(", ")}.
+Csak a kategória nevét írd vissza, első betű nagy, többi kicsi, semmi mást:
+
+${text}`;
+
+  try {
+    const res = await fetch("http://127.0.0.1:11434/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "llama3:latest", prompt, stream: false })
+    });
+
+    const raw = await res.text();
+    let candidate: string;
+
+    try {
+      const data = JSON.parse(raw);
+      candidate = String(data.response ?? "").trim();
+    } catch {
+      candidate = raw.trim();
+    }
+
+    candidate = toTitleCase(candidate);
+
+    if (!VALID_CATEGORIES.includes(candidate)) {
+      candidate = VALID_CATEGORIES[0]; // Politika fallback
+    }
+
+    return candidate;
+  } catch (err) {
+    console.error(">>> runOllamaCategory hiba:", err);
+    return "Politika";
+  }
+}
+
+// Forrás meghatározása URL alapján
 function getSourceFromUrl(url: string): string {
   try {
     const u = new URL(url);
@@ -117,7 +165,7 @@ function getSourceFromUrl(url: string): string {
     if (overrides[host]) return overrides[host];
 
     const parts = host.split(".");
-    if (parts.length >= 2) return parts[parts.length - 2]; // pl. telex.hu → telex
+    if (parts.length >= 2) return parts[parts.length - 2];
     return host;
   } catch {
     return "ismeretlen";
@@ -149,78 +197,63 @@ export async function GET() {
     for (const article of articles) {
       console.log(">>> Összefoglalás indul:", article.url_canonical);
 
-      const source = getSourceFromUrl(article.url_canonical); // ✅ csak ez az új rész
+      const source = getSourceFromUrl(article.url_canonical);
       console.log(">>> Forrás:", source);
 
-      let rawSummary = await runOllamaLongAnalysis(article.content_text);
+      const rawSummary = await runOllamaLongAnalysis(article.content_text);
       let summary = await runOllamaShortSummary(article.content_text);
 
       let plagiarismScore = 0;
-      const similarityScore = checkPlagiarism(article.content_text, summary);
-      if (similarityScore > 0.8) {
-        plagiarismScore = 1;
-        console.log("⚠️ Plágium gyanú rövid összefoglalónál! Újrafogalmazás indul...");
-        summary = await runOllamaShortSummary(article.content_text);
+      try {
+        const similarityScore = checkPlagiarism(article.content_text, summary);
+        if (similarityScore > 0.8) {
+          plagiarismScore = 1;
+          console.log("⚠️ Plágium gyanú rövid összefoglalónál! Újrafogalmazás indul...");
+          summary = await runOllamaShortSummary(article.content_text);
+        }
+        console.log(`>>> Plágium ellenőrzés: score=${plagiarismScore}, similarity=${similarityScore}`);
+      } catch (plErr) {
+        console.error(">>> Plágium ellenőrzés hiba:", plErr);
       }
 
-      console.log(`>>> Plágium ellenőrzés: score=${plagiarismScore}, similarity=${similarityScore}`);
+      // ✅ Cikk kategorizálása (garantált érvényes kategória)
+      const category = await runOllamaCategory(article.content_text);
+      console.log(">>> Cikk kategória:", category);
 
-      let category = "";
-      if (summary.length > 0) {
-        const catRes = await fetch("http://127.0.0.1:11434/api/generate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            model: "llama3:latest",
-            prompt: `Adj meg egyetlen kategóriát az alábbi listából:
-[politika, gazdaság, technológia, kultúra, sport, egészségügy].
-Csak a kategória nevét írd vissza:
+      // Kulcsszavak generálása
+      const keywords = await runOllamaKeywords(article.content_text);
+      console.log(">>> Kulcsszavak:", keywords);
 
-${article.content_text}`,
-            stream: false
-          })
-        });
+      for (const kw of keywords) {
+        const kwCategory = await runOllamaCategory(kw);
 
-        const catText = await catRes.text();
-try {
-  const catData = JSON.parse(catText);
-  category = (catData.response ?? "").trim().toLowerCase();
-
-  // 🔧 fallback: ha üres vagy nem illeszkedik a listára
-  const validCategories = ["politika","gazdaság","technológia","kultúra","sport","egészségügy"];
-  if (!validCategories.includes(category)) {
-    category = "ismeretlen";
-  }
-} catch (err) {
-  console.error(">>> JSON parse hiba kategóriánál:", err);
-  category = "ismeretlen"; // 🔧 fallback hiba esetén
-}
-
-
-        console.log(">>> Kategória:", category);
-
-        const keywords = await runOllamaKeywords(article.content_text);
-        console.log(">>> Kulcsszavak:", keywords);
-
-        for (const kw of keywords) {
+        try {
           await connection.execute(
-            "INSERT INTO keywords (article_id, keyword) VALUES (?, ?)",
-            [article.id, kw]
+            "INSERT INTO keywords (article_id, keyword, category, created_at) VALUES (?, ?, ?, NOW())",
+            [article.id, kw, kwCategory]
           );
-
-          await connection.execute(
-            "INSERT INTO trends (keyword, created_at, category, source) VALUES (?, NOW(), ?, ?)",
-            [kw, category, source] // ✅ source mentése
-          );
+        } catch (kwErr) {
+          console.error(">>> Hiba keywords beszúrásnál:", kwErr);
         }
 
+        try {
+          await connection.execute(
+            "INSERT INTO trends (keyword, created_at, category, source) VALUES (?, NOW(), ?, ?)",
+            [kw, kwCategory, source]
+          );
+        } catch (trendErr) {
+          console.error(">>> Hiba trends beszúrásnál:", trendErr);
+        }
+      }
+
+      // Summaries tábla frissítése vagy beszúrása
+      try {
         if (article.summary_id) {
           await connection.execute(
             "UPDATE summaries SET content = ?, detailed_content = ?, category = ?, plagiarism_score = ?, ai_clean = 1, source = ? WHERE id = ?",
             [summary, rawSummary, category, plagiarismScore, source, article.summary_id]
           );
           console.log(">>> Frissítve az adatbázisban:", article.url_canonical);
-          
         } else {
           await connection.execute(
             "INSERT INTO summaries (article_id, url, language, content, detailed_content, category, plagiarism_score, ai_clean, source) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -228,6 +261,8 @@ try {
           );
           console.log(">>> Mentve az adatbázisba:", article.url_canonical);
         }
+      } catch (sumErr) {
+        console.error(">>> Hiba summaries beszúrásnál/frissítésnél:", sumErr);
       }
     }
 

@@ -6,6 +6,7 @@ import SparklineMini from "./SparklineMini";
 import SparklineDetailed from "./SparklineDetailed";
 import SpikeBadge from "./SpikeBadge";
 import { Modal, Button } from "react-bootstrap";
+import TrendSourcesModal from "./TrendSourcesModal";
 
 type HistoryRow = { day: string; freq: number };
 
@@ -21,6 +22,14 @@ interface Trend {
   status?: "new" | "recurring" | "decreasing" | "stable" | "periodic" | "international";
   category?: string;
   history?: HistoryRow[];
+}
+
+interface Source {
+  title: string;
+  url: string;
+  source: string;
+  date: string;
+  summary?: string;
 }
 
 export default function TrendsPanel({ filters }: { filters: Filters }) {
@@ -171,6 +180,29 @@ function calcGrowth(history: HistoryRow[]): number {
     return last < prev;
   }
 
+
+const [sources, setSources] = useState<Source[]>([]);
+const [activeSourcesKeyword, setActiveSourcesKeyword] = useState<string | null>(null);
+
+function handleShowSources(keyword: string, period: string = filters.period) {
+  setActiveSourcesKeyword(keyword);
+
+  fetch(`/api/trends/trend-sources?keyword=${encodeURIComponent(keyword)}&period=${encodeURIComponent(period)}`)
+    .then(res => res.json())
+    .then((data: Source[]) => {
+      setSources(data); // közvetlenül tömbként tároljuk
+    })
+    .catch(err => {
+      console.error("Források betöltése sikertelen:", err);
+      setSources([]);
+    });
+}
+
+
+
+
+
+
   const visibleTrends = trends.filter((t) => {
     const matchKeyword =
       !filters.keyword || filters.keyword.trim().length === 0
@@ -248,6 +280,25 @@ function calcGrowth(history: HistoryRow[]): number {
                 </div>
 
                 <div className="d-flex flex-wrap align-items-center gap-2 mt-2">
+                   <button
+    className="btn btn-sm btn-outline-primary me-2"
+     onClick={() => {
+    setActiveSourcesKeyword(t.keyword);
+    handleShowSources(t.keyword, filters.period);
+  }}
+>
+    Cikkek
+  </button>
+ <TrendSourcesModal
+  show={activeSourcesKeyword === t.keyword}
+  onHide={() => setActiveSourcesKeyword(null)}
+  keyword={t.keyword}
+  sources={sources}   // közvetlenül a tömböt adjuk át
+  defaultPeriod={filters.period}
+  onPeriodChange={handleShowSources}
+/>
+
+
                   <span className="badge bg-info">{t.frequency}×</span>
 
                   {displayHistory.length === 1 && <span className="badge bg-success">Új</span>}
