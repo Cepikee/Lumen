@@ -1,4 +1,3 @@
-// components/TrendsList.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -17,7 +16,6 @@ interface Trend {
   last_seen?: string;
   articles?: Article[];
   status?: "new" | "recurring" | "decreasing" | "stable" | "periodic" | "international";
-  // 🔹 csak ez az egy új mező került be, hogy tudjunk kategóriára szűrni
   category?: string;
 }
 
@@ -31,7 +29,7 @@ interface Props {
     startDate?: string;
     endDate?: string;
   };
-  trends?: Trend[]; // opcionális: ha a page adja, használjuk; ha nincs, fetch-elünk
+  trends?: Trend[];
 }
 
 type HistoryRow = { day: string; freq: number };
@@ -68,7 +66,7 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
       .then((res) => res.json())
       .then((data) => {
         if (!mounted) return;
-        const trendList = Array.isArray(data.trends) ? data.trends : [];
+        const trendList = Array.isArray(data.trends) ? data.trends : Array.isArray(data) ? data : [];
         setTrends(trendList);
         setHistoryMap({});
 
@@ -140,19 +138,17 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
     return last < prev;
   }
 
-  // 🔹 Szűrés: kulcsszó + kategória (ha van)
-  // 🔹 Szűrés: kulcsszó + kategória
-const visibleTrends = trends.filter((t) => {
-  const matchKeyword =
-    filters.keyword.trim().length === 0 ||
-    t.keyword.toLowerCase().includes(filters.keyword.trim().toLowerCase());
+  const visibleTrends = trends.filter((t) => {
+    const matchKeyword =
+      filters.keyword.trim().length === 0 ||
+      t.keyword.toLowerCase().includes(filters.keyword.trim().toLowerCase());
 
-  const matchCategory =
-    filters.categories.length === 0 ||
-    (t.category ? filters.categories.includes(t.category.toLowerCase()) : true);
+    const matchCategory =
+      filters.categories.length === 0 ||
+      (t.category ? filters.categories.includes(t.category.toLowerCase()) : true);
 
-  return matchKeyword && matchCategory;
-});
+    return matchKeyword && matchCategory;
+  });
 
   return (
     <>
@@ -164,7 +160,6 @@ const visibleTrends = trends.filter((t) => {
           return (
             <li key={t.keyword} className="list-group-item">
               <div className="d-flex flex-column">
-                {/* Felső sor: kulcsszó + sparkline */}
                 <div className="d-flex justify-content-between align-items-center" style={{ width: "100%" }}>
                   <span className="fw-bold fs-5">{t.keyword}</span>
 
@@ -180,10 +175,8 @@ const visibleTrends = trends.filter((t) => {
                           pointerEvents: "none",
                         }}
                       >
-                        <SparklineMini history={displayHistory} period={""} />
+                        <SparklineMini history={displayHistory} period={filters.period} />
                       </div>
-
-                      {/* Kattintható overlay */}
                       <div
                         role="button"
                         aria-label="Részletes grafikon megnyitása"
@@ -212,40 +205,16 @@ const visibleTrends = trends.filter((t) => {
                   )}
                 </div>
 
-                {/* Alsó sor: jelvények */}
                 <div className="d-flex flex-wrap align-items-center gap-2 mt-2">
                   <span className="badge bg-info">{t.freq}×</span>
-
-                  {(historyMap[t.keyword]?.length ?? 0) === 1 && (
-  <span className="badge badge-new">Új</span>
-)}
-
-                  {/* Növekvő */}
-                  {isIncreasing(displayHistory) && (
-                    <span className="badge badge-increasing">Növekvő</span>
-                  )}
-
-                  {/* Csökkenő */}
-                  {isDecreasing(displayHistory) && (
-                    <span className="badge badge-decreasing">Csökkenő</span>
-                  )}
-
-                  {/* Stabil */}
-                  {(t.growth ?? 0) === 0 && t.freq > 5 && (
-                    <span className="badge badge-stable">Stabil</span>
-                  )}
-
-                  {/* Időszakos */}
-                  {filters.period === "custom" && (
-                    <span className="badge badge-periodic">Időszakos</span>
-                  )}
-
-                  {/* Nemzetközi */}
+                  {(historyMap[t.keyword]?.length ?? 0) === 1 && <span className="badge badge-new">Új</span>}
+                  {isIncreasing(displayHistory) && <span className="badge badge-increasing">Növekvő</span>}
+                  {isDecreasing(displayHistory) && <span className="badge badge-decreasing">Csökkenő</span>}
+                  {(t.growth ?? 0) === 0 && t.freq > 5 && <span className="badge badge-stable">Stabil</span>}
+                  {filters.period === "custom" && <span className="badge badge-periodic">Időszakos</span>}
                   {t.keyword.match(/ország|nemzetközi|EU|világ/i) && (
                     <span className="badge badge-international">Nemzetközi</span>
                   )}
-
-                  {/* SpikeBadge komponens */}
                   <SpikeBadge
                     growth={t.growth ?? null}
                     period={filters.period}
@@ -259,7 +228,6 @@ const visibleTrends = trends.filter((t) => {
         })}
       </ul>
 
-      {/* Modal a részletes grafikonhoz */}
       <Modal show={!!showChart} onHide={() => setShowChart(null)} size="lg" centered>
         <Modal.Header closeButton>
           <Modal.Title>{showChart} – Részletes trend</Modal.Title>

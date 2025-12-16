@@ -1,11 +1,12 @@
+// SpikeBadge.tsx
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SpikeModal from "./SpikeModal";
 
 interface SpikeBadgeProps {
-  growth: number | null;
+  growth: number | string | null;
   topic: string;
-  totalCount: number;
+  totalCount: number | string;
   period: string;
 }
 
@@ -26,19 +27,12 @@ function getIndexFromGrowth(growth: number): number {
 export default function SpikeBadge({ growth, topic, totalCount, period }: SpikeBadgeProps) {
   const [showModal, setShowModal] = useState(false);
 
-  // 🔧 Debug log minden rendernél
-  useEffect(() => {
-    console.log("DEBUG SpikeBadge", {
-      topic,
-      totalCount,
-      growth,
-      period,
-    });
-  }, [topic, totalCount, growth, period]);
+  // Biztonságos típuskonverzió
+  const growthNum = typeof growth === "string" ? parseFloat(growth) || 0 : growth ?? 0;
+  const totalCountNum = typeof totalCount === "string" ? parseInt(totalCount as string, 10) || 0 : totalCount ?? 0;
 
-  // Egyszerű szabály: ha csak 1× → besorolás alatt
-  const isPending = totalCount <= 1;
-  const index = !isPending ? getIndexFromGrowth(growth ?? 0) : null;
+  const isPending = totalCountNum <= 1;
+  const index = !isPending ? getIndexFromGrowth(growthNum) : null;
 
   const getClassName = (i: number | null) => {
     if (i == null) return "badge pending";
@@ -61,12 +55,14 @@ export default function SpikeBadge({ growth, topic, totalCount, period }: SpikeB
           position: "relative",
           overflow: "hidden",
           color: "#FFFFFF",
+          padding: "6px 10px",
+          display: "inline-block",
         }}
         onClick={() => setShowModal(true)}
+        role="button"
+        aria-label={`Spike badge for ${topic}`}
       >
-        {index === null
-          ? "Besorolás alatt"
-          : `Spike — Index ${index} ${index === 10 ? "🔥" : ""}`}
+        {index === null ? "Besorolás alatt" : `Spike — Index ${index} ${index === 10 ? "🔥" : ""}`}
       </span>
 
       <SpikeModal
@@ -74,7 +70,7 @@ export default function SpikeBadge({ growth, topic, totalCount, period }: SpikeB
         index={index}
         show={showModal}
         onClose={() => setShowModal(false)}
-        initialStats={{ growth, totalCount }}
+        initialStats={{ growth: growthNum, totalCount: totalCountNum }}
       />
     </>
   );

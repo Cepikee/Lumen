@@ -25,49 +25,28 @@ Terv (előző napból):
 
 Nincs, mivel ez volt az első nap.
 
-Nap: 2025. december 15.
-Cím: CI workflow és API fejlesztés
+# Fejlesztési napló – 2025-12-15
 
-Elkészült feladatok:
+## Mai feladatok
+- `categorize-null` route.ts elkészítése és futtatása.
+- Kategóriák újrakiosztása (Politika, Sport, Gazdaság, Tech).
+- Frontend `TrendsFilters` és `TrendsPanel` komponensek tesztelése.
 
-GitHub Actions CI workflow létrehozása (.github/workflows/ci.yml).
+## Eredmények
+- Az adatbázisban a kategóriák sikeresen NULL-ra állítva, majd újrakategorizálva.
+- SQL ellenőrzés: `SELECT keyword, category, frequency ...` visszaadja a megfelelő sorokat.
+- Git commit készült a mai változtatásokról.
 
-Automatizált depcheck, lint és build futtatás minden push/pull request után.
+## Hibák / Kritikus problémák
+- **Szűrős megjelenítés továbbra sem működik.**
+  - Frontend `filters.categories` tömböt küldi, de a backend route nem jól kezeli az SQL paraméterezést.
+  - A frontend `Trend` interface `freq` mezőt vár, míg az adatbázisban `frequency` van → mezőnév eltérés.
+- A `route.ts` futása beragadt, kézzel kellett leállítani (Ctrl+C).
+- Ez **kritikusan fontos hiba**, mert a szűrők nélkül a felhasználói élmény sérül. Holnap első feladat: backend `/api/trends` route javítása (categories tömb kezelése + frequency alias).
 
-Node.js környezet cache‑eléssel a gyorsabb futásért.
-
-API /trends endpoint frissítése:
-
-A lekérdezés most már visszaadja a category mezőt.
-
-Beépítettük a kategória szűrést (WHERE t.category IN (...)).
-
-Eltávolítottuk a LIMIT‑et, így az adott időszakban előforduló összes kulcsszó megjelenik.
-
-Frontend oldalon a TrendsList.tsx szűrési logikája most már helyesen működik a category mezővel.
-
-Eredmény:
-
-A projekt mostantól automatikusan ellenőrzött minden commitnál.
-
-Hibás build vagy lint hiba nem kerülhet be a main branch‑be.
-
-A felhasználó bármely kategóriára szűrhet, és az adott időszakban előforduló összes kulcsszót látja.
-
-Az analitikai platform pontosabb képet ad a trendekről.
-
-Hibák?:
-
-SQL ONLY_FULL_GROUP_BY mód miatt kezdetben hibát dobott a GROUP BY használat.
-
-Javítva: GROUP BY t.keyword, t.category vagy MAX(t.category) megoldással.
-
-Terv (előző napból):
-
-Grafikon modul hozzáadása → nem valósult meg.
-
-Hibakezelés API hívásokhoz → részben, az SQL hibát kezeltük.
-
-README bővítése telepítési instrukciókkal → nem valósult meg.
-
-Automatizált tesztelés bevezetése → nem valósult meg.
+## Holnapi teendők
+- `/api/trends` route javítása:
+  - `filters.categories` → SQL `IN (...)` helyes paraméterezés.
+  - `frequency AS freq` alias, hogy a frontend változatlanul működjön.
+- Frontend ellenőrzés: `TrendsPanel` helyesen jelenítse meg a kategóriákat és gyakoriságot.
+- Tesztelés: szűrők (forrás, kategória, időszak) működjenek együtt.

@@ -8,7 +8,7 @@ export async function GET(req: Request) {
     const sources = searchParams.get("sources");
     const startDate = searchParams.get("startDate");
     const endDate = searchParams.get("endDate");
-    const categories = searchParams.get("categories"); // 🔹 új
+    const categories = searchParams.get("categories");
 
     let intervalValue: number | null = null;
     let intervalUnit = "DAY";
@@ -25,30 +25,66 @@ export async function GET(req: Request) {
       database: "projekt2025"
     });
 
-    const sourceList = sources ? sources.split(",").filter(s => s.trim() !== "") : [];
-    const categoryList = categories ? categories.split(",").filter(c => c.trim() !== "") : [];
+    const sourceList = sources ? sources.split(",").map(s => s.trim()).filter(s => s !== "") : [];
+    const categoryList = categories ? categories.split(",").map(c => c.trim()).filter(c => c !== "") : [];
 
     let whereParts: string[] = [];
     const params: any[] = [];
 
+    // időszak kezelése
     if (period === "custom" && startDate && endDate) {
       whereParts.push(`DATE(t.created_at) BETWEEN ? AND ?`);
       params.push(startDate, endDate);
     } else if (intervalValue) {
+      // intervalValue biztonságos, mert előre definiált értékekből jön
       whereParts.push(`t.created_at >= NOW() - INTERVAL ${intervalValue} ${intervalUnit}`);
     }
 
+    // források (case-insensitive)
     if (sourceList.length > 0) {
-      whereParts.push(`t.source IN (${sourceList.map(() => "?").join(",")})`);
-      params.push(...sourceList);
+      whereParts.push(`LOWER(COALESCE(t.source, '')) IN (${sourceList.map(() => "?").join(",")})`);
+      params.push(...sourceList.map(s => s.toLowerCase()));
     }
 
+    // kategóriák (case-insensitive, ékezetekre a backend normalizálása a legegyszerűbb)
     if (categoryList.length > 0) {
-      whereParts.push(`t.category IN (${categoryList.map(() => "?").join(",")})`);
-      params.push(...categoryList);
+      whereParts.push(`LOWER(COALESCE(t.category, '')) IN (${categoryList.map(() => "?").join(",")})`);
+      params.push(...categoryList.map(c => c.toLowerCase()));
     }
 
     const whereClause = whereParts.length > 0 ? `WHERE ${whereParts.join(" AND ")}` : "";
+
+    // DEBUG: logoljuk a beérkező searchParams-okat, a WHERE-t és a params tömböt
+    console.log("DEBUG /api/trends SEARCHPARAMS:", {
+      period,
+      sources,
+      startDate,
+      endDate,
+      categories
+    });
+    console.log("DEBUG /api/trends WHERE:", whereClause);
+    console.log("DEBUG /api/trends PARAMS:", params);
+
+    // growth csak akkor számolódjon, ha intervalValue definiált és > 0
+    let growthSql = "NULL AS growth";
+    if (intervalValue && intervalValue > 0) {
+      const prevInterval = 2 * intervalValue;
+      growthSql = `(
+        (COUNT(*) - (
+          SELECT COUNT(*) 
+          FROM trends t2 
+          WHERE t2.keyword = t.keyword 
+            AND t2.created_at BETWEEN NOW() - INTERVAL ${prevInterval} ${intervalUnit} 
+                                AND NOW() - INTERVAL ${intervalValue} ${intervalUnit}
+        )) / GREATEST(1, (
+          SELECT COUNT(*) 
+          FROM trends t2 
+          WHERE t2.keyword = t.keyword 
+            AND t2.created_at BETWEEN NOW() - INTERVAL ${prevInterval} ${intervalUnit} 
+                                AND NOW() - INTERVAL ${intervalValue} ${intervalUnit}
+        ))
+      ) AS growth`;
+    }
 
     const [rows] = await connection.execute<any[]>(
       `SELECT 
@@ -57,31 +93,16 @@ export async function GET(req: Request) {
           COUNT(*) AS freq,
           MIN(t.created_at) AS first_seen,
           MAX(t.created_at) AS last_seen,
-          ${
-            period === "custom"
-              ? "NULL AS growth"
-              : `(
-                  (COUNT(*) - (
-                    SELECT COUNT(*) 
-                    FROM trends t2 
-                    WHERE t2.keyword = t.keyword 
-                      AND t2.created_at BETWEEN NOW() - INTERVAL ${2 * (intervalValue ?? 0)} ${intervalUnit} 
-                                          AND NOW() - INTERVAL ${intervalValue ?? 0} ${intervalUnit}
-                  )) / GREATEST(1, (
-                    SELECT COUNT(*) 
-                    FROM trends t2 
-                    WHERE t2.keyword = t.keyword 
-                      AND t2.created_at BETWEEN NOW() - INTERVAL ${2 * (intervalValue ?? 0)} ${intervalUnit} 
-                                          AND NOW() - INTERVAL ${intervalValue ?? 0} ${intervalUnit}
-                  ))
-                ) AS growth`
-          }
+          ${growthSql}
        FROM trends t
        ${whereClause}
        GROUP BY t.keyword, t.category
        ORDER BY freq DESC`,
       params
     );
+
+    // DEBUG: hány sort adott vissza a lekérdezés
+    console.log("DEBUG /api/trends ROWS_COUNT:", Array.isArray(rows) ? rows.length : 0);
 
     await connection.end();
 

@@ -74,12 +74,8 @@ export default function Page() {
         </div>
       )}
 
-      <TrendsSection
-        show={showTrendsPanel}
-        onToggle={() => setShowTrendsPanel((v) => !v)}
-        trendExpanded={trendExpanded}
-        setTrendExpanded={setTrendExpanded}
-      />
+     
+
 
       <FeedList items={history} expandedId={expandedId} setExpandedId={setExpandedId} />
     </main>

@@ -3,6 +3,7 @@
 import React from "react";
 import CategoryHeatMap from "./CategoryHeatMap"; // 🔹 ha kell, használható
 
+import TrendsDebug from "./TrendsDebug";
 // 🔹 Exportáljuk az interface-t, hogy máshol is használható legyen
 export interface Filters {
   period: string;
@@ -101,7 +102,7 @@ export default function TrendsFilters({ filters, setFilters }: Props) {
         <label className="form-label fw-bold">📂 Kategóriák</label>
         {allCategories.map((cat) => {
           const checked = filters.categories.includes(cat);
-
+<TrendsDebug filters={filters} />
           return (
             <div key={cat} className="form-check">
               <input

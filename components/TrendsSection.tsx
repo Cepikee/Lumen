@@ -1,18 +1,16 @@
 "use client";
-import TrendsPanel from "./TrendsPanel";
+import TrendsPanel from "@/components/TrendsPanel";
 
 interface Props {
   show: boolean;
   onToggle: () => void;
-  trendExpanded: string | null;
-  setTrendExpanded: (k: string | null) => void;
+  filters: any; // vagy pontosan a Filters típus, ha exportálva van
 }
 
 export default function TrendsSection({
   show,
   onToggle,
-  trendExpanded,
-  setTrendExpanded,
+  filters,
 }: Props) {
   return (
     <>
@@ -24,7 +22,7 @@ export default function TrendsSection({
       </div>
 
       {show ? (
-        <TrendsPanel trendExpanded={trendExpanded} setTrendExpanded={setTrendExpanded} />
+        <TrendsPanel filters={filters} />
       ) : (
         <p className="text-muted mb-4">A trendek panel jelenleg zárva van.</p>
       )}
