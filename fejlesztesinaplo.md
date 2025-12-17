@@ -202,7 +202,24 @@ A queue bevezetése megszünteti a káoszt, és biztosítja a skálázható, meg
 
 
 # Fejlesztési napló – 2025-12-17
+## Mi változott
+- Csökkentettük a kezdeti megjelenített trendek számát 50-re, hogy ne indítsunk 1000+ per-key API hívást.
+- Hozzáadtunk egy "Továbbiak betöltése" gombot, ami batch-szerűen növeli a visibleCount-ot.
+- bevezettünk egy ref alapú historyCache-et, amely megakadályozza, hogy ugyanazt a /api/trend-history végpontot többször hívjuk ugyanarra a kulcsszóra.
+- A visibleCount visszaáll alapértékre, ha a felhasználói kereső, kategóriák vagy rendezés változik.
+- Külön useEffect: 1) trends lista lekérése, 2) per-key history lekérése csak a jelenleg megjelenített elemekhez.
 
+Miért jó ez
+- Drasztikusan csökkenti a párhuzamos /api/trend-history hívások számát.
+- Javítja a UI teljesítményt és csökkenti a backend terhelését.
+- Egyszerű, visszafordítható megoldás, később bővíthető infinite scroll vagy batch endpoint támogatással.
+
+Tesztelési lépések
+1. Nyisd meg az appot, válassz period=7d és egy forrást.
+2. Ellenőrizd a Network fülön, hogy maximum 50 `/api/trend-history` hívás indul.
+3. Kattints a Továbbiak betöltése gombra többször, figyeld a további hívásokat.
+4. Módosítsd a keresőt vagy kategóriát, ellenőrizd, hogy a visibleCount visszaáll 50-re és a cache invalidálódik.
+## 
 ## 🔴 Kritikus hiba
 - **cron.js – summarize-all**
   - ✅ Átalakítva ciklikus, batch-alapú feldolgozásra → folyamatosan fut, nem csak egyszer a végén.
