@@ -202,12 +202,20 @@ A queue bevezetése megszünteti a káoszt, és biztosítja a skálázható, meg
 
 
 # Fejlesztési napló – 2025-12-17
-## Mi változott
+## Mi változott ez volt az utolsó változtatás
 - Csökkentettük a kezdeti megjelenített trendek számát 50-re, hogy ne indítsunk 1000+ per-key API hívást.
 - Hozzáadtunk egy "Továbbiak betöltése" gombot, ami batch-szerűen növeli a visibleCount-ot.
 - bevezettünk egy ref alapú historyCache-et, amely megakadályozza, hogy ugyanazt a /api/trend-history végpontot többször hívjuk ugyanarra a kulcsszóra.
 - A visibleCount visszaáll alapértékre, ha a felhasználói kereső, kategóriák vagy rendezés változik.
 - Külön useEffect: 1) trends lista lekérése, 2) per-key history lekérése csak a jelenleg megjelenített elemekhez.
+fix(trends): szigorított kategória- és kulcsszó promptok
+
+- eltávolítva a végtelen ciklus a kategóriafüggvényből
+- prompt szigorítás: csak Politika, Sport, Gazdaság, Tech engedélyezett
+- kulcsszavaknál explicit utasítás, hogy ne írjon bevezetőt vagy magyarázatot
+- megszüntetve a hibás sorok beszúrása (pl. "Here are the keywords...")
+
+
 
 Miért jó ez
 - Drasztikusan csökkenti a párhuzamos /api/trend-history hívások számát.

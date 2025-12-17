@@ -100,16 +100,49 @@ async function runOllamaShortSummary(text: string) {
 async function runOllamaLongAnalysis(text: string) {
   return await callOllama(`Írj részletes elemzést (3–6 bekezdés), plágiummentesen:\n\n${text}`);
 }
+// Kulcsszavak
 async function runOllamaKeywords(text: string) {
-  const raw = await callOllama(`Adj vissza 6–10 kulcsszót magyarul, vesszővel elválasztva:\n\n${text}`);
-  return raw.split(/[,\n]/).map(k => k.trim()).filter(k => k.length >= 2).slice(0, 10);
+  const raw = await callOllama(
+    `Adj vissza pontosan 6–10 kulcsszót magyarul, vesszővel elválasztva.
+Semmi mást ne írj, ne magyarázz, ne vezess be.
+Szöveg: ${text}`
+  );
+
+  return raw
+    .split(/[,\n]/)
+    .map(k => k.trim())
+    .filter(k => k.length >= 2)
+    .slice(0, 10);
 }
-const VALID_CATEGORIES = ["Politika", "Sport", "Gazdaság", "Tech"];
+
+
+// Kategória
 async function runOllamaCategory(text: string) {
-  const raw = await callOllama(`Adj meg egyetlen kategóriát az alábbi listából: ${VALID_CATEGORIES.join(", ")}.\n\n${text}`);
-  const candidate = (raw || "").charAt(0).toUpperCase() + (raw || "").slice(1).toLowerCase();
-  return VALID_CATEGORIES.includes(candidate) ? candidate : "Politika";
+  const raw = await callOllama(
+    `Adj meg egyetlen kategóriát az alábbi listából: Politika, Sport, Gazdaság, Tech.
+Csak a kategória nevét írd vissza, nagybetűvel kezdve.
+A döntést mindig a teljes szöveg kontextusa alapján hozd meg, ne csak a szó önmagában vett jelentése alapján.
+Szöveg: ${text}
+`
+  );
+
+  const cleaned = (raw || "").trim().toLowerCase();
+  const valid = ["politika", "sport", "gazdaság", "tech"];
+
+  if (valid.includes(cleaned)) {
+    // alakítsuk vissza a helyes formára
+    switch (cleaned) {
+      case "politika": return "Politika";
+      case "sport": return "Sport";
+      case "gazdaság": return "Gazdaság";
+      case "tech": return "Tech";
+    }
+  }
+
+  throw new Error(`Érvénytelen kategória válasz: "${raw}"`);
 }
+
+
 function getSourceFromUrl(url: string) {
   try {
     const u = new URL(url);
