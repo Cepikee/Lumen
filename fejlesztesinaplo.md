@@ -111,3 +111,125 @@ Idempotencia: biztosítsuk, hogy a summarizálás idempotens legyen, így újrah
 Retry és backoff: hibakezelésnél alkalmazzunk exponential backoffot és max retry számot.
 
 Logging és metrikák: részletes logolás minden batchről, időtartamokról, hibákról, és alap metrikák gyűjtése (processed/sec, failures, queue length).
+
+
+
+
+
+
+Új fejlesztési irányelvek – 2025-12-17
+Kiinduló probléma
+A cron.js jelenlegi működése nem fenntartható: a summarize-all csak egyszer fut a cron végén, emiatt túl sok adatot újratölt, redundáns feldolgozást okoz, és a 7 napos nézet nem stabil, míg a 30 napos nézet már megjelenik, de nem megbízható.
+
+Eddigi javaslatok
+Ciklusos feldolgozás: a summarizer folyamatosan fusson, ne csak egyszer.
+
+Batch és limitálás: kisebb adagokban (pl. 100 rekord), párhuzamosan, de korlátozott concurrency‑vel.
+
+Feldolgozási státusz flag: minden rekordhoz pending, in_progress, done jelölés.
+
+Inkrementális summarizálás: csak az új vagy változott rekordokat dolgozzuk fel.
+
+Cache és deduplikáció: tároljuk az összegzéseket, ne kérjünk feleslegesen újra.
+
+Monitoring és logolás: batch méretek, hibák, időtartamok nyomon követése.
+
+Új fejlesztési irányelvek
+Idempotencia minden műveletben
+
+Minden summarizáló és feldolgozó művelet legyen idempotens: többszöri futtatás ugyanarra az adatra ne okozzon duplikációt vagy hibát.
+
+Ez biztosítja, hogy újrafutás esetén sem lesz adatvesztés vagy ismétlés.
+
+Inkrementális feldolgozás, ne nulláról
+
+Ne az egész időszakot dolgozzuk újra, hanem csak az újonnan érkezett vagy módosult rekordokat.
+
+Ez csökkenti a terhelést és gyorsítja a frissítést.
+
+Cache használata
+
+Az összegzéseket és aggregációkat cache‑ben tároljuk (pl. Redis vagy külön táblában).
+
+A frontend mindig a cache‑ből olvas, így elkerülhető a felesleges újratöltés.
+
+Duplikáció szűrése
+
+Minden rekordhoz kulcs (keyword + url + date) alapján deduplikálás.
+
+Így nem kerülhet be kétszer ugyanaz a cikk.
+
+Státusz flag kötelező
+
+Minden rekordhoz legyen status mező (pending, in_progress, done, failed).
+
+Ez biztosítja az átlátható feldolgozást és megakadályozza a káoszt.
+
+Queue alapú feldolgozás
+
+Queue nélkül káosz van: be kell vezetni egy üzenetsort (Redis Streams, RabbitMQ, SQS).
+
+Az új cikkek bekerülnek a queue‑ba, a summarizer pedig folyamatosan fogyasztja őket.
+
+Ez biztosítja a skálázhatóságot és a stabil feldolgozást.
+
+Mire jutottunk így
+A rendszer folyamatosan, ciklikusan dolgozik, nem egyszeri tömeges futásokkal.
+
+Minden művelet idempotens, így újrafutásnál nincs duplikáció.
+
+Az adatok inkrementálisan kerülnek feldolgozásra, nem nulláról.
+
+A cache és a deduplikáció csökkenti a felesleges újratöltést.
+
+A státusz flag átláthatóvá teszi a folyamatot.
+
+A queue bevezetése megszünteti a káoszt, és biztosítja a skálázható, megbízható működést.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Fejlesztési napló – 2025-12-17
+
+## 🔴 Kritikus hiba
+- **cron.js – summarize-all**
+  - ✅ Átalakítva ciklikus, batch-alapú feldolgozásra → folyamatosan fut, nem csak egyszer a végén.
+  - ✅ LIMIT és concurrency lecsökkentve → nem terheli túl a gépet.
+  - ✅ Hibás prepared statement (`LIMIT ?`) javítva → stabilan fut.
+
+## 🟠 Magas prioritás
+- Inkrementális feldolgozás
+  - ⬜ Csak új vagy változott rekordok kezelése.
+- Deduplication és státusz flag
+  - ⬜ `processed` mező bevezetése.
+- Frontend–backend összhang
+  - ⬜ Modalban a `sources` átadása egyszerűsítve.
+- Cache kezelés
+  - ⬜ Felesleges újratöltések megakadályozása.
+
+## 🟡 Közepes prioritás
+- Logging és monitoring
+  - ⬜ Részletes log minden batchről.
+- Retry/backoff mechanizmus
+  - ⬜ Exponential backoff hibák esetén.
+- Tesztelés
+  - ⬜ Unit tesztek a summarizerre.
+  - ⬜ Terheléses tesztek a batch méretekre.
+
+## ✅ Teendők sorrendben
+- **Ma** – cron.js ciklikus futásra átírva ✅
+- **Holnap** – státusz flag + inkrementális feldolgozás
+- **Következő sprint** – cache réteg + monitoring
+- **Hosszabb távon** – queue alapú feldolgozás (Redis/RabbitMQ)
