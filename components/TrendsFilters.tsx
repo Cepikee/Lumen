@@ -22,7 +22,17 @@ interface Props {
 
 export default function TrendsFilters({ filters, setFilters }: Props) {
   const allSources = ["Telex", "444", "Index"];
-  const allCategories = ["Politika", "Sport", "Gazdaság", "Tech"];
+  const allCategories = [
+  "Politika",
+  "Sport",
+  "Gazdaság",
+  "Tech",
+  "Kultúra",
+  "Egészségügy",
+  "Oktatás",
+  "Közélet",
+];
+
 
   const isAllSources = filters.sources.length === 0;
 

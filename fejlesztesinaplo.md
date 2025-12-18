@@ -216,24 +216,6 @@ fix(trends): szigorított kategória- és kulcsszó promptok
 - megszüntetve a hibás sorok beszúrása (pl. "Here are the keywords...")
 
 
-
-Miért jó ez
-- Drasztikusan csökkenti a párhuzamos /api/trend-history hívások számát.
-- Javítja a UI teljesítményt és csökkenti a backend terhelését.
-- Egyszerű, visszafordítható megoldás, később bővíthető infinite scroll vagy batch endpoint támogatással.
-
-Tesztelési lépések
-1. Nyisd meg az appot, válassz period=7d és egy forrást.
-2. Ellenőrizd a Network fülön, hogy maximum 50 `/api/trend-history` hívás indul.
-3. Kattints a Továbbiak betöltése gombra többször, figyeld a további hívásokat.
-4. Módosítsd a keresőt vagy kategóriát, ellenőrizd, hogy a visibleCount visszaáll 50-re és a cache invalidálódik.
-## 
-## 🔴 Kritikus hiba
-- **cron.js – summarize-all**
-  - ✅ Átalakítva ciklikus, batch-alapú feldolgozásra → folyamatosan fut, nem csak egyszer a végén.
-  - ✅ LIMIT és concurrency lecsökkentve → nem terheli túl a gépet.
-  - ✅ Hibás prepared statement (`LIMIT ?`) javítva → stabilan fut.
-
 ## 🟠 Magas prioritás
 - Inkrementális feldolgozás
   - ⬜ Csak új vagy változott rekordok kezelése.
@@ -253,8 +235,31 @@ Tesztelési lépések
   - ⬜ Unit tesztek a summarizerre.
   - ⬜ Terheléses tesztek a batch méretekre.
 
-## ✅ Teendők sorrendben
-- **Ma** – cron.js ciklikus futásra átírva ✅
-- **Holnap** – státusz flag + inkrementális feldolgozás
-- **Következő sprint** – cache réteg + monitoring
-- **Hosszabb távon** – queue alapú feldolgozás (Redis/RabbitMQ)
+
+## 2025.12.18. ##
+# Mától 8 kategóriábal ehet sorolni mindent. 
+## 🛠️ Fejlesztési napló – Summarize-all javítás
+
+## 📌 Probléma
+A `summarize-all` route futtatásakor a **részletes elemzés (`detailed_content`)** nem került be az adatbázisba.  
+Ennek oka az volt, hogy:
+- A full insert hibára futott, mert a paraméterek száma vagy értéke nem stimmelt.  
+- A fallback insert csak a rövid összefoglalót (`content`) mentette, így a hosszú elemzés elveszett.
+
+## 🔍 Hibakeresés
+- Külön teszt route (`longanalysis`) készült, amely közvetlenül hívta az AI-t és beszúrta a long analysis-t.  
+- Ez hibátlanul lefutott, bizonyítva, hogy az AI output és az adatbázis mező rendben van.  
+- A probléma tehát a `summarize-all` extra logikájában (plágium ellenőrzés, kulcsszavak, paraméterek) volt.
+
+## ✅ Javítás
+1. **SELECT lekérdezés módosítása**  
+   - Most már nem csak az új cikkeket, hanem azokat is kiválasztja, ahol `detailed_content IS NULL OR = ''`.
+
+2. **Insert blokk javítása**  
+   - Debug log került be, hogy lássuk a placeholder és paraméter számot.  
+   - A fallback insertet átírtuk úgy, hogy **a long analysis is bekerüljön**, ne csak a rövid összefoglaló.
+   #✅ Insert fallback javítva → nem veszik el a hosszú elemzés.
+#
+## ✅ Prompt szigorítva → mindig magyar nyelvű output.
+# ✅ AI-clean integrálva → minden rekord jelölve, nincs külön route szükség.
+# ✅ Szintaxis hibák elhárítva → a try/catch/finally blokkok rendben záródnak.

@@ -7,7 +7,6 @@ export async function GET() {
 
   try {
     const parser = new Parser();
-    const feed = await parser.parseURL("https://telex.hu/rss"); // RSS URL
 
     const connection = await mysql.createConnection({
       host: "localhost",
@@ -18,27 +17,39 @@ export async function GET() {
 
     let inserted = 0;
 
-    for (const item of feed.items) {
-      // Ellenőrizzük, hogy már benne van-e az articles táblában
+    // Telex RSS
+    const feedTelex = await parser.parseURL("https://telex.hu/rss");
+    for (const item of feedTelex.items) {
       const [rows] = await connection.execute<RowDataPacket[]>(
         "SELECT id FROM articles WHERE url_canonical = ?",
         [item.link]
       );
-
       if (rows.length === 0) {
-        // mindig a mostani dátumot mentjük published_at mezőbe
         await connection.execute(
           `INSERT INTO articles (title, url_canonical, content_text, published_at, language)
            VALUES (?, ?, ?, NOW(), ?)`,
-          [
-            item.title || "",
-            item.link,
-            item.contentSnippet || "",
-            "hu",
-          ]
+          [item.title || "", item.link, item.contentSnippet || "", "hu"]
         );
         inserted++;
-        console.log("🆕 Új cikk mentve:", item.link);
+        console.log("🆕 Új Telex cikk mentve:", item.link);
+      }
+    }
+
+    // HVG RSS
+    const feedHvg = await parser.parseURL("https://hvg.hu/rss");
+    for (const item of feedHvg.items) {
+      const [rows] = await connection.execute<RowDataPacket[]>(
+        "SELECT id FROM articles WHERE url_canonical = ?",
+        [item.link]
+      );
+      if (rows.length === 0) {
+        await connection.execute(
+          `INSERT INTO articles (title, url_canonical, content_text, published_at, language)
+           VALUES (?, ?, ?, NOW(), ?)`,
+          [item.title || "", item.link, item.contentSnippet || "", "hu"]
+        );
+        inserted++;
+        console.log("🆕 Új HVG cikk mentve:", item.link);
       }
     }
 

@@ -95,11 +95,13 @@ async function callOllama(prompt: string, timeoutMs = 180000): Promise<string> {
 
 // ---- AI segédfüggvények ----
 async function runOllamaShortSummary(text: string) {
-  return await callOllama(`Foglaljad össze röviden (max 5 mondatban), plágiummentesen:\n\n${text}`);
+  return await callOllama(`Foglaljad össze röviden (max 5 mondatban), plágiummentesen, kizárólag magyar nyelven:\n\n${text}`);
 }
+
 async function runOllamaLongAnalysis(text: string) {
-  return await callOllama(`Írj részletes elemzést (3–6 bekezdés), plágiummentesen:\n\n${text}`);
+  return await callOllama(`Írj részletes elemzést (3–6 bekezdés), plágiummentesen, kizárólag magyar nyelven:\n\n${text}`);
 }
+
 // Kulcsszavak
 async function runOllamaKeywords(text: string) {
   const raw = await callOllama(
@@ -118,29 +120,52 @@ Szöveg: ${text}`
 
 // Kategória
 async function runOllamaCategory(text: string) {
-  const raw = await callOllama(
-    `Adj meg egyetlen kategóriát az alábbi listából: Politika, Sport, Gazdaság, Tech.
+  const prompt = `Adj meg egyetlen kategóriát az alábbi listából:
+Politika, Sport, Gazdaság, Tech, Kultúra, Egészségügy, Oktatás, Közélet.
 Csak a kategória nevét írd vissza, nagybetűvel kezdve.
 A döntést mindig a teljes szöveg kontextusa alapján hozd meg, ne csak a szó önmagában vett jelentése alapján.
-Szöveg: ${text}
-`
-  );
+Szöveg: ${text}`;
 
-  const cleaned = (raw || "").trim().toLowerCase();
-  const valid = ["politika", "sport", "gazdaság", "tech"];
+  const raw = await callOllama(prompt);
 
-  if (valid.includes(cleaned)) {
-    // alakítsuk vissza a helyes formára
-    switch (cleaned) {
-      case "politika": return "Politika";
-      case "sport": return "Sport";
-      case "gazdaság": return "Gazdaság";
-      case "tech": return "Tech";
-    }
+  // Normalizálás: whitespace, idézőjelek, pontok, teljes nagybetű kezelése
+  const cleaned = (raw ?? "")
+    .trim()
+    .replace(/^["“”'`]+|["“”'`]+$/g, "")
+    .replace(/\.+$/g, "") // levágjuk a záró pontokat
+    .toLowerCase();
+
+  const valid = [
+    "politika",
+    "sport",
+    "gazdaság",
+    "tech",
+    "kultúra",
+    "egészségügy",
+    "oktatás",
+    "közélet",
+  ];
+
+  if (!valid.includes(cleaned)) {
+    throw new Error(`Érvénytelen kategória válasz: "${raw}"`);
   }
 
-  throw new Error(`Érvénytelen kategória válasz: "${raw}"`);
+  // Visszaalakítás a helyes, címke formára
+  switch (cleaned) {
+    case "politika":    return "Politika";
+    case "sport":       return "Sport";
+    case "gazdaság":    return "Gazdaság";
+    case "tech":        return "Tech";
+    case "kultúra":     return "Kultúra";
+    case "egészségügy": return "Egészségügy";
+    case "oktatás":     return "Oktatás";
+    case "közélet":     return "Közélet";
+    default:
+      // Elvileg ide nem jutunk, mert előtte validate-áltunk
+      throw new Error(`Ismeretlen kategória (mapping hiba): "${raw}"`);
+  }
 }
+
 
 
 function getSourceFromUrl(url: string) {
@@ -284,23 +309,27 @@ export async function GET() {
           ];
 
           try {
-            await safeExecute(connection, insertSql, params, `insert-summary-${articleId}`);
-          } catch (fullErr) {
-            console.warn(">>> Full insert failed for", articleId, "trying minimal insert. Error:", (fullErr as any)?.message ?? fullErr);
-            try {
-              await safeExecute(connection,
-                `INSERT INTO summaries (article_id, url, language, content)
-                 VALUES (?, ?, ?, ?)
-                 ON DUPLICATE KEY UPDATE content = VALUES(content)`,
-                [articleId, article.url_canonical ?? "", "hu", summary ?? ""],
-                `minimal-insert-${articleId}`
-              );
-            } catch (miniErr) {
-              console.error(">>> Minimal insert also failed for articleId:", articleId, "err:", miniErr);
-              errors.push({ id: articleId, error: String((miniErr as any)?.message ?? miniErr) });
-              return;
-            }
-          }
+  await safeExecute(connection, insertSql, params, `insert-summary-${articleId}`);
+} catch (fullErr) {
+  console.error(">>> Full insert failed for", articleId, (fullErr as any)?.message ?? fullErr);
+
+  try {
+    await safeExecute(connection,
+      `INSERT INTO summaries (article_id, content, detailed_content)
+       VALUES (?, ?, ?)
+       ON DUPLICATE KEY UPDATE 
+         content = VALUES(content),
+         detailed_content = VALUES(detailed_content)`,
+      [articleId, summary ?? "", rawSummary ?? ""],
+      `fallback-insert-${articleId}`
+    );
+  } catch (miniErr) {
+    console.error(">>> Fallback insert also failed for articleId:", articleId, (miniErr as any)?.message ?? miniErr);
+    errors.push({ id: articleId, error: String((miniErr as any)?.message ?? miniErr) });
+    return;
+  }
+} // <-- ez a külső catch lezárása
+
 
           if (Array.isArray(keywords) && keywords.length > 0) {
             for (const kw of keywords) {
@@ -334,10 +363,21 @@ export async function GET() {
         }
       }));
     }
+    // --- summarize-all feldolgozás logikája ---
+    // ... itt futnak a cikkek feldolgozásai, inserts, trendek stb. ...
 
+    // A végén jelöljük meg minden summary rekordot AI-clean státusszal
+    await connection.execute(
+      "UPDATE summaries SET ai_clean = 1 WHERE ai_clean IS NULL OR ai_clean = 0"
+    );
+
+    // Kapcsolat lezárása
+    await connection.end();
+
+    // Egyetlen return, minden infóval
     return NextResponse.json({
       status: "ok",
-      message: "Összefoglalások + kulcsszavak + trendek frissítve",
+      message: "Összefoglalások + kulcsszavak + trendek frissítve, minden cikk AI–fogalmazásként megjelölve",
       processedCount: processed.length,
       processed,
       errors,
