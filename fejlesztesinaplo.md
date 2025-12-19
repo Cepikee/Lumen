@@ -268,3 +268,85 @@ Ennek oka az volt, hogy:
 # Mostantól a rendszer a Telex és a HVG híreit is automatikusan betölti az articles táblába.
 # 
 # A beszúrási logika változatlan, így a duplikációk ellenőrzése és a published_at mező kezelése ugyanúgy működik.
+
+> >   ## Fejlesztési napló – 2025.12.19.
+
+## 🎯 Cél
+A hírkártyák vizuális egységesítése, brand‑specifikus megjelenés kialakítása, valamint egy egyedi, animált watermark rendszer bevezetése, amely a forrás karakterét tükrözi.
+
+---
+
+## 🧱 1. Backend mezőszinkronizáció
+- A `/api/summaries` endpoint nem adta vissza a `source` mezőt.
+- A SELECT lekérdezést frissítettük, hogy tartalmazza a `source` oszlopot.
+- A frontend így már helyesen megkapja a forrásadatot.
+
+**Eredmény:**  
+A feed újra működik, a források helyesen jelennek meg.
+
+---
+
+## 🎨 2. FeedItemCard egységesítése
+- Egységes padding, margó, border‑radius, árnyék.
+- Sötét téma fixálása.
+- Brand‑színű bal oldali accent stripe.
+- AI‑clean badge visszaállítása.
+- Linkek és címek egységes stílusa.
+
+**Eredmény:**  
+A feed most már konzisztens, termékérzetű.
+
+---
+
+## 🖼️ 3. Watermark rendszer bevezetése
+- A kártyák háttérébe diagonális watermark került (TELEX / HVG).
+- A watermark a kártya közepén jelenik meg, halványan, nem zavaró módon.
+- A megoldás teljesen CSS‑alapú, gyors, reszponzív.
+
+**Eredmény:**  
+A kártyák vizuálisan karakteresebbek, brand‑azonosak.
+
+---
+
+## 🌊 4. Forráshullám animációk
+Két egyedi animáció készült:
+
+### 🔵 TELEX – „Lélegző hullám”
+- Finom pulzálás  
+- Kék brand‑szín  
+- Modern, tech‑érzet  
+
+### 🟡 HVG – „Magazin sáv”
+- Stabil, enyhén vibráló háttér  
+- Sárga brand‑szín  
+- Print‑lap hangulat  
+
+**Eredmény:**  
+A kártyák élnek, ritmusuk van, és a forrás karakterét tükrözik.
+
+---
+
+## 🧩 5. Stabil watermark fix
+- A pseudo‑elem eredetileg a külső kártyára került, de a DOM‑ban nem jelent meg.
+- A watermarkot áthelyeztük a `card-body` elemre (`feed-body` class), ami garantáltan létezik.
+- A CSS‑szelektorok így már biztosan működnek.
+
+**Eredmény:**  
+A watermark és az animációk most már 100%-ban működnek.
+
+---
+
+## 🚀 Összegzés
+A feed most:
+- vizuálisan egységes  
+- brand‑azonos  
+- animált, élő  
+- modern, prémium érzetű  
+- stabil backend‑frontend adatkapcsolattal működik  
+
+Ez egy nagy lépés a termék vizuális identitása felé.
+
+---
+
+## 📝 Git commit üzenet
+
