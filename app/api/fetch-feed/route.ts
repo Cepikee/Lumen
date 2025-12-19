@@ -55,8 +55,10 @@ export async function GET() {
 
     await connection.end();
     return NextResponse.json({ status: "ok", inserted });
-  } catch (err: any) {
-    console.error("API /fetch-feed hiba:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
-  }
+  } catch (err: unknown) {
+  const message =
+    err instanceof Error ? err.message : "Ismeretlen hiba történt";
+  console.error("API /fetch-feed hiba:", message);
+  return NextResponse.json({ error: message }, { status: 500 });
+}
 }

@@ -32,8 +32,10 @@ export async function GET(req: Request) {
     await connection.end();
 
     return NextResponse.json(rows ?? []);
-  } catch (err: any) {
-    console.error("API /summaries hiba:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
-  }
+  } catch (err: unknown) {
+  const message =
+    err instanceof Error ? err.message : "Ismeretlen hiba történt";
+  console.error("API /summaries hiba:", message);
+  return NextResponse.json({ error: message }, { status: 500 });
+}
 }

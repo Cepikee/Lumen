@@ -25,8 +25,10 @@ export async function POST() {
 
     console.log(">>> Összes összefoglalás törölve!");
     return NextResponse.json({ status: "ok", message: "Minden összefoglalás törölve" });
-  } catch (err: any) {
-    console.error("API /clear-summaries hiba:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
-  }
+ } catch (err: unknown) {
+  const message =
+  err instanceof Error ? err.message : "Ismeretlen hiba történt";
+  console.error("API /clear-summaries hiba:", message);
+  return NextResponse.json({ error: message }, { status: 500 });
+}
 }

@@ -23,8 +23,12 @@ export async function GET() {
       status: "ok",
       message: "Minden cikk megjelölve: 100% AI–fogalmazás"
     });
-  } catch (err: any) {
-    console.error("API /ai-clean hiba:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
-  }
+  } catch (err: unknown) {
+  const message =
+    err instanceof Error ? err.message : "Ismeretlen hiba történt";
+
+  console.error("API /ai-clean hiba:", message);
+
+  return NextResponse.json({ error: message }, { status: 500 });
+}
 }

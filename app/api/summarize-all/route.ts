@@ -3,7 +3,7 @@ import mysql from "mysql2/promise";
 import { checkPlagiarism } from "../../../lib/checkPlagiarism.js";
 
 // ---- Helpers ----
-function unwrapValue(v: any) {
+function unwrapValue(v: unknown) {
   if (v && typeof v === "object" && typeof v.valueOf === "function") {
     try {
       const un = v.valueOf();
