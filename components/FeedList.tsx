@@ -12,14 +12,19 @@ interface FeedItem {
   created_at: string;
 }
 
-
 interface Props {
   items: FeedItem[];
   expandedId: number | null;
   setExpandedId: (id: number | null) => void;
+  viewMode: "card" | "compact";   // <-- ÚJ
 }
 
-export default function FeedList({ items, expandedId, setExpandedId }: Props) {
+export default function FeedList({
+  items,
+  expandedId,
+  setExpandedId,
+  viewMode,                        // <-- ÚJ
+}: Props) {
   if (!items || items.length === 0) return <p>Nincs még összefoglalás.</p>;
 
   return (
@@ -34,6 +39,7 @@ export default function FeedList({ items, expandedId, setExpandedId }: Props) {
           onToggle={() =>
             setExpandedId(expandedId === item.id ? null : item.id)
           }
+          viewMode={viewMode}       // <-- ÚJ
         />
       ))}
     </>

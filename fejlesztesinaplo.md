@@ -312,20 +312,15 @@ A kártyák vizuálisan karakteresebbek, brand‑azonosak.
 Két egyedi animáció készült:
 
 ### 🔵 TELEX – „Lélegző hullám”
-- Finom pulzálás  
 - Kék brand‑szín  
 - Modern, tech‑érzet  
-
 ### 🟡 HVG – „Magazin sáv”
 - Stabil, enyhén vibráló háttér  
 - Sárga brand‑szín  
 - Print‑lap hangulat  
-
 **Eredmény:**  
 A kártyák élnek, ritmusuk van, és a forrás karakterét tükrözik.
-
 ---
-
 ## 🧩 5. Stabil watermark fix
 - A pseudo‑elem eredetileg a külső kártyára került, de a DOM‑ban nem jelent meg.
 - A watermarkot áthelyeztük a `card-body` elemre (`feed-body` class), ami garantáltan létezik.
@@ -348,5 +343,17 @@ Ez egy nagy lépés a termék vizuális identitása felé.
 
 ---
 
-## 📝 Git commit üzenet
+## ezt olvasd el: bevezettük a /types/Feeditem.ts-et! Ebbe vannak valamilyen változók.. 
+#🎉 Mit old meg ez?
+✔ Nincs többé MySQL hiba
 
+✔ A backend végre helyesen lapoz
+
+✔ Az infinite scroll működni fog
+
+✔ Nem lesz több duplikált ID
+
+✔ A frontend nem omlik össze
+# le limitálva 20 cikkre! És utána megy le a lapozás!! :D 
+# - nézetváltás gomb működik, page.tsx-ben van a logikája. Localstorage megőrzés! 
+# 📌 PROBLÉMA: Majd a csst alakítani kell hogy jobb legyen 

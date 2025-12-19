@@ -4,21 +4,22 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
 .header-fixed {
-  position: sticky; /* vagy fixed */
+  position: sticky;
   top: 0;
   z-index: 1000;
-  background: #fff; /* világos mód */
+  background: #fff;
   padding: 1rem;
 }
 
 .feed-scroll {
-  max-height: calc(100vh - 200px); /* a header magasságától függően */
+  max-height: calc(100vh - 200px);
   overflow-y: auto;
 }
 
 .badge-ai {
-  background-color: #28a745; /* zöld */
+  background-color: #28a745;
   color: #fff;
   padding: 4px 8px;
   border-radius: 6px;
@@ -26,6 +27,7 @@ html, body {
   font-weight: 600;
   text-transform: uppercase;
 }
+
 .telex-frame {
   background-color: #ffffff;
   color: #000000;
@@ -61,7 +63,7 @@ html, body {
 }
 
 .panel-content.open {
-  max-height: 1000px; /* elég nagy, hogy minden beleférjen */
+  max-height: 1000px;
   opacity: 1;
   visibility: visible;
 }
@@ -125,13 +127,11 @@ html, body {
   justify-content: center !important;
 }
 
-/* Ha a list-group-item is engedi a kilógást, védjük le */
 .list-group-item {
   overflow: hidden;
   box-sizing: border-box;
 }
 
-/* biztosítjuk, hogy a wrapper legyen felett és fogadja a kattintást */
 .trend-clickable {
   display: flex;
   align-items: center;
@@ -140,7 +140,6 @@ html, body {
   user-select: none;
 }
 
-/* a sparkline canvas ne nyelje el az eseményeket */
 .trend-clickable .sparkline-inner {
   pointer-events: none;
 }
@@ -150,10 +149,10 @@ html, body {
 }
 
 @keyframes flameBackground {
-  0% { background-color: #EF4444; }   /* piros */
-  33% { background-color: #FB923C; }  /* narancs */
-  66% { background-color: #FACC15; }  /* sárga */
-  100% { background-color: #EF4444; } /* piros */
+  0% { background-color: #EF4444; }
+  33% { background-color: #FB923C; }
+  66% { background-color: #FACC15; }
+  100% { background-color: #EF4444; }
 }
 
 @keyframes flameOutline {
@@ -170,17 +169,15 @@ html, body {
 
 .flame-wind {
   background: linear-gradient(
-  270deg,
-  #B91C1C,   /* sötét piros */
-  #D97706,   /* mély narancs */
-  #EAB308,   /* mustársárga */
-  #B91C1C    /* sötét piros */
-);
-
+    270deg,
+    #B91C1C,
+    #D97706,
+    #EAB308,
+    #B91C1C
+  );
   background-size: 400% 400%;
   animation: flameWind 6s linear infinite;
 }
-
 
 @keyframes flameWind {
   0% { background-position: 100% 50%; }
@@ -188,48 +185,28 @@ html, body {
   100% { background-position: 100% 50%; }
 }
 
-/* Alap badge */
 .badge {
   padding: 4px 8px;
   display: inline-block;
 }
 
-/* 1–3: zöld, statikus */
-.green {
-  background-color: #22C55E; /* zöld */
-}
+.green { background-color: #22C55E; }
+.teal { background-color: #14B8A6; transition: box-shadow 0.3s ease; }
+.blue { background-color: #3B82F6; }
 
-/* 4–5: türkiz, hover glow */
-.teal {
-  background-color: #14B8A6; /* türkiz */
-  transition: box-shadow 0.3s ease;
-}
-
-
-
-/* 6–7: kék, pulzáló outline */
-.blue {
-  background-color: #3B82F6; /* kék */
-}
 @keyframes pulseOutline {
   0% { box-shadow: 0 0 0 0 #000000; }
   50% { box-shadow: 0 0 6px 2px #000000; }
   100% { box-shadow: 0 0 0 0 #000000; }
 }
 
-/* 8–9: lila, lassú gradient mozgás */
 .purple {
   background: linear-gradient(270deg, #8B5CF6, #7C3AED, #9333EA, #8B5CF6);
   background-size: 400% 400%;
   animation: purpleFlow 8s linear infinite;
 }
-@keyframes purpleFlow {
-  0% { background-position: 100% 50%; }
-  50% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
 
-@keyframes flameWind {
+@keyframes purpleFlow {
   0% { background-position: 100% 50%; }
   50% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
@@ -253,25 +230,13 @@ html, body {
   background-size: 400% 400%;
   animation: purpleFlow 8s linear infinite;
 }
+
 .spike-index-badge.flame-wind {
   background: linear-gradient(270deg,#B91C1C,#D97706,#EAB308,#B91C1C);
   background-size: 400% 400%;
   animation: flameWind 6s linear infinite;
 }
 
-@keyframes purpleFlow {
-  0% { background-position: 100% 50%; }
-  50% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-
-@keyframes flameWind {
-  0% { background-position: 100% 50%; }
-  50% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-
-/* Csökkenő badge — piros → világosabb piros */
 .badge-decreasing {
   background: linear-gradient(90deg, #e53935, #ff7961);
   border: 2px solid #000;
@@ -280,7 +245,6 @@ html, body {
   color: #fff;
 }
 
-/* Növekvő badge — középzöld → sötétzöld */
 .badge-increasing {
   background: linear-gradient(90deg, #388e3c, #1b5e20);
   border: 2px solid #000;
@@ -289,7 +253,6 @@ html, body {
   color: #fff;
 }
 
-/* Nemzetközi badge — türkiz */
 .badge-international {
   background-color: #009688;
   border: 2px solid #000;
@@ -299,119 +262,147 @@ html, body {
 }
 
 .badge-new {
-  background-color: #8B5E3C;   /* gesztenyepüré árnyalat */
-  border: 2px solid #000;      /* fekete keret */
-  border-radius: 6px;          /* lekerekített sarkok */
-  font-weight: 600;            /* félkövér betű */
-  color: #fff;                 /* fehér szöveg */
+  background-color: #8B5E3C;
+  border: 2px solid #000;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #fff;
 }
- 
+
 .badge.pending {
   border: 2px solid #000;
   border-radius: 6px;
   font-weight: 600;
-  font-size: 0.85rem;   /* kisebb betűméret */
+  font-size: 0.85rem;
   color: #fff;
   padding: 6px 12px;
   display: inline-block;
   text-transform: uppercase;
   letter-spacing: 1px;
-
-  /* Barna árnyalatok */
-  background: linear-gradient(
-    270deg,
-    #5C4033,   /* sötét csokoládébarna */
-    #A0522D,   /* karamell-barna */
-    #5C4033    /* vissza sötét barna */
-  );
+  background: linear-gradient(270deg,#5C4033,#A0522D,#5C4033);
   background-size: 600% 600%;
-
-  /* Hullámzó animáció */
   animation: waveBrown 4s ease infinite;
 }
 
 @keyframes waveBrown {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+/* ================================
+   WATERMARK TELJESEN KIKAPCSOLVA
+   ================================ */
 
-
-
-/* --- ALAP WATERMARK --- */
 .feed-card {
   position: relative;
   overflow: hidden;
+  border: none !important;
 }
 
 .feed-card::before {
-  content: attr(data-source-text);
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-25deg);
-  font-size: 5rem;
-  font-weight: 900;
-  color: var(--accent-color);
-  opacity: 0.06;
-  pointer-events: none;
-  z-index: 1;
-  text-transform: uppercase;
-  letter-spacing: 0.2rem;
-
-  background: linear-gradient(
-    135deg,
-    rgba(var(--accent-rgb), 0.15) 0%,
-    rgba(var(--accent-rgb), 0.0) 70%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
+  display: none !important;
 }
 
-/* --- TELEX ANIMÁCIÓ --- */
-.feed-card[data-source-text="TELEX"]::before {
-  animation: telexWave 6s ease-in-out infinite;
+/* ================================
+   CARD VIEW
+   ================================ */
+
+.feed-card.card {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-left: 6px solid var(--accent-color, #888);
+  color: white;
+  transition: all 0.2s ease;
 }
 
-@keyframes telexWave {
-  0% {
-    transform: translate(-50%, -50%) rotate(-25deg) scale(1);
-    opacity: 0.05;
-  }
-  50% {
-    transform: translate(-50%, -50%) rotate(-25deg) scale(1.08);
-    opacity: 0.09;
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(-25deg) scale(1);
-    opacity: 0.05;
-  }
+.feed-card.card .card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-/* --- HVG ANIMÁCIÓ --- */
-.feed-card[data-source-text="HVG"]::before {
-  animation: hvgPulse 8s ease-in-out infinite;
-  letter-spacing: 0.3rem;
+.feed-card.card .card-body {
+  padding: 0;
 }
 
-@keyframes hvgPulse {
-  0% {
-    transform: translate(-50%, -50%) rotate(-20deg) scale(1);
-    opacity: 0.05;
-  }
-  50% {
-    transform: translate(-50%, -50%) rotate(-20deg) scale(1.03);
-    opacity: 0.08;
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(-20deg) scale(1);
-    opacity: 0.05;
-  }
+.feed-card.card .badge {
+  border-radius: 4px;
+}
+
+/* ================================
+   COMPACT VIEW
+   ================================ */
+
+.feed-card.compact {
+  background-color: #1a1a1a;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-left: 4px solid var(--accent-color, #888);
+  color: white;
+  transition: all 0.15s ease;
+}
+
+.feed-card.compact:hover {
+  background-color: #222;
+}
+
+.feed-card.compact .badge {
+  font-size: 0.65rem;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.feed-card.compact a {
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.feed-card.compact .content {
+  font-size: 0.85rem;
+  line-height: 1.2;
+  max-height: 3.6em;
+  overflow: hidden;
+}
+
+.feed-card.compact button {
+  font-size: 0.8rem;
+  padding: 0;
+}
+
+.feed-card.compact p {
+  font-size: 0.7rem;
+}
+
+/* ================================
+   EXPANDED CONTENT
+   ================================ */
+
+.feed-card .expanded-content {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
+}
+
+/* ================================
+   FEED WRAPPER ANIMÁCIÓ
+   ================================ */
+
+.feed-wrapper {
+  transition: all 0.25s ease;
+}
+
+.feed-wrapper.card {
+  padding: 16px 0;
+  transform: scale(1);
+  opacity: 1;
+}
+
+.feed-wrapper.compact {
+  padding: 4px 0;
+  transform: scale(0.98);
+  opacity: 0.9;
 }

@@ -1,7 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './globals.css';
 import HeaderActions from "../components/HeaderActions";
 import Link from "next/link";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const setInitialTheme = `
