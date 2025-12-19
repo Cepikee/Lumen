@@ -15,7 +15,7 @@ export async function GET() {
     // Explicit típus: RowDataPacket[]
     const [rows] = await connection.execute<RowDataPacket[]>(
       `
-      SELECT id, url, language, content, detailed_content, category, plagiarism_score, ai_clean, created_at
+      SELECT id, url, language, source, content, detailed_content, category, plagiarism_score, ai_clean, created_at
       FROM summaries
       ORDER BY created_at DESC
       LIMIT 50

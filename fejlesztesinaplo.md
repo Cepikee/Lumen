@@ -263,3 +263,8 @@ Ennek oka az volt, hogy:
 ## ✅ Prompt szigorítva → mindig magyar nyelvű output.
 # ✅ AI-clean integrálva → minden rekord jelölve, nincs külön route szükség.
 # ✅ Szintaxis hibák elhárítva → a try/catch/finally blokkok rendben záródnak.
+# A fetch-feed route kiegészült a https://hvg.hu/rss feldolgozásával.
+#
+# Mostantól a rendszer a Telex és a HVG híreit is automatikusan betölti az articles táblába.
+# 
+# A beszúrási logika változatlan, így a duplikációk ellenőrzése és a published_at mező kezelése ugyanúgy működik.

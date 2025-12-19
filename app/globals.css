@@ -341,3 +341,77 @@ html, body {
     background-position: 0% 50%;
   }
 }
+
+
+
+
+/* --- ALAP WATERMARK --- */
+.feed-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.feed-card::before {
+  content: attr(data-source-text);
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-25deg);
+  font-size: 5rem;
+  font-weight: 900;
+  color: var(--accent-color);
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+
+  background: linear-gradient(
+    135deg,
+    rgba(var(--accent-rgb), 0.15) 0%,
+    rgba(var(--accent-rgb), 0.0) 70%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* --- TELEX ANIMÁCIÓ --- */
+.feed-card[data-source-text="TELEX"]::before {
+  animation: telexWave 6s ease-in-out infinite;
+}
+
+@keyframes telexWave {
+  0% {
+    transform: translate(-50%, -50%) rotate(-25deg) scale(1);
+    opacity: 0.05;
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(-25deg) scale(1.08);
+    opacity: 0.09;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-25deg) scale(1);
+    opacity: 0.05;
+  }
+}
+
+/* --- HVG ANIMÁCIÓ --- */
+.feed-card[data-source-text="HVG"]::before {
+  animation: hvgPulse 8s ease-in-out infinite;
+  letter-spacing: 0.3rem;
+}
+
+@keyframes hvgPulse {
+  0% {
+    transform: translate(-50%, -50%) rotate(-20deg) scale(1);
+    opacity: 0.05;
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(-20deg) scale(1.03);
+    opacity: 0.08;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-20deg) scale(1);
+    opacity: 0.05;
+  }
+}
