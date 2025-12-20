@@ -9,7 +9,6 @@ export async function GET(req: Request) {
 
     const page = Number(searchParams.get("page") ?? 1);
     const limit = Number(searchParams.get("limit") ?? 20);
-
     const offset = (page - 1) * limit;
 
     const connection = await mysql.createConnection({
@@ -19,11 +18,22 @@ export async function GET(req: Request) {
       database: "projekt2025"
     });
 
-    // IMPORTANT: LIMIT és OFFSET NEM LEHET PARAMÉTER
     const query = `
-      SELECT id, url, language, source, content, detailed_content, category, plagiarism_score, ai_clean, created_at
-      FROM summaries
-      ORDER BY created_at DESC
+      SELECT 
+        s.id,
+        s.url,
+        s.language,
+        src.name AS source,   -- <<< EZ A LÉNYEG
+        s.content,
+        s.detailed_content,
+        s.category,
+        s.plagiarism_score,
+        s.ai_clean,
+        s.created_at
+      FROM summaries s
+      LEFT JOIN articles a ON s.article_id = a.id
+      LEFT JOIN sources src ON a.source_id = src.id
+      ORDER BY s.created_at DESC
       LIMIT ${limit} OFFSET ${offset}
     `;
 
@@ -33,9 +43,9 @@ export async function GET(req: Request) {
 
     return NextResponse.json(rows ?? []);
   } catch (err: unknown) {
-  const message =
-    err instanceof Error ? err.message : "Ismeretlen hiba történt";
-  console.error("API /summaries hiba:", message);
-  return NextResponse.json({ error: message }, { status: 500 });
-}
+    const message =
+      err instanceof Error ? err.message : "Ismeretlen hiba történt";
+    console.error("API /summaries hiba:", message);
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }
