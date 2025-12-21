@@ -101,7 +101,7 @@ export default function FeedItemCard({
           </div>
 
           <div
-            className="mt-1"
+              className={`mt-1 ${expanded ? "" : "clamp-2"}`}
             style={{
               fontSize: "0.85rem",
               lineHeight: "1.2",
@@ -149,8 +149,9 @@ export default function FeedItemCard({
   return (
     <div className={`feed-wrapper`}>
       <div
-        className="feed-card mb-3"
-        data-source-text={source.toUpperCase()}
+         className="feed-card mb-3 p-3 rounded shadow-sm"
+  style={{  backgroundColor: "#1a1a1a", }}
+  data-source-text={source.toUpperCase()}
       >
         <div className="card-body position-relative" style={{ zIndex: 2 }}>
           <h5 className="card-title d-flex justify-content-between align-items-center">

@@ -476,3 +476,9 @@ html, body {
   background: linear-gradient(90deg, #009688 0%, #66d1c4 100%);
   color: white;
 }
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

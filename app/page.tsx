@@ -13,8 +13,15 @@ export default function Page() {
   const [hasMore, setHasMore] = useState(true);
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
+  // Forrás szűrő
+  const [showSourcePanel, setShowSourcePanel] = useState(false);
+  const [sourceFilters, setSourceFilters] = useState<string[]>([]);
+
   // Nézetváltó
   const [viewMode, setViewMode] = useState<"card" | "compact">("card");
+
+  // Today mód
+  const [isTodayMode, setIsTodayMode] = useState(false);
 
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
@@ -26,9 +33,48 @@ export default function Page() {
     }
   }, []);
 
-  // --- Oldalankénti fetch --- //
+  // --- Forrás szűrés --- //
+  async function applySourceFilter(sources: string[]) {
+    setSourceFilters(sources);
+    setItems([]);
+    setPage(1);
+
+    // Ha nincs kiválasztva semmi → összes hír
+    if (sources.length === 0) {
+      setHasMore(true);
+      fetchPage(1);
+      return;
+    }
+
+    setLoading(true);
+    setHasMore(false); // szűrésnél nincs infinite scroll
+
+    try {
+      const query = sources
+        .map((s) => `source=${encodeURIComponent(s)}`)
+        .join("&");
+
+      const res = await fetch(`/api/summaries?${query}`, {
+        cache: "no-store",
+      });
+
+      const raw = await res.json();
+      const data: FeedItem[] = raw.map((item: any) => ({
+        ...item,
+        ai_clean: Number(item.ai_clean),
+      }));
+
+      setItems(data);
+    } catch (err) {
+      console.error("Source filter error:", err);
+    }
+
+    setLoading(false);
+  }
+
+  // --- Oldalankénti fetch (csak ha nem today mód és nincs forrásszűrő) --- //
   async function fetchPage(pageNum: number) {
-    if (loading) return;
+    if (loading || isTodayMode || sourceFilters.length > 0) return;
 
     setLoading(true);
     try {
@@ -48,7 +94,6 @@ export default function Page() {
       if (!Array.isArray(data) || data.length === 0) {
         setHasMore(false);
       } else {
-        // DUPLIKÁLT ID-k kiszűrése
         setItems((prev) => {
           const merged = [...prev, ...data];
           const unique = merged.filter(
@@ -66,12 +111,14 @@ export default function Page() {
 
   // --- Első oldal betöltése --- //
   useEffect(() => {
-    fetchPage(page);
-  }, [page]);
+    if (!isTodayMode && sourceFilters.length === 0) {
+      fetchPage(page);
+    }
+  }, [page, isTodayMode, sourceFilters]);
 
   // --- Infinite scroll observer --- //
   useEffect(() => {
-    if (!loaderRef.current) return;
+    if (!loaderRef.current || isTodayMode || sourceFilters.length > 0) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -85,39 +132,50 @@ export default function Page() {
 
     observer.observe(loaderRef.current);
     return () => observer.disconnect();
-  }, [hasMore, loading]);
+  }, [hasMore, loading, isTodayMode, sourceFilters]);
 
-  // --- Elemzés után reset + újratöltés --- //
-  async function handleAnalyze(url: string) {
+  // --- Mi történt ma? --- //
+  async function handleTodayFilter() {
     setLoading(true);
-    setSummary(null);
+    setIsTodayMode(true);
+    setItems([]);
+    setHasMore(false); // nincs infinite scroll ma
 
     try {
-      const res = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url }),
+      const res = await fetch(`/api/summaries?today=true`, {
+        cache: "no-store",
       });
 
-      const data = await res.json();
-      setSummary(data.summary);
+      const raw = await res.json();
+      const data: FeedItem[] = raw.map((item: any) => ({
+        ...item,
+        ai_clean: Number(item.ai_clean),
+      }));
 
-      // Reset feed
-      setItems([]);
-      setPage(1);
-      setHasMore(true);
-    } catch {
-      setSummary("Hiba történt az elemzés közben.");
-    } finally {
-      setLoading(false);
+      setItems(data);
+    } catch (err) {
+      console.error("Today filter error:", err);
     }
+
+    setLoading(false);
+  }
+
+  // --- Visszaállítás teljes feedre --- //
+  function resetFeed() {
+    setIsTodayMode(false);
+    setSourceFilters([]);
+    setItems([]);
+    setPage(1);
+    setHasMore(true);
   }
 
   return (
     <main className="flex-grow-1 overflow-auto p-3">
 
-      {/* Nézetváltó (React dropdown) */}
-      <div className="mb-3 position-relative">
+      {/* Nézet + Források + Mi történt ma? */}
+      <div className="mb-3 d-flex gap-2 position-relative">
+
+        {/* Nézetváltó */}
         <button
           className="btn btn-secondary"
           onClick={() => setShowDropdown((prev) => !prev)}
@@ -153,9 +211,80 @@ export default function Page() {
             </button>
           </div>
         )}
-      </div>
 
-      <InputInline onAnalyze={handleAnalyze} loading={loading} />
+        {/* Mi történt ma? */}
+        <button className="btn btn-secondary" onClick={handleTodayFilter}>
+          🗓️ Mi történt ma?
+        </button>
+
+        {/* Visszaállítás */}
+        {(isTodayMode || sourceFilters.length > 0) && (
+          <button className="btn btn-outline-secondary" onClick={resetFeed}>
+            🔄 Összes hír
+          </button>
+        )}
+
+        {/* Források */}
+        <button
+          className="btn btn-secondary"
+          onClick={() => setShowSourcePanel(prev => !prev)}
+        >
+          Források
+        </button>
+
+        {/* Forrás panel */}
+        {showSourcePanel && (
+          <div
+            className="card p-3 shadow-sm"
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: "0",
+              zIndex: 10,
+              width: "250px"
+            }}
+          >
+            <h6 className="fw-bold mb-2">📰 Források</h6>
+
+            {/* Mind */}
+            <div className="form-check mb-1">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                checked={sourceFilters.length === 0}
+                onChange={() => {
+                  setSourceFilters([]);
+                  setShowSourcePanel(false);
+                  applySourceFilter([]);
+                }}
+              />
+              <label className="form-check-label">Mind</label>
+            </div>
+
+            {/* Egyes források */}
+            {["Telex", "444", "HVG", "24.hu", "Portfolio"].map(src => (
+              <div key={src} className="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  checked={sourceFilters.includes(src)}
+                  onChange={(e) => {
+                    const newSources = e.target.checked
+                      ? [...sourceFilters, src]
+                      : sourceFilters.filter(s => s !== src);
+
+                    setSourceFilters(newSources);
+                    setShowSourcePanel(false);
+                    applySourceFilter(newSources);
+                  }}
+                />
+                <label className="form-check-label">{src}</label>
+              </div>
+            ))}
+          </div>
+        )}
+
+      </div>
 
       {summary && (
         <div className="card bg-secondary text-light shadow mb-4">
@@ -174,40 +303,14 @@ export default function Page() {
       />
 
       {/* Sentinel elem az infinite scrollhoz */}
-      <div ref={loaderRef} style={{ height: "50px" }} />
+      {!isTodayMode && sourceFilters.length === 0 && (
+        <div ref={loaderRef} style={{ height: "50px" }} />
+      )}
 
       {loading && <p className="text-center text-muted mt-3">Betöltés...</p>}
-      {!hasMore && <p className="text-center text-muted mt-3">Nincs több hír.</p>}
+      {!hasMore && !isTodayMode && sourceFilters.length === 0 && (
+        <p className="text-center text-muted mt-3">Nincs több hír.</p>
+      )}
     </main>
-  );
-}
-
-// --- InputInline --- //
-function InputInline({
-  onAnalyze,
-  loading,
-}: {
-  onAnalyze: (url: string) => void | Promise<void>;
-  loading: boolean;
-}): React.ReactElement {
-  const [url, setUrl] = useState("");
-
-  return (
-    <div className="input-group mb-3">
-      <input
-        type="text"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        placeholder="Írd be a cikk URL-jét..."
-        className="form-control"
-      />
-      <button
-        onClick={() => onAnalyze(url)}
-        disabled={loading || !url}
-        className="btn btn-primary"
-      >
-        {loading ? "Elemzés folyamatban..." : "Elemzés"}
-      </button>
-    </div>
   );
 }

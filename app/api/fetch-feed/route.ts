@@ -175,6 +175,29 @@ export async function GET() {
         console.log("🆕 Új 444 cikk mentve:", item.link);
       }
     }
+// --- SUMMARIZE-ALL FUTTATÁSA ÚJ CIKKEK SZÁMA ALAPJÁN ---
+const BATCH_SIZE = 10;
+const cycles = Math.ceil(inserted / BATCH_SIZE);
+
+console.log("===============================================");
+console.log(">>> FETCH-FEED ÖSSZEGZÉS");
+console.log(">>> Új cikkek száma:", inserted);
+console.log(">>> Batch méret:", BATCH_SIZE);
+console.log(">>> Szükséges summarize-all ciklusok:", cycles);
+console.log("===============================================");
+
+for (let i = 0; i < cycles; i++) {
+  console.log(`>>> Summarize-all indítása (${i + 1}/${cycles})...`);
+
+  await fetch("http://localhost:3000/api/summarize-all", {
+    method: "GET",
+  });
+
+  console.log(`>>> Summarize-all lefutott (${i + 1}/${cycles})`);
+}
+
+console.log(">>> Minden summarize-all ciklus lefutott!");
+console.log("===============================================");
 
     await connection.end();
     return NextResponse.json({ status: "ok", inserted });

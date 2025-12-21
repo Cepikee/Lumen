@@ -119,21 +119,10 @@ Szöveg: ${text}`
 
 
 // Kategória
-async function runOllamaCategory(text: string) {
-  const prompt = `Adj meg egyetlen kategóriát az alábbi listából:
-Politika, Sport, Gazdaság, Tech, Kultúra, Egészségügy, Oktatás, Közélet.
-Csak a kategória nevét írd vissza, nagybetűvel kezdve.
-A döntést mindig a teljes szöveg kontextusa alapján hozd meg, ne csak a szó önmagában vett jelentése alapján.
-Szöveg: ${text}`;
-
-  const raw = await callOllama(prompt);
-
-  // Normalizálás: whitespace, idézőjelek, pontok, teljes nagybetű kezelése
-  const cleaned = (raw ?? "")
-    .trim()
-    .replace(/^["“”'`]+|["“”'`]+$/g, "")
-    .replace(/\.+$/g, "") // levágjuk a záró pontokat
-    .toLowerCase();
+export async function runOllamaCategory(text: string) {
+  if (!text || text.trim().length < 5) {
+    throw new Error("Nincs szöveg a kategorizáláshoz, újrafuttatás szükséges.");
+  }
 
   const valid = [
     "politika",
@@ -146,24 +135,65 @@ Szöveg: ${text}`;
     "közélet",
   ];
 
-  if (!valid.includes(cleaned)) {
-    throw new Error(`Érvénytelen kategória válasz: "${raw}"`);
-  }
+  let attempts = 0;
 
-  // Visszaalakítás a helyes, címke formára
-  switch (cleaned) {
-    case "politika":    return "Politika";
-    case "sport":       return "Sport";
-    case "gazdaság":    return "Gazdaság";
-    case "tech":        return "Tech";
-    case "kultúra":     return "Kultúra";
-    case "egészségügy": return "Egészségügy";
-    case "oktatás":     return "Oktatás";
-    case "közélet":     return "Közélet";
-    default:
-      // Elvileg ide nem jutunk, mert előtte validate-áltunk
-      throw new Error(`Ismeretlen kategória (mapping hiba): "${raw}"`);
+  while (attempts < 3) {
+    attempts++;
+
+    const prompt = `
+Feladat: A szöveg alapján válassz EGYET a következő kategóriák közül:
+
+- Politika
+- Sport
+- Gazdaság
+- Tech
+- Kultúra
+- Egészségügy
+- Oktatás
+- Közélet
+
+KÖTELEZŐ SZABÁLYOK:
+1. Csak a fenti listából választhatsz.
+2. Nem adhatsz meg új kategóriát.
+3. Nem adhatsz magyarázatot.
+4. Nem adhatsz több kategóriát.
+5. Ha bizonytalan vagy, akkor is a listából válassz.
+
+Válasz formátuma (kötelező):
+<kategória>
+
+Csak a kategória nevét írd vissza, semmi mást.
+
+Szöveg:
+${text}
+`;
+
+    const raw = await callOllama(prompt);
+
+    const cleaned = (raw ?? "")
+      .trim()
+      .replace(/^["“”'`]+|["“”'`]+$/g, "")
+      .replace(/[<>]/g, "")
+      .replace(/\.+$/g, "")
+      .toLowerCase();
+
+    if (valid.includes(cleaned)) {
+      switch (cleaned) {
+        case "politika":    return "Politika";
+        case "sport":       return "Sport";
+        case "gazdaság":    return "Gazdaság";
+        case "tech":        return "Tech";
+        case "kultúra":     return "Kultúra";
+        case "egészségügy": return "Egészségügy";
+        case "oktatás":     return "Oktatás";
+        case "közélet":     return "Közélet";
+      }
+    }
+
+    // ha rossz → újrapróbáljuk
   }
+  // ha 3 próbálkozás után is rossz → hibát dobunk
+  throw new Error(`Érvénytelen kategória válasz 3 próbálkozás után is.`);
 }
 
 
@@ -187,7 +217,7 @@ function hasContent(s: string | null | undefined, minLen = 50) {
 }
 
 // ---- Konfiguráció ----
-const BATCH_SIZE = 60;
+const BATCH_SIZE = 10;
 const CONCURRENCY = 1;
 
 export async function GET() {

@@ -1,5 +1,4 @@
 import './globals.css';
-import HeaderActions from "../components/HeaderActions";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -34,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <Link href="/" className="nav-link">🏠 Főoldal</Link>
                 </li>
                 <li className="nav-item">
-                  <Link href="/trends" className="nav-link">🔥 Trendek</Link>
+                  <Link href="/trends" className="nav-link">Kulcsszavak</Link>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">Beállítások</a>
@@ -44,22 +43,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </nav>
 
-        {/* HEADER */}
-        <header className="bg-body shadow-sm">
-          <div className="container py-3 d-flex justify-content-between align-items-center">
-            <div className="d-flex align-items-center gap-2">
-              <span className="fs-3">💡</span>
-              <h1 className="fs-4 fw-bold mb-0">Lumen – Elemző AI</h1>
-            </div>
-            {/* Fejléc gombok kliens komponensben */}
-            <HeaderActions />
-          </div>
-        </header>
-
+       
         {/* MAIN */}
         <main className="flex-grow-1 container-fluid px-0 py-4">
-          {children}
-        </main>
+  <div className="container" style={{ maxWidth: "1100px" }}>
+    {children}
+  </div>
+</main>
+
 
         {/* FOOTER */}
         <footer className="bg-body-tertiary border-top py-3 mt-auto">
