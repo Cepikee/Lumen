@@ -56,25 +56,7 @@ export default function FeedItemCard({
 }) {
   const url = item.url || "";
   const source = item.source?.toLowerCase() || "ismeretlen";
-
-  const sourceColors: Record<string, string> = {
-    telex: "#00AEEF",
-    hvg: "#FFCC00",
-    index: "#009933",
-    "444": "#000000",
-    "24": "#FF3300",
-    portfolio: "#FF6600",
-    ismeretlen: "#888888",
-  };
-
-  const accent = sourceColors[source] ?? "#888888";
-
-  const accentRgb =
-    accent
-      .replace("#", "")
-      .match(/.{1,2}/g)
-      ?.map((x) => parseInt(x, 16))
-      .join(",") ?? "255,255,255";
+  const sourceClass = `source-${source.replace(/\W+/g, "").toLowerCase()}`;
 
   // --- COMPACT NÉZET --- //
   if (viewMode === "compact") {
@@ -82,22 +64,17 @@ export default function FeedItemCard({
       <div className={`feed-wrapper compact`}>
         <div
           className="feed-card compact mb-2 p-2 rounded"
+          data-source-text={source.toUpperCase()}
           style={{
             backgroundColor: "#1a1a1a",
-            borderLeft: `4px solid ${accent}`,
             color: "white",
           }}
         >
           <div className="d-flex justify-content-between">
             <div className="d-flex align-items-center gap-2">
               <span
-                className="badge"
-                style={{
-                  backgroundColor: accent,
-                  color: "black",
-                  fontSize: "0.65rem",
-                  fontWeight: "bold",
-                }}
+                className={`badge ${sourceClass}`}
+                style={{ fontSize: "0.65rem", fontWeight: "bold" }}
               >
                 {source.toUpperCase()}
               </span>
@@ -107,11 +84,7 @@ export default function FeedItemCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-decoration-none"
-                style={{
-                  color: accent,
-                  fontWeight: "bold",
-                  fontSize: "0.85rem",
-                }}
+                style={{ fontWeight: "bold", fontSize: "0.85rem" }}
               >
                 {url}
               </a>
@@ -119,13 +92,8 @@ export default function FeedItemCard({
 
             {item.ai_clean === 1 && (
               <span
-                className="badge"
-                style={{
-                  backgroundColor: accent,
-                  color: "black",
-                  fontSize: "0.65rem",
-                  fontWeight: "bold",
-                }}
+                className={`badge ${sourceClass}`}
+                style={{ fontSize: "0.65rem", fontWeight: "bold" }}
               >
                 AI
               </span>
@@ -137,8 +105,12 @@ export default function FeedItemCard({
             style={{
               fontSize: "0.85rem",
               lineHeight: "1.2",
-              maxHeight: "3.6em",
-              overflow: "hidden",
+              ...(expanded
+                ? {}
+                : {
+                    maxHeight: "3.6em",
+                    overflow: "hidden",
+                  }),
             }}
           >
             <ReactMarkdown>{item.content}</ReactMarkdown>
@@ -146,7 +118,7 @@ export default function FeedItemCard({
 
           <button
             className="btn btn-link p-0 mt-1"
-            style={{ color: accent, fontSize: "0.8rem" }}
+            style={{ fontSize: "0.8rem" }}
             onClick={onToggle}
           >
             {expanded ? "🔽 Bezárás" : "📘 Részletek"}
@@ -177,29 +149,15 @@ export default function FeedItemCard({
   return (
     <div className={`feed-wrapper`}>
       <div
-        className="feed-card mb-3 "
+        className="feed-card mb-3"
         data-source-text={source.toUpperCase()}
-        style={{
-          
-    backgroundColor: "#1e1e1e",
-    color: "white",
-     borderLeft: `4px solid ${accent}`,// vagy vedd ki
-    "--accent-color": accent,
-    "--accent-rgb": accentRgb,
-          } as React.CSSProperties
-        }
       >
         <div className="card-body position-relative" style={{ zIndex: 2 }}>
           <h5 className="card-title d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center gap-2">
               <span
-                className="badge me-2"
-                style={{
-                  backgroundColor: accent,
-                  color: "black",
-                  fontWeight: "bold",
-                  fontSize: "0.75rem",
-                }}
+                className={`badge me-2 ${sourceClass}`}
+                style={{ fontWeight: "bold", fontSize: "0.75rem" }}
               >
                 {source.toUpperCase()}
               </span>
@@ -209,7 +167,7 @@ export default function FeedItemCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-decoration-none"
-                style={{ color: accent, fontWeight: "bold" }}
+                style={{ fontWeight: "bold" }}
               >
                 {url}
               </a>
@@ -217,12 +175,8 @@ export default function FeedItemCard({
 
             {item.ai_clean === 1 && (
               <span
-                className="badge"
-                style={{
-                  backgroundColor: accent,
-                  color: "black",
-                  fontWeight: "bold",
-                }}
+                className={`badge ${sourceClass}`}
+                style={{ fontWeight: "bold" }}
               >
                 100% AI‑fogalmazás
               </span>
@@ -233,11 +187,7 @@ export default function FeedItemCard({
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
-          <button
-            className="btn btn-link p-0 mt-2"
-            style={{ color: accent }}
-            onClick={onToggle}
-          >
+          <button className="btn btn-link p-0 mt-2" onClick={onToggle}>
             {expanded ? "🔽 Bezárás" : "📘 Részletes elemzésért kattints ide!"}
           </button>
 

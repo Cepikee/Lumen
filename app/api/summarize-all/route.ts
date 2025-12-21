@@ -187,7 +187,7 @@ function hasContent(s: string | null | undefined, minLen = 50) {
 }
 
 // ---- Konfiguráció ----
-const BATCH_SIZE = 1;
+const BATCH_SIZE = 60;
 const CONCURRENCY = 1;
 
 export async function GET() {
@@ -208,7 +208,7 @@ export async function GET() {
       SELECT a.id, a.url_canonical, a.content_text, s.id AS summary_id
       FROM articles a
       LEFT JOIN summaries s ON s.article_id = a.id
-      WHERE (s.id IS NULL OR s.detailed_content IS NULL OR s.detailed_content = '')
+      WHERE (s.id IS NULL OR s.detailed_content IS NULL OR TRIM(s.detailed_content) = '')
         AND a.content_text IS NOT NULL AND a.content_text <> ''
       ORDER BY a.published_at DESC
       LIMIT ${Number(BATCH_SIZE)}

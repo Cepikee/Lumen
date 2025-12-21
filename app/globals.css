@@ -406,3 +406,73 @@ html, body {
   transform: scale(0.98);
   opacity: 0.9;
 }
+
+
+.source-badge {
+  font-weight: bold;
+  font-size: 0.75rem;
+  color: black;
+}
+
+/* Alap badge stílus */
+.source-badge {
+  font-weight: bold;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* --- HVG: marad változatlan, mert profi --- */
+.source-hvg {
+  background-color: #ff7a00;
+  color: black;
+}
+
+/* --- 444.hu: fehér → zöld átmenet, fekete betűszín --- */
+.source-444hu {
+  background: linear-gradient(90deg, #ffffff 0%, #00cc66 100%);
+  color: black;
+}
+
+/* --- Portfolio: sárga → narancs átmenet, fekete betűszín --- */
+.source-portfolio {
+  background: linear-gradient(90deg, #ffd27f 0%, #ff6600 100%);
+  color: black;
+}
+
+/* --- 24.hu: PIROS → SZÜRKE átmenet (nem tompa, hanem igazi piros) --- */
+.source-24hu {
+  background: linear-gradient(90deg, #ff0000 0%, #6e6e6e 100%);
+  color: black;
+}
+
+/* --- Index: fekete → sárga átmenet --- */
+.source-index {
+  background: linear-gradient(90deg, #000000 0%, #f4d35e 100%);
+  color: white;
+}
+
+/* --- Telex: szürke → kék átmenet --- */
+.source-telex {
+  background: linear-gradient(90deg, #3a3a3a 0%, #00AEEF 100%);
+  color: white;
+}
+
+/* --- Magyar Nemzet --- */
+.source-magyarnemzet {
+  background: linear-gradient(90deg, #8b1e3f 0%, #c46a82 100%);
+  color: white;
+}
+
+/* --- Origo --- */
+.source-origo {
+  background: linear-gradient(90deg, #0077b6 0%, #66b7e3 100%);
+  color: white;
+}
+
+/* --- Népszava --- */
+.source-népszava,
+.source-nepszava {
+  background: linear-gradient(90deg, #009688 0%, #66d1c4 100%);
+  color: white;
+}

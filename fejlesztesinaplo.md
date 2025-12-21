@@ -357,3 +357,46 @@ Ez egy nagy lépés a termék vizuális identitása felé.
 # le limitálva 20 cikkre! És utána megy le a lapozás!! :D 
 # - nézetváltás gomb működik, page.tsx-ben van a logikája. Localstorage megőrzés! 
 # 📌 PROBLÉMA: Majd a csst alakítani kell hogy jobb legyen 
+# Fejlesztési napló – 2025-12-20
+
+## Talált hibák:
+- A fetch-feed nem állította be a `source_id` mezőt, ezért minden cikk forrása NULL lett.
+- A `sources` táblában duplikált Telex rekord szerepelt (id=1 és id=2).
+- A régi cikkek egy része a hibás (2-es) Telex ID-ra hivatkozott.
+- A főoldal által használt `/api/summaries` endpoint nem JOIN-olta a `sources` táblát.
+- A summaries API a `source` mezőt a summaries táblából olvasta, ami üres volt.
+- A frontend fallbackként „ISMERETLEN”-t írt ki, mert nem kapott forrásnevet.
+
+## Megoldások:
+- A fetch-feed kiegészült automatikus forrásfelismeréssel és `source_id` mentéssel.
+- A duplikált Telex rekord törölve lett, miután minden cikk át lett irányítva az 1-es ID-ra.
+- Visszamenőleges SQL-lel kitöltésre kerültek a hiányzó `source_id` mezők (Telex, HVG).
+- Az `/api/summaries` endpoint kiegészült `articles` és `sources` JOIN-okkal.
+- A summaries API mostantól a `source` mezőt a `sources.name` alapján tölti.
+- A frontend automatikusan helyesen jeleníti meg a forrásneveket (Telex, HVG).
+
+# 📘 Fejlesztési napló – 2025.02.21
+## 🔧 Backend javítások
+detectourceId() teljes újraírása domain‑alapúra
+Portfolio.hu felismerés hozzáadva (source_id = 3)
+Index–Portfolio keveredés megszüntetve
+Réi hibás source_id értékek javítása SQL‑lel
+Fetch-feed mostantól minden forrást 100%-osan helyesen kategorizál
+## ⚙️ Summarize-all pipeline
+Batch size ideiglenes emelése (60) a backlog gyors ledarálásához
+Backlog teljesen lefutott (1 db → 0 db)
+GPU terhelés megfigyelése, optimalizálási terv előkészítve
+Megerősítve: summarize-all csak batch‑enként fut, nem végtelen ciklusban
+## 🗄️ Adatbázis műveletek
+Feldolgozatlan cikkek számlálása SQL-lel
+Hibás forrású régi cikkek javítása (Index/Portfolio)
+Summaies tábla ellenőrzése (detailed_content hiányok)
+## 🎨 Frontend
+FeedItemCard.tsx ellenőrizve
+Badge logika helyes → backend hibától függött
+Forrásbélyegzők mostantól pontosak (Portfolio, Index, 24, 444, stb.)
+## 🧹 Rendszerállapot
+Fetch-feed → Summarize-all → Frontend teljesen szinkronban
+Backlog: 0 fedolgozatlan cikk
+Forrásdetektálás: 100% pontos
+Rendszer stabil, terhelés normalizálva
