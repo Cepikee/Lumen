@@ -261,39 +261,37 @@ export default function Page() {
               <label className="form-check-label">Mind</label>
             </div>
 
-            {/* Egyes források */}
-            {["Telex", "444", "HVG", "24.hu", "Portfolio"].map(src => (
-              <div key={src} className="form-check">
+            {/* Egyes források — ID + név */}
+            {[
+              { id: 1, name: "Telex" },
+              { id: 5, name: "Index" },
+              { id: 6, name: "444" },
+              { id: 4, name: "HVG" },
+              { id: 2, name: "24.hu" },
+              { id: 3, name: "Portfolio" },
+            ].map(src => (
+              <div key={src.id} className="form-check">
                 <input
                   type="checkbox"
                   className="form-check-input"
-                  checked={sourceFilters.includes(src)}
+                  checked={sourceFilters.includes(String(src.id))}
                   onChange={(e) => {
                     const newSources = e.target.checked
-                      ? [...sourceFilters, src]
-                      : sourceFilters.filter(s => s !== src);
+                      ? [...sourceFilters, String(src.id)]
+                      : sourceFilters.filter(s => s !== String(src.id));
 
                     setSourceFilters(newSources);
                     setShowSourcePanel(false);
                     applySourceFilter(newSources);
                   }}
                 />
-                <label className="form-check-label">{src}</label>
+                <label className="form-check-label">{src.name}</label>
               </div>
             ))}
           </div>
         )}
 
       </div>
-
-      {summary && (
-        <div className="card bg-secondary text-light shadow mb-4">
-          <div className="card-body">
-            <h5 className="card-title">📝 Összefoglaló</h5>
-            <div>{summary}</div>
-          </div>
-        </div>
-      )}
 
       <FeedList
         items={items}

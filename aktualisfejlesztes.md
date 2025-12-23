@@ -1,136 +1,74 @@
-🧱 1. Kártyák egységesítése (Reddit‑szerű feed)
-Most a kártyák jók, de lehetne:
+1) Summarizer pipeline stabilizálása
+retry logika
 
-egységes margó
+timeout kezelés
 
-egységes padding
+failed state-ek tisztítása
 
-egységes border‑radius
+duplikációk kizárása
 
-egységes árnyék
+Ez a pipeline lesz a gerince az egész Utomnak.
 
-egységes betűméret
+2) Trend aggregator finomhangolása
+period logika pontosítása (7d, 24h, 1h)
 
-Ez adja meg a „termék” érzést.
+frequency számítás tisztítása
 
-## KÉSZEN VAN!!
+kategorizálás AI-ból → stabilabb mapping
 
+Ez adja majd a “wow” élményt a felhasználónak.
 
-🎯 4. Amit én javaslok a következő lépésnek
-1. Lépés:
-Egységes alap kártya stílus bevezetése → ezt ma megcsináljuk.
+3) Backend API tisztítása
+endpointok egységesítése
 
-2. Lépés:
-Forrás-specifikus szín + kis vizuális elem (accent stripe) → ez lesz a következő fejlesztés.
+error handling
 
-3. Lépés:
-Halvány háttérminta / watermark → ez már a „luxus” réteg, de nagyon jól fog kinézni.
+rate limit / throttle
 
+cache réteg (ha kell)
 
+Ez a frontend stabilitását fogja megdobni.
 
+4) Frontend apró UX finomítások
+loading állapotok
 
+skeleton UI
 
-Ha szeretnéd, a következő lépésben megcsinálhatjuk:
+szebb transitions
 
-👉 A „Friss / Feltörekvő / Legjobbak / Toplista” gombsor működő logikáját vagy 👉 A kártyák Reddit‑szerű compact / card nézet váltását
+responsive fixek
 
-Csak mondd, melyikkel menjünk tovább.
+Ez adja a prémium érzést.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-🎛️ 2. Forrás badge (Telex / HVG jelölés)
-Nagyon sokat dob a feeden, ha minden cikk tetején ott van:
-
-[TELEX] vagy [HVG]
-
-Kicsi, színezett badge, pl.:
-
-Telex → kék
-
-HVG → narancs
-
-Ez vizuálisan is segít, és később 10–15 forrásnál életmentő lesz.
-
-🕒 3. Időbélyeg emberi formátumban
-Most így jelenik meg:
-
-2025. 12. 18. 16:41:50
-
-Legyen így:
-
-„3 perce”
-
-„1 órája”
-
-„Tegnap”
-
-„2 napja”
-
-Ez sokkal modernebb és könnyebben olvasható.
-
-🧩 4. Rövid összefoglaló + hosszú összefoglaló vizuális szétválasztása
-Most egybe folyik. Javaslat:
-
-rövid összefoglaló → sima szöveg
-
-hosszú összefoglaló → halványabb háttér, keret, vagy collapsible panel
-
-Ez azonnal professzionálisabbá teszi.
-
-📌 5. „Részletes elemzés” gomb egységesítése
-Most egy link. Lehetne:
-
-kék gomb
-
-ikon (📘 vagy 🔍)
-
-hover effekt
-
-Kicsi változtatás, nagy hatás.
-
-🧭 6. Felső navigáció fixálása (sticky header)
-Ha a felhasználó görget, a menü maradjon fent:
-
-Főoldal
-
-Trendek
-
-Beállítások
-
-Ez sokkal jobb UX.
-
-🌙 7. Dark mode (ha még nincs)
-Egy egyszerű toggle‑lal:
-
-háttér #111
-
-kártyák #1c1c1c
-
-szöveg #eee
-
-A híroldalak 80%-a már támogatja.
-
-📱 8. Mobil optimalizálás
-Ha mobilon a kártyák túl szélesek vagy a szöveg túl hosszú, érdemes:
-
-max‑width
-
-responsive grid
-
-kisebb betűméret
-
-Ez sokat dob a használhatóságon.
+5) MySQL optimalizációk
+buffer pool méret véglegesítése
+slow query log bekapcsolása
+indexek átnézése (most még könnyű)
+Ez hosszú távon rengeteget számít.
+🚀 És utána jöhet a nagy fejlesztés
+A nagy fejlesztés alatt én valami ilyesmire gondolok:
+A) Teljes értékű trend oldal
+idővonal
+kategóriák
+források
+kulcsszó kapcsolatok
+vizualizációk
+Ez lenne az Utom “signature” funkciója.
+B) Felhasználói fiókok + személyre szabás
+kedvenc témák
+saját feed
+éresítések
+mentett trendek
+Ez már termék szintű élmény.
+C) AI‑alapú kategorizálás + címkézés
+automatikus topic detection
+sentiment
+entitások
+kapcsolati gráf
+Ez már “premium intelligence”.
+D) Dashboard / admin felület
+pipeline monitor
+trend statisztikák
+források állapot
+hibák, retry-k
+Ez neked, mint foundernek, aranyat ér.

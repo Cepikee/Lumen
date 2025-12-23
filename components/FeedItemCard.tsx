@@ -5,12 +5,22 @@ import ReactMarkdown from "react-markdown";
 interface FeedItem {
   id: number;
   url: string;
-  source: string;
+  source_id: number;
   content: string;
   detailed_content: string;
   ai_clean: number;
   created_at: string;
 }
+
+// --- FORRÁS MAPPING --- //
+const SOURCE_MAP: Record<number, string> = {
+  1: "telex",
+  2: "24hu",
+  3: "portfolio",
+  4: "hvg",
+  5: "index",
+  6: "444",
+};
 
 // --- DÁTUM FORMÁZÓK --- //
 function formatRelativeTime(dateString: string): string {
@@ -55,8 +65,12 @@ export default function FeedItemCard({
   viewMode: "card" | "compact";
 }) {
   const url = item.url || "";
-  const source = item.source?.toLowerCase() || "ismeretlen";
-  const sourceClass = `source-${source.replace(/\W+/g, "").toLowerCase()}`;
+
+  // 🔥 A HELYES forrásnév source_id alapján
+  const source = SOURCE_MAP[item.source_id] || "ismeretlen";
+
+  // 🔥 CSS class generálása
+  const sourceClass = `source-${source}`;
 
   // --- COMPACT NÉZET --- //
   if (viewMode === "compact") {
@@ -101,7 +115,7 @@ export default function FeedItemCard({
           </div>
 
           <div
-              className={`mt-1 ${expanded ? "" : "clamp-2"}`}
+            className={`mt-1 ${expanded ? "" : "clamp-2"}`}
             style={{
               fontSize: "0.85rem",
               lineHeight: "1.2",
@@ -149,9 +163,9 @@ export default function FeedItemCard({
   return (
     <div className={`feed-wrapper`}>
       <div
-         className="feed-card mb-3 p-3 rounded shadow-sm"
-  style={{  backgroundColor: "#1a1a1a", }}
-  data-source-text={source.toUpperCase()}
+        className="feed-card mb-3 p-3 rounded shadow-sm"
+        style={{ backgroundColor: "#1a1a1a" }}
+        data-source-text={source.toUpperCase()}
       >
         <div className="card-body position-relative" style={{ zIndex: 2 }}>
           <h5 className="card-title d-flex justify-content-between align-items-center">

@@ -422,63 +422,40 @@ html, body {
   border-radius: 4px;
 }
 
-/* --- HVG: marad változatlan, mert profi --- */
-.source-hvg {
-  background-color: #ff7a00;
-  color: black;
+.badge.source-444 {
+  background-color: #2d6126 !important;
+  color: rgb(255, 255, 255) !important;
 }
 
-/* --- 444.hu: fehér → zöld átmenet, fekete betűszín --- */
-.source-444hu {
-  background: linear-gradient(90deg, #ffffff 0%, #00cc66 100%);
-  color: black;
+.badge.source-index {
+  background-color: rgba(224, 226, 116, 0.747) !important;
+  color: rgb(255, 255, 255) !important;
 }
 
-/* --- Portfolio: sárga → narancs átmenet, fekete betűszín --- */
-.source-portfolio {
-  background: linear-gradient(90deg, #ffd27f 0%, #ff6600 100%);
-  color: black;
+.badge.source-portfolio {
+  background-color: #ff6600 !important;
+  color: rgb(255, 255, 255) !important;
 }
 
-/* --- 24.hu: PIROS → SZÜRKE átmenet (nem tompa, hanem igazi piros) --- */
-.source-24hu {
-  background: linear-gradient(90deg, #ff0000 0%, #6e6e6e 100%);
-  color: black;
+.badge.source-24hu {
+  background-color: #ff0000 !important;
+  color: white !important;
 }
 
-/* --- Index: fekete → sárga átmenet --- */
-.source-index {
-  background: linear-gradient(90deg, #000000 0%, #f4d35e 100%);
-  color: white;
+.badge.source-telex {
+  background-color: #00AEEF !important;
+  color: white !important;
 }
 
-/* --- Telex: szürke → kék átmenet --- */
-.source-telex {
-  background: linear-gradient(90deg, #3a3a3a 0%, #00AEEF 100%);
-  color: white;
+.badge.source-hvg {
+  background-color: #ff7a00 !important;
+  color: rgb(255, 255, 255) !important;
 }
 
-/* --- Magyar Nemzet --- */
-.source-magyarnemzet {
-  background: linear-gradient(90deg, #8b1e3f 0%, #c46a82 100%);
-  color: white;
-}
-
-/* --- Origo --- */
-.source-origo {
-  background: linear-gradient(90deg, #0077b6 0%, #66b7e3 100%);
-  color: white;
-}
-
-/* --- Népszava --- */
-.source-népszava,
-.source-nepszava {
-  background: linear-gradient(90deg, #009688 0%, #66d1c4 100%);
-  color: white;
-}
 .clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

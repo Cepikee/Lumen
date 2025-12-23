@@ -198,20 +198,18 @@ ${text}
 
 
 
-function getSourceFromUrl(url: string) {
-  try {
-    const u = new URL(url);
-    let host = u.hostname.toLowerCase();
-    if (host.startsWith("www.")) host = host.slice(4);
-    const overrides: Record<string, string> = {
-      "telex.hu": "telex", "index.hu": "index", "444.hu": "444",
-      "24.hu": "24", "hvg.hu": "hvg", "portfolio.hu": "portfolio"
-    };
-    if (overrides[host]) return overrides[host];
-    const parts = host.split(".");
-    return parts.length >= 2 ? parts[parts.length - 2] : host;
-  } catch { return "ismeretlen"; }
-}
+function getSourceFromUrl(url: string) { 
+  try { 
+    const u = new URL(url); 
+    let host = u.hostname.toLowerCase(); 
+    if (host.startsWith("www.")) host = host.slice(4); 
+    const overrides: Record<string, string> = 
+  { "telex.hu": "telex", "index.hu": "index", "444.hu": "444", "24.hu": "24", "hvg.hu": "hvg", "portfolio.hu": "portfolio" }; 
+  // Pontos egyezés 
+  if (overrides[host]) return overrides[host]; 
+  // // Ha nem ismert domain → "ismeretlen"
+   return "ismeretlen"; 
+  } catch { return "ismeretlen"; } }
 function hasContent(s: string | null | undefined, minLen = 50) {
   return !!s && s.trim().length >= minLen;
 }

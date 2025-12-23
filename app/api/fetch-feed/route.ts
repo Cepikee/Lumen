@@ -1,26 +1,68 @@
+// app/api/fetch-feed/route.tsx
 import { NextResponse } from "next/server";
 import mysql, { RowDataPacket } from "mysql2/promise";
 import Parser from "rss-parser";
 
-// Forrás felismerése URL alapján
-function detectSourceId(url: string): number | null {
+/** Domain → source_id */
+function detectSourceId(url: string | null | undefined): number | null {
   if (!url) return null;
+  try {
+    const domain = new URL(url).hostname.replace(/^www\./, "");
+    switch (domain) {
+      case "telex.hu": return 1;
+      case "24.hu": return 2;
+      case "portfolio.hu": return 3;
+      case "hvg.hu": return 4;
+      case "index.hu": return 5;
+      case "444.hu": return 6;
+      default: return null;
+    }
+  } catch {
+    return null;
+  }
+}
 
-  if (url.includes("telex.hu")) return 1;
-  if (url.includes("hvg.hu")) return 4;
-  if (url.includes("24.hu")) return 2;
-  if (url.includes("portfolio.hu")) return 3;
-  if (url.includes("index.hu")) return 5;
-  if (url.includes("444.hu")) return 6;
+/** Aggresszív attribútumjavítás (idézőjelek beszúrása, on* attrib eltávolítás) */
+function aggressiveFixAttributes(xml: string) {
+  let out = xml;
+  out = out.replace(/(\s(?:src|href|data-src|data-href|poster|srcset|data-srcset)=)(?!["'])([^\s"'>]+)/gi, '$1"$2"');
+  out = out.replace(/(\s(on[a-zA-Z]+)=)(["']?)([^"'>\s]+)(["']?)/gi, ''); // eltávolítjuk az on* attribútumokat
+  out = out.replace(/\u0000/g, "");
+  return out;
+}
 
-  return null; // ismeretlen forrás
+/** Ha HTML-t kapunk, próbáljuk meg kinyerni az RSS linket */
+function extractRssFromHtml(html: string): string | null {
+  // keresünk <link rel="alternate" type="application/rss+xml" href="...">
+  const linkMatch = html.match(/<link[^>]+rel=["']?alternate["']?[^>]*type=["']?(application\/rss\+xml|application\/atom\+xml|application\/xml|text\/xml)["']?[^>]*>/i);
+  if (linkMatch) {
+    const hrefMatch = linkMatch[0].match(/href=(["'])(.*?)\1/i);
+    if (hrefMatch) return hrefMatch[2];
+    const hrefMatch2 = linkMatch[0].match(/href=([^\s>]+)/i);
+    if (hrefMatch2) return hrefMatch2[1];
+  }
+  // alternatív: <a href="...rss"> vagy <a href="/rss">
+  const aMatch = html.match(/<a[^>]+href=(["'])([^"']*rss[^"']*)\1/i);
+  if (aMatch) return aMatch[2];
+  return null;
+}
+
+/** Ellenőrzi, hogy a szöveg tartalmaz-e RSS/Atom jellegű elemet */
+function looksLikeXmlFeed(xml: string) {
+  const s = xml.slice(0, 1000).toLowerCase();
+  return s.includes("<rss") || s.includes("<feed") || s.includes("<rdf");
 }
 
 export async function GET() {
   console.log(">>> fetch-feed route elindult!");
 
   try {
-    const parser = new Parser();
+    const parser = new Parser({
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; FetchBot/1.0)",
+        Accept: "application/rss+xml, application/xml, text/xml",
+      },
+    });
 
     const connection = await mysql.createConnection({
       host: "localhost",
@@ -31,179 +73,138 @@ export async function GET() {
 
     let inserted = 0;
 
-    // ---- TELEX ----
-    const feedTelex = await parser.parseURL("https://telex.hu/rss");
-    for (const item of feedTelex.items) {
-      const [rows] = await connection.execute<RowDataPacket[]>(
-        "SELECT id FROM articles WHERE url_canonical = ?",
-        [item.link]
-      );
+    async function fetchAndParse(feedUrl: string, fixHtml = false) {
+      const res = await fetch(feedUrl, {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (compatible; FetchBot/1.0)",
+          Accept: "application/rss+xml, application/xml, text/xml",
+        },
+        redirect: "follow",
+      });
+      const contentType = res.headers.get("content-type") || "";
+      const text = await res.text();
+      return { status: res.status, ok: res.ok, contentType, text };
+    }
 
-      if (rows.length === 0) {
-        const sourceId = detectSourceId(item.link ?? "");
+    async function processFeed(
+      feedUrl: string,
+      sourceName: string,
+      forcedSourceId: number | null = null,
+      fixHtml = false
+    ) {
+      try {
+        console.log(`>>> processFeed start: ${sourceName} (${feedUrl})`);
+        let { status, ok, contentType, text } = await fetchAndParse(feedUrl, fixHtml);
+        console.log(`>>> ${sourceName} HTTP ${status} content-type: ${contentType}`);
+        // Ha HTML-t kaptunk vagy nem tűnik feednek, próbáljunk kinyerni RSS linket
+        if (!ok) throw new Error(`HTTP ${status}`);
+        if (!looksLikeXmlFeed(text) || /text\/html|application\/xhtml\+xml/i.test(contentType)) {
+          const rssLink = extractRssFromHtml(text);
+          if (rssLink) {
+            // abszolút URL-re alakítás
+            const base = new URL(feedUrl);
+            const resolved = rssLink.startsWith("http") ? rssLink : new URL(rssLink, base).toString();
+            console.log(`>>> ${sourceName} talált RSS link a HTML-ben: ${resolved}`);
+            ({ status, ok, contentType, text } = await fetchAndParse(resolved, fixHtml));
+            if (!ok) throw new Error(`HTTP ${status} when fetching discovered RSS`);
+          } else {
+            throw new Error("Nem talált RSS linket a HTML-ben");
+          }
+        }
 
-        await connection.execute(
-          `INSERT INTO articles 
-             (title, url_canonical, content_text, published_at, language, source_id)
-           VALUES (?, ?, ?, NOW(), ?, ?)`,
-          [
-            item.title || "",
-            item.link,
-            item['content:encoded'] || item.content || item.contentSnippet || "",
-            "hu",
-            sourceId,
-          ]
-        );
+        // Ha fixHtml, próbáljuk meg javítani
+        let xml = text;
+        if (fixHtml) xml = aggressiveFixAttributes(xml);
 
-        inserted++;
-        console.log("🆕 Új Telex cikk mentve:", item.link);
+        // Első parse próbálkozás
+        let feed;
+        try {
+          feed = await parser.parseString(xml);
+        } catch (err) {
+          console.warn(`⚠️ ${sourceName} parse hiba (első):`, (err instanceof Error) ? err.message : String(err));
+          // második próbálkozás agresszív javítással
+          xml = aggressiveFixAttributes(xml);
+          try {
+            feed = await parser.parseString(xml);
+          } catch (err2) {
+            console.error(`⚠️ ${sourceName} parse hiba (második):`, (err2 instanceof Error) ? err2.message : String(err2));
+            throw err2;
+          }
+        }
+
+        if (!feed || !Array.isArray(feed.items)) {
+          throw new Error("Feed feldolgozása sikertelen");
+        }
+
+        for (const item of feed.items) {
+          const link = (item.link ?? "").toString();
+          if (!link) continue;
+
+          const [rows] = await connection.execute<RowDataPacket[]>(
+            "SELECT id FROM articles WHERE url_canonical = ?",
+            [link]
+          );
+
+          if (rows.length === 0) {
+            const sourceId = forcedSourceId ?? detectSourceId(link);
+            await connection.execute(
+              `INSERT INTO articles 
+                (title, url_canonical, content_text, published_at, language, source_id)
+               VALUES (?, ?, ?, NOW(), ?, ?)`,
+              [
+                item.title || "",
+                link,
+                item["content:encoded"] || item.content || item.contentSnippet || "",
+                "hu",
+                sourceId,
+              ]
+            );
+            inserted++;
+            console.log(`🆕 Új ${sourceName} cikk mentve:`, link);
+          }
+        }
+      } catch (err) {
+        console.error(`⚠️ ${sourceName} feed hiba:`, err);
       }
     }
 
-    // ---- HVG ----
-    const feedHvg = await parser.parseURL("https://hvg.hu/rss");
-    for (const item of feedHvg.items) {
-      const [rows] = await connection.execute<RowDataPacket[]>(
-        "SELECT id FROM articles WHERE url_canonical = ?",
-        [item.link]
-      );
+    // ---- FEED LISTA ----
+    await processFeed("https://telex.hu/rss", "Telex");
+    await processFeed("https://hvg.hu/rss", "HVG");
+    await processFeed("https://24.hu/feed", "24.hu");
+    await processFeed("https://index.hu/24ora/rss/", "Index");
+    await processFeed("https://444.hu/feed", "444");
 
-      if (rows.length === 0) {
-        const sourceId = detectSourceId(item.link ?? "");
+    // Portfolio: forcedSourceId = 3 és fixHtml = true
+     await processFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio", 3, true);
 
-        await connection.execute(
-          `INSERT INTO articles 
-             (title, url_canonical, content_text, published_at, language, source_id)
-           VALUES (?, ?, ?, NOW(), ?, ?)`,
-          [
-            item.title || "",
-            item.link,
-            item.contentSnippet || "",
-            "hu",
-            sourceId,
-          ]
-        );
 
-        inserted++;
-        console.log("🆕 Új HVG cikk mentve:", item.link);
+    // --- SUMMARIZE-ALL FUTTATÁSA ---
+    const BATCH_SIZE = 10;
+    const cycles = Math.max(0, Math.ceil(inserted / BATCH_SIZE));
+
+    console.log("===============================================");
+    console.log(">>> FETCH-FEED ÖSSZEGZÉS");
+    console.log(">>> Új cikkek száma:", inserted);
+    console.log(">>> Batch méret:", BATCH_SIZE);
+    console.log(">>> Szükséges summarize-all ciklusok:", cycles);
+    console.log("===============================================");
+
+    for (let i = 0; i < cycles; i++) {
+      console.log(`>>> Summarize-all indítása (${i + 1}/${cycles})...`);
+      try {
+        await fetch("http://localhost:3000/api/summarize-all", { method: "GET" });
+        console.log(`>>> Summarize-all lefutott (${i + 1}/${cycles})`);
+      } catch (err) {
+        console.error("⚠️ summarize-all hívás hiba:", err);
       }
     }
 
-    // ---- 24.hu ----
-    const feed24 = await parser.parseURL("https://24.hu/feed/");
-    for (const item of feed24.items) {
-      const [rows] = await connection.execute<RowDataPacket[]>(
-        "SELECT id FROM articles WHERE url_canonical = ?",
-        [item.link]
-      );
-
-      if (rows.length === 0) {
-        const sourceId = detectSourceId(item.link ?? "");
-
-        await connection.execute(
-          `INSERT INTO articles 
-             (title, url_canonical, content_text, published_at, language, source_id)
-           VALUES (?, ?, ?, NOW(), ?, ?)`,
-          [
-            item.title || "",
-            item.link,
-            item.contentSnippet || "",
-            "hu",
-            sourceId,
-          ]
-        );
-
-        inserted++;
-        console.log("🆕 Új 24.hu cikk mentve:", item.link);
-      }
-    }
-
-    // ---- INDEX ----
-    const feedIndex = await parser.parseURL("https://index.hu/24ora/rss/");
-    for (const item of feedIndex.items) {
-      const [rows] = await connection.execute<RowDataPacket[]>(
-        "SELECT id FROM articles WHERE url_canonical = ?",
-        [item.link]
-      );
-
-      if (rows.length === 0) {
-        const sourceId = detectSourceId(item.link ?? "");
-
-        await connection.execute(
-          `INSERT INTO articles 
-             (title, url_canonical, content_text, published_at, language, source_id)
-           VALUES (?, ?, ?, NOW(), ?, ?)`,
-          [
-            item.title || "",
-            item.link,
-            item.contentSnippet || "",
-            "hu",
-            sourceId,
-          ]
-        );
-
-        inserted++;
-        console.log("🆕 Új Index cikk mentve:", item.link);
-      }
-    }
-
-    // ---- 444 ----
-    const feed444 = await parser.parseURL("https://444.hu/feed");
-    for (const item of feed444.items) {
-      const [rows] = await connection.execute<RowDataPacket[]>(
-        "SELECT id FROM articles WHERE url_canonical = ?",
-        [item.link]
-      );
-
-      if (rows.length === 0) {
-        const sourceId = detectSourceId(item.link ?? "");
-
-        await connection.execute(
-          `INSERT INTO articles 
-             (title, url_canonical, content_text, published_at, language, source_id)
-           VALUES (?, ?, ?, NOW(), ?, ?)`,
-          [
-            item.title || "",
-            item.link,
-            item.contentSnippet || "",
-            "hu",
-            sourceId,
-          ]
-        );
-
-        inserted++;
-        console.log("🆕 Új 444 cikk mentve:", item.link);
-      }
-    }
-// --- SUMMARIZE-ALL FUTTATÁSA ÚJ CIKKEK SZÁMA ALAPJÁN ---
-const BATCH_SIZE = 10;
-const cycles = Math.ceil(inserted / BATCH_SIZE);
-
-console.log("===============================================");
-console.log(">>> FETCH-FEED ÖSSZEGZÉS");
-console.log(">>> Új cikkek száma:", inserted);
-console.log(">>> Batch méret:", BATCH_SIZE);
-console.log(">>> Szükséges summarize-all ciklusok:", cycles);
-console.log("===============================================");
-
-for (let i = 0; i < cycles; i++) {
-  console.log(`>>> Summarize-all indítása (${i + 1}/${cycles})...`);
-
-  await fetch("http://localhost:3000/api/summarize-all", {
-    method: "GET",
-  });
-
-  console.log(`>>> Summarize-all lefutott (${i + 1}/${cycles})`);
-}
-
-console.log(">>> Minden summarize-all ciklus lefutott!");
-console.log("===============================================");
-
+    console.log(">>> Minden summarize-all ciklus lefutott!");
     await connection.end();
     return NextResponse.json({ status: "ok", inserted });
   } catch (err: unknown) {
-    const message =
-      err instanceof Error ? err.message : "Ismeretlen hiba történt";
+    const message = err instanceof Error ? err.message : "Ismeretlen hiba történt";
     console.error("API /fetch-feed hiba:", message);
     return NextResponse.json({ error: message }, { status: 500 });
   }
