@@ -412,3 +412,4 @@ users → optimalizálva
 128M ram az MYSQLnél átírva: 4G-re! XD 
 Ez azt jelenti, hogy az Utom adatbázisa most már nagyvállalati szintű sebességgel fog működni, és a pipeline‑ok (summarizer, trend aggregator, UI API) 10–50× gyorsabbak lesznek, ahogy nő az adatmennyiség.
 ##########################################
+## 2025.12.23.: Főoldalon források javítjva, így már megfelelő source_id-t kapnak, mindenhol! 

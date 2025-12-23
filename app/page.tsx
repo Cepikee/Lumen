@@ -10,12 +10,18 @@ export default function Page() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [items, setItems] = useState<FeedItem[]>([]);
   const [page, setPage] = useState(1);
+  const [sourcePage, setSourcePage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
   // Forrás szűrő
   const [showSourcePanel, setShowSourcePanel] = useState(false);
   const [sourceFilters, setSourceFilters] = useState<string[]>([]);
+
+  // Automatikusan betöltött forráslista
+  const [availableSources, setAvailableSources] = useState<
+    { id: number; name: string }[]
+  >([]);
 
   // Nézetváltó
   const [viewMode, setViewMode] = useState<"card" | "compact">("card");
@@ -25,7 +31,7 @@ export default function Page() {
 
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
-  // --- Nézet betöltése localStorage-ből --- //
+  // Nézet betöltése localStorage-ből
   useEffect(() => {
     const saved = localStorage.getItem("viewMode");
     if (saved === "card" || saved === "compact") {
@@ -33,59 +39,80 @@ export default function Page() {
     }
   }, []);
 
-  // --- Forrás szűrés --- //
+  // Forráslista betöltése
+  useEffect(() => {
+    async function loadSources() {
+      try {
+        const res = await fetch("/api/sources", { cache: "no-store" });
+        const data = await res.json();
+        setAvailableSources(data);
+      } catch (err) {
+        console.error("Source load error:", err);
+      }
+    }
+    loadSources();
+  }, []);
+
+  // 🔥 Szűrt feed lapozása — 10-es limitre javítva
+  async function fetchFilteredPage(pageNum: number, sources: string[]) {
+    const query = sources
+      .map((s) => `source=${encodeURIComponent(s)}`)
+      .join("&");
+
+    const res = await fetch(`/api/summaries?page=${pageNum}&limit=10&${query}`, {
+      cache: "no-store",
+    });
+
+    const raw = await res.json();
+
+    if (!Array.isArray(raw)) {
+      console.error("Filtered fetch error:", raw);
+      return [];
+    }
+
+    return raw.map((item: any) => ({
+      ...item,
+      ai_clean: Number(item.ai_clean),
+    }));
+  }
+
+  // 🔥 Forrás szűrés — első oldal betöltése — 10-es limitre javítva
   async function applySourceFilter(sources: string[]) {
     setSourceFilters(sources);
     setItems([]);
-    setPage(1);
+    setSourcePage(1);
+    setHasMore(true);
 
-    // Ha nincs kiválasztva semmi → összes hír
     if (sources.length === 0) {
-      setHasMore(true);
-      fetchPage(1);
+      setPage(1);
       return;
     }
 
-    setLoading(true);
-    setHasMore(false); // szűrésnél nincs infinite scroll
+    const firstPage = await fetchFilteredPage(1, sources);
 
-    try {
-      const query = sources
-        .map((s) => `source=${encodeURIComponent(s)}`)
-        .join("&");
-
-      const res = await fetch(`/api/summaries?${query}`, {
-        cache: "no-store",
-      });
-
-      const raw = await res.json();
-      const data: FeedItem[] = raw.map((item: any) => ({
-        ...item,
-        ai_clean: Number(item.ai_clean),
-      }));
-
-      setItems(data);
-    } catch (err) {
-      console.error("Source filter error:", err);
+    if (!firstPage || firstPage.length === 0) {
+      setItems([]);
+      setHasMore(false);
+      return;
     }
 
-    setLoading(false);
+    setItems(firstPage);
+    if (firstPage.length < 10) setHasMore(false);
   }
 
-  // --- Oldalankénti fetch (csak ha nem today mód és nincs forrásszűrő) --- //
+  // Normál feed lapozása — 10-es limit
   async function fetchPage(pageNum: number) {
     if (loading || isTodayMode || sourceFilters.length > 0) return;
 
     setLoading(true);
     try {
-      const res = await fetch(`/api/summaries?page=${pageNum}&limit=20`, {
+      const res = await fetch(`/api/summaries?page=${pageNum}&limit=10`, {
         cache: "no-store",
       });
 
       if (!res.ok) return;
 
       const raw = await res.json();
-
       const data: FeedItem[] = raw.map((item: any) => ({
         ...item,
         ai_clean: Number(item.ai_clean),
@@ -109,22 +136,32 @@ export default function Page() {
     setLoading(false);
   }
 
-  // --- Első oldal betöltése --- //
+  // Első oldal betöltése
   useEffect(() => {
     if (!isTodayMode && sourceFilters.length === 0) {
       fetchPage(page);
     }
   }, [page, isTodayMode, sourceFilters]);
 
-  // --- Infinite scroll observer --- //
+  // 🔥 Infinite scroll — működik 10-es limitnél is
   useEffect(() => {
-    if (!loaderRef.current || isTodayMode || sourceFilters.length > 0) return;
+    if (!loaderRef.current || isTodayMode) return;
 
     const observer = new IntersectionObserver(
-      (entries) => {
+      async (entries) => {
         const first = entries[0];
-        if (first.isIntersecting && hasMore && !loading) {
-          setPage((prev) => prev + 1);
+
+        if (first.isIntersecting && hasMore) {
+          if (sourceFilters.length > 0) {
+            const next = sourcePage + 1;
+            setSourcePage(next);
+
+            const newItems = await fetchFilteredPage(next, sourceFilters);
+            if (newItems.length === 0) setHasMore(false);
+            else setItems((prev) => [...prev, ...newItems]);
+          } else {
+            setPage((prev) => prev + 1);
+          }
         }
       },
       { threshold: 1 }
@@ -132,14 +169,14 @@ export default function Page() {
 
     observer.observe(loaderRef.current);
     return () => observer.disconnect();
-  }, [hasMore, loading, isTodayMode, sourceFilters]);
+  }, [hasMore, isTodayMode, sourceFilters, sourcePage]);
 
-  // --- Mi történt ma? --- //
+  // Mi történt ma?
   async function handleTodayFilter() {
     setLoading(true);
     setIsTodayMode(true);
     setItems([]);
-    setHasMore(false); // nincs infinite scroll ma
+    setHasMore(false);
 
     try {
       const res = await fetch(`/api/summaries?today=true`, {
@@ -160,7 +197,7 @@ export default function Page() {
     setLoading(false);
   }
 
-  // --- Visszaállítás teljes feedre --- //
+  // Visszaállítás
   function resetFeed() {
     setIsTodayMode(false);
     setSourceFilters([]);
@@ -261,15 +298,8 @@ export default function Page() {
               <label className="form-check-label">Mind</label>
             </div>
 
-            {/* Egyes források — ID + név */}
-            {[
-              { id: 1, name: "Telex" },
-              { id: 5, name: "Index" },
-              { id: 6, name: "444" },
-              { id: 4, name: "HVG" },
-              { id: 2, name: "24.hu" },
-              { id: 3, name: "Portfolio" },
-            ].map(src => (
+            {/* Automatikusan betöltött források */}
+            {availableSources.map(src => (
               <div key={src.id} className="form-check">
                 <input
                   type="checkbox"
@@ -300,13 +330,12 @@ export default function Page() {
         viewMode={viewMode}
       />
 
-      {/* Sentinel elem az infinite scrollhoz */}
-      {!isTodayMode && sourceFilters.length === 0 && (
+      {!isTodayMode && (
         <div ref={loaderRef} style={{ height: "50px" }} />
       )}
 
       {loading && <p className="text-center text-muted mt-3">Betöltés...</p>}
-      {!hasMore && !isTodayMode && sourceFilters.length === 0 && (
+      {!hasMore && !isTodayMode && (
         <p className="text-center text-muted mt-3">Nincs több hír.</p>
       )}
     </main>

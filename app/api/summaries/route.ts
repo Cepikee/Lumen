@@ -1,31 +1,67 @@
 import { NextResponse } from "next/server";
-import mysql, { RowDataPacket } from "mysql2/promise";
+import mysql from "mysql2/promise";
 
 export const dynamic = "force-dynamic";
+
+let pool: mysql.Pool | null = null;
+function getPool() {
+  if (!pool) {
+    pool = mysql.createPool({
+      host: "localhost",
+      user: "root",
+      password: "jelszo",
+      database: "projekt2025",
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0,
+    });
+  }
+  return pool;
+}
 
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
 
     const todayFilter = searchParams.get("today") === "true";
-    const page = Number(searchParams.get("page") ?? 1);
-    const limit = Number(searchParams.get("limit") ?? 20);
+    const page = Math.max(1, Number(searchParams.get("page") ?? 1));
+
+    const limit = 10;
     const offset = (page - 1) * limit;
 
-    // Több forrás támogatása
-    const sources = searchParams.getAll("source");
+    const sourcesRaw = searchParams.getAll("source");
+    const sources = sourcesRaw
+      .map((s) => s.trim())
+      .filter((s) => s !== "")
+      .map((s) => Number(s))
+      .filter((n) => Number.isFinite(n));
 
-    const connection = await mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "jelszo",
-      database: "projekt2025"
-    });
+    const db = getPool();
 
-    // 1) Több forrásos szűrés
+    // 1) Több forrásos szűrés — DUPLIKÁCIÓMENTES PAGINÁLÁS
     if (sources.length > 0) {
       const placeholders = sources.map(() => "?").join(",");
-      const query = `
+
+      // 1. lépés: ID-k lekérése
+      const idQuery = `
+        SELECT s.id
+        FROM summaries s
+        LEFT JOIN articles a ON s.article_id = a.id
+        WHERE a.source_id IN (${placeholders})
+        ORDER BY s.created_at DESC
+        LIMIT ${limit} OFFSET ${offset}
+      `;
+
+      const [idRows] = await db.query(idQuery, sources);
+      const ids = (idRows as any[]).map((r) => r.id);
+
+      if (ids.length === 0) return NextResponse.json([]);
+
+      // ORDER BY FIELD(...) a helyes sorrendhez
+      const idPlaceholders = ids.map(() => "?").join(",");
+      const orderField = ids.map((id) => "?").join(",");
+
+      const fullQuery = `
         SELECT 
           s.id,
           s.url,
@@ -41,12 +77,13 @@ export async function GET(req: Request) {
         FROM summaries s
         LEFT JOIN articles a ON s.article_id = a.id
         LEFT JOIN sources src ON a.source_id = src.id
-        WHERE src.id IN (${placeholders})
-        ORDER BY s.created_at DESC
+        WHERE s.id IN (${idPlaceholders})
+        ORDER BY FIELD(s.id, ${orderField})
       `;
 
-      const [rows] = await connection.execute<RowDataPacket[]>(query, sources);
-      await connection.end();
+      const params = [...ids, ...ids];
+      const [rows] = await db.query(fullQuery, params);
+
       return NextResponse.json(rows ?? []);
     }
 
@@ -78,17 +115,27 @@ export async function GET(req: Request) {
         ORDER BY s.created_at DESC
       `;
 
-      const [todayRows] = await connection.execute<RowDataPacket[]>(todayQuery, [
-        today,
-        tomorrow
-      ]);
-
-      await connection.end();
-      return NextResponse.json(todayRows ?? []);
+      const [rows] = await db.query(todayQuery, [today, tomorrow]);
+      return NextResponse.json(rows ?? []);
     }
 
-    // 3) Normál paginált feed
-    const query = `
+    // 3) Normál paginált feed — DUPLIKÁCIÓMENTES
+    const idQuery = `
+      SELECT s.id
+      FROM summaries s
+      ORDER BY s.created_at DESC
+      LIMIT ${limit} OFFSET ${offset}
+    `;
+
+    const [idRows] = await db.query(idQuery);
+    const ids = (idRows as any[]).map((r) => r.id);
+
+    if (ids.length === 0) return NextResponse.json([]);
+
+    const idPlaceholders = ids.map(() => "?").join(",");
+    const orderField = ids.map(() => "?").join(",");
+
+    const fullQuery = `
       SELECT 
         s.id,
         s.url,
@@ -104,19 +151,17 @@ export async function GET(req: Request) {
       FROM summaries s
       LEFT JOIN articles a ON s.article_id = a.id
       LEFT JOIN sources src ON a.source_id = src.id
-      ORDER BY s.created_at DESC
-      LIMIT ${limit} OFFSET ${offset}
+      WHERE s.id IN (${idPlaceholders})
+      ORDER BY FIELD(s.id, ${orderField})
     `;
 
-    const [rows] = await connection.execute<RowDataPacket[]>(query);
-    await connection.end();
+    const params = [...ids, ...ids];
+    const [rows] = await db.query(fullQuery, params);
 
     return NextResponse.json(rows ?? []);
 
-  } catch (err: unknown) {
-    const message =
-      err instanceof Error ? err.message : "Ismeretlen hiba történt";
-    console.error("API /summaries hiba:", message);
-    return NextResponse.json({ error: message }, { status: 500 });
+  } catch (err: any) {
+    console.error("API /summaries hiba:", err);
+    return NextResponse.json({ error: String(err) }, { status: 500 });
   }
 }
