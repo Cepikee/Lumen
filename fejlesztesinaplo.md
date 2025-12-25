@@ -413,3 +413,28 @@ users → optimalizálva
 Ez azt jelenti, hogy az Utom adatbázisa most már nagyvállalati szintű sebességgel fog működni, és a pipeline‑ok (summarizer, trend aggregator, UI API) 10–50× gyorsabbak lesznek, ahogy nő az adatmennyiség.
 ##########################################
 ## 2025.12.23.: Főoldalon források javítjva, így már megfelelő source_id-t kapnak, mindenhol! 
+
+
+DELETE FROM summaries; DELETE FROM articles; DELETE FROM keywords; DELETE FROM trends; ALTER TABLE summaries AUTO_INCREMENT = 1; ALTER TABLE articles AUTO_INCREMENT = 1; ALTER TABLE keywords AUTO_INCREMENT = 1; ALTER TABLE trends AUTO_INCREMENT = 1;
+
+
+
+
+
+
+
+kulcsszó‑trendek
+
+források közti eltérések
+
+témák időbeli változása
+
+politikai polarizáció mértéke
+
+érzelmi tónus változása
+
+ismétlődő minták
+
+rejtett összefüggések
+
+Egy újságíró ezt nem tudja 

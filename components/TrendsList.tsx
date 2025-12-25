@@ -5,6 +5,7 @@ import SparklineMini from "./SparklineMini";
 import SparklineDetailed from "./SparklineDetailed";
 import SpikeBadge from "./SpikeBadge";
 import { Modal, Button } from "react-bootstrap";
+import { Tooltip } from "bootstrap";
 
 interface Article { id: number; url: string; content: string; source: string; }
 
@@ -104,6 +105,18 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
     if (Array.isArray(externalTrends)) setTrends(externalTrends);
   }, [externalTrends]);
 
+  // ⭐ Tooltip inicializálás
+  useEffect(() => {
+    setTimeout(() => {
+      const tooltipTriggerList = Array.from(
+        document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      );
+      tooltipTriggerList.forEach((el) => {
+        new Tooltip(el);
+      });
+    }, 50);
+  }, [trends, historyMap]);
+
   if (loading) return <p className="text-muted">Betöltés folyamatban…</p>;
   if (error) return <p className="text-danger">Hiba történt a trendek betöltésekor.</p>;
   if (trends.length === 0) return <p className="text-muted">Nincs találat a megadott szűrőkre.</p>;
@@ -157,6 +170,14 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
           const displayHistory = getDisplayHistory(t.keyword);
           const hasHistory = displayHistory.length > 0;
 
+          // ⭐ Stabil logika
+          const days = displayHistory.length;
+          const isStable =
+            days >= 5 &&
+            (t.growth ?? 0) < 0.1 &&
+            !isIncreasing(displayHistory) &&
+            !isDecreasing(displayHistory);
+
           return (
             <li key={t.keyword} className="list-group-item">
               <div className="d-flex flex-column">
@@ -164,7 +185,7 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
                   <span className="fw-bold fs-5">{t.keyword}</span>
 
                   {hasHistory && (
-                    <div style={{ position: "relative", display: "inline-block", width: 160, height: 40 }}>
+                    <div style={{ position: "relative", display: "inline-block", width: 160, height: 30 }}>
                       <div
                         style={{
                           width: "100%",
@@ -194,11 +215,11 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
                           left: 0,
                           top: 0,
                           width: 160,
-                          height: 40,
+                          height: 30,
                           cursor: "pointer",
                           background: "transparent",
                           borderRadius: 6,
-                          zIndex: 10,
+                          zIndex: 5,
                         }}
                       />
                     </div>
@@ -207,14 +228,39 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
 
                 <div className="d-flex flex-wrap align-items-center gap-2 mt-2">
                   <span className="badge bg-info">{t.freq}×</span>
-                  {(historyMap[t.keyword]?.length ?? 0) === 1 && <span className="badge badge-new">Új</span>}
-                  {isIncreasing(displayHistory) && <span className="badge badge-increasing">Növekvő</span>}
-                  {isDecreasing(displayHistory) && <span className="badge badge-decreasing">Csökkenő</span>}
-                  {(t.growth ?? 0) === 0 && t.freq > 5 && <span className="badge badge-stable">Stabil</span>}
-                  {filters.period === "custom" && <span className="badge badge-periodic">Időszakos</span>}
+
+                  {(historyMap[t.keyword]?.length ?? 0) === 1 && (
+                    <span className="badge badge-new">Új</span>
+                  )}
+
+                  {isIncreasing(displayHistory) && (
+                    <span className="badge badge-increasing">Növekvő</span>
+                  )}
+
+                  {isDecreasing(displayHistory) && (
+                    <span className="badge badge-decreasing">Csökkenő</span>
+                  )}
+
+                  {isStable && (
+                    <span
+                      className="badge badge-stable"
+                      style={{ position: "relative", zIndex: 20 }}
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="A kulcsszó legalább 5 napja jelen van, nem növekszik és nem csökken — stabil trend."
+                    >
+                      Stabil
+                    </span>
+                  )}
+
+                  {filters.period === "custom" && (
+                    <span className="badge badge-periodic">Időszakos</span>
+                  )}
+
                   {t.keyword.match(/ország|nemzetközi|EU|világ/i) && (
                     <span className="badge badge-international">Nemzetközi</span>
                   )}
+
                   <SpikeBadge
                     growth={t.growth ?? null}
                     period={filters.period}
