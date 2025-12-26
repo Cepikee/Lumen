@@ -16,9 +16,9 @@ export interface FeedItem {
 const SOURCE_MAP: Record<number, string> = {
   1: "telex",
   2: "24hu",
-  3: "portfolio",
+  3: "index",
   4: "hvg",
-  5: "index",
+  5: "portfolio",
   6: "444",
 };
 

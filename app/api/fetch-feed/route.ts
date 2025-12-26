@@ -175,8 +175,9 @@ export async function GET() {
     await processFeed("https://index.hu/24ora/rss/", "Index");
     await processFeed("https://444.hu/feed", "444");
 
-    // Portfolio: forcedSourceId = 3 és fixHtml = true
-     await processFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio", 3, true);
+    // Portfolio: forcedSourceId = 5 és fixHtml = true
+     await processFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio", 5, true);
+
 
 
     // --- SUMMARIZE-ALL FUTTATÁSA ---
