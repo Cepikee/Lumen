@@ -2,7 +2,7 @@ import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CookieConsent from "../components/CookieConsent";
 import Header from "../components/Header";
-
+import ClientWrapper from "../components/ClientWrapper";
 export const metadata = {
   title: "Utom.hu – AI‑alapú hírtrend elemzés",
   description:
@@ -51,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <CookieConsent />
         {/* Bootstrap JS – szükséges az accordionhoz */} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer ></script>
+      <ClientWrapper />
       </body>
     </html>
   );
