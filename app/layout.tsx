@@ -1,8 +1,8 @@
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import CookieConsent from "../components/CookieConsent";
-import Header from "../components/Header";
-import ClientWrapper from "../components/ClientWrapper";
+
+import ClientLayout from "../components/ClientLayout";
+
 export const metadata = {
   title: "Utom.hu – AI‑alapú hírtrend elemzés",
   description:
@@ -38,20 +38,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body className="d-flex flex-column min-vh-100">
+        <ClientLayout>{children}</ClientLayout>
 
-        {/* HEADER KOMPONENS */}
-        <Header />
-
-        {/* MAIN CONTENT */}
-        <main className="flex-grow-1 container-fluid px-0 py-4" style={{ marginTop: "70px" }}>
-          <div className="container" style={{ maxWidth: "1100px" }}>
-            {children}
-          </div>
-        </main>
-
-        <CookieConsent />
-        {/* Bootstrap JS – szükséges az accordionhoz */} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer ></script>
-      <ClientWrapper />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+          defer
+        ></script>
       </body>
     </html>
   );

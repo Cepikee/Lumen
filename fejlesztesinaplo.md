@@ -419,22 +419,4 @@ DELETE FROM summaries; DELETE FROM articles; DELETE FROM keywords; DELETE FROM t
 
 
 
-
-
-
-
-kulcsszó‑trendek
-
-források közti eltérések
-
-témák időbeli változása
-
-politikai polarizáció mértéke
-
-érzelmi tónus változása
-
-ismétlődő minták
-
-rejtett összefüggések
-
-Egy újságíró ezt nem tudja 
+2025.12.26. 1: Bekerült a BackToTop.tsx, ami a nyílat mutatja, hogy felfelé legyen. Ezt a clientWrapperrel kell importálni, mert anmúgy nem jó.
