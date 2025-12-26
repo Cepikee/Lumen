@@ -2,7 +2,7 @@
 
 import ReactMarkdown from "react-markdown";
 
-interface FeedItem {
+export interface FeedItem {
   id: number;
   url: string;
   source_id: number;

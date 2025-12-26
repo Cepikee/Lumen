@@ -1,29 +1,23 @@
 "use client";
 
+import React from "react";
 import FeedItemCard from "./FeedItemCard";
+import type { FeedItem } from "./FeedItemCard";
 
-interface FeedItem {
-  id: number;
-  url: string;
-  source: string;
-  content: string;
-  detailed_content: string;
-  ai_clean: number;
-  created_at: string;
-}
+type FeedItemLocal = FeedItem;
 
 interface Props {
-  items: FeedItem[];
+  items: FeedItemLocal[];
   expandedId: number | null;
   setExpandedId: (id: number | null) => void;
-  viewMode: "card" | "compact";   // <-- ÚJ
+  viewMode: "card" | "compact";
 }
 
 export default function FeedList({
   items,
   expandedId,
   setExpandedId,
-  viewMode,                        // <-- ÚJ
+  viewMode,
 }: Props) {
   if (!items || items.length === 0) return <p>Nincs még összefoglalás.</p>;
 
@@ -39,7 +33,7 @@ export default function FeedList({
           onToggle={() =>
             setExpandedId(expandedId === item.id ? null : item.id)
           }
-          viewMode={viewMode}       // <-- ÚJ
+          viewMode={viewMode}
         />
       ))}
     </>
