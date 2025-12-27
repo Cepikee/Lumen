@@ -72,3 +72,22 @@ trend statisztikák
 források állapot
 hibák, retry-k
 Ez neked, mint foundernek, aranyat ér.
+
+
+
+
+
+
+
+
+## 2025.12.26:
+authentication & authorization
+rate limiting
+Indexing(db)
+ACID & transaction
+caching
+message queues
+load balancing
+cap theorem
+reverse proxy
+CDN

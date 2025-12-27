@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import mysql, { RowDataPacket } from "mysql2/promise";
 import Parser from "rss-parser";
+import fs from "fs";
 
 /** Domain → source_id */
 function detectSourceId(url: string | null | undefined): number | null {
@@ -11,10 +12,13 @@ function detectSourceId(url: string | null | undefined): number | null {
     switch (domain) {
       case "telex.hu": return 1;
       case "24.hu": return 2;
-      case "portfolio.hu": return 3;
+      case "index.hu": return 3;
       case "hvg.hu": return 4;
-      case "index.hu": return 5;
+      case "portfolio.hu": return 5;
       case "444.hu": return 6;
+      case "magyarnemzet.hu": return 7;
+      case "origo.hu": return 8;
+      case "nepszava.hu": return 9;
       default: return null;
     }
   } catch {
@@ -26,14 +30,13 @@ function detectSourceId(url: string | null | undefined): number | null {
 function aggressiveFixAttributes(xml: string) {
   let out = xml;
   out = out.replace(/(\s(?:src|href|data-src|data-href|poster|srcset|data-srcset)=)(?!["'])([^\s"'>]+)/gi, '$1"$2"');
-  out = out.replace(/(\s(on[a-zA-Z]+)=)(["']?)([^"'>\s]+)(["']?)/gi, ''); // eltávolítjuk az on* attribútumokat
+  out = out.replace(/(\s(on[a-zA-Z]+)=)(["']?)([^"'>\s]+)(["']?)/gi, '');
   out = out.replace(/\u0000/g, "");
   return out;
 }
 
 /** Ha HTML-t kapunk, próbáljuk meg kinyerni az RSS linket */
 function extractRssFromHtml(html: string): string | null {
-  // keresünk <link rel="alternate" type="application/rss+xml" href="...">
   const linkMatch = html.match(/<link[^>]+rel=["']?alternate["']?[^>]*type=["']?(application\/rss\+xml|application\/atom\+xml|application\/xml|text\/xml)["']?[^>]*>/i);
   if (linkMatch) {
     const hrefMatch = linkMatch[0].match(/href=(["'])(.*?)\1/i);
@@ -41,7 +44,6 @@ function extractRssFromHtml(html: string): string | null {
     const hrefMatch2 = linkMatch[0].match(/href=([^\s>]+)/i);
     if (hrefMatch2) return hrefMatch2[1];
   }
-  // alternatív: <a href="...rss"> vagy <a href="/rss">
   const aMatch = html.match(/<a[^>]+href=(["'])([^"']*rss[^"']*)\1/i);
   if (aMatch) return aMatch[2];
   return null;
@@ -96,15 +98,19 @@ export async function GET() {
         console.log(`>>> processFeed start: ${sourceName} (${feedUrl})`);
         let { status, ok, contentType, text } = await fetchAndParse(feedUrl, fixHtml);
         console.log(`>>> ${sourceName} HTTP ${status} content-type: ${contentType}`);
-        // Ha HTML-t kaptunk vagy nem tűnik feednek, próbáljunk kinyerni RSS linket
+
+        // HTML fallback logolás
         if (!ok) throw new Error(`HTTP ${status}`);
         if (!looksLikeXmlFeed(text) || /text\/html|application\/xhtml\+xml/i.test(contentType)) {
+          console.warn(`HTML fallback aktiválva: ${sourceName}`);
+
           const rssLink = extractRssFromHtml(text);
           if (rssLink) {
-            // abszolút URL-re alakítás
             const base = new URL(feedUrl);
             const resolved = rssLink.startsWith("http") ? rssLink : new URL(rssLink, base).toString();
-            console.log(`>>> ${sourceName} talált RSS link a HTML-ben: ${resolved}`);
+
+            console.log(`>>> ${sourceName} fallback RSS URL: ${resolved}`);
+
             ({ status, ok, contentType, text } = await fetchAndParse(resolved, fixHtml));
             if (!ok) throw new Error(`HTTP ${status} when fetching discovered RSS`);
           } else {
@@ -112,22 +118,31 @@ export async function GET() {
           }
         }
 
-        // Ha fixHtml, próbáljuk meg javítani
         let xml = text;
         if (fixHtml) xml = aggressiveFixAttributes(xml);
 
-        // Első parse próbálkozás
         let feed;
         try {
           feed = await parser.parseString(xml);
         } catch (err) {
-          console.warn(`⚠️ ${sourceName} parse hiba (első):`, (err instanceof Error) ? err.message : String(err));
-          // második próbálkozás agresszív javítással
+          console.warn(`⚠️ ${sourceName} parse hiba (első):`, err instanceof Error ? err.message : String(err));
+
+          fs.appendFileSync(
+            "feed_errors.log",
+            `[${new Date().toISOString()}] ${sourceName} FIRST PARSE ERROR: ${err instanceof Error ? err.message : String(err)}\n`
+          );
+
           xml = aggressiveFixAttributes(xml);
           try {
             feed = await parser.parseString(xml);
           } catch (err2) {
-            console.error(`⚠️ ${sourceName} parse hiba (második):`, (err2 instanceof Error) ? err2.message : String(err2));
+            console.error(`⚠️ ${sourceName} parse hiba (második):`, err2 instanceof Error ? err2.message : String(err2));
+
+            fs.appendFileSync(
+              "feed_errors.log",
+              `[${new Date().toISOString()}] ${sourceName} SECOND PARSE ERROR: ${err2 instanceof Error ? err2.message : String(err2)}\n`
+            );
+
             throw err2;
           }
         }
@@ -147,6 +162,22 @@ export async function GET() {
 
           if (rows.length === 0) {
             const sourceId = forcedSourceId ?? detectSourceId(link);
+
+            // Ismeretlen domain → SKIP
+            if (sourceId === null) {
+              console.warn(`SKIP: ismeretlen domain → ${link}`);
+              fs.appendFileSync(
+                "feed_errors.log",
+                `[${new Date().toISOString()}] UNKNOWN DOMAIN: ${link}\n`
+              );
+              continue;
+            }
+
+            // Domain → source_id logolás
+            console.log(
+              `SOURCE-DETECT: ${link} → domain=${new URL(link).hostname.replace(/^www\./, "")} → source_id=${sourceId}`
+            );
+
             await connection.execute(
               `INSERT INTO articles 
                 (title, url_canonical, content_text, published_at, language, source_id)
@@ -159,6 +190,7 @@ export async function GET() {
                 sourceId,
               ]
             );
+
             inserted++;
             console.log(`🆕 Új ${sourceName} cikk mentve:`, link);
           }
@@ -176,9 +208,7 @@ export async function GET() {
     await processFeed("https://444.hu/feed", "444");
 
     // Portfolio: forcedSourceId = 5 és fixHtml = true
-     await processFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio", 5, true);
-
-
+    await processFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio", 5, true);
 
     // --- SUMMARIZE-ALL FUTTATÁSA ---
     const BATCH_SIZE = 10;

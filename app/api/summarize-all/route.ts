@@ -70,7 +70,7 @@ async function safeExecute(conn: mysql.Connection, sql: string, params: any[], c
   }
 }
 
-// ---- Ollama hívás timeouttal ----
+// ---- Ollama hívás timeouttal a fő dolgokhoz ----
 async function callOllama(prompt: string, timeoutMs = 180000): Promise<string> {
   const controller = new AbortController();
   const t = setTimeout(() => controller.abort(), timeoutMs);
@@ -92,6 +92,26 @@ async function callOllama(prompt: string, timeoutMs = 180000): Promise<string> {
     clearTimeout(t);
   }
 }
+// ---- OLLAMA HíVÁS CSAK A KATEGÓRIZÁLÁSRA ----
+async function callOllamaCategory(prompt: string): Promise<string> {
+  const res = await fetch("http://127.0.0.1:11434/api/generate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ model: "llama3.1:8b-instruct-q4_K_M", prompt, stream: false }),
+  });
+
+  const raw = await res.text();
+  try {
+    const data = JSON.parse(raw);
+    return (data.response ?? "").trim();
+  } catch {
+    return raw.trim();
+  }
+}
+
+
+
+
 
 // ---- AI segédfüggvények ----
 async function runOllamaShortSummary(text: string) {
@@ -132,43 +152,34 @@ export async function runOllamaCategory(text: string) {
     "kultúra",
     "egészségügy",
     "oktatás",
-    "közélet",
+    "közélet"
   ];
 
-  let attempts = 0;
+  const blocks = text
+    .split(/\n{2,}|<h1>|<h2>|<h3>|<\/p>|<li>|•|\*/gi)
+    .map(b => b.trim())
+    .filter(b => b.length > 30);
 
-  while (attempts < 3) {
-    attempts++;
+  const votes: string[] = [];
 
-    const prompt = `
-Feladat: A szöveg alapján válassz EGYET a következő kategóriák közül:
+  for (const block of blocks) {
+    const prompt = `Válassz egy kategóriát az alábbi listából a tartalom alapján. 
+Csak a kategória nevét írd vissza.
 
-- Politika
-- Sport
-- Gazdaság
-- Tech
-- Kultúra
-- Egészségügy
-- Oktatás
-- Közélet
+politika
+sport
+gazdaság
+tech
+kultúra
+egészségügy
+oktatás
+közélet
 
-KÖTELEZŐ SZABÁLYOK:
-1. Csak a fenti listából választhatsz.
-2. Nem adhatsz meg új kategóriát.
-3. Nem adhatsz magyarázatot.
-4. Nem adhatsz több kategóriát.
-5. Ha bizonytalan vagy, akkor is a listából válassz.
-
-Válasz formátuma (kötelező):
-<kategória>
-
-Csak a kategória nevét írd vissza, semmi mást.
-
-Szöveg:
-${text}
+Tartalom:
+${block}
 `;
 
-    const raw = await callOllama(prompt);
+    const raw = await callOllamaCategory(prompt);
 
     const cleaned = (raw ?? "")
       .trim()
@@ -178,23 +189,41 @@ ${text}
       .toLowerCase();
 
     if (valid.includes(cleaned)) {
-      switch (cleaned) {
-        case "politika":    return "Politika";
-        case "sport":       return "Sport";
-        case "gazdaság":    return "Gazdaság";
-        case "tech":        return "Tech";
-        case "kultúra":     return "Kultúra";
-        case "egészségügy": return "Egészségügy";
-        case "oktatás":     return "Oktatás";
-        case "közélet":     return "Közélet";
-      }
+      votes.push(cleaned);
+    } else {
+      console.warn(">>> Érvénytelen kategória válasz:", cleaned, "RAW:", raw);
     }
-
-    // ha rossz → újrapróbáljuk
   }
-  // ha 3 próbálkozás után is rossz → hibát dobunk
-  throw new Error(`Érvénytelen kategória válasz 3 próbálkozás után is.`);
+
+  if (votes.length === 0) {
+    throw new Error("Nem sikerült kategóriát meghatározni, újrafuttatás szükséges.");
+  }
+
+  const freq: Record<string, number> = {};
+  for (const v of votes) {
+    freq[v] = (freq[v] || 0) + 1;
+  }
+
+  const dominant = Object.entries(freq)
+    .sort((a, b) => b[1] - a[1])[0][0];
+
+  const finalCategory = {
+    politika: "Politika",
+    sport: "Sport",
+    gazdaság: "Gazdaság",
+    tech: "Tech",
+    kultúra: "Kultúra",
+    egészségügy: "Egészségügy",
+    oktatás: "Oktatás",
+    közélet: "Közélet"
+  }[dominant];
+
+  console.log(">>> Végső kategória:", finalCategory);
+
+  return finalCategory;
 }
+
+
 
 
 
@@ -275,15 +304,43 @@ export async function GET() {
           }
 
           const contentText = article.content_text ?? "";
-          const source = getSourceFromUrl(article.url_canonical ?? "");
-          const rawSummary = await runOllamaLongAnalysis(contentText);
-          let summary = await runOllamaShortSummary(contentText);
+const source = getSourceFromUrl(article.url_canonical ?? "");
 
-          if (!hasContent(summary) || !hasContent(rawSummary)) {
-            console.warn(">>> Összefoglaló túl rövid/üres, kihagyva:", articleId);
-            errors.push({ id: articleId, error: "Summary too short or empty" });
-            return;
-          }
+// --- Rövid összefoglaló (kötelező) ---
+let summary = await runOllamaShortSummary(contentText);
+
+// Ha túl rövid, újrapróbálkozás
+if (!hasContent(summary)) {
+  console.warn(">>> Rövid összefoglaló túl rövid, újrapróbálkozás:", articleId);
+  summary = await runOllamaShortSummary(contentText);
+}
+
+// Ha még mindig rövid, akkor is megtartjuk – a cikket nem dobjuk el
+if (!hasContent(summary)) {
+  console.warn(">>> Rövid összefoglaló továbbra is rövid, de a cikket NEM dobjuk el:", articleId);
+}
+
+
+// --- Hosszú elemzés (KÖTELEZŐ) ---
+let rawSummary = await runOllamaLongAnalysis(contentText);
+
+// Ha túl rövid, újrapróbálkozás
+if (!hasContent(rawSummary)) {
+  console.warn(">>> Hosszú elemzés túl rövid, újrapróbálkozás:", articleId);
+  rawSummary = await runOllamaLongAnalysis(contentText);
+}
+
+// Ha még mindig rövid, generálunk egy minimális fallback-et
+if (!hasContent(rawSummary)) {
+  console.warn(">>> Hosszú elemzés továbbra is rövid, fallback generálása:", articleId);
+
+  rawSummary = `
+A cikk tartalma rövid, ezért az elemzés csak alapvető megállapításokat tartalmaz.
+A szöveg fő témája: ${summary}.
+További részletek a cikkben nem szerepelnek, ezért az elemzés korlátozott.
+  `.trim();
+}
+
 
           let plagiarismScore = 0;
           try {
