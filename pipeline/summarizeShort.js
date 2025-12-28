@@ -69,18 +69,23 @@ async function summarizeShort(articleId) {
     }
 
     // 2) Prompt – summarize-all stílusban
-    const prompt = `Foglaljad össze röviden (max 5 mondatban), plágiummentesen, kizárólag magyar nyelven:
-${contentText}
-`.trim();
+    const prompt = `Foglaljad össze a következő szöveget röviden, maximum 5 mondatban.
+Csak az összefoglalót írd ki, bevezető mondat nélkül.
+Ne írj olyat, hogy "Itt a lényeg", "Íme az összefoglaló", "Röviden", vagy bármilyen bevezetőt.
+Csak magyarul válaszolj:
+
+${contentText}`.trim();
+
 
     // 3) AI hívás
     let summary = await callOllama(prompt);
 
     // 4) Validálás + újrapróbálás
-    if (!isValidSummary(summary)) {
-      console.warn(`[SHORT] ⚠️ Első összefoglaló érvénytelen, újrapróbálás...`);
-      summary = await callOllama(prompt);
-    }
+
+    if (!isValidSummary(summary)) { 
+      console.warn(`[SHORT] ⚠️ Érvénytelen összefoglaló — AI válasz:`); 
+      console.warn(summary); 
+      console.warn(`[SHORT] Újrapróbálás...`); summary = await callOllama(prompt); }
 
     if (!isValidSummary(summary)) {
       console.error(`[SHORT] ❌ AI nem adott érvényes összefoglalót! articleId=${articleId}`);

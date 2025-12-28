@@ -17,9 +17,9 @@ const BLUE = "\x1b[34m";
 const CYAN = "\x1b[36m";
 
 // ---- Konfiguráció ----
-const BATCH_SIZE = 2;
+const BATCH_SIZE = 1;
 const LOOP_DELAY_MS = 60000;
-const CONCURRENCY = 1;
+const CONCURRENCY = 2;
 const ARTICLE_TIMEOUT_MS = 60000;
 const MAX_RETRIES = 3;
 
