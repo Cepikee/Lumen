@@ -31,14 +31,35 @@ export async function GET(req: Request) {
     let whereParts: string[] = [];
     const params: any[] = [];
 
-    // időszak kezelése
-    if (period === "custom" && startDate && endDate) {
-      whereParts.push(`DATE(t.created_at) BETWEEN ? AND ?`);
-      params.push(startDate, endDate);
-    } else if (intervalValue) {
-      // intervalValue biztonságos, mert előre definiált értékekből jön
-      whereParts.push(`t.created_at >= NOW() - INTERVAL ${intervalValue} ${intervalUnit}`);
-    }
+    // ---- 24 órás nézet: valós idejű aggregáció, NEM a trends cache ----
+if (period === "24h") {
+  const [rows] = await connection.execute<any[]>(
+    `SELECT 
+        k.keyword,
+        k.category,
+        COUNT(*) AS freq,
+        MIN(k.created_at) AS first_seen,
+        MAX(k.created_at) AS last_seen,
+        NULL AS growth
+     FROM keywords k
+     JOIN articles a ON a.id = k.article_id
+     WHERE a.published_at >= NOW() - INTERVAL 1 DAY
+     GROUP BY k.keyword, k.category
+     ORDER BY freq DESC`
+  );
+
+  await connection.end();
+  return NextResponse.json({ status: "ok", trends: rows });
+}
+
+// ---- minden más időszak: trends cache ----
+if (period === "custom" && startDate && endDate) {
+  whereParts.push(`DATE(t.created_at) BETWEEN ? AND ?`);
+  params.push(startDate, endDate);
+} else if (intervalValue) {
+  whereParts.push(`t.created_at >= NOW() - INTERVAL ${intervalValue} ${intervalUnit}`);
+}
+
 
     // források (case-insensitive)
     if (sourceList.length > 0) {

@@ -31,10 +31,8 @@ export async function GET(req: Request) {
       days = 7;
     }
 
-    const keywordLike = `%${keyword.trim()}%`;
-
     let dateFilter = "";
-    let params: any[] = [keywordLike];
+    let params: any[] = [keyword.trim()];
 
     if (period !== "all") {
       dateFilter =
@@ -50,10 +48,11 @@ export async function GET(req: Request) {
          a.published_at AS date,
          SUMM.content AS summary,
          SUMM.trend_keywords
-       FROM articles a
+       FROM keywords k
+       JOIN articles a ON a.id = k.article_id
        LEFT JOIN sources s ON a.source_id = s.id
        LEFT JOIN summaries SUMM ON a.id = SUMM.article_id
-       WHERE COALESCE(SUMM.trend_keywords, '') LIKE ?
+       WHERE k.keyword = ?
        ${dateFilter}
        ORDER BY a.published_at DESC
        LIMIT 20`,
