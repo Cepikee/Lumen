@@ -26,7 +26,6 @@ function detectSourceId(url: string | null | undefined): number | null {
   }
 }
 
-/** Aggresszív attribútumjavítás (idézőjelek beszúrása, on* attrib eltávolítás) */
 function aggressiveFixAttributes(xml: string) {
   let out = xml;
   out = out.replace(/(\s(?:src|href|data-src|data-href|poster|srcset|data-srcset)=)(?!["'])([^\s"'>]+)/gi, '$1"$2"');
@@ -35,7 +34,6 @@ function aggressiveFixAttributes(xml: string) {
   return out;
 }
 
-/** Ha HTML-t kapunk, próbáljuk meg kinyerni az RSS linket */
 function extractRssFromHtml(html: string): string | null {
   const linkMatch = html.match(/<link[^>]+rel=["']?alternate["']?[^>]*type=["']?(application\/rss\+xml|application\/atom\+xml|application\/xml|text\/xml)["']?[^>]*>/i);
   if (linkMatch) {
@@ -49,7 +47,6 @@ function extractRssFromHtml(html: string): string | null {
   return null;
 }
 
-/** Ellenőrzi, hogy a szöveg tartalmaz-e RSS/Atom jellegű elemet */
 function looksLikeXmlFeed(xml: string) {
   const s = xml.slice(0, 1000).toLowerCase();
   return s.includes("<rss") || s.includes("<feed") || s.includes("<rdf");
@@ -99,7 +96,6 @@ export async function GET() {
         let { status, ok, contentType, text } = await fetchAndParse(feedUrl, fixHtml);
         console.log(`>>> ${sourceName} HTTP ${status} content-type: ${contentType}`);
 
-        // HTML fallback logolás
         if (!ok) throw new Error(`HTTP ${status}`);
         if (!looksLikeXmlFeed(text) || /text\/html|application\/xhtml\+xml/i.test(contentType)) {
           console.warn(`HTML fallback aktiválva: ${sourceName}`);
@@ -126,25 +122,8 @@ export async function GET() {
           feed = await parser.parseString(xml);
         } catch (err) {
           console.warn(`⚠️ ${sourceName} parse hiba (első):`, err instanceof Error ? err.message : String(err));
-
-          fs.appendFileSync(
-            "feed_errors.log",
-            `[${new Date().toISOString()}] ${sourceName} FIRST PARSE ERROR: ${err instanceof Error ? err.message : String(err)}\n`
-          );
-
           xml = aggressiveFixAttributes(xml);
-          try {
-            feed = await parser.parseString(xml);
-          } catch (err2) {
-            console.error(`⚠️ ${sourceName} parse hiba (második):`, err2 instanceof Error ? err2.message : String(err2));
-
-            fs.appendFileSync(
-              "feed_errors.log",
-              `[${new Date().toISOString()}] ${sourceName} SECOND PARSE ERROR: ${err2 instanceof Error ? err2.message : String(err2)}\n`
-            );
-
-            throw err2;
-          }
+          feed = await parser.parseString(xml);
         }
 
         if (!feed || !Array.isArray(feed.items)) {
@@ -162,21 +141,7 @@ export async function GET() {
 
           if (rows.length === 0) {
             const sourceId = forcedSourceId ?? detectSourceId(link);
-
-            // Ismeretlen domain → SKIP
-            if (sourceId === null) {
-              console.warn(`SKIP: ismeretlen domain → ${link}`);
-              fs.appendFileSync(
-                "feed_errors.log",
-                `[${new Date().toISOString()}] UNKNOWN DOMAIN: ${link}\n`
-              );
-              continue;
-            }
-
-            // Domain → source_id logolás
-            console.log(
-              `SOURCE-DETECT: ${link} → domain=${new URL(link).hostname.replace(/^www\./, "")} → source_id=${sourceId}`
-            );
+            if (sourceId === null) continue;
 
             await connection.execute(
               `INSERT INTO articles 
@@ -206,33 +171,10 @@ export async function GET() {
     await processFeed("https://24.hu/feed", "24.hu");
     await processFeed("https://index.hu/24ora/rss/", "Index");
     await processFeed("https://444.hu/feed", "444");
-
-    // Portfolio: forcedSourceId = 5 és fixHtml = true
     await processFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio", 5, true);
 
-    // --- SUMMARIZE-ALL FUTTATÁSA ---
-    const BATCH_SIZE = 10;
-    const cycles = Math.max(0, Math.ceil(inserted / BATCH_SIZE));
-
-    console.log("===============================================");
-    console.log(">>> FETCH-FEED ÖSSZEGZÉS");
-    console.log(">>> Új cikkek száma:", inserted);
-    console.log(">>> Batch méret:", BATCH_SIZE);
-    console.log(">>> Szükséges summarize-all ciklusok:", cycles);
-    console.log("===============================================");
-
-    for (let i = 0; i < cycles; i++) {
-      console.log(`>>> Summarize-all indítása (${i + 1}/${cycles})...`);
-      try {
-        await fetch("http://localhost:3000/api/summarize-all", { method: "GET" });
-        console.log(`>>> Summarize-all lefutott (${i + 1}/${cycles})`);
-      } catch (err) {
-        console.error("⚠️ summarize-all hívás hiba:", err);
-      }
-    }
-
-    console.log(">>> Minden summarize-all ciklus lefutott!");
     await connection.end();
+
     return NextResponse.json({ status: "ok", inserted });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Ismeretlen hiba történt";

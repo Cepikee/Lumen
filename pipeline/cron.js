@@ -1,0 +1,312 @@
+// cron.js — Node.js CommonJS verzió
+
+const mysql = require("mysql2/promise");
+const { summarizeShort } = require("./summarizeShort");
+const { summarizeLong } = require("./summarizeLong");
+const { plagiarismCheck } = require("./plagiarismCheck");
+const { saveSources } = require("./saveSources");
+const { saveSummary } = require("./saveSummary");
+const { scrapeArticle } = require("./scrapeArticle");
+
+// ANSI színek
+const RESET = "\x1b[0m";
+const GREEN = "\x1b[32m";
+const RED = "\x1b[31m";
+const YELLOW = "\x1b[33m";
+const BLUE = "\x1b[34m";
+const CYAN = "\x1b[36m";
+
+// ---- Konfiguráció ----
+const BATCH_SIZE = 2;
+const LOOP_DELAY_MS = 60000;
+const CONCURRENCY = 1;
+const ARTICLE_TIMEOUT_MS = 60000;
+const MAX_RETRIES = 3;
+
+console.log(`${GREEN}✅ cron.js elindult!${RESET}`);
+
+// ---- Segédfüggvények ----
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function withTimeout(promise, ms, label = "task") {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error(`Timeout: ${label} after ${ms}ms`)), ms)
+    )
+  ]);
+}
+
+async function runWithRetries(label, fn) {
+  const start = Date.now();
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      const result = await fn();
+      const dur = ((Date.now() - start) / 1000).toFixed(2);
+      console.log(`${label} ${GREEN}Sikeres${RESET} ${CYAN}(${attempt}/${MAX_RETRIES}, idő: ${dur}s)${RESET}`);
+      return result;
+    } catch (err) {
+      if (attempt < MAX_RETRIES) {
+        console.warn(`${label} ${YELLOW}Hiba: ${err.message} (${attempt}/${MAX_RETRIES}). Újrapróbálás...${RESET}`);
+      } else {
+        console.error(`${label} ${RED}Végleges hiba: ${err.message}${RESET}`);
+        throw err;
+      }
+    }
+  }
+}
+
+// ---- AI hívás + kulcsszavak generálása ----
+async function callOllama(prompt, timeoutMs = 180000) {
+  const controller = new AbortController();
+  const t = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const res = await fetch("http://127.0.0.1:11434/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "llama3:latest",
+        prompt,
+        stream: false,
+      }),
+      signal: controller.signal,
+    });
+
+    const raw = await res.text();
+    try {
+      const data = JSON.parse(raw);
+      return (data.response ?? "").trim();
+    } catch {
+      return raw.trim();
+    }
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+async function runOllamaKeywords(text) 
+{ const raw = await callOllama( 
+  `Adj 6–10 magyar kulcsszót vesszővel elválasztva a következő szöveg alapján. Csak a kulcsszavakat írd ki, mást ne:
+   ${text}` 
+  ); 
+  return raw 
+  .split(/[,\n]/) 
+  .map(k => k.trim()) 
+  .filter(k => k.length >= 2) 
+  .slice(0, 10);
+ }
+// ---- Pending cikkek lekérése ----
+async function fetchPendingArticles(connection, limit) {
+  const [rows] = await connection.execute(
+    `SELECT id, title, url_canonical, content_text 
+     FROM articles 
+     WHERE status = 'pending' 
+     ORDER BY id ASC 
+     LIMIT ${limit}`
+  );
+  return rows;
+}
+
+// ---- Státusz frissítés ----
+async function markStatus(connection, ids, status) {
+  if (!ids.length) return;
+  console.log(`[STATUS] 🔄 ${CYAN}${ids.join(", ")} → ${status}${RESET}`);
+  await connection.query(`UPDATE articles SET status = ? WHERE id IN (?)`, [status, ids]);
+}
+
+// ---- Egy cikk teljes pipeline feldolgozása ----
+async function processArticlePipeline(article) {
+  const articleId = article.id;
+
+  console.log("──────────────────────────────────────────────");
+  console.log(`▶️  ${CYAN}CIKK FELDOLGOZÁS INDUL — ID: ${articleId}${RESET}`);
+  console.log("──────────────────────────────────────────────");
+
+  let shortSummary = "";
+  let longSummary = "";
+  let plagiarismScore = 0;
+  let trendKeywords = "";
+  let source = "";
+  
+// 0) Biztosítsuk, hogy legyen rendes content_text (SCRAPER) 
+if (!article.content_text || article.content_text.trim().length < 400) { 
+  console.log( `[SCRAPER] ℹ️ Túl rövid content_text (len=${(article.content_text || "").length}), scraping próbálkozás...` ); 
+  const scrapeRes = await scrapeArticle(articleId, article.url_canonical || ""); if (!scrapeRes.ok) { 
+    console.error( `[SCRAPER] ❌ Scraping sikertelen. Megszakítjuk a pipeline-t. articleId=${articleId}` ); 
+    throw new Error(`Scraping sikertelen: ${scrapeRes.error || "ismeretlen hiba"}`); } 
+    // Frissen kinyert szöveget tegyük be a lokális article objektumba is 
+  article.content_text = scrapeRes.text; }
+  
+  // 1) Rövid összefoglaló
+  await runWithRetries("[SHORT] ✂️ Rövid összefoglaló", async () => {
+    const res = await summarizeShort(articleId);
+    if (!res?.ok) throw new Error(res?.error || "summarizeShort sikertelen");
+    shortSummary = res.summary || "";
+    console.log(`[SHORT] AI válasz hossza: ${shortSummary.length} karakter`);
+    return res;
+  });
+
+  // 2) Hosszú elemzés
+  await runWithRetries("[LONG] 📄 Hosszú elemzés", async () => {
+    const res = await summarizeLong(articleId, shortSummary);
+    if (!res?.ok) throw new Error(res?.error || "summarizeLong sikertelen");
+    longSummary = res.detailed || "";
+    console.log(`[LONG] AI válasz hossza: ${longSummary.length} karakter`);
+    return res;
+  });
+
+  // 3) Plágium ellenőrzés
+  await runWithRetries("[PLAG] 🔍 Plágium ellenőrzés", async () => {
+    const res = await plagiarismCheck(articleId, shortSummary);
+    if (!res?.ok) throw new Error(res?.error || "plagiarismCheck sikertelen");
+    plagiarismScore = res.plagiarismScore ?? 0;
+    shortSummary = res.summaryShort || shortSummary;
+    console.log(`[PLAG] Score=${plagiarismScore}`);
+    return res;
+  });
+
+  // 4) Kulcsszavak generálása az EREDETI cikk szövegéből
+  await runWithRetries("[KW] 🔑 Kulcsszavak", async () => {
+    const keywords = await runOllamaKeywords(article.content_text || "");
+    trendKeywords = Array.isArray(keywords) ? keywords.join(",") : "";
+    console.log(`[KW] Kulcsszavak: ${trendKeywords}`);
+    return keywords;
+  });
+
+  // 5) Forrás mentése
+  await runWithRetries("[SOURCE] 🌐 Forrás mentése", async () => {
+    const res = await saveSources(articleId, article.url_canonical || "");
+    if (!res?.ok) throw new Error(res?.error || "saveSources sikertelen");
+    source = res.source || "ismeretlen";
+    console.log(`[SOURCE] Forrás meghatározva: ${source}`);
+    return res;
+  });
+
+  // 6) Summary mentése
+  await runWithRetries("[SAVE] 💾 Summary mentése", async () => {
+    const res = await saveSummary({
+      articleId,
+      shortSummary,
+      longSummary,
+      plagiarismScore,
+      trendKeywords,
+      source,
+    });
+    if (!res?.ok) throw new Error(res?.error || "saveSummary sikertelen");
+    console.log(`[SAVE] Summary mentve.`);
+
+    // AI clean flag
+    const conn = await mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "jelszo",
+      database: "projekt2025",
+    });
+    await conn.execute(
+      `UPDATE summaries SET ai_clean = 1, created_at = NOW() WHERE article_id = ?`,
+      [articleId]
+    );
+    await conn.end();
+    console.log(`[AICLEAN] 🤖 AI clean beállítva: articleId=${articleId}`);
+
+    return res;
+  });
+
+  console.log(`✔️  ${GREEN}CIKK FELDOLGOZVA — ID: ${articleId}${RESET}`);
+  console.log("──────────────────────────────────────────────");
+}
+
+// ---- Batch feldolgozás ----
+async function processBatch(connection, batch) {
+  const ids = batch.map(a => a.id);
+  await markStatus(connection, ids, "in_progress");
+
+  const workers = [];
+
+  for (const article of batch) {
+    console.log(`⚙️ Feldolgozás indul: ID=${article.id} - "${article.title}"`);
+
+    const task = withTimeout(
+      processArticlePipeline(article),
+      ARTICLE_TIMEOUT_MS,
+      `processArticlePipeline(${article.id})`
+    )
+      .then(() => markStatus(connection, [article.id], "done"))
+      .catch(async (err) => {
+        console.error(`❌ ${RED}Hiba (${article.id}): ${err.message}${RESET}`);
+        await markStatus(connection, [article.id], "pending");
+        console.log(`🔁 ${YELLOW}Retry beállítva: ${article.id} → pending${RESET}`);
+      });
+
+    workers.push(task);
+
+    if (workers.length >= CONCURRENCY) {
+      await Promise.all(workers);
+      workers.length = 0;
+    }
+  }
+
+  if (workers.length > 0) await Promise.all(workers);
+}
+
+// ---- Folyamatos ciklus ----
+(async () => {
+  const connection = await mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "jelszo",
+    database: "projekt2025",
+  });
+
+  while (true) {
+    try {
+      console.log(`🚀 Feed begyűjtés: ${new Date().toLocaleString("hu-HU")}`);
+
+      try {
+        const feedRes = await fetch("http://127.0.0.1:3000/api/fetch-feed");
+        const feedData = await feedRes.json();
+        console.log("📰 Feed eredmény:", feedData);
+      } catch (feedErr) {
+        console.error(`❌ ${RED}Hiba fetch-feed közben:${RESET}`, feedErr);
+      }
+
+      const batch = await fetchPendingArticles(connection, BATCH_SIZE);
+
+      if (batch.length === 0) {
+        console.log("⏸️ Nincs új pending cikk. Régi cikkek ellenőrzése...");
+
+        const [oldRows] = await connection.execute(`
+          SELECT a.*
+          FROM articles a
+          LEFT JOIN summaries s ON s.article_id = a.id
+          WHERE a.status = 'done'
+            AND a.content_hash IS NOT NULL
+            AND (s.article_id IS NULL OR s.trend_keywords IS NULL)
+          ORDER BY a.id ASC
+          LIMIT ${BATCH_SIZE};
+        `);
+
+        if (oldRows.length > 0) {
+          console.log(`🔁 Régi cikkek újrafeldolgozása: ${oldRows.length} db`);
+          const oldIds = oldRows.map(a => a.id);
+          await markStatus(connection, oldIds, "pending");
+          continue;
+        }
+
+        console.log(`😴 Várakozás ${LOOP_DELAY_MS / 60000} percet...`);
+        await sleep(LOOP_DELAY_MS);
+        continue;
+      }
+
+      console.log(`🆕 Új batch: ${batch.length} db cikk`);
+      await processBatch(connection, batch);
+      console.log("📊 Batch kész!");
+    } catch (err) {
+      console.error(`❌ ${RED}Hiba a fő ciklusban:${RESET}`, err);
+      await sleep(10000);
+    }
+  }
+})();

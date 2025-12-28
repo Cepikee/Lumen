@@ -91,3 +91,34 @@ load balancing
 cap theorem
 reverse proxy
 CDN
+
+
+
+.
+
+
+4) Frontend UI/UX finomítás
+Cél: Utom.hu  prémium, letisztult, hibátlan élmény.
+
+[ ] Forrás badge-ek színének egységesítése
+
+[ ] Tooltip-ek egységesítése
+
+[ ] Kártyanézet / kompakt nézet finomhangolása
+
+[ ] “Mi történt ma?” nézet vizuális tisztítása
+
+Eredmény: A felület prémium, egységes, márkaazonos.
+
+5) Adatminőség ellenőrzés
+Cél: A rendszerben csak tiszta, jó minőségű tartalom legyen.
+
+[ ] Ellenőrizni, hogy minden summary-hez tartozik article
+
+[ ] Ellenőrizni, hogy nincs null source_id
+
+[ ] Ellenőrizni, hogy nincs duplikált URL
+
+[ ] Ellenőrizni, hogy minden cikk magyar nyelvű (ha kell)
+
+Eredmény: A rendszer adatbázisa tiszta és stabil.
