@@ -43,7 +43,7 @@ if (period === "24h") {
         NULL AS growth
      FROM keywords k
      JOIN articles a ON a.id = k.article_id
-     WHERE a.published_at >= NOW() - INTERVAL 1 DAY
+     WHERE k.created_at >= NOW() - INTERVAL 1 DAY
      GROUP BY k.keyword, k.category
      ORDER BY freq DESC`
   );

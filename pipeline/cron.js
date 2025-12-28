@@ -87,24 +87,39 @@ async function callOllama(prompt, timeoutMs = 180000) {
   }
 }
 
-async function runOllamaKeywords(text) 
-{ const raw = await callOllama( 
-  `Adj 6–10 magyar kulcsszót vesszővel elválasztva a következő szöveg alapján. Csak a kulcsszavakat írd ki, mást ne:
-   ${text}` 
-  ); 
-  return raw 
-  .split(/[,\n]/) 
-  .map(k => k.trim()) 
-  .filter(k => k.length >= 2) 
-  .slice(0, 10);
- }
+async function runOllamaKeywords(text) {
+  const raw = await callOllama(
+`Adj vissza pontosan 6–10 magyar kulcsszót a szöveg alapján.
+SZABÁLYOK:
+- Csak kulcsszavakat adj vissza.
+- Ne írj mondatot.
+- Ne írj bevezetőt.
+- Ne írj magyarázatot.
+- Ne írj sorszámot.
+- Ne írj listát.
+- Ne ismételd meg a promptot.
+- Csak vesszővel elválasztott kulcsszavakat adj vissza.
+
+Szöveg:
+${text}
+
+Kimenet (csak kulcsszavak):`
+  );
+
+  return raw
+    .split(/[,\n]/)
+    .map(k => k.trim())
+    .filter(k => k.length >= 2)
+    .slice(0, 10);
+}
+
 // ---- Pending cikkek lekérése ----
 async function fetchPendingArticles(connection, limit) {
   const [rows] = await connection.execute(
     `SELECT id, title, url_canonical, content_text 
      FROM articles 
      WHERE status = 'pending' 
-     ORDER BY id ASC 
+     ORDER BY created_at DESC
      LIMIT ${limit}`
   );
   return rows;
@@ -168,13 +183,37 @@ if (!article.content_text || article.content_text.trim().length < 400) {
     return res;
   });
 
-  // 4) Kulcsszavak generálása az EREDETI cikk szövegéből
-  await runWithRetries("[KW] 🔑 Kulcsszavak", async () => {
-    const keywords = await runOllamaKeywords(article.content_text || "");
-    trendKeywords = Array.isArray(keywords) ? keywords.join(",") : "";
-    console.log(`[KW] Kulcsszavak: ${trendKeywords}`);
-    return keywords;
+  // 4) Kulcsszavak generálása
+let keywords = [];
+
+keywords = await runWithRetries("[KW] 🔑 Kulcsszavak", async () => {
+  const kw = await runOllamaKeywords(article.content_text || "");
+  trendKeywords = Array.isArray(kw) ? kw.join(",") : "";
+  console.log(`[KW] Kulcsszavak: ${trendKeywords}`);
+  return kw;
+});
+
+// 4/B) Kulcsszavak mentése
+await runWithRetries("[KW-SAVE] 💾 Kulcsszavak mentése", async () => {
+  const conn = await mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "jelszo",
+    database: "projekt2025",
   });
+
+  for (const kw of keywords) {
+    await conn.execute(
+      `INSERT INTO keywords (article_id, keyword, created_at)
+       VALUES (?, ?, NOW())`,
+      [articleId, kw.trim()]
+    );
+  }
+
+  await conn.end();
+  console.log(`[KW-SAVE] Kulcsszavak mentve: ${keywords.length} db`);
+});
+
 
   // 5) Forrás mentése
   await runWithRetries("[SOURCE] 🌐 Forrás mentése", async () => {
