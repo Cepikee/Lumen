@@ -7,6 +7,8 @@ const { plagiarismCheck } = require("./plagiarismCheck");
 const { saveSources } = require("./saveSources");
 const { saveSummary } = require("./saveSummary");
 const { scrapeArticle } = require("./scrapeArticle");
+const { fixShortSummary, isValidShortSummary } = require("./summarizeShortValidator");
+
 
 // ANSI színek
 const RESET = "\x1b[0m";
@@ -148,25 +150,54 @@ async function processArticlePipeline(article) {
 
 // -0) Feed frissítése 
 await fetch("http://127.0.0.1:3000/api/fetch-feed");
-  
-// 0) Biztosítsuk, hogy legyen rendes content_text (SCRAPER) 
-if (!article.content_text || article.content_text.trim().length < 400) { 
-  console.log( `[SCRAPER] ℹ️ Túl rövid content_text (len=${(article.content_text || "").length}), scraping próbálkozás...` ); 
-  const scrapeRes = await scrapeArticle(articleId, article.url_canonical || ""); if (!scrapeRes.ok) { 
-    console.error( `[SCRAPER] ❌ Scraping sikertelen. Megszakítjuk a pipeline-t. articleId=${articleId}` ); 
-    throw new Error(`Scraping sikertelen: ${scrapeRes.error || "ismeretlen hiba"}`); } 
-    // Frissen kinyert szöveget tegyük be a lokális article objektumba is 
-  article.content_text = scrapeRes.text; }
+
+// 0) Biztosítsuk, hogy legyen rendes content_text (SCRAPER)
+if (!article.content_text || article.content_text.trim().length < 400) {
+  console.log(
+    `[SCRAPER] ℹ️ Túl rövid content_text (len=${(article.content_text || "").length}), scraping próbálkozás...`
+  );
+  const scrapeRes = await scrapeArticle(articleId, article.url_canonical || "");
+  // ❗ 404 → azonnal FAILED, nincs retry, nincs pending loop
+  if (!scrapeRes.ok) {
+    if (scrapeRes.error && scrapeRes.error.includes("404")) {
+      console.error(
+        `[SCRAPER] ❌ 404 – nem létező oldal. articleId=${articleId}`
+      );
+      // 🔧 Itt kell új DB kapcsolatot nyitni
+      const conn = await mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "jelszo",
+        database: "projekt2025",
+      });
+      await conn.execute(
+        "UPDATE articles SET status = 'failed' WHERE id = ?",
+        [articleId]
+      );
+      await conn.end();
+      console.log(`[SCRAPER] ⛔ Cikk FAILED státuszba téve (404).`);
+      return; // kilépünk a pipeline-ból, nem dobunk hibát
+    }
+    // ❗ Minden más scraper hiba → normál error
+    console.error(
+      `[SCRAPER] ❌ Scraping sikertelen. Megszakítjuk a pipeline-t. articleId=${articleId}`
+    );
+    throw new Error(`Scraping sikertelen: ${scrapeRes.error || "ismeretlen hiba"}`);
+  }
+  // ✔️ Sikeres scraping → friss szöveg beállítása
+  article.content_text = scrapeRes.text;
+}
+
+
   
   // 1) Rövid összefoglaló
-  await runWithRetries("[SHORT] ✂️ Rövid összefoglaló", async () => {
-    const res = await summarizeShort(articleId);
-    if (!res?.ok) throw new Error(res?.error || "summarizeShort sikertelen");
-    shortSummary = res.summary || "";
-    console.log(`[SHORT] AI válasz hossza: ${shortSummary.length} karakter`);
-    return res;
-  });
-
+await runWithRetries("[SHORT] ✂️ Rövid összefoglaló", async () => {
+  const res = await summarizeShort(articleId);
+  if (!res?.ok) throw new Error(res?.error || "summarizeShort sikertelen");
+  shortSummary = res.summary || "";
+  console.log(`[SHORT] AI válasz hossza: ${shortSummary.length} karakter`);
+  return res;
+});
   // 2) Hosszú elemzés
   await runWithRetries("[LONG] 📄 Hosszú elemzés", async () => {
     const res = await summarizeLong(articleId, shortSummary);

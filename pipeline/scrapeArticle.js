@@ -41,7 +41,7 @@ async function scrapeArticle(articleId, url) {
     const html = await fetchHtml(url);
     const text = extractArticleText(html, url);
 
-    if (!text || text.length < 400) {
+    if (!text || text.length < 200) {
       console.warn(
         `[SCRAPER] ⚠️ Túl rövid vagy üres szöveg (len=${text.length}). articleId=${articleId}`
       );
