@@ -13,7 +13,7 @@ import type { ChartOptions, ScriptableLineSegmentContext } from "chart.js";
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
-type HistoryPoint = { day: string; freq: number };
+type HistoryPoint = { day?: string; hour?: number; freq: number };
 
 interface Props {
   history: HistoryPoint[];

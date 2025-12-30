@@ -1,3 +1,4 @@
+// components/TrendsList.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -33,7 +34,7 @@ interface Props {
   trends?: Trend[];
 }
 
-type HistoryRow = { day: string; freq: number };
+type HistoryRow = { day?: string; hour?: number; freq: number };
 
 export default function TrendsList({ filters, trends: externalTrends }: Props) {
   const [trends, setTrends] = useState<Trend[]>(externalTrends ?? []);
@@ -86,9 +87,14 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
               if (!mounted) return;
               if (Array.isArray(data.history)) {
                 setHistoryMap((prev) => ({ ...prev, [t.keyword]: data.history as HistoryRow[] }));
+              } else {
+                setHistoryMap((prev) => ({ ...prev, [t.keyword]: [] }));
               }
             })
-            .catch(() => {});
+            .catch(() => {
+              if (!mounted) return;
+              setHistoryMap((prev) => ({ ...prev, [t.keyword]: [] }));
+            });
         });
       })
       .catch(() => {
@@ -105,7 +111,6 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
     if (Array.isArray(externalTrends)) setTrends(externalTrends);
   }, [externalTrends]);
 
-  // ⭐ Tooltip inicializálás
   useEffect(() => {
     setTimeout(() => {
       const tooltipTriggerList = Array.from(
@@ -123,9 +128,11 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
 
   function filterByCustomPeriod(history: HistoryRow[]) {
     if (!filters.startDate || !filters.endDate) return history;
+    if (filters.period === "24h") return history;
     const from = new Date(filters.startDate + "T00:00:00");
     const to = new Date(filters.endDate + "T23:59:59");
     return history.filter((h) => {
+      if (!h.day) return false;
       const d = new Date(h.day + "T00:00:00");
       return d >= from && d <= to;
     });
@@ -170,7 +177,6 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
           const displayHistory = getDisplayHistory(t.keyword);
           const hasHistory = displayHistory.length > 0;
 
-          // ⭐ Stabil logika
           const days = displayHistory.length;
           const isStable =
             days >= 5 &&
@@ -279,20 +285,17 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
           <Modal.Title>{showChart} – Részletes trend</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {showChart && getDisplayHistory(showChart).length === 0 ? (
-            <p className="text-muted">Betöltés folyamatban…</p>
+          {showChart ? (
+            <div style={{ width: "100%", height: "400px" }}>
+              <SparklineDetailed
+                history={getDisplayHistory(showChart)}
+                period={filters.period}
+                startDate={filters.startDate}
+                endDate={filters.endDate}
+              />
+            </div>
           ) : (
-            showChart && (
-              <div style={{ width: "100%", height: "400px" }}>
-                <SparklineDetailed
-                  key={`${showChart}-${filters.period}-${filters.startDate || ""}-${filters.endDate || ""}`}
-                  history={getDisplayHistory(showChart)}
-                  period={filters.period}
-                  startDate={filters.startDate}
-                  endDate={filters.endDate}
-                />
-              </div>
-            )
+            <p className="text-muted">Betöltés folyamatban…</p>
           )}
         </Modal.Body>
         <Modal.Footer>
