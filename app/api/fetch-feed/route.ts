@@ -26,6 +26,17 @@ function detectSourceId(url: string | null | undefined): number | null {
   }
 }
 
+function titleFromLink(link: string): string {
+  try {
+    const slug = link.split("/").pop() || "";
+    const withoutId = slug.replace(/-\d+$/, "");
+    return withoutId.replace(/-/g, " ").trim();
+  } catch {
+    return "";
+  }
+}
+
+
 function aggressiveFixAttributes(xml: string) {
   let out = xml;
   out = out.replace(/(\s(?:src|href|data-src|data-href|poster|srcset|data-srcset)=)(?!["'])([^\s"'>]+)/gi, '$1"$2"');
@@ -142,17 +153,16 @@ export async function GET() {
           if (rows.length === 0) {
             const sourceId = forcedSourceId ?? detectSourceId(link);
             if (sourceId === null) continue;
-
+const finalTitle = (item.title && item.title.trim()) || titleFromLink(link);
             await connection.execute(
-              `INSERT INTO articles 
-                (title, url_canonical, content_text, published_at, language, source_id)
-               VALUES (?, ?, ?, NOW(), ?, ?)`,
+              `INSERT INTO articles (title, url_canonical, content_text, published_at, language, source_id, source) VALUES (?, ?, ?, NOW(), ?, ?, ?)`,
               [
-                item.title || "",
+                finalTitle,
                 link,
                 item["content:encoded"] || item.content || item.contentSnippet || "",
                 "hu",
                 sourceId,
+                sourceName
               ]
             );
 

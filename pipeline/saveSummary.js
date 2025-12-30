@@ -12,6 +12,7 @@ async function saveSummary(payload) {
 
     const {
       articleId,
+      url,
       shortSummary,
       longSummary,
       plagiarismScore,
@@ -20,32 +21,36 @@ async function saveSummary(payload) {
     } = payload;
 
     await conn.execute(
-      `
-      INSERT INTO summaries (
-        article_id,
-        content,
-        detailed_content,
-        plagiarism_score,
-        trend_keywords,
-        source
-      )
-      VALUES (?, ?, ?, ?, ?, ?)
-      ON DUPLICATE KEY UPDATE
-        content = VALUES(content),
-        detailed_content = VALUES(detailed_content),
-        plagiarism_score = VALUES(plagiarism_score),
-        trend_keywords = VALUES(trend_keywords),
-        source = VALUES(source)
-      `,
-      [
-        articleId,
-        shortSummary,
-        longSummary,
-        plagiarismScore,
-        trendKeywords,
-        source,
-      ]
-    );
+  `
+  INSERT INTO summaries (
+    article_id,
+    url,
+    content,
+    detailed_content,
+    plagiarism_score,
+    trend_keywords,
+    source
+  )
+  VALUES (?, ?, ?, ?, ?, ?, ?)
+  ON DUPLICATE KEY UPDATE
+    url = VALUES(url),
+    content = VALUES(content),
+    detailed_content = VALUES(detailed_content),
+    plagiarism_score = VALUES(plagiarism_score),
+    trend_keywords = VALUES(trend_keywords),
+    source = VALUES(source)
+  `,
+  [
+    articleId,
+    url,             // <-- EZ MOSTANTÓL BEKERÜL
+    shortSummary,
+    longSummary,
+    plagiarismScore,
+    trendKeywords,
+    source,
+  ]
+);
+
 
     await conn.end();
 

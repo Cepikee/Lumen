@@ -139,12 +139,15 @@ async function processArticlePipeline(article) {
   console.log("──────────────────────────────────────────────");
   console.log(`▶️  ${CYAN}CIKK FELDOLGOZÁS INDUL — ID: ${articleId}${RESET}`);
   console.log("──────────────────────────────────────────────");
-
+  
   let shortSummary = "";
   let longSummary = "";
   let plagiarismScore = 0;
   let trendKeywords = "";
   let source = "";
+
+// -0) Feed frissítése 
+await fetch("http://127.0.0.1:3000/api/fetch-feed");
   
 // 0) Biztosítsuk, hogy legyen rendes content_text (SCRAPER) 
 if (!article.content_text || article.content_text.trim().length < 400) { 
@@ -214,6 +217,30 @@ await runWithRetries("[KW-SAVE] 💾 Kulcsszavak mentése", async () => {
   console.log(`[KW-SAVE] Kulcsszavak mentve: ${keywords.length} db`);
 });
 
+// 4/C) Trends mentése (nyers eseménylog)
+await runWithRetries("[TRENDS-SAVE] 📈 Trends mentése", async () => {
+  const conn = await mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "jelszo",
+    database: "projekt2025",
+  });
+
+  for (const kw of keywords) {
+    await conn.execute(
+      `INSERT INTO trends (keyword, frequency, period, category, source)
+       VALUES (?, 1, '7d', ?, ?)`,
+      [
+        kw.trim(),          // keyword
+        article.category ?? null, 
+        article.source ?? null    // forrás (index, telex, hvg, stb.)
+      ]
+    );
+  }
+
+  await conn.end();
+  console.log(`[TRENDS-SAVE] Trends sorok mentve: ${keywords.length} db`);
+});
 
   // 5) Forrás mentése
   await runWithRetries("[SOURCE] 🌐 Forrás mentése", async () => {
@@ -226,9 +253,11 @@ await runWithRetries("[KW-SAVE] 💾 Kulcsszavak mentése", async () => {
 
   // 6) Summary mentése
   await runWithRetries("[SAVE] 💾 Summary mentése", async () => {
+    const url = article.url_canonical || "";
     const res = await saveSummary({
       articleId,
       shortSummary,
+      url,
       longSummary,
       plagiarismScore,
       trendKeywords,
