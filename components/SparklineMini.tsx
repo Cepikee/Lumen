@@ -18,7 +18,7 @@ type HistoryPoint = { day?: string; hour?: number; freq: number };
 interface Props {
   history: HistoryPoint[];
   period?: string;
-  width?: number; // opcionális, felülírható
+  width?: number;
   height?: number;
 }
 
@@ -44,12 +44,13 @@ function computeSegmentPercents(values: number[]): number[] {
 }
 
 function getIndexColor(index: number): string {
-  if (index === 1) return "#9CA3AF"; // szürke
-  if (index <= 3) return "#FACC15";  // sárga
-  if (index <= 5) return "#FB923C";  // narancs
-  if (index <= 7) return "#3B82F6";  // kék
-  return "#8B5CF6";                  // lila
+  if (index === 1) return "#9CA3AF";
+  if (index <= 3) return "#FACC15";
+  if (index <= 5) return "#FB923C";
+  if (index <= 7) return "#3B82F6";
+  return "#8B5CF6";
 }
+
 function getAdaptiveIndex(percent: number, qs: { q25: number; q50: number; q75: number }): number {
   if (percent < Math.min(1, qs.q25 * 0.25)) return 1;
   if (percent < qs.q25) return percent < qs.q25 * 0.67 ? 2 : 3;
@@ -61,38 +62,33 @@ function getAdaptiveIndex(percent: number, qs: { q25: number; q50: number; q75: 
   return 10;
 }
 
-function filterByPeriod(history: HistoryPoint[], period?: string) {
-  if (!period) return history;
-  const now = new Date();
-  let from: Date;
-  if (period === "24h") from = new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000);
-  else if (period === "7d") from = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-  else if (period === "30d") from = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-  else if (period === "365d") from = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
-  else return history;
-  return history.filter(h => {
-    const d = new Date(h.day + "T00:00:00");
-    return d >= from && d <= now;
-  });
-}
-
 export default function SparklineMini({ history, period = "365d", width = 220, height = 60 }: Props) {
   const chartRef = useRef<Chart | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  // Biztonság: ha csak 1 pont van, duplikáljuk
   let safeHistory = history ?? [];
   if (safeHistory.length === 1) {
     const only = safeHistory[0];
     safeHistory = [
-      { day: only.day, freq: only.freq },
-      { day: only.day, freq: only.freq }
+      { ...only },
+      { ...only }
     ];
   }
 
-  const filtered = filterByPeriod(safeHistory, period);
-  const labels = filtered.map(h => new Date(h.day + "T00:00:00").toLocaleDateString("hu-HU"));
-  const values = filtered.map(h => h.freq);
+  let labels: string[] = [];
+  let values: number[] = [];
+
+  if (period === "24h") {
+    labels = safeHistory.map(h =>
+      typeof h.hour === "number" ? `${String(h.hour).padStart(2, "0")}:00` : "?"
+    );
+    values = safeHistory.map(h => h.freq);
+  } else {
+    labels = safeHistory.map(h =>
+      h.day ? new Date(h.day + "T00:00:00").toLocaleDateString("hu-HU") : "?"
+    );
+    values = safeHistory.map(h => h.freq);
+  }
 
   const percents = computeSegmentPercents(values);
   const sorted = [...percents].sort((a, b) => a - b);
@@ -134,51 +130,39 @@ export default function SparklineMini({ history, period = "365d", width = 220, h
     maintainAspectRatio: false
   };
 
-  // Kényszerített canvas méretezés és chart update
   useEffect(() => {
     const container = containerRef.current;
     const chart = chartRef.current;
     if (!container) return;
 
-    // explicit container méret (ha kell, itt is beállítható)
     container.style.width = `${width}px`;
     container.style.height = `${height}px`;
     container.style.overflow = "hidden";
 
-    // ha van chart instance, állítsuk be a canvas attribútumokat és frissítsük
     const canvas = container.querySelector("canvas") as HTMLCanvasElement | null;
     if (canvas) {
-      // set attributes (ez a kulcs: canvas width/height attribútumok)
       canvas.width = width;
       canvas.height = height;
-      // inline style is OK, de a canvas attribútum a fontos
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
-      // ha van chart instance, kényszerítjük a resize/update-et
+
       if (chart && typeof chart.resize === "function") {
         try {
           chart.resize();
           chart.update();
-        } catch {
-          // ignore
-        }
+        } catch {}
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [width, height, labels.length]); // labels.length változásakor is frissítünk
+  }, [width, height, labels.length]);
 
-  // Render: a Line komponens ref-jét elkapjuk, hogy chartRef legyen
   return (
     <div ref={containerRef} style={{ display: "inline-block", width: `${width}px`, height: `${height}px` }}>
       <Line
         ref={(instance) => {
-          // react-chartjs-2 v4: instance lehet null vagy Chart
           if (instance && "chartInstance" in instance) {
-            // régebbi wrapper esetén
             // @ts-ignore
             chartRef.current = instance.chartInstance;
           } else {
-            // modern: instance maga a Chart
             // @ts-ignore
             chartRef.current = instance as unknown as Chart | null;
           }
