@@ -7,6 +7,7 @@ export interface FeedItem {
   url: string;
   source_id: number;
   content: string;
+  title: string;
   detailed_content: string;
   ai_clean: number;
   created_at: string;
@@ -22,26 +23,12 @@ const SOURCE_MAP: Record<number, string> = {
   6: "444",
 };
 
-// --- CÍM TISZTÍTÓ --- //
-function cleanTitle(raw: string): string {
-  if (!raw) return "";
-
-  const firstLine = raw.split("\n")[0];
-
-  return firstLine
-    .replace(/\|.*$/, "") // forrás levágása
-    .replace(/^\s+|\s+$/g, "") // whitespace
-    .replace(/ +/g, " ") // dupla szóköz
-    .replace(/^\p{Ll}/u, (c) => c.toUpperCase()); // kisbetűs kezdés javítása
-}
-
 // --- DÁTUM FORMÁZÓK --- //
 function formatRelativeTime(dateString: string): string {
   const now = new Date();
   const date = new Date(dateString);
   const diffMs = now.getTime() - date.getTime();
-  const diffSec = Math.floor(diffMs / 1000);
-  const diffMin = Math.floor(diffSec / 60);
+  const diffMin = Math.floor(diffMs / 60000);
   const diffHour = Math.floor(diffMin / 60);
   const diffDay = Math.floor(diffHour / 24);
 
@@ -53,7 +40,7 @@ function formatRelativeTime(dateString: string): string {
 
 function formatFullDate(dateString: string): string {
   const date = new Date(dateString);
-  const options: Intl.DateTimeFormatOptions = {
+  return date.toLocaleString("hu-HU", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -62,8 +49,7 @@ function formatFullDate(dateString: string): string {
     minute: "2-digit",
     second: "2-digit",
     timeZoneName: "short",
-  };
-  return date.toLocaleString("hu-HU", options);
+  });
 }
 
 export default function FeedItemCard({
@@ -78,29 +64,21 @@ export default function FeedItemCard({
   viewMode: "card" | "compact";
 }) {
   const url = item.url || "";
-  const title = cleanTitle(item.content);
-
   const source = SOURCE_MAP[item.source_id] || "ismeretlen";
   const sourceClass = `source-${source}`;
 
   // --- COMPACT NÉZET --- //
   if (viewMode === "compact") {
     return (
-      <div className={`feed-wrapper compact`}>
+      <div className="feed-wrapper compact">
         <div
           className="feed-card compact mb-2 p-2 rounded"
           data-source-text={source.toUpperCase()}
-          style={{
-            backgroundColor: "#1a1a1a",
-            color: "white",
-          }}
+          style={{ backgroundColor: "#1a1a1a", color: "white" }}
         >
           <div className="d-flex justify-content-between">
             <div className="d-flex align-items-center gap-2">
-              <span
-                className={`badge ${sourceClass}`}
-                style={{ fontSize: "0.65rem", fontWeight: "bold" }}
-              >
+              <span className={`badge ${sourceClass}`} style={{ fontSize: "0.65rem", fontWeight: "bold" }}>
                 {source.toUpperCase()}
               </span>
 
@@ -109,9 +87,18 @@ export default function FeedItemCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-decoration-none"
-                style={{ fontWeight: "bold", fontSize: "0.85rem" }}
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "0.85rem",
+                  lineHeight: "1.2",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
               >
-                {title}
+                {item.title}
               </a>
             </div>
 
@@ -119,8 +106,9 @@ export default function FeedItemCard({
               <span
                 className={`badge ${sourceClass}`}
                 style={{ fontSize: "0.65rem", fontWeight: "bold" }}
+                title="Ez a tartalom teljes egészében AI által lett megfogalmazva."
               >
-                AI
+                🤖 AI
               </span>
             )}
           </div>
@@ -130,39 +118,23 @@ export default function FeedItemCard({
             style={{
               fontSize: "0.85rem",
               lineHeight: "1.2",
-              ...(expanded
-                ? {}
-                : {
-                    maxHeight: "3.6em",
-                    overflow: "hidden",
-                  }),
+              ...(expanded ? {} : { maxHeight: "3.6em", overflow: "hidden" }),
             }}
           >
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
-          <button
-            className="btn btn-link p-0 mt-1"
-            style={{ fontSize: "0.8rem" }}
-            onClick={onToggle}
-          >
+          <button className="btn btn-link p-0 mt-1" style={{ fontSize: "0.8rem" }} onClick={onToggle}>
             {expanded ? "🔽 Bezárás" : "📘 Részletek"}
           </button>
 
           {expanded && (
-            <div
-              className="mt-2 p-2 rounded"
-              style={{ backgroundColor: "#2a2a2a" }}
-            >
+            <div className="mt-2 p-2 rounded" style={{ backgroundColor: "#2a2a2a" }}>
               <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
             </div>
           )}
 
-          <p
-            className="text-muted small mt-2 mb-0"
-            style={{ fontSize: "0.7rem" }}
-            title={formatFullDate(item.created_at)}
-          >
+          <p className="text-muted small mt-2 mb-0" style={{ fontSize: "0.7rem" }} title={formatFullDate(item.created_at)}>
             {formatRelativeTime(item.created_at)}
           </p>
         </div>
@@ -172,7 +144,7 @@ export default function FeedItemCard({
 
   // --- CARD NÉZET --- //
   return (
-    <div className={`feed-wrapper`}>
+    <div className="feed-wrapper">
       <div
         className="feed-card mb-3 p-3 rounded shadow-sm"
         style={{ backgroundColor: "#1a1a1a" }}
@@ -181,10 +153,7 @@ export default function FeedItemCard({
         <div className="card-body position-relative" style={{ zIndex: 2 }}>
           <h5 className="card-title d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center gap-2">
-              <span
-                className={`badge me-2 ${sourceClass}`}
-                style={{ fontWeight: "bold", fontSize: "0.75rem" }}
-              >
+              <span className={`badge me-2 ${sourceClass}`} style={{ fontWeight: "bold", fontSize: "0.75rem" }}>
                 {source.toUpperCase()}
               </span>
 
@@ -193,9 +162,18 @@ export default function FeedItemCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-decoration-none"
-                style={{ fontWeight: "bold", fontSize: "1.1rem" }}
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "1.15rem",
+                  lineHeight: "1.3",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
               >
-                {title}
+                {item.title}
               </a>
             </div>
 
@@ -203,8 +181,9 @@ export default function FeedItemCard({
               <span
                 className={`badge ${sourceClass}`}
                 style={{ fontWeight: "bold" }}
+                title="Ez a tartalom teljes egészében AI által lett megfogalmazva."
               >
-                100% AI‑fogalmazás
+                AI‑fogalmazás
               </span>
             )}
           </h5>
@@ -218,24 +197,16 @@ export default function FeedItemCard({
           </button>
 
           {expanded && (
-            <div
-              className="mt-3 p-3 rounded"
-              style={{ backgroundColor: "#2a2a2a" }}
-            >
+            <div className="mt-3 p-3 rounded" style={{ backgroundColor: "#2a2a2a" }}>
               {item.detailed_content ? (
                 <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
               ) : (
-                <p className="text-warning small mb-0">
-                  Ehhez a hírhez nincs elmentve részletes elemzés.
-                </p>
+                <p className="text-warning small mb-0">Ehhez a hírhez nincs elmentve részletes elemzés.</p>
               )}
             </div>
           )}
 
-          <p
-            className="text-muted small mt-3 mb-0"
-            title={formatFullDate(item.created_at)}
-          >
+          <p className="text-muted small mt-3 mb-0" title={formatFullDate(item.created_at)}>
             {formatRelativeTime(item.created_at)}
           </p>
         </div>

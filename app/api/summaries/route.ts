@@ -19,6 +19,23 @@ function getPool() {
   return pool;
 }
 
+// --- Fallback cím generálás (ha nincs AI title) --- //
+function fallbackTitle(row: any): string {
+  if (row.title && row.title.trim().length > 0) {
+    return row.title.trim();
+  }
+
+  const slug = row.url?.split("/").pop() || "";
+  const words = slug.split("-").filter((w: string) => w.length > 2);
+
+  if (words.length >= 3) {
+    return words.map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+  }
+
+  const fallback = row.content?.split("\n")[0]?.trim() || "Cím nélkül";
+  return fallback;
+}
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
@@ -38,7 +55,7 @@ export async function GET(req: Request) {
 
     const db = getPool();
 
-    // 1) Több forrásos szűrés — DUPLIKÁCIÓMENTES PAGINÁLÁS
+    // --- 1) Több forrásos szűrés --- //
     if (sources.length > 0) {
       const placeholders = sources.map(() => "?").join(",");
 
@@ -63,6 +80,7 @@ export async function GET(req: Request) {
         SELECT 
           s.id,
           s.url,
+          s.title,
           s.language,
           src.id AS source_id,
           src.name AS source_name,
@@ -82,10 +100,15 @@ export async function GET(req: Request) {
       const params = [...ids, ...ids];
       const [rows] = await db.query<any[]>(fullQuery, params);
 
-      return NextResponse.json(rows ?? []);
+      const finalRows = rows.map((r) => ({
+        ...r,
+        title: fallbackTitle(r),
+      }));
+
+      return NextResponse.json(finalRows ?? []);
     }
 
-    // 2) Mai nap szűrő
+    // --- 2) Mai nap szűrő --- //
     if (todayFilter) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -97,6 +120,7 @@ export async function GET(req: Request) {
         SELECT 
           s.id,
           s.url,
+          s.title,
           s.language,
           src.id AS source_id,
           src.name AS source_name,
@@ -114,10 +138,16 @@ export async function GET(req: Request) {
       `;
 
       const [rows] = await db.query<any[]>(todayQuery, [today, tomorrow]);
-      return NextResponse.json(rows ?? []);
+
+      const finalRows = rows.map((r) => ({
+        ...r,
+        title: fallbackTitle(r),
+      }));
+
+      return NextResponse.json(finalRows ?? []);
     }
 
-    // 3) Normál paginált feed — FORRÁSONKÉNT 10 RANDOM MAI CIKK
+    // --- 3) Normál paginált feed (LEGFRISSEBB ELŐL) --- //
     {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -125,11 +155,11 @@ export async function GET(req: Request) {
       const tomorrow = new Date(today);
       tomorrow.setDate(today.getDate() + 1);
 
-      // 3.1) Mai cikkek lekérése
       const todayQuery = `
         SELECT 
           s.id,
           s.url,
+          s.title,
           s.language,
           src.id AS source_id,
           src.name AS source_name,
@@ -148,36 +178,36 @@ export async function GET(req: Request) {
 
       const [todayRows] = await db.query<any[]>(todayQuery, [today, tomorrow]);
 
-      // 3.2) Csoportosítás forrás szerint
       const bySource: Record<number, any[]> = {};
       for (const row of todayRows) {
         if (!bySource[row.source_id]) bySource[row.source_id] = [];
         bySource[row.source_id].push(row);
       }
 
-      // 3.3) Minden forrásból 10 random mai cikk
       let pool: any[] = [];
 
       for (const sourceId in bySource) {
         const list = bySource[sourceId];
 
-        // ha kevesebb mint 10 van → mindet berakjuk
-        if (list.length <= 10) {
-          pool.push(...list);
-        } else {
-          // különben 10 randomot választunk
-          const shuffled = [...list].sort(() => Math.random() - 0.5);
-          pool.push(...shuffled.slice(0, 10));
-        }
+        const sorted = [...list].sort(
+          (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+
+        pool.push(...sorted.slice(0, 10));
       }
 
-      // 3.4) Végső random sorrend
-      pool.sort(() => Math.random() - 0.5);
+      pool.sort(
+        (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
 
-      // 3.5) Paginálás a random pool-ból
       const paginated = pool.slice(offset, offset + limit);
 
-      return NextResponse.json(paginated);
+      const finalRows = paginated.map((r) => ({
+        ...r,
+        title: fallbackTitle(r),
+      }));
+
+      return NextResponse.json(finalRows);
     }
 
   } catch (err: any) {

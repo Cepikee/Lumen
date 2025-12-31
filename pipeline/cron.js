@@ -115,6 +115,41 @@ Kimenet (csak kulcsszavak):`
     .slice(0, 10);
 }
 
+async function runOllamaTitle(url, shortSummary, longSummary) {
+  const prompt = `
+Írj egy rövid, újságírói stílusú MAGYAR címet az alábbi hírhez.
+SZABÁLYOK:
+- Csak a címet add vissza.
+- Ne írj magyarázatot.
+- Ne írj kommentárt.
+- Ne írj zárójeles megjegyzést.
+- Ne írj meta‑szöveget.
+- Ne ismételd meg a promptot.
+- Ne írj semmi mást a cím után.
+
+Legyen tömör, 6–12 szavas.
+Ne legyen clickbait.
+A cím legyen természetes, magyar nyelvű megfogalmazás.
+
+URL: ${url}
+
+Rövid összefoglaló:
+${shortSummary}
+
+Részletes elemzés:
+${longSummary}
+
+Kimenet (csak a cím):
+`;
+
+
+  return await callOllama(prompt);
+}
+
+
+
+
+
 // ---- Pending cikkek lekérése ----
 async function fetchPendingArticles(connection, limit) {
   const [rows] = await connection.execute(
@@ -216,6 +251,28 @@ await runWithRetries("[SHORT] ✂️ Rövid összefoglaló", async () => {
     console.log(`[PLAG] Score=${plagiarismScore}`);
     return res;
   });
+// 4) AI cím generálás
+let title = "";
+await runWithRetries("[TITLE] 🏷️ Cím generálás", async () => {
+  title = await runOllamaTitle(article.url_canonical, shortSummary, longSummary);
+
+  // Ha az AI valami hülyeséget ad vissza → fallback
+  if (!title || title.length < 5) {
+    const slug = (article.url_canonical || "").split("/").pop() || "";
+    const words = slug.split("-").filter(w => w.length > 2);
+    if (words.length >= 3) {
+      title = words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+    } else {
+      title = shortSummary.split("\n")[0].trim().slice(0, 120);
+    }
+  }
+
+  console.log(`[TITLE] Generált cím: ${title}`);
+});
+
+
+
+
 
   // 4) Kulcsszavak generálása + NORMALIZÁLÁS + DEDUPLIKÁLÁS
 let keywords = [];
@@ -298,11 +355,12 @@ await runWithRetries("[TRENDS-SAVE] 📈 Trends mentése", async () => {
     const url = article.url_canonical || "";
     const res = await saveSummary({
       articleId,
-      shortSummary,
       url,
-      longSummary,
-      plagiarismScore,
-      trendKeywords,
+      title,
+      shortSummary,
+      longSummary, 
+      plagiarismScore, 
+      trendKeywords, 
       source,
     });
     if (!res?.ok) throw new Error(res?.error || "saveSummary sikertelen");
