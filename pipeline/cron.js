@@ -217,15 +217,26 @@ await runWithRetries("[SHORT] ✂️ Rövid összefoglaló", async () => {
     return res;
   });
 
-  // 4) Kulcsszavak generálása
+  // 4) Kulcsszavak generálása + NORMALIZÁLÁS + DEDUPLIKÁLÁS
 let keywords = [];
 
 keywords = await runWithRetries("[KW] 🔑 Kulcsszavak", async () => {
   const kw = await runOllamaKeywords(article.content_text || "");
-  trendKeywords = Array.isArray(kw) ? kw.join(",") : "";
-  console.log(`[KW] Kulcsszavak: ${trendKeywords}`);
-  return kw;
+
+  // 🔥 NORMALIZÁLÁS
+  const normalized = (Array.isArray(kw) ? kw : [])
+    .map(k => (k || "").trim().toLowerCase())   // kisbetű + trim
+    .filter(k => k.length > 0);                 // üres stringek kiszűrése
+
+  // 🔥 DEDUPLIKÁLÁS
+  const unique = [...new Set(normalized)];
+
+  trendKeywords = unique.join(",");
+  console.log(`[KW] Kulcsszavak (normalizált): ${trendKeywords}`);
+
+  return unique;
 });
+
 
 // 4/B) Kulcsszavak mentése
 await runWithRetries("[KW-SAVE] 💾 Kulcsszavak mentése", async () => {
@@ -240,7 +251,7 @@ await runWithRetries("[KW-SAVE] 💾 Kulcsszavak mentése", async () => {
     await conn.execute(
       `INSERT INTO keywords (article_id, keyword, created_at)
        VALUES (?, ?, NOW())`,
-      [articleId, kw.trim()]
+      [articleId, kw.trim().toLowerCase()]
     );
   }
 
@@ -262,7 +273,7 @@ await runWithRetries("[TRENDS-SAVE] 📈 Trends mentése", async () => {
       `INSERT INTO trends (keyword, frequency, period, category, source)
        VALUES (?, 1, '7d', ?, ?)`,
       [
-        kw.trim(),          // keyword
+        kw.trim().toLowerCase(), // 🔥 NORMALIZÁLT KULCSSZÓ          // keyword
         article.category ?? null, 
         article.source ?? null    // forrás (index, telex, hvg, stb.)
       ]

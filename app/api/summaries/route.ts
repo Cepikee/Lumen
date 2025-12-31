@@ -42,7 +42,6 @@ export async function GET(req: Request) {
     if (sources.length > 0) {
       const placeholders = sources.map(() => "?").join(",");
 
-      // 1. lépés: ID-k lekérése
       const idQuery = `
         SELECT s.id
         FROM summaries s
@@ -52,14 +51,13 @@ export async function GET(req: Request) {
         LIMIT ${limit} OFFSET ${offset}
       `;
 
-      const [idRows] = await db.query(idQuery, sources);
-      const ids = (idRows as any[]).map((r) => r.id);
+      const [idRows] = await db.query<any[]>(idQuery, sources);
+      const ids = idRows.map((r) => r.id);
 
       if (ids.length === 0) return NextResponse.json([]);
 
-      // ORDER BY FIELD(...) a helyes sorrendhez
       const idPlaceholders = ids.map(() => "?").join(",");
-      const orderField = ids.map((id) => "?").join(",");
+      const orderField = ids.map(() => "?").join(",");
 
       const fullQuery = `
         SELECT 
@@ -82,7 +80,7 @@ export async function GET(req: Request) {
       `;
 
       const params = [...ids, ...ids];
-      const [rows] = await db.query(fullQuery, params);
+      const [rows] = await db.query<any[]>(fullQuery, params);
 
       return NextResponse.json(rows ?? []);
     }
@@ -115,50 +113,72 @@ export async function GET(req: Request) {
         ORDER BY s.created_at DESC
       `;
 
-      const [rows] = await db.query(todayQuery, [today, tomorrow]);
+      const [rows] = await db.query<any[]>(todayQuery, [today, tomorrow]);
       return NextResponse.json(rows ?? []);
     }
 
-    // 3) Normál paginált feed — DUPLIKÁCIÓMENTES
-    const idQuery = `
-      SELECT s.id
-      FROM summaries s
-      ORDER BY s.created_at DESC
-      LIMIT ${limit} OFFSET ${offset}
-    `;
+    // 3) Normál paginált feed — FORRÁSONKÉNT 10 RANDOM MAI CIKK
+    {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
 
-    const [idRows] = await db.query(idQuery);
-    const ids = (idRows as any[]).map((r) => r.id);
+      const tomorrow = new Date(today);
+      tomorrow.setDate(today.getDate() + 1);
 
-    if (ids.length === 0) return NextResponse.json([]);
+      // 3.1) Mai cikkek lekérése
+      const todayQuery = `
+        SELECT 
+          s.id,
+          s.url,
+          s.language,
+          src.id AS source_id,
+          src.name AS source_name,
+          s.content,
+          s.detailed_content,
+          s.category,
+          s.plagiarism_score,
+          s.ai_clean,
+          s.created_at
+        FROM summaries s
+        LEFT JOIN articles a ON s.article_id = a.id
+        LEFT JOIN sources src ON a.source_id = src.id
+        WHERE s.created_at >= ? AND s.created_at < ?
+        ORDER BY s.created_at DESC
+      `;
 
-    const idPlaceholders = ids.map(() => "?").join(",");
-    const orderField = ids.map(() => "?").join(",");
+      const [todayRows] = await db.query<any[]>(todayQuery, [today, tomorrow]);
 
-    const fullQuery = `
-      SELECT 
-        s.id,
-        s.url,
-        s.language,
-        src.id AS source_id,
-        src.name AS source_name,
-        s.content,
-        s.detailed_content,
-        s.category,
-        s.plagiarism_score,
-        s.ai_clean,
-        s.created_at
-      FROM summaries s
-      LEFT JOIN articles a ON s.article_id = a.id
-      LEFT JOIN sources src ON a.source_id = src.id
-      WHERE s.id IN (${idPlaceholders})
-      ORDER BY FIELD(s.id, ${orderField})
-    `;
+      // 3.2) Csoportosítás forrás szerint
+      const bySource: Record<number, any[]> = {};
+      for (const row of todayRows) {
+        if (!bySource[row.source_id]) bySource[row.source_id] = [];
+        bySource[row.source_id].push(row);
+      }
 
-    const params = [...ids, ...ids];
-    const [rows] = await db.query(fullQuery, params);
+      // 3.3) Minden forrásból 10 random mai cikk
+      let pool: any[] = [];
 
-    return NextResponse.json(rows ?? []);
+      for (const sourceId in bySource) {
+        const list = bySource[sourceId];
+
+        // ha kevesebb mint 10 van → mindet berakjuk
+        if (list.length <= 10) {
+          pool.push(...list);
+        } else {
+          // különben 10 randomot választunk
+          const shuffled = [...list].sort(() => Math.random() - 0.5);
+          pool.push(...shuffled.slice(0, 10));
+        }
+      }
+
+      // 3.4) Végső random sorrend
+      pool.sort(() => Math.random() - 0.5);
+
+      // 3.5) Paginálás a random pool-ból
+      const paginated = pool.slice(offset, offset + limit);
+
+      return NextResponse.json(paginated);
+    }
 
   } catch (err: any) {
     console.error("API /summaries hiba:", err);
