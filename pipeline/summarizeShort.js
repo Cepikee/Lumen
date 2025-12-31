@@ -69,7 +69,7 @@ async function summarizeShort(articleId) {
     }
 
     // 2) Prompt – summarize-all stílusban
-    const prompt = `Foglaljad össze a következő szöveget röviden, maximum 5 mondatban.
+    const prompt = `Foglaljad össze a következő szöveget röviden, maximum 5 mondatban magyarul.
 Csak az összefoglalót írd ki, bevezető mondat nélkül.
 Ne írj olyat, hogy "Itt a lényeg", "Íme az összefoglaló", "Röviden", vagy bármilyen bevezetőt.
 Csak magyarul válaszolj:
