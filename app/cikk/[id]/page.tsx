@@ -19,6 +19,9 @@ export default function CikkOldal() {
   const [item, setItem] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
+  // 🔥 Kapcsolódó cikkek state
+  const [related, setRelated] = useState<any[]>([]);
+
   useEffect(() => {
     if (!id) return;
 
@@ -33,6 +36,18 @@ export default function CikkOldal() {
       })
       .catch(() => setLoading(false));
   }, [id]);
+
+  // 🔥 Kapcsolódó cikkek lekérése
+  useEffect(() => {
+    if (!item) return;
+
+    fetch(`/api/related?source_id=${item.source_id}&exclude=${item.id}&limit=5`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) setRelated(data);
+      })
+      .catch(() => setRelated([]));
+  }, [item]);
 
   if (loading) {
     return (
@@ -63,14 +78,14 @@ export default function CikkOldal() {
         fontSize: "0.95rem",
       }}
     >
-      {/* Fő cím – középre igazítva + nagyobb méret */}
+      {/* Fő cím */}
       <a
         href={item.url}
         target="_blank"
         rel="noopener noreferrer"
         title="Eredeti cikkért kattints ide"
         style={{
-          fontSize: "1.5rem", // 2× nagyobb
+          fontSize: "1.5rem",
           fontWeight: 700,
           marginBottom: "20px",
           lineHeight: "1.25",
@@ -120,12 +135,12 @@ export default function CikkOldal() {
         )}
       </div>
 
-      {/* Rövid tartalom – Neon Mono (1.5× nagyobb) */}
+      {/* Rövid tartalom */}
       <div style={{ marginBottom: "26px" }}>
         <p
           style={{
             fontFamily: "'Share Tech Mono', monospace",
-            fontSize: "1.1rem", // 1.5× nagyobb
+            fontSize: "1.1rem",
             fontWeight: 400,
             marginBottom: "0px",
             lineHeight: "1.55",
@@ -139,7 +154,7 @@ export default function CikkOldal() {
         </p>
       </div>
 
-      {/* Részletes tartalom – Neon Mono (változatlan) */}
+      {/* Részletes tartalom */}
       <div
         style={{
           marginTop: "28px",
@@ -162,6 +177,47 @@ export default function CikkOldal() {
           {item.detailed_content}
         </div>
       </div>
+
+      {/* 🔥 Kapcsolódó cikkek blokk — EZ ITT VAN LEGALUL */}
+      {related.length > 0 && (
+        <div style={{ marginTop: "40px" }}>
+          <h3
+            style={{
+              fontSize: "1.4rem",
+              marginBottom: "16px",
+              color: "#4da3ff",
+              textAlign: "center",
+              fontWeight: 600,
+              textShadow: "0 0 6px rgba(0, 234, 255, 0.25)",
+            }}
+          >
+            Kapcsolódó cikkek
+          </h3>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+            {related.map((r) => (
+              <a
+                key={r.id}
+                href={`/cikk/${r.id}`}
+                style={{
+                  padding: "12px 16px",
+                  backgroundColor: "#1a1a1a",
+                  borderRadius: "8px",
+                  textDecoration: "none",
+                  color: "white",
+                  fontFamily: "'Share Tech Mono', monospace",
+                  fontSize: "0.9rem",
+                  letterSpacing: "0.3px",
+                  boxShadow: "0 0 6px rgba(0, 234, 255, 0.15)",
+                  transition: "background 0.2s ease",
+                }}
+              >
+                {r.title}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
