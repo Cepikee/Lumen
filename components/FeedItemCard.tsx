@@ -22,6 +22,19 @@ const SOURCE_MAP: Record<number, string> = {
   6: "444",
 };
 
+// --- CÍM TISZTÍTÓ --- //
+function cleanTitle(raw: string): string {
+  if (!raw) return "";
+
+  const firstLine = raw.split("\n")[0];
+
+  return firstLine
+    .replace(/\|.*$/, "") // forrás levágása
+    .replace(/^\s+|\s+$/g, "") // whitespace
+    .replace(/ +/g, " ") // dupla szóköz
+    .replace(/^\p{Ll}/u, (c) => c.toUpperCase()); // kisbetűs kezdés javítása
+}
+
 // --- DÁTUM FORMÁZÓK --- //
 function formatRelativeTime(dateString: string): string {
   const now = new Date();
@@ -65,11 +78,9 @@ export default function FeedItemCard({
   viewMode: "card" | "compact";
 }) {
   const url = item.url || "";
+  const title = cleanTitle(item.content);
 
-  // 🔥 A HELYES forrásnév source_id alapján
   const source = SOURCE_MAP[item.source_id] || "ismeretlen";
-
-  // 🔥 CSS class generálása
   const sourceClass = `source-${source}`;
 
   // --- COMPACT NÉZET --- //
@@ -100,7 +111,7 @@ export default function FeedItemCard({
                 className="text-decoration-none"
                 style={{ fontWeight: "bold", fontSize: "0.85rem" }}
               >
-                {url}
+                {title}
               </a>
             </div>
 
@@ -182,9 +193,9 @@ export default function FeedItemCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-decoration-none"
-                style={{ fontWeight: "bold" }}
+                style={{ fontWeight: "bold", fontSize: "1.1rem" }}
               >
-                {url}
+                {title}
               </a>
             </div>
 
