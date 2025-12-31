@@ -85,14 +85,15 @@ export default function Sidebar({
             </button>
           </div>
 
-          <button
-            className="btn btn-sm btn-secondary w-100 mb-2"
-            onClick={onTodayFilter}
-          >
-            🗓️ Mi történt ma?
-          </button>
-
-          {(isTodayMode || (sourceFilters && sourceFilters.length > 0)) && (
+          {/* --- GOMB LOGIKA JAVÍTVA --- */}
+          {sourceFilters.length === 0 ? (
+            <button
+              className="btn btn-sm btn-secondary w-100 mb-2"
+              onClick={onTodayFilter}
+            >
+              🗓️ Mi történt ma?
+            </button>
+          ) : (
             <button
               className="btn btn-sm btn-outline-secondary w-100 mb-3"
               onClick={onReset}
@@ -100,6 +101,7 @@ export default function Sidebar({
               🔄 Összes hír
             </button>
           )}
+          {/* --- GOMB LOGIKA VÉGE --- */}
 
           <div>
             <div className="fw-bold mb-1">Források</div>
