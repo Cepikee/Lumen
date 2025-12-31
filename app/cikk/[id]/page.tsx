@@ -3,50 +3,84 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+// 🔥 Régi, jól működő SOURCE‑logika visszahozva
+function mapSource(raw: string) {
+  const s = raw.toLowerCase();
+
+  if (s.includes("telex")) return "telex";
+  if (s.includes("24")) return "24hu";
+  if (s.includes("index")) return "index";
+  if (s.includes("hvg")) return "hvg";
+  if (s.includes("portfolio")) return "portfolio";
+  if (s.includes("444")) return "444";
+
+  return "ismeretlen";
+}
+
 export default function CikkOldal() {
   const params = useParams();
   const id = params?.id as string;
 
-  const SOURCE_MAP: Record<number, string> = {
-    1: "telex",
-    2: "24hu",
-    3: "index",
-    4: "hvg",
-    5: "portfolio",
-    6: "444",
-  };
-
   const [item, setItem] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔥 Kapcsolódó cikkek state
+  // Kapcsolódó cikkek state
   const [related, setRelated] = useState<any[]>([]);
+  const [relatedLoading, setRelatedLoading] = useState(false);
+  const [relatedError, setRelatedError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) return;
 
     setLoading(true);
+    setItem(null);
+    setRelated([]);
+    setRelatedError(null);
 
     fetch(`/api/summaries?id=${id}`, { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
         const article = Array.isArray(data) ? data[0] : data;
-        setItem(article);
-        setLoading(false);
+        setItem(article || null);
       })
-      .catch(() => setLoading(false));
+      .catch((err) => {
+        console.error("summaries fetch error:", err);
+        setItem(null);
+      })
+      .finally(() => setLoading(false));
   }, [id]);
 
-  // 🔥 Kapcsolódó cikkek lekérése
+  // Kapcsolódó cikkek lekérése — már a mapSource alapján
   useEffect(() => {
     if (!item) return;
 
-    fetch(`/api/related?source_id=${item.source_id}&exclude=${item.id}&limit=5`)
+    const rawSource = item.source ?? item.source_name ?? "";
+    const normalized = mapSource(rawSource);
+
+    if (!normalized || normalized === "ismeretlen") {
+      setRelated([]);
+      setRelatedError("Nincs használható forrás a kapcsolódó cikkekhez.");
+      return;
+    }
+
+    setRelatedLoading(true);
+    setRelatedError(null);
+
+    fetch(`/api/related?source=${normalized}&exclude=${item.id}&limit=5`, { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data)) setRelated(data);
+        if (Array.isArray(data)) {
+          setRelated(data);
+        } else {
+          setRelated([]);
+        }
       })
-      .catch(() => setRelated([]));
+      .catch((err) => {
+        console.error("related fetch error:", err);
+        setRelated([]);
+        setRelatedError("Hiba a kapcsolódó cikkek lekérésekor.");
+      })
+      .finally(() => setRelatedLoading(false));
   }, [item]);
 
   if (loading) {
@@ -65,7 +99,9 @@ export default function CikkOldal() {
     );
   }
 
-  const source = SOURCE_MAP[item.source_id] || "ismeretlen";
+  // 🔥 VISSZAÁLLÍTOTT META LOGIKA
+  const rawSource = item.source ?? item.source_name ?? "";
+  const source = mapSource(rawSource);
   const sourceClass = `source-${source}`;
 
   return (
@@ -106,9 +142,9 @@ export default function CikkOldal() {
         <span
           className={`badge ${sourceClass}`}
           style={{ fontSize: "0.75rem", fontWeight: "bold" }}
-          title={`Forrás: ${item.source_name}`}
+          title={`Forrás: ${source}`}
         >
-          {item.source_name.toUpperCase()}
+          {source.toUpperCase()}
         </span>
 
         <span
@@ -119,9 +155,9 @@ export default function CikkOldal() {
             backgroundColor: "#333",
             color: "#ccc",
           }}
-          title={new Date(item.created_at).toLocaleString("hu-HU")}
+          title={item.created_at ? new Date(item.created_at).toLocaleString("hu-HU") : ""}
         >
-          {new Date(item.created_at).toLocaleDateString("hu-HU")}
+          {item.created_at ? new Date(item.created_at).toLocaleDateString("hu-HU") : ""}
         </span>
 
         {item.ai_clean === 1 && (
@@ -155,12 +191,7 @@ export default function CikkOldal() {
       </div>
 
       {/* Részletes tartalom */}
-      <div
-        style={{
-          marginTop: "28px",
-          marginBottom: "20px",
-        }}
-      >
+      <div style={{ marginTop: "28px", marginBottom: "20px" }}>
         <div
           style={{
             whiteSpace: "pre-line",
@@ -178,22 +209,34 @@ export default function CikkOldal() {
         </div>
       </div>
 
-      {/* 🔥 Kapcsolódó cikkek blokk — EZ ITT VAN LEGALUL */}
-      {related.length > 0 && (
-        <div style={{ marginTop: "40px" }}>
-          <h3
-            style={{
-              fontSize: "1.4rem",
-              marginBottom: "16px",
-              color: "#4da3ff",
-              textAlign: "center",
-              fontWeight: 600,
-              textShadow: "0 0 6px rgba(0, 234, 255, 0.25)",
-            }}
-          >
-            Kapcsolódó cikkek
-          </h3>
+      {/* Kapcsolódó cikkek blokk */}
+      <div style={{ marginTop: "40px" }}>
+        <h3
+          style={{
+            fontSize: "1.4rem",
+            marginBottom: "16px",
+            color: "#4da3ff",
+            textAlign: "center",
+            fontWeight: 600,
+            textShadow: "0 0 6px rgba(0, 234, 255, 0.25)",
+          }}
+        >
+          Kapcsolódó cikkek
+        </h3>
 
+        {relatedLoading && <div style={{ textAlign: "center", color: "#999" }}>Betöltés…</div>}
+
+        {!relatedLoading && relatedError && (
+          <div style={{ textAlign: "center", color: "#ff8a8a" }}>{relatedError}</div>
+        )}
+
+        {!relatedLoading && related.length === 0 && !relatedError && (
+          <div style={{ textAlign: "center", color: "#999" }}>
+            Nincsenek kapcsolódó cikkek.
+          </div>
+        )}
+
+        {!relatedLoading && related.length > 0 && (
           <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
             {related.map((r) => (
               <a
@@ -216,8 +259,8 @@ export default function CikkOldal() {
               </a>
             ))}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

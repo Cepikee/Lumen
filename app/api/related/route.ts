@@ -36,7 +36,8 @@ export async function GET(req: Request) {
       `
       SELECT id, title, url, source, created_at
       FROM summaries
-      WHERE source = ? AND id != ?
+      WHERE source LIKE CONCAT('%', ?, '%')
+        AND id != ?
       ORDER BY created_at DESC
       LIMIT ?
       `,
