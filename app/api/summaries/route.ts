@@ -39,7 +39,53 @@ function fallbackTitle(row: any): string {
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
+    const db = getPool();
 
+    // ---------------------------------------------------------
+    // 🔥 0) ID ALAPÚ LEKÉRDEZÉS (Cikkoldal)
+    // ---------------------------------------------------------
+    const idParam = searchParams.get("id");
+    if (idParam) {
+      const id = Number(idParam);
+
+      const query = `
+        SELECT 
+          s.id,
+          s.url,
+          s.title,
+          s.language,
+          src.id AS source_id,
+          src.name AS source_name,
+          s.content,
+          s.detailed_content,
+          s.category,
+          s.plagiarism_score,
+          s.ai_clean,
+          s.created_at
+        FROM summaries s
+        LEFT JOIN articles a ON s.article_id = a.id
+        LEFT JOIN sources src ON a.source_id = src.id
+        WHERE s.id = ?
+        LIMIT 1
+      `;
+
+      const [rows] = await db.query<any[]>(query, [id]);
+
+      if (!rows || rows.length === 0) {
+        return NextResponse.json({ error: "Cikk nem található." }, { status: 404 });
+      }
+
+      const row = rows[0];
+
+      return NextResponse.json({
+        ...row,
+        title: fallbackTitle(row),
+      });
+    }
+
+    // ---------------------------------------------------------
+    // 🔥 1) Több forrásos szűrés
+    // ---------------------------------------------------------
     const todayFilter = searchParams.get("today") === "true";
     const page = Math.max(1, Number(searchParams.get("page") ?? 1));
 
@@ -53,9 +99,6 @@ export async function GET(req: Request) {
       .map((s) => Number(s))
       .filter((n) => Number.isFinite(n));
 
-    const db = getPool();
-
-    // --- 1) Több forrásos szűrés --- //
     if (sources.length > 0) {
       const placeholders = sources.map(() => "?").join(",");
 
@@ -108,7 +151,9 @@ export async function GET(req: Request) {
       return NextResponse.json(finalRows ?? []);
     }
 
-    // --- 2) Mai nap szűrő --- //
+    // ---------------------------------------------------------
+    // 🔥 2) Mai nap szűrő
+    // ---------------------------------------------------------
     if (todayFilter) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -147,7 +192,9 @@ export async function GET(req: Request) {
       return NextResponse.json(finalRows ?? []);
     }
 
-    // --- 3) Normál paginált feed (LEGFRISSEBB ELŐL) --- //
+    // ---------------------------------------------------------
+    // 🔥 3) Normál paginált feed
+    // ---------------------------------------------------------
     {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
