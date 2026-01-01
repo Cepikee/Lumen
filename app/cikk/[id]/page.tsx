@@ -138,45 +138,89 @@ export default function CikkOldal() {
       </a>
 
       {/* Meta badge sor */}
-      <div className="d-flex align-items-center gap-2 mb-4 justify-content-center">
-        <span
-          className={`badge ${sourceClass}`}
-          style={{ fontSize: "0.75rem", fontWeight: "bold" }}
-          title={`Forrás: ${source}`}
-        >
-          {source.toUpperCase()}
-        </span>
+<div style={{ marginBottom: "24px" }}>
+  {/* Felső badge sor */}
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "12px",
+      marginBottom: "10px",
+      flexWrap: "wrap",
+    }}
+  >
+    {/* Forrás badge */}
+    <span
+      className={`badge ${sourceClass}`}
+      style={{
+        fontSize: "0.8rem",
+        fontWeight: 600,
+        padding: "4px 10px",
+        borderRadius: "6px",
+        backgroundColor: "#222",
+        color: "#eee",
+        minWidth: "70px",
+        textAlign: "center",
+      }}
+      title={`Forrás: ${source}`}
+    >
+      {source.toUpperCase()}
+    </span>
+    {/* AI-fogalmazás badge (ugyanaz a stílus, sourceClass-szal) */}
+    {item.ai_clean === 1 && (
+      <span
+        className={`badge ${sourceClass}`}
+        style={{
+          fontSize: "0.8rem",
+          fontWeight: 600,
+          padding: "4px 10px",
+          borderRadius: "6px",
+          backgroundColor: "#222",
+          color: "#eee",
+          minWidth: "90px",
+          textAlign: "center",
+        }}
+        title="Ez a tartalom teljes egészében AI által lett megfogalmazva."
+      >
+        AI-fogalmazás
+      </span>
+    )}
+  </div>
 
-        <span
-          className="badge badge-date"
-          style={{
-            fontSize: "0.75rem",
-            fontWeight: "bold",
-            backgroundColor: "#333",
-            color: "#ccc",
-          }}
-          title={item.created_at ? new Date(item.created_at).toLocaleString("hu-HU") : ""}
-        >
-          {item.created_at ? new Date(item.created_at).toLocaleDateString("hu-HU") : ""}
-        </span>
-
-        {item.ai_clean === 1 && (
-          <span
-            className={`badge ${sourceClass}`}
-            style={{ fontSize: "0.75rem", fontWeight: "bold" }}
-            title="Ez a tartalom teljes egészében AI által lett megfogalmazva."
-          >
-            AI-fogalmazás
-          </span>
-        )}
-      </div>
+  {/* Feldolgozva: dátum */}
+  <div
+  style={{
+    fontSize: "0.85rem",
+    color: "#ccc",
+    textAlign: "left",
+    marginTop: "4px",
+    letterSpacing: "0.3px",
+  }}
+>
+  Feldolgozva:{" "}
+  <span style={{ color: "#e0e0e0", fontWeight: 500 }}>
+    {item.created_at
+      ? new Date(item.created_at)
+          .toLocaleString("hu-HU", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+          .replace(/\s/g, "")
+      : ""}
+  </span>
+</div>
+</div>
 
       {/* Rövid tartalom */}
       <div style={{ marginBottom: "26px" }}>
         <p
           style={{
             fontFamily: "'Share Tech Mono', monospace",
-            fontSize: "1.1rem",
+            fontSize: "0.92rem",
             fontWeight: 400,
             marginBottom: "0px",
             lineHeight: "1.55",
@@ -189,8 +233,17 @@ export default function CikkOldal() {
           {item.content}
         </p>
       </div>
+{/* Elválasztó vonal */}
+<div
+  style={{
+    width: "100%",
+    height: "1px",
+    backgroundColor: "rgba(255, 255, 255, 0.12)",
+    margin: "26px 0 28px 0",
+  }}
+></div>
 
-      {/* Részletes tartalom */}
+{/* Részletes tartalom */}
       <div style={{ marginTop: "28px", marginBottom: "20px" }}>
         <div
           style={{
@@ -208,59 +261,148 @@ export default function CikkOldal() {
           {item.detailed_content}
         </div>
       </div>
+{/* Elválasztó vonal */}
+<div
+  style={{
+    width: "100%",
+    height: "1px",
+    backgroundColor: "rgba(255, 255, 255, 0.12)",
+    margin: "26px 0 28px 0",
+  }}
+></div>
+
+
+
+{/* Kulcsszavak hashtag formában */}
+{item.keywords && item.keywords.length > 0 && (
+  <div
+    style={{
+      marginTop: "22px",
+      marginBottom: "32px",
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "12px",
+    }}
+  >
+    {item.keywords.map((kw: string, i: number) => (
+      <span
+        key={i}
+        style={{
+          fontSize: "0.78rem",
+          color: "#ffffff",
+          fontWeight: 400,
+          letterSpacing: "0.25px",
+        }}
+      >
+        #{kw}
+      </span>
+    ))}
+  </div>
+)}
+
+
+
+
+
+
 
       {/* Kapcsolódó cikkek blokk */}
-      <div style={{ marginTop: "40px" }}>
-        <h3
-          style={{
-            fontSize: "1.4rem",
-            marginBottom: "16px",
-            color: "#4da3ff",
-            textAlign: "center",
-            fontWeight: 600,
-            textShadow: "0 0 6px rgba(0, 234, 255, 0.25)",
-          }}
-        >
-          Kapcsolódó cikkek
-        </h3>
+{/* Kapcsolódó cikkek – egysoros, scrollozható dobozok */}
+{/* Kapcsolódó cikkek – egymás alatt, fekete dobozok */}
+<div style={{ marginTop: 48 }}>
+  <h4
+    style={{
+      fontSize: "0.9rem",
+      marginBottom: 18,
+      color: "#ffffff",
+      textAlign: "center",
+      fontWeight: 500,
+      letterSpacing: "0.3px",
+      textTransform: "uppercase",
+      fontFamily: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial",
+    }}
+  >
+    Kapcsolódó cikkek
+  </h4>
 
-        {relatedLoading && <div style={{ textAlign: "center", color: "#999" }}>Betöltés…</div>}
+  {!relatedLoading && related.length > 0 && (
+    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
 
-        {!relatedLoading && relatedError && (
-          <div style={{ textAlign: "center", color: "#ff8a8a" }}>{relatedError}</div>
-        )}
+      {related.map((r) => {
+        // CSS kulcs előállítása
+        const cssKey =
+          "source-" +
+          (r.source_name
+            ?.toLowerCase()
+            .replace(".hu", "")
+            .replace(/\./g, "")
+            .trim() || "");
 
-        {!relatedLoading && related.length === 0 && !relatedError && (
-          <div style={{ textAlign: "center", color: "#999" }}>
-            Nincsenek kapcsolódó cikkek.
-          </div>
-        )}
+        // Színtérkép a CSS alapján
+        const sourceColors: Record<string, string> = {
+          "source-444": "#2d6126",
+          "source-index": "rgba(224, 226, 116, 0.747)",
+          "source-portfolio": "#ff6600",
+          "source-24hu": "#ff0000",
+          "source-telex": "#00AEEF",
+          "source-hvg": "#ff7a00",
+          default: "#4da3ff",
+        };
 
-        {!relatedLoading && related.length > 0 && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-            {related.map((r) => (
-              <a
-                key={r.id}
-                href={`/cikk/${r.id}`}
-                style={{
-                  padding: "12px 16px",
-                  backgroundColor: "#1a1a1a",
-                  borderRadius: "8px",
-                  textDecoration: "none",
-                  color: "white",
-                  fontFamily: "'Share Tech Mono', monospace",
-                  fontSize: "0.9rem",
-                  letterSpacing: "0.3px",
-                  boxShadow: "0 0 6px rgba(0, 234, 255, 0.15)",
-                  transition: "background 0.2s ease",
-                }}
-              >
-                {r.title}
-              </a>
-            ))}
-          </div>
-        )}
-      </div>
+        const dotColor = sourceColors[cssKey] || sourceColors.default;
+
+        return (
+          <a
+            key={r.id}
+            href={`/cikk/${r.id}`}
+            style={{
+              backgroundColor: "#111",
+              padding: "12px 16px",
+              borderRadius: "8px",
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              transition: "background 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "#1a1a1a";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "#111";
+            }}
+          >
+            {/* Pont a cím előtt */}
+            <span
+              style={{
+                width: 6,
+                height: 6,
+                borderRadius: "50%",
+                backgroundColor: dotColor,
+                display: "inline-block",
+              }}
+            />
+
+            {/* Cím */}
+            <span
+              style={{
+                fontSize: "0.9rem",
+                fontWeight: 500,
+                color: "#ffffff",
+                lineHeight: 1.35,
+              }}
+            >
+              {r.title}
+            </span>
+          </a>
+        );
+      })}
+
+    </div>
+  )}
+</div>
+
+
     </div>
   );
 }

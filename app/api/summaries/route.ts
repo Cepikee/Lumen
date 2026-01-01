@@ -19,7 +19,17 @@ function getPool() {
   return pool;
 }
 
-// --- Forrásnév → source_id mapping --- //
+// --- ID → source név mapping (frontend ID-t küld!) --- //
+const ID_TO_SOURCE_NAME: Record<string, string> = {
+  "1": "telex",
+  "2": "24hu",
+  "3": "index",
+  "4": "hvg",
+  "5": "portfolio",
+  "6": "444",
+};
+
+// --- Forrásnév → source_id mapping (backend JOIN-hoz) --- //
 const SOURCE_NAME_TO_ID: Record<string, number> = {
   telex: 1,
   "24hu": 2,
@@ -71,7 +81,8 @@ export async function GET(req: Request) {
           s.category,
           s.plagiarism_score,
           s.ai_clean,
-          s.created_at
+          s.created_at,
+          s.trend_keywords
         FROM summaries s
         LEFT JOIN articles a ON s.article_id = a.id
         LEFT JOIN sources src ON a.source_id = src.id
@@ -90,22 +101,30 @@ export async function GET(req: Request) {
       return NextResponse.json({
         ...row,
         title: fallbackTitle(row),
+        keywords: row.trend_keywords
+          ? row.trend_keywords.split(",").map((k: string) => k.trim())
+          : [],
       });
     }
 
     // ---------------------------------------------------------
-    // 🔥 1) Több forrásos szűrés (string alapú!)
+    // 🔥 1) Több forrásos szűrés (ID → név → source_id)
     // ---------------------------------------------------------
     const page = Math.max(1, Number(searchParams.get("page") ?? 1));
     const limit = 10;
     const offset = (page - 1) * limit;
 
     const sourcesRaw = searchParams.getAll("source");
-    const sources = sourcesRaw
-      .map((s) => s.trim().toLowerCase())
+
+    // ID → név konverzió
+    const normalizedSources = sourcesRaw
+      .map((s) => {
+        if (ID_TO_SOURCE_NAME[s]) return ID_TO_SOURCE_NAME[s];
+        return s.toLowerCase().replace(".hu", "").replace(/\./g, "");
+      })
       .filter((s) => s !== "");
 
-    const sourceIds = sources
+    const sourceIds = normalizedSources
       .map((s) => SOURCE_NAME_TO_ID[s])
       .filter((id) => id !== undefined);
 
@@ -204,7 +223,7 @@ export async function GET(req: Request) {
     }
 
     // ---------------------------------------------------------
-    // 🔥 3) Normál paginált feed — NEM csak mai nap!
+    // 🔥 3) Normál paginált feed
     // ---------------------------------------------------------
     {
       const query = `

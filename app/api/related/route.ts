@@ -34,11 +34,20 @@ export async function GET(req: Request) {
 
     const [rows] = await pool.query(
       `
-      SELECT id, title, url, source, created_at
-      FROM summaries
-      WHERE source LIKE CONCAT('%', ?, '%')
-        AND id != ?
-      ORDER BY created_at DESC
+      SELECT 
+        s.id,
+        s.title,
+        s.url,
+        s.created_at,
+        s.source,
+        src.name AS source_name,
+        src.id AS source_id
+      FROM summaries s
+      LEFT JOIN articles a ON s.article_id = a.id
+      LEFT JOIN sources src ON a.source_id = src.id
+      WHERE src.name LIKE CONCAT('%', ?, '%')
+        AND s.id != ?
+      ORDER BY s.created_at DESC
       LIMIT ?
       `,
       [source, excludeId, limit]
