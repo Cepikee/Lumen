@@ -19,7 +19,17 @@ function getPool() {
   return pool;
 }
 
-// --- Fallback cím generálás (ha nincs AI title) --- //
+// --- Forrásnév → source_id mapping --- //
+const SOURCE_NAME_TO_ID: Record<string, number> = {
+  telex: 1,
+  "24hu": 2,
+  index: 3,
+  hvg: 4,
+  portfolio: 5,
+  "444": 6,
+};
+
+// --- Fallback cím generálás --- //
 function fallbackTitle(row: any): string {
   if (row.title && row.title.trim().length > 0) {
     return row.title.trim();
@@ -84,23 +94,23 @@ export async function GET(req: Request) {
     }
 
     // ---------------------------------------------------------
-    // 🔥 1) Több forrásos szűrés
+    // 🔥 1) Több forrásos szűrés (string alapú!)
     // ---------------------------------------------------------
-    const todayFilter = searchParams.get("today") === "true";
     const page = Math.max(1, Number(searchParams.get("page") ?? 1));
-
     const limit = 10;
     const offset = (page - 1) * limit;
 
     const sourcesRaw = searchParams.getAll("source");
     const sources = sourcesRaw
-      .map((s) => s.trim())
-      .filter((s) => s !== "")
-      .map((s) => Number(s))
-      .filter((n) => Number.isFinite(n));
+      .map((s) => s.trim().toLowerCase())
+      .filter((s) => s !== "");
 
-    if (sources.length > 0) {
-      const placeholders = sources.map(() => "?").join(",");
+    const sourceIds = sources
+      .map((s) => SOURCE_NAME_TO_ID[s])
+      .filter((id) => id !== undefined);
+
+    if (sourceIds.length > 0) {
+      const placeholders = sourceIds.map(() => "?").join(",");
 
       const idQuery = `
         SELECT s.id
@@ -111,7 +121,7 @@ export async function GET(req: Request) {
         LIMIT ${limit} OFFSET ${offset}
       `;
 
-      const [idRows] = await db.query<any[]>(idQuery, sources);
+      const [idRows] = await db.query<any[]>(idQuery, sourceIds);
       const ids = idRows.map((r) => r.id);
 
       if (ids.length === 0) return NextResponse.json([]);
@@ -154,6 +164,7 @@ export async function GET(req: Request) {
     // ---------------------------------------------------------
     // 🔥 2) Mai nap szűrő
     // ---------------------------------------------------------
+    const todayFilter = searchParams.get("today") === "true";
     if (todayFilter) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -193,16 +204,10 @@ export async function GET(req: Request) {
     }
 
     // ---------------------------------------------------------
-    // 🔥 3) Normál paginált feed
+    // 🔥 3) Normál paginált feed — NEM csak mai nap!
     // ---------------------------------------------------------
     {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
-      const tomorrow = new Date(today);
-      tomorrow.setDate(today.getDate() + 1);
-
-      const todayQuery = `
+      const query = `
         SELECT 
           s.id,
           s.url,
@@ -219,37 +224,13 @@ export async function GET(req: Request) {
         FROM summaries s
         LEFT JOIN articles a ON s.article_id = a.id
         LEFT JOIN sources src ON a.source_id = src.id
-        WHERE s.created_at >= ? AND s.created_at < ?
         ORDER BY s.created_at DESC
+        LIMIT ? OFFSET ?
       `;
 
-      const [todayRows] = await db.query<any[]>(todayQuery, [today, tomorrow]);
+      const [rows] = await db.query<any[]>(query, [limit, offset]);
 
-      const bySource: Record<number, any[]> = {};
-      for (const row of todayRows) {
-        if (!bySource[row.source_id]) bySource[row.source_id] = [];
-        bySource[row.source_id].push(row);
-      }
-
-      let pool: any[] = [];
-
-      for (const sourceId in bySource) {
-        const list = bySource[sourceId];
-
-        const sorted = [...list].sort(
-          (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        );
-
-        pool.push(...sorted.slice(0, 10));
-      }
-
-      pool.sort(
-        (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-      );
-
-      const paginated = pool.slice(offset, offset + limit);
-
-      const finalRows = paginated.map((r) => ({
+      const finalRows = rows.map((r) => ({
         ...r,
         title: fallbackTitle(r),
       }));
