@@ -13,10 +13,25 @@ interface ClientLayoutProps {
 export default function ClientLayout({ children }: ClientLayoutProps) {
   const [viewMode, setViewMode] = useState<"card" | "compact">("card");
   const [isTodayMode, setIsTodayMode] = useState(false);
+
+  // --- Forrás szűrés ---
   const [sourceFilters, setSourceFilters] = useState<string[]>([]);
   const [availableSources, setAvailableSources] = useState<
     { id: number; name: string }[]
   >([]);
+
+  // --- Kategória szűrés (ÚJ) ---
+  const [categoryFilters, setCategoryFilters] = useState<string[]>([]);
+  const [availableCategories, setAvailableCategories] = useState<string[]>([
+    "Egészségügy",
+    "Gazdaság",
+    "Közélet",
+    "Kultúra",
+    "Oktatás",
+    "Politika",
+    "Sport",
+    "Tech",
+  ]);
 
   useEffect(() => {
     let mounted = true;
@@ -40,6 +55,10 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     setSourceFilters(sources);
   }, []);
 
+  const handleCategoryFilterChange = useCallback((cats: string[]) => {
+    setCategoryFilters(cats);
+  }, []);
+
   return (
     <>
       <Header />
@@ -48,8 +67,14 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
         value={{
           viewMode,
           isTodayMode,
+
+          // Források
           sourceFilters,
           availableSources,
+
+          // Kategóriák (ÚJ)
+          categoryFilters,
+          availableCategories,
         }}
       >
         <SidebarWrapper
@@ -58,22 +83,32 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           onReset={() => {
             setIsTodayMode(false);
             setSourceFilters([]);
+            setCategoryFilters([]); // 🔥 Resetkor törlünk kategóriákat is
           }}
           onSourceFilterChange={handleSourceFilterChange}
+          onCategoryFilterChange={handleCategoryFilterChange} // 🔥 ÚJ
+
           activeFilterState={{
             viewMode,
             isTodayMode,
             sourceFilters,
             availableSources,
+
+            // 🔥 ÚJ
+            categoryFilters,
+            availableCategories,
           }}
         >
-          <main className="flex-grow-1 overflow-auto p-3" 
-          style={{ 
-            maxWidth: "1280px", 
-            margin: "0 auto", 
-            width: "100%", }} > 
-            {children} 
-            </main>
+          <main
+            className="flex-grow-1 overflow-auto p-3"
+            style={{
+              maxWidth: "1280px",
+              margin: "0 auto",
+              width: "100%",
+            }}
+          >
+            {children}
+          </main>
         </SidebarWrapper>
       </LayoutContext.Provider>
 

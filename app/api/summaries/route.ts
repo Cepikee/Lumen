@@ -108,15 +108,15 @@ export async function GET(req: Request) {
     }
 
     // ---------------------------------------------------------
-    // 🔥 1) Több forrásos szűrés (ID → név → source_id)
+    // 🔥 1) Paraméterek beolvasása
     // ---------------------------------------------------------
     const page = Math.max(1, Number(searchParams.get("page") ?? 1));
     const limit = 10;
     const offset = (page - 1) * limit;
 
+    // --- Források ---
     const sourcesRaw = searchParams.getAll("source");
 
-    // ID → név konverzió
     const normalizedSources = sourcesRaw
       .map((s) => {
         if (ID_TO_SOURCE_NAME[s]) return ID_TO_SOURCE_NAME[s];
@@ -128,27 +128,29 @@ export async function GET(req: Request) {
       .map((s) => SOURCE_NAME_TO_ID[s])
       .filter((id) => id !== undefined);
 
-    if (sourceIds.length > 0) {
-      const placeholders = sourceIds.map(() => "?").join(",");
+    // --- Kategóriák ---
+    const categories = searchParams.getAll("category");
 
-      const idQuery = `
-        SELECT s.id
-        FROM summaries s
-        LEFT JOIN articles a ON s.article_id = a.id
-        WHERE a.source_id IN (${placeholders})
-        ORDER BY s.created_at DESC
-        LIMIT ${limit} OFFSET ${offset}
-      `;
+    // ---------------------------------------------------------
+    // 🔥 2) Kombinált szűrés (FORRÁS + KATEGÓRIA) — AND logika
+    // ---------------------------------------------------------
+    if (sourceIds.length > 0 || categories.length > 0) {
+      const whereParts: string[] = [];
+      const params: any[] = [];
 
-      const [idRows] = await db.query<any[]>(idQuery, sourceIds);
-      const ids = idRows.map((r) => r.id);
+      if (sourceIds.length > 0) {
+        whereParts.push(`a.source_id IN (${sourceIds.map(() => "?").join(",")})`);
+        params.push(...sourceIds);
+      }
 
-      if (ids.length === 0) return NextResponse.json([]);
+      if (categories.length > 0) {
+        whereParts.push(`s.category IN (${categories.map(() => "?").join(",")})`);
+        params.push(...categories);
+      }
 
-      const idPlaceholders = ids.map(() => "?").join(",");
-      const orderField = ids.map(() => "?").join(",");
+      const whereClause = whereParts.length > 0 ? `WHERE ${whereParts.join(" AND ")}` : "";
 
-      const fullQuery = `
+      const query = `
         SELECT 
           s.id,
           s.url,
@@ -165,12 +167,14 @@ export async function GET(req: Request) {
         FROM summaries s
         LEFT JOIN articles a ON s.article_id = a.id
         LEFT JOIN sources src ON a.source_id = src.id
-        WHERE s.id IN (${idPlaceholders})
-        ORDER BY FIELD(s.id, ${orderField})
+        ${whereClause}
+        ORDER BY s.created_at DESC
+        LIMIT ? OFFSET ?
       `;
 
-      const params = [...ids, ...ids];
-      const [rows] = await db.query<any[]>(fullQuery, params);
+      params.push(limit, offset);
+
+      const [rows] = await db.query<any[]>(query, params);
 
       const finalRows = rows.map((r) => ({
         ...r,
@@ -181,7 +185,7 @@ export async function GET(req: Request) {
     }
 
     // ---------------------------------------------------------
-    // 🔥 2) Mai nap szűrő
+    // 🔥 3) Mai nap szűrő
     // ---------------------------------------------------------
     const todayFilter = searchParams.get("today") === "true";
     if (todayFilter) {
@@ -223,7 +227,7 @@ export async function GET(req: Request) {
     }
 
     // ---------------------------------------------------------
-    // 🔥 3) Normál paginált feed
+    // 🔥 4) Normál paginált feed
     // ---------------------------------------------------------
     {
       const query = `

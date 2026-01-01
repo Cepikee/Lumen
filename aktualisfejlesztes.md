@@ -122,3 +122,28 @@ Cél: A rendszerben csak tiszta, jó minőségű tartalom legyen.
 [ ] Ellenőrizni, hogy minden cikk magyar nyelvű (ha kell)
 
 Eredmény: A rendszer adatbázisa tiszta és stabil.
+
+
+
+
+
+
+
+> pár cikknek nincsen kategóriája. pótolni kell majd 
+
+🎯 Javasolt sorrend ma
+Meta blokk fixálás (badge + forrás)
+
+Kapcsolódó cikkek fallback logika
+
+Kapcsolódó cikkek UI tuning
+
+Tipográfia finomítás
+
+Skeleton tuning
+
+SEO meta adatok
+
+Kód tisztítás
+
+Ez egy egy nap alatt végigvihető, nagyon tiszta roadmap.

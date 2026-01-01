@@ -8,10 +8,11 @@ import { LayoutContext } from "@/components/LayoutContext";
 export default function Page() {
   const layout = useContext(LayoutContext);
 
-  // Ha valamiért nincs context (elméletben nem kéne), fallback:
+  // Context fallback
   const viewMode = layout?.viewMode ?? "card";
   const isTodayMode = layout?.isTodayMode ?? false;
   const sourceFilters = layout?.sourceFilters ?? [];
+  const categoryFilters = layout?.categoryFilters ?? []; // 🔥 ÚJ
 
   const [items, setItems] = useState<FeedItem[]>([]);
   const [page, setPage] = useState(1);
@@ -22,14 +23,21 @@ export default function Page() {
 
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
-  async function fetchFilteredPage(pageNum: number, sources: string[]) {
-    const query = sources.map((s) => `source=${encodeURIComponent(s)}`).join("&");
+  // 🔥 ÚJ: forrás + kategória szűrt fetch
+  async function fetchFilteredPage(pageNum: number, sources: string[], categories: string[]) {
+    const sourceQuery = sources.map((s) => `source=${encodeURIComponent(s)}`).join("&");
+    const categoryQuery = categories.map((c) => `category=${encodeURIComponent(c)}`).join("&");
+
+    const query = [sourceQuery, categoryQuery].filter(Boolean).join("&");
+
     const res = await fetch(
       `/api/summaries?page=${pageNum}&limit=10&${query}`,
       { cache: "no-store" }
     );
+
     const raw = await res.json();
     if (!Array.isArray(raw)) return [];
+
     return raw.map((item: any) => ({
       ...item,
       ai_clean: Number(item.ai_clean),
@@ -37,7 +45,7 @@ export default function Page() {
   }
 
   async function fetchPageData(pageNum: number) {
-    if (loading || isTodayMode || sourceFilters.length > 0) return [];
+    if (loading || isTodayMode || sourceFilters.length > 0 || categoryFilters.length > 0) return [];
     setLoading(true);
     try {
       const res = await fetch(
@@ -81,7 +89,7 @@ export default function Page() {
   }
 
   async function loadFilteredFirstPage() {
-    const firstPage = await fetchFilteredPage(1, sourceFilters);
+    const firstPage = await fetchFilteredPage(1, sourceFilters, categoryFilters);
     if (!firstPage || firstPage.length === 0) {
       setItems([]);
       setHasMore(false);
@@ -92,6 +100,7 @@ export default function Page() {
     setSourcePage(1);
   }
 
+  // 🔥 FIGYELJE A KATEGÓRIÁKAT IS
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -105,7 +114,7 @@ export default function Page() {
         return;
       }
 
-      if (sourceFilters.length > 0) {
+      if (sourceFilters.length > 0 || categoryFilters.length > 0) {
         await loadFilteredFirstPage();
         return;
       }
@@ -123,8 +132,9 @@ export default function Page() {
     return () => {
       cancelled = true;
     };
-  }, [isTodayMode, JSON.stringify(sourceFilters)]);
+  }, [isTodayMode, JSON.stringify(sourceFilters), JSON.stringify(categoryFilters)]);
 
+  // 🔥 Normál lapozás (nincs szűrés)
   useEffect(() => {
     if (page === 1) return;
     let cancelled = false;
@@ -149,11 +159,12 @@ export default function Page() {
     };
   }, [page]);
 
+  // 🔥 Szűrt lapozás (forrás vagy kategória)
   useEffect(() => {
     if (sourcePage === 1) return;
     let cancelled = false;
     (async () => {
-      const newItems = await fetchFilteredPage(sourcePage, sourceFilters);
+      const newItems = await fetchFilteredPage(sourcePage, sourceFilters, categoryFilters);
       if (cancelled) return;
       if (!newItems || newItems.length === 0) {
         setHasMore(false);
@@ -171,8 +182,9 @@ export default function Page() {
     return () => {
       cancelled = true;
     };
-  }, [sourcePage, JSON.stringify(sourceFilters)]);
+  }, [sourcePage, JSON.stringify(sourceFilters), JSON.stringify(categoryFilters)]);
 
+  // 🔥 Infinite scroll figyelje a kategóriákat is
   useEffect(() => {
     if (!loaderRef.current) return;
     const el = loaderRef.current;
@@ -181,7 +193,8 @@ export default function Page() {
         const first = entries[0];
         if (!first.isIntersecting || !hasMore) return;
         if (isTodayMode) return;
-        if (sourceFilters.length > 0) {
+
+        if (sourceFilters.length > 0 || categoryFilters.length > 0) {
           setSourcePage((prev) => prev + 1);
         } else {
           setPage((prev) => prev + 1);
@@ -192,7 +205,7 @@ export default function Page() {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [hasMore, isTodayMode, JSON.stringify(sourceFilters)]);
+  }, [hasMore, isTodayMode, JSON.stringify(sourceFilters), JSON.stringify(categoryFilters)]);
 
   return (
     <>

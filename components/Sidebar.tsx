@@ -12,6 +12,10 @@ interface ActiveFilterState {
   isTodayMode: boolean;
   sourceFilters: string[];
   availableSources: SourceItem[];
+
+  // 🔥 ÚJ: kategória szűrés
+  categoryFilters: string[];
+  availableCategories: string[];
 }
 
 interface SidebarProps {
@@ -21,6 +25,10 @@ interface SidebarProps {
   onTodayFilter: () => void;
   onReset: () => void;
   onSourceFilterChange: (sources: string[]) => void;
+
+  // 🔥 ÚJ: kategória callback
+  onCategoryFilterChange: (categories: string[]) => void;
+
   activeFilterState: ActiveFilterState;
 }
 
@@ -31,9 +39,19 @@ export default function Sidebar({
   onTodayFilter,
   onReset,
   onSourceFilterChange,
+  onCategoryFilterChange,
   activeFilterState
 }: SidebarProps) {
-  const { viewMode, isTodayMode, sourceFilters = [], availableSources = [] } = activeFilterState || {};
+  const {
+    viewMode,
+    isTodayMode,
+    sourceFilters = [],
+    availableSources = [],
+
+    // 🔥 ÚJ
+    categoryFilters = [],
+    availableCategories = []
+  } = activeFilterState || {};
 
   return (
     <>
@@ -103,6 +121,7 @@ export default function Sidebar({
           )}
           {/* --- GOMB LOGIKA VÉGE --- */}
 
+          {/* --- FORRÁSOK --- */}
           <div>
             <div className="fw-bold mb-1">Források</div>
 
@@ -131,6 +150,39 @@ export default function Sidebar({
                   }}
                 />
                 <label className="form-check-label">{src.name}</label>
+              </div>
+            ))}
+          </div>
+
+          {/* --- KATEGÓRIÁK --- */}
+          <div className="mt-4">
+            <div className="fw-bold mb-1">Kategóriák</div>
+
+            <div className="form-check mb-1">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                checked={categoryFilters.length === 0}
+                onChange={() => onCategoryFilterChange([])}
+              />
+              <label className="form-check-label">Mind</label>
+            </div>
+
+            {availableCategories.map((cat: string) => (
+              <div key={cat} className="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  checked={categoryFilters.includes(cat)}
+                  onChange={(e) => {
+                    const newCats = e.target.checked
+                      ? [...categoryFilters, cat]
+                      : categoryFilters.filter((c) => c !== cat);
+
+                    onCategoryFilterChange(newCats);
+                  }}
+                />
+                <label className="form-check-label">{cat}</label>
               </div>
             ))}
           </div>
