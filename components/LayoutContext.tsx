@@ -10,9 +10,13 @@ export interface LayoutContextValue {
   sourceFilters: string[];
   availableSources: { id: number; name: string }[];
 
-  // --- Kategória szűrés (ÚJ) ---
+  // --- Kategória szűrés ---
   categoryFilters: string[];
   availableCategories: string[];
+
+  // --- Keresés (új) ---
+  searchTerm: string;
+  setSearchTerm: (value: string) => void; // 🔥 ÚJ
 }
 
 export const LayoutContext = createContext<LayoutContextValue | null>(null);

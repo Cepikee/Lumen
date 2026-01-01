@@ -114,6 +114,20 @@ export async function GET(req: Request) {
     const limit = 10;
     const offset = (page - 1) * limit;
 
+    // --- Keresés ---
+    const q = searchParams.get("q")?.trim() ?? "";
+    let searchCondition = "";
+    if (q) {
+      const safe = q.replace(/'/g, "''");
+      searchCondition = `
+        AND (
+          s.title LIKE '%${safe}%'
+          OR s.content LIKE '%${safe}%'
+          OR s.detailed_content LIKE '%${safe}%'
+        )
+      `;
+    }
+
     // --- Források ---
     const sourcesRaw = searchParams.getAll("source");
 
@@ -168,6 +182,7 @@ export async function GET(req: Request) {
         LEFT JOIN articles a ON s.article_id = a.id
         LEFT JOIN sources src ON a.source_id = src.id
         ${whereClause}
+        ${searchCondition}   -- 🔥 KERESÉS HOZZÁADVA
         ORDER BY s.created_at DESC
         LIMIT ? OFFSET ?
       `;
@@ -213,6 +228,7 @@ export async function GET(req: Request) {
         LEFT JOIN articles a ON s.article_id = a.id
         LEFT JOIN sources src ON a.source_id = src.id
         WHERE s.created_at >= ? AND s.created_at < ?
+        ${searchCondition}   -- 🔥 KERESÉS HOZZÁADVA
         ORDER BY s.created_at DESC
       `;
 
@@ -227,7 +243,7 @@ export async function GET(req: Request) {
     }
 
     // ---------------------------------------------------------
-    // 🔥 4) Normál paginált feed
+    // 🔥 4) Normál paginált feed + keresés
     // ---------------------------------------------------------
     {
       const query = `
@@ -247,6 +263,8 @@ export async function GET(req: Request) {
         FROM summaries s
         LEFT JOIN articles a ON s.article_id = a.id
         LEFT JOIN sources src ON a.source_id = src.id
+        WHERE 1=1
+        ${searchCondition}   -- 🔥 KERESÉS HOZZÁADVA
         ORDER BY s.created_at DESC
         LIMIT ? OFFSET ?
       `;

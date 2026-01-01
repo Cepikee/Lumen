@@ -14,13 +14,16 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   const [viewMode, setViewMode] = useState<"card" | "compact">("card");
   const [isTodayMode, setIsTodayMode] = useState(false);
 
+  // 🔥 Kereső
+  const [searchTerm, setSearchTerm] = useState("");
+
   // --- Forrás szűrés ---
   const [sourceFilters, setSourceFilters] = useState<string[]>([]);
   const [availableSources, setAvailableSources] = useState<
     { id: number; name: string }[]
   >([]);
 
-  // --- Kategória szűrés (ÚJ) ---
+  // --- Kategória szűrés ---
   const [categoryFilters, setCategoryFilters] = useState<string[]>([]);
   const [availableCategories, setAvailableCategories] = useState<string[]>([
     "Egészségügy",
@@ -33,6 +36,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     "Tech",
   ]);
 
+  // Források betöltése
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -61,8 +65,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
 
   return (
     <>
-      <Header />
-
+      {/* 🔥 A Header-t ÁTHELYEZTÜK a Provider ALÁ */}
       <LayoutContext.Provider
         value={{
           viewMode,
@@ -72,31 +75,37 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           sourceFilters,
           availableSources,
 
-          // Kategóriák (ÚJ)
+          // Kategóriák
           categoryFilters,
           availableCategories,
+
+          // Keresés
+          searchTerm,
+          setSearchTerm,
         }}
       >
+        {/* 🔥 MOST MÁR MEGKAPJA A CONTEXT-ET */}
+        <Header />
+
         <SidebarWrapper
           onViewModeChange={handleViewModeChange}
           onTodayFilter={() => setIsTodayMode(true)}
           onReset={() => {
             setIsTodayMode(false);
             setSourceFilters([]);
-            setCategoryFilters([]); // 🔥 Resetkor törlünk kategóriákat is
+            setCategoryFilters([]);
           }}
           onSourceFilterChange={handleSourceFilterChange}
-          onCategoryFilterChange={handleCategoryFilterChange} // 🔥 ÚJ
-
+          onCategoryFilterChange={handleCategoryFilterChange}
           activeFilterState={{
             viewMode,
             isTodayMode,
             sourceFilters,
             availableSources,
-
-            // 🔥 ÚJ
             categoryFilters,
             availableCategories,
+            searchTerm,
+            setSearchTerm,
           }}
         >
           <main
