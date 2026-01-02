@@ -488,3 +488,583 @@ html, body {
     transform: translateX(-50%) translateY(0);
   }
 }
+
+
+
+/* ===== UTOM LANDING PAGE ===== */
+
+.landing-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at center,
+    rgba(124,58,237,0.35) 0%,
+    rgba(15,23,42,1) 60%,
+    rgba(0,0,0,1) 100%
+  );
+  color: #e9d5ff;
+  font-family: system-ui, sans-serif;
+}
+
+/* HERO – KÖZÉPRE HÚZOTT STRUKTÚRA */
+
+.hero {
+  padding: 64px 24px 40px;
+}
+
+.hero-centered {
+  min-height: auto;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+
+.hero-centered-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1.3fr 1.1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+/* LOGO / BRAND */
+
+.logo-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.logo-row.center {
+  justify-content: center;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+}
+
+.brand {
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c084fc;
+}
+
+/* AI PILLEK */
+
+.ai-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.pill {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(15,23,42,0.7);
+  color: #e9d5ff;
+}
+
+.pill-ai {
+  border-color: rgba(74,222,128,0.4);
+  color: #bbf7d0;
+}
+
+.pill-clean {
+  border-color: rgba(129,140,248,0.4);
+}
+
+/* HERO TITLE / SUBTITLE / CTA */
+
+.hero-title {
+  font-size: 38px;
+  margin-bottom: 12px;
+  color: #f5f3ff;
+}
+
+.hero-title.center {
+  text-align: center;
+}
+
+.hero-subtitle {
+  font-size: 15px;
+  color: #ffffff;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.hero-subtitle.center {
+  text-align: center;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.hero-actions.center {
+  justify-content: center;
+}
+
+.primary-btn,
+.secondary-btn {
+  border-radius: 999px;
+  border: none;
+  padding: 10px 22px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #6d28d9, #4c1d95);
+  color: #fdf4ff;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.secondary-btn {
+  background: transparent;
+  color: #e9d5ff;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.secondary-btn:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+.primary-btn.large {
+  padding: 12px 26px;
+  font-size: 15px;
+}
+
+/* OLDALSÓ DOBOZOK A HERO KÖRÜL */
+
+.hero-side-box {
+  background: rgba(30, 20, 60, 0.65);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+  font-size: 14px;
+}
+
+.hero-side-box h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #f5f3ff;
+}
+
+.hero-side-box p {
+  font-size: 14px;
+  color: #d8b4fe;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.badge-pill {
+  display: inline-block;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(124,58,237,0.7);
+  color: #e9d5ff;
+  margin-bottom: 10px;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #e9d5ff;
+}
+
+.feature-list li {
+  font-size: 13px;
+  margin-bottom: 4px;
+  display: flex;
+  gap: 6px;
+}
+
+.feature-list li::before {
+  content: "•";
+  color: #a855f7;
+}
+
+/* HERO METRICS JOBB OLDALON */
+
+.hero-metrics {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(40,20,80,0.6);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.metric-label {
+  color: #c084fc;
+}
+
+.metric-value {
+  color: #f5f3ff;
+}
+
+.metric-bad {
+  color: #f472b6;
+}
+
+/* SECTIONS */
+
+.section {
+  padding: 60px 24px;
+}
+
+.section.alt {
+  background: rgba(0,0,0,0.2);
+}
+
+.section.last {
+  padding-bottom: 80px;
+}
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-inner.center {
+  text-align: center;
+  max-width: 700px;
+}
+
+.section-header h2 {
+  font-size: 26px;
+  margin-bottom: 8px;
+  color: #f5f3ff;
+}
+
+.section-header p {
+  color: #d8b4fe;
+  font-size: 15px;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+/* KÁRTYÁK */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: rgba(40,20,80,0.6);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.card h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #f5f3ff;
+}
+
+.card p {
+  font-size: 14px;
+  color: #d8b4fe;
+  line-height: 1.5;
+}
+
+/* GRAFIKON BLOKK */
+
+.charts-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1.7fr 1.1fr;
+  gap: 20px;
+}
+
+.chart-card {
+  background: rgba(17,24,39,0.8);
+  border-radius: 16px;
+  border: 1px solid rgba(148,163,184,0.3);
+  padding: 18px 20px;
+}
+
+.chart-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.chart-title {
+  font-size: 14px;
+  color: #e5e7eb;
+}
+
+.chart-meta {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.chart-placeholder {
+  position: relative;
+  height: 160px;
+  border-radius: 10px;
+  background: radial-gradient(circle at top left, rgba(129,140,248,0.2), rgba(15,23,42,1));
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.chart-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  top: 45%;
+  background: linear-gradient(90deg, #a855f7, #22c55e);
+  transform: skewY(-8deg);
+}
+
+.chart-line.secondary {
+  top: 65%;
+  background: linear-gradient(90deg, #38bdf8, #f97316);
+}
+
+.chart-axis {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 10px;
+  height: 1px;
+  background: rgba(148,163,184,0.4);
+}
+
+.chart-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.chart-footer.small {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.bar-chart-placeholder {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0 10px;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #e5e7eb;
+}
+
+.bar-row span {
+  width: 80px;
+}
+
+.bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #4f46e5, #a855f7);
+  opacity: 0.85;
+}
+
+.bar-80 { max-width: 80%; }
+.bar-60 { max-width: 60%; }
+.bar-40 { max-width: 40%; }
+.bar-30 { max-width: 30%; }
+
+/* SZEKCIÓ VONAL */
+
+.section-divider {
+  width: 80%;
+  height: 1px;
+  margin: 60px auto;
+  background: linear-gradient(
+    to right,
+    rgba(124,58,237,0.25),
+    rgba(255,255,255,0.05),
+    rgba(124,58,237,0.25)
+  );
+  opacity: 0.7;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .hero-centered-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-side-box {
+    order: 2;
+  }
+
+  .hero-center {
+    order: 1;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.trend-box {
+  background: rgba(30,20,60,0.65);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 0 40px rgba(124,58,237,0.12);
+  backdrop-filter: blur(4px);
+  width: fit-content;
+  margin: 0 auto;
+  position: relative;
+}
+
+.trend-header {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.trend-header h2 {
+  font-size: 20px;
+  color: #f3f4f6;
+  margin: 0;
+}
+
+.trend-header h3 {
+  font-size: 16px;
+  color: #d1d5db;
+  margin: 4px 0;
+}
+
+.trend-header h4 {
+  font-size: 14px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.trend-graph {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.chart-area {
+  position: relative;
+  height: 220px;
+  width: 260px; /* <<< EZ A FONTOS, ETTŐL NEM LESZ ÜRES JOBB OLDAL */
+  padding-left: 44px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.trend-labels-y {
+  position: absolute;
+  left: 8px;
+  top: 12px;
+  bottom: 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #9ca3af;
+  z-index: 3;
+}
+
+.bars-wrapper {
+  position: absolute;
+  left: 44px;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.trend-bar-group {
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+  height: 140px; /* <<< EZ KELL A MOZGÁSHOZ */
+}
+
+.trend-bar {
+  width: 40px;
+  min-height: 6px;
+  max-height: 140px;
+  border-radius: 4px;
+  background: linear-gradient(to top, #22c55e, #facc15, #ef4444);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transform-origin: bottom;
+  transition: height 0.3s ease-out;
+}
+
+.trend-axis {
+  position: absolute;
+  left: 44px;
+  bottom: 36px;
+  width: 168px; /* 3*40 + 2*24 */
+  height: 2px;
+  background: rgba(255,255,255,0.12);
+  z-index: 4;
+}
+
+.trend-labels-x {
+  display: flex;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.trend-labels-x .label {
+  display: inline-block;
+  font-size: 13px;
+  color: #d8b4fe;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  width: 40px;
+  text-align: center;
+}

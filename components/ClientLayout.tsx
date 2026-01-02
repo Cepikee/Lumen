@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Header from "./Header";
 import CookieConsent from "./CookieConsent";
 import SidebarWrapper from "./SidebarWrapper";
@@ -11,6 +12,9 @@ interface ClientLayoutProps {
 }
 
 export default function ClientLayout({ children }: ClientLayoutProps) {
+  const pathname = usePathname();
+  const isLanding = pathname.includes("landing");
+
   const [viewMode, setViewMode] = useState<"card" | "compact">("card");
   const [isTodayMode, setIsTodayMode] = useState(false);
 
@@ -65,7 +69,6 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
 
   return (
     <>
-      {/* 🔥 A Header-t ÁTHELYEZTÜK a Provider ALÁ */}
       <LayoutContext.Provider
         value={{
           viewMode,
@@ -84,44 +87,50 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           setSearchTerm,
         }}
       >
-        {/* 🔥 MOST MÁR MEGKAPJA A CONTEXT-ET */}
-        <Header />
+        {/* 🔥 Header csak ha NEM landing */}
+        {!isLanding && <Header />}
 
-        <SidebarWrapper
-          onViewModeChange={handleViewModeChange}
-          onTodayFilter={() => setIsTodayMode(true)}
-          onReset={() => {
-            setIsTodayMode(false);
-            setSourceFilters([]);
-            setCategoryFilters([]);
-          }}
-          onSourceFilterChange={handleSourceFilterChange}
-          onCategoryFilterChange={handleCategoryFilterChange}
-          activeFilterState={{
-            viewMode,
-            isTodayMode,
-            sourceFilters,
-            availableSources,
-            categoryFilters,
-            availableCategories,
-            searchTerm,
-            setSearchTerm,
-          }}
-        >
-          <main
-            className="flex-grow-1 overflow-auto p-3"
-            style={{
-              maxWidth: "1280px",
-              margin: "0 auto",
-              width: "100%",
+        {/* 🔥 SidebarWrapper csak ha NEM landing */}
+        {!isLanding ? (
+          <SidebarWrapper
+            onViewModeChange={handleViewModeChange}
+            onTodayFilter={() => setIsTodayMode(true)}
+            onReset={() => {
+              setIsTodayMode(false);
+              setSourceFilters([]);
+              setCategoryFilters([]);
+            }}
+            onSourceFilterChange={handleSourceFilterChange}
+            onCategoryFilterChange={handleCategoryFilterChange}
+            activeFilterState={{
+              viewMode,
+              isTodayMode,
+              sourceFilters,
+              availableSources,
+              categoryFilters,
+              availableCategories,
+              searchTerm,
+              setSearchTerm,
             }}
           >
-            {children}
-          </main>
-        </SidebarWrapper>
+            <main
+              className="flex-grow-1 overflow-auto p-3"
+              style={{
+                maxWidth: "1280px",
+                margin: "0 auto",
+                width: "100%",
+              }}
+            >
+              {children}
+            </main>
+          </SidebarWrapper>
+        ) : (
+          <main>{children}</main>
+        )}
       </LayoutContext.Provider>
 
-      <CookieConsent />
+      {/* 🔥 CookieConsent csak ha NEM landing */}
+      {!isLanding && <CookieConsent />}
     </>
   );
 }

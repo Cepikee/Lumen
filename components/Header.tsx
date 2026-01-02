@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useContext, useState, useEffect } from "react";
 import { LayoutContext } from "./LayoutContext";
-
+import { usePathname } from "next/navigation";
 export default function Header() {
   const layout = useContext(LayoutContext);
-
+   const pathname = usePathname(); // 🔥 Ha landing oldalon vagyunk → ne jelenjen meg a header if (pathname.startsWith("/landing")) { return null; } 
   // Ha valamiért nincs context, fallback
   const searchTerm = layout?.searchTerm ?? "";
   const setSearchTerm = layout?.setSearchTerm ?? (() => {});
