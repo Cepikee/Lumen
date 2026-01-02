@@ -69,23 +69,25 @@ async function categorizeArticle(articleId) {
 
     const contentText = rows?.[0]?.content_text ?? "";
 
-    if (!contentText || contentText.trim().length < 30) {
+    if (!contentText || contentText.trim().length < 15) {
       console.error(`[CAT] ❌ Üres vagy túl rövid content_text! id=${articleId}`);
       return { ok: false };
     }
 
     // 2) Prompt
-    const prompt = `
-A következő cikk szövege alapján döntsd el, hogy melyik kategóriába tartozik.
-Csak EGY szót írj ki, pontosan az alábbi listából:
-
-${VALID_CATEGORIES.join(", ")}
-
-Ne írj mást, csak a kategória nevét.
-
+   const prompt = `
 Cikk szöveg:
 ${contentText}
-    `.trim();
+
+Kategóriák:
+${VALID_CATEGORIES.join(", ")}
+
+Feladat:
+Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kategória nevét írd ki.
+`.trim();
+
+
+
 
     // 3) AI hívás
     let category = await callOllama(prompt);
@@ -143,3 +145,5 @@ async function run() {
 }
 
 run();
+
+module.exports = { categorizeArticle };

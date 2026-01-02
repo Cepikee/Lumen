@@ -19,6 +19,7 @@ async function saveSummary(payload) {
       plagiarismScore,
       trendKeywords,
       source,
+      category
     } = payload;
 
     await conn.execute(
@@ -31,9 +32,10 @@ async function saveSummary(payload) {
         detailed_content,
         plagiarism_score,
         trend_keywords,
-        source
+        source,
+        category
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
       ON DUPLICATE KEY UPDATE
         url = VALUES(url),
         title = VALUES(title),               -- <-- ÚJ MEZŐ
@@ -41,7 +43,8 @@ async function saveSummary(payload) {
         detailed_content = VALUES(detailed_content),
         plagiarism_score = VALUES(plagiarism_score),
         trend_keywords = VALUES(trend_keywords),
-        source = VALUES(source)
+        source = VALUES(source),
+        category = VALUES(category)
       `,
       [
         articleId,
@@ -52,6 +55,7 @@ async function saveSummary(payload) {
         plagiarismScore,
         trendKeywords,
         source,
+        category
       ]
     );
 
