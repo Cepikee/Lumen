@@ -1,11 +1,21 @@
 "use client";
 
 import React, { useEffect, useState, useRef, useContext } from "react";
+import { useRouter } from "next/navigation";
 import FeedList from "@/components/FeedList";
 import type { FeedItem } from "@/components/FeedItemCard";
 import { LayoutContext } from "@/components/LayoutContext";
 
 export default function Page() {
+  const router = useRouter();
+
+  // 🔥 LANDING REDIRECT — csak egyszer jelenjen meg
+//  useEffect(() => {
+  //  const seen = localStorage.getItem("utom_seen_landing");
+   // if (!seen) {
+    //  router.replace("/landing");
+    //}
+  // }, []);
   const layout = useContext(LayoutContext);
 
   // Context fallback
