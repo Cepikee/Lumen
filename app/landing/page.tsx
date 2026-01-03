@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
-
+import Image from "next/image";
 export default function LandingPage() {
   const router = useRouter();
 
@@ -121,48 +121,176 @@ useEffect(() => {
 
       {/* VONAL */}
       <div className="section-divider" />
-{/* TRENDBLOKK */}
+{/* TREND + TRUST BLOKK EGYMÁS MELLETT */}
 <section className="section">
-  <div className="section-inner">
-    <div className="trend-box">
-      <div className="trend-header">
-        <h2>Trendek</h2>
-        <h3>Vizuális megjelenítése</h3>
-        <h4>Grafikon</h4>
-      </div>
+  <div className="section-inner two-columns">
 
-      <div className="trend-graph">
-        <div className="chart-area">
-          
-          {/* Y tengely */}
-          <div className="trend-labels-y">
-            <span>3</span>
-            <span>2</span>
-            <span>1</span>
+    {/* --- TRENDEK BLOKK (változatlan) --- */}
+    <div className="trend-static icons refined">
+      <header className="trend-header center">
+        <h2>A rendszer fő képességei</h2>
+        <p className="lead">Három technológiai pillér, amelyre az Utom elemzőmotorja épül.</p>
+      </header>
+
+      <div className="cards">
+        {/* Bal: Elemzés */}
+        <article className="card">
+          <div className="icon-wrap">
+            <Image src="/data-analysis-svgrepo-com.svg" alt="Elemzés ikon" width={120} height={120} className="img-logo" />
           </div>
-
-          {/* Sávok + címkék */}
-          <div className="bars-wrapper">
-            <div className="trend-bar-group">
-              <div className="trend-bar bar1"></div>
-              <div className="trend-bar bar2"></div>
-              <div className="trend-bar bar3"></div>
-            </div>
-
-            <div className="trend-labels-x">
-              <span className="label">Politika</span>
-              <span className="label">Tech</span>
-              <span className="label">Gazdaság</span>
-            </div>
+          <div className="card-body">
+            <h4 className="card-title">Elemzés</h4>
+            <p className="card-desc">
+              A rendszer automatikusan felismeri, ha több, nagyon hasonló hír jelenik meg.
+            </p>
+            <ul className="card-features emphasized">
+              <li>Duplikátumok összefésülése</li>
+              <li>Forráskonzisztencia ellenőrzése</li>
+              <li>Prioritás a teljes, hiteles beszámolónak</li>
+            </ul>
           </div>
+        </article>
 
-          {/* X tengely */}
-          <div className="trend-axis"></div>
-        </div>
+        {/* Közép */}
+        <article className="card">
+          <div className="icon-wrap">
+            <Image src="/availability-svgrepo-com.svg" alt="Forrásegyensúly ikon" width={120} height={120} className="img-logo" />
+          </div>
+          <div className="card-body">
+            <h4 className="card-title">Forrásegyensúly</h4>
+            <p className="card-desc">
+              Több tucat magyar portálból gyűjtünk, így csökken a torzítás.
+            </p>
+            <ul className="card-features emphasized">
+              <li>Sokforrású aggregáció</li>
+              <li>Kiegyensúlyozott nézet</li>
+              <li>Forrás‑átláthatóság</li>
+            </ul>
+          </div>
+        </article>
+
+        {/* Jobb */}
+        <article className="card">
+          <div className="icon-wrap">
+            <Image src="/machine-vision-svgrepo-com.svg" alt="Időbeli változás ikon" width={120} height={120} className="img-logo" />
+          </div>
+          <div className="card-body">
+            <h4 className="card-title">Időbeli változás</h4>
+            <p className="card-desc">
+              A rendszer kimutatja, hogyan változnak a trendek időben.
+            </p>
+            <ul className="card-features emphasized">
+              <li>Idősoros kimutatások</li>
+              <li>Kulcsszó‑trendek</li>
+              <li>Napi dinamika</li>
+            </ul>
+          </div>
+        </article>
       </div>
     </div>
+
+   {/* --- ÚJ BLOKK: MIÉRT MEGBÍZHATÓ AZ UTOM? --- */}
+<div className="trend-static icons refined">
+  <header className="trend-header center">
+    <h2>Mitől prémium az Utom?</h2>
+    <p className="lead">Három élményközpontú előny, amely megkülönbözteti a hagyományos hírgyűjtőktől.</p>
+  </header>
+
+  <div className="cards">
+
+    {/* Bal: Prémium élmény */}
+    <article className="card">
+      <div className="icon-wrap">
+        <Image
+          src="/ai-science-spark.svg"
+          alt="Prémium élmény ikon"
+          width={120}
+          height={120}
+          className="img-logo"
+        />
+      </div>
+
+      <div className="card-body">
+        <h4 className="card-title">Prémium élmény</h4>
+        <p className="card-desc">
+          Letisztult felület, amely a lényeget emeli ki : felesleges zaj nélkül.
+        </p>
+
+        <ul className="card-features emphasized">
+          <li>Gyors, letisztult felület</li>
+          <li>Intelligens kiemelések</li>
+          <li>Minimális zaj, maximális lényeg</li>
+        </ul>
+      </div>
+    </article>
+
+    {/* Közép: Rendszer-integritás */}
+    <article className="card">
+      <div className="icon-wrap">
+        <Image
+          src="/shield-2.svg"
+          alt="Rendszer-integritás ikon"
+          width={120}
+          height={120}
+          className="img-logo"
+        />
+      </div>
+
+      <div className="card-body">
+        <h4 className="card-title">Rendszer‑integritás</h4>
+        <p className="card-desc">
+          Stabil, hibamentes működésre tervezett háttérrendszer, amely folyamatosan ellenőrzi önmagát.
+        </p>
+
+        <ul className="card-features emphasized">
+          <li>Automatikus minőségellenőrzések</li>
+          <li>Stabil, kiszámítható működés</li>
+          <li>Megbízható háttérfolyamatok</li>
+        </ul>
+      </div>
+    </article>
+
+    {/* Jobb: AI-alapú működés */}
+    <article className="card">
+      <div className="icon-wrap">
+        <Image
+          src="/cloud-check-flat.svg"
+          alt="AI-alapú működés ikon"
+          width={120}
+          height={120}
+          className="img-logo"
+        />
+      </div>
+
+      <div className="card-body">
+        <h4 className="card-title">AI‑alapú működés</h4>
+        <p className="card-desc">
+          Az Utom mesterséges intelligenciával dolgozza fel a híreket emberi beavatkozás nélkül, valós időben.
+        </p>
+
+        <ul className="card-features emphasized">
+          <li>Automatikus tartalomelemzés</li>
+          <li>Valós idejű felismerések</li>
+          <li>Öntanuló működés</li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+</div>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
