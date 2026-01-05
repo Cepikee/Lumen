@@ -41,13 +41,21 @@ async function scrapeArticle(articleId, url) {
     const html = await fetchHtml(url);
     const text = extractArticleText(html, url);
 
-    if (!text || text.length < 200) {
+    // 🔥 ÚJ LOGIKA: ha túl rövid → FAILED státusz, nincs retry
+    if (!text || text.length < 40) {
       console.warn(
-        `[SCRAPER] ⚠️ Túl rövid vagy üres szöveg (len=${text.length}). articleId=${articleId}`
+        `[SCRAPER] ⚠️ Túl rövid szöveg (len=${text.length}). FAILED státusz beállítva. articleId=${articleId}`
       );
-      return { ok: false, error: "Túl rövid vagy üres kinyert szöveg" };
+
+      await conn.execute(
+        `UPDATE articles SET status = 'failed', content_text = NULL WHERE id = ?`,
+        [articleId]
+      );
+
+      return { ok: true, skipped: true }; // <-- NEM hiba → pipeline nem retry-ol
     }
 
+    // 🔥 Normál eset: elég hosszú → mentjük
     await conn.execute(
       `UPDATE articles SET content_text = ?, status = 'pending' WHERE id = ?`,
       [text, articleId]
@@ -57,6 +65,7 @@ async function scrapeArticle(articleId, url) {
       `[SCRAPER] ✅ Sikeres scraping. len=${text.length} articleId=${articleId}`
     );
     return { ok: true, text };
+
   } catch (err) {
     console.error(
       `[SCRAPER] ❌ Hiba scraping közben. articleId=${articleId} - ${err.message}`

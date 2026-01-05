@@ -92,7 +92,12 @@ async function callOllama(prompt, timeoutMs = 180000) {
 
 async function runOllamaKeywords(text) {
   const raw = await callOllama(
-`Adj vissza pontosan 6–10 magyar kulcsszót a szöveg alapján.
+`Ez a szöveg:
+
+${text}
+
+Most adj vissza pontosan 6–10 magyar kulcsszót a fenti szöveg alapján.
+
 SZABÁLYOK:
 - Csak kulcsszavakat adj vissza.
 - Ne írj mondatot.
@@ -103,12 +108,8 @@ SZABÁLYOK:
 - Ne ismételd meg a promptot.
 - Csak vesszővel elválasztott kulcsszavakat adj vissza.
 
-Szöveg:
-${text}
-
 Kimenet (csak kulcsszavak):`
   );
-
   return raw
     .split(/[,\n]/)
     .map(k => k.trim())
@@ -188,41 +189,69 @@ async function processArticlePipeline(article) {
 await fetch("http://127.0.0.1:3000/api/fetch-feed");
 
 // 0) Biztosítsuk, hogy legyen rendes content_text (SCRAPER)
+// 0) Biztosítsuk, hogy legyen rendes content_text (SCRAPER)
 if (!article.content_text || article.content_text.trim().length < 400) {
   console.log(
     `[SCRAPER] ℹ️ Túl rövid content_text (len=${(article.content_text || "").length}), scraping próbálkozás...`
   );
+
   const scrapeRes = await scrapeArticle(articleId, article.url_canonical || "");
+
+  // 🔥 ÚJ: ha a scraper SKIPPED → FAILED státusz, nincs retry
+  if (scrapeRes.skipped) {
+    console.warn(`[SCRAPER] ⛔ Rövid cikk SKIPPED. FAILED státusz beállítva. articleId=${articleId}`);
+
+    const conn = await mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "jelszo",
+      database: "projekt2025",
+    });
+
+    await conn.execute(
+      "UPDATE articles SET status = 'failed' WHERE id = ?",
+      [articleId]
+    );
+
+    await conn.end();
+    return; // 🔥 NINCS HIBA, NINCS RETRY
+  }
+
   // ❗ 404 → azonnal FAILED, nincs retry, nincs pending loop
   if (!scrapeRes.ok) {
     if (scrapeRes.error && scrapeRes.error.includes("404")) {
       console.error(
         `[SCRAPER] ❌ 404 – nem létező oldal. articleId=${articleId}`
       );
-      // 🔧 Itt kell új DB kapcsolatot nyitni
+
       const conn = await mysql.createConnection({
         host: "localhost",
         user: "root",
         password: "jelszo",
         database: "projekt2025",
       });
+
       await conn.execute(
         "UPDATE articles SET status = 'failed' WHERE id = ?",
         [articleId]
       );
+
       await conn.end();
       console.log(`[SCRAPER] ⛔ Cikk FAILED státuszba téve (404).`);
-      return; // kilépünk a pipeline-ból, nem dobunk hibát
+      return;
     }
+
     // ❗ Minden más scraper hiba → normál error
     console.error(
       `[SCRAPER] ❌ Scraping sikertelen. Megszakítjuk a pipeline-t. articleId=${articleId}`
     );
     throw new Error(`Scraping sikertelen: ${scrapeRes.error || "ismeretlen hiba"}`);
   }
+
   // ✔️ Sikeres scraping → friss szöveg beállítása
   article.content_text = scrapeRes.text;
 }
+
 
 // 0/B) Kategorizálás (scraping után)
 try {
