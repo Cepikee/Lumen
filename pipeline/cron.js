@@ -23,7 +23,7 @@ const CYAN = "\x1b[36m";
 const BATCH_SIZE = 1;
 const LOOP_DELAY_MS = 60000;
 const CONCURRENCY = 2;
-const ARTICLE_TIMEOUT_MS = 60000;
+const ARTICLE_TIMEOUT_MS = 600000;
 const MAX_RETRIES = 3;
 
 console.log(`${GREEN}✅ cron.js elindult!${RESET}`);
