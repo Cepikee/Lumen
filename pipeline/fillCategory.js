@@ -1,7 +1,7 @@
 const mysql = require("mysql2/promise");
 
 // --- AI hívás ---
-async function callOllama(prompt, timeoutMs = 30000) {
+async function callOllama(prompt, timeoutMs = 120000) {
   const controller = new AbortController();
   const t = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -10,7 +10,7 @@ async function callOllama(prompt, timeoutMs = 30000) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "llama3:latest",
+        model: "llama3:8b-instruct-q4_0",
         prompt,
         stream: false
       }),
@@ -75,7 +75,7 @@ async function categorizeArticle(articleId) {
     }
 
     // 2) Prompt
-   const prompt = `
+    const prompt = `
 Cikk szöveg:
 ${contentText}
 
@@ -85,9 +85,6 @@ ${VALID_CATEGORIES.join(", ")}
 Feladat:
 Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kategória nevét írd ki.
 `.trim();
-
-
-
 
     // 3) AI hívás
     let category = await callOllama(prompt);
