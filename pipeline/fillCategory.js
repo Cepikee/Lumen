@@ -1,4 +1,7 @@
 const mysql = require("mysql2/promise");
+module.exports = async function categorizeArticle() {
+  return { ok: false };
+};
 
 // --- AI hívás ---
 async function callOllama(prompt, timeoutMs = 120000) {
