@@ -71,9 +71,10 @@ async function callOllama(prompt, timeoutMs = 180000) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "llama3:latest",
+        model: "phi3:mini",
         prompt,
-        stream: false,
+        stream: true,
+        keep_alive: 0
       }),
       signal: controller.signal,
     });

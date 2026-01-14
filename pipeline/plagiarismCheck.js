@@ -10,7 +10,7 @@ async function callOllama(prompt, timeoutMs = 180000) {
     const res = await fetch("http://127.0.0.1:11434/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model: "llama3:latest", prompt, stream: false }),
+      body: JSON.stringify({ model: "phi3:mini", prompt, stream: false }),
       signal: controller.signal,
     });
 

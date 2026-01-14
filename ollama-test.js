@@ -5,7 +5,7 @@ async function run() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "llama3:latest", // vagy "llama3", ha azt töltötted le
+      model: "phi3:mini", // vagy "llama3", ha azt töltötted le
       prompt: "Foglalj össze röviden magyarul egy hírt: Lando Norris az F1 2025-ös világbajnoka."
     })
   });
