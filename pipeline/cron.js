@@ -255,34 +255,34 @@ if (!article.content_text || article.content_text.trim().length < 400) {
 
 
 // 0/B) Kategorizálás (scraping után)
-try {
-  console.log(`[CAT] 🏷️ Kategorizálás indul: articleId=${articleId}`);
-  const catRes = await categorizeArticle(articleId);
-
-  if (!catRes?.ok) {
-    console.warn(`[CAT] ⚠️ Kategorizálás sikertelen, fallback később. articleId=${articleId}`);
-  } else {
-    // 🔥 Friss kategória beolvasása az article objektumba
-    const conn2 = await mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "jelszo",
-      database: "projekt2025",
-    });
-
-    const [catRow] = await conn2.execute(
-      "SELECT category FROM articles WHERE id = ?",
-      [articleId]
-    );
-
-    await conn2.end();
-
-    article.category = catRow?.[0]?.category || null;
-    console.log(`[CAT] ✔️ Kategória beállítva a pipeline-ban: ${article.category}`);
-  }
-} catch (err) {
-  console.error(`[CAT] ❌ Kategorizálási hiba:`, err);
-}
+// try {
+//  console.log(`[CAT] 🏷️ Kategorizálás indul: articleId=${articleId}`);
+ //  const catRes = await categorizeArticle(articleId);
+// 
+ //  if (!catRes?.ok) {
+  //   console.warn(`[CAT] ⚠️ Kategorizálás sikertelen, fallback később. articleId=${articleId}`);
+ //  } else {
+ //    // 🔥 Friss kategória beolvasása az article objektumba
+ //    const conn2 = await mysql.createConnection({
+ //      host: "localhost",
+  //     user: "root",
+   //    password: "jelszo",
+   //    database: "projekt2025",
+  //   });
+// 
+   //  const [catRow] = await conn2.execute(
+  //     "SELECT category FROM articles WHERE id = ?",
+  //    [articleId]
+  //   );
+// 
+  //   await conn2.end();
+// 
+ //   article.category = catRow?.[0]?.category || null;
+  //   console.log(`[CAT] ✔️ Kategória beállítva a pipeline-ban: ${article.category}`);
+//   }
+// } catch (err) {
+ //  console.error(`[CAT] ❌ Kategorizálási hiba:`, err);
+// }
 
 
 
