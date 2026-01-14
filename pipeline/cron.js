@@ -62,7 +62,7 @@ async function runWithRetries(label, fn) {
 }
 
 // ---- AI hívás + kulcsszavak generálása ----
-async function callOllama(prompt, timeoutMs = 180000) {
+async function callOllama(prompt, numPredict = 512, timeoutMs = 180000) {
   const controller = new AbortController();
   const t = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -74,7 +74,8 @@ async function callOllama(prompt, timeoutMs = 180000) {
         model: "llama3:latest",
         prompt,
         stream: true,
-        keep_alive: 0
+        keep_alive: 0,
+        num_predict: numPredict
       }),
       signal: controller.signal,
     });
@@ -109,7 +110,8 @@ SZABÁLYOK:
 - Ne ismételd meg a promptot.
 - Csak vesszővel elválasztott kulcsszavakat adj vissza.
 
-Kimenet (csak kulcsszavak):`
+Kimenet (csak kulcsszavak):` ,
+100
   );
   return raw
     .split(/[,\n]/)
@@ -146,7 +148,7 @@ Kimenet (csak a cím):
 `;
 
 
-  return await callOllama(prompt);
+  return await callOllama(prompt, 60);
 }
 
 

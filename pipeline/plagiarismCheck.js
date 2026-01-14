@@ -1,8 +1,7 @@
-// pipeline/plagiarismCheck.js
 const mysql = require("mysql2/promise");
 
 // --- AI hívás ---
-async function callOllama(prompt, timeoutMs = 180000) {
+async function callOllama(prompt, numPredict = 128, timeoutMs = 180000) {
   const controller = new AbortController();
   const t = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -10,7 +9,15 @@ async function callOllama(prompt, timeoutMs = 180000) {
     const res = await fetch("http://127.0.0.1:11434/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model: "llama3:latest", prompt, stream: true }),
+      body: JSON.stringify({
+        model: "llama3:latest",
+        prompt,
+        stream: true,
+        keep_alive: 0,
+        options: {
+          num_predict: numPredict
+        }
+      }),
       signal: controller.signal,
     });
 
@@ -38,7 +45,8 @@ Szöveg:
 ${shortSummary}
     `.trim();
 
-    const raw = await callOllama(prompt);
+    // AI hívás limitálva 128 tokenre
+    const raw = await callOllama(prompt, 128);
 
     // --- plágium pontszám kinyerése ---
     const score = parseFloat(raw);
