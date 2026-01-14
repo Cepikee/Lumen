@@ -12,7 +12,7 @@ async function callOllama(prompt, numPredict = 512, timeoutMs = 180000) {
   body: JSON.stringify({
     model: "llama3:latest",
     prompt,
-    stream: true,
+    stream: false,
     keep_alive: 0,
     options: {
       num_predict: numPredict

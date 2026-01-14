@@ -13,7 +13,7 @@ async function callOllama(prompt, timeoutMs = 180000) {
       body: JSON.stringify({
         model: "llama3:latest",
         prompt,
-        stream: true,
+        stream: false,
       }),
       signal: controller.signal,
     });
