@@ -78,7 +78,7 @@ async function callOllama(prompt: string, timeoutMs = 180000): Promise<string> {
     const res = await fetch("http://127.0.0.1:11434/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model: "phi3:mini", prompt, stream: false }),
+      body: JSON.stringify({ model: "llama3:latest", prompt, stream: true }),
       signal: controller.signal,
     });
     const raw = await res.text();
@@ -97,7 +97,7 @@ async function callOllamaCategory(prompt: string): Promise<string> {
   const res = await fetch("http://127.0.0.1:11434/api/generate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "llama3.1:8b-instruct-q4_K_M", prompt, stream: false }),
+    body: JSON.stringify({ model: "llama3.1:8b-instruct-q4_K_M", prompt, stream: true }),
   });
 
   const raw = await res.text();

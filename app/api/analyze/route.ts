@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     body: JSON.stringify({
       model: "llama3",
       prompt: `Elemezd és foglald össze ezt a cikket magyarul:\n\n${text}`,
-      stream: false,
+      stream: true,
     }),
   });
 
