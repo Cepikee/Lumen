@@ -34,12 +34,11 @@ export async function POST(req: Request) {
     const hashed = await bcrypt.hash(password, 10);
 
     // 4) Jelszó frissítése a users táblában
-    await db.query("UPDATE users SET password = ? WHERE id = ?", [hashed, userId]);
+    await db.query("UPDATE users SET password_hash = ? WHERE id = ?", [hashed, userId]);
 
     // 5) Token törlése
     await db.query("DELETE FROM password_reset_tokens WHERE token = ?", [token]);
 
-    // 🔥 Siker jelzés a frontendnek
     return NextResponse.json({ success: true, redirect: "/?resetSuccess=1" });
 
   } catch (err: any) {
