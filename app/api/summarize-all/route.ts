@@ -139,7 +139,7 @@ Szöveg: ${text}`
 
 
 // Kategória
-export async function runOllamaCategory(text: string) {
+ async function runOllamaCategory(text: string) {
   if (!text || text.trim().length < 5) {
     throw new Error("Nincs szöveg a kategorizáláshoz, újrafuttatás szükséges.");
   }
