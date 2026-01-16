@@ -3,15 +3,14 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  // Turbopack teljes kikapcsolása
   experimental: {
     serverActions: {
-      bodySizeLimit: "2mb",
+      bodySizeLimit: "15mb",
     },
   },
 
-  // Webpack kényszerítése
   distDir: ".next",
+
   webpack: (config) => {
     return config;
   },
