@@ -1,22 +1,18 @@
-// next.config.ts
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  // Turbopack explicit engedélyezése (kötelező Next.js 16-ban)
-  turbopack: {
-    root: "/var/www/utom/Lumen",
+  // Turbopack teljes kikapcsolása
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "2mb",
+    },
   },
 
-  // Sourcemap-ek kikapcsolása buildben
-  productionBrowserSourceMaps: false,
-
-  // Sourcemap-ek kikapcsolása fejlesztés alatt
-  webpack(config, { dev }) {
-    if (dev) {
-      config.devtool = false;
-    }
+  // Webpack kényszerítése
+  distDir: ".next",
+  webpack: (config) => {
     return config;
   },
 };
