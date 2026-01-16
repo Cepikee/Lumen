@@ -17,10 +17,18 @@ export default function LoginModal() {
   const [forgotEmail, setForgotEmail] = useState("");
   const [forgotStatus, setForgotStatus] = useState<"idle" | "loading" | "success">("idle");
 
+  // 🔥 LOGIN + reCAPTCHA
   const handleLogin = async () => {
+    // reCAPTCHA token lekérése
+    // @ts-ignore
+    const recaptchaToken = await grecaptcha.execute(
+      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
+      { action: "login" }
+    );
+
     const res = await fetch("/api/auth/login", {
       method: "POST",
-      body: JSON.stringify({ email, password, pin }),
+      body: JSON.stringify({ email, password, pin, recaptchaToken }),
     });
 
     const data = await res.json();
@@ -32,14 +40,21 @@ export default function LoginModal() {
     }
   };
 
+  // 🔥 FORGOT PASSWORD + reCAPTCHA
   const handleForgot = async (e: any) => {
     e.preventDefault();
     setForgotStatus("loading");
 
+    // @ts-ignore
+    const recaptchaToken = await grecaptcha.execute(
+      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
+      { action: "forgot_password" }
+    );
+
     await fetch("/api/auth/request-password-reset", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: forgotEmail }),
+      body: JSON.stringify({ email: forgotEmail, recaptchaToken }),
     });
 
     setForgotStatus("success");
@@ -109,7 +124,6 @@ export default function LoginModal() {
                   Belépés
                 </button>
 
-                {/* 🔥 IDE JÖN A LINK */}
                 <p
                   className="mt-3 text-center"
                   style={{ cursor: "pointer", textDecoration: "underline" }}

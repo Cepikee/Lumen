@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { db } from "@/lib/db";
 import { mailer } from "@/lib/mailer";
+import { verifyRecaptcha } from "@/lib/recaptcha";
+
 
 // IP kinyerése reverse proxy mögül
 function getIp(req: Request) {
@@ -13,13 +15,20 @@ function getIp(req: Request) {
 export async function POST(req: Request) {
   try {
     const ip = getIp(req);
-    const { email } = await req.json();
+    const { email, recaptchaToken } = await req.json();
 
     if (!email) {
       return NextResponse.json({ success: false, error: "Email is required" });
     }
 
-    // 1) RATE LIMIT: max 5 kérés / 30 perc / IP
+    // 🔥 1) reCAPTCHA ellenőrzés
+    const score = await verifyRecaptcha(recaptchaToken);
+    if (score < 0.5) {
+      // Nem árulunk el semmit
+      return NextResponse.json({ success: true });
+    }
+
+    // 🔥 2) RATE LIMIT: max 5 kérés / 30 perc / IP
     const [ipRows]: any = await db.query(
       `SELECT COUNT(*) AS cnt
        FROM password_reset_requests
@@ -29,17 +38,14 @@ export async function POST(req: Request) {
     );
 
     if (ipRows[0].cnt >= 5) {
-      // logoljuk a blokkolt kérést is
       await db.query(
         "INSERT INTO password_reset_requests (ip, email) VALUES (?, ?)",
         [ip, email]
       );
-
-      // mindig success, hogy ne áruljunk el semmit
       return NextResponse.json({ success: true });
     }
 
-    // 2) EMAIL ALAPÚ LIMIT: max 3 reset / 30 perc / email
+    // 🔥 3) EMAIL ALAPÚ LIMIT: max 3 reset / 30 perc / email
     const [emailRows]: any = await db.query(
       `SELECT COUNT(*) AS cnt
        FROM password_reset_requests
@@ -53,33 +59,29 @@ export async function POST(req: Request) {
         "INSERT INTO password_reset_requests (ip, email) VALUES (?, ?)",
         [ip, email]
       );
-
       return NextResponse.json({ success: true });
     }
 
-    // 3) Logoljuk a kérést
+    // 🔥 4) Logoljuk a kérést
     await db.query(
       "INSERT INTO password_reset_requests (ip, email) VALUES (?, ?)",
       [ip, email]
     );
 
-    // 4) Felhasználó keresése
+    // 🔥 5) Felhasználó keresése
     const [users]: any = await db.query(
       "SELECT id FROM users WHERE email = ? LIMIT 1",
       [email]
     );
 
     if (!users || users.length === 0) {
-      // Biztonsági okból akkor is success
       return NextResponse.json({ success: true });
     }
 
     const userId = users[0].id;
 
-    // 5) Token generálása
+    // 🔥 6) Token generálása
     const token = crypto.randomBytes(32).toString("hex");
-
-    // 6) Token mentése (15 perc lejárat)
     const expiresAt = new Date(Date.now() + 1000 * 60 * 15);
 
     await db.query(
@@ -87,10 +89,10 @@ export async function POST(req: Request) {
       [userId, token, expiresAt]
     );
 
-    // 7) Reset link összeállítása
+    // 🔥 7) Reset link összeállítása
     const resetUrl = `https://utom.hu/reset-password?token=${token}`;
 
-    // 8) Email küldése
+    // 🔥 8) Email küldése
     await mailer.sendMail({
       from: `"Utom.hu" <noreply@utom.hu>`,
       to: email,
