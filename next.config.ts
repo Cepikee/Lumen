@@ -5,7 +5,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   // Turbopack explicit engedélyezése (kötelező Next.js 16-ban)
-  turbopack: {},
+  turbopack: {
+    root: "/var/www/utom/Lumen",
+  },
 
   // Sourcemap-ek kikapcsolása buildben
   productionBrowserSourceMaps: false,
