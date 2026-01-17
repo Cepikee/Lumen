@@ -1,6 +1,74 @@
 "use client";
 
+import { useEffect } from "react";
+
 export default function PremiumPage() {
+  useEffect(() => {
+    function applyVarsForBody() {
+      const root = document.documentElement;
+      const isDark = document.body.classList.contains("dark");
+      const isLight = document.body.classList.contains("light");
+
+      if (isDark) {
+        root.style.setProperty("--premium-bg", "#0f1113");
+        root.style.setProperty("--premium-section", "#121316");
+        root.style.setProperty("--premium-card", "#17181a");
+        root.style.setProperty("--premium-text", "#e6e6e6");
+      } else if (isLight) {
+        root.style.setProperty("--premium-bg", "#ffffff");
+        root.style.setProperty("--premium-section", "#f5f5f5");
+        root.style.setProperty("--premium-card", "#ffffff");
+        root.style.setProperty("--premium-text", "#000000");
+      } else {
+        // system vagy nincs explicit osztály: fallback a prefers-color-scheme alapján
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (prefersDark) {
+          root.style.setProperty("--premium-bg", "#0f1113");
+          root.style.setProperty("--premium-section", "#121316");
+          root.style.setProperty("--premium-card", "#17181a");
+          root.style.setProperty("--premium-text", "#e6e6e6");
+        } else {
+          root.style.setProperty("--premium-bg", "#ffffff");
+          root.style.setProperty("--premium-section", "#f5f5f5");
+          root.style.setProperty("--premium-card", "#ffffff");
+          root.style.setProperty("--premium-text", "#000000");
+        }
+      }
+    }
+
+    // Első alkalmazás
+    applyVarsForBody();
+
+    // Figyeljük a body class változását (ThemeSwitch frissítésekor)
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (m.type === "attributes" && (m.attributeName === "class" || m.attributeName === "className")) {
+          applyVarsForBody();
+          break;
+        }
+      }
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+
+    // Ha a prefers-color-scheme változik (rendszer mód), frissítjük
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const mqHandler = () => applyVarsForBody();
+    if (mq.addEventListener) {
+      mq.addEventListener("change", mqHandler);
+    } else {
+      mq.addListener(mqHandler);
+    }
+
+    return () => {
+      observer.disconnect();
+      if (mq.removeEventListener) {
+        mq.removeEventListener("change", mqHandler);
+      } else {
+        mq.removeListener(mqHandler);
+      }
+    };
+  }, []);
+
   return (
     <main
       className="premium-page pb-5"
