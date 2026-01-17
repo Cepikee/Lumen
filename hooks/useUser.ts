@@ -7,6 +7,9 @@ export function useUser() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // 🔥 A user theme külön state-ben is elérhető
+  const [theme, setTheme] = useState<"dark" | "light" | "system">("system");
+
   useEffect(() => {
     async function load() {
       try {
@@ -18,13 +21,21 @@ export function useUser() {
         const data = await res.json();
 
         if (data.loggedIn) {
-          setUser(data.user as User);
+          const u = data.user as User;
+          setUser(u);
+
+          // 🔥 Ha van theme mező, beállítjuk
+          if (u.theme) {
+            setTheme(u.theme as "dark" | "light" | "system");
+          }
         } else {
           setUser(null);
+          setTheme("system"); // alapértelmezett
         }
       } catch (err) {
         console.error("Auth error:", err);
         setUser(null);
+        setTheme("system");
       }
 
       setLoading(false);
@@ -33,5 +44,5 @@ export function useUser() {
     load();
   }, []);
 
-  return { user, loading };
+  return { user, theme, loading, setTheme };
 }
