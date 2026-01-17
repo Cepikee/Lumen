@@ -4,16 +4,42 @@ import { useState } from "react";
 import { User } from "@/types/User";
 import ThemeSwitch from "@/components/ThemeSwitch";
 
-
 export default function SettingsView({ user }: { user: User }) {
   const [nickname, setNickname] = useState(user.nickname);
   const [bio, setBio] = useState(user.bio || "");
-  const [theme, setTheme] = useState(user.theme);
+  const [saving, setSaving] = useState(false);
 
   const premiumActive =
     user.is_premium ||
     (user.premium_until &&
       new Date(user.premium_until) > new Date());
+
+  async function handleSave() {
+    setSaving(true);
+
+    try {
+      const res = await fetch("/api/user/update", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nickname,
+          bio,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        alert("Beállítások elmentve!");
+      } else {
+        alert("Hiba történt: " + data.message);
+      }
+    } catch (err) {
+      alert("Váratlan hiba történt.");
+    }
+
+    setSaving(false);
+  }
 
   return (
     <div style={{ padding: "20px", maxWidth: "450px" }}>
@@ -64,12 +90,11 @@ export default function SettingsView({ user }: { user: User }) {
         />
       </div>
 
-{/* THEME */}
-<div className="mb-4">
-  <label className="form-label fw-bold">Téma</label>
-  <ThemeSwitch />
-</div>
-
+      {/* THEME */}
+      <div className="mb-4">
+        <label className="form-label fw-bold">Téma</label>
+        <ThemeSwitch />
+      </div>
 
       {/* EMAIL */}
       <div className="mb-3">
@@ -90,8 +115,12 @@ export default function SettingsView({ user }: { user: User }) {
       </div>
 
       {/* SAVE BUTTON */}
-      <button className="btn btn-primary w-100">
-        Mentés (hamarosan)
+      <button
+        onClick={handleSave}
+        className="btn btn-primary w-100"
+        disabled={saving}
+      >
+        {saving ? "Mentés..." : "Mentés"}
       </button>
     </div>
   );

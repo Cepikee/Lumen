@@ -6,6 +6,7 @@ import Header from "./Header";
 import CookieConsent from "./CookieConsent";
 import SidebarWrapper from "./SidebarWrapper";
 import { LayoutContext } from "./LayoutContext";
+import { useUser } from "@/hooks/useUser"; // 🔥 THEME IMPORT
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -15,19 +16,56 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   const pathname = usePathname();
   const isLanding = pathname.includes("landing");
 
+  const { theme } = useUser(); // 🔥 USER THEME
+
+  // 🔥 APPLY THEME TO HTML
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (theme === "dark") {
+      root.classList.add("dark");
+      root.setAttribute("data-bs-theme", "dark");
+      return;
+    }
+
+    if (theme === "light") {
+      root.classList.remove("dark");
+      root.setAttribute("data-bs-theme", "light");
+      return;
+    }
+
+    // SYSTEM MODE
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const applySystemTheme = () => {
+      if (prefersDark.matches) {
+        root.classList.add("dark");
+        root.setAttribute("data-bs-theme", "dark");
+      } else {
+        root.classList.remove("dark");
+        root.setAttribute("data-bs-theme", "light");
+      }
+    };
+
+    applySystemTheme();
+    prefersDark.addEventListener("change", applySystemTheme);
+
+    return () => {
+      prefersDark.removeEventListener("change", applySystemTheme);
+    };
+  }, [theme]);
+
+  // --- EREDETI KÓD ---
   const [viewMode, setViewMode] = useState<"card" | "compact">("card");
   const [isTodayMode, setIsTodayMode] = useState(false);
 
-  // 🔥 Kereső
   const [searchTerm, setSearchTerm] = useState("");
 
-  // --- Forrás szűrés ---
   const [sourceFilters, setSourceFilters] = useState<string[]>([]);
   const [availableSources, setAvailableSources] = useState<
     { id: number; name: string }[]
   >([]);
 
-  // --- Kategória szűrés ---
   const [categoryFilters, setCategoryFilters] = useState<string[]>([]);
   const [availableCategories, setAvailableCategories] = useState<string[]>([
     "Egészségügy",
@@ -40,7 +78,6 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     "Tech",
   ]);
 
-  // Források betöltése
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -73,24 +110,16 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
         value={{
           viewMode,
           isTodayMode,
-
-          // Források
           sourceFilters,
           availableSources,
-
-          // Kategóriák
           categoryFilters,
           availableCategories,
-
-          // Keresés
           searchTerm,
           setSearchTerm,
         }}
       >
-        {/* 🔥 Header csak ha NEM landing */}
         {!isLanding && <Header />}
 
-        {/* 🔥 SidebarWrapper csak ha NEM landing */}
         {!isLanding ? (
           <SidebarWrapper
             onViewModeChange={handleViewModeChange}
@@ -129,7 +158,6 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
         )}
       </LayoutContext.Provider>
 
-      {/* 🔥 CookieConsent csak ha NEM landing */}
       {!isLanding && <CookieConsent />}
     </>
   );

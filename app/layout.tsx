@@ -42,26 +42,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           async
           defer
         />
+
         {/* Google Analytics 4 */}
-<script
-  async
-  src="https://www.googletagmanager.com/gtag/js?id=G-TZ5DTR2N2S"
-></script>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-TZ5DTR2N2S"
+        ></script>
 
-<script
-  dangerouslySetInnerHTML={{
-    __html: `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-TZ5DTR2N2S');
-    `,
-  }}
-/>
-
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-TZ5DTR2N2S');
+            `,
+          }}
+        />
       </head>
 
       <body className="d-flex flex-column min-vh-100">
+        {/* 🔥 A theme-kezelés a ClientLayout-ban történik */}
         <ClientLayout>{children}</ClientLayout>
 
         <script
