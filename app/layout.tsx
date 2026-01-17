@@ -20,34 +20,12 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const setInitialTheme = `
-  (() => {
-    try {
-      // Ha a ClientLayout már beállította a témát, ne írjuk felül
-      if (document.documentElement.hasAttribute('data-user-theme')) return;
-
-      const stored = localStorage.getItem('theme');
-      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = stored ?? (systemDark ? 'dark' : 'light');
-
-      document.documentElement.setAttribute('data-bs-theme', theme);
-
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    } catch {}
-  })();
-`;
-
-
   return (
     <html lang="hu" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
+        {/* 🔥 NINCS többé setInitialTheme script */}
 
-        {/* 🔥 reCAPTCHA v3 script — GLOBÁLISAN BETÖLTŐDIK */}
+        {/* reCAPTCHA v3 */}
         <script
           src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
           async
@@ -73,7 +51,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body className="d-flex flex-column min-vh-100">
-        {/* 🔥 A theme-kezelés a ClientLayout-ban történik */}
         <ClientLayout>{children}</ClientLayout>
 
         <script
