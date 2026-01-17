@@ -21,7 +21,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   // 🔥 APPLY THEME TO HTML
   useEffect(() => {
     const root = document.documentElement;
-
+    root.setAttribute("data-user-theme", "true");
     if (theme === "dark") {
       root.classList.add("dark");
       root.setAttribute("data-bs-theme", "dark");

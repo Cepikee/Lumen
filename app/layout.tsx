@@ -21,15 +21,26 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const setInitialTheme = `
-    (() => {
-      try {
-        const stored = localStorage.getItem('theme');
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = stored ?? (systemDark ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-bs-theme', theme);
-      } catch {}
-    })();
-  `;
+  (() => {
+    try {
+      // Ha a ClientLayout már beállította a témát, ne írjuk felül
+      if (document.documentElement.hasAttribute('data-user-theme')) return;
+
+      const stored = localStorage.getItem('theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = stored ?? (systemDark ? 'dark' : 'light');
+
+      document.documentElement.setAttribute('data-bs-theme', theme);
+
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    } catch {}
+  })();
+`;
+
 
   return (
     <html lang="hu" suppressHydrationWarning>
