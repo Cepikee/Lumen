@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import SpikeModal from "./SpikeModal"; // fontos!
+import SpikeModal from "./UtomModal"; // fontos!
 import ProfileView from "./ProfileView";
 import SettingsView from "./SettingsView";
+import UtomModal from "./UtomModal";
 
 type User = { id: number; email: string };
 
@@ -109,15 +110,15 @@ export default function ProfileMenu({ user }: { user: User }) {
 
       {/* MODALOK */}
       {modal === "profile" && (
-        <SpikeModal onClose={() => setModal(null)}>
+        <UtomModal show={true} onClose={() => setModal(null)}>
           <ProfileView user={user} />
-        </SpikeModal>
+        </UtomModal>
       )}
 
       {modal === "settings" && (
-        <SpikeModal onClose={() => setModal(null)}>
+        <UtomModal show={true} onClose={() => setModal(null)}>
           <SettingsView user={user} />
-        </SpikeModal>
+        </UtomModal>
       )}
     </div>
   );
