@@ -5,29 +5,26 @@ import { useContext, useState, useEffect } from "react";
 import { LayoutContext } from "./LayoutContext";
 import { usePathname } from "next/navigation";
 import LoginModal from "./LoginModal";
-import { useUser } from "@/hooks/useUser";
 import RegisterModal from "./RegisterModal";
+import { useUser } from "@/hooks/useUser";
+import ProfileMenu from "./ProfileMenu";
+
 export default function Header() {
   const layout = useContext(LayoutContext);
   const pathname = usePathname();
   const { user, loading } = useUser();
 
-  // 🔥 Ha landing oldalon vagyunk → ne jelenjen meg a header
+  // Landing oldalon nincs header
   if (pathname.startsWith("/landing")) {
     return null;
   }
 
-  // Ha valamiért nincs context, fallback
   const searchTerm = layout?.searchTerm ?? "";
   const setSearchTerm = layout?.setSearchTerm ?? (() => {});
 
-  // Lokális kereső state (debounce)
   const [localSearch, setLocalSearch] = useState(searchTerm);
-
-  // Gépelés animáció
   const [isTyping, setIsTyping] = useState(false);
 
-  // Debounce + animáció
   useEffect(() => {
     setIsTyping(true);
     const t = setTimeout(() => {
@@ -42,7 +39,7 @@ export default function Header() {
     <nav className="navbar navbar-expand-lg bg-body shadow-sm sticky-top">
       <div className="container-fluid">
 
-        {/* BRAND + LOGO */}
+        {/* LOGO */}
         <Link href="/" className="navbar-brand d-flex align-items-center gap-3">
           <img
             src="/utomlogo.png"
@@ -66,7 +63,6 @@ export default function Header() {
               maxWidth: "90%",
             }}
           >
-            {/* 🔍 Ikon az inputon belül */}
             <span
               style={{
                 position: "absolute",
@@ -81,7 +77,6 @@ export default function Header() {
               🔍
             </span>
 
-            {/* Keresőmező */}
             <input
               type="text"
               placeholder="Keresés..."
@@ -96,7 +91,6 @@ export default function Header() {
               onChange={(e) => setLocalSearch(e.target.value)}
             />
 
-            {/* ❌ Törlés ikon */}
             {localSearch.length > 0 && (
               <span
                 onClick={() => setLocalSearch("")}
@@ -116,7 +110,6 @@ export default function Header() {
             )}
           </div>
 
-          {/* ⏳ Gépelés animáció */}
           <div
             style={{
               height: "20px",
@@ -130,37 +123,22 @@ export default function Header() {
           </div>
         </div>
 
-        {/* 🔥 JOBB OLDALI USER RÉSZ */}
+        {/* JOBB OLDALI USER RÉSZ */}
         <div className="d-flex align-items-center ms-auto me-3">
 
-          {/* Ha még tölt → semmit nem mutatunk */}
-          {loading && (
-            <span className="text-muted">Betöltés…</span>
+          {loading && <span className="text-muted">Betöltés…</span>}
+
+          {/* Nincs user → Login + Regisztráció */}
+          {!loading && !user && (
+            <>
+              <LoginModal />
+              <RegisterModal />
+            </>
           )}
 
-          {/* Ha nincs user → Bejelentkezés */}
-         {!loading && !user && (
-                 <>
-            <LoginModal />
-           <RegisterModal />
-                    </>
-)}
-
-          {/* Ha van user → Szia + Kilépés */}
+          {/* Van user → Profil ikon + dropdown */}
           {!loading && user && (
-            <div className="d-flex align-items-center gap-3">
-              <span className="fw-bold">Szia, {user.email}!</span>
-
-              <button
-                className="btn btn-outline-danger btn-sm"
-                onClick={async () => {
-                  await fetch("/api/auth/logout", { method: "POST" });
-                  window.location.reload();
-                }}
-              >
-                Kilépés
-              </button>
-            </div>
+            <ProfileMenu user={user} />
           )}
 
         </div>
