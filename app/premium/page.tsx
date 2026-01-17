@@ -11,14 +11,14 @@ export default function PremiumPage() {
     >
       {/* Felső szakasz */}
       <section
-        style={{ backgroundColor: "var(--premium-bg-section)" }}
+        style={{ backgroundColor: "var(--premium-section)" }}
         className="py-5 text-center"
       >
         <div className="container">
           <h1 className="fs-2 fw-bold mb-3">
             A hirdetésmentesség csak a kezdet. Az Utom Prémium a minőség új szintje.
           </h1>
-          <p className="mx-auto text-muted fs-5" style={{ maxWidth: "600px" }}>
+          <p className="mx-auto fs-5 text-muted" style={{ maxWidth: "600px" }}>
             Olyan eszközöket kapsz, amelyekkel tényleg átlátod a híreket — gyorsabban, tisztábban, okosabban.
           </p>
 
