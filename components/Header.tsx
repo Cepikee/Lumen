@@ -14,14 +14,12 @@ export default function Header() {
   const pathname = usePathname();
   const { user, loading } = useUser();
 
-  // Landing oldalon nincs header
   if (pathname.startsWith("/landing")) {
     return null;
   }
 
   const searchTerm = layout?.searchTerm ?? "";
   const setSearchTerm = layout?.setSearchTerm ?? (() => {});
-
   const [localSearch, setLocalSearch] = useState(searchTerm);
   const [isTyping, setIsTyping] = useState(false);
 
@@ -31,12 +29,11 @@ export default function Header() {
       setSearchTerm(localSearch);
       setIsTyping(false);
     }, 300);
-
     return () => clearTimeout(t);
   }, [localSearch]);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body shadow-sm sticky-top">
+    <nav className="navbar navbar-expand-lg bg-body shadow-sm sticky-top position-relative">
       <div className="container-fluid">
 
         {/* LOGO */}
@@ -123,50 +120,33 @@ export default function Header() {
           </div>
         </div>
 
-        {/* JOBB OLDALI USER RÉSZ */}
-        <div className="d-flex align-items-center ms-auto me-3">
+        {/* NAVIGATION */}
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <Link href="/" className="nav-link">Főoldal</Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/trends" className="nav-link">Kulcsszavak</Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/adatvedelem" className="nav-link">Adatvédelem</Link>
+            </li>
+          </ul>
+        </div>
 
+        {/* 🔧 PROFIL IKON TELJES JOBB SZÉLEN */}
+        <div className="position-absolute end-0 top-0 me-3 mt-2 d-flex align-items-center">
           {loading && <span className="text-muted">Betöltés…</span>}
-
-          {/* Nincs user → Login + Regisztráció */}
           {!loading && !user && (
             <>
               <LoginModal />
               <RegisterModal />
             </>
           )}
-
-          {/* Van user → Profil ikon + dropdown */}
-          {!loading && user && (
-            <ProfileMenu user={user} />
-          )}
-
+          {!loading && user && <ProfileMenu user={user} />}
         </div>
 
-        {/* NAVIGATION */}
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
-
-            <li className="nav-item">
-              <Link href="/" className="nav-link">
-                Főoldal
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link href="/trends" className="nav-link">
-                Kulcsszavak
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link href="/adatvedelem" className="nav-link">
-                Adatvédelem
-              </Link>
-            </li>
-
-          </ul>
-        </div>
       </div>
     </nav>
   );

@@ -4,24 +4,36 @@ import { useState } from "react";
 
 export default function RegisterModal() {
   const [open, setOpen] = useState(false);
+
   const [email, setEmail] = useState("");
+  const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
   const [pin, setPin] = useState("");
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const handleRegister = async () => {
+    setError("");
+    setLoading(true);
+
     const res = await fetch("/api/auth/register", {
       method: "POST",
-      body: JSON.stringify({ email, password, pin }),
+      body: JSON.stringify({ email, password, pin, nickname }),
     });
 
     const data = await res.json();
-    console.log("Register response:", data);
+    setLoading(false);
 
     if (data.success) {
       alert("Sikeres regisztráció!");
       setOpen(false);
+      setEmail("");
+      setPassword("");
+      setPin("");
+      setNickname("");
     } else {
-      alert(data.message || "Hiba történt.");
+      setError(data.message || "Hiba történt.");
     }
   };
 
@@ -56,6 +68,18 @@ export default function RegisterModal() {
           >
             <h3 className="mb-3">Regisztráció</h3>
 
+            {/* HIBAÜZENET */}
+            {error && (
+              <div className="alert alert-danger py-2">{error}</div>
+            )}
+
+            <input
+              className="form-control mb-2"
+              placeholder="Felhasználónév (nickname)"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+            />
+
             <input
               className="form-control mb-2"
               placeholder="Email"
@@ -73,14 +97,18 @@ export default function RegisterModal() {
 
             <input
               className="form-control mb-3"
-              placeholder="PIN (1-4 szám)"
+              placeholder="PIN (4 számjegy)"
               type="number"
               value={pin}
               onChange={(e) => setPin(e.target.value)}
             />
 
-            <button className="btn btn-success w-100" onClick={handleRegister}>
-              Regisztráció
+            <button
+              className="btn btn-success w-100"
+              onClick={handleRegister}
+              disabled={loading}
+            >
+              {loading ? "Feldolgozás…" : "Regisztráció"}
             </button>
 
             <button

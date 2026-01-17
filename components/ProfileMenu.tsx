@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import SpikeModal from "./UtomModal"; // fontos!
 import ProfileView from "./ProfileView";
 import SettingsView from "./SettingsView";
 import UtomModal from "./UtomModal";
@@ -13,31 +12,39 @@ export default function ProfileMenu({ user }: { user: User }) {
   const [modal, setModal] = useState<null | "profile" | "settings">(null);
 
   function openModal(type: "profile" | "settings") {
-    setOpen(false);      // dropdown bezár
-    setModal(type);      // modal megnyit
+    setOpen(false);
+    setModal(type);
   }
 
   return (
     <div className="position-relative">
 
-      {/* Profil ikon */}
+      {/* Profil ikon – DiceBear avatar */}
       <div
         onClick={() => setOpen(!open)}
         style={{
           width: "40px",
           height: "40px",
           borderRadius: "50%",
+          overflow: "hidden",
+          cursor: "pointer",
           backgroundColor: "#444",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          cursor: "pointer",
-          color: "white",
-          fontWeight: "bold",
-          userSelect: "none",
         }}
       >
-        {user.email[0].toUpperCase()}
+        <img
+          src={`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(
+            user.email
+          )}`}
+          alt="avatar"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        />
       </div>
 
       {/* Dropdown */}
@@ -110,13 +117,13 @@ export default function ProfileMenu({ user }: { user: User }) {
 
       {/* MODALOK */}
       {modal === "profile" && (
-        <UtomModal show={true} onClose={() => setModal(null)}>
+        <UtomModal show={true} onClose={() => setModal(null)} title="Profil">
           <ProfileView user={user} />
         </UtomModal>
       )}
 
       {modal === "settings" && (
-        <UtomModal show={true} onClose={() => setModal(null)}>
+        <UtomModal show={true} onClose={() => setModal(null)} title="Beállítások">
           <SettingsView user={user} />
         </UtomModal>
       )}

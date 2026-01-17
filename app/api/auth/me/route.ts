@@ -11,14 +11,35 @@ export async function GET(req: Request) {
 
   const userId = match[1];
 
-  const [rows]: any = await db.query("SELECT id, email FROM users WHERE id = ?", [userId]);
+  // 🔥 Teljes user lekérés minden új mezővel
+  const [rows]: any = await db.query(
+    `SELECT 
+        id,
+        email,
+        nickname,
+        created_at,
+        email_verified,
+        last_login,
+        role,
+        theme,
+        bio,
+        is_premium,
+        premium_until,
+        premium_tier
+     FROM users
+     WHERE id = ?
+     LIMIT 1`,
+    [userId]
+  );
 
   if (rows.length === 0) {
     return NextResponse.json({ loggedIn: false });
   }
 
+  const user = rows[0];
+
   return NextResponse.json({
     loggedIn: true,
-    user: rows[0],
+    user,
   });
 }
