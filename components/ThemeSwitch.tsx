@@ -17,40 +17,7 @@ export default function ThemeSwitch() {
     }
   }, [userTheme]);
 
-  // 🔥 Téma alkalmazása a HTML elemre
-  useEffect(() => {
-    const root = document.documentElement;
-
-    if (current === "dark") {
-      root.classList.add("dark");
-      return;
-    }
-
-    if (current === "light") {
-      root.classList.remove("dark");
-      return;
-    }
-
-    // SYSTEM MODE
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const applySystemTheme = () => {
-      if (prefersDark.matches) {
-        root.classList.add("dark");
-      } else {
-        root.classList.remove("dark");
-      }
-    };
-
-    applySystemTheme();
-    prefersDark.addEventListener("change", applySystemTheme);
-
-    return () => {
-      prefersDark.removeEventListener("change", applySystemTheme);
-    };
-  }, [current]);
-
-  // 🔥 DB mentés + useUser frissítés
+  // 🔥 Csak globális theme frissítés (NINCS DOM MANIPULÁCIÓ)
   async function updateTheme(newTheme: ThemeMode) {
     setCurrent(newTheme);
     setUserTheme(newTheme);
