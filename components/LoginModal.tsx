@@ -7,7 +7,7 @@ export default function LoginModal() {
   const [open, setOpen] = useState(false);
 
   // 🔥 PANEL VÁLTÓ
-  const [mode, setMode] = useState<"login" | "forgot">("login");
+  const [mode, setMode] = useState<"login" | "forgot" | "forgot_pin">("login");
 
   // LOGIN mezők
   const [email, setEmail] = useState("");
@@ -17,6 +17,10 @@ export default function LoginModal() {
   // FORGOT PASSWORD mezők
   const [forgotEmail, setForgotEmail] = useState("");
   const [forgotStatus, setForgotStatus] = useState<"idle" | "loading" | "success">("idle");
+
+  // FORGOT PIN mezők
+  const [forgotPinEmail, setForgotPinEmail] = useState("");
+  const [forgotPinStatus, setForgotPinStatus] = useState<"idle" | "loading" | "success">("idle");
 
   // 🔥 REGISZTRÁCIÓ MODAL
   const [showRegister, setShowRegister] = useState(false);
@@ -61,6 +65,26 @@ export default function LoginModal() {
     });
 
     setForgotStatus("success");
+  };
+
+  // 🔥 FORGOT PIN + reCAPTCHA
+  const handleForgotPin = async (e: any) => {
+    e.preventDefault();
+    setForgotPinStatus("loading");
+
+    // @ts-ignore
+    const recaptchaToken = await grecaptcha.execute(
+      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
+      { action: "forgot_pin" }
+    );
+
+    await fetch("/api/auth/request-pin-reset", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: forgotPinEmail, recaptchaToken }),
+    });
+
+    setForgotPinStatus("success");
   };
 
   return (
@@ -137,6 +161,13 @@ export default function LoginModal() {
                     Elfelejtetted a jelszavad?
                   </p>
 
+                  <p
+                    style={{ cursor: "pointer", textDecoration: "underline" }}
+                    onClick={() => setMode("forgot_pin")}
+                  >
+                    Elfelejtetted a PIN kódod?
+                  </p>
+
                   <p className="mt-2">
                     Nincs még fiókod?{" "}
                     <span
@@ -188,6 +219,48 @@ export default function LoginModal() {
                       {forgotStatus === "loading"
                         ? "Küldés..."
                         : "Visszaállító email küldése"}
+                    </button>
+                  </form>
+                )}
+
+                <p
+                  className="mt-3 text-center"
+                  style={{ cursor: "pointer", textDecoration: "underline" }}
+                  onClick={() => setMode("login")}
+                >
+                  Vissza a bejelentkezéshez
+                </p>
+              </>
+            )}
+
+            {/* 🔥 FORGOT PIN PANEL */}
+            {mode === "forgot_pin" && (
+              <>
+                <h3 className="mb-3">PIN kód visszaállítása</h3>
+
+                {forgotPinStatus === "success" ? (
+                  <p>
+                    Ha létezik ilyen email cím, elküldtük a PIN visszaállító linket.
+                  </p>
+                ) : (
+                  <form onSubmit={handleForgotPin}>
+                    <input
+                      className="form-control mb-3"
+                      placeholder="Email cím"
+                      type="email"
+                      value={forgotPinEmail}
+                      onChange={(e) => setForgotPinEmail(e.target.value)}
+                      required
+                    />
+
+                    <button
+                      className="btn btn-primary w-100"
+                      type="submit"
+                      disabled={forgotPinStatus === "loading"}
+                    >
+                      {forgotPinStatus === "loading"
+                        ? "Küldés..."
+                        : "PIN visszaállító email küldése"}
                     </button>
                   </form>
                 )}
