@@ -959,44 +959,6 @@ html, body {
 
 
 
-/* global.css (vagy styles/globals.css) */
-:root {
-  --premium-bg: #ffffff;
-  --premium-section: #f5f5f5;
-  --premium-card: #ffffff;
-  --premium-text: #000000;
-}
-
-/* Ha a ThemeSwitch body.dark‑ot állít, ezek lépnek életbe */
-body.dark {
-  --premium-bg: #212529;        /* fő háttér sötét módban */
-  --premium-section: #121316;   /* felső szakasz sötét árnyalat */
-  --premium-card: #17181a;      /* kártyák sötét háttere */
-  --premium-text: #e6e6e6;      /* szöveg sötét módban */
-}
-
-/* opcionális: ha body.light is használt */
-body.light {
-  --premium-bg: #ffffff;
-  --premium-section: #f5f5f5;
-  --premium-card: #ffffff;
-  --premium-text: #000000;
-}
-
-/* Erősebb prioritás a premium oldalnak (ha valami felülírná) */
-.premium-page {
-  background-color: var(--premium-bg) !important;
-  color: var(--premium-text) !important;
-}
-.premium-section {
-  background-color: var(--premium-section) !important;
-}
-.premium-card {
-  background-color: var(--premium-card) !important;
-}
-
-
-
 
 
 
