@@ -3,14 +3,17 @@
 import { useState } from "react";
 import { User } from "@/types/User";
 import ThemeSwitch from "@/components/ThemeSwitch";
-import { useUserStore } from "@/store/useUserStore"; // 🔥 GLOBÁLIS USER UPDATE
+import { useUserStore } from "@/store/useUserStore";
+import PasswordChangeModal from "@/components/PasswordChangeModal"; // 🔥 ÚJ
 
 export default function SettingsView({ user }: { user: User }) {
   const [nickname, setNickname] = useState(user.nickname);
   const [bio, setBio] = useState(user.bio || "");
   const [saving, setSaving] = useState(false);
 
-  const setUser = useUserStore((s) => s.setUser); // 🔥 Zustand setter
+  const [showPasswordModal, setShowPasswordModal] = useState(false); // 🔥 ÚJ
+
+  const setUser = useUserStore((s) => s.setUser);
 
   const premiumActive =
     user.is_premium ||
@@ -33,7 +36,6 @@ export default function SettingsView({ user }: { user: User }) {
       const data = await res.json();
 
       if (data.success) {
-        // 🔥 AZONNALI GLOBÁLIS USER FRISSÍTÉS
         setUser({
           ...user,
           nickname,
@@ -121,7 +123,13 @@ export default function SettingsView({ user }: { user: User }) {
       {/* PASSWORD */}
       <div className="mb-4">
         <strong>Jelszó:</strong>
-        <div className="text-muted small">A jelszó módosítása hamarosan érkezik</div>
+        <div
+          className="text-primary"
+          style={{ cursor: "pointer", fontWeight: "500" }}
+          onClick={() => setShowPasswordModal(true)} // 🔥 ÚJ
+        >
+          Jelszó módosítása →
+        </div>
       </div>
 
       {/* SAVE BUTTON */}
@@ -132,6 +140,12 @@ export default function SettingsView({ user }: { user: User }) {
       >
         {saving ? "Mentés..." : "Mentés"}
       </button>
+
+      {/* PASSWORD MODAL */}
+      <PasswordChangeModal
+        show={showPasswordModal}
+        onClose={() => setShowPasswordModal(false)}
+      />
     </div>
   );
 }
