@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { User } from "@/types/User";
+import ThemeSwitch from "@/components/ThemeSwitch";
+
 
 export default function SettingsView({ user }: { user: User }) {
   const [nickname, setNickname] = useState(user.nickname);
@@ -62,19 +64,12 @@ export default function SettingsView({ user }: { user: User }) {
         />
       </div>
 
-      {/* THEME */}
-      <div className="mb-4">
-        <label className="form-label fw-bold">Téma</label>
-        <select
-          className="form-select"
-          value={theme}
-          onChange={(e) => setTheme(e.target.value as "light" | "dark" | "system")}
-        >
-          <option value="system">Rendszer</option>
-          <option value="light">Világos</option>
-          <option value="dark">Sötét</option>
-        </select>
-      </div>
+{/* THEME */}
+<div className="mb-4">
+  <label className="form-label fw-bold">Téma</label>
+  <ThemeSwitch />
+</div>
+
 
       {/* EMAIL */}
       <div className="mb-3">
