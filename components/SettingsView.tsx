@@ -4,14 +4,16 @@ import { useState } from "react";
 import { User } from "@/types/User";
 import ThemeSwitch from "@/components/ThemeSwitch";
 import { useUserStore } from "@/store/useUserStore";
-import PasswordChangeModal from "@/components/PasswordChangeModal"; // 🔥 ÚJ
+import PasswordChangeModal from "@/components/PasswordChangeModal";
+import PinChangeModal from "@/components/PinChangeModal"; // 🔥 ÚJ
 
 export default function SettingsView({ user }: { user: User }) {
   const [nickname, setNickname] = useState(user.nickname);
   const [bio, setBio] = useState(user.bio || "");
   const [saving, setSaving] = useState(false);
 
-  const [showPasswordModal, setShowPasswordModal] = useState(false); // 🔥 ÚJ
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [showPinModal, setShowPinModal] = useState(false); // 🔥 ÚJ
 
   const setUser = useUserStore((s) => s.setUser);
 
@@ -117,7 +119,13 @@ export default function SettingsView({ user }: { user: User }) {
       {/* PIN */}
       <div className="mb-3">
         <strong>PIN kód:</strong>
-        <div className="text-muted small">A PIN módosítása hamarosan érkezik</div>
+        <div
+          className="text-primary"
+          style={{ cursor: "pointer", fontWeight: "500" }}
+          onClick={() => setShowPinModal(true)} // 🔥 ÚJ
+        >
+          PIN kód módosítása →
+        </div>
       </div>
 
       {/* PASSWORD */}
@@ -126,7 +134,7 @@ export default function SettingsView({ user }: { user: User }) {
         <div
           className="text-primary"
           style={{ cursor: "pointer", fontWeight: "500" }}
-          onClick={() => setShowPasswordModal(true)} // 🔥 ÚJ
+          onClick={() => setShowPasswordModal(true)}
         >
           Jelszó módosítása →
         </div>
@@ -145,6 +153,12 @@ export default function SettingsView({ user }: { user: User }) {
       <PasswordChangeModal
         show={showPasswordModal}
         onClose={() => setShowPasswordModal(false)}
+      />
+
+      {/* PIN MODAL */}
+      <PinChangeModal
+        show={showPinModal}
+        onClose={() => setShowPinModal(false)}
       />
     </div>
   );
