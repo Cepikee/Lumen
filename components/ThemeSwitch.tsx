@@ -1,27 +1,30 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useUser } from "@/hooks/useUser";
+import { useUserStore } from "@/store/useUserStore";
 
 type ThemeMode = "dark" | "system" | "light";
 
 export default function ThemeSwitch() {
-  const { theme: userTheme, setTheme: setUserTheme } = useUser();
+  // 🔥 GLOBAL THEME FROM ZUSTAND
+  const theme = useUserStore((s) => s.theme);
+  const setTheme = useUserStore((s) => s.setTheme);
 
   const [current, setCurrent] = useState<ThemeMode>("system");
 
-  // 🔥 Ha a user betöltődik, frissítjük a kapcsolót
+  // 🔥 Ha a globális theme változik, frissítjük a kapcsolót
   useEffect(() => {
-    if (userTheme) {
-      setCurrent(userTheme);
+    if (theme) {
+      setCurrent(theme);
     }
-  }, [userTheme]);
+  }, [theme]);
 
   // 🔥 Csak globális theme frissítés (NINCS DOM MANIPULÁCIÓ)
   async function updateTheme(newTheme: ThemeMode) {
     setCurrent(newTheme);
-    setUserTheme(newTheme);
+    setTheme(newTheme); // Zustand store frissítése
 
+    // Backend update
     await fetch("/api/user/update", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

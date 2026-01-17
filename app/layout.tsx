@@ -23,16 +23,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="hu" suppressHydrationWarning>
       <head>
-        {/* 🔥 NINCS többé setInitialTheme script */}
-
-        {/* reCAPTCHA v3 */}
+        {/* reCAPTCHA */}
         <script
           src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
           async
           defer
         />
 
-        {/* Google Analytics 4 */}
+        {/* Google Analytics */}
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-TZ5DTR2N2S"

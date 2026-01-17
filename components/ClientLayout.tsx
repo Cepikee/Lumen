@@ -6,7 +6,7 @@ import Header from "./Header";
 import CookieConsent from "./CookieConsent";
 import SidebarWrapper from "./SidebarWrapper";
 import { LayoutContext } from "./LayoutContext";
-import { useUser } from "@/hooks/useUser"; // 🔥 THEME IMPORT
+import { useUserStore } from "@/store/useUserStore"; // 🔥 ZUSTAND IMPORT
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -16,12 +16,20 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   const pathname = usePathname();
   const isLanding = pathname.includes("landing");
 
-  const { theme } = useUser(); // 🔥 USER THEME
+  // 🔥 GLOBAL THEME FROM ZUSTAND
+  const theme = useUserStore((s) => s.theme);
+  const loadUser = useUserStore((s) => s.loadUser);
+
+  // 🔥 LOAD USER ONCE
+  useEffect(() => {
+    loadUser();
+  }, [loadUser]);
 
   // 🔥 APPLY THEME TO HTML
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute("data-user-theme", "true");
+
     if (theme === "dark") {
       root.classList.add("dark");
       root.setAttribute("data-bs-theme", "dark");
