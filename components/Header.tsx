@@ -33,9 +33,8 @@ export default function Header() {
   }, [localSearch]);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body shadow-sm sticky-top position-relative">
-      {/* 🔧 FONTOS: position-relative, hogy az avatar abszolút pozicionálása működjön */}
-      <div className="container-fluid position-relative">
+    <nav className="navbar navbar-expand-lg bg-body shadow-sm sticky-top">
+      <div className="container-fluid d-flex align-items-center justify-content-between">
 
         {/* LOGO */}
         <Link href="/" className="navbar-brand d-flex align-items-center gap-3">
@@ -53,7 +52,7 @@ export default function Header() {
         </Link>
 
         {/* KERESŐ */}
-        <div className="w-100 d-flex flex-column align-items-center my-3">
+        <div className="d-flex flex-column align-items-center mx-auto">
           <div
             className="position-relative"
             style={{
@@ -121,9 +120,9 @@ export default function Header() {
           </div>
         </div>
 
-        {/* NAVIGATION */}
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
+        {/* NAVIGATION + PROFIL */}
+        <div className="d-flex align-items-center gap-3">
+          <ul className="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
             <li className="nav-item">
               <Link href="/" className="nav-link">Főoldal</Link>
             </li>
@@ -134,24 +133,19 @@ export default function Header() {
               <Link href="/adatvedelem" className="nav-link">Adatvédelem</Link>
             </li>
           </ul>
+
+          {/* PROFIL IKON */}
+          <div className="d-flex align-items-center">
+            {loading && <span className="text-muted">Betöltés…</span>}
+            {!loading && !user && (
+              <>
+                <LoginModal />
+                <RegisterModal />
+              </>
+            )}
+            {!loading && user && <ProfileMenu user={user} />}
+          </div>
         </div>
-
-        {/* 🔧 PROFIL IKON – TELJES JOBB SZÉLEN */}
-        <div className="position-absolute end-0 top-0 me-3 mt-2 d-flex align-items-center">
-          {loading && <span className="text-muted">Betöltés…</span>}
-
-          {!loading && !user && (
-            <>
-              <LoginModal />
-              <RegisterModal />
-            </>
-          )}
-
-          {!loading && user && (
-            <ProfileMenu user={user} />
-          )}
-        </div>
-
       </div>
     </nav>
   );

@@ -34,9 +34,7 @@ export default function ProfileMenu({ user }: { user: User }) {
         }}
       >
         <img
-          src={`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(
-            user.email
-          )}`}
+         src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${encodeURIComponent(user.nickname)}`}
           alt="avatar"
           style={{
             width: "100%",
