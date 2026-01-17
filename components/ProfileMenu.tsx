@@ -4,13 +4,16 @@ import { useState } from "react";
 import ProfileView from "./ProfileView";
 import SettingsView from "./SettingsView";
 import UtomModal from "./UtomModal";
+import PremiumModal from "./PremiumModal"; // ← ÚJ
 import { User } from "@/types/User";
 
 export default function ProfileMenu({ user }: { user: User }) {
   const [open, setOpen] = useState(false);
-  const [modal, setModal] = useState<null | "profile" | "settings">(null);
 
-  function openModal(type: "profile" | "settings") {
+  // 🔥 Bővített modal state
+  const [modal, setModal] = useState<null | "profile" | "settings" | "premium">(null);
+
+  function openModal(type: "profile" | "settings" | "premium") {
     setOpen(false);
     setModal(type);
   }
@@ -91,14 +94,13 @@ export default function ProfileMenu({ user }: { user: User }) {
             Beállítások
           </button>
 
-          {/* PRÉMIUM */}
-          <a
-            href="/premium"
+          {/* PRÉMIUM – MODAL NYITÁS */}
+          <button
+            onClick={() => openModal("premium")}
             style={{
-              display: "block",
               width: "100%",
               padding: "10px 14px",
-              textDecoration: "none",
+              border: "none",
               background: "white",
               textAlign: "left",
               cursor: "pointer",
@@ -106,7 +108,7 @@ export default function ProfileMenu({ user }: { user: User }) {
             }}
           >
             Prémium
-          </a>
+          </button>
 
           {/* KIJELENTKEZÉS */}
           <button
@@ -140,6 +142,11 @@ export default function ProfileMenu({ user }: { user: User }) {
         <UtomModal show={true} onClose={() => setModal(null)} title="Beállítások">
           <SettingsView user={user} />
         </UtomModal>
+      )}
+
+      {/* 🔥 PRÉMIUM MODAL */}
+      {modal === "premium" && (
+        <PremiumModal onClose={() => setModal(null)} />
       )}
     </div>
   );
