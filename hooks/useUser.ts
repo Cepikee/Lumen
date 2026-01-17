@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { User } from "@/types/User";
 
 export function useUser() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,11 +16,15 @@ export function useUser() {
         });
 
         const data = await res.json();
+
         if (data.loggedIn) {
-          setUser(data.user);
+          setUser(data.user as User);
+        } else {
+          setUser(null);
         }
       } catch (err) {
         console.error("Auth error:", err);
+        setUser(null);
       }
 
       setLoading(false);

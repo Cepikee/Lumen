@@ -4,8 +4,7 @@ import { useState } from "react";
 import ProfileView from "./ProfileView";
 import SettingsView from "./SettingsView";
 import UtomModal from "./UtomModal";
-
-type User = { id: number; email: string };
+import { User } from "@/types/User";
 
 export default function ProfileMenu({ user }: { user: User }) {
   const [open, setOpen] = useState(false);
