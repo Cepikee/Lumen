@@ -34,7 +34,7 @@ export default function ProfileMenu({ user }: { user: User }) {
         }}
       >
         <img
-         src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${encodeURIComponent(user.nickname)}`}
+          src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${encodeURIComponent(user.nickname)}`}
           alt="avatar"
           style={{
             width: "100%",
@@ -72,7 +72,7 @@ export default function ProfileMenu({ user }: { user: User }) {
               color: "#333",
             }}
           >
-            Profil megtekintése
+            Profil
           </button>
 
           {/* BEÁLLÍTÁSOK */}
@@ -90,6 +90,23 @@ export default function ProfileMenu({ user }: { user: User }) {
           >
             Beállítások
           </button>
+
+          {/* PRÉMIUM */}
+          <a
+            href="/premium"
+            style={{
+              display: "block",
+              width: "100%",
+              padding: "10px 14px",
+              textDecoration: "none",
+              background: "white",
+              textAlign: "left",
+              cursor: "pointer",
+              color: "#333",
+            }}
+          >
+            Prémium
+          </a>
 
           {/* KIJELENTKEZÉS */}
           <button
