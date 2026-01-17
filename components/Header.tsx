@@ -34,7 +34,8 @@ export default function Header() {
 
   return (
     <nav className="navbar navbar-expand-lg bg-body shadow-sm sticky-top position-relative">
-      <div className="container-fluid">
+      {/* 🔧 FONTOS: position-relative, hogy az avatar abszolút pozicionálása működjön */}
+      <div className="container-fluid position-relative">
 
         {/* LOGO */}
         <Link href="/" className="navbar-brand d-flex align-items-center gap-3">
@@ -135,16 +136,20 @@ export default function Header() {
           </ul>
         </div>
 
-        {/* 🔧 PROFIL IKON TELJES JOBB SZÉLEN */}
+        {/* 🔧 PROFIL IKON – TELJES JOBB SZÉLEN */}
         <div className="position-absolute end-0 top-0 me-3 mt-2 d-flex align-items-center">
           {loading && <span className="text-muted">Betöltés…</span>}
+
           {!loading && !user && (
             <>
               <LoginModal />
               <RegisterModal />
             </>
           )}
-          {!loading && user && <ProfileMenu user={user} />}
+
+          {!loading && user && (
+            <ProfileMenu user={user} />
+          )}
         </div>
 
       </div>
