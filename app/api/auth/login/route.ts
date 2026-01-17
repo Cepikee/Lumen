@@ -11,7 +11,7 @@ function getIp(req: Request) {
 
 export async function POST(req: Request) {
   const ip = getIp(req);
-  const { email, password, pin } = await req.json();
+  const { email, password, pin, rememberMe } = await req.json(); // ← rememberMe kiolvasása
 
   // 1) RATE LIMIT
   const [attempts]: any = await db.query(
@@ -93,7 +93,12 @@ export async function POST(req: Request) {
     [user.id]
   );
 
-  // 7) SESSION COOKIE + USER ADATOK VISSZAADÁSA
+  // 🔥 7) SESSION COOKIE időtartam a rememberMe alapján
+  const maxAge = rememberMe
+    ? 60 * 60 * 24 * 30   // 30 nap
+    : 60 * 60 * 24;       // 1 nap
+
+  // 8) SESSION COOKIE + USER ADATOK VISSZAADÁSA
   const response = NextResponse.json({
     success: true,
     user: {
@@ -112,7 +117,7 @@ export async function POST(req: Request) {
     secure: true,
     sameSite: "strict",
     path: "/",
-    maxAge: 60 * 60 * 24 * 7
+    maxAge
   });
 
   return response;

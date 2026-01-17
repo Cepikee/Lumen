@@ -13,6 +13,7 @@ export default function LoginModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [pin, setPin] = useState("");
+  const [rememberMe, setRememberMe] = useState(false); // ← ÚJ
 
   // FORGOT PASSWORD mezők
   const [forgotEmail, setForgotEmail] = useState("");
@@ -35,7 +36,7 @@ export default function LoginModal() {
 
     const res = await fetch("/api/auth/login", {
       method: "POST",
-      body: JSON.stringify({ email, password, pin, recaptchaToken }),
+      body: JSON.stringify({ email, password, pin, recaptchaToken, rememberMe }), // ← ÚJ
     });
 
     const data = await res.json();
@@ -147,13 +148,26 @@ export default function LoginModal() {
                   onChange={(e) => setPin(e.target.value)}
                 />
 
+                {/* 🔥 REMEMBER ME CHECKBOX */}
+                <div className="form-check mb-3">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="rememberMe"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                  />
+                  <label className="form-check-label" htmlFor="rememberMe">
+                    Maradjak bejelentkezve
+                  </label>
+                </div>
+
                 <button className="btn btn-success w-100" onClick={handleLogin}>
                   Belépés
                 </button>
 
                 {/* 🔥 ALULI LINK BLOKK */}
                 <div className="mt-3 text-center">
-
                   <p
                     style={{ cursor: "pointer", textDecoration: "underline" }}
                     onClick={() => setMode("forgot")}

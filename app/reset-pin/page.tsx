@@ -68,7 +68,7 @@ function ResetPinContent() {
       {status === "success" ? (
         <div>
           <p>A PIN kód sikeresen frissítve!</p>
-          <a href="/login" className="btn btn-success w-100 mt-3">
+          <a href="/" className="btn btn-success w-100 mt-3">
             Bejelentkezés
           </a>
         </div>
