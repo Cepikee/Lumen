@@ -5,13 +5,16 @@ import { useContext, useState, useEffect } from "react";
 import { LayoutContext } from "./LayoutContext";
 import { usePathname } from "next/navigation";
 import LoginModal from "./LoginModal";
-import { useUser } from "@/hooks/useUser";
 import ProfileMenu from "./ProfileMenu";
+import { useUserStore } from "@/store/useUserStore"; // 🔥 ZUSTAND
 
 export default function Header() {
   const layout = useContext(LayoutContext);
   const pathname = usePathname();
-  const { user, loading } = useUser();
+
+  // 🔥 GLOBAL USER + LOADING FROM ZUSTAND
+  const user = useUserStore((s) => s.user);
+  const loading = useUserStore((s) => s.loading);
 
   if (pathname.startsWith("/landing")) {
     return null;
@@ -29,7 +32,7 @@ export default function Header() {
       setIsTyping(false);
     }, 300);
     return () => clearTimeout(t);
-  }, [localSearch]);
+  }, [localSearch, setSearchTerm]);
 
   return (
     <nav className="navbar navbar-expand-lg bg-body shadow-sm sticky-top">
@@ -137,11 +140,7 @@ export default function Header() {
           <div className="d-flex align-items-center">
             {loading && <span className="text-muted">Betöltés…</span>}
 
-            {!loading && !user && (
-              <>
-                <LoginModal />
-              </>
-            )}
+            {!loading && !user && <LoginModal />}
 
             {!loading && user && <ProfileMenu user={user} />}
           </div>

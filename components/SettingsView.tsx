@@ -3,11 +3,14 @@
 import { useState } from "react";
 import { User } from "@/types/User";
 import ThemeSwitch from "@/components/ThemeSwitch";
+import { useUserStore } from "@/store/useUserStore"; // 🔥 GLOBÁLIS USER UPDATE
 
 export default function SettingsView({ user }: { user: User }) {
   const [nickname, setNickname] = useState(user.nickname);
   const [bio, setBio] = useState(user.bio || "");
   const [saving, setSaving] = useState(false);
+
+  const setUser = useUserStore((s) => s.setUser); // 🔥 Zustand setter
 
   const premiumActive =
     user.is_premium ||
@@ -30,6 +33,13 @@ export default function SettingsView({ user }: { user: User }) {
       const data = await res.json();
 
       if (data.success) {
+        // 🔥 AZONNALI GLOBÁLIS USER FRISSÍTÉS
+        setUser({
+          ...user,
+          nickname,
+          bio,
+        });
+
         alert("Beállítások elmentve!");
       } else {
         alert("Hiba történt: " + data.message);
