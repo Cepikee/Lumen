@@ -10,28 +10,48 @@ export default function PremiumPage() {
       const isLight = document.body.classList.contains("light");
 
       if (isDark) {
+        // UTOM SÖTÉT TÉMA
         root.style.setProperty("--premium-bg", "#0f1113");
         root.style.setProperty("--premium-section", "#121316");
         root.style.setProperty("--premium-card", "#17181a");
         root.style.setProperty("--premium-text", "#e6e6e6");
+
+        // 🔥 BOOTSTRAP SÖTÉT HÁTTÉR
+        root.style.setProperty("--bs-body-bg", "#212529");
+        root.style.setProperty("--bs-body-color", "#ffffff");
+
       } else if (isLight) {
+        // UTOM VILÁGOS TÉMA
         root.style.setProperty("--premium-bg", "#ffffff");
         root.style.setProperty("--premium-section", "#f5f5f5");
         root.style.setProperty("--premium-card", "#ffffff");
         root.style.setProperty("--premium-text", "#000000");
+
+        // 🔥 BOOTSTRAP VILÁGOS HÁTTÉR
+        root.style.setProperty("--bs-body-bg", "#ffffff");
+        root.style.setProperty("--bs-body-color", "#000000");
+
       } else {
-        // system vagy nincs explicit osztály: fallback a prefers-color-scheme alapján
+        // SYSTEM MODE
         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
         if (prefersDark) {
           root.style.setProperty("--premium-bg", "#0f1113");
           root.style.setProperty("--premium-section", "#121316");
           root.style.setProperty("--premium-card", "#17181a");
           root.style.setProperty("--premium-text", "#e6e6e6");
+
+          root.style.setProperty("--bs-body-bg", "#212529");
+          root.style.setProperty("--bs-body-color", "#ffffff");
+
         } else {
           root.style.setProperty("--premium-bg", "#ffffff");
           root.style.setProperty("--premium-section", "#f5f5f5");
           root.style.setProperty("--premium-card", "#ffffff");
           root.style.setProperty("--premium-text", "#000000");
+
+          root.style.setProperty("--bs-body-bg", "#ffffff");
+          root.style.setProperty("--bs-body-color", "#000000");
         }
       }
     }
@@ -39,33 +59,18 @@ export default function PremiumPage() {
     // Első alkalmazás
     applyVarsForBody();
 
-    // Figyeljük a body class változását (ThemeSwitch frissítésekor)
-    const observer = new MutationObserver((mutations) => {
-      for (const m of mutations) {
-        if (m.type === "attributes" && (m.attributeName === "class" || m.attributeName === "className")) {
-          applyVarsForBody();
-          break;
-        }
-      }
-    });
+    // Figyeljük a body class változását
+    const observer = new MutationObserver(() => applyVarsForBody());
     observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
 
-    // Ha a prefers-color-scheme változik (rendszer mód), frissítjük
+    // System mode változás figyelése
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const mqHandler = () => applyVarsForBody();
-    if (mq.addEventListener) {
-      mq.addEventListener("change", mqHandler);
-    } else {
-      mq.addListener(mqHandler);
-    }
+    mq.addEventListener?.("change", mqHandler);
 
     return () => {
       observer.disconnect();
-      if (mq.removeEventListener) {
-        mq.removeEventListener("change", mqHandler);
-      } else {
-        mq.removeListener(mqHandler);
-      }
+      mq.removeEventListener?.("change", mqHandler);
     };
   }, []);
 
@@ -73,14 +78,14 @@ export default function PremiumPage() {
     <main
       className="premium-page pb-5"
       style={{
-        backgroundColor: "var(--premium-bg, #ffffff)",
-        color: "var(--premium-text, #000000)"
+        backgroundColor: "var(--premium-bg)",
+        color: "var(--premium-text)"
       }}
     >
       {/* Felső szakasz */}
       <section
         className="premium-section py-5 text-center"
-        style={{ backgroundColor: "var(--premium-section, #f5f5f5)" }}
+        style={{ backgroundColor: "var(--premium-section)" }}
       >
         <div className="container">
           <h1 className="fs-2 fw-bold mb-3">
@@ -95,7 +100,7 @@ export default function PremiumPage() {
               className="border rounded p-4 shadow-sm text-center premium-card"
               style={{
                 minWidth: "200px",
-                backgroundColor: "var(--premium-card, #ffffff)"
+                backgroundColor: "var(--premium-card)"
               }}
             >
               <h3 className="fs-4 mb-2">1000 Ft / hó</h3>
@@ -105,7 +110,7 @@ export default function PremiumPage() {
               className="border rounded p-4 shadow-sm text-center premium-card"
               style={{
                 minWidth: "200px",
-                backgroundColor: "var(--premium-card, #ffffff)"
+                backgroundColor: "var(--premium-card)"
               }}
             >
               <h3 className="fs-4 mb-2">9000 Ft / év</h3>
@@ -118,7 +123,7 @@ export default function PremiumPage() {
       {/* Funkciólista */}
       <section
         className="py-5"
-        style={{ backgroundColor: "var(--premium-bg, #ffffff)" }}
+        style={{ backgroundColor: "var(--premium-bg)" }}
       >
         <div className="container">
           <h2 className="text-center fs-3 fw-bold mb-5">Az Utom prémium csomagja:</h2>
