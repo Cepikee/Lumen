@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function ResetPinPage() {
+function ResetPinContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
@@ -106,5 +106,13 @@ export default function ResetPinPage() {
         </form>
       )}
     </div>
+  );
+}
+
+export default function ResetPinPage() {
+  return (
+    <Suspense fallback={<div className="text-center mt-5">Betöltés...</div>}>
+      <ResetPinContent />
+    </Suspense>
   );
 }
