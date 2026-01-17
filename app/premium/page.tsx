@@ -2,10 +2,18 @@
 
 export default function PremiumPage() {
   return (
-    <main className="bg-body text-body pb-5">
-      
-      {/* Felső szakasz – Bevezető + Árazás */}
-      <section className="bg-light py-5 text-center">
+    <main
+      style={{
+        backgroundColor: "var(--premium-bg)",
+        color: "var(--premium-text)"
+      }}
+      className="pb-5"
+    >
+      {/* Felső szakasz */}
+      <section
+        style={{ backgroundColor: "var(--premium-bg-section)" }}
+        className="py-5 text-center"
+      >
         <div className="container">
           <h1 className="fs-2 fw-bold mb-3">
             A hirdetésmentesség csak a kezdet. Az Utom Prémium a minőség új szintje.
@@ -15,10 +23,23 @@ export default function PremiumPage() {
           </p>
 
           <div className="d-flex justify-content-center gap-4 mt-4 flex-wrap">
-            <div className="border rounded p-4 bg-white shadow-sm text-center" style={{ minWidth: "200px" }}>
+            <div
+              className="border rounded p-4 shadow-sm text-center"
+              style={{
+                minWidth: "200px",
+                backgroundColor: "var(--premium-card)"
+              }}
+            >
               <h3 className="fs-4 mb-2">1000 Ft / hó</h3>
             </div>
-            <div className="border rounded p-4 bg-success-subtle shadow-sm text-center" style={{ minWidth: "200px" }}>
+
+            <div
+              className="border rounded p-4 shadow-sm text-center"
+              style={{
+                minWidth: "200px",
+                backgroundColor: "var(--premium-card)"
+              }}
+            >
               <h3 className="fs-4 mb-2">9000 Ft / év</h3>
               <p className="text-success fw-bold mb-0">Megtakarítás: 25%</p>
             </div>
@@ -27,52 +48,23 @@ export default function PremiumPage() {
       </section>
 
       {/* Funkciólista */}
-      <section className="bg-white py-5">
+      <section
+        style={{ backgroundColor: "var(--premium-bg)" }}
+        className="py-5"
+      >
         <div className="container">
           <h2 className="text-center fs-3 fw-bold mb-5">Az Utom prémium csomagja:</h2>
 
           <div className="row row-cols-1 row-cols-md-2 g-4">
             {[
-              {
-                icon: "🧬",
-                title: "Utom Forrás‑DNS",
-                desc: "AI‑alapú forrásprofil, amely megmutatja, milyen témák dominálnak egy hírportálnál — százalékos bontásban."
-              },
-              {
-                icon: "🧠",
-                title: "Fake Detektor",
-                desc: "AI kiszűri a manipulált, torzított vagy hamis tartalmakat."
-              },
-              {
-                icon: "🧊",
-                title: "Clickbait Detektor",
-                desc: "Automatikusan felismeri a kattintásvadász címeket, és visszaveszi a zajt."
-              },
-              {
-                icon: "🧱",
-                title: "Cikk összehasonlítás",
-                desc: "Több forrás egy kattintással összevetve. Látod, ki mit hallgat el."
-              },
-              {
-                icon: "🧭",
-                title: "Trendek automatikus súlyozása",
-                desc: "Az Utom AI kiszűri a mesterségesen felfújt témákat — csak a valódi trendek maradnak."
-              },
-              {
-                icon: "💬",
-                title: "Prémium chat szoba",
-                desc: "Zárt közösség, ahol a prémium tagok beszélgethetnek, vitázhatnak, elemezhetnek."
-              },
-              {
-                icon: "🧑‍⚖️",
-                title: "Hitelességi szavazás (prémium súlyozással)",
-                desc: "A szavazatod többet ér. A közösségi minőségkontroll így sokkal pontosabb."
-              },
-              {
-                icon: "🧘‍♂️",
-                title: "Ultra‑minimalista mód",
-                desc: "Csak a lényeg: reklám nélkül, sallang nélkül, egyetlen összefoglalóval (UtomScore)."
-              }
+              { icon: "🧬", title: "Utom Forrás‑DNS", desc: "AI‑alapú forrásprofil, amely megmutatja, milyen témák dominálnak egy hírportálnál — százalékos bontásban." },
+              { icon: "🧠", title: "Fake Detektor", desc: "AI kiszűri a manipulált, torzított vagy hamis tartalmakat." },
+              { icon: "🧊", title: "Clickbait Detektor", desc: "Automatikusan felismeri a kattintásvadász címeket, és visszaveszi a zajt." },
+              { icon: "🧱", title: "Cikk összehasonlítás", desc: "Több forrás egy kattintással összevetve. Látod, ki mit hallgat el." },
+              { icon: "🧭", title: "Trendek automatikus súlyozása", desc: "Az Utom AI kiszűri a mesterségesen felfújt témákat — csak a valódi trendek maradnak." },
+              { icon: "💬", title: "Prémium chat szoba", desc: "Zárt közösség, ahol a prémium tagok beszélgethetnek, vitázhatnak, elemezhetnek." },
+              { icon: "🧑‍⚖️", title: "Hitelességi szavazás", desc: "A szavazatod többet ér. A közösségi minőségkontroll így sokkal pontosabb." },
+              { icon: "🧘‍♂️", title: "Ultra‑minimalista mód", desc: "Csak a lényeg: reklám nélkül, sallang nélkül, egyetlen összefoglalóval (UtomScore)." }
             ].map((item, i) => (
               <div key={i} className="d-flex gap-3">
                 <div className="fs-2">{item.icon}</div>
@@ -86,11 +78,11 @@ export default function PremiumPage() {
         </div>
       </section>
 
-      {/* CTA gombok */}
+      {/* CTA */}
       <section className="py-4 text-center">
         <div className="d-inline-flex gap-3 flex-wrap">
           <button className="btn btn-primary">Előfizetés havi csomagra</button>
-          <button className="btn btn-outline-primary">Előfizetés éves csomagra (25% kedvezmény)</button>
+          <button className="btn btn-outline-primary">Előfizetés éves csomagra</button>
         </div>
       </section>
 

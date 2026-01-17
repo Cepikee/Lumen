@@ -959,6 +959,19 @@ html, body {
 
 
 
+:root {
+  --premium-bg: #ffffff;
+  --premium-bg-section: #f5f5f5;
+  --premium-card: #ffffff;
+  --premium-text: #000000;
+}
+
+body.dark {
+  --premium-bg: #121212;
+  --premium-bg-section: #1a1a1a;
+  --premium-card: #1e1e1e;
+  --premium-text: #ffffff;
+}
 
 
 
