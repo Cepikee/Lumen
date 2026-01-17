@@ -969,7 +969,7 @@ html, body {
 
 /* Ha a ThemeSwitch body.dark‑ot állít, ezek lépnek életbe */
 body.dark {
-  --premium-bg: #0f1113;        /* fő háttér sötét módban */
+  --premium-bg: #212529;        /* fő háttér sötét módban */
   --premium-section: #121316;   /* felső szakasz sötét árnyalat */
   --premium-card: #17181a;      /* kártyák sötét háttere */
   --premium-text: #e6e6e6;      /* szöveg sötét módban */
