@@ -3,16 +3,16 @@
 export default function PremiumPage() {
   return (
     <main
+      className="premium-page pb-5"
       style={{
-        backgroundColor: "var(--premium-bg)",
-        color: "var(--premium-text)"
+        backgroundColor: "var(--premium-bg, #ffffff)",
+        color: "var(--premium-text, #000000)"
       }}
-      className="pb-5"
     >
       {/* Felső szakasz */}
       <section
-        style={{ backgroundColor: "var(--premium-section)" }}
-        className="py-5 text-center"
+        className="premium-section py-5 text-center"
+        style={{ backgroundColor: "var(--premium-section, #f5f5f5)" }}
       >
         <div className="container">
           <h1 className="fs-2 fw-bold mb-3">
@@ -24,20 +24,20 @@ export default function PremiumPage() {
 
           <div className="d-flex justify-content-center gap-4 mt-4 flex-wrap">
             <div
-              className="border rounded p-4 shadow-sm text-center"
+              className="border rounded p-4 shadow-sm text-center premium-card"
               style={{
                 minWidth: "200px",
-                backgroundColor: "var(--premium-card)"
+                backgroundColor: "var(--premium-card, #ffffff)"
               }}
             >
               <h3 className="fs-4 mb-2">1000 Ft / hó</h3>
             </div>
 
             <div
-              className="border rounded p-4 shadow-sm text-center"
+              className="border rounded p-4 shadow-sm text-center premium-card"
               style={{
                 minWidth: "200px",
-                backgroundColor: "var(--premium-card)"
+                backgroundColor: "var(--premium-card, #ffffff)"
               }}
             >
               <h3 className="fs-4 mb-2">9000 Ft / év</h3>
@@ -49,8 +49,8 @@ export default function PremiumPage() {
 
       {/* Funkciólista */}
       <section
-        style={{ backgroundColor: "var(--premium-bg)" }}
         className="py-5"
+        style={{ backgroundColor: "var(--premium-bg, #ffffff)" }}
       >
         <div className="container">
           <h2 className="text-center fs-3 fw-bold mb-5">Az Utom prémium csomagja:</h2>
