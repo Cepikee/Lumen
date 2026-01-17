@@ -2,16 +2,23 @@
 
 import { useState } from "react";
 
-export default function RegisterModal() {
-  const [open, setOpen] = useState(false);
-
+export default function RegisterModal({ onClose }: { onClose: () => void }) {
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
+  const [bio, setBio] = useState("");
   const [password, setPassword] = useState("");
   const [pin, setPin] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  // 🔥 JELSZÓ ELLENŐRZŐ LOGIKA
+  const passwordChecks = {
+    length: password.length >= 8,
+    number: /\d/.test(password),
+    special: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+    uppercase: /[A-Z]/.test(password),
+  };
 
   const handleRegister = async () => {
     setError("");
@@ -19,7 +26,13 @@ export default function RegisterModal() {
 
     const res = await fetch("/api/auth/register", {
       method: "POST",
-      body: JSON.stringify({ email, password, pin, nickname }),
+      body: JSON.stringify({
+        email,
+        password,
+        pin,
+        nickname,
+        bio,
+      }),
     });
 
     const data = await res.json();
@@ -27,99 +40,118 @@ export default function RegisterModal() {
 
     if (data.success) {
       alert("Sikeres regisztráció!");
-      setOpen(false);
-      setEmail("");
-      setPassword("");
-      setPin("");
-      setNickname("");
+      onClose();
     } else {
       setError(data.message || "Hiba történt.");
     }
   };
 
   return (
-    <>
-      {/* GOMB A HEADERHEZ */}
-      <button
-        className="btn btn-outline-secondary ms-3"
-        onClick={() => setOpen(true)}
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0,0,0,0.5)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 9999,
+      }}
+      onClick={onClose}
+    >
+      <div
+        className="bg-dark text-white p-4 rounded position-relative"
+        style={{ width: "380px" }}
+        onClick={(e) => e.stopPropagation()}
       >
-        Regisztráció
-      </button>
-
-      {/* MODAL */}
-      {open && (
-        <div
+        {/* BEZÁRÓ GOMB */}
+        <button
+          onClick={onClose}
           style={{
-            position: "fixed",
-            inset: 0,
-            background: "rgba(0,0,0,0.5)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 9999,
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            background: "transparent",
+            border: "none",
+            color: "white",
+            fontSize: "22px",
+            cursor: "pointer",
           }}
-          onClick={() => setOpen(false)}
         >
-          <div
-            className="bg-dark text-white p-4 rounded"
-            style={{ width: "350px" }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="mb-3">Regisztráció</h3>
+          ×
+        </button>
 
-            {/* HIBAÜZENET */}
-            {error && (
-              <div className="alert alert-danger py-2">{error}</div>
-            )}
+        <h3 className="mb-3">Regisztráció</h3>
 
-            <input
-              className="form-control mb-2"
-              placeholder="Felhasználónév (nickname)"
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
-            />
+        {/* HIBAÜZENET */}
+        {error && <div className="alert alert-danger py-2">{error}</div>}
 
-            <input
-              className="form-control mb-2"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+        <input
+          className="form-control mb-2"
+          placeholder="Felhasználónév (nickname)"
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+        />
 
-            <input
-              className="form-control mb-2"
-              placeholder="Jelszó"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+        <input
+          className="form-control mb-2"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-            <input
-              className="form-control mb-3"
-              placeholder="PIN (4 számjegy)"
-              type="number"
-              value={pin}
-              onChange={(e) => setPin(e.target.value)}
-            />
+        <textarea
+          className="form-control mb-2"
+          placeholder="Bio (rövid bemutatkozás)"
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+          rows={2}
+        />
 
-            <button
-              className="btn btn-success w-100"
-              onClick={handleRegister}
-              disabled={loading}
-            >
-              {loading ? "Feldolgozás…" : "Regisztráció"}
-            </button>
+        <input
+          className="form-control mb-2"
+          placeholder="Jelszó"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-            <button
-              className="btn btn-secondary w-100 mt-2"
-              onClick={() => setOpen(false)}
-            >
-              Bezárás
-            </button>
+        {/* 🔥 JELSZÓ ELLENŐRZŐ */}
+        <div className="bg-secondary p-2 rounded mb-3" style={{ fontSize: "14px" }}>
+          <div style={{ color: passwordChecks.length ? "#4caf50" : "#ff5252" }}>
+            {passwordChecks.length ? "✔" : "✖"} Minimum 8 karakter
+          </div>
+          <div style={{ color: passwordChecks.number ? "#4caf50" : "#ff5252" }}>
+            {passwordChecks.number ? "✔" : "✖"} Tartalmaz számot
+          </div>
+          <div style={{ color: passwordChecks.uppercase ? "#4caf50" : "#ff5252" }}>
+            {passwordChecks.uppercase ? "✔" : "✖"} Tartalmaz nagybetűt
+          </div>
+          <div style={{ color: passwordChecks.special ? "#4caf50" : "#ff5252" }}>
+            {passwordChecks.special ? "✔" : "✖"} Tartalmaz speciális karaktert
           </div>
         </div>
-      )}
-    </>
+
+        <input
+          className="form-control mb-3"
+          placeholder="PIN (4 számjegy)"
+          type="number"
+          value={pin}
+          onChange={(e) => setPin(e.target.value)}
+        />
+
+        <button
+          className="btn btn-success w-100"
+          onClick={handleRegister}
+          disabled={loading}
+        >
+          {loading ? "Feldolgozás…" : "Regisztráció"}
+        </button>
+
+        <button className="btn btn-secondary w-100 mt-2" onClick={onClose}>
+          Bezárás
+        </button>
+      </div>
+    </div>
   );
 }

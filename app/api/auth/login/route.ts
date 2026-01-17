@@ -13,7 +13,7 @@ export async function POST(req: Request) {
   const ip = getIp(req);
   const { email, password, pin } = await req.json();
 
-  // 1) RATE LIMIT: 10 próbálkozás / 15 perc / IP
+  // 1) RATE LIMIT
   const [attempts]: any = await db.query(
     `SELECT COUNT(*) AS cnt 
      FROM login_attempts 
@@ -23,7 +23,6 @@ export async function POST(req: Request) {
   );
 
   if (attempts[0].cnt >= 10) {
-    // logoljuk a blokkolt próbálkozást is
     await db.query(
       "INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 0)",
       [ip, email]
@@ -88,15 +87,32 @@ export async function POST(req: Request) {
     [ip, email]
   );
 
-  // 6) SESSION COOKIE LÉTREHOZÁSA
-  const response = NextResponse.json({ success: true });
+  // 6) last_login frissítése
+  await db.query(
+    "UPDATE users SET last_login = NOW() WHERE id = ?",
+    [user.id]
+  );
+
+  // 7) SESSION COOKIE + USER ADATOK VISSZAADÁSA
+  const response = NextResponse.json({
+    success: true,
+    user: {
+      id: user.id,
+      email: user.email,
+      nickname: user.nickname,
+      bio: user.bio,
+      is_premium: user.is_premium,
+      premium_until: user.premium_until,
+      premium_tier: user.premium_tier
+    }
+  });
 
   response.cookies.set("session_user", String(user.id), {
     httpOnly: true,
-    secure: true, // élesben true
+    secure: true,
     sameSite: "strict",
     path: "/",
-    maxAge: 60 * 60 * 24 * 7 // 7 nap
+    maxAge: 60 * 60 * 24 * 7
   });
 
   return response;

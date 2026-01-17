@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
-  const { email, password, pin, nickname } = await req.json();
+  const { email, password, pin, nickname, bio } = await req.json();
 
   // --- VALIDÁCIÓK ---
 
@@ -38,11 +38,11 @@ export async function POST(req: Request) {
     });
   }
 
-  // Jelszó minimális követelmény
-  if (password.length < 6) {
+  // Jelszó minimális követelmény (frontend már erősebb)
+  if (password.length < 8) {
     return NextResponse.json({
       success: false,
-      message: "A jelszónak legalább 6 karakter hosszúnak kell lennie."
+      message: "A jelszónak legalább 8 karakter hosszúnak kell lennie."
     });
   }
 
@@ -79,8 +79,8 @@ export async function POST(req: Request) {
   const [result]: any = await db.query(
     `INSERT INTO users 
       (email, password_hash, pin_code, nickname, created_at, email_verified, last_login, role, theme, bio, is_premium, premium_until, premium_tier)
-     VALUES (?, ?, ?, ?, NOW(), 0, NULL, 'user', 'system', NULL, 0, NULL, NULL)`,
-    [email, password_hash, pin, nickname]
+     VALUES (?, ?, ?, ?, NOW(), 0, NULL, 'user', 'system', ?, 0, NULL, NULL)`,
+    [email, password_hash, pin, nickname, bio || null]
   );
 
   const userId = result.insertId;

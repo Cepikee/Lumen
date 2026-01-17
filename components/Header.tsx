@@ -5,7 +5,6 @@ import { useContext, useState, useEffect } from "react";
 import { LayoutContext } from "./LayoutContext";
 import { usePathname } from "next/navigation";
 import LoginModal from "./LoginModal";
-import RegisterModal from "./RegisterModal";
 import { useUser } from "@/hooks/useUser";
 import ProfileMenu from "./ProfileMenu";
 
@@ -134,15 +133,16 @@ export default function Header() {
             </li>
           </ul>
 
-          {/* PROFIL IKON */}
+          {/* PROFIL IKON / BEJELENTKEZÉS */}
           <div className="d-flex align-items-center">
             {loading && <span className="text-muted">Betöltés…</span>}
+
             {!loading && !user && (
               <>
                 <LoginModal />
-                <RegisterModal />
               </>
             )}
+
             {!loading && user && <ProfileMenu user={user} />}
           </div>
         </div>

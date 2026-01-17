@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import RegisterModal from "./RegisterModal";
 
 export default function LoginModal() {
   const [open, setOpen] = useState(false);
@@ -17,9 +18,11 @@ export default function LoginModal() {
   const [forgotEmail, setForgotEmail] = useState("");
   const [forgotStatus, setForgotStatus] = useState<"idle" | "loading" | "success">("idle");
 
+  // 🔥 REGISZTRÁCIÓ MODAL
+  const [showRegister, setShowRegister] = useState(false);
+
   // 🔥 LOGIN + reCAPTCHA
   const handleLogin = async () => {
-    // reCAPTCHA token lekérése
     // @ts-ignore
     const recaptchaToken = await grecaptcha.execute(
       process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
@@ -73,7 +76,7 @@ export default function LoginModal() {
         Bejelentkezés
       </button>
 
-      {/* MODAL */}
+      {/* LOGIN MODAL */}
       {open && (
         <div
           style={{
@@ -124,13 +127,29 @@ export default function LoginModal() {
                   Belépés
                 </button>
 
-                <p
-                  className="mt-3 text-center"
-                  style={{ cursor: "pointer", textDecoration: "underline" }}
-                  onClick={() => setMode("forgot")}
-                >
-                  Elfelejtetted a jelszavad?
-                </p>
+                {/* 🔥 ALULI LINK BLOKK */}
+                <div className="mt-3 text-center">
+
+                  <p
+                    style={{ cursor: "pointer", textDecoration: "underline" }}
+                    onClick={() => setMode("forgot")}
+                  >
+                    Elfelejtetted a jelszavad?
+                  </p>
+
+                  <p className="mt-2">
+                    Nincs még fiókod?{" "}
+                    <span
+                      style={{ cursor: "pointer", textDecoration: "underline" }}
+                      onClick={() => {
+                        setOpen(false);
+                        setShowRegister(true);
+                      }}
+                    >
+                      Regisztrálj!
+                    </span>
+                  </p>
+                </div>
 
                 <button
                   className="btn btn-secondary w-100 mt-2"
@@ -184,6 +203,11 @@ export default function LoginModal() {
             )}
           </div>
         </div>
+      )}
+
+      {/* 🔥 REGISZTRÁCIÓ MODAL */}
+      {showRegister && (
+        <RegisterModal onClose={() => setShowRegister(false)} />
       )}
     </>
   );
