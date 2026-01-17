@@ -2,9 +2,10 @@
 
 export default function PremiumPage() {
   return (
-    <main style={{ backgroundColor: "#f8f9fa", paddingBottom: "80px" }}>
+    <main style={{ backgroundColor: "#ffffff", paddingBottom: "80px" }}>
+      
       {/* Felső szakasz – Bevezető + Árazás */}
-      <section style={{ padding: "60px 20px", textAlign: "center" }}>
+      <section style={{ padding: "60px 20px", textAlign: "center", backgroundColor: "#f5f5f5" }}>
         <h1 style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "20px" }}>
           A hirdetésmentesség csak a kezdet. Az Utom Prémium a minőség új szintje.
         </h1>
@@ -45,7 +46,7 @@ export default function PremiumPage() {
       </section>
 
       {/* Funkciólista – ikon + szöveg + leírás */}
-      <section style={{ padding: "60px 20px", backgroundColor: "white" }}>
+      <section style={{ padding: "60px 20px", backgroundColor: "#ffffff" }}>
         <h2 style={{ textAlign: "center", fontSize: "1.8rem", fontWeight: "bold", marginBottom: "40px" }}>
           Az Utom prémium csomagja:
         </h2>
@@ -59,9 +60,9 @@ export default function PremiumPage() {
         }}>
           {[
             {
-              icon: "🔍",
-              title: "UTOM DNS – hírportál ujjlenyomat",
-              desc: "Minden forrásnak saját digitális lenyomata van. Látod, honnan jön, mennyire megbízható."
+              icon: "🧬",
+              title: "Utom Forrás‑DNS",
+              desc: "AI‑alapú forrásprofil, amely megmutatja, milyen témák dominálnak egy hírportálnál — százalékos bontásban."
             },
             {
               icon: "🧠",
