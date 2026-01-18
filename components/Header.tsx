@@ -142,7 +142,8 @@ export default function Header() {
 
             {!loading && !user && <LoginModal />}
 
-            {!loading && user && <ProfileMenu user={user} />}
+            {!loading && user && <ProfileMenu />}
+
           </div>
         </div>
       </div>

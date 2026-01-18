@@ -1,12 +1,18 @@
 "use client";
 
-import { User } from "@/types/User";
+import { useUserStore } from "@/store/useUserStore";
 
-export default function ProfileView({ user }: { user: User }) {
+export default function ProfileView() {
+  const user = useUserStore((s) => s.user); // 🔥 mindig FRISS user
+
+  if (!user) {
+    return <div>Betöltés...</div>;
+  }
+
   const premiumActive =
     user.is_premium ||
     (user.premium_until &&
-      new Date(user.premium_until) > new Date());
+      new Date(user.premium_until).getTime() > Date.now());
 
   return (
     <div style={{ padding: "20px", maxWidth: "400px" }}>

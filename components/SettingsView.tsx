@@ -1,25 +1,45 @@
 "use client";
 
 import { useState } from "react";
-import { User } from "@/types/User";
 import ThemeSwitch from "@/components/ThemeSwitch";
 import { useUserStore } from "@/store/useUserStore";
 import PasswordChangeModal from "@/components/PasswordChangeModal";
 import PinChangeModal from "@/components/PinChangeModal";
+import AvatarModal from "@/components/AvatarModal";
 
-export default function SettingsView({ user }: { user: User }) {
-  const [nickname, setNickname] = useState(user.nickname);
-  const [bio, setBio] = useState(user.bio || "");
+function getAvatarUrl(user: any) {
+  const style = user.avatar_style || "bottts";
+  const seed = encodeURIComponent(user.avatar_seed || user.nickname);
+  return `https://api.dicebear.com/8.x/${style}/svg?seed=${seed}`;
+}
+
+export default function SettingsView() {
+  const user = useUserStore((s) => s.user);
+  const setUser = useUserStore((s) => s.setUser);
+
+  const [nickname, setNickname] = useState(user!.nickname);
+  const [bio, setBio] = useState(user!.bio || "");
   const [saving, setSaving] = useState(false);
 
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [showPinModal, setShowPinModal] = useState(false);
+  const [showAvatarModal, setShowAvatarModal] = useState(false);
 
-  const setUser = useUserStore((s) => s.setUser);
+  if (!user) return <div>Betöltés...</div>;
+
+  // ⭐ Ha az AvatarModal nyitva van → csak a modal jelenik meg
+  if (showAvatarModal) {
+    return (
+      <AvatarModal
+        show={true}
+        onClose={() => setShowAvatarModal(false)}
+      />
+    );
+  }
 
   const premiumActive =
     user.is_premium ||
-    (user.premium_until && new Date(user.premium_until) > new Date());
+    (user.premium_until && new Date(user.premium_until).getTime() > Date.now());
 
   const premiumUntil = user.premium_until
     ? new Date(user.premium_until).toLocaleString("hu-HU", {
@@ -44,7 +64,7 @@ export default function SettingsView({ user }: { user: User }) {
       const data = await res.json();
 
       if (data.success) {
-        setUser({ ...user, nickname, bio });
+        setUser({ ...user!, nickname, bio });
         alert("Beállítások elmentve!");
       } else {
         alert("Hiba történt: " + data.message);
@@ -56,6 +76,7 @@ export default function SettingsView({ user }: { user: User }) {
     setSaving(false);
   }
 
+  // ⭐ Ha nincs AvatarModal → a SettingsView jelenik meg
   return (
     <div style={{ padding: "20px", maxWidth: "450px" }}>
       {/* PREMIUM INFO */}
@@ -72,19 +93,42 @@ export default function SettingsView({ user }: { user: User }) {
         </div>
       </div>
 
-     {/* NICKNAME */}
-<div className="mb-3">
-  <div className="mb-1">
-    <strong>Felhasználónév:</strong> {nickname}
-  </div>
-  <div
-    className="text-primary"
-    style={{ cursor: "pointer", fontWeight: "500" }}
-  >
-    Felhasználónév váltás kérelmezése →
-  </div>
-</div>
+      {/* AVATAR BLOKK */}
+      <div className="mb-4">
+        <strong>Avatar:</strong>
+        <div className="d-flex align-items-center gap-3 mt-2">
+          <img
+            src={getAvatarUrl(user)}
+            alt="avatar"
+            style={{
+              width: "64px",
+              height: "64px",
+              borderRadius: "50%",
+              objectFit: "cover",
+              border: premiumActive ? "2px solid gold" : "1px solid #555",
+              boxShadow: premiumActive ? "0 0 6px gold" : "none",
+            }}
+          />
 
+          <div
+            className="text-primary"
+            style={{ cursor: "pointer", fontWeight: "500" }}
+            onClick={() => setShowAvatarModal(true)}
+          >
+            Avatar módosítása →
+          </div>
+        </div>
+      </div>
+
+      {/* NICKNAME */}
+      <div className="mb-3">
+        <div className="mb-1">
+          <strong>Felhasználónév:</strong> {nickname}
+        </div>
+        <div className="text-primary" style={{ cursor: "pointer", fontWeight: "500" }}>
+          Felhasználónév váltás kérelmezése →
+        </div>
+      </div>
 
       {/* BIO */}
       <div className="mb-3">
@@ -105,10 +149,7 @@ export default function SettingsView({ user }: { user: User }) {
       {/* EMAIL */}
       <div className="mb-3">
         <strong>Email:</strong> {user.email}
-        <div
-          className="text-primary mt-1"
-          style={{ cursor: "pointer", fontWeight: "500" }}
-        >
+        <div className="text-primary mt-1" style={{ cursor: "pointer", fontWeight: "500" }}>
           Email módosítása →
         </div>
       </div>
@@ -147,14 +188,8 @@ export default function SettingsView({ user }: { user: User }) {
       </button>
 
       {/* MODALS */}
-      <PasswordChangeModal
-        show={showPasswordModal}
-        onClose={() => setShowPasswordModal(false)}
-      />
-      <PinChangeModal
-        show={showPinModal}
-        onClose={() => setShowPinModal(false)}
-      />
+      <PasswordChangeModal show={showPasswordModal} onClose={() => setShowPasswordModal(false)} />
+      <PinChangeModal show={showPinModal} onClose={() => setShowPinModal(false)} />
     </div>
   );
 }

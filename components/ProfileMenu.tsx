@@ -4,9 +4,10 @@ import { useState } from "react";
 import ProfileView from "./ProfileView";
 import SettingsView from "./SettingsView";
 import UtomModal from "./UtomModal";
-import { User } from "@/types/User";
+import { useUserStore } from "@/store/useUserStore";
 
-export default function ProfileMenu({ user }: { user: User }) {
+export default function ProfileMenu() {
+  const user = useUserStore((s) => s.user); // 🔥 mindig FRISS user
   const [open, setOpen] = useState(false);
   const [modal, setModal] = useState<null | "profile" | "settings">(null);
 
@@ -15,16 +16,28 @@ export default function ProfileMenu({ user }: { user: User }) {
     setModal(type);
   }
 
+  // 🔥 prémium logika – csak akkor true, ha tényleg prémium
   const premiumActive =
-    user.is_premium ||
-    (user.premium_until && new Date(user.premium_until) > new Date());
+    user &&
+    (user.is_premium === true ||
+      (user.premium_until &&
+        new Date(user.premium_until).getTime() > Date.now()));
+
+  // 🔥 DiceBear 8.x avatar URL
+  const avatarUrl =
+    user?.avatar_style && user?.avatar_seed
+      ? `https://api.dicebear.com/8.x/${user.avatar_style}/svg?seed=${encodeURIComponent(
+          user.avatar_seed
+        )}`
+      : null;
 
   return (
     <div className="position-relative">
 
-      {/* Profil ikon – DiceBear avatar + PRÉMIUM ARANY KERET + GLOW */}
+      {/* Profil ikon */}
       <div
         onClick={() => setOpen(!open)}
+        className={premiumActive ? "premium-avatar" : ""}
         style={{
           position: "relative",
           width: "40px",
@@ -36,23 +49,29 @@ export default function ProfileMenu({ user }: { user: User }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-
-          // 🔥 Prémium kiemelés
-          border: premiumActive ? "2px solid gold" : "none",
-          boxShadow: premiumActive ? "0 0 6px gold" : "none",
         }}
       >
-        <img
-          src={`https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(
-            user.nickname
-          )}`}
-          alt="avatar"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
+        {avatarUrl ? (
+          <img
+            src={avatarUrl}
+            alt="avatar"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "50%",
+            }}
+          />
+        ) : (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              background: "#555",
+              borderRadius: "50%",
+            }}
+          />
+        )}
       </div>
 
       {/* Dropdown */}
@@ -139,13 +158,13 @@ export default function ProfileMenu({ user }: { user: User }) {
       {/* MODALOK */}
       {modal === "profile" && (
         <UtomModal show={true} onClose={() => setModal(null)} title="Profil">
-          <ProfileView user={user} />
+          <ProfileView />
         </UtomModal>
       )}
 
       {modal === "settings" && (
         <UtomModal show={true} onClose={() => setModal(null)} title="Beállítások">
-          <SettingsView user={user} />
+         <SettingsView />
         </UtomModal>
       )}
     </div>

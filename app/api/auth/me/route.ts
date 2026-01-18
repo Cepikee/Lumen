@@ -13,7 +13,7 @@ export async function GET(req: Request) {
 
   // 🔥 Teljes user lekérés minden új mezővel
   const [rows]: any = await db.query(
-    `SELECT 
+  `SELECT 
         id,
         email,
         nickname,
@@ -25,12 +25,16 @@ export async function GET(req: Request) {
         bio,
         is_premium,
         premium_until,
-        premium_tier
+        premium_tier,
+        avatar_style,
+        avatar_seed,
+        avatar_format
      FROM users
      WHERE id = ?
      LIMIT 1`,
-    [userId]
-  );
+  [userId]
+);
+
 
   if (rows.length === 0) {
     return NextResponse.json({ loggedIn: false });
