@@ -8,8 +8,6 @@ import { User } from "@/types/User";
 
 export default function ProfileMenu({ user }: { user: User }) {
   const [open, setOpen] = useState(false);
-
-  // Csak a két modal marad
   const [modal, setModal] = useState<null | "profile" | "settings">(null);
 
   function openModal(type: "profile" | "settings") {
@@ -17,13 +15,18 @@ export default function ProfileMenu({ user }: { user: User }) {
     setModal(type);
   }
 
+  const premiumActive =
+    user.is_premium ||
+    (user.premium_until && new Date(user.premium_until) > new Date());
+
   return (
     <div className="position-relative">
 
-      {/* Profil ikon – DiceBear avatar */}
+      {/* Profil ikon – DiceBear avatar + PRÉMIUM ARANY KERET + GLOW */}
       <div
         onClick={() => setOpen(!open)}
         style={{
+          position: "relative",
           width: "40px",
           height: "40px",
           borderRadius: "50%",
@@ -33,10 +36,16 @@ export default function ProfileMenu({ user }: { user: User }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+
+          // 🔥 Prémium kiemelés
+          border: premiumActive ? "2px solid gold" : "none",
+          boxShadow: premiumActive ? "0 0 6px gold" : "none",
         }}
       >
         <img
-          src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${encodeURIComponent(user.nickname)}`}
+          src={`https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(
+            user.nickname
+          )}`}
           alt="avatar"
           style={{
             width: "100%",
@@ -61,7 +70,6 @@ export default function ProfileMenu({ user }: { user: User }) {
             zIndex: 9999,
           }}
         >
-          {/* PROFIL */}
           <button
             onClick={() => openModal("profile")}
             style={{
@@ -77,7 +85,6 @@ export default function ProfileMenu({ user }: { user: User }) {
             Profil
           </button>
 
-          {/* BEÁLLÍTÁSOK */}
           <button
             onClick={() => openModal("settings")}
             style={{
@@ -93,7 +100,6 @@ export default function ProfileMenu({ user }: { user: User }) {
             Beállítások
           </button>
 
-          {/* PRÉMIUM – OLDALRA NAVIGÁL */}
           <a
             href="/premium"
             style={{
@@ -110,7 +116,6 @@ export default function ProfileMenu({ user }: { user: User }) {
             Prémium
           </a>
 
-          {/* KIJELENTKEZÉS */}
           <button
             onClick={async () => {
               await fetch("/api/auth/logout", { method: "POST" });

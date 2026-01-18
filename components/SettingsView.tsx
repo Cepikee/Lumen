@@ -5,7 +5,7 @@ import { User } from "@/types/User";
 import ThemeSwitch from "@/components/ThemeSwitch";
 import { useUserStore } from "@/store/useUserStore";
 import PasswordChangeModal from "@/components/PasswordChangeModal";
-import PinChangeModal from "@/components/PinChangeModal"; // 🔥 ÚJ
+import PinChangeModal from "@/components/PinChangeModal";
 
 export default function SettingsView({ user }: { user: User }) {
   const [nickname, setNickname] = useState(user.nickname);
@@ -13,14 +13,23 @@ export default function SettingsView({ user }: { user: User }) {
   const [saving, setSaving] = useState(false);
 
   const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const [showPinModal, setShowPinModal] = useState(false); // 🔥 ÚJ
+  const [showPinModal, setShowPinModal] = useState(false);
 
   const setUser = useUserStore((s) => s.setUser);
 
   const premiumActive =
     user.is_premium ||
-    (user.premium_until &&
-      new Date(user.premium_until) > new Date());
+    (user.premium_until && new Date(user.premium_until) > new Date());
+
+  const premiumUntil = user.premium_until
+    ? new Date(user.premium_until).toLocaleString("hu-HU", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+    : null;
 
   async function handleSave() {
     setSaving(true);
@@ -29,21 +38,13 @@ export default function SettingsView({ user }: { user: User }) {
       const res = await fetch("/api/user/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nickname,
-          bio,
-        }),
+        body: JSON.stringify({ nickname, bio }),
       });
 
       const data = await res.json();
 
       if (data.success) {
-        setUser({
-          ...user,
-          nickname,
-          bio,
-        });
-
+        setUser({ ...user, nickname, bio });
         alert("Beállítások elmentve!");
       } else {
         alert("Hiba történt: " + data.message);
@@ -57,41 +58,33 @@ export default function SettingsView({ user }: { user: User }) {
 
   return (
     <div style={{ padding: "20px", maxWidth: "450px" }}>
-      <h2 className="mb-3">Beállítások</h2>
-
       {/* PREMIUM INFO */}
       <div className="mb-4">
         <strong>Prémium státusz:</strong>
         <div>
           {premiumActive ? (
             <span style={{ color: "gold", fontWeight: "bold" }}>
-              ⭐ Aktív prémium
+              ⭐ Aktív – {premiumUntil}
             </span>
           ) : (
-            <span>Nem prémium felhasználó</span>
+            <span>Inaktív</span>
           )}
         </div>
-
-        {user.premium_until && (
-          <div className="text-muted small">
-            Lejár:{" "}
-            {new Date(user.premium_until).toLocaleDateString("hu-HU")}
-          </div>
-        )}
       </div>
 
-      {/* NICKNAME */}
-      <div className="mb-3">
-        <label className="form-label fw-bold">Felhasználónév</label>
-        <input
-          className="form-control"
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
-        />
-        <div className="text-muted small">
-          Csak betűk, számok és _ (3–20 karakter)
-        </div>
-      </div>
+     {/* NICKNAME */}
+<div className="mb-3">
+  <div className="mb-1">
+    <strong>Felhasználónév:</strong> {nickname}
+  </div>
+  <div
+    className="text-primary"
+    style={{ cursor: "pointer", fontWeight: "500" }}
+  >
+    Felhasználónév váltás kérelmezése →
+  </div>
+</div>
+
 
       {/* BIO */}
       <div className="mb-3">
@@ -106,14 +99,18 @@ export default function SettingsView({ user }: { user: User }) {
 
       {/* THEME */}
       <div className="mb-4">
-        <label className="form-label fw-bold">Téma</label>
         <ThemeSwitch />
       </div>
 
       {/* EMAIL */}
       <div className="mb-3">
-        <strong>Email:</strong>
-        <div>{user.email}</div>
+        <strong>Email:</strong> {user.email}
+        <div
+          className="text-primary mt-1"
+          style={{ cursor: "pointer", fontWeight: "500" }}
+        >
+          Email módosítása →
+        </div>
       </div>
 
       {/* PIN */}
@@ -122,7 +119,7 @@ export default function SettingsView({ user }: { user: User }) {
         <div
           className="text-primary"
           style={{ cursor: "pointer", fontWeight: "500" }}
-          onClick={() => setShowPinModal(true)} // 🔥 ÚJ
+          onClick={() => setShowPinModal(true)}
         >
           PIN kód módosítása →
         </div>
@@ -149,13 +146,11 @@ export default function SettingsView({ user }: { user: User }) {
         {saving ? "Mentés..." : "Mentés"}
       </button>
 
-      {/* PASSWORD MODAL */}
+      {/* MODALS */}
       <PasswordChangeModal
         show={showPasswordModal}
         onClose={() => setShowPasswordModal(false)}
       />
-
-      {/* PIN MODAL */}
       <PinChangeModal
         show={showPinModal}
         onClose={() => setShowPinModal(false)}

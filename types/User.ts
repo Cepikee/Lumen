@@ -11,4 +11,7 @@ export type User = {
   is_premium: boolean;
   premium_until: string | null;
   premium_tier: string | null;
+  avatar_style: string; 
+  avatar_seed: string; 
+  avatar_format: "svg" | "gif";
 };
