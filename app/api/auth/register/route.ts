@@ -111,6 +111,13 @@ export async function POST(req: Request) {
 
   const userId = result.insertId;
 
+  // --- 🔥 EMAIL MEGERŐSÍTÉS INDÍTÁSA (HOZZÁADOTT RÉSZ) ---
+  await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/send-verification`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ userId }),
+  });
+
   // --- SESSION COOKIE ---
 
   const response = NextResponse.json({
