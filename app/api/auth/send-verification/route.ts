@@ -39,6 +39,7 @@ export async function POST(req: Request) {
     const verifyUrl = `https://utom.hu/verify-email?token=${token}`;
 
     await mailer.sendMail({
+      from: `"Utom.hu" <noreply@utom.hu>`,   // 🔥 CPanel kötelező!
       to: user.email,
       subject: "Erősítsd meg az email címed",
       html: `
