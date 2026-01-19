@@ -5,11 +5,7 @@ import InsightSparkline from "@/components/InsightSparkline";
 import InsightSourceRing from "@/components/InsightSourceRing";
 import InsightCard from "@/components/InsightCard";
 
-export default function InsightPage({
-  params,
-}: {
-  params: { keyword: string };
-}) {
+export default function InsightPage({ params }: any) {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
