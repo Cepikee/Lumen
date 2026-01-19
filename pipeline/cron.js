@@ -215,7 +215,6 @@ async function processArticlePipeline(article) {
 await fetch("http://127.0.0.1:3000/api/fetch-feed");
 
 // 0) Biztosítsuk, hogy legyen rendes content_text (SCRAPER)
-// 0) Biztosítsuk, hogy legyen rendes content_text (SCRAPER)
 if (!article.content_text || article.content_text.trim().length < 400) {
   console.log(
     `[SCRAPER] ℹ️ Túl rövid content_text (len=${(article.content_text || "").length}), scraping próbálkozás...`
@@ -346,60 +345,6 @@ await runWithRetries("[SHORT] ✂️ Rövid összefoglaló", async () => {
     console.log(`[LONG] AI válasz hossza: ${longSummary.length} karakter`);
     return res;
   });
-
-  // 0/B) Kategorizálás (hosszú elemzés után, 400 karakter alapján)
-try {
-  console.log(`[CAT] 🏷️ Kategorizálás indul: articleId=${articleId}`);
-
-  const textForCategory = (article.content_text || "").slice(0, 400);
-
-  const prompt = `
-Ez egy magyar hír cikk részlete:
-
-"${textForCategory}"
-
-Kategóriák:
-${VALID_CATEGORIES.join(", ")}
-
-Feladat:
-Válaszd ki a cikkhez legjobban illő kategóriát a listából.
-Csak a kategória nevét írd ki, semmi mást.
-`.trim();
-
-  let category = await callOllama(prompt, 0, 300000);
-
-  if (!isValidCategory(category)) {
-    console.warn(`[CAT] ⚠️ Érvénytelen kategória: "${category}". Újrapróbálás...`);
-    category = await callOllama(prompt, 0, 300000);
-  }
-
-  if (!isValidCategory(category)) {
-    console.error(`[CAT] ❌ AI nem adott érvényes kategóriát! articleId=${articleId}`);
-  } else {
-    const conn2 = await mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "jelszo",
-      database: "projekt2025",
-    });
-
-    await conn2.execute(
-      "UPDATE articles SET category = ? WHERE id = ?",
-      [category.trim(), articleId]
-    );
-
-    await conn2.end();
-
-    article.category = category.trim();
-
-    console.log(`[CAT] ✔️ Kategória mentve: ${article.category}`);
-  }
-} catch (err) {
-  console.error(`[CAT] ❌ Kategorizálási hiba:`, err);
-}
-
-
-
 
   // 3) Plágium ellenőrzés
   await runWithRetries("[PLAG] 🔍 Plágium ellenőrzés", async () => {
