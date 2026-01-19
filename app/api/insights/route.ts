@@ -10,18 +10,19 @@ export async function GET(req: Request) {
     const [rows] = await db.query(
       `
       SELECT 
-        k.keyword,
-        k.category,
-        COUNT(DISTINCT k.article_id) AS article_count,
-        COUNT(DISTINCT a.source) AS source_diversity,
-        MAX(a.created_at) AS last_article_at
-      FROM keywords k
-      JOIN articles a ON a.id = k.article_id
-      WHERE a.created_at >= NOW() - INTERVAL 24 HOUR
-      GROUP BY k.keyword, k.category
-      HAVING article_count >= 3
-      ORDER BY article_count DESC, last_article_at DESC
-      LIMIT ?
+  k.keyword,
+  a.category AS category,   -- 🔥 EZ A LÉNYEG
+  COUNT(DISTINCT k.article_id) AS article_count,
+  COUNT(DISTINCT a.source) AS source_diversity,
+  MAX(a.created_at) AS last_article_at
+FROM keywords k
+JOIN articles a ON a.id = k.article_id
+WHERE a.created_at >= NOW() - INTERVAL 24 HOUR
+GROUP BY k.keyword, a.category   -- 🔥 Itt is átírva
+HAVING article_count >= 3
+ORDER BY article_count DESC, last_article_at DESC
+LIMIT ?
+
       `,
       [limit]
     );

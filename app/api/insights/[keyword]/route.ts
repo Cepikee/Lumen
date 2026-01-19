@@ -6,30 +6,29 @@ export async function GET(
   context: { params: Promise<{ keyword: string }> }
 ) {
   try {
-    // FIX #1: params awaitolása
     const { keyword } = await context.params;
     const decodedKeyword = decodeURIComponent(keyword);
 
-    // 1) Trend meta
+    // 1) Trend meta — 🔥 kulcsszó kategória helyett CIKK kategória
     const [metaRows] = await db.query(
       `
       SELECT 
         k.keyword,
-        k.category,
+        a.category AS category,
         COUNT(DISTINCT k.article_id) AS total_articles,
         COUNT(DISTINCT a.source) AS source_diversity,
         MAX(a.created_at) AS last_article_at
       FROM keywords k
       JOIN articles a ON a.id = k.article_id
       WHERE k.keyword = ?
-      GROUP BY k.keyword, k.category
+      GROUP BY k.keyword, a.category
       `,
       [decodedKeyword]
     );
 
     const meta = (metaRows as any[])[0];
 
-    // 2) Sparkline (24h)
+    // 2) Sparkline (24h) — ez maradhat
     const [sparkRows] = await db.query(
       `
       SELECT 
@@ -50,7 +49,7 @@ export async function GET(
       count: row.article_count,
     }));
 
-    // 3) Source dominance (today)
+    // 3) Source dominance — maradhat
     const [sourceRows] = await db.query(
       `
       SELECT 
@@ -79,7 +78,7 @@ export async function GET(
         : 0,
     }));
 
-    // 4) Related articles
+    // 4) Related articles — már most is a.category-t ad vissza
     const [articleRows] = await db.query(
       `
       SELECT 
@@ -98,26 +97,27 @@ export async function GET(
       [decodedKeyword]
     );
 
-    // 5) Related trends
+    // 5) Related trends — 🔥 itt is átírjuk a kategóriát
     const [relatedTrendRows] = await db.query(
       `
       SELECT 
         k2.keyword,
-        k2.category,
+        a2.category AS category,
         COUNT(DISTINCT k2.article_id) AS article_count
       FROM keywords k1
       JOIN keywords k2 
         ON k1.article_id = k2.article_id 
         AND k2.keyword != k1.keyword
+      JOIN articles a2 ON a2.id = k2.article_id
       WHERE k1.keyword = ?
-      GROUP BY k2.keyword, k2.category
+      GROUP BY k2.keyword, a2.category
       ORDER BY article_count DESC
       LIMIT 10
       `,
       [decodedKeyword]
     );
 
-    // 6) TrendScore v1
+    // 6) TrendScore
     const recentActivityScore = Math.min(meta.total_articles / 10, 1);
     const sourceDiversityScore = Math.min(meta.source_diversity / 5, 1);
 
