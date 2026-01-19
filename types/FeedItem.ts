@@ -6,4 +6,5 @@ export interface FeedItem {
   detailed_content: string;     // KÖTELEZŐ
   ai_clean: number;    // KÖTELEZŐ
   created_at: string;           // KÖTELEZŐ
+  category?: string;
 }
