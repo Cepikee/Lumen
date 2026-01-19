@@ -278,38 +278,56 @@ if (!article.content_text || article.content_text.trim().length < 400) {
   article.content_text = scrapeRes.text;
 }
 
+// 🔥 IDE JÖN A KATEGORIZÁLÁS BLOKK
+try {
+  console.log(`[CAT] 🏷️ Kategorizálás indul: articleId=${articleId}`);
 
-// 0/B) Kategorizálás (scraping után)
-// try {
-//  console.log(`[CAT] 🏷️ Kategorizálás indul: articleId=${articleId}`);
- //  const catRes = await categorizeArticle(articleId);
-// 
- //  if (!catRes?.ok) {
-  //   console.warn(`[CAT] ⚠️ Kategorizálás sikertelen, fallback később. articleId=${articleId}`);
- //  } else {
- //    // 🔥 Friss kategória beolvasása az article objektumba
- //    const conn2 = await mysql.createConnection({
- //      host: "localhost",
-  //     user: "root",
-   //    password: "jelszo",
-   //    database: "projekt2025",
-  //   });
-// 
-   //  const [catRow] = await conn2.execute(
-  //     "SELECT category FROM articles WHERE id = ?",
-  //    [articleId]
-  //   );
-// 
-  //   await conn2.end();
-// 
- //   article.category = catRow?.[0]?.category || null;
-  //   console.log(`[CAT] ✔️ Kategória beállítva a pipeline-ban: ${article.category}`);
-//   }
-// } catch (err) {
- //  console.error(`[CAT] ❌ Kategorizálási hiba:`, err);
-// }
+  const textForCategory = (article.content_text || "").slice(0, 400);
 
+  const prompt = `
+Ez egy magyar hír cikk részlete:
 
+"${textForCategory}"
+
+Kategóriák:
+${VALID_CATEGORIES.join(", ")}
+
+Feladat:
+Válaszd ki a cikkhez legjobban illő kategóriát a listából.
+Csak a kategória nevét írd ki, semmi mást.
+`.trim();
+
+  let category = await callOllama(prompt, 0, 300000);
+
+  if (!isValidCategory(category)) {
+    console.warn(`[CAT] ⚠️ Érvénytelen kategória: "${category}". Újrapróbálás...`);
+    category = await callOllama(prompt, 0, 300000);
+  }
+
+  if (!isValidCategory(category)) {
+    console.error(`[CAT] ❌ AI nem adott érvényes kategóriát! articleId=${articleId}`);
+  } else {
+    const conn2 = await mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "jelszo",
+      database: "projekt2025",
+    });
+
+    await conn2.execute(
+      "UPDATE articles SET category = ? WHERE id = ?",
+      [category.trim(), articleId]
+    );
+
+    await conn2.end();
+
+    article.category = category.trim();
+
+    console.log(`[CAT] ✔️ Kategória mentve: ${article.category}`);
+  }
+} catch (err) {
+  console.error(`[CAT] ❌ Kategorizálási hiba:`, err);
+}
 
   
   // 1) Rövid összefoglaló
