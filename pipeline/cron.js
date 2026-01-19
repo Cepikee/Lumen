@@ -8,7 +8,7 @@ const { saveSources } = require("./saveSources");
 const { saveSummary } = require("./saveSummary");
 const { scrapeArticle } = require("./scrapeArticle");
 const { fixShortSummary, isValidShortSummary } = require("./summarizeShortValidator");
-const { categorizeArticle } = require("./fillCategory");
+
 
 // 🔥 IDE JÖN:
 const VALID_CATEGORIES = [
