@@ -9,19 +9,19 @@ export async function GET(
     const { keyword } = await context.params;
     const decodedKeyword = decodeURIComponent(keyword);
 
-    // 1) META — trends tábla használata
+    // 1) META — keywords tábla
     const [metaRows] = await db.query(
       `
       SELECT 
-        t.keyword,
+        k.keyword,
         a.category AS category,
-        COUNT(DISTINCT t.article_id) AS total_articles,
+        COUNT(DISTINCT k.article_id) AS total_articles,
         COUNT(DISTINCT a.source) AS source_diversity,
         MAX(a.created_at) AS last_article_at
-      FROM trends t
-      JOIN articles a ON a.id = t.article_id
-      WHERE t.keyword = ?
-      GROUP BY t.keyword, a.category
+      FROM keywords k
+      JOIN articles a ON a.id = k.article_id
+      WHERE k.keyword = ?
+      GROUP BY k.keyword, a.category
       `,
       [decodedKeyword]
     );
@@ -32,15 +32,15 @@ export async function GET(
 
     const meta = (metaRows as any[])[0];
 
-    // 2) SPARKLINE — trends tábla
+    // 2) SPARKLINE — keywords tábla
     const [sparkRows] = await db.query(
       `
       SELECT 
         DATE_FORMAT(a.created_at, '%Y-%m-%d %H:00:00') AS bucket,
         COUNT(*) AS article_count
-      FROM trends t
-      JOIN articles a ON a.id = t.article_id
-      WHERE t.keyword = ?
+      FROM keywords k
+      JOIN articles a ON a.id = k.article_id
+      WHERE k.keyword = ?
         AND a.created_at >= NOW() - INTERVAL 24 HOUR
       GROUP BY bucket
       ORDER BY bucket
@@ -53,15 +53,15 @@ export async function GET(
       count: row.article_count,
     }));
 
-    // 3) SOURCE DOMINANCE — trends tábla
+    // 3) SOURCE DOMINANCE — keywords tábla
     const [sourceRows] = await db.query(
       `
       SELECT 
         a.source,
         COUNT(*) AS article_count
-      FROM trends t
-      JOIN articles a ON a.id = t.article_id
-      WHERE t.keyword = ?
+      FROM keywords k
+      JOIN articles a ON a.id = k.article_id
+      WHERE k.keyword = ?
         AND DATE(a.created_at) = CURDATE()
       GROUP BY a.source
       ORDER BY article_count DESC
@@ -82,7 +82,7 @@ export async function GET(
         : 0,
     }));
 
-    // 4) RELATED ARTICLES — trends tábla
+    // 4) RELATED ARTICLES — keywords tábla
     const [articleRows] = await db.query(
       `
       SELECT 
@@ -92,29 +92,29 @@ export async function GET(
         a.source,
         a.created_at,
         a.category
-      FROM trends t
-      JOIN articles a ON a.id = t.article_id
-      WHERE t.keyword = ?
+      FROM keywords k
+      JOIN articles a ON a.id = k.article_id
+      WHERE k.keyword = ?
       ORDER BY a.created_at DESC
       LIMIT 20
       `,
       [decodedKeyword]
     );
 
-    // 5) RELATED TRENDS — trends tábla
+    // 5) RELATED TRENDS — keywords tábla
     const [relatedTrendRows] = await db.query(
       `
       SELECT 
-        t2.keyword,
+        k2.keyword,
         a2.category AS category,
-        COUNT(DISTINCT t2.article_id) AS article_count
-      FROM trends t1
-      JOIN trends t2 
-        ON t1.article_id = t2.article_id 
-        AND t2.keyword != t1.keyword
-      JOIN articles a2 ON a2.id = t2.article_id
-      WHERE t1.keyword = ?
-      GROUP BY t2.keyword, a2.category
+        COUNT(DISTINCT k2.article_id) AS article_count
+      FROM keywords k1
+      JOIN keywords k2 
+        ON k1.article_id = k2.article_id 
+        AND k2.keyword != k1.keyword
+      JOIN articles a2 ON a2.id = k2.article_id
+      WHERE k1.keyword = ?
+      GROUP BY k2.keyword, a2.category
       ORDER BY article_count DESC
       LIMIT 10
       `,
