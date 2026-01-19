@@ -13,7 +13,7 @@ async function callOllama(prompt, timeoutMs = 120000) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "llama3:8b-instruct-q4_0",
+        model: "llama3:latest",
         prompt,
         stream: false
       }),
