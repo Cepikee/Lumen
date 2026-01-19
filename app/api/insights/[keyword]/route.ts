@@ -3,12 +3,11 @@ import { db } from "@/lib/db";
 
 export async function GET(
   req: Request,
-  context: { params: Promise<{ keyword: string }> }
+  { params }: { params: { keyword: string } }
 ) {
-  try {
-    const { keyword } = await context.params;
-    const decodedKeyword = decodeURIComponent(keyword);
+  const decodedKeyword = decodeURIComponent(params.keyword);
 
+  try {
     // 1) META — keywords tábla
     const [metaRows] = await db.query(
       `

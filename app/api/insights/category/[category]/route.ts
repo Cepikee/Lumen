@@ -3,11 +3,10 @@ import { db } from "@/lib/db";
 
 export async function GET(
   req: Request,
-  context: { params: Promise<{ category: string }> }
+  { params }: { params: { category: string } }
 ) {
+  const decoded = decodeURIComponent(params.category);
   try {
-    const { category } = await context.params;
-    const decoded = decodeURIComponent(category);
 
     // 1) META
     const [metaRows] = await db.query(
