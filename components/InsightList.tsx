@@ -10,6 +10,7 @@ type InsightItem = {
   sources: number;
   dominantSource: string;
   timeAgo: string;
+  href: string;
 };
 
 type InsightListProps = {
@@ -39,6 +40,7 @@ export default function InsightList({ items, loading }: InsightListProps) {
           sources={item.sources}
           dominantSource={item.dominantSource}
           timeAgo={item.timeAgo}
+          href={item.href}
         />
       ))}
     </div>

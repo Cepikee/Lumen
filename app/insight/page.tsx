@@ -1,27 +1,27 @@
+// app/insight/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
-import InsightCard from "@/components/InsightCard";
-import InsightCategoryBar from "@/components/InsightCategoryBar";
-import InsightFilters from "@/components/InsightFilters";
 import InsightList from "@/components/InsightList";
 
 export default function InsightFeedPage() {
-  const [trends, setTrends] = useState<any[]>([]);
+  const [categoryTrends, setCategoryTrends] = useState<any[]>([]);
+  const [keywordTrends, setKeywordTrends] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // Kategória és szűrő állapot
-  const [activeCategory, setActiveCategory] = useState<string>("Összes");
-  const [activeFilter, setActiveFilter] = useState<string>("Legfrissebb");
 
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch("/api/insights");
-        const json = await res.json();
-        if (json.success) {
-          setTrends(json.trends);
-        }
+        const [catRes, kwRes] = await Promise.all([
+          fetch("/api/insights/categories"),
+          fetch("/api/insights"),
+        ]);
+
+        const catJson = await catRes.json();
+        const kwJson = await kwRes.json();
+
+        if (catJson.success) setCategoryTrends(catJson.categories);
+        if (kwJson.success) setKeywordTrends(kwJson.trends);
       } catch (err) {
         console.error("InsightFeed error:", err);
       } finally {
@@ -31,59 +31,37 @@ export default function InsightFeedPage() {
     load();
   }, []);
 
-  // Kategória lista
-  const categories = ["Összes", ...new Set(trends.map((t) => t.category))];
+  const categoryItems = categoryTrends.map((c) => ({
+    id: `cat-${c.category}`,
+    title: c.category,
+    category: "Kategória",
+    score: c.trendScore,
+    sources: c.articleCount,
+    dominantSource: `${c.sourceDiversity} forrás`,
+    timeAgo: new Date(c.lastArticleAt).toLocaleString(),
+    href: `/insight/category/${encodeURIComponent(c.category)}`,
+  }));
 
-  // Szűrés kategória szerint
-  let filtered = activeCategory === "Összes"
-    ? trends
-    : trends.filter((t) => t.category === activeCategory);
-
-  // Szűrés filter szerint
-  if (activeFilter === "Legfrissebb") {
-    filtered = [...filtered].sort(
-      (a, b) => new Date(b.lastArticleAt).getTime() - new Date(a.lastArticleAt).getTime()
-    );
-  }
-
-  if (activeFilter === "Növekvő") {
-    filtered = [...filtered].sort((a, b) => b.trendScore - a.trendScore);
-  }
-
-  if (activeFilter === "Legtöbb forrás") {
-    filtered = [...filtered].sort((a, b) => b.sourceDiversity - a.sourceDiversity);
-  }
-
-  // InsightList formátumra alakítás
-  const listItems = filtered.map((t) => ({
-    id: t.keyword,
+  const keywordItems = keywordTrends.map((t: any) => ({
+    id: `kw-${t.keyword}`,
     title: t.keyword,
     category: t.category,
     score: t.trendScore,
     sources: t.articleCount,
     dominantSource: `${t.sourceDiversity} forrás`,
     timeAgo: new Date(t.lastArticleAt).toLocaleString(),
+    href: `/insight/${encodeURIComponent(t.keyword)}`,
   }));
 
   return (
     <main className="container py-5">
       <h1 className="mb-4 text-center">Trendek</h1>
 
-      {/* Kategória sáv */}
-      <InsightCategoryBar
-        categories={categories}
-        active={activeCategory}
-        onSelect={(cat: string) => setActiveCategory(cat)}
-      />
+      <h2 className="fs-5 fw-bold mb-2">Kategória trendek</h2>
+      <InsightList items={categoryItems} loading={loading} />
 
-      {/* Szűrők */}
-      <InsightFilters
-        active={activeFilter}
-        onChange={(filter: string) => setActiveFilter(filter)}
-      />
-
-      {/* Lista */}
-      <InsightList items={listItems} loading={loading} />
+      <h2 className="fs-5 fw-bold mt-5 mb-2">Kulcsszó trendek</h2>
+      <InsightList items={keywordItems} loading={loading} />
     </main>
   );
 }
