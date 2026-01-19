@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-export async function GET(
-  req: Request,
-  { params }: { params: { keyword: string } }
-) {
-  const decodedKeyword = decodeURIComponent(params.keyword);
-
+export async function GET(req: Request, context: any) {
   try {
+    const { keyword } = context.params as { keyword: string };
+    const decodedKeyword = decodeURIComponent(keyword);
+
     // 1) META — keywords tábla
     const [metaRows] = await db.query(
       `

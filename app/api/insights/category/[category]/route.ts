@@ -1,12 +1,10 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-export async function GET(
-  req: Request,
-  { params }: { params: { category: string } }
-) {
-  const decoded = decodeURIComponent(params.category);
+export async function GET(req: Request, context: any) {
   try {
+    const { category } = context.params as { category: string };
+    const decoded = decodeURIComponent(category);
 
     // 1) META
     const [metaRows] = await db.query(
@@ -129,7 +127,7 @@ export async function GET(
       relatedArticles: articleRows,
     });
 
-  } catch (err: any) {
+  } catch (err) {
     console.error("CATEGORY INSIGHT ERROR:", err);
     return NextResponse.json({ success: false }, { status: 500 });
   }
