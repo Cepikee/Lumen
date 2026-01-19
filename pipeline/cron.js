@@ -10,6 +10,29 @@ const { scrapeArticle } = require("./scrapeArticle");
 const { fixShortSummary, isValidShortSummary } = require("./summarizeShortValidator");
 const { categorizeArticle } = require("./fillCategory");
 
+// 🔥 IDE JÖN:
+const VALID_CATEGORIES = [
+  "Politika",
+  "Gazdaság",
+  "Közélet",
+  "Kultúra",
+  "Sport",
+  "Tech",
+  "Egészségügy",
+  "Oktatás"
+];
+
+function isValidCategory(cat) {
+  if (!cat) return false;
+  const clean = cat.trim().toLowerCase();
+  return VALID_CATEGORIES.some(c => c.toLowerCase() === clean);
+}
+
+
+
+
+
+
 
 // ANSI színek
 const RESET = "\x1b[0m";
