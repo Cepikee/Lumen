@@ -64,7 +64,6 @@ async function categorizeArticle(articleId) {
   });
 
   try {
-    // 1) Cikk lekérése
     const [rows] = await conn.execute(
       "SELECT content_text FROM articles WHERE id = ?",
       [articleId]
@@ -77,7 +76,6 @@ async function categorizeArticle(articleId) {
       return { ok: false };
     }
 
-    // 2) Prompt
     const prompt = `
 Cikk szöveg:
 ${contentText}
@@ -89,10 +87,8 @@ Feladat:
 Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kategória nevét írd ki.
 `.trim();
 
-    // 3) AI hívás
     let category = await callOllama(prompt);
 
-    // 4) Validáció + újrapróbálás
     if (!isValidCategory(category)) {
       console.warn(`[CAT] ⚠️ Érvénytelen kategória: "${category}". Újrapróbálás...`);
       category = await callOllama(prompt);
@@ -103,7 +99,6 @@ Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kate
       return { ok: false };
     }
 
-    // 5) Mentés
     await conn.execute(
       "UPDATE articles SET category = ? WHERE id = ?",
       [category.trim(), articleId]
@@ -129,8 +124,9 @@ async function run() {
     database: "projekt2025",
   });
 
+  // 🔥 JAVÍTOTT LEKÉRDEZÉS — LEGFIRISSEBB CIKKEK ELŐRE
   const [rows] = await conn.execute(
-    "SELECT id FROM articles WHERE category IS NULL OR category = ''"
+    "SELECT id FROM articles WHERE category IS NULL OR category = '' ORDER BY id DESC"
   );
 
   await conn.end();
