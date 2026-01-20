@@ -995,6 +995,15 @@ html[data-theme="light"] {
 
 
 
+
+
+/* ============================================================
+   Combined Insights CSS
+   - Ez a fájl tartalmazza az eredeti stílusokat + a javításokat,
+     amelyek megakadályozzák, hogy a kártyák "összefolyjanak".
+   - Illeszkedik a meglévő Bootstrap grid struktúrához (.row .col-*)
+   ============================================================ */
+
 /* Insight Category Bar */
 .insight-category-bar {
   display: flex;
@@ -1024,7 +1033,8 @@ html[data-theme="light"] {
   color: var(--bs-primary);
   font-weight: 600;
 }
-/* Insight Card */
+
+/* Insight Card base (kezdő stílusok megtartva) */
 .insight-card {
   border: 1px solid var(--bs-border-color);
   background: var(--bs-body-bg);
@@ -1032,6 +1042,14 @@ html[data-theme="light"] {
   padding: 20px;
   transition: box-shadow 0.2s ease, transform 0.15s ease;
   cursor: pointer;
+
+  /* Javítások: biztosítjuk a flex viselkedést és a box-sizing-t */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 140px;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .insight-card:hover {
@@ -1065,6 +1083,9 @@ html[data-theme="light"] {
   font-size: 1.15rem;
   font-weight: 600;
   margin-bottom: 14px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 /* Sparkline placeholder */
@@ -1089,31 +1110,98 @@ html[data-theme="light"] {
   font-size: 0.85rem;
   color: var(--bs-secondary-color);
 }
-/* Insight List */
+
+/* Insight List
+   - Támogatjuk a korábbi flex column struktúrát és a Bootstrap .row/.col-*-os elrendezést.
+*/
 .insight-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  box-sizing: border-box;
 }
 
-/* Skeleton loading */
-.insight-skeleton {
-  height: 120px;
-  border-radius: 16px;
-  background: linear-gradient(
-    90deg,
-    var(--bs-border-color) 0%,
-    rgba(0,0,0,0.05) 50%,
-    var(--bs-border-color) 100%
-  );
-  background-size: 200% 100%;
-  animation: skeleton-loading 1.2s infinite;
+/* Ha a listát .row-vel használjuk (komponensekben így van), biztosítjuk a cellák viselkedését */
+.insight-list.row {
+  display: block; /* a .row kezeli a layoutot */
 }
 
-@keyframes skeleton-loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+/* Ha a kártyák .col-*-ban vannak, ezek a szabályok biztosítják, hogy a cella box-sizing helyes legyen */
+.insight-list .col-12,
+.insight-list .col-sm-6,
+.insight-list .col-lg-4 {
+  box-sizing: border-box;
 }
+
+/* Card body: töltsön ki minden rendelkezésre álló helyet, hogy a footer le tudjon tolódni */
+.insight-card .card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1 1 auto;
+  padding-bottom: 0.5rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Footer tolódjon az aljára */
+.insight-card .card-footer {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background: transparent;
+  border-top: 0;
+  position: relative !important;
+}
+
+/* Bal oldali ikon/gyűrű fix méret és nem nyújtható */
+.insight-card .me-3 {
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  box-sizing: border-box;
+}
+
+/* Sparkline / canvas: ne lógjon ki, fix magasság */
+.insight-card .insight-sparkline,
+.insight-card canvas,
+.insight-sparkline {
+  max-width: 100%;
+  width: 100%;
+  height: 40px !important;
+  display: block;
+  box-sizing: border-box;
+}
+
+/* Skeleton és helykitöltők: ugyanaz a grid struktúra */
+.insight-list .insight-skeleton {
+  height: 160px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.06));
+  box-sizing: border-box;
+}
+
+/* Kontraszt / témabiztosítás: ha valami felülírja a színeket */
+.insight-card,
+.insight-card .card-body,
+.insight-card .card-footer {
+  background-clip: padding-box;
+}
+
+/* Ha valami miatt position:absolute-ot kapott a footer vagy a body, semlegesítjük */
+.insight-card .card-body,
+.insight-card .card-footer {
+  position: relative !important;
+}
+
+/* Mobilon több hely a címnek és kisebb sparkline */
+@media (max-width: 576px) {
+  .insight-card { min-height: 140px; }
+  .insight-card .insight-sparkline,
+  .insight-card canvas { height: 36px !important; }
+}
+
 /* Insight Filters */
 .insight-filters {
   display: flex;
@@ -1144,14 +1232,6 @@ html[data-theme="light"] {
   border-color: var(--bs-primary);
   font-weight: 600;
 }
-/* Sparkline container */
-.insight-sparkline {
-  height: 40px;
-  width: 100%;
-  position: relative;
-  margin-bottom: 16px;
-  overflow: hidden;
-}
 
 /* Placeholder line */
 .insight-sparkline-line {
@@ -1171,10 +1251,10 @@ html[data-theme="light"] {
   border-radius: 2px;
 }
 
-/* Source Ring (placeholder v1) */
+/* Source Ring (placeholder v1) - kisebb, fix méret, középre igazítva */
 .insight-source-ring {
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background: conic-gradient(
     var(--bs-primary) 0deg 120deg,
@@ -1184,15 +1264,17 @@ html[data-theme="light"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 0;
+  box-sizing: border-box;
 }
 
 .insight-source-ring-inner {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   background: var(--bs-body-bg);
   border-radius: 50%;
   border: 1px solid var(--bs-border-color);
+  box-sizing: border-box;
 }
 
 /* Insight Page */
@@ -1236,13 +1318,9 @@ html[data-theme="light"] {
   background: var(--bs-body-bg);
 }
 
-
-
-
 /* ============================================================
    Csak a témaváltáshoz szükséges CSS változók és felülírások
    (dark / light / system) — Insights oldalhoz
-   Ne módosítja a ThemeSwitch komponens JS-ét; csak CSS változók.
    ============================================================ */
 
 /* --- Alap (dark) változók --- */
@@ -1271,7 +1349,6 @@ html[data-theme="light"] {
 }
 
 /* --- Light theme felülírások, ha <html data-theme="light"> --- */
-/* A ThemeSwitch vagy más logika állítsa a data-theme attribútumot */
 :root[data-theme="light"] {
   --ins-bg: #ffffff;
   --ins-surface-800: #ffffff;
@@ -1315,7 +1392,6 @@ html[data-theme="light"] {
 
 /* ============================================================
    Insights-specifikus szabályok, amelyek a fenti változókat használják
-   (ezek biztosítják, hogy a kártyák és szövegek alkalmazkodjanak)
    ============================================================ */
 
 /* Alap háttér és szöveg */
@@ -1350,10 +1426,8 @@ html {
 }
 
 /* ThemeSwitch track/slider (csak megjelenési segéd) */
-/* Ha a ThemeSwitch komponens inline stílusokat használ, ezek a szabályok
-   biztosítják, hogy a track/slider a megfelelő színeket kapja mindkét témában. */
 .theme-switch .track,
-header .theme-track { /* header fallback selector, ha nincs className */
+header .theme-track {
   background: var(--ins-switch-track-bg);
   box-shadow: 0 0 0 1px var(--ins-switch-track-border);
   border-radius: 999px;
@@ -1394,12 +1468,3 @@ header .theme-track .option[aria-pressed="true"] {
 :root[data-theme="light"] .insight-card {
   border: 1px solid rgba(0,0,0,0.04);
 }
-
-/* ============================================================
-   Végjegyzet (magyar):
-   - Ez a CSS csak a témaváltozókat és az Insights oldalra vonatkozó
-     szabályokat tartalmazza. A ThemeSwitch komponens JS-e változatlan.
-   - A ThemeSwitch vagy más logika állítsa a <html data-theme="light"> attribútumot,
-     vagy hagyja üresen, hogy a rendszer preferencia érvényesüljön.
-   ============================================================ */
-
