@@ -1237,199 +1237,169 @@ html[data-theme="light"] {
 }
 
 
+
+
+/* ============================================================
+   Csak a témaváltáshoz szükséges CSS változók és felülírások
+   (dark / light / system) — Insights oldalhoz
+   Ne módosítja a ThemeSwitch komponens JS-ét; csak CSS változók.
+   ============================================================ */
+
+/* --- Alap (dark) változók --- */
 :root {
-  --utom-style-text: white;
+  /* Alap színek */
+  --ins-bg: #0b0c0d;
+  --ins-surface-800: #0f1112;
+  --ins-surface-700: #16181a;
+  --ins-text: #ffffff;
+  --ins-muted: #9aa3ad;
+  --ins-accent: #4dabf7;
+  --ins-accent-2: #ff6b6b;
 
-  /* Theme variables */
-  --surface-900: #0b0c0d;
-  --surface-800: #0f1112;
-  --surface-700: #16181a;
-  --muted: #9aa3ad;
-  --accent: #4dabf7;
-  --accent-2: #ff6b6b;
-  --card-radius: 12px;
-  --card-padding: 1rem;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.6);
-  --shadow-md: 0 6px 18px rgba(0,0,0,0.6);
+  /* Árnyékok és méretek */
+  --ins-card-radius: 12px;
+  --ins-card-padding: 1rem;
+  --ins-shadow-sm: 0 1px 3px rgba(0,0,0,0.6);
+  --ins-shadow-md: 0 6px 18px rgba(0,0,0,0.6);
+
+  /* ThemeSwitch-hez kapcsolódó track/slider változók (csak megjelenéshez) */
+  --ins-switch-track-bg: #1f1f1f;
+  --ins-switch-track-border: rgba(0,0,0,0.12);
+  --ins-switch-slider-bg: #333;
+  --ins-switch-active-color: #fff;
+  --ins-switch-inactive-color: #888;
 }
 
-/* Base layout */
-body {
-  color: var(--utom-style-text);
-  background: var(--surface-900);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* --- Light theme felülírások, ha <html data-theme="light"> --- */
+/* A ThemeSwitch vagy más logika állítsa a data-theme attribútumot */
+:root[data-theme="light"] {
+  --ins-bg: #ffffff;
+  --ins-surface-800: #ffffff;
+  --ins-surface-700: #f7f8fa;
+  --ins-text: #0b0c0d;
+  --ins-muted: #6b7280;
+  --ins-accent: #0d6efd;
+  --ins-accent-2: #d63384;
+
+  --ins-shadow-sm: 0 1px 3px rgba(16,24,40,0.06);
+  --ins-shadow-md: 0 6px 18px rgba(16,24,40,0.08);
+
+  --ins-switch-track-bg: #f0f2f5;
+  --ins-switch-track-border: rgba(0,0,0,0.06);
+  --ins-switch-slider-bg: #ffffff;
+  --ins-switch-active-color: #0b0c0d;
+  --ins-switch-inactive-color: #6b7280;
 }
 
-/* Insight card */
+/* --- Ha nincs explicit data-theme, kövessük a rendszer preferenciát --- */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --ins-bg: #ffffff;
+    --ins-surface-800: #ffffff;
+    --ins-surface-700: #f7f8fa;
+    --ins-text: #0b0c0d;
+    --ins-muted: #6b7280;
+    --ins-accent: #0d6efd;
+    --ins-accent-2: #d63384;
+
+    --ins-shadow-sm: 0 1px 3px rgba(16,24,40,0.06);
+    --ins-shadow-md: 0 6px 18px rgba(16,24,40,0.08);
+
+    --ins-switch-track-bg: #f0f2f5;
+    --ins-switch-track-border: rgba(0,0,0,0.06);
+    --ins-switch-slider-bg: #ffffff;
+    --ins-switch-active-color: #0b0c0d;
+    --ins-switch-inactive-color: #6b7280;
+  }
+}
+
+/* ============================================================
+   Insights-specifikus szabályok, amelyek a fenti változókat használják
+   (ezek biztosítják, hogy a kártyák és szövegek alkalmazkodjanak)
+   ============================================================ */
+
+/* Alap háttér és szöveg */
+body,
+html {
+  background: var(--ins-bg);
+  color: var(--ins-text);
+}
+
+/* Insight kártya: felület és szöveg örökli a változókat */
 .insight-card {
-  background: linear-gradient(180deg, var(--surface-800), var(--surface-700));
-  border-radius: var(--card-radius);
-  padding: 0;
-  overflow: hidden;
-  transition: transform .12s ease, box-shadow .12s ease;
-  will-change: transform;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  background: linear-gradient(180deg, var(--ins-surface-800), var(--ins-surface-700));
+  color: var(--ins-text);
+  border-radius: var(--ins-card-radius);
+  box-shadow: var(--ins-shadow-sm);
 }
 
+/* Kártya hover/focus árnyék a változók alapján */
 .insight-card:hover,
 .insight-card:focus-within {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--ins-shadow-md);
 }
 
-.insight-card .card-body {
-  padding: var(--card-padding);
-  display: flex;
-  flex-direction: column;
-  gap: .75rem;
-}
+/* Címek és meta */
+.insight-title { color: var(--ins-text); }
+.text-secondary { color: var(--ins-muted) !important; }
 
-/* Header and score */
-.insight-card-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.insight-score {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.04);
-  color: var(--utom-style-text);
-  font-weight: 700;
-  font-size: 1.05rem;
-  box-shadow: var(--shadow-sm);
-}
-
-/* Title and meta */
-.insight-title {
-  margin: 0;
-  font-weight: 600;
-  color: var(--utom-style-text);
-  letter-spacing: -0.01em;
-}
-
+/* Badge / accent színek */
 .insight-card .badge {
-  font-weight: 600;
-  font-size: 0.85rem;
+  background: var(--ins-accent);
+  color: #fff;
 }
 
-.text-secondary {
-  color: var(--muted) !important;
-}
-
-/* Buttons */
-.insight-card .btn {
-  min-width: 84px;
-}
-
-/* Chart containers */
-.insight-source-ring {
-  display: inline-block;
-  border-radius: 50%;
-  overflow: hidden;
-  background: transparent;
-  flex: 0 0 auto;
-}
-
-.insight-sparkline {
-  width: 100%;
-  height: 40px;
-  display: block;
-}
-
-/* Placeholder / skeleton */
-.placeholder-glow .placeholder {
-  background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-  border-radius: 6px;
-}
-
-/* Filters */
-.insight-filters {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.insight-filter-item {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.04);
-  color: var(--muted);
-  padding: 0.35rem 0.6rem;
+/* ThemeSwitch track/slider (csak megjelenési segéd) */
+/* Ha a ThemeSwitch komponens inline stílusokat használ, ezek a szabályok
+   biztosítják, hogy a track/slider a megfelelő színeket kapja mindkét témában. */
+.theme-switch .track,
+header .theme-track { /* header fallback selector, ha nincs className */
+  background: var(--ins-switch-track-bg);
+  box-shadow: 0 0 0 1px var(--ins-switch-track-border);
   border-radius: 999px;
-  cursor: pointer;
-  transition: background .12s ease, color .12s ease, border-color .12s ease;
 }
 
-.insight-filter-item.active {
-  background: rgba(77,171,247,0.12);
-  color: var(--accent);
-  border-color: rgba(77,171,247,0.18);
+.theme-switch .slider,
+header .theme-track .slider {
+  background: var(--ins-switch-slider-bg);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
 
-/* Grid spacing tweaks */
-.row.g-3 > .col-12,
-.row.g-3 > .col-sm-6,
-.row.g-3 > .col-lg-4 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+/* ThemeSwitch opciók színei (aktív/inaktív) */
+.theme-switch .option,
+header .theme-track .option {
+  color: var(--ins-switch-inactive-color);
+}
+.theme-switch .option.active,
+.theme-switch .option[aria-pressed="true"],
+header .theme-track .option.active,
+header .theme-track .option[aria-pressed="true"] {
+  color: var(--ins-switch-active-color);
 }
 
-/* Card footer */
-.card-footer {
-  padding: 0 var(--card-padding) var(--card-padding);
+/* Canvas és chart konténerek öröklik a témát */
+.insight-source-ring,
+.insight-sparkline {
+  background: transparent;
+  color: var(--ins-text);
 }
 
-/* Small utilities */
-.visually-hidden {
-  position: absolute !important;
-  height: 1px; width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  white-space: nowrap;
+/* Linkek és gombok: világos témában is olvashatóak legyenek */
+.insight-card .btn,
+.insight-card a {
+  color: var(--ins-text);
 }
 
-/* Responsive tweaks */
-@media (max-width: 576px) {
-  .insight-card { border-radius: 10px; }
-  .insight-score { width: 44px; height: 44px; font-size: 1rem; }
-  .insight-sparkline { height: 36px; }
+/* Ha szükséges, finomabb kontraszt a light témában */
+:root[data-theme="light"] .insight-card {
+  border: 1px solid rgba(0,0,0,0.04);
 }
 
-/* Small polish for link-disabled state */
-.insight-card[data-disabled="true"] {
-  opacity: 0.9;
-  pointer-events: none;
-}
+/* ============================================================
+   Végjegyzet (magyar):
+   - Ez a CSS csak a témaváltozókat és az Insights oldalra vonatkozó
+     szabályokat tartalmazza. A ThemeSwitch komponens JS-e változatlan.
+   - A ThemeSwitch vagy más logika állítsa a <html data-theme="light"> attribútumot,
+     vagy hagyja üresen, hogy a rendszer preferencia érvényesüljön.
+   ============================================================ */
 
-.insight-card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-/* Canvas fallback styling */
-.insight-source-ring canvas,
-.insight-sparkline canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-/* Accent utilities */
-.accent-text { color: var(--accent); }
-.accent-2-text { color: var(--accent-2); }
-
-/* Optional: compact variant */
-.insight-card.compact .card-body { padding: .6rem; }
-.insight-card.compact .insight-score { width:40px; height:40px; font-size:.95rem; }
-
-/* End of file */
