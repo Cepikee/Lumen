@@ -5,11 +5,28 @@ import { db } from "@/lib/db";
 /**
  * Normalizáló segédfüggvény
  * - trimeli a bemenetet
+ * - kezeli az egyszeres és dupla URL-enkódolást (pl. %C3%A1 vagy %25C3%25A1)
  * - üres / "null" stringet null-ként kezeli
  */
 function normalizeParam(raw?: string | null) {
-  if (!raw) return null;
-  const s = String(raw).trim();
+  if (raw === undefined || raw === null) return null;
+
+  let s = String(raw).trim();
+  if (!s) return null;
+
+  try {
+    // Ha dupla enkódolás jele (%25) van, próbáljuk meg kétszer dekódolni
+    if (s.includes("%25")) {
+      s = decodeURIComponent(decodeURIComponent(s));
+    } else if (s.includes("%")) {
+      // egyszeres enkódolás
+      s = decodeURIComponent(s);
+    }
+  } catch (e) {
+    // ha a dekódolás meghiúsul, marad az eredeti string (trim után)
+  }
+
+  s = s.trim();
   if (!s) return null;
   if (s.toLowerCase() === "null") return null;
   return s;
@@ -21,6 +38,8 @@ export async function GET(req: Request, context: any) {
   const rawFromContext = context?.params?.category;
   const rawFromPath = (url.pathname || "").split("/").filter(Boolean).pop();
   const raw = rawFromContext ?? rawFromPath ?? undefined;
+
+  // normalizáljuk és dekódoljuk a paramétert
   const categoryParam = normalizeParam(raw);
 
   // query paramok
@@ -42,17 +61,6 @@ export async function GET(req: Request, context: any) {
   const startDateStr = startDate.toISOString().slice(0, 10); // 'YYYY-MM-DD'
 
   try {
-    // --- Log (hasznos debughoz, később törölhető) ---
-    console.log("API /api/insights/category/:category hívás", {
-      raw,
-      categoryParam,
-      period,
-      sort,
-      page,
-      limit,
-      startDateStr,
-    });
-
     // -------------------------
     // 1) Cikkek lekérdezése (page)
     // -------------------------
@@ -71,27 +79,21 @@ export async function GET(req: Request, context: any) {
     itemsParams.push(startDateStr);
     const periodClause = `${whereClause ? " AND" : " WHERE"} DATE(published_at) >= ?`;
 
-    // rendezés: a táblában nincs sources_count vagy score, ezért egyszerűsítve
-    const orderBy =
-      sort === "popular"
-        ? "ORDER BY published_at DESC" // ha lesz popularity mező, ide lehet visszaállítani
-        : "ORDER BY published_at DESC";
+    // rendezés (egyszerű, jelenleg csak published_at)
+    const orderBy = "ORDER BY published_at DESC";
 
-    // A táblában nincs sources_count és nincs score mező -> használjunk alapértékeket
+    // content_text-ből rövid kivonat (ha van), ha nincs, NULL
     const itemsSql = `
-  SELECT id, title, category, published_at, source AS dominantSource,
-         1 AS sources, 0 AS score, SUBSTRING(content_text, 1, 300) AS excerpt
-  FROM articles
-  ${whereClause}
-  ${periodClause}
-  ${orderBy}
-  LIMIT ? OFFSET ?
-`;
-
+      SELECT id, title, category, published_at, source AS dominantSource,
+             1 AS sources, 0 AS score, 
+             CASE WHEN content_text IS NOT NULL THEN SUBSTRING(content_text, 1, 300) ELSE NULL END AS excerpt
+      FROM articles
+      ${whereClause}
+      ${periodClause}
+      ${orderBy}
+      LIMIT ? OFFSET ?
+    `;
     itemsParams.push(limit, offset);
-
-    console.log("itemsSql:", itemsSql);
-    console.log("itemsParams:", itemsParams);
 
     const [itemsRows]: any = await db.query(itemsSql, itemsParams);
 
@@ -129,8 +131,6 @@ export async function GET(req: Request, context: any) {
       ${aggWhere}
       AND DATE(published_at) >= ?
     `;
-    console.log("aggSql:", aggSql);
-    console.log("aggParams:", aggParams);
     const [aggRows]: any = await db.query(aggSql, aggParams);
     const agg = (aggRows && aggRows[0]) || { articleCount: 0, sourceCount: 0, lastUpdated: null };
 
@@ -155,8 +155,6 @@ export async function GET(req: Request, context: any) {
       GROUP BY DATE(published_at)
       ORDER BY DATE(published_at) ASC
     `;
-    console.log("trendSql:", trendSql);
-    console.log("trendParams:", trendParams);
     const [trendRows]: any = await db.query(trendSql, trendParams);
 
     const dayMap = new Map<string, number>();
@@ -205,12 +203,11 @@ export async function GET(req: Request, context: any) {
       summary,
       items,
       ...pageInfo,
-      debug: { itemsCount: items.length }, // ideiglenes debug mező
     });
   } catch (err: any) {
     console.error("Category route hiba:", err);
     return NextResponse.json(
-      { success: false, error: "szerver_hiba", debug: String(err) },
+      { success: false, error: "szerver_hiba" },
       { status: 500 }
     );
   }
