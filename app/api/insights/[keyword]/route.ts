@@ -5,9 +5,13 @@ import { db } from "@/lib/db";
 
 export async function GET(req: Request, context: any) {
   try {
+    console.log("RAW PARAM:", context.params.keyword);
+console.log("DECODED:", decodeURIComponent(context.params.keyword));
+
     const { keyword } = context.params as { keyword: string };
     const decodedKeyword = decodeURIComponent(keyword);
-
+console.log("SQL PARAM:", decodedKeyword);
+console.log("SQL PARAM HEX:", Buffer.from(decodedKeyword).toString("hex"));
     // 1) META — keywords tábla
     const [metaRows] = await db.query(
       `
@@ -138,12 +142,6 @@ export async function GET(req: Request, context: any) {
       relatedArticles: articleRows,
       relatedTrends: relatedTrendRows,
     });
-
-
-console.log("RAW PARAM:", context.params.keyword);
-console.log("DECODED:", decodeURIComponent(context.params.keyword));
-console.log("SQL PARAM:", decodedKeyword);
-console.log("SQL PARAM HEX:", Buffer.from(decodedKeyword).toString("hex"));
 
   } catch (err: any) {
     console.error("INSIGHT DETAIL ERROR:", err);
