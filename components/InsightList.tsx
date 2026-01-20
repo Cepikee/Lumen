@@ -10,7 +10,7 @@ type InsightItem = {
   sources: number;
   dominantSource: string;
   timeAgo: string;
-  href: string;
+  href?: string;
 };
 
 type InsightListProps = {
