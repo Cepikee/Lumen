@@ -5,18 +5,31 @@ export async function GET(req: Request, context: any) {
   try {
     const rawKeyword = context?.params?.keyword;
 
-    // 1) VÉDELEM
     if (!rawKeyword || rawKeyword === "undefined") {
       console.error("INVALID KEYWORD PARAM:", rawKeyword);
       return NextResponse.json({ success: false }, { status: 400 });
     }
 
     const decodedKeyword = decodeURIComponent(rawKeyword);
+    const keyword = decodedKeyword.trim();
 
-    // 2) META — KATEGÓRIA KIVÉVE
+    // DEBUG: log a beérkező keyword és hex reprezentáció (töröld élesben ha nem kell)
+    console.info("INSIGHT KEYWORD:", { rawKeyword, decodedKeyword, keyword });
+    try {
+      const [hexRows] = await db.query(
+        `SELECT HEX(?) AS hex_param`,
+        [keyword]
+      );
+      console.info("KEYWORD HEX PARAM:", (hexRows as any[])[0]?.hex_param);
+    } catch (e) {
+      // ignore hex debug failure
+    }
+
+    // META
     const [metaRows] = await db.query(
       `
       SELECT 
+        NULL AS category,
         k.keyword,
         COUNT(DISTINCT k.article_id) AS total_articles,
         COUNT(DISTINCT a.source) AS source_diversity,
@@ -26,16 +39,17 @@ export async function GET(req: Request, context: any) {
       WHERE k.keyword = ?
       GROUP BY k.keyword
       `,
-      [decodedKeyword]
+      [keyword]
     );
 
     if (!metaRows || (metaRows as any[]).length === 0) {
+      console.warn("META ROWS EMPTY for keyword:", keyword);
       return NextResponse.json({ success: false });
     }
 
     const meta = (metaRows as any[])[0];
 
-    // 3) SPARKLINE
+    // SPARKLINE
     const [sparkRows] = await db.query(
       `
       SELECT 
@@ -48,7 +62,7 @@ export async function GET(req: Request, context: any) {
       GROUP BY bucket
       ORDER BY bucket
       `,
-      [decodedKeyword]
+      [keyword]
     );
 
     const sparklineData = (sparkRows as any[]).map((row) => ({
@@ -56,7 +70,7 @@ export async function GET(req: Request, context: any) {
       count: row.article_count,
     }));
 
-    // 4) SOURCE DOMINANCE
+    // SOURCE DOMINANCE
     const [sourceRows] = await db.query(
       `
       SELECT 
@@ -69,11 +83,11 @@ export async function GET(req: Request, context: any) {
       GROUP BY a.source
       ORDER BY article_count DESC
       `,
-      [decodedKeyword]
+      [keyword]
     );
 
     const totalSourceArticles = (sourceRows as any[]).reduce(
-      (sum, r) => sum + r.article_count,
+      (sum, r) => sum + (r.article_count || 0),
       0
     );
 
@@ -85,7 +99,7 @@ export async function GET(req: Request, context: any) {
         : 0,
     }));
 
-    // 5) RELATED ARTICLES
+    // RELATED ARTICLES
     const [articleRows] = await db.query(
       `
       SELECT 
@@ -101,10 +115,10 @@ export async function GET(req: Request, context: any) {
       ORDER BY a.created_at DESC
       LIMIT 20
       `,
-      [decodedKeyword]
+      [keyword]
     );
 
-    // 6) RELATED TRENDS — KATEGÓRIA KIVÉVE
+    // RELATED TRENDS
     const [relatedTrendRows] = await db.query(
       `
       SELECT 
@@ -119,14 +133,14 @@ export async function GET(req: Request, context: any) {
       ORDER BY article_count DESC
       LIMIT 10
       `,
-      [decodedKeyword]
+      [keyword]
     );
 
     const filteredTrends = (relatedTrendRows as any[]).filter(
       (t) => t?.keyword && t.keyword !== "undefined"
     );
 
-    // 7) TrendScore
+    // TrendScore
     const recentActivityScore = Math.min(meta.total_articles / 10, 1);
     const sourceDiversityScore = Math.min(meta.source_diversity / 5, 1);
 
@@ -136,7 +150,7 @@ export async function GET(req: Request, context: any) {
 
     return NextResponse.json({
       success: true,
-      keyword: decodedKeyword,
+      keyword,
       trendScore: Math.round(trendScore * 100),
       meta,
       sparklineData,
@@ -144,11 +158,10 @@ export async function GET(req: Request, context: any) {
       relatedArticles: articleRows,
       relatedTrends: filteredTrends,
     });
-
   } catch (err: any) {
     console.error("INSIGHT DETAIL ERROR:", err);
     return NextResponse.json(
-      { success: false, error: err.message },
+      { success: false, error: err?.message || String(err) },
       { status: 500 }
     );
   }
