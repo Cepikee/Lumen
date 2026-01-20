@@ -1,3 +1,4 @@
+// app/insights/[keyword]/page.tsx
 import InsightSparkline from "@/components/InsightSparkline";
 import InsightSourceRing from "@/components/InsightSourceRing";
 import InsightCard from "@/components/InsightCard";
@@ -5,12 +6,11 @@ import InsightCard from "@/components/InsightCard";
 export default async function InsightPage({ params }: any) {
   const raw = params?.keyword;
 
-  // ⛔ Ha undefined → ne fusson tovább
   if (!raw || raw === "undefined") {
     return <div className="container py-5">Nem található trend.</div>;
   }
 
-  const keyword = decodeURIComponent(raw);
+  const keyword = decodeURIComponent(raw).trim();
 
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://utom.hu";
 
@@ -32,7 +32,6 @@ export default async function InsightPage({ params }: any) {
       <h1 className="insight-page-title">{trend.keyword}</h1>
 
       <div className="insight-page-meta">
-        <span className="badge bg-primary">{trend.meta.category}</span>
         <span className="insight-page-score">{trend.trendScore}</span>
         <span className="text-muted">
           Utolsó cikk: {new Date(trend.meta.last_article_at).toLocaleString()}
@@ -66,10 +65,10 @@ export default async function InsightPage({ params }: any) {
               url_canonical: string;
               source: string | null;
               created_at: string;
-              category: string;
+              category?: string;
             }) => (
               <li key={a.id} className="list-group-item">
-                <a href={a.url_canonical} target="_blank">
+                <a href={a.url_canonical} target="_blank" rel="noreferrer">
                   {a.title}
                 </a>
                 <div className="small text-muted">
@@ -91,17 +90,16 @@ export default async function InsightPage({ params }: any) {
             .map(
               (item: {
                 keyword: string;
-                category: string;
                 article_count: number;
               }) => (
                 <InsightCard
                   key={item.keyword}
                   title={item.keyword}
-                  category={item.category}
                   score={Math.round((item.article_count / 10) * 100)}
                   sources={item.article_count}
                   dominantSource={"?"}
                   timeAgo={"—"}
+                  href={`/insights/${encodeURIComponent(item.keyword)}`}
                 />
               )
             )}
