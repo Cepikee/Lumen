@@ -1,62 +1,64 @@
+// app/api/insights/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
+function normalizeDbString(s: any) {
+  if (s === null || s === undefined) return null;
+  const t = String(s).trim();
+  if (!t) return null;
+  if (t.toLowerCase() === "null") return null;
+  return t;
+}
+
 export async function GET(req: Request) {
+  const url = new URL(req.url);
+  const rawCategory = url.searchParams.get("category");
+  const category = normalizeDbString(rawCategory);
+  const filter = String(url.searchParams.get("filter") || "").trim().toLowerCase();
+
   try {
-    const { searchParams } = new URL(req.url);
-    const limit = Number(searchParams.get("limit") || 20);
+    let itemsSql = `SELECT id, title, category, published_at, source AS dominantSource, 0 AS sources, 0 AS score
+                    FROM articles`;
+    const params: any[] = [];
 
-    // TOP TRENDS lekérdezés
-    const [rows] = await db.query(
-      `
-      SELECT 
-  k.keyword,
-  a.category AS category,   -- 🔥 EZ A LÉNYEG
-  COUNT(DISTINCT k.article_id) AS article_count,
-  COUNT(DISTINCT a.source) AS source_diversity,
-  MAX(a.created_at) AS last_article_at
-FROM keywords k
-JOIN articles a ON a.id = k.article_id
-WHERE a.created_at >= NOW() - INTERVAL 24 HOUR
-GROUP BY k.keyword, a.category   -- 🔥 Itt is átírva
-HAVING article_count >= 3
-ORDER BY article_count DESC, last_article_at DESC
-LIMIT ?
+    if (category === null && rawCategory !== null) {
+      // explicit "null" param -> return NULL categories
+      itemsSql += ` WHERE category IS NULL`;
+    } else if (category) {
+      itemsSql += ` WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))`;
+      params.push(category);
+    }
 
-      `,
-      [limit]
-    );
+    itemsSql += ` ORDER BY published_at DESC LIMIT 200`;
 
-    // TrendScore v1 számítás
-    const trends = (rows as any[]).map((t) => {
-      const recentActivityScore = Math.min(t.article_count / 10, 1);
-      const sourceDiversityScore = Math.min(t.source_diversity / 5, 1);
+    const [rows]: any = await db.query(itemsSql, params);
 
-      const trendScore =
-        0.5 * recentActivityScore +
-        0.5 * sourceDiversityScore;
-
+    const items = (rows || []).map((r: any) => {
+      const cat = normalizeDbString(r.category);
       return {
-        keyword: t.keyword,
-        category: t.category,
-        articleCount: t.article_count,
-        sourceDiversity: t.source_diversity,
-        lastArticleAt: t.last_article_at,
-        trendScore: Math.round(trendScore * 100),
+        id: String(r.id),
+        title: r.title,
+        category: cat,
+        timeAgo: r.published_at ? new Date(r.published_at).toISOString() : null,
+        dominantSource: r.dominantSource || "",
+        sources: Number(r.sources || 0),
+        score: Number(r.score || 0),
+        href: cat ? `/insights/category/${encodeURIComponent(cat)}` : `/insights/${r.id}`,
       };
     });
 
-    return NextResponse.json({
-      success: true,
-      count: trends.length,
-      trends,
-    });
-
-  } catch (err: any) {
-    console.error("INSIGHTS ERROR:", err);
-    return NextResponse.json(
-      { success: false, error: err.message },
-      { status: 500 }
+    const [catsRows]: any = await db.query(
+      `SELECT LOWER(TRIM(category)) AS cat_norm, COUNT(*) AS cnt
+       FROM articles
+       GROUP BY LOWER(TRIM(category))
+       ORDER BY cnt DESC
+       LIMIT 200`
     );
+
+    const categories = (catsRows || []).map((c: any) => c.cat_norm).filter(Boolean);
+
+    return NextResponse.json({ success: true, items, categories });
+  } catch (err) {
+    return NextResponse.json({ success: false, error: "server_error" }, { status: 500 });
   }
 }

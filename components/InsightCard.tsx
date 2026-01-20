@@ -22,9 +22,11 @@ export default function InsightCard({
   timeAgo,
   href,
 }: InsightCardProps) {
+  const linkHref = href || "#";
+  const disabled = !href;
   return (
-    <Link href={href || "#"} className="insight-card-link">
-      <div className="insight-card">
+    <Link href={linkHref} className="insight-card-link" aria-disabled={disabled}>
+      <div className="insight-card" data-disabled={disabled ? "true" : "false"}>
         <div className="insight-card-header">
           <span className="insight-score">{score}</span>
         </div>

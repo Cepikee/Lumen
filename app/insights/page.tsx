@@ -30,7 +30,7 @@ export default function InsightFeedPage() {
     async function load() {
       setLoading(true);
       try {
-        const catRes = await fetch("/api/insights/categories", { cache: "no-store" });
+        const catRes = await fetch("/api/insights", { cache: "no-store" });
         if (!catRes.ok) {
           if (!mounted) return;
           setCategoryTrends([]);
@@ -38,18 +38,27 @@ export default function InsightFeedPage() {
         }
         const catJson = await catRes.json();
         if (!mounted) return;
-        if (catJson && Array.isArray(catJson.categories)) {
-          setCategoryTrends(catJson.categories);
-        } else if (catJson && catJson.success && Array.isArray(catJson.data)) {
-          setCategoryTrends(catJson.data);
+        if (catJson && Array.isArray(catJson.items)) {
+          // API returns items and categories; we prefer categories summary if present
+          if (Array.isArray(catJson.categories) && catJson.categories.length > 0) {
+            setCategoryTrends(catJson.categories as RawCategory[]);
+          } else {
+            // derive minimal structure from items
+            const derived = (catJson.items || []).map((it: any) => ({
+              category: it.category ?? null,
+              trendScore: it.score ?? 0,
+              articleCount: it.sources ?? 0,
+              sourceDiversity: it.dominantSource ?? "",
+              lastArticleAt: it.timeAgo ?? null,
+            }));
+            setCategoryTrends(derived);
+          }
         } else {
           setCategoryTrends([]);
         }
 
-        // keyword feed egyelőre nincs API-ból
         setKeywordTrends([]);
       } catch (err) {
-        console.error("InsightFeed error:", err);
         if (mounted) {
           setCategoryTrends([]);
           setKeywordTrends([]);
@@ -70,16 +79,16 @@ export default function InsightFeedPage() {
       return {
         id: `cat-${cat ?? "unknown"}`,
         title: cat ?? "Ismeretlen kategória",
-        score: typeof c.trendScore === "number" ? c.trendScore : Number(c.trendScore) || 0,
-        sources: c.articleCount ?? 0,
+        score: Number(c.trendScore || 0),
+        sources: Number(c.articleCount || 0),
         dominantSource: `${c.sourceDiversity ?? 0} forrás`,
         timeAgo: c.lastArticleAt ? new Date(c.lastArticleAt).toLocaleString() : "",
         href: cat ? `/insights/category/${encodeURIComponent(cat)}` : undefined,
       };
     })
-    .slice(0, 200); // védelem túl sok elem ellen
+    .slice(0, 200);
 
-  const keywordItems: any[] = []; // egyelőre nincs keyword feed
+  const keywordItems: any[] = [];
 
   return (
     <main className="container py-5">
