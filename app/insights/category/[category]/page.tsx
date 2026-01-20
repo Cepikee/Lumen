@@ -2,7 +2,7 @@ import InsightSparkline from "@/components/InsightSparkline";
 import InsightSourceRing from "@/components/InsightSourceRing";
 import InsightCard from "@/components/InsightCard";
 
-export default async function CategoryInsightPage({ params }: { params: { category: string } }) {
+export default async function CategoryInsightPage({ params }: any) {
   const category = decodeURIComponent(params.category);
 
   const res = await fetch(
