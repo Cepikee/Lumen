@@ -998,11 +998,10 @@ html[data-theme="light"] {
 
 
 /* ============================================================
-   Insights combined CSS
-   - Teljes, egy fájlba rendezett stílus: eredeti szabályok +
-     rendező, kevésbé "elnyomó" felülírások, hogy a kártyák
-     ne folynak össze és a tartalom jól olvasható maradjon.
-   - Illeszkedik Bootstrap .row/.col struktúrához.
+   Insights CSS — teljes, javított verzió
+   - Eredeti részletes szabályok megtartva
+   - Célzott javítások: flex viselkedés, footer alul, canvas méretek
+   - Illeszkedik Bootstrap .row/.col struktúrához
    ============================================================ */
 
 /* ---------------------------
@@ -1027,7 +1026,9 @@ html[data-theme="light"] {
   font-size: 0.95rem;
 }
 
-.insight-category-item:hover { opacity: 0.7; }
+.insight-category-item:hover {
+  opacity: 0.7;
+}
 
 .insight-category-item.active {
   border-color: var(--bs-primary);
@@ -1035,7 +1036,7 @@ html[data-theme="light"] {
   font-weight: 600;
 }
 
-/* Filters */
+/* Insight Filters */
 .insight-filters {
   display: flex;
   gap: 12px;
@@ -1055,7 +1056,9 @@ html[data-theme="light"] {
   font-size: 0.9rem;
 }
 
-.insight-filter-item:hover { opacity: 0.7; }
+.insight-filter-item:hover {
+  opacity: 0.7;
+}
 
 .insight-filter-item.active {
   background: var(--bs-primary);
@@ -1067,15 +1070,18 @@ html[data-theme="light"] {
 /* ---------------------------
    Insight List / Grid
    --------------------------- */
+/* Ha a komponens .row .col struktúrát használ, tartsuk meg azt.
+   Alapértelmezésben a listát .row-vel használjuk, de ha nem,
+   a következő szabályok biztosítják a helyes box-sizing-ot. */
 .insight-list {
-  display: flex;
-  flex-direction: column;
+  display: block;
   gap: 20px;
   box-sizing: border-box;
 }
 
-/* Ha .row-vel használjuk, a .row kezeli a layoutot */
-.insight-list.row { display: block; }
+.insight-list.row {
+  display: block;
+}
 
 .insight-list .col-12,
 .insight-list .col-sm-6,
@@ -1083,16 +1089,18 @@ html[data-theme="light"] {
   box-sizing: border-box;
 }
 
-/* Biztosítjuk, hogy a .col cellák stretch-eljenek */
+/* Biztosítjuk, hogy a .col cellák stretch-eljenek a rácsban */
 .row.g-3 > [class*="col-"] {
   display: flex;
   align-items: stretch;
+  box-sizing: border-box;
 }
 
 /* ---------------------------
    Insight Card (alap)
    --------------------------- */
-/* Alap stílusok megtartva, de flex viselkedéssel és enyhébb megjelenéssel */
+/* Megőrizzük a részletes megjelenést, de biztosítjuk a flex viselkedést
+   és azt, hogy a footer mindig az alján legyen. */
 .insight-card {
   border: 1px solid var(--bs-border-color);
   background: var(--bs-body-bg);
@@ -1101,7 +1109,6 @@ html[data-theme="light"] {
   transition: box-shadow 0.2s ease, transform 0.15s ease;
   cursor: pointer;
 
-  /* Javítások: flex, magasság és box-sizing */
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -1110,9 +1117,9 @@ html[data-theme="light"] {
   box-sizing: border-box;
 }
 
-/* Enyhébb hover, ne legyen túl erős */
+/* Enyhe hover */
 .insight-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   transform: translateY(-2px);
 }
 
@@ -1120,15 +1127,9 @@ html[data-theme="light"] {
 .insight-page .insight-card,
 main.insights .insight-card,
 .insights-root .insight-card {
-  background: var(--bs-body-bg) !important;
-  color: var(--bs-body-color) !important;
-  border: 1px solid rgba(0,0,0,0.06) !important;
-}
-
-/* Ha a root változók erősen gradienst adtak, semlegesítjük */
-.insight-card {
   background: var(--bs-body-bg);
   color: var(--bs-body-color);
+  border: 1px solid rgba(0,0,0,0.06);
 }
 
 /* ---------------------------
@@ -1151,16 +1152,16 @@ main.insights .insight-card,
   padding-bottom: 0.5rem;
   background: transparent;
   border-top: 0;
-  position: relative !important;
+  position: relative;
 }
 
 /* Ha valami miatt position:absolute-ot kapott, semlegesítjük */
 .insight-card .card-body,
 .insight-card .card-footer {
-  position: relative !important;
+  position: relative;
 }
 
-/* Bal oldali ikon/gyűrű fix méret */
+/* Bal oldali ikon/gyűrű fix méret és nem nyújtható */
 .insight-card .me-3 {
   flex: 0 0 64px;
   width: 64px;
@@ -1199,19 +1200,20 @@ main.insights .insight-card,
   color: rgba(0,0,0,0.55);
 }
 :root:not([data-theme="light"]) .insight-card .text-secondary {
-  color: rgba(255,255,255,0.65) !important;
+  color: rgba(255,255,255,0.65);
 }
 
 /* ---------------------------
    Sparkline / Source ring
    --------------------------- */
-/* Sparkline konténer: fix magasság, ne nyomja össze a szöveget */
+/* Sparkline konténer: fix magasság, ne nyomja össze a szöveget.
+   Ha a sparkline komponens inline stílust ad, állítsd ott is a magasságot. */
 .insight-card .insight-sparkline,
 .insight-card canvas,
 .insight-sparkline {
   max-width: 100%;
   width: 100%;
-  height: 40px !important;
+  height: 40px;
   display: block;
   box-sizing: border-box;
   margin-bottom: 8px;
@@ -1263,10 +1265,15 @@ main.insights .insight-card,
 .insight-skeleton {
   height: 160px;
   border-radius: 8px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.06));
-  box-sizing: border-box;
+  background: linear-gradient(
+    90deg,
+    var(--bs-border-color) 0%,
+    rgba(0,0,0,0.05) 50%,
+    var(--bs-border-color) 100%
+  );
   background-size: 200% 100%;
   animation: skeleton-loading 1.2s infinite;
+  box-sizing: border-box;
 }
 
 @keyframes skeleton-loading {
@@ -1384,15 +1391,56 @@ main.insights .insight-card,
    --------------------------- */
 /* Linkek és gombok: biztosan olvashatóak legyenek */
 .insight-card .btn,
-.insight-card a { color: inherit !important; }
+.insight-card a {
+  color: inherit;
+}
 
 /* Canvas és chart konténerek öröklik a témát */
 .insight-source-ring,
-.insight-sparkline { background: transparent; color: inherit; }
+.insight-sparkline {
+  background: transparent;
+  color: inherit;
+}
 
 /* Mobil finomítások */
 @media (max-width: 576px) {
-  .insight-card { min-height: 120px; padding: 12px; }
+  .insight-card {
+    min-height: 120px;
+    padding: 12px;
+  }
   .insight-card .insight-sparkline,
-  .insight-card canvas { height: 36px !important; }
+  .insight-card canvas {
+    height: 36px;
+  }
+}
+
+/* ---------------------------
+   Célzott további javítások (ne invazívak)
+   - Ezek a szabályok csak akkor lépnek életbe, ha a korábbi
+     stílusok miatt mégis összeolvadna a tartalom.
+   --------------------------- */
+
+/* Ha a kártya belső elemei túl közel vannak egymáshoz, növeljük a gap-et */
+.insight-card .card-body > * {
+  margin-bottom: 6px;
+}
+
+/* Ha a cím túl hosszú, ne nyomja össze a meta részt */
+.insight-card .insight-title {
+  display: block;
+  max-height: 3.6em; /* kb. 2 sor */
+  overflow: hidden;
+}
+
+/* Ha a sparkline komponens inline stílusa nagyobb magasságot ad, korlátozzuk */
+.insight-card canvas {
+  max-height: 56px;
+  height: 40px;
+  width: 100%;
+}
+
+/* Biztosítjuk, hogy a "Megnyit" gomb ne tolja el a layoutot */
+.insight-card .btn {
+  white-space: nowrap;
+  align-self: flex-end;
 }
