@@ -1,33 +1,20 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import InsightSparkline from "@/components/InsightSparkline";
 import InsightSourceRing from "@/components/InsightSourceRing";
 import InsightCard from "@/components/InsightCard";
 
-export default function CategoryInsightPage({ params }: any) {
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
+export default async function CategoryInsightPage({ params }: { params: { category: string } }) {
   const category = decodeURIComponent(params.category);
 
-  useEffect(() => {
-    async function load() {
-      try {
-        const res = await fetch(`/api/insights/category/${category}`);
-        const json = await res.json();
-        setData(json);
-      } catch (err) {
-        console.error("CategoryInsight error:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    load();
-  }, [category]);
+  const res = await fetch(
+    `/api/insights/category/${encodeURIComponent(category)}`,
+    { cache: "no-store" }
+  );
 
-  if (loading) return <div className="container py-5">Betöltés…</div>;
-  if (!data?.success) return <div className="container py-5">Nincs ilyen kategória.</div>;
+  const data = await res.json();
+
+  if (!data?.success) {
+    return <div className="container py-5">Nincs ilyen kategória.</div>;
+  }
 
   const trend = data;
 
@@ -62,7 +49,7 @@ export default function CategoryInsightPage({ params }: any) {
         <ul className="list-group">
           {trend.relatedKeywords.map((k: any) => (
             <li key={k.keyword} className="list-group-item">
-              <a href={`/insight/${encodeURIComponent(k.keyword)}`}>
+              <a href={`/insights/${encodeURIComponent(k.keyword)}`}>
                 {k.keyword}
               </a>
               <div className="small text-muted">{k.article_count} cikk</div>

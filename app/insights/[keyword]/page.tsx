@@ -1,34 +1,16 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import InsightSparkline from "@/components/InsightSparkline";
 import InsightSourceRing from "@/components/InsightSourceRing";
 import InsightCard from "@/components/InsightCard";
 
-export default function InsightPage({ params }: any) {
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
+export default async function InsightPage({ params }: { params: { keyword: string } }) {
   const keyword = decodeURIComponent(params.keyword);
 
-  useEffect(() => {
-    async function load() {
-      try {
-        const res = await fetch(`/api/insights/${keyword}`);
-        const json = await res.json();
-        setData(json);
-      } catch (err) {
-        console.error("InsightPage error:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    load();
-  }, [keyword]);
+  const res = await fetch(
+    `/api/insights/${encodeURIComponent(keyword)}`,
+    { cache: "no-store" }
+  );
 
-  if (loading) {
-    return <div className="container py-5">Betöltés…</div>;
-  }
+  const data = await res.json();
 
   if (!data?.success) {
     return <div className="container py-5">Nem található trend.</div>;
