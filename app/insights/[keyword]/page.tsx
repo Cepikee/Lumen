@@ -5,10 +5,13 @@ import InsightCard from "@/components/InsightCard";
 export default async function InsightPage({ params }: any) {
   const keyword = decodeURIComponent(params.keyword);
 
-  const res = await fetch(
-    `/api/insights/${encodeURIComponent(keyword)}`,
-    { cache: "no-store" }
-  );
+ const base = process.env.NEXT_PUBLIC_SITE_URL || "https://utom.hu";
+
+const res = await fetch(
+  `${base}/api/insights/${encodeURIComponent(keyword)}`,
+  { cache: "no-store" }
+);
+
 
   const data = await res.json();
 
