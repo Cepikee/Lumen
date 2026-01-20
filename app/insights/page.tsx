@@ -1,10 +1,11 @@
 // app/insights/page.tsx
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import InsightList from "@/components/InsightList";
-import InsightFilters from "@/components/InsightFilters"; // meglévő komponens
-import ThemeSync from "@/components/ThemeSync"; // ThemeSync komponens, szinkronizálja a Zustand theme-et a DOM-mal
+import InsightFilters from "@/components/InsightFilters";
+import ThemeSync from "@/components/ThemeSync";
+import { useInsights, InsightApiItem } from "@/hooks/useInsights";
 
 type LocalRawCategory = {
   category: string | null;
@@ -12,6 +13,9 @@ type LocalRawCategory = {
   articleCount: number;
   sourceDiversity?: number | string;
   lastArticleAt?: string | null;
+  // opcionális vizualizációs adatok (ha a backend küldi)
+  sparkline?: number[];
+  ringData?: number[];
 };
 
 function normalizeCategory(raw?: string | null) {
@@ -22,7 +26,7 @@ function normalizeCategory(raw?: string | null) {
   return s;
 }
 
-/** Type guard */
+/** Type guard egyszerű ellenőrzéshez (megtartva) */
 function isRawCategory(obj: unknown): obj is LocalRawCategory {
   if (!obj || typeof obj !== "object") return false;
   const o = obj as Record<string, unknown>;
@@ -37,86 +41,41 @@ function isRawCategory(obj: unknown): obj is LocalRawCategory {
 }
 
 export default function InsightFeedPage() {
-  const [categoryTrends, setCategoryTrends] = useState<LocalRawCategory[]>([]);
-  const [loading, setLoading] = useState(true);
-
   // period: időablak (7d/30d/90d)
   const [period, setPeriod] = useState<"7d" | "30d" | "90d">("7d");
   // sort: a meglévő InsightFilters komponens által használt aktív filter string
   const [sort, setSort] = useState<string>("Legfrissebb");
 
-  const mounted = useRef(true);
+  // SWR hook: data | error | loading
+  const { data, error, loading } = useInsights(period, sort);
 
-  useEffect(() => {
-    mounted.current = true;
-    async function load() {
-      setLoading(true);
-      try {
-        // period és sort is elküldjük az API-nak, ha támogatja
-        const q = new URLSearchParams();
-        q.set("period", period);
-        q.set("sort", sort);
-        const res = await fetch(`/api/insights?${q.toString()}`, { cache: "no-store" });
-        if (!res.ok) {
-          if (mounted.current) setCategoryTrends([]);
-          return;
-        }
-        const json: unknown = await res.json();
-        if (!mounted.current) return;
+  // Deriváljuk a categoryTrends tömböt a hookból érkező adatokból
+  const categoryTrends = useMemo<LocalRawCategory[]>(() => {
+    if (!data) return [];
 
-        // Ha van categories tömb
-        if (Array.isArray((json as any)?.categories) && (json as any).categories.length > 0) {
-          const rawCats = (json as any).categories as unknown[];
-          const filtered: LocalRawCategory[] = rawCats
-            .filter(isRawCategory)
-            .filter((c) => normalizeCategory(c.category) !== null);
-          if (mounted.current) setCategoryTrends(filtered);
-          return;
-        }
+    const sourceArray = Array.isArray(data.categories) && data.categories.length > 0
+      ? data.categories
+      : Array.isArray(data.items) ? data.items : [];
 
-        // Ha nincs categories, de vannak items, deriváljuk
-        if (Array.isArray((json as any)?.items) && (json as any).items.length > 0) {
-          const items = (json as any).items as any[];
-          const derived = items.reduce((acc: Record<string, LocalRawCategory>, it: any) => {
-            const cat = normalizeCategory(it.category) ?? "__NULL__";
-            if (!acc[cat]) {
-              acc[cat] = {
-                category: cat === "__NULL__" ? null : cat,
-                trendScore: 0,
-                articleCount: 0,
-                sourceDiversity: 0,
-                lastArticleAt: it.timeAgo ?? null,
-              };
-            }
-            acc[cat].articleCount += 1;
-            acc[cat].sourceDiversity =
-              (Number(acc[cat].sourceDiversity || 0) || 0) + (Number(it.sources || 0) || 0);
-            if (it.timeAgo && (!acc[cat].lastArticleAt || it.timeAgo > acc[cat].lastArticleAt)) {
-              acc[cat].lastArticleAt = it.timeAgo;
-            }
-            return acc;
-          }, {});
-          const values = Object.values(derived).filter((v): v is LocalRawCategory => {
-            return isRawCategory(v) && normalizeCategory(v.category) !== null;
-          }) as LocalRawCategory[];
-          if (mounted.current) setCategoryTrends(values);
-          return;
-        }
+    const mapped = sourceArray
+      .map((it) => {
+        const cat = (it.category ?? null) as string | null;
+        return {
+          category: cat,
+          trendScore: Number(it.trendScore ?? 0),
+          articleCount: Number(it.articleCount ?? 0),
+          sourceDiversity: it.sourceDiversity ?? 0,
+          lastArticleAt: it.lastArticleAt ?? null,
+          sparkline: it.sparkline,
+          ringData: it.ringData,
+        } as LocalRawCategory;
+      })
+      .filter((c) => normalizeCategory(c.category) !== null);
 
-        if (mounted.current) setCategoryTrends([]);
-      } catch (e) {
-        if (mounted.current) setCategoryTrends([]);
-      } finally {
-        if (mounted.current) setLoading(false);
-      }
-    }
-    load();
-    return () => {
-      mounted.current = false;
-    };
-  }, [period, sort]); // újrafetch, ha period vagy sort változik
+    return mapped;
+  }, [data]);
 
-  // UI items
+  // UI items: átadjuk a sparkline/ringData mezőket is, ha vannak
   const categoryItems = categoryTrends
     .filter((c) => normalizeCategory(c.category) !== null)
     .map((c) => {
@@ -129,6 +88,9 @@ export default function InsightFeedPage() {
         dominantSource: `${c.sourceDiversity ?? 0} forrás`,
         timeAgo: c.lastArticleAt ? new Date(c.lastArticleAt).toLocaleString() : "",
         href: `/insights/category/${encodeURIComponent(cat)}`,
+        // átadjuk a vizualizációs adatokat az InsightList/InsightCard számára
+        ringData: c.ringData,
+        sparkline: c.sparkline,
       };
     });
 

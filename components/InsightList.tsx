@@ -11,6 +11,9 @@ type InsightItem = {
   dominantSource: string;
   timeAgo: string;
   href?: string;
+  // opcionális vizualizációs adatok (backendből jöhetnek)
+  ringData?: number[];
+  sparkline?: number[];
 };
 
 type InsightListProps = {
@@ -20,27 +23,45 @@ type InsightListProps = {
 
 export default function InsightList({ items, loading }: InsightListProps) {
   if (loading) {
+    // Skeleton grid: ugyanaz a grid struktúra, mint a tényleges kártyáknál
     return (
-      <div className="insight-list">
-        {[...Array(5)].map((_, i) => (
-          <div key={i} className="insight-skeleton"></div>
+      <div className="row g-3">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="col-12 col-sm-6 col-lg-4">
+            <div className="card bg-dark text-light h-100 border-0 placeholder-glow">
+              <div className="card-body">
+                <div className="d-flex gap-3 align-items-start">
+                  <div style={{ width: 64, height: 64 }} className="bg-secondary rounded-circle" />
+                  <div className="flex-grow-1">
+                    <h3 className="placeholder col-6 mb-2" style={{ height: 18 }} />
+                    <p className="placeholder col-4 mb-1" style={{ height: 12 }} />
+                    <div className="placeholder col-3" style={{ height: 12 }} />
+                  </div>
+                </div>
+                <div style={{ height: 40, marginTop: 12 }} className="placeholder col-12" />
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     );
   }
 
   return (
-    <div className="insight-list">
+    <div className="row g-3">
       {items.map((item) => (
-        <InsightCard
-          key={item.id}
-          title={item.title}
-          score={item.score}
-          sources={item.sources}
-          dominantSource={item.dominantSource}
-          timeAgo={item.timeAgo}
-          href={item.href}
-        />
+        <div key={item.id} className="col-12 col-sm-6 col-lg-4">
+          <InsightCard
+            title={item.title}
+            score={item.score}
+            sources={item.sources}
+            dominantSource={item.dominantSource}
+            timeAgo={item.timeAgo}
+            href={item.href}
+            ringData={item.ringData}
+            sparkline={item.sparkline}
+          />
+        </div>
       ))}
     </div>
   );

@@ -32,11 +32,16 @@ export default function InsightCard({
   const linkHref = href || "#";
   const disabled = !href;
 
-  // useInView hook: csak akkor renderelünk charts-t, ha a kártya látható
-  const { ref, inView } = useInView(0.15);
+  // useInView: kisebb threshold, előtöltés (rootMargin) és debounce, egyszeri init
+  const { ref, inView } = useInView(0.12);
+
+
 
   // default adatok, ha nincs ringData/sparkline
-  const ring = useMemo(() => ringData ?? [Math.max(0, score), Math.max(0, sources - score)], [ringData, score, sources]);
+  const ring = useMemo(
+    () => ringData ?? [Math.max(0, score), Math.max(0, sources - score)],
+    [ringData, score, sources]
+  );
   const spark = useMemo(() => sparkline ?? [], [sparkline]);
 
   return (
@@ -45,7 +50,7 @@ export default function InsightCard({
       tabIndex={0}
       role="article"
       aria-labelledby={`insight-${title}`}
-      className="insight-card card bg-dark text-light h-100 border-0 shadow-sm"
+      className="insight-card card h-100 border-0"
       data-disabled={disabled ? "true" : "false"}
     >
       <div className="card-body d-flex flex-column gap-3">
