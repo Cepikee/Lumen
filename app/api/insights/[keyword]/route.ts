@@ -5,7 +5,7 @@ export async function GET(req: Request, context: any) {
   try {
     const rawKeyword = context?.params?.keyword;
 
-    // 1) VÉDELEM: ha a paraméter hiányzik vagy "undefined"
+    // 1) VÉDELEM
     if (!rawKeyword || rawKeyword === "undefined") {
       console.error("INVALID KEYWORD PARAM:", rawKeyword);
       return NextResponse.json({ success: false }, { status: 400 });
@@ -13,19 +13,18 @@ export async function GET(req: Request, context: any) {
 
     const decodedKeyword = decodeURIComponent(rawKeyword);
 
-    // 2) META
+    // 2) META — KATEGÓRIA KIVÉVE
     const [metaRows] = await db.query(
       `
       SELECT 
         k.keyword,
-        a.category AS category,
         COUNT(DISTINCT k.article_id) AS total_articles,
         COUNT(DISTINCT a.source) AS source_diversity,
         MAX(a.created_at) AS last_article_at
       FROM keywords k
       JOIN articles a ON a.id = k.article_id
       WHERE k.keyword = ?
-      GROUP BY k.keyword, a.category
+      GROUP BY k.keyword
       `,
       [decodedKeyword]
     );
@@ -105,32 +104,29 @@ export async function GET(req: Request, context: any) {
       [decodedKeyword]
     );
 
-    // 6) RELATED TRENDS
+    // 6) RELATED TRENDS — KATEGÓRIA KIVÉVE
     const [relatedTrendRows] = await db.query(
       `
       SELECT 
         k2.keyword,
-        a2.category AS category,
         COUNT(DISTINCT k2.article_id) AS article_count
       FROM keywords k1
       JOIN keywords k2 
         ON k1.article_id = k2.article_id 
         AND k2.keyword != k1.keyword
-      JOIN articles a2 ON a2.id = k2.article_id
       WHERE k1.keyword = ?
-      GROUP BY k2.keyword, a2.category
+      GROUP BY k2.keyword
       ORDER BY article_count DESC
       LIMIT 10
       `,
       [decodedKeyword]
     );
 
-    // 7) SZŰRÉS: csak érvényes keywordök
     const filteredTrends = (relatedTrendRows as any[]).filter(
       (t) => t?.keyword && t.keyword !== "undefined"
     );
 
-    // 8) TrendScore
+    // 7) TrendScore
     const recentActivityScore = Math.min(meta.total_articles / 10, 1);
     const sourceDiversityScore = Math.min(meta.source_diversity / 5, 1);
 
