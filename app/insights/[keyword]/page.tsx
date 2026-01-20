@@ -3,15 +3,21 @@ import InsightSourceRing from "@/components/InsightSourceRing";
 import InsightCard from "@/components/InsightCard";
 
 export default async function InsightPage({ params }: any) {
-  const keyword = decodeURIComponent(params.keyword);
+  const raw = params?.keyword;
 
- const base = process.env.NEXT_PUBLIC_SITE_URL || "https://utom.hu";
+  // ⛔ Ha undefined → ne fusson tovább
+  if (!raw || raw === "undefined") {
+    return <div className="container py-5">Nem található trend.</div>;
+  }
 
-const res = await fetch(
-  `${base}/api/insights/${encodeURIComponent(keyword)}`,
-  { cache: "no-store" }
-);
+  const keyword = decodeURIComponent(raw);
 
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://utom.hu";
+
+  const res = await fetch(
+    `${base}/api/insights/${encodeURIComponent(keyword)}`,
+    { cache: "no-store" }
+  );
 
   const data = await res.json();
 
@@ -23,7 +29,6 @@ const res = await fetch(
 
   return (
     <main className="container py-5 insight-page">
-
       <h1 className="insight-page-title">{trend.keyword}</h1>
 
       <div className="insight-page-meta">
@@ -46,9 +51,7 @@ const res = await fetch(
         <InsightSourceRing sources={trend.sourceDominance} />
         <div className="text-muted small mt-2">
           Domináns forrás:{" "}
-          <strong>
-            {trend.sourceDominance[0]?.source || "Nincs adat"}
-          </strong>
+          <strong>{trend.sourceDominance[0]?.source || "Nincs adat"}</strong>
         </div>
       </div>
 
@@ -84,7 +87,7 @@ const res = await fetch(
 
         <div className="d-flex flex-column gap-3">
           {trend.relatedTrends
-            .filter((item: any) => item?.keyword)   // <-- EZ A FIX
+            .filter((item: any) => item?.keyword)
             .map(
               (item: {
                 keyword: string;
@@ -104,7 +107,6 @@ const res = await fetch(
             )}
         </div>
       </section>
-
     </main>
   );
 }
