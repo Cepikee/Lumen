@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from "react";
 import InsightList from "@/components/InsightList";
 import InsightFilters from "@/components/InsightFilters"; // meglévő komponens
+import ThemeSync from "@/components/ThemeSync"; // ThemeSync komponens, szinkronizálja a Zustand theme-et a DOM-mal
 
 type LocalRawCategory = {
   category: string | null;
@@ -133,6 +134,9 @@ export default function InsightFeedPage() {
 
   return (
     <main className="container py-4">
+      {/* ThemeSync: szinkronizálja a Zustand theme értékét a DOM data-theme attribútumával */}
+      <ThemeSync />
+
       <header className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between mb-3 gap-3">
         <div>
           <h1 className="h3 mb-1 text-center text-md-start">Trendek</h1>
