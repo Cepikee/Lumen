@@ -47,14 +47,16 @@ export default async function CategoryInsightPage({ params }: any) {
         <h2 className="fs-5 fw-bold mb-2">Kapcsolódó kulcsszavak</h2>
 
         <ul className="list-group">
-          {trend.relatedKeywords.map((k: any) => (
-            <li key={k.keyword} className="list-group-item">
-              <a href={`/insights/${encodeURIComponent(k.keyword)}`}>
-                {k.keyword}
-              </a>
-              <div className="small text-muted">{k.article_count} cikk</div>
-            </li>
-          ))}
+          {trend.relatedKeywords
+            .filter((k: any) => k?.keyword) // <-- EZ A FIX
+            .map((k: any) => (
+              <li key={k.keyword} className="list-group-item">
+                <a href={`/insights/${encodeURIComponent(k.keyword)}`}>
+                  {k.keyword}
+                </a>
+                <div className="small text-muted">{k.article_count} cikk</div>
+              </li>
+            ))}
         </ul>
       </section>
 

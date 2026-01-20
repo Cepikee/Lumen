@@ -3,10 +3,17 @@ import { db } from "@/lib/db";
 
 export async function GET(req: Request, context: any) {
   try {
-    const { category } = context.params as { category: string };
-    const decoded = decodeURIComponent(category);
+    const rawCategory = context?.params?.category;
 
-    // 1) META
+    // 1) VÉDELEM: ha hiányzik vagy "undefined"
+    if (!rawCategory || rawCategory === "undefined") {
+      console.error("INVALID CATEGORY PARAM:", rawCategory);
+      return NextResponse.json({ success: false }, { status: 400 });
+    }
+
+    const decoded = decodeURIComponent(rawCategory);
+
+    // 2) META
     const [metaRows] = await db.query(
       `
       SELECT 
@@ -27,7 +34,7 @@ export async function GET(req: Request, context: any) {
 
     const meta = (metaRows as any[])[0];
 
-    // 2) SPARKLINE (24h)
+    // 3) SPARKLINE (24h)
     const [sparkRows] = await db.query(
       `
       SELECT 
@@ -47,7 +54,7 @@ export async function GET(req: Request, context: any) {
       count: row.article_count,
     }));
 
-    // 3) DOMINÁNS FORRÁSOK
+    // 4) DOMINÁNS FORRÁSOK
     const [sourceRows] = await db.query(
       `
       SELECT 
@@ -75,7 +82,7 @@ export async function GET(req: Request, context: any) {
         : 0,
     }));
 
-    // 4) KAPCSOLÓDÓ KULCSSZAVAK
+    // 5) KAPCSOLÓDÓ KULCSSZAVAK
     const [keywordRows] = await db.query(
       `
       SELECT 
@@ -91,7 +98,12 @@ export async function GET(req: Request, context: any) {
       [decoded]
     );
 
-    // 5) KAPCSOLÓDÓ CIKKEK
+    // SZŰRÉS: csak érvényes kulcsszavak
+    const filteredKeywords = (keywordRows as any[]).filter(
+      (k) => k?.keyword && k.keyword !== "undefined"
+    );
+
+    // 6) KAPCSOLÓDÓ CIKKEK
     const [articleRows] = await db.query(
       `
       SELECT 
@@ -108,7 +120,7 @@ export async function GET(req: Request, context: any) {
       [decoded]
     );
 
-    // 6) TrendScore
+    // 7) TrendScore
     const recentActivityScore = Math.min(meta.total_articles / 20, 1);
     const sourceDiversityScore = Math.min(meta.source_diversity / 5, 1);
 
@@ -123,7 +135,7 @@ export async function GET(req: Request, context: any) {
       meta,
       sparklineData,
       sourceDominance,
-      relatedKeywords: keywordRows,
+      relatedKeywords: filteredKeywords,
       relatedArticles: articleRows,
     });
 

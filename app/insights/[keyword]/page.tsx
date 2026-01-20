@@ -80,23 +80,25 @@ export default async function InsightPage({ params }: any) {
         <h2 className="fs-5 fw-bold mb-3">Kapcsolódó trendek</h2>
 
         <div className="d-flex flex-column gap-3">
-          {trend.relatedTrends.map(
-            (item: {
-              keyword: string;
-              category: string;
-              article_count: number;
-            }) => (
-              <InsightCard
-                key={item.keyword}
-                title={item.keyword}
-                category={item.category}
-                score={Math.round((item.article_count / 10) * 100)}
-                sources={item.article_count}
-                dominantSource={"?"}
-                timeAgo={"—"}
-              />
-            )
-          )}
+          {trend.relatedTrends
+            .filter((item: any) => item?.keyword)   // <-- EZ A FIX
+            .map(
+              (item: {
+                keyword: string;
+                category: string;
+                article_count: number;
+              }) => (
+                <InsightCard
+                  key={item.keyword}
+                  title={item.keyword}
+                  category={item.category}
+                  score={Math.round((item.article_count / 10) * 100)}
+                  sources={item.article_count}
+                  dominantSource={"?"}
+                  timeAgo={"—"}
+                />
+              )
+            )}
         </div>
       </section>
 

@@ -1,22 +1,19 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-
-
-
-
 export async function GET(req: Request, context: any) {
   try {
-    console.log("=== INSIGHTS ROUTE HIT ===");
-    console.log("REQUEST URL:", req.url);
-    console.log("RAW PATHNAME:", new URL(req.url).pathname);
-    console.log("CONTEXT PARAMS:", context?.params);
-    console.log("DECODED PARAM (attempt):", context?.params?.keyword ? decodeURIComponent(context.params.keyword) : null);
-    // ... a többi kód marad
+    const rawKeyword = context?.params?.keyword;
 
-    const { keyword } = context.params as { keyword: string };
-    const decodedKeyword = decodeURIComponent(keyword);
-    // 1) META — keywords tábla
+    // 1) VÉDELEM: ha a paraméter hiányzik vagy "undefined"
+    if (!rawKeyword || rawKeyword === "undefined") {
+      console.error("INVALID KEYWORD PARAM:", rawKeyword);
+      return NextResponse.json({ success: false }, { status: 400 });
+    }
+
+    const decodedKeyword = decodeURIComponent(rawKeyword);
+
+    // 2) META
     const [metaRows] = await db.query(
       `
       SELECT 
@@ -39,7 +36,7 @@ export async function GET(req: Request, context: any) {
 
     const meta = (metaRows as any[])[0];
 
-    // 2) SPARKLINE — keywords tábla
+    // 3) SPARKLINE
     const [sparkRows] = await db.query(
       `
       SELECT 
@@ -60,7 +57,7 @@ export async function GET(req: Request, context: any) {
       count: row.article_count,
     }));
 
-    // 3) SOURCE DOMINANCE — keywords tábla
+    // 4) SOURCE DOMINANCE
     const [sourceRows] = await db.query(
       `
       SELECT 
@@ -89,7 +86,7 @@ export async function GET(req: Request, context: any) {
         : 0,
     }));
 
-    // 4) RELATED ARTICLES — keywords tábla
+    // 5) RELATED ARTICLES
     const [articleRows] = await db.query(
       `
       SELECT 
@@ -108,7 +105,7 @@ export async function GET(req: Request, context: any) {
       [decodedKeyword]
     );
 
-    // 5) RELATED TRENDS — keywords tábla
+    // 6) RELATED TRENDS
     const [relatedTrendRows] = await db.query(
       `
       SELECT 
@@ -128,7 +125,12 @@ export async function GET(req: Request, context: any) {
       [decodedKeyword]
     );
 
-    // 6) TrendScore
+    // 7) SZŰRÉS: csak érvényes keywordök
+    const filteredTrends = (relatedTrendRows as any[]).filter(
+      (t) => t?.keyword && t.keyword !== "undefined"
+    );
+
+    // 8) TrendScore
     const recentActivityScore = Math.min(meta.total_articles / 10, 1);
     const sourceDiversityScore = Math.min(meta.source_diversity / 5, 1);
 
@@ -144,7 +146,7 @@ export async function GET(req: Request, context: any) {
       sparklineData,
       sourceDominance,
       relatedArticles: articleRows,
-      relatedTrends: relatedTrendRows,
+      relatedTrends: filteredTrends,
     });
 
   } catch (err: any) {
