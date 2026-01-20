@@ -22,7 +22,6 @@ function normalizeCategory(raw?: string | null) {
 
 export default function InsightFeedPage() {
   const [categoryTrends, setCategoryTrends] = useState<RawCategory[]>([]);
-  const [keywordTrends, setKeywordTrends] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,60 +29,43 @@ export default function InsightFeedPage() {
     async function load() {
       setLoading(true);
       try {
-        const catRes = await fetch("/api/insights", { cache: "no-store" });
-        if (!catRes.ok) {
-          if (!mounted) return;
+        const res = await fetch("/api/insights", { cache: "no-store" });
+        if (!res.ok) {
           setCategoryTrends([]);
           return;
         }
-        const catJson = await catRes.json();
+        const json = await res.json();
         if (!mounted) return;
 
-        // Normalize different possible API shapes:
-        // - { categories: ["Politika", "Sport", ...] }
-        // - { categories: [{ category, trendScore, ... }, ...] }
-        // - { items: [...] } where items contain category/score/sources
-        if (catJson && Array.isArray(catJson.categories) && catJson.categories.length > 0) {
-          const cats = catJson.categories.map((c: any) => {
-            if (c && typeof c === "object" && "category" in c) {
-              return {
-                category: c.category ?? null,
-                trendScore: Number(c.trendScore ?? 0),
-                articleCount: Number(c.articleCount ?? c.articleCount ?? 0),
-                sourceDiversity: c.sourceDiversity ?? c.sourceDiversity ?? 0,
-                lastArticleAt: c.lastArticleAt ?? null,
-              } as RawCategory;
+        // API most categories objektumokat ad vissza
+        if (Array.isArray(json.categories) && json.categories.length > 0) {
+          setCategoryTrends(json.categories as RawCategory[]);
+        } else if (Array.isArray(json.items) && json.items.length > 0) {
+          // derive from items if categories missing
+          const derived = json.items.reduce((acc: Record<string, RawCategory>, it: any) => {
+            const cat = normalizeCategory(it.category) ?? "__NULL__";
+            if (!acc[cat]) {
+              acc[cat] = {
+                category: cat === "__NULL__" ? null : cat,
+                trendScore: 0,
+                articleCount: 0,
+                sourceDiversity: 0,
+                lastArticleAt: it.timeAgo ?? null,
+              };
             }
-            // c is likely a string
-            return {
-              category: typeof c === "string" ? c : null,
-              trendScore: 0,
-              articleCount: 0,
-              sourceDiversity: 0,
-              lastArticleAt: null,
-            } as RawCategory;
-          });
-          setCategoryTrends(cats);
-        } else if (catJson && Array.isArray(catJson.items) && catJson.items.length > 0) {
-          // derive minimal structure from items
-          const derived = (catJson.items || []).map((it: any) => ({
-            category: it.category ?? null,
-            trendScore: Number(it.score ?? 0),
-            articleCount: Number(it.sources ?? 0),
-            sourceDiversity: it.dominantSource ?? 0,
-            lastArticleAt: it.timeAgo ?? null,
-          }));
-          setCategoryTrends(derived);
+            acc[cat].articleCount += 1;
+            acc[cat].sourceDiversity = (acc[cat].sourceDiversity || 0) + (it.sources || 0);
+            if (it.timeAgo && (!acc[cat].lastArticleAt || it.timeAgo > acc[cat].lastArticleAt)) {
+              acc[cat].lastArticleAt = it.timeAgo;
+            }
+            return acc;
+          }, {});
+          setCategoryTrends(Object.values(derived));
         } else {
           setCategoryTrends([]);
         }
-
-        setKeywordTrends([]);
-      } catch (err) {
-        if (mounted) {
-          setCategoryTrends([]);
-          setKeywordTrends([]);
-        }
+      } catch (e) {
+        setCategoryTrends([]);
       } finally {
         if (mounted) setLoading(false);
       }
@@ -94,22 +76,18 @@ export default function InsightFeedPage() {
     };
   }, []);
 
-  const categoryItems = categoryTrends
-    .map((c) => {
-      const cat = normalizeCategory(c.category);
-      return {
-        id: `cat-${cat ?? "unknown"}`,
-        title: cat ?? "Ismeretlen kategória",
-        score: Number(c.trendScore || 0),
-        sources: Number(c.articleCount || 0),
-        dominantSource: `${c.sourceDiversity ?? 0} forrás`,
-        timeAgo: c.lastArticleAt ? new Date(c.lastArticleAt).toLocaleString() : "",
-        href: cat ? `/insights/category/${encodeURIComponent(cat)}` : undefined,
-      };
-    })
-    .slice(0, 200);
-
-  const keywordItems: any[] = [];
+  const categoryItems = categoryTrends.map((c) => {
+    const cat = normalizeCategory(c.category);
+    return {
+      id: `cat-${cat ?? "unknown"}`,
+      title: cat ?? "Ismeretlen kategória",
+      score: Number(c.trendScore || 0),
+      sources: Number(c.articleCount || 0),
+      dominantSource: `${c.sourceDiversity ?? 0} forrás`,
+      timeAgo: c.lastArticleAt ? new Date(c.lastArticleAt).toLocaleString() : "",
+      href: cat ? `/insights/category/${encodeURIComponent(cat)}` : undefined,
+    };
+  });
 
   return (
     <main className="container py-5">
@@ -120,13 +98,6 @@ export default function InsightFeedPage() {
           Kategória trendek
         </h2>
         <InsightList items={categoryItems} loading={loading} />
-      </section>
-
-      <section aria-labelledby="keyword-trends" className="mt-5">
-        <h2 id="keyword-trends" className="fs-5 fw-bold mb-2">
-          Kulcsszó trendek
-        </h2>
-        <InsightList items={keywordItems} loading={loading} />
       </section>
     </main>
   );
