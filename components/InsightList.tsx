@@ -1,3 +1,4 @@
+// components/InsightList.tsx
 "use client";
 
 import InsightCard from "@/components/InsightCard";
@@ -5,7 +6,6 @@ import InsightCard from "@/components/InsightCard";
 type InsightItem = {
   id: string;
   title: string;
-  category: string;
   score: number;
   sources: number;
   dominantSource: string;
@@ -35,7 +35,6 @@ export default function InsightList({ items, loading }: InsightListProps) {
         <InsightCard
           key={item.id}
           title={item.title}
-          category={item.category}
           score={item.score}
           sources={item.sources}
           dominantSource={item.dominantSource}

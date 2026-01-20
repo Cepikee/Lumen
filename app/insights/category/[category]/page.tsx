@@ -1,3 +1,4 @@
+// app/insights/category/[category]/page.tsx
 import InsightSparkline from "@/components/InsightSparkline";
 import InsightSourceRing from "@/components/InsightSourceRing";
 import InsightCard from "@/components/InsightCard";
@@ -7,11 +8,10 @@ export default async function CategoryInsightPage({ params }: any) {
 
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://utom.hu";
 
-const res = await fetch(
-  `${base}/api/insights/category/${encodeURIComponent(category)}`,
-  { cache: "no-store" }
-);
-
+  const res = await fetch(
+    `${base}/api/insights/category/${encodeURIComponent(category)}`,
+    { cache: "no-store" }
+  );
 
   const data = await res.json();
 
@@ -23,7 +23,6 @@ const res = await fetch(
 
   return (
     <main className="container py-5 insight-page">
-
       <h1 className="insight-page-title">{trend.category}</h1>
 
       <div className="insight-page-meta">
@@ -51,7 +50,7 @@ const res = await fetch(
 
         <ul className="list-group">
           {trend.relatedKeywords
-            .filter((k: any) => k?.keyword) // <-- EZ A FIX
+            .filter((k: any) => k?.keyword)
             .map((k: any) => (
               <li key={k.keyword} className="list-group-item">
                 <a href={`/insights/${encodeURIComponent(k.keyword)}`}>
@@ -71,7 +70,6 @@ const res = await fetch(
             <InsightCard
               key={a.id}
               title={a.title}
-              category={trend.category}
               score={0}
               sources={0}
               dominantSource={a.source}
@@ -81,7 +79,6 @@ const res = await fetch(
           ))}
         </div>
       </section>
-
     </main>
   );
 }
