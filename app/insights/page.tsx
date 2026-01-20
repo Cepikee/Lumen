@@ -20,6 +20,21 @@ function normalizeCategory(raw?: string | null) {
   return s;
 }
 
+/** Type guard: ellenőrzi, hogy egy objektum RawCategory-szerű-e */
+function isRawCategory(obj: unknown): obj is RawCategory {
+  if (!obj || typeof obj !== "object") return false;
+  const o = obj as Record<string, unknown>;
+  // category lehet string vagy null; trendScore és articleCount számok
+  return (
+    ("category" in o) &&
+    (typeof o.category === "string" || o.category === null) &&
+    ("trendScore" in o) &&
+    (typeof o.trendScore === "number") &&
+    ("articleCount" in o) &&
+    (typeof o.articleCount === "number")
+  );
+}
+
 export default function InsightFeedPage() {
   const [categoryTrends, setCategoryTrends] = useState<RawCategory[]>([]);
   const [loading, setLoading] = useState(true);
@@ -31,18 +46,26 @@ export default function InsightFeedPage() {
       try {
         const res = await fetch("/api/insights", { cache: "no-store" });
         if (!res.ok) {
-          setCategoryTrends([]);
+          if (mounted) setCategoryTrends([]);
           return;
         }
-        const json = await res.json();
+        const json: unknown = await res.json();
         if (!mounted) return;
 
-        // API most categories objektumokat ad vissza
-        if (Array.isArray(json.categories) && json.categories.length > 0) {
-          setCategoryTrends(json.categories as RawCategory[]);
-        } else if (Array.isArray(json.items) && json.items.length > 0) {
-          // derive from items if categories missing
-          const derived = json.items.reduce((acc: Record<string, RawCategory>, it: any) => {
+        // Ha van categories tömb, használjuk (biztonságosan szűrve és cast-olva)
+        if (Array.isArray((json as any)?.categories) && (json as any).categories.length > 0) {
+          const rawCats = (json as any).categories as unknown[];
+          const filtered: RawCategory[] = rawCats.filter(isRawCategory).filter(
+            (c) => normalizeCategory(c.category) !== null
+          );
+          if (mounted) setCategoryTrends(filtered);
+          return;
+        }
+
+        // Ha nincs categories, de vannak items, deriváljuk
+        if (Array.isArray((json as any)?.items) && (json as any).items.length > 0) {
+          const items = (json as any).items as any[];
+          const derived = items.reduce((acc: Record<string, RawCategory>, it: any) => {
             const cat = normalizeCategory(it.category) ?? "__NULL__";
             if (!acc[cat]) {
               acc[cat] = {
@@ -54,18 +77,24 @@ export default function InsightFeedPage() {
               };
             }
             acc[cat].articleCount += 1;
-            acc[cat].sourceDiversity = (acc[cat].sourceDiversity || 0) + (it.sources || 0);
+            acc[cat].sourceDiversity = (Number(acc[cat].sourceDiversity || 0) || 0) + (Number(it.sources || 0) || 0);
             if (it.timeAgo && (!acc[cat].lastArticleAt || it.timeAgo > acc[cat].lastArticleAt)) {
               acc[cat].lastArticleAt = it.timeAgo;
             }
             return acc;
           }, {});
-          setCategoryTrends(Object.values(derived));
-        } else {
-          setCategoryTrends([]);
+          // Object.values eredménye unknown lehet, ezért castoljuk és szűrjük
+          const values = Object.values(derived).filter((v): v is RawCategory => {
+            return isRawCategory(v) && normalizeCategory(v.category) !== null;
+          }) as RawCategory[];
+          if (mounted) setCategoryTrends(values);
+          return;
         }
+
+        // alapértelmezett
+        if (mounted) setCategoryTrends([]);
       } catch (e) {
-        setCategoryTrends([]);
+        if (mounted) setCategoryTrends([]);
       } finally {
         if (mounted) setLoading(false);
       }
@@ -76,18 +105,21 @@ export default function InsightFeedPage() {
     };
   }, []);
 
-  const categoryItems = categoryTrends.map((c) => {
-    const cat = normalizeCategory(c.category);
-    return {
-      id: `cat-${cat ?? "unknown"}`,
-      title: cat ?? "Ismeretlen kategória",
-      score: Number(c.trendScore || 0),
-      sources: Number(c.articleCount || 0),
-      dominantSource: `${c.sourceDiversity ?? 0} forrás`,
-      timeAgo: c.lastArticleAt ? new Date(c.lastArticleAt).toLocaleString() : "",
-      href: cat ? `/insights/category/${encodeURIComponent(cat)}` : undefined,
-    };
-  });
+  // Szűrjük ki a null kategóriákat, mielőtt UI elemeket készítünk
+  const categoryItems = categoryTrends
+    .filter((c) => normalizeCategory(c.category) !== null)
+    .map((c) => {
+      const cat = normalizeCategory(c.category)!; // itt már nem lehet null
+      return {
+        id: `cat-${cat}`,
+        title: cat,
+        score: Number(c.trendScore || 0),
+        sources: Number(c.articleCount || 0),
+        dominantSource: `${c.sourceDiversity ?? 0} forrás`,
+        timeAgo: c.lastArticleAt ? new Date(c.lastArticleAt).toLocaleString() : "",
+        href: `/insights/category/${encodeURIComponent(cat)}`,
+      };
+    });
 
   return (
     <main className="container py-5">
