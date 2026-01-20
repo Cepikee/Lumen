@@ -3,15 +3,19 @@ import { db } from "@/lib/db";
 
 
 
+
+
 export async function GET(req: Request, context: any) {
   try {
-    console.log("RAW PARAM:", context.params.keyword);
-console.log("DECODED:", decodeURIComponent(context.params.keyword));
+    console.log("=== INSIGHTS ROUTE HIT ===");
+    console.log("REQUEST URL:", req.url);
+    console.log("RAW PATHNAME:", new URL(req.url).pathname);
+    console.log("CONTEXT PARAMS:", context?.params);
+    console.log("DECODED PARAM (attempt):", context?.params?.keyword ? decodeURIComponent(context.params.keyword) : null);
+    // ... a többi kód marad
 
     const { keyword } = context.params as { keyword: string };
     const decodedKeyword = decodeURIComponent(keyword);
-console.log("SQL PARAM:", decodedKeyword);
-console.log("SQL PARAM HEX:", Buffer.from(decodedKeyword).toString("hex"));
     // 1) META — keywords tábla
     const [metaRows] = await db.query(
       `
