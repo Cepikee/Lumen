@@ -79,14 +79,15 @@ export async function GET(req: Request, context: any) {
 
     // A táblában nincs sources_count és nincs score mező -> használjunk alapértékeket
     const itemsSql = `
-      SELECT id, title, category, published_at, source AS dominantSource,
-             1 AS sources, 0 AS score, excerpt
-      FROM articles
-      ${whereClause}
-      ${periodClause}
-      ${orderBy}
-      LIMIT ? OFFSET ?
-    `;
+  SELECT id, title, category, published_at, source AS dominantSource,
+         1 AS sources, 0 AS score, SUBSTRING(content_text, 1, 300) AS excerpt
+  FROM articles
+  ${whereClause}
+  ${periodClause}
+  ${orderBy}
+  LIMIT ? OFFSET ?
+`;
+
     itemsParams.push(limit, offset);
 
     console.log("itemsSql:", itemsSql);
