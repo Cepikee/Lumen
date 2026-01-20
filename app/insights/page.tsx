@@ -1,6 +1,6 @@
 // app/insights/page.tsx
 "use client";
-
+import "@/styles/insights.css";
 import { useMemo, useState } from "react";
 import InsightList from "@/components/InsightList";
 import InsightFilters from "@/components/InsightFilters";
