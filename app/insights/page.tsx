@@ -2,7 +2,7 @@
 "use client";
 import "@/styles/insights.css";
 import { useMemo, useState } from "react";
-import InsightList from "@/components/InsightList";
+import InsightCard from "@/components/InsightCard";
 import InsightFilters from "@/components/InsightFilters";
 import ThemeSync from "@/components/ThemeSync";
 import { useInsights, InsightApiItem } from "@/hooks/useInsights";
@@ -13,7 +13,6 @@ type LocalRawCategory = {
   articleCount: number;
   sourceDiversity?: number | string;
   lastArticleAt?: string | null;
-  // opcionális vizualizációs adatok (ha a backend küldi)
   sparkline?: number[];
   ringData?: number[];
 };
@@ -26,7 +25,6 @@ function normalizeCategory(raw?: string | null) {
   return s;
 }
 
-/** Type guard egyszerű ellenőrzéshez (megtartva) */
 function isRawCategory(obj: unknown): obj is LocalRawCategory {
   if (!obj || typeof obj !== "object") return false;
   const o = obj as Record<string, unknown>;
@@ -41,15 +39,11 @@ function isRawCategory(obj: unknown): obj is LocalRawCategory {
 }
 
 export default function InsightFeedPage() {
-  // period: időablak (7d/30d/90d)
   const [period, setPeriod] = useState<"7d" | "30d" | "90d">("7d");
-  // sort: a meglévő InsightFilters komponens által használt aktív filter string
   const [sort, setSort] = useState<string>("Legfrissebb");
 
-  // SWR hook: data | error | loading
   const { data, error, loading } = useInsights(period, sort);
 
-  // Deriváljuk a categoryTrends tömböt a hookból érkező adatokból
   const categoryTrends = useMemo<LocalRawCategory[]>(() => {
     if (!data) return [];
 
@@ -75,7 +69,6 @@ export default function InsightFeedPage() {
     return mapped;
   }, [data]);
 
-  // UI items: átadjuk a sparkline/ringData mezőket is, ha vannak
   const categoryItems = categoryTrends
     .filter((c) => normalizeCategory(c.category) !== null)
     .map((c) => {
@@ -88,7 +81,6 @@ export default function InsightFeedPage() {
         dominantSource: `${c.sourceDiversity ?? 0} forrás`,
         timeAgo: c.lastArticleAt ? new Date(c.lastArticleAt).toLocaleString() : "",
         href: `/insights/category/${encodeURIComponent(cat)}`,
-        // átadjuk a vizualizációs adatokat az InsightList/InsightCard számára
         ringData: c.ringData,
         sparkline: c.sparkline,
       };
@@ -96,7 +88,6 @@ export default function InsightFeedPage() {
 
   return (
     <main className="container py-4">
-      {/* ThemeSync: szinkronizálja a Zustand theme értékét a DOM data-theme attribútumával */}
       <ThemeSync />
 
       <header className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between mb-3 gap-3">
@@ -106,7 +97,6 @@ export default function InsightFeedPage() {
         </div>
 
         <div className="d-flex gap-2 align-items-center">
-          {/* Period gombcsoport (7d/30d/90d) */}
           <div className="btn-group me-2" role="group" aria-label="Időszak">
             <button
               type="button"
@@ -131,7 +121,6 @@ export default function InsightFeedPage() {
             </button>
           </div>
 
-          {/* A meglévő InsightFilters komponens: active/onChange API */}
           <InsightFilters active={sort} onChange={(f) => setSort(f)} />
         </div>
       </header>
@@ -139,8 +128,39 @@ export default function InsightFeedPage() {
       <section aria-labelledby="category-trends">
         <h2 id="category-trends" className="fs-5 fw-bold mb-2 visually-hidden">Kategória trendek</h2>
 
-        <div className="row g-3">
-          <InsightList items={categoryItems} loading={loading} />
+        {/* row-cols segédosztályok: mobilon 1 oszlop, md 2, lg 3 */}
+        <div className="row g-3 row-cols-1 row-cols-md-2 row-cols-lg-3">
+          {loading
+            ? // skeleton helykitöltők, amíg tölt
+              Array.from({ length: 6 }).map((_, i) => (
+                <div key={`skeleton-${i}`} className="col d-flex">
+                  <article className="insight-card card border-0" style={{ display: "flex", flexDirection: "column", flex: "1 1 auto", minHeight: 140 }}>
+                    <div className="card-body d-flex flex-column gap-3" style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+                      <div className="d-flex align-items-start">
+                        <div className="me-3 d-flex align-items-center" style={{ width: 64, height: 64, minWidth: 64 }}>
+                          <div className="insight-source-ring bg-secondary rounded-circle w-100 h-100" />
+                        </div>
+                        <div className="flex-grow-1">
+                          <div style={{ height: 18, width: "60%", background: "rgba(0,0,0,0.06)", borderRadius: 6, marginBottom: 8 }} />
+                          <div style={{ height: 12, width: "40%", background: "rgba(0,0,0,0.04)", borderRadius: 6 }} />
+                        </div>
+                        <div className="ms-2 text-end d-flex flex-column gap-2">
+                          <div style={{ height: 28, width: 64, background: "rgba(0,0,0,0.04)", borderRadius: 6 }} />
+                        </div>
+                      </div>
+
+                      <div className="card-footer bg-transparent border-0 pt-0" style={{ marginTop: "auto" }}>
+                        <div className="insight-sparkline" style={{ height: 40, background: "rgba(0,0,0,0.03)" }} />
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              ))
+            : categoryItems.map((item) => (
+                <div key={item.id} className="col d-flex">
+                  <InsightCard {...item} />
+                </div>
+              ))}
         </div>
       </section>
     </main>
