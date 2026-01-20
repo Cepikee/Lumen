@@ -38,21 +38,42 @@ export default function InsightFeedPage() {
         }
         const catJson = await catRes.json();
         if (!mounted) return;
-        if (catJson && Array.isArray(catJson.items)) {
-          // API returns items and categories; we prefer categories summary if present
-          if (Array.isArray(catJson.categories) && catJson.categories.length > 0) {
-            setCategoryTrends(catJson.categories as RawCategory[]);
-          } else {
-            // derive minimal structure from items
-            const derived = (catJson.items || []).map((it: any) => ({
-              category: it.category ?? null,
-              trendScore: it.score ?? 0,
-              articleCount: it.sources ?? 0,
-              sourceDiversity: it.dominantSource ?? "",
-              lastArticleAt: it.timeAgo ?? null,
-            }));
-            setCategoryTrends(derived);
-          }
+
+        // Normalize different possible API shapes:
+        // - { categories: ["Politika", "Sport", ...] }
+        // - { categories: [{ category, trendScore, ... }, ...] }
+        // - { items: [...] } where items contain category/score/sources
+        if (catJson && Array.isArray(catJson.categories) && catJson.categories.length > 0) {
+          const cats = catJson.categories.map((c: any) => {
+            if (c && typeof c === "object" && "category" in c) {
+              return {
+                category: c.category ?? null,
+                trendScore: Number(c.trendScore ?? 0),
+                articleCount: Number(c.articleCount ?? c.articleCount ?? 0),
+                sourceDiversity: c.sourceDiversity ?? c.sourceDiversity ?? 0,
+                lastArticleAt: c.lastArticleAt ?? null,
+              } as RawCategory;
+            }
+            // c is likely a string
+            return {
+              category: typeof c === "string" ? c : null,
+              trendScore: 0,
+              articleCount: 0,
+              sourceDiversity: 0,
+              lastArticleAt: null,
+            } as RawCategory;
+          });
+          setCategoryTrends(cats);
+        } else if (catJson && Array.isArray(catJson.items) && catJson.items.length > 0) {
+          // derive minimal structure from items
+          const derived = (catJson.items || []).map((it: any) => ({
+            category: it.category ?? null,
+            trendScore: Number(it.score ?? 0),
+            articleCount: Number(it.sources ?? 0),
+            sourceDiversity: it.dominantSource ?? 0,
+            lastArticleAt: it.timeAgo ?? null,
+          }));
+          setCategoryTrends(derived);
         } else {
           setCategoryTrends([]);
         }
