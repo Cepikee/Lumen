@@ -14,9 +14,8 @@ type InsightCardProps = {
   dominantSource: string;
   timeAgo: string;
   href?: string;
-  // opcionális adatok a chartokhoz (ha van)
-  ringData?: number[];     // pl. [dominantCount, otherCount]
-  sparkline?: number[];    // pl. napi értékek
+  ringData?: number[];
+  sparkline?: number[];
 };
 
 export default function InsightCard({
@@ -32,12 +31,9 @@ export default function InsightCard({
   const linkHref = href || "#";
   const disabled = !href;
 
-  // useInView: kisebb threshold, előtöltés (rootMargin) és debounce, egyszeri init
+  // ha a useInView csak egy number-t vár, ez rendben van
   const { ref, inView } = useInView(0.12);
 
-
-
-  // default adatok, ha nincs ringData/sparkline
   const ring = useMemo(
     () => ringData ?? [Math.max(0, score), Math.max(0, sources - score)],
     [ringData, score, sources]
@@ -50,12 +46,25 @@ export default function InsightCard({
       tabIndex={0}
       role="article"
       aria-labelledby={`insight-${title}`}
-      className="insight-card card h-100 border-0"
+      className="insight-card card border-0"
       data-disabled={disabled ? "true" : "false"}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        flex: "1 1 auto",
+        minHeight: 140,
+        boxSizing: "border-box",
+      }}
     >
-      <div className="card-body d-flex flex-column gap-3">
+      <div
+        className="card-body d-flex flex-column gap-3"
+        style={{ display: "flex", flexDirection: "column", flex: 1 }}
+      >
         <div className="d-flex align-items-start">
-          <div className="me-3 d-flex align-items-center" style={{ width: 64, height: 64 }}>
+          <div
+            className="me-3 d-flex align-items-center"
+            style={{ width: 64, height: 64, minWidth: 64 }}
+          >
             {inView ? (
               <InsightSourceRing data={ring} aria-hidden="true" />
             ) : (
@@ -64,7 +73,7 @@ export default function InsightCard({
           </div>
 
           <div className="flex-grow-1">
-            <h3 id={`insight-${title}`} className="insight-title h6 mb-1">
+            <h3 id={`insight-${title}`} className="insight-title h6 mb-1" style={{ margin: 0 }}>
               {title}
             </h3>
 
@@ -80,7 +89,11 @@ export default function InsightCard({
 
           <div className="ms-2 text-end d-flex flex-column gap-2">
             {href ? (
-              <Link href={linkHref} className="btn btn-sm btn-outline-light" aria-label={`Megnyit ${title} kategória`}>
+              <Link
+                href={linkHref}
+                className="btn btn-sm btn-outline-light"
+                aria-label={`Megnyit ${title} kategória`}
+              >
                 Megnyit
               </Link>
             ) : (
@@ -91,7 +104,7 @@ export default function InsightCard({
           </div>
         </div>
 
-        <div className="card-footer bg-transparent border-0 pt-0">
+        <div className="card-footer bg-transparent border-0 pt-0" style={{ marginTop: "auto" }}>
           {inView ? (
             <InsightSparkline data={spark} aria-hidden="true" />
           ) : (
