@@ -1,4 +1,3 @@
-// app/insight/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -12,16 +11,15 @@ export default function InsightFeedPage() {
   useEffect(() => {
     async function load() {
       try {
-        const [catRes, kwRes] = await Promise.all([
-          fetch("/api/insights/categories"),
-          fetch("/api/insights"),
-        ]);
-
+        // ❗ Csak a létező API-t hívjuk
+        const catRes = await fetch("/api/insights/categories");
         const catJson = await catRes.json();
-        const kwJson = await kwRes.json();
 
         if (catJson.success) setCategoryTrends(catJson.categories);
-        if (kwJson.success) setKeywordTrends(kwJson.trends);
+
+        // ❗ Keyword feed egyelőre nincs API-ból
+        setKeywordTrends([]);
+
       } catch (err) {
         console.error("InsightFeed error:", err);
       } finally {
@@ -39,19 +37,10 @@ export default function InsightFeedPage() {
     sources: c.articleCount,
     dominantSource: `${c.sourceDiversity} forrás`,
     timeAgo: new Date(c.lastArticleAt).toLocaleString(),
-    href: `/insight/category/${encodeURIComponent(c.category)}`,
+    href: `/insights/category/${encodeURIComponent(c.category)}`,
   }));
 
-  const keywordItems = keywordTrends.map((t: any) => ({
-    id: `kw-${t.keyword}`,
-    title: t.keyword,
-    category: t.category,
-    score: t.trendScore,
-    sources: t.articleCount,
-    dominantSource: `${t.sourceDiversity} forrás`,
-    timeAgo: new Date(t.lastArticleAt).toLocaleString(),
-    href: `/insight/${encodeURIComponent(t.keyword)}`,
-  }));
+  const keywordItems: any[] = []; // egyelőre nincs keyword feed
 
   return (
     <main className="container py-5">
