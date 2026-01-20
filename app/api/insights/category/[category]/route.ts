@@ -16,11 +16,14 @@ function normalizeParam(raw?: string | null) {
 }
 
 export async function GET(req: Request, context: any) {
-  const raw = context?.params?.category;
+  // próbáljuk meg a kategóriát több forrásból kinyerni (context.params vagy URL path)
+  const url = new URL(req.url);
+  const rawFromContext = context?.params?.category;
+  const rawFromPath = (url.pathname || "").split("/").filter(Boolean).pop();
+  const raw = rawFromContext ?? rawFromPath ?? undefined;
   const categoryParam = normalizeParam(raw);
 
   // query paramok
-  const url = new URL(req.url);
   const period = String(url.searchParams.get("period") || "7d");
   const sort = String(url.searchParams.get("sort") || "latest");
   const page = Math.max(1, Number(url.searchParams.get("page") || 1));
@@ -39,7 +42,7 @@ export async function GET(req: Request, context: any) {
   const startDateStr = startDate.toISOString().slice(0, 10); // 'YYYY-MM-DD'
 
   try {
-    // --- DEBUG: log a hívás paramétereit (ideiglenes) ---
+    // --- Log (hasznos debughoz, később törölhető) ---
     console.log("API /api/insights/category/:category hívás", {
       raw,
       categoryParam,
@@ -57,24 +60,27 @@ export async function GET(req: Request, context: any) {
     let whereClause = "";
 
     if (categoryParam === null && raw !== undefined) {
+      // explicit "null" paraméter: category IS NULL
       whereClause = ` WHERE category IS NULL`;
     } else if (categoryParam) {
       whereClause = ` WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))`;
       itemsParams.push(categoryParam);
     }
 
-    // használjuk a DATE(published_at) >= ? feltételt (egyszerűbb és megbízható)
+    // periódus feltétel (DATE alapú)
     itemsParams.push(startDateStr);
     const periodClause = `${whereClause ? " AND" : " WHERE"} DATE(published_at) >= ?`;
 
+    // rendezés: a táblában nincs sources_count vagy score, ezért egyszerűsítve
     const orderBy =
       sort === "popular"
-        ? "ORDER BY COALESCE(sources_count, 1) DESC, published_at DESC"
+        ? "ORDER BY published_at DESC" // ha lesz popularity mező, ide lehet visszaállítani
         : "ORDER BY published_at DESC";
 
+    // A táblában nincs sources_count és nincs score mező -> használjunk alapértékeket
     const itemsSql = `
       SELECT id, title, category, published_at, source AS dominantSource,
-             COALESCE(sources_count, 1) AS sources, COALESCE(score, 0) AS score, excerpt
+             1 AS sources, 0 AS score, excerpt
       FROM articles
       ${whereClause}
       ${periodClause}
@@ -83,7 +89,6 @@ export async function GET(req: Request, context: any) {
     `;
     itemsParams.push(limit, offset);
 
-    // DEBUG: log SQL és paraméterek
     console.log("itemsSql:", itemsSql);
     console.log("itemsParams:", itemsParams);
 
@@ -199,11 +204,9 @@ export async function GET(req: Request, context: any) {
       summary,
       items,
       ...pageInfo,
-      // debug mező ideiglenesen: ha kell, láthatod a visszaadott SQL eredményt
-      debug: { itemsCount: items.length },
+      debug: { itemsCount: items.length }, // ideiglenes debug mező
     });
   } catch (err: any) {
-    // ideiglenes részletes hibaüzenet (teszteléshez)
     console.error("Category route hiba:", err);
     return NextResponse.json(
       { success: false, error: "szerver_hiba", debug: String(err) },
