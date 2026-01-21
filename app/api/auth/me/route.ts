@@ -28,7 +28,8 @@ export async function GET(req: Request) {
         premium_tier,
         avatar_style,
         avatar_seed,
-        avatar_format
+        avatar_format,
+        avatar_frame
      FROM users
      WHERE id = ?
      LIMIT 1`,

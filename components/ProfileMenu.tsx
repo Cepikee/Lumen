@@ -6,36 +6,31 @@ import SettingsView from "./SettingsView";
 import UtomModal from "./UtomModal";
 import { useUserStore } from "@/store/useUserStore";
 import "@/styles/profile-badge.css";
+import { PREMIUM_FRAMES } from "@/types/premiumFrames";
 
 export default function ProfileMenu() {
-  const user = useUserStore((s) => s.user); // 🔥 mindig FRISS user
+  // 🔥 HOOKOK MINDIG LEGELŐL!
+  const user = useUserStore((s) => s.user);
   const [open, setOpen] = useState(false);
   const [modal, setModal] = useState<null | "profile" | "settings">(null);
+
+  // 🔥 user után jöhet minden, ami user-t használ
+  const currentFrame = PREMIUM_FRAMES.find((f) => f.id === user?.avatar_frame);
 
   function openModal(type: "profile" | "settings") {
     setOpen(false);
     setModal(type);
   }
 
-  // Korona ikon
-  function CrownIcon({ size = 18 }: { size?: number }) {
-    return (
-      <svg viewBox="0 0 24 24" width={size} height={size} style={{ display: "block" }}>
-        <path d="M4 18L5 8L9 12L12 6L15 12L19 8L20 18H4Z" fill="#FFD700" />
-      </svg>
-    );
-  }
-
-  // 🔥 prémium logika – csak akkor true, ha tényleg prémium
   const premiumActive =
     user &&
     (user.is_premium === true ||
-      (user.premium_until && new Date(user.premium_until).getTime() > Date.now()));
+      (user.premium_until &&
+        new Date(user.premium_until).getTime() > Date.now()));
 
-  // 🔥 DiceBear 8.x avatar URL
   const avatarUrl =
     user?.avatar_style && user?.avatar_seed
-      ? `https://api.dicebear.com/8.x/${user.avatar_style}/svg?seed=${encodeURIComponent(
+      ? `https://api.dicebear.com/9.x/${user.avatar_style}/svg?seed=${encodeURIComponent(
           user.avatar_seed
         )}`
       : null;
@@ -43,26 +38,45 @@ export default function ProfileMenu() {
   return (
     <div className="position-relative">
       {/* Profil ikon */}
-      <div className="profile-badge" onClick={() => setOpen(!open)}>
-        <div className={`badge-ring ${premiumActive ? "premium" : ""}`}>
-          <div className="avatar-inner">
-            {avatarUrl ? (
-              <img src={avatarUrl} alt="avatar" />
-            ) : (
-              <div style={{ width: "100%", height: "100%", background: "transparent" }} />
-            )}
-          </div>
+      <div
+        className="profile-badge premium-avatar"
+        onClick={() => setOpen(!open)}
+      >
+        <div className="avatar-inner">
+          {avatarUrl ? (
+            <img src={avatarUrl} alt="avatar" className="avatar-image" />
+          ) : (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                background: "transparent",
+              }}
+            />
+          )}
         </div>
 
-        {/* Korona */}
-        {premiumActive && (
+        {/* Prémium keret overlay */}
+        {premiumActive && currentFrame && (
           <>
-            <div className="crown" style={{ top: "-11px" }}>
-              <CrownIcon size={22} />
-            </div>
+            {currentFrame.type === "css" && (
+  <div
+    key={currentFrame.id}   // 🔥 EZ A FIX
+    className={currentFrame.className}
+  ></div>
+)}
+
+
+            {currentFrame.type === "png" && (
+              <img
+                src={currentFrame.src}
+                className={`avatar-frame ${currentFrame.className}`}
+                alt=""
+              />
+            )}
           </>
         )}
-      </div> {/* ← EZ volt a hiányzó lezárás */}
+      </div>
 
       {/* Dropdown */}
       {open && (
@@ -147,13 +161,21 @@ export default function ProfileMenu() {
 
       {/* MODALOK */}
       {modal === "profile" && (
-        <UtomModal show={true} onClose={() => setModal(null)} title="Profil">
+        <UtomModal
+          show={true}
+          onClose={() => setModal(null)}
+          title="Profil"
+        >
           <ProfileView />
         </UtomModal>
       )}
 
       {modal === "settings" && (
-        <UtomModal show={true} onClose={() => setModal(null)} title="Beállítások">
+        <UtomModal
+          show={true}
+          onClose={() => setModal(null)}
+          title="Beállítások"
+        >
           <SettingsView />
         </UtomModal>
       )}

@@ -21,15 +21,19 @@ function generateSeeds(count: number, page: number, style: string) {
 // DiceBear stílusok
 const STYLES = [
   { id: "adventurer", label: "Kalandor" },
-  { id: "adventurer-neutral", label: "Kalandor (semleges)" },
+  { id: "adventurer-neutral", label: "Kalandor" },
   { id: "avataaars", label: "Avatárok" },
   { id: "big-ears", label: "Nagy fülek" },
-  { id: "big-ears-neutral", label: "Nagy fülek (semleges)" },
+  { id: "big-ears-neutral", label: "Nagy fülek" },
   { id: "big-smile", label: "Nagy mosoly" },
   { id: "bottts", label: "Robot" },
-  { id: "bottts-neutral", label: "Robot (semleges)" },
+  { id: "bottts-neutral", label: "Robot" },
   { id: "croodles", label: "Firkarajz" },
   { id: "croodles-neutral", label: "Firkarajz (semleges)" },
+  { id: "open-peeps", label: "Nyitott figurák" },
+  { id: "pixel-art", label: "Pixel Art" },
+  { id: "personas", label: "Személyiségek" },
+  { id: "toon-heads", label: "Rajzfilm fejek" },
 ];
 
 export default function AvatarModal({
@@ -66,7 +70,7 @@ export default function AvatarModal({
 
   // 🔥 Gyors DiceBear URL
   function getUrl(s: string, seed: string) {
-    return `https://api.dicebear.com/8.x/${s}/svg?seed=${encodeURIComponent(
+    return `https://api.dicebear.com/9.x/${s}/svg?seed=${encodeURIComponent(
       seed
     )}&size=64&scale=90`;
   }

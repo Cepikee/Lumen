@@ -6,6 +6,8 @@ import { useUserStore } from "@/store/useUserStore";
 import PasswordChangeModal from "@/components/PasswordChangeModal";
 import PinChangeModal from "@/components/PinChangeModal";
 import AvatarModal from "@/components/AvatarModal";
+import { PREMIUM_FRAMES } from "@/types/premiumFrames";
+import FrameModal from "@/components/FrameModal";
 
 function getAvatarUrl(user: any) {
   const style = user.avatar_style || "bottts";
@@ -17,25 +19,17 @@ export default function SettingsView() {
   const user = useUserStore((s) => s.user);
   const setUser = useUserStore((s) => s.setUser);
 
+  // 🔥 MINDEN HOOK LEGELŐL
+  const [showFrameModal, setShowFrameModal] = useState(false);
+  const [showAvatarModal, setShowAvatarModal] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [showPinModal, setShowPinModal] = useState(false);
+
   const [nickname, setNickname] = useState(user!.nickname);
   const [bio, setBio] = useState(user!.bio || "");
   const [saving, setSaving] = useState(false);
 
-  const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const [showPinModal, setShowPinModal] = useState(false);
-  const [showAvatarModal, setShowAvatarModal] = useState(false);
-
   if (!user) return <div>Betöltés...</div>;
-
-  // ⭐ Ha az AvatarModal nyitva van → csak a modal jelenik meg
-  if (showAvatarModal) {
-    return (
-      <AvatarModal
-        show={true}
-        onClose={() => setShowAvatarModal(false)}
-      />
-    );
-  }
 
   const premiumActive =
     user.is_premium ||
@@ -50,6 +44,8 @@ export default function SettingsView() {
         minute: "2-digit",
       })
     : null;
+
+  const currentFrame = PREMIUM_FRAMES.find((f) => f.id === user.avatar_frame);
 
   async function handleSave() {
     setSaving(true);
@@ -76,120 +72,193 @@ export default function SettingsView() {
     setSaving(false);
   }
 
-  // ⭐ Ha nincs AvatarModal → a SettingsView jelenik meg
   return (
     <div style={{ padding: "20px", maxWidth: "450px" }}>
-      {/* PREMIUM INFO */}
-      <div className="mb-4">
-        <strong>Prémium státusz:</strong>
-        <div>
-          {premiumActive ? (
-            <span style={{ color: "gold", fontWeight: "bold" }}>
-              ⭐ Aktív – {premiumUntil}
-            </span>
-          ) : (
-            <span>Inaktív</span>
-          )}
-        </div>
-      </div>
-
-      {/* AVATAR BLOKK */}
-      <div className="mb-4">
-        <strong>Avatar:</strong>
-        <div className="d-flex align-items-center gap-3 mt-2">
-          <img
-            src={getAvatarUrl(user)}
-            alt="avatar"
-            style={{
-              width: "64px",
-              height: "64px",
-              borderRadius: "50%",
-              objectFit: "cover",
-              border: "none",
-              boxShadow: "none",
-            }}
-          />
-
-          <div
-            className="text-primary"
-            style={{ cursor: "pointer", fontWeight: "500" }}
-            onClick={() => setShowAvatarModal(true)}
-          >
-            Avatar módosítása →
-          </div>
-        </div>
-      </div>
-
-      {/* NICKNAME */}
-      <div className="mb-3">
-        <div className="mb-1">
-          <strong>Felhasználónév:</strong> {nickname}
-        </div>
-        <div className="text-primary" style={{ cursor: "pointer", fontWeight: "500" }}>
-          Felhasználónév váltás kérelmezése →
-        </div>
-      </div>
-
-      {/* BIO */}
-      <div className="mb-3">
-        <label className="form-label fw-bold">Bemutatkozás</label>
-        <textarea
-          className="form-control"
-          rows={3}
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-        />
-      </div>
-
-      {/* THEME */}
-      <div className="mb-4">
-        <ThemeSwitch />
-      </div>
-
-      {/* EMAIL */}
-      <div className="mb-3">
-        <strong>Email:</strong> {user.email}
-        <div className="text-primary mt-1" style={{ cursor: "pointer", fontWeight: "500" }}>
-          Email módosítása →
-        </div>
-      </div>
-
-      {/* PIN */}
-      <div className="mb-3">
-        <strong>PIN kód:</strong>
-        <div
-          className="text-primary"
-          style={{ cursor: "pointer", fontWeight: "500" }}
-          onClick={() => setShowPinModal(true)}
-        >
-          PIN kód módosítása →
-        </div>
-      </div>
-
-      {/* PASSWORD */}
-      <div className="mb-4">
-        <strong>Jelszó:</strong>
-        <div
-          className="text-primary"
-          style={{ cursor: "pointer", fontWeight: "500" }}
-          onClick={() => setShowPasswordModal(true)}
-        >
-          Jelszó módosítása →
-        </div>
-      </div>
-
-      {/* SAVE BUTTON */}
-      <button
-        onClick={handleSave}
-        className="btn btn-primary w-100"
-        disabled={saving}
-      >
-        {saving ? "Mentés..." : "Mentés"}
-      </button>
-
-      {/* MODALS */}
+      {/* 🔥 MODALOK – NEM KORAI RETURN, HANEM A RETURN-ÖN BELÜL */}
+      <AvatarModal show={showAvatarModal} onClose={() => setShowAvatarModal(false)} />
+      <FrameModal show={showFrameModal} onClose={() => setShowFrameModal(false)} />
       <PasswordChangeModal show={showPasswordModal} onClose={() => setShowPasswordModal(false)} />
       <PinChangeModal show={showPinModal} onClose={() => setShowPinModal(false)} />
+
+      {/* Ha bármelyik modal nyitva van → háttér eltűnik */}
+      {(showAvatarModal || showFrameModal) && <></>}
+      {!showAvatarModal && !showFrameModal && (
+        <>
+          {/* PREMIUM INFO */}
+          <div className="mb-4">
+            <strong>Prémium státusz:</strong>
+            <div>
+              {premiumActive ? (
+                <span style={{ color: "gold", fontWeight: "bold" }}>
+                  ⭐ Aktív – {premiumUntil}
+                </span>
+              ) : (
+                <span>Inaktív</span>
+              )}
+            </div>
+          </div>
+
+          {/* AVATAR BLOKK */}
+          <div className="mb-4">
+            <strong>Avatar:</strong>
+            <div className="d-flex align-items-center gap-3 mt-2">
+              <img
+                src={getAvatarUrl(user)}
+                alt="avatar"
+                style={{
+                  width: "64px",
+                  height: "64px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                }}
+              />
+
+              <div
+                className="text-primary"
+                style={{ cursor: "pointer", fontWeight: "500" }}
+                onClick={() => setShowAvatarModal(true)}
+              >
+                Avatar módosítása →
+              </div>
+            </div>
+          </div>
+
+          {/* PRÉMIUM KERET BLOKK */}
+          {premiumActive && (
+            <div className="mb-4">
+              <strong>Prémium keret:</strong>
+
+              <div className="d-flex align-items-center gap-3 mt-2">
+                {/* Előnézet */}
+                <div
+                  className="premium-frame-preview"
+                  style={{ position: "relative", width: "64px", height: "64px" }}
+                >
+                  <img
+                    src={getAvatarUrl(user)}
+                    alt="avatar"
+                    style={{
+                      width: "64px",
+                      height: "64px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      position: "relative",
+                      zIndex: 2,
+                    }}
+                  />
+
+                  {currentFrame?.type === "css" && (
+                    <div
+                      className={currentFrame.className}
+                      style={{
+                        position: "absolute",
+                        top: "-18%",
+                        left: "-18%",
+                        width: "136%",
+                        height: "136%",
+                        borderRadius: "50%",
+                        pointerEvents: "none",
+                        zIndex: 3,
+                      }}
+                    ></div>
+                  )}
+
+                  {currentFrame?.type === "png" && (
+                    <img
+                      src={currentFrame.src}
+                      className={currentFrame.className}
+                      style={{
+                        position: "absolute",
+                        top: "-18%",
+                        left: "-18%",
+                        width: "136%",
+                        height: "auto",
+                        pointerEvents: "none",
+                        zIndex: 3,
+                      }}
+                    />
+                  )}
+                </div>
+
+                <div
+                  className="text-primary"
+                  style={{ cursor: "pointer", fontWeight: "500" }}
+                  onClick={() => setShowFrameModal(true)}
+                >
+                  Keret módosítása →
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* NICKNAME */}
+          <div className="mb-3">
+            <div className="mb-1">
+              <strong>Felhasználónév:</strong> {nickname}
+            </div>
+            <div className="text-primary" style={{ cursor: "pointer", fontWeight: "500" }}>
+              Felhasználónév váltás kérelmezése →
+            </div>
+          </div>
+
+          {/* BIO */}
+          <div className="mb-3">
+            <label className="form-label fw-bold">Bemutatkozás</label>
+            <textarea
+              className="form-control"
+              rows={3}
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+            />
+          </div>
+
+          {/* THEME */}
+          <div className="mb-4">
+            <ThemeSwitch />
+          </div>
+
+          {/* EMAIL */}
+          <div className="mb-3">
+            <strong>Email:</strong> {user.email}
+            <div className="text-primary mt-1" style={{ cursor: "pointer", fontWeight: "500" }}>
+              Email módosítása →
+            </div>
+          </div>
+
+          {/* PIN */}
+          <div className="mb-3">
+            <strong>PIN kód:</strong>
+            <div
+              className="text-primary"
+              style={{ cursor: "pointer", fontWeight: "500" }}
+              onClick={() => setShowPinModal(true)}
+            >
+              PIN kód módosítása →
+            </div>
+          </div>
+
+          {/* PASSWORD */}
+          <div className="mb-4">
+            <strong>Jelszó:</strong>
+            <div
+              className="text-primary"
+              style={{ cursor: "pointer", fontWeight: "500" }}
+              onClick={() => setShowPasswordModal(true)}
+            >
+              Jelszó módosítása →
+            </div>
+          </div>
+
+          {/* SAVE BUTTON */}
+          <button
+            onClick={handleSave}
+            className="btn btn-primary w-100"
+            disabled={saving}
+          >
+            {saving ? "Mentés..." : "Mentés"}
+          </button>
+        </>
+      )}
     </div>
   );
 }

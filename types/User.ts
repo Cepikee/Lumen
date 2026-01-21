@@ -1,5 +1,5 @@
 export type User = {
-  id: number;
+  id?: number;   
   email: string;
   nickname: string;
   created_at: string;
@@ -14,4 +14,5 @@ export type User = {
   avatar_style: string; 
   avatar_seed: string; 
   avatar_format: "svg" | "gif";
+  avatar_frame?: string;
 };
