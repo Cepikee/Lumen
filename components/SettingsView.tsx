@@ -105,8 +105,8 @@ export default function SettingsView() {
               height: "64px",
               borderRadius: "50%",
               objectFit: "cover",
-              border: premiumActive ? "2px solid gold" : "1px solid #555",
-              boxShadow: premiumActive ? "0 0 6px gold" : "none",
+              border: "none",
+              boxShadow: "none",
             }}
           />
 

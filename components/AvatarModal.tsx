@@ -193,7 +193,7 @@ export default function AvatarModal({
                 format: "svg",
               })
             }
-            className={user.is_premium ? "premium-avatar" : ""}
+            className=""
             style={{
               width: "64px",
               height: "64px",

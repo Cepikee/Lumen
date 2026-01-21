@@ -1,0 +1,72 @@
+/* profile-badge.css - teljes, kész változat (csillogás nélkül) */
+
+/* Konténer */
+.profile-badge {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: none !important;
+}
+
+/* Gyűrű (a border maga az arany vonal) */
+.badge-ring {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* avatar a gyűrű belsejéig vágva */
+  background: transparent;
+  transition: none !important;
+}
+
+/* Prémium állapot: vastag arany vonal + soft glow */
+.badge-ring.premium {
+  border: 4px solid #FFD700;
+  box-shadow: 0 0 6px rgba(255, 215, 74, 0.35);
+}
+
+/* Avatar belső */
+.avatar-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: none !important;
+  transform: none !important;
+}
+
+.avatar-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Korona: statikus, prémium */
+.crown {
+  position: absolute;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 20000 !important;
+  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.75));
+  will-change: opacity;
+  /* top értéket inline állítsd a JSX-ben (pl. style={{ top: "-22px" }}) */
+}
+
+/* Globális felülírás – semmi hover / transform ne szóljon bele */
+.profile-badge,
+.profile-badge * {
+  transition: none !important;
+  transform: none !important;
+}
+

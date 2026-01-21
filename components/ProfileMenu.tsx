@@ -5,6 +5,7 @@ import ProfileView from "./ProfileView";
 import SettingsView from "./SettingsView";
 import UtomModal from "./UtomModal";
 import { useUserStore } from "@/store/useUserStore";
+import "@/styles/profile-badge.css";
 
 export default function ProfileMenu() {
   const user = useUserStore((s) => s.user); // 🔥 mindig FRISS user
@@ -16,12 +17,20 @@ export default function ProfileMenu() {
     setModal(type);
   }
 
+  // Korona ikon
+  function CrownIcon({ size = 18 }: { size?: number }) {
+    return (
+      <svg viewBox="0 0 24 24" width={size} height={size} style={{ display: "block" }}>
+        <path d="M4 18L5 8L9 12L12 6L15 12L19 8L20 18H4Z" fill="#FFD700" />
+      </svg>
+    );
+  }
+
   // 🔥 prémium logika – csak akkor true, ha tényleg prémium
   const premiumActive =
     user &&
     (user.is_premium === true ||
-      (user.premium_until &&
-        new Date(user.premium_until).getTime() > Date.now()));
+      (user.premium_until && new Date(user.premium_until).getTime() > Date.now()));
 
   // 🔥 DiceBear 8.x avatar URL
   const avatarUrl =
@@ -33,46 +42,27 @@ export default function ProfileMenu() {
 
   return (
     <div className="position-relative">
-
       {/* Profil ikon */}
-      <div
-        onClick={() => setOpen(!open)}
-        className={premiumActive ? "premium-avatar" : ""}
-        style={{
-          position: "relative",
-          width: "40px",
-          height: "40px",
-          borderRadius: "50%",
-          overflow: "hidden",
-          cursor: "pointer",
-          backgroundColor: "#444",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {avatarUrl ? (
-          <img
-            src={avatarUrl}
-            alt="avatar"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "50%",
-            }}
-          />
-        ) : (
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              background: "#555",
-              borderRadius: "50%",
-            }}
-          />
+      <div className="profile-badge" onClick={() => setOpen(!open)}>
+        <div className={`badge-ring ${premiumActive ? "premium" : ""}`}>
+          <div className="avatar-inner">
+            {avatarUrl ? (
+              <img src={avatarUrl} alt="avatar" />
+            ) : (
+              <div style={{ width: "100%", height: "100%", background: "transparent" }} />
+            )}
+          </div>
+        </div>
+
+        {/* Korona */}
+        {premiumActive && (
+          <>
+            <div className="crown" style={{ top: "-11px" }}>
+              <CrownIcon size={22} />
+            </div>
+          </>
         )}
-      </div>
+      </div> {/* ← EZ volt a hiányzó lezárás */}
 
       {/* Dropdown */}
       {open && (
@@ -164,7 +154,7 @@ export default function ProfileMenu() {
 
       {modal === "settings" && (
         <UtomModal show={true} onClose={() => setModal(null)} title="Beállítások">
-         <SettingsView />
+          <SettingsView />
         </UtomModal>
       )}
     </div>

@@ -1,0 +1,7 @@
+<!-- public/icons/crown.svg -->
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path
+    d="M4 18L5 8L9 12L12 6L15 12L19 8L20 18H4Z"
+    fill="#FFD700"
+  />
+</svg>
