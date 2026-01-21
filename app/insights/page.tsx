@@ -1,11 +1,10 @@
-// app/insights/page.tsx
 "use client";
 import "@/styles/insights.css";
 import { useMemo, useState } from "react";
 import InsightCard from "@/components/InsightCard";
 import InsightFilters from "@/components/InsightFilters";
 import ThemeSync from "@/components/ThemeSync";
-import { useInsights, InsightApiItem } from "@/hooks/useInsights";
+import { useInsights } from "@/hooks/useInsights";
 
 type LocalRawCategory = {
   category: string | null;
@@ -25,19 +24,6 @@ function normalizeCategory(raw?: string | null) {
   return s;
 }
 
-function isRawCategory(obj: unknown): obj is LocalRawCategory {
-  if (!obj || typeof obj !== "object") return false;
-  const o = obj as Record<string, unknown>;
-  return (
-    ("category" in o) &&
-    (typeof o.category === "string" || o.category === null) &&
-    ("trendScore" in o) &&
-    (typeof o.trendScore === "number") &&
-    ("articleCount" in o) &&
-    (typeof o.articleCount === "number")
-  );
-}
-
 export default function InsightFeedPage() {
   const [period, setPeriod] = useState<"7d" | "30d" | "90d">("7d");
   const [sort, setSort] = useState<string>("Legfrissebb");
@@ -47,9 +33,12 @@ export default function InsightFeedPage() {
   const categoryTrends = useMemo<LocalRawCategory[]>(() => {
     if (!data) return [];
 
-    const sourceArray = Array.isArray(data.categories) && data.categories.length > 0
-      ? data.categories
-      : Array.isArray(data.items) ? data.items : [];
+    const sourceArray =
+      Array.isArray(data.categories) && data.categories.length > 0
+        ? data.categories
+        : Array.isArray(data.items)
+        ? data.items
+        : [];
 
     const mapped = sourceArray
       .map((it) => {
@@ -126,43 +115,89 @@ export default function InsightFeedPage() {
       </header>
 
       <section aria-labelledby="category-trends">
-        <h2 id="category-trends" className="fs-5 fw-bold mb-2 visually-hidden">Kategória trendek</h2>
+  <h2 id="category-trends" className="fs-5 fw-bold mb-2 visually-hidden">
+    Kategória trendek
+  </h2>
 
-        {/* row-cols segédosztályok: mobilon 1 oszlop, md 2, lg 3 */}
-        <div className="row g-3 row-cols-1 row-cols-md-2 row-cols-lg-3">
-          {loading
-            ? // skeleton helykitöltők, amíg tölt
-              Array.from({ length: 6 }).map((_, i) => (
-                <div key={`skeleton-${i}`} className="col d-flex">
-                  <article className="insight-card card border-0" style={{ display: "flex", flexDirection: "column", flex: "1 1 auto", minHeight: 140 }}>
-                    <div className="card-body d-flex flex-column gap-3" style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-                      <div className="d-flex align-items-start">
-                        <div className="me-3 d-flex align-items-center" style={{ width: 64, height: 64, minWidth: 64 }}>
-                          <div className="insight-source-ring bg-secondary rounded-circle w-100 h-100" />
-                        </div>
-                        <div className="flex-grow-1">
-                          <div style={{ height: 18, width: "60%", background: "rgba(0,0,0,0.06)", borderRadius: 6, marginBottom: 8 }} />
-                          <div style={{ height: 12, width: "40%", background: "rgba(0,0,0,0.04)", borderRadius: 6 }} />
-                        </div>
-                        <div className="ms-2 text-end d-flex flex-column gap-2">
-                          <div style={{ height: 28, width: 64, background: "rgba(0,0,0,0.04)", borderRadius: 6 }} />
-                        </div>
-                      </div>
-
-                      <div className="card-footer bg-transparent border-0 pt-0" style={{ marginTop: "auto" }}>
-                        <div className="insight-sparkline" style={{ height: 40, background: "rgba(0,0,0,0.03)" }} />
-                      </div>
+  {/* FEED KERET + SZOROSABB KÁRTYÁK */}
+  <div className="insight-feed-wrapper p-3 rounded-4">
+    <div className="row g-2">
+      {loading
+        ? Array.from({ length: 6 }).map((_, i) => (
+            <div key={`skeleton-${i}`} className="col-12 d-flex">
+              <article
+                className="insight-card card border-0"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  flex: "1 1 auto",
+                  minHeight: 140,
+                }}
+              >
+                <div
+                  className="card-body d-flex flex-column gap-3"
+                  style={{ display: "flex", flexDirection: "column", flex: 1 }}
+                >
+                  <div className="d-flex align-items-start">
+                    <div
+                      className="me-3 d-flex align-items-center"
+                      style={{ width: 64, height: 64, minWidth: 64 }}
+                    >
+                      <div className="insight-source-ring bg-secondary rounded-circle w-100 h-100" />
                     </div>
-                  </article>
+                    <div className="flex-grow-1">
+                      <div
+                        style={{
+                          height: 18,
+                          width: "60%",
+                          background: "rgba(0,0,0,0.06)",
+                          borderRadius: 6,
+                          marginBottom: 8,
+                        }}
+                      />
+                      <div
+                        style={{
+                          height: 12,
+                          width: "40%",
+                          background: "rgba(0,0,0,0.04)",
+                          borderRadius: 6,
+                        }}
+                      />
+                    </div>
+                    <div className="ms-2 text-end d-flex flex-column gap-2">
+                      <div
+                        style={{
+                          height: 28,
+                          width: 64,
+                          background: "rgba(0,0,0,0.04)",
+                          borderRadius: 6,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    className="card-footer bg-transparent border-0 pt-0"
+                    style={{ marginTop: "auto" }}
+                  >
+                    <div
+                      className="insight-sparkline"
+                      style={{ height: 40, background: "rgba(0,0,0,0.03)" }}
+                    />
+                  </div>
                 </div>
-              ))
-            : categoryItems.map((item) => (
-                <div key={item.id} className="col d-flex">
-                  <InsightCard {...item} />
-                </div>
-              ))}
-        </div>
-      </section>
+              </article>
+            </div>
+          ))
+        : categoryItems.map((item) => (
+            <div key={item.id} className="col-12 d-flex">
+              <InsightCard {...item} />
+            </div>
+          ))}
+    </div>
+  </div>
+</section>
+
     </main>
   );
 }
