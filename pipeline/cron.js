@@ -8,6 +8,8 @@ const { saveSources } = require("./saveSources");
 const { saveSummary } = require("./saveSummary");
 const { scrapeArticle } = require("./scrapeArticle");
 const { fixShortSummary, isValidShortSummary } = require("./summarizeShortValidator");
+import { processClickbaitForArticle } from "./clickbait.js";
+
 
 
 // 🔥 IDE JÖN:
@@ -419,6 +421,30 @@ await runWithRetries("[KW-SAVE] 💾 Kulcsszavak mentése", async () => {
   await conn.end();
   console.log(`[KW-SAVE] Kulcsszavak mentve: ${keywords.length} db`);
 });
+
+// 5) CLICKBAIT értékelés (forrás cím + Utom cím)
+await runWithRetries("[CLICKBAIT] 🎯 Clickbait értékelés", async () => {
+  const conn = await mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "jelszo",
+    database: "projekt2025",
+  });
+
+  const res = await processClickbaitForArticle(articleId, conn, callOllama);
+
+  await conn.end();
+
+  if (!res?.ok) throw new Error(res?.error || "clickbait sikertelen");
+
+  console.log(
+    `[CLICKBAIT] Forrás=${res.source}, Utom=${res.utom}, Javulás=${res.javulas}`
+  );
+
+  return res;
+});
+
+
 
 // 4/C) Trends mentése (nyers eseménylog)
 await runWithRetries("[TRENDS-SAVE] 📈 Trends mentése", async () => {
