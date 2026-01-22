@@ -1,5 +1,5 @@
 // clickbait.js
-// Magyar clickbait-értékelő modul Ollama-hoz
+// Magyar clickbait-értékelő modul Ollama-hoz (CommonJS verzió)
 
 // 1) Prompt generálása
 function buildClickbaitPrompt(cim, cikkSzoveg) {
@@ -31,7 +31,7 @@ Csak ÉS KIZÁRÓLAG ezt a JSON-t add vissza:
 }
 
 // 2) Egyetlen clickbait értékelés
-export async function evaluateClickbait(cim, cikkSzoveg, callOllama) {
+async function evaluateClickbait(cim, cikkSzoveg, callOllama) {
   const prompt = buildClickbaitPrompt(cim, cikkSzoveg);
 
   // FONTOS: nagyon alacsony numPredict → gyors, stabil, csak számot ad
@@ -51,7 +51,7 @@ export async function evaluateClickbait(cim, cikkSzoveg, callOllama) {
 }
 
 // 3) Teljes clickbait folyamat egy cikkre
-export async function processClickbaitForArticle(articleId, conn, callOllama) {
+async function processClickbaitForArticle(articleId, conn, callOllama) {
   console.log(`[CLICKBAIT] ▶️ Feldolgozás indul: articleId=${articleId}`);
 
   // Cikk lekérése
@@ -102,3 +102,9 @@ export async function processClickbaitForArticle(articleId, conn, callOllama) {
     javulas: sourceScore - utomScore,
   };
 }
+
+// CommonJS export
+module.exports = {
+  evaluateClickbait,
+  processClickbaitForArticle
+};

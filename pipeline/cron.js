@@ -8,7 +8,7 @@ const { saveSources } = require("./saveSources");
 const { saveSummary } = require("./saveSummary");
 const { scrapeArticle } = require("./scrapeArticle");
 const { fixShortSummary, isValidShortSummary } = require("./summarizeShortValidator");
-import { processClickbaitForArticle } from "./clickbait.js";
+const { processClickbaitForArticle } = require("./clickbait.js");
 
 
 
