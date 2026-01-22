@@ -1,7 +1,7 @@
 const mysql = require("mysql2/promise");
 
 // --- AI hívás ---
-async function callOllama(prompt, numPredict = 2048, timeoutMs = 180000) {
+async function callOllama(prompt, numPredict = 1000, timeoutMs = 180000) {
   const controller = new AbortController();
   const t = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -82,12 +82,12 @@ ${contentText}
 `.trim();
 
     // 3) AI hívás (limit: 2048 token)
-    let detailed = await callOllama(prompt, 2048);
+    let detailed = await callOllama(prompt, 1000);
 
     // 4) Validálás + újrapróbálás
     if (!isValidDetailed(detailed)) {
       console.warn(`[LONG] ⚠️ Első elemzés érvénytelen, újrapróbálás...`);
-      detailed = await callOllama(prompt, 2048);
+      detailed = await callOllama(prompt, 1000);
     }
 
     // 5) Ha még mindig rossz → fallback
