@@ -51,12 +51,12 @@ async function evaluateClickbait(cim, cikkSzoveg, callOllama) {
 }
 
 // 3) Teljes clickbait folyamat egy cikkre
-async function processClickbaitForArticle(articleId, conn, callOllama) {
+async function processClickbaitForArticle(articleId, conn, callOllama, utomTitle) {
   console.log(`[CLICKBAIT] ▶️ Feldolgozás indul: articleId=${articleId}`);
 
   // Cikk lekérése
   const [rows] = await conn.execute(
-    "SELECT title, content_text, utom_title FROM articles WHERE id = ?",
+    "SELECT title, content_text FROM articles WHERE id = ?",
     [articleId]
   );
 
@@ -65,7 +65,7 @@ async function processClickbaitForArticle(articleId, conn, callOllama) {
     return { ok: false, error: "Nincs ilyen cikk" };
   }
 
-  const { title, content_text, utom_title } = rows[0];
+  const { title, content_text } = rows[0];
 
   if (!content_text || content_text.trim().length < 50) {
     console.error(`[CLICKBAIT] ❌ Üres vagy túl rövid content_text!`);
@@ -75,8 +75,8 @@ async function processClickbaitForArticle(articleId, conn, callOllama) {
   // Forrás cím clickbait értékelése
   const sourceScore = await evaluateClickbait(title, content_text, callOllama);
 
-  // Utom cím clickbait értékelése
-  const utomScore = await evaluateClickbait(utom_title, content_text, callOllama);
+  // Utom cím clickbait értékelése (EZT a cron.js adja át!)
+  const utomScore = await evaluateClickbait(utomTitle, content_text, callOllama);
 
   // Mentés summaries táblába
   await conn.execute(

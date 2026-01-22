@@ -431,7 +431,7 @@ await runWithRetries("[CLICKBAIT] 🎯 Clickbait értékelés", async () => {
     database: "projekt2025",
   });
 
-  const res = await processClickbaitForArticle(articleId, conn, callOllama);
+  const res = await processClickbaitForArticle(articleId, conn, callOllama, title);
 
   await conn.end();
 
