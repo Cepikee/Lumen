@@ -24,9 +24,7 @@ Adj egy 0–100 közötti pontszámot:
 100 = extrém módon clickbait
 
 VÁLASZ:
-Csak ÉS KIZÁRÓLAG ezt a JSON-t add vissza:
-
-{"pontszam": <szám>}
+Csak egyetlen számot írj 0 és 100 között. Semmi mást.
 `.trim();
 }
 
@@ -34,25 +32,26 @@ Csak ÉS KIZÁRÓLAG ezt a JSON-t add vissza:
 async function evaluateClickbait(cim, cikkSzoveg, callOllama) {
   const prompt = buildClickbaitPrompt(cim, cikkSzoveg);
 
-  // FONTOS: nagyon alacsony numPredict → gyors, stabil, csak számot ad
-  let raw = await callOllama(prompt, 40);
-
+  let raw = await callOllama(prompt, 20); // nagyon kevés token elég
   raw = raw.trim();
 
-  try {
-    const json = JSON.parse(raw);
-    const pont = Number(json.pontszam ?? 0);
-    if (isNaN(pont)) return 0;
-    return pont;
-  } catch (err) {
-    console.warn("[CLICKBAIT] ⚠️ JSON parse hiba, nyers válasz:", raw);
+  // csak számot várunk → parseInt mindent megold
+  const num = parseInt(raw, 10);
+
+  if (isNaN(num)) {
+    console.warn("[CLICKBAIT] ⚠️ Nem szám jött vissza:", raw);
     return 0;
   }
+
+  // 0–100 közé szorítjuk
+  return Math.max(0, Math.min(100, num));
 }
+
 
 // 3) Teljes clickbait folyamat egy cikkre
 async function processClickbaitForArticle(articleId, conn, callOllama, utomTitle) {
-  console.log(`[CLICKBAIT] ▶️ Feldolgozás indul: articleId=${articleId}`);
+  console.log(`\x1b[34m[CLICKBAIT] ▶️ Feldolgozás indul: articleId=${articleId}\x1b[0m`);
+
 
   // Cikk lekérése
   const [rows] = await conn.execute(
@@ -92,8 +91,9 @@ async function processClickbaitForArticle(articleId, conn, callOllama, utomTitle
   );
 
   console.log(
-    `[CLICKBAIT] ✔️ Mentve: forrás=${sourceScore}, utom=${utomScore}, articleId=${articleId}`
+    console.log(`\x1b[32m[CLICKBAIT] ✔️ Mentve: forrás=${sourceScore}, utom=${utomScore}, articleId=${articleId}\x1b[0m`)
   );
+
 
   return {
     ok: true,
