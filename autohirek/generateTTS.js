@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const fetch = require("node-fetch");
 
 async function generateTTSFromText(text) {
   const apiKey = process.env.OPENAI_API_KEY;
@@ -9,7 +8,6 @@ async function generateTTSFromText(text) {
     throw new Error("Hiányzik az OPENAI_API_KEY környezeti változó.");
   }
 
-  // fájlnév: pl. 2026-01-23-daily-report.mp3
   const today = new Date();
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, "0");
@@ -32,8 +30,8 @@ async function generateTTSFromText(text) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "gpt-4o-mini-tts", // vagy később cserélheted másikra
-      voice: "alloy",           // alap hang
+      model: "gpt-4o-mini-tts",
+      voice: "alloy",
       input: text,
       format: "mp3",
     }),
