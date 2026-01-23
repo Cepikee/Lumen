@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const generateTTSFromText = require("./generateTTS");
 
 (async () => {

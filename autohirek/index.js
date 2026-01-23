@@ -1,3 +1,4 @@
+require("dotenv").config();
 const getTodayArticles = require("./getArticles");
 const { buildDailyInput, buildPrompt } = require("./buildPrompt");
 const generateReport = require("./generateReport");
