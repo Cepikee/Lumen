@@ -1,23 +1,20 @@
-const db = require("../lib/db");
+const mysql = require("mysql2/promise");
 
-async function saveDailyReport(content) {
-  const conn = await db();
+async function saveReport(content) {
+  const conn = await mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "jelszo",
+    database: "projekt2025",
+  });
 
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const dd = String(today.getDate()).padStart(2, "0");
-  const dateStr = `${yyyy}-${mm}-${dd}`;
-
-  await conn.execute(
-    `
-    INSERT INTO daily_reports (report_date, content)
-    VALUES (?, ?)
-    `,
-    [dateStr, content]
+  const [result] = await conn.execute(
+    "INSERT INTO daily_reports (content, created_at) VALUES (?, NOW())",
+    [content]
   );
 
-  return true;
+  await conn.end();
+  return result.insertId;
 }
 
-module.exports = saveDailyReport;
+module.exports = saveReport;

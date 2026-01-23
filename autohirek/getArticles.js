@@ -1,18 +1,16 @@
-const db = require("../lib/db");
+const mysql = require("mysql2/promise");
 
-async function getTodayArticles() {
-  const conn = await db();
+async function getArticles() {
+  const conn = await mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "jelszo",
+    database: "projekt2025",
+  });
 
-  const [rows] = await conn.execute(
-    `
-    SELECT article_id, content, detailed_content, created_at
-    FROM summaries
-    WHERE DATE(created_at) = CURDATE()
-    ORDER BY created_at ASC
-    `
-  );
-
+  const [rows] = await conn.execute("SELECT * FROM articles ORDER BY id DESC LIMIT 10");
+  await conn.end();
   return rows;
 }
 
-module.exports = getTodayArticles;
+module.exports = getArticles;
