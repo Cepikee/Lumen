@@ -5,7 +5,7 @@ const { buildDailyInput, buildPrompt } = require("./buildPrompt");
 const saveDailyReport = require("./saveReport");
 
 // 🔥 INLINE OLLAMA WRAPPER — stabil, timeouttal, limitált kimenettel
-async function callOllama(prompt, numPredict = 600, timeoutMs = 180000) {
+async function callOllama(prompt, numPredict = 600, timeoutMs = 18000000) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
