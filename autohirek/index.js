@@ -4,8 +4,8 @@ const getTodayArticles = require("./getArticles");
 const { buildDailyInput, buildPrompt } = require("./buildPrompt");
 const saveDailyReport = require("./saveReport");
 
-// 🔥 INLINE OLLAMA WRAPPER — nincs külön fájl
-async function callOllama(prompt, numPredict = 1400, timeoutMs = 180000) {
+// 🔥 INLINE OLLAMA WRAPPER — stabil, timeouttal, limitált kimenettel
+async function callOllama(prompt, numPredict = 600, timeoutMs = 180000) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -45,8 +45,9 @@ async function runAutoHirekPipeline() {
   const articles = await getTodayArticles();
   console.log(`📄 ${articles.length} hír találva a mai napra.`);
 
-  // 1) Cikkekből input
+  // 1) Cikkekből input (csak rövid összefoglaló!)
   const dailyInput = buildDailyInput(articles);
+  console.log("DailyInput mérete:", dailyInput.length);
 
   // 2) Inputból prompt
   console.log("🧠 Prompt generálása...");
@@ -54,7 +55,7 @@ async function runAutoHirekPipeline() {
 
   // 3) Prompt → Ollama → NAPI CIKK
   console.log("🤖 Napi összefoglaló cikk generálása Ollamával...");
-  const report = await callOllama(prompt, 1400);
+  const report = await callOllama(prompt, 600);
 
   // 4) Mentés adatbázisba
   console.log("\n📝 Mentés adatbázisba...");

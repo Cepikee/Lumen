@@ -11,9 +11,6 @@ Cikk ID: ${a.article_id}
 
 Rövid összefoglaló:
 ${a.content}
-
-Hosszú összefoglaló:
-${a.detailed_content}
 `;
     })
     .join("\n-------------------------\n");
@@ -21,10 +18,12 @@ ${a.detailed_content}
 
 function buildPrompt(dailyInput) {
   return `
+NE ÍRJ ÁLTALÁNOS CIKKET. A LENTI HÍREKBŐL DOLGOZZ.
+
 Te egy profi magyar hírszerkesztő vagy, aki a mai nap híreiből egyetlen, jól felépített cikket készít.
 
 Feladatod:
-- írj egy összefüggő, 3–6 bekezdéses hírcikket
+- írj egy összefüggő, 3–5 bekezdéses hírcikket
 - a cikk legyen tömör, érthető, logikus szerkezetű
 - ne ismételd szó szerint a források szövegét
 - emeld ki a legfontosabb eseményeket, trendeket, összefüggéseket
@@ -32,11 +31,10 @@ Feladatod:
 - ne írj clickbait stílusban
 - ne írj felsorolást, hanem folyamatos szöveget
 
-Az alábbiakban találod a mai nap összes hírét (rövid és hosszú összefoglalóval):
+Az alábbiakban találod a mai nap összes hírét:
 
 ${dailyInput}
 `;
 }
-
 
 module.exports = { buildDailyInput, buildPrompt };
