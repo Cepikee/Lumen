@@ -1,16 +1,20 @@
 function buildDailyInput(articles) {
   if (!articles.length) {
-    return "Ma nem érkezett autós hír.";
+    return "Ma nem érkezett hír.";
   }
 
   return articles
     .map((a, i) => {
       return `
 Cikk ${i + 1}
-Cikk ID: ${a.article_id}
+ID: ${a.id}
+Cím: ${a.title || "Nincs cím"}
 
 Rövid összefoglaló:
-${a.content}
+${a.content || "Nincs rövid összefoglaló"}
+
+Részletes összefoglaló:
+${a.detailed_content || "Nincs részletes összefoglaló"}
 `;
     })
     .join("\n-------------------------\n");
@@ -18,22 +22,23 @@ ${a.content}
 
 function buildPrompt(dailyInput) {
   return `
-NE ÍRJ ÁLTALÁNOS CIKKET. A LENTI HÍREKBŐL DOLGOZZ.
-
-Te egy profi magyar hírszerkesztő vagy, aki a mai nap híreiből egyetlen, jól felépített cikket készít.
-
-Feladatod:
-- írj egy összefüggő, 3–5 bekezdéses hírcikket
-- a cikk legyen tömör, érthető, logikus szerkezetű
-- ne ismételd szó szerint a források szövegét
-- emeld ki a legfontosabb eseményeket, trendeket, összefüggéseket
-- a hangnem legyen tárgyilagos, híradós jellegű
-- ne írj clickbait stílusban
-- ne írj felsorolást, hanem folyamatos szöveget
-
-Az alábbiakban találod a mai nap összes hírét:
+A MAI HÍREK NYERS ANYAGA:
 
 ${dailyInput}
+
+-------------------------
+
+FELADAT:
+- írj egy összefüggő, 3–5 bekezdéses napi hírösszefoglalót
+- a cikk legyen tömör, logikus, híradós hangvételű
+- ne ismételd szó szerint a forrásokat
+- emeld ki a lényeget, a trendeket, a fontos eseményeket
+- ne írj clickbait stílusban
+- ne írj felsorolást, csak folyamatos szöveget
+- kizárólag a fenti hírekből dolgozz
+- ne találj ki új információt
+
+KÉSZÍTSD EL A NAPI HÍRÖSSZEFOGLALÓT MOST.
 `;
 }
 

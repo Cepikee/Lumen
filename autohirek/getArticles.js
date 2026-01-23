@@ -8,7 +8,11 @@ async function getArticles() {
     database: "projekt2025",
   });
 
-  const [rows] = await conn.execute("SELECT * FROM articles ORDER BY id DESC LIMIT 10");
+  // A summaries tábla a forrás
+  const [rows] = await conn.execute(
+    "SELECT id, title, content, detailed_content FROM summaries ORDER BY id DESC LIMIT 10"
+  );
+
   await conn.end();
   return rows;
 }
