@@ -20,7 +20,10 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
   const handlePlaying = async () => {
     if (allowed) return;
 
-    const res = await fetch(`/api/hirado/can-watch?videoId=${video.id}`);
+    const res = await fetch(`/api/hirado/can-watch?videoId=${video.id}`, {
+      credentials: "include",   // 🔥 EZ A LÉNYEG!
+    });
+
     const data = await res.json();
 
     if (!data.canWatch) {
