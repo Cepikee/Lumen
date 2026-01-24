@@ -3,6 +3,10 @@
 import { useRef, useState } from "react";
 import { Plyr } from "plyr-react";
 import "plyr-react/plyr.css";
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+  rel="stylesheet"
+/>
 
 type HiradoPlayerProps = {
   video: {
@@ -66,40 +70,133 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
         onTimeUpdate={handleTimeUpdate} // 🔥 garantáltan lefut minden lejátszásnál
       />
 
-      {showPremiumModal && (
-  <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 animate-[fadeIn_0.25s_ease-out]">
+     {showPremiumModal && (
+  <div
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,0.65)",
+      backdropFilter: "blur(6px)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: 1055,
+      animation: "fadeIn 0.25s ease-out",
+    }}
+  >
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        maxWidth: "420px",
+        padding: "2.8rem 2.4rem",
+        borderRadius: "24px",
+        textAlign: "center",
+        background:
+          "linear-gradient(145deg, #0f0f0f, #1a1a1a)",
+        boxShadow:
+          "0 0 80px rgba(255,200,120,0.18), inset 0 0 0 1px rgba(255,255,255,0.06)",
+        color: "#fff",
+        animation: "popIn 0.25s ease-out",
+      }}
+    >
+      {/* ICON */}
+      <div
+        style={{
+          width: 64,
+          height: 64,
+          margin: "0 auto 1.5rem",
+          borderRadius: "50%",
+          background:
+            "linear-gradient(135deg, #f5c26b, #ffdf9e)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "#111",
+          fontSize: "1.6rem",
+          boxShadow:
+            "0 0 30px rgba(255,215,130,0.6)",
+        }}
+      >
+        <i className="bi bi-lock-fill"></i>
+      </div>
 
-    <div className="bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-2xl shadow-2xl max-w-sm w-full px-8 py-10 text-center animate-[popIn_0.25s_ease-out]">
-
-      {/* SVG ikon */}
-      <img
-        src="/sad.svg"
-        alt="Sad face"
-        className="w-20 h-20 mx-auto mb-5 opacity-90"
-      />
-
-      {/* Cím */}
-      <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-3">
-        Prémium szükséges
+      {/* TITLE */}
+      <h2 style={{ fontWeight: 700, marginBottom: "0.75rem" }}>
+        Prémium tartalom
       </h2>
 
-      {/* Leírás */}
-      <p className="text-sm text-neutral-700 dark:text-neutral-300 mb-8 leading-relaxed">
-        A mai híradót már megnézted.<br />
-        A további megtekintéshez Prémium előfizetés szükséges.
+      {/* TEXT */}
+      <p
+        style={{
+          fontSize: "0.95rem",
+          color: "#ccc",
+          lineHeight: 1.6,
+          marginBottom: "1.8rem",
+        }}
+      >
+        A mai híradót már megnézted.
+        <br />
+        A további megtekintéshez{" "}
+        <span style={{ color: "#f5c26b", fontWeight: 600 }}>
+          Prémium előfizetés
+        </span>{" "}
+        szükséges.
       </p>
 
-      {/* Gomb */}
+      {/* CTA */}
       <button
+        className="btn w-100"
         onClick={() => (window.location.href = "/premium")}
-        className="bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 px-6 py-3 rounded-full text-sm font-semibold shadow-md hover:scale-[1.04] active:scale-[0.98] transition-transform"
+        style={{
+          background:
+            "linear-gradient(135deg, #f5c26b, #ffdf9e)",
+          border: "none",
+          borderRadius: "999px",
+          padding: "0.75rem",
+          fontWeight: 700,
+          color: "#111",
+          boxShadow:
+            "0 8px 25px rgba(255,215,130,0.4)",
+          transition: "transform 0.15s ease",
+        }}
+        onMouseOver={(e) =>
+          (e.currentTarget.style.transform = "scale(1.04)")
+        }
+        onMouseOut={(e) =>
+          (e.currentTarget.style.transform = "scale(1)")
+        }
       >
-        Prémium előfizetés
+        Prémium feloldása
+      </button>
+
+      {/* SECONDARY */}
+      <button
+        className="btn btn-link mt-3"
+        style={{ color: "#999", fontSize: "0.8rem" }}
+        onClick={() => setShowPremiumModal(false)}
+      >
+        Talán később
       </button>
     </div>
 
+    {/* INLINE KEYFRAMES */}
+    <style>
+      {`
+        @keyframes fadeIn {
+          from { opacity: 0 }
+          to { opacity: 1 }
+        }
+        @keyframes popIn {
+          from { transform: scale(0.92); opacity: 0 }
+          to { transform: scale(1); opacity: 1 }
+        }
+      `}
+    </style>
   </div>
 )}
+
+
 
 
     </div>
