@@ -1,19 +1,35 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+import HiradoPlayer from "@/components/HiradoPlayer";
 import HiradoArchive from "@/components/HiradoArchive";
-const HiradoPlayer = dynamic(() => import("@/components/HiradoPlayer"), {
-  ssr: false,
-});
 
+export default function HiradoPage() {
+  const [data, setData] = useState<any>(null);
 
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await fetch("/api/hirado/today", {
+          cache: "no-store",
+        });
+        const json = await res.json();
+        setData(json);
+      } catch (err) {
+        console.error("HIRADO FETCH ERROR:", err);
+      }
+    }
 
-export default async function HiradoPage() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/hirado/today`, {
-    cache: "no-store",
-  });
+    load();
+  }, []);
 
-  const data = await res.json();
+  if (!data) {
+    return (
+      <div className="max-w-4xl mx-auto p-6">
+        Betöltés...
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6">
