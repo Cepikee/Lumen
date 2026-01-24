@@ -14,11 +14,13 @@ type HiradoPlayerProps = {
 
 export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
   const playerRef = useRef<any>(null);
-  const [showPremiumModal, setShowPremiumModal] = useState(false);
   const [blocked, setBlocked] = useState(false);
+  const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  const handlePlay = async () => {
-    if (isPremium) return;
+  // 🔥 A Plyr minden 250ms-ben küldi a timeupdate-et → garantáltan lefut
+  const handleTimeUpdate = async () => {
+    if (isPremium) return;     // prémium user → szabad
+    if (blocked) return;       // már tiltottuk → ne kérdezzen tovább
 
     const res = await fetch(`/api/hirado/can-watch?videoId=${video.id}`, {
       credentials: "include",
@@ -27,7 +29,8 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
     const data = await res.json();
 
     if (!data.canWatch) {
-      setBlocked(true); // 🔥 a videó forrása eltűnik → nem tud tovább játszani
+      // 🔥 A videó fizikai megszüntetése → kijátszhatatlan tiltás
+      setBlocked(true);
       setShowPremiumModal(true);
     }
   };
@@ -60,7 +63,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
           ],
           clickToPlay: true,
         }}
-        onPlay={handlePlay}
+        onTimeUpdate={handleTimeUpdate} // 🔥 garantáltan lefut minden lejátszásnál
       />
 
       {showPremiumModal && (
