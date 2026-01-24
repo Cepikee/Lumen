@@ -67,22 +67,31 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
       />
 
       {showPremiumModal && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-neutral-900 p-6 rounded-xl shadow-xl max-w-sm">
-            <h2 className="text-xl font-bold mb-3">Prémium szükséges</h2>
-            <p className="mb-4">
-              A mai híradót már megnézted. A további megtekintéshez Prémium
-              előfizetés szükséges.
-            </p>
-            <button
-              onClick={() => (window.location.href = "/premium")}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-            >
-              Prémium előfizetés
-            </button>
-          </div>
-        </div>
-      )}
+  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+    <div className="bg-white dark:bg-neutral-900 p-8 rounded-2xl shadow-2xl max-w-sm text-center">
+      
+      {/* 😢 Szomorú emoji vagy SVG */}
+      <div className="text-6xl mb-4">😢</div>
+
+      {/* Cím */}
+      <h2 className="text-2xl font-bold mb-2">Prémium szükséges</h2>
+
+      {/* Magyarázó szöveg */}
+      <p className="text-base opacity-80 mb-6">
+        A mai híradót már megnézted. A további megtekintéshez Prémium előfizetés szükséges.
+      </p>
+
+      {/* Gomb */}
+      <button
+        onClick={() => (window.location.href = "/premium")}
+        className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-3 rounded-full text-sm font-semibold shadow-md hover:from-blue-700 hover:to-indigo-700 transition"
+      >
+        Prémium előfizetés
+      </button>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
