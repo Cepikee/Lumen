@@ -1,5 +1,10 @@
-import HiradoPlayer from "@/components/HiradoPlayer";
+import dynamic from "next/dynamic";
 import HiradoArchive from "@/components/HiradoArchive";
+const HiradoPlayer = dynamic(() => import("@/components/HiradoPlayer"), {
+  ssr: false,
+});
+
+
 
 export default async function HiradoPage() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/hirado/today`, {
