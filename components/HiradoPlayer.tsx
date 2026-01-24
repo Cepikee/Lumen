@@ -15,6 +15,7 @@ type HiradoPlayerProps = {
 export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
   const playerRef = useRef<any>(null);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
+  const [blocked, setBlocked] = useState(false);
 
   const handlePlay = async () => {
     if (isPremium) return;
@@ -26,8 +27,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
     const data = await res.json();
 
     if (!data.canWatch) {
-      // 🔥 EZ MOST MŰKÖDNI FOG
-      playerRef.current?.plyr?.pause();
+      setBlocked(true); // 🔥 a videó forrása eltűnik → nem tud tovább játszani
       setShowPremiumModal(true);
     }
   };
@@ -36,15 +36,19 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
     <div className="w-full max-w-3xl mx-auto">
       <Plyr
         ref={playerRef}
-        source={{
-          type: "video",
-          sources: [
-            {
-              src: video.fileUrl,
-              type: "video/mp4",
-            },
-          ],
-        }}
+        source={
+          blocked
+            ? { type: "video", sources: [] } // 🔥 nincs forrás → nincs lejátszás
+            : {
+                type: "video",
+                sources: [
+                  {
+                    src: video.fileUrl,
+                    type: "video/mp4",
+                  },
+                ],
+              }
+        }
         options={{
           controls: [
             "play",
@@ -56,7 +60,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
           ],
           clickToPlay: true,
         }}
-        onPlay={handlePlay}   // 🔥 VISSZATÉRTÜNK ERRE, EZ A HELYES
+        onPlay={handlePlay}
       />
 
       {showPremiumModal && (
