@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Plyr } from "plyr-react";
 import "plyr-react/plyr.css";
 
@@ -9,16 +9,32 @@ type HiradoPlayerProps = {
     id: number;
     fileUrl: string;
   };
+  isPremium: boolean;
 };
 
-export default function HiradoPlayer({ video }: HiradoPlayerProps) {
+export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
   const playerRef = useRef<any>(null);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
-  const [allowed, setAllowed] = useState(false);
+  const [allowed, setAllowed] = useState(isPremium); // prémium usernek automatikus engedély
+
+  // 10 másodperces limit nem prémium usernek
+  useEffect(() => {
+    if (isPremium) return; // prémium usernek nincs limit
+
+    const timer = setTimeout(() => {
+      if (!allowed) {
+        playerRef.current?.plyr?.pause();
+        setShowPremiumModal(true);
+      }
+    }, 10000); // 10 másodperc
+
+    return () => clearTimeout(timer);
+  }, [allowed, isPremium]);
 
   const handlePlay = async () => {
     if (allowed) return;
 
+    // Ha nem prémium, akkor csak egyszer nézheti meg
     const res = await fetch(`/api/hirado/can-watch?videoId=${video.id}`);
     const data = await res.json();
 
@@ -65,8 +81,8 @@ export default function HiradoPlayer({ video }: HiradoPlayerProps) {
           <div className="bg-white dark:bg-neutral-900 p-6 rounded-xl shadow-xl max-w-sm">
             <h2 className="text-xl font-bold mb-3">Prémium szükséges</h2>
             <p className="mb-4">
-              A mai híradót egyszer már megnézted. A további megtekintéshez
-              Prémium szükséges.
+              A mai híradót már megnézted, vagy nem rendelkezel Prémium
+              előfizetéssel. A további megtekintéshez Prémium szükséges.
             </p>
             <button
               onClick={() => (window.location.href = "/premium")}
