@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import HiradoPlayer from "@/components/HiradoPlayer";
+import HiradoPlayerWrapper from "./HiradoPlayerWrapper";
 import HiradoArchive from "@/components/HiradoArchive";
 
 export default function HiradoPage() {
@@ -9,42 +9,25 @@ export default function HiradoPage() {
 
   useEffect(() => {
     async function load() {
-      try {
-        const res = await fetch("/api/hirado/today", {
-          cache: "no-store",
-        });
-        const json = await res.json();
-        setData(json);
-      } catch (err) {
-        console.error("HIRADO FETCH ERROR:", err);
-      }
+      const res = await fetch("/api/hirado/today", { cache: "no-store" });
+      const json = await res.json();
+      setData(json);
     }
-
     load();
   }, []);
 
-  if (!data) {
-    return (
-      <div className="max-w-4xl mx-auto p-6">
-        Betöltés...
-      </div>
-    );
-  }
+  if (!data) return <div className="p-6">Betöltés...</div>;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Utom Híradó</h1>
 
       {!data.hasVideo && (
-        <div className="text-lg opacity-70">
-          Ma még nincs híradó. Nézz vissza később.
-        </div>
+        <div className="text-lg opacity-70">Ma még nincs híradó.</div>
       )}
 
       {data.hasVideo && (
-        <div>
-          <HiradoPlayer video={data.video} />
-        </div>
+        <HiradoPlayerWrapper video={data.video} />
       )}
 
       <HiradoArchive />
