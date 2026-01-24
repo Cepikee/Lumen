@@ -16,7 +16,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
   const playerRef = useRef<any>(null);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  const handlePlaying = async () => {
+  const handlePlay = async () => {
     if (isPremium) return;
 
     const res = await fetch(`/api/hirado/can-watch?videoId=${video.id}`, {
@@ -26,6 +26,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
     const data = await res.json();
 
     if (!data.canWatch) {
+      // 🔥 EZ MOST MŰKÖDNI FOG
       playerRef.current?.plyr?.pause();
       setShowPremiumModal(true);
     }
@@ -55,7 +56,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
           ],
           clickToPlay: true,
         }}
-        onPlaying={handlePlaying}
+        onPlay={handlePlay}   // 🔥 VISSZATÉRTÜNK ERRE, EZ A HELYES
       />
 
       {showPremiumModal && (
