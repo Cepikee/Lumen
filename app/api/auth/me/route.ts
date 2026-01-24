@@ -11,9 +11,8 @@ export async function GET(req: Request) {
 
   const userId = match[1];
 
-  // 🔥 Teljes user lekérés minden új mezővel
   const [rows]: any = await db.query(
-  `SELECT 
+    `SELECT 
         id,
         email,
         nickname,
@@ -33,9 +32,8 @@ export async function GET(req: Request) {
      FROM users
      WHERE id = ?
      LIMIT 1`,
-  [userId]
-);
-
+    [userId]
+  );
 
   if (rows.length === 0) {
     return NextResponse.json({ loggedIn: false });
@@ -45,6 +43,9 @@ export async function GET(req: Request) {
 
   return NextResponse.json({
     loggedIn: true,
-    user,
+    user: {
+      ...user,
+      isPremium: user.is_premium === 1, // 🔥 EZ A LÉNYEG
+    },
   });
 }
