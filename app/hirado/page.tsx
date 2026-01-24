@@ -1,3 +1,5 @@
+"use client";
+
 import dynamic from "next/dynamic";
 import HiradoArchive from "@/components/HiradoArchive";
 const HiradoPlayer = dynamic(() => import("@/components/HiradoPlayer"), {
