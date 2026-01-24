@@ -86,87 +86,94 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
   >
     <div
       style={{
-        position: "relative",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        gap: "2rem",
         width: "100%",
-        maxWidth: "420px",
-        padding: "2.8rem 2.4rem",
+        maxWidth: "680px",
+        padding: "2.8rem",
         borderRadius: "24px",
-        textAlign: "center",
-        background: "linear-gradient(145deg, #0f0f0f, #1a1a1a)",
-        boxShadow:
-          "0 0 80px rgba(255,200,120,0.18), inset 0 0 0 1px rgba(255,255,255,0.06)",
+        background: "linear-gradient(135deg, #1b2b4f, #2e4a7f)", // 🔵 kékes háttér
+        boxShadow: "0 0 80px rgba(80,150,255,0.2)",
         color: "#fff",
         animation: "popIn 0.25s ease-out",
       }}
     >
-      {/* MEDÚZA KÉP */}
-      <img
-        src="/icons/premium.png"
-        alt="Prémium szükséges"
-        style={{
-          width: "72px",
-          height: "72px",
-          margin: "0 auto 1.5rem",
-          opacity: 0.9,
-          animation: "floatIn 0.4s ease-out",
-        }}
-      />
+      {/* BAL OLDAL – MEDÚZA */}
+      <div style={{ flex: "0 0 180px" }}>
+        <img
+          src="/icons/premium.png"
+          alt="Prémium szükséges"
+          style={{
+            width: "100%",
+            height: "auto",
+            borderRadius: "16px",
+            boxShadow: "0 0 20px rgba(255,255,255,0.1)",
+            animation: "floatIn 0.4s ease-out",
+          }}
+        />
+      </div>
 
-      {/* TITLE */}
-      <h2 style={{ fontWeight: 700, marginBottom: "0.75rem" }}>
-        Prémium tartalom
-      </h2>
+      {/* JOBB OLDAL – TARTALOM */}
+      <div style={{ flex: 1 }}>
+        {/* TITLE */}
+        <h2 style={{ fontWeight: 700, fontSize: "1.4rem", marginBottom: "0.75rem" }}>
+          Prémium tartalom
+        </h2>
 
-      {/* TEXT */}
-      <p
-        style={{
-          fontSize: "0.95rem",
-          color: "#ccc",
-          lineHeight: 1.6,
-          marginBottom: "1.8rem",
-        }}
-      >
-        A mai híradót már megnézted.
-        <br />
-        A további megtekintéshez{" "}
-        <span style={{ color: "#f5c26b", fontWeight: 600 }}>
-          Prémium előfizetés
-        </span>{" "}
-        szükséges.
-      </p>
+        {/* TEXT */}
+        <p
+          style={{
+            fontSize: "0.95rem",
+            color: "#e0e0e0",
+            lineHeight: 1.6,
+            marginBottom: "1.8rem",
+          }}
+        >
+          A mai híradót már megnézted.
+          <br />
+          A további megtekintéshez{" "}
+          <span style={{ color: "#ffb4b4", fontWeight: 600 }}>
+            Prémium előfizetés
+          </span>{" "}
+          szükséges.
+        </p>
 
-      {/* CTA */}
-      <button
-        className="btn w-100"
-        onClick={() => (window.location.href = "/premium")}
-        style={{
-          background: "linear-gradient(135deg, #f5c26b, #ffdf9e)",
-          border: "none",
-          borderRadius: "999px",
-          padding: "0.75rem",
-          fontWeight: 700,
-          color: "#111",
-          boxShadow: "0 8px 25px rgba(255,215,130,0.4)",
-          transition: "transform 0.15s ease",
-        }}
-        onMouseOver={(e) =>
-          (e.currentTarget.style.transform = "scale(1.04)")
-        }
-        onMouseOut={(e) =>
-          (e.currentTarget.style.transform = "scale(1)")
-        }
-      >
-        Prémium feloldása
-      </button>
+        {/* CTA */}
+        <button
+          className="btn w-100"
+          onClick={() => (window.location.href = "/premium")}
+          style={{
+            background: "linear-gradient(135deg, #ffb4b4, #ffdddd)", // 🔴 halvány piros
+            border: "none",
+            borderRadius: "999px",
+            padding: "0.75rem 1.2rem",
+            fontWeight: 700,
+            color: "#111",
+            boxShadow: "0 8px 25px rgba(255,180,180,0.3)",
+            transition: "transform 0.15s ease",
+            marginBottom: "0.75rem",
+          }}
+          onMouseOver={(e) =>
+            (e.currentTarget.style.transform = "scale(1.04)")
+          }
+          onMouseOut={(e) =>
+            (e.currentTarget.style.transform = "scale(1)")
+          }
+        >
+          Prémium feloldása
+        </button>
 
-      {/* SECONDARY */}
-      <button
-        className="btn btn-link mt-3"
-        style={{ color: "#999", fontSize: "0.8rem" }}
-        onClick={() => (window.location.href = "https://utom.hu/")}
-      >
-        Vissza a főoldalra
-      </button>
+        {/* SECONDARY */}
+        <button
+          className="btn btn-link"
+          style={{ color: "#ccc", fontSize: "0.8rem" }}
+          onClick={() => (window.location.href = "https://utom.hu/")}
+        >
+          Vissza a főoldalra
+        </button>
+      </div>
     </div>
 
     {/* INLINE KEYFRAMES */}
@@ -188,6 +195,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
     </style>
   </div>
 )}
+
 
 
 
