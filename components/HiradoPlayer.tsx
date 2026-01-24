@@ -70,7 +70,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
         onTimeUpdate={handleTimeUpdate} // 🔥 garantáltan lefut minden lejátszásnál
       />
 
-     {showPremiumModal && (
+    {showPremiumModal && (
   <div
     style={{
       position: "fixed",
@@ -92,34 +92,25 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
         padding: "2.8rem 2.4rem",
         borderRadius: "24px",
         textAlign: "center",
-        background:
-          "linear-gradient(145deg, #0f0f0f, #1a1a1a)",
+        background: "linear-gradient(145deg, #0f0f0f, #1a1a1a)",
         boxShadow:
           "0 0 80px rgba(255,200,120,0.18), inset 0 0 0 1px rgba(255,255,255,0.06)",
         color: "#fff",
         animation: "popIn 0.25s ease-out",
       }}
     >
-      {/* ICON */}
-      <div
+      {/* MEDÚZA KÉP */}
+      <img
+        src="/premium.png"
+        alt="Prémium szükséges"
         style={{
-          width: 64,
-          height: 64,
+          width: "72px",
+          height: "72px",
           margin: "0 auto 1.5rem",
-          borderRadius: "50%",
-          background:
-            "linear-gradient(135deg, #f5c26b, #ffdf9e)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "#111",
-          fontSize: "1.6rem",
-          boxShadow:
-            "0 0 30px rgba(255,215,130,0.6)",
+          opacity: 0.9,
+          animation: "floatIn 0.4s ease-out",
         }}
-      >
-        <i className="bi bi-lock-fill"></i>
-      </div>
+      />
 
       {/* TITLE */}
       <h2 style={{ fontWeight: 700, marginBottom: "0.75rem" }}>
@@ -149,15 +140,13 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
         className="btn w-100"
         onClick={() => (window.location.href = "/premium")}
         style={{
-          background:
-            "linear-gradient(135deg, #f5c26b, #ffdf9e)",
+          background: "linear-gradient(135deg, #f5c26b, #ffdf9e)",
           border: "none",
           borderRadius: "999px",
           padding: "0.75rem",
           fontWeight: 700,
           color: "#111",
-          boxShadow:
-            "0 8px 25px rgba(255,215,130,0.4)",
+          boxShadow: "0 8px 25px rgba(255,215,130,0.4)",
           transition: "transform 0.15s ease",
         }}
         onMouseOver={(e) =>
@@ -174,9 +163,9 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
       <button
         className="btn btn-link mt-3"
         style={{ color: "#999", fontSize: "0.8rem" }}
-        onClick={() => setShowPremiumModal(false)}
+        onClick={() => (window.location.href = "https://utom.hu/")}
       >
-        Talán később
+        Vissza a főoldalra
       </button>
     </div>
 
@@ -191,10 +180,15 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
           from { transform: scale(0.92); opacity: 0 }
           to { transform: scale(1); opacity: 1 }
         }
+        @keyframes floatIn {
+          from { transform: translateY(12px); opacity: 0 }
+          to { transform: translateY(0); opacity: 1 }
+        }
       `}
     </style>
   </div>
 )}
+
 
 
 
