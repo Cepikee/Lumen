@@ -67,30 +67,40 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
       />
 
       {showPremiumModal && (
-  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-    <div className="bg-white dark:bg-neutral-900 p-8 rounded-2xl shadow-2xl max-w-sm text-center">
-      
-      {/* 😢 Szomorú emoji vagy SVG */}
-      <div className="text-6xl mb-4">😢</div>
+  <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 animate-[fadeIn_0.25s_ease-out]">
+
+    <div className="bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-2xl shadow-2xl max-w-sm w-full px-8 py-10 text-center animate-[popIn_0.25s_ease-out]">
+
+      {/* SVG ikon */}
+      <img
+        src="/sad.svg"
+        alt="Sad face"
+        className="w-20 h-20 mx-auto mb-5 opacity-90"
+      />
 
       {/* Cím */}
-      <h2 className="text-2xl font-bold mb-2">Prémium szükséges</h2>
+      <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-3">
+        Prémium szükséges
+      </h2>
 
-      {/* Magyarázó szöveg */}
-      <p className="text-base opacity-80 mb-6">
-        A mai híradót már megnézted. A további megtekintéshez Prémium előfizetés szükséges.
+      {/* Leírás */}
+      <p className="text-sm text-neutral-700 dark:text-neutral-300 mb-8 leading-relaxed">
+        A mai híradót már megnézted.<br />
+        A további megtekintéshez Prémium előfizetés szükséges.
       </p>
 
       {/* Gomb */}
       <button
         onClick={() => (window.location.href = "/premium")}
-        className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-3 rounded-full text-sm font-semibold shadow-md hover:from-blue-700 hover:to-indigo-700 transition"
+        className="bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 px-6 py-3 rounded-full text-sm font-semibold shadow-md hover:scale-[1.04] active:scale-[0.98] transition-transform"
       >
         Prémium előfizetés
       </button>
     </div>
+
   </div>
 )}
+
 
     </div>
   );
