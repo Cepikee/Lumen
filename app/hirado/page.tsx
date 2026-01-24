@@ -13,7 +13,7 @@ export default function HiradoPage() {
     async function load() {
       const res = await fetch("/api/hirado/today", { 
         cache: "no-store",
-        credentials: "include",   // 🔥 EZ A LÉNYEG
+        credentials: "include",
       });
       const json = await res.json();
       setData(json);
@@ -26,10 +26,10 @@ export default function HiradoPage() {
     async function loadUser() {
       const res = await fetch("/api/auth/me", { 
         cache: "no-store",
-        credentials: "include",   // 🔥 EZ IS LÉNYEG
+        credentials: "include",
       });
       const json = await res.json();
-      setUser(json.user);         // 🔥 user objektumot ad vissza, nem a teljes response-t
+      setUser(json.user);
     }
     loadUser();
   }, []);
@@ -49,7 +49,7 @@ export default function HiradoPage() {
       {data.hasVideo && (
         <HiradoPlayerWrapper
           video={data.video}
-          isPremium={user.isPremium}   // 🔥 most már helyes érték
+          isPremium={user.is_premium === 1}   // 🔥 JAVÍTVA
         />
       )}
 
