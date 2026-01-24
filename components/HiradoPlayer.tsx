@@ -58,7 +58,8 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
             "fullscreen",
           ],
         }}
-        onPlay={handlePlay}
+        onPlaying={handlePlay}
+
       />
 
       {showPremiumModal && (
