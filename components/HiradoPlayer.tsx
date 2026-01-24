@@ -101,7 +101,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
     >
       {/* MEDÚZA KÉP */}
       <img
-        src="/premium.png"
+        src="/icons/premium.png"
         alt="Prémium szükséges"
         style={{
           width: "72px",
