@@ -15,19 +15,12 @@ type HiradoPlayerProps = {
 export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
   const playerRef = useRef<any>(null);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
-  const [allowed, setAllowed] = useState(isPremium);
 
   const handlePlay = async () => {
     // Prémium user → mindig engedjük
-    if (isPremium) {
-      setAllowed(true);
-      return;
-    }
+    if (isPremium) return;
 
-    // Ha már engedélyeztük (első nézés), akkor is engedjük
-    if (allowed) return;
-
-    // Backend ellenőrzés: megnézte-e már ma?
+    // Backend ellenőrzés minden egyes Play-re
     const res = await fetch(`/api/hirado/can-watch?videoId=${video.id}`);
     const data = await res.json();
 
@@ -38,8 +31,8 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
       return;
     }
 
-    // Ha nézheti → ez az első alkalom → engedjük végignézni
-    setAllowed(true);
+    // Ha nézheti → semmit nem kell csinálni
+    // (a backend már beírta, hogy most nézi először)
   };
 
   return (
