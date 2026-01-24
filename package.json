@@ -20,6 +20,8 @@
     "next": "^16.1.1",
     "node-cron": "^4.2.1",
     "nodemailer": "^7.0.12",
+    "plyr": "^3.8.4",
+    "plyr-react": "^6.0.0",
     "react": "19.2.0",
     "react-bootstrap": "^2.10.10",
     "react-chartjs-2": "^5.3.1",
