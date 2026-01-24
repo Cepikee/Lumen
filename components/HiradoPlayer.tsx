@@ -70,13 +70,13 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
         onTimeUpdate={handleTimeUpdate} // 🔥 garantáltan lefut minden lejátszásnál
       />
 
-    {showPremiumModal && (
+  {showPremiumModal && (
   <div
     style={{
       position: "fixed",
       inset: 0,
-      background: "rgba(0,0,0,0.65)",
-      backdropFilter: "blur(6px)",
+      background: "rgba(0,0,0,0.4)", // 🔧 háttér blur csökkentve
+      backdropFilter: "blur(3px)",   // 🔧 blur felezve
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -94,8 +94,8 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
         maxWidth: "680px",
         padding: "2.8rem",
         borderRadius: "24px",
-        background: "linear-gradient(135deg, #1b2b4f, #2e4a7f)", // 🔵 kékes háttér
-        boxShadow: "0 0 80px rgba(80,150,255,0.2)",
+        background: "#1d2e4a", // 🔧 sima sötétkék háttér
+        boxShadow: "0 0 40px rgba(80,150,255,0.1)", // 🔧 fényhatás visszavéve
         color: "#fff",
         animation: "popIn 0.25s ease-out",
       }}
@@ -109,14 +109,14 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
             width: "100%",
             height: "auto",
             borderRadius: "16px",
-            boxShadow: "0 0 20px rgba(255,255,255,0.1)",
+            boxShadow: "0 0 12px rgba(255,255,255,0.08)",
             animation: "floatIn 0.4s ease-out",
           }}
         />
       </div>
 
       {/* JOBB OLDAL – TARTALOM */}
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1, textAlign: "center" }}>
         {/* TITLE */}
         <h2 style={{ fontWeight: 700, fontSize: "1.4rem", marginBottom: "0.75rem" }}>
           Prémium tartalom
@@ -145,13 +145,13 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
           className="btn w-100"
           onClick={() => (window.location.href = "/premium")}
           style={{
-            background: "linear-gradient(135deg, #ffb4b4, #ffdddd)", // 🔴 halvány piros
+            background: "linear-gradient(135deg, #ffb4b4, #ffdddd)",
             border: "none",
             borderRadius: "999px",
             padding: "0.75rem 1.2rem",
             fontWeight: 700,
             color: "#111",
-            boxShadow: "0 8px 25px rgba(255,180,180,0.3)",
+            boxShadow: "0 6px 18px rgba(255,180,180,0.2)",
             transition: "transform 0.15s ease",
             marginBottom: "0.75rem",
           }}
@@ -168,7 +168,12 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
         {/* SECONDARY */}
         <button
           className="btn btn-link"
-          style={{ color: "#ccc", fontSize: "0.8rem" }}
+          style={{
+            color: "#ccc",
+            fontSize: "0.8rem",
+            display: "block",
+            margin: "0 auto",
+          }}
           onClick={() => (window.location.href = "https://utom.hu/")}
         >
           Vissza a főoldalra
