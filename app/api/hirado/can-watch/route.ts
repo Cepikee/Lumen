@@ -8,27 +8,36 @@ export async function GET(req: Request) {
     const videoId = searchParams.get("videoId");
 
     if (!videoId) {
-      return NextResponse.json({ error: "NO_VIDEO_ID" }, { status: 400 });
+      return NextResponse.json(
+        { canWatch: false, error: "NO_VIDEO_ID" },
+        { status: 400 }
+      );
     }
 
-    // 1) USER ID COOKIE-BÓL
+    // 1) USER AZONOSÍTÁS – session_user cookie
     const cookie = req.headers.get("cookie") || "";
     const match = cookie.match(/session_user=([^;]+)/);
 
     if (!match) {
-      return NextResponse.json({ canWatch: false, reason: "NOT_LOGGED_IN" });
+      return NextResponse.json({
+        canWatch: false,
+        reason: "NOT_LOGGED_IN",
+      });
     }
 
     const userId = match[1];
 
-    // 2) USER LEKÉRÉSE A DB-BŐL
+    // 2) USER VALIDÁLÁS
     const [userRows] = await db.query<RowDataPacket[]>(
       "SELECT id, is_premium FROM users WHERE id = ? LIMIT 1",
       [userId]
     );
 
     if (!userRows || userRows.length === 0) {
-      return NextResponse.json({ canWatch: false, reason: "INVALID_USER" });
+      return NextResponse.json({
+        canWatch: false,
+        reason: "INVALID_USER",
+      });
     }
 
     const user = userRows[0];
@@ -41,10 +50,22 @@ export async function GET(req: Request) {
     );
 
     if (!videoRows || videoRows.length === 0) {
-      return NextResponse.json({ canWatch: false, reason: "NO_VIDEO" });
+      return NextResponse.json({
+        canWatch: false,
+        reason: "NO_VIDEO",
+      });
     }
 
-    // 4) NÉZTE-E MÁR?
+    // 4) PRÉMIUM USER → BÁRMIKOR NÉZHETI
+    if (isPremium) {
+      return NextResponse.json({
+        canWatch: true,
+        firstTime: false,
+        premiumRequired: false,
+      });
+    }
+
+    // 5) NEM PRÉMIUM USER – NÉZTE-E MÁR EZT A VIDEÓT?
     const [viewRows] = await db.query<RowDataPacket[]>(
       "SELECT id FROM video_views WHERE user_id = ? AND video_id = ? LIMIT 1",
       [userId, videoId]
@@ -52,37 +73,31 @@ export async function GET(req: Request) {
 
     const alreadyViewed = viewRows.length > 0;
 
-    // 5) HA MÉG NEM NÉZTE → ENGEDJÜK + BEÍRJUK
-    if (!alreadyViewed) {
-      await db.query(
-        "INSERT INTO video_views (user_id, video_id) VALUES (?, ?)",
-        [userId, videoId]
-      );
-
-      return NextResponse.json({
-        canWatch: true,
-        firstTime: true,
-        premiumRequired: false
-      });
-    }
-
-    // 6) HA MÁR NÉZTE → CSAK PRÉMIUM
-    if (!isPremium) {
+    // 6) HA MÁR NÉZTE → AZONNALI TILTÁS
+    if (alreadyViewed) {
       return NextResponse.json({
         canWatch: false,
-        reason: "PREMIUM_REQUIRED"
+        reason: "PREMIUM_REQUIRED",
       });
     }
 
-    // 7) PRÉMIUM USER → BÁRMIKOR NÉZHETI
+    // 7) HA MÉG NEM NÉZTE → BEJEGYEZZÜK, HOGY MOST NÉZI ELŐSZÖR
+    // FONTOS: legyen UNIQUE INDEX (user_id, video_id) a video_views táblán!
+    await db.query(
+      "INSERT IGNORE INTO video_views (user_id, video_id) VALUES (?, ?)",
+      [userId, videoId]
+    );
+
     return NextResponse.json({
       canWatch: true,
-      firstTime: false,
-      premiumRequired: true
+      firstTime: true,
+      premiumRequired: false,
     });
-
   } catch (err) {
     console.error("CAN WATCH ERROR:", err);
-    return NextResponse.json({ error: "SERVER_ERROR" }, { status: 500 });
+    return NextResponse.json(
+      { canWatch: false, error: "SERVER_ERROR" },
+      { status: 500 }
+    );
   }
 }
