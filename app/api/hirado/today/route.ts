@@ -21,7 +21,7 @@ export async function GET() {
         date: video.date,
         title: video.title,
         description: video.description,
-        fileUrl: video.file_url
+        fileUrl: video.file_url.replace("/var/www/utom/public", "")
       }
     });
 
