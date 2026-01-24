@@ -15,13 +15,12 @@ type HiradoPlayerProps = {
 export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
   const playerRef = useRef<any>(null);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
-  const [allowed, setAllowed] = useState(isPremium);
 
   const handlePlaying = async () => {
-    if (allowed) return;
+    if (isPremium) return;
 
     const res = await fetch(`/api/hirado/can-watch?videoId=${video.id}`, {
-      credentials: "include",   // 🔥 EZ A LÉNYEG!
+      credentials: "include",
     });
 
     const data = await res.json();
@@ -29,10 +28,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
     if (!data.canWatch) {
       playerRef.current?.plyr?.pause();
       setShowPremiumModal(true);
-      return;
     }
-
-    setAllowed(true);
   };
 
   return (
