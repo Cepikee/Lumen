@@ -1,14 +1,8 @@
 import HiradoClient from "@/components/HiradoClient";
 
-type HiradoPageProps = {
-  searchParams: {
-    video?: string | string[];
-  };
-};
-
-export default function HiradoPage({ searchParams }: HiradoPageProps) {
+export default function HiradoPage({ searchParams }: any) {
   const raw = searchParams?.video;
-  const videoId = Array.isArray(raw) ? raw[0] : raw; // <-- nincs több null
+  const videoId = Array.isArray(raw) ? raw[0] : raw;
 
   return <HiradoClient videoId={videoId} />;
 }
