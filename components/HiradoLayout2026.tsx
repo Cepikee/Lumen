@@ -6,7 +6,7 @@ import HiradoPlayerWrapper from "@/app/hirado/HiradoPlayerWrapper";
 import HiradoArchiveSlider from "@/components/HiradoArchiveSlider";
 
 type HiradoLayoutProps = {
-  video: { id: number; fileUrl: string; title?: string; date?: string };
+  video?: { id: number; fileUrl: string; title?: string; date?: string };
   user: { is_premium: number };
 };
 
@@ -39,6 +39,9 @@ export default function HiradoLayout2026({ video, user }: HiradoLayoutProps) {
 
   const activeTheme = theme === "system" ? systemTheme : theme;
 
+  // 🔥 BIZTONSÁGOS VIDEO OBJEKTUM
+  const safeVideo = video ?? { id: 0, fileUrl: "" };
+
   return (
     <div>
       <header>
@@ -51,7 +54,7 @@ export default function HiradoLayout2026({ video, user }: HiradoLayoutProps) {
           <div>
             <div>
               <HiradoPlayerWrapper
-                video={video}
+                video={safeVideo}
                 isPremium={user.is_premium === 1}
               />
             </div>
