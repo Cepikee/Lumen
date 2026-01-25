@@ -1,3 +1,4 @@
+// components/HiradoLayout2026.tsx
 "use client";
 
 import { useEffect, useState } from "react";
