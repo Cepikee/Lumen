@@ -7,8 +7,7 @@ import HiradoArchiveSlider from "@/components/HiradoArchiveSlider";
 
 type HiradoLayoutProps = {
   video?: { id: number; fileUrl: string; title?: string; date?: string };
-  user: { isPremium: boolean; is_premium?: number };
-
+  user: { isPremium: boolean };
 };
 
 export default function HiradoLayout2026({ video, user }: HiradoLayoutProps) {
@@ -40,7 +39,6 @@ export default function HiradoLayout2026({ video, user }: HiradoLayoutProps) {
 
   const activeTheme = theme === "system" ? systemTheme : theme;
 
-  // 🔥 BIZTONSÁGOS VIDEO OBJEKTUM
   const safeVideo = video ?? { id: 0, fileUrl: "" };
 
   return (
@@ -55,10 +53,9 @@ export default function HiradoLayout2026({ video, user }: HiradoLayoutProps) {
           <div>
             <div>
               <HiradoPlayerWrapper
-  video={safeVideo}
-  isPremium={user.isPremium}
-/>
-
+                video={safeVideo}
+                isPremium={user.isPremium}
+              />
             </div>
           </div>
 

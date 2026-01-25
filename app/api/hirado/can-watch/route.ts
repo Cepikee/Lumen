@@ -41,8 +41,12 @@ export async function GET(req: Request) {
     }
 
     const user = userRows[0];
-    const isPremium = user.is_premium === 1;
 
+    // 🔥 VÉGLEGES PRÉMIUM LOGIKA — MINDENT KEZEL
+    const isPremium =
+      user.is_premium === 1 ||
+      user.is_premium === "1" ||
+      user.is_premium === true;
 
     // 3) VIDEÓ LÉTEZIK-E?
     const [videoRows] = await db.query<RowDataPacket[]>(
@@ -83,7 +87,6 @@ export async function GET(req: Request) {
     }
 
     // 7) HA MÉG NEM NÉZTE → BEJEGYEZZÜK, HOGY MOST NÉZI ELŐSZÖR
-    // FONTOS: legyen UNIQUE INDEX (user_id, video_id) a video_views táblán!
     await db.query(
       "INSERT IGNORE INTO video_views (user_id, video_id) VALUES (?, ?)",
       [userId, videoId]
