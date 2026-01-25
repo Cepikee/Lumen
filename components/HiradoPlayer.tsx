@@ -15,16 +15,16 @@ type HiradoPlayerProps = {
   isPremium: boolean;
 };
 
-export default function HiradoPlayer({ video }: HiradoPlayerProps) {
+export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
   const playerRef = useRef<any>(null);
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  // 🔥 Normalizált videó URL (TS-safe)
   const videoSrc = video.fileUrl ?? video.file_url ?? "";
 
   const handleTimeUpdate = async () => {
     if (blocked) return;
+    if (isPremium) return; // 🔥 PRÉMIUM → NINCS ELLENŐRZÉS
 
     const res = await fetch(`/api/hirado/can-watch?videoId=${video.id}`, {
       credentials: "include",
@@ -49,7 +49,7 @@ export default function HiradoPlayer({ video }: HiradoPlayerProps) {
                 type: "video",
                 sources: [
                   {
-                    src: videoSrc, // 🔥 mindig string, TS OK
+                    src: videoSrc,
                     type: "video/mp4",
                   },
                 ],
