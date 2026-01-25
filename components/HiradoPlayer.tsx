@@ -7,9 +7,12 @@ import "plyr-react/plyr.css";
 type HiradoPlayerProps = {
   video: {
     id: number;
-    fileUrl: string;
+    fileUrl?: string;
+    file_url?: string;
+    title?: string;
+    date?: string;
   };
-  isPremium: boolean; // maradhat, de nem használjuk döntésre
+  isPremium: boolean;
 };
 
 export default function HiradoPlayer({ video }: HiradoPlayerProps) {
@@ -17,7 +20,9 @@ export default function HiradoPlayer({ video }: HiradoPlayerProps) {
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  // 🔥 MINDIG a backend dönti el, nézheted-e
+  // 🔥 Normalizált videó URL (TS-safe)
+  const videoSrc = video.fileUrl ?? video.file_url ?? "";
+
   const handleTimeUpdate = async () => {
     if (blocked) return;
 
@@ -44,7 +49,7 @@ export default function HiradoPlayer({ video }: HiradoPlayerProps) {
                 type: "video",
                 sources: [
                   {
-                    src: video.fileUrl,
+                    src: videoSrc, // 🔥 mindig string, TS OK
                     type: "video/mp4",
                   },
                 ],

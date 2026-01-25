@@ -6,91 +6,109 @@ import RegisterModal from "./RegisterModal";
 export default function LoginModal() {
   const [open, setOpen] = useState(false);
 
-  // 🔥 PANEL VÁLTÓ
   const [mode, setMode] = useState<"login" | "forgot" | "forgot_pin">("login");
 
-  // LOGIN mezők
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [pin, setPin] = useState("");
-  const [rememberMe, setRememberMe] = useState(false); // ← ÚJ
+  const [rememberMe, setRememberMe] = useState(false);
 
-  // FORGOT PASSWORD mezők
   const [forgotEmail, setForgotEmail] = useState("");
   const [forgotStatus, setForgotStatus] = useState<"idle" | "loading" | "success">("idle");
 
-  // FORGOT PIN mezők
   const [forgotPinEmail, setForgotPinEmail] = useState("");
   const [forgotPinStatus, setForgotPinStatus] = useState<"idle" | "loading" | "success">("idle");
 
-  // 🔥 REGISZTRÁCIÓ MODAL
   const [showRegister, setShowRegister] = useState(false);
 
-  // 🔥 LOGIN + reCAPTCHA
   const handleLogin = async () => {
-    // @ts-ignore
-    const recaptchaToken = await grecaptcha.execute(
-      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
-      { action: "login" }
-    );
+    try {
+      // @ts-ignore
+      const recaptchaToken = await grecaptcha.execute(
+        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
+        { action: "login" }
+      );
 
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      body: JSON.stringify({ email, password, pin, recaptchaToken, rememberMe }), // ← ÚJ
-    });
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, pin, recaptchaToken, rememberMe }),
+      });
 
-    const data = await res.json();
+      const text = await res.text();
+      if (!text) {
+        alert("A szerver nem adott választ.");
+        return;
+      }
 
-    if (data.success) {
-      window.location.reload();
-    } else {
-      alert(data.message || "Hibás adatok.");
+      let data: any;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        alert("A szerver hibás választ adott.");
+        return;
+      }
+
+      if (data.success) {
+        window.location.reload();
+      } else {
+        alert(data.message || "Hibás adatok.");
+      }
+    } catch {
+      alert("Hiba történt a bejelentkezés során.");
     }
   };
 
-  // 🔥 FORGOT PASSWORD + reCAPTCHA
   const handleForgot = async (e: any) => {
     e.preventDefault();
     setForgotStatus("loading");
 
-    // @ts-ignore
-    const recaptchaToken = await grecaptcha.execute(
-      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
-      { action: "forgot_password" }
-    );
+    try {
+      // @ts-ignore
+      const recaptchaToken = await grecaptcha.execute(
+        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
+        { action: "forgot_password" }
+      );
 
-    await fetch("/api/auth/request-password-reset", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: forgotEmail, recaptchaToken }),
-    });
+      await fetch("/api/auth/request-password-reset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: forgotEmail, recaptchaToken }),
+      });
 
-    setForgotStatus("success");
+      setForgotStatus("success");
+    } catch {
+      setForgotStatus("idle");
+      alert("Hiba történt.");
+    }
   };
 
-  // 🔥 FORGOT PIN + reCAPTCHA
   const handleForgotPin = async (e: any) => {
     e.preventDefault();
     setForgotPinStatus("loading");
 
-    // @ts-ignore
-    const recaptchaToken = await grecaptcha.execute(
-      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
-      { action: "forgot_pin" }
-    );
+    try {
+      // @ts-ignore
+      const recaptchaToken = await grecaptcha.execute(
+        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
+        { action: "forgot_pin" }
+      );
 
-    await fetch("/api/auth/request-pin-reset", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: forgotPinEmail, recaptchaToken }),
-    });
+      await fetch("/api/auth/request-pin-reset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: forgotPinEmail, recaptchaToken }),
+      });
 
-    setForgotPinStatus("success");
+      setForgotPinStatus("success");
+    } catch {
+      setForgotPinStatus("idle");
+      alert("Hiba történt.");
+    }
   };
 
   return (
     <>
-      {/* GOMB A HEADERBEN */}
       <button
         className="btn btn-outline-primary"
         onClick={() => {
@@ -101,7 +119,6 @@ export default function LoginModal() {
         Bejelentkezés
       </button>
 
-      {/* LOGIN MODAL */}
       {open && (
         <div
           style={{
@@ -120,7 +137,6 @@ export default function LoginModal() {
             style={{ width: "350px" }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* 🔥 LOGIN PANEL */}
             {mode === "login" && (
               <>
                 <h3 className="mb-3">Bejelentkezés</h3>
@@ -148,7 +164,6 @@ export default function LoginModal() {
                   onChange={(e) => setPin(e.target.value)}
                 />
 
-                {/* 🔥 REMEMBER ME CHECKBOX */}
                 <div className="form-check mb-3">
                   <input
                     className="form-check-input"
@@ -166,7 +181,6 @@ export default function LoginModal() {
                   Belépés
                 </button>
 
-                {/* 🔥 ALULI LINK BLOKK */}
                 <div className="mt-3 text-center">
                   <p
                     style={{ cursor: "pointer", textDecoration: "underline" }}
@@ -205,15 +219,12 @@ export default function LoginModal() {
               </>
             )}
 
-            {/* 🔥 FORGOT PASSWORD PANEL */}
             {mode === "forgot" && (
               <>
                 <h3 className="mb-3">Jelszó visszaállítása</h3>
 
                 {forgotStatus === "success" ? (
-                  <p>
-                    Ha létezik ilyen email cím, elküldtük a visszaállító linket.
-                  </p>
+                  <p>Ha létezik ilyen email cím, elküldtük a visszaállító linket.</p>
                 ) : (
                   <form onSubmit={handleForgot}>
                     <input
@@ -230,9 +241,7 @@ export default function LoginModal() {
                       type="submit"
                       disabled={forgotStatus === "loading"}
                     >
-                      {forgotStatus === "loading"
-                        ? "Küldés..."
-                        : "Visszaállító email küldése"}
+                      {forgotStatus === "loading" ? "Küldés..." : "Visszaállító email küldése"}
                     </button>
                   </form>
                 )}
@@ -247,15 +256,12 @@ export default function LoginModal() {
               </>
             )}
 
-            {/* 🔥 FORGOT PIN PANEL */}
             {mode === "forgot_pin" && (
               <>
                 <h3 className="mb-3">PIN kód visszaállítása</h3>
 
                 {forgotPinStatus === "success" ? (
-                  <p>
-                    Ha létezik ilyen email cím, elküldtük a PIN visszaállító linket.
-                  </p>
+                  <p>Ha létezik ilyen email cím, elküldtük a PIN visszaállító linket.</p>
                 ) : (
                   <form onSubmit={handleForgotPin}>
                     <input
@@ -272,9 +278,7 @@ export default function LoginModal() {
                       type="submit"
                       disabled={forgotPinStatus === "loading"}
                     >
-                      {forgotPinStatus === "loading"
-                        ? "Küldés..."
-                        : "PIN visszaállító email küldése"}
+                      {forgotPinStatus === "loading" ? "Küldés..." : "PIN visszaállító email küldése"}
                     </button>
                   </form>
                 )}
@@ -292,10 +296,7 @@ export default function LoginModal() {
         </div>
       )}
 
-      {/* 🔥 REGISZTRÁCIÓ MODAL */}
-      {showRegister && (
-        <RegisterModal onClose={() => setShowRegister(false)} />
-      )}
+      {showRegister && <RegisterModal onClose={() => setShowRegister(false)} />}
     </>
   );
 }

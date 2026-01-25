@@ -986,3 +986,33 @@ html[data-theme="light"] {
   --bs-btn-border-color: var(--utom-style-text) !important;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+/* PLYR – TELJES HÁTTÉR FIX */
+.plyr,
+.plyr__video-wrapper,
+.plyr__poster,
+.plyr__controls,
+.plyr__captions,
+.plyr__progress,
+.plyr__progress__buffer,
+.plyr__menu,
+.plyr__menu__container {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* A videó elem maga is legyen átlátszó */
+.plyr__video-wrapper video {
+    background: transparent !important;
+}

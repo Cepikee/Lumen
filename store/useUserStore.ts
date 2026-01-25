@@ -10,7 +10,6 @@ interface UserState {
   theme: ThemeMode;
   loading: boolean;
 
-  // actions
   setUser: (u: User | null) => void;
   setTheme: (t: ThemeMode) => void;
   loadUser: () => Promise<void>;
@@ -26,8 +25,24 @@ export const useUserStore = create<UserState>((set) => ({
 
   loadUser: async () => {
     try {
-      const res = await fetch("/api/auth/me", { credentials: "include" });
-      const data = await res.json();
+      const res = await fetch("/api/auth/me", {
+        credentials: "include",
+        cache: "no-store",
+      });
+
+      const text = await res.text();
+      if (!text) {
+        set({ user: null, theme: "system", loading: false });
+        return;
+      }
+
+      let data: any;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        set({ user: null, theme: "system", loading: false });
+        return;
+      }
 
       if (data.loggedIn) {
         set({
@@ -42,8 +57,7 @@ export const useUserStore = create<UserState>((set) => ({
           loading: false,
         });
       }
-    } catch (err) {
-      console.error("Auth load error:", err);
+    } catch {
       set({
         user: null,
         theme: "system",

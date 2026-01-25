@@ -1,36 +1,102 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import HiradoPlayerWrapper from "./HiradoPlayerWrapper";
-import HiradoArchive from "@/components/HiradoArchive";
+import { useSearchParams } from "next/navigation";
+import HiradoLayout2026 from "@/components/HiradoLayout2026";
+
+// 🔥 A HELYES STORE IMPORT
+import { useUserStore } from "@/store/useUserStore";
+
 
 export default function HiradoPage() {
+  const searchParams = useSearchParams();
+  const videoId = searchParams.get("video");
+
   const [data, setData] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
 
-  // Híradó adat lekérése
+  // 🔥 TÉMA A USER STORE-BÓL
+  const theme = useUserStore((s) => s.theme);
+
+  // 🔥 TÉMA ALKALMAZÁSA A /hirado OLDALON
+  useEffect(() => {
+    if (!theme) return;
+
+    document.documentElement.classList.remove("light", "dark");
+
+    if (theme === "system") {
+      const system = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+      document.documentElement.classList.add(system);
+    } else {
+      document.documentElement.classList.add(theme);
+    }
+  }, [theme]);
+
+  // 🔥 Híradó adat lekérése (mai vagy archív)
   useEffect(() => {
     async function load() {
-      const res = await fetch("/api/hirado/today", { 
-        cache: "no-store",
-        credentials: "include",
-      });
-      const json = await res.json();
-      setData(json);
-    }
-    load();
-  }, []);
+      try {
+        let url = "/api/hirado/today";
 
-  // Felhasználó lekérése
+        if (videoId) {
+          url = `/api/hirado/by-id?videoId=${videoId}`;
+        }
+
+        const res = await fetch(url, {
+          cache: "no-store",
+          credentials: "include",
+        });
+
+        const text = await res.text();
+        if (!text) {
+          console.warn("⚠️ /api/hirado üres választ adott");
+          return;
+        }
+
+        const json = JSON.parse(text);
+        setData(json);
+      } catch (err) {
+        console.error("⚠️ Híradó adat hiba:", err);
+      }
+    }
+
+    load();
+  }, [videoId]);
+
+  // 🔥 Felhasználó lekérése
   useEffect(() => {
     async function loadUser() {
-      const res = await fetch("/api/auth/me", { 
-        cache: "no-store",
-        credentials: "include",
-      });
-      const json = await res.json();
-      setUser(json.user);
+      try {
+        const res = await fetch("/api/auth/me", {
+          cache: "no-store",
+          credentials: "include",
+        });
+
+        const text = await res.text();
+        if (!text) {
+          console.warn("⚠️ /api/auth/me üres választ adott");
+          setUser(null);
+          return;
+        }
+
+        let json;
+        try {
+          json = JSON.parse(text);
+        } catch {
+          console.warn("⚠️ /api/auth/me nem JSON választ adott:", text);
+          setUser(null);
+          return;
+        }
+
+        setUser(json.user ?? null);
+      } catch (err) {
+        console.error("⚠️ Felhasználó lekérési hiba:", err);
+        setUser(null);
+      }
     }
+
     loadUser();
   }, []);
 
@@ -38,22 +104,6 @@ export default function HiradoPage() {
     return <div className="p-6">Betöltés...</div>;
   }
 
-  return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Utom Híradó</h1>
-
-      {!data.hasVideo && (
-        <div className="text-lg opacity-70">Ma még nincs híradó.</div>
-      )}
-
-      {data.hasVideo && (
-        <HiradoPlayerWrapper
-          video={data.video}
-          isPremium={user.is_premium === 1}   // 🔥 JAVÍTVA
-        />
-      )}
-
-      <HiradoArchive />
-    </div>
-  );
+  // 🔥 A teljes híradó oldal a 2026-os layoutot használja
+  return <HiradoLayout2026 video={data.video} user={user} />;
 }

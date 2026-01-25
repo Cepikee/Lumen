@@ -7,7 +7,6 @@ export function useUser() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔥 A user theme külön state-ben is elérhető
   const [theme, setTheme] = useState<"dark" | "light" | "system">("system");
 
   useEffect(() => {
@@ -18,22 +17,44 @@ export function useUser() {
           credentials: "include",
         });
 
-        const data = await res.json();
+        // 🔥 1) Olvassuk be raw textként
+        const text = await res.text();
 
+        // 🔥 2) Ha üres → nincs JSON → nincs hiba
+        if (!text) {
+          console.warn("⚠️ /api/auth/me üres választ adott (useUser)");
+          setUser(null);
+          setTheme("system");
+          setLoading(false);
+          return;
+        }
+
+        // 🔥 3) Ha nem JSON → ne dobjon hibát
+        let data: any;
+        try {
+          data = JSON.parse(text);
+        } catch {
+          console.warn("⚠️ /api/auth/me nem JSON választ adott (useUser):", text);
+          setUser(null);
+          setTheme("system");
+          setLoading(false);
+          return;
+        }
+
+        // 🔥 4) Ha minden oké → állítsuk be
         if (data.loggedIn) {
           const u = data.user as User;
           setUser(u);
 
-          // 🔥 Ha van theme mező, beállítjuk
           if (u.theme) {
             setTheme(u.theme as "dark" | "light" | "system");
           }
         } else {
           setUser(null);
-          setTheme("system"); // alapértelmezett
+          setTheme("system");
         }
       } catch (err) {
-        console.error("Auth error:", err);
+        console.error("Auth error (useUser):", err);
         setUser(null);
         setTheme("system");
       }

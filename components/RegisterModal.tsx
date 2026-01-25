@@ -12,7 +12,6 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // 🔥 JELSZÓ ELLENŐRZŐ LOGIKA
   const passwordChecks = {
     length: password.length >= 8,
     number: /\d/.test(password),
@@ -26,6 +25,7 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
 
     const res = await fetch("/api/auth/register", {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email,
         password,
@@ -35,7 +35,23 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
       }),
     });
 
-    const data = await res.json();
+    const text = await res.text();
+
+    if (!text) {
+      setLoading(false);
+      setError("A szerver nem adott választ.");
+      return;
+    }
+
+    let data: any;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      setLoading(false);
+      setError("A szerver hibás választ adott.");
+      return;
+    }
+
     setLoading(false);
 
     if (data.success) {
@@ -64,7 +80,6 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
         style={{ width: "380px" }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* BEZÁRÓ GOMB */}
         <button
           onClick={onClose}
           style={{
@@ -83,7 +98,6 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
 
         <h3 className="mb-3">Regisztráció</h3>
 
-        {/* HIBAÜZENET */}
         {error && <div className="alert alert-danger py-2">{error}</div>}
 
         <input
@@ -116,7 +130,6 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        {/* 🔥 JELSZÓ ELLENŐRZŐ */}
         <div className="bg-secondary p-2 rounded mb-3" style={{ fontSize: "14px" }}>
           <div style={{ color: passwordChecks.length ? "#4caf50" : "#ff5252" }}>
             {passwordChecks.length ? "✔" : "✖"} Minimum 8 karakter
