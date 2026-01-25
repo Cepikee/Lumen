@@ -55,7 +55,7 @@ export default function HiradoLayout2026({ video, user }: HiradoLayoutProps) {
             <div>
               <HiradoPlayerWrapper
                 video={safeVideo}
-                isPremium={user?.is_premium === 1}
+                isPremium={user.is_premium}
               />
             </div>
           </div>
