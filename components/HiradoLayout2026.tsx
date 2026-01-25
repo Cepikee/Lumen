@@ -7,7 +7,8 @@ import HiradoArchiveSlider from "@/components/HiradoArchiveSlider";
 
 type HiradoLayoutProps = {
   video?: { id: number; fileUrl: string; title?: string; date?: string };
-  user: { is_premium: number };
+  user: { isPremium: boolean; is_premium?: number };
+
 };
 
 export default function HiradoLayout2026({ video, user }: HiradoLayoutProps) {
@@ -54,9 +55,10 @@ export default function HiradoLayout2026({ video, user }: HiradoLayoutProps) {
           <div>
             <div>
               <HiradoPlayerWrapper
-                video={safeVideo}
-                isPremium={user.is_premium}
-              />
+  video={safeVideo}
+  isPremium={user.isPremium}
+/>
+
             </div>
           </div>
 

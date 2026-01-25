@@ -43,6 +43,7 @@ export async function GET(req: Request) {
     const user = userRows[0];
     const isPremium = user.is_premium === 1;
 
+
     // 3) VIDEÓ LÉTEZIK-E?
     const [videoRows] = await db.query<RowDataPacket[]>(
       "SELECT id FROM videos WHERE id = ? LIMIT 1",
