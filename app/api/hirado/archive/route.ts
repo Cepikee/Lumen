@@ -4,7 +4,12 @@ import type { RowDataPacket } from "mysql2";
 
 export async function GET() {
   const [rows] = await db.query<RowDataPacket[]>(
-    `SELECT id, title, date, file_url
+    `SELECT 
+        id, 
+        title, 
+        date, 
+        file_url,
+        thumbnail_url   -- 🔥 fontos: ezt is visszaadjuk
      FROM videos
      WHERE date < CURDATE()
      ORDER BY date DESC
