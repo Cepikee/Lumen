@@ -6,8 +6,8 @@ type VideoItem = {
   id: number;
   title?: string;
   date: string;
-  file_url?: string;
-  thumbnail_url?: string; // 🔥 új mező
+  fileUrl?: string;
+  thumbnailUrl?: string; // 🔥 helyes mező
 };
 
 export default function HiradoArchiveSlider() {
@@ -115,9 +115,9 @@ export default function HiradoArchiveSlider() {
                 (e.currentTarget.style.transform = "none")
               }
             >
-              {/* 🔥 Thumbnail kép */}
+              {/* 🔥 Thumbnail kép — helyes mező */}
               <img
-                src={v.thumbnail_url ?? "/icons/kep-placeholder.png"}
+                src={v.thumbnailUrl ?? "/icons/kep-placeholder.png"}
                 alt="Borítókép"
                 style={{
                   width: "100%",
