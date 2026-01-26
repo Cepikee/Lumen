@@ -3,7 +3,12 @@ import fs from "fs";
 import path from "path";
 import { db } from "@/lib/db";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  req: NextRequest,
+  context: { params: { id: string } }
+) {
+  const { id } = context.params;
+
   // 1) Cookie → userId
   const cookie = req.headers.get("cookie") || "";
   const match = cookie.match(/session_user=([^;]+)/);
@@ -39,7 +44,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
      FROM videos 
      WHERE id = ? 
      LIMIT 1`,
-    [params.id]
+    [id]
   );
 
   if (!videoRows.length) {
@@ -48,7 +53,6 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
   const video = videoRows[0];
 
-  // A DB-ben lévő file_url pl.: "/hirado/2026-01-25.mp4"
   const filename = path.basename(video.file_url);
   const filePath = `/var/www/utom/private/videos/${filename}`;
 
