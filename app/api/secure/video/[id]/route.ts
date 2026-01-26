@@ -1,12 +1,19 @@
-import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import { db } from "@/lib/db";
+import { Readable } from "stream";
 
-export async function GET(
-  req: NextRequest,
-  context: { params: { id: string } }
-) {
+function nodeStreamToWebStream(nodeStream: fs.ReadStream): ReadableStream {
+  return new ReadableStream({
+    start(controller) {
+      nodeStream.on("data", (chunk) => controller.enqueue(chunk));
+      nodeStream.on("end", () => controller.close());
+      nodeStream.on("error", (err) => controller.error(err));
+    },
+  });
+}
+
+export async function GET(req: Request, context: any) {
   const { id } = context.params;
 
   // 1) Cookie → userId
@@ -14,7 +21,7 @@ export async function GET(
   const match = cookie.match(/session_user=([^;]+)/);
 
   if (!match) {
-    return new NextResponse("Unauthorized", { status: 401 });
+    return new Response("Unauthorized", { status: 401 });
   }
 
   const userId = match[1];
@@ -28,14 +35,14 @@ export async function GET(
     [userId]
   );
 
-  if (!userRows.length) {
-    return new NextResponse("Unauthorized", { status: 401 });
+  if (!Array.isArray(userRows) || userRows.length === 0) {
+    return new Response("Unauthorized", { status: 401 });
   }
 
   const user = userRows[0];
 
   if (user.is_premium !== 1) {
-    return new NextResponse("Forbidden", { status: 403 });
+    return new Response("Forbidden", { status: 403 });
   }
 
   // 3) Videó lekérése DB-ből
@@ -47,8 +54,8 @@ export async function GET(
     [id]
   );
 
-  if (!videoRows.length) {
-    return new NextResponse("Not found", { status: 404 });
+  if (!Array.isArray(videoRows) || videoRows.length === 0) {
+    return new Response("Not found", { status: 404 });
   }
 
   const video = videoRows[0];
@@ -57,7 +64,7 @@ export async function GET(
   const filePath = `/var/www/utom/private/videos/${filename}`;
 
   if (!fs.existsSync(filePath)) {
-    return new NextResponse("File missing", { status: 404 });
+    return new Response("File missing", { status: 404 });
   }
 
   // 4) Range header (tekerés)
@@ -71,9 +78,10 @@ export async function GET(
     const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
     const chunkSize = end - start + 1;
 
-    const file = fs.createReadStream(filePath, { start, end });
+    const nodeStream = fs.createReadStream(filePath, { start, end });
+    const webStream = nodeStreamToWebStream(nodeStream);
 
-    return new NextResponse(file as any, {
+    return new Response(webStream, {
       status: 206,
       headers: {
         "Content-Range": `bytes ${start}-${end}/${fileSize}`,
@@ -85,9 +93,10 @@ export async function GET(
   }
 
   // 5) Teljes videó stream
-  const file = fs.createReadStream(filePath);
+  const nodeStream = fs.createReadStream(filePath);
+  const webStream = nodeStreamToWebStream(nodeStream);
 
-  return new NextResponse(file as any, {
+  return new Response(webStream, {
     status: 200,
     headers: {
       "Content-Length": fileSize.toString(),
