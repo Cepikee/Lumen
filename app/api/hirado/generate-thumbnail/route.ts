@@ -33,8 +33,9 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Video not found" }, { status: 404 });
   }
 
-  const fileUrl = rows[0].file_url;
-  const videoPath = path.join(process.cwd(), "public", "videos", fileUrl);
+  // 🔥 NEM nyúlunk hozzá, abszolút pathként használjuk
+  const fileUrl: string = rows[0].file_url;
+  const videoPath = fileUrl; // már teljes abszolút útvonal
 
   try {
     const thumbnailUrl = await generateThumbnail(videoPath, `thumb_${id}`);
@@ -46,6 +47,9 @@ export async function GET(req: Request) {
 
     return NextResponse.json({ success: true, thumbnail: thumbnailUrl });
   } catch (err) {
-    return NextResponse.json({ error: "FFmpeg error", details: String(err) });
+    return NextResponse.json(
+      { error: "FFmpeg error", details: String(err) },
+      { status: 500 }
+    );
   }
 }
