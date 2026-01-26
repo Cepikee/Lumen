@@ -1,4 +1,3 @@
-// components/HiradoLayout2026.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -7,7 +6,12 @@ import HiradoPlayerWrapper from "@/app/hirado/HiradoPlayerWrapper";
 import HiradoArchiveSlider from "@/components/HiradoArchiveSlider";
 
 type HiradoLayoutProps = {
-  video?: { id: number; fileUrl: string; title?: string; date?: string };
+  video?: { 
+    id: number; 
+    title?: string; 
+    date?: string; 
+    thumbnailUrl?: string;
+  };
   user: { isPremium: boolean };
 };
 
@@ -40,7 +44,8 @@ export default function HiradoLayout2026({ video, user }: HiradoLayoutProps) {
 
   const activeTheme = theme === "system" ? systemTheme : theme;
 
-  const safeVideo = video ?? { id: 0, fileUrl: "" };
+  // ❌ Nincs több fileUrl
+  const safeVideo = video ?? { id: 0 };
 
   return (
     <div>

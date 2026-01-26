@@ -10,7 +10,6 @@ export async function GET() {
           date, 
           title, 
           description, 
-          file_url,
           thumbnail_url
        FROM videos 
        WHERE date = CURDATE() 
@@ -30,14 +29,7 @@ export async function GET() {
         date: v.date,
         title: v.title,
         description: v.description,
-
-        // 🔥 Videó URL → publikus
-        fileUrl: v.file_url?.replace("/var/www/utom/public", ""),
-
-        // 🔥 Thumbnail URL → publikus
-        thumbnailUrl: v.thumbnail_url
-          ? v.thumbnail_url.replace("/var/www/utom/public", "")
-          : null,
+        thumbnailUrl: v.thumbnail_url || null,
       },
     });
 

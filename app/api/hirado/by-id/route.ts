@@ -18,7 +18,6 @@ export async function GET(req: Request) {
         id, 
         title, 
         date, 
-        file_url,
         thumbnail_url
      FROM videos 
      WHERE id = ? 
@@ -38,14 +37,7 @@ export async function GET(req: Request) {
       id: v.id,
       title: v.title,
       date: v.date,
-
-      // 🔥 file_url → fileUrl (publikus)
-      fileUrl: v.file_url?.replace("/var/www/utom/public", ""),
-
-      // 🔥 thumbnail_url → thumbnailUrl (publikus)
-      thumbnailUrl: v.thumbnail_url
-        ? v.thumbnail_url.replace("/var/www/utom/public", "")
-        : null,
+      thumbnailUrl: v.thumbnail_url || null,
     },
   });
 }

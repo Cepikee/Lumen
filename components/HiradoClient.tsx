@@ -43,14 +43,7 @@ export default function HiradoClient({ videoId }: { videoId?: string }) {
 
         const json = JSON.parse(text);
 
-        // 🔥 Itt javítjuk a file_url → fileUrl mezőt
-        if (json.video?.file_url) {
-          json.video.fileUrl = json.video.file_url.replace(
-            "/var/www/utom/public",
-            ""
-          );
-        }
-
+        // ❌ NINCS több fileUrl vagy file_url
         setData(json);
       } catch (err) {
         console.error("Híradó adat hiba:", err);

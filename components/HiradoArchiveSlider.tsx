@@ -6,7 +6,6 @@ type VideoItem = {
   id: number;
   title?: string;
   date: string;
-  fileUrl?: string;
   thumbnailUrl?: string; // 🔥 helyes mező
 };
 

@@ -7,10 +7,9 @@ import "plyr-react/plyr.css";
 type HiradoPlayerProps = {
   video: {
     id: number;
-    fileUrl?: string;
-    file_url?: string;
     title?: string;
     date?: string;
+    thumbnailUrl?: string;
   };
   isPremium: boolean;
 };
@@ -20,9 +19,8 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  // 🔥 Mindig levágjuk a szerver pathot → garantáltan működik
-  const rawSrc = video.fileUrl ?? video.file_url ?? "";
-  const videoSrc = rawSrc.replace("/var/www/utom/public", "");
+  // 🔥 Secure videóstream URL — nincs több fileUrl
+  const videoSrc = `/api/secure/video/${video.id}`;
 
   const handleTimeUpdate = async () => {
     if (blocked) return;
@@ -51,7 +49,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
                 type: "video",
                 sources: [
                   {
-                    src: videoSrc, // 🔥 Itt már mindig jó URL van
+                    src: videoSrc, // 🔥 Secure stream URL
                     type: "video/mp4",
                   },
                 ],
