@@ -121,7 +121,7 @@ export default function HiradoArchiveSlider() {
                 alt="Borítókép"
                 style={{
                   width: "100%",
-                  height: "auto",
+                  height: 80,
                   borderRadius: 6,
                   marginBottom: 8,
                   objectFit: "cover",
