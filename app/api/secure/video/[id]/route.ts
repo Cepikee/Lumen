@@ -19,9 +19,9 @@ function nodeStreamToWebStream(nodeStream: fs.ReadStream): ReadableStream {
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
-  const id = params.id;
+  const id = context.params.id;
 
   const url = new URL(req.url);
   let userId: string | null = null;
