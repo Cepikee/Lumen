@@ -19,7 +19,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  // 🔥 Secure videóstream URL — nincs több fileUrl
+  // 🔥 Secure videóstream URL
   const videoSrc = `/api/secure/video/${video.id}`;
 
   const handleTimeUpdate = async () => {
@@ -42,6 +42,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
     <div className="w-full max-w-3xl mx-auto">
       <Plyr
         ref={playerRef}
+        crossOrigin="use-credentials"   // 🔥 COOKIE-K KÜLDÉSE A SECURE STREAMHEZ
         source={
           blocked
             ? { type: "video", sources: [] }
@@ -49,7 +50,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
                 type: "video",
                 sources: [
                   {
-                    src: videoSrc, // 🔥 Secure stream URL
+                    src: videoSrc,
                     type: "video/mp4",
                   },
                 ],
