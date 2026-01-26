@@ -14,7 +14,12 @@ export async function GET(req: Request) {
   }
 
   const [rows] = await db.query<RowDataPacket[]>(
-    `SELECT id, title, date, file_url 
+    `SELECT 
+        id, 
+        title, 
+        date, 
+        file_url,
+        thumbnail_url
      FROM videos 
      WHERE id = ? 
      LIMIT 1`,
@@ -25,13 +30,22 @@ export async function GET(req: Request) {
     return NextResponse.json({ hasVideo: false });
   }
 
+  const v = rows[0];
+
   return NextResponse.json({
     hasVideo: true,
     video: {
-      id: rows[0].id,
-      fileUrl: rows[0].file_url,
-      title: rows[0].title,
-      date: rows[0].date,
+      id: v.id,
+      title: v.title,
+      date: v.date,
+
+      // 🔥 file_url → fileUrl (publikus)
+      fileUrl: v.file_url?.replace("/var/www/utom/public", ""),
+
+      // 🔥 thumbnail_url → thumbnailUrl (publikus)
+      thumbnailUrl: v.thumbnail_url
+        ? v.thumbnail_url.replace("/var/www/utom/public", "")
+        : null,
     },
   });
 }

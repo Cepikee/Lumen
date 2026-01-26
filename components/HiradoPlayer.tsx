@@ -20,11 +20,13 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  const videoSrc = video.fileUrl ?? video.file_url ?? "";
+  // 🔥 Mindig levágjuk a szerver pathot → garantáltan működik
+  const rawSrc = video.fileUrl ?? video.file_url ?? "";
+  const videoSrc = rawSrc.replace("/var/www/utom/public", "");
 
   const handleTimeUpdate = async () => {
     if (blocked) return;
-    if (isPremium) return; // 🔥 PRÉMIUM → NINCS ELLENŐRZÉS
+    if (isPremium) return; // 🔥 Prémium → nincs korlátozás
 
     const res = await fetch(`/api/hirado/can-watch?videoId=${video.id}`, {
       credentials: "include",
@@ -49,7 +51,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
                 type: "video",
                 sources: [
                   {
-                    src: videoSrc,
+                    src: videoSrc, // 🔥 Itt már mindig jó URL van
                     type: "video/mp4",
                   },
                 ],

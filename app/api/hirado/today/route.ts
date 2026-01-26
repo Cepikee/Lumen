@@ -5,24 +5,40 @@ import type { RowDataPacket } from "mysql2";
 export async function GET() {
   try {
     const [rows] = await db.query<RowDataPacket[]>(
-      "SELECT id, date, title, description, file_url FROM videos WHERE date = CURDATE() LIMIT 1"
+      `SELECT 
+          id, 
+          date, 
+          title, 
+          description, 
+          file_url,
+          thumbnail_url
+       FROM videos 
+       WHERE date = CURDATE() 
+       LIMIT 1`
     );
 
     if (!rows || rows.length === 0) {
       return NextResponse.json({ hasVideo: false });
     }
 
-    const video = rows[0] as RowDataPacket;
+    const v = rows[0];
 
     return NextResponse.json({
       hasVideo: true,
       video: {
-        id: video.id,
-        date: video.date,
-        title: video.title,
-        description: video.description,
-        fileUrl: video.file_url.replace("/var/www/utom/public", "")
-      }
+        id: v.id,
+        date: v.date,
+        title: v.title,
+        description: v.description,
+
+        // 🔥 Videó URL → publikus
+        fileUrl: v.file_url?.replace("/var/www/utom/public", ""),
+
+        // 🔥 Thumbnail URL → publikus
+        thumbnailUrl: v.thumbnail_url
+          ? v.thumbnail_url.replace("/var/www/utom/public", "")
+          : null,
+      },
     });
 
   } catch (err) {
