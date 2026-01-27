@@ -1,38 +1,25 @@
 import fs from "fs";
 import path from "path";
-import { db } from "@/lib/db";
+import express from "express";
+import { db } from "./db.js"; // vagy ahol a DB-d van
 
-function nodeStreamToWebStream(nodeStream) {
-  return new ReadableStream({
-    start(controller) {
-      nodeStream.on("data", (chunk) => {
-        controller.enqueue(new Uint8Array(chunk));
-      });
-      nodeStream.on("end", () => controller.close());
-      nodeStream.on("error", (err) => controller.error(err));
-    },
-    cancel() {
-      nodeStream.destroy();
-    },
-  });
-}
+const router = express.Router();
 
-export async function GET(req, context) {
-  const id = context.params.id;
+router.get("/api/secure/video/:id", async (req, res) => {
+  const id = req.params.id;
 
-  const url = new URL(req.url);
   let userId = null;
 
   // Debug bypass
-  if (url.searchParams.get("debug") === "true") {
+  if (req.query.debug === "true") {
     userId = "1";
   }
 
   // Cookie auth
   if (!userId) {
-    const cookie = req.headers.get("cookie") || "";
+    const cookie = req.headers.cookie || "";
     const match = cookie.match(/session_user=([^;]+)/);
-    if (!match) return new Response("Unauthorized", { status: 401 });
+    if (!match) return res.status(401).send("Unauthorized");
     userId = match[1];
   }
 
@@ -43,12 +30,12 @@ export async function GET(req, context) {
   );
 
   if (!Array.isArray(userRows) || userRows.length === 0) {
-    return new Response("Unauthorized", { status: 401 });
+    return res.status(401).send("Unauthorized");
   }
 
   const user = userRows[0];
   if (user.is_premium !== 1) {
-    return new Response("Forbidden", { status: 403 });
+    return res.status(403).send("Forbidden");
   }
 
   // Video lookup
@@ -58,7 +45,7 @@ export async function GET(req, context) {
   );
 
   if (!Array.isArray(videoRows) || videoRows.length === 0) {
-    return new Response("Not found", { status: 404 });
+    return res.status(404).send("Not found");
   }
 
   const video = videoRows[0];
@@ -66,12 +53,12 @@ export async function GET(req, context) {
   const filePath = `/var/www/utom/private/videos/${filename}`;
 
   if (!fs.existsSync(filePath)) {
-    return new Response("File missing", { status: 404 });
+    return res.status(404).send("File missing");
   }
 
-  const range = req.headers.get("range");
   const stat = fs.statSync(filePath);
   const fileSize = stat.size;
+  const range = req.headers.range;
 
   // Range streaming
   if (range) {
@@ -80,29 +67,26 @@ export async function GET(req, context) {
     const end = parts[1] ? Number(parts[1]) : fileSize - 1;
 
     const chunkSize = end - start + 1;
-    const nodeStream = fs.createReadStream(filePath, { start, end });
-    const webStream = nodeStreamToWebStream(nodeStream);
+    const file = fs.createReadStream(filePath, { start, end });
 
-    return new Response(webStream, {
-      status: 206,
-      headers: {
-        "Content-Range": `bytes ${start}-${end}/${fileSize}`,
-        "Accept-Ranges": "bytes",
-        "Content-Length": String(chunkSize),
-        "Content-Type": "video/mp4",
-      },
+    res.writeHead(206, {
+      "Content-Range": `bytes ${start}-${end}/${fileSize}`,
+      "Accept-Ranges": "bytes",
+      "Content-Length": chunkSize,
+      "Content-Type": "video/mp4",
     });
+
+    file.pipe(res);
+    return;
   }
 
   // Full file streaming
-  const nodeStream = fs.createReadStream(filePath);
-  const webStream = nodeStreamToWebStream(nodeStream);
-
-  return new Response(webStream, {
-    status: 200,
-    headers: {
-      "Content-Length": String(fileSize),
-      "Content-Type": "video/mp4",
-    },
+  res.writeHead(200, {
+    "Content-Length": fileSize,
+    "Content-Type": "video/mp4",
   });
-}
+
+  fs.createReadStream(filePath).pipe(res);
+});
+
+export default router;
