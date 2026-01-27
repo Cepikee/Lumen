@@ -112,6 +112,11 @@ const server = http.createServer(async (req, res) => {
   const id = req.url.split("/").pop().split("?")[0];
   videoIdForLog = id;
 
+  // 🔧 FIX: ha undefined → legyen 0 (system value)
+  if (!videoIdForLog || videoIdForLog === "undefined") {
+    videoIdForLog = 0;
+  }
+
   if (!verifyToken(parsedUrl.query)) {
     await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
     res.writeHead(403);
