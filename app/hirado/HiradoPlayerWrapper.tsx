@@ -19,7 +19,7 @@ export default function HiradoPlayerWrapper({
     <HiradoPlayer
       video={video}
       isPremium={isPremium}
-      videoUrl={videoUrl} // 🔥 TOVÁBBADJUK A SIGNED URL-T
+      videoUrl={videoUrl} // 🔥 EZ VOLT A HIBA — MOST MÁR TOVÁBBADJUK
     />
   );
 }
