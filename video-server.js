@@ -1,7 +1,7 @@
 import http from "http";
 import fs from "fs";
 import path from "path";
-import { db } from "./lib/db.js";
+import { db } from "./lib/db-node.js";
 
 const server = http.createServer(async (req, res) => {
   if (!req.url.startsWith("/api/secure/video/")) {
