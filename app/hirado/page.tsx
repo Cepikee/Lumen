@@ -21,7 +21,8 @@ function signVideoUrl(videoId: string, userId: string) {
     s: signature,
   });
 
-  return `/api/secure/video?${params.toString()}`;
+  // 🔥 JAVÍTOTT SOR — a videoId bekerül az URL-be
+  return `/api/secure/video/${videoId}?${params.toString()}`;
 }
 
 export default async function HiradoPage({ searchParams }: any) {
