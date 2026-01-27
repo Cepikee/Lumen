@@ -18,8 +18,8 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  // 🔥 A videó mostantól a külön Node szerverről jön
-  const videoSrc = `http://utom.hu:3001/api/secure/video/${video.id}`;
+  // 🔥 Végleges, Nginx proxyn átmenő URL
+  const videoSrc = `/api/secure/video/${video.id}`;
 
   const handleTimeUpdate = async () => {
     if (blocked) return;
