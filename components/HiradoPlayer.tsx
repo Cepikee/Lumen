@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Plyr } from "plyr-react";
 import "plyr-react/plyr.css";
 
-type HiradoPlayerProps = {
+export type HiradoPlayerProps = {
   video: {
     id: number;
     title?: string;
@@ -12,14 +12,17 @@ type HiradoPlayerProps = {
     thumbnailUrl?: string;
   };
   isPremium: boolean;
-  videoUrl: string; // 🔥 HOZZÁADVA
+  videoUrl: string;
 };
 
-export default function HiradoPlayer({ video, isPremium, videoUrl }: HiradoPlayerProps) {
+export default function HiradoPlayer({
+  video,
+  isPremium,
+  videoUrl,
+}: HiradoPlayerProps) {
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  // 🔥 A régi videoSrc helyett a signed URL-t használjuk
   const videoSrc = videoUrl;
 
   const handleTimeUpdate = async () => {
@@ -45,7 +48,7 @@ export default function HiradoPlayer({ video, isPremium, videoUrl }: HiradoPlaye
           type: "video",
           sources: [
             {
-              src: videoSrc, // 🔥 SIGNED URL ITT KERÜL BE
+              src: videoSrc,
               type: "video/mp4",
             },
           ],

@@ -1,25 +1,23 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import type { HiradoPlayerProps } from "@/components/HiradoPlayer";
 
-const HiradoPlayer = dynamic(() => import("@/components/HiradoPlayer"), {
-  ssr: false,
-});
+const HiradoPlayer = dynamic<HiradoPlayerProps>(
+  () => import("@/components/HiradoPlayer"),
+  { ssr: false }
+);
 
 export default function HiradoPlayerWrapper({
   video,
   isPremium,
   videoUrl,
-}: {
-  video: any;
-  isPremium: boolean;
-  videoUrl: string;
-}) {
+}: HiradoPlayerProps) {
   return (
     <HiradoPlayer
       video={video}
       isPremium={isPremium}
-      videoUrl={videoUrl} // 🔥 EZ VOLT A HIBA — MOST MÁR TOVÁBBADJUK
+      videoUrl={videoUrl}
     />
   );
 }
