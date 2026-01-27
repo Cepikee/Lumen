@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Plyr from "plyr";
-import "plyr/dist/plyr.css";
+import { useState } from "react";
+import { Plyr } from "plyr-react";
+import "plyr-react/plyr.css";
 
 type HiradoPlayerProps = {
   video: {
@@ -15,32 +15,10 @@ type HiradoPlayerProps = {
 };
 
 export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const playerRef = useRef<Plyr | null>(null);
-
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
   const videoSrc = `/api/secure/video/${video.id}`;
-
-  useEffect(() => {
-    if (videoRef.current) {
-      playerRef.current = new Plyr(videoRef.current, {
-        controls: [
-          "play",
-          "progress",
-          "current-time",
-          "mute",
-          "volume",
-          "fullscreen",
-        ],
-      });
-    }
-
-    return () => {
-      playerRef.current?.destroy();
-    };
-  }, [video.id]);
 
   const handleTimeUpdate = async () => {
     if (blocked) return;
@@ -55,19 +33,32 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
     if (!data.canWatch) {
       setBlocked(true);
       setShowPremiumModal(true);
-      videoRef.current?.pause();
     }
   };
 
   return (
     <div className="w-full max-w-3xl mx-auto">
-      <video
-        ref={videoRef}
-        src={videoSrc}
-        controls
-        crossOrigin="use-credentials"   // 🔥 COOKIE-K KÜLDÉSE ITT
+      <Plyr
+        source={{
+          type: "video",
+          sources: [
+            {
+              src: videoSrc,
+              type: "video/mp4",
+            },
+          ],
+        }}
+        options={{
+          controls: [
+            "play",
+            "progress",
+            "current-time",
+            "mute",
+            "volume",
+            "fullscreen",
+          ],
+        }}
         onTimeUpdate={handleTimeUpdate}
-        style={{ width: "100%", borderRadius: "12px" }}
       />
 
       {showPremiumModal && (
