@@ -10,18 +10,45 @@ const VIDEO_SIGN_SECRET =
   process.env.VIDEO_SIGN_SECRET ||
   "3f9c1e8b7a2d4f0c9e1a7b3d6c4f8e2a5d7c9b1e3f6a8d4c7b2e9f1a3c5d7e9";
 
+// 🔐 Engedélyezett origin / referer
+const ALLOWED_ORIGINS = [
+  "https://utom.hu",
+  "https://www.utom.hu",
+  "http://localhost:3000",
+];
+
+// 🔐 IP kinyerése reverse proxy mögül is
+const getClientIp = (req) => {
+  const xf = req.headers["x-forwarded-for"];
+  if (xf) return xf.split(",")[0].trim();
+  return req.socket.remoteAddress || "";
+};
+
+// 🔐 Video access log helper
+async function logVideoAccess(userId, videoId, ip, status) {
+  try {
+    await db.query(
+      "INSERT INTO video_access_logs (user_id, video_id, ip, status) VALUES (?, ?, ?, ?)",
+      [userId || 0, videoId || 0, ip || "", status]
+    );
+  } catch (err) {
+    console.error("video_access_logs insert failed:", err);
+  }
+}
+
+// 🔐 Rate limiting bucket
+const rateBuckets = new Map();
+
 // 🔐 Token ellenőrzés — MOSTANTÓL TILT IS
 function verifyToken(query) {
   const { v, u, e, s } = query || {};
   console.log("Incoming token params:", query);
 
-  // Debug mód → mindent átenged
   if (query.debug === "true") {
     console.log("DEBUG MODE → token bypass");
     return true;
   }
 
-  // Ha bármi hiányzik → TILTÁS
   if (!v || !u || !e || !s) {
     console.log("Missing token parts → DENY");
     return false;
@@ -60,15 +87,36 @@ const server = http.createServer(async (req, res) => {
     return res.end("Not found");
   }
 
-  // 🔐 Token ellenőrzés — MOSTANTÓL TILT
+  const ip = getClientIp(req);
+  let accessStatus = "denied";
+  let userIdForLog = null;
+  let videoIdForLog = null;
+
+  // 🔐 Anti-hotlinking – csak saját domainről
+  const referer = req.headers.referer || "";
+  const origin = req.headers.origin || "";
+  const source = origin || referer || "";
+  const allowedOrigin = ALLOWED_ORIGINS.some((base) =>
+    source.startsWith(base)
+  );
+
+  if (!allowedOrigin && !req.url.includes("debug=true")) {
+    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
+    res.writeHead(403);
+    return res.end("Forbidden (hotlink)");
+  }
+
+  // 🔐 Token ellenőrzés
   const parsedUrl = url.parse(req.url, true);
 
+  const id = req.url.split("/").pop().split("?")[0];
+  videoIdForLog = id;
+
   if (!verifyToken(parsedUrl.query)) {
+    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
     res.writeHead(403);
     return res.end("Forbidden (invalid token)");
   }
-
-  const id = req.url.split("/").pop().split("?")[0];
 
   let userId = null;
 
@@ -80,20 +128,50 @@ const server = http.createServer(async (req, res) => {
     const cookie = req.headers.cookie || "";
     const match = cookie.match(/session_user=([^;]+)/);
     if (!match) {
+      await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
       res.writeHead(401);
       return res.end("Unauthorized");
     }
     userId = match[1];
   }
 
+  userIdForLog = userId;
+
+  // 🔐 RATE LIMITING (5 mp alatt max 20 kérés)
+  const key = `${userId}:${ip}`;
+  const now = Date.now();
+  const windowMs = 5000;
+  const limit = 20;
+
+  let bucket = rateBuckets.get(key) || [];
+  bucket = bucket.filter((ts) => now - ts < windowMs);
+  bucket.push(now);
+  rateBuckets.set(key, bucket);
+
+  if (bucket.length > limit) {
+    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
+    res.writeHead(429);
+    return res.end("Too many requests");
+  }
+
   const [userRows] = await db.query(
-    "SELECT id, is_premium FROM users WHERE id = ? LIMIT 1",
+    "SELECT id, is_premium, last_ip FROM users WHERE id = ? LIMIT 1",
     [userId]
   );
 
   if (!userRows.length || userRows[0].is_premium !== 1) {
+    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
     res.writeHead(403);
     return res.end("Forbidden");
+  }
+
+  // 🔐 IP + session kötés
+  const storedIp = userRows[0].last_ip;
+
+  if (storedIp && storedIp !== ip) {
+    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
+    res.writeHead(403);
+    return res.end("IP mismatch (session locked)");
   }
 
   const [videoRows] = await db.query(
@@ -102,6 +180,7 @@ const server = http.createServer(async (req, res) => {
   );
 
   if (!videoRows.length) {
+    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
     res.writeHead(404);
     return res.end("Not found");
   }
@@ -110,6 +189,7 @@ const server = http.createServer(async (req, res) => {
   const filePath = `/var/www/utom/private/videos/${filename}`;
 
   if (!fs.existsSync(filePath)) {
+    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
     res.writeHead(404);
     return res.end("File missing");
   }
@@ -130,6 +210,9 @@ const server = http.createServer(async (req, res) => {
       "Content-Type": "video/mp4",
     });
 
+    accessStatus = "allowed";
+    await logVideoAccess(userIdForLog, videoIdForLog, ip, accessStatus);
+
     fs.createReadStream(filePath, { start, end }).pipe(res);
     return;
   }
@@ -138,6 +221,9 @@ const server = http.createServer(async (req, res) => {
     "Content-Length": fileSize,
     "Content-Type": "video/mp4",
   });
+
+  accessStatus = "allowed";
+  await logVideoAccess(userIdForLog, videoIdForLog, ip, accessStatus);
 
   fs.createReadStream(filePath).pipe(res);
 });

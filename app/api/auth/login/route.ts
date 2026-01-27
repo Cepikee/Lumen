@@ -97,6 +97,12 @@ export async function POST(req: Request) {
       user.id,
     ]);
 
+    // 🔐 IP + session kötés — ITT MENTJÜK EL A USER IP-JÉT
+    await db.query("UPDATE users SET last_ip = ? WHERE id = ?", [
+      ip,
+      user.id,
+    ]);
+
     const maxAge = rememberMe
       ? 60 * 60 * 24 * 30
       : 60 * 60 * 24;
