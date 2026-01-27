@@ -13,9 +13,10 @@ type HiradoLayoutProps = {
     thumbnailUrl?: string;
   };
   user: { isPremium: boolean };
+  videoUrl: string; // 🔥 HOZZÁADVA
 };
 
-export default function HiradoLayout2026({ video, user }: HiradoLayoutProps) {
+export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayoutProps) {
   const today = new Date().toLocaleDateString("hu-HU");
 
   const theme = useUserStore((s) => s.theme);
@@ -61,6 +62,7 @@ export default function HiradoLayout2026({ video, user }: HiradoLayoutProps) {
               <HiradoPlayerWrapper
                 video={safeVideo}
                 isPremium={user.isPremium}
+                videoUrl={videoUrl} // 🔥 ÁTADJUK A SIGNED URL-T
               />
             </div>
           </div>

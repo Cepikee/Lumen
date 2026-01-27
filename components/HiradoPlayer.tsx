@@ -12,14 +12,15 @@ type HiradoPlayerProps = {
     thumbnailUrl?: string;
   };
   isPremium: boolean;
+  videoUrl: string; // 🔥 HOZZÁADVA
 };
 
-export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
+export default function HiradoPlayer({ video, isPremium, videoUrl }: HiradoPlayerProps) {
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  // 🔥 Végleges, Nginx proxyn átmenő URL
-  const videoSrc = `/api/secure/video/${video.id}`;
+  // 🔥 A régi videoSrc helyett a signed URL-t használjuk
+  const videoSrc = videoUrl;
 
   const handleTimeUpdate = async () => {
     if (blocked) return;
@@ -44,7 +45,7 @@ export default function HiradoPlayer({ video, isPremium }: HiradoPlayerProps) {
           type: "video",
           sources: [
             {
-              src: videoSrc,
+              src: videoSrc, // 🔥 SIGNED URL ITT KERÜL BE
               type: "video/mp4",
             },
           ],

@@ -1,12 +1,71 @@
 import http from "http";
 import fs from "fs";
 import path from "path";
+import url from "url";
+import crypto from "crypto";
 import { db } from "./lib/db-node.js";
+
+// 🔐 Secret betöltése
+const VIDEO_SIGN_SECRET =
+  process.env.VIDEO_SIGN_SECRET ||
+  "3f9c1e8b7a2d4f0c9e1a7b3d6c4f8e2a5d7c9b1e3f6a8d4c7b2e9f1a3c5d7e9";
+
+// 🔐 Token ellenőrzés — MOSTANTÓL TILT IS
+function verifyToken(query) {
+  const { v, u, e, s } = query || {};
+  console.log("Incoming token params:", query);
+
+  // Debug mód → mindent átenged
+  if (query.debug === "true") {
+    console.log("DEBUG MODE → token bypass");
+    return true;
+  }
+
+  // Ha bármi hiányzik → TILTÁS
+  if (!v || !u || !e || !s) {
+    console.log("Missing token parts → DENY");
+    return false;
+  }
+
+  const expires = parseInt(e, 10);
+  if (Number.isNaN(expires)) {
+    console.log("Invalid expires → DENY");
+    return false;
+  }
+
+  const now = Math.floor(Date.now() / 1000);
+  if (now > expires) {
+    console.log("Token expired → DENY");
+    return false;
+  }
+
+  const payload = `${v}:${u}:${e}`;
+  const expected = crypto
+    .createHmac("sha256", VIDEO_SIGN_SECRET)
+    .update(payload)
+    .digest("hex");
+
+  if (expected !== s) {
+    console.log("Bad signature → DENY");
+    return false;
+  }
+
+  console.log("Token OK");
+  return true;
+}
 
 const server = http.createServer(async (req, res) => {
   if (!req.url.startsWith("/api/secure/video/")) {
     res.writeHead(404);
     return res.end("Not found");
+  }
+
+  // 🔐 Token ellenőrzés — MOSTANTÓL TILT
+  const parsedUrl = url.parse(req.url, true);
+
+  if (!verifyToken(parsedUrl.query)) {
+    res.writeHead(403);
+    return res.end("Forbidden (invalid token)");
   }
 
   const id = req.url.split("/").pop().split("?")[0];

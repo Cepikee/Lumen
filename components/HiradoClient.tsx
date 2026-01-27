@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 import HiradoLayout2026 from "@/components/HiradoLayout2026";
 import { useUserStore } from "@/store/useUserStore";
 
-export default function HiradoClient({ videoId }: { videoId?: string }) {
+export default function HiradoClient({
+  videoId,
+  videoUrl,
+}: {
+  videoId?: string;
+  videoUrl: string;
+}) {
   const [data, setData] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
 
@@ -43,7 +49,8 @@ export default function HiradoClient({ videoId }: { videoId?: string }) {
 
         const json = JSON.parse(text);
 
-        // ❌ NINCS több fileUrl vagy file_url
+        // 🔥 A videó URL-t NEM innen vesszük többé
+        // A signed URL-t a szerver oldalon generáljuk
         setData(json);
       } catch (err) {
         console.error("Híradó adat hiba:", err);
@@ -90,5 +97,6 @@ export default function HiradoClient({ videoId }: { videoId?: string }) {
     return <div className="p-6">Betöltés...</div>;
   }
 
-  return <HiradoLayout2026 video={data.video} user={user} />;
+  // 🔥 A HiradoLayout2026 mostantól megkapja a signed videoUrl-t
+  return <HiradoLayout2026 video={data.video} user={user} videoUrl={videoUrl} />;
 }
