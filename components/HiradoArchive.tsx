@@ -19,7 +19,7 @@ export default function HiradoArchive() {
 
   if (!videos.length) {
     return (
-      <div className="mt-4 opacity-60">
+      <div className="opacity-60 mt-4">
         Nincs archív híradó.
       </div>
     );

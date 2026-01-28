@@ -19,7 +19,6 @@ type HiradoLayoutProps = {
 
 export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayoutProps) {
   const today = new Date().toLocaleDateString("hu-HU");
-
   const theme = useUserStore((s) => s.theme);
 
   const [systemTheme, setSystemTheme] = useState<"dark" | "light">(() =>
@@ -29,7 +28,17 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
       : "light"
   );
 
+  // 🔥 Nézetváltó
   const [view, setView] = useState<"slider" | "list">("slider");
+
+  // 🔥 Scroll pozíció megőrzése
+  const [savedScroll, setSavedScroll] = useState(0);
+
+  const switchView = (mode: "slider" | "list") => {
+    setSavedScroll(window.scrollY);
+    setView(mode);
+    setTimeout(() => window.scrollTo(0, savedScroll), 0);
+  };
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -37,17 +46,16 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
     const handler = (e: MediaQueryListEvent) =>
       setSystemTheme(e.matches ? "dark" : "light");
 
-    if (mq.addEventListener) mq.addEventListener("change", handler);
-    else mq.addListener(handler);
+    mq.addEventListener?.("change", handler);
+    mq.addListener?.(handler);
 
     return () => {
-      if (mq.removeEventListener) mq.removeEventListener("change", handler);
-      else mq.removeListener(handler);
+      mq.removeEventListener?.("change", handler);
+      mq.removeListener?.(handler);
     };
   }, []);
 
   const activeTheme = theme === "system" ? systemTheme : theme;
-
   const safeVideo = video ?? { id: 0 };
 
   return (
@@ -59,19 +67,16 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
 
       <main>
         <div>
-          <div>
-            <div>
-              <HiradoPlayerWrapper
-                video={safeVideo}
-                isPremium={user.isPremium}
-                videoUrl={videoUrl}
-              />
-            </div>
-          </div>
+          <HiradoPlayerWrapper
+            video={safeVideo}
+            isPremium={user.isPremium}
+            videoUrl={videoUrl}
+          />
 
           <footer>
             <div style={{ marginTop: "2rem" }}>
-              {/* Archívum + pill váltó egy sorban */}
+              
+              {/* 🔥 ARCHÍVUM + PILL VÁLTÓ EGY SORBAN */}
               <div
                 style={{
                   display: "flex",
@@ -82,6 +87,7 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
               >
                 <h2 style={{ margin: 0 }}>Archívum</h2>
 
+                {/* 🔥 Egyetlen pill-gomb két állással */}
                 <div
                   style={{
                     display: "flex",
@@ -91,7 +97,7 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
                   }}
                 >
                   <button
-                    onClick={() => setView("slider")}
+                    onClick={() => switchView("slider")}
                     style={{
                       padding: "6px 14px",
                       border: "none",
@@ -103,8 +109,9 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
                   >
                     Slider
                   </button>
+
                   <button
-                    onClick={() => setView("list")}
+                    onClick={() => switchView("list")}
                     style={{
                       padding: "6px 14px",
                       border: "none",
@@ -119,14 +126,9 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
                 </div>
               </div>
 
-              {/* Nézetek */}
-              <div>
-                {view === "slider" && <HiradoArchiveSlider />}
-
-                {view === "list" && (
-                  <HiradoArchive />
-                )}
-              </div>
+              {/* 🔥 NÉZETEK */}
+              {view === "slider" && <HiradoArchiveSlider />}
+              {view === "list" && <HiradoArchive />}
             </div>
           </footer>
         </div>
