@@ -76,7 +76,6 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
             >
               <h2 style={{ margin: 0 }}>Archívum</h2>
 
-              {/* Egyetlen pill-gomb két állással */}
               <div
                 style={{
                   display: "flex",
@@ -115,23 +114,19 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
               </div>
             </div>
 
-            {/* SLIDE-SWITCH ANIMÁCIÓ */}
+            {/* UGRÁLÁSMENTES KONTAINER */}
             <div
               style={{
                 position: "relative",
                 overflow: "hidden",
-                minHeight: "260px", // slider magasság
               }}
             >
               {/* SLIDER nézet */}
               <div
                 style={{
-                  position: "absolute",
-                  inset: 0,
-                  transform: view === "slider"
-                    ? "translateX(0)"
-                    : "translateX(-100%)",
                   transition: "transform 0.25s ease",
+                  transform: view === "slider" ? "translateX(0)" : "translateX(-100%)",
+                  position: "relative",
                 }}
               >
                 <HiradoArchiveSlider />
@@ -140,12 +135,10 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
               {/* LISTA nézet */}
               <div
                 style={{
-                  position: "absolute",
-                  inset: 0,
-                  transform: view === "list"
-                    ? "translateX(0)"
-                    : "translateX(100%)",
                   transition: "transform 0.25s ease",
+                  transform: view === "list" ? "translateX(0)" : "translateX(100%)",
+                  position: "relative",
+                  marginTop: "-260px", // SLIDER magasságát ellensúlyozza
                 }}
               >
                 <HiradoArchive />
