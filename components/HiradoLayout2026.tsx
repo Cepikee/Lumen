@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useUserStore } from "@/store/useUserStore";
 import HiradoPlayerWrapper from "@/app/hirado/HiradoPlayerWrapper";
 import HiradoArchiveSlider from "@/components/HiradoArchiveSlider";
+import HiradoArchive from "@/components/HiradoArchive"; // 🔥 LISTA NÉZET
 
 type HiradoLayoutProps = {
   video?: { 
@@ -13,7 +14,7 @@ type HiradoLayoutProps = {
     thumbnailUrl?: string;
   };
   user: { isPremium: boolean };
-  videoUrl: string; // 🔥 HOZZÁADVA
+  videoUrl: string;
 };
 
 export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayoutProps) {
@@ -27,6 +28,9 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
       ? "dark"
       : "light"
   );
+
+  // 🔥 NÉZETVÁLTÓ ÁLLAPOT
+  const [view, setView] = useState<"slider" | "list">("slider");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -45,7 +49,6 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
 
   const activeTheme = theme === "system" ? systemTheme : theme;
 
-  // ❌ Nincs több fileUrl
   const safeVideo = video ?? { id: 0 };
 
   return (
@@ -62,7 +65,7 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
               <HiradoPlayerWrapper
                 video={safeVideo}
                 isPremium={user.isPremium}
-                videoUrl={videoUrl} // 🔥 ÁTADJUK A SIGNED URL-T
+                videoUrl={videoUrl}
               />
             </div>
           </div>
@@ -70,8 +73,44 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
           <footer>
             <div>
               <h2>Archívum</h2>
+
+              {/* 🔥 NÉZETVÁLTÓ GOMBOK */}
+              <div style={{ display: "flex", gap: "1rem", margin: "1rem 0" }}>
+                <button
+                  onClick={() => setView("slider")}
+                  style={{
+                    padding: "6px 14px",
+                    borderRadius: 8,
+                    background: view === "slider" ? "#00d4ff" : "#ddd",
+                    color: view === "slider" ? "#000" : "#333",
+                    fontWeight: 600,
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  Slider nézet
+                </button>
+
+                <button
+                  onClick={() => setView("list")}
+                  style={{
+                    padding: "6px 14px",
+                    borderRadius: 8,
+                    background: view === "list" ? "#00d4ff" : "#ddd",
+                    color: view === "list" ? "#000" : "#333",
+                    fontWeight: 600,
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  Lista nézet
+                </button>
+              </div>
+
+              {/* 🔥 NÉZETEK */}
               <div>
-                <HiradoArchiveSlider />
+                {view === "slider" && <HiradoArchiveSlider />}
+                {view === "list" && <HiradoArchive />}
               </div>
             </div>
           </footer>

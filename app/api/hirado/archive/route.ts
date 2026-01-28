@@ -10,7 +10,6 @@ export async function GET() {
         date, 
         thumbnail_url
      FROM videos
-     WHERE date < CURDATE()
      ORDER BY date DESC
      LIMIT 30`
   );
@@ -24,3 +23,4 @@ export async function GET() {
 
   return NextResponse.json({ videos });
 }
+
