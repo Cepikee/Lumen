@@ -8,7 +8,7 @@ export default function HiradoClient({
   videoId,
   videoUrl,
 }: {
-  videoId?: string;
+  videoId: number;
   videoUrl: string;
 }) {
   const [data, setData] = useState<any>(null);

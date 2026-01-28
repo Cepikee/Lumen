@@ -23,7 +23,7 @@ export default function HiradoPlayer({
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  const videoSrc = videoUrl;
+  const videoSrc = String(videoUrl);
 
   const handleTimeUpdate = async () => {
     if (blocked) return;

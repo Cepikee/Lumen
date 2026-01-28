@@ -1,11 +1,12 @@
 import crypto from "crypto";
 import { cookies } from "next/headers";
 import HiradoClient from "@/components/HiradoClient";
+import { db } from "@/lib/db-node";
 
 // 🔐 Signed URL generálás
-function signVideoUrl(videoId: string, userId: string) {
+function signVideoUrl(videoId: number, userId: string) {
   const secret = process.env.VIDEO_SIGN_SECRET!;
-  const ttl = 60; // 60 másodperc érvényesség
+  const ttl = 60;
   const expires = Math.floor(Date.now() / 1000) + ttl;
 
   const payload = `${videoId}:${userId}:${expires}`;
@@ -15,28 +16,30 @@ function signVideoUrl(videoId: string, userId: string) {
     .digest("hex");
 
   const params = new URLSearchParams({
-    v: videoId,
+    v: String(videoId),
     u: userId,
     e: String(expires),
     s: signature,
   });
 
-  // 🔥 JAVÍTOTT SOR — a videoId bekerül az URL-be
   return `/api/secure/video/${videoId}?${params.toString()}`;
 }
 
-export default async function HiradoPage({ searchParams }: any) {
-  const params = await searchParams;
-  const raw = params?.video;
-  const videoId = Array.isArray(raw) ? raw[0] : raw; // 🔥 string marad
+export default async function HiradoPage() {
+  // 🔥 Legfrissebb videó lekérése
+  const [rows]: any = await db.query(
+    "SELECT id, file_url FROM videos ORDER BY date DESC LIMIT 1"
+  );
 
-  // 🔐 User ID kinyerése a session cookie-ból
-  const cookieStore = await cookies(); // 🔥 hibajavítás: await kell
+  const video = rows[0];
+  const videoId = video.id;
+
+  // 🔐 User ID cookie-ból
+  const cookieStore = await cookies();
   const sessionUser = cookieStore.get("session_user");
-
   const userId = sessionUser?.value || null;
 
-  // 🔐 Signed URL generálása
+  // 🔐 Signed URL
   const videoUrl = userId
     ? signVideoUrl(videoId, userId)
     : `/api/secure/video/${videoId}?debug=true`;
