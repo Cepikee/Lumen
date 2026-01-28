@@ -1,0 +1,122 @@
+.page {
+  background: transparent;
+  color: #eaeaf0;
+  padding: 100px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: 1fr 2px 1fr;
+  gap: 48px;
+}
+
+.line {
+  background: linear-gradient(#af40ff, #00ddeb);
+  border-radius: 2px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 900;
+}
+
+.intro {
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+/* Quick message */
+.quickMessage {
+  margin-top: 32px;
+  padding: 24px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.quickTitle {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.input,
+.textarea {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #eaeaf0;
+  font-size: 14px;
+  outline: none;
+}
+
+.textarea {
+  resize: none;
+}
+
+.button {
+  margin-top: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, #af40ff, #00ddeb);
+  color: #0b0d12;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Right side items */
+.item {
+  display: flex;
+  gap: 16px;
+}
+
+.item.large {
+  margin-top: 32px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: #00ddeb;
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.email {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.sub {
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+ul {
+  margin-left: 18px;
+  line-height: 1.7;
+  opacity: 0.85;
+}
