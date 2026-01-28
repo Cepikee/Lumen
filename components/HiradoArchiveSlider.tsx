@@ -6,13 +6,16 @@ type VideoItem = {
   id: number;
   title?: string;
   date: string;
-  thumbnailUrl?: string; // 🔥 helyes mező
+  thumbnailUrl?: string;
 };
 
 export default function HiradoArchiveSlider() {
   const [videos, setVideos] = useState<VideoItem[]>([]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
+  // -------------------------------------------------------
+  // 1) ARCHÍV BETÖLTÉSE
+  // -------------------------------------------------------
   useEffect(() => {
     async function load() {
       try {
@@ -29,11 +32,36 @@ export default function HiradoArchiveSlider() {
     load();
   }, []);
 
-  const scrollLeft = () =>
-    scrollRef.current?.scrollBy({ left: -180, behavior: "smooth" });
-  const scrollRight = () =>
-    scrollRef.current?.scrollBy({ left: 180, behavior: "smooth" });
+  // -------------------------------------------------------
+  // 2) AUTOMATIKUS KÖZÉPRE GÖRGETÉS A LEGFRISSEBBRE
+  // -------------------------------------------------------
+  useEffect(() => {
+    if (!videos.length || !scrollRef.current) return;
 
+    // Rendezés dátum szerint (legfrissebb elöl)
+    const sorted = [...videos].sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+
+    // Featured kiválasztása
+    const todayIso = new Date().toISOString().split("T")[0];
+    const featured =
+      sorted.find((v) => (v.date || "").startsWith(todayIso)) || sorted[0];
+
+    // Featured index
+    const index = sorted.findIndex((v) => v.id === featured.id);
+
+    // Automatikus középre görgetés
+    const cardWidth = 148; // 140 + padding
+    scrollRef.current.scrollTo({
+      left: index * cardWidth - window.innerWidth / 2 + cardWidth / 2,
+      behavior: "smooth",
+    });
+  }, [videos]);
+
+  // -------------------------------------------------------
+  // 3) STÍLUSOK
+  // -------------------------------------------------------
   const wrapperStyle: React.CSSProperties = {
     position: "relative",
     width: "100%",
@@ -58,6 +86,7 @@ export default function HiradoArchiveSlider() {
     padding: "8px",
     borderRadius: 999,
     cursor: "pointer",
+    zIndex: 10,
   };
 
   const cardStyleBase: React.CSSProperties = {
@@ -77,10 +106,15 @@ export default function HiradoArchiveSlider() {
 
   const todayIso = new Date().toISOString().split("T")[0];
 
+  // -------------------------------------------------------
+  // 4) RENDER
+  // -------------------------------------------------------
   return (
     <div style={wrapperStyle}>
       <button
-        onClick={scrollLeft}
+        onClick={() =>
+          scrollRef.current?.scrollBy({ left: -180, behavior: "smooth" })
+        }
         aria-label="Előző"
         style={{ ...arrowStyle, left: 6 }}
       >
@@ -114,7 +148,6 @@ export default function HiradoArchiveSlider() {
                 (e.currentTarget.style.transform = "none")
               }
             >
-              {/* 🔥 Thumbnail kép — helyes mező */}
               <img
                 src={v.thumbnailUrl ?? "/icons/kep-placeholder.png"}
                 alt="Borítókép"
@@ -161,7 +194,9 @@ export default function HiradoArchiveSlider() {
       </div>
 
       <button
-        onClick={scrollRight}
+        onClick={() =>
+          scrollRef.current?.scrollBy({ left: 180, behavior: "smooth" })
+        }
         aria-label="Következő"
         style={{ ...arrowStyle, right: 6 }}
       >
