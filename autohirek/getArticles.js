@@ -10,8 +10,12 @@ async function getArticles() {
 
   // A summaries tábla a forrás
   const [rows] = await conn.execute(
-    "SELECT id, title, content, detailed_content FROM summaries ORDER BY id DESC LIMIT 10"
-  );
+  `SELECT id, title, content, detailed_content
+   FROM summaries
+   WHERE DATE(created_at) = CURDATE()
+   ORDER BY id DESC`
+);
+
 
   await conn.end();
   return rows;
