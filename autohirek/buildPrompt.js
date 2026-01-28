@@ -5,16 +5,20 @@ function buildDailyInput(articles) {
 
   return articles
     .map((a, i) => {
+      // 🔥 Kötelező rövidítés — stabil működés stream nélkül
+      const shortContent = (a.content || "").slice(0, 300);
+      const shortDetailed = (a.detailed_content || "").slice(0, 500);
+
       return `
 Cikk ${i + 1}
 ID: ${a.id}
 Cím: ${a.title || "Nincs cím"}
 
-Rövid összefoglaló:
-${a.content || "Nincs rövid összefoglaló"}
+Rövid összefoglaló (vágott):
+${shortContent || "Nincs rövid összefoglaló"}
 
-Részletes összefoglaló:
-${a.detailed_content || "Nincs részletes összefoglaló"}
+Részletes összefoglaló (vágott):
+${shortDetailed || "Nincs részletes összefoglaló"}
 `;
     })
     .join("\n-------------------------\n");
