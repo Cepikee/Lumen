@@ -114,33 +114,13 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
               </div>
             </div>
 
-            {/* UGRÁLÁSMENTES KONTAINER */}
-            <div
-              style={{
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              {/* SLIDER nézet */}
-              <div
-                style={{
-                  transition: "transform 0.25s ease",
-                  transform: view === "slider" ? "translateX(0)" : "translateX(-100%)",
-                  position: "relative",
-                }}
-              >
+            {/* NÉZETEK — NINCS ANIMÁCIÓ, NINCS TRANSLATE, NINCS UGRÁS */}
+            <div>
+              <div style={{ display: view === "slider" ? "block" : "none" }}>
                 <HiradoArchiveSlider />
               </div>
 
-              {/* LISTA nézet */}
-              <div
-                style={{
-                  transition: "transform 0.25s ease",
-                  transform: view === "list" ? "translateX(0)" : "translateX(100%)",
-                  position: "relative",
-                  marginTop: "-260px", // SLIDER magasságát ellensúlyozza
-                }}
-              >
+              <div style={{ display: view === "list" ? "block" : "none" }}>
                 <HiradoArchive />
               </div>
             </div>
