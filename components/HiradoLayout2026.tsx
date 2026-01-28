@@ -28,25 +28,8 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
       : "light"
   );
 
-  // 🔥 Nézetváltó
+  // Nézetváltó
   const [view, setView] = useState<"slider" | "list">("slider");
-
-  // 🔥 Scroll pozíció megőrzése
-  const [savedScroll, setSavedScroll] = useState(0);
-
-  const switchView = (mode: "slider" | "list") => {
-  const current = window.scrollY;
-  setSavedScroll(current);
-  setView(mode);
-
-  // 🔥 Várunk, amíg a DOM tényleg átváltott
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      window.scrollTo(0, current);
-    });
-  });
-};
-
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -63,7 +46,6 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
     };
   }, []);
 
-  const activeTheme = theme === "system" ? systemTheme : theme;
   const safeVideo = video ?? { id: 0 };
 
   return (
@@ -74,72 +56,104 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
       </header>
 
       <main>
-        <div>
-          <HiradoPlayerWrapper
-            video={safeVideo}
-            isPremium={user.isPremium}
-            videoUrl={videoUrl}
-          />
+        <HiradoPlayerWrapper
+          video={safeVideo}
+          isPremium={user.isPremium}
+          videoUrl={videoUrl}
+        />
 
-          <footer>
-            <div style={{ marginTop: "2rem" }}>
-              
-              {/* 🔥 ARCHÍVUM + PILL VÁLTÓ EGY SORBAN */}
+        <footer>
+          <div style={{ marginTop: "2rem" }}>
+
+            {/* ARCHÍVUM + pill váltó */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: "1rem",
+              }}
+            >
+              <h2 style={{ margin: 0 }}>Archívum</h2>
+
+              {/* Egyetlen pill-gomb két állással */}
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  marginBottom: "1rem",
+                  borderRadius: 999,
+                  overflow: "hidden",
+                  border: "1px solid #ccc",
                 }}
               >
-                <h2 style={{ margin: 0 }}>Archívum</h2>
-
-                {/* 🔥 Egyetlen pill-gomb két állással */}
-                <div
+                <button
+                  onClick={() => setView("slider")}
                   style={{
-                    display: "flex",
-                    borderRadius: 999,
-                    overflow: "hidden",
-                    border: "1px solid #ccc",
+                    padding: "6px 14px",
+                    border: "none",
+                    cursor: "pointer",
+                    background: view === "slider" ? "#00d4ff" : "transparent",
+                    color: view === "slider" ? "#000" : "#333",
+                    fontWeight: 600,
                   }}
                 >
-                  <button
-                    onClick={() => switchView("slider")}
-                    style={{
-                      padding: "6px 14px",
-                      border: "none",
-                      cursor: "pointer",
-                      background: view === "slider" ? "#00d4ff" : "transparent",
-                      color: view === "slider" ? "#000" : "#333",
-                      fontWeight: 600,
-                    }}
-                  >
-                    Slider
-                  </button>
+                  Slider
+                </button>
 
-                  <button
-                    onClick={() => switchView("list")}
-                    style={{
-                      padding: "6px 14px",
-                      border: "none",
-                      cursor: "pointer",
-                      background: view === "list" ? "#00d4ff" : "transparent",
-                      color: view === "list" ? "#000" : "#333",
-                      fontWeight: 600,
-                    }}
-                  >
-                    Lista
-                  </button>
-                </div>
+                <button
+                  onClick={() => setView("list")}
+                  style={{
+                    padding: "6px 14px",
+                    border: "none",
+                    cursor: "pointer",
+                    background: view === "list" ? "#00d4ff" : "transparent",
+                    color: view === "list" ? "#000" : "#333",
+                    fontWeight: 600,
+                  }}
+                >
+                  Lista
+                </button>
+              </div>
+            </div>
+
+            {/* SLIDE-SWITCH ANIMÁCIÓ */}
+            <div
+              style={{
+                position: "relative",
+                overflow: "hidden",
+                minHeight: "260px", // slider magasság
+              }}
+            >
+              {/* SLIDER nézet */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  transform: view === "slider"
+                    ? "translateX(0)"
+                    : "translateX(-100%)",
+                  transition: "transform 0.25s ease",
+                }}
+              >
+                <HiradoArchiveSlider />
               </div>
 
-              {/* 🔥 NÉZETEK */}
-              {view === "slider" && <HiradoArchiveSlider />}
-              {view === "list" && <HiradoArchive />}
+              {/* LISTA nézet */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  transform: view === "list"
+                    ? "translateX(0)"
+                    : "translateX(100%)",
+                  transition: "transform 0.25s ease",
+                }}
+              >
+                <HiradoArchive />
+              </div>
             </div>
-          </footer>
-        </div>
+
+          </div>
+        </footer>
       </main>
     </div>
   );
