@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useUserStore } from "@/store/useUserStore";
 import HiradoPlayerWrapper from "@/app/hirado/HiradoPlayerWrapper";
 import HiradoArchiveSlider from "@/components/HiradoArchiveSlider";
-import HiradoArchive from "@/components/HiradoArchive"; // 🔥 LISTA NÉZET
+import HiradoArchive from "@/components/HiradoArchive";
 
 type HiradoLayoutProps = {
   video?: { 
@@ -29,7 +29,7 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
       : "light"
   );
 
-  // 🔥 NÉZETVÁLTÓ ÁLLAPOT
+  // 🔥 NÉZETVÁLTÓ
   const [view, setView] = useState<"slider" | "list">("slider");
 
   useEffect(() => {
@@ -71,46 +71,71 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
           </div>
 
           <footer>
-            <div>
-              <h2>Archívum</h2>
+            <div style={{ marginTop: "2rem" }}>
+              {/* 🔥 ARCHÍVUM CÍM + NÉZETVÁLTÓ EGY SORBAN */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "1rem",
+                }}
+              >
+                <h2 style={{ margin: 0 }}>Archívum</h2>
 
-              {/* 🔥 NÉZETVÁLTÓ GOMBOK */}
-              <div style={{ display: "flex", gap: "1rem", margin: "1rem 0" }}>
-                <button
-                  onClick={() => setView("slider")}
-                  style={{
-                    padding: "6px 14px",
-                    borderRadius: 8,
-                    background: view === "slider" ? "#00d4ff" : "#ddd",
-                    color: view === "slider" ? "#000" : "#333",
-                    fontWeight: 600,
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  Slider nézet
-                </button>
+                <div style={{ display: "flex", gap: "0.5rem" }}>
+                  <button
+                    onClick={() => setView("slider")}
+                    style={{
+                      padding: "6px 14px",
+                      borderRadius: 8,
+                      background: view === "slider" ? "#00d4ff" : "#ddd",
+                      color: view === "slider" ? "#000" : "#333",
+                      fontWeight: 600,
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Slider
+                  </button>
 
-                <button
-                  onClick={() => setView("list")}
-                  style={{
-                    padding: "6px 14px",
-                    borderRadius: 8,
-                    background: view === "list" ? "#00d4ff" : "#ddd",
-                    color: view === "list" ? "#000" : "#333",
-                    fontWeight: 600,
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  Lista nézet
-                </button>
+                  <button
+                    onClick={() => setView("list")}
+                    style={{
+                      padding: "6px 14px",
+                      borderRadius: 8,
+                      background: view === "list" ? "#00d4ff" : "#ddd",
+                      color: view === "list" ? "#000" : "#333",
+                      fontWeight: 600,
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Lista
+                  </button>
+                </div>
               </div>
 
               {/* 🔥 NÉZETEK */}
               <div>
                 {view === "slider" && <HiradoArchiveSlider />}
-                {view === "list" && <HiradoArchive />}
+
+                {view === "list" && (
+                  <div>
+                    {/* 🔥 LISTA NÉZET FEJLÉC – 1 SORBAN */}
+                    <div
+                      style={{
+                        fontSize: "1.1rem",
+                        fontWeight: 600,
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      Utom Híradó: {today}
+                    </div>
+
+                    <HiradoArchive />
+                  </div>
+                )}
               </div>
             </div>
           </footer>
