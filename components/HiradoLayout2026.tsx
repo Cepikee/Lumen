@@ -35,10 +35,18 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
   const [savedScroll, setSavedScroll] = useState(0);
 
   const switchView = (mode: "slider" | "list") => {
-    setSavedScroll(window.scrollY);
-    setView(mode);
-    setTimeout(() => window.scrollTo(0, savedScroll), 0);
-  };
+  const current = window.scrollY;
+  setSavedScroll(current);
+  setView(mode);
+
+  // 🔥 Várunk, amíg a DOM tényleg átváltott
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.scrollTo(0, current);
+    });
+  });
+};
+
 
   useEffect(() => {
     if (typeof window === "undefined") return;
