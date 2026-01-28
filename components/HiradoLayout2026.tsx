@@ -29,7 +29,6 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
       : "light"
   );
 
-  // 🔥 NÉZETVÁLTÓ
   const [view, setView] = useState<"slider" | "list">("slider");
 
   useEffect(() => {
@@ -72,7 +71,7 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
 
           <footer>
             <div style={{ marginTop: "2rem" }}>
-              {/* 🔥 ARCHÍVUM CÍM + NÉZETVÁLTÓ EGY SORBAN */}
+              {/* Archívum + pill váltó egy sorban */}
               <div
                 style={{
                   display: "flex",
@@ -83,32 +82,36 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
               >
                 <h2 style={{ margin: 0 }}>Archívum</h2>
 
-                <div style={{ display: "flex", gap: "0.5rem" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    borderRadius: 999,
+                    overflow: "hidden",
+                    border: "1px solid #ccc",
+                  }}
+                >
                   <button
                     onClick={() => setView("slider")}
                     style={{
                       padding: "6px 14px",
-                      borderRadius: 8,
-                      background: view === "slider" ? "#00d4ff" : "#ddd",
-                      color: view === "slider" ? "#000" : "#333",
-                      fontWeight: 600,
                       border: "none",
                       cursor: "pointer",
+                      background: view === "slider" ? "#00d4ff" : "transparent",
+                      color: view === "slider" ? "#000" : "#333",
+                      fontWeight: 600,
                     }}
                   >
                     Slider
                   </button>
-
                   <button
                     onClick={() => setView("list")}
                     style={{
                       padding: "6px 14px",
-                      borderRadius: 8,
-                      background: view === "list" ? "#00d4ff" : "#ddd",
-                      color: view === "list" ? "#000" : "#333",
-                      fontWeight: 600,
                       border: "none",
                       cursor: "pointer",
+                      background: view === "list" ? "#00d4ff" : "transparent",
+                      color: view === "list" ? "#000" : "#333",
+                      fontWeight: 600,
                     }}
                   >
                     Lista
@@ -116,25 +119,12 @@ export default function HiradoLayout2026({ video, user, videoUrl }: HiradoLayout
                 </div>
               </div>
 
-              {/* 🔥 NÉZETEK */}
+              {/* Nézetek */}
               <div>
                 {view === "slider" && <HiradoArchiveSlider />}
 
                 {view === "list" && (
-                  <div>
-                    {/* 🔥 LISTA NÉZET FEJLÉC – 1 SORBAN */}
-                    <div
-                      style={{
-                        fontSize: "1.1rem",
-                        fontWeight: 600,
-                        marginBottom: "1rem",
-                      }}
-                    >
-                      Utom Híradó: {today}
-                    </div>
-
-                    <HiradoArchive />
-                  </div>
+                  <HiradoArchive />
                 )}
               </div>
             </div>
