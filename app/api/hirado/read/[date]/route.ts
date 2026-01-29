@@ -8,18 +8,46 @@ interface DailyReportRow {
 
 export async function GET(request: Request) {
   try {
-    // 🔥 Dátum kinyerése az URL-ből
     const url = new URL(request.url);
-    const date = url.pathname.split("/").pop(); // pl. "2026-01-28"
+
+    // 🔥 1) Dátum a path végén
+    let date = url.pathname.split("/").pop() || "";
+
+    // 🔥 2) Ha ID jött (pl. 123), akkor nézzük meg a videók táblában a dátumot
+    if (date && !date.includes("-")) {
+      const [videoRows] = await db.query(
+        `SELECT date FROM videos WHERE id = ? LIMIT 1`,
+        [date]
+      );
+
+      const video = (videoRows as any[])[0];
+      if (video?.date) {
+        date = video.date.toISOString().split("T")[0];
+      }
+    }
+
+    // 🔥 3) Ha query paraméterben jött (pl. ?video=123)
+    const videoId = url.searchParams.get("video");
+    if (!date && videoId) {
+      const [videoRows] = await db.query(
+        `SELECT date FROM videos WHERE id = ? LIMIT 1`,
+        [videoId]
+      );
+
+      const video = (videoRows as any[])[0];
+      if (video?.date) {
+        date = video.date.toISOString().split("T")[0];
+      }
+    }
 
     if (!date) {
       return NextResponse.json(
-        { error: "Missing date parameter" },
+        { error: "Missing date or videoId" },
         { status: 400 }
       );
     }
 
-    // 🔥 DB lekérdezés
+    // 🔥 4) Napi riport lekérése
     const [rows] = await db.query(
       `SELECT content, report_date
        FROM daily_reports
