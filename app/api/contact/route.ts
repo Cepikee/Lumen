@@ -135,7 +135,7 @@ export async function POST(req: Request) {
       });
     }
 
-    // 🔥 TURNSTILE ELLENŐRZÉS
+    // TURNSTILE ELLENŐRZÉS
     if (!turnstileToken) {
       registerFail(ip);
       return NextResponse.json({
@@ -200,6 +200,7 @@ export async function POST(req: Request) {
 
     const finalSubject = subjectMap[subject] || "Kapcsolat";
 
+    // EMAIL NEKED
     await mailer.sendMail({
       from: `"Utom.hu" <noreply@utom.hu>`,
       to,
@@ -219,9 +220,31 @@ export async function POST(req: Request) {
       `,
     });
 
-    if (emailFrom) {
-      emailCooldown.set(emailFrom, now);
-    }
+    // 🔥 AUTOMATIKUS VÁLASZ A FELHASZNÁLÓNAK
+    await mailer.sendMail({
+      from: `"Utom.hu" <noreply@utom.hu>`,
+      to: safeEmail,
+      subject: "Köszönjük a megkeresést – Utom.hu",
+      html: `
+        <h2>Köszönjük, hogy felvetted velünk a kapcsolatot!</h2>
+
+        <p>Kedves ${safeName},</p>
+
+        <p>Köszönjük az üzenetedet. A rendszerünk sikeresen fogadta a megkeresést, és hamarosan átnézzük.</p>
+
+        <p><strong>Kategória:</strong> ${finalSubject}</p>
+
+        <h3>Az általad küldött üzenet:</h3>
+        <p>${safeMsg.replace(/\n/g, "<br>")}</p>
+
+        <p>Általában 24 órán belül válaszolunk, de a forgalomtól függően ez változhat.</p>
+
+        <hr>
+        <p style="font-size:12px;opacity:0.6;">Ez egy automatikus visszaigazoló üzenet. Kérjük, ne válaszolj rá.</p>
+      `,
+    });
+
+    emailCooldown.set(emailFrom, now);
 
     return NextResponse.json({ success: true });
   } catch {
@@ -246,3 +269,8 @@ function registerFail(ip: string) {
     banSet.add(ip);
   }
 }
+// Ezzel a kóddal egy Next.js API route-ot hozunk létre a /api/contact útvonalon,
+// amely kezeli a kapcsolatfelvételi űrlapok beküldését.
+// A kód különböző biztonsági intézkedéseket alkalmaz, mint például
+// a kérések gyakoriságának korlátozása, botok elleni védelem Cloudflare Turnstile segítségével,
+// valamint a mezők érvényesítése és tisztítása az email küldés előtt.
