@@ -1,32 +1,85 @@
 "use client";
+
 import { useEffect, useState } from "react";
 
-export default function Felolvasas({ videoId }: { videoId?: number }) {
+type FelolvasasProps = {
+  videoId?: number;
+};
+
+export default function Felolvasas({ videoId }: FelolvasasProps) {
   const [text, setText] = useState("");
+  const [isReading, setIsReading] = useState(false);
 
   useEffect(() => {
-    if (!videoId) return;
+    if (!videoId || videoId <= 0) {
+      setText("");
+      return;
+    }
 
-    fetch(`/api/hirado/read/${videoId}`)
-      .then(r => r.json())
-      .then(d => {
-        if (d.hasReport && d.content) {
-          setText(d.content.replace(/<[^>]+>/g, " "));
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const res = await fetch(`/api/hirado/read/${videoId}`, {
+          cache: "no-store",
+        });
+
+        if (!res.ok) {
+          if (!cancelled) setText("");
+          return;
         }
-      });
+
+        const data = await res.json();
+
+        if (!cancelled && data?.hasReport && data?.content) {
+          const plain = String(data.content).replace(/<[^>]+>/g, " ");
+          setText(plain.trim());
+        } else if (!cancelled) {
+          setText("");
+        }
+      } catch {
+        if (!cancelled) setText("");
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
   }, [videoId]);
+
+  const handleClick = () => {
+    if (!text) return;
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+
+    if (isReading) {
+      window.speechSynthesis.cancel();
+      setIsReading(false);
+      return;
+    }
+
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "hu-HU";
+    utter.rate = 1;
+    utter.pitch = 1;
+    utter.onend = () => setIsReading(false);
+
+    setIsReading(true);
+    window.speechSynthesis.speak(utter);
+  };
 
   if (!text) return null;
 
-  const read = () => {
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "hu-HU";
-    speechSynthesis.speak(u);
-  };
-
   return (
-    <button onClick={read}>
-      Híradó felolvasása
+    <button
+      onClick={handleClick}
+      style={{ fontWeight: 600 }}
+      aria-pressed={isReading}
+    >
+      {isReading ? "Felolvasás leállítása" : "Híradó felolvasása"}
     </button>
   );
 }
+          
