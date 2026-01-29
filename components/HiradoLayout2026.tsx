@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { useUserStore } from "@/store/useUserStore";
 import HiradoPlayerWrapper from "@/app/hirado/HiradoPlayerWrapper";
 import HiradoArchiveSlider from "@/components/HiradoArchiveSlider";
 import HiradoArchive from "@/components/HiradoArchive";
@@ -36,12 +35,6 @@ export default function HiradoLayout2026({
   const [measuring, setMeasuring] = useState(true);
 
   const safeVideo = video ?? { id: 0 };
-
-  const videoDate =
-    video?.date ||
-    video?.created_at ||
-    video?.video_date ||
-    "";
 
   useLayoutEffect(() => {
     const id = window.setTimeout(() => {
@@ -81,7 +74,7 @@ export default function HiradoLayout2026({
 
       <main>
         <HiradoPlayerWrapper
-          video={{ ...safeVideo, date: videoDate }}
+          video={safeVideo}
           isPremium={user.isPremium}
           videoUrl={videoUrl}
         />
@@ -98,8 +91,7 @@ export default function HiradoLayout2026({
             >
               <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
                 <h2 style={{ margin: 0 }}>Archívum</h2>
-
-                <Felolvasas date={videoDate} />
+                <Felolvasas />
               </div>
 
               <div

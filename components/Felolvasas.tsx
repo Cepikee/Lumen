@@ -2,11 +2,17 @@
 
 import { useEffect, useState } from "react";
 
-export default function Felolvasas({ date }: { date: string }) {
+export default function Felolvasas() {
   const [reportText, setReportText] = useState("");
   const [isReading, setIsReading] = useState(false);
 
-  // 🔥 Lekérés az API-ból
+  const date =
+    typeof window !== "undefined"
+      ? window.location.pathname.split("/").pop() ||
+        new URLSearchParams(window.location.search).get("video") ||
+        ""
+      : "";
+
   useEffect(() => {
     if (!date) return;
 
@@ -23,7 +29,6 @@ export default function Felolvasas({ date }: { date: string }) {
     })();
   }, [date]);
 
-  // 🔥 Felolvasás
   const handleRead = () => {
     if (!("speechSynthesis" in window)) return;
 
@@ -44,14 +49,13 @@ export default function Felolvasas({ date }: { date: string }) {
     window.speechSynthesis.speak(utter);
   };
 
-  // 🔥 Ha nincs szöveg → nincs gomb
   if (!reportText) return null;
 
   return (
     <button
       onClick={handleRead}
-      className="btn btn-primary mt-3"
-      style={{ width: "100%", fontWeight: 600 }}
+      className="btn btn-primary"
+      style={{ fontWeight: 600 }}
     >
       {isReading ? "Felolvasás leállítása" : "Híradó felolvasása"}
     </button>
