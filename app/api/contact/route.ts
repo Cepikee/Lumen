@@ -3,7 +3,7 @@ import { mailer } from "@/lib/mailer";
 
 export async function POST(req: Request) {
   try {
-    const { name, emailFrom, subject, message } = await req.json();
+    const { name, emailFrom, subject, customSubject, message } = await req.json();
 
     if (!name || !emailFrom || !message) {
       return NextResponse.json({
@@ -16,9 +16,7 @@ export async function POST(req: Request) {
     const to =
       subject === "press"
         ? "press@utom.hu"
-        : subject === "support"
-        ? "support@utom.hu"
-        : "support@utom.hu"; // fallback
+        : "support@utom.hu"; // minden más ide megy
 
     // Tárgy
     const subjectMap: Record<string, string> = {
@@ -32,7 +30,7 @@ export async function POST(req: Request) {
       account: "Fiók / hozzáférés",
       data: "Adatkezelés",
       collab: "Együttműködés",
-      custom: "Egyéb kérdés",
+      custom: customSubject || "Egyéb kérdés",
     };
 
     const finalSubject = subjectMap[subject] || "Kapcsolat";

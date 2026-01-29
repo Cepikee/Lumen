@@ -12,45 +12,39 @@ export default function KapcsolatPage() {
   /* ============================
       MAILTO KÜLDÉS – JAVÍTOTT
   ============================ */
-  const handleSend = () => {
-    // Ki legyen a címzett?
-    const to =
-      subject === "press"
-        ? "press@utom.hu"
-        : "support@utom.hu"; // minden más ide megy
+  const handleSend = async () => {
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        emailFrom,
+        subject,
+        customSubject,
+        message,
+      }),
+    });
 
-    // Tárgy meghatározása
-    const subjectMap: Record<string, string> = {
-      support: "Rendszer & működés",
-      press: "Média / sajtó megkeresés",
-      bug: "Hiba bejelentése",
-      feature: "Funkciókérés",
-      business: "Üzleti megkeresés",
-      legal: "Jogi / felhasználási kérdés",
-      feedback: "Visszajelzés",
-      account: "Fiók / hozzáférés",
-      data: "Adatkezelés",
-      custom: customSubject || "Egyéb megkeresés",
-    };
+    const data = await res.json();
 
-    const finalSubject = subjectMap[subject] || "Kapcsolat";
+    if (data.success) {
+      alert("Üzenet sikeresen elküldve!");
+      setName("");
+      setEmailFrom("");
+      setMessage("");
+      setSubject("support");
+      setCustomSubject("");
+    } else {
+      alert("Hiba történt: " + data.error);
+    }
+  } catch (err) {
+    alert("Váratlan hiba történt.");
+  }
+};
 
-    // Email body
-    const body = `
-Név: ${name}
-Email: ${emailFrom}
-
-Kategória: ${finalSubject}
-
-Üzenet:
-${message}
-    `;
-
-    // Mailto indítása
-    window.location.href = `mailto:${to}?subject=${encodeURIComponent(
-      finalSubject
-    )}&body=${encodeURIComponent(body)}`;
-  };
 
   return (
     <div className="page">
