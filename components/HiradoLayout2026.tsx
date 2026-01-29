@@ -5,12 +5,15 @@ import { useUserStore } from "@/store/useUserStore";
 import HiradoPlayerWrapper from "@/app/hirado/HiradoPlayerWrapper";
 import HiradoArchiveSlider from "@/components/HiradoArchiveSlider";
 import HiradoArchive from "@/components/HiradoArchive";
+import Felolvasas from "@/components/Felolvasas";
 
 type HiradoLayoutProps = {
   video?: {
     id: number;
     title?: string;
     date?: string;
+    created_at?: string;
+    video_date?: string;
     thumbnailUrl?: string;
   };
   user: { isPremium: boolean };
@@ -32,16 +35,13 @@ export default function HiradoLayout2026({
       : "light"
   );
 
-  // Nézetváltó: "slider" vagy "list"
   const [view, setView] = useState<"slider" | "list">("slider");
 
-  // Méréshez és a konténer magasságának rögzítéséhez
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const listRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerMinHeight, setContainerMinHeight] = useState<number | undefined>(undefined);
 
-  // Amíg mérünk, mindkét nézet látható, de rejtett (visibility:hidden) hogy ne villanjon
   const [measuring, setMeasuring] = useState(true);
 
   useEffect(() => {
@@ -59,10 +59,7 @@ export default function HiradoLayout2026({
     };
   }, []);
 
-  // Mérjük meg a két nézet magasságát, és állítsuk be a konténer minHeight-ját.
-  // Ezzel elkerüljük, hogy a layout magassága váltáskor változzon -> nincs ugrás.
   useLayoutEffect(() => {
-    // Kicsit késleltetünk, hogy minden komponens rendereljen (slider képek, stb.)
     const id = window.setTimeout(() => {
       const sliderH = sliderRef.current?.offsetHeight ?? 0;
       const listH = listRef.current?.offsetHeight ?? 0;
@@ -71,23 +68,18 @@ export default function HiradoLayout2026({
       if (maxH > 0) {
         setContainerMinHeight(maxH);
       } else {
-        // fallback: ha nem sikerült mérni, állítsunk egy konzerv értéket
         setContainerMinHeight(260);
       }
 
-      // mérés kész
       setMeasuring(false);
     }, 50);
 
     return () => window.clearTimeout(id);
   }, []);
 
-  // Újramérés ablakméret-változáskor (responsive)
   useEffect(() => {
     const onResize = () => {
-      // újramérés: ideiglenesen engedélyezzük mindkét nézetet, mérünk, majd visszaállítjuk
       setMeasuring(true);
-      // kis késleltetés, hogy a DOM stabil legyen
       setTimeout(() => {
         const sliderH = sliderRef.current?.offsetHeight ?? 0;
         const listH = listRef.current?.offsetHeight ?? 0;
@@ -102,6 +94,12 @@ export default function HiradoLayout2026({
   }, []);
 
   const safeVideo = video ?? { id: 0 };
+
+  const videoDate =
+    video?.date ||
+    video?.created_at ||
+    video?.video_date ||
+    "";
 
   return (
     <div>
@@ -119,7 +117,6 @@ export default function HiradoLayout2026({
 
         <footer>
           <div style={{ marginTop: "2rem" }}>
-            {/* ARCHÍVUM + pill váltó */}
             <div
               style={{
                 display: "flex",
@@ -128,7 +125,11 @@ export default function HiradoLayout2026({
                 marginBottom: "1rem",
               }}
             >
-              <h2 style={{ margin: 0 }}>Archívum</h2>
+              <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                <h2 style={{ margin: 0 }}>Archívum</h2>
+
+                <Felolvasas date={videoDate} />
+              </div>
 
               <div
                 style={{
@@ -168,19 +169,15 @@ export default function HiradoLayout2026({
               </div>
             </div>
 
-            {/* KONTAINER: rögzített minHeight a mért max alapján -> nem ugrik */}
             <div
               ref={containerRef}
               style={{
                 position: "relative",
-                // ha van mért magasság, használjuk; különben hagyjuk, hogy a tartalom adja
                 minHeight: containerMinHeight ? `${containerMinHeight}px` : undefined,
               }}
             >
-              {/* SLIDER wrapper */}
               <div
                 ref={sliderRef}
-                // mérés alatt mindkét nézet látható, de rejtett, hogy ne villanjon
                 style={{
                   display: measuring ? "block" : view === "slider" ? "block" : "none",
                   visibility: measuring ? "hidden" : "visible",
@@ -189,7 +186,6 @@ export default function HiradoLayout2026({
                 <HiradoArchiveSlider />
               </div>
 
-              {/* LIST wrapper */}
               <div
                 ref={listRef}
                 style={{

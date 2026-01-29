@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Plyr } from "plyr-react";
 import "plyr-react/plyr.css";
 
@@ -8,9 +8,7 @@ export type HiradoPlayerProps = {
   video: {
     id: number;
     title?: string;
-    created_at?: string;
     date?: string;
-    video_date?: string;
     thumbnailUrl?: string;
   };
   isPremium: boolean;
@@ -25,52 +23,7 @@ export default function HiradoPlayer({
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  const [reportText, setReportText] = useState("");
-  const [isReading, setIsReading] = useState(false);
-
   const videoSrc = String(videoUrl);
-
-  const videoDate =
-    video.date ||
-    video.created_at ||
-    video.video_date ||
-    null;
-
-  useEffect(() => {
-    if (!videoDate) return;
-
-    (async () => {
-      try {
-        const res = await fetch(`/api/hirado/read/${videoDate}`);
-        const data = await res.json();
-
-        if (data.hasReport && data.content) {
-          const plain = data.content.replace(/<[^>]+>/g, " ");
-          setReportText(plain);
-        }
-      } catch {}
-    })();
-  }, [videoDate]);
-
-  const handleRead = () => {
-    if (!("speechSynthesis" in window)) return;
-
-    if (isReading) {
-      window.speechSynthesis.cancel();
-      setIsReading(false);
-      return;
-    }
-
-    const utter = new SpeechSynthesisUtterance(reportText);
-    utter.lang = "hu-HU";
-    utter.rate = 1;
-    utter.pitch = 1;
-
-    utter.onend = () => setIsReading(false);
-
-    setIsReading(true);
-    window.speechSynthesis.speak(utter);
-  };
 
   const handleTimeUpdate = async () => {
     if (blocked) return;
@@ -112,16 +65,6 @@ export default function HiradoPlayer({
         }}
         onTimeUpdate={handleTimeUpdate}
       />
-
-      {reportText && (
-        <button
-          onClick={handleRead}
-          className="btn btn-primary mt-3"
-          style={{ width: "100%", fontWeight: 600 }}
-        >
-          {isReading ? "Felolvasás leállítása" : "Híradó felolvasása"}
-        </button>
-      )}
 
       {showPremiumModal && (
         <div
