@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Plyr } from "plyr-react";
 import "plyr-react/plyr.css";
 
@@ -8,7 +8,7 @@ export type HiradoPlayerProps = {
   video: {
     id: number;
     title?: string;
-    date?: string;
+    date?: string; // 🔥 EZ KELL A FELolvasÁSHOZ
     thumbnailUrl?: string;
   };
   isPremium: boolean;
@@ -23,8 +23,53 @@ export default function HiradoPlayer({
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
+  // 🔥 FELolvasÁSHOZ
+  const [reportText, setReportText] = useState("");
+  const [isReading, setIsReading] = useState(false);
+
   const videoSrc = String(videoUrl);
 
+  // 🔥 1) Lekérjük a videó napjához tartozó szöveget
+  useEffect(() => {
+    if (!video?.date) return;
+
+    (async () => {
+      try {
+        const res = await fetch(`/api/hirado/read/${video.date}`);
+        const data = await res.json();
+
+        if (data.hasReport && data.content) {
+          const plain = data.content.replace(/<[^>]+>/g, " ");
+          setReportText(plain);
+        }
+      } catch (err) {
+        console.error("Felolvasás API hiba:", err);
+      }
+    })();
+  }, [video?.date]);
+
+  // 🔥 2) Web Speech API felolvasás
+  const handleRead = () => {
+    if (!("speechSynthesis" in window)) return;
+
+    if (isReading) {
+      window.speechSynthesis.cancel();
+      setIsReading(false);
+      return;
+    }
+
+    const utter = new SpeechSynthesisUtterance(reportText);
+    utter.lang = "hu-HU";
+    utter.rate = 1;
+    utter.pitch = 1;
+
+    utter.onend = () => setIsReading(false);
+
+    setIsReading(true);
+    window.speechSynthesis.speak(utter);
+  };
+
+  // 🔥 3) Premium blokkolás
   const handleTimeUpdate = async () => {
     if (blocked) return;
     if (isPremium) return;
@@ -65,6 +110,17 @@ export default function HiradoPlayer({
         }}
         onTimeUpdate={handleTimeUpdate}
       />
+
+      {/* 🔥 FELolvasÁS GOMB — csak ha van szöveg */}
+      {reportText && (
+        <button
+          onClick={handleRead}
+          className="btn btn-primary mt-3"
+          style={{ width: "100%" }}
+        >
+          {isReading ? "Felolvasás leállítása" : "Híradó felolvasása"}
+        </button>
+      )}
 
       {showPremiumModal && (
         <div
