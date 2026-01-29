@@ -120,3 +120,49 @@ ul {
   line-height: 1.7;
   opacity: 0.85;
 }
+
+select.input option {
+  background-color: #1f1f1f;
+  color: #eaeaf0;
+}
+select.input option:hover,
+select.input option:checked {
+  background-color: #1f1f1f;
+  color: #eaeaf0;
+}
+/* ===========================
+   VILÁGOS TÉMA
+=========================== */
+
+.theme-light .page {
+  background: #ffffff;
+  color: #000000;
+}
+
+.theme-light .intro,
+.theme-light .sub {
+  opacity: 0.85;
+}
+
+.theme-light .quickMessage {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.theme-light .input,
+.theme-light .textarea {
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #000000;
+}
+
+/* Dropdown – világos */
+.theme-light select.input option {
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+.theme-light select.input option:hover,
+.theme-light select.input option:checked {
+  background-color: #f0f0f0;
+  color: #1a1a1a;
+}

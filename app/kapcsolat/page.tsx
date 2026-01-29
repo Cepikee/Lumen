@@ -1,6 +1,7 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import "./kapcsolat.css";
+import { useUserStore } from "@/store/useUserStore";
 
 export default function KapcsolatPage() {
   const [name, setName] = React.useState("");
@@ -9,42 +10,59 @@ export default function KapcsolatPage() {
   const [customSubject, setCustomSubject] = React.useState("");
   const [message, setMessage] = React.useState("");
 
+  // 🔥 GLOBAL THEME
+  const theme = useUserStore((s) => s.theme);
+
+  // 🔥 APPLY THEME CLASS TO <html>
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove("theme-dark", "theme-light");
+
+    if (theme === "dark") {
+      root.classList.add("theme-dark");
+    } else if (theme === "light") {
+      root.classList.add("theme-light");
+    } else {
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      root.classList.add(isDark ? "theme-dark" : "theme-light");
+    }
+  }, [theme]);
+
   /* ============================
-      MAILTO KÜLDÉS – JAVÍTOTT
+      BACKEND EMAIL KÜLDÉS
   ============================ */
   const handleSend = async () => {
-  try {
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        emailFrom,
-        subject,
-        customSubject,
-        message,
-      }),
-    });
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          emailFrom,
+          subject,
+          customSubject,
+          message,
+        }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data.success) {
-      alert("Üzenet sikeresen elküldve!");
-      setName("");
-      setEmailFrom("");
-      setMessage("");
-      setSubject("support");
-      setCustomSubject("");
-    } else {
-      alert("Hiba történt: " + data.error);
+      if (data.success) {
+        alert("Üzenet sikeresen elküldve!");
+        setName("");
+        setEmailFrom("");
+        setMessage("");
+        setSubject("support");
+        setCustomSubject("");
+      } else {
+        alert("Hiba történt: " + data.error);
+      }
+    } catch (err) {
+      alert("Váratlan hiba történt.");
     }
-  } catch (err) {
-    alert("Váratlan hiba történt.");
-  }
-};
-
+  };
 
   return (
     <div className="page">
@@ -126,7 +144,11 @@ export default function KapcsolatPage() {
             <div>
               <div className="sectionTitle">Média / Sajtó</div>
               <div className="email">press@utom.hu</div>
-              <div className="sub">Interjúk, együttműködések</div>
+              <ul>
+                <li>Interjúk</li>
+                <li>Együttműködések</li>
+                <li>Marketing</li>
+              </ul>
             </div>
           </div>
 
@@ -135,11 +157,26 @@ export default function KapcsolatPage() {
             <div>
               <div className="sectionTitle">Rendszer & működés</div>
               <div className="email">support@utom.hu</div>
-              <div className="sub">Hibák, kérdések, visszajelzések</div>
+              <ul>
+                <li>Hibák</li>
+                <li>Kérdések</li>
+                <li>Visszajelzések</li>
+              </ul>
             </div>
           </div>
-
-          <div className="item large">
+            <div className="item">
+            <span className="dot" />
+            <div>
+              <div className="sectionTitle">Általános Információk</div>
+              <div className="email">support@utom.hu</div>
+              <ul>
+                <li>Ötletek</li>
+                <li>Kérések</li>
+                <li>Információk</li>
+              </ul>
+            </div>
+          </div>
+          <div className="item">
             <span className="dot" />
             <div>
               <div className="sectionTitle">Whitepaper</div>
@@ -148,9 +185,6 @@ export default function KapcsolatPage() {
                 <li>előzetes egyeztetés után</li>
                 <li>NDA aláírását követően</li>
               </ul>
-              <p className="sub">
-                Befektetők és technológiai partnerek számára.
-              </p>
             </div>
           </div>
         </div>
