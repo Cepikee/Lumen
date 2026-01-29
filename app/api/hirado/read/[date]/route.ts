@@ -6,46 +6,35 @@ export async function GET(req: Request) {
     const url = new URL(req.url);
     const param = url.pathname.split("/").pop() || "";
 
-    let date: string | null = null;
-
-    // ha szám → videó ID
-    if (/^\d+$/.test(param)) {
-      const result = await db.query(
-        "SELECT DATE(`date`) AS dateOnly, `date` FROM videos WHERE id = ? LIMIT 1",
-        [param]
-      );
-      const rows: any[] = JSON.parse(JSON.stringify(result[0] || []));
-      const v = rows[0];
-      if (v?.dateOnly) {
-        date = String(v.dateOnly);
-      } else if (v?.date) {
-        date = new Date(v.date).toISOString().split("T")[0];
-      }
-    }
-
-    // ha YYYY-MM-DD → dátum
+    // ha YYYY-MM-DD → közvetlen dátumos keresés
     if (/^\d{4}-\d{2}-\d{2}$/.test(param)) {
-      date = param;
+      const date = param;
+      const r = await db.query(
+        "SELECT id, report_date, content FROM daily_reports WHERE DATE(report_date) = ? LIMIT 1",
+        [date]
+      );
+      const rows: any[] = JSON.parse(JSON.stringify(r[0] || []));
+      if (!rows.length) return NextResponse.json({ hasReport: false });
+      return NextResponse.json({ hasReport: true, content: rows[0].content });
     }
 
-    if (!date) {
-      return NextResponse.json({ hasReport: false });
+    // ha szám → videó ID: JOIN a daily_reports-szal a videos.date alapján
+    if (/^\d+$/.test(param)) {
+      const vid = param;
+      const r = await db.query(
+        `SELECT dr.content
+         FROM daily_reports dr
+         JOIN videos v ON DATE(dr.report_date) = DATE(v.date)
+         WHERE v.id = ? LIMIT 1`,
+        [vid]
+      );
+      const rows: any[] = JSON.parse(JSON.stringify(r[0] || []));
+      if (!rows.length) return NextResponse.json({ hasReport: false });
+      return NextResponse.json({ hasReport: true, content: rows[0].content });
     }
 
-    const result2 = await db.query(
-      "SELECT id, report_date, content FROM daily_reports WHERE DATE(report_date) = ? LIMIT 1",
-      [date]
-    );
-    const rep: any[] = JSON.parse(JSON.stringify(result2[0] || []));
-
-    if (!rep.length) {
-      return NextResponse.json({ hasReport: false });
-    }
-
-    return NextResponse.json({
-      hasReport: true,
-      content: rep[0].content,
-    });
+    // egyébként nincs értelmezhető param
+    return NextResponse.json({ hasReport: false });
   } catch (err: any) {
     console.error("READ API unexpected error:", err && err.stack ? err.stack : err);
     return new NextResponse(JSON.stringify({ hasReport: false, error: "internal server error" }), {
