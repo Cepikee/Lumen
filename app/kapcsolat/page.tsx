@@ -9,24 +9,44 @@ export default function KapcsolatPage() {
   const [customSubject, setCustomSubject] = React.useState("");
   const [message, setMessage] = React.useState("");
 
+  /* ============================
+      MAILTO KÜLDÉS – JAVÍTOTT
+  ============================ */
   const handleSend = () => {
-    const to = subject === "press" ? "press@utom.hu" : "support@utom.hu";
+    // Ki legyen a címzett?
+    const to =
+      subject === "press"
+        ? "press@utom.hu"
+        : "support@utom.hu"; // minden más ide megy
 
-    const finalSubject =
-      subject === "custom"
-        ? customSubject || "Egyéb megkeresés"
-        : subject === "press"
-        ? "Média / sajtó megkeresés"
-        : "Rendszer & működés";
+    // Tárgy meghatározása
+    const subjectMap: Record<string, string> = {
+      support: "Rendszer & működés",
+      press: "Média / sajtó megkeresés",
+      bug: "Hiba bejelentése",
+      feature: "Funkciókérés",
+      business: "Üzleti megkeresés",
+      legal: "Jogi / felhasználási kérdés",
+      feedback: "Visszajelzés",
+      account: "Fiók / hozzáférés",
+      data: "Adatkezelés",
+      custom: customSubject || "Egyéb megkeresés",
+    };
 
+    const finalSubject = subjectMap[subject] || "Kapcsolat";
+
+    // Email body
     const body = `
 Név: ${name}
 Email: ${emailFrom}
+
+Kategória: ${finalSubject}
 
 Üzenet:
 ${message}
     `;
 
+    // Mailto indítása
     window.location.href = `mailto:${to}?subject=${encodeURIComponent(
       finalSubject
     )}&body=${encodeURIComponent(body)}`;
