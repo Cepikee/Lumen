@@ -6,13 +6,20 @@ interface DailyReportRow {
   report_date: string;
 }
 
-export async function GET(
-  request: Request,
-  context: { params: { date: string } }
-) {
-  const { date } = context.params;
-
+export async function GET(request: Request) {
   try {
+    // 🔥 Dátum kinyerése az URL-ből
+    const url = new URL(request.url);
+    const date = url.pathname.split("/").pop(); // pl. "2026-01-28"
+
+    if (!date) {
+      return NextResponse.json(
+        { error: "Missing date parameter" },
+        { status: 400 }
+      );
+    }
+
+    // 🔥 DB lekérdezés
     const [rows] = await db.query(
       `SELECT content, report_date
        FROM daily_reports
