@@ -221,7 +221,7 @@ export default function KapcsolatPage() {
             {/* TURNSTILE WIDGET HELYE */}
             <div
               className="cf-turnstile"
-              data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+              data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY + ""}
               data-callback="onTurnstileSuccess"
               data-theme={theme === "light" ? "light" : "dark"}
               style={{ marginTop: 8, marginBottom: 8 }}
