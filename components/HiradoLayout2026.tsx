@@ -26,6 +26,14 @@ export default function HiradoLayout2026({
 }: HiradoLayoutProps) {
   const today = new Date().toLocaleDateString("hu-HU");
 
+  // 🔥 NAGYON FONTOS:
+  // Ha nincs video vagy nincs ID → NE rendereljünk semmit.
+  if (!video || !video.id) {
+    return <div className="p-6">Betöltés...</div>;
+  }
+
+  const safeVideo = video;
+
   const [view, setView] = useState<"slider" | "list">("slider");
 
   const sliderRef = useRef<HTMLDivElement | null>(null);
@@ -33,8 +41,6 @@ export default function HiradoLayout2026({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerMinHeight, setContainerMinHeight] = useState<number | undefined>(undefined);
   const [measuring, setMeasuring] = useState(true);
-
-  const safeVideo = video ?? { id: 0 };
 
   useLayoutEffect(() => {
     const id = window.setTimeout(() => {
@@ -91,8 +97,9 @@ export default function HiradoLayout2026({
             >
               <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
                 <h2 style={{ margin: 0 }}>Archívum</h2>
-                <Felolvasas videoId={safeVideo.id} />
 
+                {/* 🔥 MOSTANTÓL MINDIG LESZ VALÓS ID */}
+                <Felolvasas videoId={safeVideo.id} />
               </div>
 
               <div
