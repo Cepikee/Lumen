@@ -1,24 +1,109 @@
 import { NextResponse } from "next/server";
 import { mailer } from "@/lib/mailer";
 
+// Egyszerű memória alapú rate limit (IP → count)
+const rateMap = new Map<string, { count: number; last: number }>();
+
 export async function POST(req: Request) {
   try {
-    const { name, emailFrom, subject, customSubject, message } = await req.json();
+    const ip =
+      req.headers.get("x-forwarded-for") ||
+      req.headers.get("x-real-ip") ||
+      "unknown";
 
-    if (!name || !emailFrom || !message) {
+    const now = Date.now();
+
+    // RATE LIMIT: max 5 kérés / 1 perc / IP
+    const entry = rateMap.get(ip) || { count: 0, last: now };
+    if (now - entry.last > 60_000) {
+      entry.count = 0;
+      entry.last = now;
+    }
+    entry.count++;
+    rateMap.set(ip, entry);
+
+    if (entry.count > 5) {
       return NextResponse.json({
         success: false,
-        error: "Hiányzó mezők",
+        error: "Túl sok kérés. Próbáld újra később.",
       });
     }
 
-    // Ki legyen a címzett?
+    // BODY LIMIT
+    const bodyText = await req.text();
+    if (bodyText.length > 10_000) {
+      return NextResponse.json({
+        success: false,
+        error: "Túl nagy kérés.",
+      });
+    }
+
+    const { name, emailFrom, subject, customSubject, message, honey } =
+      JSON.parse(bodyText);
+
+    // HONEYPOT (botok kitöltik)
+    if (honey && honey.trim() !== "") {
+      return NextResponse.json({ success: true });
+    }
+
+    // MINIMUM KÜLDÉSI IDŐ (2 sec)
+    const sentAt = req.headers.get("x-form-start");
+    if (sentAt) {
+      const diff = now - Number(sentAt);
+      if (diff < 2000) {
+        return NextResponse.json({
+          success: false,
+          error: "Túl gyors küldés.",
+        });
+      }
+    }
+
+    // VALIDÁCIÓ
+    if (!name || !emailFrom || !message) {
+      return NextResponse.json({
+        success: false,
+        error: "Hiányzó mezők.",
+      });
+    }
+
+    if (name.length > 100 || emailFrom.length > 200) {
+      return NextResponse.json({
+        success: false,
+        error: "Érvénytelen mezőhossz.",
+      });
+    }
+
+    if (message.length > 5000) {
+      return NextResponse.json({
+        success: false,
+        error: "Az üzenet túl hosszú.",
+      });
+    }
+
+    // EMAIL VALIDÁCIÓ
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailFrom)) {
+      return NextResponse.json({
+        success: false,
+        error: "Érvénytelen email cím.",
+      });
+    }
+
+    // SANITIZATION
+    const safe = (str: string) =>
+      str.replace(/[<>]/g, (c) => (c === "<" ? "&lt;" : "&gt;"));
+
+    const safeName = safe(name);
+    const safeEmail = safe(emailFrom);
+    const safeMsg = safe(message);
+
+    // CÍMZETT
     const to =
       subject === "press"
         ? "press@utom.hu"
-        : "support@utom.hu"; // minden más ide megy
+        : "support@utom.hu";
 
-    // Tárgy
+    // TÁRGY MAP
     const subjectMap: Record<string, string> = {
       press: "Média / sajtó megkeresés",
       support: "Rendszer & működés",
@@ -35,7 +120,7 @@ export async function POST(req: Request) {
 
     const finalSubject = subjectMap[subject] || "Kapcsolat";
 
-    // Email küldése
+    // EMAIL KÜLDÉS
     await mailer.sendMail({
       from: `"Utom.hu" <noreply@utom.hu>`,
       to,
@@ -43,12 +128,12 @@ export async function POST(req: Request) {
       html: `
         <h2>Új üzenet érkezett a Kapcsolat űrlapról</h2>
 
-        <p><strong>Név:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${emailFrom}</p>
+        <p><strong>Név:</strong> ${safeName}</p>
+        <p><strong>Email:</strong> ${safeEmail}</p>
         <p><strong>Kategória:</strong> ${finalSubject}</p>
 
         <h3>Üzenet:</h3>
-        <p>${message.replace(/\n/g, "<br>")}</p>
+        <p>${safeMsg.replace(/\n/g, "<br>")}</p>
 
         <hr>
         <p style="font-size:12px;opacity:0.6;">Utom.hu – Kapcsolat űrlap</p>
@@ -56,10 +141,10 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ success: true });
-  } catch (err: any) {
+  } catch {
     return NextResponse.json({
       success: false,
-      error: err.message,
+      error: "Ismeretlen hiba.",
     });
   }
 }

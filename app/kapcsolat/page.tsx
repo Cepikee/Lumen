@@ -1,14 +1,23 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./kapcsolat.css";
 import { useUserStore } from "@/store/useUserStore";
 
 export default function KapcsolatPage() {
-  const [name, setName] = React.useState("");
-  const [emailFrom, setEmailFrom] = React.useState("");
-  const [subject, setSubject] = React.useState("support");
-  const [customSubject, setCustomSubject] = React.useState("");
-  const [message, setMessage] = React.useState("");
+  const [name, setName] = useState("");
+  const [emailFrom, setEmailFrom] = useState("");
+  const [subject, setSubject] = useState("support");
+  const [customSubject, setCustomSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  // 🔥 HONEYPOT (láthatatlan mező)
+  const [honey, setHoney] = useState("");
+
+  // 🔥 Küldés indulási idő (spam ellen)
+  const [startTime, setStartTime] = useState(Date.now());
+
+  // 🔥 Gomb tiltása küldés közben
+  const [sending, setSending] = useState(false);
 
   // 🔥 GLOBAL THEME
   const theme = useUserStore((s) => s.theme);
@@ -29,14 +38,46 @@ export default function KapcsolatPage() {
   }, [theme]);
 
   /* ============================
+      FRONTEND VALIDÁCIÓ + VÉDELEM
+  ============================ */
+  const validate = () => {
+    if (!name.trim() || !emailFrom.trim() || !message.trim()) {
+      return "Minden mező kitöltése kötelező.";
+    }
+
+    if (name.length > 100) return "A név túl hosszú.";
+    if (emailFrom.length > 200) return "Az email túl hosszú.";
+    if (message.length > 5000) return "Az üzenet túl hosszú.";
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailFrom)) return "Érvénytelen email cím.";
+
+    if (honey.trim() !== "") return "Bot aktivitás észlelve.";
+
+    const diff = Date.now() - startTime;
+    if (diff < 2000) return "Túl gyors küldés.";
+
+    return null;
+  };
+
+  /* ============================
       BACKEND EMAIL KÜLDÉS
   ============================ */
   const handleSend = async () => {
+    const error = validate();
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    setSending(true);
+
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "x-form-start": String(startTime), // időbélyeg
         },
         body: JSON.stringify({
           name,
@@ -44,6 +85,7 @@ export default function KapcsolatPage() {
           subject,
           customSubject,
           message,
+          honey,
         }),
       });
 
@@ -56,12 +98,16 @@ export default function KapcsolatPage() {
         setMessage("");
         setSubject("support");
         setCustomSubject("");
+        setHoney("");
+        setStartTime(Date.now());
       } else {
         alert("Hiba történt: " + data.error);
       }
-    } catch (err) {
+    } catch {
       alert("Váratlan hiba történt.");
     }
+
+    setSending(false);
   };
 
   return (
@@ -80,9 +126,19 @@ export default function KapcsolatPage() {
           <div className="quickMessage">
             <div className="quickTitle">Gyors üzenet</div>
 
+            {/* HONEYPOT (láthatatlan) */}
+            <input
+              style={{ display: "none" }}
+              value={honey}
+              onChange={(e) => setHoney(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+
             <input
               placeholder="Név"
               value={name}
+              maxLength={100}
               onChange={(e) => setName(e.target.value)}
               className="input"
             />
@@ -90,6 +146,7 @@ export default function KapcsolatPage() {
             <input
               placeholder="Email cím"
               value={emailFrom}
+              maxLength={200}
               onChange={(e) => setEmailFrom(e.target.value)}
               className="input"
             />
@@ -115,6 +172,7 @@ export default function KapcsolatPage() {
               <input
                 placeholder="Tárgy"
                 value={customSubject}
+                maxLength={200}
                 onChange={(e) => setCustomSubject(e.target.value)}
                 className="input"
               />
@@ -124,20 +182,25 @@ export default function KapcsolatPage() {
               placeholder="Rövid üzenet…"
               rows={3}
               value={message}
+              maxLength={5000}
               onChange={(e) => setMessage(e.target.value)}
               className="textarea"
             />
 
-            <button onClick={handleSend} className="button">
-              Üzenet küldése
+            <button
+              onClick={handleSend}
+              className="button"
+              disabled={sending}
+              style={{ opacity: sending ? 0.6 : 1 }}
+            >
+              {sending ? "Küldés..." : "Üzenet küldése"}
             </button>
           </div>
         </div>
 
-        {/* IDŐVONAL */}
+        {/* JOBB OLDAL */}
         <div className="line" />
 
-        {/* JOBB OLDAL */}
         <div className="block">
           <div className="item">
             <span className="dot" />
@@ -164,7 +227,8 @@ export default function KapcsolatPage() {
               </ul>
             </div>
           </div>
-            <div className="item">
+
+          <div className="item">
             <span className="dot" />
             <div>
               <div className="sectionTitle">Általános Információk</div>
@@ -176,6 +240,7 @@ export default function KapcsolatPage() {
               </ul>
             </div>
           </div>
+
           <div className="item">
             <span className="dot" />
             <div>
