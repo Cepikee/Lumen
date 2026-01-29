@@ -8,7 +8,9 @@ export type HiradoPlayerProps = {
   video: {
     id: number;
     title?: string;
-    date?: string; // 🔥 EZ KELL A FELolvasÁSHOZ
+    created_at?: string;
+    date?: string;
+    video_date?: string;
     thumbnailUrl?: string;
   };
   isPremium: boolean;
@@ -23,32 +25,33 @@ export default function HiradoPlayer({
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
-  // 🔥 FELolvasÁSHOZ
   const [reportText, setReportText] = useState("");
   const [isReading, setIsReading] = useState(false);
 
   const videoSrc = String(videoUrl);
 
-  // 🔥 1) Lekérjük a videó napjához tartozó szöveget
+  const videoDate =
+    video.date ||
+    video.created_at ||
+    video.video_date ||
+    null;
+
   useEffect(() => {
-    if (!video?.date) return;
+    if (!videoDate) return;
 
     (async () => {
       try {
-        const res = await fetch(`/api/hirado/read/${video.date}`);
+        const res = await fetch(`/api/hirado/read/${videoDate}`);
         const data = await res.json();
 
         if (data.hasReport && data.content) {
           const plain = data.content.replace(/<[^>]+>/g, " ");
           setReportText(plain);
         }
-      } catch (err) {
-        console.error("Felolvasás API hiba:", err);
-      }
+      } catch {}
     })();
-  }, [video?.date]);
+  }, [videoDate]);
 
-  // 🔥 2) Web Speech API felolvasás
   const handleRead = () => {
     if (!("speechSynthesis" in window)) return;
 
@@ -69,7 +72,6 @@ export default function HiradoPlayer({
     window.speechSynthesis.speak(utter);
   };
 
-  // 🔥 3) Premium blokkolás
   const handleTimeUpdate = async () => {
     if (blocked) return;
     if (isPremium) return;
@@ -111,12 +113,11 @@ export default function HiradoPlayer({
         onTimeUpdate={handleTimeUpdate}
       />
 
-      {/* 🔥 FELolvasÁS GOMB — csak ha van szöveg */}
       {reportText && (
         <button
           onClick={handleRead}
           className="btn btn-primary mt-3"
-          style={{ width: "100%" }}
+          style={{ width: "100%", fontWeight: 600 }}
         >
           {isReading ? "Felolvasás leállítása" : "Híradó felolvasása"}
         </button>
