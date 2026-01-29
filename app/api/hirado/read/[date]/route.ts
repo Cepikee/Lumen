@@ -1,20 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-// A DB sor típusosítása
 interface DailyReportRow {
   content: string;
   report_date: string;
 }
 
 export async function GET(
-  req: NextRequest,
+  request: Request,
   context: { params: { date: string } }
 ) {
-  const { date } = context.params; // pl. "2026-01-28"
+  const { date } = context.params;
 
   try {
-    // A MySQL driver mindig TÖMBÖT ad vissza
     const [rows] = await db.query(
       `SELECT content, report_date
        FROM daily_reports
