@@ -2,23 +2,16 @@
 
 import { useEffect, useState } from "react";
 
-export default function Felolvasas() {
+export default function Felolvasas({ videoId }: { videoId?: number }) {
   const [reportText, setReportText] = useState("");
   const [isReading, setIsReading] = useState(false);
 
-  const date =
-    typeof window !== "undefined"
-      ? window.location.pathname.split("/").pop() ||
-        new URLSearchParams(window.location.search).get("video") ||
-        ""
-      : "";
-
   useEffect(() => {
-    if (!date) return;
+    if (!videoId) return;
 
     (async () => {
       try {
-        const res = await fetch(`/api/hirado/read/${date}`);
+        const res = await fetch(`/api/hirado/read/${videoId}`);
         const data = await res.json();
 
         if (data.hasReport && data.content) {
@@ -27,7 +20,7 @@ export default function Felolvasas() {
         }
       } catch {}
     })();
-  }, [date]);
+  }, [videoId]);
 
   const handleRead = () => {
     if (!("speechSynthesis" in window)) return;

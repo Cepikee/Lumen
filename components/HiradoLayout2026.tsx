@@ -91,7 +91,8 @@ export default function HiradoLayout2026({
             >
               <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
                 <h2 style={{ margin: 0 }}>Archívum</h2>
-                <Felolvasas />
+                <Felolvasas videoId={safeVideo.id} />
+
               </div>
 
               <div
