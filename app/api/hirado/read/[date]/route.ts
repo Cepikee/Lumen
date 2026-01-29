@@ -1,80 +1,49 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-interface DailyReportRow {
-  content: string;
-  report_date: string;
-}
+export async function GET(req: Request) {
+  const url = new URL(req.url);
+  const param = url.pathname.split("/").pop() || "";
 
-export async function GET(request: Request) {
-  try {
-    const url = new URL(request.url);
+  let date: string | null = null;
 
-    // 🔥 1) Dátum a path végén
-    let date = url.pathname.split("/").pop() || "";
-
-    // 🔥 2) Ha ID jött (pl. 123), akkor nézzük meg a videók táblában a dátumot
-    if (date && !date.includes("-")) {
-      const [videoRows] = await db.query(
-        `SELECT date FROM videos WHERE id = ? LIMIT 1`,
-        [date]
-      );
-
-      const video = (videoRows as any[])[0];
-      if (video?.date) {
-        date = video.date.toISOString().split("T")[0];
-      }
-    }
-
-    // 🔥 3) Ha query paraméterben jött (pl. ?video=123)
-    const videoId = url.searchParams.get("video");
-    if (!date && videoId) {
-      const [videoRows] = await db.query(
-        `SELECT date FROM videos WHERE id = ? LIMIT 1`,
-        [videoId]
-      );
-
-      const video = (videoRows as any[])[0];
-      if (video?.date) {
-        date = video.date.toISOString().split("T")[0];
-      }
-    }
-
-    if (!date) {
-      return NextResponse.json(
-        { error: "Missing date or videoId" },
-        { status: 400 }
-      );
-    }
-
-    // 🔥 4) Napi riport lekérése
-    const [rows] = await db.query(
-      `SELECT content, report_date
-       FROM daily_reports
-       WHERE DATE(report_date) = ?
-       LIMIT 1`,
-      [date]
+  // ha szám → videó ID
+  if (/^\d+$/.test(param)) {
+    const result = await db.query(
+      "SELECT date FROM videos WHERE id = ? LIMIT 1",
+      [param]
     );
 
-    const row = (rows as DailyReportRow[])[0];
+    const rows: any[] = JSON.parse(JSON.stringify(result[0]));
+    const v = rows[0];
 
-    if (!row) {
-      return NextResponse.json({
-        content: null,
-        date,
-        hasReport: false,
-      });
+    if (v?.date) {
+      date = new Date(v.date).toISOString().split("T")[0];
     }
-
-    return NextResponse.json({
-      content: row.content,
-      date: row.report_date,
-      hasReport: true,
-    });
-  } catch (err) {
-    return NextResponse.json(
-      { error: "DB error", details: String(err) },
-      { status: 500 }
-    );
   }
+
+  // ha YYYY-MM-DD → dátum
+  if (/^\d{4}-\d{2}-\d{2}$/.test(param)) {
+    date = param;
+  }
+
+  if (!date) {
+    return NextResponse.json({ hasReport: false });
+  }
+
+  const result2 = await db.query(
+    "SELECT content FROM daily_reports WHERE DATE(report_date) = ? LIMIT 1",
+    [date]
+  );
+
+  const rep: any[] = JSON.parse(JSON.stringify(result2[0]));
+
+  if (!rep.length) {
+    return NextResponse.json({ hasReport: false });
+  }
+
+  return NextResponse.json({
+    hasReport: true,
+    content: rep[0].content,
+  });
 }

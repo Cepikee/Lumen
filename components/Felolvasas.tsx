@@ -1,56 +1,32 @@
 "use client";
-
 import { useEffect, useState } from "react";
 
 export default function Felolvasas({ videoId }: { videoId?: number }) {
-  const [reportText, setReportText] = useState("");
-  const [isReading, setIsReading] = useState(false);
+  const [text, setText] = useState("");
 
   useEffect(() => {
     if (!videoId) return;
 
-    (async () => {
-      try {
-        const res = await fetch(`/api/hirado/read/${videoId}`);
-        const data = await res.json();
-
-        if (data.hasReport && data.content) {
-          const plain = data.content.replace(/<[^>]+>/g, " ");
-          setReportText(plain);
+    fetch(`/api/hirado/read/${videoId}`)
+      .then(r => r.json())
+      .then(d => {
+        if (d.hasReport && d.content) {
+          setText(d.content.replace(/<[^>]+>/g, " "));
         }
-      } catch {}
-    })();
+      });
   }, [videoId]);
 
-  const handleRead = () => {
-    if (!("speechSynthesis" in window)) return;
+  if (!text) return null;
 
-    if (isReading) {
-      window.speechSynthesis.cancel();
-      setIsReading(false);
-      return;
-    }
-
-    const utter = new SpeechSynthesisUtterance(reportText);
-    utter.lang = "hu-HU";
-    utter.rate = 1;
-    utter.pitch = 1;
-
-    utter.onend = () => setIsReading(false);
-
-    setIsReading(true);
-    window.speechSynthesis.speak(utter);
+  const read = () => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "hu-HU";
+    speechSynthesis.speak(u);
   };
 
-  if (!reportText) return null;
-
   return (
-    <button
-      onClick={handleRead}
-      className="btn btn-primary"
-      style={{ fontWeight: 600 }}
-    >
-      {isReading ? "Felolvasás leállítása" : "Híradó felolvasása"}
+    <button onClick={read}>
+      Híradó felolvasása
     </button>
   );
 }
