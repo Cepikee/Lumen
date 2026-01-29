@@ -1,8 +1,15 @@
 import { NextResponse } from "next/server";
 import { mailer } from "@/lib/mailer";
 
-// Egyszerű memória alapú rate limit (IP → count)
 const rateMap = new Map<string, { count: number; last: number }>();
+const failMap = new Map<string, { count: number; last: number }>();
+const banSet = new Set<string>();
+const emailCooldown = new Map<string, number>();
+
+const MAX_REQ_PER_MIN = 5;
+const MAX_FAIL = 10;
+const FAIL_WINDOW = 10 * 60_000; // 10 perc
+const EMAIL_COOLDOWN_MS = 30_000; // 30 mp
 
 export async function POST(req: Request) {
   try {
@@ -11,46 +18,72 @@ export async function POST(req: Request) {
       req.headers.get("x-real-ip") ||
       "unknown";
 
+    const ua = req.headers.get("user-agent") || "unknown";
     const now = Date.now();
 
-    // RATE LIMIT: max 5 kérés / 1 perc / IP
-    const entry = rateMap.get(ip) || { count: 0, last: now };
-    if (now - entry.last > 60_000) {
-      entry.count = 0;
-      entry.last = now;
+    if (banSet.has(ip)) {
+      return NextResponse.json({
+        success: false,
+        error: "Ideiglenesen blokkolva.",
+      });
     }
-    entry.count++;
-    rateMap.set(ip, entry);
 
-    if (entry.count > 5) {
+    if (
+      ua === "unknown" ||
+      /curl|wget|python|scrapy|bot|spider|crawler/i.test(ua)
+    ) {
+      registerFail(ip);
+      return NextResponse.json({
+        success: false,
+        error: "Érvénytelen kliens.",
+      });
+    }
+
+    const rateEntry = rateMap.get(ip) || { count: 0, last: now };
+    if (now - rateEntry.last > 60_000) {
+      rateEntry.count = 0;
+      rateEntry.last = now;
+    }
+    rateEntry.count++;
+    rateMap.set(ip, rateEntry);
+
+    if (rateEntry.count > MAX_REQ_PER_MIN) {
+      registerFail(ip);
       return NextResponse.json({
         success: false,
         error: "Túl sok kérés. Próbáld újra később.",
       });
     }
 
-    // BODY LIMIT
     const bodyText = await req.text();
     if (bodyText.length > 10_000) {
+      registerFail(ip);
       return NextResponse.json({
         success: false,
         error: "Túl nagy kérés.",
       });
     }
 
-    const { name, emailFrom, subject, customSubject, message, honey } =
-      JSON.parse(bodyText);
+    const {
+      name,
+      emailFrom,
+      subject,
+      customSubject,
+      message,
+      honey,
+      turnstileToken,
+    } = JSON.parse(bodyText);
 
-    // HONEYPOT (botok kitöltik)
     if (honey && honey.trim() !== "") {
+      registerFail(ip);
       return NextResponse.json({ success: true });
     }
 
-    // MINIMUM KÜLDÉSI IDŐ (2 sec)
     const sentAt = req.headers.get("x-form-start");
     if (sentAt) {
       const diff = now - Number(sentAt);
       if (diff < 2000) {
+        registerFail(ip);
         return NextResponse.json({
           success: false,
           error: "Túl gyors küldés.",
@@ -58,8 +91,19 @@ export async function POST(req: Request) {
       }
     }
 
-    // VALIDÁCIÓ
+    if (emailFrom) {
+      const lastSent = emailCooldown.get(emailFrom) || 0;
+      if (now - lastSent < EMAIL_COOLDOWN_MS) {
+        registerFail(ip);
+        return NextResponse.json({
+          success: false,
+          error: "Túl gyakori küldés erről az email címről.",
+        });
+      }
+    }
+
     if (!name || !emailFrom || !message) {
+      registerFail(ip);
       return NextResponse.json({
         success: false,
         error: "Hiányzó mezők.",
@@ -67,6 +111,7 @@ export async function POST(req: Request) {
     }
 
     if (name.length > 100 || emailFrom.length > 200) {
+      registerFail(ip);
       return NextResponse.json({
         success: false,
         error: "Érvénytelen mezőhossz.",
@@ -74,22 +119,59 @@ export async function POST(req: Request) {
     }
 
     if (message.length > 5000) {
+      registerFail(ip);
       return NextResponse.json({
         success: false,
         error: "Az üzenet túl hosszú.",
       });
     }
 
-    // EMAIL VALIDÁCIÓ
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(emailFrom)) {
+      registerFail(ip);
       return NextResponse.json({
         success: false,
         error: "Érvénytelen email cím.",
       });
     }
 
-    // SANITIZATION
+    // 🔥 TURNSTILE ELLENŐRZÉS
+    if (!turnstileToken) {
+      registerFail(ip);
+      return NextResponse.json({
+        success: false,
+        error: "Hiányzó ellenőrző token.",
+      });
+    }
+
+    const secret = process.env.TURNSTILE_SECRET_KEY;
+    if (!secret) {
+      return NextResponse.json({
+        success: false,
+        error: "Hiányzó szerver konfiguráció.",
+      });
+    }
+
+    const cfRes = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `secret=${encodeURIComponent(
+          secret
+        )}&response=${encodeURIComponent(turnstileToken)}`,
+      }
+    );
+
+    const cfData = await cfRes.json();
+    if (!cfData.success) {
+      registerFail(ip);
+      return NextResponse.json({
+        success: false,
+        error: "Ellenőrzés sikertelen.",
+      });
+    }
+
     const safe = (str: string) =>
       str.replace(/[<>]/g, (c) => (c === "<" ? "&lt;" : "&gt;"));
 
@@ -97,13 +179,11 @@ export async function POST(req: Request) {
     const safeEmail = safe(emailFrom);
     const safeMsg = safe(message);
 
-    // CÍMZETT
     const to =
       subject === "press"
         ? "press@utom.hu"
         : "support@utom.hu";
 
-    // TÁRGY MAP
     const subjectMap: Record<string, string> = {
       press: "Média / sajtó megkeresés",
       support: "Rendszer & működés",
@@ -120,7 +200,6 @@ export async function POST(req: Request) {
 
     const finalSubject = subjectMap[subject] || "Kapcsolat";
 
-    // EMAIL KÜLDÉS
     await mailer.sendMail({
       from: `"Utom.hu" <noreply@utom.hu>`,
       to,
@@ -140,11 +219,30 @@ export async function POST(req: Request) {
       `,
     });
 
+    if (emailFrom) {
+      emailCooldown.set(emailFrom, now);
+    }
+
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({
       success: false,
       error: "Ismeretlen hiba.",
     });
+  }
+}
+
+function registerFail(ip: string) {
+  const now = Date.now();
+  const entry = failMap.get(ip) || { count: 0, last: now };
+  if (now - entry.last > FAIL_WINDOW) {
+    entry.count = 0;
+  }
+  entry.count++;
+  entry.last = now;
+  failMap.set(ip, entry);
+
+  if (entry.count >= MAX_FAIL) {
+    banSet.add(ip);
   }
 }

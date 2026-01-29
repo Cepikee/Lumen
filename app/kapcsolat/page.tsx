@@ -10,19 +10,16 @@ export default function KapcsolatPage() {
   const [customSubject, setCustomSubject] = useState("");
   const [message, setMessage] = useState("");
 
-  // 🔥 HONEYPOT (láthatatlan mező)
   const [honey, setHoney] = useState("");
-
-  // 🔥 Küldés indulási idő (spam ellen)
   const [startTime, setStartTime] = useState(Date.now());
-
-  // 🔥 Gomb tiltása küldés közben
   const [sending, setSending] = useState(false);
+  const [cooldownUntil, setCooldownUntil] = useState<number | null>(null);
 
-  // 🔥 GLOBAL THEME
+  const [turnstileToken, setTurnstileToken] = useState("");
+
   const theme = useUserStore((s) => s.theme);
 
-  // 🔥 APPLY THEME CLASS TO <html>
+  // 🔥 THEME
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove("theme-dark", "theme-light");
@@ -37,8 +34,28 @@ export default function KapcsolatPage() {
     }
   }, [theme]);
 
+  // 🔥 TURNSTILE SCRIPT BETÖLTÉSE
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  // 🔥 GLOBÁLIS CALLBACK A TURNSTILE-HEZ
+  useEffect(() => {
+    // @ts-ignore
+    window.onTurnstileSuccess = (token: string) => {
+      setTurnstileToken(token);
+    };
+  }, []);
+
   /* ============================
-      FRONTEND VALIDÁCIÓ + VÉDELEM
+      FRONTEND VALIDÁCIÓ
   ============================ */
   const validate = () => {
     if (!name.trim() || !emailFrom.trim() || !message.trim()) {
@@ -57,6 +74,14 @@ export default function KapcsolatPage() {
     const diff = Date.now() - startTime;
     if (diff < 2000) return "Túl gyors küldés.";
 
+    if (cooldownUntil && Date.now() < cooldownUntil) {
+      return "Kérlek várj egy kicsit a következő küldés előtt.";
+    }
+
+    if (!turnstileToken) {
+      return "Kérlek erősítsd meg, hogy nem vagy robot.";
+    }
+
     return null;
   };
 
@@ -72,12 +97,15 @@ export default function KapcsolatPage() {
 
     setSending(true);
 
+    // kis random delay botok ellen
+    await new Promise((r) => setTimeout(r, 50 + Math.random() * 150));
+
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-form-start": String(startTime), // időbélyeg
+          "x-form-start": String(startTime),
         },
         body: JSON.stringify({
           name,
@@ -86,6 +114,7 @@ export default function KapcsolatPage() {
           customSubject,
           message,
           honey,
+          turnstileToken,
         }),
       });
 
@@ -100,6 +129,8 @@ export default function KapcsolatPage() {
         setCustomSubject("");
         setHoney("");
         setStartTime(Date.now());
+        setCooldownUntil(Date.now() + 30_000);
+        setTurnstileToken("");
       } else {
         alert("Hiba történt: " + data.error);
       }
@@ -186,6 +217,15 @@ export default function KapcsolatPage() {
               onChange={(e) => setMessage(e.target.value)}
               className="textarea"
             />
+
+            {/* TURNSTILE WIDGET HELYE */}
+            <div
+              className="cf-turnstile"
+              data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+              data-callback="onTurnstileSuccess"
+              data-theme={theme === "light" ? "light" : "dark"}
+              style={{ marginTop: 8, marginBottom: 8 }}
+            ></div>
 
             <button
               onClick={handleSend}
