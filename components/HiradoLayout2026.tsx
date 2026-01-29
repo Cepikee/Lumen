@@ -26,14 +26,6 @@ export default function HiradoLayout2026({
   videoUrl,
 }: HiradoLayoutProps) {
   const today = new Date().toLocaleDateString("hu-HU");
-  const theme = useUserStore((s) => s.theme);
-
-  const [systemTheme, setSystemTheme] = useState<"dark" | "light">(() =>
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light"
-  );
 
   const [view, setView] = useState<"slider" | "list">("slider");
 
@@ -41,23 +33,15 @@ export default function HiradoLayout2026({
   const listRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerMinHeight, setContainerMinHeight] = useState<number | undefined>(undefined);
-
   const [measuring, setMeasuring] = useState(true);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const handler = (e: MediaQueryListEvent) =>
-      setSystemTheme(e.matches ? "dark" : "light");
+  const safeVideo = video ?? { id: 0 };
 
-    mq.addEventListener?.("change", handler);
-    mq.addListener?.(handler);
-
-    return () => {
-      mq.removeEventListener?.("change", handler);
-      mq.removeListener?.(handler);
-    };
-  }, []);
+  const videoDate =
+    video?.date ||
+    video?.created_at ||
+    video?.video_date ||
+    "";
 
   useLayoutEffect(() => {
     const id = window.setTimeout(() => {
@@ -65,12 +49,7 @@ export default function HiradoLayout2026({
       const listH = listRef.current?.offsetHeight ?? 0;
       const maxH = Math.max(sliderH, listH, 0);
 
-      if (maxH > 0) {
-        setContainerMinHeight(maxH);
-      } else {
-        setContainerMinHeight(260);
-      }
-
+      setContainerMinHeight(maxH > 0 ? maxH : 260);
       setMeasuring(false);
     }, 50);
 
@@ -93,14 +72,6 @@ export default function HiradoLayout2026({
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const safeVideo = video ?? { id: 0 };
-
-  const videoDate =
-    video?.date ||
-    video?.created_at ||
-    video?.video_date ||
-    "";
-
   return (
     <div>
       <header>
@@ -110,7 +81,7 @@ export default function HiradoLayout2026({
 
       <main>
         <HiradoPlayerWrapper
-          video={safeVideo}
+          video={{ ...safeVideo, date: videoDate }}
           isPremium={user.isPremium}
           videoUrl={videoUrl}
         />
