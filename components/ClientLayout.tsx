@@ -6,7 +6,7 @@ import Header from "./Header";
 import CookieConsent from "./CookieConsent";
 import SidebarWrapper from "./SidebarWrapper";
 import { LayoutContext } from "./LayoutContext";
-import { useUserStore } from "@/store/useUserStore"; // 🔥 ZUSTAND IMPORT
+import { useUserStore } from "@/store/useUserStore";
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -15,6 +15,9 @@ interface ClientLayoutProps {
 export default function ClientLayout({ children }: ClientLayoutProps) {
   const pathname = usePathname();
   const isLanding = pathname.includes("landing");
+
+  // ⭐ Sidebar csak a főoldalon
+  const shouldShowSidebar = pathname === "/" && !isLanding;
 
   // 🔥 GLOBAL THEME FROM ZUSTAND
   const theme = useUserStore((s) => s.theme);
@@ -63,7 +66,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     };
   }, [theme]);
 
-  // --- EREDETI KÓD ---
+  // --- FILTER STATE ---
   const [viewMode, setViewMode] = useState<"card" | "compact">("card");
   const [isTodayMode, setIsTodayMode] = useState(false);
 
@@ -128,7 +131,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       >
         {!isLanding && <Header />}
 
-        {!isLanding ? (
+        {shouldShowSidebar ? (
           <SidebarWrapper
             onViewModeChange={handleViewModeChange}
             onTodayFilter={() => setIsTodayMode(true)}
@@ -162,7 +165,16 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
             </main>
           </SidebarWrapper>
         ) : (
-          <main>{children}</main>
+          <main
+            className="flex-grow-1 overflow-auto p-3"
+            style={{
+              maxWidth: "1280px",
+              margin: "0 auto",
+              width: "100%",
+            }}
+          >
+            {children}
+          </main>
         )}
       </LayoutContext.Provider>
 

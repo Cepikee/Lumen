@@ -134,6 +134,9 @@ export default function Header() {
             <li className="nav-item">
               <Link href="/adatvedelem" className="nav-link">Adatvédelem</Link>
             </li>
+            <li className="nav-item">
+              <Link href="/kapcsolat" className="nav-link">Kapcsolat</Link>
+            </li>
           </ul>
 
           {/* PROFIL IKON / BEJELENTKEZÉS */}
