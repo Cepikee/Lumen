@@ -1019,25 +1019,21 @@ html[data-theme="light"] {
 
 
 
-.felolvasas-player {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 9999;
-}
+/* --- Felolvasás mini-player (Bootstrap + custom CSS) --- */
 
-.player-box {
+.felolvasas-inline {
   display: flex;
   align-items: center;
   gap: 14px;
-  background: rgba(15, 23, 42, 0.92);
+  padding: 6px 12px;
+  background: rgba(15, 23, 42, 0.85);
   border: 1px solid rgba(100, 116, 139, 0.4);
-  backdrop-filter: blur(8px);
-  padding: 10px 16px;
-  border-radius: 50px;
+  border-radius: 40px;
+  backdrop-filter: blur(6px);
 }
 
-.player-btn {
+/* Play/Stop button */
+.felolvasas-inline .player-btn {
   width: 42px;
   height: 42px;
   border-radius: 50%;
@@ -1046,6 +1042,7 @@ html[data-theme="light"] {
   justify-content: center;
 }
 
+/* Waveform */
 .waveform {
   display: flex;
   align-items: flex-end;
@@ -1070,4 +1067,18 @@ html[data-theme="light"] {
   0% { height: 6px; }
   50% { height: 22px; }
   100% { height: 6px; }
+}
+
+/* Progress bar container */
+.felolvasas-inline .progress {
+  width: 120px;
+  height: 6px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(100, 116, 139, 0.4);
+}
+
+/* Progress bar fill */
+.felolvasas-inline .progress-bar {
+  transition: width 0.15s linear;
 }

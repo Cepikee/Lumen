@@ -95,41 +95,39 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
   if (!text) return null;
 
   return (
-    <div className="felolvasas-player">
-      <div className="player-box shadow-lg">
+    <div className="felolvasas-inline d-flex align-items-center gap-3">
 
-        {/* Play / Stop button */}
-        <button onClick={handleClick} className="btn btn-primary player-btn">
-          {isReading ? (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-              <rect x="6" y="6" width="12" height="12" rx="2" />
-            </svg>
-          ) : (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          )}
-        </button>
+      {/* Play / Stop button */}
+      <button onClick={handleClick} className="btn btn-primary rounded-circle p-2">
+        {isReading ? (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+            <rect x="6" y="6" width="12" height="12" rx="2" />
+          </svg>
+        ) : (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        )}
+      </button>
 
-        {/* Waveform */}
-        <div className="waveform">
-          {[0, 1, 2, 3, 4].map((i) => (
-            <div
-              key={i}
-              className={`bar ${isReading ? "bar-anim" : ""}`}
-              style={{ animationDelay: `${i * 0.12}s` }}
-            />
-          ))}
-        </div>
-
-        {/* Progress bar */}
-        <div className="progress flex-grow-1 ms-3">
+      {/* Waveform */}
+      <div className="waveform d-flex align-items-end gap-1">
+        {[0, 1, 2, 3, 4].map((i) => (
           <div
-            className="progress-bar bg-info"
-            role="progressbar"
-            style={{ width: `${progress * 100}%` }}
+            key={i}
+            className={`bar ${isReading ? "bar-anim" : ""}`}
+            style={{ animationDelay: `${i * 0.12}s` }}
           />
-        </div>
+        ))}
+      </div>
+
+      {/* Progress bar */}
+      <div className="progress flex-grow-1" style={{ width: "120px" }}>
+        <div
+          className="progress-bar bg-info"
+          role="progressbar"
+          style={{ width: `${progress * 100}%` }}
+        />
       </div>
     </div>
   );
