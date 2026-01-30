@@ -7,57 +7,38 @@ type FelolvasasProps = {
 };
 
 export default function Felolvasas({ videoId }: FelolvasasProps) {
-  const [text, setText] = useState<string>("");
+  const [text, setText] = useState("");
   const [isReading, setIsReading] = useState(false);
-  const [status, setStatus] = useState<string>("idle");
 
   useEffect(() => {
-    console.log("Felolvasas mounted or videoId changed", { videoId });
-    setStatus("checking videoId");
-
     if (!videoId || videoId <= 0) {
-      console.log("Invalid videoId, aborting fetch", { videoId });
       setText("");
-      setStatus("no-videoId");
       return;
     }
 
     let cancelled = false;
-    setStatus("fetching");
 
     (async () => {
       try {
-        const url = `/api/hirado/read/${videoId}`;
-        console.log("Fetching URL", url);
-        const res = await fetch(url, { cache: "no-store" });
-        console.log("Fetch response", res.status, res.statusText);
+        const res = await fetch(`/api/hirado/read/${videoId}`, {
+          cache: "no-store",
+        });
 
         if (!res.ok) {
-          console.warn("Fetch not ok", res.status);
-          if (!cancelled) {
-            setText("");
-            setStatus(`fetch-error-${res.status}`);
-          }
+          if (!cancelled) setText("");
           return;
         }
 
         const data = await res.json();
-        console.log("Fetch JSON", data);
 
         if (!cancelled && data?.hasReport && data?.content) {
           const plain = String(data.content).replace(/<[^>]+>/g, " ");
           setText(plain.trim());
-          setStatus("has-report");
         } else if (!cancelled) {
           setText("");
-          setStatus("no-report");
         }
-      } catch (err) {
-        console.error("Fetch exception", err);
-        if (!cancelled) {
-          setText("");
-          setStatus("fetch-exception");
-        }
+      } catch {
+        if (!cancelled) setText("");
       }
     })();
 
@@ -89,29 +70,15 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
     window.speechSynthesis.speak(utter);
   };
 
+  if (!text) return null;
+
   return (
-    <div style={{ border: "1px dashed red", padding: 8 }}>
-      <div style={{ fontSize: 12, color: "#333" }}>
-        <strong>Debug Felolvasas</strong>
-      </div>
-
-      <div style={{ fontSize: 12 }}>
-        <div>videoId: <code>{String(videoId)}</code></div>
-        <div>status: <code>{status}</code></div>
-        <div>hasText: <code>{text ? "yes" : "no"}</code></div>
-      </div>
-
-      {text ? (
-        <div style={{ marginTop: 8 }}>
-          <button onClick={handleClick} style={{ fontWeight: 600 }}>
-            {isReading ? "Felolvasás leállítása" : "Híradó felolvasása"}
-          </button>
-        </div>
-      ) : (
-        <div style={{ marginTop: 8, fontSize: 12, color: "#666" }}>
-          Nincs szöveg a felolvasáshoz
-        </div>
-      )}
-    </div>
+    <button
+      onClick={handleClick}
+      className="px-4 py-2 rounded-md font-semibold transition-all duration-200 
+                 bg-blue-600 text-white hover:bg-blue-700 active:scale-95"
+    >
+      {isReading ? "Felolvasás leállítása" : "Híradó felolvasása"}
+    </button>
   );
 }
