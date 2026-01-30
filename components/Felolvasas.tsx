@@ -10,6 +10,7 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
   const [text, setText] = useState("");
   const [isReading, setIsReading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [volume, setVolume] = useState(1); // 0–1 hangerő
 
   useEffect(() => {
     if (!videoId || videoId <= 0) {
@@ -75,6 +76,7 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
     utter.lang = "hu-HU";
     utter.rate = 1;
     utter.pitch = 1;
+    utter.volume = volume;
 
     utter.onboundary = (event: SpeechSynthesisEvent) => {
       const ratio = Math.min(1, event.charIndex / text.length);
@@ -97,8 +99,17 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
   return (
     <div className="felolvasas-inline d-flex align-items-center gap-3">
 
-      {/* Play / Stop button */}
-      <button onClick={handleClick} className="btn btn-primary rounded-circle p-2">
+      {/* Saját ikon */}
+      <img
+        src="/felolvas.svg"
+        alt="Felolvasás ikon"
+        width={22}
+        height={22}
+        className="felolvasas-icon"
+      />
+
+      {/* Felolvasás gomb */}
+      <button onClick={handleClick} className="btn btn-primary rounded-circle p-2 player-btn">
         {isReading ? (
           <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
             <rect x="6" y="6" width="12" height="12" rx="2" />
@@ -110,25 +121,28 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
         )}
       </button>
 
-      {/* Waveform */}
-      <div className="waveform d-flex align-items-end gap-1">
-        {[0, 1, 2, 3, 4].map((i) => (
-          <div
-            key={i}
-            className={`bar ${isReading ? "bar-anim" : ""}`}
-            style={{ animationDelay: `${i * 0.12}s` }}
-          />
-        ))}
-      </div>
+      {/* Felirat */}
+      <span className="felolvasas-text">Felolvasás</span>
 
       {/* Progress bar */}
-      <div className="progress flex-grow-1" style={{ width: "120px" }}>
+      <div className="progress" style={{ width: "140px" }}>
         <div
           className="progress-bar bg-info"
           role="progressbar"
           style={{ width: `${progress * 100}%` }}
         />
       </div>
+
+      {/* Hangerő slider */}
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.05"
+        value={volume}
+        onChange={(e) => setVolume(Number(e.target.value))}
+        className="form-range felolvasas-volume"
+      />
     </div>
   );
 }
