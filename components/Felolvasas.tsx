@@ -9,14 +9,13 @@ type FelolvasasProps = {
 export default function Felolvasas({ videoId }: FelolvasasProps) {
   const [text, setText] = useState("");
   const [isReading, setIsReading] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);
   const [showVolume, setShowVolume] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     if (!videoId || videoId <= 0) {
       setText("");
-      setProgress(0);
       return;
     }
 
@@ -29,10 +28,7 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
         });
 
         if (!res.ok) {
-          if (!cancelled) {
-            setText("");
-            setProgress(0);
-          }
+          if (!cancelled) setText("");
           return;
         }
 
@@ -41,16 +37,11 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
         if (!cancelled && data?.hasReport && data?.content) {
           const plain = String(data.content).replace(/<[^>]+>/g, " ");
           setText(plain.trim());
-          setProgress(0);
         } else if (!cancelled) {
           setText("");
-          setProgress(0);
         }
       } catch {
-        if (!cancelled) {
-          setText("");
-          setProgress(0);
-        }
+        if (!cancelled) setText("");
       }
     })();
 
@@ -71,7 +62,6 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
     if (isReading) {
       window.speechSynthesis.cancel();
       setIsReading(false);
-      setProgress(0);
       return;
     }
 
@@ -81,26 +71,20 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
     utter.pitch = 1;
     utter.volume = volume;
 
-    utter.onboundary = (event) => {
+    utter.onboundary = () => {
       utter.volume = volume;
-      const ratio = Math.min(1, event.charIndex / text.length);
-      setProgress(ratio);
     };
 
     utter.onend = () => {
       setIsReading(false);
-      setProgress(1);
-      setTimeout(() => setProgress(0), 600);
     };
 
     setIsReading(true);
-    setProgress(0);
     window.speechSynthesis.speak(utter);
   };
 
   if (!text) return null;
 
-  // Hangerő ikon logika
   const getVolumeIcon = () => {
     if (volume === 0) {
       return (
@@ -127,6 +111,20 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
     );
   };
 
+  // --- KICSI MÓD ---
+  if (!expanded) {
+    return (
+      <button
+        className="felolvasas-small-btn"
+        onClick={() => setExpanded(true)}
+      >
+        <img src="/felolvas.svg" width={20} height={20} />
+        <span>Felolvasás</span>
+      </button>
+    );
+  }
+
+  // --- NAGY MÓD ---
   return (
     <div className="felolvasas-inline d-flex align-items-center gap-3">
 
@@ -146,14 +144,7 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
 
       <span className="felolvasas-text">Felolvasás</span>
 
-      <div className="progress" style={{ width: "140px" }}>
-        <div
-          className="progress-bar bg-info"
-          role="progressbar"
-          style={{ width: `${progress * 100}%` }}
-        />
-      </div>
-
+      {/* YouTube-stílusú hangerő */}
       <div className="volume-wrapper">
         <div onClick={() => setShowVolume(!showVolume)} style={{ cursor: "pointer" }}>
           {getVolumeIcon()}
@@ -174,6 +165,13 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
           />
         )}
       </div>
+
+      <button
+        className="btn btn-outline-light btn-sm"
+        onClick={() => setExpanded(false)}
+      >
+        Bezár
+      </button>
     </div>
   );
 }

@@ -1023,6 +1023,24 @@ html[data-theme="light"] {
 
 /* --- Felolvasás mini-player (Bootstrap + custom CSS) --- */
 
+.felolvasas-small-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(100, 116, 139, 0.4);
+  padding: 6px 14px;
+  border-radius: 40px;
+  color: #e2e8f0;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+
+.felolvasas-small-btn:hover {
+  background: rgba(30, 41, 59, 0.9);
+}
+
 .felolvasas-inline {
   display: flex;
   align-items: center;
@@ -1061,4 +1079,5 @@ html[data-theme="light"] {
   accent-color: #0dcaf0;
   cursor: pointer;
 }
+
 
