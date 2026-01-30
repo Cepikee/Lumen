@@ -10,7 +10,8 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
   const [text, setText] = useState("");
   const [isReading, setIsReading] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [volume, setVolume] = useState(1); // 0–1 hangerő
+  const [volume, setVolume] = useState(1);
+  const [showVolume, setShowVolume] = useState(false);
 
   useEffect(() => {
     if (!videoId || videoId <= 0) {
@@ -57,13 +58,15 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
       cancelled = true;
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
         window.speechSynthesis.cancel();
+        window.speechSynthesis.pause();
+        window.speechSynthesis.resume();
+        window.speechSynthesis.cancel();
       }
     };
   }, [videoId]);
 
   const handleClick = () => {
     if (!text) return;
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
 
     if (isReading) {
       window.speechSynthesis.cancel();
@@ -78,7 +81,8 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
     utter.pitch = 1;
     utter.volume = volume;
 
-    utter.onboundary = (event: SpeechSynthesisEvent) => {
+    utter.onboundary = (event) => {
+      utter.volume = volume;
       const ratio = Math.min(1, event.charIndex / text.length);
       setProgress(ratio);
     };
@@ -99,16 +103,8 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
   return (
     <div className="felolvasas-inline d-flex align-items-center gap-3">
 
-      {/* Saját ikon */}
-      <img
-        src="/felolvas.svg"
-        alt="Felolvasás ikon"
-        width={22}
-        height={22}
-        className="felolvasas-icon"
-      />
+      <img src="/felolvas.svg" width={22} height={22} alt="Felolvasás" />
 
-      {/* Felolvasás gomb */}
       <button onClick={handleClick} className="btn btn-primary rounded-circle p-2 player-btn">
         {isReading ? (
           <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
@@ -121,10 +117,8 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
         )}
       </button>
 
-      {/* Felirat */}
       <span className="felolvasas-text">Felolvasás</span>
 
-      {/* Progress bar */}
       <div className="progress" style={{ width: "140px" }}>
         <div
           className="progress-bar bg-info"
@@ -133,16 +127,34 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
         />
       </div>
 
-      {/* Hangerő slider */}
-      <input
-        type="range"
-        min="0"
-        max="1"
-        step="0.05"
-        value={volume}
-        onChange={(e) => setVolume(Number(e.target.value))}
-        className="form-range felolvasas-volume"
-      />
+      {/* Volume icon + slider */}
+      <div
+        className="volume-wrapper"
+        onMouseLeave={() => setShowVolume(false)}
+      >
+        <svg
+          onClick={() => setShowVolume(!showVolume)}
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="#0dcaf0"
+          style={{ cursor: "pointer" }}
+        >
+          <path d="M5 9v6h4l5 5V4l-5 5H5z" />
+        </svg>
+
+        {showVolume && (
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.05"
+            value={volume}
+            onChange={(e) => setVolume(Number(e.target.value))}
+            className="volume-slider"
+          />
+        )}
+      </div>
     </div>
   );
 }

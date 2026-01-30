@@ -1034,44 +1034,31 @@ html[data-theme="light"] {
   backdrop-filter: blur(6px);
 }
 
-/* Ikon */
-.felolvasas-icon {
-  opacity: 0.9;
-}
-
-/* Play/Stop button */
 .player-btn {
   width: 42px;
   height: 42px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Felirat */
 .felolvasas-text {
   font-size: 14px;
   font-weight: 600;
   color: #e2e8f0;
 }
 
-/* Progress bar container */
-.felolvasas-inline .progress {
-  width: 140px;
-  height: 6px;
-  border-radius: 4px;
-  overflow: hidden;
-  background: rgba(100, 116, 139, 0.4);
+/* Volume icon + slider */
+.volume-wrapper {
+  position: relative;
 }
 
-/* Progress bar fill */
-.felolvasas-inline .progress-bar {
-  transition: width 0.15s linear;
-}
-
-/* Hangerő slider */
-.felolvasas-volume {
+.volume-slider {
+  position: absolute;
+  bottom: 40px;
+  left: -6px;
+  transform: rotate(-90deg);
   width: 90px;
   accent-color: #0dcaf0;
+  cursor: pointer;
 }
