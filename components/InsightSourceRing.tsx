@@ -8,7 +8,7 @@ export type InsightSourceRingProps = {
     percent: number;
     color?: string;
   }[];
-  data?: number[]; // alias: pl. [dominantCount, otherCount]
+  data?: number[];
   size?: number;
   className?: string;
   "aria-hidden"?: boolean | "true" | "false";
@@ -36,12 +36,14 @@ export default function InsightSourceRing({
 
     if (Array.isArray(sources) && sources.length > 0) {
       const total = sources.reduce((s, x) => s + (Number(x.percent) || 0), 0) || 100;
+
       segments = sources.map((s) => ({
         percent: (Number(s.percent) || 0) * (100 / total),
         color: s.color || getColorForName(s.name),
       }));
     } else if (Array.isArray(data) && data.length > 0) {
       const total = data.reduce((s, n) => s + (Number(n) || 0), 0) || 1;
+
       segments = data.map((n, i) => ({
         percent: (Number(n) || 0) * (100 / total),
         color: defaultPalette[i % defaultPalette.length],
@@ -93,11 +95,24 @@ export default function InsightSourceRing({
   );
 }
 
-/* Helpers */
-const defaultPalette = ["#ff6b6b", "#4dabf7", "#9b5de5", "#ffd166", "#06d6a0"];
+/* --- UTOM PORTÁL SZÍNMAP --- */
+const sourceColorMap: Record<string, string> = {
+  "444": "#2d6126",
+  "index": "rgba(224, 226, 116, 0.747)",
+  "portfolio": "#ff6600",
+  "24hu": "#ff0000",
+  "telex": "#00AEEF",
+  "hvg": "#ff7a00",
+};
+
+function normalizeName(name?: string) {
+  if (!name) return "";
+  return name.toLowerCase().replace(".hu", "").trim();
+}
 
 function getColorForName(name?: string) {
-  if (!name) return defaultPalette[0];
-  const hash = Array.from(name).reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) | 0, 0);
-  return defaultPalette[Math.abs(hash) % defaultPalette.length];
+  const key = normalizeName(name);
+  return sourceColorMap[key] || "#4da3ff";
 }
+
+const defaultPalette = ["#ff6b6b", "#4dabf7", "#9b5de5", "#ffd166", "#06d6a0"];
