@@ -46,7 +46,7 @@ export default function CategoryPage() {
   const [meta, setMeta] = useState<ApiMeta | null>(null);
   const [summary, setSummary] = useState<ApiSummary | null>(null);
   const [items, setItems] = useState<ApiItem[]>([]);
-  const [fullSources, setFullSources] = useState<any[]>([]);
+  const [ringSources, setRingSources] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -75,7 +75,7 @@ export default function CategoryPage() {
           setMeta(null);
           setSummary(null);
           setItems([]);
-          setFullSources([]);
+          setRingSources([]);
           return;
         }
 
@@ -100,7 +100,7 @@ export default function CategoryPage() {
         }));
 
         setItems(mapped);
-        setFullSources(json.sources || []);
+        setRingSources(json.ringSources || []);
 
       } catch (e) {
         console.error("Category load error:", e);
@@ -225,7 +225,7 @@ export default function CategoryPage() {
             ) : items.length === 0 ? (
               <div className="text-muted">Nincs találat a kiválasztott időszakra.</div>
             ) : (
-              <SourceBreakdown items={items} fullSources={fullSources} />
+              <SourceBreakdown fullSources={ringSources} />
             )}
           </div>
         </aside>
@@ -272,45 +272,17 @@ function mapToInsightListItem(it: any) {
   };
 }
 
-/* --- VÉGLEGES, JAVÍTOTT SourceBreakdown --- */
-function SourceBreakdown({
-  items,
-  fullSources,
-}: {
-  items: ApiItem[];
-  fullSources?: any[];
-}) {
-  // 1) Forrásadatok összegyűjtése
-  const sourceData =
-    fullSources && fullSources.length > 0
-      ? fullSources.map((s) => ({
-          name: s.source || "Ismeretlen",
-          count: s.count || 0,
-        }))
-      : items.map((it) => ({
-          name: it.dominantSource || "Ismeretlen",
-          count: 1,
-        }));
+/* --- VÉGLEGES, TISZTA SourceBreakdown --- */
+function SourceBreakdown({ fullSources }: { fullSources: any[] }) {
+  // A backend már kiszámolta:
+  // name    → normalized név (portfolio, index, 24hu…)
+  // label   → eredeti név
+  // count   → darabszám
+  // percent → kerekített százalék
 
-  // 2) Összegzés
-  const map = new Map<string, number>();
-  for (const s of sourceData) {
-    map.set(s.name, (map.get(s.name) || 0) + s.count);
-  }
-
-  const total = Array.from(map.values()).reduce((a, b) => a + b, 0) || 1;
-
-  // 3) Rendezett lista (eredeti nevekkel)
-  const list = Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
-
-  // 4) Normalizáló függvény a SourceRing számára
-  const normalize = (name: string) =>
-    name.toLowerCase().replace(".hu", "").trim();
-
-  // 5) ringSources → ezt kapja a SourceRing
-  const ringSources = list.map(([name, cnt]) => ({
-    name: normalize(name),
-    percent: Math.round((cnt / total) * 100),
+  const ringSources = fullSources.map((s) => ({
+    name: s.name,
+    percent: s.percent,
   }));
 
   return (
@@ -318,13 +290,14 @@ function SourceBreakdown({
       <InsightSourceRing sources={ringSources} />
 
       <ul className="list-unstyled mt-3 small">
-        {list.map(([name, cnt]) => (
-          <li key={name} className="d-flex justify-content-between">
-            <span>{name}</span>
-            <span className="text-muted">{cnt}</span>
+        {fullSources.map((s) => (
+          <li key={s.label} className="d-flex justify-content-between">
+            <span>{s.label}</span>
+            <span className="text-muted">{s.count}</span>
           </li>
         ))}
       </ul>
     </div>
   );
 }
+/* --- VÉGLEGES, TISZTA SourceBreakdown --- */  

@@ -158,6 +158,27 @@ export async function GET(req: Request, context: any) {
       count: Number(r.cnt || 0),
     }));
 
+    // 🔢 ELOSZLÁS SZÁMÍTÁS A GYŰRŰHÖZ
+    // 🔢 ELOSZLÁS SZÁMÍTÁS A GYŰRŰHÖZ
+const totalSourceCount = sources.reduce(
+  (sum: number, s: { source: string; count: number }) =>
+    sum + (Number(s.count) || 0),
+  0
+) || 1;
+
+const ringSources = sources.map((s: { source: string; count: number }) => {
+  const rawName = String(s.source || "");
+  const normalized = rawName.toLowerCase().replace(".hu", "").trim();
+
+  return {
+    name: normalized,                 // normalized név (portfolio, index, 24hu…)
+    label: rawName || "Ismeretlen",   // eredeti név
+    count: s.count,
+    percent: Math.round((Number(s.count) / totalSourceCount) * 100),
+  };
+});
+
+
     // ---------------------------------------
     // 4) Trend sorozat
     // ---------------------------------------
@@ -225,6 +246,7 @@ export async function GET(req: Request, context: any) {
       summary,
       items,
       sources,
+      ringSources, // ⬅️ Ezt mostantól használhatod a gyűrűhöz
       page,
       limit,
       total: Number(agg.articleCount || 0),
