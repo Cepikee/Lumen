@@ -1048,7 +1048,6 @@ html[data-theme="light"] {
   color: #e2e8f0;
 }
 
-/* Volume icon + slider */
 .volume-wrapper {
   position: relative;
 }
@@ -1062,3 +1061,4 @@ html[data-theme="light"] {
   accent-color: #0dcaf0;
   cursor: pointer;
 }
+

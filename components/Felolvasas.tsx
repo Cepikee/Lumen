@@ -100,6 +100,33 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
 
   if (!text) return null;
 
+  // Hangerő ikon logika
+  const getVolumeIcon = () => {
+    if (volume === 0) {
+      return (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#0dcaf0">
+          <path d="M5 9v6h4l5 5V4l-5 5H5z" />
+          <line x1="16" y1="8" x2="22" y2="14" stroke="#0dcaf0" strokeWidth="2"/>
+          <line x1="22" y1="8" x2="16" y2="14" stroke="#0dcaf0" strokeWidth="2"/>
+        </svg>
+      );
+    }
+    if (volume < 0.5) {
+      return (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#0dcaf0">
+          <path d="M5 9v6h4l5 5V4l-5 5H5z" />
+          <path d="M16 10a2 2 0 0 1 0 4" stroke="#0dcaf0" strokeWidth="2" fill="none"/>
+        </svg>
+      );
+    }
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#0dcaf0">
+        <path d="M5 9v6h4l5 5V4l-5 5H5z" />
+        <path d="M16 8a4 4 0 0 1 0 8" stroke="#0dcaf0" strokeWidth="2" fill="none"/>
+      </svg>
+    );
+  };
+
   return (
     <div className="felolvasas-inline d-flex align-items-center gap-3">
 
@@ -127,21 +154,10 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
         />
       </div>
 
-      {/* Volume icon + slider */}
-      <div
-        className="volume-wrapper"
-        onMouseLeave={() => setShowVolume(false)}
-      >
-        <svg
-          onClick={() => setShowVolume(!showVolume)}
-          width="22"
-          height="22"
-          viewBox="0 0 24 24"
-          fill="#0dcaf0"
-          style={{ cursor: "pointer" }}
-        >
-          <path d="M5 9v6h4l5 5V4l-5 5H5z" />
-        </svg>
+      <div className="volume-wrapper">
+        <div onClick={() => setShowVolume(!showVolume)} style={{ cursor: "pointer" }}>
+          {getVolumeIcon()}
+        </div>
 
         {showVolume && (
           <input
@@ -150,7 +166,10 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
             max="1"
             step="0.05"
             value={volume}
-            onChange={(e) => setVolume(Number(e.target.value))}
+            onChange={(e) => {
+              setVolume(Number(e.target.value));
+              setShowVolume(false);
+            }}
             className="volume-slider"
           />
         )}
