@@ -4,9 +4,6 @@ import { db } from "@/lib/db";
 
 /**
  * Normalizáló segédfüggvény
- * - trimeli a bemenetet
- * - kezeli az egyszeres és dupla URL-enkódolást (pl. %C3%A1 vagy %25C3%25A1)
- * - üres / "null" stringet null-ként kezeli
  */
 function normalizeParam(raw?: string | null) {
   if (raw === undefined || raw === null) return null;
@@ -15,16 +12,12 @@ function normalizeParam(raw?: string | null) {
   if (!s) return null;
 
   try {
-    // Ha dupla enkódolás jele (%25) van, próbáljuk meg kétszer dekódolni
     if (s.includes("%25")) {
       s = decodeURIComponent(decodeURIComponent(s));
     } else if (s.includes("%")) {
-      // egyszeres enkódolás
       s = decodeURIComponent(s);
     }
-  } catch (e) {
-    // ha a dekódolás meghiúsul, marad az eredeti string (trim után)
-  }
+  } catch {}
 
   s = s.trim();
   if (!s) return null;
@@ -33,13 +26,12 @@ function normalizeParam(raw?: string | null) {
 }
 
 export async function GET(req: Request, context: any) {
-  // próbáljuk meg a kategóriát több forrásból kinyerni (context.params vagy URL path)
   const url = new URL(req.url);
+
+  // kategória paraméter
   const rawFromContext = context?.params?.category;
   const rawFromPath = (url.pathname || "").split("/").filter(Boolean).pop();
   const raw = rawFromContext ?? rawFromPath ?? undefined;
-
-  // normalizáljuk és dekódoljuk a paramétert
   const categoryParam = normalizeParam(raw);
 
   // query paramok
@@ -54,38 +46,38 @@ export async function GET(req: Request, context: any) {
   if (period === "30d") days = 30;
   else if (period === "90d") days = 90;
 
-  // kezdő dátum: csak a YYYY-MM-DD részt használjuk (MySQL DATE összehasonlításhoz)
+  // kezdő dátum
   const now = new Date();
   const startDate = new Date(now);
   startDate.setDate(now.getDate() - (days - 1));
-  const startDateStr = startDate.toISOString().slice(0, 10); // 'YYYY-MM-DD'
+  const startDateStr = startDate.toISOString().slice(0, 10);
 
   try {
-    // -------------------------
+    // ---------------------------------------
     // 1) Cikkek lekérdezése (page)
-    // -------------------------
+    // ---------------------------------------
     const itemsParams: any[] = [];
     let whereClause = "";
 
     if (categoryParam === null && raw !== undefined) {
-      // explicit "null" paraméter: category IS NULL
       whereClause = ` WHERE category IS NULL`;
     } else if (categoryParam) {
       whereClause = ` WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))`;
       itemsParams.push(categoryParam);
     }
 
-    // periódus feltétel (DATE alapú)
     itemsParams.push(startDateStr);
     const periodClause = `${whereClause ? " AND" : " WHERE"} DATE(published_at) >= ?`;
 
-    // rendezés (egyszerű, jelenleg csak published_at)
-    const orderBy = "ORDER BY published_at DESC";
+    // rendezés
+    let orderBy = "ORDER BY published_at DESC";
+    if (sort === "popular") {
+      orderBy = "ORDER BY score DESC, published_at DESC";
+    }
 
-    // content_text-ből rövid kivonat (ha van), ha nincs, NULL
     const itemsSql = `
       SELECT id, title, category, published_at, source AS dominantSource,
-             1 AS sources, 0 AS score, 
+             1 AS sources, 0 AS score,
              CASE WHEN content_text IS NOT NULL THEN SUBSTRING(content_text, 1, 300) ELSE NULL END AS excerpt
       FROM articles
       ${whereClause}
@@ -109,17 +101,19 @@ export async function GET(req: Request, context: any) {
       href: `/insights/${r.id}`,
     }));
 
-    // -------------------------
-    // 2) Aggregációk (összes cikk, források száma, utolsó frissítés)
-    // -------------------------
+    // ---------------------------------------
+    // 2) Aggregációk (összes cikk, források száma)
+    // ---------------------------------------
     const aggParams: any[] = [];
     let aggWhere = "";
+
     if (categoryParam === null && raw !== undefined) {
       aggWhere = ` WHERE category IS NULL`;
     } else if (categoryParam) {
       aggWhere = ` WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))`;
       aggParams.push(categoryParam);
     }
+
     aggParams.push(startDateStr);
 
     const aggSql = `
@@ -132,19 +126,52 @@ export async function GET(req: Request, context: any) {
       AND DATE(published_at) >= ?
     `;
     const [aggRows]: any = await db.query(aggSql, aggParams);
-    const agg = (aggRows && aggRows[0]) || { articleCount: 0, sourceCount: 0, lastUpdated: null };
+    const agg = aggRows?.[0] || { articleCount: 0, sourceCount: 0, lastUpdated: null };
 
-    // -------------------------
-    // 3) Trend sorozat (naponkénti darabszám)
-    // -------------------------
+    // ---------------------------------------
+    // 3) Forráslista (TELJES, nem csak a 20 itemből)
+    // ---------------------------------------
+    const srcParams: any[] = [];
+    let srcWhere = "";
+
+    if (categoryParam === null && raw !== undefined) {
+      srcWhere = ` WHERE category IS NULL`;
+    } else if (categoryParam) {
+      srcWhere = ` WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))`;
+      srcParams.push(categoryParam);
+    }
+
+    srcParams.push(startDateStr);
+
+    const srcSql = `
+      SELECT source, COUNT(*) AS cnt
+      FROM articles
+      ${srcWhere}
+      AND DATE(published_at) >= ?
+      GROUP BY source
+      ORDER BY cnt DESC
+      LIMIT 50
+    `;
+    const [srcRows]: any = await db.query(srcSql, srcParams);
+
+    const sources = (srcRows || []).map((r: any) => ({
+      source: r.source || "Ismeretlen",
+      count: Number(r.cnt || 0),
+    }));
+
+    // ---------------------------------------
+    // 4) Trend sorozat
+    // ---------------------------------------
     const trendParams: any[] = [];
     let trendWhere = "";
+
     if (categoryParam === null && raw !== undefined) {
       trendWhere = ` WHERE category IS NULL`;
     } else if (categoryParam) {
       trendWhere = ` WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))`;
       trendParams.push(categoryParam);
     }
+
     trendParams.push(startDateStr);
 
     const trendSql = `
@@ -158,26 +185,27 @@ export async function GET(req: Request, context: any) {
     const [trendRows]: any = await db.query(trendSql, trendParams);
 
     const dayMap = new Map<string, number>();
-    for (const r of (trendRows || [])) {
-      const d = r.day ? String(r.day) : null; // YYYY-MM-DD
+    for (const r of trendRows || []) {
+      const d = r.day ? String(r.day) : null;
       if (d) dayMap.set(d, Number(r.cnt || 0));
     }
 
     const labels: string[] = [];
     const series: number[] = [];
+
     for (let i = 0; i < days; i++) {
       const d = new Date(startDate);
       d.setDate(startDate.getDate() + i);
-      const label = d.toISOString().slice(0, 10); // YYYY-MM-DD
+      const label = d.toISOString().slice(0, 10);
       labels.push(label);
       series.push(dayMap.get(label) ?? 0);
     }
 
     const trendScore = series.reduce((s, v) => s + v, 0);
 
-    // -------------------------
-    // 4) Válasz összeállítása
-    // -------------------------
+    // ---------------------------------------
+    // 5) Válasz
+    // ---------------------------------------
     const meta = {
       category: categoryParam ?? null,
       articleCount: Number(agg.articleCount || 0),
@@ -188,13 +216,7 @@ export async function GET(req: Request, context: any) {
     const summary = {
       trendSeries: series,
       trendLabels: labels,
-      trendScore: Number(trendScore || 0),
-    };
-
-    const pageInfo = {
-      page,
-      limit,
-      total: Number(agg.articleCount || 0),
+      trendScore,
     };
 
     return NextResponse.json({
@@ -202,9 +224,12 @@ export async function GET(req: Request, context: any) {
       meta,
       summary,
       items,
-      ...pageInfo,
+      sources,   // ÚJ: TELJES forráslista
+      page,
+      limit,
+      total: Number(agg.articleCount || 0),
     });
-  } catch (err: any) {
+  } catch (err) {
     console.error("Category route hiba:", err);
     return NextResponse.json(
       { success: false, error: "szerver_hiba" },
