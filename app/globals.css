@@ -1025,8 +1025,8 @@ html[data-theme="light"] {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(100, 116, 139, 0.4);
+  background: rgba(15,23,42,0.85);
+  border: 1px solid rgba(100,116,139,0.4);
   padding: 6px 14px;
   border-radius: 40px;
   color: #e2e8f0;
@@ -1038,10 +1038,10 @@ html[data-theme="light"] {
 .felolvasas-inline {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   padding: 6px 12px;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(100, 116, 139, 0.4);
+  background: rgba(15,23,42,0.85);
+  border: 1px solid rgba(100,116,139,0.4);
   border-radius: 40px;
   backdrop-filter: blur(6px);
 }
@@ -1054,17 +1054,36 @@ html[data-theme="light"] {
   justify-content: center;
 }
 
+/* Volume wrapper: ikon és slider egy sorban */
 .volume-wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
+/* vízszintes slider, egyvonalban az ikonnal */
 .volume-slider-horizontal {
-  position: absolute;
-  top: 50%;
-  left: 30px;
-  transform: translateY(-50%);
   width: 120px;
   accent-color: #0dcaf0;
   cursor: pointer;
+  background: transparent;
+  -webkit-appearance: none;
+  height: 4px;
 }
 
+/* egyszerű track/thumb stílusok */
+.volume-slider-horizontal::-webkit-slider-runnable-track {
+  height: 4px;
+  background: rgba(100,116,139,0.35);
+  border-radius: 4px;
+}
+.volume-slider-horizontal::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #0dcaf0;
+  margin-top: -5px;
+  box-shadow: 0 0 6px rgba(13,202,240,0.35);
+}
