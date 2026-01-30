@@ -1021,8 +1021,6 @@ html[data-theme="light"] {
 
 /* --- Felolvasás mini-player (Bootstrap + custom CSS) --- */
 
-/* --- Felolvasás mini-player (Bootstrap + custom CSS) --- */
-
 .felolvasas-small-btn {
   display: flex;
   align-items: center;
@@ -1035,10 +1033,6 @@ html[data-theme="light"] {
   font-weight: 600;
   cursor: pointer;
   backdrop-filter: blur(6px);
-}
-
-.felolvasas-small-btn:hover {
-  background: rgba(30, 41, 59, 0.9);
 }
 
 .felolvasas-inline {
@@ -1060,24 +1054,15 @@ html[data-theme="light"] {
   justify-content: center;
 }
 
-.felolvasas-text {
-  font-size: 14px;
-  font-weight: 600;
-  color: #e2e8f0;
-}
-
 .volume-wrapper {
   position: relative;
 }
 
-.volume-slider {
+.volume-slider-horizontal {
   position: absolute;
-  bottom: 40px;
-  left: -6px;
-  transform: rotate(-90deg);
-  width: 90px;
+  bottom: -5px;
+  left: 30px;
+  width: 120px;
   accent-color: #0dcaf0;
   cursor: pointer;
 }
-
-

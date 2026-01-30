@@ -85,6 +85,7 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
 
   if (!text) return null;
 
+  // Hangerő ikon logika
   const getVolumeIcon = () => {
     if (volume === 0) {
       return (
@@ -128,8 +129,7 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
   return (
     <div className="felolvasas-inline d-flex align-items-center gap-3">
 
-      <img src="/felolvas.svg" width={22} height={22} alt="Felolvasás" />
-
+      {/* Play / Stop */}
       <button onClick={handleClick} className="btn btn-primary rounded-circle p-2 player-btn">
         {isReading ? (
           <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
@@ -142,14 +142,19 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
         )}
       </button>
 
-      <span className="felolvasas-text">Felolvasás</span>
-
       {/* YouTube-stílusú hangerő */}
       <div className="volume-wrapper">
-        <div onClick={() => setShowVolume(!showVolume)} style={{ cursor: "pointer" }}>
+
+        {/* ikon + dupla kattintás = mute/unmute */}
+        <div
+          onClick={() => setShowVolume(!showVolume)}
+          onDoubleClick={() => setVolume(volume === 0 ? 1 : 0)}
+          style={{ cursor: "pointer" }}
+        >
           {getVolumeIcon()}
         </div>
 
+        {/* vízszintes slider */}
         {showVolume && (
           <input
             type="range"
@@ -159,19 +164,12 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
             value={volume}
             onChange={(e) => {
               setVolume(Number(e.target.value));
-              setShowVolume(false);
             }}
-            className="volume-slider"
+            onMouseUp={() => setShowVolume(false)}
+            className="volume-slider-horizontal"
           />
         )}
       </div>
-
-      <button
-        className="btn btn-outline-light btn-sm"
-        onClick={() => setExpanded(false)}
-      >
-        Bezár
-      </button>
     </div>
   );
 }
