@@ -1060,9 +1060,11 @@ html[data-theme="light"] {
 
 .volume-slider-horizontal {
   position: absolute;
-  bottom: -5px;
+  top: 50%;
   left: 30px;
+  transform: translateY(-50%);
   width: 120px;
   accent-color: #0dcaf0;
   cursor: pointer;
 }
+

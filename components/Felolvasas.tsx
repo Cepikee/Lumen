@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type FelolvasasProps = {
   videoId?: number;
@@ -13,6 +13,10 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
   const [showVolume, setShowVolume] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
+  // 🔥 Itt tároljuk az aktuálisan futó utterance példányt
+  const utterRef = useRef<SpeechSynthesisUtterance | null>(null);
+
+  // --- FETCH ---
   useEffect(() => {
     if (!videoId || videoId <= 0) {
       setText("");
@@ -47,45 +51,44 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
 
     return () => {
       cancelled = true;
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-        window.speechSynthesis.pause();
-        window.speechSynthesis.resume();
+      if ("speechSynthesis" in window) {
         window.speechSynthesis.cancel();
       }
     };
   }, [videoId]);
 
-  const handleClick = () => {
+  // --- PLAY / STOP ---
+  const startReading = () => {
     if (!text) return;
-
-    if (isReading) {
-      window.speechSynthesis.cancel();
-      setIsReading(false);
-      return;
-    }
 
     const utter = new SpeechSynthesisUtterance(text);
     utter.lang = "hu-HU";
     utter.rate = 1;
     utter.pitch = 1;
-    utter.volume = volume;
-
-    utter.onboundary = () => {
-      utter.volume = volume;
-    };
+    utter.volume = volume; // induló hangerő
 
     utter.onend = () => {
       setIsReading(false);
+      utterRef.current = null;
     };
 
+    utterRef.current = utter; // 🔥 eltároljuk
     setIsReading(true);
     window.speechSynthesis.speak(utter);
   };
 
-  if (!text) return null;
+  const stopReading = () => {
+    window.speechSynthesis.cancel();
+    utterRef.current = null;
+    setIsReading(false);
+  };
 
-  // Hangerő ikon logika
+  const handleClick = () => {
+    if (isReading) stopReading();
+    else startReading();
+  };
+
+  // --- HANGERŐ IKON ---
   const getVolumeIcon = () => {
     if (volume === 0) {
       return (
@@ -142,13 +145,17 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
         )}
       </button>
 
-      {/* YouTube-stílusú hangerő */}
+      {/* Hangerő */}
       <div className="volume-wrapper">
 
         {/* ikon + dupla kattintás = mute/unmute */}
         <div
           onClick={() => setShowVolume(!showVolume)}
-          onDoubleClick={() => setVolume(volume === 0 ? 1 : 0)}
+          onDoubleClick={() => {
+            const newVol = volume === 0 ? 1 : 0;
+            setVolume(newVol);
+            if (utterRef.current) utterRef.current.volume = newVol; // 🔥 élő frissítés
+          }}
           style={{ cursor: "pointer" }}
         >
           {getVolumeIcon()}
@@ -163,9 +170,14 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
             step="0.05"
             value={volume}
             onChange={(e) => {
-              setVolume(Number(e.target.value));
+              const newVol = Number(e.target.value);
+              setVolume(newVol);
+
+              // 🔥 ÉLŐBEN frissítjük a hangerőt
+              if (utterRef.current) {
+                utterRef.current.volume = newVol;
+              }
             }}
-            onMouseUp={() => setShowVolume(false)}
             className="volume-slider-horizontal"
           />
         )}
