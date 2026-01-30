@@ -46,7 +46,7 @@ export default function CategoryPage() {
   const [meta, setMeta] = useState<ApiMeta | null>(null);
   const [summary, setSummary] = useState<ApiSummary | null>(null);
   const [items, setItems] = useState<ApiItem[]>([]);
-  const [fullSources, setFullSources] = useState<any[]>([]);   // ÚJ
+  const [fullSources, setFullSources] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -100,7 +100,7 @@ export default function CategoryPage() {
         }));
 
         setItems(mapped);
-        setFullSources(json.sources || []);   // ÚJ: teljes forráslista mentése
+        setFullSources(json.sources || []);
 
       } catch (e) {
         console.error("Category load error:", e);
@@ -272,7 +272,7 @@ function mapToInsightListItem(it: any) {
   };
 }
 
-/* ÚJ: SourceBreakdown teljes forráslistával */
+/* --- VÉGLEGES, JAVÍTOTT SourceBreakdown --- */
 function SourceBreakdown({
   items,
   fullSources,
@@ -280,6 +280,7 @@ function SourceBreakdown({
   items: ApiItem[];
   fullSources?: any[];
 }) {
+  // 1) Forrásadatok összegyűjtése
   const sourceData =
     fullSources && fullSources.length > 0
       ? fullSources.map((s) => ({
@@ -291,22 +292,31 @@ function SourceBreakdown({
           count: 1,
         }));
 
+  // 2) Összegzés
   const map = new Map<string, number>();
   for (const s of sourceData) {
     map.set(s.name, (map.get(s.name) || 0) + s.count);
   }
 
   const total = Array.from(map.values()).reduce((a, b) => a + b, 0) || 1;
+
+  // 3) Rendezett lista (eredeti nevekkel)
   const list = Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
 
+  // 4) Normalizáló függvény a SourceRing számára
+  const normalize = (name: string) =>
+    name.toLowerCase().replace(".hu", "").trim();
+
+  // 5) ringSources → ezt kapja a SourceRing
   const ringSources = list.map(([name, cnt]) => ({
-    name,
+    name: normalize(name),
     percent: Math.round((cnt / total) * 100),
   }));
 
   return (
     <div>
       <InsightSourceRing sources={ringSources} />
+
       <ul className="list-unstyled mt-3 small">
         {list.map(([name, cnt]) => (
           <li key={name} className="d-flex justify-content-between">
