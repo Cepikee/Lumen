@@ -76,10 +76,19 @@ export async function GET(req: Request, context: any) {
     }
 
     const itemsSql = `
-      SELECT id, title, category, published_at, source AS dominantSource,
-             1 AS sources, 0 AS score,
-             CASE WHEN content_text IS NOT NULL THEN SUBSTRING(content_text, 1, 300) ELSE NULL END AS excerpt
-      FROM articles
+      SELECT 
+  a.id AS article_id,
+  s.id AS summary_id,
+  a.title,
+  a.category,
+  a.published_at,
+  a.source AS dominantSource,
+  1 AS sources,
+  0 AS score,
+  CASE WHEN a.content_text IS NOT NULL THEN SUBSTRING(a.content_text, 1, 300) ELSE NULL END AS excerpt
+FROM articles a
+LEFT JOIN summaries s ON s.article_id = a.id
+
       ${whereClause}
       ${periodClause}
       ${orderBy}
@@ -90,7 +99,7 @@ export async function GET(req: Request, context: any) {
     const [itemsRows]: any = await db.query(itemsSql, itemsParams);
 
     const items = (itemsRows || []).map((r: any) => ({
-      id: String(r.id),
+      id: String(r.summary_id),
       title: r.title,
       category: r.category ?? null,
       published_at: r.published_at ? new Date(r.published_at).toISOString() : null,
@@ -98,7 +107,7 @@ export async function GET(req: Request, context: any) {
       sources: Number(r.sources || 1),
       score: Number(r.score || 0),
       excerpt: r.excerpt || "",
-      href: `/insights/${r.id}`,
+      href: `/cikk/${r.summary_id}`,
     }));
 
     // ---------------------------------------
