@@ -7,14 +7,7 @@ import InsightList from "@/components/InsightList";
 import InsightSparkline from "@/components/InsightSparkline";
 import InsightSourceRing from "@/components/InsightSourceRing";
 
-/**
- * Egyszerű, stabil kategória oldal (Politika stb.)
- * - Nem használ AI hívásokat
- * - Lekéri: meta, summary (trend), items
- * - Mobilbarát, fallback és hibakezelés
- */
-
-/* Típusok a frontendhez */
+/* Típusok */
 type ApiMeta = {
   category: string | null;
   articleCount: number;
@@ -53,11 +46,13 @@ export default function CategoryPage() {
   const [meta, setMeta] = useState<ApiMeta | null>(null);
   const [summary, setSummary] = useState<ApiSummary | null>(null);
   const [items, setItems] = useState<ApiItem[]>([]);
+  const [fullSources, setFullSources] = useState<any[]>([]);   // ÚJ
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let mounted = true;
+
     async function load() {
       setLoading(true);
       setError(null);
@@ -70,11 +65,9 @@ export default function CategoryPage() {
         )}&page=${page}&limit=${limit}`;
 
         const res = await fetch(url, { cache: "no-store" });
-        if (!res.ok) {
-          throw new Error("Hálózati hiba");
-        }
-        const json = await res.json();
+        if (!res.ok) throw new Error("Hálózati hiba");
 
+        const json = await res.json();
         if (!mounted) return;
 
         if (!json || json.success !== true) {
@@ -82,13 +75,11 @@ export default function CategoryPage() {
           setMeta(null);
           setSummary(null);
           setItems([]);
+          setFullSources([]);
           return;
         }
 
-        // meta
         setMeta(json.meta ?? null);
-
-        // summary
         setSummary(
           json.summary ?? {
             trendSeries: [],
@@ -97,7 +88,6 @@ export default function CategoryPage() {
           }
         );
 
-        // items: alakítsuk át a backend formátumát InsightList-hez
         const mapped: ApiItem[] = (json.items || []).map((it: any) => ({
           id: String(it.id),
           title: it.title,
@@ -108,7 +98,10 @@ export default function CategoryPage() {
           excerpt: it.excerpt ?? "",
           href: it.href ?? `/insights/${it.id}`,
         }));
+
         setItems(mapped);
+        setFullSources(json.sources || []);   // ÚJ: teljes forráslista mentése
+
       } catch (e) {
         console.error("Category load error:", e);
         if (mounted) setError("Szerverhiba vagy hálózati probléma.");
@@ -121,10 +114,8 @@ export default function CategoryPage() {
     return () => {
       mounted = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryRaw, period, sort, page, limit]);
 
-  /* Rövid segédfüggvény: dátum formázás */
   function formatDate(iso?: string | null) {
     if (!iso) return "";
     try {
@@ -134,7 +125,6 @@ export default function CategoryPage() {
     }
   }
 
-  /* Rendezés gombok kezelése (csak query string frissítés) */
   function setSort(newSort: string) {
     const q = new URLSearchParams(Array.from(search?.entries() || []));
     q.set("sort", newSort);
@@ -151,7 +141,6 @@ export default function CategoryPage() {
 
   return (
     <main className="container py-4">
-      {/* Fejléc */}
       <header className="mb-4">
         <h1 className="h3">{meta?.category ?? decodeURIComponent(categoryRaw)}</h1>
         <div className="d-flex gap-3 align-items-center text-muted small">
@@ -163,10 +152,8 @@ export default function CategoryPage() {
         </div>
       </header>
 
-      {/* Metrikák és vezérlők */}
       <section className="mb-4">
         <div className="d-flex flex-column flex-md-row justify-content-between gap-3">
-          {/* Metrikák */}
           <div className="d-flex gap-3 align-items-center">
             <div className="metric-card p-2 border rounded text-center">
               <div className="metric-value fs-4">{meta?.articleCount ?? "—"}</div>
@@ -183,13 +170,11 @@ export default function CategoryPage() {
               <div className="metric-label small text-muted">Trend pont</div>
             </div>
 
-            {/* Sparkline (kis grafikon) */}
             <div className="p-2">
               <InsightSparkline trend={summary?.trendSeries ?? []} />
             </div>
           </div>
 
-          {/* Szűrők / rendezés */}
           <div className="d-flex gap-2 align-items-center">
             <div className="btn-group" role="group" aria-label="Rendezés">
               <button
@@ -230,42 +215,39 @@ export default function CategoryPage() {
         </div>
       </section>
 
-      {/* Fő tartalom: forrásbontás + lista */}
       <section className="row">
-        {/* Jobb oldali sáv: források (desktop) */}
         <aside className="col-12 col-md-4 mb-4">
           <div className="p-3 border rounded">
             <h3 className="h6 mb-3">Források</h3>
-            {/* Egyszerű forrásbontás: számoljuk össze a forrásokat a items alapján */}
+
             {loading ? (
               <div className="text-muted">Betöltés…</div>
             ) : items.length === 0 ? (
               <div className="text-muted">Nincs találat a kiválasztott időszakra.</div>
             ) : (
-              <>
-                {/* Készítsünk egyszerű statisztikát a jelenlegi items tömbből */}
-                <SourceBreakdown items={items} />
-              </>
+              <SourceBreakdown items={items} fullSources={fullSources} />
             )}
           </div>
         </aside>
 
-        {/* Lista */}
         <div className="col-12 col-md-8">
           {error ? (
             <div className="alert alert-danger">{error}</div>
           ) : loading ? (
             <div>
               <div className="mb-2 text-muted">Betöltés…</div>
-              <InsightList items={Array.from({ length: 6 }).map((_, i) => ({
-                id: `skeleton-${i}`,
-                title: "Betöltés…",
-                score: 0,
-                sources: 0,
-                dominantSource: "",
-                timeAgo: "",
-                href: undefined,
-              }))} loading={true} />
+              <InsightList
+                items={Array.from({ length: 6 }).map((_, i) => ({
+                  id: `skeleton-${i}`,
+                  title: "Betöltés…",
+                  score: 0,
+                  sources: 0,
+                  dominantSource: "",
+                  timeAgo: "",
+                  href: undefined,
+                }))}
+                loading={true}
+              />
             </div>
           ) : items.length === 0 ? (
             <div className="text-muted">Nincs megjeleníthető cikk a kiválasztott szűrőkkel.</div>
@@ -278,7 +260,6 @@ export default function CategoryPage() {
   );
 }
 
-/* Segédfüggvény: ApiItem -> InsightList item shape */
 function mapToInsightListItem(it: any) {
   return {
     id: it.id,
@@ -291,18 +272,33 @@ function mapToInsightListItem(it: any) {
   };
 }
 
-/* Komponens: egyszerű forrásbontás a jelenlegi items tömb alapján */
-function SourceBreakdown({ items }: { items: ApiItem[] }) {
-  // számoljuk a forrásokat
-  const map = new Map<string, number>();
-  for (const it of items) {
-    const s = it.dominantSource || "Ismeretlen";
-    map.set(s, (map.get(s) || 0) + 1);
-  }
-  const total = Array.from(map.values()).reduce((a, b) => a + b, 0) || 1;
-  const list = Array.from(map.entries()).sort((a, b) => b[1] - a[1]).slice(0, 10);
+/* ÚJ: SourceBreakdown teljes forráslistával */
+function SourceBreakdown({
+  items,
+  fullSources,
+}: {
+  items: ApiItem[];
+  fullSources?: any[];
+}) {
+  const sourceData =
+    fullSources && fullSources.length > 0
+      ? fullSources.map((s) => ({
+          name: s.source || "Ismeretlen",
+          count: s.count || 0,
+        }))
+      : items.map((it) => ({
+          name: it.dominantSource || "Ismeretlen",
+          count: 1,
+        }));
 
-  // készítsük el a források adatait az InsightSourceRing-nek (név, percent, szín opcionális)
+  const map = new Map<string, number>();
+  for (const s of sourceData) {
+    map.set(s.name, (map.get(s.name) || 0) + s.count);
+  }
+
+  const total = Array.from(map.values()).reduce((a, b) => a + b, 0) || 1;
+  const list = Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
+
   const ringSources = list.map(([name, cnt]) => ({
     name,
     percent: Math.round((cnt / total) * 100),
