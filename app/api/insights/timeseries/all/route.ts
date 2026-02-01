@@ -51,17 +51,15 @@ export async function GET(req: Request) {
   let start: Date;
 
   if (mode === "hours") {
-    // most óra eleje
-    const aligned = new Date(now);
-    aligned.setMinutes(0, 0, 0);
-    // 24 órás ablak: 23 órát vissza
-    start = new Date(aligned.getTime() - (hours - 1) * 60 * 60 * 1000);
+    // 1) start = most - 24 óra (NEM kerekítjük!)
+    start = new Date(now.getTime() - 24 * 60 * 60 * 1000);
   } else {
     start = new Date(now);
     start.setDate(start.getDate() - days + 1);
     start.setHours(0, 0, 0, 0);
   }
 
+  // SQL-hez: a start teljes timestamp kell
   const startStr =
     mode === "hours"
       ? start.toISOString().slice(0, 19).replace("T", " ")
@@ -118,28 +116,31 @@ export async function GET(req: Request) {
         rows = r || [];
       }
 
+      // Map feltöltése — SQL stringet használunk → nincs timezone elcsúszás
       const map = new Map<string, number>();
       for (const r of rows) {
         const key =
           mode === "hours"
             ? String(r.bucket) // "YYYY-MM-DD HH:00:00"
-            : toYMD(r.bucket); // "YYYY-MM-DD"
+            : toYMD(r.bucket);
 
         map.set(key, Number(r.count) || 0);
       }
 
-      const points: { date: string; count: number }[] = [];
+      // 2) cursor = start órára kerekítve
       const cursor = new Date(start);
+      if (mode === "hours") {
+        cursor.setMinutes(0, 0, 0);
+      }
+
+      const points: { date: string; count: number }[] = [];
 
       if (mode === "hours") {
         for (let i = 0; i < hours; i++) {
           const key = cursor.toISOString().slice(0, 19).replace("T", " ");
           const c = map.get(key) ?? 0;
 
-          points.push({
-            date: key,
-            count: c,
-          });
+          points.push({ date: key, count: c });
 
           cursor.setHours(cursor.getHours() + 1);
         }
@@ -148,10 +149,7 @@ export async function GET(req: Request) {
           const key = cursor.toISOString().slice(0, 10);
           const c = map.get(key) ?? 0;
 
-          points.push({
-            date: key,
-            count: c,
-          });
+          points.push({ date: key, count: c });
 
           cursor.setDate(cursor.getDate() + 1);
         }
