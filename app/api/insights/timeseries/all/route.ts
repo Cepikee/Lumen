@@ -28,9 +28,10 @@ export async function GET(req: Request) {
   if (period === "30d") days = 30;
   else if (period === "90d") days = 90;
 
+  // 🔥 A HELYES kezdődátum (nem csúszik el 1 nappal)
   const now = new Date();
   const start = new Date(now);
-  start.setDate(now.getDate() - (days - 1));
+  start.setDate(start.getDate() - days + 1);
   const startStr = start.toISOString().slice(0, 10);
 
   try {
@@ -52,26 +53,29 @@ export async function GET(req: Request) {
     // ---------------------------------------------------------
     const results: any[] = [];
 
-    for (const cat of categories) {
+    for (const rawCat of categories) {
+      const cat = normalizeDbString(rawCat);
+      if (!cat) continue;
+
       const [rows]: any = await db.query(
         `
-        SELECT DATE(published_at) AS day, COUNT(*) AS count
+        SELECT 
+          DATE(CAST(published_at AS DATETIME)) AS day,
+          COUNT(*) AS count
         FROM articles
         WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
-          AND DATE(published_at) >= ?
-        GROUP BY DATE(published_at)
+          AND DATE(CAST(published_at AS DATETIME)) >= ?
+        GROUP BY day
         ORDER BY day ASC
         `,
         [cat, startStr]
       );
 
-      // Map nap → count
       const map = new Map<string, number>();
       for (const r of rows || []) {
         map.set(r.day, Number(r.count) || 0);
       }
 
-      // Feltöltjük az összes napot 0-val, ha nincs adat
       const points: { date: string; count: number }[] = [];
       const cursor = new Date(start);
 
@@ -85,7 +89,7 @@ export async function GET(req: Request) {
       }
 
       results.push({
-        category: normalizeDbString(cat),
+        category: cat,
         points,
       });
     }
