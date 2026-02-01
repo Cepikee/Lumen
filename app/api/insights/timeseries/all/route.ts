@@ -17,6 +17,21 @@ function normalizeDbString(s: any): string | null {
   return t || null;
 }
 
+function toYMD(value: any): string {
+  // value lehet Date objektum, ISO string vagy 'YYYY-MM-DD'
+  if (!value && value !== 0) return "";
+  try {
+    const d = new Date(value);
+    if (isNaN(d.getTime())) {
+      // ha nem parse-olható, fallback: string első 10 karakter
+      return String(value).slice(0, 10);
+    }
+    return d.toISOString().slice(0, 10);
+  } catch {
+    return String(value).slice(0, 10);
+  }
+}
+
 export async function GET(req: Request) {
   const url = new URL(req.url);
 
@@ -25,14 +40,12 @@ export async function GET(req: Request) {
   if (period === "30d") days = 30;
   else if (period === "90d") days = 90;
 
-  // helyes kezdődátum: most - days + 1 (pl. 7 nap: 7 napot fed le)
   const now = new Date();
   const start = new Date(now);
   start.setDate(start.getDate() - days + 1);
   const startStr = start.toISOString().slice(0, 10);
 
   try {
-    // 1) Kategóriák lekérése a DB-ből (normalizálva)
     const [cats]: any = await db.query(`
       SELECT DISTINCT TRIM(category) AS category
       FROM articles
@@ -46,7 +59,6 @@ export async function GET(req: Request) {
     const results: any[] = [];
     let anyNonZero = false;
 
-    // 2) Minden kategóriához idősor lekérése
     for (const rawCat of categories) {
       const cat = normalizeDbString(rawCat);
       if (!cat) continue;
@@ -67,8 +79,9 @@ export async function GET(req: Request) {
 
       const map = new Map<string, number>();
       for (const r of rows || []) {
-        // r.day is 'YYYY-MM-DD'
-        map.set(String(r.day), Number(r.count) || 0);
+        // Normalizáljuk a r.day értéket YYYY-MM-DD formátumra
+        const key = toYMD(r.day);
+        map.set(key, Number(r.count) || 0);
       }
 
       const points: { date: string; count: number }[] = [];
@@ -91,9 +104,7 @@ export async function GET(req: Request) {
       });
     }
 
-    // Ha minden kategória 0, adjunk vissza diagnosztikát is
     if (!anyNonZero) {
-      // összes cikk az időszakban
       const [totalRows]: any = await db.query(
         `
         SELECT COUNT(*) AS total
@@ -103,7 +114,6 @@ export async function GET(req: Request) {
         [startStr]
       );
 
-      // kategória eloszlás az időszakban (lowered, trimmed)
       const [distRows]: any = await db.query(
         `
         SELECT LOWER(TRIM(category)) AS category_norm, COUNT(*) AS cnt
@@ -116,7 +126,6 @@ export async function GET(req: Request) {
         [startStr]
       );
 
-      // egy példa lekérdezés egy kategóriára (ha van legalább egy)
       let sampleCategoryCheck: any = null;
       if (categories.length > 0) {
         const sampleCat = categories[0];
@@ -133,7 +142,10 @@ export async function GET(req: Request) {
         );
         sampleCategoryCheck = {
           sampleCategory: sampleCat,
-          rows: sampleRows || [],
+          rows: (sampleRows || []).map((r: any) => ({
+            day: toYMD(r.day),
+            count: Number(r.count) || 0,
+          })),
         };
       }
 
@@ -156,7 +168,6 @@ export async function GET(req: Request) {
       });
     }
 
-    // normál visszaadás, ha van legalább egy nem‑null adat
     return NextResponse.json({
       success: true,
       period,
