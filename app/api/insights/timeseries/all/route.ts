@@ -2,21 +2,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-function normalizeDbString(s: any): string | null {
-  if (s === null || s === undefined) return null;
-  let t = String(s).trim();
-  if (!t) return null;
-  if (t.toLowerCase() === "null") return null;
-
-  const hasMojibake = /[├â├ę├╝├║]/.test(t);
-  if (hasMojibake) {
-    try {
-      t = Buffer.from(t, "latin1").toString("utf8");
-    } catch {}
-  }
-  return t || null;
-}
-
 export async function GET(req: Request) {
   const url = new URL(req.url);
 
@@ -25,36 +10,34 @@ export async function GET(req: Request) {
   if (period === "30d") days = 30;
   else if (period === "90d") days = 90;
 
+  // 🔥 A HELYES kezdődátum
   const now = new Date();
   const start = new Date(now);
   start.setDate(start.getDate() - days + 1);
   const startStr = start.toISOString().slice(0, 10);
 
   try {
-    const [cats]: any = await db.query(`
-      SELECT DISTINCT TRIM(category) AS category
-      FROM articles
-      WHERE category IS NOT NULL AND category <> ''
-    `);
+    // 🔥 1) Kategóriák LEKÉRÉSE a működő insights endpointból
+    const base = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const insightsRes = await fetch(`${base}/api/insights?period=${period}`, {
+      cache: "no-store",
+    });
+    const insights = await insightsRes.json();
 
-    const categories = cats
-      .map((c: any) => normalizeDbString(c.category))
-      .filter(Boolean) as string[];
+    const categories = insights.categories.map((c: any) => c.category);
 
     const results: any[] = [];
 
-    for (const rawCat of categories) {
-      const cat = normalizeDbString(rawCat);
-      if (!cat) continue;
-
+    // 🔥 2) Minden kategóriához idősor
+    for (const cat of categories) {
       const [rows]: any = await db.query(
         `
         SELECT 
-          DATE(CAST(published_at AS DATETIME)) AS day,
+          DATE(published_at) AS day,
           COUNT(*) AS count
         FROM articles
         WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
-          AND DATE(CAST(published_at AS DATETIME)) >= DATE(?)
+          AND DATE(published_at) >= DATE(?)
         GROUP BY day
         ORDER BY day ASC
         `,
