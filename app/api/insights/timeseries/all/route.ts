@@ -2,12 +2,22 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
+/**
+ * Ugyanaz a normalizáló, mint az insights endpointban
+ */
 function normalizeDbString(s: any): string | null {
   if (s === null || s === undefined) return null;
   let t = String(s).trim();
   if (!t) return null;
   if (t.toLowerCase() === "null") return null;
-  return t;
+
+  const hasMojibake = /[├â├ę├╝├║]/.test(t);
+  if (hasMojibake) {
+    try {
+      t = Buffer.from(t, "latin1").toString("utf8");
+    } catch {}
+  }
+  return t || null;
 }
 
 export async function GET(req: Request) {
@@ -24,9 +34,11 @@ export async function GET(req: Request) {
   const startStr = start.toISOString().slice(0, 10);
 
   try {
-    // 1) Lekérjük az összes kategóriát
+    // ---------------------------------------------------------
+    // 1) ÖSSZES KATEGÓRIA LEKÉRÉSE (ugyanúgy, mint insights)
+    // ---------------------------------------------------------
     const [cats]: any = await db.query(`
-      SELECT DISTINCT LOWER(TRIM(category)) AS category
+      SELECT DISTINCT TRIM(category) AS category
       FROM articles
       WHERE category IS NOT NULL AND category <> ''
     `);
@@ -35,7 +47,9 @@ export async function GET(req: Request) {
       .map((c: any) => normalizeDbString(c.category))
       .filter(Boolean) as string[];
 
-    // 2) Minden kategóriához lekérjük az idősorát
+    // ---------------------------------------------------------
+    // 2) Minden kategóriához idősor lekérése
+    // ---------------------------------------------------------
     const results: any[] = [];
 
     for (const cat of categories) {
@@ -47,15 +61,17 @@ export async function GET(req: Request) {
           AND DATE(published_at) >= ?
         GROUP BY DATE(published_at)
         ORDER BY day ASC
-      `,
+        `,
         [cat, startStr]
       );
 
+      // Map nap → count
       const map = new Map<string, number>();
       for (const r of rows || []) {
         map.set(r.day, Number(r.count) || 0);
       }
 
+      // Feltöltjük az összes napot 0-val, ha nincs adat
       const points: { date: string; count: number }[] = [];
       const cursor = new Date(start);
 
