@@ -2,49 +2,32 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-/**
- * Normalizáljuk a DB-ből jövő stringeket (mojibake fix)
- */
-function normalizeDbString(s: any): string | null {
-  if (s === null || s === undefined) return null;
-  let t = String(s).trim();
+function cleanCategory(s: any): string | null {
+  if (!s) return null;
+  const t = String(s).trim();
   if (!t) return null;
   if (t.toLowerCase() === "null") return null;
-
-  const hasMojibake = /[├â├ę├╝├║]/.test(t);
-  if (hasMojibake) {
-    try {
-      t = Buffer.from(t, "latin1").toString("utf8");
-    } catch {}
-  }
-  return t || null;
+  return t;
 }
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
 
-  // period paraméter
   const period = url.searchParams.get("period") || "7d";
-  let days = 7;
-  if (period === "30d") days = 30;
-  else if (period === "90d") days = 90;
+  let days = period === "30d" ? 30 : period === "90d" ? 90 : 7;
 
-  // kezdő dátum
   const now = new Date();
   const startDate = new Date(now);
   startDate.setDate(now.getDate() - (days - 1));
   const startDateStr = startDate.toISOString().slice(0, 10);
 
-  // opcionális category filter
   const rawCategory = url.searchParams.get("category");
-  const categoryParam = rawCategory ? String(rawCategory).trim() : null;
+  const categoryParam = rawCategory ? rawCategory.trim() : null;
 
   try {
-    // ---------------------------------------------------------
-    // 1) LEKÉRDEZZÜK AZ ÖSSZES KATEGÓRIÁT A DB-BŐL
-    // ---------------------------------------------------------
+    // 1) ÖSSZES KATEGÓRIA LEKÉRÉSE
     const [allCats]: any = await db.query(`
-      SELECT DISTINCT LOWER(TRIM(category)) AS category
+      SELECT DISTINCT TRIM(category) AS category
       FROM articles
       WHERE category IS NOT NULL AND category <> ''
     `);
@@ -52,7 +35,7 @@ export async function GET(req: Request) {
     const catMap = new Map<
       string,
       {
-        category: string | null;
+        category: string;
         trendScore: number;
         articleCount: number;
         sourceSet: Set<string>;
@@ -62,10 +45,10 @@ export async function GET(req: Request) {
     >();
 
     for (const c of allCats) {
-      const cat = normalizeDbString(c.category);
-      const key = cat ?? "__NULL__";
+      const cat = cleanCategory(c.category);
+      if (!cat) continue;
 
-      catMap.set(key, {
+      catMap.set(cat, {
         category: cat,
         trendScore: 0,
         articleCount: 0,
@@ -75,19 +58,13 @@ export async function GET(req: Request) {
       });
     }
 
-    // ---------------------------------------------------------
-    // 2) CIKKEK LEKÉRDEZÉSE (IDŐSZAK + OPCIONÁLIS KATEGÓRIA)
-    // ---------------------------------------------------------
+    // 2) CIKKEK LEKÉRÉSE
     const params: any[] = [];
     let where = "";
 
-    if (categoryParam !== null && categoryParam !== "") {
-      if (categoryParam.toLowerCase() === "null") {
-        where = ` WHERE category IS NULL`;
-      } else {
-        where = ` WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))`;
-        params.push(categoryParam);
-      }
+    if (categoryParam) {
+      where = ` WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))`;
+      params.push(categoryParam);
     }
 
     params.push(startDateStr);
@@ -103,15 +80,12 @@ export async function GET(req: Request) {
 
     const [rows]: any = await db.query(sql, params);
 
-    // ---------------------------------------------------------
     // 3) AGGREGÁCIÓ FELTÖLTÉSE
-    // ---------------------------------------------------------
-    for (const r of rows || []) {
-      const raw = r.category ?? null;
-      const cat = normalizeDbString(raw);
-      const key = cat ?? "__NULL__";
+    for (const r of rows) {
+      const cat = cleanCategory(r.category);
+      if (!cat) continue;
 
-      const entry = catMap.get(key);
+      const entry = catMap.get(cat);
       if (!entry) continue;
 
       const publishedAt = r.published_at
@@ -122,7 +96,7 @@ export async function GET(req: Request) {
         ? String(r.dominantSource).trim()
         : "Ismeretlen";
 
-      entry.articleCount += 1;
+      entry.articleCount++;
       entry.sourceSet.add(dominantSource);
 
       entry.sourceCounts.set(
@@ -135,9 +109,7 @@ export async function GET(req: Request) {
       }
     }
 
-    // ---------------------------------------------------------
-    // 4) KATEGÓRIA LISTA ÖSSZEÁLLÍTÁSA
-    // ---------------------------------------------------------
+    // 4) KATEGÓRIA LISTA
     const categories = Array.from(catMap.values())
       .map((e) => {
         const total = Array.from(e.sourceCounts.values()).reduce(
@@ -146,15 +118,12 @@ export async function GET(req: Request) {
         );
 
         const ringSources = Array.from(e.sourceCounts.entries()).map(
-          ([label, count]) => {
-            const normalized = label.toLowerCase().replace(".hu", "").trim();
-            return {
-              name: normalized,
-              label,
-              count,
-              percent: total > 0 ? Math.round((count / total) * 100) : 0,
-            };
-          }
+          ([label, count]) => ({
+            name: label.toLowerCase().replace(".hu", "").trim(),
+            label,
+            count,
+            percent: total > 0 ? Math.round((count / total) * 100) : 0,
+          })
         );
 
         return {
@@ -168,23 +137,19 @@ export async function GET(req: Request) {
       })
       .sort((a, b) => b.articleCount - a.articleCount);
 
-    // ---------------------------------------------------------
     // 5) LEGFRISSEBB CIKKEK
-    // ---------------------------------------------------------
-    const items = (rows || []).slice(0, 200).map((r: any) => ({
+    const items = rows.slice(0, 200).map((r: any) => ({
       id: String(r.id),
       title: r.title,
-      category: normalizeDbString(r.category),
+      category: cleanCategory(r.category),
       timeAgo: r.published_at
         ? new Date(r.published_at).toISOString()
         : null,
       dominantSource: r.dominantSource || "",
       sources: 1,
       score: 0,
-      href: normalizeDbString(r.category)
-        ? `/insights/category/${encodeURIComponent(
-            normalizeDbString(r.category)!
-          )}`
+      href: cleanCategory(r.category)
+        ? `/insights/category/${encodeURIComponent(cleanCategory(r.category)!)}`
         : `/insights/${r.id}`,
     }));
 
