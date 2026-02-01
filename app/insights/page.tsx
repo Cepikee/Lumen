@@ -6,7 +6,13 @@ import InsightFilters from "@/components/InsightFilters";
 import ThemeSync from "@/components/ThemeSync";
 import { useInsights } from "@/hooks/useInsights";
 import { useTimeseriesAll } from "@/hooks/useTimeseriesAll";
-import InsightsOverviewChart from "@/components/InsightsOverviewChart";
+import dynamic from "next/dynamic";
+
+const InsightsOverviewChart = dynamic(
+  () => import("@/components/InsightsOverviewChart"),
+  { ssr: false }
+);
+
 
 type LocalRawCategory = {
   category: string | null;
