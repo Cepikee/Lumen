@@ -59,7 +59,7 @@ export async function GET(req: Request) {
     start.setHours(0, 0, 0, 0);
   }
 
-  // SQL-hez: a start teljes timestamp kell
+  // SQL-hez teljes timestamp kell
   const startStr =
     mode === "hours"
       ? start.toISOString().slice(0, 19).replace("T", " ")
@@ -127,10 +127,11 @@ export async function GET(req: Request) {
         map.set(key, Number(r.count) || 0);
       }
 
-      // 2) cursor = start órára kerekítve
+      // 2) cursor = start órára kerekítve + 1 óra
       const cursor = new Date(start);
       if (mode === "hours") {
         cursor.setMinutes(0, 0, 0);
+        cursor.setHours(cursor.getHours() + 1);
       }
 
       const points: { date: string; count: number }[] = [];
