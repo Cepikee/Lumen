@@ -115,7 +115,7 @@ const sourceColorMap: Record<string, string> = {
   "portfolio": "#ff6600",
   "24hu": "#ff0000",
   "telex": "#00AEEF",
-  "hvg": "#ff7a00",
+  "hvg": "#dd6503cb",
 };
 
 function normalizeName(name?: string) {
