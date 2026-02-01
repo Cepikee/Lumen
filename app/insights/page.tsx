@@ -15,7 +15,7 @@ type LocalRawCategory = {
   sourceDiversity?: number;
   lastArticleAt?: string | null;
   sparkline?: number[];
-  ringSources?: any[]; // ÚJ
+  ringSources?: any[];
 };
 
 function normalizeCategory(raw?: string | null) {
@@ -32,6 +32,7 @@ export default function InsightFeedPage() {
 
   const { data, error, loading } = useInsights(period, sort);
   const { data: tsData, loading: tsLoading } = useTimeseriesAll(period);
+
   const categoryTrends = useMemo<LocalRawCategory[]>(() => {
     if (!data) return [];
 
@@ -50,7 +51,7 @@ export default function InsightFeedPage() {
           sourceDiversity: Number(it.sourceDiversity ?? 0),
           lastArticleAt: it.lastArticleAt ?? null,
           sparkline: it.sparkline ?? [],
-          ringSources: it.ringSources ?? [], // ÚJ
+          ringSources: it.ringSources ?? [],
         } as LocalRawCategory;
       })
       .filter((c) => normalizeCategory(c.category) !== null);
@@ -68,7 +69,7 @@ export default function InsightFeedPage() {
       dominantSource: `${c.sourceDiversity ?? 0} forrás`,
       timeAgo: c.lastArticleAt ? new Date(c.lastArticleAt).toLocaleString() : "",
       href: `/insights/category/${encodeURIComponent(cat)}`,
-      ringSources: c.ringSources, // ÚJ
+      ringSources: c.ringSources,
       sparkline: c.sparkline,
     };
   });
@@ -77,16 +78,8 @@ export default function InsightFeedPage() {
     <main className="container py-4">
       <ThemeSync />
 
+      {/* HEADER – csak cím + szűrők */}
       <header className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between mb-3 gap-3">
-        {tsLoading ? (
-  <div style={{ height: 180 }} className="mb-4 bg-light rounded-4" />
-) : (
-  <div className="mb-4 p-3 rounded-4 bg-body-secondary">
-    {/* IDE JÖN MAJD A GRAFIKON */}
-   <InsightsOverviewChart data={tsData?.categories || []} />
-  </div>
-)}
-
         <div>
           <h1 className="h3 mb-1 text-center text-md-start">Insights</h1>
           <p className="text-muted mb-0">Kategória trendek és forráseloszlások</p>
@@ -121,6 +114,16 @@ export default function InsightFeedPage() {
         </div>
       </header>
 
+      {/* GRAFIKON – külön blokkban, teljes szélességben */}
+      {tsLoading ? (
+        <div style={{ height: 220 }} className="mb-4 bg-light rounded-4" />
+      ) : (
+        <div className="mb-4 p-3 rounded-4 bg-body-secondary">
+          <InsightsOverviewChart data={tsData?.categories || []} />
+        </div>
+      )}
+
+      {/* KATEGÓRIAKÁRTYÁK */}
       <section aria-labelledby="category-trends">
         <h2 id="category-trends" className="fs-5 fw-bold mb-2 visually-hidden">
           Kategória trendek
