@@ -2,69 +2,57 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-function cleanCategory(s: any): string | null {
-  if (!s) return null;
-  const t = String(s).trim();
+/**
+ * Normalizáljuk a DB-ből jövő stringeket (mojibake fix)
+ */
+function normalizeDbString(s: any): string | null {
+  if (s === null || s === undefined) return null;
+  let t = String(s).trim();
   if (!t) return null;
   if (t.toLowerCase() === "null") return null;
-  return t;
+
+  const hasMojibake = /[├â├ę├╝├║]/.test(t);
+  if (hasMojibake) {
+    try {
+      t = Buffer.from(t, "latin1").toString("utf8");
+    } catch {}
+  }
+  return t || null;
 }
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
 
+  // period paraméter
   const period = url.searchParams.get("period") || "7d";
-  let days = period === "30d" ? 30 : period === "90d" ? 90 : 7;
+  let days = 7;
+  if (period === "30d") days = 30;
+  else if (period === "90d") days = 90;
 
+  // kezdő dátum
   const now = new Date();
   const startDate = new Date(now);
   startDate.setDate(now.getDate() - (days - 1));
   const startDateStr = startDate.toISOString().slice(0, 10);
 
+  // opcionális category filter
   const rawCategory = url.searchParams.get("category");
-  const categoryParam = rawCategory ? rawCategory.trim() : null;
+  const categoryParam = rawCategory ? String(rawCategory).trim() : null;
 
   try {
-    // 1) ÖSSZES KATEGÓRIA LEKÉRÉSE
-    const [allCats]: any = await db.query(`
-      SELECT DISTINCT TRIM(category) AS category
-      FROM articles
-      WHERE category IS NOT NULL AND category <> ''
-    `);
-
-    const catMap = new Map<
-      string,
-      {
-        category: string;
-        trendScore: number;
-        articleCount: number;
-        sourceSet: Set<string>;
-        lastArticleAt: string | null;
-        sourceCounts: Map<string, number>;
-      }
-    >();
-
-    for (const c of allCats) {
-      const cat = cleanCategory(c.category);
-      if (!cat) continue;
-
-      catMap.set(cat, {
-        category: cat,
-        trendScore: 0,
-        articleCount: 0,
-        sourceSet: new Set(),
-        lastArticleAt: null,
-        sourceCounts: new Map(),
-      });
-    }
-
-    // 2) CIKKEK LEKÉRÉSE
+    // -----------------------------
+    // 1) Cikkek lekérdezése
+    // -----------------------------
     const params: any[] = [];
     let where = "";
 
-    if (categoryParam) {
-      where = ` WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))`;
-      params.push(categoryParam);
+    if (categoryParam !== null && categoryParam !== "") {
+      if (categoryParam.toLowerCase() === "null") {
+        where = ` WHERE category IS NULL`;
+      } else {
+        where = ` WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))`;
+        params.push(categoryParam);
+      }
     }
 
     params.push(startDateStr);
@@ -80,13 +68,25 @@ export async function GET(req: Request) {
 
     const [rows]: any = await db.query(sql, params);
 
-    // 3) AGGREGÁCIÓ FELTÖLTÉSE
-    for (const r of rows) {
-      const cat = cleanCategory(r.category);
-      if (!cat) continue;
+    // -----------------------------
+    // 2) Kategória aggregáció
+    // -----------------------------
+    const catMap = new Map<
+      string,
+      {
+        category: string | null;
+        trendScore: number;
+        articleCount: number;
+        sourceSet: Set<string>;
+        lastArticleAt: string | null;
+        sourceCounts: Map<string, number>; // ÚJ: forráseloszlás
+      }
+    >();
 
-      const entry = catMap.get(cat);
-      if (!entry) continue;
+    for (const r of rows || []) {
+      const raw = r.category ?? null;
+      const cat = normalizeDbString(raw);
+      const key = cat ?? "__NULL__";
 
       const publishedAt = r.published_at
         ? new Date(r.published_at).toISOString()
@@ -96,34 +96,61 @@ export async function GET(req: Request) {
         ? String(r.dominantSource).trim()
         : "Ismeretlen";
 
-      entry.articleCount++;
+      if (!catMap.has(key)) {
+        catMap.set(key, {
+          category: cat,
+          trendScore: 0,
+          articleCount: 0,
+          sourceSet: new Set(),
+          lastArticleAt: publishedAt,
+          sourceCounts: new Map(), // ÚJ
+        });
+      }
+
+      const entry = catMap.get(key)!;
+
+      entry.articleCount += 1;
       entry.sourceSet.add(dominantSource);
 
+      // ÚJ: forráseloszlás növelése
       entry.sourceCounts.set(
         dominantSource,
         (entry.sourceCounts.get(dominantSource) || 0) + 1
       );
 
-      if (publishedAt && (!entry.lastArticleAt || publishedAt > entry.lastArticleAt)) {
+      // legfrissebb cikk dátuma
+      if (
+        publishedAt &&
+        (!entry.lastArticleAt || publishedAt > entry.lastArticleAt)
+      ) {
         entry.lastArticleAt = publishedAt;
       }
     }
 
-    // 4) KATEGÓRIA LISTA
+    // -----------------------------
+    // 3) Kategória lista összeállítása + ringSources
+    // -----------------------------
     const categories = Array.from(catMap.values())
       .map((e) => {
         const total = Array.from(e.sourceCounts.values()).reduce(
-          (sum, c) => sum + c,
+          (sum: number, c: number) => sum + c,
           0
         );
 
         const ringSources = Array.from(e.sourceCounts.entries()).map(
-          ([label, count]) => ({
-            name: label.toLowerCase().replace(".hu", "").trim(),
-            label,
-            count,
-            percent: total > 0 ? Math.round((count / total) * 100) : 0,
-          })
+          ([label, count]) => {
+            const normalized = label
+              .toLowerCase()
+              .replace(".hu", "")
+              .trim();
+
+            return {
+              name: normalized, // normalized név → színmap
+              label, // eredeti név
+              count,
+              percent: Math.round((count / total) * 100),
+            };
+          }
         );
 
         return {
@@ -132,24 +159,28 @@ export async function GET(req: Request) {
           articleCount: e.articleCount,
           sourceDiversity: e.sourceSet.size,
           lastArticleAt: e.lastArticleAt,
-          ringSources,
+          ringSources, // ÚJ
         };
       })
       .sort((a, b) => b.articleCount - a.articleCount);
 
-    // 5) LEGFRISSEBB CIKKEK
-    const items = rows.slice(0, 200).map((r: any) => ({
+    // -----------------------------
+    // 4) Items (legfrissebb cikkek)
+    // -----------------------------
+    const items = (rows || []).slice(0, 200).map((r: any) => ({
       id: String(r.id),
       title: r.title,
-      category: cleanCategory(r.category),
+      category: normalizeDbString(r.category),
       timeAgo: r.published_at
         ? new Date(r.published_at).toISOString()
         : null,
       dominantSource: r.dominantSource || "",
       sources: 1,
       score: 0,
-      href: cleanCategory(r.category)
-        ? `/insights/category/${encodeURIComponent(cleanCategory(r.category)!)}`
+      href: normalizeDbString(r.category)
+        ? `/insights/category/${encodeURIComponent(
+            normalizeDbString(r.category)!
+          )}`
         : `/insights/${r.id}`,
     }));
 
