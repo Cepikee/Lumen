@@ -1,3 +1,4 @@
+// app/api/insights/timeseries/all/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
@@ -34,7 +35,6 @@ export async function GET(req: Request) {
 
   const period = url.searchParams.get("period") || "7d";
 
-  // ÚJ: mód kiválasztása
   let mode: "days" | "hours" = "days";
   let days = 7;
   let hours = 24;
@@ -47,21 +47,27 @@ export async function GET(req: Request) {
     days = 90;
   }
 
-  // Időintervallum számítása
   const now = new Date();
   let start: Date;
 
   if (mode === "hours") {
-    start = new Date(now.getTime() - hours * 60 * 60 * 1000);
+    // most óra eleje
+    const aligned = new Date(now);
+    aligned.setMinutes(0, 0, 0);
+    // 24 órás ablak: 23 órát vissza
+    start = new Date(aligned.getTime() - (hours - 1) * 60 * 60 * 1000);
   } else {
     start = new Date(now);
     start.setDate(start.getDate() - days + 1);
+    start.setHours(0, 0, 0, 0);
   }
 
-  const startStr = start.toISOString().slice(0, 19).replace("T", " ");
+  const startStr =
+    mode === "hours"
+      ? start.toISOString().slice(0, 19).replace("T", " ")
+      : start.toISOString().slice(0, 10) + " 00:00:00";
 
   try {
-    // Kategóriák lekérése
     const [cats]: any = await db.query(`
       SELECT DISTINCT TRIM(category) AS category
       FROM articles
@@ -73,7 +79,6 @@ export async function GET(req: Request) {
       .filter(Boolean) as string[];
 
     const results: any[] = [];
-    let anyNonZero = false;
 
     for (const rawCat of categories) {
       const cat = normalizeDbString(rawCat);
@@ -81,7 +86,6 @@ export async function GET(req: Request) {
 
       let rows: any[] = [];
 
-      // ÚJ: 24h órás bontás
       if (mode === "hours") {
         const [r]: any = await db.query(
           `
@@ -98,7 +102,6 @@ export async function GET(req: Request) {
         );
         rows = r || [];
       } else {
-        // Régi napos bontás
         const [r]: any = await db.query(
           `
           SELECT 
@@ -115,17 +118,16 @@ export async function GET(req: Request) {
         rows = r || [];
       }
 
-      // Map feltöltése
       const map = new Map<string, number>();
       for (const r of rows) {
-        const key = mode === "hours"
-          ? new Date(r.bucket).toISOString().slice(0, 19).replace("T", " ")
-          : toYMD(r.bucket);
+        const key =
+          mode === "hours"
+            ? String(r.bucket) // "YYYY-MM-DD HH:00:00"
+            : toYMD(r.bucket); // "YYYY-MM-DD"
 
         map.set(key, Number(r.count) || 0);
       }
 
-      // Pontok generálása
       const points: { date: string; count: number }[] = [];
       const cursor = new Date(start);
 
@@ -133,7 +135,6 @@ export async function GET(req: Request) {
         for (let i = 0; i < hours; i++) {
           const key = cursor.toISOString().slice(0, 19).replace("T", " ");
           const c = map.get(key) ?? 0;
-          if (c > 0) anyNonZero = true;
 
           points.push({
             date: key,
@@ -146,7 +147,6 @@ export async function GET(req: Request) {
         for (let i = 0; i < days; i++) {
           const key = cursor.toISOString().slice(0, 10);
           const c = map.get(key) ?? 0;
-          if (c > 0) anyNonZero = true;
 
           points.push({
             date: key,
