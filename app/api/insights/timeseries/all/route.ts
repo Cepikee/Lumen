@@ -2,9 +2,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-/**
- * Ugyanaz a normalizáló, mint az insights endpointban
- */
 function normalizeDbString(s: any): string | null {
   if (s === null || s === undefined) return null;
   let t = String(s).trim();
@@ -28,16 +25,12 @@ export async function GET(req: Request) {
   if (period === "30d") days = 30;
   else if (period === "90d") days = 90;
 
-  // 🔥 A HELYES kezdődátum (nem csúszik el 1 nappal)
   const now = new Date();
   const start = new Date(now);
   start.setDate(start.getDate() - days + 1);
   const startStr = start.toISOString().slice(0, 10);
 
   try {
-    // ---------------------------------------------------------
-    // 1) ÖSSZES KATEGÓRIA LEKÉRÉSE (ugyanúgy, mint insights)
-    // ---------------------------------------------------------
     const [cats]: any = await db.query(`
       SELECT DISTINCT TRIM(category) AS category
       FROM articles
@@ -48,9 +41,6 @@ export async function GET(req: Request) {
       .map((c: any) => normalizeDbString(c.category))
       .filter(Boolean) as string[];
 
-    // ---------------------------------------------------------
-    // 2) Minden kategóriához idősor lekérése
-    // ---------------------------------------------------------
     const results: any[] = [];
 
     for (const rawCat of categories) {
@@ -64,7 +54,7 @@ export async function GET(req: Request) {
           COUNT(*) AS count
         FROM articles
         WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
-          AND DATE(CAST(published_at AS DATETIME)) >= ?
+          AND DATE(CAST(published_at AS DATETIME)) >= DATE(?)
         GROUP BY day
         ORDER BY day ASC
         `,
