@@ -7,7 +7,7 @@ type CategorySeries = { category: string; points: Point[] };
 
 export default function InsightsOverviewChart({
   data,
-  height = 260,
+  height = 300, // nagyobb teljes magasság
 }: {
   data: CategorySeries[];
   height?: number;
@@ -35,19 +35,20 @@ export default function InsightsOverviewChart({
     // --- Detect theme ---
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    const axisColor = isDark ? "#888" : "#666";
+    const axisColor = isDark ? "#aaa" : "#666";
     const gridColor = isDark ? "#333" : "#eee";
-    const textColor = isDark ? "#bbb" : "#444";
+    const textColor = isDark ? "#ddd" : "#444";
 
+    // ÚJ PALETTA – Gazdaság új színnel
     const palette = [
-      "#ff6b6b",
-      "#4dabf7",
-      "#ffd166",
-      "#06d6a0",
-      "#9b5de5",
-      "#f06595",
-      "#74c0fc",
-      "#fcc419",
+      "#ff6b6b", // Sport
+      "#4dabf7", // Politika
+      "#ffd166", // Kultúra
+      "#06d6a0", // Tech
+      "#9b5de5", // Egészségügy
+      "#f06595", // Közélet
+      "#00c2d1", // Gazdaság (ÚJ, erős türkiz)
+      "#ff922b", // Oktatás
     ];
 
     // --- Global max ---
@@ -59,8 +60,8 @@ export default function InsightsOverviewChart({
     }
 
     // --- Layout ---
-    const paddingLeft = 40;
-    const paddingBottom = 32; // nagyobb, hogy ne lógjon ki
+    const paddingLeft = 45;
+    const paddingBottom = 48; // NAGYOBB alsó padding → dátumok nem lógnak ki
     const paddingTop = 10;
     const paddingRight = 10;
 
@@ -82,7 +83,7 @@ export default function InsightsOverviewChart({
 
     // Y labels + grid
     ctx.fillStyle = textColor;
-    ctx.font = "11px sans-serif";
+    ctx.font = "12px sans-serif";
     ctx.textAlign = "right";
 
     const ySteps = 4;
@@ -90,7 +91,7 @@ export default function InsightsOverviewChart({
       const value = Math.round((globalMax / ySteps) * i);
       const y = toY(value);
 
-      ctx.fillText(String(value), paddingLeft - 6, y + 3);
+      ctx.fillText(String(value), paddingLeft - 8, y + 4);
 
       ctx.strokeStyle = gridColor;
       ctx.beginPath();
@@ -108,21 +109,23 @@ export default function InsightsOverviewChart({
 
     // X labels (auto thinning)
     ctx.fillStyle = textColor;
-    ctx.font = "11px sans-serif";
+    ctx.font = "12px sans-serif";
     ctx.textAlign = "center";
 
     const samplePoints = data[0]?.points || [];
     const stepX = innerW / Math.max(samplePoints.length - 1, 1);
 
-    // Ha sok nap van (30/90), ritkítjuk a feliratokat
-    const labelEvery = samplePoints.length > 60 ? 10 : samplePoints.length > 20 ? 3 : 1;
+    // Ritkítás: 7 → minden nap, 30 → minden 3., 90 → minden 7.
+    let labelEvery = 1;
+    if (samplePoints.length > 60) labelEvery = 7;
+    else if (samplePoints.length > 20) labelEvery = 3;
 
     samplePoints.forEach((p, i) => {
       if (i % labelEvery !== 0) return;
 
       const x = paddingLeft + i * stepX;
       const label = p.date.slice(5); // "MM-DD"
-      ctx.fillText(label, x, height - 8);
+      ctx.fillText(label, x, height - paddingBottom + 20); // FELJEBB húzva
     });
 
     // --- Lines ---
@@ -170,8 +173,8 @@ export default function InsightsOverviewChart({
             "#06d6a0",
             "#9b5de5",
             "#f06595",
-            "#74c0fc",
-            "#fcc419",
+            "#00c2d1", // Gazdaság új színe
+            "#ff922b",
           ][idx % 8];
 
           return (
