@@ -5,6 +5,8 @@ import InsightCard from "@/components/InsightCard";
 import InsightFilters from "@/components/InsightFilters";
 import ThemeSync from "@/components/ThemeSync";
 import { useInsights } from "@/hooks/useInsights";
+import { useTimeseriesAll } from "@/hooks/useTimeseriesAll";
+import InsightsOverviewChart from "@/components/InsightsOverviewChart";
 
 type LocalRawCategory = {
   category: string | null;
@@ -29,7 +31,7 @@ export default function InsightFeedPage() {
   const [sort, setSort] = useState<string>("Legfrissebb");
 
   const { data, error, loading } = useInsights(period, sort);
-
+  const { data: tsData, loading: tsLoading } = useTimeseriesAll(period);
   const categoryTrends = useMemo<LocalRawCategory[]>(() => {
     if (!data) return [];
 
@@ -76,6 +78,15 @@ export default function InsightFeedPage() {
       <ThemeSync />
 
       <header className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between mb-3 gap-3">
+        {tsLoading ? (
+  <div style={{ height: 180 }} className="mb-4 bg-light rounded-4" />
+) : (
+  <div className="mb-4 p-3 rounded-4 bg-body-secondary">
+    {/* IDE JÖN MAJD A GRAFIKON */}
+   <InsightsOverviewChart data={tsData?.categories || []} />
+  </div>
+)}
+
         <div>
           <h1 className="h3 mb-1 text-center text-md-start">Insights</h1>
           <p className="text-muted mb-0">Kategória trendek és forráseloszlások</p>
