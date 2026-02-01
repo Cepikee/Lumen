@@ -10,10 +10,10 @@ type LocalRawCategory = {
   category: string | null;
   trendScore: number;
   articleCount: number;
-  sourceDiversity?: number | string;
+  sourceDiversity?: number;
   lastArticleAt?: string | null;
   sparkline?: number[];
-  ringData?: number[];
+  ringSources?: any[]; // ÚJ
 };
 
 function normalizeCategory(raw?: string | null) {
@@ -36,8 +36,6 @@ export default function InsightFeedPage() {
     const sourceArray =
       Array.isArray(data.categories) && data.categories.length > 0
         ? data.categories
-        : Array.isArray(data.items)
-        ? data.items
         : [];
 
     const mapped = sourceArray
@@ -47,10 +45,10 @@ export default function InsightFeedPage() {
           category: cat,
           trendScore: Number(it.trendScore ?? 0),
           articleCount: Number(it.articleCount ?? 0),
-          sourceDiversity: it.sourceDiversity ?? 0,
+          sourceDiversity: Number(it.sourceDiversity ?? 0),
           lastArticleAt: it.lastArticleAt ?? null,
-          sparkline: it.sparkline,
-          ringData: it.ringData,
+          sparkline: it.sparkline ?? [],
+          ringSources: it.ringSources ?? [], // ÚJ
         } as LocalRawCategory;
       })
       .filter((c) => normalizeCategory(c.category) !== null);
@@ -58,22 +56,20 @@ export default function InsightFeedPage() {
     return mapped;
   }, [data]);
 
-  const categoryItems = categoryTrends
-    .filter((c) => normalizeCategory(c.category) !== null)
-    .map((c) => {
-      const cat = normalizeCategory(c.category)!;
-      return {
-        id: `cat-${cat}`,
-        title: cat,
-        score: Number(c.trendScore || 0),
-        sources: Number(c.articleCount || 0),
-        dominantSource: `${c.sourceDiversity ?? 0} forrás`,
-        timeAgo: c.lastArticleAt ? new Date(c.lastArticleAt).toLocaleString() : "",
-        href: `/insights/category/${encodeURIComponent(cat)}`,
-        ringData: c.ringData,
-        sparkline: c.sparkline,
-      };
-    });
+  const categoryItems = categoryTrends.map((c) => {
+    const cat = normalizeCategory(c.category)!;
+    return {
+      id: `cat-${cat}`,
+      title: cat,
+      score: Number(c.trendScore || 0),
+      sources: Number(c.articleCount || 0),
+      dominantSource: `${c.sourceDiversity ?? 0} forrás`,
+      timeAgo: c.lastArticleAt ? new Date(c.lastArticleAt).toLocaleString() : "",
+      href: `/insights/category/${encodeURIComponent(cat)}`,
+      ringSources: c.ringSources, // ÚJ
+      sparkline: c.sparkline,
+    };
+  });
 
   return (
     <main className="container py-4">
@@ -81,8 +77,8 @@ export default function InsightFeedPage() {
 
       <header className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between mb-3 gap-3">
         <div>
-          <h1 className="h3 mb-1 text-center text-md-start">Trendek</h1>
-          <p className="text-muted mb-0">Kategória trendek és források áttekintése</p>
+          <h1 className="h3 mb-1 text-center text-md-start">Insights</h1>
+          <p className="text-muted mb-0">Kategória trendek és forráseloszlások</p>
         </div>
 
         <div className="d-flex gap-2 align-items-center">
@@ -115,89 +111,81 @@ export default function InsightFeedPage() {
       </header>
 
       <section aria-labelledby="category-trends">
-  <h2 id="category-trends" className="fs-5 fw-bold mb-2 visually-hidden">
-    Kategória trendek
-  </h2>
+        <h2 id="category-trends" className="fs-5 fw-bold mb-2 visually-hidden">
+          Kategória trendek
+        </h2>
 
-  {/* FEED KERET + SZOROSABB KÁRTYÁK */}
-  <div className="insight-feed-wrapper p-3 rounded-4">
-    <div className="row g-2">
-      {loading
-        ? Array.from({ length: 6 }).map((_, i) => (
-            <div key={`skeleton-${i}`} className="col-12 d-flex">
-              <article
-                className="insight-card card border-0"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  flex: "1 1 auto",
-                  minHeight: 140,
-                }}
-              >
-                <div
-                  className="card-body d-flex flex-column gap-3"
-                  style={{ display: "flex", flexDirection: "column", flex: 1 }}
-                >
-                  <div className="d-flex align-items-start">
-                    <div
-                      className="me-3 d-flex align-items-center"
-                      style={{ width: 64, height: 64, minWidth: 64 }}
+        <div className="insight-feed-wrapper p-3 rounded-4">
+          <div className="row g-2">
+            {loading
+              ? Array.from({ length: 6 }).map((_, i) => (
+                  <div key={`skeleton-${i}`} className="col-12 d-flex">
+                    <article
+                      className="insight-card card border-0"
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        flex: "1 1 auto",
+                        minHeight: 140,
+                      }}
                     >
-                      <div className="insight-source-ring bg-secondary rounded-circle w-100 h-100" />
-                    </div>
-                    <div className="flex-grow-1">
-                      <div
-                        style={{
-                          height: 18,
-                          width: "60%",
-                          background: "rgba(0,0,0,0.06)",
-                          borderRadius: 6,
-                          marginBottom: 8,
-                        }}
-                      />
-                      <div
-                        style={{
-                          height: 12,
-                          width: "40%",
-                          background: "rgba(0,0,0,0.04)",
-                          borderRadius: 6,
-                        }}
-                      />
-                    </div>
-                    <div className="ms-2 text-end d-flex flex-column gap-2">
-                      <div
-                        style={{
-                          height: 28,
-                          width: 64,
-                          background: "rgba(0,0,0,0.04)",
-                          borderRadius: 6,
-                        }}
-                      />
-                    </div>
-                  </div>
+                      <div className="card-body d-flex flex-column gap-3">
+                        <div className="d-flex align-items-start">
+                          <div
+                            className="me-3 d-flex align-items-center"
+                            style={{ width: 64, height: 64, minWidth: 64 }}
+                          >
+                            <div className="insight-source-ring bg-secondary rounded-circle w-100 h-100" />
+                          </div>
+                          <div className="flex-grow-1">
+                            <div
+                              style={{
+                                height: 18,
+                                width: "60%",
+                                background: "rgba(0,0,0,0.06)",
+                                borderRadius: 6,
+                                marginBottom: 8,
+                              }}
+                            />
+                            <div
+                              style={{
+                                height: 12,
+                                width: "40%",
+                                background: "rgba(0,0,0,0.04)",
+                                borderRadius: 6,
+                              }}
+                            />
+                          </div>
+                          <div className="ms-2 text-end d-flex flex-column gap-2">
+                            <div
+                              style={{
+                                height: 28,
+                                width: 64,
+                                background: "rgba(0,0,0,0.04)",
+                                borderRadius: 6,
+                              }}
+                            />
+                          </div>
+                        </div>
 
-                  <div
-                    className="card-footer bg-transparent border-0 pt-0"
-                    style={{ marginTop: "auto" }}
-                  >
-                    <div
-                      className="insight-sparkline"
-                      style={{ height: 40, background: "rgba(0,0,0,0.03)" }}
-                    />
+                        <div className="card-footer bg-transparent border-0 pt-0" style={{ marginTop: "auto" }}>
+                          <div
+                            className="insight-sparkline"
+                            style={{ height: 40, background: "rgba(0,0,0,0.03)" }}
+                          />
+                        </div>
+                      </div>
+                    </article>
                   </div>
-                </div>
-              </article>
-            </div>
-          ))
-        : categoryItems.map((item) => (
-            <div key={item.id} className="col-12 d-flex">
-              <InsightCard {...item} />
-            </div>
-          ))}
-    </div>
-  </div>
-</section>
-
+                ))
+              : categoryItems.map((item) => (
+                  <div key={item.id} className="col-12 d-flex">
+                    <InsightCard {...item} />
+                  </div>
+                ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

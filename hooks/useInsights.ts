@@ -9,7 +9,7 @@ export type InsightApiItem = {
   sourceDiversity?: number | string;
   lastArticleAt?: string | null;
   sparkline?: number[];
-  ringData?: number[];
+  ringSources?: { name: string; label: string; count: number; percent: number; }[]; // ÚJ, helyes mező
 };
 
 export type InsightsResponse = {

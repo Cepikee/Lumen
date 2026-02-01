@@ -23,7 +23,7 @@ function normalizeDbString(s: any): string | null {
 export async function GET(req: Request) {
   const url = new URL(req.url);
 
-  // ÚJ: period paraméter kezelése
+  // period paraméter
   const period = url.searchParams.get("period") || "7d";
   let days = 7;
   if (period === "30d") days = 30;
@@ -41,7 +41,7 @@ export async function GET(req: Request) {
 
   try {
     // -----------------------------
-    // 1) Cikkek lekérdezése (NINCS LIMIT torzítás)
+    // 1) Cikkek lekérdezése
     // -----------------------------
     const params: any[] = [];
     let where = "";
@@ -55,7 +55,6 @@ export async function GET(req: Request) {
       }
     }
 
-    // időszűrés
     params.push(startDateStr);
     const periodClause = `${where ? " AND" : " WHERE"} DATE(published_at) >= ?`;
 
@@ -80,6 +79,7 @@ export async function GET(req: Request) {
         articleCount: number;
         sourceSet: Set<string>;
         lastArticleAt: string | null;
+        sourceCounts: Map<string, number>; // ÚJ: forráseloszlás
       }
     >();
 
@@ -94,7 +94,7 @@ export async function GET(req: Request) {
 
       const dominantSource = r.dominantSource
         ? String(r.dominantSource).trim()
-        : "";
+        : "Ismeretlen";
 
       if (!catMap.has(key)) {
         catMap.set(key, {
@@ -103,14 +103,20 @@ export async function GET(req: Request) {
           articleCount: 0,
           sourceSet: new Set(),
           lastArticleAt: publishedAt,
+          sourceCounts: new Map(), // ÚJ
         });
       }
 
       const entry = catMap.get(key)!;
-      entry.articleCount += 1;
 
-      // ÚJ: helyes forrásszám (Set)
-      if (dominantSource) entry.sourceSet.add(dominantSource);
+      entry.articleCount += 1;
+      entry.sourceSet.add(dominantSource);
+
+      // ÚJ: forráseloszlás növelése
+      entry.sourceCounts.set(
+        dominantSource,
+        (entry.sourceCounts.get(dominantSource) || 0) + 1
+      );
 
       // legfrissebb cikk dátuma
       if (
@@ -122,16 +128,40 @@ export async function GET(req: Request) {
     }
 
     // -----------------------------
-    // 3) Kategória lista összeállítása
+    // 3) Kategória lista összeállítása + ringSources
     // -----------------------------
     const categories = Array.from(catMap.values())
-      .map((e) => ({
-        category: e.category,
-        trendScore: e.articleCount, // egyszerű score
-        articleCount: e.articleCount,
-        sourceDiversity: e.sourceSet.size, // ÚJ: helyes forrásszám
-        lastArticleAt: e.lastArticleAt,
-      }))
+      .map((e) => {
+        const total = Array.from(e.sourceCounts.values()).reduce(
+          (sum: number, c: number) => sum + c,
+          0
+        );
+
+        const ringSources = Array.from(e.sourceCounts.entries()).map(
+          ([label, count]) => {
+            const normalized = label
+              .toLowerCase()
+              .replace(".hu", "")
+              .trim();
+
+            return {
+              name: normalized, // normalized név → színmap
+              label, // eredeti név
+              count,
+              percent: Math.round((count / total) * 100),
+            };
+          }
+        );
+
+        return {
+          category: e.category,
+          trendScore: e.articleCount,
+          articleCount: e.articleCount,
+          sourceDiversity: e.sourceSet.size,
+          lastArticleAt: e.lastArticleAt,
+          ringSources, // ÚJ
+        };
+      })
       .sort((a, b) => b.articleCount - a.articleCount);
 
     // -----------------------------
