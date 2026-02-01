@@ -7,7 +7,7 @@ type CategorySeries = { category: string; points: Point[] };
 
 export default function InsightsOverviewChart({
   data,
-  height = 220,
+  height = 260,
 }: {
   data: CategorySeries[];
   height?: number;
@@ -32,43 +32,85 @@ export default function InsightsOverviewChart({
 
     ctx.clearRect(0, 0, width, height);
 
-    // --- Színpaletta kategóriákhoz ---
-    const palette = [
-      "#ff6b6b", // piros
-      "#4dabf7", // kék
-      "#ffd166", // sárga
-      "#06d6a0", // zöld
-      "#9b5de5", // lila
-    ];
+    const palette = ["#ff6b6b", "#4dabf7", "#ffd166", "#06d6a0", "#9b5de5"];
 
     // --- Globális min/max ---
     let globalMax = 1;
-    let globalMin = 0;
-
     for (const cat of data) {
       for (const p of cat.points) {
         if (p.count > globalMax) globalMax = p.count;
       }
     }
 
-    const padding = 12;
-    const innerH = height - padding * 2;
-    const innerW = width - padding * 2;
+    // --- Layout ---
+    const paddingLeft = 40;
+    const paddingBottom = 26;
+    const paddingTop = 10;
+    const paddingRight = 10;
+
+    const innerH = height - paddingTop - paddingBottom;
+    const innerW = width - paddingLeft - paddingRight;
 
     const toY = (v: number) => {
-      if (globalMax === globalMin) return height / 2;
-      const ratio = (v - globalMin) / (globalMax - globalMin);
-      return height - padding - ratio * innerH;
+      const ratio = v / globalMax;
+      return paddingTop + innerH - ratio * innerH;
     };
 
-    // --- Minden kategória kirajzolása ---
+    // --- Y tengely ---
+    ctx.strokeStyle = "#ccc";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(paddingLeft, paddingTop);
+    ctx.lineTo(paddingLeft, height - paddingBottom);
+    ctx.stroke();
+
+    // Y skála
+    ctx.fillStyle = "#666";
+    ctx.font = "11px sans-serif";
+    ctx.textAlign = "right";
+
+    const ySteps = 4;
+    for (let i = 0; i <= ySteps; i++) {
+      const value = Math.round((globalMax / ySteps) * i);
+      const y = toY(value);
+
+      ctx.fillText(String(value), paddingLeft - 6, y + 3);
+
+      // vízszintes grid
+      ctx.strokeStyle = "#eee";
+      ctx.beginPath();
+      ctx.moveTo(paddingLeft, y);
+      ctx.lineTo(width - paddingRight, y);
+      ctx.stroke();
+    }
+
+    // --- X tengely ---
+    ctx.strokeStyle = "#ccc";
+    ctx.beginPath();
+    ctx.moveTo(paddingLeft, height - paddingBottom);
+    ctx.lineTo(width - paddingRight, height - paddingBottom);
+    ctx.stroke();
+
+    // X feliratok
+    ctx.fillStyle = "#666";
+    ctx.font = "11px sans-serif";
+    ctx.textAlign = "center";
+
+    const samplePoints = data[0]?.points || [];
+    const stepX = innerW / Math.max(samplePoints.length - 1, 1);
+
+    samplePoints.forEach((p, i) => {
+      const x = paddingLeft + i * stepX;
+      const label = p.date.slice(5); // "MM-DD"
+      ctx.fillText(label, x, height - 6);
+    });
+
+    // --- Vonalak ---
     data.forEach((cat, idx) => {
       const color = palette[idx % palette.length];
       const points = cat.points;
 
       if (!points || points.length === 0) return;
-
-      const stepX = innerW / Math.max(points.length - 1, 1);
 
       ctx.beginPath();
       ctx.lineWidth = 2;
@@ -77,7 +119,7 @@ export default function InsightsOverviewChart({
       ctx.lineCap = "round";
 
       points.forEach((p, i) => {
-        const x = padding + i * stepX;
+        const x = paddingLeft + i * stepX;
         const y = toY(p.count);
 
         if (i === 0) ctx.moveTo(x, y);
@@ -90,6 +132,38 @@ export default function InsightsOverviewChart({
 
   return (
     <div style={{ width: "100%", height }}>
+      {/* --- Legenda --- */}
+      <div
+        style={{
+          display: "flex",
+          gap: 12,
+          flexWrap: "wrap",
+          marginBottom: 8,
+          paddingLeft: 4,
+        }}
+      >
+        {data.map((cat, idx) => {
+          const color = ["#ff6b6b", "#4dabf7", "#ffd166", "#06d6a0", "#9b5de5"][idx % 5];
+          return (
+            <div
+              key={cat.category}
+              style={{ display: "flex", alignItems: "center", gap: 6 }}
+            >
+              <div
+                style={{
+                  width: 12,
+                  height: 12,
+                  backgroundColor: color,
+                  borderRadius: 3,
+                }}
+              />
+              <span style={{ fontSize: 12, color: "#444" }}>{cat.category}</span>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* --- Canvas --- */}
       <canvas
         ref={canvasRef}
         style={{
