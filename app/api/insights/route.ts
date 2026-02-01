@@ -40,9 +40,44 @@ export async function GET(req: Request) {
   const categoryParam = rawCategory ? String(rawCategory).trim() : null;
 
   try {
-    // -----------------------------
-    // 1) Cikkek lekérdezése
-    // -----------------------------
+    // ---------------------------------------------------------
+    // 1) LEKÉRDEZZÜK AZ ÖSSZES KATEGÓRIÁT A DB-BŐL
+    // ---------------------------------------------------------
+    const [allCats]: any = await db.query(`
+      SELECT DISTINCT LOWER(TRIM(category)) AS category
+      FROM articles
+      WHERE category IS NOT NULL AND category <> ''
+    `);
+
+    const catMap = new Map<
+      string,
+      {
+        category: string | null;
+        trendScore: number;
+        articleCount: number;
+        sourceSet: Set<string>;
+        lastArticleAt: string | null;
+        sourceCounts: Map<string, number>;
+      }
+    >();
+
+    for (const c of allCats) {
+      const cat = normalizeDbString(c.category);
+      const key = cat ?? "__NULL__";
+
+      catMap.set(key, {
+        category: cat,
+        trendScore: 0,
+        articleCount: 0,
+        sourceSet: new Set(),
+        lastArticleAt: null,
+        sourceCounts: new Map(),
+      });
+    }
+
+    // ---------------------------------------------------------
+    // 2) CIKKEK LEKÉRDEZÉSE (IDŐSZAK + OPCIONÁLIS KATEGÓRIA)
+    // ---------------------------------------------------------
     const params: any[] = [];
     let where = "";
 
@@ -68,25 +103,16 @@ export async function GET(req: Request) {
 
     const [rows]: any = await db.query(sql, params);
 
-    // -----------------------------
-    // 2) Kategória aggregáció
-    // -----------------------------
-    const catMap = new Map<
-      string,
-      {
-        category: string | null;
-        trendScore: number;
-        articleCount: number;
-        sourceSet: Set<string>;
-        lastArticleAt: string | null;
-        sourceCounts: Map<string, number>; // ÚJ: forráseloszlás
-      }
-    >();
-
+    // ---------------------------------------------------------
+    // 3) AGGREGÁCIÓ FELTÖLTÉSE
+    // ---------------------------------------------------------
     for (const r of rows || []) {
       const raw = r.category ?? null;
       const cat = normalizeDbString(raw);
       const key = cat ?? "__NULL__";
+
+      const entry = catMap.get(key);
+      if (!entry) continue;
 
       const publishedAt = r.published_at
         ? new Date(r.published_at).toISOString()
@@ -96,59 +122,37 @@ export async function GET(req: Request) {
         ? String(r.dominantSource).trim()
         : "Ismeretlen";
 
-      if (!catMap.has(key)) {
-        catMap.set(key, {
-          category: cat,
-          trendScore: 0,
-          articleCount: 0,
-          sourceSet: new Set(),
-          lastArticleAt: publishedAt,
-          sourceCounts: new Map(), // ÚJ
-        });
-      }
-
-      const entry = catMap.get(key)!;
-
       entry.articleCount += 1;
       entry.sourceSet.add(dominantSource);
 
-      // ÚJ: forráseloszlás növelése
       entry.sourceCounts.set(
         dominantSource,
         (entry.sourceCounts.get(dominantSource) || 0) + 1
       );
 
-      // legfrissebb cikk dátuma
-      if (
-        publishedAt &&
-        (!entry.lastArticleAt || publishedAt > entry.lastArticleAt)
-      ) {
+      if (publishedAt && (!entry.lastArticleAt || publishedAt > entry.lastArticleAt)) {
         entry.lastArticleAt = publishedAt;
       }
     }
 
-    // -----------------------------
-    // 3) Kategória lista összeállítása + ringSources
-    // -----------------------------
+    // ---------------------------------------------------------
+    // 4) KATEGÓRIA LISTA ÖSSZEÁLLÍTÁSA
+    // ---------------------------------------------------------
     const categories = Array.from(catMap.values())
       .map((e) => {
         const total = Array.from(e.sourceCounts.values()).reduce(
-          (sum: number, c: number) => sum + c,
+          (sum, c) => sum + c,
           0
         );
 
         const ringSources = Array.from(e.sourceCounts.entries()).map(
           ([label, count]) => {
-            const normalized = label
-              .toLowerCase()
-              .replace(".hu", "")
-              .trim();
-
+            const normalized = label.toLowerCase().replace(".hu", "").trim();
             return {
-              name: normalized, // normalized név → színmap
-              label, // eredeti név
+              name: normalized,
+              label,
               count,
-              percent: Math.round((count / total) * 100),
+              percent: total > 0 ? Math.round((count / total) * 100) : 0,
             };
           }
         );
@@ -159,14 +163,14 @@ export async function GET(req: Request) {
           articleCount: e.articleCount,
           sourceDiversity: e.sourceSet.size,
           lastArticleAt: e.lastArticleAt,
-          ringSources, // ÚJ
+          ringSources,
         };
       })
       .sort((a, b) => b.articleCount - a.articleCount);
 
-    // -----------------------------
-    // 4) Items (legfrissebb cikkek)
-    // -----------------------------
+    // ---------------------------------------------------------
+    // 5) LEGFRISSEBB CIKKEK
+    // ---------------------------------------------------------
     const items = (rows || []).slice(0, 200).map((r: any) => ({
       id: String(r.id),
       title: r.title,
