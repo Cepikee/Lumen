@@ -11,8 +11,8 @@ type InsightItem = {
   dominantSource: string;
   timeAgo: string;
   href?: string;
+  ringSources?: { name: string; percent: number }[]; // ÚJ
   // opcionális vizualizációs adatok (backendből jöhetnek)
-  ringData?: number[];
   sparkline?: number[];
 };
 
@@ -58,7 +58,7 @@ export default function InsightList({ items, loading }: InsightListProps) {
             dominantSource={item.dominantSource}
             timeAgo={item.timeAgo}
             href={item.href}
-            ringData={item.ringData}
+            ringSources={item.ringSources}
             sparkline={item.sparkline}
           />
         </div>
