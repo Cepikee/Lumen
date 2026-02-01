@@ -14,7 +14,7 @@ type InsightCardProps = {
   dominantSource: string;
   timeAgo: string;
   href?: string;
-  ringData?: number[];
+  ringSources?: { name: string; percent: number }[]; // ÚJ
   sparkline?: number[];
 };
 
@@ -25,19 +25,14 @@ export default function InsightCard({
   dominantSource,
   timeAgo,
   href,
-  ringData,
+  ringSources = [], // ÚJ
   sparkline,
 }: InsightCardProps) {
   const linkHref = href || "#";
   const disabled = !href;
 
-  // ha a useInView csak egy number-t vár, ez rendben van
   const { ref, inView } = useInView(0.12);
 
-  const ring = useMemo(
-    () => ringData ?? [Math.max(0, score), Math.max(0, sources - score)],
-    [ringData, score, sources]
-  );
   const spark = useMemo(() => sparkline ?? [], [sparkline]);
 
   return (
@@ -66,7 +61,7 @@ export default function InsightCard({
             style={{ width: 64, height: 64, minWidth: 64 }}
           >
             {inView ? (
-              <InsightSourceRing data={ring} aria-hidden="true" />
+              <InsightSourceRing sources={ringSources} aria-hidden="true" />
             ) : (
               <div className="bg-secondary rounded-circle w-100 h-100" />
             )}
