@@ -34,24 +34,29 @@ export default function InsightSourceRing({
 
     let segments: { percent: number; color: string }[] = [];
 
+    /* --- Backend percent értékek használata --- */
     if (Array.isArray(sources) && sources.length > 0) {
-      const total = sources.reduce((s, x) => s + (Number(x.percent) || 0), 0) || 100;
-
       segments = sources.map((s) => ({
-        percent: (Number(s.percent) || 0) * (100 / total),
+        percent: Number(s.percent) || 0,
         color: s.color || getColorForName(s.name),
       }));
-    } else if (Array.isArray(data) && data.length > 0) {
+    }
+
+    /* --- Fallback --- */
+    else if (Array.isArray(data) && data.length > 0) {
       const total = data.reduce((s, n) => s + (Number(n) || 0), 0) || 1;
 
       segments = data.map((n, i) => ({
         percent: (Number(n) || 0) * (100 / total),
         color: defaultPalette[i % defaultPalette.length],
       }));
-    } else {
+    }
+
+    else {
       segments = [{ percent: 100, color: "#3a3f44" }];
     }
 
+    /* --- Canvas méretezés --- */
     const dpr = window.devicePixelRatio || 1;
     const w = size;
     const h = size;
@@ -64,23 +69,31 @@ export default function InsightSourceRing({
     const cx = w / 2;
     const cy = h / 2;
     const radius = Math.min(w, h) / 2 - 2;
-    const thickness = Math.max(6, Math.floor(radius * 0.35));
+    const baseThickness = Math.max(6, Math.floor(radius * 0.35));
     let start = -Math.PI / 2;
 
+    /* --- Szeletek rajzolása --- */
     for (const seg of segments) {
       const angle = (seg.percent / 100) * Math.PI * 2;
+
+      /* --- Ha túl kicsi a szelet (< 3°), vékony stroke kell --- */
+      const isTiny = angle < (Math.PI / 60); // kb. 3°
+      const thickness = isTiny ? 2 : baseThickness;
+
       ctx.beginPath();
-      ctx.arc(cx, cy, radius - thickness / 2, start, start + angle, false);
+      ctx.arc(cx, cy, radius - baseThickness / 2, start, start + angle, false);
       ctx.lineWidth = thickness;
       ctx.lineCap = "butt";
       ctx.strokeStyle = seg.color;
       ctx.stroke();
+
       start += angle;
     }
 
+    /* --- Belső kör törlése --- */
     ctx.beginPath();
     ctx.fillStyle = "rgba(0,0,0,0)";
-    ctx.arc(cx, cy, radius - thickness - 1, 0, Math.PI * 2);
+    ctx.arc(cx, cy, radius - baseThickness - 1, 0, Math.PI * 2);
     ctx.fill();
   }, [sources, data, size]);
 
