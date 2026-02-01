@@ -85,7 +85,7 @@ export async function GET(req: Request) {
       }
 
       results.push({
-        category: cat,
+        category: normalizeDbString(cat),
         points,
       });
     }
