@@ -13,7 +13,6 @@ const InsightsOverviewChart = dynamic(
   { ssr: false }
 );
 
-
 type LocalRawCategory = {
   category: string | null;
   trendScore: number;
@@ -33,7 +32,7 @@ function normalizeCategory(raw?: string | null) {
 }
 
 export default function InsightFeedPage() {
-  const [period, setPeriod] = useState<"7d" | "30d" | "90d">("7d");
+  const [period, setPeriod] = useState<"24h" | "7d" | "30d" | "90d">("7d");
   const [sort, setSort] = useState<string>("Legfrissebb");
 
   const { data, error, loading } = useInsights(period, sort);
@@ -84,7 +83,7 @@ export default function InsightFeedPage() {
     <main className="container py-4">
       <ThemeSync />
 
-      {/* HEADER – csak cím + szűrők */}
+      {/* HEADER */}
       <header className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between mb-3 gap-3">
         <div>
           <h1 className="h3 mb-1 text-center text-md-start">Insights</h1>
@@ -93,6 +92,13 @@ export default function InsightFeedPage() {
 
         <div className="d-flex gap-2 align-items-center">
           <div className="btn-group me-2" role="group" aria-label="Időszak">
+            <button
+              type="button"
+              className={`btn btn-outline-secondary ${period === "24h" ? "active" : ""}`}
+              onClick={() => setPeriod("24h")}
+            >
+              24h
+            </button>
             <button
               type="button"
               className={`btn btn-outline-secondary ${period === "7d" ? "active" : ""}`}
@@ -120,7 +126,7 @@ export default function InsightFeedPage() {
         </div>
       </header>
 
-      {/* GRAFIKON – külön blokkban, teljes szélességben */}
+      {/* GRAFIKON */}
       {tsLoading ? (
         <div style={{ height: 220 }} className="mb-4 bg-light rounded-4" />
       ) : (

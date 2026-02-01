@@ -6,7 +6,7 @@ const fetcher = (url: string) =>
     return r.json();
   });
 
-export function useTimeseriesAll(period: "7d" | "30d" | "90d") {
+export function useTimeseriesAll(period: "24h" | "7d" | "30d" | "90d") {
   const q = new URLSearchParams();
   q.set("period", period);
 

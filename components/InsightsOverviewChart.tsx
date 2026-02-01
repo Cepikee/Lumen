@@ -35,7 +35,6 @@ export default function InsightsOverviewChart({
   data: CategorySeries[];
   height?: number;
 }) {
-  // --- Detect theme ---
   const isDark =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -43,17 +42,23 @@ export default function InsightsOverviewChart({
   const textColor = isDark ? "#ddd" : "#333";
   const gridColor = isDark ? "#444" : "#eee";
 
-  // ÚJ PALETTA – Gazdaság új színnel
   const palette = [
-    "#ff6b6b", // Sport
-    "#4dabf7", // Politika
-    "#ffd166", // Kultúra
-    "#06d6a0", // Tech
-    "#9b5de5", // Egészségügy
-    "#f06595", // Közélet
-    "#00c2d1", // Gazdaság (új)
-    "#ff922b", // Oktatás
+    "#ff6b6b",
+    "#4dabf7",
+    "#ffd166",
+    "#06d6a0",
+    "#9b5de5",
+    "#f06595",
+    "#00c2d1",
+    "#ff922b",
   ];
+
+  // --- Detect if this is 24h mode (hourly timestamps) ---
+  const isHourly = useMemo(() => {
+    if (!data || data.length === 0) return false;
+    const sample = data[0].points[0]?.date || "";
+    return sample.length > 10; // "YYYY-MM-DD HH:MM:SS"
+  }, [data]);
 
   // --- Chart.js data ---
   const chartData = useMemo(() => {
@@ -69,7 +74,7 @@ export default function InsightsOverviewChart({
         borderColor: palette[idx % palette.length],
         backgroundColor: palette[idx % palette.length] + "33",
         borderWidth: 2,
-        tension: 0.3, // smooth curve
+        tension: 0.3,
         pointRadius: 0,
         fill: false,
       })),
@@ -93,6 +98,17 @@ export default function InsightsOverviewChart({
           maxRotation: 0,
           autoSkip: true,
           autoSkipPadding: 20,
+          callback: function (value: any, index: number) {
+            const raw = chartData.labels[index];
+
+            if (isHourly) {
+              // "YYYY-MM-DD HH:MM:SS" → "HH:MM"
+              return raw.slice(11, 16);
+            }
+
+            // "YYYY-MM-DD"
+            return raw;
+          },
         },
         grid: {
           color: gridColor,
@@ -120,6 +136,18 @@ export default function InsightsOverviewChart({
         bodyColor: isDark ? "#ddd" : "#333",
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
+        callbacks: {
+          title: function (items: any) {
+            const raw = items[0].label;
+
+            if (isHourly) {
+              // Tooltip full timestamp
+              return raw.replace("T", " ");
+            }
+
+            return raw;
+          },
+        },
       },
       zoom: {
         zoom: {

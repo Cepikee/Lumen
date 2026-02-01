@@ -2,9 +2,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-/**
- * Normalizáljuk a DB-ből jövő stringeket (mojibake fix)
- */
 function normalizeDbString(s: any): string | null {
   if (s === null || s === undefined) return null;
   let t = String(s).trim();
@@ -23,26 +20,42 @@ function normalizeDbString(s: any): string | null {
 export async function GET(req: Request) {
   const url = new URL(req.url);
 
-  // period paraméter
   const period = url.searchParams.get("period") || "7d";
+
+  // --- mód kiválasztása ---
+  let mode: "days" | "hours" = "days";
   let days = 7;
-  if (period === "30d") days = 30;
-  else if (period === "90d") days = 90;
+  let hours = 24;
 
-  // kezdő dátum
+  if (period === "24h") {
+    mode = "hours";
+  } else if (period === "30d") {
+    days = 30;
+  } else if (period === "90d") {
+    days = 90;
+  }
+
+  // --- időintervallum ---
   const now = new Date();
-  const startDate = new Date(now);
-  startDate.setDate(now.getDate() - (days - 1));
-  const startDateStr = startDate.toISOString().slice(0, 10);
+  let start: Date;
 
-  // opcionális category filter
+  if (mode === "hours") {
+    start = new Date(now.getTime() - hours * 60 * 60 * 1000);
+  } else {
+    start = new Date(now);
+    start.setDate(start.getDate() - (days - 1));
+  }
+
+  const startStr = start.toISOString().slice(0, 19).replace("T", " ");
+
+  // --- category filter ---
   const rawCategory = url.searchParams.get("category");
   const categoryParam = rawCategory ? String(rawCategory).trim() : null;
 
   try {
-    // -----------------------------
+    // -----------------------------------------
     // 1) Cikkek lekérdezése
-    // -----------------------------
+    // -----------------------------------------
     const params: any[] = [];
     let where = "";
 
@@ -55,8 +68,12 @@ export async function GET(req: Request) {
       }
     }
 
-    params.push(startDateStr);
-    const periodClause = `${where ? " AND" : " WHERE"} DATE(published_at) >= ?`;
+    params.push(startStr);
+
+    const periodClause =
+      mode === "hours"
+        ? `${where ? " AND" : " WHERE"} published_at >= ?`
+        : `${where ? " AND" : " WHERE"} DATE(published_at) >= DATE(?)`;
 
     const sql = `
       SELECT id, title, category, published_at, source AS dominantSource
@@ -68,18 +85,18 @@ export async function GET(req: Request) {
 
     const [rows]: any = await db.query(sql, params);
 
-    // -----------------------------
-    // 2) Kategória aggregáció
-    // -----------------------------
+    // -----------------------------------------
+    // 2) Kategória aggregáció + sparkline előkészítés
+    // -----------------------------------------
     const catMap = new Map<
       string,
       {
         category: string | null;
-        trendScore: number;
         articleCount: number;
         sourceSet: Set<string>;
         lastArticleAt: string | null;
-        sourceCounts: Map<string, number>; // ÚJ: forráseloszlás
+        sourceCounts: Map<string, number>;
+        sparkBuckets: Map<string, number>; // ÚJ
       }
     >();
 
@@ -89,7 +106,7 @@ export async function GET(req: Request) {
       const key = cat ?? "__NULL__";
 
       const publishedAt = r.published_at
-        ? new Date(r.published_at).toISOString()
+        ? new Date(r.published_at)
         : null;
 
       const dominantSource = r.dominantSource
@@ -99,11 +116,11 @@ export async function GET(req: Request) {
       if (!catMap.has(key)) {
         catMap.set(key, {
           category: cat,
-          trendScore: 0,
           articleCount: 0,
           sourceSet: new Set(),
-          lastArticleAt: publishedAt,
-          sourceCounts: new Map(), // ÚJ
+          lastArticleAt: publishedAt ? publishedAt.toISOString() : null,
+          sourceCounts: new Map(),
+          sparkBuckets: new Map(), // ÚJ
         });
       }
 
@@ -112,24 +129,62 @@ export async function GET(req: Request) {
       entry.articleCount += 1;
       entry.sourceSet.add(dominantSource);
 
-      // ÚJ: forráseloszlás növelése
       entry.sourceCounts.set(
         dominantSource,
         (entry.sourceCounts.get(dominantSource) || 0) + 1
       );
 
-      // legfrissebb cikk dátuma
       if (
         publishedAt &&
-        (!entry.lastArticleAt || publishedAt > entry.lastArticleAt)
+        (!entry.lastArticleAt ||
+          publishedAt.toISOString() > entry.lastArticleAt)
       ) {
-        entry.lastArticleAt = publishedAt;
+        entry.lastArticleAt = publishedAt.toISOString();
+      }
+
+      // --- SPARKLINE BUCKET ---
+      if (publishedAt) {
+        const bucketKey =
+          mode === "hours"
+            ? publishedAt.toISOString().slice(0, 13) + ":00:00"
+            : publishedAt.toISOString().slice(0, 10);
+
+        entry.sparkBuckets.set(
+          bucketKey,
+          (entry.sparkBuckets.get(bucketKey) || 0) + 1
+        );
       }
     }
 
-    // -----------------------------
-    // 3) Kategória lista összeállítása + ringSources
-    // -----------------------------
+    // -----------------------------------------
+    // 3) Sparkline generálása
+    // -----------------------------------------
+    function generateSparkline(entry: any) {
+      const buckets = entry.sparkBuckets;
+      const spark: number[] = [];
+
+      const cursor = new Date(start);
+
+      if (mode === "hours") {
+        for (let i = 0; i < hours; i++) {
+          const key = cursor.toISOString().slice(0, 19).replace("T", " ");
+          spark.push(buckets.get(key) ?? 0);
+          cursor.setHours(cursor.getHours() + 1);
+        }
+      } else {
+        for (let i = 0; i < days; i++) {
+          const key = cursor.toISOString().slice(0, 10);
+          spark.push(buckets.get(key) ?? 0);
+          cursor.setDate(cursor.getDate() + 1);
+        }
+      }
+
+      return spark;
+    }
+
+    // -----------------------------------------
+    // 4) Kategória lista + ringSources + sparkline
+    // -----------------------------------------
     const categories = Array.from(catMap.values())
       .map((e) => {
         const total = Array.from(e.sourceCounts.values()).reduce(
@@ -139,14 +194,11 @@ export async function GET(req: Request) {
 
         const ringSources = Array.from(e.sourceCounts.entries()).map(
           ([label, count]) => {
-            const normalized = label
-              .toLowerCase()
-              .replace(".hu", "")
-              .trim();
+            const normalized = label.toLowerCase().replace(".hu", "").trim();
 
             return {
-              name: normalized, // normalized név → színmap
-              label, // eredeti név
+              name: normalized,
+              label,
               count,
               percent: Math.round((count / total) * 100),
             };
@@ -159,14 +211,15 @@ export async function GET(req: Request) {
           articleCount: e.articleCount,
           sourceDiversity: e.sourceSet.size,
           lastArticleAt: e.lastArticleAt,
-          ringSources, // ÚJ
+          ringSources,
+          sparkline: generateSparkline(e), // ÚJ
         };
       })
       .sort((a, b) => b.articleCount - a.articleCount);
 
-    // -----------------------------
-    // 4) Items (legfrissebb cikkek)
-    // -----------------------------
+    // -----------------------------------------
+    // 5) Items
+    // -----------------------------------------
     const items = (rows || []).slice(0, 200).map((r: any) => ({
       id: String(r.id),
       title: r.title,

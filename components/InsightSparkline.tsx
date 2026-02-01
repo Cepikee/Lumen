@@ -3,8 +3,8 @@
 import { useEffect, useRef } from "react";
 
 export type InsightSparklineProps = {
-  trend?: number[]; // preferált
-  data?: number[];  // alias
+  trend?: number[];
+  data?: number[];
   height?: number;
   className?: string;
   "aria-hidden"?: boolean | "true" | "false";
@@ -26,7 +26,14 @@ export default function InsightSparkline({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const values = Array.isArray(trend) && trend.length > 0 ? trend : Array.isArray(data) ? data : [];
+    const values =
+      Array.isArray(trend) && trend.length > 0
+        ? trend
+        : Array.isArray(data)
+        ? data
+        : [];
+
+    const isHourly = values.length === 24; // ÚJ: 24h mód felismerése
 
     const dpr = window.devicePixelRatio || 1;
     const w = canvas.clientWidth || 200;
@@ -54,7 +61,8 @@ export default function InsightSparkline({
     const innerW = Math.max(1, w - pad * 2);
     const innerH = Math.max(1, h - pad * 2);
 
-    ctx.lineWidth = 2;
+    // --- Vonalvastagság 24h módban finomabb ---
+    ctx.lineWidth = isHourly ? 1.5 : 2;
     ctx.strokeStyle = "#4dabf7";
     ctx.beginPath();
 
@@ -67,7 +75,8 @@ export default function InsightSparkline({
 
     ctx.stroke();
 
-    ctx.globalAlpha = 0.08;
+    // --- Kitöltés 24h módban halványabb ---
+    ctx.globalAlpha = isHourly ? 0.05 : 0.08;
     ctx.fillStyle = "#4dabf7";
     ctx.lineTo(pad + innerW, pad + innerH);
     ctx.lineTo(pad, pad + innerH);
@@ -77,7 +86,11 @@ export default function InsightSparkline({
   }, [trend, data, height]);
 
   return (
-    <div className={`insight-sparkline ${className}`} style={{ width: "100%" }} aria-hidden={ariaHidden ?? true}>
+    <div
+      className={`insight-sparkline ${className}`}
+      style={{ width: "100%" }}
+      aria-hidden={ariaHidden ?? true}
+    >
       <canvas ref={canvasRef} style={{ width: "100%", display: "block" }} />
     </div>
   );

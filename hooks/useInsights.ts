@@ -1,7 +1,7 @@
 // src/hooks/useInsights.ts
 import useSWR from "swr";
 
-/* --- API típusok (exportálva, hogy más fájlok importálhassák) --- */
+/* --- API típusok --- */
 export type InsightApiItem = {
   category?: string | null;
   trendScore?: number;
@@ -9,7 +9,7 @@ export type InsightApiItem = {
   sourceDiversity?: number | string;
   lastArticleAt?: string | null;
   sparkline?: number[];
-  ringSources?: { name: string; label: string; count: number; percent: number; }[]; // ÚJ, helyes mező
+  ringSources?: { name: string; label: string; count: number; percent: number; }[];
 };
 
 export type InsightsResponse = {
@@ -17,18 +17,19 @@ export type InsightsResponse = {
   items?: InsightApiItem[];
 };
 
-/* --- egyszerű fetcher SWR-hez --- */
+/* --- fetcher --- */
 const fetcher = (url: string) =>
   fetch(url, { cache: "no-store" }).then((r) => {
     if (!r.ok) throw new Error("Fetch error");
     return r.json();
   });
 
-/* --- useInsights hook exportálva --- */
-export function useInsights(period: "7d" | "30d" | "90d", sort: string) {
+/* --- useInsights hook --- */
+export function useInsights(period: "24h" | "7d" | "30d" | "90d", sort: string) {
   const q = new URLSearchParams();
   q.set("period", period);
   q.set("sort", sort);
+
   const url = `/api/insights?${q.toString()}`;
 
   const { data, error, isValidating } = useSWR<InsightsResponse>(url, fetcher, {
