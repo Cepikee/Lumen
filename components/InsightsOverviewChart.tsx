@@ -81,9 +81,11 @@ export default function InsightsOverviewChart({
     };
   }, [data]);
 
+  // ⭐ ÚJ ADAT ÉRKEZIK → visszaáll a friss időablakra
   useEffect(() => {
     const chart = chartRef.current;
     if (!chart) return;
+
     chart.resetZoom();
   }, [chartData]);
 
@@ -131,10 +133,17 @@ export default function InsightsOverviewChart({
         },
       },
 
-      // ⭐ Zoom/pan teljes tiltása → nincs több elcsúszás, nincs stack overflow
+      // ⭐ Zoom/pan engedve → interaktív
       zoom: {
-        zoom: { wheel: { enabled: false }, pinch: { enabled: false }, mode: "x" },
-        pan: { enabled: false, mode: "x" },
+        zoom: {
+          wheel: { enabled: true },
+          pinch: { enabled: true },
+          mode: "x",
+        },
+        pan: {
+          enabled: true,
+          mode: "x",
+        },
       },
     },
   };
