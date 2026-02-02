@@ -12,7 +12,7 @@ import {
 } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
 import { Line } from "react-chartjs-2";
-import { useMemo } from "react";
+import { useMemo, useRef, useEffect } from "react";
 
 ChartJS.register(
   LineElement,
@@ -35,6 +35,8 @@ export default function InsightsOverviewChart({
   data: CategorySeries[];
   height?: number;
 }) {
+  const chartRef = useRef<ChartJS<"line"> | null>(null);
+
   const isDark =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -53,14 +55,12 @@ export default function InsightsOverviewChart({
     "#ff922b",
   ];
 
-  // --- Detect if this is 24h mode (hourly timestamps) ---
   const isHourly = useMemo(() => {
     if (!data || data.length === 0) return false;
     const sample = data[0].points[0]?.date || "";
-    return sample.length > 10; // "YYYY-MM-DD HH:MM:SS"
+    return sample.length > 10;
   }, [data]);
 
-  // --- Chart.js data ---
   const chartData = useMemo(() => {
     if (!data || data.length === 0) return null;
 
@@ -81,16 +81,18 @@ export default function InsightsOverviewChart({
     };
   }, [data]);
 
+  useEffect(() => {
+    const chart = chartRef.current;
+    if (!chart) return;
+    chart.resetZoom();
+  }, [chartData]);
+
   if (!chartData) return null;
 
-  // --- Chart.js options ---
   const options: any = {
     responsive: true,
     maintainAspectRatio: false,
-    animation: {
-      duration: 600,
-      easing: "easeOutQuart",
-    },
+    animation: { duration: 300, easing: "easeOutQuart" },
     scales: {
       x: {
         ticks: {
@@ -100,35 +102,19 @@ export default function InsightsOverviewChart({
           autoSkipPadding: 20,
           callback: function (value: any, index: number) {
             const raw = chartData.labels[index];
-
-            if (isHourly) {
-              // "YYYY-MM-DD HH:MM:SS" → "HH:MM"
-              return raw.slice(11, 16);
-            }
-
-            // "YYYY-MM-DD"
+            if (isHourly) return raw.slice(11, 16);
             return raw;
           },
         },
-        grid: {
-          color: gridColor,
-        },
+        grid: { color: gridColor },
       },
       y: {
-        ticks: {
-          color: textColor,
-        },
-        grid: {
-          color: gridColor,
-        },
+        ticks: { color: textColor },
+        grid: { color: gridColor },
       },
     },
     plugins: {
-      legend: {
-        labels: {
-          color: textColor,
-        },
-      },
+      legend: { labels: { color: textColor } },
       tooltip: {
         enabled: true,
         backgroundColor: isDark ? "#222" : "#fff",
@@ -139,25 +125,27 @@ export default function InsightsOverviewChart({
         callbacks: {
           title: function (items: any) {
             const raw = items[0].label;
-
-            if (isHourly) {
-              // Tooltip full timestamp
-              return raw.replace("T", " ");
-            }
-
+            if (isHourly) return raw.replace("T", " ");
             return raw;
           },
         },
       },
+
       zoom: {
         zoom: {
           wheel: { enabled: true },
           pinch: { enabled: true },
           mode: "x",
+          onZoomComplete({ chart }: { chart: ChartJS<"line"> }) {
+            chart.resetZoom();
+          },
         },
         pan: {
           enabled: true,
           mode: "x",
+          onPanComplete({ chart }: { chart: ChartJS<"line"> }) {
+            chart.resetZoom();
+          },
         },
       },
     },
@@ -165,7 +153,7 @@ export default function InsightsOverviewChart({
 
   return (
     <div style={{ width: "100%", height }}>
-      <Line data={chartData} options={options} />
+      <Line ref={chartRef} data={chartData} options={options} />
     </div>
   );
 }
