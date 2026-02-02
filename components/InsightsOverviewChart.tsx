@@ -131,22 +131,10 @@ export default function InsightsOverviewChart({
         },
       },
 
+      // ⭐ Zoom/pan teljes tiltása → nincs több elcsúszás, nincs stack overflow
       zoom: {
-        zoom: {
-          wheel: { enabled: true },
-          pinch: { enabled: true },
-          mode: "x",
-          onZoomComplete({ chart }: { chart: ChartJS<"line"> }) {
-            chart.resetZoom();
-          },
-        },
-        pan: {
-          enabled: true,
-          mode: "x",
-          onPanComplete({ chart }: { chart: ChartJS<"line"> }) {
-            chart.resetZoom();
-          },
-        },
+        zoom: { wheel: { enabled: false }, pinch: { enabled: false }, mode: "x" },
+        pan: { enabled: false, mode: "x" },
       },
     },
   };
