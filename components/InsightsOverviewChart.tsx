@@ -5,20 +5,21 @@ import {
   LineElement,
   PointElement,
   LinearScale,
-  CategoryScale,
+  TimeScale,
   Tooltip,
   Legend,
   Filler,
 } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
+import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
-import { useMemo, useRef, useEffect } from "react";
+import { useMemo } from "react";
 
 ChartJS.register(
   LineElement,
   PointElement,
   LinearScale,
-  CategoryScale,
+  TimeScale,
   Tooltip,
   Legend,
   Filler,
@@ -35,8 +36,6 @@ export default function InsightsOverviewChart({
   data: CategorySeries[];
   height?: number;
 }) {
-  const chartRef = useRef<ChartJS<"line"> | null>(null);
-
   const isDark =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -55,22 +54,16 @@ export default function InsightsOverviewChart({
     "#ff922b",
   ];
 
-  const isHourly = useMemo(() => {
-    if (!data || data.length === 0) return false;
-    const sample = data[0].points[0]?.date || "";
-    return sample.length > 10;
-  }, [data]);
-
   const chartData = useMemo(() => {
     if (!data || data.length === 0) return null;
 
-    const labels = data[0].points.map((p) => p.date);
-
     return {
-      labels,
       datasets: data.map((cat, idx) => ({
         label: cat.category,
-        data: cat.points.map((p) => p.count),
+        data: cat.points.map((p) => ({
+          x: new Date(p.date),
+          y: p.count,
+        })),
         borderColor: palette[idx % palette.length],
         backgroundColor: palette[idx % palette.length] + "33",
         borderWidth: 2,
@@ -81,14 +74,6 @@ export default function InsightsOverviewChart({
     };
   }, [data]);
 
-  // ⭐ ÚJ ADAT ÉRKEZIK → visszaáll a friss időablakra
-  useEffect(() => {
-    const chart = chartRef.current;
-    if (!chart) return;
-
-    chart.resetZoom();
-  }, [chartData]);
-
   if (!chartData) return null;
 
   const options: any = {
@@ -97,16 +82,16 @@ export default function InsightsOverviewChart({
     animation: { duration: 300, easing: "easeOutQuart" },
     scales: {
       x: {
+        type: "time",
+        time: {
+          unit: "hour",
+          displayFormats: {
+            hour: "HH:mm",
+          },
+        },
         ticks: {
           color: textColor,
           maxRotation: 0,
-          autoSkip: true,
-          autoSkipPadding: 20,
-          callback: function (value: any, index: number) {
-            const raw = chartData.labels[index];
-            if (isHourly) return raw.slice(11, 16);
-            return raw;
-          },
         },
         grid: { color: gridColor },
       },
@@ -126,14 +111,10 @@ export default function InsightsOverviewChart({
         borderWidth: 1,
         callbacks: {
           title: function (items: any) {
-            const raw = items[0].label;
-            if (isHourly) return raw.replace("T", " ");
-            return raw;
+            return new Date(items[0].parsed.x).toLocaleString("hu-HU");
           },
         },
       },
-
-      // ⭐ Zoom/pan engedve → interaktív
       zoom: {
         zoom: {
           wheel: { enabled: true },
@@ -150,7 +131,7 @@ export default function InsightsOverviewChart({
 
   return (
     <div style={{ width: "100%", height }}>
-      <Line ref={chartRef} data={chartData} options={options} />
+      <Line data={chartData} options={options} />
     </div>
   );
 }
