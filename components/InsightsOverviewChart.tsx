@@ -80,10 +80,8 @@ export default function InsightsOverviewChart({
     "#ff922b",
   ];
 
-  // 🔍 DEBUG: forecast adat
   console.log("📈 Forecast adat:", forecast);
 
-  // ⭐ CHART DATA (valós + AI előrejelzés)
   const chartData = useMemo(() => {
     if (!data || data.length === 0) return null;
 
@@ -106,7 +104,7 @@ export default function InsightsOverviewChart({
       });
     });
 
-    // 🔮 2) AI előrejelzés
+    // 🔮 2) AI előrejelzés (valódi)
     if (forecast && typeof forecast === "object") {
       Object.keys(forecast).forEach((catName, idx) => {
         const fc = forecast[catName];
@@ -127,22 +125,6 @@ export default function InsightsOverviewChart({
         });
       });
     }
-
-    // 🧪 3) KÉZI TESZT FORECAST
-    datasets.push({
-      label: "Teszt – AI előrejelzés",
-      data: [
-        { x: new Date("2026-02-03T18:00:00"), y: 2 },
-        { x: new Date("2026-02-03T19:00:00"), y: 3 },
-        { x: new Date("2026-02-03T20:00:00"), y: 1 },
-      ],
-      borderColor: "#8888AA",
-      borderDash: [6, 6],
-      borderWidth: 2,
-      tension: 0.3,
-      pointRadius: 3,
-      fill: false,
-    });
 
     return { datasets };
   }, [data, forecast]);

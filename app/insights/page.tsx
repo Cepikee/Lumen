@@ -7,6 +7,11 @@ import ThemeSync from "@/components/ThemeSync";
 import { useInsights } from "@/hooks/useInsights";
 import { useTimeseriesAll } from "@/hooks/useTimeseriesAll";
 import dynamic from "next/dynamic";
+import useSWR from "swr";
+
+// ⭐ Forecast API hook
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
+const useForecast = () => useSWR("/api/insights/forecast", fetcher);
 
 const InsightsOverviewChart = dynamic(
   () => import("@/components/InsightsOverviewChart"),
@@ -37,6 +42,9 @@ export default function InsightFeedPage() {
 
   const { data, error, loading } = useInsights(period, sort);
   const { data: tsData, loading: tsLoading } = useTimeseriesAll(period);
+
+  // ⭐ Forecast betöltése
+  const { data: forecastData } = useForecast();
 
   const categoryTrends = useMemo<LocalRawCategory[]>(() => {
     if (!data) return [];
@@ -131,7 +139,10 @@ export default function InsightFeedPage() {
         <div style={{ height: 220 }} className="mb-4 bg-light rounded-4" />
       ) : (
         <div className="mb-4 p-3 rounded-4 bg-body-secondary">
-          <InsightsOverviewChart data={tsData?.categories || []} />
+          <InsightsOverviewChart
+            data={tsData?.categories || []}
+            forecast={forecastData?.forecast || {}}
+          />
         </div>
       )}
 
@@ -146,62 +157,16 @@ export default function InsightFeedPage() {
             {loading
               ? Array.from({ length: 6 }).map((_, i) => (
                   <div key={`skeleton-${i}`} className="col-12 d-flex">
-                    <article
-                      className="insight-card card border-0"
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        flex: "1 1 auto",
-                        minHeight: 140,
-                      }}
-                    >
-                      <div className="card-body d-flex flex-column gap-3">
-                        <div className="d-flex align-items-start">
-                          <div
-                            className="me-3 d-flex align-items-center"
-                            style={{ width: 64, height: 64, minWidth: 64 }}
-                          >
-                            <div className="insight-source-ring bg-secondary rounded-circle w-100 h-100" />
-                          </div>
-                          <div className="flex-grow-1">
-                            <div
-                              style={{
-                                height: 18,
-                                width: "60%",
-                                background: "rgba(0,0,0,0.06)",
-                                borderRadius: 6,
-                                marginBottom: 8,
-                              }}
-                            />
-                            <div
-                              style={{
-                                height: 12,
-                                width: "40%",
-                                background: "rgba(0,0,0,0.04)",
-                                borderRadius: 6,
-                              }}
-                            />
-                          </div>
-                          <div className="ms-2 text-end d-flex flex-column gap-2">
-                            <div
-                              style={{
-                                height: 28,
-                                width: 64,
-                                background: "rgba(0,0,0,0.04)",
-                                borderRadius: 6,
-                              }}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="card-footer bg-transparent border-0 pt-0" style={{ marginTop: "auto" }}>
-                          <div
-                            className="insight-sparkline"
-                            style={{ height: 40, background: "rgba(0,0,0,0.03)" }}
-                          />
-                        </div>
-                      </div>
-                    </article>
+                    <InsightCard
+                      title="Betöltés..."
+                      score={0}
+                      sources={0}
+                      dominantSource=""
+                      timeAgo=""
+                      href="#"
+                      ringSources={[]}
+                      sparkline={[]}
+                    />
                   </div>
                 ))
               : categoryItems.map((item) => (
