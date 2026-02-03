@@ -1,4 +1,4 @@
-function buildForecastPrompt(category, points) {
+function buildForecastPrompt(category, points, futureHours, startHourIso) {
   const history = points
     .map(p => `${p.date} → ${p.count}`)
     .join("\n");
@@ -10,7 +10,8 @@ AZ ELMÚLT 7 NAP ÓRÁS ADATAI:
 ${history}
 
 FELADAT:
-- készíts előrejelzést a következő 12 órára
+- készíts előrejelzést a következő ${futureHours} órára
+- az első előrejelzett időpont: ${startHourIso}
 - minden órára adj egy egész számot
 - ne írj szöveget, csak JSON-t
 - formátum:

@@ -4,7 +4,7 @@ const getTimeseries = require("./getTimeseries");
 const buildForecastPrompt = require("./buildForecastPrompt");
 const saveForecast = require("./saveForecast");
 
-// 🔥 JSON EXTRACTOR — bármit ír az AI, ebből JSON lesz
+// JSON extractor
 function extractJson(text) {
   if (!text) throw new Error("Empty AI response");
 
@@ -16,16 +16,10 @@ function extractJson(text) {
   }
 
   const jsonString = text.slice(start, end + 1);
-
-  try {
-    return JSON.parse(jsonString);
-  } catch (err) {
-    console.error("❌ JSON parse error on extracted string:", jsonString);
-    throw err;
-  }
+  return JSON.parse(jsonString);
 }
 
-// 🔥 OLLAMA WRAPPER
+// OLLAMA wrapper
 async function callOllama(prompt) {
   const res = await fetch("http://127.0.0.1:11434/api/generate", {
     method: "POST",
@@ -47,11 +41,27 @@ async function runForecastPipeline() {
   console.log("🔍 Órás adatok lekérése...");
   const timeseries = await getTimeseries(24 * 7);
 
+  // ⭐ MOST UTC-ben
+  const now = new Date();
+  const nowUtc = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+
+  // ⭐ Következő egész óra (UTC)
+  const startHour = new Date(nowUtc);
+  startHour.setMinutes(0, 0, 0);
+  startHour.setHours(startHour.getHours() + 1);
+
+  const startHourIso = startHour.toISOString().slice(0, 19).replace("T", " ");
+
+  // ⭐ 6 órás jövőbeli horizont
+  const futureHours = 6;
+
   for (const category of Object.keys(timeseries)) {
     console.log(`\n📊 Kategória: ${category}`);
 
     const points = timeseries[category];
-    const prompt = buildForecastPrompt(category, points);
+
+    // ⭐ ÚJ PROMPT: jövőbeli időablakkal
+    const prompt = buildForecastPrompt(category, points, futureHours, startHourIso);
 
     console.log("🤖 AI előrejelzés generálása...");
     const raw = await callOllama(prompt);
@@ -61,7 +71,7 @@ async function runForecastPipeline() {
       forecast = extractJson(raw);
     } catch (err) {
       console.error("❌ JSON extract/parse error:", err);
-      continue; // megy tovább a következő kategóriára
+      continue;
     }
 
     console.log("💾 Mentés DB-be...");
