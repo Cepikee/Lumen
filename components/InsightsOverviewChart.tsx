@@ -55,9 +55,11 @@ type CategorySeries = { category: string; points: Point[] };
 
 export default function InsightsOverviewChart({
   data,
+  forecast,
   height = 300,
 }: {
   data: CategorySeries[];
+  forecast: any;
   height?: number;
 }) {
   const isDark =
@@ -78,11 +80,15 @@ export default function InsightsOverviewChart({
     "#ff922b",
   ];
 
+  // ⭐ CHART DATA (valós + AI előrejelzés)
   const chartData = useMemo(() => {
     if (!data || data.length === 0) return null;
 
-    return {
-      datasets: data.map((cat, idx) => ({
+    const datasets: any[] = [];
+
+    // 🔵 1) Valós adatok
+    data.forEach((cat, idx) => {
+      datasets.push({
         label: cat.category,
         data: cat.points.map((p) => ({
           x: new Date(p.date),
@@ -93,13 +99,33 @@ export default function InsightsOverviewChart({
         borderWidth: 2,
         tension: 0.3,
         pointRadius: 0,
-        pointHitRadius: 20,
-        hoverRadius: 20,
-        hitRadius: 20,
         fill: false,
-      })),
-    };
-  }, [data]);
+      });
+    });
+
+    // 🔮 2) AI előrejelzés
+    if (forecast) {
+      Object.keys(forecast).forEach((catName, idx) => {
+        const fc = forecast[catName];
+
+        datasets.push({
+          label: `${catName} – AI előrejelzés`,
+          data: fc.map((p: any) => ({
+            x: new Date(p.date),
+            y: p.predicted,
+          })),
+          borderColor: palette[idx % palette.length] + "AA",
+          borderDash: [6, 6], // ⭐ SZAGGATOTT VONAL
+          borderWidth: 2,
+          tension: 0.3,
+          pointRadius: 3,
+          fill: false,
+        });
+      });
+    }
+
+    return { datasets };
+  }, [data, forecast]);
 
   if (!chartData) return null;
 
@@ -141,7 +167,6 @@ export default function InsightsOverviewChart({
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
 
-        // ⭐ MAGYAR DÁTUM FORMÁTUM
         callbacks: {
           title: function (items: any) {
             const d = new Date(items[0].parsed.x);
