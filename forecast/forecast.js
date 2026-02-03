@@ -4,7 +4,28 @@ const getTimeseries = require("./getTimeseries");
 const buildForecastPrompt = require("./buildForecastPrompt");
 const saveForecast = require("./saveForecast");
 
-// Ollama wrapper
+// 🔥 JSON EXTRACTOR — bármit ír az AI, ebből JSON lesz
+function extractJson(text) {
+  if (!text) throw new Error("Empty AI response");
+
+  const start = text.indexOf("[");
+  const end = text.lastIndexOf("]");
+
+  if (start === -1 || end === -1) {
+    throw new Error("No JSON array found in AI output");
+  }
+
+  const jsonString = text.slice(start, end + 1);
+
+  try {
+    return JSON.parse(jsonString);
+  } catch (err) {
+    console.error("❌ JSON parse error on extracted string:", jsonString);
+    throw err;
+  }
+}
+
+// 🔥 OLLAMA WRAPPER
 async function callOllama(prompt) {
   const res = await fetch("http://127.0.0.1:11434/api/generate", {
     method: "POST",
@@ -37,10 +58,10 @@ async function runForecastPipeline() {
 
     let forecast;
     try {
-      forecast = JSON.parse(raw);
-    } catch {
-      console.error("❌ JSON parse error");
-      continue;
+      forecast = extractJson(raw);
+    } catch (err) {
+      console.error("❌ JSON extract/parse error:", err);
+      continue; // megy tovább a következő kategóriára
     }
 
     console.log("💾 Mentés DB-be...");
