@@ -15,7 +15,7 @@ import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
 import { useMemo } from "react";
 
-// ⭐ CROSSHAIR PLUGIN – Chart.js 4.x kompatibilis, tooltip-barát
+// ⭐ CROSSHAIR PLUGIN – Chart.js 4.x kompatibilis
 const crosshairPlugin = {
   id: "crosshair",
   afterDatasetsDraw(chart: any) {
@@ -32,7 +32,7 @@ const crosshairPlugin = {
     ctx.moveTo(x, topY);
     ctx.lineTo(x, bottomY);
     ctx.lineWidth = 1;
-    ctx.strokeStyle = "#8884"; // prémium halvány crosshair
+    ctx.strokeStyle = "#8884";
     ctx.stroke();
     ctx.restore();
   },
@@ -52,6 +52,38 @@ ChartJS.register(
 
 type Point = { date: string; count: number };
 type CategorySeries = { category: string; points: Point[] };
+
+// ⭐ MINDEN órára generálunk pontot (ha nincs adat → 0)
+function fillHourly(points: Point[]): Point[] {
+  if (points.length === 0) return [];
+
+  const result: Point[] = [];
+
+  for (let i = 0; i < points.length - 1; i++) {
+    const current = points[i];
+    const next = points[i + 1];
+
+    const start = new Date(current.date).getTime();
+    const end = new Date(next.date).getTime();
+    const step = 60 * 60 * 1000; // 1 óra
+
+    // eredeti pont
+    result.push(current);
+
+    // óránkénti pontok
+    for (let t = start + step; t < end; t += step) {
+      result.push({
+        date: new Date(t).toISOString(),
+        count: 0, // ⭐ ha nincs adat → 0
+      });
+    }
+  }
+
+  // utolsó pont
+  result.push(points[points.length - 1]);
+
+  return result;
+}
 
 export default function InsightsOverviewChart({
   data,
@@ -82,25 +114,29 @@ export default function InsightsOverviewChart({
     if (!data || data.length === 0) return null;
 
     return {
-      datasets: data.map((cat, idx) => ({
-        label: cat.category,
-        data: cat.points.map((p) => ({
-          x: new Date(p.date),
-          y: p.count,
-        })),
-        borderColor: palette[idx % palette.length],
-        backgroundColor: palette[idx % palette.length] + "33",
-        borderWidth: 2,
-        tension: 0.3,
+      datasets: data.map((cat, idx) => {
+        const densePoints = fillHourly(cat.points);
 
-        // ⭐ Láthatatlan, nagy hover-hitbox → 7 napos módban is tökéletes
-        pointRadius: 0,
-        pointHitRadius: 20,
-        hoverRadius: 20,
-        hitRadius: 20,
+        return {
+          label: cat.category,
+          data: densePoints.map((p) => ({
+            x: new Date(p.date),
+            y: p.count,
+          })),
+          borderColor: palette[idx % palette.length],
+          backgroundColor: palette[idx % palette.length] + "33",
+          borderWidth: 2,
+          tension: 0.3,
 
-        fill: false,
-      })),
+          // ⭐ láthatatlan, nagy hover-hitbox
+          pointRadius: 0,
+          pointHitRadius: 20,
+          hoverRadius: 20,
+          hitRadius: 20,
+
+          fill: false,
+        };
+      }),
     };
   }, [data]);
 
@@ -110,7 +146,6 @@ export default function InsightsOverviewChart({
     responsive: true,
     maintainAspectRatio: false,
 
-    // ⭐ Legend + vonalak smooth animáció
     animations: {
       colors: { type: "color", duration: 300 },
       numbers: { type: "number", duration: 300 },
@@ -118,7 +153,7 @@ export default function InsightsOverviewChart({
 
     animation: { duration: 300, easing: "easeOutQuart" },
 
-    // ⭐ A teljes vonal hoverelhető → TradingView-szintű UX
+    // ⭐ teljes vonal hoverelhető
     interaction: {
       mode: "nearest",
       intersect: false,
@@ -151,43 +186,9 @@ export default function InsightsOverviewChart({
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
 
-        // ⭐ MA / TEGNAP / dátum + óra
         callbacks: {
           title: function (items: any) {
             const d = new Date(items[0].parsed.x);
-            const now = new Date();
-
-            const isToday =
-              d.getFullYear() === now.getFullYear() &&
-              d.getMonth() === now.getMonth() &&
-              d.getDate() === now.getDate();
-
-            const yesterday = new Date();
-            yesterday.setDate(now.getDate() - 1);
-
-            const isYesterday =
-              d.getFullYear() === yesterday.getFullYear() &&
-              d.getMonth() === yesterday.getMonth() &&
-              d.getDate() === yesterday.getDate();
-
-            if (isToday)
-              return (
-                "Ma " +
-                d.toLocaleTimeString("hu-HU", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })
-              );
-
-            if (isYesterday)
-              return (
-                "Tegnap " +
-                d.toLocaleTimeString("hu-HU", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })
-              );
-
             return d.toLocaleString("hu-HU", {
               year: "numeric",
               month: "2-digit",
