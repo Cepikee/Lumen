@@ -21,21 +21,22 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const period = url.searchParams.get("period") || "7d";
 
-  // minden mód órás bontás lesz
   let hoursBack = 24;
-
   if (period === "7d") hoursBack = 24 * 7;
   if (period === "30d") hoursBack = 24 * 30;
   if (period === "90d") hoursBack = 24 * 90;
 
+  // ⭐ MOST időpont (UTC)
   const now = new Date();
-  const start = new Date(now.getTime() - hoursBack * 60 * 60 * 1000);
+  const nowUtc = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
 
-  // SQL timestamp
-  const startStr = start.toISOString().slice(0, 19).replace("T", " ");
+  // ⭐ 24 órával ezelőtti időpont (UTC)
+  const startUtc = new Date(nowUtc.getTime() - hoursBack * 60 * 60 * 1000);
+
+  const startStr = startUtc.toISOString().slice(0, 19).replace("T", " ");
 
   try {
-    // összes kategória
+    // ⭐ összes kategória
     const [cats]: any = await db.query(`
       SELECT DISTINCT TRIM(category) AS category
       FROM articles
@@ -52,7 +53,7 @@ export async function GET(req: Request) {
       const cat = normalizeDbString(rawCat);
       if (!cat) continue;
 
-      // órás bucket SQL
+      // ⭐ lekérjük az adott kategória órás adatait
       const [rows]: any = await db.query(
         `
         SELECT 
@@ -72,13 +73,13 @@ export async function GET(req: Request) {
         map.set(String(r.bucket), Number(r.count) || 0);
       }
 
-      // órás kitöltés
-      const cursor = new Date(start);
+      // ⭐ órás kitöltés MOST-ig (nem áll meg korábban!)
+      const cursor = new Date(startUtc);
       cursor.setMinutes(0, 0, 0);
 
       const points: { date: string; count: number }[] = [];
 
-      for (let i = 0; i < hoursBack; i++) {
+      while (cursor <= nowUtc) {
         const key = cursor.toISOString().slice(0, 19).replace("T", " ");
         const c = map.get(key) ?? 0;
 
