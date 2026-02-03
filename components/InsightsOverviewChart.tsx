@@ -15,6 +15,29 @@ import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
 import { useMemo, useState, useEffect } from "react";
 
+// ⭐ CROSSHAIR PLUGIN
+const crosshairPlugin = {
+  id: "crosshair",
+  afterDraw: (chart: any) => {
+    if (!chart.tooltip?._active || chart.tooltip._active.length === 0) return;
+
+    const ctx = chart.ctx;
+    const activePoint = chart.tooltip._active[0];
+    const x = activePoint.element.x;
+    const topY = chart.chartArea.top;
+    const bottomY = chart.chartArea.bottom;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x, topY);
+    ctx.lineTo(x, bottomY);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "#8884"; // prémium halvány vonal
+    ctx.stroke();
+    ctx.restore();
+  },
+};
+
 ChartJS.register(
   LineElement,
   PointElement,
@@ -23,7 +46,8 @@ ChartJS.register(
   Tooltip,
   Legend,
   Filler,
-  zoomPlugin
+  zoomPlugin,
+  crosshairPlugin
 );
 
 type Point = { date: string; count: number };
@@ -80,9 +104,6 @@ export default function InsightsOverviewChart({
         tension: 0.3,
         pointRadius: 0,
         fill: false,
-
-        // Összehasonlító nézet → 2. dataset szaggatott
-        borderDash: idx === 1 ? [6, 6] : undefined,
       })),
     };
   }, [data]);
@@ -92,20 +113,23 @@ export default function InsightsOverviewChart({
   const options: any = {
     responsive: true,
     maintainAspectRatio: false,
+
+    // ⭐ LEGEND ANIMÁCIÓ
+    animations: {
+      colors: { type: "color", duration: 300 },
+      numbers: { type: "number", duration: 300 },
+    },
+
     animation: { duration: 300, easing: "easeOutQuart" },
+
     scales: {
       x: {
         type: "time",
         time: {
           unit: "hour",
-          displayFormats: {
-            hour: "HH:mm",
-          },
+          displayFormats: { hour: "HH:mm" },
         },
-        ticks: {
-          color: textColor,
-          maxRotation: 0,
-        },
+        ticks: { color: textColor, maxRotation: 0 },
         grid: { color: gridColor },
       },
       y: {
@@ -113,8 +137,10 @@ export default function InsightsOverviewChart({
         grid: { color: gridColor },
       },
     },
+
     plugins: {
       legend: { labels: { color: textColor } },
+
       tooltip: {
         enabled: true,
         backgroundColor: isDark ? "#222" : "#fff",
@@ -123,7 +149,7 @@ export default function InsightsOverviewChart({
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
 
-        // Ma / Tegnap / Dátum + óra tooltip
+        // ⭐ MA / TEGNAP TOOLTIP
         callbacks: {
           title: function (items: any) {
             const d = new Date(items[0].parsed.x);
@@ -171,17 +197,10 @@ export default function InsightsOverviewChart({
         },
       },
 
-      // Zoom + Pan engedve
+      // ⭐ ZOOM + PAN
       zoom: {
-        zoom: {
-          wheel: { enabled: true },
-          pinch: { enabled: true },
-          mode: "x",
-        },
-        pan: {
-          enabled: true,
-          mode: "x",
-        },
+        zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: "x" },
+        pan: { enabled: true, mode: "x" },
       },
     },
   };
