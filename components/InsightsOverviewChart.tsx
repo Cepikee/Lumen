@@ -15,15 +15,15 @@ import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
 import { useMemo } from "react";
 
-// ⭐ CROSSHAIR PLUGIN – tooltip-barát verzió
+// ⭐ CROSSHAIR PLUGIN – Chart.js 4.x kompatibilis, tooltip-barát
 const crosshairPlugin = {
   id: "crosshair",
-  afterDatasetsDraw: (chart: any) => {
-    if (!chart.tooltip?._active || chart.tooltip._active.length === 0) return;
+  afterDatasetsDraw(chart: any) {
+    const active = chart.tooltip?.getActiveElements?.();
+    if (!active || active.length === 0) return;
 
     const ctx = chart.ctx;
-    const activePoint = chart.tooltip._active[0];
-    const x = activePoint.element.x;
+    const { x } = active[0].element;
     const topY = chart.chartArea.top;
     const bottomY = chart.chartArea.bottom;
 
@@ -32,7 +32,7 @@ const crosshairPlugin = {
     ctx.moveTo(x, topY);
     ctx.lineTo(x, bottomY);
     ctx.lineWidth = 1;
-    ctx.strokeStyle = "#8884"; // halvány prémium vonal
+    ctx.strokeStyle = "#8884"; // prémium halvány crosshair
     ctx.stroke();
     ctx.restore();
   },
@@ -104,7 +104,7 @@ export default function InsightsOverviewChart({
     responsive: true,
     maintainAspectRatio: false,
 
-    // Legend + vonalak smooth animáció
+    // ⭐ Legend + vonalak smooth animáció
     animations: {
       colors: { type: "color", duration: 300 },
       numbers: { type: "number", duration: 300 },
@@ -139,7 +139,7 @@ export default function InsightsOverviewChart({
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
 
-        // Ma / Tegnap / dátum + óra
+        // ⭐ MA / TEGNAP / dátum + óra
         callbacks: {
           title: function (items: any) {
             const d = new Date(items[0].parsed.x);
