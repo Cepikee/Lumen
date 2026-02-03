@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
 import "chartjs-adapter-date-fns";
+import { hu } from "date-fns/locale";
 import { Line } from "react-chartjs-2";
 import { useMemo } from "react";
 
@@ -69,6 +70,13 @@ export default function InsightsOverviewChart({
   const textColor = isDark ? "#ddd" : "#333";
   const gridColor = isDark ? "#444" : "#eee";
 
+  // ⭐ Prémium AI előrejelzés szín
+  const aiColor = "#9b5de5AA";
+
+  // ⭐ MOST időpont UTC-ben
+  const nowLocal = new Date();
+  const nowUtc = new Date(nowLocal.getTime() - nowLocal.getTimezoneOffset() * 60000);
+
   const palette = [
     "#ff6b6b",
     "#4dabf7",
@@ -80,19 +88,17 @@ export default function InsightsOverviewChart({
     "#ff922b",
   ];
 
-  const aiLineColor = "#9b5de5AA";
-
   const { datasets } = useMemo(() => {
     if (!data || data.length === 0) return { datasets: [] };
 
     const datasets: any[] = [];
 
-    // 🔵 1) Valós adatok – ahogy jönnek, nem szűrjük idő szerint itt
+    // 🔵 1) Valós adatok – nem szűrjük, csak megjelenítjük
     data.forEach((cat, idx) => {
       datasets.push({
         label: cat.category,
         data: cat.points.map((p) => ({
-          x: new Date(p.date),
+          x: new Date(p.date), // UTC → local automatikusan
           y: p.count,
         })),
         borderColor: palette[idx % palette.length],
@@ -105,14 +111,6 @@ export default function InsightsOverviewChart({
     });
 
     // 🔮 2) AI előrejelzés – 1 dataset, pontok kategória színnel
-
-    // referenciapont: legkésőbbi valós adat ideje
-    const allRealDates = data.flatMap((cat) =>
-      cat.points.map((p) => new Date(p.date).getTime())
-    );
-    const latestReal =
-      allRealDates.length > 0 ? new Date(Math.max(...allRealDates)) : new Date();
-
     const aiPoints: any[] = [];
     const aiPointColors: string[] = [];
     const aiCategories: string[] = [];
@@ -121,9 +119,10 @@ export default function InsightsOverviewChart({
       const color = palette[idx % palette.length];
 
       (fc as any[]).forEach((p) => {
-        const d = new Date(p.date);
-        // csak a legutolsó valós adat UTÁNI pontokat rajzoljuk
-        if (d.getTime() >= latestReal.getTime()) {
+        const d = new Date(p.date); // UTC timestamp
+
+        // Csak jövőbeli pontokat rajzolunk
+        if (d.getTime() >= nowUtc.getTime()) {
           aiPoints.push({ x: d, y: p.predicted });
           aiPointColors.push(color);
           aiCategories.push(catName);
@@ -135,7 +134,7 @@ export default function InsightsOverviewChart({
       datasets.push({
         label: "AI előrejelzés",
         data: aiPoints,
-        borderColor: aiLineColor,
+        borderColor: aiColor,
         borderDash: [6, 6],
         borderWidth: 2,
         tension: 0.3,
@@ -143,7 +142,7 @@ export default function InsightsOverviewChart({
         pointBackgroundColor: aiPointColors,
         pointBorderColor: aiPointColors,
         fill: false,
-        _aiCategories: aiCategories, // tooltiphez
+        _aiCategories: aiCategories,
       });
     }
 
@@ -166,6 +165,9 @@ export default function InsightsOverviewChart({
     scales: {
       x: {
         type: "time",
+        adapters: {
+          date: { locale: hu },
+        },
         time: {
           unit: "hour",
           displayFormats: { hour: "HH:mm" },
@@ -191,6 +193,18 @@ export default function InsightsOverviewChart({
         borderWidth: 1,
 
         callbacks: {
+          // ⭐ MAGYAR IDŐ
+          title: function (items: any) {
+            const d = new Date(items[0].parsed.x);
+            return d.toLocaleString("hu-HU", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+          },
+
           label: function (ctx: any) {
             const ds = ctx.dataset;
             const idx = ctx.dataIndex;
