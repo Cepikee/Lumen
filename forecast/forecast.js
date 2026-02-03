@@ -31,7 +31,7 @@ async function callOllama(prompt) {
       keep_alive: 0,
       options: { num_predict: 400 }
     }),
-    signal: AbortSignal.timeout(600000000000) // 2 minutes
+    signal: AbortSignal.timeout(4294967294) // 2 minutes
   });
 
   const data = await res.json();
