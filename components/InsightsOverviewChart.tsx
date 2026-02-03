@@ -92,8 +92,13 @@ export default function InsightsOverviewChart({
         backgroundColor: palette[idx % palette.length] + "33",
         borderWidth: 2,
         tension: 0.3,
+
+        // ⭐ Láthatatlan, nagy hover-hitbox → 7 napos módban is tökéletes
         pointRadius: 0,
-        pointHitRadius: 12, // ⭐ láthatatlan hover area
+        pointHitRadius: 20,
+        hoverRadius: 20,
+        hitRadius: 20,
+
         fill: false,
       })),
     };
@@ -112,6 +117,12 @@ export default function InsightsOverviewChart({
     },
 
     animation: { duration: 300, easing: "easeOutQuart" },
+
+    // ⭐ A teljes vonal hoverelhető → TradingView-szintű UX
+    interaction: {
+      mode: "nearest",
+      intersect: false,
+    },
 
     scales: {
       x: {
