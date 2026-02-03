@@ -69,33 +69,34 @@ export default function InsightsOverviewChart({
   const textColor = isDark ? "#ddd" : "#333";
   const gridColor = isDark ? "#444" : "#eee";
 
-  // ⭐ Prémium AI előrejelzés szín
-  const aiColor = "#9b5de5AA";
+  const palette = [
+    "#ff6b6b",
+    "#4dabf7",
+    "#ffd166",
+    "#06d6a0",
+    "#9b5de5",
+    "#f06595",
+    "#00c2d1",
+    "#ff922b",
+  ];
 
-  // ⭐ MOST időpont
-  const now = new Date();
+  const aiLineColor = "#9b5de5AA";
 
-  // ⭐ 24 órával ezelőtti időpont
-  const minDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-  const maxDate = now;
-
-  const { datasets, aiPoints } = useMemo(() => {
-    if (!data || data.length === 0) return { datasets: [], aiPoints: [] };
+  const { datasets } = useMemo(() => {
+    if (!data || data.length === 0) return { datasets: [] };
 
     const datasets: any[] = [];
 
-    // 🔵 1) Valós adatok (múlt 24 óra)
-    data.forEach((cat) => {
+    // 🔵 1) Valós adatok – ahogy jönnek, nem szűrjük idő szerint itt
+    data.forEach((cat, idx) => {
       datasets.push({
         label: cat.category,
-        data: cat.points
-          .map((p) => ({
-            x: new Date(p.date),
-            y: p.count,
-          }))
-          .filter((p) => p.x >= minDate && p.x <= maxDate),
-        borderColor: "#ccc",
-        backgroundColor: "#ccc3",
+        data: cat.points.map((p) => ({
+          x: new Date(p.date),
+          y: p.count,
+        })),
+        borderColor: palette[idx % palette.length],
+        backgroundColor: palette[idx % palette.length] + "33",
         borderWidth: 2,
         tension: 0.3,
         pointRadius: 0,
@@ -103,26 +104,26 @@ export default function InsightsOverviewChart({
       });
     });
 
-    // 🔮 2) AI előrejelzés (csak a jövő)
+    // 🔮 2) AI előrejelzés – 1 dataset, pontok kategória színnel
+
+    // referenciapont: legkésőbbi valós adat ideje
+    const allRealDates = data.flatMap((cat) =>
+      cat.points.map((p) => new Date(p.date).getTime())
+    );
+    const latestReal =
+      allRealDates.length > 0 ? new Date(Math.max(...allRealDates)) : new Date();
+
     const aiPoints: any[] = [];
     const aiPointColors: string[] = [];
     const aiCategories: string[] = [];
 
     Object.entries(forecast || {}).forEach(([catName, fc], idx) => {
-      const color = [
-        "#ff6b6b",
-        "#4dabf7",
-        "#ffd166",
-        "#06d6a0",
-        "#9b5de5",
-        "#f06595",
-        "#00c2d1",
-        "#ff922b",
-      ][idx % 8];
+      const color = palette[idx % palette.length];
 
       (fc as any[]).forEach((p) => {
         const d = new Date(p.date);
-        if (d.getTime() >= now.getTime()) {
+        // csak a legutolsó valós adat UTÁNI pontokat rajzoljuk
+        if (d.getTime() >= latestReal.getTime()) {
           aiPoints.push({ x: d, y: p.predicted });
           aiPointColors.push(color);
           aiCategories.push(catName);
@@ -130,12 +131,11 @@ export default function InsightsOverviewChart({
       });
     });
 
-    // Csak akkor rajzoljuk, ha van jövőbeli forecast
     if (aiPoints.length > 0) {
       datasets.push({
         label: "AI előrejelzés",
         data: aiPoints,
-        borderColor: aiColor,
+        borderColor: aiLineColor,
         borderDash: [6, 6],
         borderWidth: 2,
         tension: 0.3,
@@ -147,7 +147,7 @@ export default function InsightsOverviewChart({
       });
     }
 
-    return { datasets, aiPoints };
+    return { datasets };
   }, [data, forecast]);
 
   if (!datasets || datasets.length === 0) return null;
@@ -166,8 +166,6 @@ export default function InsightsOverviewChart({
     scales: {
       x: {
         type: "time",
-        min: minDate,
-        max: maxDate,
         time: {
           unit: "hour",
           displayFormats: { hour: "HH:mm" },
@@ -198,8 +196,11 @@ export default function InsightsOverviewChart({
             const idx = ctx.dataIndex;
 
             if (ds.label === "AI előrejelzés") {
-              const cat = ds._aiCategories[idx];
-              return `AI előrejelzés – ${cat}: ${ctx.parsed.y}`;
+              const cat = ds._aiCategories?.[idx];
+              if (cat) {
+                return `AI előrejelzés – ${cat}: ${ctx.parsed.y}`;
+              }
+              return `AI előrejelzés: ${ctx.parsed.y}`;
             }
 
             return `${ds.label}: ${ctx.parsed.y}`;
