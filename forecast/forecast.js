@@ -19,24 +19,36 @@ function extractJson(text) {
   return JSON.parse(jsonString);
 }
 
-// OLLAMA wrapper
 async function callOllama(prompt) {
-  const res = await fetch("http://127.0.0.1:11434/api/generate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "llama3:latest",
-      prompt,
-      stream: false,
-      keep_alive: 0,
-      options: { num_predict: 400 }
-    }),
-    signal: AbortSignal.timeout(4294967294) // 2 minutes
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10 * 60 * 1000); // 10 perc
 
-  const data = await res.json();
-  return data.response;
+  try {
+    const res = await fetch("http://127.0.0.1:11434/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "llama3:latest",
+        prompt,
+        stream: false,
+        keep_alive: 0,
+        options: { num_predict: 400 }
+      }),
+      signal: controller.signal
+    });
+
+    clearTimeout(timeout);
+
+    const data = await res.json();
+    return data.response;
+
+  } catch (err) {
+    clearTimeout(timeout);
+    console.error("❌ OLLAMA HIBA / TIMEOUT:", err);
+    return null; // soha ne álljon le
+  }
 }
+
 
 async function runForecastPipeline() {
   console.log("🔍 Órás adatok lekérése...");
