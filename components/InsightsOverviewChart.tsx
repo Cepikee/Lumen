@@ -80,8 +80,6 @@ export default function InsightsOverviewChart({
     "#ff922b",
   ];
 
-  console.log("📈 Forecast adat:", forecast);
-
   const chartData = useMemo(() => {
     if (!data || data.length === 0) return null;
 
@@ -104,32 +102,47 @@ export default function InsightsOverviewChart({
       });
     });
 
-    // 🔮 2) AI előrejelzés (valódi)
-    if (forecast && typeof forecast === "object") {
-      Object.keys(forecast).forEach((catName, idx) => {
-        const fc = forecast[catName];
-        if (!fc || fc.length === 0) return;
+    // 🔮 2) Összevont AI előrejelzés
+    const forecastSum: Record<string, number> = {};
 
-        datasets.push({
-          label: `${catName} – AI előrejelzés`,
-          data: fc.map((p: any) => ({
-            x: new Date(p.date),
-            y: p.predicted,
-          })),
-          borderColor: palette[idx % palette.length] + "AA",
-          borderDash: [6, 6],
-          borderWidth: 2,
-          tension: 0.3,
-          pointRadius: 3,
-          fill: false,
-        });
+    Object.values(forecast || {}).forEach((fc: any) => {
+      fc.forEach((p: any) => {
+        const key = p.date;
+        forecastSum[key] = (forecastSum[key] || 0) + p.predicted;
+      });
+    });
+
+    const forecastPoints = Object.entries(forecastSum).map(([date, sum]) => ({
+      x: new Date(date),
+      y: sum,
+    }));
+
+    if (forecastPoints.length > 0) {
+      datasets.push({
+        label: "AI előrejelzés (összesített)",
+        data: forecastPoints,
+        borderColor: "#8888AA",
+        borderDash: [6, 6],
+        borderWidth: 2,
+        tension: 0.3,
+        pointRadius: 3,
+        fill: false,
       });
     }
 
-    return { datasets };
+    return { datasets, forecastPoints };
   }, [data, forecast]);
 
   if (!chartData) return null;
+
+  // ⏱️ Automatikus időskála kiterjesztés
+  const allDates = [
+    ...data.flatMap((cat) => cat.points.map((p) => new Date(p.date))),
+    ...chartData.forecastPoints.map((p) => p.x),
+  ];
+
+  const minDate = new Date(Math.min(...allDates.map((d) => d.getTime())));
+  const maxDate = new Date(Math.max(...allDates.map((d) => d.getTime())));
 
   const options: any = {
     responsive: true,
@@ -149,6 +162,8 @@ export default function InsightsOverviewChart({
           unit: "hour",
           displayFormats: { hour: "HH:mm" },
         },
+        min: minDate,
+        max: maxDate,
         ticks: { color: textColor },
         grid: { color: gridColor },
       },
@@ -193,7 +208,7 @@ export default function InsightsOverviewChart({
 
   return (
     <div style={{ width: "100%", height }}>
-      <Line data={chartData} options={options} />
+      <Line data={{ datasets: chartData.datasets }} options={options} />
     </div>
   );
 }
