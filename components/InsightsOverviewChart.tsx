@@ -13,12 +13,12 @@ import {
 import zoomPlugin from "chartjs-plugin-zoom";
 import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo } from "react";
 
-// ⭐ CROSSHAIR PLUGIN
+// ⭐ CROSSHAIR PLUGIN – tooltip-barát verzió
 const crosshairPlugin = {
   id: "crosshair",
-  afterDraw: (chart: any) => {
+  afterDatasetsDraw: (chart: any) => {
     if (!chart.tooltip?._active || chart.tooltip._active.length === 0) return;
 
     const ctx = chart.ctx;
@@ -32,7 +32,7 @@ const crosshairPlugin = {
     ctx.moveTo(x, topY);
     ctx.lineTo(x, bottomY);
     ctx.lineWidth = 1;
-    ctx.strokeStyle = "#8884"; // prémium halvány vonal
+    ctx.strokeStyle = "#8884"; // halvány prémium vonal
     ctx.stroke();
     ctx.restore();
   },
@@ -60,16 +60,6 @@ export default function InsightsOverviewChart({
   data: CategorySeries[];
   height?: number;
 }) {
-  const [refreshKey, setRefreshKey] = useState(0);
-
-  // Auto-refresh 10 mp-enként
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRefreshKey((k) => k + 1);
-    }, 10000);
-    return () => clearInterval(interval);
-  }, []);
-
   const isDark =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -114,7 +104,7 @@ export default function InsightsOverviewChart({
     responsive: true,
     maintainAspectRatio: false,
 
-    // ⭐ LEGEND ANIMÁCIÓ
+    // Legend + vonalak smooth animáció
     animations: {
       colors: { type: "color", duration: 300 },
       numbers: { type: "number", duration: 300 },
@@ -149,7 +139,7 @@ export default function InsightsOverviewChart({
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
 
-        // ⭐ MA / TEGNAP TOOLTIP
+        // Ma / Tegnap / dátum + óra
         callbacks: {
           title: function (items: any) {
             const d = new Date(items[0].parsed.x);
@@ -197,7 +187,6 @@ export default function InsightsOverviewChart({
         },
       },
 
-      // ⭐ ZOOM + PAN
       zoom: {
         zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: "x" },
         pan: { enabled: true, mode: "x" },
@@ -207,7 +196,7 @@ export default function InsightsOverviewChart({
 
   return (
     <div style={{ width: "100%", height }}>
-      <Line key={refreshKey} data={chartData} options={options} />
+      <Line data={chartData} options={options} />
     </div>
   );
 }
