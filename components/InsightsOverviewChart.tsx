@@ -80,8 +80,8 @@ export default function InsightsOverviewChart({
     "#ff922b",
   ];
 
-  const chartData = useMemo(() => {
-    if (!data || data.length === 0) return null;
+  const { datasets, aiPoints } = useMemo(() => {
+    if (!data || data.length === 0) return { datasets: [], aiPoints: [] };
 
     const datasets: any[] = [];
 
@@ -102,26 +102,28 @@ export default function InsightsOverviewChart({
       });
     });
 
-    // 🔮 2) Összevont AI előrejelzés
-    const forecastSum: Record<string, number> = {};
+    // 🔮 2) Egyetlen AI előrejelzés dataset (pontok kategória színével)
+    const aiPoints: any[] = [];
+    const aiColors: string[] = [];
 
-    Object.values(forecast || {}).forEach((fc: any) => {
-      fc.forEach((p: any) => {
-        const key = p.date;
-        forecastSum[key] = (forecastSum[key] || 0) + p.predicted;
+    Object.entries(forecast || {}).forEach(([catName, fc], idx) => {
+      const color = palette[idx % palette.length] + "AA";
+
+      (fc as any[]).forEach((p) => {
+        aiPoints.push({
+          x: new Date(p.date),
+          y: p.predicted,
+        });
+        aiColors.push(color);
       });
     });
 
-    const forecastPoints = Object.entries(forecastSum).map(([date, sum]) => ({
-      x: new Date(date),
-      y: sum,
-    }));
-
-    if (forecastPoints.length > 0) {
+    if (aiPoints.length > 0) {
       datasets.push({
-        label: "AI előrejelzés (összesített)",
-        data: forecastPoints,
-        borderColor: "#8888AA",
+        label: "AI előrejelzés",
+        data: aiPoints,
+        borderColor: aiColors,
+        pointBackgroundColor: aiColors,
         borderDash: [6, 6],
         borderWidth: 2,
         tension: 0.3,
@@ -130,15 +132,15 @@ export default function InsightsOverviewChart({
       });
     }
 
-    return { datasets, forecastPoints };
+    return { datasets, aiPoints };
   }, [data, forecast]);
 
-  if (!chartData) return null;
+  if (!datasets || datasets.length === 0) return null;
 
   // ⏱️ Automatikus időskála kiterjesztés
   const allDates = [
     ...data.flatMap((cat) => cat.points.map((p) => new Date(p.date))),
-    ...chartData.forecastPoints.map((p) => p.x),
+    ...aiPoints.map((p) => p.x),
   ];
 
   const minDate = new Date(Math.min(...allDates.map((d) => d.getTime())));
@@ -208,7 +210,7 @@ export default function InsightsOverviewChart({
 
   return (
     <div style={{ width: "100%", height }}>
-      <Line data={{ datasets: chartData.datasets }} options={options} />
+      <Line data={{ datasets }} options={options} />
     </div>
   );
 }
