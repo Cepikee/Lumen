@@ -41,15 +41,15 @@ async function runForecastPipeline() {
   console.log("🔍 Órás adatok lekérése...");
   const timeseries = await getTimeseries(24 * 7);
 
-  // ⭐ MOST UTC-ben
-  const now = new Date();
-  const nowUtc = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+  // ⭐ MOST CET-ben
+  const nowLocal = new Date();
 
-  // ⭐ Következő egész óra (UTC)
-  const startHour = new Date(nowUtc);
+  // ⭐ Következő egész óra CET-ben
+  const startHour = new Date(nowLocal);
   startHour.setMinutes(0, 0, 0);
   startHour.setHours(startHour.getHours() + 1);
 
+  // ⭐ ISO formátum CET-ben
   const startHourIso = startHour.toISOString().slice(0, 19).replace("T", " ");
 
   // ⭐ 6 órás jövőbeli horizont
@@ -60,7 +60,7 @@ async function runForecastPipeline() {
 
     const points = timeseries[category];
 
-    // ⭐ ÚJ PROMPT: jövőbeli időablakkal
+    // ⭐ ÚJ PROMPT: CET idővel, 6 órára
     const prompt = buildForecastPrompt(category, points, futureHours, startHourIso);
 
     console.log("🤖 AI előrejelzés generálása...");
