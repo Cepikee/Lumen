@@ -81,7 +81,7 @@ function fillHourly(points: Point[]): Point[] {
 
     result.push({
       date: new Date(t).toISOString(),
-      count: lastValue, // ⭐ előző érték továbbvitele
+      count: lastValue,
     });
   }
 
@@ -91,9 +91,11 @@ function fillHourly(points: Point[]): Point[] {
 export default function InsightsOverviewChart({
   data,
   height = 300,
+  mode = "24h", // ⭐ új prop: "24h" | "7d" | "30d" | "90d"
 }: {
   data: CategorySeries[];
   height?: number;
+  mode?: "24h" | "7d" | "30d" | "90d";
 }) {
   const isDark =
     typeof window !== "undefined" &&
@@ -118,29 +120,28 @@ export default function InsightsOverviewChart({
 
     return {
       datasets: data.map((cat, idx) => {
-        const densePoints = fillHourly(cat.points);
+        const points =
+          mode === "24h" ? cat.points : fillHourly(cat.points);
 
         return {
           label: cat.category,
-          data: densePoints.map((p) => ({
+          data: points.map((p) => ({
             x: new Date(p.date),
             y: p.count,
           })),
           borderColor: palette[idx % palette.length],
           backgroundColor: palette[idx % palette.length] + "33",
           borderWidth: 2,
-          tension: 0.3,
-
+          tension: mode === "24h" ? 0.3 : 0, // ⭐ csak 24h módban legyen ívelt
           pointRadius: 0,
           pointHitRadius: 20,
           hoverRadius: 20,
           hitRadius: 20,
-
           fill: false,
         };
       }),
     };
-  }, [data]);
+  }, [data, mode]);
 
   if (!chartData) return null;
 
