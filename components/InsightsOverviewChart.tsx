@@ -15,7 +15,7 @@ import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
 import { useMemo } from "react";
 
-// ⭐ CROSSHAIR PLUGIN – Chart.js 4.x kompatibilis
+// ⭐ CROSSHAIR PLUGIN
 const crosshairPlugin = {
   id: "crosshair",
   afterDatasetsDraw(chart: any) {
@@ -53,34 +53,37 @@ ChartJS.register(
 type Point = { date: string; count: number };
 type CategorySeries = { category: string; points: Point[] };
 
-// ⭐ MINDEN órára generálunk pontot (ha nincs adat → 0)
+// ⭐ STEP-LINE KITÖLTÉS: minden órára pont, ha nincs adat → előző érték
 function fillHourly(points: Point[]): Point[] {
   if (points.length === 0) return [];
 
-  const result: Point[] = [];
+  const sorted = [...points].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
 
-  for (let i = 0; i < points.length - 1; i++) {
-    const current = points[i];
-    const next = points[i + 1];
+  const start = new Date(sorted[0].date).getTime();
+  const end = new Date(sorted[sorted.length - 1].date).getTime();
+  const step = 60 * 60 * 1000;
 
-    const start = new Date(current.date).getTime();
-    const end = new Date(next.date).getTime();
-    const step = 60 * 60 * 1000; // 1 óra
-
-    // eredeti pont
-    result.push(current);
-
-    // óránkénti pontok
-    for (let t = start + step; t < end; t += step) {
-      result.push({
-        date: new Date(t).toISOString(),
-        count: 0, // ⭐ ha nincs adat → 0
-      });
-    }
+  const pointMap = new Map<number, number>();
+  for (const p of sorted) {
+    const ts = new Date(p.date).getTime();
+    pointMap.set(ts, p.count);
   }
 
-  // utolsó pont
-  result.push(points[points.length - 1]);
+  const result: Point[] = [];
+  let lastValue = sorted[0].count;
+
+  for (let t = start; t <= end; t += step) {
+    if (pointMap.has(t)) {
+      lastValue = pointMap.get(t)!;
+    }
+
+    result.push({
+      date: new Date(t).toISOString(),
+      count: lastValue, // ⭐ előző érték továbbvitele
+    });
+  }
 
   return result;
 }
@@ -128,7 +131,6 @@ export default function InsightsOverviewChart({
           borderWidth: 2,
           tension: 0.3,
 
-          // ⭐ láthatatlan, nagy hover-hitbox
           pointRadius: 0,
           pointHitRadius: 20,
           hoverRadius: 20,
@@ -146,18 +148,17 @@ export default function InsightsOverviewChart({
     responsive: true,
     maintainAspectRatio: false,
 
+    interaction: {
+      mode: "nearest",
+      intersect: false,
+    },
+
     animations: {
       colors: { type: "color", duration: 300 },
       numbers: { type: "number", duration: 300 },
     },
 
     animation: { duration: 300, easing: "easeOutQuart" },
-
-    // ⭐ teljes vonal hoverelhető
-    interaction: {
-      mode: "nearest",
-      intersect: false,
-    },
 
     scales: {
       x: {
@@ -166,7 +167,7 @@ export default function InsightsOverviewChart({
           unit: "hour",
           displayFormats: { hour: "HH:mm" },
         },
-        ticks: { color: textColor, maxRotation: 0 },
+        ticks: { color: textColor },
         grid: { color: gridColor },
       },
       y: {
@@ -185,19 +186,6 @@ export default function InsightsOverviewChart({
         bodyColor: isDark ? "#ddd" : "#333",
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
-
-        callbacks: {
-          title: function (items: any) {
-            const d = new Date(items[0].parsed.x);
-            return d.toLocaleString("hu-HU", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-              hour: "2-digit",
-              minute: "2-digit",
-            });
-          },
-        },
       },
 
       zoom: {
