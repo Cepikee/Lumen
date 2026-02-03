@@ -13,7 +13,7 @@ import {
 import zoomPlugin from "chartjs-plugin-zoom";
 import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 ChartJS.register(
   LineElement,
@@ -36,6 +36,16 @@ export default function InsightsOverviewChart({
   data: CategorySeries[];
   height?: number;
 }) {
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  // Auto-refresh 10 mp-enként
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRefreshKey((k) => k + 1);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   const isDark =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -70,6 +80,9 @@ export default function InsightsOverviewChart({
         tension: 0.3,
         pointRadius: 0,
         fill: false,
+
+        // Összehasonlító nézet → 2. dataset szaggatott
+        borderDash: idx === 1 ? [6, 6] : undefined,
       })),
     };
   }, [data]);
@@ -109,12 +122,56 @@ export default function InsightsOverviewChart({
         bodyColor: isDark ? "#ddd" : "#333",
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
+
+        // Ma / Tegnap / Dátum + óra tooltip
         callbacks: {
           title: function (items: any) {
-            return new Date(items[0].parsed.x).toLocaleString("hu-HU");
+            const d = new Date(items[0].parsed.x);
+            const now = new Date();
+
+            const isToday =
+              d.getFullYear() === now.getFullYear() &&
+              d.getMonth() === now.getMonth() &&
+              d.getDate() === now.getDate();
+
+            const yesterday = new Date();
+            yesterday.setDate(now.getDate() - 1);
+
+            const isYesterday =
+              d.getFullYear() === yesterday.getFullYear() &&
+              d.getMonth() === yesterday.getMonth() &&
+              d.getDate() === yesterday.getDate();
+
+            if (isToday)
+              return (
+                "Ma " +
+                d.toLocaleTimeString("hu-HU", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              );
+
+            if (isYesterday)
+              return (
+                "Tegnap " +
+                d.toLocaleTimeString("hu-HU", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              );
+
+            return d.toLocaleString("hu-HU", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
           },
         },
       },
+
+      // Zoom + Pan engedve
       zoom: {
         zoom: {
           wheel: { enabled: true },
@@ -131,7 +188,7 @@ export default function InsightsOverviewChart({
 
   return (
     <div style={{ width: "100%", height }}>
-      <Line data={chartData} options={options} />
+      <Line key={refreshKey} data={chartData} options={options} />
     </div>
   );
 }
