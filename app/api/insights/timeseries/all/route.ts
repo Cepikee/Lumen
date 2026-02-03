@@ -17,55 +17,25 @@ function normalizeDbString(s: any): string | null {
   return t || null;
 }
 
-function toYMD(value: any): string {
-  if (!value && value !== 0) return "";
-  try {
-    const d = new Date(value);
-    if (isNaN(d.getTime())) {
-      return String(value).slice(0, 10);
-    }
-    return d.toISOString().slice(0, 10);
-  } catch {
-    return String(value).slice(0, 10);
-  }
-}
-
 export async function GET(req: Request) {
   const url = new URL(req.url);
-
   const period = url.searchParams.get("period") || "7d";
 
-  let mode: "days" | "hours" = "days";
-  let days = 7;
-  let hours = 24;
+  // minden mód órás bontás lesz
+  let hoursBack = 24;
 
-  if (period === "24h") {
-    mode = "hours";
-  } else if (period === "30d") {
-    days = 30;
-  } else if (period === "90d") {
-    days = 90;
-  }
+  if (period === "7d") hoursBack = 24 * 7;
+  if (period === "30d") hoursBack = 24 * 30;
+  if (period === "90d") hoursBack = 24 * 90;
 
   const now = new Date();
-  let start: Date;
+  const start = new Date(now.getTime() - hoursBack * 60 * 60 * 1000);
 
-  if (mode === "hours") {
-    // 1) start = most - 24 óra (NEM kerekítjük!)
-    start = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-  } else {
-    start = new Date(now);
-    start.setDate(start.getDate() - days + 1);
-    start.setHours(0, 0, 0, 0);
-  }
-
-  // SQL-hez teljes timestamp kell
-  const startStr =
-    mode === "hours"
-      ? start.toISOString().slice(0, 19).replace("T", " ")
-      : start.toISOString().slice(0, 10) + " 00:00:00";
+  // SQL timestamp
+  const startStr = start.toISOString().slice(0, 19).replace("T", " ");
 
   try {
+    // összes kategória
     const [cats]: any = await db.query(`
       SELECT DISTINCT TRIM(category) AS category
       FROM articles
@@ -82,78 +52,39 @@ export async function GET(req: Request) {
       const cat = normalizeDbString(rawCat);
       if (!cat) continue;
 
-      let rows: any[] = [];
+      // órás bucket SQL
+      const [rows]: any = await db.query(
+        `
+        SELECT 
+          DATE_FORMAT(published_at, '%Y-%m-%d %H:00:00') AS bucket,
+          COUNT(*) AS count
+        FROM articles
+        WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
+          AND published_at >= ?
+        GROUP BY bucket
+        ORDER BY bucket ASC
+        `,
+        [cat, startStr]
+      );
 
-      if (mode === "hours") {
-        const [r]: any = await db.query(
-          `
-          SELECT 
-            DATE_FORMAT(published_at, '%Y-%m-%d %H:00:00') AS bucket,
-            COUNT(*) AS count
-          FROM articles
-          WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
-            AND published_at >= ?
-          GROUP BY bucket
-          ORDER BY bucket ASC
-          `,
-          [cat, startStr]
-        );
-        rows = r || [];
-      } else {
-        const [r]: any = await db.query(
-          `
-          SELECT 
-            DATE(published_at) AS bucket,
-            COUNT(*) AS count
-          FROM articles
-          WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
-            AND DATE(published_at) >= DATE(?)
-          GROUP BY bucket
-          ORDER BY bucket ASC
-          `,
-          [cat, startStr]
-        );
-        rows = r || [];
-      }
-
-      // Map feltöltése — SQL stringet használunk → nincs timezone elcsúszás
       const map = new Map<string, number>();
-      for (const r of rows) {
-        const key =
-          mode === "hours"
-            ? String(r.bucket) // "YYYY-MM-DD HH:00:00"
-            : toYMD(r.bucket);
-
-        map.set(key, Number(r.count) || 0);
+      for (const r of rows || []) {
+        map.set(String(r.bucket), Number(r.count) || 0);
       }
 
-      // 2) cursor = start órára kerekítve + 1 óra
+      // órás kitöltés
       const cursor = new Date(start);
-      if (mode === "hours") {
-        cursor.setMinutes(0, 0, 0);
-        cursor.setHours(cursor.getHours() + 1);
-      }
+      cursor.setMinutes(0, 0, 0);
 
       const points: { date: string; count: number }[] = [];
 
-      if (mode === "hours") {
-        for (let i = 0; i < hours; i++) {
-          const key = cursor.toISOString().slice(0, 19).replace("T", " ");
-          const c = map.get(key) ?? 0;
+      for (let i = 0; i < hoursBack; i++) {
+        const key = cursor.toISOString().slice(0, 19).replace("T", " ");
+        const c = map.get(key) ?? 0;
 
-          points.push({ date: key, count: c });
+        points.push({ date: key, count: c });
 
-          cursor.setHours(cursor.getHours() + 1);
-        }
-      } else {
-        for (let i = 0; i < days; i++) {
-          const key = cursor.toISOString().slice(0, 10);
-          const c = map.get(key) ?? 0;
-
-          points.push({ date: key, count: c });
-
-          cursor.setDate(cursor.getDate() + 1);
-        }
+        cursor.setHours(cursor.getHours() + 1);
       }
 
       results.push({
