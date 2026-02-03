@@ -55,7 +55,7 @@ type CategorySeries = { category: string; points: Point[] };
 
 export default function InsightsOverviewChart({
   data,
-  forecast,
+  forecast = {},
   height = 300,
 }: {
   data: CategorySeries[];
