@@ -53,49 +53,12 @@ ChartJS.register(
 type Point = { date: string; count: number };
 type CategorySeries = { category: string; points: Point[] };
 
-// ⭐ STEP-LINE KITÖLTÉS: minden órára pont, ha nincs adat → előző érték
-function fillHourly(points: Point[]): Point[] {
-  if (points.length === 0) return [];
-
-  const sorted = [...points].sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-  );
-
-  const start = new Date(sorted[0].date).getTime();
-  const end = new Date(sorted[sorted.length - 1].date).getTime();
-  const step = 60 * 60 * 1000;
-
-  const pointMap = new Map<number, number>();
-  for (const p of sorted) {
-    const ts = new Date(p.date).getTime();
-    pointMap.set(ts, p.count);
-  }
-
-  const result: Point[] = [];
-  let lastValue = sorted[0].count;
-
-  for (let t = start; t <= end; t += step) {
-    if (pointMap.has(t)) {
-      lastValue = pointMap.get(t)!;
-    }
-
-    result.push({
-      date: new Date(t).toISOString(),
-      count: lastValue,
-    });
-  }
-
-  return result;
-}
-
 export default function InsightsOverviewChart({
   data,
   height = 300,
-  mode = "24h", // ⭐ új prop: "24h" | "7d" | "30d" | "90d"
 }: {
   data: CategorySeries[];
   height?: number;
-  mode?: "24h" | "7d" | "30d" | "90d";
 }) {
   const isDark =
     typeof window !== "undefined" &&
@@ -119,29 +82,24 @@ export default function InsightsOverviewChart({
     if (!data || data.length === 0) return null;
 
     return {
-      datasets: data.map((cat, idx) => {
-        const points =
-          mode === "24h" ? cat.points : fillHourly(cat.points);
-
-        return {
-          label: cat.category,
-          data: points.map((p) => ({
-            x: new Date(p.date),
-            y: p.count,
-          })),
-          borderColor: palette[idx % palette.length],
-          backgroundColor: palette[idx % palette.length] + "33",
-          borderWidth: 2,
-          tension: mode === "24h" ? 0.3 : 0, // ⭐ csak 24h módban legyen ívelt
-          pointRadius: 0,
-          pointHitRadius: 20,
-          hoverRadius: 20,
-          hitRadius: 20,
-          fill: false,
-        };
-      }),
+      datasets: data.map((cat, idx) => ({
+        label: cat.category,
+        data: cat.points.map((p) => ({
+          x: new Date(p.date),
+          y: p.count,
+        })),
+        borderColor: palette[idx % palette.length],
+        backgroundColor: palette[idx % palette.length] + "33",
+        borderWidth: 2,
+        tension: 0.3,
+        pointRadius: 0,
+        pointHitRadius: 20,
+        hoverRadius: 20,
+        hitRadius: 20,
+        fill: false,
+      })),
     };
-  }, [data, mode]);
+  }, [data]);
 
   if (!chartData) return null;
 
@@ -152,11 +110,6 @@ export default function InsightsOverviewChart({
     interaction: {
       mode: "nearest",
       intersect: false,
-    },
-
-    animations: {
-      colors: { type: "color", duration: 300 },
-      numbers: { type: "number", duration: 300 },
     },
 
     animation: { duration: 300, easing: "easeOutQuart" },
@@ -187,6 +140,21 @@ export default function InsightsOverviewChart({
         bodyColor: isDark ? "#ddd" : "#333",
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
+
+        // ⭐ MAGYAR DÁTUM FORMÁTUM
+        callbacks: {
+          title: function (items: any) {
+            const d = new Date(items[0].parsed.x);
+
+            return d.toLocaleString("hu-HU", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+          },
+        },
       },
 
       zoom: {
