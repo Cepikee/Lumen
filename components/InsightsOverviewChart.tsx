@@ -59,7 +59,7 @@ export default function InsightsOverviewChart({
   height = 300,
 }: {
   data: CategorySeries[];
-  forecast: any;
+  forecast?: any;
   height?: number;
 }) {
   const isDark =
