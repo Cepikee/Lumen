@@ -93,6 +93,7 @@ export default function InsightsOverviewChart({
         borderWidth: 2,
         tension: 0.3,
         pointRadius: 0,
+        pointHitRadius: 12, // ⭐ láthatatlan hover area
         fill: false,
       })),
     };
