@@ -69,32 +69,33 @@ export default function InsightsOverviewChart({
   const textColor = isDark ? "#ddd" : "#333";
   const gridColor = isDark ? "#444" : "#eee";
 
-  const palette = [
-    "#ff6b6b",
-    "#4dabf7",
-    "#ffd166",
-    "#06d6a0",
-    "#9b5de5",
-    "#f06595",
-    "#00c2d1",
-    "#ff922b",
-  ];
+  // ⭐ Prémium AI előrejelzés szín
+  const aiColor = "#9b5de5AA";
+
+  // ⭐ MOST időpont
+  const now = new Date();
+
+  // ⭐ 24 órával ezelőtti időpont
+  const minDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+  const maxDate = now;
 
   const { datasets, aiPoints } = useMemo(() => {
     if (!data || data.length === 0) return { datasets: [], aiPoints: [] };
 
     const datasets: any[] = [];
 
-    // 🔵 1) Valós adatok
-    data.forEach((cat, idx) => {
+    // 🔵 1) Valós adatok (múlt 24 óra)
+    data.forEach((cat) => {
       datasets.push({
         label: cat.category,
-        data: cat.points.map((p) => ({
-          x: new Date(p.date),
-          y: p.count,
-        })),
-        borderColor: palette[idx % palette.length],
-        backgroundColor: palette[idx % palette.length] + "33",
+        data: cat.points
+          .map((p) => ({
+            x: new Date(p.date),
+            y: p.count,
+          }))
+          .filter((p) => p.x >= minDate && p.x <= maxDate),
+        borderColor: "#ccc",
+        backgroundColor: "#ccc3",
         borderWidth: 2,
         tension: 0.3,
         pointRadius: 0,
@@ -102,33 +103,47 @@ export default function InsightsOverviewChart({
       });
     });
 
-    // 🔮 2) Egyetlen AI előrejelzés dataset (pontok kategória színével)
+    // 🔮 2) AI előrejelzés (csak a jövő)
     const aiPoints: any[] = [];
-    const aiColors: string[] = [];
+    const aiPointColors: string[] = [];
+    const aiCategories: string[] = [];
 
     Object.entries(forecast || {}).forEach(([catName, fc], idx) => {
-      const color = palette[idx % palette.length] + "AA";
+      const color = [
+        "#ff6b6b",
+        "#4dabf7",
+        "#ffd166",
+        "#06d6a0",
+        "#9b5de5",
+        "#f06595",
+        "#00c2d1",
+        "#ff922b",
+      ][idx % 8];
 
       (fc as any[]).forEach((p) => {
-        aiPoints.push({
-          x: new Date(p.date),
-          y: p.predicted,
-        });
-        aiColors.push(color);
+        const d = new Date(p.date);
+        if (d.getTime() >= now.getTime()) {
+          aiPoints.push({ x: d, y: p.predicted });
+          aiPointColors.push(color);
+          aiCategories.push(catName);
+        }
       });
     });
 
+    // Csak akkor rajzoljuk, ha van jövőbeli forecast
     if (aiPoints.length > 0) {
       datasets.push({
         label: "AI előrejelzés",
         data: aiPoints,
-        borderColor: aiColors,
-        pointBackgroundColor: aiColors,
+        borderColor: aiColor,
         borderDash: [6, 6],
         borderWidth: 2,
         tension: 0.3,
-        pointRadius: 3,
+        pointRadius: 4,
+        pointBackgroundColor: aiPointColors,
+        pointBorderColor: aiPointColors,
         fill: false,
+        _aiCategories: aiCategories, // tooltiphez
       });
     }
 
@@ -136,15 +151,6 @@ export default function InsightsOverviewChart({
   }, [data, forecast]);
 
   if (!datasets || datasets.length === 0) return null;
-
-  // ⏱️ Automatikus időskála kiterjesztés
-  const allDates = [
-    ...data.flatMap((cat) => cat.points.map((p) => new Date(p.date))),
-    ...aiPoints.map((p) => p.x),
-  ];
-
-  const minDate = new Date(Math.min(...allDates.map((d) => d.getTime())));
-  const maxDate = new Date(Math.max(...allDates.map((d) => d.getTime())));
 
   const options: any = {
     responsive: true,
@@ -160,12 +166,12 @@ export default function InsightsOverviewChart({
     scales: {
       x: {
         type: "time",
+        min: minDate,
+        max: maxDate,
         time: {
           unit: "hour",
           displayFormats: { hour: "HH:mm" },
         },
-        min: minDate,
-        max: maxDate,
         ticks: { color: textColor },
         grid: { color: gridColor },
       },
@@ -187,16 +193,16 @@ export default function InsightsOverviewChart({
         borderWidth: 1,
 
         callbacks: {
-          title: function (items: any) {
-            const d = new Date(items[0].parsed.x);
+          label: function (ctx: any) {
+            const ds = ctx.dataset;
+            const idx = ctx.dataIndex;
 
-            return d.toLocaleString("hu-HU", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-              hour: "2-digit",
-              minute: "2-digit",
-            });
+            if (ds.label === "AI előrejelzés") {
+              const cat = ds._aiCategories[idx];
+              return `AI előrejelzés – ${cat}: ${ctx.parsed.y}`;
+            }
+
+            return `${ds.label}: ${ctx.parsed.y}`;
           },
         },
       },
