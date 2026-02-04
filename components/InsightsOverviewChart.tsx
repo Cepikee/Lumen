@@ -59,6 +59,22 @@ ChartJS.register(
 type Point = { date: string; count: number };
 type CategorySeries = { category: string; points: Point[] };
 
+// FIX kategória színek – ALAP BEÁLLÍTÁS
+const CATEGORY_COLORS: Record<string, string> = {
+  Sport: "#ef4444",
+  Politika: "#3b82f6",
+  Gazdaság: "#22c55e",
+  Tech: "#f97316",
+  Kultúra: "#eab308",
+  Oktatás: "#a855f7",
+  // fallback
+  _default: "#6b7280",
+};
+
+function getCategoryColor(category: string) {
+  return CATEGORY_COLORS[category] ?? CATEGORY_COLORS._default;
+}
+
 export default function InsightsOverviewChart({
   data,
   forecast = {},
@@ -77,31 +93,17 @@ export default function InsightsOverviewChart({
   const textColor = isDark ? "#ddd" : "#333";
   const gridColor = isDark ? "#444" : "#eee";
 
-  const palette = [
-    "#ff6b6b",
-    "#4dabf7",
-    "#ffd166",
-    "#06d6a0",
-    "#9b5de5",
-    "#f06595",
-    "#00c2d1",
-    "#ff922b",
-  ];
-
-  const getColor = (category: string, idx: number) =>
-    palette[idx % palette.length];
-
   const { datasets } = useMemo(() => {
     if (!data || data.length === 0) return { datasets: [] };
 
     const datasets: any[] = [];
 
     // HISTORY – kategóriánként külön dataset, pont nélkül
-    data.forEach((cat, idx) => {
-      const color = getColor(cat.category, idx);
+    data.forEach((cat) => {
+      const color = getCategoryColor(cat.category);
 
       datasets.push({
-        label: `${cat.category}`,
+        label: cat.category,
         data: cat.points.map((p) => ({
           x: new Date(p.date),
           y: p.count,
@@ -112,13 +114,14 @@ export default function InsightsOverviewChart({
         borderWidth: 2,
         tension: 0.3,
         fill: false,
+        _isForecast: false,
       });
     });
 
-    // FORECAST – kategóriánként külön dataset, de azonos label → 1 legend sor
+    // FORECAST – kategóriánként külön dataset, de 1 legend sor (filterrel)
     if (range === "24h") {
-      Object.entries(forecast || {}).forEach(([catName, fc], idx) => {
-        const color = getColor(catName, idx);
+      Object.entries(forecast || {}).forEach(([catName, fc]) => {
+        const color = getCategoryColor(catName);
 
         const points = (fc as any[]).map((p) => ({
           x: new Date(p.date),
@@ -127,7 +130,7 @@ export default function InsightsOverviewChart({
 
         if (points.length > 0) {
           datasets.push({
-            label: "AI előrejelzés",   // azonos label → legendben egy sor
+            label: "AI előrejelzés",
             data: points,
             borderColor: color,
             borderDash: [6, 6],
@@ -135,6 +138,7 @@ export default function InsightsOverviewChart({
             tension: 0.3,
             pointRadius: 0,
             fill: false,
+            _isForecast: true,
             _aiCategory: catName,
           });
         }
@@ -171,7 +175,21 @@ export default function InsightsOverviewChart({
       },
     },
     plugins: {
-      legend: { labels: { color: textColor } },
+      legend: {
+        labels: {
+          color: textColor,
+          // csak az első AI előrejelzés dataset jelenjen meg a legendben
+          filter: (item: any, chart: any) => {
+            const ds: any = chart.data.datasets[item.datasetIndex];
+            if (!ds?._isForecast) return true;
+
+            const firstForecastIndex = chart.data.datasets.findIndex(
+              (d: any) => d._isForecast
+            );
+            return item.datasetIndex === firstForecastIndex;
+          },
+        },
+      },
       tooltip: {
         enabled: true,
         backgroundColor: isDark ? "#222" : "#fff",
@@ -194,7 +212,7 @@ export default function InsightsOverviewChart({
             const ds = ctx.dataset;
             const value = ctx.parsed.y;
 
-            if (ds.label === "AI előrejelzés") {
+            if (ds._isForecast) {
               return `AI előrejelzés – ${ds._aiCategory}: ${value}`;
             }
 
