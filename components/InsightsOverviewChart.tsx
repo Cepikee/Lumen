@@ -156,54 +156,56 @@ export default function InsightsOverviewChart({
     },
     plugins: {
       legend: {
-        labels: {
-          color: textColor,
-          filter: (item: any, chart: any) => {
-  // init fázis – engedjük át
-  if (!chart || !chart.data || !chart.data.datasets) return true;
+  labels: {
+    color: textColor,
 
-  const ds = chart.data.datasets[item.datasetIndex];
-  if (!ds) return false;
+    generateLabels: (chart: any) => {
+      const original =
+        ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
 
-  // normál kategóriák
-  if (!ds._isForecast) return true;
+      return original.filter((item: any) => {
+        const ds = chart.data.datasets[item.datasetIndex];
+        if (!ds) return false;
 
-  // egyetlen dummy AI legend
-  if (ds._isDummyAiLegend) return true;
+        // normál kategóriák
+        if (!ds._isForecast) return true;
 
-  // kategóriánkénti AI forecast rejtve
-  return false;
-},
+        // egyetlen dummy AI legend
+        if (ds._isDummyAiLegend) return true;
 
+        // minden más AI forecast rejtve
+        return false;
+      });
+    },
+  },
 
-        },
-        onClick: (e: any, item: any, legend: any) => {
-          const chart = legend.chart;
-          const idx = item.datasetIndex;
-          const ds = chart.data.datasets[idx];
+  onClick: (e: any, item: any, legend: any) => {
+    const chart = legend.chart;
+    const idx = item.datasetIndex;
+    const ds = chart.data.datasets[idx];
 
-          // Dummy AI → összes forecast ki/be
-          if (ds._isDummyAiLegend) {
-            const anyVisible = chart.data.datasets.some(
-              (d: any, i: number) =>
-                d._isForecast && !d._isDummyAiLegend && chart.isDatasetVisible(i)
-            );
+    // Dummy AI → összes forecast ki/be
+    if (ds._isDummyAiLegend) {
+      const anyVisible = chart.data.datasets.some(
+        (d: any, i: number) =>
+          d._isForecast && !d._isDummyAiLegend && chart.isDatasetVisible(i)
+      );
 
-            chart.data.datasets.forEach((d: any, i: number) => {
-              if (d._isForecast && !d._isDummyAiLegend) {
-                chart.setDatasetVisibility(i, !anyVisible);
-              }
-            });
+      chart.data.datasets.forEach((d: any, i: number) => {
+        if (d._isForecast && !d._isDummyAiLegend) {
+          chart.setDatasetVisibility(i, !anyVisible);
+        }
+      });
 
-            chart.update();
-            return;
-          }
+      chart.update();
+      return;
+    }
 
-          // normál kategória toggle
-          const visible = chart.isDatasetVisible(idx);
-          chart.setDatasetVisibility(idx, !visible);
-          chart.update();
-        },
+    // normál kategória toggle
+    const visible = chart.isDatasetVisible(idx);
+    chart.setDatasetVisibility(idx, !visible);
+    chart.update();
+  },
       },
       tooltip: {
         enabled: true,
