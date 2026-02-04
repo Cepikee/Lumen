@@ -159,7 +159,8 @@ export default function InsightsOverviewChart({
         labels: {
           color: textColor,
           filter: (item: any, chart: any) => {
-  if (!chart || !chart.data || !chart.data.datasets) return false;
+  // init fázis – engedjük át
+  if (!chart || !chart.data || !chart.data.datasets) return true;
 
   const ds = chart.data.datasets[item.datasetIndex];
   if (!ds) return false;
@@ -173,6 +174,7 @@ export default function InsightsOverviewChart({
   // kategóriánkénti AI forecast rejtve
   return false;
 },
+
 
         },
         onClick: (e: any, item: any, legend: any) => {
