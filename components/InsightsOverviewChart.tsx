@@ -134,6 +134,7 @@ export default function InsightsOverviewChart({
             fill: false,
             _isForecast: true,
             _aiCategory: catName,
+            legend: { display: false }
           });
         }
       );
