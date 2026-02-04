@@ -70,6 +70,9 @@ export default function InsightsOverviewChart({
   height = 300,
   range = "24h",
 }: any) {
+
+  { console.log("RANGE ÉRTÉKE:", range); // <<< IDE
+  }
   const isDark =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
