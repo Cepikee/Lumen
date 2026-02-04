@@ -82,6 +82,7 @@ export default function InsightsOverviewChart({
   const { datasets } = useMemo(() => {
     const ds: any[] = [];
 
+    // HISTORY
     data.forEach((cat: any) => {
       const color = getCategoryColor(cat.category);
       ds.push({
@@ -100,6 +101,7 @@ export default function InsightsOverviewChart({
       });
     });
 
+    // FORECAST – teljesen rejtve a legendből
     if (range === "24h") {
       Object.entries(forecast).forEach(([catName, fc]: any) => {
         const color = getCategoryColor(catName);
@@ -117,10 +119,10 @@ export default function InsightsOverviewChart({
           fill: false,
           _isForecast: true,
           _aiCategory: catName,
-          display: false, // <<<<<<<<<<<<<<<<<<<<<<<<<<< EZ TÜNTETI EL A LEGENDBŐL
         });
       });
 
+      // DUMMY AI LEGEND (EGYETLEN)
       ds.push({
         label: "AI előrejelzés",
         data: [],
@@ -155,7 +157,13 @@ export default function InsightsOverviewChart({
     },
     plugins: {
       legend: {
-        labels: { color: textColor },
+        labels: {
+          color: textColor,
+          filter: (item: any, chart: any) => {
+            const ds = chart.data.datasets[item.datasetIndex];
+            return !ds._isForecast;
+          },
+        },
         onClick: (e: any, item: any, legend: any) => {
           const chart = legend.chart;
           const idx = item.datasetIndex;
