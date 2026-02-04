@@ -142,6 +142,7 @@ export default function InsightFeedPage() {
           <InsightsOverviewChart
             data={tsData?.categories || []}
             forecast={forecastData?.forecast || {}}
+            range={period}
           />
         </div>
       )}
