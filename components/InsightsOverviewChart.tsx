@@ -16,9 +16,7 @@ import { hu } from "date-fns/locale";
 import { Line } from "react-chartjs-2";
 import { useMemo } from "react";
 
-// ─────────────────────────────────────────────
 // CROSSHAIR
-// ─────────────────────────────────────────────
 const crosshairPlugin = {
   id: "crosshair",
   afterDatasetsDraw(chart: any) {
@@ -41,6 +39,12 @@ const crosshairPlugin = {
   },
 };
 
+type ForecastPoint = {
+  date: string;
+  predicted: number;
+};
+
+
 ChartJS.register(
   LineElement,
   PointElement,
@@ -53,13 +57,7 @@ ChartJS.register(
   crosshairPlugin
 );
 
-// ─────────────────────────────────────────────
-// TYPES
-// ─────────────────────────────────────────────
-type Point = { date: string; count: number };
-type CategorySeries = { category: string; points: Point[] };
-
-// FIX kategória színek – ALAP BEÁLLÍTÁS
+// FIX kategória színek
 const CATEGORY_COLORS: Record<string, string> = {
   Sport: "#ef4444",
   Politika: "#3b82f6",
@@ -67,7 +65,6 @@ const CATEGORY_COLORS: Record<string, string> = {
   Tech: "#f97316",
   Kultúra: "#eab308",
   Oktatás: "#a855f7",
-  // fallback
   _default: "#6b7280",
 };
 
@@ -81,7 +78,7 @@ export default function InsightsOverviewChart({
   height = 300,
   range = "24h",
 }: {
-  data: CategorySeries[];
+  data: any[];
   forecast?: any;
   height?: number;
   range?: "24h" | "7d" | "30d" | "90d";
@@ -94,17 +91,15 @@ export default function InsightsOverviewChart({
   const gridColor = isDark ? "#444" : "#eee";
 
   const { datasets } = useMemo(() => {
-    if (!data || data.length === 0) return { datasets: [] };
-
     const datasets: any[] = [];
 
-    // HISTORY – kategóriánként külön dataset, pont nélkül
+    // 1) HISTORY – kategóriánként külön dataset
     data.forEach((cat) => {
       const color = getCategoryColor(cat.category);
 
       datasets.push({
         label: cat.category,
-        data: cat.points.map((p) => ({
+        data: cat.points.map((p: any) => ({
           x: new Date(p.date),
           y: p.count,
         })),
@@ -114,58 +109,59 @@ export default function InsightsOverviewChart({
         borderWidth: 2,
         tension: 0.3,
         fill: false,
-        _isForecast: false,
+        hiddenInLegend: false,
       });
     });
 
-    // FORECAST – kategóriánként külön dataset, de 1 legend sor (filterrel)
+    // 2) FORECAST – kategóriánként külön dataset, de legendben rejtve
     if (range === "24h") {
-      Object.entries(forecast || {}).forEach(([catName, fc]) => {
-        const color = getCategoryColor(catName);
+      Object.entries(forecast as Record<string, ForecastPoint[]>).forEach(
+  ([catName, fc]) => {
+    const color = getCategoryColor(catName);
 
-        const points = (fc as any[]).map((p) => ({
-          x: new Date(p.date),
-          y: p.predicted,
-        }));
+    datasets.push({
+      label: "AI előrejelzés",
+      data: fc.map((p: ForecastPoint) => ({
+        x: new Date(new Date(p.date).getTime() + 60 * 60 * 1000), // +1 óra offset
+        y: p.predicted,
+      })),
+      borderColor: color,
+      borderDash: [6, 6],
+      borderWidth: 2,
+      tension: 0.3,
+      pointRadius: 0,
+      fill: false,
+      hiddenInLegend: true,
+    });
+  }
+);
 
-        if (points.length > 0) {
-          datasets.push({
-            label: "AI előrejelzés",
-            data: points,
-            borderColor: color,
-            borderDash: [6, 6],
-            borderWidth: 2,
-            tension: 0.3,
-            pointRadius: 0,
-            fill: false,
-            _isForecast: true,
-            _aiCategory: catName,
-          });
-        }
+
+      // 3) DUMMY LEGEND ITEM – csak a legendben látszik
+      datasets.push({
+        label: "AI előrejelzés",
+        data: [],
+        borderColor: "#888",
+        borderDash: [6, 6],
+        borderWidth: 2,
+        pointRadius: 0,
+        fill: false,
+        hiddenInLegend: false, // ⭐ EZ LÁTSZIK A LEGENDBEN
       });
     }
 
     return { datasets };
   }, [data, forecast, range]);
 
-  if (!datasets || datasets.length === 0) return null;
-
   const options: any = {
     responsive: true,
     maintainAspectRatio: false,
-    interaction: {
-      mode: "nearest",
-      intersect: false,
-    },
-    animation: { duration: 300, easing: "easeOutQuart" },
+    interaction: { mode: "nearest", intersect: false },
     scales: {
       x: {
         type: "time",
         adapters: { date: { locale: hu } },
-        time: {
-          unit: "hour",
-          displayFormats: { hour: "HH:mm" },
-        },
+        time: { unit: "hour", displayFormats: { hour: "HH:mm" } },
         ticks: { color: textColor },
         grid: { color: gridColor },
       },
@@ -176,60 +172,24 @@ export default function InsightsOverviewChart({
     },
     plugins: {
       legend: {
-  labels: {
-    color: textColor,
-    filter: (item: any, chart: any) => {
-      const datasets = chart?.data?.datasets;
-      if (!datasets) return false; // chart még nem állt össze
-
-      const ds: any = datasets[item.datasetIndex];
-
-      // HISTORY dataset → mindig mutatjuk
-      if (!ds?._isForecast) return true;
-
-      // FORECAST dataset → csak az első jelenjen meg
-      const firstForecastIndex = datasets.findIndex(
-        (d: any) => d._isForecast
-      );
-
-      return item.datasetIndex === firstForecastIndex;
-    },
-  },
-},
-
-      tooltip: {
-        enabled: true,
-        backgroundColor: isDark ? "#222" : "#fff",
-        titleColor: isDark ? "#fff" : "#000",
-        bodyColor: isDark ? "#ddd" : "#333",
-        borderColor: isDark ? "#444" : "#ccc",
-        borderWidth: 1,
-        callbacks: {
-          title: (items: any) => {
-            const d = new Date(items[0].parsed.x);
-            return d.toLocaleString("hu-HU", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-              hour: "2-digit",
-              minute: "2-digit",
-            });
-          },
-          label: (ctx: any) => {
-            const ds = ctx.dataset;
-            const value = ctx.parsed.y;
-
-            if (ds._isForecast) {
-              return `AI előrejelzés – ${ds._aiCategory}: ${value}`;
-            }
-
-            return `${ds.label}: ${value}`;
+        labels: {
+          color: textColor,
+          filter: (item: any, chart: any) => {
+            const ds = chart.data.datasets[item.datasetIndex];
+            return !ds.hiddenInLegend;
           },
         },
       },
-      zoom: {
-        zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: "x" },
-        pan: { enabled: true, mode: "x" },
+      tooltip: {
+        callbacks: {
+          label: (ctx: any) => {
+            const ds = ctx.dataset;
+            if (ds.hiddenInLegend) {
+              return `AI előrejelzés – ${ds.label}: ${ctx.parsed.y}`;
+            }
+            return `${ds.label}: ${ctx.parsed.y}`;
+          },
+        },
       },
     },
   };
