@@ -95,11 +95,10 @@ export default function InsightsOverviewChart({
         borderWidth: 2,
         tension: 0.3,
         fill: false,
-        _isForecast: false,
       });
     });
 
-    // ===== FORECAST (rejtve legendből) =====
+    // ===== AI FORECAST – CSAK 24H =====
     if (range === "24h") {
       Object.entries(forecast).forEach(([catName, fc]: any) => {
         const color = getCategoryColor(catName);
@@ -120,7 +119,7 @@ export default function InsightsOverviewChart({
         });
       });
 
-      // ===== DUMMY AI LEGEND (EGY DARAB) =====
+      // DUMMY AI LEGEND
       ds.push({
         label: "AI előrejelzés",
         data: [],
@@ -156,65 +155,65 @@ export default function InsightsOverviewChart({
     },
     plugins: {
       legend: {
-  labels: {
-    color: textColor,
+        labels: {
+          color: textColor,
 
-    generateLabels: (chart: any) => {
-  const original =
-    ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
+          generateLabels: (chart: any) => {
+            const original =
+              ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
 
-  return original.filter((item: any) => {
-    const ds = chart.data.datasets[item.datasetIndex];
-    if (!ds) return false;
+            return original.filter((item: any) => {
+              const ds = chart.data.datasets[item.datasetIndex];
+              if (!ds) return false;
 
-    // normál kategóriák mindig
-    if (!ds._isForecast) return true;
+              // normál kategóriák
+              if (!ds._isForecast) return true;
 
-    // AI csak 24h-ban
-    if (range === "24h" && ds._isDummyAiLegend) return true;
+              // AI legend csak 24h-ban
+              if (range === "24h" && ds._isDummyAiLegend) return true;
 
-    return false;
-  });
-},
+              return false;
+            });
+          },
+        },
 
-  },
+        onClick: (e: any, item: any, legend: any) => {
+          const chart = legend.chart;
+          const idx = item.datasetIndex;
+          const ds = chart.data.datasets[idx];
 
-  onClick: (e: any, item: any, legend: any) => {
-  const chart = legend.chart;
-  const idx = item.datasetIndex;
-  const ds = chart.data.datasets[idx];
+          // 7d / 30d / 90d → normál toggle
+          if (range !== "24h") {
+            const visible = chart.isDatasetVisible(idx);
+            chart.setDatasetVisibility(idx, !visible);
+            chart.update();
+            return;
+          }
 
-  // AI logika csak 24h-ban
-  if (range !== "24h") {
-    const visible = chart.isDatasetVisible(idx);
-    chart.setDatasetVisibility(idx, !visible);
-    chart.update();
-    return;
-  }
+          // Dummy AI → összes AI ki/be
+          if (ds._isDummyAiLegend) {
+            const anyVisible = chart.data.datasets.some(
+              (d: any, i: number) =>
+                d._isForecast &&
+                !d._isDummyAiLegend &&
+                chart.isDatasetVisible(i)
+            );
 
-  // Dummy AI → összes forecast ki/be
-  if (ds._isDummyAiLegend) {
-    const anyVisible = chart.data.datasets.some(
-      (d: any, i: number) =>
-        d._isForecast && !d._isDummyAiLegend && chart.isDatasetVisible(i)
-    );
+            chart.data.datasets.forEach((d: any, i: number) => {
+              if (d._isForecast && !d._isDummyAiLegend) {
+                chart.setDatasetVisibility(i, !anyVisible);
+              }
+            });
 
-    chart.data.datasets.forEach((d: any, i: number) => {
-      if (d._isForecast && !d._isDummyAiLegend) {
-        chart.setDatasetVisibility(i, !anyVisible);
-      }
-    });
+            chart.update();
+            return;
+          }
 
-    chart.update();
-    return;
-  }
-
-  // normál kategória toggle
-  const visible = chart.isDatasetVisible(idx);
-  chart.setDatasetVisibility(idx, !visible);
-  chart.update();
-},
-
+          // normál kategória
+          const visible = chart.isDatasetVisible(idx);
+          chart.setDatasetVisibility(idx, !visible);
+          chart.update();
+        },
       },
       tooltip: {
         enabled: true,
@@ -258,9 +257,8 @@ export default function InsightsOverviewChart({
 
   return (
     <div style={{ width: "100%", height }}>
-      <Line data={{ datasets }} options={options} />
+      {/* 🔑 EZ A SOR OLDJA MEG A PROBLÉMÁT */}
+      <Line key={range} data={{ datasets }} options={options} />
     </div>
   );
 }
-
-// nagyon profi jó verzió stabil ez most így.
