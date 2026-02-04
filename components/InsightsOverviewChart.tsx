@@ -36,8 +36,6 @@ const crosshairPlugin = {
   },
 };
 
-type ForecastPoint = { date: string; predicted: number };
-
 ChartJS.register(
   LineElement,
   PointElement,
@@ -82,7 +80,7 @@ export default function InsightsOverviewChart({
   const { datasets } = useMemo(() => {
     const ds: any[] = [];
 
-    // HISTORY
+    // ===== HISTORY =====
     data.forEach((cat: any) => {
       const color = getCategoryColor(cat.category);
       ds.push({
@@ -101,12 +99,12 @@ export default function InsightsOverviewChart({
       });
     });
 
-    // FORECAST – teljesen rejtve a legendből
+    // ===== FORECAST (rejtve legendből) =====
     if (range === "24h") {
       Object.entries(forecast).forEach(([catName, fc]: any) => {
         const color = getCategoryColor(catName);
         ds.push({
-          label: null,
+          label: "AI előrejelzés",
           data: fc.map((p: any) => ({
             x: new Date(new Date(p.date).getTime() + 3600000),
             y: p.predicted,
@@ -122,16 +120,17 @@ export default function InsightsOverviewChart({
         });
       });
 
-      // DUMMY AI LEGEND (EGYETLEN)
+      // ===== DUMMY AI LEGEND (EGY DARAB) =====
       ds.push({
         label: "AI előrejelzés",
         data: [],
-        borderColor: "#888",
+        borderColor: "#999",
         borderDash: [6, 6],
         borderWidth: 2,
         pointRadius: 0,
         fill: false,
         _isDummyAiLegend: true,
+        _isForecast: true,
       });
     }
 
@@ -157,23 +156,44 @@ export default function InsightsOverviewChart({
     },
     plugins: {
       legend: {
-        labels: { color: textColor, filter: (item: any, chart: any) => { const datasets = chart?.data?.datasets; if (!datasets) return true; const ds = datasets[item.datasetIndex]; if (!ds) return true; return !ds._isForecast; }, },
+        labels: {
+          color: textColor,
+          filter: (item: any, chart: any) => {
+            const ds = chart.data.datasets[item.datasetIndex];
+
+            // normál kategóriák
+            if (!ds._isForecast) return true;
+
+            // egyetlen dummy AI legend
+            if (ds._isDummyAiLegend) return true;
+
+            // kategóriánkénti AI forecast rejtve
+            return false;
+          },
+        },
         onClick: (e: any, item: any, legend: any) => {
           const chart = legend.chart;
           const idx = item.datasetIndex;
           const ds = chart.data.datasets[idx];
 
+          // Dummy AI → összes forecast ki/be
           if (ds._isDummyAiLegend) {
             const anyVisible = chart.data.datasets.some(
-              (d: any, i: number) => d._isForecast && chart.isDatasetVisible(i)
+              (d: any, i: number) =>
+                d._isForecast && !d._isDummyAiLegend && chart.isDatasetVisible(i)
             );
+
             chart.data.datasets.forEach((d: any, i: number) => {
-              if (d._isForecast) chart.setDatasetVisibility(i, !anyVisible);
+              if (d._isForecast && !d._isDummyAiLegend) {
+                chart.setDatasetVisibility(i, !anyVisible);
+              }
             });
+
             chart.update();
             return;
           }
 
+          // normál kategória toggle
           const visible = chart.isDatasetVisible(idx);
           chart.setDatasetVisibility(idx, !visible);
           chart.update();
@@ -201,13 +221,19 @@ export default function InsightsOverviewChart({
           label: (ctx: any) => {
             const ds = ctx.dataset;
             const v = ctx.parsed.y;
-            if (ds._isForecast) return `AI előrejelzés : ${ds._aiCategory} : ${v}`;
+            if (ds._isForecast) {
+              return `AI előrejelzés · ${ds._aiCategory}: ${v}`;
+            }
             return `${ds.label}: ${v}`;
           },
         },
       },
       zoom: {
-        zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: "x" },
+        zoom: {
+          wheel: { enabled: true },
+          pinch: { enabled: true },
+          mode: "x",
+        },
         pan: { enabled: true, mode: "x" },
       },
     },
