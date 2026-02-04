@@ -176,20 +176,27 @@ export default function InsightsOverviewChart({
     },
     plugins: {
       legend: {
-        labels: {
-          color: textColor,
-          // csak az első AI előrejelzés dataset jelenjen meg a legendben
-          filter: (item: any, chart: any) => {
-            const ds: any = chart.data.datasets[item.datasetIndex];
-            if (!ds?._isForecast) return true;
+  labels: {
+    color: textColor,
+    filter: (item: any, chart: any) => {
+      const datasets = chart?.data?.datasets;
+      if (!datasets) return false; // chart még nem állt össze
 
-            const firstForecastIndex = chart.data.datasets.findIndex(
-              (d: any) => d._isForecast
-            );
-            return item.datasetIndex === firstForecastIndex;
-          },
-        },
-      },
+      const ds: any = datasets[item.datasetIndex];
+
+      // HISTORY dataset → mindig mutatjuk
+      if (!ds?._isForecast) return true;
+
+      // FORECAST dataset → csak az első jelenjen meg
+      const firstForecastIndex = datasets.findIndex(
+        (d: any) => d._isForecast
+      );
+
+      return item.datasetIndex === firstForecastIndex;
+    },
+  },
+},
+
       tooltip: {
         enabled: true,
         backgroundColor: isDark ? "#222" : "#fff",
