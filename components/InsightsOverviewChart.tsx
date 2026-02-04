@@ -253,3 +253,5 @@ export default function InsightsOverviewChart({
     </div>
   );
 }
+
+// nagyon profi jó verzió stabil ez most így.
