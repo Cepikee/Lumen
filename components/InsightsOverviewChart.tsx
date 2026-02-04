@@ -100,41 +100,39 @@ export default function InsightsOverviewChart({
     });
 
     // ===== FORECAST (rejtve legendből) =====
-    // ===== FORECAST CSAK 24h MÓDBAN =====
-if (range === "24h") {
-  Object.entries(forecast).forEach(([catName, fc]: any) => {
-    const color = getCategoryColor(catName);
-    ds.push({
-      label: "AI előrejelzés",
-      data: fc.map((p: any) => ({
-        x: new Date(new Date(p.date).getTime() + 3600000),
-        y: p.predicted,
-      })),
-      borderColor: color,
-      borderDash: [6, 6],
-      borderWidth: 2,
-      tension: 0.3,
-      pointRadius: 0,
-      fill: false,
-      _isForecast: true,
-      _aiCategory: catName,
-    });
-  });
+    if (range === "24h") {
+      Object.entries(forecast).forEach(([catName, fc]: any) => {
+        const color = getCategoryColor(catName);
+        ds.push({
+          label: "AI előrejelzés",
+          data: fc.map((p: any) => ({
+            x: new Date(new Date(p.date).getTime() + 3600000),
+            y: p.predicted,
+          })),
+          borderColor: color,
+          borderDash: [6, 6],
+          borderWidth: 2,
+          tension: 0.3,
+          pointRadius: 0,
+          fill: false,
+          _isForecast: true,
+          _aiCategory: catName,
+        });
+      });
 
-  // csak 24h módban jelenjen meg a dummy AI legend
-  ds.push({
-    label: "AI előrejelzés",
-    data: [],
-    borderColor: "#999",
-    borderDash: [6, 6],
-    borderWidth: 2,
-    pointRadius: 0,
-    fill: false,
-    _isDummyAiLegend: true,
-    _isForecast: true,
-  });
-}
-
+      // ===== DUMMY AI LEGEND (EGY DARAB) =====
+      ds.push({
+        label: "AI előrejelzés",
+        data: [],
+        borderColor: "#999",
+        borderDash: [6, 6],
+        borderWidth: 2,
+        pointRadius: 0,
+        fill: false,
+        _isDummyAiLegend: true,
+        _isForecast: true,
+      });
+    }
 
     return { datasets: ds };
   }, [data, forecast, range]);
@@ -158,76 +156,66 @@ if (range === "24h") {
     },
     plugins: {
       legend: {
-  legend: {
   labels: {
     color: textColor,
 
     generateLabels: (chart: any) => {
-      const original =
-        ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
+  const original =
+    ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
 
-      // ====== 7d / 30d / 90d ======
-      // Forecast + dummy AI teljesen eltűnik
-      if (range !== "24h") {
-        return original.filter((item: any) => {
-          const ds = chart.data.datasets[item.datasetIndex];
-          return ds && !ds._isForecast; // csak a normál kategóriák maradnak
-        });
-      }
+  return original.filter((item: any) => {
+    const ds = chart.data.datasets[item.datasetIndex];
+    if (!ds) return false;
 
-      // ====== 24h ======
-      // Normál működés: 1 db dummy AI + kategóriák
-      return original.filter((item: any) => {
-        const ds = chart.data.datasets[item.datasetIndex];
-        if (!ds) return false;
+    // normál kategóriák mindig
+    if (!ds._isForecast) return true;
 
-        if (!ds._isForecast) return true; // kategóriák
-        if (ds._isDummyAiLegend) return true; // egyetlen AI legend
+    // AI csak 24h-ban
+    if (range === "24h" && ds._isDummyAiLegend) return true;
 
-        return false; // minden más forecast rejtve
-      });
-    },
+    return false;
+  });
+},
+
   },
 
   onClick: (e: any, item: any, legend: any) => {
-    const chart = legend.chart;
-    const idx = item.datasetIndex;
-    const ds = chart.data.datasets[idx];
+  const chart = legend.chart;
+  const idx = item.datasetIndex;
+  const ds = chart.data.datasets[idx];
 
-    // ====== 7d / 30d / 90d ======
-    // Nincs AI → normál toggle
-    if (range !== "24h") {
-      const visible = chart.isDatasetVisible(idx);
-      chart.setDatasetVisibility(idx, !visible);
-      chart.update();
-      return;
-    }
-
-    // ====== 24h ======
-    // Dummy AI → összes forecast ki/be
-    if (ds._isDummyAiLegend) {
-      const anyVisible = chart.data.datasets.some(
-        (d: any, i: number) =>
-          d._isForecast && !d._isDummyAiLegend && chart.isDatasetVisible(i)
-      );
-
-      chart.data.datasets.forEach((d: any, i: number) => {
-        if (d._isForecast && !d._isDummyAiLegend) {
-          chart.setDatasetVisibility(i, !anyVisible);
-        }
-      });
-
-      chart.update();
-      return;
-    }
-
-    // normál kategória toggle
+  // AI logika csak 24h-ban
+  if (range !== "24h") {
     const visible = chart.isDatasetVisible(idx);
     chart.setDatasetVisibility(idx, !visible);
     chart.update();
-  },
-      },  
-    },
+    return;
+  }
+
+  // Dummy AI → összes forecast ki/be
+  if (ds._isDummyAiLegend) {
+    const anyVisible = chart.data.datasets.some(
+      (d: any, i: number) =>
+        d._isForecast && !d._isDummyAiLegend && chart.isDatasetVisible(i)
+    );
+
+    chart.data.datasets.forEach((d: any, i: number) => {
+      if (d._isForecast && !d._isDummyAiLegend) {
+        chart.setDatasetVisibility(i, !anyVisible);
+      }
+    });
+
+    chart.update();
+    return;
+  }
+
+  // normál kategória toggle
+  const visible = chart.isDatasetVisible(idx);
+  chart.setDatasetVisibility(idx, !visible);
+  chart.update();
+},
+
+      },
       tooltip: {
         enabled: true,
         backgroundColor: isDark ? "#222" : "#fff",
