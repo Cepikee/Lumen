@@ -99,67 +99,76 @@ export default function InsightsOverviewChart({
   const nowUtc = new Date(nowLocal.getTime() - nowLocal.getTimezoneOffset() * 60000);
 
   // ─────────────────────────────────────────────
-  // DATASETS
+  // DATASETS + GLOBAL MIN/MAX
   // ─────────────────────────────────────────────
-  const { datasets } = useMemo(() => {
-    if (!data || data.length === 0) return { datasets: [] };
+  const { datasets, globalMin, globalMax } = useMemo(() => {
+    if (!data || data.length === 0)
+      return { datasets: [], globalMin: null, globalMax: null };
 
     const datasets: any[] = [];
+    let minX: Date | null = null;
+    let maxX: Date | null = null;
 
-    // 1) HISTORY – kategóriánként külön dataset (pontok nélkül)
+    // 1) HISTORY
     data.forEach((cat, idx) => {
       const color = getColor(cat.category, idx);
 
+      const points = cat.points.map((p) => {
+        const d = new Date(p.date);
+        if (!minX || d < minX) minX = d;
+        if (!maxX || d > maxX) maxX = d;
+        return { x: d, y: p.count };
+      });
+
       datasets.push({
         label: `${cat.category}`,
-        data: cat.points.map((p) => ({
-          x: new Date(p.date),
-          y: p.count,
-        })),
+        data: points,
         borderColor: color,
         backgroundColor: color + "33",
-        pointRadius: 0,          // ⭐ nincs pont
+        pointRadius: 0,
         borderWidth: 2,
         tension: 0.3,
         fill: false,
       });
     });
 
-    // 2) FORECAST – kategóriánként külön dataset, de 1 legend elem
+    // 2) FORECAST
     if (range === "24h") {
       Object.entries(forecast || {}).forEach(([catName, fc], idx) => {
         const color = getColor(catName, idx);
 
         const points = (fc as any[])
-          .map((p) => ({
-            x: new Date(p.date),
-            y: p.predicted,
-          }))
+          .map((p) => {
+            const d = new Date(p.date);
+            if (!minX || d < minX) minX = d;
+            if (!maxX || d > maxX) maxX = d;
+            return { x: d, y: p.predicted };
+          })
           .filter((p) => p.x.getTime() >= nowUtc.getTime());
 
         if (points.length > 0) {
           datasets.push({
-            label: "AI előrejelzés",   // ⭐ csak 1 legend elem
+            label: "AI előrejelzés",
             data: points,
             borderColor: color,
             borderDash: [6, 6],
             borderWidth: 2,
             tension: 0.3,
-            pointRadius: 0,           // ⭐ nincs pont
+            pointRadius: 0,
             fill: false,
-            _aiCategory: catName,     // ⭐ tooltiphez
+            _aiCategory: catName,
           });
         }
       });
     }
 
-    return { datasets };
+    return { datasets, globalMin: minX, globalMax: maxX };
   }, [data, forecast, range]);
 
   if (!datasets || datasets.length === 0) return null;
 
   // ─────────────────────────────────────────────
-  // OPTIONS
+  // OPTIONS (min/max beállítva)
   // ─────────────────────────────────────────────
   const options: any = {
     responsive: true,
@@ -175,6 +184,8 @@ export default function InsightsOverviewChart({
     scales: {
       x: {
         type: "time",
+        min: globalMin || undefined,   // ⭐ fontos!
+        max: globalMax || undefined,   // ⭐ fontos!
         adapters: { date: { locale: hu } },
         time: {
           unit: "hour",
