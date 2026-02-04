@@ -106,7 +106,7 @@ export default function InsightsOverviewChart({
       Object.entries(forecast).forEach(([catName, fc]: any) => {
         const color = getCategoryColor(catName);
         ds.push({
-          label: "AI előrejelzés",
+          label: null,
           data: fc.map((p: any) => ({
             x: new Date(new Date(p.date).getTime() + 3600000),
             y: p.predicted,
