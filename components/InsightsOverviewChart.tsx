@@ -123,6 +123,7 @@ export default function InsightsOverviewChart({
           datasets.push({
             // use undefined label (not empty string) and mark as forecast
             label: undefined,
+            display: false,
             data: fc.map((p: ForecastPoint) => ({
               x: new Date(new Date(p.date).getTime() + 60 * 60 * 1000),
               y: p.predicted,
