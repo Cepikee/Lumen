@@ -156,6 +156,7 @@ export default function InsightsOverviewChart({
     },
     plugins: {
       legend: {
+  legend: {
   labels: {
     color: textColor,
 
@@ -163,18 +164,25 @@ export default function InsightsOverviewChart({
       const original =
         ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
 
+      // ====== 7d / 30d / 90d ======
+      // Forecast + dummy AI teljesen eltűnik
+      if (range !== "24h") {
+        return original.filter((item: any) => {
+          const ds = chart.data.datasets[item.datasetIndex];
+          return ds && !ds._isForecast; // csak a normál kategóriák maradnak
+        });
+      }
+
+      // ====== 24h ======
+      // Normál működés: 1 db dummy AI + kategóriák
       return original.filter((item: any) => {
         const ds = chart.data.datasets[item.datasetIndex];
         if (!ds) return false;
 
-        // normál kategóriák
-        if (!ds._isForecast) return true;
+        if (!ds._isForecast) return true; // kategóriák
+        if (ds._isDummyAiLegend) return true; // egyetlen AI legend
 
-        // egyetlen dummy AI legend
-        if (ds._isDummyAiLegend) return true;
-
-        // minden más AI forecast rejtve
-        return false;
+        return false; // minden más forecast rejtve
       });
     },
   },
@@ -184,6 +192,16 @@ export default function InsightsOverviewChart({
     const idx = item.datasetIndex;
     const ds = chart.data.datasets[idx];
 
+    // ====== 7d / 30d / 90d ======
+    // Nincs AI → normál toggle
+    if (range !== "24h") {
+      const visible = chart.isDatasetVisible(idx);
+      chart.setDatasetVisibility(idx, !visible);
+      chart.update();
+      return;
+    }
+
+    // ====== 24h ======
     // Dummy AI → összes forecast ki/be
     if (ds._isDummyAiLegend) {
       const anyVisible = chart.data.datasets.some(
@@ -206,7 +224,8 @@ export default function InsightsOverviewChart({
     chart.setDatasetVisibility(idx, !visible);
     chart.update();
   },
-      },
+      },  
+    },
       tooltip: {
         enabled: true,
         backgroundColor: isDark ? "#222" : "#fff",
