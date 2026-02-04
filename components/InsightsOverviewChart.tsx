@@ -157,13 +157,7 @@ export default function InsightsOverviewChart({
     },
     plugins: {
       legend: {
-        labels: {
-          color: textColor,
-          filter: (item: any, chart: any) => {
-            const ds = chart.data.datasets[item.datasetIndex];
-            return !ds._isForecast;
-          },
-        },
+        labels: { color: textColor, filter: (item: any, chart: any) => { const datasets = chart?.data?.datasets; if (!datasets) return true; const ds = datasets[item.datasetIndex]; if (!ds) return true; return !ds._isForecast; }, },
         onClick: (e: any, item: any, legend: any) => {
           const chart = legend.chart;
           const idx = item.datasetIndex;
