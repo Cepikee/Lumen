@@ -94,7 +94,7 @@ export default function InsightsOverviewChart({
   const { datasets } = useMemo(() => {
     const datasets: any[] = [];
 
-    // 1) HISTORY – minden kategória külön dataset (pontok nélkül)
+    // HISTORY
     data.forEach((cat) => {
       const color = getCategoryColor(cat.category);
 
@@ -114,16 +114,15 @@ export default function InsightsOverviewChart({
       });
     });
 
-    // 2) FORECAST – minden kategóriahoz külön dataset, de NINCS label → nem kerül legendbe
+    // FORECAST
     if (range === "24h") {
       Object.entries(forecast as Record<string, ForecastPoint[]>).forEach(
         ([catName, fc]) => {
           const color = getCategoryColor(catName);
 
           datasets.push({
-            label: "", // ⭐ üres → NINCS legend sor
+            label: "",
             data: fc.map((p: ForecastPoint) => ({
-              // +1 óra offset a megjelenítéshez
               x: new Date(new Date(p.date).getTime() + 60 * 60 * 1000),
               y: p.predicted,
             })),
@@ -139,10 +138,10 @@ export default function InsightsOverviewChart({
         }
       );
 
-      // 3) DUMMY LEGEND ITEM – csak ez jelenik meg az AI előrejelzésként a legendában
+      // DUMMY AI LEGEND
       datasets.push({
         label: "AI előrejelzés",
-        data: [], // nincs vonal
+        data: [],
         borderColor: "#888",
         borderDash: [6, 6],
         borderWidth: 2,
@@ -178,13 +177,11 @@ export default function InsightsOverviewChart({
         labels: {
           color: textColor,
         },
-        // EGY gombbal az összes AI forecast ki/be
         onClick: (e: any, legendItem: any, legend: any) => {
           const chart = legend.chart;
           const idx = legendItem.datasetIndex;
           const clickedDs = chart.data.datasets[idx];
 
-          // ha a dummy AI legendre kattintunk
           if (clickedDs && clickedDs._isDummyAiLegend) {
             const anyVisible = chart.data.datasets.some(
               (d: any, i: number) => d._isForecast && chart.isDatasetVisible(i)
@@ -200,7 +197,6 @@ export default function InsightsOverviewChart({
             return;
           }
 
-          // normál kategória toggle
           const ci = chart;
           const currentlyVisible = ci.isDatasetVisible(idx);
           ci.setDatasetVisibility(idx, !currentlyVisible);
@@ -215,7 +211,6 @@ export default function InsightsOverviewChart({
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
         callbacks: {
-          // magyar, 24 órás formátum: pl. "2026.02.04. 15:00:00"
           title: (items: any) => {
             const d = new Date(items[0].parsed.x);
             return d.toLocaleString("hu-HU", {
@@ -227,7 +222,6 @@ export default function InsightsOverviewChart({
               second: "2-digit",
             });
           },
-          // AI tooltip formátum: "AI előrejelzés : Kategória : DB"
           label: (ctx: any) => {
             const ds = ctx.dataset;
             const value = ctx.parsed.y;
@@ -237,6 +231,17 @@ export default function InsightsOverviewChart({
             }
             return `${ds.label}: ${value}`;
           },
+        },
+      },
+      zoom: {
+        zoom: {
+          wheel: { enabled: true },
+          pinch: { enabled: true },
+          mode: "x",
+        },
+        pan: {
+          enabled: true,
+          mode: "x",
         },
       },
     },
