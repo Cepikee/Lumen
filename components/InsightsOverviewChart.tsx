@@ -159,17 +159,21 @@ export default function InsightsOverviewChart({
         labels: {
           color: textColor,
           filter: (item: any, chart: any) => {
-            const ds = chart.data.datasets[item.datasetIndex];
+  if (!chart || !chart.data || !chart.data.datasets) return false;
 
-            // normál kategóriák
-            if (!ds._isForecast) return true;
+  const ds = chart.data.datasets[item.datasetIndex];
+  if (!ds) return false;
 
-            // egyetlen dummy AI legend
-            if (ds._isDummyAiLegend) return true;
+  // normál kategóriák
+  if (!ds._isForecast) return true;
 
-            // kategóriánkénti AI forecast rejtve
-            return false;
-          },
+  // egyetlen dummy AI legend
+  if (ds._isDummyAiLegend) return true;
+
+  // kategóriánkénti AI forecast rejtve
+  return false;
+},
+
         },
         onClick: (e: any, item: any, legend: any) => {
           const chart = legend.chart;
