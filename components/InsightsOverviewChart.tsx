@@ -77,9 +77,6 @@ export default function InsightsOverviewChart({
   const textColor = isDark ? "#ddd" : "#333";
   const gridColor = isDark ? "#444" : "#eee";
 
-  // ─────────────────────────────────────────────
-  // FIX KATEGÓRIA SZÍNEK
-  // ─────────────────────────────────────────────
   const palette = [
     "#ff6b6b",
     "#4dabf7",
@@ -94,35 +91,21 @@ export default function InsightsOverviewChart({
   const getColor = (category: string, idx: number) =>
     palette[idx % palette.length];
 
-  // MOST UTC
-  const nowLocal = new Date();
-  const nowUtc = new Date(nowLocal.getTime() - nowLocal.getTimezoneOffset() * 60000);
-
-  // ─────────────────────────────────────────────
-  // DATASETS + GLOBAL MIN/MAX
-  // ─────────────────────────────────────────────
-  const { datasets, globalMin, globalMax } = useMemo(() => {
-    if (!data || data.length === 0)
-      return { datasets: [], globalMin: null, globalMax: null };
+  const { datasets } = useMemo(() => {
+    if (!data || data.length === 0) return { datasets: [] };
 
     const datasets: any[] = [];
-    let minX: Date | null = null;
-    let maxX: Date | null = null;
 
-    // 1) HISTORY
+    // HISTORY – kategóriánként külön dataset, pont nélkül
     data.forEach((cat, idx) => {
       const color = getColor(cat.category, idx);
 
-      const points = cat.points.map((p) => {
-        const d = new Date(p.date);
-        if (!minX || d < minX) minX = d;
-        if (!maxX || d > maxX) maxX = d;
-        return { x: d, y: p.count };
-      });
-
       datasets.push({
         label: `${cat.category}`,
-        data: points,
+        data: cat.points.map((p) => ({
+          x: new Date(p.date),
+          y: p.count,
+        })),
         borderColor: color,
         backgroundColor: color + "33",
         pointRadius: 0,
@@ -132,23 +115,19 @@ export default function InsightsOverviewChart({
       });
     });
 
-    // 2) FORECAST
+    // FORECAST – kategóriánként külön dataset, de azonos label → 1 legend sor
     if (range === "24h") {
       Object.entries(forecast || {}).forEach(([catName, fc], idx) => {
         const color = getColor(catName, idx);
 
-        const points = (fc as any[])
-          .map((p) => {
-            const d = new Date(p.date);
-            if (!minX || d < minX) minX = d;
-            if (!maxX || d > maxX) maxX = d;
-            return { x: d, y: p.predicted };
-          })
-          .filter((p) => p.x.getTime() >= nowUtc.getTime());
+        const points = (fc as any[]).map((p) => ({
+          x: new Date(p.date),
+          y: p.predicted,
+        }));
 
         if (points.length > 0) {
           datasets.push({
-            label: "AI előrejelzés",
+            label: "AI előrejelzés",   // azonos label → legendben egy sor
             data: points,
             borderColor: color,
             borderDash: [6, 6],
@@ -162,30 +141,22 @@ export default function InsightsOverviewChart({
       });
     }
 
-    return { datasets, globalMin: minX, globalMax: maxX };
+    return { datasets };
   }, [data, forecast, range]);
 
   if (!datasets || datasets.length === 0) return null;
 
-  // ─────────────────────────────────────────────
-  // OPTIONS (min/max beállítva)
-  // ─────────────────────────────────────────────
   const options: any = {
     responsive: true,
     maintainAspectRatio: false,
-
     interaction: {
       mode: "nearest",
       intersect: false,
     },
-
     animation: { duration: 300, easing: "easeOutQuart" },
-
     scales: {
       x: {
         type: "time",
-        min: globalMin || undefined,   // ⭐ fontos!
-        max: globalMax || undefined,   // ⭐ fontos!
         adapters: { date: { locale: hu } },
         time: {
           unit: "hour",
@@ -199,10 +170,8 @@ export default function InsightsOverviewChart({
         grid: { color: gridColor },
       },
     },
-
     plugins: {
       legend: { labels: { color: textColor } },
-
       tooltip: {
         enabled: true,
         backgroundColor: isDark ? "#222" : "#fff",
@@ -210,7 +179,6 @@ export default function InsightsOverviewChart({
         bodyColor: isDark ? "#ddd" : "#333",
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
-
         callbacks: {
           title: (items: any) => {
             const d = new Date(items[0].parsed.x);
@@ -222,7 +190,6 @@ export default function InsightsOverviewChart({
               minute: "2-digit",
             });
           },
-
           label: (ctx: any) => {
             const ds = ctx.dataset;
             const value = ctx.parsed.y;
@@ -235,7 +202,6 @@ export default function InsightsOverviewChart({
           },
         },
       },
-
       zoom: {
         zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: "x" },
         pan: { enabled: true, mode: "x" },
