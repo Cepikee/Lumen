@@ -16,7 +16,9 @@ import { hu } from "date-fns/locale";
 import { Line } from "react-chartjs-2";
 import { useMemo } from "react";
 
-// ⭐ CROSSHAIR PLUGIN
+// ─────────────────────────────────────────────
+// CROSSHAIR
+// ─────────────────────────────────────────────
 const crosshairPlugin = {
   id: "crosshair",
   afterDatasetsDraw(chart: any) {
@@ -51,6 +53,9 @@ ChartJS.register(
   crosshairPlugin
 );
 
+// ─────────────────────────────────────────────
+// TYPES
+// ─────────────────────────────────────────────
 type Point = { date: string; count: number };
 type CategorySeries = { category: string; points: Point[] };
 
@@ -58,10 +63,12 @@ export default function InsightsOverviewChart({
   data,
   forecast = {},
   height = 300,
+  range = "24h",
 }: {
   data: CategorySeries[];
   forecast?: any;
   height?: number;
+  range?: "24h" | "7d" | "30d" | "90d";
 }) {
   const isDark =
     typeof window !== "undefined" &&
@@ -70,13 +77,9 @@ export default function InsightsOverviewChart({
   const textColor = isDark ? "#ddd" : "#333";
   const gridColor = isDark ? "#444" : "#eee";
 
-  // ⭐ Prémium AI előrejelzés szín
-  const aiColor = "#9b5de5AA";
-
-  // ⭐ MOST időpont UTC-ben
-  const nowLocal = new Date();
-  const nowUtc = new Date(nowLocal.getTime() - nowLocal.getTimezoneOffset() * 60000);
-
+  // ─────────────────────────────────────────────
+  // FIX KATEGÓRIA SZÍNEK
+  // ─────────────────────────────────────────────
   const palette = [
     "#ff6b6b",
     "#4dabf7",
@@ -88,69 +91,79 @@ export default function InsightsOverviewChart({
     "#ff922b",
   ];
 
+  const getColor = (category: string, idx: number) =>
+    palette[idx % palette.length];
+
+  // MOST UTC
+  const nowLocal = new Date();
+  const nowUtc = new Date(nowLocal.getTime() - nowLocal.getTimezoneOffset() * 60000);
+
+  // ─────────────────────────────────────────────
+  // DATASETS
+  // ─────────────────────────────────────────────
   const { datasets } = useMemo(() => {
     if (!data || data.length === 0) return { datasets: [] };
 
     const datasets: any[] = [];
 
-    // 🔵 1) Valós adatok – nem szűrjük, csak megjelenítjük
+    // 1) HISTORY – kategóriánként külön dataset
     data.forEach((cat, idx) => {
+      const color = getColor(cat.category, idx);
+
       datasets.push({
-        label: cat.category,
+        label: `${cat.category}`,
         data: cat.points.map((p) => ({
-          x: new Date(p.date), // UTC → local automatikusan
+          x: new Date(p.date),
           y: p.count,
         })),
-        borderColor: palette[idx % palette.length],
-        backgroundColor: palette[idx % palette.length] + "33",
+        borderColor: color,
+        backgroundColor: color + "33",
+        pointBackgroundColor: color,
+        pointBorderColor: color,
+        pointRadius: 3,
         borderWidth: 2,
         tension: 0.3,
-        pointRadius: 0,
         fill: false,
       });
     });
 
-    // 🔮 2) AI előrejelzés – 1 dataset, pontok kategória színnel
-    const aiPoints: any[] = [];
-    const aiPointColors: string[] = [];
-    const aiCategories: string[] = [];
+    // 2) FORECAST – kategóriánként külön dataset
+    if (range === "24h") {
+      Object.entries(forecast || {}).forEach(([catName, fc], idx) => {
+        const color = getColor(catName, idx);
 
-    Object.entries(forecast || {}).forEach(([catName, fc], idx) => {
-      const color = palette[idx % palette.length];
+        const points = (fc as any[])
+          .map((p) => ({
+            x: new Date(p.date),
+            y: p.predicted,
+          }))
+          .filter((p) => p.x.getTime() >= nowUtc.getTime());
 
-      (fc as any[]).forEach((p) => {
-        const d = new Date(p.date); // UTC timestamp
-
-        // Csak jövőbeli pontokat rajzolunk
-        if (d.getTime() >= nowUtc.getTime()) {
-          aiPoints.push({ x: d, y: p.predicted });
-          aiPointColors.push(color);
-          aiCategories.push(catName);
+        if (points.length > 0) {
+          datasets.push({
+            label: `${catName} – AI előrejelzés`,
+            data: points,
+            borderColor: color,
+            borderDash: [6, 6],
+            borderWidth: 2,
+            tension: 0.3,
+            pointRadius: 4,
+            pointBackgroundColor: color,
+            pointBorderColor: color,
+            fill: false,
+          });
         }
-      });
-    });
-
-    if (aiPoints.length > 0) {
-      datasets.push({
-        label: "AI előrejelzés",
-        data: aiPoints,
-        borderColor: aiColor,
-        borderDash: [6, 6],
-        borderWidth: 2,
-        tension: 0.3,
-        pointRadius: 4,
-        pointBackgroundColor: aiPointColors,
-        pointBorderColor: aiPointColors,
-        fill: false,
-        _aiCategories: aiCategories,
       });
     }
 
     return { datasets };
-  }, [data, forecast]);
+  }, [data, forecast, range]);
 
   if (!datasets || datasets.length === 0) return null;
 
+  // ─────────────────────────────────────────────
+  // OPTIONS
+  // ─────────────────────────────────────────────
   const options: any = {
     responsive: true,
     maintainAspectRatio: false,
@@ -165,9 +178,7 @@ export default function InsightsOverviewChart({
     scales: {
       x: {
         type: "time",
-        adapters: {
-          date: { locale: hu },
-        },
+        adapters: { date: { locale: hu } },
         time: {
           unit: "hour",
           displayFormats: { hour: "HH:mm" },
@@ -193,8 +204,7 @@ export default function InsightsOverviewChart({
         borderWidth: 1,
 
         callbacks: {
-          // ⭐ MAGYAR IDŐ
-          title: function (items: any) {
+          title: (items: any) => {
             const d = new Date(items[0].parsed.x);
             return d.toLocaleString("hu-HU", {
               year: "numeric",
@@ -204,21 +214,7 @@ export default function InsightsOverviewChart({
               minute: "2-digit",
             });
           },
-
-          label: function (ctx: any) {
-            const ds = ctx.dataset;
-            const idx = ctx.dataIndex;
-
-            if (ds.label === "AI előrejelzés") {
-              const cat = ds._aiCategories?.[idx];
-              if (cat) {
-                return `AI előrejelzés – ${cat}: ${ctx.parsed.y}`;
-              }
-              return `AI előrejelzés: ${ctx.parsed.y}`;
-            }
-
-            return `${ds.label}: ${ctx.parsed.y}`;
-          },
+          label: (ctx: any) => `${ctx.dataset.label}: ${ctx.parsed.y}`,
         },
       },
 

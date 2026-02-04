@@ -37,19 +37,23 @@ async function callOllama(prompt) {
         prompt,
         stream: false,
         keep_alive: 0,
-        options: { num_predict: 400 }
+        options: { num_predict: 400 },
       }),
-      signal: controller.signal
+      signal: controller.signal,
     });
 
     clearTimeout(timeout);
 
     if (!res.ok) {
-      console.error("❌ OLLAMA HTTP HIBA:", res.status, await res.text().catch(() => ""));
+      console.error(
+        "❌ OLLAMA HTTP HIBA:",
+        res.status,
+        await res.text().catch(() => "")
+      );
       return null;
     }
 
-    const data = await res.json().catch(err => {
+    const data = await res.json().catch((err) => {
       console.error("❌ OLLAMA JSON PARSE HIBA:", err);
       return null;
     });
@@ -70,14 +74,18 @@ async function callOllama(prompt) {
 async function runForecastPipeline() {
   try {
     console.log("🔍 Órás adatok lekérése...");
-    const timeseries = await getTimeseries(24 * 7);
+    // 48 órás history
+    const timeseries = await getTimeseries(48);
 
     const nowLocal = new Date();
+
+    // következő egész óra (a mostani rendszered szerint)
     const startHour = new Date(nowLocal);
     startHour.setMinutes(0, 0, 0);
     startHour.setHours(startHour.getHours() + 1);
     const startHourIso = startHour.toISOString().slice(0, 19).replace("T", " ");
 
+    // 6 órás jövőbeli horizont
     const futureHours = 6;
 
     for (const category of Object.keys(timeseries)) {
@@ -89,7 +97,12 @@ async function runForecastPipeline() {
         continue;
       }
 
-      const prompt = buildForecastPrompt(category, points, futureHours, startHourIso);
+      const prompt = buildForecastPrompt(
+        category,
+        points,
+        futureHours,
+        startHourIso
+      );
 
       console.log("🤖 AI előrejelzés generálása...");
       const raw = await callOllama(prompt);
