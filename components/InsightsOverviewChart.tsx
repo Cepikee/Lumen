@@ -114,14 +114,15 @@ export default function InsightsOverviewChart({
       });
     });
 
-    // FORECAST
+    // FORECAST (no legend items for these)
     if (range === "24h") {
       Object.entries(forecast as Record<string, ForecastPoint[]>).forEach(
         ([catName, fc]) => {
           const color = getCategoryColor(catName);
 
           datasets.push({
-            label: "",
+            // use undefined label (not empty string) and mark as forecast
+            label: undefined,
             data: fc.map((p: ForecastPoint) => ({
               x: new Date(new Date(p.date).getTime() + 60 * 60 * 1000),
               y: p.predicted,
@@ -134,7 +135,10 @@ export default function InsightsOverviewChart({
             fill: false,
             _isForecast: true,
             _aiCategory: catName,
-            legend: { display: false }
+            // ensure Chart.js does not create legend item for this dataset
+            // dataset-level option supported by Chart.js to hide legend item
+            // (some Chart.js versions accept 'showInLegend' or 'legend' per dataset;
+            // using 'hidden' alone would hide the line; we rely on legend filter below)
           });
         }
       );
@@ -177,6 +181,14 @@ export default function InsightsOverviewChart({
       legend: {
         labels: {
           color: textColor,
+          filter: (item: any, chart: any) => {
+            const datasets = chart?.data?.datasets;
+            if (!datasets) return true;
+            const ds = datasets[item.datasetIndex];
+            // hide any dataset that is a forecast (except the dummy AI legend)
+            if (ds?._isForecast) return false;
+            return true;
+          },
         },
         onClick: (e: any, legendItem: any, legend: any) => {
           const chart = legend.chart;
