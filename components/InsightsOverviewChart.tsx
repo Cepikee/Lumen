@@ -16,18 +16,15 @@ import { hu } from "date-fns/locale";
 import { Line } from "react-chartjs-2";
 import { useMemo } from "react";
 
-// CROSSHAIR
 const crosshairPlugin = {
   id: "crosshair",
   afterDatasetsDraw(chart: any) {
     const active = chart.tooltip?.getActiveElements?.();
     if (!active || active.length === 0) return;
-
     const ctx = chart.ctx;
     const { x } = active[0].element;
     const topY = chart.chartArea.top;
     const bottomY = chart.chartArea.bottom;
-
     ctx.save();
     ctx.beginPath();
     ctx.moveTo(x, topY);
@@ -39,10 +36,7 @@ const crosshairPlugin = {
   },
 };
 
-type ForecastPoint = {
-  date: string;
-  predicted: number;
-};
+type ForecastPoint = { date: string; predicted: number };
 
 ChartJS.register(
   LineElement,
@@ -56,7 +50,6 @@ ChartJS.register(
   crosshairPlugin
 );
 
-// FIX kategória színek (kiegészítve: Egészségügy, Közélet)
 const CATEGORY_COLORS: Record<string, string> = {
   Sport: "#ef4444",
   Politika: "#3b82f6",
@@ -69,8 +62,8 @@ const CATEGORY_COLORS: Record<string, string> = {
   _default: "#6b7280",
 };
 
-function getCategoryColor(category: string) {
-  return CATEGORY_COLORS[category] ?? CATEGORY_COLORS._default;
+function getCategoryColor(c: string) {
+  return CATEGORY_COLORS[c] ?? CATEGORY_COLORS._default;
 }
 
 export default function InsightsOverviewChart({
@@ -78,12 +71,7 @@ export default function InsightsOverviewChart({
   forecast = {},
   height = 300,
   range = "24h",
-}: {
-  data: { category: string; points: { date: string; count: number }[] }[];
-  forecast?: Record<string, ForecastPoint[]>;
-  height?: number;
-  range?: "24h" | "7d" | "30d" | "90d";
-}) {
+}: any) {
   const isDark =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -92,13 +80,11 @@ export default function InsightsOverviewChart({
   const gridColor = isDark ? "#444" : "#eee";
 
   const { datasets } = useMemo(() => {
-    const datasets: any[] = [];
+    const ds: any[] = [];
 
-    // HISTORY
-    data.forEach((cat) => {
+    data.forEach((cat: any) => {
       const color = getCategoryColor(cat.category);
-
-      datasets.push({
+      ds.push({
         label: cat.category,
         data: cat.points.map((p: any) => ({
           x: new Date(p.date),
@@ -114,38 +100,28 @@ export default function InsightsOverviewChart({
       });
     });
 
-    // FORECAST (no legend items for these)
     if (range === "24h") {
-      Object.entries(forecast as Record<string, ForecastPoint[]>).forEach(
-        ([catName, fc]) => {
-          const color = getCategoryColor(catName);
+      Object.entries(forecast).forEach(([catName, fc]: any) => {
+        const color = getCategoryColor(catName);
+        ds.push({
+          label: "AI előrejelzés",
+          data: fc.map((p: any) => ({
+            x: new Date(new Date(p.date).getTime() + 3600000),
+            y: p.predicted,
+          })),
+          borderColor: color,
+          borderDash: [6, 6],
+          borderWidth: 2,
+          tension: 0.3,
+          pointRadius: 0,
+          fill: false,
+          _isForecast: true,
+          _aiCategory: catName,
+          display: false, // <<<<<<<<<<<<<<<<<<<<<<<<<<< EZ TÜNTETI EL A LEGENDBŐL
+        });
+      });
 
-          datasets.push({
-            // use undefined label (not empty string) and mark as forecast
-            label: undefined,
-            display: false,
-            data: fc.map((p: ForecastPoint) => ({
-              x: new Date(new Date(p.date).getTime() + 60 * 60 * 1000),
-              y: p.predicted,
-            })),
-            borderColor: color,
-            borderDash: [6, 6],
-            borderWidth: 2,
-            tension: 0.3,
-            pointRadius: 0,
-            fill: false,
-            _isForecast: true,
-            _aiCategory: catName,
-            // ensure Chart.js does not create legend item for this dataset
-            // dataset-level option supported by Chart.js to hide legend item
-            // (some Chart.js versions accept 'showInLegend' or 'legend' per dataset;
-            // using 'hidden' alone would hide the line; we rely on legend filter below)
-          });
-        }
-      );
-
-      // DUMMY AI LEGEND
-      datasets.push({
+      ds.push({
         label: "AI előrejelzés",
         data: [],
         borderColor: "#888",
@@ -153,12 +129,11 @@ export default function InsightsOverviewChart({
         borderWidth: 2,
         pointRadius: 0,
         fill: false,
-        _isForecast: false,
         _isDummyAiLegend: true,
       });
     }
 
-    return { datasets };
+    return { datasets: ds };
   }, [data, forecast, range]);
 
   const options: any = {
@@ -180,41 +155,26 @@ export default function InsightsOverviewChart({
     },
     plugins: {
       legend: {
-        labels: {
-          color: textColor,
-          filter: (item: any, chart: any) => {
-            const datasets = chart?.data?.datasets;
-            if (!datasets) return true;
-            const ds = datasets[item.datasetIndex];
-            // hide any dataset that is a forecast (except the dummy AI legend)
-            if (ds?._isForecast) return false;
-            return true;
-          },
-        },
-        onClick: (e: any, legendItem: any, legend: any) => {
+        labels: { color: textColor },
+        onClick: (e: any, item: any, legend: any) => {
           const chart = legend.chart;
-          const idx = legendItem.datasetIndex;
-          const clickedDs = chart.data.datasets[idx];
+          const idx = item.datasetIndex;
+          const ds = chart.data.datasets[idx];
 
-          if (clickedDs && clickedDs._isDummyAiLegend) {
+          if (ds._isDummyAiLegend) {
             const anyVisible = chart.data.datasets.some(
               (d: any, i: number) => d._isForecast && chart.isDatasetVisible(i)
             );
-
             chart.data.datasets.forEach((d: any, i: number) => {
-              if (d._isForecast) {
-                chart.setDatasetVisibility(i, !anyVisible);
-              }
+              if (d._isForecast) chart.setDatasetVisibility(i, !anyVisible);
             });
-
             chart.update();
             return;
           }
 
-          const ci = chart;
-          const currentlyVisible = ci.isDatasetVisible(idx);
-          ci.setDatasetVisibility(idx, !currentlyVisible);
-          ci.update();
+          const visible = chart.isDatasetVisible(idx);
+          chart.setDatasetVisibility(idx, !visible);
+          chart.update();
         },
       },
       tooltip: {
@@ -238,25 +198,15 @@ export default function InsightsOverviewChart({
           },
           label: (ctx: any) => {
             const ds = ctx.dataset;
-            const value = ctx.parsed.y;
-            if (ds && ds._isForecast) {
-              const cat = ds._aiCategory ?? "ismeretlen";
-              return `AI előrejelzés : ${cat} : ${value}`;
-            }
-            return `${ds.label}: ${value}`;
+            const v = ctx.parsed.y;
+            if (ds._isForecast) return `AI előrejelzés : ${ds._aiCategory} : ${v}`;
+            return `${ds.label}: ${v}`;
           },
         },
       },
       zoom: {
-        zoom: {
-          wheel: { enabled: true },
-          pinch: { enabled: true },
-          mode: "x",
-        },
-        pan: {
-          enabled: true,
-          mode: "x",
-        },
+        zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: "x" },
+        pan: { enabled: true, mode: "x" },
       },
     },
   };
