@@ -100,39 +100,41 @@ export default function InsightsOverviewChart({
     });
 
     // ===== FORECAST (rejtve legendből) =====
-    if (range === "24h") {
-      Object.entries(forecast).forEach(([catName, fc]: any) => {
-        const color = getCategoryColor(catName);
-        ds.push({
-          label: "AI előrejelzés",
-          data: fc.map((p: any) => ({
-            x: new Date(new Date(p.date).getTime() + 3600000),
-            y: p.predicted,
-          })),
-          borderColor: color,
-          borderDash: [6, 6],
-          borderWidth: 2,
-          tension: 0.3,
-          pointRadius: 0,
-          fill: false,
-          _isForecast: true,
-          _aiCategory: catName,
-        });
-      });
+    // ===== FORECAST CSAK 24h MÓDBAN =====
+if (range === "24h") {
+  Object.entries(forecast).forEach(([catName, fc]: any) => {
+    const color = getCategoryColor(catName);
+    ds.push({
+      label: "AI előrejelzés",
+      data: fc.map((p: any) => ({
+        x: new Date(new Date(p.date).getTime() + 3600000),
+        y: p.predicted,
+      })),
+      borderColor: color,
+      borderDash: [6, 6],
+      borderWidth: 2,
+      tension: 0.3,
+      pointRadius: 0,
+      fill: false,
+      _isForecast: true,
+      _aiCategory: catName,
+    });
+  });
 
-      // ===== DUMMY AI LEGEND (EGY DARAB) =====
-      ds.push({
-        label: "AI előrejelzés",
-        data: [],
-        borderColor: "#999",
-        borderDash: [6, 6],
-        borderWidth: 2,
-        pointRadius: 0,
-        fill: false,
-        _isDummyAiLegend: true,
-        _isForecast: true,
-      });
-    }
+  // csak 24h módban jelenjen meg a dummy AI legend
+  ds.push({
+    label: "AI előrejelzés",
+    data: [],
+    borderColor: "#999",
+    borderDash: [6, 6],
+    borderWidth: 2,
+    pointRadius: 0,
+    fill: false,
+    _isDummyAiLegend: true,
+    _isForecast: true,
+  });
+}
+
 
     return { datasets: ds };
   }, [data, forecast, range]);
