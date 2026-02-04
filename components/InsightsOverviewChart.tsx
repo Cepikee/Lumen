@@ -56,7 +56,7 @@ ChartJS.register(
   crosshairPlugin
 );
 
-// FIX kategória színek
+// FIX kategória színek (kiegészítve: Egészségügy, Közélet)
 const CATEGORY_COLORS: Record<string, string> = {
   Sport: "#ef4444",
   Politika: "#3b82f6",
@@ -64,6 +64,8 @@ const CATEGORY_COLORS: Record<string, string> = {
   Tech: "#f97316",
   Kultúra: "#eab308",
   Oktatás: "#a855f7",
+  Egészségügy: "#6b7280",
+  Közélet: "#94a3b8",
   _default: "#6b7280",
 };
 
@@ -92,7 +94,7 @@ export default function InsightsOverviewChart({
   const { datasets } = useMemo(() => {
     const datasets: any[] = [];
 
-    // 1) HISTORY – kategóriánként külön dataset
+    // 1) HISTORY – minden kategória külön dataset (pontok nélkül)
     data.forEach((cat) => {
       const color = getCategoryColor(cat.category);
 
@@ -108,12 +110,12 @@ export default function InsightsOverviewChart({
         borderWidth: 2,
         tension: 0.3,
         fill: false,
-        // nem befolyásolja a legend megjelenést
+        // látható a legendában
         hiddenInLegend: false,
       });
     });
 
-    // 2) FORECAST – kategóriánként külön dataset, de legendában rejtve
+    // 2) FORECAST – minden kategóriahoz külön dataset, de rejtve a legendában
     if (range === "24h") {
       Object.entries(forecast as Record<string, ForecastPoint[]>).forEach(
         ([catName, fc]) => {
@@ -122,7 +124,7 @@ export default function InsightsOverviewChart({
           datasets.push({
             label: "AI előrejelzés",
             data: fc.map((p: ForecastPoint) => ({
-              // +1 óra offset a megjelenítéshez (ahogy kértél)
+              // +1 óra offset a megjelenítéshez
               x: new Date(new Date(p.date).getTime() + 60 * 60 * 1000),
               y: p.predicted,
             })),
@@ -132,23 +134,24 @@ export default function InsightsOverviewChart({
             tension: 0.3,
             pointRadius: 0,
             fill: false,
-            hiddenInLegend: true, // rejtve a legendában
-            _aiCategory: catName, // tooltiphez
+            // rejtve a legendában, de látható a tooltipben
+            hiddenInLegend: true,
+            _aiCategory: catName,
           });
         }
       );
 
-      // 3) DUMMY LEGEND ITEM – csak a legendben látszik, ez vezérli az összes forecastet
+      // 3) DUMMY LEGEND ITEM – csak ez jelenik meg az AI előrejelzésként a legendában
       datasets.push({
         label: "AI előrejelzés",
-        data: [], // nincs vonal rajzolva
+        data: [], // nincs vonal
         borderColor: "#888",
         borderDash: [6, 6],
         borderWidth: 2,
         pointRadius: 0,
         fill: false,
-        hiddenInLegend: false, // ez látszik a legendában
-        _isDummyAiLegend: true, // jelölés a custom onClick-hoz
+        hiddenInLegend: false,
+        _isDummyAiLegend: true,
       });
     }
 
@@ -176,31 +179,29 @@ export default function InsightsOverviewChart({
       legend: {
         labels: {
           color: textColor,
-          // védett ellenőrzés: ha chart.data.datasets még nincs, engedjük tovább
+          // védett ellenőrzés: ha chart.data.datasets még nincs, engedjük tovább (ne dobjon hibát)
           filter: (item: any, chart: any) => {
             const datasets = chart?.data?.datasets;
             if (!datasets) return true;
             const ds = datasets[item.datasetIndex];
-            // ha hiddenInLegend === true, akkor ne jelenjen meg
             return !ds?.hiddenInLegend;
           },
         },
-        // custom onClick: ha a dummy AI legendre kattintanak, toggle-olja az összes forecast datasetet
+        // custom onClick: a dummy AI legend gombja vezérli az összes forecast datasetet
         onClick: (e: any, legendItem: any, legend: any) => {
           const chart = legend.chart;
           const idx = legendItem.datasetIndex;
           const clickedDs = chart.data.datasets[idx];
 
-          // ha ez a dummy AI legend (nincs data, _isDummyAiLegend true), akkor toggle-oljuk az összes forecast datasetet
           if (clickedDs && clickedDs._isDummyAiLegend) {
-            // van-e jelenleg legalább egy forecast látható?
+            // ha legalább egy forecast látható, akkor elrejtjük mindet; különben megmutatjuk mindet
             const anyVisible = chart.data.datasets.some((d: any, i: number) => {
               return d.hiddenInLegend && chart.isDatasetVisible(i);
             });
 
             chart.data.datasets.forEach((d: any, i: number) => {
               if (d.hiddenInLegend) {
-                chart.setDatasetVisibility(i, !anyVisible); // ha van látható, akkor elrejtjük mindet; különben megmutatjuk mindet
+                chart.setDatasetVisibility(i, !anyVisible);
               }
             });
 
@@ -208,7 +209,7 @@ export default function InsightsOverviewChart({
             return;
           }
 
-          // egyéb legend elemek alapértelmezett viselkedése
+          // egyéb legend elemek alapértelmezett viselkedése (kategóriák)
           const ci = chart;
           const meta = ci.getDatasetMeta(idx);
           const currentlyVisible = ci.isDatasetVisible(idx);
@@ -224,10 +225,11 @@ export default function InsightsOverviewChart({
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
         callbacks: {
-          // magyar, 24 órás formátum (példa: 2026.02.04. 15:00:00)
+          // magyar, 24 órás formátum: pl. "2026.02.04. 15:00:00"
           title: (items: any) => {
             const d = new Date(items[0].parsed.x);
-            return d.toLocaleString("hu-HU", {
+            // explicit magyar formátum, 24h
+            const parts = d.toLocaleString("hu-HU", {
               year: "numeric",
               month: "2-digit",
               day: "2-digit",
@@ -235,17 +237,16 @@ export default function InsightsOverviewChart({
               minute: "2-digit",
               second: "2-digit",
             });
+            return parts;
           },
           // AI tooltip formátum: "AI előrejelzés : Kategória : DB"
           label: (ctx: any) => {
             const ds = ctx.dataset;
             const value = ctx.parsed.y;
-            // forecast dataset (rejtett a legendában)
             if (ds && ds.hiddenInLegend) {
               const cat = ds._aiCategory ?? "ismeretlen";
               return `AI előrejelzés : ${cat} : ${value}`;
             }
-            // history / normal dataset
             return `${ds.label}: ${value}`;
           },
         },
