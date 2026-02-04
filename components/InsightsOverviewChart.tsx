@@ -106,7 +106,7 @@ export default function InsightsOverviewChart({
 
     const datasets: any[] = [];
 
-    // 1) HISTORY – kategóriánként külön dataset
+    // 1) HISTORY – kategóriánként külön dataset (pontok nélkül)
     data.forEach((cat, idx) => {
       const color = getColor(cat.category, idx);
 
@@ -118,16 +118,14 @@ export default function InsightsOverviewChart({
         })),
         borderColor: color,
         backgroundColor: color + "33",
-        pointBackgroundColor: color,
-        pointBorderColor: color,
-        pointRadius: 3,
+        pointRadius: 0,          // ⭐ nincs pont
         borderWidth: 2,
         tension: 0.3,
         fill: false,
       });
     });
 
-    // 2) FORECAST – kategóriánként külön dataset
+    // 2) FORECAST – kategóriánként külön dataset, de 1 legend elem
     if (range === "24h") {
       Object.entries(forecast || {}).forEach(([catName, fc], idx) => {
         const color = getColor(catName, idx);
@@ -141,16 +139,15 @@ export default function InsightsOverviewChart({
 
         if (points.length > 0) {
           datasets.push({
-            label: `${catName} – AI előrejelzés`,
+            label: "AI előrejelzés",   // ⭐ csak 1 legend elem
             data: points,
             borderColor: color,
             borderDash: [6, 6],
             borderWidth: 2,
             tension: 0.3,
-            pointRadius: 4,
-            pointBackgroundColor: color,
-            pointBorderColor: color,
+            pointRadius: 0,           // ⭐ nincs pont
             fill: false,
+            _aiCategory: catName,     // ⭐ tooltiphez
           });
         }
       });
@@ -214,7 +211,17 @@ export default function InsightsOverviewChart({
               minute: "2-digit",
             });
           },
-          label: (ctx: any) => `${ctx.dataset.label}: ${ctx.parsed.y}`,
+
+          label: (ctx: any) => {
+            const ds = ctx.dataset;
+            const value = ctx.parsed.y;
+
+            if (ds.label === "AI előrejelzés") {
+              return `AI előrejelzés – ${ds._aiCategory}: ${value}`;
+            }
+
+            return `${ds.label}: ${value}`;
+          },
         },
       },
 
