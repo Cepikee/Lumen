@@ -1,39 +1,7 @@
+// plagiarismCheck.js — 6-instance kompatibilis, modern verzió
 const mysql = require("mysql2/promise");
 
-// --- AI hívás ---
-async function callOllama(prompt, numPredict = 128, timeoutMs = 180000) {
-  const controller = new AbortController();
-  const t = setTimeout(() => controller.abort(), timeoutMs);
-
-  try {
-    const res = await fetch("http://127.0.0.1:11434/api/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "llama3:latest",
-        prompt,
-        stream: false,
-        keep_alive: 0,
-        options: {
-          num_predict: numPredict
-        }
-      }),
-      signal: controller.signal,
-    });
-
-    const raw = await res.text();
-    try {
-      const data = JSON.parse(raw);
-      return (data.response ?? "").trim();
-    } catch {
-      return raw.trim();
-    }
-  } finally {
-    clearTimeout(t);
-  }
-}
-
-async function plagiarismCheck(articleId, shortSummary) {
+async function plagiarismCheck(articleId, shortSummary, baseUrl) {
   try {
     const prompt = `
 Ellenőrizd a következő szöveget plágium szempontból.
@@ -45,8 +13,8 @@ Szöveg:
 ${shortSummary}
     `.trim();
 
-    // AI hívás limitálva 128 tokenre
-    const raw = await callOllama(prompt, 128);
+    // AI hívás (már a cron.js által adott instance-re)
+    const raw = await global.callOllama(baseUrl, prompt, 128);
 
     // --- plágium pontszám kinyerése ---
     const score = parseFloat(raw);

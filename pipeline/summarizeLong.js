@@ -1,60 +1,28 @@
+// summarizeLong.js — 6-instance kompatibilis, modern verzió
 const mysql = require("mysql2/promise");
-
-// --- AI hívás ---
-async function callOllama(prompt, numPredict = 1000, timeoutMs = 180000) {
-  const controller = new AbortController();
-  const t = setTimeout(() => controller.abort(), timeoutMs);
-
-  try {
-    const res = await fetch("http://127.0.0.1:11434/api/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "llama3:latest",
-        prompt,
-        stream: false,
-        keep_alive: 0,
-        options: {
-          num_predict: numPredict
-        }
-      }),
-      signal: controller.signal,
-    });
-
-    const raw = await res.text();
-    try {
-      const data = JSON.parse(raw);
-      return (data.response ?? "").trim();
-    } catch {
-      return raw.trim();
-    }
-  } finally {
-    clearTimeout(t);
-  }
-}
 
 // --- Validáció ---
 function isValidDetailed(text) {
   if (!text) return false;
   const t = text.trim();
 
-  // Ne legyen túl rövid
   if (t.length < 150) return false;
 
-  // Ne legyen prompt visszaírás
-  if (t.toLowerCase().includes("írj részletes") ||
-      t.toLowerCase().includes("elemzést") ||
-      t.toLowerCase().includes("sajnálom")) {
+  if (
+    t.toLowerCase().includes("írj részletes") ||
+    t.toLowerCase().includes("elemzést") ||
+    t.toLowerCase().includes("sajnálom")
+  ) {
     return false;
   }
 
-  // Ne legyen HTML
   if (t.startsWith("<") && t.endsWith(">")) return false;
 
   return true;
 }
 
-async function summarizeLong(articleId, shortSummary) {
+// --- Hosszú elemzés ---
+async function summarizeLong(articleId, shortSummary, baseUrl) {
   const conn = await mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -76,18 +44,19 @@ async function summarizeLong(articleId, shortSummary) {
       return { ok: false, error: "Üres content_text" };
     }
 
-    // 2) Prompt – summarize-all stílusban
+    // 2) Prompt
     const prompt = `Írj részletes elemzést (3–6 bekezdés), plágiummentesen, kizárólag magyar nyelven:
+
 ${contentText}
 `.trim();
 
-    // 3) AI hívás (limit: 2048 token)
-    let detailed = await callOllama(prompt, 1000);
+    // 3) AI hívás (már a cron.js által adott instance-re)
+    let detailed = await global.callOllama(baseUrl, prompt, 1000);
 
     // 4) Validálás + újrapróbálás
     if (!isValidDetailed(detailed)) {
       console.warn(`[LONG] ⚠️ Első elemzés érvénytelen, újrapróbálás...`);
-      detailed = await callOllama(prompt, 1000);
+      detailed = await global.callOllama(baseUrl, prompt, 1000);
     }
 
     // 5) Ha még mindig rossz → fallback
@@ -99,7 +68,7 @@ További részletek a cikkben nem szerepelnek, ezért az elemzés korlátozott.
       `.trim();
     }
 
-    // 6) Mentés a summaries táblába
+    // 6) Mentés
     await conn.execute(
       `
       INSERT INTO summaries (article_id, detailed_content)

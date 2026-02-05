@@ -1,36 +1,5 @@
+// fillCategory.js — 6-instance kompatibilis, modern verzió
 const mysql = require("mysql2/promise");
-module.exports = async function categorizeArticle() {
-  return { ok: false };
-};
-
-// --- AI hívás ---
-async function callOllama(prompt, timeoutMs = 120000) {
-  const controller = new AbortController();
-  const t = setTimeout(() => controller.abort(), timeoutMs);
-
-  try {
-    const res = await fetch("http://127.0.0.1:11434/api/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "llama3:latest",
-        prompt,
-        stream: false
-      }),
-      signal: controller.signal,
-    });
-
-    const raw = await res.text();
-    try {
-      const data = JSON.parse(raw);
-      return (data.response ?? "").trim();
-    } catch {
-      return raw.trim();
-    }
-  } finally {
-    clearTimeout(t);
-  }
-}
 
 // --- Valid kategóriák ---
 const VALID_CATEGORIES = [
@@ -48,14 +17,11 @@ const VALID_CATEGORIES = [
 function isValidCategory(cat) {
   if (!cat) return false;
   const clean = cat.trim().toLowerCase();
-
-  return VALID_CATEGORIES.some(
-    (c) => c.toLowerCase() === clean
-  );
+  return VALID_CATEGORIES.some(c => c.toLowerCase() === clean);
 }
 
 // --- Egy cikk kategorizálása ---
-async function categorizeArticle(articleId) {
+async function categorizeArticle(articleId, baseUrl) {
   const conn = await mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -87,11 +53,12 @@ Feladat:
 Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kategória nevét írd ki.
 `.trim();
 
-    let category = await callOllama(prompt);
+    // AI hívás (már a cron.js által adott instance-re)
+    let category = await global.callOllama(baseUrl, prompt);
 
     if (!isValidCategory(category)) {
       console.warn(`[CAT] ⚠️ Érvénytelen kategória: "${category}". Újrapróbálás...`);
-      category = await callOllama(prompt);
+      category = await global.callOllama(baseUrl, prompt);
     }
 
     if (!isValidCategory(category)) {
@@ -114,32 +81,5 @@ Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kate
     await conn.end();
   }
 }
-
-// --- Fő futtató ---
-async function run() {
-  const conn = await mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "jelszo",
-    database: "projekt2025",
-  });
-
-  // 🔥 JAVÍTOTT LEKÉRDEZÉS — LEGFIRISSEBB CIKKEK ELŐRE
-  const [rows] = await conn.execute(
-    "SELECT id FROM articles WHERE category IS NULL OR category = '' ORDER BY id DESC"
-  );
-
-  await conn.end();
-
-  console.log(`Talált cikkek kategória nélkül: ${rows.length}`);
-
-  for (const row of rows) {
-    await categorizeArticle(row.id);
-  }
-
-  console.log("Kész.");
-}
-
-run();
 
 module.exports = { categorizeArticle };

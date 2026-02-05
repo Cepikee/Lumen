@@ -90,9 +90,8 @@ async function processClickbaitForArticle(articleId, conn, callOllama, utomTitle
     [sourceScore, utomScore, articleId]
   );
 
-  console.log(
-    console.log(`\x1b[32m[CLICKBAIT] ✔️ Mentve: forrás=${sourceScore}, utom=${utomScore}, articleId=${articleId}\x1b[0m`)
-  );
+  console.log(`\x1b[32m[CLICKBAIT] ✔️ Mentve: forrás=${sourceScore}, utom=${utomScore}, articleId=${articleId}\x1b[0m`);
+  
 
 
   return {
