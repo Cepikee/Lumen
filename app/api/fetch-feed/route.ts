@@ -1,8 +1,19 @@
-// app/api/fetch-feed/route.tsx
+// app/api/fetch-feed/route.ts
 import { NextResponse } from "next/server";
 import mysql, { RowDataPacket } from "mysql2/promise";
 import Parser from "rss-parser";
 import fs from "fs";
+import path from "path";
+
+/** Egységes logolás fájlba */
+function logError(source: string, err: any) {
+  const p = "/var/www/utom/logs/fetch-feed.log";
+  const line = `[${new Date().toISOString()}] ${source}: ${
+    err instanceof Error ? err.message : String(err)
+  }\n`;
+  fs.appendFileSync(p, line);
+}
+
 
 /** Domain → source_id */
 function detectSourceId(url: string | null | undefined): number | null {
@@ -36,7 +47,6 @@ function titleFromLink(link: string): string {
   }
 }
 
-
 function aggressiveFixAttributes(xml: string) {
   let out = xml;
   out = out.replace(/(\s(?:src|href|data-src|data-href|poster|srcset|data-srcset)=)(?!["'])([^\s"'>]+)/gi, '$1"$2"');
@@ -69,8 +79,10 @@ export async function GET() {
   try {
     const parser = new Parser({
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; FetchBot/1.0)",
-        Accept: "application/rss+xml, application/xml, text/xml",
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
+        Accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
       },
     });
 
@@ -83,38 +95,53 @@ export async function GET() {
 
     let inserted = 0;
 
+    /** Böngészőnek álcázott fetch */
     async function fetchAndParse(feedUrl: string, fixHtml = false) {
       const res = await fetch(feedUrl, {
         headers: {
-          "User-Agent": "Mozilla/5.0 (compatible; FetchBot/1.0)",
-          Accept: "application/rss+xml, application/xml, text/xml",
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
+          "Accept":
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+          "Accept-Language": "hu-HU,hu;q=0.9,en-US;q=0.8,en;q=0.7",
+          "Cache-Control": "no-cache",
+          "Pragma": "no-cache",
         },
         redirect: "follow",
       });
+
       const contentType = res.headers.get("content-type") || "";
       const text = await res.text();
       return { status: res.status, ok: res.ok, contentType, text };
     }
 
+    /** Egy feed feldolgozása */
     async function processFeed(
       feedUrl: string,
       sourceName: string,
       forcedSourceId: number | null = null,
       fixHtml = false
     ) {
+      const start = Date.now();
+
       try {
         console.log(`>>> processFeed start: ${sourceName} (${feedUrl})`);
+
         let { status, ok, contentType, text } = await fetchAndParse(feedUrl, fixHtml);
         console.log(`>>> ${sourceName} HTTP ${status} content-type: ${contentType}`);
 
         if (!ok) throw new Error(`HTTP ${status}`);
+
+        // HTML fallback
         if (!looksLikeXmlFeed(text) || /text\/html|application\/xhtml\+xml/i.test(contentType)) {
           console.warn(`HTML fallback aktiválva: ${sourceName}`);
 
           const rssLink = extractRssFromHtml(text);
           if (rssLink) {
             const base = new URL(feedUrl);
-            const resolved = rssLink.startsWith("http") ? rssLink : new URL(rssLink, base).toString();
+            const resolved = rssLink.startsWith("http")
+              ? rssLink
+              : new URL(rssLink, base).toString();
 
             console.log(`>>> ${sourceName} fallback RSS URL: ${resolved}`);
 
@@ -153,16 +180,23 @@ export async function GET() {
           if (rows.length === 0) {
             const sourceId = forcedSourceId ?? detectSourceId(link);
             if (sourceId === null) continue;
-const finalTitle = (item.title && item.title.trim()) || titleFromLink(link);
+
+            const finalTitle =
+              (item.title && item.title.trim()) || titleFromLink(link);
+
             await connection.execute(
-              `INSERT INTO articles (title, url_canonical, content_text, published_at, language, source_id, source) VALUES (?, ?, ?, NOW(), ?, ?, ?)`,
+              `INSERT INTO articles (title, url_canonical, content_text, published_at, language, source_id, source)
+               VALUES (?, ?, ?, NOW(), ?, ?, ?)`,
               [
                 finalTitle,
                 link,
-                item["content:encoded"] || item.content || item.contentSnippet || "",
+                item["content:encoded"] ||
+                  item.content ||
+                  item.contentSnippet ||
+                  "",
                 "hu",
                 sourceId,
-                sourceName
+                sourceName,
               ]
             );
 
@@ -172,6 +206,11 @@ const finalTitle = (item.title && item.title.trim()) || titleFromLink(link);
         }
       } catch (err) {
         console.error(`⚠️ ${sourceName} feed hiba:`, err);
+        logError(sourceName, err);
+      } finally {
+        console.log(
+          `>>> ${sourceName} feldolgozási idő: ${Date.now() - start}ms`
+        );
       }
     }
 
@@ -189,6 +228,7 @@ const finalTitle = (item.title && item.title.trim()) || titleFromLink(link);
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Ismeretlen hiba történt";
     console.error("API /fetch-feed hiba:", message);
+    logError("GLOBAL", message);
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
