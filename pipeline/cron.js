@@ -27,9 +27,9 @@ const CYAN = "\x1b[36m";
 //  KONFIGURÁCIÓ
 // ─────────────────────────────────────────────
 
-const BATCH_SIZE = 3;
+const BATCH_SIZE = 1;
 const LOOP_DELAY_MS = 60000;
-const CONCURRENCY = 3;
+const CONCURRENCY = 1;
 const ARTICLE_TIMEOUT_MS = 600000;
 const MAX_RETRIES = 3;
 
