@@ -246,6 +246,7 @@ async function markStatus(ids, status) {
 // ─────────────────────────────────────────────
 
 async function processArticlePipeline(article) {
+  await sleep(2000);
   const articleId = article.id;
 
   // round‑robin instance választás
