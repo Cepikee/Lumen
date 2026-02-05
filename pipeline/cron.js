@@ -149,6 +149,8 @@ async function callOllama(baseUrl, prompt, numPredict = 512, timeoutMs = 180000)
     clearTimeout(t);
   }
 }
+global.callOllama = callOllama;   // <-- EZT TEDD IDE
+
 
 // ─────────────────────────────────────────────
 //  AI WRAPPEREK (MÓDOSÍTVA: baseUrl továbbadása)
