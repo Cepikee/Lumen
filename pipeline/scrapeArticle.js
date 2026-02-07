@@ -1,30 +1,22 @@
 // scrapeArticle.js
 const mysql = require("mysql2/promise");
-const { JSDOM } = require("jsdom");
-const { Readability } = require("@mozilla/readability");
+const { cleanArticle } = require("./cleanArticle");
 
 // Egyszerű HTTP letöltés
 async function fetchHtml(url) {
   const res = await fetch(url, {
     headers: {
       "User-Agent": "Mozilla/5.0 (compatible; UtomScraper/1.0)",
-      Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
     },
-    redirect: "follow",
+    redirect: "follow"
   });
+
   if (!res.ok) {
     throw new Error(`HTTP ${res.status} ${res.statusText}`);
   }
-  return await res.text();
-}
 
-// HTML → tiszta szöveg (Readability)
-function extractArticleText(html, url) {
-  const dom = new JSDOM(html, { url });
-  const reader = new Readability(dom.window.document);
-  const article = reader.parse();
-  const text = article?.textContent?.trim() || "";
-  return text;
+  return await res.text();
 }
 
 async function scrapeArticle(articleId, url) {
@@ -34,15 +26,22 @@ async function scrapeArticle(articleId, url) {
     host: "localhost",
     user: "root",
     password: "jelszo",
-    database: "projekt2025",
+    database: "projekt2025"
   });
 
   try {
     const html = await fetchHtml(url);
-    const text = extractArticleText(html, url);
 
-    // 🔥 ÚJ LOGIKA: ha túl rövid → FAILED státusz, nincs retry
-    if (!text || text.length < 40) {
+    // 🔥 ÚJ: tisztított, nyers cikk szöveg (reklámok, képek, kapcsolódók nélkül)
+    const text = cleanArticle(html, url);
+
+    // Biztonsági log
+    console.log(
+      `[SCRAPER] ℹ️ Tisztított szöveg hossza: len=${text?.length || 0} articleId=${articleId}`
+    );
+
+    // 🔥 Ha túl rövid → FAILED, nincs retry
+    if (!text || text.length < 200) {
       console.warn(
         `[SCRAPER] ⚠️ Túl rövid szöveg (len=${text.length}). FAILED státusz beállítva. articleId=${articleId}`
       );
@@ -52,10 +51,10 @@ async function scrapeArticle(articleId, url) {
         [articleId]
       );
 
-      return { ok: true, skipped: true }; // <-- NEM hiba → pipeline nem retry-ol
+      return { ok: true, skipped: true };
     }
 
-    // 🔥 Normál eset: elég hosszú → mentjük
+    // 🔥 Normál eset: elég hosszú → mentjük, vissza pending-re
     await conn.execute(
       `UPDATE articles SET content_text = ?, status = 'pending' WHERE id = ?`,
       [text, articleId]
@@ -65,7 +64,6 @@ async function scrapeArticle(articleId, url) {
       `[SCRAPER] ✅ Sikeres scraping. len=${text.length} articleId=${articleId}`
     );
     return { ok: true, text };
-
   } catch (err) {
     console.error(
       `[SCRAPER] ❌ Hiba scraping közben. articleId=${articleId} - ${err.message}`
