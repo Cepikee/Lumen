@@ -141,14 +141,19 @@ global.callOllama = callOllama;
 // ─────────────────────────────────────────────
 
 async function runOllamaKeywords(text) {
-  const raw = await callOllama(
-`Ez a szöveg:
-
+  const prompt = `
+Szöveg:
 ${text}
 
-Most adj vissza pontosan 6–10 magyar kulcsszót...`,
-100
-  );
+Feladat:
+Adj vissza pontosan 6–10 magyar kulcsszót.
+
+Korlátozások:
+❗ Csak a kulcsszavakat add vissza, vesszővel elválasztva.
+❗ Ne írj bevezetőt, magyarázatot, sorszámot, címkét, semmi mást.
+  `.trim();
+
+  const raw = await callOllama(prompt, 100);
 
   return raw
     .split(/[,\n]/)
@@ -156,6 +161,7 @@ Most adj vissza pontosan 6–10 magyar kulcsszót...`,
     .filter(k => k.length >= 2)
     .slice(0, 10);
 }
+
 
 async function runOllamaTitle(url, shortSummary, longSummary) {
   const prompt = `
