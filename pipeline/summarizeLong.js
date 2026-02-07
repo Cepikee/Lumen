@@ -1,4 +1,4 @@
-// summarizeLong.js — 6-instance kompatibilis, modern verzió
+// summarizeLong.js — stabil, optimalizált verzió
 const mysql = require("mysql2/promise");
 
 // --- Validáció ---
@@ -22,7 +22,7 @@ function isValidDetailed(text) {
 }
 
 // --- Hosszú elemzés ---
-async function summarizeLong(articleId, shortSummary, baseUrl) {
+async function summarizeLong(articleId, shortSummary) {
   const conn = await mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -37,38 +37,51 @@ async function summarizeLong(articleId, shortSummary, baseUrl) {
       [articleId]
     );
 
-    const contentText = rows?.[0]?.content_text ?? "";
+    let contentText = rows?.[0]?.content_text ?? "";
 
     if (!contentText || contentText.trim().length < 50) {
       console.error(`[LONG] ❌ Üres vagy túl rövid content_text! articleId=${articleId}`);
       return { ok: false, error: "Üres content_text" };
     }
 
-    // 2) Prompt
-    const prompt = `Írj részletes elemzést (3–6 bekezdés), plágiummentesen, kizárólag magyar nyelven:
+    // 🔥 2) Rövidítés — max 2000 karakter
+    contentText = contentText
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 2000);
 
+    // 🔥 3) Optimalizált prompt — shortSummary + rövidített content
+    const prompt = `
+Készíts részletes, 3–5 bekezdéses elemzést magyar nyelven, plágiummentesen.
+
+Rövid összefoglaló:
+${shortSummary}
+
+A cikk részletei:
 ${contentText}
-`.trim();
+    `.trim();
 
-    // 3) AI hívás (ugyanúgy, mint a short.js-ben)
-    let detailed = await global.callOllama(prompt, 1000);
+    // 🔥 4) AI hívás — max 300 token (nem 1000!)
+    let detailed = await global.callOllama(prompt, 300);
 
-    // 4) Validálás + újrapróbálás
+    // 🔥 5) Validáció — csak 1 újrapróbálás
     if (!isValidDetailed(detailed)) {
       console.warn(`[LONG] ⚠️ Első elemzés érvénytelen, újrapróbálás...`);
-      detailed = await global.callOllama(prompt, 1000);
+      detailed = await global.callOllama(prompt, 300);
     }
 
-    // 5) Ha még mindig rossz → fallback
+    // 🔥 6) Fallback — ha még mindig rossz
     if (!isValidDetailed(detailed)) {
       detailed = `
-A cikk tartalma rövid vagy hiányos, ezért az elemzés csak alapvető megállapításokat tartalmaz.
-A szöveg fő témája: ${shortSummary}.
-További részletek a cikkben nem szerepelnek, ezért az elemzés korlátozott.
+A cikk rövid összefoglalója alapján az alábbi elemzés készíthető:
+
+${shortSummary}
+
+A részletes tartalom hiánya miatt az elemzés korlátozott.
       `.trim();
     }
 
-    // 6) Mentés
+    // 7) Mentés
     await conn.execute(
       `
       INSERT INTO summaries (article_id, detailed_content)
