@@ -238,26 +238,39 @@ async function processArticlePipeline(article) {
   let source = "";
 
   // 0) Scraping fallback
-  if (!article.content_text || article.content_text.trim().length < 400) {
-    console.log(`[SCRAPER] ℹ️ Túl rövid content_text, scraping...`);
+  // 0) Scraping fallback
+if (!article.content_text || article.content_text.trim().length < 400) {
+  console.log(`[SCRAPER] ℹ️ Túl rövid content_text, scraping...`);
 
-    const scrapeRes = await scrapeArticle(articleId, article.url_canonical || "");
+  const scrapeRes = await scrapeArticle(articleId, article.url_canonical || "");
 
-    if (scrapeRes.skipped) {
+  if (scrapeRes.skipped) {
+    await pool.execute(`UPDATE articles SET status = 'failed' WHERE id = ?`, [articleId]);
+    return;
+  }
+
+  if (!scrapeRes.ok) {
+    if (scrapeRes.error?.includes("404")) {
       await pool.execute(`UPDATE articles SET status = 'failed' WHERE id = ?`, [articleId]);
       return;
     }
-
-    if (!scrapeRes.ok) {
-      if (scrapeRes.error?.includes("404")) {
-        await pool.execute(`UPDATE articles SET status = 'failed' WHERE id = ?`, [articleId]);
-        return;
-      }
-      throw new Error(`Scraping sikertelen: ${scrapeRes.error}`);
-    }
-
-    article.content_text = scrapeRes.text;
+    throw new Error(`Scraping sikertelen: ${scrapeRes.error}`);
   }
+
+  article.content_text = scrapeRes.text;
+
+  // 🔥 ÚJ: szöveg rövidítése azonnal scraping után
+  article.content_text = article.content_text
+    .replace(/Kapcsolódó cikkek[\s\S]*/i, "")   // kapcsolódó cikkek törlése
+    .replace(/<[^>]+>/g, "")                   // HTML törlése
+    .replace(/Hirdetés[\s\S]*?$/gi, "")        // hirdetés blokkok törlése
+    .replace(/Borítókép:[\s\S]*?$/gi, "")      // borítókép leírás törlése
+    .replace(/Címlapkép:[\s\S]*?$/gi, "")      // címlapkép leírás törlése
+    .replace(/\s+/g, " ")                      // whitespace normalizálás
+    .trim()
+    .slice(0, 3000);                            // max 3000 karakter
+}
+
 
   // 1) Rövid összefoglaló — JAVÍTVA!
   await runWithRetries("[SHORT] ✂️ Rövid összefoglaló", async () => {
