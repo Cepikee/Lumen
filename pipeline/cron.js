@@ -394,13 +394,31 @@ async function processBatch(batch) {
         ARTICLE_TIMEOUT_MS,
         `processArticlePipeline(${article.id})`
       );
+
+      // Cikk kész
       await markStatus([article.id], "done");
+
+      // ─────────────────────────────────────────────
+      //  ÚJ: IDŐALAPÚ FEED FRISSÍTÉS MINDEN CIKK UTÁN
+      // ─────────────────────────────────────────────
+      try {
+        console.log("🔄 Új cikkek keresése a feedben...");
+        const feedRes = await fetch("http://127.0.0.1:3000/api/fetch-feed?limit=1");
+        const feedData = await feedRes.json();
+        console.log("📰 Feed frissítés eredménye:", feedData);
+        cronLog(`Időalapú feed frissítés: inserted=${feedData.inserted}`);
+      } catch (err) {
+        console.error("❌ Feed frissítés hiba:", err);
+        cronLog(`Feed frissítés hiba: ${err.message}`);
+      }
+
     } catch (err) {
       console.error(`❌ ${RED}Hiba (${article.id}): ${err.message}${RESET}`);
       await markStatus([article.id], "pending");
     }
   }
 }
+
 
 // ─────────────────────────────────────────────
 //  FŐ CIKLUS — változatlan
