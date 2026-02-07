@@ -163,22 +163,35 @@ Korlátozások:
 }
 
 
-async function runOllamaTitle(url, shortSummary, longSummary) {
+async function runOllamaTitle(shortSummary) {
   const prompt = `
-Írj egy rövid, újságírói stílusú MAGYAR címet...
-URL: ${url}
+Írj egy rövid, újságírói stílusú magyar címet a cikkhez.
+
+❗ Csak a címet add vissza.
+❗ Ne írj bevezetőt, magyarázatot, kommentet, angol szöveget, formázást vagy meta‑megjegyzést.
+❗ Ne használj csillagokat, markdown-t, nagybetűs kiemelést vagy zárójeles megjegyzést.
+❗ A kimenetben kizárólag a cím szerepeljen.
 
 Rövid összefoglaló:
 ${shortSummary}
+  `.trim();
 
-Részletes elemzés:
-${longSummary}
+  let title = await callOllama(prompt, 60);
 
-Kimenet (csak a cím):
-`;
+  // --- TISZTÍTÁS ---
+  title = title
+    .replace(/\*\*/g, "")        // markdown csillagok törlése
+    .replace(/#+/g, "")          // markdown heading törlése
+    .replace(/\(.+?\)/g, "")     // zárójeles meta-megjegyzések törlése
+    .replace(/\[.+?\]/g, "")     // szögletes meta-megjegyzések törlése
+    .replace(/[_*~`]/g, "")      // egyéb markdown jelek törlése
+    .replace(/\s+/g, " ")        // dupla whitespace-ek eltüntetése
+    .trim();
 
-  return await callOllama(prompt, 60);
+  return title;
 }
+
+
 
 // ─────────────────────────────────────────────
 //  PENDING LEKÉRÉS
