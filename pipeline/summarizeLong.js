@@ -50,7 +50,7 @@ async function summarizeLong(articleId, shortSummary, baseUrl) {
 ${contentText}
 `.trim();
 
-    // 3) AI hívás (már a cron.js által adott instance-re)
+    // 3) AI hívás (ugyanúgy, mint a short.js-ben)
     let detailed = await global.callOllama(prompt, 1000);
 
     // 4) Validálás + újrapróbálás
