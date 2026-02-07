@@ -433,8 +433,8 @@ async function processBatch(batch) {
 }
 
 
-// ─────────────────────────────────────────────
-//  FŐ CIKLUS — változatlan
+/// ─────────────────────────────────────────────
+//  FŐ CIKLUS — IDŐALAPÚ FEED FRISSÍTÉSSEL
 // ─────────────────────────────────────────────
 
 (async () => {
@@ -442,24 +442,26 @@ async function processBatch(batch) {
     try {
       console.log(`🚀 Feed begyűjtés: ${new Date().toLocaleString("hu-HU")}`);
 
+      // 🔥 MINDIG fut a fetch-feed, pendingtől függetlenül
+      try {
+        console.log("🔄 Feed frissítés indul (limit=1)...");
+        const feedRes = await fetch("http://127.0.0.1:3000/api/fetch-feed?limit=1");
+        const feedData = await feedRes.json();
+        console.log("📰 Feed eredmény:", feedData);
+        cronLog(`Feed fetch eredmény: inserted=${feedData.inserted}`);
+      } catch (feedErr) {
+        console.error(`❌ ${RED}Hiba fetch-feed közben:${RESET}`, feedErr);
+        cronLog(`Feed fetch hiba: ${feedErr.message}`);
+      }
+
+      // Pending cikkek lekérése
       const [pendingCountRows] = await pool.execute(
         `SELECT COUNT(*) AS c FROM articles WHERE status = 'pending'`
       );
       const pendingCount = pendingCountRows[0].c;
+
       console.log(`📌 Pending cikkek száma: ${pendingCount}`);
       cronLog(`Pending cikkek száma: ${pendingCount}`);
-
-      if (pendingCount === 0) {
-        console.log("📰 Nincs pending cikk → feed frissítés indul...");
-        try {
-          const feedRes = await fetch("http://127.0.0.1:3000/api/fetch-feed");
-          const feedData = await feedRes.json();
-          console.log("📰 Feed eredmény:", feedData);
-          cronLog(`Feed fetch eredmény: inserted=${feedData.inserted}`);
-        } catch (feedErr) {
-          console.error(`❌ ${RED}Hiba fetch-feed közben:${RESET}`, feedErr);
-        }
-      }
 
       const batch = await fetchPendingArticles(BATCH_SIZE);
 
@@ -471,7 +473,9 @@ async function processBatch(batch) {
 
       console.log(`🆕 Új batch: ${batch.length} db cikk`);
       cronLog(`Batch indul: ${batch.length} cikk`);
+
       await processBatch(batch);
+
       console.log("📊 Batch kész!");
     } catch (err) {
       console.error(`❌ ${RED}Hiba a fő ciklusban:${RESET}`, err);
@@ -480,3 +484,4 @@ async function processBatch(batch) {
     }
   }
 })();
+
