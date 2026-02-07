@@ -21,7 +21,7 @@ function isValidCategory(cat) {
 }
 
 // --- Egy cikk kategorizálása ---
-async function categorizeArticle(articleId, baseUrl) {
+async function categorizeArticle(articleId) {
   const conn = await mysql.createConnection({
     host: "localhost",
     user: "root",
