@@ -1,4 +1,4 @@
-// short.js — 6-instance kompatibilis, modern verzió
+// short.js — stabil, 1-instance kompatibilis verzió
 const mysql = require("mysql2/promise");
 
 // --- Validáció ---
@@ -52,13 +52,13 @@ Csak magyarul válaszolj:
 
 ${contentText}`.trim();
 
-    // 3) AI hívás (már a cron.js által adott instance-re)
-    let summary = await global.callOllama(baseUrl, prompt);
+    // 3) AI hívás — JAVÍTVA!
+    let summary = await global.callOllama(prompt, 300);
 
     // 4) Validálás + újrapróbálás
     if (!isValidSummary(summary)) {
       console.warn(`[SHORT] ⚠️ Érvénytelen összefoglaló, újrapróbálás...`);
-      summary = await global.callOllama(baseUrl, prompt);
+      summary = await global.callOllama(prompt, 300);
     }
 
     if (!isValidSummary(summary)) {

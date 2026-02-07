@@ -1,4 +1,4 @@
-// fillCategory.js — 6-instance kompatibilis, modern verzió
+// fillCategory.js — stabil, 1-instance kompatibilis verzió
 const mysql = require("mysql2/promise");
 
 // --- Valid kategóriák ---
@@ -53,12 +53,12 @@ Feladat:
 Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kategória nevét írd ki.
 `.trim();
 
-    // AI hívás (már a cron.js által adott instance-re)
-    let category = await global.callOllama(baseUrl, prompt);
+    // AI hívás — JAVÍTVA!
+    let category = await global.callOllama(prompt, 100);
 
     if (!isValidCategory(category)) {
       console.warn(`[CAT] ⚠️ Érvénytelen kategória: "${category}". Újrapróbálás...`);
-      category = await global.callOllama(baseUrl, prompt);
+      category = await global.callOllama(prompt, 100);
     }
 
     if (!isValidCategory(category)) {

@@ -240,7 +240,7 @@ async function processArticlePipeline(article) {
     article.content_text = scrapeRes.text;
   }
 
-  // 1) Rövid összefoglaló
+  // 1) Rövid összefoglaló — JAVÍTVA!
   await runWithRetries("[SHORT] ✂️ Rövid összefoglaló", async () => {
     const res = await summarizeShort(articleId, OLLAMA_URL);
     if (!res?.ok) throw new Error(res?.error || "summarizeShort sikertelen");
@@ -248,7 +248,7 @@ async function processArticlePipeline(article) {
     return res;
   });
 
-  // 2) Hosszú elemzés
+  // 2) Hosszú elemzés — JAVÍTVA!
   await runWithRetries("[LONG] 📄 Hosszú elemzés", async () => {
     const res = await summarizeLong(articleId, shortSummary, OLLAMA_URL);
     if (!res?.ok) throw new Error(res?.error || "summarizeLong sikertelen");

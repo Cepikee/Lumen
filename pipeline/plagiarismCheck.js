@@ -1,4 +1,4 @@
-// plagiarismCheck.js — 6-instance kompatibilis, modern verzió
+// plagiarismCheck.js — stabil, 1-instance kompatibilis verzió
 const mysql = require("mysql2/promise");
 
 async function plagiarismCheck(articleId, shortSummary, baseUrl) {
@@ -13,8 +13,8 @@ Szöveg:
 ${shortSummary}
     `.trim();
 
-    // AI hívás (már a cron.js által adott instance-re)
-    const raw = await global.callOllama(baseUrl, prompt, 128);
+    // AI hívás — JAVÍTVA!
+    const raw = await global.callOllama(prompt, 128);
 
     // --- plágium pontszám kinyerése ---
     const score = parseFloat(raw);
