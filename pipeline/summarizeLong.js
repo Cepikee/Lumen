@@ -1,4 +1,4 @@
-// summarizeLong.js — stabil, optimalizált verzió
+// summarizeLong.js — stabil, optimalizált, helyes prompt struktúrával
 const mysql = require("mysql2/promise");
 
 // --- Validáció ---
@@ -50,18 +50,28 @@ async function summarizeLong(articleId, shortSummary) {
       .trim()
       .slice(0, 2000);
 
-    // 🔥 3) Optimalizált prompt — shortSummary + rövidített content
+    // 🔥 3) TÖKÉLETES PROMPT — shortSummary + contentText ELŐL
     const prompt = `
-Készíts részletes, 3–5 bekezdéses elemzést magyar nyelven, plágiummentesen.
-
 Rövid összefoglaló:
 ${shortSummary}
 
-A cikk részletei:
+Cikk szövege:
 ${contentText}
+
+Feladat:
+Készíts részletes, 3–5 bekezdéses elemzést magyar nyelven, a fenti tartalom alapján.
+
+Fontos szabályok:
+- Ne ismételd meg szó szerint a rövid összefoglalót.
+- Ne írj új információt, csak azt használd, ami a cikkben szerepel.
+- Ne írj újságcikket, csak elemző összefoglalót.
+- Ne ismételd önmagad.
+- Ne sorold fel többször ugyanazt.
+- Ne írj listát, csak folyamatos szöveget.
+- Ne írj bevezetőt vagy lezárást.
     `.trim();
 
-    // 🔥 4) AI hívás — max 300 token (nem 1000!)
+    // 🔥 4) AI hívás — max 300 token
     let detailed = await global.callOllama(prompt, 300);
 
     // 🔥 5) Validáció — csak 1 újrapróbálás
