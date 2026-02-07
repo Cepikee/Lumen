@@ -51,12 +51,12 @@ ${contentText}
 `.trim();
 
     // 3) AI hívás (már a cron.js által adott instance-re)
-    let detailed = await global.callOllama(baseUrl, prompt, 1000);
+    let detailed = await global.callOllama(prompt, 1000);
 
     // 4) Validálás + újrapróbálás
     if (!isValidDetailed(detailed)) {
       console.warn(`[LONG] ⚠️ Első elemzés érvénytelen, újrapróbálás...`);
-      detailed = await global.callOllama(baseUrl, prompt, 1000);
+      detailed = await global.callOllama(prompt, 1000);
     }
 
     // 5) Ha még mindig rossz → fallback
