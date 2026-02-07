@@ -279,6 +279,12 @@ if (!article.content_text || article.content_text.trim().length < 400) {
     shortSummary = res.summary || "";
     return res;
   });
+  // 🔥 Rövid összefoglaló mentése a DB-be
+await pool.execute(
+  `UPDATE articles SET short_summary = ? WHERE id = ?`,
+  [shortSummary, articleId]
+);
+
 
   // 2) Hosszú elemzés — JAVÍTVA!
   await runWithRetries("[LONG] 📄 Hosszú elemzés", async () => {
@@ -287,6 +293,12 @@ if (!article.content_text || article.content_text.trim().length < 400) {
     longSummary = res.detailed || "";
     return res;
   });
+  // 🔥 Hosszú összefoglaló mentése a DB-be
+await pool.execute(
+  `UPDATE articles SET long_summary = ? WHERE id = ?`,
+  [longSummary, articleId]
+);
+
 
   // 3) Plágium — AI nélküli verzió
 await runWithRetries("[PLAG] 🔍 Plágium", async () => {
