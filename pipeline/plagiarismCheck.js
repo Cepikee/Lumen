@@ -1,58 +1,78 @@
-// plagiarismCheck.js — stabil, 1-instance kompatibilis verzió
+// plagiarismCheck.js — AI nélküli, stabil, gyors verzió
 const mysql = require("mysql2/promise");
 
-async function plagiarismCheck(articleId, shortSummary, baseUrl) {
+// --- Normalizálás ---
+function normalize(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-záéíóöőúüű0-9 ]/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+// --- Tokenizálás ---
+function tokenize(text) {
+  return new Set(normalize(text).split(" "));
+}
+
+// --- Jaccard similarity ---
+function jaccard(a, b) {
+  const setA = tokenize(a);
+  const setB = tokenize(b);
+
+  const intersection = new Set([...setA].filter(x => setB.has(x)));
+  const union = new Set([...setA, ...setB]);
+
+  return union.size === 0 ? 0 : intersection.size / union.size;
+}
+
+// --- Plágium ellenőrzés ---
+async function plagiarismCheck(articleId, shortSummary, longSummary) {
+  const conn = await mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "jelszo",
+    database: "projekt2025",
+  });
+
   try {
-    const prompt = `
-Ellenőrizd a következő szöveget plágium szempontból.
-Adj vissza egyetlen számot 0 és 1 között, semmi mást.
-Ha szeretnéd, javítsd a szöveget is, és írd a végére így:
-[JAVÍTOTT]: <új szöveg>
+    // 1) Eredeti cikk lekérése
+    const [rows] = await conn.execute(
+      "SELECT content_text FROM articles WHERE id = ?",
+      [articleId]
+    );
 
-Szöveg:
-${shortSummary}
-    `.trim();
+    const original = rows?.[0]?.content_text ?? "";
 
-    // AI hívás — JAVÍTVA!
-    const raw = await global.callOllama(prompt, 128);
-
-    // --- plágium pontszám kinyerése ---
-    const score = parseFloat(raw);
-    const finalScore = isNaN(score) ? 0 : score;
-
-    // --- javított szöveg kinyerése ---
-    let improved = shortSummary;
-    const marker = "[JAVÍTOTT]:";
-    if (raw.includes(marker)) {
-      improved = raw.split(marker)[1].trim();
+    if (!original || original.trim().length < 50) {
+      return { ok: false, error: "Üres eredeti szöveg" };
     }
 
-    // --- adatbázis frissítés ---
-    const conn = await mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "jelszo",
-      database: "projekt2025",
-    });
+    // 2) Similarity számítás
+    const scoreShort = jaccard(original, shortSummary);
+    const scoreLong = jaccard(original, longSummary);
 
+    // 3) A kettő közül a magasabb a plágiumScore
+    const plagiarismScore = Math.max(scoreShort, scoreLong);
+
+    // 4) Mentés
     await conn.execute(
       `
       UPDATE summaries
-      SET plagiarism_score = ?, content = ?
+      SET plagiarism_score = ?
       WHERE article_id = ?
       `,
-      [finalScore, improved, articleId]
+      [plagiarismScore, articleId]
     );
-
-    await conn.end();
 
     return {
       ok: true,
-      plagiarismScore: finalScore,
-      summaryShort: improved,
+      plagiarismScore,
     };
   } catch (err) {
     return { ok: false, error: err?.message ?? String(err) };
+  } finally {
+    await conn.end();
   }
 }
 

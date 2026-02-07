@@ -288,14 +288,18 @@ if (!article.content_text || article.content_text.trim().length < 400) {
     return res;
   });
 
-  // 3) Plágium
-  await runWithRetries("[PLAG] 🔍 Plágium", async () => {
-    const res = await plagiarismCheck(articleId, shortSummary, OLLAMA_URL);
-    if (!res?.ok) throw new Error(res?.error || "plagiarismCheck sikertelen");
-    plagiarismScore = res.plagiarismScore ?? 0;
-    shortSummary = res.summaryShort || shortSummary;
-    return res;
-  });
+  // 3) Plágium — AI nélküli verzió
+await runWithRetries("[PLAG] 🔍 Plágium", async () => {
+  const res = await plagiarismCheck(articleId, shortSummary, longSummary);
+  if (!res?.ok) throw new Error(res?.error || "plagiarismCheck sikertelen");
+
+  plagiarismScore = res.plagiarismScore ?? 0;
+
+  console.log(`🧪 PlágiumScore: ${plagiarismScore.toFixed(2)}`);
+
+  return res;
+});
+
   // 3/B) Kategorizálás
 await runWithRetries("[CAT] 🏷️ Kategorizálás", async () => {
   const res = await categorizeArticle(articleId);
