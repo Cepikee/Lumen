@@ -283,6 +283,14 @@ async function processArticlePipeline(article) {
     shortSummary = res.summaryShort || shortSummary;
     return res;
   });
+  // 3/B) Kategorizálás
+await runWithRetries("[CAT] 🏷️ Kategorizálás", async () => {
+  const res = await categorizeArticle(articleId);
+  if (!res?.ok) throw new Error("Kategorizálás sikertelen");
+  article.category = res.category;
+  return res;
+});
+
 
   // 4) Cím generálás
   let title = "";
