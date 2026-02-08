@@ -167,7 +167,8 @@ export default function InsightsOverviewChart({
             return original.filter((item: any) => {
               const ds = chart.data.datasets[item.datasetIndex];
               if (!ds) return false;
-
+               // 🚫 HÍR KATEGÓRIA KIZÁRÁSA
+              if (ds.label === "hír" || ds.label === "hir") return false;
               // normál kategóriák
               if (!ds._isForecast) return true;
 
