@@ -99,35 +99,94 @@ export default function PremiumPage() {
         .premium-card {
           background: var(--bs-body-bg);
           border: 1px solid rgba(0,0,0,0.08);
-          border-radius: 20px;
-          padding: 32px 40px;
-          width: 260px;
+          border-radius: 24px;
+          padding: 36px 42px;
+          width: 280px;
           text-align: center;
-          box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+          box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+          transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
         .premium-card:hover {
-          transform: translateY(-4px);
+          transform: translateY(-6px);
           border-color: #0d6efd;
-          box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+          box-shadow: 0 12px 28px rgba(0,0,0,0.12);
         }
 
         .premium-card.highlight {
-          border-color: rgba(0,0,0,0.08); /* kérésed szerint */
+          border-color: rgba(0,0,0,0.08);
+          position: relative;
         }
 
         .badge-popular {
           position: absolute;
-          top: -12px;
+          top: -14px;
           left: 50%;
           transform: translateX(-50%);
           background: #0d6efd;
           color: white;
-          padding: 4px 12px;
-          border-radius: 12px;
+          padding: 5px 14px;
+          border-radius: 14px;
           font-size: 0.75rem;
           font-weight: 600;
+        }
+
+        .price {
+          font-size: 2.2rem;
+          font-weight: 700;
+          margin-bottom: 6px;
+        }
+
+        .price span {
+          font-size: 1rem;
+          opacity: 0.7;
+        }
+
+        .desc {
+          color: var(--bs-secondary-color);
+          margin-bottom: 24px;
+        }
+
+        .premium-btn {
+          padding: 12px 26px;
+          border-radius: 9999px;
+          background: #0d6efd;
+          color: white;
+          border: none;
+          font-weight: 600;
+          transition: background 0.2s ease;
+        }
+
+        .premium-btn:hover {
+          background: #0b5ed7;
+        }
+
+        .premium-feature-card {
+          background: var(--bs-body-bg);
+          border: 1px solid rgba(0,0,0,0.08);
+          border-radius: 16px;
+          padding: 20px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+          transition: transform 0.2s ease;
+        }
+
+        .premium-feature-card:hover {
+          transform: translateY(-3px);
+        }
+
+        .premium-btn-lg {
+          padding: 14px 32px;
+          border-radius: 9999px;
+          background: #0d6efd;
+          color: white;
+          border: none;
+          font-size: 1.1rem;
+          font-weight: 600;
+          transition: background 0.2s ease;
+        }
+
+        .premium-btn-lg:hover {
+          background: #0b5ed7;
         }
       `}</style>
 
