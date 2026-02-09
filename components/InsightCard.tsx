@@ -14,7 +14,7 @@ type InsightCardProps = {
   dominantSource: string;
   timeAgo: string;
   href?: string;
-  ringSources?: { name: string; percent: number }[]; // ÚJ
+  ringSources?: { name: string; percent: number }[];
   sparkline?: number[];
 };
 
@@ -25,14 +25,13 @@ export default function InsightCard({
   dominantSource,
   timeAgo,
   href,
-  ringSources = [], // ÚJ
+  ringSources = [],
   sparkline,
 }: InsightCardProps) {
   const linkHref = href || "#";
   const disabled = !href;
 
   const { ref, inView } = useInView(0.12);
-
   const spark = useMemo(() => sparkline ?? [], [sparkline]);
 
   return (
@@ -86,13 +85,13 @@ export default function InsightCard({
             {href ? (
               <Link
                 href={linkHref}
-                className="btn btn-sm btn-outline-light"
+                className="insight-open-btn"
                 aria-label={`Megnyit ${title} kategória`}
               >
                 Megnyit
               </Link>
             ) : (
-              <button className="btn btn-sm btn-outline-light" disabled aria-disabled="true">
+              <button className="insight-open-btn" disabled aria-disabled="true">
                 Nincs link
               </button>
             )}

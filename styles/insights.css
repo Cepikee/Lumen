@@ -45,3 +45,52 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
+/* ─────────────────────────────────────────────
+   INSIGHT CARD – világos/sötét mód fix
+   ───────────────────────────────────────────── */
+
+.insight-card {
+  background: var(--bs-body-bg);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 16px;
+  padding: 16px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+/* Cím */
+.insight-card .insight-title {
+  color: var(--bs-body-color);
+  font-weight: 600;
+}
+
+/* Meta szövegek (források, dátum) */
+.insight-card .text-secondary {
+  color: var(--bs-secondary-color) !important;
+}
+
+/* Fluent-style "Megnyit" gomb */
+.insight-open-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: var(--bs-body-bg);
+  border: 1px solid rgba(0,0,0,0.15);
+  color: var(--bs-body-color);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.insight-open-btn:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+/* Dark mode */
+[data-theme="dark"] .insight-open-btn {
+  background: #222;
+  border-color: #444;
+  color: #eee;
+}
+
+[data-theme="dark"] .insight-open-btn:hover {
+  background: #333;
+}
