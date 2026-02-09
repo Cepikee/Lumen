@@ -173,6 +173,13 @@ export default function PremiumPage() {
         .premium-feature-card:hover {
           transform: translateY(-3px);
         }
+        .premium-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, rgba(0,153,255,0.12), rgba(0,204,153,0.12));
+  background-attachment: fixed;
+}
+
 
         .premium-btn-lg {
           padding: 14px 32px;
