@@ -9,11 +9,11 @@ export default function InsightFilters({ active, onChange }: InsightFiltersProps
   const filters = ["Legfrissebb", "Növekvő", "Legtöbb forrás"];
 
   return (
-    <div className="insight-filters">
+    <div className="insights-filter-group">
       {filters.map((f) => (
         <button
           key={f}
-          className={`insight-filter-item ${active === f ? "active" : ""}`}
+          className={`insights-filter-btn ${active === f ? "active" : ""}`}
           onClick={() => onChange(f)}
         >
           {f}
