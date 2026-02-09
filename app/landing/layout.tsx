@@ -1,10 +1,9 @@
-// app/premium/layout.tsx
+// app/landing/layout.tsx
 import React from "react";
-import "../premium/premium.css"; // <-- EZ FONTOS
 
-export default function PremiumLayout({ children }: { children: React.ReactNode }) {
+export default function LandingLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="premium-wrapper">
+    <div className="landing-page">
       {children}
     </div>
   );
