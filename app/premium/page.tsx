@@ -91,11 +91,9 @@ export default function PremiumPage() {
       {/* CSS */}
       <style jsx>{`
         .premium-page {
+          min-height: 100vh;
           background: linear-gradient(135deg, rgba(0,153,255,0.12), rgba(0,204,153,0.12));
-        }
-
-        .premium-hero {
-          padding-bottom: 80px;
+          background-attachment: fixed;
         }
 
         .premium-card {
@@ -116,7 +114,7 @@ export default function PremiumPage() {
         }
 
         .premium-card.highlight {
-          border-color: #0d6efd;
+          border-color: rgba(0,0,0,0.08); /* kérésed szerint */
         }
 
         .badge-popular {
@@ -130,63 +128,6 @@ export default function PremiumPage() {
           border-radius: 12px;
           font-size: 0.75rem;
           font-weight: 600;
-        }
-
-        .price {
-          font-size: 2rem;
-          font-weight: 700;
-        }
-
-        .price span {
-          font-size: 1rem;
-          opacity: 0.7;
-        }
-
-        .desc {
-          color: var(--bs-secondary-color);
-          margin-bottom: 20px;
-        }
-
-        .premium-btn {
-          padding: 10px 22px;
-          border-radius: 9999px;
-          background: #0d6efd;
-          color: white;
-          border: none;
-          font-weight: 600;
-          transition: background 0.2s ease;
-        }
-
-        .premium-btn:hover {
-          background: #0b5ed7;
-        }
-
-        .premium-feature-card {
-          background: var(--bs-body-bg);
-          border: 1px solid rgba(0,0,0,0.08);
-          border-radius: 16px;
-          padding: 20px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-          transition: transform 0.2s ease;
-        }
-
-        .premium-feature-card:hover {
-          transform: translateY(-3px);
-        }
-
-        .premium-btn-lg {
-          padding: 14px 32px;
-          border-radius: 9999px;
-          background: #0d6efd;
-          color: white;
-          border: none;
-          font-size: 1.1rem;
-          font-weight: 600;
-          transition: background 0.2s ease;
-        }
-
-        .premium-btn-lg:hover {
-          background: #0b5ed7;
         }
       `}</style>
 
