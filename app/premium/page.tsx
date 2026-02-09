@@ -2,7 +2,7 @@
 
 export default function PremiumPage() {
   return (
-    <main className="premium-page pb-5">
+    <main className="pb-5">
 
       {/* HERO + PRICING */}
       <section className="premium-hero text-center py-5">
@@ -90,12 +90,6 @@ export default function PremiumPage() {
 
       {/* CSS */}
       <style jsx>{`
-        .premium-page {
-          min-height: 100vh;
-          background: linear-gradient(135deg, rgba(0,153,255,0.12), rgba(0,204,153,0.12));
-          background-attachment: fixed;
-        }
-
         .premium-card {
           background: var(--bs-body-bg);
           border: 1px solid rgba(0,0,0,0.08);
@@ -173,13 +167,6 @@ export default function PremiumPage() {
         .premium-feature-card:hover {
           transform: translateY(-3px);
         }
-        .premium-wrapper {
-  min-height: 100vh;
-  width: 100%;
-  background: linear-gradient(135deg, rgba(0,153,255,0.12), rgba(0,204,153,0.12));
-  background-attachment: fixed;
-}
-
 
         .premium-btn-lg {
           padding: 14px 32px;
