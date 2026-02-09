@@ -2,13 +2,12 @@
 
 export default function PremiumPage() {
   return (
-    <main className="pb-5 premium-page">
+    <main className="premium-page pb-5">
 
-      {/* HERO – prémium háttér + pricing */}
+      {/* HERO + PRICING */}
       <section className="premium-hero text-center py-5">
         <div className="container">
 
-          {/* Logó */}
           <img src="./utomlogo.png" alt="Utom" height="52" className="mb-4 opacity-75" />
 
           <h1 className="display-6 fw-bold mb-3">
@@ -18,7 +17,7 @@ export default function PremiumPage() {
             Tisztább, gyorsabb, mélyebb elemzés — reklámok nélkül.
           </p>
 
-          {/* Pricing kártyák */}
+          {/* Pricing */}
           <div className="premium-pricing-wrapper d-flex justify-content-center gap-4 flex-wrap">
 
             {/* Havi */}
@@ -34,6 +33,13 @@ export default function PremiumPage() {
               <div className="price">9000 Ft<span>/év</span></div>
               <div className="desc">Éves előfizetés</div>
               <button className="premium-btn">Előfizetek</button>
+            </div>
+
+            {/* Cégeknek */}
+            <div className="premium-card enterprise">
+              <div className="price">Cégeknek</div>
+              <div className="desc">Egyedi árazás alapján</div>
+              <button className="premium-btn">Kapcsolat</button>
             </div>
 
           </div>
@@ -84,8 +90,11 @@ export default function PremiumPage() {
 
       {/* CSS */}
       <style jsx>{`
+        .premium-page {
+          background: linear-gradient(135deg, rgba(0,153,255,0.12), rgba(0,204,153,0.12));
+        }
+
         .premium-hero {
-          background: linear-gradient(135deg, rgba(0,153,255,0.15), rgba(0,204,153,0.15));
           padding-bottom: 80px;
         }
 
@@ -97,11 +106,12 @@ export default function PremiumPage() {
           width: 260px;
           text-align: center;
           box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .premium-card:hover {
           transform: translateY(-4px);
+          border-color: #0d6efd;
           box-shadow: 0 8px 24px rgba(0,0,0,0.12);
         }
 
