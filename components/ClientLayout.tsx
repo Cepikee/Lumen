@@ -20,16 +20,14 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   // ⭐ Sidebar csak a főoldalon
   const shouldShowSidebar = pathname === "/" && !isLanding && !isPremium;
 
-  // 🔥 GLOBAL THEME FROM ZUSTAND
+  // THEME
   const theme = useUserStore((s) => s.theme);
   const loadUser = useUserStore((s) => s.loadUser);
 
-  // 🔥 LOAD USER ONCE
   useEffect(() => {
     loadUser();
   }, [loadUser]);
 
-  // 🔥 APPLY THEME TO HTML
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute("data-user-theme", "true");
@@ -46,7 +44,6 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       return;
     }
 
-    // SYSTEM MODE
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
 
     const applySystemTheme = () => {
@@ -67,7 +64,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     };
   }, [theme]);
 
-  // --- FILTER STATE ---
+  // FILTER STATE
   const [viewMode, setViewMode] = useState<"card" | "compact">("card");
   const [isTodayMode, setIsTodayMode] = useState(false);
 
@@ -116,12 +113,27 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     setCategoryFilters(cats);
   }, []);
 
-  // ⭐⭐⭐ PREMIUM ÉS LANDING OLDAL — FULL WIDTH, HEADER NÉLKÜL ⭐⭐⭐
-  if (isLanding || isPremium) {
+  // ⭐⭐⭐ LANDING OLDAL — HEADER NÉLKÜL, FULL WIDTH ⭐⭐⭐
+  if (isLanding) {
     return (
       <main className="flex-grow-1 overflow-auto p-0">
         {children}
       </main>
+    );
+  }
+
+  // ⭐⭐⭐ PREMIUM OLDAL — HEADER IGEN, FULL WIDTH, NINCS MAX-WIDTH ⭐⭐⭐
+  if (isPremium) {
+    return (
+      <>
+        <Header />
+
+        <main className="flex-grow-1 overflow-auto p-0">
+          {children}
+        </main>
+
+        <CookieConsent />
+      </>
     );
   }
 
