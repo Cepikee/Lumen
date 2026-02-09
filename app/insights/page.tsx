@@ -37,7 +37,7 @@ function normalizeCategory(raw?: string | null) {
 }
 
 export default function InsightFeedPage() {
-  const [period, setPeriod] = useState<"24h" | "7d" | "30d" | "90d">("7d");
+  const [period, setPeriod] = useState<"24h" | "7d" | "30d" | "90d">("24h");
   const [sort, setSort] = useState<string>("Legfrissebb");
 
   const { data, error, loading } = useInsights(period, sort);
@@ -99,36 +99,40 @@ export default function InsightFeedPage() {
         </div>
 
         <div className="d-flex gap-2 align-items-center">
-          <div className="btn-group me-2" role="group" aria-label="Időszak">
-            <button
-              type="button"
-              className={`btn btn-outline-secondary ${period === "24h" ? "active" : ""}`}
-              onClick={() => setPeriod("24h")}
-            >
-              24h
-            </button>
-            <button
-              type="button"
-              className={`btn btn-outline-secondary ${period === "7d" ? "active" : ""}`}
-              onClick={() => setPeriod("7d")}
-            >
-              7d
-            </button>
-            <button
-              type="button"
-              className={`btn btn-outline-secondary ${period === "30d" ? "active" : ""}`}
-              onClick={() => setPeriod("30d")}
-            >
-              30d
-            </button>
-            <button
-              type="button"
-              className={`btn btn-outline-secondary ${period === "90d" ? "active" : ""}`}
-              onClick={() => setPeriod("90d")}
-            >
-              90d
-            </button>
-          </div>
+          <div className="insights-filter-group me-2">
+  <button
+    type="button"
+    className={`insights-filter-btn ${period === "24h" ? "active" : ""}`}
+    onClick={() => setPeriod("24h")}
+  >
+    24h
+  </button>
+
+  <button
+    type="button"
+    className={`insights-filter-btn ${period === "7d" ? "active" : ""}`}
+    onClick={() => setPeriod("7d")}
+  >
+    7d
+  </button>
+
+  <button
+    type="button"
+    className={`insights-filter-btn ${period === "30d" ? "active" : ""}`}
+    onClick={() => setPeriod("30d")}
+  >
+    30d
+  </button>
+
+  <button
+    type="button"
+    className={`insights-filter-btn ${period === "90d" ? "active" : ""}`}
+    onClick={() => setPeriod("90d")}
+  >
+    90d
+  </button>
+</div>
+
 
           <InsightFilters active={sort} onChange={(f) => setSort(f)} />
         </div>
