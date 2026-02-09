@@ -76,7 +76,10 @@ const theme = useUserStore((s) => s.theme);
   const isDark = theme === "dark" || (theme === "system" && typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const textColor = isDark ? "#ddd" : "#333";
-  const gridColor = isDark ? "#444" : "#eee";
+
+const gridColor = isDark
+  ? "rgba(255,255,255,0.15)"   // sötét mód: finom világos grid
+  : "rgba(0,0,0,0.12)";        // világos mód: finom sötét grid
 
   const { datasets } = useMemo(() => {
     const ds: any[] = [];
