@@ -15,9 +15,10 @@ interface ClientLayoutProps {
 export default function ClientLayout({ children }: ClientLayoutProps) {
   const pathname = usePathname();
   const isLanding = pathname.includes("landing");
+  const isPremium = pathname.includes("premium");
 
   // ⭐ Sidebar csak a főoldalon
-  const shouldShowSidebar = pathname === "/" && !isLanding;
+  const shouldShowSidebar = pathname === "/" && !isLanding && !isPremium;
 
   // 🔥 GLOBAL THEME FROM ZUSTAND
   const theme = useUserStore((s) => s.theme);
@@ -115,6 +116,16 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     setCategoryFilters(cats);
   }, []);
 
+  // ⭐⭐⭐ PREMIUM ÉS LANDING OLDAL — FULL WIDTH, HEADER NÉLKÜL ⭐⭐⭐
+  if (isLanding || isPremium) {
+    return (
+      <main className="flex-grow-1 overflow-auto p-0">
+        {children}
+      </main>
+    );
+  }
+
+  // ⭐⭐⭐ MINDEN MÁS OLDAL — RÉGI LAYOUT ⭐⭐⭐
   return (
     <>
       <LayoutContext.Provider
@@ -129,7 +140,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           setSearchTerm,
         }}
       >
-        {!isLanding && <Header />}
+        <Header />
 
         {shouldShowSidebar ? (
           <SidebarWrapper
@@ -178,7 +189,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
         )}
       </LayoutContext.Provider>
 
-      {!isLanding && <CookieConsent />}
+      <CookieConsent />
     </>
   );
 }
