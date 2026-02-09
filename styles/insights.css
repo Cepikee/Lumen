@@ -78,10 +78,12 @@
   font-weight: 500;
   transition: all 0.2s ease;
   white-space: nowrap;
+  text-decoration: none; /* <-- EZ KELL */
 }
 
 .insight-open-btn:hover {
   background: rgba(0,0,0,0.05);
+  text-decoration: none;
 }
 
 /* Dark mode */

@@ -2,123 +2,219 @@
 
 export default function PremiumPage() {
   return (
-    <main className="pb-5">
+    <main className="pb-5 premium-root">
 
-      {/* Felső szakasz – HERO háttér + logó + pricing */}
-      <section className="py-5 text-center hero-premium">
+      {/* HERO */}
+      <section className="premium-hero text-center">
         <div className="container">
 
-          {/* Utom logó */}
-          <div className="mb-4">
-            <img src="./utomlogo.png" alt="Utom" height="48" />
-          </div>
+          <img src="./utomlogo.png" alt="Utom" height="44" className="mb-4" />
 
-          <h1 className="fs-2 fw-bold mb-3">
-            Az Utom Prémium még tisztábban mutatja meg, mi van a hírek mögött. Egyszerűen, letisztultan.
+          <h1 className="premium-title">
+            Az Utom Prémium
           </h1>
 
-          {/* Reddit-stílusú pricing gombok */}
-          <div className="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+          <p className="premium-subtitle">
+            Nem több hír. Jobb megértés.  
+            Tisztábban látod, mi van a felszín alatt.
+          </p>
 
-            {/* Havi */}
-            <button className="reddit-btn">
-              <div className="fs-4 fw-bold">1000 Ft / hó</div>
-              <div className="text-muted small">Havi előfizetés</div>
-            </button>
+          {/* PRICING */}
+          <div className="pricing-grid mt-5">
 
-            {/* Éves */}
-            <button className="reddit-btn position-relative">
-              <div
-                className="position-absolute top-0 start-50 translate-middle badge bg-primary"
-                style={{ fontSize: "0.75rem" }}
-              >
-                Megtakarítás: 25%
-              </div>
-              <div className="fs-4 fw-bold">9000 Ft / év</div>
-              <div className="text-muted small">Éves előfizetés</div>
-            </button>
+            {/* HAVI */}
+            <div className="pricing-card">
+              <div className="pricing-header">Havi</div>
+              <div className="pricing-price">1000 Ft</div>
+              <div className="pricing-sub">havonta</div>
+
+              <button className="btn btn-outline-primary w-100 mt-4">
+                Csatlakozom
+              </button>
+            </div>
+
+            {/* ÉVES */}
+            <div className="pricing-card featured">
+              <div className="badge-save">–25%</div>
+
+              <div className="pricing-header">Éves</div>
+              <div className="pricing-price">9000 Ft</div>
+              <div className="pricing-sub">évente</div>
+
+              <button className="btn btn-primary w-100 mt-4">
+                Prémium leszek
+              </button>
+            </div>
 
           </div>
-
-          {/* Inline CSS */}
-          <style jsx>{`
-            .hero-premium {
-              background: linear-gradient(
-                135deg,
-                rgba(0, 153, 255, 0.12),
-                rgba(0, 204, 153, 0.12)
-              );
-            }
-
-            .reddit-btn {
-              min-width: 260px;
-              padding: 18px 24px;
-              border-radius: 9999px;
-              border: 1px solid var(--bs-border-color);
-              background: var(--bs-body-bg);
-              text-align: center;
-              cursor: pointer;
-              transition: opacity 0.15s ease;
-            }
-
-            .reddit-btn:hover {
-              opacity: 0.75;
-            }
-
-            .reddit-btn:focus,
-            .reddit-btn:active {
-              outline: none;
-              opacity: 0.9;
-            }
-          `}</style>
 
         </div>
       </section>
 
-      {/* ELVÁLASZTÓ VONAL */}
-      <hr className="my-5" />
-
-      {/* Funkciólista */}
+      {/* FUNKCIÓK */}
       <section className="py-5">
         <div className="container">
-          <h2 className="text-center fs-3 fw-bold mb-5">Az Utom prémium csomagja:</h2>
 
-          <div className="row row-cols-1 row-cols-md-2 g-4">
+          <h2 className="text-center fw-bold mb-5">
+            Mit kapsz Prémiumként?
+          </h2>
+
+          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             {[
-              { icon: "🧬", title: "Forrás DNS", desc: "AI‑alapú tartalmi ujjlenyomat, amely mindent megmutat egy hírportálról." },
-              { icon: "🧠", title: "Fake Detektor", desc: "Kiszűrjük a hamis, félrevezető vagy gyanús tartalmakat — valóság, torzítás nélkül." },
-              { icon: "🧊", title: "Clickbait Detektor", desc: "Felismerjük a kattintásvadász címeket, és megmutatjuk, mennyire azok." },
-              { icon: "🧱", title: "Cikk Összehasonlítás", desc: "Több forrás egy kattintással összevetve — látod, ki mit ír máshogy." },
-              { icon: "🧭", title: "Forrás‑Radar", desc: "Megmutatjuk, mely portálok dominálnak egy témában — és kik maradnak csendben." },
-              { icon: "💬", title: "Prémium Chat Szoba", desc: "Zárt közösség, ahol a prémium tagok beszélgethetnek, vitázhatnak, elemezhetnek." },
-              { icon: "🧑‍⚖️", title: "Közösségi Vélemény", desc: "A felhasználók visszajelzései alapján láthatod, hogyan értékeli a közösség a cikket." },
-              { icon: "🧘‍♂️", title: "Ultra‑minimalista mód", desc: "Csak a lényeg: reklám, sallang nélkül, egyszerűen nagyszerűen." }
-            ].map((item, i) => (
-              <div key={i} className="d-flex gap-3">
-                <div className="fs-2">{item.icon}</div>
-                <div>
-                  <h5 className="mb-1">{item.title}</h5>
-                  <p className="text-muted mb-0">{item.desc}</p>
+              { icon: "🧬", title: "Forrás DNS", desc: "AI-alapú tartalmi ujjlenyomat minden hírforráshoz." },
+              { icon: "🧠", title: "Fake Detektor", desc: "Hamis vagy torzító tartalmak automatikus felismerése." },
+              { icon: "🧊", title: "Clickbait Detektor", desc: "Megmutatjuk, mennyire kattintásvadász egy cím." },
+              { icon: "🧱", title: "Cikk Összehasonlítás", desc: "Ugyanaz a hír több forrásból, egy nézetben." },
+              { icon: "🧭", title: "Forrás-Radar", desc: "Ki beszél egy témáról – és ki hallgat?" },
+              { icon: "💬", title: "Prémium Közösség", desc: "Zárt tér gondolkodó felhasználóknak." },
+              { icon: "🧑‍⚖️", title: "Közösségi Vélemény", desc: "Valódi felhasználói visszajelzések cikkekről." },
+              { icon: "🧘‍♂️", title: "Ultra-minimalista mód", desc: "Reklámmentes, sallang nélküli olvasás." }
+            ].map((f, i) => (
+              <div key={i}>
+                <div className="feature-card h-100">
+                  <div className="feature-icon">{f.icon}</div>
+                  <h5>{f.title}</h5>
+                  <p className="text-muted small mb-0">{f.desc}</p>
                 </div>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-4 text-center">
-        <div className="d-inline-flex gap-3 flex-wrap">
-          <button className="btn btn-outline-primary">Előfizetés havi csomagra</button>
-          <button className="btn btn-outline-primary">Előfizetés éves csomagra</button>
-        </div>
+      <section className="text-center py-5 premium-cta">
+        <h3 className="fw-bold mb-3">
+          Az Utom Prémium nem mindenkinek való.
+        </h3>
+        <p className="text-muted mb-4">
+          Csak azoknak, akik szeretnek mélyebbre ásni.
+        </p>
+
+        <button className="btn btn-primary btn-lg">
+          Csatlakozom a Prémiumhoz
+        </button>
       </section>
 
-      {/* Lábléc */}
-      <section className="text-center text-muted small">
-        <p>Bizonyos funkciók csak aktív Prémium tagsággal érhetők el.</p>
-        <a href="/premium-faq" className="text-decoration-underline">Gyakori kérdések a Prémiumról</a>
-      </section>
+      {/* FOOTER */}
+      <footer className="text-center text-muted small mt-5">
+        <p>
+          Bizonyos funkciók csak aktív Prémium tagsággal érhetők el.
+        </p>
+        <a href="/premium-faq" className="text-decoration-underline">
+          Gyakori kérdések
+        </a>
+      </footer>
+
+      {/* STYLES */}
+      <style jsx>{`
+        .premium-root {
+          background: #fafafa;
+        }
+
+        .premium-hero {
+          padding: 80px 0 100px;
+          background: linear-gradient(
+            135deg,
+            rgba(13,110,253,0.08),
+            rgba(0,0,0,0)
+          );
+        }
+
+        .premium-title {
+          font-size: clamp(2.2rem, 4vw, 3rem);
+          font-weight: 700;
+          letter-spacing: -0.02em;
+        }
+
+        .premium-subtitle {
+          max-width: 620px;
+          margin: 16px auto 0;
+          font-size: 1.1rem;
+          color: var(--bs-secondary-color);
+        }
+
+        .pricing-grid {
+          display: flex;
+          justify-content: center;
+          gap: 24px;
+          flex-wrap: wrap;
+        }
+
+        .pricing-card {
+          position: relative;
+          width: 280px;
+          padding: 28px;
+          border-radius: 20px;
+          background: #fff;
+          border: 1px solid rgba(0,0,0,0.06);
+          text-align: center;
+          transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .pricing-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 32px rgba(0,0,0,.08);
+        }
+
+        .pricing-card.featured {
+          border: 2px solid var(--bs-primary);
+        }
+
+        .badge-save {
+          position: absolute;
+          top: -12px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: var(--bs-primary);
+          color: #fff;
+          padding: 4px 10px;
+          border-radius: 999px;
+          font-size: .75rem;
+        }
+
+        .pricing-header {
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
+
+        .pricing-price {
+          font-size: 2rem;
+          font-weight: 700;
+        }
+
+        .pricing-sub {
+          font-size: .9rem;
+          color: var(--bs-secondary-color);
+        }
+
+        .feature-card {
+          background: rgba(255,255,255,0.7);
+          backdrop-filter: blur(6px);
+          border-radius: 16px;
+          padding: 22px;
+          border: 1px solid rgba(0,0,0,0.05);
+          transition: transform .15s ease;
+        }
+
+        .feature-card:hover {
+          transform: translateY(-2px);
+        }
+
+        .feature-icon {
+          font-size: 1.8rem;
+          margin-bottom: 8px;
+        }
+
+        .premium-cta {
+          background: linear-gradient(
+            180deg,
+            rgba(13,110,253,0.06),
+            rgba(0,0,0,0)
+          );
+        }
+      `}</style>
 
     </main>
   );
