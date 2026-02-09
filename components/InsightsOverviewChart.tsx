@@ -15,6 +15,7 @@ import "chartjs-adapter-date-fns";
 import { hu } from "date-fns/locale";
 import { Line } from "react-chartjs-2";
 import { useMemo } from "react";
+import { useUserStore } from "@/store/useUserStore";
 
 const crosshairPlugin = {
   id: "crosshair",
@@ -71,10 +72,8 @@ export default function InsightsOverviewChart({
   range = "24h",
 }: any) {
 
-  
-  const isDark =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
+const theme = useUserStore((s) => s.theme);  
+  const isDark = theme === "dark" || (theme === "system" && typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const textColor = isDark ? "#ddd" : "#333";
   const gridColor = isDark ? "#444" : "#eee";
@@ -261,7 +260,7 @@ export default function InsightsOverviewChart({
   return (
     <div style={{ width: "100%", height }}>
       {/* 🔑 EZ A SOR OLDJA MEG A PROBLÉMÁT */}
-      <Line key={range} data={{ datasets }} options={options} />
+      <Line key={range + theme} data={{ datasets }} options={options} />
     </div>
   );
 }
