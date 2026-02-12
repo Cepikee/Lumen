@@ -1,0 +1,127 @@
+/* ============================= */
+/*        UTOM – ÁSZF 2026      */
+/* ============================= */
+
+.aszf-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
+  padding: 80px 20px;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #e5e7eb;
+}
+
+.aszf-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 60px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* HEADER */
+
+.aszf-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.aszf-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.aszf-updated {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+/* SECTIONS */
+
+.aszf-container section {
+  margin-bottom: 50px;
+}
+
+.aszf-container h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  padding-left: 14px;
+  border-left: 3px solid #6366f1;
+  letter-spacing: 0.2px;
+}
+
+.aszf-container p {
+  color: #d1d5db;
+  line-height: 1.8;
+  margin-bottom: 14px;
+  font-size: 0.97rem;
+}
+
+.aszf-container ul {
+  margin-top: 10px;
+  padding-left: 22px;
+}
+
+.aszf-container li {
+  margin-bottom: 8px;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* LINKS */
+
+.aszf-container a {
+  color: #a5b4fc;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.aszf-container a:hover {
+  text-decoration: underline;
+  color: #c7d2fe;
+}
+
+/* STRONG */
+
+.aszf-container strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* FOOTER */
+
+.aszf-footer {
+  margin-top: 70px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .aszf-container {
+    padding: 35px;
+  }
+
+  .aszf-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .aszf-container h2 {
+    font-size: 1rem;
+  }
+
+  .aszf-container p,
+  .aszf-container li {
+    font-size: 0.9rem;
+  }
+}

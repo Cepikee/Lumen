@@ -1,0 +1,25 @@
+/* Impresszum blokk */
+
+.impresszum-block {
+  background: var(--bs-body-bg);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.impresszum-block h3 {
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.impresszum-block p,
+.impresszum-block ul {
+  color: var(--bs-secondary-color);
+  margin-bottom: 12px;
+}
+
+.impresszum-block ul {
+  padding-left: 20px;
+}

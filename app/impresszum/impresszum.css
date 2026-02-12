@@ -1,0 +1,109 @@
+/* 2026 Modern Legal Style */
+
+.impresszum-wrapper {
+  background: linear-gradient(135deg, #0f172a, #111827);
+  min-height: 100vh;
+  padding: 60px 20px;
+  font-family: "Inter", sans-serif;
+  color: #e5e7eb;
+}
+
+.impresszum-container {
+  max-width: 820px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(18px);
+  padding: 50px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.impresszum-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.impresszum-logo {
+  height: 42px;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.impresszum-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.impresszum-updated {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.impresszum-section {
+  margin-bottom: 45px;
+}
+
+.impresszum-section h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  border-left: 3px solid #6366f1;
+  padding-left: 12px;
+}
+
+.impresszum-section p {
+  color: #d1d5db;
+  line-height: 1.7;
+}
+
+.impresszum-section ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.impresszum-section li {
+  margin-bottom: 8px;
+  color: #cbd5e1;
+}
+
+.impresszum-note {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.impresszum-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: #6366f1;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: 0.2s ease;
+}
+
+.impresszum-button:hover {
+  background: #4f46e5;
+}
+
+.impresszum-footer {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 30px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.impresszum-footer a {
+  display: block;
+  margin-top: 8px;
+  color: #a5b4fc;
+  text-decoration: none;
+}
+
+.impresszum-footer a:hover {
+  text-decoration: underline;
+}
