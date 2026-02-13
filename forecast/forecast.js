@@ -179,23 +179,20 @@ async function runForecastPipeline() {
   }
 }
 
-// Következő futás kiszámítása
+
+// Következő futás kiszámítása – HELYES verzió
 function calculateNextRun(finishedAt) {
-  // következő egész óra
-  const nextHour = new Date(finishedAt);
-  nextHour.setMinutes(0, 0, 0);
-  nextHour.setHours(nextHour.getHours() + 1);
+  const nextRun = new Date(finishedAt);
 
-  // forecast vége: +6 óra
-  const forecastEnd = new Date(nextHour);
-  forecastEnd.setHours(forecastEnd.getHours() + 6);
+  // +6 óra előrejelzés
+  nextRun.setHours(nextRun.getHours() + 6);
 
-  // indulás: 15 perccel előtte
-  const nextRun = new Date(forecastEnd);
+  // -15 perc indulás előtt
   nextRun.setMinutes(nextRun.getMinutes() - 15);
 
   return nextRun;
 }
+
 
 // Végtelen ciklus – PM2 alatt fut
 async function mainLoop() {
