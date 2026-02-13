@@ -1,7 +1,7 @@
 "use client";
 
 import React, { JSX } from "react";
-import "@/styles/impresszum.css";
+import "/styles/impresszum.css";
 
 export default function Impresszum(): JSX.Element {
   return (
