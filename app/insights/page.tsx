@@ -149,11 +149,12 @@ export default function InsightFeedPage() {
             forecast={forecastData?.forecast || {}}
             range={period}
           />
+             <ForecastStatus />
         </div>
         
       )}
 
-      <ForecastStatus />
+   
       {/* KATEGÓRIAKÁRTYÁK */}
       <section aria-labelledby="category-trends">
         <h2 id="category-trends" className="fs-5 fw-bold mb-2 visually-hidden">

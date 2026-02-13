@@ -15,8 +15,7 @@ export default function ForecastStatus() {
         const res = await fetch("/api/forecast-status");
         const json = await res.json();
         setData(json);
-      } catch (err) {
-        console.error("Status fetch error:", err);
+      } catch {
         setData({
           status: "error",
           lastRun: null,
@@ -42,22 +41,20 @@ export default function ForecastStatus() {
   };
 
   const labels: Record<string, string> = {
-    running: "AI éppen dolgozik",
-    waiting: "Várakozik a következő futásra",
-    error: "Hiba történt",
-    unknown: "Nincs adat",
+    running: "Az AI előrejelzés éppen dolgozik",
+    waiting: "Az AI előrejelzés jelenleg várakozik a következő futásra",
+    error: "Az AI előrejelzés hibába futott",
+    unknown: "Az AI előrejelzés még nem futott le",
   };
 
   return (
-    <div className="d-flex align-items-center gap-3 mb-4 p-3 rounded-4 bg-body-secondary border border-dark-subtle">
+    <div className="d-flex align-items-center gap-3 mt-3">
 
-      {/* SZÍNES KÖR */}
       <div
         className={`rounded-circle ${colors[status]}`}
         style={{ width: 12, height: 12 }}
       />
 
-      {/* EGY SOROS SZÖVEG */}
       <div className="d-flex align-items-center flex-wrap gap-3">
 
         <span className="fw-semibold">{labels[status]}</span>
