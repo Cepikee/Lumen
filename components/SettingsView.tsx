@@ -82,7 +82,7 @@ export default function SettingsView() {
       <FrameModal show={showFrameModal} onClose={() => setShowFrameModal(false)} />
       <PasswordChangeModal show={showPasswordModal} onClose={() => setShowPasswordModal(false)} />
       <PinChangeModal show={showPinModal} onClose={() => setShowPinModal(false)} />
-      <UsernameChangeModal show={showUsernameModal} onClose={() => setShowUsernameModal(false)} currentUsername={nickname} />
+      <UsernameChangeModal show={showUsernameModal} onClose={() => setShowUsernameModal(false)} currentUsername={nickname}  usernameChangedAt={user.username_changed_at}/>
 
 
       {/* Ha bármelyik modal nyitva van → háttér eltűnik */}

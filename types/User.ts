@@ -15,4 +15,5 @@ export type User = {
   avatar_seed: string; 
   avatar_format: "svg" | "gif";
   avatar_frame?: string;
+  username_changed_at?: string | null;
 };

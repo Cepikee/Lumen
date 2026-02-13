@@ -29,6 +29,7 @@ export async function GET(req: Request) {
           avatar_style,
           avatar_seed,
           avatar_format,
+          username_changed_at,
           avatar_frame
        FROM users
        WHERE id = ?
