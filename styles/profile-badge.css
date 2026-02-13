@@ -21,12 +21,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* avatar a gyűrű belsejéig vágva */
+  overflow: hidden;
   background: transparent;
   transition: none !important;
 }
 
-/* Prémium állapot: vastag arany vonal + soft glow */
+/* Prémium állapot */
 .badge-ring.premium {
   border: 4px solid #FFD700;
   box-shadow: 0 0 6px rgba(255, 215, 74, 0.35);
@@ -38,7 +38,6 @@
   height: 100%;
   border-radius: 50%;
   transition: none !important;
-  transform: none !important;
 }
 
 .avatar-inner img {
@@ -48,27 +47,22 @@
   display: block;
   border-radius: 50%;
   transition: none !important;
-  transform: none !important;
 }
 
-/* Korona: statikus, prémium */
+/* Korona */
 .crown {
   position: absolute;
   transform: translateX(-50%);
   pointer-events: none;
   z-index: 20000 !important;
   filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.75));
-  will-change: opacity;
-  /* top értéket inline állítsd a JSX-ben (pl. style={{ top: "-22px" }}) */
 }
 
-/* Globális felülírás – semmi hover / transform ne szóljon bele */
+/* Globális tiltás */
 .profile-badge,
 .profile-badge * {
   transition: none !important;
 }
-
-
 
 /* Avatar wrapper */
 .premium-avatar {
@@ -94,21 +88,31 @@
   pointer-events: none;
 }
 
-/* Gradient spin keret */
+/* ⭐ JAVÍTOTT SZÍNES PÖRGŐ KERET — NEM UGRÁL, NEM CSÚSZIK */
 .premium-frame-gradient {
   position: absolute;
-  top: -18%;
-  left: -18%;
-  width: 136%;
-  height: 136%;
+  top: 0;
+  left: 0;
+  width: 44px;      /* avatar méretével egyezzen */
+  height: 44px;
   border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+
   background: conic-gradient(
     #21db7b,
     #db21a0,
+    #21db7b,
+    #2196f3,
+    #ff9800,
     #21db7b
   );
-  pointer-events: none;
-  z-index: 2;
+
+  animation: spin 6s linear infinite;
+
+  /* gyűrű kivágása */
+  -webkit-mask: radial-gradient(circle, transparent 60%, black 62%);
+  mask: radial-gradient(circle, transparent 60%, black 62%);
 }
 
 /* Animációk */
@@ -135,27 +139,3 @@
     filter: hue-rotate(360deg);
   }
 }
-
-.premium-frame-gradient {
-  position: absolute;
-  top: -18%;
-  left: -18%;
-  width: 136%;
-  height: 136%;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 3;
-  background: conic-gradient(
-    #21db7b,
-    #db21a0,
-    #21db7b,
-    #2196f3,
-    #ff9800,
-    #21db7b
-  );
-  animation: spin 6s linear infinite;
-  -webkit-mask: radial-gradient(circle, transparent 65%, black 67%);
-  mask: radial-gradient(circle, transparent 65%, black 67%);
-
-}
-
