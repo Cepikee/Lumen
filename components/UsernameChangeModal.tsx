@@ -7,7 +7,7 @@ interface UsernameChangeModalProps {
   show: boolean;
   onClose: () => void;
   currentUsername: string;
-  usernameChangedAt?: string | null; // ezt add át a SettingsView-ből
+  usernameChangedAt?: string | null;
 }
 
 export default function UsernameChangeModal({
@@ -42,7 +42,8 @@ export default function UsernameChangeModal({
       return;
     }
 
-    if (!/^[a-zA-Z0-9._-]+$/.test(newUsername)) {
+    // ❗ ÚJ SZABÁLY: csak betűk és számok
+    if (!/^[a-zA-Z0-9]+$/.test(newUsername)) {
       setValid(false);
       return;
     }
@@ -107,7 +108,7 @@ export default function UsernameChangeModal({
           <strong>Figyelem!</strong>
           <ul className="mt-2 mb-0">
             <li>A felhasználónév 3–20 karakter hosszú lehet.</li>
-            <li>Csak betűk, számok, pont, kötőjel és aláhúzás használható.</li>
+            <li><strong>Csak betűk és számok használhatók.</strong></li>
             <li>Nem lehet kizárólag számokból.</li>
             <li>Tiltott nevek: admin, moderator, support, utom, system.</li>
             <li>A módosítás után 30 napig nem változtathatod újra.</li>

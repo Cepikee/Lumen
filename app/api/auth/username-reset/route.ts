@@ -56,7 +56,7 @@ export async function POST(req: Request) {
       });
     }
 
-    if (!/^[a-zA-Z0-9._-]+$/.test(username)) {
+    if (!/^[a-zA-Z0-9]+$/.test(username)) {
       return NextResponse.json({
         success: false,
         message:
