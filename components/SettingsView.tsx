@@ -20,19 +20,26 @@ export default function SettingsView() {
   const user = useUserStore((s) => s.user);
   const setUser = useUserStore((s) => s.setUser);
 
-  // 🔥 MINDEN HOOK LEGELŐL
+  // 🔥 MODAL HOOKOK
   const [showFrameModal, setShowFrameModal] = useState(false);
   const [showAvatarModal, setShowAvatarModal] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [showPinModal, setShowPinModal] = useState(false);
   const [showUsernameModal, setShowUsernameModal] = useState(false);
 
-
   const [nickname, setNickname] = useState(user!.nickname);
   const [bio, setBio] = useState(user!.bio || "");
   const [saving, setSaving] = useState(false);
 
   if (!user) return <div>Betöltés...</div>;
+
+  // 🔥 Bármelyik modál nyitva van?
+  const anyModalOpen =
+    showAvatarModal ||
+    showFrameModal ||
+    showPasswordModal ||
+    showPinModal ||
+    showUsernameModal;
 
   const premiumActive =
     user.is_premium ||
@@ -77,17 +84,20 @@ export default function SettingsView() {
 
   return (
     <div style={{ padding: "20px", maxWidth: "450px" }}>
-      {/* 🔥 MODALOK – NEM KORAI RETURN, HANEM A RETURN-ÖN BELÜL */}
+      {/* 🔥 MODALOK */}
       <AvatarModal show={showAvatarModal} onClose={() => setShowAvatarModal(false)} />
       <FrameModal show={showFrameModal} onClose={() => setShowFrameModal(false)} />
       <PasswordChangeModal show={showPasswordModal} onClose={() => setShowPasswordModal(false)} />
       <PinChangeModal show={showPinModal} onClose={() => setShowPinModal(false)} />
-      <UsernameChangeModal show={showUsernameModal} onClose={() => setShowUsernameModal(false)} currentUsername={nickname}  usernameChangedAt={user.username_changed_at}/>
+      <UsernameChangeModal
+        show={showUsernameModal}
+        onClose={() => setShowUsernameModal(false)}
+        currentUsername={nickname}
+        usernameChangedAt={user.username_changed_at}
+      />
 
-
-      {/* Ha bármelyik modal nyitva van → háttér eltűnik */}
-      {(showAvatarModal || showFrameModal) && <></>}
-      {!showAvatarModal && !showFrameModal && (
+      {/* 🔥 Ha bármelyik modál nyitva van → háttér eltűnik */}
+      {!anyModalOpen && (
         <>
           {/* PREMIUM INFO */}
           <div className="mb-4">
@@ -128,13 +138,12 @@ export default function SettingsView() {
             </div>
           </div>
 
-          {/* PRÉMIUM KERET BLOKK */}
+          {/* PRÉMIUM KERET */}
           {premiumActive && (
             <div className="mb-4">
               <strong>Prémium keret:</strong>
 
               <div className="d-flex align-items-center gap-3 mt-2">
-                {/* Előnézet */}
                 <div
                   className="premium-frame-preview"
                   style={{ position: "relative", width: "64px", height: "64px" }}
@@ -196,20 +205,19 @@ export default function SettingsView() {
             </div>
           )}
 
-          {/* NICKNAME */}
-        <div className="mb-3">
-  <div className="mb-1">
-    <strong>Felhasználónév:</strong> {nickname}
-  </div>
-  <div
-    className="text-primary"
-    style={{ cursor: "pointer", fontWeight: "500" }}
-    onClick={() => setShowUsernameModal(true)}
-  >
-    Felhasználónév módosítása →
-  </div>
-        </div>
-
+          {/* USERNAME */}
+          <div className="mb-3">
+            <div className="mb-1">
+              <strong>Felhasználónév:</strong> {nickname}
+            </div>
+            <div
+              className="text-primary"
+              style={{ cursor: "pointer", fontWeight: "500" }}
+              onClick={() => setShowUsernameModal(true)}
+            >
+              Felhasználónév módosítása →
+            </div>
+          </div>
 
           {/* BIO */}
           <div className="mb-3">
