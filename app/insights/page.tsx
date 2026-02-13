@@ -152,7 +152,7 @@ export default function InsightFeedPage() {
         </div>
         
       )}
-import ForecastStatus from "@/components/ForecastStatus";
+
       <ForecastStatus />
       {/* KATEGÓRIAKÁRTYÁK */}
       <section aria-labelledby="category-trends">
