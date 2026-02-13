@@ -8,6 +8,7 @@ import PinChangeModal from "@/components/PinChangeModal";
 import AvatarModal from "@/components/AvatarModal";
 import { PREMIUM_FRAMES } from "@/types/premiumFrames";
 import FrameModal from "@/components/FrameModal";
+import UsernameChangeModal from "./UsernameChangeModal";
 
 function getAvatarUrl(user: any) {
   const style = user.avatar_style || "bottts";
@@ -24,6 +25,8 @@ export default function SettingsView() {
   const [showAvatarModal, setShowAvatarModal] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [showPinModal, setShowPinModal] = useState(false);
+  const [showUsernameModal, setShowUsernameModal] = useState(false);
+
 
   const [nickname, setNickname] = useState(user!.nickname);
   const [bio, setBio] = useState(user!.bio || "");
@@ -79,6 +82,8 @@ export default function SettingsView() {
       <FrameModal show={showFrameModal} onClose={() => setShowFrameModal(false)} />
       <PasswordChangeModal show={showPasswordModal} onClose={() => setShowPasswordModal(false)} />
       <PinChangeModal show={showPinModal} onClose={() => setShowPinModal(false)} />
+      <UsernameChangeModal show={showUsernameModal} onClose={() => setShowUsernameModal(false)} currentUsername={nickname} />
+
 
       {/* Ha bármelyik modal nyitva van → háttér eltűnik */}
       {(showAvatarModal || showFrameModal) && <></>}
@@ -192,14 +197,19 @@ export default function SettingsView() {
           )}
 
           {/* NICKNAME */}
-          <div className="mb-3">
-            <div className="mb-1">
-              <strong>Felhasználónév:</strong> {nickname}
-            </div>
-            <div className="text-primary" style={{ cursor: "pointer", fontWeight: "500" }}>
-              Felhasználónév váltás kérelmezése →
-            </div>
-          </div>
+        <div className="mb-3">
+  <div className="mb-1">
+    <strong>Felhasználónév:</strong> {nickname}
+  </div>
+  <div
+    className="text-primary"
+    style={{ cursor: "pointer", fontWeight: "500" }}
+    onClick={() => setShowUsernameModal(true)}
+  >
+    Felhasználónév módosítása →
+  </div>
+        </div>
+
 
           {/* BIO */}
           <div className="mb-3">
