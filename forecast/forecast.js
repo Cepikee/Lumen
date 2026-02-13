@@ -230,3 +230,4 @@ async function mainLoop() {
 }
 
 mainLoop();
+//  mainLoop() egy végtelen ciklus, amely minden órában lefut, így PM2-vel kell indítani a forecast.js-t, hogy folyamatosan működjön.
