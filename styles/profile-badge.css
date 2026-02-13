@@ -108,7 +108,7 @@
     #21db7b
   );
 
-  animation: spin 10s linear infinite;
+  animation: spin 6s linear infinite;
 
   /* gyűrű kivágása */
   -webkit-mask: radial-gradient(circle, transparent 60%, black 62%);
@@ -117,7 +117,7 @@
 
 /* Animációk */
 .spin {
-  animation: spin 1.2s linear infinite;
+  animation: spin 4.2s linear infinite;
 }
 
 .anim-spin {
