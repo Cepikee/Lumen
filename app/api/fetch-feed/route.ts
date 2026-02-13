@@ -1,4 +1,6 @@
 // app/api/fetch-feed/route.ts
+export const runtime = "nodejs";
+
 import { NextResponse } from "next/server";
 import mysql, { RowDataPacket } from "mysql2/promise";
 import Parser from "rss-parser";
@@ -31,7 +33,6 @@ async function proxyRequest(url: string): Promise<string> {
   for (const proxy of FREE_PROXIES) {
     try {
       const agent = new HttpsProxyAgent(proxy);
-
       const client = url.startsWith("https") ? https : http;
 
       const text: string = await new Promise((resolve, reject) => {
