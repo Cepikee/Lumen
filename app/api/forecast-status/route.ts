@@ -1,17 +1,11 @@
 import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
 
+// HELYES következő futás számítás
 function calculateNextRun(finishedAt: Date) {
-  const nextHour = new Date(finishedAt);
-  nextHour.setMinutes(0, 0, 0);
-  nextHour.setHours(nextHour.getHours() + 1);
-
-  const forecastEnd = new Date(nextHour);
-  forecastEnd.setHours(forecastEnd.getHours() + 6);
-
-  const nextRun = new Date(forecastEnd);
+  const nextRun = new Date(finishedAt);
+  nextRun.setHours(nextRun.getHours() + 6);
   nextRun.setMinutes(nextRun.getMinutes() - 15);
-
   return nextRun;
 }
 
@@ -25,11 +19,12 @@ export async function GET() {
     });
 
     const [rows] = await conn.execute(
-      "SELECT finished_at FROM forecast_runs ORDER BY id DESC LIMIT 1"
+      "SELECT status, finished_at FROM forecast_runs ORDER BY id DESC LIMIT 1"
     );
 
     await conn.end();
 
+    // Nincs adat
     if (!Array.isArray(rows) || rows.length === 0) {
       return NextResponse.json({
         status: "unknown",
@@ -38,19 +33,36 @@ export async function GET() {
       });
     }
 
-    const lastRun = new Date((rows as any)[0].finished_at);
-    const nextRun = calculateNextRun(lastRun);
+    const row = (rows as any)[0];
 
-    const now = new Date();
+    // Ha éppen fut → RUNNING
+    if (row.status === "running") {
+      return NextResponse.json({
+        status: "running",
+        lastRun: row.finished_at ? new Date(row.finished_at) : null,
+        nextRun: null,
+      });
+    }
 
-    let status: "running" | "waiting" = "waiting";
-    if (now > nextRun) status = "running";
+    // Ha befejeződött → WAITING
+    if (row.status === "finished" && row.finished_at) {
+      const lastRun = new Date(row.finished_at);
+      const nextRun = calculateNextRun(lastRun);
 
+      return NextResponse.json({
+        status: "waiting",
+        lastRun,
+        nextRun,
+      });
+    }
+
+    // Ha valami furcsa történik
     return NextResponse.json({
-      status,
-      lastRun,
-      nextRun,
+      status: "unknown",
+      lastRun: null,
+      nextRun: null,
     });
+
   } catch (err) {
     console.error("Forecast status API error:", err);
     return NextResponse.json(

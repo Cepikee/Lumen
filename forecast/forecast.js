@@ -15,6 +15,17 @@ async function getConnection() {
   });
 }
 
+// 0) Jelzés: forecast éppen fut
+async function markForecastRunning() {
+  const conn = await getConnection();
+  await conn.execute(`
+    INSERT INTO forecast_runs (finished_at, status)
+    VALUES (NULL, 'running')
+  `);
+  await conn.end();
+  console.log("🏃‍♂️ Forecast státusz: RUNNING");
+}
+
 // 1) MINDEN régi forecast törlése (minden kategória)
 async function deleteOldForecasts() {
   console.log("🗑 Régi előrejelzések törlése (forecast tábla teljes ürítése)...");
@@ -24,23 +35,24 @@ async function deleteOldForecasts() {
   console.log("🗑 Kész: forecast tábla kiürítve.");
 }
 
-// 4) Utolsó futás időpontjának mentése
+// 4) Utolsó futás időpontjának mentése + státusz FINISHED
 async function saveLastForecastTime(date) {
   console.log("🕒 Utolsó futás mentése DB-be:", date);
 
   const conn = await getConnection();
 
-  // Egyszerű log tábla – minden futásról egy sor
   await conn.execute(
     `
-      INSERT INTO forecast_runs (finished_at)
-      VALUES (?)
+      UPDATE forecast_runs
+      SET finished_at = ?, status = 'finished'
+      ORDER BY id DESC
+      LIMIT 1
     `,
     [date]
   );
 
   await conn.end();
-  console.log("🕒 Kész: forecast_runs táblába elmentve.");
+  console.log("🕒 Kész: forecast_runs frissítve (FINISHED).");
 }
 
 // JSON extractor
@@ -113,7 +125,6 @@ async function callOllama(prompt) {
 async function runForecastPipeline() {
   try {
     console.log("🔍 Órás adatok lekérése...");
-    // 48 órás history
     const timeseries = await getTimeseries(48);
 
     const nowLocal = new Date();
@@ -124,7 +135,6 @@ async function runForecastPipeline() {
     startHour.setHours(startHour.getHours() + 1);
     const startHourIso = startHour.toISOString().slice(0, 19).replace("T", " ");
 
-    // 6 órás jövőbeli horizont
     const futureHours = 6;
 
     for (const category of Object.keys(timeseries)) {
@@ -173,12 +183,11 @@ async function runForecastPipeline() {
       }
     }
 
-    console.log("\n🎉 Minden kategória előrejelzése lefutott (hibásakat kihagyta)!");
+    console.log("\n🎉 Minden kategória előrejelzése lefutott!");
   } catch (err) {
     console.error("❌ VÁRATLAN HIBA A PIPELINE-BAN:", err);
   }
 }
-
 
 // Következő futás kiszámítása – HELYES verzió
 function calculateNextRun(finishedAt) {
@@ -193,13 +202,15 @@ function calculateNextRun(finishedAt) {
   return nextRun;
 }
 
-
 // Végtelen ciklus – PM2 alatt fut
 async function mainLoop() {
   while (true) {
     console.log("\n==============================");
     console.log("🚀 Forecast ciklus indul...");
     console.log("==============================");
+
+    // 0. jelzés: forecast éppen fut
+    await markForecastRunning();
 
     // 1. régi adatok törlése
     await deleteOldForecasts();
@@ -227,4 +238,3 @@ async function mainLoop() {
 }
 
 mainLoop();
-//  mainLoop() egy végtelen ciklus, amely minden órában lefut, így PM2-vel kell indítani a forecast.js-t, hogy folyamatosan működjön.

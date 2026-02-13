@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 type ForecastStatusResponse = {
   status: "running" | "waiting" | "error" | "unknown";
-  lastRun: string | null;
-  nextRun: string | null;
+  lastRun: string | Date | null;
+  nextRun: string | Date | null;
 };
 
 export default function ForecastStatus() {
