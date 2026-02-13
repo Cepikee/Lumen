@@ -33,7 +33,6 @@ const STYLES = [
   { id: "open-peeps", label: "Nyitott figurák" },
   { id: "pixel-art", label: "Pixel Art" },
   { id: "personas", label: "Személyiségek" },
-  { id: "toon-heads", label: "Rajzfilm fejek" },
 ];
 
 export default function AvatarModal({
