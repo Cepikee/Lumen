@@ -1,8 +1,47 @@
 require("dotenv").config();
 
+const mysql = require("mysql2/promise");
 const getTimeseries = require("./getTimeseries");
 const buildForecastPrompt = require("./buildForecastPrompt");
 const saveForecast = require("./saveForecast");
+
+// DB kapcsolat helper
+async function getConnection() {
+  return mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "jelszo",
+    database: "projekt2025",
+  });
+}
+
+// 1) MINDEN régi forecast törlése (minden kategória)
+async function deleteOldForecasts() {
+  console.log("🗑 Régi előrejelzések törlése (forecast tábla teljes ürítése)...");
+  const conn = await getConnection();
+  await conn.execute("DELETE FROM forecast");
+  await conn.end();
+  console.log("🗑 Kész: forecast tábla kiürítve.");
+}
+
+// 4) Utolsó futás időpontjának mentése
+async function saveLastForecastTime(date) {
+  console.log("🕒 Utolsó futás mentése DB-be:", date);
+
+  const conn = await getConnection();
+
+  // Egyszerű log tábla – minden futásról egy sor
+  await conn.execute(
+    `
+      INSERT INTO forecast_runs (finished_at)
+      VALUES (?)
+    `,
+    [date]
+  );
+
+  await conn.end();
+  console.log("🕒 Kész: forecast_runs táblába elmentve.");
+}
 
 // JSON extractor
 function extractJson(text) {
@@ -79,7 +118,7 @@ async function runForecastPipeline() {
 
     const nowLocal = new Date();
 
-    // következő egész óra (a mostani rendszered szerint)
+    // következő egész óra
     const startHour = new Date(nowLocal);
     startHour.setMinutes(0, 0, 0);
     startHour.setHours(startHour.getHours() + 1);
@@ -140,4 +179,54 @@ async function runForecastPipeline() {
   }
 }
 
-runForecastPipeline();
+// Következő futás kiszámítása
+function calculateNextRun(finishedAt) {
+  // következő egész óra
+  const nextHour = new Date(finishedAt);
+  nextHour.setMinutes(0, 0, 0);
+  nextHour.setHours(nextHour.getHours() + 1);
+
+  // forecast vége: +6 óra
+  const forecastEnd = new Date(nextHour);
+  forecastEnd.setHours(forecastEnd.getHours() + 6);
+
+  // indulás: 15 perccel előtte
+  const nextRun = new Date(forecastEnd);
+  nextRun.setMinutes(nextRun.getMinutes() - 15);
+
+  return nextRun;
+}
+
+// Végtelen ciklus – PM2 alatt fut
+async function mainLoop() {
+  while (true) {
+    console.log("\n==============================");
+    console.log("🚀 Forecast ciklus indul...");
+    console.log("==============================");
+
+    // 1. régi adatok törlése
+    await deleteOldForecasts();
+
+    // 2–3. forecast futtatása + mentés
+    await runForecastPipeline();
+
+    // 4. mentjük, mikor végeztünk
+    const finishedAt = new Date();
+    await saveLastForecastTime(finishedAt);
+
+    // 5. következő futás kiszámítása
+    const nextRun = calculateNextRun(finishedAt);
+    console.log("⏭ Következő futás:", nextRun);
+
+    const waitMs = nextRun - finishedAt;
+    console.log("😴 Várakozás (ms):", waitMs);
+
+    if (waitMs > 0) {
+      await new Promise((res) => setTimeout(res, waitMs));
+    } else {
+      console.warn("⚠ Negatív várakozási idő, azonnali újrafutás.");
+    }
+  }
+}
+
+mainLoop();
