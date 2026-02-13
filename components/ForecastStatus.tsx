@@ -26,7 +26,7 @@ export default function ForecastStatus() {
     };
 
     load();
-    const interval = setInterval(load, 10000); // 10 másodpercenként frissít
+    const interval = setInterval(load, 10000);
     return () => clearInterval(interval);
   }, []);
 
@@ -35,10 +35,10 @@ export default function ForecastStatus() {
   const { status, lastRun, nextRun } = data;
 
   const colors: Record<string, string> = {
-    running: "bg-green-500",
-    waiting: "bg-yellow-500",
-    error: "bg-red-500",
-    unknown: "bg-gray-500",
+    running: "bg-success",
+    waiting: "bg-warning",
+    error: "bg-danger",
+    unknown: "bg-secondary",
   };
 
   const labels: Record<string, string> = {
@@ -49,23 +49,31 @@ export default function ForecastStatus() {
   };
 
   return (
-    <div className="flex items-center gap-3 mb-4 p-2 rounded-md bg-[#1a1a1a] border border-[#333]">
-      <div className={`w-3 h-3 rounded-full ${colors[status]}`} />
+    <div className="d-flex align-items-center gap-3 mb-4 p-3 rounded-4 bg-body-secondary border border-dark-subtle">
 
-      <div className="flex flex-col">
-        <span className="font-medium text-gray-200">{labels[status]}</span>
+      {/* SZÍNES KÖR */}
+      <div
+        className={`rounded-circle ${colors[status]}`}
+        style={{ width: 12, height: 12 }}
+      />
+
+      {/* EGY SOROS SZÖVEG */}
+      <div className="d-flex align-items-center flex-wrap gap-3">
+
+        <span className="fw-semibold">{labels[status]}</span>
 
         {lastRun && (
-          <span className="text-xs text-gray-400">
-            Utolsó futás: {new Date(lastRun).toLocaleString()}
+          <span className="text-muted small">
+            • Utolsó futás: {new Date(lastRun).toLocaleString()}
           </span>
         )}
 
         {nextRun && (
-          <span className="text-xs text-gray-400">
-            Következő futás: {new Date(nextRun).toLocaleString()}
+          <span className="text-muted small">
+            • Következő futás: {new Date(nextRun).toLocaleString()}
           </span>
         )}
+
       </div>
     </div>
   );
