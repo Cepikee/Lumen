@@ -8,6 +8,7 @@ import { useInsights } from "@/hooks/useInsights";
 import { useTimeseriesAll } from "@/hooks/useTimeseriesAll";
 import dynamic from "next/dynamic";
 import useSWR from "swr";
+import ForecastStatus from "@/components/ForecastStatus";
 
 // ⭐ Forecast API hook
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
@@ -149,8 +150,10 @@ export default function InsightFeedPage() {
             range={period}
           />
         </div>
+        
       )}
-
+import ForecastStatus from "@/components/ForecastStatus";
+      <ForecastStatus />
       {/* KATEGÓRIAKÁRTYÁK */}
       <section aria-labelledby="category-trends">
         <h2 id="category-trends" className="fs-5 fw-bold mb-2 visually-hidden">
