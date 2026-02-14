@@ -1,11 +1,8 @@
-// components/InsightCard.tsx
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
-import { useInView } from "@/lib/useInView";
+import DonutChart from "@/components/DonutChart";
 import InsightSparkline from "@/components/InsightSparkline";
-import InsightSourceRing from "@/components/InsightSourceRing";
 
 type InsightCardProps = {
   title: string;
@@ -20,96 +17,47 @@ type InsightCardProps = {
 
 export default function InsightCard({
   title,
-  score,
   sources,
   dominantSource,
   timeAgo,
   href,
   ringSources = [],
-  sparkline,
+  sparkline = [],
 }: InsightCardProps) {
   const linkHref = href || "#";
-  const disabled = !href;
-
-  const { ref, inView } = useInView(0.12);
-  const spark = useMemo(() => sparkline ?? [], [sparkline]);
 
   return (
     <article
-      ref={ref as any}
-      tabIndex={0}
-      role="article"
-      aria-labelledby={`insight-${title}`}
-      className="insight-card card border-0"
-      data-disabled={disabled ? "true" : "false"}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        flex: "1 1 auto",
-        minHeight: 140,
-        boxSizing: "border-box",
-      }}
+      className="card border-0 shadow-sm p-3 text-center h-100"
+      style={{ borderRadius: 16 }}
     >
-      <div
-        className="card-body d-flex flex-column gap-3"
-        style={{ display: "flex", flexDirection: "column", flex: 1 }}
-      >
-        <div className="d-flex align-items-start">
-          <div
-            className="me-3 d-flex align-items-center"
-            style={{ width: 64, height: 64, minWidth: 64 }}
-          >
-            {inView ? (
-              <InsightSourceRing sources={ringSources} aria-hidden="true" />
-            ) : (
-              <div className="bg-secondary rounded-circle w-100 h-100" />
-            )}
-          </div>
+      {/* Cím */}
+      <h3 className="h6 mb-3">{title}</h3>
 
-          <div className="flex-grow-1">
-            <h3 id={`insight-${title}`} className="insight-title h6 mb-1" style={{ margin: 0 }}>
-              {title}
-            </h3>
-
-            <div className="d-flex align-items-center gap-2">
-              <span className="badge bg-primary">{sources}</span>
-              <small className="text-secondary">{dominantSource}</small>
-            </div>
-
-            <div className="mt-2">
-              <small className="text-secondary">{timeAgo ?? "Nincs friss cikk"}</small>
-            </div>
-          </div>
-
-          <div className="ms-2 text-end d-flex flex-column gap-2">
-            {href ? (
-              <Link
-                href={linkHref}
-                className="insight-open-btn"
-                aria-label={`Megnyit ${title} kategória`}
-              >
-                Megnyit
-              </Link>
-            ) : (
-              <button className="insight-open-btn" disabled aria-disabled="true">
-                Nincs link
-              </button>
-            )}
-          </div>
-        </div>
-
-        <div className="card-footer bg-transparent border-0 pt-0" style={{ marginTop: "auto" }}>
-          {inView ? (
-            <InsightSparkline data={spark} aria-hidden="true" />
-          ) : (
-            <div style={{ height: 40 }} />
-          )}
-        </div>
+      {/* Donut chart */}
+      <div className="d-flex justify-content-center mb-3">
+        <DonutChart sources={ringSources} />
       </div>
 
-      <span className="visually-hidden" aria-live="polite">
-        {`${title} — ${sources} forrás — trend pontszám ${score}`}
-      </span>
+      {/* Metaadatok */}
+      <div className="mb-2">
+        <span className="badge bg-primary me-2">{sources} cikk</span>
+        <small className="text-muted">{dominantSource}</small>
+      </div>
+
+      <small className="text-muted d-block mb-3">{timeAgo}</small>
+
+      {/* Sparkline */}
+      <div className="mb-3">
+        <InsightSparkline data={sparkline} />
+      </div>
+
+      {/* Gomb */}
+      <div className="mt-auto">
+        <Link href={linkHref} className="btn btn-outline-primary btn-sm w-100">
+          Megnyit
+        </Link>
+      </div>
     </article>
   );
 }

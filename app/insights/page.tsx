@@ -162,10 +162,10 @@ export default function InsightFeedPage() {
         </h2>
 
         <div className="insight-feed-wrapper p-3 rounded-4">
-          <div className="row g-2">
+          <div className="row g-3">
             {loading
               ? Array.from({ length: 6 }).map((_, i) => (
-                  <div key={`skeleton-${i}`} className="col-12 d-flex">
+                  <div key={`skeleton-${i}`} className="col-12 col-md-6 col-lg-4">
                     <InsightCard
                       title="Betöltés..."
                       score={0}
@@ -179,11 +179,12 @@ export default function InsightFeedPage() {
                   </div>
                 ))
               : categoryItems.map((item) => (
-                  <div key={item.id} className="col-12 d-flex">
+                  <div key={item.id} className="col-12 col-md-6 col-lg-4">
                     <InsightCard {...item} />
                   </div>
                 ))}
           </div>
+
         </div>
       </section>
     </main>
