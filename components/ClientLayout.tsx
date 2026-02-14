@@ -19,9 +19,10 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   const isAdatvedelmi = pathname.includes("adatvedelem");
   const isASZF = pathname.includes("aszf");
   const isImpresszum = pathname.includes("impresszum");
+  const isInsights = pathname.includes("insights");
 
   // ⭐ Sidebar csak a főoldalon
-  const shouldShowSidebar = pathname === "/" && !isLanding && !isPremium && !isAdatvedelmi && !isASZF && !isImpresszum;
+  const shouldShowSidebar = pathname === "/" && !isLanding && !isPremium && !isAdatvedelmi && !isASZF && !isImpresszum && !isInsights;
 
   // THEME
   const theme = useUserStore((s) => s.theme);
@@ -126,7 +127,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   }
 
   // ⭐⭐⭐ PREMIUM OLDAL — HEADER IGEN, FULL WIDTH, NINCS MAX-WIDTH ⭐⭐⭐
-  if (isPremium || isAdatvedelmi || isASZF || isImpresszum) {
+  if (isPremium || isAdatvedelmi || isASZF || isImpresszum || isInsights) {
     return (
       <>
         <Header />
