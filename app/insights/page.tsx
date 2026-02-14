@@ -89,7 +89,7 @@ export default function InsightFeedPage() {
   });
 
   return (
-    <main className="container py-4">
+    <main className="container-fluid py-4">
       <ThemeSync />
 
       {/* HEADER */}
@@ -184,7 +184,6 @@ export default function InsightFeedPage() {
                   </div>
                 ))}
           </div>
-
         </div>
       </section>
     </main>
