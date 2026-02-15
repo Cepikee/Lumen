@@ -108,6 +108,7 @@
   padding: 10px 0;
   scroll-snap-type: x mandatory;
   white-space: nowrap;
+  justify-content: center;
 }
 
 
