@@ -1,5 +1,6 @@
-// summarizeLong.js — stabil, optimalizált, helyes prompt struktúrával
+// summarizeLong.js — OpenAI verzió (GPT‑4o‑mini + aiClient.js)
 const mysql = require("mysql2/promise");
+const { callOpenAI } = require("./aiClient");
 
 // --- Validáció ---
 function isValidDetailed(text) {
@@ -103,13 +104,13 @@ Fontos szabályok:
 - Ne írj bevezetőt vagy lezárást.
     `.trim();
 
-    // 4) AI hívás
-    let detailed = await global.callOllama(prompt, 300);
+    // 4) OpenAI hívás
+    let detailed = await callOpenAI(prompt, 300);
 
     // 5) Validáció — 1 újrapróbálás
     if (!isValidDetailed(detailed)) {
       console.warn(`[LONG] ⚠️ Első elemzés érvénytelen, újrapróbálás...`);
-      detailed = await global.callOllama(prompt, 300);
+      detailed = await callOpenAI(prompt, 300);
     }
 
     // 6) Fallback
@@ -123,10 +124,10 @@ A részletes tartalom hiánya miatt az elemzés korlátozott.
       `.trim();
     }
 
-    // 🔥 7) Tisztítás
+    // 7) Tisztítás
     detailed = cleanDetailedSummary(detailed, shortSummary);
 
-    // 🔥 8) Mentés
+    // 8) Mentés
     await conn.execute(
       `
       INSERT INTO summaries (article_id, detailed_content)

@@ -1,5 +1,6 @@
-// short.js — stabil, 1-instance kompatibilis verzió
+// short.js — OpenAI verzió (aiClient.js használatával)
 const mysql = require("mysql2/promise");
+const { callOpenAI } = require("./aiClient");
 
 // --- Validáció ---
 function isValidSummary(text) {
@@ -22,7 +23,7 @@ function isValidSummary(text) {
 }
 
 // --- Rövid összefoglaló ---
-async function summarizeShort(articleId, baseUrl) {
+async function summarizeShort(articleId) {
   const conn = await mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -45,20 +46,22 @@ async function summarizeShort(articleId, baseUrl) {
     }
 
     // 2) Prompt
-    const prompt = `Foglaljad össze a következő szöveget röviden, maximum 5 mondatban magyarul.
+    const prompt = `
+Foglaljad össze a következő szöveget röviden, maximum 5 mondatban magyarul.
 Csak az összefoglalót írd ki, bevezető mondat nélkül.
 Ne írj olyat, hogy "Itt a lényeg", "Íme az összefoglaló", "Röviden", vagy bármilyen bevezetőt.
 Csak magyarul válaszolj:
 
-${contentText}`.trim();
+${contentText}
+    `.trim();
 
-    // 3) AI hívás — JAVÍTVA!
-    let summary = await global.callOllama(prompt, 300);
+    // 3) OpenAI hívás (GPT‑4o‑mini)
+    let summary = await callOpenAI(prompt, 200);
 
     // 4) Validálás + újrapróbálás
     if (!isValidSummary(summary)) {
       console.warn(`[SHORT] ⚠️ Érvénytelen összefoglaló, újrapróbálás...`);
-      summary = await global.callOllama(prompt, 300);
+      summary = await callOpenAI(prompt, 200);
     }
 
     if (!isValidSummary(summary)) {
