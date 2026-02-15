@@ -122,17 +122,21 @@
 
 /* Kártyák fix szélessége */
 .insight-card-wrapper {
-  min-width: 260px;
-  max-width: 260px;
+  min-width: 200px;
+  max-width: 200px;
   flex-shrink: 0;
   scroll-snap-align: start;
 }
 
 
+
 /* Fix kártyaszélesség a scrollhoz */
+/* Kompakt kártyaméret */
 .insight-card {
-  width: 260px !important;
-  min-width: 260px !important;
-  max-width: 260px !important;
+  width: 200px !important;
+  min-width: 200px !important;
+  max-width: 200px !important;
+  padding: 12px !important;
   flex-shrink: 0 !important;
 }
+
