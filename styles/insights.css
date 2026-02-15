@@ -101,12 +101,15 @@
 /* Vízszintes scroll konténer */
 .insight-horizontal-scroll {
   display: flex;
+  flex-direction: row;
   gap: 16px;
   overflow-x: auto;
+  overflow-y: hidden;
   padding: 10px 0;
   scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
+  white-space: nowrap;
 }
+
 
 .insight-horizontal-scroll::-webkit-scrollbar {
   height: 8px;
@@ -119,7 +122,17 @@
 
 /* Kártyák fix szélessége */
 .insight-card-wrapper {
-  min-width: 260px; /* állítható */
+  min-width: 260px;
+  max-width: 260px;
   flex-shrink: 0;
   scroll-snap-align: start;
+}
+
+
+/* Fix kártyaszélesség a scrollhoz */
+.insight-card {
+  width: 260px !important;
+  min-width: 260px !important;
+  max-width: 260px !important;
+  flex-shrink: 0 !important;
 }
