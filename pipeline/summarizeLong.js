@@ -1,7 +1,8 @@
 // summarizeLong.js — OpenAI verzió (GPT‑4o‑mini + aiClient.js)
+require("dotenv").config({ path: "/var/www/utom/.env" });
 const mysql = require("mysql2/promise");
 const { callOpenAI } = require("./aiClient");
-require("dotenv").config();
+
 // --- Validáció ---
 function isValidDetailed(text) {
   if (!text) return false;

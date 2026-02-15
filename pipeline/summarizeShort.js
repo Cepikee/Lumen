@@ -1,7 +1,8 @@
 // short.js — OpenAI verzió (aiClient.js használatával)
+require("dotenv").config({ path: "/var/www/utom/.env" });
 const mysql = require("mysql2/promise");
 const { callOpenAI } = require("./aiClient");
-require("dotenv").config();
+
 // --- Validáció ---
 function isValidSummary(text) {
   if (!text) return false;
