@@ -162,28 +162,29 @@ export default function InsightFeedPage() {
         </h2>
 
         <div className="insight-feed-wrapper p-3 rounded-4">
-          <div className="row g-3">
-            {loading
-              ? Array.from({ length: 6 }).map((_, i) => (
-                  <div key={`skeleton-${i}`} className="col-12 col-md-6 col-lg-4">
-                    <InsightCard
-                      title="Betöltés..."
-                      score={0}
-                      sources={0}
-                      dominantSource=""
-                      timeAgo=""
-                      href="#"
-                      ringSources={[]}
-                      sparkline={[]}
-                    />
-                  </div>
-                ))
-              : categoryItems.map((item) => (
-                  <div key={item.id} className="col-12 col-md-6 col-lg-4">
-                    <InsightCard {...item} />
-                  </div>
-                ))}
-          </div>
+              <div className="insight-horizontal-scroll">
+                {loading
+                  ? Array.from({ length: 6 }).map((_, i) => (
+                      <div key={`skeleton-${i}`} className="insight-card-wrapper">
+                        <InsightCard
+                          title="Betöltés..."
+                          score={0}
+                          sources={0}
+                          dominantSource=""
+                          timeAgo=""
+                          href="#"
+                          ringSources={[]}
+                          sparkline={[]}
+                        />
+                      </div>
+                    ))
+                  : categoryItems.map((item) => (
+                      <div key={item.id} className="insight-card-wrapper">
+                        <InsightCard {...item} />
+                      </div>
+                    ))}
+              </div>
+
         </div>
       </section>
     </main>

@@ -96,3 +96,30 @@
 [data-theme="dark"] .insight-open-btn:hover {
   background: #333;
 }
+
+
+/* Vízszintes scroll konténer */
+.insight-horizontal-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 10px 0;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.insight-horizontal-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.insight-horizontal-scroll::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 4px;
+}
+
+/* Kártyák fix szélessége */
+.insight-card-wrapper {
+  min-width: 260px; /* állítható */
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
