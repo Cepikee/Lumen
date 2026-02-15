@@ -1,7 +1,6 @@
-// short.js — OpenAI verzió (aiClient.js használatával)
+// short.js — Ollama verzió (OpenAI kikapcsolva)
 require("dotenv").config({ path: "/var/www/utom/.env" });
 const mysql = require("mysql2/promise");
-const { callOpenAI } = require("./aiClient");
 
 // --- Validáció ---
 function isValidSummary(text) {
@@ -56,13 +55,13 @@ Csak magyarul válaszolj:
 ${contentText}
     `.trim();
 
-    // 3) OpenAI hívás (GPT‑4o‑mini)
-    let summary = await callOpenAI(prompt, 200);
+    // 3) OLLAMA hívás (régi rendszer)
+    let summary = await global.callOllama(prompt, 200);
 
     // 4) Validálás + újrapróbálás
     if (!isValidSummary(summary)) {
       console.warn(`[SHORT] ⚠️ Érvénytelen összefoglaló, újrapróbálás...`);
-      summary = await callOpenAI(prompt, 200);
+      summary = await global.callOllama(prompt, 200);
     }
 
     if (!isValidSummary(summary)) {
