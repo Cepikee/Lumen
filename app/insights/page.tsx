@@ -1,6 +1,6 @@
 "use client";
 import "@/styles/insights.css";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import InsightCard from "@/components/InsightCard";
 import InsightFilters from "@/components/InsightFilters";
 import ThemeSync from "@/components/ThemeSync";
@@ -46,6 +46,47 @@ export default function InsightFeedPage() {
 
   // ⭐ Forecast betöltése
   const { data: forecastData } = useForecast();
+
+  // ⭐ Drag-scroll ref
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    const onMouseDown = (e: MouseEvent) => {
+      isDown = true;
+      startX = e.pageX - el.offsetLeft;
+      scrollLeft = el.scrollLeft;
+    };
+
+    const onMouseLeave = () => { isDown = false; };
+    const onMouseUp = () => { isDown = false; };
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - el.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      el.scrollLeft = scrollLeft - walk;
+    };
+
+    el.addEventListener("mousedown", onMouseDown);
+    el.addEventListener("mouseleave", onMouseLeave);
+    el.addEventListener("mouseup", onMouseUp);
+    el.addEventListener("mousemove", onMouseMove);
+
+    return () => {
+      el.removeEventListener("mousedown", onMouseDown);
+      el.removeEventListener("mouseleave", onMouseLeave);
+      el.removeEventListener("mouseup", onMouseUp);
+      el.removeEventListener("mousemove", onMouseMove);
+    };
+  }, []);
 
   const categoryTrends = useMemo<LocalRawCategory[]>(() => {
     if (!data) return [];
@@ -101,39 +142,11 @@ export default function InsightFeedPage() {
 
         <div className="d-flex gap-2 align-items-center">
           <div className="insights-filter-group me-2">
-  <button
-    type="button"
-    className={`insights-filter-btn ${period === "24h" ? "active" : ""}`}
-    onClick={() => setPeriod("24h")}
-  >
-    24h
-  </button>
-
-  <button
-    type="button"
-    className={`insights-filter-btn ${period === "7d" ? "active" : ""}`}
-    onClick={() => setPeriod("7d")}
-  >
-    7d
-  </button>
-
-  <button
-    type="button"
-    className={`insights-filter-btn ${period === "30d" ? "active" : ""}`}
-    onClick={() => setPeriod("30d")}
-  >
-    30d
-  </button>
-
-  <button
-    type="button"
-    className={`insights-filter-btn ${period === "90d" ? "active" : ""}`}
-    onClick={() => setPeriod("90d")}
-  >
-    90d
-  </button>
-</div>
-
+            <button type="button" className={`insights-filter-btn ${period === "24h" ? "active" : ""}`} onClick={() => setPeriod("24h")}>24h</button>
+            <button type="button" className={`insights-filter-btn ${period === "7d" ? "active" : ""}`} onClick={() => setPeriod("7d")}>7d</button>
+            <button type="button" className={`insights-filter-btn ${period === "30d" ? "active" : ""}`} onClick={() => setPeriod("30d")}>30d</button>
+            <button type="button" className={`insights-filter-btn ${period === "90d" ? "active" : ""}`} onClick={() => setPeriod("90d")}>90d</button>
+          </div>
 
           <InsightFilters active={sort} onChange={(f) => setSort(f)} />
         </div>
@@ -149,12 +162,10 @@ export default function InsightFeedPage() {
             forecast={forecastData?.forecast || {}}
             range={period}
           />
-             <ForecastStatus />
+          <ForecastStatus />
         </div>
-        
       )}
 
-   
       {/* KATEGÓRIAKÁRTYÁK */}
       <section aria-labelledby="category-trends">
         <h2 id="category-trends" className="fs-5 fw-bold mb-2 visually-hidden">
@@ -162,29 +173,28 @@ export default function InsightFeedPage() {
         </h2>
 
         <div className="insight-feed-wrapper p-3 rounded-4">
-              <div className="insight-horizontal-scroll">
-                {loading
-                  ? Array.from({ length: 6 }).map((_, i) => (
-                      <div key={`skeleton-${i}`} className="insight-card-wrapper">
-                        <InsightCard
-                          title="Betöltés..."
-                          score={0}
-                          sources={0}
-                          dominantSource=""
-                          timeAgo=""
-                          href="#"
-                          ringSources={[]}
-                          sparkline={[]}
-                        />
-                      </div>
-                    ))
-                  : categoryItems.map((item) => (
-                      <div key={item.id} className="insight-card-wrapper">
-                        <InsightCard {...item} />
-                      </div>
-                    ))}
-              </div>
-
+          <div className="insight-horizontal-scroll" ref={scrollRef}>
+            {loading
+              ? Array.from({ length: 6 }).map((_, i) => (
+                  <div key={`skeleton-${i}`} className="insight-card-wrapper">
+                    <InsightCard
+                      title="Betöltés..."
+                      score={0}
+                      sources={0}
+                      dominantSource=""
+                      timeAgo=""
+                      href="#"
+                      ringSources={[]}
+                      sparkline={[]}
+                    />
+                  </div>
+                ))
+              : categoryItems.map((item) => (
+                  <div key={item.id} className="insight-card-wrapper">
+                    <InsightCard {...item} />
+                  </div>
+                ))}
+          </div>
         </div>
       </section>
     </main>
