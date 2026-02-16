@@ -6,6 +6,7 @@ import mysql, { RowDataPacket } from "mysql2/promise";
 import Parser from "rss-parser";
 import fs from "fs";
 import * as cheerio from "cheerio";
+import puppeteer from "puppeteer";
 
 /** Logolás */
 function logError(source: string, err: any) {
@@ -46,77 +47,81 @@ function cleanHtmlText(text: string) {
     .trim();
 }
 
-/** 444.hu cikkoldal scraper */
+/** ⭐ Puppeteer-alapú 444.hu cikk scraper */
 async function fetch444ArticleContent(url: string): Promise<string> {
-  const res = await fetch(url, {
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
-      Accept: "text/html",
-    },
-  });
+  try {
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
 
-  const html = await res.text();
-  const $ = cheerio.load(html);
+    const page = await browser.newPage();
+    await page.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36"
+    );
 
-  const article = $("article");
+    await page.goto(url, { waitUntil: "networkidle2", timeout: 60000 });
 
-  // Zavaró elemek törlése
-  article.find("aside").remove();
-  article.find(".related").remove();
-  article.find(".recommended").remove();
-  article.find(".share").remove();
-  article.find(".social").remove();
-  article.find(".ad").remove();
-  article.find(".advertisement").remove();
-  article.find("script").remove();
-  article.find("style").remove();
-  article.find("nav").remove();
-  article.find("footer").remove();
-  article.find("#comments").remove();
-  article.find("iframe").remove();
+    const html = await page.content();
+    await browser.close();
 
-  const text = cleanHtmlText(article.text());
-  return text;
+    const $ = cheerio.load(html);
+    const article = $("article");
+
+    // Zavaró elemek törlése
+    article.find("aside, .related, .recommended, .share, .social, .ad, .advertisement, script, style, nav, footer, #comments, iframe").remove();
+
+    const text = cleanHtmlText(article.text());
+    return text || "";
+  } catch (err) {
+    logError("444-PUPPETEER", err);
+    return "";
+  }
 }
 
-/** 444.hu főoldal scraper (cikk linkek) */
+/** ⭐ Puppeteer-alapú 444.hu főoldal scraper */
 async function fetch444Articles(): Promise<{ title: string; link: string }[]> {
-  const url = "https://444.hu";
+  try {
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
 
-  const res = await fetch(url, {
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
-      Accept: "text/html",
-    },
-  });
+    const page = await browser.newPage();
+    await page.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36"
+    );
 
-  const html = await res.text();
-  const $ = cheerio.load(html);
+    await page.goto("https://444.hu", { waitUntil: "networkidle2", timeout: 60000 });
 
-  const articles: { title: string; link: string }[] = [];
+    const html = await page.content();
+    await browser.close();
 
-  $("a").each((_, el) => {
-    const href = $(el).attr("href");
-    let title = $(el).text().trim();
+    const $ = cheerio.load(html);
+    const articles: { title: string; link: string }[] = [];
 
-    if (!href) return;
-    if (!title) return;
-    if (title.length < 10) return;
+    $("a").each((_, el) => {
+      const href = $(el).attr("href");
+      const title = $(el).text().trim();
 
-    let link = href.startsWith("http") ? href : `https://444.hu${href}`;
-    if (!link.startsWith("https://444.hu")) return;
+      if (!href || !title || title.length < 10) return;
 
-    articles.push({ title, link });
-  });
+      const link = href.startsWith("http") ? href : `https://444.hu${href}`;
+      if (!link.startsWith("https://444.hu")) return;
 
-  const unique = new Map<string, { title: string; link: string }>();
-  for (const a of articles) {
-    if (!unique.has(a.link)) unique.set(a.link, a);
+      articles.push({ title, link });
+    });
+
+    const unique = new Map<string, { title: string; link: string }>();
+    for (const a of articles) {
+      if (!unique.has(a.link)) unique.set(a.link, a);
+    }
+
+    return Array.from(unique.values()).slice(0, 50);
+  } catch (err) {
+    logError("444-PUPPETEER-LIST", err);
+    return [];
   }
-
-  return Array.from(unique.values()).slice(0, 50);
 }
 
 export async function GET() {
@@ -125,8 +130,6 @@ export async function GET() {
       headers: {
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
-        Accept:
-          "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
       },
     });
 
@@ -186,7 +189,7 @@ export async function GET() {
       }
     }
 
-    /** 444 HTML scraper */
+    /** ⭐ 444.hu feldolgozás Puppeteerrel */
     async function process444Html() {
       try {
         const articles = await fetch444Articles();
@@ -231,7 +234,8 @@ export async function GET() {
     await processRssFeed("https://index.hu/24ora/rss/", "Index");
     await processRssFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio");
 
-    await process444Html(); // 444 HTML scraper + content
+    // ⭐ 444.hu Puppeteer scraper
+    await process444Html();
 
     await connection.end();
 
