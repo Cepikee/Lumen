@@ -1,15 +1,16 @@
 // app/api/insights/timeseries/all/route.ts
+
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-function normalizeDbString(s: any): string | null {
-  if (s === null || s === undefined) return null;
+function fixCat(s: any): string | null {
+  if (!s) return null;
   let t = String(s).trim();
   if (!t) return null;
-  if (t.toLowerCase() === "null") return null;
-  const hasMojibake = /[├â├ę├╝├║]/.test(t);
-  if (hasMojibake) {
-    try { t = Buffer.from(t, "latin1").toString("utf8"); } catch {}
+  if (/[├â├ę├╝├║]/.test(t)) {
+    try {
+      t = Buffer.from(t, "latin1").toString("utf8").trim();
+    } catch {}
   }
   return t || null;
 }
@@ -29,38 +30,24 @@ export async function GET(req: Request) {
   const startStr = startUtc.toISOString().slice(0, 19).replace("T", " ");
 
   try {
-    // --- BEILLESZTENDŐ JAVÍTOTT BLOKK (itt legyen) ---
     const [cats]: any = await db.query(`
       SELECT DISTINCT TRIM(category) AS category
       FROM summaries
       WHERE category IS NOT NULL AND category <> ''
     `);
 
-    function decodeIfMojibake(s: string | null): string | null {
-      if (!s) return null;
-      const t = String(s).trim();
-      if (!t) return null;
-      if (/[├â├ę├╝├║]/.test(t)) {
-        try { return Buffer.from(t, "latin1").toString("utf8").trim(); } catch { return t; }
-      }
-      return t;
-    }
-
-    const rawCats = (cats || []).map((c: any) => c.category);
-    const normSet = new Map<string, string>();
-    for (const rc of rawCats) {
-      const decoded = decodeIfMojibake(rc) ?? rc;
-      const normalized = decoded ? decoded.trim() : "";
-      if (!normalized) continue;
-      const key = normalized.toLowerCase();
-      if (!normSet.has(key)) normSet.set(key, normalized);
-    }
-    const categories = Array.from(normSet.values());
+    const categories = Array.from(
+      new Map(
+        (cats || [])
+          .map((c: any) => fixCat(c.category))
+          .filter(Boolean)
+          .map((c: string) => [c.toLowerCase(), c])
+      ).values()
+    );
 
     const results: any[] = [];
 
     for (const cat of categories) {
-      if (!cat) continue;
       const [rows]: any = await db.query(
         `
         SELECT 
@@ -76,7 +63,9 @@ export async function GET(req: Request) {
       );
 
       const map = new Map<string, number>();
-      for (const r of rows || []) map.set(String(r.bucket), Number(r.count) || 0);
+      for (const r of rows || []) {
+        map.set(String(r.bucket), Number(r.count) || 0);
+      }
 
       const cursor = new Date(startUtc);
       cursor.setMinutes(0, 0, 0);
@@ -94,6 +83,9 @@ export async function GET(req: Request) {
     return NextResponse.json({ success: true, period, categories: results });
   } catch (err) {
     console.error("Timeseries ALL error:", err);
-    return NextResponse.json({ success: false, error: "server_error" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "server_error" },
+      { status: 500 }
+    );
   }
 }

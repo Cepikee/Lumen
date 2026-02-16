@@ -1,3 +1,5 @@
+// components/InsightsOverviewChart.tsx
+
 "use client";
 
 import {
@@ -71,28 +73,40 @@ export default function InsightsOverviewChart({
   height = 300,
   range = "24h",
 }: any) {
-
-const theme = useUserStore((s) => s.theme);  
-  const isDark = theme === "dark" || (theme === "system" && typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  const theme = useUserStore((s) => s.theme);
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const textColor = isDark ? "#ddd" : "#333";
 
-const gridColor = isDark
-  ? "rgba(255,255,255,0.15)"   // sötét mód: finom világos grid
-  : "rgba(0,0,0,0.12)";        // világos mód: finom sötét grid
+  const gridColor = isDark
+    ? "rgba(255,255,255,0.15)"
+    : "rgba(0,0,0,0.12)";
 
   const { datasets } = useMemo(() => {
     const ds: any[] = [];
 
-    // ===== HISTORY =====
-    data.forEach((cat: any) => {
-      const color = getCategoryColor(cat.category);
+    // HISTORY
+    (data || []).forEach((cat: any) => {
+      const label = cat?.category ?? "Ismeretlen";
+      const color = getCategoryColor(label);
+      const points = Array.isArray(cat?.points) ? cat.points : [];
+
       ds.push({
-        label: cat.category,
-        data: cat.points.map((p: any) => ({
-          x: new Date(p.date),
-          y: p.count,
-        })),
+        label,
+        data: points
+          .map((p: any) => {
+            const dateVal = p?.date ? new Date(p.date) : null;
+            const countVal =
+              typeof p?.count === "number"
+                ? p.count
+                : Number(p?.count) || 0;
+            return dateVal ? { x: dateVal, y: countVal } : null;
+          })
+          .filter(Boolean),
         borderColor: color,
         backgroundColor: color + "33",
         pointRadius: 0,
@@ -102,16 +116,25 @@ const gridColor = isDark
       });
     });
 
-    // ===== AI FORECAST – CSAK 24H =====
-    if (range === "24h") {
+    // AI FORECAST – csak 24h
+    if (range === "24h" && forecast && typeof forecast === "object") {
       Object.entries(forecast).forEach(([catName, fc]: any) => {
+        const series = Array.isArray(fc) ? fc : [];
         const color = getCategoryColor(catName);
         ds.push({
           label: "AI előrejelzés",
-          data: fc.map((p: any) => ({
-            x: new Date(new Date(p.date).getTime() + 3600000),
-            y: p.predicted,
-          })),
+          data: series
+            .map((p: any) => {
+              const date = p?.date ? new Date(p.date) : null;
+              const pred =
+                typeof p?.predicted === "number"
+                  ? p.predicted
+                  : Number(p?.predicted) || 0;
+              return date
+                ? { x: new Date(date.getTime() + 3600000), y: pred }
+                : null;
+            })
+            .filter(Boolean),
           borderColor: color,
           borderDash: [6, 6],
           borderWidth: 2,
@@ -123,7 +146,7 @@ const gridColor = isDark
         });
       });
 
-      // DUMMY AI LEGEND
+      // dummy AI legend
       ds.push({
         label: "AI előrejelzés",
         data: [],
@@ -138,7 +161,7 @@ const gridColor = isDark
     }
 
     return { datasets: ds };
-  }, [data, forecast, range]);
+  }, [data, forecast, range, theme]);
 
   const options: any = {
     responsive: true,
@@ -153,6 +176,8 @@ const gridColor = isDark
         grid: { color: gridColor },
       },
       y: {
+        beginAtZero: true,
+        suggestedMax: 5,
         ticks: { color: textColor },
         grid: { color: gridColor },
       },
@@ -161,7 +186,6 @@ const gridColor = isDark
       legend: {
         labels: {
           color: textColor,
-
           generateLabels: (chart: any) => {
             const original =
               ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
@@ -169,25 +193,19 @@ const gridColor = isDark
             return original.filter((item: any) => {
               const ds = chart.data.datasets[item.datasetIndex];
               if (!ds) return false;
-               // 🚫 HÍR KATEGÓRIA KIZÁRÁSA
-              if (ds.label === "hír" || ds.label === "hir") return false;
-              // normál kategóriák
+              const lbl = (ds.label || "").toString().toLowerCase();
+              if (lbl === "hír" || lbl === "hir" || lbl === "news") return false;
               if (!ds._isForecast) return true;
-
-              // AI legend csak 24h-ban
               if (range === "24h" && ds._isDummyAiLegend) return true;
-
               return false;
             });
           },
         },
-
         onClick: (e: any, item: any, legend: any) => {
           const chart = legend.chart;
           const idx = item.datasetIndex;
           const ds = chart.data.datasets[idx];
 
-          // 7d / 30d / 90d → normál toggle
           if (range !== "24h") {
             const visible = chart.isDatasetVisible(idx);
             chart.setDatasetVisibility(idx, !visible);
@@ -195,7 +213,6 @@ const gridColor = isDark
             return;
           }
 
-          // Dummy AI → összes AI ki/be
           if (ds._isDummyAiLegend) {
             const anyVisible = chart.data.datasets.some(
               (d: any, i: number) =>
@@ -214,7 +231,6 @@ const gridColor = isDark
             return;
           }
 
-          // normál kategória
           const visible = chart.isDatasetVisible(idx);
           chart.setDatasetVisibility(idx, !visible);
           chart.update();
@@ -262,10 +278,7 @@ const gridColor = isDark
 
   return (
     <div style={{ width: "100%", height }}>
-      {/* 🔑 EZ A SOR OLDJA MEG A PROBLÉMÁT */}
       <Line key={range + theme} data={{ datasets }} options={options} />
     </div>
   );
 }
-
-// STABIL VERZIÓ 2026.02.04. ESTE. " "
