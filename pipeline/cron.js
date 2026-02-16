@@ -1,5 +1,5 @@
 // cron.js — OpenAI verzió, 3‑cikkes batch, stabil pipeline
-require("dotenv").config();
+require("dotenv").config({ path: "/var/www/utom/.env" });
 
 // ─────────────────────────────────────────────
 //  IMPORTOK

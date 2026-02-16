@@ -1,4 +1,5 @@
 // aiClient.js
+require("dotenv").config({ path: "/var/www/utom/.env" });
 const OpenAI = require("openai");
 
 const openai = new OpenAI({
