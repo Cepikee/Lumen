@@ -238,9 +238,12 @@ export async function GET() {
     await processRssFeed("https://index.hu/24ora/rss/", "Index");
     await processRssFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio");
 
-    // ---- 444.hu FEED PUPPETEERREL ----
-    const feed444 = await fetch444FeedWithPuppeteer();
-    await processRssFeed(feed444, "444.hu", true);
+// ---- 444.hu FEED CLOUDFLARE WORKERREL ----
+const feed444 = await fetch("https://royal-king-47c3.vashiri6562.workers.dev/")
+  .then(r => r.text());
+
+await processRssFeed(feed444, "444.hu", true);
+
 
     await connection.end();
 
