@@ -7,17 +7,9 @@ function normalizeDbString(s: any): string | null {
   let t = String(s).trim();
   if (!t) return null;
   if (t.toLowerCase() === "null") return null;
-
-  const hasMojibake = /[├â├ę├╝├║]/.test(t);
-  if (hasMojibake) {
-    try {
-      t = Buffer.from(t, "latin1").toString("utf8");
-    } catch {}
-  }
   return t || null;
 }
 
-// Convert a Date to local (server) ISO string without timezone shift issues
 function toLocalISOString(date: Date) {
   const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
   return local.toISOString();
@@ -37,13 +29,14 @@ export async function GET(req: Request) {
 
   const now = new Date();
   let start: Date;
-  if (mode === "hours") start = new Date(now.getTime() - hours * 60 * 60 * 1000);
-  else {
+
+  if (mode === "hours") {
+    start = new Date(now.getTime() - hours * 60 * 60 * 1000);
+  } else {
     start = new Date(now);
     start.setDate(start.getDate() - (days - 1));
   }
 
-  // Use local ISO (no UTC shift) for SQL comparison
   const startStr = toLocalISOString(start).slice(0, 19).replace("T", " ");
 
   const rawCategory = url.searchParams.get("category");
@@ -62,17 +55,21 @@ export async function GET(req: Request) {
       }
     }
 
-    // push start time after category param (or as only param)
     params.push(startStr);
 
-    const periodClause = `${where ? " AND" : " WHERE"} published_at >= ?`;
+    const periodClause = `${where ? " AND" : " WHERE"} created_at >= ?`;
 
     const sql = `
-      SELECT id, title, category, published_at, source AS dominantSource
-      FROM articles
+      SELECT 
+        article_id AS id,
+        title,
+        category,
+        created_at,
+        source AS dominantSource
+      FROM summaries
       ${where}
       ${periodClause}
-      ORDER BY published_at DESC
+      ORDER BY created_at DESC
     `;
 
     const [rows]: any = await db.query(sql, params);
@@ -90,11 +87,10 @@ export async function GET(req: Request) {
     >();
 
     for (const r of rows || []) {
-      const raw = r.category ?? null;
-      const cat = normalizeDbString(raw);
+      const cat = normalizeDbString(r.category);
       const key = cat ?? "__NULL__";
 
-      const publishedAt = r.published_at ? new Date(r.published_at) : null;
+      const publishedAt = r.created_at ? new Date(r.created_at) : null;
       const dominantSource = r.dominantSource ? String(r.dominantSource).trim() : "Ismeretlen";
 
       if (!catMap.has(key)) {
@@ -118,9 +114,12 @@ export async function GET(req: Request) {
       }
 
       if (publishedAt) {
-        // bucket using local ISO so keys match startStr and cursor keys
         const local = new Date(publishedAt.getTime() - publishedAt.getTimezoneOffset() * 60000);
-        const bucketKey = mode === "hours" ? local.toISOString().slice(0, 13) + ":00:00" : local.toISOString().slice(0, 10);
+        const bucketKey =
+          mode === "hours"
+            ? local.toISOString().slice(0, 13) + ":00:00"
+            : local.toISOString().slice(0, 10);
+
         entry.sparkBuckets.set(bucketKey, (entry.sparkBuckets.get(bucketKey) || 0) + 1);
       }
     }
@@ -133,8 +132,13 @@ export async function GET(req: Request) {
       const steps = mode === "hours" ? hours : days;
       for (let i = 0; i < steps; i++) {
         const localCursor = new Date(cursor.getTime() - cursor.getTimezoneOffset() * 60000);
-        const key = mode === "hours" ? localCursor.toISOString().slice(0, 13) + ":00:00" : localCursor.toISOString().slice(0, 10);
+        const key =
+          mode === "hours"
+            ? localCursor.toISOString().slice(0, 13) + ":00:00"
+            : localCursor.toISOString().slice(0, 10);
+
         spark.push(buckets.get(key) ?? 0);
+
         if (mode === "hours") cursor.setHours(cursor.getHours() + 1);
         else cursor.setDate(cursor.getDate() + 1);
       }
@@ -145,9 +149,15 @@ export async function GET(req: Request) {
     const categories = Array.from(catMap.values())
       .map((e) => {
         const total = Array.from(e.sourceCounts.values()).reduce((sum: number, c: number) => sum + c, 0) || 1;
+
         const ringSources = Array.from(e.sourceCounts.entries()).map(([label, count]) => {
           const normalized = label.toLowerCase().replace(".hu", "").trim();
-          return { name: normalized, label, count, percent: Math.round((count / total) * 100) };
+          return {
+            name: normalized,
+            label,
+            count,
+            percent: Math.round((count / total) * 100),
+          };
         });
 
         return {
@@ -166,11 +176,13 @@ export async function GET(req: Request) {
       id: String(r.id),
       title: r.title,
       category: normalizeDbString(r.category),
-      timeAgo: r.published_at ? toLocalISOString(new Date(r.published_at)) : null,
+      timeAgo: r.created_at ? toLocalISOString(new Date(r.created_at)) : null,
       dominantSource: r.dominantSource || "",
       sources: 1,
       score: 0,
-      href: normalizeDbString(r.category) ? `/insights/category/${encodeURIComponent(normalizeDbString(r.category)!)}` : `/insights/${r.id}`,
+      href: normalizeDbString(r.category)
+        ? `/insights/category/${encodeURIComponent(normalizeDbString(r.category)!)}` 
+        : `/insights/${r.id}`,
     }));
 
     return NextResponse.json({ success: true, period, categories, items });
