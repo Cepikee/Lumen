@@ -78,10 +78,6 @@ async function loadWithPuppeteer(url: string): Promise<string> {
   }
 }
 
-
-
-
-
 /** ⭐ Portfolio fallback */
 async function fetchPortfolioArticle(url: string): Promise<string> {
   try {
@@ -114,8 +110,6 @@ async function fetchPortfolioArticle(url: string): Promise<string> {
     return "";
   }
 }
-
-
 
 export async function GET() {
   try {
@@ -167,10 +161,18 @@ export async function GET() {
             const sourceId = detectSourceId(link);
             if (!sourceId) continue;
 
-            // ⭐ 444.hu feed HTML → tiszta szöveg
-            let rawContent = item["content:encoded"] || item.content || "";
-let content = cleanHtmlText(cheerio.load(rawContent).text());
-// ⭐ Portfolio fallback
+            let content: string;
+
+            if (sourceId === 6) {
+              // ⭐ 444.hu → teljes HTML-t mentünk, nem tisztítunk
+              content = item["content:encoded"] || item.content || "";
+            } else {
+              // ⭐ Minden más forrás → tisztított szöveg
+              const rawContent = item["content:encoded"] || item.content || "";
+              content = cleanHtmlText(cheerio.load(rawContent).text());
+            }
+
+            // ⭐ Portfolio fallback
             if (sourceId === 5 && content.length < 500) {
               content = await fetchPortfolioArticle(link);
             }
@@ -197,11 +199,6 @@ let content = cleanHtmlText(cheerio.load(rawContent).text());
       }
     }
 
-    
-  
-
-
-
     // ---- NORMÁL FEED LISTA ----
     await processRssFeed("https://telex.hu/rss", "Telex");
     await processRssFeed("https://hvg.hu/rss", "HVG");
@@ -209,6 +206,7 @@ let content = cleanHtmlText(cheerio.load(rawContent).text());
     await processRssFeed("https://index.hu/24ora/rss/", "Index");
     await processRssFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio");
     await processRssFeed("https://444.hu/feed", "444.hu");
+
     await connection.end();
 
     /** ⭐ FEED STATISZTIKA KIÍRÁSA */
