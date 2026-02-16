@@ -34,6 +34,7 @@ async function fetchHtml444(url) {
 
   const browser = await puppeteer.launch({
     headless: true,
+    executablePath: "/root/.cache/puppeteer/chrome/linux-145.0.7632.67/chrome-linux64/chrome",
     args: [
       "--no-sandbox",
       "--disable-setuid-sandbox",
