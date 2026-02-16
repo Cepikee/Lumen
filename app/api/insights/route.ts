@@ -17,6 +17,12 @@ function normalizeDbString(s: any): string | null {
   return t || null;
 }
 
+// CET normalizáló
+function toLocalISOString(date: Date) {
+  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+  return local.toISOString();
+}
+
 export async function GET(req: Request) {
   const url = new URL(req.url);
 
@@ -46,8 +52,7 @@ export async function GET(req: Request) {
     start.setDate(start.getDate() - (days - 1));
   }
 
-  const startStr = start.toISOString().slice(0, 19).replace("T", " ");
-
+  const startStr = toLocalISOString(start).slice(0, 19).replace("T", " ");
 
   // --- category filter ---
   const rawCategory = url.searchParams.get("category");
@@ -71,11 +76,7 @@ export async function GET(req: Request) {
 
     params.push(startStr);
 
-    const periodClause =
-      mode === "hours"
-        ? `${where ? " AND" : " WHERE"} published_at >= ?`
-        : `${where ? " AND" : " WHERE"} published_at >= ?
-`;
+    const periodClause = `${where ? " AND" : " WHERE"} published_at >= ?`;
 
     const sql = `
       SELECT id, title, category, published_at, source AS dominantSource
@@ -98,7 +99,7 @@ export async function GET(req: Request) {
         sourceSet: Set<string>;
         lastArticleAt: string | null;
         sourceCounts: Map<string, number>;
-        sparkBuckets: Map<string, number>; // ÚJ
+        sparkBuckets: Map<string, number>;
       }
     >();
 
@@ -107,9 +108,7 @@ export async function GET(req: Request) {
       const cat = normalizeDbString(raw);
       const key = cat ?? "__NULL__";
 
-      const publishedAt = r.published_at
-        ? new Date(r.published_at)
-        : null;
+      const publishedAt = r.published_at ? new Date(r.published_at) : null;
 
       const dominantSource = r.dominantSource
         ? String(r.dominantSource).trim()
@@ -120,9 +119,9 @@ export async function GET(req: Request) {
           category: cat,
           articleCount: 0,
           sourceSet: new Set(),
-          lastArticleAt: publishedAt ? publishedAt.toISOString() : null,
+          lastArticleAt: publishedAt ? toLocalISOString(publishedAt) : null,
           sourceCounts: new Map(),
-          sparkBuckets: new Map(), // ÚJ
+          sparkBuckets: new Map(),
         });
       }
 
@@ -139,18 +138,21 @@ export async function GET(req: Request) {
       if (
         publishedAt &&
         (!entry.lastArticleAt ||
-          publishedAt.toISOString() > entry.lastArticleAt)
+          toLocalISOString(publishedAt) > entry.lastArticleAt)
       ) {
-        entry.lastArticleAt = publishedAt.toISOString();
+        entry.lastArticleAt = toLocalISOString(publishedAt);
       }
 
-      // --- SPARKLINE BUCKET ---
+      // --- SPARKLINE BUCKET (CET) ---
       if (publishedAt) {
+        const local = new Date(
+          publishedAt.getTime() - publishedAt.getTimezoneOffset() * 60000
+        );
+
         const bucketKey =
           mode === "hours"
-            ? publishedAt.toISOString().slice(0, 13) + ":00:00"
-            : publishedAt.toISOString().slice(0, 10)
-;
+            ? local.toISOString().slice(0, 13) + ":00:00"
+            : local.toISOString().slice(0, 10);
 
         entry.sparkBuckets.set(
           bucketKey,
@@ -166,20 +168,22 @@ export async function GET(req: Request) {
       const buckets = entry.sparkBuckets;
       const spark: number[] = [];
 
-      const cursor = new Date(start);
+      let cursor = new Date(start);
 
-      if (mode === "hours") {
-        for (let i = 0; i < hours; i++) {
-          const key = cursor.toISOString().slice(0, 19).replace("T", " ");
-          spark.push(buckets.get(key) ?? 0);
-          cursor.setHours(cursor.getHours() + 1);
-        }
-      } else {
-        for (let i = 0; i < days; i++) {
-          const key = cursor.toISOString().slice(0, 10);
-          spark.push(buckets.get(key) ?? 0);
-          cursor.setDate(cursor.getDate() + 1);
-        }
+      for (let i = 0; i < (mode === "hours" ? hours : days); i++) {
+        const localCursor = new Date(
+          cursor.getTime() - cursor.getTimezoneOffset() * 60000
+        );
+
+        const key =
+          mode === "hours"
+            ? localCursor.toISOString().slice(0, 13) + ":00:00"
+            : localCursor.toISOString().slice(0, 10);
+
+        spark.push(buckets.get(key) ?? 0);
+
+        if (mode === "hours") cursor.setHours(cursor.getHours() + 1);
+        else cursor.setDate(cursor.getDate() + 1);
       }
 
       return spark;
@@ -215,7 +219,7 @@ export async function GET(req: Request) {
           sourceDiversity: e.sourceSet.size,
           lastArticleAt: e.lastArticleAt,
           ringSources,
-          sparkline: generateSparkline(e), // ÚJ
+          sparkline: generateSparkline(e),
         };
       })
       .sort((a, b) => b.articleCount - a.articleCount);
@@ -228,7 +232,7 @@ export async function GET(req: Request) {
       title: r.title,
       category: normalizeDbString(r.category),
       timeAgo: r.published_at
-        ? new Date(r.published_at).toISOString()
+        ? toLocalISOString(new Date(r.published_at))
         : null,
       dominantSource: r.dominantSource || "",
       sources: 1,
