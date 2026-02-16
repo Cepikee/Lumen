@@ -33,19 +33,18 @@ export async function GET(req: Request) {
   const startStr = start.toISOString().slice(0, 10);
 
   try {
-    // 1) Lekérdezzük a napokra aggregált cikkek számát
+    // ⭐ SUMMARIES TÁBLA HASZNÁLATA
     const sql = `
-      SELECT DATE(published_at) AS day, COUNT(*) AS count
-      FROM articles
+      SELECT DATE(created_at) AS day, COUNT(*) AS count
+      FROM summaries
       WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
-        AND DATE(published_at) >= ?
-      GROUP BY DATE(published_at)
+        AND DATE(created_at) >= ?
+      GROUP BY DATE(created_at)
       ORDER BY day ASC
     `;
 
     const [rows]: any = await db.query(sql, [category, startStr]);
 
-    // 2) Kitöltjük a hiányzó napokat is
     const map = new Map<string, number>();
     for (const r of rows || []) {
       map.set(r.day, Number(r.count) || 0);

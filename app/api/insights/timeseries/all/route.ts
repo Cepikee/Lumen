@@ -7,13 +7,6 @@ function normalizeDbString(s: any): string | null {
   let t = String(s).trim();
   if (!t) return null;
   if (t.toLowerCase() === "null") return null;
-
-  const hasMojibake = /[├â├ę├╝├║]/.test(t);
-  if (hasMojibake) {
-    try {
-      t = Buffer.from(t, "latin1").toString("utf8");
-    } catch {}
-  }
   return t || null;
 }
 
@@ -26,20 +19,17 @@ export async function GET(req: Request) {
   if (period === "30d") hoursBack = 24 * 30;
   if (period === "90d") hoursBack = 24 * 90;
 
-  // ⭐ MOST időpont (UTC)
   const now = new Date();
   const nowUtc = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
-
-  // ⭐ 24 órával ezelőtti időpont (UTC)
   const startUtc = new Date(nowUtc.getTime() - hoursBack * 60 * 60 * 1000);
 
   const startStr = startUtc.toISOString().slice(0, 19).replace("T", " ");
 
   try {
-    // ⭐ összes kategória
+    // ⭐ HELYES: kategóriák a SUMMARIES táblából
     const [cats]: any = await db.query(`
       SELECT DISTINCT TRIM(category) AS category
-      FROM articles
+      FROM summaries
       WHERE category IS NOT NULL AND category <> ''
     `);
 
@@ -53,15 +43,15 @@ export async function GET(req: Request) {
       const cat = normalizeDbString(rawCat);
       if (!cat) continue;
 
-      // ⭐ lekérjük az adott kategória órás adatait
+      // ⭐ HELYES: timeseries a SUMMARIES táblából
       const [rows]: any = await db.query(
         `
         SELECT 
-          DATE_FORMAT(published_at, '%Y-%m-%d %H:00:00') AS bucket,
+          DATE_FORMAT(created_at, '%Y-%m-%d %H:00:00') AS bucket,
           COUNT(*) AS count
-        FROM articles
+        FROM summaries
         WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
-          AND published_at >= ?
+          AND created_at >= ?
         GROUP BY bucket
         ORDER BY bucket ASC
         `,
@@ -73,7 +63,6 @@ export async function GET(req: Request) {
         map.set(String(r.bucket), Number(r.count) || 0);
       }
 
-      // ⭐ órás kitöltés MOST-ig (nem áll meg korábban!)
       const cursor = new Date(startUtc);
       cursor.setMinutes(0, 0, 0);
 
