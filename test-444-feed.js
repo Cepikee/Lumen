@@ -1,6 +1,7 @@
 // test-444-feed.js
-// Teszt script a 444.hu feed többlépcsős lekéréséhez (Puppeteer, homepage flow, in-browser fetch).
-// Futtatás: node test-444-feed.js
+// Teszt: 444.hu feed lekérése Puppeteerrel, homepage flow és in-browser fetch.
+// Futtatás: HTTP_PROXY vagy HTTPS_PROXY beállítható, pl:
+// HTTP_PROXY="http://user:pass@proxyhost:port" node test-444-feed.js
 
 const puppeteer = require('puppeteer');
 
@@ -15,6 +16,10 @@ async function launchBrowserWithProxy() {
   });
 }
 
+async function sleep(ms) {
+  return new Promise(r => setTimeout(r, ms));
+}
+
 async function tryDirectFetch(page) {
   const resp = await page.goto('https://444.hu/feed', { waitUntil: 'networkidle2', timeout: 60000 });
   if (!resp) return { ok: false, reason: 'no-response' };
@@ -26,10 +31,14 @@ async function tryDirectFetch(page) {
 async function tryHomepageFetch(page) {
   const r1 = await page.goto('https://444.hu', { waitUntil: 'networkidle2', timeout: 60000 });
   const s1 = r1 ? r1.status() : 'noresp';
-  // várjunk egy kicsit, hogy a challenge lefusson, cookie-k beálljanak
-  await page.waitForTimeout(2000);
 
-  // fetch a böngésző kontextusában
+  // polyfill: ha nincs page.waitForTimeout, használjunk sleep
+  if (typeof page.waitForTimeout === 'function') {
+    await page.waitForTimeout(2000);
+  } else {
+    await sleep(2000);
+  }
+
   const result = await page.evaluate(async () => {
     try {
       const resp = await fetch('https://444.hu/feed', {
@@ -64,7 +73,6 @@ async function tryHomepageFetch(page) {
       'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
     });
 
-    // 1) Próbáljuk meg közvetlenül a feedet
     console.log('Attempting direct feed fetch (page.goto)...');
     const direct = await tryDirectFetch(page);
     console.log('Direct result:', { ok: direct.ok, status: direct.status, len: direct.text ? direct.text.length : 0 });
@@ -76,7 +84,6 @@ async function tryHomepageFetch(page) {
       return;
     }
 
-    // 2) Ha nem sikerült, próbáljuk meg a homepage -> in-browser fetch stratégiát
     console.log('Direct fetch failed or returned non-RSS. Trying homepage flow...');
     const homepage = await tryHomepageFetch(page);
     console.log('Homepage flow result:', { homepageStatus: homepage.homepageStatus, status: homepage.status, len: homepage.text ? homepage.text.length : 0 });
@@ -88,9 +95,12 @@ async function tryHomepageFetch(page) {
       return;
     }
 
-    // 3) Ha még mindig nem, próbáljunk meg egy második kört (retry) és logoljuk részletesen
     console.log('Homepage flow did not return RSS. Retrying direct fetch once more...');
-    await page.waitForTimeout(1000);
+    if (typeof page.waitForTimeout === 'function') {
+      await page.waitForTimeout(1000);
+    } else {
+      await sleep(1000);
+    }
     const direct2 = await tryDirectFetch(page);
     console.log('Retry direct result:', { ok: direct2.ok, status: direct2.status, len: direct2.text ? direct2.text.length : 0 });
     if (direct2.text) console.log('HEAD:', direct2.text.slice(0, 400).replace(/\n/g, ' '));
@@ -102,7 +112,8 @@ async function tryHomepageFetch(page) {
     }
 
     console.log('All strategies failed. Likely Cloudflare/IP block or gateway issue.');
-    console.log('If you have a proxy, set HTTP_PROXY or HTTPS_PROXY and re-run the script.');
+    console.log('If you have a proxy, set HTTP_PROXY or HTTPS_PROXY and re-run the script, e.g.:');
+    console.log('HTTP_PROXY="http://user:pass@proxyhost:port" node test-444-feed.js');
     await browser.close();
   } catch (e) {
     console.error('ERR', e);
