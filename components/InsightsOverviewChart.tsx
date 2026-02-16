@@ -73,6 +73,7 @@ export default function InsightsOverviewChart({
   height = 300,
   range = "24h",
 }: any) {
+    console.log("CHART RAW DATA:", data);
   const theme = useUserStore((s) => s.theme);
   const isDark =
     theme === "dark" ||
