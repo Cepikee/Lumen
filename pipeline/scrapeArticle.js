@@ -1,13 +1,19 @@
-// scrapeArticle.js
+// scrapeArticle.js — Cloudflare Worker proxy támogatással
 const mysql = require("mysql2/promise");
 const { cleanArticle } = require("./cleanArticle");
 
-// Egyszerű HTTP letöltés
+// 🔥 A TE WORKERED:
+const WORKER_URL = "https://royal-king-47c3.vashiri6562.workers.dev/?url=";
+
+// --- HTTP letöltés (közvetlen vagy Worker proxy) ---
 async function fetchHtml(url) {
   const res = await fetch(url, {
     headers: {
-      "User-Agent": "Mozilla/5.0 (compatible; UtomScraper/1.0)",
-      Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+      "Accept":
+        "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Accept-Language": "hu-HU,hu;q=0.9"
     },
     redirect: "follow"
   });
@@ -17,6 +23,11 @@ async function fetchHtml(url) {
   }
 
   return await res.text();
+}
+
+// --- 444.hu felismerés ---
+function is444(url) {
+  return url.includes("444.hu");
 }
 
 async function scrapeArticle(articleId, url) {
@@ -30,20 +41,36 @@ async function scrapeArticle(articleId, url) {
   });
 
   try {
-    const html = await fetchHtml(url);
+    let html;
 
-    // 🔥 ÚJ: tisztított, nyers cikk szöveg (reklámok, képek, kapcsolódók nélkül)
+    // 🔥 1) Ha 444.hu → automatikusan Worker proxy
+    if (is444(url)) {
+      const proxyUrl = WORKER_URL + encodeURIComponent(url);
+      console.log(`[SCRAPER] 444.hu észlelve → Cloudflare Worker proxy: ${proxyUrl}`);
+
+      try {
+        html = await fetchHtml(proxyUrl);
+      } catch (err) {
+        console.error(`[SCRAPER] ❌ Worker proxy hiba: ${err.message}`);
+        throw new Error("444.hu Worker proxy is failed");
+      }
+
+    } else {
+      // 🔥 2) Normál oldal → közvetlen letöltés
+      html = await fetchHtml(url);
+    }
+
+    // 🔥 3) Tisztítás
     const text = cleanArticle(html, url);
 
-    // Biztonsági log
     console.log(
       `[SCRAPER] ℹ️ Tisztított szöveg hossza: len=${text?.length || 0} articleId=${articleId}`
     );
 
-    // 🔥 Ha túl rövid → FAILED, nincs retry
+    // 🔥 4) Túl rövid → FAILED (nincs retry)
     if (!text || text.length < 200) {
       console.warn(
-        `[SCRAPER] ⚠️ Túl rövid szöveg (len=${text.length}). FAILED státusz beállítva. articleId=${articleId}`
+        `[SCRAPER] ⚠️ Túl rövid szöveg. FAILED státusz. articleId=${articleId}`
       );
 
       await conn.execute(
@@ -54,7 +81,7 @@ async function scrapeArticle(articleId, url) {
       return { ok: true, skipped: true };
     }
 
-    // 🔥 Normál eset: elég hosszú → mentjük, vissza pending-re
+    // 🔥 5) Mentés → vissza pending státuszba
     await conn.execute(
       `UPDATE articles SET content_text = ?, status = 'pending' WHERE id = ?`,
       [text, articleId]
@@ -64,11 +91,12 @@ async function scrapeArticle(articleId, url) {
       `[SCRAPER] ✅ Sikeres scraping. len=${text.length} articleId=${articleId}`
     );
     return { ok: true, text };
+
   } catch (err) {
     console.error(
       `[SCRAPER] ❌ Hiba scraping közben. articleId=${articleId} - ${err.message}`
     );
-    return { ok: false, error: err?.message ?? String(err) };
+    return { ok: false, error: err.message };
   } finally {
     await conn.end();
   }
