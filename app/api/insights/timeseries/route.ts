@@ -1,7 +1,7 @@
 // app/api/insights/timeseries/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-
+console.log("TIMESERIES ALL ROUTE FUT!!!");
 function normalizeDbString(s: any): string | null {
   if (s === null || s === undefined) return null;
   let t = String(s).trim();
