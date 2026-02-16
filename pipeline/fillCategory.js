@@ -1,5 +1,6 @@
-// fillCategory.js — optimalizált, stabil, 1-instance kompatibilis verzió
+// fillCategory.js — OpenAI verzió
 const mysql = require("mysql2/promise");
+const { callOpenAI } = require("./aiClient");
 
 // --- Valid kategóriák ---
 const VALID_CATEGORIES = [
@@ -20,16 +21,15 @@ function isValidCategory(cat) {
   return VALID_CATEGORIES.some(c => c.toLowerCase() === clean);
 }
 
-// --- Lokális kategória detektálás a teljes AI válaszból ---
+// --- Lokális kategória detektálás ---
 function extractCategoryFromText(rawText) {
   if (!rawText) return null;
 
   const lower = rawText.toLowerCase();
 
   for (const cat of VALID_CATEGORIES) {
-    const cLower = cat.toLowerCase();
-    if (lower.includes(cLower)) {
-      return cat; // mindig a nagybetűs, hivatalos verziót adjuk vissza
+    if (lower.includes(cat.toLowerCase())) {
+      return cat;
     }
   }
 
@@ -66,7 +66,7 @@ async function categorizeArticle(articleId) {
       .trim()
       .slice(0, 1000);
 
-    // 3) Prompt — VÁLTOZATLAN!
+    // 3) Prompt — OpenAI verzió
     const prompt = `
 Cikk szöveg:
 ${contentText}
@@ -76,38 +76,32 @@ ${VALID_CATEGORIES.join(", ")}
 
 Feladat:
 Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kategória nevét írd ki.
-`.trim();
+    `.trim();
 
-    // 4) AI hívás — gyors, kevés token
-    let rawCategory = await global.callOllama(prompt, 60);
-
-    // 4/A) Első próbálkozás: AI válasz közvetlenül
+    // 4) OpenAI hívás
+    let rawCategory = await callOpenAI(prompt, 40);
     let category = rawCategory.trim();
 
-    // 4/B) Ha nem valid → próbáljuk lokálisan kinyerni a teljes szövegből
+    // 5) Validáció + fallback
     if (!isValidCategory(category)) {
       const extracted = extractCategoryFromText(rawCategory);
-      if (extracted) {
-        category = extracted;
-      }
+      if (extracted) category = extracted;
     }
 
-    // 4/C) Ha még mindig nem valid → újrapróbálás AI-val
     if (!isValidCategory(category)) {
       console.warn(`[CAT] ⚠️ Érvénytelen kategória: "${rawCategory}". Újrapróbálás...`);
-      rawCategory = await global.callOllama(prompt, 60);
+      rawCategory = await callOpenAI(prompt, 40);
 
       const extracted = extractCategoryFromText(rawCategory);
       category = extracted || rawCategory.trim();
     }
 
-    // 4/D) Ha még mindig nem valid → hiba
     if (!isValidCategory(category)) {
       console.error(`[CAT] ❌ AI nem adott érvényes kategóriát! id=${articleId}`);
       return { ok: false };
     }
 
-    // 5) Mentés — mindig nagybetűs, hivatalos formában
+    // 6) Mentés
     const finalCategory = VALID_CATEGORIES.find(
       c => c.toLowerCase() === category.toLowerCase()
     );
