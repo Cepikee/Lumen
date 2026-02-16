@@ -201,8 +201,16 @@ export async function GET() {
             const sourceId = detectSourceId(link);
             if (!sourceId) continue;
 
-            let content = item["content:encoded"] || item.content || "";
+            // ⭐ 444.hu feed HTML → tiszta szöveg
+            let rawContent = item["content:encoded"] || item.content || "";
+            let content = cleanHtmlText(cheerio.load(rawContent).text());
 
+            // ⭐ 444.hu fallback: ha rövid → Puppeteer
+            if (sourceId === 6 && content.length < 500) {
+              content = await fetch444ArticleContent(link);
+            }
+
+            // ⭐ Portfolio fallback
             if (sourceId === 5 && content.length < 500) {
               content = await fetchPortfolioArticle(link);
             }
@@ -275,7 +283,6 @@ export async function GET() {
     await processRssFeed("https://index.hu/24ora/rss/", "Index");
     await processRssFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio");
     await processRssFeed("https://444.hu/feed", "444.hu");
-
 
     await process444Html();
 
