@@ -91,12 +91,18 @@ async function fetch444FeedWithPuppeteer(): Promise<string> {
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36"
     );
 
-    await page.goto("https://444.hu/feed", {
+    const response = await page.goto("https://444.hu/feed", {
       waitUntil: "networkidle2",
       timeout: 60000,
     });
 
-    const xml = await page.content();
+    if (!response) {
+      logError("444-FEED-PUPPETEER", "No response from page.goto()");
+      await browser.close();
+      return "";
+    }
+
+    const xml = await response.text();
     await browser.close();
     return xml;
   } catch (err) {
@@ -104,6 +110,8 @@ async function fetch444FeedWithPuppeteer(): Promise<string> {
     return "";
   }
 }
+
+
 
 /** ⭐ Portfolio fallback */
 async function fetchPortfolioArticle(url: string): Promise<string> {
