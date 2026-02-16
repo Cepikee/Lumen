@@ -43,10 +43,9 @@ async function scrapeArticle(articleId, url) {
     if (is444(url)) {
       console.log(`[SCRAPER] 🟢 444.hu → scraping kihagyva, RSS content:encoded használata.`);
 
-      // A content_text-et az RSS feldolgozó már beírta
       await conn.execute(
         `UPDATE articles 
-         SET status = 'pending', scraped_via = 'rss' 
+         SET status = 'pending'
          WHERE id = ?`,
         [articleId]
       );
