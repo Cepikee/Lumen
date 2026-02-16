@@ -1,11 +1,10 @@
 // scripts/fetch-and-post-444.js
-const fetch = require('node-fetch');
 
 (async () => {
   try {
+    // 1) Lekérjük a 444 feedet
     const resp = await fetch('https://444.hu/feed', {
-      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
-      timeout: 60000
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
     });
 
     const text = await resp.text();
@@ -15,6 +14,7 @@ const fetch = require('node-fetch');
       process.exit(1);
     }
 
+    // 2) POST a saját szerverre
     const post = await fetch(process.env.TARGET_ENDPOINT, {
       method: 'POST',
       headers: {
