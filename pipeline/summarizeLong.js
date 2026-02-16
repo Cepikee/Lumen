@@ -1,6 +1,7 @@
-// summarizeLong.js — Ollama verzió (OpenAI kikapcsolva)
+// summarizeLong.js — OpenAI verzió (aiClient.js-ből importálva)
 require("dotenv").config({ path: "/var/www/utom/.env" });
 const mysql = require("mysql2/promise");
+const { callOpenAI } = require("./aiClient");   // <-- EZ A LÉNYEG
 
 // --- Validáció ---
 function isValidDetailed(text) {
@@ -104,13 +105,13 @@ Fontos szabályok:
 - Ne írj bevezetőt vagy lezárást.
     `.trim();
 
-    // 4) OLLAMA hívás (régi rendszer)
-    let detailed = await global.callOllama(prompt, 300);
+    // 4) OpenAI hívás (aiClient.js-ből)
+    let detailed = await callOpenAI(prompt, 900);
 
     // 5) Validáció — 1 újrapróbálás
     if (!isValidDetailed(detailed)) {
       console.warn(`[LONG] ⚠️ Első elemzés érvénytelen, újrapróbálás...`);
-      detailed = await global.callOllama(prompt, 300);
+      detailed = await callOpenAI(prompt, 900);
     }
 
     // 6) Fallback

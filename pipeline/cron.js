@@ -1,19 +1,21 @@
-// cron.js — Stabil, 1-instance verzió
+// cron.js — OpenAI verzió, 3‑cikkes batch, stabil pipeline
 require("dotenv").config();
+
 // ─────────────────────────────────────────────
 //  IMPORTOK
 // ─────────────────────────────────────────────
 
 const mysql = require("mysql2/promise");
+const fs = require("fs");
+
+const { callOpenAI } = require("./aiClient");
 const { summarizeShort } = require("./summarizeShort");
 const { summarizeLong } = require("./summarizeLong");
 const { plagiarismCheck } = require("./plagiarismCheck");
 const { saveSources } = require("./saveSources");
 const { saveSummary } = require("./saveSummary");
 const { scrapeArticle } = require("./scrapeArticle");
-const { fixShortSummary, isValidShortSummary } = require("./summarizeShortValidator");
 const { categorizeArticle } = require("./fillCategory");
-const fs = require("fs");
 
 // ANSI színek
 const RESET = "\x1b[0m";
@@ -23,16 +25,16 @@ const YELLOW = "\x1b[33m";
 const CYAN = "\x1b[36m";
 
 // ─────────────────────────────────────────────
-//  KONFIGURÁCIÓ — VISSZAÁLLÍTVA A RÉGI STABILRA
+//  KONFIGURÁCIÓ — 3 cikk egyszerre
 // ─────────────────────────────────────────────
 
-const BATCH_SIZE = 1;
+const BATCH_SIZE = 3;
 const LOOP_DELAY_MS = 60000;
-const CONCURRENCY = 1;
+const CONCURRENCY = 3;
 const ARTICLE_TIMEOUT_MS = 600000;
 const MAX_RETRIES = 3;
 
-console.log(`${GREEN}✅ cron.js — stabil 1-instance verzió elindult!${RESET}`);
+console.log(`${GREEN}✅ cron.js — OpenAI verzió elindult!${RESET}`);
 
 // ─────────────────────────────────────────────
 //  DB POOL
@@ -95,105 +97,6 @@ async function runWithRetries(label, fn) {
 }
 
 // ─────────────────────────────────────────────
-//  1 OLLAMA INSTANCE — RÉGI STABIL VERZIÓ
-// ─────────────────────────────────────────────
-
-const OLLAMA_URL = "http://127.0.0.1:11434";
-
-// ─────────────────────────────────────────────
-//  AI HÍVÁS — minden ide megy
-// ─────────────────────────────────────────────
-
-async function callOllama(prompt, numPredict = 512, timeoutMs = 180000) {
-  const controller = new AbortController();
-  const t = setTimeout(() => controller.abort(), timeoutMs);
-
-  try {
-    const res = await fetch(`${OLLAMA_URL}/api/generate`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "llama3:latest",
-        prompt,
-        stream: false,
-        keep_alive: 0,
-        num_predict: numPredict
-      }),
-      signal: controller.signal,
-    });
-
-    const raw = await res.text();
-    try {
-      const data = JSON.parse(raw);
-      return (data.response ?? "").trim();
-    } catch {
-      return raw.trim();
-    }
-  } finally {
-    clearTimeout(t);
-  }
-}
-
-global.callOllama = callOllama;
-
-// ─────────────────────────────────────────────
-//  AI WRAPPEREK — minden OLLAMA_URL-re megy
-// ─────────────────────────────────────────────
-
-async function runOllamaKeywords(text) {
-  const prompt = `
-Szöveg:
-${text}
-
-Feladat:
-Adj vissza pontosan 6–10 magyar kulcsszót.
-
-Korlátozások:
-❗ Csak a kulcsszavakat add vissza, vesszővel elválasztva.
-❗ Ne írj bevezetőt, magyarázatot, sorszámot, címkét, semmi mást.
-  `.trim();
-
-  const raw = await callOllama(prompt, 100);
-
-  return raw
-    .split(/[,\n]/)
-    .map(k => k.trim())
-    .filter(k => k.length >= 2)
-    .slice(0, 10);
-}
-
-
-async function runOllamaTitle(shortSummary) {
-  const prompt = `
-Írj egy rövid, újságírói stílusú magyar címet a cikkhez.
-
-❗ Csak a címet add vissza.
-❗ Ne írj bevezetőt, magyarázatot, kommentet, angol szöveget, formázást vagy meta‑megjegyzést.
-❗ Ne használj csillagokat, markdown-t, nagybetűs kiemelést vagy zárójeles megjegyzést.
-❗ A kimenetben kizárólag a cím szerepeljen.
-
-Rövid összefoglaló:
-${shortSummary}
-  `.trim();
-
-  let title = await callOllama(prompt, 60);
-
-  // --- TISZTÍTÁS ---
-  title = title
-    .replace(/\*\*/g, "")        // markdown csillagok törlése
-    .replace(/#+/g, "")          // markdown heading törlése
-    .replace(/\(.+?\)/g, "")     // zárójeles meta-megjegyzések törlése
-    .replace(/\[.+?\]/g, "")     // szögletes meta-megjegyzések törlése
-    .replace(/[_*~`]/g, "")      // egyéb markdown jelek törlése
-    .replace(/\s+/g, " ")        // dupla whitespace-ek eltüntetése
-    .trim();
-
-  return title;
-}
-
-
-
-// ─────────────────────────────────────────────
 //  PENDING LEKÉRÉS
 // ─────────────────────────────────────────────
 
@@ -209,7 +112,6 @@ async function fetchPendingArticles(limit) {
   return rows;
 }
 
-
 // ─────────────────────────────────────────────
 //  STATUS UPDATE
 // ─────────────────────────────────────────────
@@ -221,14 +123,13 @@ async function markStatus(ids, status) {
 }
 
 // ─────────────────────────────────────────────
-//  TELJES PIPELINE — minden hívás 1 instance
+//  TELJES PIPELINE — OpenAI verzió
 // ─────────────────────────────────────────────
 
 async function processArticlePipeline(article) {
-  await sleep(2000);
+  await sleep(1000);
   const articleId = article.id;
 
-  console.log(`${CYAN}⚙️ Ollama instance: ${OLLAMA_URL}${RESET}`);
   console.log("──────────────────────────────────────────────");
   console.log(`▶️  ${CYAN}CIKK FELDOLGOZÁS INDUL — ID: ${articleId}${RESET}`);
   console.log("──────────────────────────────────────────────");
@@ -238,95 +139,101 @@ async function processArticlePipeline(article) {
   let plagiarismScore = 0;
   let trendKeywords = "";
   let source = "";
+  let keywords = [];
 
   // 0) Scraping fallback
-  // 0) Scraping fallback
-if (!article.content_text || article.content_text.trim().length < 400) {
-  console.log(`[SCRAPER] ℹ️ Túl rövid content_text, scraping...`);
+  if (!article.content_text || article.content_text.trim().length < 400) {
+    console.log(`[SCRAPER] ℹ️ Túl rövid content_text, scraping...`);
 
-  const scrapeRes = await scrapeArticle(articleId, article.url_canonical || "");
+    const scrapeRes = await scrapeArticle(articleId, article.url_canonical || "");
 
-  if (scrapeRes.skipped) {
-    await pool.execute(`UPDATE articles SET status = 'failed' WHERE id = ?`, [articleId]);
-    return;
-  }
-
-  if (!scrapeRes.ok) {
-    if (scrapeRes.error?.includes("404")) {
+    if (scrapeRes.skipped) {
       await pool.execute(`UPDATE articles SET status = 'failed' WHERE id = ?`, [articleId]);
       return;
     }
-    throw new Error(`Scraping sikertelen: ${scrapeRes.error}`);
+
+    if (!scrapeRes.ok) {
+      if (scrapeRes.error?.includes("404")) {
+        await pool.execute(`UPDATE articles SET status = 'failed' WHERE id = ?`, [articleId]);
+        return;
+      }
+      throw new Error(`Scraping sikertelen: ${scrapeRes.error}`);
+    }
+
+    article.content_text = scrapeRes.text
+      .replace(/Kapcsolódó cikkek[\s\S]*/i, "")
+      .replace(/<[^>]+>/g, "")
+      .replace(/Hirdetés[\s\S]*?$/gi, "")
+      .replace(/Borítókép:[\s\S]*?$/gi, "")
+      .replace(/Címlapkép:[\s\S]*?$/gi, "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 3000);
   }
 
-  article.content_text = scrapeRes.text;
-
-  // 🔥 ÚJ: szöveg rövidítése azonnal scraping után
-  article.content_text = article.content_text
-    .replace(/Kapcsolódó cikkek[\s\S]*/i, "")   // kapcsolódó cikkek törlése
-    .replace(/<[^>]+>/g, "")                   // HTML törlése
-    .replace(/Hirdetés[\s\S]*?$/gi, "")        // hirdetés blokkok törlése
-    .replace(/Borítókép:[\s\S]*?$/gi, "")      // borítókép leírás törlése
-    .replace(/Címlapkép:[\s\S]*?$/gi, "")      // címlapkép leírás törlése
-    .replace(/\s+/g, " ")                      // whitespace normalizálás
-    .trim()
-    .slice(0, 3000);                            // max 3000 karakter
-}
-
-
-  // 1) Rövid összefoglaló — JAVÍTVA!
+  // 1) Rövid összefoglaló
   await runWithRetries("[SHORT] ✂️ Rövid összefoglaló", async () => {
-    const res = await summarizeShort(articleId, OLLAMA_URL);
+    const res = await summarizeShort(articleId);
     if (!res?.ok) throw new Error(res?.error || "summarizeShort sikertelen");
     shortSummary = res.summary || "";
     return res;
   });
-  // 🔥 Rövid összefoglaló mentése a DB-be
-await pool.execute(
-  `UPDATE articles SET short_summary = ? WHERE id = ?`,
-  [shortSummary, articleId]
-);
 
+  await pool.execute(
+    `UPDATE articles SET short_summary = ? WHERE id = ?`,
+    [shortSummary, articleId]
+  );
 
-  // 2) Hosszú elemzés — JAVÍTVA!
+  // 2) Hosszú elemzés
   await runWithRetries("[LONG] 📄 Hosszú elemzés", async () => {
-    const res = await summarizeLong(articleId, shortSummary, OLLAMA_URL);
+    const res = await summarizeLong(articleId, shortSummary);
     if (!res?.ok) throw new Error(res?.error || "summarizeLong sikertelen");
     longSummary = res.detailed || "";
     return res;
   });
-  // 🔥 Hosszú összefoglaló mentése a DB-be
-await pool.execute(
-  `UPDATE articles SET long_summary = ? WHERE id = ?`,
-  [longSummary, articleId]
-);
 
+  await pool.execute(
+    `UPDATE articles SET long_summary = ? WHERE id = ?`,
+    [longSummary, articleId]
+  );
 
-  // 3) Plágium — AI nélküli verzió
-await runWithRetries("[PLAG] 🔍 Plágium", async () => {
-  const res = await plagiarismCheck(articleId, shortSummary, longSummary);
-  if (!res?.ok) throw new Error(res?.error || "plagiarismCheck sikertelen");
+  // 3) Plágium
+  await runWithRetries("[PLAG] 🔍 Plágium", async () => {
+    const res = await plagiarismCheck(articleId, shortSummary, longSummary);
+    if (!res?.ok) throw new Error(res?.error || "plagiarismCheck sikertelen");
 
-  plagiarismScore = res.plagiarismScore ?? 0;
+    plagiarismScore = res.plagiarismScore ?? 0;
+    console.log(`🧪 PlágiumScore: ${plagiarismScore.toFixed(2)}`);
 
-  console.log(`🧪 PlágiumScore: ${plagiarismScore.toFixed(2)}`);
+    return res;
+  });
 
-  return res;
-});
+  // 4) Kategorizálás
+  await runWithRetries("[CAT] 🏷️ Kategorizálás", async () => {
+    const res = await categorizeArticle(articleId);
+    if (!res?.ok) throw new Error("Kategorizálás sikertelen");
+    article.category = res.category;
+    return res;
+  });
 
-  // 3/B) Kategorizálás
-await runWithRetries("[CAT] 🏷️ Kategorizálás", async () => {
-  const res = await categorizeArticle(articleId);
-  if (!res?.ok) throw new Error("Kategorizálás sikertelen");
-  article.category = res.category;
-  return res;
-});
-
-
-  // 4) Cím generálás
+  // 5) Cím generálás — OPENAI
   let title = "";
   await runWithRetries("[TITLE] 🏷️ Cím", async () => {
-    title = await runOllamaTitle(article.url_canonical, shortSummary, longSummary);
+    const prompt = `
+Írj egy rövid, újságírói stílusú magyar címet a cikkhez.
+
+Követelmények:
+- Csak a címet add vissza.
+- Ne írj bevezetőt, magyarázatot, kommentet.
+- Ne használj markdown-t, csillagokat, zárójeleket, meta-megjegyzést.
+- A cím legyen tömör, figyelemfelkeltő, magyar nyelvű.
+
+Rövid összefoglaló:
+${shortSummary}
+    `.trim();
+
+    title = await callOpenAI(prompt, 60);
+
     if (!title || title.length < 5) {
       const slug = (article.url_canonical || "").split("/").pop() || "";
       const words = slug.split("-").filter(w => w.length > 2);
@@ -334,19 +241,46 @@ await runWithRetries("[CAT] 🏷️ Kategorizálás", async () => {
         ? words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")
         : shortSummary.split("\n")[0].trim().slice(0, 120);
     }
+
+    title = title
+      .replace(/\*\*/g, "")
+      .replace(/#+/g, "")
+      .replace(/\(.+?\)/g, "")
+      .replace(/\[.+?\]/g, "")
+      .replace(/[_*~`]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
   });
 
-  // 5) Kulcsszavak
-  let keywords = [];
-  keywords = await runWithRetries("[KW] 🔑 Kulcsszavak", async () => {
-    const kw = await runOllamaKeywords(article.content_text || "");
-    const normalized = kw.map(k => k.trim().toLowerCase());
-    const unique = [...new Set(normalized)];
+  // 6) Kulcsszavak — OPENAI
+  await runWithRetries("[KW] 🔑 Kulcsszavak", async () => {
+    const prompt = `
+Szöveg:
+${article.content_text || ""}
+
+Feladat:
+Adj vissza pontosan 6–10 magyar kulcsszót.
+
+Korlátozások:
+- Csak a kulcsszavakat add vissza, vesszővel elválasztva.
+- Ne írj bevezetőt, magyarázatot, sorszámot, címkét.
+    `.trim();
+
+    const raw = await callOpenAI(prompt, 80);
+
+    const kw = raw
+      .split(/[,\n]/)
+      .map(k => k.trim())
+      .filter(k => k.length >= 2);
+
+    const unique = [...new Set(kw)];
     trendKeywords = unique.join(",");
+    keywords = unique;
+
     return unique;
   });
 
-  // 5/B) Kulcsszavak mentése
+  // 6/B) Kulcsszavak mentése
   await runWithRetries("[KW-SAVE] 💾 Kulcsszavak mentése", async () => {
     if (keywords.length === 0) return;
 
@@ -359,7 +293,7 @@ await runWithRetries("[CAT] 🏷️ Kategorizálás", async () => {
     );
   });
 
-  // 5/C) Trends mentése
+  // 6/C) Trends mentése
   await runWithRetries("[TRENDS-SAVE] 📈 Trends mentése", async () => {
     if (keywords.length === 0) return;
 
@@ -374,7 +308,7 @@ await runWithRetries("[CAT] 🏷️ Kategorizálás", async () => {
     );
   });
 
-  // 6) Forrás mentése
+  // 7) Forrás mentése
   await runWithRetries("[SOURCE] 🌐 Forrás", async () => {
     const res = await saveSources(articleId, article.url_canonical || "");
     if (!res?.ok) throw new Error(res?.error || "saveSources sikertelen");
@@ -382,7 +316,7 @@ await runWithRetries("[CAT] 🏷️ Kategorizálás", async () => {
     return res;
   });
 
-  // 7) Summary mentése
+  // 8) Summary mentése
   await runWithRetries("[SAVE] 💾 Summary", async () => {
     const res = await saveSummary({
       articleId,
@@ -411,47 +345,31 @@ await runWithRetries("[CAT] 🏷️ Kategorizálás", async () => {
 }
 
 // ─────────────────────────────────────────────
-//  BATCH FELDOLGOZÁS — 1 concurrency
+//  BATCH FELDOLGOZÁS — 3 concurrency
 // ─────────────────────────────────────────────
 
 async function processBatch(batch) {
   const ids = batch.map(a => a.id);
   await markStatus(ids, "in_progress");
 
-  for (const article of batch) {
-    try {
-      await withTimeout(
-        processArticlePipeline(article),
-        ARTICLE_TIMEOUT_MS,
-        `processArticlePipeline(${article.id})`
-      );
+  // egyszerre 3 pipeline fut
+  const tasks = batch.map(article =>
+    withTimeout(
+      processArticlePipeline(article),
+      ARTICLE_TIMEOUT_MS,
+      `processArticlePipeline(${article.id})`
+    )
+      .then(() => markStatus([article.id], "done"))
+      .catch(async err => {
+        console.error(`❌ ${RED}Hiba (${article.id}): ${err.message}${RESET}`);
+        await markStatus([article.id], "pending");
+      })
+  );
 
-      // Cikk kész
-      await markStatus([article.id], "done");
-
-      // ─────────────────────────────────────────────
-      //  ÚJ: IDŐALAPÚ FEED FRISSÍTÉS MINDEN CIKK UTÁN
-      // ─────────────────────────────────────────────
-      try {
-        console.log("🔄 Új cikkek keresése a feedben...");
-        const feedRes = await fetch("http://127.0.0.1:3000/api/fetch-feed?limit=10");
-        const feedData = await feedRes.json();
-        console.log("📰 Feed frissítés eredménye:", feedData);
-        cronLog(`Időalapú feed frissítés: inserted=${feedData.inserted}`);
-      } catch (err) {
-        console.error("❌ Feed frissítés hiba:", err);
-        cronLog(`Feed frissítés hiba: ${err.message}`);
-      }
-
-    } catch (err) {
-      console.error(`❌ ${RED}Hiba (${article.id}): ${err.message}${RESET}`);
-      await markStatus([article.id], "pending");
-    }
-  }
+  await Promise.all(tasks);
 }
 
-
-/// ─────────────────────────────────────────────
+// ─────────────────────────────────────────────
 //  FŐ CIKLUS — IDŐALAPÚ FEED FRISSÍTÉSSEL
 // ─────────────────────────────────────────────
 
@@ -460,7 +378,7 @@ async function processBatch(batch) {
     try {
       console.log(`🚀 Feed begyűjtés: ${new Date().toLocaleString("hu-HU")}`);
 
-      // 🔥 MINDIG fut a fetch-feed, pendingtől függetlenül
+      // feed frissítés
       try {
         console.log("🔄 Feed frissítés indul (limit=1)...");
         const feedRes = await fetch("http://127.0.0.1:3000/api/fetch-feed?limit=1");
@@ -472,7 +390,7 @@ async function processBatch(batch) {
         cronLog(`Feed fetch hiba: ${feedErr.message}`);
       }
 
-      // Pending cikkek lekérése
+      // pending cikkek száma
       const [pendingCountRows] = await pool.execute(
         `SELECT COUNT(*) AS c FROM articles WHERE status = 'pending'`
       );
@@ -502,4 +420,3 @@ async function processBatch(batch) {
     }
   }
 })();
-
