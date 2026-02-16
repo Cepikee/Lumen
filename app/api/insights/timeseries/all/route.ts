@@ -5,15 +5,21 @@ import { db } from "@/lib/db";
 
 function fixCat(s: any): string | null {
   if (!s) return null;
-  let t = String(s).trim();
+
+  // 1) minden kontrollkarakter eltávolítása
+  let t = String(s).replace(/[\x00-\x1F\x7F]/g, "").trim();
   if (!t) return null;
+
+  // 2) ha még mindig mojibake, próbáljuk latin1 → utf8
   if (/[├â├ę├╝├║]/.test(t)) {
     try {
       t = Buffer.from(t, "latin1").toString("utf8").trim();
     } catch {}
   }
+
   return t || null;
 }
+
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
