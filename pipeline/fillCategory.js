@@ -1,4 +1,4 @@
-// fillCategory.js — OpenAI verzió
+// fillCategory.js — OpenAI verzió (javított, prompt változatlan)
 const mysql = require("mysql2/promise");
 const { callOpenAI } = require("./aiClient");
 
@@ -21,21 +21,6 @@ function isValidCategory(cat) {
   return VALID_CATEGORIES.some(c => c.toLowerCase() === clean);
 }
 
-// --- Lokális kategória detektálás ---
-function extractCategoryFromText(rawText) {
-  if (!rawText) return null;
-
-  const lower = rawText.toLowerCase();
-
-  for (const cat of VALID_CATEGORIES) {
-    if (lower.includes(cat.toLowerCase())) {
-      return cat;
-    }
-  }
-
-  return null;
-}
-
 // --- Egy cikk kategorizálása ---
 async function categorizeArticle(articleId) {
   const conn = await mysql.createConnection({
@@ -52,24 +37,34 @@ async function categorizeArticle(articleId) {
       [articleId]
     );
 
-    let contentText = rows?.[0]?.content_text ?? "";
-    let shortSummary = rows?.[0]?.short_summary ?? "";
-
-    if (!shortSummary || shortSummary.trim().length < 20) {
-      console.error(`[CAT] ❌ Nincs short summary! id=${articleId}`);
+    if (!rows || rows.length === 0) {
+      console.error(`[CAT] ❌ Nincs ilyen cikk: id=${articleId}`);
       return { ok: false };
     }
 
-    // 2) Rövidítés — max 1000 karakter
-    contentText = contentText
+    let contentText = rows[0].content_text || "";
+    let shortSummary = rows[0].short_summary || "";
+
+    // 2) Input kiválasztása — először summary
+    let baseText =
+      shortSummary && shortSummary.trim().length > 40
+        ? shortSummary
+        : contentText;
+
+    if (!baseText || baseText.trim().length < 40) {
+      console.error(`[CAT] ❌ Nincs elég szöveg kategorizáláshoz! id=${articleId}`);
+      return { ok: false };
+    }
+
+    baseText = baseText
       .replace(/\s+/g, " ")
       .trim()
-      .slice(0, 1000);
+      .slice(0, 1200);
 
-    // 3) Prompt — OpenAI verzió
+    // 3) A RÉGI PROMPTOD — érintetlenül
     const prompt = `
 Cikk szöveg:
-${contentText}
+${baseText}
 
 Kategóriák:
 ${VALID_CATEGORIES.join(", ")}
@@ -82,30 +77,24 @@ Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kate
     let rawCategory = await callOpenAI(prompt, 40);
     let category = rawCategory.trim();
 
-    // 5) Validáció + fallback
+    // 5) Validáció
     if (!isValidCategory(category)) {
-      const extracted = extractCategoryFromText(rawCategory);
-      if (extracted) category = extracted;
-    }
+      console.warn(`[CAT] ⚠️ Érvénytelen kategória: "${category}". Újrapróbálás...`);
 
-    if (!isValidCategory(category)) {
-      console.warn(`[CAT] ⚠️ Érvénytelen kategória: "${rawCategory}". Újrapróbálás...`);
       rawCategory = await callOpenAI(prompt, 40);
-
-      const extracted = extractCategoryFromText(rawCategory);
-      category = extracted || rawCategory.trim();
+      category = rawCategory.trim();
     }
 
     if (!isValidCategory(category)) {
-      console.error(`[CAT] ❌ AI nem adott érvényes kategóriát! id=${articleId}`);
+      console.error(`[CAT] ❌ AI nem adott érvényes kategóriát! id=${articleId} RAW="${rawCategory}"`);
       return { ok: false };
     }
 
-    // 6) Mentés
     const finalCategory = VALID_CATEGORIES.find(
       c => c.toLowerCase() === category.toLowerCase()
     );
 
+    // 6) Mentés
     await conn.execute(
       "UPDATE articles SET category = ? WHERE id = ?",
       [finalCategory, articleId]
