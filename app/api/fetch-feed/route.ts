@@ -54,7 +54,7 @@ function cleanHtmlText(text: string) {
     .trim();
 }
 
-/** ⭐ Puppeteer wrapper */
+/** Puppeteer wrapper */
 async function loadWithPuppeteer(url: string): Promise<string> {
   try {
     const browser = await puppeteer.launch({
@@ -78,7 +78,7 @@ async function loadWithPuppeteer(url: string): Promise<string> {
   }
 }
 
-/** ⭐ 444.hu feed Puppeteerrel */
+/** 444.hu feed Puppeteerrel */
 async function fetch444FeedWithPuppeteer(): Promise<string> {
   try {
     const browser = await puppeteer.launch({
@@ -111,9 +111,7 @@ async function fetch444FeedWithPuppeteer(): Promise<string> {
   }
 }
 
-
-
-/** ⭐ Portfolio fallback */
+/** Portfolio fallback */
 async function fetchPortfolioArticle(url: string): Promise<string> {
   try {
     const res = await fetch(url, {
@@ -146,6 +144,44 @@ async function fetchPortfolioArticle(url: string): Promise<string> {
   }
 }
 
+/** ⭐ OPENAI SUMMARIZER (eredeti prompt, fallback nélkül) */
+async function summarizeArticle(title: string, content: string) {
+  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      response_format: { type: "json_object" },
+      messages: [
+        {
+          role: "system",
+          content: `
+Foglalj össze magyarul tényszerűen, 5-8 mondatban.
+Adj vissza egy JSON-t a következő formában:
+
+{
+  "category": "…",
+  "short_summary": "…"
+}
+
+Semmi mást ne írj, csak érvényes JSON-t.
+`
+        },
+        {
+          role: "user",
+          content: `Cikk címe: ${title}\n\nCikk tartalma:\n${content}`
+        }
+      ]
+    })
+  });
+
+  const json = await res.json();
+  return JSON.parse(json.choices[0].message.content);
+}
+
 export async function GET() {
   try {
     const parser = new Parser({
@@ -164,7 +200,7 @@ export async function GET() {
 
     let inserted = 0;
 
-    /** ⭐ RSS feldolgozás */
+    /** RSS feldolgozás */
     async function processRssFeed(xmlOrUrl: string, sourceName: string, isXml = false) {
       try {
         let xml = "";
@@ -209,6 +245,7 @@ export async function GET() {
               content = await fetchPortfolioArticle(link);
             }
 
+            // --- CIKK BESZÚRÁSA ---
             await connection.execute(
               `INSERT INTO articles (title, url_canonical, content_text, published_at, language, source_id, source)
                VALUES (?, ?, ?, NOW(), ?, ?, ?)`,
@@ -224,6 +261,22 @@ export async function GET() {
 
             inserted++;
             feedStats[sourceName] = (feedStats[sourceName] || 0) + 1;
+
+            // --- ÚJ CIKK ID LEKÉRÉSE ---
+            const [idRows] = await connection.execute<RowDataPacket[]>(
+              "SELECT id FROM articles WHERE url_canonical = ?",
+              [link]
+            );
+            const newId = idRows[0].id;
+
+            // --- SUMMARIZER FUTTATÁSA ---
+            const summary = await summarizeArticle(item.title || "", content);
+
+            // --- VISSZAÍRÁS AZ ARTICLES TÁBLÁBA ---
+            await connection.execute(
+              "UPDATE articles SET category = ?, short_summary = ? WHERE id = ?",
+              [summary.category, summary.short_summary, newId]
+            );
           }
         }
       } catch (err) {
@@ -231,32 +284,19 @@ export async function GET() {
       }
     }
 
-    // ---- NORMÁL FEED LISTA ----
+    // ---- FEED LISTA ----
     await processRssFeed("https://telex.hu/rss", "Telex");
     await processRssFeed("https://hvg.hu/rss", "HVG");
     await processRssFeed("https://24.hu/feed", "24.hu");
     await processRssFeed("https://index.hu/24ora/rss/", "Index");
     await processRssFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio");
 
-// ---- 444.hu FEED CLOUDFLARE WORKERREL ----
-const feed444 = await fetch("https://royal-king-47c3.vashiri6562.workers.dev/")
-  .then(r => r.text());
+    const feed444 = await fetch("https://royal-king-47c3.vashiri6562.workers.dev/")
+      .then(r => r.text());
 
-await processRssFeed(feed444, "444.hu", true);
-
+    await processRssFeed(feed444, "444.hu", true);
 
     await connection.end();
-
-    /** ⭐ FEED STATISZTIKA KIÍRÁSA */
-    console.log("──────────────── FEED STATISZTIKA ────────────────");
-    for (const [source, count] of Object.entries(feedStats)) {
-      console.log(`[FEED-STATS] ${source} → ${count} új cikk`);
-      fs.appendFileSync(
-        "/var/www/utom/logs/fetch-feed.log",
-        `[${new Date().toISOString()}] FEED-STATS ${source}: ${count} új cikk\n`
-      );
-    }
-    console.log("────────────────────────────────────────────────────");
 
     return NextResponse.json({
       status: "ok",
