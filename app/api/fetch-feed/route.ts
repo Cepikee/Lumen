@@ -17,6 +17,16 @@ function logError(source: string, err: any) {
   fs.appendFileSync(p, line);
 }
 
+/** FEED STATISZTIKA */
+const feedStats: Record<string, number> = {
+  "Telex": 0,
+  "HVG": 0,
+  "24.hu": 0,
+  "Index": 0,
+  "Portfolio": 0,
+  "444.hu": 0
+};
+
 /** Domain → source_id */
 function detectSourceId(url: string | null | undefined): number | null {
   if (!url) return null;
@@ -85,7 +95,6 @@ async function fetch444ArticleContent(url: string): Promise<string> {
 /** ⭐ Portfolio.hu fallback: fetch → ha rövid → Puppeteer */
 async function fetchPortfolioArticle(url: string): Promise<string> {
   try {
-    // 1) Próbáljuk meg sima fetch-csel
     const res = await fetch(url, {
       headers: {
         "User-Agent":
@@ -102,7 +111,6 @@ async function fetchPortfolioArticle(url: string): Promise<string> {
       return text;
     }
 
-    // 2) Ha túl rövid → Puppeteer fallback
     logError("PORTFOLIO-FALLBACK", `Fetch too short (len=${text.length}), using Puppeteer`);
 
     const html2 = await loadWithPuppeteer(url);
@@ -195,7 +203,6 @@ export async function GET() {
 
             let content = item["content:encoded"] || item.content || "";
 
-            // ⭐ Portfolio.hu fallback
             if (sourceId === 5 && content.length < 500) {
               content = await fetchPortfolioArticle(link);
             }
@@ -214,6 +221,7 @@ export async function GET() {
             );
 
             inserted++;
+            feedStats[sourceName] = (feedStats[sourceName] || 0) + 1;
           }
         }
       } catch (err) {
@@ -247,11 +255,12 @@ export async function GET() {
                 content,
                 "hu",
                 sourceId,
-                "444",
+                "444.hu",
               ]
             );
 
             inserted++;
+            feedStats["444.hu"]++;
           }
         }
       } catch (err) {
@@ -264,16 +273,29 @@ export async function GET() {
     await processRssFeed("https://hvg.hu/rss", "HVG");
     await processRssFeed("https://24.hu/feed", "24.hu");
     await processRssFeed("https://index.hu/24ora/rss/", "Index");
-
-    // ⭐ Portfolio RSS + fallback
     await processRssFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio");
 
-    // ⭐ 444.hu Puppeteer scraper
     await process444Html();
 
     await connection.end();
 
-    return NextResponse.json({ status: "ok", inserted });
+    /** ⭐ FEED STATISZTIKA KIÍRÁSA */
+    console.log("──────────────── FEED STATISZTIKA ────────────────");
+    for (const [source, count] of Object.entries(feedStats)) {
+      console.log(`[FEED-STATS] ${source} → ${count} új cikk`);
+      fs.appendFileSync(
+        "/var/www/utom/logs/fetch-feed.log",
+        `[${new Date().toISOString()}] FEED-STATS ${source}: ${count} új cikk\n`
+      );
+    }
+    console.log("────────────────────────────────────────────────────");
+
+    return NextResponse.json({
+      status: "ok",
+      inserted,
+      stats: feedStats
+    });
+
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
   }
