@@ -78,6 +78,33 @@ async function loadWithPuppeteer(url: string): Promise<string> {
   }
 }
 
+/** ⭐ 444.hu feed Puppeteerrel */
+async function fetch444FeedWithPuppeteer(): Promise<string> {
+  try {
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
+
+    const page = await browser.newPage();
+    await page.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36"
+    );
+
+    await page.goto("https://444.hu/feed", {
+      waitUntil: "networkidle2",
+      timeout: 60000,
+    });
+
+    const xml = await page.content();
+    await browser.close();
+    return xml;
+  } catch (err) {
+    logError("444-FEED-PUPPETEER", err);
+    return "";
+  }
+}
+
 /** ⭐ Portfolio fallback */
 async function fetchPortfolioArticle(url: string): Promise<string> {
   try {
@@ -129,7 +156,7 @@ export async function GET() {
 
     let inserted = 0;
 
-    /** ⭐ RSS feldolgozás (444.hu feed támogatással) */
+    /** ⭐ RSS feldolgozás */
     async function processRssFeed(xmlOrUrl: string, sourceName: string, isXml = false) {
       try {
         let xml = "";
@@ -164,15 +191,12 @@ export async function GET() {
             let content: string;
 
             if (sourceId === 6) {
-              // ⭐ 444.hu → teljes HTML-t mentünk, nem tisztítunk
               content = item["content:encoded"] || item.content || "";
             } else {
-              // ⭐ Minden más forrás → tisztított szöveg
               const rawContent = item["content:encoded"] || item.content || "";
               content = cleanHtmlText(cheerio.load(rawContent).text());
             }
 
-            // ⭐ Portfolio fallback
             if (sourceId === 5 && content.length < 500) {
               content = await fetchPortfolioArticle(link);
             }
@@ -205,7 +229,10 @@ export async function GET() {
     await processRssFeed("https://24.hu/feed", "24.hu");
     await processRssFeed("https://index.hu/24ora/rss/", "Index");
     await processRssFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio");
-    await processRssFeed("https://444.hu/feed", "444.hu");
+
+    // ---- 444.hu FEED PUPPETEERREL ----
+    const feed444 = await fetch444FeedWithPuppeteer();
+    await processRssFeed(feed444, "444.hu", true);
 
     await connection.end();
 
@@ -230,5 +257,3 @@ export async function GET() {
     return NextResponse.json({ error: String(err) }, { status: 500 });
   }
 }
-
-// rák egye ki a gyomrát
