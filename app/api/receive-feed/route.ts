@@ -49,10 +49,20 @@ export async function POST(request: Request) {
       if (rows.length === 0) {
         const contentText = it.content ? it.content.replace(/\s+/g,' ').trim() : '';
         await connection.execute(
-          `INSERT INTO articles (title, url_canonical, content_text, published_at, language, source_id, source)
-           VALUES (?, ?, ?, NOW(), ?, ?, ?)`,
-          [it.title, it.link, contentText, "hu", 6, "444.hu"]
-        );
+  `INSERT INTO articles (
+      title,
+      url_canonical,
+      content_text,
+      published_at,
+      language,
+      source_id,
+      source,
+      status
+    )
+    VALUES (?, ?, ?, NOW(), ?, ?, ?, 'pending')`,
+  [it.title, it.link, contentText, "hu", 6, "444.hu"]
+);
+
         inserted++;
       }
     }
