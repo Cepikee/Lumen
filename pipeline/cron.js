@@ -200,13 +200,15 @@ ${shortSummary}
 async function fetchPendingArticles(limit) {
   const [rows] = await pool.execute(
     `SELECT id, title, url_canonical, content_text, category, source
-     FROM articles 
-     WHERE status = 'pending' 
+     FROM articles
+     WHERE status = 'pending'
      ORDER BY created_at DESC
-     LIMIT ${limit}`
+     LIMIT ?`,
+    [limit]
   );
   return rows;
 }
+
 
 // ─────────────────────────────────────────────
 //  STATUS UPDATE
@@ -432,7 +434,7 @@ async function processBatch(batch) {
       // ─────────────────────────────────────────────
       try {
         console.log("🔄 Új cikkek keresése a feedben...");
-        const feedRes = await fetch("http://127.0.0.1:3000/api/fetch-feed?limit=1");
+        const feedRes = await fetch("http://127.0.0.1:3000/api/fetch-feed?limit=10");
         const feedData = await feedRes.json();
         console.log("📰 Feed frissítés eredménye:", feedData);
         cronLog(`Időalapú feed frissítés: inserted=${feedData.inserted}`);
