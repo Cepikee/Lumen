@@ -39,9 +39,6 @@ function detectSourceId(url: string | null | undefined): number | null {
       case "hvg.hu": return 4;
       case "portfolio.hu": return 5;
       case "444.hu": return 6;
-      case "magyarnemzet.hu": return 7;
-      case "origo.hu": return 8;
-      case "nepszava.hu": return 9;
       default: return null;
     }
   } catch {
@@ -81,7 +78,35 @@ async function loadWithPuppeteer(url: string): Promise<string> {
   }
 }
 
-/** ⭐ 444.hu mindig Puppeteer */
+/** ⭐ 444.hu feed letöltése Puppeteerrel (CRITICAL FIX) */
+async function fetch444FeedXml(): Promise<string> {
+  try {
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
+
+    const page = await browser.newPage();
+    await page.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36"
+    );
+
+    await page.goto("https://444.hu/feed", {
+      waitUntil: "networkidle2",
+      timeout: 60000
+    });
+
+    const xml = await page.content();
+    await browser.close();
+
+    return xml;
+  } catch (err) {
+    logError("444-FEED-PUPPETEER", err);
+    return "";
+  }
+}
+
+/** ⭐ 444.hu cikk Puppeteer */
 async function fetch444ArticleContent(url: string): Promise<string> {
   const html = await loadWithPuppeteer(url);
   const $ = cheerio.load(html);
@@ -92,7 +117,7 @@ async function fetch444ArticleContent(url: string): Promise<string> {
   return cleanHtmlText(article.text());
 }
 
-/** ⭐ Portfolio.hu fallback: fetch → ha rövid → Puppeteer */
+/** ⭐ Portfolio fallback */
 async function fetchPortfolioArticle(url: string): Promise<string> {
   try {
     const res = await fetch(url, {
@@ -175,17 +200,23 @@ export async function GET() {
 
     let inserted = 0;
 
-    /** Normál RSS feldolgozás */
-    async function processRssFeed(feedUrl: string, sourceName: string) {
+    /** ⭐ RSS feldolgozás (444.hu feed támogatással) */
+    async function processRssFeed(xmlOrUrl: string, sourceName: string, isXml = false) {
       try {
-        const res = await fetch(feedUrl, {
-          headers: {
-            "User-Agent":
-              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
-          },
-        });
+        let xml = "";
 
-        const xml = await res.text();
+        if (isXml) {
+          xml = xmlOrUrl;
+        } else {
+          const res = await fetch(xmlOrUrl, {
+            headers: {
+              "User-Agent":
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
+            },
+          });
+          xml = await res.text();
+        }
+
         const feed = await parser.parseString(xml);
 
         for (const item of feed.items) {
@@ -237,7 +268,7 @@ export async function GET() {
       }
     }
 
-    /** ⭐ 444.hu feldolgozás Puppeteerrel */
+    /** ⭐ 444.hu feldolgozás Puppeteerrel – INNER, hogy lássa connection/inserted-et */
     async function process444Html() {
       try {
         const articles = await fetch444Articles();
@@ -276,14 +307,18 @@ export async function GET() {
       }
     }
 
-    // ---- FEED LISTA ----
+    /** ⭐ 444.hu feed Puppeteerrel */
+    const xml444 = await fetch444FeedXml();
+    await processRssFeed(xml444, "444.hu", true);
+
+    // ---- NORMÁL FEED LISTA ----
     await processRssFeed("https://telex.hu/rss", "Telex");
     await processRssFeed("https://hvg.hu/rss", "HVG");
     await processRssFeed("https://24.hu/feed", "24.hu");
     await processRssFeed("https://index.hu/24ora/rss/", "Index");
     await processRssFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio");
-    await processRssFeed("https://444.hu/feed", "444.hu");
 
+    // ⭐ 444.hu főoldal scraping extra rétegként
     await process444Html();
 
     await connection.end();
