@@ -47,8 +47,8 @@ function cleanHtmlText(text: string) {
     .trim();
 }
 
-/** ⭐ Puppeteer-alapú 444.hu cikk scraper */
-async function fetch444ArticleContent(url: string): Promise<string> {
+/** ⭐ Puppeteer wrapper */
+async function loadWithPuppeteer(url: string): Promise<string> {
   try {
     const browser = await puppeteer.launch({
       headless: true,
@@ -64,40 +64,65 @@ async function fetch444ArticleContent(url: string): Promise<string> {
 
     const html = await page.content();
     await browser.close();
-
-    const $ = cheerio.load(html);
-    const article = $("article");
-
-    // Zavaró elemek törlése
-    article.find("aside, .related, .recommended, .share, .social, .ad, .advertisement, script, style, nav, footer, #comments, iframe").remove();
-
-    const text = cleanHtmlText(article.text());
-    return text || "";
+    return html;
   } catch (err) {
-    logError("444-PUPPETEER", err);
+    logError("PUPPETEER", err);
     return "";
   }
 }
 
-/** ⭐ Puppeteer-alapú 444.hu főoldal scraper */
-async function fetch444Articles(): Promise<{ title: string; link: string }[]> {
+/** ⭐ 444.hu mindig Puppeteer */
+async function fetch444ArticleContent(url: string): Promise<string> {
+  const html = await loadWithPuppeteer(url);
+  const $ = cheerio.load(html);
+  const article = $("article");
+
+  article.find("aside, .related, .recommended, .share, .social, .ad, .advertisement, script, style, nav, footer, #comments, iframe").remove();
+
+  return cleanHtmlText(article.text());
+}
+
+/** ⭐ Portfolio.hu fallback: fetch → ha rövid → Puppeteer */
+async function fetchPortfolioArticle(url: string): Promise<string> {
   try {
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    // 1) Próbáljuk meg sima fetch-csel
+    const res = await fetch(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
+      },
     });
 
-    const page = await browser.newPage();
-    await page.setUserAgent(
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36"
-    );
+    const html = await res.text();
+    let $ = cheerio.load(html);
+    let article = $(".article-content, .article-body, article");
+    let text = cleanHtmlText(article.text());
 
-    await page.goto("https://444.hu", { waitUntil: "networkidle2", timeout: 60000 });
+    if (text.length > 500) {
+      return text;
+    }
 
-    const html = await page.content();
-    await browser.close();
+    // 2) Ha túl rövid → Puppeteer fallback
+    logError("PORTFOLIO-FALLBACK", `Fetch too short (len=${text.length}), using Puppeteer`);
 
+    const html2 = await loadWithPuppeteer(url);
+    $ = cheerio.load(html2);
+    article = $(".article-content, .article-body, article");
+    text = cleanHtmlText(article.text());
+
+    return text;
+  } catch (err) {
+    logError("PORTFOLIO", err);
+    return "";
+  }
+}
+
+/** ⭐ 444.hu főoldal Puppeteer */
+async function fetch444Articles(): Promise<{ title: string; link: string }[]> {
+  try {
+    const html = await loadWithPuppeteer("https://444.hu");
     const $ = cheerio.load(html);
+
     const articles: { title: string; link: string }[] = [];
 
     $("a").each((_, el) => {
@@ -119,7 +144,7 @@ async function fetch444Articles(): Promise<{ title: string; link: string }[]> {
 
     return Array.from(unique.values()).slice(0, 50);
   } catch (err) {
-    logError("444-PUPPETEER-LIST", err);
+    logError("444-LIST", err);
     return [];
   }
 }
@@ -168,13 +193,20 @@ export async function GET() {
             const sourceId = detectSourceId(link);
             if (!sourceId) continue;
 
+            let content = item["content:encoded"] || item.content || "";
+
+            // ⭐ Portfolio.hu fallback
+            if (sourceId === 5 && content.length < 500) {
+              content = await fetchPortfolioArticle(link);
+            }
+
             await connection.execute(
               `INSERT INTO articles (title, url_canonical, content_text, published_at, language, source_id, source)
                VALUES (?, ?, ?, NOW(), ?, ?, ?)`,
               [
                 item.title || "",
                 link,
-                item["content:encoded"] || item.content || "",
+                content,
                 "hu",
                 sourceId,
                 sourceName,
@@ -232,6 +264,8 @@ export async function GET() {
     await processRssFeed("https://hvg.hu/rss", "HVG");
     await processRssFeed("https://24.hu/feed", "24.hu");
     await processRssFeed("https://index.hu/24ora/rss/", "Index");
+
+    // ⭐ Portfolio RSS + fallback
     await processRssFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio");
 
     // ⭐ 444.hu Puppeteer scraper
