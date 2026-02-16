@@ -48,6 +48,7 @@ export async function GET(req: Request) {
 
   const startStr = start.toISOString().slice(0, 19).replace("T", " ");
 
+
   // --- category filter ---
   const rawCategory = url.searchParams.get("category");
   const categoryParam = rawCategory ? String(rawCategory).trim() : null;
@@ -73,7 +74,8 @@ export async function GET(req: Request) {
     const periodClause =
       mode === "hours"
         ? `${where ? " AND" : " WHERE"} published_at >= ?`
-        : `${where ? " AND" : " WHERE"} DATE(published_at) >= DATE(?)`;
+        : `${where ? " AND" : " WHERE"} published_at >= ?
+`;
 
     const sql = `
       SELECT id, title, category, published_at, source AS dominantSource
@@ -147,7 +149,8 @@ export async function GET(req: Request) {
         const bucketKey =
           mode === "hours"
             ? publishedAt.toISOString().slice(0, 13) + ":00:00"
-            : publishedAt.toISOString().slice(0, 10);
+            : publishedAt.toISOString().slice(0, 10)
+;
 
         entry.sparkBuckets.set(
           bucketKey,
