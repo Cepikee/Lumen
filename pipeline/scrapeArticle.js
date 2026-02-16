@@ -1,11 +1,9 @@
-// scrapeArticle.js — Cloudflare Worker proxy támogatással
+// scrapeArticle.js — 444.hu Puppeteer támogatással
 const mysql = require("mysql2/promise");
 const { cleanArticle } = require("./cleanArticle");
+const puppeteer = require("puppeteer");
 
-// 🔥 A TE WORKERED:
-const WORKER_URL = "https://royal-king-47c3.vashiri6562.workers.dev/?url=";
-
-// --- HTTP letöltés (közvetlen vagy Worker proxy) ---
+// --- HTTP letöltés (közvetlen) ---
 async function fetchHtml(url) {
   const res = await fetch(url, {
     headers: {
@@ -30,6 +28,42 @@ function is444(url) {
   return url.includes("444.hu");
 }
 
+// --- 444.hu → Puppeteer scraping ---
+async function fetchHtml444(url) {
+  console.log(`[SCRAPER] 🟡 Puppeteer indul 444.hu-hoz...`);
+
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-gpu"
+    ]
+  });
+
+  const page = await browser.newPage();
+
+  await page.setUserAgent(
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+  );
+
+  await page.setExtraHTTPHeaders({
+    "Accept-Language": "hu-HU,hu;q=0.9"
+  });
+
+  // Cloudflare JS challenge → várunk
+  await page.goto(url, { waitUntil: "networkidle2", timeout: 30000 });
+
+  // Várunk, amíg a cikk tartalma megjelenik
+  await page.waitForSelector("article", { timeout: 15000 }).catch(() => {});
+
+  const html = await page.content();
+
+  await browser.close();
+  return html;
+}
+
 async function scrapeArticle(articleId, url) {
   console.log(`[SCRAPER] Indul: articleId=${articleId}, url=${url}`);
 
@@ -43,20 +77,11 @@ async function scrapeArticle(articleId, url) {
   try {
     let html;
 
-    // 🔥 1) Ha 444.hu → automatikusan Worker proxy
+    // 🔥 1) Ha 444.hu → Puppeteer
     if (is444(url)) {
-      const proxyUrl = WORKER_URL + encodeURIComponent(url);
-      console.log(`[SCRAPER] 444.hu észlelve → Cloudflare Worker proxy: ${proxyUrl}`);
-
-      try {
-        html = await fetchHtml(proxyUrl);
-      } catch (err) {
-        console.error(`[SCRAPER] ❌ Worker proxy hiba: ${err.message}`);
-        throw new Error("444.hu Worker proxy is failed");
-      }
-
+      html = await fetchHtml444(url);
     } else {
-      // 🔥 2) Normál oldal → közvetlen letöltés
+      // 🔥 2) Normál oldal → fetch
       html = await fetchHtml(url);
     }
 
