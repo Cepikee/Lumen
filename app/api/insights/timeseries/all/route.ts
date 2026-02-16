@@ -10,7 +10,7 @@ function fixCat(s: any): string | null {
   let t = String(s).replace(/[\x00-\x1F\x7F]/g, "").trim();
   if (!t) return null;
 
-  // 2) ha még mindig mojibake, próbáljuk latin1 → utf8
+  // 2) latin1 → utf8 javítás, ha mojibake
   if (/[├â├ę├╝├║]/.test(t)) {
     try {
       t = Buffer.from(t, "latin1").toString("utf8").trim();
@@ -20,8 +20,9 @@ function fixCat(s: any): string | null {
   return t || null;
 }
 
-
 export async function GET(req: Request) {
+  console.log(">>> TIMESERIES ALL ROUTE FUT <<<");
+
   const url = new URL(req.url);
   const period = url.searchParams.get("period") || "7d";
 
@@ -36,6 +37,7 @@ export async function GET(req: Request) {
   const startStr = startUtc.toISOString().slice(0, 19).replace("T", " ");
 
   try {
+    // 1) kategóriák lekérése és normalizálása
     const [cats]: any = await db.query(`
       SELECT DISTINCT TRIM(category) AS category
       FROM summaries
@@ -53,7 +55,11 @@ export async function GET(req: Request) {
 
     const results: any[] = [];
 
-    for (const cat of categories) {
+    // 2) minden kategóriára külön timeseries
+    for (const rawCat of categories) {
+      const cat = fixCat(rawCat);
+      if (!cat) continue;
+
       const [rows]: any = await db.query(
         `
         SELECT 
