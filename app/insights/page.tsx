@@ -88,6 +88,20 @@ export default function InsightFeedPage() {
     };
   }, []);
 
+  // ⭐ 10 perces downsampling a timeseries adatra
+  const downsampledTs = useMemo(() => {
+    if (!tsData?.categories) return [];
+
+    return tsData.categories.map((cat: any) => {
+      const filteredPoints = cat.points.filter((_: any, i: number) => i % 10 === 0);
+
+      return {
+        ...cat,
+        points: filteredPoints,
+      };
+    });
+  }, [tsData]);
+
   const categoryTrends = useMemo<LocalRawCategory[]>(() => {
     if (!data) return [];
 
@@ -158,7 +172,7 @@ export default function InsightFeedPage() {
       ) : (
         <div className="mb-4 p-3 rounded-4 bg-body-secondary">
           <InsightsOverviewChart
-            data={tsData?.categories || []}
+            data={downsampledTs || []}
             forecast={forecastData?.forecast || {}}
             range={period}
           />
