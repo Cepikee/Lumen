@@ -78,44 +78,9 @@ async function loadWithPuppeteer(url: string): Promise<string> {
   }
 }
 
-/** ⭐ 444.hu feed letöltése Puppeteerrel (CRITICAL FIX) */
-async function fetch444FeedXml(): Promise<string> {
-  try {
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
 
-    const page = await browser.newPage();
-    await page.setUserAgent(
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36"
-    );
 
-    await page.goto("https://444.hu/feed", {
-      waitUntil: "networkidle2",
-      timeout: 60000
-    });
 
-    const xml = await page.content();
-    await browser.close();
-
-    return xml;
-  } catch (err) {
-    logError("444-FEED-PUPPETEER", err);
-    return "";
-  }
-}
-
-/** ⭐ 444.hu cikk Puppeteer */
-async function fetch444ArticleContent(url: string): Promise<string> {
-  const html = await loadWithPuppeteer(url);
-  const $ = cheerio.load(html);
-  const article = $("article");
-
-  article.find("aside, .related, .recommended, .share, .social, .ad, .advertisement, script, style, nav, footer, #comments, iframe").remove();
-
-  return cleanHtmlText(article.text());
-}
 
 /** ⭐ Portfolio fallback */
 async function fetchPortfolioArticle(url: string): Promise<string> {
@@ -150,37 +115,7 @@ async function fetchPortfolioArticle(url: string): Promise<string> {
   }
 }
 
-/** ⭐ 444.hu főoldal Puppeteer */
-async function fetch444Articles(): Promise<{ title: string; link: string }[]> {
-  try {
-    const html = await loadWithPuppeteer("https://444.hu");
-    const $ = cheerio.load(html);
 
-    const articles: { title: string; link: string }[] = [];
-
-    $("a").each((_, el) => {
-      const href = $(el).attr("href");
-      const title = $(el).text().trim();
-
-      if (!href || !title || title.length < 10) return;
-
-      const link = href.startsWith("http") ? href : `https://444.hu${href}`;
-      if (!link.startsWith("https://444.hu")) return;
-
-      articles.push({ title, link });
-    });
-
-    const unique = new Map<string, { title: string; link: string }>();
-    for (const a of articles) {
-      if (!unique.has(a.link)) unique.set(a.link, a);
-    }
-
-    return Array.from(unique.values()).slice(0, 50);
-  } catch (err) {
-    logError("444-LIST", err);
-    return [];
-  }
-}
 
 export async function GET() {
   try {
@@ -234,14 +169,8 @@ export async function GET() {
 
             // ⭐ 444.hu feed HTML → tiszta szöveg
             let rawContent = item["content:encoded"] || item.content || "";
-            let content = cleanHtmlText(cheerio.load(rawContent).text());
-
-            // ⭐ 444.hu fallback: ha rövid → Puppeteer
-            if (sourceId === 6 && content.length < 500) {
-              content = await fetch444ArticleContent(link);
-            }
-
-            // ⭐ Portfolio fallback
+let content = cleanHtmlText(cheerio.load(rawContent).text());
+// ⭐ Portfolio fallback
             if (sourceId === 5 && content.length < 500) {
               content = await fetchPortfolioArticle(link);
             }
@@ -268,48 +197,10 @@ export async function GET() {
       }
     }
 
-    /** ⭐ 444.hu feldolgozás Puppeteerrel – INNER, hogy lássa connection/inserted-et */
-    async function process444Html() {
-      try {
-        const articles = await fetch444Articles();
+    
+  
 
-        for (const { title, link } of articles) {
-          const [rows] = await connection.execute<RowDataPacket[]>(
-            "SELECT id FROM articles WHERE url_canonical = ?",
-            [link]
-          );
 
-          if (rows.length === 0) {
-            const sourceId = detectSourceId(link);
-            if (!sourceId) continue;
-
-            const content = await fetch444ArticleContent(link);
-
-            await connection.execute(
-              `INSERT INTO articles (title, url_canonical, content_text, published_at, language, source_id, source)
-               VALUES (?, ?, ?, NOW(), ?, ?, ?)`,
-              [
-                title,
-                link,
-                content,
-                "hu",
-                sourceId,
-                "444.hu",
-              ]
-            );
-
-            inserted++;
-            feedStats["444.hu"]++;
-          }
-        }
-      } catch (err) {
-        logError("444-HTML", err);
-      }
-    }
-
-    /** ⭐ 444.hu feed Puppeteerrel */
-    const xml444 = await fetch444FeedXml();
-    await processRssFeed(xml444, "444.hu", true);
 
     // ---- NORMÁL FEED LISTA ----
     await processRssFeed("https://telex.hu/rss", "Telex");
@@ -317,10 +208,7 @@ export async function GET() {
     await processRssFeed("https://24.hu/feed", "24.hu");
     await processRssFeed("https://index.hu/24ora/rss/", "Index");
     await processRssFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio");
-
-    // ⭐ 444.hu főoldal scraping extra rétegként
-    await process444Html();
-
+    await processRssFeed("https://444.hu/feed", "444.hu");
     await connection.end();
 
     /** ⭐ FEED STATISZTIKA KIÍRÁSA */

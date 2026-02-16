@@ -1,7 +1,6 @@
-// scrapeArticle.js — 444.hu Puppeteer támogatással
+// scrapeArticle.js — 444.hu RSS-alapú támogatással
 const mysql = require("mysql2/promise");
 const { cleanArticle } = require("./cleanArticle");
-const puppeteer = require("puppeteer");
 
 // --- HTTP letöltés (közvetlen) ---
 async function fetchHtml(url) {
@@ -28,43 +27,6 @@ function is444(url) {
   return url.includes("444.hu");
 }
 
-// --- 444.hu → Puppeteer scraping ---
-async function fetchHtml444(url) {
-  console.log(`[SCRAPER] 🟡 Puppeteer indul 444.hu-hoz...`);
-
-  const browser = await puppeteer.launch({
-    headless: true,
-    executablePath: "/root/.cache/puppeteer/chrome/linux-145.0.7632.67/chrome-linux64/chrome",
-    args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--disable-dev-shm-usage",
-      "--disable-gpu"
-    ]
-  });
-
-  const page = await browser.newPage();
-
-  await page.setUserAgent(
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
-  );
-
-  await page.setExtraHTTPHeaders({
-    "Accept-Language": "hu-HU,hu;q=0.9"
-  });
-
-  // Cloudflare JS challenge → várunk
-  await page.goto(url, { waitUntil: "networkidle2", timeout: 30000 });
-
-  // Várunk, amíg a cikk tartalma megjelenik
-  await page.waitForSelector("article", { timeout: 15000 }).catch(() => {});
-
-  const html = await page.content();
-
-  await browser.close();
-  return html;
-}
-
 async function scrapeArticle(articleId, url) {
   console.log(`[SCRAPER] Indul: articleId=${articleId}, url=${url}`);
 
@@ -76,15 +38,24 @@ async function scrapeArticle(articleId, url) {
   });
 
   try {
-    let html;
 
-    // 🔥 1) Ha 444.hu → Puppeteer
+    // 🔥 1) 444.hu → NEM scrapelünk, mert RSS-ből jön a teljes cikk
     if (is444(url)) {
-      html = await fetchHtml444(url);
-    } else {
-      // 🔥 2) Normál oldal → fetch
-      html = await fetchHtml(url);
+      console.log(`[SCRAPER] 🟢 444.hu → scraping kihagyva, RSS content:encoded használata.`);
+
+      // A content_text-et az RSS feldolgozó már beírta
+      await conn.execute(
+        `UPDATE articles 
+         SET status = 'pending', scraped_via = 'rss' 
+         WHERE id = ?`,
+        [articleId]
+      );
+
+      return { ok: true, skipped: true, reason: "rss_content_used" };
     }
+
+    // 🔥 2) Normál oldal → fetch
+    const html = await fetchHtml(url);
 
     // 🔥 3) Tisztítás
     const text = cleanArticle(html, url);
