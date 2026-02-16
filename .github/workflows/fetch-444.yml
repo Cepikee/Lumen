@@ -1,0 +1,26 @@
+name: fetch-444-feed
+on:
+  schedule:
+    - cron: '*/5 * * * *' # 5 percenként
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Fetch 444 feed and POST to my server
+        env:
+          TARGET_ENDPOINT: ${{ secrets.MY_SERVER_ENDPOINT }}
+          TARGET_TOKEN: ${{ secrets.MY_SERVER_TOKEN }}
+        run: node ./scripts/fetch-and-post-444.js
