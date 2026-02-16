@@ -274,6 +274,8 @@ export async function GET() {
     await processRssFeed("https://24.hu/feed", "24.hu");
     await processRssFeed("https://index.hu/24ora/rss/", "Index");
     await processRssFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio");
+    await processRssFeed("https://444.hu/feed", "444.hu");
+
 
     await process444Html();
 
