@@ -112,10 +112,10 @@ export default function InsightsOverviewChart({
         showLine: true,
         stepped: false,
         cubicInterpolationMode: "monotone",   // ⭐ EZ A LÉNYEG
-        tension: 0.4,                          // ⭐ SZÉP, LÁGY GÖRBE
-        pointRadius: 3,
-        pointHoverRadius: 5,
-        borderWidth: 2,
+        tension: 0.15,                          // ⭐ SZÉP, LÁGY GÖRBE
+        pointRadius: 0,
+        pointHoverRadius: 6,
+        borderWidth: 1.2,
         fill: false,
       });
 
