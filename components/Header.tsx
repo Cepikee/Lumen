@@ -16,10 +16,12 @@ export default function Header() {
   const user = useUserStore((s) => s.user);
   const loading = useUserStore((s) => s.loading);
 
+  // Landing oldalon nincs header
   if (pathname.startsWith("/landing")) {
     return null;
   }
 
+  // Kereső állapot
   const searchTerm = layout?.searchTerm ?? "";
   const setSearchTerm = layout?.setSearchTerm ?? (() => {});
   const [localSearch, setLocalSearch] = useState(searchTerm);
@@ -38,87 +40,88 @@ export default function Header() {
     <nav className="navbar navbar-expand-lg bg-body shadow-sm sticky-top">
       <div className="container-fluid d-flex align-items-center justify-content-between">
 
-        {/* LOGÓ */}
-        <Link href="/" className="navbar-brand d-flex align-items-center gap-2">
+        {/* LOGÓ — csak a logó, nagyobb méretben */}
+        <Link href="/" className="navbar-brand d-flex align-items-center">
           <Image
-            src="/apple-touch-icon.png"   // <-- EZ A LOGÓD
+            src="/apple-touch-icon.png"
             alt="Utom.hu logó"
-            width={64}
-            height={64}
+            width={72}
+            height={72}
             priority
             style={{ objectFit: "contain" }}
           />
-          <span className="fw-bold fs-4">Utom.hu</span>
         </Link>
 
-        {/* KERESŐ */}
-        <div className="d-flex flex-column align-items-center mx-auto">
-          <div
-            className="position-relative"
-            style={{
-              width: "360px",
-              maxWidth: "90%",
-            }}
-          >
-            <span
+        {/* KERESŐ — csak a főoldalon */}
+        {pathname === "/" && (
+          <div className="d-flex flex-column align-items-center mx-auto">
+            <div
+              className="position-relative"
               style={{
-                position: "absolute",
-                left: "10px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                color: "#bbb",
-                pointerEvents: "none",
-                fontSize: "16px",
+                width: "360px",
+                maxWidth: "90%",
               }}
             >
-              🔍
-            </span>
-
-            <input
-              type="text"
-              placeholder="Keresés..."
-              className="form-control bg-dark text-white border-secondary"
-              style={{
-                textAlign: "left",
-                fontSize: "16px",
-                paddingLeft: "36px",
-                paddingRight: "32px",
-              }}
-              value={localSearch}
-              onChange={(e) => setLocalSearch(e.target.value)}
-            />
-
-            {localSearch.length > 0 && (
               <span
-                onClick={() => setLocalSearch("")}
                 style={{
                   position: "absolute",
-                  right: "10px",
+                  left: "10px",
                   top: "50%",
                   transform: "translateY(-50%)",
-                  cursor: "pointer",
                   color: "#bbb",
-                  fontSize: "18px",
-                  userSelect: "none",
+                  pointerEvents: "none",
+                  fontSize: "16px",
                 }}
               >
-                ×
+                🔍
               </span>
-            )}
-          </div>
 
-          <div
-            style={{
-              height: "20px",
-              marginTop: "4px",
-              fontSize: "14px",
-              color: "#aaa",
-              textAlign: "center",
-            }}
-          >
-            {isTyping ? "Keresés folyamatban…" : ""}
+              <input
+                type="text"
+                placeholder="Keresés..."
+                className="form-control bg-dark text-white border-secondary"
+                style={{
+                  textAlign: "left",
+                  fontSize: "16px",
+                  paddingLeft: "36px",
+                  paddingRight: "32px",
+                }}
+                value={localSearch}
+                onChange={(e) => setLocalSearch(e.target.value)}
+              />
+
+              {localSearch.length > 0 && (
+                <span
+                  onClick={() => setLocalSearch("")}
+                  style={{
+                    position: "absolute",
+                    right: "10px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                    color: "#bbb",
+                    fontSize: "18px",
+                    userSelect: "none",
+                  }}
+                >
+                  ×
+                </span>
+              )}
+            </div>
+
+            <div
+              style={{
+                height: "20px",
+                marginTop: "4px",
+                fontSize: "14px",
+                color: "#aaa",
+                textAlign: "center",
+              }}
+            >
+              {isTyping ? "Keresés folyamatban…" : ""}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* NAV + PROFIL */}
         <div className="d-flex align-items-center gap-3">
