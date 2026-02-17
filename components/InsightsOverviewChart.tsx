@@ -97,24 +97,31 @@ export default function InsightsOverviewChart({
       const points = Array.isArray(cat?.points) ? cat.points : [];
 
       ds.push({
-        label,
-        data: points
-          .map((p: any) => {
-            const dateVal = p?.date ? new Date(p.date) : null;
-            const countVal =
-              typeof p?.count === "number"
-                ? p.count
-                : Number(p?.count) || 0;
-            return dateVal ? { x: dateVal, y: countVal } : null;
-          })
-          .filter(Boolean),
-        borderColor: color,
-        backgroundColor: color + "33",
-        pointRadius: 0,
-        borderWidth: 2,
-        tension: 0.3,
-        fill: false,
-      });
+  label,
+  data: points
+    .map((p: any) => {
+      const dateVal = p?.date ? new Date(p.date) : null;
+      const countVal =
+        typeof p?.count === "number"
+          ? p.count
+          : Number(p?.count) || 0;
+      return dateVal ? { x: dateVal, y: countVal } : null;
+    })
+    .filter(Boolean),
+  borderColor: color,
+  backgroundColor: color + "33",
+
+  // 🔥 EZT ÍRD ÁT:
+  showLine: false,
+  pointRadius: 4,
+  pointHoverRadius: 6,
+
+  // 🔥 EZEKET HAGYD BENNE, NEM BAJ:
+  borderWidth: 2,
+  tension: 0.3,
+  fill: false,
+});
+
     });
 
     // AI FORECAST – csak 24h
