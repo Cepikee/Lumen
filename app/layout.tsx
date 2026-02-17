@@ -4,13 +4,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ClientLayout from "../components/ClientLayout";
 
 export const metadata = {
-  title: "Utom.hu – AI‑alapú hírtrend elemzés",
+  metadataBase: new URL("https://utom.hu"),
+  title: "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
   description:
-    "Valós idejű hírtrendek, spike‑detektálás és kategorizálás több száz magyar forrásból.",
+    "Az Utom egy független, AI-alapú automatikus hírgyártó és híradó platform.",
   openGraph: {
-    title: "Utom.hu – AI‑alapú hírtrend elemzés",
+    title: "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
     description:
-      "Valós idejű hírtrendek, spike‑detektálás és kategorizálás több száz magyar forrásból.",
+      "Az Utom egy független, AI-alapú automatikus hírgyártó és híradó platform.",
     url: "https://utom.hu",
     siteName: "Utom.hu",
     images: ["/og-image.png"],
@@ -23,6 +24,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="hu" suppressHydrationWarning>
       <head>
+        {/* Faviconok */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+
         {/* reCAPTCHA */}
         <script
           src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
