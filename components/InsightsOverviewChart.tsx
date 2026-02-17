@@ -279,6 +279,7 @@ export default function InsightsOverviewChart({
         },
         pan: { enabled: true, mode: "x" },
       },
+      decimation: { enabled: false}
     },
   };
 
