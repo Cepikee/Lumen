@@ -43,8 +43,8 @@ export default function Header() {
           <Image
             src="/apple-touch-icon.png"   // <-- EZ A LOGÓD
             alt="Utom.hu logó"
-            width={40}
-            height={40}
+            width={64}
+            height={64}
             priority
             style={{ objectFit: "contain" }}
           />
