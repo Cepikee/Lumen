@@ -88,19 +88,12 @@ export default function InsightFeedPage() {
     };
   }, []);
 
-  // ⭐ 10 perces downsampling a timeseries adatra
-  const downsampledTs = useMemo(() => {
-    if (!tsData?.categories) return [];
+ // ⭐ NINCS downsampling – minden pont megmarad
+const downsampledTs = useMemo(() => {
+  if (!tsData?.categories) return [];
+  return tsData.categories;
+}, [tsData]);
 
-    return tsData.categories.map((cat: any) => {
-      const filteredPoints = cat.points.filter((_: any, i: number) => i % 10 === 0);
-
-      return {
-        ...cat,
-        points: filteredPoints,
-      };
-    });
-  }, [tsData]);
 
   const categoryTrends = useMemo<LocalRawCategory[]>(() => {
     if (!data) return [];
