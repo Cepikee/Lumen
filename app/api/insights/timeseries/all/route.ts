@@ -22,13 +22,15 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const period = url.searchParams.get("period") || "24h";
 
-  // ⭐ PERIOD LOGIKA – CSAK AZ SQL AGGREGÁCIÓT VÁLTOZTATJUK
+  // ⭐ PERIOD LOGIKA – SQL bucket formátum
   let minutesBack = 24 * 60;
   let sqlBucket = "%Y-%m-%d %H:%i:00"; // 1 perc
 
   if (period === "7d") {
     minutesBack = 7 * 24 * 60;
-    sqlBucket = "%Y-%m-%d %H:%i:00"; // 10 percet frontend oldalon ritkítunk
+
+    // ⭐ 10 perces bucket SQL-ben
+    sqlBucket = "%Y-%m-%d %H:%i:00";
   }
 
   if (period === "30d") {
@@ -38,7 +40,7 @@ export async function GET(req: Request) {
 
   if (period === "90d") {
     minutesBack = 90 * 24 * 60;
-    sqlBucket = "%Y-%m-%d %H:00:00"; // órás bucket (frontend ritkít)
+    sqlBucket = "%Y-%m-%d %H:00:00"; // órás bucket
   }
 
   // ⭐ MINDEN UTC-ben
@@ -69,11 +71,24 @@ export async function GET(req: Request) {
       const cat = fixCat(rawCat);
       if (!cat) continue;
 
-      // ⭐ ADAT-ALAPÚ AGGREGÁCIÓ – NINCS CURSOR, NINCS 0-ZÁS
+      // ⭐ 7 napos mód: 10 perces kerekítés SQL-ben
+      const bucketExpr =
+        period === "7d"
+          ? `
+            DATE_FORMAT(
+              DATE_SUB(
+                CONVERT_TZ(created_at, @@session.time_zone, '+00:00'),
+                INTERVAL MINUTE(CONVERT_TZ(created_at, @@session.time_zone, '+00:00')) % 10 MINUTE
+              ),
+              '%Y-%m-%d %H:%i:00'
+            )
+          `
+          : `DATE_FORMAT(CONVERT_TZ(created_at, @@session.time_zone, '+00:00'), '${sqlBucket}')`;
+
       const [rows]: any = await db.query(
         `
         SELECT 
-          DATE_FORMAT(CONVERT_TZ(created_at, @@session.time_zone, '+00:00'), '${sqlBucket}') AS bucket,
+          ${bucketExpr} AS bucket,
           COUNT(*) AS count
         FROM summaries
         WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
@@ -84,7 +99,6 @@ export async function GET(req: Request) {
         [cat, startStr]
       );
 
-      // ⭐ CSAK VALÓS ADATOKAT ADUNK VISSZA
       const points = rows.map((r: any) => ({
         date: String(r.bucket),
         count: Number(r.count) || 0,
