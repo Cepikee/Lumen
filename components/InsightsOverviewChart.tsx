@@ -111,7 +111,7 @@ export default function InsightsOverviewChart({
           borderColor: color,
           backgroundColor: color + "33",
       showLine: true,
-      stepped: true,
+      stepped: false,
       tension: 0,
       pointRadius: 4,
       pointHoverRadius: 6,
