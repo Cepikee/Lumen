@@ -22,30 +22,32 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const period = url.searchParams.get("period") || "24h";
 
-  // ⭐ PERIOD LOGIKA – SQL bucket formátum
+  // PERIOD LOGIKA
   let minutesBack = 24 * 60;
-  let sqlBucket = "%Y-%m-%d %H:%i:00"; // 1 perc (24h mód)
+  let sqlBucket = "%Y-%m-%d %H:%i:00";
 
   if (period === "7d") {
     minutesBack = 7 * 24 * 60;
-    sqlBucket = "%Y-%m-%d %H:00:00"; // ⭐ órás bucket
+    sqlBucket = "%Y-%m-%d %H:00:00";
   }
 
   if (period === "30d") {
     minutesBack = 30 * 24 * 60;
-    sqlBucket = "%Y-%m-%d %H:00:00"; // órás bucket
+    sqlBucket = "%Y-%m-%d %H:00:00";
   }
 
   if (period === "90d") {
     minutesBack = 90 * 24 * 60;
-    sqlBucket = "%Y-%m-%d %H:00:00"; // órás bucket
+    sqlBucket = "%Y-%m-%d %H:00:00";
   }
 
-  // ⭐ MINDEN UTC-ben
+  // UTC IDŐINTERVALLUM
   const now = new Date();
   const nowUtc = new Date(now.toISOString());
   const startUtc = new Date(nowUtc.getTime() - minutesBack * 60 * 1000);
+
   const startStr = startUtc.toISOString().slice(0, 19).replace("T", " ");
+  const endStr = nowUtc.toISOString().slice(0, 19).replace("T", " ");
 
   try {
     const [cats]: any = await db.query(`
@@ -69,7 +71,7 @@ export async function GET(req: Request) {
       const cat = fixCat(rawCat);
       if (!cat) continue;
 
-      // ⭐ Egységes bucketelés (adat-alapú)
+      // JAVÍTOTT SQL: helyes időintervallum + helyes timezone
       const [rows]: any = await db.query(
         `
         SELECT 
@@ -81,10 +83,11 @@ export async function GET(req: Request) {
         FROM summaries
         WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
           AND created_at >= CONVERT_TZ(?, '+00:00', @@session.time_zone)
+          AND created_at <= CONVERT_TZ(?, '+00:00', @@session.time_zone)
         GROUP BY bucket
         ORDER BY bucket ASC
         `,
-        [cat, startStr]
+        [cat, startStr, endStr]
       );
 
       const points = rows.map((r: any) => ({
