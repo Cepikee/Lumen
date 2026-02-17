@@ -7,12 +7,14 @@ import {
   LineElement,
   PointElement,
   LinearScale,
-  CategoryScale,        // ⭐ TIME SCALE HELYETT CATEGORY SCALE
+  TimeScale,
   Tooltip,
   Legend,
   Filler,
 } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
+import "chartjs-adapter-date-fns";
+import { hu } from "date-fns/locale";
 import { Line } from "react-chartjs-2";
 import { useMemo } from "react";
 import { useUserStore } from "@/store/useUserStore";
@@ -41,7 +43,7 @@ ChartJS.register(
   LineElement,
   PointElement,
   LinearScale,
-  CategoryScale,        // ⭐ EZT REGISZTRÁLJUK
+  TimeScale,
   Tooltip,
   Legend,
   Filler,
@@ -71,6 +73,7 @@ export default function InsightsOverviewChart({
   height = 300,
   range = "24h",
 }: any) {
+    console.log("CHART RAW DATA:", data);
   const theme = useUserStore((s) => s.theme);
   const isDark =
     theme === "dark" ||
@@ -79,13 +82,12 @@ export default function InsightsOverviewChart({
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const textColor = isDark ? "#ddd" : "#333";
+
   const gridColor = isDark
     ? "rgba(255,255,255,0.15)"
     : "rgba(0,0,0,0.12)";
 
-  // ⭐ CATEGORY SCALE-HEZ: előre formázott HH:mm stringek
-  const { labels, datasets } = useMemo(() => {
-    const allLabels = new Set<string>();
+  const { datasets } = useMemo(() => {
     const ds: any[] = [];
 
     // HISTORY
@@ -93,60 +95,79 @@ export default function InsightsOverviewChart({
       const label = cat?.category ?? "Ismeretlen";
       const color = getCategoryColor(label);
       const points = Array.isArray(cat?.points) ? cat.points : [];
-
-      const formatted = points.map((p: any) => {
-        const d = new Date(p.date);
-        const hh = d.getHours().toString().padStart(2, "0");
-        const mm = d.getMinutes().toString().padStart(2, "0");
-        const key = `${hh}:${mm}`;
-        allLabels.add(key);
-        return { x: key, y: p.count };
-      });
-
       ds.push({
         label,
-        data: formatted,
+        data: points
+          .map((p: any) => {
+            const dateVal = p?.date ? new Date(p.date) : null;
+            const countVal =
+              typeof p?.count === "number"
+                ? p.count
+                : Number(p?.count) || 0;
+            return dateVal ? { x: dateVal, y: countVal } : null;
+          })
+          .filter(Boolean),
         borderColor: color,
         backgroundColor: color + "22",
-        cubicInterpolationMode: "monotone",   // ⭐ UGYANAZ, MINT A DEMÓBAN
-        tension: 0.4,
-        pointRadius: 0,
+        showLine: true,
+        stepped: false,
+        cubicInterpolationMode: "monotone",   // ⭐ EZ A LÉNYEG
+        tension: 0.4,                          // ⭐ SZÉP, LÁGY GÖRBE
+        pointRadius: 3,
         pointHoverRadius: 5,
         borderWidth: 2,
         fill: false,
       });
+
+
+
     });
 
-    // FORECAST
+    // AI FORECAST – csak 24h
     if (range === "24h" && forecast && typeof forecast === "object") {
       Object.entries(forecast).forEach(([catName, fc]: any) => {
+        const series = Array.isArray(fc) ? fc : [];
         const color = getCategoryColor(catName);
-        const formatted = (fc || []).map((p: any) => {
-          const d = new Date(p.date);
-          const hh = d.getHours().toString().padStart(2, "0");
-          const mm = d.getMinutes().toString().padStart(2, "0");
-          const key = `${hh}:${mm}`;
-          allLabels.add(key);
-          return { x: key, y: p.predicted };
-        });
-
         ds.push({
-          label: `AI előrejelzés (${catName})`,
-          data: formatted,
+          label: "AI előrejelzés",
+          data: series
+            .map((p: any) => {
+              const date = p?.date ? new Date(p.date) : null;
+              const pred =
+                typeof p?.predicted === "number"
+                  ? p.predicted
+                  : Number(p?.predicted) || 0;
+              return date
+                ? { x: new Date(date.getTime() + 3600000), y: pred }
+                : null;
+            })
+            .filter(Boolean),
           borderColor: color,
           borderDash: [6, 6],
           borderWidth: 2,
-          tension: 0.4,
+          tension: 0.3,
           pointRadius: 0,
           fill: false,
+          _isForecast: true,
+          _aiCategory: catName,
         });
+      });
+
+      // dummy AI legend
+      ds.push({
+        label: "AI előrejelzés",
+        data: [],
+        borderColor: "#999",
+        borderDash: [6, 6],
+        borderWidth: 2,
+        pointRadius: 0,
+        fill: false,
+        _isDummyAiLegend: true,
+        _isForecast: true,
       });
     }
 
-    return {
-      labels: Array.from(allLabels).sort(),
-      datasets: ds,
-    };
+    return { datasets: ds };
   }, [data, forecast, range, theme]);
 
   const options: any = {
@@ -155,19 +176,72 @@ export default function InsightsOverviewChart({
     interaction: { mode: "nearest", intersect: false },
     scales: {
       x: {
-        type: "category",               // ⭐ TIME SCALE HELYETT CATEGORY SCALE
+        type: "time",
+        adapters: { date: { locale: hu } },
+        time: { unit: "hour", displayFormats: { hour: "HH:mm" } },
         ticks: { color: textColor },
         grid: { color: gridColor },
       },
       y: {
         beginAtZero: true,
+        suggestedMax: 5,
         ticks: { color: textColor },
         grid: { color: gridColor },
       },
     },
     plugins: {
       legend: {
-        labels: { color: textColor },
+        labels: {
+          color: textColor,
+          generateLabels: (chart: any) => {
+            const original =
+              ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
+
+            return original.filter((item: any) => {
+              const ds = chart.data.datasets[item.datasetIndex];
+              if (!ds) return false;
+              const lbl = (ds.label || "").toString().toLowerCase();
+              if (lbl === "hír" || lbl === "hir" || lbl === "news") return false;
+              if (!ds._isForecast) return true;
+              if (range === "24h" && ds._isDummyAiLegend) return true;
+              return false;
+            });
+          },
+        },
+        onClick: (e: any, item: any, legend: any) => {
+          const chart = legend.chart;
+          const idx = item.datasetIndex;
+          const ds = chart.data.datasets[idx];
+
+          if (range !== "24h") {
+            const visible = chart.isDatasetVisible(idx);
+            chart.setDatasetVisibility(idx, !visible);
+            chart.update();
+            return;
+          }
+
+          if (ds._isDummyAiLegend) {
+            const anyVisible = chart.data.datasets.some(
+              (d: any, i: number) =>
+                d._isForecast &&
+                !d._isDummyAiLegend &&
+                chart.isDatasetVisible(i)
+            );
+
+            chart.data.datasets.forEach((d: any, i: number) => {
+              if (d._isForecast && !d._isDummyAiLegend) {
+                chart.setDatasetVisibility(i, !anyVisible);
+              }
+            });
+
+            chart.update();
+            return;
+          }
+
+          const visible = chart.isDatasetVisible(idx);
+          chart.setDatasetVisibility(idx, !visible);
+          chart.update();
+        },
       },
       tooltip: {
         enabled: true,
@@ -178,8 +252,23 @@ export default function InsightsOverviewChart({
         borderWidth: 1,
         callbacks: {
           title: (items: any) => {
-            const time = items[0].label;
-            return `Időpont: ${time}`;
+            const d = new Date(items[0].parsed.x);
+            return d.toLocaleString("hu-HU", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+            });
+          },
+          label: (ctx: any) => {
+            const ds = ctx.dataset;
+            const v = ctx.parsed.y;
+            if (ds._isForecast) {
+              return `AI előrejelzés · ${ds._aiCategory}: ${v}`;
+            }
+            return `${ds.label}: ${v}`;
           },
         },
       },
@@ -191,12 +280,13 @@ export default function InsightsOverviewChart({
         },
         pan: { enabled: true, mode: "x" },
       },
+      decimation: { enabled: false}
     },
   };
 
   return (
     <div style={{ width: "100%", height }}>
-      <Line data={{ labels, datasets }} options={options} />
+      <Line key={range + theme} data={{ datasets }} options={options} />
     </div>
   );
 }
