@@ -41,6 +41,12 @@ export async function GET(req: Request) {
     bucketSize = 180;           // 3 óra
   }
 
+  // ⭐ SQL bucket formátum (dinamikus)
+  const bucketFormat =
+    bucketSize >= 60
+      ? "%Y-%m-%d %H:00:00"   // órás vagy több
+      : "%Y-%m-%d %H:%i:00";  // perces
+
   const now = new Date();
   const nowUtc = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
   const startUtc = new Date(nowUtc.getTime() - minutesBack * 60 * 1000);
@@ -68,11 +74,11 @@ export async function GET(req: Request) {
       const cat = fixCat(rawCat);
       if (!cat) continue;
 
-      // ⭐ SQL bucket továbbra is perc alapú — a cursor fog ritkítani
+      // ⭐ SQL bucket most már period szerint változik
       const [rows]: any = await db.query(
         `
         SELECT 
-          DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:00') AS bucket,
+          DATE_FORMAT(created_at, '${bucketFormat}') AS bucket,
           COUNT(*) AS count
         FROM summaries
         WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
