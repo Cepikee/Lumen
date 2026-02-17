@@ -97,29 +97,27 @@ export default function InsightsOverviewChart({
       const points = Array.isArray(cat?.points) ? cat.points : [];
 
       ds.push({
-  label,
-  data: points
-    .map((p: any) => {
-      const dateVal = p?.date ? new Date(p.date) : null;
-      const countVal =
-        typeof p?.count === "number"
-          ? p.count
-          : Number(p?.count) || 0;
-      return dateVal ? { x: dateVal, y: countVal } : null;
-    })
-    .filter(Boolean),
-  borderColor: color,
-  backgroundColor: color + "33",
+          label,
+          data: points
+            .map((p: any) => {
+              const dateVal = p?.date ? new Date(p.date) : null;
+              const countVal =
+                typeof p?.count === "number"
+                  ? p.count
+                  : Number(p?.count) || 0;
+              return dateVal ? { x: dateVal, y: countVal } : null;
+            })
+            .filter(Boolean),
+          borderColor: color,
+          backgroundColor: color + "33",
+      showLine: true,
+      stepped: true,
+      tension: 0,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      borderWidth: 2,
+      fill: false,
 
-  // 🔥 EZT ÍRD ÁT:
-  showLine: false,
-  pointRadius: 4,
-  pointHoverRadius: 6,
-
-  // 🔥 EZEKET HAGYD BENNE, NEM BAJ:
-  borderWidth: 2,
-  tension: 0.3,
-  fill: false,
 });
 
     });
