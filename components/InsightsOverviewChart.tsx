@@ -125,7 +125,9 @@ export default function InsightsOverviewChart({
 
     // AI FORECAST – csak 24h
     if (range === "24h" && forecast && typeof forecast === "object") {
+      const VALID_CATEGORIES = Object.keys(CATEGORY_COLORS).filter(k => k !== "_default");
       Object.entries(forecast).forEach(([catName, fc]: any) => {
+        if (!VALID_CATEGORIES.includes(catName)) return; // ⭐ SZŰRÉS
         const series = Array.isArray(fc) ? fc : [];
         const color = getCategoryColor(catName);
         ds.push({
