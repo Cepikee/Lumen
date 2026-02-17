@@ -137,20 +137,26 @@ export default function InsightsOverviewChart({
                 typeof p?.predicted === "number"
                   ? p.predicted
                   : Number(p?.predicted) || 0;
-              return date
-                ? { x: new Date(date.getTime() + 3600000), y: pred }
-                : null;
+              return date ? { x: date, y: pred } : null;
             })
             .filter(Boolean),
+
           borderColor: color,
-          borderDash: [6, 6],
-          borderWidth: 2,
-          tension: 0.3,
+          borderDash: [6, 6],       // ⭐ szaggatott vonal
+          borderWidth: 1.2,
+
+          // ⭐ UGYANAZ, mint a history
+          cubicInterpolationMode: "monotone",
+          tension: 0.15,
           pointRadius: 0,
+          pointHoverRadius: 6,
           fill: false,
+          spanGaps: true,           // ⭐ fontos!
+
           _isForecast: true,
           _aiCategory: catName,
         });
+
       });
 
       // dummy AI legend
