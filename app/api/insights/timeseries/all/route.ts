@@ -19,12 +19,27 @@ function fixCat(s: any): string | null {
 }
 
 export async function GET(req: Request) {
-  console.log(">>> TIMESERIES ALL ROUTE FUT <<<");
-
   const url = new URL(req.url);
   const period = url.searchParams.get("period") || "24h";
 
-  let minutesBack = 24 * 60; // 24 óra = 1440 perc
+  // ⭐ PERIOD LOGIKA
+  let minutesBack = 24 * 60; // default: 24h
+  let bucketSize = 1;        // default: 1 perc
+
+  if (period === "7d") {
+    minutesBack = 7 * 24 * 60; // 7 nap
+    bucketSize = 10;           // 10 perc
+  }
+
+  if (period === "30d") {
+    minutesBack = 30 * 24 * 60; // 30 nap
+    bucketSize = 60;            // 1 óra
+  }
+
+  if (period === "90d") {
+    minutesBack = 90 * 24 * 60; // 90 nap
+    bucketSize = 180;           // 3 óra
+  }
 
   const now = new Date();
   const nowUtc = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
@@ -53,6 +68,7 @@ export async function GET(req: Request) {
       const cat = fixCat(rawCat);
       if (!cat) continue;
 
+      // ⭐ SQL bucket továbbra is perc alapú — a cursor fog ritkítani
       const [rows]: any = await db.query(
         `
         SELECT 
@@ -76,10 +92,13 @@ export async function GET(req: Request) {
       cursor.setSeconds(0, 0);
 
       const points: { date: string; count: number }[] = [];
+
+      // ⭐ DINAMIKUS BUCKET LÉPTETÉS
       while (cursor <= nowUtc) {
         const key = cursor.toISOString().slice(0, 19).replace("T", " ");
         points.push({ date: key, count: map.get(key) ?? 0 });
-        cursor.setMinutes(cursor.getMinutes() + 1); // PERCENKÉNTI lépés
+
+        cursor.setMinutes(cursor.getMinutes() + bucketSize);
       }
 
       results.push({ category: cat, points });
