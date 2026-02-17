@@ -41,13 +41,12 @@ export async function GET(req: Request) {
     sqlBucket = "%Y-%m-%d %H:00:00";
   }
 
-  // UTC IDŐINTERVALLUM
+  // IDŐINTERVALLUM (NINCS TZ KONVERZIÓ)
   const now = new Date();
-  const nowUtc = new Date(now.toISOString());
-  const startUtc = new Date(nowUtc.getTime() - minutesBack * 60 * 1000);
+  const endStr = now.toISOString().slice(0, 19).replace("T", " ");
 
+  const startUtc = new Date(now.getTime() - minutesBack * 60 * 1000);
   const startStr = startUtc.toISOString().slice(0, 19).replace("T", " ");
-  const endStr = nowUtc.toISOString().slice(0, 19).replace("T", " ");
 
   try {
     const [cats]: any = await db.query(`
@@ -71,19 +70,16 @@ export async function GET(req: Request) {
       const cat = fixCat(rawCat);
       if (!cat) continue;
 
-      // JAVÍTOTT SQL: helyes időintervallum + helyes timezone
+      // JAVÍTOTT SQL – NINCS TZ, VAN FELSŐ HATÁR
       const [rows]: any = await db.query(
         `
         SELECT 
-          DATE_FORMAT(
-            CONVERT_TZ(created_at, @@session.time_zone, '+00:00'),
-            '${sqlBucket}'
-          ) AS bucket,
+          DATE_FORMAT(created_at, '${sqlBucket}') AS bucket,
           COUNT(*) AS count
         FROM summaries
         WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
-          AND created_at >= CONVERT_TZ(?, '+00:00', @@session.time_zone)
-          AND created_at <= CONVERT_TZ(?, '+00:00', @@session.time_zone)
+          AND created_at >= ?
+          AND created_at <= ?
         GROUP BY bucket
         ORDER BY bucket ASC
         `,
