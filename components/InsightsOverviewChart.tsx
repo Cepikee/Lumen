@@ -108,15 +108,15 @@ export default function InsightsOverviewChart({
               return dateVal ? { x: dateVal, y: countVal } : null;
             })
             .filter(Boolean),
-          borderColor: color,
-          backgroundColor: color + "33",
-      showLine: true,
-      stepped: false,
-      tension: 0,
-      pointRadius: 4,
-      pointHoverRadius: 6,
-      borderWidth: 2,
-      fill: false,
+        borderColor: color,
+        showLine: true,
+        stepped: false,
+        tension: 0.35,          // simított vonal
+        pointRadius: 2,         // kisebb pontok → kevésbé kaotikus
+        pointHoverRadius: 5,
+        borderWidth: 2,
+        fill: true,             // halvány kitöltés → sokkal szebb
+        backgroundColor: color + "22", // nagyon finom háttér
 
 });
 
