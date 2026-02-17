@@ -95,25 +95,30 @@ export default function InsightsOverviewChart({
       const label = cat?.category ?? "Ismeretlen";
       const color = getCategoryColor(label);
       const points = Array.isArray(cat?.points) ? cat.points : [];
-ds.push({
-  label,
-  data: points
-    .map((p: any) => {
-      const dateVal = p?.date ? new Date(p.date) : null;
-      const countVal =
-        typeof p?.count === "number"
-          ? p.count
-          : Number(p?.count) || 0;
-      return dateVal ? { x: dateVal, y: countVal } : null;
-    })
-    .filter(Boolean),
-  borderColor: color,
-  backgroundColor: color + "55",   // szép, halvány kitöltés
-  fill: true,                      // TERÜLETGRAFIKON
-  tension: 0.3,                    // simított
-  pointRadius: 0,                  // területgrafikonhoz nem kell pont
-  borderWidth: 1.5,
-});
+      ds.push({
+        label,
+        data: points
+          .map((p: any) => {
+            const dateVal = p?.date ? new Date(p.date) : null;
+            const countVal =
+              typeof p?.count === "number"
+                ? p.count
+                : Number(p?.count) || 0;
+            return dateVal ? { x: dateVal, y: countVal } : null;
+          })
+          .filter(Boolean),
+        borderColor: color,
+        backgroundColor: color + "22",
+        showLine: true,
+        stepped: false,
+        cubicInterpolationMode: "monotone",   // ⭐ EZ A LÉNYEG
+        tension: 0.4,                          // ⭐ SZÉP, LÁGY GÖRBE
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        borderWidth: 2,
+        fill: false,
+      });
+
 
 
     });
@@ -172,7 +177,6 @@ ds.push({
     scales: {
       x: {
         type: "time",
-        stacked: true,
         adapters: { date: { locale: hu } },
         time: { unit: "hour", displayFormats: { hour: "HH:mm" } },
         ticks: { color: textColor },
@@ -180,7 +184,6 @@ ds.push({
       },
       y: {
         beginAtZero: true,
-        stacked: true,
         suggestedMax: 5,
         ticks: { color: textColor },
         grid: { color: gridColor },
