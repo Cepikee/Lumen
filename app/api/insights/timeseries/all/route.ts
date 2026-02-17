@@ -27,18 +27,18 @@ export async function GET(req: Request) {
   let bucketSize = 1;        // default: 1 perc
 
   if (period === "7d") {
-    minutesBack = 7 * 24 * 60; // 7 nap
-    bucketSize = 10;           // 10 perc
+    minutesBack = 7 * 24 * 60;
+    bucketSize = 10;
   }
 
   if (period === "30d") {
-    minutesBack = 30 * 24 * 60; // 30 nap
-    bucketSize = 60;            // 1 óra
+    minutesBack = 30 * 24 * 60;
+    bucketSize = 60;
   }
 
   if (period === "90d") {
-    minutesBack = 90 * 24 * 60; // 90 nap
-    bucketSize = 180;           // 3 óra
+    minutesBack = 90 * 24 * 60;
+    bucketSize = 180;
   }
 
   // ⭐ SQL bucket formátum (dinamikus)
@@ -47,8 +47,9 @@ export async function GET(req: Request) {
       ? "%Y-%m-%d %H:00:00"   // órás vagy több
       : "%Y-%m-%d %H:%i:00";  // perces
 
+  // ⭐ MINDEN UTC-ben
   const now = new Date();
-  const nowUtc = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+  const nowUtc = new Date(now.toISOString()); // garantált UTC
   const startUtc = new Date(nowUtc.getTime() - minutesBack * 60 * 1000);
   const startStr = startUtc.toISOString().slice(0, 19).replace("T", " ");
 
@@ -74,15 +75,15 @@ export async function GET(req: Request) {
       const cat = fixCat(rawCat);
       if (!cat) continue;
 
-      // ⭐ SQL bucket most már period szerint változik
+      // ⭐ SQL-ben is UTC-re konvertálunk
       const [rows]: any = await db.query(
         `
         SELECT 
-          DATE_FORMAT(created_at, '${bucketFormat}') AS bucket,
+          DATE_FORMAT(CONVERT_TZ(created_at, @@session.time_zone, '+00:00'), '${bucketFormat}') AS bucket,
           COUNT(*) AS count
         FROM summaries
         WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
-          AND created_at >= ?
+          AND created_at >= CONVERT_TZ(?, '+00:00', @@session.time_zone)
         GROUP BY bucket
         ORDER BY bucket ASC
         `,
@@ -99,7 +100,7 @@ export async function GET(req: Request) {
 
       const points: { date: string; count: number }[] = [];
 
-      // ⭐ DINAMIKUS BUCKET LÉPTETÉS
+      // ⭐ DINAMIKUS BUCKET LÉPTETÉS — UTC-ben
       while (cursor <= nowUtc) {
         const key = cursor.toISOString().slice(0, 19).replace("T", " ");
         points.push({ date: key, count: map.get(key) ?? 0 });
