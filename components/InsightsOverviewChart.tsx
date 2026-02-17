@@ -111,12 +111,13 @@ export default function InsightsOverviewChart({
         borderColor: color,
         showLine: true,
         stepped: false,
-        tension: 0.35,          // simított vonal
-        pointRadius: 2,         // kisebb pontok → kevésbé kaotikus
-        pointHoverRadius: 5,
-        borderWidth: 2,
-        fill: true,             // halvány kitöltés → sokkal szebb
-        backgroundColor: color + "22", // nagyon finom háttér
+       tension: 0,          // nincs simítás → tiszta, éles vonal
+pointRadius: 3,      // jól látható, de nem túl nagy
+pointHoverRadius: 5,
+borderWidth: 2,
+fill: false,         // nincs kitöltés → nem lesz pacás
+backgroundColor: color,
+
 
 });
 
