@@ -22,34 +22,28 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const period = url.searchParams.get("period") || "24h";
 
-  // ⭐ PERIOD LOGIKA
-  let minutesBack = 24 * 60; // default: 24h
-  let bucketSize = 1;        // default: 1 perc
+  // ⭐ PERIOD LOGIKA – CSAK AZ SQL AGGREGÁCIÓT VÁLTOZTATJUK
+  let minutesBack = 24 * 60;
+  let sqlBucket = "%Y-%m-%d %H:%i:00"; // 1 perc
 
   if (period === "7d") {
     minutesBack = 7 * 24 * 60;
-    bucketSize = 10;
+    sqlBucket = "%Y-%m-%d %H:%i:00"; // 10 percet frontend oldalon ritkítunk
   }
 
   if (period === "30d") {
     minutesBack = 30 * 24 * 60;
-    bucketSize = 60;
+    sqlBucket = "%Y-%m-%d %H:00:00"; // órás bucket
   }
 
   if (period === "90d") {
     minutesBack = 90 * 24 * 60;
-    bucketSize = 180;
+    sqlBucket = "%Y-%m-%d %H:00:00"; // órás bucket (frontend ritkít)
   }
-
-  // ⭐ SQL bucket formátum (dinamikus)
-  const bucketFormat =
-    bucketSize >= 60
-      ? "%Y-%m-%d %H:00:00"   // órás vagy több
-      : "%Y-%m-%d %H:%i:00";  // perces
 
   // ⭐ MINDEN UTC-ben
   const now = new Date();
-  const nowUtc = new Date(now.toISOString()); // garantált UTC
+  const nowUtc = new Date(now.toISOString());
   const startUtc = new Date(nowUtc.getTime() - minutesBack * 60 * 1000);
   const startStr = startUtc.toISOString().slice(0, 19).replace("T", " ");
 
@@ -75,11 +69,11 @@ export async function GET(req: Request) {
       const cat = fixCat(rawCat);
       if (!cat) continue;
 
-      // ⭐ SQL-ben is UTC-re konvertálunk
+      // ⭐ ADAT-ALAPÚ AGGREGÁCIÓ – NINCS CURSOR, NINCS 0-ZÁS
       const [rows]: any = await db.query(
         `
         SELECT 
-          DATE_FORMAT(CONVERT_TZ(created_at, @@session.time_zone, '+00:00'), '${bucketFormat}') AS bucket,
+          DATE_FORMAT(CONVERT_TZ(created_at, @@session.time_zone, '+00:00'), '${sqlBucket}') AS bucket,
           COUNT(*) AS count
         FROM summaries
         WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
@@ -90,23 +84,11 @@ export async function GET(req: Request) {
         [cat, startStr]
       );
 
-      const map = new Map<string, number>();
-      for (const r of rows || []) {
-        map.set(String(r.bucket), Number(r.count) || 0);
-      }
-
-      const cursor = new Date(startUtc);
-      cursor.setSeconds(0, 0);
-
-      const points: { date: string; count: number }[] = [];
-
-      // ⭐ DINAMIKUS BUCKET LÉPTETÉS — UTC-ben
-      while (cursor <= nowUtc) {
-        const key = cursor.toISOString().slice(0, 19).replace("T", " ");
-        points.push({ date: key, count: map.get(key) ?? 0 });
-
-        cursor.setMinutes(cursor.getMinutes() + bucketSize);
-      }
+      // ⭐ CSAK VALÓS ADATOKAT ADUNK VISSZA
+      const points = rows.map((r: any) => ({
+        date: String(r.bucket),
+        count: Number(r.count) || 0,
+      }));
 
       results.push({ category: cat, points });
     }
