@@ -24,13 +24,11 @@ export async function GET(req: Request) {
 
   // ⭐ PERIOD LOGIKA – SQL bucket formátum
   let minutesBack = 24 * 60;
-  let sqlBucket = "%Y-%m-%d %H:%i:00"; // 1 perc
+  let sqlBucket = "%Y-%m-%d %H:%i:00"; // 1 perc (24h mód)
 
   if (period === "7d") {
     minutesBack = 7 * 24 * 60;
-
-    // ⭐ 10 perces bucket SQL-ben
-    sqlBucket = "%Y-%m-%d %H:%i:00";
+    sqlBucket = "%Y-%m-%d %H:00:00"; // ⭐ órás bucket
   }
 
   if (period === "30d") {
@@ -71,24 +69,14 @@ export async function GET(req: Request) {
       const cat = fixCat(rawCat);
       if (!cat) continue;
 
-      // ⭐ 7 napos mód: 10 perces kerekítés SQL-ben
-      const bucketExpr =
-        period === "7d"
-          ? `
-            DATE_FORMAT(
-              DATE_SUB(
-                CONVERT_TZ(created_at, @@session.time_zone, '+00:00'),
-                INTERVAL MINUTE(CONVERT_TZ(created_at, @@session.time_zone, '+00:00')) % 10 MINUTE
-              ),
-              '%Y-%m-%d %H:%i:00'
-            )
-          `
-          : `DATE_FORMAT(CONVERT_TZ(created_at, @@session.time_zone, '+00:00'), '${sqlBucket}')`;
-
+      // ⭐ Egységes bucketelés (adat-alapú)
       const [rows]: any = await db.query(
         `
         SELECT 
-          ${bucketExpr} AS bucket,
+          DATE_FORMAT(
+            CONVERT_TZ(created_at, @@session.time_zone, '+00:00'),
+            '${sqlBucket}'
+          ) AS bucket,
           COUNT(*) AS count
         FROM summaries
         WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
