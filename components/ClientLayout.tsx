@@ -22,7 +22,14 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   const isInsights = pathname.includes("insights");
 
   // ⭐ Sidebar csak a főoldalon
-  const shouldShowSidebar = pathname === "/" && !isLanding && !isPremium && !isAdatvedelmi && !isASZF && !isImpresszum && !isInsights;
+  const shouldShowSidebar =
+    pathname === "/" &&
+    !isLanding &&
+    !isPremium &&
+    !isAdatvedelmi &&
+    !isASZF &&
+    !isImpresszum &&
+    !isInsights;
 
   // THEME
   const theme = useUserStore((s) => s.theme);
@@ -120,7 +127,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   // ⭐⭐⭐ LANDING OLDAL — HEADER NÉLKÜL, FULL WIDTH ⭐⭐⭐
   if (isLanding) {
     return (
-      <main className="flex-grow-1 overflow-auto p-0">
+      <main className="flex-grow-1 overflow-auto p-0" tabIndex={-1}>
         {children}
       </main>
     );
@@ -132,7 +139,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       <>
         <Header />
 
-        <main className="flex-grow-1 overflow-auto p-0">
+        <main className="flex-grow-1 overflow-auto p-0" tabIndex={-1}>
           {children}
         </main>
 
@@ -182,6 +189,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           >
             <main
               className="flex-grow-1 overflow-auto p-3"
+              tabIndex={-1}
               style={{
                 maxWidth: "1280px",
                 margin: "0 auto",
@@ -194,6 +202,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
         ) : (
           <main
             className="flex-grow-1 overflow-auto p-3"
+            tabIndex={-1}
             style={{
               maxWidth: "1280px",
               margin: "0 auto",
