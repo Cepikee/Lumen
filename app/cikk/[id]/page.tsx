@@ -28,6 +28,22 @@ export default function CikkOldal() {
   const [relatedLoading, setRelatedLoading] = useState(false);
   const [relatedError, setRelatedError] = useState<string | null>(null);
 
+  // ⭐ SYSTEM THEME FIX — mindig legyen theme-light vagy theme-dark a <html>-en
+  useEffect(() => {
+    const root = document.documentElement;
+
+    const resolved =
+      theme === "system"
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light"
+        : theme;
+
+    root.classList.remove("theme-light", "theme-dark");
+    root.classList.add(`theme-${resolved}`);
+  }, [theme]);
+
+  // Cikk lekérése
   useEffect(() => {
     if (!id) return;
 
@@ -46,6 +62,7 @@ export default function CikkOldal() {
       .finally(() => setLoading(false));
   }, [id]);
 
+  // Kapcsolódó cikkek
   useEffect(() => {
     if (!item) return;
 
@@ -75,7 +92,7 @@ export default function CikkOldal() {
 
   if (loading) {
     return (
-      <div className={`article-container ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
+      <div className={`article-container`}>
         <div className="article-inner">Betöltés…</div>
       </div>
     );
@@ -83,7 +100,7 @@ export default function CikkOldal() {
 
   if (!item || !item.id) {
     return (
-      <div className={`article-container ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
+      <div className={`article-container`}>
         <div className="article-inner">❌ Cikk nem található.</div>
       </div>
     );
@@ -94,7 +111,7 @@ export default function CikkOldal() {
   const sourceClass = `source-${source}`;
 
   return (
-    <div className={`article-container ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
+    <div className={`article-container`}>
       <div className="article-inner">
 
         {/* CÍM */}
