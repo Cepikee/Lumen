@@ -1,6 +1,6 @@
 "use client";
 import "@/styles/insights.css";
-import { useMemo, useRef, useEffect } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import InsightCard from "@/components/InsightCard";
 import InsightFilters from "@/components/InsightFilters";
 import ThemeSync from "@/components/ThemeSync";
@@ -9,7 +9,7 @@ import { useTimeseriesAll } from "@/hooks/useTimeseriesAll";
 import dynamic from "next/dynamic";
 import useSWR from "swr";
 import ForecastStatus from "@/components/ForecastStatus";
-import { useUserStore } from "@/store/useUserStore";   // ⭐ ZUSTAND
+
 
 // ⭐ Forecast API hook
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
@@ -39,16 +39,16 @@ function normalizeCategory(raw?: string | null) {
 }
 
 export default function InsightFeedPage() {
-  // ⭐ PERIOD + SORT → ZUSTAND STORE
-  const period = useUserStore((s) => s.period);
-  const sort = useUserStore((s) => s.sort);
-  const setPeriod = useUserStore((s) => s.setPeriod);
-  const setSort = useUserStore((s) => s.setSort);
+  const [period, setPeriod] = useState<"24h" | "7d" | "30d" | "90d">("24h");
+  const [sort, setSort] = useState<string>("Legfrissebb");
 
-  const { data, loading } = useInsights(period, sort);
+  const { data, error, loading } = useInsights(period, sort);
   const { data: tsData, loading: tsLoading } = useTimeseriesAll(period);
+
+  // ⭐ Forecast betöltése
   const { data: forecastData } = useForecast();
 
+  // ⭐ Drag-scroll ref
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -89,10 +89,12 @@ export default function InsightFeedPage() {
     };
   }, []);
 
-  const downsampledTs = useMemo(() => {
-    if (!tsData?.categories) return [];
-    return tsData.categories;
-  }, [tsData]);
+ // ⭐ NINCS downsampling – minden pont megmarad
+const downsampledTs = useMemo(() => {
+  if (!tsData?.categories) return [];
+  return tsData.categories;
+}, [tsData]);
+
 
   const categoryTrends = useMemo<LocalRawCategory[]>(() => {
     if (!data) return [];
@@ -171,6 +173,7 @@ export default function InsightFeedPage() {
           <ForecastStatus />
         </div>
       )}
+
       {/* KATEGÓRIAKÁRTYÁK */}
       <section aria-labelledby="category-trends">
         <h2 id="category-trends" className="fs-5 fw-bold mb-2 visually-hidden">
@@ -205,5 +208,3 @@ export default function InsightFeedPage() {
     </main>
   );
 }
-
-
