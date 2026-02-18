@@ -12,6 +12,12 @@ interface ClientLayoutProps {
   children: React.ReactNode;
 }
 
+const preventMainFocus = (e: React.MouseEvent) => {
+  if (!(e.target as Element).closest("input, textarea, [contenteditable='true']")) {
+    e.preventDefault();
+  }
+};
+
 export default function ClientLayout({ children }: ClientLayoutProps) {
   const pathname = usePathname();
   const isLanding = pathname.includes("landing");
@@ -127,7 +133,11 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   // ⭐⭐⭐ LANDING OLDAL — HEADER NÉLKÜL, FULL WIDTH ⭐⭐⭐
   if (isLanding) {
     return (
-      <main className="flex-grow-1 overflow-auto p-0" tabIndex={-1}>
+      <main
+        className="flex-grow-1 overflow-auto p-0"
+        tabIndex={-1}
+        onMouseDown={preventMainFocus}
+      >
         {children}
       </main>
     );
@@ -139,7 +149,11 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       <>
         <Header />
 
-        <main className="flex-grow-1 overflow-auto p-0" tabIndex={-1}>
+        <main
+          className="flex-grow-1 overflow-auto p-0"
+          tabIndex={-1}
+          onMouseDown={preventMainFocus}
+        >
           {children}
         </main>
 
@@ -190,6 +204,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
             <main
               className="flex-grow-1 overflow-auto p-3"
               tabIndex={-1}
+              onMouseDown={preventMainFocus}
               style={{
                 maxWidth: "1280px",
                 margin: "0 auto",
@@ -203,6 +218,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           <main
             className="flex-grow-1 overflow-auto p-3"
             tabIndex={-1}
+            onMouseDown={preventMainFocus}
             style={{
               maxWidth: "1280px",
               margin: "0 auto",

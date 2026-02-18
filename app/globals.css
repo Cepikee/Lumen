@@ -1431,3 +1431,10 @@ input, textarea {
 }
 /* HEADER VÉGE */
 
+/* TEMP: elrejti a caret-et nem-input elemeknél */
+*:not(input):not(textarea):not([contenteditable="true"]) {
+  caret-color: transparent !important;
+}
+*:not(input):not(textarea):not([contenteditable="true"]):focus {
+  outline: none !important;
+}
