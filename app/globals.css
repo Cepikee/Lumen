@@ -1360,6 +1360,7 @@ body.theme-dark {
 }
 
 /* SEARCH FIX */
+/* SEARCH FIX */
 .search-wrapper {
   display: flex;
   flex-direction: column;
@@ -1384,6 +1385,7 @@ body.theme-dark {
   border-radius: 8px;
   height: 40px;
   outline: none;
+  caret-color: var(--article-text); /* biztosítja, hogy a kurzor látható legyen az inputban */
 }
 
 .search-input::placeholder {
@@ -1419,9 +1421,32 @@ body.theme-dark {
   color: var(--article-muted);
   text-align: center;
 }
+
+/* Általános kurzor beállítás inputokhoz */
 input, textarea {
   cursor: text !important;
 }
+
+/* CARET viselkedés: elnyomjuk a caret-et nem-input elemeknél, de engedélyezzük az input/textarea/contenteditable mezőknél */
+input, textarea, [contenteditable="true"] {
+  caret-color: auto;
+}
+
+/* Biztonsági réteg: ne jelenjen meg caret nem-input elemeknél */
+*:not(input):not(textarea):not([contenteditable="true"]) {
+  caret-color: transparent;
+}
+*:not(input):not(textarea):not([contenteditable="true"]):focus {
+  outline: none;
+}
+
+/* Kereső input fókusz stílus (opcionális, de ajánlott) */
+.search-input:focus {
+  border-color: rgba(255,255,255,0.6);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.08);
+  outline: none;
+}
+
 
 
 /* PROFILE */
@@ -1431,10 +1456,16 @@ input, textarea {
 }
 /* HEADER VÉGE */
 
-/* TEMP: elrejti a caret-et nem-input elemeknél */
+/* CARET: csak input/textarea/contenteditable elemeknél legyen látható */
+input, textarea, [contenteditable="true"] {
+  caret-color: auto;
+}
+
+/* Ne legyen caret és vizuális fókusz nem‑input elemeknél (biztonsági réteg) */
 *:not(input):not(textarea):not([contenteditable="true"]) {
-  caret-color: transparent !important;
+  caret-color: transparent;
 }
 *:not(input):not(textarea):not([contenteditable="true"]):focus {
-  outline: none !important;
+  outline: none;
 }
+
