@@ -12,7 +12,7 @@ export interface FeedItem {
   detailed_content: string;
   ai_clean: number;
   created_at: string;
-  category?: string; // ← KATEGÓRIA HOZZÁADVA
+  category?: string;
 }
 
 // --- FORRÁS MAPPING --- //
@@ -69,14 +69,15 @@ export default function FeedItemCard({
   const source = SOURCE_MAP[item.source_id] || "ismeretlen";
   const sourceClass = `source-${source}`;
 
-  // --- COMPACT NÉZET --- //
+  // ============================
+  // ⭐ COMPACT NÉZET
+  // ============================
   if (viewMode === "compact") {
     return (
       <div className="feed-wrapper compact">
         <div
-          className="feed-card compact mb-2 p-2 rounded"
+          className="feed-card compact mb-2 p-2 rounded theme-card"
           data-source-text={source.toUpperCase()}
-          style={{ backgroundColor: "#1a1a1a", color: "white", cursor: "pointer" }}
           onClick={() => {
             window.location.href = `/cikk/${item.id}`;
           }}
@@ -91,18 +92,8 @@ export default function FeedItemCard({
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-decoration-none"
+                className="text-decoration-none title-compact"
                 onClick={(e) => e.stopPropagation()}
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "0.85rem",
-                  lineHeight: "1.2",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: "vertical",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
               >
                 {item.title}
               </a>
@@ -119,20 +110,12 @@ export default function FeedItemCard({
             )}
           </div>
 
-          <div
-            className={`mt-1 ${expanded ? "" : "clamp-2"}`}
-            style={{
-              fontSize: "0.85rem",
-              lineHeight: "1.2",
-              ...(expanded ? {} : { maxHeight: "3.6em", overflow: "hidden" }),
-            }}
-          >
+          <div className={`mt-1 ${expanded ? "" : "clamp-2"} content-compact`}>
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
           <button
-            className="btn btn-link p-0 mt-1"
-            style={{ fontSize: "0.8rem" }}
+            className="btn btn-link p-0 mt-1 compact-toggle"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -143,32 +126,18 @@ export default function FeedItemCard({
           </button>
 
           {expanded && (
-            <div className="mt-2 p-2 rounded" style={{ backgroundColor: "#2a2a2a" }}>
+            <div className="mt-2 p-2 rounded theme-card-inner">
               <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
             </div>
           )}
 
-          {/* --- IDŐ + KATEGÓRIA EGY SORBAN --- */}
           <div className="d-flex justify-content-between align-items-center mt-2">
-            <p
-              className="text-muted small mb-0"
-              style={{ fontSize: "0.7rem" }}
-              title={formatFullDate(item.created_at)}
-            >
+            <p className="text-muted small mb-0 time-compact" title={formatFullDate(item.created_at)}>
               {formatRelativeTime(item.created_at)}
             </p>
 
             {item.category && (
-              <span
-                style={{
-                  fontSize: "0.7rem",
-                  color: "white",
-                  opacity: 0.8,
-                  textTransform: "uppercase",
-                }}
-              >
-                {item.category}
-              </span>
+              <span className="category-compact">{item.category}</span>
             )}
           </div>
         </div>
@@ -176,12 +145,13 @@ export default function FeedItemCard({
     );
   }
 
-  // --- CARD NÉZET --- //
+  // ============================
+  // ⭐ CARD NÉZET
+  // ============================
   return (
     <div className="feed-wrapper">
       <div
-        className="feed-card mb-3 p-3 rounded shadow-sm"
-        style={{ backgroundColor: "#1a1a1a", cursor: "pointer" }}
+        className="feed-card mb-3 p-3 rounded shadow-sm theme-card"
         data-source-text={source.toUpperCase()}
         onClick={() => {
           window.location.href = `/cikk/${item.id}`;
@@ -198,18 +168,8 @@ export default function FeedItemCard({
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-decoration-none"
+                className="text-decoration-none title-card"
                 onClick={(e) => e.stopPropagation()}
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "1.15rem",
-                  lineHeight: "1.3",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: "vertical",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
               >
                 {item.title}
               </a>
@@ -226,12 +186,12 @@ export default function FeedItemCard({
             )}
           </h5>
 
-          <div className="mt-2">
+          <div className="mt-2 content-card">
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
           <button
-            className="btn btn-link p-0 mt-2"
+            className="btn btn-link p-0 mt-2 card-toggle"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -242,7 +202,7 @@ export default function FeedItemCard({
           </button>
 
           {expanded && (
-            <div className="mt-3 p-3 rounded" style={{ backgroundColor: "#2a2a2a" }}>
+            <div className="mt-3 p-3 rounded theme-card-inner">
               {item.detailed_content ? (
                 <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
               ) : (
@@ -251,27 +211,13 @@ export default function FeedItemCard({
             </div>
           )}
 
-          {/* --- IDŐ + KATEGÓRIA EGY SORBAN --- */}
           <div className="d-flex justify-content-between align-items-center mt-3">
-            <p
-              className="text-muted small mb-0"
-              title={formatFullDate(item.created_at)}
-              style={{ fontSize: "0.75rem" }}
-            >
+            <p className="text-muted small mb-0 time-card" title={formatFullDate(item.created_at)}>
               {formatRelativeTime(item.created_at)}
             </p>
 
             {item.category && (
-              <span
-                style={{
-                  fontSize: "0.75rem",
-                  color: "white",
-                  opacity: 0.8,
-                  textTransform: "uppercase",
-                }}
-              >
-                {item.category}
-              </span>
+              <span className="category-card">{item.category}</span>
             )}
           </div>
         </div>
