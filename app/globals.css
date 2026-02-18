@@ -1134,12 +1134,14 @@ html[data-theme="light"] {
 
 
 /* page[iĐ rész] */
+/* ARTICLE PAGE THEME */
 .article-container {
   padding: 40px;
   max-width: 720px;
   margin: 0 auto;
 }
 
+/* THEME VARIABLES */
 .theme-light {
   --article-bg: #ffffff;
   --article-text: #000000;
@@ -1149,15 +1151,26 @@ html[data-theme="light"] {
 }
 
 .theme-dark {
-  --article-bg: #0d0d0d;
+  --article-bg: #1a1a1a;        /* FEED SZÜRKE – egységes */
   --article-text: #e0e0e0;
   --article-muted: #cccccc;
   --article-divider: rgba(255,255,255,0.12);
-  --article-box: #1a1a1a;
+  --article-box: #2a2a2a;
 }
 
-.article-inner {
+/* APPLY BACKGROUND TO FULL PAGE */
+html.theme-light,
+body.theme-light {
   background: var(--article-bg);
+}
+
+html.theme-dark,
+body.theme-dark {
+  background: var(--article-bg);
+}
+
+/* INNER CONTENT (NO BACKGROUND HERE!) */
+.article-inner {
   color: var(--article-text);
   line-height: 1.55;
   font-size: 0.95rem;
@@ -1292,4 +1305,5 @@ html[data-theme="light"] {
   font-weight: 500;
   line-height: 1.35;
 }
+
 /* page[iĐ rész] vége */
