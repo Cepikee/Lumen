@@ -1419,12 +1419,6 @@ body.theme-dark {
   color: var(--article-muted);
   text-align: center;
 }
-
-/* GLOBAL CURSOR FIX */
-html, body, * {
-  cursor: default !important;
-}
-
 input, textarea {
   cursor: text !important;
 }
@@ -1436,6 +1430,4 @@ input, textarea {
   align-items: center;
 }
 /* HEADER VÉGE */
-.header-nav {
-  background: var(--article-bg);
-}
+
