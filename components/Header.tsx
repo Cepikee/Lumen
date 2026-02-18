@@ -37,11 +37,11 @@ export default function Header() {
   }, [localSearch, setSearchTerm]);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body shadow-sm sticky-top">
-      <div className="container-fluid d-flex align-items-center justify-content-between">
+    <nav className="header-nav">
+      <div className="header-container">
 
-        {/* LOGÓ — csak a logó, nagyobb méretben */}
-        <Link href="/" className="navbar-brand d-flex align-items-center">
+        {/* LOGÓ */}
+        <Link href="/" className="header-logo">
           <Image
             src="/apple-touch-icon.png"
             alt="Utom.hu logó"
@@ -54,93 +54,41 @@ export default function Header() {
 
         {/* KERESŐ — csak a főoldalon */}
         {pathname === "/" && (
-          <div className="d-flex flex-column align-items-center mx-auto">
-            <div
-              className="position-relative"
-              style={{
-                width: "360px",
-                maxWidth: "90%",
-              }}
-            >
-              <span
-                style={{
-                  position: "absolute",
-                  left: "10px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  color: "#bbb",
-                  pointerEvents: "none",
-                  fontSize: "16px",
-                }}
-              >
-                🔍
-              </span>
+          <div className="search-wrapper">
+            <div className="search-box">
+              <span className="search-icon">🔍</span>
 
               <input
                 type="text"
                 placeholder="Keresés..."
-                className="form-control bg-dark text-white border-secondary"
-                style={{
-                  textAlign: "left",
-                  fontSize: "16px",
-                  paddingLeft: "36px",
-                  paddingRight: "32px",
-                }}
+                className="search-input"
                 value={localSearch}
                 onChange={(e) => setLocalSearch(e.target.value)}
               />
 
               {localSearch.length > 0 && (
-                <span
-                  onClick={() => setLocalSearch("")}
-                  style={{
-                    position: "absolute",
-                    right: "10px",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    cursor: "pointer",
-                    color: "#bbb",
-                    fontSize: "18px",
-                    userSelect: "none",
-                  }}
-                >
+                <span className="search-clear" onClick={() => setLocalSearch("")}>
                   ×
                 </span>
               )}
             </div>
 
-            <div
-              style={{
-                height: "20px",
-                marginTop: "4px",
-                fontSize: "14px",
-                color: "#aaa",
-                textAlign: "center",
-              }}
-            >
+            <div className="search-status">
               {isTyping ? "Keresés folyamatban…" : ""}
             </div>
           </div>
         )}
 
         {/* NAV + PROFIL */}
-        <div className="d-flex align-items-center gap-3">
-          <ul className="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
-            <li className="nav-item">
-              <Link href="/" className="nav-link">Főoldal</Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/trends" className="nav-link">Kulcsszavak</Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/adatvedelem" className="nav-link">Adatvédelem</Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/kapcsolat" className="nav-link">Kapcsolat</Link>
-            </li>
+        <div className="header-right">
+          <ul className="header-menu">
+            <li><Link href="/" className="nav-link">Főoldal</Link></li>
+            <li><Link href="/trends" className="nav-link">Kulcsszavak</Link></li>
+            <li><Link href="/adatvedelem" className="nav-link">Adatvédelem</Link></li>
+            <li><Link href="/kapcsolat" className="nav-link">Kapcsolat</Link></li>
           </ul>
 
-          <div className="d-flex align-items-center">
+          <div className="header-profile">
             {loading && <span className="text-muted">Betöltés…</span>}
             {!loading && !user && <LoginModal />}
             {!loading && user && <ProfileMenu />}

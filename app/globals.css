@@ -1307,3 +1307,122 @@ body.theme-dark {
 }
 
 /* page[iĐ rész] vége */
+
+
+/* HEADER FIXED */
+/* HEADER */
+.header-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--article-bg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+/* NAV MENU */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-menu {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header-menu .nav-link {
+  color: var(--article-text);
+  text-decoration: none;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.header-menu .nav-link:hover {
+  color: var(--article-muted);
+}
+
+/* SEARCH */
+.search-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.search-box {
+  position: relative;
+  width: 360px;
+  max-width: 90%;
+}
+
+.search-input {
+  width: 100%;
+  background: var(--article-box);
+  color: var(--article-text);
+  padding-left: 36px;
+  padding-right: 32px;
+  font-size: 16px;
+  border: 1px solid var(--article-divider);
+  border-radius: 8px;
+  height: 40px;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--article-muted);
+  opacity: 0.8;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--article-muted);
+  pointer-events: none;
+  font-size: 16px;
+}
+
+.search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--article-muted);
+  font-size: 18px;
+  user-select: none;
+}
+
+.search-status {
+  height: 20px;
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--article-muted);
+  text-align: center;
+}
+
+/* PROFILE */
+.header-profile {
+  display: flex;
+  align-items: center;
+}
+/* HEADER VÉGE */
