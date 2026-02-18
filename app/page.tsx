@@ -1,29 +1,20 @@
 "use client";
 
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import FeedList from "@/components/FeedList";
 import type { FeedItem } from "@/components/FeedItemCard";
-import { LayoutContext } from "@/components/LayoutContext";
+import { useUserStore } from "@/store/useUserStore";   // ⭐ ZUSTAND
 
 export default function Page() {
   const router = useRouter();
 
-  // 🔥 LANDING REDIRECT — csak egyszer jelenjen meg
-//  useEffect(() => {
-  //  const seen = localStorage.getItem("utom_seen_landing");
-   // if (!seen) {
-    //  router.replace("/landing");
-    //}
-  // }, []);
-  const layout = useContext(LayoutContext);
-
-  // Context fallback
-  const viewMode = layout?.viewMode ?? "card";
-  const isTodayMode = layout?.isTodayMode ?? false;
-  const sourceFilters = layout?.sourceFilters ?? [];
-  const categoryFilters = layout?.categoryFilters ?? [];
-  const searchTerm = layout?.searchTerm ?? "";
+  // ⭐ LayoutContext HELYETT → useUserStore
+  const viewMode = useUserStore((s) => s.viewMode);
+  const isTodayMode = useUserStore((s) => s.isTodayMode);
+  const sourceFilters = useUserStore((s) => s.sourceFilters);
+  const categoryFilters = useUserStore((s) => s.categoryFilters);
+  const searchTerm = useUserStore((s) => s.searchTerm);
 
   const [items, setItems] = useState<FeedItem[]>([]);
   const [page, setPage] = useState(1);
@@ -34,7 +25,7 @@ export default function Page() {
 
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
-  // Normalizált dependency stringek (SOHA nem undefined!)
+  // Normalizált dependency stringek
   const depSources = JSON.stringify(sourceFilters ?? []);
   const depCategories = JSON.stringify(categoryFilters ?? []);
   const depSearch = searchTerm ?? "";
@@ -111,7 +102,7 @@ export default function Page() {
     setSourcePage(1);
   }
 
-  // --- FŐ USEEFFECT: minden filter + keresés ---
+  // --- FŐ USEEFFECT ---
   useEffect(() => {
     let cancelled = false;
 

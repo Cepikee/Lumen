@@ -16,12 +16,8 @@ export default function Header() {
   const user = useUserStore((s) => s.user);
   const loading = useUserStore((s) => s.loading);
 
-  // Landing oldalon nincs header
-  if (pathname.startsWith("/landing")) {
-    return null;
-  }
+  if (pathname.startsWith("/landing")) return null;
 
-  // Kereső állapot
   const searchTerm = layout?.searchTerm ?? "";
   const setSearchTerm = layout?.setSearchTerm ?? (() => {});
   const [localSearch, setLocalSearch] = useState(searchTerm);
@@ -37,11 +33,11 @@ export default function Header() {
   }, [localSearch, setSearchTerm]);
 
   return (
-    <nav className="header-nav">
-      <div className="header-container">
+    <nav className="navbar navbar-expand-lg bg-body shadow-sm sticky-top">
+      <div className="container-fluid d-flex align-items-center justify-content-between">
 
         {/* LOGÓ */}
-        <Link href="/" className="header-logo">
+        <Link href="/" className="navbar-brand d-flex align-items-center">
           <Image
             src="/apple-touch-icon.png"
             alt="Utom.hu logó"
@@ -54,7 +50,7 @@ export default function Header() {
 
         {/* KERESŐ — csak a főoldalon */}
         {pathname === "/" && (
-          <div className="search-wrapper">
+          <div className="search-wrapper mx-auto">
             <div className="search-box">
               <span className="search-icon">🔍</span>
 
@@ -79,21 +75,22 @@ export default function Header() {
           </div>
         )}
 
-        {/* NAV + PROFIL */}
-        <div className="header-right">
-          <ul className="header-menu">
-            <li><Link href="/" className="nav-link">Főoldal</Link></li>
-            <li><Link href="/trends" className="nav-link">Kulcsszavak</Link></li>
-            <li><Link href="/adatvedelem" className="nav-link">Adatvédelem</Link></li>
-            <li><Link href="/kapcsolat" className="nav-link">Kapcsolat</Link></li>
+        {/* NAV + PROFIL (JOBB OLDALON MARAD!) */}
+        <div className="d-flex align-items-center gap-3 ms-auto">
+          <ul className="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
+            <li className="nav-item"><Link href="/" className="nav-link">Főoldal</Link></li>
+            <li className="nav-item"><Link href="/trends" className="nav-link">Kulcsszavak</Link></li>
+            <li className="nav-item"><Link href="/adatvedelem" className="nav-link">Adatvédelem</Link></li>
+            <li className="nav-item"><Link href="/kapcsolat" className="nav-link">Kapcsolat</Link></li>
           </ul>
 
-          <div className="header-profile">
+          <div className="d-flex align-items-center">
             {loading && <span className="text-muted">Betöltés…</span>}
             {!loading && !user && <LoginModal />}
             {!loading && user && <ProfileMenu />}
           </div>
         </div>
+
       </div>
     </nav>
   );
