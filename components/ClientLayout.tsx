@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import Header from "./Header";
 import CookieConsent from "./CookieConsent";
 import SidebarWrapper from "./SidebarWrapper";
-import { LayoutContext } from "./LayoutContext";
 import { useUserStore } from "@/store/useUserStore";
 
 interface ClientLayoutProps {
@@ -27,7 +26,6 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   const isImpresszum = pathname.includes("impresszum");
   const isInsights = pathname.includes("insights");
 
-  // ⭐ Sidebar csak a főoldalon
   const shouldShowSidebar =
     pathname === "/" &&
     !isLanding &&
@@ -45,31 +43,38 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     loadUser();
   }, [loadUser]);
 
-  // ⭐ JAVÍTOTT THEME-EFFECT → PATHNAME IS A DEPENDENCY
+  // ⭐ JAVÍTOTT THEME-EFFECT → theme-dark / theme-light class kerül a <html>-re
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute("data-user-theme", "true");
 
+    // DARK MODE
     if (theme === "dark") {
-      root.classList.add("dark");
+      root.classList.add("theme-dark");
+      root.classList.remove("theme-light");
       root.setAttribute("data-bs-theme", "dark");
       return;
     }
 
+    // LIGHT MODE
     if (theme === "light") {
-      root.classList.remove("dark");
+      root.classList.add("theme-light");
+      root.classList.remove("theme-dark");
       root.setAttribute("data-bs-theme", "light");
       return;
     }
 
+    // SYSTEM MODE
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
 
     const applySystemTheme = () => {
       if (prefersDark.matches) {
-        root.classList.add("dark");
+        root.classList.add("theme-dark");
+        root.classList.remove("theme-light");
         root.setAttribute("data-bs-theme", "dark");
       } else {
-        root.classList.remove("dark");
+        root.classList.add("theme-light");
+        root.classList.remove("theme-dark");
         root.setAttribute("data-bs-theme", "light");
       }
     };
@@ -80,12 +85,11 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     return () => {
       prefersDark.removeEventListener("change", applySystemTheme);
     };
-  }, [theme, pathname]); // ⭐ PATHNAME HOZZÁADVA
+  }, [theme, pathname]);
 
-  // FILTER STATE
+  // FILTER STATE (ezek maradhatnak, mert SidebarWrapper használja őket)
   const [viewMode, setViewMode] = useState<"card" | "compact">("card");
   const [isTodayMode, setIsTodayMode] = useState(false);
-
   const [searchTerm, setSearchTerm] = useState("");
 
   const [sourceFilters, setSourceFilters] = useState<string[]>([]);
@@ -131,7 +135,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     setCategoryFilters(cats);
   }, []);
 
-  // ⭐⭐⭐ LANDING OLDAL — HEADER NÉLKÜL, FULL WIDTH ⭐⭐⭐
+  // ⭐⭐⭐ LANDING OLDAL — HEADER NÉLKÜL
   if (isLanding) {
     return (
       <main
@@ -144,12 +148,11 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     );
   }
 
-  // ⭐⭐⭐ PREMIUM OLDAL — HEADER IGEN, FULL WIDTH ⭐⭐⭐
+  // ⭐⭐⭐ PREMIUM OLDAL — HEADER IGEN, FULL WIDTH
   if (isPremium || isAdatvedelmi || isASZF || isImpresszum || isInsights) {
     return (
       <>
         <Header />
-
         <main
           className="flex-grow-1 overflow-auto p-0"
           tabIndex={-1}
@@ -157,40 +160,52 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
         >
           {children}
         </main>
-
         <CookieConsent />
       </>
     );
   }
 
-  // ⭐⭐⭐ MINDEN MÁS OLDAL — RÉGI LAYOUT ⭐⭐⭐
-// ⭐⭐⭐ MINDEN MÁS OLDAL — RÉGI LAYOUT ⭐⭐⭐
-return (
-  <>
-    <Header />
+  // ⭐⭐⭐ FŐOLDAL — Sidebar + Header
+  return (
+    <>
+      <Header />
 
-    {shouldShowSidebar ? (
-      <SidebarWrapper
-        onViewModeChange={handleViewModeChange}
-        onTodayFilter={() => setIsTodayMode(true)}
-        onReset={() => {
-          setIsTodayMode(false);
-          setSourceFilters([]);
-          setCategoryFilters([]);
-        }}
-        onSourceFilterChange={handleSourceFilterChange}
-        onCategoryFilterChange={handleCategoryFilterChange}
-        activeFilterState={{
-          viewMode,
-          isTodayMode,
-          sourceFilters,
-          availableSources,
-          categoryFilters,
-          availableCategories,
-          searchTerm,
-          setSearchTerm,
-        }}
-      >
+      {shouldShowSidebar ? (
+        <SidebarWrapper
+          onViewModeChange={handleViewModeChange}
+          onTodayFilter={() => setIsTodayMode(true)}
+          onReset={() => {
+            setIsTodayMode(false);
+            setSourceFilters([]);
+            setCategoryFilters([]);
+          }}
+          onSourceFilterChange={handleSourceFilterChange}
+          onCategoryFilterChange={handleCategoryFilterChange}
+          activeFilterState={{
+            viewMode,
+            isTodayMode,
+            sourceFilters,
+            availableSources,
+            categoryFilters,
+            availableCategories,
+            searchTerm,
+            setSearchTerm,
+          }}
+        >
+          <main
+            className="flex-grow-1 overflow-auto p-3"
+            tabIndex={-1}
+            onMouseDown={preventMainFocus}
+            style={{
+              maxWidth: "1280px",
+              margin: "0 auto",
+              width: "100%",
+            }}
+          >
+            {children}
+          </main>
+        </SidebarWrapper>
+      ) : (
         <main
           className="flex-grow-1 overflow-auto p-3"
           tabIndex={-1}
@@ -203,23 +218,9 @@ return (
         >
           {children}
         </main>
-      </SidebarWrapper>
-    ) : (
-      <main
-        className="flex-grow-1 overflow-auto p-3"
-        tabIndex={-1}
-        onMouseDown={preventMainFocus}
-        style={{
-          maxWidth: "1280px",
-          margin: "0 auto",
-          width: "100%",
-        }}
-      >
-        {children}
-      </main>
-    )}
+      )}
 
-    <CookieConsent />
-  </>
-);
+      <CookieConsent />
+    </>
+  );
 }
