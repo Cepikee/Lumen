@@ -52,10 +52,10 @@ export default function Header() {
         {/* LOGÓ */}
         <Link href="/" className="navbar-brand d-flex align-items-center">
           <Image
-            src="/apple-touch-icon.png"
+            src="/web-app-manifest-512x512.png"
             alt="Utom.hu logó"
-            width={72}
-            height={72}
+            width={96}
+            height={96}
             priority
             style={{ objectFit: "contain" }}
           />
