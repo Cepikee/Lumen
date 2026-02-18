@@ -45,6 +45,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     loadUser();
   }, [loadUser]);
 
+  // ⭐ JAVÍTOTT THEME-EFFECT → PATHNAME IS A DEPENDENCY
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute("data-user-theme", "true");
@@ -79,7 +80,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     return () => {
       prefersDark.removeEventListener("change", applySystemTheme);
     };
-  }, [theme]);
+  }, [theme, pathname]); // ⭐ PATHNAME HOZZÁADVA
 
   // FILTER STATE
   const [viewMode, setViewMode] = useState<"card" | "compact">("card");
@@ -143,7 +144,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     );
   }
 
-  // ⭐⭐⭐ PREMIUM OLDAL — HEADER IGEN, FULL WIDTH, NINCS MAX-WIDTH ⭐⭐⭐
+  // ⭐⭐⭐ PREMIUM OLDAL — HEADER IGEN, FULL WIDTH ⭐⭐⭐
   if (isPremium || isAdatvedelmi || isASZF || isImpresszum || isInsights) {
     return (
       <>
