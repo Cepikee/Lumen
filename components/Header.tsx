@@ -33,7 +33,7 @@ export default function Header() {
   }, [localSearch, setSearchTerm]);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body shadow-sm sticky-top">
+    <nav className="navbar navbar-expand-lg shadow-sm sticky-top header-nav">
       <div className="container-fluid d-flex align-items-center justify-content-between">
 
         {/* LOGÓ */}

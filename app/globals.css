@@ -1436,3 +1436,6 @@ input, textarea {
   align-items: center;
 }
 /* HEADER VÉGE */
+.header-nav {
+  background: var(--article-bg);
+}
