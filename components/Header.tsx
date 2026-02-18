@@ -2,29 +2,29 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import React, { useContext, useState, useEffect, useRef } from "react";
-import { LayoutContext } from "./LayoutContext";
+import React, { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import LoginModal from "./LoginModal";
 import ProfileMenu from "./ProfileMenu";
 import { useUserStore } from "@/store/useUserStore";
 
 export default function Header() {
-  const layout = useContext(LayoutContext);
   const pathname = usePathname();
 
   const user = useUserStore((s) => s.user);
   const loading = useUserStore((s) => s.loading);
 
-  if (pathname.startsWith("/landing")) return null;
+  // ⭐ A KERESŐ MOSTANTÓL ZUSTANDOT HASZNÁL
+  const searchTerm = useUserStore((s) => s.searchTerm);
+  const setSearchTerm = useUserStore((s) => s.setSearchTerm);
 
-  const searchTerm = layout?.searchTerm ?? "";
-  const setSearchTerm = layout?.setSearchTerm ?? (() => {});
   const [localSearch, setLocalSearch] = useState<string>(searchTerm);
   const [isTyping, setIsTyping] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  // Sync localSearch when external searchTerm changes (initial value and external updates)
+  if (pathname.startsWith("/landing")) return null;
+
+  // Sync localSearch when external searchTerm changes
   useEffect(() => {
     setLocalSearch(searchTerm);
   }, [searchTerm]);
@@ -102,7 +102,7 @@ export default function Header() {
           </div>
         )}
 
-        {/* NAV + PROFIL (JOBB OLDALON MARAD!) */}
+        {/* NAV + PROFIL */}
         <div className="d-flex align-items-center gap-3 ms-auto">
           <ul className="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
             <li className="nav-item">
