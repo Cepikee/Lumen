@@ -164,10 +164,23 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   }
 
   // ⭐⭐⭐ MINDEN MÁS OLDAL — RÉGI LAYOUT ⭐⭐⭐
-  return (
-    <>
-      <LayoutContext.Provider
-        value={{
+// ⭐⭐⭐ MINDEN MÁS OLDAL — RÉGI LAYOUT ⭐⭐⭐
+return (
+  <>
+    <Header />
+
+    {shouldShowSidebar ? (
+      <SidebarWrapper
+        onViewModeChange={handleViewModeChange}
+        onTodayFilter={() => setIsTodayMode(true)}
+        onReset={() => {
+          setIsTodayMode(false);
+          setSourceFilters([]);
+          setCategoryFilters([]);
+        }}
+        onSourceFilterChange={handleSourceFilterChange}
+        onCategoryFilterChange={handleCategoryFilterChange}
+        activeFilterState={{
           viewMode,
           isTodayMode,
           sourceFilters,
@@ -178,60 +191,35 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           setSearchTerm,
         }}
       >
-        <Header />
+        <main
+          className="flex-grow-1 overflow-auto p-3"
+          tabIndex={-1}
+          onMouseDown={preventMainFocus}
+          style={{
+            maxWidth: "1280px",
+            margin: "0 auto",
+            width: "100%",
+          }}
+        >
+          {children}
+        </main>
+      </SidebarWrapper>
+    ) : (
+      <main
+        className="flex-grow-1 overflow-auto p-3"
+        tabIndex={-1}
+        onMouseDown={preventMainFocus}
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          width: "100%",
+        }}
+      >
+        {children}
+      </main>
+    )}
 
-        {shouldShowSidebar ? (
-          <SidebarWrapper
-            onViewModeChange={handleViewModeChange}
-            onTodayFilter={() => setIsTodayMode(true)}
-            onReset={() => {
-              setIsTodayMode(false);
-              setSourceFilters([]);
-              setCategoryFilters([]);
-            }}
-            onSourceFilterChange={handleSourceFilterChange}
-            onCategoryFilterChange={handleCategoryFilterChange}
-            activeFilterState={{
-              viewMode,
-              isTodayMode,
-              sourceFilters,
-              availableSources,
-              categoryFilters,
-              availableCategories,
-              searchTerm,
-              setSearchTerm,
-            }}
-          >
-            <main
-              className="flex-grow-1 overflow-auto p-3"
-              tabIndex={-1}
-              onMouseDown={preventMainFocus}
-              style={{
-                maxWidth: "1280px",
-                margin: "0 auto",
-                width: "100%",
-              }}
-            >
-              {children}
-            </main>
-          </SidebarWrapper>
-        ) : (
-          <main
-            className="flex-grow-1 overflow-auto p-3"
-            tabIndex={-1}
-            onMouseDown={preventMainFocus}
-            style={{
-              maxWidth: "1280px",
-              margin: "0 auto",
-              width: "100%",
-            }}
-          >
-            {children}
-          </main>
-        )}
-      </LayoutContext.Provider>
-
-      <CookieConsent />
-    </>
-  );
+    <CookieConsent />
+  </>
+);
 }
