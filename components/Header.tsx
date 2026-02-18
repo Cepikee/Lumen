@@ -49,7 +49,7 @@ export default function Header() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-  const logoSrc = isDark ? "/utom.png" : "/web-app-manifest-512x512.png";
+  const logoSrc = isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
 
   return (
     <nav className="navbar navbar-expand-lg shadow-sm sticky-top header-nav">
