@@ -13,7 +13,7 @@ interface ClientLayoutProps {
 
 const preventMainFocus = (e: React.MouseEvent) => {
   if (!(e.target as Element).closest("input, textarea, [contenteditable='true']")) {
-    e.preventDefault();
+   // e.preventDefault();
   }
 };
 
