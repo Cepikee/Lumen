@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { LayoutContext } from "./LayoutContext";
 import { usePathname } from "next/navigation";
 import LoginModal from "./LoginModal";
@@ -20,9 +20,16 @@ export default function Header() {
 
   const searchTerm = layout?.searchTerm ?? "";
   const setSearchTerm = layout?.setSearchTerm ?? (() => {});
-  const [localSearch, setLocalSearch] = useState(searchTerm);
+  const [localSearch, setLocalSearch] = useState<string>(searchTerm);
   const [isTyping, setIsTyping] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
+  // Sync localSearch when external searchTerm changes (initial value and external updates)
+  useEffect(() => {
+    setLocalSearch(searchTerm);
+  }, [searchTerm]);
+
+  // Debounce localSearch -> setSearchTerm
   useEffect(() => {
     setIsTyping(true);
     const t = setTimeout(() => {
@@ -32,10 +39,16 @@ export default function Header() {
     return () => clearTimeout(t);
   }, [localSearch, setSearchTerm]);
 
+  // Handle Enter to immediately apply search
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      setSearchTerm(localSearch);
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg shadow-sm sticky-top header-nav">
       <div className="container-fluid d-flex align-items-center justify-content-between">
-
         {/* LOGÓ */}
         <Link href="/" className="navbar-brand d-flex align-items-center">
           <Image
@@ -51,19 +64,33 @@ export default function Header() {
         {/* KERESŐ — csak a főoldalon */}
         {pathname === "/" && (
           <div className="search-wrapper mx-auto">
-            <div className="search-box">
+            <div
+              className="search-box"
+              onClick={() => inputRef.current?.focus()}
+              role="presentation"
+            >
               <span className="search-icon">🔍</span>
 
               <input
+                ref={inputRef}
                 type="text"
                 placeholder="Keresés..."
                 className="search-input"
                 value={localSearch}
                 onChange={(e) => setLocalSearch(e.target.value)}
+                onKeyDown={handleKeyDown}
+                aria-label="Keresés"
               />
 
               {localSearch.length > 0 && (
-                <span className="search-clear" onClick={() => setLocalSearch("")}>
+                <span
+                  className="search-clear"
+                  onClick={() => {
+                    setLocalSearch("");
+                    setSearchTerm("");
+                    inputRef.current?.focus();
+                  }}
+                >
                   ×
                 </span>
               )}
@@ -78,10 +105,26 @@ export default function Header() {
         {/* NAV + PROFIL (JOBB OLDALON MARAD!) */}
         <div className="d-flex align-items-center gap-3 ms-auto">
           <ul className="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
-            <li className="nav-item"><Link href="/" className="nav-link">Főoldal</Link></li>
-            <li className="nav-item"><Link href="/trends" className="nav-link">Kulcsszavak</Link></li>
-            <li className="nav-item"><Link href="/adatvedelem" className="nav-link">Adatvédelem</Link></li>
-            <li className="nav-item"><Link href="/kapcsolat" className="nav-link">Kapcsolat</Link></li>
+            <li className="nav-item">
+              <Link href="/" className="nav-link">
+                Főoldal
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/trends" className="nav-link">
+                Kulcsszavak
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/adatvedelem" className="nav-link">
+                Adatvédelem
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/kapcsolat" className="nav-link">
+                Kapcsolat
+              </Link>
+            </li>
           </ul>
 
           <div className="d-flex align-items-center">
@@ -90,7 +133,6 @@ export default function Header() {
             {!loading && user && <ProfileMenu />}
           </div>
         </div>
-
       </div>
     </nav>
   );
