@@ -1480,3 +1480,62 @@ input, textarea, [contenteditable="true"] {
   outline: none;
 }
 
+
+html.theme-light .header-nav {
+  background: var(--article-bg) !important;
+  color: var(--article-text) !important;
+}
+
+html.theme-dark .header-nav {
+  background: var(--article-bg) !important;
+  color: var(--article-text) !important;
+}
+
+html.theme-light .nav-link,
+html.theme-dark .nav-link {
+  color: var(--article-text) !important;
+}
+
+/* === UTOM DARK MODE FIX: HEADER + FEEDITEMCARD === */
+
+/* Sötét és rendszer mód – minden háttér legyen #212529 */
+html.theme-dark {
+  --feed-bg: #212529;
+  --feed-bg-inner: #212529;
+  --feed-text: #ffffff;
+
+  --article-bg: #212529;
+  --article-text: #ffffff;
+  --article-muted: #cccccc;
+}
+
+/* HEADER háttér fix */
+html.theme-dark .header-nav {
+  background: #212529 !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+/* NAV LINK szín */
+html.theme-dark .nav-link {
+  color: #ffffff !important;
+}
+
+/* FEEDITEMCARD háttér fix */
+.feed-card.card,
+.feed-card.compact {
+  background-color: #212529 !important;
+  color: #ffffff !important;
+}
+
+/* Expanded content is #212529 is */
+.feed-card .expanded-content,
+.theme-card-inner {
+  background-color: #212529 !important;
+  color: #ffffff !important;
+}
+
+/* Hover is also #212529 */
+.feed-card.compact:hover {
+  background-color: #212529 !important;
+}
