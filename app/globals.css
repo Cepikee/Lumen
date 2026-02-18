@@ -1539,3 +1539,5 @@ html.theme-dark .nav-link {
 .feed-card.compact:hover {
   background-color: #212529 !important;
 }
+
+* { user-select: text !important; }
