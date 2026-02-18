@@ -14,9 +14,9 @@ export default function Header() {
   const user = useUserStore((s) => s.user);
   const loading = useUserStore((s) => s.loading);
 
-  // ⭐ A KERESŐ MOSTANTÓL ZUSTANDOT HASZNÁL
   const searchTerm = useUserStore((s) => s.searchTerm);
   const setSearchTerm = useUserStore((s) => s.setSearchTerm);
+  const theme = useUserStore((s) => s.theme);
 
   const [localSearch, setLocalSearch] = useState<string>(searchTerm);
   const [isTyping, setIsTyping] = useState(false);
@@ -24,12 +24,10 @@ export default function Header() {
 
   if (pathname.startsWith("/landing")) return null;
 
-  // Sync localSearch when external searchTerm changes
   useEffect(() => {
     setLocalSearch(searchTerm);
   }, [searchTerm]);
 
-  // Debounce localSearch -> setSearchTerm
   useEffect(() => {
     setIsTyping(true);
     const t = setTimeout(() => {
@@ -39,12 +37,19 @@ export default function Header() {
     return () => clearTimeout(t);
   }, [localSearch, setSearchTerm]);
 
-  // Handle Enter to immediately apply search
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       setSearchTerm(localSearch);
     }
   };
+
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  const logoSrc = isDark ? "/utom.png" : "/web-app-manifest-512x512.png";
 
   return (
     <nav className="navbar navbar-expand-lg shadow-sm sticky-top header-nav">
@@ -52,7 +57,7 @@ export default function Header() {
         {/* LOGÓ */}
         <Link href="/" className="navbar-brand d-flex align-items-center">
           <Image
-            src="/web-app-manifest-512x512.png"
+            src={logoSrc}
             alt="Utom.hu logó"
             width={96}
             height={96}
@@ -70,7 +75,6 @@ export default function Header() {
               role="presentation"
             >
               <span className="search-icon">🔍</span>
-
               <input
                 ref={inputRef}
                 type="text"
@@ -81,7 +85,6 @@ export default function Header() {
                 onKeyDown={handleKeyDown}
                 aria-label="Keresés"
               />
-
               {localSearch.length > 0 && (
                 <span
                   className="search-clear"
@@ -95,7 +98,6 @@ export default function Header() {
                 </span>
               )}
             </div>
-
             <div className="search-status">
               {isTyping ? "Keresés folyamatban…" : ""}
             </div>
@@ -106,24 +108,16 @@ export default function Header() {
         <div className="d-flex align-items-center gap-3 ms-auto">
           <ul className="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
             <li className="nav-item">
-              <Link href="/" className="nav-link">
-                Főoldal
-              </Link>
+              <Link href="/" className="nav-link">Főoldal</Link>
             </li>
             <li className="nav-item">
-              <Link href="/trends" className="nav-link">
-                Kulcsszavak
-              </Link>
+              <Link href="/trends" className="nav-link">Kulcsszavak</Link>
             </li>
             <li className="nav-item">
-              <Link href="/adatvedelem" className="nav-link">
-                Adatvédelem
-              </Link>
+              <Link href="/adatvedelem" className="nav-link">Adatvédelem</Link>
             </li>
             <li className="nav-item">
-              <Link href="/kapcsolat" className="nav-link">
-                Kapcsolat
-              </Link>
+              <Link href="/kapcsolat" className="nav-link">Kapcsolat</Link>
             </li>
           </ul>
 
