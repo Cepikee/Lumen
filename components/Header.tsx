@@ -59,9 +59,10 @@ export default function Header() {
           <Image
             src={logoSrc}
             alt="Utom.hu logó"
-            width={96}
-            height={96}
+            width={48}
+            height={48}
             priority
+            className="header-logo-img"
             style={{ objectFit: "contain" }}
           />
         </Link>
