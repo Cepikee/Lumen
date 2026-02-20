@@ -25,7 +25,7 @@ const feedStats: Record<string, number> = {
   "Index": 0,
   "Portfolio": 0,
   "444.hu": 0,
-  "origo.hu": 0
+  "Origo": 0
 };
 
 /** Domain → source_id */

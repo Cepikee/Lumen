@@ -12,6 +12,7 @@ function mapSource(raw: string) {
   if (s.includes("hvg")) return "hvg";
   if (s.includes("portfolio")) return "portfolio";
   if (s.includes("444")) return "444";
+  if (s.includes("origo")) return "origo"; 
   return "ismeretlen";
 }
 
@@ -199,6 +200,7 @@ export default function CikkOldal() {
                   "source-24hu": "#ff0000",
                   "source-telex": "#00AEEF",
                   "source-hvg": "#ff7a00",
+                  "source-origo": "#0e008a",
                   default: "#4da3ff",
                 };
 
