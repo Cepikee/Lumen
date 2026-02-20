@@ -67,7 +67,7 @@ export default function CikkOldal() {
   useEffect(() => {
     if (!item) return;
 
-    const rawSource = item.source ?? item.source_name ?? "";
+    const rawSource = item.source_name || item.source || "";  //const rawSource = item.source ?? item.source_name ?? "";
     const normalized = mapSource(rawSource);
 
     if (!normalized || normalized === "ismeretlen") {

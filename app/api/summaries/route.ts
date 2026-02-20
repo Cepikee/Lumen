@@ -27,6 +27,7 @@ const ID_TO_SOURCE_NAME: Record<string, string> = {
   "4": "hvg",
   "5": "portfolio",
   "6": "444",
+  "7": "origo",
 };
 
 // --- Forrásnév → source_id mapping (backend JOIN-hoz) --- //
@@ -37,6 +38,7 @@ const SOURCE_NAME_TO_ID: Record<string, number> = {
   hvg: 4,
   portfolio: 5,
   "444": 6,
+  origo: 7,
 };
 
 // --- Fallback cím generálás --- //
@@ -76,6 +78,7 @@ export async function GET(req: Request) {
           s.language,
           src.id AS source_id,
           src.name AS source_name,
+          a.source AS source,
           s.content,
           s.detailed_content,
           s.category,
