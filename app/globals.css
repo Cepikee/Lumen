@@ -452,6 +452,11 @@ html, body {
   background-color: #ff7a00 !important;
   color: rgb(255, 255, 255) !important;
 }
+.badge.source-origo {
+  background-color: #0e008a !important;
+  color: white !important;
+}
+
 
 .clamp-2 {
   display: -webkit-box;

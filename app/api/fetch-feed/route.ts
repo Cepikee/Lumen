@@ -24,7 +24,8 @@ const feedStats: Record<string, number> = {
   "24.hu": 0,
   "Index": 0,
   "Portfolio": 0,
-  "444.hu": 0
+  "444.hu": 0,
+  "origo.hu": 0
 };
 
 /** Domain → source_id */
@@ -39,6 +40,7 @@ function detectSourceId(url: string | null | undefined): number | null {
       case "hvg.hu": return 4;
       case "portfolio.hu": return 5;
       case "444.hu": return 6;
+      case "origo.hu": return 7;
       default: return null;
     }
   } catch {
@@ -290,6 +292,7 @@ export async function GET() {
     await processRssFeed("https://24.hu/feed", "24.hu");
     await processRssFeed("https://index.hu/24ora/rss/", "Index");
     await processRssFeed("https://www.portfolio.hu/rss/all.xml", "Portfolio");
+    await processRssFeed("https://www.origo.hu/publicapi/hu/rss/origo/articles", "Origo");
 
     const feed444 = await fetch("https://royal-king-47c3.vashiri6562.workers.dev/")
       .then(r => r.text());

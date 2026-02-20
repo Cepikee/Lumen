@@ -23,6 +23,7 @@ const SOURCE_MAP: Record<number, string> = {
   4: "hvg",
   5: "portfolio",
   6: "444",
+  7: "origo",
 };
 
 // --- DÁTUM FORMÁZÓK --- //
