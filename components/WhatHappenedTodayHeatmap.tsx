@@ -59,11 +59,32 @@ export default function WhatHappenedTodayHeatmap() {
 
   const { categories, hours, matrix } = data;
 
-  // --- Datasetek generálása ---
-  const datasets = categories.map((cat, idx) => ({
+  // Fix sorrend
+  const orderedCategories = [
+    "Politika",
+    "Gazdaság",
+    "Közélet",
+    "Kultúra",
+    "Egészségügy",
+    "Oktatás",
+  ].filter((c) => categories.includes(c));
+
+  // Fix színek
+  const colors: Record<string, string> = {
+    Politika: "#d81b60",
+    Gazdaság: "#f9a825",
+    Közélet: "#43a047",
+    Kultúra: "#00acc1",
+    Egészségügy: "#e53935",
+    Oktatás: "#3949ab",
+  };
+
+  // Datasetek (stacked)
+  const datasets = orderedCategories.map((cat) => ({
     label: cat,
     data: hours.map((h) => matrix[cat]?.[h] ?? 0),
-    backgroundColor: `hsl(${(idx * 60) % 360}, 70%, 55%)`,
+    backgroundColor: colors[cat],
+    borderWidth: 0,
   }));
 
   const chartData = {
@@ -73,6 +94,7 @@ export default function WhatHappenedTodayHeatmap() {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "bottom" as const,
@@ -85,19 +107,18 @@ export default function WhatHappenedTodayHeatmap() {
     },
     scales: {
       x: {
-        stacked: false,
+        stacked: true,
       },
       y: {
+        stacked: true,
         beginAtZero: true,
-        ticks: {
-          precision: 0,
-        },
+        ticks: { precision: 0 },
       },
     },
   };
 
   return (
-    <div className="wht-heatmap">
+    <div className="wht-heatmap" style={{ height: "350px" }}>
       <h5 className="mb-3">Kategóriák aktivitása óránként</h5>
 
       <Bar data={chartData} options={options} />
