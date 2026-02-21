@@ -1554,3 +1554,193 @@ html.theme-dark .nav-link {
 }
 
 * { user-select: text !important; }
+
+/* --- END OF GLOBALS.CSS --- */
+
+/* WhatHappenedToday oldal stílusai */
+/* Wrapper */
+.wht-wrapper {
+  width: 100%;
+}
+
+/* Címblokk */
+.wht-header {
+  text-align: left;
+}
+
+.wht-header-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #0d6efd, transparent);
+  transform: translateY(-50%);
+}
+
+.wht-title {
+  background: var(--bs-body-bg);
+  font-weight: 700; /* 600 helyett 700 */
+  font-size: 1.8rem; /* 1.4 helyett 1.8 */
+  z-index: 2;
+}
+
+
+/* Dobozok */
+.wht-box {
+  background: var(--bs-body-bg);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  min-height: 200px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* EZ ÚJ */
+}
+
+
+/* HEATMAP */
+/* ============================
+   HEATMAP STYLES
+   ============================ */
+
+.wht-heatmap-table th,
+.wht-heatmap-table td {
+  font-size: 0.75rem;
+  padding: 4px 6px;
+}
+
+.wht-heatmap-cell {
+  width: 28px;
+  height: 28px;
+  background-color: #f5f5f5;
+  transition: background-color 0.2s ease;
+  border-radius: 4px;
+}
+
+/* Színintenzitás a cella érték alapján */
+.wht-heatmap-cell[data-value="0"] {
+  background-color: #f0f0f0;
+}
+
+.wht-heatmap-cell[data-value="1"] {
+  background-color: #d6eaff;
+}
+
+.wht-heatmap-cell[data-value="2"] {
+  background-color: #a8d4ff;
+}
+
+.wht-heatmap-cell[data-value="3"] {
+  background-color: #7bbcff;
+}
+
+.wht-heatmap-cell[data-value="4"] {
+  background-color: #4ea4ff;
+}
+
+.wht-heatmap-cell[data-value="5"] {
+  background-color: #1f8cff;
+}
+
+.wht-heatmap-cell[data-value="6"],
+.wht-heatmap-cell[data-value="7"],
+.wht-heatmap-cell[data-value="8"],
+.wht-heatmap-cell[data-value="9"] {
+  background-color: #006fe6;
+  color: white;
+}
+
+/* 10+ brutál spike */
+.wht-heatmap-cell[data-value]:not([data-value="0"]):not([data-value="1"]):not([data-value="2"]):not([data-value="3"]):not([data-value="4"]):not([data-value="5"]):not([data-value="6"]):not([data-value="7"]):not([data-value="8"]):not([data-value="9"]) {
+  background-color: #004c99;
+  color: white;
+}
+
+/* Heatmap Styles vége */
+/* --- SOURCE ACTIVITY SPARKLINE --- */
+/* ============================
+   SOURCE ACTIVITY SPARKLINE
+   ============================ */
+
+.wht-sparkline {
+  width: 90px;
+  height: 24px;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.wht-sparkline-bar {
+  width: 3px;
+  background-color: #0d6efd; /* Bootstrap primary */
+  border-radius: 2px;
+  transition: height 0.2s ease;
+}
+
+.wht-sparkline-bar:hover {
+  background-color: #084298;
+}
+/* Source Activity Sparkline vége */
+
+/* SpikeDetection */
+/* ============================
+   SPIKE DETECTION STYLES
+   ============================ */
+
+.wht-spike-item {
+  border-left: 4px solid transparent;
+  transition: background-color 0.2s ease;
+}
+
+/* Mild spike (3+) */
+.wht-spike-mild {
+  border-left-color: #0d6efd;
+  background-color: rgba(13, 110, 253, 0.05);
+}
+
+/* Strong spike (5+) */
+.wht-spike-strong {
+  border-left-color: #fd7e14;
+  background-color: rgba(253, 126, 20, 0.08);
+}
+
+/* Brutal spike (7+) */
+.wht-spike-brutal {
+  border-left-color: #dc3545;
+  background-color: rgba(220, 53, 69, 0.08);
+}
+
+.wht-spike-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+/* Spike Detection Styles vége */
+/* Kulcsszavak */
+/* ============================
+   TRENDING KEYWORDS STYLES
+   ============================ */
+
+.wht-keyword-item {
+  border-left: 4px solid transparent;
+  transition: background-color 0.2s ease;
+}
+
+/* Mild spike (3+) */
+.wht-keyword-mild {
+  border-left-color: #0d6efd;
+  background-color: rgba(13, 110, 253, 0.05);
+}
+
+/* Strong spike (5+) */
+.wht-keyword-strong {
+  border-left-color: #fd7e14;
+  background-color: rgba(253, 126, 20, 0.08);
+}
+
+/* Brutal spike (7+) */
+.wht-keyword-brutal {
+  border-left-color: #dc3545;
+  background-color: rgba(220, 53, 69, 0.08);
+}
+
+.wht-keyword-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+/* Kulcsszavak vége */

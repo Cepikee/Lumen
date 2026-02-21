@@ -9,6 +9,7 @@ import { useTimeseriesAll } from "@/hooks/useTimeseriesAll";
 import dynamic from "next/dynamic";
 import useSWR from "swr";
 import ForecastStatus from "@/components/ForecastStatus";
+import WhatHappenedToday from "@/components/WhatHappenedToday";
 
 
 // ⭐ Forecast API hook
@@ -205,6 +206,8 @@ const downsampledTs = useMemo(() => {
           </div>
         </div>
       </section>
+      {/* WHAT HAPPENED TODAY DASHBOARD */} <div className="mt-5"> <WhatHappenedToday /> </div>        
+
     </main>
   );
 }
