@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 
 interface SpikeItem {
-  type: "category" | "keyword" | "source";
+  type: "category" | "source";
   label: string;
-  hour?: number;
+  hour: number;
   value: number;
   level: "mild" | "strong" | "brutal";
 }
@@ -51,8 +51,7 @@ export default function WhatHappenedTodaySpikeDetection() {
 
   const getIcon = (type: SpikeItem["type"]) => {
     if (type === "category") return "🔥";
-    if (type === "keyword") return "📈";
-    return "⚡";
+    return "⚡"; // source
   };
 
   const getLevelText = (level: SpikeItem["level"]) => {
@@ -77,13 +76,7 @@ export default function WhatHappenedTodaySpikeDetection() {
                 <strong>{item.label}</strong>
 
                 <div className="text-muted small mt-1">
-                  {item.type !== "keyword" && item.hour !== undefined && (
-                    <>
-                      {item.hour}:00-kor{" "}
-                    </>
-                  )}
-                  {item.value} {item.type === "keyword" ? "előfordulás" : "cikk"} —{" "}
-                  {getLevelText(item.level)}
+                  {item.hour}:00-kor • {item.value} cikk — {getLevelText(item.level)}
                 </div>
               </div>
             </div>

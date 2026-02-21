@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-// --- Kategória tisztító függvény (ugyanaz, mint a timeseries-ben) ---
+// --- Kategória tisztító (ugyanaz, mint a timeseries-ben) ---
 function fixCat(s: any): string | null {
   if (!s) return null;
 
@@ -26,52 +26,53 @@ export async function GET() {
       WHERE category IS NOT NULL AND category <> ''
     `);
 
+    // TS FIX: explicit paraméter típus + type guard
     const categories = Array.from(
       new Map(
         (cats || [])
           .map((c: any) => fixCat(c.category))
-          .filter(Boolean)
+          .filter((x: string | null): x is string => typeof x === "string" && x.length > 0)
           .map((c: string) => [c.toLowerCase(), c])
       ).values()
-    );
+    ) as string[];
 
-    // --- 2) Órák listája (0–23) ---
+    // --- 2) Órák listája ---
     const hours = Array.from({ length: 24 }, (_, i) => i);
 
-    // --- 3) Alap mátrix 0-val kitöltve ---
+    // --- 3) Alap mátrix típusozva ---
     const matrix: Record<string, Record<number, number>> = {};
+
     for (const cat of categories) {
-      matrix[cat as string] = {};
+      matrix[cat] = {};
       for (const h of hours) {
-        matrix[cat as string][h] = 0;
+        matrix[cat][h] = 0;
       }
     }
 
-    // --- 4) Mai nap időintervalluma ---
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const todayStr = today.toISOString().slice(0, 19).replace("T", " ");
+    // --- 4) Mai nap intervalluma (ugyanaz, mint a timeseries-ben) ---
+    const now = new Date();
+    const endStr = now.toISOString().slice(0, 19).replace("T", " ");
 
-    const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-    const tomorrowStr = tomorrow.toISOString().slice(0, 19).replace("T", " ");
+    const startUtc = new Date(now.getTime());
+    startUtc.setHours(0, 0, 0, 0);
+    const startStr = startUtc.toISOString().slice(0, 19).replace("T", " ");
 
-    // --- 5) Fő SQL lekérdezés: kategória × óra × count ---
+    // --- 5) Bucket-alapú SQL (Chart.js kompatibilis) ---
     const [rows]: any = await db.query(
       `
       SELECT 
         TRIM(category) AS category,
-        HOUR(created_at) AS hour,
+        DATE_FORMAT(created_at, "%Y-%m-%d %H:00:00") AS bucket,
         COUNT(*) AS count
       FROM summaries
       WHERE created_at >= ?
-        AND created_at < ?
+        AND created_at <= ?
         AND category IS NOT NULL
         AND category <> ''
-      GROUP BY TRIM(category), HOUR(created_at)
-      ORDER BY TRIM(category), hour
+      GROUP BY TRIM(category), bucket
+      ORDER BY bucket ASC
       `,
-      [todayStr, tomorrowStr]
+      [startStr, endStr]
     );
 
     // --- 6) Mátrix feltöltése ---
@@ -79,11 +80,11 @@ export async function GET() {
       const cat = fixCat(r.category);
       if (!cat) continue;
 
-      const hour = Number(r.hour);
+      const hour = new Date(r.bucket).getHours();
       const count = Number(r.count) || 0;
 
-      if (matrix[cat as string] && hour >= 0 && hour <= 23) {
-        matrix[cat as string][hour] = count;
+      if (matrix[cat] && hour >= 0 && hour <= 23) {
+        matrix[cat][hour] = count;
       }
     }
 

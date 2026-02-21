@@ -67,17 +67,24 @@ export default function WhatHappenedTodayKulcsszavak() {
             }`}
           >
             <div className="d-flex justify-content-between align-items-center">
+              
+              {/* Bal oldal: kulcsszó + csak a spike magyarázat */}
               <div>
                 <span className="me-2">📈</span>
                 <strong>{item.keyword}</strong>
 
-                <div className="text-muted small mt-1">
-                  {item.count} előfordulás{" "}
-                  {item.level && <>— {getLevelText(item.level)}</>}
-                </div>
+                {item.level && (
+                  <div className="text-muted small mt-1">
+                    {getLevelText(item.level)}
+                  </div>
+                )}
               </div>
 
-              <div className="fw-bold fs-6 text-end">{item.count}</div>
+              {/* Jobb oldal: nagy szám + db */}
+              <div className="fw-bold fs-6 text-end">
+                {item.count} db
+              </div>
+
             </div>
           </div>
         ))}
