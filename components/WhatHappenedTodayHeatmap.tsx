@@ -3,6 +3,18 @@
 import { useEffect, useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
+
 interface HeatmapResponse {
   success: boolean;
   categories: string[];
@@ -21,7 +33,7 @@ export default function WhatHappenedTodayHeatmap() {
         const json = await res.json();
         setData(json);
       } catch (err) {
-        console.error("Heatmap fetch error:", err);
+        console.error("Bar chart fetch error:", err);
       } finally {
         setLoading(false);
       }
@@ -38,48 +50,57 @@ export default function WhatHappenedTodayHeatmap() {
   }
 
   if (!data || !data.success) {
-    return <div className="text-danger">Nem sikerült betölteni a heatmap adatokat.</div>;
+    return (
+      <div className="text-danger">
+        Nem sikerült betölteni az adatokat.
+      </div>
+    );
   }
 
   const { categories, hours, matrix } = data;
+
+  // --- Datasetek generálása ---
+  const datasets = categories.map((cat, idx) => ({
+    label: cat,
+    data: hours.map((h) => matrix[cat]?.[h] ?? 0),
+    backgroundColor: `hsl(${(idx * 60) % 360}, 70%, 55%)`,
+  }));
+
+  const chartData = {
+    labels: hours.map((h) => `${h}:00`),
+    datasets,
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom" as const,
+      },
+      tooltip: {
+        callbacks: {
+          label: (ctx: any) => `${ctx.dataset.label}: ${ctx.raw} cikk`,
+        },
+      },
+    },
+    scales: {
+      x: {
+        stacked: false,
+      },
+      y: {
+        beginAtZero: true,
+        ticks: {
+          precision: 0,
+        },
+      },
+    },
+  };
 
   return (
     <div className="wht-heatmap">
       <h5 className="mb-3">Kategóriák aktivitása óránként</h5>
 
-      <div className="table-responsive">
-        <table className="table table-bordered wht-heatmap-table">
-          <thead>
-            <tr>
-              <th>Kategória</th>
-              {hours.map((h) => (
-                <th key={h} className="text-center">{h}</th>
-              ))}
-            </tr>
-          </thead>
-
-          <tbody>
-            {categories.map((cat) => (
-              <tr key={cat}>
-                <td className="fw-semibold">{cat}</td>
-
-                {hours.map((h) => {
-                  const value = matrix[cat]?.[h] ?? 0;
-                  return (
-                    <td
-                      key={h}
-                      className="wht-heatmap-cell text-center"
-                      data-value={value}
-                    >
-                      {value > 0 ? value : ""}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Bar data={chartData} options={options} />
     </div>
   );
 }
