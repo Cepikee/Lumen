@@ -61,8 +61,7 @@ export default function WhatHappenedTodaySpikeDetection() {
   };
 
   // ⭐ CSAK EZ AZ ÚJ: időrendi rendezés balról jobbra
-  const sorted = [...data].sort((a, b) => a.hour - b.hour);
-
+const sorted = [...data].sort((a, b) => b.hour - a.hour);
   return (
     <div className="wht-spike-detection">
       <h5 className="mb-3">Kiugró aktivitások ma</h5>

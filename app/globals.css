@@ -1751,6 +1751,7 @@ html.theme-dark .nav-link {
   background: var(--bs-body-bg);
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 12px;
+  padding-bottom: 0 !important; /* vagy 10–20px */
 
   /* FULL WIDTH FIX */
   width: 100% !important;
