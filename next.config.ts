@@ -6,7 +6,17 @@ const nextConfig: NextConfig = {
   experimental: {
     serverActions: {
       bodySizeLimit: "15mb",
+      allowedOrigins: ["*"], // ⭐ fontos!
     },
+  },
+
+  // ⭐ ETag kikapcsolása → kevesebb verzióütközés
+  generateEtags: false,
+
+  // ⭐ Dev-szerű viselkedés: ne cache-eljen agresszívan
+  onDemandEntries: {
+    maxInactiveAge: 0,
+    pagesBufferLength: 0,
   },
 
   distDir: ".next",
