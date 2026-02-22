@@ -19,22 +19,22 @@ export default function WhatHappenedToday() {
       {/* FŐSOR – 3 OSZLOP */}
       <div className="row g-4">
 
-        {/* BAL OSZLOP */}
-        <div className="col-12 col-lg-4">
+        {/* BAL OSZLOP – kisebb: 3 */}
+        <div className="col-12 col-lg-3">
           <div className="wht-box module-box">
             <WhatHappenedTodayHeatmap />
           </div>
         </div>
 
-        {/* KÖZÉPSŐ OSZLOP */}
-        <div className="col-12 col-lg-4">
+        {/* KÖZÉPSŐ OSZLOP – kisebb: 3 */}
+        <div className="col-12 col-lg-3">
           <div className="wht-box module-box">
             <WhatHappenedTodaySourceActivity />
           </div>
         </div>
 
-        {/* JOBB OSZLOP */}
-        <div className="col-12 col-lg-4 d-flex flex-column gap-4">
+        {/* JOBB OSZLOP – nagyobb: 6 */}
+        <div className="col-12 col-lg-6 d-flex flex-column gap-4">
 
           {/* FENT – KIUGRÓ AKTIVITÁSOK (VÍZSZINTES) */}
           <div className="wht-box module-box horizontal-list">
