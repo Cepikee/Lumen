@@ -206,7 +206,7 @@ const downsampledTs = useMemo(() => {
           </div>
         </div>
       </section>
-      {/* WHAT HAPPENED TODAY DASHBOARD */} <div className="mt-5"> <WhatHappenedToday /> </div>        
+      {/* WHAT HAPPENED TODAY DASHBOARD */} <div className="container-fluid mt-5 px-0"> <WhatHappenedToday /> </div>        
 
     </main>
   );

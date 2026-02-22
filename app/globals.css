@@ -1750,10 +1750,16 @@ html.theme-dark .nav-link {
   background: var(--bs-body-bg);
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 12px;
-  max-width: 1700px;
-  width: 100%;
-  padding: 34px;
+
+  /* FULL WIDTH FIX */
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 34px 0 !important;
+
+  box-sizing: border-box;
 }
+
 
 .module-box {
   min-height: 600px;
