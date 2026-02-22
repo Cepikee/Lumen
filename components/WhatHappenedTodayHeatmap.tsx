@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Spinner from "react-bootstrap/Spinner";
 
 import {
@@ -27,6 +27,7 @@ export default function WhatHappenedTodayHeatmap() {
   const [data, setData] = useState<HeatmapResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // ⭐ Ugyanaz a theme logika, mint az InsightsOverviewChart-ban
   const theme = useUserStore((s) => s.theme);
   const isDark =
     theme === "dark" ||
@@ -41,6 +42,7 @@ export default function WhatHappenedTodayHeatmap() {
   const tooltipBody = isDark ? "#ddd" : "#333";
   const tooltipBorder = isDark ? "#444" : "#ccc";
 
+  // ⭐ Automatikus frissítés (InsightsOverviewChart mintájára)
   useEffect(() => {
     async function load() {
       try {
@@ -53,7 +55,11 @@ export default function WhatHappenedTodayHeatmap() {
         setLoading(false);
       }
     }
-    load();
+
+    load(); // első betöltés
+
+    const interval = setInterval(load, 60_000); // ⭐ 1 percenként frissít
+    return () => clearInterval(interval);
   }, []);
 
   if (loading) {
@@ -92,59 +98,65 @@ export default function WhatHappenedTodayHeatmap() {
     Oktatás: "#3949ab",
   };
 
-  const datasets = orderedCategories.map((cat) => ({
-    label: cat,
-    data: hours.map((h) => matrix[cat]?.[h] ?? 0),
-    backgroundColor: colors[cat],
-    borderWidth: 0,
-  }));
+  // ⭐ Ugyanaz a useMemo logika, mint az InsightsOverviewChart-ban
+  const chartData = useMemo(() => {
+    const datasets = orderedCategories.map((cat) => ({
+      label: cat,
+      data: hours.map((h) => matrix[cat]?.[h] ?? 0),
+      backgroundColor: colors[cat],
+      borderWidth: 0,
+    }));
 
-  const chartData = {
-    labels: hours.map((h) => `${h}:00`),
-    datasets,
-  };
+    return {
+      labels: hours.map((h) => `${h}:00`),
+      datasets,
+    };
+  }, [data, theme]); // ⭐ Ha új adat jön vagy theme vált → újrarenderel
 
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "bottom" as const,
-        labels: {
-          color: textColor, // ⭐ DARK MODE FIX
+  const options = useMemo(() => {
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "bottom" as const,
+          labels: {
+            color: textColor,
+          },
+        },
+        tooltip: {
+          backgroundColor: tooltipBg,
+          titleColor: tooltipTitle,
+          bodyColor: tooltipBody,
+          borderColor: tooltipBorder,
+          borderWidth: 1,
+          callbacks: {
+            label: (ctx: any) => `${ctx.dataset.label}: ${ctx.raw} cikk`,
+          },
         },
       },
-      tooltip: {
-        backgroundColor: tooltipBg, // ⭐ DARK MODE FIX
-        titleColor: tooltipTitle,
-        bodyColor: tooltipBody,
-        borderColor: tooltipBorder,
-        borderWidth: 1,
-        callbacks: {
-          label: (ctx: any) => `${ctx.dataset.label}: ${ctx.raw} cikk`,
+      scales: {
+        x: {
+          stacked: true,
+          ticks: { color: textColor },
+          grid: { color: gridColor },
+        },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+          ticks: { precision: 0, color: textColor },
+          grid: { color: gridColor },
         },
       },
-    },
-    scales: {
-      x: {
-        stacked: true,
-        ticks: { color: textColor }, // ⭐ DARK MODE FIX
-        grid: { color: gridColor },
-      },
-      y: {
-        stacked: true,
-        beginAtZero: true,
-        ticks: { precision: 0, color: textColor }, // ⭐ DARK MODE FIX
-        grid: { color: gridColor },
-      },
-    },
-  };
+    };
+  }, [theme]); // ⭐ Theme váltáskor újrarenderel
 
   return (
     <div className="wht-heatmap" style={{ height: "350px" }}>
       <h5 className="mb-3">Kategóriák aktivitása óránként</h5>
 
-      <Bar key={theme} data={chartData} options={options} />
+      {/* ⭐ Ugyanaz a kulcs logika, mint a nagy grafikonban */}
+      <Bar key={theme + JSON.stringify(data)} data={chartData} options={options} />
     </div>
   );
 }

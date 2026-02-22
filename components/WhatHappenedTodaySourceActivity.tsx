@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { useUserStore } from "@/store/useUserStore";
 
@@ -29,6 +29,7 @@ export default function WhatHappenedTodaySourceActivity() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
+  // ⭐ Automatikus frissítés (InsightsOverviewChart mintájára)
   useEffect(() => {
     async function load() {
       try {
@@ -43,7 +44,11 @@ export default function WhatHappenedTodaySourceActivity() {
         setLoading(false);
       }
     }
-    load();
+
+    load(); // első betöltés
+
+    const interval = setInterval(load, 60_000); // ⭐ 1 percenként frissít
+    return () => clearInterval(interval);
   }, []);
 
   if (loading) {
@@ -58,98 +63,109 @@ export default function WhatHappenedTodaySourceActivity() {
     return <div className="text-muted">Ma még nincs aktivitás.</div>;
   }
 
-  const sorted = [...data].sort((a, b) => b.total - a.total);
+  // ⭐ Rendezés minden frissítéskor
+  const sorted = useMemo(() => {
+    return [...data].sort((a, b) => b.total - a.total);
+  }, [data]);
 
-  const series = sorted.map((item) => ({
-    name: item.source,
-    data: [item.total],
-  }));
+  // ⭐ Series újraszámolása (InsightsOverviewChart mintájára)
+  const series = useMemo(() => {
+    return sorted.map((item) => ({
+      name: item.source,
+      data: [item.total],
+    }));
+  }, [sorted]);
 
-  const options: ApexCharts.ApexOptions = {
-    chart: {
-      type: "bar",
-      toolbar: { show: false },
-      stacked: false,
-    },
-
-    plotOptions: {
-      bar: {
-        horizontal: true,
-        borderRadius: 6,
-        barHeight: "60%",
+  // ⭐ Options újraszámolása theme alapján
+  const options: ApexCharts.ApexOptions = useMemo(() => {
+    return {
+      chart: {
+        type: "bar",
+        toolbar: { show: false },
+        stacked: false,
       },
-    },
 
-    xaxis: {
-      labels: { show: false },
-      axisBorder: { show: false },
-      axisTicks: { show: false },
-    },
-
-    yaxis: {
-      labels: { show: false },
-    },
-
-    colors: [
-      "#FF4D4F",
-      "#FFA940",
-      "#36CFC9",
-      "#40A9FF",
-      "#9254DE",
-      "#73D13D",
-      "#F759AB",
-      "#597EF7",
-      "#FFC53D",
-      "#5CDBD3",
-    ],
-
-    dataLabels: {
-      enabled: true,
-      formatter: (val) => `${val} db`,
-      style: {
-        fontSize: "14px",
-        fontWeight: 700,
-        colors: isDark ? ["#fff"] : ["#000"], // ⭐ DARK MODE FIX
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          borderRadius: 6,
+          barHeight: "60%",
+        },
       },
-      offsetX: 10,
-    },
 
-    legend: {
-      show: true,
-      position: "left",
-      horizontalAlign: "left",
-      fontSize: "15px",
-      fontWeight: 600,
-      labels: {
-        colors: isDark ? "#fff" : "#000", // ⭐ DARK MODE FIX
+      xaxis: {
+        labels: { show: false },
+        axisBorder: { show: false },
+        axisTicks: { show: false },
       },
-      markers: {
-        size: 14,
-      },
-    },
 
-    tooltip: {
-      shared: false,
-      theme: isDark ? "dark" : "light", // ⭐ DARK MODE FIX
-      y: {
+      yaxis: {
+        labels: { show: false },
+      },
+
+      colors: [
+        "#FF4D4F",
+        "#FFA940",
+        "#36CFC9",
+        "#40A9FF",
+        "#9254DE",
+        "#73D13D",
+        "#F759AB",
+        "#597EF7",
+        "#FFC53D",
+        "#5CDBD3",
+      ],
+
+      dataLabels: {
+        enabled: true,
         formatter: (val) => `${val} db`,
+        style: {
+          fontSize: "14px",
+          fontWeight: 700,
+          colors: isDark ? ["#fff"] : ["#000"],
+        },
+        offsetX: 10,
       },
-      x: {
-        formatter: () => "",
-      },
-      marker: {
-        show: false,
-      },
-    },
 
-    grid: { show: false },
-  };
+      legend: {
+        show: true,
+        position: "left",
+        horizontalAlign: "left",
+        fontSize: "15px",
+        fontWeight: 600,
+        labels: {
+          colors: isDark ? "#fff" : "#000",
+        },
+        markers: {
+          size: 14,
+        },
+      },
+
+      tooltip: {
+        shared: false,
+        theme: isDark ? "dark" : "light",
+        y: {
+          formatter: (val) => `${val} db`,
+        },
+        x: {
+          formatter: () => "",
+        },
+        marker: {
+          show: false,
+        },
+      },
+
+      grid: { show: false },
+    };
+  }, [theme]);
 
   return (
     <div className="wht-source-activity">
       <h5 className="mb-3 text-center">Források aktivitása ma</h5>
+
+      {/* ⭐ Ugyanaz a kulcs logika, mint az InsightsOverviewChart-ban */}
       <ApexChart
-        key={theme} // ⭐ fontos: újrarendereli a chartot theme váltáskor
+        key={theme + JSON.stringify(data)}
         options={options}
         series={series}
         type="bar"
