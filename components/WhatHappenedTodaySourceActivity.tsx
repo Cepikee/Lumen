@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
+import { useUserStore } from "@/store/useUserStore";
 
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -20,6 +21,13 @@ interface ApiResponse {
 export default function WhatHappenedTodaySourceActivity() {
   const [data, setData] = useState<SourceItem[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const theme = useUserStore((s) => s.theme);
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   useEffect(() => {
     async function load() {
@@ -50,10 +58,8 @@ export default function WhatHappenedTodaySourceActivity() {
     return <div className="text-muted">Ma még nincs aktivitás.</div>;
   }
 
-  // Rendezés: legtöbb cikk → legkevesebb
   const sorted = [...data].sort((a, b) => b.total - a.total);
 
-  // ⭐ Minden forrás külön series → így lesz színes + kattintható
   const series = sorted.map((item) => ({
     name: item.source,
     data: [item.total],
@@ -63,7 +69,7 @@ export default function WhatHappenedTodaySourceActivity() {
     chart: {
       type: "bar",
       toolbar: { show: false },
-      stacked: false, // ⭐ NEM stacked!
+      stacked: false,
     },
 
     plotOptions: {
@@ -74,22 +80,16 @@ export default function WhatHappenedTodaySourceActivity() {
       },
     },
 
-    // ⭐ Nincs jobboldali tengely
     xaxis: {
-    labels: {
-    show: false, 
-  },
-  axisBorder: { show: false },
-  axisTicks: { show: false },
-},
-
-
-    // ⭐ Bal oldalt a forrásnevek (legendából)
-    yaxis: {
-      labels: { show: false }, // a legend lesz a névlista
+      labels: { show: false },
+      axisBorder: { show: false },
+      axisTicks: { show: false },
     },
 
-    // ⭐ Színes csíkok
+    yaxis: {
+      labels: { show: false },
+    },
+
     colors: [
       "#FF4D4F",
       "#FFA940",
@@ -103,41 +103,44 @@ export default function WhatHappenedTodaySourceActivity() {
       "#5CDBD3",
     ],
 
-    // ⭐ Darabszám a csík végén
     dataLabels: {
       enabled: true,
       formatter: (val) => `${val} db`,
       style: {
         fontSize: "14px",
         fontWeight: 700,
+        colors: isDark ? ["#fff"] : ["#000"], // ⭐ DARK MODE FIX
       },
       offsetX: 10,
     },
 
-    // ⭐ Kattintható legenda bal oldalon
     legend: {
       show: true,
       position: "left",
       horizontalAlign: "left",
       fontSize: "15px",
       fontWeight: 600,
+      labels: {
+        colors: isDark ? "#fff" : "#000", // ⭐ DARK MODE FIX
+      },
       markers: {
         size: 14,
       },
     },
-    tooltip: {
-  shared: false,
-  y: {
-    formatter: (val) => `${val} db`,
-  },
-  x: {
-    formatter: () => "",
-  },
-  marker: {
-    show: false,
-  },
-},
 
+    tooltip: {
+      shared: false,
+      theme: isDark ? "dark" : "light", // ⭐ DARK MODE FIX
+      y: {
+        formatter: (val) => `${val} db`,
+      },
+      x: {
+        formatter: () => "",
+      },
+      marker: {
+        show: false,
+      },
+    },
 
     grid: { show: false },
   };
@@ -145,7 +148,13 @@ export default function WhatHappenedTodaySourceActivity() {
   return (
     <div className="wht-source-activity">
       <h5 className="mb-3 text-center">Források aktivitása ma</h5>
-      <ApexChart options={options} series={series} type="bar" height={350} />
+      <ApexChart
+        key={theme} // ⭐ fontos: újrarendereli a chartot theme váltáskor
+        options={options}
+        series={series}
+        type="bar"
+        height={350}
+      />
     </div>
   );
 }
