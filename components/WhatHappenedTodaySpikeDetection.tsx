@@ -51,7 +51,7 @@ export default function WhatHappenedTodaySpikeDetection() {
 
   const getIcon = (type: SpikeItem["type"]) => {
     if (type === "category") return "🔥";
-    return "⚡"; // source
+    return "⚡";
   };
 
   const getLevelText = (level: SpikeItem["level"]) => {
@@ -60,12 +60,16 @@ export default function WhatHappenedTodaySpikeDetection() {
     return "enyhe spike";
   };
 
+  // ⭐ IDŐRENDI RENDEZÉS (balról jobbra)
+  const sorted = [...data].sort((a, b) => a.hour - b.hour);
+
   return (
     <div className="wht-spike-detection">
-      <h5 className="mb-3">Kiugró aktivitások ma</h5>
+      <h5 className="mb-3 text-center">Kiugró aktivitások ma</h5>
 
-      <div className="list-group">
-        {data.map((item, idx) => (
+      {/* ⭐ VÍZSZINTES SCROLL + FIX MAGASSÁG */}
+      <div className="list-group horizontal-list">
+        {sorted.map((item, idx) => (
           <div
             key={idx}
             className={`list-group-item wht-spike-item wht-spike-${item.level}`}
