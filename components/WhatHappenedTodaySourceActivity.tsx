@@ -77,11 +77,7 @@ export default function WhatHappenedTodaySourceActivity() {
     // ⭐ Nincs jobboldali tengely
     xaxis: {
     labels: {
-    show: true,
-    style: {
-      fontSize: "12px",
-      colors: "#999",
-    },
+    show: false, 
   },
   axisBorder: { show: false },
   axisTicks: { show: false },
@@ -129,7 +125,11 @@ export default function WhatHappenedTodaySourceActivity() {
         size: 14,
       },
     },
-    tooltip: { shared: false, },
+    tooltip: { shared: false,
+      y: { formatter: () => "", 
+
+      },
+     },
 
     grid: { show: false },
   };
