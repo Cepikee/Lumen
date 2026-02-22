@@ -1856,85 +1856,199 @@ html.theme-dark .nav-link {
 
 
 /* =========================
-   Spike Detection V2 styles
-   (könnyen eltávolítható: .spike-v2-*)
+   Spike Detection V2 — HORIZONTAL COMPACT (200x200)
+   Replaces vertical list with a horizontal, scrollable strip.
+   Easy to remove: all classes start with .spike-v2-*
    ========================= */
 
 .spike-v2-root {
+  --strip-width: 200px;
+  --strip-height: 200px;
+  box-sizing: border-box;
+  width: var(--strip-width);
+  height: var(--strip-height);
   background: var(--bs-body-bg);
   border-radius: 10px;
-  padding: 12px;
+  padding: 8px;
   border: 1px solid rgba(0,0,0,0.06);
-  min-height: 120px;
-}
-
-.spike-v2-title {
-  font-size: 1rem;
-  margin-bottom: 8px;
-}
-
-.spike-v2-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  max-height: 420px;
-  overflow-y: auto;
-  padding-right: 6px;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
 }
 
-.spike-v2-item {
+/* Title (small, compact) */
+.spike-v2-title {
+  font-size: 0.85rem;
+  margin: 0;
+  padding: 0 2px;
+  line-height: 1;
+  color: var(--bs-body-color);
+}
+
+/* Viewport: fixed height, horizontal scroll only */
+.spike-v2-list {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  border-radius: 8px;
-  transition: background 0.12s ease, transform 0.08s ease;
-  cursor: pointer;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  flex-direction: row;
+  gap: 8px;
+  align-items: stretch;
+  height: calc(var(--strip-height) - 36px); /* leave room for title and nav */
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
+/* Hide vertical scrollbar visuals on WebKit while keeping horizontal */
+.spike-v2-list::-webkit-scrollbar { height: 8px; }
+.spike-v2-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 6px; }
+
+/* Each item is a compact horizontal card (fixed width to fit inside 200px container) */
+.spike-v2-item {
+  flex: 0 0 160px; /* card width; fits with padding/gaps inside 200px box */
+  height: 140px;
+  min-width: 140px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+  cursor: pointer;
+  text-align: left;
+  color: var(--bs-body-color);
+  box-sizing: border-box;
+}
+
+/* Hover / focus micro animation */
 .spike-v2-item:focus,
 .spike-v2-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  outline: none;
 }
 
-.spike-v2-left { display:flex; gap:10px; align-items:flex-start; }
+/* Left block: label (compact) */
+.spike-v2-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 
-.spike-v2-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+/* Icon removed (not needed) — keep space minimal */
+.spike-v2-icon { display: none; }
+
+/* Label: single line, ellipsis */
+.spike-v2-label {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.05;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Remove type tag entirely (user requested) */
+.spike-v2-type { display: none !important; }
+
+/* Compact meta (hour + small text) */
+.spike-v2-meta {
+  font-size: 0.72rem;
+  color: rgba(0,0,0,0.6);
+}
+
+/* Right block: value + badge */
+.spike-v2-right {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  background: rgba(0,0,0,0.04);
+  gap: 8px;
+  justify-content: flex-end;
+  min-width: 72px;
 }
 
-.spike-v2-label { font-size: 0.95rem; }
-.spike-v2-type { font-size: 0.75rem; opacity: 0.8; margin-left: 6px; }
+/* Value styling */
+.spike-v2-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bs-body-color);
+}
 
-.spike-v2-meta { font-size: 0.78rem; opacity: 0.7; margin-top: 4px; }
+/* Badge: compact pill */
+.spike-v2-badge {
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  white-space: nowrap;
+}
 
-.spike-v2-right { display:flex; align-items:center; gap:8px; min-width: 92px; }
-
-.spike-v2-value { font-size: 1.05rem; color: var(--bs-body-color); }
-
-.spike-v2-badge { font-weight: 700; padding: 6px 10px; border-radius: 8px; font-size: 0.75rem; }
-
-/* szintek */
-.spike-v2-level-mild { border-left: 4px solid rgba(99,102,241,0.6); }
-.spike-v2-level-strong { border-left: 4px solid rgba(250,204,21,0.85); }
+/* Level left border (subtle) */
+.spike-v2-level-mild { border-left: 4px solid rgba(96,165,250,0.9); }
+.spike-v2-level-strong { border-left: 4px solid rgba(245,158,11,0.95); }
 .spike-v2-level-brutal { border-left: 4px solid rgba(239,68,68,0.95); }
 
-/* badge színek (bootstrap bg helyett, ha kell) */
+/* Badge color overrides (compact) */
 .spike-v2-badge-brutal { background: linear-gradient(90deg,#ef4444,#fb923c); color: #fff; }
 .spike-v2-badge-strong { background: linear-gradient(90deg,#f59e0b,#f97316); color: #111; }
 .spike-v2-badge-mild { background: linear-gradient(90deg,#60a5fa,#7c3aed); color: #fff; }
 
-/* responsive */
-@media (max-width: 900px) {
-  .spike-v2-right { min-width: 64px; gap:6px; }
-  .spike-v2-icon { width: 30px; height: 30px; font-size: 16px; }
+/* Replace vertical list layout internals for compact card content */
+.spike-v2-item .spike-v2-left,
+.spike-v2-item .spike-v2-right {
+  width: 100%;
 }
+
+/* Add a small inline bar to visualize magnitude (inside left area) */
+.spike-v2-barwrap {
+  height: 10px;
+  background: rgba(0,0,0,0.03);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+.spike-v2-bar {
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg,#ff7a00,#ef4444);
+  transition: width 0.25s ease;
+}
+
+/* Navigation arrows (optional) — small, unobtrusive */
+.spike-v2-nav {
+  position: absolute;
+  top: 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  color: rgba(0,0,0,0.7);
+  z-index: 10;
+}
+.spike-v2-nav.left { left: 6px; transform: translateY(-6px); }
+.spike-v2-nav.right { right: 6px; transform: translateY(-6px); }
+
+/* Accessibility: focus ring for keyboard users */
+.spike-v2-item:focus { box-shadow: 0 0 0 3px rgba(99,102,241,0.12); outline: none; }
+
+/* Mobile adjustments: slightly smaller cards if space is tight */
+@media (max-width: 360px) {
+  .spike-v2-root { --strip-width: 180px; --strip-height: 180px; padding: 6px; }
+  .spike-v2-item { flex: 0 0 140px; height: 120px; padding: 6px; }
+  .spike-v2-label { font-size: 0.86rem; }
+  .spike-v2-value { font-size: 0.95rem; }
+}
+
+/* Utility: hide the original vertical scrollbar if present */
+.spike-v2-list { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.12) transparent; }
