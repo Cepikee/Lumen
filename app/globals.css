@@ -1798,3 +1798,19 @@ html.theme-dark .nav-link {
 .horizontal-list .list-group-item:hover {
   background: rgba(0,0,0,0.05);
 }
+/* ============================
+   JOBB OLDALI KÉT MODUL MAGASSÁG FIX
+   ============================ */
+
+/* SpikeDetection legyen fél magasságú */
+.horizontal-list:first-of-type {
+  min-height: 300px !important;
+  max-height: 300px !important;
+}
+
+/* Kulcsszavak modul is fél magasságú */
+.horizontal-list:last-of-type {
+  min-height: 300px !important;
+  max-height: 300px !important;
+}
+
