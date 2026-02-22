@@ -36,15 +36,15 @@ export default function WhatHappenedToday() {
             </div>
           </div>
 
-          {/* JOBB BLOKK – KÉT ELEM EGY OSZLOPBAN */}
+          {/* JOBB BLOKK – KÉT ELEM EGY OSZLOPBAN (A JOBB OLDALON A TARTALOM VÍZSZINTESEN JELENIK MEG) */}
           <div className="col-12 col-lg-4 d-flex flex-column gap-4">
 
-            {/* FENT – KIUGRÓ AKTIVITÁSOK (VÍZSZINTES) */}
+            {/* FENT – KIUGRÓ AKTIVITÁSOK (VÍZSZINTES LISTA) */}
             <div className="wht-box module-box horizontal-box">
               <WhatHappenedTodaySpikeDetection />
             </div>
 
-            {/* LENT – FELKAPOTT KULCSSZAVAK (VÍZSZINTES) */}
+            {/* LENT – FELKAPOTT KULCSSZAVAK (VÍZSZINTES LISTA) */}
             <div className="wht-box module-box horizontal-box">
               <WhatHappenedTodayKulcsszavak />
             </div>
