@@ -53,18 +53,17 @@ export default function WhatHappenedTodaySourceActivity() {
   // Rendezés: legtöbb cikk → legkevesebb
   const sorted = [...data].sort((a, b) => b.total - a.total);
 
-  // Sima horizontal bar chart → minden forrás egy bar
-  const series = [
-    {
-      name: "Cikkek száma",
-      data: sorted.map((item) => item.total),
-    },
-  ];
+  // ⭐ Minden forrás külön series → így lesz színes + kattintható
+  const series = sorted.map((item) => ({
+    name: item.source,
+    data: [item.total],
+  }));
 
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: "bar",
       toolbar: { show: false },
+      stacked: false, // ⭐ NEM stacked!
     },
 
     plotOptions: {
@@ -75,25 +74,19 @@ export default function WhatHappenedTodaySourceActivity() {
       },
     },
 
-    // Bal oldalon a forrásnevek
-    yaxis: {
-      labels: {
-        style: {
-          fontSize: "15px",
-          fontWeight: 600,
-        },
-      },
-    },
-
-    // Forrásnevek kategóriaként
+    // ⭐ Nincs jobboldali tengely
     xaxis: {
-      categories: sorted.map((item) => item.source),
-      labels: {
-        show: false, // jobboldali függőleges tengely eltüntetése
-      },
+      labels: { show: false },
+      axisBorder: { show: false },
+      axisTicks: { show: false },
     },
 
-    // Színes csíkok
+    // ⭐ Bal oldalt a forrásnevek (legendából)
+    yaxis: {
+      labels: { show: false }, // a legend lesz a névlista
+    },
+
+    // ⭐ Színes csíkok
     colors: [
       "#FF4D4F",
       "#FFA940",
@@ -107,7 +100,7 @@ export default function WhatHappenedTodaySourceActivity() {
       "#5CDBD3",
     ],
 
-    // Darabszám a csík végén
+    // ⭐ Darabszám a csík végén
     dataLabels: {
       enabled: true,
       formatter: (val) => `${val} db`,
@@ -118,8 +111,19 @@ export default function WhatHappenedTodaySourceActivity() {
       offsetX: 10,
     },
 
+    // ⭐ Kattintható legenda bal oldalon
+    legend: {
+      show: true,
+      position: "left",
+      horizontalAlign: "left",
+      fontSize: "15px",
+      fontWeight: 600,
+      markers: {
+        size: 14,
+      },
+    },
+
     grid: { show: false },
-    legend: { show: false },
   };
 
   return (
