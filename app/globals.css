@@ -1751,12 +1751,12 @@ html.theme-dark .nav-link {
   border-radius: 12px;
   max-width: 1400px;
   width: 100%;
-  padding: 30px;
+  padding: 34px;
 }
 
 .module-box {
-  min-height: 350px;
-  max-height: 350px;
+  min-height: 420px;
+  max-height: 420px;
   overflow-y: auto;
   border-radius: 10px;
 }
