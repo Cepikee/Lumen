@@ -53,7 +53,7 @@ export default function WhatHappenedTodaySourceActivity() {
   // Rendezés: legtöbb cikk → legkevesebb
   const sorted = [...data].sort((a, b) => b.total - a.total);
 
-  // ⭐ MINDEN FORRÁS KÜLÖN SERIES → így lesz színes
+  // Minden forrás külön series → így lesz színes
   const series = sorted.map((item) => ({
     name: item.source,
     data: [item.total],
@@ -65,6 +65,7 @@ export default function WhatHappenedTodaySourceActivity() {
       stacked: true,
       toolbar: { show: false },
     },
+
     plotOptions: {
       bar: {
         horizontal: true,
@@ -73,18 +74,17 @@ export default function WhatHappenedTodaySourceActivity() {
       },
     },
 
-    // ⭐ Csak 1 kategória kell, mert stacked bar
+    // ❗ A "Források" felirat eltávolítva → üres kategória
     xaxis: {
-      categories: ["Források"],
+      categories: [""],
       labels: {
         style: {
-          fontSize: "15px",
-          fontWeight: 600,
+          fontSize: "0px", // teljesen elrejtjük
         },
       },
     },
 
-    // ⭐ Színes paletta – minden forrás más szín
+    // ⭐ Színes paletta
     colors: [
       "#FF4D4F",
       "#FFA940",
@@ -103,11 +103,16 @@ export default function WhatHappenedTodaySourceActivity() {
       style: { fontSize: "13px", fontWeight: 700 },
     },
 
+    // ⭐ Legenda bal oldalon
     legend: {
       show: true,
-      position: "right",
-      fontSize: "14px",
+      position: "left",
+      horizontalAlign: "left",
+      fontSize: "15px",
       fontWeight: 600,
+      markers: {
+        size: 14,
+      },
     },
 
     grid: { show: false },
