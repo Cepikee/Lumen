@@ -1855,21 +1855,22 @@ html.theme-dark .nav-link {
 
 
 
+
+
 /* =========================
-   Spike Detection V2 — HORIZONTAL COMPACT (200x200)
-   Replaces vertical list with a horizontal, scrollable strip.
-   Easy to remove: all classes start with .spike-v2-*
+   Spike strip — compact 200x200 (frissített, nagyobb olvashatóság)
+   All classes start with .spike-v2-*
    ========================= */
 
 .spike-v2-root {
-  --strip-width: 200px;
-  --strip-height: 200px;
+  --strip-w: 200px;
+  --strip-h: 200px;
   box-sizing: border-box;
-  width: var(--strip-width);
-  height: var(--strip-height);
+  width: var(--strip-w);
+  height: var(--strip-h);
   background: var(--bs-body-bg);
   border-radius: 10px;
-  padding: 8px;
+  padding: 10px;
   border: 1px solid rgba(0,0,0,0.06);
   display: flex;
   flex-direction: column;
@@ -1878,22 +1879,23 @@ html.theme-dark .nav-link {
   overflow: hidden;
 }
 
-/* Title (small, compact) */
+/* Title */
 .spike-v2-title {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   margin: 0;
   padding: 0 2px;
   line-height: 1;
   color: var(--bs-body-color);
+  font-weight: 700;
 }
 
-/* Viewport: fixed height, horizontal scroll only */
+/* Horizontal viewport */
 .spike-v2-list {
   display: flex;
   flex-direction: row;
   gap: 8px;
   align-items: stretch;
-  height: calc(var(--strip-height) - 36px); /* leave room for title and nav */
+  height: calc(var(--strip-h) - 40px); /* title + nav hely */
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 6px;
@@ -1901,19 +1903,19 @@ html.theme-dark .nav-link {
   scroll-behavior: smooth;
 }
 
-/* Hide vertical scrollbar visuals on WebKit while keeping horizontal */
+/* scrollbar styling */
 .spike-v2-list::-webkit-scrollbar { height: 8px; }
 .spike-v2-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 6px; }
 
-/* Each item is a compact horizontal card (fixed width to fit inside 200px container) */
+/* Card */
 .spike-v2-item {
-  flex: 0 0 160px; /* card width; fits with padding/gaps inside 200px box */
-  height: 140px;
-  min-width: 140px;
+  flex: 0 0 170px; /* kártya szélesség; 170 + gap illeszkedik 200px dobozba */
+  height: 150px;
+  min-width: 150px;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
   border-radius: 8px;
   border: 1px solid rgba(0,0,0,0.06);
-  padding: 8px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1924,7 +1926,7 @@ html.theme-dark .nav-link {
   box-sizing: border-box;
 }
 
-/* Hover / focus micro animation */
+/* Hover / focus */
 .spike-v2-item:focus,
 .spike-v2-item:hover {
   transform: translateY(-3px);
@@ -1933,19 +1935,9 @@ html.theme-dark .nav-link {
   outline: none;
 }
 
-/* Left block: label (compact) */
-.spike-v2-left {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-/* Icon removed (not needed) — keep space minimal */
-.spike-v2-icon { display: none; }
-
-/* Label: single line, ellipsis */
+/* Label */
 .spike-v2-label {
-  font-size: 0.92rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.05;
   white-space: nowrap;
@@ -1954,16 +1946,13 @@ html.theme-dark .nav-link {
   max-width: 100%;
 }
 
-/* Remove type tag entirely (user requested) */
-.spike-v2-type { display: none !important; }
-
-/* Compact meta (hour + small text) */
+/* Meta small */
 .spike-v2-meta {
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   color: rgba(0,0,0,0.6);
 }
 
-/* Right block: value + badge */
+/* Right block */
 .spike-v2-right {
   display: flex;
   align-items: center;
@@ -1972,57 +1961,40 @@ html.theme-dark .nav-link {
   min-width: 72px;
 }
 
-/* Value styling */
+/* Value */
 .spike-v2-value {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 800;
   color: var(--bs-body-color);
 }
 
-/* Badge: compact pill */
+/* Badge */
 .spike-v2-badge {
-  font-weight: 700;
-  padding: 4px 8px;
+  font-weight: 800;
+  padding: 6px 10px;
   border-radius: 999px;
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   white-space: nowrap;
 }
 
-/* Level left border (subtle) */
+/* Level border */
 .spike-v2-level-mild { border-left: 4px solid rgba(96,165,250,0.9); }
 .spike-v2-level-strong { border-left: 4px solid rgba(245,158,11,0.95); }
 .spike-v2-level-brutal { border-left: 4px solid rgba(239,68,68,0.95); }
 
-/* Badge color overrides (compact) */
+/* Badge colors */
 .spike-v2-badge-brutal { background: linear-gradient(90deg,#ef4444,#fb923c); color: #fff; }
 .spike-v2-badge-strong { background: linear-gradient(90deg,#f59e0b,#f97316); color: #111; }
 .spike-v2-badge-mild { background: linear-gradient(90deg,#60a5fa,#7c3aed); color: #fff; }
 
-/* Replace vertical list layout internals for compact card content */
-.spike-v2-item .spike-v2-left,
-.spike-v2-item .spike-v2-right {
-  width: 100%;
-}
+/* Inline magnitude bar */
+.spike-v2-barwrap { height: 12px; background: rgba(0,0,0,0.03); border-radius: 6px; overflow: hidden; margin-top: 6px; }
+.spike-v2-bar { height: 100%; border-radius: 6px; background: linear-gradient(90deg,#ff7a00,#ef4444); transition: width 0.25s ease; }
 
-/* Add a small inline bar to visualize magnitude (inside left area) */
-.spike-v2-barwrap {
-  height: 10px;
-  background: rgba(0,0,0,0.03);
-  border-radius: 6px;
-  overflow: hidden;
-  margin-top: 6px;
-}
-.spike-v2-bar {
-  height: 100%;
-  border-radius: 6px;
-  background: linear-gradient(90deg,#ff7a00,#ef4444);
-  transition: width 0.25s ease;
-}
-
-/* Navigation arrows (optional) — small, unobtrusive */
+/* Nav buttons */
 .spike-v2-nav {
   position: absolute;
-  top: 28px;
+  top: 30px;
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -2039,16 +2011,13 @@ html.theme-dark .nav-link {
 .spike-v2-nav.left { left: 6px; transform: translateY(-6px); }
 .spike-v2-nav.right { right: 6px; transform: translateY(-6px); }
 
-/* Accessibility: focus ring for keyboard users */
+/* Accessibility focus */
 .spike-v2-item:focus { box-shadow: 0 0 0 3px rgba(99,102,241,0.12); outline: none; }
 
-/* Mobile adjustments: slightly smaller cards if space is tight */
+/* Small screens */
 @media (max-width: 360px) {
-  .spike-v2-root { --strip-width: 180px; --strip-height: 180px; padding: 6px; }
-  .spike-v2-item { flex: 0 0 140px; height: 120px; padding: 6px; }
-  .spike-v2-label { font-size: 0.86rem; }
-  .spike-v2-value { font-size: 0.95rem; }
+  .spike-v2-root { --strip-w: 180px; --strip-h: 180px; padding: 8px; }
+  .spike-v2-item { flex: 0 0 140px; height: 120px; padding: 8px; }
+  .spike-v2-label { font-size: 0.92rem; }
+  .spike-v2-value { font-size: 1rem; }
 }
-
-/* Utility: hide the original vertical scrollbar if present */
-.spike-v2-list { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.12) transparent; }
