@@ -3,7 +3,7 @@
 import useSWR from "swr";
 import { useState, useRef, useEffect } from "react";
 import Spinner from "react-bootstrap/Spinner";
-import { Badge, Modal, Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 type SpikeLevel = "mild" | "strong" | "brutal";
 
@@ -25,15 +25,17 @@ export default function WhatHappenedTodaySpikeDetection() {
 
   const [open, setOpen] = useState<SpikeItem | null>(null);
   const stripRef = useRef<HTMLDivElement | null>(null);
+  const prevLenRef = useRef<number>(0);
 
-  // Auto-scroll to left (newest) when data arrives
+  // Auto-scroll to left (newest) when data arrives or when new items appear
   useEffect(() => {
-    if (!stripRef.current) return;
-    // small timeout to allow rendering
-    const t = setTimeout(() => {
-      stripRef.current!.scrollLeft = 0;
-    }, 50);
-    return () => clearTimeout(t);
+    if (!stripRef.current || !data) return;
+    const len = Array.isArray(data.spikes) ? data.spikes.length : 0;
+    // if first load or new items added, scroll to left (newest)
+    if (prevLenRef.current === 0 || len > prevLenRef.current) {
+      setTimeout(() => { if (stripRef.current) stripRef.current.scrollLeft = 0; }, 40);
+    }
+    prevLenRef.current = len;
   }, [data]);
 
   if (isLoading) {

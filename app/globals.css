@@ -1858,7 +1858,7 @@ html.theme-dark .nav-link {
 
 
 /* =========================
-   Spike strip — compact 200x200 (frissített, nagyobb olvashatóság)
+   Spike strip — final compact 200x200
    All classes start with .spike-v2-*
    ========================= */
 
@@ -1877,6 +1877,7 @@ html.theme-dark .nav-link {
   gap: 6px;
   position: relative;
   overflow: hidden;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
 /* Title */
@@ -1909,7 +1910,7 @@ html.theme-dark .nav-link {
 
 /* Card */
 .spike-v2-item {
-  flex: 0 0 170px; /* kártya szélesség; 170 + gap illeszkedik 200px dobozba */
+  flex: 0 0 160px; /* kártya szélesség; 160 + gap illeszkedik 200px dobozba */
   height: 150px;
   min-width: 150px;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
