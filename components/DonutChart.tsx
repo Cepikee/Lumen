@@ -10,7 +10,12 @@ import {
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function DonutChart({ sources }: { sources: { name: string; percent: number }[] }) {
+export type DonutChartProps = {
+  sources: { name: string; percent: number }[];
+  isDark?: boolean;   // ⭐ HOZZÁADVA
+};
+
+export default function DonutChart({ sources, isDark = false }: DonutChartProps) {
   const labels = sources.map(s => s.name);
   const dataValues = sources.map(s => s.percent);
 
@@ -37,6 +42,11 @@ export default function DonutChart({ sources }: { sources: { name: string; perce
           plugins: {
             legend: { display: false },
             tooltip: {
+              backgroundColor: isDark ? "#222" : "#fff",   // ⭐ DARK MODE
+              titleColor: isDark ? "#fff" : "#000",
+              bodyColor: isDark ? "#ddd" : "#333",
+              borderColor: isDark ? "#444" : "#ccc",
+              borderWidth: 1,
               callbacks: {
                 label: (ctx) => `${ctx.label}: ${ctx.raw}%`,
               },
