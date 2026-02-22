@@ -1829,8 +1829,8 @@ html.theme-dark .nav-link {
 
 /* SpikeDetection legyen fél magasságú */
 .horizontal-list:first-of-type {
-  min-height: 300px !important;
-  max-height: 300px !important;
+  min-height: 100px !important;
+  max-height: 100px !important;
 }
 
 /* Kulcsszavak modul is fél magasságú */
