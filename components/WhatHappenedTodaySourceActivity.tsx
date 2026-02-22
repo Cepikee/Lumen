@@ -61,30 +61,50 @@ export default function WhatHappenedTodaySourceActivity() {
   ];
 
   const options: ApexCharts.ApexOptions = {
-    chart: {
-      type: "bar",
-      stacked: true,
-      toolbar: { show: false },
+  chart: {
+    type: "bar",
+    stacked: true,
+    toolbar: { show: false },
+  },
+  plotOptions: {
+    bar: {
+      horizontal: true,
+      borderRadius: 6,
+      barHeight: "60%",
     },
-    plotOptions: {
-      bar: {
-        horizontal: true,
-        borderRadius: 6,
-        barHeight: "60%",
-      },
+  },
+  xaxis: {
+    categories: sorted.map((item) => item.source),
+    labels: { 
+      style: { 
+        fontSize: "15px",   // ⭐ nagyobb betűméret
+        fontWeight: 600,
+      } 
     },
-    xaxis: {
-      categories: sorted.map((item) => item.source),
-      labels: { style: { fontSize: "13px" } },
-    },
-    colors: ["#ff4d4f"],
-    dataLabels: {
-      enabled: true,
-      style: { fontSize: "12px", fontWeight: 600 },
-    },
-    grid: { show: false },
-    legend: { show: false },
-  };
+  },
+
+  // ⭐ Többszínű paletta (szép, modern, harmonikus)
+  colors: [
+    "#FF4D4F",
+    "#FFA940",
+    "#36CFC9",
+    "#40A9FF",
+    "#9254DE",
+    "#73D13D",
+    "#F759AB",
+    "#597EF7",
+    "#FFC53D",
+    "#5CDBD3",
+  ],
+
+  dataLabels: {
+    enabled: true,
+    style: { fontSize: "13px", fontWeight: 700 },
+  },
+  grid: { show: false },
+  legend: { show: false },
+};
+
 
   return (
     <div className="wht-source-activity">
