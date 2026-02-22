@@ -20,7 +20,7 @@ interface SpikeItem {
 
 export default function WhatHappenedTodaySpikeDetectionV2() {
   const { data, error, isLoading } = useSWR<{ success: boolean; spikes: SpikeItem[] }>(
-    "/api/insights/spike-detection-v2",
+    "/api/insights/spike-detection",
     fetcher,
     { refreshInterval: 60_000, revalidateOnFocus: true }
   );
