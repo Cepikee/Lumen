@@ -29,26 +29,33 @@ export default function WhatHappenedTodaySourceActivity() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-  // ⭐ Automatikus frissítés (InsightsOverviewChart mintájára)
+  // fetch + mounted guard
   useEffect(() => {
+    let mounted = true;
     async function load() {
       try {
         const res = await fetch("/api/insights/source-activity");
         const json: ApiResponse = await res.json();
+        if (!mounted) return;
         if (json.success) {
-          setData(json.sources);
+          setData(json.sources || []);
+        } else {
+          setData([]);
         }
       } catch (err) {
         console.error("Source activity fetch error:", err);
+        if (mounted) setData([]);
       } finally {
-        setLoading(false);
+        if (mounted) setLoading(false);
       }
     }
 
-    load(); // első betöltés
-
-    const interval = setInterval(load, 60_000); // ⭐ 1 percenként frissít
-    return () => clearInterval(interval);
+    load();
+    const interval = setInterval(load, 60_000);
+    return () => {
+      mounted = false;
+      clearInterval(interval);
+    };
   }, []);
 
   if (loading) {
@@ -63,24 +70,22 @@ export default function WhatHappenedTodaySourceActivity() {
     return <div className="text-muted">Ma még nincs aktivitás.</div>;
   }
 
-  // ⭐ Rendezés minden frissítéskor
+  // safe sorted
   const sorted = useMemo(() => {
-  if (!data || !Array.isArray(data)) return [];
-  return [...data].sort((a, b) => b.total - a.total);
-}, [data]);
+    if (!data || !Array.isArray(data)) return [];
+    return [...data].sort((a, b) => b.total - a.total);
+  }, [data]);
 
-
-  // ⭐ Series újraszámolása (InsightsOverviewChart mintájára)
+  // safe series
   const series = useMemo(() => {
-  if (!sorted.length) return [];
-  return sorted.map((item) => ({
-    name: item.source,
-    data: [item.total],
-  }));
-}, [sorted]);
+    if (!sorted || !sorted.length) return [];
+    return sorted.map((item) => ({
+      name: item.source,
+      data: [item.total],
+    }));
+  }, [sorted]);
 
-
-  // ⭐ Options újraszámolása theme alapján
+  // options depends on isDark (not only theme)
   const options: ApexCharts.ApexOptions = useMemo(() => {
     return {
       chart: {
@@ -88,7 +93,6 @@ export default function WhatHappenedTodaySourceActivity() {
         toolbar: { show: false },
         stacked: false,
       },
-
       plotOptions: {
         bar: {
           horizontal: true,
@@ -96,17 +100,14 @@ export default function WhatHappenedTodaySourceActivity() {
           barHeight: "60%",
         },
       },
-
       xaxis: {
         labels: { show: false },
         axisBorder: { show: false },
         axisTicks: { show: false },
       },
-
       yaxis: {
         labels: { show: false },
       },
-
       colors: [
         "#FF4D4F",
         "#FFA940",
@@ -119,7 +120,6 @@ export default function WhatHappenedTodaySourceActivity() {
         "#FFC53D",
         "#5CDBD3",
       ],
-
       dataLabels: {
         enabled: true,
         formatter: (val) => `${val} db`,
@@ -130,7 +130,6 @@ export default function WhatHappenedTodaySourceActivity() {
         },
         offsetX: 10,
       },
-
       legend: {
         show: true,
         position: "left",
@@ -144,7 +143,6 @@ export default function WhatHappenedTodaySourceActivity() {
           size: 14,
         },
       },
-
       tooltip: {
         shared: false,
         theme: isDark ? "dark" : "light",
@@ -158,18 +156,16 @@ export default function WhatHappenedTodaySourceActivity() {
           show: false,
         },
       },
-
       grid: { show: false },
     };
-  }, [theme]);
+  }, [isDark]); // <-- isDark itt a fontos dependency
 
   return (
     <div className="wht-source-activity">
       <h5 className="mb-3 text-center">Források aktivitása ma</h5>
 
-      {/* ⭐ Ugyanaz a kulcs logika, mint az InsightsOverviewChart-ban */}
       <ApexChart
-        key={theme + "-" + data.length}
+        key={`${theme}-${data.length}`}
         options={options}
         series={series}
         type="bar"

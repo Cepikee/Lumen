@@ -27,7 +27,6 @@ export default function WhatHappenedTodayHeatmap() {
   const [data, setData] = useState<HeatmapResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // ⭐ Ugyanaz a theme logika, mint az InsightsOverviewChart-ban
   const theme = useUserStore((s) => s.theme);
   const isDark =
     theme === "dark" ||
@@ -42,24 +41,29 @@ export default function WhatHappenedTodayHeatmap() {
   const tooltipBody = isDark ? "#ddd" : "#333";
   const tooltipBorder = isDark ? "#444" : "#ccc";
 
-  // ⭐ Automatikus frissítés (InsightsOverviewChart mintájára)
   useEffect(() => {
+    let mounted = true;
     async function load() {
       try {
         const res = await fetch("/api/insights/heatmap");
         const json = await res.json();
+        if (!mounted) return;
         setData(json);
       } catch (err) {
         console.error("Bar chart fetch error:", err);
+        if (mounted) setData(null);
       } finally {
-        setLoading(false);
+        if (mounted) setLoading(false);
       }
     }
 
     load(); // első betöltés
 
-    const interval = setInterval(load, 60_000); // ⭐ 1 percenként frissít
-    return () => clearInterval(interval);
+    const interval = setInterval(load, 60_000); // 1 percenként frissít
+    return () => {
+      mounted = false;
+      clearInterval(interval);
+    };
   }, []);
 
   if (loading) {
@@ -71,23 +75,22 @@ export default function WhatHappenedTodayHeatmap() {
   }
 
   if (!data || !data.success) {
-    return (
-      <div className="text-danger">
-        Nem sikerült betölteni az adatokat.
-      </div>
-    );
+    return <div className="text-danger">Nem sikerült betölteni az adatokat.</div>;
   }
 
-  const { categories, hours, matrix } = data;
+  const { categories = [], hours = [], matrix = {} } = data;
 
-  const orderedCategories = [
-    "Politika",
-    "Gazdaság",
-    "Közélet",
-    "Kultúra",
-    "Egészségügy",
-    "Oktatás",
-  ].filter((c) => categories.includes(c));
+  const orderedCategories = useMemo(() => {
+    const order = [
+      "Politika",
+      "Gazdaság",
+      "Közélet",
+      "Kultúra",
+      "Egészségügy",
+      "Oktatás",
+    ];
+    return order.filter((c) => categories.includes(c));
+  }, [categories]);
 
   const colors: Record<string, string> = {
     Politika: "#d81b60",
@@ -98,20 +101,30 @@ export default function WhatHappenedTodayHeatmap() {
     Oktatás: "#3949ab",
   };
 
-  // ⭐ Ugyanaz a useMemo logika, mint az InsightsOverviewChart-ban
+  // Biztonságos useMemo: csak akkor dolgozunk, ha hours és orderedCategories léteznek
   const chartData = useMemo(() => {
-    const datasets = orderedCategories.map((cat) => ({
-      label: cat,
-      data: hours.map((h) => matrix[cat]?.[h] ?? 0),
-      backgroundColor: colors[cat],
-      borderWidth: 0,
-    }));
+    try {
+      if (!Array.isArray(hours) || hours.length === 0 || !Array.isArray(orderedCategories)) {
+        return { labels: [], datasets: [] };
+      }
 
-    return {
-      labels: hours.map((h) => `${h}:00`),
-      datasets,
-    };
-  }, [data, theme]); // ⭐ Ha új adat jön vagy theme vált → újrarenderel
+      const datasets = orderedCategories.map((cat) => ({
+        label: cat,
+        data: hours.map((h) => (matrix?.[cat]?.[h] ?? 0)),
+        backgroundColor: colors[cat] ?? "#888",
+        borderWidth: 0,
+      }));
+
+      return {
+        labels: hours.map((h) => `${h}:00`),
+        datasets,
+      };
+    } catch (err) {
+      console.error("chartData useMemo error:", err);
+      return { labels: [], datasets: [] };
+    }
+    // dependency-k: ne add meg az egész data objektumot, csak a primitív részeit
+  }, [hours?.length, orderedCategories.join(","), JSON.stringify(Object.keys(matrix || {}))]);
 
   const options = useMemo(() => {
     return {
@@ -120,9 +133,7 @@ export default function WhatHappenedTodayHeatmap() {
       plugins: {
         legend: {
           position: "bottom" as const,
-          labels: {
-            color: textColor,
-          },
+          labels: { color: textColor },
         },
         tooltip: {
           backgroundColor: tooltipBg,
@@ -149,14 +160,16 @@ export default function WhatHappenedTodayHeatmap() {
         },
       },
     };
-  }, [theme]); // ⭐ Theme váltáskor újrarenderel
+  }, [theme, textColor, gridColor, tooltipBg, tooltipTitle, tooltipBody, tooltipBorder]);
+
+  // STABIL kulcs: theme + hours length + categories length
+  const stableKey = `${theme}-${hours?.length ?? 0}-${categories?.length ?? 0}`;
 
   return (
     <div className="wht-heatmap" style={{ height: "350px" }}>
       <h5 className="mb-3">Kategóriák aktivitása óránként</h5>
 
-      {/* ⭐ Ugyanaz a kulcs logika, mint a nagy grafikonban */}
-      <Bar key={theme + JSON.stringify(data)} data={chartData} options={options} />
+      <Bar key={stableKey} data={chartData} options={options} />
     </div>
   );
 }
