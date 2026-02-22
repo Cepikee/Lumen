@@ -1844,3 +1844,7 @@ html.theme-dark .nav-link {
   max-height: 200px !important;
 }
 
+/* Sourceactivity*/
+.wht-source-activity {
+  padding: 10px 0;
+}

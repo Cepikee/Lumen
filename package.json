@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mozilla/readability": "^0.6.0",
+    "apexcharts": "^5.6.0",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "bootstrap": "^5.3.8",
@@ -29,6 +30,7 @@
     "plyr-react": "^6.0.0",
     "puppeteer": "^24.37.3",
     "react": "19.2.0",
+    "react-apexcharts": "^2.0.1",
     "react-bootstrap": "^2.10.10",
     "react-chartjs-2": "^5.3.1",
     "react-dom": "19.2.0",
