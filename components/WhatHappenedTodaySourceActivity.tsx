@@ -76,10 +76,17 @@ export default function WhatHappenedTodaySourceActivity() {
 
     // ⭐ Nincs jobboldali tengely
     xaxis: {
-      labels: { show: false },
-      axisBorder: { show: false },
-      axisTicks: { show: false },
+    labels: {
+    show: true,
+    style: {
+      fontSize: "12px",
+      colors: "#999",
     },
+  },
+  axisBorder: { show: false },
+  axisTicks: { show: false },
+},
+
 
     // ⭐ Bal oldalt a forrásnevek (legendából)
     yaxis: {
@@ -122,6 +129,7 @@ export default function WhatHappenedTodaySourceActivity() {
         size: 14,
       },
     },
+    tooltip: { shared: false, },
 
     grid: { show: false },
   };
