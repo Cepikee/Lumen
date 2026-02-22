@@ -165,7 +165,7 @@ export default function WhatHappenedTodaySourceActivity() {
 
       {/* ⭐ Ugyanaz a kulcs logika, mint az InsightsOverviewChart-ban */}
       <ApexChart
-        key={theme + JSON.stringify(data)}
+        key={theme + "-" + data.length}
         options={options}
         series={series}
         type="bar"
