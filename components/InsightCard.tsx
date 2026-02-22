@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import DonutChart from "@/components/DonutChart";
 import InsightSparkline from "@/components/InsightSparkline";
+import { useUserStore } from "@/store/useUserStore";
 
 export type InsightCardProps = {
   title: string;
@@ -14,7 +15,6 @@ export type InsightCardProps = {
   href?: string;
   ringSources?: { name: string; percent: number }[];
   sparkline?: number[];
-  isDark?: boolean;
 };
 
 const InsightCard: React.FC<InsightCardProps> = ({
@@ -25,11 +25,18 @@ const InsightCard: React.FC<InsightCardProps> = ({
   href,
   ringSources = [],
   sparkline = [],
-  isDark = false,
 }) => {
   const linkHref = href || "#";
 
-  // ⭐ Dark mode színek
+  // ⭐ UGYANAZ A THEME LOGIKA, mint az InsightsOverviewChart-ban
+  const theme = useUserStore((s) => s.theme);
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  // ⭐ TOKENEK (ezeket a store-ban definiáljuk)
   const bgColor = isDark ? "#1a1a1a" : "#ffffff";
   const textColor = isDark ? "#f0f0f0" : "#222222";
   const mutedColor = isDark ? "#bbbbbb" : "#6c757d";
@@ -45,17 +52,14 @@ const InsightCard: React.FC<InsightCardProps> = ({
         border: `1px solid ${borderColor}`,
       }}
     >
-      {/* Cím */}
       <h3 className="h6 mb-3" style={{ color: textColor }}>
         {title}
       </h3>
 
-      {/* Donut chart */}
       <div className="d-flex justify-content-center mb-3">
         <DonutChart sources={ringSources} isDark={isDark} />
       </div>
 
-      {/* Metaadatok */}
       <div className="mb-2">
         <span
           className="badge me-2"
@@ -66,7 +70,6 @@ const InsightCard: React.FC<InsightCardProps> = ({
         >
           {sources} cikk
         </span>
-
         <small style={{ color: mutedColor }}>{dominantSource}</small>
       </div>
 
@@ -74,12 +77,10 @@ const InsightCard: React.FC<InsightCardProps> = ({
         {timeAgo}
       </small>
 
-      {/* Sparkline */}
       <div className="mb-3">
         <InsightSparkline data={sparkline} isDark={isDark} />
       </div>
 
-      {/* Gomb */}
       <div className="mt-auto">
         <Link
           href={linkHref}

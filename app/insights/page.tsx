@@ -201,15 +201,12 @@ const downsampledTs = useMemo(() => {
                       timeAgo=""
                       href="#"
                       ringSources={[]}
-                      sparkline={[]}
-                      isDark={isDark}
-                      
-                    />
+                      sparkline={[]}/>
                   </div>
                 ))
               : categoryItems.map((item) => (
                   <div key={item.id} className="insight-card-wrapper">
-                    <InsightCard {...item} isDark={isDark}/>
+                    <InsightCard {...item}/>
                   </div>
                 ))}
           </div>
