@@ -1829,13 +1829,13 @@ html.theme-dark .nav-link {
 
 /* SpikeDetection legyen fél magasságú */
 .horizontal-list:first-of-type {
-  min-height: 100px !important;
-  max-height: 100px !important;
+  min-height: 200px !important;
+  max-height: 200px !important;
 }
 
 /* Kulcsszavak modul is fél magasságú */
 .horizontal-list:last-of-type {
-  min-height: 300px !important;
-  max-height: 300px !important;
+  min-height: 200px !important;
+  max-height: 200px !important;
 }
 
