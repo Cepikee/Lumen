@@ -1857,77 +1857,92 @@ html.theme-dark .nav-link {
 
 
 
-/* QUICK FIX: force horizontal compact strip inside .wht-box.module-box.horizontal-list */
+/* Spike strip — auto size (no fixed 200x200), horizontal scroll preserved */
+
+/* Remove forced heights on parent horizontal-list */
+.horizontal-list:first-of-type,
+.horizontal-list:last-of-type {
+  min-height: unset !important;
+  max-height: unset !important;
+}
+
+/* Allow the inner strip to overflow horizontally but let parent size naturally */
 .wht-box.module-box.horizontal-list {
-  /* allow the inner strip to overflow horizontally */
-  overflow: visible !important;
+  overflow: visible; /* don't force parent clipping */
+  box-sizing: border-box;
 }
 
-/* ensure the root has exact size */
+/* Root: do NOT force width/height — let the parent determine size */
 .spike-v2-root {
-  width: 200px !important;
-  height: 200px !important;
-  padding: 6px !important;
-  box-sizing: border-box !important;
+  padding: 8px;
+  box-sizing: border-box;
+  width: auto;
+  height: auto;
+  background: var(--bs-body-bg);
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  overflow: visible;
 }
 
-/* viewport: horizontal scroll only, no wrapping */
+/* Horizontal viewport: keep horizontal scroll only */
 .spike-v2-list {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  gap: 6px !important;
-  align-items: stretch !important;
-  height: calc(100% - 36px) !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  padding: 0 2px !important;
-  white-space: nowrap !important;
-  -webkit-overflow-scrolling: touch !important;
-  scroll-behavior: smooth !important;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: stretch;
+  height: auto;               /* let height be determined by parent / content */
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 6px 2px;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
-/* make each card much smaller so multiple cards are visible */
+/* Card: compact but flexible — no hard forcing of container size */
 .spike-v2-item {
-  flex: 0 0 110px !important;    /* card width */
-  min-width: 110px !important;
-  height: 100px !important;      /* card height */
-  padding: 6px !important;
-  gap: 6px !important;
-  box-sizing: border-box !important;
-  font-size: 12px !important;
+  flex: 0 0 auto;            /* allow natural width from CSS or inline if needed */
+  min-width: 110px;          /* keep compact minimum */
+  height: auto;              /* let content determine height */
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 13px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
 }
 
-/* reduce label and meta sizes so text doesn't wrap too much */
-.spike-v2-label { font-size: 0.92rem !important; line-height: 1 !important; }
-.spike-v2-meta  { font-size: 0.68rem !important; color: rgba(0,0,0,0.6) !important; }
+/* Text sizing: readable but not huge */
+.spike-v2-label { font-size: 0.98rem; font-weight:700; line-height:1.05; }
+.spike-v2-meta  { font-size: 0.75rem; color: rgba(0,0,0,0.6); }
 
-/* compact right block */
-.spike-v2-right { min-width: 56px !important; gap: 6px !important; }
-.spike-v2-value { font-size: 0.95rem !important; font-weight: 700 !important; }
+/* Right block */
+.spike-v2-right { display:flex; align-items:center; gap:8px; min-width: 56px; }
+.spike-v2-value { font-size: 1rem; font-weight:700; }
 
-/* smaller badge */
-.spike-v2-badge { padding: 3px 6px !important; font-size: 0.62rem !important; }
+/* Badge and bar */
+.spike-v2-badge { padding: 4px 8px; font-size: 0.72rem; border-radius: 999px; }
+.spike-v2-barwrap { height: 8px; margin-top: 6px; }
+.spike-v2-bar { height: 100%; border-radius: 6px; transition: width 0.18s ease; }
 
-/* smaller inline bar */
-.spike-v2-barwrap { height: 8px !important; margin-top: 6px !important; }
-.spike-v2-bar { transition: width 0.18s ease !important; }
+/* Nav buttons: keep them visible */
+.spike-v2-nav { z-index: 99; }
 
-/* nav buttons: keep them visible above the strip */
-.spike-v2-nav { z-index: 999 !important; }
-
-/* ensure buttons inside list render inline-flex (some user agents may default to block) */
+/* Ensure inline-flex children */
 .spike-v2-list > .spike-v2-item,
-.spike-v2-list > button {
-  display: inline-flex !important;
-  vertical-align: top !important;
-}
+.spike-v2-list > button { display: inline-flex; vertical-align: top; }
 
-/* fallback: if any parent sets font-size very small, force a readable base */
-.spike-v2-root, .spike-v2-root * { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial !important; }
+/* Accessibility focus */
+.spike-v2-item:focus { box-shadow: 0 0 0 3px rgba(99,102,241,0.12); outline: none; }
 
-/* responsive tweak if container is even tighter */
-@media (max-width: 320px) {
-  .spike-v2-item { flex: 0 0 100px !important; min-width: 100px !important; height: 92px !important; }
-  .spike-v2-label { font-size: 0.86rem !important; }
+/* Small screens fallback */
+@media (max-width: 360px) {
+  .spike-v2-item { min-width: 100px; padding: 6px; }
+  .spike-v2-label { font-size: 0.9rem; }
+  .spike-v2-value { font-size: 0.95rem; }
 }
