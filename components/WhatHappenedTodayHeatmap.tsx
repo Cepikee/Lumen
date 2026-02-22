@@ -1,7 +1,6 @@
 "use client";
 
 import useSWR from "swr";
-import { useMemo } from "react";
 import Spinner from "react-bootstrap/Spinner";
 
 import {
@@ -41,7 +40,6 @@ export default function WhatHappenedTodayHeatmap() {
   const tooltipBody = isDark ? "#ddd" : "#333";
   const tooltipBorder = isDark ? "#444" : "#ccc";
 
-  // SWR: refreshInterval 60_000 ms (1 perc)
   const { data, error, isLoading } = useSWR<HeatmapResponse>("/api/insights/heatmap", fetcher, {
     refreshInterval: 60_000,
     revalidateOnFocus: true,
@@ -73,12 +71,11 @@ export default function WhatHappenedTodayHeatmap() {
     Oktatás: "#3949ab",
   };
 
-  // Számítás egyszerűen, useMemo csak a teljes újrarender csökkentésére (nem kötelező)
-  const chartData = useMemo(() => {
+  // egyszerű, szinkron számítás (nincs useMemo)
+  const chartData = (() => {
     if (!Array.isArray(hours) || hours.length === 0 || orderedCategories.length === 0) {
       return { labels: [], datasets: [] };
     }
-
     const datasets = orderedCategories.map((cat) => {
       const row = hours.map((h) => {
         const v = matrix?.[cat]?.[h];
@@ -91,44 +88,26 @@ export default function WhatHappenedTodayHeatmap() {
         borderWidth: 0,
       };
     });
-
-    return {
-      labels: hours.map((h) => `${h}:00`),
-      datasets,
-    };
-  }, [hours?.length ?? 0, orderedCategories.join(","), Object.keys(matrix || {}).length, isDark]);
+    return { labels: hours.map((h) => `${h}:00`), datasets };
+  })();
 
   const options = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: {
-        position: "bottom" as const,
-        labels: { color: textColor },
-      },
+      legend: { position: "bottom" as const, labels: { color: textColor } },
       tooltip: {
         backgroundColor: tooltipBg,
         titleColor: tooltipTitle,
         bodyColor: tooltipBody,
         borderColor: tooltipBorder,
         borderWidth: 1,
-        callbacks: {
-          label: (ctx: any) => `${ctx.dataset.label}: ${ctx.raw} cikk`,
-        },
+        callbacks: { label: (ctx: any) => `${ctx.dataset.label}: ${ctx.raw} cikk` },
       },
     },
     scales: {
-      x: {
-        stacked: true,
-        ticks: { color: textColor },
-        grid: { color: gridColor },
-      },
-      y: {
-        stacked: true,
-        beginAtZero: true,
-        ticks: { precision: 0, color: textColor },
-        grid: { color: gridColor },
-      },
+      x: { stacked: true, ticks: { color: textColor }, grid: { color: gridColor } },
+      y: { stacked: true, beginAtZero: true, ticks: { precision: 0, color: textColor }, grid: { color: gridColor } },
     },
   };
 
