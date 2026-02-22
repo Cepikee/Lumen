@@ -12,6 +12,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { useUserStore } from "@/store/useUserStore";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
@@ -25,6 +26,20 @@ interface HeatmapResponse {
 export default function WhatHappenedTodayHeatmap() {
   const [data, setData] = useState<HeatmapResponse | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const theme = useUserStore((s) => s.theme);
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  const textColor = isDark ? "#ddd" : "#333";
+  const gridColor = isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)";
+  const tooltipBg = isDark ? "#222" : "#fff";
+  const tooltipTitle = isDark ? "#fff" : "#000";
+  const tooltipBody = isDark ? "#ddd" : "#333";
+  const tooltipBorder = isDark ? "#444" : "#ccc";
 
   useEffect(() => {
     async function load() {
@@ -59,7 +74,6 @@ export default function WhatHappenedTodayHeatmap() {
 
   const { categories, hours, matrix } = data;
 
-  // Fix sorrend
   const orderedCategories = [
     "Politika",
     "Gazdaság",
@@ -69,7 +83,6 @@ export default function WhatHappenedTodayHeatmap() {
     "Oktatás",
   ].filter((c) => categories.includes(c));
 
-  // Fix színek
   const colors: Record<string, string> = {
     Politika: "#d81b60",
     Gazdaság: "#f9a825",
@@ -79,7 +92,6 @@ export default function WhatHappenedTodayHeatmap() {
     Oktatás: "#3949ab",
   };
 
-  // Datasetek (stacked)
   const datasets = orderedCategories.map((cat) => ({
     label: cat,
     data: hours.map((h) => matrix[cat]?.[h] ?? 0),
@@ -98,8 +110,16 @@ export default function WhatHappenedTodayHeatmap() {
     plugins: {
       legend: {
         position: "bottom" as const,
+        labels: {
+          color: textColor, // ⭐ DARK MODE FIX
+        },
       },
       tooltip: {
+        backgroundColor: tooltipBg, // ⭐ DARK MODE FIX
+        titleColor: tooltipTitle,
+        bodyColor: tooltipBody,
+        borderColor: tooltipBorder,
+        borderWidth: 1,
         callbacks: {
           label: (ctx: any) => `${ctx.dataset.label}: ${ctx.raw} cikk`,
         },
@@ -108,11 +128,14 @@ export default function WhatHappenedTodayHeatmap() {
     scales: {
       x: {
         stacked: true,
+        ticks: { color: textColor }, // ⭐ DARK MODE FIX
+        grid: { color: gridColor },
       },
       y: {
         stacked: true,
         beginAtZero: true,
-        ticks: { precision: 0 },
+        ticks: { precision: 0, color: textColor }, // ⭐ DARK MODE FIX
+        grid: { color: gridColor },
       },
     },
   };
@@ -121,7 +144,7 @@ export default function WhatHappenedTodayHeatmap() {
     <div className="wht-heatmap" style={{ height: "350px" }}>
       <h5 className="mb-3">Kategóriák aktivitása óránként</h5>
 
-      <Bar data={chartData} options={options} />
+      <Bar key={theme} data={chartData} options={options} />
     </div>
   );
 }
