@@ -19,9 +19,11 @@ interface ApiResponse {
 }
 
 export default function WhatHappenedTodaySourceActivity() {
+  // --- state
   const [data, setData] = useState<SourceItem[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // --- theme from zustand
   const theme = useUserStore((s) => s.theme);
   const isDark =
     theme === "dark" ||
@@ -29,21 +31,35 @@ export default function WhatHappenedTodaySourceActivity() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-  // fetch + mounted guard
+  // --- debug: render start
+  console.log("WHSourceActivity render start", {
+    theme,
+    isDark,
+    dataLength: data?.length ?? 0,
+    loading,
+  });
+
+  // --- fetch with mounted guard and debug logs
   useEffect(() => {
     let mounted = true;
+
     async function load() {
+      console.log("WHSourceActivity fetch start");
       try {
         const res = await fetch("/api/insights/source-activity");
         const json: ApiResponse = await res.json();
-        if (!mounted) return;
-        if (json.success) {
-          setData(json.sources || []);
+        console.log("WHSourceActivity fetch result", json);
+        if (!mounted) {
+          console.log("WHSourceActivity fetch result ignored (unmounted)");
+          return;
+        }
+        if (json && json.success) {
+          setData(Array.isArray(json.sources) ? json.sources : []);
         } else {
           setData([]);
         }
       } catch (err) {
-        console.error("Source activity fetch error:", err);
+        console.error("WHSourceActivity fetch error:", err);
         if (mounted) setData([]);
       } finally {
         if (mounted) setLoading(false);
@@ -51,13 +67,14 @@ export default function WhatHappenedTodaySourceActivity() {
     }
 
     load();
-    const interval = setInterval(load, 60_000);
+    const interval = setInterval(load, 60_000); // 1 percenként frissít
     return () => {
       mounted = false;
       clearInterval(interval);
     };
   }, []);
 
+  // --- loading / empty states
   if (loading) {
     return (
       <div className="text-center py-4">
@@ -66,106 +83,144 @@ export default function WhatHappenedTodaySourceActivity() {
     );
   }
 
-  if (!data.length) {
+  if (!data || data.length === 0) {
+    console.log("WHSourceActivity: no data to render");
     return <div className="text-muted">Ma még nincs aktivitás.</div>;
   }
 
-  // safe sorted
+  // --- safe sorted memo with try/catch + debug
   const sorted = useMemo(() => {
-    if (!data || !Array.isArray(data)) return [];
-    return [...data].sort((a, b) => b.total - a.total);
+    try {
+      if (!data || !Array.isArray(data)) {
+        console.log("sorted useMemo: data invalid", data);
+        return [];
+      }
+      const s = [...data].sort((a, b) => b.total - a.total);
+      console.log("sorted useMemo result length:", s.length);
+      return s;
+    } catch (err) {
+      console.error("sorted useMemo error:", err);
+      return [];
+    }
   }, [data]);
 
-  // safe series
+  // --- series memo with try/catch + debug
   const series = useMemo(() => {
-    if (!sorted || !sorted.length) return [];
-    return sorted.map((item) => ({
-      name: item.source,
-      data: [item.total],
-    }));
+    try {
+      if (!sorted || !Array.isArray(sorted) || sorted.length === 0) {
+        console.log("series useMemo: sorted empty");
+        return [];
+      }
+      const s = sorted.map((item) => ({
+        name: item.source,
+        data: [item.total],
+      }));
+      console.log("series useMemo result length:", s.length);
+      return s;
+    } catch (err) {
+      console.error("series useMemo error:", err);
+      return [];
+    }
   }, [sorted]);
 
-  // options depends on isDark (not only theme)
+  // --- options memo (depends on isDark) with debug
   const options: ApexCharts.ApexOptions = useMemo(() => {
-    return {
-      chart: {
-        type: "bar",
-        toolbar: { show: false },
-        stacked: false,
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true,
-          borderRadius: 6,
-          barHeight: "60%",
+    try {
+      const opts: ApexCharts.ApexOptions = {
+        chart: {
+          type: "bar",
+          toolbar: { show: false },
+          stacked: false,
         },
-      },
-      xaxis: {
-        labels: { show: false },
-        axisBorder: { show: false },
-        axisTicks: { show: false },
-      },
-      yaxis: {
-        labels: { show: false },
-      },
-      colors: [
-        "#FF4D4F",
-        "#FFA940",
-        "#36CFC9",
-        "#40A9FF",
-        "#9254DE",
-        "#73D13D",
-        "#F759AB",
-        "#597EF7",
-        "#FFC53D",
-        "#5CDBD3",
-      ],
-      dataLabels: {
-        enabled: true,
-        formatter: (val) => `${val} db`,
-        style: {
-          fontSize: "14px",
-          fontWeight: 700,
-          colors: isDark ? ["#fff"] : ["#000"],
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            borderRadius: 6,
+            barHeight: "60%",
+          },
         },
-        offsetX: 10,
-      },
-      legend: {
-        show: true,
-        position: "left",
-        horizontalAlign: "left",
-        fontSize: "15px",
-        fontWeight: 600,
-        labels: {
-          colors: isDark ? "#fff" : "#000",
+        xaxis: {
+          labels: { show: false },
+          axisBorder: { show: false },
+          axisTicks: { show: false },
         },
-        markers: {
-          size: 14,
+        yaxis: {
+          labels: { show: false },
         },
-      },
-      tooltip: {
-        shared: false,
-        theme: isDark ? "dark" : "light",
-        y: {
-          formatter: (val) => `${val} db`,
+        colors: [
+          "#FF4D4F",
+          "#FFA940",
+          "#36CFC9",
+          "#40A9FF",
+          "#9254DE",
+          "#73D13D",
+          "#F759AB",
+          "#597EF7",
+          "#FFC53D",
+          "#5CDBD3",
+        ],
+        dataLabels: {
+          enabled: true,
+          formatter: (val: any) => `${val} db`,
+          style: {
+            fontSize: "14px",
+            fontWeight: 700,
+            colors: isDark ? ["#fff"] : ["#000"],
+          },
+          offsetX: 10,
         },
-        x: {
-          formatter: () => "",
+        legend: {
+          show: true,
+          position: "left",
+          horizontalAlign: "left",
+          fontSize: "15px",
+          fontWeight: 600,
+          labels: {
+            colors: isDark ? "#fff" : "#000",
+          },
+          markers: {
+            size: 14,
+          },
         },
-        marker: {
-          show: false,
+        tooltip: {
+          shared: false,
+          theme: isDark ? "dark" : "light",
+          y: {
+            formatter: (val: any) => `${val} db`,
+          },
+          x: {
+            formatter: () => "",
+          },
+          marker: {
+            show: false,
+          },
         },
-      },
-      grid: { show: false },
-    };
-  }, [isDark]); // <-- isDark itt a fontos dependency
+        grid: { show: false },
+      };
+      console.log("options useMemo computed (isDark):", isDark);
+      return opts;
+    } catch (err) {
+      console.error("options useMemo error:", err);
+      return {};
+    }
+  }, [isDark]);
+
+  // --- stable key (avoid JSON.stringify)
+  const stableKey = `${theme}-${data.length}`;
+
+  // --- final debug before render
+  console.log("WHSourceActivity final render", {
+    stableKey,
+    seriesLength: series.length,
+    topSeries: series.slice(0, 3),
+  });
 
   return (
     <div className="wht-source-activity">
       <h5 className="mb-3 text-center">Források aktivitása ma</h5>
 
       <ApexChart
-        key={`${theme}-${data.length}`}
+        key={stableKey}
         options={options}
         series={series}
         type="bar"
