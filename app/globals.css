@@ -1584,6 +1584,7 @@ html.theme-dark .nav-link {
   font-weight: 700; /* 600 helyett 700 */
   font-size: 1.8rem; /* 1.4 helyett 1.8 */
   z-index: 2;
+  text-align: center;
 }
 
 
@@ -1775,30 +1776,32 @@ html.theme-dark .nav-link {
   gap: 10px;
 }
 /* ============================
-   JOBB OLDALI KÉT MODUL – VÍZSZINTES ELRENDEZÉS
+   JOBB OLDALI MODULOK – VÍZSZINTES SCROLL
    ============================ */
 
-/* A horizontal-list csak a jobb oldali két modulban van → erre célozunk */
 .horizontal-list .list-group {
   display: flex !important;
   flex-direction: row !important;
-  flex-wrap: wrap !important;
+  flex-wrap: nowrap !important;        /* NEM törik új sorba */
   gap: 14px !important;
-  padding: 0 !important;
+  overflow-x: auto !important;         /* vízszintes scroll */
+  overflow-y: hidden !important;
+  white-space: nowrap !important;
+  padding: 4px 0 !important;
   margin: 0 !important;
+  scrollbar-width: thin;
 }
 
-/* A spike + kulcsszó elemek NE legyenek 100% szélesek */
+/* Kártyák fix szélességgel */
 .horizontal-list .list-group-item {
-  display: inline-flex !important;
-  flex-direction: column;
-  justify-content: space-between;
-  min-width: 180px;
-  max-width: calc(50% - 14px);
+  flex: 0 0 auto !important;           /* ne nőjön, ne törjön */
+  width: 240px !important;             /* fix szélesség */
+  min-height: 120px;                   /* szép arány */
+  border-radius: 10px;
   padding: 12px;
-  border-radius: 8px;
   box-sizing: border-box;
 }
+
 
 /* Hover */
 .horizontal-list .list-group-item:hover {
