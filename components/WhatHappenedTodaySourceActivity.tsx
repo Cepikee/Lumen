@@ -53,58 +53,65 @@ export default function WhatHappenedTodaySourceActivity() {
   // Rendezés: legtöbb cikk → legkevesebb
   const sorted = [...data].sort((a, b) => b.total - a.total);
 
-  const series = [
-    {
-      name: "Cikkek száma",
-      data: sorted.map((item) => item.total),
-    },
-  ];
+  // ⭐ MINDEN FORRÁS KÜLÖN SERIES → így lesz színes
+  const series = sorted.map((item) => ({
+    name: item.source,
+    data: [item.total],
+  }));
 
   const options: ApexCharts.ApexOptions = {
-  chart: {
-    type: "bar",
-    stacked: true,
-    toolbar: { show: false },
-  },
-  plotOptions: {
-    bar: {
-      horizontal: true,
-      borderRadius: 6,
-      barHeight: "60%",
+    chart: {
+      type: "bar",
+      stacked: true,
+      toolbar: { show: false },
     },
-  },
-  xaxis: {
-    categories: sorted.map((item) => item.source),
-    labels: { 
-      style: { 
-        fontSize: "15px",   // ⭐ nagyobb betűméret
-        fontWeight: 600,
-      } 
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        borderRadius: 6,
+        barHeight: "60%",
+      },
     },
-  },
 
-  // ⭐ Többszínű paletta (szép, modern, harmonikus)
-  colors: [
-    "#FF4D4F",
-    "#FFA940",
-    "#36CFC9",
-    "#40A9FF",
-    "#9254DE",
-    "#73D13D",
-    "#F759AB",
-    "#597EF7",
-    "#FFC53D",
-    "#5CDBD3",
-  ],
+    // ⭐ Csak 1 kategória kell, mert stacked bar
+    xaxis: {
+      categories: ["Források"],
+      labels: {
+        style: {
+          fontSize: "15px",
+          fontWeight: 600,
+        },
+      },
+    },
 
-  dataLabels: {
-    enabled: true,
-    style: { fontSize: "13px", fontWeight: 700 },
-  },
-  grid: { show: false },
-  legend: { show: false },
-};
+    // ⭐ Színes paletta – minden forrás más szín
+    colors: [
+      "#FF4D4F",
+      "#FFA940",
+      "#36CFC9",
+      "#40A9FF",
+      "#9254DE",
+      "#73D13D",
+      "#F759AB",
+      "#597EF7",
+      "#FFC53D",
+      "#5CDBD3",
+    ],
 
+    dataLabels: {
+      enabled: true,
+      style: { fontSize: "13px", fontWeight: 700 },
+    },
+
+    legend: {
+      show: true,
+      position: "right",
+      fontSize: "14px",
+      fontWeight: 600,
+    },
+
+    grid: { show: false },
+  };
 
   return (
     <div className="wht-source-activity">
