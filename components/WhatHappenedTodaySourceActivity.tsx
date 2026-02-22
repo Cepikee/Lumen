@@ -125,11 +125,19 @@ export default function WhatHappenedTodaySourceActivity() {
         size: 14,
       },
     },
-    tooltip: { shared: false,
-      y: { formatter: () => "", 
+    tooltip: {
+  shared: false,
+  y: {
+    formatter: (val) => `${val} db`,
+  },
+  x: {
+    formatter: () => "",
+  },
+  marker: {
+    show: false,
+  },
+},
 
-      },
-     },
 
     grid: { show: false },
   };
