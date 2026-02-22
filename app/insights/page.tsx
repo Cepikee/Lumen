@@ -10,12 +10,12 @@ import dynamic from "next/dynamic";
 import useSWR from "swr";
 import ForecastStatus from "@/components/ForecastStatus";
 import WhatHappenedToday from "@/components/WhatHappenedToday";
+import { useUserStore } from "@/store/useUserStore";
 
 
 // ⭐ Forecast API hook
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 const useForecast = () => useSWR("/api/insights/forecast", fetcher);
-
 const InsightsOverviewChart = dynamic(
   () => import("@/components/InsightsOverviewChart"),
   { ssr: false }
@@ -40,6 +40,13 @@ function normalizeCategory(raw?: string | null) {
 }
 
 export default function InsightFeedPage() {
+  const theme = useUserStore((s) => s.theme);
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
   const [period, setPeriod] = useState<"24h" | "7d" | "30d" | "90d">("24h");
   const [sort, setSort] = useState<string>("Legfrissebb");
 
@@ -177,7 +184,7 @@ const downsampledTs = useMemo(() => {
 
       {/* KATEGÓRIAKÁRTYÁK */}
       <section aria-labelledby="category-trends">
-        <h2 id="category-trends" className="fs-5 fw-bold mb-2 visually-hidden">
+        <h2 id="category-trends" className="fs-5 fw-bold mb-2">
           Kategória trendek
         </h2>
 
@@ -195,12 +202,14 @@ const downsampledTs = useMemo(() => {
                       href="#"
                       ringSources={[]}
                       sparkline={[]}
+                      isDark={isDark}
+                      
                     />
                   </div>
                 ))
               : categoryItems.map((item) => (
                   <div key={item.id} className="insight-card-wrapper">
-                    <InsightCard {...item} />
+                    <InsightCard {...item} isDark={isDark}/>
                   </div>
                 ))}
           </div>

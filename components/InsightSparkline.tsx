@@ -7,6 +7,7 @@ export type InsightSparklineProps = {
   data?: number[];
   height?: number;
   className?: string;
+  isDark?: boolean; // ⭐ HOZZÁADVA
   "aria-hidden"?: boolean | "true" | "false";
 };
 
@@ -15,6 +16,7 @@ export default function InsightSparkline({
   data,
   height = 40,
   className = "",
+  isDark = false,   
   "aria-hidden": ariaHidden,
 }: InsightSparklineProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);

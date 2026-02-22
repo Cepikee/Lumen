@@ -23,6 +23,7 @@ export default function InsightCard({
   href,
   ringSources = [],
   sparkline = [],
+  isDark,
 }: InsightCardProps) {
   const linkHref = href || "#";
 
