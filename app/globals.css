@@ -1779,6 +1779,16 @@ html.theme-dark .nav-link {
    JOBB OLDALI MODULOK – VÍZSZINTES SCROLL
    ============================ */
 
+/* ============================
+   JOBB OLDALI MODULOK – VÍZSZINTES SCROLL
+   ============================ */
+
+.horizontal-list {
+  max-height: 260px !important;
+  min-height: 260px !important;
+  overflow: hidden;
+}
+
 .horizontal-list .list-group {
   display: flex !important;
   flex-direction: row !important;
@@ -1792,14 +1802,20 @@ html.theme-dark .nav-link {
   scrollbar-width: thin;
 }
 
-/* Kártyák fix szélességgel */
 .horizontal-list .list-group-item {
   flex: 0 0 auto !important;           /* ne nőjön, ne törjön */
   width: 240px !important;             /* fix szélesség */
-  min-height: 120px;                   /* szép arány */
+  min-height: 120px;
   border-radius: 10px;
   padding: 12px;
   box-sizing: border-box;
+}
+
+
+.wht-box h5 {
+  text-align: center !important;
+  width: 100%;
+  margin-bottom: 16px;
 }
 
 
