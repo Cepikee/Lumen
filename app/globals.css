@@ -1749,14 +1749,14 @@ html.theme-dark .nav-link {
   background: var(--bs-body-bg);
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 12px;
-  max-width: 1400px;
+  max-width: 1700px;
   width: 100%;
   padding: 34px;
 }
 
 .module-box {
-  min-height: 420px;
-  max-height: 420px;
+  min-height: 650px;
+  max-height: 650px;
   overflow-y: auto;
   border-radius: 10px;
 }
