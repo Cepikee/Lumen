@@ -1761,3 +1761,9 @@ html.theme-dark .nav-link {
   border-radius: 10px;
 }
 
+.horizontal-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}

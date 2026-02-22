@@ -9,7 +9,7 @@ export default function WhatHappenedToday() {
   return (
     <div className="container my-5 d-flex justify-content-center">
 
-      {/* KÖZÖS DOBOZ */}
+      {/* NAGY DOBOZ */}
       <div className="wht-wrapper-box p-4">
 
         {/* CÍM */}
@@ -19,30 +19,33 @@ export default function WhatHappenedToday() {
           </h2>
         </div>
 
-        {/* FŐ SOR – 2 OSZLOP */}
+        {/* EGY SOR – 3 BLOKK EGYMÁS MELLETT */}
         <div className="row g-4">
 
-          {/* BAL OSZLOP */}
-          <div className="col-12 col-lg-6 d-flex flex-column gap-4">
-
+          {/* BAL BLOKK – KATEGÓRIÁK */}
+          <div className="col-12 col-lg-4">
             <div className="wht-box module-box">
               <WhatHappenedTodayHeatmap />
             </div>
-
-            <div className="wht-box module-box">
-              <WhatHappenedTodaySpikeDetection />
-            </div>
-
           </div>
 
-          {/* JOBB OSZLOP */}
-          <div className="col-12 col-lg-6 d-flex flex-column gap-4">
-
+          {/* KÖZÉPSŐ BLOKK – FORRÁSOK */}
+          <div className="col-12 col-lg-4">
             <div className="wht-box module-box">
               <WhatHappenedTodaySourceActivity />
             </div>
+          </div>
 
-            <div className="wht-box module-box">
+          {/* JOBB BLOKK – KÉT ELEM EGY OSZLOPBAN */}
+          <div className="col-12 col-lg-4 d-flex flex-column gap-4">
+
+            {/* FENT – KIUGRÓ AKTIVITÁSOK (VÍZSZINTES) */}
+            <div className="wht-box module-box horizontal-box">
+              <WhatHappenedTodaySpikeDetection />
+            </div>
+
+            {/* LENT – FELKAPOTT KULCSSZAVAK (VÍZSZINTES) */}
+            <div className="wht-box module-box horizontal-box">
               <WhatHappenedTodayKulcsszavak />
             </div>
 
