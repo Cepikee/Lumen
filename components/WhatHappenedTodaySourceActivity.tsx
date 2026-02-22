@@ -65,16 +65,20 @@ export default function WhatHappenedTodaySourceActivity() {
 
   // ⭐ Rendezés minden frissítéskor
   const sorted = useMemo(() => {
-    return [...data].sort((a, b) => b.total - a.total);
-  }, [data]);
+  if (!data || !Array.isArray(data)) return [];
+  return [...data].sort((a, b) => b.total - a.total);
+}, [data]);
+
 
   // ⭐ Series újraszámolása (InsightsOverviewChart mintájára)
   const series = useMemo(() => {
-    return sorted.map((item) => ({
-      name: item.source,
-      data: [item.total],
-    }));
-  }, [sorted]);
+  if (!sorted.length) return [];
+  return sorted.map((item) => ({
+    name: item.source,
+    data: [item.total],
+  }));
+}, [sorted]);
+
 
   // ⭐ Options újraszámolása theme alapján
   const options: ApexCharts.ApexOptions = useMemo(() => {
