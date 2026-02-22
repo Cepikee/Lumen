@@ -1,23 +1,20 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-// --- Szöveg tisztító ---
+// Szöveg tisztító
 function fixText(s: any): string | null {
   if (!s) return null;
-
   let t = String(s).replace(/[\x00-\x1F\x7F]/g, "").trim();
   if (!t) return null;
-
   if (/[├â├ę├╝├║]/.test(t)) {
     try {
       t = Buffer.from(t, "latin1").toString("utf8").trim();
     } catch {}
   }
-
   return t || null;
 }
 
-// --- Spike szint ---
+// Spike szint
 function getSpikeLevel(count: number) {
   if (count >= 7) return "brutal";
   if (count >= 5) return "strong";
@@ -27,11 +24,9 @@ function getSpikeLevel(count: number) {
 
 export async function GET() {
   try {
-    // --- 1) Mai nap intervalluma ---
     const now = new Date();
     const start = new Date(now);
     start.setHours(0, 0, 0, 0);
-
     const end = new Date(start);
     end.setDate(start.getDate() + 1);
 
@@ -40,9 +35,7 @@ export async function GET() {
 
     const spikes: any[] = [];
 
-    // ============================================================
-    // 2) KATEGÓRIA SPIKE — bucket alapú, Chart.js kompatibilis
-    // ============================================================
+    // Kategória spike
     const [catRows]: any = await db.query(
       `
       SELECT 
@@ -57,19 +50,17 @@ export async function GET() {
       GROUP BY TRIM(category), bucket
       HAVING count >= 3
       ORDER BY count DESC
-      LIMIT 20
+      LIMIT 40
       `,
       [startStr, endStr]
     );
 
-    for (const r of catRows) {
+    for (const r of catRows || []) {
       const cat = fixText(r.category);
       if (!cat) continue;
-
       const hour = new Date(r.bucket).getHours();
       const level = getSpikeLevel(r.count);
       if (!level) continue;
-
       spikes.push({
         type: "category",
         label: cat,
@@ -79,9 +70,7 @@ export async function GET() {
       });
     }
 
-    // ============================================================
-    // 3) FORRÁS SPIKE — bucket alapú
-    // ============================================================
+    // Forrás spike
     const [srcRows]: any = await db.query(
       `
       SELECT 
@@ -96,19 +85,17 @@ export async function GET() {
       GROUP BY TRIM(source), bucket
       HAVING count >= 3
       ORDER BY count DESC
-      LIMIT 20
+      LIMIT 40
       `,
       [startStr, endStr]
     );
 
-    for (const r of srcRows) {
+    for (const r of srcRows || []) {
       const src = fixText(r.source);
       if (!src) continue;
-
       const hour = new Date(r.bucket).getHours();
       const level = getSpikeLevel(r.count);
       if (!level) continue;
-
       spikes.push({
         type: "source",
         label: src,
@@ -118,23 +105,15 @@ export async function GET() {
       });
     }
 
-    // ============================================================
-    // 4) TOP 10 spike visszaadása
-    // ============================================================
+    // Rangsorolás: kombinált score (érték + óra súlyozás)
     const topSpikes = spikes
-      .sort((a, b) => b.value - a.value)
-      .slice(0, 10);
+      .map((s) => ({ ...s, score: s.value })) // később bővíthető (z-score, delta)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 12);
 
-    return NextResponse.json({
-      success: true,
-      spikes: topSpikes,
-    });
-
+    return NextResponse.json({ success: true, spikes: topSpikes });
   } catch (err) {
-    console.error("Spike Detection API error:", err);
-    return NextResponse.json(
-      { success: false, error: "server_error" },
-      { status: 500 }
-    );
+    console.error("Spike Detection V2 API error:", err);
+    return NextResponse.json({ success: false, error: "server_error" }, { status: 500 });
   }
 }
