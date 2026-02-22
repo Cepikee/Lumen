@@ -1855,76 +1855,150 @@ html.theme-dark .nav-link {
 
 
 /* =========================
-   Spike strip — színezés, badge, hover, animáció
+   Spike strip — auto size + színezés
    (minden osztály .spike-v2-* prefix)
    ========================= */
 
-/* Card background subtle gradient and soft border */
+/* Root: ne legyen fix méret, engedjük a szülőnek a méretezést */
+.spike-v2-root {
+  box-sizing: border-box;
+  padding: 10px;
+  background: var(--bs-body-bg);
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: visible;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Title */
+.spike-v2-title {
+  font-size: 0.95rem;
+  margin: 0;
+  padding: 0 2px;
+  line-height: 1;
+  color: var(--bs-body-color);
+  font-weight: 700;
+}
+
+/* Horizontal viewport: csak vízszintes görgetés, magasság a szülőtől/fenttől függ */
+.spike-v2-list {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: stretch;
+  height: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+}
+
+/* scrollbar styling */
+.spike-v2-list::-webkit-scrollbar { height: 8px; }
+.spike-v2-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 6px; }
+
+/* Card: kompakt, de rugalmas — ne kényszerítsük a szülőt */
 .spike-v2-item {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
-  border: 1px solid rgba(0,0,0,0.08);
-  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.18s ease;
+  flex: 0 0 auto;        /* engedjük a kártyának, hogy természetes szélességet vegyen fel */
+  min-width: 120px;      /* kompakt minimum */
+  max-width: 220px;      /* ne legyen túl széles */
+  height: auto;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 10px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+  cursor: pointer;
+  text-align: left;
+  color: var(--bs-body-color);
+  box-sizing: border-box;
 }
 
-/* Stronger hover look */
+/* Hover / focus */
+.spike-v2-item:focus,
 .spike-v2-item:hover {
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06));
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+  outline: none;
 }
 
-/* Title / label contrast */
+/* Label */
 .spike-v2-label {
-  color: #0f172a; /* dark slate */
-  text-shadow: 0 1px 0 rgba(255,255,255,0.02);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.05;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  color: #0f172a;
 }
 
-/* Meta (óra) kisebb, halvány */
-.spike-v2-meta { color: rgba(15,23,42,0.55); }
-
-/* Value — emeljük ki */
-.spike-v2-value { color: #0b1220; }
-
-/* Inline magnitude bar — finom glow a nagyobb értékeknél */
-.spike-v2-bar {
-  background: linear-gradient(90deg, rgba(255,122,0,0.95), rgba(239,68,68,0.95));
-  box-shadow: 0 4px 12px rgba(239,68,68,0.06) inset;
+/* Meta small */
+.spike-v2-meta {
+  font-size: 0.78rem;
+  color: rgba(0,0,0,0.6);
 }
 
-/* Level left border — erősebb, színesebb */
-.spike-v2-level-mild { border-left-color: rgba(96,165,250,0.95); }
-.spike-v2-level-strong { border-left-color: rgba(245,158,11,0.95); }
-.spike-v2-level-brutal { border-left-color: rgba(239,68,68,0.98); }
+/* Right block */
+.spike-v2-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+  min-width: 64px;
+}
 
-/* Badge styles: pill + gradient + subtle pulse for brutal */
-.spike-v2-badge {
-  border-radius: 999px;
+/* Value */
+.spike-v2-value {
+  font-size: 1.05rem;
   font-weight: 800;
-  letter-spacing: 0.02em;
+  color: var(--bs-body-color);
+}
+
+/* Badge */
+.spike-v2-badge {
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  white-space: nowrap;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
 
-/* Badge color variants */
-.spike-v2-badge-mild { background: linear-gradient(90deg,#60a5fa,#7c3aed); color:#fff; }
-.spike-v2-badge-strong { background: linear-gradient(90deg,#f59e0b,#f97316); color:#111; }
-.spike-v2-badge-brutal {
-  background: linear-gradient(90deg,#ef4444,#fb923c);
-  color:#fff;
-  animation: spikePulse 2.2s ease-in-out infinite;
-}
+/* Level border */
+.spike-v2-level-mild { border-left: 4px solid rgba(96,165,250,0.9); }
+.spike-v2-level-strong { border-left: 4px solid rgba(245,158,11,0.95); }
+.spike-v2-level-brutal { border-left: 4px solid rgba(239,68,68,0.95); }
 
-/* Subtle pulse animation for brutal badges */
+/* Badge colors */
+.spike-v2-badge-brutal { background: linear-gradient(90deg,#ef4444,#fb923c); color: #fff; animation: spikePulse 2.2s ease-in-out infinite; }
+.spike-v2-badge-strong { background: linear-gradient(90deg,#f59e0b,#f97316); color: #111; }
+.spike-v2-badge-mild { background: linear-gradient(90deg,#60a5fa,#7c3aed); color: #fff; }
+
+/* Inline magnitude bar */
+.spike-v2-barwrap { height: 10px; background: rgba(0,0,0,0.03); border-radius: 6px; overflow: hidden; margin-top: 6px; }
+.spike-v2-bar { height: 100%; border-radius: 6px; background: linear-gradient(90deg,#ff7a00,#ef4444); transition: width 0.25s ease; box-shadow: 0 4px 12px rgba(239,68,68,0.04) inset; }
+
+/* Pulse animation for brutal badge */
 @keyframes spikePulse {
   0% { transform: scale(1); box-shadow: 0 6px 18px rgba(239,68,68,0.06); }
   50% { transform: scale(1.03); box-shadow: 0 10px 28px rgba(239,68,68,0.10); }
   100% { transform: scale(1); box-shadow: 0 6px 18px rgba(239,68,68,0.06); }
 }
 
-/* Title area accent (small left accent line) */
-.spike-v2-title {
-  position: relative;
-  padding-left: 8px;
-}
+/* Title accent */
+.spike-v2-title { position: relative; padding-left: 8px; }
 .spike-v2-title::before {
   content: "";
   position: absolute;
@@ -1937,30 +2011,33 @@ html.theme-dark .nav-link {
   background: linear-gradient(180deg,#7c3aed,#06b6d4);
 }
 
-/* Nav buttons: translucent, hover stronger */
+/* Nav buttons */
 .spike-v2-nav {
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(4px);
-  transition: background 0.12s ease, transform 0.12s ease;
-}
-.spike-v2-nav:hover { background: rgba(255,255,255,0.10); transform: translateY(-2px); }
-
-/* Dark mode tweaks (if your theme toggles) */
-html.theme-dark .spike-v2-item {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border: 1px solid rgba(255,255,255,0.04);
-}
-html.theme-dark .spike-v2-label { color: #e6eefc; }
-html.theme-dark .spike-v2-meta { color: rgba(255,255,255,0.65); }
-html.theme-dark .spike-v2-value { color: #fff; }
-
-/* Small utility: truncate long labels nicely */
-.spike-v2-label { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-/* Optional: tiny sparkline placeholder (if later you add sparkline SVG) */
-.spike-v2-spark {
+  position: absolute;
+  top: 12px;
+  width: 28px;
   height: 28px;
-  width: 100%;
-  opacity: 0.95;
-  margin-top: 6px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  color: rgba(0,0,0,0.7);
+  z-index: 10;
 }
+.spike-v2-nav.left { left: 6px; }
+.spike-v2-nav.right { right: 6px; }
+
+/* Accessibility focus */
+.spike-v2-item:focus { box-shadow: 0 0 0 3px rgba(99,102,241,0.12); outline: none; }
+
+/* Responsive tweaks */
+@media (max-width: 360px) {
+  .spike-v2-item { min-width: 100px; padding: 8px; }
+  .spike-v2-label { font-size: 0.92rem; }
+  .spike-v2-value { font-size: 1rem; }
+}
+
