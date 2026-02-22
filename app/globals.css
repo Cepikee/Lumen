@@ -1857,121 +1857,77 @@ html.theme-dark .nav-link {
 
 
 
-/* Spike strip — compact 200x200 (több kártya látszódjon) */
+/* QUICK FIX: force horizontal compact strip inside .wht-box.module-box.horizontal-list */
+.wht-box.module-box.horizontal-list {
+  /* allow the inner strip to overflow horizontally */
+  overflow: visible !important;
+}
+
+/* ensure the root has exact size */
 .spike-v2-root {
-  --strip-w: 200px;
-  --strip-h: 200px;
-  box-sizing: border-box;
-  width: var(--strip-w);
-  height: var(--strip-h);
-  background: var(--bs-body-bg);
-  border-radius: 10px;
-  padding: 8px;
-  border: 1px solid rgba(0,0,0,0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  position: relative;
-  overflow: hidden;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  width: 200px !important;
+  height: 200px !important;
+  padding: 6px !important;
+  box-sizing: border-box !important;
 }
 
-/* Title */
-.spike-v2-title { font-size: 0.88rem; margin: 0; font-weight: 700; color: var(--bs-body-color); }
-
-/* Horizontal viewport */
+/* viewport: horizontal scroll only, no wrapping */
 .spike-v2-list {
-  display: flex;
-  flex-direction: row;
-  gap: 6px;
-  align-items: stretch;
-  height: calc(var(--strip-h) - 36px);
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 6px;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  white-space: nowrap;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 6px !important;
+  align-items: stretch !important;
+  height: calc(100% - 36px) !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding: 0 2px !important;
+  white-space: nowrap !important;
+  -webkit-overflow-scrolling: touch !important;
+  scroll-behavior: smooth !important;
 }
 
-/* scrollbar styling (subtle) */
-.spike-v2-list::-webkit-scrollbar { height: 7px; }
-.spike-v2-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.10); border-radius: 6px; }
-
-/* Card — kisebb, kompaktabb, így több fér el */
+/* make each card much smaller so multiple cards are visible */
 .spike-v2-item {
-  flex: 0 0 120px;        /* <-- kisebb szélesség: 120px */
-  height: 110px;         /* <-- kisebb magasság */
-  min-width: 120px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-  border-radius: 8px;
-  border: 1px solid rgba(0,0,0,0.06);
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 6px;
-  cursor: pointer;
-  text-align: left;
-  color: var(--bs-body-color);
-  box-sizing: border-box;
+  flex: 0 0 110px !important;    /* card width */
+  min-width: 110px !important;
+  height: 100px !important;      /* card height */
+  padding: 6px !important;
+  gap: 6px !important;
+  box-sizing: border-box !important;
+  font-size: 12px !important;
 }
 
-/* Hover / focus */
-.spike-v2-item:focus,
-.spike-v2-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
-  outline: none;
+/* reduce label and meta sizes so text doesn't wrap too much */
+.spike-v2-label { font-size: 0.92rem !important; line-height: 1 !important; }
+.spike-v2-meta  { font-size: 0.68rem !important; color: rgba(0,0,0,0.6) !important; }
+
+/* compact right block */
+.spike-v2-right { min-width: 56px !important; gap: 6px !important; }
+.spike-v2-value { font-size: 0.95rem !important; font-weight: 700 !important; }
+
+/* smaller badge */
+.spike-v2-badge { padding: 3px 6px !important; font-size: 0.62rem !important; }
+
+/* smaller inline bar */
+.spike-v2-barwrap { height: 8px !important; margin-top: 6px !important; }
+.spike-v2-bar { transition: width 0.18s ease !important; }
+
+/* nav buttons: keep them visible above the strip */
+.spike-v2-nav { z-index: 999 !important; }
+
+/* ensure buttons inside list render inline-flex (some user agents may default to block) */
+.spike-v2-list > .spike-v2-item,
+.spike-v2-list > button {
+  display: inline-flex !important;
+  vertical-align: top !important;
 }
 
-/* Label (kisebb) */
-.spike-v2-label {
-  font-size: 0.92rem;
-  font-weight: 700;
-  line-height: 1.05;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+/* fallback: if any parent sets font-size very small, force a readable base */
+.spike-v2-root, .spike-v2-root * { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial !important; }
 
-/* Meta (óra) */
-.spike-v2-meta { font-size: 0.72rem; color: rgba(0,0,0,0.6); }
-
-/* Right block: érték + badge (kisebb) */
-.spike-v2-right { display:flex; align-items:center; gap:6px; min-width: 64px; }
-.spike-v2-value { font-size: 0.95rem; font-weight: 800; }
-
-/* Badge (kisebb) */
-.spike-v2-badge { font-weight: 800; padding: 4px 8px; border-radius: 999px; font-size: 0.64rem; }
-
-/* Level border (subtilis) */
-.spike-v2-level-mild { border-left: 3px solid rgba(96,165,250,0.9); }
-.spike-v2-level-strong { border-left: 3px solid rgba(245,158,11,0.95); }
-.spike-v2-level-brutal { border-left: 3px solid rgba(239,68,68,0.95); }
-
-/* Badge colors */
-.spike-v2-badge-brutal { background: linear-gradient(90deg,#ef4444,#fb923c); color: #fff; }
-.spike-v2-badge-strong { background: linear-gradient(90deg,#f59e0b,#f97316); color: #111; }
-.spike-v2-badge-mild { background: linear-gradient(90deg,#60a5fa,#7c3aed); color: #fff; }
-
-/* Small inline magnitude bar (kisebb) */
-.spike-v2-barwrap { height: 8px; background: rgba(0,0,0,0.03); border-radius: 6px; overflow: hidden; margin-top: 6px; }
-.spike-v2-bar { height: 100%; border-radius: 6px; background: linear-gradient(90deg,#ff7a00,#ef4444); transition: width 0.25s ease; }
-
-/* Nav buttons (ha használod) */
-.spike-v2-nav { position:absolute; top:28px; width:26px; height:26px; border-radius:50%; border:none; background:rgba(0,0,0,0.06); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:15px; color:rgba(0,0,0,0.7); z-index:10; }
-.spike-v2-nav.left { left:6px; transform: translateY(-6px); }
-.spike-v2-nav.right { right:6px; transform: translateY(-6px); }
-
-/* Accessibility focus */
-.spike-v2-item:focus { box-shadow: 0 0 0 3px rgba(99,102,241,0.10); outline: none; }
-
-/* Mobile tweak */
-@media (max-width: 360px) {
-  .spike-v2-root { --strip-w: 180px; --strip-h: 180px; padding: 6px; }
-  .spike-v2-item { flex: 0 0 110px; height: 100px; padding: 6px; }
-  .spike-v2-label { font-size: 0.86rem; }
-  .spike-v2-value { font-size: 0.92rem; }
+/* responsive tweak if container is even tighter */
+@media (max-width: 320px) {
+  .spike-v2-item { flex: 0 0 100px !important; min-width: 100px !important; height: 92px !important; }
+  .spike-v2-label { font-size: 0.86rem !important; }
 }
