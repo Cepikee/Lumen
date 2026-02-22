@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 
 import {
@@ -41,15 +41,14 @@ export default function WhatHappenedTodayHeatmap() {
   const tooltipBody = isDark ? "#ddd" : "#333";
   const tooltipBorder = isDark ? "#444" : "#ccc";
 
-  // fetch with mounted guard and robust error handling
   useEffect(() => {
     let mounted = true;
+
     async function load() {
       try {
         const res = await fetch("/api/insights/heatmap");
         const json = await res.json();
         if (!mounted) return;
-        // ensure shape safety
         if (json && typeof json === "object" && Array.isArray(json.hours) && Array.isArray(json.categories)) {
           setData({
             success: Boolean(json.success),
@@ -88,15 +87,10 @@ export default function WhatHappenedTodayHeatmap() {
     return <div className="text-danger">Nem sikerült betölteni az adatokat.</div>;
   }
 
-  // safe destructure with defaults
   const { categories = [], hours = [], matrix = {} } = data;
 
-  // orderedCategories computed from categories only
-  const orderedCategories = useMemo(() => {
-    const order = ["Politika", "Gazdaság", "Közélet", "Kultúra", "Egészségügy", "Oktatás"];
-    if (!Array.isArray(categories)) return [];
-    return order.filter((c) => categories.includes(c));
-  }, [Array.isArray(categories) ? categories.join(",") : ""]);
+  const order = ["Politika", "Gazdaság", "Közélet", "Kultúra", "Egészségügy", "Oktatás"];
+  const orderedCategories = order.filter((c) => categories.includes(c));
 
   const colors: Record<string, string> = {
     Politika: "#d81b60",
@@ -107,22 +101,21 @@ export default function WhatHappenedTodayHeatmap() {
     Oktatás: "#3949ab",
   };
 
-  // chartData: useMemo with guarded inputs and primitive dependencies only
-  const chartData = useMemo(() => {
+  const chartData = (() => {
     try {
       if (!Array.isArray(hours) || hours.length === 0 || !Array.isArray(orderedCategories) || orderedCategories.length === 0) {
         return { labels: [], datasets: [] };
       }
 
       const datasets = orderedCategories.map((cat) => {
-        const row = Array.isArray(hours) ? hours.map((h) => {
+        const row = hours.map((h) => {
           try {
             const v = matrix?.[cat]?.[h];
             return typeof v === "number" ? v : Number(v) || 0;
           } catch {
             return 0;
           }
-        }) : [];
+        });
         return {
           label: cat,
           data: row,
@@ -139,52 +132,45 @@ export default function WhatHappenedTodayHeatmap() {
       console.error("chartData compute error:", err);
       return { labels: [], datasets: [] };
     }
-    // dependencies are primitive or small strings to avoid unstable triggers
-  }, [hours?.length ?? 0, orderedCategories.join(","), Object.keys(matrix || {}).length]);
+  })();
 
-  // options memoized on isDark and text colors
-  const options = useMemo(() => {
-    return {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: "bottom" as const,
-          labels: { color: textColor },
-        },
-        tooltip: {
-          backgroundColor: tooltipBg,
-          titleColor: tooltipTitle,
-          bodyColor: tooltipBody,
-          borderColor: tooltipBorder,
-          borderWidth: 1,
-          callbacks: {
-            label: (ctx: any) => `${ctx.dataset.label}: ${ctx.raw} cikk`,
-          },
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "bottom" as const,
+        labels: { color: textColor },
+      },
+      tooltip: {
+        backgroundColor: tooltipBg,
+        titleColor: tooltipTitle,
+        bodyColor: tooltipBody,
+        borderColor: tooltipBorder,
+        borderWidth: 1,
+        callbacks: {
+          label: (ctx: any) => `${ctx.dataset.label}: ${ctx.raw} cikk`,
         },
       },
-      scales: {
-        x: {
-          stacked: true,
-          ticks: { color: textColor },
-          grid: { color: gridColor },
-        },
-        y: {
-          stacked: true,
-          beginAtZero: true,
-          ticks: { precision: 0, color: textColor },
-          grid: { color: gridColor },
-        },
+    },
+    scales: {
+      x: {
+        stacked: true,
+        ticks: { color: textColor },
+        grid: { color: gridColor },
       },
-    };
-  }, [isDark, textColor, gridColor, tooltipBg, tooltipTitle, tooltipBody, tooltipBorder]);
+      y: {
+        stacked: true,
+        beginAtZero: true,
+        ticks: { precision: 0, color: textColor },
+        grid: { color: gridColor },
+      },
+    },
+  };
 
-  // stable key using small primitives only
   const stableKey = `${theme}-${hours?.length ?? 0}-${categories?.length ?? 0}`;
 
-  // final guard: if chartData.datasets contains unexpected values, log and fallback
   if (!chartData || !Array.isArray(chartData.datasets)) {
-    console.warn("Heatmap: invalid chartData, falling back to empty dataset", chartData);
     return (
       <div className="wht-heatmap" style={{ height: "350px" }}>
         <h5 className="mb-3">Kategóriák aktivitása óránként</h5>
