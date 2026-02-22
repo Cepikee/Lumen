@@ -1,11 +1,13 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useEffect, useState, useMemo } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { useUserStore } from "@/store/useUserStore";
 
-const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
+/**
+ * Diagnostic version: does NOT render ApexChart.
+ * It prints safe JSON of data, sorted, series, options to the page and console.
+ */
 
 interface SourceItem {
   source: string;
@@ -16,16 +18,29 @@ interface SourceItem {
 interface ApiResponse {
   success: boolean;
   sources: SourceItem[];
-  // keep other fields optional if backend returns extras
   [k: string]: any;
 }
 
-export default function WhatHappenedTodaySourceActivity() {
-  // --- state
+/** Safe stringify to avoid crash on circular refs */
+function safeStringify(obj: any, space = 2) {
+  const seen = new WeakSet();
+  return JSON.stringify(
+    obj,
+    (key, value) => {
+      if (typeof value === "object" && value !== null) {
+        if (seen.has(value)) return "[Circular]";
+        seen.add(value);
+      }
+      if (typeof value === "function") return `[Function ${value.name || "anonymous"}]`;
+      return value;
+    },
+    space
+  );
+}
+
+export default function WhatHappenedTodaySourceActivityDebug() {
   const [data, setData] = useState<SourceItem[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // --- theme from zustand
   const theme = useUserStore((s) => s.theme);
   const isDark =
     theme === "dark" ||
@@ -33,26 +48,18 @@ export default function WhatHappenedTodaySourceActivity() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-  // --- debug: render start
-  console.log("WHSourceActivity render start", {
-    theme,
-    isDark,
-    dataLength: data?.length ?? 0,
-    loading,
-  });
+  console.log("DIAG render start", { theme, isDark, dataLength: data?.length ?? 0, loading });
 
-  // --- fetch with mounted guard and debug logs
   useEffect(() => {
     let mounted = true;
-
     async function load() {
-      console.log("WHSourceActivity fetch start");
+      console.log("DIAG fetch start");
       try {
         const res = await fetch("/api/insights/source-activity");
         const json: ApiResponse = await res.json();
-        console.log("WHSourceActivity fetch result", json);
+        console.log("DIAG fetch result raw", json);
         if (!mounted) {
-          console.log("WHSourceActivity fetch result ignored (unmounted)");
+          console.log("DIAG fetch ignored (unmounted)");
           return;
         }
         if (json && json.success && Array.isArray(json.sources)) {
@@ -61,7 +68,7 @@ export default function WhatHappenedTodaySourceActivity() {
           setData([]);
         }
       } catch (err) {
-        console.error("WHSourceActivity fetch error:", err);
+        console.error("DIAG fetch error", err);
         if (mounted) setData([]);
       } finally {
         if (mounted) setLoading(false);
@@ -69,14 +76,13 @@ export default function WhatHappenedTodaySourceActivity() {
     }
 
     load();
-    const interval = setInterval(load, 60_000); // 1 percenként frissít
+    const interval = setInterval(load, 60_000);
     return () => {
       mounted = false;
       clearInterval(interval);
     };
   }, []);
 
-  // --- loading / empty states
   if (loading) {
     return (
       <div className="text-center py-4">
@@ -86,162 +92,88 @@ export default function WhatHappenedTodaySourceActivity() {
   }
 
   if (!data || data.length === 0) {
-    console.log("WHSourceActivity: no data to render");
+    console.log("DIAG: no data to render");
     return <div className="text-muted">Ma még nincs aktivitás.</div>;
   }
 
-  // --- safe sorted memo with try/catch + debug
-  const sorted = useMemo(() => {
-    try {
-      console.log("sorted useMemo start", { dataLen: data.length });
-      if (!data || !Array.isArray(data)) {
-        console.log("sorted useMemo: data invalid", data);
-        return [];
-      }
-      const s = [...data].sort((a, b) => (b?.total ?? 0) - (a?.total ?? 0));
-      console.log("sorted useMemo result length:", s.length);
-      return s;
-    } catch (err) {
-      console.error("sorted useMemo error:", err);
-      console.trace();
-      return [];
-    }
-  }, [data]);
+  // synchronous safe computations (no useMemo to avoid hook issues)
+  let sorted: SourceItem[] = [];
+  try {
+    sorted = Array.isArray(data) ? [...data].sort((a, b) => (b?.total ?? 0) - (a?.total ?? 0)) : [];
+    console.log("DIAG sorted computed length", sorted.length);
+  } catch (err) {
+    console.error("DIAG sorted sync error", err);
+    sorted = [];
+  }
 
-  // --- series memo with try/catch + debug
-  const series = useMemo(() => {
-    try {
-      console.log("series useMemo start", { sortedLen: sorted.length });
-      if (!sorted || !Array.isArray(sorted) || sorted.length === 0) {
-        console.log("series useMemo: sorted empty");
-        return [];
-      }
-      const s = sorted.map((item) => ({
-        name: String(item?.source ?? "unknown"),
-        data: [Number(item?.total ?? 0)],
-      }));
-      console.log("series useMemo result length:", s.length, s.slice(0, 3));
-      return s;
-    } catch (err) {
-      console.error("series useMemo error:", err);
-      console.trace();
-      return [];
-    }
-  }, [sorted]);
+  let series: any[] = [];
+  try {
+    series = sorted.map((item) => ({ name: String(item?.source ?? "unknown"), data: [Number(item?.total ?? 0)] }));
+    console.log("DIAG series computed length", series.length, series.slice(0, 5));
+  } catch (err) {
+    console.error("DIAG series sync error", err);
+    series = [];
+  }
 
-  // --- options memo (depends on isDark) with debug
-  const options: ApexCharts.ApexOptions = useMemo(() => {
-    try {
-      console.log("options useMemo start", { isDark });
-      const opts: ApexCharts.ApexOptions = {
-        chart: {
-          type: "bar",
-          toolbar: { show: false },
-          stacked: false,
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true,
-            borderRadius: 6,
-            barHeight: "60%",
-          },
-        },
-        xaxis: {
-          labels: { show: false },
-          axisBorder: { show: false },
-          axisTicks: { show: false },
-        },
-        yaxis: {
-          labels: { show: false },
-        },
-        colors: [
-          "#FF4D4F",
-          "#FFA940",
-          "#36CFC9",
-          "#40A9FF",
-          "#9254DE",
-          "#73D13D",
-          "#F759AB",
-          "#597EF7",
-          "#FFC53D",
-          "#5CDBD3",
-        ],
-        dataLabels: {
-          enabled: true,
-          formatter: (val: any) => `${val} db`,
-          style: {
-            fontSize: "14px",
-            fontWeight: 700,
-            colors: isDark ? ["#fff"] : ["#000"],
-          },
-          offsetX: 10,
-        },
-        legend: {
-          show: true,
-          position: "left",
-          horizontalAlign: "left",
-          fontSize: "15px",
-          fontWeight: 600,
-          labels: {
-            colors: isDark ? "#fff" : "#000",
-          },
-          markers: {
-            size: 14,
-          },
-        },
-        tooltip: {
-          shared: false,
-          theme: isDark ? "dark" : "light",
-          y: {
-            formatter: (val: any) => `${val} db`,
-          },
-          x: {
-            formatter: () => "",
-          },
-          marker: {
-            show: false,
-          },
-        },
-        grid: { show: false },
-      };
-      console.log("options useMemo computed");
-      return opts;
-    } catch (err) {
-      console.error("options useMemo error:", err);
-      console.trace();
-      return {};
-    }
-  }, [isDark]);
+  let options: any = {};
+  try {
+    options = {
+      chart: { type: "bar", toolbar: { show: false }, stacked: false },
+      plotOptions: { bar: { horizontal: true, borderRadius: 6, barHeight: "60%" } },
+      xaxis: { labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false } },
+      yaxis: { labels: { show: false } },
+      colors: ["#FF4D4F", "#FFA940", "#36CFC9", "#40A9FF", "#9254DE", "#73D13D", "#F759AB", "#597EF7", "#FFC53D", "#5CDBD3"],
+      dataLabels: {
+        enabled: true,
+        formatter: (val: any) => `${val} db`,
+        style: { fontSize: "14px", fontWeight: 700, colors: isDark ? ["#fff"] : ["#000"] },
+        offsetX: 10,
+      },
+      legend: { show: true, position: "left", horizontalAlign: "left", labels: { colors: isDark ? "#fff" : "#000" } },
+      tooltip: { shared: false, theme: isDark ? "dark" : "light", y: { formatter: (v: any) => `${v} db` } },
+      grid: { show: false },
+    };
+    console.log("DIAG options computed");
+  } catch (err) {
+    console.error("DIAG options error", err);
+    options = {};
+  }
 
-  // --- stable key (avoid JSON.stringify)
   const stableKey = `${theme}-${data.length}`;
 
-  // --- final debug before render
-  console.log("WHSourceActivity final render", {
-    stableKey,
-    seriesLength: series.length,
-    topSeries: series.slice(0, 3),
-  });
-
-  // --- TEMP ISOLATION: if you want to isolate ApexChart, uncomment the block below
-  // and comment out the ApexChart render. This helps determine if ApexChart is the cause.
-  //
-  // return (
-  //   <div className="wht-source-activity">
-  //     <h5 className="mb-3 text-center">Források aktivitása ma</h5>
-  //     <div style={{ padding: 20, border: "1px dashed #ccc" }}>
-  //       <pre style={{ whiteSpace: "pre-wrap" }}>
-  //         {JSON.stringify({ stableKey, series, options }, null, 2)}
-  //       </pre>
-  //     </div>
-  //   </div>
-  // );
-
+  // Render debug JSON instead of the chart
   return (
-    <div className="wht-source-activity">
-      <h5 className="mb-3 text-center">Források aktivitása ma</h5>
+    <div style={{ padding: 12 }}>
+      <h5 className="mb-3 text-center">DIAGNOSTIC Források aktivitása ma</h5>
 
-      <ApexChart key={stableKey} options={options} series={series} type="bar" height={350} />
+      <div style={{ marginBottom: 12, padding: 12, border: "1px solid #ddd", borderRadius: 8, background: isDark ? "#111" : "#fff", color: isDark ? "#eee" : "#111" }}>
+        <strong>stableKey</strong>
+        <pre>{stableKey}</pre>
+      </div>
+
+      <div style={{ marginBottom: 12, padding: 12, border: "1px dashed #bbb", borderRadius: 8, background: isDark ? "#0b0b0b" : "#fafafa", color: isDark ? "#ddd" : "#222" }}>
+        <strong>data (safe)</strong>
+        <pre style={{ whiteSpace: "pre-wrap" }}>{safeStringify(data, 2)}</pre>
+      </div>
+
+      <div style={{ marginBottom: 12, padding: 12, border: "1px dashed #bbb", borderRadius: 8 }}>
+        <strong>sorted (safe)</strong>
+        <pre style={{ whiteSpace: "pre-wrap" }}>{safeStringify(sorted, 2)}</pre>
+      </div>
+
+      <div style={{ marginBottom: 12, padding: 12, border: "1px dashed #bbb", borderRadius: 8 }}>
+        <strong>series (safe)</strong>
+        <pre style={{ whiteSpace: "pre-wrap" }}>{safeStringify(series, 2)}</pre>
+      </div>
+
+      <div style={{ marginBottom: 12, padding: 12, border: "1px dashed #bbb", borderRadius: 8 }}>
+        <strong>options keys</strong>
+        <pre>{Object.keys(options || {}).join(", ")}</pre>
+      </div>
+
+      <div style={{ marginTop: 16, padding: 12, border: "1px solid #eee", borderRadius: 8 }}>
+        <em>Console logs also printed. If this page renders without crashing, the chart library is likely the cause.</em>
+      </div>
     </div>
   );
 }
