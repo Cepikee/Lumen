@@ -7,43 +7,46 @@ import WhatHappenedTodayKulcsszavak from "./WhatHappenedTodayKulcsszavak";
 
 export default function WhatHappenedToday() {
   return (
-    <div className="wht-wrapper container my-5">
+    <div className="container my-5 d-flex justify-content-center">
 
-      {/* FŐ CÍM BLOKK */}
-      <div className="wht-header position-relative mb-4">
-        <div className="wht-header-line"></div>
-        <h2 className="wht-title position-relative d-inline-block px-3">
-          Mi történt ma valójában?
-        </h2>
-      </div>
+      {/* KÖZÖS DOBOZ */}
+      <div className="wht-wrapper-box p-4">
 
-      {/* 4 MODUL GRID */}
-      <div className="row g-4">
-
-        <div className="col-12 col-md-6 col-lg-3">
-          <div className="wht-box p-3 h-100">
-            <WhatHappenedTodayHeatmap />
-          </div>
+        {/* DOBOZ FEJLÉC */}
+        <div className="wht-header text-center mb-4">
+          <h2 className="wht-title d-inline-block px-3">
+            Mi történt ma valójában?
+          </h2>
         </div>
 
-        <div className="col-12 col-md-6 col-lg-3">
-          <div className="wht-box p-3 h-100">
-            <WhatHappenedTodaySourceActivity />
-          </div>
-        </div>
+        {/* 4 MODUL GRID */}
+        <div className="row g-4">
 
-        <div className="col-12 col-md-6 col-lg-3">
-          <div className="wht-box p-3 h-100">
-            <WhatHappenedTodaySpikeDetection />
+          <div className="col-12 col-md-6 col-lg-3">
+            <div className="wht-box module-box">
+              <WhatHappenedTodayHeatmap />
+            </div>
           </div>
-        </div>
 
-        <div className="col-12 col-md-6 col-lg-3">
-          <div className="wht-box p-3 h-100">
-            <WhatHappenedTodayKulcsszavak />
+          <div className="col-12 col-md-6 col-lg-3">
+            <div className="wht-box module-box">
+              <WhatHappenedTodaySourceActivity />
+            </div>
           </div>
-        </div>
 
+          <div className="col-12 col-md-6 col-lg-3">
+            <div className="wht-box module-box">
+              <WhatHappenedTodaySpikeDetection />
+            </div>
+          </div>
+
+          <div className="col-12 col-md-6 col-lg-3">
+            <div className="wht-box module-box">
+              <WhatHappenedTodayKulcsszavak />
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   );

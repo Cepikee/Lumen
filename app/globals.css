@@ -1565,7 +1565,7 @@ html.theme-dark .nav-link {
 
 /* Címblokk */
 .wht-header {
-  text-align: left;
+  text-align: center;
 }
 
 .wht-header-line {
@@ -1744,3 +1744,19 @@ html.theme-dark .nav-link {
   background-color: rgba(0, 0, 0, 0.05);
 }
 /* Kulcsszavak vége */
+
+.wht-wrapper-box {
+  background: var(--bs-body-bg);
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 12px;
+  max-width: 1400px;
+  width: 100%;
+  padding: 30px;
+}
+
+.module-box {
+  min-height: 350px;
+  max-height: 350px;
+  overflow-y: auto;
+  border-radius: 10px;
+}
