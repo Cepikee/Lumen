@@ -31,16 +31,19 @@ export default function WhatHappenedTodaySpikeDetection() {
   useEffect(() => {
     if (!stripRef.current || !data) return;
     const len = Array.isArray(data.spikes) ? data.spikes.length : 0;
-    // if first load or new items added, scroll to left (newest)
     if (prevLenRef.current === 0 || len > prevLenRef.current) {
-      setTimeout(() => { if (stripRef.current) stripRef.current.scrollLeft = 0; }, 40);
+      // small delay to allow rendering
+      const t = setTimeout(() => {
+        if (stripRef.current) stripRef.current.scrollLeft = 0;
+      }, 40);
+      return () => clearTimeout(t);
     }
     prevLenRef.current = len;
   }, [data]);
 
   if (isLoading) {
     return (
-      <div className="spike-v2-root text-center" style={{ padding: 10 }}>
+      <div className="spike-v2-root text-center">
         <Spinner animation="border" size="sm" /> Betöltés...
       </div>
     );
@@ -48,20 +51,12 @@ export default function WhatHappenedTodaySpikeDetection() {
 
   if (error || !data || !data.success) {
     const msg = (data as any)?.message ?? (data as any)?.error ?? "Nem sikerült betölteni az aktivitásokat.";
-    return (
-      <div className="spike-v2-root text-danger" style={{ padding: 10 }}>
-        Hiba: {msg}
-      </div>
-    );
+    return <div className="spike-v2-root text-danger">Hiba: {msg}</div>;
   }
 
   const spikes = Array.isArray(data.spikes) ? data.spikes : [];
   if (!spikes.length) {
-    return (
-      <div className="spike-v2-root text-muted" style={{ padding: 10 }}>
-        Ma nem történt kiugró aktivitás.
-      </div>
-    );
+    return <div className="spike-v2-root text-muted">Ma nem történt kiugró aktivitás.</div>;
   }
 
   // legfrissebb balra (nagyobb hour balra)
@@ -70,13 +65,15 @@ export default function WhatHappenedTodaySpikeDetection() {
 
   const levelLabel = (l: SpikeLevel) => (l === "brutal" ? "BRUTÁL" : l === "strong" ? "ERŐS" : "ENYHE");
 
+  const CARD_SCROLL_DELTA = 120; // egységnyi lapozás, igazítható CSS-hez
+
   const scrollBy = (delta: number) => {
     if (!stripRef.current) return;
     stripRef.current.scrollBy({ left: delta, behavior: "smooth" });
   };
 
   return (
-    <div className="spike-v2-root" style={{ padding: 10 }}>
+    <div className="spike-v2-root">
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div className="spike-v2-title">Kiugró aktivitások ma</div>
       </div>
@@ -85,6 +82,7 @@ export default function WhatHappenedTodaySpikeDetection() {
         {sorted.map((s, i) => (
           <button
             key={`${s.label}-${i}`}
+            type="button"
             className={`spike-v2-item spike-v2-level-${s.level}`}
             onClick={() => setOpen(s)}
             aria-label={`${s.label}, ${s.value} cikk, ${levelLabel(s.level)}`}
@@ -108,8 +106,12 @@ export default function WhatHappenedTodaySpikeDetection() {
         ))}
       </div>
 
-      <button className="spike-v2-nav left" onClick={() => scrollBy(-160)} aria-hidden>‹</button>
-      <button className="spike-v2-nav right" onClick={() => scrollBy(160)} aria-hidden>›</button>
+      <button type="button" className="spike-v2-nav left" onClick={() => scrollBy(-CARD_SCROLL_DELTA)} aria-hidden>
+        ‹
+      </button>
+      <button type="button" className="spike-v2-nav right" onClick={() => scrollBy(CARD_SCROLL_DELTA)} aria-hidden>
+        ›
+      </button>
 
       <Modal show={!!open} onHide={() => setOpen(null)} centered>
         <Modal.Header closeButton>
