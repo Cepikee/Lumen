@@ -53,16 +53,17 @@ export default function WhatHappenedTodaySourceActivity() {
   // Rendezés: legtöbb cikk → legkevesebb
   const sorted = [...data].sort((a, b) => b.total - a.total);
 
-  // Minden forrás külön series → így lesz színes
-  const series = sorted.map((item) => ({
-    name: item.source,
-    data: [item.total],
-  }));
+  // Sima horizontal bar chart → minden forrás egy bar
+  const series = [
+    {
+      name: "Cikkek száma",
+      data: sorted.map((item) => item.total),
+    },
+  ];
 
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: "bar",
-      stacked: true,
       toolbar: { show: false },
     },
 
@@ -74,17 +75,25 @@ export default function WhatHappenedTodaySourceActivity() {
       },
     },
 
-    // ❗ A "Források" felirat eltávolítva → üres kategória
-    xaxis: {
-      categories: [""],
+    // Bal oldalon a forrásnevek
+    yaxis: {
       labels: {
         style: {
-          fontSize: "0px", // teljesen elrejtjük
+          fontSize: "15px",
+          fontWeight: 600,
         },
       },
     },
 
-    // ⭐ Színes paletta
+    // Forrásnevek kategóriaként
+    xaxis: {
+      categories: sorted.map((item) => item.source),
+      labels: {
+        show: false, // jobboldali függőleges tengely eltüntetése
+      },
+    },
+
+    // Színes csíkok
     colors: [
       "#FF4D4F",
       "#FFA940",
@@ -98,24 +107,19 @@ export default function WhatHappenedTodaySourceActivity() {
       "#5CDBD3",
     ],
 
+    // Darabszám a csík végén
     dataLabels: {
       enabled: true,
-      style: { fontSize: "13px", fontWeight: 700 },
-    },
-
-    // ⭐ Legenda bal oldalon
-    legend: {
-      show: true,
-      position: "left",
-      horizontalAlign: "left",
-      fontSize: "15px",
-      fontWeight: 600,
-      markers: {
-        size: 14,
+      formatter: (val) => `${val} db`,
+      style: {
+        fontSize: "14px",
+        fontWeight: 700,
       },
+      offsetX: 10,
     },
 
     grid: { show: false },
+    legend: { show: false },
   };
 
   return (
