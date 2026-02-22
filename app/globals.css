@@ -1559,7 +1559,6 @@ html.theme-dark .nav-link {
 
 /* WhatHappenedToday oldal stílusai */
 /* WhatHappenedToday oldal stílusai */
-
 /* Wrapper */
 .wht-wrapper {
   width: 100%;
@@ -1568,7 +1567,6 @@ html.theme-dark .nav-link {
 /* Címblokk */
 .wht-header {
   text-align: center;
-  position: relative;
 }
 
 .wht-header-line {
@@ -1579,7 +1577,6 @@ html.theme-dark .nav-link {
   height: 2px;
   background: linear-gradient(to right, #0d6efd, transparent);
   transform: translateY(-50%);
-  z-index: 1;
 }
 
 .wht-title {
@@ -1587,9 +1584,8 @@ html.theme-dark .nav-link {
   font-weight: 700; /* 600 helyett 700 */
   font-size: 1.8rem; /* 1.4 helyett 1.8 */
   z-index: 2;
-  display: inline-block;
-  padding: 0 8px;
 }
+
 
 /* Dobozok */
 .wht-box {
@@ -1598,8 +1594,8 @@ html.theme-dark .nav-link {
   border-radius: 8px;
   min-height: 200px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* EZ ÚJ */
-  box-sizing: border-box;
 }
+
 
 /* HEATMAP */
 /* ============================
@@ -1660,7 +1656,6 @@ html.theme-dark .nav-link {
 }
 
 /* Heatmap Styles vége */
-
 /* --- SOURCE ACTIVITY SPARKLINE --- */
 /* ============================
    SOURCE ACTIVITY SPARKLINE
@@ -1694,8 +1689,6 @@ html.theme-dark .nav-link {
 .wht-spike-item {
   border-left: 4px solid transparent;
   transition: background-color 0.2s ease;
-  box-sizing: border-box;
-  padding: 8px;
 }
 
 /* Mild spike (3+) */
@@ -1720,7 +1713,6 @@ html.theme-dark .nav-link {
   background-color: rgba(0, 0, 0, 0.05);
 }
 /* Spike Detection Styles vége */
-
 /* Kulcsszavak */
 /* ============================
    TRENDING KEYWORDS STYLES
@@ -1729,8 +1721,6 @@ html.theme-dark .nav-link {
 .wht-keyword-item {
   border-left: 4px solid transparent;
   transition: background-color 0.2s ease;
-  box-sizing: border-box;
-  padding: 8px;
 }
 
 /* Mild spike (3+) */
@@ -1756,7 +1746,6 @@ html.theme-dark .nav-link {
 }
 /* Kulcsszavak vége */
 
-/* Közös doboz (WhatHappenedToday wrapper) */
 .wht-wrapper-box {
   background: var(--bs-body-bg);
   border: 1px solid rgba(0,0,0,0.15);
@@ -1764,103 +1753,48 @@ html.theme-dark .nav-link {
   max-width: 1700px;
   width: 100%;
   padding: 34px;
-  margin: 0 auto;
-  box-sizing: border-box;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
 }
 
-/* Modulok egységes, nagy magassága (fix) */
 .module-box {
   min-height: 600px;
   max-height: 600px;
   overflow-y: auto;
   border-radius: 10px;
-  box-sizing: border-box;
 }
 
-/* JOBB OSZLOP: a horizontal-box belső tartalma vízszintesen jelenik meg.
-   horizontal-box itt a wht-box belsejére vonatkozik: a komponens belső listáit rendezzük. */
 .horizontal-box {
-  display: flex;
-  flex-direction: column; /* a modulon belül a tartalom blokkok egymás alatt maradnak */
-  gap: 12px;
-  height: 100%;
-  box-sizing: border-box;
-  padding: 8px;
-}
-
-/* A komponensek belső listáinak (spike / keyword) vízszintes megjelenítése.
-   Feltételezi, hogy a komponensek list wrapper-ei .wht-spike-list / .wht-keyword-list,
-   és az elemek .wht-spike-item / .wht-keyword-item osztályt kapnak. */
-.horizontal-box .wht-spike-list,
-.horizontal-box .wht-keyword-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 6px 0;
-  margin: 0;
-  list-style: none;
-  box-sizing: border-box;
+  gap: 10px;
+}
+/* ============================
+   JOBB OLDALI KÉT MODUL – VÍZSZINTES ELRENDEZÉS
+   ============================ */
+
+/* A horizontal-list csak a jobb oldali két modulban van → erre célozunk */
+.horizontal-list .list-group {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 14px !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-/* Listaelemek inline-flex, ne foglaljanak 100% szélességet */
-.horizontal-box .wht-spike-item,
-.horizontal-box .wht-keyword-item {
-  display: inline-flex;
+/* A spike + kulcsszó elemek NE legyenek 100% szélesek */
+.horizontal-list .list-group-item {
+  display: inline-flex !important;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  min-width: 160px;
-  max-width: calc(50% - 12px);
-  padding: 10px;
+  justify-content: space-between;
+  min-width: 180px;
+  max-width: calc(50% - 14px);
+  padding: 12px;
+  border-radius: 8px;
   box-sizing: border-box;
-  background: transparent;
-  border-left: none;
-  border-radius: 6px;
 }
 
-/* Cím és meta a listaelemekben */
-.horizontal-box .wht-spike-item .title,
-.horizontal-box .wht-keyword-item .title {
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 6px;
-}
-
-.horizontal-box .wht-spike-item .meta,
-.horizontal-box .wht-keyword-item .meta {
-  font-size: 0.85rem;
-  color: #666;
-}
-
-/* Hover finomítás */
-.horizontal-box .wht-spike-item:hover,
-.horizontal-box .wht-keyword-item:hover {
-  background-color: rgba(0,0,0,0.04);
-}
-
-/* Megőrizzük a spike színezéseket (ha vannak wht-spike-mild/strong/brutal osztályok) */
-.wht-spike-mild { border-left-color: #0d6efd; background-color: rgba(13,110,253,0.04); }
-.wht-spike-strong { border-left-color: #fd7e14; background-color: rgba(253,126,20,0.06); }
-.wht-spike-brutal { border-left-color: #dc3545; background-color: rgba(220,53,69,0.06); }
-
-/* Ha a komponensek sparkline vagy kis grafikonokat használnak, biztosítsuk a helyet */
-.wht-sparkline { width: 100%; height: 36px; }
-
-/* Mobil: a három oszlop egymás alá kerül, a jobb oldali listák visszaállnak függőlegesre */
-@media (max-width: 991.98px) {
-  .wht-wrapper-box { padding: 20px; }
-  .module-box { min-height: 420px; max-height: 420px; }
-  .horizontal-box .wht-spike-list,
-  .horizontal-box .wht-keyword-list {
-    flex-direction: column;
-    gap: 8px;
-  }
-  .horizontal-box .wht-spike-item,
-  .horizontal-box .wht-keyword-item {
-    max-width: 100%;
-    min-width: auto;
-  }
+/* Hover */
+.horizontal-list .list-group-item:hover {
+  background: rgba(0,0,0,0.05);
 }
