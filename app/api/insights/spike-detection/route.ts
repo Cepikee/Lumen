@@ -1,5 +1,7 @@
+// app/api/insights/spike-detection/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
 
 // Szöveg tisztító
 function fixText(s: any): string | null {
@@ -22,11 +24,16 @@ function getSpikeLevel(count: number) {
   return null;
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    // ⭐ KÖZPONTI SECURITY CHECK
+    const sec = securityCheck(req);
+    if (sec) return sec;
+
     const now = new Date();
     const start = new Date(now);
     start.setHours(0, 0, 0, 0);
+
     const end = new Date(start);
     end.setDate(start.getDate() + 1);
 
@@ -35,7 +42,7 @@ export async function GET() {
 
     const spikes: any[] = [];
 
-    // Kategória spike
+    // --- Kategória spike ---
     const [catRows]: any = await db.query(
       `
       SELECT 
@@ -58,9 +65,11 @@ export async function GET() {
     for (const r of catRows || []) {
       const cat = fixText(r.category);
       if (!cat) continue;
+
       const hour = new Date(r.bucket).getHours();
       const level = getSpikeLevel(r.count);
       if (!level) continue;
+
       spikes.push({
         type: "category",
         label: cat,
@@ -70,7 +79,7 @@ export async function GET() {
       });
     }
 
-    // Forrás spike
+    // --- Forrás spike ---
     const [srcRows]: any = await db.query(
       `
       SELECT 
@@ -93,9 +102,11 @@ export async function GET() {
     for (const r of srcRows || []) {
       const src = fixText(r.source);
       if (!src) continue;
+
       const hour = new Date(r.bucket).getHours();
       const level = getSpikeLevel(r.count);
       if (!level) continue;
+
       spikes.push({
         type: "source",
         label: src,
@@ -105,15 +116,19 @@ export async function GET() {
       });
     }
 
-    // Rangsorolás: kombinált score (érték + óra súlyozás)
+    // --- Rangsorolás ---
     const topSpikes = spikes
-      .map((s) => ({ ...s, score: s.value })) // később bővíthető (z-score, delta)
+      .map((s) => ({ ...s, score: s.value }))
       .sort((a, b) => b.score - a.score)
       .slice(0, 12);
 
     return NextResponse.json({ success: true, spikes: topSpikes });
+
   } catch (err) {
     console.error("Spike Detection V2 API error:", err);
-    return NextResponse.json({ success: false, error: "server_error" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "server_error" },
+      { status: 500 }
+    );
   }
 }

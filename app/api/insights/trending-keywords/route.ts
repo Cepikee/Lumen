@@ -1,5 +1,7 @@
+// app/api/insights/trending-keywords/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
 
 // --- Kulcsszó tisztító ---
 function cleanKeyword(s: string): string {
@@ -17,7 +19,11 @@ function getSpikeLevel(count: number) {
   return null;
 }
 
-export async function GET() {
+export async function GET(req: Request) {
+  // ⭐ KÖZPONTI SECURITY CHECK
+  const sec = securityCheck(req);
+  if (sec) return sec;
+
   try {
     // --- 1) Mai nap intervalluma ---
     const today = new Date();
@@ -56,8 +62,8 @@ export async function GET() {
     // --- 4) Minimum előfordulás = 3 ---
     const filtered = Object.entries(keywordCount)
       .filter(([_, count]) => count >= 3)
-      .sort((a, b) => b[1] - a[1]) // legtöbb → legkevesebb
-      .slice(0, 20); // top 20
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 20);
 
     // --- 5) Küszöb szerinti besorolás ---
     const keywords = filtered.map(([kw, count]) => ({

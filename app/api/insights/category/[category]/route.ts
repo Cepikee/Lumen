@@ -1,6 +1,7 @@
 // app/api/insights/category/[category]/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
 
 function normalizeParam(raw?: string | null) {
   if (raw === undefined || raw === null) return null;
@@ -19,6 +20,10 @@ function normalizeParam(raw?: string | null) {
 }
 
 export async function GET(req: Request, context: any) {
+  // ⭐ KÖZPONTI SECURITY CHECK
+  const sec = securityCheck(req);
+  if (sec) return sec;
+
   const url = new URL(req.url);
 
   const rawFromContext = context?.params?.category;
@@ -158,26 +163,21 @@ export async function GET(req: Request, context: any) {
       count: Number(r.cnt || 0),
     }));
 
-    // 🔢 ELOSZLÁS SZÁMÍTÁS A GYŰRŰHÖZ
-    // 🔢 ELOSZLÁS SZÁMÍTÁS A GYŰRŰHÖZ
-const totalSourceCount = sources.reduce(
-  (sum: number, s: { source: string; count: number }) =>
-    sum + (Number(s.count) || 0),
-  0
-) || 1;
+    // 🔢 Gyűrű diagram adatok
+    const totalSourceCount =
+      sources.reduce((sum: number, s: { source: string; count: number }) => sum + (Number(s.count) || 0), 0) || 1;
 
-const ringSources = sources.map((s: { source: string; count: number }) => {
-  const rawName = String(s.source || "");
-  const normalized = rawName.toLowerCase().replace(".hu", "").trim();
+    const ringSources = sources.map((s: { source: string; count: number }) => {
+      const rawName = String(s.source || "");
+      const normalized = rawName.toLowerCase().replace(".hu", "").trim();
 
-  return {
-    name: normalized,                 // normalized név (portfolio, index, 24hu…)
-    label: rawName || "Ismeretlen",   // eredeti név
-    count: s.count,
-    percent: Math.round((Number(s.count) / totalSourceCount) * 100),
-  };
-});
-
+      return {
+        name: normalized,
+        label: rawName || "Ismeretlen",
+        count: s.count,
+        percent: Math.round((Number(s.count) / totalSourceCount) * 100),
+      };
+    });
 
     // ---------------------------------------
     // 4) Trend sorozat
@@ -246,11 +246,12 @@ const ringSources = sources.map((s: { source: string; count: number }) => {
       summary,
       items,
       sources,
-      ringSources, // ⬅️ Ezt mostantól használhatod a gyűrűhöz
+      ringSources,
       page,
       limit,
       total: Number(agg.articleCount || 0),
     });
+
   } catch (err) {
     console.error("Category route hiba:", err);
     return NextResponse.json(

@@ -1,5 +1,7 @@
+// app/api/insights/heatmap/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
 
 // --- Kategória tisztító (ugyanaz, mint a timeseries-ben) ---
 function fixCat(s: any): string | null {
@@ -17,8 +19,12 @@ function fixCat(s: any): string | null {
   return t || null;
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    // ⭐ KÖZPONTI SECURITY CHECK
+    const sec = securityCheck(req);
+    if (sec) return sec;
+
     // --- 1) Kategóriák lekérése ---
     const [cats]: any = await db.query(`
       SELECT DISTINCT TRIM(category) AS category
@@ -26,12 +32,14 @@ export async function GET() {
       WHERE category IS NOT NULL AND category <> ''
     `);
 
-    // TS FIX: explicit paraméter típus + type guard
     const categories = Array.from(
       new Map(
         (cats || [])
           .map((c: any) => fixCat(c.category))
-          .filter((x: string | null): x is string => typeof x === "string" && x.length > 0)
+          .filter(
+            (x: string | null): x is string =>
+              typeof x === "string" && x.length > 0
+          )
           .map((c: string) => [c.toLowerCase(), c])
       ).values()
     ) as string[];
@@ -39,7 +47,7 @@ export async function GET() {
     // --- 2) Órák listája ---
     const hours = Array.from({ length: 24 }, (_, i) => i);
 
-    // --- 3) Alap mátrix típusozva ---
+    // --- 3) Alap mátrix ---
     const matrix: Record<string, Record<number, number>> = {};
 
     for (const cat of categories) {
@@ -49,7 +57,7 @@ export async function GET() {
       }
     }
 
-    // --- 4) Mai nap intervalluma (ugyanaz, mint a timeseries-ben) ---
+    // --- 4) Mai nap intervalluma ---
     const now = new Date();
     const endStr = now.toISOString().slice(0, 19).replace("T", " ");
 
@@ -57,7 +65,7 @@ export async function GET() {
     startUtc.setHours(0, 0, 0, 0);
     const startStr = startUtc.toISOString().slice(0, 19).replace("T", " ");
 
-    // --- 5) Bucket-alapú SQL (Chart.js kompatibilis) ---
+    // --- 5) Bucket-alapú SQL ---
     const [rows]: any = await db.query(
       `
       SELECT 

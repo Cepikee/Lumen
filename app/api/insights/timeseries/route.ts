@@ -1,6 +1,8 @@
 // app/api/insights/timeseries/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
+
 function normalizeDbString(s: any): string | null {
   if (s === null || s === undefined) return null;
   let t = String(s).trim();
@@ -10,6 +12,10 @@ function normalizeDbString(s: any): string | null {
 }
 
 export async function GET(req: Request) {
+  // ⭐ KÖZPONTI SECURITY CHECK
+  const sec = securityCheck(req);
+  if (sec) return sec;
+
   const url = new URL(req.url);
 
   const rawCategory = url.searchParams.get("category");
@@ -32,7 +38,6 @@ export async function GET(req: Request) {
   const startStr = start.toISOString().slice(0, 10);
 
   try {
-    // ⭐ SUMMARIES TÁBLA HASZNÁLATA
     const sql = `
       SELECT DATE(created_at) AS day, COUNT(*) AS count
       FROM summaries

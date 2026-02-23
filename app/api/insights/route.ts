@@ -1,6 +1,7 @@
 // app/api/insights/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
 
 function normalizeDbString(s: any): string | null {
   if (s === null || s === undefined) return null;
@@ -16,6 +17,10 @@ function toLocalISOString(date: Date) {
 }
 
 export async function GET(req: Request) {
+  // ⭐ KÖZPONTI SECURITY CHECK
+  const sec = securityCheck(req);
+  if (sec) return sec;
+
   const url = new URL(req.url);
   const period = url.searchParams.get("period") || "7d";
 

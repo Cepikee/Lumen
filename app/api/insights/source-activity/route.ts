@@ -1,5 +1,7 @@
+// app/api/insights/source-activity/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
 
 // --- Forrásnév tisztító ---
 function fixSource(s: any): string | null {
@@ -17,8 +19,12 @@ function fixSource(s: any): string | null {
   return t || null;
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    // ⭐ KÖZPONTI SECURITY CHECK
+    const sec = securityCheck(req);
+    if (sec) return sec;
+
     // --- 1) Mai nap intervalluma ---
     const now = new Date();
     const start = new Date(now);

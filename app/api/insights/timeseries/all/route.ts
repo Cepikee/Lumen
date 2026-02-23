@@ -1,7 +1,7 @@
 // app/api/insights/timeseries/all/route.ts
-
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
 
 function fixCat(s: any): string | null {
   if (!s) return null;
@@ -19,6 +19,10 @@ function fixCat(s: any): string | null {
 }
 
 export async function GET(req: Request) {
+  // ⭐ KÖZPONTI SECURITY CHECK
+  const sec = securityCheck(req);
+  if (sec) return sec;
+
   const url = new URL(req.url);
   const period = url.searchParams.get("period") || "24h";
 
@@ -41,7 +45,7 @@ export async function GET(req: Request) {
     sqlBucket = "%Y-%m-%d %H:00:00";
   }
 
-  // IDŐINTERVALLUM (NINCS TZ KONVERZIÓ)
+  // IDŐINTERVALLUM
   const now = new Date();
   const endStr = now.toISOString().slice(0, 19).replace("T", " ");
 
@@ -70,7 +74,6 @@ export async function GET(req: Request) {
       const cat = fixCat(rawCat);
       if (!cat) continue;
 
-      // JAVÍTOTT SQL – NINCS TZ, VAN FELSŐ HATÁR
       const [rows]: any = await db.query(
         `
         SELECT 
