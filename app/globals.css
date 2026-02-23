@@ -1856,7 +1856,7 @@ html.theme-dark .nav-link {
 
 /* ---------- Spike grid root (320x320 támogatva a horizontal-list osztállyal) ---------- */
 .spike-grid-root {
-  padding: 12px;
+  padding: 10px;
   border-radius: 10px;
   background: var(--bs-body-bg);
   border: 1px solid rgba(0,0,0,0.06);
@@ -1864,48 +1864,61 @@ html.theme-dark .nav-link {
   color: var(--bs-body-color);
   display: flex;
   flex-direction: column;
-  gap: 10px;
   box-sizing: border-box;
+  gap: 6px;
 }
 
-/* ha a user már berakta .horizontal-list-et, az biztosítja a fix 320x320 magasságot */
+/* Külső doboz – fix 320x320 */
 .horizontal-list {
   max-height: 320px !important;
   min-height: 320px !important;
-  overflow: hidden;
-}
-
-/* Header */
-.spike-grid-header {
+  overflow: hidden; /* a belső rács scrollozik, nem ez */
   display: flex;
   flex-direction: column;
-  gap: 2px;
-}
-.spike-grid-title {
-  font-size: 0.95rem;
-  margin: 0;
-  font-weight: 700;
-}
-.spike-grid-sub {
-  font-size: 0.78rem;
-  color: rgba(0,0,0,0.55);
 }
 
-/* Grid: rács, kompakt kártyákkal */
+/* Header – LECSÖKKENTVE, hogy a rács nagyobb legyen */
+.spike-grid-header {
+  flex: 0 0 36px; /* <<< EDDIG 50-60px volt, most kisebb */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 2px;
+}
+
+.spike-grid-title {
+  font-size: 0.9rem;
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.spike-grid-sub {
+  font-size: 0.72rem;
+  color: rgba(0,0,0,0.55);
+  line-height: 1;
+}
+
+/* ---------- BELSŐ DOBOZ — NAGYOBBÍTOTT ---------- */
+/* A rács most kitölti a maradék helyet a 320px-es keretben */
 .spike-grid {
+  flex: 1 1 auto;              /* <<< EZ A LÉNYEG: nőjön meg! */
+  overflow-y: auto;            /* lefelé scroll */
+  overflow-x: hidden;
+  padding-right: 6px;
+  padding-bottom: 6px;
+
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 8px;
   align-content: start;
-  overflow: auto;
-  padding-right: 6px; /* scrollbar hely */
 }
 
-/* Card */
+/* ---------- Kártyák ---------- */
 .spike-card {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   padding: 8px;
   background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.01));
   border-radius: 8px;
@@ -1913,11 +1926,12 @@ html.theme-dark .nav-link {
   text-align: left;
   cursor: pointer;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
-  min-height: 72px;
+  min-height: 70px;
   box-sizing: border-box;
 }
-.spike-card:focus,
-.spike-card:hover {
+
+.spike-card:hover,
+.spike-card:focus {
   transform: translateY(-3px);
   box-shadow: 0 10px 24px rgba(0,0,0,0.06);
   outline: none;
@@ -1928,45 +1942,47 @@ html.theme-dark .nav-link {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
 }
+
 .spike-card-label {
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: #0f172a;
 }
+
 .spike-card-meta {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
 }
+
 .spike-card-hour {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: rgba(0,0,0,0.55);
 }
+
 .spike-card-value {
   font-weight: 800;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #0f172a;
 }
 
 /* Bar */
 .spike-card-barwrap {
   width: 100%;
-  height: 8px;
+  height: 7px;
   background: rgba(0,0,0,0.06);
   border-radius: 6px;
   overflow: hidden;
 }
+
 .spike-card-bar {
   height: 100%;
   border-radius: 6px;
   transition: width 0.22s ease;
-  /* alap szín, felülírható level-specifikusan */
-  background: linear-gradient(90deg,#ef4444,#fb923c);
 }
 
 /* Footer */
@@ -1974,42 +1990,42 @@ html.theme-dark .nav-link {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 8px;
 }
+
 .spike-card-badge {
-  padding: 4px 8px;
+  padding: 3px 7px;
   border-radius: 999px;
   font-weight: 700;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: #fff;
 }
 
-/* Level színek és osztályok */
-.spike-badge-mild { background: linear-gradient(90deg,#60a5fa,#7c3aed); color: #fff; }
+/* Jelzők */
+.spike-badge-mild { background: linear-gradient(90deg,#60a5fa,#7c3aed); }
 .spike-badge-strong { background: linear-gradient(90deg,#f59e0b,#f97316); color: #111; }
-.spike-badge-brutal { background: linear-gradient(90deg,#ef4444,#fb923c); color: #fff; }
-.spike-badge-extreme { background: linear-gradient(90deg,#9b2c2c,#ef4444); color: #fff; }
+.spike-badge-brutal { background: linear-gradient(90deg,#ef4444,#fb923c); }
+.spike-badge-extreme { background: linear-gradient(90deg,#9b2c2c,#ef4444); }
 
-/* Bar színek per level */
+/* Bar színek */
 .spike-card-bar-mild { background: linear-gradient(90deg,#60a5fa,#7c3aed); }
 .spike-card-bar-strong { background: linear-gradient(90deg,#f59e0b,#f97316); }
 .spike-card-bar-brutal { background: linear-gradient(90deg,#ef4444,#fb923c); }
 .spike-card-bar-extreme { background: linear-gradient(90deg,#9b2c2c,#ef4444); }
 
-/* külön extrém kártya kiemelés (pl. árnyék) */
+/* Extrém kártya kiemelés */
 .spike-card-extreme {
   box-shadow: 0 12px 36px rgba(239,68,68,0.08);
   border-color: rgba(239,68,68,0.12);
 }
 
-/* scrollbar finomítás */
-.spike-grid::-webkit-scrollbar { width: 8px; height: 8px; }
+/* Scrollbar */
+.spike-grid::-webkit-scrollbar { width: 8px; }
 .spike-grid::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 6px; }
 
-/* Responsive tweaks */
+/* Mobil */
 @media (max-width: 520px) {
-  .spike-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
-  .spike-card { padding: 8px; min-height: 64px; }
-  .spike-card-label { font-size: 0.88rem; }
-  .spike-card-value { font-size: 0.9rem; }
+  .spike-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  .spike-card { padding: 6px; min-height: 60px; }
+  .spike-card-label { font-size: 0.85rem; }
+  .spike-card-value { font-size: 0.85rem; }
 }
