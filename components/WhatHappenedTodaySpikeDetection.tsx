@@ -44,7 +44,11 @@ export default function WhatHappenedTodaySpikeDetection() {
   }
 
   // rendezés: legnagyobb érték elöl
-  const sorted = [...spikes].sort((a, b) => b.value - a.value);
+  const sorted = [...spikes].sort((a, b) => {
+  if (b.hour !== a.hour) return b.hour - a.hour; // idő szerint visszafelé
+  return b.value - a.value; // ha azonos óra, akkor érték szerint
+});
+
   const maxVal = Math.max(...sorted.map((s) => s.value), 1);
 
   // többféle jelző számítás érték alapján (nem csak a level mezőre támaszkodunk)
