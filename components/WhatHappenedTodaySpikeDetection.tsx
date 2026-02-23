@@ -44,6 +44,14 @@ const getColorForLabel = (label: string) => {
   return "#999";
 };
 
+// --- SEVERITY SZÍNEK ---
+const severityColors: Record<string, string> = {
+  extreme: "#d32f2f", // piros
+  brutal: "#ec407a",  // pink
+  strong: "#43a047",  // zöld
+  mild: "#ffa726",    // narancs
+};
+
 export default function WhatHappenedTodaySpikeDetection() {
   const { data, error, isLoading } = useSWR<{ success: boolean; spikes: SpikeItem[] }>(
     "/api/insights/spike-detection",
@@ -98,6 +106,7 @@ export default function WhatHappenedTodaySpikeDetection() {
           const pct = Math.round((s.value / maxVal) * 100);
           const sev = severity(s.value);
           const color = getColorForLabel(s.label);
+          const sevColor = severityColors[sev.key];
 
           return (
             <button
@@ -110,7 +119,7 @@ export default function WhatHappenedTodaySpikeDetection() {
               <div className="spike-card-top">
                 <div
                   className="spike-card-label"
-                  style={{ color }}   // <<< CÍM SZÍNE BEÉPÍTVE
+                  style={{ color }}   // <<< CÍM SZÍNE
                 >
                   {s.label}
                 </div>
@@ -126,7 +135,7 @@ export default function WhatHappenedTodaySpikeDetection() {
                   className="spike-card-bar"
                   style={{
                     width: `${pct}%`,
-                    background: color,   // <<< BAR SZÍNE BEÉPÍTVE
+                    background: color,   // <<< BAR SZÍNE
                   }}
                 />
               </div>
@@ -134,6 +143,7 @@ export default function WhatHappenedTodaySpikeDetection() {
               <div className="spike-card-footer">
                 <span
                   className="spike-card-badge"
+                  style={{ background: sevColor }}   // <<< BADGE = severity szín
                 >
                   {sev.label}
                 </span>
