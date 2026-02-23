@@ -12,7 +12,6 @@ import ForecastStatus from "@/components/ForecastStatus";
 import WhatHappenedToday from "@/components/WhatHappenedToday";
 import { useUserStore } from "@/store/useUserStore";
 
-
 // ⭐ Forecast API hook
 const fetcher = (url: string) =>
   fetch(url, {
@@ -47,6 +46,30 @@ function normalizeCategory(raw?: string | null) {
 
 export default function InsightFeedPage() {
   const theme = useUserStore((s) => s.theme);
+  const user = useUserStore((s) => s.user);
+  const isPremium = user?.is_premium === true;
+
+
+
+  const [showPremiumModal, setShowPremiumModal] = useState(false);
+
+  // ⭐ Prémium ellenőrzés
+  useEffect(() => {
+    if (!isPremium) {
+      setShowPremiumModal(true);
+    }
+  }, [isPremium]);
+
+  // Ha nem prémium → csak a modal jelenjen meg
+  if (!isPremium) {
+    return (
+      <>
+        <PremiumRequiredModal />
+      </>
+    );
+  }
+
+  // ⭐ Ha prémium → mehet az eredeti Insights oldal
   const isDark =
     theme === "dark" ||
     (theme === "system" &&
@@ -59,10 +82,8 @@ export default function InsightFeedPage() {
   const { data, error, loading } = useInsights(period, sort);
   const { data: tsData, loading: tsLoading } = useTimeseriesAll(period);
 
-  // ⭐ Forecast betöltése
   const { data: forecastData } = useForecast();
 
-  // ⭐ Drag-scroll ref
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -103,12 +124,10 @@ export default function InsightFeedPage() {
     };
   }, []);
 
- // ⭐ NINCS downsampling – minden pont megmarad
-const downsampledTs = useMemo(() => {
-  if (!tsData?.categories) return [];
-  return tsData.categories;
-}, [tsData]);
-
+  const downsampledTs = useMemo(() => {
+    if (!tsData?.categories) return [];
+    return tsData.categories;
+  }, [tsData]);
 
   const categoryTrends = useMemo<LocalRawCategory[]>(() => {
     if (!data) return [];
@@ -218,8 +237,94 @@ const downsampledTs = useMemo(() => {
           </div>
         </div>
       </section>
-      {/* WHAT HAPPENED TODAY DASHBOARD */} <div className="container-fluid mt-5 px-0"> <WhatHappenedToday /> </div>        
 
+      <div className="container-fluid mt-5 px-0">
+        <WhatHappenedToday />
+      </div>
     </main>
+  );
+}
+
+/* ⭐ Prémium modal (ugyanaz, mint a Híradóban) */
+function PremiumRequiredModal() {
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0,0,0,0.4)",
+        backdropFilter: "blur(3px)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 1055,
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "2rem",
+          width: "100%",
+          maxWidth: "680px",
+          padding: "2.8rem",
+          borderRadius: "24px",
+          background: "#1d2e4a",
+          color: "#fff",
+        }}
+      >
+        <div style={{ flex: "0 0 180px" }}>
+          <img
+            src="/icons/premium.png"
+            alt="Prémium szükséges"
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: "16px",
+            }}
+          />
+        </div>
+
+        <div style={{ flex: 1, textAlign: "center" }}>
+          <h2 style={{ fontWeight: 700, fontSize: "1.4rem" }}>
+            Prémium tartalom
+          </h2>
+
+          <p style={{ fontSize: "0.95rem", color: "#e0e0e0" }}>
+            Az Insights oldal csak{" "}
+            <span style={{ color: "#ffb4b4", fontWeight: 600 }}>
+              Prémium előfizetéssel
+            </span>{" "}
+            érhető el.
+          </p>
+
+          <button
+            className="btn w-100"
+            onClick={() => (window.location.href = "/premium")}
+            style={{
+              background: "linear-gradient(135deg, #ffb4b4, #ffdddd)",
+              borderRadius: "999px",
+              padding: "0.75rem 1.2rem",
+              fontWeight: 700,
+              color: "#111",
+            }}
+          >
+            Prémium feloldása
+          </button>
+
+          <button
+            className="btn btn-link"
+            style={{
+              color: "#ccc",
+              fontSize: "0.8rem",
+            }}
+            onClick={() => (window.location.href = "/")}
+          >
+            Vissza a főoldalra
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
