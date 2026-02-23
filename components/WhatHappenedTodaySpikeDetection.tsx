@@ -8,10 +8,10 @@ import { Modal, Button } from "react-bootstrap";
 type SpikeLevel = "mild" | "strong" | "brutal";
 
 interface SpikeItem {
-  label: string;
-  hour: number;
-  value: number;
-  level: SpikeLevel;
+  label: string;   // kategória vagy forrás neve
+  hour: number;    // óra (0-23)
+  value: number;   // cikkek száma
+  level?: SpikeLevel; // opcionális, de nem kötelező használni
 }
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
@@ -27,7 +27,7 @@ export default function WhatHappenedTodaySpikeDetection() {
 
   if (isLoading) {
     return (
-      <div className="spike-grid-root text-center">
+      <div className="spike-grid-root horizontal-list text-center">
         <Spinner animation="border" size="sm" /> Betöltés...
       </div>
     );
@@ -35,22 +35,28 @@ export default function WhatHappenedTodaySpikeDetection() {
 
   if (error || !data || !data.success) {
     const msg = (data as any)?.message ?? (data as any)?.error ?? "Nem sikerült betölteni az aktivitásokat.";
-    return <div className="spike-grid-root text-danger">Hiba: {msg}</div>;
+    return <div className="spike-grid-root horizontal-list text-danger">Hiba: {msg}</div>;
   }
 
   const spikes = Array.isArray(data.spikes) ? data.spikes : [];
   if (!spikes.length) {
-    return <div className="spike-grid-root text-muted">Ma nem történt kiugró aktivitás.</div>;
+    return <div className="spike-grid-root horizontal-list text-muted">Ma nem történt kiugró aktivitás.</div>;
   }
 
   // rendezés: legnagyobb érték elöl
   const sorted = [...spikes].sort((a, b) => b.value - a.value);
   const maxVal = Math.max(...sorted.map((s) => s.value), 1);
 
-  const levelLabel = (l: SpikeLevel) => (l === "brutal" ? "Brutál" : l === "strong" ? "Erős" : "Enyhe");
+  // többféle jelző számítás érték alapján (nem csak a level mezőre támaszkodunk)
+  const severity = (v: number) => {
+    if (v >= 20) return { key: "extreme", label: "Extrém", cls: "spike-badge-extreme", bar: "spike-card-bar-extreme" };
+    if (v >= 15) return { key: "brutal", label: "Brutál", cls: "spike-badge-brutal", bar: "spike-card-bar-brutal" };
+    if (v >= 10) return { key: "strong", label: "Erős", cls: "spike-badge-strong", bar: "spike-card-bar-strong" };
+    return { key: "mild", label: "Enyhe", cls: "spike-badge-mild", bar: "spike-card-bar-mild" };
+  };
 
   return (
-    <div className="spike-grid-root">
+    <div className="spike-grid-root horizontal-list" role="region" aria-label="Kiugró aktivitások ma">
       <div className="spike-grid-header">
         <h5 className="spike-grid-title">Kiugró aktivitások ma</h5>
         <div className="spike-grid-sub">Legnagyobb aktivitások, óránként</div>
@@ -59,10 +65,12 @@ export default function WhatHappenedTodaySpikeDetection() {
       <div className="spike-grid">
         {sorted.map((s, i) => {
           const pct = Math.round((s.value / maxVal) * 100);
+          const sev = severity(s.value);
+
           return (
             <button
               key={`${s.label}-${i}`}
-              className={`spike-card spike-card-${s.level}`}
+              className={`spike-card ${sev.key === "extreme" ? "spike-card-extreme" : ""}`}
               onClick={() => setOpen(s)}
               aria-label={`${s.label} ${s.hour}:00 ${s.value} cikk`}
               type="button"
@@ -76,12 +84,15 @@ export default function WhatHappenedTodaySpikeDetection() {
               </div>
 
               <div className="spike-card-barwrap" aria-hidden>
-                <div className="spike-card-bar" style={{ width: `${pct}%` }} />
+                {/* balra igazított sáv, nincs "100%" felirat */}
+                <div
+                  className={`spike-card-bar ${sev.bar}`}
+                  style={{ width: `${pct}%` }}
+                />
               </div>
 
               <div className="spike-card-footer">
-                <span className={`spike-card-badge spike-badge-${s.level}`}>{levelLabel(s.level)}</span>
-                <small className="spike-card-percent">{pct}%</small>
+                <span className={`spike-card-badge ${sev.cls}`}>{sev.label}</span>
               </div>
             </button>
           );
@@ -94,7 +105,7 @@ export default function WhatHappenedTodaySpikeDetection() {
         </Modal.Header>
         <Modal.Body>
           <p><strong>Cikkek száma:</strong> {open?.value}</p>
-          <p><strong>Spike szint:</strong> {open ? levelLabel(open.level) : ""}</p>
+          <p><strong>Jelző:</strong> {open ? severity(open.value).label : ""}</p>
           <p className="text-muted small">Itt később példacikkok vagy filter gombok jeleníthetők meg.</p>
         </Modal.Body>
         <Modal.Footer>
