@@ -112,11 +112,7 @@ export default function WhatHappenedTodaySpikeDetection() {
   };
 
   return (
-    <div
-      className="spike-grid-root horizontal-list"
-      role="region"
-      aria-label="Kiugró aktivitások ma"
-    >
+    <div className="spike-grid-root horizontal-list" role="region" aria-label="Kiugró aktivitások ma">
       <div className="spike-grid-header">
         <h5 className="spike-grid-title">Kiugró aktivitások ma</h5>
       </div>
@@ -129,8 +125,6 @@ export default function WhatHappenedTodaySpikeDetection() {
           const color = getColorForLabel(s.label);
           const sevColor = severityColors[sev.key];
 
-          const labelColor = isDark ? "#fff" : color;
-
           return (
             <button
               key={`${s.label}-${i}`}
@@ -140,16 +134,32 @@ export default function WhatHappenedTodaySpikeDetection() {
               type="button"
             >
               <div className="spike-card-top">
+
+                {/* --- CÍM: mindig színes, dark módban is --- */}
                 <div
                   className="spike-card-label"
-                  style={{ color: labelColor }}
+                  style={{ color: color }}
                 >
                   {s.label}
                 </div>
 
                 <div className="spike-card-meta">
-                  <span className="spike-card-hour">{s.hour}:00</span>
-                  <span className="spike-card-value">{s.value}</span>
+
+                  {/* --- ÓRA: dark módban fehér --- */}
+                  <span
+                    className="spike-card-hour"
+                    style={{ color: isDark ? "#fff" : "#000" }}
+                  >
+                    {s.hour}:00
+                  </span>
+
+                  {/* --- ÉRTÉK: dark módban fehér --- */}
+                  <span
+                    className="spike-card-value"
+                    style={{ color: isDark ? "#fff" : "#000" }}
+                  >
+                    {s.value}
+                  </span>
                 </div>
               </div>
 
@@ -183,17 +193,11 @@ export default function WhatHappenedTodaySpikeDetection() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>
-            <strong>Cikkek száma:</strong> {open?.value}
-          </p>
-          <p>
-            <strong>Jelző:</strong> {open ? severity(open.value).label : ""}
-          </p>
+          <p><strong>Cikkek száma:</strong> {open?.value}</p>
+          <p><strong>Jelző:</strong> {open ? severity(open.value).label : ""}</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setOpen(null)}>
-            Bezár
-          </Button>
+          <Button variant="secondary" onClick={() => setOpen(null)}>Bezár</Button>
         </Modal.Footer>
       </Modal>
     </div>
