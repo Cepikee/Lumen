@@ -1,7 +1,12 @@
 import useSWR from "swr";
 
 const fetcher = (url: string) =>
-  fetch(url, { cache: "no-store" }).then((r) => {
+  fetch(url, {
+    cache: "no-store",
+    headers: {
+      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+    },
+  }).then((r) => {
     if (!r.ok) throw new Error("Fetch error");
     return r.json();
   });
