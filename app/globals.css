@@ -1838,7 +1838,7 @@ html.theme-dark .nav-link {
 /* Kulcsszavak modul is fél magasságú */
 .horizontal-list:last-of-type {
   min-height: 200px !important;
-  max-height: 200px !important;
+  max-height: 400px !important;
 }
 
 /* Sourceactivity*/
