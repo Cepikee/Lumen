@@ -45,49 +45,23 @@ function normalizeCategory(raw?: string | null) {
 }
 
 export default function InsightFeedPage() {
+  // -------------------------
   // STORE / THEME / USER
+  // -------------------------
   const theme = useUserStore((s) => s.theme);
   const user = useUserStore((s) => s.user);
   const userLoading = useUserStore((s) => s.loading);
 
-  // --- TÍPUSBIZTOS PRÉMIUM ELLENŐRZÉS (kezel boolean, number, camelCase, role, premium_tier)
-  const isPremium = (() => {
-    if (!user) return false;
-
-    // boolean mezők
-    if (typeof (user as any).is_premium === "boolean") {
-      return (user as any).is_premium === true;
-    }
-    if (typeof (user as any).isPremium === "boolean") {
-      return (user as any).isPremium === true;
-    }
-
-    // számként visszaadott érték (pl. 1)
-    if (typeof (user as any).is_premium === "number") {
-      return Number((user as any).is_premium) === 1;
-    }
-
-    // role vagy premium_tier fallback
-    if (typeof (user as any).role === "string" && (user as any).role === "premium") {
-      return true;
-    }
-    if ((user as any).premium_tier) {
-      return true;
-    }
-
-    return false;
-  })();
-
-  // --- DEBUG / API CHECK
+  // -------------------------
+  // DEBUG / API CHECK (hooks must be declared unconditionally)
+  // -------------------------
   const [apiUser, setApiUser] = useState<any | null>(null);
   const [apiChecked, setApiChecked] = useState(false);
 
-  // Ha máshol nem hívod, töltsd be a store userét
   useEffect(() => {
     useUserStore.getState().loadUser?.();
   }, []);
 
-  // Közvetlen /api/auth/me lekérés a debughoz (nem írja felül a store-t)
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -113,15 +87,38 @@ export default function InsightFeedPage() {
     };
   }, []);
 
-  // Konzol debug a store és az API állapotáról
+  // Dev helper: csak logol, nem írja felül a store-t
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development" && apiUser) {
+      const candidate = apiUser.user ?? apiUser;
+      if (candidate) {
+        console.log("DEBUG candidate user from API (dev only):", candidate);
+      }
+    }
+  }, [apiUser]);
+
   useEffect(() => {
     console.log("DEBUG useUserStore.user:", user);
     console.log("DEBUG useUserStore.loading:", userLoading);
-    console.log("DEBUG derived isPremium:", isPremium);
     console.log("DEBUG apiChecked:", apiChecked, "apiUser:", apiUser);
-  }, [user, userLoading, isPremium, apiChecked, apiUser]);
+  }, [user, userLoading, apiChecked, apiUser]);
 
-  // UI STATE / HOOKS (minden további hook is itt, a komponens elején)
+  // -------------------------
+  // PRÉMIUM ELLENŐRZÉS (típusbiztos, runtime)
+  // -------------------------
+  const isPremium = (() => {
+    if (!user) return false;
+    if (typeof (user as any).is_premium === "boolean") return (user as any).is_premium === true;
+    if (typeof (user as any).isPremium === "boolean") return (user as any).isPremium === true;
+    if (typeof (user as any).is_premium === "number") return Number((user as any).is_premium) === 1;
+    if (typeof (user as any).role === "string" && (user as any).role === "premium") return true;
+    if ((user as any).premium_tier) return true;
+    return false;
+  })();
+
+  // -------------------------
+  // UI STATE / DATA HOOKS (egyszer, a komponens elején)
+  // -------------------------
   const [period, setPeriod] = useState<"24h" | "7d" | "30d" | "90d">("24h");
   const [sort, setSort] = useState<string>("Legfrissebb");
 
@@ -131,7 +128,99 @@ export default function InsightFeedPage() {
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  // --- minden hook fent van, most jöhet a feltételes renderelés
+  // scrollRef effect (declared unconditionally)
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    const onMouseDown = (e: MouseEvent) => {
+      isDown = true;
+      startX = e.pageX - el.offsetLeft;
+      scrollLeft = el.scrollLeft;
+    };
+
+    const onMouseLeave = () => {
+      isDown = false;
+    };
+
+    const onMouseUp = () => {
+      isDown = false;
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - el.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      el.scrollLeft = scrollLeft - walk;
+    };
+
+    el.addEventListener("mousedown", onMouseDown);
+    el.addEventListener("mouseleave", onMouseLeave);
+    el.addEventListener("mouseup", onMouseUp);
+    el.addEventListener("mousemove", onMouseMove);
+
+    return () => {
+      el.removeEventListener("mousedown", onMouseDown);
+      el.removeEventListener("mouseleave", onMouseLeave);
+      el.removeEventListener("mouseup", onMouseUp);
+      el.removeEventListener("mousemove", onMouseMove);
+    };
+  }, [scrollRef]);
+
+  const downsampledTs = useMemo(() => {
+    if (!tsData?.categories) return [];
+    return tsData.categories;
+  }, [tsData]);
+
+  const categoryTrends = useMemo<LocalRawCategory[]>(() => {
+    if (!data) return [];
+
+    const sourceArray =
+      Array.isArray(data.categories) && data.categories.length > 0
+        ? data.categories
+        : [];
+
+    const mapped = sourceArray
+      .map((it: any) => {
+        const cat = (it.category ?? null) as string | null;
+        return {
+          category: cat,
+          trendScore: Number(it.trendScore ?? 0),
+          articleCount: Number(it.articleCount ?? 0),
+          sourceDiversity: Number(it.sourceDiversity ?? 0),
+          lastArticleAt: it.lastArticleAt ?? null,
+          sparkline: it.sparkline ?? [],
+          ringSources: it.ringSources ?? [],
+        } as LocalRawCategory;
+      })
+      .filter((c) => normalizeCategory(c.category) !== null);
+
+    return mapped;
+  }, [data]);
+
+  const categoryItems = categoryTrends.map((c) => {
+    const cat = normalizeCategory(c.category)!;
+    return {
+      id: `cat-${cat}`,
+      title: cat,
+      score: Number(c.trendScore || 0),
+      sources: Number(c.articleCount || 0),
+      dominantSource: `${c.sourceDiversity ?? 0} forrás`,
+      timeAgo: c.lastArticleAt ? new Date(c.lastArticleAt).toLocaleString() : "",
+      href: `/insights/category/${encodeURIComponent(cat)}`,
+      ringSources: c.ringSources,
+      sparkline: c.sparkline,
+    };
+  });
+
+  // -------------------------
+  // MINDEN HOOK fent van — most jöhet a feltételes render
+  // -------------------------
   if (userLoading) return null;
   if (!apiChecked) return null;
 
@@ -181,99 +270,14 @@ export default function InsightFeedPage() {
     );
   }
 
-  // Ha ide eljutunk, a user prémiumként van azonosítva (store vagy API alapján)
-  // innen folytathatod a renderelést (header, chart, cards stb.)
-
-  // scrollRef effect
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    let isDown = false;
-    let startX = 0;
-    let scrollLeft = 0;
-
-    const onMouseDown = (e: MouseEvent) => {
-      isDown = true;
-      startX = e.pageX - el.offsetLeft;
-      scrollLeft = el.scrollLeft;
-    };
-
-    const onMouseLeave = () => {
-      isDown = false;
-    };
-
-    const onMouseUp = () => {
-      isDown = false;
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - el.offsetLeft;
-      const walk = (x - startX) * 1.5;
-      el.scrollLeft = scrollLeft - walk;
-    };
-
-    el.addEventListener("mousedown", onMouseDown);
-    el.addEventListener("mouseleave", onMouseLeave);
-    el.addEventListener("mouseup", onMouseUp);
-    el.addEventListener("mousemove", onMouseMove);
-
-    return () => {
-      el.removeEventListener("mousedown", onMouseDown);
-      el.removeEventListener("mouseleave", onMouseLeave);
-      el.removeEventListener("mouseup", onMouseUp);
-      el.removeEventListener("mousemove", onMouseMove);
-    };
-  }, [scrollRef]);
-
-  // single downsampledTs and categoryTrends declarations (no duplicates)
-  const downsampledTs = useMemo(() => {
-    if (!tsData?.categories) return [];
-    return tsData.categories;
-  }, [tsData]);
-
-  const categoryTrends = useMemo<LocalRawCategory[]>(() => {
-    if (!data) return [];
-
-    const sourceArray =
-      Array.isArray(data.categories) && data.categories.length > 0
-        ? data.categories
-        : [];
-
-    const mapped = sourceArray
-      .map((it: any) => {
-        const cat = (it.category ?? null) as string | null;
-        return {
-          category: cat,
-          trendScore: Number(it.trendScore ?? 0),
-          articleCount: Number(it.articleCount ?? 0),
-          sourceDiversity: Number(it.sourceDiversity ?? 0),
-          lastArticleAt: it.lastArticleAt ?? null,
-          sparkline: it.sparkline ?? [],
-          ringSources: it.ringSources ?? [],
-        } as LocalRawCategory;
-      })
-      .filter((c) => normalizeCategory(c.category) !== null);
-
-    return mapped;
-  }, [data]);
-
-  const categoryItems = categoryTrends.map((c) => {
-    const cat = normalizeCategory(c.category)!;
-    return {
-      id: `cat-${cat}`,
-      title: cat,
-      score: Number(c.trendScore || 0),
-      sources: Number(c.articleCount || 0),
-      dominantSource: `${c.sourceDiversity ?? 0} forrás`,
-      timeAgo: c.lastArticleAt ? new Date(c.lastArticleAt).toLocaleString() : "",
-      href: `/insights/category/${encodeURIComponent(cat)}`,
-      ringSources: c.ringSources,
-      sparkline: c.sparkline,
-    };
-  });
+  // -------------------------
+  // RENDER
+  // -------------------------
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   return (
     <main className="container-fluid py-4">
@@ -362,7 +366,7 @@ export default function InsightFeedPage() {
   );
 }
 
-/* ⭐ Prémium modal – ugyanaz a stílus, mint a Híradóban */
+/* ⭐ Prémium modal */
 function PremiumRequiredModal() {
   return (
     <div
