@@ -37,13 +37,14 @@ const InsightCard: React.FC<InsightCardProps> = ({
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   // ⭐ TOKENEK (ezeket a store-ban definiáljuk)
-  const bgColor = isDark ? "#212529;" : "#ffffff";
+  const bgColor = isDark ? "#212529" : "#ffffff";
   const textColor = isDark ? "#f0f0f0" : "#222222";
   const mutedColor = isDark ? "#bbbbbb" : "#6c757d";
   const borderColor = isDark ? "#333" : "#e5e5e5";
 
   return (
     <article
+      key={theme}
       className="p-3 text-center h-100"
       style={{
         borderRadius: 16,
