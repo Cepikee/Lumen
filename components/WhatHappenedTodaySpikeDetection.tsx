@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { Modal, Button } from "react-bootstrap";
+import { useUserStore } from "@/store/useUserStore";
 
 type SpikeLevel = "mild" | "strong" | "brutal";
 
@@ -46,13 +47,21 @@ const getColorForLabel = (label: string) => {
 
 // --- SEVERITY SZÍNEK ---
 const severityColors: Record<string, string> = {
-  extreme: "#d32f2f", // piros
-  brutal: "#ec407a",  // pink
-  strong: "#43a047",  // zöld
-  mild: "#ffa726",    // narancs
+  extreme: "#d32f2f",
+  brutal: "#ec407a",
+  strong: "#43a047",
+  mild: "#ffa726",
 };
 
 export default function WhatHappenedTodaySpikeDetection() {
+  const theme = useUserStore((s) => s.theme);
+
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
   const { data, error, isLoading } = useSWR<{ success: boolean; spikes: SpikeItem[] }>(
     "/api/insights/spike-detection",
     fetcher,
@@ -70,13 +79,20 @@ export default function WhatHappenedTodaySpikeDetection() {
   }
 
   if (error || !data || !data.success) {
-    const msg = (data as any)?.message ?? (data as any)?.error ?? "Nem sikerült betölteni az aktivitásokat.";
+    const msg =
+      (data as any)?.message ??
+      (data as any)?.error ??
+      "Nem sikerült betölteni az aktivitásokat.";
     return <div className="spike-grid-root horizontal-list text-danger">Hiba: {msg}</div>;
   }
 
   const spikes = Array.isArray(data.spikes) ? data.spikes : [];
   if (!spikes.length) {
-    return <div className="spike-grid-root horizontal-list text-muted">Ma nem történt kiugró aktivitás.</div>;
+    return (
+      <div className="spike-grid-root horizontal-list text-muted">
+        Ma nem történt kiugró aktivitás.
+      </div>
+    );
   }
 
   // --- RENDEZÉS: idő szerint visszafelé ---
@@ -96,7 +112,11 @@ export default function WhatHappenedTodaySpikeDetection() {
   };
 
   return (
-    <div className="spike-grid-root horizontal-list" role="region" aria-label="Kiugró aktivitások ma">
+    <div
+      className="spike-grid-root horizontal-list"
+      role="region"
+      aria-label="Kiugró aktivitások ma"
+    >
       <div className="spike-grid-header">
         <h5 className="spike-grid-title">Kiugró aktivitások ma</h5>
       </div>
@@ -105,8 +125,11 @@ export default function WhatHappenedTodaySpikeDetection() {
         {sorted.map((s, i) => {
           const pct = Math.round((s.value / maxVal) * 100);
           const sev = severity(s.value);
+
           const color = getColorForLabel(s.label);
           const sevColor = severityColors[sev.key];
+
+          const labelColor = isDark ? "#fff" : color;
 
           return (
             <button
@@ -119,7 +142,7 @@ export default function WhatHappenedTodaySpikeDetection() {
               <div className="spike-card-top">
                 <div
                   className="spike-card-label"
-                  style={{ color }}   // <<< CÍM SZÍNE
+                  style={{ color: labelColor }}
                 >
                   {s.label}
                 </div>
@@ -135,7 +158,7 @@ export default function WhatHappenedTodaySpikeDetection() {
                   className="spike-card-bar"
                   style={{
                     width: `${pct}%`,
-                    background: color,   // <<< BAR SZÍNE
+                    background: color,
                   }}
                 />
               </div>
@@ -143,7 +166,7 @@ export default function WhatHappenedTodaySpikeDetection() {
               <div className="spike-card-footer">
                 <span
                   className="spike-card-badge"
-                  style={{ background: sevColor }}   // <<< BADGE = severity szín
+                  style={{ background: sevColor }}
                 >
                   {sev.label}
                 </span>
@@ -155,14 +178,22 @@ export default function WhatHappenedTodaySpikeDetection() {
 
       <Modal show={!!open} onHide={() => setOpen(null)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>{open?.label} — {open?.hour}:00</Modal.Title>
+          <Modal.Title>
+            {open?.label} — {open?.hour}:00
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p><strong>Cikkek száma:</strong> {open?.value}</p>
-          <p><strong>Jelző:</strong> {open ? severity(open.value).label : ""}</p>
+          <p>
+            <strong>Cikkek száma:</strong> {open?.value}
+          </p>
+          <p>
+            <strong>Jelző:</strong> {open ? severity(open.value).label : ""}
+          </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setOpen(null)}>Bezár</Button>
+          <Button variant="secondary" onClick={() => setOpen(null)}>
+            Bezár
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
