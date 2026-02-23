@@ -48,25 +48,16 @@ export default function InsightFeedPage() {
   const theme = useUserStore((s) => s.theme);
   const user = useUserStore((s) => s.user);
   const isPremium = user?.is_premium === true;
+  const userLoading = useUserStore((s) => s.loading);
 
+  // Amíg tölt a user → ne mutass semmit
+  if (userLoading) {
+    return null; // vagy loader
+  }
 
-
-  const [showPremiumModal, setShowPremiumModal] = useState(false);
-
-  // ⭐ Prémium ellenőrzés
-  useEffect(() => {
-    if (!isPremium) {
-      setShowPremiumModal(true);
-    }
-  }, [isPremium]);
-
-  // Ha nem prémium → csak a modal jelenjen meg
+  // Ha betöltött és nem prémium → modal
   if (!isPremium) {
-    return (
-      <>
-        <PremiumRequiredModal />
-      </>
-    );
+    return <PremiumRequiredModal />;
   }
 
   // ⭐ Ha prémium → mehet az eredeti Insights oldal
@@ -154,6 +145,7 @@ export default function InsightFeedPage() {
 
     return mapped;
   }, [data]);
+
 
   const categoryItems = categoryTrends.map((c) => {
     const cat = normalizeCategory(c.category)!;
