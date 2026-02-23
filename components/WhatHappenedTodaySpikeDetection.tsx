@@ -8,15 +8,15 @@ import { Modal, Button } from "react-bootstrap";
 type SpikeLevel = "mild" | "strong" | "brutal";
 
 interface SpikeItem {
-  label: string;   // kategória vagy forrás neve
-  hour: number;    // óra (0-23)
-  value: number;   // cikkek száma
+  label: string;
+  hour: number;
+  value: number;
   level?: SpikeLevel;
 }
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
-// --- KATEGÓRIA SZÍNEK (heatmapből) ---
+// --- KATEGÓRIA SZÍNEK ---
 const categoryColors: Record<string, string> = {
   Politika: "#d81b60",
   Gazdaság: "#f9a825",
@@ -26,7 +26,7 @@ const categoryColors: Record<string, string> = {
   Oktatás: "#3949ab",
 };
 
-// --- FORRÁS SZÍNEK (forrás aktivitás modulból) ---
+// --- FORRÁS SZÍNEK ---
 const sourceColors: Record<string, string> = {
   "origo.hu": "#FF4D4F",
   "portfolio.hu": "#FFA940",
@@ -41,7 +41,7 @@ const sourceColors: Record<string, string> = {
 const getColorForLabel = (label: string) => {
   if (categoryColors[label]) return categoryColors[label];
   if (sourceColors[label]) return sourceColors[label];
-  return "#999"; // fallback
+  return "#999";
 };
 
 export default function WhatHappenedTodaySpikeDetection() {
@@ -71,7 +71,7 @@ export default function WhatHappenedTodaySpikeDetection() {
     return <div className="spike-grid-root horizontal-list text-muted">Ma nem történt kiugró aktivitás.</div>;
   }
 
-  // --- RENDEZÉS: idő szerint visszafelé, azon belül érték szerint ---
+  // --- RENDEZÉS: idő szerint visszafelé ---
   const sorted = [...spikes].sort((a, b) => {
     if (b.hour !== a.hour) return b.hour - a.hour;
     return b.value - a.value;
@@ -108,7 +108,13 @@ export default function WhatHappenedTodaySpikeDetection() {
               type="button"
             >
               <div className="spike-card-top">
-                <div className="spike-card-label">{s.label}</div>
+                <div
+                  className="spike-card-label"
+                  style={{ color }}   // <<< CÍM SZÍNE BEÉPÍTVE
+                >
+                  {s.label}
+                </div>
+
                 <div className="spike-card-meta">
                   <span className="spike-card-hour">{s.hour}:00</span>
                   <span className="spike-card-value">{s.value}</span>
@@ -120,7 +126,7 @@ export default function WhatHappenedTodaySpikeDetection() {
                   className="spike-card-bar"
                   style={{
                     width: `${pct}%`,
-                    background: color,
+                    background: color,   // <<< BAR SZÍNE BEÉPÍTVE
                   }}
                 />
               </div>
@@ -128,7 +134,6 @@ export default function WhatHappenedTodaySpikeDetection() {
               <div className="spike-card-footer">
                 <span
                   className="spike-card-badge"
-                  style={{ background: color }}
                 >
                   {sev.label}
                 </span>
