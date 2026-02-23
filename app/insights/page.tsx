@@ -78,7 +78,7 @@ export default function InsightFeedPage() {
     return false;
   })();
 
-  // --- DEBUG / API CHECK (minden hook fent van)
+  // --- DEBUG / API CHECK
   const [apiUser, setApiUser] = useState<any | null>(null);
   const [apiChecked, setApiChecked] = useState(false);
 
@@ -87,7 +87,7 @@ export default function InsightFeedPage() {
     useUserStore.getState().loadUser?.();
   }, []);
 
-  // Közvetlen /api/auth/me lekérés a debughoz
+  // Közvetlen /api/auth/me lekérés a debughoz (nem írja felül a store-t)
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -113,17 +113,6 @@ export default function InsightFeedPage() {
     };
   }, []);
 
-  // IDEIGLENES: ha az API visszaad user objektumot, állítsuk be a store-t is (csak dev)
-  useEffect(() => {
-    if (process.env.NODE_ENV === "development" && apiUser) {
-      const candidate = apiUser.user ?? apiUser;
-      if (candidate) {
-        console.log("DEBUG: force-setting store user from API (dev only):", candidate);
-        useUserStore.getState().setUser?.(candidate);
-      }
-    }
-  }, [apiUser]);
-
   // Konzol debug a store és az API állapotáról
   useEffect(() => {
     console.log("DEBUG useUserStore.user:", user);
@@ -142,85 +131,10 @@ export default function InsightFeedPage() {
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
+  // --- minden hook fent van, most jöhet a feltételes renderelés
+  if (userLoading) return null;
+  if (!apiChecked) return null;
 
-    let isDown = false;
-    let startX = 0;
-    let scrollLeft = 0;
-
-    const onMouseDown = (e: MouseEvent) => {
-      isDown = true;
-      startX = e.pageX - el.offsetLeft;
-      scrollLeft = el.scrollLeft;
-    };
-    const onMouseLeave = () => { isDown = false; };
-    const onMouseUp = () => { isDown = false; };
-    const onMouseMove = (e: MouseEvent) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - el.offsetLeft;
-      const walk = (x - startX) * 1.5;
-      el.scrollLeft = scrollLeft - walk;
-    };
-
-    el.addEventListener("mousedown", onMouseDown);
-    el.addEventListener("mouseleave", onMouseLeave);
-    el.addEventListener("mouseup", onMouseUp);
-    el.addEventListener("mousemove", onMouseMove);
-
-    return () => {
-      el.removeEventListener("mousedown", onMouseDown);
-      el.removeEventListener("mouseleave", onMouseLeave);
-      el.removeEventListener("mouseup", onMouseUp);
-      el.removeEventListener("mousemove", onMouseMove);
-    };
-  }, []);
-
-  const downsampledTs = useMemo(() => {
-    if (!tsData?.categories) return [];
-    return tsData.categories;
-  }, [tsData]);
-
-  const categoryTrends = useMemo<LocalRawCategory[]>(() => {
-    if (!data) return [];
-
-    const sourceArray =
-      Array.isArray(data.categories) && data.categories.length > 0
-        ? data.categories
-        : [];
-
-    const mapped = sourceArray
-      .map((it) => {
-        const cat = (it.category ?? null) as string | null;
-        return {
-          category: cat,
-          trendScore: Number(it.trendScore ?? 0),
-          articleCount: Number(it.articleCount ?? 0),
-          sourceDiversity: Number(it.sourceDiversity ?? 0),
-          lastArticleAt: it.lastArticleAt ?? null,
-          sparkline: it.sparkline ?? [],
-          ringSources: it.ringSources ?? [],
-        } as LocalRawCategory;
-      })
-      .filter((c) => normalizeCategory(c.category) !== null);
-
-    return mapped;
-  }, [data]);
-
-  // --- MOST jöhet a feltételes renderelés (mivel minden hook fent van)
-  // Amíg tölt a user → ne mutass semmit
-  if (userLoading) {
-    return null;
-  }
-
-  // Várjuk meg az API ellenőrzést is (debug célból)
-  if (!apiChecked) {
-    return null;
-  }
-
-  // Ha sem a store, sem az API nem lát prémiumot → modal
   const apiSaysPremium =
     apiUser?.user?.is_premium === 1 ||
     apiUser?.is_premium === 1 ||
@@ -270,8 +184,7 @@ export default function InsightFeedPage() {
   // Ha ide eljutunk, a user prémiumként van azonosítva (store vagy API alapján)
   // innen folytathatod a renderelést (header, chart, cards stb.)
 
-
-
+  // scrollRef effect
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
@@ -313,8 +226,9 @@ export default function InsightFeedPage() {
       el.removeEventListener("mouseup", onMouseUp);
       el.removeEventListener("mousemove", onMouseMove);
     };
-  }, []);
+  }, [scrollRef]);
 
+  // single downsampledTs and categoryTrends declarations (no duplicates)
   const downsampledTs = useMemo(() => {
     if (!tsData?.categories) return [];
     return tsData.categories;
@@ -329,7 +243,7 @@ export default function InsightFeedPage() {
         : [];
 
     const mapped = sourceArray
-      .map((it) => {
+      .map((it: any) => {
         const cat = (it.category ?? null) as string | null;
         return {
           category: cat,
@@ -374,10 +288,34 @@ export default function InsightFeedPage() {
 
         <div className="d-flex gap-2 align-items-center">
           <div className="insights-filter-group me-2">
-            <button type="button" className={`insights-filter-btn ${period === "24h" ? "active" : ""}`} onClick={() => setPeriod("24h")}>24h</button>
-            <button type="button" className={`insights-filter-btn ${period === "7d" ? "active" : ""}`} onClick={() => setPeriod("7d")}>7d</button>
-            <button type="button" className={`insights-filter-btn ${period === "30d" ? "active" : ""}`} onClick={() => setPeriod("30d")}>30d</button>
-            <button type="button" className={`insights-filter-btn ${period === "90d" ? "active" : ""}`} onClick={() => setPeriod("90d")}>90d</button>
+            <button
+              type="button"
+              className={`insights-filter-btn ${period === "24h" ? "active" : ""}`}
+              onClick={() => setPeriod("24h")}
+            >
+              24h
+            </button>
+            <button
+              type="button"
+              className={`insights-filter-btn ${period === "7d" ? "active" : ""}`}
+              onClick={() => setPeriod("7d")}
+            >
+              7d
+            </button>
+            <button
+              type="button"
+              className={`insights-filter-btn ${period === "30d" ? "active" : ""}`}
+              onClick={() => setPeriod("30d")}
+            >
+              30d
+            </button>
+            <button
+              type="button"
+              className={`insights-filter-btn ${period === "90d" ? "active" : ""}`}
+              onClick={() => setPeriod("90d")}
+            >
+              90d
+            </button>
           </div>
 
           <InsightFilters active={sort} onChange={(f) => setSort(f)} />
@@ -389,11 +327,7 @@ export default function InsightFeedPage() {
         <div style={{ height: 220 }} className="mb-4 bg-light rounded-4" />
       ) : (
         <div className="mb-4 p-3 rounded-4 bg-body-secondary">
-          <InsightsOverviewChart
-            data={downsampledTs || []}
-            forecast={forecastData?.forecast || {}}
-            range={period}
-          />
+          <InsightsOverviewChart data={downsampledTs || []} forecast={forecastData?.forecast || {}} range={period} />
           <ForecastStatus />
         </div>
       )}
@@ -409,20 +343,12 @@ export default function InsightFeedPage() {
             {loading
               ? Array.from({ length: 6 }).map((_, i) => (
                   <div key={`skeleton-${i}`} className="insight-card-wrapper">
-                    <InsightCard
-                      title="Betöltés..."
-                      score={0}
-                      sources={0}
-                      dominantSource=""
-                      timeAgo=""
-                      href="#"
-                      ringSources={[]}
-                      sparkline={[]}/>
+                    <InsightCard title="Betöltés..." score={0} sources={0} dominantSource="" timeAgo="" href="#" ringSources={[]} sparkline={[]} />
                   </div>
                 ))
               : categoryItems.map((item) => (
                   <div key={item.id} className="insight-card-wrapper">
-                    <InsightCard {...item}/>
+                    <InsightCard {...item} />
                   </div>
                 ))}
           </div>
@@ -478,16 +404,11 @@ function PremiumRequiredModal() {
         </div>
 
         <div style={{ flex: 1, textAlign: "center" }}>
-          <h2 style={{ fontWeight: 700, fontSize: "1.4rem" }}>
-            Prémium tartalom
-          </h2>
+          <h2 style={{ fontWeight: 700, fontSize: "1.4rem" }}>Prémium tartalom</h2>
 
           <p style={{ fontSize: "0.95rem", color: "#e0e0e0" }}>
             Az Insights oldal csak{" "}
-            <span style={{ color: "#ffb4b4", fontWeight: 600 }}>
-              Prémium előfizetéssel
-            </span>{" "}
-            érhető el.
+            <span style={{ color: "#ffb4b4", fontWeight: 600 }}>Prémium előfizetéssel</span> érhető el.
           </p>
 
           <button
