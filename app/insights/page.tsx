@@ -50,16 +50,16 @@ export default function InsightFeedPage() {
   const userLoading = useUserStore((s) => s.loading);
   const isPremium = user?.is_premium === true;
 
-  // --- Debug állapotok az API közvetlen teszteléséhez
+  // --- Debug: közvetlen API ellenőrzés és store betöltés
   const [apiUser, setApiUser] = useState<any | null>(null);
   const [apiChecked, setApiChecked] = useState(false);
 
-  // TÖLTSD BE A USER ADATOT (ha máshol nem hívod)
+  // Ha máshol nem hívod, töltsd be a store userét
   useEffect(() => {
     useUserStore.getState().loadUser();
   }, []);
 
-  // Közvetlen teszt: lekérdezzük az /api/auth/me választ, hogy lásd a backend mit ad vissza
+  // Közvetlen /api/auth/me lekérés a debughoz
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -85,7 +85,21 @@ export default function InsightFeedPage() {
     };
   }, []);
 
-  // Konzol debug a store aktuális értékeiről
+  // IDEIGLENES: ha az API visszaad user objektumot, állítsuk be a store-t is (csak dev)
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development" && apiUser) {
+      // Ha az API válaszban a user a top-levelben van: apiUser.is_premium
+      // vagy apiUser.user.is_premium, ezért mindkettőt kezeljük.
+      const candidate = apiUser.user ?? apiUser;
+      if (candidate) {
+        console.log("DEBUG: force-setting store user from API (dev only):", candidate);
+        // setUser feltételezve, hogy a store-ban van ilyen setter; ha más a neve, cseréld le
+        useUserStore.getState().setUser?.(candidate);
+      }
+    }
+  }, [apiUser]);
+
+  // Konzol debug a store és az API állapotáról
   useEffect(() => {
     console.log("DEBUG useUserStore.user:", user);
     console.log("DEBUG useUserStore.loading:", userLoading);
@@ -93,7 +107,7 @@ export default function InsightFeedPage() {
     console.log("DEBUG apiChecked:", apiChecked, "apiUser:", apiUser);
   }, [user, userLoading, isPremium, apiChecked, apiUser]);
 
-  // Amíg tölt a user → ne mutass semmit (vagy mutass loader)
+  // Amíg a store betölt, ne döntsünk
   if (userLoading) {
     return null;
   }
@@ -146,6 +160,7 @@ export default function InsightFeedPage() {
   }
 
   // Ha ide eljutunk, a user prémiumként van azonosítva (store vagy API alapján)
+
 
   // ⭐ Ha prémium → mehet az eredeti Insights oldal
   const isDark =
