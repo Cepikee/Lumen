@@ -47,24 +47,105 @@ function normalizeCategory(raw?: string | null) {
 export default function InsightFeedPage() {
   const theme = useUserStore((s) => s.theme);
   const user = useUserStore((s) => s.user);
-  const isPremium = user?.is_premium === true;
   const userLoading = useUserStore((s) => s.loading);
+  const isPremium = user?.is_premium === true;
 
-  // TÖLTSD BE A USER ADATOT
+  // --- Debug: közvetlen API ellenőrzés és store betöltés
+  const [apiUser, setApiUser] = useState<any | null>(null);
+  const [apiChecked, setApiChecked] = useState(false);
+
+  // Ha máshol nem hívod, töltsd be a store userét
   useEffect(() => {
     useUserStore.getState().loadUser();
   }, []);
 
-  // Amíg tölt a user → ne mutass semmit
+  // Közvetlen /api/auth/me lekérés a debughoz
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const res = await fetch("/api/auth/me", {
+          credentials: "include",
+          cache: "no-store",
+        });
+        const text = await res.text();
+        const parsed = text ? JSON.parse(text) : null;
+        if (!mounted) return;
+        setApiUser(parsed);
+        console.log("DEBUG /api/auth/me parsed:", parsed);
+      } catch (err) {
+        console.error("DEBUG /api/auth/me error:", err);
+        if (mounted) setApiUser(null);
+      } finally {
+        if (mounted) setApiChecked(true);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // Konzol debug a store és az API állapotáról
+  useEffect(() => {
+    console.log("DEBUG useUserStore.user:", user);
+    console.log("DEBUG useUserStore.loading:", userLoading);
+    console.log("DEBUG derived isPremium:", isPremium);
+    console.log("DEBUG apiChecked:", apiChecked, "apiUser:", apiUser);
+  }, [user, userLoading, isPremium, apiChecked, apiUser]);
+
+  // Amíg a store betölt, ne döntsünk
   if (userLoading) {
     return null;
   }
 
-  // Ha betöltött és nem prémium → modal
-  if (!isPremium) {
-    return <PremiumRequiredModal />;
+  // Várjuk meg az API ellenőrzést is (debug célból)
+  if (!apiChecked) {
+    return null;
   }
 
+  // Ha sem a store, sem az API nem lát prémiumot → modal
+  const apiSaysPremium =
+    apiUser?.user?.is_premium === true || apiUser?.is_premium === true;
+
+  if (!isPremium && !apiSaysPremium) {
+    return (
+      <>
+        <PremiumRequiredModal />
+        {process.env.NODE_ENV === "development" && (
+          <pre
+            style={{
+              position: "fixed",
+              right: 8,
+              bottom: 8,
+              zIndex: 9999,
+              background: "rgba(0,0,0,0.85)",
+              color: "#fff",
+              padding: 12,
+              fontSize: 12,
+              maxWidth: 420,
+              maxHeight: 300,
+              overflow: "auto",
+              borderRadius: 8,
+            }}
+          >
+            {JSON.stringify(
+              {
+                userLoading,
+                user,
+                isPremium,
+                apiChecked,
+                apiUser,
+              },
+              null,
+              2
+            )}
+          </pre>
+        )}
+      </>
+    );
+  }
+
+  // Ha ide eljutunk, a user prémiumként van azonosítva (store vagy API alapján)
   // ⭐ Ha prémium → mehet az eredeti Insights oldal
   const isDark =
     theme === "dark" ||
@@ -156,7 +237,6 @@ export default function InsightFeedPage() {
     return mapped;
   }, [data]);
 
-
   const categoryItems = categoryTrends.map((c) => {
     const cat = normalizeCategory(c.category)!;
     return {
@@ -247,7 +327,7 @@ export default function InsightFeedPage() {
   );
 }
 
-/* ⭐ Prémium modal (ugyanaz, mint a Híradóban) */
+/* ⭐ Prémium modal – ugyanaz a stílus, mint a Híradóban */
 function PremiumRequiredModal() {
   return (
     <div
