@@ -50,16 +50,16 @@ export default function InsightFeedPage() {
   const userLoading = useUserStore((s) => s.loading);
   const isPremium = user?.is_premium === true;
 
-  // --- Debug: közvetlen API ellenőrzés és store betöltés
+  // --- Debug állapotok az API közvetlen teszteléséhez
   const [apiUser, setApiUser] = useState<any | null>(null);
   const [apiChecked, setApiChecked] = useState(false);
 
-  // Ha máshol nem hívod, töltsd be a store userét
+  // TÖLTSD BE A USER ADATOT (ha máshol nem hívod)
   useEffect(() => {
     useUserStore.getState().loadUser();
   }, []);
 
-  // Közvetlen /api/auth/me lekérés a debughoz
+  // Közvetlen teszt: lekérdezzük az /api/auth/me választ, hogy lásd a backend mit ad vissza
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -85,7 +85,7 @@ export default function InsightFeedPage() {
     };
   }, []);
 
-  // Konzol debug a store és az API állapotáról
+  // Konzol debug a store aktuális értékeiről
   useEffect(() => {
     console.log("DEBUG useUserStore.user:", user);
     console.log("DEBUG useUserStore.loading:", userLoading);
@@ -93,7 +93,7 @@ export default function InsightFeedPage() {
     console.log("DEBUG apiChecked:", apiChecked, "apiUser:", apiUser);
   }, [user, userLoading, isPremium, apiChecked, apiUser]);
 
-  // Amíg a store betölt, ne döntsünk
+  // Amíg tölt a user → ne mutass semmit (vagy mutass loader)
   if (userLoading) {
     return null;
   }
@@ -146,6 +146,7 @@ export default function InsightFeedPage() {
   }
 
   // Ha ide eljutunk, a user prémiumként van azonosítva (store vagy API alapján)
+
   // ⭐ Ha prémium → mehet az eredeti Insights oldal
   const isDark =
     theme === "dark" ||
