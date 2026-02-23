@@ -15,7 +15,13 @@ interface SpikeItem {
   level?: SpikeLevel;
 }
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
+const fetcher = (url: string) =>
+  fetch(url, {
+    headers: {
+      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+    },
+  }).then((r) => r.json());
+
 
 // --- KATEGÓRIA SZÍNEK ---
 const categoryColors: Record<string, string> = {

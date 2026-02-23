@@ -19,21 +19,27 @@ export default function WhatHappenedTodayKulcsszavak() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function load() {
-      try {
-        const res = await fetch("/api/insights/trending-keywords");
-        const json: ApiResponse = await res.json();
-        if (json.success) {
-          setData(json.keywords);
-        }
-      } catch (err) {
-        console.error("Trending keywords fetch error:", err);
-      } finally {
-        setLoading(false);
+  async function load() {
+    try {
+      const res = await fetch("/api/insights/trending-keywords", {
+        headers: {
+          "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+        },
+      });
+
+      const json: ApiResponse = await res.json();
+      if (json.success) {
+        setData(json.keywords);
       }
+    } catch (err) {
+      console.error("Trending keywords fetch error:", err);
+    } finally {
+      setLoading(false);
     }
-    load();
-  }, []);
+  }
+  load();
+}, []);
+
 
   if (loading) {
     return (

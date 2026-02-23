@@ -23,7 +23,13 @@ interface HeatmapResponse {
   matrix: Record<string, Record<number, number>>;
 }
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
+const fetcher = (url: string) =>
+  fetch(url, {
+    headers: {
+      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+    },
+  }).then((r) => r.json());
+
 
 export default function WhatHappenedTodayHeatmap() {
   const theme = useUserStore((s) => s.theme);

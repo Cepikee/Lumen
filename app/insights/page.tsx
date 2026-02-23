@@ -14,7 +14,13 @@ import { useUserStore } from "@/store/useUserStore";
 
 
 // ⭐ Forecast API hook
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
+const fetcher = (url: string) =>
+  fetch(url, {
+    headers: {
+      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+    },
+  }).then((r) => r.json());
+
 const useForecast = () => useSWR("/api/insights/forecast", fetcher);
 const InsightsOverviewChart = dynamic(
   () => import("@/components/InsightsOverviewChart"),

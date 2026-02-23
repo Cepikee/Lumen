@@ -64,7 +64,13 @@ export default function CategoryPage() {
           sort
         )}&page=${page}&limit=${limit}`;
 
-        const res = await fetch(url, { cache: "no-store" });
+        const res = await fetch(url, {
+  cache: "no-store",
+  headers: {
+    "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+  },
+});
+
         if (!res.ok) throw new Error("Hálózati hiba");
 
         const json = await res.json();

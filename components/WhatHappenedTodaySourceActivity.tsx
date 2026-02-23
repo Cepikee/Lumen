@@ -20,7 +20,13 @@ interface ApiResponse {
   [k: string]: any;
 }
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
+const fetcher = (url: string) =>
+  fetch(url, {
+    headers: {
+      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+    },
+  }).then((r) => r.json());
+
 
 export default function WhatHappenedTodaySourceActivity() {
   const theme = useUserStore((s) => s.theme);
