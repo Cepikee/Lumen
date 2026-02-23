@@ -1789,8 +1789,8 @@ html.theme-dark .nav-link {
    ============================ */
 
 .horizontal-list {
-  max-height: 120px !important;
-  min-height: 120px !important;
+  max-height: 320px !important;
+  min-height: 320px !important;
   overflow: hidden;
 }
 
