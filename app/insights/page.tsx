@@ -47,8 +47,37 @@ function normalizeCategory(raw?: string | null) {
 export default function InsightFeedPage() {
   const theme = useUserStore((s) => s.theme);
   const user = useUserStore((s) => s.user);
-  const userLoading = useUserStore((s) => s.loading);
-  const isPremium = user?.is_premium === true;
+const userLoading = useUserStore((s) => s.loading);
+
+// Típusbiztos prémium ellenőrzés
+const isPremium = (() => {
+  if (!user) return false;
+
+  // 1) explicit boolean mezők (ha a típusban léteznek)
+  if (typeof (user as any).is_premium === "boolean") {
+    return (user as any).is_premium === true;
+  }
+  if (typeof (user as any).isPremium === "boolean") {
+    return (user as any).isPremium === true;
+  }
+
+  // 2) számként visszaadott érték (pl. 1)
+  if (typeof (user as any).is_premium === "number") {
+    return Number((user as any).is_premium) === 1;
+  }
+
+  // 3) role vagy premium_tier fallback
+  if (typeof (user as any).role === "string" && (user as any).role === "premium") {
+    return true;
+  }
+  if ((user as any).premium_tier) {
+    return true;
+  }
+
+  return false;
+})();
+
+
 
   // --- Debug: közvetlen API ellenőrzés és store betöltés
   const [apiUser, setApiUser] = useState<any | null>(null);
