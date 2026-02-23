@@ -46,19 +46,25 @@ function normalizeCategory(raw?: string | null) {
 
 export default function InsightFeedPage() {
   const theme = useUserStore((s) => s.theme);
-  const user = useUserStore((s) => s.user);
-  const isPremium = user?.is_premium === true;
-  const userLoading = useUserStore((s) => s.loading);
+const user = useUserStore((s) => s.user);
+const isPremium = user?.is_premium === true;
+const userLoading = useUserStore((s) => s.loading);
 
-  // Amíg tölt a user → ne mutass semmit
-  if (userLoading) {
-    return null; // vagy loader
-  }
+// TÖLTSD BE A USER ADATOT
+useEffect(() => {
+  useUserStore.getState().loadUser();
+}, []);
 
-  // Ha betöltött és nem prémium → modal
-  if (!isPremium) {
-    return <PremiumRequiredModal />;
-  }
+// Amíg tölt a user → ne mutass semmit
+if (userLoading) {
+  return null;
+}
+
+// Ha betöltött és nem prémium → modal
+if (!isPremium) {
+  return <PremiumRequiredModal />;
+}
+
 
   // ⭐ Ha prémium → mehet az eredeti Insights oldal
   const isDark =
