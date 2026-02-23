@@ -1852,8 +1852,6 @@ html.theme-dark .nav-link {
 
 
 
-
-
 /* ---------- Spike grid root (320x320 támogatva a horizontal-list osztállyal) ---------- */
 .spike-grid-root {
   padding: 10px;
@@ -1872,14 +1870,14 @@ html.theme-dark .nav-link {
 .horizontal-list {
   max-height: 320px !important;
   min-height: 320px !important;
-  overflow: hidden; /* a belső rács scrollozik, nem ez */
+  overflow: hidden; /* a belső rács scrollozik */
   display: flex;
   flex-direction: column;
 }
 
-/* Header – LECSÖKKENTVE, hogy a rács nagyobb legyen */
+/* Header – kisebb, hogy több hely maradjon a rácsnak */
 .spike-grid-header {
-  flex: 0 0 36px; /* <<< EDDIG 50-60px volt, most kisebb */
+  flex: 0 0 34px; /* <<< LECSÖKKENTVE */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1899,11 +1897,11 @@ html.theme-dark .nav-link {
   line-height: 1;
 }
 
-/* ---------- BELSŐ DOBOZ — NAGYOBBÍTOTT ---------- */
-/* A rács most kitölti a maradék helyet a 320px-es keretben */
+/* ---------- BELSŐ DOBOZ — NAGYOBBÍTOTT, LEFELÉ SCROLLOZ ---------- */
 .spike-grid {
-  flex: 1 1 auto;              /* <<< EZ A LÉNYEG: nőjön meg! */
-  overflow-y: auto;            /* lefelé scroll */
+  flex: 1 1 auto;              /* <<< EZ A LÉNYEG: kitölti a maradék helyet */
+  height: calc(320px - 40px);  /* <<< BELSŐ DOBOZ MAGASSÁGA MEGNÖVELVE */
+  overflow-y: auto;            /* <<< LEFELÉ SCROLL */
   overflow-x: hidden;
   padding-right: 6px;
   padding-bottom: 6px;
