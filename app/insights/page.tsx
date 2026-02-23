@@ -45,47 +45,46 @@ function normalizeCategory(raw?: string | null) {
 }
 
 export default function InsightFeedPage() {
+  // STORE / THEME / USER
   const theme = useUserStore((s) => s.theme);
   const user = useUserStore((s) => s.user);
-const userLoading = useUserStore((s) => s.loading);
+  const userLoading = useUserStore((s) => s.loading);
 
-// Típusbiztos prémium ellenőrzés
-const isPremium = (() => {
-  if (!user) return false;
+  // --- TÍPUSBIZTOS PRÉMIUM ELLENŐRZÉS (kezel boolean, number, camelCase, role, premium_tier)
+  const isPremium = (() => {
+    if (!user) return false;
 
-  // 1) explicit boolean mezők (ha a típusban léteznek)
-  if (typeof (user as any).is_premium === "boolean") {
-    return (user as any).is_premium === true;
-  }
-  if (typeof (user as any).isPremium === "boolean") {
-    return (user as any).isPremium === true;
-  }
+    // boolean mezők
+    if (typeof (user as any).is_premium === "boolean") {
+      return (user as any).is_premium === true;
+    }
+    if (typeof (user as any).isPremium === "boolean") {
+      return (user as any).isPremium === true;
+    }
 
-  // 2) számként visszaadott érték (pl. 1)
-  if (typeof (user as any).is_premium === "number") {
-    return Number((user as any).is_premium) === 1;
-  }
+    // számként visszaadott érték (pl. 1)
+    if (typeof (user as any).is_premium === "number") {
+      return Number((user as any).is_premium) === 1;
+    }
 
-  // 3) role vagy premium_tier fallback
-  if (typeof (user as any).role === "string" && (user as any).role === "premium") {
-    return true;
-  }
-  if ((user as any).premium_tier) {
-    return true;
-  }
+    // role vagy premium_tier fallback
+    if (typeof (user as any).role === "string" && (user as any).role === "premium") {
+      return true;
+    }
+    if ((user as any).premium_tier) {
+      return true;
+    }
 
-  return false;
-})();
+    return false;
+  })();
 
-
-
-  // --- Debug: közvetlen API ellenőrzés és store betöltés
+  // --- DEBUG / API CHECK (minden hook fent van)
   const [apiUser, setApiUser] = useState<any | null>(null);
   const [apiChecked, setApiChecked] = useState(false);
 
   // Ha máshol nem hívod, töltsd be a store userét
   useEffect(() => {
-    useUserStore.getState().loadUser();
+    useUserStore.getState().loadUser?.();
   }, []);
 
   // Közvetlen /api/auth/me lekérés a debughoz
@@ -117,12 +116,9 @@ const isPremium = (() => {
   // IDEIGLENES: ha az API visszaad user objektumot, állítsuk be a store-t is (csak dev)
   useEffect(() => {
     if (process.env.NODE_ENV === "development" && apiUser) {
-      // Ha az API válaszban a user a top-levelben van: apiUser.is_premium
-      // vagy apiUser.user.is_premium, ezért mindkettőt kezeljük.
       const candidate = apiUser.user ?? apiUser;
       if (candidate) {
         console.log("DEBUG: force-setting store user from API (dev only):", candidate);
-        // setUser feltételezve, hogy a store-ban van ilyen setter; ha más a neve, cseréld le
         useUserStore.getState().setUser?.(candidate);
       }
     }
@@ -136,7 +132,85 @@ const isPremium = (() => {
     console.log("DEBUG apiChecked:", apiChecked, "apiUser:", apiUser);
   }, [user, userLoading, isPremium, apiChecked, apiUser]);
 
-  // Amíg a store betölt, ne döntsünk
+  // UI STATE / HOOKS (minden további hook is itt, a komponens elején)
+  const [period, setPeriod] = useState<"24h" | "7d" | "30d" | "90d">("24h");
+  const [sort, setSort] = useState<string>("Legfrissebb");
+
+  const { data, error, loading } = useInsights(period, sort);
+  const { data: tsData, loading: tsLoading } = useTimeseriesAll(period);
+  const { data: forecastData } = useForecast();
+
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    const onMouseDown = (e: MouseEvent) => {
+      isDown = true;
+      startX = e.pageX - el.offsetLeft;
+      scrollLeft = el.scrollLeft;
+    };
+    const onMouseLeave = () => { isDown = false; };
+    const onMouseUp = () => { isDown = false; };
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - el.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      el.scrollLeft = scrollLeft - walk;
+    };
+
+    el.addEventListener("mousedown", onMouseDown);
+    el.addEventListener("mouseleave", onMouseLeave);
+    el.addEventListener("mouseup", onMouseUp);
+    el.addEventListener("mousemove", onMouseMove);
+
+    return () => {
+      el.removeEventListener("mousedown", onMouseDown);
+      el.removeEventListener("mouseleave", onMouseLeave);
+      el.removeEventListener("mouseup", onMouseUp);
+      el.removeEventListener("mousemove", onMouseMove);
+    };
+  }, []);
+
+  const downsampledTs = useMemo(() => {
+    if (!tsData?.categories) return [];
+    return tsData.categories;
+  }, [tsData]);
+
+  const categoryTrends = useMemo<LocalRawCategory[]>(() => {
+    if (!data) return [];
+
+    const sourceArray =
+      Array.isArray(data.categories) && data.categories.length > 0
+        ? data.categories
+        : [];
+
+    const mapped = sourceArray
+      .map((it) => {
+        const cat = (it.category ?? null) as string | null;
+        return {
+          category: cat,
+          trendScore: Number(it.trendScore ?? 0),
+          articleCount: Number(it.articleCount ?? 0),
+          sourceDiversity: Number(it.sourceDiversity ?? 0),
+          lastArticleAt: it.lastArticleAt ?? null,
+          sparkline: it.sparkline ?? [],
+          ringSources: it.ringSources ?? [],
+        } as LocalRawCategory;
+      })
+      .filter((c) => normalizeCategory(c.category) !== null);
+
+    return mapped;
+  }, [data]);
+
+  // --- MOST jöhet a feltételes renderelés (mivel minden hook fent van)
+  // Amíg tölt a user → ne mutass semmit
   if (userLoading) {
     return null;
   }
@@ -148,7 +222,12 @@ const isPremium = (() => {
 
   // Ha sem a store, sem az API nem lát prémiumot → modal
   const apiSaysPremium =
-    apiUser?.user?.is_premium === true || apiUser?.is_premium === true;
+    apiUser?.user?.is_premium === 1 ||
+    apiUser?.is_premium === 1 ||
+    apiUser?.user?.isPremium === true ||
+    apiUser?.isPremium === true ||
+    apiUser?.user?.role === "premium" ||
+    apiUser?.role === "premium";
 
   if (!isPremium && !apiSaysPremium) {
     return (
@@ -189,24 +268,9 @@ const isPremium = (() => {
   }
 
   // Ha ide eljutunk, a user prémiumként van azonosítva (store vagy API alapján)
+  // innen folytathatod a renderelést (header, chart, cards stb.)
 
 
-  // ⭐ Ha prémium → mehet az eredeti Insights oldal
-  const isDark =
-    theme === "dark" ||
-    (theme === "system" &&
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-  const [period, setPeriod] = useState<"24h" | "7d" | "30d" | "90d">("24h");
-  const [sort, setSort] = useState<string>("Legfrissebb");
-
-  const { data, error, loading } = useInsights(period, sort);
-  const { data: tsData, loading: tsLoading } = useTimeseriesAll(period);
-
-  const { data: forecastData } = useForecast();
-
-  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const el = scrollRef.current;
