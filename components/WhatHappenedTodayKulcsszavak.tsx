@@ -6,6 +6,9 @@ import Spinner from "react-bootstrap/Spinner";
 import { useUserStore } from "@/store/useUserStore";
 import type { ApexOptions } from "apexcharts"; // csak a struktúra egységessége miatt
 
+// (ApexChart dinamikus import nincs használatban itt, de benne van az import-struktúra egységességéért)
+const Dummy = dynamic(() => Promise.resolve(() => null), { ssr: false });
+
 interface KeywordItem {
   keyword: string;
   count: number;
@@ -59,18 +62,18 @@ export default function TrendingKeywords() {
   const keywords = [...data.keywords].sort((a, b) => b.count - a.count);
   const max = Math.max(...keywords.map((k) => k.count));
 
-  // COLORS
+  // COLORS (dark mode figyelembevételével)
   const barColor = {
-    mild: "bg-yellow-400",
-    strong: "bg-orange-500",
-    brutal: "bg-red-600",
-  };
+    mild: isDark ? "bg-yellow-300" : "bg-yellow-400",
+    strong: isDark ? "bg-orange-400" : "bg-orange-500",
+    brutal: isDark ? "bg-red-500" : "bg-red-600",
+  } as const;
 
   const badgeColor = {
-    mild: "bg-yellow-100 text-yellow-700",
-    strong: "bg-orange-100 text-orange-700",
-    brutal: "bg-red-100 text-red-700",
-  };
+    mild: isDark ? "bg-yellow-900/10 text-yellow-300" : "bg-yellow-100 text-yellow-700",
+    strong: isDark ? "bg-orange-900/10 text-orange-300" : "bg-orange-100 text-orange-700",
+    brutal: isDark ? "bg-red-900/10 text-red-300" : "bg-red-100 text-red-700",
+  } as const;
 
   const getLevelText = (level: KeywordItem["level"]) => {
     if (level === "brutal") return "brutál spike";
@@ -80,20 +83,30 @@ export default function TrendingKeywords() {
   };
 
   return (
-    <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 p-6">
-      <h5 className="text-lg font-semibold mb-3 text-center">
+    <div className="bg-white/70 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 p-6">
+      <h5 className="text-lg font-semibold mb-3 text-center text-gray-900 dark:text-gray-100">
         Felkapott kulcsszavak ma
       </h5>
 
-      <div className="space-y-5">
+      <div className="space-y-4">
         {keywords.map((item, idx) => {
-          const percentage = (item.count / max) * 100;
+          const percentage = max > 0 ? (item.count / max) * 100 : 0;
 
           return (
-            <div key={idx} className="flex items-center gap-4">
+            <div
+              key={idx}
+              className="flex items-center gap-4"
+              role="listitem"
+              aria-label={`${item.keyword} ${item.count} említés`}
+            >
               {/* Kulcsszó + badge */}
-              <div className="w-40 flex flex-col">
-                <span className="font-semibold text-gray-800">{item.keyword}</span>
+              <div className="w-44 flex flex-col">
+                <div className="flex items-center gap-2">
+                  <span className="text-gray-400 dark:text-gray-300">📈</span>
+                  <span className="font-semibold text-gray-800 dark:text-gray-100 truncate">
+                    {item.keyword}
+                  </span>
+                </div>
 
                 {item.level && (
                   <span
@@ -104,18 +117,25 @@ export default function TrendingKeywords() {
                 )}
               </div>
 
-              {/* Sáv */}
-              <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
-                <div
-                  className={`h-full rounded-full transition-all duration-500 ${
-                    barColor[item.level ?? "mild"]
-                  }`}
-                  style={{ width: `${percentage}%` }}
-                />
+              {/* Sáv (ApexChart stílusú, de Tailwind-only) */}
+              <div className="flex-1 min-w-0">
+                <div className="h-3 bg-gray-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-600 ${barColor[item.level ?? "mild"]}`}
+                    style={{ width: `${percentage}%` }}
+                  />
+                </div>
+                {/* opcionális kis meta sor */}
+                <div className="mt-2 flex items-center justify-between text-xs text-gray-400 dark:text-gray-400">
+                  <div className="truncate max-w-[60%]">
+                    {item.level ? `${getLevelText(item.level)}` : "—"}
+                  </div>
+                  <div className="ml-2">{Math.round(percentage)}%</div>
+                </div>
               </div>
 
               {/* Szám */}
-              <div className="w-16 text-right font-bold text-gray-900">
+              <div className="w-20 text-right font-bold text-gray-900 dark:text-gray-100">
                 {item.count} db
               </div>
             </div>
