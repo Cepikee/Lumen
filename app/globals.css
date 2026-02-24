@@ -2113,3 +2113,52 @@ html.theme-dark .nav-link {
   margin: 0 !important;
   padding: 0 !important;
 }
+
+
+
+
+
+
+
+/* WHT Source activity layout fixes */
+.wht-source-activity {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* fix bal legend oszlop: ne legyen mozgatható, mindig ugyanabban a dobozban marad */
+.wht-source-activity .wht-source-legend {
+  box-sizing: border-box;
+  width: 180px;
+  overflow: hidden;
+}
+
+/* a chart konténer ne engedje, hogy a chart jobbra-balra ugráljon */
+.wht-source-activity .wht-source-chart {
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* biztosítjuk, hogy az ApexCharts SVG ne kapjon extra paddinget és ne tolja el a layoutot */
+.wht-source-activity .apexcharts-canvas,
+.wht-source-activity .apexcharts-inner,
+.wht-source-activity .apexcharts-svg,
+.wht-source-activity .apexcharts-toolbar {
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+}
+
+/* ha a böngésző mégis beszúrná az SVG <title>-t, rejtsük el */
+.wht-source-activity .apexcharts-svg title {
+  display: none !important;
+}
+
+/* custom tooltip alapstílus (ha JS létrehozza) */
+#custom-apex-tooltip-source {
+  z-index: 999999;
+  pointer-events: none;
+  position: fixed;
+  display: none;
+  transform: none;
+}

@@ -119,6 +119,7 @@ export default function WhatHappenedTodaySourceActivity() {
       sparkline: { enabled: false },
       background: "transparent",
       offsetY: -4,
+      redrawOnParentResize: true,
       events: {
         mounted: function (chartContext: any) {
           try {
@@ -203,7 +204,7 @@ export default function WhatHappenedTodaySourceActivity() {
         horizontal: true,
         borderRadius: 6,
         barHeight: `${Math.max(8, Math.floor(rowHeight * 0.6))}px`,
-        distributed: true, // minden sáv saját színt kap a colors tömbből
+        distributed: true,
       },
     },
     dataLabels: {
@@ -222,13 +223,9 @@ export default function WhatHappenedTodaySourceActivity() {
       axisBorder: { show: false },
       axisTicks: { show: false },
     },
-    yaxis: {
-      labels: { show: false },
-    },
+    yaxis: { labels: { show: false } },
     colors,
-    tooltip: {
-      enabled: false, // beépített tooltip kikapcsolva
-    },
+    tooltip: { enabled: false },
     legend: { show: false },
     grid: { show: false },
   } as ApexOptions;
@@ -239,10 +236,9 @@ export default function WhatHappenedTodaySourceActivity() {
     <div className="wht-source-activity">
       <h5 className="mb-3 text-center">Források aktivitása ma</h5>
 
-      {/* LAYOUT: bal oldalon a custom legend (színes swatch + név), jobb oldalon a chart */}
-      <div className="flex items-start gap-3">
-        {/* BAL: custom legend (csak swatch + név) */}
-        <div style={{ width: 180 }} className="flex-shrink-0">
+      <div className="flex items-start gap-3" style={{ alignItems: "flex-start" }}>
+        {/* BAL: custom legend (csak swatch + név) — fix szélesség, nem mozgatható */}
+        <div style={{ width: 180, flexShrink: 0 }} className="wht-source-legend">
           <div className="flex flex-col">
             {labels.map((label, i) => (
               <div
@@ -273,14 +269,13 @@ export default function WhatHappenedTodaySourceActivity() {
                 >
                   {label}
                 </span>
-                {/* NINCS középső szám — a felhasználói kérés szerint eltávolítva */}
               </div>
             ))}
           </div>
         </div>
 
-        {/* JOBB: chart */}
-        <div className="flex-1 min-w-0">
+        {/* JOBB: chart — a maradék helyet foglalja, nem tolható el */}
+        <div className="flex-1 min-w-0 wht-source-chart" style={{ overflow: "hidden" }}>
           <ApexChart key={stableKey} options={options} series={[{ name: "Források", data: values }]} type="bar" height={chartHeight} />
         </div>
       </div>
