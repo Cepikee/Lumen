@@ -2098,7 +2098,7 @@ html.theme-dark .nav-link {
 
 /* Tooltip: magas z-index és pointer events — JS kezeli a pozícionálást */
 .apexcharts-tooltip {
-  z-index: 99999 !important;
+  z-index: 1 !important;
   pointer-events: auto !important;
   position: fixed !important;
   display: none !important;

@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 import useSWR from "swr";
 import Spinner from "react-bootstrap/Spinner";
@@ -38,6 +39,110 @@ export default function WhatHappenedTodayKulcsszavak() {
     { refreshInterval: 60_000, revalidateOnFocus: true }
   );
 
+  useEffect(() => {
+    // Robust tooltip handler: figyeljük a DOM-ot, ha létrejön .apexcharts-tooltip, áthelyezzük a body-hoz
+    let observer: MutationObserver | null = null;
+    let currentTip: HTMLElement | null = null;
+    let mouseMoveHandler: ((e: MouseEvent) => void) | null = null;
+
+    const ensureTip = (tip: HTMLElement | null) => {
+      if (!tip) return;
+      // alapstílusok
+      tip.style.position = "fixed";
+      tip.style.zIndex = "99999";
+      tip.style.pointerEvents = "auto";
+      tip.style.display = "none";
+      tip.style.transform = "none";
+      // ha nincs a body-n, áthelyezzük
+      if (tip.parentElement !== document.body) {
+        document.body.appendChild(tip);
+      }
+    };
+
+    const attachObserver = () => {
+      observer = new MutationObserver((mutations) => {
+        for (const m of mutations) {
+          // új node-ok között keressük a tooltipet
+          if (m.addedNodes && m.addedNodes.length) {
+            m.addedNodes.forEach((n) => {
+              if (!(n instanceof HTMLElement)) return;
+              // közvetlen tooltip vagy belső elem
+              if (n.classList.contains("apexcharts-tooltip")) {
+                currentTip = n;
+                ensureTip(currentTip);
+              } else {
+                const found = n.querySelector?.(".apexcharts-tooltip") as HTMLElement | null;
+                if (found) {
+                  currentTip = found;
+                  ensureTip(currentTip);
+                }
+              }
+            });
+          }
+        }
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
+      // ha már van tooltip a DOM-ban, azonnal kezeljük
+      const existing = document.querySelector(".apexcharts-tooltip") as HTMLElement | null;
+      if (existing) {
+        currentTip = existing;
+        ensureTip(currentTip);
+      }
+    };
+
+    const attachMouseMove = () => {
+      mouseMoveHandler = (event: MouseEvent) => {
+        try {
+          const tip = currentTip ?? (document.querySelector(".apexcharts-tooltip") as HTMLElement | null);
+          if (!tip) return;
+          if (!tip.innerHTML || tip.innerHTML.trim() === "") {
+            tip.style.display = "none";
+            return;
+          }
+
+          const offsetX = 12;
+          const offsetY = 12;
+          const clientX = event.clientX;
+          const clientY = event.clientY;
+
+          const vw = window.innerWidth;
+          const vh = window.innerHeight;
+          const rect = tip.getBoundingClientRect();
+          let left = clientX + offsetX;
+          let top = clientY + offsetY;
+
+          if (left + rect.width > vw - 8) {
+            left = Math.max(8, clientX - rect.width - offsetX);
+          }
+          if (top + rect.height > vh - 8) {
+            top = Math.max(8, clientY - rect.height - offsetY);
+          }
+
+          tip.style.left = `${left}px`;
+          tip.style.top = `${top}px`;
+          tip.style.display = "block";
+        } catch (e) {
+          // noop
+        }
+      };
+
+      window.addEventListener("mousemove", mouseMoveHandler);
+    };
+
+    attachObserver();
+    attachMouseMove();
+
+    return () => {
+      if (observer) observer.disconnect();
+      if (mouseMoveHandler) window.removeEventListener("mousemove", mouseMoveHandler);
+      // ne töröljük a tooltipet a body-ból, csak hagyjuk a cleanup-ot
+      observer = null;
+      currentTip = null;
+      mouseMoveHandler = null;
+    };
+  }, []);
+
   if (isLoading) {
     return (
       <div className="text-center py-2 text-gray-500">
@@ -51,13 +156,11 @@ export default function WhatHappenedTodayKulcsszavak() {
     return <div className="text-sm text-gray-500">Ma még nincsenek felkapott kulcsszavak.</div>;
   }
 
-  // rendezés: legnagyobb elöl
   const sorted = [...data.keywords].sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
   const counts = sorted.map((k) => Number(k.count ?? 0));
   const categories = sorted.map((k) => String(k.keyword));
 
-  /* FIX SORMAGASSÁG */
-  const rowHeight = 36; // px — ha változtatod, cseréld a globals.css-ben is
+  const rowHeight = 36;
   const height = Math.max(120, sorted.length * rowHeight);
 
   const baseColors = [
@@ -79,109 +182,21 @@ export default function WhatHappenedTodayKulcsszavak() {
       },
       background: "transparent",
       offsetY: -4,
+      // megtartjuk az events-et is, de a MutationObserver a fő megoldás
       events: {
-        // Áthelyezzük a tooltipet a body-hoz és beállítjuk a stílusát
-        mounted: function (chartContext: any, config: any) {
+        mounted: function (chartContext: any) {
           try {
-            const moveTipToBody = () => {
-              const tip = chartContext.el.querySelector(".apexcharts-tooltip");
-              if (tip) {
-                if (tip.parentElement !== document.body) {
-                  document.body.appendChild(tip);
-                }
-                // fix pozíció, magas z-index, pointer events
-                tip.style.position = "fixed";
-                tip.style.zIndex = "99999";
-                tip.style.pointerEvents = "auto";
-                tip.style.display = "none"; // alapból rejtve, majd mouseMove mutatja
-                tip.style.transform = "none";
-              }
-            };
-            moveTipToBody();
-            // lefedjük az esetet, ha Apex később hozza létre
-            setTimeout(moveTipToBody, 50);
-            setTimeout(moveTipToBody, 300);
-          } catch (e) {
-            // noop
-          }
-        },
-
-        updated: function (chartContext: any) {
-          try {
-            const moveTipToBody = () => {
-              const tip = chartContext.el.querySelector(".apexcharts-tooltip");
-              if (tip) {
-                if (tip.parentElement !== document.body) {
-                  document.body.appendChild(tip);
-                }
-                tip.style.position = "fixed";
-                tip.style.zIndex = "99999";
-                tip.style.pointerEvents = "auto";
-                tip.style.display = "none";
-                tip.style.transform = "none";
-              }
-            };
-            moveTipToBody();
-            setTimeout(moveTipToBody, 50);
-          } catch (e) {
-            // noop
-          }
-        },
-
-        // Pozícionáljuk a tooltipet a kurzorhoz (fixed pozíció)
-        mouseMove: function (event: any, chartContext: any, config: any) {
-          try {
-            // keresünk a body alatt lévő apexcharts-tooltip elemet
-            const tip = document.querySelector(".apexcharts-tooltip") as HTMLElement | null;
-            if (!tip) return;
-
-            // ha nincs tartalom, ne mutassuk
-            if (!tip.innerHTML || tip.innerHTML.trim() === "") {
-              tip.style.display = "none";
-              return;
-            }
-
-            // kis offset, hogy ne takarja a kurzor
-            const offsetX = 12;
-            const offsetY = 12;
-
-            // event.clientX/Y általában elérhető
-            const clientX = event?.clientX ?? (config?.event?.clientX ?? 0);
-            const clientY = event?.clientY ?? (config?.event?.clientY ?? 0);
-
-            // pozícionálás: ügyelünk, hogy a tooltip ne menjen ki a viewportból
-            const vw = window.innerWidth;
-            const vh = window.innerHeight;
-            const rect = tip.getBoundingClientRect();
-            let left = clientX + offsetX;
-            let top = clientY + offsetY;
-
-            // ha túl jobb oldalon lenne, igazítjuk balra
-            if (left + rect.width > vw - 8) {
-              left = Math.max(8, clientX - rect.width - offsetX);
-            }
-            // ha túl alul lenne, igazítjuk feljebb
-            if (top + rect.height > vh - 8) {
-              top = Math.max(8, clientY - rect.height - offsetY);
-            }
-
-            tip.style.left = `${left}px`;
-            tip.style.top = `${top}px`;
-            tip.style.display = "block";
-          } catch (e) {
-            // noop
-          }
-        },
-
-        mouseLeave: function () {
-          try {
-            const tip = document.querySelector(".apexcharts-tooltip") as HTMLElement | null;
+            const tip = chartContext.el.querySelector(".apexcharts-tooltip") as HTMLElement | null;
             if (tip) {
+              // ha van, áthelyezzük a body-hoz (observer is figyel, de itt is biztosítjuk)
+              if (tip.parentElement !== document.body) document.body.appendChild(tip);
+              tip.style.position = "fixed";
+              tip.style.zIndex = "99999";
+              tip.style.pointerEvents = "auto";
               tip.style.display = "none";
+              tip.style.transform = "none";
             }
-          } catch (e) {
-            // noop
-          }
+          } catch (e) {}
         },
       },
     },
@@ -225,15 +240,12 @@ export default function WhatHappenedTodayKulcsszavak() {
 
   return (
     <div className="wht-keywords-activity bg-white/80 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-2 max-w-full">
-      {/* kisebb cím, balra igazítva */}
       <h5 className="text-sm font-medium mb-1 text-left text-gray-900 dark:text-gray-100">
         Felkapott kulcsszavak ma
       </h5>
 
-      {/* scroll wrapper: ha túl sok elem, itt görgethető lesz */}
       <div className="wht-keywords-scroll" style={{ maxHeight: 320, overflowY: "auto" }}>
         <div className="flex items-start gap-2">
-          {/* BAL: kulcsszavak — fix sormagasság és explicit line-height */}
           <div className="flex-shrink-0" style={{ width: 140 }}>
             <div className="flex flex-col">
               {sorted.map((item, i) => (
@@ -259,7 +271,6 @@ export default function WhatHappenedTodayKulcsszavak() {
             </div>
           </div>
 
-          {/* JOBB: chart */}
           <div className="flex-1 min-w-0">
             <ApexChart
               key={stableKey}
