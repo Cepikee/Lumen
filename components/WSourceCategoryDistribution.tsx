@@ -101,12 +101,12 @@ export default function WSourceCategoryDistribution() {
     >
       <h3 className="text-lg font-semibold mb-4">Kategóriaeloszlás forrásonként</h3>
 
-      {/* --- SZÍNMAGYARÁZAT --- */}
-      <div className="flex flex-wrap gap-3 mb-6 justify-center text-sm">
+      {/* --- SZÉP, KIS, MODERN LEGEND --- */}
+      <div className="flex flex-wrap gap-4 mb-4 justify-center text-xs opacity-80">
         {categories.map((cat, i) => (
-          <div key={cat} className="flex items-center gap-2">
+          <div key={cat} className="flex items-center gap-1">
             <div
-              className="w-3 h-3 rounded-sm"
+              className="w-2.5 h-2.5 rounded-sm"
               style={{ backgroundColor: categoryColors[i] }}
             />
             <span>{cat}</span>
