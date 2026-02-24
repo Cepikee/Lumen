@@ -102,27 +102,34 @@ export default function WSourceCategoryDistribution() {
 
           const options: ApexOptions = {
             chart: {
-              type: "radar",
+              type: "bar",
               toolbar: { show: false },
               background: "transparent",
             },
-            stroke: { width: 2 },
-            fill: { opacity: 0.2 },
+            plotOptions: {
+              bar: {
+                horizontal: true,
+                barHeight: "60%",
+              },
+            },
             xaxis: {
               categories,
               labels: {
                 style: {
-                  colors: categories.map(() => (isDark ? "#fff" : "#000")),
-                  fontSize: "12px",
+                  colors: isDark ? "#fff" : "#000",
                 },
               },
             },
             yaxis: {
               labels: {
-                style: { colors: isDark ? "#fff" : "#000" },
+                style: {
+                  colors: isDark ? "#fff" : "#000",
+                },
               },
             },
+            dataLabels: { enabled: false },
             legend: { show: false },
+            colors: ["#3b82f6"],
           };
 
           return (
@@ -140,7 +147,7 @@ export default function WSourceCategoryDistribution() {
               <ApexChart
                 options={options}
                 series={series}
-                type="radar"
+                type="bar"
                 height={350}
               />
             </div>
