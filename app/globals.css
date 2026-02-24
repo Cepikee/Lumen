@@ -2031,3 +2031,28 @@ html.theme-dark .nav-link {
   .spike-card-label { font-size: 0.85rem; }
   .spike-card-value { font-size: 0.85rem; }
 }
+
+/* Scoped overrides for the keywords panel to avoid global collisions */
+.wht-keywords-activity .wht-header-line,
+.wht-keywords-activity .chart-line {
+  display: none !important; /* eltünteti a felesleges vonalat csak ennél a panelnél */
+}
+
+/* biztosítjuk, hogy a chart wrapper ne adjon extra paddinget */
+.wht-keywords-activity .apexcharts-canvas,
+.wht-keywords-activity .apexcharts-inner,
+.wht-keywords-activity .apexcharts-toolbar {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* bal címkék sorai — ha szükséges, finomítsd a magasságot */
+.wht-keywords-activity .kw-label {
+  display: flex;
+  align-items: center;
+  padding-left: 6px;
+  padding-right: 6px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

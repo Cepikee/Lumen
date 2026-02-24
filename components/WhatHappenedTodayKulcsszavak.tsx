@@ -56,17 +56,14 @@ export default function TrendingKeywords() {
     return <div className="text-sm text-gray-500">Ma még nincsenek felkapott kulcsszavak.</div>;
   }
 
-  // rendezés: legnagyobb elöl
   const sorted = [...data.keywords].sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
   const counts = sorted.map((k) => Number(k.count ?? 0));
   const categories = sorted.map((k) => String(k.keyword));
-  const max = Math.max(...counts, 1);
 
-  // sormagasság (pixelben) — ha változtatod, a chart és a bal oszlop is igazodik
-  const rowHeight = 40; // px
-  const height = Math.max(120, sorted.length * rowHeight);
+  /* --- FIX SORMAGASSÁG --- */
+  const rowHeight = 36; // px — ha túl nagy/kicsi, állítsd 32/40-re
+  const height = Math.max(100, sorted.length * rowHeight);
 
-  // Színek soronként (distributed)
   const baseColors = [
     "#FF4D4F",
     "#FFA940",
@@ -87,8 +84,8 @@ export default function TrendingKeywords() {
       toolbar: { show: false },
       animations: {
         enabled: true,
-        speed: 600,
-        animateGradually: { enabled: true, delay: 60 },
+        speed: 500,
+        animateGradually: { enabled: true, delay: 40 },
         dynamicAnimation: { enabled: true, speed: 300 },
       },
       background: "transparent",
@@ -98,7 +95,7 @@ export default function TrendingKeywords() {
       bar: {
         horizontal: true,
         borderRadius: 6,
-        // pixel alapú barHeight, hogy pontosan illeszkedjen a rowHeight-hoz
+        // pontos pixel érték a rowHeight alapján
         barHeight: `${Math.max(8, Math.floor(rowHeight * 0.55))}px`,
         distributed: true,
       },
@@ -107,7 +104,7 @@ export default function TrendingKeywords() {
       enabled: true,
       formatter: (val: any) => `${val} db`,
       style: {
-        fontSize: "12px",
+        fontSize: "11px",
         fontWeight: 700,
         colors: isDark ? ["#fff"] : ["#000"],
       },
@@ -119,9 +116,7 @@ export default function TrendingKeywords() {
       axisBorder: { show: false },
       axisTicks: { show: false },
     },
-    yaxis: {
-      labels: { show: false },
-    },
+    yaxis: { labels: { show: false } },
     colors,
     tooltip: {
       theme: isDark ? "dark" : "light",
@@ -134,8 +129,8 @@ export default function TrendingKeywords() {
   const stableKey = `${theme}-${sorted.length}-${counts.join(",")}`;
 
   return (
-    <div className="bg-white/80 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-3 max-w-full">
-      {/* kisebb cím */}
+    <div className="wht-keywords-activity bg-white/80 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-3 max-w-full">
+      {/* kisebb cím, balra igazítva */}
       <h5 className="text-sm font-medium mb-2 text-left text-gray-900 dark:text-gray-100">
         Felkapott kulcsszavak ma
       </h5>
@@ -147,9 +142,8 @@ export default function TrendingKeywords() {
             {sorted.map((item, i) => (
               <div
                 key={i}
-                className="flex items-center"
-                style={{ height: rowHeight, paddingLeft: 4 }}
-                aria-hidden
+                className="kw-label"
+                style={{ height: rowHeight, lineHeight: `${rowHeight}px` }}
               >
                 <span className="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">
                   {item.keyword}
