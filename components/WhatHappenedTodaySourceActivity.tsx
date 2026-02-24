@@ -41,7 +41,6 @@ export default function WhatHappenedTodaySourceActivity() {
     revalidateOnFocus: true,
   });
 
-  /* --- CUSTOM TOOLTIP SETUP (single DOM element on body) --- */
   useEffect(() => {
     let tip = document.getElementById("custom-apex-tooltip-source");
     if (!tip) {
@@ -66,10 +65,7 @@ export default function WhatHappenedTodaySourceActivity() {
       tip.style.background = isDark ? "#0b1220" : "#ffffff";
       tip.style.color = isDark ? "#fff" : "#000";
     }
-
-    return () => {
-      // megtartjuk az elemet újrahasználathoz
-    };
+    return () => {};
   }, [isDark]);
 
   if (isLoading) {
@@ -84,32 +80,22 @@ export default function WhatHappenedTodaySourceActivity() {
     return <div className="text-muted">Ma még nincs aktivitás.</div>;
   }
 
-  // rendezés: legnagyobb elöl
   const sorted = [...data.sources].sort((a, b) => (b.total ?? 0) - (a.total ?? 0));
   const labels = sorted.map((s) => String(s.source ?? "ismeretlen"));
   const values = sorted.map((s) => Number(s.total ?? 0));
 
-  // Sor magasság és chart magasság
-  const rowHeight = 48;
+  /* === KEY: exact pixel row height === */
+  const rowHeight = 44; // ha a másik modulban 36 volt, állítsd 36-ra; itt 44 példaként
   const chartHeight = Math.max(120, sorted.length * rowHeight);
 
   const baseColors = [
-    "#FF4D4F",
-    "#FFA940",
-    "#36CFC9",
-    "#40A9FF",
-    "#9254DE",
-    "#73D13D",
-    "#F759AB",
-    "#597EF7",
-    "#FFC53D",
-    "#5CDBD3",
+    "#FF4D4F", "#FFA940", "#36CFC9", "#40A9FF", "#9254DE",
+    "#73D13D", "#F759AB", "#597EF7", "#FFC53D", "#5CDBD3",
   ];
   const colors = labels.map((_, i) => baseColors[i % baseColors.length]);
 
-  const buildTooltipHtml = (label: string, value: number) => {
-    return `<div style="font-weight:700;margin-bottom:4px">${label}</div><div style="font-size:12px;opacity:0.85">${value} db</div>`;
-  };
+  const buildTooltipHtml = (label: string, value: number) =>
+    `<div style="font-weight:700;margin-bottom:4px">${label}</div><div style="font-size:12px;opacity:0.85">${value} db</div>`;
 
   const options: ApexOptions = {
     chart: {
@@ -118,47 +104,40 @@ export default function WhatHappenedTodaySourceActivity() {
       stacked: false,
       sparkline: { enabled: false },
       background: "transparent",
-      offsetY: -4,
+      offsetY: 0,                 // fontos: ne legyen függőleges eltolás
+      parentHeightOffset: 0,     // fontos: ne adjon extra top/bottom offsetet
       redrawOnParentResize: true,
+      animations: { enabled: false },
       events: {
-        mounted: function (chartContext: any) {
+        mounted(chartContext: any) {
           try {
             const svg = chartContext.el.querySelector("svg");
             const title = svg?.querySelector("title");
             if (title) title.remove();
             if (svg && svg.hasAttribute("title")) svg.removeAttribute("title");
             if (svg && svg.hasAttribute("aria-label")) svg.removeAttribute("aria-label");
-          } catch (e) {
-            // noop
-          }
+          } catch (e) {}
         },
-        updated: function (chartContext: any) {
+        updated(chartContext: any) {
           try {
             const svg = chartContext.el.querySelector("svg");
             const title = svg?.querySelector("title");
             if (title) title.remove();
             if (svg && svg.hasAttribute("title")) svg.removeAttribute("title");
             if (svg && svg.hasAttribute("aria-label")) svg.removeAttribute("aria-label");
-          } catch (e) {
-            // noop
-          }
+          } catch (e) {}
         },
-        dataPointMouseEnter: function (event: any, chartContext: any, config: any) {
+        dataPointMouseEnter(event: any, chartContext: any, config: any) {
           try {
             const tip = document.getElementById("custom-apex-tooltip-source");
             if (!tip) return;
             const idx = config.dataPointIndex ?? 0;
-            const label = labels[idx] ?? "";
-            const value = values[idx] ?? 0;
-            tip.innerHTML = buildTooltipHtml(label, value);
-
+            tip.innerHTML = buildTooltipHtml(labels[idx], values[idx]);
             const clientX = event?.clientX ?? (config?.event?.clientX ?? 0);
             const clientY = event?.clientY ?? (config?.event?.clientY ?? 0);
-            const offsetX = 12;
-            const offsetY = 12;
             tip.style.display = "block";
-            const vw = window.innerWidth;
-            const vh = window.innerHeight;
+            const offsetX = 12, offsetY = 12;
+            const vw = window.innerWidth, vh = window.innerHeight;
             const rect = tip.getBoundingClientRect();
             let left = Math.min(vw - rect.width - 8, clientX + offsetX);
             let top = Math.min(vh - rect.height - 8, clientY + offsetY);
@@ -166,26 +145,22 @@ export default function WhatHappenedTodaySourceActivity() {
             if (top < 8) top = 8;
             tip.style.left = `${left}px`;
             tip.style.top = `${top}px`;
-          } catch (e) {
-            // noop
-          }
+          } catch (e) {}
         },
-        dataPointMouseLeave: function () {
+        dataPointMouseLeave() {
           try {
             const tip = document.getElementById("custom-apex-tooltip-source");
             if (tip) tip.style.display = "none";
           } catch (e) {}
         },
-        mouseMove: function (event: any, chartContext: any, config: any) {
+        mouseMove(event: any, chartContext: any, config: any) {
           try {
             const tip = document.getElementById("custom-apex-tooltip-source");
             if (!tip || tip.style.display === "none") return;
             const clientX = event?.clientX ?? (config?.event?.clientX ?? 0);
             const clientY = event?.clientY ?? (config?.event?.clientY ?? 0);
-            const offsetX = 12;
-            const offsetY = 12;
-            const vw = window.innerWidth;
-            const vh = window.innerHeight;
+            const offsetX = 12, offsetY = 12;
+            const vw = window.innerWidth, vh = window.innerHeight;
             const rect = tip.getBoundingClientRect();
             let left = clientX + offsetX;
             let top = clientY + offsetY;
@@ -193,9 +168,7 @@ export default function WhatHappenedTodaySourceActivity() {
             if (top + rect.height > vh - 8) top = Math.max(8, clientY - rect.height - offsetY);
             tip.style.left = `${left}px`;
             tip.style.top = `${top}px`;
-          } catch (e) {
-            // noop
-          }
+          } catch (e) {}
         },
       },
     },
@@ -203,18 +176,14 @@ export default function WhatHappenedTodaySourceActivity() {
       bar: {
         horizontal: true,
         borderRadius: 6,
-        barHeight: `${Math.max(8, Math.floor(rowHeight * 0.6))}px`,
+        barHeight: `${rowHeight}px`, // pontos pixelmagasság — ez a kulcs
         distributed: true,
       },
     },
     dataLabels: {
       enabled: true,
       formatter: (val: any) => `${val} db`,
-      style: {
-        fontSize: "13px",
-        fontWeight: 700,
-        colors: isDark ? ["#fff"] : ["#000"],
-      },
+      style: { fontSize: "13px", fontWeight: 700, colors: isDark ? ["#fff"] : ["#000"] },
       offsetX: 8,
     },
     xaxis: {
@@ -224,10 +193,13 @@ export default function WhatHappenedTodaySourceActivity() {
       axisTicks: { show: false },
     },
     yaxis: { labels: { show: false } },
+    grid: {
+      show: false,
+      padding: { left: 0, right: 0, top: 0, bottom: 0 }, // fontos: nincs extra padding
+    },
     colors,
     tooltip: { enabled: false },
     legend: { show: false },
-    grid: { show: false },
   } as ApexOptions;
 
   const stableKey = `${theme}-${sorted.length}-${values.join(",")}`;
@@ -237,7 +209,6 @@ export default function WhatHappenedTodaySourceActivity() {
       <h5 className="mb-3 text-center">Források aktivitása ma</h5>
 
       <div className="flex items-start gap-3" style={{ alignItems: "flex-start" }}>
-        {/* BAL: custom legend (csak swatch + név) — fix szélesség, nem mozgatható */}
         <div style={{ width: 180, flexShrink: 0 }} className="wht-source-legend">
           <div className="flex flex-col">
             {labels.map((label, i) => (
@@ -263,10 +234,7 @@ export default function WhatHappenedTodaySourceActivity() {
                     flexShrink: 0,
                   }}
                 />
-                <span
-                  className="text-sm font-medium truncate"
-                  style={{ color: isDark ? "#e6eef8" : "#111827", flex: 1 }}
-                >
+                <span className="text-sm font-medium truncate" style={{ color: isDark ? "#e6eef8" : "#111827", flex: 1 }}>
                   {label}
                 </span>
               </div>
@@ -274,7 +242,6 @@ export default function WhatHappenedTodaySourceActivity() {
           </div>
         </div>
 
-        {/* JOBB: chart — a maradék helyet foglalja, nem tolható el */}
         <div className="flex-1 min-w-0 wht-source-chart" style={{ overflow: "hidden" }}>
           <ApexChart key={stableKey} options={options} series={[{ name: "Források", data: values }]} type="bar" height={chartHeight} />
         </div>
