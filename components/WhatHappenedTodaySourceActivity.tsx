@@ -84,16 +84,16 @@ export default function WhatHappenedTodaySourceActivity() {
     return <div className="text-muted">Ma még nincs aktivitás.</div>;
   }
 
+  // rendezés: legnagyobb elöl
   const sorted = [...data.sources].sort((a, b) => (b.total ?? 0) - (a.total ?? 0));
-  // series: each source is its own series with a single value (keeps legend and colors distributed)
-  const series = sorted.map((item) => ({ name: String(item.source ?? "ismeretlen"), data: [Number(item.total ?? 0)] }));
   const labels = sorted.map((s) => String(s.source ?? "ismeretlen"));
   const values = sorted.map((s) => Number(s.total ?? 0));
 
-  const rowHeight = 48; // visual row height reference for barHeight
-  const chartHeight = Math.max(120, sorted.length * 48); // keep chart tall enough if many sources
+  // Sor magasság és chart magasság (összhangban a kulcsszavak komponenssel)
+  const rowHeight = 48;
+  const chartHeight = Math.max(120, sorted.length * rowHeight);
 
-  const colors = [
+  const baseColors = [
     "#FF4D4F",
     "#FFA940",
     "#36CFC9",
@@ -105,22 +105,28 @@ export default function WhatHappenedTodaySourceActivity() {
     "#FFC53D",
     "#5CDBD3",
   ];
+  // ha szeretnéd, hogy minden sáv más színű legyen:
+  const distributedColors = labels.map((_, i) => baseColors[i % baseColors.length]);
 
   const buildTooltipHtml = (label: string, value: number) => {
     return `<div style="font-weight:700;margin-bottom:4px">${label}</div><div style="font-size:12px;opacity:0.85">${value} db</div>`;
   };
 
+  /* ===== Fontos változtatás: single series + xaxis.categories =====
+     így könnyen megjeleníthetjük a bal oldali címkéket és a chartot egymás mellett
+  */
   const options: ApexOptions = {
     chart: {
       type: "bar",
       toolbar: { show: false },
       stacked: false,
-      sparkline: { enabled: false },
+      sparkline: { enabled: true },
       background: "transparent",
+      offsetY: -4,
       events: {
         mounted: function (chartContext: any) {
           try {
-            // remove any <title> inside the chart SVG (prevents browser native tooltip "Chart")
+            // eltávolítjuk az SVG <title>-t és aria attribútumokat (megelőzi a natív "Chart" tooltipet)
             const svg = chartContext.el.querySelector("svg");
             const title = svg?.querySelector("title");
             if (title) title.remove();
@@ -141,12 +147,13 @@ export default function WhatHappenedTodaySourceActivity() {
             // noop
           }
         },
-        // Use dataPointMouseEnter/Leave + mouseMove to control custom tooltip
+        // custom tooltip events: használjuk dataPointMouseEnter/Leave + mouseMove
         dataPointMouseEnter: function (event: any, chartContext: any, config: any) {
           try {
             const tip = document.getElementById("custom-apex-tooltip-source");
             if (!tip) return;
-            const idx = config.seriesIndex ?? 0;
+            // dataPointIndex adja meg a sor indexét (mivel single series)
+            const idx = config.dataPointIndex ?? 0;
             const label = labels[idx] ?? "";
             const value = values[idx] ?? 0;
             tip.innerHTML = buildTooltipHtml(label, value);
@@ -202,10 +209,23 @@ export default function WhatHappenedTodaySourceActivity() {
       bar: {
         horizontal: true,
         borderRadius: 6,
-        barHeight: "60%", // keeps bars visually balanced inside the chart area
+        // barHeight pixelben: igazítsd a rowHeight-hoz
+        barHeight: `${Math.max(8, Math.floor(rowHeight * 0.6))}px`,
+        distributed: false,
       },
     },
+    dataLabels: {
+      enabled: true,
+      formatter: (val: any) => `${val} db`,
+      style: {
+        fontSize: "13px",
+        fontWeight: 700,
+        colors: isDark ? ["#fff"] : ["#000"],
+      },
+      offsetX: 8,
+    },
     xaxis: {
+      categories: labels,
       labels: { show: false },
       axisBorder: { show: false },
       axisTicks: { show: false },
@@ -213,36 +233,55 @@ export default function WhatHappenedTodaySourceActivity() {
     yaxis: {
       labels: { show: false },
     },
-    colors,
-    dataLabels: {
-      enabled: true,
-      formatter: (val: any) => `${val} db`,
-      style: {
-        fontSize: "14px",
-        fontWeight: 700,
-        colors: isDark ? ["#fff"] : ["#000"],
-      },
-      offsetX: 10,
-    },
-    legend: {
-      show: true,
-      position: "left",
-      horizontalAlign: "left",
-      labels: { colors: isDark ? "#fff" : "#000" },
-      markers: { size: 14 },
-    },
+    colors: distributedColors,
     tooltip: {
-      enabled: false, // disable built-in tooltip — we use custom tooltip
+      enabled: false, // built-in tooltip kikapcsolva
     },
-    grid: { show: false },
+    grid: { show: false, padding: { left: 0, right: 0 } },
+    legend: { show: false },
   } as ApexOptions;
 
-  const stableKey = `${theme}-${sorted.length}`;
+  const stableKey = `${theme}-${sorted.length}-${values.join(",")}`;
 
   return (
     <div className="wht-source-activity">
       <h5 className="mb-3 text-center">Források aktivitása ma</h5>
-      <ApexChart key={stableKey} options={options} series={series} type="bar" height={chartHeight} />
+
+      {/* LAYOUT: bal oldalon a címkék, jobb oldalon a chart — így mindig egymás mellett lesznek */}
+      <div className="flex items-start gap-3">
+        {/* BAL: címkék (fix szélesség, soronként egyező magasság) */}
+        <div style={{ width: 140 }} className="flex-shrink-0">
+          <div className="flex flex-col">
+            {labels.map((label, i) => (
+              <div
+                key={i}
+                className="source-label"
+                style={{
+                  height: rowHeight,
+                  lineHeight: `${rowHeight}px`,
+                  paddingLeft: 6,
+                  paddingRight: 6,
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                <span
+                  className="text-sm font-medium text-gray-800 dark:text-gray-100 truncate"
+                  style={{ display: "inline-block", transform: "translateY(-2px)" }}
+                >
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* JOBB: chart */}
+        <div className="flex-1 min-w-0">
+          <ApexChart key={stableKey} options={options} series={[{ name: "Források", data: values }]} type="bar" height={chartHeight} />
+        </div>
+      </div>
     </div>
   );
 }
