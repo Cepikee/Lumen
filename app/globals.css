@@ -2115,3 +2115,12 @@ html.theme-dark .nav-link {
 .wht-keywords-activity .chart-line {
   display: none !important;
 }
+/* amikor a chart fölött van az egér, engedjük meg a láthatóságot */
+.wht-keywords-activity .wht-keywords-scroll:hover {
+  overflow: visible;
+}
+/* Apex tooltip mindig látható és legfelül legyen */
+.apexcharts-tooltip {
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+}

@@ -79,6 +79,28 @@ export default function WhatHappenedTodayKulcsszavak() {
       },
       background: "transparent",
       offsetY: -4,
+      events: {
+        mounted: function (chartContext: any) {
+          try {
+            const tip = chartContext.el.querySelector(".apexcharts-tooltip");
+            if (tip && tip.parentElement !== document.body) {
+              document.body.appendChild(tip);
+            }
+          } catch (e) {
+            /* noop */
+          }
+        },
+        updated: function (chartContext: any) {
+          try {
+            const tip = chartContext.el.querySelector(".apexcharts-tooltip");
+            if (tip && tip.parentElement !== document.body) {
+              document.body.appendChild(tip);
+            }
+          } catch (e) {
+            /* noop */
+          }
+        },
+      },
     },
     plotOptions: {
       bar: {
@@ -109,6 +131,7 @@ export default function WhatHappenedTodayKulcsszavak() {
     tooltip: {
       theme: isDark ? "dark" : "light",
       y: { formatter: (val: any) => `${val} db` },
+      shared: false,
     },
     grid: { show: false, padding: { left: 0, right: 0 } },
     legend: { show: false },
