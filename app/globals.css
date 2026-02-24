@@ -2162,3 +2162,14 @@ html.theme-dark .nav-link {
   display: none;
   transform: none;
 }
+/* WHT Source activity layout fixes */
+.wht-source-activity { box-sizing: border-box; width: 100%; }
+.wht-source-activity .wht-source-legend { box-sizing: border-box; width: 180px; overflow: hidden; }
+.wht-source-activity .wht-source-chart { min-width: 0; overflow: hidden; }
+.wht-source-activity .wht-source-legend > div > div { height: 36px !important; line-height: 36px !important; }
+.wht-source-activity .apexcharts-canvas,
+.wht-source-activity .apexcharts-inner,
+.wht-source-activity .apexcharts-svg,
+.wht-source-activity .apexcharts-toolbar { padding: 0 !important; margin: 0 !important; box-sizing: border-box; }
+.wht-source-activity .apexcharts-svg title { display: none !important; }
+#custom-apex-tooltip-source { z-index: 999999; pointer-events: none; position: fixed; display: none; transform: none; }

@@ -84,8 +84,8 @@ export default function WhatHappenedTodaySourceActivity() {
   const labels = sorted.map((s) => String(s.source ?? "ismeretlen"));
   const values = sorted.map((s) => Number(s.total ?? 0));
 
-  /* === KEY: exact pixel row height === */
-  const rowHeight = 44; // ha a másik modulban 36 volt, állítsd 36-ra; itt 44 példaként
+  /* === FONTOS: pontos, egységes sormagasság === */
+  const rowHeight = 36; // egyezzen a kulcsszavak modul sormagasságával
   const chartHeight = Math.max(120, sorted.length * rowHeight);
 
   const baseColors = [
@@ -97,6 +97,8 @@ export default function WhatHappenedTodaySourceActivity() {
   const buildTooltipHtml = (label: string, value: number) =>
     `<div style="font-weight:700;margin-bottom:4px">${label}</div><div style="font-size:12px;opacity:0.85">${value} db</div>`;
 
+  const barHeightPx = Math.max(8, Math.floor(rowHeight * 0.7)); // 36 * 0.7 = 25px -> jól illeszkedik
+
   const options: ApexOptions = {
     chart: {
       type: "bar",
@@ -104,8 +106,8 @@ export default function WhatHappenedTodaySourceActivity() {
       stacked: false,
       sparkline: { enabled: false },
       background: "transparent",
-      offsetY: 0,                 // fontos: ne legyen függőleges eltolás
-      parentHeightOffset: 0,     // fontos: ne adjon extra top/bottom offsetet
+      offsetY: 0,
+      parentHeightOffset: 0,
       redrawOnParentResize: true,
       animations: { enabled: false },
       events: {
@@ -176,7 +178,7 @@ export default function WhatHappenedTodaySourceActivity() {
       bar: {
         horizontal: true,
         borderRadius: 6,
-        barHeight: `${rowHeight}px`, // pontos pixelmagasság — ez a kulcs
+        barHeight: `${barHeightPx}px`, // pontos pixelmagasság
         distributed: true,
       },
     },
@@ -193,10 +195,7 @@ export default function WhatHappenedTodaySourceActivity() {
       axisTicks: { show: false },
     },
     yaxis: { labels: { show: false } },
-    grid: {
-      show: false,
-      padding: { left: 0, right: 0, top: 0, bottom: 0 }, // fontos: nincs extra padding
-    },
+    grid: { show: false, padding: { left: 0, right: 0, top: 0, bottom: 0 } },
     colors,
     tooltip: { enabled: false },
     legend: { show: false },
