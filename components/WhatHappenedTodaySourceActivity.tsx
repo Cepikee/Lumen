@@ -68,7 +68,7 @@ export default function WhatHappenedTodaySourceActivity() {
     }
 
     return () => {
-      // keep tooltip element for reuse; no removal to avoid flicker on remount
+      // megtartjuk az elemet újrahasználathoz
     };
   }, [isDark]);
 
@@ -89,7 +89,7 @@ export default function WhatHappenedTodaySourceActivity() {
   const labels = sorted.map((s) => String(s.source ?? "ismeretlen"));
   const values = sorted.map((s) => Number(s.total ?? 0));
 
-  // Sor magasság és chart magasság (összhangban a kulcsszavak komponenssel)
+  // Sor magasság és chart magasság
   const rowHeight = 48;
   const chartHeight = Math.max(120, sorted.length * rowHeight);
 
@@ -105,18 +105,12 @@ export default function WhatHappenedTodaySourceActivity() {
     "#FFC53D",
     "#5CDBD3",
   ];
-  const colors = sorted.map((_, i) => baseColors[i % baseColors.length]);
+  const colors = labels.map((_, i) => baseColors[i % baseColors.length]);
 
   const buildTooltipHtml = (label: string, value: number) => {
     return `<div style="font-weight:700;margin-bottom:4px">${label}</div><div style="font-size:12px;opacity:0.85">${value} db</div>`;
   };
 
-  /* ===== Final approach:
-       - single series with values
-       - xaxis.categories = labels
-       - plotOptions.bar.distributed = true so each bar gets its color from colors[]
-       - legend disabled (we render a custom legend on the left with color swatches + values)
-  */
   const options: ApexOptions = {
     chart: {
       type: "bar",
@@ -209,7 +203,7 @@ export default function WhatHappenedTodaySourceActivity() {
         horizontal: true,
         borderRadius: 6,
         barHeight: `${Math.max(8, Math.floor(rowHeight * 0.6))}px`,
-        distributed: true,
+        distributed: true, // minden sáv saját színt kap a colors tömbből
       },
     },
     dataLabels: {
@@ -233,7 +227,7 @@ export default function WhatHappenedTodaySourceActivity() {
     },
     colors,
     tooltip: {
-      enabled: false,
+      enabled: false, // beépített tooltip kikapcsolva
     },
     legend: { show: false },
     grid: { show: false },
@@ -245,9 +239,9 @@ export default function WhatHappenedTodaySourceActivity() {
     <div className="wht-source-activity">
       <h5 className="mb-3 text-center">Források aktivitása ma</h5>
 
-      {/* LAYOUT: bal oldalon a custom legend (színes swatch + név + érték), jobb oldalon a chart */}
+      {/* LAYOUT: bal oldalon a custom legend (színes swatch + név), jobb oldalon a chart */}
       <div className="flex items-start gap-3">
-        {/* BAL: custom legend */}
+        {/* BAL: custom legend (csak swatch + név) */}
         <div style={{ width: 180 }} className="flex-shrink-0">
           <div className="flex flex-col">
             {labels.map((label, i) => (
@@ -279,9 +273,7 @@ export default function WhatHappenedTodaySourceActivity() {
                 >
                   {label}
                 </span>
-                <span style={{ fontWeight: 700, color: isDark ? "#fff" : "#000", marginLeft: 8 }}>
-                  {values[i]} db
-                </span>
+                {/* NINCS középső szám — a felhasználói kérés szerint eltávolítva */}
               </div>
             ))}
           </div>
