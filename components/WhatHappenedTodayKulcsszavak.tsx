@@ -40,108 +40,34 @@ export default function WhatHappenedTodayKulcsszavak() {
   );
 
   useEffect(() => {
-    // Robust tooltip handler: figyeljük a DOM-ot, ha létrejön .apexcharts-tooltip, áthelyezzük a body-hoz
-    let observer: MutationObserver | null = null;
-    let currentTip: HTMLElement | null = null;
-    let mouseMoveHandler: ((e: MouseEvent) => void) | null = null;
-
-    const ensureTip = (tip: HTMLElement | null) => {
-      if (!tip) return;
-      // alapstílusok
-      tip.style.position = "fixed";
-      tip.style.zIndex = "99999";
-      tip.style.pointerEvents = "auto";
-      tip.style.display = "none";
-      tip.style.transform = "none";
-      // ha nincs a body-n, áthelyezzük
-      if (tip.parentElement !== document.body) {
-        document.body.appendChild(tip);
-      }
-    };
-
-    const attachObserver = () => {
-      observer = new MutationObserver((mutations) => {
-        for (const m of mutations) {
-          // új node-ok között keressük a tooltipet
-          if (m.addedNodes && m.addedNodes.length) {
-            m.addedNodes.forEach((n) => {
-              if (!(n instanceof HTMLElement)) return;
-              // közvetlen tooltip vagy belső elem
-              if (n.classList.contains("apexcharts-tooltip")) {
-                currentTip = n;
-                ensureTip(currentTip);
-              } else {
-                const found = n.querySelector?.(".apexcharts-tooltip") as HTMLElement | null;
-                if (found) {
-                  currentTip = found;
-                  ensureTip(currentTip);
-                }
-              }
-            });
-          }
-        }
+    // ensure tooltip container exists once
+    let tip = document.getElementById("custom-apex-tooltip");
+    if (!tip) {
+      tip = document.createElement("div");
+      tip.id = "custom-apex-tooltip";
+      Object.assign(tip.style, {
+        position: "fixed",
+        zIndex: "999999",
+        pointerEvents: "none",
+        display: "none",
+        background: isDark ? "#0b1220" : "#ffffff",
+        color: isDark ? "#fff" : "#000",
+        borderRadius: "6px",
+        padding: "8px 10px",
+        boxShadow: "0 6px 18px rgba(0,0,0,0.12)",
+        fontSize: "13px",
+        lineHeight: "1.2",
+        maxWidth: "320px",
       });
+      document.body.appendChild(tip);
+    }
 
-      observer.observe(document.body, { childList: true, subtree: true });
-      // ha már van tooltip a DOM-ban, azonnal kezeljük
-      const existing = document.querySelector(".apexcharts-tooltip") as HTMLElement | null;
-      if (existing) {
-        currentTip = existing;
-        ensureTip(currentTip);
-      }
-    };
-
-    const attachMouseMove = () => {
-      mouseMoveHandler = (event: MouseEvent) => {
-        try {
-          const tip = currentTip ?? (document.querySelector(".apexcharts-tooltip") as HTMLElement | null);
-          if (!tip) return;
-          if (!tip.innerHTML || tip.innerHTML.trim() === "") {
-            tip.style.display = "none";
-            return;
-          }
-
-          const offsetX = 12;
-          const offsetY = 12;
-          const clientX = event.clientX;
-          const clientY = event.clientY;
-
-          const vw = window.innerWidth;
-          const vh = window.innerHeight;
-          const rect = tip.getBoundingClientRect();
-          let left = clientX + offsetX;
-          let top = clientY + offsetY;
-
-          if (left + rect.width > vw - 8) {
-            left = Math.max(8, clientX - rect.width - offsetX);
-          }
-          if (top + rect.height > vh - 8) {
-            top = Math.max(8, clientY - rect.height - offsetY);
-          }
-
-          tip.style.left = `${left}px`;
-          tip.style.top = `${top}px`;
-          tip.style.display = "block";
-        } catch (e) {
-          // noop
-        }
-      };
-
-      window.addEventListener("mousemove", mouseMoveHandler);
-    };
-
-    attachObserver();
-    attachMouseMove();
-
+    // cleanup on unmount
     return () => {
-      if (observer) observer.disconnect();
-      if (mouseMoveHandler) window.removeEventListener("mousemove", mouseMoveHandler);
-      // ne töröljük a tooltipet a body-ból, csak hagyjuk a cleanup-ot
-      observer = null;
-      currentTip = null;
-      mouseMoveHandler = null;
+      // keep tooltip element (no harm) or remove if you prefer:
+      // const el = document.getElementById("custom-apex-tooltip"); if (el) el.remove();
     };
-  }, []);
+  }, [isDark]);
 
   if (isLoading) {
     return (
@@ -169,6 +95,12 @@ export default function WhatHappenedTodayKulcsszavak() {
   ];
   const colors = sorted.map((_, i) => baseColors[i % baseColors.length]);
 
+  // Custom tooltip helper: content builder
+  const buildTooltipHtml = (label: string, value: number) => {
+    // simple HTML; keep it small and safe
+    return `<div style="font-weight:700;margin-bottom:4px">${label}</div><div style="font-size:12px;opacity:0.85">${value} db</div>`;
+  };
+
   const options: ApexOptions = {
     chart: {
       type: "bar",
@@ -182,20 +114,55 @@ export default function WhatHappenedTodayKulcsszavak() {
       },
       background: "transparent",
       offsetY: -4,
-      // megtartjuk az events-et is, de a MutationObserver a fő megoldás
+      // Use dataPointMouseEnter/Leave to show our custom tooltip reliably
       events: {
-        mounted: function (chartContext: any) {
+        dataPointMouseEnter: function (event: any, chartContext: any, config: any) {
           try {
-            const tip = chartContext.el.querySelector(".apexcharts-tooltip") as HTMLElement | null;
-            if (tip) {
-              // ha van, áthelyezzük a body-hoz (observer is figyel, de itt is biztosítjuk)
-              if (tip.parentElement !== document.body) document.body.appendChild(tip);
-              tip.style.position = "fixed";
-              tip.style.zIndex = "99999";
-              tip.style.pointerEvents = "auto";
-              tip.style.display = "none";
-              tip.style.transform = "none";
-            }
+            const tip = document.getElementById("custom-apex-tooltip");
+            if (!tip) return;
+            const seriesIndex = config.seriesIndex;
+            const dataPointIndex = config.dataPointIndex;
+            const label = categories[dataPointIndex] ?? "";
+            const value = counts[dataPointIndex] ?? 0;
+            tip.innerHTML = buildTooltipHtml(label, value);
+            // position near cursor if available
+            const clientX = event?.clientX ?? (config?.event?.clientX ?? 0);
+            const clientY = event?.clientY ?? (config?.event?.clientY ?? 0);
+            const offsetX = 12;
+            const offsetY = 12;
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+            // temporarily show to measure
+            tip.style.display = "block";
+            tip.style.left = `${Math.min(vw - tip.clientWidth - 8, clientX + offsetX)}px`;
+            tip.style.top = `${Math.min(vh - tip.clientHeight - 8, clientY + offsetY)}px`;
+          } catch (e) {
+            // noop
+          }
+        },
+        dataPointMouseLeave: function () {
+          try {
+            const tip = document.getElementById("custom-apex-tooltip");
+            if (tip) tip.style.display = "none";
+          } catch (e) {}
+        },
+        mouseMove: function (event: any, chartContext: any, config: any) {
+          try {
+            const tip = document.getElementById("custom-apex-tooltip");
+            if (!tip || tip.style.display === "none") return;
+            const clientX = event?.clientX ?? (config?.event?.clientX ?? 0);
+            const clientY = event?.clientY ?? (config?.event?.clientY ?? 0);
+            const offsetX = 12;
+            const offsetY = 12;
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+            const rect = tip.getBoundingClientRect();
+            let left = clientX + offsetX;
+            let top = clientY + offsetY;
+            if (left + rect.width > vw - 8) left = Math.max(8, clientX - rect.width - offsetX);
+            if (top + rect.height > vh - 8) top = Math.max(8, clientY - rect.height - offsetY);
+            tip.style.left = `${left}px`;
+            tip.style.top = `${top}px`;
           } catch (e) {}
         },
       },
@@ -227,10 +194,7 @@ export default function WhatHappenedTodayKulcsszavak() {
     yaxis: { labels: { show: false } },
     colors,
     tooltip: {
-      theme: isDark ? "dark" : "light",
-      y: { formatter: (val: any) => `${val} db` },
-      shared: false,
-      enabled: true,
+      enabled: false, // disable built-in tooltip
     },
     grid: { show: false, padding: { left: 0, right: 0 } },
     legend: { show: false },
