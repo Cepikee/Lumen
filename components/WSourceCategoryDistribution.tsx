@@ -7,11 +7,12 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import useSWR from "swr";
 import Spinner from "react-bootstrap/Spinner";
 import { useUserStore } from "@/store/useUserStore";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 interface CategoryItem {
   source: string;
@@ -135,6 +136,16 @@ export default function WSourceCategoryDistribution() {
                   },
                 },
               },
+              datalabels: {
+                color: isDark ? "#fff" : "#000",
+                font: {
+                  size: 9,
+                  weight: "bold",
+                },
+                formatter: (value: number) => {
+                  return value > 0 ? value : "";
+                },
+              },
             },
           };
 
@@ -154,11 +165,6 @@ export default function WSourceCategoryDistribution() {
 
               <div className="relative w-[120px] h-[120px]">
                 <Doughnut data={chartData} options={options} />
-              </div>
-
-              {/* --- SZÁMOK KÖZÉPRE (összes cikk) --- */}
-              <div className="text-xs mt-1 opacity-70">
-                Összes: {values.reduce((a, b) => a + b, 0)}
               </div>
             </div>
           );
