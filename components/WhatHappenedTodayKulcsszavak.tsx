@@ -80,24 +80,107 @@ export default function WhatHappenedTodayKulcsszavak() {
       background: "transparent",
       offsetY: -4,
       events: {
-        mounted: function (chartContext: any) {
+        // Áthelyezzük a tooltipet a body-hoz és beállítjuk a stílusát
+        mounted: function (chartContext: any, config: any) {
           try {
-            const tip = chartContext.el.querySelector(".apexcharts-tooltip");
-            if (tip && tip.parentElement !== document.body) {
-              document.body.appendChild(tip);
-            }
+            const moveTipToBody = () => {
+              const tip = chartContext.el.querySelector(".apexcharts-tooltip");
+              if (tip) {
+                if (tip.parentElement !== document.body) {
+                  document.body.appendChild(tip);
+                }
+                // fix pozíció, magas z-index, pointer events
+                tip.style.position = "fixed";
+                tip.style.zIndex = "99999";
+                tip.style.pointerEvents = "auto";
+                tip.style.display = "none"; // alapból rejtve, majd mouseMove mutatja
+                tip.style.transform = "none";
+              }
+            };
+            moveTipToBody();
+            // lefedjük az esetet, ha Apex később hozza létre
+            setTimeout(moveTipToBody, 50);
+            setTimeout(moveTipToBody, 300);
           } catch (e) {
-            /* noop */
+            // noop
           }
         },
+
         updated: function (chartContext: any) {
           try {
-            const tip = chartContext.el.querySelector(".apexcharts-tooltip");
-            if (tip && tip.parentElement !== document.body) {
-              document.body.appendChild(tip);
+            const moveTipToBody = () => {
+              const tip = chartContext.el.querySelector(".apexcharts-tooltip");
+              if (tip) {
+                if (tip.parentElement !== document.body) {
+                  document.body.appendChild(tip);
+                }
+                tip.style.position = "fixed";
+                tip.style.zIndex = "99999";
+                tip.style.pointerEvents = "auto";
+                tip.style.display = "none";
+                tip.style.transform = "none";
+              }
+            };
+            moveTipToBody();
+            setTimeout(moveTipToBody, 50);
+          } catch (e) {
+            // noop
+          }
+        },
+
+        // Pozícionáljuk a tooltipet a kurzorhoz (fixed pozíció)
+        mouseMove: function (event: any, chartContext: any, config: any) {
+          try {
+            // keresünk a body alatt lévő apexcharts-tooltip elemet
+            const tip = document.querySelector(".apexcharts-tooltip") as HTMLElement | null;
+            if (!tip) return;
+
+            // ha nincs tartalom, ne mutassuk
+            if (!tip.innerHTML || tip.innerHTML.trim() === "") {
+              tip.style.display = "none";
+              return;
+            }
+
+            // kis offset, hogy ne takarja a kurzor
+            const offsetX = 12;
+            const offsetY = 12;
+
+            // event.clientX/Y általában elérhető
+            const clientX = event?.clientX ?? (config?.event?.clientX ?? 0);
+            const clientY = event?.clientY ?? (config?.event?.clientY ?? 0);
+
+            // pozícionálás: ügyelünk, hogy a tooltip ne menjen ki a viewportból
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+            const rect = tip.getBoundingClientRect();
+            let left = clientX + offsetX;
+            let top = clientY + offsetY;
+
+            // ha túl jobb oldalon lenne, igazítjuk balra
+            if (left + rect.width > vw - 8) {
+              left = Math.max(8, clientX - rect.width - offsetX);
+            }
+            // ha túl alul lenne, igazítjuk feljebb
+            if (top + rect.height > vh - 8) {
+              top = Math.max(8, clientY - rect.height - offsetY);
+            }
+
+            tip.style.left = `${left}px`;
+            tip.style.top = `${top}px`;
+            tip.style.display = "block";
+          } catch (e) {
+            // noop
+          }
+        },
+
+        mouseLeave: function () {
+          try {
+            const tip = document.querySelector(".apexcharts-tooltip") as HTMLElement | null;
+            if (tip) {
+              tip.style.display = "none";
             }
           } catch (e) {
-            /* noop */
+            // noop
           }
         },
       },
@@ -132,6 +215,7 @@ export default function WhatHappenedTodayKulcsszavak() {
       theme: isDark ? "dark" : "light",
       y: { formatter: (val: any) => `${val} db` },
       shared: false,
+      enabled: true,
     },
     grid: { show: false, padding: { left: 0, right: 0 } },
     legend: { show: false },

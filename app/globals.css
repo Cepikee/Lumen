@@ -2036,91 +2036,80 @@ html.theme-dark .nav-link {
 
 
 
-/* ===== Scoped overrides for the keywords panel ===== */
+/* ===== Javított scoped CSS a Felkapott kulcsszavak panelhez ===== */
+
+/* Panel wrapper */
+.wht-keywords-activity,
 .wht-box.module-box.horizontal-list .wht-keywords-activity {
-  width: 100%;
   box-sizing: border-box;
+  width: 100%;
 }
 
-/* eltüntetjük a wht-header-line vagy chart-line csak ennél a panelnél */
+/* Eltüntetjük csak ennél a panelnél a dekorvonalakat */
+.wht-keywords-activity .wht-header-line,
 .wht-box.module-box.horizontal-list .wht-header-line,
+.wht-keywords-activity .chart-line,
 .wht-box.module-box.horizontal-list .chart-line {
   display: none !important;
 }
 
-/* ApexCharts wrapper override: nincs extra padding/margin */
+/* ApexCharts wrapper: nullázzuk a belső margin/padding-ot */
+.wht-keywords-activity .apexcharts-canvas,
+.wht-keywords-activity .apexcharts-inner,
+.wht-keywords-activity .apexcharts-svg,
+.wht-keywords-activity .apexcharts-toolbar,
 .wht-box.module-box.horizontal-list .apexcharts-canvas,
 .wht-box.module-box.horizontal-list .apexcharts-inner,
-.wht-box.module-box.horizontal-list .apexcharts-toolbar,
-.wht-box.module-box.horizontal-list .apexcharts-svg {
+.wht-box.module-box.horizontal-list .apexcharts-svg,
+.wht-box.module-box.horizontal-list .apexcharts-toolbar {
   padding: 0 !important;
   margin: 0 !important;
   box-sizing: border-box;
 }
 
-/* bal címkék sorainak biztosítása: pontos line-height és középre igazítás */
+/* Kulcsszó sorok: fix magasság és középre igazítás (egyezzen a komponens rowHeight értékével) */
+.wht-keywords-activity .kw-label,
 .wht-box.module-box.horizontal-list .kw-label {
   display: flex;
   align-items: center;
-  padding-left: 6px;
-  padding-right: 6px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  line-height: 36px; /* egyezzen meg a komponens rowHeight értékével */
-  height: 36px;      /* egyezzen meg a komponens rowHeight értékével */
+  height: 36px;
+  line-height: 36px;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
-/* ha van .row vagy .chart-placeholder, ami felülírja, nullázzuk itt */
+/* Kulcsszó szöveg enyhe felfelé tolása (2px) */
+.wht-keywords-activity .kw-label > span,
+.wht-box.module-box.horizontal-list .kw-label > span {
+  display: inline-block;
+  transform: translateY(-2px);
+}
+
+/* Görgető wrapper: simább görgetés mobilon, alap overflow beállítás */
+.wht-keywords-activity .wht-keywords-scroll,
+.wht-box.module-box.horizontal-list .wht-keywords-scroll {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+  max-height: 320px; /* szükség szerint állítsd át inline vagy Tailwinddel */
+}
+
+/* Tooltip: magas z-index és pointer events — JS kezeli a pozícionálást */
+.apexcharts-tooltip {
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+  position: fixed !important;
+  display: none !important;
+  transform: none !important;
+}
+
+/* Biztonsági reset csak erre a panelre: ha vannak globális .row vagy .chart-placeholder szabályok */
+.wht-keywords-activity .row,
+.wht-keywords-activity .chart-placeholder,
 .wht-box.module-box.horizontal-list .row,
 .wht-box.module-box.horizontal-list .chart-placeholder {
   margin: 0 !important;
   padding: 0 !important;
-}
-/* Kulcsszó szöveg enyhe felfelé tolása */
-.wht-keywords-activity .kw-label > span {
-  display: inline-block;
-  transform: translateY(-2px);
-  /* opcionálisan finomhangolás: */
-  /* line-height: 36px; */
-}
-/* ===== Scoped overrides for the keywords panel ===== */
-.wht-keywords-activity .kw-label {
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  /* line-height és height egyezzen meg a komponens rowHeight értékével */
-  line-height: 36px;
-  height: 36px;
-}
-
-/* biztosítjuk, hogy az ApexCharts SVG ne kapjon extra paddinget ebben a panelben */
-.wht-keywords-activity .apexcharts-canvas,
-.wht-keywords-activity .apexcharts-inner,
-.wht-keywords-activity .apexcharts-svg {
-  padding: 0 !important;
-  margin: 0 !important;
-  box-sizing: border-box;
-}
-
-/* a scroll wrapper finomítása (simább görgetés mobilon) */
-.wht-keywords-activity .wht-keywords-scroll {
-  -webkit-overflow-scrolling: touch;
-}
-
-/* ha globális .wht-header-line vagy .chart-line jelenik meg, elrejthetjük csak ennél a panelnél */
-.wht-keywords-activity .wht-header-line,
-.wht-keywords-activity .chart-line {
-  display: none !important;
-}
-/* amikor a chart fölött van az egér, engedjük meg a láthatóságot */
-.wht-keywords-activity .wht-keywords-scroll:hover {
-  overflow: visible;
-}
-/* Apex tooltip mindig látható és legfelül legyen */
-.apexcharts-tooltip {
-  z-index: 99999 !important;
-  pointer-events: auto !important;
 }
