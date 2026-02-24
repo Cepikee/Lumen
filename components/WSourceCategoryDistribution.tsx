@@ -79,16 +79,15 @@ export default function WSourceCategoryDistribution() {
     "Oktatás",
   ];
 
-  // --- Kategória színek ---
   const categoryColors = [
-    "#ef4444", // Politika
-    "#f59e0b", // Gazdaság
-    "#10b981", // Közélet
-    "#3b82f6", // Kultúra
-    "#8b5cf6", // Sport
-    "#ec4899", // Tech
-    "#14b8a6", // Egészségügy
-    "#6366f1", // Oktatás
+    "#ef4444",
+    "#f59e0b",
+    "#10b981",
+    "#3b82f6",
+    "#8b5cf6",
+    "#ec4899",
+    "#14b8a6",
+    "#6366f1",
   ];
 
   return (
@@ -102,60 +101,46 @@ export default function WSourceCategoryDistribution() {
     >
       <h3 className="text-lg font-semibold mb-4">Kategóriaeloszlás forrásonként</h3>
 
-      {/* --- VÍZSZINTES SCROLL, KÖZÉPRE IGAZÍTVA --- */}
+      {/* --- VÍZSZINTES SCROLL + KÖZÉPRE IGAZÍTÁS --- */}
       <div className="flex gap-6 overflow-x-auto pb-4 justify-center">
         {items.map((src) => {
-          const series = [
-            {
-              name: src.source,
-              data: categories.map((c) => (src as any)[c] ?? 0),
-            },
-          ];
+          const values = categories.map((c) => (src as any)[c] ?? 0);
 
           const options: ApexOptions = {
             chart: {
-              type: "bar",
+              type: "donut",
               toolbar: { show: false },
-              background: "transparent",
             },
-            plotOptions: {
-              bar: {
-                horizontal: true,
-                barHeight: "55%",
-              },
+            labels: categories,
+            colors: categoryColors,
+            legend: {
+              show: false,
             },
             dataLabels: {
               enabled: true,
+              formatter: (val: number, opts: any) => {
+                const index = opts.seriesIndex;
+                const raw = values[index];
+                return raw > 0 ? raw.toString() : "";
+              },
               style: {
                 colors: [isDark ? "#fff" : "#000"],
                 fontSize: "11px",
               },
             },
-            xaxis: {
-              categories,
-              labels: {
-                style: {
-                  colors: isDark ? "#fff" : "#000",
-                  fontSize: "11px",
+            plotOptions: {
+              pie: {
+                donut: {
+                  size: "65%",
                 },
               },
             },
-            yaxis: {
-              labels: {
-                style: {
-                  colors: isDark ? "#fff" : "#000",
-                  fontSize: "11px",
-                },
-              },
-            },
-            legend: { show: false },
-            colors: categoryColors,
           };
 
           return (
             <div
               key={src.source}
-              className="min-w-[280px] p-3 rounded border"
+              className="min-w-[240px] p-3 rounded border flex flex-col items-center"
               style={{
                 background: isDark ? "#0b1220" : "#fff",
                 borderColor: isDark ? "#1e293b" : "#e5e7eb",
@@ -168,9 +153,10 @@ export default function WSourceCategoryDistribution() {
 
               <ApexChart
                 options={options}
-                series={series}
-                type="bar"
-                height={260}
+                series={values}
+                type="donut"
+                height={220}
+                width={220}
               />
             </div>
           );
