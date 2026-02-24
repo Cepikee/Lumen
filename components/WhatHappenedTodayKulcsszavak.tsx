@@ -39,8 +39,8 @@ export default function WhatHappenedTodayKulcsszavak() {
     { refreshInterval: 60_000, revalidateOnFocus: true }
   );
 
+  /* --- CUSTOM TOOLTIP SETUP (single DOM element on body) --- */
   useEffect(() => {
-    // ensure tooltip container exists once
     let tip = document.getElementById("custom-apex-tooltip");
     if (!tip) {
       tip = document.createElement("div");
@@ -60,12 +60,14 @@ export default function WhatHappenedTodayKulcsszavak() {
         maxWidth: "320px",
       });
       document.body.appendChild(tip);
+    } else {
+      // update theme colors if element already exists
+      tip.style.background = isDark ? "#0b1220" : "#ffffff";
+      tip.style.color = isDark ? "#fff" : "#000";
     }
 
-    // cleanup on unmount
     return () => {
-      // keep tooltip element (no harm) or remove if you prefer:
-      // const el = document.getElementById("custom-apex-tooltip"); if (el) el.remove();
+      // keep tooltip element for reuse; no removal to avoid flicker on remount
     };
   }, [isDark]);
 
@@ -95,12 +97,16 @@ export default function WhatHappenedTodayKulcsszavak() {
   ];
   const colors = sorted.map((_, i) => baseColors[i % baseColors.length]);
 
-  // Custom tooltip helper: content builder
+  /* Helper to build tooltip HTML */
   const buildTooltipHtml = (label: string, value: number) => {
-    // simple HTML; keep it small and safe
     return `<div style="font-weight:700;margin-bottom:4px">${label}</div><div style="font-size:12px;opacity:0.85">${value} db</div>`;
   };
 
+  /* Apex options with events:
+     - disable built-in tooltip
+     - use dataPointMouseEnter/Leave + mouseMove to control custom tooltip
+     - remove any <title> elements inserted into the SVG (the "Chart" label)
+  */
   const options: ApexOptions = {
     chart: {
       type: "bar",
@@ -114,28 +120,57 @@ export default function WhatHappenedTodayKulcsszavak() {
       },
       background: "transparent",
       offsetY: -4,
-      // Use dataPointMouseEnter/Leave to show our custom tooltip reliably
       events: {
+        mounted: function (chartContext: any) {
+          try {
+            // Remove any <title> inside the chart SVG (prevents browser native tooltip "Chart")
+            const svg = chartContext.el.querySelector("svg");
+            const title = svg?.querySelector("title");
+            if (title) title.remove();
+
+            // Also remove any aria-label/title attributes that might trigger native tooltips
+            if (svg && svg.hasAttribute("title")) svg.removeAttribute("title");
+            if (svg && svg.hasAttribute("aria-label")) svg.removeAttribute("aria-label");
+          } catch (e) {
+            // noop
+          }
+        },
+        updated: function (chartContext: any) {
+          try {
+            const svg = chartContext.el.querySelector("svg");
+            const title = svg?.querySelector("title");
+            if (title) title.remove();
+            if (svg && svg.hasAttribute("title")) svg.removeAttribute("title");
+            if (svg && svg.hasAttribute("aria-label")) svg.removeAttribute("aria-label");
+          } catch (e) {
+            // noop
+          }
+        },
+        // Show custom tooltip on data point enter
         dataPointMouseEnter: function (event: any, chartContext: any, config: any) {
           try {
             const tip = document.getElementById("custom-apex-tooltip");
             if (!tip) return;
-            const seriesIndex = config.seriesIndex;
             const dataPointIndex = config.dataPointIndex;
             const label = categories[dataPointIndex] ?? "";
             const value = counts[dataPointIndex] ?? 0;
             tip.innerHTML = buildTooltipHtml(label, value);
-            // position near cursor if available
+
             const clientX = event?.clientX ?? (config?.event?.clientX ?? 0);
             const clientY = event?.clientY ?? (config?.event?.clientY ?? 0);
             const offsetX = 12;
             const offsetY = 12;
+            tip.style.display = "block";
+            // initial placement with viewport bounds check
             const vw = window.innerWidth;
             const vh = window.innerHeight;
-            // temporarily show to measure
-            tip.style.display = "block";
-            tip.style.left = `${Math.min(vw - tip.clientWidth - 8, clientX + offsetX)}px`;
-            tip.style.top = `${Math.min(vh - tip.clientHeight - 8, clientY + offsetY)}px`;
+            const rect = tip.getBoundingClientRect();
+            let left = Math.min(vw - rect.width - 8, clientX + offsetX);
+            let top = Math.min(vh - rect.height - 8, clientY + offsetY);
+            if (left < 8) left = 8;
+            if (top < 8) top = 8;
+            tip.style.left = `${left}px`;
+            tip.style.top = `${top}px`;
           } catch (e) {
             // noop
           }
@@ -163,7 +198,9 @@ export default function WhatHappenedTodayKulcsszavak() {
             if (top + rect.height > vh - 8) top = Math.max(8, clientY - rect.height - offsetY);
             tip.style.left = `${left}px`;
             tip.style.top = `${top}px`;
-          } catch (e) {}
+          } catch (e) {
+            // noop
+          }
         },
       },
     },
@@ -194,7 +231,7 @@ export default function WhatHappenedTodayKulcsszavak() {
     yaxis: { labels: { show: false } },
     colors,
     tooltip: {
-      enabled: false, // disable built-in tooltip
+      enabled: false, // built-in tooltip disabled — we use custom tooltip
     },
     grid: { show: false, padding: { left: 0, right: 0 } },
     legend: { show: false },
