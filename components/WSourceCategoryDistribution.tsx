@@ -28,7 +28,6 @@ const fetcher = (url: string) =>
   }).then((r) => r.json());
 
 export default function WSourceCategoryDistribution() {
-  // --- THEME (pont úgy, ahogy te használod) ---
   const theme = useUserStore((s) => s.theme);
 
   const isDark =
@@ -37,7 +36,6 @@ export default function WSourceCategoryDistribution() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-  // --- API ---
   const { data, error, isLoading } = useSWR<{ success: boolean; items: CategoryItem[] }>(
     "/api/insights/source-category-distribution",
     fetcher,
@@ -70,7 +68,6 @@ export default function WSourceCategoryDistribution() {
     );
   }
 
-  // --- Kategóriák sorrendje ---
   const categories = [
     "Politika",
     "Gazdaság",
@@ -81,49 +78,6 @@ export default function WSourceCategoryDistribution() {
     "Egészségügy",
     "Oktatás",
   ];
-
-  // --- Sorozatok (forrásonként) ---
-  const series = items.map((src) => ({
-    name: src.source,
-    data: categories.map((c) => (src as any)[c] ?? 0),
-  }));
-
-  // --- Chart opciók ---
-  const options: ApexOptions = {
-    chart: {
-      type: "radar",
-      toolbar: { show: false },
-      background: "transparent",
-    },
-    stroke: {
-      width: 2,
-    },
-    fill: {
-      opacity: 0.2,
-    },
-    legend: {
-      show: true,
-      labels: {
-        colors: isDark ? "#fff" : "#000",
-      },
-    },
-    xaxis: {
-      categories,
-      labels: {
-        style: {
-          colors: categories.map(() => (isDark ? "#fff" : "#000")),
-          fontSize: "13px",
-        },
-      },
-    },
-    yaxis: {
-      labels: {
-        style: {
-          colors: isDark ? "#fff" : "#000",
-        },
-      },
-    },
-  };
 
   return (
     <div
@@ -136,12 +90,63 @@ export default function WSourceCategoryDistribution() {
     >
       <h3 className="text-lg font-semibold mb-4">Kategóriaeloszlás forrásonként</h3>
 
-      <ApexChart
-        options={options}
-        series={series}
-        type="radar"
-        height={420}
-      />
+      {/* --- VÍZSZINTES SCROLL, EGY SORBAN --- */}
+      <div className="flex gap-6 overflow-x-auto pb-4">
+        {items.map((src) => {
+          const series = [
+            {
+              name: src.source,
+              data: categories.map((c) => (src as any)[c] ?? 0),
+            },
+          ];
+
+          const options: ApexOptions = {
+            chart: {
+              type: "radar",
+              toolbar: { show: false },
+              background: "transparent",
+            },
+            stroke: { width: 2 },
+            fill: { opacity: 0.2 },
+            xaxis: {
+              categories,
+              labels: {
+                style: {
+                  colors: categories.map(() => (isDark ? "#fff" : "#000")),
+                  fontSize: "12px",
+                },
+              },
+            },
+            yaxis: {
+              labels: {
+                style: { colors: isDark ? "#fff" : "#000" },
+              },
+            },
+            legend: { show: false },
+          };
+
+          return (
+            <div
+              key={src.source}
+              className="min-w-[350px] p-4 rounded border"
+              style={{
+                background: isDark ? "#0b1220" : "#fff",
+                borderColor: isDark ? "#1e293b" : "#e5e7eb",
+                color: isDark ? "#fff" : "#000",
+              }}
+            >
+              <h4 className="text-md font-semibold mb-2">{src.source}</h4>
+
+              <ApexChart
+                options={options}
+                series={series}
+                type="radar"
+                height={350}
+              />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
