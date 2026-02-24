@@ -1756,6 +1756,7 @@ html.theme-dark .nav-link {
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 12px;
   padding-bottom: 0 !important; /* vagy 10–20px */
+  box-sizing: border-box;
 
   /* FULL WIDTH FIX */
   width: 100% !important;
@@ -1851,6 +1852,39 @@ html.theme-dark .nav-link {
 }
 
 
+
+/* ===== Scoped layout fixes for WhatHappenedToday page ===== */
+
+/* biztosítjuk, hogy a row és a col-ok tényleg 100% magasságot örököljenek */
+.wht-wrapper-box {
+  box-sizing: border-box;
+}
+
+/* ha bootstrap .row felülírja a magasságot, erőltetjük a stretch-et */
+.wht-wrapper-box .row.items-stretch {
+  align-items: stretch;
+}
+
+/* a wht-box alapértelmezett paddingját nullázzuk, mert inline paddinget adunk a belső wrappernek */
+.wht-wrapper-box .wht-box.module-box.p-0 {
+  padding: 0 !important;
+}
+
+/* a görgethető panel belső wrapperének finomítása */
+.wht-wrapper-box .wht-box.module-box .overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* opcionális: ha a bal oldali panelek fix min-height-ot használnak, biztosítsuk, hogy a jobb alsó is igazodjon */
+.wht-wrapper-box .col-12.col-lg-3 .wht-box,
+.wht-wrapper-box .col-12.col-lg-6 .wht-box.flex-none {
+  min-height: 180px; /* finomítsd: állítsd ugyanarra az értékre, amit a bal modulok használnak */
+}
+
+/* ha szükséges, a jobb alsó doboz belső paddingját állítsd itt */
+.wht-wrapper-box .wht-box.module-box .p-3 {
+  padding: 12px !important;
+}
 
 
 
