@@ -79,6 +79,18 @@ export default function WSourceCategoryDistribution() {
     "Oktatás",
   ];
 
+  // --- Kategória színek ---
+  const categoryColors = [
+    "#ef4444", // Politika
+    "#f59e0b", // Gazdaság
+    "#10b981", // Közélet
+    "#3b82f6", // Kultúra
+    "#8b5cf6", // Sport
+    "#ec4899", // Tech
+    "#14b8a6", // Egészségügy
+    "#6366f1", // Oktatás
+  ];
+
   return (
     <div
       className="p-4 rounded border"
@@ -90,8 +102,8 @@ export default function WSourceCategoryDistribution() {
     >
       <h3 className="text-lg font-semibold mb-4">Kategóriaeloszlás forrásonként</h3>
 
-      {/* --- VÍZSZINTES SCROLL, EGY SORBAN --- */}
-      <div className="flex gap-6 overflow-x-auto pb-4">
+      {/* --- VÍZSZINTES SCROLL, KÖZÉPRE IGAZÍTVA --- */}
+      <div className="flex gap-6 overflow-x-auto pb-4 justify-center">
         {items.map((src) => {
           const series = [
             {
@@ -109,7 +121,14 @@ export default function WSourceCategoryDistribution() {
             plotOptions: {
               bar: {
                 horizontal: true,
-                barHeight: "60%",
+                barHeight: "55%",
+              },
+            },
+            dataLabels: {
+              enabled: true,
+              style: {
+                colors: [isDark ? "#fff" : "#000"],
+                fontSize: "11px",
               },
             },
             xaxis: {
@@ -117,6 +136,7 @@ export default function WSourceCategoryDistribution() {
               labels: {
                 style: {
                   colors: isDark ? "#fff" : "#000",
+                  fontSize: "11px",
                 },
               },
             },
@@ -124,31 +144,33 @@ export default function WSourceCategoryDistribution() {
               labels: {
                 style: {
                   colors: isDark ? "#fff" : "#000",
+                  fontSize: "11px",
                 },
               },
             },
-            dataLabels: { enabled: false },
             legend: { show: false },
-            colors: ["#3b82f6"],
+            colors: categoryColors,
           };
 
           return (
             <div
               key={src.source}
-              className="min-w-[350px] p-4 rounded border"
+              className="min-w-[280px] p-3 rounded border"
               style={{
                 background: isDark ? "#0b1220" : "#fff",
                 borderColor: isDark ? "#1e293b" : "#e5e7eb",
                 color: isDark ? "#fff" : "#000",
               }}
             >
-              <h4 className="text-md font-semibold mb-2">{src.source}</h4>
+              <h4 className="text-md font-semibold mb-2 text-center">
+                {src.source}
+              </h4>
 
               <ApexChart
                 options={options}
                 series={series}
                 type="bar"
-                height={350}
+                height={260}
               />
             </div>
           );
