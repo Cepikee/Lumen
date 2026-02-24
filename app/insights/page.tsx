@@ -412,7 +412,7 @@ function PremiumRequiredModal() {
 
           <p style={{ fontSize: "0.95rem", color: "#e0e0e0" }}>
             Az Insights oldal csak{" "}
-            <span style={{ color: "#ffb4b4", fontWeight: 600 }}>Prémium előfizetéssel</span> érhető el.
+            <span style={{ color: "#0400ff", fontWeight: 600 }}>Prémium előfizetéssel</span> érhető el.
           </p>
 
           <button

@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* app/globals.css — lehet üres is */
 html, body {
   min-height: 100%;
