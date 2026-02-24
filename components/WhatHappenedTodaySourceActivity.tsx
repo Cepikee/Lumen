@@ -121,7 +121,8 @@ export default function WhatHappenedTodaySourceActivity() {
       type: "bar",
       toolbar: { show: false },
       stacked: false,
-      sparkline: { enabled: true },
+      // sparkline kikapcsolva, hogy a legend és a marginok rendesen megjelenjenek
+      sparkline: { enabled: false },
       background: "transparent",
       offsetY: -4,
       events: {
@@ -148,14 +149,13 @@ export default function WhatHappenedTodaySourceActivity() {
             // noop
           }
         },
-        // custom tooltip events: használjuk dataPointMouseEnter/Leave + mouseMove
         dataPointMouseEnter: function (event: any, chartContext: any, config: any) {
           try {
             const tip = document.getElementById("custom-apex-tooltip-source");
             if (!tip) return;
 
             // seriesIndex mutatja meg, melyik source-ról van szó
-            const idx = typeof config.seriesIndex === "number" ? config.seriesIndex : 0;
+            const idx = typeof config.seriesIndex === "number" ? config.seriesIndex : config.dataPointIndex ?? 0;
             const label = labels[idx] ?? "";
             const value = values[idx] ?? 0;
             tip.innerHTML = buildTooltipHtml(label, value);
@@ -244,10 +244,13 @@ export default function WhatHappenedTodaySourceActivity() {
       show: true,
       position: "left",
       horizontalAlign: "left",
+      // floating + offsetX tolja a legendát a chart bal szélére, hogy ne takarja a bal címkéket
+      floating: true,
+      offsetX: -140,
+      offsetY: 0,
       labels: { colors: isDark ? "#fff" : "#000" },
       markers: { width: 12, height: 12 },
       formatter: function (seriesName: string, opts: any) {
-        // megjeleníti a legendában a forrás nevét és az értéket
         const idx = opts.seriesIndex;
         const val = values[idx] ?? 0;
         return `${seriesName} — ${val} db`;
