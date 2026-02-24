@@ -2075,3 +2075,10 @@ html.theme-dark .nav-link {
   margin: 0 !important;
   padding: 0 !important;
 }
+/* Kulcsszó szöveg enyhe felfelé tolása */
+.wht-keywords-activity .kw-label > span {
+  display: inline-block;
+  transform: translateY(-2px);
+  /* opcionálisan finomhangolás: */
+  /* line-height: 36px; */
+}
