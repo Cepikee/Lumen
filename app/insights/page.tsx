@@ -11,7 +11,7 @@ import useSWR from "swr";
 import ForecastStatus from "@/components/ForecastStatus";
 import WhatHappenedToday from "@/components/WhatHappenedToday";
 import { useUserStore } from "@/store/useUserStore";
-
+import WSourceOsszehasonlitas from "@/components/WSourceOsszehasonlitas";
 // ⭐ Forecast API hook
 const fetcher = (url: string) =>
   fetch(url, {
@@ -362,9 +362,15 @@ export default function InsightFeedPage() {
       <div className="container-fluid mt-5 px-0">
         <WhatHappenedToday />
       </div>
+      <div className="w-full flex flex-col gap-8">
+      <WSourceOsszehasonlitas />
+    </div>
     </main>
   );
 }
+
+
+
 
 /* ⭐ Prémium modal */
 function PremiumRequiredModal() {
