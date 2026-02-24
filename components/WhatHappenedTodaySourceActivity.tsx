@@ -105,16 +105,17 @@ export default function WhatHappenedTodaySourceActivity() {
     "#FFC53D",
     "#5CDBD3",
   ];
-  // ha szeretnéd, hogy minden sáv más színű legyen:
-  const distributedColors = labels.map((_, i) => baseColors[i % baseColors.length]);
+
+  // SERIES: minden forrás külön series, egyetlen adatponttal — így a legend és a színek visszajönnek
+  const series = sorted.map((item) => ({ name: String(item.source ?? "ismeretlen"), data: [Number(item.total ?? 0)] }));
+
+  // színek soronként (egyedi sávszínek)
+  const colors = sorted.map((_, i) => baseColors[i % baseColors.length]);
 
   const buildTooltipHtml = (label: string, value: number) => {
     return `<div style="font-weight:700;margin-bottom:4px">${label}</div><div style="font-size:12px;opacity:0.85">${value} db</div>`;
   };
 
-  /* ===== Fontos változtatás: single series + xaxis.categories =====
-     így könnyen megjeleníthetjük a bal oldali címkéket és a chartot egymás mellett
-  */
   const options: ApexOptions = {
     chart: {
       type: "bar",
@@ -152,8 +153,9 @@ export default function WhatHappenedTodaySourceActivity() {
           try {
             const tip = document.getElementById("custom-apex-tooltip-source");
             if (!tip) return;
-            // dataPointIndex adja meg a sor indexét (mivel single series)
-            const idx = config.dataPointIndex ?? 0;
+
+            // seriesIndex mutatja meg, melyik source-ról van szó
+            const idx = typeof config.seriesIndex === "number" ? config.seriesIndex : 0;
             const label = labels[idx] ?? "";
             const value = values[idx] ?? 0;
             tip.innerHTML = buildTooltipHtml(label, value);
@@ -209,9 +211,9 @@ export default function WhatHappenedTodaySourceActivity() {
       bar: {
         horizontal: true,
         borderRadius: 6,
-        // barHeight pixelben: igazítsd a rowHeight-hoz
+        // ha minden series külön sáv, ez a beállítás határozza a sáv vastagságát
         barHeight: `${Math.max(8, Math.floor(rowHeight * 0.6))}px`,
-        distributed: false,
+        distributed: true, // fontos: minden series külön színt kap
       },
     },
     dataLabels: {
@@ -225,7 +227,8 @@ export default function WhatHappenedTodaySourceActivity() {
       offsetX: 8,
     },
     xaxis: {
-      categories: labels,
+      // egyetlen kategória, mert minden series egy adatpontot ad
+      categories: [""],
       labels: { show: false },
       axisBorder: { show: false },
       axisTicks: { show: false },
@@ -233,12 +236,24 @@ export default function WhatHappenedTodaySourceActivity() {
     yaxis: {
       labels: { show: false },
     },
-    colors: distributedColors,
+    colors,
     tooltip: {
-      enabled: false, // built-in tooltip kikapcsolva
+      enabled: false, // built-in tooltip kikapcsolva — custom tooltip használva
     },
-    grid: { show: false, padding: { left: 0, right: 0 } },
-    legend: { show: false },
+    legend: {
+      show: true,
+      position: "left",
+      horizontalAlign: "left",
+      labels: { colors: isDark ? "#fff" : "#000" },
+      markers: { width: 12, height: 12 },
+      formatter: function (seriesName: string, opts: any) {
+        // megjeleníti a legendában a forrás nevét és az értéket
+        const idx = opts.seriesIndex;
+        const val = values[idx] ?? 0;
+        return `${seriesName} — ${val} db`;
+      },
+    },
+    grid: { show: false },
   } as ApexOptions;
 
   const stableKey = `${theme}-${sorted.length}-${values.join(",")}`;
@@ -279,7 +294,7 @@ export default function WhatHappenedTodaySourceActivity() {
 
         {/* JOBB: chart */}
         <div className="flex-1 min-w-0">
-          <ApexChart key={stableKey} options={options} series={[{ name: "Források", data: values }]} type="bar" height={chartHeight} />
+          <ApexChart key={stableKey} options={options} series={series} type="bar" height={chartHeight} />
         </div>
       </div>
     </div>
