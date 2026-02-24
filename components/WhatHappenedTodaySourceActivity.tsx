@@ -105,30 +105,29 @@ export default function WhatHappenedTodaySourceActivity() {
     "#FFC53D",
     "#5CDBD3",
   ];
-
-  // SERIES: minden forrás külön series, egyetlen adatponttal — így a legend és a színek visszajönnek
-  const series = sorted.map((item) => ({ name: String(item.source ?? "ismeretlen"), data: [Number(item.total ?? 0)] }));
-
-  // színek soronként (egyedi sávszínek)
   const colors = sorted.map((_, i) => baseColors[i % baseColors.length]);
 
   const buildTooltipHtml = (label: string, value: number) => {
     return `<div style="font-weight:700;margin-bottom:4px">${label}</div><div style="font-size:12px;opacity:0.85">${value} db</div>`;
   };
 
+  /* ===== Final approach:
+       - single series with values
+       - xaxis.categories = labels
+       - plotOptions.bar.distributed = true so each bar gets its color from colors[]
+       - legend disabled (we render a custom legend on the left with color swatches + values)
+  */
   const options: ApexOptions = {
     chart: {
       type: "bar",
       toolbar: { show: false },
       stacked: false,
-      // sparkline kikapcsolva, hogy a legend és a marginok rendesen megjelenjenek
       sparkline: { enabled: false },
       background: "transparent",
       offsetY: -4,
       events: {
         mounted: function (chartContext: any) {
           try {
-            // eltávolítjuk az SVG <title>-t és aria attribútumokat (megelőzi a natív "Chart" tooltipet)
             const svg = chartContext.el.querySelector("svg");
             const title = svg?.querySelector("title");
             if (title) title.remove();
@@ -153,9 +152,7 @@ export default function WhatHappenedTodaySourceActivity() {
           try {
             const tip = document.getElementById("custom-apex-tooltip-source");
             if (!tip) return;
-
-            // seriesIndex mutatja meg, melyik source-ról van szó
-            const idx = typeof config.seriesIndex === "number" ? config.seriesIndex : config.dataPointIndex ?? 0;
+            const idx = config.dataPointIndex ?? 0;
             const label = labels[idx] ?? "";
             const value = values[idx] ?? 0;
             tip.innerHTML = buildTooltipHtml(label, value);
@@ -211,9 +208,8 @@ export default function WhatHappenedTodaySourceActivity() {
       bar: {
         horizontal: true,
         borderRadius: 6,
-        // ha minden series külön sáv, ez a beállítás határozza a sáv vastagságát
         barHeight: `${Math.max(8, Math.floor(rowHeight * 0.6))}px`,
-        distributed: true, // fontos: minden series külön színt kap
+        distributed: true,
       },
     },
     dataLabels: {
@@ -227,8 +223,7 @@ export default function WhatHappenedTodaySourceActivity() {
       offsetX: 8,
     },
     xaxis: {
-      // egyetlen kategória, mert minden series egy adatpontot ad
-      categories: [""],
+      categories: labels,
       labels: { show: false },
       axisBorder: { show: false },
       axisTicks: { show: false },
@@ -238,24 +233,9 @@ export default function WhatHappenedTodaySourceActivity() {
     },
     colors,
     tooltip: {
-      enabled: false, // built-in tooltip kikapcsolva — custom tooltip használva
+      enabled: false,
     },
-    legend: {
-      show: true,
-      position: "left",
-      horizontalAlign: "left",
-      // floating + offsetX tolja a legendát a chart bal szélére, hogy ne takarja a bal címkéket
-      floating: true,
-      offsetX: -140,
-      offsetY: 0,
-      labels: { colors: isDark ? "#fff" : "#000" },
-      markers: { width: 12, height: 12 },
-      formatter: function (seriesName: string, opts: any) {
-        const idx = opts.seriesIndex;
-        const val = values[idx] ?? 0;
-        return `${seriesName} — ${val} db`;
-      },
-    },
+    legend: { show: false },
     grid: { show: false },
   } as ApexOptions;
 
@@ -265,30 +245,42 @@ export default function WhatHappenedTodaySourceActivity() {
     <div className="wht-source-activity">
       <h5 className="mb-3 text-center">Források aktivitása ma</h5>
 
-      {/* LAYOUT: bal oldalon a címkék, jobb oldalon a chart — így mindig egymás mellett lesznek */}
+      {/* LAYOUT: bal oldalon a custom legend (színes swatch + név + érték), jobb oldalon a chart */}
       <div className="flex items-start gap-3">
-        {/* BAL: címkék (fix szélesség, soronként egyező magasság) */}
-        <div style={{ width: 140 }} className="flex-shrink-0">
+        {/* BAL: custom legend */}
+        <div style={{ width: 180 }} className="flex-shrink-0">
           <div className="flex flex-col">
             {labels.map((label, i) => (
               <div
                 key={i}
-                className="source-label"
                 style={{
                   height: rowHeight,
-                  lineHeight: `${rowHeight}px`,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
                   paddingLeft: 6,
                   paddingRight: 6,
-                  overflow: "hidden",
-                  whiteSpace: "nowrap",
-                  textOverflow: "ellipsis",
                 }}
               >
                 <span
-                  className="text-sm font-medium text-gray-800 dark:text-gray-100 truncate"
-                  style={{ display: "inline-block", transform: "translateY(-2px)" }}
+                  aria-hidden
+                  style={{
+                    width: 12,
+                    height: 12,
+                    borderRadius: 3,
+                    background: colors[i],
+                    display: "inline-block",
+                    flexShrink: 0,
+                  }}
+                />
+                <span
+                  className="text-sm font-medium truncate"
+                  style={{ color: isDark ? "#e6eef8" : "#111827", flex: 1 }}
                 >
                   {label}
+                </span>
+                <span style={{ fontWeight: 700, color: isDark ? "#fff" : "#000", marginLeft: 8 }}>
+                  {values[i]} db
                 </span>
               </div>
             ))}
@@ -297,7 +289,7 @@ export default function WhatHappenedTodaySourceActivity() {
 
         {/* JOBB: chart */}
         <div className="flex-1 min-w-0">
-          <ApexChart key={stableKey} options={options} series={series} type="bar" height={chartHeight} />
+          <ApexChart key={stableKey} options={options} series={[{ name: "Források", data: values }]} type="bar" height={chartHeight} />
         </div>
       </div>
     </div>
