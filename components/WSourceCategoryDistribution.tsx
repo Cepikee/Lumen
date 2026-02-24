@@ -1,12 +1,17 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { Doughnut } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import useSWR from "swr";
 import Spinner from "react-bootstrap/Spinner";
 import { useUserStore } from "@/store/useUserStore";
-import type { ApexOptions } from "apexcharts";
 
-const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 interface CategoryItem {
   source: string;
@@ -39,7 +44,7 @@ export default function WSourceCategoryDistribution() {
   const { data, error, isLoading } = useSWR<{ success: boolean; items: CategoryItem[] }>(
     "/api/insights/source-category-distribution",
     fetcher,
-    { refreshInterval: 60_000, revalidateOnFocus: true }
+    { refreshInterval: 60000 }
   );
 
   if (isLoading) {
@@ -50,23 +55,11 @@ export default function WSourceCategoryDistribution() {
     );
   }
 
-  if (error || !data || !data.success || !Array.isArray(data.items)) {
-    return (
-      <div className="p-4 text-red-500">
-        Nem sikerült betölteni a kategóriaeloszlást.
-      </div>
-    );
+  if (error || !data?.success) {
+    return <div className="p-4 text-red-500">Nem sikerült betölteni az adatokat.</div>;
   }
 
   const items = data.items;
-
-  if (!items.length) {
-    return (
-      <div className="p-4 text-gray-500">
-        Nincs elég adat a kategóriaeloszláshoz.
-      </div>
-    );
-  }
 
   const categories = [
     "Politika",
@@ -101,8 +94,8 @@ export default function WSourceCategoryDistribution() {
     >
       <h3 className="text-lg font-semibold mb-4">Kategóriaeloszlás forrásonként</h3>
 
-      {/* --- SZÉP, KIS, MODERN LEGEND --- */}
-      <div className="flex flex-wrap gap-4 mb-4 justify-center text-xs opacity-80">
+      {/* --- SZÉP, KIS LEGEND --- */}
+      <div className="flex flex-wrap gap-4 mb-6 justify-center text-xs opacity-80">
         {categories.map((cat, i) => (
           <div key={cat} className="flex items-center gap-1">
             <div
@@ -114,34 +107,32 @@ export default function WSourceCategoryDistribution() {
         ))}
       </div>
 
-      {/* --- DONUTOK EGY SORBAN, KISEBB MÉRETBEN --- */}
-      <div className="flex gap-6 overflow-x-auto pb-4 justify-center">
+      {/* --- DOUGHNUT CHARTOK --- */}
+      <div className="flex gap-6 overflow-x-auto pb-4 justify-center pl-4">
         {items.map((src) => {
           const values = categories.map((c) => (src as any)[c] ?? 0);
 
-          const options: ApexOptions = {
-            chart: {
-              type: "donut",
-              toolbar: { show: false },
-            },
+          const chartData = {
             labels: categories,
-            colors: categoryColors,
-            legend: { show: false },
-            dataLabels: {
-              enabled: true,
-              formatter: (_val, opts) => {
-                const raw = values[opts.seriesIndex];
-                return raw > 0 ? raw.toString() : "";
+            datasets: [
+              {
+                data: values,
+                backgroundColor: categoryColors,
+                borderWidth: 0,
               },
-              style: {
-                colors: [isDark ? "#fff" : "#000"],
-                fontSize: "10px",
-              },
-            },
-            plotOptions: {
-              pie: {
-                donut: {
-                  size: "60%",
+            ],
+          };
+
+          const options = {
+            cutout: "70%",
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: (ctx: any) => {
+                    const value = ctx.raw;
+                    return value > 0 ? `${ctx.label}: ${value}` : "";
+                  },
                 },
               },
             },
@@ -150,24 +141,25 @@ export default function WSourceCategoryDistribution() {
           return (
             <div
               key={src.source}
-              className="min-w-[180px] p-2 rounded border flex flex-col items-center"
+              className="min-w-[150px] p-2 rounded border flex flex-col items-center"
               style={{
                 background: isDark ? "#0b1220" : "#fff",
                 borderColor: isDark ? "#1e293b" : "#e5e7eb",
                 color: isDark ? "#fff" : "#000",
               }}
             >
-              <h4 className="text-sm font-semibold mb-1 text-center">
+              <h4 className="text-xs font-semibold mb-1 text-center">
                 {src.source}
               </h4>
 
-              <ApexChart
-                options={options}
-                series={values}
-                type="donut"
-                height={150}
-                width={150}
-              />
+              <div className="relative w-[120px] h-[120px]">
+                <Doughnut data={chartData} options={options} />
+              </div>
+
+              {/* --- SZÁMOK KÖZÉPRE (összes cikk) --- */}
+              <div className="text-xs mt-1 opacity-70">
+                Összes: {values.reduce((a, b) => a + b, 0)}
+              </div>
             </div>
           );
         })}
