@@ -1,6 +1,10 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import useSWR from "swr";
+import Spinner from "react-bootstrap/Spinner";
+import { useUserStore } from "@/store/useUserStore";
+import type { ApexOptions } from "apexcharts"; // csak a struktúra egységessége miatt
 
 interface KeywordItem {
   keyword: string;
@@ -21,6 +25,13 @@ const fetcher = (url: string) =>
   }).then((r) => r.json());
 
 export default function TrendingKeywords() {
+  const theme = useUserStore((s) => s.theme);
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
   const { data, error, isLoading } = useSWR<ApiResponse>(
     "/api/insights/trending-keywords",
     fetcher,
@@ -30,22 +41,25 @@ export default function TrendingKeywords() {
     }
   );
 
+  // LOADING
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-4 text-gray-500">
-        <div className="h-5 w-5 animate-spin rounded-full border-2 border-gray-400 border-t-transparent"></div>
-        <span className="ml-2">Betöltés...</span>
+      <div className="text-center py-4">
+        <Spinner animation="border" size="sm" /> Betöltés...
       </div>
     );
   }
 
+  // ERROR / EMPTY
   if (error || !data?.success || !data.keywords?.length) {
-    return <div className="text-gray-500">Ma még nincsenek felkapott kulcsszavak.</div>;
+    return <div className="text-muted">Ma még nincsenek felkapott kulcsszavak.</div>;
   }
 
-  const keywords = data.keywords;
+  // SORT
+  const keywords = [...data.keywords].sort((a, b) => b.count - a.count);
   const max = Math.max(...keywords.map((k) => k.count));
 
+  // COLORS
   const barColor = {
     mild: "bg-yellow-400",
     strong: "bg-orange-500",
@@ -67,7 +81,7 @@ export default function TrendingKeywords() {
 
   return (
     <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 p-6">
-      <h5 className="text-lg font-semibold text-gray-900 mb-6 text-center">
+      <h5 className="text-lg font-semibold mb-3 text-center">
         Felkapott kulcsszavak ma
       </h5>
 
@@ -77,7 +91,6 @@ export default function TrendingKeywords() {
 
           return (
             <div key={idx} className="flex items-center gap-4">
-              
               {/* Kulcsszó + badge */}
               <div className="w-40 flex flex-col">
                 <span className="font-semibold text-gray-800">{item.keyword}</span>
@@ -94,7 +107,9 @@ export default function TrendingKeywords() {
               {/* Sáv */}
               <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
                 <div
-                  className={`h-full rounded-full transition-all duration-500 ${barColor[item.level ?? "mild"]}`}
+                  className={`h-full rounded-full transition-all duration-500 ${
+                    barColor[item.level ?? "mild"]
+                  }`}
                   style={{ width: `${percentage}%` }}
                 />
               </div>
