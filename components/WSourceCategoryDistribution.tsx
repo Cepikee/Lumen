@@ -101,7 +101,20 @@ export default function WSourceCategoryDistribution() {
     >
       <h3 className="text-lg font-semibold mb-4">Kategóriaeloszlás forrásonként</h3>
 
-      {/* --- VÍZSZINTES SCROLL + KÖZÉPRE IGAZÍTÁS --- */}
+      {/* --- SZÍNMAGYARÁZAT --- */}
+      <div className="flex flex-wrap gap-3 mb-6 justify-center text-sm">
+        {categories.map((cat, i) => (
+          <div key={cat} className="flex items-center gap-2">
+            <div
+              className="w-3 h-3 rounded-sm"
+              style={{ backgroundColor: categoryColors[i] }}
+            />
+            <span>{cat}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* --- DONUTOK EGY SORBAN, KISEBB MÉRETBEN --- */}
       <div className="flex gap-6 overflow-x-auto pb-4 justify-center">
         {items.map((src) => {
           const values = categories.map((c) => (src as any)[c] ?? 0);
@@ -113,25 +126,22 @@ export default function WSourceCategoryDistribution() {
             },
             labels: categories,
             colors: categoryColors,
-            legend: {
-              show: false,
-            },
+            legend: { show: false },
             dataLabels: {
               enabled: true,
-              formatter: (val: number, opts: any) => {
-                const index = opts.seriesIndex;
-                const raw = values[index];
+              formatter: (_val, opts) => {
+                const raw = values[opts.seriesIndex];
                 return raw > 0 ? raw.toString() : "";
               },
               style: {
                 colors: [isDark ? "#fff" : "#000"],
-                fontSize: "11px",
+                fontSize: "10px",
               },
             },
             plotOptions: {
               pie: {
                 donut: {
-                  size: "65%",
+                  size: "60%",
                 },
               },
             },
@@ -140,14 +150,14 @@ export default function WSourceCategoryDistribution() {
           return (
             <div
               key={src.source}
-              className="min-w-[240px] p-3 rounded border flex flex-col items-center"
+              className="min-w-[180px] p-2 rounded border flex flex-col items-center"
               style={{
                 background: isDark ? "#0b1220" : "#fff",
                 borderColor: isDark ? "#1e293b" : "#e5e7eb",
                 color: isDark ? "#fff" : "#000",
               }}
             >
-              <h4 className="text-md font-semibold mb-2 text-center">
+              <h4 className="text-sm font-semibold mb-1 text-center">
                 {src.source}
               </h4>
 
@@ -155,8 +165,8 @@ export default function WSourceCategoryDistribution() {
                 options={options}
                 series={values}
                 type="donut"
-                height={220}
-                width={220}
+                height={150}
+                width={150}
               />
             </div>
           );
