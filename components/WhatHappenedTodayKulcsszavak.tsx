@@ -62,6 +62,10 @@ export default function TrendingKeywords() {
   const categories = sorted.map((k) => String(k.keyword));
   const max = Math.max(...counts, 1);
 
+  // sormagasság (pixelben) — ha változtatod, a chart és a bal oszlop is igazodik
+  const rowHeight = 40; // px
+  const height = Math.max(120, sorted.length * rowHeight);
+
   // Színek soronként (distributed)
   const baseColors = [
     "#FF4D4F",
@@ -88,14 +92,15 @@ export default function TrendingKeywords() {
         dynamicAnimation: { enabled: true, speed: 300 },
       },
       background: "transparent",
-      offsetY: -6, // csökkenti a cím alatti üres teret
+      offsetY: -6,
     },
     plotOptions: {
       bar: {
         horizontal: true,
         borderRadius: 6,
-        barHeight: "48%",
-        distributed: true, // minden sáv más színű
+        // pixel alapú barHeight, hogy pontosan illeszkedjen a rowHeight-hoz
+        barHeight: `${Math.max(8, Math.floor(rowHeight * 0.55))}px`,
+        distributed: true,
       },
     },
     dataLabels: {
@@ -115,7 +120,7 @@ export default function TrendingKeywords() {
       axisTicks: { show: false },
     },
     yaxis: {
-      labels: { show: false }, // kulcsszavakat mi rendereljük bal oldalon
+      labels: { show: false },
     },
     colors,
     tooltip: {
@@ -127,20 +132,25 @@ export default function TrendingKeywords() {
   };
 
   const stableKey = `${theme}-${sorted.length}-${counts.join(",")}`;
-  const height = Math.max(100, sorted.length * 40); // kompaktabb magasság
 
   return (
     <div className="bg-white/80 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-3 max-w-full">
-      <h5 className="text-sm font-medium mb-2 text-center text-gray-900 dark:text-gray-100">
+      {/* kisebb cím */}
+      <h5 className="text-sm font-medium mb-2 text-left text-gray-900 dark:text-gray-100">
         Felkapott kulcsszavak ma
       </h5>
 
       <div className="flex items-start gap-3">
-        {/* Bal: kulcsszó + kis margó (egy sorban a sávval) */}
-        <div className="flex-shrink-0 w-36 pl-1">
-          <div className="flex flex-col gap-3">
+        {/* Bal: kulcsszavak — minden sor pontosan rowHeight magas, középre igazítva */}
+        <div className="flex-shrink-0" style={{ width: 140 }}>
+          <div className="flex flex-col">
             {sorted.map((item, i) => (
-              <div key={i} className="flex items-center h-8">
+              <div
+                key={i}
+                className="flex items-center"
+                style={{ height: rowHeight, paddingLeft: 4 }}
+                aria-hidden
+              >
                 <span className="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">
                   {item.keyword}
                 </span>
@@ -149,7 +159,7 @@ export default function TrendingKeywords() {
           </div>
         </div>
 
-        {/* Jobb: chart (sávok) */}
+        {/* Jobb: chart (sávok) — magasság pontosan height */}
         <div className="flex-1 min-w-0">
           <ApexChart
             key={stableKey}
