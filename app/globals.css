@@ -2032,22 +2032,33 @@ html.theme-dark .nav-link {
   .spike-card-value { font-size: 0.85rem; }
 }
 
-/* Scoped overrides for the keywords panel to avoid global collisions */
-.wht-keywords-activity .wht-header-line,
-.wht-keywords-activity .chart-line {
-  display: none !important; /* eltünteti a felesleges vonalat csak ennél a panelnél */
+
+
+/* ===== Scoped overrides for the keywords panel ===== */
+.wht-box.module-box.horizontal-list .wht-keywords-activity {
+  /* biztosítjuk, hogy a panel teljesen kitöltse a dobozt */
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* biztosítjuk, hogy a chart wrapper ne adjon extra paddinget */
-.wht-keywords-activity .apexcharts-canvas,
-.wht-keywords-activity .apexcharts-inner,
-.wht-keywords-activity .apexcharts-toolbar {
+/* eltüntetjük a wht-header-line vagy chart-line csak ennél a panelnél */
+.wht-box.module-box.horizontal-list .wht-header-line,
+.wht-box.module-box.horizontal-list .chart-line {
+  display: none !important;
+}
+
+/* ApexCharts wrapper override: nincs extra padding/margin */
+.wht-box.module-box.horizontal-list .apexcharts-canvas,
+.wht-box.module-box.horizontal-list .apexcharts-inner,
+.wht-box.module-box.horizontal-list .apexcharts-toolbar,
+.wht-box.module-box.horizontal-list .apexcharts-svg {
   padding: 0 !important;
   margin: 0 !important;
+  box-sizing: border-box;
 }
 
-/* bal címkék sorai — ha szükséges, finomítsd a magasságot */
-.wht-keywords-activity .kw-label {
+/* bal címkék sorainak biztosítása: pontos line-height és középre igazítás */
+.wht-box.module-box.horizontal-list .kw-label {
   display: flex;
   align-items: center;
   padding-left: 6px;
@@ -2055,4 +2066,13 @@ html.theme-dark .nav-link {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  line-height: 36px; /* egyezzen meg a komponens rowHeight értékével */
+  height: 36px;      /* egyezzen meg a komponens rowHeight értékével */
+}
+
+/* ha a projektedben van .row vagy .chart-placeholder, ami felülírja, célzottan nullázzuk itt */
+.wht-box.module-box.horizontal-list .row,
+.wht-box.module-box.horizontal-list .chart-placeholder {
+  margin: 0 !important;
+  padding: 0 !important;
 }

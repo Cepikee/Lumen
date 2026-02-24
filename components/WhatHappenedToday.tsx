@@ -42,8 +42,10 @@ export default function WhatHappenedToday() {
           </div>
 
           {/* LENT – KULCSSZAVAK (VÍZSZINTES) */}
-          <div className="wht-box module-box horizontal-list">
+          <div className="wht-box module-box horizontal-list p-0 overflow-hidden">
+            <div className="px-3 py-2">
             <WhatHappenedTodayKulcsszavak />
+            </div>
           </div>
 
         </div>
