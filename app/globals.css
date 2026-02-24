@@ -2036,7 +2036,6 @@ html.theme-dark .nav-link {
 
 /* ===== Scoped overrides for the keywords panel ===== */
 .wht-box.module-box.horizontal-list .wht-keywords-activity {
-  /* biztosítjuk, hogy a panel teljesen kitöltse a dobozt */
   width: 100%;
   box-sizing: border-box;
 }
@@ -2070,7 +2069,7 @@ html.theme-dark .nav-link {
   height: 36px;      /* egyezzen meg a komponens rowHeight értékével */
 }
 
-/* ha a projektedben van .row vagy .chart-placeholder, ami felülírja, célzottan nullázzuk itt */
+/* ha van .row vagy .chart-placeholder, ami felülírja, nullázzuk itt */
 .wht-box.module-box.horizontal-list .row,
 .wht-box.module-box.horizontal-list .chart-placeholder {
   margin: 0 !important;

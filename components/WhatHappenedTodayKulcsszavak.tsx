@@ -21,9 +21,7 @@ interface ApiResponse {
 
 const fetcher = (url: string) =>
   fetch(url, {
-    headers: {
-      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
-    },
+    headers: { "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY! },
   }).then((r) => r.json());
 
 export default function TrendingKeywords() {
@@ -37,10 +35,7 @@ export default function TrendingKeywords() {
   const { data, error, isLoading } = useSWR<ApiResponse>(
     "/api/insights/trending-keywords",
     fetcher,
-    {
-      refreshInterval: 60_000,
-      revalidateOnFocus: true,
-    }
+    { refreshInterval: 60_000, revalidateOnFocus: true }
   );
 
   if (isLoading) {
@@ -56,25 +51,20 @@ export default function TrendingKeywords() {
     return <div className="text-sm text-gray-500">Ma még nincsenek felkapott kulcsszavak.</div>;
   }
 
+  // rendezés
   const sorted = [...data.keywords].sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
   const counts = sorted.map((k) => Number(k.count ?? 0));
   const categories = sorted.map((k) => String(k.keyword));
 
-  /* --- FIX SORMAGASSÁG --- */
-  const rowHeight = 36; // px — ha túl nagy/kicsi, állítsd 32/40-re
+  /* ===== FIX SORMAGASSÁG =====
+     Ha változtatsz itt, cseréld a globals.css override-ban is.
+  */
+  const rowHeight = 36; // px — pontosan ez legyen a kw-label line-height/height
   const height = Math.max(100, sorted.length * rowHeight);
 
   const baseColors = [
-    "#FF4D4F",
-    "#FFA940",
-    "#36CFC9",
-    "#40A9FF",
-    "#9254DE",
-    "#73D13D",
-    "#F759AB",
-    "#597EF7",
-    "#FFC53D",
-    "#5CDBD3",
+    "#FF4D4F", "#FFA940", "#36CFC9", "#40A9FF", "#9254DE",
+    "#73D13D", "#F759AB", "#597EF7", "#FFC53D", "#5CDBD3",
   ];
   const colors = sorted.map((_, i) => baseColors[i % baseColors.length]);
 
@@ -82,20 +72,21 @@ export default function TrendingKeywords() {
     chart: {
       type: "bar",
       toolbar: { show: false },
+      sparkline: { enabled: true }, // eltünteti a legtöbb belső margót
       animations: {
         enabled: true,
-        speed: 500,
+        speed: 450,
         animateGradually: { enabled: true, delay: 40 },
         dynamicAnimation: { enabled: true, speed: 300 },
       },
       background: "transparent",
-      offsetY: -6,
+      offsetY: -4, // finomhangolás, ha kell állítsd -2..-10 között
     },
     plotOptions: {
       bar: {
         horizontal: true,
         borderRadius: 6,
-        // pontos pixel érték a rowHeight alapján
+        // pixel alapú barHeight, hogy pontosan illeszkedjen a rowHeight-hoz
         barHeight: `${Math.max(8, Math.floor(rowHeight * 0.55))}px`,
         distributed: true,
       },
@@ -122,28 +113,44 @@ export default function TrendingKeywords() {
       theme: isDark ? "dark" : "light",
       y: { formatter: (val: any) => `${val} db` },
     },
-    grid: { show: false },
+    grid: {
+      show: false,
+      padding: { left: 0, right: 0 }, // fontos: eltünteti a grid paddinget
+    },
     legend: { show: false },
+    responsive: [
+      {
+        breakpoint: 640,
+        options: {
+          plotOptions: { bar: { barHeight: `${Math.max(6, Math.floor(rowHeight * 0.45))}px` } },
+        },
+      },
+    ],
   };
 
   const stableKey = `${theme}-${sorted.length}-${counts.join(",")}`;
 
   return (
-    <div className="wht-keywords-activity bg-white/80 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-3 max-w-full">
-      {/* kisebb cím, balra igazítva */}
-      <h5 className="text-sm font-medium mb-2 text-left text-gray-900 dark:text-gray-100">
+    <div className="wht-keywords-activity bg-white/80 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-2 max-w-full">
+      <h5 className="text-sm font-medium mb-1 text-left text-gray-900 dark:text-gray-100">
         Felkapott kulcsszavak ma
       </h5>
 
-      <div className="flex items-start gap-3">
-        {/* Bal: kulcsszavak — minden sor pontosan rowHeight magas, középre igazítva */}
+      <div className="flex items-start gap-2">
+        {/* BAL: kulcsszavak — fix sormagasság és explicit line-height */}
         <div className="flex-shrink-0" style={{ width: 140 }}>
           <div className="flex flex-col">
             {sorted.map((item, i) => (
               <div
                 key={i}
                 className="kw-label"
-                style={{ height: rowHeight, lineHeight: `${rowHeight}px` }}
+                style={{
+                  height: rowHeight,
+                  lineHeight: `${rowHeight}px`,
+                  paddingLeft: 6,
+                  paddingRight: 6,
+                  overflow: "hidden",
+                }}
               >
                 <span className="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">
                   {item.keyword}
@@ -153,7 +160,7 @@ export default function TrendingKeywords() {
           </div>
         </div>
 
-        {/* Jobb: chart (sávok) — magasság pontosan height */}
+        {/* JOBB: chart */}
         <div className="flex-1 min-w-0">
           <ApexChart
             key={stableKey}
