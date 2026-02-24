@@ -2084,3 +2084,34 @@ html.theme-dark .nav-link {
   /* opcionálisan finomhangolás: */
   /* line-height: 36px; */
 }
+/* ===== Scoped overrides for the keywords panel ===== */
+.wht-keywords-activity .kw-label {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* line-height és height egyezzen meg a komponens rowHeight értékével */
+  line-height: 36px;
+  height: 36px;
+}
+
+/* biztosítjuk, hogy az ApexCharts SVG ne kapjon extra paddinget ebben a panelben */
+.wht-keywords-activity .apexcharts-canvas,
+.wht-keywords-activity .apexcharts-inner,
+.wht-keywords-activity .apexcharts-svg {
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+}
+
+/* a scroll wrapper finomítása (simább görgetés mobilon) */
+.wht-keywords-activity .wht-keywords-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ha globális .wht-header-line vagy .chart-line jelenik meg, elrejthetjük csak ennél a panelnél */
+.wht-keywords-activity .wht-header-line,
+.wht-keywords-activity .chart-line {
+  display: none !important;
+}
