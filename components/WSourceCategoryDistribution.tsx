@@ -39,8 +39,6 @@ const sliceLabelPlugin = {
   },
 };
 
-ChartJS.register(sliceLabelPlugin);
-
 interface CategoryItem {
   source: string;
   Politika: number;
@@ -181,7 +179,7 @@ export default function WSourceCategoryDistribution() {
               </h4>
 
               <div className="relative w-[120px] h-[120px]">
-                <Doughnut data={chartData} options={options} />
+                <Doughnut data={chartData} options={options}  plugins={[sliceLabelPlugin]}/>
               </div>
             </div>
           );
