@@ -119,9 +119,6 @@ export default function WSourceCategoryDistribution() {
       }}
     >
       <h3 className="text-lg font-semibold mb-4">Kategóriaeloszlás forrásonként</h3>
-
-      
-
       {/* --- DOUGHNUT CHARTOK --- */}
       <div className="flex gap-6 overflow-x-auto pb-4 justify-center pl-4">
         {items.map((src) => {
