@@ -73,62 +73,40 @@ export default function WSourceClickbaitPro() {
       </div>
 
       {/* ⭐ STAT CHART BLOCK ⭐ */}
-<div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 mb-14">
+      <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 mb-14">
 
-  {/* Átlag Index – Gauge */}
-  <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
-    <p className="text-xs uppercase tracking-wider text-gray-300 mb-3">Átlag Index</p>
-    <div className="w-full h-24">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={[{ v: avg }]}>
-          <Bar dataKey="v" fill="#818cf8" radius={[10, 10, 10, 10]} />
-          <XAxis type="number" hide domain={[0, 70]} />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-    <p className="text-3xl font-bold text-indigo-400 mt-2">{avg.toFixed(1)}</p>
-  </div>
+        <StatChartCard
+          label="Átlag Index"
+          value={avg.toFixed(1)}
+          color="#818cf8"
+          data={[{ v: avg }]}
+        />
 
-  {/* Legmagasabb – Mini bar */}
-  <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
-    <p className="text-xs uppercase tracking-wider text-gray-300 mb-3">Legmagasabb</p>
-    <div className="w-full h-24">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={[{ v: highest.score }]}>
-          <Bar dataKey="v" fill="#fb923c" radius={[10, 10, 10, 10]} />
-          <XAxis type="number" hide domain={[0, 70]} />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-    <p className="text-3xl font-bold text-orange-400 mt-2">{highest.score.toFixed(1)}</p>
-  </div>
+        <StatChartCard
+          label="Legmagasabb"
+          value={highest.score.toFixed(1)}
+          color="#fb923c"
+          data={[{ v: highest.score }]}
+        />
 
-  {/* Legalacsonyabb – Mini bar */}
-  <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
-    <p className="text-xs uppercase tracking-wider text-gray-300 mb-3">Legalacsonyabb</p>
-    <div className="w-full h-24">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={[{ v: lowest.score }]}>
-          <Bar dataKey="v" fill="#34d399" radius={[10, 10, 10, 10]} />
-          <XAxis type="number" hide domain={[0, 70]} />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-    <p className="text-3xl font-bold text-emerald-400 mt-2">{lowest.score.toFixed(1)}</p>
-  </div>
+        <StatChartCard
+          label="Legalacsonyabb"
+          value={lowest.score.toFixed(1)}
+          color="#34d399"
+          data={[{ v: lowest.score }]}
+        />
 
-  {/* Források – Donut */}
-  <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
-    <p className="text-xs uppercase tracking-wider text-gray-300 mb-3">Források</p>
-    <div className="w-full h-24 flex items-center justify-center">
-      <div className="w-20 h-20 rounded-full border-4 border-sky-400 border-t-transparent animate-spin-slow"></div>
-    </div>
-    <p className="text-3xl font-bold text-sky-400 mt-2 text-center">{sources.length}</p>
-  </div>
+        <StatChartCard
+          label="Források"
+          value={sources.length}
+          color="#38bdf8"
+          data={[{ v: sources.length }]}
+          max={10}
+        />
 
-</div>
+      </div>
 
-      {/* CHART */}
+      {/* MAIN CHART */}
       <div className="relative z-10 h-[440px]">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
@@ -136,17 +114,8 @@ export default function WSourceClickbaitPro() {
             data={sources}
             margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
           >
-            <XAxis
-              type="number"
-              domain={[0, 70]}
-              stroke="#475569"
-            />
-            <YAxis
-              type="category"
-              dataKey="name"
-              width={130}
-              stroke="#64748b"
-            />
+            <XAxis type="number" domain={[0, 70]} stroke="#475569" />
+            <YAxis type="category" dataKey="name" width={130} stroke="#64748b" />
             <Tooltip
               cursor={{ fill: "rgba(255,255,255,0.03)" }}
               contentStyle={{
@@ -156,21 +125,15 @@ export default function WSourceClickbaitPro() {
               }}
               labelStyle={{ color: "#94a3b8" }}
             />
-            <Bar
-              dataKey="score"
-              radius={[0, 14, 14, 0]}
-              animationDuration={900}
-            >
-              {sources.map(
-                (entry: { name: string; score: number }, index: number) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={getBarColor(entry.score)}
-                    stroke={index < 3 ? "rgba(255,255,255,0.4)" : "none"}
-                    strokeWidth={index < 3 ? 2 : 0}
-                  />
-                )
-              )}
+            <Bar dataKey="score" radius={[0, 14, 14, 0]} animationDuration={900}>
+              {sources.map((entry: any, index: number) => (
+                <Cell
+                  key={index}
+                  fill={getBarColor(entry.score)}
+                  stroke={index < 3 ? "rgba(255,255,255,0.4)" : "none"}
+                  strokeWidth={index < 3 ? 2 : 0}
+                />
+              ))}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
@@ -179,16 +142,34 @@ export default function WSourceClickbaitPro() {
   );
 }
 
-/* STAT CARD (NEM HASZNÁLT, DE MEGHAGYTAM, MERT BENNE VOLT) */
-function StatCard({ label, value, accent }: any) {
+/* ⭐ MINI STAT CHART COMPONENT ⭐ */
+function StatChartCard({
+  label,
+  value,
+  color,
+  data,
+  max = 70,
+}: {
+  label: string;
+  value: string | number;
+  color: string;
+  data: any[];
+  max?: number;
+}) {
   return (
-    <div className="relative p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/5 hover:border-white/10 transition-all">
-      <p className="text-xs uppercase tracking-wider text-gray-400">
-        {label}
-      </p>
-      <p className={`text-4xl font-bold mt-3 ${accent}`}>
-        {value}
-      </p>
+    <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
+      <p className="text-xs uppercase tracking-wider text-gray-300 mb-3">{label}</p>
+
+      <div className="w-full h-28">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={data} margin={{ left: 0, right: 0, top: 0, bottom: 0 }}>
+            <XAxis type="number" hide domain={[0, max]} />
+            <Bar dataKey="v" fill={color} radius={[10, 10, 10, 10]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      <p className="text-3xl font-bold mt-2" style={{ color }}>{value}</p>
     </div>
   );
 }
