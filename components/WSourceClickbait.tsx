@@ -67,50 +67,9 @@ export default function WSourceClickbaitPro() {
 
       {/* HEADER */}
       <div className="relative z-10 mb-12">
-        <h2 className="text-3xl font-bold tracking-tight text-white text-center">
+        <h2 className="text-3xl font-bold tracking-tight text-center">
           Forrásonkénti rangsor és aggregált statisztika
         </h2>
-      </div>
-
-      {/* ⭐ STAT CHART BLOCK ⭐ */}
-      <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
-
-        <StatChartCard
-          label="Átlag Index"
-          value={avg.toFixed(1)}
-          color="#818cf8"
-          data={[{ v: avg }]}
-        />
-
-        <StatChartCard
-          label="Legmagasabb"
-          value={highest.score.toFixed(1)}
-          color="#fb923c"
-          data={[{ v: highest.score }]}
-        />
-
-        <StatChartCard
-          label="Legalacsonyabb"
-          value={lowest.score.toFixed(1)}
-          color="#34d399"
-          data={[{ v: lowest.score }]}
-        />
-
-        <StatChartCard
-          label="Források"
-          value={sources.length}
-          color="#38bdf8"
-          data={[{ v: sources.length }]}
-          max={10}
-        />
-
-      </div>
-
-      {/* ⭐ ÚJ: SZÖVEGES STAT ÖSSZEFOGLALÓ ⭐ */}
-      <div className="relative z-10 mb-10 text-center text-gray-300 text-sm">
-        <p>Átlag: <span className="text-indigo-400 font-semibold">{avg.toFixed(1)}</span></p>
-        <p>Legmagasabb: <span className="text-orange-400 font-semibold">{highest.score.toFixed(1)}</span></p>
-        <p>Legalacsonyabb: <span className="text-emerald-400 font-semibold">{lowest.score.toFixed(1)}</span></p>
       </div>
 
       {/* MAIN CHART */}
@@ -144,7 +103,31 @@ export default function WSourceClickbaitPro() {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
-      </div>
+        </div>
+        {/* ⭐ ÚJ: SZÖVEGES STAT ÖSSZEFOGLALÓ ⭐ */}
+<div className="relative z-10 mb-10 text-gray-300 text-sm flex items-center justify-center gap-8">
+  <p>
+    Átlag:{" "}
+    <span className="text-indigo-400 font-semibold">
+      {avg.toFixed(1)}
+    </span>
+  </p>
+
+  <p>
+    Legmagasabb:{" "}
+    <span className="text-orange-400 font-semibold">
+      {highest.score.toFixed(1)}
+    </span>
+  </p>
+
+  <p>
+    Legalacsonyabb:{" "}
+    <span className="text-emerald-400 font-semibold">
+      {lowest.score.toFixed(1)}
+    </span>
+  </p>
+</div>
+
     </div>
   );
 }
