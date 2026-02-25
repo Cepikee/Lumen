@@ -339,7 +339,7 @@ Korlátozások:
   });
   // 9) CLICKBAIT — OpenAI
   await runWithRetries("[CLICKBAIT] 🎯 Clickbait elemzés", async () => {
-    const { processClickbaitOpenAI } = require("./clickbaitOpenAI");
+    const { processClickbaitOpenAI } = require("./clickbait_openai");
     const res = await processClickbaitOpenAI(articleId);
     if (!res?.ok) throw new Error(res?.error || "clickbaitOpenAI sikertelen");
   });
