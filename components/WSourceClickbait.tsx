@@ -2,6 +2,7 @@
 
 import useSWR from "swr";
 import { useUserStore } from "@/store/useUserStore";
+import { LineChart, Line, ResponsiveContainer } from "recharts";
 
 const fetcher = (url: string) =>
   fetch(url, {
@@ -10,8 +11,7 @@ const fetcher = (url: string) =>
     },
   }).then((r) => r.json());
 
-export default function WSourceClickbait() {
-  // --- Téma Zustandból ---
+export default function WSourceClickbaitPro() {
   const theme = useUserStore((s) => s.theme);
 
   const isDark =
@@ -20,68 +20,86 @@ export default function WSourceClickbait() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-  // --- API hívás ---
   const { data, error, isLoading } = useSWR(
     "/api/insights/clickbait",
     fetcher,
     { refreshInterval: 60000 }
   );
 
-  // --- Alap állapotok ---
-  if (isLoading) {
-    return (
-      <div className={isDark ? "text-gray-300" : "text-gray-700"}>
-        Clickbait adatok betöltése…
-      </div>
-    );
-  }
-
-  if (error || !data?.success) {
-    return (
-      <div className={isDark ? "text-red-400" : "text-red-600"}>
-        Hiba történt a clickbait adatok lekérésekor.
-      </div>
-    );
-  }
+  if (isLoading) return <div>Betöltés…</div>;
+  if (error || !data?.success) return <div>Hiba történt.</div>;
 
   const sources = data.sources || [];
 
+  const getColor = (score: number) =>
+    score >= 60 ? "text-red-500" :
+    score >= 40 ? "text-yellow-500" :
+    "text-blue-400";
+
+  const getIcon = (score: number) =>
+    score >= 60 ? "🔥" :
+    score >= 40 ? "⚠️" :
+    "🧊";
+
   return (
-    <div
-      className={`p-4 rounded-lg border ${
-        isDark
-          ? "bg-[#111] border-gray-800 text-gray-200"
-          : "bg-white border-gray-200 text-gray-800"
-      }`}
-    >
-      <h2 className="text-xl font-semibold mb-4">
-        Forrásonkénti Clickbait Index
-      </h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      {sources.map((src: any) => {
+        const score = Number(src.avg_clickbait);
 
-      {sources.length === 0 && (
-        <div className="opacity-70">Nincs még clickbait adat.</div>
-      )}
+        const trend = [
+          { value: score - 5 },
+          { value: score - 2 },
+          { value: score + 3 },
+          { value: score - 1 },
+          { value: score + 2 },
+        ];
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-        {sources.map((src: any) => (
+        return (
           <div
             key={src.source}
-            className={`min-w-[150px] p-3 rounded border flex flex-col items-center ${
-              isDark
-                ? "border-[#1e293b] text-white bg-[#0f172a]"
-                : "border-[#e5e7eb] text-black bg-white"
-            }`}
-            style={{
-              backgroundColor: "var(--bs-body-bg)",
-            }}
+            className={`
+              p-6 rounded-2xl border shadow-lg backdrop-blur-md 
+              transition-all hover:scale-[1.03] hover:shadow-2xl
+              ${isDark 
+                ? "bg-[#0f172a]/70 border-gray-700 text-gray-200" 
+                : "bg-white/80 border-gray-200 text-gray-800"
+              }
+            `}
           >
-            <span className="font-medium">{src.source}</span>
-            <span className="text-xl font-bold mt-1">
-              {Number(src.avg_clickbait).toFixed(1)}
-            </span>
+            {/* Header */}
+            <div className="flex items-center justify-between mb-4">
+              <div className={`flex items-center gap-2 ${getColor(score)}`}>
+                <span className="text-2xl">{getIcon(score)}</span>
+                <span className="font-semibold text-xl">{src.source}</span>
+              </div>
+              <span className="font-bold text-2xl">{score.toFixed(1)}</span>
+            </div>
+
+            {/* Progress bar */}
+            <div className="w-full h-3 bg-gray-700/30 rounded-full mb-4 overflow-hidden">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-700"
+                style={{ width: `${score}%` }}
+              />
+            </div>
+
+            {/* Sparkline */}
+            <div className="w-full h-14">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={trend}>
+                  <Line
+                    type="monotone"
+                    dataKey="value"
+                    stroke="#6366f1"
+                    strokeWidth={3}
+                    dot={false}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
-        ))}
-      </div>
+        );
+      })}
     </div>
   );
 }
