@@ -61,12 +61,7 @@ export default function WSourceClickbaitPro() {
 
   return (
     <div
-      className="relative p-10 rounded-3xl shadow-[0_20px_80px_-20px_rgba(0,0,0,0.6)] overflow-hidden"
-      style={{
-        background: isDark
-          ? "linear-gradient(to bottom right, #0f172a, #020617)"
-          : "#ffffff",
-      }}
+      className="relative p-10 rounded-3xl shadow-[0_20px_80px_-20px_rgba(0,0,0,0.6)] overflow-hidden bg-[var(--bs-body-bg)]"
     >
       {/* subtle background glow */}
       <div
@@ -171,7 +166,7 @@ export default function WSourceClickbaitPro() {
         </ResponsiveContainer>
       </div>
 
-      {/* ⭐ SUMMARY TEXT ⭐ */}
+      {/* SUMMARY TEXT */}
       <div className="relative z-10 mt-10 mb-6 text-sm flex items-center justify-center gap-32 px-4">
         <p className="text-gray-300 m-0">
           Átlag:{" "}
