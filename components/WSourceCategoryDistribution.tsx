@@ -140,7 +140,7 @@ export default function WSourceCategoryDistribution() {
                 color: isDark ? "#fff" : "#000",
                 font: {
                   size: 9,
-                  weight: "bold",
+                  weight: "bold" as const,
                 },
                 formatter: (value: number) => {
                   return value > 0 ? value : "";
