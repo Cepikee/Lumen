@@ -48,31 +48,41 @@ export async function GET(req: Request) {
     const map: Record<string, any> = {};
 
     for (const r of rows) {
-      const src = String(r.source).trim();
-      const cat = fixCat(r.category);
-      const count = Number(r.count) || 0;
+  // --- NORMALIZÁLT SOURCE ---
+  let src = String(r.source).trim().toLowerCase();
 
-      if (!src || !cat) continue;
+  // ⭐ PORTFOLIO NORMALIZÁLÁS
+  if (src === "portfolio") {
+    src = "portfolio.hu";
+  }
 
-      if (!map[src]) {
-        map[src] = {
-          source: src,
-          Politika: 0,
-          Gazdaság: 0,
-          Közélet: 0,
-          Kultúra: 0,
-          Sport: 0,
-          Tech: 0,
-          Egészségügy: 0,
-          Oktatás: 0,
-        };
-      }
+  // --- KATEGÓRIA ÉS COUNT ---
+  const cat = fixCat(r.category);
+  const count = Number(r.count) || 0;
 
-      // Ha a kategória nem ismert → ignoráljuk
-      if (map[src][cat] !== undefined) {
-        map[src][cat] += count;
-      }
-    }
+  if (!src || !cat) continue;
+
+  // --- MAP INIT ---
+  if (!map[src]) {
+    map[src] = {
+      source: src,
+      Politika: 0,
+      Gazdaság: 0,
+      Közélet: 0,
+      Kultúra: 0,
+      Sport: 0,
+      Tech: 0,
+      Egészségügy: 0,
+      Oktatás: 0,
+    };
+  }
+
+  // --- KATEGÓRIA HOZZÁADÁSA ---
+  if (map[src][cat] !== undefined) {
+    map[src][cat] += count;
+  }
+}
+
 
     // --- 3) Válasz tömbbé alakítva ---
     const items = Object.values(map);
