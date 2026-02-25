@@ -67,21 +67,84 @@ export default function WSourceClickbaitPro() {
 
       {/* HEADER */}
       <div className="relative z-10 mb-12">
-        <h2 className="text-3xl font-bold tracking-tight text-white">
-          Clickbait Analytics
-        </h2>
-        <p className="text-sm text-gray-400 mt-2">
+        <h2 className="text-3xl font-bold tracking-tight text-white text-center">
           Forrásonkénti rangsor és aggregált statisztika
-        </p>
+        </h2>
       </div>
 
-      {/* STATS */}
+      {/* ⭐ MODERN METRIC BLOCKS (EZ LETT BEILLESZTVE) ⭐ */}
       <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 mb-14">
-        <StatCard label="Átlag Index" value={avg.toFixed(1)} accent="text-indigo-400" />
-        <StatCard label="Legmagasabb" value={highest?.score.toFixed(1)} accent="text-orange-400" />
-        <StatCard label="Legalacsonyabb" value={lowest?.score.toFixed(1)} accent="text-emerald-400" />
-        <StatCard label="Források" value={sources.length} accent="text-sky-400" />
+
+        {/* Átlag Index */}
+        <div
+          className={`
+            p-6 rounded-2xl border shadow-xl backdrop-blur-xl
+            flex flex-col gap-1
+            ${isDark ? "bg-white/5 border-white/10 text-gray-200" : "bg-white/40 border-gray-200 text-gray-900"}
+          `}
+        >
+          <span className="text-xs uppercase tracking-wider opacity-70">
+            Átlag Index
+          </span>
+          <span className="text-4xl font-bold text-indigo-400">
+            {avg.toFixed(1)}
+          </span>
+          <div className="h-[2px] w-full bg-indigo-400/40 mt-3 rounded"></div>
+        </div>
+
+        {/* Legmagasabb */}
+        <div
+          className={`
+            p-6 rounded-2xl border shadow-xl backdrop-blur-xl
+            flex flex-col gap-1
+            ${isDark ? "bg-white/5 border-white/10 text-gray-200" : "bg-white/40 border-gray-200 text-gray-900"}
+          `}
+        >
+          <span className="text-xs uppercase tracking-wider opacity-70">
+            Legmagasabb
+          </span>
+          <span className="text-4xl font-bold text-orange-400">
+            {highest?.score.toFixed(1)}
+          </span>
+          <div className="h-[2px] w-full bg-orange-400/40 mt-3 rounded"></div>
+        </div>
+
+        {/* Legalacsonyabb */}
+        <div
+          className={`
+            p-6 rounded-2xl border shadow-xl backdrop-blur-xl
+            flex flex-col gap-1
+            ${isDark ? "bg-white/5 border-white/10 text-gray-200" : "bg-white/40 border-gray-200 text-gray-900"}
+          `}
+        >
+          <span className="text-xs uppercase tracking-wider opacity-70">
+            Legalacsonyabb
+          </span>
+          <span className="text-4xl font-bold text-emerald-400">
+            {lowest?.score.toFixed(1)}
+          </span>
+          <div className="h-[2px] w-full bg-emerald-400/40 mt-3 rounded"></div>
+        </div>
+
+        {/* Források */}
+        <div
+          className={`
+            p-6 rounded-2xl border shadow-xl backdrop-blur-xl
+            flex flex-col gap-1
+            ${isDark ? "bg-white/5 border-white/10 text-gray-200" : "bg-white/40 border-gray-200 text-gray-900"}
+          `}
+        >
+          <span className="text-xs uppercase tracking-wider opacity-70">
+            Források
+          </span>
+          <span className="text-4xl font-bold text-sky-400">
+            {sources.length}
+          </span>
+          <div className="h-[2px] w-full bg-sky-400/40 mt-3 rounded"></div>
+        </div>
+
       </div>
+      {/* ⭐ END OF MODERN METRIC BLOCKS ⭐ */}
 
       {/* CHART */}
       <div className="relative z-10 h-[440px]">
@@ -116,14 +179,16 @@ export default function WSourceClickbaitPro() {
               radius={[0, 14, 14, 0]}
               animationDuration={900}
             >
-              {sources.map((entry: any, index: number) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={getBarColor(entry.score)}
-                  stroke={index < 3 ? "rgba(255,255,255,0.4)" : "none"}
-                  strokeWidth={index < 3 ? 2 : 0}
-                />
-              ))}
+              {sources.map(
+                (entry: { name: string; score: number }, index: number) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={getBarColor(entry.score)}
+                    stroke={index < 3 ? "rgba(255,255,255,0.4)" : "none"}
+                    strokeWidth={index < 3 ? 2 : 0}
+                  />
+                )
+              )}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
@@ -132,7 +197,7 @@ export default function WSourceClickbaitPro() {
   );
 }
 
-/* STAT CARD */
+/* STAT CARD (NEM HASZNÁLT, DE MEGHAGYTAM, MERT BENNE VOLT) */
 function StatCard({ label, value, accent }: any) {
   return (
     <div className="relative p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/5 hover:border-white/10 transition-all">
