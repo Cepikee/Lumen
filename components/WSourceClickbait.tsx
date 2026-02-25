@@ -66,8 +66,11 @@ export default function WSourceClickbaitPro() {
       <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" />
 
       {/* HEADER */}
-      <div className="relative z-10 mb-12">
-        <h2 className="text-3xl font-bold tracking-tight text-center">
+      <div className="relative z-10 mb-12 mt-6">
+        <h2
+          className="text-3xl font-bold tracking-tight text-center"
+          style={{ color: isDark ? "#fff" : "#000" }}
+        >
           Forrásonkénti rangsor és aggregált statisztika
         </h2>
       </div>
@@ -76,21 +79,46 @@ export default function WSourceClickbaitPro() {
       <div className="relative z-10 h-[440px]">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
+            key={isDark ? "dark" : "light"} // force rerender on theme change
             layout="vertical"
             data={sources}
             margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
           >
-            <XAxis type="number" domain={[0, 70]} stroke="#475569" />
-            <YAxis type="category" dataKey="name" width={130} stroke="#64748b" />
-            <Tooltip
-              cursor={{ fill: "rgba(255,255,255,0.03)" }}
-              contentStyle={{
-                backgroundColor: "#0f172a",
-                border: "1px solid rgba(255,255,255,0.05)",
-                borderRadius: "16px",
-              }}
-              labelStyle={{ color: "#94a3b8" }}
+            <XAxis
+              type="number"
+              domain={[0, 70]}
+              stroke={isDark ? "#cbd5e1" : "#475569"}
+              tick={{ fill: isDark ? "#e2e8f0" : "#334155" }}
             />
+
+            <YAxis
+              type="category"
+              dataKey="name"
+              width={130}
+              stroke={isDark ? "#e2e8f0" : "#334155"}
+              tick={{ fill: isDark ? "#e2e8f0" : "#334155" }}
+            />
+
+            <Tooltip
+              cursor={{
+                fill: isDark
+                  ? "rgba(255,255,255,0.05)"
+                  : "rgba(0,0,0,0.05)",
+              }}
+              contentStyle={{
+                backgroundColor: isDark ? "#1e293b" : "#ffffff",
+                border: isDark ? "1px solid #334155" : "1px solid #e5e7eb",
+                borderRadius: "12px",
+                color: isDark ? "#f1f5f9" : "#0f172a",
+              }}
+              labelStyle={{
+                color: isDark ? "#f8fafc" : "#0f172a",
+                fontWeight: 600,
+              }}
+              formatter={(value?: number) => (value ?? 0).toFixed(2)}
+
+            />
+
             <Bar dataKey="score" radius={[0, 14, 14, 0]} animationDuration={900}>
               {sources.map((entry: any, index: number) => (
                 <Cell
@@ -103,63 +131,31 @@ export default function WSourceClickbaitPro() {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
-        </div>
-        {/* ⭐ ÚJ: SZÖVEGES STAT ÖSSZEFOGLALÓ ⭐ */}
-<div className="relative z-10 mb-10 text-gray-300 text-sm flex items-center justify-center gap-8">
-  <p>
-    Átlag:{" "}
-    <span className="text-indigo-400 font-semibold">
-      {avg.toFixed(1)}
-    </span>
-  </p>
-
-  <p>
-    Legmagasabb:{" "}
-    <span className="text-orange-400 font-semibold">
-      {highest.score.toFixed(1)}
-    </span>
-  </p>
-
-  <p>
-    Legalacsonyabb:{" "}
-    <span className="text-emerald-400 font-semibold">
-      {lowest.score.toFixed(1)}
-    </span>
-  </p>
-</div>
-
-    </div>
-  );
-}
-
-/* ⭐ MINI STAT CHART COMPONENT ⭐ */
-function StatChartCard({
-  label,
-  value,
-  color,
-  data,
-  max = 70,
-}: {
-  label: string;
-  value: string | number;
-  color: string;
-  data: any[];
-  max?: number;
-}) {
-  return (
-    <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
-      <p className="text-xs uppercase tracking-wider text-gray-300 mb-3">{label}</p>
-
-      <div className="w-full h-28">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ left: 0, right: 0, top: 0, bottom: 0 }}>
-            <XAxis type="number" hide domain={[0, max]} />
-            <Bar dataKey="v" fill={color} radius={[10, 10, 10, 10]} />
-          </BarChart>
-        </ResponsiveContainer>
       </div>
 
-      <p className="text-3xl font-bold mt-2" style={{ color }}>{value}</p>
+      {/* ⭐ SZÖVEGES STAT ÖSSZEFOGLALÓ ⭐ */}
+      <div className="relative z-10 mt-10 mb-6 text-sm flex items-center justify-center gap-20">
+        <p className="text-gray-300">
+          Átlag:{" "}
+          <span className="text-indigo-400 font-semibold">
+            {avg.toFixed(1)}
+          </span>
+        </p>
+
+        <p className="text-gray-300">
+          Legmagasabb:{" "}
+          <span className="text-orange-400 font-semibold">
+            {highest.score.toFixed(1)}
+          </span>
+        </p>
+
+        <p className="text-gray-300">
+          Legalacsonyabb:{" "}
+          <span className="text-emerald-400 font-semibold">
+            {lowest.score.toFixed(1)}
+          </span>
+        </p>
+      </div>
     </div>
   );
 }
