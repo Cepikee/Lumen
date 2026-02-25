@@ -120,18 +120,7 @@ export default function WSourceCategoryDistribution() {
     >
       <h3 className="text-lg font-semibold mb-4">Kategóriaeloszlás forrásonként</h3>
 
-      {/* --- LEGEND --- */}
-      <div className="flex flex-wrap gap-4 mb-6 justify-center text-xs opacity-80">
-        {categories.map((cat, i) => (
-          <div key={cat} className="flex items-center gap-1">
-            <div
-              className="w-2.5 h-2.5 rounded-sm"
-              style={{ backgroundColor: categoryColors[i] }}
-            />
-            <span>{cat}</span>
-          </div>
-        ))}
-      </div>
+      
 
       {/* --- DOUGHNUT CHARTOK --- */}
       <div className="flex gap-6 overflow-x-auto pb-4 justify-center pl-4">
