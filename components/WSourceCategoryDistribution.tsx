@@ -150,14 +150,18 @@ export default function WSourceCategoryDistribution() {
           };
 
           return (
-            <div
-              key={src.source}
-              className={`min-w-[150px] p-2 rounded border flex flex-col items-center ${
-                isDark
-                  ? "bg-[#0b1220] border-[#1e293b] text-white"
-                  : "bg-white border-[#e5e7eb] text-black"
-              }`}
-            >
+                            <div
+                    key={src.source}
+                    className={`min-w-[150px] p-2 rounded border flex flex-col items-center ${
+                      isDark
+                        ? "border-[#1e293b] text-white"
+                        : "border-[#e5e7eb] text-black"
+                    }`}
+                    style={{
+                      backgroundColor: "var(--bs-body-bg)"
+                    }}
+                  >
+
               <h4 className="text-xs font-semibold mb-1 text-center">
                 {src.source}
               </h4>
