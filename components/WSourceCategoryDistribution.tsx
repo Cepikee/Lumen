@@ -85,7 +85,7 @@ export default function WSourceCategoryDistribution() {
     return <div className="p-4 text-red-500">Nem sikerült betölteni az adatokat.</div>;
   }
 
-  const items = data.items;
+  const items = data.items.filter(i => i.source.toLowerCase() !== "portfolio");
 
   const categories = [
     "Politika",
@@ -153,12 +153,12 @@ export default function WSourceCategoryDistribution() {
           return (
             <div
               key={src.source}
-              className="min-w-[150px] p-2 rounded border flex flex-col items-center"
-              style={{
-                background: isDark ? "#0b1220" : "#fff",
-                borderColor: isDark ? "#1e293b" : "#e5e7eb",
-                color: isDark ? "#fff" : "#000",
-              }}
+              className={`min-w-[150px] p-2 rounded border flex flex-col items-center ${
+  isDark
+    ? "bg-[#0b1220] border-[#1e293b] text-white"
+    : "bg-white border-[#e5e7eb] text-black"
+}`}
+
             >
               <h4 className="text-xs font-semibold mb-1 text-center">
                 {src.source}
