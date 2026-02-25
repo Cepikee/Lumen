@@ -51,6 +51,14 @@ export default function WSourceClickbaitPro() {
   const highest = sources[0];
   const lowest = sources[sources.length - 1];
 
+  // --- SUMMARY CHART DATA ---
+  const summaryData = [
+    { name: "Átlag Index", value: avg, color: "#818cf8" },
+    { name: "Legmagasabb", value: highest.score, color: "#fb923c" },
+    { name: "Legalacsonyabb", value: lowest.score, color: "#34d399" },
+    { name: "Források", value: sources.length, color: "#38bdf8" },
+  ];
+
   const getBarColor = (score: number) => {
     if (score >= 60) return "#ef4444";
     if (score >= 45) return "#f97316";
@@ -72,38 +80,36 @@ export default function WSourceClickbaitPro() {
         </h2>
       </div>
 
-      {/* ⭐ STAT CHART BLOCK ⭐ */}
-      <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 mb-14">
+      {/* ⭐ SUMMARY CHART – A 4 STAT EGYBEN ⭐ */}
+      <div className="relative z-10 mb-14 p-6 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
+        <h3 className="text-lg font-semibold mb-4 text-white">
+          Összesített mutatók
+        </h3>
 
-        <StatChartCard
-          label="Átlag Index"
-          value={avg.toFixed(1)}
-          color="#818cf8"
-          data={[{ v: avg }]}
-        />
-
-        <StatChartCard
-          label="Legmagasabb"
-          value={highest.score.toFixed(1)}
-          color="#fb923c"
-          data={[{ v: highest.score }]}
-        />
-
-        <StatChartCard
-          label="Legalacsonyabb"
-          value={lowest.score.toFixed(1)}
-          color="#34d399"
-          data={[{ v: lowest.score }]}
-        />
-
-        <StatChartCard
-          label="Források"
-          value={sources.length}
-          color="#38bdf8"
-          data={[{ v: sources.length }]}
-          max={10}
-        />
-
+        <div className="w-full h-64">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              layout="vertical"
+              data={summaryData}
+              margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
+            >
+              <XAxis type="number" domain={[0, Math.max(highest.score, avg) + 10]} hide />
+              <YAxis type="category" dataKey="name" width={140} />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#0f172a",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                }}
+              />
+              <Bar dataKey="value" radius={[0, 12, 12, 0]}>
+                {summaryData.map((entry, index) => (
+                  <Cell key={index} fill={entry.color} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
 
       {/* MAIN CHART */}
@@ -138,38 +144,6 @@ export default function WSourceClickbaitPro() {
           </BarChart>
         </ResponsiveContainer>
       </div>
-    </div>
-  );
-}
-
-/* ⭐ MINI STAT CHART COMPONENT ⭐ */
-function StatChartCard({
-  label,
-  value,
-  color,
-  data,
-  max = 70,
-}: {
-  label: string;
-  value: string | number;
-  color: string;
-  data: any[];
-  max?: number;
-}) {
-  return (
-    <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
-      <p className="text-xs uppercase tracking-wider text-gray-300 mb-3">{label}</p>
-
-      <div className="w-full h-28">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ left: 0, right: 0, top: 0, bottom: 0 }}>
-            <XAxis type="number" hide domain={[0, max]} />
-            <Bar dataKey="v" fill={color} radius={[10, 10, 10, 10]} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-
-      <p className="text-3xl font-bold mt-2" style={{ color }}>{value}</p>
     </div>
   );
 }
