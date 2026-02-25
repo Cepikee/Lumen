@@ -88,6 +88,8 @@ export default function WSourceClickbaitPro() {
             layout="vertical"
             data={sources}
             margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
+            style={{ backgroundColor: "var(--bs-body-bg)" }}
+            
           >
             <XAxis
               type="number"
