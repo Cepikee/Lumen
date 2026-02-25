@@ -6,6 +6,9 @@ import { useUserStore } from "@/store/useUserStore";
 // --- Gyerek komponens: kategóriaeloszlás ---
 import WSourceCategoryDistribution from "./WSourceCategoryDistribution";
 
+// --- ÚJ: Clickbait komponens ---
+import WSourceClickbait from "./WSourceClickbait";
+
 export default function WSourceOsszehasonlitas() {
   // --- THEME (pont úgy, ahogy te használod) ---
   const theme = useUserStore((s) => s.theme);
@@ -69,7 +72,24 @@ export default function WSourceOsszehasonlitas() {
           {/* --- 1) Kategóriaeloszlás forrásonként --- */}
           <WSourceCategoryDistribution />
 
-          {/* --- További modulok majd ide jönnek --- */}
+          {/* --- 2) ÚJ: Clickbait index forrásonként --- */}
+          <div
+            className="p-4 rounded border"
+            style={{
+              background: isDark ? "#0b1220" : "#fff",
+              borderColor: isDark ? "#1e293b" : "#e5e7eb",
+              color: isDark ? "#fff" : "#000",
+            }}
+          >
+            <h3 className="text-lg font-semibold mb-4">
+              Clickbait index forrásonként
+            </h3>
+
+            {/* --- Itt jelenik meg a WSourceClickbait --- */}
+            <WSourceClickbait />
+          </div>
+
+          {/* --- 3) Clickbait arány placeholder --- */}
           <div
             className="p-4 rounded border"
             style={{
@@ -82,6 +102,7 @@ export default function WSourceOsszehasonlitas() {
             <p className="text-sm opacity-70">Ide jön majd a bar chart.</p>
           </div>
 
+          {/* --- 4) Speed index placeholder --- */}
           <div
             className="p-4 rounded border"
             style={{
@@ -157,7 +178,9 @@ export default function WSourceOsszehasonlitas() {
             }}
           >
             <h3 className="text-lg font-semibold mb-2">Kategória összehasonlítás</h3>
-            <p className="text-sm opacity-70">Ide jön majd a két forrás radar chartja egymás mellett.</p>
+            <p className="text-sm opacity-70">
+              Ide jön majd a két forrás radar chartja egymás mellett.
+            </p>
           </div>
         </div>
       )}
