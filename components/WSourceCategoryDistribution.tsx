@@ -13,7 +13,7 @@ import { useUserStore } from "@/store/useUserStore";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-// ⭐ SAJÁT LABEL-RAJZOLÓ PLUGIN (nincs több hiba!)
+// ⭐ SAJÁT LABEL-RAJZOLÓ PLUGIN
 const sliceLabelPlugin = {
   id: "sliceLabelPlugin",
   afterDraw(chart: any) {
@@ -111,15 +111,14 @@ export default function WSourceCategoryDistribution() {
 
   return (
     <div
-      className="p-4 rounded border"
-      style={{
-        background: isDark ? "#0b1220" : "#fff",
-        borderColor: isDark ? "#1e293b" : "#e5e7eb",
-        color: isDark ? "#fff" : "#000",
-      }}
+      className={`p-4 rounded border ${
+        isDark
+          ? "bg-[#0b1220] border-[#1e293b] text-white"
+          : "bg-white border-[#e5e7eb] text-black"
+      }`}
     >
       <h3 className="text-lg font-semibold mb-4">Kategóriaeloszlás forrásonként</h3>
-      {/* --- DOUGHNUT CHARTOK --- */}
+
       <div className="flex gap-6 overflow-x-auto pb-4 justify-center pl-4">
         {items.map((src) => {
           const values = categories.map((c) => (src as any)[c] ?? 0);
@@ -154,18 +153,17 @@ export default function WSourceCategoryDistribution() {
             <div
               key={src.source}
               className={`min-w-[150px] p-2 rounded border flex flex-col items-center ${
-  isDark
-    ? "bg-[#0b1220] border-[#1e293b] text-white"
-    : "bg-white border-[#e5e7eb] text-black"
-}`}
-
+                isDark
+                  ? "bg-[#0b1220] border-[#1e293b] text-white"
+                  : "bg-white border-[#e5e7eb] text-black"
+              }`}
             >
               <h4 className="text-xs font-semibold mb-1 text-center">
                 {src.source}
               </h4>
 
               <div className="relative w-[120px] h-[120px]">
-                <Doughnut data={chartData} options={options}  plugins={[sliceLabelPlugin]}/>
+                <Doughnut data={chartData} options={options} plugins={[sliceLabelPlugin]} />
               </div>
             </div>
           );
