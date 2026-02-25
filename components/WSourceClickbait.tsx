@@ -168,27 +168,19 @@ export default function WSourceClickbaitPro() {
 
       {/* SUMMARY TEXT */}
       <div className="relative z-10 mt-10 mb-6 text-sm flex items-center justify-center gap-32 px-4">
-        <p className="text-gray-300 m-0">
-          Átlag:{" "}
-          <span className="text-indigo-400 font-semibold">
-            {avg.toFixed(1)}
-          </span>
-        </p>
+  <p className="text-gray-300 m-0 flex-shrink-0">
+    Átlag: <span className="text-indigo-400 font-semibold">{avg.toFixed(1)}</span>
+  </p>
 
-        <p className="text-gray-300 m-0">
-          Legmagasabb:{" "}
-          <span className="text-orange-400 font-semibold">
-            {highest.score.toFixed(1)}
-          </span>
-        </p>
+  <p className="text-gray-300 m-0 flex-shrink-0">
+    Legmagasabb: <span className="text-orange-400 font-semibold">{highest.score.toFixed(1)}</span>
+  </p>
 
-        <p className="text-gray-300 m-0">
-          Legalacsonyabb:{" "}
-          <span className="text-emerald-400 font-semibold">
-            {lowest.score.toFixed(1)}
-          </span>
-        </p>
-      </div>
+  <p className="text-gray-300 m-0 flex-shrink-0">
+    Legalacsonyabb: <span className="text-emerald-400 font-semibold">{lowest.score.toFixed(1)}</span>
+  </p>
+</div>
+
     </div>
   );
 }
