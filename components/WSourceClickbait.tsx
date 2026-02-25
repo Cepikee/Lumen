@@ -60,19 +60,31 @@ export default function WSourceClickbaitPro() {
   };
 
   return (
-   <div
-  className="relative p-10 rounded-3xl shadow-[0_20px_80px_-20px_rgba(0,0,0,0.6)] overflow-hidden"
-  style={{
-    background: isDark
-      ? "linear-gradient(to bottom right, #0f172a, #020617)"
-      : "#ffffff"
-  }}
->
-
-
+    <div
+      className="relative p-10 rounded-3xl shadow-[0_20px_80px_-20px_rgba(0,0,0,0.6)] overflow-hidden"
+      style={{
+        background: isDark
+          ? "linear-gradient(to bottom right, #0f172a, #020617)"
+          : "#ffffff",
+      }}
+    >
       {/* subtle background glow */}
-      <div className="absolute -top-32 -right-32 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl" />
-      <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" />
+      <div
+        className="absolute -top-32 -right-32 w-96 h-96 rounded-full blur-3xl"
+        style={{
+          backgroundColor: isDark
+            ? "rgba(79,70,229,0.10)"
+            : "rgba(0,0,0,0.03)",
+        }}
+      />
+      <div
+        className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full blur-3xl"
+        style={{
+          backgroundColor: isDark
+            ? "rgba(147,51,234,0.10)"
+            : "rgba(0,0,0,0.03)",
+        }}
+      />
 
       {/* HEADER */}
       <div className="relative z-10 mb-12 mt-6">
@@ -88,7 +100,7 @@ export default function WSourceClickbaitPro() {
       <div className="relative z-10 h-[440px]">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
-            key={isDark ? "dark" : "light"} // force rerender on theme change
+            key={isDark ? "dark" : "light"}
             layout="vertical"
             data={sources}
             margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
@@ -125,49 +137,63 @@ export default function WSourceClickbaitPro() {
                 fontWeight: 600,
               }}
               itemStyle={{
-                color: isDark ? "#f1f5f9" : "#0f172a",
+                color: isDark ? "#ffffff" : "#000000",
                 fontWeight: 500,
               }}
-              formatter={(value?: number) => (value ?? 0).toFixed(2)}
-
+              formatter={(value?: number) => [
+                (value ?? 0).toFixed(2),
+                "Score",
+              ]}
             />
 
-             <Bar dataKey="score" radius={[0, 14, 14, 0]} animationDuration={900}>
-                <LabelList
-                    dataKey="score"
-                    position="right"
-                    fill={isDark ? "#ffffff" : "#000000"}
-                    formatter={(value: any) => {
-                        const num = Number(value);  
-                        return isNaN(num) ? "" : num.toFixed(1);
-                    }}
-                    style={{ fontSize: "14px", fontWeight: 600 }}
+            <Bar dataKey="score" radius={[0, 14, 14, 0]} animationDuration={900}>
+              <LabelList
+                dataKey="score"
+                position="right"
+                fill={isDark ? "#ffffff" : "#000000"}
+                formatter={(value: any) => {
+                  const num = Number(value);
+                  return isNaN(num) ? "" : num.toFixed(1);
+                }}
+                style={{ fontSize: "14px", fontWeight: 600 }}
+              />
+
+              {sources.map((entry: any, index: number) => (
+                <Cell
+                  key={index}
+                  fill={getBarColor(entry.score)}
+                  stroke={index < 3 ? "rgba(255,255,255,0.4)" : "none"}
+                  strokeWidth={index < 3 ? 2 : 0}
                 />
-                {sources.map((entry: any, index: number) => (
-                    <Cell
-                    key={index}
-                    fill={getBarColor(entry.score)}
-                    stroke={index < 3 ? "rgba(255,255,255,0.4)" : "none"}
-                    strokeWidth={index < 3 ? 2 : 0}
-                    />
-                ))}
+              ))}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
 
-      {/* ⭐ SZÖVEGES STAT ÖSSZEFOGLALÓ ⭐ */}
+      {/* ⭐ SUMMARY TEXT ⭐ */}
       <div className="relative z-10 mt-10 mb-6 text-sm flex items-center justify-center gap-32 px-4">
-  <p className="text-gray-300 m-0">
-    Átlag: <span className="text-indigo-400 font-semibold">{avg.toFixed(1)}</span>
-  </p>
-  <p className="text-gray-300 m-0">
-    Legmagasabb: <span className="text-orange-400 font-semibold">{highest.score.toFixed(1)}</span>
-  </p>
-  <p className="text-gray-300 m-0">
-    Legalacsonyabb: <span className="text-emerald-400 font-semibold">{lowest.score.toFixed(1)}</span>
-  </p>
-</div>
+        <p className="text-gray-300 m-0">
+          Átlag:{" "}
+          <span className="text-indigo-400 font-semibold">
+            {avg.toFixed(1)}
+          </span>
+        </p>
+
+        <p className="text-gray-300 m-0">
+          Legmagasabb:{" "}
+          <span className="text-orange-400 font-semibold">
+            {highest.score.toFixed(1)}
+          </span>
+        </p>
+
+        <p className="text-gray-300 m-0">
+          Legalacsonyabb:{" "}
+          <span className="text-emerald-400 font-semibold">
+            {lowest.score.toFixed(1)}
+          </span>
+        </p>
+      </div>
     </div>
   );
 }
