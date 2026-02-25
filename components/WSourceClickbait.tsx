@@ -80,16 +80,19 @@ export default function WSourceClickbaitPro() {
             : "rgba(0,0,0,0.03)",
         }}
       />
+
       {/* MAIN CHART */}
       <div className="relative z-10 h-[440px]">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer
+          width="100%"
+          height="100%"
+          className="bg-[var(--bs-body-bg)]"
+        >
           <BarChart
             key={isDark ? "dark" : "light"}
             layout="vertical"
             data={sources}
             margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
-            style={{ backgroundColor: "var(--bs-body-bg)" }}
-            
           >
             <XAxis
               type="number"
