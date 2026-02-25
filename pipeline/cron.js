@@ -337,6 +337,12 @@ Korlátozások:
       [articleId]
     );
   });
+  // 9) CLICKBAIT — OpenAI
+  await runWithRetries("[CLICKBAIT] 🎯 Clickbait elemzés", async () => {
+    const { processClickbaitOpenAI } = require("./clickbaitOpenAI");
+    const res = await processClickbaitOpenAI(articleId);
+    if (!res?.ok) throw new Error(res?.error || "clickbaitOpenAI sikertelen");
+  });
 
   console.log(`✔️  ${GREEN}CIKK FELDOLGOZVA — ID: ${articleId}${RESET}`);
   cronLog(`Cikk feldolgozva: ID=${articleId}`);
