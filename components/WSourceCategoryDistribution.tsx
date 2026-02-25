@@ -111,12 +111,16 @@ export default function WSourceCategoryDistribution() {
 
   return (
     <div
-      className={`p-4 rounded border ${
-        isDark
-          ? "bg-[#0b1220] border-[#1e293b] text-white"
-          : "bg-white border-[#e5e7eb] text-black"
-      }`}
-    >
+  className={`p-4 rounded border ${
+    isDark
+      ? "border-[#1e293b] text-white"
+      : "border-[#e5e7eb] text-black"
+  }`}
+  style={{
+    backgroundColor: "var(--bs-body-bg)"
+  }}
+>
+
       <h3 className="text-lg font-semibold mb-4">Kategóriaeloszlás forrásonként</h3>
 
       <div className="flex gap-6 overflow-x-auto pb-4 justify-center pl-4">
