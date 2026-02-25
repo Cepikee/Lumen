@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
   Tooltip,
   Cell,
+  LabelList,
 } from "recharts";
 
 const fetcher = (url: string) =>
@@ -59,7 +60,15 @@ export default function WSourceClickbaitPro() {
   };
 
   return (
-    <div className="relative p-10 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-950 shadow-[0_20px_80px_-20px_rgba(0,0,0,0.6)] overflow-hidden">
+   <div
+  className="relative p-10 rounded-3xl shadow-[0_20px_80px_-20px_rgba(0,0,0,0.6)] overflow-hidden"
+  style={{
+    background: isDark
+      ? "linear-gradient(to bottom right, #0f172a, #020617)"
+      : "#ffffff"
+  }}
+>
+
 
       {/* subtle background glow */}
       <div className="absolute -top-32 -right-32 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl" />
@@ -71,7 +80,7 @@ export default function WSourceClickbaitPro() {
           className="text-3xl font-bold tracking-tight text-center"
           style={{ color: isDark ? "#fff" : "#000" }}
         >
-          Forrásonkénti rangsor és aggregált statisztika
+          Források Clickbait Indexei
         </h2>
       </div>
 
@@ -115,26 +124,40 @@ export default function WSourceClickbaitPro() {
                 color: isDark ? "#f8fafc" : "#0f172a",
                 fontWeight: 600,
               }}
+              itemStyle={{
+                color: isDark ? "#f1f5f9" : "#0f172a",
+                fontWeight: 500,
+              }}
               formatter={(value?: number) => (value ?? 0).toFixed(2)}
 
             />
 
-            <Bar dataKey="score" radius={[0, 14, 14, 0]} animationDuration={900}>
-              {sources.map((entry: any, index: number) => (
-                <Cell
-                  key={index}
-                  fill={getBarColor(entry.score)}
-                  stroke={index < 3 ? "rgba(255,255,255,0.4)" : "none"}
-                  strokeWidth={index < 3 ? 2 : 0}
+             <Bar dataKey="score" radius={[0, 14, 14, 0]} animationDuration={900}>
+                <LabelList
+                    dataKey="score"
+                    position="right"
+                    fill={isDark ? "#ffffff" : "#000000"}
+                    formatter={(value: any) => {
+                        const num = Number(value);  
+                        return isNaN(num) ? "" : num.toFixed(1);
+                    }}
+                    style={{ fontSize: "14px", fontWeight: 600 }}
                 />
-              ))}
+                {sources.map((entry: any, index: number) => (
+                    <Cell
+                    key={index}
+                    fill={getBarColor(entry.score)}
+                    stroke={index < 3 ? "rgba(255,255,255,0.4)" : "none"}
+                    strokeWidth={index < 3 ? 2 : 0}
+                    />
+                ))}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
 
       {/* ⭐ SZÖVEGES STAT ÖSSZEFOGLALÓ ⭐ */}
-      <div className="relative z-10 mt-10 mb-6 text-sm flex items-center justify-center gap-20">
+      <div className="relative z-10 mt-10 mb-6 text-sm flex items-center justify-center gap-32 px-4">
         <p className="text-gray-300">
           Átlag:{" "}
           <span className="text-indigo-400 font-semibold">
