@@ -7,12 +7,39 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import ChartDataLabels from "chartjs-plugin-datalabels";
 import useSWR from "swr";
 import Spinner from "react-bootstrap/Spinner";
 import { useUserStore } from "@/store/useUserStore";
 
-ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+// ⭐ SAJÁT LABEL-RAJZOLÓ PLUGIN (nincs több hiba!)
+const sliceLabelPlugin = {
+  id: "sliceLabelPlugin",
+  afterDraw(chart: any) {
+    const { ctx } = chart;
+    const dataset = chart.data.datasets[0];
+    const meta = chart.getDatasetMeta(0);
+
+    ctx.save();
+    ctx.font = "bold 10px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    meta.data.forEach((arc: any, index: number) => {
+      const value = dataset.data[index];
+      if (!value) return;
+
+      const pos = arc.tooltipPosition();
+      ctx.fillStyle = "#000";
+      ctx.fillText(value, pos.x, pos.y);
+    });
+
+    ctx.restore();
+  },
+};
+
+ChartJS.register(sliceLabelPlugin);
 
 interface CategoryItem {
   source: string;
@@ -95,7 +122,7 @@ export default function WSourceCategoryDistribution() {
     >
       <h3 className="text-lg font-semibold mb-4">Kategóriaeloszlás forrásonként</h3>
 
-      {/* --- SZÉP, KIS LEGEND --- */}
+      {/* --- LEGEND --- */}
       <div className="flex flex-wrap gap-4 mb-6 justify-center text-xs opacity-80">
         {categories.map((cat, i) => (
           <div key={cat} className="flex items-center gap-1">
@@ -134,16 +161,6 @@ export default function WSourceCategoryDistribution() {
                     const value = ctx.raw;
                     return value > 0 ? `${ctx.label}: ${value}` : "";
                   },
-                },
-              },
-              datalabels: {
-                color: isDark ? "#fff" : "#000",
-                font: {
-                  size: 9,
-                  weight: "bold" as const,
-                },
-                formatter: (value: number) => {
-                  return value > 0 ? value : "";
                 },
               },
             },
