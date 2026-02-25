@@ -72,79 +72,61 @@ export default function WSourceClickbaitPro() {
         </h2>
       </div>
 
-      {/* ⭐ MODERN METRIC BLOCKS (EZ LETT BEILLESZTVE) ⭐ */}
-      <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 mb-14">
+      {/* ⭐ STAT CHART BLOCK ⭐ */}
+<div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 mb-14">
 
-        {/* Átlag Index */}
-        <div
-          className={`
-            p-6 rounded-2xl border shadow-xl backdrop-blur-xl
-            flex flex-col gap-1
-            ${isDark ? "bg-white/5 border-white/10 text-gray-200" : "bg-white/40 border-gray-200 text-gray-900"}
-          `}
-        >
-          <span className="text-xs uppercase tracking-wider opacity-70">
-            Átlag Index
-          </span>
-          <span className="text-4xl font-bold text-indigo-400">
-            {avg.toFixed(1)}
-          </span>
-          <div className="h-[2px] w-full bg-indigo-400/40 mt-3 rounded"></div>
-        </div>
+  {/* Átlag Index – Gauge */}
+  <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
+    <p className="text-xs uppercase tracking-wider text-gray-300 mb-3">Átlag Index</p>
+    <div className="w-full h-24">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={[{ v: avg }]}>
+          <Bar dataKey="v" fill="#818cf8" radius={[10, 10, 10, 10]} />
+          <XAxis type="number" hide domain={[0, 70]} />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+    <p className="text-3xl font-bold text-indigo-400 mt-2">{avg.toFixed(1)}</p>
+  </div>
 
-        {/* Legmagasabb */}
-        <div
-          className={`
-            p-6 rounded-2xl border shadow-xl backdrop-blur-xl
-            flex flex-col gap-1
-            ${isDark ? "bg-white/5 border-white/10 text-gray-200" : "bg-white/40 border-gray-200 text-gray-900"}
-          `}
-        >
-          <span className="text-xs uppercase tracking-wider opacity-70">
-            Legmagasabb
-          </span>
-          <span className="text-4xl font-bold text-orange-400">
-            {highest?.score.toFixed(1)}
-          </span>
-          <div className="h-[2px] w-full bg-orange-400/40 mt-3 rounded"></div>
-        </div>
+  {/* Legmagasabb – Mini bar */}
+  <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
+    <p className="text-xs uppercase tracking-wider text-gray-300 mb-3">Legmagasabb</p>
+    <div className="w-full h-24">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={[{ v: highest.score }]}>
+          <Bar dataKey="v" fill="#fb923c" radius={[10, 10, 10, 10]} />
+          <XAxis type="number" hide domain={[0, 70]} />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+    <p className="text-3xl font-bold text-orange-400 mt-2">{highest.score.toFixed(1)}</p>
+  </div>
 
-        {/* Legalacsonyabb */}
-        <div
-          className={`
-            p-6 rounded-2xl border shadow-xl backdrop-blur-xl
-            flex flex-col gap-1
-            ${isDark ? "bg-white/5 border-white/10 text-gray-200" : "bg-white/40 border-gray-200 text-gray-900"}
-          `}
-        >
-          <span className="text-xs uppercase tracking-wider opacity-70">
-            Legalacsonyabb
-          </span>
-          <span className="text-4xl font-bold text-emerald-400">
-            {lowest?.score.toFixed(1)}
-          </span>
-          <div className="h-[2px] w-full bg-emerald-400/40 mt-3 rounded"></div>
-        </div>
+  {/* Legalacsonyabb – Mini bar */}
+  <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
+    <p className="text-xs uppercase tracking-wider text-gray-300 mb-3">Legalacsonyabb</p>
+    <div className="w-full h-24">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={[{ v: lowest.score }]}>
+          <Bar dataKey="v" fill="#34d399" radius={[10, 10, 10, 10]} />
+          <XAxis type="number" hide domain={[0, 70]} />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+    <p className="text-3xl font-bold text-emerald-400 mt-2">{lowest.score.toFixed(1)}</p>
+  </div>
 
-        {/* Források */}
-        <div
-          className={`
-            p-6 rounded-2xl border shadow-xl backdrop-blur-xl
-            flex flex-col gap-1
-            ${isDark ? "bg-white/5 border-white/10 text-gray-200" : "bg-white/40 border-gray-200 text-gray-900"}
-          `}
-        >
-          <span className="text-xs uppercase tracking-wider opacity-70">
-            Források
-          </span>
-          <span className="text-4xl font-bold text-sky-400">
-            {sources.length}
-          </span>
-          <div className="h-[2px] w-full bg-sky-400/40 mt-3 rounded"></div>
-        </div>
+  {/* Források – Donut */}
+  <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
+    <p className="text-xs uppercase tracking-wider text-gray-300 mb-3">Források</p>
+    <div className="w-full h-24 flex items-center justify-center">
+      <div className="w-20 h-20 rounded-full border-4 border-sky-400 border-t-transparent animate-spin-slow"></div>
+    </div>
+    <p className="text-3xl font-bold text-sky-400 mt-2 text-center">{sources.length}</p>
+  </div>
 
-      </div>
-      {/* ⭐ END OF MODERN METRIC BLOCKS ⭐ */}
+</div>
 
       {/* CHART */}
       <div className="relative z-10 h-[440px]">
