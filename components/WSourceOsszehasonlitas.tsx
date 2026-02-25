@@ -3,14 +3,11 @@
 import { useState } from "react";
 import { useUserStore } from "@/store/useUserStore";
 
-// --- Gyerek komponens: kategóriaeloszlás ---
+// Gyerek komponensek
 import WSourceCategoryDistribution from "./WSourceCategoryDistribution";
-
-// --- ÚJ: Clickbait komponens ---
 import WSourceClickbait from "./WSourceClickbait";
 
 export default function WSourceOsszehasonlitas() {
-  // --- THEME (pont úgy, ahogy te használod) ---
   const theme = useUserStore((s) => s.theme);
 
   const isDark =
@@ -19,16 +16,15 @@ export default function WSourceOsszehasonlitas() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-  // --- NÉZET: statisztika / összehasonlítás ---
   const [view, setView] = useState<"stats" | "compare">("stats");
 
-  // --- ÖSSZEHASONLÍTÁS: két forrás kiválasztása ---
   const [sourceA, setSourceA] = useState<string | null>(null);
   const [sourceB, setSourceB] = useState<string | null>(null);
 
   return (
     <div className="w-full flex flex-col gap-6">
-      {/* --- CÍM --- */}
+
+      {/* --- OLDAL CÍM --- */}
       <h2
         className="text-2xl font-bold"
         style={{ color: isDark ? "#fff" : "#000" }}
@@ -69,31 +65,46 @@ export default function WSourceOsszehasonlitas() {
       {view === "stats" && (
         <div className="flex flex-col gap-6">
 
-          {/* --- 1) Kategóriaeloszlás forrásonként --- */}
-          <WSourceCategoryDistribution />
-
-          {/* --- 2) ÚJ: Clickbait index forrásonként --- */}
+          {/* --- 1) Kategóriaeloszlás --- */}
           <div
-            className="p-4 rounded border"
+            className="p-4 rounded border bg-[var(--bs-body-bg)]"
             style={{
-              background: isDark ? "#0b1220" : "#fff",
               borderColor: isDark ? "#1e293b" : "#e5e7eb",
               color: isDark ? "#fff" : "#000",
             }}
           >
             <h3 className="text-lg font-semibold mb-4">
-              Clickbait index forrásonként
+              Kategóriaeloszlás forrásonként
             </h3>
 
-            {/* --- Itt jelenik meg a WSourceClickbait --- */}
+            <WSourceCategoryDistribution />
+          </div>
+
+          {/* --- 2) CLICKBAIT INDEX --- */}
+          <div
+            className="p-4 rounded border bg-[var(--bs-body-bg)]"
+            style={{
+              borderColor: isDark ? "#1e293b" : "#e5e7eb",
+              color: isDark ? "#fff" : "#000",
+            }}
+          >
+            {/* A cím pontosan úgy, mint a gyerek komponensben volt */}
+            <div className="relative z-10 mb-8 mt-2">
+              <h2
+                className="text-3xl font-bold tracking-tight text-center"
+                style={{ color: isDark ? "#fff" : "#000" }}
+              >
+                Források Clickbait Indexei
+              </h2>
+            </div>
+
             <WSourceClickbait />
           </div>
 
           {/* --- 3) Clickbait arány placeholder --- */}
           <div
-            className="p-4 rounded border"
+            className="p-4 rounded border bg-[var(--bs-body-bg)]"
             style={{
-              background: isDark ? "#0b1220" : "#fff",
               borderColor: isDark ? "#1e293b" : "#e5e7eb",
               color: isDark ? "#fff" : "#000",
             }}
@@ -104,9 +115,8 @@ export default function WSourceOsszehasonlitas() {
 
           {/* --- 4) Speed index placeholder --- */}
           <div
-            className="p-4 rounded border"
+            className="p-4 rounded border bg-[var(--bs-body-bg)]"
             style={{
-              background: isDark ? "#0b1220" : "#fff",
               borderColor: isDark ? "#1e293b" : "#e5e7eb",
               color: isDark ? "#fff" : "#000",
             }}
@@ -120,11 +130,11 @@ export default function WSourceOsszehasonlitas() {
       {/* --- ÖSSZEHASONLÍTÓ NÉZET --- */}
       {view === "compare" && (
         <div className="flex flex-col gap-6">
+
           {/* --- FORRÁSVÁLASZTÓ --- */}
           <div
-            className="p-4 rounded border flex flex-col gap-4"
+            className="p-4 rounded border flex flex-col gap-4 bg-[var(--bs-body-bg)]"
             style={{
-              background: isDark ? "#0b1220" : "#fff",
               borderColor: isDark ? "#1e293b" : "#e5e7eb",
               color: isDark ? "#fff" : "#000",
             }}
@@ -170,9 +180,8 @@ export default function WSourceOsszehasonlitas() {
 
           {/* --- ÖSSZEHASONLÍTÓ CHARTOK HELYE --- */}
           <div
-            className="p-4 rounded border"
+            className="p-4 rounded border bg-[var(--bs-body-bg)]"
             style={{
-              background: isDark ? "#0b1220" : "#fff",
               borderColor: isDark ? "#1e293b" : "#e5e7eb",
               color: isDark ? "#fff" : "#000",
             }}

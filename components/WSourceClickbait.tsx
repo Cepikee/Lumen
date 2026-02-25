@@ -80,17 +80,6 @@ export default function WSourceClickbaitPro() {
             : "rgba(0,0,0,0.03)",
         }}
       />
-
-      {/* HEADER */}
-      <div className="relative z-10 mb-12 mt-6">
-        <h2
-          className="text-3xl font-bold tracking-tight text-center"
-          style={{ color: isDark ? "#fff" : "#000" }}
-        >
-          Források Clickbait Indexei
-        </h2>
-      </div>
-
       {/* MAIN CHART */}
       <div className="relative z-10 h-[440px]">
         <ResponsiveContainer width="100%" height="100%">
@@ -165,22 +154,6 @@ export default function WSourceClickbaitPro() {
           </BarChart>
         </ResponsiveContainer>
       </div>
-
-      {/* SUMMARY TEXT */}
-      <div className="relative z-10 mt-10 mb-6 text-sm flex items-center justify-center gap-32 px-4">
-  <p className="text-gray-300 m-0 flex-shrink-0">
-    Átlag: <span className="text-indigo-400 font-semibold">{avg.toFixed(1)}</span>
-  </p>
-
-  <p className="text-gray-300 m-0 flex-shrink-0">
-    Legmagasabb: <span className="text-orange-400 font-semibold">{highest.score.toFixed(1)}</span>
-  </p>
-
-  <p className="text-gray-300 m-0 flex-shrink-0">
-    Legalacsonyabb: <span className="text-emerald-400 font-semibold">{lowest.score.toFixed(1)}</span>
-  </p>
-</div>
-
     </div>
   );
 }
