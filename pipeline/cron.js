@@ -337,18 +337,48 @@ Korlátozások:
       [articleId]
     );
   });
-  // 9) CLICKBAIT — OpenAI
+    // 9) CLICKBAIT — OpenAI
   await runWithRetries("[CLICKBAIT] 🎯 Clickbait elemzés", async () => {
     const { processClickbaitOpenAI } = require("./clickbait_openai");
     const res = await processClickbaitOpenAI(articleId);
     if (!res?.ok) throw new Error(res?.error || "clickbaitOpenAI sikertelen");
   });
 
+  // ─────────────────────────────────────────────
+  // 10) EMBEDDING + CLUSTER + SPEED INDEX
+  // ─────────────────────────────────────────────
+
+  await runWithRetries("[EMBED] 🧠 Embedding generálás", async () => {
+    const { generaljEmbeddingetCikkhez } = require("../pipeline/generateEmbedding");
+    await generaljEmbeddingetCikkhez(articleId);
+  });
+
+  await runWithRetries("[CLUSTER] 🧩 Clusterezés", async () => {
+    const { clusterArticle } = require("../pipeline/clusterArticles");
+    await clusterArticle(articleId);
+  });
+
+  await runWithRetries("[SPEED] ⚡ Speed Index frissítés", async () => {
+    const { updateSpeedIndex } = require("../pipeline/updateSpeedIndex");
+    await updateSpeedIndex();
+  });
+
+  console.log(`✔️  CIKK TELJES PIPELINE KÉSZ — ID: ${articleId}`);
+  cronLog(`Cikk teljes pipeline kész: ID=${articleId}`);
+
+  console.log("──────────────────────────────────────────────");
+}
+
+
+
+
+
+
   console.log(`✔️  ${GREEN}CIKK FELDOLGOZVA — ID: ${articleId}${RESET}`);
   cronLog(`Cikk feldolgozva: ID=${articleId}`);
 
   console.log("──────────────────────────────────────────────");
-}
+
 
 // ─────────────────────────────────────────────
 //  BATCH FELDOLGOZÁS — 3 concurrency
