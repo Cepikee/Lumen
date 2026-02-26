@@ -1,175 +1,99 @@
 "use client";
 
-import { useState } from "react";
-
 export default function PremiumPage() {
-  const [supportAmount, setSupportAmount] = useState("");
-
   return (
-    <main className="min-h-screen bg-[#0f172a] text-white pb-20
-      bg-[radial-gradient(circle_at_30%_20%,rgba(0,153,255,0.2),transparent_40%),radial-gradient(circle_at_80%_80%,rgba(0,204,153,0.2),transparent_40%)]">
+    <main className="premium-wrapper">
 
       {/* HERO */}
-      <section className="text-center px-6 pt-24 pb-16">
-        <div className="max-w-3xl mx-auto">
+      <section className="premium-hero text-center">
+        <div className="container">
 
-          <img src="/utomlogo.png" alt="Utom" className="h-12 mx-auto mb-6 opacity-75" />
+          <img src="/utomlogo.png" alt="Utom" height="52" className="mb-4 opacity-75" />
 
-          <h1 className="text-3xl md:text-4xl font-bold leading-tight">
-            Lásd a hírek mögötti{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
-              valódi szerkezetet
-            </span>.
+          <h1 className="hero-title">
+            Lásd a hírek mögötti <span className="gradient-text">valódi szerkezetet</span>.
           </h1>
 
-          <p className="mt-6 text-lg opacity-80">
+          <p className="hero-sub">
             Mélyebb elemzés. Torzítás nélkül. Reklámok nélkül.
           </p>
 
-          <button className="mt-8 px-8 py-3 rounded-full font-semibold
-            bg-gradient-to-r from-cyan-400 to-emerald-400
-            text-slate-900 hover:scale-105 transition-all duration-200
-            shadow-lg shadow-emerald-400/30">
+          <button className="premium-btn-lg mt-4">
             Prémium hozzáférés indítása
           </button>
 
-          <p className="mt-3 text-sm opacity-60">
+          <p className="small text-muted mt-3">
             7 napos kockázatmentes kipróbálás
           </p>
-
         </div>
       </section>
 
       {/* PRICING */}
-      <section className="px-6">
-        <div className="max-w-6xl mx-auto flex flex-wrap justify-center gap-6">
+      <section className="pricing-section">
+        <div className="container d-flex justify-content-center gap-4 flex-wrap">
 
           {/* Havi */}
-          <div className="w-[280px] rounded-3xl p-10 backdrop-blur-xl
-            bg-white/5 border border-white/10
-            hover:-translate-y-2 transition-all duration-300">
-
-            <div className="text-3xl font-bold">
-              1000 Ft<span className="text-base opacity-70">/hó</span>
-            </div>
-
-            <p className="mt-4 opacity-70">
-              Rugalmas, bármikor lemondható
-            </p>
-
-            <button className="mt-6 w-full py-3 rounded-full font-semibold
-              bg-gradient-to-r from-cyan-400 to-emerald-400
-              text-slate-900 hover:scale-105 transition-all">
-              Előfizetek
-            </button>
+          <div className="premium-card glass">
+            <div className="price">1000 Ft<span>/hó</span></div>
+            <div className="desc">Rugalmas, bármikor lemondható</div>
+            <button className="premium-btn w-100">Előfizetek</button>
           </div>
 
           {/* Éves */}
-          <div className="relative w-[280px] rounded-3xl p-10 backdrop-blur-xl
-            bg-white/5 border border-cyan-400
-            scale-105 shadow-2xl shadow-cyan-400/30
-            hover:-translate-y-2 transition-all duration-300">
-
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2
-              bg-gradient-to-r from-cyan-400 to-emerald-400
-              text-slate-900 text-xs font-semibold px-4 py-1 rounded-full">
-              Legjobb ár
-            </div>
-
-            <div className="text-3xl font-bold">
-              9000 Ft<span className="text-base opacity-70">/év</span>
-            </div>
-
-            <p className="mt-4 opacity-70">
-              2 hónap ajándék
-            </p>
-
-            <button className="mt-6 w-full py-3 rounded-full font-semibold
-              bg-gradient-to-r from-cyan-400 to-emerald-400
-              text-slate-900 hover:scale-105 transition-all">
-              Éves csomag indítása
-            </button>
+          <div className="premium-card highlight glass">
+            <div className="badge-popular">Legjobb ár</div>
+            <div className="price">9000 Ft<span>/év</span></div>
+            <div className="desc">2 hónap ajándék</div>
+            <button className="premium-btn w-100">Éves csomag indítása</button>
           </div>
 
-          {/* Támogató */}
-          <div className="w-[280px] rounded-3xl p-10 backdrop-blur-xl
-            bg-white/5 border border-white/10
-            hover:-translate-y-2 transition-all duration-300">
-
-            <div className="text-2xl font-bold">
-              💛 Támogató
-            </div>
-
-            <p className="mt-4 text-sm opacity-70">
-              Támogasd a független, AI-alapú hírelemzést.
-              Küldj annyit, amennyit szeretnél.
-            </p>
-
-            <input
-              type="number"
-              value={supportAmount}
-              onChange={(e) => setSupportAmount(e.target.value)}
-              placeholder="Összeg (Ft)"
-              className="mt-5 w-full px-4 py-2 rounded-xl
-                bg-white/5 border border-white/20
-                focus:outline-none focus:ring-2 focus:ring-cyan-400"
-            />
-
-            <button className="mt-4 w-full py-3 rounded-full font-semibold
-              bg-gradient-to-r from-cyan-400 to-emerald-400
-              text-slate-900 hover:scale-105 transition-all">
-              Támogatás küldése
-            </button>
-          </div>
-
-          {/* Cégeknek */}
-          <div className="w-[280px] rounded-3xl p-10 backdrop-blur-xl
-            bg-white/5 border border-white/10
-            hover:-translate-y-2 transition-all duration-300">
-
-            <div className="text-2xl font-bold">
-              🏢 Cégeknek
-            </div>
-
-            <ul className="mt-5 space-y-2 text-sm opacity-80">
-              <li>• API hozzáférés</li>
-              <li>• Dedikált support</li>
-              <li>• Egyedi kérések és fejlesztések</li>
-            </ul>
-
-            <button className="mt-6 w-full py-3 rounded-full font-semibold
-              bg-gradient-to-r from-cyan-400 to-emerald-400
-              text-slate-900 hover:scale-105 transition-all">
-              Ajánlatkérés
-            </button>
+          {/* Céges */}
+          <div className="premium-card glass">
+            <div className="price">Céges</div>
+            <div className="desc">Egyedi dashboard és riportok</div>
+            <button className="premium-btn w-100">Kapcsolat</button>
           </div>
 
         </div>
       </section>
 
       {/* WHY PREMIUM */}
-      <section className="px-6 pt-24 text-center">
-        <div className="max-w-4xl mx-auto">
+<section className="why-premium-section text-center">
+  <div className="container">
 
-          <h2 className="text-2xl md:text-3xl font-bold">
-            Miért legyél{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
-              Prémium
-            </span>{" "}
-            tag?
-          </h2>
+    <h2 className="section-title mb-3">
+      Miért legyél <span className="gradient-text">Prémium</span> tag?
+    </h2>
 
-          <p className="mt-4 opacity-70">
-            Több kontroll. Több tisztánlátás. Nulla zaj.
-          </p>
+    <p className="section-sub mb-5">
+      Több kontroll. Több tisztánlátás. Nulla zaj.
+    </p>
 
-        </div>
-      </section>
-      {/* Detailed Features */}
-<section className="px-6 pt-16 pb-24">
-  <div className="max-w-6xl mx-auto">
+    {/* Top 4 highlight */}
+    <div className="why-grid mb-5">
+      <div className="why-card">
+        <div className="why-icon">🔒</div>
+        <h5>100% reklámmentes élmény</h5>
+      </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="why-card">
+        <div className="why-icon">⚡</div>
+        <h5>Valós idejű AI elemzés</h5>
+      </div>
+
+      <div className="why-card">
+        <div className="why-icon">🧠</div>
+        <h5>Torzítás detektálás</h5>
+      </div>
+
+      <div className="why-card">
+        <div className="why-icon">💬</div>
+        <h5>Zárt prémium közösség</h5>
+      </div>
+    </div>
+
+    {/* Detailed Features */}
+    <div className="row row-cols-1 row-cols-md-2 g-4 text-start">
 
       {[
         { icon: "🧬", title: "Forrás DNS", desc: "AI-alapú tartalmi ujjlenyomat, amely feltárja egy hírportál szerkezetét és mintázatait." },
@@ -181,25 +105,13 @@ export default function PremiumPage() {
         { icon: "🧑‍⚖️", title: "Közösségi Vélemény", desc: "Valódi felhasználói visszajelzések egy cikk megbízhatóságáról." },
         { icon: "🧘‍♂️", title: "Ultra-minimalista mód", desc: "Csak a lényeg — reklám és zavaró elemek nélkül." }
       ].map((item, i) => (
-        <div
-          key={i}
-          className="flex gap-4 p-6 rounded-2xl
-            bg-white/5 border border-white/10
-            backdrop-blur-xl
-            hover:-translate-y-1 hover:shadow-xl hover:shadow-cyan-400/20
-            transition-all duration-300"
-        >
-          <div className="text-3xl">
-            {item.icon}
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-lg">
-              {item.title}
-            </h4>
-            <p className="mt-2 text-sm opacity-70 leading-relaxed">
-              {item.desc}
-            </p>
+        <div key={i} className="col">
+          <div className="premium-feature-card d-flex gap-3">
+            <div className="fs-2">{item.icon}</div>
+            <div>
+              <h5 className="mb-1">{item.title}</h5>
+              <p className="text-muted mb-0">{item.desc}</p>
+            </div>
           </div>
         </div>
       ))}
