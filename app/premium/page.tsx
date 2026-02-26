@@ -37,7 +37,8 @@ export default function PremiumPage() {
           {/* Havi */}
           <div className="premium-card glass">
             <div className="price">1000 Ft<span>/hó</span></div>
-            <div className="desc">Rugalmas, bármikor lemondható</div>
+            <li> Minden prémium funkció</li>
+            <li> Bármikor lemondható </li>
             <button className="premium-btn w-100">Előfizetek</button>
           </div>
 
@@ -45,7 +46,9 @@ export default function PremiumPage() {
           <div className="premium-card highlight glass">
             <div className="badge-popular">Legjobb ár</div>
             <div className="price">9000 Ft<span>/év</span></div>
-            <div className="desc">2 hónap ajándék</div>
+            <li> Minden prémium funkció</li>
+            <li> 2 hónap ingyen </li>
+            <li> Költséghatékony </li>
             <button className="premium-btn w-100">Éves csomag indítása</button>
           </div>
 
@@ -94,7 +97,7 @@ export default function PremiumPage() {
     <div className="why-grid mb-5">
       <div className="why-card">
         <div className="why-icon">🧠</div>
-        <h5>Nem csak olvasod a híreket — érted is őket</h5>
+        <h5>Értelmezett hírek</h5>
       </div>
 
       <div className="why-card">
