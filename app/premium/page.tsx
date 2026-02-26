@@ -1,6 +1,8 @@
 "use client";
+import { useState } from "react";
 
 export default function PremiumPage() {
+  const [supportAmount, setSupportAmount] = useState("");
   return (
     <main className="premium-wrapper">
 
@@ -46,11 +48,37 @@ export default function PremiumPage() {
             <div className="desc">2 hónap ajándék</div>
             <button className="premium-btn w-100">Éves csomag indítása</button>
           </div>
+          {/* TÁMOGATÓ */}
+          <div className=" w-[280px] rounded-3xl p-10 backdrop-blur-xl bg-white/5 border border-white/10 transition-all duration-300 hover:-translate-y-2 " >
+            <div className="text-2xl font-bold">💛 Támogató</div>
+
+            <p className="mt-4 text-sm opacity-70">
+              Támogasd a független, AI-alapú hírelemzést. Küldj annyit,
+              amennyit szeretnél.
+            </p>
+
+            <input type="number" value={supportAmount} onChange={(e) => setSupportAmount(e.target.value)}
+              placeholder="Összeg (Ft)"
+              className="
+                mt-5 w-full px-4 py-2 rounded-xl
+                bg-white/5 border border-white/20
+                focus:outline-none focus:ring-2 focus:ring-cyan-400
+              "
+            />
+
+            <button className=" mt-4 w-full py-3 rounded-full font-semibold bg-gradient-to-r from-cyan-400 to-emerald-400 text-slate-900 transition-all hover:scale-105 " >
+              Támogatás küldése
+            </button>
+          </div>
 
           {/* Céges */}
           <div className="premium-card glass">
-            <div className="price">Céges</div>
-            <div className="desc">Egyedi dashboard és riportok</div>
+            <div className="price">🏢 Cégeknek</div>
+            <div className="mt-5 space-y-2 text-sm opacity-80">
+              <li>📊 API hozzáférés</li>
+              <li>👥 Dedikált support</li>
+              <li> Egyedi kérések </li>
+            </div>
             <button className="premium-btn w-100">Kapcsolat</button>
           </div>
 
