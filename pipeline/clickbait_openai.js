@@ -14,28 +14,41 @@ function toScore(raw) {
 function buildClickbaitPrompt(title, content) {
   return `
 CÍM:
-"${title}"
+"{title}"
 
 CIKK SZÖVEGE:
-${content}
+{content}
 
 FELADAT:
-Értékeld a fenti cikk clickbait szintjét három külön dimenzióban.
-Mindegyikre adj egy 0–100 közötti számot.
+Állapítsd meg, hogy a cikk mennyire clickbait. A clickbait azt jelenti, hogy a cím vagy a tartalom félrevezető, túlzó, manipuláló vagy bulváros.
 
-1) TITLE_CLICKBAIT:
-A cím mennyire kattintásvadász, túlzó, bulváros vagy érzelmileg manipuláló?
+Kiemelten vizsgáld az alábbiakat:
 
-2) CONTENT_CLICKBAIT:
-A cikk szövege mennyire bulváros, túlzó, érzelmi, szenzációhajhász?
+1) A cím és a szöveg ugyanarról az eseményről szól-e.
+2) A cikkben szereplő esemény aktuális-e. 
+   - Ha a cikk régi eseményt ír le (pl. évekkel vagy évtizedekkel ezelőtti történés), de a cím úgy hangzik, mintha most történne → ez clickbait.
+3) Ha a cím mást sugall, mint amit a cikk valójában tartalmaz → ez clickbait.
+4) Csak akkor adj magas pontszámot, ha valódi bulvár, túlzás vagy félrevezetés történik. 
+   - A pusztán drámai vagy konfliktusos téma NEM clickbait önmagában.
 
-3) CONSISTENCY_CLICKBAIT:
-A cím mennyire tér el a tartalomtól? (0 = teljesen korrekt, 100 = nagyon félrevezető)
+Adj három 0–100 közötti pontszámot:
 
-VÁLASZ FORMÁTUMA (szigorúan így):
+TITLE_CLICKBAIT:
+A cím mennyire túlzó, félrevezető vagy bulváros?
+
+CONTENT_CLICKBAIT:
+A cikk szövege mennyire bulváros vagy szenzációhajhász?
+
+CONSISTENCY_CLICKBAIT:
+A cím mennyire tér el a tartalomtól? 
+0 = teljesen korrekt, 
+100 = nagyon félrevezető (pl. régi eseményt frissnek állít be, vagy mást sugall, mint a tartalom).
+
+VÁLASZ FORMÁTUMA:
 TITLE: <szám>
 CONTENT: <szám>
 CONSISTENCY: <szám>
+
 `.trim();
 }
 
