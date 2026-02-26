@@ -1,12 +1,10 @@
-// /pipeline/generateEmbedding.js — Cikk embedding generálás Ollama + llama3:latest
+// /pipeline/generateEmbedding.js — Cikk embedding generálás OpenAI-val (EREDTI SZÖVEGBŐL)
 require("dotenv").config({ path: "/var/www/utom/.env" });
 const mysql = require("mysql2/promise");
-
-const OLLAMA_EMBEDDING_URL = "http://127.0.0.1:11434/api/embeddings";
-const MODELL_NEV = "llama3:latest";
+const { callOpenAI } = require("./aiClient");
 
 /**
- * Embedding generálása egy cikkhez
+ * Embedding generálása egy cikkhez OpenAI-val
  * @param {number} cikkId
  * @param {number} timeoutMs
  */
@@ -18,9 +16,9 @@ async function generaljEmbeddingetCikkhez(cikkId, timeoutMs = 180000) {
     database: "projekt2025",
   });
 
-  // 1) Cikk lekérése — HELYES MEZŐK
+  // 1) Cikk lekérése — CSAK AZ EREDETI SZÖVEG
   const [rows] = await conn.execute(
-    `SELECT id, title, content_text, short_summary, long_summary 
+    `SELECT id, title, content_text 
      FROM articles 
      WHERE id = ?`,
     [cikkId]
@@ -33,63 +31,51 @@ async function generaljEmbeddingetCikkhez(cikkId, timeoutMs = 180000) {
 
   const cikk = rows[0];
 
-  // 2) Embedding szöveg összeállítása
-  let szoveg = "";
-
-  if (cikk.content_text && cikk.content_text.trim().length > 0) {
-    szoveg = `${cikk.title}\n\n${cikk.content_text}`;
-  } else if (cikk.long_summary && cikk.long_summary.trim().length > 0) {
-    szoveg = `${cikk.title}\n\n${cikk.long_summary}`;
-  } else if (cikk.short_summary && cikk.short_summary.trim().length > 0) {
-    szoveg = `${cikk.title}\n\n${cikk.short_summary}`;
-  } else {
+  // 2) Eredeti szöveg ellenőrzése
+  if (!cikk.content_text || cikk.content_text.trim().length < 50) {
     await conn.end();
-    throw new Error(`A cikk szövege üres: ${cikkId}`);
+    throw new Error(`A cikk eredeti szövege túl rövid vagy üres: ${cikkId}`);
   }
 
-  szoveg = szoveg.trim().slice(0, 4000); // biztonsági limit
+  // 3) Embedding szöveg összeállítása — CSAK EREDETI
+  const szoveg = `${cikk.title}\n\n${cikk.content_text}`.trim().slice(0, 8000);
 
-  // 3) Timeout + AbortController
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  // 4) OpenAI embedding hívás
+  const prompt = `
+Készíts embeddinget a következő szöveghez.
+Csak a nyers embedding vektort add vissza JSON tömbként.
 
+SZÖVEG:
+${szoveg}
+  `.trim();
+
+  let rawEmbedding = await callOpenAI(prompt, 300);
+
+  // 5) JSON parsolás
+  let embedding;
   try {
-    // 4) Embedding kérés az Ollama-tól
-    const response = await fetch(OLLAMA_EMBEDDING_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      signal: controller.signal,
-      body: JSON.stringify({
-        model: MODELL_NEV,
-        prompt: szoveg,
-      }),
-    });
-
-    if (!response.ok) {
-      const text = await response.text();
-      throw new Error(`Ollama hiba: ${response.status} ${text}`);
-    }
-
-    const data = await response.json();
-
-    if (!data.embedding || !Array.isArray(data.embedding)) {
-      throw new Error("Az Ollama hibás embedding választ adott vissza.");
-    }
-
-    // 5) Embedding mentése
-    await conn.execute(
-      "UPDATE articles SET embedding = ? WHERE id = ?",
-      [JSON.stringify(data.embedding), cikkId]
-    );
-
-    return {
-      cikkId,
-      embeddingHossz: data.embedding.length,
-    };
-  } finally {
-    clearTimeout(timeout);
-    await conn.end();
+    embedding = JSON.parse(rawEmbedding);
+  } catch (e) {
+    console.error("Embedding JSON parse error:", rawEmbedding);
+    throw new Error("Embedding JSON parse error");
   }
+
+  if (!Array.isArray(embedding)) {
+    throw new Error("Embedding nem tömb!");
+  }
+
+  // 6) Mentés adatbázisba
+  await conn.execute(
+    "UPDATE articles SET embedding = ? WHERE id = ?",
+    [JSON.stringify(embedding), cikkId]
+  );
+
+  await conn.end();
+
+  return {
+    cikkId,
+    embeddingHossz: embedding.length,
+  };
 }
 
 module.exports = { generaljEmbeddingetCikkhez };
