@@ -1,14 +1,13 @@
-// /pipeline/generateEmbedding.js — Cikk embedding generálás OpenAI-val (EREDTI SZÖVEGBŐL)
+// /pipeline/generateEmbedding.js — Cikk embedding generálás OpenAI-val (text-embedding-3-small)
 require("dotenv").config({ path: "/var/www/utom/.env" });
 const mysql = require("mysql2/promise");
-const { callOpenAI } = require("./aiClient");
+const OpenAI = require("openai");
 
-/**
- * Embedding generálása egy cikkhez OpenAI-val
- * @param {number} cikkId
- * @param {number} timeoutMs
- */
-async function generaljEmbeddingetCikkhez(cikkId, timeoutMs = 180000) {
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+async function generaljEmbeddingetCikkhez(cikkId) {
   const conn = await mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -24,47 +23,29 @@ async function generaljEmbeddingetCikkhez(cikkId, timeoutMs = 180000) {
     [cikkId]
   );
 
-  if (!rows || rows.length === 0) {
+  if (!rows.length) {
     await conn.end();
-    throw new Error(`Nincs ilyen cikk az adatbázisban: ${cikkId}`);
+    throw new Error(`Nincs ilyen cikk: ${cikkId}`);
   }
 
-  const cikk = rows[0];
+  const { title, content_text } = rows[0];
 
-  // 2) Eredeti szöveg ellenőrzése
-  if (!cikk.content_text || cikk.content_text.trim().length < 50) {
+  if (!content_text || content_text.trim().length < 50) {
     await conn.end();
-    throw new Error(`A cikk eredeti szövege túl rövid vagy üres: ${cikkId}`);
+    throw new Error(`A cikk eredeti szövege túl rövid: ${cikkId}`);
   }
 
-  // 3) Embedding szöveg összeállítása — CSAK EREDETI
-  const szoveg = `${cikk.title}\n\n${cikk.content_text}`.trim().slice(0, 8000);
+  const szoveg = `${title}\n\n${content_text}`.slice(0, 8000);
 
-  // 4) OpenAI embedding hívás
-  const prompt = `
-Készíts embeddinget a következő szöveghez.
-Csak a nyers embedding vektort add vissza JSON tömbként.
+  // 2) VALÓDI OpenAI embedding API — text-embedding-3-small
+  const response = await openai.embeddings.create({
+    model: "text-embedding-3-small",
+    input: szoveg
+  });
 
-SZÖVEG:
-${szoveg}
-  `.trim();
+  const embedding = response.data[0].embedding;
 
-  let rawEmbedding = await callOpenAI(prompt, 300);
-
-  // 5) JSON parsolás
-  let embedding;
-  try {
-    embedding = JSON.parse(rawEmbedding);
-  } catch (e) {
-    console.error("Embedding JSON parse error:", rawEmbedding);
-    throw new Error("Embedding JSON parse error");
-  }
-
-  if (!Array.isArray(embedding)) {
-    throw new Error("Embedding nem tömb!");
-  }
-
-  // 6) Mentés adatbázisba
+  // 3) Mentés
   await conn.execute(
     "UPDATE articles SET embedding = ? WHERE id = ?",
     [JSON.stringify(embedding), cikkId]
@@ -74,7 +55,7 @@ ${szoveg}
 
   return {
     cikkId,
-    embeddingHossz: embedding.length,
+    embeddingHossz: embedding.length
   };
 }
 
