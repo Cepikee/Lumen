@@ -2,10 +2,7 @@
 require("dotenv").config({ path: "/var/www/utom/.env" });
 const mysql = require("mysql2/promise");
 
-// Ollama embedding végpont
 const OLLAMA_EMBEDDING_URL = "http://127.0.0.1:11434/api/embeddings";
-
-// Modell neve
 const MODELL_NEV = "llama3:latest";
 
 /**
@@ -14,7 +11,6 @@ const MODELL_NEV = "llama3:latest";
  * @param {number} timeoutMs
  */
 async function generaljEmbeddingetCikkhez(cikkId, timeoutMs = 180000) {
-  // 1) Adatbázis kapcsolat
   const conn = await mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -22,61 +18,73 @@ async function generaljEmbeddingetCikkhez(cikkId, timeoutMs = 180000) {
     database: "projekt2025",
   });
 
-  // 2) Cikk lekérése
-  const [sorok] = await conn.execute(
-    "SELECT id, title, content FROM articles WHERE id = ?",
+  // 1) Cikk lekérése — HELYES MEZŐK
+  const [rows] = await conn.execute(
+    `SELECT id, title, content_text, short_summary, long_summary 
+     FROM articles 
+     WHERE id = ?`,
     [cikkId]
   );
 
-  if (!sorok || sorok.length === 0) {
+  if (!rows || rows.length === 0) {
     await conn.end();
     throw new Error(`Nincs ilyen cikk az adatbázisban: ${cikkId}`);
   }
 
-  const cikk = sorok[0];
-  const szoveg = `${cikk.title}\n\n${cikk.content || ""}`.trim();
+  const cikk = rows[0];
 
-  if (!szoveg) {
+  // 2) Embedding szöveg összeállítása
+  let szoveg = "";
+
+  if (cikk.content_text && cikk.content_text.trim().length > 0) {
+    szoveg = `${cikk.title}\n\n${cikk.content_text}`;
+  } else if (cikk.long_summary && cikk.long_summary.trim().length > 0) {
+    szoveg = `${cikk.title}\n\n${cikk.long_summary}`;
+  } else if (cikk.short_summary && cikk.short_summary.trim().length > 0) {
+    szoveg = `${cikk.title}\n\n${cikk.short_summary}`;
+  } else {
     await conn.end();
     throw new Error(`A cikk szövege üres: ${cikkId}`);
   }
 
+  szoveg = szoveg.trim().slice(0, 4000); // biztonsági limit
+
   // 3) Timeout + AbortController
-  const vezerlo = new AbortController();
-  const timeout = setTimeout(() => vezerlo.abort(), timeoutMs);
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
     // 4) Embedding kérés az Ollama-tól
-    const valasz = await fetch(OLLAMA_EMBEDDING_URL, {
+    const response = await fetch(OLLAMA_EMBEDDING_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      signal: vezerlo.signal,
+      signal: controller.signal,
       body: JSON.stringify({
         model: MODELL_NEV,
         prompt: szoveg,
       }),
     });
 
-    if (!valasz.ok) {
-      const hibaszoveg = await valasz.text();
-      throw new Error(`Ollama hiba: ${valasz.status} ${hibaszoveg}`);
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(`Ollama hiba: ${response.status} ${text}`);
     }
 
-    const adat = await valasz.json();
+    const data = await response.json();
 
-    if (!adat.embedding || !Array.isArray(adat.embedding)) {
+    if (!data.embedding || !Array.isArray(data.embedding)) {
       throw new Error("Az Ollama hibás embedding választ adott vissza.");
     }
 
-    // 5) Embedding mentése az adatbázisba
+    // 5) Embedding mentése
     await conn.execute(
       "UPDATE articles SET embedding = ? WHERE id = ?",
-      [JSON.stringify(adat.embedding), cikkId]
+      [JSON.stringify(data.embedding), cikkId]
     );
 
     return {
       cikkId,
-      embeddingHossz: adat.embedding.length,
+      embeddingHossz: data.embedding.length,
     };
   } finally {
     clearTimeout(timeout);
@@ -84,5 +92,4 @@ async function generaljEmbeddingetCikkhez(cikkId, timeoutMs = 180000) {
   }
 }
 
-// Exportáljuk
 module.exports = { generaljEmbeddingetCikkhez };
