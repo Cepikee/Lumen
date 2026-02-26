@@ -48,32 +48,25 @@ export default function PremiumPage() {
             <div className="desc">2 hónap ajándék</div>
             <button className="premium-btn w-100">Éves csomag indítása</button>
           </div>
-          {/* TÁMOGATÓ */}
-          <div className=" w-[280px] rounded-3xl p-10 backdrop-blur-xl bg-white/5 border border-white/10 transition-all duration-300 hover:-translate-y-2 " >
-            <div className="text-2xl font-bold">💛 Támogató</div>
 
-            <p className="mt-4 text-sm opacity-70">
-              Támogasd a független, AI-alapú hírelemzést. Küldj annyit,
-              amennyit szeretnél.
-            </p>
-
-            <input type="number" value={supportAmount} onChange={(e) => setSupportAmount(e.target.value)}
-              placeholder="Összeg (Ft)"
-              className="
-                mt-5 w-full px-4 py-2 rounded-xl
-                bg-white/5 border border-white/20
-                focus:outline-none focus:ring-2 focus:ring-cyan-400
-              "
+          {/* Támogató */}
+          <div className="premium-card glass supporter">
+            <div className="price">Támogató</div>
+            <div className="desc">
+              Támogasd az első AI-vezérelt magyar hírelemző projektet.
+            </div>
+             <input
+             type="number"
+             placeholder="Összeg (Ft)"
+             className="supporter-input"
             />
-
-            <button className=" mt-4 w-full py-3 rounded-full font-semibold bg-gradient-to-r from-cyan-400 to-emerald-400 text-slate-900 transition-all hover:scale-105 " >
-              Támogatás küldése
+            <button className="premium-btn w-100 mt-3">
+              Projekt támogatása
             </button>
           </div>
-
           {/* Céges */}
           <div className="premium-card glass">
-            <div className="price">🏢 Cégeknek</div>
+            <div className="price">Cégeknek</div>
             <div className="mt-5 space-y-2 text-sm opacity-80">
               <li>📊 API hozzáférés</li>
               <li>👥 Dedikált support</li>
@@ -100,18 +93,18 @@ export default function PremiumPage() {
     {/* Top 4 highlight */}
     <div className="why-grid mb-5">
       <div className="why-card">
-        <div className="why-icon">🔒</div>
-        <h5>100% reklámmentes élmény</h5>
+        <div className="why-icon">🧠</div>
+        <h5>Nem csak olvasod a híreket — érted is őket</h5>
       </div>
 
       <div className="why-card">
         <div className="why-icon">⚡</div>
-        <h5>Valós idejű AI elemzés</h5>
+        <h5>Átlátod a torzításokat és manipulációt</h5>
       </div>
 
       <div className="why-card">
-        <div className="why-icon">🧠</div>
-        <h5>Torzítás detektálás</h5>
+        <div className="why-icon">🚫</div>
+        <h5>Zajmentes, tiszta információs tér</h5>
       </div>
 
       <div className="why-card">
