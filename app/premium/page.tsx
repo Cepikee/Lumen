@@ -134,7 +134,7 @@ export default function PremiumPage() {
             <div className="fs-2">{item.icon}</div>
             <div>
               <h5 className="mb-1">{item.title}</h5>
-              <p className="text-muted mb-0">{item.desc}</p>
+              <p className="mb-0">{item.desc}</p>
             </div>
           </div>
         </div>
