@@ -14,10 +14,10 @@ function toScore(raw) {
 function buildClickbaitPrompt(title, content) {
   return `
 CÍM:
-"{title}"
+"${title}"
 
 CIKK SZÖVEGE:
-{content}
+${content}
 
 FELADAT:
 Állapítsd meg, hogy a cikk mennyire clickbait. A clickbait azt jelenti, hogy a cím vagy a tartalom félrevezető, túlzó, manipuláló vagy bulváros.
@@ -25,30 +25,15 @@ FELADAT:
 Kiemelten vizsgáld az alábbiakat:
 
 1) A cím és a szöveg ugyanarról az eseményről szól-e.
-2) A cikkben szereplő esemény aktuális-e. 
-   - Ha a cikk régi eseményt ír le (pl. évekkel vagy évtizedekkel ezelőtti történés), de a cím úgy hangzik, mintha most történne → ez clickbait.
+2) A cikkben szereplő esemény aktuális-e.
 3) Ha a cím mást sugall, mint amit a cikk valójában tartalmaz → ez clickbait.
-4) Csak akkor adj magas pontszámot, ha valódi bulvár, túlzás vagy félrevezetés történik. 
-   - A pusztán drámai vagy konfliktusos téma NEM clickbait önmagában.
+4) Csak akkor adj magas pontszámot, ha valódi bulvár, túlzás vagy félrevezetés történik.
 
 Adj három 0–100 közötti pontszámot:
 
-TITLE_CLICKBAIT:
-A cím mennyire túlzó, félrevezető vagy bulváros?
-
-CONTENT_CLICKBAIT:
-A cikk szövege mennyire bulváros vagy szenzációhajhász?
-
-CONSISTENCY_CLICKBAIT:
-A cím mennyire tér el a tartalomtól? 
-0 = teljesen korrekt, 
-100 = nagyon félrevezető (pl. régi eseményt frissnek állít be, vagy mást sugall, mint a tartalom).
-
-VÁLASZ FORMÁTUMA:
 TITLE: <szám>
 CONTENT: <szám>
 CONSISTENCY: <szám>
-
 `.trim();
 }
 
@@ -64,6 +49,17 @@ async function processClickbaitOpenAI(articleId) {
   try {
     console.log(`\x1b[34m[CLICKBAIT-OAI] ▶️ Indul: articleId=${articleId}\x1b[0m`);
 
+    // 0) Ha már van clickbait eredmény, ne futtasd újra
+    const [existing] = await conn.execute(
+      "SELECT final_clickbait FROM summaries WHERE article_id = ?",
+      [articleId]
+    );
+
+    if (existing.length && existing[0].final_clickbait !== null) {
+      console.log(`[CLICKBAIT-OAI] ⏭ Már van clickbait eredmény, kihagyva.`);
+      return { ok: true, skipped: true };
+    }
+
     // 1) Cikk lekérése
     const [rows] = await conn.execute(
       "SELECT title, content_text FROM articles WHERE id = ?",
@@ -75,11 +71,12 @@ async function processClickbaitOpenAI(articleId) {
       return { ok: false, error: "Nincs ilyen cikk" };
     }
 
-    const { title, content_text } = rows[0];
+    let { title, content_text } = rows[0];
 
+    // Ha túl rövid → fallback a címre
     if (!content_text || content_text.trim().length < 50) {
-      console.error(`[CLICKBAIT-OAI] ❌ Üres vagy túl rövid content_text!`);
-      return { ok: false, error: "Üres content_text" };
+      console.warn(`[CLICKBAIT-OAI] ⚠️ Rövid content_text, fallback a címre.`);
+      content_text = title;
     }
 
     // 2) Prompt
@@ -108,12 +105,11 @@ async function processClickbaitOpenAI(articleId) {
       }
     }
 
-    // 5) Final score (átlag)
     const finalScore = Math.round(
       (titleScore + contentScore + consistencyScore) / 3
     );
 
-    // 6) Mentés summaries táblába
+    // 5) Mentés summaries táblába
     await conn.execute(
       `
       UPDATE summaries
