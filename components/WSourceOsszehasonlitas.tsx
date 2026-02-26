@@ -7,6 +7,9 @@ import { useUserStore } from "@/store/useUserStore";
 import WSourceCategoryDistribution from "./WSourceCategoryDistribution";
 import WSourceClickbait from "./WSourceClickbait";
 import WSourceClickbaitRatio from "./WSourceClickbaitRatio";
+import WSourceSpeedIndexTimeline from "./WSourceSpeedIndexTimeline";
+import WSourceSpeedIndexLeaderboard from "./WSourceSpeedIndexLeaderboard";
+import WSourceSpeedIndexDistribution from "./WSourceSpeedIndexDistribution";
 
 export default function WSourceOsszehasonlitas() {
   const theme = useUserStore((s) => s.theme);
@@ -123,18 +126,65 @@ export default function WSourceOsszehasonlitas() {
             <WSourceClickbaitRatio />
           </div>
 
-          {/* --- 4) Speed index placeholder --- */}
-          <div
-            className="p-4 rounded border bg-[var(--bs-body-bg)]"
-            style={{
-              borderColor: isDark ? "#1e293b" : "#e5e7eb",
-              color: isDark ? "#fff" : "#000",
-            }}
-          >
-            <h3 className="text-lg font-semibold mb-2">Sebesség index</h3>
-            <p className="text-sm opacity-70">Ide jön majd a speed chart.</p>
-          </div>
-        </div>
+          {/* --- 4) SPEED INDEX BLOKK --- */}
+<div
+  className="p-4 rounded border bg-[var(--bs-body-bg)]"
+  style={{
+    borderColor: isDark ? "#1e293b" : "#e5e7eb",
+    color: isDark ? "#fff" : "#000",
+  }}
+>
+  <h3 className="text-lg font-semibold mb-4 text-center">
+    Speed Index elemzések
+  </h3>
+
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    {/* --- 1) Speed Index rangsor --- */}
+    <div
+      className="p-3 rounded border"
+      style={{
+        borderColor: isDark ? "#334155" : "#d1d5db",
+        backgroundColor: "var(--bs-body-bg)",
+      }}
+    >
+      <h4 className="text-md font-semibold mb-2 text-center">
+        Rangsor
+      </h4>
+      <WSourceSpeedIndexLeaderboard />
+    </div>
+
+    {/* --- 2) Speed Index eloszlás (alapértelmezett forrás: telex.hu) --- */}
+    <div
+      className="p-3 rounded border"
+      style={{
+        borderColor: isDark ? "#334155" : "#d1d5db",
+        backgroundColor: "var(--bs-body-bg)",
+      }}
+    >
+      <h4 className="text-md font-semibold mb-2 text-center">
+        Késés-eloszlás
+      </h4>
+      <WSourceSpeedIndexDistribution source="telex.hu" />
+    </div>
+
+    {/* --- 3) Speed Index timeline (alapértelmezett cluster: 1) --- */}
+    <div
+      className="p-3 rounded border"
+      style={{
+        borderColor: isDark ? "#334155" : "#d1d5db",
+        backgroundColor: "var(--bs-body-bg)",
+      }}
+    >
+      <h4 className="text-md font-semibold mb-2 text-center">
+        Hír terjedése
+      </h4>
+      <WSourceSpeedIndexTimeline clusterId={1} />
+    </div>
+
+  </div>
+</div>
+
       )}
 
       {/* --- ÖSSZEHASONLÍTÓ NÉZET --- */}
