@@ -1,33 +1,64 @@
-/* TELJES OLDAL HÁTTERE */
+/* WRAPPER */
 .premium-wrapper {
   min-height: 100vh;
-  width: 100%;
-  background: linear-gradient(135deg, rgba(0,153,255,0.12), rgba(0,204,153,0.12));
-  background-attachment: fixed;
-  background-size: cover;
+  background: radial-gradient(circle at 30% 20%, rgba(0,153,255,0.2), transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(0,204,153,0.2), transparent 40%),
+              #0f172a;
+  color: white;
+  padding-bottom: 80px;
 }
 
-/* PRICING KÁRTYÁK */
+/* HERO */
+.premium-hero {
+  padding: 100px 20px 60px;
+}
+
+.hero-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  max-width: 700px;
+  margin: auto;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #00c6ff, #00ffb3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  margin-top: 20px;
+}
+
+/* PRICING */
+.pricing-section {
+  padding: 60px 0;
+}
+
 .premium-card {
-  background: var(--bs-body-bg);
-  border: 1px solid rgba(0,0,0,0.08);
   border-radius: 24px;
-  padding: 36px 42px;
+  padding: 40px;
   width: 280px;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(20px);
+}
+
+.glass {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 .premium-card:hover {
-  transform: translateY(-6px);
-  border-color: #0d6efd;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  transform: translateY(-8px);
 }
 
-.premium-card.highlight {
-  border-color: rgba(0,0,0,0.08);
-  position: relative;
+.highlight {
+  transform: scale(1.05);
+  border: 1px solid #00c6ff;
+  box-shadow: 0 0 40px rgba(0,198,255,0.3);
 }
 
 .badge-popular {
@@ -35,19 +66,18 @@
   top: -14px;
   left: 50%;
   transform: translateX(-50%);
-  background: #0d6efd;
-  color: white;
-  padding: 5px 14px;
-  border-radius: 14px;
-  font-size: 0.75rem;
+  background: linear-gradient(90deg, #00c6ff, #00ffb3);
+  color: #0f172a;
+  padding: 5px 16px;
+  border-radius: 999px;
   font-weight: 600;
+  font-size: 0.75rem;
 }
 
-/* PRICING TYPOGRAPHY */
+/* TYPO */
 .price {
   font-size: 2.2rem;
   font-weight: 700;
-  margin-bottom: 6px;
 }
 
 .price span {
@@ -56,50 +86,36 @@
 }
 
 .desc {
-  color: var(--bs-secondary-color);
-  margin-bottom: 24px;
+  opacity: 0.7;
+  margin: 20px 0;
 }
 
-/* GOMBOK */
-.premium-btn {
-  padding: 12px 26px;
-  border-radius: 9999px;
-  background: #0d6efd;
-  color: white;
-  border: none;
-  font-weight: 600;
-  transition: background 0.2s ease;
-}
-
-.premium-btn:hover {
-  background: #0b5ed7;
-}
-
+/* BUTTONS */
+.premium-btn,
 .premium-btn-lg {
-  padding: 14px 32px;
-  border-radius: 9999px;
-  background: #0d6efd;
-  color: white;
+  background: linear-gradient(90deg, #00c6ff, #00ffb3);
   border: none;
-  font-size: 1.1rem;
+  color: #0f172a;
   font-weight: 600;
-  transition: background 0.2s ease;
+  padding: 12px 24px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
 }
 
+.premium-btn:hover,
 .premium-btn-lg:hover {
-  background: #0b5ed7;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0,255,179,0.5);
 }
 
-/* FUNKCIÓ KÁRTYÁK */
-.premium-feature-card {
-  background: var(--bs-body-bg);
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  transition: transform 0.2s ease;
+/* TRUST */
+.trust-section {
+  padding: 80px 20px;
 }
 
-.premium-feature-card:hover {
-  transform: translateY(-3px);
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  opacity: 0.85;
 }

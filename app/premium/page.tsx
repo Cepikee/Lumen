@@ -2,90 +2,72 @@
 
 export default function PremiumPage() {
   return (
-    <main className="pb-5">
+    <main className="premium-wrapper">
 
-      {/* HERO + PRICING */}
-      <section className="premium-hero text-center py-5">
+      {/* HERO */}
+      <section className="premium-hero text-center">
         <div className="container">
 
-          <img src="./utomlogo.png" alt="Utom" height="52" className="mb-4 opacity-75" />
+          <img src="/utomlogo.png" alt="Utom" height="52" className="mb-4 opacity-75" />
 
-          <h1 className="display-6 fw-bold mb-3">
-            Az Utom Prémium feltárja a hírek valódi szerkezetét.
+          <h1 className="hero-title">
+            Lásd a hírek mögötti <span className="gradient-text">valódi szerkezetet</span>.
           </h1>
-          <p className="lead text-muted mb-4">
-            Tisztább, gyorsabb, mélyebb elemzés — reklámok nélkül.
+
+          <p className="hero-sub">
+            Mélyebb elemzés. Torzítás nélkül. Reklámok nélkül.
           </p>
 
-          {/* Pricing */}
-          <div className="premium-pricing-wrapper d-flex justify-content-center gap-4 flex-wrap">
+          <button className="premium-btn-lg mt-4">
+            Prémium hozzáférés indítása
+          </button>
 
-            {/* Havi */}
-            <div className="premium-card">
-              <div className="price">1000 Ft<span>/hó</span></div>
-              <div className="desc">Havi előfizetés</div>
-              <button className="premium-btn">Előfizetek</button>
-            </div>
-
-            {/* Éves */}
-            <div className="premium-card highlight position-relative">
-              <div className="badge-popular">Legnépszerűbb</div>
-              <div className="price">9000 Ft<span>/év</span></div>
-              <div className="desc">Éves előfizetés</div>
-              <button className="premium-btn">Előfizetek</button>
-            </div>
-
-            {/* Cégeknek */}
-            <div className="premium-card enterprise">
-              <div className="price">Cégeknek</div>
-              <div className="desc">Egyedi árazás alapján</div>
-              <button className="premium-btn">Kapcsolat</button>
-            </div>
-
-          </div>
+          <p className="small text-muted mt-3">
+            7 napos kockázatmentes kipróbálás
+          </p>
         </div>
       </section>
 
-      {/* Funkciók */}
-      <section className="py-5">
+      {/* PRICING */}
+      <section className="pricing-section">
+        <div className="container d-flex justify-content-center gap-4 flex-wrap">
+
+          {/* Havi */}
+          <div className="premium-card glass">
+            <div className="price">1000 Ft<span>/hó</span></div>
+            <div className="desc">Rugalmas, bármikor lemondható</div>
+            <button className="premium-btn w-100">Előfizetek</button>
+          </div>
+
+          {/* Éves */}
+          <div className="premium-card highlight glass">
+            <div className="badge-popular">Legjobb ár</div>
+            <div className="price">9000 Ft<span>/év</span></div>
+            <div className="desc">2 hónap ajándék</div>
+            <button className="premium-btn w-100">Éves csomag indítása</button>
+          </div>
+
+          {/* Céges */}
+          <div className="premium-card glass">
+            <div className="price">Céges</div>
+            <div className="desc">Egyedi dashboard és riportok</div>
+            <button className="premium-btn w-100">Kapcsolat</button>
+          </div>
+
+        </div>
+      </section>
+
+      {/* TRUST SECTION */}
+      <section className="trust-section text-center">
         <div className="container">
-          <h2 className="text-center fs-3 fw-bold mb-5">Mit tartalmaz az Utom Prémium?</h2>
-
-          <div className="row row-cols-1 row-cols-md-2 g-4">
-            {[
-              { icon: "🧬", title: "Forrás DNS", desc: "AI‑alapú tartalmi ujjlenyomat, amely mindent megmutat egy hírportálról." },
-              { icon: "🧠", title: "Fake Detektor", desc: "Kiszűrjük a hamis, félrevezető vagy gyanús tartalmakat — valóság, torzítás nélkül." },
-              { icon: "🧊", title: "Clickbait Detektor", desc: "Felismerjük a kattintásvadász címeket, és megmutatjuk, mennyire azok." },
-              { icon: "🧱", title: "Cikk Összehasonlítás", desc: "Több forrás egy kattintással összevetve — látod, ki mit ír máshogy." },
-              { icon: "🧭", title: "Forrás‑Radar", desc: "Megmutatjuk, mely portálok dominálnak egy témában — és kik maradnak csendben." },
-              { icon: "💬", title: "Prémium Chat Szoba", desc: "Zárt közösség, ahol a prémium tagok beszélgethetnek, vitázhatnak, elemezhetnek." },
-              { icon: "🧑‍⚖️", title: "Közösségi Vélemény", desc: "A felhasználók visszajelzései alapján láthatod, hogyan értékeli a közösség a cikket." },
-              { icon: "🧘‍♂️", title: "Ultra‑minimalista mód", desc: "Csak a lényeg: reklám, sallang nélkül, egyszerűen nagyszerűen." }
-            ].map((item, i) => (
-              <div key={i} className="col">
-                <div className="premium-feature-card d-flex gap-3">
-                  <div className="fs-2">{item.icon}</div>
-                  <div>
-                    <h5 className="mb-1">{item.title}</h5>
-                    <p className="text-muted mb-0">{item.desc}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <h2 className="mb-4">Miért bíznak bennünk?</h2>
+          <div className="trust-grid">
+            <div>🔒 100% reklámmentes élmény</div>
+            <div>⚡ Valós idejű AI elemzés</div>
+            <div>🧠 Torzítás detektálás</div>
+            <div>💬 Zárt prémium közösség</div>
           </div>
         </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-5 text-center">
-        <button className="premium-btn-lg">Prémium előfizetés indítása</button>
-        <p className="text-muted small mt-2">Bármikor lemondhatod</p>
-      </section>
-
-      {/* Lábléc */}
-      <section className="text-center text-muted small pb-4">
-        <p>Bizonyos funkciók csak aktív Prémium tagsággal érhetők el.</p>
-        <a href="/premium-faq" className="text-decoration-underline">Gyakori kérdések a Prémiumról</a>
       </section>
 
     </main>
