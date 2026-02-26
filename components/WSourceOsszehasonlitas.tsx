@@ -7,9 +7,9 @@ import { useUserStore } from "@/store/useUserStore";
 import WSourceCategoryDistribution from "./WSourceCategoryDistribution";
 import WSourceClickbait from "./WSourceClickbait";
 import WSourceClickbaitRatio from "./WSourceClickbaitRatio";
-import WSourceSpeedIndexTimeline from "./WSourceSpeedIndexTimeline";
 import WSourceSpeedIndexLeaderboard from "./WSourceSpeedIndexLeaderboard";
 import WSourceSpeedIndexDistribution from "./WSourceSpeedIndexDistribution";
+import WSourceSpeedIndexTimeline from "./WSourceSpeedIndexTimeline";
 
 export default function WSourceOsszehasonlitas() {
   const theme = useUserStore((s) => s.theme);
@@ -27,7 +27,6 @@ export default function WSourceOsszehasonlitas() {
 
   return (
     <div className="w-full flex flex-col gap-6">
-
       {/* --- OLDAL CÍM --- */}
       <h2
         className="text-2xl font-bold"
@@ -68,7 +67,6 @@ export default function WSourceOsszehasonlitas() {
       {/* --- STATISZTIKAI NÉZET --- */}
       {view === "stats" && (
         <div className="flex flex-col gap-6">
-
           {/* --- 1) Kategóriaeloszlás --- */}
           <div
             className="p-4 rounded border bg-[var(--bs-body-bg)]"
@@ -92,7 +90,6 @@ export default function WSourceOsszehasonlitas() {
               color: isDark ? "#fff" : "#000",
             }}
           >
-            {/* A cím pontosan úgy, mint a gyerek komponensben volt */}
             <div className="relative z-10 mb-8 mt-2">
               <h2
                 className="text-3xl font-bold tracking-tight text-center"
@@ -105,7 +102,7 @@ export default function WSourceOsszehasonlitas() {
             <WSourceClickbait />
           </div>
 
-          {/* --- 3) Clickbait arány placeholder --- */}
+          {/* --- 3) CLICKBAIT ARÁNY --- */}
           <div
             className="p-4 rounded border bg-[var(--bs-body-bg)]"
             style={{
@@ -113,7 +110,6 @@ export default function WSourceOsszehasonlitas() {
               color: isDark ? "#fff" : "#000",
             }}
           >
-            {/* A cím pontosan úgy, mint a gyerek komponensben volt */}
             <div className="relative z-10 mb-8 mt-2">
               <h2
                 className="text-3xl font-bold tracking-tight text-center"
@@ -127,70 +123,67 @@ export default function WSourceOsszehasonlitas() {
           </div>
 
           {/* --- 4) SPEED INDEX BLOKK --- */}
-<div
-  className="p-4 rounded border bg-[var(--bs-body-bg)]"
-  style={{
-    borderColor: isDark ? "#1e293b" : "#e5e7eb",
-    color: isDark ? "#fff" : "#000",
-  }}
->
-  <h3 className="text-lg font-semibold mb-4 text-center">
-    Speed Index elemzések
-  </h3>
+          <div
+            className="p-4 rounded border bg-[var(--bs-body-bg)]"
+            style={{
+              borderColor: isDark ? "#1e293b" : "#e5e7eb",
+              color: isDark ? "#fff" : "#000",
+            }}
+          >
+            <h3 className="text-lg font-semibold mb-4 text-center">
+              Speed Index elemzések
+            </h3>
 
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* --- 1) Speed Index rangsor --- */}
+              <div
+                className="p-3 rounded border"
+                style={{
+                  borderColor: isDark ? "#334155" : "#d1d5db",
+                  backgroundColor: "var(--bs-body-bg)",
+                }}
+              >
+                <h4 className="text-md font-semibold mb-2 text-center">
+                  Rangsor
+                </h4>
+                <WSourceSpeedIndexLeaderboard />
+              </div>
 
-    {/* --- 1) Speed Index rangsor --- */}
-    <div
-      className="p-3 rounded border"
-      style={{
-        borderColor: isDark ? "#334155" : "#d1d5db",
-        backgroundColor: "var(--bs-body-bg)",
-      }}
-    >
-      <h4 className="text-md font-semibold mb-2 text-center">
-        Rangsor
-      </h4>
-      <WSourceSpeedIndexLeaderboard />
-    </div>
+              {/* --- 2) Speed Index eloszlás --- */}
+              <div
+                className="p-3 rounded border"
+                style={{
+                  borderColor: isDark ? "#334155" : "#d1d5db",
+                  backgroundColor: "var(--bs-body-bg)",
+                }}
+              >
+                <h4 className="text-md font-semibold mb-2 text-center">
+                  Késés-eloszlás
+                </h4>
+                <WSourceSpeedIndexDistribution source="telex.hu" />
+              </div>
 
-    {/* --- 2) Speed Index eloszlás (alapértelmezett forrás: telex.hu) --- */}
-    <div
-      className="p-3 rounded border"
-      style={{
-        borderColor: isDark ? "#334155" : "#d1d5db",
-        backgroundColor: "var(--bs-body-bg)",
-      }}
-    >
-      <h4 className="text-md font-semibold mb-2 text-center">
-        Késés-eloszlás
-      </h4>
-      <WSourceSpeedIndexDistribution source="telex.hu" />
-    </div>
-
-    {/* --- 3) Speed Index timeline (alapértelmezett cluster: 1) --- */}
-    <div
-      className="p-3 rounded border"
-      style={{
-        borderColor: isDark ? "#334155" : "#d1d5db",
-        backgroundColor: "var(--bs-body-bg)",
-      }}
-    >
-      <h4 className="text-md font-semibold mb-2 text-center">
-        Hír terjedése
-      </h4>
-      <WSourceSpeedIndexTimeline clusterId={1} />
-    </div>
-
-  </div>
-</div>
-
+              {/* --- 3) Speed Index timeline --- */}
+              <div
+                className="p-3 rounded border"
+                style={{
+                  borderColor: isDark ? "#334155" : "#d1d5db",
+                  backgroundColor: "var(--bs-body-bg)",
+                }}
+              >
+                <h4 className="text-md font-semibold mb-2 text-center">
+                  Hír terjedése
+                </h4>
+                <WSourceSpeedIndexTimeline clusterId={1} />
+              </div>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* --- ÖSSZEHASONLÍTÓ NÉZET --- */}
       {view === "compare" && (
         <div className="flex flex-col gap-6">
-
           {/* --- FORRÁSVÁLASZTÓ --- */}
           <div
             className="p-4 rounded border flex flex-col gap-4 bg-[var(--bs-body-bg)]"
@@ -246,7 +239,9 @@ export default function WSourceOsszehasonlitas() {
               color: isDark ? "#fff" : "#000",
             }}
           >
-            <h3 className="text-lg font-semibold mb-2">Kategória összehasonlítás</h3>
+            <h3 className="text-lg font-semibold mb-2">
+              Kategória összehasonlítás
+            </h3>
             <p className="text-sm opacity-70">
               Ide jön majd a két forrás radar chartja egymás mellett.
             </p>
