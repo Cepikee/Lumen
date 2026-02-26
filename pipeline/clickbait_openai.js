@@ -12,9 +12,9 @@ function toScore(raw) {
 
 // --- Prompt generálása ---
 function buildClickbaitPrompt(title, content) {
-  return `
+ return `
 CÍM:
-"${title}"
+${title}
 
 CIKK SZÖVEGE:
 ${content}
@@ -29,12 +29,16 @@ Kiemelten vizsgáld az alábbiakat:
 3) Ha a cím mást sugall, mint amit a cikk valójában tartalmaz → ez clickbait.
 4) Csak akkor adj magas pontszámot, ha valódi bulvár, túlzás vagy félrevezetés történik.
 
-Adj három 0–100 közötti pontszámot:
+Adj három 0–100 közötti pontszámot **ÉS SEMMI MÁST**:
 
 TITLE: <szám>
 CONTENT: <szám>
 CONSISTENCY: <szám>
+
+NE írj magyarázatot, indoklást, elemzést, kommentárt vagy szöveges értékelést.
+Csak a három számot add vissza pontosan ebben a formátumban.
 `.trim();
+
 }
 
 // --- Fő függvény: clickbait feldolgozás ---
