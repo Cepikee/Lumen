@@ -337,7 +337,7 @@ Korlátozások:
       [articleId]
     );
   });
-    // 9) CLICKBAIT — OpenAI
+      // 9) CLICKBAIT — OpenAI
   await runWithRetries("[CLICKBAIT] 🎯 Clickbait elemzés", async () => {
     const { processClickbaitOpenAI } = require("./clickbait_openai");
     const res = await processClickbaitOpenAI(articleId);
@@ -363,21 +363,11 @@ Korlátozások:
     await updateSpeedIndex();
   });
 
-  console.log(`✔️  CIKK TELJES PIPELINE KÉSZ — ID: ${articleId}`);
+  console.log(`✔️  ${GREEN}CIKK TELJES PIPELINE KÉSZ — ID: ${articleId}${RESET}`);
   cronLog(`Cikk teljes pipeline kész: ID=${articleId}`);
 
   console.log("──────────────────────────────────────────────");
 }
-
-
-
-
-
-
-  console.log(`✔️  ${GREEN}CIKK FELDOLGOZVA — ID: ${articleId}${RESET}`);
-  cronLog(`Cikk feldolgozva: ID=${articleId}`);
-
-  console.log("──────────────────────────────────────────────");
 
 
 // ─────────────────────────────────────────────
