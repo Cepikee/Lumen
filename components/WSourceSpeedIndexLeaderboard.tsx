@@ -2,6 +2,15 @@
 
 import useSWR from "swr";
 import { useUserStore } from "@/store/useUserStore";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+} from "recharts";
 
 const fetcher = (url: string) =>
   fetch(url, {
@@ -34,16 +43,12 @@ export default function WSourceSpeedIndexLeaderboard() {
   });
 
   if (isLoading) {
-    return (
-      <div className="p-4 text-center text-sm opacity-70">
-        Betöltés…
-      </div>
-    );
+    return <div className="p-4 text-center">Betöltés…</div>;
   }
 
   if (error || !data?.success) {
     return (
-      <div className="p-4 text-red-500 text-sm">
+      <div className="p-4 text-red-500">
         Nem sikerült betölteni a Speed Index adatokat.
       </div>
     );
@@ -51,49 +56,61 @@ export default function WSourceSpeedIndexLeaderboard() {
 
   const items = data.leaderboard;
 
+  // Színskála késés alapján
+  const getColor = (delay: number) => {
+    if (delay <= 1) return "#22c55e"; // zöld
+    if (delay <= 5) return "#eab308"; // sárga
+    return "#ef4444"; // piros
+  };
+
   return (
     <div
-      className={`p-6 rounded-xl shadow-sm border ${
+      className={`p-6 rounded-xl shadow-lg border ${
         isDark
           ? "border-[#1e293b] bg-[#0f172a] text-white"
           : "border-gray-200 bg-white text-black"
       }`}
     >
-      <h3 className="text-xl font-bold mb-5 text-center">
-        Speed Index rangsor
+      <h3 className="text-xl font-bold mb-6 text-center">
+        ⚡ Speed Index — Átlagos késés forrásonként
       </h3>
 
-      <div className="flex flex-col gap-3">
-        {items.map((item) => {
-          const delayColor =
-            item.avgDelay <= 1
-              ? "text-green-500"
-              : item.avgDelay <= 5
-              ? "text-yellow-500"
-              : "text-red-500";
-
-          return (
-            <div
-              key={item.source}
-              className={`p-4 rounded-lg border flex justify-between items-center transition ${
-                isDark
-                  ? "border-[#1e293b] bg-[#1e293b]/40"
-                  : "border-gray-200 bg-gray-50"
-              }`}
-            >
-              <div className="font-semibold text-lg">{item.source}</div>
-
-              <div className="text-sm text-right">
-                <div className={`${delayColor} font-bold`}>
-                  {item.avgDelay.toFixed(1)} perc átlag
-                </div>
-                <div className="opacity-70">
-                  Medián: {item.medianDelay.toFixed(1)} perc
-                </div>
-              </div>
-            </div>
-          );
-        })}
+      <div className="w-full h-80">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={items}
+            margin={{ top: 20, right: 20, left: 0, bottom: 20 }}
+          >
+            <XAxis
+              dataKey="source"
+              stroke={isDark ? "#cbd5e1" : "#475569"}
+              tick={{ fontSize: 14 }}
+            />
+            <YAxis
+              stroke={isDark ? "#cbd5e1" : "#475569"}
+              tick={{ fontSize: 14 }}
+              label={{
+                value: "perc",
+                angle: -90,
+                position: "insideLeft",
+                fill: isDark ? "#cbd5e1" : "#475569",
+              }}
+            />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: isDark ? "#1e293b" : "#ffffff",
+                border: "1px solid #475569",
+                borderRadius: "8px",
+                color: isDark ? "#ffffff" : "#000000",
+              }}
+            />
+            <Bar dataKey="avgDelay" radius={[6, 6, 0, 0]}>
+              {items.map((item, index) => (
+                <Cell key={index} fill={getColor(item.avgDelay)} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
