@@ -10,11 +10,12 @@ import WSourceClickbaitRatio from "./WSourceClickbaitRatio";
 import WSourceSpeedIndexLeaderboard from "./WSourceSpeedIndexLeaderboard";
 import WSourceSpeedIndexDistribution from "./WSourceSpeedIndexDistribution";
 import WSourceSpeedIndexTimeline from "./WSourceSpeedIndexTimeline";
+
 import { motion, AnimatePresence } from "framer-motion";
+
 export default function WSourceOsszehasonlitas() {
   const theme = useUserStore((s) => s.theme);
   const [showInfo, setShowInfo] = useState(false);
-
 
   const isDark =
     theme === "dark" ||
@@ -145,7 +146,7 @@ export default function WSourceOsszehasonlitas() {
                   backgroundColor: "var(--bs-body-bg)",
                 }}
               >
-                                <div className="flex justify-center items-center gap-2 mb-4">
+                <div className="flex justify-center items-center gap-2 mb-4">
                   <h4 className="text-md font-semibold text-center">
                     Speed Index magyarázat
                   </h4>
@@ -160,8 +161,12 @@ export default function WSourceOsszehasonlitas() {
 
                 <WSourceSpeedIndexLeaderboard />
 
-                {showInfo && <SpeedIndexInfoModal onClose={() => setShowInfo(false)} />}
-
+                <AnimatePresence>
+                  {showInfo && (
+                    <SpeedIndexInfoModal onClose={() => setShowInfo(false)} />
+                  )}
+                </AnimatePresence>
+              </div>
 
               {/* --- 2) Speed Index eloszlás --- */}
               <div
@@ -264,15 +269,24 @@ export default function WSourceOsszehasonlitas() {
       )}
     </div>
   );
-import { motion } from "framer-motion";
+}
+
+/* ============================= */
+/* Speed Index Magyarázó Modal */
+/* ============================= */
 
 function SpeedIndexInfoModal({ onClose }: { onClose: () => void }) {
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
+    >
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0 }}
+        initial={{ scale: 0.9 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0.9 }}
         className="bg-[#0f172a] text-white p-8 rounded-2xl max-w-lg w-full border border-white/10 shadow-2xl"
       >
         <h2 className="text-xl font-bold mb-4">Mi az a Speed Index?</h2>
@@ -306,8 +320,6 @@ function SpeedIndexInfoModal({ onClose }: { onClose: () => void }) {
           Bezárás
         </button>
       </motion.div>
-    </div>
+    </motion.div>
   );
-}
- 
 }
