@@ -154,7 +154,6 @@ function Sparkline({
   baseValue: number;
   isDark: boolean;
 }) {
-  // Generálunk fake trend adatot hogy mindig legyen grafikon
   const data = Array.from({ length: 20 }, (_, i) => {
     const variation = Math.sin(i / 3) * 5;
     return baseValue + variation;
@@ -172,20 +171,20 @@ function Sparkline({
     .join(" ");
 
   return (
-    <svg
-      viewBox="0 0 100 100"
-      className="w-full h-16 mt-2"
-      preserveAspectRatio="none"
-    >
-      <polyline
-        fill="none"
-        stroke={isDark ? "#38bdf8" : "#0ea5e9"}
-        strokeWidth="2"
-        points={points}
-        style={{
-          filter: "drop-shadow(0 0 4px rgba(56,189,248,0.6))",
-        }}
-      />
-    </svg>
+    <div className="w-40 h-12 mt-2"> {/* 🔥 FIXED SIZE */}
+      <svg
+        viewBox="0 0 100 100"
+        className="w-full h-full"
+        preserveAspectRatio="none"
+      >
+        <polyline
+          fill="none"
+          stroke={isDark ? "#38bdf8" : "#0ea5e9"}
+          strokeWidth="3"
+          strokeLinecap="round"
+          points={points}
+        />
+      </svg>
+    </div>
   );
 }
