@@ -1,17 +1,15 @@
 // app/api/insights/speedindex/leaderboard/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
+import { securityCheck } from "@/lib/security";
 
 export async function GET(req: Request) {
   try {
-    // ⭐ KÖZPONTI SECURITY CHECK
     const sec = securityCheck(req);
     if (sec) return sec;
 
-    // --- 1) Speed Index adatok lekérése ---
-    const [rows]: any = await db.query(
-      `
+    // 1️⃣ Aktuális aggregált adatok
+    const [rows]: any = await db.query(`
       SELECT 
         source,
         avg_delay_minutes AS avgDelay,
@@ -19,10 +17,8 @@ export async function GET(req: Request) {
         updated_at AS updatedAt
       FROM speed_index
       ORDER BY avg_delay_minutes ASC
-      `
-    );
+    `);
 
-    // --- 2) Ha nincs adat ---
     if (!rows || rows.length === 0) {
       return NextResponse.json({
         success: true,
@@ -30,20 +26,36 @@ export async function GET(req: Request) {
       });
     }
 
-    // --- 3) Válasz összeállítása ---
-    const leaderboard = rows.map((r: any) => ({
-      source: r.source,
-      avgDelay: Number(r.avgDelay),
-      medianDelay: Number(r.medianDelay),
-      updatedAt: r.updatedAt,
-    }));
+    // 2️⃣ History lekérés source-onként (utolsó 20 mérés)
+    const leaderboard = await Promise.all(
+      rows.map(async (r: any) => {
+        const [historyRows]: any = await db.query(
+          `
+          SELECT delay_minutes
+          FROM speed_index_history
+          WHERE source = ?
+          ORDER BY created_at DESC
+          LIMIT 20
+          `,
+          [r.source]
+        );
 
-    // --- 4) JSON válasz ---
+        return {
+          source: r.source,
+          avgDelay: Number(r.avgDelay),
+          medianDelay: Number(r.medianDelay),
+          updatedAt: r.updatedAt,
+          history: historyRows
+            .map((h: any) => Number(h.delay_minutes))
+            .reverse(), // időrendbe fordítjuk
+        };
+      })
+    );
+
     return NextResponse.json({
       success: true,
       leaderboard,
     });
-
   } catch (err) {
     console.error("SpeedIndex API error:", err);
     return NextResponse.json(

@@ -1,18 +1,16 @@
 "use client";
 
 import useSWR from "swr";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { useUserStore } from "@/store/useUserStore";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  Cell,
-} from "recharts";
-import { motion } from "framer-motion";
+
+interface LeaderboardItem {
+  source: string;
+  avgDelay: number;
+  medianDelay: number;
+  updatedAt: string;
+  history: number[]; // sparkline adatok
+}
 
 const fetcher = (url: string) =>
   fetch(url, {
@@ -20,13 +18,6 @@ const fetcher = (url: string) =>
       "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
     },
   }).then((r) => r.json());
-
-interface LeaderboardItem {
-  source: string;
-  avgDelay: number;
-  medianDelay: number;
-  updatedAt: string;
-}
 
 export default function WSourceSpeedIndexLeaderboard() {
   const theme = useUserStore((s) => s.theme);
@@ -37,6 +28,8 @@ export default function WSourceSpeedIndexLeaderboard() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
+  const previousRanking = useRef<Record<string, number>>({});
+
   const { data, error, isLoading } = useSWR<{
     success: boolean;
     leaderboard: LeaderboardItem[];
@@ -44,140 +37,163 @@ export default function WSourceSpeedIndexLeaderboard() {
     refreshInterval: 60000,
   });
 
-  const sortedItems = useMemo(() => {
+  const items = useMemo(() => {
     if (!data?.leaderboard) return [];
-    return [...data.leaderboard].sort((a, b) => a.avgDelay - b.avgDelay);
+    const sorted = [...data.leaderboard].sort(
+      (a, b) => a.avgDelay - b.avgDelay
+    );
+
+    sorted.forEach((item, index) => {
+      if (!(item.source in previousRanking.current)) {
+        previousRanking.current[item.source] = index;
+      }
+    });
+
+    return sorted;
   }, [data]);
 
-  if (isLoading) {
+  if (isLoading)
+    return <div className="p-12 text-center">Betöltés...</div>;
+
+  if (error || !data?.success)
     return (
-      <div className="p-6 text-center animate-pulse opacity-70">
-        Speed Index betöltése...
+      <div className="p-12 text-center text-red-500">
+        Hiba az adatok betöltésekor
       </div>
     );
-  }
 
-  if (error || !data?.success) {
-    return (
-      <div className="p-6 text-red-500 text-center">
-        Nem sikerült betölteni az adatokat.
-      </div>
-    );
-  }
-
-  const getBarColor = (delay: number) => {
-    if (delay <= 1)
-      return isDark ? "url(#greenGradientDark)" : "url(#greenGradient)";
-    if (delay <= 5)
-      return isDark ? "url(#yellowGradientDark)" : "url(#yellowGradient)";
-    return isDark ? "url(#redGradientDark)" : "url(#redGradient)";
-  };
+  const maxDelay = Math.max(...items.map((i) => i.avgDelay));
 
   return (
     <div
-      className={`relative p-8 rounded-2xl border backdrop-blur-xl transition-all duration-300
+      className={`relative p-12 rounded-3xl backdrop-blur-xl border transition-all duration-500
       ${
         isDark
-          ? "bg-gradient-to-br from-[#0f172a] to-[#111827] border-slate-800 text-white"
-          : "bg-gradient-to-br from-white to-slate-50 border-slate-200 text-slate-900"
-      } shadow-2xl`}
+          ? "bg-white/5 border-white/10 text-white"
+          : "bg-white/70 border-slate-200 text-slate-900"
+      } shadow-[0_20px_60px_rgba(0,0,0,0.25)]`}
     >
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <h3 className="text-2xl font-bold tracking-tight">
-          ⚡ Speed Index Leaderboard
-        </h3>
-        <span className="text-sm opacity-60">
-          Automatikus frissítés · 60 mp
-        </span>
+      <div className="flex justify-between items-center mb-14">
+        <h2 className="text-3xl font-semibold tracking-tight">
+          ⚡ Speed Index
+        </h2>
+        <div className="text-sm opacity-60">
+          Live ranking · 60 mp refresh
+        </div>
       </div>
 
-      {/* Top 3 Highlight */}
-      <div className="grid md:grid-cols-3 gap-4 mb-10">
-        {sortedItems.slice(0, 3).map((item, i) => (
-          <motion.div
-            key={item.source}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            className={`p-5 rounded-xl border relative overflow-hidden
-            ${
-              i === 0
-                ? "border-emerald-500 shadow-lg shadow-emerald-500/20"
-                : "border-slate-700"
-            }`}
-          >
-            <div className="text-sm opacity-60 mb-1">
-              #{i + 1} Leggyorsabb
-            </div>
-            <div className="text-lg font-semibold">{item.source}</div>
-            <div className="mt-2 text-3xl font-bold">
-              {item.avgDelay.toFixed(2)} perc
-            </div>
-            <div className="text-sm opacity-60">
-              Medián: {item.medianDelay.toFixed(2)} perc
-            </div>
-          </motion.div>
-        ))}
-      </div>
+      <div className="space-y-6">
+        {items.map((item, index) => {
+          const previousIndex = previousRanking.current[item.source];
+          const delta = previousIndex - index;
 
-      {/* Chart */}
-      <div className="w-full h-96">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={sortedItems}>
-            <defs>
-              <linearGradient id="greenGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#34d399" />
-                <stop offset="100%" stopColor="#059669" />
-              </linearGradient>
-              <linearGradient id="yellowGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#facc15" />
-                <stop offset="100%" stopColor="#ca8a04" />
-              </linearGradient>
-              <linearGradient id="redGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#f87171" />
-                <stop offset="100%" stopColor="#b91c1c" />
-              </linearGradient>
-            </defs>
+          previousRanking.current[item.source] = index;
 
-            <XAxis
-              dataKey="source"
-              stroke={isDark ? "#94a3b8" : "#64748b"}
-              tick={{ fontSize: 13 }}
-            />
-            <YAxis
-              stroke={isDark ? "#94a3b8" : "#64748b"}
-              tick={{ fontSize: 13 }}
-              label={{
-                value: "Késés (perc)",
-                angle: -90,
-                position: "insideLeft",
-                fill: isDark ? "#94a3b8" : "#64748b",
-              }}
-            />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: isDark ? "#1e293b" : "#ffffff",
-                borderRadius: "12px",
-                border: "1px solid #334155",
-              }}
-              formatter={(value: any) => `${value} perc`}
-            />
-            <Bar
-              dataKey="avgDelay"
-              radius={[8, 8, 0, 0]}
-              animationDuration={1200}
+          const percentage = (item.avgDelay / maxDelay) * 100;
+
+          return (
+            <div
+              key={item.source}
+              className={`group relative p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1
+              ${
+                isDark
+                  ? "bg-white/5 border-white/10 hover:bg-white/10"
+                  : "bg-white border-slate-200 hover:bg-slate-50"
+              }
+              shadow-lg hover:shadow-2xl`}
             >
-              {sortedItems.map((item, index) => (
-                <Cell
-                  key={index}
-                  fill={getBarColor(item.avgDelay)}
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-6">
+                  <div className="text-lg font-semibold w-8">
+                    #{index + 1}
+                  </div>
+
+                  <div>
+                    <div className="text-lg font-medium">
+                      {item.source}
+                    </div>
+                    <div className="text-xs opacity-50">
+                      Medián: {item.medianDelay.toFixed(1)} perc
+                    </div>
+                  </div>
+
+                  {/* Delta indicator */}
+                  {delta !== 0 && (
+                    <div
+                      className={`text-sm font-semibold px-2 py-1 rounded-full
+                      ${
+                        delta > 0
+                          ? "bg-emerald-500/20 text-emerald-400"
+                          : "bg-red-500/20 text-red-400"
+                      }`}
+                    >
+                      {delta > 0 ? `↑ ${delta}` : `↓ ${Math.abs(delta)}`}
+                    </div>
+                  )}
+                </div>
+
+                <div className="text-xl font-bold">
+                  {item.avgDelay.toFixed(1)} perc
+                </div>
+              </div>
+
+              {/* Sparkline */}
+              <Sparkline data={item.history} isDark={isDark} />
+
+              {/* Progress bar */}
+              <div className="mt-4 w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-emerald-400 via-yellow-400 to-red-500 transition-all duration-700"
+                  style={{ width: `${percentage}%` }}
                 />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
+  );
+}
+
+/* ============================= */
+/* Mini Sparkline Component */
+/* ============================= */
+
+function Sparkline({
+  data,
+  isDark,
+}: {
+  data: number[];
+  isDark: boolean;
+}) {
+  if (!data || data.length === 0) return null;
+
+  const max = Math.max(...data);
+  const min = Math.min(...data);
+  const points = data
+    .map((value, i) => {
+      const x = (i / (data.length - 1)) * 100;
+      const y = 100 - ((value - min) / (max - min || 1)) * 100;
+      return `${x},${y}`;
+    })
+    .join(" ");
+
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      className="w-full h-16 mt-2"
+      preserveAspectRatio="none"
+    >
+      <polyline
+        fill="none"
+        stroke={isDark ? "#38bdf8" : "#0ea5e9"}
+        strokeWidth="2"
+        points={points}
+        style={{
+          filter: "drop-shadow(0 0 4px rgba(56,189,248,0.6))",
+        }}
+      />
+    </svg>
   );
 }
