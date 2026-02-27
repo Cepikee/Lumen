@@ -10,9 +10,11 @@ import WSourceClickbaitRatio from "./WSourceClickbaitRatio";
 import WSourceSpeedIndexLeaderboard from "./WSourceSpeedIndexLeaderboard";
 import WSourceSpeedIndexDistribution from "./WSourceSpeedIndexDistribution";
 import WSourceSpeedIndexTimeline from "./WSourceSpeedIndexTimeline";
-
+import { motion, AnimatePresence } from "framer-motion";
 export default function WSourceOsszehasonlitas() {
   const theme = useUserStore((s) => s.theme);
+  const [showInfo, setShowInfo] = useState(false);
+
 
   const isDark =
     theme === "dark" ||
@@ -143,11 +145,23 @@ export default function WSourceOsszehasonlitas() {
                   backgroundColor: "var(--bs-body-bg)",
                 }}
               >
-                <h4 className="text-md font-semibold mb-2 text-center">
-                  Rangsor
-                </h4>
+                                <div className="flex justify-center items-center gap-2 mb-4">
+                  <h4 className="text-md font-semibold text-center">
+                    Speed Index magyarázat
+                  </h4>
+
+                  <button
+                    onClick={() => setShowInfo(true)}
+                    className="text-slate-400 hover:text-slate-200 text-lg"
+                  >
+                    ⓘ
+                  </button>
+                </div>
+
                 <WSourceSpeedIndexLeaderboard />
-              </div>
+
+                {showInfo && <SpeedIndexInfoModal onClose={() => setShowInfo(false)} />}
+
 
               {/* --- 2) Speed Index eloszlás --- */}
               <div
@@ -250,4 +264,50 @@ export default function WSourceOsszehasonlitas() {
       )}
     </div>
   );
+import { motion } from "framer-motion";
+
+function SpeedIndexInfoModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0 }}
+        className="bg-[#0f172a] text-white p-8 rounded-2xl max-w-lg w-full border border-white/10 shadow-2xl"
+      >
+        <h2 className="text-xl font-bold mb-4">Mi az a Speed Index?</h2>
+
+        <div className="space-y-4 text-sm opacity-90 leading-relaxed">
+          <p>
+            A Speed Index azt mutatja meg, hogy egy hírportál mennyivel később
+            ír ugyanarról a témáról, mint a legelső megjelenés.
+          </p>
+
+          <p>
+            Ha egy portál 0 percet mutat, akkor gyakran elsőként ír. Ha 100+
+            percet mutat, akkor sok témában később reagál.
+          </p>
+
+          <p>
+            Csak azok a portálok jelennek meg, amelyek ugyanarról a témáról
+            írnak más portálokkal együtt, és van időkülönbség a cikkek között.
+          </p>
+
+          <p>
+            A medián 0 azt jelenti, hogy sokszor ők is elsők, de amikor késnek,
+            akkor nagyot.
+          </p>
+        </div>
+
+        <button
+          onClick={onClose}
+          className="mt-6 w-full py-2 rounded-xl bg-white/10 hover:bg-white/20 transition"
+        >
+          Bezárás
+        </button>
+      </motion.div>
+    </div>
+  );
+}
+ 
 }
