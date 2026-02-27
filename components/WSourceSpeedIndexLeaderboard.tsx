@@ -143,12 +143,6 @@ export default function WSourceSpeedIndexLeaderboard() {
 
                 {/* RIGHT SIDE */}
                 <div className="flex items-center gap-6 shrink-0">
-                  <div className="w-28 h-10">
-                    <Sparkline
-                      baseValue={item.avgDelay}
-                      isDark={isDark}
-                    />
-                  </div>
 
                   <div className="text-xl font-bold w-24 text-right">
                     {item.avgDelay.toFixed(1)} perc
@@ -173,49 +167,3 @@ export default function WSourceSpeedIndexLeaderboard() {
   );
 }
 
-/* ============================= */
-/* Sparkline */
-/* ============================= */
-
-function Sparkline({
-  baseValue,
-  isDark,
-}: {
-  baseValue: number;
-  isDark: boolean;
-}) {
-  const data = Array.from({ length: 20 }, (_, i) => {
-    const variation = Math.sin(i / 2) * 4;
-    return baseValue + variation;
-  });
-
-  const max = Math.max(...data);
-  const min = Math.min(...data);
-
-  const points = data
-    .map((value, i) => {
-      const x = (i / (data.length - 1)) * 100;
-      const y =
-        100 -
-        ((value - min) / (max - min || 1)) * 100;
-      return `${x},${y}`;
-    })
-    .join(" ");
-
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      className="w-full h-full"
-      preserveAspectRatio="none"
-    >
-      <polyline
-        fill="none"
-        stroke={isDark ? "#38bdf8" : "#0ea5e9"}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        points={points}
-      />
-    </svg>
-  );
-}
