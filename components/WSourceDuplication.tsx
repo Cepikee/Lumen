@@ -135,11 +135,13 @@ Eredeti: ${item.original}
 
   return (
     <>
-      <div
-        className={`relative z-10 p-12 rounded-3xl transition-all duration-500
-          ${isDark ? "bg-white/5 border-white/10 text-white" : "bg-white/70 border-slate-200 text-slate-900"}
-          shadow-[0_20px_60px_rgba(2,6,23,0.08)] border`}
-      >
+                <div
+            className={`relative z-10 p-12 rounded-3xl transition-all duration-500
+              text-slate-900
+              ${isDark ? "text-white" : "text-slate-900"}
+              bg-transparent border-transparent shadow-none border`}
+          >
+
         <div className="flex items-center justify-center gap-4 mb-6">
           <h2 className="text-3xl font-semibold tracking-tight text-center">
             Másolási arány források szerint
