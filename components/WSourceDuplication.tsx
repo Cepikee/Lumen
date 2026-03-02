@@ -61,18 +61,18 @@ export default function WSourceDuplication() {
     },
   ];
 
-  // --- SZÍNES PALETTA (minden oszlop más szín) ---
+  // --- SZÍNES PALETTA ---
   const palette = [
-    "#ef4444", // piros
-    "#f97316", // narancs
-    "#eab308", // sárga
-    "#22c55e", // zöld
-    "#06b6d4", // türkiz
-    "#3b82f6", // kék
-    "#8b5cf6", // lila
-    "#ec4899", // pink
-    "#14b8a6", // teal
-    "#a855f7", // violet
+    "#ef4444",
+    "#f97316",
+    "#eab308",
+    "#22c55e",
+    "#06b6d4",
+    "#3b82f6",
+    "#8b5cf6",
+    "#ec4899",
+    "#14b8a6",
+    "#a855f7",
   ];
 
   const options: ApexCharts.ApexOptions = {
@@ -81,6 +81,8 @@ export default function WSourceDuplication() {
       toolbar: { show: false },
       animations: { enabled: true },
       foreColor: isDark ? "#fff" : "#000",
+      zoom: { enabled: false },
+      sparkline: { enabled: false },
     },
     theme: {
       mode: isDark ? "dark" : "light",
@@ -90,7 +92,7 @@ export default function WSourceDuplication() {
         borderRadius: 6,
         horizontal: false,
         columnWidth: "45%",
-        distributed: true, // <-- EZ TESZI SZÍNESSÉ
+        distributed: true,
       },
     },
     colors: palette,
@@ -105,21 +107,25 @@ export default function WSourceDuplication() {
     },
     xaxis: {
       categories: items.map((i) => i.source),
+      crosshairs: { show: false }, // <-- NINCS SZÜRKE VONAL
       labels: {
         rotate: -30,
         style: {
           colors: items.map(() => (isDark ? "#fff" : "#000")),
-          fontWeight: 600, // <-- FÉLKÖVÉR FORRÁSNEVEK
+          fontWeight: 600,
         },
       },
     },
     yaxis: {
+      crosshairs: { show: false }, // <-- NINCS SZÜRKE VONAL
       labels: {
         formatter: (val) => `${val}%`,
       },
     },
     tooltip: {
       theme: isDark ? "dark" : "light",
+      x: { show: false },
+      marker: { show: false },
       y: {
         formatter: (val, opts) => {
           const item = items[opts.dataPointIndex];
