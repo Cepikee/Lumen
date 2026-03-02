@@ -2182,3 +2182,42 @@ html.theme-dark .nav-link {
 .wht-source-activity .apexcharts-toolbar { padding: 0 !important; margin: 0 !important; box-sizing: border-box; }
 .wht-source-activity .apexcharts-svg title { display: none !important; }
 #custom-apex-tooltip-source { z-index: 999999; pointer-events: none; position: fixed; display: none; transform: none; }
+
+
+/* alap: a chart belső és környező rétegei a rendszer body bg változóját használják */
+.apexcharts-canvas,
+.apexcharts-plot-area,
+.apexcharts-grid,
+.apexcharts-legend,
+.apexcharts-tooltip,
+.apexcharts-inner,
+.apexcharts-series {
+  background: var(--bs-body-bg, #f8fafc) !important;
+  color: inherit;
+}
+
+/* plot area lekerekítése, ha a külső konténernek border-radius-a van */
+.apexcharts-plot-area {
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+/* legend finomítás: áttetsző, de a változót használja */
+.apexcharts-legend {
+  background: color-mix(in srgb, var(--bs-body-bg, #f8fafc) 92%, transparent) !important;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* tooltip háttér is a változóhoz igazítva (ha tooltip külön dobozban jelenik meg) */
+.apexcharts-tooltip {
+  background: var(--bs-body-bg, #f8fafc) !important;
+  color: inherit !important;
+  border: 1px solid color-mix(in srgb, var(--bs-body-bg, #f8fafc) 60%, #000 40%) !important;
+}
+
+/* ha a projektben dark theme osztályt használsz (pl. .dark), finomhangolás */
+.dark .apexcharts-canvas,
+[data-theme="dark"] .apexcharts-canvas {
+  background: var(--bs-body-bg, #0f172a) !important;
+}

@@ -87,6 +87,7 @@ export default function WSourceDuplication() {
       animations: { enabled: true },
       foreColor: isDark ? "#fff" : "#000",
       zoom: { enabled: false },
+      background: "var(--bs-body-bg, #f8fafc)" // <-- itt a változó + fallback
     },
     theme: { mode: isDark ? "dark" : "light" },
     plotOptions: {
