@@ -179,23 +179,24 @@ export default function WSourceClickbaitRatio() {
       </div>
 
       {/* Info modal — clickbait magyarázat */}
-      <UtomModal show={openInfo} onClose={() => setOpenInfo(false)} title="Mi az a clickbait arány?">
+     <UtomModal show={openInfo} onClose={() => setOpenInfo(false)} title="Mi az a clickbait arány?">
         <div className="text-sm leading-relaxed">
           <p className="mb-3">
-            A clickbait arány azt mutatja meg, hogy egy adott forrás milyen gyakran használ olyan cím- vagy bevezetőelemeket,
-            amelyek célja a kattintás maximalizálása (érzelmi túlzás, félrevezető fókusz, túlzó állítások).
+            Ez a mutató azt mutatja meg, hogy egy forrás mennyire gyakran használ olyan címeket vagy bevezeté­seket,
+            amelyek elsősorban a kattintásra ösztönöznek.
           </p>
 
           <p className="mb-2">
-            <strong>Mérés alapja:</strong> automatikus cím- és lead‑elemzés szabályok és gépi tanulás alapján.
+            A rendszer minden cikket értékel egy belső pontszámmal; ha ez a pontszám egy előre meghatározott küszöböt eléri,
+            a cikket clickbaitnek tekintjük.
           </p>
 
           <p className="mb-2">
-            <strong>Skála:</strong> az érték százalékban van megadva — magasabb százalék több clickbait jellegű tartalmat jelez.
+            A grafikonon látható százalék azt mutatja, hogy az adott forrásnál a vizsgált cikkek hány százaléka érte el ezt a küszöböt.
           </p>
 
           <p className="mt-3">
-            Fontos: ez egy automatikus mutató, nem helyettesíti az emberi szerkesztői értékelést; kontextus és témaválasztás is befolyásolhatja az eredményt.
+            Fontos: ez automatikus, statisztikai jellegű mutató — segít összehasonlítani forrásokat, de nem helyettesíti az emberi értékelést.
           </p>
         </div>
       </UtomModal>
