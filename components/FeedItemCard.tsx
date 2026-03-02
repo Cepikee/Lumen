@@ -78,13 +78,9 @@ function getSourceKey(sourceId: number) {
 
 export default function FeedItemCard({
   item,
-  expanded,
-  onToggle,
   viewMode,
 }: {
   item: FeedItem;
-  expanded: boolean;
-  onToggle: () => void;
   viewMode: "card" | "compact";
 }) {
   const url = item.url || "";
@@ -93,153 +89,87 @@ export default function FeedItemCard({
   const borderColor = getSourceColor(item.source_id);
 
   const wrapperFont = inter.className;
-  const baseText = "text-[17px] leading-[1.5] font-medium tracking-[0.2px] text-[var(--feed-text)]";
-  const titleClasses = "text-[1.15rem] leading-[1.3] font-semibold text-[#4da3ff] no-underline hover:text-[#77b8ff]";
-  const detailedClasses = "text-[15px] leading-[1.75] text-[var(--feed-text)] tracking-[0.2px]";
+
+  const baseText =
+    "text-[17px] leading-[1.6] font-medium tracking-[0.2px] text-[var(--feed-text)]";
+
+  const titleClasses =
+    "text-[1.15rem] leading-[1.3] font-semibold text-[#4da3ff] hover:text-[#77b8ff] transition-colors";
 
   const badgeClass = `badge source-${sourceKey}`;
 
-  if (viewMode === "compact") {
-    return (
-      <div className={`${wrapperFont} feed-wrapper compact`}>
-        <div
-          className={`feed-card compact mb-2 p-2 rounded theme-card border-l-4`}
-          data-source-text={sourceText}
-          style={{ backgroundColor: "var(--bs-body-bg)", borderLeftColor: borderColor }}
-        >
-          <div className="flex justify-between">
-            <div className="flex items-center gap-3">
-              <span className={badgeClass} aria-hidden>{sourceText}</span>
-
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`title-compact ${titleClasses} max-w-[60%] line-clamp-2`}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {item.title}
-              </a>
-            </div>
-
-            {item.ai_clean === 1 && (
-              <span className={badgeClass} title="Ez a tartalom teljes egészében AI által lett megfogalmazva.">
-                🤖 AI
-              </span>
-            )}
-          </div>
-
-          <div className={`mt-2 ${expanded ? "" : "clamp-2"} content-compact ${baseText}`}>
-            <ReactMarkdown>{item.content}</ReactMarkdown>
-          </div>
-
-          {/* Link-only navigation: Link visz a cikk oldalára, nincs körvonal */}
-          <div className="mt-2">
-            <Link href={`/cikk/${item.id}`} legacyBehavior>
-              <a
-                className="text-sm text-sky-500 hover:underline"
-                onClick={(e) => { e.stopPropagation(); }}
-                aria-label={`Részletes elemzés: ${item.title}`}
-              >
-                {expanded ? "🔽 Bezárás" : "📘 Részletek"}
-              </a>
-            </Link>
-          </div>
-
-          {expanded && (
-            <div className="mt-2 p-2 rounded theme-card-inner" style={{ backgroundColor: "var(--feed-bg-inner)" }}>
-              <div className={detailedClasses}>
-                <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
-              </div>
-            </div>
-          )}
-
-          <div className="flex justify-between items-center mt-2">
-            <p className="text-muted text-[0.9rem] mb-0" title={formatFullDate(item.created_at)} style={{ color: "var(--article-muted)" }}>
-              {formatRelativeTime(item.created_at)}
-            </p>
-
-            {item.category && (
-              <span className="category-compact text-[1.05rem] opacity-95 uppercase">{item.category}</span>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className={`${wrapperFont} feed-wrapper`}>
-      <div
-        className={`feed-card mb-3 p-3 rounded shadow-sm theme-card border-l-4`}
-        data-source-text={sourceText}
-        style={{ backgroundColor: "var(--bs-body-bg)", borderLeftColor: borderColor }}
+      <Link
+        href={`/cikk/${item.id}`}
+        className="block no-underline"
       >
-        <div className="card-body relative z-10">
-          <h5 className="card-title flex justify-between items-start m-0">
-            <div className="flex items-center gap-3 max-w-[78%]">
-              <span className={badgeClass}>{sourceText}</span>
+        <div
+          className={`feed-card mb-3 p-3 rounded shadow-sm theme-card border-l-4 cursor-pointer hover:shadow-lg transition-all duration-200`}
+          data-source-text={sourceText}
+          style={{
+            backgroundColor: "var(--bs-body-bg)",
+            borderLeftColor: borderColor,
+          }}
+        >
+          <div className="card-body relative z-10">
 
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${titleClasses} title-card max-w-full line-clamp-2`}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {item.title}
-              </a>
-            </div>
+            {/* HEADER */}
+            <h5 className="card-title flex justify-between items-start m-0">
+              <div className="flex items-center gap-3 max-w-[78%]">
+                <span className={badgeClass}>{sourceText}</span>
 
-            {item.ai_clean === 1 && (
-              <span className={badgeClass} title="Ez a tartalom teljes egészében AI által lett megfogalmazva.">
-                AI‑fogalmazás
-              </span>
-            )}
-          </h5>
-
-          <div className={`mt-2 content-card ${baseText}`}>
-            <ReactMarkdown>{item.content}</ReactMarkdown>
-          </div>
-
-          {/* Link-only navigation: Link visz a cikk oldalára, nincs körvonal */}
-          <div className="mt-2">
-            <Link href={`/cikk/${item.id}`} legacyBehavior>
-              <a
-                className="text-sm text-sky-500 hover:underline"
-                onClick={(e) => e.stopPropagation()}
-                aria-label={`Részletes elemzés: ${item.title}`}
-              >
-                {expanded ? "🔽 Bezárás" : "📘 Részletes elemzésért kattints ide!"}
-              </a>
-            </Link>
-          </div>
-
-          {expanded && (
-            <div className="mt-3 p-3 rounded theme-card-inner" style={{ backgroundColor: "var(--feed-bg-inner)" }}>
-              <div className={detailedClasses}>
-                {item.detailed_content ? (
-                  <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
-                ) : (
-                  <p className="text-warning text-sm mb-0">Ehhez a hírhez nincs elmentve részletes elemzés.</p>
-                )}
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${titleClasses} line-clamp-2`}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {item.title}
+                </a>
               </div>
-            </div>
-          )}
 
-          <div className="flex justify-between items-center mt-3">
-            <p className="text-muted text-[0.95rem] mb-0" title={formatFullDate(item.created_at)} style={{ color: "var(--article-muted)" }}>
-              {formatRelativeTime(item.created_at)}
+              {item.ai_clean === 1 && (
+                <span
+                  className={badgeClass}
+                  title="Ez a tartalom teljes egészében AI által lett megfogalmazva."
+                >
+                  🤖 AI
+                </span>
+              )}
+            </h5>
+
+            {/* SUMMARY */}
+            <div className={`mt-3 ${baseText}`}>
+              <ReactMarkdown>{item.content}</ReactMarkdown>
+            </div>
+
+            {/* CTA */}
+            <p className="mt-3 text-sm text-sky-500">
+              📘 Részletes elemzés megtekintéséhez kattints a kártyára
             </p>
 
-            {item.category && (
-              <span className="category-card text-[1.05rem] opacity-95 uppercase">{item.category}</span>
-            )}
+            {/* FOOTER */}
+            <div className="flex justify-between items-center mt-3">
+              <p
+                className="text-muted text-[0.95rem] mb-0"
+                title={formatFullDate(item.created_at)}
+                style={{ color: "var(--article-muted)" }}
+              >
+                {formatRelativeTime(item.created_at)}
+              </p>
+
+              {item.category && (
+                <span className="category-card text-[1.05rem] opacity-95 uppercase">
+                  {item.category}
+                </span>
+              )}
+            </div>
+
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }
-
-//*STABIL VERZIÓ, NEM SZABAD MÓDOSÍTANI*//
