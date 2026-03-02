@@ -2,6 +2,8 @@
 
 import useSWR from "swr";
 import { useUserStore } from "@/store/useUserStore";
+import { useState } from "react";
+import UtomModal from "@/components/UtomModal";
 import {
   BarChart,
   Bar,
@@ -22,6 +24,7 @@ const fetcher = (url: string) =>
 
 export default function WSourceClickbaitRatio() {
   const theme = useUserStore((s) => s.theme);
+  const [openInfo, setOpenInfo] = useState(false);
 
   const isDark =
     theme === "dark" ||
@@ -53,101 +56,149 @@ export default function WSourceClickbaitRatio() {
   };
 
   return (
-    <div
-      /* újrahasznosítjuk a meglévő "ghost" osztályt, nincs új CSS */
-      className={`relative p-10 rounded-3xl overflow-hidden wsource-card--ghost ${isDark ? "text-white" : "text-slate-900"}`}
-      style={{ background: "var(--bs-body-bg, #f8fafc)" }}
-    >
-      {/* subtle background glow */}
+    <>
       <div
-        className="absolute -top-32 -right-32 w-96 h-96 rounded-full blur-3xl pointer-events-none"
-        style={{
-          backgroundColor: isDark
-            ? "rgba(79,70,229,0.10)"
-            : "rgba(0,0,0,0.03)",
-        }}
-      />
-      <div
-        className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full blur-3xl pointer-events-none"
-        style={{
-          backgroundColor: isDark
-            ? "rgba(147,51,234,0.10)"
-            : "rgba(0,0,0,0.03)",
-        }}
-      />
+        /* újrahasznosítjuk a meglévő "ghost" osztályt, nincs új CSS */
+        className={`relative p-10 rounded-3xl overflow-hidden wsource-card--ghost ${isDark ? "text-white" : "text-slate-900"}`}
+        style={{ background: "var(--bs-body-bg, #f8fafc)" }}
+      >
+        {/* header: cím + info gomb (26x26, csak SVG) */}
+        <div className="flex items-center justify-center gap-4 mb-6">
+          <h2 className="text-3xl font-semibold tracking-tight text-center">
+            Források clickbait arányai
+          </h2>
 
-      {/* MAIN CHART */}
-      <div className="relative z-10 h-[440px]">
-        <ResponsiveContainer width="100%" height="100%" className="apexcharts-plot-area">
-          <BarChart
-            key={isDark ? "dark" : "light"}
-            layout="vertical"
-            data={sources}
-            margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
+          <button
+            onClick={() => setOpenInfo(true)}
+            aria-label="Információ"
+            type="button"
+            className="w-[26px] h-[26px] p-0 m-0 flex items-center justify-center bg-transparent border-0"
+            style={{ width: 26, height: 26 }}
           >
-            <XAxis
-              type="number"
-              domain={[0, 100]}
-              stroke={isDark ? "#cbd5e1" : "#475569"}
-              tick={{ fill: isDark ? "#e2e8f0" : "#334155" }}
-              tickFormatter={(v) => `${v}%`}
+            <img
+              src="/icons/info-svg.svg"
+              alt="info"
+              className="w-[26px] h-[26px] object-contain pointer-events-none"
+              width={26}
+              height={26}
+              style={{ display: "block" }}
             />
+          </button>
+        </div>
 
-            <YAxis
-              type="category"
-              dataKey="name"
-              width={130}
-              stroke={isDark ? "#e2e8f0" : "#334155"}
-              tick={{ fill: isDark ? "#e2e8f0" : "#334155" }}
-            />
+        {/* subtle background glow */}
+        <div
+          className="absolute -top-32 -right-32 w-96 h-96 rounded-full blur-3xl pointer-events-none"
+          style={{
+            backgroundColor: isDark
+              ? "rgba(79,70,229,0.10)"
+              : "rgba(0,0,0,0.03)",
+          }}
+        />
+        <div
+          className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full blur-3xl pointer-events-none"
+          style={{
+            backgroundColor: isDark
+              ? "rgba(147,51,234,0.10)"
+              : "rgba(0,0,0,0.03)",
+          }}
+        />
 
-            {/* cursor={false} kikapcsolja a hover háttér "szürke izét" */}
-            <Tooltip
-              cursor={false}
-              contentStyle={{
-                backgroundColor: isDark ? "#1e293b" : "#ffffff",
-                border: isDark ? "1px solid #334155" : "1px solid #e5e7eb",
-                borderRadius: "12px",
-                color: isDark ? "#f1f5f9" : "#0f172a",
-              }}
-              labelStyle={{
-                color: isDark ? "#f8fafc" : "#0f172a",
-                fontWeight: 600,
-              }}
-              itemStyle={{
-                color: isDark ? "#ffffff" : "#000000",
-                fontWeight: 500,
-              }}
-              formatter={(value?: number) => [
-                `${(value ?? 0).toFixed(1)}%`,
-                "Clickbait arány",
-              ]}
-            />
-
-            <Bar dataKey="ratio" radius={[0, 14, 14, 0]} animationDuration={900}>
-              <LabelList
-                dataKey="ratio"
-                position="right"
-                fill={isDark ? "#ffffff" : "#000000"}
-                formatter={(value: any) => {
-                  const num = Number(value);
-                  return isNaN(num) ? "" : `${num.toFixed(1)}%`;
-                }}
-                style={{ fontSize: "14px", fontWeight: 600 }}
+        {/* MAIN CHART */}
+        <div className="relative z-10 h-[440px]">
+          <ResponsiveContainer width="100%" height="100%" className="apexcharts-plot-area">
+            <BarChart
+              key={isDark ? "dark" : "light"}
+              layout="vertical"
+              data={sources}
+              margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
+            >
+              <XAxis
+                type="number"
+                domain={[0, 100]}
+                stroke={isDark ? "#cbd5e1" : "#475569"}
+                tick={{ fill: isDark ? "#e2e8f0" : "#334155" }}
+                tickFormatter={(v) => `${v}%`}
               />
 
-              {sources.map((entry: any, index: number) => (
-                <Cell
-                  key={index}
-                  fill={getBarColor(entry.ratio)}
-                  stroke={index < 3 ? "rgba(255,255,255,0.4)" : "none"}
-                  strokeWidth={index < 3 ? 2 : 0}
+              <YAxis
+                type="category"
+                dataKey="name"
+                width={130}
+                stroke={isDark ? "#e2e8f0" : "#334155"}
+                tick={{ fill: isDark ? "#e2e8f0" : "#334155" }}
+              />
+
+              {/* hover háttér kikapcsolva */}
+              <Tooltip
+                cursor={false}
+                contentStyle={{
+                  backgroundColor: isDark ? "#1e293b" : "#ffffff",
+                  border: isDark ? "1px solid #334155" : "1px solid #e5e7eb",
+                  borderRadius: "12px",
+                  color: isDark ? "#f1f5f9" : "#0f172a",
+                }}
+                labelStyle={{
+                  color: isDark ? "#f8fafc" : "#0f172a",
+                  fontWeight: 600,
+                }}
+                itemStyle={{
+                  color: isDark ? "#ffffff" : "#000000",
+                  fontWeight: 500,
+                }}
+                formatter={(value?: number) => [
+                  `${(value ?? 0).toFixed(1)}%`,
+                  "Clickbait arány",
+                ]}
+              />
+
+              <Bar dataKey="ratio" radius={[0, 14, 14, 0]} animationDuration={900}>
+                <LabelList
+                  dataKey="ratio"
+                  position="right"
+                  fill={isDark ? "#ffffff" : "#000000"}
+                  formatter={(value: any) => {
+                    const num = Number(value);
+                    return isNaN(num) ? "" : `${num.toFixed(1)}%`;
+                  }}
+                  style={{ fontSize: "14px", fontWeight: 600 }}
                 />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+
+                {sources.map((entry: any, index: number) => (
+                  <Cell
+                    key={index}
+                    fill={getBarColor(entry.ratio)}
+                    stroke={index < 3 ? "rgba(255,255,255,0.4)" : "none"}
+                    strokeWidth={index < 3 ? 2 : 0}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
-    </div>
+
+      {/* Info modal — clickbait magyarázat */}
+      <UtomModal show={openInfo} onClose={() => setOpenInfo(false)} title="Mi az a clickbait arány?">
+        <div className="text-sm leading-relaxed">
+          <p className="mb-3">
+            A clickbait arány azt mutatja meg, hogy egy adott forrás milyen gyakran használ olyan cím- vagy bevezetőelemeket,
+            amelyek célja a kattintás maximalizálása (érzelmi túlzás, félrevezető fókusz, túlzó állítások).
+          </p>
+
+          <p className="mb-2">
+            <strong>Mérés alapja:</strong> automatikus cím- és lead‑elemzés szabályok és gépi tanulás alapján.
+          </p>
+
+          <p className="mb-2">
+            <strong>Skála:</strong> az érték százalékban van megadva — magasabb százalék több clickbait jellegű tartalmat jelez.
+          </p>
+
+          <p className="mt-3">
+            Fontos: ez egy automatikus mutató, nem helyettesíti az emberi szerkesztői értékelést; kontextus és témaválasztás is befolyásolhatja az eredményt.
+          </p>
+        </div>
+      </UtomModal>
+    </>
   );
 }
