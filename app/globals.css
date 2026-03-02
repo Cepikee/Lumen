@@ -1557,7 +1557,6 @@ html.theme-dark .nav-link {
 /* Expanded content is #212529 is */
 .feed-card .expanded-content,
 .theme-card-inner {
-  background-color: var(--feed-bg-inner) !important;
   color: var(--feed-text) !important;
 }
 
