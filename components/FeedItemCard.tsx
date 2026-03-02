@@ -82,6 +82,7 @@ export default function FeedItemCard({
           onClick={() => {
             window.location.href = `/cikk/${item.id}`;
           }}
+          style={{ backgroundColor: "var(--bs-body-bg)" }}
         >
           <div className="d-flex justify-content-between">
             <div className="d-flex align-items-center gap-2">
@@ -127,7 +128,7 @@ export default function FeedItemCard({
           </button>
 
           {expanded && (
-            <div className="mt-2 p-2 rounded theme-card-inner">
+            <div className="mt-2 p-2 rounded theme-card-inner" style={{ backgroundColor: "var(--bs-body-bg)" }}>
               <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
             </div>
           )}
@@ -157,6 +158,7 @@ export default function FeedItemCard({
         onClick={() => {
           window.location.href = `/cikk/${item.id}`;
         }}
+        style={{ backgroundColor: "var(--bs-body-bg)" }}
       >
         <div className="card-body position-relative" style={{ zIndex: 2 }}>
           <h5 className="card-title d-flex justify-content-between align-items-center">
@@ -203,7 +205,7 @@ export default function FeedItemCard({
           </button>
 
           {expanded && (
-            <div className="mt-3 p-3 rounded theme-card-inner">
+            <div className="mt-3 p-3 rounded theme-card-inner" style={{ backgroundColor: "var(--bs-body-bg)" }}>
               {item.detailed_content ? (
                 <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
               ) : (
