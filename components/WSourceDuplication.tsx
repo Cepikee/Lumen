@@ -151,21 +151,26 @@ Eredeti: ${item.original}
         }
         shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
       >
-        <h2 className="text-3xl font-semibold tracking-tight text-center mb-10 flex items-center justify-center gap-2 pointer-events-auto">
-          Másolási arány források szerint
 
-          <button
-            onClick={() => setOpenInfo(true)}
-            className="w-[26px] h-[26px] mt-1 opacity-70 hover:opacity-100 transition flex items-center justify-center"
-          >
-            <img
-              src="/icons/info-svg.svg"
-              alt="info"
-              className="w-[26px] h-[26px] object-contain"
-            />
-          </button>
-        </h2>
+        {/* CÍM + GOMB KÜLÖN POINTER-EVENTS-AUTO WRAPPERBEN */}
+        <div className="pointer-events-auto">
+          <h2 className="text-3xl font-semibold tracking-tight text-center mb-10 flex items-center justify-center gap-2">
+            Másolási arány források szerint
 
+            <button
+              onClick={() => setOpenInfo(true)}
+              className="w-[26px] h-[26px] mt-1 opacity-70 hover:opacity-100 transition flex items-center justify-center"
+            >
+              <img
+                src="/icons/info-svg.svg"
+                alt="info"
+                className="w-[26px] h-[26px] object-contain"
+              />
+            </button>
+          </h2>
+        </div>
+
+        {/* CHART KÜLÖN POINTER-EVENTS-AUTO WRAPPERBEN */}
         <div className="pointer-events-auto">
           <Chart
             options={options}
