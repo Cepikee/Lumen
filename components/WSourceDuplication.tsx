@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import useSWR from "swr";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useUserStore } from "@/store/useUserStore";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
@@ -24,6 +24,27 @@ const fetcher = (url: string) =>
 export default function WSourceDuplication() {
   const theme = useUserStore((s) => s.theme);
   const [openInfo, setOpenInfo] = useState(false);
+
+  // Debug state logs
+  useEffect(() => {
+    console.debug("WSourceDuplication mounted");
+    return () => console.debug("WSourceDuplication unmounted");
+  }, []);
+
+  useEffect(() => {
+    console.debug("openInfo changed:", openInfo);
+  }, [openInfo]);
+
+  // Optional global click logger for debugging which element receives clicks
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      const el = e.target as HTMLElement | null;
+      if (!el) return;
+      console.debug("GLOBAL CLICK target:", el.tagName, el.className || el.id || el.outerHTML?.slice(0, 120));
+    };
+    window.addEventListener("click", handler, true);
+    return () => window.removeEventListener("click", handler, true);
+  }, []);
 
   const isDark =
     theme === "dark" ||
@@ -142,7 +163,7 @@ Eredeti: ${item.original}
   return (
     <>
       <div
-        className={`relative z-0 p-12 rounded-3xl backdrop-blur-2xl border transition-all duration-500
+        className={`relative z-10 p-12 rounded-3xl backdrop-blur-2xl border transition-all duration-500
         ${
           isDark
             ? "bg-white/5 border-white/10 text-white"
@@ -150,27 +171,42 @@ Eredeti: ${item.original}
         }
         shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
       >
-        {/* Cím + gomb — kattintható */}
-        <div className="mb-6 flex items-center justify-center">
+        {/* Header area: button positioned above chart to avoid overlays */}
+        <div className="relative flex items-center justify-center mb-6">
           <h2 className="text-3xl font-semibold tracking-tight text-center mr-3">
             Másolási arány források szerint
           </h2>
 
+          {/* DEBUG BUTTON: inline styles ensure it's above everything and logs clicks */}
           <button
-            onClick={() => setOpenInfo(true)}
+            onClick={() => {
+              console.debug("INFO BUTTON CLICKED (handler start) — openInfo before set:", openInfo);
+              setOpenInfo(true);
+              console.debug("INFO BUTTON CLICKED (handler end)");
+            }}
             aria-label="Információ"
-            className="w-[26px] h-[26px] mt-1 opacity-80 hover:opacity-100 transition flex items-center justify-center"
             type="button"
+            style={{
+              position: "relative",
+              zIndex: 99999,
+              pointerEvents: "auto",
+              width: 26,
+              height: 26,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            className="opacity-80 hover:opacity-100 transition"
           >
             <img
               src="/icons/info-svg.svg"
               alt="info"
-              className="w-[20px] h-[20px] object-contain"
+              style={{ width: 20, height: 20, objectFit: "contain", pointerEvents: "none" }}
             />
           </button>
         </div>
 
-        {/* Chart konténer — biztosítunk minHeight-ot és relatív stacking-et */}
+        {/* Chart container: ensure it has min height so ApexCharts can measure */}
         <div className="relative z-0 min-h-[320px]">
           <Chart options={options} series={series} type="bar" height={420} />
         </div>
@@ -178,11 +214,23 @@ Eredeti: ${item.original}
 
       {/* Modal */}
       {openInfo && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[9999]">
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[99999]"
+          onClick={(e) => {
+            // close when clicking backdrop (debug)
+            const target = e.target as HTMLElement;
+            if (target && target.className && typeof target.className === "string" && target.className.includes("bg-black/50")) {
+              console.debug("Backdrop clicked — closing modal");
+              setOpenInfo(false);
+            }
+          }}
+        >
           <div
             className={`p-8 rounded-2xl max-w-lg text-center ${
               isDark ? "bg-slate-800 text-white" : "bg-white text-slate-900"
             }`}
+            role="dialog"
+            aria-modal="true"
           >
             <h3 className="text-xl font-semibold mb-4">Mi az a másolási arány?</h3>
 
@@ -200,7 +248,10 @@ Eredeti: ${item.original}
             </p>
 
             <button
-              onClick={() => setOpenInfo(false)}
+              onClick={() => {
+                console.debug("CLOSE BUTTON CLICKED");
+                setOpenInfo(false);
+              }}
               className="px-6 py-2 rounded-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 transition"
             >
               Bezárás
