@@ -61,6 +61,20 @@ export default function WSourceDuplication() {
     },
   ];
 
+  // --- SZÍNES PALETTA (minden oszlop más szín) ---
+  const palette = [
+    "#ef4444", // piros
+    "#f97316", // narancs
+    "#eab308", // sárga
+    "#22c55e", // zöld
+    "#06b6d4", // türkiz
+    "#3b82f6", // kék
+    "#8b5cf6", // lila
+    "#ec4899", // pink
+    "#14b8a6", // teal
+    "#a855f7", // violet
+  ];
+
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: "bar",
@@ -76,15 +90,17 @@ export default function WSourceDuplication() {
         borderRadius: 6,
         horizontal: false,
         columnWidth: "45%",
+        distributed: true, // <-- EZ TESZI SZÍNESSÉ
       },
     },
-    colors: ["#ef4444"],
+    colors: palette,
     dataLabels: {
       enabled: true,
       formatter: (val) => `${(val as number).toFixed(1)}%`,
       style: {
         colors: [isDark ? "#fff" : "#000"],
         fontSize: "12px",
+        fontWeight: 600,
       },
     },
     xaxis: {
@@ -93,6 +109,7 @@ export default function WSourceDuplication() {
         rotate: -30,
         style: {
           colors: items.map(() => (isDark ? "#fff" : "#000")),
+          fontWeight: 600, // <-- FÉLKÖVÉR FORRÁSNEVEK
         },
       },
     },
@@ -106,7 +123,8 @@ export default function WSourceDuplication() {
       y: {
         formatter: (val, opts) => {
           const item = items[opts.dataPointIndex];
-          return `Másolási arány: ${val.toFixed(1)}%
+          const score = Number(val);
+          return `Másolási arány: ${score.toFixed(1)}%
 Eredeti: ${item.original}
 Átvett: ${item.duplicate}`;
         },
@@ -127,14 +145,9 @@ Eredeti: ${item.original}
       }
       shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
     >
-      <div className="flex justify-between items-center mb-10">
-        <h2 className="text-3xl font-semibold tracking-tight">
-          🔁 Másolási arány (Duplication Score)
-        </h2>
-        <div className="text-sm opacity-60">
-          Live ranking · 60 mp refresh
-        </div>
-      </div>
+      <h2 className="text-3xl font-semibold tracking-tight text-center mb-10">
+        Másolási arány (Duplication Score)
+      </h2>
 
       <Chart options={options} series={series} type="bar" height={420} />
     </div>

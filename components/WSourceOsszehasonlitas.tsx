@@ -103,10 +103,6 @@ export default function WSourceOsszehasonlitas() {
           color: isDark ? "#fff" : "#000",
         }}
       >
-        <h3 className="text-lg font-semibold mb-4 text-center">
-          Másolási arány 
-        </h3>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div
             className="p-3 rounded border"
