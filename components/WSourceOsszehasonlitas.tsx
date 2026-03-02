@@ -19,14 +19,6 @@ export default function WSourceOsszehasonlitas() {
 
   return (
     <div className="w-full flex flex-col gap-6">
-      {/* --- OLDAL CÍM --- */}
-      <h2
-        className="text-2xl font-bold"
-        style={{ color: isDark ? "#fff" : "#000" }}
-      >
-        Forrás-összehasonlítás
-      </h2>
-
       {/* --- 1) Kategóriaeloszlás --- */}
       <div
         className="p-4 rounded border bg-[var(--bs-body-bg)]"

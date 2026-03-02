@@ -1,28 +1,21 @@
-// /pipeline/clusterArticles.js — Cikk clusterezés embedding alapján
+// /pipeline/clusterArticles.js — Javított clusterezés
 require("dotenv").config({ path: "/var/www/utom/.env" });
 const mysql = require("mysql2/promise");
 
-// --- Cosine similarity kiszámítása két embedding között ---
+// --- Cosine similarity ---
 function cosineSimilarity(v1, v2) {
   if (!v1 || !v2 || v1.length !== v2.length) return 0;
 
-  let dot = 0;
-  let mag1 = 0;
-  let mag2 = 0;
-
+  let dot = 0, mag1 = 0, mag2 = 0;
   for (let i = 0; i < v1.length; i++) {
     dot += v1[i] * v2[i];
     mag1 += v1[i] * v1[i];
     mag2 += v2[i] * v2[i];
   }
-
   const denom = Math.sqrt(mag1) * Math.sqrt(mag2);
-  if (denom === 0) return 0;
-
-  return dot / denom;
+  return denom === 0 ? 0 : dot / denom;
 }
 
-// --- Fő függvény: cikk clusterezése ---
 async function clusterArticle(articleId) {
   const conn = await mysql.createConnection({
     host: "localhost",
@@ -31,18 +24,33 @@ async function clusterArticle(articleId) {
     database: "projekt2025",
   });
 
-  // 1) Lekérjük az adott cikk embeddingjét
+  // 1) Lekérjük a cikket
   const [rows] = await conn.execute(
     "SELECT id, embedding, published_at, source FROM articles WHERE id = ?",
     [articleId]
   );
 
-  if (!rows || rows.length === 0) {
+  if (!rows.length) {
     await conn.end();
     throw new Error(`Nincs ilyen cikk: ${articleId}`);
   }
 
   const article = rows[0];
+
+  // --- DÁTUMKORLÁT: csak a mai cikkeket clusterezzük ---
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const publishedAt = new Date(article.published_at);
+  if (publishedAt < today) {
+    await conn.end();
+    return {
+      articleId,
+      clusterId: null,
+      skipped: true,
+      reason: "Régi cikk — nem clusterezzük"
+    };
+  }
 
   if (!article.embedding) {
     await conn.end();
@@ -51,14 +59,14 @@ async function clusterArticle(articleId) {
 
   const currentEmbedding = JSON.parse(article.embedding);
 
-  // 2) Lekérjük az utolsó 7 nap cikkjeit embeddinggel
+  // 2) Csak a MAI cikkekkel hasonlítjuk össze
   const [otherArticles] = await conn.execute(
     `
     SELECT id, embedding, cluster_id
     FROM articles
     WHERE id != ?
       AND embedding IS NOT NULL
-      AND published_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+      AND published_at >= CURDATE()
     `,
     [articleId]
   );
@@ -66,7 +74,7 @@ async function clusterArticle(articleId) {
   let bestSimilarity = 0;
   let bestClusterId = null;
 
-  // 3) Similarity számítás minden más cikkel
+  // 3) Similarity számítás
   for (const other of otherArticles) {
     if (!other.embedding) continue;
 
@@ -79,11 +87,11 @@ async function clusterArticle(articleId) {
     }
   }
 
-  // 4) Döntés: meglévő cluster vagy új cluster?
-  const THRESHOLD = 0.82;
+  // --- ÚJ THRESHOLD: sokkal pontosabb ---
+  const THRESHOLD = 0.90;
 
   if (bestSimilarity >= THRESHOLD && bestClusterId) {
-    // --- Meglévő cluster ---
+    // Meglévő cluster
     await conn.execute(
       "UPDATE articles SET cluster_id = ? WHERE id = ?",
       [bestClusterId, articleId]
@@ -98,7 +106,7 @@ async function clusterArticle(articleId) {
     };
   }
 
-  // --- Új cluster létrehozása ---
+  // Új cluster
   const [insertRes] = await conn.execute(
     `
     INSERT INTO clusters (first_published_at, first_source, title)
@@ -109,7 +117,6 @@ async function clusterArticle(articleId) {
 
   const newClusterId = insertRes.insertId;
 
-  // Cikk hozzárendelése az új clusterhez
   await conn.execute(
     "UPDATE articles SET cluster_id = ? WHERE id = ?",
     [newClusterId, articleId]
@@ -125,5 +132,4 @@ async function clusterArticle(articleId) {
   };
 }
 
-// Export
 module.exports = { clusterArticle };
