@@ -45,8 +45,7 @@ export default function WSourceDuplication() {
     );
   }, [data]);
 
-  if (isLoading)
-    return <div className="p-12 text-center">Betöltés...</div>;
+  if (isLoading) return <div className="p-12 text-center">Betöltés...</div>;
 
   if (error || !data?.success)
     return (
@@ -143,7 +142,7 @@ Eredeti: ${item.original}
   return (
     <>
       <div
-        className={`relative z-0 p-12 rounded-3xl backdrop-blur-2xl border transition-all duration-500 pointer-events-none
+        className={`relative z-0 p-12 rounded-3xl backdrop-blur-2xl border transition-all duration-500
         ${
           isDark
             ? "bg-white/5 border-white/10 text-white"
@@ -151,36 +150,33 @@ Eredeti: ${item.original}
         }
         shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
       >
-
-        {/* CÍM + GOMB KÜLÖN POINTER-EVENTS-AUTO WRAPPERBEN */}
-        <div className="pointer-events-auto">
-          <h2 className="text-3xl font-semibold tracking-tight text-center mb-10 flex items-center justify-center gap-2">
+        {/* Cím + gomb — kattintható */}
+        <div className="mb-6 flex items-center justify-center">
+          <h2 className="text-3xl font-semibold tracking-tight text-center mr-3">
             Másolási arány források szerint
-
-            <button
-              onClick={() => setOpenInfo(true)}
-              className="w-[26px] h-[26px] mt-1 opacity-70 hover:opacity-100 transition flex items-center justify-center"
-            >
-              <img
-                src="/icons/info-svg.svg"
-                alt="info"
-                className="w-[26px] h-[26px] object-contain"
-              />
-            </button>
           </h2>
+
+          <button
+            onClick={() => setOpenInfo(true)}
+            aria-label="Információ"
+            className="w-[26px] h-[26px] mt-1 opacity-80 hover:opacity-100 transition flex items-center justify-center"
+            type="button"
+          >
+            <img
+              src="/icons/info-svg.svg"
+              alt="info"
+              className="w-[20px] h-[20px] object-contain"
+            />
+          </button>
         </div>
 
-        {/* CHART KÜLÖN POINTER-EVENTS-AUTO WRAPPERBEN */}
-        <div className="pointer-events-auto">
-          <Chart
-            options={options}
-            series={series}
-            type="bar"
-            height={420}
-          />
+        {/* Chart konténer — biztosítunk minHeight-ot és relatív stacking-et */}
+        <div className="relative z-0 min-h-[320px]">
+          <Chart options={options} series={series} type="bar" height={420} />
         </div>
       </div>
 
+      {/* Modal */}
       {openInfo && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[9999]">
           <div
@@ -188,18 +184,18 @@ Eredeti: ${item.original}
               isDark ? "bg-slate-800 text-white" : "bg-white text-slate-900"
             }`}
           >
-            <h3 className="text-xl font-semibold mb-4">
-              Mi az a másolási arány?
-            </h3>
+            <h3 className="text-xl font-semibold mb-4">Mi az a másolási arány?</h3>
 
             <p className="text-sm leading-relaxed mb-6">
               A rendszer azt méri, hogy egy adott hírforrás hányszor közöl olyan hírt,
               amelyet egy másik forrás már korábban publikált.
-              <br /><br />
+              <br />
+              <br />
               <strong>Eredeti:</strong> hányszor volt ő az első.
               <br />
               <strong>Átvett:</strong> hányszor jelent meg nála később ugyanaz a hír.
-              <br /><br />
+              <br />
+              <br />
               A mutató: <strong>Átvett / (Eredeti + Átvett)</strong>.
             </p>
 
