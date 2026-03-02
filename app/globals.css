@@ -1526,20 +1526,20 @@ html.theme-dark .nav-link {
 
 /* Sötét és rendszer mód – minden háttér legyen #212529 */
 html.theme-dark {
-  --feed-bg: #212529;
-  --feed-bg-inner: #212529;
+  --feed-bg: var(--bs-body-bg, #212529);
+  --feed-bg-inner: var(--bs-body-bg, #212529);
   --feed-text: #ffffff;
 
-  --article-bg: #212529;
+  --article-bg: var(--bs-body-bg, #212529);
   --article-text: #ffffff;
   --article-muted: #cccccc;
 }
 
 /* HEADER háttér fix */
 html.theme-dark .header-nav {
-  background: #212529 !important;
-  color: #ffffff !important;
-  box-shadow: none !important;
+  background: var(--bs-body-bg);
+  color: var(--article-text);
+  box-shadow: none;
 }
 
 /* NAV LINK szín */
@@ -1550,20 +1550,20 @@ html.theme-dark .nav-link {
 /* FEEDITEMCARD háttér fix */
 .feed-card.card,
 .feed-card.compact {
-  background-color: #212529 !important;
-  color: #ffffff !important;
+  background-color: var(--feed-bg);
+  color: var(--feed-text) !important;
 }
 
 /* Expanded content is #212529 is */
 .feed-card .expanded-content,
 .theme-card-inner {
-  background-color: #212529 !important;
-  color: #ffffff !important;
+  background-color: var(--feed-bg-inner) !important;
+  color: var(--feed-text) !important;
 }
 
 /* Hover is also #212529 */
 .feed-card.compact:hover {
-  background-color: #212529 !important;
+  background-color: var(--feed-bg) !important;
 }
 
 * { user-select: text !important; }
