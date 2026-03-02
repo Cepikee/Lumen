@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
-import { EB_Garamond } from "next/font/google";
+import { Inter } from "next/font/google";
 
-const ebGaramond = EB_Garamond({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -23,20 +23,20 @@ export interface FeedItem {
 }
 
 const baseTextStyle: React.CSSProperties = {
-  fontSize: "17px",           // nagyobb alap betűméret
+  fontSize: "17px",
   lineHeight: 1.7,
   color: "var(--feed-text)",
   letterSpacing: "0.2px",
-  fontWeight: 400,
+  fontWeight: 500, // erősebb, "feketesebb" megjelenés
   WebkitFontSmoothing: "antialiased",
   MozOsxFontSmoothing: "grayscale",
 };
 
 const titleStyle: React.CSSProperties = {
-  fontSize: "1.15rem",        // nagyobb cím
+  fontSize: "1.15rem",
   lineHeight: 1.3,
   fontWeight: 600,
-  color: "#4da3ff",          // vissza a kék cím
+  color: "#4da3ff", // kék cím
   textDecoration: "none",
 };
 
@@ -100,7 +100,7 @@ export default function FeedItemCard({
 
   if (viewMode === "compact") {
     return (
-      <div className={`feed-wrapper compact ${ebGaramond.className}`} style={baseTextStyle}>
+      <div className={`feed-wrapper compact ${inter.className}`} style={baseTextStyle}>
         <div
           className="feed-card compact mb-2 p-2 rounded theme-card"
           data-source-text={source.toUpperCase()}
@@ -171,7 +171,7 @@ export default function FeedItemCard({
   }
 
   return (
-    <div className={`feed-wrapper ${ebGaramond.className}`} style={baseTextStyle}>
+    <div className={`feed-wrapper ${inter.className}`} style={baseTextStyle}>
       <div
         className="feed-card mb-3 p-3 rounded shadow-sm theme-card"
         data-source-text={source.toUpperCase()}
