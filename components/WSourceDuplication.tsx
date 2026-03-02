@@ -35,20 +35,6 @@ export default function WSourceDuplication() {
     console.debug("openInfo changed:", openInfo);
   }, [openInfo]);
 
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      const el = e.target as HTMLElement | null;
-      if (!el) return;
-      console.debug(
-        "GLOBAL CLICK target:",
-        el.tagName,
-        el.className || el.id || (el.outerHTML && el.outerHTML.slice(0, 120))
-      );
-    };
-    window.addEventListener("click", handler, true);
-    return () => window.removeEventListener("click", handler, true);
-  }, []);
-
   const isDark =
     theme === "dark" ||
     (theme === "system" &&
@@ -157,10 +143,19 @@ Eredeti: ${item.original}
 
   return (
     <>
+      {/* Inline small CSS for the fade-in animation (works without extra Tailwind plugin) */}
+      <style>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(8px) scale(0.995); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .animate-fade-in-up { animation: fadeInUp 220ms cubic-bezier(.2,.9,.2,1) both; }
+      `}</style>
+
       <div
         className={`relative z-10 p-12 rounded-3xl backdrop-blur-2xl border transition-all duration-500
         ${isDark ? "bg-white/5 border-white/10 text-white" : "bg-white/70 border-slate-200 text-slate-900"}
-        shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
+        shadow-[0_40px_100px_rgba(0,0,0,0.12)]`}
       >
         <div className="relative flex items-center justify-center mb-6">
           <h2 className="text-3xl font-semibold tracking-tight text-center mr-3">
@@ -169,16 +164,15 @@ Eredeti: ${item.original}
 
           <button
             onClick={() => {
-              console.debug("INFO BUTTON CLICKED (handler start) — openInfo before set:", openInfo);
+              console.debug("INFO BUTTON CLICKED — openInfo before set:", openInfo);
               setOpenInfo(true);
-              console.debug("INFO BUTTON CLICKED (handler end)");
             }}
             aria-label="Információ"
             type="button"
-            style={{ position: "relative", zIndex: 99999, pointerEvents: "auto", width: 26, height: 26 }}
-            className="opacity-80 hover:opacity-100 transition flex items-center justify-center"
+            style={{ position: "relative", zIndex: 99999, pointerEvents: "auto", width: 36, height: 36 }}
+            className="opacity-90 hover:opacity-100 transition flex items-center justify-center rounded-full bg-white/10"
           >
-            <img src="/icons/info-svg.svg" alt="info" className="w-[20px] h-[20px] object-contain pointer-events-none" />
+            <img src="/icons/info-svg.svg" alt="info" className="w-[18px] h-[18px] object-contain pointer-events-none" />
           </button>
         </div>
 
@@ -193,12 +187,7 @@ Eredeti: ${item.original}
             className="fixed inset-0 flex items-center justify-center"
             style={{ zIndex: 2147483647 }}
             onMouseDown={(e) => {
-              // close when clicking backdrop (but not when clicking the dialog)
-              const target = e.target as HTMLElement;
-              if (target && target === e.currentTarget) {
-                console.debug("Backdrop clicked — closing modal");
-                setOpenInfo(false);
-              }
+              if (e.target === e.currentTarget) setOpenInfo(false);
             }}
           >
             {/* Backdrop */}
@@ -206,32 +195,43 @@ Eredeti: ${item.original}
 
             {/* Dialog */}
             <div
-              className={`relative z-10 w-full max-w-lg mx-4 p-6 rounded-2xl shadow-xl border
-                ${isDark ? "bg-slate-800 text-white border-slate-700" : "bg-white text-slate-900 border-slate-200"}`}
+              className={`relative z-10 w-full max-w-lg mx-4 p-6 rounded-2xl shadow-xl border animate-fade-in-up
+                ${isDark ? "bg-slate-900 text-white border-slate-700" : "bg-white text-slate-900 border-slate-200"}`}
               role="dialog"
               aria-modal="true"
             >
-              <h3 className="text-xl font-semibold mb-3">Mi az a másolási arány?</h3>
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold mb-2">Mi az a másolási arány?</h3>
+                  <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                    A rendszer azt méri, hogy egy adott hírforrás hányszor közöl olyan hírt,
+                    amelyet egy másik forrás már korábban publikált.
+                    <br />
+                    <br />
+                    <strong>Eredeti:</strong> hányszor volt ő az első.
+                    <br />
+                    <strong>Átvett:</strong> hányszor jelent meg nála később ugyanaz a hír.
+                    <br />
+                    <br />
+                    A mutató: <strong>Átvett / (Eredeti + Átvett)</strong>.
+                  </p>
+                </div>
 
-              <p className="text-sm leading-relaxed mb-6">
-                A rendszer azt méri, hogy egy adott hírforrás hányszor közöl olyan hírt,
-                amelyet egy másik forrás már korábban publikált.
-                <br />
-                <br />
-                <strong>Eredeti:</strong> hányszor volt ő az első.
-                <br />
-                <strong>Átvett:</strong> hányszor jelent meg nála később ugyanaz a hír.
-                <br />
-                <br />
-                A mutató: <strong>Átvett / (Eredeti + Átvett)</strong>.
-              </p>
-
-              <div className="flex justify-center">
+                {/* Close X */}
                 <button
-                  onClick={() => {
-                    console.debug("CLOSE BUTTON CLICKED");
-                    setOpenInfo(false);
-                  }}
+                  onClick={() => setOpenInfo(false)}
+                  aria-label="Bezárás"
+                  className="ml-2 p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-slate-700 dark:text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="mt-6 flex justify-center">
+                <button
+                  onClick={() => setOpenInfo(false)}
                   className="px-6 py-2 rounded-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 transition"
                 >
                   Bezárás
