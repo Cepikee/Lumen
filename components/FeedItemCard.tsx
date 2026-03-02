@@ -50,6 +50,28 @@ function formatFullDate(dateString: string): string {
   });
 }
 
+/** Map source id to readable name and Tailwind badge / border classes */
+function getSourceInfo(sourceId: number) {
+  switch (sourceId) {
+    case 1:
+      return { key: "telex", badge: "bg-[#00AEEF] text-white", border: "border-l-4 border-[#00AEEF]" };
+    case 2:
+      return { key: "24hu", badge: "bg-[#ff0000] text-white", border: "border-l-4 border-[#ff0000]" };
+    case 3:
+      return { key: "index", badge: "bg-[#e0e274] text-white", border: "border-l-4 border-[#e0e274]" };
+    case 4:
+      return { key: "hvg", badge: "bg-[#ff7a00] text-white", border: "border-l-4 border-[#ff7a00]" };
+    case 5:
+      return { key: "portfolio", badge: "bg-[#ff6600] text-white", border: "border-l-4 border-[#ff6600]" };
+    case 6:
+      return { key: "444", badge: "bg-[#2d6126] text-white", border: "border-l-4 border-[#2d6126]" };
+    case 7:
+      return { key: "origo", badge: "bg-[#0e008a] text-white", border: "border-l-4 border-[#0e008a]" };
+    default:
+      return { key: "ismeretlen", badge: "bg-gray-300 text-black", border: "border-l-4 border-gray-300" };
+  }
+}
+
 export default function FeedItemCard({
   item,
   expanded,
@@ -62,49 +84,40 @@ export default function FeedItemCard({
   viewMode: "card" | "compact";
 }) {
   const url = item.url || "";
-  const source = {
-    1: "telex",
-    2: "24hu",
-    3: "index",
-    4: "hvg",
-    5: "portfolio",
-    6: "444",
-    7: "origo",
-  }[item.source_id] || "ismeretlen";
-  const sourceClass = `source-${source}`;
+  const sourceInfo = getSourceInfo(item.source_id);
+  const sourceText = sourceInfo.key.toUpperCase();
 
-  // Tailwind utility classes used:
-  // - font: inter via inter.className
-  // - base text: text-[17px] leading-[1.5] font-medium text-[var(--feed-text)]
-  // - title: text-[1.15rem] leading-[1.3] font-semibold text-[#4da3ff]
-  // - detailed: text-[15px] leading-[1.75]
-  // - backgrounds use bg-[var(--bs-body-bg)]
-  // - clamp uses line-clamp-2 (Tailwind line-clamp plugin expected)
+  // Common Tailwind classes to mimic previous styling
+  const wrapperFont = inter.className; // applies Inter
+  const baseTextClasses = "text-[17px] leading-[1.5] font-medium tracking-[0.2px] text-[var(--feed-text)]";
+  const titleClasses = "text-[1.15rem] leading-[1.3] font-semibold text-[#4da3ff] no-underline";
+  const detailedClasses = "text-[15px] leading-[1.75] text-[var(--feed-text)] tracking-[0.2px]";
+
+  // AI badge style (boxed)
+  const aiBadgeClasses = "inline-block px-2 py-0.5 rounded text-[0.65rem] font-bold border border-black";
 
   if (viewMode === "compact") {
     return (
-      <div className={`${inter.className} feed-wrapper compact`}>
+      <div className={`${wrapperFont} feed-wrapper compact`}>
         <div
-          data-source-text={source.toUpperCase()}
+          className={`feed-card compact mb-2 p-2 rounded theme-card ${sourceInfo.border}`}
+          data-source-text={sourceText}
           onClick={() => {
             window.location.href = `/cikk/${item.id}`;
           }}
-          className="feed-card compact mb-2 p-2 rounded theme-card bg-[var(--bs-body-bg)]"
+          style={{ backgroundColor: "var(--bs-body-bg)" }}
         >
           <div className="flex justify-between">
-            <div className="flex items-center gap-2">
-              <span
-                className={`inline-block text-[0.65rem] font-bold px-2 py-0.5 rounded ${sourceClass}`}
-                aria-hidden
-              >
-                {source.toUpperCase()}
+            <div className="flex items-start gap-2">
+              <span className={`inline-block text-[0.65rem] font-bold px-2 py-0.5 rounded ${sourceInfo.badge}`}>
+                {sourceText}
               </span>
 
               <a
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="title-compact text-[1.15rem] leading-[1.3] font-semibold text-[#4da3ff] no-underline"
+                className={`title-compact ${titleClasses} max-w-[60%] line-clamp-2`}
                 onClick={(e) => e.stopPropagation()}
               >
                 {item.title}
@@ -113,7 +126,7 @@ export default function FeedItemCard({
 
             {item.ai_clean === 1 && (
               <span
-                className={`inline-block text-[0.65rem] font-bold px-2 py-0.5 rounded ${sourceClass}`}
+                className={`${aiBadgeClasses} bg-[#00AEEF] text-white`}
                 title="Ez a tartalom teljes egészében AI által lett megfogalmazva."
               >
                 🤖 AI
@@ -121,14 +134,12 @@ export default function FeedItemCard({
             )}
           </div>
 
-          <div
-            className={`mt-1 content-compact text-[17px] leading-[1.5] font-medium text-[var(--feed-text)] tracking-[0.2px] ${expanded ? "" : "line-clamp-2"}`}
-          >
+          <div className={`mt-1 ${expanded ? "" : "line-clamp-2"} content-compact ${baseTextClasses} mt-2`}>
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
           <button
-            className="mt-1 text-sm text-sky-500 hover:underline p-0"
+            className="btn-link mt-2 text-sm text-sky-500 hover:underline p-0"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -139,8 +150,8 @@ export default function FeedItemCard({
           </button>
 
           {expanded && (
-            <div className="mt-2 p-2 rounded theme-card-inner bg-[var(--bs-body-bg)]">
-              <div className="text-[15px] leading-[1.75] text-[var(--feed-text)] tracking-[0.2px]">
+            <div className="mt-2 p-2 rounded theme-card-inner" style={{ backgroundColor: "var(--bs-body-bg)" }}>
+              <div className={detailedClasses}>
                 <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
               </div>
             </div>
@@ -156,9 +167,7 @@ export default function FeedItemCard({
             </p>
 
             {item.category && (
-              <span className="category-compact text-[0.85rem] opacity-95 uppercase">
-                {item.category}
-              </span>
+              <span className="category-compact text-[0.85rem] opacity-95 uppercase">{item.category}</span>
             )}
           </div>
         </div>
@@ -166,30 +175,29 @@ export default function FeedItemCard({
     );
   }
 
+  // CARD view
   return (
-    <div className={`${inter.className} feed-wrapper`}>
+    <div className={`${wrapperFont} feed-wrapper`}>
       <div
-        data-source-text={source.toUpperCase()}
+        className={`feed-card mb-3 p-3 rounded shadow-sm theme-card ${sourceInfo.border}`}
+        data-source-text={sourceText}
         onClick={() => {
           window.location.href = `/cikk/${item.id}`;
         }}
-        className="feed-card mb-3 p-3 rounded shadow-sm theme-card bg-[var(--bs-body-bg)]"
+        style={{ backgroundColor: "var(--bs-body-bg)" }}
       >
         <div className="card-body relative z-10">
-          <h5 className="card-title flex justify-between items-center m-0">
-            <div className="flex items-center gap-2">
-              <span
-                className={`me-2 inline-block font-bold text-[0.75rem] px-2 py-0.5 rounded ${sourceClass}`}
-                aria-hidden
-              >
-                {source.toUpperCase()}
+          <h5 className="card-title flex justify-between items-start m-0">
+            <div className="flex items-start gap-2 max-w-[78%]">
+              <span className={`inline-block font-bold text-[0.75rem] px-2 py-0.5 rounded ${sourceInfo.badge}`}>
+                {sourceText}
               </span>
 
               <a
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="title-card no-underline text-[1.15rem] leading-[1.3] font-semibold text-[#4da3ff] max-w-[70%] overflow-hidden"
+                className={`${titleClasses} title-card max-w-full line-clamp-2`}
                 onClick={(e) => e.stopPropagation()}
               >
                 {item.title}
@@ -198,7 +206,7 @@ export default function FeedItemCard({
 
             {item.ai_clean === 1 && (
               <span
-                className={`inline-block font-bold px-2 py-0.5 rounded ${sourceClass}`}
+                className={`${aiBadgeClasses} bg-[#00AEEF] text-white ml-2`}
                 title="Ez a tartalom teljes egészében AI által lett megfogalmazva."
               >
                 AI‑fogalmazás
@@ -206,7 +214,7 @@ export default function FeedItemCard({
             )}
           </h5>
 
-          <div className="mt-2 content-card text-[17px] leading-[1.5] font-medium text-[var(--feed-text)] tracking-[0.2px]">
+          <div className={`mt-2 content-card ${baseTextClasses}`}>
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
@@ -222,8 +230,8 @@ export default function FeedItemCard({
           </button>
 
           {expanded && (
-            <div className="mt-3 p-3 rounded theme-card-inner bg-[var(--bs-body-bg)]">
-              <div className="text-[15px] leading-[1.75] text-[var(--feed-text)] tracking-[0.2px]">
+            <div className="mt-3 p-3 rounded theme-card-inner" style={{ backgroundColor: "var(--bs-body-bg)" }}>
+              <div className={detailedClasses}>
                 {item.detailed_content ? (
                   <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
                 ) : (
@@ -243,9 +251,7 @@ export default function FeedItemCard({
             </p>
 
             {item.category && (
-              <span className="category-card text-[0.9rem] opacity-95 uppercase">
-                {item.category}
-              </span>
+              <span className="category-card text-[0.9rem] opacity-95 uppercase">{item.category}</span>
             )}
           </div>
         </div>
