@@ -50,21 +50,19 @@ function formatFullDate(dateString: string): string {
   });
 }
 
-/** For styling the left border to match badge color */
 function getSourceColor(sourceId: number) {
   switch (sourceId) {
-    case 1: return "#00AEEF"; // telex
-    case 2: return "#ff0000"; // 24hu
-    case 3: return "rgba(224,226,116,0.747)"; // index
-    case 4: return "#ff7a00"; // hvg
-    case 5: return "#ff6600"; // portfolio
-    case 6: return "#2d6126"; // 444
-    case 7: return "#0e008a"; // origo
-    default: return "#d1d5db"; // gray
+    case 1: return "#00AEEF";
+    case 2: return "#ff0000";
+    case 3: return "rgba(224,226,116,0.747)";
+    case 4: return "#ff7a00";
+    case 5: return "#ff6600";
+    case 6: return "#2d6126";
+    case 7: return "#0e008a";
+    default: return "#d1d5db";
   }
 }
 
-/** Map id -> source key used by CSS classes (badge.source-...) */
 function getSourceKey(sourceId: number) {
   switch (sourceId) {
     case 1: return "telex";
@@ -99,7 +97,6 @@ export default function FeedItemCard({
   const titleClasses = "text-[1.15rem] leading-[1.3] font-semibold text-[#4da3ff] no-underline hover:text-[#77b8ff]";
   const detailedClasses = "text-[15px] leading-[1.75] text-[var(--feed-text)] tracking-[0.2px]";
 
-  // Reuse existing CSS badge classes from globals.css: "badge source-<key>"
   const badgeClass = `badge source-${sourceKey}`;
 
   if (viewMode === "compact") {
@@ -108,12 +105,10 @@ export default function FeedItemCard({
         <div
           className={`feed-card compact mb-2 p-2 rounded theme-card border-l-4`}
           data-source-text={sourceText}
-          onClick={() => { window.location.href = `/cikk/${item.id}`; }}
           style={{ backgroundColor: "var(--bs-body-bg)", borderLeftColor: borderColor }}
         >
           <div className="flex justify-between">
             <div className="flex items-center gap-3">
-              {/* source badge uses the original CSS class so colors match exactly */}
               <span className={badgeClass} aria-hidden>{sourceText}</span>
 
               <a
@@ -127,7 +122,6 @@ export default function FeedItemCard({
               </a>
             </div>
 
-            {/* AI badge: use same badge class (no black border) */}
             {item.ai_clean === 1 && (
               <span className={badgeClass} title="Ez a tartalom teljes egészében AI által lett megfogalmazva.">
                 🤖 AI
@@ -139,13 +133,18 @@ export default function FeedItemCard({
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
-          {/* simple blue link, no box or border */}
-          <button
-            className="mt-2 text-sm text-sky-500 hover:underline p-0 bg-transparent border-0"
-            onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggle(); }}
-          >
-            {expanded ? "🔽 Bezárás" : "📘 Részletek"}
-          </button>
+          {/* Link-only navigation: Link visz a cikk oldalára, nincs körvonal */}
+          <div className="mt-2">
+            <Link href={`/cikk/${item.id}`} legacyBehavior>
+              <a
+                className="text-sm text-sky-500 hover:underline"
+                onClick={(e) => { e.stopPropagation(); }}
+                aria-label={`Részletes elemzés: ${item.title}`}
+              >
+                {expanded ? "🔽 Bezárás" : "📘 Részletek"}
+              </a>
+            </Link>
+          </div>
 
           {expanded && (
             <div className="mt-2 p-2 rounded theme-card-inner" style={{ backgroundColor: "var(--feed-bg-inner)" }}>
@@ -174,16 +173,13 @@ export default function FeedItemCard({
       <div
         className={`feed-card mb-3 p-3 rounded shadow-sm theme-card border-l-4`}
         data-source-text={sourceText}
-        onClick={() => { window.location.href = `/cikk/${item.id}`; }}
         style={{ backgroundColor: "var(--bs-body-bg)", borderLeftColor: borderColor }}
       >
         <div className="card-body relative z-10">
           <h5 className="card-title flex justify-between items-start m-0">
             <div className="flex items-center gap-3 max-w-[78%]">
-              {/* source badge */}
               <span className={badgeClass}>{sourceText}</span>
 
-              {/* title */}
               <a
                 href={url}
                 target="_blank"
@@ -195,7 +191,6 @@ export default function FeedItemCard({
               </a>
             </div>
 
-            {/* AI badge styled like source badge, no extra border */}
             {item.ai_clean === 1 && (
               <span className={badgeClass} title="Ez a tartalom teljes egészében AI által lett megfogalmazva.">
                 AI‑fogalmazás
@@ -207,13 +202,18 @@ export default function FeedItemCard({
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
-          {/* Részletes elemzés link — kék, egyszerű, nincs doboz vagy körvonal */}
-          <button
-            className="mt-2 text-sm text-sky-500 hover:underline p-0 bg-transparent border-0"
-            onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggle(); }}
-          >
-            {expanded ? "🔽 Bezárás" : "📘 Részletes elemzésért kattints ide!"}
-          </button>
+          {/* Link-only navigation: Link visz a cikk oldalára, nincs körvonal */}
+          <div className="mt-2">
+            <Link href={`/cikk/${item.id}`} legacyBehavior>
+              <a
+                className="text-sm text-sky-500 hover:underline"
+                onClick={(e) => e.stopPropagation()}
+                aria-label={`Részletes elemzés: ${item.title}`}
+              >
+                {expanded ? "🔽 Bezárás" : "📘 Részletes elemzésért kattints ide!"}
+              </a>
+            </Link>
+          </div>
 
           {expanded && (
             <div className="mt-3 p-3 rounded theme-card-inner" style={{ backgroundColor: "var(--feed-bg-inner)" }}>
