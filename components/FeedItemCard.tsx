@@ -123,7 +123,7 @@ export default function FeedItemCard({
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${titleClasses} line-clamp-2`}
+                  className={`${titleClasses} line-clamp-2 !no-underline`}
                   onClick={(e) => e.stopPropagation()}
                 >
                   {item.title}
@@ -160,7 +160,7 @@ export default function FeedItemCard({
             </p>
 
             {/* Középső CTA – kisebb, diszkrétebb */}
-            <p className="text-[0.8rem] opacity-70 text-sky-500 text-center flex-1 px-4 whitespace-nowrap overflow-hidden text-ellipsis">
+            <p className="text-[0.65rem] opacity-50 tracking-wide text-sky-500 text-center flex-1 px-4 whitespace-nowrap overflow-hidden text-ellipsis">
               Részletes elemzés megtekintéséhez kattintson a kártyára
             </p>
 
