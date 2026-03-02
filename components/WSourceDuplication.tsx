@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import useSWR from "swr";
 import { useMemo, useState } from "react";
 import { useUserStore } from "@/store/useUserStore";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
