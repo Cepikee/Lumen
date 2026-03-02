@@ -135,7 +135,7 @@ export default function FeedItemCard({
                   className={badgeClass}
                   title="Ez a tartalom teljes egészében AI által lett megfogalmazva."
                 >
-                  🤖 AI
+                  AI‑fogalmazás
                 </span>
               )}
             </h5>
