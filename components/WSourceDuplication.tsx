@@ -171,24 +171,29 @@ Eredeti: ${item.original}
       </div>
 
       <UtomModal show={openInfo} onClose={() => setOpenInfo(false)} title="Mi az a másolási arány?">
-        <div className="text-sm leading-relaxed">
-          <p className="mb-3">
-            A rendszer azt méri, hogy egy adott hírforrás hányszor közöl olyan hírt, amelyet egy másik forrás már korábban publikált.
-          </p>
+  <div className="text-sm leading-relaxed">
+    <p className="mb-3">
+      A mutató azt mutatja meg, hogy egy forrás milyen gyakran közöl olyan hírt, amelyet egy másik forrás már korábban publikált.
+    </p>
 
-          <p className="mb-2">
-            <strong>Eredeti:</strong> hányszor volt ő az első.
-          </p>
+    <p className="mb-2">
+      <strong>Eredeti</strong> — amikor a forrás volt az első, aki a témát közzétette.
+    </p>
 
-          <p className="mb-2">
-            <strong>Átvett:</strong> hányszor jelent meg nála később ugyanaz a hír.
-          </p>
+    <p className="mb-2">
+      <strong>Átvett</strong> — amikor a forrás később közölte ugyanazt a hírt.
+    </p>
 
-          <p className="mt-3">
-            A mutató: <strong>Átvett / (Eredeti + Átvett)</strong>.
-          </p>
-        </div>
-      </UtomModal>
+    <p className="mb-2">
+      <strong>Arány</strong> — az átvett esetek aránya az összes vizsgált esethez képest (azaz mennyi a nem eredeti megjelenés).
+    </p>
+
+    <p className="mt-3">
+      <strong>Megjegyzés:</strong> ez egy automatikus, összehasonlító mutató — segít látni, mely forrásoknál gyakoribb az átvétel, de nem helyettesíti az emberi értékelést.
+    </p>
+  </div>
+</UtomModal>
+
     </>
   );
 }
