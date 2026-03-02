@@ -139,9 +139,9 @@ export default function FeedItemCard({
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
-          {/* simple blue link, no box */}
+          {/* simple blue link, no box or border */}
           <button
-            className="mt-2 text-sm text-sky-500 hover:underline p-0"
+            className="mt-2 text-sm text-sky-500 hover:underline p-0 bg-transparent border-0"
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggle(); }}
           >
             {expanded ? "🔽 Bezárás" : "📘 Részletek"}
@@ -161,7 +161,7 @@ export default function FeedItemCard({
             </p>
 
             {item.category && (
-              <span className="category-compact text-[0.85rem] opacity-95 uppercase">{item.category}</span>
+              <span className="category-compact text-[1.05rem] opacity-95 uppercase">{item.category}</span>
             )}
           </div>
         </div>
@@ -207,9 +207,9 @@ export default function FeedItemCard({
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
-          {/* simple blue link, no box */}
+          {/* Részletes elemzés link — kék, egyszerű, nincs doboz vagy körvonal */}
           <button
-            className="mt-2 text-sm text-sky-500 hover:underline p-0"
+            className="mt-2 text-sm text-sky-500 hover:underline p-0 bg-transparent border-0"
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggle(); }}
           >
             {expanded ? "🔽 Bezárás" : "📘 Részletes elemzésért kattints ide!"}
@@ -233,7 +233,7 @@ export default function FeedItemCard({
             </p>
 
             {item.category && (
-              <span className="category-card text-[0.9rem] opacity-95 uppercase">{item.category}</span>
+              <span className="category-card text-[1.05rem] opacity-95 uppercase">{item.category}</span>
             )}
           </div>
         </div>
