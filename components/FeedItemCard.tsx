@@ -2,6 +2,13 @@
 
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
+import { Lexend } from "next/font/google";
+
+const lexend = Lexend({
+  subsets: ["latin"],
+  weight: ["100","200","300","400","500","600","700","800","900"],
+  display: "swap",
+});
 
 export interface FeedItem {
   id: number;
@@ -75,7 +82,7 @@ export default function FeedItemCard({
   // ============================
   if (viewMode === "compact") {
     return (
-      <div className="feed-wrapper compact">
+      <div className={`feed-wrapper compact ${lexend.className}`}>
         <div
           className="feed-card compact mb-2 p-2 rounded theme-card"
           data-source-text={source.toUpperCase()}
@@ -151,7 +158,7 @@ export default function FeedItemCard({
   // ⭐ CARD NÉZET
   // ============================
   return (
-    <div className="feed-wrapper">
+    <div className={`feed-wrapper ${lexend.className}`}>
       <div
         className="feed-card mb-3 p-3 rounded shadow-sm theme-card"
         data-source-text={source.toUpperCase()}
