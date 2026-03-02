@@ -22,18 +22,30 @@ export interface FeedItem {
   category?: string;
 }
 
-// --- FORRÁS MAPPING --- //
-const SOURCE_MAP: Record<number, string> = {
-  1: "telex",
-  2: "24hu",
-  3: "index",
-  4: "hvg",
-  5: "portfolio",
-  6: "444",
-  7: "origo",
+const baseTextStyle: React.CSSProperties = {
+  fontSize: "16px",
+  lineHeight: 1.7,
+  color: "var(--feed-text)",
+  letterSpacing: "0.2px",
+  fontWeight: 400,
+  WebkitFontSmoothing: "antialiased",
+  MozOsxFontSmoothing: "grayscale",
 };
 
-// --- DÁTUM FORMÁZÓK --- //
+const titleStyle: React.CSSProperties = {
+  fontSize: "1.05rem",
+  lineHeight: 1.3,
+  fontWeight: 600,
+  color: "var(--feed-text)",
+};
+
+const detailedStyle: React.CSSProperties = {
+  fontSize: "15px",
+  lineHeight: 1.75,
+  color: "var(--feed-text)",
+  letterSpacing: "0.2px",
+};
+
 function formatRelativeTime(dateString: string): string {
   const now = new Date();
   const date = new Date(dateString);
@@ -74,21 +86,25 @@ export default function FeedItemCard({
   viewMode: "card" | "compact";
 }) {
   const url = item.url || "";
-  const source = SOURCE_MAP[item.source_id] || "ismeretlen";
+  const source = {
+    1: "telex",
+    2: "24hu",
+    3: "index",
+    4: "hvg",
+    5: "portfolio",
+    6: "444",
+    7: "origo",
+  }[item.source_id] || "ismeretlen";
   const sourceClass = `source-${source}`;
 
-  // ============================
-  // ⭐ COMPACT NÉZET
-  // ============================
+  // Compact view
   if (viewMode === "compact") {
     return (
-      <div className={`feed-wrapper compact ${ebGaramond.className}`}>
+      <div className={`feed-wrapper compact ${ebGaramond.className}`} style={baseTextStyle}>
         <div
           className="feed-card compact mb-2 p-2 rounded theme-card"
           data-source-text={source.toUpperCase()}
-          onClick={() => {
-            window.location.href = `/cikk/${item.id}`;
-          }}
+          onClick={() => { window.location.href = `/cikk/${item.id}`; }}
           style={{ backgroundColor: "var(--bs-body-bg)" }}
         >
           <div className="d-flex justify-content-between">
@@ -103,6 +119,7 @@ export default function FeedItemCard({
                 rel="noopener noreferrer"
                 className="text-decoration-none title-compact"
                 onClick={(e) => e.stopPropagation()}
+                style={titleStyle}
               >
                 {item.title}
               </a>
@@ -119,34 +136,33 @@ export default function FeedItemCard({
             )}
           </div>
 
-          <div className={`mt-1 ${expanded ? "" : "clamp-2"} content-compact`}>
+          <div className={`mt-1 ${expanded ? "" : "clamp-2"} content-compact`} style={{ ...baseTextStyle }}>
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
           <button
             className="btn btn-link p-0 mt-1 compact-toggle"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              onToggle();
-            }}
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggle(); }}
+            style={{ fontSize: "0.9rem" }}
           >
             {expanded ? "🔽 Bezárás" : "📘 Részletek"}
           </button>
 
           {expanded && (
             <div className="mt-2 p-2 rounded theme-card-inner" style={{ backgroundColor: "var(--bs-body-bg)" }}>
-              <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
+              <div style={detailedStyle}>
+                <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
+              </div>
             </div>
           )}
 
           <div className="d-flex justify-content-between align-items-center mt-2">
-            <p className="text-muted small mb-0 time-compact" title={formatFullDate(item.created_at)}>
+            <p className="text-muted small mb-0 time-compact" title={formatFullDate(item.created_at)} style={{ fontSize: "0.85rem", color: "var(--article-muted)" }}>
               {formatRelativeTime(item.created_at)}
             </p>
 
             {item.category && (
-              <span className="category-compact">{item.category}</span>
+              <span className="category-compact" style={{ fontSize: "0.75rem", opacity: 0.9 }}>{item.category}</span>
             )}
           </div>
         </div>
@@ -154,21 +170,17 @@ export default function FeedItemCard({
     );
   }
 
-  // ============================
-  // ⭐ CARD NÉZET
-  // ============================
+  // Card view
   return (
-    <div className={`feed-wrapper ${ebGaramond.className}`}>
+    <div className={`feed-wrapper ${ebGaramond.className}`} style={baseTextStyle}>
       <div
         className="feed-card mb-3 p-3 rounded shadow-sm theme-card"
         data-source-text={source.toUpperCase()}
-        onClick={() => {
-          window.location.href = `/cikk/${item.id}`;
-        }}
+        onClick={() => { window.location.href = `/cikk/${item.id}`; }}
         style={{ backgroundColor: "var(--bs-body-bg)" }}
       >
         <div className="card-body position-relative" style={{ zIndex: 2 }}>
-          <h5 className="card-title d-flex justify-content-between align-items-center">
+          <h5 className="card-title d-flex justify-content-between align-items-center" style={{ margin: 0 }}>
             <div className="d-flex align-items-center gap-2">
               <span className={`badge me-2 ${sourceClass}`} style={{ fontWeight: "bold", fontSize: "0.75rem" }}>
                 {source.toUpperCase()}
@@ -180,54 +192,50 @@ export default function FeedItemCard({
                 rel="noopener noreferrer"
                 className="text-decoration-none title-card"
                 onClick={(e) => e.stopPropagation()}
+                style={titleStyle}
               >
                 {item.title}
               </a>
             </div>
 
             {item.ai_clean === 1 && (
-              <span
-                className={`badge ${sourceClass}`}
-                style={{ fontWeight: "bold" }}
-                title="Ez a tartalom teljes egészében AI által lett megfogalmazva."
-              >
+              <span className={`badge ${sourceClass}`} style={{ fontWeight: "bold" }} title="Ez a tartalom teljes egészében AI által lett megfogalmazva.">
                 AI‑fogalmazás
               </span>
             )}
           </h5>
 
-          <div className="mt-2 content-card">
+          <div className="mt-2 content-card" style={{ ...baseTextStyle }}>
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
           <button
             className="btn btn-link p-0 mt-2 card-toggle"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              onToggle();
-            }}
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggle(); }}
+            style={{ fontSize: "0.95rem" }}
           >
             {expanded ? "🔽 Bezárás" : "📘 Részletes elemzésért kattints ide!"}
           </button>
 
           {expanded && (
             <div className="mt-3 p-3 rounded theme-card-inner" style={{ backgroundColor: "var(--bs-body-bg)" }}>
-              {item.detailed_content ? (
-                <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
-              ) : (
-                <p className="text-warning small mb-0">Ehhez a hírhez nincs elmentve részletes elemzés.</p>
-              )}
+              <div style={detailedStyle}>
+                {item.detailed_content ? (
+                  <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
+                ) : (
+                  <p className="text-warning small mb-0">Ehhez a hírhez nincs elmentve részletes elemzés.</p>
+                )}
+              </div>
             </div>
           )}
 
           <div className="d-flex justify-content-between align-items-center mt-3">
-            <p className="text-muted small mb-0 time-card" title={formatFullDate(item.created_at)}>
+            <p className="text-muted small mb-0 time-card" title={formatFullDate(item.created_at)} style={{ fontSize: "0.9rem", color: "var(--article-muted)" }}>
               {formatRelativeTime(item.created_at)}
             </p>
 
             {item.category && (
-              <span className="category-card">{item.category}</span>
+              <span className="category-card" style={{ fontSize: "0.85rem", opacity: 0.9 }}>{item.category}</span>
             )}
           </div>
         </div>
