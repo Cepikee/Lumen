@@ -67,7 +67,8 @@ export default function WSourceClickbaitPro() {
         style={{ background: "var(--bs-body-bg, #f8fafc)" }}
       >
         {/* header: cím középre, info gomb jobbra */}
-        <div className="relative mb-6">
+        <div className="flex items-center justify-center gap-4 mb-6">
+
           <h2 className="text-3xl font-semibold tracking-tight text-center">
             Források átlagos clickbait pontszáma
           </h2>
@@ -76,7 +77,7 @@ export default function WSourceClickbaitPro() {
             onClick={() => setOpenInfo(true)}
             aria-label="Információ"
             type="button"
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-[26px] h-[26px] p-0 m-0 flex items-center justify-center bg-transparent border-0"
+            className="w-[26px] h-[26px] p-0 m-0 flex items-center justify-center bg-transparent border-0"
             style={{ width: 26, height: 26 }}
           >
             <img
