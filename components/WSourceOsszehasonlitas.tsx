@@ -95,27 +95,18 @@ export default function WSourceOsszehasonlitas() {
           </div>
         </div>
       </div>
-            {/* --- 5) DUPLICATION SCORE BLOKK --- */}
-      <div
-        className="p-4 rounded border bg-[var(--bs-body-bg)]"
-        style={{
-          borderColor: isDark ? "#1e293b" : "#e5e7eb",
-          color: isDark ? "#fff" : "#000",
-        }}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div
-            className="p-3 rounded border"
-            style={{
-              borderColor: isDark ? "#334155" : "#d1d5db",
-              backgroundColor: "var(--bs-body-bg)",
-            }}
-          >
-            <WSourceDuplication />
-          </div>
-        </div>
-      </div>
-
+           {/* --- 5) DUPLICATION SCORE BLOKK --- */}
+<div
+  className="p-4 rounded border bg-[var(--bs-body-bg)]"
+  style={{
+    borderColor: isDark ? "#1e293b" : "#e5e7eb",
+    color: isDark ? "#fff" : "#000",
+  }}
+>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <WSourceDuplication />
+  </div>
+</div>
     </div>
   );
 }
