@@ -54,9 +54,8 @@ export default function WSourceClickbaitRatio() {
 
   return (
     <div
-      /* újrahasznosítjuk a meglévő "ghost" osztályt, így nem kell új CSS */
+      /* újrahasznosítjuk a meglévő "ghost" osztályt, nincs új CSS */
       className={`relative p-10 rounded-3xl overflow-hidden wsource-card--ghost ${isDark ? "text-white" : "text-slate-900"}`}
-      /* biztos fallback a változóhoz, ha nincs definiálva */
       style={{ background: "var(--bs-body-bg, #f8fafc)" }}
     >
       {/* subtle background glow */}
@@ -79,92 +78,75 @@ export default function WSourceClickbaitRatio() {
 
       {/* MAIN CHART */}
       <div className="relative z-10 h-[440px]">
-        {/*
-          A következő wrapper osztályok (apexcharts-*) megegyeznek a
-          korábban használt CSS szelektorokkal, így a meglévő szabályok
-          (pl. .wsource-card--ghost .apexcharts-canvas { background: var(--bs-body-bg) })
-          hatni fognak anélkül, hogy új CSS‑t kellene írni.
-        */}
-        <div
-          className="apexcharts-canvas apexcharts-plot-area apexcharts-inner"
-          style={{ width: "100%", height: "100%", background: "var(--bs-body-bg, transparent)" }}
-        >
-          <ResponsiveContainer
-            width="100%"
-            height="100%"
-            /* extra osztály, hogy a meglévő szelektorok lefedjék */
-            className="apexcharts-plot-area"
+        <ResponsiveContainer width="100%" height="100%" className="apexcharts-plot-area">
+          <BarChart
+            key={isDark ? "dark" : "light"}
+            layout="vertical"
+            data={sources}
+            margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
           >
-            <BarChart
-              key={isDark ? "dark" : "light"}
-              layout="vertical"
-              data={sources}
-              margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
-            >
-              <XAxis
-                type="number"
-                domain={[0, 100]}
-                stroke={isDark ? "#cbd5e1" : "#475569"}
-                tick={{ fill: isDark ? "#e2e8f0" : "#334155" }}
-                tickFormatter={(v) => `${v}%`}
+            <XAxis
+              type="number"
+              domain={[0, 100]}
+              stroke={isDark ? "#cbd5e1" : "#475569"}
+              tick={{ fill: isDark ? "#e2e8f0" : "#334155" }}
+              tickFormatter={(v) => `${v}%`}
+            />
+
+            <YAxis
+              type="category"
+              dataKey="name"
+              width={130}
+              stroke={isDark ? "#e2e8f0" : "#334155"}
+              tick={{ fill: isDark ? "#e2e8f0" : "#334155" }}
+            />
+
+            {/* cursor={false} kikapcsolja a hover háttér "szürke izét" */}
+            <Tooltip
+              cursor={false}
+              contentStyle={{
+                backgroundColor: isDark ? "#1e293b" : "#ffffff",
+                border: isDark ? "1px solid #334155" : "1px solid #e5e7eb",
+                borderRadius: "12px",
+                color: isDark ? "#f1f5f9" : "#0f172a",
+              }}
+              labelStyle={{
+                color: isDark ? "#f8fafc" : "#0f172a",
+                fontWeight: 600,
+              }}
+              itemStyle={{
+                color: isDark ? "#ffffff" : "#000000",
+                fontWeight: 500,
+              }}
+              formatter={(value?: number) => [
+                `${(value ?? 0).toFixed(1)}%`,
+                "Clickbait arány",
+              ]}
+            />
+
+            <Bar dataKey="ratio" radius={[0, 14, 14, 0]} animationDuration={900}>
+              <LabelList
+                dataKey="ratio"
+                position="right"
+                fill={isDark ? "#ffffff" : "#000000"}
+                formatter={(value: any) => {
+                  const num = Number(value);
+                  return isNaN(num) ? "" : `${num.toFixed(1)}%`;
+                }}
+                style={{ fontSize: "14px", fontWeight: 600 }}
               />
 
-              <YAxis
-                type="category"
-                dataKey="name"
-                width={130}
-                stroke={isDark ? "#e2e8f0" : "#334155"}
-                tick={{ fill: isDark ? "#e2e8f0" : "#334155" }}
-              />
-
-              <Tooltip
-                cursor={{
-                  fill: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)",
-                }}
-                contentStyle={{
-                  backgroundColor: isDark ? "#1e293b" : "#ffffff",
-                  border: isDark ? "1px solid #334155" : "1px solid #e5e7eb",
-                  borderRadius: "12px",
-                  color: isDark ? "#f1f5f9" : "#0f172a",
-                }}
-                labelStyle={{
-                  color: isDark ? "#f8fafc" : "#0f172a",
-                  fontWeight: 600,
-                }}
-                itemStyle={{
-                  color: isDark ? "#ffffff" : "#000000",
-                  fontWeight: 500,
-                }}
-                formatter={(value?: number) => [
-                  `${(value ?? 0).toFixed(1)}%`,
-                  "Clickbait arány",
-                ]}
-              />
-
-              <Bar dataKey="ratio" radius={[0, 14, 14, 0]} animationDuration={900}>
-                <LabelList
-                  dataKey="ratio"
-                  position="right"
-                  fill={isDark ? "#ffffff" : "#000000"}
-                  formatter={(value: any) => {
-                    const num = Number(value);
-                    return isNaN(num) ? "" : `${num.toFixed(1)}%`;
-                  }}
-                  style={{ fontSize: "14px", fontWeight: 600 }}
+              {sources.map((entry: any, index: number) => (
+                <Cell
+                  key={index}
+                  fill={getBarColor(entry.ratio)}
+                  stroke={index < 3 ? "rgba(255,255,255,0.4)" : "none"}
+                  strokeWidth={index < 3 ? 2 : 0}
                 />
-
-                {sources.map((entry: any, index: number) => (
-                  <Cell
-                    key={index}
-                    fill={getBarColor(entry.ratio)}
-                    stroke={index < 3 ? "rgba(255,255,255,0.4)" : "none"}
-                    strokeWidth={index < 3 ? 2 : 0}
-                  />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
