@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import useSWR from "swr";
 import { useMemo, useState, useEffect } from "react";
-import UtomModal from "@/components/UtomModal"; // igazítsd az útvonalat, ha máshol van
+import UtomModal from "@/components/UtomModal";
 import { useUserStore } from "@/store/useUserStore";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
@@ -144,6 +144,7 @@ Eredeti: ${item.original}
             Másolási arány források szerint
           </h2>
 
+          {/* Minimalista info button: csak az SVG, semmi kör, pontosan 26x26 */}
           <button
             onClick={() => {
               console.debug("INFO BUTTON CLICKED — openInfo before set:", openInfo);
@@ -151,10 +152,17 @@ Eredeti: ${item.original}
             }}
             aria-label="Információ"
             type="button"
-            style={{ zIndex: 50 }}
-            className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition"
+            className="w-[26px] h-[26px] p-0 m-0 flex items-center justify-center bg-transparent border-0"
+            style={{ width: 26, height: 26 }}
           >
-            <img src="/icons/info-svg.svg" alt="info" className="w-4 h-4 object-contain pointer-events-none" />
+            <img
+              src="/icons/info-svg.svg"
+              alt="info"
+              className="w-[26px] h-[26px] object-contain pointer-events-none"
+              width={26}
+              height={26}
+              style={{ display: "block" }}
+            />
           </button>
         </div>
 
