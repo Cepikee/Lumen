@@ -92,8 +92,11 @@ export default function FeedItemCard({
   const titleClasses = "text-[1.15rem] leading-[1.3] font-semibold text-[#4da3ff] no-underline hover:text-[#77b8ff]";
   const detailedClasses = "text-[15px] leading-[1.75] text-[var(--feed-text)] tracking-[0.2px]";
 
-  // AI badge boxed style (border + bg)
-  const aiBadge = "inline-flex items-center gap-1 px-2 py-0.5 rounded border border-black text-[0.65rem] font-bold";
+  // source badge base (same look as original CSS badges)
+  const sourceBadgeBase = "inline-block text-[0.75rem] font-bold px-2 py-0.5 rounded";
+
+  // AI badge should use the same visual style as the source badge (per request)
+  const aiBadgeClasses = `${sourceBadgeBase} ${sourceInfo.badgeBg} border border-black`;
 
   if (viewMode === "compact") {
     return (
@@ -107,11 +110,13 @@ export default function FeedItemCard({
           style={{ backgroundColor: "var(--bs-body-bg)" }}
         >
           <div className="flex justify-between">
-            <div className="flex items-start gap-2">
-              <span className={`${sourceInfo.badgeBg} inline-block text-[0.65rem] font-bold px-2 py-0.5 rounded`}>
+            <div className="flex items-center gap-3">
+              {/* Source badge (colored) */}
+              <span className={`${sourceBadgeBase} ${sourceInfo.badgeBg} leading-none`}>
                 {sourceText}
               </span>
 
+              {/* Title (kept blue and formatted) */}
               <a
                 href={url}
                 target="_blank"
@@ -123,12 +128,13 @@ export default function FeedItemCard({
               </a>
             </div>
 
+            {/* AI badge uses same badge styling as source badge */}
             {item.ai_clean === 1 && (
               <span
-                className={`${aiBadge} bg-[#00AEEF] text-white`}
+                className={aiBadgeClasses}
                 title="Ez a tartalom teljes egészében AI által lett megfogalmazva."
               >
-                🤖 <span className="hidden sm:inline">AI</span>
+                🤖 AI
               </span>
             )}
           </div>
@@ -137,6 +143,7 @@ export default function FeedItemCard({
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
+          {/* Részletes elemzés link — egyszerű, kék, nincs kocka körvonal */}
           <button
             className="mt-2 text-sm text-sky-500 hover:underline p-0"
             onClick={(e) => {
@@ -149,7 +156,7 @@ export default function FeedItemCard({
           </button>
 
           {expanded && (
-            <div className="mt-2 p-2 rounded theme-card-inner" style={{ backgroundColor: "var(--bs-body-bg)" }}>
+            <div className="mt-2 p-2 rounded theme-card-inner" style={{ backgroundColor: "var(--feed-bg-inner)" }}>
               <div className={detailedClasses}>
                 <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
               </div>
@@ -174,6 +181,7 @@ export default function FeedItemCard({
     );
   }
 
+  // CARD view
   return (
     <div className={`${wrapperFont} feed-wrapper`}>
       <div
@@ -186,11 +194,13 @@ export default function FeedItemCard({
       >
         <div className="card-body relative z-10">
           <h5 className="card-title flex justify-between items-start m-0">
-            <div className="flex items-start gap-2 max-w-[78%]">
-              <span className={`${sourceInfo.badgeBg} inline-block font-bold text-[0.75rem] px-2 py-0.5 rounded`}>
+            <div className="flex items-center gap-3 max-w-[78%]">
+              {/* Source badge */}
+              <span className={`${sourceBadgeBase} ${sourceInfo.badgeBg} leading-none`}>
                 {sourceText}
               </span>
 
+              {/* Title */}
               <a
                 href={url}
                 target="_blank"
@@ -202,9 +212,10 @@ export default function FeedItemCard({
               </a>
             </div>
 
+            {/* AI badge styled like source badge and placed inline */}
             {item.ai_clean === 1 && (
               <span
-                className={`${aiBadge} bg-[#00AEEF] text-white ml-2`}
+                className={`${aiBadgeClasses} ml-2`}
                 title="Ez a tartalom teljes egészében AI által lett megfogalmazva."
               >
                 AI‑fogalmazás
@@ -216,6 +227,7 @@ export default function FeedItemCard({
             <ReactMarkdown>{item.content}</ReactMarkdown>
           </div>
 
+          {/* Részletes elemzés link — kék, egyszerű, nincs doboz */}
           <button
             className="mt-2 text-sm text-sky-500 hover:underline p-0"
             onClick={(e) => {
@@ -228,7 +240,7 @@ export default function FeedItemCard({
           </button>
 
           {expanded && (
-            <div className="mt-3 p-3 rounded theme-card-inner" style={{ backgroundColor: "var(--bs-body-bg)" }}>
+            <div className="mt-3 p-3 rounded theme-card-inner" style={{ backgroundColor: "var(--feed-bg-inner)" }}>
               <div className={detailedClasses}>
                 {item.detailed_content ? (
                   <ReactMarkdown>{item.detailed_content}</ReactMarkdown>
