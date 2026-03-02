@@ -23,7 +23,7 @@ export interface FeedItem {
 }
 
 const baseTextStyle: React.CSSProperties = {
-  fontSize: "16px",
+  fontSize: "17px",           // nagyobb alap betűméret
   lineHeight: 1.7,
   color: "var(--feed-text)",
   letterSpacing: "0.2px",
@@ -33,10 +33,11 @@ const baseTextStyle: React.CSSProperties = {
 };
 
 const titleStyle: React.CSSProperties = {
-  fontSize: "1.05rem",
+  fontSize: "1.15rem",        // nagyobb cím
   lineHeight: 1.3,
   fontWeight: 600,
-  color: "var(--feed-text)",
+  color: "#4da3ff",          // vissza a kék cím
+  textDecoration: "none",
 };
 
 const detailedStyle: React.CSSProperties = {
@@ -97,7 +98,6 @@ export default function FeedItemCard({
   }[item.source_id] || "ismeretlen";
   const sourceClass = `source-${source}`;
 
-  // Compact view
   if (viewMode === "compact") {
     return (
       <div className={`feed-wrapper compact ${ebGaramond.className}`} style={baseTextStyle}>
@@ -143,7 +143,7 @@ export default function FeedItemCard({
           <button
             className="btn btn-link p-0 mt-1 compact-toggle"
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggle(); }}
-            style={{ fontSize: "0.9rem" }}
+            style={{ fontSize: "0.95rem" }}
           >
             {expanded ? "🔽 Bezárás" : "📘 Részletek"}
           </button>
@@ -157,12 +157,12 @@ export default function FeedItemCard({
           )}
 
           <div className="d-flex justify-content-between align-items-center mt-2">
-            <p className="text-muted small mb-0 time-compact" title={formatFullDate(item.created_at)} style={{ fontSize: "0.85rem", color: "var(--article-muted)" }}>
+            <p className="text-muted small mb-0 time-compact" title={formatFullDate(item.created_at)} style={{ fontSize: "0.9rem", color: "var(--article-muted)" }}>
               {formatRelativeTime(item.created_at)}
             </p>
 
             {item.category && (
-              <span className="category-compact" style={{ fontSize: "0.75rem", opacity: 0.9 }}>{item.category}</span>
+              <span className="category-compact" style={{ fontSize: "0.85rem", opacity: 0.95 }}>{item.category}</span>
             )}
           </div>
         </div>
@@ -170,7 +170,6 @@ export default function FeedItemCard({
     );
   }
 
-  // Card view
   return (
     <div className={`feed-wrapper ${ebGaramond.className}`} style={baseTextStyle}>
       <div
@@ -230,12 +229,12 @@ export default function FeedItemCard({
           )}
 
           <div className="d-flex justify-content-between align-items-center mt-3">
-            <p className="text-muted small mb-0 time-card" title={formatFullDate(item.created_at)} style={{ fontSize: "0.9rem", color: "var(--article-muted)" }}>
+            <p className="text-muted small mb-0 time-card" title={formatFullDate(item.created_at)} style={{ fontSize: "0.95rem", color: "var(--article-muted)" }}>
               {formatRelativeTime(item.created_at)}
             </p>
 
             {item.category && (
-              <span className="category-card" style={{ fontSize: "0.85rem", opacity: 0.9 }}>{item.category}</span>
+              <span className="category-card" style={{ fontSize: "0.9rem", opacity: 0.95 }}>{item.category}</span>
             )}
           </div>
         </div>
