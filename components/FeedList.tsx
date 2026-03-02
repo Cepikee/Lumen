@@ -29,10 +29,6 @@ export default function FeedList({
         <FeedItemCard
           key={item.id}
           item={item}
-          expanded={expandedId === item.id}
-          onToggle={() =>
-            setExpandedId(expandedId === item.id ? null : item.id)
-          }
           viewMode={viewMode}
         />
       ))}
