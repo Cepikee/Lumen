@@ -145,27 +145,33 @@ export default function FeedItemCard({
               <ReactMarkdown>{item.content}</ReactMarkdown>
             </div>
 
-            {/* CTA */}
-            <p className="mt-3 text-sm text-sky-500">
-              📘 Részletes elemzés megtekintéséhez kattints a kártyára
-            </p>
+           
 
             {/* FOOTER */}
-            <div className="flex justify-between items-center mt-3">
-              <p
-                className="text-muted text-[0.95rem] mb-0"
-                title={formatFullDate(item.created_at)}
-                style={{ color: "var(--article-muted)" }}
-              >
-                {formatRelativeTime(item.created_at)}
-              </p>
+          <div className="flex items-center justify-between mt-3 text-[0.95rem]">
 
-              {item.category && (
-                <span className="category-card text-[1.05rem] opacity-95 uppercase">
-                  {item.category}
-                </span>
-              )}
-            </div>
+            {/* Bal oldal – idő */}
+            <p
+              className="mb-0"
+              title={formatFullDate(item.created_at)}
+              style={{ color: "var(--article-muted)" }}
+            >
+              {formatRelativeTime(item.created_at)}
+            </p>
+
+            {/* Középső CTA – kisebb, diszkrétebb */}
+            <p className="text-[0.8rem] opacity-70 text-sky-500 text-center flex-1 px-4 whitespace-nowrap overflow-hidden text-ellipsis">
+              Részletes elemzés megtekintéséhez kattintson a kártyára
+            </p>
+
+            {/* Jobb oldal – kategória */}
+            {item.category && (
+              <span className="uppercase">
+                {item.category}
+              </span>
+            )}
+
+          </div>
 
           </div>
         </div>
