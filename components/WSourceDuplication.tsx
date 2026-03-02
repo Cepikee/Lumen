@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import useSWR from "swr";
 import { useMemo, useState, useEffect } from "react";
-import { createPortal } from "react-dom";
+import UtomModal from "@/components/UtomModal"; // igazítsd az útvonalat, ha máshol van
 import { useUserStore } from "@/store/useUserStore";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
@@ -30,10 +30,6 @@ export default function WSourceDuplication() {
     console.debug("WSourceDuplication mounted");
     return () => console.debug("WSourceDuplication unmounted");
   }, []);
-
-  useEffect(() => {
-    console.debug("openInfo changed:", openInfo);
-  }, [openInfo]);
 
   const isDark =
     theme === "dark" ||
@@ -136,29 +132,15 @@ Eredeti: ${item.original}
     grid: { borderColor: isDark ? "#334155" : "#e2e8f0" },
   };
 
-  const ModalPortal = ({ children }: { children: React.ReactNode }) => {
-    if (typeof document === "undefined") return null;
-    return createPortal(children, document.body);
-  };
-
   return (
     <>
-      {/* Inline small CSS for the fade-in animation (works without extra Tailwind plugin) */}
-      <style>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(8px) scale(0.995); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .animate-fade-in-up { animation: fadeInUp 220ms cubic-bezier(.2,.9,.2,1) both; }
-      `}</style>
-
       <div
-        className={`relative z-10 p-12 rounded-3xl backdrop-blur-2xl border transition-all duration-500
-        ${isDark ? "bg-white/5 border-white/10 text-white" : "bg-white/70 border-slate-200 text-slate-900"}
-        shadow-[0_40px_100px_rgba(0,0,0,0.12)]`}
+        className={`relative z-10 p-12 rounded-3xl transition-all duration-500
+          ${isDark ? "bg-white/5 border-white/10 text-white" : "bg-white/70 border-slate-200 text-slate-900"}
+          shadow-[0_20px_60px_rgba(2,6,23,0.08)] border`}
       >
-        <div className="relative flex items-center justify-center mb-6">
-          <h2 className="text-3xl font-semibold tracking-tight text-center mr-3">
+        <div className="flex items-center justify-center gap-4 mb-6">
+          <h2 className="text-3xl font-semibold tracking-tight text-center">
             Másolási arány források szerint
           </h2>
 
@@ -169,78 +151,37 @@ Eredeti: ${item.original}
             }}
             aria-label="Információ"
             type="button"
-            style={{ position: "relative", zIndex: 99999, pointerEvents: "auto", width: 36, height: 36 }}
-            className="opacity-90 hover:opacity-100 transition flex items-center justify-center rounded-full bg-white/10"
+            style={{ zIndex: 50 }}
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition"
           >
-            <img src="/icons/info-svg.svg" alt="info" className="w-[18px] h-[18px] object-contain pointer-events-none" />
+            <img src="/icons/info-svg.svg" alt="info" className="w-4 h-4 object-contain pointer-events-none" />
           </button>
         </div>
 
-        <div className="relative z-0 min-h-[320px]">
+        <div className="relative z-0 min-h-[340px]">
           <Chart options={options} series={series} type="bar" height={420} />
         </div>
       </div>
 
-      {openInfo && (
-        <ModalPortal>
-          <div
-            className="fixed inset-0 flex items-center justify-center"
-            style={{ zIndex: 2147483647 }}
-            onMouseDown={(e) => {
-              if (e.target === e.currentTarget) setOpenInfo(false);
-            }}
-          >
-            {/* Backdrop */}
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+      <UtomModal show={openInfo} onClose={() => setOpenInfo(false)} title="Mi az a másolási arány?">
+        <div className="text-sm leading-relaxed">
+          <p className="mb-3">
+            A rendszer azt méri, hogy egy adott hírforrás hányszor közöl olyan hírt, amelyet egy másik forrás már korábban publikált.
+          </p>
 
-            {/* Dialog */}
-            <div
-              className={`relative z-10 w-full max-w-lg mx-4 p-6 rounded-2xl shadow-xl border animate-fade-in-up
-                ${isDark ? "bg-slate-900 text-white border-slate-700" : "bg-white text-slate-900 border-slate-200"}`}
-              role="dialog"
-              aria-modal="true"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2">Mi az a másolási arány?</h3>
-                  <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                    A rendszer azt méri, hogy egy adott hírforrás hányszor közöl olyan hírt,
-                    amelyet egy másik forrás már korábban publikált.
-                    <br />
-                    <br />
-                    <strong>Eredeti:</strong> hányszor volt ő az első.
-                    <br />
-                    <strong>Átvett:</strong> hányszor jelent meg nála később ugyanaz a hír.
-                    <br />
-                    <br />
-                    A mutató: <strong>Átvett / (Eredeti + Átvett)</strong>.
-                  </p>
-                </div>
+          <p className="mb-2">
+            <strong>Eredeti:</strong> hányszor volt ő az első.
+          </p>
 
-                {/* Close X */}
-                <button
-                  onClick={() => setOpenInfo(false)}
-                  aria-label="Bezárás"
-                  className="ml-2 p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-slate-700 dark:text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
+          <p className="mb-2">
+            <strong>Átvett:</strong> hányszor jelent meg nála később ugyanaz a hír.
+          </p>
 
-              <div className="mt-6 flex justify-center">
-                <button
-                  onClick={() => setOpenInfo(false)}
-                  className="px-6 py-2 rounded-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 transition"
-                >
-                  Bezárás
-                </button>
-              </div>
-            </div>
-          </div>
-        </ModalPortal>
-      )}
+          <p className="mt-3">
+            A mutató: <strong>Átvett / (Eredeti + Átvett)</strong>.
+          </p>
+        </div>
+      </UtomModal>
     </>
   );
 }
