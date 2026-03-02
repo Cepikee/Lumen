@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
 
-// Típus a végső eredményhez
 interface DuplicationRow {
   source: string;
   original: number;
@@ -15,12 +14,12 @@ export async function GET(req: Request) {
     const sec = securityCheck(req);
     if (sec) return sec;
 
-    // 🔥 1 QUERY – minden adat egyben, villámgyorsan
+    // 🔥 1 QUERY – collation fixszel
     const [rows]: any = await db.query(`
       SELECT 
         a.source,
-        SUM(a.source = c.first_source) AS original,
-        SUM(a.source <> c.first_source) AS duplicate
+        SUM(a.source COLLATE utf8mb4_0900_ai_ci = c.first_source COLLATE utf8mb4_0900_ai_ci) AS original,
+        SUM(a.source COLLATE utf8mb4_0900_ai_ci <> c.first_source COLLATE utf8mb4_0900_ai_ci) AS duplicate
       FROM articles a
       JOIN clusters c ON a.cluster_id = c.id
       WHERE c.first_published_at >= CURDATE()
@@ -34,7 +33,6 @@ export async function GET(req: Request) {
       });
     }
 
-    // 🔢 Eredmények átalakítása típusosan
     const duplication: DuplicationRow[] = rows.map((r: any) => {
       const original = Number(r.original);
       const duplicate = Number(r.duplicate);
@@ -49,7 +47,6 @@ export async function GET(req: Request) {
       };
     });
 
-    // 📊 Rendezés: ki a leginkább követő
     duplication.sort(
       (a: DuplicationRow, b: DuplicationRow) =>
         b.duplicationScore - a.duplicationScore
