@@ -164,7 +164,7 @@ Eredeti: ${item.original}
       </div>
 
       {openInfo && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[9999]">
           <div
             className={`p-8 rounded-2xl max-w-lg text-center ${
               isDark ? "bg-slate-800 text-white" : "bg-white text-slate-900"
