@@ -153,12 +153,16 @@ Eredeti: ${item.original}
         shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
       >
         <h2 className="text-3xl font-semibold tracking-tight text-center mb-10 flex items-center justify-center gap-2">
-          Másolási arány források szerint
-          <InformationCircleIcon
-            className="w-5 h-5 mt-1 cursor-pointer opacity-70 hover:opacity-100 transition"
-            onClick={() => setOpenInfo(true)}
-          />
-        </h2>
+  Másolási arány források szerint
+
+  <button
+    onClick={() => setOpenInfo(true)}
+    className="w-5 h-5 mt-1 opacity-70 hover:opacity-100 transition"
+  >
+    <img src="/icons/info.svg" alt="info" className="w-5 h-5" />
+  </button>
+</h2>
+
 
         <Chart options={options} series={series} type="bar" height={420} />
       </div>
