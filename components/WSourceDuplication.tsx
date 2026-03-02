@@ -5,7 +5,6 @@ import useSWR from "swr";
 import { useMemo, useState } from "react";
 import { useUserStore } from "@/store/useUserStore";
 
-
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 interface DuplicationItem {
@@ -144,7 +143,7 @@ Eredeti: ${item.original}
   return (
     <>
       <div
-        className={`p-12 rounded-3xl backdrop-blur-2xl border transition-all duration-500
+        className={`relative z-0 pointer-events-none p-12 rounded-3xl backdrop-blur-2xl border transition-all duration-500
         ${
           isDark
             ? "bg-white/5 border-white/10 text-white"
@@ -152,19 +151,29 @@ Eredeti: ${item.original}
         }
         shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
       >
-        <h2 className="text-3xl font-semibold tracking-tight text-center mb-10 flex items-center justify-center gap-2">
-  Másolási arány források szerint
+        <h2 className="text-3xl font-semibold tracking-tight text-center mb-10 flex items-center justify-center gap-2 pointer-events-auto">
+          Másolási arány források szerint
 
-  <button
-    onClick={() => setOpenInfo(true)}
-    className="w-5 h-5 mt-1 opacity-70 hover:opacity-100 transition"
-  >
-    <img src="/icons/info.svg" alt="info" className="w-5 h-5" />
-  </button>
-</h2>
+                          <button
+                  onClick={() => setOpenInfo(true)}
+                  className="w-[26px] h-[26px] mt-1 opacity-70 hover:opacity-100 transition flex items-center justify-center"
+                >
+                  <img
+                    src="/icons/info-svg.svg"
+                    alt="info"
+                    className="w-[26px] h-[26px] object-contain"
+                  />
+                </button>
 
+        </h2>
 
-        <Chart options={options} series={series} type="bar" height={420} />
+        <Chart
+          options={options}
+          series={series}
+          type="bar"
+          height={420}
+          className="pointer-events-auto"
+        />
       </div>
 
       {openInfo && (
@@ -179,18 +188,13 @@ Eredeti: ${item.original}
             </h3>
 
             <p className="text-sm leading-relaxed mb-6">
-              A rendszer azt méri, hogy egy adott hírforrás hányszor közöl olyan
-              hírt, amelyet egy másik forrás már korábban publikált. Ha egy
-              forrás gyakran vesz át másoktól híreket, magasabb lesz a
-              másolási aránya.
-              <br />
-              <br />
+              A rendszer azt méri, hogy egy adott hírforrás hányszor közöl olyan hírt,
+              amelyet egy másik forrás már korábban publikált.
+              <br /><br />
               <strong>Eredeti:</strong> hányszor volt ő az első.
               <br />
-              <strong>Átvett:</strong> hányszor jelent meg nála később ugyanaz a
-              hír.
-              <br />
-              <br />
+              <strong>Átvett:</strong> hányszor jelent meg nála később ugyanaz a hír.
+              <br /><br />
               A mutató: <strong>Átvett / (Eredeti + Átvett)</strong>.
             </p>
 
