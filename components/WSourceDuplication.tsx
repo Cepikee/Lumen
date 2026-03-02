@@ -87,7 +87,7 @@ export default function WSourceDuplication() {
       animations: { enabled: true },
       foreColor: isDark ? "#fff" : "#000",
       zoom: { enabled: false },
-      background: "var(--bs-body-bg, #f8fafc)" // <-- itt a változó + fallback
+      background: "var(--bs-body-bg, #f8fafc)",
     },
     theme: { mode: isDark ? "dark" : "light" },
     plotOptions: {
@@ -135,19 +135,15 @@ Eredeti: ${item.original}
 
   return (
     <>
-                <div
-            className={`relative z-10 p-12 rounded-3xl transition-all duration-500
-              text-slate-900
-              ${isDark ? "text-white" : "text-slate-900"}
-              bg-transparent border-transparent shadow-none border`}
-          >
-
+      <div
+        className={`relative z-10 p-12 rounded-3xl transition-all duration-500 wsource-card--ghost
+          ${isDark ? "text-white" : "text-slate-900"}`}
+      >
         <div className="flex items-center justify-center gap-4 mb-6">
           <h2 className="text-3xl font-semibold tracking-tight text-center">
             Másolási arány források szerint
           </h2>
 
-          {/* Minimalista info button: csak az SVG, semmi kör, pontosan 26x26 */}
           <button
             onClick={() => {
               console.debug("INFO BUTTON CLICKED — openInfo before set:", openInfo);

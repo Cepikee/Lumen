@@ -2221,3 +2221,34 @@ html.theme-dark .nav-link {
 [data-theme="dark"] .apexcharts-canvas {
   background: var(--bs-body-bg, #0f172a) !important;
 }
+/* wsource-card--ghost: a doboz ott marad, de a látható keret eltűnik */
+.wsource-card--ghost {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Ha inline style vagy Tailwind border osztály marad, ez is felülírja */
+.wsource-card--ghost[style] {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ApexCharts belső plot area és canvas: használja a rendszer body bg változóját (vagy legyen átlátszó) */
+.wsource-card--ghost .apexcharts-canvas,
+.wsource-card--ghost .apexcharts-plot-area,
+.wsource-card--ghost .apexcharts-inner {
+  background: var(--bs-body-bg, transparent) !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+/* Ha dark theme osztályt használsz (.dark vagy data-theme="dark"), finomhangolás */
+.dark .wsource-card--ghost .apexcharts-canvas,
+[data-theme="dark"] .wsource-card--ghost .apexcharts-canvas {
+  background: var(--bs-body-bg, #0f172a) !important;
+}
+
+/* opcionális: ha szeretnéd, hogy a cím és gomb kontrasztja mindig jó legyen */
+.wsource-card--ghost h2 { color: inherit; }
+.wsource-card--ghost button img { display: block; }
