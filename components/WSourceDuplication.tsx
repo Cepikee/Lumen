@@ -192,3 +192,5 @@ Eredeti: ${item.original}
     </>
   );
 }
+
+// LEGACY: régi Recharts-os verzió, ha esetleg kellene még valamiért
