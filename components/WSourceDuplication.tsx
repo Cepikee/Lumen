@@ -26,7 +26,6 @@ export default function WSourceDuplication() {
   const theme = useUserStore((s) => s.theme);
   const [openInfo, setOpenInfo] = useState(false);
 
-  // Debug logs
   useEffect(() => {
     console.debug("WSourceDuplication mounted");
     return () => console.debug("WSourceDuplication unmounted");
@@ -36,7 +35,6 @@ export default function WSourceDuplication() {
     console.debug("openInfo changed:", openInfo);
   }, [openInfo]);
 
-  // Global click logger (debug)
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       const el = e.target as HTMLElement | null;
@@ -108,9 +106,7 @@ export default function WSourceDuplication() {
       foreColor: isDark ? "#fff" : "#000",
       zoom: { enabled: false },
     },
-    theme: {
-      mode: isDark ? "dark" : "light",
-    },
+    theme: { mode: isDark ? "dark" : "light" },
     plotOptions: {
       bar: {
         borderRadius: 6,
@@ -123,28 +119,19 @@ export default function WSourceDuplication() {
     dataLabels: {
       enabled: true,
       formatter: (val) => `${(val as number).toFixed(1)}%`,
-      style: {
-        colors: [isDark ? "#fff" : "#000"],
-        fontSize: "12px",
-        fontWeight: 600,
-      },
+      style: { colors: [isDark ? "#fff" : "#000"], fontSize: "12px", fontWeight: 600 },
     },
     xaxis: {
       categories: items.map((i) => i.source),
       crosshairs: { show: false },
       labels: {
         rotate: -30,
-        style: {
-          colors: items.map(() => (isDark ? "#fff" : "#000")),
-          fontWeight: 600,
-        },
+        style: { colors: items.map(() => (isDark ? "#fff" : "#000")), fontWeight: 600 },
       },
     },
     yaxis: {
       crosshairs: { show: false },
-      labels: {
-        formatter: (val) => `${val}%`,
-      },
+      labels: { formatter: (val) => `${val}%` },
     },
     tooltip: {
       theme: isDark ? "dark" : "light",
@@ -160,13 +147,10 @@ Eredeti: ${item.original}
         },
       },
     },
-    grid: {
-      borderColor: isDark ? "#334155" : "#e2e8f0",
-    },
+    grid: { borderColor: isDark ? "#334155" : "#e2e8f0" },
   };
 
-  // Modal portal render helper
-  const Modal = ({ children }: { children: React.ReactNode }) => {
+  const ModalPortal = ({ children }: { children: React.ReactNode }) => {
     if (typeof document === "undefined") return null;
     return createPortal(children, document.body);
   };
@@ -175,14 +159,9 @@ Eredeti: ${item.original}
     <>
       <div
         className={`relative z-10 p-12 rounded-3xl backdrop-blur-2xl border transition-all duration-500
-        ${
-          isDark
-            ? "bg-white/5 border-white/10 text-white"
-            : "bg-white/70 border-slate-200 text-slate-900"
-        }
+        ${isDark ? "bg-white/5 border-white/10 text-white" : "bg-white/70 border-slate-200 text-slate-900"}
         shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
       >
-        {/* Header area: button positioned above chart */}
         <div className="relative flex items-center justify-center mb-6">
           <h2 className="text-3xl font-semibold tracking-tight text-center mr-3">
             Másolási arány források szerint
@@ -190,63 +169,49 @@ Eredeti: ${item.original}
 
           <button
             onClick={() => {
-              console.debug(
-                "INFO BUTTON CLICKED (handler start) — openInfo before set:",
-                openInfo
-              );
+              console.debug("INFO BUTTON CLICKED (handler start) — openInfo before set:", openInfo);
               setOpenInfo(true);
               console.debug("INFO BUTTON CLICKED (handler end)");
             }}
             aria-label="Információ"
             type="button"
-            style={{
-              position: "relative",
-              zIndex: 99999,
-              pointerEvents: "auto",
-              width: 26,
-              height: 26,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            className="opacity-80 hover:opacity-100 transition"
+            style={{ position: "relative", zIndex: 99999, pointerEvents: "auto", width: 26, height: 26 }}
+            className="opacity-80 hover:opacity-100 transition flex items-center justify-center"
           >
-            <img
-              src="/icons/info-svg.svg"
-              alt="info"
-              style={{ width: 20, height: 20, objectFit: "contain", pointerEvents: "none" }}
-            />
+            <img src="/icons/info-svg.svg" alt="info" className="w-[20px] h-[20px] object-contain pointer-events-none" />
           </button>
         </div>
 
-        {/* Chart container: ensure it has min height so ApexCharts can measure */}
         <div className="relative z-0 min-h-[320px]">
           <Chart options={options} series={series} type="bar" height={420} />
         </div>
       </div>
 
-      {/* Modal rendered into document.body via portal */}
       {openInfo && (
-        <Modal>
+        <ModalPortal>
           <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center"
-            style={{ zIndex: 2147483647 }} // extra high to be safe
-            onClick={(e) => {
+            className="fixed inset-0 flex items-center justify-center"
+            style={{ zIndex: 2147483647 }}
+            onMouseDown={(e) => {
+              // close when clicking backdrop (but not when clicking the dialog)
               const target = e.target as HTMLElement;
-              if (target && target.className && typeof target.className === "string" && target.className.includes("bg-black/50")) {
+              if (target && target === e.currentTarget) {
                 console.debug("Backdrop clicked — closing modal");
                 setOpenInfo(false);
               }
             }}
           >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+
+            {/* Dialog */}
             <div
-              className={`p-8 rounded-2xl max-w-lg text-center ${
-                isDark ? "bg-slate-800 text-white" : "bg-white text-slate-900"
-              }`}
+              className={`relative z-10 w-full max-w-lg mx-4 p-6 rounded-2xl shadow-xl border
+                ${isDark ? "bg-slate-800 text-white border-slate-700" : "bg-white text-slate-900 border-slate-200"}`}
               role="dialog"
               aria-modal="true"
             >
-              <h3 className="text-xl font-semibold mb-4">Mi az a másolási arány?</h3>
+              <h3 className="text-xl font-semibold mb-3">Mi az a másolási arány?</h3>
 
               <p className="text-sm leading-relaxed mb-6">
                 A rendszer azt méri, hogy egy adott hírforrás hányszor közöl olyan hírt,
@@ -261,18 +226,20 @@ Eredeti: ${item.original}
                 A mutató: <strong>Átvett / (Eredeti + Átvett)</strong>.
               </p>
 
-              <button
-                onClick={() => {
-                  console.debug("CLOSE BUTTON CLICKED");
-                  setOpenInfo(false);
-                }}
-                className="px-6 py-2 rounded-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 transition"
-              >
-                Bezárás
-              </button>
+              <div className="flex justify-center">
+                <button
+                  onClick={() => {
+                    console.debug("CLOSE BUTTON CLICKED");
+                    setOpenInfo(false);
+                  }}
+                  className="px-6 py-2 rounded-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 transition"
+                >
+                  Bezárás
+                </button>
+              </div>
             </div>
           </div>
-        </Modal>
+        </ModalPortal>
       )}
     </>
   );
