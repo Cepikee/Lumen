@@ -59,15 +59,6 @@ export default function WSourceOsszehasonlitas() {
           color: isDark ? "#fff" : "#000",
         }}
       >
-        <div className="relative z-10 mb-8 mt-2">
-          <h2
-            className="text-3xl font-bold tracking-tight text-center"
-            style={{ color: isDark ? "#fff" : "#000" }}
-          >
-            Források Clickbait Arányai
-          </h2>
-        </div>
-
         <WSourceClickbaitRatio />
       </div>
 

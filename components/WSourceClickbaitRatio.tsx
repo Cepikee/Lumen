@@ -65,7 +65,7 @@ export default function WSourceClickbaitRatio() {
         {/* header: cím + info gomb (26x26, csak SVG) */}
         <div className="flex items-center justify-center gap-4 mb-6">
           <h2 className="text-3xl font-semibold tracking-tight text-center">
-            Források clickbait arányai
+            Források Clickbait Arányai
           </h2>
 
           <button
