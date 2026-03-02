@@ -1,9 +1,11 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import useSWR from "swr";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { useUserStore } from "@/store/useUserStore";
-import { motion, AnimatePresence } from "framer-motion";
+
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 interface DuplicationItem {
   source: string;
@@ -27,8 +29,6 @@ export default function WSourceDuplication() {
     (theme === "system" &&
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-  const previousRanking = useRef<Record<string, number>>({});
 
   const { data, error, isLoading } = useSWR<{
     success: boolean;
@@ -54,7 +54,68 @@ export default function WSourceDuplication() {
       </div>
     );
 
-  const maxScore = Math.max(...items.map((i) => i.duplicationScore));
+  const series = [
+    {
+      name: "Másolási arány (%)",
+      data: items.map((i) => i.duplicationScore),
+    },
+  ];
+
+  const options: ApexCharts.ApexOptions = {
+    chart: {
+      type: "bar",
+      toolbar: { show: false },
+      animations: { enabled: true },
+      foreColor: isDark ? "#fff" : "#000",
+    },
+    theme: {
+      mode: isDark ? "dark" : "light",
+    },
+    plotOptions: {
+      bar: {
+        borderRadius: 6,
+        horizontal: false,
+        columnWidth: "45%",
+      },
+    },
+    colors: ["#ef4444"],
+    dataLabels: {
+      enabled: true,
+      formatter: (val) => `${(val as number).toFixed(1)}%`,
+      style: {
+        colors: [isDark ? "#fff" : "#000"],
+        fontSize: "12px",
+      },
+    },
+    xaxis: {
+      categories: items.map((i) => i.source),
+      labels: {
+        rotate: -30,
+        style: {
+          colors: items.map(() => (isDark ? "#fff" : "#000")),
+        },
+      },
+    },
+    yaxis: {
+      labels: {
+        formatter: (val) => `${val}%`,
+      },
+    },
+    tooltip: {
+      theme: isDark ? "dark" : "light",
+      y: {
+        formatter: (val, opts) => {
+          const item = items[opts.dataPointIndex];
+          return `Másolási arány: ${val.toFixed(1)}%
+Eredeti: ${item.original}
+Átvett: ${item.duplicate}`;
+        },
+      },
+    },
+    grid: {
+      borderColor: isDark ? "#334155" : "#e2e8f0",
+    },
+  };
 
   return (
     <div
@@ -66,101 +127,16 @@ export default function WSourceDuplication() {
       }
       shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
     >
-      <div className="flex justify-between items-center mb-14">
+      <div className="flex justify-between items-center mb-10">
         <h2 className="text-3xl font-semibold tracking-tight">
-          🔁 Duplication Score
+          🔁 Másolási arány (Duplication Score)
         </h2>
         <div className="text-sm opacity-60">
           Live ranking · 60 mp refresh
         </div>
       </div>
 
-      <div className="space-y-6">
-        {items.map((item, index) => {
-          const previousIndex =
-            previousRanking.current[item.source] ?? index;
-
-          const delta = previousIndex - index;
-          previousRanking.current[item.source] = index;
-
-          const percentage =
-            (item.duplicationScore / maxScore) * 100;
-
-          return (
-            <motion.div
-              key={item.source}
-              layout
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className={`p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1
-              ${
-                isDark
-                  ? "bg-white/5 border-white/10 hover:bg-white/10"
-                  : "bg-white border-slate-200 hover:bg-slate-50"
-              }
-              shadow-lg hover:shadow-2xl`}
-            >
-              {/* HEADER ROW */}
-              <div className="flex items-center justify-between">
-                {/* LEFT SIDE */}
-                <div className="flex items-center gap-4 min-w-0">
-                  <div className="text-lg font-semibold w-8 shrink-0">
-                    #{index + 1}
-                  </div>
-
-                  <div className="min-w-0">
-                    <div className="text-lg font-medium truncate">
-                      {item.source}
-                    </div>
-                    <div className="text-xs opacity-50">
-                      Eredeti: {item.original} · Átvett: {item.duplicate}
-                    </div>
-                  </div>
-
-                  <AnimatePresence>
-                    {delta !== 0 && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className={`text-xs font-semibold px-3 py-1 rounded-full
-                        ${
-                          delta > 0
-                            ? "bg-emerald-500/20 text-emerald-400"
-                            : "bg-red-500/20 text-red-400"
-                        }`}
-                      >
-                        {delta > 0
-                          ? `↑ ${delta}`
-                          : `↓ ${Math.abs(delta)}`}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                {/* RIGHT SIDE */}
-                <div className="flex items-center gap-6 shrink-0">
-                  <div className="text-xl font-bold w-24 text-right">
-                    {item.duplicationScore.toFixed(1)}%
-                  </div>
-                </div>
-              </div>
-
-              {/* PROGRESS BAR */}
-              <div className="mt-5 w-full h-2 rounded-full bg-white/10 overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${percentage}%` }}
-                  transition={{ duration: 0.8 }}
-                  className="h-full bg-gradient-to-r from-red-500 via-yellow-400 to-emerald-400"
-                />
-              </div>
-            </motion.div>
-          );
-        })}
-      </div>
+      <Chart options={options} series={series} type="bar" height={420} />
     </div>
   );
 }
