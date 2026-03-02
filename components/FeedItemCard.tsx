@@ -242,3 +242,5 @@ export default function FeedItemCard({
     </div>
   );
 }
+
+//*STABIL VERZIÓ, NEM SZABAD MÓDOSÍTANI*//
