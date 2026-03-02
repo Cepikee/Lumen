@@ -2,8 +2,9 @@
 
 import dynamic from "next/dynamic";
 import useSWR from "swr";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useUserStore } from "@/store/useUserStore";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -23,6 +24,7 @@ const fetcher = (url: string) =>
 
 export default function WSourceDuplication() {
   const theme = useUserStore((s) => s.theme);
+  const [openInfo, setOpenInfo] = useState(false);
 
   const isDark =
     theme === "dark" ||
@@ -61,7 +63,6 @@ export default function WSourceDuplication() {
     },
   ];
 
-  // --- SZÍNES PALETTA ---
   const palette = [
     "#ef4444",
     "#f97316",
@@ -82,7 +83,6 @@ export default function WSourceDuplication() {
       animations: { enabled: true },
       foreColor: isDark ? "#fff" : "#000",
       zoom: { enabled: false },
-      sparkline: { enabled: false },
     },
     theme: {
       mode: isDark ? "dark" : "light",
@@ -107,7 +107,7 @@ export default function WSourceDuplication() {
     },
     xaxis: {
       categories: items.map((i) => i.source),
-      crosshairs: { show: false }, // <-- NINCS SZÜRKE VONAL
+      crosshairs: { show: false },
       labels: {
         rotate: -30,
         style: {
@@ -117,7 +117,7 @@ export default function WSourceDuplication() {
       },
     },
     yaxis: {
-      crosshairs: { show: false }, // <-- NINCS SZÜRKE VONAL
+      crosshairs: { show: false },
       labels: {
         formatter: (val) => `${val}%`,
       },
@@ -142,20 +142,63 @@ Eredeti: ${item.original}
   };
 
   return (
-    <div
-      className={`p-12 rounded-3xl backdrop-blur-2xl border transition-all duration-500
-      ${
-        isDark
-          ? "bg-white/5 border-white/10 text-white"
-          : "bg-white/70 border-slate-200 text-slate-900"
-      }
-      shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
-    >
-      <h2 className="text-3xl font-semibold tracking-tight text-center mb-10">
-        Másolási arány (Duplication Score)
-      </h2>
+    <>
+      <div
+        className={`p-12 rounded-3xl backdrop-blur-2xl border transition-all duration-500
+        ${
+          isDark
+            ? "bg-white/5 border-white/10 text-white"
+            : "bg-white/70 border-slate-200 text-slate-900"
+        }
+        shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
+      >
+        <h2 className="text-3xl font-semibold tracking-tight text-center mb-10 flex items-center justify-center gap-2">
+          Másolási arány források szerint
+          <InformationCircleIcon
+            className="w-7 h-7 cursor-pointer opacity-70 hover:opacity-100 transition"
+            onClick={() => setOpenInfo(true)}
+          />
+        </h2>
 
-      <Chart options={options} series={series} type="bar" height={420} />
-    </div>
+        <Chart options={options} series={series} type="bar" height={420} />
+      </div>
+
+      {openInfo && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+          <div
+            className={`p-8 rounded-2xl max-w-lg text-center ${
+              isDark ? "bg-slate-800 text-white" : "bg-white text-slate-900"
+            }`}
+          >
+            <h3 className="text-xl font-semibold mb-4">
+              Mi az a másolási arány?
+            </h3>
+
+            <p className="text-sm leading-relaxed mb-6">
+              A rendszer azt méri, hogy egy adott hírforrás hányszor közöl olyan
+              hírt, amelyet egy másik forrás már korábban publikált. Ha egy
+              forrás gyakran vesz át másoktól híreket, magasabb lesz a
+              másolási aránya.
+              <br />
+              <br />
+              <strong>Eredeti:</strong> hányszor volt ő az első.
+              <br />
+              <strong>Átvett:</strong> hányszor jelent meg nála később ugyanaz a
+              hír.
+              <br />
+              <br />
+              A mutató: <strong>Átvett / (Eredeti + Átvett)</strong>.
+            </p>
+
+            <button
+              onClick={() => setOpenInfo(false)}
+              className="px-6 py-2 rounded-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 transition"
+            >
+              Bezárás
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
