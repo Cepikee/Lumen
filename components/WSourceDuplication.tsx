@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import useSWR from "swr";
 import { useMemo, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useUserStore } from "@/store/useUserStore";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
@@ -25,7 +26,7 @@ export default function WSourceDuplication() {
   const theme = useUserStore((s) => s.theme);
   const [openInfo, setOpenInfo] = useState(false);
 
-  // Debug state logs
+  // Debug logs
   useEffect(() => {
     console.debug("WSourceDuplication mounted");
     return () => console.debug("WSourceDuplication unmounted");
@@ -35,12 +36,16 @@ export default function WSourceDuplication() {
     console.debug("openInfo changed:", openInfo);
   }, [openInfo]);
 
-  // Optional global click logger for debugging which element receives clicks
+  // Global click logger (debug)
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       const el = e.target as HTMLElement | null;
       if (!el) return;
-      console.debug("GLOBAL CLICK target:", el.tagName, el.className || el.id || el.outerHTML?.slice(0, 120));
+      console.debug(
+        "GLOBAL CLICK target:",
+        el.tagName,
+        el.className || el.id || (el.outerHTML && el.outerHTML.slice(0, 120))
+      );
     };
     window.addEventListener("click", handler, true);
     return () => window.removeEventListener("click", handler, true);
@@ -160,6 +165,12 @@ Eredeti: ${item.original}
     },
   };
 
+  // Modal portal render helper
+  const Modal = ({ children }: { children: React.ReactNode }) => {
+    if (typeof document === "undefined") return null;
+    return createPortal(children, document.body);
+  };
+
   return (
     <>
       <div
@@ -171,16 +182,18 @@ Eredeti: ${item.original}
         }
         shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
       >
-        {/* Header area: button positioned above chart to avoid overlays */}
+        {/* Header area: button positioned above chart */}
         <div className="relative flex items-center justify-center mb-6">
           <h2 className="text-3xl font-semibold tracking-tight text-center mr-3">
             Másolási arány források szerint
           </h2>
 
-          {/* DEBUG BUTTON: inline styles ensure it's above everything and logs clicks */}
           <button
             onClick={() => {
-              console.debug("INFO BUTTON CLICKED (handler start) — openInfo before set:", openInfo);
+              console.debug(
+                "INFO BUTTON CLICKED (handler start) — openInfo before set:",
+                openInfo
+              );
               setOpenInfo(true);
               console.debug("INFO BUTTON CLICKED (handler end)");
             }}
@@ -212,52 +225,54 @@ Eredeti: ${item.original}
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Modal rendered into document.body via portal */}
       {openInfo && (
-        <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[99999]"
-          onClick={(e) => {
-            // close when clicking backdrop (debug)
-            const target = e.target as HTMLElement;
-            if (target && target.className && typeof target.className === "string" && target.className.includes("bg-black/50")) {
-              console.debug("Backdrop clicked — closing modal");
-              setOpenInfo(false);
-            }
-          }}
-        >
+        <Modal>
           <div
-            className={`p-8 rounded-2xl max-w-lg text-center ${
-              isDark ? "bg-slate-800 text-white" : "bg-white text-slate-900"
-            }`}
-            role="dialog"
-            aria-modal="true"
-          >
-            <h3 className="text-xl font-semibold mb-4">Mi az a másolási arány?</h3>
-
-            <p className="text-sm leading-relaxed mb-6">
-              A rendszer azt méri, hogy egy adott hírforrás hányszor közöl olyan hírt,
-              amelyet egy másik forrás már korábban publikált.
-              <br />
-              <br />
-              <strong>Eredeti:</strong> hányszor volt ő az első.
-              <br />
-              <strong>Átvett:</strong> hányszor jelent meg nála később ugyanaz a hír.
-              <br />
-              <br />
-              A mutató: <strong>Átvett / (Eredeti + Átvett)</strong>.
-            </p>
-
-            <button
-              onClick={() => {
-                console.debug("CLOSE BUTTON CLICKED");
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center"
+            style={{ zIndex: 2147483647 }} // extra high to be safe
+            onClick={(e) => {
+              const target = e.target as HTMLElement;
+              if (target && target.className && typeof target.className === "string" && target.className.includes("bg-black/50")) {
+                console.debug("Backdrop clicked — closing modal");
                 setOpenInfo(false);
-              }}
-              className="px-6 py-2 rounded-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 transition"
+              }
+            }}
+          >
+            <div
+              className={`p-8 rounded-2xl max-w-lg text-center ${
+                isDark ? "bg-slate-800 text-white" : "bg-white text-slate-900"
+              }`}
+              role="dialog"
+              aria-modal="true"
             >
-              Bezárás
-            </button>
+              <h3 className="text-xl font-semibold mb-4">Mi az a másolási arány?</h3>
+
+              <p className="text-sm leading-relaxed mb-6">
+                A rendszer azt méri, hogy egy adott hírforrás hányszor közöl olyan hírt,
+                amelyet egy másik forrás már korábban publikált.
+                <br />
+                <br />
+                <strong>Eredeti:</strong> hányszor volt ő az első.
+                <br />
+                <strong>Átvett:</strong> hányszor jelent meg nála később ugyanaz a hír.
+                <br />
+                <br />
+                A mutató: <strong>Átvett / (Eredeti + Átvett)</strong>.
+              </p>
+
+              <button
+                onClick={() => {
+                  console.debug("CLOSE BUTTON CLICKED");
+                  setOpenInfo(false);
+                }}
+                className="px-6 py-2 rounded-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 transition"
+              >
+                Bezárás
+              </button>
+            </div>
           </div>
-        </div>
+        </Modal>
       )}
     </>
   );
