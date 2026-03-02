@@ -155,7 +155,7 @@ Eredeti: ${item.original}
         <h2 className="text-3xl font-semibold tracking-tight text-center mb-10 flex items-center justify-center gap-2">
           Másolási arány források szerint
           <InformationCircleIcon
-            className="w-7 h-7 cursor-pointer opacity-70 hover:opacity-100 transition"
+            className="w-5 h-5 mt-1 cursor-pointer opacity-70 hover:opacity-100 transition"
             onClick={() => setOpenInfo(true)}
           />
         </h2>
