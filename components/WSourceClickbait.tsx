@@ -66,9 +66,9 @@ export default function WSourceClickbaitPro() {
         className={`relative p-10 rounded-3xl overflow-hidden wsource-card--ghost ${isDark ? "text-white" : "text-slate-900"}`}
         style={{ background: "var(--bs-body-bg, #f8fafc)" }}
       >
-        {/* header: cím + info gomb (26x26, csak SVG) */}
-        <div className="flex items-center justify-between gap-4 mb-6">
-          <h2 className="text-3xl font-semibold tracking-tight">
+        {/* header: cím középre, info gomb jobbra */}
+        <div className="relative mb-6">
+          <h2 className="text-3xl font-semibold tracking-tight text-center">
             Források átlagos clickbait pontszáma
           </h2>
 
@@ -76,7 +76,7 @@ export default function WSourceClickbaitPro() {
             onClick={() => setOpenInfo(true)}
             aria-label="Információ"
             type="button"
-            className="w-[26px] h-[26px] p-0 m-0 flex items-center justify-center bg-transparent border-0"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-[26px] h-[26px] p-0 m-0 flex items-center justify-center bg-transparent border-0"
             style={{ width: 26, height: 26 }}
           >
             <img
@@ -90,7 +90,7 @@ export default function WSourceClickbaitPro() {
           </button>
         </div>
 
-        {/* subtle background glow (meglévő vizuális elem, nem kötelező) */}
+        {/* subtle background glow (meglévő vizuális elem) */}
         <div
           className="absolute -top-32 -right-32 w-96 h-96 rounded-full blur-3xl pointer-events-none"
           style={{
@@ -193,7 +193,7 @@ export default function WSourceClickbaitPro() {
             Ez egy automatikus, összehasonlító mutató — hasznos trendek és különbségek feltárására, de nem helyettesíti az emberi értékelést.
           </p>
         </div>
-        </UtomModal>
+      </UtomModal>
     </>
   );
 }
