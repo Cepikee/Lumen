@@ -3,6 +3,14 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
 
+// ⭐ Biztonságos dátum normalizáló
+function normalizeDate(d: any): string | null {
+  if (!d) return null;
+  if (d instanceof Date) return d.toISOString();
+  const parsed = new Date(d);
+  return isNaN(parsed.getTime()) ? null : parsed.toISOString();
+}
+
 export async function GET(req: Request) {
   try {
     const sec = securityCheck(req);
@@ -44,10 +52,10 @@ export async function GET(req: Request) {
           source: r.source,
           avgDelay: Number(r.avgDelay),
           medianDelay: Number(r.medianDelay),
-          updatedAt: r.updatedAt,
+          updatedAt: normalizeDate(r.updatedAt),   // ⭐ mindig string vagy null
           history: historyRows
             .map((h: any) => Number(h.delay_minutes))
-            .reverse(), // időrendbe fordítjuk
+            .reverse(),
         };
       })
     );
@@ -56,6 +64,7 @@ export async function GET(req: Request) {
       success: true,
       leaderboard,
     });
+
   } catch (err) {
     console.error("SpeedIndex API error:", err);
     return NextResponse.json(

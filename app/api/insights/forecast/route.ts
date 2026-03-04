@@ -1,10 +1,17 @@
 // app/api/insights/forecast/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
+import { securityCheck } from "@/lib/security";
+
+// ⭐ Biztonságos dátum normalizáló
+function normalizeDate(d: any): string | null {
+  if (!d) return null;
+  if (d instanceof Date) return d.toISOString().slice(0, 10);
+  const parsed = new Date(d);
+  return isNaN(parsed.getTime()) ? null : parsed.toISOString().slice(0, 10);
+}
 
 export async function GET(req: Request) {
-  // ⭐ KÖZPONTI SECURITY CHECK
   const sec = securityCheck(req);
   if (sec) return sec;
 
@@ -18,9 +25,11 @@ export async function GET(req: Request) {
     const result: Record<string, any[]> = {};
 
     for (const r of rows) {
-      if (!result[r.category]) result[r.category] = [];
-      result[r.category].push({
-        date: r.date,
+      const cat = r.category || "Ismeretlen";
+      if (!result[cat]) result[cat] = [];
+
+      result[cat].push({
+        date: normalizeDate(r.date),   // ⭐ mindig string lesz, nem Date
         predicted: r.predicted,
       });
     }
@@ -38,5 +47,3 @@ export async function GET(req: Request) {
     );
   }
 }
-
-// Ez a route a /api/insights/forecast GET kérését kezeli, és visszaadja a kategóriák szerinti előrejelzéseket. A securityCheck függvény biztosítja, hogy csak jogosult kérések érkezzenek ide.

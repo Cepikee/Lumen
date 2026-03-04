@@ -1,7 +1,7 @@
 // app/api/insights/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
+import { securityCheck } from "@/lib/security";
 
 function normalizeDbString(s: any): string | null {
   if (s === null || s === undefined) return null;
@@ -11,13 +11,15 @@ function normalizeDbString(s: any): string | null {
   return t || null;
 }
 
-function toLocalISOString(date: Date) {
-  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-  return local.toISOString();
+// ⭐ Egységes, biztonságos dátum normalizáló
+function normalizeDate(d: any): Date | null {
+  if (!d) return null;
+  if (d instanceof Date) return d;
+  const parsed = new Date(d);
+  return isNaN(parsed.getTime()) ? null : parsed;
 }
 
 export async function GET(req: Request) {
-  // ⭐ KÖZPONTI SECURITY CHECK
   const sec = securityCheck(req);
   if (sec) return sec;
 
@@ -36,13 +38,14 @@ export async function GET(req: Request) {
   let start: Date;
 
   if (mode === "hours") {
-    start = new Date(now.getTime() - hours * 60 * 60 * 1000);
+    start = new Date(now.getTime() - hours * 3600 * 1000);
   } else {
     start = new Date(now);
     start.setDate(start.getDate() - (days - 1));
   }
 
-  const startStr = toLocalISOString(start).slice(0, 19).replace("T", " ");
+  // ⭐ DB-nek teljesen jó a sima ISO → nincs replace, nincs timezone hack
+  const startStr = start.toISOString().slice(0, 19).replace("T", " ");
 
   const rawCategory = url.searchParams.get("category");
   const categoryParam = rawCategory ? String(rawCategory).trim() : null;
@@ -95,7 +98,7 @@ export async function GET(req: Request) {
       const cat = normalizeDbString(r.category);
       const key = cat ?? "__NULL__";
 
-      const publishedAt = r.created_at ? new Date(r.created_at) : null;
+      const publishedAt = normalizeDate(r.created_at);
       const dominantSource = r.dominantSource ? String(r.dominantSource).trim() : "Ismeretlen";
 
       if (!catMap.has(key)) {
@@ -103,7 +106,7 @@ export async function GET(req: Request) {
           category: cat,
           articleCount: 0,
           sourceSet: new Set(),
-          lastArticleAt: publishedAt ? toLocalISOString(publishedAt) : null,
+          lastArticleAt: publishedAt ? publishedAt.toISOString() : null,
           sourceCounts: new Map(),
           sparkBuckets: new Map(),
         });
@@ -112,20 +115,28 @@ export async function GET(req: Request) {
       const entry = catMap.get(key)!;
       entry.articleCount += 1;
       entry.sourceSet.add(dominantSource);
-      entry.sourceCounts.set(dominantSource, (entry.sourceCounts.get(dominantSource) || 0) + 1);
+      entry.sourceCounts.set(
+        dominantSource,
+        (entry.sourceCounts.get(dominantSource) || 0) + 1
+      );
 
-      if (publishedAt && (!entry.lastArticleAt || toLocalISOString(publishedAt) > entry.lastArticleAt)) {
-        entry.lastArticleAt = toLocalISOString(publishedAt);
+      if (
+        publishedAt &&
+        (!entry.lastArticleAt || publishedAt.toISOString() > entry.lastArticleAt)
+      ) {
+        entry.lastArticleAt = publishedAt.toISOString();
       }
 
       if (publishedAt) {
-        const local = new Date(publishedAt.getTime() - publishedAt.getTimezoneOffset() * 60000);
         const bucketKey =
           mode === "hours"
-            ? local.toISOString().slice(0, 13) + ":00:00"
-            : local.toISOString().slice(0, 10);
+            ? publishedAt.toISOString().slice(0, 13) + ":00:00"
+            : publishedAt.toISOString().slice(0, 10);
 
-        entry.sparkBuckets.set(bucketKey, (entry.sparkBuckets.get(bucketKey) || 0) + 1);
+        entry.sparkBuckets.set(
+          bucketKey,
+          (entry.sparkBuckets.get(bucketKey) || 0) + 1
+        );
       }
     }
 
@@ -136,11 +147,10 @@ export async function GET(req: Request) {
 
       const steps = mode === "hours" ? hours : days;
       for (let i = 0; i < steps; i++) {
-        const localCursor = new Date(cursor.getTime() - cursor.getTimezoneOffset() * 60000);
         const key =
           mode === "hours"
-            ? localCursor.toISOString().slice(0, 13) + ":00:00"
-            : localCursor.toISOString().slice(0, 10);
+            ? cursor.toISOString().slice(0, 13) + ":00:00"
+            : cursor.toISOString().slice(0, 10);
 
         spark.push(buckets.get(key) ?? 0);
 
@@ -153,17 +163,23 @@ export async function GET(req: Request) {
 
     const categories = Array.from(catMap.values())
       .map((e) => {
-        const total = Array.from(e.sourceCounts.values()).reduce((sum: number, c: number) => sum + c, 0) || 1;
+        const total =
+          Array.from(e.sourceCounts.values()).reduce(
+            (sum: number, c: number) => sum + c,
+            0
+          ) || 1;
 
-        const ringSources = Array.from(e.sourceCounts.entries()).map(([label, count]) => {
-          const normalized = label.toLowerCase().replace(".hu", "").trim();
-          return {
-            name: normalized,
-            label,
-            count,
-            percent: Math.round((count / total) * 100),
-          };
-        });
+        const ringSources = Array.from(e.sourceCounts.entries()).map(
+          ([label, count]) => {
+            const normalized = label.toLowerCase().replace(".hu", "").trim();
+            return {
+              name: normalized,
+              label,
+              count,
+              percent: Math.round((count / total) * 100),
+            };
+          }
+        );
 
         return {
           category: e.category,
@@ -177,22 +193,31 @@ export async function GET(req: Request) {
       })
       .sort((a, b) => b.articleCount - a.articleCount);
 
-    const items = (rows || []).slice(0, 200).map((r: any) => ({
-      id: String(r.id),
-      title: r.title,
-      category: normalizeDbString(r.category),
-      timeAgo: r.created_at ? toLocalISOString(new Date(r.created_at)) : null,
-      dominantSource: r.dominantSource || "",
-      sources: 1,
-      score: 0,
-      href: normalizeDbString(r.category)
-        ? `/insights/category/${encodeURIComponent(normalizeDbString(r.category)!)}` 
-        : `/insights/${r.id}`,
-    }));
+    const items = (rows || []).slice(0, 200).map((r: any) => {
+      const created = normalizeDate(r.created_at);
+
+      return {
+        id: String(r.id),
+        title: r.title,
+        category: normalizeDbString(r.category),
+        timeAgo: created ? created.toISOString() : null,
+        dominantSource: r.dominantSource || "",
+        sources: 1,
+        score: 0,
+        href: normalizeDbString(r.category)
+          ? `/insights/category/${encodeURIComponent(
+              normalizeDbString(r.category)!
+            )}`
+          : `/insights/${r.id}`,
+      };
+    });
 
     return NextResponse.json({ success: true, period, categories, items });
   } catch (err) {
     console.error("Insights route error:", err);
-    return NextResponse.json({ success: false, error: "server_error" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "server_error" },
+      { status: 500 }
+    );
   }
 }
