@@ -59,11 +59,11 @@ export async function GET(req: Request) {
 
     // --- 4) Mai nap intervalluma ---
     const now = new Date();
-    const endStr = now.toISOString().slice(0, 19).replace("T", " ");
+const endStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")} 23:59:59`;
 
     const startUtc = new Date(now.getTime());
     startUtc.setHours(0, 0, 0, 0);
-    const startStr = startUtc.toISOString().slice(0, 19).replace("T", " ");
+    const startStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")} 00:00:00`;
 
     // --- 5) Bucket-alapú SQL ---
     const [rows]: any = await db.query(
