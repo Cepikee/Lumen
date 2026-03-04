@@ -5,3 +5,5 @@ export function middleware(req: NextRequest) {
   // Itt nem kell semmit csinálni, csak továbbengedjük a kérést
   return new Response(null, { status: 200 });
 }
+
+// Middleware konfiguráció
