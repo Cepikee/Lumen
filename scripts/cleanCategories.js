@@ -19,7 +19,6 @@ export async function cleanCategories() {
 
   // --- DINAMIKUS IMPORTOK (ESM + változó path) ---
   const { db } = await import(r("lib/db.js"));
-  const { securityCheck } = await import(r("lib/security.js"));
 
   // --- IDE JÖN A TISZTÍTÓ LOGIKA ---
   console.log("DB OK, SECURITY OK – fut a tisztítás...");
