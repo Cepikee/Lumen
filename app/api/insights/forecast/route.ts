@@ -38,3 +38,5 @@ export async function GET(req: Request) {
     );
   }
 }
+
+// Ez a route a /api/insights/forecast GET kérését kezeli, és visszaadja a kategóriák szerinti előrejelzéseket. A securityCheck függvény biztosítja, hogy csak jogosult kérések érkezzenek ide.
