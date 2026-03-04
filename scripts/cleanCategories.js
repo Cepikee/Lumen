@@ -1,3 +1,5 @@
+// scripts/cleanCategories.js
+
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -5,16 +7,22 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT = path.resolve(__dirname, "..");
+
 function r(p) {
   return path.join(ROOT, p);
 }
 
-// DB + SECURITY
-import { db } from r("lib/db.js");
-import { securityCheck } from r("lib/security.js");
-
 export async function cleanCategories() {
-  console.log(">>> CLEANING CATEGORIES <<<");
+  console.log(">>> CLEAN CATEGORIES START <<<");
 
-  // ide jön a logika amit eddig TS-ben használtál
+  // DINAMIKUS IMPORT – ESM-ben ez az egyetlen mód változó path-ra
+  const { db } = await import(r("lib/db.js"));
+  const { securityCheck } = await import(r("lib/security.js"));
+
+  // --- IDE JÖN A TISZTÍTÓ LOGIKA ---
+  console.log("DB OK, SECURITY OK – fut a tisztítás...");
+
+  // ... a te kódod ...
+
+  console.log(">>> CLEAN CATEGORIES DONE <<<");
 }

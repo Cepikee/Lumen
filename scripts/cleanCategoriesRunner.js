@@ -1,10 +1,9 @@
-// cleanCategoriesRunner.js
+// scripts/cleanCategoriesRunner.js
 
 (async () => {
   try {
     console.log(">>> PM2 CLEANER START <<<");
 
-    // ESM modul betöltése dinamikusan
     const { cleanCategories } = await import("./cleanCategories.js");
 
     await cleanCategories();
