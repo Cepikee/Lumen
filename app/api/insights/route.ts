@@ -11,7 +11,6 @@ function normalizeDbString(s: any): string | null {
   return t || null;
 }
 
-// ⭐ Egységes, biztonságos dátum normalizáló
 function normalizeDate(d: any): Date | null {
   if (!d) return null;
   if (d instanceof Date) return d;
@@ -44,8 +43,14 @@ export async function GET(req: Request) {
     start.setDate(start.getDate() - (days - 1));
   }
 
-  // ⭐ DB-nek teljesen jó a sima ISO → nincs replace, nincs timezone hack
-  const startStr = start.toISOString().slice(0, 19).replace("T", " ");
+  // HELYI IDŐ
+  const startStr =
+    `${start.getFullYear()}-` +
+    `${String(start.getMonth() + 1).padStart(2, "0")}-` +
+    `${String(start.getDate()).padStart(2, "0")} ` +
+    `${String(start.getHours()).padStart(2, "0")}:` +
+    `${String(start.getMinutes()).padStart(2, "0")}:` +
+    `${String(start.getSeconds()).padStart(2, "0")}`;
 
   const rawCategory = url.searchParams.get("category");
   const categoryParam = rawCategory ? String(rawCategory).trim() : null;

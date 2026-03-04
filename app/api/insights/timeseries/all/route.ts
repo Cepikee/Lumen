@@ -1,32 +1,25 @@
 // app/api/insights/timeseries/all/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
+import { securityCheck } from "@/lib/security";
 
 function fixCat(s: any): string | null {
   if (!s) return null;
-
   let t = String(s).replace(/[\x00-\x1F\x7F]/g, "").trim();
   if (!t) return null;
-
   if (/[├â├ę├╝├║]/.test(t)) {
-    try {
-      t = Buffer.from(t, "latin1").toString("utf8").trim();
-    } catch {}
+    try { t = Buffer.from(t, "latin1").toString("utf8").trim(); } catch {}
   }
-
   return t || null;
 }
 
 export async function GET(req: Request) {
-  // ⭐ KÖZPONTI SECURITY CHECK
   const sec = securityCheck(req);
   if (sec) return sec;
 
   const url = new URL(req.url);
   const period = url.searchParams.get("period") || "24h";
 
-  // PERIOD LOGIKA
   let minutesBack = 24 * 60;
   let sqlBucket = "%Y-%m-%d %H:%i:00";
 
@@ -45,12 +38,24 @@ export async function GET(req: Request) {
     sqlBucket = "%Y-%m-%d %H:00:00";
   }
 
-  // IDŐINTERVALLUM
+  // HELYI IDŐ
   const now = new Date();
-  const endStr = now.toISOString().slice(0, 19).replace("T", " ");
+  const endStr =
+    `${now.getFullYear()}-` +
+    `${String(now.getMonth() + 1).padStart(2, "0")}-` +
+    `${String(now.getDate()).padStart(2, "0")} ` +
+    `${String(now.getHours()).padStart(2, "0")}:` +
+    `${String(now.getMinutes()).padStart(2, "0")}:` +
+    `${String(now.getSeconds()).padStart(2, "0")}`;
 
-  const startUtc = new Date(now.getTime() - minutesBack * 60 * 1000);
-  const startStr = startUtc.toISOString().slice(0, 19).replace("T", " ");
+  const startLocal = new Date(now.getTime() - minutesBack * 60 * 1000);
+  const startStr =
+    `${startLocal.getFullYear()}-` +
+    `${String(startLocal.getMonth() + 1).padStart(2, "0")}-` +
+    `${String(startLocal.getDate()).padStart(2, "0")} ` +
+    `${String(startLocal.getHours()).padStart(2, "0")}:` +
+    `${String(startLocal.getMinutes()).padStart(2, "0")}:` +
+    `${String(startLocal.getSeconds()).padStart(2, "0")}`;
 
   try {
     const [cats]: any = await db.query(`

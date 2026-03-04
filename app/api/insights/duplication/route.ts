@@ -1,3 +1,4 @@
+// app/api/insights/clickbait-duplication/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
@@ -14,17 +15,26 @@ export async function GET(req: Request) {
     const sec = securityCheck(req);
     if (sec) return sec;
 
-    // 🔥 1 QUERY – collation fixszel
-    const [rows]: any = await db.query(`
+    // 🔥 HELYI IDŐ – mai nap 00:00:00
+    const now = new Date();
+    const startStr =
+      `${now.getFullYear()}-` +
+      `${String(now.getMonth() + 1).padStart(2, "0")}-` +
+      `${String(now.getDate()).padStart(2, "0")} 00:00:00`;
+
+    const [rows]: any = await db.query(
+      `
       SELECT 
         a.source,
         SUM(a.source COLLATE utf8mb4_0900_ai_ci = c.first_source COLLATE utf8mb4_0900_ai_ci) AS original,
         SUM(a.source COLLATE utf8mb4_0900_ai_ci <> c.first_source COLLATE utf8mb4_0900_ai_ci) AS duplicate
       FROM articles a
       JOIN clusters c ON a.cluster_id = c.id
-      WHERE c.first_published_at >= CURDATE()
+      WHERE c.first_published_at >= ?
       GROUP BY a.source
-    `);
+      `,
+      [startStr]
+    );
 
     if (!rows || rows.length === 0) {
       return NextResponse.json({

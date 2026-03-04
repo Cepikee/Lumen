@@ -3,31 +3,23 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
 
-// --- Kategória tisztító (ugyanaz, mint máshol) ---
 function fixCat(s: any): string | null {
   if (!s) return null;
-
   let t = String(s).replace(/[\x00-\x1F\x7F]/g, "").trim();
   if (!t) return null;
-
   if (/[├â├ę├╝├║]/.test(t)) {
     try {
       t = Buffer.from(t, "latin1").toString("utf8").trim();
     } catch {}
   }
-
   return t || null;
 }
 
 export async function GET(req: Request) {
   try {
-    // ⭐ SECURITY CHECK
     const sec = securityCheck(req);
     if (sec) return sec;
 
-    // ─────────────────────────────────────────────
-    // 1) Forrásonkénti átlag clickbait
-    // ─────────────────────────────────────────────
     const [sourceRows]: any = await db.query(`
       SELECT 
         source,
@@ -39,9 +31,6 @@ export async function GET(req: Request) {
       ORDER BY avg_clickbait DESC
     `);
 
-    // ─────────────────────────────────────────────
-    // 2) Kategóriánkénti átlag clickbait
-    // ─────────────────────────────────────────────
     const [catRows]: any = await db.query(`
       SELECT 
         TRIM(category) AS category,
@@ -62,14 +51,25 @@ export async function GET(req: Request) {
     }));
 
     // ─────────────────────────────────────────────
-    // 3) 24 órás clickbait trend (óránként)
+    // 24 órás trend – HELYI IDŐ
     // ─────────────────────────────────────────────
     const now = new Date();
-    const endStr = now.toISOString().slice(0, 19).replace("T", " ");
+    const endStr =
+      `${now.getFullYear()}-` +
+      `${String(now.getMonth() + 1).padStart(2, "0")}-` +
+      `${String(now.getDate()).padStart(2, "0")} ` +
+      `${String(now.getHours()).padStart(2, "0")}:` +
+      `${String(now.getMinutes()).padStart(2, "0")}:` +
+      `${String(now.getSeconds()).padStart(2, "0")}`;
 
-    const startUtc = new Date(now.getTime());
-    startUtc.setHours(startUtc.getHours() - 24);
-    const startStr = startUtc.toISOString().slice(0, 19).replace("T", " ");
+    const startLocal = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    const startStr =
+      `${startLocal.getFullYear()}-` +
+      `${String(startLocal.getMonth() + 1).padStart(2, "0")}-` +
+      `${String(startLocal.getDate()).padStart(2, "0")} ` +
+      `${String(startLocal.getHours()).padStart(2, "0")}:` +
+      `${String(startLocal.getMinutes()).padStart(2, "0")}:` +
+      `${String(startLocal.getSeconds()).padStart(2, "0")}`;
 
     const [trendRows]: any = await db.query(
       `
@@ -93,9 +93,6 @@ export async function GET(req: Request) {
       count: Number(r.count) || 0
     }));
 
-    // ─────────────────────────────────────────────
-    // 4) Top 20 legclickbaitebb cikk
-    // ─────────────────────────────────────────────
     const [topRows]: any = await db.query(`
       SELECT 
         article_id,
@@ -110,9 +107,6 @@ export async function GET(req: Request) {
       LIMIT 20
     `);
 
-    // ─────────────────────────────────────────────
-    // 5) Összesített statisztikák
-    // ─────────────────────────────────────────────
     const [statsRows]: any = await db.query(`
       SELECT 
         AVG(final_clickbait) AS avg_clickbait,
@@ -130,9 +124,6 @@ export async function GET(req: Request) {
       total: Number(statsRows[0].total) || 0
     };
 
-    // ─────────────────────────────────────────────
-    // VÁLASZ
-    // ─────────────────────────────────────────────
     return NextResponse.json({
       success: true,
       sources: sourceRows,

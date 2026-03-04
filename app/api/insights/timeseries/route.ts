@@ -1,7 +1,7 @@
 // app/api/insights/timeseries/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
+import { securityCheck } from "@/lib/security";
 
 function normalizeDbString(s: any): string | null {
   if (s === null || s === undefined) return null;
@@ -12,7 +12,6 @@ function normalizeDbString(s: any): string | null {
 }
 
 export async function GET(req: Request) {
-  // ⭐ KÖZPONTI SECURITY CHECK
   const sec = securityCheck(req);
   if (sec) return sec;
 
@@ -32,10 +31,15 @@ export async function GET(req: Request) {
   if (period === "30d") days = 30;
   else if (period === "90d") days = 90;
 
+  // HELYI IDŐ – kezdő dátum
   const now = new Date();
-  const start = new Date(now);
-  start.setDate(now.getDate() - (days - 1));
-  const startStr = start.toISOString().slice(0, 10);
+  const startLocal = new Date(now);
+  startLocal.setDate(now.getDate() - (days - 1));
+
+  const startStr =
+    `${startLocal.getFullYear()}-` +
+    `${String(startLocal.getMonth() + 1).padStart(2, "0")}-` +
+    `${String(startLocal.getDate()).padStart(2, "0")}`;
 
   try {
     const sql = `
@@ -55,14 +59,19 @@ export async function GET(req: Request) {
     }
 
     const points: { date: string; count: number }[] = [];
-    const cursor = new Date(start);
+    const cursor = new Date(startLocal);
 
     for (let i = 0; i < days; i++) {
-      const d = cursor.toISOString().slice(0, 10);
+      const d =
+        `${cursor.getFullYear()}-` +
+        `${String(cursor.getMonth() + 1).padStart(2, "0")}-` +
+        `${String(cursor.getDate()).padStart(2, "0")}`;
+
       points.push({
         date: d,
         count: map.get(d) ?? 0,
       });
+
       cursor.setDate(cursor.getDate() + 1);
     }
 
