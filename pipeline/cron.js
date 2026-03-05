@@ -216,6 +216,16 @@ async function processArticlePipeline(article) {
     return res;
   });
 
+  // 4/B) SENTIMENT — OpenAI
+await runWithRetries("[SENTIMENT] 😊 Hangulatelemzés", async () => {
+  const { processSentiment } = require("./pipeline/sentiment");
+  const res = await processSentiment(articleId);
+  if (!res?.ok) throw new Error(res?.error || "sentiment sikertelen");
+  return res;
+});
+
+
+
   // 5) Cím generálás — OPENAI
   let title = "";
   await runWithRetries("[TITLE] 🏷️ Cím", async () => {
