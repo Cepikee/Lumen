@@ -37,7 +37,7 @@ export default function WhatHappenedToday() {
         <div className="col-12 col-lg-6 d-flex flex-column gap-4">
 
           {/* FENT – KIUGRÓ AKTIVITÁSOK (VÍZSZINTES) */}
-          <div className="wht-box module-box horizontal-list border-0 shadow-none bg-transparent p-0">
+          <div className="horizontal-list bg-transparent border-0 shadow-none p-0 m-0">
             <WhatHappenedTodaySpikeDetection />
           </div>
 
