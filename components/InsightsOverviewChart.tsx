@@ -298,3 +298,5 @@ export default function InsightsOverviewChart({
     </div>
   );
 }
+/** stabil verzió
+ * - sima görbe (monotone) */
