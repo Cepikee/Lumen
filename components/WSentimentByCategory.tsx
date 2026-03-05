@@ -45,11 +45,15 @@ export default function WSentimentByCategory() {
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: "bar",
-      background: "transparent", // 🔥 nincs apex háttér
+      background: "transparent",
       foreColor: isDark ? "#fff" : "#000",
       toolbar: { show: false },
       animations: { enabled: true },
       zoom: { enabled: false },
+
+      // 🔥 TELJES HIGHLIGHT TILTÁS
+      selection: { enabled: false },
+      brush: { enabled: false },
     },
 
     theme: { mode: isDark ? "dark" : "light" },
@@ -58,13 +62,21 @@ export default function WSentimentByCategory() {
       bar: {
         horizontal: false,
         borderRadius: 6,
+
+        // 🔥 hover opacity tiltása
+        colors: {
+          ranges: [],
+          backgroundBarOpacity: 1,
+        },
+
+        distributed: false, // 🔥 fontos!
       },
     },
 
-    colors: ["#ef4444"],
-
+    // 🔥 nincs crosshair
     xaxis: {
       categories,
+      crosshairs: { show: false },
       labels: {
         rotate: -30,
         style: {
@@ -94,26 +106,31 @@ export default function WSentimentByCategory() {
       },
     },
 
+    // 🔥 nincs hover highlight
     states: {
-      hover: { filter: { type: "none" } }, // 🔥 nincs hover highlight
+      hover: { filter: { type: "none" } },
       active: { filter: { type: "none" } },
     },
 
     grid: {
       borderColor: isDark ? "#334155" : "#e2e8f0",
-      strokeDashArray: 3, // 🔥 nincs világos csík hoverkor
+      strokeDashArray: 3,
     },
 
     tooltip: {
       theme: isDark ? "dark" : "light",
       fillSeriesColor: false,
       marker: { show: false },
+      shared: false, // 🔥 ne highlightoljon sort
+      intersect: false,
     },
 
     legend: {
       labels: { colors: isDark ? "#fff" : "#000" },
-      onItemHover: { highlightDataSeries: false }, // 🔥 nincs legend hover highlight
+      onItemHover: { highlightDataSeries: false },
     },
+
+    colors: ["#ef4444"],
   };
 
   const series = [
@@ -127,7 +144,7 @@ export default function WSentimentByCategory() {
     <>
       <div
         className="relative z-10 p-12 rounded-3xl wsource-card--ghost"
-        style={{ background: "var(--bs-body-bg)" }} // 🔥 UTOM háttér
+        style={{ background: "var(--bs-body-bg)" }}
       >
         <div className="flex items-center justify-center gap-4 mb-6">
           <h2 className="text-3xl font-semibold tracking-tight text-center">
@@ -153,9 +170,7 @@ export default function WSentimentByCategory() {
         title="Mit mutat ez a grafikon?"
       >
         <div className="text-sm leading-relaxed">
-          <p>
-            Melyik kategóriában hány negatív hangulatú cikk jelent meg ma.
-          </p>
+          <p>Melyik kategóriában hány negatív hangulatú cikk jelent meg ma.</p>
           <p className="mt-2">
             Ez segít látni, mely témák a leginkább negatívak a hírekben.
           </p>
