@@ -38,30 +38,28 @@ function isValidTimestamp(ts) {
 }
 
 /**
- * Speed Index frissítése az összes cluster alapján
- *
- * Javítások, amiket beépít:
- * - egy clusterből forrásonként csak a legkorábbi cikket vesszük figyelembe
- * - ha egy clusterben kevesebb, mint 2 különböző forrás van, kihagyjuk (nincs összehasonlítás)
- * - az első (legelső) forrás késését (0) nem toljuk be a késések közé, így a medián nem lesz automatikusan 0
- * - negatív vagy túl nagy késéseket kiszűrünk (pl. > 240 perc)
- * - Portfolio jellegű forrásokat opcionálisan kizárunk (konfigurálható)
- * - hibakezelés és logolás
+ * Biztonságos mentés előtti validáció
  */
+function isSafeStat(avg, med, maxMinutes = 1000) {
+  if (!isFinite(avg) || !isFinite(med)) return false;
+  if (avg <= 0 || med <= 0) return false;
+  if (avg > maxMinutes || med > maxMinutes) return false;
+  return true;
+}
+
 async function updateSpeedIndex() {
   const conn = await mysql.createConnection({
     host: process.env.DB_HOST || "localhost",
     user: process.env.DB_USER || "root",
     password: process.env.DB_PASS || "jelszo",
     database: process.env.DB_NAME || "projekt2025",
-    // optional: increase timeout if needed
-    // connectTimeout: 10000,
   });
 
   try {
     // Konfiguráció
     const MAX_DELAY_MINUTES = 240; // 4 óra: ennél nagyobb különbség valószínűleg nem ugyanaz a hír
-    const EXCLUDE_SOURCES = new Set(["portfolio.hu", "portfolio"]); // ha kell, bővíthető
+    const SAFE_MAX_SAVE = 1000; // mentésnél ez a felső határ (perc)
+    const EXCLUDE_SOURCES = new Set(["portfolio.hu", "portfolio"]); // opcionális kizárás
 
     // 1) Lekérjük az összes clustert
     const [clusters] = await conn.execute("SELECT id FROM clusters");
@@ -110,7 +108,7 @@ async function updateSpeedIndex() {
       for (const item of earliestBySource) {
         const delayMinutes = (item.publishedAt - firstPublished) / 1000 / 60;
 
-        // kizárjuk a negatív értékeket (ha valami időzóna/probléma) és a túl nagy értékeket
+        // kizárjuk a negatív értékeket és a túl nagy értékeket
         if (!isFinite(delayMinutes) || delayMinutes <= 0 || delayMinutes > MAX_DELAY_MINUTES) {
           continue;
         }
@@ -120,7 +118,7 @@ async function updateSpeedIndex() {
       }
     }
 
-    // 3) Speed Index táblába mentjük az eredményeket
+    // 3) Speed Index táblába mentjük az eredményeket és history-t is írunk
     let updatedCount = 0;
     for (const source of Object.keys(delaysBySource)) {
       const delays = delaysBySource[source];
@@ -131,7 +129,13 @@ async function updateSpeedIndex() {
       const avg = average(delays);
       const med = median(delays);
 
-      // Mentés: kerekítve 1 tizedesre, de a DB mező típusa szerint módosítható
+      // Validáció: ne mentsünk NaN/negatív/túl nagy értéket
+      if (!isSafeStat(avg, med, SAFE_MAX_SAVE)) {
+        console.warn(`Skipping save for ${source} due to invalid stats avg=${avg}, med=${med}`);
+        continue;
+      }
+
+      // Mentés az aggregate táblába
       await conn.execute(
         `
         INSERT INTO speed_index (source, avg_delay_minutes, median_delay_minutes, updated_at)
@@ -144,6 +148,26 @@ async function updateSpeedIndex() {
         [source, Number(avg.toFixed(1)), Number(med.toFixed(1))]
       );
 
+      // History írása: minden egyes delay külön sor lesz (később aggregálható)
+      // Tömbös beszúrás hatékonyság miatt készítünk multi-row INSERT-et
+      try {
+        const placeholders = delays.map(() => "(?, ?, NOW())").join(", ");
+        const params = [];
+        for (const d of delays) {
+          params.push(source, Number(d.toFixed(1)));
+        }
+        // Ha létezik a speed_index_history tábla, beszúrjuk; ha nincs, elkapjuk a hibát és logoljuk
+        if (placeholders.length > 0) {
+          await conn.execute(
+            `INSERT INTO speed_index_history (source, delay_minutes, created_at) VALUES ${placeholders}`,
+            params
+          );
+        }
+      } catch (e) {
+        // Ha nincs history tábla vagy más hiba, logoljuk, de ne álljon le a pipeline
+        console.warn(`Failed to write history for ${source}:`, e.message || e);
+      }
+
       updatedCount++;
     }
 
@@ -155,7 +179,7 @@ async function updateSpeedIndex() {
       rawSourcesFound: Object.keys(delaysBySource).length,
     };
   } catch (err) {
-    await conn.end();
+    try { await conn.end(); } catch (e) {}
     console.error("updateSpeedIndex error:", err);
     throw err;
   }
