@@ -177,55 +177,97 @@ export default function WSourceSpeedIndexLeaderboard() {
 
       {/* INFO MODAL */}
           <UtomModal
-        show={openInfo}
-        onClose={() => setOpenInfo(false)}
-        title="Mi az a Speed Index?"
-      >
-        <div className="text-sm leading-relaxed space-y-4">
+  show={openInfo}
+  onClose={() => setOpenInfo(false)}
+  title="Mi az a Speed Index?"
+>
+  <div className="text-sm leading-relaxed space-y-6">
 
-          <p className="text-base font-semibold">
-            A <b>Speed Index</b> azt mutatja meg, hogy egy hírforrás <span style={{color:"#22c55e"}}><b>milyen gyorsan reagál</b></span> a friss eseményekre.
-          </p>
+    {/* Bevezető */}
+    <p className="text-base font-semibold text-center">
+      A <b>Speed Index</b> azt mutatja meg, hogy egy hírforrás 
+      <span style={{color:"#22c55e"}}><b> milyen gyorsan reagál</b></span> a friss eseményekre.
+    </p>
 
-          <p>
-            Amikor egy új téma felbukkan a hírekben, mindig van egy forrás, amelyik <b>elsőként</b> ír róla.
-            Ehhez az első megjelenéshez viszonyítjuk, hogy a többi forrás <b>hány perccel később</b> publikálja
-            ugyanennek a témának a saját változatát.
-          </p>
+    {/* Ikonos magyarázat blokk */}
+    <div className="space-y-5">
 
-          <p>
-            Ha egy forrás rendszeresen gyorsan reagál, akkor <b style={{color:"#16a34a"}}>alacsony késési értéket</b> kap.
-            Ha gyakran csak jóval később jelenik meg ugyanazzal a témával, akkor a késés
-            <b style={{color:"#dc2626"}}> magasabb</b> lesz.
-          </p>
+      {/* 1. lépés */}
+      <div className="flex items-start gap-4">
+        <div className="text-2xl">📰</div>
+        <p>
+          <b>Megjelenik egy új téma</b> a hírekben. Valamelyik forrás mindig elsőként ír róla —
+          ez lesz a kiindulópont, amihez minden más forrást viszonyítunk.
+        </p>
+      </div>
 
-          <p>
-            A rangsor úgy áll össze, hogy megnézzük: egy forrás átlagosan mennyivel marad le az első
-            megjelenéshez képest. Az kerül előrébb, aki a legtöbb témánál a <b>legkisebb késéssel</b> jelenik meg.
-          </p>
+      {/* 2. lépés */}
+      <div className="flex items-start gap-4">
+        <div className="text-2xl">⏱️</div>
+        <p>
+          A rendszer megnézi, hogy a többi forrás <b>hány perccel később</b> jelenik meg ugyanazzal a témával.
+          Minél kisebb ez a különbség, annál gyorsabb a reakció.
+        </p>
+      </div>
 
-          <div className="p-4 rounded-xl"
-              style={{background:"rgba(0,0,0,0.05)", border:"1px solid rgba(0,0,0,0.1)"}}>
-            <p className="font-semibold mb-2">Mit jelent ez a gyakorlatban?</p>
-            <ul className="list-disc list-inside space-y-1">
-              <li>A <b>kisebb érték</b> gyorsabb reakciót jelent.</li>
-              <li>A <b>nagyobb érték</b> lassabb megjelenést jelez.</li>
-              <li>A helyezések folyamatosan változhatnak, ahogy új témák jelennek meg.</li>
-              <li>A Speed Index <i>nem minőségi mutató</i>, csak az időzítést méri.</li>
-            </ul>
-          </div>
+      {/* 3. lépés */}
+      <div className="flex items-start gap-4">
+        <div className="text-2xl">📊</div>
+        <p>
+          A késésekből egy <b>átlagos reakcióidő</b> számolódik minden forrásra.  
+          A kisebb érték gyorsabb, a nagyobb lassabb megjelenést jelent.
+        </p>
+      </div>
 
-          <p>
-            A Speed Index célja, hogy átláthatóvá tegye, mely források követik a leggyorsabban az eseményeket,
-            és kik azok, akik inkább később csatlakoznak egy-egy témához.
-          </p>
+      {/* 4. lépés */}
+      <div className="flex items-start gap-4">
+        <div className="text-2xl">🏆</div>
+        <p>
+          Ezekből alakul ki a <b>rangsor</b>:  
+          az kerül előrébb, aki a legtöbb témánál a legkisebb késéssel jelenik meg.
+        </p>
+      </div>
 
-          <p className="text-xs opacity-70 italic">
-            A rangsor AI által került meghatározásra.
-          </p>
+    </div>
 
-        </div>
-      </UtomModal>
+    {/* Kiemelt doboz */}
+    <div
+      className="p-4 rounded-xl text-center"
+      style={{
+        background: "rgba(0,0,0,0.05)",
+        border: "1px solid rgba(0,0,0,0.1)"
+      }}
+    >
+      <p className="font-semibold mb-2 text-lg">
+        Mit jelent ez a gyakorlatban?
+      </p>
+
+      <ul className="list-disc list-inside space-y-1 text-left inline-block text-sm">
+        <li><b>Kisebb érték</b> → gyorsabb reakció.</li>
+        <li><b>Nagyobb érték</b> → lassabb megjelenés.</li>
+        <li>A helyezések folyamatosan változnak az új témák miatt.</li>
+        <li>A Speed Index <i>nem minőségi mutató</i>, csak az időzítést méri.</li>
+      </ul>
+    </div>
+
+    {/* Lezárás */}
+    <p>
+      A Speed Index célja, hogy átláthatóvá tegye, mely források követik a leggyorsabban az eseményeket,
+      és kik azok, akik inkább később csatlakoznak egy-egy témához.
+    </p>
+
+    <p
+      className="text-xs italic text-center mt-6"
+      style={{
+        color: isDark ? "#ffffff" : "#000000"
+      }}
+    >
+      A rangsor AI által került meghatározásra.
+    </p>
+
+  </div>
+</UtomModal>
+
 
     </>
   );
