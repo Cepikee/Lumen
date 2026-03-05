@@ -21,14 +21,14 @@ export default function WhatHappenedToday() {
 
         {/* BAL OSZLOP – kisebb: 3 */}
         <div className="col-12 col-lg-3">
-          <div className="wht-box module-box">
+          <div className="wht-box module-box border-0 shadow-none bg-transparent p-0">
             <WhatHappenedTodayHeatmap />
           </div>
         </div>
 
         {/* KÖZÉPSŐ OSZLOP – kisebb: 3 */}
         <div className="col-12 col-lg-3">
-          <div className="wht-box module-box">
+          <div className="wht-box module-box border-0 shadow-none bg-transparent p-0">
             <WhatHappenedTodaySourceActivity />
           </div>
         </div>
@@ -37,14 +37,14 @@ export default function WhatHappenedToday() {
         <div className="col-12 col-lg-6 d-flex flex-column gap-4">
 
           {/* FENT – KIUGRÓ AKTIVITÁSOK (VÍZSZINTES) */}
-          <div className="wht-box module-box horizontal-list">
+          <div className="wht-box module-box horizontal-list border-0 shadow-none bg-transparent p-0">
             <WhatHappenedTodaySpikeDetection />
           </div>
 
           {/* LENT – KULCSSZAVAK (VÍZSZINTES) */}
-          <div className="wht-box module-box horizontal-list p-0 overflow-hidden">
+          <div className="wht-box module-box horizontal-list border-0 shadow-none bg-transparent p-0 overflow-hidden">
             <div className="px-3 py-2">
-            <WhatHappenedTodayKulcsszavak />
+              <WhatHappenedTodayKulcsszavak />
             </div>
           </div>
 

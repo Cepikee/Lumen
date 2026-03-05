@@ -240,7 +240,7 @@ export default function WhatHappenedTodayKulcsszavak() {
   const stableKey = `${theme}-${sorted.length}-${counts.join(",")}`;
 
   return (
-    <div className="wht-keywords-activity bg-white/80 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-2 max-w-full">
+    <div className="wht-keywords-activity bg-white/80 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl p-2 max-w-full">
       <h5 className="text-sm font-medium mb-1 text-left text-gray-900 dark:text-gray-100">
         Felkapott kulcsszavak ma
       </h5>
