@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useUserStore } from "@/store/useUserStore";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -21,6 +21,7 @@ const fetcher = (url: string) =>
 
 export default function WSourceSpeedIndexLeaderboard() {
   const theme = useUserStore((s) => s.theme);
+  const [openInfo, setOpenInfo] = useState(false);
 
   const isDark =
     theme === "dark" ||
@@ -45,112 +46,128 @@ export default function WSourceSpeedIndexLeaderboard() {
   }, [data]);
 
   if (isLoading) return <div className="p-12 text-center">Betöltés...</div>;
-
   if (error || !data?.success)
-    return (
-      <div className="p-12 text-center text-red-500">
-        Hiba az adatok betöltésekor
-      </div>
-    );
+    return <div className="p-12 text-center text-red-500">Hiba az adatok betöltésekor</div>;
 
   const maxDelay = Math.max(...items.map((i) => i.avgDelay ?? 0), 0);
 
   const toDisplayMinutes = (v: number | null | undefined) => {
     if (v == null || !isFinite(v)) return "—";
-    if (v > 1000) {
-      console.warn("SpeedIndex outlier:", v);
-      return "—";
-    }
+    if (v > 1000) return "—";
     return v.toFixed(1) + " perc";
   };
 
   return (
-    <div
-      className={`p-12 rounded-3xl backdrop-blur-2xl border transition-all duration-500
-      ${
-        isDark
-          ? "bg-white/5 border-white/10 text-white"
-          : "bg-white/70 border-slate-200 text-slate-900"
-      }
-      shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
-    >
-      <div className="flex justify-between items-center mb-14">
-        <h2 className="text-3xl font-semibold tracking-tigh text-center"> Speed Index</h2>
-      </div>
+    <>
+      <div
+        className={`relative p-10 rounded-3xl overflow-hidden wsource-card--ghost ${
+          isDark ? "text-white" : "text-slate-900"
+        }`}
+        style={{ background: "var(--bs-body-bg, #f8fafc)" }}
+      >
+        {/* háttér glow-ok */}
+        <div
+          className="absolute -top-32 -right-32 w-96 h-96 rounded-full blur-3xl pointer-events-none"
+          style={{
+            backgroundColor: isDark
+              ? "rgba(79,70,229,0.10)"
+              : "rgba(0,0,0,0.03)",
+          }}
+        />
+        <div
+          className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full blur-3xl pointer-events-none"
+          style={{
+            backgroundColor: isDark
+              ? "rgba(147,51,234,0.10)"
+              : "rgba(0,0,0,0.03)",
+          }}
+        />
 
-      <div className="space-y-6">
-        {items.map((item, index) => {
-          const previousIndex = previousRanking.current[item.source] ?? index;
-          const delta = previousIndex - index;
-          previousRanking.current[item.source] = index;
+        {/* header */}
+        <div className="flex items-center justify-center gap-4 mb-6 relative z-10">
+          <h2 className="text-3xl font-semibold tracking-tight text-center">
+            Speed Index
+          </h2>
+        </div>
 
-          const percentage = maxDelay ? ((item.avgDelay ?? 0) / maxDelay) * 100 : 0;
+        {/* lista */}
+        <div className="space-y-6 relative z-10">
+          {items.map((item, index) => {
+            const previousIndex = previousRanking.current[item.source] ?? index;
+            const delta = previousIndex - index;
+            previousRanking.current[item.source] = index;
 
-          return (
-            <motion.div
-              key={item.source}
-              layout
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className={`p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1
-              ${
-                isDark
-                  ? "bg-white/5 border-white/10 hover:bg-white/10"
-                  : "bg-white border-slate-200 hover:bg-slate-50"
-              }
-              shadow-lg hover:shadow-2xl`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4 min-w-0">
-                  <div className="text-lg font-semibold w-8 shrink-0">#{index + 1}</div>
+            const percentage = maxDelay
+              ? ((item.avgDelay ?? 0) / maxDelay) * 100
+              : 0;
 
-                  <div className="min-w-0">
-                    <div className="text-lg font-medium truncate">{item.source}</div>
-                    <div className="text-xs opacity-50">
-                      Medián: {toDisplayMinutes(item.medianDelay)}
+            return (
+              <motion.div
+                key={item.source}
+                layout
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className={`p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 ${
+                  isDark
+                    ? "bg-white/5 border-white/10 hover:bg-white/10"
+                    : "bg-white border-slate-200 hover:bg-slate-50"
+                } shadow-lg hover:shadow-2xl`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="text-lg font-semibold w-8 shrink-0">
+                      #{index + 1}
+                    </div>
+
+                    <div className="min-w-0">
+                      <div className="text-lg font-medium truncate">
+                        {item.source}
+                      </div>
+                      <div className="text-xs opacity-50">
+                        Medián: {toDisplayMinutes(item.medianDelay)}
+                      </div>
+                    </div>
+
+                    <AnimatePresence>
+                      {delta !== 0 && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className={`text-xs font-semibold px-3 py-1 rounded-full ${
+                            delta > 0
+                              ? "bg-emerald-500/20 text-emerald-400"
+                              : "bg-red-500/20 text-red-400"
+                          }`}
+                        >
+                          {delta > 0 ? `↑ ${delta}` : `↓ ${Math.abs(delta)}`}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  <div className="flex items-center gap-6 shrink-0">
+                    <div className="text-xl font-bold w-24 text-right">
+                      {toDisplayMinutes(item.avgDelay)}
                     </div>
                   </div>
-
-                  <AnimatePresence>
-                    {delta !== 0 && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className={`text-xs font-semibold px-3 py-1 rounded-full
-                        ${
-                          delta > 0
-                            ? "bg-emerald-500/20 text-emerald-400"
-                            : "bg-red-500/20 text-red-400"
-                        }`}
-                      >
-                        {delta > 0 ? `↑ ${delta}` : `↓ ${Math.abs(delta)}`}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </div>
 
-                <div className="flex items-center gap-6 shrink-0">
-                  <div className="text-xl font-bold w-24 text-right">
-                    {toDisplayMinutes(item.avgDelay)}
-                  </div>
+                <div className="mt-5 w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${percentage}%` }}
+                    transition={{ duration: 0.8 }}
+                    className="h-full bg-gradient-to-r from-emerald-400 via-yellow-400 to-red-500"
+                  />
                 </div>
-              </div>
-
-              <div className="mt-5 w-full h-2 rounded-full bg-white/10 overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${percentage}%` }}
-                  transition={{ duration: 0.8 }}
-                  className="h-full bg-gradient-to-r from-emerald-400 via-yellow-400 to-red-500"
-                />
-              </div>
-            </motion.div>
-          );
-        })}
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
