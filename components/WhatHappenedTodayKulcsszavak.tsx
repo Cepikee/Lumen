@@ -241,7 +241,7 @@ export default function WhatHappenedTodayKulcsszavak() {
 
   return (
     <div className="wht-keywords-activity bg-white/80 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl p-2 max-w-full">
-      <h5 className="text-sm font-medium mb-1 text-left text-gray-900 dark:text-gray-100">
+      <h5 className="text-sm font-medium mb-1  text-gray-900 dark:text-gray-100 text-center">
         Felkapott kulcsszavak ma
       </h5>
 
