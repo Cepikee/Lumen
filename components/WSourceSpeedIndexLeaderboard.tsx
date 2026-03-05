@@ -75,8 +75,7 @@ export default function WSourceSpeedIndexLeaderboard() {
       shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
     >
       <div className="flex justify-between items-center mb-14">
-        <h2 className="text-3xl font-semibold tracking-tight">⚡ Speed Index</h2>
-        <div className="text-sm opacity-60">Live ranking · 60 mp refresh</div>
+        <h2 className="text-3xl font-semibold tracking-tigh text-center"> Speed Index</h2>
       </div>
 
       <div className="space-y-6">

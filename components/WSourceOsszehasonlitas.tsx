@@ -60,18 +60,13 @@ export default function WSourceOsszehasonlitas() {
       </div>
 
       {/* --- 4) SPEED INDEX BLOKK --- */}
-      <div
-        className="p-4 rounded border bg-[var(--bs-body-bg)]"
-        style={{
-          borderColor: isDark ? "#1e293b" : "#e5e7eb",
-          color: isDark ? "#fff" : "#000",
-        }}
-      >
-        <h3 className="text-lg font-semibold mb-4 text-center">
-          Speed Index elemzések
-        </h3>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div
+          className="p-4 rounded border bg-[var(--bs-body-bg)]"
+          style={{
+            borderColor: isDark ? "#1e293b" : "#e5e7eb",
+            color: isDark ? "#fff" : "#000",
+          }}
+        >
           <div
             className="p-3 rounded border"
             style={{
@@ -82,7 +77,7 @@ export default function WSourceOsszehasonlitas() {
             <WSourceSpeedIndexLeaderboard />
           </div>
         </div>
-      </div>
+
 
       {/* --- 5) DUPLICATION SCORE BLOKK --- */}
       <div
