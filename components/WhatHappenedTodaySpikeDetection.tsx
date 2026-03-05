@@ -119,7 +119,7 @@ export default function WhatHappenedTodaySpikeDetection() {
 
   return (
     <div className="spike-grid-root horizontal-list" role="region" aria-label="Kiugró aktivitások ma">
-      <div className="spike-grid-header">
+      <div className="spike-grid-header text-center">
         <h5 className="spike-grid-title">Kiugró aktivitások ma</h5>
       </div>
 

@@ -1871,7 +1871,6 @@ html.theme-dark .nav-link {
   padding: 10px;
   border-radius: 10px;
   background: var(--bs-body-bg);
-  border: 1px solid rgba(0,0,0,0.06);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   color: var(--bs-body-color);
   display: flex;
