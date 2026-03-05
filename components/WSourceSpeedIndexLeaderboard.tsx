@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { useMemo, useRef, useState } from "react";
 import { useUserStore } from "@/store/useUserStore";
 import { motion, AnimatePresence } from "framer-motion";
+import UtomModal from "@/components/UtomModal";
 
 interface LeaderboardItem {
   source: string;
@@ -14,9 +15,7 @@ interface LeaderboardItem {
 
 const fetcher = (url: string) =>
   fetch(url, {
-    headers: {
-      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
-    },
+    headers: { "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY! },
   }).then((r) => r.json());
 
 export default function WSourceSpeedIndexLeaderboard() {
@@ -88,6 +87,13 @@ export default function WSourceSpeedIndexLeaderboard() {
           <h2 className="text-3xl font-semibold tracking-tight text-center">
             Speed Index
           </h2>
+
+          <button
+            onClick={() => setOpenInfo(true)}
+            className="w-[26px] h-[26px] flex items-center justify-center bg-transparent border-0"
+          >
+            <img src="/icons/info-svg.svg" alt="info" width={26} height={26} />
+          </button>
         </div>
 
         {/* lista */}
@@ -168,6 +174,59 @@ export default function WSourceSpeedIndexLeaderboard() {
           })}
         </div>
       </div>
+
+      {/* INFO MODAL */}
+          <UtomModal
+        show={openInfo}
+        onClose={() => setOpenInfo(false)}
+        title="Mi az a Speed Index?"
+      >
+        <div className="text-sm leading-relaxed space-y-4">
+
+          <p className="text-base font-semibold">
+            A <b>Speed Index</b> azt mutatja meg, hogy egy hírforrás <span style={{color:"#22c55e"}}><b>milyen gyorsan reagál</b></span> a friss eseményekre.
+          </p>
+
+          <p>
+            Amikor egy új téma felbukkan a hírekben, mindig van egy forrás, amelyik <b>elsőként</b> ír róla.
+            Ehhez az első megjelenéshez viszonyítjuk, hogy a többi forrás <b>hány perccel később</b> publikálja
+            ugyanennek a témának a saját változatát.
+          </p>
+
+          <p>
+            Ha egy forrás rendszeresen gyorsan reagál, akkor <b style={{color:"#16a34a"}}>alacsony késési értéket</b> kap.
+            Ha gyakran csak jóval később jelenik meg ugyanazzal a témával, akkor a késés
+            <b style={{color:"#dc2626"}}> magasabb</b> lesz.
+          </p>
+
+          <p>
+            A rangsor úgy áll össze, hogy megnézzük: egy forrás átlagosan mennyivel marad le az első
+            megjelenéshez képest. Az kerül előrébb, aki a legtöbb témánál a <b>legkisebb késéssel</b> jelenik meg.
+          </p>
+
+          <div className="p-4 rounded-xl"
+              style={{background:"rgba(0,0,0,0.05)", border:"1px solid rgba(0,0,0,0.1)"}}>
+            <p className="font-semibold mb-2">Mit jelent ez a gyakorlatban?</p>
+            <ul className="list-disc list-inside space-y-1">
+              <li>A <b>kisebb érték</b> gyorsabb reakciót jelent.</li>
+              <li>A <b>nagyobb érték</b> lassabb megjelenést jelez.</li>
+              <li>A helyezések folyamatosan változhatnak, ahogy új témák jelennek meg.</li>
+              <li>A Speed Index <i>nem minőségi mutató</i>, csak az időzítést méri.</li>
+            </ul>
+          </div>
+
+          <p>
+            A Speed Index célja, hogy átláthatóvá tegye, mely források követik a leggyorsabban az eseményeket,
+            és kik azok, akik inkább később csatlakoznak egy-egy témához.
+          </p>
+
+          <p className="text-xs opacity-70 italic">
+            A rangsor AI által került meghatározásra.
+          </p>
+
+        </div>
+      </UtomModal>
+
     </>
   );
 }
