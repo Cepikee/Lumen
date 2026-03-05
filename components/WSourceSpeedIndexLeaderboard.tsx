@@ -7,8 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface LeaderboardItem {
   source: string;
-  avgDelay: number;
-  medianDelay: number;
+  avgDelay: number | null;
+  medianDelay: number | null;
   updatedAt: string;
 }
 
@@ -40,12 +40,11 @@ export default function WSourceSpeedIndexLeaderboard() {
   const items = useMemo(() => {
     if (!data?.leaderboard) return [];
     return [...data.leaderboard].sort(
-      (a, b) => a.avgDelay - b.avgDelay
+      (a, b) => (a.avgDelay ?? Infinity) - (b.avgDelay ?? Infinity)
     );
   }, [data]);
 
-  if (isLoading)
-    return <div className="p-12 text-center">Betöltés...</div>;
+  if (isLoading) return <div className="p-12 text-center">Betöltés...</div>;
 
   if (error || !data?.success)
     return (
@@ -54,7 +53,16 @@ export default function WSourceSpeedIndexLeaderboard() {
       </div>
     );
 
-  const maxDelay = Math.max(...items.map((i) => i.avgDelay));
+  const maxDelay = Math.max(...items.map((i) => i.avgDelay ?? 0), 0);
+
+  const toDisplayMinutes = (v: number | null | undefined) => {
+    if (v == null || !isFinite(v)) return "—";
+    if (v > 1000) {
+      console.warn("SpeedIndex outlier:", v);
+      return "—";
+    }
+    return v.toFixed(1) + " perc";
+  };
 
   return (
     <div
@@ -67,24 +75,17 @@ export default function WSourceSpeedIndexLeaderboard() {
       shadow-[0_40px_100px_rgba(0,0,0,0.25)]`}
     >
       <div className="flex justify-between items-center mb-14">
-        <h2 className="text-3xl font-semibold tracking-tight">
-          ⚡ Speed Index
-        </h2>
-        <div className="text-sm opacity-60">
-          Live ranking · 60 mp refresh
-        </div>
+        <h2 className="text-3xl font-semibold tracking-tight">⚡ Speed Index</h2>
+        <div className="text-sm opacity-60">Live ranking · 60 mp refresh</div>
       </div>
 
       <div className="space-y-6">
         {items.map((item, index) => {
-          const previousIndex =
-            previousRanking.current[item.source] ?? index;
-
+          const previousIndex = previousRanking.current[item.source] ?? index;
           const delta = previousIndex - index;
           previousRanking.current[item.source] = index;
 
-          const percentage =
-            (item.avgDelay / maxDelay) * 100;
+          const percentage = maxDelay ? ((item.avgDelay ?? 0) / maxDelay) * 100 : 0;
 
           return (
             <motion.div
@@ -101,21 +102,14 @@ export default function WSourceSpeedIndexLeaderboard() {
               }
               shadow-lg hover:shadow-2xl`}
             >
-              {/* HEADER ROW */}
               <div className="flex items-center justify-between">
-                {/* LEFT SIDE */}
                 <div className="flex items-center gap-4 min-w-0">
-                  <div className="text-lg font-semibold w-8 shrink-0">
-                    #{index + 1}
-                  </div>
+                  <div className="text-lg font-semibold w-8 shrink-0">#{index + 1}</div>
 
                   <div className="min-w-0">
-                    <div className="text-lg font-medium truncate">
-                      {item.source}
-                    </div>
+                    <div className="text-lg font-medium truncate">{item.source}</div>
                     <div className="text-xs opacity-50">
-                      Medián:{" "}
-                      {item.medianDelay.toFixed(1)} perc
+                      Medián: {toDisplayMinutes(item.medianDelay)}
                     </div>
                   </div>
 
@@ -133,24 +127,19 @@ export default function WSourceSpeedIndexLeaderboard() {
                             : "bg-red-500/20 text-red-400"
                         }`}
                       >
-                        {delta > 0
-                          ? `↑ ${delta}`
-                          : `↓ ${Math.abs(delta)}`}
+                        {delta > 0 ? `↑ ${delta}` : `↓ ${Math.abs(delta)}`}
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </div>
 
-                {/* RIGHT SIDE */}
                 <div className="flex items-center gap-6 shrink-0">
-
                   <div className="text-xl font-bold w-24 text-right">
-                    {item.avgDelay.toFixed(1)} perc
+                    {toDisplayMinutes(item.avgDelay)}
                   </div>
                 </div>
               </div>
 
-              {/* PROGRESS BAR */}
               <div className="mt-5 w-full h-2 rounded-full bg-white/10 overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
@@ -166,4 +155,3 @@ export default function WSourceSpeedIndexLeaderboard() {
     </div>
   );
 }
-
