@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
 
-// ⭐ Biztonságos dátum normalizáló
 function normalizeDate(d: any): string | null {
   if (!d) return null;
   if (d instanceof Date) return d.toISOString();
@@ -11,12 +10,18 @@ function normalizeDate(d: any): string | null {
   return isNaN(parsed.getTime()) ? null : parsed.toISOString();
 }
 
+function clampNumber(v: any, max = 1000): number | null {
+  const n = Number(v);
+  if (!isFinite(n) || isNaN(n)) return null;
+  if (n < 0) return null;
+  return n > max ? null : n;
+}
+
 export async function GET(req: Request) {
   try {
     const sec = securityCheck(req);
     if (sec) return sec;
 
-    // 1️⃣ Aktuális aggregált adatok
     const [rows]: any = await db.query(`
       SELECT 
         source,
@@ -34,9 +39,15 @@ export async function GET(req: Request) {
       });
     }
 
-    // 2️⃣ History lekérés source-onként (utolsó 20 mérés)
+    // sanitize + clamp suspicious values
+    const safeRows = rows.map((r: any) => ({
+      ...r,
+      avgDelay: clampNumber(r.avgDelay, 1000),
+      medianDelay: clampNumber(r.medianDelay, 1000),
+    }));
+
     const leaderboard = await Promise.all(
-      rows.map(async (r: any) => {
+      safeRows.map(async (r: any) => {
         const [historyRows]: any = await db.query(
           `
           SELECT delay_minutes
@@ -50,11 +61,12 @@ export async function GET(req: Request) {
 
         return {
           source: r.source,
-          avgDelay: Number(r.avgDelay),
-          medianDelay: Number(r.medianDelay),
-          updatedAt: normalizeDate(r.updatedAt),   // ⭐ mindig string vagy null
-          history: historyRows
-            .map((h: any) => Number(h.delay_minutes))
+          avgDelay: r.avgDelay === null ? null : Number(r.avgDelay),
+          medianDelay: r.medianDelay === null ? null : Number(r.medianDelay),
+          updatedAt: normalizeDate(r.updatedAt),
+          history: (historyRows || [])
+            .map((h: any) => clampNumber(h.delay_minutes, 1000))
+            .filter((x: any) => x !== null)
             .reverse(),
         };
       })
