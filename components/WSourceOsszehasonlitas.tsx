@@ -59,24 +59,17 @@ export default function WSourceOsszehasonlitas() {
         <WSourceClickbaitRatio />
       </div>
 
-      {/* --- 4) SPEED INDEX BLOKK --- */}
-        <div
-          className="p-4 rounded border bg-[var(--bs-body-bg)]"
-          style={{
-            borderColor: isDark ? "#1e293b" : "#e5e7eb",
-            color: isDark ? "#fff" : "#000",
-          }}
-        >
-          <div
-            className="p-3 rounded border"
-            style={{
-              borderColor: isDark ? "#334155" : "#d1d5db",
-              backgroundColor: "var(--bs-body-bg)",
-            }}
-          >
-            <WSourceSpeedIndexLeaderboard />
-          </div>
-        </div>
+     {/* --- 4) SPEED INDEX BLOKK (javított) --- */}
+<div
+  className="p-4 rounded border bg-[var(--bs-body-bg)]"
+  style={{
+    borderColor: isDark ? "#1e293b" : "#e5e7eb",
+    color: isDark ? "#fff" : "#000",
+  }}
+>
+  <WSourceSpeedIndexLeaderboard />
+</div>
+
 
 
       {/* --- 5) DUPLICATION SCORE BLOKK --- */}
