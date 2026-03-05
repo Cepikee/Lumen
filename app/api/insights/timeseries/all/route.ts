@@ -111,3 +111,4 @@ export async function GET(req: Request) {
     );
   }
 }
+// This API route returns time series data for all categories over a specified period (24h, 7d, 30d, 90d).
