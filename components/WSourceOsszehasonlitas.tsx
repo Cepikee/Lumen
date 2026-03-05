@@ -8,6 +8,8 @@ import WSourceClickbait from "./WSourceClickbait";
 import WSourceClickbaitRatio from "./WSourceClickbaitRatio";
 import WSourceSpeedIndexLeaderboard from "./WSourceSpeedIndexLeaderboard";
 import WSourceDuplication from "./WSourceDuplication";
+
+// ÚJ: sentiment widgetek külön-külön
 import WSentimentTimeline from "./WSentimentTimeline";
 import WSentimentToday from "./WSentimentToday";
 import WSentimentByCategory from "./WSentimentByCategory";
@@ -23,6 +25,7 @@ export default function WSourceOsszehasonlitas() {
 
   return (
     <div className="w-full flex flex-col gap-6">
+
       {/* --- 1) Kategóriaeloszlás --- */}
       <div
         className="p-4 rounded border bg-[var(--bs-body-bg)]"
@@ -80,63 +83,52 @@ export default function WSourceOsszehasonlitas() {
           </div>
         </div>
       </div>
-          {/* --- 5) DUPLICATION SCORE BLOKK --- */}
-<div
-  className="p-4 rounded border bg-[var(--bs-body-bg)]"
-  style={{
-    borderColor: isDark ? "#1e293b" : "#e5e7eb",
-    color: isDark ? "#fff" : "#000",
-  }}
->
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <WSourceDuplication />
-  </div>
-</div>
 
-{/* --- 6) SENTIMENT BLOKK --- */}
-<div
-  className="p-4 rounded border bg-[var(--bs-body-bg)]"
-  style={{
-    borderColor: isDark ? "#1e293b" : "#e5e7eb",
-    color: isDark ? "#fff" : "#000",
-  }}
->
-  <h3 className="text-lg font-semibold mb-4 text-center">
-    Hangulatelemzés
-  </h3>
+      {/* --- 5) DUPLICATION SCORE BLOKK --- */}
+      <div
+        className="p-4 rounded border bg-[var(--bs-body-bg)]"
+        style={{
+          borderColor: isDark ? "#1e293b" : "#e5e7eb",
+          color: isDark ? "#fff" : "#000",
+        }}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <WSourceDuplication />
+        </div>
+      </div>
 
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div
-      className="p-3 rounded border"
-      style={{
-        borderColor: isDark ? "#334155" : "#d1d5db",
-        backgroundColor: "var(--bs-body-bg)",
-      }}
-    >
-      <WSentimentToday />
-    </div>
+      {/* --- 6) SENTIMENT WIDGETEK KÜLÖN-KÜLÖN --- */}
 
-    <div
-      className="p-3 rounded border"
-      style={{
-        borderColor: isDark ? "#334155" : "#d1d5db",
-        backgroundColor: "var(--bs-body-bg)",
-      }}
-    >
-      <WSentimentByCategory />
-    </div>
+      <div
+        className="p-4 rounded border bg-[var(--bs-body-bg)]"
+        style={{
+          borderColor: isDark ? "#1e293b" : "#e5e7eb",
+          color: isDark ? "#fff" : "#000",
+        }}
+      >
+        <WSentimentToday />
+      </div>
 
-    <div
-      className="p-3 rounded border"
-      style={{
-        borderColor: isDark ? "#334155" : "#d1d5db",
-        backgroundColor: "var(--bs-body-bg)",
-      }}
-    >
-      <WSentimentTimeline />
-    </div>
-  </div>
-</div>
+      <div
+        className="p-4 rounded border bg-[var(--bs-body-bg)]"
+        style={{
+          borderColor: isDark ? "#1e293b" : "#e5e7eb",
+          color: isDark ? "#fff" : "#000",
+        }}
+      >
+        <WSentimentByCategory />
+      </div>
+
+      <div
+        className="p-4 rounded border bg-[var(--bs-body-bg)]"
+        style={{
+          borderColor: isDark ? "#1e293b" : "#e5e7eb",
+          color: isDark ? "#fff" : "#000",
+        }}
+      >
+        <WSentimentTimeline />
+      </div>
+
     </div>
   );
 }
