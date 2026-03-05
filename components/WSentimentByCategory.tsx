@@ -31,7 +31,11 @@ export default function WSentimentByCategory() {
 
   if (isLoading) return <div className="p-12 text-center">Betöltés...</div>;
   if (error || !data?.success)
-    return <div className="p-12 text-center text-red-500">Hiba az adatok betöltésekor</div>;
+    return (
+      <div className="p-12 text-center text-red-500">
+        Hiba az adatok betöltésekor
+      </div>
+    );
 
   const categories = Object.keys(data.categories || {});
   const negativeValues = categories.map(
@@ -39,20 +43,76 @@ export default function WSentimentByCategory() {
   );
 
   const options: ApexCharts.ApexOptions = {
-    chart: { type: "bar", toolbar: { show: false }, foreColor: isDark ? "#fff" : "#000" },
+    chart: {
+      type: "bar",
+      background: "transparent", // 🔥 nincs apex háttér
+      foreColor: isDark ? "#fff" : "#000",
+      toolbar: { show: false },
+      animations: { enabled: true },
+      zoom: { enabled: false },
+    },
+
     theme: { mode: isDark ? "dark" : "light" },
-    plotOptions: { bar: { horizontal: false, borderRadius: 6 } },
+
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        borderRadius: 6,
+      },
+    },
+
     colors: ["#ef4444"],
+
     xaxis: {
       categories,
-      labels: { rotate: -30, style: { fontWeight: 600 } },
+      labels: {
+        rotate: -30,
+        style: {
+          fontWeight: 600,
+          colors: categories.map(() => (isDark ? "#e2e8f0" : "#334155")),
+        },
+      },
     },
+
+    yaxis: {
+      labels: {
+        formatter: (v) => `${v}`,
+        style: { colors: isDark ? "#e2e8f0" : "#334155" },
+      },
+    },
+
     dataLabels: {
       enabled: true,
-      formatter: (val) => `${val}`,
+      formatter: (val) => {
+        const num = Number(val);
+        return isNaN(num) ? "" : `${num}`;
+      },
+      style: {
+        colors: [isDark ? "#fff" : "#000"],
+        fontSize: "12px",
+        fontWeight: 600,
+      },
     },
-    yaxis: {
-      labels: { formatter: (v) => `${v}` },
+
+    states: {
+      hover: { filter: { type: "none" } }, // 🔥 nincs hover highlight
+      active: { filter: { type: "none" } },
+    },
+
+    grid: {
+      borderColor: isDark ? "#334155" : "#e2e8f0",
+      strokeDashArray: 3, // 🔥 nincs világos csík hoverkor
+    },
+
+    tooltip: {
+      theme: isDark ? "dark" : "light",
+      fillSeriesColor: false,
+      marker: { show: false },
+    },
+
+    legend: {
+      labels: { colors: isDark ? "#fff" : "#000" },
+      onItemHover: { highlightDataSeries: false }, // 🔥 nincs legend hover highlight
     },
   };
 
@@ -65,7 +125,10 @@ export default function WSentimentByCategory() {
 
   return (
     <>
-      <div className="relative z-10 p-12 rounded-3xl wsource-card--ghost">
+      <div
+        className="relative z-10 p-12 rounded-3xl wsource-card--ghost"
+        style={{ background: "var(--bs-body-bg)" }} // 🔥 UTOM háttér
+      >
         <div className="flex items-center justify-center gap-4 mb-6">
           <h2 className="text-3xl font-semibold tracking-tight text-center">
             Kategóriahangulat – negatív arány
@@ -84,10 +147,18 @@ export default function WSentimentByCategory() {
         </div>
       </div>
 
-      <UtomModal show={openInfo} onClose={() => setOpenInfo(false)} title="Mit mutat ez a grafikon?">
+      <UtomModal
+        show={openInfo}
+        onClose={() => setOpenInfo(false)}
+        title="Mit mutat ez a grafikon?"
+      >
         <div className="text-sm leading-relaxed">
-          <p>Melyik kategóriában hány negatív hangulatú cikk jelent meg ma.</p>
-          <p className="mt-2">Ez segít látni, mely témák a leginkább negatívak a hírekben.</p>
+          <p>
+            Melyik kategóriában hány negatív hangulatú cikk jelent meg ma.
+          </p>
+          <p className="mt-2">
+            Ez segít látni, mely témák a leginkább negatívak a hírekben.
+          </p>
         </div>
       </UtomModal>
     </>
