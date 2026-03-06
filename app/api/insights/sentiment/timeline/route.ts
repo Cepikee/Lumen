@@ -17,11 +17,11 @@ export async function GET(req: Request) {
     const [rows]: any = await db.query(
       `
       SELECT 
-        DATE_FORMAT(created_at, "%Y-%m-%d %H:00:00") AS bucket,
+        DATE_FORMAT(published_at, "%Y-%m-%d %H:00:00") AS bucket,
         sentiment,
         COUNT(*) AS c
       FROM articles
-      WHERE created_at >= ? AND created_at <= ?
+      WHERE published_at >= ? AND published_at <= ?
         AND sentiment IS NOT NULL
       GROUP BY bucket, sentiment
       ORDER BY bucket ASC
