@@ -2,128 +2,99 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 export default function UtomDns() {
   const mountRef = useRef<HTMLDivElement | null>(null);
 
-  const dnaParams = {
-    turns: 10,
-    pointsPerTurn: 120,
-    radius: 1.2,
+  const params = {
     height: 10,
+    segments: 400,
+    lateralAmplitude: 0.45,
+    lateralFrequency: 2.2,
     tubeRadius: 0.12,
-    bridgeEvery: 12,
-    bridgeRadius: 0.06,
-    colorA: new THREE.Color("#0070f3"),
-    colorB: new THREE.Color("#ff4081"),
-    bridgeColor: new THREE.Color("#9e9e9e")
+    bridgeEvery: 16,
+    bridgeRadius: 0.055,
+    colorA: "#0057d9",
+    colorB: "#d9004a",
+    bridgeColor: "#9e9e9e",
+    background: 0xf6f7f9
   };
 
   useEffect(() => {
     if (!mountRef.current) return;
 
-    const { clientWidth: width, clientHeight: heightPx } = mountRef.current;
-
-    // Scene / Camera / Renderer
+    // --- Scene / Camera / Renderer ---
+    const W = mountRef.current.clientWidth;
+    const H = mountRef.current.clientHeight;
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf6f7f9);
+    scene.background = new THREE.Color(params.background);
 
-    const camera = new THREE.PerspectiveCamera(50, width / heightPx, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 100);
     camera.position.set(0, 0, 16);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(width, heightPx);
+    renderer.setSize(W, H);
     mountRef.current.appendChild(renderer.domElement);
 
     // Lights
     scene.add(new THREE.AmbientLight(0xffffff, 0.45));
     const dir = new THREE.DirectionalLight(0xffffff, 0.9);
-    dir.position.set(5, 10, 7);
+    dir.position.set(6, 10, 8);
     scene.add(dir);
-    const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 0.25);
-    scene.add(hemi);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 0.25));
 
-    // Controls
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.08;
-    controls.minDistance = 6;
-    controls.maxDistance = 40;
-    controls.autoRotate = false;
-
-    // Parameters
+    // --- Generate vertical, slightly oscillating lines ---
     const {
-      turns,
-      pointsPerTurn,
-      radius,
       height: dnaHeight,
+      segments,
+      lateralAmplitude,
+      lateralFrequency,
       tubeRadius,
       bridgeEvery,
       bridgeRadius,
       colorA,
       colorB,
       bridgeColor
-    } = dnaParams;
+    } = params;
 
-    const totalPoints = turns * pointsPerTurn;
-
-    // Generate base points for two helices
     const pointsA: THREE.Vector3[] = [];
     const pointsB: THREE.Vector3[] = [];
 
-    for (let i = 0; i < totalPoints; i++) {
-      const t = i / pointsPerTurn; // step in turns
-      const angle = t * Math.PI * 2;
-      const y = (t / turns) * dnaHeight - dnaHeight / 2;
+    for (let i = 0; i <= segments; i++) {
+      const t = i / segments;
+      const y = t * dnaHeight - dnaHeight / 2;
+      const phase = t * Math.PI * lateralFrequency;
 
-      pointsA.push(new THREE.Vector3(Math.cos(angle) * radius, y, Math.sin(angle) * radius));
-      pointsB.push(new THREE.Vector3(Math.cos(angle + Math.PI) * radius, y, Math.sin(angle + Math.PI) * radius));
+      const xA = Math.sin(phase) * lateralAmplitude;
+      const zA = Math.cos(phase * 0.5) * lateralAmplitude * 0.25;
+      pointsA.push(new THREE.Vector3(xA, y, zA));
+
+      const xB = -Math.sin(phase) * lateralAmplitude;
+      const zB = -Math.cos(phase * 0.5) * lateralAmplitude * 0.25;
+      pointsB.push(new THREE.Vector3(xB, y, zB));
     }
 
-    // Create smooth curves
-    const curveA = new THREE.CatmullRomCurve3(pointsA);
-    const curveB = new THREE.CatmullRomCurve3(pointsB);
+    const curveA = new THREE.CatmullRomCurve3(pointsA, false, "catmullrom", 0.5);
+    const curveB = new THREE.CatmullRomCurve3(pointsB, false, "catmullrom", 0.5);
 
-    // Tube geometries (higher segments for smoothness)
-    const segments = totalPoints;
-    const radialSegments = 20;
-
+    const radialSegments = 18;
     const tubeGeomA = new THREE.TubeGeometry(curveA, segments, tubeRadius, radialSegments, false);
     const tubeGeomB = new THREE.TubeGeometry(curveB, segments, tubeRadius, radialSegments, false);
 
-    // Vertex colors: gradient along the tube from colorA to colorB (can be adjusted)
-    const applyGradient = (geom: THREE.BufferGeometry, startColor: THREE.Color, endColor: THREE.Color) => {
-      const posCount = geom.attributes.position.count;
-      const colors = new Float32Array(posCount * 3);
-      for (let i = 0; i < posCount; i++) {
-        const t = i / (posCount - 1);
-        const c = startColor.clone().lerp(endColor, t);
-        colors[i * 3] = c.r;
-        colors[i * 3 + 1] = c.g;
-        colors[i * 3 + 2] = c.b;
-      }
-      geom.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-    };
-
-    // Apply gradients: A goes from colorA -> lighter, B goes from colorB -> lighter
-    const lighterA = colorA.clone().lerp(new THREE.Color(0xffffff), 0.25);
-    const lighterB = colorB.clone().lerp(new THREE.Color(0xffffff), 0.25);
-    applyGradient(tubeGeomA, colorA, lighterA);
-    applyGradient(tubeGeomB, colorB, lighterB);
-
-    // Materials using vertex colors
     const matA = new THREE.MeshStandardMaterial({
-      vertexColors: true,
-      metalness: 0.2,
-      roughness: 0.35,
+      color: new THREE.Color(colorA),
+      emissive: new THREE.Color(colorA).multiplyScalar(0.06),
+      metalness: 0.15,
+      roughness: 0.28,
       side: THREE.DoubleSide
     });
+
     const matB = new THREE.MeshStandardMaterial({
-      vertexColors: true,
-      metalness: 0.2,
-      roughness: 0.35,
+      color: new THREE.Color(colorB),
+      emissive: new THREE.Color(colorB).multiplyScalar(0.06),
+      metalness: 0.12,
+      roughness: 0.26,
       side: THREE.DoubleSide
     });
 
@@ -131,56 +102,72 @@ export default function UtomDns() {
     const meshB = new THREE.Mesh(tubeGeomB, matB);
     scene.add(meshA, meshB);
 
-    // Bridges (cylinders) connecting corresponding points
+    // Bridges group
     const bridgeGroup = new THREE.Group();
-    const cylGeom = new THREE.CylinderGeometry(bridgeRadius, bridgeRadius, 1, 12);
+    scene.add(bridgeGroup);
 
-    for (let i = 0; i < totalPoints; i += bridgeEvery) {
+    for (let i = 0; i <= segments; i += bridgeEvery) {
       const a = pointsA[i];
       const b = pointsB[i];
-
-      const mid = new THREE.Vector3().addVectors(a, b).multiplyScalar(0.5);
       const dirVec = new THREE.Vector3().subVectors(b, a);
       const length = dirVec.length();
 
-      // Clone geometry per bridge to avoid shared transform issues
-      const geom = cylGeom.clone();
-      geom.translate(0, length / 2, 0); // center along Y after orientation
-
-      const mat = new THREE.MeshStandardMaterial({
-        color: bridgeColor,
-        metalness: 0.1,
-        roughness: 0.4
+      // Create cylinder per bridge (so we can set correct length)
+      const cylGeom = new THREE.CylinderGeometry(bridgeRadius, bridgeRadius, length, 12);
+      const cylMat = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(bridgeColor),
+        metalness: 0.08,
+        roughness: 0.45
       });
-
-      const bridge = new THREE.Mesh(geom, mat);
+      const bridge = new THREE.Mesh(cylGeom, cylMat);
 
       // Orient cylinder from a -> b
       const up = new THREE.Vector3(0, 1, 0);
-      const axis = new THREE.Vector3().crossVectors(up, dirVec).normalize();
-      const angle = Math.acos(up.dot(dirVec.normalize()));
-      const q = new THREE.Quaternion().setFromAxisAngle(axis, angle);
+      const dirNorm = dirVec.clone().normalize();
+      const axis = new THREE.Vector3().crossVectors(up, dirNorm);
+      const axisLen = axis.length();
+      if (axisLen > 1e-6) {
+        axis.normalize();
+        const angle = Math.acos(Math.max(-1, Math.min(1, up.dot(dirNorm))));
+        bridge.quaternion.setFromAxisAngle(axis, angle);
+      } else {
+        // parallel or anti-parallel: rotate 0 or PI
+        if (up.dot(dirNorm) < 0) bridge.rotateX(Math.PI);
+      }
 
-      bridge.applyQuaternion(q);
-      bridge.position.copy(a);
-
-      // Move to midpoint (since we translated geometry)
-      bridge.position.add(dirVec.clone().multiplyScalar(0.5));
+      // position at midpoint
+      const mid = new THREE.Vector3().addVectors(a, b).multiplyScalar(0.5);
+      bridge.position.copy(mid);
 
       bridgeGroup.add(bridge);
     }
 
-    scene.add(bridgeGroup);
-
-    // Subtle ground / rim for depth (optional)
-    const rimGeom = new THREE.RingGeometry(radius + tubeRadius * 1.6, radius + tubeRadius * 2.6, 64);
+    // Rim for depth
+    const rimGeom = new THREE.RingGeometry(1.6, 2.6, 64);
     const rimMat = new THREE.MeshBasicMaterial({ color: 0xffffff, opacity: 0.03, transparent: true });
     const rim = new THREE.Mesh(rimGeom, rimMat);
     rim.rotation.x = -Math.PI / 2;
     rim.position.y = -dnaHeight / 2 - 0.05;
     scene.add(rim);
 
-    // Resize handling
+    // OrbitControls dinamikus import (TS kompatibilitás)
+    let controls: any = null;
+    (async () => {
+      try {
+        const mod = await import("three/examples/jsm/controls/OrbitControls");
+        const OrbitControls = (mod as any).OrbitControls ?? (mod as any).default;
+        controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.08;
+        controls.minDistance = 6;
+        controls.maxDistance = 40;
+        (controls as any).autoRotate = false;
+      } catch (e) {
+        console.warn("OrbitControls import failed:", e);
+      }
+    })();
+
+    // Resize handler
     const handleResize = () => {
       if (!mountRef.current) return;
       const w = mountRef.current.clientWidth;
@@ -191,60 +178,84 @@ export default function UtomDns() {
     };
     window.addEventListener("resize", handleResize);
 
-    // Animation loop
-    let rafId = 0;
+    // Animation
     const clock = new THREE.Clock();
-
+    let rafId = 0;
     const animate = () => {
       rafId = requestAnimationFrame(animate);
-      const dt = clock.getDelta();
-
-      // gentle rotation and subtle breathing
       const t = clock.getElapsedTime();
-      meshA.rotation.y += 0.0025;
-      meshB.rotation.y += 0.0025;
-      bridgeGroup.rotation.y += 0.0025;
 
-      const pulse = 1 + Math.sin(t * 1.6) * 0.02;
+      meshA.rotation.y += 0.0018;
+      meshB.rotation.y += 0.0018;
+      bridgeGroup.rotation.y += 0.0018;
+
+      const pulse = 1 + Math.sin(t * 1.8) * 0.01;
       meshA.scale.setScalar(pulse);
       meshB.scale.setScalar(pulse);
 
-      controls.update();
+      if (controls) controls.update();
       renderer.render(scene, camera);
     };
     animate();
 
-    // Cleanup on unmount
+    // --- CLEANUP: csak egyetlen cleanup függvényt adunk vissza ---
     return () => {
+      // stop animation
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", handleResize);
-      controls.dispose();
+
+      // dispose controls
+      if (controls && typeof controls.dispose === "function") {
+        controls.dispose();
+      }
 
       // remove renderer DOM
-      mountRef.current?.removeChild(renderer.domElement);
+      if (mountRef.current && renderer.domElement.parentElement === mountRef.current) {
+        mountRef.current.removeChild(renderer.domElement);
+      }
 
-      // dispose geometries & materials
-      tubeGeomA.dispose();
-      tubeGeomB.dispose();
-      cylGeom.dispose();
-      matA.dispose();
-      matB.dispose();
-      // dispose bridge materials
-      bridgeGroup.traverse((o) => {
-        if ((o as THREE.Mesh).material) {
-          const m = (o as THREE.Mesh).material as THREE.Material;
-          m.dispose();
+      // dispose renderer
+      try {
+        renderer.dispose();
+      } catch (e) {
+        // ignore
+      }
+
+      // dispose geometries & materials safely
+      const safeDisposeMaterial = (m?: THREE.Material | THREE.Material[] | null) => {
+        if (!m) return;
+        if (Array.isArray(m)) {
+          m.forEach((mat) => {
+            try { mat.dispose(); } catch (e) { /* ignore */ }
+          });
+        } else {
+          try { m.dispose(); } catch (e) { /* ignore */ }
         }
-        if ((o as THREE.Mesh).geometry) {
-          (o as THREE.Mesh).geometry.dispose();
+      };
+
+      try { tubeGeomA.dispose(); } catch {}
+      try { tubeGeomB.dispose(); } catch {};
+      safeDisposeMaterial(matA);
+      safeDisposeMaterial(matB);
+
+      // dispose bridges
+      bridgeGroup.traverse((obj) => {
+        const mesh = obj as THREE.Mesh;
+        if (mesh.isMesh) {
+          try { mesh.geometry.dispose(); } catch {}
+          safeDisposeMaterial(mesh.material as THREE.Material | THREE.Material[] | undefined);
         }
       });
+
+      // rim
+      try { rim.geometry.dispose(); } catch {}
+      try { rim.material.dispose(); } catch {}
     };
-  }, []);
+  }, []); // <-- dependency array: csak egyszer futjon
 
   return (
     <div className="w-full h-[640px] border rounded-lg shadow bg-white p-2">
-      <h2 className="text-xl font-semibold mb-2">uTOM DNS Spirál (Vizualizáció)</h2>
+      <h2 className="text-xl font-semibold mb-2">uTOM DNS Spirál (Egyszálú, kilengő)</h2>
       <div ref={mountRef} className="w-full h-full" />
     </div>
   );
