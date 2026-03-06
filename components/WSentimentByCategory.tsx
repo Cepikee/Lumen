@@ -200,7 +200,7 @@ export default function WSentimentByCategory() {
               <div className="text-2xl">🔍</div>
               <p>
                 Ez segít megérteni, mely területek domináltak
-                <b>negatív hangulatú tartalommal</b>.
+                <b> negatív hangulatú tartalommal</b>.
               </p>
             </div>
 

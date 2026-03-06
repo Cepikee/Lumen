@@ -25,6 +25,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   const isASZF = pathname.includes("aszf");
   const isImpresszum = pathname.includes("impresszum");
   const isInsights = pathname.includes("insights");
+  const isDns = pathname.includes("dns");
 
   const shouldShowSidebar =
     pathname === "/" &&
@@ -34,6 +35,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     !isASZF &&
     !isImpresszum &&
     !isInsights;
+    !isDns; // DNS oldalra ne legyen sidebar
 
   // THEME
   const theme = useUserStore((s) => s.theme);
@@ -149,7 +151,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   }
 
   // ⭐⭐⭐ PREMIUM OLDAL — HEADER IGEN, FULL WIDTH
-  if (isPremium || isAdatvedelmi || isASZF || isImpresszum || isInsights) {
+  if (isPremium || isAdatvedelmi || isASZF || isImpresszum || isInsights || isDns) {
     return (
       <>
         <Header />

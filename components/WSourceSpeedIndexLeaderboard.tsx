@@ -214,7 +214,7 @@ export default function WSourceSpeedIndexLeaderboard() {
       <div className="flex items-start gap-4">
         <div className="text-2xl">📊</div>
         <p>
-          A késésekből egy <b>átlagos reakcióidő</b> számolódik minden forrásra.  
+          A késésekből egy <b>átlagos reakció idő</b> számolódik minden forrásra.  
           A kisebb érték gyorsabb, a nagyobb lassabb megjelenést jelent.
         </p>
       </div>
