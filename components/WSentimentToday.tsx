@@ -46,7 +46,7 @@ export default function WSentimentToday() {
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: "pie",
-      background: "transparent", // 🔥 nincs apex háttér
+      background: "transparent",
       foreColor: isDark ? "#fff" : "#000",
       toolbar: { show: false },
       animations: { enabled: true },
@@ -57,19 +57,19 @@ export default function WSentimentToday() {
 
     plotOptions: {
       pie: {
-        expandOnClick: false, // 🔥 ne nagyítson hoverkor
+        expandOnClick: false,
         donut: { labels: { show: false } },
       },
     },
 
     states: {
-      hover: { filter: { type: "none" } }, // 🔥 nincs hover highlight
+      hover: { filter: { type: "none" } },
       active: { filter: { type: "none" } },
     },
 
     grid: {
       borderColor: isDark ? "#334155" : "#e2e8f0",
-      strokeDashArray: 3, // 🔥 nincs világos csík hoverkor
+      strokeDashArray: 3,
     },
 
     tooltip: {
@@ -81,7 +81,7 @@ export default function WSentimentToday() {
     legend: {
       position: "bottom",
       labels: { colors: isDark ? "#fff" : "#000" },
-      onItemHover: { highlightDataSeries: false }, // 🔥 nincs legend hover highlight
+      onItemHover: { highlightDataSeries: false },
     },
 
     labels: ["Pozitív", "Semleges", "Negatív"],
@@ -100,7 +100,7 @@ export default function WSentimentToday() {
     <>
       <div
         className="relative z-10 p-12 rounded-3xl wsource-card--ghost"
-        style={{ background: "var(--bs-body-bg)" }} // 🔥 egységes UTOM háttér
+        style={{ background: "var(--bs-body-bg)" }}
       >
         <div className="flex items-center justify-center gap-4 mb-6">
           <h2 className="text-3xl font-semibold tracking-tight text-center">
@@ -120,20 +120,85 @@ export default function WSentimentToday() {
         </div>
       </div>
 
+      {/* 🔥 ÚJ, FELTUNINGOLT UTOM MODAL */}
       <UtomModal
         show={openInfo}
         onClose={() => setOpenInfo(false)}
         title="Mi az a hangulatelemzés?"
       >
-        <div className="text-sm leading-relaxed">
-          <p>
-            A rendszer minden cikket pozitív, semleges vagy negatív hangulatúnak
-            osztályoz.
+        <div className="text-sm leading-relaxed space-y-6">
+
+          {/* Belső cím */}
+          <h3 className="text-xl font-bold text-center mb-2">
+            Hogyan működik a napi hangulatelemzés?
+          </h3>
+
+          {/* Bevezető */}
+          <p className="text-base font-semibold text-center">
+            A rendszer minden hírt <b>pozitív</b>, <b>semleges</b> vagy <b>negatív</b> hangulatúnak
+            osztályoz, és ezekből számolja ki a mai nap összesített arányait.
           </p>
-          <p className="mt-2">
-            Ez a grafikon azt mutatja, hogy a mai hírek milyen arányban
-            tartoznak ezekbe a kategóriákba.
+
+          {/* Ikonos magyarázat */}
+          <div className="space-y-5">
+
+            <div className="flex items-start gap-4">
+              <div className="text-2xl">🧠</div>
+              <p>
+                A cikkek szövegét egy AI‑modell elemzi, és meghatározza,
+                milyen érzelmi töltet jellemzi a tartalmat.
+              </p>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="text-2xl">📊</div>
+              <p>
+                A grafikon azt mutatja, hogy a mai hírek mekkora része volt
+                <b>pozitív</b>, <b>semleges</b> vagy <b>negatív</b>.
+              </p>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="text-2xl">📅</div>
+              <p>
+                A mutató <b>napi bontású</b>, így jól látható, ha egy nap
+                különösen negatív vagy pozitív hangulatú hírek dominálnak.
+              </p>
+            </div>
+
+          </div>
+
+          {/* Kiemelt doboz */}
+          <div
+            className="p-4 rounded-xl text-center"
+            style={{
+              background: "rgba(0,0,0,0.05)",
+              border: "1px solid rgba(0,0,0,0.1)",
+            }}
+          >
+            <p className="font-semibold mb-2 text-lg">Mit jelent ez a gyakorlatban?</p>
+
+            <ul className="list-disc list-inside space-y-1 text-left inline-block text-sm">
+              <li><b>Sok zöld</b> → pozitív hangulatú nap.</li>
+              <li><b>Sok szürke</b> → semleges, kiegyensúlyozott hírek.</li>
+              <li><b>Sok piros</b> → negatív hangulatú nap.</li>
+              <li>A mutató <i>nem minőségi értékelés</i>, csak a hangulat arányát mutatja.</li>
+            </ul>
+          </div>
+
+          {/* Lezárás */}
+          <p className="text-center">
+            A hangulatelemzés segít megérteni, milyen érzelmi tónus jellemzi
+            a mai híreket, és hogyan változik a közbeszéd hangulata.
           </p>
+
+          <p
+            className="text-xs italic text-center mt-6"
+            style={{ color: isDark ? "#ffffff" : "#000000" }}
+          >
+            A hangulatelemzés AI által került meghatározásra.
+          </p>
+
         </div>
       </UtomModal>
     </>

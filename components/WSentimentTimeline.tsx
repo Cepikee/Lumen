@@ -44,7 +44,7 @@ export default function WSentimentTimeline() {
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: "line",
-      background: "transparent", // 🔥 nincs apex háttér
+      background: "transparent",
       foreColor: isDark ? "#fff" : "#000",
       toolbar: { show: false },
       animations: { enabled: true },
@@ -67,13 +67,13 @@ export default function WSentimentTimeline() {
     dataLabels: { enabled: false },
 
     states: {
-      hover: { filter: { type: "none" } }, // 🔥 nincs hover highlight
+      hover: { filter: { type: "none" } },
       active: { filter: { type: "none" } },
     },
 
     grid: {
       borderColor: isDark ? "#334155" : "#e2e8f0",
-      strokeDashArray: 3, // 🔥 nincs világos csík hoverkor
+      strokeDashArray: 3,
     },
 
     tooltip: {
@@ -84,7 +84,7 @@ export default function WSentimentTimeline() {
 
     legend: {
       labels: { colors: isDark ? "#fff" : "#000" },
-      onItemHover: { highlightDataSeries: false }, // 🔥 nincs legend hover highlight
+      onItemHover: { highlightDataSeries: false },
     },
   };
 
@@ -97,7 +97,7 @@ export default function WSentimentTimeline() {
     <>
       <div
         className="relative z-10 p-12 rounded-3xl wsource-card--ghost"
-        style={{ background: "var(--bs-body-bg)" }} // 🔥 UTOM háttér
+        style={{ background: "var(--bs-body-bg)" }}
       >
         <div className="flex items-center justify-center gap-4 mb-6">
           <h2 className="text-3xl font-semibold tracking-tight text-center">
@@ -117,19 +117,87 @@ export default function WSentimentTimeline() {
         </div>
       </div>
 
+      {/* 🔥 ÚJ, FELTUNINGOLT UTOM MODAL */}
       <UtomModal
         show={openInfo}
         onClose={() => setOpenInfo(false)}
         title="Mit mutat ez a grafikon?"
       >
-        <div className="text-sm leading-relaxed">
-          <p>
-            Óránként mutatja, hogy mennyi pozitív és negatív hangulatú cikk
-            jelent meg.
+        <div className="text-sm leading-relaxed space-y-6">
+
+          {/* Belső cím */}
+          <h3 className="text-xl font-bold text-center mb-2">
+            Hogyan változik a hírek hangulata óráról órára?
+          </h3>
+
+          {/* Bevezető */}
+          <p className="text-base font-semibold text-center">
+            Ez a grafikon azt mutatja, hogy a mai napon
+            <span style={{ color: "#22c55e" }}> <b>pozitív</b></span> és
+            <span style={{ color: "#ef4444" }}> <b>negatív</b></span> hangulatú hírek
+            hogyan oszlanak meg óránként.
           </p>
-          <p className="mt-2">
-            Ez segít látni, mikor romlik vagy javul a hírek hangulata.
+
+          {/* Ikonos magyarázat */}
+          <div className="space-y-5">
+
+            <div className="flex items-start gap-4">
+              <div className="text-2xl">⏱️</div>
+              <p>
+                A rendszer minden cikket besorol hangulat szerint, majd
+                <b> óránként összesíti</b>, hogy mennyi pozitív és negatív hír jelent meg.
+              </p>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="text-2xl">📈</div>
+              <p>
+                A vonalak azt mutatják, mikor volt több
+                <b> pozitív</b> vagy <b>negatív</b> hangulatú tartalom.
+              </p>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="text-2xl">🔍</div>
+              <p>
+                Így könnyen észrevehető, ha egy adott órában
+                <b> hirtelen romlik</b> vagy <b>javul</b> a hírek hangulata.
+              </p>
+            </div>
+
+          </div>
+
+          {/* Kiemelt doboz */}
+          <div
+            className="p-4 rounded-xl text-center"
+            style={{
+              background: "rgba(0,0,0,0.05)",
+              border: "1px solid rgba(0,0,0,0.1)",
+            }}
+          >
+            <p className="font-semibold mb-2 text-lg">Mit jelent ez a gyakorlatban?</p>
+
+            <ul className="list-disc list-inside space-y-1 text-left inline-block text-sm">
+              <li><b>Emelkedő piros vonal</b> → több negatív hír érkezik.</li>
+              <li><b>Emelkedő zöld vonal</b> → pozitívabb a hírek hangulata.</li>
+              <li><b>Hirtelen kiugrás</b> → valamilyen esemény erősen befolyásolta a hangulatot.</li>
+              <li>A mutató <i>nem minőségi értékelés</i>, csak a hangulat arányát mutatja.</li>
+            </ul>
+          </div>
+
+          {/* Lezárás */}
+          <p className="text-center">
+            A hangulat időbeli alakulása segít megérteni,
+            hogyan változik a közbeszéd tónusa a nap folyamán.
           </p>
+
+          <p
+            className="text-xs italic text-center mt-6"
+            style={{ color: isDark ? "#ffffff" : "#000000" }}
+          >
+            A hangulatelemzés AI által került meghatározásra.
+          </p>
+
         </div>
       </UtomModal>
     </>

@@ -145,22 +145,15 @@ Eredeti: ${item.original}
           </h2>
 
           <button
-            onClick={() => {
-              console.debug("INFO BUTTON CLICKED — openInfo before set:", openInfo);
-              setOpenInfo(true);
-            }}
+            onClick={() => setOpenInfo(true)}
             aria-label="Információ"
             type="button"
             className="w-[26px] h-[26px] p-0 m-0 flex items-center justify-center bg-transparent border-0"
-            style={{ width: 26, height: 26 }}
           >
             <img
               src="/icons/info-svg.svg"
               alt="info"
               className="w-[26px] h-[26px] object-contain pointer-events-none"
-              width={26}
-              height={26}
-              style={{ display: "block" }}
             />
           </button>
         </div>
@@ -170,32 +163,90 @@ Eredeti: ${item.original}
         </div>
       </div>
 
-      <UtomModal show={openInfo} onClose={() => setOpenInfo(false)} title="Mi az a másolási arány?">
-  <div className="text-sm leading-relaxed">
-    <p className="mb-3">
-      A mutató azt mutatja meg, hogy egy forrás milyen gyakran közöl olyan hírt, amelyet egy másik forrás már korábban publikált.
-    </p>
+      {/* 🔥 ÚJ, FELTUNINGOLT UTOM MODAL */}
+      <UtomModal
+        show={openInfo}
+        onClose={() => setOpenInfo(false)}
+        title="Mi az a másolási arány?"
+      >
+        <div className="text-sm leading-relaxed space-y-6">
 
-    <p className="mb-2">
-      <strong>Eredeti</strong> — amikor a forrás volt az első, aki a témát közzétette.
-    </p>
+          {/* Bevezető */}
+          <p className="text-base font-semibold text-center">
+            A <b>másolási arány</b> azt mutatja meg, hogy egy hírforrás
+            <span style={{ color: "#ef4444" }}> <b>milyen gyakran vesz át</b></span>
+            más forrásoktól már korábban megjelent témákat.
+          </p>
 
-    <p className="mb-2">
-      <strong>Átvett</strong> — amikor a forrás később közölte ugyanazt a hírt.
-    </p>
+          {/* Ikonos magyarázat */}
+          <div className="space-y-5">
 
-    <p className="mb-2">
-      <strong>Arány</strong> — az átvett esetek aránya az összes vizsgált esethez képest (azaz mennyi a nem eredeti megjelenés).
-    </p>
+            <div className="flex items-start gap-4">
+              <div className="text-2xl">📰</div>
+              <p>
+                <b>Megjelenik egy új téma</b> a hírekben. A rendszer azonosítja,
+                melyik forrás ír róla <b>elsőként</b>.
+              </p>
+            </div>
 
-    <p className="mt-3">
-      <strong>Megjegyzés:</strong> ez egy automatikus, összehasonlító mutató — segít látni, mely forrásoknál gyakoribb az átvétel, de nem helyettesíti az emberi értékelést.
-    </p>
-  </div>
-</UtomModal>
+            <div className="flex items-start gap-4">
+              <div className="text-2xl">🔁</div>
+              <p>
+                Ha egy másik forrás <b>később</b> ír ugyanerről a témáról,
+                akkor azt <b>átvett tartalomnak</b> tekintjük.
+              </p>
+            </div>
 
+            <div className="flex items-start gap-4">
+              <div className="text-2xl">📊</div>
+              <p>
+                A rendszer minden forrásnál megszámolja, hányszor volt
+                <b>eredeti</b> és hányszor <b>átvett</b> a megjelenés.
+              </p>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="text-2xl">📉</div>
+              <p>
+                A <b>másolási arány</b> azt mutatja meg, hogy az összes
+                megjelenésből mekkora rész volt átvett tartalom.
+              </p>
+            </div>
+
+          </div>
+
+          {/* Kiemelt doboz */}
+          <div
+            className="p-4 rounded-xl text-center"
+            style={{
+              background: "rgba(0,0,0,0.05)",
+              border: "1px solid rgba(0,0,0,0.1)",
+            }}
+          >
+            <p className="font-semibold mb-2 text-lg">Mit jelent ez a gyakorlatban?</p>
+
+            <ul className="list-disc list-inside space-y-1 text-left inline-block text-sm">
+              <li><b>Alacsony arány</b> → a forrás többnyire saját témákat dolgoz fel.</li>
+              <li><b>Magas arány</b> → a forrás gyakran vesz át másoktól.</li>
+              <li>A mutató <i>nem minőségi értékelés</i>, csak a megjelenések eredetiségét méri.</li>
+            </ul>
+          </div>
+
+          {/* Lezárás */}
+          <p className="text-center">
+            A cél, hogy átlátható legyen, mely források mennyire támaszkodnak
+            saját tartalomra, és kik azok, akik inkább mások témáit dolgozzák fel.
+          </p>
+
+          <p
+            className="text-xs italic text-center mt-6"
+            style={{ color: isDark ? "#ffffff" : "#000000" }}
+          >
+            A rangsor AI által került meghatározásra.
+          </p>
+
+        </div>
+      </UtomModal>
     </>
   );
 }
-
-// LEGACY: régi Recharts-os verzió, ha esetleg kellene még valamiért

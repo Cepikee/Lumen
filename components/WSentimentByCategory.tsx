@@ -50,8 +50,6 @@ export default function WSentimentByCategory() {
       toolbar: { show: false },
       animations: { enabled: true },
       zoom: { enabled: false },
-
-      // 🔥 TELJES HIGHLIGHT TILTÁS
       selection: { enabled: false },
       brush: { enabled: false },
     },
@@ -62,18 +60,14 @@ export default function WSentimentByCategory() {
       bar: {
         horizontal: false,
         borderRadius: 6,
-
-        // 🔥 hover opacity tiltása
         colors: {
           ranges: [],
           backgroundBarOpacity: 1,
         },
-
-        distributed: false, // 🔥 fontos!
+        distributed: false,
       },
     },
 
-    // 🔥 nincs crosshair
     xaxis: {
       categories,
       crosshairs: { show: false },
@@ -106,7 +100,6 @@ export default function WSentimentByCategory() {
       },
     },
 
-    // 🔥 nincs hover highlight
     states: {
       hover: { filter: { type: "none" } },
       active: { filter: { type: "none" } },
@@ -121,7 +114,7 @@ export default function WSentimentByCategory() {
       theme: isDark ? "dark" : "light",
       fillSeriesColor: false,
       marker: { show: false },
-      shared: false, // 🔥 ne highlightoljon sort
+      shared: false,
       intersect: false,
     },
 
@@ -164,16 +157,85 @@ export default function WSentimentByCategory() {
         </div>
       </div>
 
+      {/* 🔥 ÚJ, FELTUNINGOLT UTOM MODAL */}
       <UtomModal
         show={openInfo}
         onClose={() => setOpenInfo(false)}
         title="Mit mutat ez a grafikon?"
       >
-        <div className="text-sm leading-relaxed">
-          <p>Melyik kategóriában hány negatív hangulatú cikk jelent meg ma.</p>
-          <p className="mt-2">
-            Ez segít látni, mely témák a leginkább negatívak a hírekben.
+        <div className="text-sm leading-relaxed space-y-6">
+
+          {/* Belső cím */}
+          <h3 className="text-xl font-bold text-center mb-2">
+            Mit jelent a kategóriahangulat?
+          </h3>
+
+          {/* Bevezető */}
+          <p className="text-base font-semibold text-center">
+            Ez a grafikon azt mutatja, hogy a mai napon
+            <span style={{ color: "#ef4444" }}> <b>mely témákban jelent meg a legtöbb negatív hangulatú hír</b></span>.
           </p>
+
+          {/* Ikonos magyarázat */}
+          <div className="space-y-5">
+
+            <div className="flex items-start gap-4">
+              <div className="text-2xl">🗂️</div>
+              <p>
+                Minden cikk egy kategóriába kerül (pl. politika, gazdaság, tech).
+                A rendszer megszámolja, hogy kategóriánként hány
+                <b> negatív hangulatú</b> cikk jelent meg ma.
+              </p>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="text-2xl">📉</div>
+              <p>
+                A magasabb érték azt jelzi, hogy az adott témában
+                <b> több negatív hír</b> jelent meg a nap folyamán.
+              </p>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="text-2xl">🔍</div>
+              <p>
+                Ez segít megérteni, mely területek domináltak
+                <b>negatív hangulatú tartalommal</b>.
+              </p>
+            </div>
+
+          </div>
+
+          {/* Kiemelt doboz */}
+          <div
+            className="p-4 rounded-xl text-center"
+            style={{
+              background: "rgba(0,0,0,0.05)",
+              border: "1px solid rgba(0,0,0,0.1)",
+            }}
+          >
+            <p className="font-semibold mb-2 text-lg">Mit jelent ez a gyakorlatban?</p>
+
+            <ul className="list-disc list-inside space-y-1 text-left inline-block text-sm">
+              <li><b>Magas érték</b> → sok negatív hír az adott témában.</li>
+              <li><b>Alacsony érték</b> → kevés negatív tartalom.</li>
+              <li>A mutató <i>nem minőségi értékelés</i>, csak a hangulat arányát mutatja.</li>
+            </ul>
+          </div>
+
+          {/* Lezárás */}
+          <p className="text-center">
+            A kategóriahangulat segít megérteni, mely témák járultak hozzá
+            leginkább a mai nap negatív hírtónusához.
+          </p>
+
+          <p
+            className="text-xs italic text-center mt-6"
+            style={{ color: isDark ? "#ffffff" : "#000000" }}
+          >
+            A hangulatelemzés AI által került meghatározásra.
+          </p>
+
         </div>
       </UtomModal>
     </>
