@@ -18,7 +18,7 @@ export async function GET(req: Request) {
       `
       SELECT sentiment, COUNT(*) AS c
       FROM articles
-      WHERE created_at >= ? AND created_at <= ?
+      WHERE published_at >= ? AND published_at <= ?
         AND sentiment IS NOT NULL
       GROUP BY sentiment
       `,

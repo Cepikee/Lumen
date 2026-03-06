@@ -18,14 +18,28 @@ export async function GET(req: Request) {
     const sec = securityCheck(req);
     if (sec) return sec;
 
-    const [rows]: any = await db.query(`
-      SELECT TRIM(category) AS category, sentiment, COUNT(*) AS c
+    // 🔥 Mai nap meghatározása
+    const now = new Date();
+    const day = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")}`;
+    const start = `${day} 00:00:00`;
+    const end = `${day} 23:59:59`;
+
+    // 🔥 Csak a MA publikált cikkek
+    const [rows]: any = await db.query(
+      `
+      SELECT 
+        TRIM(category) AS category,
+        sentiment,
+        COUNT(*) AS c
       FROM articles
-      WHERE sentiment IS NOT NULL
+      WHERE published_at >= ? AND published_at <= ?
+        AND sentiment IS NOT NULL
         AND category IS NOT NULL
         AND category <> ''
       GROUP BY TRIM(category), sentiment
-    `);
+      `,
+      [start, end]
+    );
 
     const result: Record<string, { positive: number; neutral: number; negative: number }> = {};
 
