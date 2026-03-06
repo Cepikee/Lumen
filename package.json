@@ -39,6 +39,8 @@
     "recharts": "^3.7.0",
     "rss-parser": "^3.13.0",
     "swr": "^2.3.8",
+    "three": "^0.183.2",
+    "three-stdlib": "^2.36.1",
     "zustand": "^5.0.10"
   },
   "devDependencies": {
@@ -51,6 +53,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19.2.3",
     "@types/recharts": "^1.8.29",
+    "@types/three": "^0.183.1",
     "autoprefixer": "^10.4.24",
     "concurrently": "^9.2.1",
     "eslint": "^9",
