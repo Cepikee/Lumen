@@ -6,22 +6,24 @@ import * as THREE from "three";
 export default function UtomDns() {
   const mountRef = useRef<HTMLDivElement | null>(null);
 
-  // 🔵 Alap DNS paraméterek (később a 20+ dimenzió írja felül)
+  // DNS paraméterek (később a 20+ dimenzió írja felül)
   const dnaParams = {
     turns: 10,
-    pointsPerTurn: 80,
+    pointsPerTurn: 100,
     radius: 1.2,
-    height: 8,
-    bridgeEvery: 10,       // hány pontonként legyen összekötő híd
+    height: 10,
+    tubeRadius: 0.12,
+    bridgeEvery: 12,
+    bridgeRadius: 0.05,
     colorA: "#0070f3",
     colorB: "#ff4081",
-    bridgeColor: "#888"
+    bridgeColor: "#ffaa00"
   };
 
   useEffect(() => {
     if (!mountRef.current) return;
 
-    // --- Alap Three.js setup ---
+    // --- Scene setup ---
     const scene = new THREE.Scene();
     scene.background = new THREE.Color("#f0f2f5");
 
@@ -31,7 +33,7 @@ export default function UtomDns() {
       0.1,
       100
     );
-    camera.position.set(0, 0, 12);
+    camera.position.set(0, 0, 14);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(
@@ -40,10 +42,12 @@ export default function UtomDns() {
     );
     mountRef.current.appendChild(renderer.domElement);
 
-    // --- Fények ---
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(5, 5, 5);
-    scene.add(light);
+    // --- Lights ---
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+    dirLight.position.set(5, 5, 5);
+    scene.add(dirLight);
 
     // --- DNS paraméterek ---
     const {
@@ -51,7 +55,9 @@ export default function UtomDns() {
       pointsPerTurn,
       radius,
       height,
+      tubeRadius,
       bridgeEvery,
+      bridgeRadius,
       colorA,
       colorB,
       bridgeColor
@@ -59,80 +65,88 @@ export default function UtomDns() {
 
     const totalPoints = turns * pointsPerTurn;
 
-    // --- HELIX A ---
-    const geometryA = new THREE.BufferGeometry();
-    const positionsA = new Float32Array(totalPoints * 3);
-
-    // --- HELIX B ---
-    const geometryB = new THREE.BufferGeometry();
-    const positionsB = new Float32Array(totalPoints * 3);
-
-    // --- ÖSSZEKÖTŐ HIDAK ---
-    const bridgeGroup = new THREE.Group();
+    // --- Spirál pontok generálása ---
+    const pointsA: THREE.Vector3[] = [];
+    const pointsB: THREE.Vector3[] = [];
 
     for (let i = 0; i < totalPoints; i++) {
       const t = i / pointsPerTurn;
       const angle = t * Math.PI * 2;
 
-      // Helix A
-      const xA = Math.cos(angle) * radius;
-      const yA = (t / turns) * height - height / 2;
-      const zA = Math.sin(angle) * radius;
+      const y = (t / turns) * height - height / 2;
 
-      positionsA[i * 3] = xA;
-      positionsA[i * 3 + 1] = yA;
-      positionsA[i * 3 + 2] = zA;
+      // Helix A
+      pointsA.push(
+        new THREE.Vector3(
+          Math.cos(angle) * radius,
+          y,
+          Math.sin(angle) * radius
+        )
+      );
 
       // Helix B (180° eltolva)
-      const xB = Math.cos(angle + Math.PI) * radius;
-      const yB = yA;
-      const zB = Math.sin(angle + Math.PI) * radius;
-
-      positionsB[i * 3] = xB;
-      positionsB[i * 3 + 1] = yB;
-      positionsB[i * 3 + 2] = zB;
-
-      // --- Összekötő híd minden N. pontnál ---
-      if (i % bridgeEvery === 0) {
-        const bridgeGeometry = new THREE.BufferGeometry();
-        const bridgePositions = new Float32Array([
-          xA, yA, zA,
-          xB, yB, zB
-        ]);
-        bridgeGeometry.setAttribute(
-          "position",
-          new THREE.BufferAttribute(bridgePositions, 3)
-        );
-
-        const bridgeMaterial = new THREE.LineBasicMaterial({
-          color: bridgeColor,
-          linewidth: 1
-        });
-
-        const bridge = new THREE.Line(bridgeGeometry, bridgeMaterial);
-        bridgeGroup.add(bridge);
-      }
+      pointsB.push(
+        new THREE.Vector3(
+          Math.cos(angle + Math.PI) * radius,
+          y,
+          Math.sin(angle + Math.PI) * radius
+        )
+      );
     }
 
-    geometryA.setAttribute("position", new THREE.BufferAttribute(positionsA, 3));
-    geometryB.setAttribute("position", new THREE.BufferAttribute(positionsB, 3));
+    // --- TubeGeometry spirálok ---
+    const curveA = new THREE.CatmullRomCurve3(pointsA);
+    const curveB = new THREE.CatmullRomCurve3(pointsB);
 
-    const materialA = new THREE.LineBasicMaterial({ color: colorA });
-    const materialB = new THREE.LineBasicMaterial({ color: colorB });
+    const tubeA = new THREE.TubeGeometry(curveA, totalPoints, tubeRadius, 16, false);
+    const tubeB = new THREE.TubeGeometry(curveB, totalPoints, tubeRadius, 16, false);
 
-    const helixA = new THREE.Line(geometryA, materialA);
-    const helixB = new THREE.Line(geometryB, materialB);
+    const materialA = new THREE.MeshStandardMaterial({ color: colorA });
+    const materialB = new THREE.MeshStandardMaterial({ color: colorB });
 
-    scene.add(helixA);
-    scene.add(helixB);
+    const meshA = new THREE.Mesh(tubeA, materialA);
+    const meshB = new THREE.Mesh(tubeB, materialB);
+
+    scene.add(meshA);
+    scene.add(meshB);
+
+    // --- Összekötő hidak (CylinderGeometry) ---
+    const bridgeGroup = new THREE.Group();
+
+    for (let i = 0; i < totalPoints; i += bridgeEvery) {
+      const a = pointsA[i];
+      const b = pointsB[i];
+
+      const mid = new THREE.Vector3().addVectors(a, b).multiplyScalar(0.5);
+      const dir = new THREE.Vector3().subVectors(b, a);
+      const length = dir.length();
+
+      const bridgeGeom = new THREE.CylinderGeometry(
+        bridgeRadius,
+        bridgeRadius,
+        length,
+        8
+      );
+
+      const bridgeMat = new THREE.MeshStandardMaterial({ color: bridgeColor });
+      const bridge = new THREE.Mesh(bridgeGeom, bridgeMat);
+
+      // Cylinder orientation
+      bridge.position.copy(mid);
+      bridge.lookAt(b);
+      bridge.rotateX(Math.PI / 2);
+
+      bridgeGroup.add(bridge);
+    }
+
     scene.add(bridgeGroup);
 
     // --- Animáció ---
     const animate = () => {
       requestAnimationFrame(animate);
 
-      helixA.rotation.y += 0.003;
-      helixB.rotation.y += 0.003;
+      meshA.rotation.y += 0.003;
+      meshB.rotation.y += 0.003;
       bridgeGroup.rotation.y += 0.003;
 
       renderer.render(scene, camera);
@@ -143,8 +157,8 @@ export default function UtomDns() {
     // Cleanup
     return () => {
       mountRef.current?.removeChild(renderer.domElement);
-      geometryA.dispose();
-      geometryB.dispose();
+      tubeA.dispose();
+      tubeB.dispose();
       materialA.dispose();
       materialB.dispose();
     };
@@ -152,7 +166,7 @@ export default function UtomDns() {
 
   return (
     <div className="w-full h-[600px] border rounded-lg shadow bg-white p-2">
-      <h2 className="text-xl font-semibold mb-2">uTOM DNS Spirál (Dual Helix)</h2>
+      <h2 className="text-xl font-semibold mb-2">uTOM DNS Spirál (TubeGeometry)</h2>
       <div ref={mountRef} className="w-full h-full" />
     </div>
   );
