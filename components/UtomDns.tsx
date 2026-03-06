@@ -9,14 +9,14 @@ export default function UtomDns() {
   const cfg = {
     height: 10,
     points: 360,
-    lateralAmp: 0.35,       // fő szálak kilengése
-    twistAmount: 0.6,      // mennyit csavarodnak (kis érték = kevésbé helix)
+    lateralAmp: 0.35,
+    twistAmount: 0.6,
     tubeRadius: 0.12,
     bridgeRadius: 0.05,
-    bridgeStep: 12,        // hány pontonként legyen híd
+    bridgeStep: 12,
     maxBridgesPerRow: 4,
     rowSpacing: 0.28,
-    minSeparation: 0.9,
+    minSeparation: 1.0,
     colorA: "#0039ff",
     colorB: "#ff0033",
     background: 0xf6f7f9
@@ -28,7 +28,7 @@ export default function UtomDns() {
     const W = mountRef.current.clientWidth;
     const H = mountRef.current.clientHeight;
 
-    // Scene / Camera / Renderer
+    // Renderer / Scene / Camera
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(cfg.background);
 
@@ -47,46 +47,46 @@ export default function UtomDns() {
     scene.add(dir);
     scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 0.25));
 
-    // root group: ide tesszük a szálakat és hidakat is, így együtt forognak
+    // Root group: everything goes here so it rotates together
     const rootGroup = new THREE.Group();
     scene.add(rootGroup);
 
-    // 1) Generáljuk a két "fő szál" pontjait: nem rugós helix, hanem függőleges, enyhe kilengéssel és kis csavarással
+    // Generate two centerlines with robust separation (iterative if needed)
     const pointsA: THREE.Vector3[] = [];
     const pointsB: THREE.Vector3[] = [];
 
     for (let i = 0; i <= cfg.points; i++) {
-      const t = i / cfg.points; // 0..1
+      const t = i / cfg.points;
       const y = t * cfg.height - cfg.height / 2;
 
-      // enyhe kilengés és kis twist: x = sin(k*t)*amp, z = cos(k2*t)*amp2
-      const phase = t * Math.PI * cfg.twistAmount * 2; // csavarodás
-      const xOffset = Math.sin(phase) * cfg.lateralAmp;
-      const zOffset = Math.cos(phase * 0.5) * cfg.lateralAmp * 0.25;
+      const phase = t * Math.PI * cfg.twistAmount * 2;
+      let xA = Math.sin(phase) * cfg.lateralAmp;
+      let zA = Math.cos(phase * 0.5) * cfg.lateralAmp * 0.25;
+      let xB = -Math.sin(phase) * cfg.lateralAmp;
+      let zB = -Math.cos(phase * 0.5) * cfg.lateralAmp * 0.25;
 
-      // A és B ellentétes fázisban, így sose találkoznak
-      let xA = xOffset;
-      let zA = zOffset;
-      let xB = -xOffset;
-      let zB = -zOffset;
-
-      // biztosítjuk a minimális távolságot (ha túl közel, toljuk szét)
-      const dx = xA - xB;
-      const dz = zA - zB;
-      const dist = Math.sqrt(dx * dx + dz * dz);
-      if (dist < cfg.minSeparation) {
-        const need = (cfg.minSeparation - dist) * 0.6;
-        xA += need;
-        xB -= need;
+      // iterative separation to guarantee min distance
+      let dx = xA - xB;
+      let dz = zA - zB;
+      let dist = Math.sqrt(dx * dx + dz * dz);
+      let iter = 0;
+      while (dist < cfg.minSeparation && iter < 8) {
+        const push = 0.02 + iter * 0.01;
+        xA += push;
+        xB -= push;
+        dx = xA - xB;
+        dz = zA - zB;
+        dist = Math.sqrt(dx * dx + dz * dz);
+        iter++;
       }
 
       pointsA.push(new THREE.Vector3(xA, y, zA));
       pointsB.push(new THREE.Vector3(xB, y, zB));
     }
 
-    // 2) Készítsük el a csöveket (TubeGeometry) a pontokból — kevésbé simítjuk, hogy ne legyen túl görbe
-    const curveA = new THREE.CatmullRomCurve3(pointsA, false, "catmullrom", 0.2);
-    const curveB = new THREE.CatmullRomCurve3(pointsB, false, "catmullrom", 0.2);
+    // Curves and tubes (less smoothing to avoid over-curving)
+    const curveA = new THREE.CatmullRomCurve3(pointsA, false, "catmullrom", 0.0);
+    const curveB = new THREE.CatmullRomCurve3(pointsB, false, "catmullrom", 0.0);
 
     const radialSeg = 16;
     const tubeA = new THREE.TubeGeometry(curveA, cfg.points, cfg.tubeRadius, radialSeg, false);
@@ -96,23 +96,25 @@ export default function UtomDns() {
       color: new THREE.Color(cfg.colorA),
       emissive: new THREE.Color(cfg.colorA).multiplyScalar(0.06),
       metalness: 0.12,
-      roughness: 0.2
+      roughness: 0.18,
+      side: THREE.DoubleSide
     });
     const matB = new THREE.MeshStandardMaterial({
       color: new THREE.Color(cfg.colorB),
       emissive: new THREE.Color(cfg.colorB).multiplyScalar(0.06),
       metalness: 0.12,
-      roughness: 0.2
+      roughness: 0.18,
+      side: THREE.DoubleSide
     });
 
     const meshA = new THREE.Mesh(tubeA, matA);
     const meshB = new THREE.Mesh(tubeB, matB);
 
-    // adjuk a rootGroup-hoz, így együtt forognak
+    // Add main strands to rootGroup so they rotate together
     rootGroup.add(meshA);
     rootGroup.add(meshB);
 
-    // 3) Hidak: mindig a két szál ugyanazon t pontjai közé helyezzük, középre pozícionálva
+    // Bridges: use curve.getPointAt(u) so bridges sit exactly on the tube centerlines
     const bridgeGroup = new THREE.Group();
     rootGroup.add(bridgeGroup);
 
@@ -120,56 +122,49 @@ export default function UtomDns() {
     let currentRowYOffset = 0;
 
     for (let i = 0; i <= cfg.points; i += cfg.bridgeStep) {
-      // ha megtelt a sor, új sor kezdődik (csak a hidak Y-át toljuk fel)
       if (bridgesInRow >= cfg.maxBridgesPerRow) {
         bridgesInRow = 0;
         currentRowYOffset += cfg.rowSpacing;
       }
 
-      // pontok a két szálon ugyanazon t-hez
-      const a = pointsA[i].clone();
-      const b = pointsB[i].clone();
+      const u = i / cfg.points;
+      const a = curveA.getPointAt(u);
+      const b = curveB.getPointAt(u);
 
-      // alkalmazzuk a sorok okozta Y eltolást csak a hidak pozíciójára
-      a.y += currentRowYOffset;
-      b.y += currentRowYOffset;
+      // apply Y offset only to the bridge endpoints (do not modify the main curves)
+      const aBridge = a.clone();
+      const bBridge = b.clone();
+      aBridge.y += currentRowYOffset;
+      bBridge.y += currentRowYOffset;
 
-      // vektor és távolság
-      const dir = new THREE.Vector3().subVectors(b, a);
+      const dir = new THREE.Vector3().subVectors(bBridge, aBridge);
       const length = dir.length();
-      if (length < 0.2) continue; // túl rövid, kihagyjuk
+      if (length < 0.2) continue;
 
-      // híd geometriája: cylinder tengelye Y irányban alapból
+      // Cylinder geometry with exact length
       const cylGeom = new THREE.CylinderGeometry(cfg.bridgeRadius, cfg.bridgeRadius, length, 12);
       const cylMat = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(Math.random() * 0xffffff), // random szín
+        color: new THREE.Color(Math.random() * 0xffffff),
         metalness: 0.06,
         roughness: 0.45
       });
       const bridge = new THREE.Mesh(cylGeom, cylMat);
 
-      // orientálás: forgassuk a hengert a a->b irányába
+      // Orient bridge: set quaternion from up vector to direction
       const up = new THREE.Vector3(0, 1, 0);
       const dirNorm = dir.clone().normalize();
-      const axis = new THREE.Vector3().crossVectors(up, dirNorm);
-      const axisLen = axis.length();
-      if (axisLen > 1e-6) {
-        axis.normalize();
-        const angle = Math.acos(Math.max(-1, Math.min(1, up.dot(dirNorm))));
-        bridge.quaternion.setFromAxisAngle(axis, angle);
-      } else {
-        if (up.dot(dirNorm) < 0) bridge.rotateX(Math.PI);
-      }
+      const quat = new THREE.Quaternion().setFromUnitVectors(up, dirNorm);
+      bridge.quaternion.copy(quat);
 
-      // pozíció: középpont
-      const mid = new THREE.Vector3().addVectors(a, b).multiplyScalar(0.5);
+      // Position at midpoint
+      const mid = new THREE.Vector3().addVectors(aBridge, bBridge).multiplyScalar(0.5);
       bridge.position.copy(mid);
 
       bridgeGroup.add(bridge);
       bridgesInRow += 1;
     }
 
-    // 4) jobb környezet: finom ring és enyhe háttér
+    // subtle rim for depth
     const rim = new THREE.Mesh(
       new THREE.RingGeometry(1.6, 2.6, 64),
       new THREE.MeshBasicMaterial({ color: 0xffffff, opacity: 0.03, transparent: true })
@@ -178,7 +173,7 @@ export default function UtomDns() {
     rim.position.y = -cfg.height / 2 - 0.05;
     scene.add(rim);
 
-    // OrbitControls dinamikus import (TS kompatibilitás)
+    // OrbitControls dynamic import (TS-safe)
     let controls: any = null;
     (async () => {
       try {
@@ -194,7 +189,7 @@ export default function UtomDns() {
       }
     })();
 
-    // Resize
+    // Resize handler
     const onResize = () => {
       if (!mountRef.current) return;
       const w = mountRef.current.clientWidth;
@@ -205,17 +200,17 @@ export default function UtomDns() {
     };
     window.addEventListener("resize", onResize);
 
-    // 5) Animáció: forgatjuk a rootGroup-ot → minden együtt mozog
+    // Animation: rotate rootGroup so everything moves together
     const clock = new THREE.Clock();
     let rafId = 0;
     const animate = () => {
       rafId = requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
 
-      // rootGroup forgatása: együtt mozognak a hidak és a szálak
+      // gentle rotation of the whole structure
       rootGroup.rotation.y = Math.sin(t * 0.12) * 0.06;
 
-      // enyhe pulzálás
+      // subtle breathing
       const pulse = 1 + Math.sin(t * 1.6) * 0.008;
       meshA.scale.setScalar(pulse);
       meshB.scale.setScalar(pulse);
@@ -225,7 +220,7 @@ export default function UtomDns() {
     };
     animate();
 
-    // CLEANUP
+    // Cleanup
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", onResize);
@@ -236,7 +231,7 @@ export default function UtomDns() {
       }
       try { renderer.dispose(); } catch {}
 
-      const safeDispose = (m?: THREE.Material | THREE.Material[] | null) => {
+      const safeDisposeMaterial = (m?: THREE.Material | THREE.Material[] | null) => {
         if (!m) return;
         if (Array.isArray(m)) m.forEach(mat => { try { mat.dispose(); } catch {} });
         else try { m.dispose(); } catch {}
@@ -244,14 +239,14 @@ export default function UtomDns() {
 
       try { tubeA.dispose(); } catch {}
       try { tubeB.dispose(); } catch {}
-      safeDispose(matA);
-      safeDispose(matB);
+      safeDisposeMaterial(matA);
+      safeDisposeMaterial(matB);
 
-      bridgeGroup.traverse((o) => {
-        const mesh = o as THREE.Mesh;
+      bridgeGroup.traverse((obj) => {
+        const mesh = obj as THREE.Mesh;
         if (mesh.isMesh) {
           try { mesh.geometry.dispose(); } catch {}
-          safeDispose(mesh.material as THREE.Material | THREE.Material[] | undefined);
+          safeDisposeMaterial(mesh.material as THREE.Material | THREE.Material[] | undefined);
         }
       });
 
@@ -262,7 +257,7 @@ export default function UtomDns() {
 
   return (
     <div className="w-full h-[640px] border rounded-lg shadow bg-white p-2">
-      <h2 className="text-xl font-semibold mb-2">uTOM DNS — javított</h2>
+      <h2 className="text-xl font-semibold mb-2">uTOM DNS — javított verzió</h2>
       <div ref={mountRef} className="w-full h-full" />
     </div>
   );
