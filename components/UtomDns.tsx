@@ -6,26 +6,28 @@ import * as THREE from "three";
 export default function UtomDns() {
   const mountRef = useRef<HTMLDivElement | null>(null);
 
+  // Paraméterek — állíthatók
   const params = {
     height: 10,
     segments: 400,
-    lateralAmplitude: 0.45,
-    lateralFrequency: 2.2,
     tubeRadius: 0.12,
-    bridgeEvery: 16,
-    bridgeRadius: 0.055,
-    colorA: "#0057d9",
-    colorB: "#d9004a",
-    bridgeColor: "#9e9e9e",
+    bridgeRadius: 0.05,
+    maxBridgesPerRow: 4,         // egy "sorban" maximum ennyi híd
+    rowSpacing: 0.25,            // mennyit lépjen fel a "sor" után
+    lateralAmplitude: 0.6,       // mennyire kileng jobbra-balra
+    lateralFrequency: 3.0,       // kilengés frekvenciája
+    minSeparation: 0.9,          // minimális távolság a két szál között (sose érjenek össze)
+    colorA: "#0039ff",           // élesebb kék
+    colorB: "#ff0033",           // élesebb piros
     background: 0xf6f7f9
   };
 
   useEffect(() => {
     if (!mountRef.current) return;
 
-    // --- Scene / Camera / Renderer ---
     const W = mountRef.current.clientWidth;
     const H = mountRef.current.clientHeight;
+
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(params.background);
 
@@ -44,57 +46,77 @@ export default function UtomDns() {
     scene.add(dir);
     scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 0.25));
 
-    // --- Generate vertical, slightly oscillating lines ---
+    // Paraméterek kicsomagolva
     const {
       height: dnaHeight,
       segments,
       lateralAmplitude,
       lateralFrequency,
       tubeRadius,
-      bridgeEvery,
       bridgeRadius,
+      maxBridgesPerRow,
+      rowSpacing,
+      minSeparation,
       colorA,
-      colorB,
-      bridgeColor
+      colorB
     } = params;
 
+    // Két középvonal generálása úgy, hogy sose érjenek össze:
+    // alapötlet: két ellentétes fázisú oszcilláció + kis extra offset, és ha a távolság túl kicsi, növeljük az x-offsetet
     const pointsA: THREE.Vector3[] = [];
     const pointsB: THREE.Vector3[] = [];
 
     for (let i = 0; i <= segments; i++) {
-      const t = i / segments;
-      const y = t * dnaHeight - dnaHeight / 2;
+      const t = i / segments; // 0..1
+      let y = t * dnaHeight - dnaHeight / 2;
+
+      // sorok: minden N pontnál lehet "sor", de itt csak a geometria
       const phase = t * Math.PI * lateralFrequency;
 
-      const xA = Math.sin(phase) * lateralAmplitude;
-      const zA = Math.cos(phase * 0.5) * lateralAmplitude * 0.25;
-      pointsA.push(new THREE.Vector3(xA, y, zA));
+      // alap kilengés
+      let xA = Math.sin(phase) * lateralAmplitude;
+      let zA = Math.cos(phase * 0.6) * lateralAmplitude * 0.25;
 
-      const xB = -Math.sin(phase) * lateralAmplitude;
-      const zB = -Math.cos(phase * 0.5) * lateralAmplitude * 0.25;
+      let xB = -Math.sin(phase) * lateralAmplitude;
+      let zB = -Math.cos(phase * 0.6) * lateralAmplitude * 0.25;
+
+      // biztosítjuk a minimális távolságot: ha túl közel, toljuk szét őket X irányban
+      const dx = xA - xB;
+      const dz = zA - zB;
+      const dist = Math.sqrt(dx * dx + dz * dz);
+      if (dist < minSeparation) {
+        const need = (minSeparation - dist) * 0.6;
+        // tolás iránya: A jobbra, B balra (növeljük abs értéket)
+        xA += need;
+        xB -= need;
+      }
+
+      pointsA.push(new THREE.Vector3(xA, y, zA));
       pointsB.push(new THREE.Vector3(xB, y, zB));
     }
 
+    // CatmullRom görbék
     const curveA = new THREE.CatmullRomCurve3(pointsA, false, "catmullrom", 0.5);
     const curveB = new THREE.CatmullRomCurve3(pointsB, false, "catmullrom", 0.5);
 
+    // Tube geometriák
     const radialSegments = 18;
     const tubeGeomA = new THREE.TubeGeometry(curveA, segments, tubeRadius, radialSegments, false);
     const tubeGeomB = new THREE.TubeGeometry(curveB, segments, tubeRadius, radialSegments, false);
 
+    // Anyagok — élesebb színek, enyhe emissive a "tűélességhez"
     const matA = new THREE.MeshStandardMaterial({
       color: new THREE.Color(colorA),
       emissive: new THREE.Color(colorA).multiplyScalar(0.06),
-      metalness: 0.15,
-      roughness: 0.28,
+      metalness: 0.12,
+      roughness: 0.22,
       side: THREE.DoubleSide
     });
-
     const matB = new THREE.MeshStandardMaterial({
       color: new THREE.Color(colorB),
       emissive: new THREE.Color(colorB).multiplyScalar(0.06),
       metalness: 0.12,
-      roughness: 0.26,
+      roughness: 0.22,
       side: THREE.DoubleSide
     });
 
@@ -102,26 +124,58 @@ export default function UtomDns() {
     const meshB = new THREE.Mesh(tubeGeomB, matB);
     scene.add(meshA, meshB);
 
-    // Bridges group
+    // --- Hidak: csoportosítás maxBridgesPerRow szerint, majd "csavarodás" felfelé ---
     const bridgeGroup = new THREE.Group();
     scene.add(bridgeGroup);
 
-    for (let i = 0; i <= segments; i += bridgeEvery) {
-      const a = pointsA[i];
-      const b = pointsB[i];
+    // számoljuk a hidak indexét pontonként; minden sorban max maxBridgesPerRow híd, utána "lépünk" feljebb egy kis offsettel
+    let bridgesInCurrentRow = 0;
+    let currentRowYOffset = 0; // mennyit léptünk fel eddig a sorok miatt
+    const baseRowStep = rowSpacing; // mennyit lépjen fel egy sor után
+
+    for (let i = 0; i <= segments; i++) {
+      // minden pontnál eldöntjük, legyen-e híd (pl. sűrűség: minden N-edik pont)
+      // itt egyszerű: hidakat helyezünk el egyenletesen, de csoportosítva
+      // válasszunk egy lépést: minden Math.floor(segments / 60)-adik pontnál legyen potenciális híd
+      const step = Math.max(1, Math.floor(segments / 80));
+      if (i % step !== 0) continue;
+
+      // ha a jelenlegi sorban már maxBridgesPerRow híd van, lépjünk feljebb és új sort kezdünk
+      if (bridgesInCurrentRow >= maxBridgesPerRow) {
+        bridgesInCurrentRow = 0;
+        currentRowYOffset += baseRowStep;
+      }
+
+      // pontok a két szálon
+      const a = pointsA[i].clone();
+      const b = pointsB[i].clone();
+
+      // alkalmazzuk a sorok okozta Y eltolást: a hidak "sor" középpontja feljebb tolódik
+      // de csak a hidak pozíciójára, a fő szálak maradnak eredetiek
+      a.y += currentRowYOffset;
+      b.y += currentRowYOffset;
+
+      // újra ellenőrizzük, hogy a két pont ne legyen túl közel (ha igen, toljuk szét)
       const dirVec = new THREE.Vector3().subVectors(b, a);
       const length = dirVec.length();
+      if (length < minSeparation * 0.6) {
+        // ha túl rövid, kihagyjuk a hidat (biztonság)
+        continue;
+      }
 
-      // Create cylinder per bridge (so we can set correct length)
+      // véletlenszerű szín a hídhoz
+      const randColor = new THREE.Color(Math.random() * 0xffffff);
+
+      // Cylinder: tengelye Y irányban, ezért orientálni kell
       const cylGeom = new THREE.CylinderGeometry(bridgeRadius, bridgeRadius, length, 12);
       const cylMat = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(bridgeColor),
-        metalness: 0.08,
+        color: randColor,
+        metalness: 0.06,
         roughness: 0.45
       });
       const bridge = new THREE.Mesh(cylGeom, cylMat);
 
-      // Orient cylinder from a -> b
+      // orientálás: forgassuk a hengert a a->b irányába
       const up = new THREE.Vector3(0, 1, 0);
       const dirNorm = dirVec.clone().normalize();
       const axis = new THREE.Vector3().crossVectors(up, dirNorm);
@@ -131,18 +185,19 @@ export default function UtomDns() {
         const angle = Math.acos(Math.max(-1, Math.min(1, up.dot(dirNorm))));
         bridge.quaternion.setFromAxisAngle(axis, angle);
       } else {
-        // parallel or anti-parallel: rotate 0 or PI
         if (up.dot(dirNorm) < 0) bridge.rotateX(Math.PI);
       }
 
-      // position at midpoint
+      // pozíció: középpont
       const mid = new THREE.Vector3().addVectors(a, b).multiplyScalar(0.5);
       bridge.position.copy(mid);
 
       bridgeGroup.add(bridge);
+
+      bridgesInCurrentRow += 1;
     }
 
-    // Rim for depth
+    // kis vizuális alap (ring)
     const rimGeom = new THREE.RingGeometry(1.6, 2.6, 64);
     const rimMat = new THREE.MeshBasicMaterial({ color: 0xffffff, opacity: 0.03, transparent: true });
     const rim = new THREE.Mesh(rimGeom, rimMat);
@@ -167,7 +222,7 @@ export default function UtomDns() {
       }
     })();
 
-    // Resize handler
+    // Resize
     const handleResize = () => {
       if (!mountRef.current) return;
       const w = mountRef.current.clientWidth;
@@ -178,18 +233,20 @@ export default function UtomDns() {
     };
     window.addEventListener("resize", handleResize);
 
-    // Animation
+    // Animáció: kicsit csavarodik, de fő szálak sose érnek össze
     const clock = new THREE.Clock();
     let rafId = 0;
     const animate = () => {
       rafId = requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
 
-      meshA.rotation.y += 0.0018;
-      meshB.rotation.y += 0.0018;
-      bridgeGroup.rotation.y += 0.0018;
+      // finom csavarodás: a hidak és a szálak együtt forognak, de a fő szálak megtartják a távolságot
+      meshA.rotation.y = Math.sin(t * 0.12) * 0.06;
+      meshB.rotation.y = -Math.sin(t * 0.12) * 0.06;
+      bridgeGroup.rotation.y = Math.sin(t * 0.12) * 0.06;
 
-      const pulse = 1 + Math.sin(t * 1.8) * 0.01;
+      // enyhe pulzálás
+      const pulse = 1 + Math.sin(t * 1.6) * 0.008;
       meshA.scale.setScalar(pulse);
       meshB.scale.setScalar(pulse);
 
@@ -198,47 +255,28 @@ export default function UtomDns() {
     };
     animate();
 
-    // --- CLEANUP: csak egyetlen cleanup függvényt adunk vissza ---
+    // Cleanup — csak egy cleanup függvény visszaadása
     return () => {
-      // stop animation
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", handleResize);
+      if (controls && typeof controls.dispose === "function") controls.dispose();
 
-      // dispose controls
-      if (controls && typeof controls.dispose === "function") {
-        controls.dispose();
-      }
-
-      // remove renderer DOM
       if (mountRef.current && renderer.domElement.parentElement === mountRef.current) {
         mountRef.current.removeChild(renderer.domElement);
       }
+      try { renderer.dispose(); } catch {}
 
-      // dispose renderer
-      try {
-        renderer.dispose();
-      } catch (e) {
-        // ignore
-      }
-
-      // dispose geometries & materials safely
       const safeDisposeMaterial = (m?: THREE.Material | THREE.Material[] | null) => {
         if (!m) return;
-        if (Array.isArray(m)) {
-          m.forEach((mat) => {
-            try { mat.dispose(); } catch (e) { /* ignore */ }
-          });
-        } else {
-          try { m.dispose(); } catch (e) { /* ignore */ }
-        }
+        if (Array.isArray(m)) m.forEach(mat => { try { mat.dispose(); } catch {} });
+        else try { m.dispose(); } catch {}
       };
 
       try { tubeGeomA.dispose(); } catch {}
-      try { tubeGeomB.dispose(); } catch {};
+      try { tubeGeomB.dispose(); } catch {}
       safeDisposeMaterial(matA);
       safeDisposeMaterial(matB);
 
-      // dispose bridges
       bridgeGroup.traverse((obj) => {
         const mesh = obj as THREE.Mesh;
         if (mesh.isMesh) {
@@ -247,15 +285,14 @@ export default function UtomDns() {
         }
       });
 
-      // rim
       try { rim.geometry.dispose(); } catch {}
       try { rim.material.dispose(); } catch {}
     };
-  }, []); // <-- dependency array: csak egyszer futjon
+  }, []); // csak egyszer fusson
 
   return (
     <div className="w-full h-[640px] border rounded-lg shadow bg-white p-2">
-      <h2 className="text-xl font-semibold mb-2">uTOM DNS Spirál (Egyszálú, kilengő)</h2>
+      <h2 className="text-xl font-semibold mb-2">uTOM DNS Spirál (Csoportos hidak, véletlenszín)</h2>
       <div ref={mountRef} className="w-full h-full" />
     </div>
   );
