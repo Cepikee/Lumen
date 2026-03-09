@@ -49,8 +49,7 @@ export default function UtomDnsKategoria({ domain }: { domain: string }) {
     domain
       ? `/api/insights/source-category-distribution?domain=${domain}`
       : null,
-    fetcher,
-    { refreshInterval: 60000 }
+    fetcher
   );
 
   const categories = [
@@ -76,19 +75,15 @@ export default function UtomDnsKategoria({ domain }: { domain: string }) {
   ];
 
   if (!domain) {
-    return (
-      <div className="text-slate-400 text-sm">
-        Nincs kiválasztott domain.
-      </div>
-    );
+    return <div className="text-slate-400 text-sm">Válassz domaint.</div>;
   }
 
   if (isLoading) {
     return <div className="text-slate-400 text-sm">Betöltés...</div>;
   }
 
-  if (error || !data?.success) {
-    return <div className="text-red-500 text-sm">Hiba történt.</div>;
+  if (error || !data?.success || !data.items.length) {
+    return <div className="text-red-500 text-sm">Nincs adat ehhez a domainhez.</div>;
   }
 
   const item = data.items[0];
