@@ -62,15 +62,9 @@ export default function UtomDnsOsszkep({ domain }: Props) {
     monthlyArticles,
     avgWordCount,
     avgReadingTime,
-    topTopic, // ⭐ diverzitás
-  }: {
-    totalArticles: number;
-    dailyArticles: number;
-    weeklyArticles: number;
-    monthlyArticles: number;
-    avgWordCount: number;
-    avgReadingTime: number;
-    topTopic: string;
+    topTopic,
+    diversityIndex,
+    dominanceIndex,
   } = data;
 
   return (
@@ -112,13 +106,23 @@ export default function UtomDnsOsszkep({ domain }: Props) {
           {avgReadingTime > 0 ? `${avgReadingTime} perc` : "N/A"}
         </div>
 
-        {/* ⭐ Diverzitás / Leggyakoribb téma */}
+        {/* ⭐ Diverzitás */}
+        <div style={{ marginTop: "15px" }}>
+          <strong>Diverzitás index:</strong>{" "}
+          {(diversityIndex * 100).toFixed(1)}%
+        </div>
+
+        {/* ⭐ Dominancia */}
+        <div>
+          <strong>Dominancia index:</strong>{" "}
+          {(dominanceIndex * 100).toFixed(1)}%
+        </div>
+
+        {/* ⭐ Leggyakoribb téma */}
         <div style={{ marginTop: "15px" }}>
           <strong>Leggyakoribb téma:</strong>{" "}
           {topTopic || "Nincs domináns téma"}
         </div>
-
-        {/* ❌ Kategóriaeloszlás teljesen törölve */}
       </div>
     </div>
   );
