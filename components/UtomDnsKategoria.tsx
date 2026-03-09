@@ -118,11 +118,11 @@ export default function UtomDnsKategoria({ domain }: { domain: string }) {
 
       {/* Vízszintes legenda — jól látható színmintákkal */}
       <div className="w-full flex justify-center">
-        <div className="flex items-center gap-6 flex-wrap">
+        <div className="flex items-center gap-6 flex-nowrap overflow-x-auto px-2">
           {categories.map((cat, i) => (
-            <div key={cat} className="flex items-center gap-2">
+            <div key={cat} className="flex items-center gap-2 whitespace-nowrap">
               <span
-                className="inline-block w-5 h-5 rounded-sm border-2 border-white/70 shadow-sm"
+                className="inline-block w-6 h-6 rounded-sm border-2 border-white shadow"
                 style={{ backgroundColor: categoryColors[i] }}
                 aria-hidden
               />
