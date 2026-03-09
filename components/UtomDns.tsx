@@ -15,10 +15,11 @@ export default function UtomDns() {
   const [domain, setDomain] = useState("");
 
   // API hívás csak akkor, ha van domain
-  const { data, error, isLoading } = useSWR(
-    domain ? `/api/insights/domain-info?domain=${domain}` : null,
-    fetcher
-  );
+ const { data, error, isLoading } = useSWR(
+  domain ? `/api/insights/source-category-distribution?domain=${domain}` : null,
+  fetcher
+);
+
 
   return (
     <div className="w-screen h-screen bg-[#071226] flex flex-col overflow-hidden">
