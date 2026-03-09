@@ -6,41 +6,53 @@ import UtomDnsKategoria from "@/components/UtomDnsKategoria";
 export default function UtomDns() {
   const [domain, setDomain] = useState("");
 
+  const domains = ["444.hu", "origo.hu", "telex.hu", "index.hu"];
+
   return (
     <div>
-      <div>
-        {/* Bal oldalon a chart */}
-        <div>
-          <UtomDnsKategoria domain={domain} />
-        </div>
+      {/* Középre igazított részletes profil */}
+<div style={{ textAlign: "center", marginBottom: "2px" }}>
 
-        {/* Jobb oldalon a részletes profil + domain választó */}
-        <aside>
-          <div>
-            <label>Válassz domaint:</label>
-            <select
-              value={domain}
-              onChange={(e) => setDomain(e.target.value)}
-            >
-              <option value="">-- válassz --</option>
-              <option value="444.hu">444.hu</option>
-              <option value="origo.hu">origo.hu</option>
-              <option value="telex.hu">telex.hu</option>
-              <option value="index.hu">index.hu</option>
-            </select>
-          </div>
+ {/* Domain választó gombok – iPhone glass style (finomabb fény) */}
+<div style={{ marginTop: "10px" }}>
+  {domains.map((d) => (
+    <button
+      key={d}
+      onClick={() => setDomain(d)}
+      style={{
+        padding: "10px 20px",
+        margin: "6px",
+        cursor: "pointer",
+        borderRadius: "14px",
+        border: "1px solid rgba(255,255,255,0.18)",
+        background: domain === d
+          ? "rgba(255,255,255,0.22)"
+          : "rgba(255,255,255,0.12)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
+        color: "#fff",
+        fontSize: "14px",
+        transition: "0.25s",
 
-          <div>
-            <h3>Részletes profil</h3>
-            <div>Itt jelennek meg a domainhez tartozó részletes információk.</div>
+        // 🔥 finomabb glow, kevésbé világít
+        boxShadow:
+          domain === d
+            ? "0 0 6px rgba(255,255,255,0.25)"
+            : "0 0 3px rgba(0,0,0,0.15)",
+      }}
+    >
+      {d}
+    </button>
+  ))}
+</div>
 
-            <div>
-              <div>Domain: {domain || "—"}</div>
-              <div>Típus: —</div>
-              <div>Összes cikk: —</div>
-            </div>
-          </div>
-        </aside>
+
+</div>
+
+
+      {/* Chart megjelenítése */}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <UtomDnsKategoria domain={domain} />
       </div>
     </div>
   );

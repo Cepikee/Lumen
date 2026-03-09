@@ -12,7 +12,6 @@ import {
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-// Chart.js plugin típusosan
 const sliceLabelPlugin = {
   id: "sliceLabelPlugin",
   afterDraw(chart: Chart) {
@@ -38,7 +37,6 @@ const sliceLabelPlugin = {
   },
 };
 
-// fetcher típusosan
 const fetcher = (url: string): Promise<any> =>
   fetch(url, {
     headers: {
@@ -82,7 +80,7 @@ export default function UtomDnsKategoria({ domain }: UtomDnsKategoriaProps) {
     "#6366f1",
   ];
 
-  if (!domain) return <div>Válassz domaint.</div>;
+  if (!domain) return <div>Válassz egy domaint fent.</div>;
   if (loading) return <div>Betöltés…</div>;
   if (error || !data?.success || !data.items.length)
     return <div>Nincs adat ehhez a domainhez.</div>;
@@ -127,7 +125,7 @@ export default function UtomDnsKategoria({ domain }: UtomDnsKategoriaProps) {
         />
       </div>
 
-      <div>
+      <div style={{ marginTop: "20px" }}>
         {categories.map((cat, i) => (
           <div
             key={cat}
