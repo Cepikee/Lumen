@@ -1,101 +1,185 @@
-// components/UtomDns.tsx
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import useSWR from "swr";
+import UtomDnsKategoria from "@/components/UtomDnsKategoria";
+
+const fetcher = (url: string) =>
+  fetch(url, {
+    headers: {
+      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+    },
+  }).then((r) => r.json());
 
 export default function UtomDns() {
+  const [domain, setDomain] = useState("");
+
+  // API hívás csak akkor, ha van domain
+  const { data, error, isLoading } = useSWR(
+    domain ? `/api/insights/domain-info?domain=${domain}` : null,
+    fetcher
+  );
+
   return (
     <div className="w-screen h-screen bg-[#071226] flex flex-col overflow-hidden">
+      <div className="flex-1 p-4 box-border">
+        <div className="grid grid-cols-12 gap-4 h-full">
 
-      {/* TOP CONTENT – MINDEN DOBOZ FELE MAGASSÁGRA VÁGVA */}
-      <div className="flex-1 overflow-hidden p-3 box-border pb-1">
-        <div className="w-full h-full grid grid-cols-12 gap-3 overflow-hidden">
+          {/* BAL OLDAL – DOMAIN VÁLASZTÓ + ADATOK */}
+          <aside className="col-span-3 bg-[#0b1220] border border-white/10 rounded-md p-4 text-[12px] text-slate-200 flex flex-col gap-4">
 
-          {/* LEFT */}
-          <aside className="col-span-3 bg-[#0b1220] border border-white/5 rounded-md p-2 shadow-sm text-[10px] flex flex-col gap-2">
+            {/* DOMAIN VÁLASZTÓ */}
+            <div className="flex flex-col gap-2">
+              <label className="text-slate-300 text-sm">Válassz domaint:</label>
 
-            <h3 className="text-[11px] font-semibold">Bal</h3>
+              <select
+                value={domain}
+                onChange={(e) => setDomain(e.target.value)}
+                className="bg-[#071826] border border-white/10 rounded p-2 text-sm"
+              >
+                <option value="">-- válassz --</option>
+                <option value="444.hu">444.hu</option>
+                <option value="origo.hu">origo.hu</option>
+                <option value="telex.hu">telex.hu</option>
+                <option value="index.hu">index.hu</option>
+              </select>
+            </div>
 
-            <div className="h-5 bg-[#071826] rounded-md flex items-center px-2 text-slate-300">Placeholder 1</div>
-            <div className="h-5 bg-[#071826] rounded-md flex items-center px-2 text-slate-300">Placeholder 2</div>
-            <div className="h-5 bg-[#071826] rounded-md flex items-center px-2 text-slate-300">Placeholder 3</div>
+            {/* HA NINCS DOMAIN → üres */}
+            {!domain && (
+              <div className="text-slate-400 text-sm mt-4">
+                Válassz egy domaint a bal felső menüből.
+              </div>
+            )}
 
+            {/* HA VAN DOMAIN → betöltés */}
+            {domain && isLoading && (
+              <div className="text-slate-400 text-sm mt-4">Betöltés...</div>
+            )}
+
+            {/* HA VAN DOMAIN ÉS ADAT */}
+            {domain && data?.success && (
+              <>
+                {/* DOMAIN INFO */}
+                <div>
+                  <h2 className="text-[14px] font-semibold text-sky-300 mb-1">
+                    Domain alapinformációk
+                  </h2>
+
+                  <div className="flex flex-col gap-1">
+                    <div>
+                      <span className="text-slate-400">Domain neve: </span>
+                      <span className="font-semibold text-white">{data.domain}</span>
+                    </div>
+
+                    <div>
+                      <span className="text-slate-400">Típus: </span>
+                      <span className="font-semibold text-white">{data.type}</span>
+                    </div>
+
+                    <div className="mt-2">
+                      <span className="text-slate-400">Összes cikk száma: </span>
+                      <span className="font-semibold text-white">
+                        {data.totalArticles.toLocaleString("hu-HU")} db
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* KATEGÓRIAELOSZLÁS */}
+                <div>
+                  <h3 className="text-[13px] font-semibold text-slate-100 mb-2">
+                    Kategóriaeloszlás
+                  </h3>
+                  <UtomDnsKategoria domain={domain} />
+                </div>
+              </>
+            )}
           </aside>
 
-          {/* CENTER */}
-          <main className="col-span-6 bg-[#0b1220] border border-white/5 rounded-md p-2 shadow-sm text-[10px] flex flex-col gap-2">
+          {/* KÖZÉP – TARTALMI ÖSSZKÉP */}
+          <main className="col-span-6 bg-[#0b1220] border border-white/10 rounded-md p-4 text-[12px] text-slate-200 overflow-y-auto">
 
-            <h2 className="text-[11px] font-semibold text-sky-300">Közép</h2>
-
-            <div className="bg-[#071826] rounded-md p-2 border border-white/6">
-              <div className="text-[10px] text-white mb-1">Fő kártya</div>
-              <div className="h-12 bg-[#06121a] rounded-md flex items-center justify-center text-slate-400">
-                Tartalom helye
+            {!domain && (
+              <div className="text-slate-400 text-sm text-center mt-10">
+                Válassz domaint a bal oldalon.
               </div>
-            </div>
+            )}
 
-            <div className="grid grid-cols-2 gap-2">
-              <div className="bg-[#071826] rounded-md p-2 border border-white/6 h-10 flex items-center justify-center text-slate-400">
-                Kártya A
-              </div>
-              <div className="bg-[#071826] rounded-md p-2 border border-white/6 h-10 flex items-center justify-center text-slate-400">
-                Kártya B
-              </div>
-            </div>
+            {domain && data?.success && (
+              <>
+                <h2 className="text-[16px] font-semibold text-center text-sky-300 mb-3">
+                  Tartalmi összkép
+                </h2>
 
-            <div className="bg-[#071826] rounded-md p-2 border border-white/6">
-              <div className="text-[10px] text-slate-300">Lista / részletek</div>
+                <div className="space-y-3">
 
-              <ul className="mt-2 space-y-1">
-                <li className="h-5 bg-[#06121a] rounded-md flex items-center px-2 text-slate-400">Elem 1</li>
-                <li className="h-5 bg-[#06121a] rounded-md flex items-center px-2 text-slate-400">Elem 2</li>
-                <li className="h-5 bg-[#06121a] rounded-md flex items-center px-2 text-slate-400">Elem 3</li>
-              </ul>
-            </div>
+                  <section>
+                    <h3 className="text-[13px] font-semibold text-slate-100 mb-1">
+                      Tartalom mennyisége
+                    </h3>
+                    <ul className="space-y-1">
+                      <li>Összes cikk: <span className="font-semibold text-white">{data.totalArticles} db</span></li>
+                      <li>Napi cikkek száma: <span className="font-semibold text-white">{data.daily} db</span></li>
+                      <li>Heti cikkek száma: <span className="font-semibold text-white">{data.weekly} db</span></li>
+                      <li>Havi cikkek száma: <span className="font-semibold text-white">{data.monthly} db</span></li>
+                    </ul>
+                  </section>
 
+                  <hr className="border-white/10" />
+
+                  <section>
+                    <h3 className="text-[13px] font-semibold text-slate-100 mb-1">
+                      Tartalom minősége
+                    </h3>
+                    <ul className="space-y-1">
+                      <li>Átlagos cikkhossz: <span className="font-semibold text-white">{data.avgLength}</span></li>
+                      <li>Átlagos olvasási idő: <span className="font-semibold text-white">{data.avgReadTime}</span></li>
+                      <li>Átlagos plágiumérték: <span className="font-semibold text-white">{data.avgPlagiarism}%</span></li>
+                      <li>Leggyakoribb témák: <span className="font-semibold text-white">{data.topTopics.join(", ")}</span></li>
+                    </ul>
+                  </section>
+
+                </div>
+              </>
+            )}
           </main>
 
-          {/* RIGHT */}
-          <aside className="col-span-3 bg-[#0b1220] border border-white/5 rounded-md p-2 shadow-sm text-[10px] flex flex-col gap-2">
+          {/* JOBB OLDAL – TELJESÍTMÉNY */}
+          <aside className="col-span-3 bg-[#0b1220] border border-white/10 rounded-md p-3 text-[12px] text-slate-200 flex flex-col gap-3">
 
-            <h3 className="text-[11px] font-semibold text-sky-300">Jobb</h3>
-
-            <div className="bg-[#071826] rounded-md p-2 border border-white/6">
-              <div className="text-[10px] text-slate-300 mb-1">Gyors stat</div>
-              <div className="text-white font-bold text-[12px]">58%</div>
-            </div>
-
-            <div className="bg-[#071826] rounded-md p-2 border border-white/6">
-              <div className="text-[10px] text-slate-300 mb-1">Mutató</div>
-              <div className="h-8 bg-[#06121a] rounded-md flex items-center justify-center text-slate-400">
-                Grafikon helye
+            {!domain && (
+              <div className="text-slate-400 text-sm mt-10 text-center">
+                Válassz domaint a bal oldalon.
               </div>
-            </div>
+            )}
 
-            <div className="bg-[#071826] rounded-md p-2 border border-white/6">
-              <div className="text-[10px] text-slate-300 mb-1">Akciók</div>
-              <div className="flex flex-col gap-1">
-                <button className="w-full py-1 bg-sky-600/10 text-sky-300 rounded-md border border-sky-600 text-[10px]">
-                  Gomb 1
-                </button>
-                <button className="w-full py-1 bg-white/6 text-white rounded-md border border-white/8 text-[10px]">
-                  Gomb 2
-                </button>
-              </div>
-            </div>
+            {domain && data?.success && (
+              <>
+                <h2 className="text-[14px] font-semibold text-sky-300">
+                  Teljesítmény
+                </h2>
 
+                <section>
+                  <h3 className="text-[13px] font-semibold text-slate-100 mb-1">
+                    Oldal aktív időszaka
+                  </h3>
+                  <ul className="space-y-1">
+                    <li>Átlagos posztolási időszak: <span className="font-semibold text-white">{data.activeRange}</span></li>
+                    <li>Legaktívabb óra: <span className="font-semibold text-white">{data.peakHour}</span></li>
+                    <li>Legaktívabb nap: <span className="font-semibold text-white">{data.peakDay}</span></li>
+                  </ul>
+                </section>
+
+                <div className="mt-2 h-24 rounded-md bg-[#071826] border border-white/10 flex items-center justify-center text-[11px] text-slate-400">
+                  Aktivitás grafikon helye
+                </div>
+              </>
+            )}
           </aside>
 
         </div>
       </div>
-
-      {/* FOOTER – MÉG KISEBB, MÉG FELJEBB */}
-      <footer className="h-[22px] bg-[#071826] border-t border-white/10 flex items-center justify-between px-3 flex-none text-[9px] w-[45%] mx-auto rounded-md mb-1">
-        <div className="text-slate-300">Footer bal</div>
-        <div className="text-slate-400">Footer közép</div>
-        <div className="text-slate-400">Footer jobb</div>
-      </footer>
-
     </div>
   );
 }
