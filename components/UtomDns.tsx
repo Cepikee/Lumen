@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { useUserStore } from "@/store/useUserStore";
 import UtomDnsKategoria from "@/components/UtomDnsKategoria";
+import Skeleton from "@/components/Skeleton";
 
 const fetcher = (url: string) =>
   fetch(url, {
@@ -22,12 +23,14 @@ export default function UtomDns() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-  const { data } = useSWR(
+  const { data, isLoading } = useSWR(
     "/api/insights/source-category-distribution",
     fetcher
   );
 
   const domains: string[] = data?.items?.map((i: any) => i.source) ?? [];
+
+  const showSkeleton = !domain; // skeleton addig, amíg nincs domain
 
   return (
     <div style={{ padding: "20px" }}>
@@ -64,10 +67,11 @@ export default function UtomDns() {
           ))}
         </div>
 
-        {/* Üzenet a gombok alatt */}
+        {/* Üzenet a gombok alatt – csak ha nincs domain */}
         {!domain && (
           <div style={{ marginTop: "10px", fontSize: "16px" }}>
-                      </div>
+            Válassz egy domaint fent.
+          </div>
         )}
       </div>
 
@@ -85,15 +89,24 @@ export default function UtomDns() {
             width: "360px",
             padding: "20px",
             borderRadius: "16px",
-            background: "transparent",   // 🔥 láthatatlan
-            border: "none",              // 🔥 nincs keret
+            background: "transparent",
+            border: "none",
             minHeight: "400px",
           }}
         >
-          <UtomDnsKategoria
-            key={domain + "_" + (isDark ? "dark" : "light")}
-            domain={domain}
-          />
+          {showSkeleton ? (
+            <>
+              <Skeleton height="24px" width="60%" />
+              <div style={{ marginTop: "20px" }}>
+                <Skeleton height="210px" width="210px" radius={210} />
+              </div>
+            </>
+          ) : (
+            <UtomDnsKategoria
+              key={domain + "_" + (isDark ? "dark" : "light")}
+              domain={domain}
+            />
+          )}
         </div>
 
         {/* KÖZÉPSŐ DOBOZ */}
@@ -102,12 +115,18 @@ export default function UtomDns() {
             flex: 1,
             padding: "20px",
             borderRadius: "16px",
-            background: "transparent",   // 🔥 láthatatlan
-            border: "none",              // 🔥 nincs keret
+            background: "transparent",
+            border: "none",
             minHeight: "400px",
           }}
         >
-          
+          {showSkeleton ? (
+            <>
+              <Skeleton height="20px" width="80%" />
+              <Skeleton height="20px" width="60%" />
+              <Skeleton height="20px" width="90%" />
+            </>
+          ) : null}
         </div>
 
         {/* JOBB OLDALI DOBOZ */}
@@ -116,18 +135,23 @@ export default function UtomDns() {
             width: "300px",
             padding: "20px",
             borderRadius: "16px",
-            background: "transparent",   // 🔥 láthatatlan
-            border: "none",              // 🔥 nincs keret
+            background: "transparent",
+            border: "none",
             minHeight: "400px",
           }}
         >
-          
+          {showSkeleton ? (
+            <>
+              <Skeleton height="20px" width="70%" />
+              <Skeleton height="20px" width="50%" />
+              <Skeleton height="20px" width="90%" />
+            </>
+          ) : null}
         </div>
       </div>
 
       {/* FOOTER */}
       <div style={{ marginTop: "40px", textAlign: "center", opacity: 0.6 }}>
-        
       </div>
     </div>
   );

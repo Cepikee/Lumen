@@ -2259,3 +2259,7 @@ html.theme-dark .nav-link {
 .wsource-card--ghost button img { display: block; }
 
 
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
