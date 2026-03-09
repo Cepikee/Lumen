@@ -14,19 +14,6 @@ const fetcher = (url: string): Promise<any> =>
     } as HeadersInit,
   }).then((r) => r.json());
 
-// Kategória típus
-type CategoryMap = Record<
-  | "Politika"
-  | "Gazdaság"
-  | "Közélet"
-  | "Kultúra"
-  | "Sport"
-  | "Tech"
-  | "Egészségügy"
-  | "Oktatás",
-  number
->;
-
 export default function UtomDnsOsszkep({ domain }: Props) {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -67,7 +54,7 @@ export default function UtomDnsOsszkep({ domain }: Props) {
     );
   }
 
-  // TÍPUSOS DESTRUCTURING — EZ OLDJA MEG A HIBÁT
+  // TÍPUSOS DESTRUCTURING
   const {
     totalArticles,
     dailyArticles,
@@ -75,8 +62,7 @@ export default function UtomDnsOsszkep({ domain }: Props) {
     monthlyArticles,
     avgWordCount,
     avgReadingTime,
-    categories,
-    topTopic,
+    topTopic, // ⭐ diverzitás
   }: {
     totalArticles: number;
     dailyArticles: number;
@@ -84,7 +70,6 @@ export default function UtomDnsOsszkep({ domain }: Props) {
     monthlyArticles: number;
     avgWordCount: number;
     avgReadingTime: number;
-    categories: CategoryMap;
     topTopic: string;
   } = data;
 
@@ -127,20 +112,13 @@ export default function UtomDnsOsszkep({ domain }: Props) {
           {avgReadingTime > 0 ? `${avgReadingTime} perc` : "N/A"}
         </div>
 
+        {/* ⭐ Diverzitás / Leggyakoribb téma */}
         <div style={{ marginTop: "15px" }}>
-          <strong>Leggyakoribb téma:</strong> {topTopic}
+          <strong>Leggyakoribb téma:</strong>{" "}
+          {topTopic || "Nincs domináns téma"}
         </div>
 
-        <hr style={{ margin: "20px 0", opacity: 0.3 }} />
-
-        <h3>Kategóriaeloszlás</h3>
-        <ul style={{ paddingLeft: "20px" }}>
-          {Object.entries(categories).map(([cat, val]) => (
-            <li key={cat}>
-              <strong>{cat}:</strong> {val}
-            </li>
-          ))}
-        </ul>
+        {/* ❌ Kategóriaeloszlás teljesen törölve */}
       </div>
     </div>
   );
