@@ -1,39 +1,11 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import useSWR from "swr";
-import { Doughnut } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-} from "chart.js";
+import { useEffect } from "react";
+import { useUserStore } from "@/store/useUserStore";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
-
-const sliceLabelPlugin = {
-  id: "sliceLabelPlugin",
-  afterDraw(chart: any) {
-    const { ctx } = chart;
-    const dataset = chart.data.datasets[0];
-    const meta = chart.getDatasetMeta(0);
-
-    ctx.save();
-    ctx.font = "bold 11px sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-
-    meta.data.forEach((arc: any, index: number) => {
-      const value = dataset.data[index];
-      if (!value) return;
-      const pos = arc.tooltipPosition();
-      ctx.fillStyle = "#000";
-      ctx.fillText(value, pos.x, pos.y);
-    });
-
-    ctx.restore();
-  },
-};
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const fetcher = (url: string) =>
   fetch(url, {
@@ -43,9 +15,26 @@ const fetcher = (url: string) =>
   }).then((r) => r.json());
 
 export default function UtomDnsKategoria({ domain }: { domain: string }) {
+  const theme = useUserStore((s) => s.theme);
+
+  useEffect(() => {
+    // debug mount
+    // console.debug("UtomDnsKategoria mounted");
+    return () => {
+      // console.debug("UtomDnsKategoria unmounted");
+    };
+  }, []);
+
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
   const { data, error } = useSWR(
     domain ? `/api/insights/source-category-distribution?domain=${domain}` : null,
-    fetcher
+    fetcher,
+    { refreshInterval: 60000 }
   );
 
   const loading = !data && !error;
@@ -72,63 +61,106 @@ export default function UtomDnsKategoria({ domain }: { domain: string }) {
     "#6366f1", // Oktatás
   ];
 
-  if (!domain) return <div className="text-slate-300">Válassz domaint a profil panelen.</div>;
-  if (loading) return <div className="text-slate-300">Betöltés…</div>;
+  if (!domain) return null;
+  if (loading) return <div className="p-6 text-center text-slate-300">Betöltés…</div>;
   if (error || !data?.success || !data.items.length)
-    return <div className="text-red-500">Nincs adat ehhez a domainhez.</div>;
+    return <div className="p-6 text-center text-red-500">Nincs adat ehhez a domainhez.</div>;
 
   const item = data.items[0];
-  const values = categories.map((c) => item[c] ?? 0);
+  const values = categories.map((c) => Number(item[c] ?? 0));
 
-  const chartData = {
-    labels: categories,
-    datasets: [
+  const series = values;
+  const labels = categories;
+
+  const options: ApexCharts.ApexOptions = {
+    chart: {
+      type: "donut",
+      toolbar: { show: false },
+      animations: { enabled: true },
+      foreColor: isDark ? "#e6eef8" : "#0b1220",
+      background: "transparent",
+    },
+    labels,
+    colors: categoryColors,
+    legend: { show: false },
+    dataLabels: {
+      enabled: true,
+      formatter: (val: number, opts: any) => {
+        const idx = opts.seriesIndex ?? 0;
+        const raw = opts.w?.config?.series?.[opts.seriesIndex] ?? val;
+        return Number(raw) > 0 ? String(raw) : "";
+      },
+      style: {
+        colors: ["#000"],
+        fontSize: "12px",
+        fontWeight: "700",
+      },
+      dropShadow: { enabled: false },
+    },
+    plotOptions: {
+      pie: {
+        donut: {
+          size: "68%",
+          labels: {
+            show: true,
+            name: {
+              show: false,
+            },
+            value: {
+              show: false,
+            },
+            total: {
+              show: false,
+            },
+          },
+        },
+      },
+    },
+    tooltip: {
+      theme: isDark ? "dark" : "light",
+      y: {
+        formatter: (val: number) => `${val}`,
+      },
+    },
+    stroke: { show: false },
+    responsive: [
       {
-        data: values,
-        backgroundColor: categoryColors,
-        borderWidth: 0,
+        breakpoint: 640,
+        options: {
+          chart: { width: 200 },
+        },
       },
     ],
   };
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      {/* Domain név a chart felett */}
-      <h2 className="text-2xl font-semibold text-white">{domain}</h2>
-
-      {/* Chart */}
-      <div className="w-[260px] h-[260px]">
-        <Doughnut
-          data={chartData}
-          options={{
-            cutout: "70%",
-            plugins: {
-              legend: { display: false },
-              tooltip: {
-                callbacks: {
-                  label: (ctx: any) => (ctx.raw > 0 ? `${ctx.label}: ${ctx.raw}` : ""),
-                },
-              },
-            },
-            maintainAspectRatio: false,
-          }}
-          plugins={[sliceLabelPlugin]}
-        />
+    <div className="w-full">
+      {/* Fejléc: domain név */}
+      <div className="flex items-center justify-center mb-4">
+        <h2 className="text-2xl font-semibold text-white">{domain}</h2>
       </div>
 
-      {/* Vízszintes legenda — jól látható színmintákkal */}
-      <div className="w-full flex justify-center">
-        <div className="flex items-center gap-6 flex-nowrap overflow-x-auto px-2">
-          {categories.map((cat, i) => (
-            <div key={cat} className="flex items-center gap-2 whitespace-nowrap">
-              <span
-                className="inline-block w-6 h-6 rounded-sm border-2 border-white shadow"
-                style={{ backgroundColor: categoryColors[i] }}
-                aria-hidden
-              />
-              <span className="text-sm text-slate-200">{cat}</span>
-            </div>
-          ))}
+      {/* Chart + legenda sorban (mobilon egymás alatt) */}
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+        {/* Chart doboz */}
+        <div className="w-[300px] h-[300px]">
+          <Chart options={options} series={series} type="donut" height={300} />
+        </div>
+
+        {/* Vízszintes legenda — egymás mellett, jól látható mintákkal */}
+        <div className="flex-1 flex items-center justify-center">
+          <div className="flex items-center gap-6 flex-wrap justify-center">
+            {categories.map((cat, i) => (
+              <div key={cat} className="flex items-center gap-2 whitespace-nowrap">
+                <span
+                  className="inline-block w-6 h-6 rounded-sm border-2 border-white shadow"
+                  style={{ backgroundColor: categoryColors[i] }}
+                  aria-hidden
+                />
+                <span className="text-sm text-slate-200">{cat}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
