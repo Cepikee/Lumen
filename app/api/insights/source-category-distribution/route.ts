@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+
 function fixCat(s: any): string | null {
   if (!s) return null;
 
@@ -18,9 +19,12 @@ function fixCat(s: any): string | null {
 
 export async function GET(req: Request) {
   try {
-    // ⭐ KÖZPONTI SECURITY CHECK
     const sec = securityCheck(req);
     if (sec) return sec;
+
+    // ⭐ DOMAIN PARAMÉTER BEOLVASÁSA
+    const { searchParams } = new URL(req.url);
+    const domain = searchParams.get("domain")?.trim().toLowerCase();
 
     // --- 1) Forrás + kategória lekérés ---
     const [rows]: any = await db.query(`
@@ -38,59 +42,55 @@ export async function GET(req: Request) {
     `);
 
     if (!rows || !rows.length) {
-      return NextResponse.json({
-        success: true,
-        items: [],
-      });
+      return NextResponse.json({ success: true, items: [] });
     }
 
     // --- 2) Adatok összerakása forrásonként ---
     const map: Record<string, any> = {};
 
     for (const r of rows) {
-  // --- NORMALIZÁLT SOURCE ---
-  let src = String(r.source).trim().toLowerCase();
+      let src = String(r.source).trim().toLowerCase();
 
-  // ⭐ PORTFOLIO NORMALIZÁLÁS
-  if (src === "portfolio") {
-    src = "portfolio.hu";
-  }
+      if (src === "portfolio") {
+        src = "portfolio.hu";
+      }
 
-  // --- KATEGÓRIA ÉS COUNT ---
-  const cat = fixCat(r.category);
-  const count = Number(r.count) || 0;
+      const cat = fixCat(r.category);
+      const count = Number(r.count) || 0;
 
-  if (!src || !cat) continue;
+      if (!src || !cat) continue;
 
-  // --- MAP INIT ---
-  if (!map[src]) {
-    map[src] = {
-      source: src,
-      Politika: 0,
-      Gazdaság: 0,
-      Közélet: 0,
-      Kultúra: 0,
-      Sport: 0,
-      Tech: 0,
-      Egészségügy: 0,
-      Oktatás: 0,
-    };
-  }
+      if (!map[src]) {
+        map[src] = {
+          source: src,
+          Politika: 0,
+          Gazdaság: 0,
+          Közélet: 0,
+          Kultúra: 0,
+          Sport: 0,
+          Tech: 0,
+          Egészségügy: 0,
+          Oktatás: 0,
+        };
+      }
 
-  // --- KATEGÓRIA HOZZÁADÁSA ---
-  if (map[src][cat] !== undefined) {
-    map[src][cat] += count;
-  }
-}
+      if (map[src][cat] !== undefined) {
+        map[src][cat] += count;
+      }
+    }
 
-
-    // --- 3) Válasz tömbbé alakítva ---
     const items = Object.values(map);
 
-    return NextResponse.json({
-      success: true,
-      items,
-    });
+    // ⭐ DOMAIN SZŰRÉS – CSAK HA KÉRVE VAN
+    if (domain) {
+      return NextResponse.json({
+        success: true,
+        items: items.filter((i: any) => i.source === domain),
+      });
+    }
+
+    // ⭐ HA NINCS DOMAIN → VISSZAADJUK AZ ÖSSZESET (mint eddig)
+    return NextResponse.json({ success: true, items });
 
   } catch (err) {
     console.error("Category distribution API error:", err);
