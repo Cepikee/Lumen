@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { useUserStore } from "@/store/useUserStore";
 import UtomDnsKategoria from "@/components/UtomDnsKategoria";
+import UtomDnsOsszkep from "@/components/UtomDnsOsszkep";
 
 const fetcher = (url: string) =>
   fetch(url, {
@@ -109,7 +110,8 @@ export default function UtomDns() {
             border: "none",
             minHeight: "400px",
           }}
-        ></div>
+
+        >  {domain && <UtomDnsOsszkep domain={domain} />}</div>
 
         {/* JOBB OLDALI DOBOZ */}
         <div
