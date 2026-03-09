@@ -67,8 +67,7 @@ export default function UtomDns() {
         {/* Üzenet a gombok alatt */}
         {!domain && (
           <div style={{ marginTop: "10px", fontSize: "16px" }}>
-            Válassz egy domaint fent.
-          </div>
+                      </div>
         )}
       </div>
 
@@ -108,7 +107,7 @@ export default function UtomDns() {
             minHeight: "400px",
           }}
         >
-          TESZT 1
+          
         </div>
 
         {/* JOBB OLDALI DOBOZ */}
@@ -122,13 +121,13 @@ export default function UtomDns() {
             minHeight: "400px",
           }}
         >
-          TESZT 2
+          
         </div>
       </div>
 
       {/* FOOTER */}
       <div style={{ marginTop: "40px", textAlign: "center", opacity: 0.6 }}>
-        FOOTER
+        
       </div>
     </div>
   );
