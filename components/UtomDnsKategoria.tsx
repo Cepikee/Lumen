@@ -11,7 +11,6 @@ import {
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-// LABEL PLUGIN
 const sliceLabelPlugin = {
   id: "sliceLabelPlugin",
   afterDraw(chart: any) {
@@ -20,14 +19,13 @@ const sliceLabelPlugin = {
     const meta = chart.getDatasetMeta(0);
 
     ctx.save();
-    ctx.font = "bold 10px sans-serif";
+    ctx.font = "bold 11px sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
     meta.data.forEach((arc: any, index: number) => {
       const value = dataset.data[index];
       if (!value) return;
-
       const pos = arc.tooltipPosition();
       ctx.fillStyle = "#000";
       ctx.fillText(value, pos.x, pos.y);
@@ -45,12 +43,12 @@ const fetcher = (url: string) =>
   }).then((r) => r.json());
 
 export default function UtomDnsKategoria({ domain }: { domain: string }) {
-  const { data, error, isLoading } = useSWR(
-    domain
-      ? `/api/insights/source-category-distribution?domain=${domain}`
-      : null,
+  const { data, error } = useSWR(
+    domain ? `/api/insights/source-category-distribution?domain=${domain}` : null,
     fetcher
   );
+
+  const loading = !data && !error;
 
   const categories = [
     "Politika",
@@ -64,18 +62,18 @@ export default function UtomDnsKategoria({ domain }: { domain: string }) {
   ];
 
   const categoryColors = [
-    "#ef4444",
-    "#f59e0b",
-    "#10b981",
-    "#3b82f6",
-    "#8b5cf6",
-    "#ec4899",
-    "#14b8a6",
-    "#6366f1",
+    "#ef4444", // Politika
+    "#f59e0b", // Gazdaság
+    "#10b981", // Közélet
+    "#3b82f6", // Kultúra
+    "#8b5cf6", // Sport
+    "#ec4899", // Tech
+    "#14b8a6", // Egészségügy
+    "#6366f1", // Oktatás
   ];
 
-  if (!domain) return null;
-  if (isLoading) return <div className="text-slate-400">Betöltés...</div>;
+  if (!domain) return <div className="text-slate-300">Válassz domaint a profil panelen.</div>;
+  if (loading) return <div className="text-slate-300">Betöltés…</div>;
   if (error || !data?.success || !data.items.length)
     return <div className="text-red-500">Nincs adat ehhez a domainhez.</div>;
 
@@ -95,12 +93,11 @@ export default function UtomDnsKategoria({ domain }: { domain: string }) {
 
   return (
     <div className="flex flex-col items-center gap-4">
+      {/* Domain név a chart felett */}
+      <h2 className="text-2xl font-semibold text-white">{domain}</h2>
 
-      {/* DOMAIN NÉV */}
-      <h2 className="text-2xl font-bold text-white">{domain}</h2>
-
-      {/* CHART */}
-      <div className="w-[240px] h-[240px]">
+      {/* Chart */}
+      <div className="w-[260px] h-[260px]">
         <Doughnut
           data={chartData}
           options={{
@@ -109,29 +106,31 @@ export default function UtomDnsKategoria({ domain }: { domain: string }) {
               legend: { display: false },
               tooltip: {
                 callbacks: {
-                  label: (ctx: any) =>
-                    ctx.raw > 0 ? `${ctx.label}: ${ctx.raw}` : "",
+                  label: (ctx: any) => (ctx.raw > 0 ? `${ctx.label}: ${ctx.raw}` : ""),
                 },
               },
             },
+            maintainAspectRatio: false,
           }}
           plugins={[sliceLabelPlugin]}
         />
       </div>
 
-      {/* LEGENDA – vízszintes, jól látható */}
-      <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-200">
-        {categories.map((cat, i) => (
-          <div key={cat} className="flex items-center gap-2">
-            <span
-              className="inline-block w-5 h-5 rounded-sm border border-white"
-              style={{ backgroundColor: categoryColors[i] }}
-            ></span>
-            <span>{cat}</span>
-          </div>
-        ))}
+      {/* Vízszintes legenda — jól látható színmintákkal */}
+      <div className="w-full flex justify-center">
+        <div className="flex items-center gap-6 flex-wrap">
+          {categories.map((cat, i) => (
+            <div key={cat} className="flex items-center gap-2">
+              <span
+                className="inline-block w-5 h-5 rounded-sm border-2 border-white/70 shadow-sm"
+                style={{ backgroundColor: categoryColors[i] }}
+                aria-hidden
+              />
+              <span className="text-sm text-slate-200">{cat}</span>
+            </div>
+          ))}
+        </div>
       </div>
-
     </div>
   );
 }
