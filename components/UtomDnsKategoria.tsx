@@ -104,30 +104,16 @@ export default function UtomDnsKategoria({ domain }: UtomDnsKategoriaProps) {
     <div
       style={{
         display: "flex",
-        alignItems: "flex-start",
+        alignItems: "center",
         gap: "40px",
-        padding: "20px",
+        padding: "10px",
       }}
     >
-      {/* BAL OLDALI DOBOZ */}
+      {/* BAL OLDAL – CHART + TITLE */}
       <div style={{ textAlign: "center" }}>
-        <h2
-          style={{
-            marginBottom: "12px",
-            fontSize: "22px",
-            fontWeight: "600",
-          }}
-        >
-          {domain}
-        </h2>
+        <h2 style={{ marginBottom: "12px" }}>{domain}</h2>
 
-        <div
-          style={{
-            width: "210px",
-            height: "210px",
-            margin: "0 auto",
-          }}
-        >
+        <div style={{ width: "210px", height: "210px" }}>
           <Doughnut
             data={chartData}
             options={{
@@ -150,13 +136,12 @@ export default function UtomDnsKategoria({ domain }: UtomDnsKategoriaProps) {
         </div>
       </div>
 
-      {/* JOBB OLDALI LEGENDA */}
+      {/* JOBB OLDAL – LEGENDA FÜGGŐLEGESEN */}
       <div
         style={{
           display: "flex",
           flexDirection: "column",
           gap: "10px",
-          marginTop: "20px",
         }}
       >
         {categories.map((cat, i) => (
@@ -166,7 +151,6 @@ export default function UtomDnsKategoria({ domain }: UtomDnsKategoriaProps) {
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              fontSize: "15px",
             }}
           >
             <span

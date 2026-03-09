@@ -32,66 +32,83 @@ export default function UtomDns() {
   const domains: string[] = data?.items?.map((i: any) => i.source) ?? [];
 
   return (
-    <div>
-      {/* Domain választó gombok */}
-      <div style={{ textAlign: "center", marginBottom: "20px" }}>
-        <div style={{ marginTop: "10px" }}>
-          {domains.length === 0 && (
-            <div style={{ color: isDark ? "#fff" : "#000" }}>Betöltés…</div>
-          )}
-
-          {domains.map((d) => (
-            <button
-              key={d}
-              onClick={() => setDomain(d)}
-              style={{
-                padding: "10px 20px",
-                margin: "6px",
-                cursor: "pointer",
-                borderRadius: "14px",
-
-                border: isDark
-                  ? "1px solid rgba(255,255,255,0.18)"
-                  : "1px solid rgba(0,0,0,0.18)",
-
-                background:
-                  domain === d
-                    ? isDark
-                      ? "rgba(255,255,255,0.25)"
-                      : "rgba(0,0,0,0.15)"
-                    : isDark
-                    ? "rgba(255,255,255,0.12)"
-                    : "rgba(0,0,0,0.08)",
-
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-
-                color: isDark ? "#fff" : "#000",
-                fontSize: "14px",
-                transition: "0.25s",
-
-                boxShadow:
-                  domain === d
-                    ? isDark
-                      ? "0 0 6px rgba(255,255,255,0.25)"
-                      : "0 0 6px rgba(0,0,0,0.25)"
-                    : isDark
-                    ? "0 0 3px rgba(0,0,0,0.3)"
-                    : "0 0 3px rgba(0,0,0,0.15)",
-              }}
-            >
-              {d}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Chart */}
-      <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", gap: "40px", padding: "20px" }}>
+      
+      {/* BAL OLDALI DOBOZ – CHART */}
+      <div
+        style={{
+          width: "360px",
+          padding: "20px",
+          borderRadius: "16px",
+          background: isDark
+            ? "rgba(255,255,255,0.05)"
+            : "rgba(0,0,0,0.05)",
+          backdropFilter: "blur(10px)",
+        }}
+      >
         <UtomDnsKategoria
           key={domain + "_" + (isDark ? "dark" : "light")}
           domain={domain}
         />
+      </div>
+
+      {/* JOBB OLDALI TARTALOM */}
+      <div style={{ flex: 1 }}>
+        
+        {/* Domain választó gombok */}
+        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+          <div style={{ marginTop: "10px" }}>
+            {domains.length === 0 && (
+              <div style={{ color: isDark ? "#fff" : "#000" }}>Betöltés…</div>
+            )}
+
+            {domains.map((d) => (
+              <button
+                key={d}
+                onClick={() => setDomain(d)}
+                style={{
+                  padding: "10px 20px",
+                  margin: "6px",
+                  cursor: "pointer",
+                  borderRadius: "14px",
+
+                  border: isDark
+                    ? "1px solid rgba(255,255,255,0.18)"
+                    : "1px solid rgba(0,0,0,0.18)",
+
+                  background:
+                    domain === d
+                      ? isDark
+                        ? "rgba(255,255,255,0.25)"
+                        : "rgba(0,0,0,0.15)"
+                      : isDark
+                      ? "rgba(255,255,255,0.12)"
+                      : "rgba(0,0,0,0.08)",
+
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
+
+                  color: isDark ? "#fff" : "#000",
+                  fontSize: "14px",
+                  transition: "0.25s",
+
+                  boxShadow:
+                    domain === d
+                      ? isDark
+                        ? "0 0 6px rgba(255,255,255,0.25)"
+                        : "0 0 6px rgba(0,0,0,0.25)"
+                      : isDark
+                      ? "0 0 3px rgba(0,0,0,0.3)"
+                      : "0 0 3px rgba(0,0,0,0.15)",
+                }}
+              >
+                {d}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Ide jöhet majd a jobb oldali tartalom */}
       </div>
     </div>
   );
