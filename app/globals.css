@@ -1076,6 +1076,12 @@ html[data-theme="light"] {
 .volume-wrapper {
   position: relative;
 }
+.dns-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 .volume-slider-horizontal {
   position: absolute;
@@ -1094,6 +1100,7 @@ html[data-theme="light"] {
   background: linear-gradient(135deg, rgba(0,153,255,0.12), rgba(0,204,153,0.12));
   background-attachment: fixed;
 }
+
 
 
 /* --- Főoldal zustandstore oldal kártyák --- */
@@ -2250,3 +2257,5 @@ html.theme-dark .nav-link {
 /* opcionális: ha szeretnéd, hogy a cím és gomb kontrasztja mindig jó legyen */
 .wsource-card--ghost h2 { color: inherit; }
 .wsource-card--ghost button img { display: block; }
+
+

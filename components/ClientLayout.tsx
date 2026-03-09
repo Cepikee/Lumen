@@ -25,7 +25,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   const isASZF = pathname.includes("aszf");
   const isImpresszum = pathname.includes("impresszum");
   const isInsights = pathname.includes("insights");
-  const isDns = pathname.includes("dns");
+  const isDns = pathname.includes("Dns");
 
   const shouldShowSidebar =
     pathname === "/" &&
