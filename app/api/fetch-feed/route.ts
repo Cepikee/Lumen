@@ -236,16 +236,22 @@ export async function GET() {
 
             let content: string;
 
-            if (sourceId === 6) {
-              content = item["content:encoded"] || item.content || "";
-            } else {
-              const rawContent = item["content:encoded"] || item.content || "";
-              content = cleanHtmlText(cheerio.load(rawContent).text());
-            }
+              if (sourceId === 6) {
+                // 444.hu → content:encoded-ben benne a teljes cikk
+                content = item["content:encoded"] || item.content || "";
+              } else if (sourceId === 7) {
+                // Origo → RSS-ben gyakorlatilag nincs rendes cikk, mindig scrappelni fogjuk
+                content = "";
+              } else {
+                const rawContent = item["content:encoded"] || item.content || "";
+                content = cleanHtmlText(cheerio.load(rawContent).text());
+              }
 
-            if (sourceId === 5 && content.length < 500) {
-              content = await fetchPortfolioArticle(link);
-            }
+              // Portfolio: ha az RSS-ből kevés jön, külön letöltjük
+              if (sourceId === 5 && content.length < 500) {
+                content = await fetchPortfolioArticle(link);
+              }
+
 
             // --- CIKK BESZÚRÁSA ---
             await connection.execute(
