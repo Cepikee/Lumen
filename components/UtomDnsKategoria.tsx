@@ -101,8 +101,15 @@ export default function UtomDnsKategoria({ domain }: { domain: string }) {
   };
 
   return (
-    <div className="w-full flex items-center justify-center">
-      <div className="w-[200px] h-[200px]">
+    <div className="w-full flex flex-col items-center gap-4">
+
+      {/* DOMAIN NÉV NAGYBAN */}
+      <h2 className="text-xl font-bold text-white text-center">
+        {domain}
+      </h2>
+
+      {/* CHART */}
+      <div className="w-[220px] h-[220px]">
         <Doughnut
           data={chartData}
           options={{
@@ -120,6 +127,20 @@ export default function UtomDnsKategoria({ domain }: { domain: string }) {
           plugins={[sliceLabelPlugin]}
         />
       </div>
+
+      {/* LEGENDA */}
+      <div className="grid grid-cols-2 gap-2 text-sm text-slate-300">
+        {categories.map((cat, i) => (
+          <div key={cat} className="flex items-center gap-2">
+            <span
+              className="inline-block w-3 h-3 rounded-sm"
+              style={{ backgroundColor: categoryColors[i] }}
+            ></span>
+            <span>{cat}</span>
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 }
