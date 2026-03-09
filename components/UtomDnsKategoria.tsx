@@ -129,17 +129,19 @@ export default function UtomDnsKategoria({ domain }: { domain: string }) {
       </div>
 
       {/* LEGENDA */}
-      <div className="grid grid-cols-2 gap-2 text-sm text-slate-300">
-        {categories.map((cat, i) => (
-          <div key={cat} className="flex items-center gap-2">
-            <span
-              className="inline-block w-3 h-3 rounded-sm"
-              style={{ backgroundColor: categoryColors[i] }}
-            ></span>
-            <span>{cat}</span>
-          </div>
-        ))}
-      </div>
+     {/* LEGENDA – 1 soros, vízszintes */}
+            <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-300 mt-2">
+            {categories.map((cat, i) => (
+                <div key={cat} className="flex items-center gap-2">
+                <span
+                    className="inline-block w-3 h-3 rounded-sm"
+                    style={{ backgroundColor: categoryColors[i] }}
+                ></span>
+                <span>{cat}</span>
+                </div>
+            ))}
+            </div>
+
 
     </div>
   );
