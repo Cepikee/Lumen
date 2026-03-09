@@ -86,9 +86,8 @@ export default function UtomDns() {
             width: "360px",
             padding: "20px",
             borderRadius: "16px",
-            background: isDark
-              ? "rgba(255,255,255,0.05)"
-              : "rgba(0,0,0,0.05)",
+            background: "transparent",   // 🔥 láthatatlan
+            border: "none",              // 🔥 nincs keret
             minHeight: "400px",
           }}
         >
@@ -104,9 +103,8 @@ export default function UtomDns() {
             flex: 1,
             padding: "20px",
             borderRadius: "16px",
-            background: isDark
-              ? "rgba(255,255,255,0.05)"
-              : "rgba(0,0,0,0.05)",
+            background: "transparent",   // 🔥 láthatatlan
+            border: "none",              // 🔥 nincs keret
             minHeight: "400px",
           }}
         >
@@ -119,9 +117,8 @@ export default function UtomDns() {
             width: "300px",
             padding: "20px",
             borderRadius: "16px",
-            background: isDark
-              ? "rgba(255,255,255,0.05)"
-              : "rgba(0,0,0,0.05)",
+            background: "transparent",   // 🔥 láthatatlan
+            border: "none",              // 🔥 nincs keret
             minHeight: "400px",
           }}
         >
