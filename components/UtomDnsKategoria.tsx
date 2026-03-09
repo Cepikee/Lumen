@@ -74,17 +74,10 @@ export default function UtomDnsKategoria({ domain }: { domain: string }) {
     "#6366f1",
   ];
 
-  if (!domain) {
-    return <div className="text-slate-400 text-sm">Válassz domaint.</div>;
-  }
-
-  if (isLoading) {
-    return <div className="text-slate-400 text-sm">Betöltés...</div>;
-  }
-
-  if (error || !data?.success || !data.items.length) {
-    return <div className="text-red-500 text-sm">Nincs adat ehhez a domainhez.</div>;
-  }
+  if (!domain) return null;
+  if (isLoading) return <div className="text-slate-400">Betöltés...</div>;
+  if (error || !data?.success || !data.items.length)
+    return <div className="text-red-500">Nincs adat ehhez a domainhez.</div>;
 
   const item = data.items[0];
   const values = categories.map((c) => item[c] ?? 0);
@@ -101,15 +94,13 @@ export default function UtomDnsKategoria({ domain }: { domain: string }) {
   };
 
   return (
-    <div className="w-full flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-4">
 
-      {/* DOMAIN NÉV NAGYBAN */}
-      <h2 className="text-xl font-bold text-white text-center">
-        {domain}
-      </h2>
+      {/* DOMAIN NÉV */}
+      <h2 className="text-2xl font-bold text-white">{domain}</h2>
 
       {/* CHART */}
-      <div className="w-[220px] h-[220px]">
+      <div className="w-[240px] h-[240px]">
         <Doughnut
           data={chartData}
           options={{
@@ -128,20 +119,18 @@ export default function UtomDnsKategoria({ domain }: { domain: string }) {
         />
       </div>
 
-      {/* LEGENDA – 1 soros, vízszintes, jól látható */}
-<div className="flex flex-wrap justify-center gap-4 text-sm text-slate-300 mt-2">
-  {categories.map((cat, i) => (
-    <div key={cat} className="flex items-center gap-2">
-      <span
-        className="inline-block w-4 h-4 rounded-sm border border-white/40"
-        style={{ backgroundColor: categoryColors[i] }}
-      ></span>
-      <span>{cat}</span>
-    </div>
-  ))}
-</div>
-
-
+      {/* LEGENDA – vízszintes, jól látható */}
+      <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-200">
+        {categories.map((cat, i) => (
+          <div key={cat} className="flex items-center gap-2">
+            <span
+              className="inline-block w-5 h-5 rounded-sm border border-white"
+              style={{ backgroundColor: categoryColors[i] }}
+            ></span>
+            <span>{cat}</span>
+          </div>
+        ))}
+      </div>
 
     </div>
   );
