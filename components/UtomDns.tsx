@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { useUserStore } from "@/store/useUserStore";
 import UtomDnsKategoria from "@/components/UtomDnsKategoria";
-import Skeleton from "@/components/Skeleton";
 
 const fetcher = (url: string) =>
   fetch(url, {
@@ -23,14 +22,12 @@ export default function UtomDns() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-  const { data, isLoading } = useSWR(
+  const { data } = useSWR(
     "/api/insights/source-category-distribution",
     fetcher
   );
 
   const domains: string[] = data?.items?.map((i: any) => i.source) ?? [];
-
-  const showSkeleton = !domain; // skeleton addig, amíg nincs domain
 
   return (
     <div style={{ padding: "20px" }}>
@@ -94,14 +91,7 @@ export default function UtomDns() {
             minHeight: "400px",
           }}
         >
-          {showSkeleton ? (
-            <>
-              <Skeleton height="24px" width="60%" />
-              <div style={{ marginTop: "20px" }}>
-                <Skeleton height="210px" width="210px" radius={210} />
-              </div>
-            </>
-          ) : (
+          {domain && (
             <UtomDnsKategoria
               key={domain + "_" + (isDark ? "dark" : "light")}
               domain={domain}
@@ -119,15 +109,7 @@ export default function UtomDns() {
             border: "none",
             minHeight: "400px",
           }}
-        >
-          {showSkeleton ? (
-            <>
-              <Skeleton height="20px" width="80%" />
-              <Skeleton height="20px" width="60%" />
-              <Skeleton height="20px" width="90%" />
-            </>
-          ) : null}
-        </div>
+        ></div>
 
         {/* JOBB OLDALI DOBOZ */}
         <div
@@ -139,15 +121,7 @@ export default function UtomDns() {
             border: "none",
             minHeight: "400px",
           }}
-        >
-          {showSkeleton ? (
-            <>
-              <Skeleton height="20px" width="70%" />
-              <Skeleton height="20px" width="50%" />
-              <Skeleton height="20px" width="90%" />
-            </>
-          ) : null}
-        </div>
+        ></div>
       </div>
 
       {/* FOOTER */}
