@@ -50,11 +50,12 @@ interface UtomDnsKategoriaProps {
 
 export default function UtomDnsKategoria({ domain }: UtomDnsKategoriaProps) {
   const { data, error } = useSWR(
-  domain ? `/api/insights/source-category-distribution?domain=${domain}` : null,
-  fetcher,
-  { revalidateOnFocus: false, revalidateOnReconnect: true }
-);
-
+    domain
+      ? `/api/insights/source-category-distribution?domain=${domain}`
+      : null,
+    fetcher,
+    { revalidateOnFocus: false, revalidateOnReconnect: true }
+  );
 
   const loading = !data && !error;
 
@@ -100,49 +101,64 @@ export default function UtomDnsKategoria({ domain }: UtomDnsKategoriaProps) {
   };
 
   return (
-    <div>
-      <h2>{domain}</h2>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "40px",
+        padding: "10px",
+      }}
+    >
+      {/* BAL OLDAL – CHART + TITLE */}
+      <div style={{ textAlign: "center" }}>
+        <h2 style={{ marginBottom: "12px" }}>{domain}</h2>
 
-      <div style={{ width: "260px", height: "260px" }}>
-        <Doughnut
-          data={chartData}
-          options={{
-            cutout: "70%",
-            plugins: {
-              legend: { display: false },
-              tooltip: {
-                callbacks: {
-                  label: (ctx) =>
-                    typeof ctx.raw === "number" && ctx.raw > 0
-                      ? `${ctx.label}: ${ctx.raw}`
-                      : "",
+        <div style={{ width: "210px", height: "210px" }}>
+          <Doughnut
+            data={chartData}
+            options={{
+              cutout: "70%",
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    label: (ctx) =>
+                      typeof ctx.raw === "number" && ctx.raw > 0
+                        ? `${ctx.label}: ${ctx.raw}`
+                        : "",
+                  },
                 },
               },
-            },
-            maintainAspectRatio: false,
-          }}
-          plugins={[sliceLabelPlugin]}
-        />
+              maintainAspectRatio: false,
+            }}
+            plugins={[sliceLabelPlugin]}
+          />
+        </div>
       </div>
 
-      <div style={{ marginTop: "20px" }}>
+      {/* JOBB OLDAL – LEGENDA FÜGGŐLEGESEN */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+        }}
+      >
         {categories.map((cat, i) => (
           <div
             key={cat}
             style={{
-              display: "inline-flex",
+              display: "flex",
               alignItems: "center",
-              marginRight: "12px",
+              gap: "8px",
             }}
           >
             <span
               style={{
-                display: "inline-block",
                 width: "16px",
                 height: "16px",
                 backgroundColor: categoryColors[i],
                 border: "1px solid #000",
-                marginRight: "6px",
               }}
             />
             <span>{cat}</span>
