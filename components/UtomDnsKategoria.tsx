@@ -50,11 +50,11 @@ interface UtomDnsKategoriaProps {
 
 export default function UtomDnsKategoria({ domain }: UtomDnsKategoriaProps) {
   const { data, error } = useSWR(
-    domain
-      ? `/api/insights/source-category-distribution?domain=${domain}`
-      : null,
-    fetcher
-  );
+  domain ? `/api/insights/source-category-distribution?domain=${domain}` : null,
+  fetcher,
+  { revalidateOnFocus: false, revalidateOnReconnect: true }
+);
+
 
   const loading = !data && !error;
 

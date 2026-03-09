@@ -24,7 +24,7 @@ export default function UtomDns() {
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   // 🔥 Dinamikus domain lista
-  const { data, error } = useSWR(
+  const { data } = useSWR(
     "/api/insights/source-category-distribution",
     fetcher
   );
@@ -50,7 +50,6 @@ export default function UtomDns() {
                 cursor: "pointer",
                 borderRadius: "14px",
 
-                // ⭐ Témafüggő színek
                 border: isDark
                   ? "1px solid rgba(255,255,255,0.18)"
                   : "1px solid rgba(0,0,0,0.18)",
@@ -71,7 +70,6 @@ export default function UtomDns() {
                 fontSize: "14px",
                 transition: "0.25s",
 
-                // ⭐ Témafüggő árnyék
                 boxShadow:
                   domain === d
                     ? isDark
@@ -90,7 +88,10 @@ export default function UtomDns() {
 
       {/* Chart */}
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <UtomDnsKategoria domain={domain} />
+        <UtomDnsKategoria
+          key={domain + "_" + (isDark ? "dark" : "light")}
+          domain={domain}
+        />
       </div>
     </div>
   );
