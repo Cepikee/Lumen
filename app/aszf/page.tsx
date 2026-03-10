@@ -18,7 +18,7 @@ export default function ASZF(): JSX.Element {
           <p className="aszf-updated">Hatályos: {lastUpdated}</p>
         </header>
 
-        <section>
+        <section id="bevezetes">
           <h2>1. Bevezetés és definíciók</h2>
           <p>
             Jelen Általános Szerződési Feltételek (a továbbiakban: <strong>ÁSZF</strong>) az
@@ -38,7 +38,7 @@ export default function ASZF(): JSX.Element {
           </p>
         </section>
 
-        <section>
+        <section id="szolgaltatas">
           <h2>2. A szolgáltatás tárgya és jellege</h2>
           <p>
             Az Utom.hu egy automatizált hírszolgáltató platform, amely AI‑algoritmusokkal dolgozza fel
@@ -52,7 +52,7 @@ export default function ASZF(): JSX.Element {
           </p>
         </section>
 
-        <section>
+        <section id="regisztracio">
           <h2>3. Regisztráció, fiók és hozzáférés</h2>
           <p>
             A Szolgáltatás egyes funkciói regisztrációhoz kötöttek. A regisztráció során a Felhasználó
@@ -66,7 +66,7 @@ export default function ASZF(): JSX.Element {
           </ul>
         </section>
 
-        <section>
+        <section id="elofizetes">
           <h2>4. Előfizetés és fizetési feltételek (átmeneti rendelkezés)</h2>
           <p>
             Jelenleg az előfizetéses modul fejlesztés alatt áll; a fizetős szolgáltatások és csomagok
@@ -85,7 +85,7 @@ export default function ASZF(): JSX.Element {
           </p>
         </section>
 
-        <section>
+        <section id="tiltott">
           <h2>5. Felhasználói kötelezettségek és tiltott magatartás</h2>
           <p>
             A Felhasználó köteles a Szolgáltatást jogszerűen, a jóhiszeműség és a tisztesség követelményeinek
@@ -105,7 +105,7 @@ export default function ASZF(): JSX.Element {
           </p>
         </section>
 
-        <section>
+        <section id="tartalom">
           <h2>6. Tartalomkezelés, forrásmegjelölés és szerzői jog</h2>
           <p>
             A Szolgáltatás a forrásokat minden esetben megjelöli: a cikk címében vagy metaadatában
@@ -126,7 +126,7 @@ export default function ASZF(): JSX.Element {
           </p>
         </section>
 
-        <section>
+        <section id="moderacio">
           <h2>7. Moderáció és bejelentési eljárás</h2>
           <p>
             A Felhasználók bejelenthetik a jogsértő vagy problémás tartalmakat a <strong>support@utom.hu</strong>
@@ -139,8 +139,30 @@ export default function ASZF(): JSX.Element {
           </p>
         </section>
 
-        <section>
-          <h2>8. Felelősségkorlátozás és kártérítés</h2>
+        <section id="dpia">
+          <h2>8. Adatvédelmi hatásvizsgálat (DPIA) és AI‑átláthatóság</h2>
+          <p>
+            A Szolgáltató az AI‑alapú feldolgozások (tartalomgyűjtés, AI‑generálás, plágiumellenőrzés)
+            adatvédelmi kockázatait felméri és csökkenti. A Szolgáltatás működéséhez kapcsolódó DPIA
+            (Adatvédelmi Hatásvizsgálat) elkészítése folyamatban van, és a DPIA összefoglalója a
+            Szolgáltató kérésre rendelkezésre áll.
+          </p>
+          <p><strong>DPIA összefoglaló (rövid):</strong></p>
+          <ul>
+            <li><strong>Feldolgozás célja:</strong> nyilvános hírek gyűjtése, rendszerezése, AI‑alapú összefoglalók készítése, plágiumellenőrzés.</li>
+            <li><strong>Adattípusok:</strong> nyilvános forrásokból származó tartalom, metaadatok, technikai naplók, cookie‑adatok (Google Analytics).</li>
+            <li><strong>Jogalap:</strong> jogos érdek a szolgáltatás nyújtásához és a weboldal működtetéséhez; analitika esetén megfelelő tájékoztatás és hozzájárulás kezelése.</li>
+            <li><strong>Műszaki intézkedések:</strong> adatbázis‑titkosítás, hozzáférés‑kontroll, naplózás, Google Analytics anonimizálás beállítása.</li>
+            <li><strong>Szervezeti intézkedések:</strong> belső adatvédelmi szabályok, hozzáférési jogosultságok korlátozása, incidenskezelési eljárás.</li>
+            <li><strong>Maradék kockázat:</strong> rendszeres felülvizsgálat és modell‑audit javasolt; ha a maradék kockázat nem elfogadható, további technikai intézkedések bevezetendők.</li>
+          </ul>
+          <p>
+            A teljes DPIA dokumentum a Szolgáltató rendelkezésére áll, és kérésre a Felhasználó vagy az illetékes hatóság számára betekintésre vagy összefoglaló átadására kerülhet.
+          </p>
+        </section>
+
+        <section id="felelosseg">
+          <h2>9. Felelősségkorlátozás és kártérítés</h2>
           <p>
             A Szolgáltató mindent megtesz a szolgáltatás folyamatos és hibamentes működéséért, azonban
             nem vállal garanciát a szolgáltatás megszakítás‑, hibamentességére vagy a tartalom
@@ -158,32 +180,29 @@ export default function ASZF(): JSX.Element {
           </p>
         </section>
 
-        <section>
-          <h2>9. Szavatosság és panaszkezelés</h2>
+        <section id="szavatossag">
+          <h2>10. Szavatosság és panaszkezelés</h2>
           <p>
-            A Szolgáltató a jogszabályokban előírt szavatossági kötelezettségeket teljesíti. Hibák,
-            hiányosságok vagy panasz esetén a Felhasználó a <strong>support@utom.hu</strong> címen
-            tehet bejelentést. A Szolgáltató a bejelentést nyilvántartja és ésszerű határidőn belül
-            válaszol.
+            Hibák, hiányosságok vagy panasz esetén a Felhasználó a <strong>support@utom.hu</strong> címen
+            tehet bejelentést. A Szolgáltató a bejelentést nyilvántartja és 14 napon belül válaszol.
           </p>
         </section>
 
-        <section>
-          <h2>10. Adatvédelem és sütik</h2>
+        <section id="adatvedelem">
+          <h2>11. Adatvédelem és sütik</h2>
           <p>
-            A Szolgáltató az adatkezelést külön Adatvédelmi Tájékoztatóban szabályozza, amely a
-            <a href="/adatvedelem"> /adatvedelem</a> oldalon érhető el. A Felhasználó a Szolgáltatás
-            használatával elfogadja az Adatvédelmi Tájékoztatóban foglaltakat.
+            A Szolgáltató az adatkezelést részletesen az Adatvédelmi Tájékoztatóban szabályozza,
+            amely a <a href="/adatvedelem">/adatvedelem</a> oldalon érhető el. A weboldal Google Analytics
+            szolgáltatást használ; az analitika beállításai anonimizálásra és adatmegőrzési korlátozásra
+            vannak konfigurálva, ahol lehetséges.
           </p>
           <p>
-            A weboldal sütiket és analitikai eszközöket használ a szolgáltatás fejlesztése és a
-            felhasználói élmény javítása érdekében. A sütik kezelésére vonatkozó részletes információk
-            az Adatvédelmi Tájékoztatóban találhatók.
+            A Felhasználó a Szolgáltatás használatával elfogadja az Adatvédelmi Tájékoztatóban foglaltakat.
           </p>
         </section>
 
-        <section>
-          <h2>11. Harmadik felek és linkek</h2>
+        <section id="harmadik">
+          <h2>12. Harmadik felek és linkek</h2>
           <p>
             A Szolgáltatás külső forrásokra hivatkozhat. A Szolgáltató nem vállal felelősséget a
             külső oldalak tartalmáért, elérhetőségéért vagy azok által alkalmazott adatkezelési
@@ -191,21 +210,16 @@ export default function ASZF(): JSX.Element {
           </p>
         </section>
 
-        <section>
-          <h2>12. Vis maior és karbantartás</h2>
+        <section id="vismaior">
+          <h2>13. Vis maior és karbantartás</h2>
           <p>
             A Szolgáltató nem felel olyan eseményekért, amelyek elháríthatatlan külső okokból (vis
-            maior) következnek be, ideértve a természeti katasztrófákat, háborút, terrorcselekményt,
-            szolgáltatói hálózati kiesést vagy egyéb, a Szolgáltatón kívül álló okokat.
-          </p>
-          <p>
-            Rendszeres karbantartásról a Szolgáltató előzetesen tájékoztatást adhat; sürgős javítások
-            esetén előfordulhat rövid ideig tartó szolgáltatáskimaradás.
+            maior) következnek be. Rendszeres karbantartásról a Szolgáltató előzetesen tájékoztatást adhat.
           </p>
         </section>
 
-        <section>
-          <h2>13. Jogviták és alkalmazandó jog</h2>
+        <section id="jogvitak">
+          <h2>14. Jogviták és alkalmazandó jog</h2>
           <p>
             Jelen ÁSZF‑re a magyar jog az irányadó. A Szolgáltató és a Felhasználó közötti viták
             elsősorban békés úton, egyeztetéssel rendezendők. Amennyiben ez nem vezet eredményre,
@@ -214,28 +228,27 @@ export default function ASZF(): JSX.Element {
           </p>
         </section>
 
-        <section>
-          <h2>14. Módosítások és hatálybalépés</h2>
+        <section id="modositas">
+          <h2>15. Módosítások és hatálybalépés</h2>
           <p>
             A Szolgáltató jogosult az ÁSZF‑et módosítani. A módosításokat a Szolgáltató a weboldalon
-            teszi közzé; a módosítás közzétételét követően a változások hatályba lépnek, kivéve, ha a
-            Szolgáltató másként rendelkezik.
+            teszi közzé; a módosítás közzétételét követően a változások hatályba lépnek.
           </p>
           <p>
             A Felhasználó a Szolgáltatás további használatával elfogadja a módosított ÁSZF‑et.
           </p>
         </section>
 
-        <section>
-          <h2>15. Kapcsolat</h2>
+        <section id="kapcsolat">
+          <h2>16. Kapcsolat</h2>
           <p>
             Kapcsolattartó: <strong>Lakatos Márk / Utom.hu</strong><br />
             E‑mail: <strong>support@utom.hu</strong>
           </p>
         </section>
 
-        <section>
-          <h2>16. Záró rendelkezések</h2>
+        <section id="zaro">
+          <h2>17. Záró rendelkezések</h2>
           <p>
             Amennyiben a jelen ÁSZF bármely rendelkezése érvénytelennek vagy végrehajthatatlannak
             bizonyul, ez nem érinti a többi rendelkezés érvényességét. A felek a jogszabályoknak
