@@ -13,7 +13,6 @@ interface ActiveFilterState {
   sourceFilters: string[];
   availableSources: SourceItem[];
 
-  // 🔥 ÚJ: kategória szűrés
   categoryFilters: string[];
   availableCategories: string[];
 }
@@ -25,11 +24,29 @@ interface SidebarProps {
   onTodayFilter: () => void;
   onReset: () => void;
   onSourceFilterChange: (sources: string[]) => void;
-
-  // 🔥 ÚJ: kategória callback
   onCategoryFilterChange: (categories: string[]) => void;
-
   activeFilterState: ActiveFilterState;
+}
+
+// ⭐ Forrásnév normalizáló
+function prettySourceName(name: string) {
+  if (!name) return "";
+
+  const map: Record<string, string> = {
+    "24.hu": "24",
+    "444.hu": "444",
+    "hvg.hu": "HVG",
+    "index.hu": "Index",
+    "origo.hu": "Origo",
+    "portfolio.hu": "Portfolio",
+    "telex.hu": "Telex",
+  };
+
+  if (map[name]) return map[name];
+
+  // fallback: levágjuk a .hu-t és nagybetűsítjük
+  let clean = name.replace(".hu", "");
+  return clean.charAt(0).toUpperCase() + clean.slice(1);
 }
 
 export default function Sidebar({
@@ -47,8 +64,6 @@ export default function Sidebar({
     isTodayMode,
     sourceFilters = [],
     availableSources = [],
-
-    // 🔥 ÚJ
     categoryFilters = [],
     availableCategories = []
   } = activeFilterState || {};
@@ -85,6 +100,7 @@ export default function Sidebar({
         }}
       >
         <nav>
+          {/* NÉZET */}
           <div className="mb-3">
             <div className="fw-bold mb-1">Nézet</div>
 
@@ -103,7 +119,7 @@ export default function Sidebar({
             </button>
           </div>
 
-          {/* --- GOMB LOGIKA JAVÍTVA --- */}
+          {/* MAI HÍREK / RESET */}
           {sourceFilters.length === 0 ? (
             <button
               className="btn btn-sm btn-secondary w-100 mb-2"
@@ -119,9 +135,8 @@ export default function Sidebar({
               🔄 Összes hír
             </button>
           )}
-          {/* --- GOMB LOGIKA VÉGE --- */}
 
-          {/* --- FORRÁSOK --- */}
+          {/* FORRÁSOK */}
           <div>
             <div className="fw-bold mb-1">Források</div>
 
@@ -149,12 +164,14 @@ export default function Sidebar({
                     onSourceFilterChange(newSources);
                   }}
                 />
-                <label className="form-check-label">{src.name}</label>
+                <label className="form-check-label">
+                  {prettySourceName(src.name)}
+                </label>
               </div>
             ))}
           </div>
 
-          {/* --- KATEGÓRIÁK --- */}
+          {/* KATEGÓRIÁK */}
           <div className="mt-4">
             <div className="fw-bold mb-1">Kategóriák</div>
 
