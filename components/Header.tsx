@@ -24,35 +24,19 @@ export default function Header() {
 
   if (pathname.startsWith("/landing")) return null;
 
-  useEffect(() => {
-    setLocalSearch(searchTerm);
-  }, [searchTerm]);
-
-  useEffect(() => {
-    setIsTyping(true);
-    const t = setTimeout(() => {
-      setSearchTerm(localSearch);
-      setIsTyping(false);
-    }, 300);
-    return () => clearTimeout(t);
-  }, [localSearch, setSearchTerm]);
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      setSearchTerm(localSearch);
-    }
-  };
-
-  const isDark =
-    theme === "dark" ||
-    (theme === "system" &&
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-  const logoSrc = isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
+  // ⛔ FONTOS: amíg tölt a user, ne rendereljünk menüt
+  if (loading) {
+    return (
+      <nav className="navbar navbar-expand-lg shadow-sm sticky-top header-nav">
+        <div className="container-fluid">
+          <span className="text-muted">Betöltés…</span>
+        </div>
+      </nav>
+    );
+  }
 
   // -------------------------
-  // ⭐ Prémium státusz (helyes, típus-kompatibilis)
+  // ⭐ Prémium státusz
   // -------------------------
   const isPremium = user?.is_premium === true;
 
@@ -89,6 +73,18 @@ export default function Header() {
     ? menuPremium
     : menuFree;
 
+  // -------------------------
+  // KERESŐ + HEADER RENDER
+  // -------------------------
+
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  const logoSrc = isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
+
   return (
     <nav className="navbar navbar-expand-lg shadow-sm sticky-top header-nav">
       <div className="container-fluid d-flex align-items-center justify-content-between">
@@ -122,7 +118,7 @@ export default function Header() {
                 className="search-input"
                 value={localSearch}
                 onChange={(e) => setLocalSearch(e.target.value)}
-                onKeyDown={handleKeyDown}
+                onKeyDown={(e) => e.key === "Enter" && setSearchTerm(localSearch)}
                 aria-label="Keresés"
               />
               {localSearch.length > 0 && (
@@ -157,9 +153,8 @@ export default function Header() {
           </ul>
 
           <div className="d-flex align-items-center">
-            {loading && <span className="text-muted">Betöltés…</span>}
-            {!loading && !user && <LoginModal />}
-            {!loading && user && <ProfileMenu />}
+            {!user && <LoginModal />}
+            {user && <ProfileMenu />}
           </div>
         </div>
       </div>
