@@ -101,9 +101,9 @@ export default function Header() {
     setIsDark(dark);
   }, [theme]);
 
-  const logoSrc = isDark
-    ? "/web-app-manifest-512x512.png"
-    : "/utom.png";
+    const logoSrc = isDark
+      ? "/web-app-manifest-512x512.png"
+      : "/utom.png";
 
   // -------------------------
   // MENÜK
