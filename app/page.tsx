@@ -16,6 +16,17 @@ export default function Page() {
   const categoryFilters = useUserStore((s) => s.categoryFilters);
   const searchTerm = useUserStore((s) => s.searchTerm);
 
+  // ⭐ Debounce-olt kereső
+  const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchTerm);
+    }, 250); // 250ms debounce
+
+    return () => clearTimeout(handler);
+  }, [searchTerm]);
+
   // ⭐ Feed state
   const [items, setItems] = useState<FeedItem[]>([]);
   const [page, setPage] = useState(1);
@@ -29,7 +40,7 @@ export default function Page() {
   // Normalizált dependency stringek
   const depSources = JSON.stringify(sourceFilters ?? []);
   const depCategories = JSON.stringify(categoryFilters ?? []);
-  const depSearch = searchTerm ?? "";
+  const depSearch = debouncedSearch ?? "";
 
   // --- Szűrt fetch ---
   async function fetchFilteredPage(pageNum: number, sources: string[], categories: string[]) {
@@ -38,7 +49,7 @@ export default function Page() {
     const query = [sourceQuery, categoryQuery].filter(Boolean).join("&");
 
     const res = await fetch(
-      `/api/summaries?page=${pageNum}&limit=10&${query}&q=${encodeURIComponent(searchTerm)}`,
+      `/api/summaries?page=${pageNum}&limit=10&${query}&q=${encodeURIComponent(debouncedSearch)}`,
       { cache: "no-store" }
     );
 
@@ -51,12 +62,12 @@ export default function Page() {
     })) as FeedItem[];
   }
 
-  // --- Normál fetch (szűrők nélkül, de kereséssel kompatibilis) ---
+  // --- Normál fetch ---
   async function fetchPageData(pageNum: number) {
     setLoading(true);
     try {
       const res = await fetch(
-        `/api/summaries?page=${pageNum}&limit=10&q=${encodeURIComponent(searchTerm)}`,
+        `/api/summaries?page=${pageNum}&limit=10&q=${encodeURIComponent(debouncedSearch)}`,
         { cache: "no-store" }
       );
       if (!res.ok) return [];
@@ -72,12 +83,12 @@ export default function Page() {
     }
   }
 
-  // --- Today mód (kereséssel kompatibilis) ---
+  // --- Today mód ---
   async function loadToday() {
     setLoading(true);
     try {
       const res = await fetch(
-        `/api/summaries?today=true&q=${encodeURIComponent(searchTerm)}`,
+        `/api/summaries?today=true&q=${encodeURIComponent(debouncedSearch)}`,
         { cache: "no-store" }
       );
       const raw = await res.json();
@@ -104,7 +115,7 @@ export default function Page() {
     setSourcePage(1);
   }
 
-  // --- FŐ USEEFFECT: minden filter / kereső / nézetváltás változásra újratölt ---
+  // --- FŐ USEEFFECT ---
   useEffect(() => {
     let cancelled = false;
 
@@ -115,15 +126,14 @@ export default function Page() {
       setHasMore(true);
 
       const hasFilters = sourceFilters.length > 0 || categoryFilters.length > 0;
-      const hasSearch = searchTerm.trim() !== "";
 
-      // 1) TODAY + SEARCH / TODAY + NO SEARCH
+      // 1) TODAY mód (kereséssel együtt)
       if (isTodayMode) {
         await loadToday();
         return;
       }
 
-      // 2) FILTER + (SEARCH optional) → mindig szűrt fetch
+      // 2) FILTER + (SEARCH optional)
       if (hasFilters) {
         const firstPage = await fetchFilteredPage(1, sourceFilters, categoryFilters);
         if (cancelled) return;
@@ -139,7 +149,7 @@ export default function Page() {
         return;
       }
 
-      // 3) NINCS FILTER → normál fetch (SEARCH optional)
+      // 3) NINCS FILTER → normál fetch
       const first = await fetchPageData(1);
       if (cancelled) return;
 
@@ -164,7 +174,7 @@ export default function Page() {
     viewMode,
   ]);
 
-  // --- Normál lapozás (nincs filter, nincs today) ---
+  // --- Normál lapozás ---
   useEffect(() => {
     if (page === 1) return;
     let cancelled = false;
@@ -196,7 +206,7 @@ export default function Page() {
     };
   }, [page, depSearch, depSources, depCategories, isTodayMode]);
 
-  // --- Szűrt lapozás (filter + optional search) ---
+  // --- Szűrt lapozás ---
   useEffect(() => {
     if (sourcePage === 1) return;
     let cancelled = false;
