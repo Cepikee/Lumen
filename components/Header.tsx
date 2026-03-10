@@ -24,16 +24,12 @@ export default function Header() {
 
   if (pathname.startsWith("/landing")) return null;
 
-  // -------------------------
   // USER LOAD FIX
-  // -------------------------
   useEffect(() => {
     useUserStore.getState().loadUser?.();
   }, []);
 
-  // -------------------------
   // API USER CHECK
-  // -------------------------
   const [apiUser, setApiUser] = useState<any | null>(null);
   const [apiChecked, setApiChecked] = useState(false);
 
@@ -54,12 +50,12 @@ export default function Header() {
         if (mounted) setApiChecked(true);
       }
     })();
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, []);
 
-  // -------------------------
   // PRÉMIUM DETEKTOR
-  // -------------------------
   const isPremium = (() => {
     const u = user;
     if (!u) return false;
@@ -86,28 +82,29 @@ export default function Header() {
 
   const reallyPremium = isPremium || apiSaysPremium;
 
-  // -------------------------
-  // LOGO THEME FIX (A JAVÍTÁS LÉNYEGE)
-  // -------------------------
-  const [isDark, setIsDark] = useState(false);
+  // LOGO THEME LOGIKA – VÉGLEGES
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
 
   useEffect(() => {
-    const root = document.documentElement;
-
-    const dark =
-      root.classList.contains("theme-dark") ||
-      root.getAttribute("data-bs-theme") === "dark";
-
-    setIsDark(dark);
+    if (theme === "dark") {
+      setIsDark(true);
+    } else if (theme === "light") {
+      setIsDark(false);
+    } else if (theme === "system") {
+      if (typeof window !== "undefined") {
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        setIsDark(prefersDark);
+      }
+    }
   }, [theme]);
 
-    const logoSrc = isDark
-      ? "/web-app-manifest-512x512.png"
-      : "/utom.png";
+  // Dark / system+dark → fehér logó, Light / system+light → sötét logó
+  const logoSrc = isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
 
-  // -------------------------
   // MENÜK
-  // -------------------------
   const menuLoggedOut = [
     { href: "/", label: "Főoldal" },
     { href: "/aszf", label: "ÁSZF" },
@@ -141,7 +138,6 @@ export default function Header() {
   return (
     <nav className="navbar navbar-expand-lg shadow-sm sticky-top header-nav">
       <div className="container-fluid d-flex align-items-center justify-content-between">
-
         {/* LOGÓ */}
         <Link href="/" className="navbar-brand d-flex align-items-center">
           <Image
