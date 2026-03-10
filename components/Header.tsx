@@ -32,7 +32,7 @@ export default function Header() {
   }, []);
 
   // -------------------------
-  // API USER CHECK (mint az Insights oldalon)
+  // API USER CHECK
   // -------------------------
   const [apiUser, setApiUser] = useState<any | null>(null);
   const [apiChecked, setApiChecked] = useState(false);
@@ -58,7 +58,7 @@ export default function Header() {
   }, []);
 
   // -------------------------
-  // PRÉMIUM DETEKTOR (1:1 ugyanaz, mint Insights oldalon)
+  // PRÉMIUM DETEKTOR
   // -------------------------
   const isPremium = (() => {
     const u = user;
@@ -85,6 +85,25 @@ export default function Header() {
   })();
 
   const reallyPremium = isPremium || apiSaysPremium;
+
+  // -------------------------
+  // LOGO THEME FIX (A JAVÍTÁS LÉNYEGE)
+  // -------------------------
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    const dark =
+      root.classList.contains("theme-dark") ||
+      root.getAttribute("data-bs-theme") === "dark";
+
+    setIsDark(dark);
+  }, [theme]);
+
+  const logoSrc = isDark
+    ? "/web-app-manifest-512x512.png"
+    : "/utom.png";
 
   // -------------------------
   // MENÜK
@@ -118,17 +137,6 @@ export default function Header() {
     : reallyPremium
     ? menuPremium
     : menuFree;
-
-  // -------------------------
-  // KERESŐ + HEADER RENDER
-  // -------------------------
-  const isDark =
-    theme === "dark" ||
-    (theme === "system" &&
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-  const logoSrc = isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
 
   return (
     <nav className="navbar navbar-expand-lg shadow-sm sticky-top header-nav">
