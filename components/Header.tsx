@@ -96,7 +96,11 @@ export default function Header() {
     }
   }, [theme]);
 
-  const logoSrc = isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
+  const logoSrc = isLegalPage
+    ? "/web-app-manifest-512x512.png"
+    : isDark
+    ? "/web-app-manifest-512x512.png"
+    : "/utom.png";
 
   const menuLoggedOut = [
     { href: "/", label: "Főoldal" },
