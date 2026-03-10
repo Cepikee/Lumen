@@ -166,7 +166,12 @@ export default function Header() {
                 placeholder="Keresés..."
                 className="search-input"
                 value={localSearch}
-                onChange={(e) => setLocalSearch(e.target.value)}
+                onChange={(e) => {
+  const value = e.target.value;
+  setLocalSearch(value);
+  setSearchTerm(value);
+}}
+
                 aria-label="Keresés"
               />
               {localSearch.length > 0 && (

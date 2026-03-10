@@ -51,30 +51,28 @@ export default function Page() {
     })) as FeedItem[];
   }
 
- async function fetchPageData(pageNum: number) {
-  if (isTodayMode) return [];
-  if (sourceFilters.length > 0 || categoryFilters.length > 0) return [];
-
-  setLoading(true);
-  try {
-    const res = await fetch(
-      `/api/summaries?page=${pageNum}&limit=10&q=${encodeURIComponent(searchTerm)}`,
-      { cache: "no-store" }
-    );
-    if (!res.ok) return [];
-    const raw = await res.json();
-    return raw.map((item: any) => ({
-      ...item,
-      ai_clean: Number(item.ai_clean),
-    })) as FeedItem[];
-  } catch {
-    return [];
-  } finally {
-    setLoading(false);
+  // --- Normál fetch (szűrők nélkül, de kereséssel kompatibilis) ---
+  async function fetchPageData(pageNum: number) {
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `/api/summaries?page=${pageNum}&limit=10&q=${encodeURIComponent(searchTerm)}`,
+        { cache: "no-store" }
+      );
+      if (!res.ok) return [];
+      const raw = await res.json();
+      return raw.map((item: any) => ({
+        ...item,
+        ai_clean: Number(item.ai_clean),
+      })) as FeedItem[];
+    } catch {
+      return [];
+    } finally {
+      setLoading(false);
+    }
   }
-}
 
-
+  // --- Today mód (kereséssel kompatibilis) ---
   async function loadToday() {
     setLoading(true);
     try {
@@ -106,7 +104,7 @@ export default function Page() {
     setSourcePage(1);
   }
 
-  // --- FŐ USEEFFECT (minden filter + viewMode változásra újratölt) ---
+  // --- FŐ USEEFFECT: minden filter / kereső / nézetváltás változásra újratölt ---
   useEffect(() => {
     let cancelled = false;
 
@@ -116,16 +114,32 @@ export default function Page() {
       setSourcePage(1);
       setHasMore(true);
 
+      const hasFilters = sourceFilters.length > 0 || categoryFilters.length > 0;
+      const hasSearch = searchTerm.trim() !== "";
+
+      // 1) TODAY + SEARCH / TODAY + NO SEARCH
       if (isTodayMode) {
         await loadToday();
         return;
       }
 
-      if (sourceFilters.length > 0 || categoryFilters.length > 0) {
-        await loadFilteredFirstPage();
+      // 2) FILTER + (SEARCH optional) → mindig szűrt fetch
+      if (hasFilters) {
+        const firstPage = await fetchFilteredPage(1, sourceFilters, categoryFilters);
+        if (cancelled) return;
+
+        if (!firstPage || firstPage.length === 0) {
+          setItems([]);
+          setHasMore(false);
+          return;
+        }
+
+        setItems(firstPage);
+        setHasMore(firstPage.length === 10);
         return;
       }
 
+      // 3) NINCS FILTER → normál fetch (SEARCH optional)
       const first = await fetchPageData(1);
       if (cancelled) return;
 
@@ -147,15 +161,18 @@ export default function Page() {
     depSources,
     depCategories,
     depSearch,
-    viewMode, // ⭐ EZ HIÁNYZOTT → mostantól működik a nézetváltás
+    viewMode,
   ]);
 
-  // --- Normál lapozás ---
+  // --- Normál lapozás (nincs filter, nincs today) ---
   useEffect(() => {
     if (page === 1) return;
     let cancelled = false;
 
     (async () => {
+      const hasFilters = sourceFilters.length > 0 || categoryFilters.length > 0;
+      if (isTodayMode || hasFilters) return;
+
       const data = await fetchPageData(page);
       if (cancelled) return;
 
@@ -177,14 +194,17 @@ export default function Page() {
     return () => {
       cancelled = true;
     };
-  }, [page, depSearch]);
+  }, [page, depSearch, depSources, depCategories, isTodayMode]);
 
-  // --- Szűrt lapozás ---
+  // --- Szűrt lapozás (filter + optional search) ---
   useEffect(() => {
     if (sourcePage === 1) return;
     let cancelled = false;
 
     (async () => {
+      const hasFilters = sourceFilters.length > 0 || categoryFilters.length > 0;
+      if (!hasFilters || isTodayMode) return;
+
       const newItems = await fetchFilteredPage(sourcePage, sourceFilters, categoryFilters);
       if (cancelled) return;
 
@@ -206,7 +226,7 @@ export default function Page() {
     return () => {
       cancelled = true;
     };
-  }, [sourcePage, depSources, depCategories, depSearch]);
+  }, [sourcePage, depSources, depCategories, depSearch, isTodayMode]);
 
   // --- Infinite scroll ---
   useEffect(() => {
@@ -219,7 +239,9 @@ export default function Page() {
         if (!first.isIntersecting || !hasMore) return;
         if (isTodayMode) return;
 
-        if (sourceFilters.length > 0 || categoryFilters.length > 0) {
+        const hasFilters = sourceFilters.length > 0 || categoryFilters.length > 0;
+
+        if (hasFilters) {
           setSourcePage((prev) => prev + 1);
         } else {
           setPage((prev) => prev + 1);
