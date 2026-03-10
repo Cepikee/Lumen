@@ -6,14 +6,11 @@ import SidebarToggleFloating from "./SidebarToggleFloating";
 
 interface Props {
   children: React.ReactNode;
-  onViewModeChange: (mode: string) => void;
+  onViewModeChange: (m: "card" | "compact") => void;
   onTodayFilter: () => void;
   onReset: () => void;
   onSourceFilterChange: (sources: string[]) => void;
-
-  // 🔥 ÚJ: kategória szűrés callback
   onCategoryFilterChange: (cats: string[]) => void;
-
   activeFilterState: any;
 }
 
@@ -23,15 +20,20 @@ export default function SidebarWrapper({
   onTodayFilter,
   onReset,
   onSourceFilterChange,
-  onCategoryFilterChange,   // 🔥 ÚJ
+  onCategoryFilterChange,
   activeFilterState,
 }: Props) {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <SidebarToggleFloating onOpen={() => setOpen(prev => !prev)} isOpen={open} />
+      {/* Oldalsó lebegő toggle gomb */}
+      <SidebarToggleFloating
+        onOpen={() => setOpen((prev) => !prev)}
+        isOpen={open}
+      />
 
+      {/* Sidebar panel */}
       <Sidebar
         isOpen={open}
         onClose={() => setOpen(false)}
@@ -47,18 +49,16 @@ export default function SidebarWrapper({
           onReset();
           setOpen(false);
         }}
-        onSourceFilterChange={(s) => {
-          onSourceFilterChange(s);
+        onSourceFilterChange={(sources) => {
+          onSourceFilterChange(sources);
         }}
-
-        // 🔥 ÚJ: továbbadjuk a Sidebar komponensnek
         onCategoryFilterChange={(cats) => {
           onCategoryFilterChange(cats);
         }}
-
         activeFilterState={activeFilterState}
       />
 
+      {/* Tartalom */}
       <div>{children}</div>
     </>
   );

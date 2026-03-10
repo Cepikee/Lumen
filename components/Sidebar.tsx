@@ -21,7 +21,7 @@ interface ActiveFilterState {
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
-  onViewModeChange: (mode: string) => void;
+  onViewModeChange: (mode: "card" | "compact") => void;
   onTodayFilter: () => void;
   onReset: () => void;
   onSourceFilterChange: (sources: string[]) => void;
