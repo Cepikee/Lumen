@@ -1418,7 +1418,7 @@ html.theme-dark .header-nav {
   max-width: 90%;
 }
 
-/* --- ALAP STÍLUSOK (közös) --- */
+/* --- ALAP (közös) --- */
 .search-input {
   width: 100%;
   height: 32px;
@@ -1488,6 +1488,7 @@ html.theme-dark .header-nav {
   color: var(--article-muted);
   text-align: center;
 }
+
 
 
 /* Általános kurzor beállítás inputokhoz */
