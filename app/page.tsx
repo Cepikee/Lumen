@@ -4,18 +4,19 @@ import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import FeedList from "@/components/FeedList";
 import type { FeedItem } from "@/components/FeedItemCard";
-import { useUserStore } from "@/store/useUserStore";   // ⭐ ZUSTAND
+import { useUserStore } from "@/store/useUserStore";
 
 export default function Page() {
   const router = useRouter();
 
-  // ⭐ LayoutContext HELYETT → useUserStore
+  // ⭐ Zustand state-ek
   const viewMode = useUserStore((s) => s.viewMode);
   const isTodayMode = useUserStore((s) => s.isTodayMode);
   const sourceFilters = useUserStore((s) => s.sourceFilters);
   const categoryFilters = useUserStore((s) => s.categoryFilters);
   const searchTerm = useUserStore((s) => s.searchTerm);
 
+  // ⭐ Feed state
   const [items, setItems] = useState<FeedItem[]>([]);
   const [page, setPage] = useState(1);
   const [sourcePage, setSourcePage] = useState(1);
@@ -102,7 +103,7 @@ export default function Page() {
     setSourcePage(1);
   }
 
-  // --- FŐ USEEFFECT ---
+  // --- FŐ USEEFFECT (minden filter + viewMode változásra újratölt) ---
   useEffect(() => {
     let cancelled = false;
 
@@ -138,7 +139,13 @@ export default function Page() {
     return () => {
       cancelled = true;
     };
-  }, [isTodayMode, depSources, depCategories, depSearch]);
+  }, [
+    isTodayMode,
+    depSources,
+    depCategories,
+    depSearch,
+    viewMode, // ⭐ EZ HIÁNYZOTT → mostantól működik a nézetváltás
+  ]);
 
   // --- Normál lapozás ---
   useEffect(() => {
@@ -240,5 +247,3 @@ export default function Page() {
     </>
   );
 }
-
-/* műkődcik */
