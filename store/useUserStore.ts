@@ -11,18 +11,15 @@ interface UserState {
   theme: ThemeMode;
   loading: boolean;
 
-  // ⭐ Insights állapotok
   period: Period;
   sort: string;
 
-  // ⭐ FEED állapotok
   viewMode: "card" | "compact";
   isTodayMode: boolean;
   sourceFilters: string[];
   categoryFilters: string[];
   searchTerm: string;
 
-  // Setterek
   setUser: (u: User | null) => void;
   setTheme: (t: ThemeMode) => void;
 
@@ -43,31 +40,43 @@ export const useUserStore = create<UserState>((set) => ({
   theme: "system",
   loading: true,
 
-  // ⭐ Insights default
   period: "24h",
   sort: "Legfrissebb",
 
-  // ⭐ FEED default
   viewMode: "card",
   isTodayMode: false,
   sourceFilters: [],
   categoryFilters: [],
   searchTerm: "",
 
-  // Setterek
   setUser: (u) => set({ user: u }),
   setTheme: (t) => set({ theme: t }),
 
   setPeriod: (p) => set({ period: p }),
   setSort: (s) => set({ sort: s }),
 
-  setViewMode: (v) => set({ viewMode: v }),
+  // ⭐⭐⭐ VIEWMODE TARTÓS MENTÉSE
+  setViewMode: (v) => {
+    try {
+      localStorage.setItem("viewMode", v);
+    } catch {}
+    set({ viewMode: v });
+  },
+
   setTodayMode: (v) => set({ isTodayMode: v }),
   setSourceFilters: (arr) => set({ sourceFilters: arr }),
   setCategoryFilters: (arr) => set({ categoryFilters: arr }),
   setSearchTerm: (s) => set({ searchTerm: s }),
 
   loadUser: async () => {
+    // ⭐⭐⭐ VIEWMODE BEOLVASÁSA INDULÁSKOR
+    try {
+      const savedView = localStorage.getItem("viewMode");
+      if (savedView === "card" || savedView === "compact") {
+        set({ viewMode: savedView });
+      }
+    } catch {}
+
     try {
       const res = await fetch("/api/auth/me", {
         credentials: "include",
