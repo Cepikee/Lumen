@@ -51,26 +51,29 @@ export default function Page() {
     })) as FeedItem[];
   }
 
-  async function fetchPageData(pageNum: number) {
-    if (loading || isTodayMode || sourceFilters.length > 0 || categoryFilters.length > 0) return [];
-    setLoading(true);
-    try {
-      const res = await fetch(
-        `/api/summaries?page=${pageNum}&limit=10&q=${encodeURIComponent(searchTerm)}`,
-        { cache: "no-store" }
-      );
-      if (!res.ok) return [];
-      const raw = await res.json();
-      return raw.map((item: any) => ({
-        ...item,
-        ai_clean: Number(item.ai_clean),
-      })) as FeedItem[];
-    } catch {
-      return [];
-    } finally {
-      setLoading(false);
-    }
+ async function fetchPageData(pageNum: number) {
+  if (isTodayMode) return [];
+  if (sourceFilters.length > 0 || categoryFilters.length > 0) return [];
+
+  setLoading(true);
+  try {
+    const res = await fetch(
+      `/api/summaries?page=${pageNum}&limit=10&q=${encodeURIComponent(searchTerm)}`,
+      { cache: "no-store" }
+    );
+    if (!res.ok) return [];
+    const raw = await res.json();
+    return raw.map((item: any) => ({
+      ...item,
+      ai_clean: Number(item.ai_clean),
+    })) as FeedItem[];
+  } catch {
+    return [];
+  } finally {
+    setLoading(false);
   }
+}
+
 
   async function loadToday() {
     setLoading(true);
