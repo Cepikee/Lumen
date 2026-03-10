@@ -1418,31 +1418,55 @@ html.theme-dark .header-nav {
   max-width: 90%;
 }
 
+/* --- ALAP STÍLUSOK (közös) --- */
 .search-input {
   width: 100%;
   height: 32px;
-  background: rgba(255,255,255,0.05); /* FIX */
-  color: var(--article-text);
   padding-left: 32px;
   padding-right: 28px;
   font-size: 14px;
-  border: 1px solid rgba(255,255,255,0.25); /* FIX */
   border-radius: 6px;
   outline: none;
-  caret-color: var(--article-text); /* biztosítja, hogy a kurzor látható legyen az inputban */
+  caret-color: var(--article-text);
+  color: var(--article-text);
 }
 
-.search-input::placeholder {
-  color: var(--article-muted);
-  opacity: 0.8;
+/* --- LIGHT MODE --- */
+.theme-light .search-input {
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.25);
 }
 
+.theme-light .search-input::placeholder {
+  color: rgba(0,0,0,0.45);
+}
+
+.theme-light .search-icon,
+.theme-light .search-clear {
+  color: rgba(0,0,0,0.45);
+}
+
+/* --- DARK MODE --- */
+.theme-dark .search-input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.theme-dark .search-input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.theme-dark .search-icon,
+.theme-dark .search-clear {
+  color: rgba(255,255,255,0.5);
+}
+
+/* --- ICONS (közös pozíció) --- */
 .search-icon {
   position: absolute;
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--article-muted);
   pointer-events: none;
   font-size: 16px;
 }
@@ -1453,7 +1477,6 @@ html.theme-dark .header-nav {
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  color: var(--article-muted);
   font-size: 18px;
   user-select: none;
 }
@@ -1465,6 +1488,7 @@ html.theme-dark .header-nav {
   color: var(--article-muted);
   text-align: center;
 }
+
 
 /* Általános kurzor beállítás inputokhoz */
 input, textarea {
