@@ -256,8 +256,13 @@ export default function ASZF(): JSX.Element {
           </p>
         </section>
 
-        <footer className="aszf-footer">
-          <p>© {new Date().getFullYear()} Utom.hu</p>
+       <footer className="legal-footer">
+          <p>© {new Date().getFullYear()} Utom.hu – Minden jog fenntartva.</p>
+          <nav className="legal-footer-nav">
+            <a href="/impresszum">Impresszum</a>
+            <a href="/adatvedelem">Adatvédelmi Nyilatkozat</a>
+            <a href="/">Főoldal</a>
+          </nav>
         </footer>
       </div>
     </main>
