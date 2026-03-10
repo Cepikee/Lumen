@@ -99,13 +99,18 @@ export default function FeedItemCard({
   const badgeClass = `badge source-${sourceKey}`;
 
   return (
-    <div className={`${wrapperFont} feed-wrapper`}>
-      <Link
-        href={`/cikk/${item.id}`}
-        className="block no-underline"
-      >
+    <div
+      className={`${wrapperFont} ${
+        viewMode === "compact"
+          ? "p-2 mb-2 rounded-md text-sm"
+          : "p-4 mb-4 rounded-xl text-base"
+      }`}
+    >
+      <Link href={`/cikk/${item.id}`} className="block no-underline">
         <div
-          className={`feed-card mb-3 p-3 rounded shadow-sm theme-card border-l-4 cursor-pointer hover:shadow-lg transition-all duration-200`}
+          className={`feed-card rounded shadow-sm theme-card border-l-4 cursor-pointer hover:shadow-lg transition-all duration-200 ${
+            viewMode === "compact" ? "p-2" : "p-4"
+          }`}
           data-source-text={sourceText}
           style={{
             backgroundColor: "var(--bs-body-bg)",
@@ -145,33 +150,27 @@ export default function FeedItemCard({
               <ReactMarkdown>{item.content}</ReactMarkdown>
             </div>
 
-           
-
             {/* FOOTER */}
-          <div className="flex items-center justify-between mt-3 text-[0.95rem]">
+            <div className="flex items-center justify-between mt-3 text-[0.95rem]">
 
-            {/* Bal oldal – idő */}
-            <p
-              className="mb-0"
-              title={formatFullDate(item.created_at)}
-              style={{ color: "var(--article-muted)" }}
-            >
-              {formatRelativeTime(item.created_at)}
-            </p>
+              <p
+                className="mb-0"
+                title={formatFullDate(item.created_at)}
+                style={{ color: "var(--article-muted)" }}
+              >
+                {formatRelativeTime(item.created_at)}
+              </p>
 
-            {/* Középső CTA – kisebb, diszkrétebb */}
-            <p className="text-[0.65rem] opacity-50 tracking-wide text-sky-500 text-center flex-1 px-4 whitespace-nowrap overflow-hidden text-ellipsis">
-              Részletes elemzés megtekintéséhez kattintson a kártyára
-            </p>
+              <p className="text-[0.65rem] opacity-50 tracking-wide text-sky-500 text-center flex-1 px-4 whitespace-nowrap overflow-hidden text-ellipsis">
+                Részletes elemzés megtekintéséhez kattintson a kártyára
+              </p>
 
-            {/* Jobb oldal – kategória */}
-            {item.category && (
-              <span className="uppercase">
-                {item.category}
-              </span>
-            )}
-
-          </div>
+              {item.category && (
+                <span className="uppercase">
+                  {item.category}
+                </span>
+              )}
+            </div>
 
           </div>
         </div>
