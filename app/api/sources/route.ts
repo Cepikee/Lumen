@@ -1,39 +1,58 @@
+// app/api/sources/route.ts
 import { NextResponse } from "next/server";
-import mysql from "mysql2/promise";
+import { db } from "@/lib/db";
+import { securityCheck } from "@/lib/security";
 
 export const dynamic = "force-dynamic";
 
-// 🔥 Ugyanaz a globális pool, mint a summaries-ben
-let pool: mysql.Pool | null = null;
+// Normalizáló SQL függvény (domain → mag)
+const NORMALIZE = `
+  LOWER(
+    REPLACE(
+      REPLACE(
+        REPLACE(su.source, 'www.', ''),
+      '.hu', ''),
+    '/', '')
+  )
+`;
 
-function getPool() {
-  if (!pool) {
-    pool = mysql.createPool({
-      host: "localhost",
-      user: "root",
-      password: "jelszo",
-      database: "projekt2025",
-      waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0,
-    });
-  }
-  return pool;
-}
+const NORMALIZE_SRC = `
+  LOWER(
+    REPLACE(
+      REPLACE(
+        REPLACE(s.name, 'www.', ''),
+      '.hu', ''),
+    '/', '')
+  )
+`;
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
-    const db = getPool();
+    // Biztonsági ellenőrzés
+    const sec = securityCheck(req);
+    if (sec) return sec;
 
-    const [rows] = await db.query(`
-      SELECT id, name
-      FROM sources
-      ORDER BY name ASC
-    `);
+    // Csak létező, valós források lekérése
+    const [rows]: any = await db.query(
+      `
+      SELECT DISTINCT s.id, s.name
+      FROM sources s
+      JOIN summaries su
+        ON ${NORMALIZE} = ${NORMALIZE_SRC}
+      ORDER BY s.name ASC
+      `
+    );
 
-    return NextResponse.json(rows);
+    return NextResponse.json({
+      success: true,
+      sources: rows
+    });
+
   } catch (err) {
     console.error("API /sources error:", err);
-    return NextResponse.json({ error: "Hiba történt" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "server_error" },
+      { status: 500 }
+    );
   }
 }

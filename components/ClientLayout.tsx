@@ -123,9 +123,18 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     let mounted = true;
     (async () => {
       try {
-        const res = await fetch("/api/sources", { cache: "no-store" });
-        const data = await res.json();
-        if (mounted && Array.isArray(data)) setAvailableSources(data);
+        const res = await fetch("/api/sources", {
+  cache: "no-store",
+  headers: {
+    "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+  },
+});
+const data = await res.json();
+
+if (mounted && data?.success && Array.isArray(data.sources)) {
+  setAvailableSources(data.sources);
+}
+
       } catch {}
     })();
     return () => {
