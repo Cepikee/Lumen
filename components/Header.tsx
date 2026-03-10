@@ -24,24 +24,70 @@ export default function Header() {
 
   if (pathname.startsWith("/landing")) return null;
 
-  // ⛔ FONTOS: amíg tölt a user, ne rendereljünk menüt
-  if (loading) {
-    return (
-      <nav className="navbar navbar-expand-lg shadow-sm sticky-top header-nav">
-        <div className="container-fluid">
-          <span className="text-muted">Betöltés…</span>
-        </div>
-      </nav>
-    );
-  }
+  // -------------------------
+  // USER LOAD FIX
+  // -------------------------
+  useEffect(() => {
+    useUserStore.getState().loadUser?.();
+  }, []);
 
   // -------------------------
-  // ⭐ Prémium státusz
+  // API USER CHECK (mint az Insights oldalon)
   // -------------------------
-  const isPremium = user?.is_premium === true;
+  const [apiUser, setApiUser] = useState<any | null>(null);
+  const [apiChecked, setApiChecked] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const res = await fetch("/api/auth/me", {
+          credentials: "include",
+          cache: "no-store",
+        });
+        const text = await res.text();
+        const parsed = text ? JSON.parse(text) : null;
+        if (mounted) setApiUser(parsed);
+      } catch {
+        if (mounted) setApiUser(null);
+      } finally {
+        if (mounted) setApiChecked(true);
+      }
+    })();
+    return () => { mounted = false; };
+  }, []);
 
   // -------------------------
-  // ⭐ Menüprofilok
+  // PRÉMIUM DETEKTOR (1:1 ugyanaz, mint Insights oldalon)
+  // -------------------------
+  const isPremium = (() => {
+    const u = user;
+    if (!u) return false;
+
+    if (typeof u.is_premium === "boolean") return u.is_premium === true;
+    if (typeof (u as any).isPremium === "boolean") return (u as any).isPremium === true;
+    if (typeof u.is_premium === "number") return Number(u.is_premium) === 1;
+    if (u.premium_tier) return true;
+
+    return false;
+  })();
+
+  const apiSaysPremium = (() => {
+    const a = apiUser?.user ?? apiUser;
+    if (!a) return false;
+
+    if (a.is_premium === true) return true;
+    if (a.is_premium === 1) return true;
+    if (a.isPremium === true) return true;
+    if (a.premium_tier) return true;
+
+    return false;
+  })();
+
+  const reallyPremium = isPremium || apiSaysPremium;
+
+  // -------------------------
+  // MENÜK
   // -------------------------
   const menuLoggedOut = [
     { href: "/", label: "Főoldal" },
@@ -69,14 +115,13 @@ export default function Header() {
 
   const activeMenu = !user
     ? menuLoggedOut
-    : isPremium
+    : reallyPremium
     ? menuPremium
     : menuFree;
 
   // -------------------------
   // KERESŐ + HEADER RENDER
   // -------------------------
-
   const isDark =
     theme === "dark" ||
     (theme === "system" &&
@@ -118,7 +163,6 @@ export default function Header() {
                 className="search-input"
                 value={localSearch}
                 onChange={(e) => setLocalSearch(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && setSearchTerm(localSearch)}
                 aria-label="Keresés"
               />
               {localSearch.length > 0 && (
