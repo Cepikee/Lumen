@@ -90,27 +90,20 @@ export default function FeedItemCard({
 
   const wrapperFont = inter.className;
 
-  const baseText =
-    "text-[17px] leading-[1.6] font-medium tracking-[0.2px] text-[var(--feed-text)]";
-
-  const titleClasses =
-    "text-[1.15rem] leading-[1.3] font-semibold text-[#4da3ff] hover:text-[#77b8ff] transition-colors";
-
-  const badgeClass = `badge source-${sourceKey}`;
+  // CARD = eredeti
+  // COMPACT = fele méret
+  const isCompact = viewMode === "compact";
 
   return (
-    <div
-      className={`${wrapperFont} ${
-        viewMode === "compact"
-          ? "p-2 mb-2 rounded-md text-sm"
-          : "p-4 mb-4 rounded-xl text-base"
-      }`}
-    >
+    <div className={`${wrapperFont}`}>
       <Link href={`/cikk/${item.id}`} className="block no-underline">
         <div
-          className={`feed-card rounded shadow-sm theme-card border-l-4 cursor-pointer hover:shadow-lg transition-all duration-200 ${
-            viewMode === "compact" ? "p-2" : "p-4"
-          }`}
+          className={`
+            feed-card
+            rounded shadow-sm theme-card border-l-4 cursor-pointer
+            hover:shadow-lg transition-all duration-200
+            ${isCompact ? "p-2 mb-2 text-sm" : "p-4 mb-4 text-base"}
+          `}
           data-source-text={sourceText}
           style={{
             backgroundColor: "var(--bs-body-bg)",
@@ -120,15 +113,25 @@ export default function FeedItemCard({
           <div className="card-body relative z-10">
 
             {/* HEADER */}
-            <h5 className="card-title flex justify-between items-start m-0">
+            <h5
+              className={`
+                card-title flex justify-between items-start m-0
+                ${isCompact ? "text-[0.9rem]" : "text-[1.15rem]"}
+              `}
+            >
               <div className="flex items-center gap-3 max-w-[78%]">
-                <span className={badgeClass}>{sourceText}</span>
+                <span className={`badge source-${sourceKey} ${isCompact ? "scale-75" : ""}`}>
+                  {sourceText}
+                </span>
 
                 <a
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${titleClasses} line-clamp-2 !no-underline`}
+                  className={`
+                    line-clamp-2 !no-underline font-semibold text-[#4da3ff] hover:text-[#77b8ff]
+                    ${isCompact ? "text-[0.9rem]" : "text-[1.15rem]"}
+                  `}
                   onClick={(e) => e.stopPropagation()}
                 >
                   {item.title}
@@ -137,7 +140,7 @@ export default function FeedItemCard({
 
               {item.ai_clean === 1 && (
                 <span
-                  className={badgeClass}
+                  className={`badge source-${sourceKey} ${isCompact ? "scale-75" : ""}`}
                   title="Ez a tartalom teljes egészében AI által lett megfogalmazva."
                 >
                   AI‑fogalmazás
@@ -146,13 +149,22 @@ export default function FeedItemCard({
             </h5>
 
             {/* SUMMARY */}
-            <div className={`mt-3 ${baseText}`}>
+            <div
+              className={`
+                mt-3 text-[var(--feed-text)]
+                ${isCompact ? "text-[0.8rem] leading-[1.3]" : "text-[1rem] leading-[1.6]"}
+              `}
+            >
               <ReactMarkdown>{item.content}</ReactMarkdown>
             </div>
 
             {/* FOOTER */}
-            <div className="flex items-center justify-between mt-3 text-[0.95rem]">
-
+            <div
+              className={`
+                flex items-center justify-between mt-3
+                ${isCompact ? "text-[0.7rem]" : "text-[0.95rem]"}
+              `}
+            >
               <p
                 className="mb-0"
                 title={formatFullDate(item.created_at)}
@@ -161,12 +173,17 @@ export default function FeedItemCard({
                 {formatRelativeTime(item.created_at)}
               </p>
 
-              <p className="text-[0.65rem] opacity-50 tracking-wide text-sky-500 text-center flex-1 px-4 whitespace-nowrap overflow-hidden text-ellipsis">
+              <p
+                className={`
+                  opacity-50 tracking-wide text-sky-500 text-center flex-1 px-4 whitespace-nowrap overflow-hidden text-ellipsis
+                  ${isCompact ? "text-[0.55rem]" : "text-[0.65rem]"}
+                `}
+              >
                 Részletes elemzés megtekintéséhez kattintson a kártyára
               </p>
 
               {item.category && (
-                <span className="uppercase">
+                <span className={`uppercase ${isCompact ? "text-[0.6rem]" : ""}`}>
                   {item.category}
                 </span>
               )}
