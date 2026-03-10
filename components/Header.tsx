@@ -24,18 +24,15 @@ export default function Header() {
 
   if (pathname.startsWith("/landing")) return null;
 
-  // ⭐ JOGI OLDAL DETEKTOR
   const isLegalPage =
-    pathname === "/aszf" ||
-    pathname === "/impresszum" ||
-    pathname === "/adatvedelem";
+    pathname.startsWith("/aszf") ||
+    pathname.startsWith("/impresszum") ||
+    pathname.startsWith("/adatvedelem");
 
-  // USER LOAD FIX
   useEffect(() => {
     useUserStore.getState().loadUser?.();
   }, []);
 
-  // API USER CHECK
   const [apiUser, setApiUser] = useState<any | null>(null);
   const [apiChecked, setApiChecked] = useState(false);
 
@@ -61,45 +58,37 @@ export default function Header() {
     };
   }, []);
 
-  // PRÉMIUM DETEKTOR
   const isPremium = (() => {
     const u = user;
     if (!u) return false;
-
     if (typeof u.is_premium === "boolean") return u.is_premium === true;
     if (typeof (u as any).isPremium === "boolean") return (u as any).isPremium === true;
     if (typeof u.is_premium === "number") return Number(u.is_premium) === 1;
     if (u.premium_tier) return true;
-
     return false;
   })();
 
   const apiSaysPremium = (() => {
     const a = apiUser?.user ?? apiUser;
     if (!a) return false;
-
     if (a.is_premium === true) return true;
     if (a.is_premium === 1) return true;
     if (a.isPremium === true) return true;
     if (a.premium_tier) return true;
-
     return false;
   })();
 
   const reallyPremium = isPremium || apiSaysPremium;
 
-  // LOGO THEME LOGIKA – VÉGLEGES
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window === "undefined") return false;
     return window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
   useEffect(() => {
-    if (theme === "dark") {
-      setIsDark(true);
-    } else if (theme === "light") {
-      setIsDark(false);
-    } else if (theme === "system") {
+    if (theme === "dark") setIsDark(true);
+    else if (theme === "light") setIsDark(false);
+    else if (theme === "system") {
       if (typeof window !== "undefined") {
         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         setIsDark(prefersDark);
@@ -109,7 +98,6 @@ export default function Header() {
 
   const logoSrc = isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
 
-  // MENÜK
   const menuLoggedOut = [
     { href: "/", label: "Főoldal" },
     { href: "/aszf", label: "ÁSZF" },
@@ -137,12 +125,11 @@ export default function Header() {
 
   return (
     <nav
-      className={`navbar navbar-expand-lg shadow-sm sticky-top header-nav ${
+      className={`navbar navbar-expand-lg sticky-top header-nav ${
         isLegalPage ? "header-legal" : ""
       }`}
     >
       <div className="container-fluid d-flex align-items-center justify-content-between">
-        {/* LOGÓ */}
         <Link href="/" className="navbar-brand d-flex align-items-center">
           <Image
             src={logoSrc}
@@ -155,7 +142,6 @@ export default function Header() {
           />
         </Link>
 
-        {/* KERESŐ — csak a főoldalon */}
         {pathname === "/" && (
           <div className="search-wrapper mx-auto">
             <div
@@ -196,7 +182,6 @@ export default function Header() {
           </div>
         )}
 
-        {/* NAV + PROFIL */}
         <div className="d-flex align-items-center gap-3 ms-auto">
           <ul className="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
             {activeMenu.map((item) => (

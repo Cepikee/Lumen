@@ -2288,22 +2288,22 @@ html.theme-dark .nav-link {
 /*   HEADER FIX – JOGI OLDALAK   */
 /* ============================= */
 
-nav.header-legal {
+nav.header-legal.navbar {
   background: linear-gradient(135deg, #0f172a 0%, #111827 100%) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: none !important;
 }
 
-nav.header-legal .nav-link,
-nav.header-legal .navbar-brand {
+nav.header-legal.navbar .nav-link,
+nav.header-legal.navbar .navbar-brand {
   color: #e5e7eb !important;
 }
 
-nav.header-legal .nav-link:hover {
+nav.header-legal.navbar .nav-link:hover {
   color: #cbd5e1 !important;
 }
 
-nav.header-legal .header-logo-img {
+nav.header-legal.navbar .header-logo-img {
   filter: brightness(1.2);
 }
 
