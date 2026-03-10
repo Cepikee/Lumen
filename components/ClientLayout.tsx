@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Header from "./Header";
 import CookieConsent from "./CookieConsent";
@@ -13,7 +13,7 @@ interface ClientLayoutProps {
 
 const preventMainFocus = (e: React.MouseEvent) => {
   if (!(e.target as Element).closest("input, textarea, [contenteditable='true']")) {
-   // e.preventDefault();
+    // e.preventDefault();
   }
 };
 
@@ -34,8 +34,8 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     !isAdatvedelmi &&
     !isASZF &&
     !isImpresszum &&
-    !isInsights;
-    !isDns; // DNS oldalra ne legyen sidebar
+    !isInsights &&
+    !isDns;
 
   // THEME
   const theme = useUserStore((s) => s.theme);
@@ -45,12 +45,11 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     loadUser();
   }, [loadUser]);
 
-  // ⭐ JAVÍTOTT THEME-EFFECT → theme-dark / theme-light class kerül a <html>-re
+  // THEME HANDLING
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute("data-user-theme", "true");
 
-    // DARK MODE
     if (theme === "dark") {
       root.classList.add("theme-dark");
       root.classList.remove("theme-light");
@@ -58,7 +57,6 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       return;
     }
 
-    // LIGHT MODE
     if (theme === "light") {
       root.classList.add("theme-light");
       root.classList.remove("theme-dark");
@@ -66,7 +64,6 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       return;
     }
 
-    // SYSTEM MODE
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
 
     const applySystemTheme = () => {
@@ -89,18 +86,28 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     };
   }, [theme, pathname]);
 
-  // FILTER STATE (ezek maradhatnak, mert SidebarWrapper használja őket)
-  const [viewMode, setViewMode] = useState<"card" | "compact">("card");
-  const [isTodayMode, setIsTodayMode] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  // ⭐⭐⭐ FILTER STATE — ZUSTAND + LOKÁLIS
+  const viewMode = useUserStore((s) => s.viewMode);
+  const setViewMode = useUserStore((s) => s.setViewMode);
 
-  const [sourceFilters, setSourceFilters] = useState<string[]>([]);
+  const isTodayMode = useUserStore((s) => s.isTodayMode);
+  const setTodayMode = useUserStore((s) => s.setTodayMode);
+
+  const searchTerm = useUserStore((s) => s.searchTerm);
+  const setSearchTerm = useUserStore((s) => s.setSearchTerm);
+
+  const sourceFilters = useUserStore((s) => s.sourceFilters);
+  const setSourceFilters = useUserStore((s) => s.setSourceFilters);
+
+  const categoryFilters = useUserStore((s) => s.categoryFilters);
+  const setCategoryFilters = useUserStore((s) => s.setCategoryFilters);
+
+  // ⭐ Ezek NEM a store részei → maradnak lokális state-ben
   const [availableSources, setAvailableSources] = useState<
     { id: number; name: string }[]
   >([]);
 
-  const [categoryFilters, setCategoryFilters] = useState<string[]>([]);
-  const [availableCategories, setAvailableCategories] = useState<string[]>([
+  const [availableCategories] = useState<string[]>([
     "Egészségügy",
     "Gazdaság",
     "Közélet",
@@ -111,6 +118,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     "Tech",
   ]);
 
+  // Források betöltése
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -125,19 +133,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     };
   }, []);
 
-  const handleViewModeChange = useCallback((mode: string) => {
-    if (mode === "card" || mode === "compact") setViewMode(mode);
-  }, []);
-
-  const handleSourceFilterChange = useCallback((sources: string[]) => {
-    setSourceFilters(sources);
-  }, []);
-
-  const handleCategoryFilterChange = useCallback((cats: string[]) => {
-    setCategoryFilters(cats);
-  }, []);
-
-  // ⭐⭐⭐ LANDING OLDAL — HEADER NÉLKÜL
+  // LANDING OLDAL
   if (isLanding) {
     return (
       <main
@@ -150,7 +146,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     );
   }
 
-  // ⭐⭐⭐ PREMIUM OLDAL — HEADER IGEN, FULL WIDTH
+  // PREMIUM / STATIC OLDALAK
   if (isPremium || isAdatvedelmi || isASZF || isImpresszum || isInsights || isDns) {
     return (
       <>
@@ -172,17 +168,17 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     <>
       <Header />
 
-      {shouldShowSidebar ? (
+      {shouldShowSidebar && (
         <SidebarWrapper
-          onViewModeChange={handleViewModeChange}
-          onTodayFilter={() => setIsTodayMode(true)}
+          onViewModeChange={setViewMode}
+          onTodayFilter={() => setTodayMode(true)}
           onReset={() => {
-            setIsTodayMode(false);
+            setTodayMode(false);
             setSourceFilters([]);
             setCategoryFilters([]);
           }}
-          onSourceFilterChange={handleSourceFilterChange}
-          onCategoryFilterChange={handleCategoryFilterChange}
+          onSourceFilterChange={setSourceFilters}
+          onCategoryFilterChange={setCategoryFilters}
           activeFilterState={{
             viewMode,
             isTodayMode,
@@ -193,34 +189,21 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
             searchTerm,
             setSearchTerm,
           }}
-        >
-          <main
-            className="flex-grow-1 overflow-auto p-3"
-            tabIndex={-1}
-            onMouseDown={preventMainFocus}
-            style={{
-              maxWidth: "1280px",
-              margin: "0 auto",
-              width: "100%",
-            }}
-          >
-            {children}
-          </main>
-        </SidebarWrapper>
-      ) : (
-        <main
-          className="flex-grow-1 overflow-auto p-3"
-          tabIndex={-1}
-          onMouseDown={preventMainFocus}
-          style={{
-            maxWidth: "1280px",
-            margin: "0 auto",
-            width: "100%",
-          }}
-        >
-          {children}
-        </main>
+        />
       )}
+
+      <main
+        className="flex-grow-1 overflow-auto p-3"
+        tabIndex={-1}
+        onMouseDown={preventMainFocus}
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          width: "100%",
+        }}
+      >
+        {children}
+      </main>
 
       <CookieConsent />
     </>

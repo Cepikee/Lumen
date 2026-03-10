@@ -5,7 +5,6 @@ import Sidebar from "./Sidebar";
 import SidebarToggleFloating from "./SidebarToggleFloating";
 
 interface Props {
-  children: React.ReactNode;
   onViewModeChange: (m: "card" | "compact") => void;
   onTodayFilter: () => void;
   onReset: () => void;
@@ -14,8 +13,8 @@ interface Props {
   activeFilterState: any;
 }
 
+
 export default function SidebarWrapper({
-  children,
   onViewModeChange,
   onTodayFilter,
   onReset,
@@ -27,7 +26,7 @@ export default function SidebarWrapper({
 
   return (
     <>
-      {/* Oldalsó lebegő toggle gomb */}
+      {/* Lebegő toggle gomb */}
       <SidebarToggleFloating
         onOpen={() => setOpen((prev) => !prev)}
         isOpen={open}
@@ -37,29 +36,33 @@ export default function SidebarWrapper({
       <Sidebar
         isOpen={open}
         onClose={() => setOpen(false)}
-        onViewModeChange={(m) => {
+
+        // 🔥 Itt volt a hiba → típus hozzáadva
+        onViewModeChange={(m: "card" | "compact") => {
           onViewModeChange(m);
           setOpen(false);
         }}
+
         onTodayFilter={() => {
           onTodayFilter();
           setOpen(false);
         }}
+
         onReset={() => {
           onReset();
           setOpen(false);
         }}
+
         onSourceFilterChange={(sources) => {
           onSourceFilterChange(sources);
         }}
+
         onCategoryFilterChange={(cats) => {
           onCategoryFilterChange(cats);
         }}
+
         activeFilterState={activeFilterState}
       />
-
-      {/* Tartalom */}
-      <div>{children}</div>
     </>
   );
 }
