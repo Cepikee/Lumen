@@ -51,9 +51,48 @@ export default function Header() {
 
   const logoSrc = isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
 
+  // -------------------------
+  // ⭐ Prémium státusz (helyes, típus-kompatibilis)
+  // -------------------------
+  const isPremium = user?.is_premium === true;
+
+  // -------------------------
+  // ⭐ Menüprofilok
+  // -------------------------
+  const menuLoggedOut = [
+    { href: "/", label: "Főoldal" },
+    { href: "/aszf", label: "ÁSZF" },
+    { href: "/impresszum", label: "Impresszum" },
+    { href: "/kapcsolat", label: "Kapcsolat" },
+  ];
+
+  const menuFree = [
+    { href: "/", label: "Főoldal" },
+    { href: "/aszf", label: "ÁSZF" },
+    { href: "/impresszum", label: "Impresszum" },
+    { href: "/kapcsolat", label: "Kapcsolat" },
+  ];
+
+  const menuPremium = [
+    { href: "/", label: "Főoldal" },
+    { href: "/insights", label: "Insights" },
+    { href: "/trends", label: "Kulcsszavak" },
+    { href: "/aszf", label: "ÁSZF" },
+    { href: "/impresszum", label: "Impresszum" },
+    { href: "/adatvedelem", label: "Adatvédelem" },
+    { href: "/kapcsolat", label: "Kapcsolat" },
+  ];
+
+  const activeMenu = !user
+    ? menuLoggedOut
+    : isPremium
+    ? menuPremium
+    : menuFree;
+
   return (
     <nav className="navbar navbar-expand-lg shadow-sm sticky-top header-nav">
       <div className="container-fluid d-flex align-items-center justify-content-between">
+
         {/* LOGÓ */}
         <Link href="/" className="navbar-brand d-flex align-items-center">
           <Image
@@ -108,18 +147,13 @@ export default function Header() {
         {/* NAV + PROFIL */}
         <div className="d-flex align-items-center gap-3 ms-auto">
           <ul className="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
-            <li className="nav-item">
-              <Link href="/" className="nav-link">Főoldal</Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/trends" className="nav-link">Kulcsszavak</Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/adatvedelem" className="nav-link">Adatvédelem</Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/kapcsolat" className="nav-link">Kapcsolat</Link>
-            </li>
+            {activeMenu.map((item) => (
+              <li key={item.href} className="nav-item">
+                <Link href={item.href} className="nav-link">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
 
           <div className="d-flex align-items-center">
