@@ -24,6 +24,12 @@ export default function Header() {
 
   if (pathname.startsWith("/landing")) return null;
 
+  // ⭐ JOGI OLDAL DETEKTOR
+  const isLegalPage =
+    pathname === "/aszf" ||
+    pathname === "/impresszum" ||
+    pathname === "/adatvedelem";
+
   // USER LOAD FIX
   useEffect(() => {
     useUserStore.getState().loadUser?.();
@@ -101,7 +107,6 @@ export default function Header() {
     }
   }, [theme]);
 
-  // Dark / system+dark → fehér logó, Light / system+light → sötét logó
   const logoSrc = isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
 
   // MENÜK
@@ -112,12 +117,7 @@ export default function Header() {
     { href: "/kapcsolat", label: "Kapcsolat" },
   ];
 
-  const menuFree = [
-    { href: "/", label: "Főoldal" },
-    { href: "/aszf", label: "ÁSZF" },
-    { href: "/impresszum", label: "Impresszum" },
-    { href: "/kapcsolat", label: "Kapcsolat" },
-  ];
+  const menuFree = menuLoggedOut;
 
   const menuPremium = [
     { href: "/", label: "Főoldal" },
@@ -136,7 +136,11 @@ export default function Header() {
     : menuFree;
 
   return (
-    <nav className="navbar navbar-expand-lg shadow-sm sticky-top header-nav">
+    <nav
+      className={`navbar navbar-expand-lg shadow-sm sticky-top header-nav ${
+        isLegalPage ? "header-legal" : ""
+      }`}
+    >
       <div className="container-fluid d-flex align-items-center justify-content-between">
         {/* LOGÓ */}
         <Link href="/" className="navbar-brand d-flex align-items-center">
@@ -167,11 +171,10 @@ export default function Header() {
                 className="search-input"
                 value={localSearch}
                 onChange={(e) => {
-  const value = e.target.value;
-  setLocalSearch(value);
-  setSearchTerm(value);
-}}
-
+                  const value = e.target.value;
+                  setLocalSearch(value);
+                  setSearchTerm(value);
+                }}
                 aria-label="Keresés"
               />
               {localSearch.length > 0 && (

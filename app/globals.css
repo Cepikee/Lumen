@@ -2283,3 +2283,29 @@ html.theme-dark .nav-link {
 .wsource-card--ghost h2 { color: inherit; }
 .wsource-card--ghost button img { display: block; }
 
+
+/* ============================= */
+/*   HEADER FIX – JOGI OLDALAK   */
+/* ============================= */
+
+.header-legal {
+  background: linear-gradient(135deg, #0f172a 0%, #111827 100%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: none !important;
+}
+
+.header-legal .navbar-brand,
+.header-legal .nav-link {
+  color: #e5e7eb !important;
+}
+
+.header-legal .nav-link:hover {
+  color: #cbd5e1 !important;
+}
+
+.header-legal .header-logo-img {
+  filter: brightness(1.2);
+}
+/* ============================= */
+/*   HEADER FIX – JOGI OLDALAK   */
+/* ============================= *
