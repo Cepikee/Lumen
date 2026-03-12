@@ -38,106 +38,69 @@ export default function InsightsOverviewChart({
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const textColor = isDark ? "#ddd" : "#333";
-  const gridColor = isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.08)";
+  const gridColor = isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)";
+  const tooltipBg = isDark ? "#222" : "#fff";
 
-  const { series, dash } = useMemo(() => {
+  const { series, categories } = useMemo(() => {
+
+    const hoursSet = new Set<string>();
+
+    (data || []).forEach((cat: any) => {
+      (cat.points || []).forEach((p: any) => {
+        if (p?.date) {
+          const d = new Date(p.date);
+          hoursSet.add(d.getHours() + ":00");
+        }
+      });
+    });
+
+    const hours = Array.from(hoursSet).sort((a, b) => {
+      const ha = parseInt(a);
+      const hb = parseInt(b);
+      return ha - hb;
+    });
 
     const s: any[] = [];
-    const dashArr: number[] = [];
 
-    // HISTORY
     (data || []).forEach((cat: any) => {
 
       const label = cat?.category ?? "Ismeretlen";
       const color = getCategoryColor(label);
 
-      const points = Array.isArray(cat?.points) ? cat.points : [];
+      const map: Record<string, number> = {};
 
-      const formatted = points.map((p: any) => {
+      (cat.points || []).forEach((p: any) => {
+        const d = new Date(p.date);
+        const h = d.getHours() + ":00";
 
-        const dateVal = p?.date ? new Date(p.date) : null;
-
-        const countVal =
+        const val =
           typeof p?.count === "number"
             ? p.count
             : Number(p?.count) || 0;
 
-        // ⭐ 0 -> null (ne rajzoljon)
-        if (!dateVal || countVal === 0) {
-          return [dateVal?.getTime(), null];
-        }
-
-        return [dateVal.getTime(), countVal];
-
+        map[h] = val;
       });
+
+      const row = hours.map((h) => map[h] ?? 0);
 
       s.push({
         name: label,
-        data: formatted,
+        data: row,
         color,
       });
 
-      dashArr.push(0);
-
     });
 
-    // FORECAST
-    if (range === "24h" && forecast && typeof forecast === "object") {
+    return { series: s, categories: hours };
 
-      const VALID_CATEGORIES = Object.keys(CATEGORY_COLORS).filter(
-        (k) => k !== "_default"
-      );
-
-      Object.entries(forecast).forEach(([catName, fc]: any) => {
-
-        if (!VALID_CATEGORIES.includes(catName)) return;
-
-        const color = getCategoryColor(catName);
-        const series = Array.isArray(fc) ? fc : [];
-
-        const formatted = series.map((p: any) => {
-
-          const date = p?.date ? new Date(p.date) : null;
-
-          const pred =
-            typeof p?.predicted === "number"
-              ? p.predicted
-              : Number(p?.predicted) || 0;
-
-          if (!date || pred === 0) {
-            return [date?.getTime(), null];
-          }
-
-          return [date.getTime(), pred];
-
-        });
-
-        s.push({
-          name: `AI előrejelzés · ${catName}`,
-          data: formatted,
-          color,
-        });
-
-        dashArr.push(6);
-
-      });
-
-    }
-
-    return { series: s, dash: dashArr };
-
-  }, [data, forecast, range]);
+  }, [data]);
 
   const options: any = {
 
     chart: {
-      type: "line",
-      height,
-      toolbar: { show: true },
-      zoom: {
-        enabled: true,
-        type: "x",
-      },
+      type: "bar",
+      stacked: true,
+      toolbar: { show: false },
       foreColor: textColor,
       animations: { enabled: false },
     },
@@ -146,53 +109,26 @@ export default function InsightsOverviewChart({
       mode: isDark ? "dark" : "light",
     },
 
-    stroke: {
-      curve: "smooth",
-      width: 2.2,
-      dashArray: dash,
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: "70%",
+      },
     },
 
     grid: {
       borderColor: gridColor,
-      strokeDashArray: 3,
-    },
-
-    markers: {
-      size: 0,
-      hover: {
-        size: 6,
-        sizeOffset: 2,
-      },
     },
 
     legend: {
-      position: "top",
-      horizontalAlign: "left",
+      position: "bottom",
       labels: {
         colors: textColor,
       },
     },
 
-    tooltip: {
-      shared: true,
-      intersect: false,
-      theme: isDark ? "dark" : "light",
-      x: {
-        format: "yyyy.MM.dd HH:mm:ss",
-      },
-    },
-
     xaxis: {
-      type: "datetime",
-
-      crosshairs: {
-        show: true,
-        stroke: {
-          width: 1,
-          dashArray: 3,
-        },
-      },
-
+      categories,
       labels: {
         style: { colors: textColor },
       },
@@ -205,19 +141,21 @@ export default function InsightsOverviewChart({
       },
     },
 
-    fill: {
-      type: "gradient",
-      gradient: {
-        shadeIntensity: 0.3,
-        opacityFrom: 0.35,
-        opacityTo: 0,
-        stops: [0, 90, 100],
+    tooltip: {
+      theme: isDark ? "dark" : "light",
+      y: {
+        formatter: (val: number, opts: any) => {
+          const name = opts.seriesIndex !== undefined
+            ? opts.w.config.series[opts.seriesIndex].name
+            : "";
+          return `${name}: ${val} cikk`;
+        },
       },
     },
 
   };
 
-  const stableKey = `${range}-${theme}`;
+  const stableKey = `${theme}-${categories.length}`;
 
   return (
     <div style={{ width: "100%", height }}>
@@ -225,7 +163,7 @@ export default function InsightsOverviewChart({
         key={stableKey}
         options={options}
         series={series}
-        type="line"
+        type="bar"
         height={height}
       />
     </div>
