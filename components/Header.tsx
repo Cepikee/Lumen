@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import LoginModal from "./LoginModal";
 import ProfileMenu from "./ProfileMenu";
@@ -31,7 +31,6 @@ export default function Header() {
     pathname.startsWith("/adatvedelem");
 
   useEffect(() => {
-    // loadUser lehet perzisztens theme-et hagyjon érintetlenül
     useUserStore.getState().loadUser?.();
   }, []);
 
@@ -82,37 +81,94 @@ export default function Header() {
 
   const reallyPremium = isPremium || apiSaysPremium;
 
-  // isDark kezelése: store.theme elsődleges, system -> matchMedia
-  const [isDark, setIsDark] = useState<boolean>(() => {
-    if (typeof window === "undefined") return false;
-    // Ha a store már perzisztált theme-et tartalmaz, használjuk azt
-    const initialTheme = useUserStore.getState().theme;
-    if (initialTheme === "dark") return true;
-    if (initialTheme === "light") return false;
-    // system vagy undefined -> media query
-    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  });
+  // isDark kezelése: alapérték false, de useLayoutEffect korán beállítja a perzisztált theme alapján
+  const [isDark, setIsDark] = useState<boolean>(false);
 
+  // read persisted theme from localStorage before paint to avoid flicker (rehydration flash)
+  useLayoutEffect(() => {
+    try {
+      const raw = localStorage.getItem("utom-store");
+      let parsedTheme: string | null = null;
+      if (raw) {
+        try {
+          const parsed = JSON.parse(raw);
+          parsedTheme = parsed?.state?.theme ?? parsed?.theme ?? null;
+        } catch {
+          parsedTheme = null;
+        }
+      }
+
+      if (parsedTheme === "dark") {
+        setIsDark(true);
+        document.documentElement.classList.add("dark");
+      } else if (parsedTheme === "light") {
+        setIsDark(false);
+        document.documentElement.classList.remove("dark");
+      } else {
+        // system or no persisted theme -> use media query
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        setIsDark(!!prefersDark);
+        if (prefersDark) document.documentElement.classList.add("dark");
+        else document.documentElement.classList.remove("dark");
+      }
+
+      // sync store theme if different
+      if (parsedTheme && parsedTheme !== theme) {
+        // setTheme will also update document.documentElement.classList inside the store
+        setTheme(parsedTheme as "dark" | "light" | "system");
+      }
+    } catch {
+      // ignore errors, fallback to media query
+      try {
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        setIsDark(!!prefersDark);
+        if (prefersDark) document.documentElement.classList.add("dark");
+        else document.documentElement.classList.remove("dark");
+      } catch {}
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // run once on mount before paint
+
+  // keep reacting to store.theme changes (user toggles theme in UI)
   useEffect(() => {
     if (theme === "dark") {
       setIsDark(true);
+      try {
+        document.documentElement.classList.add("dark");
+      } catch {}
       return;
     }
     if (theme === "light") {
       setIsDark(false);
+      try {
+        document.documentElement.classList.remove("dark");
+      } catch {}
       return;
     }
-    // theme === "system"
+    // system
     if (typeof window !== "undefined") {
       const mql = window.matchMedia("(prefers-color-scheme: dark)");
-      const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
+      const handler = (e: MediaQueryListEvent) => {
+        setIsDark(e.matches);
+        try {
+          if (e.matches) document.documentElement.classList.add("dark");
+          else document.documentElement.classList.remove("dark");
+        } catch {}
+      };
       setIsDark(mql.matches);
-      mql.addEventListener?.("change", handler);
-      return () => mql.removeEventListener?.("change", handler);
+      try {
+        if (mql.addEventListener) mql.addEventListener("change", handler);
+        else mql.addListener(handler as any);
+      } catch {}
+      return () => {
+        try {
+          if (mql.removeEventListener) mql.removeEventListener("change", handler);
+          else mql.removeListener(handler as any);
+        } catch {}
+      };
     }
   }, [theme]);
 
-  // logo forrás: jogi oldalak és sötét mód esetén fehér logó
   const logoSrc = isLegalPage || isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
 
   const menuLoggedOut = [
