@@ -51,9 +51,9 @@ function aggregatePoints(points: any[], range: string) {
     const d = new Date(p.date);
 
     if (range === "24h") {
-      d.setMinutes(0, 0, 0); // órára kerekítés
+      d.setMinutes(0, 0, 0);
     } else {
-      d.setHours(0, 0, 0, 0); // napra kerekítés
+      d.setHours(0, 0, 0, 0);
     }
 
     const key = d.toISOString();
@@ -146,25 +146,32 @@ export default function InsightsOverviewChart({
         }).filter(Boolean);
 
         ds.push({
-
-          label: `AI előrejelzés · ${catName}`,
-
+          label: "AI előrejelzés",
           data: aggregated,
-
           backgroundColor: color + "66",
           borderColor: color,
           borderWidth: 1,
           borderDash: [6, 6],
           stack: "forecast",
-
           _isForecast: true,
           _aiCategory: catName,
-
           barThickness: 18,
           maxBarThickness: 22,
-
         });
 
+      });
+
+      // DUMMY AI LEGEND
+      ds.push({
+        label: "AI előrejelzés",
+        data: [],
+        backgroundColor: "#9994",
+        borderColor: "#999",
+        borderDash: [6, 6],
+        borderWidth: 2,
+        stack: "forecast",
+        _isDummyAiLegend: true,
+        _isForecast: true,
       });
 
     }
@@ -216,8 +223,55 @@ export default function InsightsOverviewChart({
 
       legend: {
         labels: {
-          color: textColor
-        }
+          color: textColor,
+          generateLabels: (chart: any) => {
+            const original =
+              ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
+
+            return original.filter((item: any) => {
+              const ds = chart.data.datasets[item.datasetIndex];
+              if (!ds) return false;
+
+              if (!ds._isForecast) return true;
+              if (ds._isDummyAiLegend) return true;
+
+              return false;
+            });
+          },
+        },
+
+        onClick: (e: any, item: any, legend: any) => {
+          const chart = legend.chart;
+          const idx = item.datasetIndex;
+          const ds = chart.data.datasets[idx];
+
+          // History → normál toggle
+          if (!ds._isForecast) {
+            const visible = chart.isDatasetVisible(idx);
+            chart.setDatasetVisibility(idx, !visible);
+            chart.update();
+            return;
+          }
+
+          // Dummy AI legend → toggle all AI datasets
+          if (ds._isDummyAiLegend) {
+            const anyVisible = chart.data.datasets.some(
+              (d: any, i: number) =>
+                d._isForecast &&
+                !d._isDummyAiLegend &&
+                chart.isDatasetVisible(i)
+            );
+
+            chart.data.datasets.forEach((d: any, i: number) => {
+              if (d._isForecast && !d._isDummyAiLegend) {
+                chart.setDatasetVisibility(i, !anyVisible);
+              }
+            });
+
+            chart.update();
+            return;
+          }
+        },
       },
 
       tooltip: {
