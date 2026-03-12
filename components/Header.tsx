@@ -136,13 +136,13 @@ export default function Header() {
       <div className="container-fluid d-flex align-items-center justify-content-between">
         <Link href="/" className="navbar-brand d-flex align-items-center">
           <Image
+            key={isDark ? "/web-app-manifest-512x512.png" : "/utom.png"}
             src={logoSrc}
             alt="Utom.hu logó"
             width={48}
             height={48}
             priority
             className="header-logo-img"
-            style={{ objectFit: "contain" }}
           />
         </Link>
 
