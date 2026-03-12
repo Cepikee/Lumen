@@ -131,6 +131,37 @@ function aggregatePoints(points: any[], range: string) {
   }));
 }
 
+/** Build sorted union of bucket keys (strings) from multiple datasets */
+function unionBucketKeys(datasets: { data: { x: Date }[] }[]) {
+  const set = new Set<string>();
+  datasets.forEach((ds) => {
+    if (!Array.isArray(ds.data)) return;
+    ds.data.forEach((pt: any) => {
+      if (pt && pt.x instanceof Date && !isNaN(pt.x.getTime())) {
+        set.add(toLocalBucketKeyFromDate(pt.x));
+      }
+    });
+  });
+  return Array.from(set).sort((a, b) => (a < b ? -1 : 1));
+}
+
+/** Ensure each dataset has an entry for every key (fill missing with y:0) */
+function fillMissingBuckets(datasets: any[], keys: string[]) {
+  return datasets.map((ds) => {
+    const map = new Map<string, number>();
+    (ds.data || []).forEach((pt: any) => {
+      if (pt && pt.x instanceof Date && !isNaN(pt.x.getTime())) {
+        map.set(toLocalBucketKeyFromDate(pt.x), pt.y ?? 0);
+      }
+    });
+    const filled = keys.map((k) => ({
+      x: parseBucketKeyToDate(k),
+      y: map.has(k) ? map.get(k) : 0,
+    }));
+    return { ...ds, data: filled };
+  });
+}
+
 export default function InsightsOverviewChart({
   data,
   forecast = {},
@@ -266,18 +297,22 @@ export default function InsightsOverviewChart({
       });
     }
 
-    return { datasets: ds };
+    // --- ALIGN BUCKETS ACROSS ALL DATASETS ---
+    const keys = unionBucketKeys(ds);
+    const aligned = fillMissingBuckets(ds, keys);
+
+    return { datasets: aligned };
   }, [data, forecast, range]);
 
   // Debug output (development only)
   if (typeof window !== "undefined") {
     // eslint-disable-next-line no-console
-    console.log("DEBUG CHART DATASETS:", datasets);
+    console.log("DEBUG CHART DATASETS (aligned):", datasets);
     datasets.forEach((d: any, i: number) => {
       // eslint-disable-next-line no-console
       console.log(
         `dataset[${i}] label=${d.label} points=`,
-        Array.isArray(d.data) ? d.data.slice(0, 8) : d.data
+        Array.isArray(d.data) ? d.data.slice(0, 12) : d.data
       );
       if (Array.isArray(d.data) && d.data.length > 0) {
         // eslint-disable-next-line no-console
