@@ -42,6 +42,20 @@ function getCategoryColor(c: string) {
   return CATEGORY_COLORS[c] ?? CATEGORY_COLORS._default;
 }
 
+/** ⭐ HELYI IDŐ → BUCKET kulcs (nem UTC!) */
+function toLocalBucketKey(d: Date) {
+  return (
+    d.getFullYear() +
+    "-" +
+    String(d.getMonth() + 1).padStart(2, "0") +
+    "-" +
+    String(d.getDate()).padStart(2, "0") +
+    " " +
+    String(d.getHours()).padStart(2, "0") +
+    ":00:00"
+  );
+}
+
 function aggregatePoints(points: any[], range: string) {
   const bucket: Record<string, number> = {};
 
@@ -56,7 +70,8 @@ function aggregatePoints(points: any[], range: string) {
       d.setHours(0, 0, 0, 0);
     }
 
-    const key = d.toISOString();
+    /** ❗ FIX: nem toISOString(), hanem helyi idő */
+    const key = toLocalBucketKey(d);
 
     const v =
       typeof p?.count === "number"
@@ -67,7 +82,7 @@ function aggregatePoints(points: any[], range: string) {
   });
 
   return Object.entries(bucket).map(([k, v]) => ({
-    x: new Date(k),
+    x: new Date(k), // helyi idő → helyes
     y: v,
   }));
 }
@@ -161,7 +176,7 @@ export default function InsightsOverviewChart({
 
       });
 
-      // DUMMY AI LEGEND
+      /** ⭐ DUMMY AI LEGEND */
       ds.push({
         label: "AI előrejelzés",
         data: [],
