@@ -1,6 +1,3 @@
-// ⭐ A LÉNYEG: időablak szűrés + zoom limit + min/max
-// (a többi változatlan marad)
-
 "use client";
 
 import {
@@ -45,6 +42,7 @@ function getCategoryColor(c: string) {
   return CATEGORY_COLORS[c] ?? CATEGORY_COLORS._default;
 }
 
+/** ⭐ HELYI IDŐ → BUCKET kulcs (nem UTC!) */
 function toLocalBucketKey(d: Date) {
   return (
     d.getFullYear() +
@@ -72,6 +70,7 @@ function aggregatePoints(points: any[], range: string) {
       d.setHours(0, 0, 0, 0);
     }
 
+    /** ❗ FIX: nem toISOString(), hanem helyi idő */
     const key = toLocalBucketKey(d);
 
     const v =
@@ -83,7 +82,7 @@ function aggregatePoints(points: any[], range: string) {
   });
 
   return Object.entries(bucket).map(([k, v]) => ({
-    x: new Date(k),
+    x: new Date(k), // helyi idő → helyes
     y: v,
   }));
 }
@@ -109,22 +108,9 @@ export default function InsightsOverviewChart({
     ? "rgba(255,255,255,0.15)"
     : "rgba(0,0,0,0.12)";
 
-  // ⭐ Dinamikus időablak
-  const now = new Date();
-
-  const startHour = new Date(now);
-  startHour.setMinutes(0, 0, 0);
-
-  const endHour = new Date(startHour);
-  endHour.setDate(endHour.getDate() + 1);
-
   const { datasets } = useMemo(() => {
 
     const ds: any[] = [];
-
-    // ⭐ Segédfüggvény: időablak szűrés
-    const filterRange = (arr: any[]) =>
-      arr.filter(p => p.x >= startHour && p.x <= endHour);
 
     // HISTORY
     (data || []).forEach((cat: any) => {
@@ -133,10 +119,7 @@ export default function InsightsOverviewChart({
       const color = getCategoryColor(label);
       const points = Array.isArray(cat?.points) ? cat.points : [];
 
-      let aggregated = aggregatePoints(points, range);
-
-      // ⭐ SZŰRÉS: csak a startHour–endHour közötti pontok maradnak
-      aggregated = filterRange(aggregated);
+      const aggregated = aggregatePoints(points, range);
 
       ds.push({
         label,
@@ -164,11 +147,13 @@ export default function InsightsOverviewChart({
         const color = getCategoryColor(catName);
         const series = Array.isArray(fc) ? fc : [];
 
-        let aggregated = series.map((p: any) => {
+        const aggregated = series.map((p: any) => {
 
           const date = p?.date 
           ? new Date(p.date.replace(" ", "T"))
           : null;
+
+
 
           const pred =
             typeof p?.predicted === "number"
@@ -179,16 +164,13 @@ export default function InsightsOverviewChart({
 
         }).filter(Boolean);
 
-        // ⭐ SZŰRÉS: forecast is csak a tartományon belül
-        aggregated = filterRange(aggregated);
-
         ds.push({
           label: "AI előrejelzés",
           data: aggregated,
           backgroundColor: color + "80",
           borderColor: color + "CC",
-          borderWidth: 2,
-          borderDash: [4, 4],
+          borderWidth: 1,
+          borderDash: [3, 3],
           stack: "forecast",
           _isForecast: true,
           _aiCategory: catName,
@@ -199,6 +181,7 @@ export default function InsightsOverviewChart({
 
       });
 
+      /** ⭐ DUMMY AI LEGEND */
       ds.push({
         label: "AI előrejelzés",
         data: [],
@@ -235,13 +218,11 @@ export default function InsightsOverviewChart({
         stacked: true,
         adapters: { date: { locale: hu } },
 
-        min: startHour,
-        max: endHour,
-
         time: {
-          unit: "hour",
+          unit: range === "24h" ? "hour" : "day",
           displayFormats: {
             hour: "HH:mm",
+            day: "yyyy.MM.dd",
           }
         },
 
@@ -260,22 +241,107 @@ export default function InsightsOverviewChart({
 
     plugins: {
 
+      legend: {
+        labels: {
+          color: textColor,
+          generateLabels: (chart: any) => {
+            const original =
+              ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
+
+            return original.filter((item: any) => {
+              const ds = chart.data.datasets[item.datasetIndex];
+              if (!ds) return false;
+
+              if (!ds._isForecast) return true;
+              if (ds._isDummyAiLegend) return true;
+
+              return false;
+            });
+          },
+        },
+
+        onClick: (e: any, item: any, legend: any) => {
+          const chart = legend.chart;
+          const idx = item.datasetIndex;
+          const ds = chart.data.datasets[idx];
+
+          // History → normál toggle
+          if (!ds._isForecast) {
+            const visible = chart.isDatasetVisible(idx);
+            chart.setDatasetVisibility(idx, !visible);
+            chart.update();
+            return;
+          }
+
+          // Dummy AI legend → toggle all AI datasets
+          if (ds._isDummyAiLegend) {
+            const anyVisible = chart.data.datasets.some(
+              (d: any, i: number) =>
+                d._isForecast &&
+                !d._isDummyAiLegend &&
+                chart.isDatasetVisible(i)
+            );
+
+            chart.data.datasets.forEach((d: any, i: number) => {
+              if (d._isForecast && !d._isDummyAiLegend) {
+                chart.setDatasetVisibility(i, !anyVisible);
+              }
+            });
+
+            chart.update();
+            return;
+          }
+        },
+      },
+
+      tooltip: {
+
+        backgroundColor: isDark ? "#222" : "#fff",
+        titleColor: isDark ? "#fff" : "#000",
+        bodyColor: isDark ? "#ddd" : "#333",
+        borderColor: isDark ? "#444" : "#ccc",
+        borderWidth: 1,
+
+        callbacks: {
+
+          title: (items: any) => {
+
+            const d = new Date(items[0].parsed.x);
+
+            return d.toLocaleString("hu-HU", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+
+          },
+
+          label: (ctx: any) => {
+
+            const ds = ctx.dataset;
+            const v = ctx.parsed.y;
+
+            if (ds._isForecast) {
+              return `AI előrejelzés · ${ds._aiCategory}: ${v}`;
+            }
+
+            return `${ds.label}: ${v}`;
+
+          },
+
+        },
+
+      },
+
       zoom: {
         zoom: {
           wheel: { enabled: true },
           pinch: { enabled: true },
           mode: "x",
-          limits: {
-            x: { min: startHour, max: endHour },
-          },
         },
-        pan: {
-          enabled: true,
-          mode: "x",
-          limits: {
-            x: { min: startHour, max: endHour },
-          },
-        },
+        pan: { enabled: true, mode: "x" },
       },
 
     },
