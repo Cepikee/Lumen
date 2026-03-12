@@ -48,7 +48,7 @@ async function summarizeShort(articleId) {
 
     // 2) Prompt
     const prompt = `
-Foglaljad össze a következő szöveget röviden, maximum 5 mondatban magyarul.
+Foglaljad össze a következő szöveget röviden, maximum 4 mondatban magyarul.
 Csak az összefoglalót írd ki, bevezető mondat nélkül.
 Ne írj olyat, hogy "Itt a lényeg", "Íme az összefoglaló", "Röviden", vagy bármilyen bevezetőt.
 Csak magyarul válaszolj:
@@ -57,12 +57,12 @@ ${contentText}
     `.trim();
 
     // 3) OpenAI hívás (aiClient.js-ből)
-    let summary = await callOpenAI(prompt, 300);
+    let summary = await callOpenAI(prompt, 190);
 
     // 4) Validálás + újrapróbálás
     if (!isValidSummary(summary)) {
       console.warn(`[SHORT] ⚠️ Érvénytelen összefoglaló, újrapróbálás OpenAI-val...`);
-      summary = await callOpenAI(prompt, 300);
+      summary = await callOpenAI(prompt, 190);
     }
 
     if (!isValidSummary(summary)) {

@@ -8,7 +8,7 @@ function isValidDetailed(text) {
   if (!text) return false;
   const t = text.trim();
 
-  if (t.length < 150) return false;
+  if (t.length < 120) return false;
 
   if (
     t.toLowerCase().includes("írj részletes") ||
@@ -82,7 +82,7 @@ async function summarizeLong(articleId, shortSummary) {
     contentText = contentText
       .replace(/\s+/g, " ")
       .trim()
-      .slice(0, 2000);
+      .slice(0, 1700);
 
     // 3) Tökéletes prompt
     const prompt = `
@@ -93,7 +93,7 @@ Cikk szövege:
 ${contentText}
 
 Feladat:
-Készíts részletes, 3–5 bekezdéses elemzést magyar nyelven, a fenti tartalom alapján.
+Készíts részletes, 2-3 bekezdéses elemzést magyar nyelven, a fenti tartalom alapján.
 
 Fontos szabályok:
 - Ne ismételd meg szó szerint a rövid összefoglalót.
@@ -106,12 +106,12 @@ Fontos szabályok:
     `.trim();
 
     // 4) OpenAI hívás (aiClient.js-ből)
-    let detailed = await callOpenAI(prompt, 900);
+    let detailed = await callOpenAI(prompt, 620);
 
     // 5) Validáció — 1 újrapróbálás
     if (!isValidDetailed(detailed)) {
       console.warn(`[LONG] ⚠️ Első elemzés érvénytelen, újrapróbálás...`);
-      detailed = await callOpenAI(prompt, 900);
+      detailed = await callOpenAI(prompt, 620);
     }
 
     // 6) Fallback
