@@ -42,6 +42,36 @@ function getCategoryColor(c: string) {
   return CATEGORY_COLORS[c] ?? CATEGORY_COLORS._default;
 }
 
+function aggregatePoints(points: any[], range: string) {
+  const bucket: Record<string, number> = {};
+
+  points.forEach((p) => {
+    if (!p?.date) return;
+
+    const d = new Date(p.date);
+
+    if (range === "24h") {
+      d.setMinutes(0, 0, 0); // órára kerekítés
+    } else {
+      d.setHours(0, 0, 0, 0); // napra kerekítés
+    }
+
+    const key = d.toISOString();
+
+    const v =
+      typeof p?.count === "number"
+        ? p.count
+        : Number(p?.count) || 0;
+
+    bucket[key] = (bucket[key] || 0) + v;
+  });
+
+  return Object.entries(bucket).map(([k, v]) => ({
+    x: new Date(k),
+    y: v,
+  }));
+}
+
 export default function InsightsOverviewChart({
   data,
   forecast = {},
@@ -74,27 +104,16 @@ export default function InsightsOverviewChart({
       const color = getCategoryColor(label);
       const points = Array.isArray(cat?.points) ? cat.points : [];
 
+      const aggregated = aggregatePoints(points, range);
+
       ds.push({
         label,
-        data: points
-          .map((p: any) => {
-
-            const dateVal = p?.date ? new Date(p.date) : null;
-
-            const countVal =
-              typeof p?.count === "number"
-                ? p.count
-                : Number(p?.count) || 0;
-
-            return dateVal ? { x: dateVal, y: countVal } : null;
-
-          })
-          .filter(Boolean),
-
+        data: aggregated,
         backgroundColor: color,
         borderWidth: 0,
         stack: "news",
-
+        barThickness: 18,
+        maxBarThickness: 22,
       });
 
     });
@@ -110,27 +129,27 @@ export default function InsightsOverviewChart({
 
         if (!VALID_CATEGORIES.includes(catName)) return;
 
-        const series = Array.isArray(fc) ? fc : [];
         const color = getCategoryColor(catName);
+        const series = Array.isArray(fc) ? fc : [];
+
+        const aggregated = series.map((p: any) => {
+
+          const date = p?.date ? new Date(p.date) : null;
+
+          const pred =
+            typeof p?.predicted === "number"
+              ? p.predicted
+              : Number(p?.predicted) || 0;
+
+          return date ? { x: date, y: pred } : null;
+
+        }).filter(Boolean);
 
         ds.push({
 
           label: `AI előrejelzés · ${catName}`,
 
-          data: series
-            .map((p: any) => {
-
-              const date = p?.date ? new Date(p.date) : null;
-
-              const pred =
-                typeof p?.predicted === "number"
-                  ? p.predicted
-                  : Number(p?.predicted) || 0;
-
-              return date ? { x: date, y: pred } : null;
-
-            })
-            .filter(Boolean),
+          data: aggregated,
 
           backgroundColor: color + "66",
           borderColor: color,
@@ -140,6 +159,9 @@ export default function InsightsOverviewChart({
 
           _isForecast: true,
           _aiCategory: catName,
+
+          barThickness: 18,
+          maxBarThickness: 22,
 
         });
 
@@ -155,6 +177,7 @@ export default function InsightsOverviewChart({
 
     responsive: true,
     maintainAspectRatio: false,
+    animation: false,
 
     interaction: {
       mode: "nearest",
@@ -164,18 +187,21 @@ export default function InsightsOverviewChart({
     scales: {
 
       x: {
-  type: "time",
-  stacked: true,
-  adapters: { date: { locale: hu } },
-  time: {
-    unit: "hour",                 
-    displayFormats: {
-      hour: "HH:mm",
-    }
-  },
-  ticks: { color: textColor },
-  grid: { color: gridColor },
-},
+        type: "time",
+        stacked: true,
+        adapters: { date: { locale: hu } },
+
+        time: {
+          unit: range === "24h" ? "hour" : "day",
+          displayFormats: {
+            hour: "HH:mm",
+            day: "yyyy.MM.dd",
+          }
+        },
+
+        ticks: { color: textColor },
+        grid: { color: gridColor },
+      },
 
       y: {
         stacked: true,
