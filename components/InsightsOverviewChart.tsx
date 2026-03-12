@@ -1,116 +1,36 @@
-// components/InsightsOverviewChart.tsx
-
 "use client";
+
+import useSWR from "swr";
+import Spinner from "react-bootstrap/Spinner";
 
 import {
   Chart as ChartJS,
-  LineElement,
-  PointElement,
+  CategoryScale,
   LinearScale,
-  TimeScale,
+  BarElement,
   Tooltip,
   Legend,
-  Filler,
 } from "chart.js";
-import zoomPlugin from "chartjs-plugin-zoom";
-import "chartjs-adapter-date-fns";
-import { hu } from "date-fns/locale";
-import { Line } from "react-chartjs-2";
-import { useMemo } from "react";
+import { Bar } from "react-chartjs-2";
 import { useUserStore } from "@/store/useUserStore";
-import { startOfHour, addHours, differenceInHours, subHours } from "date-fns";
 
-const crosshairPlugin = {
-  id: "crosshair",
-  afterDatasetsDraw(chart: any) {
-    const active = chart.tooltip?.getActiveElements?.();
-    if (!active || active.length === 0) return;
-    const ctx = chart.ctx;
-    const { x } = active[0].element;
-    const topY = chart.chartArea.top;
-    const bottomY = chart.chartArea.bottom;
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(x, topY);
-    ctx.lineTo(x, bottomY);
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = "#8884";
-    ctx.stroke();
-    ctx.restore();
-  },
-};
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
-ChartJS.register(
-  LineElement,
-  PointElement,
-  LinearScale,
-  TimeScale,
-  Tooltip,
-  Legend,
-  Filler,
-  zoomPlugin,
-  crosshairPlugin
-);
-
-const CATEGORY_COLORS: Record<string, string> = {
-  Sport: "#ef4444",
-  Politika: "#3b82f6",
-  Gazdaság: "#00ff5e",
-  Tech: "#f97316",
-  Kultúra: "#eab308",
-  Oktatás: "#a855f7",
-  Egészségügy: "#e600ee",
-  Közélet: "#578f68",
-  _default: "#6b7280",
-};
-
-function getCategoryColor(c: string) {
-  return CATEGORY_COLORS[c] ?? CATEGORY_COLORS._default;
+interface HeatmapResponse {
+  success: boolean;
+  categories: string[];
+  hours: number[];
+  matrix: Record<string, Record<number, number>>;
 }
 
-/**
- * Kitölti a pontokat egy óránkénti rácsra (start..end).
- * Hiányzó időpontokra null-t ad (gap), és explicit 0 értékeket is nullra cserél,
- * ha azt szeretnénk, hogy a 0 értékek ne jelenjenek meg.
- *
- * - points: eredeti pontok, { date, count }
- * - start, end: Date objektumok (inclusive)
- * - stepHours: rácslépés órában (alap 1)
- */
-function fillSeriesWithNulls(points: any[], start: Date, end: Date, stepHours = 1) {
-  const map = new Map<string, number>();
-  (points || []).forEach((p) => {
-    if (!p) return;
-    const d = p?.date ? new Date(p.date) : null;
-    if (!d || isNaN(d.getTime())) return;
-    const key = startOfHour(d).toISOString();
-    const val = typeof p?.count === "number" ? p.count : Number(p?.count) || 0;
-    map.set(key, val);
-  });
+const fetcher = (url: string) =>
+  fetch(url, {
+    headers: {
+      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+    },
+  }).then((r) => r.json());
 
-  const totalHours = Math.max(0, differenceInHours(end, start));
-  const out: { x: Date; y: number | null }[] = [];
-  for (let i = 0; i <= totalHours; i += stepHours) {
-    const dt = addHours(start, i);
-    const key = startOfHour(dt).toISOString();
-    if (!map.has(key)) {
-      // nincs adat -> null (gap)
-      out.push({ x: dt, y: null });
-    } else {
-      const v = map.get(key) as number;
-      // ha v === 0 és el akarjuk rejteni, akkor null; különben a tényleges érték
-      out.push({ x: dt, y: v === 0 ? null : v });
-    }
-  }
-  return out;
-}
-
-export default function InsightsOverviewChart({
-  data,
-  forecast = {},
-  height = 300,
-  range = "24h",
-}: any) {
+export default function WhatHappenedTodayHeatmap() {
   const theme = useUserStore((s) => s.theme);
   const isDark =
     theme === "dark" ||
@@ -119,246 +39,98 @@ export default function InsightsOverviewChart({
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const textColor = isDark ? "#ddd" : "#333";
-
   const gridColor = isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)";
+  const tooltipBg = isDark ? "#222" : "#fff";
+  const tooltipTitle = isDark ? "#fff" : "#000";
+  const tooltipBody = isDark ? "#ddd" : "#333";
+  const tooltipBorder = isDark ? "#444" : "#ccc";
 
-  const { datasets } = useMemo(() => {
-    const ds: any[] = [];
+  const { data, error, isLoading } = useSWR<HeatmapResponse>("/api/insights/heatmap", fetcher, {
+    refreshInterval: 60_000,
+    revalidateOnFocus: true,
+  });
 
-    // Határozzuk meg a start és end időpontot a rácshoz
-    const now = new Date();
-    let start: Date;
-    let end: Date;
+  if (isLoading) {
+    return (
+      <div className="text-center py-4">
+        <Spinner animation="border" size="sm" /> Betöltés...
+      </div>
+    );
+  }
 
-    if (range === "24h") {
-      end = startOfHour(now);
-      start = startOfHour(subHours(end, 24));
-    } else if (range === "7d") {
-      end = startOfHour(now);
-      start = startOfHour(subHours(end, 24 * 7));
-    } else {
-      // ha nincs range, próbáljuk meg a data alapján
-      const allDates: Date[] = [];
-      (data || []).forEach((cat: any) => {
-        (cat?.points || []).forEach((p: any) => {
-          if (p?.date) {
-            const d = new Date(p.date);
-            if (!isNaN(d.getTime())) allDates.push(d);
-          }
-        });
-      });
-      if (allDates.length) {
-        const minD = new Date(Math.min(...allDates.map((d) => d.getTime())));
-        const maxD = new Date(Math.max(...allDates.map((d) => d.getTime())));
-        start = startOfHour(minD);
-        end = startOfHour(maxD);
-      } else {
-        end = startOfHour(now);
-        start = startOfHour(subHours(end, 24));
-      }
+  if (error || !data || !data.success) {
+    return <div className="text-danger">Nem sikerült betölteni az adatokat.</div>;
+  }
+
+  const { categories = [], hours = [], matrix = {} } = data;
+
+  const order = ["Politika", "Gazdaság", "Közélet", "Kultúra", "Egészségügy", "Oktatás"];
+  const orderedCategories = order.filter((c) => categories.includes(c));
+
+  const colors: Record<string, string> = {
+    Politika: "#d81b60",
+    Gazdaság: "#f9a825",
+    Közélet: "#43a047",
+    Kultúra: "#00acc1",
+    Egészségügy: "#e53935",
+    Oktatás: "#3949ab",
+  };
+
+  // egyszerű, szinkron számítás (nincs useMemo)
+  const chartData = (() => {
+    if (!Array.isArray(hours) || hours.length === 0 || orderedCategories.length === 0) {
+      return { labels: [], datasets: [] };
     }
-
-    // HISTORY: minden kategória kitöltése null-okkal az óránkénti rácson (null = gap)
-    (data || []).forEach((cat: any) => {
-      const label = cat?.category ?? "Ismeretlen";
-      const color = getCategoryColor(label);
-      const points = Array.isArray(cat?.points) ? cat.points : [];
-
-      // kitöltés óránként (ha szükséges, módosítható a lépés)
-      const filled = fillSeriesWithNulls(points, start, end, 1);
-
-      ds.push({
-        label,
-        data: filled,
-        borderColor: color,
-        backgroundColor: color + "22",
-        showLine: true,
-        stepped: false,
-        cubicInterpolationMode: "monotone",
-        tension: 0.15,
-        pointRadius: 0, // 0 értékeket elrejtjük, nincs pont kirajzolva
-        pointHoverRadius: 6,
-        borderWidth: 1.2,
-        fill: false,
-        spanGaps: false, // gap-eknél ne kössük össze a vonalat
+    const datasets = orderedCategories.map((cat) => {
+      const row = hours.map((h) => {
+        const v = matrix?.[cat]?.[h];
+        return typeof v === "number" ? v : Number(v) || 0;
       });
+      return {
+        label: cat,
+        data: row,
+        backgroundColor: colors[cat] ?? "#888",
+        borderWidth: 0,
+      };
     });
+    return { labels: hours.map((h) => `${h}:00`), datasets };
+  })();
 
-    // AI FORECAST – csak 24h (forecast marad folyamatos, ha szükséges külön kitölthető)
-    if (range === "24h" && forecast && typeof forecast === "object") {
-      const VALID_CATEGORIES = Object.keys(CATEGORY_COLORS).filter((k) => k !== "_default");
-      Object.entries(forecast).forEach(([catName, fc]: any) => {
-        if (!VALID_CATEGORIES.includes(catName)) return;
-        const series = Array.isArray(fc) ? fc : [];
-        const color = getCategoryColor(catName);
-
-        const mapped = series
-          .map((p: any) => {
-            const date = p?.date ? new Date(p.date) : null;
-            const pred =
-              typeof p?.predicted === "number" ? p.predicted : Number(p?.predicted) || 0;
-            return date ? { x: date, y: pred } : null;
-          })
-          .filter(Boolean);
-
-        ds.push({
-          label: "AI előrejelzés",
-          data: mapped,
-          borderColor: color,
-          borderDash: [6, 6],
-          borderWidth: 1.2,
-          cubicInterpolationMode: "monotone",
-          tension: 0.15,
-          pointRadius: 0,
-          pointHoverRadius: 6,
-          fill: false,
-          spanGaps: true,
-          _isForecast: true,
-          _aiCategory: catName,
-        });
-      });
-
-      // dummy AI legend
-      ds.push({
-        label: "AI előrejelzés",
-        data: [],
-        borderColor: "#999",
-        borderDash: [6, 6],
-        borderWidth: 2,
-        pointRadius: 0,
-        fill: false,
-        _isDummyAiLegend: true,
-        _isForecast: true,
-      });
-    }
-
-    return { datasets: ds };
-  }, [data, forecast, range, theme]);
-
-  const options: any = {
+  const options = {
     responsive: true,
     maintainAspectRatio: false,
-    interaction: { mode: "nearest", intersect: false },
-    scales: {
-      x: {
-        type: "time",
-        adapters: { date: { locale: hu } },
-        time: { unit: "hour", displayFormats: { hour: "HH:mm" } },
-        ticks: { color: textColor },
-        grid: { color: gridColor },
-      },
-      y: {
-        beginAtZero: true,
-        min: 0, // biztosítjuk, hogy a tengely 0-tól induljon
-        suggestedMax: 5,
-        ticks: { color: textColor },
-        grid: { color: gridColor },
+    plugins: {
+      legend: { position: "bottom" as const, labels: { color: textColor } },
+      tooltip: {
+        backgroundColor: tooltipBg,
+        titleColor: tooltipTitle,
+        bodyColor: tooltipBody,
+        borderColor: tooltipBorder,
+        borderWidth: 1,
+        callbacks: { label: (ctx: any) => `${ctx.dataset.label}: ${ctx.raw} cikk` },
       },
     },
-    plugins: {
-      legend: {
-        labels: {
-          color: textColor,
-          generateLabels: (chart: any) => {
-            const original =
-              ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
-
-            return original.filter((item: any) => {
-              const ds = chart.data.datasets[item.datasetIndex];
-              if (!ds) return false;
-              const lbl = (ds.label || "").toString().toLowerCase();
-              if (lbl === "hír" || lbl === "hir" || lbl === "news") return false;
-              if (!ds._isForecast) return true;
-              if (range === "24h" && ds._isDummyAiLegend) return true;
-              return false;
-            });
-          },
-        },
-        onClick: (e: any, item: any, legend: any) => {
-          const chart = legend.chart;
-          const idx = item.datasetIndex;
-          const ds = chart.data.datasets[idx];
-
-          if (range !== "24h") {
-            const visible = chart.isDatasetVisible(idx);
-            chart.setDatasetVisibility(idx, !visible);
-            chart.update();
-            return;
-          }
-
-          if (ds._isDummyAiLegend) {
-            const anyVisible = chart.data.datasets.some(
-              (d: any, i: number) =>
-                d._isForecast &&
-                !d._isDummyAiLegend &&
-                chart.isDatasetVisible(i)
-            );
-
-            chart.data.datasets.forEach((d: any, i: number) => {
-              if (d._isForecast && !d._isDummyAiLegend) {
-                chart.setDatasetVisibility(i, !anyVisible);
-              }
-            });
-
-            chart.update();
-            return;
-          }
-
-          const visible = chart.isDatasetVisible(idx);
-          chart.setDatasetVisibility(idx, !visible);
-          chart.update();
-        },
-      },
-      tooltip: {
-        enabled: true,
-        backgroundColor: isDark ? "#222" : "#fff",
-        titleColor: isDark ? "#fff" : "#000",
-        bodyColor: isDark ? "#ddd" : "#333",
-        borderColor: isDark ? "#444" : "#ccc",
-        borderWidth: 1,
-        // csak nem-null értékeket mutatunk a tooltipben
-        filter: (tooltipItem: any) => tooltipItem.parsed?.y !== null && tooltipItem.parsed?.y !== undefined,
-        callbacks: {
-          title: (items: any) => {
-            const d = new Date(items[0].parsed.x);
-            return d.toLocaleString("hu-HU", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-              hour: "2-digit",
-              minute: "2-digit",
-              second: "2-digit",
-            });
-          },
-          label: (ctx: any) => {
-            const ds = ctx.dataset;
-            const v = ctx.parsed.y;
-            if (ds._isForecast) {
-              return `AI előrejelzés · ${ds._aiCategory}: ${v}`;
-            }
-            return `${ds.label}: ${v}`;
-          },
-        },
-      },
-      zoom: {
-        zoom: {
-          wheel: { enabled: true },
-          pinch: { enabled: true },
-          mode: "x",
-        },
-        pan: { enabled: true, mode: "x" },
-      },
-      decimation: { enabled: false },
+    scales: {
+      x: { stacked: true, ticks: { color: textColor }, grid: { color: gridColor } },
+      y: { stacked: true, beginAtZero: true, ticks: { precision: 0, color: textColor }, grid: { color: gridColor } },
     },
   };
 
+  const stableKey = `${theme}-${hours?.length ?? 0}-${categories?.length ?? 0}`;
+
+  if (!chartData || !Array.isArray(chartData.datasets)) {
+    return (
+      <div className="wht-heatmap" style={{ height: "350px" }}>
+        <h5 className="mb-3">Kategóriák aktivitása óránként</h5>
+        <div className="text-muted">Nincs megjeleníthető adat.</div>
+      </div>
+    );
+  }
+
   return (
-    <div style={{ width: "100%", height }}>
-      <Line key={range + theme} data={{ datasets }} options={options} />
+    <div className="wht-heatmap" style={{ height: "350px" }}>
+      <h5 className="mb-3">Kategóriák aktivitása óránként</h5>
+      <Bar key={stableKey} data={chartData} options={options} />
     </div>
   );
 }
-/** stabil verzió
- * - sima görbe (monotone)
- * - hiányzó időpontok kitöltése null-lal (gap), y.min = 0
- */
