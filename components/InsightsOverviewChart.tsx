@@ -44,10 +44,8 @@ function getCategoryColor(c: string) {
 
 /** Parse "YYYY-MM-DD HH:MM:SS" or "YYYY-MM-DDTHH:MM:SS" into a local Date reliably */
 function parseLocalDateString(s: string): Date | null {
-  if (!s) return null;
-  // Normalize separator
+  if (!s || typeof s !== "string") return null;
   const normalized = s.includes("T") ? s : s.replace(" ", "T");
-  // Accept both "YYYY-MM-DDTHH:MM:SS" and "YYYY-MM-DDTHH:MM"
   const m = normalized.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/);
   if (!m) return null;
   const year = Number(m[1]);
@@ -56,7 +54,6 @@ function parseLocalDateString(s: string): Date | null {
   const hour = Number(m[4]);
   const minute = Number(m[5]);
   const second = m[6] ? Number(m[6]) : 0;
-  // Create local Date from components (month is 0-based)
   return new Date(year, month - 1, day, hour, minute, second);
 }
 
@@ -76,9 +73,8 @@ function toLocalBucketKeyFromDate(d: Date) {
 
 /** Parse the bucket key back to a Date (local) */
 function parseBucketKeyToDate(k: string): Date {
-  // k is "YYYY-MM-DD HH:00:00"
   const m = k.match(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/);
-  if (!m) return new Date(k); // fallback, but shouldn't happen
+  if (!m) return new Date(k);
   const year = Number(m[1]);
   const month = Number(m[2]);
   const day = Number(m[3]);
@@ -90,7 +86,6 @@ function parseBucketKeyToDate(k: string): Date {
 
 /**
  * Aggregate points array where each item has { date: string | Date, count: number }
- * The function expects date strings in "YYYY-MM-DD HH:MM:SS" or "YYYY-MM-DDTHH:MM:SS" or Date objects.
  * Returns array of { x: Date, y: number } with local Date objects.
  */
 function aggregatePoints(points: any[], range: string) {
@@ -105,7 +100,6 @@ function aggregatePoints(points: any[], range: string) {
     } else if (typeof p.date === "string") {
       d = parseLocalDateString(p.date);
     } else {
-      // try to coerce
       d = p.date ? new Date(p.date) : null;
     }
 
@@ -129,7 +123,6 @@ function aggregatePoints(points: any[], range: string) {
     bucket[key] = (bucket[key] || 0) + v;
   });
 
-  // Ensure deterministic ordering by key
   const entries = Object.entries(bucket).sort((a, b) => (a[0] < b[0] ? -1 : 1));
 
   return entries.map(([k, v]) => ({
@@ -144,6 +137,10 @@ export default function InsightsOverviewChart({
   height = 300,
   range = "24h",
 }: any) {
+  // Defensive defaults
+  data = Array.isArray(data) ? data : [];
+  forecast = forecast && typeof forecast === "object" ? forecast : {};
+
   const theme = useUserStore((s) => s.theme);
 
   const isDark =
@@ -165,28 +162,27 @@ export default function InsightsOverviewChart({
       const color = getCategoryColor(label);
       const points = Array.isArray(cat?.points) ? cat.points : [];
 
-      // Normalize history points to { date: "YYYY-MM-DD HH:MM:SS", count }
-      const normalizedHistory = points.map((p: any) => {
-        // p.date may be Date or string; convert to local bucket-compatible string
-        let d: Date | null = null;
-        if (p?.date instanceof Date) d = new Date(p.date.getTime());
-        else if (typeof p?.date === "string") d = parseLocalDateString(p.date);
-        if (!d || isNaN(d.getTime())) return null;
-        // keep full minutes/seconds if present; aggregatePoints will round to hour/day
-        const year = d.getFullYear();
-        const month = String(d.getMonth() + 1).padStart(2, "0");
-        const day = String(d.getDate()).padStart(2, "0");
-        const hour = String(d.getHours()).padStart(2, "0");
-        const minute = String(d.getMinutes()).padStart(2, "0");
-        const second = String(d.getSeconds()).padStart(2, "0");
-        return {
-          date: `${year}-${month}-${day} ${hour}:${minute}:${second}`,
-          count:
-            typeof p.count === "number"
-              ? p.count
-              : Number(p.count ?? p.y) || 0,
-        };
-      }).filter(Boolean);
+      const normalizedHistory = points
+        .map((p: any) => {
+          let d: Date | null = null;
+          if (p?.date instanceof Date) d = new Date(p.date.getTime());
+          else if (typeof p?.date === "string") d = parseLocalDateString(p.date);
+          if (!d || isNaN(d.getTime())) return null;
+          const year = d.getFullYear();
+          const month = String(d.getMonth() + 1).padStart(2, "0");
+          const day = String(d.getDate()).padStart(2, "0");
+          const hour = String(d.getHours()).padStart(2, "0");
+          const minute = String(d.getMinutes()).padStart(2, "0");
+          const second = String(d.getSeconds()).padStart(2, "0");
+          return {
+            date: `${year}-${month}-${day} ${hour}:${minute}:${second}`,
+            count:
+              typeof p.count === "number"
+                ? p.count
+                : Number(p.count ?? p.y) || 0,
+          };
+        })
+        .filter(Boolean);
 
       const aggregated = aggregatePoints(normalizedHistory, range);
 
@@ -213,13 +209,15 @@ export default function InsightsOverviewChart({
         const color = getCategoryColor(catName);
         const series = Array.isArray(fc) ? fc : [];
 
-        // Normalize forecast series to same shape as history and aggregate
         const normalizedForecast = series
           .map((p: any) => {
             if (!p) return null;
-            // p.date expected like "2026-03-12 12:00:00" from DB
-            // parse reliably and produce same string format
-            const parsed = typeof p.date === "string" ? parseLocalDateString(p.date) : p.date instanceof Date ? new Date(p.date.getTime()) : null;
+            const parsed =
+              typeof p.date === "string"
+                ? parseLocalDateString(p.date)
+                : p.date instanceof Date
+                ? new Date(p.date.getTime())
+                : null;
             if (!parsed || isNaN(parsed.getTime())) return null;
             const year = parsed.getFullYear();
             const month = String(parsed.getMonth() + 1).padStart(2, "0");
@@ -270,6 +268,30 @@ export default function InsightsOverviewChart({
 
     return { datasets: ds };
   }, [data, forecast, range]);
+
+  // Debug output (development only)
+  if (typeof window !== "undefined") {
+    // eslint-disable-next-line no-console
+    console.log("DEBUG CHART DATASETS:", datasets);
+    datasets.forEach((d: any, i: number) => {
+      // eslint-disable-next-line no-console
+      console.log(
+        `dataset[${i}] label=${d.label} points=`,
+        Array.isArray(d.data) ? d.data.slice(0, 8) : d.data
+      );
+      if (Array.isArray(d.data) && d.data.length > 0) {
+        // eslint-disable-next-line no-console
+        console.log(
+          `  first x type:`,
+          typeof d.data[0].x,
+          "isDate:",
+          d.data[0].x instanceof Date,
+          "value:",
+          d.data[0].x
+        );
+      }
+    });
+  }
 
   const options: any = {
     responsive: true,
@@ -322,7 +344,6 @@ export default function InsightsOverviewChart({
           const idx = item.datasetIndex;
           const ds = chart.data.datasets[idx];
 
-          // History → normal toggle
           if (!ds._isForecast) {
             const visible = chart.isDatasetVisible(idx);
             chart.setDatasetVisibility(idx, !visible);
@@ -330,7 +351,6 @@ export default function InsightsOverviewChart({
             return;
           }
 
-          // Dummy AI legend → toggle all AI datasets
           if (ds._isDummyAiLegend) {
             const anyVisible = chart.data.datasets.some(
               (d: any, i: number) =>
@@ -386,8 +406,31 @@ export default function InsightsOverviewChart({
     },
   };
 
+  // Guard render: ensure datasets exist and at least one dataset has points
+  const hasDatasets = Array.isArray(datasets) && datasets.length > 0;
+  const anyPoints =
+    hasDatasets && datasets.some((d: any) => Array.isArray(d.data) && d.data.length > 0);
+
+  if (!hasDatasets || !anyPoints) {
+    return (
+      <div
+        style={{
+          width: "100%",
+          height,
+          minHeight: 200,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: textColor,
+        }}
+      >
+        Nincs megjeleníthető adat
+      </div>
+    );
+  }
+
   return (
-    <div style={{ width: "100%", height }}>
+    <div style={{ width: "100%", height, minHeight: 200 }}>
       <Bar key={range + theme} data={{ datasets }} options={options} />
     </div>
   );
