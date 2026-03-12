@@ -69,12 +69,15 @@ function getCategoryColor(c: string) {
 }
 
 /**
- * Kitölti a pontokat egy óránkénti rácsra (start..end), hiányzó időpontokra 0-t ad.
+ * Kitölti a pontokat egy óránkénti rácsra (start..end).
+ * Hiányzó időpontokra null-t ad (gap), és explicit 0 értékeket is nullra cserél,
+ * ha azt szeretnénk, hogy a 0 értékek ne jelenjenek meg.
+ *
  * - points: eredeti pontok, { date, count }
  * - start, end: Date objektumok (inclusive)
  * - stepHours: rácslépés órában (alap 1)
  */
-function fillSeriesWithZeros(points: any[], start: Date, end: Date, stepHours = 1) {
+function fillSeriesWithNulls(points: any[], start: Date, end: Date, stepHours = 1) {
   const map = new Map<string, number>();
   (points || []).forEach((p) => {
     if (!p) return;
@@ -86,12 +89,18 @@ function fillSeriesWithZeros(points: any[], start: Date, end: Date, stepHours = 
   });
 
   const totalHours = Math.max(0, differenceInHours(end, start));
-  const out: { x: Date; y: number }[] = [];
+  const out: { x: Date; y: number | null }[] = [];
   for (let i = 0; i <= totalHours; i += stepHours) {
     const dt = addHours(start, i);
     const key = startOfHour(dt).toISOString();
-    const y = map.has(key) ? (map.get(key) as number) : 0;
-    out.push({ x: dt, y });
+    if (!map.has(key)) {
+      // nincs adat -> null (gap)
+      out.push({ x: dt, y: null });
+    } else {
+      const v = map.get(key) as number;
+      // ha v === 0 és el akarjuk rejteni, akkor null; különben a tényleges érték
+      out.push({ x: dt, y: v === 0 ? null : v });
+    }
   }
   return out;
 }
@@ -139,7 +148,6 @@ export default function InsightsOverviewChart({
         });
       });
       if (allDates.length) {
-        // egyszerű: start = min hour, end = max hour
         const minD = new Date(Math.min(...allDates.map((d) => d.getTime())));
         const maxD = new Date(Math.max(...allDates.map((d) => d.getTime())));
         start = startOfHour(minD);
@@ -150,14 +158,14 @@ export default function InsightsOverviewChart({
       }
     }
 
-    // HISTORY: minden kategória kitöltése 0-okkal az óránkénti rácson
+    // HISTORY: minden kategória kitöltése null-okkal az óránkénti rácson (null = gap)
     (data || []).forEach((cat: any) => {
       const label = cat?.category ?? "Ismeretlen";
       const color = getCategoryColor(label);
       const points = Array.isArray(cat?.points) ? cat.points : [];
 
       // kitöltés óránként (ha szükséges, módosítható a lépés)
-      const filled = fillSeriesWithZeros(points, start, end, 1);
+      const filled = fillSeriesWithNulls(points, start, end, 1);
 
       ds.push({
         label,
@@ -168,19 +176,15 @@ export default function InsightsOverviewChart({
         stepped: false,
         cubicInterpolationMode: "monotone",
         tension: 0.15,
-        // scriptable pointRadius: 0, de 0 értéknél kisebb pont jelenik meg
-        pointRadius: (ctx: any) => {
-          const y = ctx.parsed?.y;
-          return y === 0 ? 3 : 0;
-        },
+        pointRadius: 0, // 0 értékeket elrejtjük, nincs pont kirajzolva
         pointHoverRadius: 6,
         borderWidth: 1.2,
         fill: false,
-        spanGaps: false,
+        spanGaps: false, // gap-eknél ne kössük össze a vonalat
       });
     });
 
-    // AI FORECAST – csak 24h (ha kell, itt is kitölthető, de általában folyamatos)
+    // AI FORECAST – csak 24h (forecast marad folyamatos, ha szükséges külön kitölthető)
     if (range === "24h" && forecast && typeof forecast === "object") {
       const VALID_CATEGORIES = Object.keys(CATEGORY_COLORS).filter((k) => k !== "_default");
       Object.entries(forecast).forEach(([catName, fc]: any) => {
@@ -188,7 +192,6 @@ export default function InsightsOverviewChart({
         const series = Array.isArray(fc) ? fc : [];
         const color = getCategoryColor(catName);
 
-        // forecast esetén feltételezzük, hogy a predikció folyamatos; ha nem, lehet kitölteni is
         const mapped = series
           .map((p: any) => {
             const date = p?.date ? new Date(p.date) : null;
@@ -313,6 +316,8 @@ export default function InsightsOverviewChart({
         bodyColor: isDark ? "#ddd" : "#333",
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
+        // csak nem-null értékeket mutatunk a tooltipben
+        filter: (tooltipItem: any) => tooltipItem.parsed?.y !== null && tooltipItem.parsed?.y !== undefined,
         callbacks: {
           title: (items: any) => {
             const d = new Date(items[0].parsed.x);
@@ -355,5 +360,5 @@ export default function InsightsOverviewChart({
 }
 /** stabil verzió
  * - sima görbe (monotone)
- * - hiányzó időpontok kitöltése 0-val, y.min = 0
+ * - hiányzó időpontok kitöltése null-lal (gap), y.min = 0
  */
