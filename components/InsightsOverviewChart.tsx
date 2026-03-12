@@ -24,7 +24,6 @@ function getCategoryColor(c: string) {
 
 export default function InsightsOverviewChart({
   data,
-  forecast = {},
   height = 320,
   range = "24h",
 }: any) {
@@ -39,26 +38,44 @@ export default function InsightsOverviewChart({
 
   const textColor = isDark ? "#ddd" : "#333";
   const gridColor = isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)";
-  const tooltipBg = isDark ? "#222" : "#fff";
 
   const { series, categories } = useMemo(() => {
 
-    const hoursSet = new Set<string>();
+    let buckets: string[] = [];
 
-    (data || []).forEach((cat: any) => {
-      (cat.points || []).forEach((p: any) => {
-        if (p?.date) {
-          const d = new Date(p.date);
-          hoursSet.add(d.getHours() + ":00");
+    const now = new Date();
+
+    // ===== TIME BUCKET GENERATION =====
+
+    if (range === "24h") {
+
+      for (let h = 0; h < 24; h++) {
+        for (let m = 0; m < 60; m++) {
+          buckets.push(
+            `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`
+          );
         }
-      });
-    });
+      }
 
-    const hours = Array.from(hoursSet).sort((a, b) => {
-      const ha = parseInt(a);
-      const hb = parseInt(b);
-      return ha - hb;
-    });
+    } else if (range === "7d") {
+
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(now);
+        d.setDate(now.getDate() - i);
+        buckets.push(d.toLocaleDateString("hu-HU"));
+      }
+
+    } else {
+
+      const days = range === "30d" ? 30 : 90;
+
+      for (let i = days - 1; i >= 0; i--) {
+        const d = new Date(now);
+        d.setDate(now.getDate() - i);
+        buckets.push(d.toLocaleDateString("hu-HU"));
+      }
+
+    }
 
     const s: any[] = [];
 
@@ -70,18 +87,27 @@ export default function InsightsOverviewChart({
       const map: Record<string, number> = {};
 
       (cat.points || []).forEach((p: any) => {
+
         const d = new Date(p.date);
-        const h = d.getHours() + ":00";
+
+        let key = "";
+
+        if (range === "24h") {
+          key = `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+        } else {
+          key = d.toLocaleDateString("hu-HU");
+        }
 
         const val =
           typeof p?.count === "number"
             ? p.count
             : Number(p?.count) || 0;
 
-        map[h] = val;
+        map[key] = (map[key] ?? 0) + val;
+
       });
 
-      const row = hours.map((h) => map[h] ?? 0);
+      const row = buckets.map((b) => map[b] ?? 0);
 
       s.push({
         name: label,
@@ -91,9 +117,9 @@ export default function InsightsOverviewChart({
 
     });
 
-    return { series: s, categories: hours };
+    return { series: s, categories: buckets };
 
-  }, [data]);
+  }, [data, range]);
 
   const options: any = {
 
@@ -101,8 +127,8 @@ export default function InsightsOverviewChart({
       type: "bar",
       stacked: true,
       toolbar: { show: false },
-      foreColor: textColor,
       animations: { enabled: false },
+      foreColor: textColor,
     },
 
     theme: {
@@ -112,7 +138,7 @@ export default function InsightsOverviewChart({
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: "70%",
+        columnWidth: "80%",
       },
     },
 
@@ -131,31 +157,26 @@ export default function InsightsOverviewChart({
       categories,
       labels: {
         style: { colors: textColor },
+        show: range !== "24h", // 24h-nál túl sok lenne
       },
     },
 
     yaxis: {
-      min: 0,
       labels: {
-        style: { colors: textColor },
+        show: false, // ⭐ számok eltüntetve
       },
     },
 
     tooltip: {
-      theme: isDark ? "dark" : "light",
       y: {
-        formatter: (val: number, opts: any) => {
-          const name = opts.seriesIndex !== undefined
-            ? opts.w.config.series[opts.seriesIndex].name
-            : "";
-          return `${name}: ${val} cikk`;
-        },
+        formatter: (val: number, opts: any) =>
+          `${opts.w.config.series[opts.seriesIndex].name}: ${val} cikk`,
       },
     },
 
   };
 
-  const stableKey = `${theme}-${categories.length}`;
+  const stableKey = `${theme}-${range}-${categories.length}`;
 
   return (
     <div style={{ width: "100%", height }}>
