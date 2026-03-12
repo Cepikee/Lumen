@@ -169,7 +169,7 @@ export default function InsightsOverviewChart({
           data: aggregated,
           backgroundColor: color + "80",
           borderColor: color + "CC",
-          borderWidth: 1,
+          borderWidth: 2,
           borderDash: [4, 4],
           stack: "forecast",
           _isForecast: true,
