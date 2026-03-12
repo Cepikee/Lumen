@@ -225,6 +225,7 @@ export default function InsightsOverviewChart({
         stack: "news",
         barThickness: 18,
         maxBarThickness: 22,
+        order: 1, // history drawn first
       });
     });
 
@@ -268,18 +269,22 @@ export default function InsightsOverviewChart({
 
         const aggregated = aggregatePoints(normalizedForecast, range);
 
+        // Ensure aiCategory is always set (fallback to 'ismeretlen')
+        const aiCat = catName || "ismeretlen";
+
         ds.push({
           label: "AI előrejelzés",
           data: aggregated,
-          backgroundColor: color + "66",
+          backgroundColor: color + "AA", // less transparent so it's visible
           borderColor: color,
           borderWidth: 1,
           borderDash: [6, 6],
           stack: "forecast",
           _isForecast: true,
-          _aiCategory: catName,
+          _aiCategory: aiCat,
           barThickness: 18,
           maxBarThickness: 22,
+          order: 2, // draw after history so it's visible on top
         });
       });
 
@@ -294,6 +299,7 @@ export default function InsightsOverviewChart({
         stack: "forecast",
         _isDummyAiLegend: true,
         _isForecast: true,
+        order: 2,
       });
     }
 
@@ -311,7 +317,7 @@ export default function InsightsOverviewChart({
     datasets.forEach((d: any, i: number) => {
       // eslint-disable-next-line no-console
       console.log(
-        `dataset[${i}] label=${d.label} points=`,
+        `dataset[${i}] label=${d.label} _isForecast=${!!d._isForecast} _aiCategory=${d._aiCategory} points=`,
         Array.isArray(d.data) ? d.data.slice(0, 12) : d.data
       );
       if (Array.isArray(d.data) && d.data.length > 0) {
@@ -322,8 +328,18 @@ export default function InsightsOverviewChart({
           "isDate:",
           d.data[0].x instanceof Date,
           "value:",
-          d.data[0].x
+          d.data[0].x,
+          "first y:",
+          d.data[0].y
         );
+      }
+    });
+
+    // Extra: log forecast y-values specifically
+    datasets.forEach((d: any, i: number) => {
+      if (d._isForecast) {
+        // eslint-disable-next-line no-console
+        console.log(`FORECAST dataset[${i}] _aiCategory=${d._aiCategory} y-values:`, d.data.map((p: any) => p.y));
       }
     });
   }
@@ -424,7 +440,8 @@ export default function InsightsOverviewChart({
             const ds = ctx.dataset;
             const v = ctx.parsed.y;
             if (ds._isForecast) {
-              return `AI előrejelzés · ${ds._aiCategory}: ${v}`;
+              const cat = ds._aiCategory ?? "ismeretlen";
+              return `AI előrejelzés · ${cat}: ${v}`;
             }
             return `${ds.label}: ${v}`;
           },
