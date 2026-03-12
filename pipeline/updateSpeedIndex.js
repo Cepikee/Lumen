@@ -62,7 +62,13 @@ async function updateSpeedIndex() {
     const EXCLUDE_SOURCES = new Set(["portfolio.hu", "portfolio"]); // opcionális kizárás
 
     // 1) Lekérjük az összes clustert
-    const [clusters] = await conn.execute("SELECT id FROM clusters");
+    const [clusters] = await conn.execute(`
+        SELECT id 
+        FROM clusters
+        WHERE DATE(first_published_at) = CURDATE()
+      `);
+
+
 
     // Forrásonként gyűjtjük a késéseket (percben)
     const delaysBySource = {};
