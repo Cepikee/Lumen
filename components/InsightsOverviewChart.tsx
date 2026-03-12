@@ -149,7 +149,11 @@ export default function InsightsOverviewChart({
 
         const aggregated = series.map((p: any) => {
 
-          const date = p?.date ? new Date(p.date) : null;
+          const date = p?.date 
+          ? new Date(p.date.replace(" ", "T"))
+          : null;
+
+
 
           const pred =
             typeof p?.predicted === "number"
