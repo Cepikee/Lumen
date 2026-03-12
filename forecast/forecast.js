@@ -1,3 +1,5 @@
+// forecast.js
+
 require("dotenv").config();
 
 const mysql = require("mysql2/promise");
@@ -122,6 +124,25 @@ async function callOllama(prompt) {
   }
 }
 
+// Helyi időből MySQL DATETIME (YYYY-MM-DD HH:MM:SS) – NEM UTC!
+function toMysqlLocalDatetime(date) {
+  const pad = (n) => (n < 10 ? "0" + n : String(n));
+
+  return (
+    date.getFullYear() +
+    "-" +
+    pad(date.getMonth() + 1) +
+    "-" +
+    pad(date.getDate()) +
+    " " +
+    pad(date.getHours()) +
+    ":" +
+    pad(date.getMinutes()) +
+    ":" +
+    pad(date.getSeconds())
+  );
+}
+
 async function runForecastPipeline() {
   try {
     console.log("🔍 Órás adatok lekérése...");
@@ -129,11 +150,13 @@ async function runForecastPipeline() {
 
     const nowLocal = new Date();
 
-    // következő egész óra
+    // következő egész óra (HELYI IDŐ szerint)
     const startHour = new Date(nowLocal);
-    startHour.setMinutes(0, 0, 0);
-    startHour.setHours(startHour.getHours() + 1);
-    const startHourIso = startHour.toISOString().slice(0, 19).replace("T", " ");
+    startHour.setMinutes(0, 0, 0); // percek, másodpercek, milliszekundumok lenullázása
+    startHour.setHours(startHour.getHours() + 1); // következő óra
+
+    // HELYI idő → MySQL DATETIME string (nem toISOString, nem UTC)
+    const startHourIso = toMysqlLocalDatetime(startHour);
 
     const futureHours = 6;
 

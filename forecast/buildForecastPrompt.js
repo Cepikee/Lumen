@@ -38,14 +38,22 @@ SZABÁLYOK, AMIKET KÖTELEZŐ BETARTANI:
 - ha stagnálás látszik, maradj stagnálásnál
 - ha enyhe növekedés látszik, csak enyhe növekedést jósolj
 
-5) KIMENET
-- csak JSON-t adj vissza
-- formátum:
+5) KIMENET — NAGYON FONTOS
+Return ONLY valid JSON.
+
+Format:
+
 [
-  { "date": "YYYY-MM-DD HH:00:00", "predicted": szám }
+  { "date": "YYYY-MM-DD HH:00:00", "predicted": number }
 ]
-- pontosan ${futureHours} elem legyen
-- ne írj magyarázatot, kommentet vagy szöveget
+
+Rules:
+- exactly one point per hour
+- start at ${startHourIso}
+- generate ${futureHours} hours
+- do not include explanations
+- do not include comments
+- do not include text before or after the JSON
 `;
 }
 
