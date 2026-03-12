@@ -3,14 +3,6 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
 
-// ⭐ Biztonságos dátum normalizáló
-function normalizeDate(d: any): string | null {
-  if (!d) return null;
-  if (d instanceof Date) return d.toISOString().slice(0, 10);
-  const parsed = new Date(d);
-  return isNaN(parsed.getTime()) ? null : parsed.toISOString().slice(0, 10);
-}
-
 export async function GET(req: Request) {
   const sec = securityCheck(req);
   if (sec) return sec;
@@ -29,7 +21,8 @@ export async function GET(req: Request) {
       if (!result[cat]) result[cat] = [];
 
       result[cat].push({
-        date: normalizeDate(r.date),   // ⭐ mindig string lesz, nem Date
+        // ⭐ DÁTUMOT NYERSEN ADJUK VISSZA, NINCS toISOString, NINCS slice
+        date: r.date,
         predicted: r.predicted,
       });
     }
