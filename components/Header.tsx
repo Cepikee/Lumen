@@ -136,7 +136,7 @@ export default function Header() {
       <div className="container-fluid d-flex align-items-center justify-content-between">
         <Link href="/" className="navbar-brand d-flex align-items-center">
           <Image
-            key={isDark ? "/web-app-manifest-512x512.png" : "/utom.png"}
+            key={isDark ? "dark" : "light"}   // <-- FIX: React újrarendereli a logót
             src={logoSrc}
             alt="Utom.hu logó"
             width={48}
