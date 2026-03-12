@@ -164,19 +164,18 @@ export default function InsightsOverviewChart({
     scales: {
 
       x: {
-        type: "time",
-        stacked: true,
-        adapters: { date: { locale: hu } },
-        time: {
-          unit: range === "24h" ? "minute" : "hour",
-          displayFormats: {
-            minute: "HH:mm",
-            hour: "HH:mm"
-          }
-        },
-        ticks: { color: textColor },
-        grid: { color: gridColor },
-      },
+  type: "time",
+  stacked: true,
+  adapters: { date: { locale: hu } },
+  time: {
+    unit: "hour",                 
+    displayFormats: {
+      hour: "HH:mm",
+    }
+  },
+  ticks: { color: textColor },
+  grid: { color: gridColor },
+},
 
       y: {
         stacked: true,
