@@ -8,20 +8,24 @@ async function getTimeseries(hoursBack = 168) {
     database: "projekt2025",
   });
 
+  // FIX: csak ezek a kategóriák léteznek a rendszerben
+  const VALID_CATEGORIES = [
+    "Sport",
+    "Politika",
+    "Gazdaság",
+    "Tech",
+    "Kultúra",
+    "Oktatás",
+    "Egészségügy",
+    "Közélet"
+  ];
+
   const start = new Date(Date.now() - hoursBack * 3600 * 1000);
   const startStr = start.toISOString().slice(0, 19).replace("T", " ");
 
-  const [cats] = await conn.execute(`
-    SELECT DISTINCT TRIM(category) AS category
-    FROM articles
-    WHERE category IS NOT NULL AND category <> ''
-  `);
-
-  const categories = cats.map(c => c.category);
-
   const result = {};
 
-  for (const cat of categories) {
+  for (const cat of VALID_CATEGORIES) {
     const [rows] = await conn.execute(
       `
       SELECT 
