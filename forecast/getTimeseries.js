@@ -49,7 +49,16 @@ async function getTimeseries(hoursBack = 168) {
     const points = [];
 
     for (let i = 0; i < hoursBack; i++) {
-      const key = cursor.toISOString().slice(0, 19).replace("T", " ");
+      const key =
+  cursor.getFullYear() +
+  "-" +
+  String(cursor.getMonth() + 1).padStart(2, "0") +
+  "-" +
+  String(cursor.getDate()).padStart(2, "0") +
+  " " +
+  String(cursor.getHours()).padStart(2, "0") +
+  ":00:00";
+
       points.push({
         date: key,
         count: map.get(key) ?? 0,

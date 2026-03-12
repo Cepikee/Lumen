@@ -152,10 +152,9 @@ async function runForecastPipeline() {
 
     // következő egész óra (HELYI IDŐ szerint)
     const startHour = new Date(nowLocal);
-    startHour.setMinutes(0, 0, 0); // percek, másodpercek, milliszekundumok lenullázása
-    startHour.setHours(startHour.getHours() + 1); // következő óra
+    startHour.setMinutes(0, 0, 0);
+    startHour.setHours(startHour.getHours() + 1);
 
-    // HELYI idő → MySQL DATETIME string (nem toISOString, nem UTC)
     const startHourIso = toMysqlLocalDatetime(startHour);
 
     const futureHours = 6;
@@ -192,6 +191,23 @@ async function runForecastPipeline() {
         continue;
       }
 
+      // ⭐ ISO → CET normalizálás
+      forecast = forecast.map(f => {
+        if (typeof f.date === "string" && f.date.includes("T")) {
+          const d = new Date(f.date); // UTC-nek veszi
+          f.date =
+            d.getFullYear() +
+            "-" +
+            String(d.getMonth() + 1).padStart(2, "0") +
+            "-" +
+            String(d.getDate()).padStart(2, "0") +
+            " " +
+            String(d.getHours()).padStart(2, "0") +
+            ":00:00";
+        }
+        return f;
+      });
+
       if (!Array.isArray(forecast) || forecast.length === 0) {
         console.error("❌ ÜRES / HIBÁS FORECAST ARRAY, KIHAGYVA:", category);
         continue;
@@ -216,10 +232,7 @@ async function runForecastPipeline() {
 function calculateNextRun(finishedAt) {
   const nextRun = new Date(finishedAt);
 
-  // +6 óra előrejelzés
   nextRun.setHours(nextRun.getHours() + 6);
-
-  // -15 perc indulás előtt
   nextRun.setMinutes(nextRun.getMinutes() - 15);
 
   return nextRun;
@@ -232,20 +245,13 @@ async function mainLoop() {
     console.log("🚀 Forecast ciklus indul...");
     console.log("==============================");
 
-    // 0. jelzés: forecast éppen fut
     await markForecastRunning();
-
-    // 1. régi adatok törlése
     await deleteOldForecasts();
-
-    // 2–3. forecast futtatása + mentés
     await runForecastPipeline();
 
-    // 4. mentjük, mikor végeztünk
     const finishedAt = new Date();
     await saveLastForecastTime(finishedAt);
 
-    // 5. következő futás kiszámítása
     const nextRun = calculateNextRun(finishedAt);
     console.log("⏭ Következő futás:", nextRun);
 
