@@ -70,7 +70,6 @@ function aggregatePoints(points: any[], range: string) {
       d.setHours(0, 0, 0, 0);
     }
 
-    /** ❗ FIX: nem toISOString(), hanem helyi idő */
     const key = toLocalBucketKey(d);
 
     const v =
@@ -82,7 +81,7 @@ function aggregatePoints(points: any[], range: string) {
   });
 
   return Object.entries(bucket).map(([k, v]) => ({
-    x: new Date(k), // helyi idő → helyes
+    x: new Date(k),
     y: v,
   }));
 }
@@ -147,22 +146,14 @@ export default function InsightsOverviewChart({
         const color = getCategoryColor(catName);
         const series = Array.isArray(fc) ? fc : [];
 
-        const aggregated = series.map((p: any) => {
-
-          const date = p?.date 
-          ? new Date(p.date.replace(" ", "T"))
-          : null;
-
-
-
-          const pred =
-            typeof p?.predicted === "number"
-              ? p.predicted
-              : Number(p?.predicted) || 0;
-
-          return date ? { x: date, y: pred } : null;
-
-        }).filter(Boolean);
+        /** ⭐ FORECAST AGGREGÁLÁSA UGYANÚGY, MINT A HISTORY-T */
+        const aggregated = aggregatePoints(
+          series.map((p: any) => ({
+            date: p.date.replace(" ", "T"),
+            count: p.predicted
+          })),
+          range
+        );
 
         ds.push({
           label: "AI előrejelzés",
