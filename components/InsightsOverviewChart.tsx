@@ -42,7 +42,6 @@ function getCategoryColor(c: string) {
   return CATEGORY_COLORS[c] ?? CATEGORY_COLORS._default;
 }
 
-/** ⭐ HELYI IDŐ → BUCKET kulcs (nem UTC!) */
 function toLocalBucketKey(d: Date) {
   return (
     d.getFullYear() +
@@ -70,7 +69,6 @@ function aggregatePoints(points: any[], range: string) {
       d.setHours(0, 0, 0, 0);
     }
 
-    /** ❗ FIX: nem toISOString(), hanem helyi idő */
     const key = toLocalBucketKey(d);
 
     const v =
@@ -82,7 +80,7 @@ function aggregatePoints(points: any[], range: string) {
   });
 
   return Object.entries(bucket).map(([k, v]) => ({
-    x: new Date(k), // helyi idő → helyes
+    x: new Date(k),
     y: v,
   }));
 }
@@ -107,6 +105,15 @@ export default function InsightsOverviewChart({
   const gridColor = isDark
     ? "rgba(255,255,255,0.15)"
     : "rgba(0,0,0,0.12)";
+
+  // ⭐ Dinamikus időablak: mostani óra → holnapi ugyanaz az óra
+  const now = new Date();
+
+  const startHour = new Date(now);
+  startHour.setMinutes(0, 0, 0);
+
+  const endHour = new Date(startHour);
+  endHour.setDate(endHour.getDate() + 1);
 
   const { datasets } = useMemo(() => {
 
@@ -153,8 +160,6 @@ export default function InsightsOverviewChart({
           ? new Date(p.date.replace(" ", "T"))
           : null;
 
-
-
           const pred =
             typeof p?.predicted === "number"
               ? p.predicted
@@ -167,10 +172,10 @@ export default function InsightsOverviewChart({
         ds.push({
           label: "AI előrejelzés",
           data: aggregated,
-          backgroundColor: color + "80",
-          borderColor: color + "CC",
+          backgroundColor: color + "80",   // 50% opacity
+          borderColor: color + "CC",       // erősebb kontúr
           borderWidth: 2,
-          borderDash: [4, 4],
+          borderDash: [4, 4],              // szaggatott szélek
           stack: "forecast",
           _isForecast: true,
           _aiCategory: catName,
@@ -181,7 +186,6 @@ export default function InsightsOverviewChart({
 
       });
 
-      /** ⭐ DUMMY AI LEGEND */
       ds.push({
         label: "AI előrejelzés",
         data: [],
@@ -217,6 +221,10 @@ export default function InsightsOverviewChart({
         type: "time",
         stacked: true,
         adapters: { date: { locale: hu } },
+
+        // ⭐ Dinamikus időablak
+        min: startHour,
+        max: endHour,
 
         time: {
           unit: range === "24h" ? "hour" : "day",
@@ -265,7 +273,6 @@ export default function InsightsOverviewChart({
           const idx = item.datasetIndex;
           const ds = chart.data.datasets[idx];
 
-          // History → normál toggle
           if (!ds._isForecast) {
             const visible = chart.isDatasetVisible(idx);
             chart.setDatasetVisibility(idx, !visible);
@@ -273,7 +280,6 @@ export default function InsightsOverviewChart({
             return;
           }
 
-          // Dummy AI legend → toggle all AI datasets
           if (ds._isDummyAiLegend) {
             const anyVisible = chart.data.datasets.some(
               (d: any, i: number) =>
@@ -354,4 +360,3 @@ export default function InsightsOverviewChart({
     </div>
   );
 }
-
