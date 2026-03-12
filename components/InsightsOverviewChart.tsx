@@ -42,23 +42,8 @@ function getCategoryColor(c: string) {
   return CATEGORY_COLORS[c] ?? CATEGORY_COLORS._default;
 }
 
-/** Parse "YYYY-MM-DD HH:MM:SS" or "YYYY-MM-DDTHH:MM:SS" into a local Date reliably */
-function parseLocalDateString(s: string): Date | null {
-  if (!s || typeof s !== "string") return null;
-  const normalized = s.includes("T") ? s : s.replace(" ", "T");
-  const m = normalized.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/);
-  if (!m) return null;
-  const year = Number(m[1]);
-  const month = Number(m[2]);
-  const day = Number(m[3]);
-  const hour = Number(m[4]);
-  const minute = Number(m[5]);
-  const second = m[6] ? Number(m[6]) : 0;
-  return new Date(year, month - 1, day, hour, minute, second);
-}
-
-/** HELYI IDŐ → BUCKET kulcs (YYYY-MM-DD HH:00:00) */
-function toLocalBucketKeyFromDate(d: Date) {
+/** ⭐ HELYI IDŐ → BUCKET kulcs (nem UTC!) */
+function toLocalBucketKey(d: Date) {
   return (
     d.getFullYear() +
     "-" +
@@ -71,39 +56,13 @@ function toLocalBucketKeyFromDate(d: Date) {
   );
 }
 
-/** Parse the bucket key back to a Date (local) */
-function parseBucketKeyToDate(k: string): Date {
-  const m = k.match(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/);
-  if (!m) return new Date(k);
-  const year = Number(m[1]);
-  const month = Number(m[2]);
-  const day = Number(m[3]);
-  const hour = Number(m[4]);
-  const minute = Number(m[5]);
-  const second = Number(m[6]);
-  return new Date(year, month - 1, day, hour, minute, second);
-}
-
-/**
- * Aggregate points array where each item has { date: string | Date, count: number }
- * Returns array of { x: Date, y: number } with local Date objects.
- */
 function aggregatePoints(points: any[], range: string) {
   const bucket: Record<string, number> = {};
 
   points.forEach((p) => {
-    if (!p) return;
-    let d: Date | null = null;
+    if (!p?.date) return;
 
-    if (p.date instanceof Date) {
-      d = new Date(p.date.getTime());
-    } else if (typeof p.date === "string") {
-      d = parseLocalDateString(p.date);
-    } else {
-      d = p.date ? new Date(p.date) : null;
-    }
-
-    if (!d || isNaN(d.getTime())) return;
+    const d = new Date(p.date);
 
     if (range === "24h") {
       d.setMinutes(0, 0, 0);
@@ -111,55 +70,21 @@ function aggregatePoints(points: any[], range: string) {
       d.setHours(0, 0, 0, 0);
     }
 
-    const key = toLocalBucketKeyFromDate(d);
+    /** ❗ FIX: nem toISOString(), hanem helyi idő */
+    const key = toLocalBucketKey(d);
 
     const v =
-      typeof p.count === "number"
+      typeof p?.count === "number"
         ? p.count
-        : typeof p.y === "number"
-        ? p.y
-        : Number(p.count ?? p.y) || 0;
+        : Number(p?.count) || 0;
 
     bucket[key] = (bucket[key] || 0) + v;
   });
 
-  const entries = Object.entries(bucket).sort((a, b) => (a[0] < b[0] ? -1 : 1));
-
-  return entries.map(([k, v]) => ({
-    x: parseBucketKeyToDate(k),
+  return Object.entries(bucket).map(([k, v]) => ({
+    x: new Date(k), // helyi idő → helyes
     y: v,
   }));
-}
-
-/** Build sorted union of bucket keys (strings) from multiple datasets */
-function unionBucketKeys(datasets: { data: { x: Date }[] }[]) {
-  const set = new Set<string>();
-  datasets.forEach((ds) => {
-    if (!Array.isArray(ds.data)) return;
-    ds.data.forEach((pt: any) => {
-      if (pt && pt.x instanceof Date && !isNaN(pt.x.getTime())) {
-        set.add(toLocalBucketKeyFromDate(pt.x));
-      }
-    });
-  });
-  return Array.from(set).sort((a, b) => (a < b ? -1 : 1));
-}
-
-/** Ensure each dataset has an entry for every key (fill missing with y:0) */
-function fillMissingBuckets(datasets: any[], keys: string[]) {
-  return datasets.map((ds) => {
-    const map = new Map<string, number>();
-    (ds.data || []).forEach((pt: any) => {
-      if (pt && pt.x instanceof Date && !isNaN(pt.x.getTime())) {
-        map.set(toLocalBucketKeyFromDate(pt.x), pt.y ?? 0);
-      }
-    });
-    const filled = keys.map((k) => ({
-      x: parseBucketKeyToDate(k),
-      y: map.has(k) ? map.get(k) : 0,
-    }));
-    return { ...ds, data: filled };
-  });
 }
 
 export default function InsightsOverviewChart({
@@ -168,9 +93,6 @@ export default function InsightsOverviewChart({
   height = 300,
   range = "24h",
 }: any) {
-  // Defensive defaults
-  data = Array.isArray(data) ? data : [];
-  forecast = forecast && typeof forecast === "object" ? forecast : {};
 
   const theme = useUserStore((s) => s.theme);
 
@@ -182,40 +104,22 @@ export default function InsightsOverviewChart({
 
   const textColor = isDark ? "#ddd" : "#333";
 
-  const gridColor = isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)";
+  const gridColor = isDark
+    ? "rgba(255,255,255,0.15)"
+    : "rgba(0,0,0,0.12)";
 
   const { datasets } = useMemo(() => {
+
     const ds: any[] = [];
 
     // HISTORY
     (data || []).forEach((cat: any) => {
+
       const label = cat?.category ?? "Ismeretlen";
       const color = getCategoryColor(label);
       const points = Array.isArray(cat?.points) ? cat.points : [];
 
-      const normalizedHistory = points
-        .map((p: any) => {
-          let d: Date | null = null;
-          if (p?.date instanceof Date) d = new Date(p.date.getTime());
-          else if (typeof p?.date === "string") d = parseLocalDateString(p.date);
-          if (!d || isNaN(d.getTime())) return null;
-          const year = d.getFullYear();
-          const month = String(d.getMonth() + 1).padStart(2, "0");
-          const day = String(d.getDate()).padStart(2, "0");
-          const hour = String(d.getHours()).padStart(2, "0");
-          const minute = String(d.getMinutes()).padStart(2, "0");
-          const second = String(d.getSeconds()).padStart(2, "0");
-          return {
-            date: `${year}-${month}-${day} ${hour}:${minute}:${second}`,
-            count:
-              typeof p.count === "number"
-                ? p.count
-                : Number(p.count ?? p.y) || 0,
-          };
-        })
-        .filter(Boolean);
-
-      const aggregated = aggregatePoints(normalizedHistory, range);
+      const aggregated = aggregatePoints(points, range);
 
       ds.push({
         label,
@@ -225,70 +129,58 @@ export default function InsightsOverviewChart({
         stack: "news",
         barThickness: 18,
         maxBarThickness: 22,
-        order: 1, // history drawn first
       });
+
     });
 
     // AI FORECAST
     if (range === "24h" && forecast && typeof forecast === "object") {
+
       const VALID_CATEGORIES = Object.keys(CATEGORY_COLORS).filter(
-        (k) => k !== "_default"
+        k => k !== "_default"
       );
 
       Object.entries(forecast).forEach(([catName, fc]: any) => {
+
         if (!VALID_CATEGORIES.includes(catName)) return;
 
         const color = getCategoryColor(catName);
         const series = Array.isArray(fc) ? fc : [];
 
-        const normalizedForecast = series
-          .map((p: any) => {
-            if (!p) return null;
-            const parsed =
-              typeof p.date === "string"
-                ? parseLocalDateString(p.date)
-                : p.date instanceof Date
-                ? new Date(p.date.getTime())
-                : null;
-            if (!parsed || isNaN(parsed.getTime())) return null;
-            const year = parsed.getFullYear();
-            const month = String(parsed.getMonth() + 1).padStart(2, "0");
-            const day = String(parsed.getDate()).padStart(2, "0");
-            const hour = String(parsed.getHours()).padStart(2, "0");
-            const minute = String(parsed.getMinutes()).padStart(2, "0");
-            const second = String(parsed.getSeconds()).padStart(2, "0");
-            return {
-              date: `${year}-${month}-${day} ${hour}:${minute}:${second}`,
-              count:
-                typeof p.predicted === "number"
-                  ? p.predicted
-                  : Number(p.predicted) || 0,
-            };
-          })
-          .filter(Boolean);
+        const aggregated = series.map((p: any) => {
 
-        const aggregated = aggregatePoints(normalizedForecast, range);
+          const date = p?.date 
+          ? new Date(p.date.replace(" ", "T"))
+          : null;
 
-        // Ensure aiCategory is always set (fallback to 'ismeretlen')
-        const aiCat = catName || "ismeretlen";
+
+
+          const pred =
+            typeof p?.predicted === "number"
+              ? p.predicted
+              : Number(p?.predicted) || 0;
+
+          return date ? { x: date, y: pred } : null;
+
+        }).filter(Boolean);
 
         ds.push({
           label: "AI előrejelzés",
           data: aggregated,
-          backgroundColor: color + "AA", // less transparent so it's visible
+          backgroundColor: color + "66",
           borderColor: color,
           borderWidth: 1,
           borderDash: [6, 6],
           stack: "forecast",
           _isForecast: true,
-          _aiCategory: aiCat,
+          _aiCategory: catName,
           barThickness: 18,
           maxBarThickness: 22,
-          order: 2, // draw after history so it's visible on top
         });
+
       });
 
-      // DUMMY AI LEGEND
+      /** ⭐ DUMMY AI LEGEND */
       ds.push({
         label: "AI előrejelzés",
         data: [],
@@ -299,102 +191,80 @@ export default function InsightsOverviewChart({
         stack: "forecast",
         _isDummyAiLegend: true,
         _isForecast: true,
-        order: 2,
       });
+
     }
 
-    // --- ALIGN BUCKETS ACROSS ALL DATASETS ---
-    const keys = unionBucketKeys(ds);
-    const aligned = fillMissingBuckets(ds, keys);
+    return { datasets: ds };
 
-    return { datasets: aligned };
   }, [data, forecast, range]);
 
-  // Debug output (development only)
-  if (typeof window !== "undefined") {
-    // eslint-disable-next-line no-console
-    console.log("DEBUG CHART DATASETS (aligned):", datasets);
-    datasets.forEach((d: any, i: number) => {
-      // eslint-disable-next-line no-console
-      console.log(
-        `dataset[${i}] label=${d.label} _isForecast=${!!d._isForecast} _aiCategory=${d._aiCategory} points=`,
-        Array.isArray(d.data) ? d.data.slice(0, 12) : d.data
-      );
-      if (Array.isArray(d.data) && d.data.length > 0) {
-        // eslint-disable-next-line no-console
-        console.log(
-          `  first x type:`,
-          typeof d.data[0].x,
-          "isDate:",
-          d.data[0].x instanceof Date,
-          "value:",
-          d.data[0].x,
-          "first y:",
-          d.data[0].y
-        );
-      }
-    });
-
-    // Extra: log forecast y-values specifically
-    datasets.forEach((d: any, i: number) => {
-      if (d._isForecast) {
-        // eslint-disable-next-line no-console
-        console.log(`FORECAST dataset[${i}] _aiCategory=${d._aiCategory} y-values:`, d.data.map((p: any) => p.y));
-      }
-    });
-  }
-
   const options: any = {
+
     responsive: true,
     maintainAspectRatio: false,
     animation: false,
+
     interaction: {
       mode: "nearest",
-      intersect: false,
+      intersect: false
     },
+
     scales: {
+
       x: {
         type: "time",
         stacked: true,
         adapters: { date: { locale: hu } },
+
         time: {
           unit: range === "24h" ? "hour" : "day",
           displayFormats: {
             hour: "HH:mm",
             day: "yyyy.MM.dd",
-          },
+          }
         },
+
         ticks: { color: textColor },
         grid: { color: gridColor },
       },
+
       y: {
         stacked: true,
         beginAtZero: true,
         ticks: { color: textColor },
         grid: { color: gridColor },
       },
+
     },
+
     plugins: {
+
       legend: {
         labels: {
           color: textColor,
           generateLabels: (chart: any) => {
             const original =
               ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
+
             return original.filter((item: any) => {
               const ds = chart.data.datasets[item.datasetIndex];
               if (!ds) return false;
+
               if (!ds._isForecast) return true;
               if (ds._isDummyAiLegend) return true;
+
               return false;
             });
           },
         },
+
         onClick: (e: any, item: any, legend: any) => {
           const chart = legend.chart;
           const idx = item.datasetIndex;
           const ds = chart.data.datasets[idx];
 
+          // History → normál toggle
           if (!ds._isForecast) {
             const visible = chart.isDatasetVisible(idx);
             chart.setDatasetVisibility(idx, !visible);
@@ -402,10 +272,13 @@ export default function InsightsOverviewChart({
             return;
           }
 
+          // Dummy AI legend → toggle all AI datasets
           if (ds._isDummyAiLegend) {
             const anyVisible = chart.data.datasets.some(
               (d: any, i: number) =>
-                d._isForecast && !d._isDummyAiLegend && chart.isDatasetVisible(i)
+                d._isForecast &&
+                !d._isDummyAiLegend &&
+                chart.isDatasetVisible(i)
             );
 
             chart.data.datasets.forEach((d: any, i: number) => {
@@ -419,15 +292,21 @@ export default function InsightsOverviewChart({
           }
         },
       },
+
       tooltip: {
+
         backgroundColor: isDark ? "#222" : "#fff",
         titleColor: isDark ? "#fff" : "#000",
         bodyColor: isDark ? "#ddd" : "#333",
         borderColor: isDark ? "#444" : "#ccc",
         borderWidth: 1,
+
         callbacks: {
+
           title: (items: any) => {
+
             const d = new Date(items[0].parsed.x);
+
             return d.toLocaleString("hu-HU", {
               year: "numeric",
               month: "2-digit",
@@ -435,18 +314,26 @@ export default function InsightsOverviewChart({
               hour: "2-digit",
               minute: "2-digit",
             });
+
           },
+
           label: (ctx: any) => {
+
             const ds = ctx.dataset;
             const v = ctx.parsed.y;
+
             if (ds._isForecast) {
-              const cat = ds._aiCategory ?? "ismeretlen";
-              return `AI előrejelzés · ${cat}: ${v}`;
+              return `AI előrejelzés · ${ds._aiCategory}: ${v}`;
             }
+
             return `${ds.label}: ${v}`;
+
           },
+
         },
+
       },
+
       zoom: {
         zoom: {
           wheel: { enabled: true },
@@ -455,35 +342,15 @@ export default function InsightsOverviewChart({
         },
         pan: { enabled: true, mode: "x" },
       },
+
     },
+
   };
 
-  // Guard render: ensure datasets exist and at least one dataset has points
-  const hasDatasets = Array.isArray(datasets) && datasets.length > 0;
-  const anyPoints =
-    hasDatasets && datasets.some((d: any) => Array.isArray(d.data) && d.data.length > 0);
-
-  if (!hasDatasets || !anyPoints) {
-    return (
-      <div
-        style={{
-          width: "100%",
-          height,
-          minHeight: 200,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: textColor,
-        }}
-      >
-        Nincs megjeleníthető adat
-      </div>
-    );
-  }
-
   return (
-    <div style={{ width: "100%", height, minHeight: 200 }}>
+    <div style={{ width: "100%", height }}>
       <Bar key={range + theme} data={{ datasets }} options={options} />
     </div>
   );
 }
+
