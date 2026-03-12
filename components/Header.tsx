@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import LoginModal from "./LoginModal";
 import ProfileMenu from "./ProfileMenu";
@@ -17,6 +17,7 @@ export default function Header() {
   const searchTerm = useUserStore((s) => s.searchTerm);
   const setSearchTerm = useUserStore((s) => s.setSearchTerm);
   const theme = useUserStore((s) => s.theme);
+  const setTheme = useUserStore((s) => s.setTheme);
 
   const [localSearch, setLocalSearch] = useState<string>(searchTerm);
   const [isTyping, setIsTyping] = useState(false);
@@ -30,6 +31,7 @@ export default function Header() {
     pathname.startsWith("/adatvedelem");
 
   useEffect(() => {
+    // loadUser lehet perzisztens theme-et hagyjon érintetlenül
     useUserStore.getState().loadUser?.();
   }, []);
 
@@ -80,27 +82,38 @@ export default function Header() {
 
   const reallyPremium = isPremium || apiSaysPremium;
 
+  // isDark kezelése: store.theme elsődleges, system -> matchMedia
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window === "undefined") return false;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    // Ha a store már perzisztált theme-et tartalmaz, használjuk azt
+    const initialTheme = useUserStore.getState().theme;
+    if (initialTheme === "dark") return true;
+    if (initialTheme === "light") return false;
+    // system vagy undefined -> media query
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
   useEffect(() => {
-    if (theme === "dark") setIsDark(true);
-    else if (theme === "light") setIsDark(false);
-    else if (theme === "system") {
-      if (typeof window !== "undefined") {
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        setIsDark(prefersDark);
-      }
+    if (theme === "dark") {
+      setIsDark(true);
+      return;
+    }
+    if (theme === "light") {
+      setIsDark(false);
+      return;
+    }
+    // theme === "system"
+    if (typeof window !== "undefined") {
+      const mql = window.matchMedia("(prefers-color-scheme: dark)");
+      const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
+      setIsDark(mql.matches);
+      mql.addEventListener?.("change", handler);
+      return () => mql.removeEventListener?.("change", handler);
     }
   }, [theme]);
 
-  const logoSrc = isLegalPage
-    ? "/web-app-manifest-512x512.png"
-    : isDark
-    ? "/web-app-manifest-512x512.png"
-    : "/utom.png";
+  // logo forrás: jogi oldalak és sötét mód esetén fehér logó
+  const logoSrc = isLegalPage || isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
 
   const menuLoggedOut = [
     { href: "/", label: "Főoldal" },
@@ -121,28 +134,23 @@ export default function Header() {
     { href: "/kapcsolat", label: "Kapcsolat" },
   ];
 
-  const activeMenu = !user
-    ? menuLoggedOut
-    : reallyPremium
-    ? menuPremium
-    : menuFree;
+  const activeMenu = !user ? menuLoggedOut : reallyPremium ? menuPremium : menuFree;
 
   return (
     <nav
-      className={`navbar navbar-expand-lg sticky-top header-nav ${
-        isLegalPage ? "header-legal" : ""
-      }`}
+      className={`navbar navbar-expand-lg sticky-top header-nav ${isLegalPage ? "header-legal" : ""}`}
     >
       <div className="container-fluid d-flex align-items-center justify-content-between">
         <Link href="/" className="navbar-brand d-flex align-items-center">
           <Image
-            key={isDark ? "dark" : "light"}   // <-- FIX: React újrarendereli a logót
+            key={isDark ? "logo-dark" : "logo-light"}
             src={logoSrc}
             alt="Utom.hu logó"
             width={48}
             height={48}
             priority
             className="header-logo-img"
+            style={{ objectFit: "contain" }}
           />
         </Link>
 
@@ -180,9 +188,7 @@ export default function Header() {
                 </span>
               )}
             </div>
-            <div className="search-status">
-              {isTyping ? "Keresés folyamatban…" : ""}
-            </div>
+            <div className="search-status">{isTyping ? "Keresés folyamatban…" : ""}</div>
           </div>
         )}
 
