@@ -167,15 +167,16 @@ export default function InsightsOverviewChart({
         ds.push({
           label: "AI előrejelzés",
           data: aggregated,
-          backgroundColor: color + "66",
-          borderColor: color,
+          backgroundColor: color + "80",
+          borderColor: color + "CC",
           borderWidth: 1,
-          borderDash: [6, 6],
+          borderDash: [4, 4],
           stack: "forecast",
           _isForecast: true,
           _aiCategory: catName,
           barThickness: 18,
           maxBarThickness: 22,
+          order: 99,
         });
 
       });
