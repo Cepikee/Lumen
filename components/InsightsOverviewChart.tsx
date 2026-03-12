@@ -18,6 +18,7 @@ import { hu } from "date-fns/locale";
 import { Line } from "react-chartjs-2";
 import { useMemo } from "react";
 import { useUserStore } from "@/store/useUserStore";
+import { startOfHour, addHours, differenceInHours, subHours } from "date-fns";
 
 const crosshairPlugin = {
   id: "crosshair",
@@ -67,13 +68,40 @@ function getCategoryColor(c: string) {
   return CATEGORY_COLORS[c] ?? CATEGORY_COLORS._default;
 }
 
+/**
+ * Kitölti a pontokat egy óránkénti rácsra (start..end), hiányzó időpontokra 0-t ad.
+ * - points: eredeti pontok, { date, count }
+ * - start, end: Date objektumok (inclusive)
+ * - stepHours: rácslépés órában (alap 1)
+ */
+function fillSeriesWithZeros(points: any[], start: Date, end: Date, stepHours = 1) {
+  const map = new Map<string, number>();
+  (points || []).forEach((p) => {
+    if (!p) return;
+    const d = p?.date ? new Date(p.date) : null;
+    if (!d || isNaN(d.getTime())) return;
+    const key = startOfHour(d).toISOString();
+    const val = typeof p?.count === "number" ? p.count : Number(p?.count) || 0;
+    map.set(key, val);
+  });
+
+  const totalHours = Math.max(0, differenceInHours(end, start));
+  const out: { x: Date; y: number }[] = [];
+  for (let i = 0; i <= totalHours; i += stepHours) {
+    const dt = addHours(start, i);
+    const key = startOfHour(dt).toISOString();
+    const y = map.has(key) ? (map.get(key) as number) : 0;
+    out.push({ x: dt, y });
+  }
+  return out;
+}
+
 export default function InsightsOverviewChart({
   data,
   forecast = {},
   height = 300,
   range = "24h",
 }: any) {
-    console.log("CHART RAW DATA:", data);
   const theme = useUserStore((s) => s.theme);
   const isDark =
     theme === "dark" ||
@@ -83,82 +111,108 @@ export default function InsightsOverviewChart({
 
   const textColor = isDark ? "#ddd" : "#333";
 
-  const gridColor = isDark
-    ? "rgba(255,255,255,0.15)"
-    : "rgba(0,0,0,0.12)";
+  const gridColor = isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)";
 
   const { datasets } = useMemo(() => {
     const ds: any[] = [];
 
-    // HISTORY
+    // Határozzuk meg a start és end időpontot a rácshoz
+    const now = new Date();
+    let start: Date;
+    let end: Date;
+
+    if (range === "24h") {
+      end = startOfHour(now);
+      start = startOfHour(subHours(end, 24));
+    } else if (range === "7d") {
+      end = startOfHour(now);
+      start = startOfHour(subHours(end, 24 * 7));
+    } else {
+      // ha nincs range, próbáljuk meg a data alapján
+      const allDates: Date[] = [];
+      (data || []).forEach((cat: any) => {
+        (cat?.points || []).forEach((p: any) => {
+          if (p?.date) {
+            const d = new Date(p.date);
+            if (!isNaN(d.getTime())) allDates.push(d);
+          }
+        });
+      });
+      if (allDates.length) {
+        // egyszerű: start = min hour, end = max hour
+        const minD = new Date(Math.min(...allDates.map((d) => d.getTime())));
+        const maxD = new Date(Math.max(...allDates.map((d) => d.getTime())));
+        start = startOfHour(minD);
+        end = startOfHour(maxD);
+      } else {
+        end = startOfHour(now);
+        start = startOfHour(subHours(end, 24));
+      }
+    }
+
+    // HISTORY: minden kategória kitöltése 0-okkal az óránkénti rácson
     (data || []).forEach((cat: any) => {
       const label = cat?.category ?? "Ismeretlen";
       const color = getCategoryColor(label);
       const points = Array.isArray(cat?.points) ? cat.points : [];
+
+      // kitöltés óránként (ha szükséges, módosítható a lépés)
+      const filled = fillSeriesWithZeros(points, start, end, 1);
+
       ds.push({
         label,
-        data: points
-          .map((p: any) => {
-            const dateVal = p?.date ? new Date(p.date) : null;
-            const countVal =
-              typeof p?.count === "number"
-                ? p.count
-                : Number(p?.count) || 0;
-            return dateVal ? { x: dateVal, y: countVal } : null;
-          })
-          .filter(Boolean),
+        data: filled,
         borderColor: color,
         backgroundColor: color + "22",
         showLine: true,
         stepped: false,
-        cubicInterpolationMode: "monotone",   // ⭐ EZ A LÉNYEG
-        tension: 0.15,                          // ⭐ SZÉP, LÁGY GÖRBE
-        pointRadius: 0,
+        cubicInterpolationMode: "monotone",
+        tension: 0.15,
+        // scriptable pointRadius: 0, de 0 értéknél kisebb pont jelenik meg
+        pointRadius: (ctx: any) => {
+          const y = ctx.parsed?.y;
+          return y === 0 ? 3 : 0;
+        },
         pointHoverRadius: 6,
         borderWidth: 1.2,
         fill: false,
+        spanGaps: false,
       });
-
-
-
     });
 
-    // AI FORECAST – csak 24h
+    // AI FORECAST – csak 24h (ha kell, itt is kitölthető, de általában folyamatos)
     if (range === "24h" && forecast && typeof forecast === "object") {
-      const VALID_CATEGORIES = Object.keys(CATEGORY_COLORS).filter(k => k !== "_default");
+      const VALID_CATEGORIES = Object.keys(CATEGORY_COLORS).filter((k) => k !== "_default");
       Object.entries(forecast).forEach(([catName, fc]: any) => {
-        if (!VALID_CATEGORIES.includes(catName)) return; // ⭐ SZŰRÉS
+        if (!VALID_CATEGORIES.includes(catName)) return;
         const series = Array.isArray(fc) ? fc : [];
         const color = getCategoryColor(catName);
+
+        // forecast esetén feltételezzük, hogy a predikció folyamatos; ha nem, lehet kitölteni is
+        const mapped = series
+          .map((p: any) => {
+            const date = p?.date ? new Date(p.date) : null;
+            const pred =
+              typeof p?.predicted === "number" ? p.predicted : Number(p?.predicted) || 0;
+            return date ? { x: date, y: pred } : null;
+          })
+          .filter(Boolean);
+
         ds.push({
           label: "AI előrejelzés",
-          data: series
-            .map((p: any) => {
-              const date = p?.date ? new Date(p.date) : null;
-              const pred =
-                typeof p?.predicted === "number"
-                  ? p.predicted
-                  : Number(p?.predicted) || 0;
-              return date ? { x: date, y: pred } : null;
-            })
-            .filter(Boolean),
-
+          data: mapped,
           borderColor: color,
-          borderDash: [6, 6],       // ⭐ szaggatott vonal
+          borderDash: [6, 6],
           borderWidth: 1.2,
-
-          // ⭐ UGYANAZ, mint a history
           cubicInterpolationMode: "monotone",
           tension: 0.15,
           pointRadius: 0,
           pointHoverRadius: 6,
           fill: false,
-          spanGaps: true,           // ⭐ fontos!
-
+          spanGaps: true,
           _isForecast: true,
           _aiCategory: catName,
         });
-
       });
 
       // dummy AI legend
@@ -192,6 +246,7 @@ export default function InsightsOverviewChart({
       },
       y: {
         beginAtZero: true,
+        min: 0, // biztosítjuk, hogy a tengely 0-tól induljon
         suggestedMax: 5,
         ticks: { color: textColor },
         grid: { color: gridColor },
@@ -288,7 +343,7 @@ export default function InsightsOverviewChart({
         },
         pan: { enabled: true, mode: "x" },
       },
-      decimation: { enabled: false}
+      decimation: { enabled: false },
     },
   };
 
@@ -299,4 +354,6 @@ export default function InsightsOverviewChart({
   );
 }
 /** stabil verzió
- * - sima görbe (monotone) */
+ * - sima görbe (monotone)
+ * - hiányzó időpontok kitöltése 0-val, y.min = 0
+ */
