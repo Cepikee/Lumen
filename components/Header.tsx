@@ -31,6 +31,7 @@ export default function Header() {
     pathname.startsWith("/adatvedelem");
 
   useEffect(() => {
+    // Betölti a felhasználót; a perzisztált theme-et hagyja érintetlenül
     useUserStore.getState().loadUser?.();
   }, []);
 
@@ -84,7 +85,7 @@ export default function Header() {
   // isDark kezelése: alapérték false, de useLayoutEffect korán beállítja a perzisztált theme alapján
   const [isDark, setIsDark] = useState<boolean>(false);
 
-  // read persisted theme from localStorage before paint to avoid flicker (rehydration flash)
+  // A perzisztált theme korai beolvasása a villogás elkerüléséhez
   useLayoutEffect(() => {
     try {
       const raw = localStorage.getItem("utom-store");
@@ -105,20 +106,19 @@ export default function Header() {
         setIsDark(false);
         document.documentElement.classList.remove("dark");
       } else {
-        // system or no persisted theme -> use media query
+        // system vagy nincs perzisztált beállítás -> media query alapján dönt
         const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
         setIsDark(!!prefersDark);
         if (prefersDark) document.documentElement.classList.add("dark");
         else document.documentElement.classList.remove("dark");
       }
 
-      // sync store theme if different
+      // Szinkronizáljuk a store-t, ha eltérés van
       if (parsedTheme && parsedTheme !== theme) {
-        // setTheme will also update document.documentElement.classList inside the store
         setTheme(parsedTheme as "dark" | "light" | "system");
       }
     } catch {
-      // ignore errors, fallback to media query
+      // Hiba esetén media query-re esünk vissza
       try {
         const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
         setIsDark(!!prefersDark);
@@ -127,9 +127,9 @@ export default function Header() {
       } catch {}
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // run once on mount before paint
+  }, []); // egyszer fusson mount előtt
 
-  // keep reacting to store.theme changes (user toggles theme in UI)
+  // Reagálás a store.theme változásaira (felhasználói váltás)
   useEffect(() => {
     if (theme === "dark") {
       setIsDark(true);
