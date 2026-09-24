@@ -7,6 +7,7 @@ import Parser from "rss-parser";
 import fs from "fs";
 import * as cheerio from "cheerio";
 import puppeteer from "puppeteer";
+import { blockedCapabilityResponse } from "@/lib/config/routeGuard";
 
 /** Logolás */
 function logError(source: string, err: any) {
@@ -185,6 +186,8 @@ Semmi mást ne írj, csak érvényes JSON-t.
 }
 
 export async function GET() {
+  const blocked = blockedCapabilityResponse(["feedFetch", "databaseWrite", "realAi"]);
+  if (blocked) return blocked;
   try {
     const parser = new Parser({
       headers: {

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
 import { checkPlagiarism } from "../../../lib/checkPlagiarism.js";
+import { blockedCapabilityResponse } from "@/lib/config/routeGuard";
 
 // ---- Helpers ----
 function unwrapValue(v: unknown) {
@@ -248,6 +249,8 @@ const BATCH_SIZE = 10;
 const CONCURRENCY = 1;
 
 export async function GET() {
+  const blocked = blockedCapabilityResponse(["databaseWrite", "realAi"]);
+  if (blocked) return blocked;
   console.log(">>> summarize-all route elindult!");
   const processed: number[] = [];
   const errors: { id: number | null; error: string }[] = [];

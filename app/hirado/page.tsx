@@ -3,6 +3,8 @@ import { cookies } from "next/headers";
 import HiradoClient from "@/components/HiradoClient";
 import { db } from "@/lib/db-node";
 
+export const dynamic = "force-dynamic";
+
 // 🔐 Signed URL generálás
 function signVideoUrl(videoId: number, userId: string) {
   const secret = process.env.VIDEO_SIGN_SECRET!;

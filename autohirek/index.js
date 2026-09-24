@@ -69,6 +69,12 @@ async function runAutoHirekPipeline() {
   console.log("\n🎉 KÉSZ! A napi szöveges összefoglaló elkészült, elmentve.\n");
 }
 
-runAutoHirekPipeline().catch((err) => {
-  console.error("❌ Hiba a napi hírek pipeline futtatása közben:", err);
-});
+if (require.main === module) {
+  const { assertCapability } = require("../lib/config/runtime");
+  assertCapability("backgroundJobs");
+  runAutoHirekPipeline().catch((err) => {
+    console.error("❌ Hiba a napi hírek pipeline futtatása közben:", err);
+  });
+}
+
+module.exports = { runAutoHirekPipeline };

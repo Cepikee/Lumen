@@ -20,10 +20,6 @@ const nextConfig: NextConfig = {
   },
 
   distDir: ".next",
-
-  webpack: (config) => {
-    return config;
-  },
 };
 
 export default nextConfig;

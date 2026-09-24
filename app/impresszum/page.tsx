@@ -1,7 +1,7 @@
 "use client";
 
 import React, { JSX } from "react";
-import "/styles/impresszum.css";
+import "./impresszum.css";
 
 export default function Impresszum(): JSX.Element {
   const lastUpdated = new Date().toLocaleDateString("hu-HU", {

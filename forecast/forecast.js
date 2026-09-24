@@ -266,4 +266,10 @@ async function mainLoop() {
   }
 }
 
-mainLoop();
+if (require.main === module) {
+  const { assertCapability } = require("../lib/config/runtime");
+  assertCapability("backgroundJobs");
+  mainLoop();
+}
+
+module.exports = { mainLoop, runForecastPipeline };

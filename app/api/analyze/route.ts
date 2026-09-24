@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { blockedCapabilityResponse } from "@/lib/config/routeGuard";
 
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
+  const blocked = blockedCapabilityResponse(["feedFetch", "databaseWrite", "realAi"]);
+  if (blocked) return blocked;
   const { url } = await req.json();
   if (!url) {
     return NextResponse.json({ error: "Hiányzó URL" }, { status: 400 });

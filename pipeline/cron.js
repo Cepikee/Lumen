@@ -409,7 +409,7 @@ async function processBatch(batch) {
 //  FŐ CIKLUS — IDŐALAPÚ FEED FRISSÍTÉSSEL
 // ─────────────────────────────────────────────
 
-(async () => {
+async function runPipelineWorker() {
   while (true) {
     try {
       console.log(`🚀 Feed begyűjtés: ${new Date().toLocaleString("hu-HU")}`);
@@ -455,4 +455,12 @@ async function processBatch(batch) {
       await sleep(10000);
     }
   }
-})();
+}
+
+if (require.main === module) {
+  const { assertCapability } = require("../lib/config/runtime");
+  assertCapability("backgroundJobs");
+  runPipelineWorker();
+}
+
+module.exports = { runPipelineWorker };

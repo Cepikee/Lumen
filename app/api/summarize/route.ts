@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
+import { blockedCapabilityResponse } from "@/lib/config/routeGuard";
 
 export async function POST(req: Request) {
+  const blocked = blockedCapabilityResponse(["databaseWrite", "realAi"]);
+  if (blocked) return blocked;
   const { articleId } = await req.json();
 
   const connection = await mysql.createConnection({
