@@ -11,7 +11,9 @@
     "check:imports": "node scripts/check-local-imports.cjs",
     "test": "npm run test:offline",
     "test:offline": "node --test tests/unit/*.test.cjs",
-    "check": "npm run typecheck && npm run lint && npm run check:imports && npm run test:offline && npm run build"
+    "check": "npm run typecheck && npm run lint && npm run check:imports && npm run test:offline && npm run build",
+    "db:plan": "node db/migrate.cjs --plan",
+    "db:migrate:local": "node db/migrate.cjs --apply"
   },
   "engines": {
     "node": ">=24 <25"

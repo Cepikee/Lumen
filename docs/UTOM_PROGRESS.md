@@ -61,3 +61,12 @@ Aktuális commit: `7df3f0792715f513f1293277b97095dcbbf89ce4` (új commit nem ké
 ## Commitnapló
 
 Új commit nem készült. Az A1 változások, a korábbi audit és a helyreállítási dokumentumok helyi working tree-ben vannak; `main` nem módosult, push/fetch/pull/PR nem történt.
+
+---
+
+## Kiegészítés – GitHub mentés és A2 migrációs alap
+
+- A felhasználó visszaigazolt GitHub-mentése: `develop/utom-recovery`, commit `9bc90f3` (`Utom.hu A1 helyreállítás`). A fenti A1-kori, commit előtti Git-állapot történeti bejegyzés, már nem aktuális.
+- A feltöltött A1 utáni forráscsomag alapján elkészült az **A2 migrációs keret és a forrástábla első migrációja**: `db/migration-core.cjs`, `db/migrate.cjs`, `db/migrations/001_sources.sql`, `tests/unit/migration-core.test.cjs`, `docs/UTOM_A2_MIGRATIONS.md`; továbbá `package.json` és `.env.example` bővült.
+- Az offline terv/listázás és a migrációs egységtesztek az elemzői környezetben lefutottak. Valódi MySQL 8 integrációs próba, teljes `npm run check` és WSL2-teszt itt még nem futott; az A2 és a teljes A mérföldkő nincs lezárva.
+- Az elemzői példány nem módosította a helyi Git- vagy GitHub-repositoryt. A módosított fájlokat előbb a felhasználó saját `develop/utom-recovery` ágába kell beilleszteni és ellenőrizni, majd csak sikeres teszt után committolni.
