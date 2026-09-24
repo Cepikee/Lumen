@@ -1,5 +1,5 @@
+import { getSessionUserId } from "@/lib/auth-session";
 import crypto from "crypto";
-import { cookies } from "next/headers";
 import HiradoClient from "@/components/HiradoClient";
 import { db } from "@/lib/db-node";
 
@@ -34,17 +34,15 @@ export default async function HiradoPage() {
   );
 
   const video = rows[0];
-  const videoId = video.id;
+  const videoId = video?.id ?? 0;
 
   // 🔐 User ID cookie-ból
-  const cookieStore = await cookies();
-  const sessionUser = cookieStore.get("session_user");
-  const userId = sessionUser?.value || null;
+  const userId = await getSessionUserId();
 
   // 🔐 Signed URL
   const videoUrl = userId
-    ? signVideoUrl(videoId, userId)
-    : `/api/secure/video/${videoId}?debug=true`;
+    ? signVideoUrl(videoId, String(userId))
+    : "";
 
   return <HiradoClient videoId={videoId} videoUrl={videoUrl} />;
 }

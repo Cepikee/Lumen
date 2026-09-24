@@ -1,3 +1,4 @@
+import { createSession } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
@@ -103,11 +104,7 @@ export async function POST(req: Request) {
       user.id,
     ]);
 
-    const maxAge = rememberMe
-      ? 60 * 60 * 24 * 30
-      : 60 * 60 * 24;
-
-    const response = NextResponse.json({
+const response = NextResponse.json({
       success: true,
       user: {
         id: user.id,
@@ -120,13 +117,7 @@ export async function POST(req: Request) {
       },
     });
 
-    response.cookies.set("session_user", String(user.id), {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      path: "/",
-      maxAge,
-    });
+    await createSession(Number(user.id), response, Boolean(rememberMe));
 
     return response;
   } catch {

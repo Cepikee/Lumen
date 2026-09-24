@@ -1,0 +1,27 @@
+-- Reconstructed from legacy Utom.hu SQL usage; old original DB dump unavailable.
+CREATE TABLE users (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  email VARCHAR(254) NOT NULL,
+  nickname VARCHAR(60) NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  pin_code VARCHAR(255) NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  email_verified TINYINT(1) NOT NULL DEFAULT 0,
+  email_verification_token VARCHAR(255) NULL,
+  email_verification_expires DATETIME NULL,
+  last_login DATETIME NULL,
+  last_ip VARCHAR(45) NULL,
+  role VARCHAR(40) NOT NULL DEFAULT 'user',
+  theme VARCHAR(30) NOT NULL DEFAULT 'system',
+  bio TEXT NULL,
+  is_premium TINYINT(1) NOT NULL DEFAULT 0,
+  premium_until DATETIME NULL,
+  premium_tier VARCHAR(70) NULL,
+  avatar_style VARCHAR(100) NULL,
+  avatar_seed VARCHAR(255) NULL,
+  avatar_format VARCHAR(30) NULL,
+  avatar_frame VARCHAR(190) NULL,
+  username_changed_at DATETIME NULL,
+  PRIMARY KEY (id), UNIQUE KEY uq_users_email (email), UNIQUE KEY uq_users_nickname (nickname),
+  KEY idx_users_verification_token (email_verification_token)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

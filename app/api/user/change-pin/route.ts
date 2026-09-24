@@ -1,20 +1,18 @@
+import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { db } from "@/lib/db";
 
 export async function POST(req: Request) {
   try {
-    const cookieStore = await cookies();
-    const sessionUser = cookieStore.get("session_user");
+    const userId = await getSessionUserId();
 
-    if (!sessionUser) {
+    if (!userId) {
       return NextResponse.json(
         { success: false, message: "Nincs bejelentkezve." },
         { status: 401 }
       );
     }
 
-    const userId = Number(sessionUser.value);
 
     const { currentPin, newPin } = await req.json();
 

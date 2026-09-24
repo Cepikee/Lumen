@@ -23,9 +23,16 @@ async function main() {
     if (nameRows[0]?.current_db !== config.database) throw new Error("Connected database differs from configured target");
     const [tables] = await connection.query("SHOW TABLES");
     const tableNames = tables.map((row) => Object.values(row)[0]);
-    // Prevent accidental overwrite of an existing legacy or partially initialized database.
-    if (tableNames.some((t) => t !== "schema_migrations" && !migrations.some((m) => m.version === "001" && t === "sources"))) {
-      throw new Error("Unexpected existing tables: use a fresh empty utom_local_* database");
+    // Never take over an existing populated database that was not created by this migrator.
+    // A clean utom_dev is allowed; a repeat run is allowed only with a complete migration ledger.
+    const existing = tableNames.filter((t) => t !== "schema_migrations");
+    if (existing.length) {
+      if (!tableNames.includes("schema_migrations")) throw new Error("Existing schema without migration ledger: stop and inspect manually");
+      const [applied] = await connection.query("SELECT version, filename FROM schema_migrations ORDER BY version");
+      const known = new Set(migrations.filter(m => applied.some(r => String(r.version) === m.version && r.filename === m.filename)).map(m => m.filename.replace(/^\d{3}_/, "").replace(/\.sql$/, "")));
+      if (!applied.length || existing.some(t => !known.has(t))) {
+        throw new Error("Untracked existing tables in utom_dev: stop and inspect manually");
+      }
     }
     const executed = await applyMigrations(connection, migrations);
     console.log(executed.length ? `Applied: ${executed.join(", ")}` : "No changes: all migrations already applied");

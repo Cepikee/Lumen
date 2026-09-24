@@ -1,3 +1,4 @@
+import { createSession } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
@@ -107,13 +108,7 @@ export async function POST(req: Request) {
       message: "Sikeres regisztráció!",
     });
 
-    response.cookies.set("session_user", String(userId), {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: 60 * 60 * 24 * 7,
-    });
+    await createSession(Number(userId), response, true);
 
     return response;
   } catch {

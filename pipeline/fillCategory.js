@@ -24,10 +24,10 @@ function isValidCategory(cat) {
 // --- Egy cikk kategorizálása ---
 async function categorizeArticle(articleId) {
   const conn = await mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "jelszo",
-    database: "projekt2025",
+    host: process.env.DB_HOST || "127.0.0.1",
+    user: process.env.DB_USER || "utom_app",
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME || "utom_dev",
   });
 
   try {

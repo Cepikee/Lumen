@@ -37,8 +37,8 @@ function validateDatabaseTarget(env = process.env) {
   if (env.NODE_ENV === "production" || env.UTOM_OFFLINE_MODE !== "true" || env.DB_MIGRATION_ENABLED !== "true") {
     throw new Error("Migrations require explicit offline local opt-in; production is forbidden");
   }
-  if (!/^utom_local_[a-z0-9_]+$/.test(env.DB_NAME || "")) {
-    throw new Error("DB_NAME must be an explicitly named utom_local_* test database");
+  if (env.DB_NAME !== "utom_dev") {
+    throw new Error("For this reconstruction, DB_NAME must be the existing local utom_dev database");
   }
   if (!new Set(["127.0.0.1", "localhost", "::1"]).has(env.DB_HOST)) {
     throw new Error("Migrations require a loopback DB_HOST");

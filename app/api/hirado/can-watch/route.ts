@@ -1,3 +1,4 @@
+import { getSessionUserId } from "@/lib/auth-session";
 // app/hirado/can-watch/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
@@ -32,9 +33,7 @@ export async function GET(req: Request) {
     const videoId = searchParams.get("videoId") || 0;
 
     // 🔐 RATE LIMITING (5 mp alatt max 20 kérés)
-    const cookie = req.headers.get("cookie") || "";
-    const match = cookie.match(/session_user=([^;]+)/);
-    const userId = match ? match[1] : "0";
+    const userId = (await getSessionUserId()) || 0;
 
     const key = `${userId}:${ip}`;
     const now = Date.now();
@@ -64,7 +63,7 @@ export async function GET(req: Request) {
     }
 
     // 🔐 SESSION ellenőrzés
-    if (!match) {
+    if (!userId) {
       await logAccess(0, videoId, ip, "denied");
       return NextResponse.json({
         canWatch: false,

@@ -1,19 +1,17 @@
+import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
-  const cookieStore = await cookies(); // <-- KELL az await
-  const session = cookieStore.get("session_user");
+  const userId = await getSessionUserId();
 
-  if (!session) {
+  if (!userId) {
     return NextResponse.json({
       success: false,
       message: "Nincs bejelentkezve."
     });
   }
 
-  const userId = Number(session.value);
   const body = await req.json();
 
   // Engedélyezett mezők (később bővíthető)

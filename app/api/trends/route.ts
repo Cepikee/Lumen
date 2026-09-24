@@ -19,10 +19,10 @@ export async function GET(req: Request) {
     else if (period === "365d") intervalValue = 365;
 
     const connection = await mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "jelszo",
-      database: "projekt2025"
+      host: process.env.DB_HOST || "127.0.0.1",
+      user: process.env.DB_USER || "utom_app",
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME || "utom_dev"
     });
 
     const sourceList = sources ? sources.split(",").map(s => s.trim()).filter(s => s !== "") : [];

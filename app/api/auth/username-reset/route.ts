@@ -1,3 +1,4 @@
+import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { mailer } from "@/lib/mailer";
@@ -14,17 +15,15 @@ export async function POST(req: Request) {
     const ip = getIp(req);
 
     // 🔐 1) User azonosítása cookie alapján
-    const cookie = req.headers.get("cookie") || "";
-    const match = cookie.match(/session_user=([^;]+)/);
+    const userId = await getSessionUserId();
 
-    if (!match) {
+    if (!userId) {
       return NextResponse.json({
         success: false,
         message: "Nem vagy bejelentkezve.",
       });
     }
 
-    const userId = match[1];
 
     // 🔥 2) Body beolvasása
     let body: any;

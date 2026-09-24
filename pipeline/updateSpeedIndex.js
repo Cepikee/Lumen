@@ -52,7 +52,7 @@ async function updateSpeedIndex() {
     host: process.env.DB_HOST || "localhost",
     user: process.env.DB_USER || "root",
     password: process.env.DB_PASS || "jelszo",
-    database: process.env.DB_NAME || "projekt2025",
+    database: process.env.DB_NAME || "utom_dev",
   });
 
   try {

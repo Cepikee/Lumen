@@ -1,6 +1,6 @@
+import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { cookies } from "next/headers";
 import { PREMIUM_FRAMES } from "@/types/premiumFrames";
 
 export async function POST(req: Request) {
@@ -8,9 +8,7 @@ export async function POST(req: Request) {
   const { avatar_frame } = body as { avatar_frame: string };
 
   // 🔒 Session ellenőrzés
-  const cookieStore = await cookies();
-  const sessionUser = cookieStore.get("session_user");
-  const userId = sessionUser?.value;
+  const userId = await getSessionUserId();
 
   if (!userId) {
     return NextResponse.json(

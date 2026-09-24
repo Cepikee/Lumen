@@ -44,11 +44,6 @@ function verifyToken(query) {
   const { v, u, e, s } = query || {};
   console.log("Incoming token params:", query);
 
-  if (query.debug === "true") {
-    console.log("DEBUG MODE → token bypass");
-    return true;
-  }
-
   if (!v || !u || !e || !s) {
     console.log("Missing token parts → DENY");
     return false;
@@ -100,7 +95,7 @@ const server = http.createServer(async (req, res) => {
     source.startsWith(base)
   );
 
-  if (!allowedOrigin && !req.url.includes("debug=true")) {
+  if (!allowedOrigin) {
     await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
     res.writeHead(403);
     return res.end("Forbidden (hotlink)");
@@ -125,10 +120,6 @@ const server = http.createServer(async (req, res) => {
 
   let userId = null;
 
-  if (req.url.includes("debug=true")) {
-    userId = "1";
-  }
-
   if (!userId) {
     const cookie = req.headers.cookie || "";
     const match = cookie.match(/session_user=([^;]+)/);
@@ -137,7 +128,26 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(401);
       return res.end("Unauthorized");
     }
-    userId = match[1];
+    const token = match[1];
+    if (!/^[a-f0-9]{64}$/.test(token)) {
+      res.writeHead(401);
+      return res.end("Unauthorized");
+    }
+    const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
+    const [sessions] = await db.query(
+      `SELECT s.user_id FROM user_sessions s INNER JOIN users u ON u.id = s.user_id
+       WHERE s.token_hash = ? AND s.expires_at > UTC_TIMESTAMP() LIMIT 1`,
+      [tokenHash]
+    );
+    if (!sessions.length) {
+      res.writeHead(401);
+      return res.end("Unauthorized");
+    }
+    userId = String(sessions[0].user_id);
+    if (String(parsedUrl.query.u) !== userId || String(parsedUrl.query.v) !== String(videoIdForLog)) {
+      res.writeHead(403);
+      return res.end("Forbidden");
+    }
   }
 
   userIdForLog = userId;

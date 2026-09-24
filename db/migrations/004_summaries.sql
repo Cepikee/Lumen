@@ -1,0 +1,28 @@
+-- Reconstructed from legacy Utom.hu SQL usage; old original DB dump unavailable.
+CREATE TABLE summaries (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  article_id BIGINT UNSIGNED NULL,
+  url VARCHAR(2048) NULL,
+  title TEXT NULL,
+  language VARCHAR(16) NOT NULL DEFAULT 'hu',
+  content LONGTEXT NULL,
+  summary_text LONGTEXT NULL,
+  detailed_content LONGTEXT NULL,
+  category VARCHAR(190) NULL,
+  source VARCHAR(190) NULL,
+  plagiarism_score DOUBLE NULL,
+  trend_keywords TEXT NULL,
+  ai_clean TINYINT(1) NOT NULL DEFAULT 0,
+  sentiment VARCHAR(100) NULL,
+  model_version VARCHAR(190) NULL,
+  model_name VARCHAR(190) NULL,
+  title_clickbait DOUBLE NULL,
+  content_clickbait DOUBLE NULL,
+  consistency_clickbait DOUBLE NULL,
+  final_clickbait DOUBLE NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id), UNIQUE KEY uq_summaries_article_id (article_id),
+  KEY idx_summaries_created (created_at), KEY idx_summaries_category_created (category, created_at),
+  KEY idx_summaries_source_created (source, created_at), KEY idx_summaries_clickbait (final_clickbait)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

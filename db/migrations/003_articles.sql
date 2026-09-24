@@ -1,0 +1,28 @@
+-- Reconstructed from legacy Utom.hu SQL usage; old original DB dump unavailable.
+CREATE TABLE articles (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  title TEXT NOT NULL,
+  url_canonical VARCHAR(2048) NOT NULL,
+  content_text LONGTEXT NULL,
+  published_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  language VARCHAR(16) NOT NULL DEFAULT 'hu',
+  source_id BIGINT UNSIGNED NULL,
+  source VARCHAR(190) NULL,
+  category VARCHAR(190) NULL,
+  short_summary LONGTEXT NULL,
+  long_summary LONGTEXT NULL,
+  sentiment VARCHAR(100) NULL,
+  embedding JSON NULL,
+  cluster_id BIGINT UNSIGNED NULL,
+  content_hash VARCHAR(128) NULL,
+  processed TINYINT(1) NOT NULL DEFAULT 0,
+  status VARCHAR(32) NOT NULL DEFAULT 'pending',
+  score DOUBLE NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id), UNIQUE KEY uq_articles_url_canonical (url_canonical(700)),
+  KEY idx_articles_status_created (status, created_at),
+  KEY idx_articles_published (published_at), KEY idx_articles_source_id (source_id),
+  KEY idx_articles_cluster (cluster_id), KEY idx_articles_content_hash (content_hash),
+  KEY idx_articles_source_published (source, published_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

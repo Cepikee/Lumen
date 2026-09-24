@@ -1,6 +1,6 @@
+import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -10,9 +10,7 @@ export async function POST(req: Request) {
     format: "svg" | "gif";
   };
 
-  const cookieStore = await cookies();
-  const sessionUser = cookieStore.get("session_user");
-  const userId = sessionUser?.value;
+  const userId = await getSessionUserId();
 
   if (!userId) {
     return NextResponse.json(

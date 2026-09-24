@@ -1,22 +1,21 @@
+import { revokeAllUserSessions, clearSessionCookie } from "@/lib/auth-session";
+import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
   try {
-    const cookieStore = await cookies();
-    const sessionUser = cookieStore.get("session_user");
+    const userId = await getSessionUserId();
 
 
-    if (!sessionUser) {
+    if (!userId) {
       return NextResponse.json(
         { success: false, message: "Nincs bejelentkezve." },
         { status: 401 }
       );
     }
 
-    const userId = Number(sessionUser.value);
 
     const { currentPassword, newPassword, logoutEverywhere } = await req.json();
 
@@ -74,15 +73,10 @@ export async function POST(req: Request) {
 
     // 6) Kijelentkeztetés minden eszközről (opcionális)
     if (logoutEverywhere) {
+      await revokeAllUserSessions(userId);
       // Egyszerű megoldás: töröljük a session cookie-t
       const response = NextResponse.json({ success: true });
-      response.cookies.set("session_user", "", {
-        httpOnly: true,
-        secure: true,
-        sameSite: "strict",
-        path: "/",
-        maxAge: 0
-      });
+      clearSessionCookie(response);
       return response;
     }
 

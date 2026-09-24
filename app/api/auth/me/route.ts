@@ -1,16 +1,15 @@
+import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
 export async function GET(req: Request) {
   try {
-    const cookie = req.headers.get("cookie") || "";
-    const match = cookie.match(/session_user=([^;]+)/);
+    const userId = await getSessionUserId();
 
-    if (!match) {
+    if (!userId) {
       return NextResponse.json({ loggedIn: false });
     }
 
-    const userId = match[1];
 
     const [rows]: any = await db.query(
       `SELECT 

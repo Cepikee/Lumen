@@ -10,9 +10,9 @@ test("offline migration plan is deterministic and begins with sources", () => {
 });
 
 test("local migrations reject unsafe targets and missing explicit opt-in", () => {
-  const valid = { NODE_ENV: "development", UTOM_OFFLINE_MODE: "true", DB_MIGRATION_ENABLED: "true", DB_NAME: "utom_local_dev", DB_HOST: "127.0.0.1", DB_USER: "utom_migrator", DB_PASSWORD: "test-only" };
+  const valid = { NODE_ENV: "development", UTOM_OFFLINE_MODE: "true", DB_MIGRATION_ENABLED: "true", DB_NAME: "utom_dev", DB_HOST: "127.0.0.1", DB_USER: "utom_migrator", DB_PASSWORD: "test-only" };
   assert.equal(validateDatabaseTarget(valid).multipleStatements, false);
-  for (const bad of [ {DB_NAME:"projekt2025"}, {DB_HOST:"remote.example"}, {NODE_ENV:"production"}, {DB_MIGRATION_ENABLED:"false"}, {UTOM_OFFLINE_MODE:"false"}, {DB_PASSWORD:""} ]) {
+  for (const bad of [ {DB_NAME:"projekt2025"}, {DB_NAME:"utom_local_dev"}, {DB_HOST:"remote.example"}, {NODE_ENV:"production"}, {DB_MIGRATION_ENABLED:"false"}, {UTOM_OFFLINE_MODE:"false"}, {DB_PASSWORD:""} ]) {
     assert.throws(() => validateDatabaseTarget({...valid,...bad}));
   }
 });
@@ -38,9 +38,9 @@ function fakeDb(rows=[]) {
 
 test("first migration runs once and is idempotent with same checksum", async () => {
   const db=fakeDb(), migrations=loadMigrations();
-  assert.deepEqual(await applyMigrations(db.connection,migrations), ["001_sources.sql"]);
+  assert.deepEqual(await applyMigrations(db.connection,migrations), migrations.map(m=>m.filename));
   assert.deepEqual(await applyMigrations(db.connection,migrations), []);
-  assert.equal(db.state.rows.length,1);
+  assert.equal(db.state.rows.length,migrations.length);
   assert.equal(db.state.released,true);
 });
 
