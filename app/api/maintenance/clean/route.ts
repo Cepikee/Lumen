@@ -1,17 +1,21 @@
 import { NextResponse } from "next/server";
-import { exec } from "child_process";
+
+/**
+ * S-02: Legacy maintenance endpoint disabled.
+ * Do not restore without server-side authorization
+ * and tests covering unauthorized requests.
+ */
+function disabled() {
+  return NextResponse.json(
+    { error: "maintenance_endpoint_disabled" },
+    { status: 404 }
+  );
+}
 
 export async function GET() {
-  return new Promise<NextResponse>((resolve) => {
-    exec("node scripts/cleanCategoriesRunner.js", (err, stdout, stderr) => {
-      if (err) {
-        console.error("CLEAN ERROR:", err);
-        resolve(NextResponse.json({ ok: false }));
-        return;
-      }
+  return disabled();
+}
 
-      console.log(stdout);
-      resolve(NextResponse.json({ ok: true }));
-    });
-  });
+export async function POST() {
+  return disabled();
 }
