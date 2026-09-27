@@ -40,7 +40,7 @@ const sliceLabelPlugin = {
 const fetcher = (url: string): Promise<any> =>
   fetch(url, {
     headers: {
-      "x-api-key": String(process.env.NEXT_PUBLIC_UTOM_API_KEY),
+      "x-api-key": "",
     } as HeadersInit,
   }).then((r) => r.json());
 
@@ -51,7 +51,7 @@ interface UtomDnsKategoriaProps {
 export default function UtomDnsKategoria({ domain }: UtomDnsKategoriaProps) {
   const { data, error } = useSWR(
     domain
-      ? `/api/insights/source-category-distribution?domain=${domain}`
+      ? `/api/premium-insights/source-category-distribution?domain=${domain}`
       : null,
     fetcher,
     { revalidateOnFocus: false, revalidateOnReconnect: true }

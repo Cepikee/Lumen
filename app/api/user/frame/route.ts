@@ -2,6 +2,7 @@ import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { PREMIUM_FRAMES } from "@/types/premiumFrames";
+import { getPremiumEntitlement } from "@/lib/entitlements";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -18,26 +19,15 @@ export async function POST(req: Request) {
   }
 
   // 🔍 User lekérése
-  const [rows]: any = await db.query(
-    "SELECT is_premium, premium_until FROM users WHERE id = ? LIMIT 1",
-    [userId]
-  );
-
-  if (!rows || rows.length === 0) {
+  const entitlement = await getPremiumEntitlement(userId);
+  if (entitlement.reason === "user_not_found") {
     return NextResponse.json(
       { success: false, message: "Felhasználó nem található." },
       { status: 404 }
     );
   }
 
-  const user = rows[0];
-
-  // 🔥 Prémium státusz ellenőrzés
-  const premiumActive =
-    user.is_premium ||
-    (user.premium_until && new Date(user.premium_until) > new Date());
-
-  if (!premiumActive) {
+  if (!entitlement.active) {
     return NextResponse.json(
       { success: false, message: "A prémium keretek csak prémium felhasználóknak elérhetők." },
       { status: 403 }

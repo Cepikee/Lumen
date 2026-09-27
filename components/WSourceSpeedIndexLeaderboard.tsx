@@ -15,7 +15,7 @@ interface LeaderboardItem {
 
 const fetcher = (url: string) =>
   fetch(url, {
-    headers: { "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY! },
+    headers: { "x-api-key": "" },
   }).then((r) => r.json());
 
 export default function WSourceSpeedIndexLeaderboard() {
@@ -33,7 +33,7 @@ export default function WSourceSpeedIndexLeaderboard() {
   const { data, error, isLoading } = useSWR<{
     success: boolean;
     leaderboard: LeaderboardItem[];
-  }>("/api/insights/speedindex/leaderboard", fetcher, {
+  }>("/api/premium-insights/speedindex/leaderboard", fetcher, {
     refreshInterval: 60000,
   });
 

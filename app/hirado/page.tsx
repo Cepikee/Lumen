@@ -7,7 +7,14 @@ export const dynamic = "force-dynamic";
 
 // 🔐 Signed URL generálás
 function signVideoUrl(videoId: number, userId: string) {
-  const secret = process.env.VIDEO_SIGN_SECRET!;
+  const secret =
+  process.env.VIDEO_SIGN_SECRET;
+
+if (!secret || secret.length < 32) {
+  throw new Error(
+    "VIDEO_SIGN_SECRET nincs beállítva vagy túl rövid."
+  );
+}
   const ttl = 60;
   const expires = Math.floor(Date.now() / 1000) + ttl;
 

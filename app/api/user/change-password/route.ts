@@ -3,6 +3,7 @@ import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
+import { validatePassword } from "@/lib/auth-policy";
 
 export async function POST(req: Request) {
   try {
@@ -27,11 +28,12 @@ export async function POST(req: Request) {
       );
     }
 
-    if (newPassword.length < 8 || !/\d/.test(newPassword) || !/[a-zA-Z]/.test(newPassword)) {
+    const passwordPolicy = validatePassword(newPassword);
+    if (!passwordPolicy.valid) {
       return NextResponse.json(
         {
           success: false,
-          message: "A jelszónak legalább 8 karakteresnek kell lennie, és tartalmaznia kell számot és betűt.",
+          message: passwordPolicy.message,
         },
         { status: 400 }
       );

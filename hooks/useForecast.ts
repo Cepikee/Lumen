@@ -1,10 +1,10 @@
 import useSWR from "swr";
 
 export function useForecast() {
-  return useSWR("/api/insights/forecast", (url) =>
+  return useSWR("/api/premium-insights/forecast", (url) =>
     fetch(url, {
       headers: {
-        "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+        "x-api-key": "",
       },
     }).then((r) => r.json())
   );

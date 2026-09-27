@@ -21,7 +21,7 @@ const fetcher = (url: string) =>
   fetch(url, {
     cache: "no-store",
     headers: {
-      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+      "x-api-key": "",
     },
   }).then((r) => {
     if (!r.ok) throw new Error("Fetch error");
@@ -34,7 +34,7 @@ export function useInsights(period: "24h" | "7d" | "30d" | "90d", sort: string) 
   q.set("period", period);
   q.set("sort", sort);
 
-  const url = `/api/insights?${q.toString()}`;
+  const url = `/api/premium-insights?${q.toString()}`;
 
   const { data, error, isValidating } = useSWR<InsightsResponse>(url, fetcher, {
     revalidateOnFocus: false,

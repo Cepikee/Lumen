@@ -2,6 +2,9 @@ import { createSession } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
+import { validatePassword, validatePin } from "@/lib/auth-policy";
+import { hashPin } from "@/lib/pin-security";
+import { sendEmailVerification } from "@/lib/email-verification";
 
 function generateRandomAvatar() {
   const styles = ["bottts", "adventurer", "micah"];
@@ -34,17 +37,18 @@ export async function POST(req: Request) {
       });
     }
 
-    if (!/^[0-9]{4}$/.test(pin)) {
+    if (!validatePin(pin)) {
       return NextResponse.json({
         success: false,
         message: "A PIN 4 számjegyből álljon.",
       });
     }
 
-    if (password.length < 8) {
+    const passwordPolicy = validatePassword(password);
+    if (!passwordPolicy.valid) {
       return NextResponse.json({
         success: false,
-        message: "A jelszónak legalább 8 karakter hosszúnak kell lennie.",
+        message: passwordPolicy.message,
       });
     }
 
@@ -76,7 +80,7 @@ export async function POST(req: Request) {
     const [result]: any = await db.query("INSERT INTO users SET ?", {
       email,
       password_hash,
-      pin_code: pin,
+      pin_code: await hashPin(pin),
       nickname,
       created_at: new Date(),
       email_verified: 0,
@@ -95,20 +99,18 @@ export async function POST(req: Request) {
 
     const userId = result.insertId;
 
-    try {
-      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/send-verification`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId }),
-      });
-    } catch {}
-
     const response = NextResponse.json({
       success: true,
       message: "Sikeres regisztráció!",
     });
 
     await createSession(Number(userId), response, true);
+
+    try {
+      await sendEmailVerification(Number(userId), email);
+    } catch (error) {
+      console.error("Verification email could not be sent:", error);
+    }
 
     return response;
   } catch {

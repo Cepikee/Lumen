@@ -1,6 +1,7 @@
 import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { evaluatePremium } from "@/lib/entitlements";
 
 export async function GET(req: Request) {
   try {
@@ -42,11 +43,12 @@ export async function GET(req: Request) {
 
     const user = rows[0];
 
+    const entitlement = evaluatePremium(user);
     return NextResponse.json({
       loggedIn: true,
       user: {
         ...user,
-        isPremium: user.is_premium === 1,
+        isPremium: entitlement.active,
       },
     });
   } catch {

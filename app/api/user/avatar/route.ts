@@ -1,6 +1,7 @@
 import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { getPremiumEntitlement } from "@/lib/entitlements";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -19,23 +20,15 @@ export async function POST(req: Request) {
     );
   }
 
-  const [rows]: any = await db.query("SELECT is_premium, premium_until FROM users WHERE id = ? LIMIT 1", [
-    userId,
-  ]);
-
-  if (!rows || rows.length === 0) {
+  const entitlement = await getPremiumEntitlement(userId);
+  if (entitlement.reason === "user_not_found") {
     return NextResponse.json(
       { success: false, message: "Felhasználó nem található." },
       { status: 404 }
     );
   }
 
-  const user = rows[0];
-  const premiumActive =
-    user.is_premium ||
-    (user.premium_until && new Date(user.premium_until) > new Date());
-
-  if (format === "gif" && !premiumActive) {
+  if (format === "gif" && !entitlement.active) {
     return NextResponse.json(
       { success: false, message: "Animált avatar csak prémium felhasználóknak elérhető." },
       { status: 403 }

@@ -70,3 +70,53 @@ Aktuális commit: `7df3f0792715f513f1293277b97095dcbbf89ce4` (új commit nem ké
 - A feltöltött A1 utáni forráscsomag alapján elkészült az **A2 migrációs keret és a forrástábla első migrációja**: `db/migration-core.cjs`, `db/migrate.cjs`, `db/migrations/001_sources.sql`, `tests/unit/migration-core.test.cjs`, `docs/UTOM_A2_MIGRATIONS.md`; továbbá `package.json` és `.env.example` bővült.
 - Az offline terv/listázás és a migrációs egységtesztek az elemzői környezetben lefutottak. Valódi MySQL 8 integrációs próba, teljes `npm run check` és WSL2-teszt itt még nem futott; az A2 és a teljes A mérföldkő nincs lezárva.
 - Az elemzői példány nem módosította a helyi Git- vagy GitHub-repositoryt. A módosított fájlokat előbb a felhasználó saját `develop/utom-recovery` ágába kell beilleszteni és ellenőrizni, majd csak sikeres teszt után committolni.
+
+---
+
+## 2026-09-27 – S-01–S-14 biztonsági folytatás
+
+### Állapot auditpontonként
+
+- **S-01 – code-level fixed, runtime verification pending.** A közös hash-elt szerveroldali sessiont minden Next user/auth route használja. A külön video server is SHA-256 token hash alapján ellenőriz; régi numerikus cookie nem érvényes. Valódi MySQL session-életciklus teszt még szükséges.
+- **S-02 – code-level fixed, worker integration pending.** A veszélyes endpointok worker tokennel védettek vagy letiltottak; a legacy worker letiltott. Az egyetlen végleges pipeline és a teljes per-article state machine még nincs lezárva.
+- **S-03 – code-level fixed, runtime verification pending.** A summaries keresés paraméterezett; typecheck és build sikeres. Valódi DB-adatkészletes kombinált filter/pagination próba még hiányzik.
+- **S-04 – részben javított.** Protokoll-, cím-, DNS-, redirect-, timeout-, méret- és content-type védelem van. A DNS-validáció és a későbbi `fetch` közti DNS rebinding kockázatot deployment egress szűrés vagy címhez kötött HTTP kliens zárhatja le.
+- **S-05 – code-level fixed.** Aktív forrásban nem találtunk beégetett DB user/jelszó/root fallbacket, `DB_PASS` eltérést vagy production video secret fallbacket.
+- **S-06 – code-level fixed.** Aktív forrásban nincs `debug=true` vagy hardcoded user-ID video bypass.
+- **S-07 – code-level fixed, runtime verification pending.** Elkészült az elveszett `app/api/premium-insights/[[...path]]/route.ts`: session és prémium ellenőrzés, szigorú útvonal-allowlist, traversal/rekurzió védelem, szerveroldali `UTOM_API_KEY`, query/status/body továbbítás, timeout. A böngészős forrásban nincs `NEXT_PUBLIC_UTOM_API_KEY`.
+- **S-08 – code-level fixed, runtime verification pending.** Új közös `lib/entitlements.ts`; lejárt prémium flag nem ad hozzáférést. Insights, avatar, frame, auth/me és video can-watch ezt használja. Fizetési forrás nincs bevezetve.
+- **S-09 – code-level fixed, migration runtime pending.** Közös jelszópolicy; bcrypt PIN-hash; régi plaintext PIN sikeres ellenőrzéskor automatikusan hashre frissül; login limit már csak sikertelen próbákat számol. Valódi legacy DB-próba még kell.
+- **S-10 – részben javított.** Timing-safe API-key ellenőrzés, explicit origin lista, production fail-closed origin alap, opcionális trusted proxy header és CSRF helper készült. Többprocesszes rate limithez Redis vagy más közös tároló és dokumentált reverse-proxy konfiguráció szükséges.
+- **S-11 – code-level fixed, runtime verification pending.** A test-email endpoint letiltott; verification sessionhöz kötött; verification/reset tokenek hash-elve tárolódnak; reset token fogyasztása tranzakciós és egyszeri; jelszó/PIN reset minden sessiont visszavon. SMTP/DB integrációs teszt nem futott.
+- **S-12 – code-level fixed.** Az ffmpeg shell string helyett `execFile` argumentumlista, bemeneti/output könyvtárkorlát, fájlnév-validáció, timeout és egyidejűségi korlát készült. Valódi ffmpeg nem futott.
+- **S-13 – code-level fixed, runtime verification pending.** A user/update csak `theme`, `nickname`, `bio` mezőket enged; password/PIN kizárt; session userre korlátozott; értékvalidáció és paraméterezett értékek maradtak.
+- **S-14 – részben javított.** Friss `npm audit fix` (`--force` nélkül) 46 sérülékenységről 5 high szintre csökkentette a listát. A maradék Puppeteer 25 és Nodemailer 10 breaking főverziót igényel; külön kompatibilitási munkát kér.
+
+### Ebben a körben módosított/létrehozott fájlok
+
+- Premium és proxy: `lib/entitlements.ts`, `lib/entitlements-core.js`, `lib/entitlements-core.d.ts`, `lib/premium-insights-path.js`, `lib/premium-insights-path.d.ts`, `app/api/premium-insights/[[...path]]/route.ts`, `app/api/user/avatar/route.ts`, `app/api/user/frame/route.ts`, `app/api/hirado/can-watch/route.ts`, `app/api/auth/me/route.ts`.
+- Auth és tokenek: `lib/auth-policy.js`, `lib/auth-policy.d.ts`, `lib/pin-security.ts`, `lib/one-time-token.ts`, `lib/email-verification.ts`, valamint a login/register/password/PIN/verification route-ok.
+- Egyéb biztonság: `lib/security.ts`, `lib/generateThumbnail.ts`, `app/api/user/update/route.ts`, `app/api/test-email/route.ts`, `.env.example`.
+- Függőségek és tesztek: `package-lock.json`, `tests/unit/auth-policy.test.cjs`, `tests/unit/entitlements.test.cjs`, `tests/unit/premium-insights-path.test.cjs`.
+- A jelen munkamenet előtt már módosított S-03–S-07, worker és kliensfájlokat megőriztük; nem állítottuk vissza őket.
+
+### Ellenőrzési eredmények
+
+| Ellenőrzés | Eredmény |
+|---|---|
+| `git diff --check` | PASS |
+| `npm run typecheck` | PASS |
+| `npm run lint -- --quiet` | PASS, 0 error |
+| teljes ESLint összesítés | 0 error, 372 warning |
+| `npm run check:imports` | PASS |
+| `npm run test:offline` | PASS, 18/18 |
+| `npm run build` | PASS, Next 16.3.6, 72 statikus oldal |
+| friss `npm audit` a javítás előtt | 46: 5 critical, 18 high, 22 moderate, 1 low |
+| `npm audit fix` után | 5 high; force nem futott |
+| valódi DB/SMTP/OpenAI/RSS/ffmpeg | nem futott |
+
+### Következő konkrét feladat
+
+Izolált MySQL integrációs teszt az S-01, S-07–S-11 folyamatokra, majd a news worker egyetlen aktív pipeline-ba rendezése tartós, lépésenkénti article state-tel és idempotens AI-feldolgozással. Deployment oldalon egress firewall, hiteles reverse-proxy header kezelés és közös Redis rate limiter szükséges.
+
+Első pipeline-stabilizációként a worker már újrahasználja az `articles.short_summary` és `articles.long_summary` meglévő eredményeit. Az AI-lépések alapértelmezett próbálkozásszáma 1; legfeljebb 2 csak explicit `AI_STEP_MAX_ATTEMPTS` beállítással engedélyezhető. A teljes lépésenkénti, tartós state machine ettől még nyitott.

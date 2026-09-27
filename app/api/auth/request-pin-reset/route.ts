@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import crypto from "crypto";
 import { db } from "@/lib/db";
 import { mailer } from "@/lib/mailer";
 import { verifyRecaptcha } from "@/lib/recaptcha";
+import { createOneTimeToken } from "@/lib/one-time-token";
 
 // IP kinyerése reverse proxy mögül
 function getIp(req: Request) {
@@ -79,16 +79,16 @@ export async function POST(req: Request) {
     const userId = users[0].id;
 
     // 🔥 6) Token generálása
-    const token = crypto.randomBytes(32).toString("hex");
+    const { token, tokenHash } = createOneTimeToken();
     const expiresAt = new Date(Date.now() + 1000 * 60 * 15);
 
     await db.query(
       "INSERT INTO pin_reset_tokens (userId, token, expiresAt) VALUES (?, ?, ?)",
-      [userId, token, expiresAt]
+      [userId, tokenHash, expiresAt]
     );
 
     // 🔥 7) Reset link összeállítása
-    const resetUrl = `https://utom.hu/reset-pin?token=${token}`;
+    const resetUrl = `${process.env.PUBLIC_APP_URL || "https://utom.hu"}/reset-pin?token=${token}`;
 
     // 🔥 8) Email küldése
     await mailer.sendMail({
@@ -106,7 +106,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true });
 
-  } catch (err: any) {
-    return NextResponse.json({ success: false, error: err.message });
+  } catch {
+    return NextResponse.json({ success: false, error: "A kérés feldolgozása sikertelen." }, { status: 500 });
   }
 }

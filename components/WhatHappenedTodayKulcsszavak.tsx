@@ -22,7 +22,7 @@ interface ApiResponse {
 
 const fetcher = (url: string) =>
   fetch(url, {
-    headers: { "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY! },
+    headers: { "x-api-key": "" },
   }).then((r) => r.json());
 
 export default function WhatHappenedTodayKulcsszavak() {
@@ -34,7 +34,7 @@ export default function WhatHappenedTodayKulcsszavak() {
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const { data, error, isLoading } = useSWR<ApiResponse>(
-    "/api/insights/trending-keywords",
+    "/api/premium-insights/trending-keywords",
     fetcher,
     { refreshInterval: 60_000, revalidateOnFocus: true }
   );

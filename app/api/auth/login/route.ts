@@ -2,6 +2,7 @@ import { createSession } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
+import { hashPin, verifyPin } from "@/lib/pin-security";
 
 function getIp(req: Request) {
   const fwd = req.headers.get("x-forwarded-for");
@@ -29,6 +30,7 @@ export async function POST(req: Request) {
       `SELECT COUNT(*) AS cnt 
        FROM login_attempts 
        WHERE ip = ?
+         AND success = 0
          AND created_at > (NOW() - INTERVAL 15 MINUTE)`,
       [ip]
     );
@@ -77,7 +79,8 @@ export async function POST(req: Request) {
       });
     }
 
-    if (user.pin_code !== pin) {
+    const pinResult = await verifyPin(pin, user.pin_code);
+    if (!pinResult.valid) {
       await db.query(
         "INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 0)",
         [ip, email]
@@ -87,6 +90,10 @@ export async function POST(req: Request) {
         success: false,
         message: "Hibás PIN",
       });
+    }
+
+    if (pinResult.needsUpgrade) {
+      await db.query("UPDATE users SET pin_code = ? WHERE id = ?", [await hashPin(pin), user.id]);
     }
 
     await db.query(

@@ -16,11 +16,11 @@ import WSourceOsszehasonlitas from "@/components/WSourceOsszehasonlitas";
 const fetcher = (url: string) =>
   fetch(url, {
     headers: {
-      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+      "x-api-key": "",
     },
   }).then((r) => r.json());
 
-const useForecast = () => useSWR("/api/insights/forecast", fetcher);
+const useForecast = () => useSWR("/api/premium-insights/forecast", fetcher);
 const InsightsOverviewChart = dynamic(
   () => import("@/components/InsightsOverviewChart"),
   { ssr: false }

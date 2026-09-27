@@ -18,7 +18,7 @@ interface DuplicationItem {
 const fetcher = (url: string) =>
   fetch(url, {
     headers: {
-      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+      "x-api-key": "",
     },
   }).then((r) => r.json());
 
@@ -40,7 +40,7 @@ export default function WSourceDuplication() {
   const { data, error, isLoading } = useSWR<{
     success: boolean;
     duplication: DuplicationItem[];
-  }>("/api/insights/duplication", fetcher, {
+  }>("/api/premium-insights/duplication", fetcher, {
     refreshInterval: 60000,
   });
 

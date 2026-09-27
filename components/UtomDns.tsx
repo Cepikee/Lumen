@@ -9,7 +9,7 @@ import UtomDnsOsszkep from "@/components/UtomDnsOsszkep";
 const fetcher = (url: string) =>
   fetch(url, {
     headers: {
-      "x-api-key": String(process.env.NEXT_PUBLIC_UTOM_API_KEY),
+      "x-api-key": "",
     },
   }).then((r) => r.json());
 
@@ -24,7 +24,7 @@ export default function UtomDns() {
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const { data } = useSWR(
-    "/api/insights/source-category-distribution",
+    "/api/premium-insights/source-category-distribution",
     fetcher
   );
 

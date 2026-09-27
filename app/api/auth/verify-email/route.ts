@@ -2,49 +2,31 @@
 
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import type { RowDataPacket } from "mysql2";
+import { hashOneTimeToken } from "@/lib/one-time-token";
 
 export async function POST(req: Request) {
   try {
     const { token } = await req.json();
 
-    if (!token) {
+    if (typeof token !== "string" || !/^[a-f0-9]{64}$/.test(token)) {
       return NextResponse.json({ success: false, message: "Hiányzó token" });
     }
 
-    // 🔥 Token ellenőrzése
-    const [rows] = await db.query<RowDataPacket[]>(
-      `
-      SELECT id, email_verification_expires
-      FROM users
-      WHERE email_verification_token = ?
-      LIMIT 1
-      `,
-      [token]
-    );
-
-    const user = rows[0];
-
-    if (!user) {
-      return NextResponse.json({ success: false, message: "Érvénytelen token" });
-    }
-
-    // 🔥 Lejárt token?
-    if (new Date(user.email_verification_expires) < new Date()) {
-      return NextResponse.json({ success: false, message: "A token lejárt" });
-    }
-
-    // 🔥 Email megerősítése
-    await db.query(
+    const [result] = await db.query(
       `
       UPDATE users
       SET email_verified = 1,
           email_verification_token = NULL,
           email_verification_expires = NULL
-      WHERE id = ?
+      WHERE email_verification_token = ?
+        AND email_verification_expires > UTC_TIMESTAMP()
       `,
-      [user.id]
+      [hashOneTimeToken(token)]
     );
+
+    if ((result as { affectedRows?: number }).affectedRows !== 1) {
+      return NextResponse.json({ success: false, message: "Érvénytelen vagy lejárt token" }, { status: 400 });
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

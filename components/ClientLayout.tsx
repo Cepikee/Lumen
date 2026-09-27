@@ -126,7 +126,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
         const res = await fetch("/api/sources", {
   cache: "no-store",
   headers: {
-    "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+    "x-api-key": "",
   },
 });
 const data = await res.json();

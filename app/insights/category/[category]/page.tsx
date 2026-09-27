@@ -58,7 +58,7 @@ export default function CategoryPage() {
       setError(null);
 
       try {
-        const url = `/api/insights/category/${encodeURIComponent(
+        const url = `/api/premium-insights/category/${encodeURIComponent(
           categoryRaw
         )}?period=${encodeURIComponent(period)}&sort=${encodeURIComponent(
           sort
@@ -67,7 +67,7 @@ export default function CategoryPage() {
         const res = await fetch(url, {
   cache: "no-store",
   headers: {
-    "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+    "x-api-key": "",
   },
 });
 

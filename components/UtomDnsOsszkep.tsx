@@ -10,7 +10,7 @@ interface Props {
 const fetcher = (url: string): Promise<any> =>
   fetch(url, {
     headers: {
-      "x-api-key": String(process.env.NEXT_PUBLIC_UTOM_API_KEY),
+      "x-api-key": "",
     } as HeadersInit,
   }).then((r) => r.json());
 
@@ -22,7 +22,7 @@ export default function UtomDnsOsszkep({ domain }: Props) {
     async function load() {
       try {
         const json = await fetcher(
-          `/api/insights/UtomDnsOsszkep?domain=${domain}`
+          `/api/premium-insights/UtomDnsOsszkep?domain=${domain}`
         );
 
         if (json?.success) {

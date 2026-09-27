@@ -56,7 +56,7 @@ interface CategoryItem {
 const fetcher = (url: string) =>
   fetch(url, {
     headers: {
-      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+      "x-api-key": "",
     },
   }).then((r) => r.json());
 
@@ -71,7 +71,7 @@ export default function WSourceCategoryDistribution() {
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const { data, error, isLoading } = useSWR<{ success: boolean; items: CategoryItem[] }>(
-    "/api/insights/source-category-distribution",
+    "/api/premium-insights/source-category-distribution",
     fetcher,
     { refreshInterval: 60000 }
   );

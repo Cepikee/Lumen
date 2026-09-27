@@ -18,7 +18,7 @@ import {
 const fetcher = (url: string) =>
   fetch(url, {
     headers: {
-      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+      "x-api-key": "",
     },
   }).then((r) => r.json());
 
@@ -33,7 +33,7 @@ export default function WSourceClickbaitPro() {
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const { data, error, isLoading } = useSWR(
-    "/api/insights/clickbait",
+    "/api/premium-insights/clickbait",
     fetcher,
     { refreshInterval: 60000 }
   );

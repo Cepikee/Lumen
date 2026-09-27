@@ -1,6 +1,8 @@
 import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { validatePin } from "@/lib/auth-policy";
+import { hashPin, verifyPin } from "@/lib/pin-security";
 
 export async function POST(req: Request) {
   try {
@@ -24,7 +26,7 @@ export async function POST(req: Request) {
       );
     }
 
-    if (!/^\d{4}$/.test(newPin)) {
+    if (!validatePin(newPin)) {
       return NextResponse.json(
         { success: false, message: "A PIN kódnak 4 számjegyből kell állnia." },
         { status: 400 }
@@ -47,7 +49,7 @@ export async function POST(req: Request) {
     const user = rows[0];
 
     // 3) Jelenlegi PIN ellenőrzése
-    if (String(user.pin_code) !== String(currentPin)) {
+    if (!(await verifyPin(currentPin, user.pin_code)).valid) {
       return NextResponse.json(
         { success: false, message: "Hibás jelenlegi PIN." },
         { status: 400 }
@@ -57,7 +59,7 @@ export async function POST(req: Request) {
     // 4) Új PIN mentése
     await db.query(
       "UPDATE users SET pin_code = ? WHERE id = ?",
-      [newPin, userId]
+      [await hashPin(newPin), userId]
     );
 
     return NextResponse.json({ success: true });

@@ -4,7 +4,7 @@ const fetcher = (url: string) =>
   fetch(url, {
     cache: "no-store",
     headers: {
-      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+      "x-api-key": "",
     },
   }).then((r) => {
     if (!r.ok) throw new Error("Fetch error");
@@ -16,7 +16,7 @@ export function useTimeseries(category: string, period: "7d" | "30d" | "90d") {
   q.set("category", category);
   q.set("period", period);
 
-  const url = `/api/insights/timeseries?${q.toString()}`;
+  const url = `/api/premium-insights/timeseries?${q.toString()}`;
 
   const { data, error, isValidating } = useSWR(url, fetcher, {
     revalidateOnFocus: false,

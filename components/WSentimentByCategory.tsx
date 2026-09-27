@@ -10,7 +10,7 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const fetcher = (url: string) =>
   fetch(url, {
-    headers: { "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY! },
+    headers: { "x-api-key": "" },
   }).then((r) => r.json());
 
 export default function WSentimentByCategory() {
@@ -24,7 +24,7 @@ export default function WSentimentByCategory() {
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const { data, error, isLoading } = useSWR(
-    "/api/insights/sentiment/by-category",
+    "/api/premium-insights/sentiment/by-category",
     fetcher,
     { refreshInterval: 60000 }
   );

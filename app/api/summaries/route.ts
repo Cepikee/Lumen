@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
-import mysql from "mysql2/promise";
+import mysql, { RowDataPacket } from "mysql2/promise";
 
 export const dynamic = "force-dynamic";
 
 let pool: mysql.Pool | null = null;
+
 function getPool() {
   if (!pool) {
     pool = mysql.createPool({
@@ -16,10 +17,10 @@ function getPool() {
       queueLimit: 0,
     });
   }
+
   return pool;
 }
 
-// --- ID → source név mapping (frontend ID-t küld!) --- //
 const ID_TO_SOURCE_NAME: Record<string, string> = {
   "1": "telex",
   "2": "24hu",
@@ -30,7 +31,6 @@ const ID_TO_SOURCE_NAME: Record<string, string> = {
   "7": "origo",
 };
 
-// --- Forrásnév → source_id mapping (backend JOIN-hoz) --- //
 const SOURCE_NAME_TO_ID: Record<string, number> = {
   telex: 1,
   "24hu": 2,
@@ -41,21 +41,84 @@ const SOURCE_NAME_TO_ID: Record<string, number> = {
   origo: 7,
 };
 
-// --- Fallback cím generálás --- //
-function fallbackTitle(row: any): string {
+type SummaryRow = RowDataPacket & {
+  id: number;
+  url: string | null;
+  title: string | null;
+  language: string | null;
+  source_id?: number | null;
+  source_name?: string | null;
+  source?: string | null;
+  content: string | null;
+  detailed_content: string | null;
+  category: string | null;
+  plagiarism_score: number | null;
+  ai_clean: number | null;
+  created_at: Date | string | null;
+  trend_keywords?: string | null;
+};
+
+function fallbackTitle(row: SummaryRow): string {
   if (row.title && row.title.trim().length > 0) {
     return row.title.trim();
   }
 
   const slug = row.url?.split("/").pop() || "";
-  const words = slug.split("-").filter((w: string) => w.length > 2);
+  const words = slug.split("-").filter((word) => word.length > 2);
 
   if (words.length >= 3) {
-    return words.map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+    return words
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
   }
 
-  const fallback = row.content?.split("\n")[0]?.trim() || "Cím nélkül";
-  return fallback;
+  return row.content?.split("\n")[0]?.trim() || "Cím nélkül";
+}
+
+function parsePositiveInt(
+  value: string | null,
+  fallback: number
+): number {
+  if (value === null || !/^\d+$/.test(value)) {
+    return fallback;
+  }
+
+  const parsed = Number(value);
+
+  if (!Number.isSafeInteger(parsed) || parsed < 1) {
+    return fallback;
+  }
+
+  return parsed;
+}
+
+function createSearchFilter(q: string): {
+  sql: string;
+  params: string[];
+} {
+  if (!q) {
+    return {
+      sql: "",
+      params: [],
+    };
+  }
+
+  const pattern = `%${q}%`;
+
+  return {
+    sql: `
+      AND (
+        s.title LIKE ?
+        OR s.content LIKE ?
+        OR s.detailed_content LIKE ?
+      )
+    `,
+    params: [
+      pattern,
+      pattern,
+      pattern,
+    ],
+  };
 }
 
 export async function GET(req: Request) {
@@ -64,14 +127,41 @@ export async function GET(req: Request) {
     const db = getPool();
 
     // ---------------------------------------------------------
-    // 🔥 0) ID ALAPÚ LEKÉRDEZÉS (Cikkoldal)
+    // 0) ID ALAPÚ LEKÉRDEZÉS
     // ---------------------------------------------------------
+
     const idParam = searchParams.get("id");
-    if (idParam) {
+
+    if (idParam !== null) {
+      if (!/^\d+$/.test(idParam)) {
+        return NextResponse.json(
+          {
+            error: "Érvénytelen cikkazonosító.",
+          },
+          {
+            status: 400,
+          }
+        );
+      }
+
       const id = Number(idParam);
 
+      if (
+        !Number.isSafeInteger(id) ||
+        id < 1
+      ) {
+        return NextResponse.json(
+          {
+            error: "Érvénytelen cikkazonosító.",
+          },
+          {
+            status: 400,
+          }
+        );
+      }
+
       const query = `
-        SELECT 
+        SELECT
           s.id,
           s.url,
           s.title,
@@ -87,16 +177,29 @@ export async function GET(req: Request) {
           s.created_at,
           s.trend_keywords
         FROM summaries s
-        LEFT JOIN articles a ON s.article_id = a.id
-        LEFT JOIN sources src ON a.source_id = src.id
+        LEFT JOIN articles a
+          ON s.article_id = a.id
+        LEFT JOIN sources src
+          ON a.source_id = src.id
         WHERE s.id = ?
         LIMIT 1
       `;
 
-      const [rows] = await db.query<any[]>(query, [id]);
+      const [rows] =
+        await db.query<SummaryRow[]>(
+          query,
+          [id]
+        );
 
-      if (!rows || rows.length === 0) {
-        return NextResponse.json({ error: "Cikk nem található." }, { status: 404 });
+      if (rows.length === 0) {
+        return NextResponse.json(
+          {
+            error: "Cikk nem található.",
+          },
+          {
+            status: 404,
+          }
+        );
       }
 
       const row = rows[0];
@@ -105,70 +208,146 @@ export async function GET(req: Request) {
         ...row,
         title: fallbackTitle(row),
         keywords: row.trend_keywords
-          ? row.trend_keywords.split(",").map((k: string) => k.trim())
+          ? row.trend_keywords
+              .split(",")
+              .map((keyword) =>
+                keyword.trim()
+              )
+              .filter(Boolean)
           : [],
       });
     }
 
     // ---------------------------------------------------------
-    // 🔥 1) Paraméterek beolvasása
+    // 1) PARAMÉTEREK
     // ---------------------------------------------------------
-    const page = Math.max(1, Number(searchParams.get("page") ?? 1));
+
+    const page = Math.min(
+      parsePositiveInt(
+        searchParams.get("page"),
+        1
+      ),
+      100000
+    );
+
     const limit = 10;
-    const offset = (page - 1) * limit;
+    const offset =
+      (page - 1) * limit;
 
-    // --- Keresés ---
-    const q = searchParams.get("q")?.trim() ?? "";
-    let searchCondition = "";
-    if (q) {
-      const safe = q.replace(/'/g, "''");
-      searchCondition = `
-        AND (
-          s.title LIKE '%${safe}%'
-          OR s.content LIKE '%${safe}%'
-          OR s.detailed_content LIKE '%${safe}%'
-        )
-      `;
-    }
+    const q = (
+      searchParams.get("q") ?? ""
+    )
+      .trim()
+      .slice(0, 250);
 
-    // --- Források ---
-    const sourcesRaw = searchParams.getAll("source");
-
-    const normalizedSources = sourcesRaw
-      .map((s) => {
-        if (ID_TO_SOURCE_NAME[s]) return ID_TO_SOURCE_NAME[s];
-        return s.toLowerCase().replace(".hu", "").replace(/\./g, "");
-      })
-      .filter((s) => s !== "");
-
-    const sourceIds = normalizedSources
-      .map((s) => SOURCE_NAME_TO_ID[s])
-      .filter((id) => id !== undefined);
-
-    // --- Kategóriák ---
-    const categories = searchParams.getAll("category");
+    const searchFilter =
+      createSearchFilter(q);
 
     // ---------------------------------------------------------
-    // 🔥 2) Kombinált szűrés (FORRÁS + KATEGÓRIA) — AND logika
+    // FORRÁSOK
     // ---------------------------------------------------------
-    if (sourceIds.length > 0 || categories.length > 0) {
-      const whereParts: string[] = [];
-      const params: any[] = [];
+
+    const sourcesRaw =
+      searchParams.getAll("source");
+
+    const normalizedSources =
+      sourcesRaw
+        .map((source) => {
+          if (
+            ID_TO_SOURCE_NAME[source]
+          ) {
+            return ID_TO_SOURCE_NAME[
+              source
+            ];
+          }
+
+          return source
+            .toLowerCase()
+            .replace(".hu", "")
+            .replace(/\./g, "");
+        })
+        .filter(Boolean);
+
+    const sourceIds = [
+      ...new Set(
+        normalizedSources
+          .map(
+            (source) =>
+              SOURCE_NAME_TO_ID[
+                source
+              ]
+          )
+          .filter(
+            (
+              id
+            ): id is number =>
+              id !== undefined
+          )
+      ),
+    ];
+
+    // ---------------------------------------------------------
+    // KATEGÓRIÁK
+    // ---------------------------------------------------------
+
+    const categories = [
+      ...new Set(
+        searchParams
+          .getAll("category")
+          .map((category) =>
+            category.trim()
+          )
+          .filter(Boolean)
+          .slice(0, 50)
+      ),
+    ];
+
+    // ---------------------------------------------------------
+    // 2) FORRÁS + KATEGÓRIA
+    // ---------------------------------------------------------
+
+    if (
+      sourceIds.length > 0 ||
+      categories.length > 0
+    ) {
+      const whereParts: string[] =
+        [];
+
+      const params: Array<
+        string | number
+      > = [];
 
       if (sourceIds.length > 0) {
-        whereParts.push(`a.source_id IN (${sourceIds.map(() => "?").join(",")})`);
+        whereParts.push(
+          `a.source_id IN (${sourceIds
+            .map(() => "?")
+            .join(",")})`
+        );
+
         params.push(...sourceIds);
       }
 
-      if (categories.length > 0) {
-        whereParts.push(`s.category IN (${categories.map(() => "?").join(",")})`);
-        params.push(...categories);
+      if (
+        categories.length > 0
+      ) {
+        whereParts.push(
+          `s.category IN (${categories
+            .map(() => "?")
+            .join(",")})`
+        );
+
+        params.push(
+          ...categories
+        );
       }
 
-      const whereClause = whereParts.length > 0 ? `WHERE ${whereParts.join(" AND ")}` : "";
+      const whereClause =
+        `WHERE ${whereParts.join(
+          " AND "
+        )}`;
 
       const query = `
-        SELECT 
+        SELECT
           s.id,
           s.url,
           s.title,
@@ -182,39 +361,63 @@ export async function GET(req: Request) {
           s.ai_clean,
           s.created_at
         FROM summaries s
-        LEFT JOIN articles a ON s.article_id = a.id
-        LEFT JOIN sources src ON a.source_id = src.id
+        LEFT JOIN articles a
+          ON s.article_id = a.id
+        LEFT JOIN sources src
+          ON a.source_id = src.id
         ${whereClause}
-        ${searchCondition}   -- 🔥 KERESÉS HOZZÁADVA
+        ${searchFilter.sql}
         ORDER BY s.created_at DESC
         LIMIT ? OFFSET ?
       `;
 
-      params.push(limit, offset);
+      params.push(
+        ...searchFilter.params,
+        limit,
+        offset
+      );
 
-      const [rows] = await db.query<any[]>(query, params);
+      const [rows] =
+        await db.query<
+          SummaryRow[]
+        >(query, params);
 
-      const finalRows = rows.map((r) => ({
-        ...r,
-        title: fallbackTitle(r),
-      }));
-
-      return NextResponse.json(finalRows ?? []);
+      return NextResponse.json(
+        rows.map((row) => ({
+          ...row,
+          title:
+            fallbackTitle(row),
+        }))
+      );
     }
 
     // ---------------------------------------------------------
-    // 🔥 3) Mai nap szűrő
+    // 3) MAI NAP
     // ---------------------------------------------------------
-    const todayFilter = searchParams.get("today") === "true";
+
+    const todayFilter =
+      searchParams.get("today") ===
+      "true";
+
     if (todayFilter) {
       const today = new Date();
-      today.setHours(0, 0, 0, 0);
 
-      const tomorrow = new Date(today);
-      tomorrow.setDate(today.getDate() + 1);
+      today.setHours(
+        0,
+        0,
+        0,
+        0
+      );
+
+      const tomorrow =
+        new Date(today);
+
+      tomorrow.setDate(
+        today.getDate() + 1
+      );
 
       const todayQuery = `
-        SELECT 
+        SELECT
           s.id,
           s.url,
           s.title,
@@ -228,62 +431,100 @@ export async function GET(req: Request) {
           s.ai_clean,
           s.created_at
         FROM summaries s
-        LEFT JOIN articles a ON s.article_id = a.id
-        LEFT JOIN sources src ON a.source_id = src.id
-        WHERE s.created_at >= ? AND s.created_at < ?
-        ${searchCondition}   -- 🔥 KERESÉS HOZZÁADVA
+        LEFT JOIN articles a
+          ON s.article_id = a.id
+        LEFT JOIN sources src
+          ON a.source_id = src.id
+        WHERE
+          s.created_at >= ?
+          AND s.created_at < ?
+        ${searchFilter.sql}
         ORDER BY s.created_at DESC
       `;
 
-      const [rows] = await db.query<any[]>(todayQuery, [today, tomorrow]);
+      const [rows] =
+        await db.query<
+          SummaryRow[]
+        >(
+          todayQuery,
+          [
+            today,
+            tomorrow,
+            ...searchFilter.params,
+          ]
+        );
 
-      const finalRows = rows.map((r) => ({
-        ...r,
-        title: fallbackTitle(r),
-      }));
-
-      return NextResponse.json(finalRows ?? []);
+      return NextResponse.json(
+        rows.map((row) => ({
+          ...row,
+          title:
+            fallbackTitle(row),
+        }))
+      );
     }
 
     // ---------------------------------------------------------
-    // 🔥 4) Normál paginált feed + keresés
+    // 4) NORMÁL FEED + KERESÉS
     // ---------------------------------------------------------
-    {
-      const query = `
-        SELECT 
-          s.id,
-          s.url,
-          s.title,
-          s.language,
-          src.id AS source_id,
-          src.name AS source_name,
-          s.content,
-          s.detailed_content,
-          s.category,
-          s.plagiarism_score,
-          s.ai_clean,
-          s.created_at
-        FROM summaries s
-        LEFT JOIN articles a ON s.article_id = a.id
-        LEFT JOIN sources src ON a.source_id = src.id
-        WHERE 1=1
-        ${searchCondition}   -- 🔥 KERESÉS HOZZÁADVA
-        ORDER BY s.created_at DESC
-        LIMIT ? OFFSET ?
-      `;
 
-      const [rows] = await db.query<any[]>(query, [limit, offset]);
+    const query = `
+      SELECT
+        s.id,
+        s.url,
+        s.title,
+        s.language,
+        src.id AS source_id,
+        src.name AS source_name,
+        s.content,
+        s.detailed_content,
+        s.category,
+        s.plagiarism_score,
+        s.ai_clean,
+        s.created_at
+      FROM summaries s
+      LEFT JOIN articles a
+        ON s.article_id = a.id
+      LEFT JOIN sources src
+        ON a.source_id = src.id
+      WHERE 1 = 1
+      ${searchFilter.sql}
+      ORDER BY s.created_at DESC
+      LIMIT ? OFFSET ?
+    `;
 
-      const finalRows = rows.map((r) => ({
-        ...r,
-        title: fallbackTitle(r),
-      }));
+    const [rows] =
+      await db.query<
+        SummaryRow[]
+      >(
+        query,
+        [
+          ...searchFilter.params,
+          limit,
+          offset,
+        ]
+      );
 
-      return NextResponse.json(finalRows);
-    }
+    return NextResponse.json(
+      rows.map((row) => ({
+        ...row,
+        title:
+          fallbackTitle(row),
+      }))
+    );
+  } catch (error) {
+    console.error(
+      "API /summaries hiba:",
+      error
+    );
 
-  } catch (err: any) {
-    console.error("API /summaries hiba:", err);
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return NextResponse.json(
+      {
+        error:
+          "summaries_query_failed",
+      },
+      {
+        status: 500,
+      }
+    );
   }
 }

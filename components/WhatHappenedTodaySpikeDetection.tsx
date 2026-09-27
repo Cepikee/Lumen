@@ -18,7 +18,7 @@ interface SpikeItem {
 const fetcher = (url: string) =>
   fetch(url, {
     headers: {
-      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+      "x-api-key": "",
     },
   }).then((r) => r.json());
 
@@ -69,7 +69,7 @@ export default function WhatHappenedTodaySpikeDetection() {
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const { data, error, isLoading } = useSWR<{ success: boolean; spikes: SpikeItem[] }>(
-    "/api/insights/spike-detection",
+    "/api/premium-insights/spike-detection",
     fetcher,
     { refreshInterval: 60_000, revalidateOnFocus: true }
   );

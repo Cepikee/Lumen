@@ -1,11 +1,14 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { validatePin } from "@/lib/auth-policy";
+import { hashPin } from "@/lib/pin-security";
+import { hashOneTimeToken } from "@/lib/one-time-token";
 
 export async function POST(req: Request) {
   try {
     const { token, newPin } = await req.json();
 
-    if (!token || !newPin) {
+    if (typeof token !== "string" || !/^[a-f0-9]{64}$/.test(token) || !newPin) {
       return NextResponse.json(
         { success: false, error: "Hiányzó adatok." },
         { status: 400 }
@@ -13,21 +16,24 @@ export async function POST(req: Request) {
     }
 
     // 🔥 1) PIN validáció
-    if (!/^\d{4}$/.test(newPin)) {
+    if (!validatePin(newPin)) {
       return NextResponse.json(
         { success: false, error: "A PIN kódnak 4 számjegyből kell állnia." },
         { status: 400 }
       );
     }
 
-    // 🔥 2) Token keresése
-    const [rows]: any = await db.query(
-      "SELECT userId, expiresAt FROM pin_reset_tokens WHERE token = ? LIMIT 1",
-      [token]
-    );
+    const connection = await db.getConnection();
+    try {
+      await connection.beginTransaction();
+      const [rows]: any = await connection.query(
+        "SELECT id, userId, expiresAt FROM pin_reset_tokens WHERE token = ? LIMIT 1 FOR UPDATE",
+        [hashOneTimeToken(token)],
+      );
 
     if (!rows || rows.length === 0) {
-      return NextResponse.json(
+        await connection.rollback();
+        return NextResponse.json(
         { success: false, error: "Érvénytelen vagy lejárt token." },
         { status: 400 }
       );
@@ -37,22 +43,32 @@ export async function POST(req: Request) {
 
     // 🔥 3) Token lejárati idő ellenőrzése
     if (new Date(expiresAt) < new Date()) {
-      return NextResponse.json(
+        await connection.query("DELETE FROM pin_reset_tokens WHERE id = ?", [rows[0].id]);
+        await connection.commit();
+        return NextResponse.json(
         { success: false, error: "A token lejárt." },
         { status: 400 }
       );
     }
 
     // 🔥 4) PIN frissítése
-    await db.query(
+      await connection.query(
       "UPDATE users SET pin_code = ? WHERE id = ?",
-      [newPin, userId]
+      [await hashPin(newPin), userId]
     );
 
     // 🔥 5) Token törlése
-    await db.query("DELETE FROM pin_reset_tokens WHERE token = ?", [token]);
+      await connection.query("DELETE FROM pin_reset_tokens WHERE id = ?", [rows[0].id]);
+      await connection.query("DELETE FROM user_sessions WHERE user_id = ?", [userId]);
+      await connection.commit();
 
-    return NextResponse.json({ success: true });
+      return NextResponse.json({ success: true });
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
 
   } catch (err: any) {
     console.error("PIN reset error:", err);

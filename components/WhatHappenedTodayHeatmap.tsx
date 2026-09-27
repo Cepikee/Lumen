@@ -26,7 +26,7 @@ interface HeatmapResponse {
 const fetcher = (url: string) =>
   fetch(url, {
     headers: {
-      "x-api-key": process.env.NEXT_PUBLIC_UTOM_API_KEY!,
+      "x-api-key": "",
     },
   }).then((r) => r.json());
 
@@ -46,7 +46,7 @@ export default function WhatHappenedTodayHeatmap() {
   const tooltipBody = isDark ? "#ddd" : "#333";
   const tooltipBorder = isDark ? "#444" : "#ccc";
 
-  const { data, error, isLoading } = useSWR<HeatmapResponse>("/api/insights/heatmap", fetcher, {
+  const { data, error, isLoading } = useSWR<HeatmapResponse>("/api/premium-insights/heatmap", fetcher, {
     refreshInterval: 60_000,
     revalidateOnFocus: true,
   });

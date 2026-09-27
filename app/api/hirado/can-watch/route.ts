@@ -3,6 +3,7 @@ import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import type { RowDataPacket } from "mysql2";
+import { evaluatePremium } from "@/lib/entitlements";
 
 // 🔐 Rate limiting bucket (user + IP)
 const rateBuckets = new Map();
@@ -73,7 +74,7 @@ export async function GET(req: Request) {
 
     // 🔐 USER lekérdezés
     const [userRows] = await db.query<RowDataPacket[]>(
-      "SELECT id, email, is_premium, last_ip FROM users WHERE id = ? LIMIT 1",
+      "SELECT id, email, is_premium, premium_until, premium_tier, last_ip FROM users WHERE id = ? LIMIT 1",
       [userId]
     );
 
@@ -111,10 +112,11 @@ export async function GET(req: Request) {
     }
 
     // 🔐 PRÉMIUM?
-    const isPremium =
-      user.is_premium === 1 ||
-      user.is_premium === "1" ||
-      user.is_premium === true;
+    const isPremium = evaluatePremium(user as unknown as {
+      is_premium: unknown;
+      premium_until?: unknown;
+      premium_tier?: unknown;
+    }).active;
 
     if (isPremium) {
       await logAccess(userId, videoId, ip, "allowed");

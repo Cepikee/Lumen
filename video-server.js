@@ -6,9 +6,24 @@ import crypto from "crypto";
 import { db } from "./lib/db-node.js";
 
 // 🔐 Secret betöltése
-const VIDEO_SIGN_SECRET =
-  process.env.VIDEO_SIGN_SECRET ||
-  "3f9c1e8b7a2d4f0c9e1a7b3d6c4f8e2a5d7c9b1e3f6a8d4c7b2e9f1a3c5d7e9";
+function requireSecret(name, minLength = 32) {
+  const value = process.env[name];
+
+  if (!value || value.length < minLength) {
+    throw new Error(
+      `${name} nincs beállítva vagy túl rövid. Minimum ${minLength} karakter szükséges.`
+    );
+  }
+
+  return value;
+}
+
+// 🔐 Kötelező videóaláíró titok.
+// Nincs beégetett fallback.
+const VIDEO_SIGN_SECRET = requireSecret(
+  "VIDEO_SIGN_SECRET",
+  32
+);
 
 // 🔐 Engedélyezett origin / referer
 const ALLOWED_ORIGINS = [
