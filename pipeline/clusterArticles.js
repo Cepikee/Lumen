@@ -1,19 +1,90 @@
-// /pipeline/clusterArticles.js — Javított clusterezés
+"use strict";
+
 require("dotenv").config({ path: "/var/www/utom/.env" });
 const mysql = require("mysql2/promise");
+const { existingClusterId, parseValidEmbedding } = require("./idempotency");
 
-// --- Cosine similarity ---
+const CLUSTER_LOCK_NAME = "utom:cluster:utc-day:v1";
+const THRESHOLD = 0.90;
+
 function cosineSimilarity(v1, v2) {
   if (!v1 || !v2 || v1.length !== v2.length) return 0;
-
-  let dot = 0, mag1 = 0, mag2 = 0;
+  let dot = 0;
+  let mag1 = 0;
+  let mag2 = 0;
   for (let i = 0; i < v1.length; i++) {
     dot += v1[i] * v2[i];
     mag1 += v1[i] * v1[i];
     mag2 += v2[i] * v2[i];
   }
-  const denom = Math.sqrt(mag1) * Math.sqrt(mag2);
-  return denom === 0 ? 0 : dot / denom;
+  const denominator = Math.sqrt(mag1) * Math.sqrt(mag2);
+  return denominator === 0 ? 0 : dot / denominator;
+}
+
+async function clusterArticleWithConnection(conn, articleId) {
+  await conn.beginTransaction();
+  try {
+    const [rows] = await conn.execute(
+      "SELECT id, embedding, published_at, source, cluster_id FROM articles WHERE id = ? FOR UPDATE",
+      [articleId],
+    );
+    if (!rows.length) throw new Error(`Nincs ilyen cikk: ${articleId}`);
+
+    const article = rows[0];
+    const storedClusterId = existingClusterId(article.cluster_id);
+    if (storedClusterId) {
+      await conn.commit();
+      return { articleId, clusterId: storedClusterId, reused: true, newCluster: false };
+    }
+
+    const [[dateState]] = await conn.execute(
+      "SELECT published_at >= UTC_DATE() AND published_at < UTC_DATE() + INTERVAL 1 DAY AS is_current_utc_day FROM articles WHERE id=?",
+      [articleId],
+    );
+    if (!dateState?.is_current_utc_day) {
+      await conn.commit();
+      return { articleId, clusterId: null, skipped: true, reason: "Nem a jelenlegi UTC-nap cikke" };
+    }
+
+    const currentEmbedding = parseValidEmbedding(article.embedding);
+    if (!currentEmbedding) throw new Error(`A cikknek nincs érvényes embeddingje: ${articleId}`);
+
+    const [otherArticles] = await conn.execute(
+      `SELECT id, embedding, cluster_id FROM articles
+       WHERE id != ? AND embedding IS NOT NULL
+         AND published_at >= UTC_DATE() AND published_at < UTC_DATE() + INTERVAL 1 DAY`,
+      [articleId],
+    );
+
+    let bestSimilarity = 0;
+    let bestClusterId = null;
+    for (const other of otherArticles) {
+      const otherEmbedding = parseValidEmbedding(other.embedding);
+      if (!otherEmbedding) continue;
+      const similarity = cosineSimilarity(currentEmbedding, otherEmbedding);
+      if (similarity > bestSimilarity) {
+        bestSimilarity = similarity;
+        bestClusterId = existingClusterId(other.cluster_id);
+      }
+    }
+
+    if (bestSimilarity >= THRESHOLD && bestClusterId) {
+      await conn.execute("UPDATE articles SET cluster_id = ? WHERE id = ?", [bestClusterId, articleId]);
+      await conn.commit();
+      return { articleId, clusterId: bestClusterId, similarity: bestSimilarity, newCluster: false };
+    }
+
+    const [insertResult] = await conn.execute(
+      "INSERT INTO clusters (first_published_at, first_source, title) VALUES (?, ?, ?)",
+      [article.published_at, article.source, null],
+    );
+    await conn.execute("UPDATE articles SET cluster_id = ? WHERE id = ?", [insertResult.insertId, articleId]);
+    await conn.commit();
+    return { articleId, clusterId: insertResult.insertId, similarity: bestSimilarity, newCluster: true };
+  } catch (error) {
+    await conn.rollback();
+    throw error;
+  }
 }
 
 async function clusterArticle(articleId) {
@@ -23,113 +94,25 @@ async function clusterArticle(articleId) {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME || "utom_dev",
   });
-
-  // 1) Lekérjük a cikket
-  const [rows] = await conn.execute(
-    "SELECT id, embedding, published_at, source FROM articles WHERE id = ?",
-    [articleId]
-  );
-
-  if (!rows.length) {
+  try {
+    return await withClusterAdvisoryLock(conn, () => clusterArticleWithConnection(conn, articleId));
+  } finally {
     await conn.end();
-    throw new Error(`Nincs ilyen cikk: ${articleId}`);
   }
-
-  const article = rows[0];
-
-  // --- DÁTUMKORLÁT: csak a mai cikkeket clusterezzük ---
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const publishedAt = new Date(article.published_at);
-  if (publishedAt < today) {
-    await conn.end();
-    return {
-      articleId,
-      clusterId: null,
-      skipped: true,
-      reason: "Régi cikk — nem clusterezzük"
-    };
-  }
-
-  if (!article.embedding) {
-    await conn.end();
-    throw new Error(`A cikknek nincs embeddingje: ${articleId}`);
-  }
-
-  const currentEmbedding = JSON.parse(article.embedding);
-
-  // 2) Csak a MAI cikkekkel hasonlítjuk össze
-  const [otherArticles] = await conn.execute(
-    `
-    SELECT id, embedding, cluster_id
-    FROM articles
-    WHERE id != ?
-      AND embedding IS NOT NULL
-      AND published_at >= CURDATE()
-    `,
-    [articleId]
-  );
-
-  let bestSimilarity = 0;
-  let bestClusterId = null;
-
-  // 3) Similarity számítás
-  for (const other of otherArticles) {
-    if (!other.embedding) continue;
-
-    const otherEmbedding = JSON.parse(other.embedding);
-    const sim = cosineSimilarity(currentEmbedding, otherEmbedding);
-
-    if (sim > bestSimilarity) {
-      bestSimilarity = sim;
-      bestClusterId = other.cluster_id;
-    }
-  }
-
-  // --- ÚJ THRESHOLD: sokkal pontosabb ---
-  const THRESHOLD = 0.90;
-
-  if (bestSimilarity >= THRESHOLD && bestClusterId) {
-    // Meglévő cluster
-    await conn.execute(
-      "UPDATE articles SET cluster_id = ? WHERE id = ?",
-      [bestClusterId, articleId]
-    );
-
-    await conn.end();
-    return {
-      articleId,
-      clusterId: bestClusterId,
-      similarity: bestSimilarity,
-      newCluster: false,
-    };
-  }
-
-  // Új cluster
-  const [insertRes] = await conn.execute(
-    `
-    INSERT INTO clusters (first_published_at, first_source, title)
-    VALUES (?, ?, ?)
-    `,
-    [article.published_at, article.source, null]
-  );
-
-  const newClusterId = insertRes.insertId;
-
-  await conn.execute(
-    "UPDATE articles SET cluster_id = ? WHERE id = ?",
-    [newClusterId, articleId]
-  );
-
-  await conn.end();
-
-  return {
-    articleId,
-    clusterId: newClusterId,
-    similarity: bestSimilarity,
-    newCluster: true,
-  };
 }
 
-module.exports = { clusterArticle };
+async function withClusterAdvisoryLock(conn, operation) {
+  let locked = false;
+  try {
+    const [[lockRow]] = await conn.execute("SELECT GET_LOCK(?, 10) AS acquired", [CLUSTER_LOCK_NAME]);
+    locked = Number(lockRow?.acquired) === 1;
+    if (!locked) throw new Error("cluster_lock_unavailable");
+    return await operation();
+  } finally {
+    if (locked) {
+      try { await conn.execute("SELECT RELEASE_LOCK(?)", [CLUSTER_LOCK_NAME]); } catch {}
+    }
+  }
+}
+
+module.exports = { CLUSTER_LOCK_NAME, clusterArticle, clusterArticleWithConnection, cosineSimilarity, withClusterAdvisoryLock };

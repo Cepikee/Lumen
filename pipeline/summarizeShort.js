@@ -57,14 +57,9 @@ ${contentText}
     `.trim();
 
     // 3) OpenAI hívás (aiClient.js-ből)
-    let summary = await callOpenAI(prompt, 190);
+    const summary = await callOpenAI(prompt, 190, "short_summary");
 
     // 4) Validálás + újrapróbálás
-    if (!isValidSummary(summary)) {
-      console.warn(`[SHORT] ⚠️ Érvénytelen összefoglaló, újrapróbálás OpenAI-val...`);
-      summary = await callOpenAI(prompt, 190);
-    }
-
     if (!isValidSummary(summary)) {
       console.error(`[SHORT] ❌ AI nem adott érvényes összefoglalót! articleId=${articleId}`);
       return { ok: false, error: "Érvénytelen összefoglaló" };

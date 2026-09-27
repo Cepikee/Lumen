@@ -87,7 +87,7 @@ async function processClickbaitOpenAI(articleId) {
     const prompt = buildClickbaitPrompt(title, content_text.slice(0, 3000));
 
     // 3) OpenAI hívás
-    const raw = await callOpenAI(prompt, 200);
+    const raw = await callOpenAI(prompt, 200, "clickbait");
     console.log("[CLICKBAIT-OAI] Nyers válasz:", raw);
 
     // 4) Parsolás

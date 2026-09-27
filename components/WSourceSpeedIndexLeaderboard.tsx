@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useUserStore } from "@/store/useUserStore";
 import { motion, AnimatePresence } from "framer-motion";
 import UtomModal from "@/components/UtomModal";
@@ -29,6 +29,7 @@ export default function WSourceSpeedIndexLeaderboard() {
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const previousRanking = useRef<Record<string, number>>({});
+  const [rankingDeltas, setRankingDeltas] = useState<Record<string, number>>({});
 
   const { data, error, isLoading } = useSWR<{
     success: boolean;
@@ -43,6 +44,17 @@ export default function WSourceSpeedIndexLeaderboard() {
       (a, b) => (a.avgDelay ?? Infinity) - (b.avgDelay ?? Infinity)
     );
   }, [data]);
+
+  useEffect(() => {
+    const nextRanking: Record<string, number> = {};
+    const nextDeltas: Record<string, number> = {};
+    items.forEach((item, index) => {
+      nextDeltas[item.source] = (previousRanking.current[item.source] ?? index) - index;
+      nextRanking[item.source] = index;
+    });
+    previousRanking.current = nextRanking;
+    setRankingDeltas(nextDeltas);
+  }, [items]);
 
   if (isLoading) return <div className="p-12 text-center">Betöltés...</div>;
   if (error || !data?.success)
@@ -99,9 +111,7 @@ export default function WSourceSpeedIndexLeaderboard() {
         {/* lista */}
         <div className="space-y-6 relative z-10">
           {items.map((item, index) => {
-            const previousIndex = previousRanking.current[item.source] ?? index;
-            const delta = previousIndex - index;
-            previousRanking.current[item.source] = index;
+            const delta = rankingDeltas[item.source] ?? 0;
 
             const percentage = maxDelay
               ? ((item.avgDelay ?? 0) / maxDelay) * 100

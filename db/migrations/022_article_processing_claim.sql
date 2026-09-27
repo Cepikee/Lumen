@@ -1,0 +1,2 @@
+-- Additive worker lease and failure diagnostics; existing article data is preserved.
+ALTER TABLE articles ADD COLUMN worker_id VARCHAR(128) NULL, ADD COLUMN claim_token CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NULL, ADD COLUMN claimed_at DATETIME(6) NULL, ADD COLUMN heartbeat_at DATETIME(6) NULL, ADD COLUMN processing_attempts INT UNSIGNED NOT NULL DEFAULT 0, ADD COLUMN failed_step VARCHAR(64) NULL, ADD COLUMN last_processing_error VARCHAR(1000) NULL, ADD KEY idx_articles_recovery (status, heartbeat_at), ADD UNIQUE KEY uq_articles_claim_token (claim_token);

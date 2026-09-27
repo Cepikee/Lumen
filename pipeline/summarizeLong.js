@@ -106,23 +106,11 @@ Fontos szabályok:
     `.trim();
 
     // 4) OpenAI hívás (aiClient.js-ből)
-    let detailed = await callOpenAI(prompt, 620);
+    let detailed = await callOpenAI(prompt, 620, "long_summary");
 
-    // 5) Validáció — 1 újrapróbálás
+    // 5) Validáció — fizetős hívást nem próbálunk automatikusan újra
     if (!isValidDetailed(detailed)) {
-      console.warn(`[LONG] ⚠️ Első elemzés érvénytelen, újrapróbálás...`);
-      detailed = await callOpenAI(prompt, 620);
-    }
-
-    // 6) Fallback
-    if (!isValidDetailed(detailed)) {
-      detailed = `
-A cikk rövid összefoglalója alapján az alábbi elemzés készíthető:
-
-${shortSummary}
-
-A részletes tartalom hiánya miatt az elemzés korlátozott.
-      `.trim();
+      return { ok: false, error: "Érvénytelen részletes összefoglaló" };
     }
 
     // 7) Tisztítás

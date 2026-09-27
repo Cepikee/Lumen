@@ -74,17 +74,10 @@ Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kate
     `.trim();
 
     // 4) OpenAI hívás
-    let rawCategory = await callOpenAI(prompt, 40);
-    let category = rawCategory.trim();
+    const rawCategory = await callOpenAI(prompt, 40, "category");
+    const category = rawCategory.trim();
 
     // 5) Validáció
-    if (!isValidCategory(category)) {
-      console.warn(`[CAT] ⚠️ Érvénytelen kategória: "${category}". Újrapróbálás...`);
-
-      rawCategory = await callOpenAI(prompt, 40);
-      category = rawCategory.trim();
-    }
-
     if (!isValidCategory(category)) {
       console.error(`[CAT] ❌ AI nem adott érvényes kategóriát! id=${articleId} RAW="${rawCategory}"`);
       return { ok: false };

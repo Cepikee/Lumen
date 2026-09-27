@@ -2,11 +2,12 @@
 export const runtime = "nodejs";
 
 import { NextResponse } from "next/server";
-import mysql, { RowDataPacket } from "mysql2/promise";
+import mysql from "mysql2/promise";
 import Parser from "rss-parser";
 import fs from "fs";
 import * as cheerio from "cheerio";
 import puppeteer from "puppeteer";
+import { canonicalizeArticleUrl } from "@/lib/article-identity";
 import { blockedCapabilityResponse } from "@/lib/config/routeGuard";
 import { requireInternalWorker } from "@/lib/security/internal-worker";
 
@@ -170,47 +171,6 @@ async function fetchPortfolioArticle(url: string): Promise<string> {
   }
 }
 
-/** OPENAI SUMMARIZER – eredeti prompt, fallback nélkül */
-async function summarizeArticle(title: string, content: string) {
-  const res = await fetch(
-    "https://api.openai.com/v1/chat/completions",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        response_format: { type: "json_object" },
-        messages: [
-          {
-            role: "system",
-            content: `
-Foglalj össze magyarul tényszerűen, 5-8 mondatban.
-Adj vissza egy JSON-t a következő formában:
-
-{
-  "category": "…",
-  "short_summary": "…"
-}
-
-Semmi mást ne írj, csak érvényes JSON-t.
-`,
-          },
-          {
-            role: "user",
-            content: `Cikk címe: ${title}\n\nCikk tartalma:\n${content}`,
-          },
-        ],
-      }),
-    }
-  );
-
-  const json = await res.json();
-  return JSON.parse(json.choices[0].message.content);
-}
-
 /**
  * S-02:
  * Hírgyűjtés kizárólag hitelesített, szerveroldali POST-kéréssel.
@@ -273,15 +233,10 @@ export async function POST(req: Request) {
         const feed = await parser.parseString(xml);
 
         for (const item of feed.items) {
-          const link = item.link;
+          const originalLink = item.link;
+          const link = canonicalizeArticleUrl(originalLink);
           if (!link) continue;
 
-          const [rows] = await connection.execute<RowDataPacket[]>(
-            "SELECT id FROM articles WHERE url_canonical = ?",
-            [link]
-          );
-
-          if (rows.length === 0) {
             const sourceId = detectSourceId(link);
             if (!sourceId) continue;
 
@@ -309,11 +264,11 @@ export async function POST(req: Request) {
             }
 
             // --- CIKK BESZÚRÁSA ---
-            await connection.execute(
-              `INSERT INTO articles
+            const [insertResult] = await connection.execute(
+              `INSERT IGNORE INTO articles
                 (title, url_canonical, content_text, published_at,
-                 language, source_id, source)
-               VALUES (?, ?, ?, NOW(), ?, ?, ?)`,
+                 language, source_id, source, status)
+               VALUES (?, ?, ?, UTC_TIMESTAMP(), ?, ?, ?, 'pending')`,
               [
                 item.title || "",
                 link,
@@ -324,38 +279,12 @@ export async function POST(req: Request) {
               ]
             );
 
+            if ((insertResult as { affectedRows: number }).affectedRows !== 1) continue;
             inserted++;
 
             feedStats[sourceName] =
               (feedStats[sourceName] || 0) + 1;
 
-            // --- ÚJ CIKK ID LEKÉRÉSE ---
-            const [idRows] =
-              await connection.execute<RowDataPacket[]>(
-                "SELECT id FROM articles WHERE url_canonical = ?",
-                [link]
-              );
-
-            const newId = idRows[0].id;
-
-            // --- OPENAI ÖSSZEFOGLALÁS ---
-            const summary = await summarizeArticle(
-              item.title || "",
-              content
-            );
-
-            // --- VISSZAÍRÁS AZ ARTICLES TÁBLÁBA ---
-            await connection.execute(
-              `UPDATE articles
-               SET category = ?, short_summary = ?
-               WHERE id = ?`,
-              [
-                summary.category,
-                summary.short_summary,
-                newId,
-              ]
-            );
-          }
         }
       } catch (err) {
         logError(sourceName, err);

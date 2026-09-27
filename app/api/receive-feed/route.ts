@@ -4,8 +4,9 @@ export const runtime = "nodejs";
 
 import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
-import mysql, { RowDataPacket } from "mysql2/promise";
+import mysql from "mysql2/promise";
 import * as cheerio from "cheerio";
+import { canonicalizeArticleUrl } from "@/lib/article-identity";
 
 /**
  * S-02 – külső RSS-fogadó végpont.
@@ -199,23 +200,12 @@ export async function POST(request: Request) {
     let inserted = 0;
 
     for (const item of items) {
-      const [existingRows] = await connection.execute<RowDataPacket[]>(
-        `
-          SELECT id
-          FROM articles
-          WHERE url_canonical = ?
-          LIMIT 1
-        `,
-        [item.link]
-      );
+      const canonicalUrl = canonicalizeArticleUrl(item.link);
+      if (!canonicalUrl) continue;
 
-      if (existingRows.length > 0) {
-        continue;
-      }
-
-      await connection.execute(
+      const [result] = await connection.execute(
         `
-          INSERT INTO articles (
+          INSERT IGNORE INTO articles (
             title,
             url_canonical,
             content_text,
@@ -225,11 +215,11 @@ export async function POST(request: Request) {
             source,
             status
           )
-          VALUES (?, ?, ?, NOW(), ?, ?, ?, 'pending')
+          VALUES (?, ?, ?, UTC_TIMESTAMP(), ?, ?, ?, 'pending')
         `,
         [
           item.title,
-          item.link,
+          canonicalUrl,
           item.content,
           "hu",
           6,
@@ -237,7 +227,7 @@ export async function POST(request: Request) {
         ]
       );
 
-      inserted++;
+      if ((result as { affectedRows: number }).affectedRows === 1) inserted++;
     }
 
     return NextResponse.json({

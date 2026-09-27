@@ -120,3 +120,31 @@ Aktuális commit: `7df3f0792715f513f1293277b97095dcbbf89ce4` (új commit nem ké
 Izolált MySQL integrációs teszt az S-01, S-07–S-11 folyamatokra, majd a news worker egyetlen aktív pipeline-ba rendezése tartós, lépésenkénti article state-tel és idempotens AI-feldolgozással. Deployment oldalon egress firewall, hiteles reverse-proxy header kezelés és közös Redis rate limiter szükséges.
 
 Első pipeline-stabilizációként a worker már újrahasználja az `articles.short_summary` és `articles.long_summary` meglévő eredményeit. Az AI-lépések alapértelmezett próbálkozásszáma 1; legfeljebb 2 csak explicit `AI_STEP_MAX_ATTEMPTS` beállítással engedélyezhető. A teljes lépésenkénti, tartós state machine ettől még nyitott.
+
+---
+
+## 2026-09-27 – kanonikus pipeline és crash recovery
+
+- A `pipeline/cron.js` lett az egyetlen aktív cikkfeldolgozó. A legacy TypeScript scheduler, valamint a `/api/summarize` és `/api/summarize-all` párhuzamos feldolgozási útvonal le van tiltva.
+- A feed route-ok csak kanonizált URL-lel ingestálnak; közvetlen AI-feldolgozást nem indítanak. A párhuzamos duplikációt a meglévő egyedi URL-kulcs és `INSERT IGNORE` kezeli.
+- Elkészült a tartós article claim, heartbeat, lease, korlátozott újrapróbálás és lépésenkénti state machine. A sikeres lépések eredménye újraindítás után használható, a cikk kizárólag minden kötelező lépés után lehet `done`.
+- Az embedding, a meglévő cluster-hozzárendelés, a trendírás és a speed history ismételhetővé vált duplikált mellékhatás nélkül.
+- A related news végpont forrásnormalizációja és limitje javítva lett; a saját summary kizárása megmaradt. A jelenlegi ajánlás továbbra is forrásalapú, cluster/embedding és dátumablak nélkül.
+- Új, még nem alkalmazott migrációk: 022–025. Adatbázis-írás, külső szolgáltatáshívás és migrációfuttatás nem történt.
+- Részletes működés és bevezetés: `docs/UTOM_PIPELINE_RECOVERY.md`.
+- Új offline regressziós tesztek fedik a két worker versenyét, a stale claim átvételét, a sikeres fizetős lépés újrahasználatát, a kötelező lépéseket, az opcionális lépés hibáját, az URL-azonosságot és az idempotencia segédfüggvényeket.
+
+---
+
+## 2026-09-27 – adversarial recovery és fencing
+
+- Az article aktuális claim tokenje most minden kritikus step-módosítást fence-el; a régi step-token önmagában nem jogosít írásra. Nulla érintett sor elvesztett claimnek számít.
+- A scraper többé nem ír `pending`/`failed` article státuszt, tartalommentése claim-feltételes.
+- A fizetős AI-lépések determinisztikus operation keyt és hívás előtti `uncertain` checkpointot kapnak. Bizonytalan kimenetel `needs_recovery` karanténba kerül, automatikus AI retry nélkül.
+- A short summary, long summary és category belső második OpenAI-hívása megszűnt. Meglévő summary/embedding helyi checkpointként újrahasználható.
+- Új 026-os additív migráció tárolja a külső operation recovery diagnosztikáját.
+- A cluster race MySQL advisory lockkal és lock alatti újraellenőrzéssel javítva lett. A korábbi lekérdezésből hiányzó `cluster_id` mező is bekerült.
+- A feed, cluster és Speed Index új időírásai/napablakai UTC-alapúak; a lease összehasonlítása kizárólag DB-oldali UTC-idővel történik.
+- A related news a saját article-t is kizárja, clustert priorizál, normalizált source fallbacket, determinisztikus sorrendet és ±7 napos ablakot használ.
+- Elkészült a valódi MySQL 8 migrációs és kétprocesszes claim teszt, de helyi MySQL/Docker hiányában ebben a környezetben szabályosan SKIP lett; PASS állítást nem teszünk rá.
+- A két ismert React ref-render runtime warning javítva lett a Speed Index komponensben és a `useInView` hookban.

@@ -27,7 +27,7 @@ function is444(url) {
   return url.includes("444.hu");
 }
 
-async function scrapeArticle(articleId, url) {
+async function scrapeArticle(articleId, url, claim) {
   console.log(`[SCRAPER] Indul: articleId=${articleId}, url=${url}`);
 
   const conn = await mysql.createConnection({
@@ -42,13 +42,6 @@ async function scrapeArticle(articleId, url) {
     // 🔥 1) 444.hu → NEM scrapelünk, mert RSS-ből jön a teljes cikk
     if (is444(url)) {
       console.log(`[SCRAPER] 🟢 444.hu → scraping kihagyva, RSS content:encoded használata.`);
-
-      await conn.execute(
-        `UPDATE articles 
-         SET status = 'pending'
-         WHERE id = ?`,
-        [articleId]
-      );
 
       return { ok: true, skipped: true, reason: "rss_content_used" };
     }
@@ -69,19 +62,16 @@ async function scrapeArticle(articleId, url) {
         `[SCRAPER] ⚠️ Túl rövid szöveg. FAILED státusz. articleId=${articleId}`
       );
 
-      await conn.execute(
-        `UPDATE articles SET status = 'failed', content_text = NULL WHERE id = ?`,
-        [articleId]
-      );
-
       return { ok: true, skipped: true };
     }
 
     // 🔥 5) Mentés → vissza pending státuszba
-    await conn.execute(
-      `UPDATE articles SET content_text = ?, status = 'pending' WHERE id = ?`,
-      [text, articleId]
+    const [writeResult] = await conn.execute(
+      `UPDATE articles SET content_text = ?
+       WHERE id = ? AND status='in_progress' AND worker_id=? AND claim_token=?`,
+      [text, articleId, claim?.workerId, claim?.claimToken]
     );
+    if (writeResult.affectedRows !== 1) throw new Error("article_claim_lost");
 
     console.log(
       `[SCRAPER] ✅ Sikeres scraping. len=${text.length} articleId=${articleId}`

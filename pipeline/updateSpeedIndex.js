@@ -3,6 +3,7 @@
 require("dotenv").config({ path: "/var/www/utom/.env" });
 
 const mysql = require("mysql2/promise");
+const { speedHistoryEventKey } = require("./idempotency");
 
 /**
  * Kötelező környezeti változó lekérése.
@@ -54,7 +55,8 @@ function normalizeSource(source) {
 
   return source
     .trim()
-    .toLowerCase();
+    .toLowerCase()
+    .replace(/^www\./, "");
 }
 
 /**
@@ -161,7 +163,8 @@ async function updateSpeedIndex() {
       await conn.execute(`
         SELECT id
         FROM clusters
-        WHERE DATE(first_published_at) = CURDATE()
+        WHERE first_published_at >= UTC_DATE()
+          AND first_published_at < UTC_DATE() + INTERVAL 1 DAY
       `);
 
     const delaysBySource = {};
@@ -296,11 +299,7 @@ async function updateSpeedIndex() {
           ] = [];
         }
 
-        delaysBySource[
-          item.source
-        ].push(
-          delayMinutes
-        );
+        delaysBySource[item.source].push({ clusterId, delayMinutes });
       }
     }
 
@@ -316,15 +315,17 @@ async function updateSpeedIndex() {
           delaysBySource
         )
     ) {
-      const delays =
+      const delayEvents =
         delaysBySource[source];
 
       if (
-        !delays ||
-        delays.length === 0
+        !delayEvents ||
+        delayEvents.length === 0
       ) {
         continue;
       }
+
+      const delays = delayEvents.map((event) => event.delayMinutes);
 
       const avg =
         average(delays);
@@ -355,13 +356,13 @@ async function updateSpeedIndex() {
               median_delay_minutes,
               updated_at
             )
-          VALUES (?, ?, ?, NOW())
+          VALUES (?, ?, ?, UTC_TIMESTAMP())
           ON DUPLICATE KEY UPDATE
             avg_delay_minutes =
               VALUES(avg_delay_minutes),
             median_delay_minutes =
               VALUES(median_delay_minutes),
-            updated_at = NOW()
+            updated_at = UTC_TIMESTAMP()
         `,
         [
           source,
@@ -380,23 +381,22 @@ async function updateSpeedIndex() {
 
       try {
         const placeholders =
-          delays
+          delayEvents
             .map(
               () =>
-                "(?, ?, NOW())"
+                "(?, ?, ?, UTC_TIMESTAMP())"
             )
             .join(", ");
 
         const params = [];
 
-        for (
-          const delay of delays
-        ) {
+        for (const event of delayEvents) {
+          const normalizedDelay = Number(event.delayMinutes.toFixed(1));
+          const eventKey = speedHistoryEventKey(event.clusterId, source, normalizedDelay);
           params.push(
+            eventKey,
             source,
-            Number(
-              delay.toFixed(1)
-            )
+            normalizedDelay
           );
         }
 
@@ -407,11 +407,13 @@ async function updateSpeedIndex() {
             `
               INSERT INTO speed_index_history
                 (
+                  event_key,
                   source,
                   delay_minutes,
                   created_at
                 )
               VALUES ${placeholders}
+              ON DUPLICATE KEY UPDATE event_key = VALUES(event_key)
             `,
             params
           );
