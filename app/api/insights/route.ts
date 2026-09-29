@@ -19,7 +19,7 @@ function normalizeDate(d: any): Date | null {
 }
 
 export async function GET(req: Request) {
-  const sec = securityCheck(req);
+  const sec = await securityCheck(req);
   if (sec) return sec;
 
   const url = new URL(req.url);

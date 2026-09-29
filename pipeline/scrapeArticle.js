@@ -1,25 +1,23 @@
 // scrapeArticle.js — 444.hu RSS-alapú támogatással
 const mysql = require("mysql2/promise");
 const { cleanArticle } = require("./cleanArticle");
+const { fetchPinnedText } = require("../lib/safe-fetch");
 
 // --- HTTP letöltés (közvetlen) ---
 async function fetchHtml(url) {
-  const res = await fetch(url, {
+  const result = await fetchPinnedText(url, {
+    timeoutMs: 20_000,
+    maxRedirects: 5,
+    maxBytes: 2 * 1024 * 1024,
     headers: {
       "User-Agent":
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
       "Accept":
         "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
       "Accept-Language": "hu-HU,hu;q=0.9"
-    },
-    redirect: "follow"
+    }
   });
-
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status} ${res.statusText}`);
-  }
-
-  return await res.text();
+  return result.text;
 }
 
 // --- 444.hu felismerés ---
@@ -27,10 +25,13 @@ function is444(url) {
   return url.includes("444.hu");
 }
 
-async function scrapeArticle(articleId, url, claim) {
-  console.log(`[SCRAPER] Indul: articleId=${articleId}, url=${url}`);
+async function scrapeArticle(articleId, url, claim, options = {}) {
+  let destination = "invalid";
+  try { destination = new URL(url).hostname; } catch {}
+  console.log(`[SCRAPER] Indul: articleId=${articleId}, host=${destination}`);
 
-  const conn = await mysql.createConnection({
+  const ownsConnection = options.persist !== false && !options.connection;
+  const conn = options.persist === false ? null : options.connection || await mysql.createConnection({
     host: process.env.DB_HOST || "127.0.0.1",
     user: process.env.DB_USER || "utom_app",
     password: process.env.DB_PASSWORD,
@@ -66,7 +67,7 @@ async function scrapeArticle(articleId, url, claim) {
     }
 
     // 🔥 5) Mentés → vissza pending státuszba
-    const [writeResult] = await conn.execute(
+    const [writeResult] = options.persist === false ? [{ affectedRows: 1 }] : await conn.execute(
       `UPDATE articles SET content_text = ?
        WHERE id = ? AND status='in_progress' AND worker_id=? AND claim_token=?`,
       [text, articleId, claim?.workerId, claim?.claimToken]
@@ -84,7 +85,7 @@ async function scrapeArticle(articleId, url, claim) {
     );
     return { ok: false, error: err.message };
   } finally {
-    await conn.end();
+    if (ownsConnection && conn) await conn.end();
   }
 }
 

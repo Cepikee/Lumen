@@ -19,7 +19,7 @@ type CategoryKey = (typeof categoryKeys)[number];
 
 export async function GET(req: Request) {
   try {
-    const sec = securityCheck(req);
+    const sec = await securityCheck(req);
     if (sec) return sec;
 
     const { searchParams } = new URL(req.url);

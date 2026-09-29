@@ -1,9 +1,11 @@
 // pipeline/saveSummary.js
 const mysql = require("mysql2/promise");
 
-async function saveSummary(payload) {
+async function saveSummary(payload, options = {}) {
+  let conn;
+  const ownsConnection = !options.connection;
   try {
-    const conn = await mysql.createConnection({
+    conn = options.connection || await mysql.createConnection({
       host: process.env.DB_HOST || "127.0.0.1",
       user: process.env.DB_USER || "utom_app",
       password: process.env.DB_PASSWORD,
@@ -60,11 +62,11 @@ const safe = v => (v === undefined ? null : v);
 );
 
 
-    await conn.end();
-
     return { ok: true };
   } catch (err) {
     return { ok: false, error: err?.message ?? String(err) };
+  } finally {
+    if (ownsConnection && conn) await conn.end();
   }
 }
 

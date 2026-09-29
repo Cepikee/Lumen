@@ -22,7 +22,7 @@ function getSpikeLevel(count: number) {
 
 export async function GET(req: Request) {
   try {
-    const sec = securityCheck(req);
+    const sec = await securityCheck(req);
     if (sec) return sec;
 
     // HELYI IDŐ – mai nap 00:00:00 → 23:59:59

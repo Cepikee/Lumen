@@ -22,8 +22,9 @@ function isValidCategory(cat) {
 }
 
 // --- Egy cikk kategorizálása ---
-async function categorizeArticle(articleId) {
-  const conn = await mysql.createConnection({
+async function categorizeArticle(articleId, options = {}) {
+  const ownsConnection = !options.connection;
+  const conn = options.connection || await mysql.createConnection({
     host: process.env.DB_HOST || "127.0.0.1",
     user: process.env.DB_USER || "utom_app",
     password: process.env.DB_PASSWORD,
@@ -88,7 +89,7 @@ Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kate
     );
 
     // 6) Mentés
-    await conn.execute(
+    if (options.persist !== false) await conn.execute(
       "UPDATE articles SET category = ? WHERE id = ?",
       [finalCategory, articleId]
     );
@@ -100,7 +101,7 @@ Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kate
     console.error(`[CAT] ❌ Hiba:`, err);
     return { ok: false };
   } finally {
-    await conn.end();
+    if (ownsConnection) await conn.end();
   }
 }
 

@@ -35,3 +35,17 @@ test("sequential and concurrent feed delivery retain one canonical identity", as
   ]);
   assert.deepEqual([...stored], ["https://example.com/item"]);
 });
+
+test("canonical URL normalization is idempotent and preserves meaningful query parameters", () => {
+  const canonical = canonicalizeArticleUrl("HTTP://WWW.Example.COM//News/%7eitem/?lang=hu&id=7&utm_medium=rss&fbclid=x#part");
+  assert.equal(canonical, "https://example.com/News/~item?id=7&lang=hu");
+  assert.equal(canonicalizeArticleUrl(canonical), canonical);
+  assert.notEqual(
+    canonicalizeArticleUrl("https://example.com/story?id=1"),
+    canonicalizeArticleUrl("https://example.com/story?id=2"),
+  );
+});
+
+test("generic ref and source parameters remain part of article identity", () => {
+  assert.equal(canonicalizeArticleUrl("https://example.com/story?ref=edition&source=wire"), "https://example.com/story?ref=edition&source=wire");
+});

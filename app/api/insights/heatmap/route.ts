@@ -22,7 +22,7 @@ function fixCat(s: any): string | null {
 export async function GET(req: Request) {
   try {
     // ⭐ KÖZPONTI SECURITY CHECK
-    const sec = securityCheck(req);
+    const sec = await securityCheck(req);
     if (sec) return sec;
 
     // --- 1) Kategóriák lekérése ---

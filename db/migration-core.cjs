@@ -33,20 +33,46 @@ function loadMigrations(dir = path.join(__dirname, "migrations")) {
   });
 }
 
+function auditMigrationChain(migrations) {
+  const findings = [];
+  migrations.forEach((migration, index) => {
+    const expected = String(index + 1).padStart(3, "0");
+    if (migration.version !== expected) findings.push({ level: "critical", migration: migration.filename, issue: `expected_version_${expected}` });
+    const normalized = migration.sql.replace(/^\s*--[^\n]*$/gm, "").trim();
+    if (/\b(DROP\s+(TABLE|COLUMN|DATABASE)|TRUNCATE|DELETE\s+FROM)\b/i.test(normalized)) findings.push({ level: "warning", migration: migration.filename, issue: "destructive_sql" });
+    if (/\bDROP\s+INDEX\b/i.test(normalized)) findings.push({ level: "warning", migration: migration.filename, issue: "index_replacement" });
+    if (!/ENGINE\s*=\s*InnoDB/i.test(normalized) && /^CREATE TABLE/i.test(normalized)) findings.push({ level: "warning", migration: migration.filename, issue: "implicit_engine" });
+    if (!/CHARSET\s*=\s*utf8mb4/i.test(normalized) && /^CREATE TABLE/i.test(normalized)) findings.push({ level: "warning", migration: migration.filename, issue: "implicit_charset" });
+  });
+  return { migrationCount: migrations.length, latestVersion: migrations.at(-1)?.version || null, findings, safeToApply: !findings.some((item) => item.level === "critical") };
+}
+
+async function getMigrationStatus(connection, migrations) {
+  const [tables] = await connection.query("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='schema_migrations'");
+  if (!tables.length) return { currentVersion: null, applied: [], pending: migrations.map((item) => item.filename), ledgerPresent: false };
+  const [rows] = await connection.query("SELECT version,filename,checksum FROM schema_migrations ORDER BY version");
+  const applied = new Map(rows.map((row) => [String(row.version), row]));
+  for (const migration of migrations) {
+    const row = applied.get(migration.version);
+    if (row && (row.filename !== migration.filename || row.checksum !== migration.checksum)) throw new Error(`Migration checksum/filename mismatch: ${migration.filename}`);
+  }
+  return { currentVersion: rows.at(-1)?.version || null, applied: rows.map((row) => row.filename), pending: migrations.filter((item) => !applied.has(item.version)).map((item) => item.filename), ledgerPresent: true };
+}
+
 function validateDatabaseTarget(env = process.env) {
-  if (env.NODE_ENV === "production" || env.UTOM_OFFLINE_MODE !== "true" || env.DB_MIGRATION_ENABLED !== "true") {
-    throw new Error("Migrations require explicit offline local opt-in; production is forbidden");
+  if (env.DB_MIGRATION_ENABLED !== "true") throw new Error("Migrations require DB_MIGRATION_ENABLED=true");
+  const target = String(env.UTOM_MIGRATION_TARGET || "local").toLowerCase();
+  if (!["local", "staging", "production"].includes(target)) throw new Error("Invalid UTOM_MIGRATION_TARGET");
+  if (target === "local") {
+    if (env.NODE_ENV === "production" || env.UTOM_OFFLINE_MODE !== "true") throw new Error("Local migrations require offline non-production mode");
+    if (env.DB_NAME !== "utom_dev") throw new Error("Local DB_NAME must be utom_dev");
+    if (!new Set(["127.0.0.1", "localhost", "::1"]).has(env.DB_HOST)) throw new Error("Local migrations require loopback DB_HOST");
   }
-  if (env.DB_NAME !== "utom_dev") {
-    throw new Error("For this reconstruction, DB_NAME must be the existing local utom_dev database");
-  }
-  if (!new Set(["127.0.0.1", "localhost", "::1"]).has(env.DB_HOST)) {
-    throw new Error("Migrations require a loopback DB_HOST");
-  }
+  if (target === "production" && env.UTOM_PRODUCTION_BACKUP_CONFIRMED !== "true") throw new Error("Production migrations require UTOM_PRODUCTION_BACKUP_CONFIRMED=true");
   if (!env.DB_USER || !env.DB_PASSWORD) throw new Error("Local database credentials are required");
   const port = Number(env.DB_PORT || "3306");
   if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("Invalid DB_PORT");
-  return { host: env.DB_HOST, port, user: env.DB_USER, password: env.DB_PASSWORD, database: env.DB_NAME, multipleStatements: false };
+  return { host: env.DB_HOST, port, user: env.DB_USER, password: env.DB_PASSWORD, database: env.DB_NAME, multipleStatements: false, target };
 }
 
 async function applyMigrations(connection, migrations) {
@@ -83,4 +109,4 @@ async function applyMigrations(connection, migrations) {
   }
 }
 
-module.exports = { METADATA_SQL, loadMigrations, validateDatabaseTarget, applyMigrations };
+module.exports = { METADATA_SQL, loadMigrations, auditMigrationChain, getMigrationStatus, validateDatabaseTarget, applyMigrations };

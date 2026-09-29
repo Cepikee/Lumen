@@ -21,8 +21,9 @@ function cosineSimilarity(v1, v2) {
   return denominator === 0 ? 0 : dot / denominator;
 }
 
-async function clusterArticleWithConnection(conn, articleId) {
-  await conn.beginTransaction();
+async function clusterArticleWithConnection(conn, articleId, options = {}) {
+  const manageTransaction = options.manageTransaction !== false;
+  if (manageTransaction) await conn.beginTransaction();
   try {
     const [rows] = await conn.execute(
       "SELECT id, embedding, published_at, source, cluster_id FROM articles WHERE id = ? FOR UPDATE",
@@ -33,7 +34,7 @@ async function clusterArticleWithConnection(conn, articleId) {
     const article = rows[0];
     const storedClusterId = existingClusterId(article.cluster_id);
     if (storedClusterId) {
-      await conn.commit();
+      if (manageTransaction) await conn.commit();
       return { articleId, clusterId: storedClusterId, reused: true, newCluster: false };
     }
 
@@ -42,7 +43,7 @@ async function clusterArticleWithConnection(conn, articleId) {
       [articleId],
     );
     if (!dateState?.is_current_utc_day) {
-      await conn.commit();
+      if (manageTransaction) await conn.commit();
       return { articleId, clusterId: null, skipped: true, reason: "Nem a jelenlegi UTC-nap cikke" };
     }
 
@@ -70,7 +71,7 @@ async function clusterArticleWithConnection(conn, articleId) {
 
     if (bestSimilarity >= THRESHOLD && bestClusterId) {
       await conn.execute("UPDATE articles SET cluster_id = ? WHERE id = ?", [bestClusterId, articleId]);
-      await conn.commit();
+      if (manageTransaction) await conn.commit();
       return { articleId, clusterId: bestClusterId, similarity: bestSimilarity, newCluster: false };
     }
 
@@ -79,10 +80,10 @@ async function clusterArticleWithConnection(conn, articleId) {
       [article.published_at, article.source, null],
     );
     await conn.execute("UPDATE articles SET cluster_id = ? WHERE id = ?", [insertResult.insertId, articleId]);
-    await conn.commit();
+    if (manageTransaction) await conn.commit();
     return { articleId, clusterId: insertResult.insertId, similarity: bestSimilarity, newCluster: true };
   } catch (error) {
-    await conn.rollback();
+    if (manageTransaction) await conn.rollback();
     throw error;
   }
 }

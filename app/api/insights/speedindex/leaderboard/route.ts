@@ -19,7 +19,7 @@ function clampNumber(v: any, max = 1000): number | null {
 
 export async function GET(req: Request) {
   try {
-    const sec = securityCheck(req);
+    const sec = await securityCheck(req);
     if (sec) return sec;
 
     const [rows]: any = await db.query(`

@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
 
 export async function GET(req: Request) {
-  const sec = securityCheck(req);
+  const sec = await securityCheck(req);
   if (sec) return sec;
 
   try {

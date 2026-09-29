@@ -56,8 +56,9 @@ function cleanDetailedSummary(text, shortSummary) {
 }
 
 // --- Hosszú elemzés ---
-async function summarizeLong(articleId, shortSummary) {
-  const conn = await mysql.createConnection({
+async function summarizeLong(articleId, shortSummary, options = {}) {
+  const ownsConnection = !options.connection;
+  const conn = options.connection || await mysql.createConnection({
     host: process.env.DB_HOST || "127.0.0.1",
     user: process.env.DB_USER || "utom_app",
     password: process.env.DB_PASSWORD,
@@ -117,7 +118,7 @@ Fontos szabályok:
     detailed = cleanDetailedSummary(detailed, shortSummary);
 
     // 8) Mentés
-    await conn.execute(
+    if (options.persist !== false) await conn.execute(
       `
       INSERT INTO summaries (article_id, detailed_content)
       VALUES (?, ?)
@@ -130,7 +131,7 @@ Fontos szabályok:
   } catch (err) {
     return { ok: false, error: err?.message ?? String(err) };
   } finally {
-    await conn.end();
+    if (ownsConnection) await conn.end();
   }
 }
 

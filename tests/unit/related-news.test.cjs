@@ -5,7 +5,8 @@ const assert = require("node:assert/strict");
 const { normalizeRelatedSource, selectRelatedCandidates, withinRelatedWindow } = require("../../lib/related-news");
 
 test("related source normalization is consistent", () => {
-  assert.equal(normalizeRelatedSource(" 24.hu "), "24hu");
+  assert.equal(normalizeRelatedSource(" 24.hu "), "24.hu");
+  assert.equal(normalizeRelatedSource("24hu"), "24.hu");
   assert.equal(normalizeRelatedSource(null), "");
 });
 

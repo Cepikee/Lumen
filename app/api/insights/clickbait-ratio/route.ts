@@ -6,7 +6,7 @@ import { securityCheck } from "@/lib/security";
 export async function GET(req: Request) {
   try {
     // ⭐ SECURITY CHECK
-    const sec = securityCheck(req);
+    const sec = await securityCheck(req);
     if (sec) return sec;
 
     // ─────────────────────────────────────────────

@@ -14,7 +14,15 @@
     "test:integration:mysql": "node --test tests/integration/mysql-pipeline-recovery.test.cjs",
     "check": "npm run typecheck && npm run lint && npm run check:imports && npm run test:offline && npm run build",
     "db:plan": "node db/migrate.cjs --plan",
-    "db:migrate:local": "node db/migrate.cjs --apply"
+    "db:status": "node db/migrate.cjs --status",
+    "db:migrate:local": "node db/migrate.cjs --apply",
+    "recovery:inspect": "node scripts/recovery.cjs inspect",
+    "recovery:retry": "node scripts/recovery.cjs retry",
+    "rate-limit:cleanup": "node scripts/cleanup-rate-limits.cjs",
+    "email-outbox:process": "node scripts/process-email-outbox.cjs",
+    "production:preflight": "node scripts/production-preflight.cjs",
+    "scale:fixture": "node scripts/scale-fixture.cjs",
+    "scale:audit": "node scripts/scale-audit.cjs"
   },
   "engines": {
     "node": ">=24 <25"
@@ -38,11 +46,10 @@
     "mysql2": "^3.15.3",
     "next": "^16.1.1",
     "node-cron": "^4.2.1",
-    "nodemailer": "^7.0.12",
+    "nodemailer": "10.0.12",
     "openai": "^6.22.0",
     "plyr": "^3.8.4",
     "plyr-react": "^6.0.0",
-    "puppeteer": "^24.37.3",
     "react": "19.2.0",
     "react-apexcharts": "^2.0.1",
     "react-bootstrap": "^2.10.10",
@@ -54,6 +61,7 @@
     "swr": "^2.3.8",
     "three": "^0.183.2",
     "three-stdlib": "^2.36.1",
+    "undici": "7.30.0",
     "zustand": "^5.0.10"
   },
   "devDependencies": {

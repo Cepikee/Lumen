@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
 import * as cheerio from "cheerio";
 import { canonicalizeArticleUrl } from "@/lib/article-identity";
+import { ingestFeedArticle } from "@/lib/feed-ingestion";
 
 /**
  * S-02 – külső RSS-fogadó végpont.
@@ -27,6 +28,8 @@ type FeedItem = {
   title: string;
   link: string;
   content: string;
+  publishedAt: string;
+  externalId: string;
 };
 
 function unauthorized() {
@@ -109,6 +112,8 @@ function parseFeed(xml: string): FeedItem[] {
             element.find("description").first().text() ||
             ""
         ).slice(0, MAX_CONTENT_LENGTH),
+        publishedAt: element.find("pubDate").first().text().trim(),
+        externalId: element.find("guid").first().text().trim(),
       };
     })
     .filter((item) => isAllowedArticleUrl(item.link));
@@ -198,41 +203,29 @@ export async function POST(request: Request) {
     });
 
     let inserted = 0;
+    let deduplicated = 0;
 
     for (const item of items) {
       const canonicalUrl = canonicalizeArticleUrl(item.link);
       if (!canonicalUrl) continue;
 
-      const [result] = await connection.execute(
-        `
-          INSERT IGNORE INTO articles (
-            title,
-            url_canonical,
-            content_text,
-            published_at,
-            language,
-            source_id,
-            source,
-            status
-          )
-          VALUES (?, ?, ?, UTC_TIMESTAMP(), ?, ?, ?, 'pending')
-        `,
-        [
-          item.title,
-          canonicalUrl,
-          item.content,
-          "hu",
-          6,
-          "444.hu",
-        ]
-      );
-
-      if ((result as { affectedRows: number }).affectedRows === 1) inserted++;
+      const result = await ingestFeedArticle(connection, {
+        title: item.title,
+        originalUrl: item.link,
+        content: item.content,
+        source: "444.hu",
+        publishedAt: item.publishedAt,
+        externalId: item.externalId,
+        language: "hu",
+      });
+      if (result.outcome === "inserted") inserted++;
+      else if (result.outcome === "deduplicated") deduplicated++;
     }
 
     return NextResponse.json({
       status: "ok",
       inserted,
+      deduplicated,
       received: items.length,
     });
   } catch (error) {

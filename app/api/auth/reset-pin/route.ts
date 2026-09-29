@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     try {
       await connection.beginTransaction();
       const [rows]: any = await connection.query(
-        "SELECT id, userId, expiresAt FROM pin_reset_tokens WHERE token = ? LIMIT 1 FOR UPDATE",
+        "SELECT id, userId, expiresAt, expiresAt > UTC_TIMESTAMP() AS is_valid FROM pin_reset_tokens WHERE token = ? LIMIT 1 FOR UPDATE",
         [hashOneTimeToken(token)],
       );
 
@@ -39,10 +39,10 @@ export async function POST(req: Request) {
       );
     }
 
-    const { userId, expiresAt } = rows[0];
+    const { userId, is_valid: isValid } = rows[0];
 
     // 🔥 3) Token lejárati idő ellenőrzése
-    if (new Date(expiresAt) < new Date()) {
+    if (!Number(isValid)) {
         await connection.query("DELETE FROM pin_reset_tokens WHERE id = ?", [rows[0].id]);
         await connection.commit();
         return NextResponse.json(
@@ -70,8 +70,8 @@ export async function POST(req: Request) {
       connection.release();
     }
 
-  } catch (err: any) {
-    console.error("PIN reset error:", err);
+  } catch {
+    console.error("pin_reset_failed");
     return NextResponse.json(
       { success: false, error: "Váratlan hiba történt." },
       { status: 500 }

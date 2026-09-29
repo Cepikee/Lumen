@@ -21,7 +21,7 @@ function normalizeParam(raw?: string | null) {
 
 export async function GET(req: Request, context: any) {
   // ⭐ KÖZPONTI SECURITY CHECK
-  const sec = securityCheck(req);
+  const sec = await securityCheck(req);
   if (sec) return sec;
 
   const url = new URL(req.url);

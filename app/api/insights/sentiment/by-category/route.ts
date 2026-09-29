@@ -15,7 +15,7 @@ function fixCat(s: any): string | null {
 
 export async function GET(req: Request) {
   try {
-    const sec = securityCheck(req);
+    const sec = await securityCheck(req);
     if (sec) return sec;
 
     // 🔥 Mai nap meghatározása

@@ -27,8 +27,9 @@ function jaccard(a, b) {
 }
 
 // --- Plágium ellenőrzés ---
-async function plagiarismCheck(articleId, shortSummary, longSummary) {
-  const conn = await mysql.createConnection({
+async function plagiarismCheck(articleId, shortSummary, longSummary, options = {}) {
+  const ownsConnection = !options.connection;
+  const conn = options.connection || await mysql.createConnection({
     host: process.env.DB_HOST || "127.0.0.1",
     user: process.env.DB_USER || "utom_app",
     password: process.env.DB_PASSWORD,
@@ -56,7 +57,7 @@ async function plagiarismCheck(articleId, shortSummary, longSummary) {
     const plagiarismScore = Math.max(scoreShort, scoreLong);
 
     // 4) Mentés
-    await conn.execute(
+    if (options.persist !== false) await conn.execute(
       `
       UPDATE summaries
       SET plagiarism_score = ?
@@ -72,7 +73,7 @@ async function plagiarismCheck(articleId, shortSummary, longSummary) {
   } catch (err) {
     return { ok: false, error: err?.message ?? String(err) };
   } finally {
-    await conn.end();
+    if (ownsConnection) await conn.end();
   }
 }
 

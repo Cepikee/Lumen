@@ -18,9 +18,12 @@ const { saveSources } = require("./saveSources");
 const { saveSummary } = require("./saveSummary");
 const { scrapeArticle } = require("./scrapeArticle");
 const { categorizeArticle } = require("./fillCategory");
+const { markSpeedIndexDirty, runPendingSpeedIndexBatch } = require("./speedIndexBatch");
 const { createMysqlPipelineStore, createPipelineCoordinator } = require("./state-machine");
 const { externalOperationKey, shortClaimToken } = require("./operation-identity");
 const { parseValidEmbedding, uniqueKeywords } = require("./idempotency");
+const { validateWorkerEnvironment, assertSchemaReadiness, registerWorker, heartbeatWorker, stopWorker, redact } = require("../lib/operations");
+const { getRuntimeConfig } = require("../lib/config/runtime");
 
 // ANSI színek
 const RESET = "\x1b[0m";
@@ -62,6 +65,12 @@ const pipelineState = createPipelineCoordinator(createMysqlPipelineStore(pool), 
     cronLog(JSON.stringify(event));
   },
 });
+const WORKER_ID = pipelineState.workerId;
+let shutdownRequested = false;
+let shutdownPromise = null;
+let wakeLoopDelay = null;
+let workerLoopPromise = null;
+let workerLoopSettled = true;
 
 // ─────────────────────────────────────────────
 //  LOG FUNKCIÓ
@@ -84,6 +93,13 @@ function cronLog(message) {
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function waitForLoopDelay(ms) {
+  return new Promise((resolve) => {
+    const timer = setTimeout(() => { wakeLoopDelay = null; resolve(); }, ms);
+    wakeLoopDelay = () => { clearTimeout(timer); wakeLoopDelay = null; resolve(); };
+  });
 }
 
 async function runWithRetries(label, fn) {
@@ -198,8 +214,10 @@ async function processArticlePipeline(article, claim) {
     console.log("[SCRAPER] ℹ️ Túl rövid content_text, scraping...");
 
     const scrapeStep = await runDurableStep(claim, "scrape", "[SCRAPER] 🌐 Cikk letöltése", () => scrapeArticle(
-      articleId, article.url_canonical || "", claim
-    ));
+      articleId, article.url_canonical || "", claim, { persist: false }
+    ), { project: (connection, result) => result.text
+      ? connection.execute("UPDATE articles SET content_text=? WHERE id=?", [result.text, articleId])
+      : undefined });
     const scrapeRes = scrapeStep.result;
 
     if (scrapeRes.skipped) {
@@ -235,16 +253,21 @@ async function processArticlePipeline(article, claim) {
     await runDurableStep(claim, "short_summary", "[SHORT] ✅ Meglévő összefoglaló", async () => ({ summary: shortSummary }));
   } else {
     const step = await runDurableStep(claim, "short_summary", "[SHORT] ✂️ Rövid összefoglaló", async () => {
-    const res = await summarizeShort(articleId);
+    const res = await summarizeShort(articleId, { persist: false });
 
     if (!res?.ok) {
       throw new Error(res?.error || "summarizeShort sikertelen");
     }
 
       const summary = res.summary || "";
-      await pool.execute("UPDATE articles SET short_summary = ? WHERE id = ?", [summary, articleId]);
       return { summary };
-  }, externalOptions(article, "short_summary", article.content_text));
+  }, { ...externalOptions(article, "short_summary", article.content_text), project: async (connection, result) => {
+    await connection.execute(
+      "INSERT INTO summaries (article_id,content) VALUES (?,?) ON DUPLICATE KEY UPDATE content=VALUES(content),created_at=UTC_TIMESTAMP()",
+      [articleId, result.summary],
+    );
+    await connection.execute("UPDATE articles SET short_summary=? WHERE id=?", [result.summary, articleId]);
+  } });
     shortSummary = step.result?.summary || "";
   }
 
@@ -253,16 +276,21 @@ async function processArticlePipeline(article, claim) {
     await runDurableStep(claim, "long_summary", "[LONG] ✅ Meglévő elemzés", async () => ({ detailed: longSummary }));
   } else {
     const step = await runDurableStep(claim, "long_summary", "[LONG] 📄 Hosszú elemzés", async () => {
-    const res = await summarizeLong(articleId, shortSummary);
+    const res = await summarizeLong(articleId, shortSummary, { persist: false });
 
     if (!res?.ok) {
       throw new Error(res?.error || "summarizeLong sikertelen");
     }
 
       const detailed = res.detailed || "";
-      await pool.execute("UPDATE articles SET long_summary = ? WHERE id = ?", [detailed, articleId]);
       return { detailed };
-  }, externalOptions(article, "long_summary", `${shortSummary}\n${article.content_text || ""}`));
+  }, { ...externalOptions(article, "long_summary", `${shortSummary}\n${article.content_text || ""}`), project: async (connection, result) => {
+    await connection.execute(
+      "INSERT INTO summaries (article_id,detailed_content) VALUES (?,?) ON DUPLICATE KEY UPDATE detailed_content=VALUES(detailed_content),created_at=UTC_TIMESTAMP()",
+      [articleId, result.detailed],
+    );
+    await connection.execute("UPDATE articles SET long_summary=? WHERE id=?", [result.detailed, articleId]);
+  } });
     longSummary = step.result?.detailed || "";
   }
 
@@ -271,7 +299,8 @@ async function processArticlePipeline(article, claim) {
     const res = await plagiarismCheck(
       articleId,
       shortSummary,
-      longSummary
+      longSummary,
+      { persist: false }
     );
 
     if (!res?.ok) {
@@ -282,32 +311,38 @@ async function processArticlePipeline(article, claim) {
     console.log(`🧪 PlágiumScore: ${plagiarismScore.toFixed(2)}`);
 
     return { plagiarismScore };
-  });
+  }, { project: (connection, result) => connection.execute(
+    "UPDATE summaries SET plagiarism_score=? WHERE article_id=?", [result.plagiarismScore, articleId]
+  ) });
   plagiarismScore = plagiarismStep.result?.plagiarismScore ?? plagiarismScore;
 
   // 4) Kategorizálás
   const categoryStep = await runDurableStep(claim, "category", "[CAT] 🏷️ Kategorizálás", async () => {
-    const res = await categorizeArticle(articleId);
+    const res = await categorizeArticle(articleId, { persist: false });
 
     if (!res?.ok) {
       throw new Error("Kategorizálás sikertelen");
     }
 
     return { category: res.category };
-  }, externalOptions(article, "category", shortSummary || article.content_text));
+  }, { ...externalOptions(article, "category", shortSummary || article.content_text), project: (connection, result) => connection.execute(
+    "UPDATE articles SET category=? WHERE id=?", [result.category, articleId]
+  ) });
   article.category = categoryStep.result?.category || article.category;
 
   // 4/B) SENTIMENT — OpenAI
   await runDurableStep(claim, "sentiment", "[SENTIMENT] 😊 Hangulatelemzés", async () => {
     const { processSentiment } = require("./sentiment");
-    const res = await processSentiment(articleId);
+    const res = await processSentiment(articleId, { persist: false });
 
     if (!res?.ok) {
       throw new Error(res?.error || "sentiment sikertelen");
     }
 
     return res;
-  }, { ...externalOptions(article, "sentiment", article.content_text), optional: true });
+  }, { ...externalOptions(article, "sentiment", article.content_text), optional: true, project: async (connection, result) => {
+    if (!result.skipped) await connection.execute("UPDATE articles SET sentiment=?,updated_at=UTC_TIMESTAMP() WHERE id=?", [result.sentiment, articleId]);
+  } });
 
   // 5) Cím generálás — OPENAI
   let title = "";
@@ -379,12 +414,10 @@ Korlátozások:
 
   // 6/B) Kulcsszavak mentése
   await runDurableStep(claim, "trends", "[KW-SAVE] 💾 Kulcsszavak és trend input mentése", async () => {
-    if (keywords.length === 0) return;
-    const connection = await pool.getConnection();
-    try {
-      await connection.beginTransaction();
+    return { count: keywords.length, keywords };
+  }, { project: async (connection, result) => {
       await connection.execute("DELETE FROM keywords WHERE article_id = ?", [articleId]);
-      for (const keyword of keywords) {
+      for (const keyword of result.keywords) {
         await connection.execute(
           "INSERT INTO keywords (article_id, keyword, created_at) VALUES (?, ?, UTC_TIMESTAMP())",
           [articleId, keyword],
@@ -395,21 +428,14 @@ Korlátozások:
           [articleId, keyword, article.category, article.source],
         );
       }
-      await connection.commit();
-      return { count: keywords.length };
-    } catch (error) {
-      await connection.rollback();
-      throw error;
-    } finally {
-      connection.release();
-    }
-  });
+  } });
 
   // 7) Forrás mentése
   const sourceStep = await runDurableStep(claim, "source", "[SOURCE] 🌐 Forrás", async () => {
     const res = await saveSources(
       articleId,
-      article.url_canonical || ""
+      article.url_canonical || "",
+      { persist: false }
     );
 
     if (!res?.ok) {
@@ -417,42 +443,44 @@ Korlátozások:
     }
 
     return { source: res.source || "ismeretlen" };
-  });
+  }, { project: (connection, result) => connection.execute(
+    "INSERT INTO summaries (article_id,source) VALUES (?,?) ON DUPLICATE KEY UPDATE source=VALUES(source)",
+    [articleId, result.source],
+  ) });
   source = sourceStep.result?.source || article.source || "ismeretlen";
 
   // 8) Summary mentése
-  await runDurableStep(claim, "summary_persistence", "[SAVE] 💾 Summary", async () => {
-    const res = await saveSummary({
-      articleId,
-      url: article.url_canonical || "",
-      title,
-      shortSummary,
-      longSummary,
-      plagiarismScore,
-      trendKeywords,
-      source,
-      category: article.category
-    });
-
-    if (!res?.ok) {
-      throw new Error(res?.error || "saveSummary sikertelen");
-    }
-
-    await pool.execute(
-      "UPDATE summaries SET ai_clean = 1, created_at = NOW() WHERE article_id = ?",
-      [articleId]
-    );
-  });
+  await runDurableStep(claim, "summary_persistence", "[SAVE] 💾 Summary", async () => ({
+    articleId,
+    url: article.url_canonical || "",
+    title,
+    shortSummary,
+    longSummary,
+    plagiarismScore,
+    trendKeywords,
+    source,
+    category: article.category,
+  }), { project: async (connection, payload) => {
+    const res = await saveSummary(payload, { connection });
+    if (!res?.ok) throw new Error(res?.error || "saveSummary sikertelen");
+    await connection.execute("UPDATE summaries SET ai_clean=1,created_at=UTC_TIMESTAMP() WHERE article_id=?", [articleId]);
+  } });
 
   // 9) CLICKBAIT — OpenAI
   await runDurableStep(claim, "clickbait", "[CLICKBAIT] 🎯 Clickbait elemzés", async () => {
     const { processClickbaitOpenAI } = require("./clickbait_openai");
-    const res = await processClickbaitOpenAI(articleId);
+    const res = await processClickbaitOpenAI(articleId, { persist: false });
 
     if (!res?.ok) {
       throw new Error(res?.error || "clickbaitOpenAI sikertelen");
     }
-  }, externalOptions(article, "clickbait", `${title}\n${article.content_text || ""}`));
+    return res;
+  }, { ...externalOptions(article, "clickbait", `${title}\n${article.content_text || ""}`), project: async (connection, result) => {
+    if (!result.skipped) await connection.execute(
+      `UPDATE summaries SET title_clickbait=?,content_clickbait=?,consistency_clickbait=?,final_clickbait=?,created_at=UTC_TIMESTAMP() WHERE article_id=?`,
+      [result.title, result.content, result.consistency, result.final, articleId],
+    );
+  } });
 
   // ─────────────────────────────────────────────
   // 10) EMBEDDING + CLUSTER + SPEED INDEX
@@ -466,25 +494,24 @@ Korlátozások:
       generaljEmbeddingetCikkhez
     } = require("../pipeline/generateEmbedding");
 
-    return generaljEmbeddingetCikkhez(articleId);
-  }, embeddingOptions);
+    return generaljEmbeddingetCikkhez(articleId, { persist: false });
+  }, embeddingOptions ? { ...embeddingOptions, project: async (connection, result) => {
+    if (!result.reused) await connection.execute("UPDATE articles SET embedding=? WHERE id=?", [JSON.stringify(result.embedding), articleId]);
+  } } : undefined);
 
   await runDurableStep(claim, "cluster", "[CLUSTER] 🧩 Clusterezés", async () => {
-    const {
-      clusterArticle
-    } = require("../pipeline/clusterArticles");
+    return { articleId };
+  }, { project: async (connection) => {
+    const { clusterArticleWithConnection, CLUSTER_LOCK_NAME } = require("../pipeline/clusterArticles");
+    const [[lockRow]] = await connection.execute("SELECT GET_LOCK(?,10) acquired", [CLUSTER_LOCK_NAME]);
+    if (Number(lockRow?.acquired) !== 1) throw new Error("cluster_lock_unavailable");
+    await clusterArticleWithConnection(connection, articleId, { manageTransaction: false });
+    return () => connection.execute("SELECT RELEASE_LOCK(?)", [CLUSTER_LOCK_NAME]);
+  } });
 
-    return clusterArticle(articleId);
-  });
-
-  await runDurableStep(claim, "speed_index", "[SPEED] ⚡ Speed Index frissítés", async () => {
-    const {
-      updateSpeedIndex
-    } = require("../pipeline/updateSpeedIndex");
-
-    await updateSpeedIndex();
-    return { updated: true };
-  });
+  await runDurableStep(claim, "speed_index", "[SPEED] ⚡ Speed Index ütemezés", async () => {
+    return { scheduled: true };
+  }, { project: (connection) => markSpeedIndexDirty(connection) });
 
   console.log(
     `✔️  ${GREEN}CIKK TELJES PIPELINE KÉSZ — ID: ${articleId}${RESET}`
@@ -505,10 +532,12 @@ async function processBatch(batch) {
     const claim = await pipelineState.claimArticle(article.id);
 
     if (!claim) return;
+    await heartbeatWorker(pool, WORKER_ID, "claim");
 
     try {
       await processArticlePipeline(article, claim);
       await pipelineState.finishArticle(claim);
+      await heartbeatWorker(pool, WORKER_ID, "completion");
     } catch (err) {
       console.error(
         `❌ ${RED}Hiba (${article.id}): ${err.message}${RESET}`
@@ -559,13 +588,21 @@ async function fetchFeedInternally() {
 // ─────────────────────────────────────────────
 
 async function runPipelineWorker() {
-  while (true) {
+  validateWorkerEnvironment(process.env);
+  await assertSchemaReadiness(pool);
+  await registerWorker(pool, WORKER_ID);
+  cronLog(JSON.stringify({ event: "worker_started", workerId: WORKER_ID }));
+  while (!shutdownRequested) {
     try {
       console.log(
         `🚀 Feed begyűjtés: ${new Date().toLocaleString("hu-HU")}`
       );
 
       try {
+        const runtime = getRuntimeConfig();
+        if (!runtime.capabilities.feedFetch) {
+          cronLog(JSON.stringify({ event: "feed_fetch_disabled" }));
+        } else {
         console.log("🔄 Feed frissítés indul (védett POST)...");
 
         const feedData = await fetchFeedInternally();
@@ -575,6 +612,7 @@ async function runPipelineWorker() {
         cronLog(
           `Feed fetch eredmény: inserted=${feedData.inserted}`
         );
+        }
       } catch (feedErr) {
         console.error(
           `❌ ${RED}Hiba fetch-feed közben:${RESET}`,
@@ -584,7 +622,16 @@ async function runPipelineWorker() {
         cronLog(`Feed fetch hiba: ${feedErr.message}`);
       }
 
+      if (shutdownRequested) break;
+      await heartbeatWorker(pool, WORKER_ID);
       await quarantineStaleExternalOperations();
+
+      if (shutdownRequested) break;
+      await runPendingSpeedIndexBatch(pool, {
+        workerId: WORKER_ID,
+        staleMs: ARTICLE_CLAIM_STALE_MS,
+        logger(event) { cronLog(JSON.stringify(event)); },
+      });
 
       const [pendingCountRows] = await pool.execute(
         `SELECT COUNT(*) AS c FROM articles WHERE status = 'pending'
@@ -603,14 +650,14 @@ async function runPipelineWorker() {
 
       if (batch.length === 0) {
         console.log("😴 Várakozás...");
-        await sleep(LOOP_DELAY_MS);
+        await waitForLoopDelay(LOOP_DELAY_MS);
         continue;
       }
 
       console.log(`🆕 Új batch: ${batch.length} db cikk`);
       cronLog(`Batch indul: ${batch.length} cikk`);
 
-      await processBatch(batch);
+      if (!shutdownRequested) await processBatch(batch);
 
       console.log("📊 Batch kész!");
     } catch (err) {
@@ -619,18 +666,45 @@ async function runPipelineWorker() {
         err
       );
 
-      cronLog(`Hiba a pipeline-ban: ${err.message}`);
+      cronLog(JSON.stringify({ event: "worker_loop_failed", error: redact(err.message) }));
 
-      await sleep(10000);
+      if (!shutdownRequested) await waitForLoopDelay(10000);
     }
   }
+}
+
+async function shutdownPipelineResources() {
+  if (shutdownPromise) return shutdownPromise;
+  shutdownRequested = true;
+  wakeLoopDelay?.();
+  shutdownPromise = (async () => {
+    if (workerLoopPromise && !workerLoopSettled) {
+      try { await workerLoopPromise; } catch {}
+    }
+    try { await stopWorker(pool, WORKER_ID); } catch (error) { cronLog(JSON.stringify({ event: "worker_shutdown_state_failed", error: redact(error.message) })); }
+    await pool.end();
+    cronLog(JSON.stringify({ event: "worker_stopped", workerId: WORKER_ID }));
+  })();
+  return shutdownPromise;
 }
 
 if (require.main === module) {
   const { assertCapability } = require("../lib/config/runtime");
 
   assertCapability("backgroundJobs");
-  runPipelineWorker();
+  const stop = (signal) => {
+    cronLog(JSON.stringify({ event: "worker_shutdown_requested", signal, workerId: WORKER_ID }));
+    shutdownPipelineResources().then(() => { process.exitCode = 0; }).catch((error) => { console.error(redact(error.message)); process.exitCode = 1; });
+  };
+  process.once("SIGTERM", () => stop("SIGTERM"));
+  process.once("SIGINT", () => stop("SIGINT"));
+  workerLoopSettled = false;
+  workerLoopPromise = runPipelineWorker();
+  workerLoopPromise.finally(() => { workerLoopSettled = true; }).catch((error) => {
+    console.error(JSON.stringify({ event: "worker_start_failed", error: redact(error.message) }));
+    process.exitCode = 1;
+    return shutdownPipelineResources();
+  });
 }
 
-module.exports = { processArticlePipeline, runPipelineWorker };
+module.exports = { processArticlePipeline, runPipelineWorker, shutdownPipelineResources, runPendingSpeedIndexBatch: (options) => runPendingSpeedIndexBatch(pool, options) };

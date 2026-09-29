@@ -15,7 +15,7 @@ function getSpikeLevel(count: number) {
 }
 
 export async function GET(req: Request) {
-  const sec = securityCheck(req);
+  const sec = await securityCheck(req);
   if (sec) return sec;
 
   try {

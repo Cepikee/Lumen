@@ -11,9 +11,11 @@ function cleanUrl(rawUrl) {
   }
 }
 
-async function saveSources(articleId, url) {
+async function saveSources(articleId, url, options = {}) {
+  let conn;
+  const ownsConnection = options.persist !== false && !options.connection;
   try {
-    const conn = await mysql.createConnection({
+    conn = options.persist === false ? null : options.connection || await mysql.createConnection({
       host: process.env.DB_HOST || "127.0.0.1",
       user: process.env.DB_USER || "utom_app",
       password: process.env.DB_PASSWORD,
@@ -29,7 +31,7 @@ async function saveSources(articleId, url) {
       // ha rossz az URL, marad "ismeretlen"
     }
 
-    await conn.execute(
+    if (options.persist !== false) await conn.execute(
       `
       INSERT INTO summaries (article_id, source)
       VALUES (?, ?)
@@ -38,11 +40,11 @@ async function saveSources(articleId, url) {
       [articleId, source]
     );
 
-    await conn.end();
-
     return { ok: true, source };
   } catch (err) {
     return { ok: false, error: err?.message ?? String(err) };
+  } finally {
+    if (ownsConnection && conn) await conn.end();
   }
 }
 

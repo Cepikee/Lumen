@@ -1,6 +1,6 @@
 # Utom.hu – hírfeldolgozó pipeline helyreállítása
 
-Állapot: kódszinten elkészült, a 022–025 migrációk telepítése és a valódi MySQL/OpenAI/RSS próba még szükséges.
+Állapot: **PIPELINE RECOVERY ACCEPTANCE: VERIFIED**. A recovery mechanizmus, a 022–026 migrációk, valamint az atomikus domain projection + fenced step completion valódi MySQL 8.0.46 alatt validálva. A külső szolgáltatások determinisztikus mockkal futottak; production OpenAI/RSS/deployment próba nem történt.
 
 ## Egyetlen aktív feldolgozó
 
@@ -33,7 +33,11 @@ A kötelező lépések sorrendje:
 11. `clickbait`
 12. `embedding`
 13. `cluster`
-14. `speed_index`
+14. `speed_index` — a globális számítás tartós MySQL batch-be ütemezése; az article tranzakcióban nem fut teljes recalculation
+
+A Speed Index batch claim, generation fencing és crash recovery részletes leírása: `docs/UTOM_SPEED_INDEX.md`.
+
+Rollout előtt a worker ellenőrzi a 022–033 kritikus táblákat, oszlopokat, indexeket és migration ledger verziókat. Hiányos sémával nem kezd claimelni. A 033-as email outbox `uncertain` sorai provider-egyeztetést igényelnek, automatikus retry nem megengedett. A read-only recovery inspect és az auditált lokális retry használata a `docs/UTOM_DEPLOYMENT_CHECKLIST.md` fájlban található.
 
 A `sentiment` opcionális. Hibája `skipped` állapotként marad meg és nem akadályozza a cikk lezárását. A cikk csak akkor kaphat `done` állapotot, ha minden kötelező lépés `done`. A hibás lépés neve és rövid hibája a cikkrekordban, részletes lépésállapota az `article_processing_steps` táblában marad.
 
@@ -72,15 +76,34 @@ Telepítés előtt terv módban ellenőrizendő, majd a projekt szabályai szeri
 - `025_speed_history_idempotency.sql`: determinisztikus history event kulcs.
 - `026_external_operation_recovery.sql`: operation identity, külső művelet-jelző, indítási idő, hibatípus és retryability.
 
-A mostani fejlesztési körben helyi MySQL/Docker szolgáltatás nem volt elérhető, ezért a migrációk adatbázison nem futottak. Elkészült az explicit `UTOM_MYSQL_TEST_OPT_IN=true`, loopback host és `_test` végű adatbázisnév által védett reprodukálható teszt. Ez előbb 001–021-et telepít, reprezentatív adatot hoz létre, majd 022–026-ot futtat, ismételt migrációt ellenőriz és két külön Node processzel versenyezteti a claimet.
+A validáció WSL2 Ubuntu 24.04 alatt futó MySQL `8.0.46-0ubuntu0.24.04.4` szerveren történt, InnoDB, `REPEATABLE-READ`, strict SQL mode és CEST rendszer-időzóna mellett. Az explicit `UTOM_MYSQL_TEST_OPT_IN=true`, loopback host és `_test` végű adatbázisnév által védett harness előbb 001–021-et telepített, reprezentatív adatot hozott létre, majd a teljes listával alkalmazta a 022–026 migrációkat és igazolta az ismételt futás változatlanságát.
+
+Valódi MySQL-lel bizonyított: migráció és meglévő adatok megőrzése; tízszeres kétprocesszes claim race; aktív lease, stale reclaim és zombie fencing tízszer; UTC lease-döntés eltérő Node időzónákkal; external uncertain karantén; lokális hiba újrafuttatása; final-completion recovery; atomikus domain projection rollback; feed/trend/Speed History idempotencia; cluster advisory lock és connection release tízszer; teljes kanonikus pipeline-fixture. A 2026-09-28-i végső integrációs futás 13/13 tesztet teljesített, 0 fail és 0 skip eredménnyel; a teljes fixture 2,484 másodperc volt.
+
+Mockkal bizonyított: short/long summary, kategória, sentiment, cím, kulcsszó, clickbait és embedding külső adapterei, valamint a teljes production-path pipeline hálózati és fizetős hívás nélkül. A short-summary és embedding crash-window próbában a logical provider call count egyaránt 1 maradt, a lépés `uncertain`, a cikk `needs_recovery` lett, és automatikus második hívás nem történt.
+
+Még nem bizonyított: valódi provider/RSS/SMTP/video/deployment működés. Ezek nem részei a helyi pipeline recovery acceptance-nek.
+
+## Atomikus domain projection és fencing
+
+A kanonikus worker a `completeStepWithProjection` művelettel zárja a domain adatot író lépéseket. A művelet egy pooltól kapott connectionön tranzakciót indít, `FOR UPDATE` zárral ellenőrzi az aktuális article `worker_id + claim_token` tulajdonjogát és a step saját tokenjét, ugyanazon connectionön futtatja a domain projectiont, majd ugyanabban a tranzakcióban írja a step eredményét és `done` állapotát. Hiba vagy claim-loss esetén rollback történik.
+
+Connection-injektálható lett a short/long summary, plagiarism, category, sentiment, source, summary persistence, clickbait, embedding, cluster, Speed Index és scraper modul. A standalone hívási mód megtartotta a saját connection fallbacket. A kanonikus workerben a domain write mindig az állapotgép által átadott tranzakciós connectiont használja; a számításhoz szükséges read vagy külső AI-hívás a tranzakció előtt történik.
+
+A keywords/trends projection, az article summary mezők, a sentiment/category/embedding article-mezők, a summary/clickbait/source/plagiarism rekordok, a cluster-hozzárendelés és a Speed Index írásai közös tranzakcióban záródnak a megfelelő steppel. A cluster advisory lock ugyanazon connectionön marad a tranzakció commitjáig, majd felszabadul.
+
+A valódi MySQL adversarial teszt igazolta, hogy domain write utáni kivétel és step-completion előtti hiba esetén a domain adat eltűnik; Worker B stale takeover után Worker A projection callbackje el sem indul; Worker A nem írhat keywordot vagy step completiont; a későn visszatérő AI-eredmény nem menthető, a provider call count 1, a state pedig `uncertain`/`needs_recovery`. A connection-ID ellenpróba igazolta, hogy a projection és a completion ugyanazon MySQL sessionön futott.
 
 ## Időkezelés
 
 A claim, heartbeat és stale összehasonlítás teljes egészében ugyanazon MySQL szerveren, `UTC_TIMESTAMP(6)` alapján történik; a 15 perces lease ezért nem függ a Node vagy az operációs rendszer időzónájától. Az új feed timestamp, a cluster napi ablak és a Speed Index napi ablak UTC-alapú. A felhasználói felület magyar helyi időzónás megjelenítése változatlan. Régi rekordok és további legacy `NOW()` használatok miatt teljes történeti időzóna-migráció továbbra is külön feladat.
 
+## A korábbi 30 másodperces fixture-hiba
+
+A megakadás reprodukált oka kettős volt. A WSL-ből létrehozott első tesztfelhasználó jelszava egy shell-változó átadási hiba miatt üres lett. A pipeline a Speed Index lépésig eljutott, ahol az ottani szigorú konfigurációellenőrzés `DB_PASSWORD` hibát dobott. A kivétel után a `pipeline/cron.js` importjakor létrejött modul-szintű MySQL pool nem záródott le, ezért a gyermek Node folyamat életben maradt és a külső 30 másodperces várakozás lejárt. A tesztjelszó rotálva lett; a worker `finally` ágban lezárja a saját poolját és a `shutdownPipelineResources()` segítségével a cron poolját is. A végső fixture ezután természetes process-kilépéssel 2,551 másodperc alatt végzett.
+
 ## Nyitott üzemeltetési tételek
 
-- Valódi MySQL 8 integrációs próba két egyidejű workerrel, megszakítás és lease utáni helyreállás ellenőrzésével.
 - Szolgáltatói sandbox vagy kis költségű OpenAI/RSS próba a migrált adatbázison.
 - A cluster hozzárendelést MySQL advisory lock sorosítja; lock alatt újraolvassa a cikket és a mai jelölteket. Ez megőrzi a jelenlegi cosine/threshold algoritmust, miközben megszünteti a két worker közti create race-et.
 - A globális speed index jelenleg cikkenként újraszámolódik. Külön batch-lépés hatékonyabb lenne.

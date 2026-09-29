@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     try {
       await connection.beginTransaction();
       const [rows]: any = await connection.query(
-        "SELECT id, userId, expiresAt FROM password_reset_tokens WHERE token = ? LIMIT 1 FOR UPDATE",
+        "SELECT id, userId, expiresAt, expiresAt > UTC_TIMESTAMP() AS is_valid FROM password_reset_tokens WHERE token = ? LIMIT 1 FOR UPDATE",
         [hashOneTimeToken(token)],
       );
 
@@ -33,8 +33,7 @@ export async function POST(req: Request) {
     const resetToken = rows[0];
 
     // 2) Lejárati idő ellenőrzése
-    const now = new Date();
-    if (new Date(resetToken.expiresAt) < now) {
+    if (!Number(resetToken.is_valid)) {
         await connection.query("DELETE FROM password_reset_tokens WHERE id = ?", [resetToken.id]);
         await connection.commit();
         return NextResponse.json({ success: false, error: "Token expired" }, { status: 400 });

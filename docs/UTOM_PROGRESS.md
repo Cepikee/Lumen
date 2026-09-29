@@ -1,5 +1,37 @@
 # Utom.hu – helyreállítási progress napló
 
+## HIST-025 + HIST-026 célzott lezárás – 2026-09-29
+
+HIST-025 lezárult: a 009-es rekonstruált users sémában tárolt négyjegyű plaintext legacy PIN valódi production HTTP login során, user-sorszintű zárral és tranzakcióban bcrypt cost 12 állapotba frissült. Kétprocesszes concurrent login, valid/invalid/null/üres/korrupt fixture, modern hash, restart, session/logout, PIN-reset és régi/új PIN login PASS. Kikényszerített DB CHECK hiba esetén az upgrade rollbackelt, a régi használható állapot megmaradt, majd a retry sikerült.
+
+HIST-026 lezárult: Puppeteer/browser subprocess már nincs a production pathban; a tényleges böngészős termékút a DB-sessionnel védett, szerveroldali premium entitlementet használó `/api/premium-insights` HTTP proxy. Lokális upstreammel success, 400, 500, timeout, disconnect, malformed HTTP, oversized response, redirect, allowlist/encoded path, missing/invalid/basic/expired session és négy concurrent request PASS. A proxy közös MySQL limitert, explicit abort timeoutot és 2 MiB felső response limitet kapott; credential leak és fizetős proxyhívás 0.
+
+Új high findingként a login feltétel nélkül elfogadta az `X-Forwarded-For` headert. HIST-037 alatt javítva: a közös trust policy alapállapotban figyelmen kívül hagyja, runtime spoof fixture PASS. Új migráció nem készült; latest schema 033. MySQL 30/30, korábbi session/reset E2E 1/1 és az új PIN/premium E2E 1/1 PASS. A registry 31 FIXED, 2 PARTIALLY FIXED, 1 OPEN és 3 INTENTIONAL / ACCEPTED tételt tartalmaz.
+
+## HIST-023 + HIST-024 célzott lezárás – 2026-09-29
+
+HIST-023 lezárult: a production buildből indított Next.js runtime valódi HTTP login/cookie/auth/logout/expiry tesztje, két párhuzamos session-read, szabályos Process A→B restart és SIGKILL utáni Process C restart is PASS. A session cookie szerveroldali, 256 bites véletlen tokent kap; a DB-ben csak hash szerepel, a cookie attribútumai `HttpOnly`, `Secure`, `SameSite=Lax`, `Path=/` és 86400 másodperces Max-Age. Fixation és token/log leakage nem reprodukálódott.
+
+HIST-024 lezárult: a 033 migráció AES-256-GCM titkosított transactional email outboxot ad. A password/PIN reset token és outbox scheduling egy tranzakció, a párhuzamos kérések egy aktív tokenre és egy üzenetre coalescelődnek, ugyanazon token kétprocesszes fogyasztása pontosan egy sikerrel zárult. Az update+consume rollback fault, expiry boundary, malformed/unknown/reuse, session invalidation, account-privacy, közös MySQL rate limiter és teljes reset→login flow PASS. A mock provider utáni crash `uncertain` állapotot hagyott és nem történt vak újraküldés; valódi SMTP hívás 0.
+
+Latest schema: 033. Fresh 001→033 és existing 032→033 PASS; MySQL suite 30/30, célzott production HTTP E2E 1/1 PASS. A registry 28 FIXED, 4 PARTIALLY FIXED, 1 OPEN és 3 INTENTIONAL / ACCEPTED tételt tartalmaz. Új critical/high hiba nem maradt nyitva ebben a körben.
+
+## HIST-021 + HIST-022 célzott lezárás – 2026-09-29
+
+HIST-021 lezárult: az analyze, scraper és feed letöltő most az ellenőrzött DNS-címre köti a tényleges socketet, miközben megtartja az eredeti Host/SNI és TLS-hitelesítési viselkedést; minden átirányítás új ellenőrzést kap. A privát IPv4/IPv6, IPv4-mapped IPv6, vegyes DNS, public→private és public→public redirect, timeout és tényleges pinned kapcsolat tesztje PASS. A megkerülhető Puppeteer fallback és dependency kikerült. HIST-022 lezárult: a 032 migráció közös MySQL rate-limit táblát hoz létre, az atomi upsert pedig több processz között is egyetlen limitet érvényesít. Három ismételt körben 30 párhuzamos kérésből pontosan 10 volt elfogadott, a restart/expiry/identity/cleanup/index és DB-kiesés fail-closed ellenőrzése PASS. Offline 68/68 és MySQL 30/30 célzott futás PASS. A registry 26 FIXED, 6 PARTIALLY FIXED, 1 OPEN és 3 INTENTIONAL / ACCEPTED tételt tartalmaz.
+
+## Remaining partial closure – 2026-09-28
+
+Kilenc PARTIALLY FIXED tételből HIST-028 lezárult: a summary rendezés stabil `created_at,id` tie-breakert és minden listázó ágon lapozást kapott; a 25 azonos timestampes, háromoldalas MySQL fixture nem talált átfedést vagy eltűnő sort. A session runtime vizsgálat új critical hibát talált: a `user_sessions` nem volt része a migrációs láncnak. A 031 migráció és a MySQL commit/rollback/expiry/reconnect/lock teszt ezt lezárta, de a teljes HTTP/process E2E miatt HIST-023 részleges marad. A feed most kizárólag `sources.is_active=1` forrásokat kér le, és hibaágon is zárja a kapcsolatot. Offline 62/62, MySQL 28/28 célzott futás PASS. Nyolc partial maradt; ezért a technical historical closure még nem VERIFIED.
+
+## Historical bug closure audit – 2026-09-28
+
+A 13 történeti audit/recovery dokumentum és a jelenlegi kód összevetéséből 35 tételes master registry készült. Ebben a körben megszűnt a feed hardcoded, hibát továbbdobó file logger útvonala. A Puppeteer 25.12.0 és Nodemailer 10.0.12 kontrollált frissítése után a production dependency audit 0 sérülékenységet mutat; offline API-regresszió és build fut. A registry 22 FIXED, 9 PARTIALLY FIXED, 1 OPEN és 3 INTENTIONAL / ACCEPTED tételt tartalmaz, ezért a historical closure még nem VERIFIED. Production deployment nem történt.
+
+## Production hardening – 2026-09-28
+
+Elkészült a seedelhető SMALL/MEDIUM/LARGE 021 fixture, a per-migration scale audit és a read-only production preflight. A LARGE mérés 10 000 article-lel, valódi MySQL 8 backup/restore-ral, 022–030 migrációval, query plan/health latency és duplikáció/orphan invariánsokkal PASS. A schema gate jövőbeni verziót blokkol; a production config AI, health és engedélyezett email/payment/video secret nélkül fail-fast. Nyitott blocker az öt high dependency advisory kontrollált major upgrade-je, a production cardinalitású rehearsal és a külön soak/resource trend. Production deployment nem történt.
+
 Utolsó frissítés: 2026-09-24  
 Aktuális fázis: **A1 fejlesztési szakasz elkészült; az A mérföldkő nincs lezárva**  
 Aktuális helyi branch: `develop/utom-recovery`  
@@ -61,6 +93,48 @@ Aktuális commit: `7df3f0792715f513f1293277b97095dcbbf89ce4` (új commit nem ké
 ## Commitnapló
 
 Új commit nem készült. Az A1 változások, a korábbi audit és a helyreállítási dokumentumok helyi working tree-ben vannak; `main` nem módosult, push/fetch/pull/PR nem történt.
+
+---
+
+## 2026-09-28 – Pipeline recovery, valódi MySQL 8 validáció
+
+- Környezet: WSL2 Ubuntu 24.04, MySQL `8.0.46-0ubuntu0.24.04.4`, InnoDB, `REPEATABLE-READ`, strict SQL mode, szerver `SYSTEM`/CEST időzóna.
+- Migráció: 001–021 baseline, reprezentatív meglévő adatok, majd a teljes listából 022–026; ismételt futás üres változáslistával. PASS.
+- MySQL integration runner: 11 teszt, 11 PASS, 0 FAIL, 0 SKIP; teljes idő 12,122 s.
+- Multi-process: claim race 10 iteráció UTC/Budapest processzekkel; cluster advisory-lock race 10 iterációval. Minden iteráció PASS.
+- Lease/fencing: active lease, stale reclaim, zombie heartbeat/step/final write tiltása 10 iterációval PASS. Külön Honolulu worker és CEST szerver mellett a friss/stale döntés `UTC_TIMESTAMP(6)` alapján PASS.
+- Fault injection: short-summary külső crash és embedding mentési hiba után a provider call count 1/1, `uncertain` + `needs_recovery`, automatikus retry nélkül; lokális hiba retry; final-completion recovery; rollback. PASS.
+- Teljes kanonikus pipeline mocked külső adapterekkel: article `done`, 14 required step `done`, sentiment `done` vagy indokolt `skipped`, domain projekciók jelen vannak. A végső fixture runtime 2,551 s.
+- Lifecycle: a teszt után 0 nyitott `utom_pipeline_test` kapcsolat; cluster advisory lock szabad; a gyermekfolyamat természetesen kilép. A cron poolhoz explicit `shutdownPipelineResources()` készült.
+- A korábbi 30 másodperces megakadás oka: üresre létrehozott teszt-DB jelszó miatt a Speed Index konfigurációhibát dobott, majd a modul-szintű cron pool nyitva tartotta a hibázott Node processt.
+- Regresszió: `git diff --check` PASS; typecheck PASS; importellenőrzés PASS; offline 46/46 PASS, 0 FAIL, 0 SKIP; ESLint 0 error, 369 warning; production build PASS, 72 oldal; `npm run check` PASS.
+- A korábban nyitott domain projection/step tranzakciós rés a következő körben lezárult; lásd az alábbi acceptance-kiegészítést.
+- Production DB, valódi OpenAI/RSS/SMTP/video és deployment nem lett érintve. Commit és push nem történt.
+
+### 2026-09-28 – Atomic projection acceptance
+
+- Új `completeStepWithProjection`: `BEGIN`, article és step fence validáció `FOR UPDATE` zárral, injektált domain projection, fenced step completion, `COMMIT`; bármely hiba `ROLLBACK`.
+- Connection-injektálható modulok: scraper, short/long summary, plagiarism, category, sentiment, source, summary persistence, clickbait, embedding, cluster és Speed Index. Standalone fallbackjeik megmaradtak.
+- Közös tranzakcióba került: scrape tartalom, summary mezők és rekordok, plagiarism, category, sentiment, keywords/trends, source, végleges summary, clickbait, embedding, cluster-hozzárendelés, Speed Index és history.
+- Adversarial teszt: Worker A stale lett, Worker B új tokennel átvette a cikket, Worker A késői projectionje `article_claim_lost` hibával elbukott; sem domain adat, sem step completion nem maradt. Worker B maradt az egyetlen tulajdonos.
+- Fault injection: domain write utáni exception és completion előtti serializációs hiba egyaránt teljes rollbacket adott. A sikeres ágban a projection és completion MySQL `CONNECTION_ID()` értéke azonos volt.
+- Késői AI-eredmény: 1 provider call, 0 domain commit, step `uncertain`, article `needs_recovery`, automatikus második hívás nélkül.
+- Végső MySQL runner: 13/13 PASS, 0 FAIL, 0 SKIP; full canonical fixture `done`, 2,484 s; 0 nyitott tesztkapcsolat, advisory lock szabad.
+- Regresszió: offline 46/46 PASS; typecheck, importellenőrzés, build és `npm run check` PASS; ESLint 0 error, 369 warning.
+- **PIPELINE RECOVERY ACCEPTANCE: VERIFIED**.
+
+---
+
+## 2026-09-28 – Feed ingestion correctness
+
+- A két aktív article-ingestion route közös `lib/feed-ingestion.js` logikát használ; legacy insert bypass nem maradt az aktív útvonalakon.
+- A canonical URL normalizálás idempotens, csak bizonyított tracking paramétert töröl, a jelentéssel bíró queryt és az eredeti URL-t megőrzi.
+- Új közös source identity helper egységesíti a feed, related-news és Speed Index aliasokat; `24hu`, `24.hu`, `www.24.hu` egy identity.
+- Publication timestamp: explicit timezone-os feed idő → metadata → ingestion fallback; UTC storage semantics, hibás/ambiguous dátum nem képez hamis epoch értéket.
+- `027_article_ingestion_identity.sql`: original URL, external ID, timestamp provenance és teljes, binary SHA-256 URL identity. Régi timestamp/backfill nem futott.
+- Valódi MySQL bizonyította: kétprocesszes dedup, retry, címváltozás, state preservation, same-title/different-URL, source-local GUID collision, path case és hosszú közös prefix helyes kezelése, invalid timestamp fallback, Speed Index alias-normalizáció.
+- Offline suite: 52/52 PASS. MySQL suite: 15/15 PASS a dokumentálás előtti célzott futásban. Production DB és élő feed nem lett érintve.
+- **FEED INGESTION CORRECTNESS: VERIFIED**.
 
 ---
 
@@ -148,3 +222,39 @@ Első pipeline-stabilizációként a worker már újrahasználja az `articles.sh
 - A related news a saját article-t is kizárja, clustert priorizál, normalizált source fallbacket, determinisztikus sorrendet és ±7 napos ablakot használ.
 - Elkészült a valódi MySQL 8 migrációs és kétprocesszes claim teszt, de helyi MySQL/Docker hiányában ebben a környezetben szabályosan SKIP lett; PASS állítást nem teszünk rá.
 - A két ismert React ref-render runtime warning javítva lett a Speed Index komponensben és a `useInView` hookban.
+# Speed Index deferred processing (2026-09-28)
+
+- Az article-onkénti teljes UTC-napi Speed Index újraszámítás megszűnt.
+- A `028_speed_index_deferred_batch.sql` tartós, coalescing dirty/generation állapotot ad.
+- A batch claim tokennel és generation fencinggel védett; stale claim átvehető.
+- A score, history és marker completion egy tranzakcióban történik.
+- 100 egyidejű dirty eseményből 1 teljes recalculation lett; a referenciaeredmény és a deferred eredmény azonos.
+- Offline suite: 52/52 PASS. Valódi MySQL 8 suite: 21/21 PASS a Speed Index concurrency és fault-injection esetekkel együtt.
+
+`SPEED INDEX DEFERRED PROCESSING: VERIFIED`
+
+# Rollout readiness (2026-09-28)
+
+- A teljes 001–030 migrációs lánc statikusan auditálható, checksum-védett és dry-run/status móddal rendelkezik.
+- A worker schema readiness ellenőrzéssel indul; hiányos sémán fail-fast.
+- Belső tokennel védett health endpoint mutatja a worker, backlog, stale, `needs_recovery` és Speed Index állapotot.
+- A recovery CLI alapértelmezett inspect művelete read-only; csak lokális, failed, retryable step állítható explicit retryra, audit traillel.
+- A graceful SIGTERM út lezárja a poolt és worker shutdown állapotot rögzít.
+- Deployment gate és rollout sorrend: `docs/UTOM_DEPLOYMENT_CHECKLIST.md`.
+
+Ellenőrzés: offline 57/57 PASS, valódi MySQL 8 integration 26/26 PASS, fresh migration 30/30 PASS, production build PASS, ESLint 0 error.
+
+`ROLLOUT READINESS: VERIFIED`
+
+# Staging rollout rehearsal (2026-09-28)
+
+- Valódi MySQL 8 pre-upgrade fixture, checksumolt backup, két külön restore és restore-alapú rollback drill PASS.
+- 022–030 staging migration, post-migration integrity és schema readiness PASS.
+- Valódi Next.js production runtime HTTP health/auth és fixture RSS ingestion PASS.
+- Canonical worker, domain projectionök, deferred Speed Index, safe recovery és uncertain protection PASS.
+- Graceful restart, article hard-crash és Speed Index stale recovery PASS.
+- Részletes jegyzőkönyv: `docs/UTOM_STAGING_REHEARSAL.md`.
+
+`STAGING ROLLOUT REHEARSAL: VERIFIED`
+
+`PRODUCTION DEPLOYMENT: NOT EXECUTED`

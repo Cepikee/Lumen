@@ -24,8 +24,9 @@ function isValidSummary(text) {
 }
 
 // --- Rövid összefoglaló ---
-async function summarizeShort(articleId) {
-  const conn = await mysql.createConnection({
+async function summarizeShort(articleId, options = {}) {
+  const ownsConnection = !options.connection;
+  const conn = options.connection || await mysql.createConnection({
     host: process.env.DB_HOST || "127.0.0.1",
     user: process.env.DB_USER || "utom_app",
     password: process.env.DB_PASSWORD,
@@ -66,7 +67,7 @@ ${contentText}
     }
 
     // 5) Mentés
-    await conn.execute(
+    if (options.persist !== false) await conn.execute(
       `
       INSERT INTO summaries (article_id, content)
       VALUES (?, ?)
@@ -79,7 +80,7 @@ ${contentText}
   } catch (err) {
     return { ok: false, error: err?.message ?? String(err) };
   } finally {
-    await conn.end();
+    if (ownsConnection) await conn.end();
   }
 }
 

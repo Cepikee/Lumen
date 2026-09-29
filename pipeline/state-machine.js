@@ -66,10 +66,24 @@ function createPipelineCoordinator(store, options = {}) {
       await heartbeat(claim);
       if (heartbeatError) throw heartbeatError;
       const status = result?.skipped && optionsForStep.optional ? "skipped" : "done";
-      await store.completeStep({ ...claim, stepName, status, result: result ?? null, now: now() });
+      if (optionsForStep.project) {
+        await store.completeStepWithProjection({
+          ...claim,
+          stepName,
+          status,
+          result: result ?? null,
+          project: (connection) => optionsForStep.project(connection, result ?? null),
+        });
+      } else {
+        await store.completeStep({ ...claim, stepName, status, result: result ?? null, now: now() });
+      }
       return { reused: false, status, result: result ?? null };
     } catch (error) {
       const message = safeError(error);
+      if (message.includes("claim_lost")) {
+        log({ event: "claim_lost", articleId: claim.articleId, step: stepName, workerId, claim: tokenRef(claim) });
+        throw error;
+      }
       if (optionsForStep.external && !message.includes("claim_lost")) {
         await store.markExternalUncertain({
           ...claim,
@@ -189,6 +203,47 @@ function createMysqlPipelineStore(pool) {
         [status, JSON.stringify(result ?? null), articleId, stepName, workerId, claimToken, articleId, workerId, claimToken],
       );
       if (dbResult.affectedRows !== 1) throw new Error(`step_claim_lost:${stepName}`);
+    },
+    async completeStepWithProjection({ articleId, stepName, workerId, claimToken, status, result, project, beforeComplete }) {
+      const connection = await pool.getConnection();
+      let cleanup;
+      try {
+        await connection.beginTransaction();
+        const [articles] = await connection.execute(
+          `SELECT id FROM articles
+           WHERE id=? AND status='in_progress' AND worker_id=? AND claim_token=? FOR UPDATE`,
+          [articleId, workerId, claimToken],
+        );
+        if (articles.length !== 1) throw new Error("article_claim_lost");
+        const [steps] = await connection.execute(
+          `SELECT status FROM article_processing_steps
+           WHERE article_id=? AND step_name=? AND status IN ('in_progress','uncertain')
+             AND worker_id=? AND claim_token=? FOR UPDATE`,
+          [articleId, stepName, workerId, claimToken],
+        );
+        if (steps.length !== 1) throw new Error(`step_claim_lost:${stepName}`);
+        cleanup = await project(connection);
+        if (beforeComplete) await beforeComplete(connection);
+        const [completion] = await connection.execute(
+          `UPDATE article_processing_steps SET status=?, result_json=?, completed_at=UTC_TIMESTAMP(6), heartbeat_at=UTC_TIMESTAMP(6)
+           WHERE article_id=? AND step_name=? AND status IN ('in_progress','uncertain')
+             AND worker_id=? AND claim_token=?
+             AND EXISTS (SELECT 1 FROM articles a WHERE a.id=? AND a.status='in_progress' AND a.worker_id=? AND a.claim_token=?)`,
+          [status, JSON.stringify(result ?? null), articleId, stepName, workerId, claimToken, articleId, workerId, claimToken],
+        );
+        if (completion.affectedRows !== 1) throw new Error(`step_claim_lost:${stepName}`);
+        await connection.commit();
+      } catch (error) {
+        await connection.rollback();
+        throw error;
+      } finally {
+        let reusable = true;
+        if (typeof cleanup === "function") {
+          try { await cleanup(); } catch { reusable = false; }
+        }
+        if (reusable) connection.release();
+        else connection.destroy();
+      }
     },
     async failStep({ articleId, stepName, workerId, claimToken, error }) {
       const [result] = await pool.execute(

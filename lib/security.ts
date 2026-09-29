@@ -1,9 +1,8 @@
 // lib/security.ts
 import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
-
-// 🔐 In-memory rate limit bucket (IP → timestamps)
-const rateBuckets = new Map<string, number[]>();
+import { db } from "./db";
+import { consumeRateLimitFailClosed } from "./shared-rate-limit";
 
 // 🔐 IP extraction (Cloudflare + Vercel + fallback)
 export function getIp(req: Request): string {
@@ -62,20 +61,14 @@ export function requireTrustedOrigin(req: Request): NextResponse | null {
 }
 
 // 🔐 Rate limit (IP alapú)
-export function checkRateLimit(ip: string, limit = 60, windowMs = 10_000) {
-  const now = Date.now();
-  let bucket = rateBuckets.get(ip) || [];
-
-  bucket = bucket.filter((ts) => now - ts < windowMs);
-  bucket.push(now);
-
-  rateBuckets.set(ip, bucket);
-
-  return bucket.length <= limit;
+export async function checkRateLimit(ip: string, limit = 60, windowMs = 10_000) {
+  const accepted = await consumeRateLimitFailClosed(db, { scope: "insights", identity: ip, limit, windowMs });
+  if (!accepted) console.warn("rate_limit_rejected_or_backend_unavailable");
+  return accepted;
 }
 
 // 🔐 Közös security wrapper
-export function securityCheck(req: Request) {
+export async function securityCheck(req: Request) {
   // API key
   if (!checkApiKey(req)) {
     return NextResponse.json(
@@ -97,7 +90,7 @@ export function securityCheck(req: Request) {
   const ip = internalRateKey && /^premium-user-\d+$/.test(internalRateKey)
     ? internalRateKey
     : getIp(req);
-  const ok = checkRateLimit(ip);
+  const ok = await checkRateLimit(ip);
   if (!ok) {
     return NextResponse.json(
       { success: false, error: "rate_limit" },

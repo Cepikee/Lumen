@@ -42,8 +42,9 @@ Csak a három számot add vissza pontosan ebben a formátumban.
 }
 
 // --- Fő függvény: clickbait feldolgozás ---
-async function processClickbaitOpenAI(articleId) {
-  const conn = await mysql.createConnection({
+async function processClickbaitOpenAI(articleId, options = {}) {
+  const ownsConnection = !options.connection;
+  const conn = options.connection || await mysql.createConnection({
     host: process.env.DB_HOST || "127.0.0.1",
     user: process.env.DB_USER || "utom_app",
     password: process.env.DB_PASSWORD,
@@ -114,7 +115,7 @@ async function processClickbaitOpenAI(articleId) {
     );
 
     // 5) Mentés summaries táblába
-    await conn.execute(
+    if (options.persist !== false) await conn.execute(
       `
       UPDATE summaries
       SET 
@@ -143,7 +144,7 @@ async function processClickbaitOpenAI(articleId) {
     console.error("[CLICKBAIT-OAI] ❌ Hiba:", err);
     return { ok: false, error: err?.message ?? String(err) };
   } finally {
-    await conn.end();
+    if (ownsConnection) await conn.end();
   }
 }
 

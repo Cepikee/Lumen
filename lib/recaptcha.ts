@@ -1,4 +1,11 @@
 export async function verifyRecaptcha(token: string) {
+  if (process.env.UTOM_TEST_FIXTURE_MODE === "true") {
+    const host = process.env.DB_HOST;
+    if (!["127.0.0.1", "localhost", "::1"].includes(String(host)) || !String(process.env.DB_NAME).endsWith("_test")) {
+      throw new Error("unsafe_test_fixture_configuration");
+    }
+    return Number(process.env.UTOM_TEST_RECAPTCHA_SCORE || 0);
+  }
   const secret = process.env.RECAPTCHA_SECRET_KEY;
   if (!secret || !token) return 0;
 

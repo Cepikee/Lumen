@@ -367,7 +367,7 @@ export async function GET(req: Request) {
           ON a.source_id = src.id
         ${whereClause}
         ${searchFilter.sql}
-        ORDER BY s.created_at DESC
+        ORDER BY s.created_at DESC, s.id DESC
         LIMIT ? OFFSET ?
       `;
 
@@ -439,7 +439,8 @@ export async function GET(req: Request) {
           s.created_at >= ?
           AND s.created_at < ?
         ${searchFilter.sql}
-        ORDER BY s.created_at DESC
+        ORDER BY s.created_at DESC, s.id DESC
+        LIMIT ? OFFSET ?
       `;
 
       const [rows] =
@@ -451,6 +452,8 @@ export async function GET(req: Request) {
             today,
             tomorrow,
             ...searchFilter.params,
+            limit,
+            offset,
           ]
         );
 
@@ -488,7 +491,7 @@ export async function GET(req: Request) {
         ON a.source_id = src.id
       WHERE 1 = 1
       ${searchFilter.sql}
-      ORDER BY s.created_at DESC
+      ORDER BY s.created_at DESC, s.id DESC
       LIMIT ? OFFSET ?
     `;
 

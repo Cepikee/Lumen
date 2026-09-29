@@ -29,7 +29,7 @@ const NORMALIZE_SRC = `
 export async function GET(req: Request) {
   try {
     // Biztonsági ellenőrzés
-    const sec = securityCheck(req);
+    const sec = await securityCheck(req);
     if (sec) return sec;
 
     // Csak létező, valós források lekérése

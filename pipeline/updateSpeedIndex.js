@@ -4,6 +4,7 @@ require("dotenv").config({ path: "/var/www/utom/.env" });
 
 const mysql = require("mysql2/promise");
 const { speedHistoryEventKey } = require("./idempotency");
+const { normalizeSourceIdentity } = require("../lib/source-identity");
 
 /**
  * Kötelező környezeti változó lekérése.
@@ -52,8 +53,9 @@ function average(values) {
  */
 function normalizeSource(source) {
   if (!source) return "";
-
-  return source
+  const known = normalizeSourceIdentity(source);
+  if (known) return known.key;
+  return String(source)
     .trim()
     .toLowerCase()
     .replace(/^www\./, "");
@@ -133,12 +135,12 @@ async function createDatabaseConnection() {
   });
 }
 
-async function updateSpeedIndex() {
+async function updateSpeedIndex(options = {}) {
   let conn = null;
+  const ownsConnection = !options.connection;
 
   try {
-    conn =
-      await createDatabaseConnection();
+    conn = options.connection || await createDatabaseConnection();
 
     // Maximum 4 órás különbséget
     // tekintünk ugyanahhoz a hírhez
@@ -159,6 +161,7 @@ async function updateSpeedIndex() {
     // 1) Mai clusterek
     // -------------------------------------------------------
 
+    if (options.instrumentation) options.instrumentation.fullRecalculations = (options.instrumentation.fullRecalculations || 0) + 1;
     const [clusters] =
       await conn.execute(`
         SELECT id
@@ -166,6 +169,7 @@ async function updateSpeedIndex() {
         WHERE first_published_at >= UTC_DATE()
           AND first_published_at < UTC_DATE() + INTERVAL 1 DAY
       `);
+    if (options.instrumentation) options.instrumentation.clusterScans = (options.instrumentation.clusterScans || 0) + 1;
 
     const delaysBySource = {};
 
@@ -189,6 +193,7 @@ async function updateSpeedIndex() {
           `,
           [clusterId]
         );
+      if (options.instrumentation) options.instrumentation.clusterArticleQueries = (options.instrumentation.clusterArticleQueries || 0) + 1;
 
       if (
         !articles ||
@@ -374,12 +379,15 @@ async function updateSpeedIndex() {
           ),
         ]
       );
+      if (options.instrumentation) options.instrumentation.sourceWrites = (options.instrumentation.sourceWrites || 0) + 1;
+      if (options.hooks?.afterScoreWrite) await options.hooks.afterScoreWrite({ connection: conn, source });
 
       // -----------------------------------------------------
       // 3/B) History
       // -----------------------------------------------------
 
       try {
+        if (options.hooks?.beforeHistoryWrite) await options.hooks.beforeHistoryWrite({ connection: conn, source, delayEvents });
         const placeholders =
           delayEvents
             .map(
@@ -417,8 +425,10 @@ async function updateSpeedIndex() {
             `,
             params
           );
+          if (options.instrumentation) options.instrumentation.historyWriteStatements = (options.instrumentation.historyWriteStatements || 0) + 1;
         }
       } catch (error) {
+        if (options.strict) throw error;
         // A history hiba ne állítsa meg
         // a teljes Speed Index frissítést.
         console.warn(
@@ -449,7 +459,7 @@ async function updateSpeedIndex() {
 
     throw error;
   } finally {
-    if (conn) {
+    if (conn && ownsConnection) {
       try {
         await conn.end();
       } catch {

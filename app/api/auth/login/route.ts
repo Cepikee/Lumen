@@ -3,12 +3,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { hashPin, verifyPin } from "@/lib/pin-security";
-
-function getIp(req: Request) {
-  const fwd = req.headers.get("x-forwarded-for");
-  if (fwd) return fwd.split(",")[0].trim();
-  return "unknown";
-}
+import { getIp } from "@/lib/security";
 
 export async function POST(req: Request) {
   try {
@@ -47,69 +42,42 @@ export async function POST(req: Request) {
       });
     }
 
-    const [rows]: any = await db.query(
-      "SELECT * FROM users WHERE email = ? LIMIT 1",
-      [email]
-    );
-
-    if (rows.length === 0) {
-      await db.query(
-        "INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 0)",
-        [ip, email]
+    const connection = await db.getConnection();
+    let user: any;
+    try {
+      await connection.beginTransaction();
+      const [rows]: any = await connection.query(
+        "SELECT * FROM users WHERE email = ? LIMIT 1 FOR UPDATE",
+        [email]
       );
 
-      return NextResponse.json({
-        success: false,
-        message: "Nincs ilyen felhasználó",
-      });
+      if (rows.length === 0) {
+        await connection.query("INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 0)", [ip, email]);
+        await connection.commit();
+        return NextResponse.json({ success: false, message: "Nincs ilyen felhasználó" });
+      }
+
+      user = rows[0];
+      const validPass = typeof password === "string" && await bcrypt.compare(password, user.password_hash);
+      const pinResult = validPass ? await verifyPin(pin, user.pin_code) : { valid: false, needsUpgrade: false };
+      if (!validPass || !pinResult.valid) {
+        await connection.query("INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 0)", [ip, email]);
+        await connection.commit();
+        return NextResponse.json({ success: false, message: "Hibás bejelentkezési adatok" });
+      }
+
+      if (pinResult.needsUpgrade) {
+        await connection.query("UPDATE users SET pin_code = ? WHERE id = ? AND pin_code = ?", [await hashPin(pin), user.id, user.pin_code]);
+      }
+      await connection.query("INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 1)", [ip, email]);
+      await connection.query("UPDATE users SET last_login = NOW(), last_ip = ? WHERE id = ?", [ip, user.id]);
+      await connection.commit();
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
     }
-
-    const user = rows[0];
-
-    const validPass = await bcrypt.compare(password, user.password_hash);
-    if (!validPass) {
-      await db.query(
-        "INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 0)",
-        [ip, email]
-      );
-
-      return NextResponse.json({
-        success: false,
-        message: "Hibás jelszó",
-      });
-    }
-
-    const pinResult = await verifyPin(pin, user.pin_code);
-    if (!pinResult.valid) {
-      await db.query(
-        "INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 0)",
-        [ip, email]
-      );
-
-      return NextResponse.json({
-        success: false,
-        message: "Hibás PIN",
-      });
-    }
-
-    if (pinResult.needsUpgrade) {
-      await db.query("UPDATE users SET pin_code = ? WHERE id = ?", [await hashPin(pin), user.id]);
-    }
-
-    await db.query(
-      "INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 1)",
-      [ip, email]
-    );
-
-    await db.query("UPDATE users SET last_login = NOW() WHERE id = ?", [
-      user.id,
-    ]);
-
-    // 🔐 IP + session kötés — ITT MENTJÜK EL A USER IP-JÉT
-    await db.query("UPDATE users SET last_ip = ? WHERE id = ?", [
-      ip,
-      user.id,
-    ]);
 
 const response = NextResponse.json({
       success: true,
