@@ -42,7 +42,7 @@ test("repository contract freezes the M1.6 server boundary", () => {
   assert.deepEqual(REPOSITORY_CONTRACT.scopes, [
     "entities", "aliases", "mentions", "relations", "evidence",
     "claims", "events", "aiRuns", "processingState",
-    "ingestionProvenance", "conflicts", "confidenceHistory",
+    "ingestionProvenance", "conflicts", "confidenceHistory", "aiDecisions",
   ]);
   assert.deepEqual(REPOSITORY_CONTRACT.errors, ["validation", "not_found", "conflict", "database"]);
   assert.equal(Object.isFrozen(REPOSITORY_CONTRACT), true);
@@ -83,7 +83,7 @@ test("V2 runtime modules are importable without DB, network or timer side effect
   const before = new Set(process.getActiveResourcesInfo?.() || []);
   for (const file of runtimeFiles(v2Root)) {
     const source = fs.readFileSync(file, "utf8");
-    if (!file.endsWith("ingestion-provenance-repository.js") && !file.endsWith("entity-extraction-repository.js") && !file.endsWith("entity-resolution-repository.js") && !file.endsWith("relation-extraction-repository.js") && !file.endsWith("claim-extraction-repository.js") && !file.endsWith("event-matching-repository.js") && !file.endsWith("temporal-graph-repository.js") && !file.endsWith("conflict-history-repository.js")) {
+    if (!file.endsWith("ingestion-provenance-repository.js") && !file.endsWith("entity-extraction-repository.js") && !file.endsWith("entity-resolution-repository.js") && !file.endsWith("relation-extraction-repository.js") && !file.endsWith("claim-extraction-repository.js") && !file.endsWith("event-matching-repository.js") && !file.endsWith("temporal-graph-repository.js") && !file.endsWith("conflict-history-repository.js") && !file.endsWith("ai-cost-router-repository.js")) {
       assert.doesNotMatch(source, /(?:createPool|createConnection|\.query\s*\(|\.execute\s*\(|fetch\s*\(|setTimeout\s*\(|setInterval\s*\()/, path.relative(root, file));
     }
     require(file);

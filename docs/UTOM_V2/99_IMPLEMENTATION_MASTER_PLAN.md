@@ -365,6 +365,8 @@ Tests: conflict types, rerun idempotency.
 Gate: unresolved conflict nem kap önkényes győztest.
 
 ### M12 – AI Cost Router
+
+M12 implementation and final acceptance are complete. The deterministic, cache, budget, circuit-breaker, retry classification, feature-flag and audit-persistence slice uses contract `v2.cost-router.1` and existing schema 051 `v2_ai_decisions`; no migration was required. Q09 is resolved in `90_DECISIONS.md`: OpenAI is the sole primary provider, paid AI is explicit production opt-in, and canonical HUF budget caps are enforced by `ai-cost-policy.js`. Evidence: `docs/UTOM_V2/M12_AI_COST_ROUTER.md`.
 Objective: deterministic/cache/model/escalation centralizálása.
 Tests: budget, cache, outage, malformed output, retry.
 Gate: minden AI call döntés és cost rekorddal rendelkezik.

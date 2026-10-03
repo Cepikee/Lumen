@@ -58,7 +58,7 @@ The following five decisions were explicitly approved by the owner. They are pro
 
 ## REMAINING OPEN QUESTIONS
 
-The M1-blocking questions above are resolved. The following questions remain open for their later milestones and do not block M1 start: source trust weighting, AI provider and budget, manual review roles, payment and billing lifecycle, separate reporting database, graph database choice, and detailed timeline business-day presentation rules beyond the approved UTC storage baseline. Q07 is resolved for M9: merge and split authority remain review-only.
+The M1-blocking questions above are resolved. The following questions remain open for their later milestones and do not block M1 start: source trust weighting, manual review roles, payment and billing lifecycle, separate reporting database, graph database choice, and detailed timeline business-day presentation rules beyond the approved UTC storage baseline. Q07 is resolved for M9: merge and split authority remain review-only. Q09 is resolved for M12 below.
 
 ### Q06 – Confidence thresholds (M5)
 
@@ -77,3 +77,14 @@ No recommendation outside the approved M1-D01–M1-D05 and Q06 decisions is a fi
 - **Owner status:** APPROVED
 - **Owner decision date:** 2026-10-03
 - **Rationale:** A false historical merge is more damaging than deferred review; later lifecycle/policy work may add explicit mutation authority.
+
+### Q09 – AI provider and budget (M12)
+
+- **Decision:** OpenAI is the sole primary paid provider at launch. Automatic multi-provider failover is disabled.
+- **Provider model configuration:** `AI_SMALL_MODEL` and `AI_LARGE_MODEL`; concrete model IDs are deployment configuration, never domain-code constants.
+- **Paid AI default:** disabled in development, test and staging; production requires explicit `UTOM_PAID_AI_ENABLED=true`, a provider credential and an allowed router decision.
+- **Budget policy:** monthly soft 12,000 HUF, monthly hard 15,000 HUF, daily soft 350 HUF, daily hard 500 HUF, per-article hard 5 HUF, per-step hard 2 HUF.
+- **Escalation:** small model first; maximum one large-model escalation per article lifecycle; deterministic and cache paths always precede paid calls.
+- **Owner status:** APPROVED
+- **Owner decision date:** 2026-10-03
+- **Rationale:** A single provider and explicit hard caps keep launch behavior auditable and reversible. Provider failover, payment and currency conversion changes require separate decisions.
