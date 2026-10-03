@@ -9,6 +9,7 @@ const m1Migrations = loadMigrations().filter((migration) => Number(migration.ver
 const m2Migrations = loadMigrations().filter((migration) => Number(migration.version) === 53);
 const m4Migrations = loadMigrations().filter((migration) => Number(migration.version) === 54);
 const m5Migrations = loadMigrations().filter((migration) => Number(migration.version) >= 55 && Number(migration.version) <= 57);
+const m10Migrations = loadMigrations().filter((migration) => Number(migration.version) === 58);
 
 test("M1.4 has one ordered migration statement per fixture table", () => {
   const names = contract.migrationOrder;
@@ -27,9 +28,9 @@ test("M1.4 migrations contain every fixture column and named constraint", () => 
   for (const migration of m1Migrations) {
     const tableName = migration.filename.replace(/^\d{3}_/, "").replace(/\.sql$/, "");
     const table = contract.tables[tableName];
-    for (const columnName of Object.keys(table.columns).filter((name) => !(tableName === "v2_entity_mentions" && name === "entity_type"))) assert.match(migration.sql, new RegExp(`\\b${columnName}\\b`), `${tableName}.${columnName}`);
+    for (const columnName of Object.keys(table.columns).filter((name) => !(tableName === "v2_entity_mentions" && name === "entity_type") && !(tableName === "v2_timeline_items" && ["valid_from", "valid_until"].includes(name)))) assert.match(migration.sql, new RegExp(`\\b${columnName}\\b`), `${tableName}.${columnName}`);
     for (const unique of table.unique) assert.match(migration.sql, new RegExp(`UNIQUE KEY ${unique.name} \\(`), unique.name);
-    for (const index of table.indexes) assert.match(migration.sql, new RegExp(`KEY ${index.name} \\(`), index.name);
+    for (const index of table.indexes.filter((index) => !(tableName === "v2_timeline_items" && index.name === "idx_v2_timeline_items_valid_from_valid_until"))) assert.match(migration.sql, new RegExp(`KEY ${index.name} \\(`), index.name);
     for (const foreignKey of table.foreignKeys) assert.match(migration.sql, new RegExp(`FOREIGN KEY \\(${foreignKey.columns.join(", ")}\\) REFERENCES ${foreignKey.table} \\(${foreignKey.referencedColumns.join(", ")}\\) ON DELETE ${foreignKey.onDelete} ON UPDATE ${foreignKey.onUpdate}`), `${tableName} FK`);
   }
 });
@@ -58,6 +59,15 @@ test("M5 lookup migration makes normalized identity accent-sensitive and stores 
   assert.match(m5Migrations[1].sql, /normalized_alias VARCHAR\(512\).*utf8mb4_bin/i);
   assert.match(m5Migrations[2].sql, /CREATE TABLE v2_entity_alias_observations/i);
   for (const migration of m5Migrations) assert.doesNotMatch(migration.sql, /DROP TABLE|DROP COLUMN/i);
+});
+
+test("M10 temporal bounds migration is additive and preserves timeline rows", () => {
+  assert.equal(m10Migrations.length, 1);
+  assert.equal(m10Migrations[0].filename, "058_v2_timeline_temporal_bounds.sql");
+  assert.match(m10Migrations[0].sql, /ALTER TABLE v2_timeline_items/i);
+  assert.match(m10Migrations[0].sql, /ADD COLUMN valid_from DATETIME\(6\) NULL/i);
+  assert.match(m10Migrations[0].sql, /ADD COLUMN valid_until DATETIME\(6\) NULL/i);
+  assert.doesNotMatch(m10Migrations[0].sql, /DROP TABLE|DROP COLUMN/i);
 });
 
 console.log(`M1.4 static migration contract: ${m1Migrations.length} migrations; M2 extension: ${m2Migrations.length}; M4 extension: ${m4Migrations.length}, PASS`);

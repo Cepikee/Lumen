@@ -353,8 +353,9 @@ Gate: merge and split are reviewable, current membership observations remain app
 
 ### M10 – Temporal graph
 Objective: as-of historical state.
-Tests: interval, DST, historical reconstruction, supersession.
-Gate: későbbi adat nem töröl korábbi történetet.
+Implementation complete for the applicable temporal projection slice in `lib/v2/temporal-graph.js`, `lib/v2/temporal-graph-repository.js` and `lib/v2/runtime-temporal-graph.js`: strict UTC interval validation, half-open as-of reconstruction, future/superseded exclusion, deterministic cursor ordering, idempotent timeline persistence, caller-owned rollback and concurrent writers over schema 058 timeline tables.
+Tests: interval, UTC normalization, future exclusion, historical reconstruction, supersession, unknown-time semantics, stable ordering/cursor, feature OFF/ON, MySQL idempotency, rollback and concurrency. Conflict winner selection, DST business-day presentation and frontend/API surfaces remain explicit M11/M13/M14 boundaries.
+Gate: későbbi adat nem jelenik meg az as-of projectionben, korábbi rekordok tárolva maradnak, és a projection nem választ automatikus conflict winner-t.
 
 ### M11 – Conflict és confidence history
 Objective: contradiction preservation és explainability.
