@@ -341,8 +341,9 @@ Gate: idempotens, reversible writes; claim/event/conflict processing remains out
 
 ### M8 – Claim extraction
 Objective: atomic claims article/source/evidence kapcsolattal.
-Tests: numeric/categorical/date, malformed JSON, attribution.
-Gate: displayelt claim provenance-t tartalmaz.
+Implementation: strict claim/evidence contract, mock-first feature-flagged runtime, deterministic observation/span identity and caller-owned repository persistence in `lib/v2/claim-extraction.js`, `lib/v2/runtime-claim-extraction.js` and `lib/v2/claim-extraction-repository.js`.
+Tests: numeric/categorical/date, malformed and non-finite JSON values, attribution, negation/uncertainty/conditional semantics, unresolved entity references, retry and rollback.
+Gate: displayelt claim provenance-t tartalmaz; isolated MySQL 8 integration gate PASS, implementation is ready for the M8 Git checkpoint.
 
 ### M9 – Event matching
 Objective: event candidate cluster/entity/claim alapján.
