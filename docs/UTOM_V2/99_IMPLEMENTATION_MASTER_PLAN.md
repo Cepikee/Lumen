@@ -335,8 +335,9 @@ Gate: low-confidence auto-merge nincs; M6 link persistence is caller-transaction
 
 ### M7 – Relation és evidence
 Objective: typed relation, append-only evidence.
-Tests: duplicate evidence, contradiction, retry.
-Gate: idempotens, reversible writes.
+Implementation: frozen predicate validation, evidence span validation, mock-first runtime boundary and caller-owned repository persistence in `lib/v2/relation-extraction.js`, `lib/v2/runtime-relation-extraction.js` and `lib/v2/relation-extraction-repository.js`.
+Tests: duplicate evidence, contradiction/reporting support type, unresolved entity rejection, retry and rollback.
+Gate: idempotens, reversible writes; claim/event/conflict processing remains outside M7.
 
 ### M8 – Claim extraction
 Objective: atomic claims article/source/evidence kapcsolattal.
