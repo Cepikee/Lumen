@@ -38,7 +38,20 @@ Current applicable-slice counts: **12 COMPLETE, 0 PARTIAL, 0 NOT STARTED, 0 BLOC
 
 ## Current status
 
-This is an uncommitted M9 working-tree slice. The applicable first slice is complete; automatic merge/split mutation, conflict resolution, and temporal graph projection remain explicit boundaries.
+The applicable first slice is complete and checkpointed at commit `121f104` on `develop/utom-recovery`; automatic merge/split mutation, conflict resolution, and temporal graph projection remain explicit boundaries.
+
+## Validation checkpoint
+
+- M9 unit regression: **6/6 PASS**
+- M9 MySQL 8.0.46 regression: **2/2 PASS**
+- Offline suite: **317/317 PASS**
+- TypeScript: **PASS**
+- Import check: **PASS**
+- ESLint: **0 errors, 362 warnings**
+- `npm run check`: **PASS**
+- Production build: **PASS**
+- Paid AI/provider calls: **0**
+- Temporary MySQL database/server: **torn down**
 
 ## Findings
 
