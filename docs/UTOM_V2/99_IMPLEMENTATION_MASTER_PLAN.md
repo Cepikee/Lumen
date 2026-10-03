@@ -322,12 +322,10 @@ Tests: malformed output, span bound, hallucinated entity reject, confidence/allo
 Gate: csak schema-valid mention perzisztál; M4 final gate PASS.
 
 ### M5 – Entity normalization és alias
-Objective: canonical name, alias lifecycle, review.
-Current slice: deterministic NFC/whitespace/case-preserving name and observed-alias normalization (`lib/v2/entity-normalization.js`), without lookup, persistence, resolution or merge.
-Tests: Hungarian accents, punctuation, invisible characters, diacritic distinction, invalid input and alias boundary.
-Gate: exact lookup and alias lifecycle persistence/review remain for the next M5 slice; M6 resolution is out of scope.
-Tests: case/diacritic/whitespace, collision, idempotency.
-Gate: ambiguity review queue-ba kerül.
+Objective: canonical name, exact lookup, observed alias lifecycle és collision review.
+Implementation complete: deterministic NFC/whitespace/case-preserving normalization, exact type-aware canonical/alias lookup, accent-sensitive MySQL semantics, provenance-linked observed alias persistence, idempotent observations, explicit ambiguous/review outcome and the owner-approved Q06 confidence gate (`lib/v2/entity-normalization.js`, `lib/v2/entity-resolution-repository.js`, `lib/v2/entity-resolution-policy.js`, migrations `055`–`057`). Automatic merge remains M6 scope.
+Tests: Hungarian accents, punctuation, invisible characters, diacritic distinction, canonical/alias hit, miss, collision, idempotency and MySQL integration.
+Gate: M5 complete; fuzzy/semantic/AI resolution and automatic merge remain M6 scope.
 
 ### M6 – Entity resolution
 Objective: staged scoring és bounded AI disambiguation.
@@ -492,4 +490,5 @@ M1 PASS után első kódolási lépés: additive schema migration és contract f
 - M2 acceptance: **5/5 COMPLETE**, persistence migration `053`, fresh/upgrade/idempotency/rollback evidence PASS
 - M3 completed slices: **pure existing dedup/cluster adapter contract + feature-flagged runtime handoff + related-news projection** – see `M03_DEDUP_CLUSTER_ADAPTER.md`
 - M3 acceptance: **8/8 COMPLETE**, no new query/ranking/engine/AI/schema write; legacy source-of-truth unchanged
-- Következő művelet: **M5 – exact canonical lookup és alias lifecycle persistence/review**; M5 deterministic normalization slice már elkészült
+- M5 completed slices: **deterministic normalization + exact canonical/alias lookup + provenance-linked alias lifecycle + explicit collision review boundary** – see `M05_ENTITY_NORMALIZATION.md`
+- M5 final gate: **COMPLETE**. Következő művelet: **M6 – entity resolution**, implementation intentionally not started in this session.

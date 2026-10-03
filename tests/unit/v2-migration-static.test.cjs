@@ -8,6 +8,7 @@ const contract = require("../fixtures/v2-schema-contract.cjs");
 const m1Migrations = loadMigrations().filter((migration) => Number(migration.version) >= 34 && Number(migration.version) <= 52);
 const m2Migrations = loadMigrations().filter((migration) => Number(migration.version) === 53);
 const m4Migrations = loadMigrations().filter((migration) => Number(migration.version) === 54);
+const m5Migrations = loadMigrations().filter((migration) => Number(migration.version) >= 55 && Number(migration.version) <= 57);
 
 test("M1.4 has one ordered migration statement per fixture table", () => {
   const names = contract.migrationOrder;
@@ -46,6 +47,17 @@ test("M4 mention type migration is additive and preserves existing rows", () => 
   assert.equal(m4Migrations[0].filename, "054_v2_entity_mention_type.sql");
   assert.match(m4Migrations[0].sql, /ALTER TABLE v2_entity_mentions\s+ADD COLUMN entity_type VARCHAR\(32\) NULL/i);
   assert.doesNotMatch(m4Migrations[0].sql, /DROP TABLE|DROP COLUMN/i);
+});
+
+test("M5 lookup migration makes normalized identity accent-sensitive and stores alias observations", () => {
+  assert.equal(m5Migrations.length, 3);
+  assert.equal(m5Migrations[0].filename, "055_v2_entity_normalized_collation.sql");
+  assert.equal(m5Migrations[1].filename, "056_v2_alias_normalized_collation.sql");
+  assert.equal(m5Migrations[2].filename, "057_v2_entity_alias_observations.sql");
+  assert.match(m5Migrations[0].sql, /normalized_name VARCHAR\(512\).*utf8mb4_bin/i);
+  assert.match(m5Migrations[1].sql, /normalized_alias VARCHAR\(512\).*utf8mb4_bin/i);
+  assert.match(m5Migrations[2].sql, /CREATE TABLE v2_entity_alias_observations/i);
+  for (const migration of m5Migrations) assert.doesNotMatch(migration.sql, /DROP TABLE|DROP COLUMN/i);
 });
 
 console.log(`M1.4 static migration contract: ${m1Migrations.length} migrations; M2 extension: ${m2Migrations.length}; M4 extension: ${m4Migrations.length}, PASS`);

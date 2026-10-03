@@ -1,8 +1,8 @@
 # UTOM V2 – M5 Entity normalization és alias
 
-Állapot: `M5 CURRENT SLICE COMPLETE` – determinisztikus entity/alias normalization
+Állapot: `M5 COMPLETE` – determinisztikus exact lookup, Q06 confidence gate, observed alias lifecycle és collision review boundary
 Dátum: 2026-10-03 (Europe/Budapest)
-Schema baseline: `054`
+Schema baseline: `057`
 
 ## Acceptance-gap
 
@@ -12,12 +12,12 @@ Schema baseline: `054`
 | Magyar ékezetek és punctuation megőrzése | COMPLETE | accented/hyphen fixture | nincs |
 | Determinisztikus normalized lookup name | COMPLETE | repeated-input equality regression | nincs |
 | Alias output boundary, resolution nélkül | COMPLETE | alias contract regression; nincs entityId/merge | persistence későbbi slice |
-| Canonical entity exact lookup | NOT STARTED | M5 következő dependency | repository lookup |
-| Alias persistence/lifecycle | NOT STARTED | M1 schema rendelkezésre áll | repository + MySQL |
-| Alias collision review/deferred semantics | NOT STARTED | Q06/Q10 és M5 domain gate | következő slice |
+| Canonical entity exact lookup | COMPLETE | `lib/v2/entity-resolution-repository.js`, MySQL regression | nincs |
+| Alias persistence/lifecycle | COMPLETE | migrations `055`–`057`, repository + MySQL regression | nincs |
+| Alias collision review/deferred semantics | COMPLETE | explicit `ambiguous`/review result, no auto merge | nincs |
 | Automatic merge/resolution | N/A | M6 feladata | későbbi milestone |
 
-**M5 acceptance: 4/8 COMPLETE, 3 NOT STARTED, 1 N/A, 0 BLOCKED.**
+**M5 acceptance: 8/8 COMPLETE, 0 NOT STARTED, 1 N/A, 0 BLOCKED.**
 
 ## Dependency inventory
 
@@ -28,19 +28,29 @@ Schema baseline: `054`
 - display form: NFC, trimelt, whitespace-collapsed, accents/punctuation preserved
 - lookup form: locale-aware lowercase, diacritics are retained
 - alias boundary: observed alias only; no entity ID, lookup, merge or resolution
-- persistence: none in this slice
+- persistence: observed alias plus separate provenance observation rows, migrations `055`–`057`
 - AI/paid call: 0
 
 ## Scope boundary
 
-Ez a slice csak a név- és alias-alak determinisztikus normalizálását fagyasztja be. Nem végez exact entity lookupot, alias DB-írást, collision reviewt, fuzzy matchinget, resolutiont vagy merge-et.
+Az M5 exact lookupja csak a befagyasztott normalizálót használja: nincs fuzzy, semantic vagy AI fallback. A collision eredménye explicit `ambiguous`, és review/deferred állapotban marad. Az observed alias csak valid M4 mentionből, extraction runnel és normalization versionnel visszakövethető observation sorral írható.
 
 ## Validation
 
-- M5 targeted: `tests/unit/v2-entity-normalization.test.cjs`
+- M5 targeted: `tests/unit/v2-entity-normalization.test.cjs`, `tests/unit/v2-entity-resolution.test.cjs`
 - Hungarian accents, NBSP/zero-width, hyphen, diacritic distinction, empty/non-string/language validation: PASS
-- M4/M1–M3 runtime és contract regression: változatlanul PASS
+- MySQL: canonical hit, alias hit, miss, accent-sensitive lookup, collision, idempotent observation és transaction boundary PASS
+- M4/M1–M3 runtime és contract regression: PASS
 
-## Next exact unmet requirement
+## M5 final gate
 
-Canonical entity exact lookup és alias persistence/review boundary, M6 resolution nélkül.
+- Normalization: PASS
+- Exact canonical lookup: PASS
+- Exact alias lookup: PASS
+- Miss: PASS
+- Ambiguity/review: PASS
+- Alias lifecycle/provenance/idempotency: PASS
+- MySQL normalized-key collation: `utf8mb4_bin`, PASS
+- Fuzzy/semantic/AI merge: 0
+- Q06 confidence gate: PASS (`0.95` exact single candidate, `0.80` review, ambiguity override)
+- M5 completion: `8/8 applicable COMPLETE`; automatic merge is M6 and N/A

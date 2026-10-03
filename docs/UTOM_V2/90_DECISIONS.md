@@ -60,4 +60,11 @@ The following five decisions were explicitly approved by the owner. They are pro
 
 The M1-blocking questions above are resolved. The following questions remain open for their later milestones and do not block M1 start: confidence thresholds, event merge authority, source trust weighting, AI provider and budget, manual review roles, payment and billing lifecycle, separate reporting database, graph database choice, and detailed timeline business-day presentation rules beyond the approved UTC storage baseline.
 
-No recommendation outside the approved M1-D01–M1-D05 decisions is a final product decision.
+### Q06 – Confidence thresholds (M5)
+
+- **Decision:** PRECISION-FIRST CONFIDENCE POLICY – `autoResolveMin=0.95`, `reviewMin=0.80`.
+- **Owner status:** APPROVED
+- **Owner decision date:** 2026-10-03
+- **Rationale:** Confidence alone never resolves identity. A single exact, type-compatible, non-ambiguous candidate may resolve at or above 0.95; 0.80–0.9499 remains review/unresolved; below 0.80 remains unresolved. Ambiguity always wins, and M5 never performs automatic entity merge.
+
+No recommendation outside the approved M1-D01–M1-D05 and Q06 decisions is a final product decision.

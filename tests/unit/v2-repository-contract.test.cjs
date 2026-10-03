@@ -83,7 +83,7 @@ test("V2 runtime modules are importable without DB, network or timer side effect
   const before = new Set(process.getActiveResourcesInfo?.() || []);
   for (const file of runtimeFiles(v2Root)) {
     const source = fs.readFileSync(file, "utf8");
-    if (!file.endsWith("ingestion-provenance-repository.js") && !file.endsWith("entity-extraction-repository.js")) {
+    if (!file.endsWith("ingestion-provenance-repository.js") && !file.endsWith("entity-extraction-repository.js") && !file.endsWith("entity-resolution-repository.js")) {
       assert.doesNotMatch(source, /(?:createPool|createConnection|\.query\s*\(|\.execute\s*\(|fetch\s*\(|setTimeout\s*\(|setInterval\s*\()/, path.relative(root, file));
     }
     require(file);
