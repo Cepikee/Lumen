@@ -48,3 +48,11 @@ Safe rollout: deploy the V2-capable backend with its flag OFF, deploy the fronte
 `M14 IMPLEMENTATION: COMPLETE – article context/timeline panel, flag boundary and real-browser acceptance complete.`
 
 `M14 COMPLETE: YES – all applicable browser, state, error, race, responsive and quality-gate requirements passed.`
+
+## Git checkpoint
+
+- commit: `e8b4733`
+- subject: `feat(v2): add frontend article context and timeline`
+- remote: `origin/develop/utom-recovery`
+- local/remote aligned: yes
+- working tree clean: yes
