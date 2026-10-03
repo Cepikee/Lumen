@@ -347,8 +347,9 @@ Gate: displayelt claim provenance-t tartalmaz; isolated MySQL 8 integration gate
 
 ### M9 – Event matching
 Objective: event candidate cluster/entity/claim alapján.
-Tests: split/merge, repeated coverage, temporal overlap.
-Gate: merge reviewable, membership history megmarad.
+Implementation slice complete: deterministic event candidate key, caller-owned persistence for existing `v2_events`, `v2_event_articles`, and `v2_event_entities` tables, null-safe concurrent membership upsert, and review-only merge/split recommendations in `lib/v2/event-matching.js`, `lib/v2/event-matching-repository.js`, and `lib/v2/runtime-event-matching.js`.
+Tests: candidate/status/interval validation, repeated article/entity membership idempotency, first-evidence preservation, temporal overlap/touching/unknown/disjoint classification, review-only merge/split, feature OFF/ON, rollback and concurrent MySQL workers. Automatic merge/split mutation remains prohibited by Q07; conflict resolution and temporal graph projection remain later-scope boundaries.
+Gate: merge and split are reviewable, current membership observations remain append-safe, and no automatic identity mutation occurs.
 
 ### M10 – Temporal graph
 Objective: as-of historical state.

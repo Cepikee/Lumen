@@ -58,7 +58,7 @@ The following five decisions were explicitly approved by the owner. They are pro
 
 ## REMAINING OPEN QUESTIONS
 
-The M1-blocking questions above are resolved. The following questions remain open for their later milestones and do not block M1 start: confidence thresholds, event merge authority, source trust weighting, AI provider and budget, manual review roles, payment and billing lifecycle, separate reporting database, graph database choice, and detailed timeline business-day presentation rules beyond the approved UTC storage baseline.
+The M1-blocking questions above are resolved. The following questions remain open for their later milestones and do not block M1 start: source trust weighting, AI provider and budget, manual review roles, payment and billing lifecycle, separate reporting database, graph database choice, and detailed timeline business-day presentation rules beyond the approved UTC storage baseline. Q07 is resolved for M9: merge and split authority remain review-only.
 
 ### Q06 – Confidence thresholds (M5)
 
@@ -68,3 +68,12 @@ The M1-blocking questions above are resolved. The following questions remain ope
 - **Rationale:** Confidence alone never resolves identity. A single exact, type-compatible, non-ambiguous candidate may resolve at or above 0.95; 0.80–0.9499 remains review/unresolved; below 0.80 remains unresolved. Ambiguity always wins, and M5 never performs automatic entity merge.
 
 No recommendation outside the approved M1-D01–M1-D05 and Q06 decisions is a final product decision.
+
+### Q07 – Event merge authority (M9)
+
+- **Decision:** REVIEW-ONLY EVENT MATCHING – M9 may create deterministic merge/split recommendations with evidence, but it must not mutate event identity through automatic merge or split.
+- **Automatic merge:** NO
+- **Automatic split:** NO
+- **Owner status:** APPROVED
+- **Owner decision date:** 2026-10-03
+- **Rationale:** A false historical merge is more damaging than deferred review; later lifecycle/policy work may add explicit mutation authority.
