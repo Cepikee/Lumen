@@ -3,7 +3,7 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const mysql = require("mysql2/promise");
 const { applyMigrations, loadMigrations } = require("../../db/migration-core.cjs");
-const { getEntity, getEvent, getClaim, compareSources } = require("../../lib/v2/read-model-repository");
+const { getEntity, getEvent, getClaim, compareSources, compareSourcesDetailed } = require("../../lib/v2/read-model-repository");
 const enabled = process.env.UTOM_MYSQL_TEST_OPT_IN === "true" && Boolean(process.env.UTOM_TEST_MYSQL_URL);
 function connect() { const url = new URL(process.env.UTOM_TEST_MYSQL_URL); return mysql.createConnection({ host: url.hostname, port: Number(url.port || 3306), user: decodeURIComponent(url.username), password: decodeURIComponent(url.password), database: url.pathname.slice(1) }); }
 
@@ -24,7 +24,8 @@ test("M13 MySQL read models project entity/event/claim/source comparison without
     const projectedEvent = await getEvent(connection, event.insertId);
     const projectedClaim = await getClaim(connection, claim.insertId);
     const compared = await compareSources(connection, { type: "claim", id: claim.insertId });
-    assert.equal(projectedEntity.name, "M13 Entity"); assert.equal(projectedEvent.articles.length, 1); assert.deepEqual(projectedClaim.value, { value: 5, unit: "kg" }); assert.equal(compared.sources.length, 1);
+    const detailed = await compareSourcesDetailed(connection, { type: "claim", id: claim.insertId });
+    assert.equal(projectedEntity.name, "M13 Entity"); assert.equal(projectedEvent.articles.length, 1); assert.deepEqual(projectedClaim.value, { value: 5, unit: "kg" }); assert.equal(compared.sources.length, 1); assert.equal(detailed.claims.length, 1); assert.equal(detailed.authority.winner, null); assert.equal(detailed.ai.providerCalls, 0);
   } finally { await connection.end(); }
 });
 

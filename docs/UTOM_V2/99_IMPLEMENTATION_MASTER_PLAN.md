@@ -387,8 +387,9 @@ M14 is complete: `useV2ArticleContext`, `V2ArticleContextPanel`, canonical fail-
 
 ### M15 – Source comparison
 Objective: source claims/evidence compare.
-Tests: missing source, contradiction, ordering, pagination.
-Gate: reported/inferred/disputed elkülönül.
+Implementation complete: the frozen M13 source summary remains the default `GET /api/v2/source-comparison` response. An additive `detail=claims` projection now provides deterministic source coverage, canonical claim-group shared/source-only coverage, observed values/units, attribution, temporal intervals, evidence counts and status labels using existing M8–M11 data. The projection is on-demand, bounded, read-only and provider-free; it has no winner, trust, bias or majority semantics. Evidence: `docs/UTOM_V2/M15_SOURCE_COMPARISON.md`.
+Tests: missing source, empty coverage, numeric/unit preservation, attribution, temporal scope, stable ordering, bounded pagination, malformed pagination, no-winner/no-trust/no-AI and M13 compatibility. Offline, TypeScript, ESLint, import, npm check, production build and isolated MySQL 8.0.46 fixture pass.
+Gate: reported/inferred/disputed elkülönül; M15 COMPLETE.
 
 ### M16 – Premium intelligence
 Objective: entitlement-védett context/conflict/history.
