@@ -393,8 +393,9 @@ Gate: reported/inferred/disputed elkülönül; M15 COMPLETE.
 
 ### M16 – Premium intelligence
 Objective: entitlement-védett context/conflict/history.
-Tests: anonymous, non-premium, expired, active, malformed session, empty.
-Gate: entitlement boundary és redaction bizonyított; payment továbbra is disabled.
+Implementation slice complete: new server-only `GET /api/v2/premium/intelligence` reuses canonical entitlement, M13 event/claim context, M15 source comparison and M10 premium timeline reads. It validates exactly one bounded event/claim scope, redacts conflict/audit internals, returns explicit empty/error states, and performs no writes or provider calls. Existing legacy premium proxy/UI and payment-disabled boundary remain unchanged. Evidence: `docs/UTOM_V2/M16_PREMIUM_INTELLIGENCE.md`.
+Tests: anonymous, non-premium, expired, active, malformed session/input, empty, redaction, canonical context, timeline and no-provider semantics. Offline 352/352, TypeScript, ESLint, imports, npm check and production build pass.
+Gate: entitlement boundary and redaction validated; payment remains disabled; M16 COMPLETE for the deterministic read-only slice.
 
 ### M17 – Incremental backfill és optimization
 Objective: bounded, resumable processing és költségmérés.
