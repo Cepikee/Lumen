@@ -358,6 +358,8 @@ Tests: interval, UTC normalization, future exclusion, historical reconstruction,
 Gate: későbbi adat nem jelenik meg az as-of projectionben, korábbi rekordok tárolva maradnak, és a projection nem választ automatikus conflict winner-t.
 
 ### M11 – Conflict és confidence history
+
+M11 complete. A canonical M8 claim pairből deterministic, order-insensitive conflict candidate készül, amely kezeli a numeric/categorical/boolean/entity/relation/temporal összehasonlítást, az eltérő validitási időszakot, unit mismatch-et, attribution- és evidence-megőrzést, valamint a no-winner review-only szabályt. A persistence a 046–048 sémát használja: `v2_conflicts` open állapotban, `v2_confidence_history` append-only, `v2_entity_graph_history` operation-key idempotencia-fence-ként. Feature OFF esetén nincs read/write/provider side effect. Az izolált MySQL 8.0.46 M11 suite 4/4 PASS. Részletes acceptance evidence: `docs/UTOM_V2/M11_CONFLICT_CONFIDENCE.md`.
 Objective: contradiction preservation és explainability.
 Tests: conflict types, rerun idempotency.
 Gate: unresolved conflict nem kap önkényes győztest.
