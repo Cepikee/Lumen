@@ -1,0 +1,7 @@
+import { NextResponse } from "next/server";
+import { db } from "@/lib/db";
+import { securityCheck } from "@/lib/security";
+import { isV2Enabled } from "@/lib/v2/feature-flags";
+import { envelope, errorEnvelope } from "@/lib/v2/read-model-contract";
+import { compareSources } from "@/lib/v2/read-model-repository";
+export async function GET(req: Request) { const security = await securityCheck(req); if (security) return security; if (!isV2Enabled()) return NextResponse.json(errorEnvelope("v2_disabled", "V2 read models are disabled"), { status: 404 }); const url = new URL(req.url); const eventId = url.searchParams.get("eventId"); const claimId = url.searchParams.get("claimId"); if ((eventId && claimId) || (!eventId && !claimId)) return NextResponse.json(errorEnvelope("invalid_input", "exactly_one_scope_required"), { status: 422 }); try { const data = await compareSources(db, eventId ? { type: "event", id: eventId } : { type: "claim", id: claimId }); return NextResponse.json(envelope(data)); } catch (error: any) { const invalid = String(error?.message || "").endsWith("_invalid") || error?.message === "scope_not_found"; return NextResponse.json(errorEnvelope(error?.message === "scope_not_found" ? "not_found" : invalid ? "invalid_input" : "internal_error", error?.message === "scope_not_found" ? "Comparison scope not found" : invalid ? error.message : "Unable to compare sources"), { status: error?.message === "scope_not_found" ? 404 : invalid ? 422 : 500 }); } }

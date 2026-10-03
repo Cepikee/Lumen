@@ -376,6 +376,8 @@ Objective: article context, entity, event, timeline, claim, source compare.
 Tests: envelope, cursor, 401/403/404/409/5xx, no leakage.
 Gate: contract fixtures zöldek.
 
+M13 implementation and final acceptance are complete. The versioned read-model envelope, bounded `asOf`/cursor contract, feature-off boundary, article context, timeline, entity detail, event detail, claim detail and scoped source-comparison endpoints are implemented with explicit allowlist projections in `lib/v2/read-model-contract.js`, `lib/v2/read-model-repository.js` and `app/api/v2/`. Isolated WSL MySQL 8.0.46 fixture validation and production-runtime HTTP OFF/ON smoke both pass. Premium intelligence remains an M16 concern. Evidence: `docs/UTOM_V2/M13_READ_MODELS_V2_API.md`.
+
 ### M14 – Frontend context/timeline
 Objective: feature-flagged article context és timeline panel.
 Tests: malformed response, race, flag on/off, null.
