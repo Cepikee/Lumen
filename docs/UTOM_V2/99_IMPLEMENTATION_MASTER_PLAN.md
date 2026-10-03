@@ -383,6 +383,8 @@ Objective: feature-flagged article context és timeline panel.
 Tests: malformed response, race, flag on/off, null.
 Gate: legacy UI regresszió nélkül.
 
+M14 is complete: `useV2ArticleContext`, `V2ArticleContextPanel`, canonical fail-closed frontend flag parsing and article-detail integration behind `NEXT_PUBLIC_UTOM_V2_ENABLED` (default OFF) are implemented and accepted. The slice is read-only, reuses the M13 envelope, and has real Chrome production-runtime evidence for all four flag combinations, loading/ready/empty/error/malformed/null states, rapid navigation, responsive viewports and no-write behavior. Evidence: `docs/UTOM_V2/M14_FRONTEND_CONTEXT_TIMELINE.md`.
+
 ### M15 – Source comparison
 Objective: source claims/evidence compare.
 Tests: missing source, contradiction, ordering, pagination.
