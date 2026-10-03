@@ -329,8 +329,9 @@ Gate: M5 complete; fuzzy/semantic/AI resolution and automatic merge remain M6 sc
 
 ### M6 – Entity resolution
 Objective: staged scoring és bounded AI disambiguation.
-Tests: same-name entities, false merge, threshold.
-Gate: low-confidence auto-merge nincs.
+Implementation: bounded type/language-aware candidate generation, deterministic contextual scoring, mock-first semantic review boundary, M5 exact short-circuit and audited mention linkage in `lib/v2/entity-resolution-candidates.js`, `lib/v2/entity-resolution-repository.js` and `lib/v2/runtime-entity-resolution.js`. Paid provider execution remains disabled until Q09/M12 provider and budget policy.
+Tests: same-name entities, false merge, threshold, candidate bound, feature flag, exact short-circuit, review-only semantic recommendation, idempotent persistence.
+Gate: low-confidence auto-merge nincs; M6 link persistence is caller-transactional and append-only audited.
 
 ### M7 – Relation és evidence
 Objective: typed relation, append-only evidence.
