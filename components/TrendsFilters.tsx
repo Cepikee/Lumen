@@ -112,7 +112,6 @@ export default function TrendsFilters({ filters, setFilters }: Props) {
         <label className="form-label fw-bold">📂 Kategóriák</label>
         {allCategories.map((cat) => {
           const checked = filters.categories.includes(cat);
-<TrendsDebug filters={filters} />
           return (
             <div key={cat} className="form-check">
               <input
@@ -130,6 +129,7 @@ export default function TrendsFilters({ filters, setFilters }: Props) {
             </div>
           );
         })}
+        <TrendsDebug filters={filters} />
       </div>
 
       {/* Rendezés */}

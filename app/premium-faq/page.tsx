@@ -63,8 +63,9 @@ export default function PremiumFAQ() {
           <div id="payment" className="faq-section mb-5">
             <h2 className="fs-4 fw-bold mb-3">Fizetés</h2>
             <p className="text-muted">
-              Az Utom Prémium jelenleg <strong>Barion</strong> fizetéssel érhető el.
-              Bankkártyát, Barion-tárcát és több hazai fizetési módot is támogat.
+              Az Utom Prémium fizetési szolgáltatása jelenleg nem érhető el, ezért
+              előfizetést és támogatást most nem lehet indítani. A fizetési módok
+              csak az integráció élesítése után lesznek használhatók.
             </p>
           </div>
 
@@ -156,12 +157,8 @@ const faqList = [
     q: "Miért nem tudok előfizetni?",
     a: (
       <>
-        Ha a fizetés sikertelen, annak több oka lehet:
-        <ul>
-          <li>Lejárt vagy hibás bankkártya</li>
-          <li>A bank visszautasította a tranzakciót</li>
-          <li>Barion technikai hiba</li>
-        </ul>
+        Az előfizetési fizetési integráció jelenleg nincs élesítve, ezért a
+        prémium csomagok átmenetileg nem vásárolhatók meg.
       </>
     )
   },

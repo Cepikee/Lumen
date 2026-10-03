@@ -11,6 +11,7 @@
     "check:imports": "node scripts/check-local-imports.cjs",
     "test": "npm run test:offline",
     "test:offline": "node --test tests/unit/*.test.cjs",
+    "test:ffmpeg": "node --test tests/integration/ffmpeg-thumbnail.test.cjs",
     "test:integration:mysql": "node --test tests/integration/mysql-pipeline-recovery.test.cjs",
     "check": "npm run typecheck && npm run lint && npm run check:imports && npm run test:offline && npm run build",
     "db:plan": "node db/migrate.cjs --plan",

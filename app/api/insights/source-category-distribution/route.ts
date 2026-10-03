@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { businessDayBounds, mysqlUtc } from "@/lib/business-time";
+import { normalizeSourceIdentity } from "@/lib/source-identity";
 
 function fixCat(s: any): string | null {
   if (!s) return null;
@@ -17,6 +19,26 @@ function fixCat(s: any): string | null {
   return t || null;
 }
 
+// The database contains historical category values with inconsistent casing.
+// Keep the response contract stable so e.g. "politika" is not silently
+// dropped by the UI, which renders the canonical Hungarian labels below.
+function canonicalCategory(s: any): string | null {
+  const value = fixCat(s);
+  if (!value) return null;
+  const key = value.toLocaleLowerCase("hu-HU");
+  const labels = new Map([
+    ["politika", "Politika"],
+    ["gazdaság", "Gazdaság"],
+    ["közélet", "Közélet"],
+    ["kultúra", "Kultúra"],
+    ["sport", "Sport"],
+    ["tech", "Tech"],
+    ["egészségügy", "Egészségügy"],
+    ["oktatás", "Oktatás"],
+  ]);
+  return labels.get(key) ?? null;
+}
+
 export async function GET(req: Request) {
   try {
     const sec = await securityCheck(req);
@@ -24,22 +46,31 @@ export async function GET(req: Request) {
 
     // ⭐ DOMAIN PARAMÉTER BEOLVASÁSA
     const { searchParams } = new URL(req.url);
-    const domain = searchParams.get("domain")?.trim().toLowerCase();
+    // The response canonicalizes the legacy Portfolio spelling below. Apply
+    // the same canonicalization to the incoming filter or a request for
+    // `domain=portfolio` would incorrectly return an empty result.
+    const rawDomain = searchParams.get("domain")?.trim().toLowerCase();
+    // Filter keys use the same canonical identity as response rows. Without
+    // this, aliases such as `24hu` and `24.hu` silently produce empty charts.
+    const domain = normalizeSourceIdentity(rawDomain)?.key
+      ?? (rawDomain === "portfolio" ? "portfolio.hu" : rawDomain);
+    const today = businessDayBounds(new Date());
 
     // --- 1) Forrás + kategória lekérés ---
     const [rows]: any = await db.query(`
       SELECT 
-        TRIM(source) AS source,
-        TRIM(category) AS category,
+        LOWER(TRIM(source)) AS source,
+        MIN(TRIM(category)) AS category,
         COUNT(*) AS count
       FROM summaries
-      WHERE category IS NOT NULL
+      WHERE created_at >= ? AND created_at < ?
+        AND category IS NOT NULL
         AND category <> ''
         AND source IS NOT NULL
         AND source <> ''
-      GROUP BY TRIM(source), TRIM(category)
-      ORDER BY TRIM(source) ASC
-    `);
+      GROUP BY LOWER(TRIM(source)), LOWER(TRIM(category))
+      ORDER BY LOWER(TRIM(source)) ASC
+    `, [mysqlUtc(today.start), mysqlUtc(today.end)]);
 
     if (!rows || !rows.length) {
       return NextResponse.json({ success: true, items: [] });
@@ -49,13 +80,11 @@ export async function GET(req: Request) {
     const map: Record<string, any> = {};
 
     for (const r of rows) {
-      let src = String(r.source).trim().toLowerCase();
+      const rawSource = String(r.source).trim().toLowerCase();
+      let src = normalizeSourceIdentity(rawSource)?.key ?? rawSource;
+      if (src === "portfolio") src = "portfolio.hu";
 
-      if (src === "portfolio") {
-        src = "portfolio.hu";
-      }
-
-      const cat = fixCat(r.category);
+      const cat = canonicalCategory(r.category);
       const count = Number(r.count) || 0;
 
       if (!src || !cat) continue;

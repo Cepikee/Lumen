@@ -8,8 +8,8 @@ const { isValidInternalToken } = require("../../lib/security/internal-token");
 
 test("migration chain is contiguous and statically rollout-auditable", () => {
   const audit = auditMigrationChain(loadMigrations());
-  assert.equal(audit.migrationCount, 33);
-  assert.equal(audit.latestVersion, "033");
+  assert.equal(audit.migrationCount, 54);
+  assert.equal(audit.latestVersion, "054");
   assert.equal(audit.safeToApply, true);
   assert.equal(audit.findings.some((item) => item.level === "critical"), false);
 });

@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { Inter } from "next/font/google";
+import { useRouter } from "next/navigation";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,6 +25,7 @@ export interface FeedItem {
 function formatRelativeTime(dateString: string): string {
   const now = new Date();
   const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return "ismeretlen időpont";
   const diffMs = now.getTime() - date.getTime();
   const diffMin = Math.floor(diffMs / 60000);
   const diffHour = Math.floor(diffMin / 60);
@@ -38,6 +39,7 @@ function formatRelativeTime(dateString: string): string {
 
 function formatFullDate(dateString: string): string {
   const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return "Ismeretlen dátum";
   return date.toLocaleString("hu-HU", {
     year: "numeric",
     month: "long",
@@ -83,6 +85,7 @@ export default function FeedItemCard({
   item: FeedItem;
   viewMode: "card" | "compact";
 }) {
+  const router = useRouter();
   const url = item.url || "";
   const sourceKey = getSourceKey(item.source_id);
   const sourceText = sourceKey.toUpperCase();
@@ -96,7 +99,18 @@ export default function FeedItemCard({
 
   return (
     <div className={`${wrapperFont}`}>
-      <Link href={`/cikk/${item.id}`} className="block no-underline">
+      <div
+        className="block no-underline"
+        role="link"
+        tabIndex={0}
+        onClick={() => router.push(`/cikk/${item.id}`)}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            router.push(`/cikk/${item.id}`);
+          }
+        }}
+      >
         <div
           className={`
             feed-card
@@ -124,18 +138,24 @@ export default function FeedItemCard({
                   {sourceText}
                 </span>
 
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`
-                    line-clamp-2 !no-underline font-semibold text-[#4da3ff] hover:text-[#77b8ff]
-                    ${isCompact ? "text-[0.9rem]" : "text-[1.15rem]"}
-                  `}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {item.title}
-                </a>
+                {url.trim() ? (
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`
+                      line-clamp-2 !no-underline font-semibold text-[#4da3ff] hover:text-[#77b8ff]
+                      ${isCompact ? "text-[0.9rem]" : "text-[1.15rem]"}
+                    `}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {typeof item.title === "string" && item.title.trim() ? item.title : "Cím nélkül"}
+                  </a>
+                ) : (
+                  <span className={`line-clamp-2 font-semibold text-[#4da3ff] ${isCompact ? "text-[0.9rem]" : "text-[1.15rem]"}`}>
+                    {typeof item.title === "string" && item.title.trim() ? item.title : "Cím nélkül"}
+                  </span>
+                )}
               </div>
 
               {item.ai_clean === 1 && (
@@ -155,7 +175,7 @@ export default function FeedItemCard({
                 ${isCompact ? "text-[0.8rem] leading-[1.3]" : "text-[1rem] leading-[1.6]"}
               `}
             >
-              <ReactMarkdown>{item.content}</ReactMarkdown>
+              <ReactMarkdown>{typeof item.content === "string" ? item.content : ""}</ReactMarkdown>
             </div>
 
             {/* FOOTER */}
@@ -191,7 +211,7 @@ export default function FeedItemCard({
 
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   );
 }

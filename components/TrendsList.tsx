@@ -36,8 +36,53 @@ interface Props {
 
 type HistoryRow = { day?: string; hour?: number; freq: number };
 
+function normalizeHistoryRows(value: unknown): HistoryRow[] {
+  const rows = Array.isArray(value) ? value : [];
+  return rows.flatMap((row) => {
+    if (!row || typeof row !== "object") return [];
+    const raw = row as { day?: unknown; hour?: unknown; freq?: unknown };
+    const freq = Number(raw.freq);
+    if (!Number.isFinite(freq) || freq < 0) return [];
+    const day = typeof raw.day === "string" && !Number.isNaN(new Date(raw.day).getTime())
+      ? raw.day
+      : undefined;
+    const hour = Number(raw.hour);
+    if (!day && (!Number.isInteger(hour) || hour < 0 || hour > 23)) return [];
+    return [{ day, hour: Number.isInteger(hour) ? hour : undefined, freq }];
+  });
+}
+
+function normalizeTrend(value: unknown): Trend | null {
+  if (!value || typeof value !== "object") return null;
+  const raw = value as Partial<Trend> & { topic?: unknown; name?: unknown; frequency?: unknown };
+  const keyword = typeof raw.keyword === "string"
+    ? raw.keyword.trim()
+    : typeof raw.topic === "string"
+      ? raw.topic.trim()
+      : typeof raw.name === "string"
+        ? raw.name.trim()
+        : "";
+  if (!keyword) return null;
+  const rawFreq = (raw as any).freq ?? raw.frequency;
+  const freq = Number(rawFreq);
+  return {
+    keyword,
+    freq: Number.isFinite(freq) && freq >= 0 ? freq : 0,
+    growth: raw.growth == null || Number.isFinite(Number(raw.growth)) ? (raw.growth == null ? null : Number(raw.growth)) : null,
+    first_seen: typeof raw.first_seen === "string" ? raw.first_seen : undefined,
+    last_seen: typeof raw.last_seen === "string" ? raw.last_seen : undefined,
+    articles: Array.isArray(raw.articles) ? raw.articles : undefined,
+    status: raw.status,
+    category: typeof raw.category === "string" && raw.category.trim() ? raw.category.trim() : undefined,
+  };
+}
+
 export default function TrendsList({ filters, trends: externalTrends }: Props) {
-  const [trends, setTrends] = useState<Trend[]>(externalTrends ?? []);
+  const [trends, setTrends] = useState<Trend[]>(
+    Array.isArray(externalTrends)
+      ? externalTrends.map(normalizeTrend).filter((trend): trend is Trend => trend !== null)
+      : []
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [historyMap, setHistoryMap] = useState<Record<string, HistoryRow[]>>({});
@@ -45,7 +90,11 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
 
   useEffect(() => {
     if (Array.isArray(externalTrends)) {
-      setTrends(externalTrends);
+      // External trend payloads come from runtime callers and may contain
+      // driver strings or malformed rows. Keep the same normalization used
+      // for the initial render; otherwise the first render after prop change
+      // can dereference an invalid keyword/frequency before the second effect.
+      setTrends(externalTrends.map(normalizeTrend).filter((trend): trend is Trend => trend !== null));
       setHistoryMap({});
       return;
     }
@@ -65,10 +114,18 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
     });
 
     fetch(`/api/trends?${query.toString()}`, { cache: "no-store" })
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (!res.ok) throw new Error(`trends_http_${res.status}`);
+        const data = await res.json();
+        if (!data || typeof data !== "object") throw new Error("trends_invalid_response");
+        return data;
+      })
       .then((data) => {
         if (!mounted) return;
-        const trendList = Array.isArray(data.trends) ? data.trends : Array.isArray(data) ? data : [];
+        const rawTrendList: unknown[] = (Array.isArray(data.trends) ? data.trends : Array.isArray(data) ? data : []) as unknown[];
+        const trendList = rawTrendList
+          .map(normalizeTrend)
+          .filter((trend): trend is Trend => trend !== null);
         setTrends(trendList);
         setHistoryMap({});
 
@@ -82,11 +139,16 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
           });
 
           fetch(`/api/trend-history?${historyQuery.toString()}`)
-            .then((res) => res.json())
+            .then(async (res) => {
+              if (!res.ok) throw new Error(`trend_history_http_${res.status}`);
+              const data = await res.json();
+              if (!data || typeof data !== "object") throw new Error("trend_history_invalid_response");
+              return data;
+            })
             .then((data) => {
               if (!mounted) return;
               if (Array.isArray(data.history)) {
-                setHistoryMap((prev) => ({ ...prev, [t.keyword]: data.history as HistoryRow[] }));
+                setHistoryMap((prev) => ({ ...prev, [t.keyword]: normalizeHistoryRows(data.history) }));
               } else {
                 setHistoryMap((prev) => ({ ...prev, [t.keyword]: [] }));
               }
@@ -105,10 +167,21 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
       });
 
     return () => { mounted = false; };
-  }, [filters, externalTrends]);
+  }, [
+    filters.period,
+    filters.sort,
+    filters.keyword,
+    filters.sources,
+    filters.categories,
+    filters.startDate,
+    filters.endDate,
+    externalTrends,
+  ]);
 
   useEffect(() => {
-    if (Array.isArray(externalTrends)) setTrends(externalTrends);
+    if (Array.isArray(externalTrends)) {
+      setTrends(externalTrends.map(normalizeTrend).filter((trend): trend is Trend => trend !== null));
+    }
   }, [externalTrends]);
 
   useEffect(() => {
@@ -129,12 +202,10 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
   function filterByCustomPeriod(history: HistoryRow[]) {
     if (!filters.startDate || !filters.endDate) return history;
     if (filters.period === "24h") return history;
-    const from = new Date(filters.startDate + "T00:00:00");
-    const to = new Date(filters.endDate + "T23:59:59");
     return history.filter((h) => {
-      if (!h.day) return false;
-      const d = new Date(h.day + "T00:00:00");
-      return d >= from && d <= to;
+      const day = typeof h.day === "string" ? h.day.slice(0, 10) : "";
+      return /^\d{4}-\d{2}-\d{2}$/.test(day) &&
+        day >= filters.startDate! && day <= filters.endDate!;
     });
   }
 
@@ -158,14 +229,19 @@ export default function TrendsList({ filters, trends: externalTrends }: Props) {
     return last < prev;
   }
 
-  const visibleTrends = trends.filter((t) => {
+    const visibleTrends = trends.filter((t) => {
     const matchKeyword =
       filters.keyword.trim().length === 0 ||
       t.keyword.toLowerCase().includes(filters.keyword.trim().toLowerCase());
 
     const matchCategory =
       filters.categories.length === 0 ||
-      (t.category ? filters.categories.includes(t.category.toLowerCase()) : true);
+      Boolean(
+        t.category &&
+        filters.categories
+          .map((category) => category.trim().toLowerCase())
+          .includes(t.category.trim().toLowerCase())
+      );
 
     return matchKeyword && matchCategory;
   });

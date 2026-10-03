@@ -82,12 +82,18 @@ export default function SparklineMini({ history, period = "365d", width = 220, h
     labels = safeHistory.map(h =>
       typeof h.hour === "number" ? `${String(h.hour).padStart(2, "0")}:00` : "?"
     );
-    values = safeHistory.map(h => h.freq);
+    values = safeHistory.map((h) => {
+      const value = Number(h?.freq);
+      return Number.isFinite(value) && value >= 0 ? value : 0;
+    });
   } else {
     labels = safeHistory.map(h =>
       h.day ? new Date(h.day + "T00:00:00").toLocaleDateString("hu-HU") : "?"
     );
-    values = safeHistory.map(h => h.freq);
+    values = safeHistory.map((h) => {
+      const value = Number(h?.freq);
+      return Number.isFinite(value) && value >= 0 ? value : 0;
+    });
   }
 
   const percents = computeSegmentPercents(values);

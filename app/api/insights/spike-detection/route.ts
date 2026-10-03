@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { businessDayBounds, mysqlUtc } from "@/lib/business-time";
 
 function fixText(s: any): string | null {
   if (!s) return null;
@@ -20,37 +21,38 @@ function getSpikeLevel(count: number) {
   return null;
 }
 
+function localBusinessHour(bucket: unknown): number {
+  const date = new Date(`${String(bucket).replace(" ", "T")}Z`);
+  if (Number.isNaN(date.getTime())) return 0;
+  const value = Number(new Intl.DateTimeFormat("en-US", {
+    hour: "2-digit", hour12: false, timeZone: "Europe/Budapest"
+  }).format(date));
+  return value === 24 ? 0 : value;
+}
+
 export async function GET(req: Request) {
   try {
     const sec = await securityCheck(req);
     if (sec) return sec;
 
-    // HELYI IDŐ – mai nap 00:00:00 → 23:59:59
-    const now = new Date();
-    const startStr =
-      `${now.getFullYear()}-` +
-      `${String(now.getMonth() + 1).padStart(2, "0")}-` +
-      `${String(now.getDate()).padStart(2, "0")} 00:00:00`;
-
-    const endStr =
-      `${now.getFullYear()}-` +
-      `${String(now.getMonth() + 1).padStart(2, "0")}-` +
-      `${String(now.getDate()).padStart(2, "0")} 23:59:59`;
+    const bounds = businessDayBounds(new Date());
+    const startStr = mysqlUtc(bounds.start);
+    const endStr = mysqlUtc(bounds.end);
 
     const spikes: any[] = [];
 
     const [catRows]: any = await db.query(
       `
       SELECT 
-        TRIM(category) AS category,
+        MIN(TRIM(category)) AS category,
         DATE_FORMAT(created_at, "%Y-%m-%d %H:00:00") AS bucket,
         COUNT(*) AS count
       FROM summaries
       WHERE created_at >= ?
-        AND created_at <= ?
+        AND created_at < ?
         AND category IS NOT NULL
         AND category <> ''
-      GROUP BY TRIM(category), bucket
+      GROUP BY LOWER(TRIM(category)), bucket
       HAVING count >= 3
       ORDER BY count DESC
       LIMIT 40
@@ -61,7 +63,7 @@ export async function GET(req: Request) {
     for (const r of catRows || []) {
       const cat = fixText(r.category);
       if (!cat) continue;
-      const hour = new Date(r.bucket).getHours();
+      const hour = localBusinessHour(r.bucket);
       const level = getSpikeLevel(r.count);
       if (!level) continue;
 
@@ -77,15 +79,15 @@ export async function GET(req: Request) {
     const [srcRows]: any = await db.query(
       `
       SELECT 
-        TRIM(source) AS source,
+        MIN(TRIM(source)) AS source,
         DATE_FORMAT(created_at, "%Y-%m-%d %H:00:00") AS bucket,
         COUNT(*) AS count
       FROM summaries
       WHERE created_at >= ?
-        AND created_at <= ?
+        AND created_at < ?
         AND source IS NOT NULL
         AND source <> ''
-      GROUP BY TRIM(source), bucket
+      GROUP BY LOWER(TRIM(source)), bucket
       HAVING count >= 3
       ORDER BY count DESC
       LIMIT 40
@@ -96,7 +98,7 @@ export async function GET(req: Request) {
     for (const r of srcRows || []) {
       const src = fixText(r.source);
       if (!src) continue;
-      const hour = new Date(r.bucket).getHours();
+      const hour = localBusinessHour(r.bucket);
       const level = getSpikeLevel(r.count);
       if (!level) continue;
 
@@ -111,7 +113,7 @@ export async function GET(req: Request) {
 
     const topSpikes = spikes
       .map((s) => ({ ...s, score: s.value }))
-      .sort((a, b) => b.score - a.score)
+      .sort((a, b) => b.score - a.score || a.type.localeCompare(b.type) || a.label.localeCompare(b.label, "hu") || a.hour - b.hour)
       .slice(0, 12);
 
     return NextResponse.json({ success: true, spikes: topSpikes });

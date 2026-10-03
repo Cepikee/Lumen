@@ -9,24 +9,43 @@ type VideoItem = {
   thumbnailUrl?: string;
 };
 
+const ARCHIVE_PLACEHOLDER = "/icons/kep-placeholder.png";
+
+function safeThumbnailUrl(value: unknown): string {
+  if (typeof value !== "string") return ARCHIVE_PLACEHOLDER;
+  const trimmed = value.trim();
+  if (!trimmed) return ARCHIVE_PLACEHOLDER;
+  if (trimmed.startsWith("/") || /^https?:\/\//i.test(trimmed)) return trimmed;
+  return ARCHIVE_PLACEHOLDER;
+}
+
 export default function HiradoArchiveSlider() {
   const [videos, setVideos] = useState<VideoItem[]>([]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     async function load() {
       try {
         const res = await fetch("/api/hirado/archive", {
           cache: "no-store",
           credentials: "include",
+          signal: controller.signal,
         });
+        if (!res.ok) throw new Error(`archive_${res.status}`);
         const json = await res.json();
-        setVideos(json.videos || []);
-      } catch {
-        setVideos([]);
+        const videos = Array.isArray(json?.videos) ? json.videos : [];
+        setVideos(videos.filter((video: any) => {
+          const id = Number(video?.id);
+          return Number.isSafeInteger(id) && id > 0 &&
+            typeof video?.date === "string" && !Number.isNaN(Date.parse(video.date));
+        }));
+      } catch (error) {
+        if ((error as Error)?.name !== "AbortError") setVideos([]);
       }
     }
     load();
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {
@@ -52,7 +71,11 @@ export default function HiradoArchiveSlider() {
     );
   }
 
-  const todayIso = new Date().toISOString().split("T")[0];
+  // The archive labels are shown in Budapest local time. Using UTC here made
+  // a video around local midnight appear as "MA" on the wrong calendar day.
+  const dateKey = (value: Date) =>
+    value.toLocaleDateString("sv-SE", { timeZone: "Europe/Budapest" });
+  const todayIso = dateKey(new Date());
 
   return (
     <div style={{ position: "relative", width: "100%" }}>
@@ -90,8 +113,10 @@ export default function HiradoArchiveSlider() {
         }}
       >
         {videos.map((v) => {
-          const isoDate = (v.date || "").split("T")[0];
-          const formatted = new Date(v.date).toLocaleDateString("hu-HU", {
+          const videoDate = new Date(v.date);
+          const isoDate = dateKey(videoDate);
+          const formatted = videoDate.toLocaleDateString("hu-HU", {
+            timeZone: "Europe/Budapest",
             year: "numeric",
             month: "2-digit",
             day: "2-digit",
@@ -121,8 +146,12 @@ export default function HiradoArchiveSlider() {
               }
             >
               <img
-                src={v.thumbnailUrl ?? "/icons/kep-placeholder.png"}
+                src={safeThumbnailUrl(v.thumbnailUrl)}
                 alt="Borítókép"
+                onError={(event) => {
+                  event.currentTarget.onerror = null;
+                  event.currentTarget.src = ARCHIVE_PLACEHOLDER;
+                }}
                 style={{
                   width: "100%",
                   height: 80,

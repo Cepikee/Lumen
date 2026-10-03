@@ -11,7 +11,14 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 const fetcher = (url: string) =>
   fetch(url, {
     headers: { "x-api-key": "" },
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`sentiment_category_${r.status}`);
+    const json = await r.json();
+    if (!json || !json.success || !json.categories || typeof json.categories !== "object" || Array.isArray(json.categories)) {
+      throw new Error("invalid_sentiment_category_response");
+    }
+    return json;
+  });
 
 export default function WSentimentByCategory() {
   const theme = useUserStore((s) => s.theme);
@@ -37,10 +44,11 @@ export default function WSentimentByCategory() {
       </div>
     );
 
-  const categories = Object.keys(data.categories || {});
-  const negativeValues = categories.map(
-    (c) => data.categories[c].negative || 0
-  );
+  const categories = Object.keys(data.categories || {}).filter((c) => c.trim().length > 0);
+  const negativeValues = categories.map((c) => {
+    const value = Number(data.categories[c]?.negative);
+    return Number.isFinite(value) && value >= 0 ? value : 0;
+  });
 
   const options: ApexCharts.ApexOptions = {
     chart: {

@@ -6,7 +6,7 @@ const REQUIRED_STEPS = Object.freeze([
   "scrape", "short_summary", "long_summary", "category", "title", "keywords", "trends", "source",
   "plagiarism", "summary_persistence", "clickbait", "embedding", "cluster", "speed_index",
 ]);
-const OPTIONAL_STEPS = Object.freeze(["sentiment"]);
+const OPTIONAL_STEPS = Object.freeze(["sentiment", "entity_extraction"]);
 const ALL_STEPS = Object.freeze([...REQUIRED_STEPS, ...OPTIONAL_STEPS]);
 
 function safeError(error) {
@@ -119,7 +119,10 @@ function createPipelineCoordinator(store, options = {}) {
     const byName = new Map(states.map((row) => [row.step_name, row.status]));
     const missing = REQUIRED_STEPS.filter((step) => byName.get(step) !== "done");
     if (missing.length) throw new Error(`required_steps_incomplete:${missing.join(",")}`);
-    const invalidOptional = OPTIONAL_STEPS.filter((step) => !["done", "skipped"].includes(byName.get(step)));
+    // Optional capabilities are allowed to be completely absent (for example
+    // when a feature flag is OFF). If a run claims an optional step, its state
+    // must still be terminal before the article can complete.
+    const invalidOptional = OPTIONAL_STEPS.filter((step) => byName.has(step) && !["done", "skipped"].includes(byName.get(step)));
     if (invalidOptional.length) throw new Error(`optional_steps_incomplete:${invalidOptional.join(",")}`);
     return store.completeArticle({ ...claim, now: now() });
   }

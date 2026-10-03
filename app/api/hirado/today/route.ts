@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import type { RowDataPacket } from "mysql2";
+import { parts } from "@/lib/business-time";
 
 export async function GET() {
   try {
+    const todayParts = parts(new Date());
+    const today = `${todayParts.year}-${String(todayParts.month).padStart(2, "0")}-${String(todayParts.day).padStart(2, "0")}`;
     const [rows] = await db.query<RowDataPacket[]>(
       `SELECT 
           id, 
@@ -12,8 +15,10 @@ export async function GET() {
           description, 
           thumbnail_url
        FROM videos 
-       WHERE date = CURDATE() 
+       WHERE date = ?
+       ORDER BY id DESC
        LIMIT 1`
+      , [today]
     );
 
     if (!rows || rows.length === 0) {

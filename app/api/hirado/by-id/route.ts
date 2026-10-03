@@ -3,17 +3,28 @@ import { db } from "@/lib/db";
 import type { RowDataPacket } from "mysql2";
 
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const videoId = searchParams.get("videoId");
+  try {
+    const { searchParams } = new URL(req.url);
+    const videoId = searchParams.get("videoId");
 
-  if (!videoId) {
+    if (!videoId) {
     return NextResponse.json(
       { hasVideo: false, error: "NO_VIDEO_ID" },
       { status: 400 }
     );
-  }
+    }
 
-  const [rows] = await db.query<RowDataPacket[]>(
+  // The videos table uses an integer primary key. Reject malformed values
+  // before querying so fractional, non-numeric, and unsafe IDs cannot be
+  // treated as legitimate lookups.
+    if (!/^\d+$/.test(videoId) || !Number.isSafeInteger(Number(videoId)) || Number(videoId) <= 0) {
+    return NextResponse.json(
+      { hasVideo: false, error: "INVALID_VIDEO_ID" },
+      { status: 400 }
+    );
+    }
+
+    const [rows] = await db.query<RowDataPacket[]>(
     `SELECT 
         id, 
         title, 
@@ -22,16 +33,16 @@ export async function GET(req: Request) {
      FROM videos 
      WHERE id = ? 
      LIMIT 1`,
-    [videoId]
-  );
+    [Number(videoId)]
+    );
 
-  if (!rows || rows.length === 0) {
-    return NextResponse.json({ hasVideo: false });
-  }
+    if (!rows || rows.length === 0) {
+      return NextResponse.json({ hasVideo: false });
+    }
 
-  const v = rows[0];
+    const v = rows[0];
 
-  return NextResponse.json({
+    return NextResponse.json({
     hasVideo: true,
     video: {
       id: v.id,
@@ -39,5 +50,12 @@ export async function GET(req: Request) {
       date: v.date,
       thumbnailUrl: v.thumbnail_url || null,
     },
-  });
+    });
+  } catch (error) {
+    console.error("HIRADO BY-ID ERROR:", error);
+    return NextResponse.json(
+      { hasVideo: false, error: "SERVER_ERROR" },
+      { status: 500 }
+    );
+  }
 }

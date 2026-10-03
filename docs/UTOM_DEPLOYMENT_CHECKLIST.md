@@ -65,3 +65,6 @@
 - Biztonságos lokális failed step retry: `npm run recovery:retry -- <article-id> <step-name>`.
 - `uncertain` külső/AI műveletet a CLI nem resetel. Operátori eredmény-egyeztetés és külön javítás szükséges.
 - Minden engedett manuális retry bekerül a `recovery_audit_log` táblába.
+## Final readiness gate
+
+Before any production window, complete the isolated schema-033 synthetic scale/soak rehearsal documented in `docs/UTOM_PRODUCTION_SOAK_REHEARSAL.md`, including post-soak backup/restore, resource trends, restart/crash recovery and invariant audit. The 2026-09-30 attempt was blocked by unavailable local MySQL, so production deployment remains **NOT EXECUTED**.

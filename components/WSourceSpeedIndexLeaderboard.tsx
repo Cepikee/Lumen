@@ -16,7 +16,12 @@ interface LeaderboardItem {
 const fetcher = (url: string) =>
   fetch(url, {
     headers: { "x-api-key": "" },
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`speedindex_${r.status}`);
+    const json = await r.json();
+    if (!json || !Array.isArray(json.leaderboard)) throw new Error("invalid_speedindex_response");
+    return json;
+  });
 
 export default function WSourceSpeedIndexLeaderboard() {
   const theme = useUserStore((s) => s.theme);
@@ -39,8 +44,12 @@ export default function WSourceSpeedIndexLeaderboard() {
   });
 
   const items = useMemo(() => {
-    if (!data?.leaderboard) return [];
-    return [...data.leaderboard].sort(
+    if (!Array.isArray(data?.leaderboard)) return [];
+    return data.leaderboard.map((item) => ({
+      ...item,
+      avgDelay: item.avgDelay == null || !Number.isFinite(Number(item.avgDelay)) ? null : Number(item.avgDelay),
+      medianDelay: item.medianDelay == null || !Number.isFinite(Number(item.medianDelay)) ? null : Number(item.medianDelay),
+    })).sort(
       (a, b) => (a.avgDelay ?? Infinity) - (b.avgDelay ?? Infinity)
     );
   }, [data]);
@@ -59,6 +68,10 @@ export default function WSourceSpeedIndexLeaderboard() {
   if (isLoading) return <div className="p-12 text-center">Betöltés...</div>;
   if (error || !data?.success)
     return <div className="p-12 text-center text-red-500">Hiba az adatok betöltésekor</div>;
+
+  if (items.length === 0) {
+    return <div className="p-12 text-center text-muted">Nincs elérhető Speed Index adat.</div>;
+  }
 
   const maxDelay = Math.max(...items.map((i) => i.avgDelay ?? 0), 0);
 

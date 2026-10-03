@@ -6,10 +6,19 @@ import { hashOneTimeToken } from "@/lib/one-time-token";
 
 export async function POST(req: Request) {
   try {
-    const { token, password } = await req.json();
+    let body: unknown;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ success: false, error: "Érvénytelen JSON kérés." }, { status: 400 });
+    }
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json({ success: false, error: "Érvénytelen kérés törzs." }, { status: 400 });
+    }
+    const { token, password } = body as { token?: unknown; password?: unknown };
 
-    if (typeof token !== "string" || !/^[a-f0-9]{64}$/.test(token) || !password) {
-      return NextResponse.json({ success: false, error: "Missing token or password" });
+    if (typeof token !== "string" || !/^[a-f0-9]{64}$/.test(token) || typeof password !== "string" || !password) {
+      return NextResponse.json({ success: false, error: "Missing token or password" }, { status: 400 });
     }
 
     const passwordPolicy = validatePassword(password);
@@ -45,7 +54,11 @@ export async function POST(req: Request) {
     const hashed = await bcrypt.hash(password, 12);
 
     // 4) Jelszó frissítése a users táblában
-      await connection.query("UPDATE users SET password_hash = ? WHERE id = ?", [hashed, userId]);
+      const [updateResult]: any = await connection.query("UPDATE users SET password_hash = ? WHERE id = ?", [hashed, userId]);
+      if (updateResult?.affectedRows !== 1) {
+        await connection.rollback();
+        return NextResponse.json({ success: false, error: "A felhasználó nem található." }, { status: 404 });
+      }
 
     // 5) Token törlése
       await connection.query("DELETE FROM password_reset_tokens WHERE id = ?", [resetToken.id]);

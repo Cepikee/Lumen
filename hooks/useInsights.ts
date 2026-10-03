@@ -16,6 +16,18 @@ export type InsightsResponse = {
   items?: InsightApiItem[];
 };
 
+function normalizeInsightsResponse(value: unknown): InsightsResponse {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new Error("Invalid insights response");
+  }
+  const raw = value as Record<string, unknown>;
+  return {
+    ...raw,
+    categories: Array.isArray(raw.categories) ? raw.categories : [],
+    items: Array.isArray(raw.items) ? raw.items : [],
+  } as InsightsResponse;
+}
+
 /* --- fetcher --- */
 const fetcher = (url: string) =>
   fetch(url, {
@@ -25,7 +37,7 @@ const fetcher = (url: string) =>
     },
   }).then((r) => {
     if (!r.ok) throw new Error("Fetch error");
-    return r.json();
+    return r.json().then(normalizeInsightsResponse);
   });
 
 /* --- useInsights hook --- */

@@ -19,13 +19,14 @@ export default function FeedList({
   setExpandedId,
   viewMode,
 }: Props) {
-  if (!items || items.length === 0) return <p>Nincs még összefoglalás.</p>;
+  const safeItems = Array.isArray(items) ? items.filter((item) => item && typeof item === "object") : [];
+  if (safeItems.length === 0) return <p>Nincs még összefoglalás.</p>;
 
   return (
     <>
       <h2 className="mb-4">📰 Friss hírek</h2>
 
-      {items.map((item) => (
+      {safeItems.map((item) => (
         <FeedItemCard
           key={item.id}
           item={item}

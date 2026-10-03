@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UtomModal from "@/components/UtomModal";
 import { useUserStore } from "@/store/useUserStore";
 import { PREMIUM_FRAMES } from "@/types/premiumFrames";
@@ -25,6 +25,13 @@ export default function FrameModal({
   const [selected, setSelected] = useState<string>(user?.avatar_frame || "");
   const [saving, setSaving] = useState(false);
 
+  // Settings keeps this modal mounted while the auth request resolves. Keep
+  // the selection in sync when the user arrives or changes, otherwise the
+  // save button remains disabled with the stale empty initial value.
+  useEffect(() => {
+    setSelected(user?.avatar_frame || "");
+  }, [user?.avatar_frame]);
+
   if (!user) return null;
   const u = user; // biztosítjuk a TS-nek, hogy user nem null
 
@@ -39,9 +46,9 @@ export default function FrameModal({
         body: JSON.stringify({ avatar_frame: selected }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
 
-      if (data.success) {
+      if (res.ok && data?.success === true) {
         // egyszerű, típushelyes frissítés: spread + típusassert
         setUser({ ...u, avatar_frame: selected } as User);
 

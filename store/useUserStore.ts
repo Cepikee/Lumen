@@ -113,6 +113,11 @@ export const useUserStore = create<UserState>()(
             cache: "no-store",
           });
 
+          if (!res.ok && res.status !== 401) {
+            set({ loading: false });
+            return;
+          }
+
           const text = await res.text();
           if (!text) {
             // don't overwrite a persisted theme here; keep current theme

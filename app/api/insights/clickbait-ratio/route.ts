@@ -16,12 +16,12 @@ export async function GET(req: Request) {
     // ─────────────────────────────────────────────
     const [rows]: any = await db.query(`
       SELECT 
-        source,
+        COALESCE(NULLIF(LOWER(TRIM(source)), ''), 'ismeretlen') AS source,
         SUM(CASE WHEN final_clickbait >= 45 THEN 1 ELSE 0 END) AS clickbait_count,
         COUNT(*) AS total_count
       FROM summaries
       WHERE final_clickbait IS NOT NULL
-      GROUP BY source
+      GROUP BY COALESCE(NULLIF(LOWER(TRIM(source)), ''), 'ismeretlen')
       ORDER BY clickbait_count DESC
     `);
 

@@ -21,6 +21,11 @@ function ResetPinContent() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    if (!token) {
+      setStatus("error");
+      setError("Hiányzó vagy érvénytelen token.");
+      return;
+    }
     setStatus("loading");
     setError("");
 
@@ -36,19 +41,25 @@ function ResetPinContent() {
       return;
     }
 
-    const res = await fetch("/api/auth/reset-pin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token, newPin }),
-    });
+    try {
+      const res = await fetch("/api/auth/reset-pin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, newPin }),
+      });
+      const text = await res.text();
+      let data: { success?: boolean; error?: string } = {};
+      try { data = text ? JSON.parse(text) : {}; } catch { data = {}; }
 
-    const data = await res.json();
-
-    if (data.success) {
+      if (!res.ok || data.success !== true) {
+        setStatus("error");
+        setError(data.error || `A PIN frissítése nem sikerült (${res.status}).`);
+        return;
+      }
       setStatus("success");
-    } else {
+    } catch {
       setStatus("error");
-      setError(data.error || "Hiba történt.");
+      setError("A PIN frissítése nem sikerült. Ellenőrizd a kapcsolatot.");
     }
   };
 
@@ -99,7 +110,7 @@ function ResetPinContent() {
           <button
             className="btn btn-primary w-100"
             type="submit"
-            disabled={status === "loading"}
+            disabled={status === "loading" || !token}
           >
             {status === "loading" ? "Mentés..." : "PIN frissítése"}
           </button>

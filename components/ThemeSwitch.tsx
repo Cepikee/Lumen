@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useUserStore } from "@/store/useUserStore";
 
 type ThemeMode = "dark" | "system" | "light";
@@ -11,6 +11,8 @@ export default function ThemeSwitch() {
   const setTheme = useUserStore((s) => s.setTheme);
 
   const [current, setCurrent] = useState<ThemeMode>("system");
+  const requestSequence = useRef(0);
+  const abortRef = useRef<AbortController | null>(null);
 
   // 🔥 Ha a globális theme változik, frissítjük a kapcsolót
   useEffect(() => {
@@ -21,15 +23,34 @@ export default function ThemeSwitch() {
 
   // 🔥 Csak globális theme frissítés (NINCS DOM MANIPULÁCIÓ)
   async function updateTheme(newTheme: ThemeMode) {
+    const requestId = ++requestSequence.current;
+    const previousTheme = useUserStore.getState().theme || "system";
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
     setCurrent(newTheme);
     setTheme(newTheme); // Zustand store frissítése
 
-    // Backend update
-    await fetch("/api/user/update", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ theme: newTheme }),
-    });
+    // Backend update.  The click handler is not awaited by React, therefore
+    // a rejected fetch must be consumed here rather than becoming an
+    // unhandled Promise and leaving the UI in a false optimistic state.
+    try {
+      const res = await fetch("/api/user/update", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
+        body: JSON.stringify({ theme: newTheme }),
+      });
+      if (!res.ok && requestId === requestSequence.current) {
+        setCurrent(previousTheme);
+        setTheme(previousTheme);
+      }
+    } catch (error) {
+      if (requestId === requestSequence.current && !(error instanceof DOMException && error.name === "AbortError")) {
+        setCurrent(previousTheme);
+        setTheme(previousTheme);
+      }
+    }
   }
 
   // SLIDER ANIMÁCIÓ

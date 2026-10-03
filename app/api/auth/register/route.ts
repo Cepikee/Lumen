@@ -20,28 +20,41 @@ function generateRandomAvatar() {
 
 export async function POST(req: Request) {
   try {
-    const { email, password, pin, nickname, bio } = await req.json();
+    let body: any;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ success: false, message: "Érvénytelen JSON kérés." }, { status: 400 });
+    }
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json({ success: false, message: "Érvénytelen kérés törzs." }, { status: 400 });
+    }
+    const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
+    const password = typeof body?.password === "string" ? body.password : "";
+    const pin = typeof body?.pin === "string" ? body.pin.trim() : "";
+    const nickname = typeof body?.nickname === "string" ? body.nickname.trim() : "";
+    const bio = typeof body?.bio === "string" ? body.bio.trim() : "";
 
     if (!email || !password || !pin || !nickname) {
-      return NextResponse.json({ success: false, message: "Minden mező kötelező." });
+      return NextResponse.json({ success: false, message: "Minden mező kötelező." }, { status: 400 });
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json({ success: false, message: "Érvénytelen email cím." });
+    if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json({ success: false, message: "Érvénytelen email cím." }, { status: 400 });
     }
 
     if (!/^[a-zA-Z0-9_]{3,20}$/.test(nickname)) {
       return NextResponse.json({
         success: false,
         message: "A felhasználónév 3-20 karakter, csak betű, szám és _ lehet.",
-      });
+      }, { status: 400 });
     }
 
     if (!validatePin(pin)) {
       return NextResponse.json({
         success: false,
         message: "A PIN 4 számjegyből álljon.",
-      });
+      }, { status: 400 });
     }
 
     const passwordPolicy = validatePassword(password);
@@ -49,7 +62,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: passwordPolicy.message,
-      });
+      }, { status: 400 });
     }
 
     const [emailCheck]: any = await db.query(
@@ -60,7 +73,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: "Ez az email már regisztrálva van.",
-      });
+      }, { status: 409 });
     }
 
     const [nickCheck]: any = await db.query(
@@ -71,7 +84,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: "Ez a felhasználónév már foglalt.",
-      });
+      }, { status: 409 });
     }
 
     const password_hash = await bcrypt.hash(password, 10);
@@ -113,10 +126,13 @@ export async function POST(req: Request) {
     }
 
     return response;
-  } catch {
+  } catch (error: any) {
+    if (error?.code === "ER_DUP_ENTRY") {
+      return NextResponse.json({ success: false, message: "Az email vagy felhasználónév már foglalt." }, { status: 409 });
+    }
     return NextResponse.json({
       success: false,
       message: "Váratlan hiba történt.",
-    });
+    }, { status: 500 });
   }
 }

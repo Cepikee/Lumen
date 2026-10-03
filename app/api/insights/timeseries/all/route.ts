@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { mysqlUtc } from "@/lib/business-time";
 
 function fixCat(s: any): string | null {
   if (!s) return null;
@@ -19,6 +20,9 @@ export async function GET(req: Request) {
 
   const url = new URL(req.url);
   const period = url.searchParams.get("period") || "24h";
+  if (!["24h", "7d", "30d", "90d"].includes(period)) {
+    return NextResponse.json({ success: false, error: "invalid_period" }, { status: 400 });
+  }
 
   let minutesBack = 24 * 60;
   let sqlBucket = "%Y-%m-%d %H:%i:00";
@@ -38,31 +42,18 @@ export async function GET(req: Request) {
     sqlBucket = "%Y-%m-%d %H:00:00";
   }
 
-  // HELYI IDŐ
   const now = new Date();
-  const endStr =
-    `${now.getFullYear()}-` +
-    `${String(now.getMonth() + 1).padStart(2, "0")}-` +
-    `${String(now.getDate()).padStart(2, "0")} ` +
-    `${String(now.getHours()).padStart(2, "0")}:` +
-    `${String(now.getMinutes()).padStart(2, "0")}:` +
-    `${String(now.getSeconds()).padStart(2, "0")}`;
-
-  const startLocal = new Date(now.getTime() - minutesBack * 60 * 1000);
-  const startStr =
-    `${startLocal.getFullYear()}-` +
-    `${String(startLocal.getMonth() + 1).padStart(2, "0")}-` +
-    `${String(startLocal.getDate()).padStart(2, "0")} ` +
-    `${String(startLocal.getHours()).padStart(2, "0")}:` +
-    `${String(startLocal.getMinutes()).padStart(2, "0")}:` +
-    `${String(startLocal.getSeconds()).padStart(2, "0")}`;
+  const endStr = mysqlUtc(now);
+  const startStr = mysqlUtc(new Date(now.getTime() - minutesBack * 60 * 1000));
 
   try {
     const [cats]: any = await db.query(`
       SELECT DISTINCT TRIM(category) AS category
       FROM summaries
       WHERE category IS NOT NULL AND category <> ''
-    `);
+        AND created_at >= ?
+        AND created_at < ?
+    `, [startStr, endStr]);
 
     const categories = Array.from(
       new Map(
@@ -87,7 +78,7 @@ export async function GET(req: Request) {
         FROM summaries
         WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
           AND created_at >= ?
-          AND created_at <= ?
+          AND created_at < ?
         GROUP BY bucket
         ORDER BY bucket ASC
         `,

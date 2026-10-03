@@ -1,0 +1,25 @@
+-- UTOM V2 M2 additive schema extension: ingestion provenance audit history
+CREATE TABLE v2_ingestion_provenance (
+  id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  article_id BIGINT UNSIGNED NULL,
+  url_identity CHAR(64) NULL,
+  canonical_url VARCHAR(2048) NULL,
+  source_id BIGINT UNSIGNED NULL,
+  source_key VARCHAR(128) NULL,
+  publication_at DATETIME(6) NULL,
+  publication_time_source VARCHAR(64) NULL,
+  observed_at DATETIME(6) NULL,
+  request_id CHAR(36) NULL,
+  run_id CHAR(36) NULL,
+  operation_key CHAR(64) NOT NULL,
+  normalization_version VARCHAR(64) NOT NULL,
+  status VARCHAR(24) NOT NULL,
+  created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_v2_ingestion_provenance_operation_key (operation_key),
+  KEY idx_v2_ingestion_provenance_article_id (article_id),
+  KEY idx_v2_ingestion_provenance_url_identity (url_identity),
+  KEY idx_v2_ingestion_provenance_run_id (run_id),
+  CONSTRAINT fk_v2_ingestion_provenance_article_id_1 FOREIGN KEY (article_id) REFERENCES articles (id) ON DELETE SET NULL ON UPDATE RESTRICT,
+  CONSTRAINT fk_v2_ingestion_provenance_source_id_2 FOREIGN KEY (source_id) REFERENCES sources (id) ON DELETE SET NULL ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

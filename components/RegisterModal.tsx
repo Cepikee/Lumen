@@ -22,43 +22,47 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
   const handleRegister = async () => {
     setError("");
     setLoading(true);
-
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email,
-        password,
-        pin,
-        nickname,
-        bio,
-      }),
-    });
-
-    const text = await res.text();
-
-    if (!text) {
-      setLoading(false);
-      setError("A szerver nem adott választ.");
-      return;
-    }
-
-    let data: any;
     try {
-      data = JSON.parse(text);
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          password,
+          pin,
+          nickname,
+          bio,
+        }),
+      });
+
+      const text = await res.text();
+      if (!text) {
+        setError("A szerver nem adott választ.");
+        return;
+      }
+
+      let data: any;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        setError("A szerver hibás választ adott.");
+        return;
+      }
+
+      if (res.ok && data?.success === true) {
+        alert("Sikeres regisztráció!");
+        onClose();
+        // The API creates the session cookie, but the header/store was already
+        // loaded before this modal opened. Reload so the new session is
+        // reflected immediately instead of leaving the user on the logged-out UI.
+        window.location.reload();
+      } else {
+        setError(data?.message || "Hiba történt.");
+      }
     } catch {
+      setError("A regisztrációs szolgáltatás jelenleg nem érhető el.");
+    } finally {
       setLoading(false);
-      setError("A szerver hibás választ adott.");
-      return;
-    }
-
-    setLoading(false);
-
-    if (data.success) {
-      alert("Sikeres regisztráció!");
-      onClose();
-    } else {
-      setError(data.message || "Hiba történt.");
     }
   };
 

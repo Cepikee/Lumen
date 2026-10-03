@@ -24,14 +24,40 @@ export async function GET(req: Request) {
 
   const url = new URL(req.url);
   const period = url.searchParams.get("period") || "7d";
+  const rawSortParam = url.searchParams.get("sort");
+  const rawSort = (rawSortParam === null ? "Legfrissebb" : rawSortParam).trim();
+  // The Insights UI sends Hungarian labels. Keep the API tolerant of the
+  // stable English aliases used by older links, but never silently interpret
+  // an arbitrary value as a different ordering.
+  const sort = new Map([
+    ["Legfrissebb", "latest"],
+    ["latest", "latest"],
+    ["Növekvő", "growing"],
+    ["growing", "growing"],
+    ["Legtöbb forrás", "sources"],
+    ["sources", "sources"],
+  ]).get(rawSort);
+  if (!sort) {
+    return NextResponse.json(
+      { success: false, error: "invalid_sort" },
+      { status: 400 }
+    );
+  }
 
   let mode: "days" | "hours" = "days";
   let days = 7;
   let hours = 24;
 
   if (period === "24h") mode = "hours";
+  else if (period === "7d") days = 7;
   else if (period === "30d") days = 30;
   else if (period === "90d") days = 90;
+  else {
+    return NextResponse.json(
+      { success: false, error: "invalid_period" },
+      { status: 400 }
+    );
+  }
 
   const now = new Date();
   let start: Date;
@@ -40,17 +66,25 @@ export async function GET(req: Request) {
     start = new Date(now.getTime() - hours * 3600 * 1000);
   } else {
     start = new Date(now);
-    start.setDate(start.getDate() - (days - 1));
+    // Keep the rolling period independent from the host timezone. The DB
+    // timestamps and the end bound are handled as UTC values.
+    start.setUTCDate(start.getUTCDate() - (days - 1));
   }
 
-  // HELYI IDŐ
   const startStr =
-    `${start.getFullYear()}-` +
-    `${String(start.getMonth() + 1).padStart(2, "0")}-` +
-    `${String(start.getDate()).padStart(2, "0")} ` +
-    `${String(start.getHours()).padStart(2, "0")}:` +
+    `${start.getUTCFullYear()}-` +
+    `${String(start.getUTCMonth() + 1).padStart(2, "0")}-` +
+    `${String(start.getUTCDate()).padStart(2, "0")} ` +
+    `${String(start.getUTCHours()).padStart(2, "0")}:` +
     `${String(start.getMinutes()).padStart(2, "0")}:` +
     `${String(start.getSeconds()).padStart(2, "0")}`;
+  const endStr =
+    `${now.getUTCFullYear()}-` +
+    `${String(now.getUTCMonth() + 1).padStart(2, "0")}-` +
+    `${String(now.getUTCDate()).padStart(2, "0")} ` +
+    `${String(now.getUTCHours()).padStart(2, "0")}:` +
+    `${String(now.getUTCMinutes()).padStart(2, "0")}:` +
+    `${String(now.getUTCSeconds()).padStart(2, "0")}`;
 
   const rawCategory = url.searchParams.get("category");
   const categoryParam = rawCategory ? String(rawCategory).trim() : null;
@@ -68,9 +102,9 @@ export async function GET(req: Request) {
       }
     }
 
-    params.push(startStr);
+    params.push(startStr, endStr);
 
-    const periodClause = `${where ? " AND" : " WHERE"} created_at >= ?`;
+    const periodClause = `${where ? " AND" : " WHERE"} created_at >= ? AND created_at < ?`;
 
     const sql = `
       SELECT 
@@ -104,7 +138,12 @@ export async function GET(req: Request) {
       const key = cat ?? "__NULL__";
 
       const publishedAt = normalizeDate(r.created_at);
-      const dominantSource = r.dominantSource ? String(r.dominantSource).trim() : "Ismeretlen";
+      // Source diversity/counts are semantic aggregates. Treat historical
+      // case and whitespace variants as one source, otherwise "Telex" and
+      // " telex " inflate diversity and split the ring chart.
+      const dominantSource = r.dominantSource
+        ? String(r.dominantSource).trim().toLocaleLowerCase("hu-HU") || "ismeretlen"
+        : "ismeretlen";
 
       if (!catMap.has(key)) {
         catMap.set(key, {
@@ -159,8 +198,8 @@ export async function GET(req: Request) {
 
         spark.push(buckets.get(key) ?? 0);
 
-        if (mode === "hours") cursor.setHours(cursor.getHours() + 1);
-        else cursor.setDate(cursor.getDate() + 1);
+        if (mode === "hours") cursor.setTime(cursor.getTime() + 60 * 60 * 1000);
+        else cursor.setTime(cursor.getTime() + 24 * 60 * 60 * 1000);
       }
 
       return spark;
@@ -196,9 +235,31 @@ export async function GET(req: Request) {
           sparkline: generateSparkline(e),
         };
       })
-      .sort((a, b) => b.articleCount - a.articleCount);
+      .sort((a, b) => {
+        if (sort === "latest") {
+          return String(b.lastArticleAt || "").localeCompare(String(a.lastArticleAt || ""))
+            || b.articleCount - a.articleCount
+            || String(a.category || "").localeCompare(String(b.category || ""));
+        }
+        if (sort === "sources") {
+          return b.sourceDiversity - a.sourceDiversity
+            || b.articleCount - a.articleCount
+            || String(a.category || "").localeCompare(String(b.category || ""));
+        }
+        return a.articleCount - b.articleCount
+          || String(a.category || "").localeCompare(String(b.category || ""));
+      });
 
-    const items = (rows || []).slice(0, 200).map((r: any) => {
+    // Legacy summaries may exist without a canonical article relation. They
+    // still belong in the category aggregates above, but must not become
+    // navigable `/insights/null` items in the UI.
+    const items = (rows || [])
+      .filter((r: any) => {
+        const id = Number(r?.id);
+        return Number.isSafeInteger(id) && id > 0;
+      })
+      .slice(0, 200)
+      .map((r: any) => {
       const created = normalizeDate(r.created_at);
 
       return {
@@ -215,7 +276,7 @@ export async function GET(req: Request) {
             )}`
           : `/insights/${r.id}`,
       };
-    });
+      });
 
     return NextResponse.json({ success: true, period, categories, items });
   } catch (err) {

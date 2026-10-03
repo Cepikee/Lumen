@@ -15,9 +15,18 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
 
   // 🔥 Itt tároljuk az aktuálisan futó utterance példányt
   const utterRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const speechSupported = typeof window !== "undefined" &&
+    "speechSynthesis" in window &&
+    typeof SpeechSynthesisUtterance === "function";
 
   // --- FETCH ---
   useEffect(() => {
+    // A komponens új videóra váltásakor az előző beszéd és annak UI-állapota
+    // nem maradhat aktív, különösen akkor, ha az új videóhoz nincs jelentés.
+    if (speechSupported) window.speechSynthesis.cancel();
+    utterRef.current = null;
+    setIsReading(false);
+
     if (!videoId || videoId <= 0) {
       setText("");
       return;
@@ -51,15 +60,16 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
 
     return () => {
       cancelled = true;
-      if ("speechSynthesis" in window) {
+      if (speechSupported) {
         window.speechSynthesis.cancel();
       }
+      utterRef.current = null;
     };
-  }, [videoId]);
+  }, [videoId, speechSupported]);
 
   // --- PLAY / STOP ---
   const startReading = () => {
-    if (!text) return;
+    if (!text || !speechSupported) return;
 
     const utter = new SpeechSynthesisUtterance(text);
     utter.lang = "hu-HU";
@@ -78,7 +88,7 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
   };
 
   const stopReading = () => {
-    window.speechSynthesis.cancel();
+    if (speechSupported) window.speechSynthesis.cancel();
     utterRef.current = null;
     setIsReading(false);
   };
@@ -133,7 +143,7 @@ export default function Felolvasas({ videoId }: FelolvasasProps) {
     <div className="felolvasas-inline d-flex align-items-center gap-3">
 
       {/* Play / Stop */}
-      <button onClick={handleClick} className="btn btn-primary rounded-circle p-2 player-btn">
+      <button onClick={handleClick} disabled={!speechSupported || !text} aria-disabled={!speechSupported || !text} className="btn btn-primary rounded-circle p-2 player-btn">
         {isReading ? (
           <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
             <rect x="6" y="6" width="12" height="12" rx="2" />

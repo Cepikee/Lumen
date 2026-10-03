@@ -1,7 +1,7 @@
 // TrendsDebug.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import type { Filters } from "./TrendsFilters";
 
 interface Props {
@@ -19,9 +19,11 @@ export default function TrendsDebug({ filters }: Props) {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const requestSequence = useRef(0);
 
   useEffect(() => {
     let mounted = true;
+    const requestId = ++requestSequence.current;
     async function fetchTrends() {
       setLoading(true);
       setError(null);
@@ -51,20 +53,22 @@ export default function TrendsDebug({ filters }: Props) {
 
       try {
         const res = await fetch(url);
+        if (!res.ok) throw new Error(`trends_debug_http_${res.status}`);
         const json = await res.json();
+        if (!json || typeof json !== "object") throw new Error("trends_debug_invalid_response");
         // Debug: backend válasz
         console.log("DEBUG /api/trends RESPONSE status:", res.status);
         console.log("DEBUG /api/trends RESPONSE body:", json);
 
-        if (!mounted) return;
+        if (!mounted || requestId !== requestSequence.current) return;
         setData(json);
       } catch (err: any) {
         console.error("DEBUG /api/trends FETCH ERROR:", err);
-        if (!mounted) return;
+        if (!mounted || requestId !== requestSequence.current) return;
         setError(err?.message ?? String(err));
         setData(null);
       } finally {
-        if (mounted) setLoading(false);
+        if (mounted && requestId === requestSequence.current) setLoading(false);
       }
     }
 

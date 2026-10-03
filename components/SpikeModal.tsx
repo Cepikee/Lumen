@@ -27,6 +27,10 @@ export default function SpikeModal({ topic, index, show, onClose, initialStats }
   const [stats, setStats] = useState<StatsType>(initialStats ?? {});
   const [error, setError] = useState<string | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
+  const finiteNumber = (value: unknown) => {
+    const number = typeof value === "number" ? value : Number(value);
+    return Number.isFinite(number) ? number : null;
+  };
 
   const getClassName = (i: number | null) => {
     if (i == null) return "badge pending"; // Besorolás alatt
@@ -38,7 +42,7 @@ export default function SpikeModal({ topic, index, show, onClose, initialStats }
   };
 
   const formatDate = (iso: string | undefined) =>
-    iso
+    iso && !Number.isNaN(new Date(iso).getTime())
       ? new Date(iso).toLocaleDateString("hu-HU", {
           year: "numeric",
           month: "long",
@@ -47,23 +51,35 @@ export default function SpikeModal({ topic, index, show, onClose, initialStats }
       : "—";
 
   useEffect(() => {
+    const controller = new AbortController();
+    // The modal is reused for different topics. Do not show the previous
+    // topic's result while the new request is in flight.
+    setStats(initialStats ?? {});
+    setError(null);
     if (show) {
       (async () => {
         try {
-          const res = await fetch(`/api/trends/stats?keyword=${encodeURIComponent(topic)}`);
+          const res = await fetch(`/api/trends/stats?keyword=${encodeURIComponent(topic)}`, {
+            signal: controller.signal,
+          });
           if (!res.ok) {
             const text = await res.text();
             throw new Error(`API hiba: ${res.status} ${text}`);
           }
           const data = await res.json();
+          if (!data || typeof data !== "object" || !data.stats || typeof data.stats !== "object") {
+            throw new Error("Érvénytelen statisztikai válasz");
+          }
           setStats(prev => ({ ...prev, ...data.stats }));
           setError(null);
         } catch (err: any) {
+          if (err?.name === "AbortError") return;
           console.error("Hiba az API hívásnál:", err);
           setError("Nem sikerült betölteni az adatokat.");
         }
       })();
     }
+    return () => controller.abort();
   }, [show, topic]);
 
   return (
@@ -107,7 +123,9 @@ export default function SpikeModal({ topic, index, show, onClose, initialStats }
                 <div className="card-body py-2 px-3">
                   <div className="small text-secondary">Átlag</div>
                   <div className="fw-semibold">
-                    {stats.dailyAvg != null ? Number(stats.dailyAvg).toFixed(1) : "—"} db/nap
+                    {finiteNumber(stats.dailyAvg) != null
+                      ? finiteNumber(stats.dailyAvg)!.toFixed(1)
+                      : "—"} db/nap
                   </div>
                 </div>
               </div>

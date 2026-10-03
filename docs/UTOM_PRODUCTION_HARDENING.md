@@ -42,6 +42,10 @@ A production-build auth E2E három külön alkalmazásfolyamattal igazolta a DB-
 
 A legacy plaintext PIN kompatibilitási út user-row lockkal és tranzakciós bcrypt lazy upgrade-del működik; concurrent login, injected rollback és restart runtime bizonyítást kapott. A premium Insights útvonalban nincs browser subprocess: a session/entitlement után allowlistes belső HTTP proxy fut. A boundary saját shared MySQL limitert, legfeljebb 15 másodperces timeoutot és legfeljebb 2 MiB-os response capet alkalmaz; redirectet nem követ. Lokális upstream failure-mátrix és concurrent E2E PASS, fizetős proxyhívás 0.
 
+A thumbnail helper valódi ffmpeg executable-t használ argument arrayjal, engedélyezett input/output gyökérrel, 60 másodperces alap timeouttal, nem nulla exit/output-validációval és hiba utáni partial artifact törléssel. A lokális MP4→JPEG fixture, timeout, hibás input és párhuzamos guard PASS; production video generation nem futott.
+
+Az operatív időpolicy audit lezárult: DB/lease/session/reset/rate-limit instant UTC, magyar üzleti aggregátum `Europe/Budapest`, source timestamp explicit offset + provenance, ismeretlen legacy érték `legacy_unknown`. A 2026-os budapesti spring-forward és fall-back 23/25 órás napjai, ambiguous/nonexistent civil idők és host timezone independence PASS.
+
 Production módban explicit mode, online worker, OpenAI provider, real-AI opt-in, AI secret és legalább 32 karakteres internal token kötelező. Engedélyezett email/payment/video capability saját secret nélkül fail-fast. A redaction marker teszt PASS. A meglévő suite bizonyítja a konkurens claim kizárását, fencinget, zombie-write tiltást, uncertain védelmet, atomikus completiont, stale recoveryt, Speed Index idempotenciát, feed és UTC viselkedést. Paid external call: 0.
 
 Az öt high advisoryt okozó dependency láncból a DNS-pinninget megkerülő Puppeteer fallback és maga a dependency kikerült; a Nodemailer explicit `10.0.12` verziót kapott. Az érintett API-k célzott offline regressziója és a build PASS; `npm audit --omit=dev` eredménye 0 vulnerability. Force upgrade nem történt.
@@ -52,6 +56,9 @@ A 10 000 article lokális fixture nem igazolja a valós production cardinalitás
 
 `PRODUCTION CHANGE-WINDOW READINESS: NOT VERIFIED`
 
-Blocker: production cardinalitáshoz igazított anonim rehearsal; külön soak/resource trend; a historical registry két részlegesen bizonyított tétele és az egy nyitott jogi tétel.
+Blocker: production cardinalitáshoz igazított anonim rehearsal; külön soak/resource trend; az egy nyitott jogi HIST-033 tétel.
 
 `PRODUCTION DEPLOYMENT: NOT EXECUTED`
+### Final production-cardinality rehearsal status (2026-09-30)
+
+The repository's deterministic scale fixture is available, but no verified production cardinality export is present. The final synthetic scale/soak run was blocked because the disposable local MySQL 8 endpoint did not become available in the execution window. Consequently technical change-window readiness remains **NOT VERIFIED**; no production deployment or production database action occurred. Detailed evidence is in `docs/UTOM_PRODUCTION_SOAK_REHEARSAL.md`.

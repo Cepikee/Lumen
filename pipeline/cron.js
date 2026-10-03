@@ -24,6 +24,12 @@ const { externalOperationKey, shortClaimToken } = require("./operation-identity"
 const { parseValidEmbedding, uniqueKeywords } = require("./idempotency");
 const { validateWorkerEnvironment, assertSchemaReadiness, registerWorker, heartbeatWorker, stopWorker, redact } = require("../lib/operations");
 const { getRuntimeConfig } = require("../lib/config/runtime");
+const { adaptOptionalDedupClusterSnapshot } = require("../lib/v2/runtime-dedup-cluster");
+const { isV2Enabled } = require("../lib/v2/feature-flags");
+const { createV2RequestContext } = require("../lib/v2/request-context");
+const { createIngestionEnvelope } = require("../lib/v2/ingestion-envelope");
+const { runEntityExtraction } = require("../lib/v2/runtime-entity-extraction");
+const { persistEntityExtraction } = require("../lib/v2/entity-extraction-repository");
 
 // ANSI színek
 const RESET = "\x1b[0m";
@@ -208,6 +214,7 @@ async function processArticlePipeline(article, claim) {
   let trendKeywords = "";
   let source = "";
   let keywords = [];
+  let legacyClusterSnapshot = null;
 
   // 0) Scraping fallback
   if (!article.content_text || article.content_text.trim().length < 400) {
@@ -221,7 +228,14 @@ async function processArticlePipeline(article, claim) {
     const scrapeRes = scrapeStep.result;
 
     if (scrapeRes.skipped) {
-      throw new Error(`article_skipped:${scrapeRes.error || "scrape_skipped"}`);
+      // 444.hu articles are intentionally not fetched again: their RSS
+      // content:encoded is the canonical input.  Treat that marker as a
+      // successful no-op so a short RSS item is still processed.  Other
+      // skipped results (for example an empty/too-short scrape) remain
+      // terminal skips and must not enter the AI pipeline.
+      if (scrapeRes.reason !== "rss_content_used") {
+        throw new Error(`article_skipped:${scrapeRes.error || "scrape_skipped"}`);
+      }
     }
 
     if (!scrapeRes.ok) {
@@ -246,6 +260,31 @@ async function processArticlePipeline(article, claim) {
       reusedContent: true,
       contentLength: article.content_text.length,
     }));
+  }
+
+  // M4 is an additive, optional shadow step. It consumes the canonical M2
+  // envelope once the article text is stable and never changes legacy state.
+  if (isV2Enabled()) {
+    const entityContext = createV2RequestContext({ articleId });
+    const entityEnvelope = createIngestionEnvelope({
+      originalUrl: article.url_canonical,
+      title: article.title,
+      content: article.content_text,
+      source: article.source,
+      observedAt: new Date().toISOString(),
+    }, { context: entityContext });
+    if (entityEnvelope.outcome === "normalized") {
+      await runDurableStep(claim, "entity_extraction", "[ENTITY] 🧩 Entitások", async () => {
+        const outcome = await runEntityExtraction(entityEnvelope.envelope, entityContext, { enabled: true });
+        return { ...outcome, envelopeVersion: entityEnvelope.envelope.envelopeVersion };
+      }, { optional: true, project: (connection, result) => persistEntityExtraction(connection, {
+        articleId,
+        envelope: entityEnvelope.envelope,
+        outcome: result,
+      }) });
+    } else {
+      cronLog(JSON.stringify({ event: "m4_entity_extraction_skipped", articleId, reason: entityEnvelope.reason }));
+    }
   }
 
   // 1) Rövid összefoglaló
@@ -505,9 +544,19 @@ Korlátozások:
     const { clusterArticleWithConnection, CLUSTER_LOCK_NAME } = require("../pipeline/clusterArticles");
     const [[lockRow]] = await connection.execute("SELECT GET_LOCK(?,10) acquired", [CLUSTER_LOCK_NAME]);
     if (Number(lockRow?.acquired) !== 1) throw new Error("cluster_lock_unavailable");
-    await clusterArticleWithConnection(connection, articleId, { manageTransaction: false });
+    legacyClusterSnapshot = await clusterArticleWithConnection(connection, articleId, { manageTransaction: false });
     return () => connection.execute("SELECT RELEASE_LOCK(?)", [CLUSTER_LOCK_NAME]);
   } });
+
+  const v2DedupCluster = isV2Enabled()
+    ? adaptOptionalDedupClusterSnapshot({
+      articleId,
+      canonicalUrl: article.url_canonical,
+      source: article.source,
+      ingestionOutcome: article.ingestionOutcome,
+      clusterResult: legacyClusterSnapshot || { clusterId: article.cluster_id },
+    }, { logger: (event) => cronLog(JSON.stringify(event)) })
+    : undefined;
 
   await runDurableStep(claim, "speed_index", "[SPEED] ⚡ Speed Index ütemezés", async () => {
     return { scheduled: true };
@@ -519,6 +568,7 @@ Korlátozások:
 
   cronLog(`Cikk teljes pipeline kész: ID=${articleId}`);
   console.log("──────────────────────────────────────────────");
+  return v2DedupCluster ? { v2: { dedupCluster: v2DedupCluster } } : undefined;
 }
 
 // ─────────────────────────────────────────────
@@ -529,12 +579,15 @@ async function processBatch(batch) {
   // Atomikus lefoglalás: egy cikket csak egy worker vehet át.
   // Nem tesszük vissza pending állapotba, amíg dolgozhat rajta valaki.
   await Promise.all(batch.map(async article => {
-    const claim = await pipelineState.claimArticle(article.id);
-
-    if (!claim) return;
-    await heartbeatWorker(pool, WORKER_ID, "claim");
-
+    let claim = null;
     try {
+      claim = await pipelineState.claimArticle(article.id);
+      if (!claim) return;
+
+      // A failed worker heartbeat must go through the same failure path as
+      // the pipeline itself.  Keeping it outside this try block used to
+      // leave the article claimed in `in_progress` until the stale timeout.
+      await heartbeatWorker(pool, WORKER_ID, "claim");
       await processArticlePipeline(article, claim);
       await pipelineState.finishArticle(claim);
       await heartbeatWorker(pool, WORKER_ID, "completion");
@@ -546,7 +599,15 @@ async function processBatch(batch) {
       // Részleges, már kifizetett OpenAI-munka után nem indítjuk
       // automatikusan újra az egész cikk feldolgozását.
       // A state machine az aktuális lépést és a cikket claim-tokenhez kötve failedre állítja.
-      await pipelineState.failArticle(claim, "pipeline", err);
+      if (claim) {
+        try {
+          await pipelineState.failArticle(claim, "pipeline", err);
+        } catch (failError) {
+          console.error(
+            `❌ ${RED}Állapotfrissítés sikertelen (${article.id}): ${failError.message}${RESET}`
+          );
+        }
+      }
     }
   }));
 }

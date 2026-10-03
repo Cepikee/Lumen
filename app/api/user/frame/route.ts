@@ -5,11 +5,34 @@ import { PREMIUM_FRAMES } from "@/types/premiumFrames";
 import { getPremiumEntitlement } from "@/lib/entitlements";
 
 export async function POST(req: Request) {
-  const body = await req.json();
-  const { avatar_frame } = body as { avatar_frame: string };
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json(
+      { success: false, message: "Érvénytelen kérés." },
+      { status: 400 }
+    );
+  }
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return NextResponse.json(
+      { success: false, message: "Érvénytelen kérés." },
+      { status: 400 }
+    );
+  }
+  const { avatar_frame } = body as { avatar_frame?: unknown };
 
   // 🔒 Session ellenőrzés
-  const userId = await getSessionUserId();
+  let userId: number | null;
+  try {
+    userId = await getSessionUserId();
+  } catch (error) {
+    console.error("Frame session lookup error:", error);
+    return NextResponse.json(
+      { success: false, message: "Váratlan hiba történt." },
+      { status: 500 }
+    );
+  }
 
   if (!userId) {
     return NextResponse.json(
@@ -19,7 +42,16 @@ export async function POST(req: Request) {
   }
 
   // 🔍 User lekérése
-  const entitlement = await getPremiumEntitlement(userId);
+  let entitlement;
+  try {
+    entitlement = await getPremiumEntitlement(userId);
+  } catch (error) {
+    console.error("Frame entitlement lookup error:", error);
+    return NextResponse.json(
+      { success: false, message: "Váratlan hiba történt." },
+      { status: 500 }
+    );
+  }
   if (entitlement.reason === "user_not_found") {
     return NextResponse.json(
       { success: false, message: "Felhasználó nem található." },
@@ -35,7 +67,7 @@ export async function POST(req: Request) {
   }
 
   // 🔍 Valid keret?
-  const valid = PREMIUM_FRAMES.some((f) => f.id === avatar_frame);
+  const valid = typeof avatar_frame === "string" && PREMIUM_FRAMES.some((f) => f.id === avatar_frame);
 
   if (!valid) {
     return NextResponse.json(
@@ -45,12 +77,20 @@ export async function POST(req: Request) {
   }
 
   // 💾 Mentés adatbázisba
-  await db.query(
-    `UPDATE users 
-     SET avatar_frame = ?
-     WHERE id = ?`,
-    [avatar_frame, userId]
-  );
+  try {
+    await db.query(
+      `UPDATE users
+       SET avatar_frame = ?
+       WHERE id = ?`,
+      [avatar_frame, userId]
+    );
+  } catch (error) {
+    console.error("Frame update error:", error);
+    return NextResponse.json(
+      { success: false, message: "Váratlan hiba történt." },
+      { status: 500 }
+    );
+  }
 
   return NextResponse.json({ success: true });
 }

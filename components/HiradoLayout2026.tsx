@@ -24,7 +24,9 @@ export default function HiradoLayout2026({
   user,
   videoUrl,
 }: HiradoLayoutProps) {
-  const today = new Date().toLocaleDateString("hu-HU");
+  const today = new Date().toLocaleDateString("hu-HU", {
+    timeZone: "Europe/Budapest",
+  });
 
   // 🔥 NEM renderelünk semmit, amíg nincs valós videó ID
   if (!video?.id) {

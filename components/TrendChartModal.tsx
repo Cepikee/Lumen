@@ -13,12 +13,20 @@ export default function TrendChartModal({
   keyword: string;
   history: { day: string; freq: number }[];
 }) {
+  const safeHistory = (Array.isArray(history) ? history : []).filter((point) => {
+    if (!point || typeof point !== "object") return false;
+    if (typeof point.day !== "string" || point.day.trim().length === 0) return false;
+    const timestamp = new Date(point.day).getTime();
+    const frequency = Number(point.freq);
+    return Number.isFinite(timestamp) && Number.isFinite(frequency) && frequency >= 0;
+  });
+
   const data = {
-    labels: history.map(h => new Date(h.day).toLocaleDateString("hu-HU")),
+    labels: safeHistory.map(h => new Date(h.day).toLocaleDateString("hu-HU")),
     datasets: [
       {
         label: keyword,
-        data: history.map(h => h.freq),
+        data: safeHistory.map(h => Number(h.freq)),
         borderColor: "#4CAF50",
         fill: false,
         tension: 0.3

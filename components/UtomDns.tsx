@@ -11,7 +11,12 @@ const fetcher = (url: string) =>
     headers: {
       "x-api-key": "",
     },
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`dns_http_${r.status}`);
+    const data = await r.json();
+    if (!data || typeof data !== "object") throw new Error("dns_invalid_response");
+    return data;
+  });
 
 export default function UtomDns() {
   const [domain, setDomain] = useState("");
@@ -28,7 +33,11 @@ export default function UtomDns() {
     fetcher
   );
 
-  const domains: string[] = data?.items?.map((i: any) => i.source) ?? [];
+  const domains: string[] = Array.from(new Set(
+    (Array.isArray(data?.items) ? data.items : [])
+      .map((i: any) => typeof i?.source === "string" ? i.source.trim() : "")
+      .filter(Boolean)
+  ));
 
   return (
     <div style={{ padding: "20px" }}>

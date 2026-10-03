@@ -12,30 +12,42 @@ const fetcher = (url: string): Promise<any> =>
     headers: {
       "x-api-key": "",
     } as HeadersInit,
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`dns_overview_http_${r.status}`);
+    const data = await r.json();
+    if (!data || typeof data !== "object") throw new Error("dns_overview_invalid_response");
+    return data;
+  });
 
 export default function UtomDnsOsszkep({ domain }: Props) {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let mounted = true;
     async function load() {
       try {
         const json = await fetcher(
-          `/api/premium-insights/UtomDnsOsszkep?domain=${domain}`
+          `/api/premium-insights/UtomDnsOsszkep?${new URLSearchParams({ domain }).toString()}`
         );
 
-        if (json?.success) {
+        if (mounted && json?.success) {
           setData(json);
         }
       } catch (err) {
         console.error("DNS összkép API hiba:", err);
+        if (mounted) setData(null);
       } finally {
-        setLoading(false);
+        if (mounted) setLoading(false);
       }
     }
 
+    setLoading(true);
+    setData(null);
     load();
+    return () => {
+      mounted = false;
+    };
   }, [domain]);
 
   if (loading) {
@@ -53,6 +65,11 @@ export default function UtomDnsOsszkep({ domain }: Props) {
       </div>
     );
   }
+
+  const finiteNonNegative = (value: unknown, fallback = 0) => {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) && parsed >= 0 ? parsed : fallback;
+  };
 
   // TÍPUSOS DESTRUCTURING
   const {
@@ -81,41 +98,41 @@ export default function UtomDnsOsszkep({ domain }: Props) {
       <div style={{ display: "inline-block", textAlign: "left" }}>
         <div>
           <strong>Összes cikk:</strong>{" "}
-          {totalArticles?.toLocaleString("hu-HU")}
+          {finiteNonNegative(totalArticles).toLocaleString("hu-HU")}
         </div>
 
         <ul style={{ marginTop: "10px", paddingLeft: "20px" }}>
           <li>
-            <strong>Napi cikkek száma:</strong> {dailyArticles}
+            <strong>Napi cikkek száma:</strong> {finiteNonNegative(dailyArticles)}
           </li>
           <li>
-            <strong>Heti cikkek száma:</strong> {weeklyArticles}
+            <strong>Heti cikkek száma:</strong> {finiteNonNegative(weeklyArticles)}
           </li>
           <li>
-            <strong>Havi cikkek száma:</strong> {monthlyArticles}
+            <strong>Havi cikkek száma:</strong> {finiteNonNegative(monthlyArticles)}
           </li>
         </ul>
 
         <div style={{ marginTop: "15px" }}>
           <strong>Átlagos cikkhossz:</strong>{" "}
-          {avgWordCount > 0 ? `${avgWordCount} szó` : "N/A"}
+          {finiteNonNegative(avgWordCount) > 0 ? `${finiteNonNegative(avgWordCount)} szó` : "N/A"}
         </div>
 
         <div>
           <strong>Átlagos olvasási idő:</strong>{" "}
-          {avgReadingTime > 0 ? `${avgReadingTime} perc` : "N/A"}
+          {finiteNonNegative(avgReadingTime) > 0 ? `${finiteNonNegative(avgReadingTime)} perc` : "N/A"}
         </div>
 
         {/* ⭐ Diverzitás */}
         <div style={{ marginTop: "15px" }}>
           <strong>Diverzitás index:</strong>{" "}
-          {(diversityIndex * 100).toFixed(1)}%
+          {(finiteNonNegative(diversityIndex) * 100).toFixed(1)}%
         </div>
 
         {/* ⭐ Dominancia */}
         <div>
           <strong>Dominancia index:</strong>{" "}
-          {(dominanceIndex * 100).toFixed(1)}%
+          {(finiteNonNegative(dominanceIndex) * 100).toFixed(1)}%
         </div>
 
         {/* ⭐ Leggyakoribb téma */}

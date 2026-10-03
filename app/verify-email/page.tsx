@@ -19,20 +19,25 @@ export default function VerifyEmailPage() {
     }
 
     async function verify() {
-      const res = await fetch("/api/auth/verify-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token }),
-      });
+      try {
+        const res = await fetch("/api/auth/verify-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token }),
+        });
+        const data = await res.json().catch(() => null);
 
-      const data = await res.json();
+        if (res.ok && data?.success === true) {
+          setStatus("success");
+          setMessage("Az email címed sikeresen megerősítve!");
+          return;
+        }
 
-      if (data.success) {
-        setStatus("success");
-        setMessage("Az email címed sikeresen megerősítve!");
-      } else {
         setStatus("error");
-        setMessage(data.message || "Ismeretlen hiba történt.");
+        setMessage(data?.message || "Az email megerősítése nem sikerült.");
+      } catch {
+        setStatus("error");
+        setMessage("Az email megerősítése nem sikerült.");
       }
     }
 

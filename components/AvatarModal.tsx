@@ -85,9 +85,9 @@ export default function AvatarModal({
         body: JSON.stringify(selected),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
 
-      if (data.success) {
+      if (res.ok && data?.success === true) {
         setUser({
           ...user,
           avatar_style: selected.style,
@@ -96,7 +96,7 @@ export default function AvatarModal({
         });
         onClose();
       } else {
-        alert("Hiba történt: " + data.message);
+        alert("Hiba történt: " + (data?.message ?? "Ismeretlen hiba"));
       }
     } catch (e) {
       alert("Váratlan hiba történt.");

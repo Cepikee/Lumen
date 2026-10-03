@@ -25,7 +25,10 @@ export default function UsernameChangeModal({
   const forbidden = ["admin", "moderator", "support", "utom", "system"];
 
   // Cooldown számítása
-  const lastChange = usernameChangedAt ? new Date(usernameChangedAt) : null;
+  const parsedLastChange = usernameChangedAt ? new Date(usernameChangedAt) : null;
+  const lastChange = parsedLastChange && Number.isFinite(parsedLastChange.getTime())
+    ? parsedLastChange
+    : null;
   const daysSince =
     lastChange ? Math.floor((Date.now() - lastChange.getTime()) / (1000 * 60 * 60 * 24)) : null;
   const daysLeft = daysSince !== null ? Math.max(0, 30 - daysSince) : 0;
@@ -42,8 +45,8 @@ export default function UsernameChangeModal({
       return;
     }
 
-    // ❗ ÚJ SZABÁLY: csak betűk és számok
-    if (!/^[a-zA-Z0-9]+$/.test(newUsername)) {
+    // Keep client validation aligned with /api/auth/username-reset.
+    if (!/^[a-zA-Z0-9._-]+$/.test(newUsername)) {
       setValid(false);
       return;
     }
@@ -83,14 +86,14 @@ export default function UsernameChangeModal({
         body: JSON.stringify({ newUsername }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
 
-      if (data.success) {
+      if (res.ok && data?.success === true) {
         alert("A felhasználónév sikeresen megváltozott!");
         onClose();
         window.location.reload();
       } else {
-        setError(data.message || "Hiba történt.");
+        setError(data?.message || "Hiba történt.");
       }
     } catch {
       setError("Váratlan hiba történt.");
@@ -108,7 +111,7 @@ export default function UsernameChangeModal({
           <strong>Figyelem!</strong>
           <ul className="mt-2 mb-0">
             <li>A felhasználónév 3–20 karakter hosszú lehet.</li>
-            <li><strong>Csak betűk és számok használhatók.</strong></li>
+            <li><strong>Betűk, számok, pont, kötőjel és aláhúzás használható.</strong></li>
             <li>Nem lehet kizárólag számokból.</li>
             <li>Tiltott nevek: admin, moderator, support, utom, system.</li>
             <li>A módosítás után 30 napig nem változtathatod újra.</li>

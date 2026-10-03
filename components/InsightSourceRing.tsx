@@ -37,17 +37,20 @@ export default function InsightSourceRing({
     /* --- Backend percent értékek használata --- */
     if (Array.isArray(sources) && sources.length > 0) {
       segments = sources.map((s) => ({
-        percent: Number(s.percent) || 0,
+        percent: (() => { const value = Number(s?.percent); return Number.isFinite(value) && value >= 0 ? value : 0; })(),
         color: s.color || getColorForName(s.name),
       }));
     }
 
     /* --- Fallback --- */
     else if (Array.isArray(data) && data.length > 0) {
-      const total = data.reduce((s, n) => s + (Number(n) || 0), 0) || 1;
+      const total = data.reduce((s, n) => {
+        const value = Number(n);
+        return s + (Number.isFinite(value) && value >= 0 ? value : 0);
+      }, 0) || 1;
 
       segments = data.map((n, i) => ({
-        percent: (Number(n) || 0) * (100 / total),
+        percent: (() => { const value = Number(n); return (Number.isFinite(value) && value >= 0 ? value : 0) * (100 / total); })(),
         color: defaultPalette[i % defaultPalette.length],
       }));
     }

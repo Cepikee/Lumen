@@ -1,8 +1,5 @@
 "use client";
-import { useState } from "react";
-
 export default function PremiumPage() {
-  const [supportAmount, setSupportAmount] = useState("");
   return (
     <main className="premium-wrapper">
 
@@ -20,12 +17,12 @@ export default function PremiumPage() {
             Mélyebb elemzés. Torzítás nélkül. Reklámok nélkül.
           </p>
 
-          <button className="premium-btn-lg mt-4">
+          <button className="premium-btn-lg mt-4" type="button" disabled aria-disabled="true" title="Az előfizetés jelenleg nem érhető el">
             Prémium hozzáférés indítása
           </button>
 
           <p className="small text-muted mt-3">
-            7 napos kockázatmentes kipróbálás
+            Az előfizetés és a próbaidő jelenleg nem érhető el.
           </p>
         </div>
       </section>
@@ -39,7 +36,7 @@ export default function PremiumPage() {
             <div className="price">1000 Ft<span>/hó</span></div>
             <li> Minden prémium funkció</li>
             <li> Bármikor lemondható </li>
-            <button className="premium-btn w-100">Előfizetek</button>
+            <button className="premium-btn w-100" type="button" disabled aria-disabled="true">Jelenleg nem elérhető</button>
           </div>
 
           {/* Éves */}
@@ -49,7 +46,7 @@ export default function PremiumPage() {
             <li> Minden prémium funkció</li>
             <li> 2 hónap ingyen </li>
             <li> Költséghatékony </li>
-            <button className="premium-btn w-100">Éves csomag indítása</button>
+            <button className="premium-btn w-100" type="button" disabled aria-disabled="true">Jelenleg nem elérhető</button>
           </div>
 
           {/* Támogató */}
@@ -62,10 +59,11 @@ export default function PremiumPage() {
              type="number"
              placeholder="Összeg (Ft)"
              className="supporter-input"
+             disabled
+             aria-disabled="true"
+             title="A támogatás jelenleg nem érhető el"
             />
-            <button className="premium-btn w-100 mt-3">
-              Projekt támogatása
-            </button>
+             <button className="premium-btn w-100 mt-3" type="button" disabled aria-disabled="true">Jelenleg nem elérhető</button>
           </div>
           {/* Céges */}
           <div className="premium-card glass">
@@ -75,7 +73,7 @@ export default function PremiumPage() {
               <li>👥 Dedikált support</li>
               <li> Egyedi kérések </li>
             </div>
-            <button className="premium-btn w-100">Kapcsolat</button>
+            <button className="premium-btn w-100" type="button" disabled aria-disabled="true">Jelenleg nem elérhető</button>
           </div>
 
         </div>

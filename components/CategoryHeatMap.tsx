@@ -44,7 +44,12 @@ export default function CategoryHeatMap({ categories }: Props) {
                 ></button>
               </div>
               <div className="modal-body">
-                {categories.map((cat) => (
+                {(Array.isArray(categories) ? categories : []).map((cat) => {
+                  const strength = Number(cat?.strength);
+                  const opacity = Number.isFinite(strength)
+                    ? Math.min(1, Math.max(0, strength / 100))
+                    : 0;
+                  return (
                   <div
                     key={cat.name}
                     className="d-flex align-items-center mb-1"
@@ -57,11 +62,12 @@ export default function CategoryHeatMap({ categories }: Props) {
                       style={{
                         height: "12px",
                         backgroundColor: "#A0522D",
-                        opacity: cat.strength / 100,
+                        opacity,
                       }}
                     />
                   </div>
-                ))}
+                  );
+                })}
 
                 <p className="mt-3">
                   Ez a hőtérkép vizuálisan mutatja, mely kategóriákban volt a

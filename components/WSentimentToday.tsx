@@ -11,7 +11,12 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 const fetcher = (url: string) =>
   fetch(url, {
     headers: { "x-api-key": "" },
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`sentiment_today_${r.status}`);
+    const json = await r.json();
+    if (!json || !json.success) throw new Error("invalid_sentiment_today_response");
+    return json;
+  });
 
 export default function WSentimentToday() {
   const theme = useUserStore((s) => s.theme);
@@ -37,11 +42,11 @@ export default function WSentimentToday() {
       </div>
     );
 
-  const series = [
-    data.positive || 0,
-    data.neutral || 0,
-    data.negative || 0,
-  ];
+  const asCount = (value: unknown) => {
+    const count = Number(value);
+    return Number.isFinite(count) && count >= 0 ? count : 0;
+  };
+  const series = [asCount(data.positive), asCount(data.neutral), asCount(data.negative)];
 
   const options: ApexCharts.ApexOptions = {
     chart: {

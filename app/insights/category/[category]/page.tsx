@@ -40,8 +40,10 @@ export default function CategoryPage() {
   const categoryRaw = params?.category ?? "";
   const period = (search?.get("period") as string) || "7d";
   const sort = (search?.get("sort") as string) || "latest";
-  const page = Number(search?.get("page") || 1);
-  const limit = Number(search?.get("limit") || 20);
+  const parsedPage = Number(search?.get("page") || 1);
+  const parsedLimit = Number(search?.get("limit") || 20);
+  const page = Number.isSafeInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+  const limit = Number.isSafeInteger(parsedLimit) && parsedLimit > 0 && parsedLimit <= 100 ? parsedLimit : 20;
 
   const [meta, setMeta] = useState<ApiMeta | null>(null);
   const [summary, setSummary] = useState<ApiSummary | null>(null);
@@ -94,19 +96,30 @@ export default function CategoryPage() {
           }
         );
 
-        const mapped: ApiItem[] = (json.items || []).map((it: any) => ({
+        const rawItems = Array.isArray(json.items) ? json.items : [];
+        const mapped: ApiItem[] = rawItems
+          .filter((it: any) => it && (typeof it.id === "string" || Number.isSafeInteger(it.id)))
+          .map((it: any) => ({
           id: String(it.id),
-          title: it.title,
+          title: typeof it.title === "string" && it.title.trim() ? it.title : "Cím nélkül",
           published_at: it.published_at ?? null,
           dominantSource: it.dominantSource ?? "",
-          sources: Number(it.sources ?? 1),
-          score: Number(it.score ?? 0),
+          sources: Number.isFinite(Number(it.sources)) ? Math.max(0, Number(it.sources)) : 0,
+          score: Number.isFinite(Number(it.score)) ? Number(it.score) : 0,
           excerpt: it.excerpt ?? "",
           href: it.href ?? `/insights/${it.id}`,
         }));
 
         setItems(mapped);
-        setRingSources(json.ringSources || []);
+        const normalizedRingSources = (Array.isArray(json.ringSources) ? json.ringSources : [])
+          .filter((source: any) => source && typeof source === "object")
+          .map((source: any) => ({
+            name: typeof source.name === "string" ? source.name : "ismeretlen",
+            label: typeof source.label === "string" && source.label.trim() ? source.label : "Ismeretlen",
+            count: Number.isFinite(Number(source.count)) ? Math.max(0, Number(source.count)) : 0,
+            percent: Number.isFinite(Number(source.percent)) ? Math.max(0, Number(source.percent)) : 0,
+          }));
+        setRingSources(normalizedRingSources);
 
       } catch (e) {
         console.error("Category load error:", e);
@@ -125,7 +138,8 @@ export default function CategoryPage() {
   function formatDate(iso?: string | null) {
     if (!iso) return "";
     try {
-      return new Date(iso).toLocaleString();
+      const date = new Date(iso);
+      return Number.isNaN(date.getTime()) ? "" : date.toLocaleString();
     } catch {
       return iso;
     }
@@ -267,13 +281,14 @@ export default function CategoryPage() {
 }
 
 function mapToInsightListItem(it: any) {
+  const publishedAt = typeof it.published_at === "string" ? new Date(it.published_at) : null;
   return {
     id: it.id,
     title: it.title,
-    score: Number(it.score || 0),
-    sources: Number(it.sources || 0),
+    score: Number.isFinite(Number(it.score)) ? Number(it.score) : 0,
+    sources: Number.isFinite(Number(it.sources)) ? Math.max(0, Number(it.sources)) : 0,
     dominantSource: it.dominantSource || "",
-    timeAgo: it.published_at ? new Date(it.published_at).toLocaleString() : "",
+    timeAgo: publishedAt && !Number.isNaN(publishedAt.getTime()) ? publishedAt.toLocaleString() : "",
     href: it.href,
   };
 }
@@ -306,4 +321,4 @@ function SourceBreakdown({ fullSources }: { fullSources: any[] }) {
     </div>
   );
 }
-/* --- VÉGLEGES, TISZTA SourceBreakdown --- */  
+/* --- VÉGLEGES, TISZTA SourceBreakdown --- */

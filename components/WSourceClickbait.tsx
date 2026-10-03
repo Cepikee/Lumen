@@ -20,7 +20,12 @@ const fetcher = (url: string) =>
     headers: {
       "x-api-key": "",
     },
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`clickbait_${r.status}`);
+    const json = await r.json();
+    if (!json || !Array.isArray(json.sources)) throw new Error("invalid_clickbait_response");
+    return json;
+  });
 
 export default function WSourceClickbaitPro() {
   const theme = useUserStore((s) => s.theme);
@@ -41,12 +46,16 @@ export default function WSourceClickbaitPro() {
   if (isLoading) return <div>Betöltés…</div>;
   if (error || !data?.success) return <div>Hiba történt.</div>;
 
-  const sources = (data.sources || [])
+  const sources = (Array.isArray(data.sources) ? data.sources : [])
     .map((s: any) => ({
-      name: s.source,
-      score: Number(s.avg_clickbait),
+      name: typeof s?.source === "string" && s.source.trim() ? s.source : "Ismeretlen forrás",
+      score: Number.isFinite(Number(s?.avg_clickbait)) ? Number(s.avg_clickbait) : 0,
     }))
     .sort((a: any, b: any) => b.score - a.score);
+
+  if (sources.length === 0) {
+    return <div className="p-12 text-center text-muted">Nincs elérhető clickbait adat.</div>;
+  }
 
   const avg =
     sources.length > 0

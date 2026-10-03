@@ -37,19 +37,33 @@ export async function GET(
   request: Request,
   context: { params: Promise<{ path?: string[] }> },
 ) {
-  const entitlement = await getCurrentPremiumEntitlement();
+  // Entitlement lookup touches both the session store and MySQL. Keep a
+  // database/session outage inside the JSON API contract instead of letting
+  // the route throw before the proxy can return a usable response.
+  let entitlement;
+  try {
+    entitlement = await getCurrentPremiumEntitlement();
+  } catch (error) {
+    console.error("Premium entitlement lookup failed:", error);
+    return NextResponse.json({ success: false, error: "premium_unavailable" }, { status: 503 });
+  }
   if (entitlement.reason === "not_authenticated") {
     return NextResponse.json({ success: false, error: "not_authenticated" }, { status: 401 });
   }
   if (!entitlement.active) {
     return NextResponse.json({ success: false, error: "premium_required", reason: entitlement.reason }, { status: 403 });
   }
-  const allowed = await consumeRateLimitFailClosed(db, {
-    scope: "premium-insights-proxy",
-    identity: `user-${entitlement.userId}`,
-    limit: 60,
-    windowMs: 10_000,
-  });
+  let allowed = false;
+  try {
+    allowed = await consumeRateLimitFailClosed(db, {
+      scope: "premium-insights-proxy",
+      identity: `user-${entitlement.userId}`,
+      limit: 60,
+      windowMs: 10_000,
+    });
+  } catch (error) {
+    console.error("Premium rate-limit lookup failed:", error);
+  }
   if (!allowed) return NextResponse.json({ success: false, error: "rate_limit" }, { status: 429 });
 
   const path = normalizeInsightsPath((await context.params).path);

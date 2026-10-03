@@ -2,6 +2,18 @@
 
 import { useUserStore } from "@/store/useUserStore";
 
+function formatUserDate(value: unknown, fallback = "N/A") {
+  if (typeof value !== "string" && !(value instanceof Date)) return fallback;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? fallback : date.toLocaleString("hu-HU");
+}
+
+function formatUserDateOnly(value: unknown, fallback = "N/A") {
+  if (typeof value !== "string" && !(value instanceof Date)) return fallback;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? fallback : date.toLocaleDateString("hu-HU");
+}
+
 export default function ProfileView() {
   const user = useUserStore((s) => s.user); // 🔥 mindig FRISS user
 
@@ -9,10 +21,7 @@ export default function ProfileView() {
     return <div>Betöltés...</div>;
   }
 
-  const premiumActive =
-    user.is_premium ||
-    (user.premium_until &&
-      new Date(user.premium_until).getTime() > Date.now());
+  const premiumActive = user.isPremium === true;
 
   return (
     <div style={{ padding: "20px", maxWidth: "400px" }}>
@@ -73,7 +82,7 @@ export default function ProfileView() {
             ? `Aktív ${
                 user.premium_until
                   ? "(lejár: " +
-                    new Date(user.premium_until).toLocaleDateString("hu-HU") +
+                    formatUserDateOnly(user.premium_until) +
                     ")"
                   : ""
               }`
@@ -85,9 +94,7 @@ export default function ProfileView() {
       <div className="mb-3">
         <strong>Fiók létrehozva:</strong>
         <div>
-          {user.created_at
-            ? new Date(user.created_at).toLocaleString("hu-HU")
-            : "N/A"}
+          {formatUserDate(user.created_at)}
         </div>
       </div>
 
@@ -101,9 +108,7 @@ export default function ProfileView() {
       <div className="mb-3">
         <strong>Utolsó bejelentkezés:</strong>
         <div>
-          {user.last_login
-            ? new Date(user.last_login).toLocaleString("hu-HU")
-            : "N/A"}
+          {formatUserDate(user.last_login)}
         </div>
       </div>
 

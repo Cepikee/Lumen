@@ -16,8 +16,11 @@ export type DonutChartProps = {
 };
 
 export default function DonutChart({ sources, isDark = false }: DonutChartProps) {
-  const labels = sources.map(s => s.name);
-  const dataValues = sources.map(s => s.percent);
+  const labels = (Array.isArray(sources) ? sources : []).map(s => s?.name || "Ismeretlen");
+  const dataValues = (Array.isArray(sources) ? sources : []).map(s => {
+    const value = Number(s?.percent);
+    return Number.isFinite(value) && value >= 0 ? value : 0;
+  });
 
   const colors = [
     "#4e79a7", "#f28e2b", "#e15759", "#76b7b2", "#59a14f",

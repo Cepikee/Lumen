@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
 import { normalizeRelatedSource } from "@/lib/related-news";
+import { adaptOptionalRelatedProjection } from "@/lib/v2/runtime-related-news";
 
 let pool: mysql.Pool | null = null;
 
 const RELATED_SOURCES = new Set([
-  "telex", "24hu", "index", "hvg", "portfolio", "444", "origo",
+  "telex", "24.hu", "index", "hvg", "portfolio", "444", "origo",
 ]);
 
 function getPool() {
@@ -27,6 +28,7 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
 
   const source = normalizeRelatedSource(searchParams.get("source"));
+  const sourceSqlKey = source.replace(/[.\s]/g, "");
   const excludeId = Number(searchParams.get("exclude"));
   const requestedLimit = Number(searchParams.get("limit") ?? 5);
   const limit = Number.isSafeInteger(requestedLimit)
@@ -34,7 +36,10 @@ export async function GET(req: Request) {
     : 5;
 
   if (!RELATED_SOURCES.has(source) || !Number.isSafeInteger(excludeId) || excludeId <= 0) {
-    return NextResponse.json([]);
+    return NextResponse.json(
+      { error: "invalid_related_parameters" },
+      { status: 400 },
+    );
   }
 
   try {
@@ -57,7 +62,20 @@ export async function GET(req: Request) {
       LEFT JOIN articles current_a ON current_s.article_id = current_a.id
       WHERE s.id != current_s.id
         AND s.article_id IS NOT NULL
+        -- A disabled canonical source must not leak back into related news.
+        -- Keep orphaned/source-less rows eligible because legacy summaries
+        -- can still carry a usable source label without a source FK.
+        AND (src.id IS NULL OR src.is_active = 1)
         AND (current_s.article_id IS NULL OR s.article_id != current_s.article_id)
+        AND NOT EXISTS (
+          SELECT 1
+          FROM summaries newer_s
+          WHERE newer_s.article_id = s.article_id
+            AND (
+              newer_s.created_at > s.created_at
+              OR (newer_s.created_at = s.created_at AND newer_s.id > s.id)
+            )
+        )
         AND s.created_at BETWEEN current_s.created_at - INTERVAL 7 DAY
                              AND current_s.created_at + INTERVAL 7 DAY
         AND (
@@ -70,12 +88,19 @@ export async function GET(req: Request) {
         s.id DESC
       LIMIT ?
       `,
-      [excludeId, source, limit]
+      [excludeId, sourceSqlKey, limit]
     );
 
+    // The legacy array remains the public response. When V2 is enabled, the
+    // already-stable result is transformed once for the additive projection;
+    // no second query, ranking pass or legacy mutation is performed here.
+    adaptOptionalRelatedProjection(
+      { currentSummaryId: excludeId, rows },
+      { logger: (event: { event?: string; error?: string }) => console.warn("RELATED V2 PROJECTION:", event) },
+    );
     return NextResponse.json(rows);
   } catch (err) {
     console.error("RELATED API ERROR:", err);
-    return NextResponse.json([]);
+    return NextResponse.json({ error: "related_query_failed" }, { status: 500 });
   }
 }

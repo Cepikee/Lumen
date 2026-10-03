@@ -7,20 +7,11 @@ import ThemeSync from "@/components/ThemeSync";
 import { useInsights } from "@/hooks/useInsights";
 import { useTimeseriesAll } from "@/hooks/useTimeseriesAll";
 import dynamic from "next/dynamic";
-import useSWR from "swr";
 import ForecastStatus from "@/components/ForecastStatus";
 import WhatHappenedToday from "@/components/WhatHappenedToday";
 import { useUserStore } from "@/store/useUserStore";
 import WSourceOsszehasonlitas from "@/components/WSourceOsszehasonlitas";
-// ⭐ Forecast API hook
-const fetcher = (url: string) =>
-  fetch(url, {
-    headers: {
-      "x-api-key": "",
-    },
-  }).then((r) => r.json());
-
-const useForecast = () => useSWR("/api/premium-insights/forecast", fetcher);
+import { useForecast } from "@/hooks/useForecast";
 const InsightsOverviewChart = dynamic(
   () => import("@/components/InsightsOverviewChart"),
   { ssr: false }
@@ -44,6 +35,17 @@ function normalizeCategory(raw?: string | null) {
   return s;
 }
 
+function formatInsightDate(value?: string | null) {
+  if (!value) return "";
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? "" : date.toLocaleString();
+}
+
+function finiteInsightNumber(value: unknown, fallback = 0) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
 export default function InsightFeedPage() {
   // -------------------------
   // STORE / THEME / USER
@@ -52,69 +54,14 @@ export default function InsightFeedPage() {
   const user = useUserStore((s) => s.user);
   const userLoading = useUserStore((s) => s.loading);
 
-  // -------------------------
-  // DEBUG / API CHECK (hooks must be declared unconditionally)
-  // -------------------------
-  const [apiUser, setApiUser] = useState<any | null>(null);
-  const [apiChecked, setApiChecked] = useState(false);
-
   useEffect(() => {
     useUserStore.getState().loadUser?.();
   }, []);
 
-  useEffect(() => {
-    let mounted = true;
-    (async () => {
-      try {
-        const res = await fetch("/api/auth/me", {
-          credentials: "include",
-          cache: "no-store",
-        });
-        const text = await res.text();
-        const parsed = text ? JSON.parse(text) : null;
-        if (!mounted) return;
-        setApiUser(parsed);
-        console.log("DEBUG /api/auth/me parsed:", parsed);
-      } catch (err) {
-        console.error("DEBUG /api/auth/me error:", err);
-        if (mounted) setApiUser(null);
-      } finally {
-        if (mounted) setApiChecked(true);
-      }
-    })();
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  // Dev helper: csak logol, nem írja felül a store-t
-  useEffect(() => {
-    if (process.env.NODE_ENV === "development" && apiUser) {
-      const candidate = apiUser.user ?? apiUser;
-      if (candidate) {
-        console.log("DEBUG candidate user from API (dev only):", candidate);
-      }
-    }
-  }, [apiUser]);
-
-  useEffect(() => {
-    console.log("DEBUG useUserStore.user:", user);
-    console.log("DEBUG useUserStore.loading:", userLoading);
-    console.log("DEBUG apiChecked:", apiChecked, "apiUser:", apiUser);
-  }, [user, userLoading, apiChecked, apiUser]);
-
   // -------------------------
   // PRÉMIUM ELLENŐRZÉS (típusbiztos, runtime)
   // -------------------------
-  const isPremium = (() => {
-    if (!user) return false;
-    if (typeof (user as any).is_premium === "boolean") return (user as any).is_premium === true;
-    if (typeof (user as any).isPremium === "boolean") return (user as any).isPremium === true;
-    if (typeof (user as any).is_premium === "number") return Number((user as any).is_premium) === 1;
-    if (typeof (user as any).role === "string" && (user as any).role === "premium") return true;
-    if ((user as any).premium_tier) return true;
-    return false;
-  })();
+  const isPremium = user?.isPremium === true;
 
   // -------------------------
   // UI STATE / DATA HOOKS (egyszer, a komponens elején)
@@ -123,7 +70,7 @@ export default function InsightFeedPage() {
   const [sort, setSort] = useState<string>("Legfrissebb");
 
   const { data, error, loading } = useInsights(period, sort);
-  const { data: tsData, loading: tsLoading } = useTimeseriesAll(period);
+  const { data: tsData, error: tsError, loading: tsLoading } = useTimeseriesAll(period);
   const { data: forecastData } = useForecast();
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -190,9 +137,9 @@ export default function InsightFeedPage() {
         const cat = (it.category ?? null) as string | null;
         return {
           category: cat,
-          trendScore: Number(it.trendScore ?? 0),
-          articleCount: Number(it.articleCount ?? 0),
-          sourceDiversity: Number(it.sourceDiversity ?? 0),
+          trendScore: finiteInsightNumber(it.trendScore),
+          articleCount: Math.max(0, finiteInsightNumber(it.articleCount)),
+          sourceDiversity: Math.max(0, finiteInsightNumber(it.sourceDiversity)),
           lastArticleAt: it.lastArticleAt ?? null,
           sparkline: it.sparkline ?? [],
           ringSources: it.ringSources ?? [],
@@ -211,7 +158,7 @@ export default function InsightFeedPage() {
       score: Number(c.trendScore || 0),
       sources: Number(c.articleCount || 0),
       dominantSource: `${c.sourceDiversity ?? 0} forrás`,
-      timeAgo: c.lastArticleAt ? new Date(c.lastArticleAt).toLocaleString() : "",
+      timeAgo: formatInsightDate(c.lastArticleAt),
       href: `/insights/category/${encodeURIComponent(cat)}`,
       ringSources: c.ringSources,
       sparkline: c.sparkline,
@@ -222,50 +169,11 @@ export default function InsightFeedPage() {
   // MINDEN HOOK fent van — most jöhet a feltételes render
   // -------------------------
   if (userLoading) return null;
-  if (!apiChecked) return null;
 
-  const apiSaysPremium =
-    apiUser?.user?.is_premium === 1 ||
-    apiUser?.is_premium === 1 ||
-    apiUser?.user?.isPremium === true ||
-    apiUser?.isPremium === true ||
-    apiUser?.user?.role === "premium" ||
-    apiUser?.role === "premium";
-
-  if (!isPremium && !apiSaysPremium) {
+  if (!isPremium) {
     return (
       <>
         <PremiumRequiredModal />
-        {process.env.NODE_ENV === "development" && (
-          <pre
-            style={{
-              position: "fixed",
-              right: 8,
-              bottom: 8,
-              zIndex: 9999,
-              background: "rgba(0,0,0,0.85)",
-              color: "#fff",
-              padding: 12,
-              fontSize: 12,
-              maxWidth: 420,
-              maxHeight: 300,
-              overflow: "auto",
-              borderRadius: 8,
-            }}
-          >
-            {JSON.stringify(
-              {
-                userLoading,
-                user,
-                isPremium,
-                apiChecked,
-                apiUser,
-              },
-              null,
-              2
-            )}
-          </pre>
-        )}
       </>
     );
   }
@@ -329,6 +237,10 @@ export default function InsightFeedPage() {
       {/* GRAFIKON */}
       {tsLoading ? (
         <div style={{ height: 220 }} className="mb-4 bg-light rounded-4" />
+      ) : tsError ? (
+        <div role="alert" className="mb-4 alert alert-danger">
+          Az idősor adatai nem tölthetők be.
+        </div>
       ) : (
         <div className="mb-4 p-3 rounded-4 bg-body-secondary">
           <InsightsOverviewChart data={downsampledTs || []} forecast={forecastData?.forecast || {}} range={period} />
@@ -350,7 +262,11 @@ export default function InsightFeedPage() {
                     <InsightCard title="Betöltés..." score={0} sources={0} dominantSource="" timeAgo="" href="#" ringSources={[]} sparkline={[]} />
                   </div>
                 ))
-              : categoryItems.map((item) => (
+              : error ? (
+                <div role="alert" className="alert alert-danger mb-0">
+                  Az Insights adatai nem tölthetők be.
+                </div>
+              ) : categoryItems.map((item) => (
                   <div key={item.id} className="insight-card-wrapper">
                     <InsightCard {...item} />
                   </div>

@@ -1,5 +1,13 @@
 # Utom.hu – helyreállítási progress napló
 
+## HIST-027 + HIST-034 célzott lezárás – 2026-09-30
+
+HIST-027 lezárult: a `lib/generateThumbnail.ts` valódi `execFile` production helper CJS core-t kapott, amely input/output realpath allowlistet, argument-array indítást, explicit timeoutot, nem nulla exit kezelést, output file/format validációt, részleges output cleanupot és path-előkészítés előtti concurrency guardot használ. Ideiglenes lokális statikus ffmpeg binárissal a két másodperces MP4→JPEG fixture PASS; missing/empty/traversal, non-zero, timeout, concurrency és child cleanup PASS. A disabled maintenance HTTP route nem lett újraaktiválva.
+
+HIST-034 lezárult: létrejött a `Europe/Budapest` IANA-alapú business-time helper. A daily/weekly/monthly business aggregátumok helyi határai UTC tartományokká alakulnak; rolling operational analytics, lease, recovery, session/reset expiry és rate window abszolút UTC. A repository audit javította a host-local nap/hour számítást, a DST matrix 23/25 órás napokkal, ambiguous/nonexistent civil idővel és `TZ=UTC`/`TZ=Europe/Budapest` egyezéssel PASS. Új migration nem készült; schema 033 maradt.
+
+Offline regresszió 71/71 PASS, MySQL suite 30/30 PASS, ffmpeg runtime 1/1 PASS, `npm run check` PASS, production preflight 033 PASS, npm audit 0 vulnerability. A registry 33 FIXED, 0 PARTIALLY FIXED, 1 OPEN (HIST-033 jogi), 3 ACCEPTED tételt tartalmaz. `TECHNICAL HISTORICAL BUG CLOSURE: VERIFIED`; production change-window és deployment továbbra sem végrehajtott.
+
 ## HIST-025 + HIST-026 célzott lezárás – 2026-09-29
 
 HIST-025 lezárult: a 009-es rekonstruált users sémában tárolt négyjegyű plaintext legacy PIN valódi production HTTP login során, user-sorszintű zárral és tranzakcióban bcrypt cost 12 állapotba frissült. Kétprocesszes concurrent login, valid/invalid/null/üres/korrupt fixture, modern hash, restart, session/logout, PIN-reset és régi/új PIN login PASS. Kikényszerített DB CHECK hiba esetén az upgrade rollbackelt, a régi használható állapot megmaradt, majd a retry sikerült.
@@ -258,3 +266,6 @@ Ellenőrzés: offline 57/57 PASS, valódi MySQL 8 integration 26/26 PASS, fresh 
 `STAGING ROLLOUT REHEARSAL: VERIFIED`
 
 `PRODUCTION DEPLOYMENT: NOT EXECUTED`
+## 2026-09-30 – final production readiness rehearsal
+
+The final production-cardinality/soak request was audited. The existing deterministic fixture (`scripts/scale-fixture.cjs`) supports SMALL/MEDIUM/LARGE synthetic profiles, but no documented production cardinality export exists, so these are explicitly `HIGH SYNTHETIC CAPACITY PROFILE` measurements. The isolated WSL MySQL endpoint did not become available during this run; therefore no scale, soak, resource, backup/restore or throughput numbers were invented. See `docs/UTOM_PRODUCTION_SOAK_REHEARSAL.md`. Technical historical closure remains verified; final change-window readiness is not verified and production deployment was not executed.

@@ -14,11 +14,16 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 type HistoryPoint = { day: string; freq: number };
 
 export default function Sparkline({ history }: { history: HistoryPoint[] }) {
+  const safeHistory = (Array.isArray(history) ? history : []).filter((point) => {
+    if (!point || typeof point.day !== "string" || Number.isNaN(new Date(`${point.day}T00:00:00`).getTime())) return false;
+    const value = Number(point.freq);
+    return Number.isFinite(value) && value >= 0;
+  });
   const data = {
-    labels: history.map(h => h.day),
+    labels: safeHistory.map(h => h.day),
     datasets: [
       {
-        data: history.map(h => h.freq),
+        data: safeHistory.map(h => Number(h.freq)),
         borderColor: "#4CAF50",
         fill: false,
         tension: 0.3

@@ -20,7 +20,24 @@ const fetcher = (url: string) =>
     headers: {
       "x-api-key": "",
     },
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`spike_${r.status}`);
+    const json = await r.json();
+    if (!json || !Array.isArray(json.spikes)) throw new Error("invalid_spike_response");
+    const spikes = json.spikes
+      .filter((item: any) => item && typeof item.label === "string" && item.label.trim())
+      .map((item: any) => ({
+        ...item,
+        label: item.label.trim(),
+        hour: Number(item.hour),
+        value: Number(item.value),
+      }))
+      .filter((item: any) =>
+        Number.isInteger(item.hour) && item.hour >= 0 && item.hour <= 23 &&
+        Number.isFinite(item.value) && item.value >= 0
+      );
+    return { ...json, spikes };
+  });
 
 
 // --- KATEGÓRIA SZÍNEK ---

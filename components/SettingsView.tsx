@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ThemeSwitch from "@/components/ThemeSwitch";
 import { useUserStore } from "@/store/useUserStore";
 import PasswordChangeModal from "@/components/PasswordChangeModal";
@@ -12,7 +12,7 @@ import UsernameChangeModal from "./UsernameChangeModal";
 
 function getAvatarUrl(user: any) {
   const style = user.avatar_style || "bottts";
-  const seed = encodeURIComponent(user.avatar_seed || user.nickname);
+  const seed = encodeURIComponent(user.avatar_seed || user.nickname || "user");
   return `https://api.dicebear.com/8.x/${style}/svg?seed=${seed}`;
 }
 
@@ -27,9 +27,19 @@ export default function SettingsView() {
   const [showPinModal, setShowPinModal] = useState(false);
   const [showUsernameModal, setShowUsernameModal] = useState(false);
 
-  const [nickname, setNickname] = useState(user!.nickname);
-  const [bio, setBio] = useState(user!.bio || "");
+  // The auth probe starts with no user. Reading `user!.nickname` during that
+  // first render crashes the settings modal before its loading state can show.
+  const [nickname, setNickname] = useState(user?.nickname ?? "");
+  const [bio, setBio] = useState(user?.bio ?? "");
   const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (user?.nickname) setNickname(user.nickname);
+  }, [user?.nickname]);
+
+  useEffect(() => {
+    setBio(user?.bio ?? "");
+  }, [user?.bio]);
 
   if (!user) return <div>Betöltés...</div>;
 
@@ -41,12 +51,11 @@ export default function SettingsView() {
     showPinModal ||
     showUsernameModal;
 
-  const premiumActive =
-    user.is_premium ||
-    (user.premium_until && new Date(user.premium_until).getTime() > Date.now());
+  const premiumActive = user.isPremium === true;
 
-  const premiumUntil = user.premium_until
-    ? new Date(user.premium_until).toLocaleString("hu-HU", {
+  const premiumDate = user.premium_until ? new Date(user.premium_until) : null;
+  const premiumUntil = premiumDate && !Number.isNaN(premiumDate.getTime())
+    ? premiumDate.toLocaleString("hu-HU", {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
@@ -64,16 +73,16 @@ export default function SettingsView() {
       const res = await fetch("/api/user/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nickname, bio }),
+        body: JSON.stringify({ bio }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
 
-      if (data.success) {
-        setUser({ ...user!, nickname, bio });
+      if (res.ok && data?.success === true) {
+        setUser({ ...user!, bio });
         alert("Beállítások elmentve!");
       } else {
-        alert("Hiba történt: " + data.message);
+        alert("Hiba történt: " + (data?.message || "Ismeretlen hiba."));
       }
     } catch (err) {
       alert("Váratlan hiba történt.");

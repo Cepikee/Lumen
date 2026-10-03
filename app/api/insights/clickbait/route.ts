@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { mysqlUtc } from "@/lib/business-time";
 
 function fixCat(s: any): string | null {
   if (!s) return null;
@@ -22,25 +23,25 @@ export async function GET(req: Request) {
 
     const [sourceRows]: any = await db.query(`
       SELECT 
-        source,
+        COALESCE(NULLIF(LOWER(TRIM(source)), ''), 'ismeretlen') AS source,
         AVG(final_clickbait) AS avg_clickbait,
         COUNT(*) AS count
       FROM summaries
       WHERE final_clickbait IS NOT NULL
-      GROUP BY source
-      ORDER BY avg_clickbait DESC
+      GROUP BY COALESCE(NULLIF(LOWER(TRIM(source)), ''), 'ismeretlen')
+      ORDER BY avg_clickbait DESC, source ASC
     `);
 
     const [catRows]: any = await db.query(`
       SELECT 
-        TRIM(category) AS category,
+        MIN(TRIM(category)) AS category,
         AVG(final_clickbait) AS avg_clickbait,
         COUNT(*) AS count
       FROM summaries
       WHERE final_clickbait IS NOT NULL
         AND category IS NOT NULL
-        AND category <> ''
-      GROUP BY TRIM(category)
+        AND TRIM(category) <> ''
+      GROUP BY LOWER(TRIM(category))
       ORDER BY avg_clickbait DESC
     `);
 
@@ -50,26 +51,9 @@ export async function GET(req: Request) {
       count: Number(r.count) || 0
     }));
 
-    // ─────────────────────────────────────────────
-    // 24 órás trend – HELYI IDŐ
-    // ─────────────────────────────────────────────
     const now = new Date();
-    const endStr =
-      `${now.getFullYear()}-` +
-      `${String(now.getMonth() + 1).padStart(2, "0")}-` +
-      `${String(now.getDate()).padStart(2, "0")} ` +
-      `${String(now.getHours()).padStart(2, "0")}:` +
-      `${String(now.getMinutes()).padStart(2, "0")}:` +
-      `${String(now.getSeconds()).padStart(2, "0")}`;
-
-    const startLocal = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-    const startStr =
-      `${startLocal.getFullYear()}-` +
-      `${String(startLocal.getMonth() + 1).padStart(2, "0")}-` +
-      `${String(startLocal.getDate()).padStart(2, "0")} ` +
-      `${String(startLocal.getHours()).padStart(2, "0")}:` +
-      `${String(startLocal.getMinutes()).padStart(2, "0")}:` +
-      `${String(startLocal.getSeconds()).padStart(2, "0")}`;
+    const endStr = mysqlUtc(now);
+    const startStr = mysqlUtc(new Date(now.getTime() - 24 * 60 * 60 * 1000));
 
     const [trendRows]: any = await db.query(
       `
@@ -79,7 +63,7 @@ export async function GET(req: Request) {
         COUNT(*) AS count
       FROM summaries
       WHERE created_at >= ?
-        AND created_at <= ?
+        AND created_at < ?
         AND final_clickbait IS NOT NULL
       GROUP BY bucket
       ORDER BY bucket ASC
@@ -124,9 +108,15 @@ export async function GET(req: Request) {
       total: Number(statsRows[0].total) || 0
     };
 
+    const sources = sourceRows.map((row: any) => ({
+      source: typeof row.source === "string" && row.source.trim() ? row.source : "ismeretlen",
+      avg_clickbait: Number.isFinite(Number(row.avg_clickbait)) ? Number(row.avg_clickbait) : 0,
+      count: Number.isFinite(Number(row.count)) ? Number(row.count) : 0,
+    }));
+
     return NextResponse.json({
       success: true,
-      sources: sourceRows,
+      sources,
       categories,
       trend,
       top: topRows,

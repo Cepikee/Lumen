@@ -10,12 +10,24 @@ export default function ForecastStatus() {
   const [data, setData] = useState<ForecastStatusResponse | null>(null);
 
   useEffect(() => {
+    let mounted = true;
+    let requestSequence = 0;
+
     const load = async () => {
+      const requestId = ++requestSequence;
       try {
         const res = await fetch("/api/forecast-status");
+        if (!res.ok) throw new Error(`forecast_status_${res.status}`);
         const json = await res.json();
-        setData(json);
+        const allowed = new Set(["running", "waiting", "error", "unknown"]);
+        if (!mounted || requestId !== requestSequence) return;
+        setData({
+          status: allowed.has(json?.status) ? json.status : "unknown",
+          lastRun: json?.lastRun ?? null,
+          nextRun: json?.nextRun ?? null,
+        });
       } catch {
+        if (!mounted || requestId !== requestSequence) return;
         setData({
           status: "error",
           lastRun: null,
@@ -26,7 +38,10 @@ export default function ForecastStatus() {
 
     load();
     const interval = setInterval(load, 10000);
-    return () => clearInterval(interval);
+    return () => {
+      mounted = false;
+      clearInterval(interval);
+    };
   }, []);
 
   if (!data) return null;
@@ -61,13 +76,13 @@ export default function ForecastStatus() {
 
         {lastRun && (
           <span className="text-muted small">
-            • Utolsó futás: {new Date(lastRun).toLocaleString()}
+            • Utolsó futás: {Number.isNaN(new Date(lastRun).getTime()) ? "—" : new Date(lastRun).toLocaleString()}
           </span>
         )}
 
         {nextRun && (
           <span className="text-muted small">
-            • Következő futás: {new Date(nextRun).toLocaleString()}
+            • Következő futás: {Number.isNaN(new Date(nextRun).getTime()) ? "—" : new Date(nextRun).toLocaleString()}
           </span>
         )}
 

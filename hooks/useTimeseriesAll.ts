@@ -1,5 +1,16 @@
 import useSWR from "swr";
 
+function normalizeTimeseriesResponse(value: unknown) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new Error("Invalid timeseries response");
+  }
+  const raw = value as Record<string, unknown>;
+  return {
+    ...raw,
+    categories: Array.isArray(raw.categories) ? raw.categories : [],
+  };
+}
+
 const fetcher = (url: string) =>
   fetch(url, {
     cache: "no-store",
@@ -8,7 +19,7 @@ const fetcher = (url: string) =>
     },
   }).then((r) => {
     if (!r.ok) throw new Error("Fetch error");
-    return r.json();
+    return r.json().then(normalizeTimeseriesResponse);
   });
 
 export function useTimeseriesAll(period: "24h" | "7d" | "30d" | "90d") {

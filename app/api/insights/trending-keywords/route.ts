@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { businessDayBounds, mysqlUtc } from "@/lib/business-time";
 
 function cleanKeyword(s: string): string {
   return s.replace(/[\[\]"']/g, "").trim().toLowerCase();
@@ -19,25 +20,16 @@ export async function GET(req: Request) {
   if (sec) return sec;
 
   try {
-    // HELYI IDŐ – mai nap 00:00:00 → 23:59:59
-    const now = new Date();
-
-    const todayStr =
-      `${now.getFullYear()}-` +
-      `${String(now.getMonth() + 1).padStart(2, "0")}-` +
-      `${String(now.getDate()).padStart(2, "0")} 00:00:00`;
-
-    const tomorrowStr =
-      `${now.getFullYear()}-` +
-      `${String(now.getMonth() + 1).padStart(2, "0")}-` +
-      `${String(now.getDate()).padStart(2, "0")} 23:59:59`;
+    const bounds = businessDayBounds(new Date());
+    const todayStr = mysqlUtc(bounds.start);
+    const tomorrowStr = mysqlUtc(bounds.end);
 
     const [rows]: any = await db.query(
       `
       SELECT trend_keywords
       FROM summaries
       WHERE created_at >= ?
-        AND created_at <= ?
+        AND created_at < ?
         AND trend_keywords IS NOT NULL
         AND trend_keywords <> ''
       `,
@@ -47,8 +39,10 @@ export async function GET(req: Request) {
     const keywordCount: Record<string, number> = {};
 
     for (const row of rows) {
-      const raw = row.trend_keywords || "";
-      const parts = raw.split(",").map(cleanKeyword).filter(Boolean);
+      const raw = String(row.trend_keywords || "");
+      // A keyword is counted once per article. Repeated tokens in one
+      // summary must not inflate the trend score.
+      const parts: string[] = Array.from(new Set<string>(raw.split(",").map(cleanKeyword).filter(Boolean)));
 
       for (const kw of parts) {
         keywordCount[kw] = (keywordCount[kw] || 0) + 1;
@@ -57,7 +51,7 @@ export async function GET(req: Request) {
 
     const filtered = Object.entries(keywordCount)
       .filter(([_, count]) => count >= 3)
-      .sort((a, b) => b[1] - a[1])
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "hu"))
       .slice(0, 20);
 
     const keywords = filtered.map(([kw, count]) => ({

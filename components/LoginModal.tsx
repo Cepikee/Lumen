@@ -35,6 +35,11 @@ export default function LoginModal() {
         body: JSON.stringify({ email, password, pin, recaptchaToken, rememberMe }),
       });
 
+      if (!res.ok && res.status >= 500) {
+        alert("A bejelentkezési szolgáltatás átmenetileg nem elérhető.");
+        return;
+      }
+
       const text = await res.text();
       if (!text) {
         alert("A szerver nem adott választ.");
@@ -70,11 +75,13 @@ export default function LoginModal() {
         { action: "forgot_password" }
       );
 
-      await fetch("/api/auth/request-password-reset", {
+      const res = await fetch("/api/auth/request-password-reset", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: forgotEmail, recaptchaToken }),
       });
+
+      if (!res.ok) throw new Error(`password_reset_${res.status}`);
 
       setForgotStatus("success");
     } catch {
@@ -94,11 +101,13 @@ export default function LoginModal() {
         { action: "forgot_pin" }
       );
 
-      await fetch("/api/auth/request-pin-reset", {
+      const res = await fetch("/api/auth/request-pin-reset", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: forgotPinEmail, recaptchaToken }),
       });
+
+      if (!res.ok) throw new Error(`pin_reset_${res.status}`);
 
       setForgotPinStatus("success");
     } catch {

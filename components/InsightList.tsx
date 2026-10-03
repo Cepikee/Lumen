@@ -49,7 +49,9 @@ export default function InsightList({ items, loading }: InsightListProps) {
 
   return (
     <div className="row g-3">
-      {items.map((item) => (
+      {(Array.isArray(items) ? items : [])
+        .filter((item): item is InsightItem => Boolean(item && typeof item === "object" && item.id))
+        .map((item) => (
         <div key={item.id} className="col-12 col-sm-6 col-lg-4 d-flex">
           <InsightCard
             title={item.title}
@@ -62,7 +64,7 @@ export default function InsightList({ items, loading }: InsightListProps) {
             sparkline={item.sparkline}
           />
         </div>
-      ))}
+        ))}
     </div>
   );
 }

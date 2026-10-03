@@ -46,13 +46,16 @@ export default function PasswordChangeModal({ show, onClose }: PasswordChangeMod
         }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
 
-      if (data.success) {
+      if (res.ok && data?.success === true) {
         alert("Jelszó frissítve!");
         onClose();
+        // logoutEverywhere revokes the current cookie too. Refresh the app so
+        // the local auth store cannot keep rendering the revoked session.
+        if (logoutEverywhere) window.location.reload();
       } else {
-        setError(data.message || "Hiba történt.");
+        setError(data?.message || "Hiba történt.");
       }
     } catch {
       setError("Váratlan hiba történt.");

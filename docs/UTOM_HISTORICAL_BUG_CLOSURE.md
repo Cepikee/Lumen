@@ -46,14 +46,14 @@ A `FIXED` státusz csak konkrét kód- és regressziós bizonyítékkal szerepel
 | HIST-024 | Reset/verify és email visszaélés | Közvetlen mailküldés és COUNT-alapú request limit mellett DB/mail race és crash-ablak maradt | high / auth/mail | FIXED | 033 titkosított transactional outbox; tranzakciós token+mail scheduling; aktív token coalescing; kétprocesszes request/consume, single-use, rollback, expiry, password/PIN reset-login és uncertain mail crash E2E PASS, SMTP 0 | `uncertain` mailt operátor dönt el; outbox processz és monitoring szükséges |
 | HIST-025 | Nyers legacy PIN | Plaintext mező és az auth utáni, zárolás nélküli lazy upgrade | high / auth | FIXED | 009-séma legacy fixture; timing-safe verify; `FOR UPDATE` + tranzakciós bcrypt upgrade; concurrent HTTP login, injected rollback, restart, session és reset→login E2E PASS | Sikeres legacy login után plaintext nem marad; hibás/null/üres rekord fail-closed |
 | HIST-026 | Premium proxy titok kliensben | Public API key, route traversal és hiányzó teljes runtime bizonyíték | high / premium | FIXED | Server-only key; szerveroldali entitlement; allowlist; közös MySQL limiter; 15 s felső timeout és 2 MiB response cap; production HTTP E2E lokális upstreammel PASS | Browser subprocess már nincs; az operátor által konfigurált belső origin célpont-policyja deployment feladat |
-| HIST-027 | ffmpeg shell injection | DB útvonal shell-stringben | high / video | PARTIALLY FIXED | `execFile`, path allowlist, timeout/concurrency, route tiltás | Valódi ffmpeg fixture runtime hiányzik |
+| HIST-027 | ffmpeg shell injection | DB útvonal shell-stringben és hiányzó binary/runtime bizonyíték | high / video | FIXED | CJS production helper `execFile` argument arrayjal; realpath input/output allowlist; output validation, timeout, non-zero/error cleanup, concurrency guard; valódi statikus ffmpeg media fixture PASS | A maintenance HTTP route továbbra is szándékosan disabled; a helper explicit belső használatra készült |
 | HIST-028 | Summary SQL interpolation és instabil pagination | Paraméterezés hiánya; csak timestamp rendezés | critical / search | FIXED | Paraméterezett query, `created_at DESC,id DESC`, minden ágon LIMIT/OFFSET; 25 azonos timestampes MySQL háromoldalas teszt PASS | Stabil datasetnél nincs overlap vagy eltűnő sor |
 | HIST-029 | Öt high dependency advisory | Puppeteer extract-zip lánc; Nodemailer parser/file/URL hibák | high / dependency | FIXED | A Puppeteer fallback és dependency eltávolítva; `nodemailer@10.0.12`; `npm audit --omit=dev`: 0; API regresszió és build PASS | Valódi email hálózati művelet nem futott |
 | HIST-030 | Forecast 48h/7 nap és destruktív csere | Kísérleti modell validáció nélkül | medium / forecast | INTENTIONAL / ACCEPTED | Production capability alapból tiltott | Külön termék- és modellvalidáció előtt nem production funkció |
 | HIST-031 | „Plágium” Jaccard elnevezés | Heurisztika nem jogi/ténybeli bizonyíték | medium / analytics | INTENTIONAL / ACCEPTED | Módszertani korlát dokumentált | Átnevezés/kalibráció termékfeladat |
 | HIST-032 | Cluster/clickbait pontosság | Nincs címkézett evaluation dataset | high / analytics | INTENTIONAL / ACCEPTED | Technikai determinisztika/race javítva | Címkézett minta és mérőszám külső adatfeladat |
 | HIST-033 | Forrásjogok | RSS/scraping engedélyek nem igazoltak | high / legal | OPEN | Nincs kódoldali bizonyíték | Tulajdonosi/jogi forrásengedélyezés kell |
-| HIST-034 | Teljes legacy timestamp egységesítés | Régi modulokban `NOW()` és lokális business idő maradt | medium / time | PARTIALLY FIXED | Claim/recovery/health/feed/Speed UTC-biztos és tesztelt | Nem kritikus legacy report/forecast időszemantika külön migrációt igényel |
+| HIST-034 | Teljes legacy timestamp egységesítés | Host-local JS és MySQL date boundary keveredett UTC operational és magyar business idővel | medium / time | FIXED | `Europe/Budapest` üzleti napi/heti/havi határok; UTC instant rolling analytics; publication provenance/`legacy_unknown`; session/reset/rate-limit/lease/health és DST matrix PASS | UI-only `toLocale*` megjelenítés marad presentation concern |
 | HIST-035 | `daily_reports` író/olvasó eltérő mező | `created_at` vs `report_date` | high / reports | FIXED | 016 generated `report_date`, index és kompatibilis reader; fresh migration/build PASS | Nincs ismert schema mismatch |
 | HIST-036 | Aktív session runtime tábla nem volt migrációban; feed nem tisztelte a source tiltást | Kézi S01 import és hardcoded feedlista | critical / schema, feed policy | FIXED | 031 `user_sessions` fresh migration + MySQL lifecycle PASS; fetch route csak `sources.is_active=1` forrást kér le és `finally` zárja a kapcsolatot | Jogi engedélyt továbbra is tulajdonos állítja be |
 | HIST-037 | Login IP spoofolható forwarding headerrel | A login feltétel nélkül elfogadta az `X-Forwarded-For` értéket, miközben más security útvonalak explicit trust policyt használtak | high / auth/rate-limit | FIXED | A login a közös `getIp` policyt használja; alapállapotban `direct`, forwarding header csak `UTOM_TRUST_PROXY_HEADERS=true` mellett; production HTTP spoof fixture PASS | Az ingressnek trusted módban törölnie és újraírnia kell a forwarding headereket |
@@ -69,6 +69,18 @@ A fixture valid plaintext, hibás plaintext, null, üres, modern bcrypt és kül
 A Puppeteer/browser subprocess már nem része a production útvonalnak. A kliensoldali Insights oldal ugyanazon originen a `/api/premium-insights/[[...path]]` route-ot hívja. A route DB-backed sessionből kér szerveroldali entitlementet, normalizált allowlistes insights pathot épít, és kizárólag az operátor `UTOM_INTERNAL_BASE_URL` originjére továbbít server-only API keyvel. A kliens sem upstream hostot, sem credentialt nem adhat meg; private/localhost szöveg és encoded separator nem változtathatja meg a célt. Az upstream redirect tiltott.
 
 A production build E2E premium, non-premium, expired, missing és invalid sessiont ellenőrzött. A lokális upstream success, 400, 500, timeout, disconnect, malformed HTTP, oversized body és public→private redirect esetet szimulált. A proxy közvetlenül használja a shared MySQL limitert, timeoutja konfigurálható, de legfeljebb 15 másodperc, response limitje legfeljebb 2 MiB. Négy párhuzamos kérés PASS; app/upstream process és socket cleanup PASS. A secret marker nem jelent meg response-ban vagy logban; fizetős proxyhívás 0.
+
+## HIST-027 ffmpeg runtime bizonyíték
+
+A tényleges helper a `lib/generateThumbnail.ts` CJS production core-ját használja. A binary `FFMPEG_PATH`, ennek hiányában PATH alapján oldódik fel; a teszt egy ideiglenes, repositoryn kívüli statikus ffmpeg executable-t használt. A fixture lokális, két másodperces, 64×64 MP4 volt; a helper valódi `execFile` argument arrayjal készített JPEG thumbnailt, amelyet JPEG magic byte és nem üres file méret validált.
+
+Missing/empty/traversal input, output-name injection, nem nulla exit, timeout és részleges output cleanup PASS. A concurrency guard a path-előkészítés előtt foglal, így két párhuzamos munka nem írhatja felül egymást; egy job fut, a másik kontrollált `thumbnail_worker_busy` hibát kap. A helper nem épít shell command stringet, a child timeout után lezárult, orphan process 0. A maintenance HTTP route továbbra is 404 disabled, ezért új video product flow nem keletkezett.
+
+## HIST-034 time policy és runtime bizonyíték
+
+Az authoritative belső szabály: operational DB timestamps, lease/claim/recovery, session/reset expiry és rate-limit window abszolút UTC instant; magyar napi/heti/havi üzleti aggregátum `Europe/Budapest` IANA timezone; source publication explicit offsetból UTC instant + provenance; bizonytalan régi érték `legacy_unknown`; UI `toLocale*` kizárólag display.
+
+A repository audit megszüntette a releváns host-local boundary-ket: a clickbait/source activity/heatmap/trending/duplication/summary/Ut​​om DNS aggregátumok üzleti határai Budapestből számított UTC tartományok, rolling timeseries és hour bucketek UTC-sek, forecast next-run abszolút milliszekundumos. A DST teszt a 2026-03-29-i 23 órás és a 2026-10-25-i 25 órás napot, az ambiguous őszi és nonexistent tavaszi civil időt, valamint `TZ=UTC` és `TZ=Europe/Budapest` host egyezést bizonyította. Source `Z`, `+01:00`, `+02:00`, más offset, invalid és timezone nélküli legacy parsing regresszió PASS. MySQL DATETIME mezőtípust nem változtattunk; 034 migration nem szükséges.
 
 ## HIST-021 outbound surface és threat model
 
@@ -102,7 +114,7 @@ Az outbox claim a provider előtt `uncertain` állapotot ír. A mock provider ut
 
 - Canonical pipeline, state machine, claim, fencing, transaction, partial-write, recovery, feed, URL identity, cluster race és Speed Index: MySQL runtime bizonyíték PASS.
 - Legacy pipeline: két summarize route csak autentikált 409-et ad; legacy cron fail-fast; más aktív article INSERT útvonalat a source audit nem talált.
-- UTC: lease/claim/heartbeat/recovery és publication tesztelt UTC/CET/CEST környezetben. A dokumentált legacy business-time terület HIST-034 miatt részleges.
+- UTC/business time: lease/claim/heartbeat/recovery és publication UTC-biztos; üzleti napi/heti/havi aggregátumok `Europe/Budapest` IANA határokat használnak, DST és host-TZ regresszió PASS.
 - Connection/process: SIGTERM és SIGINT után worker state `stopped`, pool/lock felszabadul. A jelen auditban talált lifecycle helper leak lezárva.
 - TODO/FIXME/HACK: aktív pipeline-ban elrejtett bypass vagy ideiglenes success-path nem található. A „legacy” találatok migrációs kommentek, compatibility guardok vagy a registryben jelzett modulok.
 - Async/error handling: aktív workerben async `forEach` és fire-and-forget DB completion nem található. A state-machine heartbeat timer `finally` ágban törlődik. A feed logger failure-pathja ebben a körben javult.
@@ -114,19 +126,21 @@ Az outbox claim a provider előtt `uncertain` állapotot ír. A mock provider ut
 | Státusz | Darab |
 |---|---:|
 | Total historical findings | 37 |
-| FIXED | 31 |
-| PARTIALLY FIXED | 2 |
+| FIXED | 33 |
+| PARTIALLY FIXED | 0 |
 | OPEN | 1 |
 | OBSOLETE | 0 |
 | NOT REPRODUCIBLE | 0 |
 | INTENTIONAL / ACCEPTED | 3 |
 | NEWLY DISCOVERED | 1 |
 
-Ebben a célzott körben HIST-025 és HIST-026 lezárult, az új HIST-037 pedig feltárás után azonnal javítást és runtime regressziót kapott. A fennmaradó high részleges vagy nyitott tételek: HIST-027 és HIST-033; a medium HIST-034 továbbra is részleges. A jogi HIST-033 nem kódhiba; technikailag a source enable/disable fail-closed módon érvényesül.
+Ebben a célzott körben HIST-027 és HIST-034 is lezárult. Az egyetlen külső OPEN tétel HIST-033; a technikai registryben nincs részleges vagy nyitott critical/high bug.
+
+`TECHNICAL HISTORICAL BUG CLOSURE: VERIFIED`
 
 `HISTORICAL BUG CLOSURE AUDIT: NOT VERIFIED`
 
-Indok: két részlegesen bizonyított és egy külső jogi tétel maradt. Nem állítható bizonyítottan, hogy minden korábbi programozási hiba teljesen lezárult.
+Indok: a technikai tételek lezárultak, de HIST-033 forrásengedélyezési státusza külső jogi/business döntés.
 
 `PRODUCTION CHANGE-WINDOW READINESS: NOT VERIFIED`
 

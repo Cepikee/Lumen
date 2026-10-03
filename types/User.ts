@@ -9,6 +9,8 @@ export type User = {
   theme: "light" | "dark" | "system";
   bio: string | null;
   is_premium: boolean;
+  /** Canonical entitlement computed by /api/auth/me; unlike is_premium it includes expiry. */
+  isPremium?: boolean;
   premium_until: string | null;
   premium_tier: string | null;
   avatar_style: string; 

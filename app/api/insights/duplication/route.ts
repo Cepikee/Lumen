@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { businessDayBounds, mysqlUtc } from "@/lib/business-time";
 
 interface DuplicationRow {
   source: string;
@@ -15,25 +16,23 @@ export async function GET(req: Request) {
     const sec = await securityCheck(req);
     if (sec) return sec;
 
-    // 🔥 HELYI IDŐ – mai nap 00:00:00
-    const now = new Date();
-    const startStr =
-      `${now.getFullYear()}-` +
-      `${String(now.getMonth() + 1).padStart(2, "0")}-` +
-      `${String(now.getDate()).padStart(2, "0")} 00:00:00`;
+    const bounds = businessDayBounds(new Date());
+    const startStr = mysqlUtc(bounds.start);
 
     const [rows]: any = await db.query(
       `
       SELECT 
-        a.source,
-        SUM(a.source COLLATE utf8mb4_0900_ai_ci = c.first_source COLLATE utf8mb4_0900_ai_ci) AS original,
-        SUM(a.source COLLATE utf8mb4_0900_ai_ci <> c.first_source COLLATE utf8mb4_0900_ai_ci) AS duplicate
+        COALESCE(NULLIF(LOWER(TRIM(a.source)), ''), 'ismeretlen') AS source,
+        SUM(COALESCE(NULLIF(LOWER(TRIM(a.source)), ''), 'ismeretlen') COLLATE utf8mb4_0900_ai_ci =
+            COALESCE(NULLIF(LOWER(TRIM(c.first_source)), ''), 'ismeretlen') COLLATE utf8mb4_0900_ai_ci) AS original,
+        SUM(COALESCE(NULLIF(LOWER(TRIM(a.source)), ''), 'ismeretlen') COLLATE utf8mb4_0900_ai_ci <>
+            COALESCE(NULLIF(LOWER(TRIM(c.first_source)), ''), 'ismeretlen') COLLATE utf8mb4_0900_ai_ci) AS duplicate
       FROM articles a
       JOIN clusters c ON a.cluster_id = c.id
-      WHERE c.first_published_at >= ?
-      GROUP BY a.source
+      WHERE c.first_published_at >= ? AND c.first_published_at < ?
+      GROUP BY COALESCE(NULLIF(LOWER(TRIM(a.source)), ''), 'ismeretlen')
       `,
-      [startStr]
+      [startStr, mysqlUtc(bounds.end)]
     );
 
     if (!rows || rows.length === 0) {
@@ -49,7 +48,7 @@ export async function GET(req: Request) {
       const total = original + duplicate;
 
       return {
-        source: r.source.toLowerCase(),
+        source: String(r.source ?? "ismeretlen").trim().toLowerCase() || "ismeretlen",
         original,
         duplicate,
         duplicationScore:
@@ -59,7 +58,7 @@ export async function GET(req: Request) {
 
     duplication.sort(
       (a: DuplicationRow, b: DuplicationRow) =>
-        b.duplicationScore - a.duplicationScore
+        b.duplicationScore - a.duplicationScore || a.source.localeCompare(b.source)
     );
 
     return NextResponse.json({

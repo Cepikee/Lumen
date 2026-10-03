@@ -21,17 +21,6 @@ function logError(source: string, err: any) {
   appendOperationalLog("fetch-feed.log", line);
 }
 
-/** FEED STATISZTIKA */
-const feedStats: Record<string, number> = {
-  Telex: 0,
-  HVG: 0,
-  "24.hu": 0,
-  Index: 0,
-  Portfolio: 0,
-  "444.hu": 0,
-  Origo: 0,
-};
-
 /** HTML tisztítás */
 function cleanHtmlText(text: string) {
   return text.replace(/\s+/g, " ").replace(/\n+/g, " ").trim();
@@ -81,6 +70,18 @@ export async function POST(req: Request) {
 
   let connection: mysql.Connection | null = null;
   try {
+    // A statisztika egy feldolgozási futás eredménye. Modul-szintű mutable
+    // objektum esetén a következő kérés az előző futás számait is visszaadná.
+    const feedStats: Record<string, number> = {
+      Telex: 0,
+      HVG: 0,
+      "24.hu": 0,
+      Index: 0,
+      Portfolio: 0,
+      "444.hu": 0,
+      Origo: 0,
+    };
+
     const parser = new Parser({
       headers: {
         "User-Agent":
@@ -101,6 +102,8 @@ export async function POST(req: Request) {
     let inserted = 0;
     let deduplicated = 0;
     let malformed = 0;
+    let feedAttempts = 0;
+    let feedFailures = 0;
 
     /** RSS feldolgozás */
     async function processRssFeed(
@@ -110,6 +113,7 @@ export async function POST(req: Request) {
       isXml = false
     ) {
       if (!activeSourceIds.has(sourceId)) return;
+      feedAttempts++;
       try {
         let xml = "";
 
@@ -181,6 +185,7 @@ export async function POST(req: Request) {
 
         }
       } catch (err) {
+        feedFailures++;
         logError(sourceName, err);
       }
     }
@@ -225,16 +230,26 @@ export async function POST(req: Request) {
       await processRssFeed(feed444.text, "444.hu", 6, true);
     }
 
+    if (feedAttempts > 0 && feedFailures === feedAttempts) {
+      return NextResponse.json(
+        { error: "feed_fetch_failed", attempted: feedAttempts },
+        { status: 502 },
+      );
+    }
+
     return NextResponse.json({
       status: "ok",
       inserted,
       deduplicated,
       malformed,
+      feedAttempts,
+      feedFailures,
       stats: feedStats,
     });
   } catch (err) {
+    console.error("FETCH FEED ERROR:", err instanceof Error ? err.message : err);
     return NextResponse.json(
-      { error: String(err) },
+      { error: "feed_fetch_failed" },
       { status: 500 }
     );
   } finally {

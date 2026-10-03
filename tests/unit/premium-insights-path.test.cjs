@@ -16,4 +16,5 @@ test("premium insights proxy rejects traversal and encoded separators", () => {
   assert.equal(normalizeInsightsPath(["category", "%2e%2e"]), null);
   assert.equal(normalizeInsightsPath(["category", "a%2Fb"]), null);
   assert.equal(normalizeInsightsPath(["category", "a%5Cb"]), null);
+  assert.equal(normalizeInsightsPath(["category", "%20%20"]), null);
 });

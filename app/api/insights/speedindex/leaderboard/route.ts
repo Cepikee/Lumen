@@ -24,12 +24,13 @@ export async function GET(req: Request) {
 
     const [rows]: any = await db.query(`
       SELECT 
-        source,
+        TRIM(source) AS source,
         avg_delay_minutes AS avgDelay,
         median_delay_minutes AS medianDelay,
         updated_at AS updatedAt
       FROM speed_index
-      ORDER BY avg_delay_minutes ASC
+      WHERE source IS NOT NULL AND TRIM(source) <> ''
+      ORDER BY avg_delay_minutes ASC, TRIM(source) ASC
     `);
 
     if (!rows || rows.length === 0) {

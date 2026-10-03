@@ -13,7 +13,9 @@ export default function InsightCategoryBar({
 }: InsightCategoryBarProps) {
   return (
     <div className="insight-category-bar">
-      {categories.map((cat) => (
+      {(Array.isArray(categories) ? categories : [])
+        .filter((cat): cat is string => typeof cat === "string" && cat.trim().length > 0)
+        .map((cat) => (
         <button
           key={cat}
           className={`insight-category-item ${
@@ -23,7 +25,7 @@ export default function InsightCategoryBar({
         >
           {cat}
         </button>
-      ))}
+        ))}
     </div>
   );
 }

@@ -26,3 +26,6 @@ STOP: backup/restore/checksum hiba; kevés tárhely; aktív writer/claim; eltér
 ## Rollback
 
 Ne próbálj helyben DDL rollbacket. Állíts le minden writert, izoláld a hibás release-t, hozz létre új üres restore DB-t, töltsd vissza az ellenőrzött pre-migration backupot, majd ellenőrizd checksum, schema version, row count és reprezentatív rekordhash alapján. Állítsd az előző release-t az új restore DB-re; app health után egy worker, smoke és Speed Index következik. A connection-string váltás és a GO/NO-GO manuális; backup/checksum/restore/integrity automatizálható.
+## Final readiness rehearsal status (2026-09-30)
+
+The documented change sequence remains rehearsal-only. The existing staging evidence covers schema migration, backup/restore, runtime smoke and crash recovery. The required schema-033 production-cardinality soak and post-soak backup/restore could not be measured in this run because the isolated local MySQL target was unavailable. Treat this as a technical **NO-GO** until the synthetic capacity run completes; HIST-033 source authorization remains an independent external blocker.

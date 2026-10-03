@@ -25,7 +25,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         error: "Ideiglenesen blokkolva.",
-      });
+      }, { status: 429 });
     }
 
     if (
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         error: "Érvénytelen kliens.",
-      });
+      }, { status: 400 });
     }
 
     const rateEntry = rateMap.get(ip) || { count: 0, last: now };
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         error: "Túl sok kérés. Próbáld újra később.",
-      });
+      }, { status: 429 });
     }
 
     const bodyText = await req.text();
@@ -61,7 +61,19 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         error: "Túl nagy kérés.",
-      });
+      }, { status: 413 });
+    }
+
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(bodyText);
+    } catch {
+      registerFail(ip);
+      return NextResponse.json({ success: false, error: "Érvénytelen JSON." }, { status: 400 });
+    }
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      registerFail(ip);
+      return NextResponse.json({ success: false, error: "Érvénytelen kérés." }, { status: 400 });
     }
 
     const {
@@ -72,9 +84,9 @@ export async function POST(req: Request) {
       message,
       honey,
       turnstileToken,
-    } = JSON.parse(bodyText);
+    } = parsed as Record<string, unknown>;
 
-    if (honey && honey.trim() !== "") {
+    if (typeof honey === "string" && honey.trim() !== "") {
       registerFail(ip);
       return NextResponse.json({ success: true });
     }
@@ -82,32 +94,43 @@ export async function POST(req: Request) {
     const sentAt = req.headers.get("x-form-start");
     if (sentAt) {
       const diff = now - Number(sentAt);
+      if (!Number.isFinite(diff)) {
+        registerFail(ip);
+        return NextResponse.json({ success: false, error: "Érvénytelen kérés." }, { status: 400 });
+      }
       if (diff < 2000) {
         registerFail(ip);
         return NextResponse.json({
           success: false,
           error: "Túl gyors küldés.",
-        });
+        }, { status: 400 });
       }
     }
 
-    if (emailFrom) {
+    if (typeof emailFrom === "string" && emailFrom) {
       const lastSent = emailCooldown.get(emailFrom) || 0;
       if (now - lastSent < EMAIL_COOLDOWN_MS) {
         registerFail(ip);
         return NextResponse.json({
           success: false,
           error: "Túl gyakori küldés erről az email címről.",
-        });
+        }, { status: 429 });
       }
     }
 
-    if (!name || !emailFrom || !message) {
+    if (
+      typeof name !== "string" ||
+      typeof emailFrom !== "string" ||
+      typeof message !== "string" ||
+      !name.trim() ||
+      !emailFrom.trim() ||
+      !message.trim()
+    ) {
       registerFail(ip);
       return NextResponse.json({
         success: false,
         error: "Hiányzó mezők.",
-      });
+      }, { status: 400 });
     }
 
     if (name.length > 100 || emailFrom.length > 200) {
@@ -115,7 +138,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         error: "Érvénytelen mezőhossz.",
-      });
+      }, { status: 400 });
     }
 
     if (message.length > 5000) {
@@ -123,7 +146,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         error: "Az üzenet túl hosszú.",
-      });
+      }, { status: 400 });
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -132,16 +155,16 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         error: "Érvénytelen email cím.",
-      });
+      }, { status: 400 });
     }
 
     // TURNSTILE ELLENŐRZÉS
-    if (!turnstileToken) {
+    if (typeof turnstileToken !== "string" || !turnstileToken.trim()) {
       registerFail(ip);
       return NextResponse.json({
         success: false,
         error: "Hiányzó ellenőrző token.",
-      });
+      }, { status: 400 });
     }
 
     const secret = process.env.TURNSTILE_SECRET_KEY;
@@ -149,7 +172,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         error: "Hiányzó szerver konfiguráció.",
-      });
+      }, { status: 503 });
     }
 
     const cfRes = await fetch(
@@ -163,13 +186,21 @@ export async function POST(req: Request) {
       }
     );
 
-    const cfData = await cfRes.json();
-    if (!cfData.success) {
+    if (!cfRes.ok) {
+      return NextResponse.json({ success: false, error: "Ellenőrzés átmenetileg nem érhető el." }, { status: 502 });
+    }
+    let cfData: unknown;
+    try {
+      cfData = await cfRes.json();
+    } catch {
+      return NextResponse.json({ success: false, error: "Érvénytelen ellenőrzési válasz." }, { status: 502 });
+    }
+    if (!cfData || typeof cfData !== "object" || (cfData as { success?: unknown }).success !== true) {
       registerFail(ip);
       return NextResponse.json({
         success: false,
         error: "Ellenőrzés sikertelen.",
-      });
+      }, { status: 400 });
     }
 
     const safe = (str: string) =>
@@ -179,8 +210,10 @@ export async function POST(req: Request) {
     const safeEmail = safe(emailFrom);
     const safeMsg = safe(message);
 
+    const subjectKey = typeof subject === "string" ? subject : "support";
+    const customSubjectText = typeof customSubject === "string" ? customSubject.slice(0, 200) : "";
     const to =
-      subject === "press"
+      subjectKey === "press"
         ? "press@utom.hu"
         : "support@utom.hu";
 
@@ -195,10 +228,10 @@ export async function POST(req: Request) {
       account: "Fiók / hozzáférés",
       data: "Adatkezelés",
       collab: "Együttműködés",
-      custom: customSubject || "Egyéb kérdés",
+      custom: customSubjectText || "Egyéb kérdés",
     };
 
-    const finalSubject = subjectMap[subject] || "Kapcsolat";
+    const finalSubject = subjectMap[subjectKey] || "Kapcsolat";
 
     // EMAIL NEKED
     await mailer.sendMail({
@@ -251,7 +284,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       success: false,
       error: "Ismeretlen hiba.",
-    });
+    }, { status: 500 });
   }
 }
 

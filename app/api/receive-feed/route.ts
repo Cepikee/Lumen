@@ -107,8 +107,9 @@ function parseFeed(xml: string): FeedItem[] {
           MAX_TITLE_LENGTH
         ),
         link: element.find("link").first().text().trim(),
-        content: normalizeText(
-          element.find("encoded").first().text() ||
+          content: normalizeText(
+          element.find("content\\:encoded").first().text() ||
+            element.find("encoded").first().text() ||
             element.find("description").first().text() ||
             ""
         ).slice(0, MAX_CONTENT_LENGTH),

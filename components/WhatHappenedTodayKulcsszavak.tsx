@@ -23,7 +23,12 @@ interface ApiResponse {
 const fetcher = (url: string) =>
   fetch(url, {
     headers: { "x-api-key": "" },
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`trending_keywords_${r.status}`);
+    const json = await r.json();
+    if (!json || !Array.isArray(json.keywords)) throw new Error("invalid_keywords_response");
+    return json;
+  });
 
 export default function WhatHappenedTodayKulcsszavak() {
   const theme = useUserStore((s) => s.theme);
@@ -84,9 +89,16 @@ export default function WhatHappenedTodayKulcsszavak() {
     return <div className="text-sm text-gray-500">Ma még nincsenek felkapott kulcsszavak.</div>;
   }
 
-  const sorted = [...data.keywords].sort((a, b) => (b.count ?? 0) - (a.count ?? 0));
-  const counts = sorted.map((k) => Number(k.count ?? 0));
-  const categories = sorted.map((k) => String(k.keyword));
+  const sorted = data.keywords
+    .map((item) => {
+      const keyword = typeof item?.keyword === "string" ? item.keyword.trim() : "";
+      const count = Number(item?.count ?? 0);
+      return { ...item, keyword, count: Number.isFinite(count) && count >= 0 ? count : 0 };
+    })
+    .filter((item) => item.keyword.length > 0)
+    .sort((a, b) => b.count - a.count);
+  const counts = sorted.map((k) => k.count);
+  const categories = sorted.map((k) => k.keyword);
 
   const rowHeight = 36;
   const height = Math.max(120, sorted.length * rowHeight);
@@ -97,9 +109,18 @@ export default function WhatHappenedTodayKulcsszavak() {
   ];
   const colors = sorted.map((_, i) => baseColors[i % baseColors.length]);
 
-  /* Helper to build tooltip HTML */
+  /* Escape API-provided labels before placing them in the tooltip DOM. */
+  const escapeTooltipText = (value: string) =>
+    value.replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    })[character] ?? character);
+
   const buildTooltipHtml = (label: string, value: number) => {
-    return `<div style="font-weight:700;margin-bottom:4px">${label}</div><div style="font-size:12px;opacity:0.85">${value} db</div>`;
+    return `<div style="font-weight:700;margin-bottom:4px">${escapeTooltipText(label)}</div><div style="font-size:12px;opacity:0.85">${value} db</div>`;
   };
 
   /* Apex options with events:

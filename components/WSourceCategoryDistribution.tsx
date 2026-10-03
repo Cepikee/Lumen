@@ -58,7 +58,12 @@ const fetcher = (url: string) =>
     headers: {
       "x-api-key": "",
     },
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`source_category_http_${r.status}`);
+    const data = await r.json();
+    if (!data || typeof data !== "object") throw new Error("source_category_invalid_response");
+    return data;
+  });
 
 export default function WSourceCategoryDistribution() {
   const theme = useUserStore((s) => s.theme);
@@ -88,7 +93,16 @@ export default function WSourceCategoryDistribution() {
     return <div className="p-4 text-red-500">Nem sikerült betölteni az adatokat.</div>;
   }
 
-  const items = data.items.filter(i => i.source.toLowerCase() !== "portfolio");
+  const items = Array.isArray(data.items)
+    ? data.items.filter((i) => {
+        const source = typeof i?.source === "string" ? i.source.trim().toLowerCase() : "";
+        return source !== "portfolio" && source !== "portfolio.hu";
+      })
+    : [];
+
+  if (items.length === 0) {
+    return <div className="p-4 text-muted">Nincs elérhető forrás-kategória adat.</div>;
+  }
 
   const categories = [
     "Politika",
@@ -144,8 +158,11 @@ export default function WSourceCategoryDistribution() {
         </div>
 
         <div className="flex gap-6 overflow-x-auto pb-4 justify-center pl-4">
-          {items.map((src) => {
-            const values = categories.map((c) => (src as any)[c] ?? 0);
+            {items.map((src, sourceIndex) => {
+              const values = categories.map((c) => {
+                const value = Number((src as any)?.[c]);
+                return Number.isFinite(value) && value >= 0 ? value : 0;
+              });
 
             const chartData = {
               labels: categories,
@@ -175,7 +192,7 @@ export default function WSourceCategoryDistribution() {
 
             return (
               <div
-                key={src.source}
+                key={`${src.source}-${sourceIndex}`}
                 className={`min-w-[150px] p-2 rounded border flex flex-col items-center ${
                   isDark ? "border-[#1e293b] text-white" : "border-[#e5e7eb] text-black"
                 } wsource-card--ghost`}

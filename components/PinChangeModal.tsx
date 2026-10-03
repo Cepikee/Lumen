@@ -45,13 +45,13 @@ export default function PinChangeModal({ show, onClose }: PinChangeModalProps) {
         }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
 
-      if (data.success) {
+      if (res.ok && data?.success === true) {
         alert("PIN kód frissítve!");
         onClose();
       } else {
-        setError(data.message || "Hiba történt.");
+        setError(data?.message || "Hiba történt.");
       }
     } catch {
       setError("Váratlan hiba történt.");

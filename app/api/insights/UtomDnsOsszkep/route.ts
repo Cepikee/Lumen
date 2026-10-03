@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { businessDayBounds, businessMonthBounds, businessWeekBounds, mysqlUtc } from "@/lib/business-time";
 
 // ---- Kategória típusok ----
 const categoryKeys = [
@@ -17,13 +18,22 @@ const categoryKeys = [
 
 type CategoryKey = (typeof categoryKeys)[number];
 
+function canonicalCategory(value: unknown): CategoryKey | null {
+  if (typeof value !== "string") return null;
+  const normalized = value.trim().toLocaleLowerCase("hu-HU");
+  const match = categoryKeys.find((category) =>
+    category.toLocaleLowerCase("hu-HU") === normalized
+  );
+  return match ?? null;
+}
+
 export async function GET(req: Request) {
   try {
     const sec = await securityCheck(req);
     if (sec) return sec;
 
     const { searchParams } = new URL(req.url);
-    const domain = searchParams.get("domain");
+    let domain = searchParams.get("domain")?.trim().toLowerCase();
 
     if (!domain) {
       return NextResponse.json(
@@ -32,13 +42,17 @@ export async function GET(req: Request) {
       );
     }
 
+    // The source distribution endpoint exposes the historical Portfolio
+    // alias as `portfolio.hu`; use the same alias when loading its details.
+    if (domain === "portfolio.hu") domain = "portfolio";
+
     // ---- 1) Kategóriaeloszlás ----
     const [catRows]: any = await db.query(
       `
-      SELECT category, COUNT(*) AS count
+      SELECT LOWER(TRIM(category)) AS category, COUNT(*) AS count
       FROM summaries
-      WHERE source = ?
-      GROUP BY category
+      WHERE LOWER(TRIM(source)) = ?
+      GROUP BY LOWER(TRIM(category))
       `,
       [domain]
     );
@@ -55,8 +69,9 @@ export async function GET(req: Request) {
     };
 
     for (const r of catRows) {
-      if (categoryKeys.includes(r.category)) {
-        categories[r.category as CategoryKey] = Number(r.count);
+      const category = canonicalCategory(r.category);
+      if (category) {
+        categories[category] += Number(r.count) || 0;
       }
     }
 
@@ -66,34 +81,37 @@ export async function GET(req: Request) {
     );
 
     // ---- 2) Napi / heti / havi cikkek ----
+    const dayBounds = businessDayBounds(new Date());
+    const weekBounds = businessWeekBounds(new Date());
+    const monthBounds = businessMonthBounds(new Date());
     const [[daily]]: any = await db.query(
       `
       SELECT COUNT(*) AS c
       FROM summaries
-      WHERE source = ?
-      AND DATE(created_at) = CURDATE()
+      WHERE LOWER(TRIM(source)) = ?
+      AND created_at >= ? AND created_at < ?
       `,
-      [domain]
+      [domain, mysqlUtc(dayBounds.start), mysqlUtc(dayBounds.end)]
     );
 
     const [[weekly]]: any = await db.query(
       `
       SELECT COUNT(*) AS c
       FROM summaries
-      WHERE source = ?
-      AND YEARWEEK(created_at) = YEARWEEK(NOW())
+      WHERE LOWER(TRIM(source)) = ?
+      AND created_at >= ? AND created_at < ?
       `,
-      [domain]
+      [domain, mysqlUtc(weekBounds.start), mysqlUtc(weekBounds.end)]
     );
 
     const [[monthly]]: any = await db.query(
       `
       SELECT COUNT(*) AS c
       FROM summaries
-      WHERE source = ?
-      AND MONTH(created_at) = MONTH(NOW())
+      WHERE LOWER(TRIM(source)) = ?
+      AND created_at >= ? AND created_at < ?
       `,
-      [domain]
+      [domain, mysqlUtc(monthBounds.start), mysqlUtc(monthBounds.end)]
     );
 
     // ---- 3) Átlagos cikkhossz (szószám) ----
@@ -101,7 +119,7 @@ export async function GET(req: Request) {
       `
       SELECT content_text
       FROM articles
-      WHERE source = ?
+      WHERE LOWER(TRIM(source)) = ?
       AND content_text IS NOT NULL
       `,
       [domain]
@@ -135,9 +153,10 @@ export async function GET(req: Request) {
 
     // ---- 6) Átlagtól való eltérés (globális átlag) ----
     const [globalRows]: any = await db.query(`
-      SELECT category, COUNT(*) AS count
+      SELECT LOWER(TRIM(category)) AS category, COUNT(*) AS count
       FROM summaries
-      GROUP BY category
+      WHERE category IS NOT NULL AND TRIM(category) <> ''
+      GROUP BY LOWER(TRIM(category))
     `);
 
     const globalTotal = globalRows.reduce(
@@ -147,7 +166,10 @@ export async function GET(req: Request) {
 
     const globalAvg: Record<string, number> = {};
     for (const r of globalRows) {
-      globalAvg[r.category] = Number(r.count) / globalTotal;
+      const category = canonicalCategory(r.category);
+      if (category && globalTotal > 0) {
+        globalAvg[category] = (globalAvg[category] ?? 0) + Number(r.count || 0) / globalTotal;
+      }
     }
 
     const avgVsGlobalAvg = categoryKeys.map((cat) => {
@@ -160,9 +182,10 @@ export async function GET(req: Request) {
     });
 
     // ---- 7) Leggyakoribb téma ----
-    const topTopic = Object.entries(categories).sort(
-      (a, b) => b[1] - a[1]
-    )[0][0];
+    const topEntry = Object.entries(categories).sort(
+      (a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "hu")
+    )[0];
+    const topTopic = topEntry && topEntry[1] > 0 ? topEntry[0] : null;
 
     return NextResponse.json({
       success: true,

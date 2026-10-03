@@ -6,7 +6,16 @@ import { hashOneTimeToken } from "@/lib/one-time-token";
 
 export async function POST(req: Request) {
   try {
-    const { token, newPin } = await req.json();
+    let body: unknown;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ success: false, error: "Érvénytelen JSON kérés." }, { status: 400 });
+    }
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json({ success: false, error: "Érvénytelen kérés törzs." }, { status: 400 });
+    }
+    const { token, newPin } = body as { token?: unknown; newPin?: unknown };
 
     if (typeof token !== "string" || !/^[a-f0-9]{64}$/.test(token) || !newPin) {
       return NextResponse.json(
@@ -52,10 +61,14 @@ export async function POST(req: Request) {
     }
 
     // 🔥 4) PIN frissítése
-      await connection.query(
+      const [updateResult]: any = await connection.query(
       "UPDATE users SET pin_code = ? WHERE id = ?",
       [await hashPin(newPin), userId]
     );
+      if (updateResult?.affectedRows !== 1) {
+        await connection.rollback();
+        return NextResponse.json({ success: false, error: "A felhasználó nem található." }, { status: 404 });
+      }
 
     // 🔥 5) Token törlése
       await connection.query("DELETE FROM pin_reset_tokens WHERE id = ?", [rows[0].id]);
@@ -70,7 +83,7 @@ export async function POST(req: Request) {
       connection.release();
     }
 
-  } catch {
+  } catch (error: any) {
     console.error("pin_reset_failed");
     return NextResponse.json(
       { success: false, error: "Váratlan hiba történt." },

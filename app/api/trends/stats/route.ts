@@ -4,7 +4,10 @@ import mysql from "mysql2/promise";
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const keyword = searchParams.get("keyword");
+    const keyword = searchParams.get("keyword")?.trim();
+    if (!keyword || !keyword.trim()) {
+      return NextResponse.json({ error: "keyword paraméter hiányzik" }, { status: 400 });
+    }
 
     const connection = await mysql.createConnection({
       host: process.env.DB_HOST || "127.0.0.1",
@@ -12,7 +15,8 @@ export async function GET(req: Request) {
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME || "utom_dev",
     });
-const [minRows] = await connection.execute<any[]>(
+    try {
+    const [minRows] = await connection.execute<any[]>(
   `SELECT MIN(cnt) AS minValue
    FROM (
      SELECT DATE(created_at) AS d, COUNT(*) AS cnt
@@ -71,7 +75,7 @@ const [lengthRows] = await connection.execute<any[]>(
 
     // Napi átlag
     const [avgRows] = await connection.execute<any[]>(
-      `SELECT COUNT(*)/DATEDIFF(MAX(created_at), MIN(created_at)+1) AS dailyAvg 
+      `SELECT COUNT(*) / GREATEST(1, DATEDIFF(DATE(MAX(created_at)), DATE(MIN(created_at))) + 1) AS dailyAvg
        FROM trends WHERE keyword = ?`,
       [keyword]
     );
@@ -85,7 +89,7 @@ const [lengthRows] = await connection.execute<any[]>(
       `SELECT DATE(created_at) AS peakDate, COUNT(*) AS peakValue
        FROM trends WHERE keyword = ?
        GROUP BY DATE(created_at)
-       ORDER BY peakValue DESC
+       ORDER BY peakValue DESC, peakDate DESC
        LIMIT 1`,
       [keyword]
     );
@@ -96,8 +100,6 @@ const [lengthRows] = await connection.execute<any[]>(
        FROM trends WHERE keyword = ?`,
       [keyword]
     );
-
-    await connection.end();
 
     return NextResponse.json({
       status: "ok",
@@ -114,8 +116,14 @@ const [lengthRows] = await connection.execute<any[]>(
     spikeLength: Number(lengthRows[0]?.spikeLength ?? 0),
       },
     });
+    } finally {
+      await connection.end();
+    }
   } catch (err: any) {
     console.error("API /trends/stats hiba:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    // Do not expose SQL/driver details as an API contract. Keep the
+    // diagnostic in server logs and return the same stable error shape as
+    // the other trends endpoints.
+    return NextResponse.json({ error: "trends_stats_failed" }, { status: 500 });
   }
 }

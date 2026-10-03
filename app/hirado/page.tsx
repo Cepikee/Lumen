@@ -2,6 +2,7 @@ import { getSessionUserId } from "@/lib/auth-session";
 import crypto from "crypto";
 import HiradoClient from "@/components/HiradoClient";
 import { db } from "@/lib/db-node";
+import { parts } from "@/lib/business-time";
 
 export const dynamic = "force-dynamic";
 
@@ -34,11 +35,33 @@ if (!secret || secret.length < 32) {
   return `/api/secure/video/${videoId}?${params.toString()}`;
 }
 
-export default async function HiradoPage() {
-  // 🔥 Legfrissebb videó lekérése
-  const [rows]: any = await db.query(
-    "SELECT id, file_url FROM videos ORDER BY date DESC LIMIT 1"
-  );
+export default async function HiradoPage({
+  searchParams,
+}: {
+  searchParams?:
+    | { video?: string | string[] }
+    | Promise<{ video?: string | string[] }>;
+}) {
+  const resolvedSearchParams = searchParams && typeof searchParams === "object" && "then" in searchParams
+    ? await searchParams
+    : searchParams;
+  const rawVideo = Array.isArray(resolvedSearchParams?.video)
+    ? resolvedSearchParams.video[0]
+    : resolvedSearchParams?.video;
+  const requestedId = rawVideo && /^\d+$/.test(rawVideo) ? Number(rawVideo) : null;
+  const [rows]: any = requestedId && Number.isSafeInteger(requestedId) && requestedId > 0
+    ? await db.query(
+        "SELECT id, file_url FROM videos WHERE id = ? LIMIT 1",
+        [requestedId]
+      )
+    : (() => {
+        const todayParts = parts(new Date());
+        const today = `${todayParts.year}-${String(todayParts.month).padStart(2, "0")}-${String(todayParts.day).padStart(2, "0")}`;
+        return db.query(
+          "SELECT id, file_url FROM videos WHERE date = ? ORDER BY id DESC LIMIT 1",
+          [today]
+        );
+      })();
 
   const video = rows[0];
   const videoId = video?.id ?? 0;

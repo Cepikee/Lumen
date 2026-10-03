@@ -16,10 +16,16 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: "Érvénytelen kérés.",
-      });
+      }, { status: 400 });
     }
 
-    const { email, password, pin, rememberMe } = body;
+    const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
+    const password = typeof body?.password === "string" ? body.password : "";
+    const pin = typeof body?.pin === "string" ? body.pin.trim() : "";
+    const rememberMe = body?.rememberMe === true;
+    if (!email || !password || !pin) {
+      return NextResponse.json({ success: false, message: "Érvénytelen bejelentkezési adatok." }, { status: 400 });
+    }
 
     const [attempts]: any = await db.query(
       `SELECT COUNT(*) AS cnt 
@@ -39,7 +45,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: "Túl sok próbálkozás. Próbáld újra később.",
-      });
+      }, { status: 429 });
     }
 
     const connection = await db.getConnection();
@@ -54,7 +60,7 @@ export async function POST(req: Request) {
       if (rows.length === 0) {
         await connection.query("INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 0)", [ip, email]);
         await connection.commit();
-        return NextResponse.json({ success: false, message: "Nincs ilyen felhasználó" });
+        return NextResponse.json({ success: false, message: "Nincs ilyen felhasználó" }, { status: 401 });
       }
 
       user = rows[0];
@@ -63,7 +69,7 @@ export async function POST(req: Request) {
       if (!validPass || !pinResult.valid) {
         await connection.query("INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 0)", [ip, email]);
         await connection.commit();
-        return NextResponse.json({ success: false, message: "Hibás bejelentkezési adatok" });
+        return NextResponse.json({ success: false, message: "Hibás bejelentkezési adatok" }, { status: 401 });
       }
 
       if (pinResult.needsUpgrade) {
@@ -99,6 +105,6 @@ const response = NextResponse.json({
     return NextResponse.json({
       success: false,
       message: "Váratlan hiba történt.",
-    });
+    }, { status: 500 });
   }
 }

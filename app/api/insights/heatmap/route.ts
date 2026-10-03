@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security"; // ⭐ központi védelem
+import { businessDayBounds, hourInZone, mysqlUtc } from "@/lib/business-time";
 
 // --- Kategória tisztító (ugyanaz, mint a timeseries-ben) ---
 function fixCat(s: any): string | null {
@@ -29,7 +30,7 @@ export async function GET(req: Request) {
     const [cats]: any = await db.query(`
       SELECT DISTINCT TRIM(category) AS category
       FROM summaries
-      WHERE category IS NOT NULL AND category <> ''
+      WHERE category IS NOT NULL AND TRIM(category) <> ''
     `);
 
     const categories = Array.from(
@@ -58,26 +59,23 @@ export async function GET(req: Request) {
     }
 
     // --- 4) Mai nap intervalluma ---
-    const now = new Date();
-const endStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")} 23:59:59`;
-
-    const startUtc = new Date(now.getTime());
-    startUtc.setHours(0, 0, 0, 0);
-    const startStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")} 00:00:00`;
+    const bounds = businessDayBounds(new Date());
+    const startStr = mysqlUtc(bounds.start);
+    const endStr = mysqlUtc(bounds.end);
 
     // --- 5) Bucket-alapú SQL ---
     const [rows]: any = await db.query(
       `
       SELECT 
-        TRIM(category) AS category,
+        MIN(TRIM(category)) AS category,
         DATE_FORMAT(created_at, "%Y-%m-%d %H:00:00") AS bucket,
         COUNT(*) AS count
       FROM summaries
       WHERE created_at >= ?
-        AND created_at <= ?
+        AND created_at < ?
         AND category IS NOT NULL
-        AND category <> ''
-      GROUP BY TRIM(category), bucket
+        AND TRIM(category) <> ''
+      GROUP BY LOWER(TRIM(category)), bucket
       ORDER BY bucket ASC
       `,
       [startStr, endStr]
@@ -87,12 +85,16 @@ const endStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}
     for (const r of rows) {
       const cat = fixCat(r.category);
       if (!cat) continue;
+      const target = categories.find((value) => value.toLowerCase() === cat.toLowerCase());
+      if (!target) continue;
 
-      const hour = new Date(r.bucket).getHours();
+      const hour = hourInZone(new Date(`${String(r.bucket).replace(" ", "T")}Z`));
       const count = Number(r.count) || 0;
 
-      if (matrix[cat] && hour >= 0 && hour <= 23) {
-        matrix[cat][hour] = count;
+      if (matrix[target] && hour >= 0 && hour <= 23) {
+        // A DST őszi visszaállításakor ugyanaz a helyi óra két UTC bucketből
+        // állhat; ilyenkor a két bucketet össze kell adni, nem felülírni.
+        matrix[target][hour] += count;
       }
     }
 

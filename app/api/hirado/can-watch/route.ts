@@ -31,7 +31,7 @@ export async function GET(req: Request) {
   try {
     const ip = getIp(req);
     const { searchParams } = new URL(req.url);
-    const videoId = searchParams.get("videoId") || 0;
+    const rawVideoId = searchParams.get("videoId");
 
     // 🔐 RATE LIMITING (5 mp alatt max 20 kérés)
     const userId = (await getSessionUserId()) || 0;
@@ -47,7 +47,7 @@ export async function GET(req: Request) {
     rateBuckets.set(key, bucket);
 
     if (bucket.length > limit) {
-      await logAccess(userId, videoId, ip, "denied");
+      await logAccess(userId, rawVideoId || 0, ip, "denied");
       return NextResponse.json(
         { canWatch: false, reason: "RATE_LIMIT" },
         { status: 429 }
@@ -55,13 +55,15 @@ export async function GET(req: Request) {
     }
 
     // 🔐 VIDEO ID ellenőrzés
-    if (!videoId || videoId === "undefined") {
+    if (!rawVideoId || !/^\d+$/.test(rawVideoId) || !Number.isSafeInteger(Number(rawVideoId)) || Number(rawVideoId) <= 0) {
       await logAccess(userId, 0, ip, "denied");
       return NextResponse.json(
-        { canWatch: false, error: "NO_VIDEO_ID" },
+        { canWatch: false, error: rawVideoId ? "INVALID_VIDEO_ID" : "NO_VIDEO_ID" },
         { status: 400 }
       );
     }
+
+    const videoId = Number(rawVideoId);
 
     // 🔐 SESSION ellenőrzés
     if (!userId) {
@@ -144,10 +146,22 @@ export async function GET(req: Request) {
     }
 
     // 🔐 első nézés → engedélyezés
-    await db.query(
+    const [insertResult] = await db.query(
       "INSERT IGNORE INTO video_views (user_id, video_id) VALUES (?, ?)",
       [userId, videoId]
     );
+
+    // Két párhuzamos első kérés ugyanarra a videóra mindkettője
+    // láthatta üresnek a SELECT eredményét. Az INSERT IGNORE csak az
+    // egyiknek hoz létre jogosultsági rekordot, ezért a tényleges írás
+    // eredménye dönti el, hogy ez valóban az első megtekintés-e.
+    if (Number((insertResult as { affectedRows?: unknown })?.affectedRows) !== 1) {
+      await logAccess(userId, videoId, ip, "denied");
+      return NextResponse.json({
+        canWatch: false,
+        reason: "PREMIUM_REQUIRED",
+      });
+    }
 
     await logAccess(userId, videoId, ip, "allowed");
 

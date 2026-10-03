@@ -18,13 +18,41 @@ export async function POST(req: Request) {
     }
 
 
-    const { currentPassword, newPassword, logoutEverywhere } = await req.json();
+    let body: unknown;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json(
+        { success: false, message: "Érvénytelen kérés." },
+        { status: 400 }
+      );
+    }
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json(
+        { success: false, message: "Érvénytelen kérés." },
+        { status: 400 }
+      );
+    }
+    const { currentPassword, newPassword, logoutEverywhere } = body as {
+      currentPassword?: unknown;
+      newPassword?: unknown;
+      logoutEverywhere?: unknown;
+    };
 
     // 1) Validáció
-    if (!currentPassword || !newPassword) {
+    if (typeof currentPassword !== "string" || typeof newPassword !== "string" || !currentPassword || !newPassword) {
       return NextResponse.json(
         { success: false, message: "Minden mező kötelező." },
         { status: 400 }
+      );
+    }
+
+    // Do not coerce arbitrary truthy JSON values (for example the string
+    // "false") into the destructive logout-everywhere option.
+    if (logoutEverywhere !== undefined && typeof logoutEverywhere !== "boolean") {
+      return NextResponse.json(
+        { success: false, message: "Érvénytelen kijelentkezési beállítás." },
+        { status: 400 },
       );
     }
 

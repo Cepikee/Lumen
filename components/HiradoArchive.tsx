@@ -6,15 +6,28 @@ export default function HiradoArchive() {
   const [videos, setVideos] = useState<any[]>([]);
 
   useEffect(() => {
+    const controller = new AbortController();
     async function load() {
-      const res = await fetch("/api/hirado/archive", {
-        cache: "no-store",
-        credentials: "include",
-      });
-      const json = await res.json();
-      setVideos(json.videos || []);
+      try {
+        const res = await fetch("/api/hirado/archive", {
+          cache: "no-store",
+          credentials: "include",
+          signal: controller.signal,
+        });
+        if (!res.ok) throw new Error(`archive_${res.status}`);
+        const json = await res.json();
+        const videos = Array.isArray(json?.videos) ? json.videos : [];
+        setVideos(videos.filter((video: any) => {
+          const id = Number(video?.id);
+          return Number.isSafeInteger(id) && id > 0 &&
+            typeof video?.date === "string" && !Number.isNaN(Date.parse(video.date));
+        }));
+      } catch (error) {
+        if ((error as Error)?.name !== "AbortError") setVideos([]);
+      }
     }
     load();
+    return () => controller.abort();
   }, []);
 
   if (!videos.length) {
@@ -29,6 +42,7 @@ export default function HiradoArchive() {
     <div className="mt-4 space-y-2">
       {videos.map((v) => {
         const formatted = new Date(v.date).toLocaleDateString("hu-HU", {
+          timeZone: "Europe/Budapest",
           year: "numeric",
           month: "2-digit",
           day: "2-digit",

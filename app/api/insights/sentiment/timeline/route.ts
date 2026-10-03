@@ -2,17 +2,16 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { businessDayBounds, hourInZone, mysqlUtc } from "@/lib/business-time";
 
 export async function GET(req: Request) {
   try {
     const sec = await securityCheck(req);
     if (sec) return sec;
 
-    const now = new Date();
-    const day = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")}`;
-
-    const start = `${day} 00:00:00`;
-    const end = `${day} 23:59:59`;
+    const bounds = businessDayBounds(new Date());
+    const start = mysqlUtc(bounds.start);
+    const end = mysqlUtc(bounds.end);
 
     const [rows]: any = await db.query(
       `
@@ -21,7 +20,7 @@ export async function GET(req: Request) {
         sentiment,
         COUNT(*) AS c
       FROM articles
-      WHERE published_at >= ? AND published_at <= ?
+      WHERE published_at >= ? AND published_at < ?
         AND sentiment IS NOT NULL
       GROUP BY bucket, sentiment
       ORDER BY bucket ASC
@@ -38,7 +37,7 @@ export async function GET(req: Request) {
     }));
 
     for (const r of rows) {
-      const hour = new Date(r.bucket).getHours();
+      const hour = hourInZone(new Date(`${String(r.bucket).replace(" ", "T")}Z`));
       if (hour < 0 || hour > 23) continue;
 
       if (r.sentiment === 1) timeline[hour].positive = r.c;

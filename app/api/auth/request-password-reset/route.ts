@@ -7,9 +7,17 @@ import { requestReset } from "@/lib/reset-service";
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    let body: any;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ success: false, error: "Érvénytelen JSON kérés." }, { status: 400 });
+    }
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json({ success: false, error: "Érvénytelen kérés törzs." }, { status: 400 });
+    }
     const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
-    if (!email) return NextResponse.json({ success: false, error: "Email is required" }, { status: 400 });
+    if (!email || email.length > 254) return NextResponse.json({ success: false, error: "Email is required" }, { status: 400 });
     if (await verifyRecaptcha(body.recaptchaToken) < 0.5) return NextResponse.json({ success: true });
     const ip = getIp(req);
     const [ipAllowed, emailAllowed] = await Promise.all([

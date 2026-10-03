@@ -13,6 +13,7 @@ export default function ProfileMenu() {
   const user = useUserStore((s) => s.user);
   const [open, setOpen] = useState(false);
   const [modal, setModal] = useState<null | "profile" | "settings">(null);
+  const [logoutError, setLogoutError] = useState(false);
 
   // 🔥 user után jöhet minden, ami user-t használ
   const currentFrame = PREMIUM_FRAMES.find((f) => f.id === user?.avatar_frame);
@@ -22,11 +23,7 @@ export default function ProfileMenu() {
     setModal(type);
   }
 
-  const premiumActive =
-    user &&
-    (user.is_premium === true ||
-      (user.premium_until &&
-        new Date(user.premium_until).getTime() > Date.now()));
+  const premiumActive = user?.isPremium === true;
 
   const avatarUrl =
     user?.avatar_style && user?.avatar_seed
@@ -141,8 +138,13 @@ export default function ProfileMenu() {
 
           <button
             onClick={async () => {
-              await fetch("/api/auth/logout", { method: "POST" });
-              window.location.reload();
+              try {
+                const res = await fetch("/api/auth/logout", { method: "POST" });
+                if (!res.ok) throw new Error(`logout_${res.status}`);
+                window.location.reload();
+              } catch {
+                setLogoutError(true);
+              }
             }}
             style={{
               width: "100%",
@@ -156,6 +158,7 @@ export default function ProfileMenu() {
           >
             Kijelentkezés
           </button>
+          {logoutError && <div className="text-danger small px-3 pb-2">A kijelentkezés nem sikerült.</div>}
         </div>
       )}
 

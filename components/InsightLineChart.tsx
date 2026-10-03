@@ -37,8 +37,14 @@ export default function InsightLineChart({
 
     ctx.clearRect(0, 0, width, h);
 
-    // Extract values
-    const values = points.map((p) => p.count);
+    // Runtime API data may contain malformed points even when the TypeScript
+    // contract says count is numeric. Ignore those points instead of drawing
+    // fabricated zeroes that distort the chart.
+    const safePoints = (Array.isArray(points) ? points : [])
+      .map((p) => ({ ...p, count: Number(p?.count) }))
+      .filter((p) => Number.isFinite(p.count) && p.count >= 0);
+    if (safePoints.length === 0) return;
+    const values = safePoints.map((p) => p.count);
     const max = Math.max(...values, 1);
     const min = Math.min(...values, 0);
 
@@ -47,7 +53,7 @@ export default function InsightLineChart({
     const innerW = width - padding * 2;
 
     // Convert point index → X coordinate
-    const stepX = innerW / Math.max(points.length - 1, 1);
+    const stepX = innerW / Math.max(safePoints.length - 1, 1);
 
     const toY = (v: number) => {
       if (max === min) return h / 2;
@@ -62,9 +68,9 @@ export default function InsightLineChart({
 
     ctx.beginPath();
 
-    points.forEach((p, i) => {
+    safePoints.forEach((p, i) => {
       const x = padding + i * stepX;
-      const y = toY(p.count);
+      const y = toY(values[i]);
 
       if (i === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);

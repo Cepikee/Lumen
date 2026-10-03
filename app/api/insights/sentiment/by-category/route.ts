@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { businessDayBounds, mysqlUtc } from "@/lib/business-time";
 
 function fixCat(s: any): string | null {
   if (!s) return null;
@@ -19,24 +20,23 @@ export async function GET(req: Request) {
     if (sec) return sec;
 
     // 🔥 Mai nap meghatározása
-    const now = new Date();
-    const day = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")}`;
-    const start = `${day} 00:00:00`;
-    const end = `${day} 23:59:59`;
+    const bounds = businessDayBounds(new Date());
+    const start = mysqlUtc(bounds.start);
+    const end = mysqlUtc(bounds.end);
 
     // 🔥 Csak a MA publikált cikkek
     const [rows]: any = await db.query(
       `
       SELECT 
-        TRIM(category) AS category,
+        MIN(TRIM(category)) AS category,
         sentiment,
         COUNT(*) AS c
       FROM articles
-      WHERE published_at >= ? AND published_at <= ?
+      WHERE published_at >= ? AND published_at < ?
         AND sentiment IS NOT NULL
         AND category IS NOT NULL
-        AND category <> ''
-      GROUP BY TRIM(category), sentiment
+        AND TRIM(category) <> ''
+      GROUP BY LOWER(TRIM(category)), sentiment
       `,
       [start, end]
     );
@@ -47,13 +47,19 @@ export async function GET(req: Request) {
       const cat = fixCat(r.category);
       if (!cat) continue;
 
-      if (!result[cat]) {
-        result[cat] = { positive: 0, neutral: 0, negative: 0 };
+      const key = cat.toLocaleLowerCase("hu-HU");
+      const existing = Object.keys(result).find((label) => label.toLocaleLowerCase("hu-HU") === key);
+      const resultKey = existing ?? cat;
+      if (!result[resultKey]) {
+        result[resultKey] = { positive: 0, neutral: 0, negative: 0 };
       }
 
-      if (r.sentiment === 1) result[cat].positive = r.c;
-      else if (r.sentiment === 0) result[cat].neutral = r.c;
-      else if (r.sentiment === -1) result[cat].negative = r.c;
+      const count = Number(r.c);
+      if (!Number.isFinite(count) || count < 0) continue;
+      const sentiment = Number(r.sentiment);
+      if (sentiment === 1) result[resultKey].positive += count;
+      else if (sentiment === 0) result[resultKey].neutral += count;
+      else if (sentiment === -1) result[resultKey].negative += count;
     }
 
     return NextResponse.json({

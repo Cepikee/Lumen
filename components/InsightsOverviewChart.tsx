@@ -63,6 +63,7 @@ function aggregatePoints(points: any[], range: string) {
     if (!p?.date) return;
 
     const d = new Date(p.date);
+    if (Number.isNaN(d.getTime())) return;
 
     if (range === "24h") {
       d.setMinutes(0, 0, 0);
@@ -73,10 +74,11 @@ function aggregatePoints(points: any[], range: string) {
     /** ❗ FIX: nem toISOString(), hanem helyi idő */
     const key = toLocalBucketKey(d);
 
-    const v =
+    const rawValue =
       typeof p?.count === "number"
         ? p.count
         : Number(p?.count) || 0;
+    const v = Number.isFinite(rawValue) && rawValue >= 0 ? rawValue : 0;
 
     bucket[key] = (bucket[key] || 0) + v;
   });
@@ -113,7 +115,7 @@ export default function InsightsOverviewChart({
     const ds: any[] = [];
 
     // HISTORY
-    (data || []).forEach((cat: any) => {
+    (Array.isArray(data) ? data : []).forEach((cat: any) => {
 
       const label = cat?.category ?? "Ismeretlen";
       const color = getCategoryColor(label);
@@ -160,7 +162,9 @@ export default function InsightsOverviewChart({
               ? p.predicted
               : Number(p?.predicted) || 0;
 
-          return date ? { x: date, y: pred } : null;
+          if (!date || Number.isNaN(date.getTime())) return null;
+          const safePred = Number.isFinite(pred) && pred >= 0 ? pred : 0;
+          return { x: date, y: safePred };
 
         }).filter(Boolean);
 

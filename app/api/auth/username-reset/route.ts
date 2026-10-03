@@ -21,7 +21,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: "Nem vagy bejelentkezve.",
-      });
+      }, { status: 401 });
     }
 
 
@@ -33,7 +33,11 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: "Érvénytelen kérés.",
-      });
+      }, { status: 400 });
+    }
+
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json({ success: false, message: "Érvénytelen kérés." }, { status: 400 });
     }
 
     const { newUsername } = body;
@@ -42,7 +46,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: "Új felhasználónév megadása kötelező.",
-      });
+      }, { status: 400 });
     }
 
     // 🔥 3) Validáció
@@ -52,22 +56,33 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: "A felhasználónév 3–20 karakter között lehet.",
-      });
+      }, { status: 400 });
     }
 
-    if (!/^[a-zA-Z0-9]+$/.test(username)) {
+    // Keep the update flow consistent with the documented username policy and
+    // registration: separators are valid, but whitespace and other symbols
+    // are not. The previous expression rejected every username containing
+    // `_`, `.`, or `-` while advertising those characters as supported.
+    if (!/^[a-zA-Z0-9._-]+$/.test(username)) {
       return NextResponse.json({
         success: false,
         message:
           "A felhasználónév csak betűket, számokat, pontot, kötőjelet és aláhúzást tartalmazhat.",
-      });
+      }, { status: 400 });
     }
 
     if (/^[0-9]+$/.test(username)) {
       return NextResponse.json({
         success: false,
         message: "A felhasználónév nem lehet csak szám.",
-      });
+      }, { status: 400 });
+    }
+
+    if (["admin", "moderator", "support", "utom", "system"].includes(username.toLowerCase())) {
+      return NextResponse.json({
+        success: false,
+        message: "Ez a felhasználónév nem használható.",
+      }, { status: 400 });
     }
 
     // 🔥 4) Jelenlegi user lekérése
@@ -80,7 +95,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: "Felhasználó nem található.",
-      });
+      }, { status: 404 });
     }
 
     const user = rows[0];
@@ -89,7 +104,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: "Ez már a jelenlegi felhasználóneved.",
-      });
+      }, { status: 400 });
     }
 
     // 🔥 5) 30 napos cooldown ellenőrzése
@@ -106,7 +121,7 @@ export async function POST(req: Request) {
           message: `Felhasználónevet 30 naponta egyszer változtathatsz. Hátralévő napok: ${
             30 - cooldown[0].days
           }.`,
-        });
+        }, { status: 400 });
       }
     }
 
@@ -120,7 +135,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: false,
         message: "Ez a felhasználónév már foglalt.",
-      });
+      }, { status: 409 });
     }
 
     // 🔥 7) Frissítés az adatbázisban
@@ -162,9 +177,15 @@ export async function POST(req: Request) {
       newUsername: username,
     });
   } catch (err: any) {
+    if (err?.code === "ER_DUP_ENTRY") {
+      return NextResponse.json(
+        { success: false, message: "Ez a felhasználónév már foglalt." },
+        { status: 409 }
+      );
+    }
     return NextResponse.json({
       success: false,
       message: err.message || "Váratlan hiba történt.",
-    });
+    }, { status: 500 });
   }
 }

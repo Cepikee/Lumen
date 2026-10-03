@@ -4,14 +4,44 @@ import { db } from "@/lib/db";
 import { getPremiumEntitlement } from "@/lib/entitlements";
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ success: false, message: "Érvénytelen kérés." }, { status: 400 });
+  }
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return NextResponse.json({ success: false, message: "Érvénytelen kérés." }, { status: 400 });
+  }
   const { style, seed, format } = body as {
-    style: string;
-    seed: string;
-    format: "svg" | "gif";
+    style?: unknown;
+    seed?: unknown;
+    format?: unknown;
   };
 
-  const userId = await getSessionUserId();
+  const allowedStyles = new Set([
+    "adventurer", "adventurer-neutral", "avataaars", "big-ears",
+    "big-ears-neutral", "big-smile", "bottts", "bottts-neutral",
+    "croodles", "croodles-neutral", "open-peeps", "pixel-art", "personas",
+  ]);
+  if (
+    typeof style !== "string" || !allowedStyles.has(style) ||
+    typeof seed !== "string" || seed.length < 1 || seed.length > 128 ||
+    (format !== "svg" && format !== "gif")
+  ) {
+    return NextResponse.json({ success: false, message: "Érvénytelen avatar adat." }, { status: 400 });
+  }
+
+  let userId: number | null;
+  try {
+    userId = await getSessionUserId();
+  } catch (error) {
+    console.error("Avatar session lookup error:", error);
+    return NextResponse.json(
+      { success: false, message: "Váratlan hiba történt." },
+      { status: 500 }
+    );
+  }
 
   if (!userId) {
     return NextResponse.json(
@@ -20,7 +50,16 @@ export async function POST(req: Request) {
     );
   }
 
-  const entitlement = await getPremiumEntitlement(userId);
+  let entitlement;
+  try {
+    entitlement = await getPremiumEntitlement(userId);
+  } catch (error) {
+    console.error("Avatar entitlement lookup error:", error);
+    return NextResponse.json(
+      { success: false, message: "Váratlan hiba történt." },
+      { status: 500 }
+    );
+  }
   if (entitlement.reason === "user_not_found") {
     return NextResponse.json(
       { success: false, message: "Felhasználó nem található." },
@@ -35,12 +74,20 @@ export async function POST(req: Request) {
     );
   }
 
-  await db.query(
-    `UPDATE users 
-     SET avatar_style = ?, avatar_seed = ?, avatar_format = ?
-     WHERE id = ?`,
-    [style, seed, format, userId]
-  );
+  try {
+    await db.query(
+      `UPDATE users
+       SET avatar_style = ?, avatar_seed = ?, avatar_format = ?
+       WHERE id = ?`,
+      [style, seed, format, userId]
+    );
+  } catch (error) {
+    console.error("Avatar update error:", error);
+    return NextResponse.json(
+      { success: false, message: "Váratlan hiba történt." },
+      { status: 500 }
+    );
+  }
 
   return NextResponse.json({ success: true });
 }

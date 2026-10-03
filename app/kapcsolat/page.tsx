@@ -118,9 +118,9 @@ export default function KapcsolatPage() {
         }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
 
-      if (data.success) {
+      if (res.ok && data?.success === true) {
         alert("Üzenet sikeresen elküldve!");
         setName("");
         setEmailFrom("");
@@ -132,7 +132,7 @@ export default function KapcsolatPage() {
         setCooldownUntil(Date.now() + 30_000);
         setTurnstileToken("");
       } else {
-        alert("Hiba történt: " + data.error);
+        alert("Hiba történt: " + (data?.error || `A küldés nem sikerült (${res.status}).`));
       }
     } catch {
       alert("Váratlan hiba történt.");

@@ -16,10 +16,25 @@ export async function POST(req: Request) {
     }
 
 
-    const { currentPin, newPin } = await req.json();
+    let body: unknown;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json(
+        { success: false, message: "Érvénytelen kérés." },
+        { status: 400 }
+      );
+    }
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json(
+        { success: false, message: "Érvénytelen kérés." },
+        { status: 400 }
+      );
+    }
+    const { currentPin, newPin } = body as { currentPin?: unknown; newPin?: unknown };
 
     // 1) Validáció
-    if (!currentPin || !newPin) {
+    if (typeof currentPin !== "string" || typeof newPin !== "string" || !currentPin || !newPin) {
       return NextResponse.json(
         { success: false, message: "Minden mező kötelező." },
         { status: 400 }

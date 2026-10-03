@@ -13,24 +13,35 @@ export default function ResetPasswordInner() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!token) {
+      setStatus("error");
+      setError("Hiányzó vagy érvénytelen token.");
+      return;
+    }
     setStatus("loading");
 
-    const res = await fetch("/api/auth/reset-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token, password }),
-    });
+    try {
+      const res = await fetch("/api/auth/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, password }),
+      });
+      const text = await res.text();
+      let data: { success?: boolean; error?: string } = {};
+      try { data = text ? JSON.parse(text) : {}; } catch { data = {}; }
 
-    const data = await res.json();
-
-    if (data.success) {
+      if (!res.ok || data.success !== true) {
+        setStatus("error");
+        setError(data.error || `A jelszó frissítése nem sikerült (${res.status}).`);
+        return;
+      }
       setStatus("success");
       setTimeout(() => {
         window.location.href = "/?resetSuccess=1";
       }, 2000);
-    } else {
+    } catch {
       setStatus("error");
-      setError(data.error || "Ismeretlen hiba.");
+      setError("A jelszó frissítése nem sikerült. Ellenőrizd a kapcsolatot.");
     }
   }
 
@@ -58,7 +69,7 @@ export default function ResetPasswordInner() {
 
           <button
             type="submit"
-            disabled={status === "loading"}
+            disabled={status === "loading" || !token}
             style={{ width: "100%", padding: 10 }}
           >
             {status === "loading" ? "Mentés..." : "Jelszó frissítése"}

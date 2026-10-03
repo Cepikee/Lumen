@@ -28,7 +28,27 @@ const fetcher = (url: string) =>
     headers: {
       "x-api-key": "",
     },
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`heatmap_${r.status}`);
+    const json = await r.json();
+    if (!json || !Array.isArray(json.categories) || !Array.isArray(json.hours) || !json.matrix || typeof json.matrix !== "object") throw new Error("invalid_heatmap_response");
+    const categories = json.categories.filter(
+      (category: unknown): category is string => typeof category === "string" && category.trim().length > 0
+    ).map((category: string) => category.trim());
+    const hours = json.hours.filter(
+      (hour: unknown): hour is number => Number.isInteger(Number(hour)) && Number(hour) >= 0 && Number(hour) <= 23
+    ).map((hour: number) => Number(hour));
+    const matrix: Record<string, Record<number, number>> = {};
+    for (const category of categories) {
+      const row = json.matrix[category];
+      matrix[category] = {};
+      for (const hour of hours) {
+        const value = Number(row?.[hour]);
+        matrix[category][hour] = Number.isFinite(value) && value >= 0 ? value : 0;
+      }
+    }
+    return { ...json, categories, hours, matrix };
+  });
 
 
 export default function WhatHappenedTodayHeatmap() {
@@ -85,7 +105,8 @@ export default function WhatHappenedTodayHeatmap() {
     const datasets = orderedCategories.map((cat) => {
       const row = hours.map((h) => {
         const v = matrix?.[cat]?.[h];
-        return typeof v === "number" ? v : Number(v) || 0;
+        const value = Number(v);
+        return Number.isFinite(value) && value >= 0 ? value : 0;
       });
       return {
         label: cat,

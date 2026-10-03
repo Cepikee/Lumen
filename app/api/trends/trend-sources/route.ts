@@ -8,12 +8,16 @@ export async function GET(req: Request) {
   const keyword = searchParams.get("keyword");
   const period = searchParams.get("period") || "7d";
 
-  if (!keyword) {
+  if (!keyword || !keyword.trim()) {
     return NextResponse.json({ error: "Keyword is required" }, { status: 400 });
   }
+  if (period !== "all" && !/^\d+d$/.test(period)) {
+    return NextResponse.json({ error: "Invalid period" }, { status: 400 });
+  }
 
+  let connection: mysql.Connection | null = null;
   try {
-    const connection = await mysql.createConnection({
+    connection = await mysql.createConnection({
       host: process.env.DB_HOST || "127.0.0.1",
       user: process.env.DB_USER || "utom_app",
       password: process.env.DB_PASSWORD,
@@ -25,8 +29,11 @@ export async function GET(req: Request) {
     if (period === "all") {
       days = null;
     } else if (period.endsWith("d")) {
-      const parsed = parseInt(period.slice(0, -1), 10);
-      days = Number.isNaN(parsed) ? 7 : parsed;
+      const parsed = Number(period.slice(0, -1));
+      if (!Number.isSafeInteger(parsed) || parsed < 1 || parsed > 3650) {
+        return NextResponse.json({ error: "Invalid period" }, { status: 400 });
+      }
+      days = parsed;
     } else {
       days = 7;
     }
@@ -41,7 +48,7 @@ export async function GET(req: Request) {
     }
 
     const [rows] = await connection.execute(
-      `SELECT 
+      `SELECT DISTINCT
          a.title,
          a.url_canonical AS url,
          s.name AS source,
@@ -51,19 +58,33 @@ export async function GET(req: Request) {
        FROM keywords k
        JOIN articles a ON a.id = k.article_id
        LEFT JOIN sources s ON a.source_id = s.id
-       LEFT JOIN summaries SUMM ON a.id = SUMM.article_id
+       LEFT JOIN summaries SUMM
+         ON a.id = SUMM.article_id
+        AND NOT EXISTS (
+          SELECT 1
+          FROM summaries newer_summ
+          WHERE newer_summ.article_id = SUMM.article_id
+            AND (
+              newer_summ.created_at > SUMM.created_at
+              OR (newer_summ.created_at = SUMM.created_at AND newer_summ.id > SUMM.id)
+            )
+        )
        WHERE k.keyword = ?
        ${dateFilter}
-       ORDER BY a.published_at DESC
+       ORDER BY a.published_at DESC, a.id DESC
        LIMIT 20`,
       params
     );
-
-    await connection.end();
 
     return NextResponse.json(rows);
   } catch (error) {
     console.error("SQL error:", error);
     return NextResponse.json({ error: "Failed to fetch sources" }, { status: 500 });
+  } finally {
+    if (connection) {
+      try { await connection.end(); } catch (closeError) {
+        console.error("SQL connection close error:", closeError);
+      }
+    }
   }
 }

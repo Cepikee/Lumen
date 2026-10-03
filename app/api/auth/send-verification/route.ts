@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     const user = rows[0];
 
     if (!user) {
-      return NextResponse.json({ success: false, message: "User nem található" });
+      return NextResponse.json({ success: false, message: "User nem található" }, { status: 404 });
     }
 
     await sendEmailVerification(userId, String(user.email));
@@ -27,6 +27,6 @@ export async function POST(req: Request) {
     return NextResponse.json({
       success: false,
       message: "Hiba történt a token generálásakor.",
-    });
+    }, { status: 500 });
   }
 }

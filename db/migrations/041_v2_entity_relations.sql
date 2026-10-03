@@ -1,0 +1,26 @@
+-- UTOM V2 M1.4 additive schema foundation: v2_entity_relations
+CREATE TABLE v2_entity_relations (
+  id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  subject_entity_id BIGINT UNSIGNED NOT NULL,
+  predicate VARCHAR(64) NOT NULL,
+  object_entity_id BIGINT UNSIGNED NULL,
+  object_value JSON NULL,
+  status VARCHAR(24) NOT NULL DEFAULT 'active',
+  confidence DECIMAL(5,4) NULL,
+  valid_from DATETIME(6) NULL,
+  valid_until DATETIME(6) NULL,
+  first_observed_at DATETIME(6) NULL,
+  last_observed_at DATETIME(6) NULL,
+  superseded_by BIGINT UNSIGNED NULL,
+  idempotency_key CHAR(64) NOT NULL,
+  created_at DATETIME(6) NOT NULL,
+  updated_at DATETIME(6) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_v2_entity_relations_idempotency_key (idempotency_key),
+  KEY idx_v2_entity_relations_subject_entity_id_predicate (subject_entity_id, predicate),
+  KEY idx_v2_entity_relations_object_entity_id_predicate (object_entity_id, predicate),
+  KEY idx_v2_entity_relations_status_valid_from_valid_until (status, valid_from, valid_until),
+  CONSTRAINT fk_v2_entity_relations_subject_entity_id_1 FOREIGN KEY (subject_entity_id) REFERENCES v2_entities (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT fk_v2_entity_relations_object_entity_id_2 FOREIGN KEY (object_entity_id) REFERENCES v2_entities (id) ON DELETE SET NULL ON UPDATE RESTRICT,
+  CONSTRAINT fk_v2_entity_relations_superseded_by_3 FOREIGN KEY (superseded_by) REFERENCES v2_entity_relations (id) ON DELETE SET NULL ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

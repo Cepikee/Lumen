@@ -20,7 +20,12 @@ const fetcher = (url: string) =>
     headers: {
       "x-api-key": "",
     },
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`duplication_${r.status}`);
+    const json = await r.json();
+    if (!json || !Array.isArray(json.duplication)) throw new Error("invalid_duplication_response");
+    return json;
+  });
 
 export default function WSourceDuplication() {
   const theme = useUserStore((s) => s.theme);
@@ -45,8 +50,13 @@ export default function WSourceDuplication() {
   });
 
   const items = useMemo(() => {
-    if (!data?.duplication) return [];
-    return [...data.duplication].sort(
+    if (!Array.isArray(data?.duplication)) return [];
+    return data.duplication.map((item) => ({
+      ...item,
+      original: Number.isFinite(Number(item.original)) ? Number(item.original) : 0,
+      duplicate: Number.isFinite(Number(item.duplicate)) ? Number(item.duplicate) : 0,
+      duplicationScore: Number.isFinite(Number(item.duplicationScore)) ? Number(item.duplicationScore) : 0,
+    })).sort(
       (a, b) => b.duplicationScore - a.duplicationScore
     );
   }, [data]);
@@ -59,6 +69,10 @@ export default function WSourceDuplication() {
         Hiba az adatok betöltésekor
       </div>
     );
+
+  if (items.length === 0) {
+    return <div className="p-12 text-center text-muted">Nincs elérhető másolási adat.</div>;
+  }
 
   const series = [
     {

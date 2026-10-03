@@ -10,6 +10,22 @@ import TrendSourcesModal from "./TrendSourcesModal";
 
 type HistoryRow = { day: string; freq: number };
 
+function normalizeHistoryRows(value: unknown): HistoryRow[] {
+  const rows = Array.isArray(value) ? value : [];
+  return rows.flatMap((row) => {
+    if (!row || typeof row !== "object") return [];
+    const raw = row as { day?: unknown; hour?: unknown; freq?: unknown };
+    const freq = Number(raw.freq);
+    if (!Number.isFinite(freq) || freq < 0) return [];
+    const day = typeof raw.day === "string" && !Number.isNaN(new Date(raw.day).getTime())
+      ? raw.day
+      : "";
+    const hour = Number(raw.hour);
+    if (!day && (!Number.isInteger(hour) || hour < 0 || hour > 23)) return [];
+    return [{ day, freq }];
+  });
+}
+
 interface Article { id: number; url: string; content: string; source: string; }
 
 interface Trend {
@@ -105,23 +121,22 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
           : [];
 
         const mapped: Trend[] = sourceArray.map((r: any) => ({
-          keyword: (r.keyword ?? r.topic ?? r.name ?? "").toString(),
-          frequency:
-            typeof r.freq === "number"
-              ? r.freq
-              : typeof r.totalCount === "number"
-              ? r.totalCount
-              : typeof r.frequency === "number"
-              ? r.frequency
-              : 0,
+          keyword: (r.keyword ?? r.topic ?? r.name ?? "").toString().trim(),
+          frequency: (() => {
+            const rawFrequency = r.freq ?? r.totalCount ?? r.frequency;
+            const numericFrequency = Number(rawFrequency);
+            return Number.isFinite(numericFrequency) && numericFrequency >= 0
+              ? numericFrequency
+              : 0;
+          })(),
           category: r.category ?? undefined,
           growth: typeof r.growth === "number" ? r.growth : null,
           first_seen: r.first_seen ?? undefined,
           last_seen: r.last_seen ?? undefined,
           articles: Array.isArray(r.articles) ? r.articles : undefined,
           status: r.status ?? undefined,
-          history: Array.isArray(r.history) ? r.history : undefined,
-        }));
+          history: normalizeHistoryRows(r.history),
+        })).filter((trend) => trend.keyword.trim().length > 0);
 
         setTrends(mapped);
       })
@@ -157,8 +172,8 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
           !(filters.categories && filters.categories.length)
             ? true
             : t.category
-            ? filters.categories.map((c) => c.toLowerCase()).includes(t.category.toLowerCase())
-            : true;
+            ? filters.categories.filter((c): c is string => typeof c === "string").map((c) => c.trim().toLowerCase()).includes(t.category.trim().toLowerCase())
+            : false;
 
         return matchKeyword && matchCategory;
       })
@@ -194,7 +209,7 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
         })
         .then((hist) => {
           if (!mounted) return;
-          const arr = Array.isArray(hist.history) ? hist.history : Array.isArray(hist) ? hist : [];
+          const arr = normalizeHistoryRows(Array.isArray(hist.history) ? hist.history : hist);
           if (arr.length) {
             historyCache.current[t.keyword] = arr;
             setHistoryMap((prev) => ({ ...prev, [t.keyword]: arr }));
@@ -220,11 +235,10 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
 
   function filterByCustomPeriod(history: HistoryRow[]) {
     if (!filters.startDate || !filters.endDate) return history;
-    const from = new Date(filters.startDate + "T00:00:00");
-    const to = new Date(filters.endDate + "T23:59:59");
     return history.filter((h) => {
-      const d = new Date(h.day + "T00:00:00");
-      return d >= from && d <= to;
+      const day = typeof h.day === "string" ? h.day.slice(0, 10) : "";
+      return /^\d{4}-\d{2}-\d{2}$/.test(day) &&
+        day >= filters.startDate! && day <= filters.endDate!;
     });
   }
 
@@ -250,16 +264,27 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
 
   const [sources, setSources] = useState<Source[]>([]);
   const [activeSourcesKeyword, setActiveSourcesKeyword] = useState<string | null>(null);
+  const sourcesRequestRef = useRef(0);
 
   function handleShowSources(keyword: string, period: string = filters.period) {
+    const requestId = ++sourcesRequestRef.current;
     setActiveSourcesKeyword(keyword);
+    // Do not keep the previous keyword's articles visible while this request
+    // is in flight. Otherwise a slow response can make the modal look as if
+    // the new keyword has already loaded the old result set.
+    setSources([]);
 
     fetch(`/api/trends/trend-sources?keyword=${encodeURIComponent(keyword)}&period=${encodeURIComponent(period)}`)
-      .then(res => res.json())
-      .then((data: Source[]) => {
-        setSources(data); // közvetlenül tömbként tároljuk
+      .then(res => {
+        if (!res.ok) throw new Error(`trend_sources_${res.status}`);
+        return res.json();
+      })
+      .then((data: unknown) => {
+        if (requestId !== sourcesRequestRef.current) return;
+        setSources(Array.isArray(data) ? data as Source[] : []);
       })
       .catch(err => {
+        if (requestId !== sourcesRequestRef.current) return;
         console.error("Források betöltése sikertelen:", err);
         setSources([]);
       });
@@ -276,8 +301,8 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
       !(filters.categories && filters.categories.length)
         ? true
         : t.category
-        ? filters.categories.map((c) => c.toLowerCase()).includes(t.category.toLowerCase())
-        : true;
+        ? filters.categories.filter((c): c is string => typeof c === "string").map((c) => c.trim().toLowerCase()).includes(t.category.trim().toLowerCase())
+        : false;
 
     return matchKeyword && matchCategory;
   });

@@ -42,7 +42,12 @@ const fetcher = (url: string): Promise<any> =>
     headers: {
       "x-api-key": "",
     } as HeadersInit,
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`dns_category_http_${r.status}`);
+    const data = await r.json();
+    if (!data || typeof data !== "object") throw new Error("dns_category_invalid_response");
+    return data;
+  });
 
 interface UtomDnsKategoriaProps {
   domain: string;
@@ -51,7 +56,7 @@ interface UtomDnsKategoriaProps {
 export default function UtomDnsKategoria({ domain }: UtomDnsKategoriaProps) {
   const { data, error } = useSWR(
     domain
-      ? `/api/premium-insights/source-category-distribution?domain=${domain}`
+      ? `/api/premium-insights/source-category-distribution?${new URLSearchParams({ domain }).toString()}`
       : null,
     fetcher,
     { revalidateOnFocus: false, revalidateOnReconnect: true }
@@ -83,11 +88,14 @@ export default function UtomDnsKategoria({ domain }: UtomDnsKategoriaProps) {
 
   if (!domain) return <div>Válassz egy domaint fent.</div>;
   if (loading) return <div>Betöltés…</div>;
-  if (error || !data?.success || !data.items.length)
+  if (error || !data?.success || !Array.isArray(data.items) || data.items.length === 0)
     return <div>Nincs adat ehhez a domainhez.</div>;
 
   const item = data.items[0];
-  const values = categories.map((c) => Number(item[c] ?? 0));
+  const values = categories.map((c) => {
+    const value = Number(item[c] ?? 0);
+    return Number.isFinite(value) && value >= 0 ? value : 0;
+  });
 
   const chartData = {
     labels: categories,

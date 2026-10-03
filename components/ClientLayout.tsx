@@ -125,10 +125,8 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       try {
         const res = await fetch("/api/sources", {
   cache: "no-store",
-  headers: {
-    "x-api-key": "",
-  },
 });
+        if (!res.ok) throw new Error(`sources_http_${res.status}`);
 const data = await res.json();
 
 if (mounted && data?.success && Array.isArray(data.sources)) {

@@ -23,7 +23,7 @@ export default function Header() {
   const [isTyping, setIsTyping] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  if (pathname.startsWith("/landing")) return null;
+  const isLanding = pathname.startsWith("/landing");
 
   const isLegalPage =
     pathname.startsWith("/aszf") ||
@@ -46,8 +46,16 @@ export default function Header() {
           credentials: "include",
           cache: "no-store",
         });
+        if (!res.ok) {
+          if (mounted) setApiUser(null);
+          return;
+        }
         const text = await res.text();
         const parsed = text ? JSON.parse(text) : null;
+        if (!parsed || typeof parsed !== "object" || parsed.loggedIn !== true || !parsed.user) {
+          if (mounted) setApiUser(null);
+          return;
+        }
         if (mounted) setApiUser(parsed);
       } catch {
         if (mounted) setApiUser(null);
@@ -63,21 +71,13 @@ export default function Header() {
   const isPremium = (() => {
     const u = user;
     if (!u) return false;
-    if (typeof u.is_premium === "boolean") return u.is_premium === true;
-    if (typeof (u as any).isPremium === "boolean") return (u as any).isPremium === true;
-    if (typeof u.is_premium === "number") return Number(u.is_premium) === 1;
-    if (u.premium_tier) return true;
-    return false;
+    return u.isPremium === true;
   })();
 
   const apiSaysPremium = (() => {
     const a = apiUser?.user ?? apiUser;
     if (!a) return false;
-    if (a.is_premium === true) return true;
-    if (a.is_premium === 1) return true;
-    if (a.isPremium === true) return true;
-    if (a.premium_tier) return true;
-    return false;
+    return a.isPremium === true;
   })();
 
   const reallyPremium = isPremium || apiSaysPremium;
@@ -191,6 +191,8 @@ export default function Header() {
   ];
 
   const activeMenu = !user ? menuLoggedOut : reallyPremium ? menuPremium : menuFree;
+
+  if (isLanding) return null;
 
   return (
     <nav

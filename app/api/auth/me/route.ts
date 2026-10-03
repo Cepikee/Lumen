@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { evaluatePremium } from "@/lib/entitlements";
 
-export async function GET(req: Request) {
+export async function GET(_req: Request) {
   try {
     const userId = await getSessionUserId();
 
@@ -52,6 +52,6 @@ export async function GET(req: Request) {
       },
     });
   } catch {
-    return NextResponse.json({ loggedIn: false });
+    return NextResponse.json({ loggedIn: false, error: "auth_state_unavailable" }, { status: 500 });
   }
 }

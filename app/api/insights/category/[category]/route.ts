@@ -33,18 +33,27 @@ export async function GET(req: Request, context: any) {
 
   const period = String(url.searchParams.get("period") || "7d");
   const sort = String(url.searchParams.get("sort") || "latest");
-  const page = Math.max(1, Number(url.searchParams.get("page") || 1));
-  const limit = Math.min(100, Math.max(1, Number(url.searchParams.get("limit") || 20)));
+  if (!["7d", "30d", "90d"].includes(period)) {
+    return NextResponse.json({ success: false, error: "invalid_period" }, { status: 400 });
+  }
+  if (!["latest", "popular"].includes(sort)) {
+    return NextResponse.json({ success: false, error: "invalid_sort" }, { status: 400 });
+  }
+  const requestedPage = Number(url.searchParams.get("page") || 1);
+  const requestedLimit = Number(url.searchParams.get("limit") || 20);
+  const page = Number.isSafeInteger(requestedPage) && requestedPage > 0 && requestedPage <= 100_000 ? requestedPage : 1;
+  const limit = Number.isSafeInteger(requestedLimit) && requestedLimit > 0
+    ? Math.min(100, requestedLimit)
+    : 20;
   const offset = (page - 1) * limit;
 
   let days = 7;
   if (period === "30d") days = 30;
   else if (period === "90d") days = 90;
 
-  const now = new Date();
-  const startDate = new Date(now);
-  startDate.setDate(now.getDate() - (days - 1));
+  const startDate = new Date(Date.now() - (days - 1) * 24 * 60 * 60 * 1000);
   const startDateStr = startDate.toISOString().slice(0, 10);
+  const endDateStr = new Date().toISOString().slice(0, 10);
 
   try {
     // ---------------------------------------
@@ -60,12 +69,15 @@ export async function GET(req: Request, context: any) {
       itemsParams.push(categoryParam);
     }
 
-    itemsParams.push(startDateStr);
-    const periodClause = ` AND DATE(a.published_at) >= ?`;
+    itemsParams.push(startDateStr, endDateStr);
+    const periodClause = ` AND DATE(a.published_at) >= ? AND DATE(a.published_at) < ?`;
 
-    let orderBy = "ORDER BY a.published_at DESC";
+    // Keep pagination stable when multiple articles share the same timestamp
+    // (or score). Without a unique tie-breaker rows can move between pages
+    // across otherwise identical requests.
+    let orderBy = "ORDER BY a.published_at DESC, a.id DESC";
     if (sort === "popular") {
-      orderBy = "ORDER BY a.score DESC, a.published_at DESC";
+      orderBy = "ORDER BY a.score DESC, a.published_at DESC, a.id DESC";
     }
 
     const itemsSql = `
@@ -77,10 +89,19 @@ export async function GET(req: Request, context: any) {
         a.published_at,
         a.source AS dominantSource,
         1 AS sources,
-        0 AS score,
+        COALESCE(a.score, 0) AS score,
         CASE WHEN a.content_text IS NOT NULL THEN SUBSTRING(a.content_text, 1, 300) ELSE NULL END AS excerpt
       FROM articles a
-      LEFT JOIN summaries s ON s.article_id = a.id
+      JOIN summaries s ON s.article_id = a.id
+        AND NOT EXISTS (
+          SELECT 1
+          FROM summaries newer_s
+          WHERE newer_s.article_id = s.article_id
+            AND (
+              newer_s.created_at > s.created_at
+              OR (newer_s.created_at = s.created_at AND newer_s.id > s.id)
+            )
+        )
       ${whereClause}
       ${periodClause}
       ${orderBy}
@@ -95,7 +116,11 @@ export async function GET(req: Request, context: any) {
       id: String(r.summary_id),
       title: r.title,
       category: r.category ?? null,
-      published_at: r.published_at ? new Date(r.published_at).toISOString() : null,
+      published_at: (() => {
+        if (!r.published_at) return null;
+        const date = new Date(r.published_at);
+        return Number.isNaN(date.getTime()) ? null : date.toISOString();
+      })(),
       dominantSource: r.dominantSource || "",
       sources: Number(r.sources || 1),
       score: Number(r.score || 0),
@@ -110,22 +135,32 @@ export async function GET(req: Request, context: any) {
     let aggWhere = "";
 
     if (categoryParam === null && raw !== undefined) {
-      aggWhere = ` WHERE category IS NULL`;
+      aggWhere = ` WHERE a.category IS NULL`;
     } else if (categoryParam) {
-      aggWhere = ` WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))`;
+      aggWhere = ` WHERE LOWER(TRIM(a.category)) = LOWER(TRIM(?))`;
       aggParams.push(categoryParam);
     }
 
-    aggParams.push(startDateStr);
+    aggParams.push(startDateStr, endDateStr);
 
     const aggSql = `
       SELECT
-        COUNT(*) AS articleCount,
-        COUNT(DISTINCT source) AS sourceCount,
-        MAX(published_at) AS lastUpdated
-      FROM articles
+        COUNT(DISTINCT a.id) AS articleCount,
+        COUNT(DISTINCT NULLIF(LOWER(TRIM(a.source)), '')) AS sourceCount,
+        MAX(a.published_at) AS lastUpdated
+      FROM articles a
+      JOIN summaries s ON s.article_id = a.id
+        AND NOT EXISTS (
+          SELECT 1
+          FROM summaries newer_s
+          WHERE newer_s.article_id = s.article_id
+            AND (
+              newer_s.created_at > s.created_at
+              OR (newer_s.created_at = s.created_at AND newer_s.id > s.id)
+            )
+        )
       ${aggWhere}
-      AND DATE(published_at) >= ?
+      AND DATE(a.published_at) >= ? AND DATE(a.published_at) < ?
     `;
 
     const [aggRows]: any = await db.query(aggSql, aggParams);
@@ -138,21 +173,31 @@ export async function GET(req: Request, context: any) {
     let srcWhere = "";
 
     if (categoryParam === null && raw !== undefined) {
-      srcWhere = ` WHERE category IS NULL`;
+      srcWhere = ` WHERE a.category IS NULL`;
     } else if (categoryParam) {
-      srcWhere = ` WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))`;
+      srcWhere = ` WHERE LOWER(TRIM(a.category)) = LOWER(TRIM(?))`;
       srcParams.push(categoryParam);
     }
 
-    srcParams.push(startDateStr);
+    srcParams.push(startDateStr, endDateStr);
 
     const srcSql = `
-      SELECT source, COUNT(*) AS cnt
-      FROM articles
+      SELECT COALESCE(NULLIF(LOWER(TRIM(a.source)), ''), 'ismeretlen') AS source, COUNT(DISTINCT a.id) AS cnt
+      FROM articles a
+      JOIN summaries s ON s.article_id = a.id
+        AND NOT EXISTS (
+          SELECT 1
+          FROM summaries newer_s
+          WHERE newer_s.article_id = s.article_id
+            AND (
+              newer_s.created_at > s.created_at
+              OR (newer_s.created_at = s.created_at AND newer_s.id > s.id)
+            )
+        )
       ${srcWhere}
-      AND DATE(published_at) >= ?
-      GROUP BY source
-      ORDER BY cnt DESC
+      AND DATE(a.published_at) >= ? AND DATE(a.published_at) < ?
+      GROUP BY COALESCE(NULLIF(LOWER(TRIM(a.source)), ''), 'ismeretlen')
+      ORDER BY cnt DESC, source ASC
       LIMIT 50
     `;
 
@@ -186,21 +231,31 @@ export async function GET(req: Request, context: any) {
     let trendWhere = "";
 
     if (categoryParam === null && raw !== undefined) {
-      trendWhere = ` WHERE category IS NULL`;
+      trendWhere = ` WHERE a.category IS NULL`;
     } else if (categoryParam) {
-      trendWhere = ` WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))`;
+      trendWhere = ` WHERE LOWER(TRIM(a.category)) = LOWER(TRIM(?))`;
       trendParams.push(categoryParam);
     }
 
-    trendParams.push(startDateStr);
+    trendParams.push(startDateStr, endDateStr);
 
     const trendSql = `
-      SELECT DATE(published_at) AS day, COUNT(*) AS cnt
-      FROM articles
+      SELECT DATE(a.published_at) AS day, COUNT(DISTINCT a.id) AS cnt
+      FROM articles a
+      JOIN summaries s ON s.article_id = a.id
+        AND NOT EXISTS (
+          SELECT 1
+          FROM summaries newer_s
+          WHERE newer_s.article_id = s.article_id
+            AND (
+              newer_s.created_at > s.created_at
+              OR (newer_s.created_at = s.created_at AND newer_s.id > s.id)
+            )
+        )
       ${trendWhere}
-      AND DATE(published_at) >= ?
-      GROUP BY DATE(published_at)
-      ORDER BY DATE(published_at) ASC
+      AND DATE(a.published_at) >= ? AND DATE(a.published_at) < ?
+      GROUP BY DATE(a.published_at)
+      ORDER BY DATE(a.published_at) ASC
     `;
 
     const [trendRows]: any = await db.query(trendSql, trendParams);
@@ -231,7 +286,11 @@ export async function GET(req: Request, context: any) {
       category: categoryParam ?? null,
       articleCount: Number(agg.articleCount || 0),
       sourceCount: Number(agg.sourceCount || 0),
-      lastUpdated: agg.lastUpdated ? new Date(agg.lastUpdated).toISOString() : null,
+      lastUpdated: (() => {
+        if (!agg.lastUpdated) return null;
+        const date = new Date(agg.lastUpdated);
+        return Number.isNaN(date.getTime()) ? null : date.toISOString();
+      })(),
     };
 
     const summary = {

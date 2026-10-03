@@ -34,15 +34,23 @@ export default function SparklineDetailed({ history, period, startDate, endDate 
     setLocalEnd(endDate || "");
   }, [period, startDate, endDate]);
 
+  const safeHistory = (Array.isArray(history) ? history : []).filter((point) => {
+    if (!point || typeof point !== "object") return false;
+    const freq = Number(point.freq);
+    if (!Number.isFinite(freq) || freq < 0) return false;
+    if (point.day && Number.isNaN(new Date(`${point.day}T00:00:00`).getTime())) return false;
+    return point.hour === undefined || (Number.isInteger(Number(point.hour)) && Number(point.hour) >= 0 && Number(point.hour) <= 23);
+  });
+
   const lastDate =
-    history.length > 0 && history[history.length - 1].day
-      ? new Date(history[history.length - 1].day + "T23:59:59")
+    safeHistory.length > 0 && safeHistory[safeHistory.length - 1].day
+      ? new Date(safeHistory[safeHistory.length - 1].day + "T23:59:59")
       : new Date();
 
   const filtered =
     localPeriod === "24h"
-      ? history
-      : filterByPeriod(history, localPeriod, lastDate);
+      ? safeHistory
+      : filterByPeriod(safeHistory, localPeriod, lastDate, localStart, localEnd);
 
   const safeFiltered =
     filtered.length === 1
@@ -67,7 +75,10 @@ export default function SparklineDetailed({ history, period, startDate, endDate 
             : "?"
         );
 
-  const dataPoints = safeFiltered.map(h => h.freq);
+  const dataPoints = safeFiltered.map((h) => {
+    const value = Number(h?.freq);
+    return Number.isFinite(value) && value >= 0 ? value : 0;
+  });
 
   const pointColors = dataPoints.map((val, i) => {
     if (i === 0) return "#999";
@@ -212,8 +223,19 @@ export default function SparklineDetailed({ history, period, startDate, endDate 
   );
 }
 
-function filterByPeriod(history: HistoryPoint[], period: string, lastDate: Date) {
+function filterByPeriod(history: HistoryPoint[], period: string, lastDate: Date, startDate?: string, endDate?: string) {
   if (period === "24h") return history;
+
+  if (period === "custom") {
+    const start = startDate ? new Date(`${startDate}T00:00:00`) : null;
+    const end = endDate ? new Date(`${endDate}T23:59:59.999`) : null;
+    if (!start || !end || Number.isNaN(start.getTime()) || Number.isNaN(end.getTime()) || start > end) return [];
+    return history.filter((point) => {
+      if (!point.day) return false;
+      const date = new Date(`${point.day}T12:00:00`);
+      return !Number.isNaN(date.getTime()) && date >= start && date <= end;
+    });
+  }
 
   let days = 0;
   if (period === "3d") days = 3;

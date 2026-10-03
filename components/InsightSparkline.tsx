@@ -28,12 +28,16 @@ export default function InsightSparkline({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const values =
+    const rawValues =
       Array.isArray(trend) && trend.length > 0
         ? trend
         : Array.isArray(data)
         ? data
         : [];
+    const values = rawValues.map((value) => {
+      const numeric = Number(value);
+      return Number.isFinite(numeric) ? numeric : 0;
+    });
 
     const isHourly = values.length === 24; // ÚJ: 24h mód felismerése
 

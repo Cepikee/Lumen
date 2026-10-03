@@ -6,10 +6,19 @@ import { hashOneTimeToken } from "@/lib/one-time-token";
 
 export async function POST(req: Request) {
   try {
-    const { token } = await req.json();
+    let body: unknown;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ success: false, message: "Érvénytelen JSON kérés." }, { status: 400 });
+    }
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json({ success: false, message: "Érvénytelen kérés törzs." }, { status: 400 });
+    }
+    const { token } = body as { token?: unknown };
 
     if (typeof token !== "string" || !/^[a-f0-9]{64}$/.test(token)) {
-      return NextResponse.json({ success: false, message: "Hiányzó token" });
+      return NextResponse.json({ success: false, message: "Hiányzó token" }, { status: 400 });
     }
 
     const [result] = await db.query(
@@ -34,6 +43,6 @@ export async function POST(req: Request) {
     return NextResponse.json({
       success: false,
       message: "Hiba történt az email megerősítésekor.",
-    });
+    }, { status: 500 });
   }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Plyr } from "plyr-react";
 import "plyr-react/plyr.css";
 
@@ -22,23 +22,51 @@ export default function HiradoPlayer({
 }: HiradoPlayerProps) {
   const [blocked, setBlocked] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
+  const entitlementChecked = useRef(false);
+  const entitlementRequest = useRef<Promise<void> | null>(null);
+  const entitlementAbort = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    entitlementAbort.current?.abort();
+    entitlementAbort.current = null;
+    entitlementRequest.current = null;
+    entitlementChecked.current = false;
+    entitlementRequest.current = null;
+    setBlocked(false);
+    setShowPremiumModal(false);
+    return () => entitlementAbort.current?.abort();
+  }, [video.id]);
 
   const videoSrc = String(videoUrl);
 
   const handleTimeUpdate = async () => {
-    if (blocked) return;
+    if (blocked || entitlementChecked.current || entitlementRequest.current) return;
     if (isPremium) return;
 
-    const res = await fetch(`/api/hirado/can-watch?videoId=${video.id}`, {
-      credentials: "include",
-    });
-
-    const data = await res.json();
-
-    if (!data.canWatch) {
-      setBlocked(true);
-      setShowPremiumModal(true);
-    }
+    const request = (async () => {
+      const controller = new AbortController();
+      entitlementAbort.current = controller;
+      try {
+        const res = await fetch(`/api/hirado/can-watch?videoId=${video.id}`, {
+          credentials: "include",
+          signal: controller.signal,
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!data || typeof data.canWatch !== "boolean") return;
+        entitlementChecked.current = data.canWatch;
+        if (!data.canWatch) {
+          setBlocked(true);
+          setShowPremiumModal(true);
+        }
+      } catch {
+        // A transient entitlement error must not be treated as a premium denial.
+      } finally {
+        if (entitlementAbort.current === controller) entitlementAbort.current = null;
+        entitlementRequest.current = null;
+      }
+    })();
+    entitlementRequest.current = request;
   };
 
   return (

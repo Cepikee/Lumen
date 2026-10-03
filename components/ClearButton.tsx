@@ -6,8 +6,12 @@ export default function ClearButton() {
       const res = await fetch("/api/clear-summaries", {
         method: "POST"
       });
-      const data = await res.json();
-      alert(data.message); // visszajelzés a felhasználónak
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data || typeof data !== "object") {
+        alert("A törlési művelet jelenleg nem érhető el.");
+        return;
+      }
+      alert(typeof data.message === "string" ? data.message : "A művelet nem hajtható végre."); // visszajelzés a felhasználónak
     } catch (err) {
       alert("Hiba történt a törlés közben!");
       console.error(err);

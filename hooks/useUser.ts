@@ -17,6 +17,20 @@ export function useUser() {
           credentials: "include",
         });
 
+        // A lejárt/hiányzó session valóban kijelentkezett állapot,
+        // egy 5xx vagy hálózati hiba viszont nem bizonyítja ezt.
+        if (!res.ok) {
+          if (res.status === 401) {
+            setUser(null);
+            setTheme("system");
+          }
+          // A failed auth probe must not leave consumers in an endless
+          // loading state. A transient 5xx still preserves the current user,
+          // but the request itself is finished.
+          setLoading(false);
+          return;
+        }
+
         // 🔥 1) Olvassuk be raw textként
         const text = await res.text();
 
@@ -42,7 +56,7 @@ export function useUser() {
         }
 
         // 🔥 4) Ha minden oké → állítsuk be
-        if (data.loggedIn) {
+        if (data.loggedIn === true && data.user && typeof data.user === "object") {
           const u = data.user as User;
           setUser(u);
 

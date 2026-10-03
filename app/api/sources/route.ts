@@ -1,44 +1,21 @@
 // app/api/sources/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { securityCheck } from "@/lib/security";
 
 export const dynamic = "force-dynamic";
 
-// Normalizáló SQL függvény (domain → mag)
-const NORMALIZE = `
-  LOWER(
-    REPLACE(
-      REPLACE(
-        REPLACE(su.source, 'www.', ''),
-      '.hu', ''),
-    '/', '')
-  )
-`;
-
-const NORMALIZE_SRC = `
-  LOWER(
-    REPLACE(
-      REPLACE(
-        REPLACE(s.name, 'www.', ''),
-      '.hu', ''),
-    '/', '')
-  )
-`;
-
 export async function GET(req: Request) {
   try {
-    // Biztonsági ellenőrzés
-    const sec = await securityCheck(req);
-    if (sec) return sec;
-
-    // Csak létező, valós források lekérése
+    // A forráslista nyilvános UI-adat; a canonical article→source FK-t
+    // használjuk, hogy hiányzó/legacy summary.source mellett se vesszen el
+    // aktív, ténylegesen használt forrás.
     const [rows]: any = await db.query(
       `
       SELECT DISTINCT s.id, s.name
       FROM sources s
-      JOIN summaries su
-        ON ${NORMALIZE} = ${NORMALIZE_SRC}
+      JOIN articles a ON a.source_id = s.id
+      JOIN summaries su ON su.article_id = a.id
+      WHERE s.is_active = 1
       ORDER BY s.name ASC
       `
     );

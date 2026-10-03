@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { businessDayBounds, hourInZone, mysqlUtc } from "@/lib/business-time";
 
 function fixSource(s: any): string | null {
   if (!s) return null;
@@ -18,29 +19,21 @@ export async function GET(req: Request) {
     const sec = await securityCheck(req);
     if (sec) return sec;
 
-    // HELYI IDŐ – mai nap 00:00:00 → 23:59:59
-    const now = new Date();
-    const startStr =
-      `${now.getFullYear()}-` +
-      `${String(now.getMonth() + 1).padStart(2, "0")}-` +
-      `${String(now.getDate()).padStart(2, "0")} 00:00:00`;
-
-    const endStr =
-      `${now.getFullYear()}-` +
-      `${String(now.getMonth() + 1).padStart(2, "0")}-` +
-      `${String(now.getDate()).padStart(2, "0")} 23:59:59`;
+    const bounds = businessDayBounds(new Date());
+    const startStr = mysqlUtc(bounds.start);
+    const endStr = mysqlUtc(bounds.end);
 
     const [totals]: any = await db.query(
       `
       SELECT 
-        TRIM(source) AS source,
+        LOWER(TRIM(source)) AS source,
         COUNT(*) AS total
       FROM summaries
       WHERE created_at >= ?
-        AND created_at <= ?
+        AND created_at < ?
         AND source IS NOT NULL
-        AND source <> ''
-      GROUP BY TRIM(source)
+        AND TRIM(source) <> ''
+      GROUP BY LOWER(TRIM(source))
       ORDER BY total DESC
       `,
       [startStr, endStr]
@@ -61,16 +54,16 @@ export async function GET(req: Request) {
     const [rows]: any = await db.query(
       `
       SELECT 
-        TRIM(source) AS source,
+        LOWER(TRIM(source)) AS source,
         DATE_FORMAT(created_at, "%Y-%m-%d %H:00:00") AS bucket,
         COUNT(*) AS count
       FROM summaries
       WHERE created_at >= ?
-        AND created_at <= ?
+        AND created_at < ?
         AND source IS NOT NULL
-        AND source <> ''
-      GROUP BY TRIM(source), bucket
-      ORDER BY TRIM(source), bucket
+        AND TRIM(source) <> ''
+      GROUP BY LOWER(TRIM(source)), bucket
+      ORDER BY LOWER(TRIM(source)), bucket
       `,
       [startStr, endStr]
     );
@@ -81,10 +74,11 @@ export async function GET(req: Request) {
     for (const r of rows) {
       const src = fixSource(r.source);
       if (!src) continue;
-      const hour = new Date(r.bucket).getHours();
+      const hour = hourInZone(new Date(`${String(r.bucket).replace(" ", "T")}Z`));
       const count = Number(r.count) || 0;
       if (hourMap[src] && hour >= 0 && hour <= 23) {
-        hourMap[src][hour] = count;
+        // DST visszaállításkor ugyanaz a helyi óra két UTC bucketből jön.
+        hourMap[src][hour] += count;
       }
     }
 

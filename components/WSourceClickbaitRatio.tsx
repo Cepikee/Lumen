@@ -20,7 +20,12 @@ const fetcher = (url: string) =>
     headers: {
       "x-api-key": "",
     },
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`clickbait_ratio_${r.status}`);
+    const json = await r.json();
+    if (!json || !Array.isArray(json.sources)) throw new Error("invalid_clickbait_ratio_response");
+    return json;
+  });
 
 export default function WSourceClickbaitRatio() {
   const theme = useUserStore((s) => s.theme);
@@ -41,12 +46,16 @@ export default function WSourceClickbaitRatio() {
   if (isLoading) return <div>Betöltés…</div>;
   if (error || !data?.success) return <div>Hiba történt.</div>;
 
-  const sources = (data.sources || [])
+  const sources = (Array.isArray(data.sources) ? data.sources : [])
     .map((s: any) => ({
-      name: s.source,
-      ratio: Number(s.ratio) * 100,
+      name: typeof s?.source === "string" && s.source.trim() ? s.source : "Ismeretlen forrás",
+      ratio: Number.isFinite(Number(s?.ratio)) ? Number(s.ratio) * 100 : 0,
     }))
     .sort((a: any, b: any) => b.ratio - a.ratio);
+
+  if (sources.length === 0) {
+    return <div className="p-12 text-center text-muted">Nincs elérhető clickbait arány adat.</div>;
+  }
 
   const getBarColor = (ratio: number) => {
     if (ratio >= 60) return "#ef4444";

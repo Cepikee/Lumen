@@ -26,7 +26,11 @@ const InsightCard: React.FC<InsightCardProps> = ({
   ringSources = [],
   sparkline = [],
 }) => {
-  const linkHref = href || "#";
+  const linkHref = typeof href === "string" && href.trim() && href !== "/null" && href !== "/undefined"
+    ? href
+    : "#";
+  const safeTitle = typeof title === "string" && title.trim() ? title : "Névtelen insight";
+  const safeSources = Number.isFinite(Number(sources)) && Number(sources) >= 0 ? Number(sources) : 0;
 
   // ⭐ UGYANAZ A THEME LOGIKA, mint az InsightsOverviewChart-ban
   const theme = useUserStore((s) => s.theme);
@@ -54,7 +58,7 @@ const InsightCard: React.FC<InsightCardProps> = ({
       }}
     >
       <h3 className="h6 mb-3" style={{ color: textColor }}>
-        {title}
+        {safeTitle}
       </h3>
 
       <div className="d-flex justify-content-center mb-3">
@@ -69,7 +73,7 @@ const InsightCard: React.FC<InsightCardProps> = ({
             color: "#fff",
           }}
         >
-          {sources} cikk
+          {safeSources} cikk
         </span>
         <small style={{ color: mutedColor }}>{dominantSource}</small>
       </div>

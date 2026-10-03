@@ -26,7 +26,12 @@ const fetcher = (url: string) =>
     headers: {
       "x-api-key": "",
     },
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`source_activity_${r.status}`);
+    const json = await r.json();
+    if (!json || !Array.isArray(json.sources)) throw new Error("invalid_source_activity_response");
+    return json;
+  });
 
 export default function WhatHappenedTodaySourceActivity() {
   const theme = useUserStore((s) => s.theme);
@@ -80,9 +85,19 @@ export default function WhatHappenedTodaySourceActivity() {
     return <div className="text-muted">Ma még nincs aktivitás.</div>;
   }
 
-  const sorted = [...data.sources].sort((a, b) => (b.total ?? 0) - (a.total ?? 0));
-  const labels = sorted.map((s) => String(s.source ?? "ismeretlen"));
-  const values = sorted.map((s) => Number(s.total ?? 0));
+  // The API guarantees an array, but a malformed item must not take down the
+  // whole premium page (e.g. a null row after a partial DB response).
+  const sorted = data.sources
+    .filter((s): s is SourceItem => !!s && typeof s === "object")
+    .map((s) => ({
+      source: typeof s.source === "string" && s.source.trim() ? s.source.trim() : "ismeretlen",
+      total: Number.isFinite(Number(s.total)) ? Math.max(0, Number(s.total)) : 0,
+      hours: Array.isArray(s.hours) ? s.hours : [],
+    }))
+    .sort((a, b) => b.total - a.total || a.source.localeCompare(b.source));
+  if (sorted.length === 0) return <div className="text-muted">Ma még nincs aktivitás.</div>;
+  const labels = sorted.map((s) => s.source);
+  const values = sorted.map((s) => s.total);
 
   /* === FONTOS: pontos, egységes sormagasság === */
   const rowHeight = 36; // egyezzen a kulcsszavak modul sormagasságával
@@ -94,8 +109,17 @@ export default function WhatHappenedTodaySourceActivity() {
   ];
   const colors = labels.map((_, i) => baseColors[i % baseColors.length]);
 
+  const escapeTooltipText = (value: string) =>
+    value.replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    })[character] ?? character);
+
   const buildTooltipHtml = (label: string, value: number) =>
-    `<div style="font-weight:700;margin-bottom:4px">${label}</div><div style="font-size:12px;opacity:0.85">${value} db</div>`;
+    `<div style="font-weight:700;margin-bottom:4px">${escapeTooltipText(label)}</div><div style="font-size:12px;opacity:0.85">${value} db</div>`;
 
   const barHeightPx = Math.max(8, Math.floor(rowHeight * 0.7)); // 36 * 0.7 = 25px -> jól illeszkedik
 

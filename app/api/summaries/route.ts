@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import mysql, { RowDataPacket } from "mysql2/promise";
+import { businessDayBounds, mysqlUtc } from "@/lib/business-time";
 
 export const dynamic = "force-dynamic";
 
@@ -34,10 +35,12 @@ const ID_TO_SOURCE_NAME: Record<string, string> = {
 const SOURCE_NAME_TO_ID: Record<string, number> = {
   telex: 1,
   "24hu": 2,
+  "24": 2,
   index: 3,
   hvg: 4,
   portfolio: 5,
   "444": 6,
+  "444hu": 6,
   origo: 7,
 };
 
@@ -103,14 +106,17 @@ function createSearchFilter(q: string): {
     };
   }
 
-  const pattern = `%${q}%`;
+  // A search term is plain text; user supplied LIKE metacharacters must not
+  // silently turn the filter into a wildcard expression.
+  const escaped = q.replace(/[\\%_]/g, "\\$&");
+  const pattern = `%${escaped}%`;
 
   return {
     sql: `
       AND (
-        s.title LIKE ?
-        OR s.content LIKE ?
-        OR s.detailed_content LIKE ?
+        s.title LIKE ? ESCAPE '\\\\'
+        OR s.content LIKE ? ESCAPE '\\\\'
+        OR s.detailed_content LIKE ? ESCAPE '\\\\'
       )
     `,
     params: [
@@ -119,6 +125,32 @@ function createSearchFilter(q: string): {
       pattern,
     ],
   };
+}
+
+function sourceIdFromFilter(rawValue: string): number | undefined {
+  const raw = rawValue.trim();
+
+  if (/^\d+$/.test(raw)) {
+    const id = Number(raw);
+    return Number.isSafeInteger(id) && id > 0 ? id : undefined;
+  }
+
+  const normalized = raw.toLowerCase().replace(/\s+/g, "");
+  const withoutTld = normalized.endsWith(".hu")
+    ? normalized.slice(0, -3)
+    : normalized;
+  const candidates = [
+    normalized,
+    withoutTld,
+    normalized.replace(/\./g, ""),
+  ];
+
+  for (const candidate of candidates) {
+    const id = SOURCE_NAME_TO_ID[candidate];
+    if (id !== undefined) return id;
+  }
+
+  return undefined;
 }
 
 export async function GET(req: Request) {
@@ -230,7 +262,13 @@ export async function GET(req: Request) {
       100000
     );
 
-    const limit = 10;
+    // Keep the documented pagination parameter meaningful for search/feed
+    // callers while bounding it so an arbitrary request cannot create an
+    // oversized result page.
+    const limit = Math.min(
+      parsePositiveInt(searchParams.get("limit"), 10),
+      100
+    );
     const offset =
       (page - 1) * limit;
 
@@ -250,41 +288,26 @@ export async function GET(req: Request) {
     const sourcesRaw =
       searchParams.getAll("source");
 
-    const normalizedSources =
-      sourcesRaw
-        .map((source) => {
-          if (
-            ID_TO_SOURCE_NAME[source]
-          ) {
-            return ID_TO_SOURCE_NAME[
-              source
-            ];
-          }
-
-          return source
-            .toLowerCase()
-            .replace(".hu", "")
-            .replace(/\./g, "");
-        })
-        .filter(Boolean);
-
     const sourceIds = [
       ...new Set(
-        normalizedSources
-          .map(
-            (source) =>
-              SOURCE_NAME_TO_ID[
-                source
-              ]
-          )
-          .filter(
-            (
-              id
-            ): id is number =>
-              id !== undefined
-          )
+        sourcesRaw.map((raw) => {
+            const trimmed = raw.trim();
+            if (/^\d+$/.test(trimmed)) {
+              const id = Number(trimmed);
+              return Number.isSafeInteger(id) && id > 0 ? id : undefined;
+            }
+            return sourceIdFromFilter(
+              ID_TO_SOURCE_NAME[trimmed] ?? trimmed
+            );
+          })
+          .filter((id): id is number => id !== undefined)
       ),
     ];
+
+    // Ismeretlen forrásfilter ne essen vissza véletlenül szűretlen feedre.
+    if (sourcesRaw.length > 0 && sourceIds.length === 0) {
+      return NextResponse.json([]);
+    }
 
     // ---------------------------------------------------------
     // KATEGÓRIÁK
@@ -306,6 +329,9 @@ export async function GET(req: Request) {
     // 2) FORRÁS + KATEGÓRIA
     // ---------------------------------------------------------
 
+    const todayFilter = searchParams.get("today") === "true";
+    const todayBounds = todayFilter ? businessDayBounds(new Date()) : null;
+
     if (
       sourceIds.length > 0 ||
       categories.length > 0
@@ -318,6 +344,10 @@ export async function GET(req: Request) {
       > = [];
 
       if (sourceIds.length > 0) {
+        // An explicit source filter must not expose rows from a disabled
+        // source. Keep source-less/orphaned summaries in the unfiltered feed,
+        // but require the canonical source row to be active for this branch.
+        whereParts.push("src.is_active = 1");
         whereParts.push(
           `a.source_id IN (${sourceIds
             .map(() => "?")
@@ -325,6 +355,11 @@ export async function GET(req: Request) {
         );
 
         params.push(...sourceIds);
+      }
+
+      if (todayBounds) {
+        whereParts.push("s.created_at >= ? AND s.created_at < ?");
+        params.push(mysqlUtc(todayBounds.start), mysqlUtc(todayBounds.end));
       }
 
       if (
@@ -395,26 +430,9 @@ export async function GET(req: Request) {
     // 3) MAI NAP
     // ---------------------------------------------------------
 
-    const todayFilter =
-      searchParams.get("today") ===
-      "true";
-
     if (todayFilter) {
-      const today = new Date();
-
-      today.setHours(
-        0,
-        0,
-        0,
-        0
-      );
-
-      const tomorrow =
-        new Date(today);
-
-      tomorrow.setDate(
-        today.getDate() + 1
-      );
+      const today = mysqlUtc(todayBounds!.start);
+      const tomorrow = mysqlUtc(todayBounds!.end);
 
       const todayQuery = `
         SELECT

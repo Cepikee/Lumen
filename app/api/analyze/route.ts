@@ -209,18 +209,29 @@ export async function POST(
     );
   }
 
-  await db.query(
-    `
-      INSERT INTO summaries
-        (url, language, content)
-      VALUES (?, ?, ?)
-    `,
-    [
-      articleUrl.toString(),
-      "hu",
-      summary,
-    ]
-  );
+  try {
+    await db.query(
+      `
+        INSERT INTO summaries
+          (url, language, content)
+        VALUES (?, ?, ?)
+      `,
+      [
+        articleUrl.toString(),
+        "hu",
+        summary,
+      ]
+    );
+  } catch (error) {
+    console.error(
+      "analyze: összefoglaló mentési hiba:",
+      error instanceof Error ? error.message : String(error)
+    );
+    return NextResponse.json(
+      { error: "summary_persist_failed" },
+      { status: 500 }
+    );
+  }
 
   return NextResponse.json({
     summary,

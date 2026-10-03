@@ -11,7 +11,12 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 const fetcher = (url: string) =>
   fetch(url, {
     headers: { "x-api-key": "" },
-  }).then((r) => r.json());
+  }).then(async (r) => {
+    if (!r.ok) throw new Error(`sentiment_timeline_${r.status}`);
+    const json = await r.json();
+    if (!json || !Array.isArray(json.timeline)) throw new Error("invalid_sentiment_timeline");
+    return json;
+  });
 
 export default function WSentimentTimeline() {
   const theme = useUserStore((s) => s.theme);
@@ -37,9 +42,18 @@ export default function WSentimentTimeline() {
       </div>
     );
 
-  const hours = data.timeline.map((t: any) => `${t.hour}:00`);
-  const positive = data.timeline.map((t: any) => t.positive);
-  const negative = data.timeline.map((t: any) => t.negative);
+  const hours = data.timeline.map((t: any) => {
+    const hour = Number(t?.hour);
+    return `${Number.isInteger(hour) && hour >= 0 && hour <= 23 ? hour : 0}:00`;
+  });
+  const positive = data.timeline.map((t: any) => {
+    const value = Number(t?.positive);
+    return Number.isFinite(value) && value >= 0 ? value : 0;
+  });
+  const negative = data.timeline.map((t: any) => {
+    const value = Number(t?.negative);
+    return Number.isFinite(value) && value >= 0 ? value : 0;
+  });
 
   const options: ApexCharts.ApexOptions = {
     chart: {
