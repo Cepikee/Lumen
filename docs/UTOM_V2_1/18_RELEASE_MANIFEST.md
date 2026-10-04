@@ -2,7 +2,7 @@
 
 ## Release identity
 
-- Commit: `3b54f65` (release baseline; későbbi dokumentációs commitok: `6a3bbd1`, `16345f6`, `60ed737`, `5e0a0be`, `1c588c7`, `3b54f65`)
+- Commit: `3b54f65` (release code baseline; későbbi readiness dokumentációs commitok: `aa1d761`, `d76193f`)
 - Branch: `develop/utom-recovery`
 - Schema: `059`
 - Node: `24.19.0`
@@ -67,3 +67,7 @@ The release contains the schema-059 V2 provenance, entity, claim, relation, even
 - Payment, paid AI, production hosting, DNS/Cloudflare and production alert provider are not implemented/configured.
 - FFmpeg is a host capability skip.
 - Local load/soak is not a VPS capacity proof; remote resource-constrained staging is required.
+
+## Owner policy freeze checkpoint – 2026-10-04
+
+Owner döntések és nyitott tételek: `docs/UTOM_V2_1/20_OWNER_DECISIONS_BEFORE_PRODUCTION.md`. A raw retention implementációs gap külön tervben szerepel: `docs/UTOM_V2_1/22_RAW_TEXT_RETENTION_IMPLEMENTATION_PLAN.md`. A remote staging provisioning manifest: `docs/UTOM_V2_1/21_REMOTE_STAGING_BUILD_MANIFEST.md`.

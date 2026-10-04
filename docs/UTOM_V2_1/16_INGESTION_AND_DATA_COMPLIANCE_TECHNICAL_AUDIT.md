@@ -71,3 +71,9 @@ A V2 provenance rekord tartalmazhatja az article ID-t, URL identityt, canonical 
 `TECHNICAL AUDIT COMPLETE – OWNER REVIEW REQUIRED FOR RETENTION/SOURCE POLICY`
 
 Production adatbázis, payment, paid AI és production deploy nem érintett.
+
+## Owner policy freeze – 2026-10-04
+
+Az owner technikai indulási policy elfogadott célértéke: sikeres feldolgozás után `articles.content_text` legfeljebb 24 óráig, failed/retry esetén legfeljebb 7 napig maradhat meg. Ez a policy jelenleg **nincs implementálva**; a mezőt több pipeline és recovery step használja, ezért a vak törlés adat- vagy feldolgozási hibát okozhatna. A migration/cleanup/recovery terv a `22_RAW_TEXT_RETENTION_IMPLEMENTATION_PLAN.md` dokumentumban található.
+
+Paywall bypass tiltott, bizonytalan source `HOLD`, a 444 proxy canonical ingestion pedig `OFF`. Ez policy freeze, nem jogi szakvélemény.

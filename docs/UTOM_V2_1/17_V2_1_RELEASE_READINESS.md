@@ -68,3 +68,13 @@ A deployhoz még külön owner/infrastruktúra kapu kell:
 - A tulajdonosi döntési kapu: `docs/UTOM_V2_1/20_OWNER_DECISIONS_BEFORE_PRODUCTION.md`.
 - Minimális induló modellként systemd alatt futó web + worker, MySQL 8, reverse proxy és off-host backup javasolt; a végleges VPS/DB elhelyezés staging mérés és owner döntés után rögzíthető.
 - `INFRASTRUCTURE READY: NO`; `OWNER DECISIONS READY: NO`; `REMOTE STAGING READY TO BUILD: NO`; `PRODUCTION DEPLOY READY: NO`.
+
+## Owner policy freeze és remote staging gate – 2026-10-04
+
+- Owner policy baseline: retention target 24 óra successful / 7 nap failed-retry; paywall bypass tilos; bizonytalan source HOLD; 444 canonical ingestion OFF; paid AI és analytics OFF; FFmpeg deferred; backup 7 daily / 4 weekly / 3 monthly, off-host és restore rehearsal kötelező.
+- Raw/full-text retention technikai állapot: `RAW FULL-TEXT RETENTION IMPLEMENTED: NO`. A 24 órás cleanup jelenleg nincs implementálva; a pipeline/recovery függőségek miatt ezt nem szabad vakon törléssel pótolni. A későbbi megvalósítási terv: `docs/UTOM_V2_1/22_RAW_TEXT_RETENTION_IMPLEMENTATION_PLAN.md`.
+- Source policy, payment, staging email, hosting, monitoring alerts és production domain rollout státusza az owner döntési dokumentumban szerepel.
+- Remote staging manifest: `docs/UTOM_V2_1/21_REMOTE_STAGING_BUILD_MANIFEST.md`.
+- `REMOTE STAGING READY TO BUILD: NO` – a provisioning host, staging secrets, email sink, backup target és owner/infra hozzáférések még nincsenek megadva.
+- `FREE PUBLIC PRODUCTION READY: NO` – raw retention implementation, transactional email és production infrastructure hiányzik.
+- `PAID PREMIUM PRODUCTION READY: NO` – payment project nincs implementálva.
