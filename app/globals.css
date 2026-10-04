@@ -1417,6 +1417,52 @@ html.theme-dark .header-nav {
   width: 360px;
   max-width: 90%;
 }
+.article-title-link {
+  color: inherit;
+  text-decoration: inherit;
+}
+h1.article-title {
+  margin-top: 0;
+}
+
+/* A fejléc korábbi flex soros elrendezése 768px alatt a menüpontokat és a
+   fix szélességű keresőt ugyanabba a sorba kényszerítette. Ez 360px-es
+   nézetben vízszintes dokumentum-túlcsordulást okozott. Mobilon a kereső
+   külön sorba kerül, a másodlagos navigáció pedig a menüpanelen marad. */
+@media (max-width: 991.98px) {
+  .header-nav > .container-fluid {
+    flex-wrap: wrap;
+    min-width: 0;
+    row-gap: 0.25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .header-nav .navbar-nav {
+    display: none !important;
+  }
+
+  .header-nav > .container-fluid > .d-flex.align-items-center.gap-3.ms-auto {
+    min-width: 0;
+    gap: 0.25rem !important;
+  }
+
+  .header-nav .search-wrapper {
+    position: static;
+    order: 3;
+    flex: 1 0 100%;
+    width: 100%;
+    max-width: 100%;
+    transform: none;
+    margin: 0.25rem 0 0.5rem !important;
+    align-items: stretch;
+  }
+
+  .header-nav .search-box {
+    width: 100%;
+    max-width: none;
+  }
+}
 
 /* --- ALAP (közös) --- */
 .search-input {
@@ -1505,12 +1551,19 @@ input, textarea, [contenteditable="true"] {
 *:not(input):not(textarea):not([contenteditable="true"]) {
   caret-color: transparent;
 }
-*:not(input):not(textarea):not([contenteditable="true"]):focus {
+*:not(input):not(textarea):not([contenteditable="true"]):focus:not(:focus-visible) {
   outline: none;
 }
 
+/* A globális outline reset mellett minden billentyűzettel elérhető vezérlőn
+   maradjon jól látható fókuszjelzés. */
+:where(a, button, [role="button"], input, textarea, select):focus-visible {
+  outline: 3px solid #0d6efd !important;
+  outline-offset: 2px;
+}
+
 /* Kereső input fókusz stílus (opcionális, de ajánlott) */
-.search-input:focus {
+.search-input:focus:not(:focus-visible) {
   border-color: rgba(255,255,255,0.6);
   box-shadow: 0 0 0 3px rgba(124,58,237,0.08);
   outline: none;
@@ -1534,7 +1587,7 @@ input, textarea, [contenteditable="true"] {
 *:not(input):not(textarea):not([contenteditable="true"]) {
   caret-color: transparent;
 }
-*:not(input):not(textarea):not([contenteditable="true"]):focus {
+*:not(input):not(textarea):not([contenteditable="true"]):focus:not(:focus-visible) {
   outline: none;
 }
 

@@ -70,33 +70,55 @@ export async function checkRateLimit(ip: string, limit = 60, windowMs = 10_000) 
 // 🔐 Közös security wrapper
 export function isAllowedSameOriginRead(req: Request, options: { allowSameOriginRead?: boolean } = {}): boolean {
   // A browser read exception is deliberately narrow: GET only, an explicit
-  // same-origin fetch signal. Origin is optional for browser GETs because
-  // Chrome does not guarantee it; when present it must match. Referer, when
-  // present, is an additional same-origin defense-in-depth check.
+  // same-origin fetch signal. Some embedded Chromium transports omit
+  // Sec-Fetch-Site, so a missing value is accepted only when Origin or Referer
+  // independently proves that the request came from this origin. Origin is
+  // optional for browser GETs because Chrome does not guarantee it; when
+  // present it must match. Referer, when present, is an additional same-origin
+  // defense-in-depth check.
   const origin = req.headers.get("origin");
   const requestOrigin = (() => {
     try { return new URL(req.url).origin; } catch { return ""; }
   })();
+  const sameOrigin = (candidate: string | null, expected: string): boolean => {
+    if (candidate === null) return true;
+    if (candidate === expected) return true;
+    try {
+      const actualUrl = new URL(candidate);
+      const expectedUrl = new URL(expected);
+      const loopback = new Set(["127.0.0.1", "localhost", "::1"]);
+      return loopback.has(actualUrl.hostname)
+        && loopback.has(expectedUrl.hostname)
+        && actualUrl.protocol === expectedUrl.protocol
+        && actualUrl.port === expectedUrl.port;
+    } catch {
+      return false;
+    }
+  };
   const configuredOrigins = (process.env.UTOM_ALLOWED_ORIGIN || "")
     .split(",")
     .map((value) => value.trim())
     .filter(Boolean);
-  const originMatchesRequest = origin === null
-    || origin === requestOrigin
-    || configuredOrigins.includes(origin);
+  const originMatchesRequest = sameOrigin(origin, requestOrigin)
+    || (origin !== null && configuredOrigins.includes(origin));
   const referer = req.headers.get("referer");
   const refererMatchesRequest = (() => {
     if (!referer) return true;
     try {
       const refererOrigin = new URL(referer).origin;
-      return refererOrigin === requestOrigin || configuredOrigins.includes(refererOrigin);
+      return sameOrigin(refererOrigin, requestOrigin) || configuredOrigins.includes(refererOrigin);
     } catch {
       return false;
     }
   })();
+  const fetchMetadataMatches = req.headers.get("sec-fetch-site") === "same-origin"
+    || (req.headers.get("sec-fetch-site") === null
+      && (origin !== null || referer !== null)
+      && originMatchesRequest
+      && refererMatchesRequest);
   return options.allowSameOriginRead === true
     && req.method === "GET"
-    && req.headers.get("sec-fetch-site") === "same-origin"
+    && fetchMetadataMatches
     && originMatchesRequest
     && refererMatchesRequest;
 }

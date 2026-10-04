@@ -168,16 +168,18 @@ export default function CikkOldal() {
 
         {/* CÍM */}
         {typeof item.url === "string" && item.url.trim() ? (
-          <a
+          <h1 className="article-title">
+            <a
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="article-title"
+            className="article-title-link"
           >
             {typeof item.title === "string" && item.title.trim() ? item.title : "Cím nélkül"}
-          </a>
+            </a>
+          </h1>
         ) : (
-          <span className="article-title">{typeof item.title === "string" && item.title.trim() ? item.title : "Cím nélkül"}</span>
+          <h1 className="article-title">{typeof item.title === "string" && item.title.trim() ? item.title : "Cím nélkül"}</h1>
         )}
 
         {/* META */}

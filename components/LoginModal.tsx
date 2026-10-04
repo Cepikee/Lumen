@@ -131,13 +131,16 @@ export default function LoginModal() {
           onClick={() => setOpen(false)}
         >
           <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="login-modal-title"
             className="bg-dark text-white p-4 rounded"
             style={{ width: "350px" }}
             onClick={(e) => e.stopPropagation()}
           >
             {mode === "login" && (
               <>
-                <h3 className="mb-3">Bejelentkezés</h3>
+                <h3 id="login-modal-title" className="mb-3">Bejelentkezés</h3>
 
                 <input
                   className="form-control mb-2"

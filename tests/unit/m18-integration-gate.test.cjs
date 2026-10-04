@@ -57,10 +57,15 @@ test("M18 browser read routes allow only same-origin reads without exposing an A
   assert.match(security, /sec-fetch-site.*same-origin/);
   assert.match(security, /req\.method === "GET"/);
   assert.match(security, /originMatchesRequest/);
-  assert.match(security, /origin === null/);
+  assert.match(security, /const sameOrigin =/);
+  assert.match(security, /127\.0\.0\.1/);
+  assert.match(security, /localhost/);
   assert.match(security, /refererMatchesRequest/);
   assert.match(security, /export function isAllowedSameOriginRead/);
   assert.match(security, /configuredOrigins\.includes\(origin\)/);
+  assert.match(security, /fetchMetadataMatches/);
+  assert.match(security, /sec-fetch-site.*=== null/);
+  assert.match(security, /origin !== null \|\| referer !== null/);
   assert.match(security, /new URL\(req\.url\)\.origin/);
   assert.match(contextRoute, /allowSameOriginRead/);
   assert.match(premiumRoute, /allowSameOriginRead/);

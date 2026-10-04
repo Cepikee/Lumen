@@ -17,6 +17,10 @@ const categoryRoute = fs.readFileSync(
   path.join(__dirname, "../../app/api/insights/category/[category]/route.ts"),
   "utf8",
 );
+const globalCss = fs.readFileSync(
+  path.join(__dirname, "../../app/globals.css"),
+  "utf8",
+);
 
 test("article related route accepts every canonical source identity", () => {
   for (const source of ["telex.hu", "24.hu", "index.hu", "hvg.hu", "portfolio.hu", "444.hu", "origo.hu"]) {
@@ -40,6 +44,12 @@ test("category insights API resolves Next dynamic params before reading category
   assert.match(categoryRoute, /await context\.params/);
   assert.match(categoryRoute, /const rawFromContext = resolvedParams\?\.category/);
   assert.doesNotMatch(categoryRoute, /const rawFromContext = context\?\.params\?\.category/);
+});
+
+test("mobile header wraps search instead of forcing horizontal overflow", () => {
+  assert.match(globalCss, /@media \(max-width: 991\.98px\)/);
+  assert.match(globalCss, /\.header-nav \.search-wrapper[\s\S]*?flex: 1 0 100%/);
+  assert.match(globalCss, /\.header-nav \.navbar-nav[\s\S]*?display: none !important/);
 });
 
 console.log("browser product contract regression: PASS");

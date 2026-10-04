@@ -37,7 +37,16 @@ export default function ProfileMenu() {
       {/* Profil ikon */}
       <div
         className="profile-badge premium-avatar"
+        role="button"
+        tabIndex={0}
+        aria-label="Profil menü megnyitása"
         onClick={() => setOpen(!open)}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            setOpen((value) => !value);
+          }
+        }}
       >
         <div className="avatar-inner">
           {avatarUrl ? (
