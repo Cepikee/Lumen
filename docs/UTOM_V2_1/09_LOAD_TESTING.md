@@ -38,7 +38,8 @@ HTTP státuszok: minden kérés `200`, 5xx/429: `0`. A folyamat CPU- és heap-m�
 
 ### Soak, worker+read és VPS következtetés
 
-- Soak: 30.132 másodperc, 25 konkurencia, 42 batch / 21 000 kérés, 0 hiba; maximális mért RSS 190.8 MB, heap 54.5 MB.\r\n- Worker+read kombinált terhelés ebben a körben nem bizonyított; a teljes pipeline és MySQL write path külön, izolált fixture-t igényel.
+- Soak: 30.132 másodperc, 25 konkurencia, 42 batch / 21 000 kérés, 0 hiba; maximális mért RSS 190.8 MB, heap 54.5 MB.
+- Worker+read kombinált terhelés ebben a körben nem bizonyított; a teljes pipeline és MySQL write path külön, izolált fixture-t igényel.
 - VPS kapacitásra ebből a fejlesztői Windows mérésből nincs felelős következtetés. `INSUFFICIENT EVIDENCE`.
 - A mérés termék/renderelt route baseline, nem production SLO és nem deployment approval.
 
