@@ -9,6 +9,8 @@ const steps = (process.env.LOAD_STEPS || "10,25,50,100,250,500")
   .filter((value) => Number.isInteger(value) && value > 0);
 const requestsPerStep = Math.max(steps.length ? Math.max(...steps) : 10, Number(process.env.LOAD_REQUESTS_PER_STEP || 200));
 const stopErrorRate = Number(process.env.LOAD_STOP_ERROR_RATE || 0.05);
+const soakMs = Math.max(0, Number(process.env.LOAD_SOAK_MS || 0));
+const soakConcurrency = Number(process.env.LOAD_SOAK_CONCURRENCY || 25);
 const routes = [
   { path: "/", expected: 200 },
   { path: "/trends", expected: 200 },
@@ -85,7 +87,7 @@ async function main() {
   if (!health.ok) {
     throw new Error(`load target is not healthy: ${health.status}${health.error ? ` (${health.error})` : ""}`);
   }
-  console.log(JSON.stringify({ type: "config", baseUrl, routes, steps, requestsPerStep, stopErrorRate }));
+  console.log(JSON.stringify({ type: "config", baseUrl, routes, steps, requestsPerStep, stopErrorRate, soakMs, soakConcurrency }));
   for (const concurrency of steps) {
     const result = await runStep(concurrency);
     console.log(JSON.stringify({ type: "step", ...result }));
@@ -94,6 +96,28 @@ async function main() {
       process.exitCode = 2;
       return;
     }
+  }
+  if (soakMs > 0) {
+    const soakStarted = performance.now();
+    let batches = 0;
+    let requests = 0;
+    let errors = 0;
+    let maxRssMb = 0;
+    let maxHeapUsedMb = 0;
+    while (performance.now() - soakStarted < soakMs) {
+      const result = await runStep(soakConcurrency);
+      batches += 1;
+      requests += result.requests;
+      errors += Math.round(result.requests * result.errorRate);
+      maxRssMb = Math.max(maxRssMb, result.rssMb);
+      maxHeapUsedMb = Math.max(maxHeapUsedMb, result.heapUsedMb);
+      if (result.errorRate > stopErrorRate) {
+        console.log(JSON.stringify({ type: "soak-stop", reason: "error-rate-threshold", result }));
+        process.exitCode = 2;
+        return;
+      }
+    }
+    console.log(JSON.stringify({ type: "soak", concurrency: soakConcurrency, durationMs: Math.round(performance.now() - soakStarted), batches, requests, errors, errorRate: requests ? Number((errors / requests).toFixed(4)) : 0, maxRssMb, maxHeapUsedMb }));
   }
   console.log(JSON.stringify({ type: "complete", status: "PASS" }));
 }
