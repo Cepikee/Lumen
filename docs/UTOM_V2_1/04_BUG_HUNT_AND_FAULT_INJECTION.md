@@ -153,3 +153,12 @@ Csak bizonyított hiba kap javítást; minden javítható finding FIXED vagy kon
 - Javítás: 059-es additív scope-kulcs, `onboardEntityMention`, bizonyíték-span ellenőrzés, unresolved anchor státusz, unique/idempotens insert, mention binding és confidence/history audit. Az accepted identity lookup, fuzzy policy, namesake- és type-mismatch védelem változatlan.
 - Regression: `mysql-v2-entity-resolution-m6.test.cjs` (evidence-bound, evidence-less/invalid span reject, retry, namesake scope, type mismatch, concurrency); `v21-canonical-intelligence-e2e.test.cjs` (3 raw article, 21 mention, 7 provisional anchor, 11 subject-bound claim, 1 conflict winner nélkül).
 - Státusz: `FIXED`.
+
+### V21-PERF-F001 – production auth probe duplikáció
+
+- Severity: Medium.
+- Reprodukció: disposable Windows Chrome CDP profillal production-like runtime-ban a homepage, article és Premium navigációk három `/api/auth/me` kérést indítottak útvonalanként.
+- Root cause: a `ClientLayout` és a `Header` ugyanazt a store loadert indította, a Header pedig külön kézi auth fetch-et is futtatott.
+- Javítás: a Header maradt az egyetlen store-loader; a ClientLayout loader effectje és a Header kézi auth probe-ja megszűnt.
+- Regresszió: `tests/unit/browser-product-contract.test.cjs`, 5/5 PASS; fix utáni Chrome CDP-mérésben minden vizsgált viewporton 0 duplikált auth-kérés.
+- Státusz: `FIXED`.

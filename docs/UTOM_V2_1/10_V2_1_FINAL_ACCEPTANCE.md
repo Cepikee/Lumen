@@ -45,5 +45,5 @@
 - Accessibility: article `h1`, LoginModal dialog semantics, ProfileMenu keyboard semantics, named controls, image alt és keyboard `:focus-visible` ring ellenőrizve.
 - Híradó: FFmpeg executable hiányában az üres/capability állapot kezelhető; ez környezeti finding, nem alkalmazási blocker.
 - Targeted tests: browser-product-contract, browser-a11y-contract, m18-integration-gate PASS; TypeScript, ESLint és import check PASS.
-- Performance evidence: a külön baseline szakaszban rögzítve; LCP a jelenlegi CDP mérőscriptben nem volt megfigyelhető, ezért `UNAVAILABLE`, nem PASS-ként dokumentált.
+- Performance evidence: a `docs/UTOM_V2_1/03_PERFORMANCE.md` külön mérési szakaszban rögzítve; navigáció előtti `PerformanceObserver`-rel LCP mérve, és a production-like háromszoros auth-probe `V21-PERF-F001` javítva. A fix utáni CDP-mérésben a vizsgált route-ok mindegyikén 0 duplikált auth-kérés volt.
 - Production boundary: production DB/deploy, payment és paid AI 0.

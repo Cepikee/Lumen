@@ -2397,6 +2397,32 @@ A helyi MySQL környezet hiánya miatt ez a terv `MYSQL RUNTIME VALIDATION REQUI
 - RECOVERY COMPLETE: IGEN
 - NEXT PHASE READY: UTOM V2 M1.1 (külön explicit utasításra)
 
+## V2.1 PERFORMANCE MEASUREMENT ADDENDUM – 2026-10-04
+
+### APP-238 / V21-PERF-F001 – production auth probe duplikáció
+
+- **Severity:** Medium.
+- **Terület:** Frontend performance / shared auth state.
+- **Reprodukció:** disposable Windows Chrome CDP profillal, production-like runtime-ban a homepage, article és Premium navigációk mindegyike három `/api/auth/me` kérést indított 390×844 és 1366×768 viewporton.
+- **Root cause:** a `ClientLayout` saját store-loader effectet futtatott, a `Header` ugyanazt a loadert futtatta, és a `Header` külön kézi auth-probe fetch-et is indított.
+- **Javítás:** a `Header` maradt az egyetlen auth-store betöltési pont; a `ClientLayout` loader effectje és a Header kézi auth-probe állapota/fetch-e megszűnt.
+- **Regresszió:** `tests/unit/browser-product-contract.test.cjs` (5/5 PASS), TypeScript PASS, ESLint 0 error, production build 74/74 PASS; fix utáni Chrome CDP-mérésben minden vizsgált viewporton 0 duplikált auth-kérés.
+- **Státusz:** `FIXED`.
+
+### MySQL környezet-egyeztetés
+
+- A korábbi lokális Windows példány `F:\Projekt2025\bin\mysqld.exe`, `26.7.0`, `127.0.0.1:33306` volt; ez nem MySQL 8, ezért nem tekinthető a V2.1 integrációs célkörnyezetének.
+- Az izolált futtatási célpont MySQL Community Server `8.0.46-0ubuntu0.24.04.4`, WSL Ubuntu 24.04, `127.0.0.1:33307`, `utom_v21_test`/`utom_dev`, `utf8mb4`, szigorú MySQL 8 SQL mode-dal. Production adatbázis nem érintett.
+- A célpont lekérdezett tényei: host `Yosohara`, port `33307`, version comment `(Ubuntu)`; titok vagy jelszó a dokumentációba nem került.
+- MySQL/V2 integration suite: minden engedélyezett teszt PASS; FFmpeg executable hiánya külön capability skip. Az opcionális HTTP auth és legacy PIN tesztek külön futtatva `2/2 PASS`, valódi SMTP és paid proxy nélkül.
+
+### Teljesítménymérés
+
+- Browser LCP: navigáció előtti `PerformanceObserver` (`buffered: true`) használatával mérve 390×844 és 1366×768 viewporton; a fix utáni eredményeket a `docs/UTOM_V2_1/03_PERFORMANCE.md` tartalmazza.
+- Browser fix utáni LCP: 76/96/40 ms (390×844 homepage/article/premium), illetve 40/52/36 ms (1366×768 homepage/article/premium); duplikált auth-kérés minden esetben 0.
+- API 20 szekvenciális minta/végpont, izolált MySQL 8.0.46: p50 14.77–30.50 ms, p95 15.88–32.98 ms; a route-onkénti válaszméretek a performance dokumentumban szerepelnek.
+- A lokális mérés nem production SLO és nem bizonyít általános terhelési kaput; a rate limiter ismételt mintavételnél külön rate-key-t igényel.
+
 ## BROWSER ACCEPTANCE ADDENDUM – 2026-10-04
 
 A V2.1 valódi rendered-product acceptance külön, izolált `utom_v21_test` MySQL adatbázison és disposable Windows Chrome CDP profillal futott. A korábbi 132/132 alkalmazási parent státusz nem változott; ez az addendum az új browser acceptance findingokat rögzíti.
