@@ -403,9 +403,9 @@ Tesztelve: pause/resume, duplicate run, DB-hiba és rollback, checksum-egyeztet�
 Kapuzás: checksum-egyeztetés és rollback működik; M17 COMPLETE.
 
 ### M18 – Final integration
-Objective: jóváhagyott V2 panel rollout.
-Tests: offline, MySQL, pipeline, API E2E, concurrency, recovery.
-Gate: minden kötelező teszt PASS, high severity open bug nincs, owner approval megvan.
+M18 integrációs kapu: a M14–M17 technikailag lezárható részei PASS, és az owner által jóváhagyott sorrendben elkészült az article context, event-scope source comparison és entitlement-védett premium panel. A részletes mátrix a `docs/UTOM_V2/M18_FINAL_INTEGRATION.md` fájlban van. A célzott offline/TypeScript/ESLint/import/build kapu, a nyilvános/anonymous Chrome acceptance, az izolált MySQL fixture backend-ellenőrzése és a canonical session fixture-rel végzett non-premium/active/expired Chrome-mátrix PASS. A Chrome GET Origin nélküli viselkedése elfogadott; az Origin csak jelenléte esetén szigorúan ellenőrzött, a Premium jogosultság továbbra is session + entitlement alapú. **M18: COMPLETE.**
+Tesztelve: offline 365/365, M17 MySQL 8.0.46 evidence, pipeline/recovery regressziók, API contractok, concurrency, feature-flag határok, panel normalizálók és fetch race-védelem. A valódi MySQL fixture-rel végzett Chrome ellenőrzés az egy-event, nulla-event és több-event source scope-okat, valamint az anonymous premium állapotot lefedte; az authenticated premium session-mátrix még hiányzik.
+Kapuzás: M18 COMPLETE csak az authenticated non-premium, active és expired Chrome session-elfogadás után jelölhető.
 
 ## 12. Tesztelési stratégia
 

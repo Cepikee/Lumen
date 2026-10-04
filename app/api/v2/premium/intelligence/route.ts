@@ -9,7 +9,7 @@ import { readTimelineItems } from "@/lib/v2/temporal-graph-repository";
 import { projectPremiumIntelligence, validatePremiumInput } from "@/lib/v2/premium-intelligence";
 
 export async function GET(req: Request) {
-  const security = await securityCheck(req);
+  const security = await securityCheck(req, { allowSameOriginRead: true });
   if (security) return security;
   if (!isV2Enabled()) return NextResponse.json(errorEnvelope("v2_disabled", "V2 premium intelligence is disabled"), { status: 404 });
   let entitlement;

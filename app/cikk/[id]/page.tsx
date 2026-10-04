@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useUserStore } from "@/store/useUserStore";
-import V2ArticleContextPanel from "@/components/V2ArticleContextPanel";
+import V2ArticleIntegrationPanels from "@/components/V2ArticleIntegrationPanels";
 
 function mapSource(raw: unknown) {
   const s = typeof raw === "string" ? raw.toLowerCase() : "";
@@ -217,7 +217,7 @@ export default function CikkOldal() {
         {/* RÖVID TARTALOM */}
         <p className="article-summary">{typeof item.content === "string" ? item.content : ""}</p>
 
-        <V2ArticleContextPanel articleId={Number(item.id)} />
+        <V2ArticleIntegrationPanels articleId={Number(item.id)} />
 
         <div className="article-divider"></div>
 

@@ -68,9 +68,43 @@ export async function checkRateLimit(ip: string, limit = 60, windowMs = 10_000) 
 }
 
 // 🔐 Közös security wrapper
-export async function securityCheck(req: Request) {
+export function isAllowedSameOriginRead(req: Request, options: { allowSameOriginRead?: boolean } = {}): boolean {
+  // A browser read exception is deliberately narrow: GET only, an explicit
+  // same-origin fetch signal. Origin is optional for browser GETs because
+  // Chrome does not guarantee it; when present it must match. Referer, when
+  // present, is an additional same-origin defense-in-depth check.
+  const origin = req.headers.get("origin");
+  const requestOrigin = (() => {
+    try { return new URL(req.url).origin; } catch { return ""; }
+  })();
+  const configuredOrigins = (process.env.UTOM_ALLOWED_ORIGIN || "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+  const originMatchesRequest = origin === null
+    || origin === requestOrigin
+    || configuredOrigins.includes(origin);
+  const referer = req.headers.get("referer");
+  const refererMatchesRequest = (() => {
+    if (!referer) return true;
+    try {
+      const refererOrigin = new URL(referer).origin;
+      return refererOrigin === requestOrigin || configuredOrigins.includes(refererOrigin);
+    } catch {
+      return false;
+    }
+  })();
+  return options.allowSameOriginRead === true
+    && req.method === "GET"
+    && req.headers.get("sec-fetch-site") === "same-origin"
+    && originMatchesRequest
+    && refererMatchesRequest;
+}
+
+export async function securityCheck(req: Request, options: { allowSameOriginRead?: boolean } = {}) {
   // API key
-  if (!checkApiKey(req)) {
+  const sameOriginRead = isAllowedSameOriginRead(req, options);
+  if (!checkApiKey(req) && !sameOriginRead) {
     return NextResponse.json(
       { success: false, error: "unauthorized" },
       { status: 401 }

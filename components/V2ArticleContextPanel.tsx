@@ -1,9 +1,8 @@
 "use client";
 
-import { useV2ArticleContext, type V2ArticleContextFetcher } from "@/hooks/useV2ArticleContext";
+import type { V2ArticleContextState } from "@/hooks/useV2ArticleContext";
 
-export default function V2ArticleContextPanel({ articleId, enabled, fetcher }: { articleId: number; enabled?: boolean; fetcher?: V2ArticleContextFetcher }) {
-  const state = useV2ArticleContext(articleId, enabled, fetcher);
+export default function V2ArticleContextPanel({ state }: { articleId: number; state: V2ArticleContextState }) {
   if (state.status === "disabled" || state.status === "idle") return null;
   if (state.status === "loading") return <section aria-label="V2 kontextus" className="article-v2-context">Kontextus betöltése…</section>;
   if (state.status === "error") return <section aria-label="V2 kontextus" className="article-v2-context">A kontextus jelenleg nem érhető el.</section>;
