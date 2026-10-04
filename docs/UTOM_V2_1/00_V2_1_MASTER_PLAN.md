@@ -35,9 +35,9 @@ Minden változás útja: inventory → reprodukció → minimális javítás →
 
 ## Aktuális checkpoint
 
-- Aktív fázis: B – localhost dev/demo harness és első Chrome acceptance.
+- Aktív fázis: F/G lezárási bizonyíték – Chrome acceptance és performance baseline rögzítve.
 - Inventory: 94 `app/` route/page/layout elem és a fő UI/hook/API függőségek rögzítve (`ROUTE_UI_INVENTORY.md`).
-- Következő konkrét lépés: a demo runtime Chrome acceptance folytatása a tiszta ideiglenes másolaton, különösen mobil viewportokon.
+- Következő konkrét lépés: a rögzített V2.1 acceptance evidence review-ja; új browser finding csak új reprodukció esetén nyitható.
 - A tiszta ideiglenes másolatban `npm ci`, TypeScript, ESLint (0 error), import check, offline **379/379** és production build PASS; az ESLint meglévő figyelmeztetései nem hibák.
 - Izolált MySQL 8.0.46 demo reset PASS: schema 059, 12 source (11 aktív), 40 article, 34 summary, 3 user, 4 entity, 8 alias, 3 relation, 12 claim, 3 event, 25 timeline item, 2 conflict; paid AI/payment 0.
 - V2.1 finding `V21-BUG-F001`: FIXED. A layout localhoston is külső reCAPTCHA/Analytics kódot töltött, és a LoginModal közvetlenül a hiányzó `grecaptcha` globálishoz kötődött. A javítás explicit site-key/analytics kapcsolót, loopback-only `local-demo` CAPTCHA adaptert és közös kliens helper-t használ; productionben nincs bypass.

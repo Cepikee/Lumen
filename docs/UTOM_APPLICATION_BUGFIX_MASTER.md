@@ -2438,3 +2438,12 @@ A V2.1 valódi rendered-product acceptance külön, izolált `utom_v21_test` MyS
 - Chrome desktop/mobile effective viewport checks: 438, 768 és 1366 CSS px, horizontal overflow nélkül; főoldal, Trends, Insights, category Insights, Premium, Híradó, article detail és reset route-ok rendereltek.
 - Paid AI: 0; payment: 0; production DB/deploy: nem érintett.
 - Nyitott javítható browser finding: 0.
+
+## V2.1 browser acceptance addendum – 2026-10-04
+
+- APP-234 / V21-BUG-F008 – 360px mobil fejléc túlcsordulás: FIXED.
+- APP-235 / V21-BUG-F009 – loopback host alias miatti valid V2 read 401: FIXED.
+- APP-236 / V21-BUG-F010 – későbbi CSS reset által eltüntetett keyboard focus ring: FIXED.
+- APP-237 / V21-BUG-F011 – article/auth/profile accessibility semantics hiánya: FIXED.
+
+A targeted browser regressziók, exact viewport matrix és auth matrix PASS; nyitott javítható browser finding: 0. A teljes recovery master korábbi application matrix státuszát ez a V2.1 addendum nem módosítja.

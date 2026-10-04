@@ -41,7 +41,55 @@ Csak bizonyított hiba kap javítást; minden javítható finding FIXED vagy kon
 
 ## Státusz
 
-`IN PROGRESS`.
+`CLOSED – browser findings F008–F011 FIXED`.
+
+## Browser closure findings – 2026-10-04
+
+### V21-BUG-F008 – mobil fejléc túlcsordulás
+
+- **Severity:** Medium
+- **Reprodukció:** valódi Chrome CDP-ben 360×800 viewporton a fejléc menüje és a fix kereső egy flex sorba kényszerült; a dokumentum scrollWidth=438 lett.
+- **Root cause:** a fejléc mobil tördelés nélkül tartotta meg a másodlagos navigációt és a kereső fix szélességét.
+- **Javítás:** mobilon a kereső külön teljes szélességű sorba kerül, a másodlagos navigáció a menüpanelen marad, a fejléc elemei zsugoríthatók.
+- **Regresszió:** exact Chrome viewport matrix 360/390/430/768/1366/1920; 36 route×viewport ellenőrzés, horizontal overflow 0.
+- **Státusz:** FIXED
+
+### V21-BUG-F009 – loopback host alias miatt elutasított böngészős V2 read
+
+- **Severity:** Medium
+- **Reprodukció:** Chrome a böngészőoldalt 127.0.0.1:3011, a Next request URL-jét localhost:3011 néven adta át; a V2 context és source comparison route 401-et adott ugyan-origin böngészőből.
+- **Root cause:** az isAllowedSameOriginRead csak szöveges origin-egyezést fogadott el, és egyes transportoknál a Sec-Fetch-Site hiányát sem kezelte.
+- **Javítás:** a security wrapper a localhost, 127.0.0.1 és ::1 aliasokat azonos protokoll és port mellett ugyan-originként kezeli; hiányzó fetch metadata esetén csak Origin/Referer bizonyított egyezésével enged.
+- **Regresszió:** m18 integration gate; valódi Chrome context 200, source comparison 200, aktív Premium article flow 0 hálózati hiba.
+- **Státusz:** FIXED
+
+### V21-BUG-F010 – billentyűzetes fókuszjelzés felülírása
+
+- **Severity:** Medium
+- **Reprodukció:** Chrome 360×800 oldalon Tab navigációval a fókuszált linkek és gombok computed style-ja outline: none volt.
+- **Root cause:** a globális fókusz-reset későbbi példánya és a kereső selector a focus-visible jelzést is felülírta.
+- **Javítás:** a reset csak nem-focus-visible állapotban töröl outline-t; minden billentyűzettel elérhető vezérlő kap 3px-es kontrasztos fókuszgyűrűt.
+- **Regresszió:** browser-a11y-contract; valódi Chrome Tab acceptanceben a vizsgált vezérlők rgb(13,110,253) solid 3px fókuszt kaptak.
+- **Státusz:** FIXED
+
+### V21-BUG-F011 – hiányzó dokumentum- és vezérlősemantika az article/auth UI-ban
+
+- **Severity:** Medium
+- **Reprodukció:** article detail oldalon nem volt h1; a login modal nem jelölt dialogként; a profil avatar nem volt billentyűzettel elérhető vezérlő.
+- **Root cause:** vizuálisan működő elemek szemantikai és keyboard contract nélkül kerültek a DOM-ba.
+- **Javítás:** article cím h1, LoginModal dialog semantics, ProfileMenu keyboard trigger.
+- **Regresszió:** browser-a11y-contract és Chrome DOM acceptance.
+- **Státusz:** FIXED
+
+## 2026-10-04 browser closure evidence
+
+- Windows Chrome 154 CDP, disposable profile, isolated local runtime; normal user profile, production DB, payment és paid AI nem érintett.
+- Exact viewport matrix: 360×800, 390×844, 430×932, 768×1024, 1366×768, 1920×1080; homepage, Trends, Insights, category Insights, Premium, article detail; 36/36 overflow PASS.
+- Canonical article 1: context 200, partial=false, entity/claim/event/timeline projection jelen; source comparison 200, 3 source jelen.
+- Event coverage: 0-event article, 1-event article és több eseményes article két választható eseménnyel; render crash és overflow nélkül.
+- Anonymous/free/active/expired session matrix: anonymous és free zárolt; active Premium Insights és article intelligence működik; expired állapotban nincs stale Premium stat.
+- Accessibility: heading, named controls, image alt, dialog/profile semantics és keyboard focus-visible ring Chrome-ban ellenőrizve; targeted contract tests PASS.
+- Az anonim Premium 403 entitlement válasza zárolt felhasználói állapotként jelenik meg; active Premium futásban network failure, console error és runtime error 0.
 
 ### V21-BUG-F001 – localhost auth külső CAPTCHA/analytics függősége
 

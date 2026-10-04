@@ -13,7 +13,7 @@
 
 ## Státusz
 
-`IN PROGRESS – BROWSER ACCEPTANCE EVIDENCE`.
+`PASS – BROWSER ACCEPTANCE CLOSED`.
 
 ### Bizonyíték 2026-10-04
 
@@ -32,3 +32,18 @@
 - Híradó üres adatállapot PASS: a `/hirado` oldal konfigurált lokális video-sign secret mellett 200-at ad és „Ma még nincs elérhető híradó” állapotot renderel.
 - Chrome acceptance során három alkalmazási finding került elő és javult: `V21-BUG-F005`, `V21-BUG-F006`, `V21-BUG-F007`. Célzott regressziók: `tests/unit/browser-product-contract.test.cjs`; offline suite 382/382 PASS, TypeScript PASS, ESLint 0 error, import check PASS.
 - A böngészős ellenőrzés paid AI, payment és production érintés nélkül, az izolált `utom_v21_test` adatbázison futott.
+
+## FINAL BROWSER CLOSURE – 2026-10-04
+
+`PASS` – valódi Windows Chrome CDP-ben, disposable profillal, izolált MySQL demo runtime mellett.
+
+- Viewport matrix: 360×800, 390×844, 430×932, 768×1024, 1366×768, 1920×1080; homepage, Trends, Insights, category Insights, Premium és article detail; 36/36 ellenőrzés, vízszintes túlcsordulás 0.
+- Canonical article: article 1 context 200, `partial=false`, entity/claim/event/timeline projection jelen; source comparison 200, 3 source jelen.
+- Event edge cases: 0-event article, 1-event article és több eseményes article két választható eseménnyel; render crash és overflow nélkül.
+- Session matrix: anonymous, free, active Premium és expired Premium. Anonymous/free/expired állapotban a premium UI zárolt; active Premium alatt Insights, category Insights és article intelligence adat renderel; active futásban failed same-origin request, console error és runtime error 0.
+- Premium UX: payment provider hiánya miatt a subscription/support gombok őszintén `Jelenleg nem elérhető` állapotúak; fake payment flow nincs.
+- Accessibility: article `h1`, LoginModal dialog semantics, ProfileMenu keyboard semantics, named controls, image alt és keyboard `:focus-visible` ring ellenőrizve.
+- Híradó: FFmpeg executable hiányában az üres/capability állapot kezelhető; ez környezeti finding, nem alkalmazási blocker.
+- Targeted tests: browser-product-contract, browser-a11y-contract, m18-integration-gate PASS; TypeScript, ESLint és import check PASS.
+- Performance evidence: a külön baseline szakaszban rögzítve; LCP a jelenlegi CDP mérőscriptben nem volt megfigyelhető, ezért `UNAVAILABLE`, nem PASS-ként dokumentált.
+- Production boundary: production DB/deploy, payment és paid AI 0.
