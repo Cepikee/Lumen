@@ -1,8 +1,8 @@
 # UTOM.hu production readiness checklist
 
-Dátum: 2026-10-04  
-Release baseline: `3b54f65`  
-Branch: `develop/utom-recovery`  
+Dátum: 2026-10-04
+Release baseline: `3b54f65`
+Branch: `develop/utom-recovery`
 Schema: `059`
 
 Ez a dokumentum előkészítési ellenőrzőlista. Production deploy, DNS-módosítás és production adatbázis-művelet ebben a körben nem történt.
@@ -59,8 +59,8 @@ Ez a dokumentum előkészítési ellenőrzőlista. Production deploy, DNS-módos
 
 ## Gate
 
-`CODE RELEASE READY: YES`  
-`INFRASTRUCTURE READY: NO`  
-`OWNER DECISIONS READY: NO`  
-`REMOTE STAGING READY TO BUILD: NO`  
+`CODE RELEASE READY: YES`
+`INFRASTRUCTURE READY: NO`
+`OWNER DECISIONS READY: NO`
+`REMOTE STAGING READY TO BUILD: NO`
 `PRODUCTION DEPLOY READY: NO`
