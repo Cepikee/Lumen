@@ -21,6 +21,14 @@ const globalCss = fs.readFileSync(
   path.join(__dirname, "../../app/globals.css"),
   "utf8",
 );
+const header = fs.readFileSync(
+  path.join(__dirname, "../../components/Header.tsx"),
+  "utf8",
+);
+const clientLayout = fs.readFileSync(
+  path.join(__dirname, "../../components/ClientLayout.tsx"),
+  "utf8",
+);
 
 test("article related route accepts every canonical source identity", () => {
   for (const source of ["telex.hu", "24.hu", "index.hu", "hvg.hu", "portfolio.hu", "444.hu", "origo.hu"]) {
@@ -50,6 +58,12 @@ test("mobile header wraps search instead of forcing horizontal overflow", () => 
   assert.match(globalCss, /@media \(max-width: 991\.98px\)/);
   assert.match(globalCss, /\.header-nav \.search-wrapper[\s\S]*?flex: 1 0 100%/);
   assert.match(globalCss, /\.header-nav \.navbar-nav[\s\S]*?display: none !important/);
+});
+
+test("header auth state uses the shared store loader without a duplicate auth probe", () => {
+  assert.doesNotMatch(header, /fetch\("\/api\/auth\/me"/);
+  assert.doesNotMatch(clientLayout, /loadUser\(\);/);
+  assert.match(header, /useUserStore\.getState\(\)\.loadUser/);
 });
 
 console.log("browser product contract regression: PASS");

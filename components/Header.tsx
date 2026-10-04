@@ -35,52 +35,13 @@ export default function Header() {
     useUserStore.getState().loadUser?.();
   }, []);
 
-  const [apiUser, setApiUser] = useState<any | null>(null);
-  const [apiChecked, setApiChecked] = useState(false);
-
-  useEffect(() => {
-    let mounted = true;
-    (async () => {
-      try {
-        const res = await fetch("/api/auth/me", {
-          credentials: "include",
-          cache: "no-store",
-        });
-        if (!res.ok) {
-          if (mounted) setApiUser(null);
-          return;
-        }
-        const text = await res.text();
-        const parsed = text ? JSON.parse(text) : null;
-        if (!parsed || typeof parsed !== "object" || parsed.loggedIn !== true || !parsed.user) {
-          if (mounted) setApiUser(null);
-          return;
-        }
-        if (mounted) setApiUser(parsed);
-      } catch {
-        if (mounted) setApiUser(null);
-      } finally {
-        if (mounted) setApiChecked(true);
-      }
-    })();
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
   const isPremium = (() => {
     const u = user;
     if (!u) return false;
     return u.isPremium === true;
   })();
 
-  const apiSaysPremium = (() => {
-    const a = apiUser?.user ?? apiUser;
-    if (!a) return false;
-    return a.isPremium === true;
-  })();
-
-  const reallyPremium = isPremium || apiSaysPremium;
+  const reallyPremium = isPremium;
 
   // isDark kezelése: alapérték false, de useLayoutEffect korán beállítja a perzisztált theme alapján
   const [isDark, setIsDark] = useState<boolean>(false);

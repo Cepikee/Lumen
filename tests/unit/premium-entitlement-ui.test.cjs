@@ -9,7 +9,8 @@ const settings = read('components/SettingsView.tsx');
 const insights = read('app/insights/page.tsx');
 
 assert.match(header, /return u\.isPremium === true/);
-assert.match(header, /return a\.isPremium === true/);
+assert.match(header, /useUserStore\.getState\(\)\.loadUser/);
+assert.doesNotMatch(header, /fetch\(["']\/api\/auth\/me/);
 assert.match(profile, /const premiumActive = user\.isPremium === true/);
 assert.match(settings, /const premiumActive = user\.isPremium === true/);
 assert.match(insights, /const isPremium = user\?\.isPremium === true/);

@@ -19,9 +19,10 @@ assert.match(hook, /data\.loggedIn === true && data\.user/);
 // Both 401 and transient auth failures must terminate the loading state.
 assert.match(hook, /if \(!res\.ok\)[\s\S]*setLoading\(false\);[\s\S]*return;/);
 
-// Header's secondary entitlement read must reject non-OK/malformed payloads.
-assert.match(header, /if \(!res\.ok\)/);
-assert.match(header, /parsed\.loggedIn !== true/);
+// Header must use the shared auth store loader; a second auth probe would
+// duplicate the request and could race the canonical store state.
+assert.match(header, /useUserStore\.getState\(\)\.loadUser/);
+assert.doesNotMatch(header, /fetch\(["']\/api\/auth\/me/);
 
 // Reset flows must handle HTTP errors and non-JSON bodies without throwing in submit.
 for (const source of [password, pin]) {

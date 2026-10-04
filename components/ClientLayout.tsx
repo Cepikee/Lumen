@@ -39,12 +39,6 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
 
   // THEME
   const theme = useUserStore((s) => s.theme);
-  const loadUser = useUserStore((s) => s.loadUser);
-
-  useEffect(() => {
-    loadUser();
-  }, [loadUser]);
-
   // THEME HANDLING
   useEffect(() => {
     const root = document.documentElement;
