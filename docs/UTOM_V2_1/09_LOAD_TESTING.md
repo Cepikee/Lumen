@@ -34,11 +34,11 @@ Csak a localhost, illetve kontrollált staging-szerű kör teljesítménye mérh
 | 250 | 500 | 687.26 | 312.16 ms | 714.69 ms | 716.04 ms | 0% | 118.8 MB | 27.64 ms |
 | 500 | 500 | 672.58 | 638.81 ms | 738.23 ms | 739.21 ms | 0% | 145.8 MB | 33.36 ms |
 
-HTTP státuszok: minden kérés `200`, 5xx/429: `0`. A folyamat CPU- és heap-mérése a harness JSON kimenetében megmaradt; a legmagasabb mért RSS 132.5 MB volt.
+HTTP státuszok: minden kérés `200`, 5xx/429: `0`. A folyamat CPU- és heap-mérése a harness JSON kimenetében megmaradt; a ladder legmagasabb mért RSS 145.8 MB volt.
 
 ### Soak, worker+read és VPS következtetés
 
-- Soak: 30.132 másodperc, 25 konkurencia, 42 batch / 21 000 kérés, 0 hiba; maximális mért RSS 190.8 MB, heap 54.5 MB.\n- Worker+read kombinált terhelés ebben a körben nem bizonyított; a teljes pipeline és MySQL write path külön, izolált fixture-t igényel.
+- Soak: 30.132 másodperc, 25 konkurencia, 42 batch / 21 000 kérés, 0 hiba; maximális mért RSS 190.8 MB, heap 54.5 MB.\r\n- Worker+read kombinált terhelés ebben a körben nem bizonyított; a teljes pipeline és MySQL write path külön, izolált fixture-t igényel.
 - VPS kapacitásra ebből a fejlesztői Windows mérésből nincs felelős következtetés. `INSUFFICIENT EVIDENCE`.
 - A mérés termék/renderelt route baseline, nem production SLO és nem deployment approval.
 
