@@ -55,6 +55,8 @@ Az observer a navigáció előtt lett telepítve (`PerformanceObserver`, `buffer
 
 Az API-mérés production-like Next runtime-on, érvényes API-kulccsal és a védett végpontokhoz külön rate-key-kel futott. A `responseBytes` átlagos body-méret.
 
+Környezet: `127.0.0.1:33307`, WSL Ubuntu 24.04 / MySQL `8.0.46-0ubuntu0.24.04.4`, host `Yosohara`, `utf8mb4`; a lekérdezett SQL mode: `IGNORE_SPACE,ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION`.
+
 | Végpont | p50 | p95 | Átlagos válasz |
 |---|---:|---:|---:|
 | `/api/summaries?page=1&limit=10&q=` | 15.26 ms | 16.96 ms | 7,942 B |
