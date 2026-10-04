@@ -59,3 +59,12 @@ A deployhoz még külön owner/infrastruktúra kapu kell:
 - Local browser HTTP smoke: `/`, `/premium`, `/cikk/1`, `/robots.txt`, `/sitemap.xml` returned 200.
 - Local load sanity: all six concurrency steps completed with 0% error and 200-only responses.
 - Soak: 30.132 s at concurrency 25, 21,000 requests, 0 errors; maximum RSS 190.8 MB and heap 54.5 MB. Worker+read and DB contention remain unmeasured.
+
+## Production readiness planning – 2026-10-04
+
+- A részletes preflight checklist: `docs/PRODUCTION_READINESS_CHECKLIST.md`.
+- A release identity, flags, secrets és service inventory: `docs/UTOM_V2_1/18_RELEASE_MANIFEST.md`.
+- A kizárólag tervként kezelt deploy/rollback sorrend: `docs/UTOM_V2_1/19_PRODUCTION_DEPLOY_RUNBOOK.md`.
+- A tulajdonosi döntési kapu: `docs/UTOM_V2_1/20_OWNER_DECISIONS_BEFORE_PRODUCTION.md`.
+- Minimális induló modellként systemd alatt futó web + worker, MySQL 8, reverse proxy és off-host backup javasolt; a végleges VPS/DB elhelyezés staging mérés és owner döntés után rögzíthető.
+- `INFRASTRUCTURE READY: NO`; `OWNER DECISIONS READY: NO`; `REMOTE STAGING READY TO BUILD: NO`; `PRODUCTION DEPLOY READY: NO`.
