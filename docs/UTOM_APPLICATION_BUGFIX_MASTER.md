@@ -2396,3 +2396,45 @@ A helyi MySQL környezet hiánya miatt ez a terv `MYSQL RUNTIME VALIDATION REQUI
 - OPEN FIXABLE BUGS: 0
 - RECOVERY COMPLETE: IGEN
 - NEXT PHASE READY: UTOM V2 M1.1 (külön explicit utasításra)
+
+## BROWSER ACCEPTANCE ADDENDUM – 2026-10-04
+
+A V2.1 valódi rendered-product acceptance külön, izolált `utom_v21_test` MySQL adatbázison és disposable Windows Chrome CDP profillal futott. A korábbi 132/132 alkalmazási parent státusz nem változott; ez az addendum az új browser acceptance findingokat rögzíti.
+
+### APP-231 – related source canonical allowlist mismatch
+
+- **Severity:** Medium
+- **Terület:** Article detail / related-news API
+- **Reprodukció:** `/cikk/1` Chrome renderből `/api/related?source=telex&exclude=1&limit=5` 400 `invalid_related_parameters` választ adott.
+- **Root cause:** a közös source normalizer canonical `telex.hu` kulcsot adott, miközben az API rövid aliasokat engedélyezett.
+- **Javítás:** canonical allowlist az `app/api/related/route.ts` fájlban.
+- **Regresszió:** `tests/unit/browser-product-contract.test.cjs`, related route regressziók és CDP runtime; 200-as array response.
+- **Státusz:** `FIXED`
+
+### APP-232 – category Insights entitlement error rendered as network failure
+
+- **Severity:** Medium
+- **Terület:** Category Insights UI / premium proxy contract
+- **Reprodukció:** anonim Chrome sessionben a category proxy 401 válasza általános hálózati hibaként jelent meg.
+- **Root cause:** a page nem különítette el a 401/403 választ, és hiba után stale adatot hagyhatott állapotban.
+- **Javítás:** explicit entitlement üzenetek, hibaállapot-törlés és AbortController cancellation az `app/insights/category/[category]/page.tsx` fájlban.
+- **Regresszió:** `tests/unit/browser-product-contract.test.cjs`; anonim és aktív Premium CDP flow.
+- **Státusz:** `FIXED`
+
+### APP-233 – Next dynamic params synchronous read
+
+- **Severity:** Low
+- **Terület:** Category Insights API runtime compatibility
+- **Reprodukció:** Next.js 16 dev runtime minden category API kérésnél sync-dynamic-apis figyelmeztetést írt.
+- **Root cause:** a route Promise-ként érkező `context.params` értéket közvetlenül olvasta.
+- **Javítás:** Promise/object kompatibilis paraméterfeloldás az `app/api/insights/category/[category]/route.ts` fájlban.
+- **Regresszió:** `tests/unit/browser-product-contract.test.cjs`; category runtime warning eltűnt.
+- **Státusz:** `FIXED`
+
+### Browser acceptance evidence
+
+- `tests/unit/browser-product-contract.test.cjs`: PASS.
+- Offline suite: 382/382 PASS; TypeScript PASS; ESLint 0 error; import check PASS.
+- Chrome desktop/mobile effective viewport checks: 438, 768 és 1366 CSS px, horizontal overflow nélkül; főoldal, Trends, Insights, category Insights, Premium, Híradó, article detail és reset route-ok rendereltek.
+- Paid AI: 0; payment: 0; production DB/deploy: nem érintett.
+- Nyitott javítható browser finding: 0.

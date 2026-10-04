@@ -54,6 +54,14 @@ export default function CategoryPage() {
 
   useEffect(() => {
     let mounted = true;
+    const controller = new AbortController();
+
+    const clearData = () => {
+      setMeta(null);
+      setSummary(null);
+      setItems([]);
+      setRingSources([]);
+    };
 
     async function load() {
       setLoading(true);
@@ -67,13 +75,19 @@ export default function CategoryPage() {
         )}&page=${page}&limit=${limit}`;
 
         const res = await fetch(url, {
-  cache: "no-store",
-  headers: {
-    "x-api-key": "",
-  },
-});
+          cache: "no-store",
+          signal: controller.signal,
+        });
 
-        if (!res.ok) throw new Error("Hálózati hiba");
+        if (!res.ok) {
+          if (mounted) {
+            clearData();
+            if (res.status === 401) setError("A kategóriai elemzésekhez jelentkezz be.");
+            else if (res.status === 403) setError("Ez az elemzés Prémium előfizetéssel érhető el.");
+            else setError(`A kategóriai elemzés nem érhető el (HTTP ${res.status}).`);
+          }
+          return;
+        }
 
         const json = await res.json();
         if (!mounted) return;
@@ -122,8 +136,12 @@ export default function CategoryPage() {
         setRingSources(normalizedRingSources);
 
       } catch (e) {
+        if (e instanceof DOMException && e.name === "AbortError") return;
         console.error("Category load error:", e);
-        if (mounted) setError("Szerverhiba vagy hálózati probléma.");
+        if (mounted) {
+          clearData();
+          setError("Szerverhiba vagy hálózati probléma.");
+        }
       } finally {
         if (mounted) setLoading(false);
       }
@@ -132,6 +150,7 @@ export default function CategoryPage() {
     load();
     return () => {
       mounted = false;
+      controller.abort();
     };
   }, [categoryRaw, period, sort, page, limit]);
 

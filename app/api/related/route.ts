@@ -6,7 +6,11 @@ import { adaptOptionalRelatedProjection } from "@/lib/v2/runtime-related-news";
 let pool: mysql.Pool | null = null;
 
 const RELATED_SOURCES = new Set([
-  "telex", "24.hu", "index", "hvg", "portfolio", "444", "origo",
+  // normalizeRelatedSource() returns canonical source identities (for
+  // example `telex` and `telex.hu` both become `telex.hu`).  Keeping the
+  // allow-list in that same canonical form prevents valid article-detail
+  // requests from being rejected with 400 before the query runs.
+  "telex.hu", "24.hu", "index.hu", "hvg.hu", "portfolio.hu", "444.hu", "origo.hu",
 ]);
 
 function getPool() {

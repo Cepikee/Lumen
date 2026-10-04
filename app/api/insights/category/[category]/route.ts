@@ -26,7 +26,13 @@ export async function GET(req: Request, context: any) {
 
   const url = new URL(req.url);
 
-  const rawFromContext = context?.params?.category;
+  // Next 15/16 supplies dynamic route params as a Promise. Resolve it before
+  // reading the category so the route does not emit a sync-dynamic-apis
+  // warning (and does not silently fall back to parsing the URL path).
+  const resolvedParams = context?.params && typeof context.params.then === "function"
+    ? await context.params
+    : context?.params;
+  const rawFromContext = resolvedParams?.category;
   const rawFromPath = (url.pathname || "").split("/").filter(Boolean).pop();
   const raw = rawFromContext ?? rawFromPath ?? undefined;
   const categoryParam = normalizeParam(raw);

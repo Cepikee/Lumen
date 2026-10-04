@@ -30,5 +30,5 @@ Developmentben a `NEXT_PUBLIC_LOCAL_DEMO_CAPTCHA=true` és `UTOM_LOCAL_DEMO_CAPT
 - A reset/migration/seed eredménye: schema 059; 12 source, 40 article, 34 summary, 3 user, 4 entity, 8 alias, 3 relation, 12 claim, 3 event, 25 timeline item, 2 conflict; paid AI és payment 0.
 - A tiszta temp másolatban `npm ci` és `npm run check` PASS. A workspace `node_modules` változatlan maradt.
 - A localhost demo során a DB portot figyelmen kívül hagyó route-poolok és a Híradó üres-result renderhibája reprodukálva és javítva lett (`V21-BUG-F002`, `V21-BUG-F003`).
-- A production-mode demo Premium login session HTTP localhoston is visszaolvasható (`V21-BUG-F004` után). A Chrome CUA transport ebben a sessionben megszakadt, ezért a viewportonkénti screenshot acceptance még külső eszközblokkolóként nyitott.
+- A production-mode demo Premium login session HTTP localhoston is visszaolvasható (`V21-BUG-F004` után). A valódi Windows Chrome CDP acceptance disposable profillal lefutott; a viewportonkénti screenshotok külső ideiglenes acceptance könyvtárban készültek.
 - A canonical E2E harness nem seedel derived V2 táblákat; a 3 nyers forrásváltozatból 21 mention, 11 claim, 1 event és 3 timeline item jött létre. Az új entity-master writer hiánya miatt az M6/M11 kapu blokkolt; a részletek a `13_CANONICAL_INTELLIGENCE_E2E.md` dokumentumban vannak.

@@ -8,6 +8,33 @@ API 500/404, hibás JSON, null, timeout, lassú hálózat, offline, képbetölt�
 
 `V21-BUG-Fxxx`: reprodukció, root cause, severity, javítás, regresszió, státusz.
 
+### V21-BUG-F005 – kapcsolódó hírek canonical source allowlist hibája
+
+- **Severity:** Medium
+- **Reprodukció:** valódi Chrome article detail oldalon a `/cikk/1` kérés `/api/related?source=telex&exclude=1&limit=5` választ adott.
+- **Root cause:** a `normalizeRelatedSource()` canonical kulcsot (`telex.hu`, `index.hu`, stb.) adott vissza, miközben a route allowlistje csak rövid aliasokat tartalmazott (`telex`, `index`, ...), ezért a valid kérés 400-zal leállt.
+- **Javítás:** az allowlist canonical source kulcsokra váltott; az aliasok továbbra is a közös normalizálón keresztül működnek.
+- **Regresszió:** `tests/unit/browser-product-contract.test.cjs`, related route unit regressziók és Chrome runtime ellenőrzés; a kérés most 200-as tömbválaszt ad.
+- **Státusz:** `FIXED`
+
+### V21-BUG-F006 – kategória Insights jogosultsági hiba félrevezető UI-ja
+
+- **Severity:** Medium
+- **Reprodukció:** anonim Chrome sessionben a `/insights/category/politika` premium proxy 401 válasza a képernyőn általános „Szerverhiba vagy hálózati probléma” üzenetként jelent meg.
+- **Root cause:** a page minden nem-2xx választ ugyanazzal az exceptionnel kezelte, nem különítette el a 401/403 entitlement állapotot, és hiba után a korábbi adatot sem törölte.
+- **Javítás:** explicit 401/403/egyéb HTTP üzenetek, adatállapot törlés hiba esetén, `AbortController` alapú cancellation és unmount/race védelem.
+- **Regresszió:** `tests/unit/browser-product-contract.test.cjs`; anonim és prémium Chrome ellenőrzés.
+- **Státusz:** `FIXED`
+
+### V21-BUG-F007 – Next dynamic params szinkron olvasása category API-ban
+
+- **Severity:** Low
+- **Reprodukció:** Next.js 16 dev runtime a category API minden kérésénél `params is a Promise` figyelmeztetést írt, és csak URL-fallbackből kapta meg a kategóriát.
+- **Root cause:** a route közvetlenül `context.params.category` mezőt olvasott Promise-alapú route contextből.
+- **Javítás:** a route a Promise-alapú és a régi objektum-alapú contextet is feloldja, majd a feloldott paraméterből normalizál.
+- **Regresszió:** `tests/unit/browser-product-contract.test.cjs`; category API Chrome runtime ellenőrzés figyelmeztetés nélkül.
+- **Státusz:** `FIXED`
+
 ## Acceptance
 
 Csak bizonyított hiba kap javítást; minden javítható finding FIXED vagy konkrét külső ok miatt BLOCKED.

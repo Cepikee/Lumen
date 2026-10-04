@@ -13,7 +13,7 @@
 
 ## Státusz
 
-`IN PROGRESS – LOCALHOST/DEMO RUNTIME VALIDÁCIÓ`.
+`IN PROGRESS – BROWSER ACCEPTANCE EVIDENCE`.
 
 ### Bizonyíték 2026-10-04
 
@@ -25,4 +25,10 @@
 - RSS live acceptance PASS: hat hivatalos kiadói feed 200 + parse sikeres, a proxy feed külön nem hivatalosként jelölve; izolált Telex ingest és dedup PASS.
 - V2 article context és source comparison trace PASS; `V21-TRACE-F001` javítva, a context most claim/entity/timeline projectiont ad.
 - Az explicit loopbackos `utom_v21_test` MySQL célponton a fájlonként izolált teljes integration suite 56 tesztből 55 PASS; az egyetlen SKIP a lokálisan hiányzó FFmpeg. A production HTTP auth és legacy PIN/proxy tesztek explicit helyi encryption key-jel PASS.
-- Chrome mobil és desktop screenshot acceptance még nincs teljesen lezárva: a CUA browser transport megszakadt a sessionben, ezért a viewportonkénti bizonyíték BLOCKED. A végső acceptance emiatt nem PASS.
+- Valódi Windows Chrome CDP acceptance PASS izolált, disposable `E:\\TEMP\\utom-chrome-v21` profillal; a normál felhasználói Chrome profil nem volt használva.
+- Desktop és mobil jellegű viewport ellenőrzés PASS: a tesztelt effektív viewportokban (438, 768 és 1366 CSS px) a főoldal, Trends, Insights, category Insights, Premium, Híradó és article detail oldalak rendereltek; horizontal overflow nem volt.
+- Anonim flow PASS: a főoldal, keresés, Trends, article detail, Premium oldal és category Insights oldal betöltődött; a category premium 401 most egyértelmű bejelentkezési üzenet.
+- Aktív Premium flow PASS: local demo login után az Insights és category Insights adatai megjelentek; a premium proxy és minden vizsgált statisztikai fetch 200 választ adott.
+- Híradó üres adatállapot PASS: a `/hirado` oldal konfigurált lokális video-sign secret mellett 200-at ad és „Ma még nincs elérhető híradó” állapotot renderel.
+- Chrome acceptance során három alkalmazási finding került elő és javult: `V21-BUG-F005`, `V21-BUG-F006`, `V21-BUG-F007`. Célzott regressziók: `tests/unit/browser-product-contract.test.cjs`; offline suite 382/382 PASS, TypeScript PASS, ESLint 0 error, import check PASS.
+- A böngészős ellenőrzés paid AI, payment és production érintés nélkül, az izolált `utom_v21_test` adatbázison futott.
