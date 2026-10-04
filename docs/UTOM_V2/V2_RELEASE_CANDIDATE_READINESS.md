@@ -15,7 +15,7 @@ Valódi fizetős provider hívás: **0**
 - M1–M18: korábban lezárt, nem nyitottuk újra.
 - M19: nincs definiálva és nem került létrehozásra.
 - A release-candidate dokumentum célja a staging-szerű együttműködés ellenőrzése, nem új funkcionalitás.
-- Ebben a sessionben commit és push nem történt.
+- A korábbi release-candidate checkpoint commitja után a production-preflight javítások külön checkpointban kerülnek rögzítésre.
 
 ## 2. Kiinduló diff
 
@@ -277,3 +277,10 @@ Ez a dokumentum a lépéseket csak tervezi; production deploy, production migrat
 | V2-RC-F001 | **FIXED**, célzott regresszióval és 37/37 MySQL recovery teszttel igazolva |
 
 Az audit végén nem maradt ideiglenes release adatbázis, felhasználó vagy backup fájl. A repository-local Node telepítés zárolt SWC bináris miatt továbbra is környezeti korlátozás; a célzott teszt és az offline suite izolált, lockfile-alapú telepítéssel PASS. A korábbi TypeScript, ESLint, import, `npm run check` és production build bizonyíték érvényes; az aktuális shellben a sérült repository-local `node_modules` miatt ezek binárisai újra nem indíthatók.
+
+## 16. Production preflight P1 javítások
+
+- `PROD-PREFLIGHT-F001`: **FIXED**; a production preflight a canonical `REQUIRED_SCHEMA.latestVersion` értéket használja, amely a migration lista aktuális utolsó verziójából származik.
+- `PROD-PREFLIGHT-F002`: **FIXED**; `UTOM_PAID_AI_ENABLED=false` esetén OpenAI credential nem kötelező, bekapcsolt paid AI esetén az explicit provider/real-AI/credential ellenőrzés megmarad.
+- Célzott preflight regresszió: **10/10 PASS**.
+- Clean-copy quality gate: TypeScript PASS, ESLint 0 error, import PASS, offline **370/370 PASS**, production build PASS.

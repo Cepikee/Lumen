@@ -61,12 +61,12 @@ Ez nem alkalmazási runtime-hiba, és nem nyit új termék- vagy fejlesztési f�
 - Raw SQL: V2 persistence repository-boundarykon van; read model lekérdezések read-onlyak, explicit scope/id/pagination validációval és stabil rendezéssel.
 - Security/entitlement: same-origin kivétel csak három explicit GET read route-ra érvényes; Premium entitlement kizárólag szerveroldali session + entitlement alapján dönt.
 - Secret/debug hygiene: repositoryban nincs audit fixture credential vagy provider secret; a debug komponens nem része az M18 runtime integrációnak.
-- Worktree: az audit módosításai dokumentációsak, valamint egy readiness-séma verzióeltérés célzott kód- és regressziójavítása; nincs commit vagy push.
+- Worktree: az audit módosításai dokumentációsak, valamint readiness- és production-preflight javítások; ezeket külön release checkpoint commit tartalmazza.
 
 ## 5. Tesztkapu
 
 - TypeScript: **PASS**
-- Offline suite: **366/366 PASS**
+- Offline suite: **370/370 PASS**
 - M18 célzott regresszió: **6/6 PASS**
 - Import check: **PASS**
 - ESLint: **0 error, 386 warning**

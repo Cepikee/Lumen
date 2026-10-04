@@ -10,6 +10,7 @@ Ez a dokumentum végrehajtatlan rollout-terv. Production deploy, production migr
 - Production MySQL, Node és disk-space ellenőrzés.
 - Production secret-ek és credentialek ellenőrzése; konkrét értékek: **TULAJDONOSI/ÜZEMELTETŐI KITÖLTÉS SZÜKSÉGES**.
 - Server és frontend V2 flag kezdetben `OFF`.
+- `UTOM_PAID_AI_ENABLED=false` az első rolloutnál.
 - Paid AI provider alapértelmezésben `OFF`; bekapcsolás csak külön explicit művelettel, M12 költségkerettel és hard cappal.
 
 ## Pre-deploy backup

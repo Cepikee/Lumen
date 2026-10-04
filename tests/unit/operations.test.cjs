@@ -28,7 +28,7 @@ test("worker environment is fail-safe and offline mode does not require OpenAI",
 });
 
 test("production environment requires explicit side effects and their secret categories", () => {
-  const valid = { DB_HOST: "db", DB_USER: "app", DB_PASSWORD: "secret", DB_NAME: "utom", UTOM_OFFLINE_MODE: "false", BACKGROUND_JOBS_ENABLED: "true", NODE_ENV: "production", APP_MODE: "production", AI_PROVIDER: "openai", REAL_AI_ENABLED: "true", OPENAI_API_KEY: "test-marker", UTOM_INTERNAL_WORKER_TOKEN: "x".repeat(32), EMAIL_OUTBOX_ENCRYPTION_KEY: "ab".repeat(32) };
+  const valid = { DB_HOST: "db", DB_USER: "app", DB_PASSWORD: "secret", DB_NAME: "utom", UTOM_OFFLINE_MODE: "false", BACKGROUND_JOBS_ENABLED: "true", NODE_ENV: "production", APP_MODE: "production", UTOM_PAID_AI_ENABLED: "true", AI_PROVIDER: "openai", REAL_AI_ENABLED: "true", OPENAI_API_KEY: "test-marker", UTOM_INTERNAL_WORKER_TOKEN: "x".repeat(32), EMAIL_OUTBOX_ENCRYPTION_KEY: "ab".repeat(32) };
   assert.equal(validateProductionEnvironment(valid).aiProvider, "openai");
   assert.throws(() => validateProductionEnvironment({ ...valid, OPENAI_API_KEY: "" }), /production_real_ai_configuration_missing|openai_api_key_missing/);
   assert.throws(() => validateProductionEnvironment({ ...valid, UTOM_INTERNAL_WORKER_TOKEN: "short" }), /production_health_token_missing_or_short/);
@@ -36,6 +36,12 @@ test("production environment requires explicit side effects and their secret cat
   assert.throws(() => validateProductionEnvironment({ ...valid, EMAIL_SEND_ENABLED: "true" }), /production_mail_configuration_missing/);
   assert.throws(() => validateProductionEnvironment({ ...valid, PAYMENT_ENABLED: "true" }), /production_payment_configuration_missing/);
   assert.throws(() => validateProductionEnvironment({ ...valid, VIDEO_GENERATION_ENABLED: "true" }), /production_video_configuration_missing/);
+});
+
+test("production environment allows paid AI to remain disabled without a provider key", () => {
+  const offlineAi = { DB_HOST: "db", DB_USER: "app", DB_PASSWORD: "secret", DB_NAME: "utom", UTOM_OFFLINE_MODE: "false", BACKGROUND_JOBS_ENABLED: "true", NODE_ENV: "production", APP_MODE: "production", UTOM_PAID_AI_ENABLED: "false", AI_PROVIDER: "mock", REAL_AI_ENABLED: "false", UTOM_INTERNAL_WORKER_TOKEN: "x".repeat(32), EMAIL_OUTBOX_ENCRYPTION_KEY: "ab".repeat(32) };
+  assert.equal(validateProductionEnvironment(offlineAi).paidAiEnabled, false);
+  assert.throws(() => validateProductionEnvironment({ ...offlineAi, UTOM_PAID_AI_ENABLED: "true" }), /production_ai_provider_must_be_explicit/);
 });
 
 test("internal health authentication rejects anonymous and malformed credentials", () => {

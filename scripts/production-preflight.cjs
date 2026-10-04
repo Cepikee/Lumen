@@ -5,7 +5,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const mysql = require("mysql2/promise");
 const { loadMigrations, auditMigrationChain, getMigrationStatus } = require("../db/migration-core.cjs");
-const { validateProductionEnvironment, checkSchemaReadiness, redact } = require("../lib/operations");
+const { REQUIRED_SCHEMA, validateProductionEnvironment, checkSchemaReadiness, redact } = require("../lib/operations");
 
 async function main() {
   const checks = [];
@@ -31,11 +31,11 @@ async function main() {
     check("database_connectivity", true, "connected");
     const migrations = loadMigrations();
     const audit = auditMigrationChain(migrations);
-    check("migration_source", audit.safeToApply && audit.latestVersion === "033", `latest=${audit.latestVersion};critical=${audit.findings.filter((x) => x.level === "critical").length}`);
+    check("migration_source", audit.safeToApply && audit.latestVersion === REQUIRED_SCHEMA.latestVersion, `latest=${audit.latestVersion};required=${REQUIRED_SCHEMA.latestVersion};critical=${audit.findings.filter((x) => x.level === "critical").length}`);
     const status = await getMigrationStatus(connection, migrations);
-    check("migration_status", status.currentVersion === "033" && status.pending.length === 0, `current=${status.currentVersion};pending=${status.pending.length}`);
+    check("migration_status", status.currentVersion === REQUIRED_SCHEMA.latestVersion && status.pending.length === 0, `current=${status.currentVersion};required=${REQUIRED_SCHEMA.latestVersion};pending=${status.pending.length}`);
     const schema = await checkSchemaReadiness(connection);
-    check("schema_readiness", schema.ready, schema.ready ? "exact_supported_schema=033" : schema.missing.join(","));
+    check("schema_readiness", schema.ready, schema.ready ? `exact_supported_schema=${REQUIRED_SCHEMA.latestVersion}` : schema.missing.join(","));
     if (schema.ready) {
       const [[articles]] = await connection.query("SELECT SUM(status='in_progress') active_claims FROM articles");
       const [[speed]] = await connection.query("SELECT SUM(status='in_progress') active_claims FROM speed_index_recalculation_jobs");
