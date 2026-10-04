@@ -134,3 +134,9 @@ A claim persistence ISO `validFrom` hibáját (`ER_TRUNCATED_WRONG_VALUE`) a `my
 `PRODUCTION DB ÉRINTVE: NEM`
 
 `PRODUCTION DEPLOY: NEM`
+
+
+## V2.1 final closure cross-reference – 2026-10-04
+
+SEO/sharing, Premium UX, ingestion technical audit, localhost load/soak and final quality evidence are consolidated in docs/UTOM_V2_1/10_V2_1_FINAL_ACCEPTANCE.md and docs/UTOM_V2_1/17_V2_1_RELEASE_READINESS.md. No production DB, deploy, payment or paid AI was used.
+

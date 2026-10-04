@@ -30,3 +30,9 @@ A Chrome körben reprodukált és javított UI hibák:
 - Article detail `h1` nélkül, LoginModal dialog semantics nélkül, ProfileMenu keyboard trigger nélkül renderelt; mindhárom javítva.
 
 A modal, heading, named control, image alt és keyboard focus ellenőrzések célzott tesztekkel és valódi Chrome Tab navigációval PASS.
+
+
+## V2.1 final closure cross-reference – 2026-10-04
+
+SEO/sharing, Premium UX, ingestion technical audit, localhost load/soak and final quality evidence are consolidated in docs/UTOM_V2_1/10_V2_1_FINAL_ACCEPTANCE.md and docs/UTOM_V2_1/17_V2_1_RELEASE_READINESS.md. No production DB, deploy, payment or paid AI was used.
+

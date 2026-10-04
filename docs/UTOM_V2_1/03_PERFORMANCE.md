@@ -69,3 +69,9 @@ Környezet: `127.0.0.1:33307`, WSL Ubuntu 24.04 / MySQL `8.0.46-0ubuntu0.24.04.4
 | `/api/v2/premium/intelligence?eventId=1` | 30.50 ms | 32.98 ms | 2,809 B |
 
 Ezek lokális, izolált mérési adatok, nem production SLO-k. A közös rate limiter külön rate-key nélkül 429-et adhat ismételt, nagy mintaszámú futásnál; ez a védelmi működés része, nem teljesítményhiba.
+
+
+## V2.1 final closure cross-reference – 2026-10-04
+
+SEO/sharing, Premium UX, ingestion technical audit, localhost load/soak and final quality evidence are consolidated in docs/UTOM_V2_1/10_V2_1_FINAL_ACCEPTANCE.md and docs/UTOM_V2_1/17_V2_1_RELEASE_READINESS.md. No production DB, deploy, payment or paid AI was used.
+
