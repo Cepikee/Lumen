@@ -61,8 +61,9 @@ test("M2 provenance persistence is idempotent, append-oriented and rollback-safe
     await resetDatabase(connection);
     const migrations = loadMigrations();
     const baseline = migrations.filter((migration) => Number(migration.version) <= 52);
+    const provenanceMigrations = migrations.filter((migration) => Number(migration.version) <= 53);
     await applyMigrations(connection, baseline);
-    const upgraded = await applyMigrations(connection, migrations);
+    const upgraded = await applyMigrations(connection, provenanceMigrations);
     assert.deepEqual(upgraded, ["053_v2_ingestion_provenance.sql"]);
     const [[extension]] = await connection.execute("SELECT COUNT(*) count FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='v2_ingestion_provenance'");
     assert.equal(Number(extension.count), 1);

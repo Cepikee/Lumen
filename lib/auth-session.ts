@@ -7,6 +7,17 @@ const COOKIE = "session_user";
 const SESSION_SECONDS = 60 * 60 * 24;
 const REMEMBER_SECONDS = 60 * 60 * 24 * 30;
 
+function isLocalDemoRuntime(): boolean {
+  const host = (process.env.DB_HOST || "").trim().toLowerCase();
+  return process.env.UTOM_LOCAL_DEMO_CAPTCHA === "true"
+    && process.env.DB_NAME === "utom_dev"
+    && (host === "127.0.0.1" || host === "localhost" || host === "::1");
+}
+
+function shouldUseSecureCookie(): boolean {
+  return process.env.NODE_ENV === "production" && !isLocalDemoRuntime();
+}
+
 function digest(value: string): string {
   return createHash("sha256").update(value).digest("hex");
 }
@@ -20,7 +31,7 @@ export async function createSession(userId: number, response: NextResponse, reme
   );
   response.cookies.set(COOKIE, token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: shouldUseSecureCookie(),
     sameSite: "lax",
     path: "/",
     maxAge,
@@ -52,7 +63,7 @@ export async function revokeAllUserSessions(userId: number): Promise<void> {
 export function clearSessionCookie(response: NextResponse): void {
   response.cookies.set(COOKIE, "", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: shouldUseSecureCookie(),
     sameSite: "lax",
     path: "/",
     maxAge: 0,

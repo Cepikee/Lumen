@@ -1,4 +1,13 @@
 export async function verifyRecaptcha(token: string) {
+  if (
+    process.env.NODE_ENV !== "production" &&
+    process.env.UTOM_LOCAL_DEMO_CAPTCHA === "true" &&
+    ["127.0.0.1", "localhost", "::1"].includes(String(process.env.DB_HOST)) &&
+    process.env.DB_NAME === "utom_dev" &&
+    token === "local-demo"
+  ) {
+    return 0.9;
+  }
   if (process.env.UTOM_TEST_FIXTURE_MODE === "true") {
     const host = process.env.DB_HOST;
     if (!["127.0.0.1", "localhost", "::1"].includes(String(host)) || !String(process.env.DB_NAME).endsWith("_test")) {

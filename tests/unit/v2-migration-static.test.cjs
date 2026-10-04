@@ -10,6 +10,7 @@ const m2Migrations = loadMigrations().filter((migration) => Number(migration.ver
 const m4Migrations = loadMigrations().filter((migration) => Number(migration.version) === 54);
 const m5Migrations = loadMigrations().filter((migration) => Number(migration.version) >= 55 && Number(migration.version) <= 57);
 const m10Migrations = loadMigrations().filter((migration) => Number(migration.version) === 58);
+const entityScopeMigration = loadMigrations().find((migration) => Number(migration.version) === 59);
 
 test("M1.4 has one ordered migration statement per fixture table", () => {
   const names = contract.migrationOrder;
@@ -28,11 +29,20 @@ test("M1.4 migrations contain every fixture column and named constraint", () => 
   for (const migration of m1Migrations) {
     const tableName = migration.filename.replace(/^\d{3}_/, "").replace(/\.sql$/, "");
     const table = contract.tables[tableName];
-    for (const columnName of Object.keys(table.columns).filter((name) => !(tableName === "v2_entity_mentions" && name === "entity_type") && !(tableName === "v2_timeline_items" && ["valid_from", "valid_until"].includes(name)))) assert.match(migration.sql, new RegExp(`\\b${columnName}\\b`), `${tableName}.${columnName}`);
-    for (const unique of table.unique) assert.match(migration.sql, new RegExp(`UNIQUE KEY ${unique.name} \\(`), unique.name);
-    for (const index of table.indexes.filter((index) => !(tableName === "v2_timeline_items" && index.name === "idx_v2_timeline_items_valid_from_valid_until"))) assert.match(migration.sql, new RegExp(`KEY ${index.name} \\(`), index.name);
+    for (const columnName of Object.keys(table.columns).filter((name) => !(tableName === "v2_entity_mentions" && name === "entity_type") && !(tableName === "v2_timeline_items" && ["valid_from", "valid_until"].includes(name)) && !(tableName === "v2_entities" && ["normalized_name_hash", "identity_scope_key"].includes(name)))) assert.match(migration.sql, new RegExp(`\\b${columnName}\\b`), `${tableName}.${columnName}`);
+    for (const unique of table.unique.filter((unique) => !(tableName === "v2_entities" && unique.name === "uq_v2_entities_identity_scope"))) assert.match(migration.sql, new RegExp(`UNIQUE KEY ${unique.name} \\(`), unique.name);
+    for (const index of table.indexes.filter((index) => !(tableName === "v2_timeline_items" && index.name === "idx_v2_timeline_items_valid_from_valid_until") && !(tableName === "v2_entities" && index.name === "idx_v2_entities_identity_scope_key_status"))) assert.match(migration.sql, new RegExp(`KEY ${index.name} \\(`), index.name);
     for (const foreignKey of table.foreignKeys) assert.match(migration.sql, new RegExp(`FOREIGN KEY \\(${foreignKey.columns.join(", ")}\\) REFERENCES ${foreignKey.table} \\(${foreignKey.referencedColumns.join(", ")}\\) ON DELETE ${foreignKey.onDelete} ON UPDATE ${foreignKey.onUpdate}`), `${tableName} FK`);
   }
+});
+
+test("V2.1 provisional identity scope migration is additive and bounded", () => {
+  assert.equal(entityScopeMigration.filename, "059_v2_provisional_entity_scope.sql");
+  assert.match(entityScopeMigration.sql, /ADD COLUMN identity_scope_key VARCHAR\(255\) NOT NULL DEFAULT ''/i);
+  assert.match(entityScopeMigration.sql, /ADD COLUMN normalized_name_hash CHAR\(64\) GENERATED ALWAYS AS \(SHA2\(normalized_name,256\)\) STORED/i);
+  assert.match(entityScopeMigration.sql, /DROP INDEX uq_v2_entities_entity_type_language_normalized_name/i);
+  assert.match(entityScopeMigration.sql, /UNIQUE KEY uq_v2_entities_identity_scope/i);
+  assert.doesNotMatch(entityScopeMigration.sql, /DROP TABLE|DROP COLUMN/i);
 });
 
 test("M2 provenance migration is additive and uses the dedicated contract", () => {

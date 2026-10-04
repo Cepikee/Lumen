@@ -27,7 +27,7 @@ test("M1.3 fixture freezes the complete additive V2 table scope", () => {
 });
 
 test("identity, duplicate and provenance constraints are explicit", () => {
-  assert.deepEqual(contract.tables.v2_entities.unique[0].columns, ["entity_type", "language", "normalized_name"]);
+  assert.deepEqual(contract.tables.v2_entities.unique[0].columns, ["entity_type", "language", "normalized_name_hash", "identity_scope_key"]);
   assert.deepEqual(contract.tables.v2_entity_aliases.unique[0].columns, ["entity_id", "normalized_alias", "language"]);
   assert.deepEqual(contract.tables.v2_entity_relations.unique[0].columns, ["idempotency_key"]);
   assert.deepEqual(contract.tables.v2_claims.unique[0].columns, ["observation_key"]);

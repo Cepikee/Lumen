@@ -127,10 +127,10 @@ test("MySQL 8 recovery integration and concurrency suite", { skip: !enabled }, a
     await t.test("fresh MySQL 8 schema applies the complete migration chain without intervention", async () => {
       assert.equal((await applyMigrations(connection, migrations)).length, migrations.length);
       assert.deepEqual(await applyMigrations(connection, migrations), []);
-      assert.deepEqual(await checkSchemaReadiness(connection), { ready: true, latestRequiredVersion: "058", missing: [] });
+      assert.deepEqual(await checkSchemaReadiness(connection), { ready: true, latestRequiredVersion: "059", missing: [] });
       const [[ledger]] = await connection.execute("SELECT COUNT(*) count,MAX(version) latest FROM schema_migrations");
       assert.equal(Number(ledger.count), migrations.length);
-      assert.equal(ledger.latest, "058");
+      assert.equal(ledger.latest, "059");
     });
     await resetDatabase(connection);
     await t.test("existing 032 schema upgrades to the V2 latest without changing prior migration checksums", async () => {
@@ -146,13 +146,17 @@ test("MySQL 8 recovery integration and concurrency suite", { skip: !enabled }, a
     const recovery = migrations.filter((migration) => Number(migration.version) >= 22);
     assert.equal((await applyMigrations(connection, baseline)).length, baseline.length);
 
-    const [source] = await connection.execute("INSERT INTO sources (slug, name, homepage_url) VALUES ('fixture', 'fixture', 'https://fixture.invalid')");
+    await connection.query(
+      "INSERT INTO sources (slug, name, homepage_url, is_active) VALUES (?, ?, ?, 1), (?, ?, ?, 1), (?, ?, ?, 1)",
+      ["fixture", "fixture", "https://fixture.invalid", "24.hu", "24.hu", "https://24.hu", "telex.hu", "telex.hu", "https://telex.hu"],
+    );
+    const [[source]] = await connection.execute("SELECT id FROM sources WHERE slug='fixture' LIMIT 1");
     const [cluster] = await connection.execute("INSERT INTO clusters (first_published_at, first_source) VALUES (UTC_TIMESTAMP(), 'fixture')");
     const fixtureStatuses = ["pending", "done", "failed"];
     for (let index = 0; index < fixtureStatuses.length; index++) {
       await connection.execute(
         "INSERT INTO articles (title, url_canonical, source_id, cluster_id, status) VALUES (?, ?, ?, ?, ?)",
-        [`fixture-${index}`, `https://fixture.invalid/${index}`, source.insertId, cluster.insertId, fixtureStatuses[index]],
+        [`fixture-${index}`, `https://fixture.invalid/${index}`, source.id, cluster.insertId, fixtureStatuses[index]],
       );
     }
     await connection.execute("INSERT INTO summaries (article_id, content) VALUES (1, 'fixture')");
@@ -181,7 +185,7 @@ test("MySQL 8 recovery integration and concurrency suite", { skip: !enabled }, a
       assert.equal(identityIndex.Sub_part, null);
       const [statuses] = await connection.query("SELECT status FROM articles ORDER BY id");
       assert.deepEqual(statuses.map((row) => row.status), fixtureStatuses);
-      assert.deepEqual(await checkSchemaReadiness(connection), { ready: true, latestRequiredVersion: "058", missing: [] });
+      assert.deepEqual(await checkSchemaReadiness(connection), { ready: true, latestRequiredVersion: "059", missing: [] });
     });
 
     await t.test("schema readiness fails closed for a missing critical constraint", async () => {

@@ -23,6 +23,7 @@ const table = (purpose, columns, primaryKey, options = {}) => ({
   columns,
   primaryKey,
   unique: options.unique || [],
+  uniqueNames: options.uniqueNames || [],
   indexes: options.indexes || [],
   foreignKeys: options.foreignKeys || [],
 });
@@ -40,13 +41,13 @@ const provenanceFk = (columns, tableName, onDelete = "RESTRICT") => ({ columns, 
 const tables = {
   v2_entities: table("Canonical typed knowledge entities", {
     id: id(), entity_type: column("VARCHAR(32)", { semantic: "controlled entity type" }),
-    canonical_name: column("VARCHAR(512)"), normalized_name: column("VARCHAR(512)"), language: column("VARCHAR(16)", { default: "hu" }),
+    canonical_name: column("VARCHAR(512)"), normalized_name: column("VARCHAR(512)"), normalized_name_hash: column("CHAR(64)", { nullable: true, generated: "SHA2(normalized_name,256)" }), language: column("VARCHAR(16)", { default: "hu" }), identity_scope_key: column("VARCHAR(255)", { default: "" }),
     status: column("VARCHAR(24)", { default: "review", semantic: "entity lifecycle" }), canonical_entity_id: column("BIGINT UNSIGNED", { nullable: true, semantic: "merge canonical pointer" }),
     confidence_current: column("DECIMAL(5,4)", { nullable: true, semantic: "0..1; resolution/current confidence" }),
     first_observed_at: utc("first observation"), last_observed_at: utc("last observation"), created_at: requiredUtc("technical creation"), updated_at: requiredUtc("technical update"),
   }, ["id"], {
-    unique: [["entity_type", "language", "normalized_name"]],
-    indexes: [["status"], ["canonical_entity_id"], ["last_observed_at"]],
+    unique: [["entity_type", "language", "normalized_name_hash", "identity_scope_key"]],
+    indexes: [["status"], ["canonical_entity_id"], ["last_observed_at"], ["identity_scope_key", "status"]], uniqueNames: ["uq_v2_entities_identity_scope"],
     foreignKeys: [{ columns: ["canonical_entity_id"], table: "v2_entities", referencedColumns: ["id"], onDelete: "SET NULL", onUpdate: "RESTRICT" }],
   }),
   v2_entity_aliases: table("Normalized aliases and ambiguous candidate names", {
@@ -117,7 +118,7 @@ const tables = {
 // fixture remains the only expected-schema source.
 const namedTables = Object.fromEntries(Object.entries(tables).map(([tableName, definition]) => [tableName, {
   ...definition,
-  unique: definition.unique.map((columns) => ({ name: `uq_${tableName}_${columns.join("_")}`, columns })),
+  unique: definition.unique.map((columns, index) => ({ name: definition.uniqueNames?.[index] || `uq_${tableName}_${columns.join("_")}`, columns })),
   indexes: definition.indexes.map((columns) => ({ name: `idx_${tableName}_${columns.join("_")}`, columns, unique: false })),
 }]));
 

@@ -13,7 +13,8 @@ test("M13 MySQL read models project entity/event/claim/source comparison without
     await applyMigrations(connection, loadMigrations());
     const [source] = await connection.execute("INSERT INTO sources (slug,name,is_active) VALUES (?,?,1)", [`m13-${suffix}`, "M13 Source"]);
     const [article] = await connection.execute("INSERT INTO articles (title,url_canonical,source_id,source,status,published_at) VALUES (?,?,?,?,?,UTC_TIMESTAMP())", ["M13", `https://m13.invalid/${suffix}`, source.insertId, "M13 Source", "done"]);
-    const [entity] = await connection.execute("INSERT INTO v2_entities (entity_type,canonical_name,normalized_name,language,status,created_at,updated_at) VALUES ('person','M13 Entity','m13 entity','hu','active',UTC_TIMESTAMP(6),UTC_TIMESTAMP(6))");
+    const entityName = `M13 Entity ${suffix}`;
+    const [entity] = await connection.execute("INSERT INTO v2_entities (entity_type,canonical_name,normalized_name,language,status,created_at,updated_at) VALUES ('person',?,?, 'hu','active',UTC_TIMESTAMP(6),UTC_TIMESTAMP(6))", [entityName, entityName.toLowerCase()]);
     await connection.execute("INSERT INTO v2_entity_aliases (entity_id,alias,normalized_alias,language,alias_type,status,created_at,updated_at) VALUES (?,?,?,?,?,?,UTC_TIMESTAMP(6),UTC_TIMESTAMP(6))", [entity.insertId, "M13 Alias", "m13 alias", "hu", "observed", "review"]);
     const [event] = await connection.execute("INSERT INTO v2_events (event_type,canonical_title,normalized_key,status,created_at,updated_at) VALUES ('topic','M13 Event',?, 'candidate',UTC_TIMESTAMP(6),UTC_TIMESTAMP(6))", [`m13-${suffix}`]);
     await connection.execute("INSERT INTO v2_event_entities (event_id,entity_id,role,created_at) VALUES (?,?,?,UTC_TIMESTAMP(6))", [event.insertId, entity.insertId, "subject"]);
@@ -25,7 +26,7 @@ test("M13 MySQL read models project entity/event/claim/source comparison without
     const projectedClaim = await getClaim(connection, claim.insertId);
     const compared = await compareSources(connection, { type: "claim", id: claim.insertId });
     const detailed = await compareSourcesDetailed(connection, { type: "claim", id: claim.insertId });
-    assert.equal(projectedEntity.name, "M13 Entity"); assert.equal(projectedEvent.articles.length, 1); assert.deepEqual(projectedClaim.value, { value: 5, unit: "kg" }); assert.equal(compared.sources.length, 1); assert.equal(detailed.claims.length, 1); assert.equal(detailed.authority.winner, null); assert.equal(detailed.ai.providerCalls, 0);
+    assert.equal(projectedEntity.name, entityName); assert.equal(projectedEvent.articles.length, 1); assert.deepEqual(projectedClaim.value, { value: 5, unit: "kg" }); assert.equal(compared.sources.length, 1); assert.equal(detailed.claims.length, 1); assert.equal(detailed.authority.winner, null); assert.equal(detailed.ai.providerCalls, 0);
   } finally { await connection.end(); }
 });
 

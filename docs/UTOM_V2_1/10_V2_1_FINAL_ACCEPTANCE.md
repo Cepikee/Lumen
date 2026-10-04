@@ -1,0 +1,28 @@
+# V2.1 végső acceptance
+
+## Kötelező kapuk
+
+- V2.1 dokumentáció kész.
+- Localhost reset/migrate/seed/start reprodukálható.
+- Anonymous, free, active Premium és expired Premium session végigtesztelve.
+- Chrome acceptance desktop és mobil viewportokon PASS.
+- Bizonyított UX/bug/security findingok FIXED vagy indokolt BLOCKED.
+- TypeScript, ESLint, import, npm check, offline és build PASS.
+- MySQL/browser evidence csak izolált környezetből.
+- Paid AI hívás: 0. Payment hívás: 0. Production érintés: NEM.
+
+## Státusz
+
+`IN PROGRESS – LOCALHOST/DEMO RUNTIME VALIDÁCIÓ`.
+
+### Bizonyíték 2026-10-04
+
+- Tiszta ideiglenes másolat: `npm ci`, TypeScript, ESLint (0 error), import check, offline **379/379**, production build PASS.
+- Izolált demo MySQL reset PASS, schema 059 és a master tervben rögzített fixture-számok.
+- A három kontrollált V2 forrásváltozat saját, 746–754 szavas magyar cikkfixture; a 120/150 millió forintos és a hiányzó összegű változatok külön source-állításként maradnak meg.
+- A canonical raw-input harness derived tábla közvetlen írása nélkül futott. M2/M4/M5/M6/M8/M9/M10/M12/M13/M15 ágak PASS; 7 scope-olt unresolved anchor és az M11 winner nélküli conflict is létrejött.
+- Runtime smoke PASS: fő route-ok és feed/source/trends endpointok 200; `V21-BUG-F002`, `V21-BUG-F003` és `V21-BUG-F004` javítva.
+- RSS live acceptance PASS: hat hivatalos kiadói feed 200 + parse sikeres, a proxy feed külön nem hivatalosként jelölve; izolált Telex ingest és dedup PASS.
+- V2 article context és source comparison trace PASS; `V21-TRACE-F001` javítva, a context most claim/entity/timeline projectiont ad.
+- Az explicit loopbackos `utom_v21_test` MySQL célponton a fájlonként izolált teljes integration suite 56 tesztből 55 PASS; az egyetlen SKIP a lokálisan hiányzó FFmpeg. A production HTTP auth és legacy PIN/proxy tesztek explicit helyi encryption key-jel PASS.
+- Chrome mobil és desktop screenshot acceptance még nincs teljesen lezárva: a CUA browser transport megszakadt a sessionben, ezért a viewportonkénti bizonyíték BLOCKED. A végső acceptance emiatt nem PASS.

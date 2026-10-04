@@ -129,6 +129,7 @@ async function createDatabaseConnection() {
 
   return mysql.createConnection({
     host,
+    port: Number(process.env.DB_PORT || 3306),
     user,
     password,
     database,

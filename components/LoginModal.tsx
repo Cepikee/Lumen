@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import RegisterModal from "./RegisterModal";
+import { getRecaptchaToken } from "./recaptcha-client";
 
 export default function LoginModal() {
   const [open, setOpen] = useState(false);
@@ -23,11 +24,7 @@ export default function LoginModal() {
 
   const handleLogin = async () => {
     try {
-      // @ts-ignore
-      const recaptchaToken = await grecaptcha.execute(
-        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
-        { action: "login" }
-      );
+      const recaptchaToken = await getRecaptchaToken("login");
 
       const res = await fetch("/api/auth/login", {
         method: "POST",
@@ -69,11 +66,7 @@ export default function LoginModal() {
     setForgotStatus("loading");
 
     try {
-      // @ts-ignore
-      const recaptchaToken = await grecaptcha.execute(
-        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
-        { action: "forgot_password" }
-      );
+      const recaptchaToken = await getRecaptchaToken("forgot_password");
 
       const res = await fetch("/api/auth/request-password-reset", {
         method: "POST",
@@ -95,11 +88,7 @@ export default function LoginModal() {
     setForgotPinStatus("loading");
 
     try {
-      // @ts-ignore
-      const recaptchaToken = await grecaptcha.execute(
-        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
-        { action: "forgot_pin" }
-      );
+      const recaptchaToken = await getRecaptchaToken("forgot_pin");
 
       const res = await fetch("/api/auth/request-pin-reset", {
         method: "POST",

@@ -1,0 +1,73 @@
+{
+  "contractVersion": "v21.canonical-intelligence-e2e.1",
+  "fixtureProvider": "scripts/dev-demo-bootstrap.cjs#buildTraceArticleBody",
+  "sourceVariants": [
+    {
+      "key": "telex.hu",
+      "url": "https://telex.hu/v21-e2e/tiszapart-a",
+      "variant": 0,
+      "numericValue": "120",
+      "numericEvidence": "120 millió forintos kerettel",
+      "expectedMembership": "primary"
+    },
+    {
+      "key": "24.hu",
+      "url": "https://24.hu/v21-e2e/tiszapart-b",
+      "variant": 1,
+      "numericValue": "150",
+      "numericEvidence": "150 millió forint",
+      "expectedMembership": "coverage"
+    },
+    {
+      "key": "index.hu",
+      "url": "https://index.hu/v21-e2e/tiszapart-c",
+      "variant": 2,
+      "numericValue": null,
+      "numericEvidence": null,
+      "expectedMembership": "coverage"
+    }
+  ],
+  "articleWordCount": { "min": 700, "max": 1200 },
+  "entities": [
+    { "mention": "Szabó Anna", "normalized": "szabó anna", "type": "person" },
+    { "mention": "Kovács Bence", "normalized": "kovács bence", "type": "person" },
+    { "mention": "Nagy Júlia", "normalized": "nagy júlia", "type": "person" },
+    { "mention": "Tiszamenti Vízőr Zrt.", "normalized": "tiszamenti vízőr zrt.", "type": "company" },
+    { "mention": "Folyóparti Egyetem", "normalized": "folyóparti egyetem", "type": "organization" },
+    { "mention": "Tiszapart", "normalized": "tiszapart", "type": "location" },
+    { "mention": "Kerekes-rét", "normalized": "kerekes-rét", "type": "location" }
+  ],
+  "aliases": [
+    { "observed": "Tiszamenti Vízőr Zrt.", "normalized": "tiszamenti vízőr zrt." },
+    { "observed": "Folyóparti Egyetem", "normalized": "folyóparti egyetem" }
+  ],
+  "relations": [],
+  "claims": [
+    { "predicate": "INVESTMENT_AMOUNT", "type": "numeric", "values": ["120", "150"], "unit": "HUF", "sourceOnlyMissing": ["index.hu"], "conflict": true },
+    { "predicate": "PROJECT_START", "type": "temporal", "value": "2026-10-18", "evidence": "október 18-án" },
+    { "predicate": "PROJECT_QUOTE", "type": "text", "value": "A lakók nem egy újabb ígéretet kérnek", "attribution": "Szabó Anna" },
+    { "predicate": "AUDIO_COLLECTION", "type": "boolean", "value": false, "polarity": "negated", "evidence": "A szenzorok nem rögzítenek hangot vagy arcot" }
+  ],
+  "event": {
+    "eventType": "news",
+    "canonicalTitle": "Tiszapart vízvédelmi program új mérése",
+    "startAt": "2026-10-04T08:00:00Z",
+    "membershipCount": 3,
+    "sameEventExpected": true
+  },
+  "temporal": {
+    "currentIncludesAll": true,
+    "pastAsOf": "2026-10-04T09:00:00Z",
+    "futureAt": "2026-10-18T00:00:00Z",
+    "futureExcluded": true
+  },
+  "conflicts": [
+    { "type": "numeric", "values": ["120", "150"], "winner": null, "requiresResolvedSubject": true }
+  ],
+  "premium": {
+    "anonymous": 401,
+    "free": 403,
+    "active": 200,
+    "expired": 403
+  }
+}

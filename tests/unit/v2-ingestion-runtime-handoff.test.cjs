@@ -18,6 +18,7 @@ function connectionFor(...results) {
   let index = 0;
   return {
     async execute(sql) {
+      if (/SELECT id, is_active FROM sources/.test(sql)) return [[{ id: 24, is_active: 1 }]];
       assert.match(sql, /INSERT IGNORE INTO articles|SELECT id FROM articles|INSERT(?: IGNORE)? INTO v2_ingestion_provenance|SELECT id FROM v2_ingestion_provenance/);
       return [results[index++]];
     },
@@ -40,6 +41,7 @@ test("V2-enabled ingestion hands off the canonical envelope without a DB write",
     assert.equal(result.v2.envelope.outcome, "normalized");
     assert.equal(result.v2.envelope.envelope.article.canonicalUrl, "https://24.hu/hir/runtime-handoff?id=9");
     assert.equal(result.v2.envelope.envelope.source.key, "24.hu");
+    assert.equal(result.v2.envelope.envelope.source.sourceId, 24);
     assert.equal(result.v2.envelope.envelope.provenance.requestId.length, 36);
     assert.equal(result.v2.envelope.envelope.provenance.runId.length, 36);
     assert.equal(result.v2.persistence.outcome, "persisted");

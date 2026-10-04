@@ -49,12 +49,12 @@ export default async function HiradoPage({
     ? resolvedSearchParams.video[0]
     : resolvedSearchParams?.video;
   const requestedId = rawVideo && /^\d+$/.test(rawVideo) ? Number(rawVideo) : null;
-  const [rows]: any = requestedId && Number.isSafeInteger(requestedId) && requestedId > 0
+  const queryResult: any = requestedId && Number.isSafeInteger(requestedId) && requestedId > 0
     ? await db.query(
         "SELECT id, file_url FROM videos WHERE id = ? LIMIT 1",
         [requestedId]
       )
-    : (() => {
+    : await (() => {
         const todayParts = parts(new Date());
         const today = `${todayParts.year}-${String(todayParts.month).padStart(2, "0")}-${String(todayParts.day).padStart(2, "0")}`;
         return db.query(
@@ -62,6 +62,8 @@ export default async function HiradoPage({
           [today]
         );
       })();
+
+  const rows: any[] = Array.isArray(queryResult?.[0]) ? queryResult[0] : [];
 
   const video = rows[0];
   const videoId = video?.id ?? 0;

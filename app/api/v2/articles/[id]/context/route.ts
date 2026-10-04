@@ -3,6 +3,8 @@ import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
 import { isV2Enabled } from "@/lib/v2/feature-flags";
 import { asOf, envelope, errorEnvelope, projectArticleContext, validateReadInput } from "@/lib/v2/read-model-contract";
+import { getClaim } from "@/lib/v2/read-model-repository";
+import { readTimelineItems } from "@/lib/v2/temporal-graph-repository";
 
 export async function GET(req: Request, context: { params: Promise<{ id: string }> | { id: string } }) {
   const security = await securityCheck(req, { allowSameOriginRead: true });
@@ -24,7 +26,25 @@ export async function GET(req: Request, context: { params: Promise<{ id: string 
       FROM v2_event_articles ea JOIN v2_events e ON e.id=ea.event_id
       WHERE ea.article_id=? AND e.status NOT IN ('archived','retracted','expired','superseded')
       ORDER BY e.canonical_title ASC,e.id ASC LIMIT 20`, [input.id]);
-    const data = { article: projectArticleContext(row, { id: row.summary_id, text: summaryText } as any), asOf: asOf(input.asOf), entities: [], claims: [], events: (eventRows as any[]).map((event) => ({ id: Number(event.id), title: typeof event.title === "string" && event.title.trim() ? event.title.trim() : null })), timeline: [], partial: true };
+    const [claimRows] = await db.query(`SELECT DISTINCT id FROM v2_claims WHERE article_id=? ORDER BY id ASC LIMIT ?`, [input.id, input.limit]);
+    const claims = (await Promise.all((claimRows as any[]).map((claim) => getClaim(db, Number(claim.id), { asOf: input.asOf })))).filter(Boolean);
+    const [entityRows] = await db.query(`
+      SELECT DISTINCT e.id,e.entity_type entityType,e.canonical_name name
+      FROM v2_entities e
+      LEFT JOIN v2_claims c ON c.article_id=? AND (c.subject_entity_id=e.id OR c.object_entity_id=e.id)
+      LEFT JOIN v2_event_articles ea ON ea.article_id=?
+      LEFT JOIN v2_event_entities ee ON ee.event_id=ea.event_id AND ee.entity_id=e.id
+      WHERE (c.id IS NOT NULL OR ee.entity_id IS NOT NULL)
+        AND e.status IN ('active','accepted','review','disputed')
+      ORDER BY e.canonical_name ASC,e.id ASC
+      LIMIT ?`, [input.id, input.id, input.limit]);
+    const entities = (entityRows as any[]).map((entity) => ({ id: Number(entity.id), type: String(entity.entityType), name: String(entity.name || "") || null }));
+    let timeline: any[] = [];
+    if ((eventRows as any[]).length > 0) {
+      const timelineResult = await readTimelineItems(db, { ownerType: "event", ownerId: Number((eventRows as any[])[0].id), asOf: input.asOf, limit: input.limit, visibility: "public" });
+      timeline = timelineResult.items;
+    }
+    const data = { article: projectArticleContext(row, { id: row.summary_id, text: summaryText } as any), asOf: asOf(input.asOf), entities, claims, events: (eventRows as any[]).map((event) => ({ id: Number(event.id), title: typeof event.title === "string" && event.title.trim() ? event.title.trim() : null })), timeline, partial: false };
     return NextResponse.json(envelope(data));
   } catch (error) {
     console.error("V2 article context error:", error);
