@@ -398,9 +398,9 @@ Tests: anonymous, non-premium, expired, active, malformed session/input, empty, 
 Gate: entitlement boundary and redaction validated; payment remains disabled; M16 COMPLETE for the deterministic read-only slice.
 
 ### M17 – Incremental backfill és optimization
-Objective: bounded, resumable processing és költségmérés.
-Tests: pause/resume, duplicate run, DB failure, cost ceiling.
-Gate: checksum reconciliation és rollback működik.
+Megvalósítva: feature-flagelt, korlátozott és folytatható runtime a meglévő `v2_processing_steps` és `v2_ai_decisions` táblákon. A kurzor csak commitképes állapot után lép, a duplikált futás a completed lépéseket újrahasználja, a busy claim nem ugorható át, a checksum determinisztikus, az M12 költségútvonal a mérvadó. Bizonyíték: `docs/UTOM_V2/M17_INCREMENTAL_BACKFILL.md`. Az izolált MySQL 8.0.46 ellenőrzés PASS.
+Tesztelve: pause/resume, duplicate run, DB-hiba és rollback, checksum-egyeztetés, költségplafon, feature OFF, busy claim, kétkapcsolatos concurrency és leased-connection tranzakció.
+Kapuzás: checksum-egyeztetés és rollback működik; M17 COMPLETE.
 
 ### M18 – Final integration
 Objective: jóváhagyott V2 panel rollout.
