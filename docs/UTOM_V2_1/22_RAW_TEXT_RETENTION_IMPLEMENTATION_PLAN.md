@@ -1,6 +1,6 @@
 # Raw/full-text retention implementation plan
 
-Állapot: `IMPLEMENTATION REQUIRED BEFORE PRODUCTION`  
+Állapot: `IMPLEMENTATION REQUIRED BEFORE PRODUCTION`
 Policy: owner által elfogadott célérték – sikeres feldolgozás után legfeljebb 24 óra, failed/retry állapotban legfeljebb 7 nap.
 
 Ez a terv nem módosít adatot és nem futtat törlést.
