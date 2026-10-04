@@ -2473,3 +2473,39 @@ A V2.1 valódi rendered-product acceptance külön, izolált `utom_v21_test` MyS
 - APP-237 / V21-BUG-F011 – article/auth/profile accessibility semantics hiánya: FIXED.
 
 A targeted browser regressziók, exact viewport matrix és auth matrix PASS; nyitott javítható browser finding: 0. A teljes recovery master korábbi application matrix státuszát ez a V2.1 addendum nem módosítja.
+
+## V2.1 SECURITY HARDENING ADDENDUM – 2026-10-04
+
+### APP-239 / V21-SEC-F001 – trusted-proxy nélküli login throttling globális lockoutja
+
+- Severity: Medium.
+- Terület: authentication / rate limit.
+- Reprodukció: proxy header trust nélkül a getIp direct sentinel értéket adott; tíz sikertelen próbálkozás után az IP-only számláló minden email címet 429-re zárhatott.
+- Root cause: a direct/unknown sentinel nem valós kliens IP, mégis közös per-IP login limitként volt használva.
+- Javítás: lib/login-rate-limit.js direct és unknown esetén emaillel együtt scope-ol; trusted IP esetén a per-IP limit megmarad.
+- Célzott regresszió: tests/unit/login-rate-limit-contract.test.cjs.
+- Státusz: FIXED.
+
+### V2.1 security/fault checkpoint
+
+- V21-SEC-F001: FIXED; open fixable security bug: 0.
+- Security matrix: local evidence alapján PASS/FIXED.
+- Fault matrix: MySQL unavailable, rollback, worker fencing/recovery, RSS/AI mock failure és session/premium transitions PASS; artificial slow-DB és large-data stress BLOCKED mint ebben a gate-ben nem végrehajtott mérési forgatókönyv; FFmpeg N/A capability.
+- Legutóbbi célzott tesztek: login-rate-limit contract 3/3 PASS; auth response/session contract 4/4 PASS; TypeScript PASS; lint quiet PASS.
+- Következő konkrét művelet: teljes offline suite, npm check, build és dokumentációs git diff ellenőrzése; ezután külön security/docs commit és push.
+
+## RESUME FROM HERE – V2.1 SECURITY/FAULT GATE
+
+- Aktív blokk: V2.1 fault-injection és security hardening evidence closure.
+- Utolsó módosított fájl: docs/UTOM_V2_1/10_V2_1_FINAL_ACCEPTANCE.md.
+- Következő fájl/művelet: teljes offline suite és npm check futtatása az APP-239 regresszióval.
+- Nyitott reprodukált javítható bug: nincs.
+- Környezeti blokkolók: mesterséges lassú MySQL és nagyadat-stressz ebben a körben nem futott; FFmpeg executable hiányzik.
+
+## V2.1 SECURITY/FAULT QUALITY RESULT – 2026-10-04
+
+- APP-239 / V21-SEC-F001 is FIXED and has no remaining reproduced fixable security bug.
+- Security hardening status: PASS.
+- Fault-injection status: PARTIAL because artificial slow-DB and large-data stress were not executed; these are explicit BLOCKED measurement scenarios, not application findings.
+- Offline 390/390, TypeScript PASS, ESLint 0 errors, import check PASS, npm check PASS, production build 74/74, npm audit 0 vulnerabilities.
+- Isolated MySQL 8.0.46: 53 PASS, 0 FAIL, FFmpeg capability skip; HTTP auth/PIN E2E: 2/2 PASS.

@@ -162,3 +162,25 @@ Csak bizonyított hiba kap javítást; minden javítható finding FIXED vagy kon
 - Javítás: a Header maradt az egyetlen store-loader; a ClientLayout loader effectje és a Header kézi auth probe-ja megszűnt.
 - Regresszió: `tests/unit/browser-product-contract.test.cjs`, 5/5 PASS; fix utáni Chrome CDP-mérésben minden vizsgált viewporton 0 duplikált auth-kérés.
 - Státusz: `FIXED`.
+
+## Fault-injection acceptance – 2026-10-04
+
+| Fault | Injection/evidence | Státusz |
+|---|---|---|
+| MySQL unavailable | isolated MySQL startup/health and route error handling | PASS |
+| Transaction failure/rollback | pipeline recovery and projection rollback integration cases | PASS |
+| Duplicate worker | claim fencing and idempotency concurrency cases | PASS |
+| Stale lease | heartbeat/lease expiry recovery cases | PASS |
+| Pipeline crash/restart | recovery suite with orphan and retry cases | PASS |
+| RSS timeout/malformed response | safe-fetch and feed failure fixtures | PASS |
+| AI provider failure | local mock failure paths; paid AI disabled | PASS |
+| Session expiry/premium downgrade | HTTP auth/PIN E2E and browser anonymous/free/active/expired matrix | PASS |
+| MySQL artificial slow query | no deterministic local injection run in this gate | BLOCKED |
+| Large article/source comparison stress | no bounded stress fixture in this gate | BLOCKED |
+| FFmpeg capability | executable absent on host; Híradó fallback verified | N/A |
+
+The BLOCKED rows are unexecuted measurement scenarios, not reproduced application defects. Production DB, payment provider and paid AI were not used.
+
+## V21-SEC-F001 cross-reference
+
+The login throttling sentinel-scope defect is fixed in lib/login-rate-limit.js; targeted contract regression is tests/unit/login-rate-limit-contract.test.cjs. Direct/unknown proxy mode is now scoped by normalized email, while trusted client IP remains per-IP.

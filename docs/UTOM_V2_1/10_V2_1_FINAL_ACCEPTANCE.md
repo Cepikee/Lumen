@@ -47,3 +47,27 @@
 - Targeted tests: browser-product-contract, browser-a11y-contract, m18-integration-gate PASS; TypeScript, ESLint és import check PASS.
 - Performance evidence: a `docs/UTOM_V2_1/03_PERFORMANCE.md` külön mérési szakaszban rögzítve; navigáció előtti `PerformanceObserver`-rel LCP mérve, és a production-like háromszoros auth-probe `V21-PERF-F001` javítva. A fix utáni CDP-mérésben a vizsgált route-ok mindegyikén 0 duplikált auth-kérés volt.
 - Production boundary: production DB/deploy, payment és paid AI 0.
+
+## SECURITY + FAULT-INJECTION GATE – 2026-10-04
+
+- Security matrix: authentication/session, premium entitlement, origin/CORS, SSRF/outbound, SQL injection, XSS, redirects/traversal, reset lifecycle, authorization, internal worker routes and secret leakage are PASS or FIXED with local evidence.
+- V21-SEC-F001 login throttling sentinel scope: FIXED; direct/unknown proxy fallback is per email and trusted IP remains per-IP. Targeted regression PASS.
+- Fault matrix: MySQL unavailable, rollback, duplicate worker, stale lease, pipeline restart, RSS failure, AI mock failure and session/premium transitions PASS. Artificial slow-DB and large-data stress remain BLOCKED as unexecuted local measurement scenarios; FFmpeg is N/A capability-only.
+- Payment: 0. Paid AI: 0. Production DB/deploy: 0.
+- Current targeted security tests: PASS. MySQL 8.0.46 isolated integration: 53 PASS, 0 FAIL, FFmpeg capability skip; HTTP auth/PIN E2E: 2/2 PASS.
+- Current offline suite after the new regression: to be rerun before release of this change. TypeScript, ESLint and import checks are required again after documentation/code validation.
+
+`SECURITY HARDENING: PASS`
+`FAULT INJECTION: PARTIAL – slow-DB and large-data scenarios BLOCKED`
+
+## V2.1 security/fault validation update – 2026-10-04
+
+- Targeted login-rate-limit regression: 3/3 PASS.
+- Offline suite: 390/390 PASS.
+- TypeScript: PASS.
+- ESLint: PASS, 0 errors.
+- Local import check: PASS.
+- npm check: PASS, including production build 74/74.
+- npm audit --omit=dev --audit-level=high: 0 vulnerabilities.
+- Isolated MySQL 8.0.46 suite: 53 PASS, 0 FAIL; FFmpeg optional capability skip.
+- Explicit HTTP auth/PIN E2E: 2/2 PASS; SMTP calls 0; paid proxy calls 0.
