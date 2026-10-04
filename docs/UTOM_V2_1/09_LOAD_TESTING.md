@@ -19,7 +19,7 @@ Csak a localhost, illetve kontrollált staging-szerű kör teljesítménye mérh
 - Windows 11 Pro, AMD Ryzen 7 5800X (8 mag / 16 logikai szál), 31.91 GB RAM.
 - Node `v24.19.0`, Next `16.3.6`, production build (`next start`) a `127.0.0.1:3011` címen.
 - A harness kizárólag localhostot céloz; production/staging URL-t nem használ.
-- A read mix: `/`, `/trends`, `/insights`, `/insights/category/politika`, `/premium`, `/cikk/1`, `/api/health`. A DB-függő `/api/summaries`, `/api/sources` és `/api/trends` route-ok az aktuális default runtime-ban fixture/DB hiány miatt nem kerültek sikeres terhelési mixbe; ezek külön MySQL fixture-kört igényelnek.
+- A read mix: `/`, `/trends`, `/insights`, `/insights/category/politika`, `/premium`, `/cikk/1`, `/api/health`. A DB-függő `/api/summaries`, `/api/sources` és `/api/trends` route-ok az aktuális default runtime-ban fixture/DB hiány miatt nem kerültek sikeres terhelési mixbe; ezek külön MySQL fixture-kört igényelnek. Az article oldal a DB-hiányt adat nélküli metadata fallbackkel kezeli; ez HTTP/render stabilitás, nem adatminőségi bizonyíték.
 
 ### Mérési eredmény
 
