@@ -404,8 +404,8 @@ Kapuzás: checksum-egyeztetés és rollback működik; M17 COMPLETE.
 
 ### M18 – Final integration
 M18 integrációs kapu: a M14–M17 technikailag lezárható részei PASS, és az owner által jóváhagyott sorrendben elkészült az article context, event-scope source comparison és entitlement-védett premium panel. A részletes mátrix a `docs/UTOM_V2/M18_FINAL_INTEGRATION.md` fájlban van. A célzott offline/TypeScript/ESLint/import/build kapu, a nyilvános/anonymous Chrome acceptance, az izolált MySQL fixture backend-ellenőrzése és a canonical session fixture-rel végzett non-premium/active/expired Chrome-mátrix PASS. A Chrome GET Origin nélküli viselkedése elfogadott; az Origin csak jelenléte esetén szigorúan ellenőrzött, a Premium jogosultság továbbra is session + entitlement alapú. **M18: COMPLETE.**
-Tesztelve: offline 365/365, M17 MySQL 8.0.46 evidence, pipeline/recovery regressziók, API contractok, concurrency, feature-flag határok, panel normalizálók és fetch race-védelem. A valódi MySQL fixture-rel végzett Chrome ellenőrzés az egy-event, nulla-event és több-event source scope-okat, valamint az anonymous premium állapotot lefedte; az authenticated premium session-mátrix még hiányzik.
-Kapuzás: M18 COMPLETE csak az authenticated non-premium, active és expired Chrome session-elfogadás után jelölhető.
+Tesztelve: offline 365/365, M17 MySQL 8.0.46 evidence, pipeline/recovery regressziók, API contractok, concurrency, feature-flag határok, panel normalizálók és fetch race-védelem. A valódi MySQL fixture-rel végzett Chrome ellenőrzés az egy-event, nulla-event és több-event source scope-okat, valamint az anonymous, authenticated non-premium, active Premium és expired Premium session-állapotokat lefedte.
+Kapuzás: az M18 integrációs gate minden alkalmazható acceptance-eleme PASS; az authenticated session-mátrix lezárt bizonyíték az M18_FINAL_INTEGRATION.md-ben.
 
 ## 12. Tesztelési stratégia
 
@@ -506,4 +506,14 @@ M1 PASS után első kódolási lépés: additive schema migration és contract f
 - M3 completed slices: **pure existing dedup/cluster adapter contract + feature-flagged runtime handoff + related-news projection** – see `M03_DEDUP_CLUSTER_ADAPTER.md`
 - M3 acceptance: **8/8 COMPLETE**, no new query/ranking/engine/AI/schema write; legacy source-of-truth unchanged
 - M5 completed slices: **deterministic normalization + exact canonical/alias lookup + provenance-linked alias lifecycle + explicit collision review boundary** – see `M05_ENTITY_NORMALIZATION.md`
-- M5 final gate: **COMPLETE**. Következő művelet: **M6 – entity resolution**, implementation intentionally not started in this session.
+- M5 final gate: **COMPLETE**. Az M6–M18 implementációs és integrációs checkpointok külön milestone-dokumentumokban lezárva; nincs következő, a korábbi állapotot jelző M6 „not started” maradvány.
+
+## 20. Release Candidate állapot
+
+- M1–M18: **COMPLETE**.
+- V2 implementáció: **KÉSZ**.
+- Release Candidate staging gate: **PASS**; fresh/upgrade/idempotencia/backup/restore és temporary clean quality gate igazolva.
+- `V2-RC-F001`: **FIXED**; a readiness baseline a legfrissebb `058` migrationt követi.
+- Production deployment: **NEM TÖRTÉNT**.
+- Production rollout terv: `docs/UTOM_V2/V2_PRODUCTION_DEPLOYMENT_PLAN.md`.
+- M19: **NINCS**, új milestone nem került létrehozásra.
