@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { hashPin, verifyPin } from "@/lib/pin-security";
 import { getIp } from "@/lib/security";
+import { getLoginAttemptScope } from "@/lib/login-rate-limit";
 
 export async function POST(req: Request) {
   try {
@@ -27,13 +28,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, message: "Érvénytelen bejelentkezési adatok." }, { status: 400 });
     }
 
+    const attemptScope = getLoginAttemptScope(ip, email);
     const [attempts]: any = await db.query(
-      `SELECT COUNT(*) AS cnt 
-       FROM login_attempts 
-       WHERE ip = ?
+      `SELECT COUNT(*) AS cnt
+       FROM login_attempts
+       WHERE ${attemptScope.where}
          AND success = 0
          AND created_at > (NOW() - INTERVAL 15 MINUTE)`,
-      [ip]
+      attemptScope.params,
     );
 
     if (attempts[0].cnt >= 10) {
