@@ -16,12 +16,20 @@ export const metadata = {
     title: "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
     description:
       "Az Utom egy független, AI-alapú automatikus hírgyártó és híradó platform.",
-    url: "https://utom.hu",
+    url: appUrl,
     siteName: "Utom.hu",
-    images: ["/og-image.png"],
+    images: ["/utom.png"],
     locale: "hu_HU",
     type: "website",
   },
+  twitter: {
+    card: "summary",
+    title: "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    description: "Az Utom egy független, AI-alapú automatikus hírgyártó és híradó platform.",
+    images: ["/utom.png"],
+  },
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

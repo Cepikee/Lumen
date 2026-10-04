@@ -8,9 +8,15 @@ Free: „Mi történt?” Premium: „Mi van mögötte?”. A meglévő context,
 
 Stripe, Barion, payment, AI chat, quota és Premium+ ebben a programban nem implementálandó. A nem elérhető művelet maradjon őszintén letiltva.
 
+## V2.1 végső termékellenőrzés – 2026-10-04
+
+- `V21-PREMIUM-F001` **FIXED**: a landing page több olyan képességet ígért, amelyhez nem tartozott jelenlegi backend/UI flow. A szöveg most csak a tényleges context, timeline, source comparison, common/different claim, conflict, actor és source-distribution értéket írja le.
+- Az előfizetési és támogatási gombok provider nélkül disabled állapotúak, és a felület ezt egyértelműen közli. Fake payment, fizetési callback és fizetős AI hívás nincs.
+- A korábbi anonymous/free/active/expired entitlement matrix változatlanul PASS; az aktív prémium funkciók csak jogosultság után jelennek meg.
+
 ## Státusz
 
-`PASS` – anonymous/free/active/expired entitlement matrix és provider nélküli disabled action állapot Chrome-ban ellenőrizve.
+`PASS – IMPLEMENTED PREMIUM VALUE, HONEST PROVIDER-GATED ACTIONS`
 # Premium localhost acceptance checkpoint – 2026-10-04
 
 - Demo Premium login session létrejön és HTTP localhoston visszaolvasható (`/api/auth/me` `loggedIn=true`).

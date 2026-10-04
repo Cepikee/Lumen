@@ -72,3 +72,11 @@ TypeScript, ESLint (0 error), import check, npm check, offline suite és product
 - Operations runbook, internal readiness diagnostics and public liveness are implemented and regression-tested.
 - Slow-DB and bounded large-input fault fixtures are PASS; `V21-OPS-F001` is FIXED.
 - Quality gate: offline 395/395, MySQL 56 PASS/0 FAIL plus FFmpeg capability skip, TypeScript PASS, ESLint 0 errors, import PASS, npm check PASS, build 74/74 PASS, npm audit 0.
+
+## V2.1 final product closure – 2026-10-04
+
+- SEO/sharing closure: `V21-SEO-F001..F003` fixed; root metadata, article metadata/JSON-LD, `robots.txt` and `sitemap.xml` now use configured/data-backed values.
+- Premium product closure: `V21-PREMIUM-F001` fixed; unsupported landing-page claims removed and provider-gated actions remain explicitly unavailable.
+- Ingestion/data technical audit: complete with owner review required for full-text retention and source policy (`docs/UTOM_V2_1/16_INGESTION_AND_DATA_COMPLIANCE_TECHNICAL_AUDIT.md`).
+- Localhost read-mix load baseline: 10/25/50/100/250/500 concurrency, 500 requests per step, all HTTP 200, 0% errors. Full DB/worker soak and VPS sizing remain unproven.
+- Release readiness is recorded in `docs/UTOM_V2_1/17_V2_1_RELEASE_READINESS.md`.

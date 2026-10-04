@@ -89,3 +89,24 @@
 - Internal operational snapshot and public liveness contract: PASS.
 - `V21-OPS-F001` wrong AI escalation table: FIXED with unit and MySQL regression coverage.
 - Final validation: offline 395/395, MySQL 56 PASS/0 FAIL plus FFmpeg capability skip, TypeScript PASS, ESLint 0 errors, import PASS, npm check PASS, build 74/74 PASS, npm audit 0.
+
+## FINAL PRODUCT + RELEASE CLOSURE – 2026-10-04
+
+- SEO/sharing: PASS. Configured canonical base, real logo image, robots, sitemap and data-backed article metadata/JSON-LD are covered by `tests/unit/v21-final-product-contract.test.cjs`.
+- Premium UX: PASS. Current implemented value is described accurately; subscription/support actions remain disabled without a provider.
+- Data/ingestion compliance: technical audit complete; retention/source policy owner review remains required and is not represented as a legal approval.
+- Localhost load baseline: PASS at 10/25/50/100/250/500 concurrency for the public render/liveness mix; 0% errors. This is not a production SLO or VPS capacity claim.
+- Production deploy: NOT READY until owner policy and infrastructure gates are approved.
+
+See `docs/UTOM_V2_1/17_V2_1_RELEASE_READINESS.md` for the final gate matrix.
+
+## FINAL QUALITY RERUN – 2026-10-04
+
+- Offline: **401/401 PASS**.
+- TypeScript: **PASS**.
+- ESLint: **PASS**, 0 error.
+- Import check: **PASS**.
+- `npm run check`: **PASS**.
+- Production build: **PASS**, 75/75.
+- npm audit high-level: **0 vulnerabilities**.
+- Local read-mix load ladder: **10/25/50/100/250/500 PASS**, 0% errors; full DB/worker soak remains unproven.

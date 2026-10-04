@@ -14,7 +14,7 @@ export default function PremiumPage() {
           </h1>
 
           <p className="hero-sub">
-            Mélyebb elemzés. Torzítás nélkül. Reklámok nélkül.
+            A hírek mögötti összefüggések, források és előzmények egy helyen.
           </p>
 
           <button className="premium-btn-lg mt-4" type="button" disabled aria-disabled="true" title="Az előfizetés jelenleg nem érhető el">
@@ -34,8 +34,10 @@ export default function PremiumPage() {
           {/* Havi */}
           <div className="premium-card glass">
             <div className="price">1000 Ft<span>/hó</span></div>
-            <li> Minden prémium funkció</li>
-            <li> Bármikor lemondható </li>
+            <ul>
+              <li>Források összehasonlítása</li>
+              <li>Előzmények és idővonalak</li>
+            </ul>
             <button className="premium-btn w-100" type="button" disabled aria-disabled="true">Jelenleg nem elérhető</button>
           </div>
 
@@ -43,9 +45,11 @@ export default function PremiumPage() {
           <div className="premium-card highlight glass">
             <div className="badge-popular">Legjobb ár</div>
             <div className="price">9000 Ft<span>/év</span></div>
-            <li> Minden prémium funkció</li>
-            <li> 2 hónap ingyen </li>
-            <li> Költséghatékony </li>
+            <ul>
+              <li>Források összehasonlítása</li>
+              <li>Közös és eltérő állítások</li>
+              <li>Konfliktusok és kapcsolódó szereplők</li>
+            </ul>
             <button className="premium-btn w-100" type="button" disabled aria-disabled="true">Jelenleg nem elérhető</button>
           </div>
 
@@ -53,7 +57,7 @@ export default function PremiumPage() {
           <div className="premium-card glass supporter">
             <div className="price">Támogató</div>
             <div className="desc">
-              Támogasd az első AI-vezérelt magyar hírelemző projektet.
+              Támogasd az Utom független hírelemző projektjét.
             </div>
              <input
              type="number"
@@ -68,11 +72,7 @@ export default function PremiumPage() {
           {/* Céges */}
           <div className="premium-card glass">
             <div className="price">Cégeknek</div>
-            <div className="mt-5 space-y-2 text-sm opacity-80">
-              <li>📊 API hozzáférés</li>
-              <li>👥 Dedikált support</li>
-              <li> Egyedi kérések </li>
-            </div>
+            <p className="mt-5 text-sm opacity-80">A céges csomag részletei és az API-hozzáférés még nem érhető el.</p>
             <button className="premium-btn w-100" type="button" disabled aria-disabled="true">Jelenleg nem elérhető</button>
           </div>
 
@@ -88,29 +88,29 @@ export default function PremiumPage() {
     </h2>
 
     <p className="section-sub mb-5">
-      Több kontroll. Több tisztánlátás. Nulla zaj.
+      Ingyen: mi történt? Prémiumban: mi van mögötte?
     </p>
 
     {/* Top 4 highlight */}
     <div className="why-grid mb-5">
       <div className="why-card">
-        <div className="why-icon">🧠</div>
-        <h5>Értelmezett hírek</h5>
+        <div className="why-icon">🧭</div>
+        <h5>Előzmények és idővonal</h5>
       </div>
 
       <div className="why-card">
         <div className="why-icon">⚡</div>
-        <h5>Átlátod a torzításokat és manipulációt</h5>
+        <h5>Források összehasonlítása</h5>
       </div>
 
       <div className="why-card">
         <div className="why-icon">🚫</div>
-        <h5>Zajmentes, tiszta információs tér</h5>
+        <h5>Közös és eltérő állítások</h5>
       </div>
 
       <div className="why-card">
         <div className="why-icon">💬</div>
-        <h5>Zárt prémium közösség</h5>
+        <h5>Konfliktusok és kapcsolódó szereplők</h5>
       </div>
     </div>
 
@@ -118,14 +118,12 @@ export default function PremiumPage() {
     <div className="row row-cols-1 row-cols-md-2 g-4 text-start">
 
       {[
-        { icon: "🧬", title: "Forrás DNS", desc: "AI-alapú tartalmi ujjlenyomat, amely feltárja egy hírportál szerkezetét és mintázatait." },
-        { icon: "🧠", title: "Fake Detektor", desc: "Kiszűrjük a hamis, félrevezető vagy manipulált tartalmakat — torzítás nélkül." },
-        { icon: "🧊", title: "Clickbait Detektor", desc: "Megmutatjuk, mennyire kattintásvadász egy cím — objektív pontszámmal." },
-        { icon: "🧱", title: "Cikk Összehasonlítás", desc: "Egy témáról több forrás nézete egy helyen — az eltérések kiemelve." },
-        { icon: "🧭", title: "Forrás-Radar", desc: "Láthatod, mely portálok dominálnak egy témában — és kik maradnak csendben." },
-        { icon: "💬", title: "Prémium Chat Szoba", desc: "Exkluzív közösség, ahol elemzünk, vitázunk és együtt gondolkodunk." },
-        { icon: "🧑‍⚖️", title: "Közösségi Vélemény", desc: "Valódi felhasználói visszajelzések egy cikk megbízhatóságáról." },
-        { icon: "🧘‍♂️", title: "Ultra-minimalista mód", desc: "Csak a lényeg — reklám és zavaró elemek nélkül." }
+        { icon: "🧭", title: "Előzmények és idővonal", desc: "Lásd, hogyan alakult egy történet, és milyen korábbi állítások kapcsolódnak hozzá." },
+        { icon: "🧱", title: "Források összehasonlítása", desc: "Egy témáról több forrás nézete egy helyen, közös és eltérő állításokkal." },
+        { icon: "⚖️", title: "Konfliktusok", desc: "Az eltérő állítások külön jelennek meg, hogy könnyebb legyen összevetni őket." },
+        { icon: "🔗", title: "Kapcsolódó szereplők", desc: "Az eseményhez kapcsolódó szereplők és tények áttekinthető nézetben." },
+        { icon: "📊", title: "Forráseloszlás", desc: "Megmutatjuk, mely források és témák jelennek meg egy történetben." },
+        { icon: "📝", title: "Bizonyíték-alapú kontextus", desc: "A megjelenített összefüggésekhez a kapcsolódó forrás és időpont is megmarad." }
       ].map((item, i) => (
         <div key={i} className="col">
           <div className="premium-feature-card d-flex gap-3">
