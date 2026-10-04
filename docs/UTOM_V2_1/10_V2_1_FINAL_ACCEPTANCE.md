@@ -30,7 +30,7 @@
 - Anonim flow PASS: a főoldal, keresés, Trends, article detail, Premium oldal és category Insights oldal betöltődött; a category premium 401 most egyértelmű bejelentkezési üzenet.
 - Aktív Premium flow PASS: local demo login után az Insights és category Insights adatai megjelentek; a premium proxy és minden vizsgált statisztikai fetch 200 választ adott.
 - Híradó üres adatállapot PASS: a `/hirado` oldal konfigurált lokális video-sign secret mellett 200-at ad és „Ma még nincs elérhető híradó” állapotot renderel.
-- Chrome acceptance során három alkalmazási finding került elő és javult: `V21-BUG-F005`, `V21-BUG-F006`, `V21-BUG-F007`. Célzott regressziók: `tests/unit/browser-product-contract.test.cjs`; offline suite 382/382 PASS, TypeScript PASS, ESLint 0 error, import check PASS.
+- Chrome acceptance során három alkalmazási finding került elő és javult: `V21-BUG-F005`, `V21-BUG-F006`, `V21-BUG-F007`. Célzott regressziók: `tests/unit/browser-product-contract.test.cjs`; a legutóbbi offline suite 387/387 PASS, TypeScript PASS, ESLint 0 error, import check PASS.
 - A böngészős ellenőrzés paid AI, payment és production érintés nélkül, az izolált `utom_v21_test` adatbázison futott.
 
 ## FINAL BROWSER CLOSURE – 2026-10-04
