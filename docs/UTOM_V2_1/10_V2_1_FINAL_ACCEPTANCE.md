@@ -71,3 +71,21 @@
 - npm audit --omit=dev --audit-level=high: 0 vulnerabilities.
 - Isolated MySQL 8.0.46 suite: 53 PASS, 0 FAIL; FFmpeg optional capability skip.
 - Explicit HTTP auth/PIN E2E: 2/2 PASS; SMTP calls 0; paid proxy calls 0.
+
+## OBSERVABILITY + FAULT-INJECTION CLOSURE – 2026-10-04
+
+- Slow MySQL fixture: PASS; isolated MySQL 8.0.46 SLEEP delays at 100 ms, 500 ms and 2 s, controlled timeout, destroyed timed-out connection and successful connection recovery.
+- Large article/V2 parser fixture: PASS; generated 10/50/100/250 KB content, 100 entity mentions and 100 claim candidates, no crash or truncation.
+- Internal health: read-only operational snapshot with schema, worker, pipeline, backfill, V2 and AI-budget signals.
+- Public liveness: minimal `/api/health` response, no DB or secret data.
+- Slow DB diagnostics: local warning/critical thresholds only; no production SLO claim.
+- Operations runbook: `docs/UTOM_V2_1/15_OPERATIONS_RUNBOOK.md`.
+- Security: PASS. Fault injection: PASS for bounded local scenarios. Observability: PASS for local/staging-ready diagnostics.
+
+## V2.1 observability and fault-injection final gate – 2026-10-04
+
+- Slow MySQL timeout/recovery fixture: PASS.
+- Large article/V2 parser bounded fixture: PASS.
+- Internal operational snapshot and public liveness contract: PASS.
+- `V21-OPS-F001` wrong AI escalation table: FIXED with unit and MySQL regression coverage.
+- Final validation: offline 395/395, MySQL 56 PASS/0 FAIL plus FFmpeg capability skip, TypeScript PASS, ESLint 0 errors, import PASS, npm check PASS, build 74/74 PASS, npm audit 0.

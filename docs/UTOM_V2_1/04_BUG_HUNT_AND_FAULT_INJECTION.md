@@ -184,3 +184,41 @@ The BLOCKED rows are unexecuted measurement scenarios, not reproduced applicatio
 ## V21-SEC-F001 cross-reference
 
 The login throttling sentinel-scope defect is fixed in lib/login-rate-limit.js; targeted contract regression is tests/unit/login-rate-limit-contract.test.cjs. Direct/unknown proxy mode is now scoped by normalized email, while trusted client IP remains per-IP.
+
+## Fault gap closure – 2026-10-04
+
+### Slow MySQL
+
+- Fixture: isolated MySQL 8.0.46 on loopback port 33307; test-only `SELECT SLEEP(?)`, no production code sleep path.
+- Delays: 100 ms, 500 ms and 2 s measured.
+- Timeout: 100 ms controlled timeout path; timed-out connection destroyed and a subsequent `SELECT 1` succeeded.
+- Pool/connection: process remained alive and connection lifecycle recovered.
+- Evidence: `tests/integration/v21-observability-faults.test.cjs`, PASS.
+
+### Large article and V2 parser fixture
+
+- Generated non-copyright fixture sizes: 10 KB, 50 KB, 100 KB and 250 KB.
+- Controlled V2 extraction fixture: 100 entity mentions and 100 claim candidates per size; no derived-table direct seed.
+- Result: all sizes completed without crash, truncation or timeout; measured parser duration was 0–2 ms per size in the local run, with bounded memory deltas.
+- Evidence: `tests/integration/v21-observability-faults.test.cjs`, PASS. This is a parser/contract stress fixture; it does not claim a production throughput SLO.
+
+The two previous BLOCKED fault rows are now closed as PASS for the bounded local scenarios. FFmpeg remains N/A capability-only.
+
+## V2.1 observability and fault closure – final validation (2026-10-04)
+
+- `tests/integration/v21-observability-faults.test.cjs`: 3/3 PASS on isolated MySQL 8.0.46.
+- Slow-DB fixture: 100 ms, 500 ms and 2 s `SLEEP`; 100 ms timeout; timed-out connection discarded; subsequent connection recovered.
+- Large-article/V2 parser fixture: 10/50/100/250 KB generated input, 100 entity mentions and 100 claims per size; bounded execution and memory; no truncation or crash.
+- Operational snapshot: read-only, schema-gated and secret-free; pipeline, backfill, V2 quality counts and AI budget fields exposed only through internal health.
+
+### V21-OPS-F001 – AI escalation metric read from the wrong table
+
+- Severity: Medium.
+- Reproduction: calling `getOperationalSnapshot()` against schema 059 raised `ER_BAD_FIELD_ERROR` because `escalation` is stored in `v2_ai_decisions`, not `v2_ai_runs`.
+- Root cause: the first operational snapshot query used the AI run table for a decision-level field.
+- Fix: query `v2_ai_decisions` for `blocked_escalations`; readiness remains a prerequisite before operational queries run.
+- Regression: `tests/unit/observability-contract.test.cjs` and the MySQL `operational snapshot is read-only and exposes bounded diagnostics` case.
+- Status: `FIXED`.
+
+- Full MySQL integration suite: 56 PASS, 0 FAIL; optional FFmpeg capability 1 SKIP; optional HTTP tests are separately covered by 2/2 PASS.
+- Offline suite: 395/395 PASS; TypeScript PASS; ESLint PASS (0 errors); import check PASS; `npm run check` PASS; production build 74/74 PASS; npm audit 0 vulnerabilities.

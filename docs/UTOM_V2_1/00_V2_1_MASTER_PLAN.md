@@ -58,3 +58,17 @@ Minden változás útja: inventory → reprodukció → minimális javítás →
 ## Minőségi kapu
 
 TypeScript, ESLint (0 error), import check, npm check, offline suite és production build minden implementációs fázis végén. MySQL és Chrome csak izolált környezetben; hiányzó környezetet BLOCKED-ként dokumentálunk, nem tekintjük PASS-nak.
+
+## V2.1 OPERATIONS + FAULT CLOSURE – 2026-10-04
+
+- V21-FAULT slow MySQL fixture: PASS; isolated MySQL 8.0.46 SLEEP at 100 ms, 500 ms and 2 s, timeout path and connection recovery verified.
+- V21-FAULT large article/V2 parser fixture: PASS; generated 10/50/100/250 KB content with 100 entity mentions and 100 claim candidates; no derived-table direct seed.
+- V21-OPS observability: PASS for local/staging-ready scope. Existing internal health route now includes read-only pipeline, worker, backfill, V2 and AI-budget diagnostics; public `/api/health` is minimal liveness-only.
+- Runbook created: docs/UTOM_V2_1/15_OPERATIONS_RUNBOOK.md.
+- Open fixable bug: 0. Production SLO, external alerting and production DB/deploy remain out of scope.
+
+## V2.1 operations/fault final closure – 2026-10-04
+
+- Operations runbook, internal readiness diagnostics and public liveness are implemented and regression-tested.
+- Slow-DB and bounded large-input fault fixtures are PASS; `V21-OPS-F001` is FIXED.
+- Quality gate: offline 395/395, MySQL 56 PASS/0 FAIL plus FFmpeg capability skip, TypeScript PASS, ESLint 0 errors, import PASS, npm check PASS, build 74/74 PASS, npm audit 0.

@@ -2509,3 +2509,36 @@ A targeted browser regressziók, exact viewport matrix és auth matrix PASS; nyi
 - Fault-injection status: PARTIAL because artificial slow-DB and large-data stress were not executed; these are explicit BLOCKED measurement scenarios, not application findings.
 - Offline 390/390, TypeScript PASS, ESLint 0 errors, import check PASS, npm check PASS, production build 74/74, npm audit 0 vulnerabilities.
 - Isolated MySQL 8.0.46: 53 PASS, 0 FAIL, FFmpeg capability skip; HTTP auth/PIN E2E: 2/2 PASS.
+
+## V2.1 OBSERVABILITY/FAULT CLOSURE – 2026-10-04
+
+- New finding: none. Existing APP-239 remains FIXED.
+- Fault fixtures: `tests/integration/v21-observability-faults.test.cjs`; slow MySQL and generated large V2 parser scenarios PASS.
+- Observability files: `lib/operations.js`, `lib/observability.js`, `app/api/internal/health/route.ts`, `app/api/health/route.ts`, `tests/unit/observability-contract.test.cjs`, `tests/unit/observability-db.test.cjs`.
+- Runbook: `docs/UTOM_V2_1/15_OPERATIONS_RUNBOOK.md`.
+- Next validation: targeted observability tests, full MySQL integration suite with migration reset, offline suite, TypeScript, ESLint, import, npm check, build and audit.
+- Environment: isolated MySQL 8.0.46 only; production DB/deploy/payment/paid AI untouched.
+
+## V2.1 OBSERVABILITY/FAULT FINAL CHECKPOINT – 2026-10-04
+
+- `V21-OPS-F001` – AI escalation metric queried from `v2_ai_runs` instead of `v2_ai_decisions`; reproduced as schema error, fixed, and covered by unit plus MySQL operational-snapshot regressions. Status: `FIXED`.
+- Fault closure: isolated slow MySQL (timeout/recovery) and bounded large-article/V2 parser fixtures PASS; no production DB, payment or paid AI used.
+- Observability closure: public liveness `/api/health`; token-protected internal readiness/operational snapshot `/api/internal/health`; secret-redacted DB diagnostics.
+- Validation: offline 395/395 PASS; MySQL 56 PASS/0 FAIL plus FFmpeg capability skip; TypeScript PASS; ESLint 0 errors; import PASS; `npm run check` PASS; build 74/74 PASS; npm audit 0.
+- Open reproduced fixable bugs: 0.
+
+### RESUME FROM HERE
+
+- Utolsó lezárt blokk: V2.1 observability, operations és fault-injection closure.
+- Aktív blokk: nincs ebben a closure-körben.
+- Következő művelet: git diff audit, célzott stage, commit és push a `develop/utom-recovery` branchre, az `AGENTS.md`, `CLAUDE.md` és `docs.zip` felhasználói fájlok érintése nélkül.
+- Környezeti blokkolók: FFmpeg executable hiánya capability skip; production SLO/alerting és external provider acceptance nincs végrehajtva.
+
+## POST-PUSH CHECKPOINT – 2026-10-04
+
+- V2.1 observability/fault closure commit: `27a66ce`.
+- `origin/develop/utom-recovery` matches local HEAD.
+- Post-commit `npm run check`: PASS; offline 395/395; build 74/74.
+- Post-commit npm audit: 0 vulnerabilities.
+- Isolated MySQL 8.0.46 was stopped after validation; the default local MySQL service was not modified.
+- User-owned untracked `AGENTS.md`, `CLAUDE.md` and `docs.zip` remain untouched.

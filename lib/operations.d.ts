@@ -5,5 +5,7 @@ export function validateWorkerEnvironment(env?: NodeJS.ProcessEnv): { mode: stri
 export function validateProductionEnvironment(env?: NodeJS.ProcessEnv): { mode: string; aiProvider: string };
 export function checkSchemaReadiness(connection: Executor): Promise<{ ready: boolean; latestRequiredVersion: string; missing: string[] }>;
 export function getHealthSnapshot(connection: Executor, env?: NodeJS.ProcessEnv): Promise<Record<string, unknown>>;
+export function getOperationalSnapshot(connection: Executor, env?: NodeJS.ProcessEnv): Promise<Record<string, unknown>>;
+export function normalizeMetricRows(rows?: Array<Record<string, unknown>>, key?: string): Record<string, number>;
 export function inspectRecovery(connection: Executor, articleId: number, staleMs?: number): Promise<Record<string, unknown>>;
 export function retryRecovery(connection: PoolConnection, articleId: number, stepName: string, actor?: string): Promise<Record<string, unknown>>;

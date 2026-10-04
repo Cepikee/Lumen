@@ -4,7 +4,8 @@ export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
 import { requireInternalWorker } from "@/lib/security/internal-worker";
-import { getHealthSnapshot, redact } from "@/lib/operations";
+import { getOperationalSnapshot, redact } from "@/lib/operations";
+import { getObservabilitySnapshot, observeDbOperation } from "@/lib/observability";
 
 export async function GET(request: Request) {
   const denied = requireInternalWorker(request);
@@ -18,8 +19,8 @@ export async function GET(request: Request) {
     connectionLimit: 2,
   });
   try {
-    const snapshot = await getHealthSnapshot(pool);
-    return NextResponse.json(snapshot, { status: snapshot.readiness === false ? 503 : 200 });
+    const snapshot = await observeDbOperation(() => getOperationalSnapshot(pool), { operation: "internal_health" });
+    return NextResponse.json({ ...snapshot, diagnostics: getObservabilitySnapshot() }, { status: snapshot.readiness === false ? 503 : 200 });
   } catch (error) {
     console.error(JSON.stringify({ event: "health_query_failed", error: redact(error instanceof Error ? error.message : error) }));
     return NextResponse.json({ liveness: true, readiness: false, status: "critical", error: "health_unavailable" }, { status: 503 });

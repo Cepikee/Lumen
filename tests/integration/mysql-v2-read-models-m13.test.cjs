@@ -12,7 +12,7 @@ test("M13 MySQL read models project entity/event/claim/source comparison without
   try {
     await applyMigrations(connection, loadMigrations());
     const [source] = await connection.execute("INSERT INTO sources (slug,name,is_active) VALUES (?,?,1)", [`m13-${suffix}`, "M13 Source"]);
-    const [article] = await connection.execute("INSERT INTO articles (title,url_canonical,source_id,source,status,published_at) VALUES (?,?,?,?,?,UTC_TIMESTAMP())", ["M13", `https://m13.invalid/${suffix}`, source.insertId, "M13 Source", "done"]);
+    const [article] = await connection.execute("INSERT INTO articles (title,url_canonical,source_id,source,status,published_at) VALUES (?,?,?,?,?,'2026-10-01 08:00:00')", ["M13", `https://m13.invalid/${suffix}`, source.insertId, "M13 Source", "done"]);
     const entityName = `M13 Entity ${suffix}`;
     const [entity] = await connection.execute("INSERT INTO v2_entities (entity_type,canonical_name,normalized_name,language,status,created_at,updated_at) VALUES ('person',?,?, 'hu','active',UTC_TIMESTAMP(6),UTC_TIMESTAMP(6))", [entityName, entityName.toLowerCase()]);
     await connection.execute("INSERT INTO v2_entity_aliases (entity_id,alias,normalized_alias,language,alias_type,status,created_at,updated_at) VALUES (?,?,?,?,?,?,UTC_TIMESTAMP(6),UTC_TIMESTAMP(6))", [entity.insertId, "M13 Alias", "m13 alias", "hu", "observed", "review"]);
