@@ -58,3 +58,4 @@ A deployhoz még külön owner/infrastruktúra kapu kell:
 - `npm audit --omit=dev --audit-level=high`: **0 vulnerabilities**.
 - Local browser HTTP smoke: `/`, `/premium`, `/cikk/1`, `/robots.txt`, `/sitemap.xml` returned 200.
 - Local load sanity: all six concurrency steps completed with 0% error and 200-only responses.
+- Soak: 30.132 s at concurrency 25, 21,000 requests, 0 errors; maximum RSS 190.8 MB and heap 54.5 MB. Worker+read and DB contention remain unmeasured.

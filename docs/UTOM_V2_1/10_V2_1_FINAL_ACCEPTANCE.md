@@ -110,3 +110,5 @@ See `docs/UTOM_V2_1/17_V2_1_RELEASE_READINESS.md` for the final gate matrix.
 - Production build: **PASS**, 75/75.
 - npm audit high-level: **0 vulnerabilities**.
 - Local read-mix load ladder: **10/25/50/100/250/500 PASS**, 0% errors; full DB/worker soak remains unproven.
+- Soak mini-run: **PASS**, 25 concurrency for 30.132 s, 21,000 requests, 0 errors; max RSS 190.8 MB, max heap 54.5 MB.
+- Worker+read combined load: **NOT EXECUTED**, because the current run had no isolated MySQL/worker fixture; this is a measurement limitation, not a code failure.
