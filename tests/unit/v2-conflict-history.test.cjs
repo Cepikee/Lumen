@@ -23,7 +23,16 @@ test("M11 avoids false conflicts for equal values, disjoint time, unit mismatch 
   assert.equal(detectConflict(claim(), claim({ id: 2 })).status, "no_conflict");
   assert.equal(detectConflict(claim(), claim({ id: 2, normalizedValue: "14", validFrom: "2026-02-01T00:00:00Z", validUntil: "2026-03-01T00:00:00Z" })).reason, "temporal_non_overlap");
   assert.equal(detectConflict(claim(), claim({ id: 2, normalizedValue: "14", unit: "million_person" })).reason, "unit_mismatch");
+  assert.equal(detectConflict(claim({ normalizedValue: "1", unit: "km" }), claim({ id: 2, normalizedValue: "1000", unit: "m" })).reason, "unit_conversion_equal");
+  assert.equal(detectConflict(claim({ normalizedValue: "10", unit: "million HUF" }), claim({ id: 2, normalizedValue: "0.01", unit: "billion HUF" })).reason, "unit_conversion_equal");
+  assert.equal(detectConflict(claim({ normalizedValue: null, value: { amount: 1, unit: "km" }, unit: "km" }), claim({ id: 2, normalizedValue: null, value: { amount: 1000, unit: "m" }, unit: "m" })).reason, "unit_conversion_equal");
   assert.equal(detectConflict(claim(), claim({ id: 2, normalizedValue: "14", subjectEntityId: 8 })).reason, "scope_or_type_mismatch");
+});
+
+test("M11 keeps plan and completed states separate even with the same predicate", () => {
+  const planned = claim({ modality: "plan", normalizedValue: "start" });
+  const completed = claim({ id: 2, modality: "completed", normalizedValue: "done" });
+  assert.equal(detectConflict(planned, completed).reason, "different_event_state");
 });
 
 test("M11 handles boolean and categorical contradictions without selecting a winner", () => {

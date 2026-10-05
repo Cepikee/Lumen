@@ -1,8 +1,20 @@
 {
   "mode": "default_mock_empty_provider",
   "source": null,
+  "integrity": {
+    "benchmarkVersion": "v22.benchmark.1",
+    "articlesHash": "3a56cd537bf0aa1cfe8048d64a0a8e626b2f2f13817786bac6081ec093d00953",
+    "goldManifestHash": "20605b4037a166234708749c26055bf1bfc40d59a5fd669f33f031a4ef9e1f02",
+    "evaluatorVersion": "v22.evaluator.3",
+    "provider": {
+      "name": "mock",
+      "config": "empty-provider"
+    }
+  },
   "tiers": {
     "core": {
+      "benchmarkVersion": "v22.benchmark.1",
+      "evaluatorVersion": "v22.evaluator.3",
       "contractVersion": "v22.intelligence-quality-baseline.2",
       "scenarioCount": 20,
       "articleCount": 45,
@@ -49,7 +61,22 @@
         "negationAccuracy": null,
         "negationEvaluated": 0,
         "modalityAccuracy": null,
-        "modalityEvaluated": 0
+        "modalityEvaluated": 0,
+        "supportedClaimPrecision": null,
+        "supportedClaimRecall": 0,
+        "supportedClaimExpected": 27,
+        "supportedClaimPredicted": 0,
+        "predictionCount": 0,
+        "groundedPredictionCount": 0,
+        "groundedPredictionRate": null,
+        "semanticallySupportedPredictionCount": 0,
+        "semanticallySupportedPredictionRate": null,
+        "goldMatchedPredictionCount": 0,
+        "goldCoveragePrecision": null,
+        "extraSupportedPredictionCount": 0,
+        "extraSupportedPredictionRate": null,
+        "trulyUnsupportedPredictionCount": 0,
+        "trulyUnsupportedPredictionRate": null
       },
       "detail": {
         "entity": {
@@ -78,6 +105,17 @@
           "falseNegative": 46,
           "precision": null,
           "recall": 0
+        },
+        "supportedClaims": {
+          "truePositive": 0,
+          "expected": 27,
+          "predicted": 0,
+          "falsePositive": 0,
+          "falseNegative": 27,
+          "precision": null,
+          "recall": 0,
+          "supportedExpected": 27,
+          "supportedPredicted": 0
         },
         "event": {
           "truePositive": 0,
@@ -141,6 +179,19 @@
             "correct": 0,
             "accuracy": null
           }
+        },
+        "integrity": {
+          "predictionCount": 0,
+          "groundedPredictionCount": 0,
+          "groundedPredictionRate": null,
+          "semanticallySupportedPredictionCount": 0,
+          "semanticallySupportedPredictionRate": null,
+          "goldMatchedPredictionCount": 0,
+          "goldCoveragePrecision": null,
+          "extraSupportedPredictionCount": 0,
+          "extraSupportedPredictionRate": null,
+          "trulyUnsupportedPredictionCount": 0,
+          "trulyUnsupportedPredictionRate": null
         },
         "identity": {
           "evaluated": 0,
@@ -1536,6 +1587,8 @@
       "baselineNote": "A provider kimenetét a benchmark normalizációs határán értékeljük; a default mock szándékosan üres."
     },
     "dense": {
+      "benchmarkVersion": "v22.benchmark.1",
+      "evaluatorVersion": "v22.evaluator.3",
       "contractVersion": "v22.intelligence-quality-baseline.2",
       "scenarioCount": 5,
       "articleCount": 15,
@@ -1582,7 +1635,22 @@
         "negationAccuracy": null,
         "negationEvaluated": 0,
         "modalityAccuracy": null,
-        "modalityEvaluated": 0
+        "modalityEvaluated": 0,
+        "supportedClaimPrecision": null,
+        "supportedClaimRecall": 0,
+        "supportedClaimExpected": 81,
+        "supportedClaimPredicted": 0,
+        "predictionCount": 0,
+        "groundedPredictionCount": 0,
+        "groundedPredictionRate": null,
+        "semanticallySupportedPredictionCount": 0,
+        "semanticallySupportedPredictionRate": null,
+        "goldMatchedPredictionCount": 0,
+        "goldCoveragePrecision": null,
+        "extraSupportedPredictionCount": 0,
+        "extraSupportedPredictionRate": null,
+        "trulyUnsupportedPredictionCount": 0,
+        "trulyUnsupportedPredictionRate": null
       },
       "detail": {
         "entity": {
@@ -1611,6 +1679,17 @@
           "falseNegative": 120,
           "precision": null,
           "recall": 0
+        },
+        "supportedClaims": {
+          "truePositive": 0,
+          "expected": 81,
+          "predicted": 0,
+          "falsePositive": 0,
+          "falseNegative": 81,
+          "precision": null,
+          "recall": 0,
+          "supportedExpected": 81,
+          "supportedPredicted": 0
         },
         "event": {
           "truePositive": 0,
@@ -1674,6 +1753,19 @@
             "correct": 0,
             "accuracy": null
           }
+        },
+        "integrity": {
+          "predictionCount": 0,
+          "groundedPredictionCount": 0,
+          "groundedPredictionRate": null,
+          "semanticallySupportedPredictionCount": 0,
+          "semanticallySupportedPredictionRate": null,
+          "goldMatchedPredictionCount": 0,
+          "goldCoveragePrecision": null,
+          "extraSupportedPredictionCount": 0,
+          "extraSupportedPredictionRate": null,
+          "trulyUnsupportedPredictionCount": 0,
+          "trulyUnsupportedPredictionRate": null
         },
         "identity": {
           "evaluated": 0,

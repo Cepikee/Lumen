@@ -58,7 +58,7 @@ A test-only oracle a provider-shaped normalizációs határon keresztül tökél
 
 A `lib/v22/deterministic-text-provider.cjs` kizárólag a cikk szövegét olvassa. Nem olvassa a gold manifestet, nem használ scenario-ID kivételágat, és nem ír canonical/V2 táblát. A jelenlegi baseline csak biztosan felismerhető szám+egység, dátum, explicit negáció, feltételes jelölő, attribúciós fordulat és egyszerű tulajdonnévi említés jelöltjeit adja vissza.
 
-Az aktuális mérés részletesen a `10_deterministic_baseline.json` fájlban van. A precision-first működés mellett a core claim precision 0.0479, recall 0.1739; a dense claim precision 0.2143, recall 0.1500. Ezek első, lexikális baseline értékek, nem modellminőségi ígéretek.
+Az integrity-korrigált mérés részletesen a `10_deterministic_baseline.json` fájlban van. A core claim precision/recall 0.4333/0.2826, a dense 0.4694/0.3833. A supported subset core/dense precision-recall 0.5000/0.4444 és 0.5395/0.5062. A grounded prediction rate mindkét tierben 1.0000; a truly unsupported rate 0.1765 és 0.1803. Az evidence grounding és a negation accuracy 1.0000 maradt. Az entity és claim extraction közös, gold-független `lib/v2/deterministic-semantic.js` helperre épül; a deterministic provider canonical providerként csak opt-in.
 
 ## Finding registry
 
@@ -74,6 +74,29 @@ Az aktuális mérés részletesen a `10_deterministic_baseline.json` fájlban va
 
 `[object Object]` értéket a baseline statikus ellenőrzése és a korábbi browser acceptance során nem reprodukáltunk; typed formatter a következő presentation slice része.
 
+### V22-INT-F002 – Széles regexből származó unsupported prediction
+
+- Severity: `HIGH`
+- Státusz: `FIXED` – context-bound entity/claim extraction, namesake hint, explicit abstention és top-50 false-positive riport.
+
+### V22-INT-F003 – Unit conversion és plan/completed conflict semantics hiánya
+
+- Severity: `HIGH`
+- Státusz: `FIXED` – canonical claim modality megőrzés és explicit m/km, million/billion HUF conversion.
+
+### V22-INT-F004 – Canonical deterministic provider contract hiánya
+
+- Severity: `MEDIUM`
+- Státusz: `FIXED` – opt-in entity/claim/relation provider és canonical runtime regresszió.
+
+### V22-INT-F005 – Forrásból nem levezethető attribution a direct-denial fixtureben
+
+- Státusz: `FIXED` – a fixture most természetesen tartalmazza a mentőszolgálat közlését; a gold és az article együtt generált.
+
+### V22-INT-F006/F007 – Headline-duplicate és hibás denial evidence binding
+
+- Státusz: `FIXED` – a generic headline attribution kimarad, a negált állítás evidence-e a tagadott propositionre kötődik.
+
 ## Források
 
 - Gépi gold: `tests/fixtures/v22-intelligence-benchmark/gold-manifest.json`
@@ -82,15 +105,17 @@ Az aktuális mérés részletesen a `10_deterministic_baseline.json` fájlban va
 - Evaluator: `lib/v22/benchmark-evaluator.cjs`
 - Futtatás: `node scripts/generate-v22-benchmark.cjs` és `node scripts/run-v22-benchmark.cjs`
 - Baseline JSON: `docs/UTOM_V2_2/00_baseline.json`
+- Integrity audit: `docs/UTOM_V2_2/12_BENCHMARK_INTEGRITY_AUDIT.md`
+- Precision Round 2: `docs/UTOM_V2_2/13_PRECISION_HARDENING_ROUND2.md`
 
 ## Következő munkasorrend
 
-1. Determinisztikus baseline pontosságának javítása csak új, reprodukálható regresszióval.
+1. A measured dense negation/modality eltérés külön precision slice-ban kezelendő.
 2. Showcase scenario selector és human-facing projection bővítése.
-3. Provider-backed benchmark futtatás, ha ilyen provider külön engedélyezetten rendelkezésre áll.
+3. Provider-backed benchmark futtatás csak külön engedélyezett providerrel.
 
 ## Állapot
 
-`V2.2 BENCHMARK VALIDATION: CORE + DENSE + ORACLE + MUTATION + DETERMINISTIC BASELINE COMPLETE`
+`V2.2 BENCHMARK VALIDATION: CORE + DENSE + ORACLE + MUTATION + PRECISION HARDENING ROUND 1 COMPLETE`
 
 Production, payment és paid AI érintetlen.

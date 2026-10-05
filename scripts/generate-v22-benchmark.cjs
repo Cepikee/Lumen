@@ -9,6 +9,7 @@ const outputDir = path.join(__dirname, "../tests/fixtures/v22-intelligence-bench
 const dataset = buildBenchmarkDataset();
 const denseDataset = buildDenseBenchmarkDataset();
 const manifest = {
+  benchmarkVersion: dataset.benchmarkVersion,
   contractVersion: dataset.contractVersion,
   generatedBy: dataset.generatedBy,
   sourcePolicy: dataset.sourcePolicy,
@@ -30,6 +31,7 @@ const manifest = {
   })),
 };
 const articles = {
+  benchmarkVersion: dataset.benchmarkVersion,
   contractVersion: dataset.contractVersion,
   scenarios: dataset.scenarios.map((scenario) => ({ id: scenario.id, sourceVariants: scenario.sourceVariants.map((source) => ({ source: source.source, title: source.title, url: source.url, wordCount: source.wordCount, text: source.text })) })),
   denseScenarios: denseDataset.scenarios.map((scenario) => ({ id: scenario.id, sourceVariants: scenario.sourceVariants.map((source) => ({ source: source.source, title: source.title, url: source.url, wordCount: source.wordCount, text: source.text })) })),

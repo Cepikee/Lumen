@@ -1,4 +1,5 @@
 {
+  "benchmarkVersion": "v22.benchmark.1",
   "contractVersion": "v22.intelligence-quality-benchmark.1",
   "generatedBy": "lib/v22/benchmark-dataset.cjs",
   "sourcePolicy": "all text is original controlled Hungarian benchmark material; no full real article is copied",
@@ -769,7 +770,7 @@
           },
           "title": "A közlemény szerint nem történt sérülés – Telex-szerű",
           "url": "https://telex.hu/v22/direct-denial/1",
-          "wordCount": 528,
+          "wordCount": 531,
           "observationIds": [
             "V22-S08:claim:1:1"
           ]
@@ -808,7 +809,7 @@
             "id": "V22-S08:claim:1:1",
             "predicate": "INJURY_OCCURRED",
             "source": "telex.hu",
-            "sentence": "A balesetben nem történt sérülés.",
+            "sentence": "A mentőszolgálat szerint a balesetben nem történt sérülés.",
             "evidence": "nem történt sérülés",
             "value": false,
             "unit": null,

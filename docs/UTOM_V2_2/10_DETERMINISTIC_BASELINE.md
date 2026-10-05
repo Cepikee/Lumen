@@ -4,6 +4,12 @@
 
 `lib/v22/deterministic-text-provider.cjs` cikk-szövegből dolgozik. A provider nem olvassa a gold manifestet, nem használ scenario-ID alapján kivételt, és nem ír V2 táblákat. A `scripts/run-v22-deterministic-baseline.cjs` csak a generált articles fixture-t és a normál evaluator boundary-t használja.
 
+## Fagyasztott benchmark-azonosító
+
+`v22.benchmark.1`; evaluator `v22.evaluator.3`. A report a generált articles
+fixture és gold manifest SHA-256 hashét, valamint a provider konfigurációját is
+tartalmazza.
+
 ## Felismert jelek
 
 - szám és mértékegység;
@@ -11,16 +17,20 @@
 - explicit negáció;
 - feltételes jelölő;
 - egyszerű `szerint` attribúció;
-- egyszerű tulajdonnévi entity-jelölt.
+- context-bound tulajdonnévi entity-jelölt és namesake identity hint;
+- canonical predicate/unit mapping és explicit abstention.
 
-A provider szándékosan konzervatív, ezért a bizonytalan szemantikai következtetéseket nem gyártja le. A jelenlegi mérés:
+A provider szándékosan konzervatív, ezért a bizonytalan szemantikai következtetéseket nem gyártja le. Az integrity-korrigált jelenlegi mérés:
 
 | Tier | Claim precision | Claim recall | Attribution | Evidence | Negation | Modality |
 |---|---:|---:|---:|---:|---:|---:|
-| Core | 0.0479 | 0.1739 | 0.7500 | 1.0000 | 1.0000 | 1.0000 |
-| Dense | 0.2143 | 0.1500 | 0.7222 | 1.0000 | 1.0000 | 1.0000 |
+| Core | 0.4333 | 0.2826 | 0.9231 | 1.0000 | 1.0000 | 0.9231 |
+| Dense | 0.4694 | 0.3833 | 0.8913 | 1.0000 | 1.0000 | 1.0000 |
 
-A teljes JSON report: `docs/UTOM_V2_2/10_deterministic_baseline.json`.
+A teljes JSON report: `docs/UTOM_V2_2/10_deterministic_baseline.json`. A gold
+unmatched legacy rate és a source-grounded truly unsupported rate külön mező.
+
+Precision Hardening Round 1 top-50 false-positive riport: `docs/UTOM_V2_2/11_false_positives_top50.json`; supported-subset mérőszámok ugyanebben a JSON reportban szerepelnek.
 
 Futtatás:
 

@@ -1,7 +1,19 @@
 {
   "provider": "deterministic-text-v1",
   "source": "F:\\Projekt2025\\Lumen\\tests\\fixtures\\v22-intelligence-benchmark\\articles.json",
+  "integrity": {
+    "benchmarkVersion": "v22.benchmark.1",
+    "articlesHash": "3a56cd537bf0aa1cfe8048d64a0a8e626b2f2f13817786bac6081ec093d00953",
+    "goldManifestHash": "20605b4037a166234708749c26055bf1bfc40d59a5fd669f33f031a4ef9e1f02",
+    "evaluatorVersion": "v22.evaluator.3",
+    "provider": {
+      "name": "deterministic-text-v1",
+      "config": "gold-independent-semantic-helper-round2"
+    }
+  },
   "core": {
+    "benchmarkVersion": "v22.benchmark.1",
+    "evaluatorVersion": "v22.evaluator.3",
     "contractVersion": "v22.intelligence-quality-baseline.2",
     "scenarioCount": 20,
     "articleCount": 45,
@@ -15,21 +27,21 @@
       "omissions": 3
     },
     "predictedCounts": {
-      "entities": 37,
+      "entities": 4,
       "relations": 0,
-      "claims": 167,
+      "claims": 30,
       "events": 0,
       "conflicts": 0,
       "changes": 0,
       "omissions": 0
     },
     "metrics": {
-      "entityPrecision": 0.08108108108108109,
-      "entityRecall": 0.13043478260869565,
+      "entityPrecision": 1,
+      "entityRecall": 0.17391304347826086,
       "relationPrecision": null,
       "relationRecall": 0,
-      "claimPrecision": 0.04790419161676647,
-      "claimRecall": 0.17391304347826086,
+      "claimPrecision": 0.43333333333333335,
+      "claimRecall": 0.2826086956521739,
       "eventMatchingAccuracy": 0,
       "conflictPrecision": null,
       "conflictRecall": 0,
@@ -37,28 +49,43 @@
       "sourceOmissionPrecision": null,
       "sourceOmissionRecall": 0,
       "temporalChangeRecall": 0,
-      "identityAccuracy": 0,
-      "unsupportedPredictionRate": 0.9214285714285714,
-      "attributionAccuracy": 0.75,
-      "attributionEvaluated": 8,
+      "identityAccuracy": 0.25,
+      "unsupportedPredictionRate": 0.5,
+      "attributionAccuracy": 0.9230769230769231,
+      "attributionEvaluated": 13,
       "evidenceAccuracy": 1,
-      "evidenceEvaluated": 8,
-      "temporalAccuracy": 0.875,
-      "temporalEvaluated": 8,
+      "evidenceEvaluated": 13,
+      "temporalAccuracy": 1,
+      "temporalEvaluated": 13,
       "negationAccuracy": 1,
-      "negationEvaluated": 8,
-      "modalityAccuracy": 1,
-      "modalityEvaluated": 8
+      "negationEvaluated": 13,
+      "modalityAccuracy": 0.9230769230769231,
+      "modalityEvaluated": 13,
+      "supportedClaimPrecision": 0.5,
+      "supportedClaimRecall": 0.4444444444444444,
+      "supportedClaimExpected": 27,
+      "supportedClaimPredicted": 24,
+      "predictionCount": 34,
+      "groundedPredictionCount": 34,
+      "groundedPredictionRate": 1,
+      "semanticallySupportedPredictionCount": 28,
+      "semanticallySupportedPredictionRate": 0.8235294117647058,
+      "goldMatchedPredictionCount": 17,
+      "goldCoveragePrecision": 0.6071428571428571,
+      "extraSupportedPredictionCount": 11,
+      "extraSupportedPredictionRate": 0.3235294117647059,
+      "trulyUnsupportedPredictionCount": 6,
+      "trulyUnsupportedPredictionRate": 0.17647058823529413
     },
     "detail": {
       "entity": {
-        "truePositive": 3,
+        "truePositive": 4,
         "expected": 23,
-        "predicted": 37,
-        "falsePositive": 34,
-        "falseNegative": 20,
-        "precision": 0.08108108108108109,
-        "recall": 0.13043478260869565
+        "predicted": 4,
+        "falsePositive": 0,
+        "falseNegative": 19,
+        "precision": 1,
+        "recall": 0.17391304347826086
       },
       "relation": {
         "truePositive": 0,
@@ -70,13 +97,24 @@
         "recall": 0
       },
       "claim": {
-        "truePositive": 8,
+        "truePositive": 13,
         "expected": 46,
-        "predicted": 167,
-        "falsePositive": 159,
-        "falseNegative": 38,
-        "precision": 0.04790419161676647,
-        "recall": 0.17391304347826086
+        "predicted": 30,
+        "falsePositive": 17,
+        "falseNegative": 33,
+        "precision": 0.43333333333333335,
+        "recall": 0.2826086956521739
+      },
+      "supportedClaims": {
+        "truePositive": 12,
+        "expected": 27,
+        "predicted": 24,
+        "falsePositive": 12,
+        "falseNegative": 15,
+        "precision": 0.5,
+        "recall": 0.4444444444444444,
+        "supportedExpected": 27,
+        "supportedPredicted": 24
       },
       "event": {
         "truePositive": 0,
@@ -116,35 +154,48 @@
       },
       "quality": {
         "attribution": {
-          "evaluated": 8,
-          "correct": 6,
-          "accuracy": 0.75
+          "evaluated": 13,
+          "correct": 12,
+          "accuracy": 0.9230769230769231
         },
         "evidence": {
-          "evaluated": 8,
-          "correct": 8,
+          "evaluated": 13,
+          "correct": 13,
           "accuracy": 1
         },
         "temporal": {
-          "evaluated": 8,
-          "correct": 7,
-          "accuracy": 0.875
+          "evaluated": 13,
+          "correct": 13,
+          "accuracy": 1
         },
         "negation": {
-          "evaluated": 8,
-          "correct": 8,
+          "evaluated": 13,
+          "correct": 13,
           "accuracy": 1
         },
         "modality": {
-          "evaluated": 8,
-          "correct": 8,
-          "accuracy": 1
+          "evaluated": 13,
+          "correct": 12,
+          "accuracy": 0.9230769230769231
         }
       },
+      "integrity": {
+        "predictionCount": 34,
+        "groundedPredictionCount": 34,
+        "groundedPredictionRate": 1,
+        "semanticallySupportedPredictionCount": 28,
+        "semanticallySupportedPredictionRate": 0.8235294117647058,
+        "goldMatchedPredictionCount": 17,
+        "goldCoveragePrecision": 0.6071428571428571,
+        "extraSupportedPredictionCount": 11,
+        "extraSupportedPredictionRate": 0.3235294117647059,
+        "trulyUnsupportedPredictionCount": 6,
+        "trulyUnsupportedPredictionRate": 0.17647058823529413
+      },
       "identity": {
-        "evaluated": 3,
-        "correct": 0,
-        "accuracy": 0
+        "evaluated": 4,
+        "correct": 1,
+        "accuracy": 0.25
       },
       "scenarios": [
         {
@@ -153,10 +204,10 @@
             "entities": {
               "truePositive": 0,
               "expected": 1,
-              "predicted": 3,
-              "falsePositive": 3,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 1,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "relations": {
@@ -169,13 +220,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 2,
+              "truePositive": 1,
               "expected": 2,
-              "predicted": 11,
-              "falsePositive": 9,
-              "falseNegative": 0,
-              "precision": 0.18181818181818182,
-              "recall": 1
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": 1,
+              "recall": 0.5
             },
             "events": {
               "truePositive": 0,
@@ -221,10 +272,10 @@
             "entities": {
               "truePositive": 0,
               "expected": 1,
-              "predicted": 2,
-              "falsePositive": 2,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 1,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "relations": {
@@ -237,13 +288,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 1,
+              "truePositive": 2,
               "expected": 2,
-              "predicted": 8,
-              "falsePositive": 7,
-              "falseNegative": 1,
-              "precision": 0.125,
-              "recall": 0.5
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "events": {
               "truePositive": 0,
@@ -289,10 +340,10 @@
             "entities": {
               "truePositive": 0,
               "expected": 1,
-              "predicted": 3,
-              "falsePositive": 3,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 1,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "relations": {
@@ -305,13 +356,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 0,
+              "truePositive": 3,
               "expected": 3,
-              "predicted": 12,
-              "falsePositive": 12,
-              "falseNegative": 3,
-              "precision": 0,
-              "recall": 0
+              "predicted": 3,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "events": {
               "truePositive": 0,
@@ -357,10 +408,10 @@
             "entities": {
               "truePositive": 0,
               "expected": 1,
-              "predicted": 2,
-              "falsePositive": 2,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 1,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "relations": {
@@ -375,10 +426,10 @@
             "claims": {
               "truePositive": 2,
               "expected": 2,
-              "predicted": 8,
-              "falsePositive": 6,
+              "predicted": 3,
+              "falsePositive": 1,
               "falseNegative": 0,
-              "precision": 0.25,
+              "precision": 0.6666666666666666,
               "recall": 1
             },
             "events": {
@@ -443,8 +494,8 @@
             "claims": {
               "truePositive": 0,
               "expected": 2,
-              "predicted": 9,
-              "falsePositive": 9,
+              "predicted": 3,
+              "falsePositive": 3,
               "falseNegative": 2,
               "precision": 0,
               "recall": 0
@@ -493,10 +544,10 @@
             "entities": {
               "truePositive": 0,
               "expected": 1,
-              "predicted": 2,
-              "falsePositive": 2,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 1,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "relations": {
@@ -511,10 +562,10 @@
             "claims": {
               "truePositive": 0,
               "expected": 2,
-              "predicted": 6,
-              "falsePositive": 6,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 2,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "events": {
@@ -561,10 +612,10 @@
             "entities": {
               "truePositive": 0,
               "expected": 1,
-              "predicted": 2,
-              "falsePositive": 2,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 1,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "relations": {
@@ -579,10 +630,10 @@
             "claims": {
               "truePositive": 0,
               "expected": 2,
-              "predicted": 7,
-              "falsePositive": 7,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 2,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "events": {
@@ -645,13 +696,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 0,
+              "truePositive": 2,
               "expected": 2,
-              "predicted": 10,
-              "falsePositive": 10,
-              "falseNegative": 2,
-              "precision": 0,
-              "recall": 0
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "events": {
               "truePositive": 0,
@@ -697,10 +748,10 @@
             "entities": {
               "truePositive": 0,
               "expected": 1,
-              "predicted": 2,
-              "falsePositive": 2,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 1,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "relations": {
@@ -715,10 +766,10 @@
             "claims": {
               "truePositive": 0,
               "expected": 2,
-              "predicted": 6,
-              "falsePositive": 6,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 2,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "events": {
@@ -765,10 +816,10 @@
             "entities": {
               "truePositive": 0,
               "expected": 1,
-              "predicted": 2,
-              "falsePositive": 2,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 1,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "relations": {
@@ -781,13 +832,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 2,
-              "predicted": 6,
-              "falsePositive": 6,
-              "falseNegative": 2,
-              "precision": 0,
-              "recall": 0
+              "predicted": 2,
+              "falsePositive": 1,
+              "falseNegative": 1,
+              "precision": 0.5,
+              "recall": 0.5
             },
             "events": {
               "truePositive": 0,
@@ -833,10 +884,10 @@
             "entities": {
               "truePositive": 0,
               "expected": 1,
-              "predicted": 2,
-              "falsePositive": 2,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 1,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "relations": {
@@ -851,8 +902,8 @@
             "claims": {
               "truePositive": 0,
               "expected": 2,
-              "predicted": 7,
-              "falsePositive": 7,
+              "predicted": 1,
+              "falsePositive": 1,
               "falseNegative": 2,
               "precision": 0,
               "recall": 0
@@ -919,8 +970,8 @@
             "claims": {
               "truePositive": 0,
               "expected": 2,
-              "predicted": 8,
-              "falsePositive": 8,
+              "predicted": 2,
+              "falsePositive": 2,
               "falseNegative": 2,
               "precision": 0,
               "recall": 0
@@ -969,10 +1020,10 @@
             "entities": {
               "truePositive": 1,
               "expected": 1,
-              "predicted": 3,
-              "falsePositive": 2,
+              "predicted": 1,
+              "falsePositive": 0,
               "falseNegative": 0,
-              "precision": 0.3333333333333333,
+              "precision": 1,
               "recall": 1
             },
             "relations": {
@@ -987,8 +1038,8 @@
             "claims": {
               "truePositive": 0,
               "expected": 2,
-              "predicted": 7,
-              "falsePositive": 7,
+              "predicted": 1,
+              "falsePositive": 1,
               "falseNegative": 2,
               "precision": 0,
               "recall": 0
@@ -1055,10 +1106,10 @@
             "claims": {
               "truePositive": 0,
               "expected": 2,
-              "predicted": 6,
-              "falsePositive": 6,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 2,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "events": {
@@ -1103,13 +1154,13 @@
           "id": "V22-S15",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 2,
-              "predicted": 3,
-              "falsePositive": 3,
-              "falseNegative": 2,
-              "precision": 0,
-              "recall": 0
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": 1,
+              "recall": 0.5
             },
             "relations": {
               "truePositive": 0,
@@ -1123,10 +1174,10 @@
             "claims": {
               "truePositive": 0,
               "expected": 2,
-              "predicted": 6,
-              "falsePositive": 6,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 2,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "events": {
@@ -1173,10 +1224,10 @@
             "entities": {
               "truePositive": 0,
               "expected": 1,
-              "predicted": 3,
-              "falsePositive": 3,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 1,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "relations": {
@@ -1191,8 +1242,8 @@
             "claims": {
               "truePositive": 0,
               "expected": 3,
-              "predicted": 15,
-              "falsePositive": 15,
+              "predicted": 6,
+              "falsePositive": 6,
               "falseNegative": 3,
               "precision": 0,
               "recall": 0
@@ -1241,10 +1292,10 @@
             "entities": {
               "truePositive": 0,
               "expected": 1,
-              "predicted": 4,
-              "falsePositive": 4,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 1,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "relations": {
@@ -1257,13 +1308,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 0,
+              "truePositive": 2,
               "expected": 2,
-              "predicted": 11,
-              "falsePositive": 11,
-              "falseNegative": 2,
-              "precision": 0,
-              "recall": 0
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "events": {
               "truePositive": 0,
@@ -1309,10 +1360,10 @@
             "entities": {
               "truePositive": 0,
               "expected": 1,
-              "predicted": 2,
-              "falsePositive": 2,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 1,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "relations": {
@@ -1327,10 +1378,10 @@
             "claims": {
               "truePositive": 0,
               "expected": 3,
-              "predicted": 6,
-              "falsePositive": 6,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 3,
-              "precision": 0,
+              "precision": null,
               "recall": 0
             },
             "events": {
@@ -1393,13 +1444,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 3,
+              "truePositive": 0,
               "expected": 3,
-              "predicted": 9,
-              "falsePositive": 6,
-              "falseNegative": 0,
-              "precision": 0.3333333333333333,
-              "recall": 1
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 3,
+              "precision": null,
+              "recall": 0
             },
             "events": {
               "truePositive": 0,
@@ -1463,8 +1514,8 @@
             "claims": {
               "truePositive": 0,
               "expected": 4,
-              "predicted": 9,
-              "falsePositive": 9,
+              "predicted": 2,
+              "falsePositive": 2,
               "falseNegative": 4,
               "precision": 0,
               "recall": 0
@@ -1535,6 +1586,8 @@
     "baselineNote": "A provider kimenetét a benchmark normalizációs határán értékeljük; a default mock szándékosan üres."
   },
   "dense": {
+    "benchmarkVersion": "v22.benchmark.1",
+    "evaluatorVersion": "v22.evaluator.3",
     "contractVersion": "v22.intelligence-quality-baseline.2",
     "scenarioCount": 5,
     "articleCount": 15,
@@ -1548,21 +1601,21 @@
       "omissions": 5
     },
     "predictedCounts": {
-      "entities": 27,
+      "entities": 8,
       "relations": 0,
-      "claims": 84,
+      "claims": 98,
       "events": 0,
       "conflicts": 0,
       "changes": 0,
       "omissions": 0
     },
     "metrics": {
-      "entityPrecision": 0.14814814814814814,
+      "entityPrecision": 0.5,
       "entityRecall": 0.2,
       "relationPrecision": null,
       "relationRecall": 0,
-      "claimPrecision": 0.21428571428571427,
-      "claimRecall": 0.15,
+      "claimPrecision": 0.46938775510204084,
+      "claimRecall": 0.38333333333333336,
       "eventMatchingAccuracy": 0,
       "conflictPrecision": null,
       "conflictRecall": null,
@@ -1570,27 +1623,42 @@
       "sourceOmissionPrecision": null,
       "sourceOmissionRecall": 0,
       "temporalChangeRecall": 0,
-      "identityAccuracy": 0,
-      "unsupportedPredictionRate": 0.7634408602150538,
-      "attributionAccuracy": 0.7222222222222222,
-      "attributionEvaluated": 18,
+      "identityAccuracy": 1,
+      "unsupportedPredictionRate": 0.5283018867924528,
+      "attributionAccuracy": 0.8913043478260869,
+      "attributionEvaluated": 46,
       "evidenceAccuracy": 1,
-      "evidenceEvaluated": 18,
+      "evidenceEvaluated": 46,
       "temporalAccuracy": 1,
-      "temporalEvaluated": 18,
+      "temporalEvaluated": 46,
       "negationAccuracy": 1,
-      "negationEvaluated": 18,
+      "negationEvaluated": 46,
       "modalityAccuracy": 1,
-      "modalityEvaluated": 18
+      "modalityEvaluated": 46,
+      "supportedClaimPrecision": 0.5394736842105263,
+      "supportedClaimRecall": 0.5061728395061729,
+      "supportedClaimExpected": 81,
+      "supportedClaimPredicted": 76,
+      "predictionCount": 106,
+      "groundedPredictionCount": 106,
+      "groundedPredictionRate": 1,
+      "semanticallySupportedPredictionCount": 84,
+      "semanticallySupportedPredictionRate": 0.7924528301886793,
+      "goldMatchedPredictionCount": 50,
+      "goldCoveragePrecision": 0.5952380952380952,
+      "extraSupportedPredictionCount": 34,
+      "extraSupportedPredictionRate": 0.32075471698113206,
+      "trulyUnsupportedPredictionCount": 22,
+      "trulyUnsupportedPredictionRate": 0.20754716981132076
     },
     "detail": {
       "entity": {
         "truePositive": 4,
         "expected": 20,
-        "predicted": 27,
-        "falsePositive": 23,
+        "predicted": 8,
+        "falsePositive": 4,
         "falseNegative": 16,
-        "precision": 0.14814814814814814,
+        "precision": 0.5,
         "recall": 0.2
       },
       "relation": {
@@ -1603,13 +1671,24 @@
         "recall": 0
       },
       "claim": {
-        "truePositive": 18,
+        "truePositive": 46,
         "expected": 120,
-        "predicted": 84,
-        "falsePositive": 66,
-        "falseNegative": 102,
-        "precision": 0.21428571428571427,
-        "recall": 0.15
+        "predicted": 98,
+        "falsePositive": 52,
+        "falseNegative": 74,
+        "precision": 0.46938775510204084,
+        "recall": 0.38333333333333336
+      },
+      "supportedClaims": {
+        "truePositive": 41,
+        "expected": 81,
+        "predicted": 76,
+        "falsePositive": 35,
+        "falseNegative": 40,
+        "precision": 0.5394736842105263,
+        "recall": 0.5061728395061729,
+        "supportedExpected": 81,
+        "supportedPredicted": 76
       },
       "event": {
         "truePositive": 0,
@@ -1649,35 +1728,48 @@
       },
       "quality": {
         "attribution": {
-          "evaluated": 18,
-          "correct": 13,
-          "accuracy": 0.7222222222222222
+          "evaluated": 46,
+          "correct": 41,
+          "accuracy": 0.8913043478260869
         },
         "evidence": {
-          "evaluated": 18,
-          "correct": 18,
+          "evaluated": 46,
+          "correct": 46,
           "accuracy": 1
         },
         "temporal": {
-          "evaluated": 18,
-          "correct": 18,
+          "evaluated": 46,
+          "correct": 46,
           "accuracy": 1
         },
         "negation": {
-          "evaluated": 18,
-          "correct": 18,
+          "evaluated": 46,
+          "correct": 46,
           "accuracy": 1
         },
         "modality": {
-          "evaluated": 18,
-          "correct": 18,
+          "evaluated": 46,
+          "correct": 46,
           "accuracy": 1
         }
       },
+      "integrity": {
+        "predictionCount": 106,
+        "groundedPredictionCount": 106,
+        "groundedPredictionRate": 1,
+        "semanticallySupportedPredictionCount": 84,
+        "semanticallySupportedPredictionRate": 0.7924528301886793,
+        "goldMatchedPredictionCount": 50,
+        "goldCoveragePrecision": 0.5952380952380952,
+        "extraSupportedPredictionCount": 34,
+        "extraSupportedPredictionRate": 0.32075471698113206,
+        "trulyUnsupportedPredictionCount": 22,
+        "trulyUnsupportedPredictionRate": 0.20754716981132076
+      },
       "identity": {
         "evaluated": 4,
-        "correct": 0,
-        "accuracy": 0
+        "correct": 4,
+        "accuracy": 1
       },
       "scenarios": [
         {
@@ -1686,10 +1778,10 @@
             "entities": {
               "truePositive": 1,
               "expected": 4,
-              "predicted": 3,
-              "falsePositive": 2,
+              "predicted": 1,
+              "falsePositive": 0,
               "falseNegative": 3,
-              "precision": 0.3333333333333333,
+              "precision": 1,
               "recall": 0.25
             },
             "relations": {
@@ -1702,13 +1794,13 @@
               "recall": 0
             },
             "claims": {
-              "truePositive": 5,
+              "truePositive": 8,
               "expected": 24,
-              "predicted": 18,
-              "falsePositive": 13,
-              "falseNegative": 19,
-              "precision": 0.2777777777777778,
-              "recall": 0.20833333333333334
+              "predicted": 23,
+              "falsePositive": 15,
+              "falseNegative": 16,
+              "precision": 0.34782608695652173,
+              "recall": 0.3333333333333333
             },
             "events": {
               "truePositive": 0,
@@ -1754,10 +1846,10 @@
             "entities": {
               "truePositive": 1,
               "expected": 4,
-              "predicted": 6,
-              "falsePositive": 5,
+              "predicted": 2,
+              "falsePositive": 1,
               "falseNegative": 3,
-              "precision": 0.16666666666666666,
+              "precision": 0.5,
               "recall": 0.25
             },
             "relations": {
@@ -1770,13 +1862,13 @@
               "recall": 0
             },
             "claims": {
-              "truePositive": 0,
+              "truePositive": 11,
               "expected": 24,
-              "predicted": 16,
-              "falsePositive": 16,
-              "falseNegative": 24,
-              "precision": 0,
-              "recall": 0
+              "predicted": 20,
+              "falsePositive": 9,
+              "falseNegative": 13,
+              "precision": 0.55,
+              "recall": 0.4583333333333333
             },
             "events": {
               "truePositive": 0,
@@ -1822,10 +1914,10 @@
             "entities": {
               "truePositive": 1,
               "expected": 4,
-              "predicted": 6,
-              "falsePositive": 5,
+              "predicted": 2,
+              "falsePositive": 1,
               "falseNegative": 3,
-              "precision": 0.16666666666666666,
+              "precision": 0.5,
               "recall": 0.25
             },
             "relations": {
@@ -1838,13 +1930,13 @@
               "recall": 0
             },
             "claims": {
-              "truePositive": 2,
+              "truePositive": 8,
               "expected": 24,
-              "predicted": 15,
-              "falsePositive": 13,
-              "falseNegative": 22,
-              "precision": 0.13333333333333333,
-              "recall": 0.08333333333333333
+              "predicted": 20,
+              "falsePositive": 12,
+              "falseNegative": 16,
+              "precision": 0.4,
+              "recall": 0.3333333333333333
             },
             "events": {
               "truePositive": 0,
@@ -1890,10 +1982,10 @@
             "entities": {
               "truePositive": 1,
               "expected": 4,
-              "predicted": 6,
-              "falsePositive": 5,
+              "predicted": 1,
+              "falsePositive": 0,
               "falseNegative": 3,
-              "precision": 0.16666666666666666,
+              "precision": 1,
               "recall": 0.25
             },
             "relations": {
@@ -1906,13 +1998,13 @@
               "recall": 0
             },
             "claims": {
-              "truePositive": 5,
+              "truePositive": 11,
               "expected": 24,
-              "predicted": 15,
-              "falsePositive": 10,
-              "falseNegative": 19,
-              "precision": 0.3333333333333333,
-              "recall": 0.20833333333333334
+              "predicted": 18,
+              "falsePositive": 7,
+              "falseNegative": 13,
+              "precision": 0.6111111111111112,
+              "recall": 0.4583333333333333
             },
             "events": {
               "truePositive": 0,
@@ -1958,8 +2050,8 @@
             "entities": {
               "truePositive": 0,
               "expected": 4,
-              "predicted": 6,
-              "falsePositive": 6,
+              "predicted": 2,
+              "falsePositive": 2,
               "falseNegative": 4,
               "precision": 0,
               "recall": 0
@@ -1974,13 +2066,13 @@
               "recall": 0
             },
             "claims": {
-              "truePositive": 6,
+              "truePositive": 8,
               "expected": 24,
-              "predicted": 20,
-              "falsePositive": 14,
-              "falseNegative": 18,
-              "precision": 0.3,
-              "recall": 0.25
+              "predicted": 17,
+              "falsePositive": 9,
+              "falseNegative": 16,
+              "precision": 0.47058823529411764,
+              "recall": 0.3333333333333333
             },
             "events": {
               "truePositive": 0,

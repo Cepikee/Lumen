@@ -16,7 +16,8 @@ Az első session elfogadási állapota:
 | deterministic text baseline | PASS – separate measured report |
 | intelligence bug fixes | N/A – baseline session |
 | `V22-INT-F001` owner presentation mapping | PASS – targeted regression |
-| showcase scenario selector | OPEN – következő slice |
+| showcase scenario selector | PASS – scenario selector és empty state regresszió |
+| Precision Hardening Round 1 | PASS – precision slice, supported subset, robustness és canonical contract regressziók; unsupported attribution boundary documented |
 | paid AI | 0 |
 | production | untouched |
 
