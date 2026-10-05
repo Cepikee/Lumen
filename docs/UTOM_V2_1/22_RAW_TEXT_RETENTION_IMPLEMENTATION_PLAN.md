@@ -41,7 +41,7 @@ Az internal operational snapshot retention metrikákat tartalmaz: legutóbbi eli
 
 ## Teszt- és release-gate eredmény
 
-- Célzott retention regression: `tests/unit/raw-text-retention.test.cjs` — 14/14 PASS.
+- Célzott retention regression: `tests/unit/raw-text-retention.test.cjs` — 15/15 PASS.
 - Migration chain: 001→060 statikusan contiguous és safe; readiness 060-ra frissítve; 059 és 061 fail-closed.
 - M17 backfill regression: 7/7 PASS, beleértve explicit raw-unavailable ágat.
 - TypeScript, import check és offline suite a teljes quality körben futtatandó a commit előtt.
