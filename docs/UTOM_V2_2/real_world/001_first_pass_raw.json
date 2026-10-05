@@ -1,0 +1,75 @@
+{
+  "testId": "REAL_WORLD_ARTICLE_001",
+  "pass": "first-blind-pass",
+  "generatedAt": "2026-10-05T20:58:48.769Z",
+  "input": {
+    "path": "docs/UTOM_V2_2/real_world/001_source_article.txt",
+    "sha256": "8201C036E78C91A0C1DB26C6EE1BEC86217EFCB70AF7DA3EBD049D9EFCF2180E",
+    "sourceKey": "real-world-001",
+    "title": ":Zoltán nem tudja, miből fizet ki több mint 4,5 millió forintot, miután a Volvója új gazdája beperelte és nyert"
+  },
+  "prediction": {
+    "source": "real-world-001",
+    "entities": [
+      {
+        "mention": "Telex\nZoltán",
+        "normalized": "telex zoltán",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Novák András",
+        "normalized": "novák andrás",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Vágány Tamás",
+        "normalized": "vágány tamás",
+        "type": "person",
+        "identity": "same"
+      }
+    ],
+    "claims": [
+      {
+        "source": "real-world-001",
+        "predicate": "PROJECT_COST",
+        "value": 1.5,
+        "unit": "million HUF",
+        "evidence": "A vevő ügyvédje ezután már nem az autó visszavásárlását kérte Zoltántól, hanem azt, hogy térítse meg az addigi javítások költségét, illetve a Volvo adásvételkor ismert és valós futásteljesítménye közti különbségből adódó piaci értékkülönbséget, vagyis összesen 1,5 millió forintot.",
+        "evidenceSpan": {
+          "start": 8429,
+          "end": 8710,
+          "textSpan": "A vevő ügyvédje ezután már nem az autó visszavásárlását kérte Zoltántól, hanem azt, hogy térítse meg az addigi javítások költségét, illetve a Volvo adásvételkor ismert és valós futásteljesítménye közti különbségből adódó piaci értékkülönbséget, vagyis összesen 1,5 millió forintot."
+        },
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": null
+      },
+      {
+        "source": "real-world-001",
+        "predicate": "VEHICLE_COUNT",
+        "value": null,
+        "unit": "vehicle",
+        "evidence": "Az ügyvéd úgy látja, nagy kockázatot vállal, aki külföldön vásárol használt autót, vagy külföldről behozott járművet ad el egy magyarországi vevőnek.",
+        "evidenceSpan": {
+          "start": 14651,
+          "end": 14800,
+          "textSpan": "Az ügyvéd úgy látja, nagy kockázatot vállal, aki külföldön vásárol használt autót, vagy külföldről behozott járművet ad el egy magyarországi vevőnek."
+        },
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": null
+      }
+    ],
+    "relations": [],
+    "events": [],
+    "conflicts": [],
+    "changes": [],
+    "omissions": []
+  }
+}

@@ -1,0 +1,1622 @@
+{
+  "dataset": {
+    "version": "v22.heldout.1",
+    "scenarios": 12,
+    "articles": 26,
+    "expectedEntities": 37,
+    "expectedRelations": 2,
+    "expectedClaims": 39,
+    "expectedEvents": 8,
+    "expectedConflicts": 1,
+    "expectedTemporalChanges": 2,
+    "expectedOmissions": 2
+  },
+  "derivability": {
+    "total": 86,
+    "derived": 86,
+    "failed": [],
+    "rows": [
+      {
+        "scenario": "H01",
+        "field": "entity",
+        "value": "Nyugati peronprogram",
+        "derived": true
+      },
+      {
+        "scenario": "H01",
+        "field": "entity",
+        "value": "Városi Közlekedési Hivatal",
+        "derived": true
+      },
+      {
+        "scenario": "H01",
+        "field": "entity",
+        "value": "Barta Réka",
+        "derived": true
+      },
+      {
+        "scenario": "H01",
+        "field": "entity",
+        "value": "Szolnok",
+        "derived": true
+      },
+      {
+        "scenario": "H01",
+        "field": "claim",
+        "source": "napihir.hu",
+        "value": 420,
+        "derived": true
+      },
+      {
+        "scenario": "H01",
+        "field": "claim",
+        "source": "reggeliujsag.hu",
+        "value": 420,
+        "derived": true
+      },
+      {
+        "scenario": "H01",
+        "field": "claim",
+        "source": "napihir.hu",
+        "value": 62,
+        "derived": true
+      },
+      {
+        "scenario": "H01",
+        "field": "claim",
+        "source": "reggeliujsag.hu",
+        "value": 62,
+        "derived": true
+      },
+      {
+        "scenario": "H01",
+        "field": "claim",
+        "source": "napihir.hu",
+        "value": "2028-03",
+        "derived": true
+      },
+      {
+        "scenario": "H01",
+        "field": "relation",
+        "value": "Városi Közlekedési Hivatal|announced|próbaszolgálat indulása",
+        "derived": true
+      },
+      {
+        "scenario": "H01",
+        "field": "event",
+        "value": "próbaszolgálat indulása",
+        "derived": true
+      },
+      {
+        "scenario": "H02",
+        "field": "entity",
+        "value": "Vektor Holding",
+        "derived": true
+      },
+      {
+        "scenario": "H02",
+        "field": "entity",
+        "value": "Tiszavirág Élelmiszerüzem",
+        "derived": true
+      },
+      {
+        "scenario": "H02",
+        "field": "entity",
+        "value": "Kelemen Áron",
+        "derived": true
+      },
+      {
+        "scenario": "H02",
+        "field": "claim",
+        "source": "uzletfigyelo.hu",
+        "value": 2.4,
+        "derived": true
+      },
+      {
+        "scenario": "H02",
+        "field": "claim",
+        "source": "uzletfigyelo.hu",
+        "value": 18,
+        "derived": true
+      },
+      {
+        "scenario": "H02",
+        "field": "claim",
+        "source": "piacma.hu",
+        "value": 2.4,
+        "derived": true
+      },
+      {
+        "scenario": "H02",
+        "field": "relation",
+        "value": "Kelemen Áron|CEO_OF|Vektor Holding",
+        "derived": true
+      },
+      {
+        "scenario": "H02",
+        "field": "event",
+        "value": "első próbagyártás",
+        "derived": true
+      },
+      {
+        "scenario": "H03",
+        "field": "entity",
+        "value": "Hegyvidéki Klinikai Központ",
+        "derived": true
+      },
+      {
+        "scenario": "H03",
+        "field": "entity",
+        "value": "Dr. Fodor Emese",
+        "derived": true
+      },
+      {
+        "scenario": "H03",
+        "field": "entity",
+        "value": "Diósgyőr",
+        "derived": true
+      },
+      {
+        "scenario": "H03",
+        "field": "claim",
+        "source": "egeszsegter.hu",
+        "value": "2028-09",
+        "derived": true
+      },
+      {
+        "scenario": "H03",
+        "field": "claim",
+        "source": "egeszsegter.hu",
+        "value": false,
+        "derived": true
+      },
+      {
+        "scenario": "H03",
+        "field": "claim",
+        "source": "korhazfigyelo.hu",
+        "value": false,
+        "derived": true
+      },
+      {
+        "scenario": "H04",
+        "field": "entity",
+        "value": "Berek téri iskola",
+        "derived": true
+      },
+      {
+        "scenario": "H04",
+        "field": "entity",
+        "value": "Molnár Ildikó",
+        "derived": true
+      },
+      {
+        "scenario": "H04",
+        "field": "entity",
+        "value": "Alföld",
+        "derived": true
+      },
+      {
+        "scenario": "H04",
+        "field": "claim",
+        "source": "oktatashir.hu",
+        "value": 73,
+        "derived": true
+      },
+      {
+        "scenario": "H04",
+        "field": "claim",
+        "source": "oktatashir.hu",
+        "value": "2027-10",
+        "derived": true
+      },
+      {
+        "scenario": "H04",
+        "field": "claim",
+        "source": "tanugyma.hu",
+        "value": 300,
+        "derived": true
+      },
+      {
+        "scenario": "H04",
+        "field": "claim",
+        "source": "tanugyma.hu",
+        "value": "2027-10-12",
+        "derived": true
+      },
+      {
+        "scenario": "H05",
+        "field": "entity",
+        "value": "Balaton-parti Atlétikai Szövetség",
+        "derived": true
+      },
+      {
+        "scenario": "H05",
+        "field": "entity",
+        "value": "Papp Zoltán",
+        "derived": true
+      },
+      {
+        "scenario": "H05",
+        "field": "entity",
+        "value": "Tófutás rajtja",
+        "derived": true
+      },
+      {
+        "scenario": "H05",
+        "field": "entity",
+        "value": "Gálameccs törlése",
+        "derived": true
+      },
+      {
+        "scenario": "H05",
+        "field": "entity",
+        "value": "Balaton",
+        "derived": true
+      },
+      {
+        "scenario": "H05",
+        "field": "claim",
+        "source": "stadionlap.hu",
+        "value": 12000,
+        "derived": true
+      },
+      {
+        "scenario": "H05",
+        "field": "event",
+        "value": "Tófutás rajtja",
+        "derived": true
+      },
+      {
+        "scenario": "H05",
+        "field": "event",
+        "value": "Gálameccs törlése",
+        "derived": true
+      },
+      {
+        "scenario": "H06",
+        "field": "entity",
+        "value": "Szegedi Törvényszék",
+        "derived": true
+      },
+      {
+        "scenario": "H06",
+        "field": "entity",
+        "value": "Varga Anna",
+        "derived": true
+      },
+      {
+        "scenario": "H06",
+        "field": "entity",
+        "value": "Varga Bence",
+        "derived": true
+      },
+      {
+        "scenario": "H06",
+        "field": "entity",
+        "value": "Nádasdy-parti telek",
+        "derived": true
+      },
+      {
+        "scenario": "H06",
+        "field": "claim",
+        "source": "birosagfigyelo.hu",
+        "value": "2028-01",
+        "derived": true
+      },
+      {
+        "scenario": "H06",
+        "field": "claim",
+        "source": "jogaszvilag.hu",
+        "value": 84,
+        "derived": true
+      },
+      {
+        "scenario": "H07",
+        "field": "entity",
+        "value": "Zöldmező Villamosművek",
+        "derived": true
+      },
+      {
+        "scenario": "H07",
+        "field": "entity",
+        "value": "Petőfi lakótelep",
+        "derived": true
+      },
+      {
+        "scenario": "H07",
+        "field": "claim",
+        "source": "alfahir.hu",
+        "value": 120,
+        "derived": true
+      },
+      {
+        "scenario": "H07",
+        "field": "claim",
+        "source": "estikronika.hu",
+        "value": 150,
+        "derived": true
+      },
+      {
+        "scenario": "H07",
+        "field": "claim",
+        "source": "alfahir.hu",
+        "value": 2400,
+        "derived": true
+      },
+      {
+        "scenario": "H07",
+        "field": "claim",
+        "source": "estikronika.hu",
+        "value": 2400,
+        "derived": true
+      },
+      {
+        "scenario": "H07",
+        "field": "claim",
+        "source": "varoslap.hu",
+        "value": "unknown",
+        "derived": true
+      },
+      {
+        "scenario": "H08",
+        "field": "entity",
+        "value": "Rába Alkatrészgyár",
+        "derived": true
+      },
+      {
+        "scenario": "H08",
+        "field": "entity",
+        "value": "Sipos Levente",
+        "derived": true
+      },
+      {
+        "scenario": "H08",
+        "field": "claim",
+        "source": "iparhang.hu",
+        "value": 80,
+        "derived": true
+      },
+      {
+        "scenario": "H08",
+        "field": "claim",
+        "source": "iparhang.hu",
+        "value": 120,
+        "derived": true
+      },
+      {
+        "scenario": "H08",
+        "field": "claim",
+        "source": "iparhang.hu",
+        "value": 15,
+        "derived": true
+      },
+      {
+        "scenario": "H08",
+        "field": "claim",
+        "source": "gyarvilag.hu",
+        "value": 120,
+        "derived": true
+      },
+      {
+        "scenario": "H08",
+        "field": "claim",
+        "source": "gyarvilag.hu",
+        "value": "2027-05",
+        "derived": true
+      },
+      {
+        "scenario": "H09",
+        "field": "entity",
+        "value": "Fővárosi Tanács",
+        "derived": true
+      },
+      {
+        "scenario": "H09",
+        "field": "entity",
+        "value": "Kőris utca",
+        "derived": true
+      },
+      {
+        "scenario": "H09",
+        "field": "claim",
+        "source": "onkormanyzatma.hu",
+        "value": "2028-02",
+        "derived": true
+      },
+      {
+        "scenario": "H09",
+        "field": "claim",
+        "source": "varosihirek.hu",
+        "value": 2,
+        "derived": true
+      },
+      {
+        "scenario": "H09",
+        "field": "event",
+        "value": "közgyűlési kihirdetés",
+        "derived": true
+      },
+      {
+        "scenario": "H10",
+        "field": "entity",
+        "value": "Délvidéki Gazdakör",
+        "derived": true
+      },
+      {
+        "scenario": "H10",
+        "field": "entity",
+        "value": "Hársas dűlő",
+        "derived": true
+      },
+      {
+        "scenario": "H10",
+        "field": "entity",
+        "value": "Tóth Noémi",
+        "derived": true
+      },
+      {
+        "scenario": "H10",
+        "field": "claim",
+        "source": "idojarasfigyelo.hu",
+        "value": "roof_tiles",
+        "derived": true
+      },
+      {
+        "scenario": "H10",
+        "field": "claim",
+        "source": "idojarasfigyelo.hu",
+        "value": 38,
+        "derived": true
+      },
+      {
+        "scenario": "H10",
+        "field": "claim",
+        "source": "gazdaregio.hu",
+        "value": 38,
+        "derived": true
+      },
+      {
+        "scenario": "H11",
+        "field": "entity",
+        "value": "Pannon Űrkutatási Labor",
+        "derived": true
+      },
+      {
+        "scenario": "H11",
+        "field": "entity",
+        "value": "Pille-7",
+        "derived": true
+      },
+      {
+        "scenario": "H11",
+        "field": "entity",
+        "value": "Dr. Sárközi Júlia",
+        "derived": true
+      },
+      {
+        "scenario": "H11",
+        "field": "claim",
+        "source": "tudomanyma.hu",
+        "value": 90,
+        "derived": true
+      },
+      {
+        "scenario": "H11",
+        "field": "claim",
+        "source": "tudomanyma.hu",
+        "value": "2029-06",
+        "derived": true
+      },
+      {
+        "scenario": "H11",
+        "field": "claim",
+        "source": "kutatovilag.hu",
+        "value": "2029-06",
+        "derived": true
+      },
+      {
+        "scenario": "H11",
+        "field": "event",
+        "value": "Pille-7",
+        "derived": true
+      },
+      {
+        "scenario": "H12",
+        "field": "entity",
+        "value": "Hajnali Busztársaság",
+        "derived": true
+      },
+      {
+        "scenario": "H12",
+        "field": "entity",
+        "value": "Fenyves köz",
+        "derived": true
+      },
+      {
+        "scenario": "H12",
+        "field": "entity",
+        "value": "Váradi Gergő",
+        "derived": true
+      },
+      {
+        "scenario": "H12",
+        "field": "claim",
+        "source": "kozlekedesma.hu",
+        "value": "2028-01",
+        "derived": true
+      },
+      {
+        "scenario": "H12",
+        "field": "claim",
+        "source": "utvonalhir.hu",
+        "value": "completed",
+        "derived": true
+      },
+      {
+        "scenario": "H12",
+        "field": "claim",
+        "source": "utvonalhir.hu",
+        "value": "2028-01",
+        "derived": true
+      },
+      {
+        "scenario": "H12",
+        "field": "event",
+        "value": "új megálló átadását",
+        "derived": true
+      },
+      {
+        "scenario": "H12",
+        "field": "event",
+        "value": "útvonal-átszervezést",
+        "derived": true
+      }
+    ]
+  },
+  "duplicateProjection": {
+    "duplicates": 0,
+    "predictions": 59,
+    "rows": []
+  },
+  "metrics": {
+    "entityPrecision": 0.6060606060606061,
+    "entityRecall": 0.5405405405405406,
+    "relationPrecision": 1,
+    "relationRecall": 0.5,
+    "claimPrecision": 0.47368421052631576,
+    "claimRecall": 0.23076923076923078,
+    "eventMatchingAccuracy": 0.75,
+    "conflictPrecision": 1,
+    "conflictRecall": 1,
+    "falseConflictRate": 0,
+    "sourceOmissionPrecision": 1,
+    "sourceOmissionRecall": 0.5,
+    "temporalChangeRecall": 0,
+    "identityAccuracy": 0.95,
+    "unsupportedPredictionRate": 0.3770491803278688,
+    "attributionAccuracy": 0.7777777777777778,
+    "attributionEvaluated": 9,
+    "evidenceAccuracy": 1,
+    "evidenceEvaluated": 9,
+    "temporalAccuracy": 0.8888888888888888,
+    "temporalEvaluated": 9,
+    "negationAccuracy": 1,
+    "negationEvaluated": 9,
+    "modalityAccuracy": 0.6666666666666666,
+    "modalityEvaluated": 9,
+    "supportedClaimPrecision": 0.47368421052631576,
+    "supportedClaimRecall": 0.23076923076923078,
+    "supportedClaimExpected": 39,
+    "supportedClaimPredicted": 19,
+    "predictionCount": 61,
+    "groundedPredictionCount": 61,
+    "groundedPredictionRate": 1,
+    "semanticallySupportedPredictionCount": 61,
+    "semanticallySupportedPredictionRate": 1,
+    "goldMatchedPredictionCount": 39,
+    "goldCoveragePrecision": 0.639344262295082,
+    "extraSupportedPredictionCount": 22,
+    "extraSupportedPredictionRate": 0.36065573770491804,
+    "trulyUnsupportedPredictionCount": 0,
+    "trulyUnsupportedPredictionRate": 0,
+    "informationCoverageScore": 0.4111111111111111,
+    "criticalFactRecall": 0.3815789473684211
+  },
+  "detail": {
+    "entity": {
+      "truePositive": 20,
+      "expected": 37,
+      "predicted": 33,
+      "falsePositive": 13,
+      "falseNegative": 17,
+      "precision": 0.6060606060606061,
+      "recall": 0.5405405405405406
+    },
+    "relation": {
+      "truePositive": 1,
+      "expected": 2,
+      "predicted": 1,
+      "falsePositive": 0,
+      "falseNegative": 1,
+      "precision": 1,
+      "recall": 0.5
+    },
+    "claim": {
+      "truePositive": 9,
+      "expected": 39,
+      "predicted": 19,
+      "falsePositive": 10,
+      "falseNegative": 30,
+      "precision": 0.47368421052631576,
+      "recall": 0.23076923076923078
+    },
+    "supportedClaims": {
+      "truePositive": 9,
+      "expected": 39,
+      "predicted": 19,
+      "falsePositive": 10,
+      "falseNegative": 30,
+      "precision": 0.47368421052631576,
+      "recall": 0.23076923076923078,
+      "supportedExpected": 39,
+      "supportedPredicted": 19
+    },
+    "event": {
+      "truePositive": 6,
+      "expected": 8,
+      "predicted": 6,
+      "falsePositive": 0,
+      "falseNegative": 2,
+      "precision": 1,
+      "recall": 0.75
+    },
+    "conflict": {
+      "truePositive": 1,
+      "expected": 1,
+      "predicted": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "precision": 1,
+      "recall": 1
+    },
+    "changes": {
+      "truePositive": 0,
+      "expected": 2,
+      "predicted": 0,
+      "falsePositive": 0,
+      "falseNegative": 2,
+      "precision": null,
+      "recall": 0
+    },
+    "sourceOmission": {
+      "truePositive": 1,
+      "expected": 2,
+      "predicted": 1,
+      "falsePositive": 0,
+      "falseNegative": 1,
+      "precision": 1,
+      "recall": 0.5
+    },
+    "quality": {
+      "attribution": {
+        "evaluated": 9,
+        "correct": 7,
+        "accuracy": 0.7777777777777778
+      },
+      "evidence": {
+        "evaluated": 9,
+        "correct": 9,
+        "accuracy": 1
+      },
+      "temporal": {
+        "evaluated": 9,
+        "correct": 8,
+        "accuracy": 0.8888888888888888
+      },
+      "negation": {
+        "evaluated": 9,
+        "correct": 9,
+        "accuracy": 1
+      },
+      "modality": {
+        "evaluated": 9,
+        "correct": 6,
+        "accuracy": 0.6666666666666666
+      }
+    },
+    "integrity": {
+      "predictionCount": 61,
+      "groundedPredictionCount": 61,
+      "groundedPredictionRate": 1,
+      "semanticallySupportedPredictionCount": 61,
+      "semanticallySupportedPredictionRate": 1,
+      "goldMatchedPredictionCount": 39,
+      "goldCoveragePrecision": 0.639344262295082,
+      "extraSupportedPredictionCount": 22,
+      "extraSupportedPredictionRate": 0.36065573770491804,
+      "trulyUnsupportedPredictionCount": 0,
+      "trulyUnsupportedPredictionRate": 0
+    },
+    "informationCoverage": {
+      "score": 0.4111111111111111,
+      "totalExpected": 90,
+      "totalMatched": 37,
+      "criticalExpected": 76,
+      "criticalMatched": 29,
+      "criticalRecall": 0.3815789473684211,
+      "breakdown": {
+        "entities": {
+          "expected": 37,
+          "matched": 20,
+          "recall": 0.5405405405405406,
+          "criticalExpected": 37,
+          "criticalMatched": 20,
+          "criticalRecall": 0.5405405405405406
+        },
+        "claims": {
+          "expected": 39,
+          "matched": 9,
+          "recall": 0.23076923076923078,
+          "criticalExpected": 39,
+          "criticalMatched": 9,
+          "criticalRecall": 0.23076923076923078
+        },
+        "relations": {
+          "expected": 2,
+          "matched": 1,
+          "recall": 0.5,
+          "criticalExpected": 0,
+          "criticalMatched": 0,
+          "criticalRecall": null
+        },
+        "changes": {
+          "expected": 2,
+          "matched": 0,
+          "recall": 0,
+          "criticalExpected": 0,
+          "criticalMatched": 0,
+          "criticalRecall": null
+        },
+        "omissions": {
+          "expected": 2,
+          "matched": 1,
+          "recall": 0.5,
+          "criticalExpected": 0,
+          "criticalMatched": 0,
+          "criticalRecall": null
+        },
+        "events": {
+          "expected": 8,
+          "matched": 6,
+          "recall": 0.75,
+          "criticalExpected": 0,
+          "criticalMatched": 0,
+          "criticalRecall": null
+        }
+      }
+    },
+    "identity": {
+      "evaluated": 20,
+      "correct": 19,
+      "accuracy": 0.95
+    },
+    "scenarios": [
+      {
+        "id": "H01",
+        "fields": {
+          "entities": {
+            "truePositive": 2,
+            "expected": 4,
+            "predicted": 4,
+            "falsePositive": 2,
+            "falseNegative": 2,
+            "precision": 0.5,
+            "recall": 0.5
+          },
+          "relations": {
+            "truePositive": 0,
+            "expected": 1,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": null,
+            "recall": 0
+          },
+          "claims": {
+            "truePositive": 2,
+            "expected": 5,
+            "predicted": 2,
+            "falsePositive": 0,
+            "falseNegative": 3,
+            "precision": 1,
+            "recall": 0.4
+          },
+          "events": {
+            "truePositive": 1,
+            "expected": 1,
+            "predicted": 1,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1
+          },
+          "conflicts": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "changes": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "omissions": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          }
+        }
+      },
+      {
+        "id": "H02",
+        "fields": {
+          "entities": {
+            "truePositive": 3,
+            "expected": 3,
+            "predicted": 4,
+            "falsePositive": 1,
+            "falseNegative": 0,
+            "precision": 0.75,
+            "recall": 1
+          },
+          "relations": {
+            "truePositive": 1,
+            "expected": 1,
+            "predicted": 1,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1
+          },
+          "claims": {
+            "truePositive": 2,
+            "expected": 3,
+            "predicted": 2,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": 1,
+            "recall": 0.6666666666666666
+          },
+          "events": {
+            "truePositive": 0,
+            "expected": 1,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": null,
+            "recall": 0
+          },
+          "conflicts": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "changes": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "omissions": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          }
+        }
+      },
+      {
+        "id": "H03",
+        "fields": {
+          "entities": {
+            "truePositive": 1,
+            "expected": 3,
+            "predicted": 2,
+            "falsePositive": 1,
+            "falseNegative": 2,
+            "precision": 0.5,
+            "recall": 0.3333333333333333
+          },
+          "relations": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "claims": {
+            "truePositive": 1,
+            "expected": 3,
+            "predicted": 2,
+            "falsePositive": 1,
+            "falseNegative": 2,
+            "precision": 0.5,
+            "recall": 0.3333333333333333
+          },
+          "events": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "conflicts": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "changes": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "omissions": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          }
+        }
+      },
+      {
+        "id": "H04",
+        "fields": {
+          "entities": {
+            "truePositive": 2,
+            "expected": 3,
+            "predicted": 2,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": 1,
+            "recall": 0.6666666666666666
+          },
+          "relations": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "claims": {
+            "truePositive": 0,
+            "expected": 4,
+            "predicted": 4,
+            "falsePositive": 4,
+            "falseNegative": 4,
+            "precision": 0,
+            "recall": 0
+          },
+          "events": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "conflicts": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "changes": {
+            "truePositive": 0,
+            "expected": 1,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": null,
+            "recall": 0
+          },
+          "omissions": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          }
+        }
+      },
+      {
+        "id": "H05",
+        "fields": {
+          "entities": {
+            "truePositive": 2,
+            "expected": 5,
+            "predicted": 2,
+            "falsePositive": 0,
+            "falseNegative": 3,
+            "precision": 1,
+            "recall": 0.4
+          },
+          "relations": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "claims": {
+            "truePositive": 0,
+            "expected": 1,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": null,
+            "recall": 0
+          },
+          "events": {
+            "truePositive": 2,
+            "expected": 2,
+            "predicted": 2,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1
+          },
+          "conflicts": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "changes": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "omissions": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          }
+        }
+      },
+      {
+        "id": "H06",
+        "fields": {
+          "entities": {
+            "truePositive": 2,
+            "expected": 4,
+            "predicted": 7,
+            "falsePositive": 5,
+            "falseNegative": 2,
+            "precision": 0.2857142857142857,
+            "recall": 0.5
+          },
+          "relations": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "claims": {
+            "truePositive": 0,
+            "expected": 2,
+            "predicted": 1,
+            "falsePositive": 1,
+            "falseNegative": 2,
+            "precision": 0,
+            "recall": 0
+          },
+          "events": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "conflicts": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "changes": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "omissions": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          }
+        }
+      },
+      {
+        "id": "H07",
+        "fields": {
+          "entities": {
+            "truePositive": 1,
+            "expected": 2,
+            "predicted": 1,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": 1,
+            "recall": 0.5
+          },
+          "relations": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "claims": {
+            "truePositive": 2,
+            "expected": 5,
+            "predicted": 2,
+            "falsePositive": 0,
+            "falseNegative": 3,
+            "precision": 1,
+            "recall": 0.4
+          },
+          "events": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "conflicts": {
+            "truePositive": 1,
+            "expected": 1,
+            "predicted": 1,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1
+          },
+          "changes": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "omissions": {
+            "truePositive": 1,
+            "expected": 1,
+            "predicted": 1,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1
+          }
+        }
+      },
+      {
+        "id": "H08",
+        "fields": {
+          "entities": {
+            "truePositive": 2,
+            "expected": 2,
+            "predicted": 3,
+            "falsePositive": 1,
+            "falseNegative": 0,
+            "precision": 0.6666666666666666,
+            "recall": 1
+          },
+          "relations": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "claims": {
+            "truePositive": 1,
+            "expected": 5,
+            "predicted": 3,
+            "falsePositive": 2,
+            "falseNegative": 4,
+            "precision": 0.3333333333333333,
+            "recall": 0.2
+          },
+          "events": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "conflicts": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "changes": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "omissions": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          }
+        }
+      },
+      {
+        "id": "H09",
+        "fields": {
+          "entities": {
+            "truePositive": 1,
+            "expected": 2,
+            "predicted": 2,
+            "falsePositive": 1,
+            "falseNegative": 1,
+            "precision": 0.5,
+            "recall": 0.5
+          },
+          "relations": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "claims": {
+            "truePositive": 0,
+            "expected": 2,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 2,
+            "precision": null,
+            "recall": 0
+          },
+          "events": {
+            "truePositive": 1,
+            "expected": 1,
+            "predicted": 1,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1
+          },
+          "conflicts": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "changes": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "omissions": {
+            "truePositive": 0,
+            "expected": 1,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": null,
+            "recall": 0
+          }
+        }
+      },
+      {
+        "id": "H10",
+        "fields": {
+          "entities": {
+            "truePositive": 1,
+            "expected": 3,
+            "predicted": 1,
+            "falsePositive": 0,
+            "falseNegative": 2,
+            "precision": 1,
+            "recall": 0.3333333333333333
+          },
+          "relations": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "claims": {
+            "truePositive": 0,
+            "expected": 3,
+            "predicted": 1,
+            "falsePositive": 1,
+            "falseNegative": 3,
+            "precision": 0,
+            "recall": 0
+          },
+          "events": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "conflicts": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "changes": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "omissions": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          }
+        }
+      },
+      {
+        "id": "H11",
+        "fields": {
+          "entities": {
+            "truePositive": 1,
+            "expected": 3,
+            "predicted": 2,
+            "falsePositive": 1,
+            "falseNegative": 2,
+            "precision": 0.5,
+            "recall": 0.3333333333333333
+          },
+          "relations": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "claims": {
+            "truePositive": 1,
+            "expected": 3,
+            "predicted": 2,
+            "falsePositive": 1,
+            "falseNegative": 2,
+            "precision": 0.5,
+            "recall": 0.3333333333333333
+          },
+          "events": {
+            "truePositive": 0,
+            "expected": 1,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": null,
+            "recall": 0
+          },
+          "conflicts": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "changes": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "omissions": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          }
+        }
+      },
+      {
+        "id": "H12",
+        "fields": {
+          "entities": {
+            "truePositive": 2,
+            "expected": 3,
+            "predicted": 3,
+            "falsePositive": 1,
+            "falseNegative": 1,
+            "precision": 0.6666666666666666,
+            "recall": 0.6666666666666666
+          },
+          "relations": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "claims": {
+            "truePositive": 0,
+            "expected": 3,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 3,
+            "precision": null,
+            "recall": 0
+          },
+          "events": {
+            "truePositive": 2,
+            "expected": 2,
+            "predicted": 2,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1
+          },
+          "conflicts": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          },
+          "changes": {
+            "truePositive": 0,
+            "expected": 1,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": null,
+            "recall": 0
+          },
+          "omissions": {
+            "truePositive": 0,
+            "expected": 0,
+            "predicted": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null
+          }
+        }
+      }
+    ]
+  }
+}

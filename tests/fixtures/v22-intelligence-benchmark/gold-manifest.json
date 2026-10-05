@@ -17,7 +17,7 @@
           },
           "title": "Eltérő összegek ugyanahhoz a beruházáshoz – Telex-szerű",
           "url": "https://telex.hu/v22/numeric-disagreement/1",
-          "wordCount": 529,
+          "wordCount": 522,
           "observationIds": [
             "V22-S01:claim:1:1"
           ]
@@ -29,7 +29,7 @@
           },
           "title": "Eltérő összegek ugyanahhoz a beruházáshoz – 24.hu-szerű",
           "url": "https://24.hu/v22/numeric-disagreement/2",
-          "wordCount": 527,
+          "wordCount": 522,
           "observationIds": [
             "V22-S01:claim:2:1"
           ]
@@ -41,7 +41,7 @@
           },
           "title": "Eltérő összegek ugyanahhoz a beruházáshoz – Index-szerű",
           "url": "https://index.hu/v22/numeric-disagreement/3",
-          "wordCount": 529,
+          "wordCount": 524,
           "observationIds": []
         }
       ],
@@ -51,7 +51,8 @@
             "id": "project",
             "mention": "Tiszapart mérőállomás",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "entityIdentityExpectations": [
@@ -78,7 +79,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           },
           {
             "id": "V22-S01:claim:2:1",
@@ -96,7 +98,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           }
         ],
         "events": [],
@@ -107,14 +110,16 @@
               "telex.hu",
               "24.hu"
             ],
-            "explanation": "A két forrás azonos projekthez eltérő összeget közöl; a költségfogalom azonossága nem bizonyított."
+            "explanation": "A két forrás azonos projekthez eltérő összeget közöl; a költségfogalom azonossága nem bizonyított.",
+            "importance": "critical"
           }
         ],
         "nonConflicts": [],
         "omissions": [
           {
             "source": "index.hu",
-            "predicate": "PROJECT_COST"
+            "predicate": "PROJECT_COST",
+            "importance": "critical"
           }
         ],
         "changesOverTime": []
@@ -133,7 +138,7 @@
           },
           "title": "Azonos szám, eltérő költségfogalom – Telex-szerű",
           "url": "https://telex.hu/v22/same-number-different-semantics/1",
-          "wordCount": 527,
+          "wordCount": 520,
           "observationIds": [
             "V22-S02:claim:1:1"
           ]
@@ -145,7 +150,7 @@
           },
           "title": "Azonos szám, eltérő költségfogalom – 24.hu-szerű",
           "url": "https://24.hu/v22/same-number-different-semantics/2",
-          "wordCount": 530,
+          "wordCount": 525,
           "observationIds": [
             "V22-S02:claim:2:1"
           ]
@@ -157,7 +162,8 @@
             "id": "project",
             "mention": "Déli csatornaprogram",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "entityIdentityExpectations": [
@@ -184,7 +190,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S02:claim:2:1",
@@ -202,7 +209,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           }
         ],
         "events": [],
@@ -233,7 +241,7 @@
           },
           "title": "Eltérő készültségi százalékok – Telex-szerű",
           "url": "https://telex.hu/v22/percentage-disagreement/1",
-          "wordCount": 524,
+          "wordCount": 531,
           "observationIds": [
             "V22-S03:claim:1:1"
           ]
@@ -245,7 +253,7 @@
           },
           "title": "Eltérő készültségi százalékok – 24.hu-szerű",
           "url": "https://24.hu/v22/percentage-disagreement/2",
-          "wordCount": 525,
+          "wordCount": 521,
           "observationIds": [
             "V22-S03:claim:2:1"
           ]
@@ -257,7 +265,7 @@
           },
           "title": "Eltérő készültségi százalékok – HVG-szerű",
           "url": "https://hvg.hu/v22/percentage-disagreement/3",
-          "wordCount": 526,
+          "wordCount": 520,
           "observationIds": [
             "V22-S03:claim:3:1"
           ]
@@ -269,7 +277,8 @@
             "id": "project",
             "mention": "Északi vasúti csomópont",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "entityIdentityExpectations": [
@@ -296,7 +305,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           },
           {
             "id": "V22-S03:claim:2:1",
@@ -314,7 +324,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           },
           {
             "id": "V22-S03:claim:3:1",
@@ -332,7 +343,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           }
         ],
         "events": [],
@@ -343,7 +355,8 @@
               "telex.hu",
               "24.hu"
             ],
-            "explanation": "A készültségi százalékok különböznek, a mérési módszer részben eltérhet."
+            "explanation": "A készültségi százalékok különböznek, a mérési módszer részben eltérhet.",
+            "importance": "critical"
           }
         ],
         "nonConflicts": [],
@@ -364,7 +377,7 @@
           },
           "title": "Kilométer és méter ugyanarról a távról – Telex-szerű",
           "url": "https://telex.hu/v22/unit-conversion/1",
-          "wordCount": 530,
+          "wordCount": 522,
           "observationIds": [
             "V22-S04:claim:1:1"
           ]
@@ -376,7 +389,7 @@
           },
           "title": "Kilométer és méter ugyanarról a távról – Index-szerű",
           "url": "https://index.hu/v22/unit-conversion/2",
-          "wordCount": 530,
+          "wordCount": 524,
           "observationIds": [
             "V22-S04:claim:2:1"
           ]
@@ -388,7 +401,8 @@
             "id": "levee",
             "mention": "Töltésszakasz",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "entityIdentityExpectations": [
@@ -415,7 +429,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S04:claim:2:1",
@@ -433,7 +448,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           }
         ],
         "events": [],
@@ -465,7 +481,7 @@
           },
           "title": "Két eltérő megnyitási dátum – Telex-szerű",
           "url": "https://telex.hu/v22/date-time-disagreement/1",
-          "wordCount": 527,
+          "wordCount": 521,
           "observationIds": [
             "V22-S05:claim:1:1"
           ]
@@ -477,7 +493,7 @@
           },
           "title": "Két eltérő megnyitási dátum – 24.hu-szerű",
           "url": "https://24.hu/v22/date-time-disagreement/2",
-          "wordCount": 526,
+          "wordCount": 522,
           "observationIds": [
             "V22-S05:claim:2:1"
           ]
@@ -489,7 +505,8 @@
             "id": "center",
             "mention": "Közösségi központ",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "entityIdentityExpectations": [
@@ -504,7 +521,7 @@
             "id": "V22-S05:claim:1:1",
             "predicate": "OPENING_DATE",
             "source": "telex.hu",
-            "sentence": "A központot június 1-jén nyithatják meg.",
+            "sentence": "A központot 2027 június 1-jén nyithatják meg.",
             "evidence": "június 1-jén",
             "value": "2027-06-01",
             "unit": "date",
@@ -518,13 +535,14 @@
             },
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           },
           {
             "id": "V22-S05:claim:2:1",
             "predicate": "OPENING_DATE",
             "source": "24.hu",
-            "sentence": "A megnyitás várható időpontja június 15.",
+            "sentence": "A megnyitás várható időpontja 2027 június 15.",
             "evidence": "június 15",
             "value": "2027-06-15",
             "unit": "date",
@@ -538,7 +556,8 @@
             },
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           }
         ],
         "events": [],
@@ -549,7 +568,8 @@
               "telex.hu",
               "24.hu"
             ],
-            "explanation": "A két forrás eltérő tervezett megnyitási dátumot közöl."
+            "explanation": "A két forrás eltérő tervezett megnyitási dátumot közöl.",
+            "importance": "critical"
           }
         ],
         "nonConflicts": [],
@@ -570,7 +590,7 @@
           },
           "title": "Terv és már befejezett munka – Telex-szerű",
           "url": "https://telex.hu/v22/plan-vs-completed/1",
-          "wordCount": 527,
+          "wordCount": 532,
           "observationIds": [
             "V22-S06:claim:1:1"
           ]
@@ -582,7 +602,7 @@
           },
           "title": "Terv és már befejezett munka – 24.hu-szerű",
           "url": "https://24.hu/v22/plan-vs-completed/2",
-          "wordCount": 526,
+          "wordCount": 520,
           "observationIds": [
             "V22-S06:claim:2:1"
           ]
@@ -594,7 +614,8 @@
             "id": "park",
             "mention": "Városi park",
             "type": "location",
-            "identity": "same"
+            "identity": "same",
+            "importance": "supporting"
           }
         ],
         "entityIdentityExpectations": [
@@ -621,7 +642,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S06:claim:2:1",
@@ -639,7 +661,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           }
         ],
         "events": [],
@@ -670,7 +693,7 @@
           },
           "title": "Feltételesen induló építkezés – Telex-szerű",
           "url": "https://telex.hu/v22/conditional-future/1",
-          "wordCount": 526,
+          "wordCount": 532,
           "observationIds": [
             "V22-S07:claim:1:1"
           ]
@@ -682,7 +705,7 @@
           },
           "title": "Feltételesen induló építkezés – Index-szerű",
           "url": "https://index.hu/v22/conditional-future/2",
-          "wordCount": 525,
+          "wordCount": 520,
           "observationIds": [
             "V22-S07:claim:2:1"
           ]
@@ -694,7 +717,8 @@
             "id": "school",
             "mention": "Új iskolaépület",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "entityIdentityExpectations": [
@@ -721,7 +745,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S07:claim:2:1",
@@ -739,7 +764,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           }
         ],
         "events": [],
@@ -770,7 +796,7 @@
           },
           "title": "A közlemény szerint nem történt sérülés – Telex-szerű",
           "url": "https://telex.hu/v22/direct-denial/1",
-          "wordCount": 531,
+          "wordCount": 523,
           "observationIds": [
             "V22-S08:claim:1:1"
           ]
@@ -782,7 +808,7 @@
           },
           "title": "A közlemény szerint nem történt sérülés – 24.hu-szerű",
           "url": "https://24.hu/v22/direct-denial/2",
-          "wordCount": 527,
+          "wordCount": 521,
           "observationIds": [
             "V22-S08:claim:2:1"
           ]
@@ -794,7 +820,8 @@
             "id": "accident",
             "mention": "Baleset",
             "type": "event",
-            "identity": "same"
+            "identity": "same",
+            "importance": "supporting"
           }
         ],
         "entityIdentityExpectations": [
@@ -824,7 +851,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S08:claim:2:1",
@@ -845,7 +873,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           }
         ],
         "events": [],
@@ -876,7 +905,7 @@
           },
           "title": "Csak a tető sérült meg – Telex-szerű",
           "url": "https://telex.hu/v22/partial-denial/1",
-          "wordCount": 529,
+          "wordCount": 522,
           "observationIds": [
             "V22-S09:claim:1:1"
           ]
@@ -888,7 +917,7 @@
           },
           "title": "Csak a tető sérült meg – HVG-szerű",
           "url": "https://hvg.hu/v22/partial-denial/2",
-          "wordCount": 525,
+          "wordCount": 520,
           "observationIds": [
             "V22-S09:claim:2:1"
           ]
@@ -900,7 +929,8 @@
             "id": "building",
             "mention": "Fő téri könyvtár",
             "type": "location",
-            "identity": "same"
+            "identity": "same",
+            "importance": "supporting"
           }
         ],
         "entityIdentityExpectations": [
@@ -927,7 +957,8 @@
             "temporal": null,
             "scope": "roof_only",
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S09:claim:2:1",
@@ -945,7 +976,8 @@
             "temporal": null,
             "scope": "building",
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           }
         ],
         "events": [],
@@ -976,7 +1008,7 @@
           },
           "title": "Bizonytalan ok a kikötőben – Telex-szerű",
           "url": "https://telex.hu/v22/uncertain-claim/1",
-          "wordCount": 526,
+          "wordCount": 531,
           "observationIds": [
             "V22-S10:claim:1:1"
           ]
@@ -988,7 +1020,7 @@
           },
           "title": "Bizonytalan ok a kikötőben – Index-szerű",
           "url": "https://index.hu/v22/uncertain-claim/2",
-          "wordCount": 523,
+          "wordCount": 528,
           "observationIds": [
             "V22-S10:claim:2:1"
           ]
@@ -1000,7 +1032,8 @@
             "id": "port",
             "mention": "Folyóparti kikötő",
             "type": "location",
-            "identity": "same"
+            "identity": "same",
+            "importance": "supporting"
           }
         ],
         "entityIdentityExpectations": [
@@ -1030,7 +1063,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S10:claim:2:1",
@@ -1048,7 +1082,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           }
         ],
         "events": [],
@@ -1079,7 +1114,7 @@
           },
           "title": "Névtelen forrás által jelzett költözés – Telex-szerű",
           "url": "https://telex.hu/v22/anonymous-attribution/1",
-          "wordCount": 532,
+          "wordCount": 525,
           "observationIds": [
             "V22-S11:claim:1:1"
           ]
@@ -1091,7 +1126,7 @@
           },
           "title": "Névtelen forrás által jelzett költözés – 24.hu-szerű",
           "url": "https://24.hu/v22/anonymous-attribution/2",
-          "wordCount": 530,
+          "wordCount": 525,
           "observationIds": [
             "V22-S11:claim:2:1"
           ]
@@ -1103,7 +1138,8 @@
             "id": "office",
             "mention": "Városházi hivatal",
             "type": "organization",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "entityIdentityExpectations": [
@@ -1133,7 +1169,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S11:claim:2:1",
@@ -1154,7 +1191,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           }
         ],
         "events": [],
@@ -1185,7 +1223,7 @@
           },
           "title": "A minisztérium és az önkormányzat állítása – Telex-szerű",
           "url": "https://telex.hu/v22/official-attribution/1",
-          "wordCount": 529,
+          "wordCount": 522,
           "observationIds": [
             "V22-S12:claim:1:1"
           ]
@@ -1197,7 +1235,7 @@
           },
           "title": "A minisztérium és az önkormányzat állítása – HVG-szerű",
           "url": "https://hvg.hu/v22/official-attribution/2",
-          "wordCount": 528,
+          "wordCount": 523,
           "observationIds": [
             "V22-S12:claim:2:1"
           ]
@@ -1209,7 +1247,8 @@
             "id": "program",
             "mention": "Közlekedési program",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "entityIdentityExpectations": [
@@ -1239,7 +1278,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S12:claim:2:1",
@@ -1260,7 +1300,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           }
         ],
         "events": [],
@@ -1291,7 +1332,7 @@
           },
           "title": "Idézet és újságírói megállapítás – Telex-szerű",
           "url": "https://telex.hu/v22/quote-vs-journalist/1",
-          "wordCount": 531,
+          "wordCount": 523,
           "observationIds": [
             "V22-S13:claim:1:1"
           ]
@@ -1303,7 +1344,7 @@
           },
           "title": "Idézet és újságírói megállapítás – 24.hu-szerű",
           "url": "https://24.hu/v22/quote-vs-journalist/2",
-          "wordCount": 528,
+          "wordCount": 522,
           "observationIds": [
             "V22-S13:claim:2:1"
           ]
@@ -1315,7 +1356,8 @@
             "id": "anna",
             "mention": "Szabó Anna",
             "type": "person",
-            "identity": "same"
+            "identity": "same",
+            "importance": "supporting"
           }
         ],
         "entityIdentityExpectations": [
@@ -1345,7 +1387,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S13:claim:2:1",
@@ -1366,7 +1409,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           }
         ],
         "events": [],
@@ -1397,7 +1441,7 @@
           },
           "title": "Két azonos nevű Nagy Péter – Telex-szerű",
           "url": "https://telex.hu/v22/entity-namesake/1",
-          "wordCount": 530,
+          "wordCount": 523,
           "observationIds": [
             "V22-S14:claim:1:1"
           ]
@@ -1409,7 +1453,7 @@
           },
           "title": "Két azonos nevű Nagy Péter – Index-szerű",
           "url": "https://index.hu/v22/entity-namesake/2",
-          "wordCount": 527,
+          "wordCount": 522,
           "observationIds": [
             "V22-S14:claim:2:1"
           ]
@@ -1421,13 +1465,15 @@
             "id": "person-1",
             "mention": "Nagy Péter",
             "type": "person",
-            "identity": "distinct:pécs"
+            "identity": "distinct:pécs",
+            "importance": "supporting"
           },
           {
             "id": "person-2",
             "mention": "Nagy Péter",
             "type": "person",
-            "identity": "distinct:szeged"
+            "identity": "distinct:szeged",
+            "importance": "supporting"
           }
         ],
         "entityIdentityExpectations": [
@@ -1442,10 +1488,11 @@
         ],
         "relations": [
           {
-            "subject": "person-1",
-            "predicate": "works_for",
+            "subject": "Nagy Péter",
+            "predicate": "WORKS_FOR",
             "object": "Pécsi Kutatóintézet",
-            "evidence": "pécsi biológus"
+            "evidence": "munkatársa",
+            "importance": "critical"
           }
         ],
         "claims": [
@@ -1465,7 +1512,8 @@
             "temporal": null,
             "scope": "person-1",
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S14:claim:2:1",
@@ -1483,7 +1531,8 @@
             "temporal": null,
             "scope": "person-2",
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           }
         ],
         "events": [],
@@ -1514,7 +1563,7 @@
           },
           "title": "A Delta név többféle entitása – Telex-szerű",
           "url": "https://telex.hu/v22/entity-type-ambiguity/1",
-          "wordCount": 528,
+          "wordCount": 524,
           "observationIds": [
             "V22-S15:claim:1:1"
           ]
@@ -1526,7 +1575,7 @@
           },
           "title": "A Delta név többféle entitása – 24.hu-szerű",
           "url": "https://24.hu/v22/entity-type-ambiguity/2",
-          "wordCount": 526,
+          "wordCount": 524,
           "observationIds": [
             "V22-S15:claim:2:1"
           ]
@@ -1538,13 +1587,15 @@
             "id": "delta-company",
             "mention": "Delta",
             "type": "organization",
-            "identity": "unresolved"
+            "identity": "unresolved",
+            "importance": "critical"
           },
           {
             "id": "delta-place",
             "mention": "Delta",
             "type": "location",
-            "identity": "unresolved"
+            "identity": "unresolved",
+            "importance": "supporting"
           }
         ],
         "entityIdentityExpectations": [
@@ -1575,7 +1626,8 @@
             "temporal": null,
             "scope": "organization",
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S15:claim:2:1",
@@ -1593,7 +1645,8 @@
             "temporal": null,
             "scope": "location",
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           }
         ],
         "events": [],
@@ -1624,7 +1677,7 @@
           },
           "title": "Márciusról júniusra módosított kezdés – Telex-szerű",
           "url": "https://telex.hu/v22/changed-plan-over-time/1",
-          "wordCount": 525,
+          "wordCount": 530,
           "observationIds": [
             "V22-S16:claim:1:1"
           ]
@@ -1636,7 +1689,7 @@
           },
           "title": "Márciusról júniusra módosított kezdés – 24.hu-szerű",
           "url": "https://24.hu/v22/changed-plan-over-time/2",
-          "wordCount": 527,
+          "wordCount": 521,
           "observationIds": [
             "V22-S16:claim:2:1"
           ]
@@ -1648,7 +1701,7 @@
           },
           "title": "Márciusról júniusra módosított kezdés – HVG-szerű",
           "url": "https://hvg.hu/v22/changed-plan-over-time/3",
-          "wordCount": 529,
+          "wordCount": 521,
           "observationIds": [
             "V22-S16:claim:3:1"
           ]
@@ -1660,7 +1713,8 @@
             "id": "works",
             "mention": "Partfalépítés",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "entityIdentityExpectations": [
@@ -1689,7 +1743,8 @@
             },
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           },
           {
             "id": "V22-S16:claim:2:1",
@@ -1709,7 +1764,8 @@
             },
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           },
           {
             "id": "V22-S16:claim:3:1",
@@ -1729,7 +1785,8 @@
             },
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           }
         ],
         "events": [],
@@ -1740,7 +1797,8 @@
           {
             "from": "2027-03",
             "to": "2027-06",
-            "explanation": "A közölt tervezett kezdés márciusról júniusra változott."
+            "explanation": "A közölt tervezett kezdés márciusról júniusra változott.",
+            "importance": "critical"
           }
         ]
       }
@@ -1758,7 +1816,7 @@
           },
           "title": "Közölt összeg és hiányzó coverage – Telex-szerű",
           "url": "https://telex.hu/v22/source-omission/1",
-          "wordCount": 528,
+          "wordCount": 521,
           "observationIds": [
             "V22-S17:claim:1:1"
           ]
@@ -1770,7 +1828,7 @@
           },
           "title": "Közölt összeg és hiányzó coverage – 24.hu-szerű",
           "url": "https://24.hu/v22/source-omission/2",
-          "wordCount": 526,
+          "wordCount": 521,
           "observationIds": [
             "V22-S17:claim:2:1"
           ]
@@ -1782,7 +1840,7 @@
           },
           "title": "Közölt összeg és hiányzó coverage – Index-szerű",
           "url": "https://index.hu/v22/source-omission/3",
-          "wordCount": 528,
+          "wordCount": 523,
           "observationIds": []
         }
       ],
@@ -1792,7 +1850,8 @@
             "id": "grant",
             "mention": "Közösségi pályázat",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "entityIdentityExpectations": [
@@ -1819,7 +1878,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S17:claim:2:1",
@@ -1837,7 +1897,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           }
         ],
         "events": [],
@@ -1846,7 +1907,8 @@
         "omissions": [
           {
             "source": "index.hu",
-            "predicate": "GRANT_AMOUNT"
+            "predicate": "GRANT_AMOUNT",
+            "importance": "critical"
           }
         ],
         "changesOverTime": []
@@ -1865,7 +1927,7 @@
           },
           "title": "Közös alap és egyedi részlet – Telex-szerű",
           "url": "https://telex.hu/v22/common-and-source-specific/1",
-          "wordCount": 525,
+          "wordCount": 531,
           "observationIds": [
             "V22-S18:claim:1:1",
             "V22-S18:claim:1:2"
@@ -1878,7 +1940,7 @@
           },
           "title": "Közös alap és egyedi részlet – 24.hu-szerű",
           "url": "https://24.hu/v22/common-and-source-specific/2",
-          "wordCount": 525,
+          "wordCount": 520,
           "observationIds": [
             "V22-S18:claim:2:1"
           ]
@@ -1890,7 +1952,8 @@
             "id": "bus",
             "mention": "Városi buszprogram",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "entityIdentityExpectations": [
@@ -1917,7 +1980,8 @@
             "temporal": null,
             "scope": "shared",
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S18:claim:1:2",
@@ -1935,7 +1999,8 @@
             "temporal": null,
             "scope": "source-only",
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           },
           {
             "id": "V22-S18:claim:2:1",
@@ -1953,7 +2018,8 @@
             "temporal": null,
             "scope": "shared",
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "supporting"
           }
         ],
         "events": [],
@@ -1962,7 +2028,8 @@
         "omissions": [
           {
             "source": "24.hu",
-            "predicate": "BIKE_RACK"
+            "predicate": "BIKE_RACK",
+            "importance": "critical"
           }
         ],
         "changesOverTime": []
@@ -1981,7 +2048,7 @@
           },
           "title": "A forrás saját korrekciója – Telex-szerű",
           "url": "https://telex.hu/v22/corrected-information/1",
-          "wordCount": 525,
+          "wordCount": 529,
           "observationIds": [
             "V22-S19:claim:1:1",
             "V22-S19:claim:1:2"
@@ -1994,7 +2061,7 @@
           },
           "title": "A forrás saját korrekciója – 24.hu-szerű",
           "url": "https://24.hu/v22/corrected-information/2",
-          "wordCount": 526,
+          "wordCount": 530,
           "observationIds": [
             "V22-S19:claim:2:1"
           ]
@@ -2006,7 +2073,8 @@
             "id": "contract",
             "mention": "Szerződés",
             "type": "document",
-            "identity": "same"
+            "identity": "same",
+            "importance": "supporting"
           }
         ],
         "entityIdentityExpectations": [
@@ -2035,7 +2103,8 @@
             },
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           },
           {
             "id": "V22-S19:claim:1:2",
@@ -2053,7 +2122,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": "telex.hu:80",
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           },
           {
             "id": "V22-S19:claim:2:1",
@@ -2071,7 +2141,8 @@
             "temporal": null,
             "scope": null,
             "correctionOf": null,
-            "eventId": null
+            "eventId": null,
+            "importance": "critical"
           }
         ],
         "events": [],
@@ -2082,7 +2153,8 @@
           {
             "from": 80,
             "to": 90,
-            "explanation": "A forrás a saját korábbi összegét pontosította; ez korrekció, nem két független forrás konfliktusa."
+            "explanation": "A forrás a saját korábbi összegét pontosította; ez korrekció, nem két független forrás konfliktusa.",
+            "importance": "critical"
           }
         ]
       }
@@ -2100,7 +2172,7 @@
           },
           "title": "Két külön esemény egy beszámolóban – Telex-szerű",
           "url": "https://telex.hu/v22/multi-event/1",
-          "wordCount": 521,
+          "wordCount": 524,
           "observationIds": [
             "V22-S20:claim:1:1",
             "V22-S20:claim:1:2"
@@ -2113,7 +2185,7 @@
           },
           "title": "Két külön esemény egy beszámolóban – Index-szerű",
           "url": "https://index.hu/v22/multi-event/2",
-          "wordCount": 526,
+          "wordCount": 528,
           "observationIds": [
             "V22-S20:claim:2:1"
           ]
@@ -2125,7 +2197,7 @@
           },
           "title": "Két külön esemény egy beszámolóban – HVG-szerű",
           "url": "https://hvg.hu/v22/multi-event/3",
-          "wordCount": 530,
+          "wordCount": 532,
           "observationIds": [
             "V22-S20:claim:3:1"
           ]
@@ -2137,13 +2209,15 @@
             "id": "council",
             "mention": "Városi tanács",
             "type": "organization",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           },
           {
             "id": "pilot",
             "mention": "Próbaüzem",
             "type": "event",
-            "identity": "same"
+            "identity": "same",
+            "importance": "supporting"
           }
         ],
         "entityIdentityExpectations": [
@@ -2160,8 +2234,9 @@
           {
             "subject": "Városi tanács",
             "predicate": "announced",
-            "object": "event-1",
-            "evidence": "tanács hétfőn bejelentette"
+            "object": "Programbejelentés",
+            "evidence": "tanács hétfőn bejelentette",
+            "importance": "critical"
           }
         ],
         "claims": [
@@ -2183,7 +2258,8 @@
             },
             "scope": null,
             "correctionOf": null,
-            "eventId": "event-1"
+            "eventId": "event-1",
+            "importance": "critical"
           },
           {
             "id": "V22-S20:claim:1:2",
@@ -2203,7 +2279,8 @@
             },
             "scope": null,
             "correctionOf": null,
-            "eventId": "event-2"
+            "eventId": "event-2",
+            "importance": "critical"
           },
           {
             "id": "V22-S20:claim:2:1",
@@ -2223,7 +2300,8 @@
             },
             "scope": null,
             "correctionOf": null,
-            "eventId": "event-2"
+            "eventId": "event-2",
+            "importance": "critical"
           },
           {
             "id": "V22-S20:claim:3:1",
@@ -2243,7 +2321,8 @@
             },
             "scope": null,
             "correctionOf": null,
-            "eventId": "event-1"
+            "eventId": "event-1",
+            "importance": "critical"
           }
         ],
         "events": [
@@ -2253,7 +2332,8 @@
             "membership": [
               "telex.hu",
               "hvg.hu"
-            ]
+            ],
+            "importance": "critical"
           },
           {
             "id": "event-2",
@@ -2261,7 +2341,8 @@
             "membership": [
               "telex.hu",
               "index.hu"
-            ]
+            ],
+            "importance": "critical"
           }
         ],
         "conflicts": [],
@@ -2293,7 +2374,7 @@
           },
           "title": "Folyóparti megújítás több ütemben – telex.hu",
           "url": "https://telex.hu/v22/dense/river-renewal/1",
-          "wordCount": 726,
+          "wordCount": 725,
           "observationIds": [
             null,
             null,
@@ -2312,7 +2393,7 @@
           },
           "title": "Folyóparti megújítás több ütemben – 24.hu",
           "url": "https://24.hu/v22/dense/river-renewal/2",
-          "wordCount": 728,
+          "wordCount": 727,
           "observationIds": [
             null,
             null,
@@ -2331,7 +2412,7 @@
           },
           "title": "Folyóparti megújítás több ütemben – hvg.hu",
           "url": "https://hvg.hu/v22/dense/river-renewal/3",
-          "wordCount": 726,
+          "wordCount": 725,
           "observationIds": [
             null,
             null,
@@ -2351,28 +2432,32 @@
             "mention": "Kékfolyó-part program",
             "normalized": "kékfolyó-part program",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           },
           {
             "id": "V22-D01:entity:2",
             "mention": "Dunamenti önkormányzat",
             "normalized": "dunamenti önkormányzat",
             "type": "organization",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           },
           {
             "id": "V22-D01:entity:3",
             "mention": "Kiss Júlia",
             "normalized": "kiss júlia",
             "type": "person",
-            "identity": "same"
+            "identity": "same",
+            "importance": "supporting"
           },
           {
             "id": "V22-D01:entity:4",
             "mention": "partfal-átadás",
             "normalized": "partfal-átadás",
             "type": "event",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "relations": [
@@ -2380,7 +2465,8 @@
             "subject": "Dunamenti önkormányzat",
             "predicate": "announced",
             "object": "partfal-átadás",
-            "evidence": "bejelentette"
+            "evidence": "bejelentette",
+            "importance": "critical"
           }
         ],
         "claims": [
@@ -2399,12 +2485,13 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:telex.hu:1"
+            "id": "V22-D01:claim:telex.hu:1",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
             "predicate": "CONSTRUCTION_START",
-            "sentence": "A munkák áprilisban indulhatnak, ha elkészül az engedély.",
+            "sentence": "A munkák 2027 áprilisban indulhatnak, ha elkészül az engedély.",
             "evidence": "áprilisban indulhatnak, ha elkészül az engedély",
             "value": "2027-04",
             "unit": null,
@@ -2416,7 +2503,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:telex.hu:2"
+            "id": "V22-D01:claim:telex.hu:2",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -2433,7 +2521,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:telex.hu:3"
+            "id": "V22-D01:claim:telex.hu:3",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -2453,7 +2542,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:telex.hu:4"
+            "id": "V22-D01:claim:telex.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -2470,7 +2560,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:telex.hu:5"
+            "id": "V22-D01:claim:telex.hu:5",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -2487,7 +2578,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D01:claim:telex.hu:6"
+            "id": "V22-D01:claim:telex.hu:6",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -2504,7 +2596,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:telex.hu:7"
+            "id": "V22-D01:claim:telex.hu:7",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -2521,14 +2614,15 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:telex.hu:8"
+            "id": "V22-D01:claim:telex.hu:8",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
             "predicate": "PROJECT_COST",
             "sentence": "A program első ütemének költsége 240 millió forint.",
             "evidence": "első ütemének költsége 240 millió forint",
-            "value": 245,
+            "value": 240,
             "unit": "million HUF",
             "attribution": null,
             "modality": "asserted",
@@ -2538,12 +2632,13 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:24.hu:1"
+            "id": "V22-D01:claim:24.hu:1",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
             "predicate": "CONSTRUCTION_START",
-            "sentence": "A munkák áprilisban indulhatnak, ha elkészül az engedély.",
+            "sentence": "A munkák 2027 áprilisban indulhatnak, ha elkészül az engedély.",
             "evidence": "áprilisban indulhatnak, ha elkészül az engedély",
             "value": "2027-04",
             "unit": null,
@@ -2555,7 +2650,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:24.hu:2"
+            "id": "V22-D01:claim:24.hu:2",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -2572,7 +2668,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:24.hu:3"
+            "id": "V22-D01:claim:24.hu:3",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -2592,7 +2689,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:24.hu:4"
+            "id": "V22-D01:claim:24.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -2609,7 +2707,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:24.hu:5"
+            "id": "V22-D01:claim:24.hu:5",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -2626,7 +2725,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D01:claim:24.hu:6"
+            "id": "V22-D01:claim:24.hu:6",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -2643,7 +2743,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:24.hu:7"
+            "id": "V22-D01:claim:24.hu:7",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -2660,7 +2761,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:24.hu:8"
+            "id": "V22-D01:claim:24.hu:8",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -2677,12 +2779,13 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:hvg.hu:1"
+            "id": "V22-D01:claim:hvg.hu:1",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
             "predicate": "CONSTRUCTION_START",
-            "sentence": "A munkák áprilisban indulhatnak, ha elkészül az engedély.",
+            "sentence": "A munkák 2027 áprilisban indulhatnak, ha elkészül az engedély.",
             "evidence": "áprilisban indulhatnak, ha elkészül az engedély",
             "value": "2027-04",
             "unit": null,
@@ -2694,7 +2797,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:hvg.hu:2"
+            "id": "V22-D01:claim:hvg.hu:2",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
@@ -2711,7 +2815,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:hvg.hu:3"
+            "id": "V22-D01:claim:hvg.hu:3",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
@@ -2731,7 +2836,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:hvg.hu:4"
+            "id": "V22-D01:claim:hvg.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -2748,7 +2854,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:hvg.hu:5"
+            "id": "V22-D01:claim:hvg.hu:5",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -2765,7 +2872,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D01:claim:hvg.hu:6"
+            "id": "V22-D01:claim:hvg.hu:6",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
@@ -2782,7 +2890,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:hvg.hu:7"
+            "id": "V22-D01:claim:hvg.hu:7",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -2799,7 +2908,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D01:claim:hvg.hu:8"
+            "id": "V22-D01:claim:hvg.hu:8",
+            "importance": "supporting"
           }
         ],
         "events": [
@@ -2810,7 +2920,8 @@
               "telex.hu",
               "24.hu",
               "hvg.hu"
-            ]
+            ],
+            "importance": "critical"
           }
         ],
         "conflicts": [],
@@ -2818,13 +2929,15 @@
         "omissions": [
           {
             "source": "hvg.hu",
-            "predicate": "BUDGET_RESERVE"
+            "predicate": "BUDGET_RESERVE",
+            "importance": "critical"
           }
         ],
         "changesOverTime": [
           {
             "from": "2027-04",
-            "to": "2027-07"
+            "to": "2027-07",
+            "importance": "critical"
           }
         ]
       }
@@ -2842,7 +2955,7 @@
           },
           "title": "Kórházi hálózat és eltérő várólisták – telex.hu",
           "url": "https://telex.hu/v22/dense/hospital-network/1",
-          "wordCount": 724,
+          "wordCount": 726,
           "observationIds": [
             null,
             null,
@@ -2861,7 +2974,7 @@
           },
           "title": "Kórházi hálózat és eltérő várólisták – 24.hu",
           "url": "https://24.hu/v22/dense/hospital-network/2",
-          "wordCount": 726,
+          "wordCount": 728,
           "observationIds": [
             null,
             null,
@@ -2880,7 +2993,7 @@
           },
           "title": "Kórházi hálózat és eltérő várólisták – hvg.hu",
           "url": "https://hvg.hu/v22/dense/hospital-network/3",
-          "wordCount": 724,
+          "wordCount": 726,
           "observationIds": [
             null,
             null,
@@ -2900,28 +3013,32 @@
             "mention": "Északi kórházi hálózat",
             "normalized": "északi kórházi hálózat",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           },
           {
             "id": "V22-D02:entity:2",
             "mention": "Szent László Kórház",
             "normalized": "szent lászló kórház",
             "type": "organization",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           },
           {
             "id": "V22-D02:entity:3",
             "mention": "Varga András",
             "normalized": "varga andrás",
             "type": "person",
-            "identity": "same"
+            "identity": "same",
+            "importance": "supporting"
           },
           {
             "id": "V22-D02:entity:4",
             "mention": "ambulancia-indítás",
             "normalized": "ambulancia-indítás",
             "type": "event",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "relations": [
@@ -2929,7 +3046,8 @@
             "subject": "Északi kórházi hálózat",
             "predicate": "announced",
             "object": "ambulancia-indítás",
-            "evidence": "bejelentette"
+            "evidence": "bejelentette",
+            "importance": "critical"
           }
         ],
         "claims": [
@@ -2951,12 +3069,13 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:telex.hu:1"
+            "id": "V22-D02:claim:telex.hu:1",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
             "predicate": "SERVICE_START",
-            "sentence": "A mobil ambulancia májusban indulhat, ha lesz személyzet.",
+            "sentence": "A mobil ambulancia 2027 májusban indulhat, ha lesz személyzet.",
             "evidence": "májusban indulhat, ha lesz személyzet",
             "value": "2027-05",
             "unit": null,
@@ -2968,7 +3087,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:telex.hu:2"
+            "id": "V22-D02:claim:telex.hu:2",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -2985,7 +3105,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:telex.hu:3"
+            "id": "V22-D02:claim:telex.hu:3",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -3005,7 +3126,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:telex.hu:4"
+            "id": "V22-D02:claim:telex.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -3022,7 +3144,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:telex.hu:5"
+            "id": "V22-D02:claim:telex.hu:5",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -3039,7 +3162,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D02:claim:telex.hu:6"
+            "id": "V22-D02:claim:telex.hu:6",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -3056,7 +3180,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:telex.hu:7"
+            "id": "V22-D02:claim:telex.hu:7",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -3073,7 +3198,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:telex.hu:8"
+            "id": "V22-D02:claim:telex.hu:8",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -3093,12 +3219,13 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:24.hu:1"
+            "id": "V22-D02:claim:24.hu:1",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
             "predicate": "SERVICE_START",
-            "sentence": "A mobil ambulancia májusban indulhat, ha lesz személyzet.",
+            "sentence": "A mobil ambulancia 2027 májusban indulhat, ha lesz személyzet.",
             "evidence": "májusban indulhat, ha lesz személyzet",
             "value": "2027-05",
             "unit": null,
@@ -3110,7 +3237,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:24.hu:2"
+            "id": "V22-D02:claim:24.hu:2",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -3127,7 +3255,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:24.hu:3"
+            "id": "V22-D02:claim:24.hu:3",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -3147,7 +3276,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:24.hu:4"
+            "id": "V22-D02:claim:24.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -3164,7 +3294,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:24.hu:5"
+            "id": "V22-D02:claim:24.hu:5",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -3181,7 +3312,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D02:claim:24.hu:6"
+            "id": "V22-D02:claim:24.hu:6",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -3198,7 +3330,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:24.hu:7"
+            "id": "V22-D02:claim:24.hu:7",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -3215,12 +3348,13 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:24.hu:8"
+            "id": "V22-D02:claim:24.hu:8",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
             "predicate": "SERVICE_START",
-            "sentence": "A mobil ambulancia májusban indulhat, ha lesz személyzet.",
+            "sentence": "A mobil ambulancia 2027 májusban indulhat, ha lesz személyzet.",
             "evidence": "májusban indulhat, ha lesz személyzet",
             "value": "2027-05",
             "unit": null,
@@ -3232,7 +3366,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:hvg.hu:1"
+            "id": "V22-D02:claim:hvg.hu:1",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -3249,7 +3384,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:hvg.hu:2"
+            "id": "V22-D02:claim:hvg.hu:2",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -3269,7 +3405,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:hvg.hu:3"
+            "id": "V22-D02:claim:hvg.hu:3",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -3286,7 +3423,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:hvg.hu:4"
+            "id": "V22-D02:claim:hvg.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -3303,7 +3441,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D02:claim:hvg.hu:5"
+            "id": "V22-D02:claim:hvg.hu:5",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
@@ -3320,7 +3459,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:hvg.hu:6"
+            "id": "V22-D02:claim:hvg.hu:6",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -3337,7 +3477,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:hvg.hu:7"
+            "id": "V22-D02:claim:hvg.hu:7",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -3354,7 +3495,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D02:claim:hvg.hu:8"
+            "id": "V22-D02:claim:hvg.hu:8",
+            "importance": "supporting"
           }
         ],
         "events": [
@@ -3365,7 +3507,8 @@
               "telex.hu",
               "24.hu",
               "hvg.hu"
-            ]
+            ],
+            "importance": "critical"
           }
         ],
         "conflicts": [],
@@ -3373,13 +3516,15 @@
         "omissions": [
           {
             "source": "hvg.hu",
-            "predicate": "WAITING_DAYS"
+            "predicate": "WAITING_DAYS",
+            "importance": "critical"
           }
         ],
         "changesOverTime": [
           {
             "from": 14,
-            "to": 9
+            "to": 9,
+            "importance": "critical"
           }
         ]
       }
@@ -3397,7 +3542,7 @@
           },
           "title": "Iskolai digitalizáció és feltételes beszerzés – telex.hu",
           "url": "https://telex.hu/v22/dense/school-digital/1",
-          "wordCount": 723,
+          "wordCount": 725,
           "observationIds": [
             null,
             null,
@@ -3416,7 +3561,7 @@
           },
           "title": "Iskolai digitalizáció és feltételes beszerzés – 24.hu",
           "url": "https://24.hu/v22/dense/school-digital/2",
-          "wordCount": 725,
+          "wordCount": 726,
           "observationIds": [
             null,
             null,
@@ -3435,7 +3580,7 @@
           },
           "title": "Iskolai digitalizáció és feltételes beszerzés – hvg.hu",
           "url": "https://hvg.hu/v22/dense/school-digital/3",
-          "wordCount": 726,
+          "wordCount": 728,
           "observationIds": [
             null,
             null,
@@ -3455,28 +3600,32 @@
             "mention": "Digitális Tanterem program",
             "normalized": "digitális tanterem program",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           },
           {
             "id": "V22-D03:entity:2",
             "mention": "Béke téri iskola",
             "normalized": "béke téri iskola",
             "type": "organization",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           },
           {
             "id": "V22-D03:entity:3",
             "mention": "Németh Éva",
             "normalized": "németh éva",
             "type": "person",
-            "identity": "same"
+            "identity": "same",
+            "importance": "supporting"
           },
           {
             "id": "V22-D03:entity:4",
             "mention": "eszközátadás",
             "normalized": "eszközátadás",
             "type": "event",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "relations": [
@@ -3484,7 +3633,8 @@
             "subject": "Digitális Tanterem program",
             "predicate": "announced",
             "object": "eszközátadás",
-            "evidence": "bejelentette"
+            "evidence": "bejelentette",
+            "importance": "critical"
           }
         ],
         "claims": [
@@ -3503,12 +3653,13 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:telex.hu:1"
+            "id": "V22-D03:claim:telex.hu:1",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
             "predicate": "DELIVERY_DATE",
-            "sentence": "Az eszközátadás szeptemberben indulhat, ha a szállító teljesít.",
+            "sentence": "Az eszközátadás 2027 szeptemberben indulhat, ha a szállító teljesít.",
             "evidence": "eszközátadás szeptemberben indulhat, ha a szállító teljesít",
             "value": "2027-09",
             "unit": null,
@@ -3520,7 +3671,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:telex.hu:2"
+            "id": "V22-D03:claim:telex.hu:2",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -3537,7 +3689,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:telex.hu:3"
+            "id": "V22-D03:claim:telex.hu:3",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -3557,7 +3710,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:telex.hu:4"
+            "id": "V22-D03:claim:telex.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -3574,7 +3728,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:telex.hu:5"
+            "id": "V22-D03:claim:telex.hu:5",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -3591,7 +3746,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D03:claim:telex.hu:6"
+            "id": "V22-D03:claim:telex.hu:6",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -3608,7 +3764,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:telex.hu:7"
+            "id": "V22-D03:claim:telex.hu:7",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -3625,14 +3782,15 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:telex.hu:8"
+            "id": "V22-D03:claim:telex.hu:8",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
             "predicate": "PROJECT_COST",
             "sentence": "A program kerete 90 millió forint.",
             "evidence": "program kerete 90 millió forint",
-            "value": 95,
+            "value": 90,
             "unit": "million HUF",
             "attribution": null,
             "modality": "asserted",
@@ -3642,7 +3800,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:24.hu:1"
+            "id": "V22-D03:claim:24.hu:1",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -3659,7 +3818,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:24.hu:2"
+            "id": "V22-D03:claim:24.hu:2",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -3676,7 +3836,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:24.hu:3"
+            "id": "V22-D03:claim:24.hu:3",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -3696,7 +3857,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:24.hu:4"
+            "id": "V22-D03:claim:24.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -3713,7 +3875,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:24.hu:5"
+            "id": "V22-D03:claim:24.hu:5",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -3730,7 +3893,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D03:claim:24.hu:6"
+            "id": "V22-D03:claim:24.hu:6",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -3747,7 +3911,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:24.hu:7"
+            "id": "V22-D03:claim:24.hu:7",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -3764,7 +3929,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:24.hu:8"
+            "id": "V22-D03:claim:24.hu:8",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -3781,12 +3947,13 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:hvg.hu:1"
+            "id": "V22-D03:claim:hvg.hu:1",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
             "predicate": "DELIVERY_DATE",
-            "sentence": "Az eszközátadás szeptemberben indulhat, ha a szállító teljesít.",
+            "sentence": "Az eszközátadás 2027 szeptemberben indulhat, ha a szállító teljesít.",
             "evidence": "eszközátadás szeptemberben indulhat, ha a szállító teljesít",
             "value": "2027-09",
             "unit": null,
@@ -3798,7 +3965,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:hvg.hu:2"
+            "id": "V22-D03:claim:hvg.hu:2",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
@@ -3815,7 +3983,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:hvg.hu:3"
+            "id": "V22-D03:claim:hvg.hu:3",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -3835,7 +4004,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:hvg.hu:4"
+            "id": "V22-D03:claim:hvg.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -3852,7 +4022,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D03:claim:hvg.hu:5"
+            "id": "V22-D03:claim:hvg.hu:5",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
@@ -3869,7 +4040,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:hvg.hu:6"
+            "id": "V22-D03:claim:hvg.hu:6",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
@@ -3886,7 +4058,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:hvg.hu:7"
+            "id": "V22-D03:claim:hvg.hu:7",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -3903,7 +4076,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D03:claim:hvg.hu:8"
+            "id": "V22-D03:claim:hvg.hu:8",
+            "importance": "supporting"
           }
         ],
         "events": [
@@ -3914,7 +4088,8 @@
               "telex.hu",
               "24.hu",
               "hvg.hu"
-            ]
+            ],
+            "importance": "critical"
           }
         ],
         "conflicts": [],
@@ -3922,13 +4097,15 @@
         "omissions": [
           {
             "source": "hvg.hu",
-            "predicate": "DEVICE_COUNT"
+            "predicate": "DEVICE_COUNT",
+            "importance": "critical"
           }
         ],
         "changesOverTime": [
           {
             "from": "2027-03",
-            "to": "2027-09"
+            "to": "2027-09",
+            "importance": "critical"
           }
         ]
       }
@@ -3946,7 +4123,7 @@
           },
           "title": "Energiatároló beruházás és vitatott teljesítmény – telex.hu",
           "url": "https://telex.hu/v22/dense/energy-storage/1",
-          "wordCount": 722,
+          "wordCount": 725,
           "observationIds": [
             null,
             null,
@@ -3965,7 +4142,7 @@
           },
           "title": "Energiatároló beruházás és vitatott teljesítmény – 24.hu",
           "url": "https://24.hu/v22/dense/energy-storage/2",
-          "wordCount": 724,
+          "wordCount": 727,
           "observationIds": [
             null,
             null,
@@ -3984,7 +4161,7 @@
           },
           "title": "Energiatároló beruházás és vitatott teljesítmény – hvg.hu",
           "url": "https://hvg.hu/v22/dense/energy-storage/3",
-          "wordCount": 724,
+          "wordCount": 727,
           "observationIds": [
             null,
             null,
@@ -4004,36 +4181,41 @@
             "mention": "Napfény energiatároló",
             "normalized": "napfény energiatároló",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           },
           {
             "id": "V22-D04:entity:2",
             "mention": "Alföldi Energia Zrt.",
             "normalized": "alföldi energia zrt.",
             "type": "organization",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           },
           {
             "id": "V22-D04:entity:3",
             "mention": "Tóth Márton",
             "normalized": "tóth márton",
             "type": "person",
-            "identity": "same"
+            "identity": "same",
+            "importance": "supporting"
           },
           {
             "id": "V22-D04:entity:4",
             "mention": "hálózati próba",
             "normalized": "hálózati próba",
             "type": "event",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "relations": [
           {
-            "subject": "Alföldi Energia Zrt.",
+            "subject": "Alföldi Energia Zrt",
             "predicate": "announced",
             "object": "hálózati próba",
-            "evidence": "bejelentette"
+            "evidence": "bejelentette",
+            "importance": "critical"
           }
         ],
         "claims": [
@@ -4055,12 +4237,13 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:telex.hu:1"
+            "id": "V22-D04:claim:telex.hu:1",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
             "predicate": "TRIAL_DATE",
-            "sentence": "A hálózati próba októberben indulhat, ha elkészül a csatlakozás.",
+            "sentence": "A hálózati próba 2027 októberben indulhat, ha elkészül a csatlakozás.",
             "evidence": "hálózati próba októberben indulhat, ha elkészül a csatlakozás",
             "value": "2027-10",
             "unit": null,
@@ -4072,7 +4255,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:telex.hu:2"
+            "id": "V22-D04:claim:telex.hu:2",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -4089,7 +4273,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:telex.hu:3"
+            "id": "V22-D04:claim:telex.hu:3",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -4109,7 +4294,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:telex.hu:4"
+            "id": "V22-D04:claim:telex.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -4126,7 +4312,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:telex.hu:5"
+            "id": "V22-D04:claim:telex.hu:5",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -4143,7 +4330,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D04:claim:telex.hu:6"
+            "id": "V22-D04:claim:telex.hu:6",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -4160,7 +4348,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:telex.hu:7"
+            "id": "V22-D04:claim:telex.hu:7",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -4177,7 +4366,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:telex.hu:8"
+            "id": "V22-D04:claim:telex.hu:8",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -4197,12 +4387,13 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:24.hu:1"
+            "id": "V22-D04:claim:24.hu:1",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
             "predicate": "TRIAL_DATE",
-            "sentence": "A hálózati próba októberben indulhat, ha elkészül a csatlakozás.",
+            "sentence": "A hálózati próba 2027 októberben indulhat, ha elkészül a csatlakozás.",
             "evidence": "hálózati próba októberben indulhat, ha elkészül a csatlakozás",
             "value": "2027-10",
             "unit": null,
@@ -4214,7 +4405,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:24.hu:2"
+            "id": "V22-D04:claim:24.hu:2",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -4231,7 +4423,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:24.hu:3"
+            "id": "V22-D04:claim:24.hu:3",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -4251,7 +4444,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:24.hu:4"
+            "id": "V22-D04:claim:24.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -4268,7 +4462,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:24.hu:5"
+            "id": "V22-D04:claim:24.hu:5",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -4285,7 +4480,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D04:claim:24.hu:6"
+            "id": "V22-D04:claim:24.hu:6",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -4302,7 +4498,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:24.hu:7"
+            "id": "V22-D04:claim:24.hu:7",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -4319,7 +4516,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:24.hu:8"
+            "id": "V22-D04:claim:24.hu:8",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -4339,12 +4537,13 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:hvg.hu:1"
+            "id": "V22-D04:claim:hvg.hu:1",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
             "predicate": "TRIAL_DATE",
-            "sentence": "A hálózati próba októberben indulhat, ha elkészül a csatlakozás.",
+            "sentence": "A hálózati próba 2027 októberben indulhat, ha elkészül a csatlakozás.",
             "evidence": "hálózati próba októberben indulhat, ha elkészül a csatlakozás",
             "value": "2027-10",
             "unit": null,
@@ -4356,7 +4555,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:hvg.hu:2"
+            "id": "V22-D04:claim:hvg.hu:2",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
@@ -4373,7 +4573,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:hvg.hu:3"
+            "id": "V22-D04:claim:hvg.hu:3",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
@@ -4393,7 +4594,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:hvg.hu:4"
+            "id": "V22-D04:claim:hvg.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -4410,7 +4612,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:hvg.hu:5"
+            "id": "V22-D04:claim:hvg.hu:5",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -4427,7 +4630,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D04:claim:hvg.hu:6"
+            "id": "V22-D04:claim:hvg.hu:6",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
@@ -4444,7 +4648,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:hvg.hu:7"
+            "id": "V22-D04:claim:hvg.hu:7",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -4461,7 +4666,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D04:claim:hvg.hu:8"
+            "id": "V22-D04:claim:hvg.hu:8",
+            "importance": "supporting"
           }
         ],
         "events": [
@@ -4472,7 +4678,8 @@
               "telex.hu",
               "24.hu",
               "hvg.hu"
-            ]
+            ],
+            "importance": "critical"
           }
         ],
         "conflicts": [],
@@ -4480,13 +4687,15 @@
         "omissions": [
           {
             "source": "hvg.hu",
-            "predicate": "GRID_LOSS"
+            "predicate": "GRID_LOSS",
+            "importance": "critical"
           }
         ],
         "changesOverTime": [
           {
             "from": 40,
-            "to": 55
+            "to": 55,
+            "importance": "critical"
           }
         ]
       }
@@ -4504,7 +4713,7 @@
           },
           "title": "Vasúti híd javítása és külön események – telex.hu",
           "url": "https://telex.hu/v22/dense/rail-bridge/1",
-          "wordCount": 720,
+          "wordCount": 721,
           "observationIds": [
             null,
             null,
@@ -4523,7 +4732,7 @@
           },
           "title": "Vasúti híd javítása és külön események – 24.hu",
           "url": "https://24.hu/v22/dense/rail-bridge/2",
-          "wordCount": 721,
+          "wordCount": 722,
           "observationIds": [
             null,
             null,
@@ -4542,7 +4751,7 @@
           },
           "title": "Vasúti híd javítása és külön események – hvg.hu",
           "url": "https://hvg.hu/v22/dense/rail-bridge/3",
-          "wordCount": 722,
+          "wordCount": 724,
           "observationIds": [
             null,
             null,
@@ -4562,28 +4771,32 @@
             "mention": "Keleti vasúti híd",
             "normalized": "keleti vasúti híd",
             "type": "project",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           },
           {
             "id": "V22-D05:entity:2",
             "mention": "Délvidéki Vasút",
             "normalized": "délvidéki vasút",
             "type": "organization",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           },
           {
             "id": "V22-D05:entity:3",
             "mention": "Farkas László",
             "normalized": "farkas lászló",
             "type": "person",
-            "identity": "same"
+            "identity": "same",
+            "importance": "supporting"
           },
           {
             "id": "V22-D05:entity:4",
             "mention": "terhelési próba",
             "normalized": "terhelési próba",
             "type": "event",
-            "identity": "same"
+            "identity": "same",
+            "importance": "critical"
           }
         ],
         "relations": [
@@ -4591,7 +4804,8 @@
             "subject": "Délvidéki Vasút",
             "predicate": "announced",
             "object": "terhelési próba",
-            "evidence": "bejelentette"
+            "evidence": "bejelentette",
+            "importance": "critical"
           }
         ],
         "claims": [
@@ -4610,7 +4824,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:telex.hu:1"
+            "id": "V22-D05:claim:telex.hu:1",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -4627,7 +4842,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:telex.hu:2"
+            "id": "V22-D05:claim:telex.hu:2",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -4647,7 +4863,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:telex.hu:3"
+            "id": "V22-D05:claim:telex.hu:3",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -4667,7 +4884,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:telex.hu:4"
+            "id": "V22-D05:claim:telex.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -4684,7 +4902,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:telex.hu:5"
+            "id": "V22-D05:claim:telex.hu:5",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -4701,7 +4920,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D05:claim:telex.hu:6"
+            "id": "V22-D05:claim:telex.hu:6",
+            "importance": "critical"
           },
           {
             "source": "telex.hu",
@@ -4718,7 +4938,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:telex.hu:7"
+            "id": "V22-D05:claim:telex.hu:7",
+            "importance": "supporting"
           },
           {
             "source": "telex.hu",
@@ -4735,14 +4956,15 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:telex.hu:8"
+            "id": "V22-D05:claim:telex.hu:8",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
             "predicate": "COMPLETION_PERCENT",
             "sentence": "A híd javítása 70 százaléknál tart.",
             "evidence": "javítása 70 százaléknál tart",
-            "value": 75,
+            "value": 70,
             "unit": "%",
             "attribution": null,
             "modality": "asserted",
@@ -4752,7 +4974,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:24.hu:1"
+            "id": "V22-D05:claim:24.hu:1",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -4769,7 +4992,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:24.hu:2"
+            "id": "V22-D05:claim:24.hu:2",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -4789,7 +5013,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:24.hu:3"
+            "id": "V22-D05:claim:24.hu:3",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -4809,7 +5034,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:24.hu:4"
+            "id": "V22-D05:claim:24.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -4826,7 +5052,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:24.hu:5"
+            "id": "V22-D05:claim:24.hu:5",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -4843,7 +5070,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D05:claim:24.hu:6"
+            "id": "V22-D05:claim:24.hu:6",
+            "importance": "critical"
           },
           {
             "source": "24.hu",
@@ -4860,7 +5088,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:24.hu:7"
+            "id": "V22-D05:claim:24.hu:7",
+            "importance": "supporting"
           },
           {
             "source": "24.hu",
@@ -4877,7 +5106,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:24.hu:8"
+            "id": "V22-D05:claim:24.hu:8",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -4894,12 +5124,13 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:hvg.hu:1"
+            "id": "V22-D05:claim:hvg.hu:1",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
             "predicate": "TRIAL_DATE",
-            "sentence": "A terhelési próba augusztusban indulhat, ha a síncsere lezárul.",
+            "sentence": "A terhelési próba 2027 augusztusban indulhat, ha a síncsere lezárul.",
             "evidence": "terhelési próba augusztusban indulhat, ha a síncsere lezárul",
             "value": "2027-08",
             "unit": null,
@@ -4911,7 +5142,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:hvg.hu:2"
+            "id": "V22-D05:claim:hvg.hu:2",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
@@ -4931,7 +5163,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:hvg.hu:3"
+            "id": "V22-D05:claim:hvg.hu:3",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
@@ -4951,7 +5184,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:hvg.hu:4"
+            "id": "V22-D05:claim:hvg.hu:4",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -4968,7 +5202,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:hvg.hu:5"
+            "id": "V22-D05:claim:hvg.hu:5",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -4985,7 +5220,8 @@
             "temporal": null,
             "scope": null,
             "eventId": "dense-event",
-            "id": "V22-D05:claim:hvg.hu:6"
+            "id": "V22-D05:claim:hvg.hu:6",
+            "importance": "critical"
           },
           {
             "source": "hvg.hu",
@@ -5002,7 +5238,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:hvg.hu:7"
+            "id": "V22-D05:claim:hvg.hu:7",
+            "importance": "supporting"
           },
           {
             "source": "hvg.hu",
@@ -5019,7 +5256,8 @@
             "temporal": null,
             "scope": null,
             "eventId": null,
-            "id": "V22-D05:claim:hvg.hu:8"
+            "id": "V22-D05:claim:hvg.hu:8",
+            "importance": "supporting"
           }
         ],
         "events": [
@@ -5030,7 +5268,8 @@
               "telex.hu",
               "24.hu",
               "hvg.hu"
-            ]
+            ],
+            "importance": "critical"
           }
         ],
         "conflicts": [],
@@ -5038,13 +5277,15 @@
         "omissions": [
           {
             "source": "hvg.hu",
-            "predicate": "SPEED_LIMIT"
+            "predicate": "SPEED_LIMIT",
+            "importance": "critical"
           }
         ],
         "changesOverTime": [
           {
             "from": "2027-05-10",
-            "to": "2027-08-20"
+            "to": "2027-08-20",
+            "importance": "critical"
           }
         ]
       }

@@ -138,3 +138,8 @@ Round 2 status: `PARTIAL` against the aspirational maximum-coverage target.
 The scoped integrity, entity-deduplication, source-derived temporal baseline,
 and robustness work is complete; relation/event/conflict recall remains
 conservative and is intentionally not expanded in this precision-first slice.
+
+Round 3 supersedes the coverage state with explicit precision-first relation,
+event and conflict candidates, source-derived dense values, importance-aware
+coverage metrics and 30 perturbation variants. See
+`14_COVERAGE_AND_REASONING_ROUND3.md`; Round 3 remains local pending review.

@@ -3,8 +3,8 @@
   "source": null,
   "integrity": {
     "benchmarkVersion": "v22.benchmark.1",
-    "articlesHash": "3a56cd537bf0aa1cfe8048d64a0a8e626b2f2f13817786bac6081ec093d00953",
-    "goldManifestHash": "20605b4037a166234708749c26055bf1bfc40d59a5fd669f33f031a4ef9e1f02",
+    "articlesHash": "07fc6f76ac80c1747cb83cbc46cf95df5489ac65d9820bfde35553398c737027",
+    "goldManifestHash": "a2fc25bb077ee01ef99d20ee6d24ea17df6c8571ed57a116ee680b6175eaaeb5",
     "evaluatorVersion": "v22.evaluator.3",
     "provider": {
       "name": "mock",
@@ -64,7 +64,7 @@
         "modalityEvaluated": 0,
         "supportedClaimPrecision": null,
         "supportedClaimRecall": 0,
-        "supportedClaimExpected": 27,
+        "supportedClaimExpected": 46,
         "supportedClaimPredicted": 0,
         "predictionCount": 0,
         "groundedPredictionCount": 0,
@@ -76,7 +76,9 @@
         "extraSupportedPredictionCount": 0,
         "extraSupportedPredictionRate": null,
         "trulyUnsupportedPredictionCount": 0,
-        "trulyUnsupportedPredictionRate": null
+        "trulyUnsupportedPredictionRate": null,
+        "informationCoverageScore": 0,
+        "criticalFactRecall": 0
       },
       "detail": {
         "entity": {
@@ -108,13 +110,13 @@
         },
         "supportedClaims": {
           "truePositive": 0,
-          "expected": 27,
+          "expected": 46,
           "predicted": 0,
           "falsePositive": 0,
-          "falseNegative": 27,
+          "falseNegative": 46,
           "precision": null,
           "recall": 0,
-          "supportedExpected": 27,
+          "supportedExpected": 46,
           "supportedPredicted": 0
         },
         "event": {
@@ -192,6 +194,64 @@
           "extraSupportedPredictionRate": null,
           "trulyUnsupportedPredictionCount": 0,
           "trulyUnsupportedPredictionRate": null
+        },
+        "informationCoverage": {
+          "score": 0,
+          "totalExpected": 78,
+          "totalMatched": 0,
+          "criticalExpected": 40,
+          "criticalMatched": 0,
+          "criticalRecall": 0,
+          "breakdown": {
+            "entities": {
+              "expected": 23,
+              "matched": 0,
+              "recall": 0,
+              "criticalExpected": 13,
+              "criticalMatched": 0,
+              "criticalRecall": 0
+            },
+            "claims": {
+              "expected": 46,
+              "matched": 0,
+              "recall": 0,
+              "criticalExpected": 18,
+              "criticalMatched": 0,
+              "criticalRecall": 0
+            },
+            "relations": {
+              "expected": 2,
+              "matched": 0,
+              "recall": 0,
+              "criticalExpected": 2,
+              "criticalMatched": 0,
+              "criticalRecall": 0
+            },
+            "changes": {
+              "expected": 2,
+              "matched": 0,
+              "recall": 0,
+              "criticalExpected": 2,
+              "criticalMatched": 0,
+              "criticalRecall": 0
+            },
+            "omissions": {
+              "expected": 3,
+              "matched": 0,
+              "recall": 0,
+              "criticalExpected": 3,
+              "criticalMatched": 0,
+              "criticalRecall": 0
+            },
+            "events": {
+              "expected": 2,
+              "matched": 0,
+              "recall": 0,
+              "criticalExpected": 2,
+              "criticalMatched": 0,
+              "criticalRecall": 0
+            }
+          }
         },
         "identity": {
           "evaluated": 0,
@@ -1638,7 +1698,7 @@
         "modalityEvaluated": 0,
         "supportedClaimPrecision": null,
         "supportedClaimRecall": 0,
-        "supportedClaimExpected": 81,
+        "supportedClaimExpected": 120,
         "supportedClaimPredicted": 0,
         "predictionCount": 0,
         "groundedPredictionCount": 0,
@@ -1650,7 +1710,9 @@
         "extraSupportedPredictionCount": 0,
         "extraSupportedPredictionRate": null,
         "trulyUnsupportedPredictionCount": 0,
-        "trulyUnsupportedPredictionRate": null
+        "trulyUnsupportedPredictionRate": null,
+        "informationCoverageScore": 0,
+        "criticalFactRecall": 0
       },
       "detail": {
         "entity": {
@@ -1682,13 +1744,13 @@
         },
         "supportedClaims": {
           "truePositive": 0,
-          "expected": 81,
+          "expected": 120,
           "predicted": 0,
           "falsePositive": 0,
-          "falseNegative": 81,
+          "falseNegative": 120,
           "precision": null,
           "recall": 0,
-          "supportedExpected": 81,
+          "supportedExpected": 120,
           "supportedPredicted": 0
         },
         "event": {
@@ -1766,6 +1828,64 @@
           "extraSupportedPredictionRate": null,
           "trulyUnsupportedPredictionCount": 0,
           "trulyUnsupportedPredictionRate": null
+        },
+        "informationCoverage": {
+          "score": 0,
+          "totalExpected": 160,
+          "totalMatched": 0,
+          "criticalExpected": 88,
+          "criticalMatched": 0,
+          "criticalRecall": 0,
+          "breakdown": {
+            "entities": {
+              "expected": 20,
+              "matched": 0,
+              "recall": 0,
+              "criticalExpected": 15,
+              "criticalMatched": 0,
+              "criticalRecall": 0
+            },
+            "claims": {
+              "expected": 120,
+              "matched": 0,
+              "recall": 0,
+              "criticalExpected": 53,
+              "criticalMatched": 0,
+              "criticalRecall": 0
+            },
+            "relations": {
+              "expected": 5,
+              "matched": 0,
+              "recall": 0,
+              "criticalExpected": 5,
+              "criticalMatched": 0,
+              "criticalRecall": 0
+            },
+            "changes": {
+              "expected": 5,
+              "matched": 0,
+              "recall": 0,
+              "criticalExpected": 5,
+              "criticalMatched": 0,
+              "criticalRecall": 0
+            },
+            "omissions": {
+              "expected": 5,
+              "matched": 0,
+              "recall": 0,
+              "criticalExpected": 5,
+              "criticalMatched": 0,
+              "criticalRecall": 0
+            },
+            "events": {
+              "expected": 5,
+              "matched": 0,
+              "recall": 0,
+              "criticalExpected": 5,
+              "criticalMatched": 0,
+              "criticalRecall": 0
+            }
+          }
         },
         "identity": {
           "evaluated": 0,

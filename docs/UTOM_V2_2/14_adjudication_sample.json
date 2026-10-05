@@ -1,0 +1,277 @@
+{
+  "sampleSize": 30,
+  "source": "11_false_positives_top50.json",
+  "policy": "Grounded exact evidence is unquestionably supported unless it is a duplicate or a context-only entity; namesake/context relation targets are gold-candidate additions.",
+  "rows": [
+    {
+      "sample": 1,
+      "scenarioId": "V22-D02",
+      "field": "entities",
+      "category": "entity_overgeneration",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "too broad",
+      "evidence": "Kórházi"
+    },
+    {
+      "sample": 2,
+      "scenarioId": "V22-D03",
+      "field": "entities",
+      "category": "entity_overgeneration",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "too broad",
+      "evidence": "Iskolai"
+    },
+    {
+      "sample": 3,
+      "scenarioId": "V22-D04",
+      "field": "entities",
+      "category": "entity_overgeneration",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "too broad",
+      "evidence": "Alföldi Energia Zrt"
+    },
+    {
+      "sample": 4,
+      "scenarioId": "V22-D05",
+      "field": "entities",
+      "category": "entity_overgeneration",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "too broad",
+      "evidence": "Vasúti"
+    },
+    {
+      "sample": 5,
+      "scenarioId": "V22-D05",
+      "field": "entities",
+      "category": "entity_overgeneration",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "too broad",
+      "evidence": "Farkas Lászl"
+    },
+    {
+      "sample": 6,
+      "scenarioId": "V22-S20",
+      "field": "entities",
+      "category": "entity_overgeneration",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "too broad",
+      "evidence": "Programbejelentés"
+    },
+    {
+      "sample": 7,
+      "scenarioId": "V22-S20",
+      "field": "entities",
+      "category": "entity_overgeneration",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "too broad",
+      "evidence": "Próbaüzem indulása"
+    },
+    {
+      "sample": 8,
+      "scenarioId": "V22-S14",
+      "field": "entities",
+      "category": "namesake_or_context_identity",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "should be added to gold",
+      "evidence": "Pécsi Kutatóintézet"
+    },
+    {
+      "sample": 9,
+      "scenarioId": "V22-D01",
+      "field": "claims",
+      "category": "negation_or_abstention",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "A tartalékkeret összege még nem ismert."
+    },
+    {
+      "sample": 10,
+      "scenarioId": "V22-D01",
+      "field": "claims",
+      "category": "negation_or_abstention",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "A tartalékkeret összege még nem ismert."
+    },
+    {
+      "sample": 11,
+      "scenarioId": "V22-D01",
+      "field": "claims",
+      "category": "numeric_scope",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "A munkák 2027 áprilisban indulhatnak, ha elkészül az engedély."
+    },
+    {
+      "sample": 12,
+      "scenarioId": "V22-D01",
+      "field": "claims",
+      "category": "numeric_scope",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "A munkák 2027 áprilisban indulhatnak, ha elkészül az engedély."
+    },
+    {
+      "sample": 13,
+      "scenarioId": "V22-D01",
+      "field": "claims",
+      "category": "numeric_scope",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "A munkák 2027 áprilisban indulhatnak, ha elkészül az engedély."
+    },
+    {
+      "sample": 14,
+      "scenarioId": "V22-D03",
+      "field": "claims",
+      "category": "numeric_scope",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "Az eszközátadás 2027 szeptemberben indulhat, ha a szállító teljesít."
+    },
+    {
+      "sample": 15,
+      "scenarioId": "V22-D03",
+      "field": "claims",
+      "category": "numeric_scope",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "Az eszközátadás 2027 szeptemberben indulhat, ha a szállító teljesít."
+    },
+    {
+      "sample": 16,
+      "scenarioId": "V22-D04",
+      "field": "claims",
+      "category": "numeric_scope",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "A hálózati próba 2027 októberben indulhat, ha elkészül a csatlakozás."
+    },
+    {
+      "sample": 17,
+      "scenarioId": "V22-D04",
+      "field": "claims",
+      "category": "numeric_scope",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "A hálózati próba 2027 októberben indulhat, ha elkészül a csatlakozás."
+    },
+    {
+      "sample": 18,
+      "scenarioId": "V22-D04",
+      "field": "claims",
+      "category": "numeric_scope",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "A hálózati próba 2027 októberben indulhat, ha elkészül a csatlakozás."
+    },
+    {
+      "sample": 19,
+      "scenarioId": "V22-D05",
+      "field": "claims",
+      "category": "numeric_scope",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "A terhelési próba 2027 augusztusban indulhat, ha a síncsere lezárul."
+    },
+    {
+      "sample": 20,
+      "scenarioId": "V22-D01",
+      "field": "claims",
+      "category": "temporal_binding",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "A korábbi tervben áprilisi kezdés szerepelt."
+    },
+    {
+      "sample": 21,
+      "scenarioId": "V22-S05",
+      "field": "claims",
+      "category": "temporal_binding",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "A június eleji átadást írja."
+    },
+    {
+      "sample": 22,
+      "scenarioId": "V22-S16",
+      "field": "claims",
+      "category": "temporal_binding",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "Márciusról júniusra módosított kezdés."
+    },
+    {
+      "sample": 23,
+      "scenarioId": "V22-S16",
+      "field": "claims",
+      "category": "temporal_binding",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "Márciusról júniusra módosított kezdés."
+    },
+    {
+      "sample": 24,
+      "scenarioId": "V22-S16",
+      "field": "claims",
+      "category": "temporal_binding",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "adjudication": "unquestionably supported",
+      "evidence": "Márciusról júniusra módosított kezdés."
+    },
+    {
+      "sample": 25,
+      "scenarioId": "V22-D01",
+      "field": "claims",
+      "category": "wrong_predicate",
+      "integrityClassification": "DUPLICATE",
+      "adjudication": "duplicate",
+      "evidence": "Dunamenti önkormányzat bejelentette az eseményt: partfal-átadás."
+    },
+    {
+      "sample": 26,
+      "scenarioId": "V22-D01",
+      "field": "claims",
+      "category": "wrong_predicate",
+      "integrityClassification": "DUPLICATE",
+      "adjudication": "duplicate",
+      "evidence": "A tanács hétfőn bejelentette az átadási ütemet."
+    },
+    {
+      "sample": 27,
+      "scenarioId": "V22-D01",
+      "field": "claims",
+      "category": "wrong_predicate",
+      "integrityClassification": "DUPLICATE",
+      "adjudication": "duplicate",
+      "evidence": "Dunamenti önkormányzat bejelentette az eseményt: partfal-átadás."
+    },
+    {
+      "sample": 28,
+      "scenarioId": "V22-D01",
+      "field": "claims",
+      "category": "wrong_predicate",
+      "integrityClassification": "DUPLICATE",
+      "adjudication": "duplicate",
+      "evidence": "A tanács hétfőn bejelentette az átadási ütemet."
+    },
+    {
+      "sample": 29,
+      "scenarioId": "V22-D01",
+      "field": "claims",
+      "category": "wrong_predicate",
+      "integrityClassification": "DUPLICATE",
+      "adjudication": "duplicate",
+      "evidence": "Dunamenti önkormányzat bejelentette az eseményt: partfal-átadás."
+    },
+    {
+      "sample": 30,
+      "scenarioId": "V22-D01",
+      "field": "claims",
+      "category": "wrong_predicate",
+      "integrityClassification": "DUPLICATE",
+      "adjudication": "duplicate",
+      "evidence": "A tanács hétfőn bejelentette az átadási ütemet."
+    }
+  ]
+}

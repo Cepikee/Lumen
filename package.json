@@ -30,7 +30,8 @@
     "benchmark:v22:generate": "node scripts/generate-v22-benchmark.cjs",
     "benchmark:v22": "node scripts/run-v22-benchmark.cjs",
     "benchmark:v22:deterministic": "node scripts/run-v22-deterministic-baseline.cjs",
-    "benchmark:v22:fp": "node scripts/analyze-v22-false-positives.cjs"
+    "benchmark:v22:fp": "node scripts/analyze-v22-false-positives.cjs",
+    "benchmark:v22:heldout": "node scripts/run-v22-heldout.cjs"
   },
   "engines": {
     "node": ">=24 <25"

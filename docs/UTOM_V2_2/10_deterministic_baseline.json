@@ -3,12 +3,12 @@
   "source": "F:\\Projekt2025\\Lumen\\tests\\fixtures\\v22-intelligence-benchmark\\articles.json",
   "integrity": {
     "benchmarkVersion": "v22.benchmark.1",
-    "articlesHash": "88902a77704386dfcb8f4440cf20df40e92eb8e5131ac636bc7943b6804019c3",
-    "goldManifestHash": "966526ae2759c2c5b09df4345365fe3033bd3928dc33ec3b5df620416ef06125",
+    "articlesHash": "07fc6f76ac80c1747cb83cbc46cf95df5489ac65d9820bfde35553398c737027",
+    "goldManifestHash": "a2fc25bb077ee01ef99d20ee6d24ea17df6c8571ed57a116ee680b6175eaaeb5",
     "evaluatorVersion": "v22.evaluator.3",
     "provider": {
       "name": "deterministic-text-v1",
-      "config": "gold-independent-semantic-helper-round2"
+      "config": "gold-independent-semantic-helper-round3"
     }
   },
   "core": {
@@ -27,114 +27,69 @@
       "omissions": 3
     },
     "predictedCounts": {
-      "entities": 4,
-      "relations": 0,
-      "claims": 31,
-      "events": 0,
-      "conflicts": 0,
-      "changes": 2,
+      "entities": 25,
+      "relations": 2,
+      "claims": 42,
+      "events": 2,
+      "conflicts": 3,
+      "changes": 1,
       "omissions": 2
     },
     "metrics": {
-      "entityPrecision": 1,
-      "entityRecall": 0.17391304347826086,
-      "relationPrecision": null,
-      "relationRecall": 0,
-      "claimPrecision": 0.5806451612903226,
-      "claimRecall": 0.391304347826087,
-      "eventMatchingAccuracy": 0,
-      "conflictPrecision": null,
-      "conflictRecall": 0,
-      "falseConflictRate": null,
-      "sourceOmissionPrecision": 0.5,
-      "sourceOmissionRecall": 0.3333333333333333,
-      "temporalChangeRecall": 1,
-      "identityAccuracy": 0.25,
-      "unsupportedPredictionRate": 0.358974358974359,
-      "attributionAccuracy": 0.8333333333333334,
-      "attributionEvaluated": 18,
+      "entityPrecision": 0.84,
+      "entityRecall": 0.9130434782608695,
+      "relationPrecision": 1,
+      "relationRecall": 1,
+      "claimPrecision": 0.6666666666666666,
+      "claimRecall": 0.6086956521739131,
+      "eventMatchingAccuracy": 1,
+      "conflictPrecision": 1,
+      "conflictRecall": 1,
+      "falseConflictRate": 0,
+      "sourceOmissionPrecision": 1,
+      "sourceOmissionRecall": 0.6666666666666666,
+      "temporalChangeRecall": 0.5,
+      "identityAccuracy": 0.8571428571428571,
+      "unsupportedPredictionRate": 0.23376623376623376,
+      "attributionAccuracy": 0.8571428571428571,
+      "attributionEvaluated": 28,
       "evidenceAccuracy": 1,
-      "evidenceEvaluated": 18,
-      "temporalAccuracy": 0.7777777777777778,
-      "temporalEvaluated": 18,
+      "evidenceEvaluated": 28,
+      "temporalAccuracy": 0.8214285714285714,
+      "temporalEvaluated": 28,
       "negationAccuracy": 1,
-      "negationEvaluated": 18,
-      "modalityAccuracy": 0.7777777777777778,
-      "modalityEvaluated": 18,
-      "supportedClaimPrecision": 0.5806451612903226,
-      "supportedClaimRecall": 0.391304347826087,
+      "negationEvaluated": 28,
+      "modalityAccuracy": 0.8571428571428571,
+      "modalityEvaluated": 28,
+      "supportedClaimPrecision": 0.6666666666666666,
+      "supportedClaimRecall": 0.6086956521739131,
       "supportedClaimExpected": 46,
-      "supportedClaimPredicted": 31,
-      "predictionCount": 39,
-      "groundedPredictionCount": 39,
+      "supportedClaimPredicted": 42,
+      "predictionCount": 77,
+      "groundedPredictionCount": 77,
       "groundedPredictionRate": 1,
-      "semanticallySupportedPredictionCount": 39,
+      "semanticallySupportedPredictionCount": 77,
       "semanticallySupportedPredictionRate": 1,
-      "goldMatchedPredictionCount": 25,
-      "goldCoveragePrecision": 0.6410256410256411,
-      "extraSupportedPredictionCount": 14,
-      "extraSupportedPredictionRate": 0.358974358974359,
+      "goldMatchedPredictionCount": 59,
+      "goldCoveragePrecision": 0.7662337662337663,
+      "extraSupportedPredictionCount": 18,
+      "extraSupportedPredictionRate": 0.23376623376623376,
       "trulyUnsupportedPredictionCount": 0,
-      "trulyUnsupportedPredictionRate": 0
+      "trulyUnsupportedPredictionRate": 0,
+      "informationCoverageScore": 0.717948717948718,
+      "criticalFactRecall": 0.775
     },
     "detail": {
       "entity": {
-        "truePositive": 4,
+        "truePositive": 21,
         "expected": 23,
-        "predicted": 4,
-        "falsePositive": 0,
-        "falseNegative": 19,
-        "precision": 1,
-        "recall": 0.17391304347826086
+        "predicted": 25,
+        "falsePositive": 4,
+        "falseNegative": 2,
+        "precision": 0.84,
+        "recall": 0.9130434782608695
       },
       "relation": {
-        "truePositive": 0,
-        "expected": 2,
-        "predicted": 0,
-        "falsePositive": 0,
-        "falseNegative": 2,
-        "precision": null,
-        "recall": 0
-      },
-      "claim": {
-        "truePositive": 18,
-        "expected": 46,
-        "predicted": 31,
-        "falsePositive": 13,
-        "falseNegative": 28,
-        "precision": 0.5806451612903226,
-        "recall": 0.391304347826087
-      },
-      "supportedClaims": {
-        "truePositive": 18,
-        "expected": 46,
-        "predicted": 31,
-        "falsePositive": 13,
-        "falseNegative": 28,
-        "precision": 0.5806451612903226,
-        "recall": 0.391304347826087,
-        "supportedExpected": 46,
-        "supportedPredicted": 31
-      },
-      "event": {
-        "truePositive": 0,
-        "expected": 2,
-        "predicted": 0,
-        "falsePositive": 0,
-        "falseNegative": 2,
-        "precision": null,
-        "recall": 0
-      },
-      "conflict": {
-        "truePositive": 0,
-        "expected": 3,
-        "predicted": 0,
-        "falsePositive": 0,
-        "falseNegative": 3,
-        "precision": null,
-        "recall": 0
-      },
-      "changes": {
         "truePositive": 2,
         "expected": 2,
         "predicted": 2,
@@ -143,72 +98,177 @@
         "precision": 1,
         "recall": 1
       },
-      "sourceOmission": {
+      "claim": {
+        "truePositive": 28,
+        "expected": 46,
+        "predicted": 42,
+        "falsePositive": 14,
+        "falseNegative": 18,
+        "precision": 0.6666666666666666,
+        "recall": 0.6086956521739131
+      },
+      "supportedClaims": {
+        "truePositive": 28,
+        "expected": 46,
+        "predicted": 42,
+        "falsePositive": 14,
+        "falseNegative": 18,
+        "precision": 0.6666666666666666,
+        "recall": 0.6086956521739131,
+        "supportedExpected": 46,
+        "supportedPredicted": 42
+      },
+      "event": {
+        "truePositive": 2,
+        "expected": 2,
+        "predicted": 2,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 1,
+        "recall": 1
+      },
+      "conflict": {
+        "truePositive": 3,
+        "expected": 3,
+        "predicted": 3,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 1,
+        "recall": 1
+      },
+      "changes": {
         "truePositive": 1,
+        "expected": 2,
+        "predicted": 1,
+        "falsePositive": 0,
+        "falseNegative": 1,
+        "precision": 1,
+        "recall": 0.5
+      },
+      "sourceOmission": {
+        "truePositive": 2,
         "expected": 3,
         "predicted": 2,
-        "falsePositive": 1,
-        "falseNegative": 2,
-        "precision": 0.5,
-        "recall": 0.3333333333333333
+        "falsePositive": 0,
+        "falseNegative": 1,
+        "precision": 1,
+        "recall": 0.6666666666666666
       },
       "quality": {
         "attribution": {
-          "evaluated": 18,
-          "correct": 15,
-          "accuracy": 0.8333333333333334
+          "evaluated": 28,
+          "correct": 24,
+          "accuracy": 0.8571428571428571
         },
         "evidence": {
-          "evaluated": 18,
-          "correct": 18,
+          "evaluated": 28,
+          "correct": 28,
           "accuracy": 1
         },
         "temporal": {
-          "evaluated": 18,
-          "correct": 14,
-          "accuracy": 0.7777777777777778
+          "evaluated": 28,
+          "correct": 23,
+          "accuracy": 0.8214285714285714
         },
         "negation": {
-          "evaluated": 18,
-          "correct": 18,
+          "evaluated": 28,
+          "correct": 28,
           "accuracy": 1
         },
         "modality": {
-          "evaluated": 18,
-          "correct": 14,
-          "accuracy": 0.7777777777777778
+          "evaluated": 28,
+          "correct": 24,
+          "accuracy": 0.8571428571428571
         }
       },
       "integrity": {
-        "predictionCount": 39,
-        "groundedPredictionCount": 39,
+        "predictionCount": 77,
+        "groundedPredictionCount": 77,
         "groundedPredictionRate": 1,
-        "semanticallySupportedPredictionCount": 39,
+        "semanticallySupportedPredictionCount": 77,
         "semanticallySupportedPredictionRate": 1,
-        "goldMatchedPredictionCount": 25,
-        "goldCoveragePrecision": 0.6410256410256411,
-        "extraSupportedPredictionCount": 14,
-        "extraSupportedPredictionRate": 0.358974358974359,
+        "goldMatchedPredictionCount": 59,
+        "goldCoveragePrecision": 0.7662337662337663,
+        "extraSupportedPredictionCount": 18,
+        "extraSupportedPredictionRate": 0.23376623376623376,
         "trulyUnsupportedPredictionCount": 0,
         "trulyUnsupportedPredictionRate": 0
       },
+      "informationCoverage": {
+        "score": 0.717948717948718,
+        "totalExpected": 78,
+        "totalMatched": 56,
+        "criticalExpected": 40,
+        "criticalMatched": 31,
+        "criticalRecall": 0.775,
+        "breakdown": {
+          "entities": {
+            "expected": 23,
+            "matched": 21,
+            "recall": 0.9130434782608695,
+            "criticalExpected": 13,
+            "criticalMatched": 13,
+            "criticalRecall": 1
+          },
+          "claims": {
+            "expected": 46,
+            "matched": 28,
+            "recall": 0.6086956521739131,
+            "criticalExpected": 18,
+            "criticalMatched": 11,
+            "criticalRecall": 0.6111111111111112
+          },
+          "relations": {
+            "expected": 2,
+            "matched": 2,
+            "recall": 1,
+            "criticalExpected": 2,
+            "criticalMatched": 2,
+            "criticalRecall": 1
+          },
+          "changes": {
+            "expected": 2,
+            "matched": 1,
+            "recall": 0.5,
+            "criticalExpected": 2,
+            "criticalMatched": 1,
+            "criticalRecall": 0.5
+          },
+          "omissions": {
+            "expected": 3,
+            "matched": 2,
+            "recall": 0.6666666666666666,
+            "criticalExpected": 3,
+            "criticalMatched": 2,
+            "criticalRecall": 0.6666666666666666
+          },
+          "events": {
+            "expected": 2,
+            "matched": 2,
+            "recall": 1,
+            "criticalExpected": 2,
+            "criticalMatched": 2,
+            "criticalRecall": 1
+          }
+        }
+      },
       "identity": {
-        "evaluated": 4,
-        "correct": 1,
-        "accuracy": 0.25
+        "evaluated": 21,
+        "correct": 18,
+        "accuracy": 0.8571428571428571
       },
       "scenarios": [
         {
           "id": "V22-S01",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -220,13 +280,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 1,
+              "truePositive": 2,
               "expected": 2,
-              "predicted": 1,
+              "predicted": 2,
               "falsePositive": 0,
-              "falseNegative": 1,
+              "falseNegative": 0,
               "precision": 1,
-              "recall": 0.5
+              "recall": 1
             },
             "events": {
               "truePositive": 0,
@@ -238,13 +298,13 @@
               "recall": null
             },
             "conflicts": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "changes": {
               "truePositive": 0,
@@ -256,13 +316,13 @@
               "recall": null
             },
             "omissions": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             }
           }
         },
@@ -270,13 +330,13 @@
           "id": "V22-S02",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -338,13 +398,13 @@
           "id": "V22-S03",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -374,13 +434,13 @@
               "recall": null
             },
             "conflicts": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "changes": {
               "truePositive": 0,
@@ -406,13 +466,13 @@
           "id": "V22-S04",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -474,13 +534,13 @@
           "id": "V22-S05",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -492,13 +552,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 0,
+              "truePositive": 2,
               "expected": 2,
-              "predicted": 3,
-              "falsePositive": 3,
-              "falseNegative": 2,
-              "precision": 0,
-              "recall": 0
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "events": {
               "truePositive": 0,
@@ -510,13 +570,13 @@
               "recall": null
             },
             "conflicts": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "changes": {
               "truePositive": 0,
@@ -542,13 +602,13 @@
           "id": "V22-S06",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -560,13 +620,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 0,
+              "truePositive": 2,
               "expected": 2,
-              "predicted": 0,
+              "predicted": 2,
               "falsePositive": 0,
-              "falseNegative": 2,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "events": {
               "truePositive": 0,
@@ -610,13 +670,13 @@
           "id": "V22-S07",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -628,13 +688,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 0,
+              "truePositive": 2,
               "expected": 2,
-              "predicted": 0,
+              "predicted": 2,
               "falsePositive": 0,
-              "falseNegative": 2,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "events": {
               "truePositive": 0,
@@ -678,13 +738,13 @@
           "id": "V22-S08",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -746,13 +806,13 @@
           "id": "V22-S09",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -766,10 +826,10 @@
             "claims": {
               "truePositive": 0,
               "expected": 2,
-              "predicted": 0,
-              "falsePositive": 0,
+              "predicted": 2,
+              "falsePositive": 2,
               "falseNegative": 2,
-              "precision": null,
+              "precision": 0,
               "recall": 0
             },
             "events": {
@@ -814,13 +874,13 @@
           "id": "V22-S10",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -832,13 +892,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 1,
+              "truePositive": 2,
               "expected": 2,
               "predicted": 2,
-              "falsePositive": 1,
-              "falseNegative": 1,
-              "precision": 0.5,
-              "recall": 0.5
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "events": {
               "truePositive": 0,
@@ -882,13 +942,13 @@
           "id": "V22-S11",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -900,13 +960,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 2,
               "predicted": 1,
-              "falsePositive": 1,
-              "falseNegative": 2,
-              "precision": 0,
-              "recall": 0
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": 1,
+              "recall": 0.5
             },
             "events": {
               "truePositive": 0,
@@ -950,13 +1010,13 @@
           "id": "V22-S12",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -968,13 +1028,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 0,
+              "truePositive": 2,
               "expected": 2,
               "predicted": 2,
-              "falsePositive": 2,
-              "falseNegative": 2,
-              "precision": 0,
-              "recall": 0
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "events": {
               "truePositive": 0,
@@ -1036,13 +1096,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 2,
               "predicted": 1,
-              "falsePositive": 1,
-              "falseNegative": 2,
-              "precision": 0,
-              "recall": 0
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": 1,
+              "recall": 0.5
             },
             "events": {
               "truePositive": 0,
@@ -1088,28 +1148,28 @@
             "entities": {
               "truePositive": 2,
               "expected": 2,
-              "predicted": 2,
+              "predicted": 3,
+              "falsePositive": 1,
+              "falseNegative": 0,
+              "precision": 0.6666666666666666,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
               "falsePositive": 0,
               "falseNegative": 0,
               "precision": 1,
               "recall": 1
             },
-            "relations": {
-              "truePositive": 0,
-              "expected": 1,
-              "predicted": 0,
-              "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
-            },
             "claims": {
               "truePositive": 0,
               "expected": 2,
-              "predicted": 0,
-              "falsePositive": 0,
+              "predicted": 2,
+              "falsePositive": 2,
               "falseNegative": 2,
-              "precision": null,
+              "precision": 0,
               "recall": 0
             },
             "events": {
@@ -1174,10 +1234,10 @@
             "claims": {
               "truePositive": 0,
               "expected": 2,
-              "predicted": 0,
-              "falsePositive": 0,
+              "predicted": 2,
+              "falsePositive": 2,
               "falseNegative": 2,
-              "precision": null,
+              "precision": 0,
               "recall": 0
             },
             "events": {
@@ -1222,13 +1282,13 @@
           "id": "V22-S16",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -1242,10 +1302,10 @@
             "claims": {
               "truePositive": 3,
               "expected": 3,
-              "predicted": 6,
-              "falsePositive": 3,
+              "predicted": 3,
+              "falsePositive": 0,
               "falseNegative": 0,
-              "precision": 0.5,
+              "precision": 1,
               "recall": 1
             },
             "events": {
@@ -1290,13 +1350,13 @@
           "id": "V22-S17",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -1358,13 +1418,13 @@
           "id": "V22-S18",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -1378,10 +1438,10 @@
             "claims": {
               "truePositive": 0,
               "expected": 3,
-              "predicted": 0,
-              "falsePositive": 0,
+              "predicted": 2,
+              "falsePositive": 2,
               "falseNegative": 3,
-              "precision": null,
+              "precision": 0,
               "recall": 0
             },
             "events": {
@@ -1426,13 +1486,13 @@
           "id": "V22-S19",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
               "truePositive": 0,
@@ -1444,13 +1504,13 @@
               "recall": null
             },
             "claims": {
-              "truePositive": 2,
+              "truePositive": 0,
               "expected": 3,
-              "predicted": 2,
+              "predicted": 0,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": 1,
-              "recall": 0.6666666666666666
+              "falseNegative": 3,
+              "precision": null,
+              "recall": 0
             },
             "events": {
               "truePositive": 0,
@@ -1471,13 +1531,13 @@
               "recall": null
             },
             "changes": {
-              "truePositive": 1,
+              "truePositive": 0,
               "expected": 1,
-              "predicted": 1,
+              "predicted": 0,
               "falsePositive": 0,
-              "falseNegative": 0,
-              "precision": 1,
-              "recall": 1
+              "falseNegative": 1,
+              "precision": null,
+              "recall": 0
             },
             "omissions": {
               "truePositive": 0,
@@ -1494,40 +1554,40 @@
           "id": "V22-S20",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 2,
-              "predicted": 0,
-              "falsePositive": 0,
-              "falseNegative": 2,
-              "precision": null,
-              "recall": 0
+              "predicted": 4,
+              "falsePositive": 3,
+              "falseNegative": 1,
+              "precision": 0.25,
+              "recall": 0.5
             },
             "relations": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "claims": {
               "truePositive": 0,
               "expected": 4,
-              "predicted": 2,
-              "falsePositive": 2,
+              "predicted": 6,
+              "falsePositive": 6,
               "falseNegative": 4,
               "precision": 0,
               "recall": 0
             },
             "events": {
-              "truePositive": 0,
+              "truePositive": 2,
               "expected": 2,
-              "predicted": 0,
+              "predicted": 2,
               "falsePositive": 0,
-              "falseNegative": 2,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "conflicts": {
               "truePositive": 0,
@@ -1550,10 +1610,10 @@
             "omissions": {
               "truePositive": 0,
               "expected": 0,
-              "predicted": 1,
-              "falsePositive": 1,
+              "predicted": 0,
+              "falsePositive": 0,
               "falseNegative": 0,
-              "precision": 0,
+              "precision": null,
               "recall": null
             }
           }
@@ -1601,103 +1661,105 @@
       "omissions": 5
     },
     "predictedCounts": {
-      "entities": 8,
-      "relations": 0,
-      "claims": 100,
-      "events": 0,
+      "entities": 25,
+      "relations": 5,
+      "claims": 85,
+      "events": 7,
       "conflicts": 0,
       "changes": 5,
-      "omissions": 4
+      "omissions": 3
     },
     "metrics": {
-      "entityPrecision": 0.5,
-      "entityRecall": 0.2,
-      "relationPrecision": null,
-      "relationRecall": 0,
-      "claimPrecision": 0.57,
-      "claimRecall": 0.475,
-      "eventMatchingAccuracy": 0,
+      "entityPrecision": 0.76,
+      "entityRecall": 0.95,
+      "relationPrecision": 1,
+      "relationRecall": 1,
+      "claimPrecision": 0.7176470588235294,
+      "claimRecall": 0.5083333333333333,
+      "eventMatchingAccuracy": 1,
       "conflictPrecision": null,
       "conflictRecall": null,
       "falseConflictRate": null,
       "sourceOmissionPrecision": 1,
-      "sourceOmissionRecall": 0.8,
+      "sourceOmissionRecall": 0.6,
       "temporalChangeRecall": 1,
       "identityAccuracy": 1,
-      "unsupportedPredictionRate": 0.4017094017094017,
-      "attributionAccuracy": 0.7719298245614035,
-      "attributionEvaluated": 57,
+      "unsupportedPredictionRate": 0.24615384615384617,
+      "attributionAccuracy": 0.7538461538461538,
+      "attributionEvaluated": 65,
       "evidenceAccuracy": 1,
-      "evidenceEvaluated": 57,
-      "temporalAccuracy": 1,
-      "temporalEvaluated": 57,
+      "evidenceEvaluated": 65,
+      "temporalAccuracy": 0.7846153846153846,
+      "temporalEvaluated": 65,
       "negationAccuracy": 1,
-      "negationEvaluated": 57,
-      "modalityAccuracy": 0.9122807017543859,
-      "modalityEvaluated": 57,
-      "supportedClaimPrecision": 0.57,
-      "supportedClaimRecall": 0.475,
+      "negationEvaluated": 65,
+      "modalityAccuracy": 0.9384615384615385,
+      "modalityEvaluated": 65,
+      "supportedClaimPrecision": 0.7176470588235294,
+      "supportedClaimRecall": 0.5083333333333333,
       "supportedClaimExpected": 120,
-      "supportedClaimPredicted": 100,
-      "predictionCount": 117,
-      "groundedPredictionCount": 117,
+      "supportedClaimPredicted": 85,
+      "predictionCount": 130,
+      "groundedPredictionCount": 130,
       "groundedPredictionRate": 1,
-      "semanticallySupportedPredictionCount": 117,
+      "semanticallySupportedPredictionCount": 130,
       "semanticallySupportedPredictionRate": 1,
-      "goldMatchedPredictionCount": 70,
-      "goldCoveragePrecision": 0.5982905982905983,
-      "extraSupportedPredictionCount": 47,
-      "extraSupportedPredictionRate": 0.4017094017094017,
+      "goldMatchedPredictionCount": 98,
+      "goldCoveragePrecision": 0.7538461538461538,
+      "extraSupportedPredictionCount": 32,
+      "extraSupportedPredictionRate": 0.24615384615384617,
       "trulyUnsupportedPredictionCount": 0,
-      "trulyUnsupportedPredictionRate": 0
+      "trulyUnsupportedPredictionRate": 0,
+      "informationCoverageScore": 0.6375,
+      "criticalFactRecall": 0.6818181818181818
     },
     "detail": {
       "entity": {
-        "truePositive": 4,
+        "truePositive": 19,
         "expected": 20,
-        "predicted": 8,
-        "falsePositive": 4,
-        "falseNegative": 16,
-        "precision": 0.5,
-        "recall": 0.2
+        "predicted": 25,
+        "falsePositive": 6,
+        "falseNegative": 1,
+        "precision": 0.76,
+        "recall": 0.95
       },
       "relation": {
-        "truePositive": 0,
+        "truePositive": 5,
         "expected": 5,
-        "predicted": 0,
+        "predicted": 5,
         "falsePositive": 0,
-        "falseNegative": 5,
-        "precision": null,
-        "recall": 0
+        "falseNegative": 0,
+        "precision": 1,
+        "recall": 1
       },
       "claim": {
-        "truePositive": 57,
+        "truePositive": 61,
         "expected": 120,
-        "predicted": 100,
-        "falsePositive": 43,
-        "falseNegative": 63,
-        "precision": 0.57,
-        "recall": 0.475
+        "predicted": 85,
+        "falsePositive": 24,
+        "falseNegative": 59,
+        "precision": 0.7176470588235294,
+        "recall": 0.5083333333333333
       },
       "supportedClaims": {
-        "truePositive": 57,
+        "truePositive": 61,
         "expected": 120,
-        "predicted": 100,
-        "falsePositive": 43,
-        "falseNegative": 63,
-        "precision": 0.57,
-        "recall": 0.475,
+        "predicted": 85,
+        "falsePositive": 24,
+        "falseNegative": 59,
+        "precision": 0.7176470588235294,
+        "recall": 0.5083333333333333,
         "supportedExpected": 120,
-        "supportedPredicted": 100
+        "supportedPredicted": 85
       },
       "event": {
-        "truePositive": 0,
+        "truePositive": 5,
         "expected": 5,
-        "predicted": 0,
-        "falsePositive": 0,
-        "falseNegative": 5,
-        "precision": null,
-        "recall": 0
+        "predicted": 7,
+        "falsePositive": 2,
+        "falseNegative": 0,
+        "precision": 0.7142857142857143,
+        "recall": 1
       },
       "conflict": {
         "truePositive": 0,
@@ -1718,57 +1780,115 @@
         "recall": 1
       },
       "sourceOmission": {
-        "truePositive": 4,
+        "truePositive": 3,
         "expected": 5,
-        "predicted": 4,
+        "predicted": 3,
         "falsePositive": 0,
-        "falseNegative": 1,
+        "falseNegative": 2,
         "precision": 1,
-        "recall": 0.8
+        "recall": 0.6
       },
       "quality": {
         "attribution": {
-          "evaluated": 57,
-          "correct": 44,
-          "accuracy": 0.7719298245614035
+          "evaluated": 65,
+          "correct": 49,
+          "accuracy": 0.7538461538461538
         },
         "evidence": {
-          "evaluated": 57,
-          "correct": 57,
+          "evaluated": 65,
+          "correct": 65,
           "accuracy": 1
         },
         "temporal": {
-          "evaluated": 57,
-          "correct": 57,
-          "accuracy": 1
+          "evaluated": 65,
+          "correct": 51,
+          "accuracy": 0.7846153846153846
         },
         "negation": {
-          "evaluated": 57,
-          "correct": 57,
+          "evaluated": 65,
+          "correct": 65,
           "accuracy": 1
         },
         "modality": {
-          "evaluated": 57,
-          "correct": 52,
-          "accuracy": 0.9122807017543859
+          "evaluated": 65,
+          "correct": 61,
+          "accuracy": 0.9384615384615385
         }
       },
       "integrity": {
-        "predictionCount": 117,
-        "groundedPredictionCount": 117,
+        "predictionCount": 130,
+        "groundedPredictionCount": 130,
         "groundedPredictionRate": 1,
-        "semanticallySupportedPredictionCount": 117,
+        "semanticallySupportedPredictionCount": 130,
         "semanticallySupportedPredictionRate": 1,
-        "goldMatchedPredictionCount": 70,
-        "goldCoveragePrecision": 0.5982905982905983,
-        "extraSupportedPredictionCount": 47,
-        "extraSupportedPredictionRate": 0.4017094017094017,
+        "goldMatchedPredictionCount": 98,
+        "goldCoveragePrecision": 0.7538461538461538,
+        "extraSupportedPredictionCount": 32,
+        "extraSupportedPredictionRate": 0.24615384615384617,
         "trulyUnsupportedPredictionCount": 0,
         "trulyUnsupportedPredictionRate": 0
       },
+      "informationCoverage": {
+        "score": 0.6375,
+        "totalExpected": 160,
+        "totalMatched": 102,
+        "criticalExpected": 88,
+        "criticalMatched": 60,
+        "criticalRecall": 0.6818181818181818,
+        "breakdown": {
+          "entities": {
+            "expected": 20,
+            "matched": 19,
+            "recall": 0.95,
+            "criticalExpected": 15,
+            "criticalMatched": 14,
+            "criticalRecall": 0.9333333333333333
+          },
+          "claims": {
+            "expected": 120,
+            "matched": 65,
+            "recall": 0.5416666666666666,
+            "criticalExpected": 53,
+            "criticalMatched": 28,
+            "criticalRecall": 0.5283018867924528
+          },
+          "relations": {
+            "expected": 5,
+            "matched": 5,
+            "recall": 1,
+            "criticalExpected": 5,
+            "criticalMatched": 5,
+            "criticalRecall": 1
+          },
+          "changes": {
+            "expected": 5,
+            "matched": 5,
+            "recall": 1,
+            "criticalExpected": 5,
+            "criticalMatched": 5,
+            "criticalRecall": 1
+          },
+          "omissions": {
+            "expected": 5,
+            "matched": 3,
+            "recall": 0.6,
+            "criticalExpected": 5,
+            "criticalMatched": 3,
+            "criticalRecall": 0.6
+          },
+          "events": {
+            "expected": 5,
+            "matched": 5,
+            "recall": 1,
+            "criticalExpected": 5,
+            "criticalMatched": 5,
+            "criticalRecall": 1
+          }
+        }
+      },
       "identity": {
-        "evaluated": 4,
-        "correct": 4,
+        "evaluated": 19,
+        "correct": 19,
         "accuracy": 1
       },
       "scenarios": [
@@ -1776,40 +1896,40 @@
           "id": "V22-D01",
           "fields": {
             "entities": {
-              "truePositive": 1,
+              "truePositive": 4,
               "expected": 4,
-              "predicted": 1,
-              "falsePositive": 0,
-              "falseNegative": 3,
-              "precision": 1,
-              "recall": 0.25
+              "predicted": 5,
+              "falsePositive": 1,
+              "falseNegative": 0,
+              "precision": 0.8,
+              "recall": 1
             },
             "relations": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "claims": {
-              "truePositive": 10,
+              "truePositive": 17,
               "expected": 24,
               "predicted": 23,
-              "falsePositive": 13,
-              "falseNegative": 14,
-              "precision": 0.43478260869565216,
-              "recall": 0.4166666666666667
+              "falsePositive": 6,
+              "falseNegative": 7,
+              "precision": 0.7391304347826086,
+              "recall": 0.7083333333333334
             },
             "events": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
-              "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "predicted": 2,
+              "falsePositive": 1,
+              "falseNegative": 0,
+              "precision": 0.5,
+              "recall": 1
             },
             "conflicts": {
               "truePositive": 0,
@@ -1844,40 +1964,40 @@
           "id": "V22-D02",
           "fields": {
             "entities": {
-              "truePositive": 1,
+              "truePositive": 4,
               "expected": 4,
-              "predicted": 2,
+              "predicted": 5,
               "falsePositive": 1,
-              "falseNegative": 3,
-              "precision": 0.5,
-              "recall": 0.25
+              "falseNegative": 0,
+              "precision": 0.8,
+              "recall": 1
             },
             "relations": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "claims": {
-              "truePositive": 13,
+              "truePositive": 11,
               "expected": 24,
-              "predicted": 22,
-              "falsePositive": 9,
-              "falseNegative": 11,
-              "precision": 0.5909090909090909,
-              "recall": 0.5416666666666666
+              "predicted": 14,
+              "falsePositive": 3,
+              "falseNegative": 13,
+              "precision": 0.7857142857142857,
+              "recall": 0.4583333333333333
             },
             "events": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "conflicts": {
               "truePositive": 0,
@@ -1912,40 +2032,40 @@
           "id": "V22-D03",
           "fields": {
             "entities": {
-              "truePositive": 1,
+              "truePositive": 4,
               "expected": 4,
-              "predicted": 2,
-              "falsePositive": 1,
-              "falseNegative": 3,
-              "precision": 0.5,
-              "recall": 0.25
+              "predicted": 4,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "relations": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "claims": {
-              "truePositive": 12,
+              "truePositive": 11,
               "expected": 24,
-              "predicted": 20,
-              "falsePositive": 8,
-              "falseNegative": 12,
-              "precision": 0.6,
-              "recall": 0.5
+              "predicted": 16,
+              "falsePositive": 5,
+              "falseNegative": 13,
+              "precision": 0.6875,
+              "recall": 0.4583333333333333
             },
             "events": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
-              "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "predicted": 2,
+              "falsePositive": 1,
+              "falseNegative": 0,
+              "precision": 0.5,
+              "recall": 1
             },
             "conflicts": {
               "truePositive": 0,
@@ -1980,40 +2100,40 @@
           "id": "V22-D04",
           "fields": {
             "entities": {
-              "truePositive": 1,
+              "truePositive": 3,
               "expected": 4,
-              "predicted": 1,
-              "falsePositive": 0,
-              "falseNegative": 3,
-              "precision": 1,
-              "recall": 0.25
+              "predicted": 6,
+              "falsePositive": 3,
+              "falseNegative": 1,
+              "precision": 0.5,
+              "recall": 0.75
             },
             "relations": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "claims": {
-              "truePositive": 12,
+              "truePositive": 11,
               "expected": 24,
-              "predicted": 18,
+              "predicted": 17,
               "falsePositive": 6,
-              "falseNegative": 12,
-              "precision": 0.6666666666666666,
-              "recall": 0.5
+              "falseNegative": 13,
+              "precision": 0.6470588235294118,
+              "recall": 0.4583333333333333
             },
             "events": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "conflicts": {
               "truePositive": 0,
@@ -2048,40 +2168,40 @@
           "id": "V22-D05",
           "fields": {
             "entities": {
-              "truePositive": 0,
+              "truePositive": 4,
               "expected": 4,
-              "predicted": 2,
-              "falsePositive": 2,
-              "falseNegative": 4,
-              "precision": 0,
-              "recall": 0
+              "predicted": 5,
+              "falsePositive": 1,
+              "falseNegative": 0,
+              "precision": 0.8,
+              "recall": 1
             },
             "relations": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "claims": {
-              "truePositive": 10,
+              "truePositive": 11,
               "expected": 24,
-              "predicted": 17,
-              "falsePositive": 7,
-              "falseNegative": 14,
-              "precision": 0.5882352941176471,
-              "recall": 0.4166666666666667
+              "predicted": 15,
+              "falsePositive": 4,
+              "falseNegative": 13,
+              "precision": 0.7333333333333333,
+              "recall": 0.4583333333333333
             },
             "events": {
-              "truePositive": 0,
+              "truePositive": 1,
               "expected": 1,
-              "predicted": 0,
+              "predicted": 1,
               "falsePositive": 0,
-              "falseNegative": 1,
-              "precision": null,
-              "recall": 0
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
             },
             "conflicts": {
               "truePositive": 0,
@@ -2102,13 +2222,13 @@
               "recall": 1
             },
             "omissions": {
-              "truePositive": 1,
+              "truePositive": 0,
               "expected": 1,
-              "predicted": 1,
+              "predicted": 0,
               "falsePositive": 0,
-              "falseNegative": 0,
-              "precision": 1,
-              "recall": 1
+              "falseNegative": 1,
+              "precision": null,
+              "recall": 0
             }
           }
         }

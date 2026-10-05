@@ -58,3 +58,12 @@ npm run benchmark:v22:fp
 
 The fixture and report hashes in `10_deterministic_baseline.json` are the
 reviewed measurement identity for this run.
+
+## Round 3 update
+
+The Round 3 fixture identity is now tracked in `10_deterministic_baseline.json`.
+After explicit entity/relation/event/conflict projection and source-derivability
+corrections, the current report has 0 truly unsupported predictions in both
+tiers. The top-50 taxonomy is now 24 supported-but-not-in-gold, 26 duplicate,
+0 true unsupported, 0 semantic mismatch and 0 evaluator mismatch. The full
+coverage and reasoning report is `14_COVERAGE_AND_REASONING_ROUND3.md`.

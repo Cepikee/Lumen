@@ -14,10 +14,11 @@ const { createDeterministicRelationProvider } = require("../../lib/v2/relation-e
 const { runRelationExtraction } = require("../../lib/v2/runtime-relation-extraction");
 const { evaluateDataset, claimKey, supportedClaim } = require("../../lib/v22/benchmark-evaluator.cjs");
 const { predictArticles } = require("../../lib/v22/deterministic-text-provider.cjs");
+const { buildHeldoutDataset } = require("../../lib/v22/heldout-generalization-dataset.cjs");
 
-test("precision helper abstains on filler and survives twenty perturbed source variants", () => {
-  const sources = buildBenchmarkDataset().scenarios.flatMap((scenario) => scenario.sourceVariants).slice(0, 20);
-  assert.equal(sources.length, 20);
+test("precision helper abstains on filler and survives thirty perturbed source variants", () => {
+  const sources = buildBenchmarkDataset().scenarios.flatMap((scenario) => scenario.sourceVariants).slice(0, 30);
+  assert.equal(sources.length, 30);
   for (const source of sources) {
     const paragraphs = source.text.split(/\n\n/gu);
     const variant = paragraphs.reverse().join("\n\n").replace(/\s+/gu, " ").replace(/\s+([,.!?])/gu, "$1").trim();
@@ -53,7 +54,21 @@ test("deterministic semantic providers satisfy canonical extraction contracts wi
   assert.ok(claim.result.claims.every((item) => normalized.envelope.article.contentText.slice(item.evidence.start, item.evidence.end) === item.evidence.textSpan));
   const relation = await runRelationExtraction({ articleId: 1, sourceId: 1, text: "Mészáros dolgozik Acme-nél.", entities: [{ id: 1, mention: "Mészáros" }, { id: 2, mention: "Acme" }] }, {}, { enabled: true, provider: createDeterministicRelationProvider() });
   assert.equal(relation.status, "completed");
+  assert.equal(relation.result.relations.length, 1);
   assert.equal(relation.result.relations[0].predicate, "WORKS_FOR");
+});
+
+test("explicit organization relation evidence keeps original article offsets", () => {
+  const text = "Alföldi Energia Zrt. bejelentette a hálózati próbát.";
+  const entities = [
+    { id: 1, mention: "Alföldi Energia Zrt" },
+    { id: 2, mention: "hálózati próbát" },
+  ];
+  const relations = semantic.extractRelations(text, entities);
+  assert.equal(relations.length, 1);
+  assert.equal(relations[0].predicate, "ANNOUNCED");
+  assert.equal(text.slice(relations[0].evidence.start, relations[0].evidence.end), relations[0].evidence.textSpan);
+  assert.match(relations[0].evidence.textSpan, /bejelentette a hálózati próbát/iu);
 });
 
 test("semantic helper has no benchmark gold dependency", () => {
@@ -131,4 +146,41 @@ test("evidence-backed categorical claims count as semantically supported", () =>
   assert.equal(supportedClaim({ predicate: "OPENING_EVENT", value: null, evidence: "bejelentette a programot" }), true);
   assert.equal(supportedClaim({ predicate: "UNSPECIFIED_CLAIM", value: null, evidence: "szöveg" }), false);
   assert.equal(supportedClaim({ predicate: "OPENING_EVENT", value: null }), false);
+});
+
+test("round 3 recovers explicit relations, separate events, and validated conflicts", () => {
+  const dataset = buildBenchmarkDataset();
+  const report = evaluateDataset(dataset, predictArticles({ scenarios: dataset.scenarios }));
+  assert.equal(report.metrics.relationRecall, 1);
+  assert.equal(report.metrics.eventMatchingAccuracy, 1);
+  assert.equal(report.metrics.conflictRecall, 1);
+  assert.equal(report.metrics.falseConflictRate, 0);
+  assert.equal(report.metrics.trulyUnsupportedPredictionRate, 0);
+  const multi = predictArticles({ scenarios: dataset.scenarios }).scenarios.find((item) => item.id === "V22-S20");
+  assert.deepEqual(multi.events.map((item) => item.title), ["Programbejelentés", "Próbaüzem indulása"]);
+});
+
+test("round 3 dense gold values remain source-derived and expose critical coverage", () => {
+  const dataset = buildDenseBenchmarkDataset();
+  for (const scenario of dataset.scenarios) {
+    for (const claim of scenario.expected.claims) {
+      const source = scenario.sourceVariants.find((variant) => variant.source.key === claim.source);
+      assert.ok(source?.text.includes(claim.sentence), `${scenario.id} claim is not source-derived`);
+      assert.ok(["critical", "supporting", "minor"].includes(claim.importance));
+    }
+  }
+  const report = evaluateDataset(dataset, predictArticles({ scenarios: dataset.scenarios }));
+  assert.ok(report.metrics.informationCoverageScore > 0.6);
+  assert.ok(report.metrics.criticalFactRecall > 0.6);
+});
+
+test("round 3 held-out role clauses resolve the longest organisation and preserve separate events", () => {
+  const dataset = buildHeldoutDataset();
+  const predictions = predictArticles({ scenarios: dataset.scenarios }).scenarios;
+  const acquisition = predictions.find((item) => item.id === "H02");
+  assert.ok(acquisition.relations.some((relation) => relation.subject === "Kelemen Áron" && relation.predicate === "CEO_OF" && relation.object === "Vektor Holding"));
+  const festival = predictions.find((item) => item.id === "H05");
+  assert.deepEqual(festival.events.map((event) => event.title), ["Tófutás rajtja", "Gálameccs törlése"]);
+  const historical = predictions.find((item) => item.id === "H08");
+  assert.equal(historical.conflicts.length, 0);
 });

@@ -1,0 +1,31 @@
+{
+  "status": "FROZEN_FIRST_PASS",
+  "dataset": {"version":"v22.heldout.1","scenarios":12,"articles":26,"expectedEntities":37,"expectedRelations":2,"expectedClaims":39,"expectedEvents":8,"expectedConflicts":1,"expectedTemporalChanges":2,"expectedOmissions":2},
+  "brainHashes": {
+    "lib/v2/deterministic-semantic.js": "EB62BC13A1E9804C25E6C4A3DFD7ECEB77EC18887ECEAB9EDB88C399649E01E3",
+    "lib/v22/deterministic-text-provider.cjs": "508D61CA3C9E33ADEED7383263A59ABB101FA71EEFF51B7D3F5027488C4119D7"
+  },
+  "metrics": {
+    "entityPrecision": 0.5294117647058824,
+    "entityRecall": 0.24324324324324326,
+    "relationPrecision": null,
+    "relationRecall": 0,
+    "claimPrecision": 0.4117647058823529,
+    "claimRecall": 0.1794871794871795,
+    "supportedClaimPrecision": 0.4117647058823529,
+    "supportedClaimRecall": 0.1794871794871795,
+    "eventMatchingAccuracy": 0,
+    "conflictPrecision": 0.5,
+    "conflictRecall": 1,
+    "falseConflictRate": 0.5,
+    "temporalChangeRecall": 0,
+    "sourceOmissionPrecision": 1,
+    "sourceOmissionRecall": 0.5,
+    "attributionAccuracy": 0.8571428571428571,
+    "evidenceAccuracy": 1,
+    "negationAccuracy": 1,
+    "modalityAccuracy": 0.7142857142857143,
+    "trulyUnsupportedPredictionRate": 0,
+    "criticalFactRecall": 0.21052631578947367
+  }
+}

@@ -31,12 +31,21 @@ async function resetAndMigrate(config) {
   }
 }
 
+// The recovery integration owns its database reset and deliberately applies
+// migrations in phases to exercise recovery from a partially migrated schema.
+// Pre-migrating it here destroys that fixture and makes the wrapper report a
+// false failure. All other integration files retain the wrapper's clean
+// latest-schema setup.
+function shouldPreMigrate(fileName) {
+  return fileName !== "mysql-pipeline-recovery.test.cjs";
+}
+
 async function main() {
   const config = configFromUrl();
   const integrationDir = path.resolve(__dirname, "../tests/integration");
   const files = fs.readdirSync(integrationDir).filter((name) => name.endsWith(".test.cjs")).sort();
   for (const name of files) {
-    await resetAndMigrate(config);
+    if (shouldPreMigrate(name)) await resetAndMigrate(config);
     const result = spawnSync(process.execPath, ["--test", "--test-concurrency=1", path.join(integrationDir, name)], {
       cwd: path.resolve(__dirname, ".."),
       env: { ...process.env, UTOM_MYSQL_TEST_OPT_IN: process.env.UTOM_MYSQL_TEST_OPT_IN || "true" },
@@ -48,4 +57,6 @@ async function main() {
   }
 }
 
-main().catch((error) => { console.error(`MySQL integration suite failed: ${error.stack || error.message}`); process.exitCode = 1; });
+if (require.main === module) main().catch((error) => { console.error(`MySQL integration suite failed: ${error.stack || error.message}`); process.exitCode = 1; });
+
+module.exports = { configFromUrl, resetAndMigrate, shouldPreMigrate };

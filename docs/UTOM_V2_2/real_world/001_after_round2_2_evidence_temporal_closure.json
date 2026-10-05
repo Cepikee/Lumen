@@ -1,0 +1,851 @@
+{
+  "testId": "REAL_WORLD_ARTICLE_001",
+  "pass": "after-round-2-2-evidence-temporal-closure",
+  "generatedAt": "2026-10-05T22:52:21.430Z",
+  "input": {
+    "path": "docs/UTOM_V2_2/real_world/001_source_article.txt",
+    "sha256": "8201C036E78C91A0C1DB26C6EE1BEC86217EFCB70AF7DA3EBD049D9EFCF2180E"
+  },
+  "immutableInputs": {
+    "firstPassSha256": "22BF2986BB5D1ECBEEEE78A0190FD3A24D535FFB7B0A4E41B5919FED8794A0B1",
+    "round1AfterSha256": "609724EFE071C6B93FBCBAFF4C51924CF15D567D6CFAE8422198F041C539EC44",
+    "round2AfterSha256": "0D8786F4F7F55AFE6072DA45732B91D7A63A729CD08A4BE2942EBFC7E3A263F3",
+    "round2_1AfterSha256": "8A3874741C75DBF6D0564ED63A66A3AD00520AB58ABFC6F205C957AAF45BD0C5"
+  },
+  "prediction": {
+    "source": "real-world-001",
+    "entities": [
+      {
+        "mention": "Volvo V60 PHEV",
+        "normalized": "volvo v60 phev",
+        "type": "product",
+        "identity": "same"
+      },
+      {
+        "mention": "Hovány",
+        "normalized": "hovány",
+        "type": "organization",
+        "identity": "same"
+      },
+      {
+        "mention": "Novák András",
+        "normalized": "novák andrás",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "D5T5",
+        "normalized": "d5t5",
+        "type": "organization",
+        "identity": "same"
+      },
+      {
+        "mention": "Vágány Tamás",
+        "normalized": "vágány tamás",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Lajos",
+        "normalized": "lajos",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Zoltán",
+        "normalized": "zoltán",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Auto DNA",
+        "normalized": "auto dna",
+        "type": "organization",
+        "identity": "same"
+      }
+    ],
+    "numericMentions": [
+      {
+        "raw": "153 ezer kilométer",
+        "value": 153000,
+        "parsedValue": 153,
+        "multiplier": 1000,
+        "canonicalValue": 153000,
+        "unit": "km",
+        "canonicalUnit": "km",
+        "scale": "ezer",
+        "valueKind": "absolute",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 1206,
+        "end": 1224
+      },
+      {
+        "raw": "13 700 eurót",
+        "value": 13700,
+        "parsedValue": 13700,
+        "multiplier": 1,
+        "canonicalValue": 13700,
+        "unit": "EUR",
+        "canonicalUnit": "EUR",
+        "scale": null,
+        "valueKind": "absolute",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 1261,
+        "end": 1273
+      },
+      {
+        "raw": "4,4 millió forint",
+        "value": 4.4,
+        "parsedValue": 4.4,
+        "multiplier": 1000000,
+        "canonicalValue": 4400000,
+        "unit": "million HUF",
+        "canonicalUnit": "HUF",
+        "scale": "millió",
+        "valueKind": "absolute",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 1309,
+        "end": 1326
+      },
+      {
+        "raw": "5,2 millió forintot",
+        "value": 5.2,
+        "parsedValue": 5.2,
+        "multiplier": 1000000,
+        "canonicalValue": 5200000,
+        "unit": "million HUF",
+        "canonicalUnit": "HUF",
+        "scale": "millió",
+        "valueKind": "absolute",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 1750,
+        "end": 1769
+      },
+      {
+        "raw": "1-től 3 évig",
+        "value": {
+          "from": 1,
+          "to": 3,
+          "multiplier": 1
+        },
+        "parsedValue": {
+          "from": 1,
+          "to": 3
+        },
+        "multiplier": 1,
+        "canonicalValue": {
+          "from": 1,
+          "to": 3
+        },
+        "unit": "year",
+        "canonicalUnit": "year",
+        "scale": null,
+        "valueKind": "range",
+        "relationKind": null,
+        "qualifier": "range",
+        "start": 3379,
+        "end": 3391
+      },
+      {
+        "raw": "227 ezer kilométer",
+        "value": 227000,
+        "parsedValue": 227,
+        "multiplier": 1000,
+        "canonicalValue": 227000,
+        "unit": "km",
+        "canonicalUnit": "km",
+        "scale": "ezer",
+        "valueKind": "absolute",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 3946,
+        "end": 3964
+      },
+      {
+        "raw": "74 ezerrel",
+        "value": 74000,
+        "parsedValue": 74,
+        "multiplier": 1000,
+        "canonicalValue": 74000,
+        "unit": "number",
+        "canonicalUnit": "number",
+        "scale": "ezer",
+        "valueKind": "approximate",
+        "relationKind": "delta",
+        "qualifier": "approximate",
+        "start": 3994,
+        "end": 4004
+      },
+      {
+        "raw": "168 ezer kilométer",
+        "value": 168000,
+        "parsedValue": 168,
+        "multiplier": 1000,
+        "canonicalValue": 168000,
+        "unit": "km",
+        "canonicalUnit": "km",
+        "scale": "ezer",
+        "valueKind": "absolute",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 4411,
+        "end": 4429
+      },
+      {
+        "raw": "330 ezer forintot",
+        "value": 330,
+        "parsedValue": 330,
+        "multiplier": 1000,
+        "canonicalValue": 330000,
+        "unit": "thousand HUF",
+        "canonicalUnit": "HUF",
+        "scale": "ezer",
+        "valueKind": "absolute",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 5831,
+        "end": 5848
+      },
+      {
+        "raw": "247 ezer kilométer",
+        "value": 247000,
+        "parsedValue": 247,
+        "multiplier": 1000,
+        "canonicalValue": 247000,
+        "unit": "km",
+        "canonicalUnit": "km",
+        "scale": "ezer",
+        "valueKind": "absolute",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 7830,
+        "end": 7848
+      },
+      {
+        "raw": "257 ezer kilométer",
+        "value": 257000,
+        "parsedValue": 257,
+        "multiplier": 1000,
+        "canonicalValue": 257000,
+        "unit": "km",
+        "canonicalUnit": "km",
+        "scale": "ezer",
+        "valueKind": "approximate",
+        "relationKind": null,
+        "qualifier": "approximate",
+        "start": 8191,
+        "end": 8209
+      },
+      {
+        "raw": "442 ezer forintot",
+        "value": 442,
+        "parsedValue": 442,
+        "multiplier": 1000,
+        "canonicalValue": 442000,
+        "unit": "thousand HUF",
+        "canonicalUnit": "HUF",
+        "scale": "ezer",
+        "valueKind": "absolute",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 8378,
+        "end": 8395
+      },
+      {
+        "raw": "1,5 millió forintot",
+        "value": 1.5,
+        "parsedValue": 1.5,
+        "multiplier": 1000000,
+        "canonicalValue": 1500000,
+        "unit": "million HUF",
+        "canonicalUnit": "HUF",
+        "scale": "millió",
+        "valueKind": "absolute",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 8690,
+        "end": 8709
+      },
+      {
+        "raw": "169 ezer kilométerrel",
+        "value": 169000,
+        "parsedValue": 169,
+        "multiplier": 1000,
+        "canonicalValue": 169000,
+        "unit": "km",
+        "canonicalUnit": "km",
+        "scale": "ezer",
+        "valueKind": "comparison",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 9307,
+        "end": 9328
+      },
+      {
+        "raw": "4,8 millió forint",
+        "value": 4.8,
+        "parsedValue": 4.8,
+        "multiplier": 1000000,
+        "canonicalValue": 4800000,
+        "unit": "million HUF",
+        "canonicalUnit": "HUF",
+        "scale": "millió",
+        "valueKind": "comparison",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 9329,
+        "end": 9346
+      },
+      {
+        "raw": "256 ezer kilométer",
+        "value": 256000,
+        "parsedValue": 256,
+        "multiplier": 1000,
+        "canonicalValue": 256000,
+        "unit": "km",
+        "canonicalUnit": "km",
+        "scale": "ezer",
+        "valueKind": "comparison",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 9353,
+        "end": 9371
+      },
+      {
+        "raw": "4,4 millió forintot",
+        "value": 4.4,
+        "parsedValue": 4.4,
+        "multiplier": 1000000,
+        "canonicalValue": 4400000,
+        "unit": "million HUF",
+        "canonicalUnit": "HUF",
+        "scale": "millió",
+        "valueKind": "approximate",
+        "relationKind": null,
+        "qualifier": "approximate",
+        "start": 9393,
+        "end": 9412
+      },
+      {
+        "raw": "4,5 millió forintot",
+        "value": 4.5,
+        "parsedValue": 4.5,
+        "multiplier": 1000000,
+        "canonicalValue": 4500000,
+        "unit": "million HUF",
+        "canonicalUnit": "HUF",
+        "scale": "millió",
+        "valueKind": "approximate",
+        "relationKind": null,
+        "qualifier": "approximate",
+        "start": 9793,
+        "end": 9812
+      },
+      {
+        "raw": "75 ezer kilométerrel",
+        "value": 75000,
+        "parsedValue": 75,
+        "multiplier": 1000,
+        "canonicalValue": 75000,
+        "unit": "km",
+        "canonicalUnit": "km",
+        "scale": "ezer",
+        "valueKind": "approximate",
+        "relationKind": "delta",
+        "qualifier": "approximate",
+        "start": 10393,
+        "end": 10413
+      },
+      {
+        "raw": "900 ezer forintba",
+        "value": 900,
+        "parsedValue": 900,
+        "multiplier": 1000,
+        "canonicalValue": 900000,
+        "unit": "thousand HUF",
+        "canonicalUnit": "HUF",
+        "scale": "ezer",
+        "valueKind": "approximate",
+        "relationKind": null,
+        "qualifier": "approximate",
+        "start": 10793,
+        "end": 10810
+      },
+      {
+        "raw": "170 ezer kilométer",
+        "value": 170000,
+        "parsedValue": 170,
+        "multiplier": 1000,
+        "canonicalValue": 170000,
+        "unit": "km",
+        "canonicalUnit": "km",
+        "scale": "ezer",
+        "valueKind": "absolute",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 11068,
+        "end": 11086
+      }
+    ],
+    "claims": [
+      {
+        "source": "real-world-001",
+        "predicate": "DISTANCE",
+        "value": 153000,
+        "unit": "km",
+        "evidence": "Az eredeti hirdetés szerint akkor 153 ezer kilométer volt az autóban, a kereskedés pedig 13 700 eurót (az akkori árfolyamon számolva kb.",
+        "evidenceSpan": {
+          "start": 1172,
+          "end": 1241,
+          "textSpan": "Az eredeti hirdetés szerint akkor 153 ezer kilométer volt az autóban,"
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": {
+          "type": "reported",
+          "label": "eredeti hirdetés"
+        },
+        "temporal": null,
+        "status": "reported",
+        "subject": "vehicle",
+        "parsedValue": 153,
+        "multiplier": 1000,
+        "canonicalValue": 153000,
+        "canonicalUnit": "km",
+        "valueKind": "absolute"
+      },
+      {
+        "source": "real-world-001",
+        "predicate": "DISTANCE",
+        "value": 227000,
+        "unit": "km",
+        "evidence": "A cég azt válaszolta, hogy 2018. december elején járt náluk legutóbb az autó, és akkor 227 ezer kilométer volt benne, vagyis nagyjából 74 ezerrel több, mint amennyivel Zoltán később megvásárolta a német kereskedéstől.",
+        "evidenceSpan": {
+          "start": 3937,
+          "end": 3976,
+          "textSpan": "és akkor 227 ezer kilométer volt benne,"
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": {
+          "type": "reported",
+          "label": "cég"
+        },
+        "temporal": {
+          "year": "2018",
+          "month": "12",
+          "relative": null,
+          "sequence": "korábban"
+        },
+        "status": "reported",
+        "subject": "vehicle",
+        "parsedValue": 227,
+        "multiplier": 1000,
+        "canonicalValue": 227000,
+        "canonicalUnit": "km",
+        "valueKind": "absolute"
+      },
+      {
+        "source": "real-world-001",
+        "predicate": "DISTANCE",
+        "value": 168000,
+        "unit": "km",
+        "evidence": "Az új tulajdonos szerette volna visszaadni a Volvót Zoltánnak, és visszakapni az árát, de olvasónk erre nem volt hajlandó, mert tartott attól, hogy a visszatekert órájú autót nem fogja tudni eladni, hiszen ekkor továbbra is 168 ezer kilométer körüli értéket mutatott a műszerfal.",
+        "evidenceSpan": {
+          "start": 4386,
+          "end": 4466,
+          "textSpan": "hiszen ekkor továbbra is 168 ezer kilométer körüli értéket mutatott a műszerfal."
+        },
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": null,
+        "temporal": null,
+        "status": "displayed",
+        "subject": "vehicle",
+        "parsedValue": 168,
+        "multiplier": 1000,
+        "canonicalValue": 168000,
+        "canonicalUnit": "km",
+        "valueKind": "absolute"
+      },
+      {
+        "source": "real-world-001",
+        "predicate": "DISTANCE",
+        "value": 247000,
+        "unit": "km",
+        "evidence": "2020 júniusában váratlanul 168 ezerről 247 ezer kilométer közelébe ugrott a számláló a műszerfalon, de máig megválaszolatlan kérdés, hogy valójában mennyit mentek a Volvóval az óratekerés előtt.",
+        "evidenceSpan": {
+          "start": 7791,
+          "end": 7890,
+          "textSpan": "2020 júniusában váratlanul 168 ezerről 247 ezer kilométer közelébe ugrott a számláló a műszerfalon,"
+        },
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": null,
+        "temporal": {
+          "year": "2020",
+          "month": "06",
+          "relative": null,
+          "sequence": null
+        },
+        "status": "displayed",
+        "subject": "vehicle",
+        "parsedValue": 247,
+        "multiplier": 1000,
+        "canonicalValue": 247000,
+        "canonicalUnit": "km",
+        "valueKind": "absolute"
+      },
+      {
+        "source": "real-world-001",
+        "predicate": "DISTANCE",
+        "value": 257000,
+        "unit": "km",
+        "evidence": "Arra jutott, hogy az nagyjából összesen 257 ezer kilométer lehetett az eljárás idején.",
+        "evidenceSpan": {
+          "start": 8164,
+          "end": 8237,
+          "textSpan": "hogy az nagyjából összesen 257 ezer kilométer lehetett az eljárás idején."
+        },
+        "polarity": "affirmed",
+        "modality": "possible",
+        "conditional": false,
+        "uncertainty": true,
+        "attribution": null,
+        "temporal": {
+          "year": null,
+          "month": null,
+          "relative": null,
+          "sequence": "az eljárás idején"
+        },
+        "status": "estimate",
+        "subject": "vehicle",
+        "parsedValue": 257,
+        "multiplier": 1000,
+        "canonicalValue": 257000,
+        "canonicalUnit": "km",
+        "valueKind": "approximate"
+      },
+      {
+        "source": "real-world-001",
+        "predicate": "CLAIM_AMOUNT",
+        "value": 1.5,
+        "unit": "million HUF",
+        "evidence": "A vevő ügyvédje ezután már nem az autó visszavásárlását kérte Zoltántól, hanem azt, hogy térítse meg az addigi javítások költségét, illetve a Volvo adásvételkor ismert és valós futásteljesítménye közti különbségből adódó piaci értékkülönbséget, vagyis összesen 1,5 millió forintot.",
+        "evidenceSpan": {
+          "start": 8674,
+          "end": 8710,
+          "textSpan": "vagyis összesen 1,5 millió forintot."
+        },
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": {
+          "type": "expert",
+          "label": "vevő ügyvédje ezután"
+        },
+        "temporal": {
+          "year": null,
+          "month": null,
+          "relative": null,
+          "sequence": "ezután"
+        },
+        "status": "observed",
+        "subject": null,
+        "parsedValue": 1.5,
+        "multiplier": 1000000,
+        "canonicalValue": 1500000,
+        "canonicalUnit": "HUF",
+        "valueKind": "absolute"
+      },
+      {
+        "source": "real-world-001",
+        "predicate": "DISTANCE",
+        "value": 169000,
+        "unit": "km",
+        "evidence": "A kalkuláció szerint a V60-hoz hasonló autók 2020-as átlagos piaci értéke 169 ezer kilométerrel 4,8 millió forint volt, 256 ezer kilométer után pedig nagyjából 4,4 millió forintot ért ez a típus.",
+        "evidenceSpan": {
+          "start": 9233,
+          "end": 9352,
+          "textSpan": "A kalkuláció szerint a V60-hoz hasonló autók 2020-as átlagos piaci értéke 169 ezer kilométerrel 4,8 millió forint volt,"
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": {
+          "type": "reported",
+          "label": "kalkuláció"
+        },
+        "temporal": {
+          "year": "2020",
+          "month": null,
+          "relative": null,
+          "sequence": null
+        },
+        "status": "comparison",
+        "subject": "reference_class",
+        "parsedValue": 169,
+        "multiplier": 1000,
+        "canonicalValue": 169000,
+        "canonicalUnit": "km",
+        "valueKind": "comparison"
+      },
+      {
+        "source": "real-world-001",
+        "predicate": "DISTANCE",
+        "value": 256000,
+        "unit": "km",
+        "evidence": "A kalkuláció szerint a V60-hoz hasonló autók 2020-as átlagos piaci értéke 169 ezer kilométerrel 4,8 millió forint volt, 256 ezer kilométer után pedig nagyjából 4,4 millió forintot ért ez a típus.",
+        "evidenceSpan": {
+          "start": 9353,
+          "end": 9376,
+          "textSpan": "256 ezer kilométer után"
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": {
+          "type": "reported",
+          "label": "kalkuláció"
+        },
+        "temporal": {
+          "year": "2020",
+          "month": null,
+          "relative": null,
+          "sequence": null
+        },
+        "status": "comparison",
+        "subject": "reference_class",
+        "parsedValue": 256,
+        "multiplier": 1000,
+        "canonicalValue": 256000,
+        "canonicalUnit": "km",
+        "valueKind": "comparison"
+      },
+      {
+        "source": "real-world-001",
+        "predicate": "CLAIM_AMOUNT",
+        "value": 4.5,
+        "unit": "million HUF",
+        "evidence": "Zoltán kétségbe van esve, mert az alaptartozását és ennek kamatait összegezve körülbelül 4,5 millió forintot kell kifizetnie az idén június végén született másodfokú ítélet után.",
+        "evidenceSpan": {
+          "start": 9730,
+          "end": 9882,
+          "textSpan": "mert az alaptartozását és ennek kamatait összegezve körülbelül 4,5 millió forintot kell kifizetnie az idén június végén született másodfokú ítélet után."
+        },
+        "polarity": "affirmed",
+        "modality": "possible",
+        "conditional": false,
+        "uncertainty": true,
+        "attribution": null,
+        "temporal": {
+          "year": null,
+          "month": "06",
+          "relative": null,
+          "sequence": "június végén"
+        },
+        "status": "estimate",
+        "subject": null,
+        "parsedValue": 4.5,
+        "multiplier": 1000000,
+        "canonicalValue": 4500000,
+        "canonicalUnit": "HUF",
+        "valueKind": "approximate"
+      },
+      {
+        "source": "real-world-001",
+        "predicate": "DISTANCE",
+        "value": 170000,
+        "unit": "km",
+        "evidence": "A vevő által a holland cégtől kapott információk egyike Zoltán szerint azt igazolta, hogy a valós 170 ezer kilométer futásteljesítménynél is kicserélték a Volvo vezérléskészletét, ezért felmerül a kérdés, hogy az mennyire volt időszerű, amikor az itteni vevő elvégeztette a szerelőjével.",
+        "evidenceSpan": {
+          "start": 11055,
+          "end": 11149,
+          "textSpan": "hogy a valós 170 ezer kilométer futásteljesítménynél is kicserélték a Volvo vezérléskészletét,"
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": {
+          "type": "reported",
+          "label": "Zoltán"
+        },
+        "temporal": null,
+        "status": "reported",
+        "subject": "vehicle",
+        "parsedValue": 170,
+        "multiplier": 1000,
+        "canonicalValue": 170000,
+        "canonicalUnit": "km",
+        "valueKind": "absolute"
+      }
+    ],
+    "relations": [
+      {
+        "subject": "Zoltán",
+        "predicate": "ACQUIRED",
+        "object": "Volvo V60 PHEV",
+        "confidence": 0.96,
+        "evidence": "Zoltán 2019 májusában vásárolt egy 2014-es évjáratú Volvo V60 PHEV"
+      }
+    ],
+    "events": [
+      {
+        "title": "Adásvétel",
+        "source": "real-world-001",
+        "evidence": "Olvasónk, Zoltán 2019 májusában vásárolt egy 2014-es évjáratú Volvo V60 PHEV plug-in hibrid autót egy berlini kereskedésben.",
+        "participants": [
+          "Volvo V60 PHEV",
+          "Zoltán"
+        ],
+        "status": "completed"
+      },
+      {
+        "title": "Szerződés",
+        "source": "real-world-001",
+        "evidence": "A vevő, Lajos az átadás előtt átnézte és kipróbálta a V60-at, és mivel nem talált rajta hibát, megállapodott Zoltánnal és feleségével.",
+        "participants": [
+          "Lajos",
+          "Zoltán"
+        ],
+        "status": "completed"
+      },
+      {
+        "title": "Mérési érték változása",
+        "source": "real-world-001",
+        "evidence": "5,2 millió forintot fizetett a dízelmotoros kombiért, aminek a kilométer-számlálója ekkor 168 ezret mutatott.",
+        "participants": [],
+        "status": "observed"
+      },
+      {
+        "title": "Javítás",
+        "source": "real-world-001",
+        "evidence": "A Volvo új tulajdonosa 2020 májusában kicseréltette a vezérlést, a vízpumpát, a féktárcsákat és betéteket, valamint elvégeztette az éves karbantartást is, hogy megóvja az autó állapotát.",
+        "participants": [],
+        "status": "completed"
+      },
+      {
+        "title": "Követelés",
+        "source": "real-world-001",
+        "evidence": "Ügyvédet fogadott, aki szerződésszegésre hivatkozva követelte az autó visszavásárlását.",
+        "participants": [],
+        "status": "reported"
+      },
+      {
+        "title": "Peres eljárás",
+        "source": "real-world-001",
+        "evidence": "Zoltán később a követelésekről szóló fizetési meghagyásra reagálva ellentmondással élt, majd az ügyből per lett.",
+        "participants": [
+          "Zoltán"
+        ],
+        "status": "completed"
+      },
+      {
+        "title": "Bírósági döntés",
+        "source": "real-world-001",
+        "evidence": "Később a bíróság megállapította, hogy a szerződést magánszemélyek kötötték, vagyis nem adott helyt a fogyasztói szerződéssel kapcsolatos érvelésnek.",
+        "participants": [],
+        "status": "completed"
+      }
+    ],
+    "conflicts": [],
+    "changes": [
+      {
+        "kind": "delta",
+        "changeKind": "delta",
+        "property": "DISTANCE",
+        "value": 74000,
+        "delta": 74000,
+        "unit": "number",
+        "direction": "increase",
+        "approximate": true,
+        "subject": null,
+        "baseline": null,
+        "from": null,
+        "to": null,
+        "time": {
+          "year": "2018",
+          "month": "12",
+          "relative": null,
+          "sequence": "később"
+        },
+        "status": "possible",
+        "attribution": {
+          "type": "reported",
+          "label": "cég"
+        },
+        "uncertainty": true,
+        "evidence": {
+          "start": 3994,
+          "end": 4009,
+          "textSpan": "74 ezerrel több"
+        }
+      },
+      {
+        "kind": "delta",
+        "changeKind": "delta",
+        "property": "DISTANCE",
+        "value": 75000,
+        "delta": 75000,
+        "unit": "km",
+        "direction": "increase",
+        "approximate": true,
+        "subject": "vehicle",
+        "baseline": null,
+        "from": null,
+        "to": null,
+        "time": null,
+        "status": "possible",
+        "attribution": null,
+        "uncertainty": true,
+        "evidence": {
+          "start": 10393,
+          "end": 10422,
+          "textSpan": "75 ezer kilométerrel magasabb"
+        }
+      },
+      {
+        "kind": "change",
+        "changeKind": "from_to",
+        "property": "DISTANCE",
+        "from": 168000,
+        "to": 247000,
+        "unit": "km",
+        "direction": "increase",
+        "approximate": true,
+        "subject": "vehicle",
+        "time": {
+          "year": "2020",
+          "month": "06",
+          "relative": null,
+          "sequence": null
+        },
+        "status": "observed",
+        "attribution": null,
+        "uncertainty": false,
+        "evidence": {
+          "start": 7818,
+          "end": 7864,
+          "textSpan": "168 ezerről 247 ezer kilométer közelébe ugrott"
+        }
+      }
+    ],
+    "omissions": []
+  }
+}
