@@ -67,6 +67,7 @@
 - Staging DB backup és restore próba kötelező, legalább egy másik storage helyre másolva.
 - Monitor: public liveness, protected readiness, DB connections, worker heartbeat, pending/failed/stale article, RSS failures, disk, memory, backup age.
 - Validation sorrend: clean OS → Node/npm → MySQL → migration 001→060 → retention dry-run/execute acceptance → build → services → HTTPS → readiness → browser/auth → Premium mock/entitlement → normal RSS → backup/restore → rollback → load → worker+read.
+- Local retention runtime gate completed: disposable MySQL 8.0.46, migration 001→060 and 059→060, retention lifecycle/rollback/concurrency PASS; remote staging remains a separate environment step.
 
 ## Rollback
 

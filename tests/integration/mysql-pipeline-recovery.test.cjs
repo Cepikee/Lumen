@@ -130,7 +130,7 @@ test("MySQL 8 recovery integration and concurrency suite", { skip: !enabled }, a
       assert.deepEqual(await checkSchemaReadiness(connection), { ready: true, latestRequiredVersion: "060", missing: [] });
       const [[ledger]] = await connection.execute("SELECT COUNT(*) count,MAX(version) latest FROM schema_migrations");
       assert.equal(Number(ledger.count), migrations.length);
-      assert.equal(ledger.latest, "059");
+      assert.equal(ledger.latest, "060");
     });
     await resetDatabase(connection);
     await t.test("existing 032 schema upgrades to the V2 latest without changing prior migration checksums", async () => {

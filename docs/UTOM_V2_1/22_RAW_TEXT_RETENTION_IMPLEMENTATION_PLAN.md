@@ -45,7 +45,9 @@ Az internal operational snapshot retention metrikákat tartalmaz: legutóbbi eli
 - Migration chain: 001→060 statikusan contiguous és safe; readiness 060-ra frissítve; 059 és 061 fail-closed.
 - M17 backfill regression: 7/7 PASS, beleértve explicit raw-unavailable ágat.
 - TypeScript, import check és offline suite a teljes quality körben futtatandó a commit előtt.
-- MySQL 8 fresh/upgrade/idempotence, transaction rollback és duplicate-worker acceptance a `23_RAW_TEXT_RETENTION_ACCEPTANCE.md` szerint izolált környezetben futtatandó.
+- MySQL 8 fresh/upgrade/idempotence PASS; a retention lifecycle, rollback és duplicate-worker acceptance valódi MySQL 8.0.46 runtime-on PASS.
+- A teljes MySQL integration suite: 56 PASS / 0 FAIL / 3 dokumentált SKIP (FFmpeg capability és két külön opt-in HTTP teszt).
 
 **RAW FULL-TEXT RETENTION IMPLEMENTED: YES — code path and targeted regressions complete.**
+**RAW FULL-TEXT RETENTION MYSQL RUNTIME: PASS — disposable loopback MySQL 8.0.46, schema 060.**
 Production deploy, VPS, payment, paid AI és source-policy bypass ebben a körben nem történt.

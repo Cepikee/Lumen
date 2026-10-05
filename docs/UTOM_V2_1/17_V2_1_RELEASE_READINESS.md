@@ -73,6 +73,7 @@ A deployhoz még külön owner/infrastruktúra kapu kell:
 
 - Owner policy baseline: retention target 24 óra successful / 7 nap failed-retry; paywall bypass tilos; bizonytalan source HOLD; 444 canonical ingestion OFF; paid AI és analytics OFF; FFmpeg deferred; backup 7 daily / 4 weekly / 3 monthly, off-host és restore rehearsal kötelező.
 - Raw/full-text retention technikai állapot: `RAW FULL-TEXT RETENTION IMPLEMENTED: YES`. A 24 órás/7 napos cleanup külön, dry-run alapértelmezett, lockolt és auditált workerben működik; acceptance: `docs/UTOM_V2_1/23_RAW_TEXT_RETENTION_ACCEPTANCE.md`.
+- Raw/full-text retention runtime gate: `PASS` MySQL 8.0.46-on; fresh/upgrade/idempotence, lifecycle, rollback és duplicate-worker ellenőrzések zöldek.
 - Source policy, payment, staging email, hosting, monitoring alerts és production domain rollout státusza az owner döntési dokumentumban szerepel.
 - Remote staging manifest: `docs/UTOM_V2_1/21_REMOTE_STAGING_BUILD_MANIFEST.md`.
 - `REMOTE STAGING READY TO BUILD: NO` – a provisioning host, staging secrets, email sink, backup target és owner/infra hozzáférések még nincsenek megadva.

@@ -36,7 +36,7 @@ test("M1.4 MySQL schema matches the M1.3 fixture", { skip: !enabled }, async () 
     const migrations = loadMigrations();
     const applied = await applyMigrations(connection, migrations);
     assert.equal(applied.length, migrations.length);
-    assert.equal(migrations.at(-1).version, "059");
+    assert.equal(migrations.at(-1).version, "060");
     assert.deepEqual(await applyMigrations(connection, migrations), []);
 
     const [tableRows] = await connection.query("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME LIKE 'v2\\_%'");
@@ -44,7 +44,7 @@ test("M1.4 MySQL schema matches the M1.3 fixture", { skip: !enabled }, async () 
     for (const tableName of Object.keys(contract.tables)) assert.equal(actualV2Tables.has(tableName), true, `${tableName} exists`);
     const [[freshLedger]] = await connection.execute("SELECT COUNT(*) count, MAX(version) latest FROM schema_migrations");
     assert.equal(Number(freshLedger.count), migrations.length);
-    assert.equal(freshLedger.latest, "059");
+    assert.equal(freshLedger.latest, "060");
     const [legacyTables] = await connection.query("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME IN ('sources','articles')");
     assert.deepEqual(legacyTables.map((row) => row.TABLE_NAME).sort(), ["articles", "sources"]);
 

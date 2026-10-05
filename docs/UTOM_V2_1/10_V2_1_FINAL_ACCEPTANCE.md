@@ -88,7 +88,7 @@
 - Large article/V2 parser bounded fixture: PASS.
 - Internal operational snapshot and public liveness contract: PASS.
 - `V21-OPS-F001` wrong AI escalation table: FIXED with unit and MySQL regression coverage.
-- Final validation: offline 395/395, MySQL 56 PASS/0 FAIL plus FFmpeg capability skip, TypeScript PASS, ESLint 0 errors, import PASS, npm check PASS, build 74/74 PASS, npm audit 0.
+- Final validation: offline 416/416, MySQL 56 PASS/0 FAIL plus 3 documented skips, including the FFmpeg capability skip; raw-text retention runtime 1/1 PASS on disposable MySQL 8.0.46, TypeScript PASS, ESLint 0 errors, import PASS, npm check PASS, build PASS, npm audit 0.
 
 ## FINAL PRODUCT + RELEASE CLOSURE – 2026-10-04
 

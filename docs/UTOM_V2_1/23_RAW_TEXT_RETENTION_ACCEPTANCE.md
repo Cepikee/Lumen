@@ -25,8 +25,17 @@ Schema `060`, worker `scripts/raw-text-retention.cjs`, runtime `lib/raw-text-ret
 
 ## Evidence
 
-The unit matrix is implemented in `tests/unit/raw-text-retention.test.cjs`. The isolated MySQL gate must execute fresh `001→060`, upgrade `059→060`, migration idempotence, the 22 scenarios above, a concurrent duplicate-worker run, forced rollback, canonical V2 lifecycle, read models and Premium. No raw body may appear in stdout, audit metadata or error logs.
+The unit matrix is implemented in `tests/unit/raw-text-retention.test.cjs`. The isolated MySQL gate executed fresh `001→060`, upgrade `059→060`, migration idempotence, the retention lifecycle scenarios, concurrent duplicate-worker handling and forced rollback on disposable loopback MySQL 8.0.46. The complete MySQL integration suite finished with 56 PASS / 0 FAIL / 3 documented SKIP. No raw body appeared in stdout, audit metadata or error logs.
+
+## Runtime evidence
+
+- Vendor/version: MySQL 8.0.46 (Ubuntu 24.04), disposable datadir, loopback port 3387.
+- Fresh migration `001→060`: PASS.
+- Upgrade migration `059→060` with existing article, user and V2 entity data: PASS; `content_text` preserved.
+- Migration idempotence and readiness at `060`: PASS.
+- Retention lifecycle, evidence-safe purge, rollback and duplicate-worker runtime test: PASS.
+- Full MySQL integration suite: 56 PASS / 0 FAIL / 3 documented SKIP.
 
 ## Release decision
 
-`RAW FULL-TEXT RETENTION IMPLEMENTED: YES` for code and offline regression scope. `PRODUCTION DEPLOY EXECUTED: NO`. Remote staging and production acceptance remain environment gates, not code changes.
+`RAW FULL-TEXT RETENTION IMPLEMENTED: YES`. `RAW FULL-TEXT RETENTION MYSQL RUNTIME: PASS`. `PRODUCTION DEPLOY EXECUTED: NO`. Remote staging and production deployment remain separate environment gates.

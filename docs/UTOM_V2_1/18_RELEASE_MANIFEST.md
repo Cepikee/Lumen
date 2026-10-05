@@ -8,6 +8,7 @@
 - Node: `24.19.0`
 - Next.js: `16.3.6`
 - MySQL target: `8.x`; isolated evidence `8.0.46`
+- Raw-text retention runtime acceptance: PASS on disposable loopback MySQL 8.0.46, schema `060`.
 - Build: `75` route generation PASS
 - Offline suite: `401/401 PASS`
 

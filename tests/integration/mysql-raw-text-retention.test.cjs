@@ -50,7 +50,7 @@ test("MySQL raw-text retention lifecycle, rollback and duplicate workers", { ski
     assert.ok(youngRow.content_text);
     assert.equal(completeRow.content_text, null);
     assert.equal(completeRow.content_hash, "a".repeat(64));
-    assert.match(completeRow.url_canonical, /retention\/complete/);
+    assert.equal(completeRow.url_canonical, "https://retention.invalid/complete");
     const [[summary]] = await connection.execute("SELECT content FROM summaries WHERE article_id=?", [complete]);
     assert.equal(summary.content, "derived summary");
     const again = await runRetentionBatch(pool, { dryRun: false, batchSize: 50, now, workerId: "retention-b" });
