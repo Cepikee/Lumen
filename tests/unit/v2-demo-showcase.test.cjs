@@ -24,3 +24,9 @@ test("V2 demo user selector is allowlisted and production route stays guarded", 
   assert.match(route, /return new NextResponse\(null, \{ status: 404 \}\)/);
   assert.match(page, /notFound\(\)/);
 });
+
+test("demo claims stay attached to the three showcased articles", () => {
+  const bootstrap = fs.readFileSync(path.join(__dirname, "../../scripts/dev-demo-bootstrap.cjs"), "utf8");
+  assert.match(bootstrap, /const articleIndex = isNumericConflict \? \(index === 2 \? 0 : 1\) : index % 3;/);
+  assert.doesNotMatch(bootstrap, /const articleIndex = isNumericConflict \? \(index === 2 \? 0 : 1\) : index;/);
+});

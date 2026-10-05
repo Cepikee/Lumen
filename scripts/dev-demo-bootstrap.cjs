@@ -148,7 +148,7 @@ async function main() {
     for (let index = 0; index < claimTypes.length; index++) {
       const type = claimTypes[index];
       const isNumericConflict = type === "numeric";
-      const articleIndex = isNumericConflict ? (index === 2 ? 0 : 1) : index;
+      const articleIndex = isNumericConflict ? (index === 2 ? 0 : 1) : index % 3;
       const sourceIndex = isNumericConflict ? (index === 2 ? 0 : 1) : index % sources.length;
       const value = isNumericConflict ? (index === 2 ? "120" : "150") : type === "unit" ? "100" : type === "boolean" ? "true" : type === "entity" ? "Demo szervezet" : `demo-${type}`;
       const [result] = await connection.execute("INSERT INTO v2_claims (subject_entity_id,predicate,object_entity_id,value_json,normalized_value,claim_type,article_id,source_id,valid_from,observed_at,publication_time,status,confidence,claim_group_id,observation_key,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [entityIds[0], isNumericConflict || type === "unit" ? "population" : `predicate_${type}`, type === "entity" ? entityIds[1] : null, JSON.stringify({ value, unit: type === "unit" ? "km" : type === "numeric" ? "million HUF" : null }), value, type, articleIds[articleIndex], sourceId[sources[sourceIndex][0]], createdAt, createdAt, createdAt, "observed", index === 3 ? 0.62 : 0.88, isNumericConflict ? claimGroupId : null, `claim-demo-${index + 1}`, createdAt, createdAt]);
@@ -156,7 +156,7 @@ async function main() {
     }
     await insertMany(connection, "v2_claim_evidence", ["claim_id", "article_id", "source_id", "text_span", "span_hash", "evidence_type", "support_type", "confidence", "publication_time", "created_at"], claimIds.map((id, index) => {
       const isNumericConflict = claimTypes[index] === "numeric";
-      const articleIndex = isNumericConflict ? (index === 2 ? 0 : 1) : index;
+      const articleIndex = isNumericConflict ? (index === 2 ? 0 : 1) : index % 3;
       const sourceIndex = isNumericConflict ? (index === 2 ? 0 : 1) : index % sources.length;
       return [id, articleIds[articleIndex], sourceId[sources[sourceIndex][0]], `Bizonyító szövegrészlet ${index + 1}`, crypto.createHash("sha256").update(`claim-${index + 1}`).digest("hex"), index === 9 ? "uncertainty" : "quote", index === 10 ? "contradict" : "support", index === 3 ? 0.62 : 0.88, createdAt, createdAt];
     }));
