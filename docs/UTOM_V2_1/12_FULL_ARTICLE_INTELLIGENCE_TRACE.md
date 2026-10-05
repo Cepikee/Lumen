@@ -43,7 +43,7 @@ Mindhárom relationhez egy-egy relation evidence rekord tartozik.
 
 ## 15. Claims és evidence
 
-A fixture 12 claimet tárol: shared, source_only, két numeric, categorical, boolean, entity, temporal, attribution, uncertain, negated és unit típusokat. A numeric eltérés `100` és `120`, az unit claim `100 km`; minden claimhez külön `v2_claim_evidence` sor és fixture span tartozik. A canonical article (`327`) claimje: `claimId=85`, `type=shared`, evidence span „Bizonyító szövegrészlet 1”, source `telex.hu`, confidence `0.88`.
+A fixture 12 claimet tárol: shared, source_only, két numeric, categorical, boolean, entity, temporal, attribution, uncertain, negated és unit típusokat. A numeric eltérés `120` és `150`, az unit claim `100 km`; minden claimhez külön `v2_claim_evidence` sor és fixture span tartozik. A canonical article (`327`) claimje: `claimId=85`, `type=shared`, evidence span „Bizonyító szövegrészlet 1”, source `telex.hu`, confidence `0.88`.
 
 ## 16. Claim group és események
 
@@ -64,7 +64,7 @@ Az event 20 timeline-ja 25 public article itemet tartalmaz, ordering key `0001`�
 
 | Conflict | Claim A/B | Típus | Severity | Winner |
 |---|---|---|---|---|
-| 13 | population 100 vs 120 | numeric | high | nincs |
+| 13 | population 120 vs 150 | numeric | high | nincs |
 | 14 | categorical source disagreement | categorical | medium | nincs |
 
 A canonical policy mindkét megfigyelést megőrzi; a rendszer nem mondja meg, melyik az igaz. A confidence-history táblában a változás oka és időpontja auditálható; fizetős provider-hívás nem történt.

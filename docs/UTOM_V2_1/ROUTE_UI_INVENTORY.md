@@ -26,6 +26,7 @@
 | V2 timeline | `/api/v2/timelines/[ownerType]/[ownerId]` | nem | részben | igen | API inventory | API inventory | audit előtt |
 | V2 source comparison | `/api/v2/source-comparison` | nem | részben | igen | API inventory | API inventory | audit előtt |
 | V2 premium intelligence | `/api/v2/premium/intelligence` | igen | igen | igen | API inventory | API inventory | audit előtt |
+| V2 Intelligence demo | `/dev/v2-demo` + `/api/dev/v2-demo` | demo user | demo preview | igen | acceptance PASS | responsive CSS | csak loopback + `utom_dev` |
 | Belső health | `/api/internal/health` | belső | nem | nem | API inventory | N/A | audit előtt |
 
 ## Közvetlen függőségek
@@ -37,8 +38,8 @@
 | Insights | InsightFilters, InsightList, charts, useInsights | insights/* |
 | V2 cikk | V2ArticleContextPanel, integration panels, useV2ArticleContext | v2/articles, timelines, entities, events |
 | V2 Premium | V2PremiumIntelligencePanel, useV2PremiumIntelligence | v2/premium/intelligence |
-| Helyi demo | `scripts/dev-demo-bootstrap.cjs` | MySQL 8, migrations 001–060 |
+| Helyi demo | `scripts/dev-demo-bootstrap.cjs`, `/dev/v2-demo` | MySQL 8, migrations 001–060, explicit loopback guard |
 
 ## Coverage státusz
 
-Ez az inventory a V2.1 audit kiindulópontja. A valódi Chrome acceptance és a hibajavítási findingok külön fázisban következnek; jelenleg nincs vizuális PASS állítás.
+Ez az inventory a V2.1 audit kiindulópontja. A `/dev/v2-demo` lokális acceptance ellenőrzése megtörtént: a route a kontrollált fixture-ből renderel, a premium/free állapotváltás működik, a conflict panel megjelenik, és böngészőkonzol-hiba nem maradt. A route továbbra sem publikus és productionben 404.
