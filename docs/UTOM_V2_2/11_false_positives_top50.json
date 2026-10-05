@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-10-05T08:49:24.238Z",
+  "generatedAt": "2026-10-05T09:41:21.735Z",
   "count": 50,
   "integrityTaxonomy": {
     "TRUE_UNSUPPORTED": 0,
-    "SUPPORTED_BUT_NOT_IN_GOLD": 41,
+    "SUPPORTED_BUT_NOT_IN_GOLD": 48,
     "SEMANTIC_MISMATCH": 0,
-    "DUPLICATE": 9,
+    "DUPLICATE": 2,
     "EVALUATOR_MISMATCH": 0
   },
   "taxonomy": {
     "attribution_error": 1,
     "entity_overgeneration": 4,
     "negation_or_abstention": 3,
-    "numeric_scope": 4,
-    "temporal_binding": 28,
-    "wrong_predicate": 10
+    "numeric_scope": 3,
+    "temporal_binding": 17,
+    "wrong_predicate": 22
   },
   "rows": [
     {
@@ -338,53 +338,6 @@
       "rootCauseComponent": "lib/v2/deterministic-semantic.js"
     },
     {
-      "scenarioId": "V22-D04",
-      "field": "claims",
-      "source": "24.hu",
-      "snippet": "A tároló teljesítménye 40 megawattóra.",
-      "prediction": {
-        "source": "24.hu",
-        "predicate": "CAPACITY",
-        "value": 40,
-        "unit": "MWh",
-        "evidence": "A tároló teljesítménye 40 megawattóra.",
-        "evidenceSpan": {
-          "start": 118,
-          "end": 156,
-          "textSpan": "A tároló teljesítménye 40 megawattóra."
-        },
-        "polarity": "affirmed",
-        "modality": "asserted",
-        "conditional": false,
-        "uncertainty": false,
-        "attribution": null
-      },
-      "nearestExpected": {
-        "source": "24.hu",
-        "predicate": "CAPACITY",
-        "sentence": "A tároló teljesítménye 40 megawattóra.",
-        "evidence": "teljesítménye 40 megawattóra",
-        "value": 45,
-        "unit": "MWh",
-        "attribution": {
-          "type": "official",
-          "label": "beruházó"
-        },
-        "modality": "asserted",
-        "polarity": "affirmed",
-        "uncertainty": false,
-        "conditional": false,
-        "temporal": null,
-        "scope": null,
-        "eventId": null,
-        "id": "V22-D04:claim:24.hu:1"
-      },
-      "category": "numeric_scope",
-      "integrityClassification": "DUPLICATE",
-      "classificationReason": "same canonical prediction identity is emitted more than once in the scenario",
-      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
-    },
-    {
       "scenarioId": "V22-S05",
       "field": "claims",
       "source": "telex.hu",
@@ -392,7 +345,7 @@
       "prediction": {
         "source": "telex.hu",
         "predicate": "OPENING_DATE",
-        "value": "június-1",
+        "value": "06-01",
         "unit": "date",
         "evidence": "A központot június 1-jén nyithatják meg.",
         "evidenceSpan": {
@@ -439,7 +392,7 @@
       "prediction": {
         "source": "24.hu",
         "predicate": "OPENING_DATE",
-        "value": "június-15",
+        "value": "06-15",
         "unit": "date",
         "evidence": "A megnyitás várható időpontja június 15.",
         "evidenceSpan": {
@@ -518,52 +471,8 @@
         "id": "V22-D01:claim:telex.hu:1"
       },
       "category": "temporal_binding",
-      "integrityClassification": "DUPLICATE",
-      "classificationReason": "same canonical prediction identity is emitted more than once in the scenario",
-      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
-    },
-    {
-      "scenarioId": "V22-D01",
-      "field": "claims",
-      "source": "telex.hu",
-      "snippet": "A korábbi tervben áprilisi kezdés szerepelt.",
-      "prediction": {
-        "source": "telex.hu",
-        "predicate": "PROJECT_START",
-        "value": "április",
-        "unit": "date",
-        "evidence": "A korábbi tervben áprilisi kezdés szerepelt.",
-        "evidenceSpan": {
-          "start": 459,
-          "end": 503,
-          "textSpan": "A korábbi tervben áprilisi kezdés szerepelt."
-        },
-        "polarity": "affirmed",
-        "modality": "plan",
-        "conditional": false,
-        "uncertainty": false,
-        "attribution": null
-      },
-      "nearestExpected": {
-        "source": "telex.hu",
-        "predicate": "PROJECT_COST",
-        "sentence": "A program első ütemének költsége 240 millió forint.",
-        "evidence": "első ütemének költsége 240 millió forint",
-        "value": 240,
-        "unit": "million HUF",
-        "attribution": null,
-        "modality": "asserted",
-        "polarity": "affirmed",
-        "uncertainty": false,
-        "conditional": false,
-        "temporal": null,
-        "scope": null,
-        "eventId": null,
-        "id": "V22-D01:claim:telex.hu:1"
-      },
-      "category": "temporal_binding",
-      "integrityClassification": "DUPLICATE",
-      "classificationReason": "same canonical prediction identity is emitted more than once in the scenario",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
       "rootCauseComponent": "lib/v2/deterministic-semantic.js"
     },
     {
@@ -606,52 +515,8 @@
         "id": "V22-D01:claim:24.hu:1"
       },
       "category": "temporal_binding",
-      "integrityClassification": "DUPLICATE",
-      "classificationReason": "same canonical prediction identity is emitted more than once in the scenario",
-      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
-    },
-    {
-      "scenarioId": "V22-D01",
-      "field": "claims",
-      "source": "24.hu",
-      "snippet": "A korábbi tervben áprilisi kezdés szerepelt.",
-      "prediction": {
-        "source": "24.hu",
-        "predicate": "PROJECT_START",
-        "value": "április",
-        "unit": "date",
-        "evidence": "A korábbi tervben áprilisi kezdés szerepelt.",
-        "evidenceSpan": {
-          "start": 456,
-          "end": 500,
-          "textSpan": "A korábbi tervben áprilisi kezdés szerepelt."
-        },
-        "polarity": "affirmed",
-        "modality": "plan",
-        "conditional": false,
-        "uncertainty": false,
-        "attribution": null
-      },
-      "nearestExpected": {
-        "source": "24.hu",
-        "predicate": "PROJECT_COST",
-        "sentence": "A program első ütemének költsége 240 millió forint.",
-        "evidence": "első ütemének költsége 240 millió forint",
-        "value": 245,
-        "unit": "million HUF",
-        "attribution": null,
-        "modality": "asserted",
-        "polarity": "affirmed",
-        "uncertainty": false,
-        "conditional": false,
-        "temporal": null,
-        "scope": null,
-        "eventId": null,
-        "id": "V22-D01:claim:24.hu:1"
-      },
-      "category": "temporal_binding",
-      "integrityClassification": "DUPLICATE",
-      "classificationReason": "same canonical prediction identity is emitted more than once in the scenario",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
       "rootCauseComponent": "lib/v2/deterministic-semantic.js"
     },
     {
@@ -754,8 +619,8 @@
         "unit": "date",
         "evidence": "A mobil ambulancia májusban indulhat, ha lesz személyzet.",
         "evidenceSpan": {
-          "start": 148,
-          "end": 205,
+          "start": 164,
+          "end": 221,
           "textSpan": "A mobil ambulancia májusban indulhat, ha lesz személyzet."
         },
         "polarity": "affirmed",
@@ -767,15 +632,15 @@
       "nearestExpected": {
         "source": "telex.hu",
         "predicate": "WAITING_DAYS",
-        "sentence": "A hálózat 14 napos várólistát közölt.",
-        "evidence": "14 napos várólistát közölt",
+        "sentence": "A korábbi lista szerint 14 napos várólista szerepelt.",
+        "evidence": "14 napos várólista szerepelt",
         "value": 14,
         "unit": "day",
         "attribution": {
           "type": "official",
           "label": "kórházi hálózat"
         },
-        "modality": "asserted",
+        "modality": "plan",
         "polarity": "affirmed",
         "uncertainty": false,
         "conditional": false,
@@ -801,8 +666,8 @@
         "unit": "date",
         "evidence": "A mobil ambulancia májusban indulhat, ha lesz személyzet.",
         "evidenceSpan": {
-          "start": 145,
-          "end": 202,
+          "start": 165,
+          "end": 222,
           "textSpan": "A mobil ambulancia májusban indulhat, ha lesz személyzet."
         },
         "polarity": "affirmed",
@@ -814,15 +679,15 @@
       "nearestExpected": {
         "source": "24.hu",
         "predicate": "WAITING_DAYS",
-        "sentence": "A hálózat 14 napos várólistát közölt.",
-        "evidence": "14 napos várólistát közölt",
-        "value": 19,
+        "sentence": "A friss közlés a várólistát 9 napos értékre pontosította.",
+        "evidence": "várólistát 9 napos értékre pontosította",
+        "value": 9,
         "unit": "day",
         "attribution": {
           "type": "official",
           "label": "kórházi hálózat"
         },
-        "modality": "asserted",
+        "modality": "plan",
         "polarity": "affirmed",
         "uncertainty": false,
         "conditional": false,
@@ -927,138 +792,6 @@
     {
       "scenarioId": "V22-D03",
       "field": "claims",
-      "source": "telex.hu",
-      "snippet": "A korábbi tervben márciusi átadás szerepelt.",
-      "prediction": {
-        "source": "telex.hu",
-        "predicate": "DELIVERY_DATE",
-        "value": "március",
-        "unit": "date",
-        "evidence": "A korábbi tervben márciusi átadás szerepelt.",
-        "evidenceSpan": {
-          "start": 412,
-          "end": 456,
-          "textSpan": "A korábbi tervben márciusi átadás szerepelt."
-        },
-        "polarity": "affirmed",
-        "modality": "plan",
-        "conditional": false,
-        "uncertainty": false,
-        "attribution": null
-      },
-      "nearestExpected": {
-        "source": "telex.hu",
-        "predicate": "PROJECT_COST",
-        "sentence": "A program kerete 90 millió forint.",
-        "evidence": "program kerete 90 millió forint",
-        "value": 90,
-        "unit": "million HUF",
-        "attribution": null,
-        "modality": "asserted",
-        "polarity": "affirmed",
-        "uncertainty": false,
-        "conditional": false,
-        "temporal": null,
-        "scope": null,
-        "eventId": null,
-        "id": "V22-D03:claim:telex.hu:1"
-      },
-      "category": "temporal_binding",
-      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
-      "classificationReason": "source-grounded prediction has no matching gold observation",
-      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
-    },
-    {
-      "scenarioId": "V22-D03",
-      "field": "claims",
-      "source": "24.hu",
-      "snippet": "Az eszközátadás szeptemberben indulhat, ha a szállító teljesít.",
-      "prediction": {
-        "source": "24.hu",
-        "predicate": "DELIVERY_DATE",
-        "value": "szeptember",
-        "unit": "date",
-        "evidence": "Az eszközátadás szeptemberben indulhat, ha a szállító teljesít.",
-        "evidenceSpan": {
-          "start": 151,
-          "end": 214,
-          "textSpan": "Az eszközátadás szeptemberben indulhat, ha a szállító teljesít."
-        },
-        "polarity": "affirmed",
-        "modality": "conditional",
-        "conditional": true,
-        "uncertainty": false,
-        "attribution": null
-      },
-      "nearestExpected": {
-        "source": "24.hu",
-        "predicate": "PROJECT_COST",
-        "sentence": "A program kerete 90 millió forint.",
-        "evidence": "program kerete 90 millió forint",
-        "value": 95,
-        "unit": "million HUF",
-        "attribution": null,
-        "modality": "asserted",
-        "polarity": "affirmed",
-        "uncertainty": false,
-        "conditional": false,
-        "temporal": null,
-        "scope": null,
-        "eventId": null,
-        "id": "V22-D03:claim:24.hu:1"
-      },
-      "category": "temporal_binding",
-      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
-      "classificationReason": "source-grounded prediction has no matching gold observation",
-      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
-    },
-    {
-      "scenarioId": "V22-D03",
-      "field": "claims",
-      "source": "24.hu",
-      "snippet": "A korábbi tervben márciusi átadás szerepelt.",
-      "prediction": {
-        "source": "24.hu",
-        "predicate": "DELIVERY_DATE",
-        "value": "március",
-        "unit": "date",
-        "evidence": "A korábbi tervben márciusi átadás szerepelt.",
-        "evidenceSpan": {
-          "start": 409,
-          "end": 453,
-          "textSpan": "A korábbi tervben márciusi átadás szerepelt."
-        },
-        "polarity": "affirmed",
-        "modality": "plan",
-        "conditional": false,
-        "uncertainty": false,
-        "attribution": null
-      },
-      "nearestExpected": {
-        "source": "24.hu",
-        "predicate": "PROJECT_COST",
-        "sentence": "A program kerete 90 millió forint.",
-        "evidence": "program kerete 90 millió forint",
-        "value": 95,
-        "unit": "million HUF",
-        "attribution": null,
-        "modality": "asserted",
-        "polarity": "affirmed",
-        "uncertainty": false,
-        "conditional": false,
-        "temporal": null,
-        "scope": null,
-        "eventId": null,
-        "id": "V22-D03:claim:24.hu:1"
-      },
-      "category": "temporal_binding",
-      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
-      "classificationReason": "source-grounded prediction has no matching gold observation",
-      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
-    },
-    {
-      "scenarioId": "V22-D03",
-      "field": "claims",
       "source": "hvg.hu",
       "snippet": "Az eszközátadás szeptemberben indulhat, ha a szállító teljesít.",
       "prediction": {
@@ -1075,50 +808,6 @@
         "polarity": "affirmed",
         "modality": "conditional",
         "conditional": true,
-        "uncertainty": false,
-        "attribution": null
-      },
-      "nearestExpected": {
-        "source": "hvg.hu",
-        "predicate": "PROJECT_COST",
-        "sentence": "A program kerete 90 millió forint.",
-        "evidence": "program kerete 90 millió forint",
-        "value": 90,
-        "unit": "million HUF",
-        "attribution": null,
-        "modality": "asserted",
-        "polarity": "affirmed",
-        "uncertainty": false,
-        "conditional": false,
-        "temporal": null,
-        "scope": null,
-        "eventId": null,
-        "id": "V22-D03:claim:hvg.hu:1"
-      },
-      "category": "temporal_binding",
-      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
-      "classificationReason": "source-grounded prediction has no matching gold observation",
-      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
-    },
-    {
-      "scenarioId": "V22-D03",
-      "field": "claims",
-      "source": "hvg.hu",
-      "snippet": "A korábbi tervben márciusi átadás szerepelt.",
-      "prediction": {
-        "source": "hvg.hu",
-        "predicate": "DELIVERY_DATE",
-        "value": "március",
-        "unit": "date",
-        "evidence": "A korábbi tervben márciusi átadás szerepelt.",
-        "evidenceSpan": {
-          "start": 373,
-          "end": 417,
-          "textSpan": "A korábbi tervben márciusi átadás szerepelt."
-        },
-        "polarity": "affirmed",
-        "modality": "plan",
-        "conditional": false,
         "uncertainty": false,
         "attribution": null
       },
@@ -1203,8 +892,8 @@
         "unit": "date",
         "evidence": "A hálózati próba októberben indulhat, ha elkészül a csatlakozás.",
         "evidenceSpan": {
-          "start": 158,
-          "end": 222,
+          "start": 167,
+          "end": 231,
           "textSpan": "A hálózati próba októberben indulhat, ha elkészül a csatlakozás."
         },
         "polarity": "affirmed",
@@ -1216,15 +905,15 @@
       "nearestExpected": {
         "source": "24.hu",
         "predicate": "CAPACITY",
-        "sentence": "A tároló teljesítménye 40 megawattóra.",
-        "evidence": "teljesítménye 40 megawattóra",
-        "value": 45,
+        "sentence": "A beruházó a kapacitást 55 MWh-ra pontosította.",
+        "evidence": "kapacitást 55 MWh-ra pontosította",
+        "value": 55,
         "unit": "MWh",
         "attribution": {
           "type": "official",
           "label": "beruházó"
         },
-        "modality": "asserted",
+        "modality": "plan",
         "polarity": "affirmed",
         "uncertainty": false,
         "conditional": false,
@@ -1279,94 +968,6 @@
         "scope": null,
         "eventId": null,
         "id": "V22-D04:claim:hvg.hu:1"
-      },
-      "category": "temporal_binding",
-      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
-      "classificationReason": "source-grounded prediction has no matching gold observation",
-      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
-    },
-    {
-      "scenarioId": "V22-D05",
-      "field": "claims",
-      "source": "telex.hu",
-      "snippet": "A terhelési próba augusztusban indulhat, ha a síncsere lezárul.",
-      "prediction": {
-        "source": "telex.hu",
-        "predicate": "TRIAL_DATE",
-        "value": "augusztus",
-        "unit": "date",
-        "evidence": "A terhelési próba augusztusban indulhat, ha a síncsere lezárul.",
-        "evidenceSpan": {
-          "start": 148,
-          "end": 211,
-          "textSpan": "A terhelési próba augusztusban indulhat, ha a síncsere lezárul."
-        },
-        "polarity": "affirmed",
-        "modality": "conditional",
-        "conditional": true,
-        "uncertainty": false,
-        "attribution": null
-      },
-      "nearestExpected": {
-        "source": "telex.hu",
-        "predicate": "COMPLETION_PERCENT",
-        "sentence": "A híd javítása 70 százaléknál tart.",
-        "evidence": "javítása 70 százaléknál tart",
-        "value": 70,
-        "unit": "%",
-        "attribution": null,
-        "modality": "asserted",
-        "polarity": "affirmed",
-        "uncertainty": false,
-        "conditional": false,
-        "temporal": null,
-        "scope": null,
-        "eventId": null,
-        "id": "V22-D05:claim:telex.hu:1"
-      },
-      "category": "temporal_binding",
-      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
-      "classificationReason": "source-grounded prediction has no matching gold observation",
-      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
-    },
-    {
-      "scenarioId": "V22-D05",
-      "field": "claims",
-      "source": "24.hu",
-      "snippet": "A terhelési próba augusztusban indulhat, ha a síncsere lezárul.",
-      "prediction": {
-        "source": "24.hu",
-        "predicate": "TRIAL_DATE",
-        "value": "augusztus",
-        "unit": "date",
-        "evidence": "A terhelési próba augusztusban indulhat, ha a síncsere lezárul.",
-        "evidenceSpan": {
-          "start": 145,
-          "end": 208,
-          "textSpan": "A terhelési próba augusztusban indulhat, ha a síncsere lezárul."
-        },
-        "polarity": "affirmed",
-        "modality": "conditional",
-        "conditional": true,
-        "uncertainty": false,
-        "attribution": null
-      },
-      "nearestExpected": {
-        "source": "24.hu",
-        "predicate": "COMPLETION_PERCENT",
-        "sentence": "A híd javítása 70 százaléknál tart.",
-        "evidence": "javítása 70 százaléknál tart",
-        "value": 75,
-        "unit": "%",
-        "attribution": null,
-        "modality": "asserted",
-        "polarity": "affirmed",
-        "uncertainty": false,
-        "conditional": false,
-        "temporal": null,
-        "scope": null,
-        "eventId": null,
-        "id": "V22-D05:claim:24.hu:1"
       },
       "category": "temporal_binding",
       "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
@@ -1490,8 +1091,8 @@
         "id": "V22-S16:claim:1:1",
         "predicate": "PROJECT_START",
         "source": "telex.hu",
-        "sentence": "A munkálatok márciusban indulhatnak.",
-        "evidence": "márciusban indulhatnak",
+        "sentence": "A munkálatok 2027 márciusában indulhatnak.",
+        "evidence": "2027 márciusában indulhatnak",
         "value": "2027-03",
         "unit": null,
         "attribution": null,
@@ -1507,55 +1108,8 @@
         "eventId": null
       },
       "category": "temporal_binding",
-      "integrityClassification": "DUPLICATE",
-      "classificationReason": "same canonical prediction identity is emitted more than once in the scenario",
-      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
-    },
-    {
-      "scenarioId": "V22-S16",
-      "field": "claims",
-      "source": "telex.hu",
-      "snippet": "A munkálatok márciusban indulhatnak.",
-      "prediction": {
-        "source": "telex.hu",
-        "predicate": "PROJECT_START",
-        "value": "március",
-        "unit": "date",
-        "evidence": "A munkálatok márciusban indulhatnak.",
-        "evidenceSpan": {
-          "start": 64,
-          "end": 100,
-          "textSpan": "A munkálatok márciusban indulhatnak."
-        },
-        "polarity": "affirmed",
-        "modality": "conditional",
-        "conditional": true,
-        "uncertainty": false,
-        "attribution": null
-      },
-      "nearestExpected": {
-        "id": "V22-S16:claim:1:1",
-        "predicate": "PROJECT_START",
-        "source": "telex.hu",
-        "sentence": "A munkálatok márciusban indulhatnak.",
-        "evidence": "márciusban indulhatnak",
-        "value": "2027-03",
-        "unit": null,
-        "attribution": null,
-        "modality": "plan",
-        "polarity": "affirmed",
-        "uncertainty": false,
-        "conditional": false,
-        "temporal": {
-          "start": "2027-03-01"
-        },
-        "scope": null,
-        "correctionOf": null,
-        "eventId": null
-      },
-      "category": "temporal_binding",
-      "integrityClassification": "DUPLICATE",
-      "classificationReason": "same canonical prediction identity is emitted more than once in the scenario",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
       "rootCauseComponent": "lib/v2/deterministic-semantic.js"
     },
     {
@@ -1584,58 +1138,8 @@
         "id": "V22-S16:claim:2:1",
         "predicate": "PROJECT_START",
         "source": "24.hu",
-        "sentence": "A friss ütemterv szerint a kezdés júniusra tolódott.",
-        "evidence": "kezdés júniusra tolódott",
-        "value": "2027-06",
-        "unit": null,
-        "attribution": null,
-        "modality": "plan",
-        "polarity": "affirmed",
-        "uncertainty": false,
-        "conditional": false,
-        "temporal": {
-          "start": "2027-06-01"
-        },
-        "scope": null,
-        "correctionOf": null,
-        "eventId": null
-      },
-      "category": "temporal_binding",
-      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
-      "classificationReason": "source-grounded prediction has no matching gold observation",
-      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
-    },
-    {
-      "scenarioId": "V22-S16",
-      "field": "claims",
-      "source": "24.hu",
-      "snippet": "A friss ütemterv szerint a kezdés júniusra tolódott.",
-      "prediction": {
-        "source": "24.hu",
-        "predicate": "PROJECT_START",
-        "value": "június",
-        "unit": "date",
-        "evidence": "A friss ütemterv szerint a kezdés júniusra tolódott.",
-        "evidenceSpan": {
-          "start": 67,
-          "end": 119,
-          "textSpan": "A friss ütemterv szerint a kezdés júniusra tolódott."
-        },
-        "polarity": "affirmed",
-        "modality": "plan",
-        "conditional": false,
-        "uncertainty": false,
-        "attribution": {
-          "type": "reported",
-          "label": "friss ütemterv"
-        }
-      },
-      "nearestExpected": {
-        "id": "V22-S16:claim:2:1",
-        "predicate": "PROJECT_START",
-        "source": "24.hu",
-        "sentence": "A friss ütemterv szerint a kezdés júniusra tolódott.",
-        "evidence": "kezdés júniusra tolódott",
+        "sentence": "A friss ütemterv szerint a kezdés 2027 júniusára tolódott.",
+        "evidence": "kezdés 2027 júniusára tolódott",
         "value": "2027-06",
         "unit": null,
         "attribution": null,
@@ -1681,55 +1185,8 @@
         "id": "V22-S16:claim:3:1",
         "predicate": "PROJECT_START",
         "source": "hvg.hu",
-        "sentence": "A közbeszerzés miatt a júniusi kezdés maradt érvényben.",
-        "evidence": "júniusi kezdés maradt érvényben",
-        "value": "2027-06",
-        "unit": null,
-        "attribution": null,
-        "modality": "plan",
-        "polarity": "affirmed",
-        "uncertainty": false,
-        "conditional": false,
-        "temporal": {
-          "start": "2027-06-01"
-        },
-        "scope": null,
-        "correctionOf": null,
-        "eventId": null
-      },
-      "category": "temporal_binding",
-      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
-      "classificationReason": "source-grounded prediction has no matching gold observation",
-      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
-    },
-    {
-      "scenarioId": "V22-S16",
-      "field": "claims",
-      "source": "hvg.hu",
-      "snippet": "A közbeszerzés miatt a júniusi kezdés maradt érvényben.",
-      "prediction": {
-        "source": "hvg.hu",
-        "predicate": "PROJECT_START",
-        "value": "június",
-        "unit": "date",
-        "evidence": "A közbeszerzés miatt a júniusi kezdés maradt érvényben.",
-        "evidenceSpan": {
-          "start": 68,
-          "end": 123,
-          "textSpan": "A közbeszerzés miatt a júniusi kezdés maradt érvényben."
-        },
-        "polarity": "affirmed",
-        "modality": "asserted",
-        "conditional": false,
-        "uncertainty": false,
-        "attribution": null
-      },
-      "nearestExpected": {
-        "id": "V22-S16:claim:3:1",
-        "predicate": "PROJECT_START",
-        "source": "hvg.hu",
-        "sentence": "A közbeszerzés miatt a júniusi kezdés maradt érvényben.",
-        "evidence": "júniusi kezdés maradt érvényben",
+        "sentence": "A közbeszerzés miatt a 2027 júniusi kezdés maradt érvényben.",
+        "evidence": "2027 júniusi kezdés maradt érvényben",
         "value": "2027-06",
         "unit": null,
         "attribution": null,
@@ -2034,8 +1491,8 @@
         "unit": null,
         "evidence": "Varga András szerint",
         "evidenceSpan": {
-          "start": 244,
-          "end": 264,
+          "start": 260,
+          "end": 280,
           "textSpan": "Varga András szerint"
         },
         "polarity": "affirmed",
@@ -2050,15 +1507,15 @@
       "nearestExpected": {
         "source": "telex.hu",
         "predicate": "WAITING_DAYS",
-        "sentence": "A hálózat 14 napos várólistát közölt.",
-        "evidence": "14 napos várólistát közölt",
+        "sentence": "A korábbi lista szerint 14 napos várólista szerepelt.",
+        "evidence": "14 napos várólista szerepelt",
         "value": 14,
         "unit": "day",
         "attribution": {
           "type": "official",
           "label": "kórházi hálózat"
         },
-        "modality": "asserted",
+        "modality": "plan",
         "polarity": "affirmed",
         "uncertainty": false,
         "conditional": false,
@@ -2084,8 +1541,8 @@
         "unit": null,
         "evidence": "A hálózat hétfőn bejelentette az indulást.",
         "evidenceSpan": {
-          "start": 335,
-          "end": 377,
+          "start": 351,
+          "end": 393,
           "textSpan": "A hálózat hétfőn bejelentette az indulást."
         },
         "polarity": "affirmed",
@@ -2097,15 +1554,15 @@
       "nearestExpected": {
         "source": "telex.hu",
         "predicate": "WAITING_DAYS",
-        "sentence": "A hálózat 14 napos várólistát közölt.",
-        "evidence": "14 napos várólistát közölt",
+        "sentence": "A korábbi lista szerint 14 napos várólista szerepelt.",
+        "evidence": "14 napos várólista szerepelt",
         "value": 14,
         "unit": "day",
         "attribution": {
           "type": "official",
           "label": "kórházi hálózat"
         },
-        "modality": "asserted",
+        "modality": "plan",
         "polarity": "affirmed",
         "uncertainty": false,
         "conditional": false,
@@ -2131,8 +1588,8 @@
         "unit": null,
         "evidence": "Varga András szerint",
         "evidenceSpan": {
-          "start": 241,
-          "end": 261,
+          "start": 261,
+          "end": 281,
           "textSpan": "Varga András szerint"
         },
         "polarity": "affirmed",
@@ -2147,15 +1604,15 @@
       "nearestExpected": {
         "source": "24.hu",
         "predicate": "WAITING_DAYS",
-        "sentence": "A hálózat 14 napos várólistát közölt.",
-        "evidence": "14 napos várólistát közölt",
-        "value": 19,
+        "sentence": "A friss közlés a várólistát 9 napos értékre pontosította.",
+        "evidence": "várólistát 9 napos értékre pontosította",
+        "value": 9,
         "unit": "day",
         "attribution": {
           "type": "official",
           "label": "kórházi hálózat"
         },
-        "modality": "asserted",
+        "modality": "plan",
         "polarity": "affirmed",
         "uncertainty": false,
         "conditional": false,
@@ -2181,8 +1638,8 @@
         "unit": null,
         "evidence": "A hálózat hétfőn bejelentette az indulást.",
         "evidenceSpan": {
-          "start": 332,
-          "end": 374,
+          "start": 352,
+          "end": 394,
           "textSpan": "A hálózat hétfőn bejelentette az indulást."
         },
         "polarity": "affirmed",
@@ -2194,13 +1651,424 @@
       "nearestExpected": {
         "source": "24.hu",
         "predicate": "WAITING_DAYS",
-        "sentence": "A hálózat 14 napos várólistát közölt.",
-        "evidence": "14 napos várólistát közölt",
-        "value": 19,
+        "sentence": "A friss közlés a várólistát 9 napos értékre pontosította.",
+        "evidence": "várólistát 9 napos értékre pontosította",
+        "value": 9,
         "unit": "day",
         "attribution": {
           "type": "official",
           "label": "kórházi hálózat"
+        },
+        "modality": "plan",
+        "polarity": "affirmed",
+        "uncertainty": false,
+        "conditional": false,
+        "temporal": null,
+        "scope": null,
+        "eventId": null,
+        "id": "V22-D02:claim:24.hu:1"
+      },
+      "category": "wrong_predicate",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
+      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
+    },
+    {
+      "scenarioId": "V22-D02",
+      "field": "claims",
+      "source": "hvg.hu",
+      "snippet": "Varga András szerint",
+      "prediction": {
+        "source": "hvg.hu",
+        "predicate": "DOCTOR_ASSESSMENT",
+        "value": null,
+        "unit": null,
+        "evidence": "Varga András szerint",
+        "evidenceSpan": {
+          "start": 203,
+          "end": 223,
+          "textSpan": "Varga András szerint"
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": {
+          "type": "reported",
+          "label": "Varga András"
+        }
+      },
+      "nearestExpected": {
+        "source": "hvg.hu",
+        "predicate": "SERVICE_START",
+        "sentence": "A mobil ambulancia májusban indulhat, ha lesz személyzet.",
+        "evidence": "májusban indulhat, ha lesz személyzet",
+        "value": "2027-05",
+        "unit": null,
+        "attribution": null,
+        "modality": "conditional",
+        "polarity": "affirmed",
+        "uncertainty": false,
+        "conditional": true,
+        "temporal": null,
+        "scope": null,
+        "eventId": null,
+        "id": "V22-D02:claim:hvg.hu:1"
+      },
+      "category": "wrong_predicate",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
+      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
+    },
+    {
+      "scenarioId": "V22-D02",
+      "field": "claims",
+      "source": "hvg.hu",
+      "snippet": "A hálózat hétfőn bejelentette az indulást.",
+      "prediction": {
+        "source": "hvg.hu",
+        "predicate": "OPENING_EVENT",
+        "value": null,
+        "unit": null,
+        "evidence": "A hálózat hétfőn bejelentette az indulást.",
+        "evidenceSpan": {
+          "start": 294,
+          "end": 336,
+          "textSpan": "A hálózat hétfőn bejelentette az indulást."
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": null
+      },
+      "nearestExpected": {
+        "source": "hvg.hu",
+        "predicate": "SERVICE_START",
+        "sentence": "A mobil ambulancia májusban indulhat, ha lesz személyzet.",
+        "evidence": "májusban indulhat, ha lesz személyzet",
+        "value": "2027-05",
+        "unit": null,
+        "attribution": null,
+        "modality": "conditional",
+        "polarity": "affirmed",
+        "uncertainty": false,
+        "conditional": true,
+        "temporal": null,
+        "scope": null,
+        "eventId": null,
+        "id": "V22-D02:claim:hvg.hu:1"
+      },
+      "category": "wrong_predicate",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
+      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
+    },
+    {
+      "scenarioId": "V22-D03",
+      "field": "claims",
+      "source": "telex.hu",
+      "snippet": "Németh Éva szerint",
+      "prediction": {
+        "source": "telex.hu",
+        "predicate": "TEACHER_ASSESSMENT",
+        "value": null,
+        "unit": null,
+        "evidence": "Németh Éva szerint",
+        "evidenceSpan": {
+          "start": 270,
+          "end": 288,
+          "textSpan": "Németh Éva szerint"
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": {
+          "type": "reported",
+          "label": "Németh Éva"
+        }
+      },
+      "nearestExpected": {
+        "source": "telex.hu",
+        "predicate": "PROJECT_COST",
+        "sentence": "A program kerete 90 millió forint.",
+        "evidence": "program kerete 90 millió forint",
+        "value": 90,
+        "unit": "million HUF",
+        "attribution": null,
+        "modality": "asserted",
+        "polarity": "affirmed",
+        "uncertainty": false,
+        "conditional": false,
+        "temporal": null,
+        "scope": null,
+        "eventId": null,
+        "id": "V22-D03:claim:telex.hu:1"
+      },
+      "category": "wrong_predicate",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
+      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
+    },
+    {
+      "scenarioId": "V22-D03",
+      "field": "claims",
+      "source": "telex.hu",
+      "snippet": "A program hétfőn bejelentette az átadási rendet.",
+      "prediction": {
+        "source": "telex.hu",
+        "predicate": "OPENING_EVENT",
+        "value": null,
+        "unit": null,
+        "evidence": "A program hétfőn bejelentette az átadási rendet.",
+        "evidenceSpan": {
+          "start": 362,
+          "end": 410,
+          "textSpan": "A program hétfőn bejelentette az átadási rendet."
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": null
+      },
+      "nearestExpected": {
+        "source": "telex.hu",
+        "predicate": "PROJECT_COST",
+        "sentence": "A program kerete 90 millió forint.",
+        "evidence": "program kerete 90 millió forint",
+        "value": 90,
+        "unit": "million HUF",
+        "attribution": null,
+        "modality": "asserted",
+        "polarity": "affirmed",
+        "uncertainty": false,
+        "conditional": false,
+        "temporal": null,
+        "scope": null,
+        "eventId": null,
+        "id": "V22-D03:claim:telex.hu:1"
+      },
+      "category": "wrong_predicate",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
+      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
+    },
+    {
+      "scenarioId": "V22-D03",
+      "field": "claims",
+      "source": "24.hu",
+      "snippet": "Németh Éva szerint",
+      "prediction": {
+        "source": "24.hu",
+        "predicate": "TEACHER_ASSESSMENT",
+        "value": null,
+        "unit": null,
+        "evidence": "Németh Éva szerint",
+        "evidenceSpan": {
+          "start": 271,
+          "end": 289,
+          "textSpan": "Németh Éva szerint"
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": {
+          "type": "reported",
+          "label": "Németh Éva"
+        }
+      },
+      "nearestExpected": {
+        "source": "24.hu",
+        "predicate": "PROJECT_COST",
+        "sentence": "A program kerete 90 millió forint.",
+        "evidence": "program kerete 90 millió forint",
+        "value": 95,
+        "unit": "million HUF",
+        "attribution": null,
+        "modality": "asserted",
+        "polarity": "affirmed",
+        "uncertainty": false,
+        "conditional": false,
+        "temporal": null,
+        "scope": null,
+        "eventId": null,
+        "id": "V22-D03:claim:24.hu:1"
+      },
+      "category": "wrong_predicate",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
+      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
+    },
+    {
+      "scenarioId": "V22-D03",
+      "field": "claims",
+      "source": "24.hu",
+      "snippet": "A program hétfőn bejelentette az átadási rendet.",
+      "prediction": {
+        "source": "24.hu",
+        "predicate": "OPENING_EVENT",
+        "value": null,
+        "unit": null,
+        "evidence": "A program hétfőn bejelentette az átadási rendet.",
+        "evidenceSpan": {
+          "start": 363,
+          "end": 411,
+          "textSpan": "A program hétfőn bejelentette az átadási rendet."
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": null
+      },
+      "nearestExpected": {
+        "source": "24.hu",
+        "predicate": "PROJECT_COST",
+        "sentence": "A program kerete 90 millió forint.",
+        "evidence": "program kerete 90 millió forint",
+        "value": 95,
+        "unit": "million HUF",
+        "attribution": null,
+        "modality": "asserted",
+        "polarity": "affirmed",
+        "uncertainty": false,
+        "conditional": false,
+        "temporal": null,
+        "scope": null,
+        "eventId": null,
+        "id": "V22-D03:claim:24.hu:1"
+      },
+      "category": "wrong_predicate",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
+      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
+    },
+    {
+      "scenarioId": "V22-D03",
+      "field": "claims",
+      "source": "hvg.hu",
+      "snippet": "Németh Éva szerint",
+      "prediction": {
+        "source": "hvg.hu",
+        "predicate": "TEACHER_ASSESSMENT",
+        "value": null,
+        "unit": null,
+        "evidence": "Németh Éva szerint",
+        "evidenceSpan": {
+          "start": 268,
+          "end": 286,
+          "textSpan": "Németh Éva szerint"
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": {
+          "type": "reported",
+          "label": "Németh Éva"
+        }
+      },
+      "nearestExpected": {
+        "source": "hvg.hu",
+        "predicate": "PROJECT_COST",
+        "sentence": "A program kerete 90 millió forint.",
+        "evidence": "program kerete 90 millió forint",
+        "value": 90,
+        "unit": "million HUF",
+        "attribution": null,
+        "modality": "asserted",
+        "polarity": "affirmed",
+        "uncertainty": false,
+        "conditional": false,
+        "temporal": null,
+        "scope": null,
+        "eventId": null,
+        "id": "V22-D03:claim:hvg.hu:1"
+      },
+      "category": "wrong_predicate",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
+      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
+    },
+    {
+      "scenarioId": "V22-D03",
+      "field": "claims",
+      "source": "hvg.hu",
+      "snippet": "A program hétfőn bejelentette az átadási rendet.",
+      "prediction": {
+        "source": "hvg.hu",
+        "predicate": "OPENING_EVENT",
+        "value": null,
+        "unit": null,
+        "evidence": "A program hétfőn bejelentette az átadási rendet.",
+        "evidenceSpan": {
+          "start": 323,
+          "end": 371,
+          "textSpan": "A program hétfőn bejelentette az átadási rendet."
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": null
+      },
+      "nearestExpected": {
+        "source": "hvg.hu",
+        "predicate": "PROJECT_COST",
+        "sentence": "A program kerete 90 millió forint.",
+        "evidence": "program kerete 90 millió forint",
+        "value": 90,
+        "unit": "million HUF",
+        "attribution": null,
+        "modality": "asserted",
+        "polarity": "affirmed",
+        "uncertainty": false,
+        "conditional": false,
+        "temporal": null,
+        "scope": null,
+        "eventId": null,
+        "id": "V22-D03:claim:hvg.hu:1"
+      },
+      "category": "wrong_predicate",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
+      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
+    },
+    {
+      "scenarioId": "V22-D04",
+      "field": "claims",
+      "source": "telex.hu",
+      "snippet": "Az energia cég bejelentette a hálózati próbát.",
+      "prediction": {
+        "source": "telex.hu",
+        "predicate": "OPENING_EVENT",
+        "value": null,
+        "unit": null,
+        "evidence": "Az energia cég bejelentette a hálózati próbát.",
+        "evidenceSpan": {
+          "start": 348,
+          "end": 394,
+          "textSpan": "Az energia cég bejelentette a hálózati próbát."
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": null
+      },
+      "nearestExpected": {
+        "source": "telex.hu",
+        "predicate": "CAPACITY",
+        "sentence": "A tároló teljesítménye 40 megawattóra.",
+        "evidence": "teljesítménye 40 megawattóra",
+        "value": 40,
+        "unit": "MWh",
+        "attribution": {
+          "type": "official",
+          "label": "beruházó"
         },
         "modality": "asserted",
         "polarity": "affirmed",
@@ -2209,7 +2077,148 @@
         "temporal": null,
         "scope": null,
         "eventId": null,
-        "id": "V22-D02:claim:24.hu:1"
+        "id": "V22-D04:claim:telex.hu:1"
+      },
+      "category": "wrong_predicate",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
+      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
+    },
+    {
+      "scenarioId": "V22-D04",
+      "field": "claims",
+      "source": "24.hu",
+      "snippet": "Az energia cég bejelentette a hálózati próbát.",
+      "prediction": {
+        "source": "24.hu",
+        "predicate": "OPENING_EVENT",
+        "value": null,
+        "unit": null,
+        "evidence": "Az energia cég bejelentette a hálózati próbát.",
+        "evidenceSpan": {
+          "start": 354,
+          "end": 400,
+          "textSpan": "Az energia cég bejelentette a hálózati próbát."
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": null
+      },
+      "nearestExpected": {
+        "source": "24.hu",
+        "predicate": "CAPACITY",
+        "sentence": "A beruházó a kapacitást 55 MWh-ra pontosította.",
+        "evidence": "kapacitást 55 MWh-ra pontosította",
+        "value": 55,
+        "unit": "MWh",
+        "attribution": {
+          "type": "official",
+          "label": "beruházó"
+        },
+        "modality": "plan",
+        "polarity": "affirmed",
+        "uncertainty": false,
+        "conditional": false,
+        "temporal": null,
+        "scope": null,
+        "eventId": null,
+        "id": "V22-D04:claim:24.hu:1"
+      },
+      "category": "wrong_predicate",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
+      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
+    },
+    {
+      "scenarioId": "V22-D04",
+      "field": "claims",
+      "source": "hvg.hu",
+      "snippet": "Az energia cég bejelentette a hálózati próbát.",
+      "prediction": {
+        "source": "hvg.hu",
+        "predicate": "OPENING_EVENT",
+        "value": null,
+        "unit": null,
+        "evidence": "Az energia cég bejelentette a hálózati próbát.",
+        "evidenceSpan": {
+          "start": 346,
+          "end": 392,
+          "textSpan": "Az energia cég bejelentette a hálózati próbát."
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": null
+      },
+      "nearestExpected": {
+        "source": "hvg.hu",
+        "predicate": "CAPACITY",
+        "sentence": "A tároló teljesítménye 40 megawattóra.",
+        "evidence": "teljesítménye 40 megawattóra",
+        "value": 40,
+        "unit": "MWh",
+        "attribution": {
+          "type": "official",
+          "label": "beruházó"
+        },
+        "modality": "asserted",
+        "polarity": "affirmed",
+        "uncertainty": false,
+        "conditional": false,
+        "temporal": null,
+        "scope": null,
+        "eventId": null,
+        "id": "V22-D04:claim:hvg.hu:1"
+      },
+      "category": "wrong_predicate",
+      "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",
+      "classificationReason": "source-grounded prediction has no matching gold observation",
+      "rootCauseComponent": "lib/v2/deterministic-semantic.js"
+    },
+    {
+      "scenarioId": "V22-D05",
+      "field": "claims",
+      "source": "telex.hu",
+      "snippet": "Farkas László szerint",
+      "prediction": {
+        "source": "telex.hu",
+        "predicate": "ENGINEER_ASSESSMENT",
+        "value": null,
+        "unit": null,
+        "evidence": "Farkas László szerint",
+        "evidenceSpan": {
+          "start": 257,
+          "end": 278,
+          "textSpan": "Farkas László szerint"
+        },
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditional": false,
+        "uncertainty": false,
+        "attribution": {
+          "type": "reported",
+          "label": "Farkas László"
+        }
+      },
+      "nearestExpected": {
+        "source": "telex.hu",
+        "predicate": "COMPLETION_PERCENT",
+        "sentence": "A híd javítása 70 százaléknál tart.",
+        "evidence": "javítása 70 százaléknál tart",
+        "value": 70,
+        "unit": "%",
+        "attribution": null,
+        "modality": "asserted",
+        "polarity": "affirmed",
+        "uncertainty": false,
+        "conditional": false,
+        "temporal": null,
+        "scope": null,
+        "eventId": null,
+        "id": "V22-D05:claim:telex.hu:1"
       },
       "category": "wrong_predicate",
       "integrityClassification": "SUPPORTED_BUT_NOT_IN_GOLD",

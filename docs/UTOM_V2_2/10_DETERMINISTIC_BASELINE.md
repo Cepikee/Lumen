@@ -24,8 +24,8 @@ A provider szándékosan konzervatív, ezért a bizonytalan szemantikai követke
 
 | Tier | Claim precision | Claim recall | Attribution | Evidence | Negation | Modality |
 |---|---:|---:|---:|---:|---:|---:|
-| Core | 0.4333 | 0.2826 | 0.9231 | 1.0000 | 1.0000 | 0.9231 |
-| Dense | 0.4694 | 0.3833 | 0.8913 | 1.0000 | 1.0000 | 1.0000 |
+| Core | 0.5806 | 0.3913 | 0.8333 | 1.0000 | 1.0000 | 0.7778 |
+| Dense | 0.5700 | 0.4750 | 0.7719 | 1.0000 | 1.0000 | 0.9123 |
 
 A teljes JSON report: `docs/UTOM_V2_2/10_deterministic_baseline.json`. A gold
 unmatched legacy rate és a source-grounded truly unsupported rate külön mező.

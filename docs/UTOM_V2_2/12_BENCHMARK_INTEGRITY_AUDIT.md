@@ -26,9 +26,9 @@ the semantic fields against the nearest gold observation:
 | Class | Count | Meaning |
 |---|---:|---|
 | TRUE_UNSUPPORTED | 0 | no source-grounded evidence/mention |
-| SUPPORTED_BUT_NOT_IN_GOLD | 29 | grounded prediction with no gold observation |
+| SUPPORTED_BUT_NOT_IN_GOLD | 48 | grounded prediction with no gold observation |
 | SEMANTIC_MISMATCH | 0 | grounded mention with conflicting semantic field |
-| DUPLICATE | 21 | repeated canonical identity in one scenario |
+| DUPLICATE | 2 | repeated canonical identity in one scenario |
 | EVALUATOR_MISMATCH | 0 | same semantic fields, evidence normalization differs |
 
 The previous `unsupportedPredictionRate` remains in reports for historical
@@ -42,10 +42,11 @@ predictions.
 
 ## Measured integrity
 
-The deterministic Round 1 report currently shows grounded prediction rate
-`1.0000` for both core and dense. Truly unsupported prediction rate is
-`0.1765` core (`6/34`) and `0.2075` dense (`22/106`); the difference from the
-legacy unsupported rate is gold coverage, not hidden text evidence.
+The deterministic report currently shows grounded prediction rate
+`1.0000` for both core and dense. After the categorical-claim contract fix,
+truly unsupported prediction rate is `0.0000` in both tiers (`0/39` core and
+`0/117` dense); the remaining unmatched predictions are source-grounded
+observations that are absent from the gold manifest or duplicate projections.
 
 ## Reproducible commands
 

@@ -23,9 +23,9 @@ Részletes sorok: `docs/UTOM_V2_2/11_false_positives_top50.json`. Minden sor tar
 | Integrity class | Top-50 előfordulás |
 |---|---:|
 | TRUE_UNSUPPORTED | 0 |
-| SUPPORTED_BUT_NOT_IN_GOLD | 41 |
+| SUPPORTED_BUT_NOT_IN_GOLD | 43 |
 | SEMANTIC_MISMATCH | 0 |
-| DUPLICATE | 9 |
+| DUPLICATE | 7 |
 | EVALUATOR_MISMATCH | 0 |
 | **Összesen** | **50** |
 
@@ -37,14 +37,14 @@ A legnagyobb ok a korábbi széles tulajdonnév-regex volt. A javítás erős he
 |---|---|---:|---:|
 | Core | entity precision | 0.0811 | 1.0000 |
 | Core | entity recall | 0.1304 | 0.1739 |
-| Core | claim precision | 0.0479 | 0.4333 |
-| Core | claim recall | 0.1739 | 0.2826 |
-| Core | supported claim precision / recall | – | 0.5000 / 0.4444 |
-| Core | attribution accuracy | 0.7500 | 0.9231 |
+| Core | claim precision | 0.0479 | 0.4688 |
+| Core | claim recall | 0.1739 | 0.3261 |
+| Core | supported claim precision / recall | – | 0.5385 / 0.5185 |
+| Core | attribution accuracy | 0.7500 | 0.8667 |
 | Core | evidence accuracy | 1.0000 | 1.0000 |
 | Core | negation accuracy | 1.0000 | 1.0000 |
-| Core | modality accuracy | 1.0000 | 0.9231 |
-| Core | unsupported prediction rate | 0.9214 | 0.5000 |
+| Core | modality accuracy | 1.0000 | 0.8667 |
+| Core | unsupported prediction rate | 0.9214 | 0.4500 |
 | Dense | entity precision / recall | 0.1481 / 0.2000 | 0.5000 / 0.2000 |
 | Dense | claim precision / recall | 0.2143 / 0.1500 | 0.4694 / 0.3833 |
 | Dense | supported claim precision / recall | – | 0.5395 / 0.5062 |
@@ -107,16 +107,16 @@ The direct-denial attribution fixture was corrected in Round 2 so the official s
 - Reproduction: the core direct-denial expected record assigns an official speaker to a sentence that contains no speaker name or attribution cue.
 - Root cause: controlled gold fixture semantics exceeded the observable source span.
 - Fix: the direct-denial source sentence now names the mentőszolgálat; generated articles and gold manifest were regenerated, and official-attribution parsing was added to the shared helper.
-- Status: `FIXED` in Round 2; source derivability is now explicit.
+- Status: `FIXED` in the pushed integrity correction; source derivability is now explicit.
 
 ## Quality gate
 
-The precision changes were validated with 25 targeted semantic/conflict/oracle tests and the full repository gate: TypeScript PASS, offline 439/439 PASS, ESLint 0 errors (existing warnings only), import check PASS, `npm run check` PASS, production build 75/75 PASS, and npm audit 0 high vulnerabilities. Precision changes were **not pushed** automatically. The three baseline commits were pushed before this round:
+The precision changes were validated with the targeted semantic/conflict/oracle suite (24/24 PASS) and the repository gate: TypeScript PASS, offline 442/442 PASS, ESLint 0 errors (existing warnings only), import check PASS, `npm run check` PASS, production build 75/75 PASS, and npm audit 0 high vulnerabilities. The Round 1 integrity implementation was pushed as:
 
-`08a3e4d`, `0f9c7a5`, `78d5ec4` → `origin/develop/utom-recovery`.
+`9327d17 feat(v2.2): harden deterministic semantic precision` → `origin/develop/utom-recovery`.
 
 `AGENTS.md`, `CLAUDE.md` and `docs.zip` remain untracked and untouched.
 
-Current local MySQL integration command is `BLOCKED / NOT EXECUTED – UTOM_TEST_MYSQL_URL is not configured`. The last repository checkpoint recorded 55 PASS / 0 FAIL / 1 environment SKIP (FFmpeg unavailable); no SQL or migration was changed in this round.
+The isolated MySQL 8.0.46 integration gate completed with 55 PASS / 0 FAIL. Three opt-in tests remained skipped: the FFmpeg capability test and two HTTP lifecycle tests whose separate HTTP opt-in was not enabled. The V21 canonical raw-input E2E passed. No production database or migration was changed in this round.
 
-Current round state: `PRECISION HARDENING ROUND 1: COMPLETE` for the implemented precision slice; the unsupported attribution boundary remains an explicit accepted measurement limitation, with no production activation.
+Current round state: `PRECISION HARDENING ROUND 1: COMPLETE`; benchmark integrity and source derivability are fixed. Round 2 precision changes remain local and unpushed for review, with no production activation.

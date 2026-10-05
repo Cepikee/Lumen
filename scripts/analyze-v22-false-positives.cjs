@@ -5,7 +5,7 @@ const path = require("node:path");
 const { buildBenchmarkDataset } = require("../lib/v22/benchmark-dataset.cjs");
 const { buildDenseBenchmarkDataset } = require("../lib/v22/dense-benchmark-dataset.cjs");
 const { predictArticles } = require("../lib/v22/deterministic-text-provider.cjs");
-const { claimKey, entityKey } = require("../lib/v22/benchmark-evaluator.cjs");
+const { claimKey, entityKey, relationKey, eventKey, conflictKey, changeKey, omissionKey } = require("../lib/v22/benchmark-evaluator.cjs");
 
 function text(value) { return String(value == null ? "" : value); }
 function evidenceCompatible(expected, actual) {
@@ -85,7 +85,10 @@ function collectTier(dataset) {
           ? expected.some((candidate) => claimKey({ ...candidate, __scenarioId: scenario.id }) === claimKey({ ...item, __scenarioId: scenario.id }) && evidenceCompatible(candidate, item))
           : field === "entities"
             ? expected.some((candidate) => entityKey({ ...candidate, __scenarioId: scenario.id }) === entityKey({ ...item, __scenarioId: scenario.id }))
-            : false;
+            : expected.some((candidate) => {
+              const keyFor = field === "relations" ? relationKey : field === "events" ? eventKey : field === "conflicts" ? conflictKey : field === "changes" ? changeKey : omissionKey;
+              return keyFor({ ...candidate, __scenarioId: scenario.id }) === keyFor({ ...item, __scenarioId: scenario.id });
+            });
         if (matched) continue;
         const nearest = expected.find((candidate) => text(candidate.source).toLowerCase() === text(item.source).toLowerCase()) || null;
         const identity = `${scenario.id}|${field}|${field === "claims" ? claimKey({ ...item, __scenarioId: scenario.id }) : field === "entities" ? entityKey({ ...item, __scenarioId: scenario.id }) : JSON.stringify(item)}`;

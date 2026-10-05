@@ -58,7 +58,7 @@ A test-only oracle a provider-shaped normalizációs határon keresztül tökél
 
 A `lib/v22/deterministic-text-provider.cjs` kizárólag a cikk szövegét olvassa. Nem olvassa a gold manifestet, nem használ scenario-ID kivételágat, és nem ír canonical/V2 táblát. A jelenlegi baseline csak biztosan felismerhető szám+egység, dátum, explicit negáció, feltételes jelölő, attribúciós fordulat és egyszerű tulajdonnévi említés jelöltjeit adja vissza.
 
-Az integrity-korrigált mérés részletesen a `10_deterministic_baseline.json` fájlban van. A core claim precision/recall 0.4333/0.2826, a dense 0.4694/0.3833. A supported subset core/dense precision-recall 0.5000/0.4444 és 0.5395/0.5062. A grounded prediction rate mindkét tierben 1.0000; a truly unsupported rate 0.1765 és 0.1803. Az evidence grounding és a negation accuracy 1.0000 maradt. Az entity és claim extraction közös, gold-független `lib/v2/deterministic-semantic.js` helperre épül; a deterministic provider canonical providerként csak opt-in.
+Az integrity-korrigált mérés részletesen a `10_deterministic_baseline.json` fájlban van. A core claim precision/recall 0.5806/0.3913, a dense 0.5700/0.4750. A supported subset ugyanezt a valid evidence-szel rendelkező canonical claim-halmazt méri: core/dense precision-recall 0.5806/0.3913 és 0.5700/0.4750. A grounded prediction rate mindkét tierben 1.0000; a truly unsupported rate 0.0000 és 0.0000. Az explicit temporal-change recall core/dense 1.0000/1.0000, az omission recall 0.3333/0.8000. Az evidence grounding és a negation accuracy 1.0000 maradt. Az evaluator most ISO dátumértékből canonical `date` unitot vezet le, ezért a unitot elhagyó gold claim nem bünteti a szemantikailag azonos predictiont. Az entity extractor most csak lokális proposition mellett ad engineer assessmentet; a szakmai szó önmagában nem generál claimet. Az entity és claim extraction közös, gold-független `lib/v2/deterministic-semantic.js` helperre épül; a deterministic provider canonical providerként csak opt-in.
 
 ## Finding registry
 
@@ -97,6 +97,26 @@ Az integrity-korrigált mérés részletesen a `10_deterministic_baseline.json` 
 
 - Státusz: `FIXED` – a generic headline attribution kimarad, a negált állítás evidence-e a tagadott propositionre kötődik.
 
+### V22-INT-F008 – Többszörös entity mention ugyanabban a scenario projectionben
+
+- Státusz: `FIXED` – azonos normalized/type/identity előrejelzések összevonódnak, a namesake identity-k külön maradnak.
+
+### V22-INT-F009 – Dense temporal gold source-derivability
+
+- Státusz: `FIXED` – mind az öt dense változás explicit régi és új forrásmondatot kapott, a date parser a magyar napragokat is kezeli.
+
+### V22-INT-F010 – ISO date unit evaluator-eltérés
+
+- Státusz: `FIXED` – a claim key az ISO `YYYY-MM` és `YYYY-MM-DD` értékekből canonical `date` unitot vezet le, ha a gold explicit unit nélkül tárolja ugyanazt a dátumot.
+
+### V22-INT-F011 – Kontextus nélküli engineer assessment
+
+- Státusz: `FIXED` – a `mérnök` token önmagában nem elég; assessment csak lokális `szerint`, állapot- vagy biztonságossági proposition mellett készül.
+
+### V22-INT-F012 – Evidence-backed categorical claim téves unsupported besorolása
+
+- Státusz: `FIXED` – a valid canonical predicate + nem üres evidence önmagában bizonyítja a benchmark semantic contract támogatottságát; a null vagy kategóriaérték nem lesz automatikusan hallucination.
+
 ## Források
 
 - Gépi gold: `tests/fixtures/v22-intelligence-benchmark/gold-manifest.json`
@@ -116,6 +136,6 @@ Az integrity-korrigált mérés részletesen a `10_deterministic_baseline.json` 
 
 ## Állapot
 
-`V2.2 BENCHMARK VALIDATION: CORE + DENSE + ORACLE + MUTATION + PRECISION HARDENING ROUND 1 COMPLETE`
+`V2.2 BENCHMARK VALIDATION: CORE + DENSE + ORACLE + MUTATION + PRECISION HARDENING ROUND 2 PARTIAL`
 
 Production, payment és paid AI érintetlen.

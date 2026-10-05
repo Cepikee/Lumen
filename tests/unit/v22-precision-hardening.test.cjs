@@ -3,6 +3,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const { buildBenchmarkDataset } = require("../../lib/v22/benchmark-dataset.cjs");
+const { buildDenseBenchmarkDataset } = require("../../lib/v22/dense-benchmark-dataset.cjs");
 const semantic = require("../../lib/v2/deterministic-semantic");
 const { createIngestionEnvelope } = require("../../lib/v2/ingestion-envelope");
 const { runEntityExtraction } = require("../../lib/v2/runtime-entity-extraction");
@@ -11,7 +12,7 @@ const { createDeterministicEntityProvider } = require("../../lib/v2/entity-extra
 const { createDeterministicClaimProvider } = require("../../lib/v2/claim-extraction-provider");
 const { createDeterministicRelationProvider } = require("../../lib/v2/relation-extraction-provider");
 const { runRelationExtraction } = require("../../lib/v2/runtime-relation-extraction");
-const { evaluateDataset } = require("../../lib/v22/benchmark-evaluator.cjs");
+const { evaluateDataset, claimKey, supportedClaim } = require("../../lib/v22/benchmark-evaluator.cjs");
 const { predictArticles } = require("../../lib/v22/deterministic-text-provider.cjs");
 
 test("precision helper abstains on filler and survives twenty perturbed source variants", () => {
@@ -84,4 +85,50 @@ test("scenario projection collapses repeated entity mentions but keeps namesake 
   assert.equal(new Set(repeated.entities.map((item) => `${item.normalized}|${item.type}|${item.identity}`)).size, repeated.entities.length);
   const namesakes = predictions.scenarios.find((item) => item.id === "V22-S14").entities.filter((item) => item.mention === "Nagy Péter");
   assert.equal(new Set(namesakes.map((item) => item.identity)).size, 2);
+});
+
+test("cross-source projection emits only explicit temporal changes and omissions", () => {
+  const dataset = buildBenchmarkDataset();
+  const predictions = predictArticles({ scenarios: dataset.scenarios });
+  const changed = predictions.scenarios.find((item) => item.id === "V22-S16");
+  assert.deepEqual(changed.changes, [{ from: "2027-03", to: "2027-06" }]);
+  const omitted = predictions.scenarios.find((item) => item.id === "V22-S17");
+  assert.deepEqual(omitted.omissions, [{ source: "index.hu", predicate: "GRANT_AMOUNT" }]);
+});
+
+test("dense temporal gold values are source-derived and projected deterministically", () => {
+  const dataset = buildDenseBenchmarkDataset();
+  const predictions = predictArticles({ scenarios: dataset.scenarios });
+  for (const scenario of dataset.scenarios) {
+    const expected = scenario.expected.changesOverTime[0];
+    const sourceText = scenario.sourceVariants.slice(0, 2).map((variant) => variant.text).join(" ");
+    const months = { "01": "január", "02": "február", "03": "március", "04": "április", "05": "május", "06": "június", "07": "július", "08": "augusztus", "09": "szeptember", "10": "október", "11": "november", "12": "december" };
+    for (const value of [expected.from, expected.to]) {
+      const textValue = String(value);
+      const dateMatch = textValue.match(/^(\d{4})-(\d{2})(?:-(\d{2}))?$/u);
+      const needle = dateMatch ? `${dateMatch[1]} ${months[dateMatch[2]]}` : textValue;
+      assert.ok(sourceText.includes(needle), `${scenario.id} change value is not source-derived: ${value}`);
+    }
+    const actual = predictions.scenarios.find((item) => item.id === scenario.id).changes;
+    assert.deepEqual(actual, [{ from: expected.from, to: expected.to }]);
+  }
+});
+
+test("evaluator normalizes an omitted date unit to the canonical date semantic", () => {
+  const dataset = buildBenchmarkDataset();
+  const expected = dataset.scenarios.find((item) => item.id === "V22-S16").expected.claims[0];
+  const predicted = { ...expected, unit: "date", __scenarioId: "V22-S16" };
+  assert.equal(claimKey({ ...expected, __scenarioId: "V22-S16" }), claimKey(predicted));
+});
+
+test("assessment predicates require a local expert proposition", () => {
+  assert.equal(semantic.extractClaims("A mérnöki dokumentum méteres mértéket használ.", "example.hu").length, 0);
+  const claims = semantic.extractClaims("Kiss Júlia mérnök szerint a partfal állapota megfelelő.", "example.hu");
+  assert.ok(claims.some((claim) => claim.predicate === "ENGINEER_ASSESSMENT"));
+});
+
+test("evidence-backed categorical claims count as semantically supported", () => {
+  assert.equal(supportedClaim({ predicate: "OPENING_EVENT", value: null, evidence: "bejelentette a programot" }), true);
+  assert.equal(supportedClaim({ predicate: "UNSPECIFIED_CLAIM", value: null, evidence: "szöveg" }), false);
+  assert.equal(supportedClaim({ predicate: "OPENING_EVENT", value: null }), false);
 });
