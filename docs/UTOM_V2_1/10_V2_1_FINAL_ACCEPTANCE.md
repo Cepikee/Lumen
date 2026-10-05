@@ -18,7 +18,7 @@
 ### Bizonyíték 2026-10-04
 
 - Tiszta ideiglenes másolat: `npm ci`, TypeScript, ESLint (0 error), import check, offline **379/379**, production build PASS.
-- Izolált demo MySQL reset PASS, schema 059 és a master tervben rögzített fixture-számok.
+- Izolált demo MySQL reset PASS, schema 060 és a master tervben rögzített fixture-számok.
 - A három kontrollált V2 forrásváltozat saját, 746–754 szavas magyar cikkfixture; a 120/150 millió forintos és a hiányzó összegű változatok külön source-állításként maradnak meg.
 - A canonical raw-input harness derived tábla közvetlen írása nélkül futott. M2/M4/M5/M6/M8/M9/M10/M12/M13/M15 ágak PASS; 7 scope-olt unresolved anchor és az M11 winner nélküli conflict is létrejött.
 - Runtime smoke PASS: fő route-ok és feed/source/trends endpointok 200; `V21-BUG-F002`, `V21-BUG-F003` és `V21-BUG-F004` javítva.

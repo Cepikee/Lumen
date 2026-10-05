@@ -4,7 +4,7 @@
 
 - Commit: `3b54f65` (release code baseline; későbbi readiness dokumentációs commitok: `aa1d761`, `d76193f`)
 - Branch: `develop/utom-recovery`
-- Schema: `059`
+- Schema: `060`
 - Node: `24.19.0`
 - Next.js: `16.3.6`
 - MySQL target: `8.x`; isolated evidence `8.0.46`
@@ -48,7 +48,7 @@ Safe initial rollout:
 
 ## V2 contract boundary
 
-The release contains the schema-059 V2 provenance, entity, claim, relation, event, timeline, conflict/history and read-model contracts. V2 server and frontend flags remain independently controllable and OFF for the first production rollout.
+The release contains the schema-060 V2 provenance, entity, claim, relation, event, timeline, conflict/history, read-model and raw-text retention audit contracts. V2 server and frontend flags remain independently controllable and OFF for the first production rollout.
 
 ## Required services
 
@@ -62,7 +62,7 @@ The release contains the schema-059 V2 provenance, entity, claim, relation, even
 
 ## Known limitations and deferred items
 
-- Full-text retention and source/TDM policy require owner approval.
+- Full-text retention implementation is complete; source/TDM policy still requires the separately recorded owner/legal decision.
 - 444 remains `THIRD-PARTY / PROXY – HOLD`.
 - Payment, paid AI, production hosting, DNS/Cloudflare and production alert provider are not implemented/configured.
 - FFmpeg is a host capability skip.

@@ -19,7 +19,7 @@ Ez a runbook helyi vagy staging jellegű diagnosztikára készült. Production a
 ## Schema mismatch
 
 - Ellenőrizd az aktuális migration láncot a `npm run db:status` paranccsal.
-- A szükséges séma verziója a repository legutóbbi migrationje, jelenleg 059.
+- A szükséges séma verziója a repository legutóbbi migrationje, jelenleg 060.
 - Hiányzó tábla, oszlop, index vagy checksum eltérés esetén állj meg és készíts külön migration tervet.
 
 ## Worker stale

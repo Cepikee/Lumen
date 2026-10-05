@@ -3,7 +3,7 @@
 Dátum: 2026-10-04
 Release baseline: `3b54f65`
 Branch: `develop/utom-recovery`
-Schema: `059`
+Schema: `060`
 
 Ez a dokumentum előkészítési ellenőrzőlista. Production deploy, DNS-módosítás és production adatbázis-művelet ebben a körben nem történt.
 
@@ -14,7 +14,7 @@ Ez a dokumentum előkészítési ellenőrzőlista. Production deploy, DNS-módos
 | Release commit rögzítve | PASS | `3b54f65` és a követő dokumentációs commitok |
 | Node verzió | PASS | Node `24.19.0`; production hoston ugyanaz a főverzió kötelező |
 | Next.js verzió | PASS | `16.3.6` |
-| Schema | PASS | Migration chain latest `059` |
+| Schema | PASS | Migration chain latest `060` |
 | TypeScript / lint / import | PASS | legutóbbi gate zöld, lint 0 error |
 | Offline regresszió | PASS | `401/401` |
 | Production build | PASS | `75/75` route-generálás |
@@ -50,7 +50,7 @@ Ez a dokumentum előkészítési ellenőrzőlista. Production deploy, DNS-módos
 
 | Tétel | Állapot |
 |---|---|
-| Full-text retention | OWNER ACTION |
+| Full-text retention | CODE PASS | `060` audit table, dry-run/execute worker, recovery-safe eligibility and evidence preservation |
 | Source/TDM/paywall policy | OWNER ACTION |
 | 444 canonical feed | OWNER ACTION – jelenleg HOLD |
 | FFmpeg/Híradó indulási scope | OWNER ACTION |

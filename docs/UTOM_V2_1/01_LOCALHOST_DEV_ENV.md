@@ -7,7 +7,7 @@ Reprodukálható, productiontól elválasztott környezet, amelyben a teljes fel
 ## Követelmények
 
 - WSL Ubuntu 24.04 és MySQL 8.0.46, kizárólag helyi adatbázissal.
-- Migration lánc: 001–059.
+- Migration lánc: 001–060.
 - Determinisztikus seed legalább 30–50 cikkel és V2 edge case-ekkel.
 - Explicit reset és reseed parancs; production célpontot megtagadó védelemmel.
 - Cloudflare, analytics, email, payment és paid AI nélkül is működő UI.
@@ -27,7 +27,7 @@ Developmentben a `NEXT_PUBLIC_LOCAL_DEMO_CAPTCHA=true` és `UTOM_LOCAL_DEMO_CAPT
 ## 2026-10-04 validációs checkpoint
 
 - A demo MySQL izolált, nem production példányon futott: loopback, `utom_dev`, MySQL 8.0.46, ideiglenes 3307 port.
-- A reset/migration/seed eredménye: schema 059; 12 source, 40 article, 34 summary, 3 user, 4 entity, 8 alias, 3 relation, 12 claim, 3 event, 25 timeline item, 2 conflict; paid AI és payment 0.
+- A reset/migration/seed eredménye: schema 060; 12 source, 40 article, 34 summary, 3 user, 4 entity, 8 alias, 3 relation, 12 claim, 3 event, 25 timeline item, 2 conflict; paid AI és payment 0.
 - A tiszta temp másolatban `npm ci` és `npm run check` PASS. A workspace `node_modules` változatlan maradt.
 - A localhost demo során a DB portot figyelmen kívül hagyó route-poolok és a Híradó üres-result renderhibája reprodukálva és javítva lett (`V21-BUG-F002`, `V21-BUG-F003`).
 - A production-mode demo Premium login session HTTP localhoston is visszaolvasható (`V21-BUG-F004` után). A valódi Windows Chrome CDP acceptance disposable profillal lefutott; a viewportonkénti screenshotok külső ideiglenes acceptance könyvtárban készültek.
@@ -35,4 +35,4 @@ Developmentben a `NEXT_PUBLIC_LOCAL_DEMO_CAPTCHA=true` és `UTOM_LOCAL_DEMO_CAPT
 
 ## Isolated browser acceptance runtime – 2026-10-04
 
-A reprodukálható browser acceptance kör egy ideiglenes lokális MySQL példányt használt `127.0.0.1:33306` címen, külön `utom_dev` adatbázissal és `demo` felhasználóval, valamint külön disposable Chrome profilt. A schema 059, 40 article, 35 summary, 12 source, 3 user és a V2 canonical fixture reset/seed után ellenőrizve lett. Ez a kör production adatbázist és a felhasználó normál Chrome profilját nem használta.
+A reprodukálható browser acceptance kör egy ideiglenes lokális MySQL példányt használt `127.0.0.1:33306` címen, külön `utom_dev` adatbázissal és `demo` felhasználóval, valamint külön disposable Chrome profilt. A schema 060, 40 article, 35 summary, 12 source, 3 user és a V2 canonical fixture reset/seed után ellenőrizve lett. Ez a kör production adatbázist és a felhasználó normál Chrome profilját nem használta.

@@ -2,14 +2,14 @@
 
 Dátum: 2026-10-04
 Branch: `develop/utom-recovery`
-Schema: `059`
+Schema: `060`
 
 ## Kód- és termékállapot
 
 - Canonical V2.1 intelligence, entity lifecycle, provenance és read model flow: a korábbi izolált acceptance evidence szerint PASS.
 - SEO/sharing: metadata, canonical, robots, sitemap és adatból képzett article `NewsArticle` structured data PASS.
 - Premium UX: a jelenleg működő context/timeline/source comparison értékek dokumentáltak; payment/provider nélküli gombok őszintén disabled állapotúak.
-- Ingestion/data audit: technikailag kész, de a full-text retention és a forrásonkénti policy owner review-t igényel.
+- Ingestion/data audit: technikailag kész; a full-text retention implementáció lezárva, a forrásonkénti policy owner/legal review külön marad.
 - Localhost render read-mix terhelés: 10/25/50/100/250/500 konkurencia, 0% HTTP hiba, 500 kérés/fokozat. A DB/worker soak és a VPS méretezés ebből nem bizonyított.
 
 ## Quality evidence
@@ -72,9 +72,9 @@ A deployhoz még külön owner/infrastruktúra kapu kell:
 ## Owner policy freeze és remote staging gate – 2026-10-04
 
 - Owner policy baseline: retention target 24 óra successful / 7 nap failed-retry; paywall bypass tilos; bizonytalan source HOLD; 444 canonical ingestion OFF; paid AI és analytics OFF; FFmpeg deferred; backup 7 daily / 4 weekly / 3 monthly, off-host és restore rehearsal kötelező.
-- Raw/full-text retention technikai állapot: `RAW FULL-TEXT RETENTION IMPLEMENTED: NO`. A 24 órás cleanup jelenleg nincs implementálva; a pipeline/recovery függőségek miatt ezt nem szabad vakon törléssel pótolni. A későbbi megvalósítási terv: `docs/UTOM_V2_1/22_RAW_TEXT_RETENTION_IMPLEMENTATION_PLAN.md`.
+- Raw/full-text retention technikai állapot: `RAW FULL-TEXT RETENTION IMPLEMENTED: YES`. A 24 órás/7 napos cleanup külön, dry-run alapértelmezett, lockolt és auditált workerben működik; acceptance: `docs/UTOM_V2_1/23_RAW_TEXT_RETENTION_ACCEPTANCE.md`.
 - Source policy, payment, staging email, hosting, monitoring alerts és production domain rollout státusza az owner döntési dokumentumban szerepel.
 - Remote staging manifest: `docs/UTOM_V2_1/21_REMOTE_STAGING_BUILD_MANIFEST.md`.
 - `REMOTE STAGING READY TO BUILD: NO` – a provisioning host, staging secrets, email sink, backup target és owner/infra hozzáférések még nincsenek megadva.
-- `FREE PUBLIC PRODUCTION READY: NO` – raw retention implementation, transactional email és production infrastructure hiányzik.
+- `FREE PUBLIC PRODUCTION READY: NO` – transactional email és production infrastructure továbbra is hiányzik; a kódoldali raw retention blocker megszűnt.
 - `PAID PREMIUM PRODUCTION READY: NO` – payment project nincs implementálva.

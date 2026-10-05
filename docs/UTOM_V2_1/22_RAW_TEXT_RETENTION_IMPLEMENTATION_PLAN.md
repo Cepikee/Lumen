@@ -1,43 +1,51 @@
-# Raw/full-text retention implementation plan
+# Raw/full-text retention implementation plan — COMPLETED
 
-Állapot: `IMPLEMENTATION REQUIRED BEFORE PRODUCTION`
-Policy: owner által elfogadott célérték – sikeres feldolgozás után legfeljebb 24 óra, failed/retry állapotban legfeljebb 7 nap.
+**Projekt:** UTOM.HU / Lumen
+**Branch:** `develop/utom-recovery`
+**Schema:** `060`
+**Owner policy:** sikeres feldolgozás után 24 óra; terminal failed/retry esetén 7 nap.
+**Runtime policy:** UTC, fail-closed konfiguráció, alapértelmezett dry-run.
 
-Ez a terv nem módosít adatot és nem futtat törlést.
+## Dependency audit
 
-## Auditált tárolási felületek
+| Consumer | Raw text szükséges? | Meddig? | Reconstructable? | Retention impact |
+|---|---:|---|---:|---|
+| `lib/feed-ingestion.js`, `pipeline/scrapeArticle.js` | írás | ingest és scrape checkpoint | source URL alapján csak policy szerint | purge nem módosítja az article identityt |
+| `pipeline/cron.js`, `lib/cron.js` | igen | minden raw-függő step terminális állapotáig | nem | aktív/pending/uncertain/recoverable állapot blokkol |
+| summary/category/sentiment/keywords/embedding/plagiarism/clickbait | igen | saját durable step befejezéséig | saját outputból nem teljesen | required step és retry ellenőrzés |
+| V2 entity/claim/relation extraction | igen | V2 processing és evidence persistence végéig | csak mentett projectionből | processing és hiányzó evidence span blokkol |
+| `lib/v2/incremental-backfill*` | esetenként | batch feldolgozás közben | explicit `raw_text_unavailable` | purged article nem kerül csendben feldolgozásra |
+| article/context/source comparison/Premium read models | nem a teljes body | tartós summary/projection után | igen | saját summary, metadata, V2 és evidence megmarad |
+| debug/admin/legacy | nincs request-time purge függőség | explicit reprocessig | raw hiánynál kontrollált hiba | nincs arbitrary public delete |
 
-| Tároló | Tartalom | Raw/full source? | Policy szerint |
-|---|---|---:|---|
-| `articles.content_text` | scraper/RSS által megtisztított teljes forrásszöveg | Igen | 24 óra / failed 7 nap |
-| `articles.short_summary`, `articles.long_summary` | feldolgozott, saját összefoglaló | Nem | hosszabb távon megőrizhető |
-| `summaries.content`, `summaries.detailed_content` | saját summary/read model tartalom | Nem | hosszabb távon megőrizhető |
-| `v2_entity_mentions.raw_text` | rövid entity mention/evidence span | Nem, minimális span | külön evidence policy |
-| `v2_claim_evidence.text_span` | korlátozott claim evidence span | Nem, minimális span | külön evidence policy |
-| `v2_relation_evidence.text_span` | korlátozott relation evidence span | Nem, minimális span | külön evidence policy |
-| `daily_reports.content`, `videos.description` | saját report/media leírás | Nem | külön domain policy |
+Az audit során a teljes raw/full body egyetlen kanonikus tárolója az `articles.content_text` volt. A `summaries`, V2 claim/relation evidence spanok, provenance, canonical URL/hash és strukturált V2 táblák külön maradnak.
 
-## Feldolgozási függőségek
+## Implementált modell
 
-Az `articles.content_text` jelenleg több feldolgozási út bemenete: rövid és hosszú összefoglaló, kategória, sentiment, kulcsszó, embedding, clickbait, plagiarism, cluster/related és a canonical V2 extraction handoff. A retry/recovery útvonal később is visszaolvashatja a mezőt.
+- A `060_raw_text_retention_audit` migráció append-only audit/run táblát hoz létre.
+- A worker csak `done` vagy `failed` cikkeket vizsgál, bounded keyset batch-ben.
+- Successful purge: `updated_at + 24h`, minden required step `done`, nincs aktív claim, nincs aktív/pending/uncertain step, V2 projection kész, minden evidence span tartósan jelen van.
+- Failed purge: `updated_at + 7d`, nincs aktív vagy pending recovery, és az attempt limit kimerült vagy a failure explicit nem retryable.
+- A purge tranzakcióban `SELECT ... FOR UPDATE`, új eligibility ellenőrzés, majd kizárólag `articles.content_text=NULL` történik.
+- Második worker és ismételt futás no-op; csak a lockot megszerző worker ír purged audit eseményt.
+- A script alapértelmezett módja dry-run; végrehajtás külön `--execute` és `UTOM_RETENTION_EXECUTE=true` opt-in.
+- A raw body soha nem kerül logba vagy audit metadata-ba.
 
-Következmény: automatikus 24 órás törlés jelenlegi formában funkciót törhet, ha egy required vagy retryable step még pending/failed/uncertain állapotú. A retention cleanup nem vezethető be pusztán egy időzített `DELETE` lekérdezéssel.
+## Recovery, backfill és reprocess
 
-## Későbbi megvalósítási lépések
+`in_progress`, `pending`, `uncertain`, friss retry és stale-but-recoverable állapot fail-closed módon védett. Purge után a pipeline és a legacy útvonal explicit `raw_text_unavailable` hibát ad, nem indul üres szöveges AI-feldolgozás. Az incremental backfill purged rekordnál `unavailable` számlálót és `raw_text_unavailable` eredményt ad vissza, és nem claimel vagy módosít processing stepet.
 
-1. Migration: explicit `raw_content_expires_at` és szükség esetén `raw_content_retention_reason` mező az `articles` táblán.
-2. Ingestionkor expiry számítás: normál feldolgozásra 24 óra, failed/retry állapotra legfeljebb 7 nap.
-3. Pipeline contract: a cleanup csak akkor nullázhatja a raw mezőt, ha minden raw-függő required step terminális, nincs aktív claim, és nincs recovery hold.
-4. Cleanup job: batch méret, lock/claim, idempotencia, audit event, dry-run és metrics.
-5. Reprocessing contract: raw törlés után a retry útvonal explicit `raw_content_unavailable` állapotot adjon, ne induljon hibás részfeldolgozás.
-6. Evidence review: a mention/claim/relation spanok hossz- és hozzáférési határai maradjanak külön a teljes raw retentiontől.
-7. Fixture: pending, failed, uncertain, completed, missing raw, duplicate cleanup és concurrent worker esetekre regresszió.
-8. Staging restore rehearsal és owner sign-off után lehet production migration/cleanup ütemezést készíteni.
+## Observability
 
-## Indulási besorolás
+Az internal operational snapshot retention metrikákat tartalmaz: legutóbbi eligible/purged/failed számlálók, utolsó 24 órás purge időpont, legöregebb eligible időpont és worker last run. A public liveness válasz ezekből semmit nem tesz közzé.
 
-- `RAW FULL-TEXT RETENTION IMPLEMENTED: NO`
-- Free public launch blocker: **YES**, amíg a jóváhagyott retention policy nem érvényesül a production ingestionben.
-- Paid Premium launch blocker: **YES**, a free gate mellett a payment/entitlement külön hiányzó kapu.
-- Owner/legal blocker: **YES**, forrásonkénti policy és retention jóváhagyás szükséges.
-- Staging build blocker: **NO**, a staging felépíthető raw cleanup aktiválása nélkül; a cleanup jelenleg nem fut, ezt az eltérést dokumentálni kell.
+## Teszt- és release-gate eredmény
+
+- Célzott retention regression: `tests/unit/raw-text-retention.test.cjs` — 14/14 PASS.
+- Migration chain: 001→060 statikusan contiguous és safe; readiness 060-ra frissítve; 059 és 061 fail-closed.
+- M17 backfill regression: 7/7 PASS, beleértve explicit raw-unavailable ágat.
+- TypeScript, import check és offline suite a teljes quality körben futtatandó a commit előtt.
+- MySQL 8 fresh/upgrade/idempotence, transaction rollback és duplicate-worker acceptance a `23_RAW_TEXT_RETENTION_ACCEPTANCE.md` szerint izolált környezetben futtatandó.
+
+**RAW FULL-TEXT RETENTION IMPLEMENTED: YES — code path and targeted regressions complete.**
+Production deploy, VPS, payment, paid AI és source-policy bypass ebben a körben nem történt.

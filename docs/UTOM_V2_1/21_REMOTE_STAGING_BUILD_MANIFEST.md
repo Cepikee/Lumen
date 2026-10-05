@@ -10,7 +10,7 @@
 - Storage: SSD/NVMe, kezdetben legalább 80–120 GB használható hely tartalékkal; a tényleges igényt MySQL, backup és log mérés alapján kell pontosítani.
 - Node: `24.19.0` vagy kompatibilis Node 24 LTS runtime.
 - npm: a repository lockfile-jához tartozó npm, `npm ci` kötelező.
-- MySQL: 8.x, izolált staging adatbázis, schema `059`, UTC és `utf8mb4`.
+- MySQL: 8.x, izolált staging adatbázis, schema `060`, UTC és `utf8mb4`.
 
 ## Network and firewall
 
@@ -66,7 +66,7 @@
 
 - Staging DB backup és restore próba kötelező, legalább egy másik storage helyre másolva.
 - Monitor: public liveness, protected readiness, DB connections, worker heartbeat, pending/failed/stale article, RSS failures, disk, memory, backup age.
-- Validation sorrend: clean OS → Node/npm → MySQL → migration 001→059 → build → services → HTTPS → readiness → browser/auth → Premium mock/entitlement → normal RSS → backup/restore → rollback → load → worker+read.
+- Validation sorrend: clean OS → Node/npm → MySQL → migration 001→060 → retention dry-run/execute acceptance → build → services → HTTPS → readiness → browser/auth → Premium mock/entitlement → normal RSS → backup/restore → rollback → load → worker+read.
 
 ## Rollback
 

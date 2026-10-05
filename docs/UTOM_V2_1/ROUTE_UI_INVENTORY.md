@@ -37,7 +37,7 @@
 | Insights | InsightFilters, InsightList, charts, useInsights | insights/* |
 | V2 cikk | V2ArticleContextPanel, integration panels, useV2ArticleContext | v2/articles, timelines, entities, events |
 | V2 Premium | V2PremiumIntelligencePanel, useV2PremiumIntelligence | v2/premium/intelligence |
-| Helyi demo | `scripts/dev-demo-bootstrap.cjs` | MySQL 8, migrations 001–059 |
+| Helyi demo | `scripts/dev-demo-bootstrap.cjs` | MySQL 8, migrations 001–060 |
 
 ## Coverage státusz
 

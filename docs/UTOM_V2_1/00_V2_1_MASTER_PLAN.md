@@ -21,7 +21,7 @@
 | Fázis | Cél | Acceptance |
 |---|---|---|
 | A | Dokumentáció és inventory | 14 V2.1 dokumentum, route/UI inventory, függőségek rögzítve |
-| B | Localhost dev/demo harness | reset → migration 001–059 → determinisztikus seed → readiness → indítás reprodukálható |
+| B | Localhost dev/demo harness | reset → migration 001–060 → determinisztikus seed → readiness → indítás reprodukálható |
 | C | Helyi auth és Premium | anonymous/free/active/expired állapotok valódi sessionnel, production auth változatlan |
 | D | Chrome acceptance | a fontos route-ok végigjárhatók production szolgáltatás nélkül |
 | E | UI/UX és mobil | 360, 390, 430, 768, 1366 és 1920 viewport lefedve |
@@ -39,7 +39,7 @@ Minden változás útja: inventory → reprodukció → minimális javítás →
 - Inventory: 94 `app/` route/page/layout elem és a fő UI/hook/API függőségek rögzítve (`ROUTE_UI_INVENTORY.md`).
 - Következő konkrét lépés: a rögzített V2.1 acceptance evidence review-ja; új browser finding csak új reprodukció esetén nyitható.
 - A tiszta ideiglenes másolatban `npm ci`, TypeScript, ESLint (0 error), import check, offline **379/379** és production build PASS; az ESLint meglévő figyelmeztetései nem hibák.
-- Izolált MySQL 8.0.46 demo reset PASS: schema 059, 12 source (11 aktív), 40 article, 34 summary, 3 user, 4 entity, 8 alias, 3 relation, 12 claim, 3 event, 25 timeline item, 2 conflict; paid AI/payment 0.
+- Izolált MySQL 8.0.46 demo reset PASS: schema 060, 12 source (11 aktív), 40 article, 34 summary, 3 user, 4 entity, 8 alias, 3 relation, 12 claim, 3 event, 25 timeline item, 2 conflict; paid AI/payment 0.
 - V2.1 finding `V21-BUG-F001`: FIXED. A layout localhoston is külső reCAPTCHA/Analytics kódot töltött, és a LoginModal közvetlenül a hiányzó `grecaptcha` globálishoz kötődött. A javítás explicit site-key/analytics kapcsolót, loopback-only `local-demo` CAPTCHA adaptert és közös kliens helper-t használ; productionben nincs bypass.
 - `REAL PAID AI CALL = 0`, `PAYMENT CALL = 0`.
 - `V21-BUG-F002`: FIXED. Több runtime MySQL connection config figyelmen kívül hagyta a `DB_PORT` értéket, így a localhost demo a 3306-os példányra esett vissza. A route-ok, a node pool és a kapcsolódó worker configok most explicit portot használnak.

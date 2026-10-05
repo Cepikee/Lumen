@@ -2,7 +2,7 @@
 
 Dátum: 2026-10-04
 Branch: `develop/utom-recovery`
-Schema: `059`
+Schema: `060`
 
 > **EZ TECHNIKAI AUDIT, NEM JOGI SZAKVÉLEMÉNY.**
 
@@ -24,10 +24,10 @@ A dokumentum a repository tényleges kódviselkedését írja le. Nem ad jogi, s
 
 - A mező `LONGTEXT`, és a scraper a megtisztított külső oldalszöveget ide írhatja.
 - Pipeline feldolgozás használja: rövid/hosszú összefoglaló, kategória, kulcsszó, sentiment, clickbait, embedding és plágium-ellenőrzés.
-- A repositoryban nem találtam automatikus TTL-t, törlési jobot vagy dokumentált retention határidőt erre a mezőre.
+- A `060` migration és a külön retention worker már auditált, fail-closed 24 órás/7 napos policy-t alkalmaz erre a mezőre.
 - A public `/api/summaries` és az article UI a `summaries.content` és `summaries.detailed_content` mezőket adja vissza; az `articles.content_text` közvetlenül nem jelenik meg a public feedben.
 - A Premium category Insights útvonal legfeljebb 300 karakteres `excerpt` mezőt képezhet `content_text`-ből. Ez rövid, védett felhasználói részlet, nem teljes cikkpublikáció.
-- Következtetés: teljes eredeti szöveg technikailag tárolódhat a belső `articles.content_text` mezőben; ezt owner által jóváhagyott retention policy nélkül nem módosítottam.
+- Következtetés: a teljes eredeti szöveg a feldolgozási és recovery-függőségek lezárása után a külön retention workerrel törölhető; a derived/V2/evidence/provenance adatok megmaradnak.
 
 ### Összefoglalók
 
@@ -62,18 +62,18 @@ A V2 provenance rekord tartalmazhatja az article ID-t, URL identityt, canonical 
 
 ## Megállapítások és owner review
 
-- **V21-DATA-F001 – Full-text retention nincs technikailag meghatározva.** A teljes szöveg tárolása lehetséges, de a repositoryban nincs bizonyított TTL vagy törlési politika. Ez policy/owner review tétel, nem automatikusan javítható kódhiba.
+- **V21-DATA-F001 – Full-text retention:** FIXED a `060` migration, a tranzakciós retention worker, a reprocess/backfill `raw_text_unavailable` ág és a célzott regressziók által. A forrás/TDM jogi policy továbbra is külön owner/legal döntés.
 - **V21-DATA-F002 – 444 proxy függőség.** A 444 feed canonical production használata tudatosan HOLD állapotban marad; nem kódhiba.
 - **V21-DATA-F003 – Paywall/TDM jogi minősítés.** A kód technikai bypass mechanizmust nem tartalmaz, de a forrásonkénti jogi/policy engedélyezés külső owner döntés.
 
 ## Státusz
 
-`TECHNICAL AUDIT COMPLETE – OWNER REVIEW REQUIRED FOR RETENTION/SOURCE POLICY`
+`TECHNICAL AUDIT COMPLETE – RETENTION IMPLEMENTED; SOURCE POLICY OWNER REVIEW REQUIRED`
 
 Production adatbázis, payment, paid AI és production deploy nem érintett.
 
 ## Owner policy freeze – 2026-10-04
 
-Az owner technikai indulási policy elfogadott célértéke: sikeres feldolgozás után `articles.content_text` legfeljebb 24 óráig, failed/retry esetén legfeljebb 7 napig maradhat meg. Ez a policy jelenleg **nincs implementálva**; a mezőt több pipeline és recovery step használja, ezért a vak törlés adat- vagy feldolgozási hibát okozhatna. A migration/cleanup/recovery terv a `22_RAW_TEXT_RETENTION_IMPLEMENTATION_PLAN.md` dokumentumban található.
+Az owner technikai indulási policy elfogadott célértéke: sikeres feldolgozás után `articles.content_text` legfeljebb 24 óráig, failed/retry esetén legfeljebb 7 napig maradhat meg. Ez a policy a `060` migrationnel, a transactionális workerrel, evidence-védelemmel és explicit reprocess/backfill ággal implementálva van. A részletes acceptance: `23_RAW_TEXT_RETENTION_ACCEPTANCE.md`.
 
 Paywall bypass tiltott, bizonytalan source `HOLD`, a 444 proxy canonical ingestion pedig `OFF`. Ez policy freeze, nem jogi szakvélemény.

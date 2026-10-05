@@ -4,7 +4,7 @@ Ez csak jóváhagyásra váró terv. Nem futott production környezetben.
 
 ## Előfeltételek
 
-1. Remote stagingen azonos Node/Next/MySQL főverzió és a schema-059 migration chain PASS.
+1. Remote stagingen azonos Node/Next/MySQL főverzió és a schema-060 migration chain PASS.
 2. Production backup target, restore rehearsal és rollback owner kijelölve.
 3. Minden secret runtime secret store-ban, érték nélkül a Gitben.
 4. `production-preflight` PASS: explicit production mode, DB connectivity, latest migration, readiness, nulla aktív claim/writer.
