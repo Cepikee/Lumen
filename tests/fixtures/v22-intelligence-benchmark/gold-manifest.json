@@ -1,0 +1,5052 @@
+{
+  "contractVersion": "v22.intelligence-quality-benchmark.1",
+  "generatedBy": "lib/v22/benchmark-dataset.cjs",
+  "sourcePolicy": "all text is original controlled Hungarian benchmark material; no full real article is copied",
+  "scenarios": [
+    {
+      "id": "V22-S01",
+      "slug": "numeric-disagreement",
+      "category": "numeric disagreement",
+      "title": "Eltérő összegek ugyanahhoz a beruházáshoz",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Eltérő összegek ugyanahhoz a beruházáshoz – Telex-szerű",
+          "url": "https://telex.hu/v22/numeric-disagreement/1",
+          "wordCount": 529,
+          "observationIds": [
+            "V22-S01:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu-szerű"
+          },
+          "title": "Eltérő összegek ugyanahhoz a beruházáshoz – 24.hu-szerű",
+          "url": "https://24.hu/v22/numeric-disagreement/2",
+          "wordCount": 527,
+          "observationIds": [
+            "V22-S01:claim:2:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "index.hu",
+            "label": "Index-szerű"
+          },
+          "title": "Eltérő összegek ugyanahhoz a beruházáshoz – Index-szerű",
+          "url": "https://index.hu/v22/numeric-disagreement/3",
+          "wordCount": 529,
+          "observationIds": []
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "project",
+            "mention": "Tiszapart mérőállomás",
+            "type": "project",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "project",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S01:claim:1:1",
+            "predicate": "PROJECT_COST",
+            "source": "telex.hu",
+            "sentence": "A program támogatási kerete 120 millió forint.",
+            "evidence": "120 millió forint",
+            "value": 120,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S01:claim:2:1",
+            "predicate": "PROJECT_COST",
+            "source": "24.hu",
+            "sentence": "A teljes projekt költsége 150 millió forint.",
+            "evidence": "150 millió forint",
+            "value": 150,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [
+          {
+            "type": "numeric",
+            "claims": [
+              "telex.hu",
+              "24.hu"
+            ],
+            "explanation": "A két forrás azonos projekthez eltérő összeget közöl; a költségfogalom azonossága nem bizonyított."
+          }
+        ],
+        "nonConflicts": [],
+        "omissions": [
+          {
+            "source": "index.hu",
+            "predicate": "PROJECT_COST"
+          }
+        ],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S02",
+      "slug": "same-number-different-semantics",
+      "category": "same number, different semantic meaning",
+      "title": "Azonos szám, eltérő költségfogalom",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Azonos szám, eltérő költségfogalom – Telex-szerű",
+          "url": "https://telex.hu/v22/same-number-different-semantics/1",
+          "wordCount": 527,
+          "observationIds": [
+            "V22-S02:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu-szerű"
+          },
+          "title": "Azonos szám, eltérő költségfogalom – 24.hu-szerű",
+          "url": "https://24.hu/v22/same-number-different-semantics/2",
+          "wordCount": 530,
+          "observationIds": [
+            "V22-S02:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "project",
+            "mention": "Déli csatornaprogram",
+            "type": "project",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "project",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S02:claim:1:1",
+            "predicate": "SUBSIDY_AMOUNT",
+            "source": "telex.hu",
+            "sentence": "A pályázati támogatás összege 120 millió forint.",
+            "evidence": "támogatás összege 120 millió forint",
+            "value": 120,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S02:claim:2:1",
+            "predicate": "PROJECT_COST",
+            "source": "24.hu",
+            "sentence": "A teljes projektköltség szintén 120 millió forint, a saját forrás nélkül.",
+            "evidence": "teljes projektköltség szintén 120 millió forint",
+            "value": 120,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [
+          {
+            "reason": "different_predicate_semantics",
+            "claims": [
+              "SUBSIDY_AMOUNT",
+              "PROJECT_COST"
+            ]
+          }
+        ],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S03",
+      "slug": "percentage-disagreement",
+      "category": "percentage disagreement",
+      "title": "Eltérő készültségi százalékok",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Eltérő készültségi százalékok – Telex-szerű",
+          "url": "https://telex.hu/v22/percentage-disagreement/1",
+          "wordCount": 524,
+          "observationIds": [
+            "V22-S03:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu-szerű"
+          },
+          "title": "Eltérő készültségi százalékok – 24.hu-szerű",
+          "url": "https://24.hu/v22/percentage-disagreement/2",
+          "wordCount": 525,
+          "observationIds": [
+            "V22-S03:claim:2:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "hvg.hu",
+            "label": "HVG-szerű"
+          },
+          "title": "Eltérő készültségi százalékok – HVG-szerű",
+          "url": "https://hvg.hu/v22/percentage-disagreement/3",
+          "wordCount": 526,
+          "observationIds": [
+            "V22-S03:claim:3:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "project",
+            "mention": "Északi vasúti csomópont",
+            "type": "project",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "project",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S03:claim:1:1",
+            "predicate": "COMPLETION_PERCENT",
+            "source": "telex.hu",
+            "sentence": "A kivitelezés készültsége 40 százalék.",
+            "evidence": "készültsége 40 százalék",
+            "value": 40,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S03:claim:2:1",
+            "predicate": "COMPLETION_PERCENT",
+            "source": "24.hu",
+            "sentence": "A számlázási mérföldkő alapján 60 százalékos a teljesítés.",
+            "evidence": "60 százalékos a teljesítés",
+            "value": 60,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S03:claim:3:1",
+            "predicate": "COMPLETION_PERCENT",
+            "source": "hvg.hu",
+            "sentence": "A helyszíni munkák körülbelül 45 százaléknál tartanak.",
+            "evidence": "körülbelül 45 százaléknál",
+            "value": 45,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [
+          {
+            "type": "categorical",
+            "claims": [
+              "telex.hu",
+              "24.hu"
+            ],
+            "explanation": "A készültségi százalékok különböznek, a mérési módszer részben eltérhet."
+          }
+        ],
+        "nonConflicts": [],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S04",
+      "slug": "unit-conversion",
+      "category": "unit conversion",
+      "title": "Kilométer és méter ugyanarról a távról",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Kilométer és méter ugyanarról a távról – Telex-szerű",
+          "url": "https://telex.hu/v22/unit-conversion/1",
+          "wordCount": 530,
+          "observationIds": [
+            "V22-S04:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "index.hu",
+            "label": "Index-szerű"
+          },
+          "title": "Kilométer és méter ugyanarról a távról – Index-szerű",
+          "url": "https://index.hu/v22/unit-conversion/2",
+          "wordCount": 530,
+          "observationIds": [
+            "V22-S04:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "levee",
+            "mention": "Töltésszakasz",
+            "type": "project",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "levee",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S04:claim:1:1",
+            "predicate": "DISTANCE",
+            "source": "telex.hu",
+            "sentence": "A töltés új szakasza 1 kilométer hosszú.",
+            "evidence": "1 kilométer hosszú",
+            "value": 1,
+            "unit": "km",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S04:claim:2:1",
+            "predicate": "DISTANCE",
+            "source": "index.hu",
+            "sentence": "A tervlap szerint a szakasz hossza 1000 méter.",
+            "evidence": "1000 méter",
+            "value": 1000,
+            "unit": "m",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [
+          {
+            "reason": "unit_conversion_equal",
+            "normalizedValue": "1000 m",
+            "claims": [
+              "telex.hu",
+              "index.hu"
+            ]
+          }
+        ],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S05",
+      "slug": "date-time-disagreement",
+      "category": "date/time disagreement",
+      "title": "Két eltérő megnyitási dátum",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Két eltérő megnyitási dátum – Telex-szerű",
+          "url": "https://telex.hu/v22/date-time-disagreement/1",
+          "wordCount": 527,
+          "observationIds": [
+            "V22-S05:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu-szerű"
+          },
+          "title": "Két eltérő megnyitási dátum – 24.hu-szerű",
+          "url": "https://24.hu/v22/date-time-disagreement/2",
+          "wordCount": 526,
+          "observationIds": [
+            "V22-S05:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "center",
+            "mention": "Közösségi központ",
+            "type": "project",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "center",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S05:claim:1:1",
+            "predicate": "OPENING_DATE",
+            "source": "telex.hu",
+            "sentence": "A központot június 1-jén nyithatják meg.",
+            "evidence": "június 1-jén",
+            "value": "2027-06-01",
+            "unit": "date",
+            "attribution": null,
+            "modality": "planned",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": {
+              "start": "2027-06-01"
+            },
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S05:claim:2:1",
+            "predicate": "OPENING_DATE",
+            "source": "24.hu",
+            "sentence": "A megnyitás várható időpontja június 15.",
+            "evidence": "június 15",
+            "value": "2027-06-15",
+            "unit": "date",
+            "attribution": null,
+            "modality": "planned",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": {
+              "start": "2027-06-15"
+            },
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [
+          {
+            "type": "temporal",
+            "claims": [
+              "telex.hu",
+              "24.hu"
+            ],
+            "explanation": "A két forrás eltérő tervezett megnyitási dátumot közöl."
+          }
+        ],
+        "nonConflicts": [],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S06",
+      "slug": "plan-vs-completed",
+      "category": "plan vs completed event",
+      "title": "Terv és már befejezett munka",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Terv és már befejezett munka – Telex-szerű",
+          "url": "https://telex.hu/v22/plan-vs-completed/1",
+          "wordCount": 527,
+          "observationIds": [
+            "V22-S06:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu-szerű"
+          },
+          "title": "Terv és már befejezett munka – 24.hu-szerű",
+          "url": "https://24.hu/v22/plan-vs-completed/2",
+          "wordCount": 526,
+          "observationIds": [
+            "V22-S06:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "park",
+            "mention": "Városi park",
+            "type": "location",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "park",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S06:claim:1:1",
+            "predicate": "OPENING_EVENT",
+            "source": "telex.hu",
+            "sentence": "A park felújítását ősszel tervezik elkezdeni.",
+            "evidence": "ősszel tervezik elkezdeni",
+            "value": "2027 ősz",
+            "unit": null,
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S06:claim:2:1",
+            "predicate": "OPENING_EVENT",
+            "source": "24.hu",
+            "sentence": "A próbaszakasz felújítása már befejeződött.",
+            "evidence": "már befejeződött",
+            "value": true,
+            "unit": null,
+            "attribution": null,
+            "modality": "completed",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [
+          {
+            "reason": "different_event_state",
+            "claims": [
+              "plan",
+              "completed"
+            ]
+          }
+        ],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S07",
+      "slug": "conditional-future",
+      "category": "conditional future statement",
+      "title": "Feltételesen induló építkezés",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Feltételesen induló építkezés – Telex-szerű",
+          "url": "https://telex.hu/v22/conditional-future/1",
+          "wordCount": 526,
+          "observationIds": [
+            "V22-S07:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "index.hu",
+            "label": "Index-szerű"
+          },
+          "title": "Feltételesen induló építkezés – Index-szerű",
+          "url": "https://index.hu/v22/conditional-future/2",
+          "wordCount": 525,
+          "observationIds": [
+            "V22-S07:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "school",
+            "mention": "Új iskolaépület",
+            "type": "project",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "school",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S07:claim:1:1",
+            "predicate": "CONSTRUCTION_START",
+            "source": "telex.hu",
+            "sentence": "Ha megérkezik a támogatás, megkezdődhet az építés.",
+            "evidence": "Ha megérkezik a támogatás, megkezdődhet",
+            "value": "construction-start",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S07:claim:2:1",
+            "predicate": "CONSTRUCTION_START",
+            "source": "index.hu",
+            "sentence": "A kivitelezés időpontjáról még nincs végleges döntés.",
+            "evidence": "még nincs végleges döntés",
+            "value": "unknown",
+            "unit": null,
+            "attribution": null,
+            "modality": "unknown",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [
+          {
+            "reason": "condition_preserved",
+            "claims": [
+              "conditional",
+              "unknown"
+            ]
+          }
+        ],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S08",
+      "slug": "direct-denial",
+      "category": "direct denial",
+      "title": "A közlemény szerint nem történt sérülés",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "A közlemény szerint nem történt sérülés – Telex-szerű",
+          "url": "https://telex.hu/v22/direct-denial/1",
+          "wordCount": 528,
+          "observationIds": [
+            "V22-S08:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu-szerű"
+          },
+          "title": "A közlemény szerint nem történt sérülés – 24.hu-szerű",
+          "url": "https://24.hu/v22/direct-denial/2",
+          "wordCount": 527,
+          "observationIds": [
+            "V22-S08:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "accident",
+            "mention": "Baleset",
+            "type": "event",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "accident",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S08:claim:1:1",
+            "predicate": "INJURY_OCCURRED",
+            "source": "telex.hu",
+            "sentence": "A balesetben nem történt sérülés.",
+            "evidence": "nem történt sérülés",
+            "value": false,
+            "unit": null,
+            "attribution": {
+              "type": "official",
+              "label": "mentőszolgálat"
+            },
+            "modality": "reported",
+            "polarity": "negated",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S08:claim:2:1",
+            "predicate": "INJURY_OCCURRED",
+            "source": "24.hu",
+            "sentence": "A rendőrség szerint személyi sérülés nem történt.",
+            "evidence": "személyi sérülés nem történt",
+            "value": false,
+            "unit": null,
+            "attribution": {
+              "type": "official",
+              "label": "rendőrség"
+            },
+            "modality": "asserted",
+            "polarity": "negated",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [
+          {
+            "reason": "same_negated_observation",
+            "claims": [
+              "telex.hu",
+              "24.hu"
+            ]
+          }
+        ],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S09",
+      "slug": "partial-denial",
+      "category": "partial denial",
+      "title": "Csak a tető sérült meg",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Csak a tető sérült meg – Telex-szerű",
+          "url": "https://telex.hu/v22/partial-denial/1",
+          "wordCount": 529,
+          "observationIds": [
+            "V22-S09:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "hvg.hu",
+            "label": "HVG-szerű"
+          },
+          "title": "Csak a tető sérült meg – HVG-szerű",
+          "url": "https://hvg.hu/v22/partial-denial/2",
+          "wordCount": 525,
+          "observationIds": [
+            "V22-S09:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "building",
+            "mention": "Fő téri könyvtár",
+            "type": "location",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "building",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S09:claim:1:1",
+            "predicate": "DAMAGE_SCOPE",
+            "source": "telex.hu",
+            "sentence": "A viharkár csak a tetőcserepeket érintette.",
+            "evidence": "csak a tetőcserepeket érintette",
+            "value": "roof_tiles",
+            "unit": null,
+            "attribution": null,
+            "modality": "partial",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": "roof_only",
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S09:claim:2:1",
+            "predicate": "DAMAGE_SCOPE",
+            "source": "hvg.hu",
+            "sentence": "Az épületben kisebb viharkár keletkezett.",
+            "evidence": "kisebb viharkár keletkezett",
+            "value": "minor_damage",
+            "unit": null,
+            "attribution": null,
+            "modality": "partial",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": "building",
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [
+          {
+            "reason": "partial_scope_compatible",
+            "claims": [
+              "roof_only",
+              "building"
+            ]
+          }
+        ],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S10",
+      "slug": "uncertain-claim",
+      "category": "uncertain claim",
+      "title": "Bizonytalan ok a kikötőben",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Bizonytalan ok a kikötőben – Telex-szerű",
+          "url": "https://telex.hu/v22/uncertain-claim/1",
+          "wordCount": 526,
+          "observationIds": [
+            "V22-S10:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "index.hu",
+            "label": "Index-szerű"
+          },
+          "title": "Bizonytalan ok a kikötőben – Index-szerű",
+          "url": "https://index.hu/v22/uncertain-claim/2",
+          "wordCount": 523,
+          "observationIds": [
+            "V22-S10:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "port",
+            "mention": "Folyóparti kikötő",
+            "type": "location",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "port",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S10:claim:1:1",
+            "predicate": "INCIDENT_CAUSE",
+            "source": "telex.hu",
+            "sentence": "A meghibásodást valószínűleg a túlmelegedés okozta.",
+            "evidence": "valószínűleg a túlmelegedés okozta",
+            "value": "overheating",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "szakértő"
+            },
+            "modality": "possible",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S10:claim:2:1",
+            "predicate": "INCIDENT_CAUSE",
+            "source": "index.hu",
+            "sentence": "A hiba oka egyelőre ismeretlen.",
+            "evidence": "oka egyelőre ismeretlen",
+            "value": "unknown",
+            "unit": null,
+            "attribution": null,
+            "modality": "unknown",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [
+          {
+            "reason": "uncertainty_preserved",
+            "claims": [
+              "possible",
+              "unknown"
+            ]
+          }
+        ],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S11",
+      "slug": "anonymous-attribution",
+      "category": "anonymous attribution",
+      "title": "Névtelen forrás által jelzett költözés",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Névtelen forrás által jelzett költözés – Telex-szerű",
+          "url": "https://telex.hu/v22/anonymous-attribution/1",
+          "wordCount": 532,
+          "observationIds": [
+            "V22-S11:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu-szerű"
+          },
+          "title": "Névtelen forrás által jelzett költözés – 24.hu-szerű",
+          "url": "https://24.hu/v22/anonymous-attribution/2",
+          "wordCount": 530,
+          "observationIds": [
+            "V22-S11:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "office",
+            "mention": "Városházi hivatal",
+            "type": "organization",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "office",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S11:claim:1:1",
+            "predicate": "RELOCATION_PLAN",
+            "source": "telex.hu",
+            "sentence": "Egy, az ügyet ismerő névtelen forrás szerint költözhet a hivatal.",
+            "evidence": "névtelen forrás szerint költözhet",
+            "value": "relocation",
+            "unit": null,
+            "attribution": {
+              "type": "anonymous",
+              "label": "névtelen forrás"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S11:claim:2:1",
+            "predicate": "RELOCATION_PLAN",
+            "source": "24.hu",
+            "sentence": "A hivatal nem kommentálta a költözésről szóló értesülést.",
+            "evidence": "nem kommentálta a költözésről szóló értesülést",
+            "value": "unconfirmed",
+            "unit": null,
+            "attribution": {
+              "type": "institution",
+              "label": "hivatal"
+            },
+            "modality": "unknown",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [
+          {
+            "reason": "attribution_and_confirmation_distinct",
+            "claims": [
+              "anonymous_report",
+              "unconfirmed"
+            ]
+          }
+        ],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S12",
+      "slug": "official-attribution",
+      "category": "official attribution",
+      "title": "A minisztérium és az önkormányzat állítása",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "A minisztérium és az önkormányzat állítása – Telex-szerű",
+          "url": "https://telex.hu/v22/official-attribution/1",
+          "wordCount": 529,
+          "observationIds": [
+            "V22-S12:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "hvg.hu",
+            "label": "HVG-szerű"
+          },
+          "title": "A minisztérium és az önkormányzat állítása – HVG-szerű",
+          "url": "https://hvg.hu/v22/official-attribution/2",
+          "wordCount": 528,
+          "observationIds": [
+            "V22-S12:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "program",
+            "mention": "Közlekedési program",
+            "type": "project",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "program",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S12:claim:1:1",
+            "predicate": "FUNDING_STATUS",
+            "source": "telex.hu",
+            "sentence": "A minisztérium szerint a program finanszírozása biztosított.",
+            "evidence": "A minisztérium szerint",
+            "value": "funding-secured",
+            "unit": null,
+            "attribution": {
+              "type": "official",
+              "label": "minisztérium"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S12:claim:2:1",
+            "predicate": "FUNDING_STATUS",
+            "source": "hvg.hu",
+            "sentence": "Az önkormányzat szerint a részletes szerződés még hiányzik.",
+            "evidence": "Az önkormányzat szerint",
+            "value": "contract-missing",
+            "unit": null,
+            "attribution": {
+              "type": "official",
+              "label": "önkormányzat"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [
+          {
+            "reason": "different_official_speakers",
+            "claims": [
+              "ministry",
+              "municipality"
+            ]
+          }
+        ],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S13",
+      "slug": "quote-vs-journalist",
+      "category": "quote vs journalist statement",
+      "title": "Idézet és újságírói megállapítás",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Idézet és újságírói megállapítás – Telex-szerű",
+          "url": "https://telex.hu/v22/quote-vs-journalist/1",
+          "wordCount": 531,
+          "observationIds": [
+            "V22-S13:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu-szerű"
+          },
+          "title": "Idézet és újságírói megállapítás – 24.hu-szerű",
+          "url": "https://24.hu/v22/quote-vs-journalist/2",
+          "wordCount": 528,
+          "observationIds": [
+            "V22-S13:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "anna",
+            "mention": "Szabó Anna",
+            "type": "person",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "anna",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S13:claim:1:1",
+            "predicate": "PUBLIC_CONFIDENCE",
+            "source": "telex.hu",
+            "sentence": "„Nem újabb ígéretet kérünk” – mondta Szabó Anna.",
+            "evidence": "Nem újabb ígéretet kérünk",
+            "value": "no_more_promises",
+            "unit": null,
+            "attribution": {
+              "type": "quoted",
+              "label": "Szabó Anna"
+            },
+            "modality": "quoted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S13:claim:2:1",
+            "predicate": "PUBLIC_CONFIDENCE",
+            "source": "24.hu",
+            "sentence": "A lakók bizalma megingott a korábbi ígéretek miatt.",
+            "evidence": "A lakók bizalma megingott",
+            "value": "trust-declined",
+            "unit": null,
+            "attribution": {
+              "type": "journalist",
+              "label": "a cikk szerzője"
+            },
+            "modality": "journalist_statement",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [
+          {
+            "reason": "quote_not_journalist_fact",
+            "claims": [
+              "quoted",
+              "journalist_statement"
+            ]
+          }
+        ],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S14",
+      "slug": "entity-namesake",
+      "category": "entity namesake",
+      "title": "Két azonos nevű Nagy Péter",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Két azonos nevű Nagy Péter – Telex-szerű",
+          "url": "https://telex.hu/v22/entity-namesake/1",
+          "wordCount": 530,
+          "observationIds": [
+            "V22-S14:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "index.hu",
+            "label": "Index-szerű"
+          },
+          "title": "Két azonos nevű Nagy Péter – Index-szerű",
+          "url": "https://index.hu/v22/entity-namesake/2",
+          "wordCount": 527,
+          "observationIds": [
+            "V22-S14:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "person-1",
+            "mention": "Nagy Péter",
+            "type": "person",
+            "identity": "distinct:pécs"
+          },
+          {
+            "id": "person-2",
+            "mention": "Nagy Péter",
+            "type": "person",
+            "identity": "distinct:szeged"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "person-1",
+            "expectation": "distinct:pécs"
+          },
+          {
+            "id": "person-2",
+            "expectation": "distinct:szeged"
+          }
+        ],
+        "relations": [
+          {
+            "subject": "person-1",
+            "predicate": "works_for",
+            "object": "Pécsi Kutatóintézet",
+            "evidence": "pécsi biológus"
+          }
+        ],
+        "claims": [
+          {
+            "id": "V22-S14:claim:1:1",
+            "predicate": "PERSON_ROLE",
+            "source": "telex.hu",
+            "sentence": "Nagy Péter pécsi biológus írta alá a jelentést.",
+            "evidence": "Nagy Péter pécsi biológus",
+            "value": "researcher_pécs",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": "person-1",
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S14:claim:2:1",
+            "predicate": "PERSON_ROLE",
+            "source": "index.hu",
+            "sentence": "Nagy Péter szegedi képviselő cáfolta a hírt.",
+            "evidence": "Nagy Péter szegedi képviselő",
+            "value": "politician_szeged",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": "person-2",
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [
+          {
+            "reason": "namesake_context_keeps_identity_distinct",
+            "claims": [
+              "person-1",
+              "person-2"
+            ]
+          }
+        ],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S15",
+      "slug": "entity-type-ambiguity",
+      "category": "entity type ambiguity",
+      "title": "A Delta név többféle entitása",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "A Delta név többféle entitása – Telex-szerű",
+          "url": "https://telex.hu/v22/entity-type-ambiguity/1",
+          "wordCount": 528,
+          "observationIds": [
+            "V22-S15:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu-szerű"
+          },
+          "title": "A Delta név többféle entitása – 24.hu-szerű",
+          "url": "https://24.hu/v22/entity-type-ambiguity/2",
+          "wordCount": 526,
+          "observationIds": [
+            "V22-S15:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "delta-company",
+            "mention": "Delta",
+            "type": "organization",
+            "identity": "unresolved"
+          },
+          {
+            "id": "delta-place",
+            "mention": "Delta",
+            "type": "location",
+            "identity": "unresolved"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "delta-company",
+            "expectation": "unresolved"
+          },
+          {
+            "id": "delta-place",
+            "expectation": "unresolved"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S15:claim:1:1",
+            "predicate": "IDENTITY_CONTEXT",
+            "source": "telex.hu",
+            "sentence": "A Delta Kft. új raktárt nyitott.",
+            "evidence": "Delta Kft. új raktárt",
+            "value": "company",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": "organization",
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S15:claim:2:1",
+            "predicate": "IDENTITY_CONTEXT",
+            "source": "24.hu",
+            "sentence": "A Delta nevű partszakasz természetvédelmi terület.",
+            "evidence": "Delta nevű partszakasz",
+            "value": "place",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": "location",
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [
+          {
+            "reason": "type_ambiguity_requires_unresolved",
+            "claims": [
+              "organization",
+              "location"
+            ]
+          }
+        ],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S16",
+      "slug": "changed-plan-over-time",
+      "category": "changed plan over time",
+      "title": "Márciusról júniusra módosított kezdés",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Márciusról júniusra módosított kezdés – Telex-szerű",
+          "url": "https://telex.hu/v22/changed-plan-over-time/1",
+          "wordCount": 524,
+          "observationIds": [
+            "V22-S16:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu-szerű"
+          },
+          "title": "Márciusról júniusra módosított kezdés – 24.hu-szerű",
+          "url": "https://24.hu/v22/changed-plan-over-time/2",
+          "wordCount": 526,
+          "observationIds": [
+            "V22-S16:claim:2:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "hvg.hu",
+            "label": "HVG-szerű"
+          },
+          "title": "Márciusról júniusra módosított kezdés – HVG-szerű",
+          "url": "https://hvg.hu/v22/changed-plan-over-time/3",
+          "wordCount": 528,
+          "observationIds": [
+            "V22-S16:claim:3:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "works",
+            "mention": "Partfalépítés",
+            "type": "project",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "works",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S16:claim:1:1",
+            "predicate": "PROJECT_START",
+            "source": "telex.hu",
+            "sentence": "A munkálatok márciusban indulhatnak.",
+            "evidence": "márciusban indulhatnak",
+            "value": "2027-03",
+            "unit": null,
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": {
+              "start": "2027-03-01"
+            },
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S16:claim:2:1",
+            "predicate": "PROJECT_START",
+            "source": "24.hu",
+            "sentence": "A friss ütemterv szerint a kezdés júniusra tolódott.",
+            "evidence": "kezdés júniusra tolódott",
+            "value": "2027-06",
+            "unit": null,
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": {
+              "start": "2027-06-01"
+            },
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S16:claim:3:1",
+            "predicate": "PROJECT_START",
+            "source": "hvg.hu",
+            "sentence": "A közbeszerzés miatt a júniusi kezdés maradt érvényben.",
+            "evidence": "júniusi kezdés maradt érvényben",
+            "value": "2027-06",
+            "unit": null,
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": {
+              "start": "2027-06-01"
+            },
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [],
+        "omissions": [],
+        "changesOverTime": [
+          {
+            "from": "2027-03",
+            "to": "2027-06",
+            "explanation": "A közölt tervezett kezdés márciusról júniusra változott."
+          }
+        ]
+      }
+    },
+    {
+      "id": "V22-S17",
+      "slug": "source-omission",
+      "category": "source omission",
+      "title": "Közölt összeg és hiányzó coverage",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Közölt összeg és hiányzó coverage – Telex-szerű",
+          "url": "https://telex.hu/v22/source-omission/1",
+          "wordCount": 528,
+          "observationIds": [
+            "V22-S17:claim:1:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu-szerű"
+          },
+          "title": "Közölt összeg és hiányzó coverage – 24.hu-szerű",
+          "url": "https://24.hu/v22/source-omission/2",
+          "wordCount": 526,
+          "observationIds": [
+            "V22-S17:claim:2:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "index.hu",
+            "label": "Index-szerű"
+          },
+          "title": "Közölt összeg és hiányzó coverage – Index-szerű",
+          "url": "https://index.hu/v22/source-omission/3",
+          "wordCount": 528,
+          "observationIds": []
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "grant",
+            "mention": "Közösségi pályázat",
+            "type": "project",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "grant",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S17:claim:1:1",
+            "predicate": "GRANT_AMOUNT",
+            "source": "telex.hu",
+            "sentence": "A pályázat 80 millió forintos kerettel indul.",
+            "evidence": "80 millió forintos kerettel",
+            "value": 80,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S17:claim:2:1",
+            "predicate": "GRANT_AMOUNT",
+            "source": "24.hu",
+            "sentence": "A dokumentum 80 millió forintot különít el.",
+            "evidence": "80 millió forintot különít el",
+            "value": 80,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [],
+        "omissions": [
+          {
+            "source": "index.hu",
+            "predicate": "GRANT_AMOUNT"
+          }
+        ],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S18",
+      "slug": "common-and-source-specific",
+      "category": "common fact + source-specific detail",
+      "title": "Közös alap és egyedi részlet",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Közös alap és egyedi részlet – Telex-szerű",
+          "url": "https://telex.hu/v22/common-and-source-specific/1",
+          "wordCount": 525,
+          "observationIds": [
+            "V22-S18:claim:1:1",
+            "V22-S18:claim:1:2"
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu-szerű"
+          },
+          "title": "Közös alap és egyedi részlet – 24.hu-szerű",
+          "url": "https://24.hu/v22/common-and-source-specific/2",
+          "wordCount": 525,
+          "observationIds": [
+            "V22-S18:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "bus",
+            "mention": "Városi buszprogram",
+            "type": "project",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "bus",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S18:claim:1:1",
+            "predicate": "BUS_PURCHASE",
+            "source": "telex.hu",
+            "sentence": "A város új buszokat vásárol, amelyek alacsonypadlósak.",
+            "evidence": "új buszokat vásárol",
+            "value": "bus-purchase",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": "shared",
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S18:claim:1:2",
+            "predicate": "BIKE_RACK",
+            "source": "telex.hu",
+            "sentence": "A járművekben kerékpártároló is lesz.",
+            "evidence": "kerékpártároló is lesz",
+            "value": "bike-rack",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": "source-only",
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S18:claim:2:1",
+            "predicate": "BUS_PURCHASE",
+            "source": "24.hu",
+            "sentence": "A város új buszokat vásárol.",
+            "evidence": "új buszokat vásárol",
+            "value": "bus-purchase",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": "shared",
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [],
+        "omissions": [
+          {
+            "source": "24.hu",
+            "predicate": "BIKE_RACK"
+          }
+        ],
+        "changesOverTime": []
+      }
+    },
+    {
+      "id": "V22-S19",
+      "slug": "corrected-information",
+      "category": "corrected information",
+      "title": "A forrás saját korrekciója",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "A forrás saját korrekciója – Telex-szerű",
+          "url": "https://telex.hu/v22/corrected-information/1",
+          "wordCount": 525,
+          "observationIds": [
+            "V22-S19:claim:1:1",
+            "V22-S19:claim:1:2"
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu-szerű"
+          },
+          "title": "A forrás saját korrekciója – 24.hu-szerű",
+          "url": "https://24.hu/v22/corrected-information/2",
+          "wordCount": 526,
+          "observationIds": [
+            "V22-S19:claim:2:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "contract",
+            "mention": "Szerződés",
+            "type": "document",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "contract",
+            "expectation": "same"
+          }
+        ],
+        "relations": [],
+        "claims": [
+          {
+            "id": "V22-S19:claim:1:1",
+            "predicate": "PROJECT_COST",
+            "source": "telex.hu",
+            "sentence": "A korábbi közlésben 80 millió szerepelt.",
+            "evidence": "korábbi közlésben 80 millió",
+            "value": 80,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": {
+              "start": "2027-01-01"
+            },
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          },
+          {
+            "id": "V22-S19:claim:1:2",
+            "predicate": "PROJECT_COST",
+            "source": "telex.hu",
+            "sentence": "A szerkesztőség pontosítása szerint a helyes összeg 90 millió forint.",
+            "evidence": "pontosítása szerint a helyes összeg 90 millió",
+            "value": 90,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": "telex.hu:80",
+            "eventId": null
+          },
+          {
+            "id": "V22-S19:claim:2:1",
+            "predicate": "PROJECT_COST",
+            "source": "24.hu",
+            "sentence": "A szerződés melléklete 90 millió forintos összeget tartalmaz.",
+            "evidence": "90 millió forintos összeget",
+            "value": 90,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "correctionOf": null,
+            "eventId": null
+          }
+        ],
+        "events": [],
+        "conflicts": [],
+        "nonConflicts": [],
+        "omissions": [],
+        "changesOverTime": [
+          {
+            "from": 80,
+            "to": 90,
+            "explanation": "A forrás a saját korábbi összegét pontosította; ez korrekció, nem két független forrás konfliktusa."
+          }
+        ]
+      }
+    },
+    {
+      "id": "V22-S20",
+      "slug": "multi-event",
+      "category": "multi-event article",
+      "title": "Két külön esemény egy beszámolóban",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "Telex-szerű"
+          },
+          "title": "Két külön esemény egy beszámolóban – Telex-szerű",
+          "url": "https://telex.hu/v22/multi-event/1",
+          "wordCount": 521,
+          "observationIds": [
+            "V22-S20:claim:1:1",
+            "V22-S20:claim:1:2"
+          ]
+        },
+        {
+          "source": {
+            "key": "index.hu",
+            "label": "Index-szerű"
+          },
+          "title": "Két külön esemény egy beszámolóban – Index-szerű",
+          "url": "https://index.hu/v22/multi-event/2",
+          "wordCount": 526,
+          "observationIds": [
+            "V22-S20:claim:2:1"
+          ]
+        },
+        {
+          "source": {
+            "key": "hvg.hu",
+            "label": "HVG-szerű"
+          },
+          "title": "Két külön esemény egy beszámolóban – HVG-szerű",
+          "url": "https://hvg.hu/v22/multi-event/3",
+          "wordCount": 530,
+          "observationIds": [
+            "V22-S20:claim:3:1"
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "council",
+            "mention": "Városi tanács",
+            "type": "organization",
+            "identity": "same"
+          },
+          {
+            "id": "pilot",
+            "mention": "Próbaüzem",
+            "type": "event",
+            "identity": "same"
+          }
+        ],
+        "entityIdentityExpectations": [
+          {
+            "id": "council",
+            "expectation": "same"
+          },
+          {
+            "id": "pilot",
+            "expectation": "same"
+          }
+        ],
+        "relations": [
+          {
+            "subject": "Városi tanács",
+            "predicate": "announced",
+            "object": "event-1",
+            "evidence": "tanács hétfőn bejelentette"
+          }
+        ],
+        "claims": [
+          {
+            "id": "V22-S20:claim:1:1",
+            "predicate": "EVENT_STATUS",
+            "source": "telex.hu",
+            "sentence": "A tanács hétfőn bejelentette a programot.",
+            "evidence": "hétfőn bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": {
+              "start": "2027-02-01"
+            },
+            "scope": null,
+            "correctionOf": null,
+            "eventId": "event-1"
+          },
+          {
+            "id": "V22-S20:claim:1:2",
+            "predicate": "EVENT_STATUS",
+            "source": "telex.hu",
+            "sentence": "A próbaüzem pénteken elindult.",
+            "evidence": "pénteken elindult",
+            "value": "pilot-start",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": {
+              "start": "2027-02-05"
+            },
+            "scope": null,
+            "correctionOf": null,
+            "eventId": "event-2"
+          },
+          {
+            "id": "V22-S20:claim:2:1",
+            "predicate": "EVENT_STATUS",
+            "source": "index.hu",
+            "sentence": "A próbaüzem első napján három mérőpont működött.",
+            "evidence": "első napján három mérőpont működött",
+            "value": "pilot-result",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": {
+              "start": "2027-02-05"
+            },
+            "scope": null,
+            "correctionOf": null,
+            "eventId": "event-2"
+          },
+          {
+            "id": "V22-S20:claim:3:1",
+            "predicate": "EVENT_STATUS",
+            "source": "hvg.hu",
+            "sentence": "A tanács külön határozatban rögzítette a program célját.",
+            "evidence": "külön határozatban rögzítette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": {
+              "start": "2027-02-01"
+            },
+            "scope": null,
+            "correctionOf": null,
+            "eventId": "event-1"
+          }
+        ],
+        "events": [
+          {
+            "id": "event-1",
+            "title": "Programbejelentés",
+            "membership": [
+              "telex.hu",
+              "hvg.hu"
+            ]
+          },
+          {
+            "id": "event-2",
+            "title": "Próbaüzem indulása",
+            "membership": [
+              "telex.hu",
+              "index.hu"
+            ]
+          }
+        ],
+        "conflicts": [],
+        "nonConflicts": [
+          {
+            "reason": "separate_event_membership",
+            "claims": [
+              "event-1",
+              "event-2"
+            ]
+          }
+        ],
+        "omissions": [],
+        "changesOverTime": []
+      }
+    }
+  ],
+  "denseScenarios": [
+    {
+      "id": "V22-D01",
+      "slug": "river-renewal",
+      "category": "river-renewal",
+      "title": "Folyóparti megújítás több ütemben",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "telex.hu"
+          },
+          "title": "Folyóparti megújítás több ütemben – telex.hu",
+          "url": "https://telex.hu/v22/dense/river-renewal/1",
+          "wordCount": 724,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu"
+          },
+          "title": "Folyóparti megújítás több ütemben – 24.hu",
+          "url": "https://24.hu/v22/dense/river-renewal/2",
+          "wordCount": 724,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "source": {
+            "key": "hvg.hu",
+            "label": "hvg.hu"
+          },
+          "title": "Folyóparti megújítás több ütemben – hvg.hu",
+          "url": "https://hvg.hu/v22/dense/river-renewal/3",
+          "wordCount": 726,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "V22-D01:entity:1",
+            "mention": "Kékfolyó-part program",
+            "normalized": "kékfolyó-part program",
+            "type": "project",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D01:entity:2",
+            "mention": "Dunamenti önkormányzat",
+            "normalized": "dunamenti önkormányzat",
+            "type": "organization",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D01:entity:3",
+            "mention": "Kiss Júlia",
+            "normalized": "kiss júlia",
+            "type": "person",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D01:entity:4",
+            "mention": "partfal-átadás",
+            "normalized": "partfal-átadás",
+            "type": "event",
+            "identity": "same"
+          }
+        ],
+        "relations": [
+          {
+            "subject": "Dunamenti önkormányzat",
+            "predicate": "announced",
+            "object": "partfal-átadás",
+            "evidence": "bejelentette"
+          }
+        ],
+        "claims": [
+          {
+            "source": "telex.hu",
+            "predicate": "PROJECT_COST",
+            "sentence": "A program első ütemének költsége 240 millió forint.",
+            "evidence": "első ütemének költsége 240 millió forint",
+            "value": 240,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:telex.hu:1"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "CONSTRUCTION_START",
+            "sentence": "A munkák áprilisban indulhatnak, ha elkészül az engedély.",
+            "evidence": "áprilisban indulhatnak, ha elkészül az engedély",
+            "value": "2027-04",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:telex.hu:2"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "COMPLETION_PERCENT",
+            "sentence": "A projekt készültsége jelenleg 35 százalék.",
+            "evidence": "készültsége jelenleg 35 százalék",
+            "value": 35,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:telex.hu:3"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "ENGINEER_ASSESSMENT",
+            "sentence": "Kiss Júlia mérnök szerint a partfal állapota megfelelő.",
+            "evidence": "Kiss Júlia mérnök szerint",
+            "value": "stable",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Kiss Júlia"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:telex.hu:4"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "DISTANCE",
+            "sentence": "A dokumentum 1,2 kilométeres szakaszt jelöl ki.",
+            "evidence": "1,2 kilométeres szakaszt",
+            "value": 1.2,
+            "unit": "km",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:telex.hu:5"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "A tanács hétfőn bejelentette az átadási ütemet.",
+            "evidence": "tanács hétfőn bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D01:claim:telex.hu:6"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "BUDGET_RESERVE",
+            "sentence": "A tartalékkeret összege még nem ismert.",
+            "evidence": "tartalékkeret összege még nem ismert",
+            "value": "unknown",
+            "unit": null,
+            "attribution": null,
+            "modality": "unknown",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:telex.hu:7"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "PROJECT_START",
+            "sentence": "A korábbi tervben áprilisi kezdés szerepelt.",
+            "evidence": "korábbi tervben áprilisi kezdés szerepelt",
+            "value": "2027-04",
+            "unit": null,
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:telex.hu:8"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "PROJECT_COST",
+            "sentence": "A program első ütemének költsége 240 millió forint.",
+            "evidence": "első ütemének költsége 240 millió forint",
+            "value": 245,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:24.hu:1"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "CONSTRUCTION_START",
+            "sentence": "A munkák áprilisban indulhatnak, ha elkészül az engedély.",
+            "evidence": "áprilisban indulhatnak, ha elkészül az engedély",
+            "value": "2027-04",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:24.hu:2"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "COMPLETION_PERCENT",
+            "sentence": "A projekt készültsége jelenleg 35 százalék.",
+            "evidence": "készültsége jelenleg 35 százalék",
+            "value": 35,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:24.hu:3"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "ENGINEER_ASSESSMENT",
+            "sentence": "Kiss Júlia mérnök szerint a partfal állapota megfelelő.",
+            "evidence": "Kiss Júlia mérnök szerint",
+            "value": "stable",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Kiss Júlia"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:24.hu:4"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "DISTANCE",
+            "sentence": "A dokumentum 1,2 kilométeres szakaszt jelöl ki.",
+            "evidence": "1,2 kilométeres szakaszt",
+            "value": 1.2,
+            "unit": "km",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:24.hu:5"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "A tanács hétfőn bejelentette az átadási ütemet.",
+            "evidence": "tanács hétfőn bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D01:claim:24.hu:6"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "BUDGET_RESERVE",
+            "sentence": "A tartalékkeret összege még nem ismert.",
+            "evidence": "tartalékkeret összege még nem ismert",
+            "value": "unknown",
+            "unit": null,
+            "attribution": null,
+            "modality": "unknown",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:24.hu:7"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "PROJECT_START",
+            "sentence": "A korábbi tervben áprilisi kezdés szerepelt.",
+            "evidence": "korábbi tervben áprilisi kezdés szerepelt",
+            "value": "2027-04",
+            "unit": null,
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:24.hu:8"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "PROJECT_COST",
+            "sentence": "A program első ütemének költsége 240 millió forint.",
+            "evidence": "első ütemének költsége 240 millió forint",
+            "value": 240,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:hvg.hu:1"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "CONSTRUCTION_START",
+            "sentence": "A munkák áprilisban indulhatnak, ha elkészül az engedély.",
+            "evidence": "áprilisban indulhatnak, ha elkészül az engedély",
+            "value": "2027-04",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:hvg.hu:2"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "COMPLETION_PERCENT",
+            "sentence": "A projekt készültsége jelenleg 35 százalék.",
+            "evidence": "készültsége jelenleg 35 százalék",
+            "value": 35,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:hvg.hu:3"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "ENGINEER_ASSESSMENT",
+            "sentence": "Kiss Júlia mérnök szerint a partfal állapota megfelelő.",
+            "evidence": "Kiss Júlia mérnök szerint",
+            "value": "stable",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Kiss Júlia"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:hvg.hu:4"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "DISTANCE",
+            "sentence": "A dokumentum 1,2 kilométeres szakaszt jelöl ki.",
+            "evidence": "1,2 kilométeres szakaszt",
+            "value": 1.2,
+            "unit": "km",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:hvg.hu:5"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "A tanács hétfőn bejelentette az átadási ütemet.",
+            "evidence": "tanács hétfőn bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D01:claim:hvg.hu:6"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "PROJECT_START",
+            "sentence": "A korábbi tervben áprilisi kezdés szerepelt.",
+            "evidence": "korábbi tervben áprilisi kezdés szerepelt",
+            "value": "2027-04",
+            "unit": null,
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:hvg.hu:7"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "SOURCE_CONTEXT",
+            "sentence": "A beszámoló a program közösségi hatásait is összegzi.",
+            "evidence": "program közösségi hatásait is összegzi",
+            "value": "community-impact",
+            "unit": null,
+            "attribution": null,
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D01:claim:hvg.hu:8"
+          }
+        ],
+        "events": [
+          {
+            "id": "V22-D01:event",
+            "title": "partfal-átadás",
+            "membership": [
+              "telex.hu",
+              "24.hu",
+              "hvg.hu"
+            ]
+          }
+        ],
+        "conflicts": [],
+        "nonConflicts": [],
+        "omissions": [
+          {
+            "source": "hvg.hu",
+            "predicate": "BUDGET_RESERVE"
+          }
+        ],
+        "changesOverTime": [
+          {
+            "from": "2027-04",
+            "to": "2027-07"
+          }
+        ]
+      }
+    },
+    {
+      "id": "V22-D02",
+      "slug": "hospital-network",
+      "category": "hospital-network",
+      "title": "Kórházi hálózat és eltérő várólisták",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "telex.hu"
+          },
+          "title": "Kórházi hálózat és eltérő várólisták – telex.hu",
+          "url": "https://telex.hu/v22/dense/hospital-network/1",
+          "wordCount": 720,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu"
+          },
+          "title": "Kórházi hálózat és eltérő várólisták – 24.hu",
+          "url": "https://24.hu/v22/dense/hospital-network/2",
+          "wordCount": 720,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "source": {
+            "key": "hvg.hu",
+            "label": "hvg.hu"
+          },
+          "title": "Kórházi hálózat és eltérő várólisták – hvg.hu",
+          "url": "https://hvg.hu/v22/dense/hospital-network/3",
+          "wordCount": 724,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "V22-D02:entity:1",
+            "mention": "Északi kórházi hálózat",
+            "normalized": "északi kórházi hálózat",
+            "type": "project",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D02:entity:2",
+            "mention": "Szent László Kórház",
+            "normalized": "szent lászló kórház",
+            "type": "organization",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D02:entity:3",
+            "mention": "Varga András",
+            "normalized": "varga andrás",
+            "type": "person",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D02:entity:4",
+            "mention": "ambulancia-indítás",
+            "normalized": "ambulancia-indítás",
+            "type": "event",
+            "identity": "same"
+          }
+        ],
+        "relations": [
+          {
+            "subject": "Északi kórházi hálózat",
+            "predicate": "announced",
+            "object": "ambulancia-indítás",
+            "evidence": "bejelentette"
+          }
+        ],
+        "claims": [
+          {
+            "source": "telex.hu",
+            "predicate": "WAITING_DAYS",
+            "sentence": "A hálózat 14 napos várólistát közölt.",
+            "evidence": "14 napos várólistát közölt",
+            "value": 14,
+            "unit": "day",
+            "attribution": {
+              "type": "official",
+              "label": "kórházi hálózat"
+            },
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:telex.hu:1"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "SERVICE_START",
+            "sentence": "A mobil ambulancia májusban indulhat, ha lesz személyzet.",
+            "evidence": "májusban indulhat, ha lesz személyzet",
+            "value": "2027-05",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:telex.hu:2"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "CAPACITY_PERCENT",
+            "sentence": "A kapacitás bővítése 18 százalékos.",
+            "evidence": "kapacitás bővítése 18 százalékos",
+            "value": 18,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:telex.hu:3"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "DOCTOR_ASSESSMENT",
+            "sentence": "Varga András szerint a rendszer átmenetileg terhelhető.",
+            "evidence": "Varga András szerint",
+            "value": "temporarily-capable",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Varga András"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:telex.hu:4"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "VEHICLE_COUNT",
+            "sentence": "A program 3 új járművet használ.",
+            "evidence": "3 új járművet használ",
+            "value": 3,
+            "unit": "vehicle",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:telex.hu:5"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "A hálózat hétfőn bejelentette az indulást.",
+            "evidence": "hálózat hétfőn bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D02:claim:telex.hu:6"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "WAITING_DAYS",
+            "sentence": "A korábbi lista 14 napos volt.",
+            "evidence": "korábbi lista 14 napos volt",
+            "value": 14,
+            "unit": "day",
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:telex.hu:7"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "WAITING_GROWTH",
+            "sentence": "A sürgősségi eseteknél nem nőtt a várakozás.",
+            "evidence": "nem nőtt a várakozás",
+            "value": false,
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "negated",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:telex.hu:8"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "WAITING_DAYS",
+            "sentence": "A hálózat 14 napos várólistát közölt.",
+            "evidence": "14 napos várólistát közölt",
+            "value": 19,
+            "unit": "day",
+            "attribution": {
+              "type": "official",
+              "label": "kórházi hálózat"
+            },
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:24.hu:1"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "SERVICE_START",
+            "sentence": "A mobil ambulancia májusban indulhat, ha lesz személyzet.",
+            "evidence": "májusban indulhat, ha lesz személyzet",
+            "value": "2027-05",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:24.hu:2"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "CAPACITY_PERCENT",
+            "sentence": "A kapacitás bővítése 18 százalékos.",
+            "evidence": "kapacitás bővítése 18 százalékos",
+            "value": 18,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:24.hu:3"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "DOCTOR_ASSESSMENT",
+            "sentence": "Varga András szerint a rendszer átmenetileg terhelhető.",
+            "evidence": "Varga András szerint",
+            "value": "temporarily-capable",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Varga András"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:24.hu:4"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "VEHICLE_COUNT",
+            "sentence": "A program 3 új járművet használ.",
+            "evidence": "3 új járművet használ",
+            "value": 3,
+            "unit": "vehicle",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:24.hu:5"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "A hálózat hétfőn bejelentette az indulást.",
+            "evidence": "hálózat hétfőn bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D02:claim:24.hu:6"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "WAITING_DAYS",
+            "sentence": "A korábbi lista 14 napos volt.",
+            "evidence": "korábbi lista 14 napos volt",
+            "value": 14,
+            "unit": "day",
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:24.hu:7"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "WAITING_GROWTH",
+            "sentence": "A sürgősségi eseteknél nem nőtt a várakozás.",
+            "evidence": "nem nőtt a várakozás",
+            "value": false,
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "negated",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:24.hu:8"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "SERVICE_START",
+            "sentence": "A mobil ambulancia májusban indulhat, ha lesz személyzet.",
+            "evidence": "májusban indulhat, ha lesz személyzet",
+            "value": "2027-05",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:hvg.hu:1"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "CAPACITY_PERCENT",
+            "sentence": "A kapacitás bővítése 18 százalékos.",
+            "evidence": "kapacitás bővítése 18 százalékos",
+            "value": 18,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:hvg.hu:2"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "DOCTOR_ASSESSMENT",
+            "sentence": "Varga András szerint a rendszer átmenetileg terhelhető.",
+            "evidence": "Varga András szerint",
+            "value": "temporarily-capable",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Varga András"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:hvg.hu:3"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "VEHICLE_COUNT",
+            "sentence": "A program 3 új járművet használ.",
+            "evidence": "3 új járművet használ",
+            "value": 3,
+            "unit": "vehicle",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:hvg.hu:4"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "A hálózat hétfőn bejelentette az indulást.",
+            "evidence": "hálózat hétfőn bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D02:claim:hvg.hu:5"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "WAITING_GROWTH",
+            "sentence": "A sürgősségi eseteknél nem nőtt a várakozás.",
+            "evidence": "nem nőtt a várakozás",
+            "value": false,
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "negated",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:hvg.hu:6"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "SOURCE_CONTEXT",
+            "sentence": "A beszámoló a program közösségi hatásait is összegzi.",
+            "evidence": "program közösségi hatásait is összegzi",
+            "value": "community-impact",
+            "unit": null,
+            "attribution": null,
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:hvg.hu:7"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "SOURCE_CONTEXT",
+            "sentence": "A szervezők a következő egyeztetés eredményét később közlik.",
+            "evidence": "következő egyeztetés eredményét később közlik",
+            "value": "pending",
+            "unit": null,
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D02:claim:hvg.hu:8"
+          }
+        ],
+        "events": [
+          {
+            "id": "V22-D02:event",
+            "title": "ambulancia-indítás",
+            "membership": [
+              "telex.hu",
+              "24.hu",
+              "hvg.hu"
+            ]
+          }
+        ],
+        "conflicts": [],
+        "nonConflicts": [],
+        "omissions": [
+          {
+            "source": "hvg.hu",
+            "predicate": "WAITING_DAYS"
+          }
+        ],
+        "changesOverTime": [
+          {
+            "from": 14,
+            "to": 9
+          }
+        ]
+      }
+    },
+    {
+      "id": "V22-D03",
+      "slug": "school-digital",
+      "category": "school-digital",
+      "title": "Iskolai digitalizáció és feltételes beszerzés",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "telex.hu"
+          },
+          "title": "Iskolai digitalizáció és feltételes beszerzés – telex.hu",
+          "url": "https://telex.hu/v22/dense/school-digital/1",
+          "wordCount": 721,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu"
+          },
+          "title": "Iskolai digitalizáció és feltételes beszerzés – 24.hu",
+          "url": "https://24.hu/v22/dense/school-digital/2",
+          "wordCount": 721,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "source": {
+            "key": "hvg.hu",
+            "label": "hvg.hu"
+          },
+          "title": "Iskolai digitalizáció és feltételes beszerzés – hvg.hu",
+          "url": "https://hvg.hu/v22/dense/school-digital/3",
+          "wordCount": 724,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "V22-D03:entity:1",
+            "mention": "Digitális Tanterem program",
+            "normalized": "digitális tanterem program",
+            "type": "project",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D03:entity:2",
+            "mention": "Béke téri iskola",
+            "normalized": "béke téri iskola",
+            "type": "organization",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D03:entity:3",
+            "mention": "Németh Éva",
+            "normalized": "németh éva",
+            "type": "person",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D03:entity:4",
+            "mention": "eszközátadás",
+            "normalized": "eszközátadás",
+            "type": "event",
+            "identity": "same"
+          }
+        ],
+        "relations": [
+          {
+            "subject": "Digitális Tanterem program",
+            "predicate": "announced",
+            "object": "eszközátadás",
+            "evidence": "bejelentette"
+          }
+        ],
+        "claims": [
+          {
+            "source": "telex.hu",
+            "predicate": "PROJECT_COST",
+            "sentence": "A program kerete 90 millió forint.",
+            "evidence": "program kerete 90 millió forint",
+            "value": 90,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:telex.hu:1"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "DELIVERY_DATE",
+            "sentence": "Az eszközátadás szeptemberben indulhat, ha a szállító teljesít.",
+            "evidence": "eszközátadás szeptemberben indulhat, ha a szállító teljesít",
+            "value": "2027-09",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:telex.hu:2"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "NETWORK_PERCENT",
+            "sentence": "Az iskolák 55 százalékában van megfelelő hálózat.",
+            "evidence": "iskolák 55 százalékában van megfelelő hálózat",
+            "value": 55,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:telex.hu:3"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "TEACHER_ASSESSMENT",
+            "sentence": "Németh Éva szerint a tanárok képzése elengedhetetlen.",
+            "evidence": "Németh Éva szerint",
+            "value": "training-needed",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Németh Éva"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:telex.hu:4"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "DEVICE_COUNT",
+            "sentence": "A keretből 600 tabletet vásárolnak.",
+            "evidence": "600 tabletet vásárolnak",
+            "value": 600,
+            "unit": "device",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:telex.hu:5"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "A program hétfőn bejelentette az átadási rendet.",
+            "evidence": "program hétfőn bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D03:claim:telex.hu:6"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "DELIVERY_DATE",
+            "sentence": "A korábbi tervben márciusi átadás szerepelt.",
+            "evidence": "korábbi tervben márciusi átadás szerepelt",
+            "value": "2027-03",
+            "unit": null,
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:telex.hu:7"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "TRAINING_DATE",
+            "sentence": "A képzés időpontja még nem végleges.",
+            "evidence": "képzés időpontja még nem végleges",
+            "value": "unknown",
+            "unit": null,
+            "attribution": null,
+            "modality": "unknown",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:telex.hu:8"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "PROJECT_COST",
+            "sentence": "A program kerete 90 millió forint.",
+            "evidence": "program kerete 90 millió forint",
+            "value": 95,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:24.hu:1"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "DELIVERY_DATE",
+            "sentence": "Az eszközátadás szeptemberben indulhat, ha a szállító teljesít.",
+            "evidence": "eszközátadás szeptemberben indulhat, ha a szállító teljesít",
+            "value": "2027-09",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:24.hu:2"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "NETWORK_PERCENT",
+            "sentence": "Az iskolák 55 százalékában van megfelelő hálózat.",
+            "evidence": "iskolák 55 százalékában van megfelelő hálózat",
+            "value": 55,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:24.hu:3"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "TEACHER_ASSESSMENT",
+            "sentence": "Németh Éva szerint a tanárok képzése elengedhetetlen.",
+            "evidence": "Németh Éva szerint",
+            "value": "training-needed",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Németh Éva"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:24.hu:4"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "DEVICE_COUNT",
+            "sentence": "A keretből 600 tabletet vásárolnak.",
+            "evidence": "600 tabletet vásárolnak",
+            "value": 600,
+            "unit": "device",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:24.hu:5"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "A program hétfőn bejelentette az átadási rendet.",
+            "evidence": "program hétfőn bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D03:claim:24.hu:6"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "DELIVERY_DATE",
+            "sentence": "A korábbi tervben márciusi átadás szerepelt.",
+            "evidence": "korábbi tervben márciusi átadás szerepelt",
+            "value": "2027-03",
+            "unit": null,
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:24.hu:7"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "TRAINING_DATE",
+            "sentence": "A képzés időpontja még nem végleges.",
+            "evidence": "képzés időpontja még nem végleges",
+            "value": "unknown",
+            "unit": null,
+            "attribution": null,
+            "modality": "unknown",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:24.hu:8"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "PROJECT_COST",
+            "sentence": "A program kerete 90 millió forint.",
+            "evidence": "program kerete 90 millió forint",
+            "value": 90,
+            "unit": "million HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:hvg.hu:1"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "DELIVERY_DATE",
+            "sentence": "Az eszközátadás szeptemberben indulhat, ha a szállító teljesít.",
+            "evidence": "eszközátadás szeptemberben indulhat, ha a szállító teljesít",
+            "value": "2027-09",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:hvg.hu:2"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "NETWORK_PERCENT",
+            "sentence": "Az iskolák 55 százalékában van megfelelő hálózat.",
+            "evidence": "iskolák 55 százalékában van megfelelő hálózat",
+            "value": 55,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:hvg.hu:3"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "TEACHER_ASSESSMENT",
+            "sentence": "Németh Éva szerint a tanárok képzése elengedhetetlen.",
+            "evidence": "Németh Éva szerint",
+            "value": "training-needed",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Németh Éva"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:hvg.hu:4"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "A program hétfőn bejelentette az átadási rendet.",
+            "evidence": "program hétfőn bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D03:claim:hvg.hu:5"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "DELIVERY_DATE",
+            "sentence": "A korábbi tervben márciusi átadás szerepelt.",
+            "evidence": "korábbi tervben márciusi átadás szerepelt",
+            "value": "2027-03",
+            "unit": null,
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:hvg.hu:6"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "TRAINING_DATE",
+            "sentence": "A képzés időpontja még nem végleges.",
+            "evidence": "képzés időpontja még nem végleges",
+            "value": "unknown",
+            "unit": null,
+            "attribution": null,
+            "modality": "unknown",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:hvg.hu:7"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "SOURCE_CONTEXT",
+            "sentence": "A beszámoló a program közösségi hatásait is összegzi.",
+            "evidence": "program közösségi hatásait is összegzi",
+            "value": "community-impact",
+            "unit": null,
+            "attribution": null,
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D03:claim:hvg.hu:8"
+          }
+        ],
+        "events": [
+          {
+            "id": "V22-D03:event",
+            "title": "eszközátadás",
+            "membership": [
+              "telex.hu",
+              "24.hu",
+              "hvg.hu"
+            ]
+          }
+        ],
+        "conflicts": [],
+        "nonConflicts": [],
+        "omissions": [
+          {
+            "source": "hvg.hu",
+            "predicate": "DEVICE_COUNT"
+          }
+        ],
+        "changesOverTime": [
+          {
+            "from": "2027-03",
+            "to": "2027-09"
+          }
+        ]
+      }
+    },
+    {
+      "id": "V22-D04",
+      "slug": "energy-storage",
+      "category": "energy-storage",
+      "title": "Energiatároló beruházás és vitatott teljesítmény",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "telex.hu"
+          },
+          "title": "Energiatároló beruházás és vitatott teljesítmény – telex.hu",
+          "url": "https://telex.hu/v22/dense/energy-storage/1",
+          "wordCount": 722,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu"
+          },
+          "title": "Energiatároló beruházás és vitatott teljesítmény – 24.hu",
+          "url": "https://24.hu/v22/dense/energy-storage/2",
+          "wordCount": 722,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "source": {
+            "key": "hvg.hu",
+            "label": "hvg.hu"
+          },
+          "title": "Energiatároló beruházás és vitatott teljesítmény – hvg.hu",
+          "url": "https://hvg.hu/v22/dense/energy-storage/3",
+          "wordCount": 724,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "V22-D04:entity:1",
+            "mention": "Napfény energiatároló",
+            "normalized": "napfény energiatároló",
+            "type": "project",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D04:entity:2",
+            "mention": "Alföldi Energia Zrt.",
+            "normalized": "alföldi energia zrt.",
+            "type": "organization",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D04:entity:3",
+            "mention": "Tóth Márton",
+            "normalized": "tóth márton",
+            "type": "person",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D04:entity:4",
+            "mention": "hálózati próba",
+            "normalized": "hálózati próba",
+            "type": "event",
+            "identity": "same"
+          }
+        ],
+        "relations": [
+          {
+            "subject": "Alföldi Energia Zrt.",
+            "predicate": "announced",
+            "object": "hálózati próba",
+            "evidence": "bejelentette"
+          }
+        ],
+        "claims": [
+          {
+            "source": "telex.hu",
+            "predicate": "CAPACITY",
+            "sentence": "A tároló teljesítménye 40 megawattóra.",
+            "evidence": "teljesítménye 40 megawattóra",
+            "value": 40,
+            "unit": "MWh",
+            "attribution": {
+              "type": "official",
+              "label": "beruházó"
+            },
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:telex.hu:1"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "TRIAL_DATE",
+            "sentence": "A hálózati próba októberben indulhat, ha elkészül a csatlakozás.",
+            "evidence": "hálózati próba októberben indulhat, ha elkészül a csatlakozás",
+            "value": "2027-10",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:telex.hu:2"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "PROJECT_COST",
+            "sentence": "A fejlesztés költsége 1,8 milliárd forint.",
+            "evidence": "fejlesztés költsége 1,8 milliárd forint",
+            "value": 1.8,
+            "unit": "billion HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:telex.hu:3"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "ENGINEER_ASSESSMENT",
+            "sentence": "Tóth Márton szerint a hálózat stabil marad.",
+            "evidence": "Tóth Márton szerint",
+            "value": "stable",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Tóth Márton"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:telex.hu:4"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "CONTAINER_COUNT",
+            "sentence": "A telep 24 konténert fogad be.",
+            "evidence": "telep 24 konténert fogad be",
+            "value": 24,
+            "unit": "container",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:telex.hu:5"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "Az energia cég bejelentette a hálózati próbát.",
+            "evidence": "energia cég bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D04:claim:telex.hu:6"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "CAPACITY",
+            "sentence": "A régi terv 40 MWh kapacitással számolt.",
+            "evidence": "régi terv 40 MWh kapacitással számolt",
+            "value": 40,
+            "unit": "MWh",
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:telex.hu:7"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "GRID_LOSS",
+            "sentence": "A veszteség pontos értéke még ismeretlen.",
+            "evidence": "veszteség pontos értéke még ismeretlen",
+            "value": "unknown",
+            "unit": null,
+            "attribution": null,
+            "modality": "unknown",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:telex.hu:8"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "CAPACITY",
+            "sentence": "A tároló teljesítménye 40 megawattóra.",
+            "evidence": "teljesítménye 40 megawattóra",
+            "value": 45,
+            "unit": "MWh",
+            "attribution": {
+              "type": "official",
+              "label": "beruházó"
+            },
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:24.hu:1"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "TRIAL_DATE",
+            "sentence": "A hálózati próba októberben indulhat, ha elkészül a csatlakozás.",
+            "evidence": "hálózati próba októberben indulhat, ha elkészül a csatlakozás",
+            "value": "2027-10",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:24.hu:2"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "PROJECT_COST",
+            "sentence": "A fejlesztés költsége 1,8 milliárd forint.",
+            "evidence": "fejlesztés költsége 1,8 milliárd forint",
+            "value": 1.8,
+            "unit": "billion HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:24.hu:3"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "ENGINEER_ASSESSMENT",
+            "sentence": "Tóth Márton szerint a hálózat stabil marad.",
+            "evidence": "Tóth Márton szerint",
+            "value": "stable",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Tóth Márton"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:24.hu:4"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "CONTAINER_COUNT",
+            "sentence": "A telep 24 konténert fogad be.",
+            "evidence": "telep 24 konténert fogad be",
+            "value": 24,
+            "unit": "container",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:24.hu:5"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "Az energia cég bejelentette a hálózati próbát.",
+            "evidence": "energia cég bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D04:claim:24.hu:6"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "CAPACITY",
+            "sentence": "A régi terv 40 MWh kapacitással számolt.",
+            "evidence": "régi terv 40 MWh kapacitással számolt",
+            "value": 40,
+            "unit": "MWh",
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:24.hu:7"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "GRID_LOSS",
+            "sentence": "A veszteség pontos értéke még ismeretlen.",
+            "evidence": "veszteség pontos értéke még ismeretlen",
+            "value": "unknown",
+            "unit": null,
+            "attribution": null,
+            "modality": "unknown",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:24.hu:8"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "CAPACITY",
+            "sentence": "A tároló teljesítménye 40 megawattóra.",
+            "evidence": "teljesítménye 40 megawattóra",
+            "value": 40,
+            "unit": "MWh",
+            "attribution": {
+              "type": "official",
+              "label": "beruházó"
+            },
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:hvg.hu:1"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "TRIAL_DATE",
+            "sentence": "A hálózati próba októberben indulhat, ha elkészül a csatlakozás.",
+            "evidence": "hálózati próba októberben indulhat, ha elkészül a csatlakozás",
+            "value": "2027-10",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:hvg.hu:2"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "PROJECT_COST",
+            "sentence": "A fejlesztés költsége 1,8 milliárd forint.",
+            "evidence": "fejlesztés költsége 1,8 milliárd forint",
+            "value": 1.8,
+            "unit": "billion HUF",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:hvg.hu:3"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "ENGINEER_ASSESSMENT",
+            "sentence": "Tóth Márton szerint a hálózat stabil marad.",
+            "evidence": "Tóth Márton szerint",
+            "value": "stable",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Tóth Márton"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:hvg.hu:4"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "CONTAINER_COUNT",
+            "sentence": "A telep 24 konténert fogad be.",
+            "evidence": "telep 24 konténert fogad be",
+            "value": 24,
+            "unit": "container",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:hvg.hu:5"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "Az energia cég bejelentette a hálózati próbát.",
+            "evidence": "energia cég bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D04:claim:hvg.hu:6"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "CAPACITY",
+            "sentence": "A régi terv 40 MWh kapacitással számolt.",
+            "evidence": "régi terv 40 MWh kapacitással számolt",
+            "value": 40,
+            "unit": "MWh",
+            "attribution": null,
+            "modality": "plan",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:hvg.hu:7"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "SOURCE_CONTEXT",
+            "sentence": "A beszámoló a program közösségi hatásait is összegzi.",
+            "evidence": "program közösségi hatásait is összegzi",
+            "value": "community-impact",
+            "unit": null,
+            "attribution": null,
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D04:claim:hvg.hu:8"
+          }
+        ],
+        "events": [
+          {
+            "id": "V22-D04:event",
+            "title": "hálózati próba",
+            "membership": [
+              "telex.hu",
+              "24.hu",
+              "hvg.hu"
+            ]
+          }
+        ],
+        "conflicts": [],
+        "nonConflicts": [],
+        "omissions": [
+          {
+            "source": "hvg.hu",
+            "predicate": "GRID_LOSS"
+          }
+        ],
+        "changesOverTime": [
+          {
+            "from": 40,
+            "to": 55
+          }
+        ]
+      }
+    },
+    {
+      "id": "V22-D05",
+      "slug": "rail-bridge",
+      "category": "rail-bridge",
+      "title": "Vasúti híd javítása és külön események",
+      "sourceVariants": [
+        {
+          "source": {
+            "key": "telex.hu",
+            "label": "telex.hu"
+          },
+          "title": "Vasúti híd javítása és külön események – telex.hu",
+          "url": "https://telex.hu/v22/dense/rail-bridge/1",
+          "wordCount": 733,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "source": {
+            "key": "24.hu",
+            "label": "24.hu"
+          },
+          "title": "Vasúti híd javítása és külön események – 24.hu",
+          "url": "https://24.hu/v22/dense/rail-bridge/2",
+          "wordCount": 733,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "source": {
+            "key": "hvg.hu",
+            "label": "hvg.hu"
+          },
+          "title": "Vasúti híd javítása és külön események – hvg.hu",
+          "url": "https://hvg.hu/v22/dense/rail-bridge/3",
+          "wordCount": 722,
+          "observationIds": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ],
+      "expected": {
+        "entities": [
+          {
+            "id": "V22-D05:entity:1",
+            "mention": "Keleti vasúti híd",
+            "normalized": "keleti vasúti híd",
+            "type": "project",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D05:entity:2",
+            "mention": "Délvidéki Vasút",
+            "normalized": "délvidéki vasút",
+            "type": "organization",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D05:entity:3",
+            "mention": "Farkas László",
+            "normalized": "farkas lászló",
+            "type": "person",
+            "identity": "same"
+          },
+          {
+            "id": "V22-D05:entity:4",
+            "mention": "terhelési próba",
+            "normalized": "terhelési próba",
+            "type": "event",
+            "identity": "same"
+          }
+        ],
+        "relations": [
+          {
+            "subject": "Délvidéki Vasút",
+            "predicate": "announced",
+            "object": "terhelési próba",
+            "evidence": "bejelentette"
+          }
+        ],
+        "claims": [
+          {
+            "source": "telex.hu",
+            "predicate": "COMPLETION_PERCENT",
+            "sentence": "A híd javítása 70 százaléknál tart.",
+            "evidence": "javítása 70 százaléknál tart",
+            "value": 70,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:telex.hu:1"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "TRIAL_DATE",
+            "sentence": "A terhelési próba augusztusban indulhat, ha a síncsere lezárul.",
+            "evidence": "terhelési próba augusztusban indulhat, ha a síncsere lezárul",
+            "value": "2027-08",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:telex.hu:2"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "PROJECT_COST",
+            "sentence": "A javítás 3,4 milliárd forintba kerül.",
+            "evidence": "javítás 3,4 milliárd forintba kerül",
+            "value": 3.4,
+            "unit": "billion HUF",
+            "attribution": {
+              "type": "official",
+              "label": "vasúttársaság"
+            },
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:telex.hu:3"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "ENGINEER_ASSESSMENT",
+            "sentence": "Farkas László szerint a szerkezet biztonságos.",
+            "evidence": "Farkas László szerint",
+            "value": "safe",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Farkas László"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:telex.hu:4"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "DISTANCE",
+            "sentence": "A pálya 2,3 kilométeren újul meg.",
+            "evidence": "pálya 2,3 kilométeren újul meg",
+            "value": 2.3,
+            "unit": "km",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:telex.hu:5"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "A vasúttársaság bejelentette a terhelési próbát.",
+            "evidence": "vasúttársaság bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D05:claim:telex.hu:6"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "PROJECT_START",
+            "sentence": "A májusi mérföldkő teljesítése késik.",
+            "evidence": "májusi mérföldkő teljesítése késik",
+            "value": "delay",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:telex.hu:7"
+          },
+          {
+            "source": "telex.hu",
+            "predicate": "SPEED_LIMIT",
+            "sentence": "A sebességkorlátozás részleteit nem közölték.",
+            "evidence": "sebességkorlátozás részleteit nem közölték",
+            "value": "unknown",
+            "unit": null,
+            "attribution": null,
+            "modality": "unknown",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:telex.hu:8"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "COMPLETION_PERCENT",
+            "sentence": "A híd javítása 70 százaléknál tart.",
+            "evidence": "javítása 70 százaléknál tart",
+            "value": 75,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:24.hu:1"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "TRIAL_DATE",
+            "sentence": "A terhelési próba augusztusban indulhat, ha a síncsere lezárul.",
+            "evidence": "terhelési próba augusztusban indulhat, ha a síncsere lezárul",
+            "value": "2027-08",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:24.hu:2"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "PROJECT_COST",
+            "sentence": "A javítás 3,4 milliárd forintba kerül.",
+            "evidence": "javítás 3,4 milliárd forintba kerül",
+            "value": 3.4,
+            "unit": "billion HUF",
+            "attribution": {
+              "type": "official",
+              "label": "vasúttársaság"
+            },
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:24.hu:3"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "ENGINEER_ASSESSMENT",
+            "sentence": "Farkas László szerint a szerkezet biztonságos.",
+            "evidence": "Farkas László szerint",
+            "value": "safe",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Farkas László"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:24.hu:4"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "DISTANCE",
+            "sentence": "A pálya 2,3 kilométeren újul meg.",
+            "evidence": "pálya 2,3 kilométeren újul meg",
+            "value": 2.3,
+            "unit": "km",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:24.hu:5"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "A vasúttársaság bejelentette a terhelési próbát.",
+            "evidence": "vasúttársaság bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D05:claim:24.hu:6"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "PROJECT_START",
+            "sentence": "A májusi mérföldkő teljesítése késik.",
+            "evidence": "májusi mérföldkő teljesítése késik",
+            "value": "delay",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:24.hu:7"
+          },
+          {
+            "source": "24.hu",
+            "predicate": "SPEED_LIMIT",
+            "sentence": "A sebességkorlátozás részleteit nem közölték.",
+            "evidence": "sebességkorlátozás részleteit nem közölték",
+            "value": "unknown",
+            "unit": null,
+            "attribution": null,
+            "modality": "unknown",
+            "polarity": "affirmed",
+            "uncertainty": true,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:24.hu:8"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "COMPLETION_PERCENT",
+            "sentence": "A híd javítása 70 százaléknál tart.",
+            "evidence": "javítása 70 százaléknál tart",
+            "value": 70,
+            "unit": "%",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:hvg.hu:1"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "TRIAL_DATE",
+            "sentence": "A terhelési próba augusztusban indulhat, ha a síncsere lezárul.",
+            "evidence": "terhelési próba augusztusban indulhat, ha a síncsere lezárul",
+            "value": "2027-08",
+            "unit": null,
+            "attribution": null,
+            "modality": "conditional",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": true,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:hvg.hu:2"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "PROJECT_COST",
+            "sentence": "A javítás 3,4 milliárd forintba kerül.",
+            "evidence": "javítás 3,4 milliárd forintba kerül",
+            "value": 3.4,
+            "unit": "billion HUF",
+            "attribution": {
+              "type": "official",
+              "label": "vasúttársaság"
+            },
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:hvg.hu:3"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "ENGINEER_ASSESSMENT",
+            "sentence": "Farkas László szerint a szerkezet biztonságos.",
+            "evidence": "Farkas László szerint",
+            "value": "safe",
+            "unit": null,
+            "attribution": {
+              "type": "expert",
+              "label": "Farkas László"
+            },
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:hvg.hu:4"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "DISTANCE",
+            "sentence": "A pálya 2,3 kilométeren újul meg.",
+            "evidence": "pálya 2,3 kilométeren újul meg",
+            "value": 2.3,
+            "unit": "km",
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:hvg.hu:5"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "OPENING_EVENT",
+            "sentence": "A vasúttársaság bejelentette a terhelési próbát.",
+            "evidence": "vasúttársaság bejelentette",
+            "value": "announcement",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": "dense-event",
+            "id": "V22-D05:claim:hvg.hu:6"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "PROJECT_START",
+            "sentence": "A májusi mérföldkő teljesítése késik.",
+            "evidence": "májusi mérföldkő teljesítése késik",
+            "value": "delay",
+            "unit": null,
+            "attribution": null,
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:hvg.hu:7"
+          },
+          {
+            "source": "hvg.hu",
+            "predicate": "SOURCE_CONTEXT",
+            "sentence": "A beszámoló a program közösségi hatásait is összegzi.",
+            "evidence": "program közösségi hatásait is összegzi",
+            "value": "community-impact",
+            "unit": null,
+            "attribution": null,
+            "modality": "reported",
+            "polarity": "affirmed",
+            "uncertainty": false,
+            "conditional": false,
+            "temporal": null,
+            "scope": null,
+            "eventId": null,
+            "id": "V22-D05:claim:hvg.hu:8"
+          }
+        ],
+        "events": [
+          {
+            "id": "V22-D05:event",
+            "title": "terhelési próba",
+            "membership": [
+              "telex.hu",
+              "24.hu",
+              "hvg.hu"
+            ]
+          }
+        ],
+        "conflicts": [],
+        "nonConflicts": [],
+        "omissions": [
+          {
+            "source": "hvg.hu",
+            "predicate": "SPEED_LIMIT"
+          }
+        ],
+        "changesOverTime": [
+          {
+            "from": "2027-05-10",
+            "to": "2027-08-20"
+          }
+        ]
+      }
+    }
+  ]
+}
