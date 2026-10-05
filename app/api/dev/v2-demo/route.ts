@@ -21,6 +21,14 @@ function jsonError(code: string, message: string, status: number) {
   return NextResponse.json({ error: message, code }, { status, headers: { "Cache-Control": "no-store" } });
 }
 
+function preserveTypedValue(value: unknown): unknown {
+  if (value == null) return null;
+  if (typeof value !== "string") return value;
+  const trimmed = value.trim();
+  if (!((trimmed.startsWith("{") && trimmed.endsWith("}")) || (trimmed.startsWith("[") && trimmed.endsWith("]")))) return value;
+  try { return JSON.parse(trimmed); } catch { return value; }
+}
+
 export async function GET(request: Request) {
   const requestHost = new URL(request.url).hostname;
   if (!isV2DemoAllowed(process.env, requestHost)) return new NextResponse(null, { status: 404 });
@@ -109,17 +117,18 @@ export async function GET(request: Request) {
       premium_tier: entitlementUser.premiumTier,
     } : null);
     const sourceNames = articles.map((row) => String(row.sourceName || row.source || "Ismeretlen forrás"));
-    const comparisonMap = new Map<string, Map<string, Row[]>>();
+    const comparisonMap = new Map<string, Map<string, { value: unknown; rows: Row[] }>>();
     for (const claim of claims) {
       const predicate = String(claim.predicate || "állítás");
-      const value = String(claim.normalizedValue || claim.valueJson || "nincs érték");
+      const value = preserveTypedValue(claim.normalizedValue ?? claim.valueJson) ?? "nincs érték";
+      const valueKey = typeof value === "string" ? value : JSON.stringify(value);
       if (!comparisonMap.has(predicate)) comparisonMap.set(predicate, new Map());
       const values = comparisonMap.get(predicate)!;
-      if (!values.has(value)) values.set(value, []);
-      values.get(value)!.push(claim);
+      if (!values.has(valueKey)) values.set(valueKey, { value, rows: [] });
+      values.get(valueKey)!.rows.push(claim);
     }
     const comparison = [...comparisonMap.entries()].map(([predicate, values]) => {
-      const variants = [...values.entries()].map(([value, rows]) => ({ value, sources: [...new Set(rows.map((row) => String(row.sourceName || "Ismeretlen")))] }));
+      const variants = [...values.values()].map(({ value, rows }) => ({ value, sources: [...new Set(rows.map((row) => String(row.sourceName || "Ismeretlen")))] }));
       const covered = new Set(variants.flatMap((variant) => variant.sources));
       return { predicate, variants, coverage: variants.length > 1 ? "conflict" : covered.size > 1 ? "shared" : "source_only", missing: sourceNames.filter((name) => !covered.has(name)) };
     });
@@ -142,8 +151,8 @@ export async function GET(request: Request) {
       articles: articles.map((row) => ({ id: Number(row.id), title: String(row.title), contentText: row.contentText == null ? null : String(row.contentText), canonicalUrl: String(row.canonicalUrl), publishedAt: row.publishedAt, source: String(row.sourceName || row.source || "Ismeretlen forrás"), sourceId: row.sourceId == null ? null : Number(row.sourceId), category: row.category == null ? null : String(row.category) })),
       intelligence: {
         entities: entities.map((row) => ({ id: Number(row.id), type: String(row.entityType), name: String(row.canonicalName), normalizedName: String(row.normalizedName), status: String(row.status), confidence: row.confidence == null ? null : Number(row.confidence) })),
-        relations: relations.map((row) => ({ id: Number(row.id), subject: String(row.subjectName), predicate: String(row.predicate), object: row.objectName ? String(row.objectName) : row.objectValue ? String(row.objectValue) : "érték", status: String(row.status), confidence: row.confidence == null ? null : Number(row.confidence) })),
-        claims: claims.map((row) => ({ id: Number(row.id), predicate: String(row.predicate), type: String(row.claimType), normalizedValue: row.normalizedValue == null ? null : String(row.normalizedValue), confidence: row.confidence == null ? null : Number(row.confidence), status: String(row.status), source: String(row.sourceName || "Ismeretlen forrás"), subject: row.subjectName ? String(row.subjectName) : null, evidence: row.evidence ? String(row.evidence) : null })),
+        relations: relations.map((row) => ({ id: Number(row.id), subject: String(row.subjectName), predicate: String(row.predicate), object: row.objectName != null ? String(row.objectName) : row.objectValue != null ? preserveTypedValue(row.objectValue) : "érték", status: String(row.status), confidence: row.confidence == null ? null : Number(row.confidence) })),
+        claims: claims.map((row) => ({ id: Number(row.id), predicate: String(row.predicate), type: String(row.claimType), normalizedValue: preserveTypedValue(row.normalizedValue ?? row.valueJson), confidence: row.confidence == null ? null : Number(row.confidence), status: String(row.status), source: String(row.sourceName || "Ismeretlen forrás"), subject: row.subjectName ? String(row.subjectName) : null, evidence: row.evidence ? String(row.evidence) : null })),
         events: events.map((row) => ({ id: Number(row.id), title: String(row.title), type: String(row.eventType), status: String(row.status), articleCount: toSafeNumber(row.articleCount), startAt: row.startAt, endAt: row.endAt })),
         conflicts: conflicts.map((row) => ({ id: Number(row.id), type: String(row.conflictType), severity: String(row.severity), state: String(row.state), explanation: row.explanation ? String(row.explanation) : null })),
         timeline: timelineRows.map((row) => ({ id: Number(row.id), itemType: String(row.itemType), itemId: Number(row.itemId), validAt: row.validAt, displayAt: row.displayAt, confidence: row.confidence == null ? null : Number(row.confidence) })),

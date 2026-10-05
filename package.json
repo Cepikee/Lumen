@@ -26,7 +26,10 @@
     "retention:raw-text": "node scripts/raw-text-retention.cjs",
     "production:preflight": "node scripts/production-preflight.cjs",
     "scale:fixture": "node scripts/scale-fixture.cjs",
-    "scale:audit": "node scripts/scale-audit.cjs"
+    "scale:audit": "node scripts/scale-audit.cjs",
+    "benchmark:v22:generate": "node scripts/generate-v22-benchmark.cjs",
+    "benchmark:v22": "node scripts/run-v22-benchmark.cjs",
+    "benchmark:v22:deterministic": "node scripts/run-v22-deterministic-baseline.cjs"
   },
   "engines": {
     "node": ">=24 <25"
