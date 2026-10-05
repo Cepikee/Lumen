@@ -162,7 +162,7 @@ function externalOptions(article, stepName, input) {
 
 async function fetchPendingArticles(limit) {
   const [rows] = await pool.execute(
-    `SELECT id, title, url_canonical, content_text, category, source, short_summary, long_summary, embedding, cluster_id
+    `SELECT id, title, url_canonical, content_text, content_hash, category, source, short_summary, long_summary, embedding, cluster_id
      FROM articles
      WHERE status = 'pending'
         OR (status = 'in_progress' AND heartbeat_at < UTC_TIMESTAMP(6) - INTERVAL ? MICROSECOND
@@ -216,6 +216,13 @@ async function processArticlePipeline(article, claim) {
   let source = "";
   let keywords = [];
   let legacyClusterSnapshot = null;
+
+  // A retained article may still be retried by an operator after its raw body
+  // was purged. Never turn that into an empty-string scrape/AI run: callers
+  // receive a durable, explicit recovery error instead.
+  if ((article.content_text == null || String(article.content_text).trim() === "") && article.content_hash) {
+    throw new Error("raw_text_unavailable");
+  }
 
   // 0) Scraping fallback
   if (!article.content_text || article.content_text.trim().length < 400) {

@@ -127,7 +127,7 @@ test("MySQL 8 recovery integration and concurrency suite", { skip: !enabled }, a
     await t.test("fresh MySQL 8 schema applies the complete migration chain without intervention", async () => {
       assert.equal((await applyMigrations(connection, migrations)).length, migrations.length);
       assert.deepEqual(await applyMigrations(connection, migrations), []);
-      assert.deepEqual(await checkSchemaReadiness(connection), { ready: true, latestRequiredVersion: "059", missing: [] });
+      assert.deepEqual(await checkSchemaReadiness(connection), { ready: true, latestRequiredVersion: "060", missing: [] });
       const [[ledger]] = await connection.execute("SELECT COUNT(*) count,MAX(version) latest FROM schema_migrations");
       assert.equal(Number(ledger.count), migrations.length);
       assert.equal(ledger.latest, "059");
@@ -185,7 +185,7 @@ test("MySQL 8 recovery integration and concurrency suite", { skip: !enabled }, a
       assert.equal(identityIndex.Sub_part, null);
       const [statuses] = await connection.query("SELECT status FROM articles ORDER BY id");
       assert.deepEqual(statuses.map((row) => row.status), fixtureStatuses);
-      assert.deepEqual(await checkSchemaReadiness(connection), { ready: true, latestRequiredVersion: "059", missing: [] });
+      assert.deepEqual(await checkSchemaReadiness(connection), { ready: true, latestRequiredVersion: "060", missing: [] });
     });
 
     await t.test("schema readiness fails closed for a missing critical constraint", async () => {

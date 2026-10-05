@@ -23,6 +23,7 @@
     "recovery:retry": "node scripts/recovery.cjs retry",
     "rate-limit:cleanup": "node scripts/cleanup-rate-limits.cjs",
     "email-outbox:process": "node scripts/process-email-outbox.cjs",
+    "retention:raw-text": "node scripts/raw-text-retention.cjs",
     "production:preflight": "node scripts/production-preflight.cjs",
     "scale:fixture": "node scripts/scale-fixture.cjs",
     "scale:audit": "node scripts/scale-audit.cjs"

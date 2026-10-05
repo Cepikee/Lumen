@@ -11,7 +11,7 @@ function readinessExecutor(latest) {
   const tables = [
     "articles", "article_processing_steps", "speed_index_recalculation_jobs", "speed_index_history",
     "v2_entity_mentions", "v2_entity_alias_observations", "v2_ingestion_provenance", "schema_migrations",
-    "worker_runtime_health", "recovery_audit_log", "user_sessions", "shared_rate_limits", "email_outbox",
+    "worker_runtime_health", "recovery_audit_log", "raw_text_retention_audit", "user_sessions", "shared_rate_limits", "email_outbox",
   ];
   const columns = new Map([
     ["articles", ["worker_id", "claim_token", "heartbeat_at", "processing_attempts", "failed_step", "last_processing_error", "original_url", "external_id", "publication_time_source", "url_identity"]],
@@ -55,14 +55,14 @@ test("active CI workflows use the supported Node major", () => {
   }
 });
 
-test("schema 059 is ready while 058 and future 060 fail closed", async () => {
-  assert.equal((await checkSchemaReadiness(readinessExecutor(59))).ready, true);
-  const old = await checkSchemaReadiness(readinessExecutor(58));
+test("schema 060 is ready while 059 and future 061 fail closed", async () => {
+  assert.equal((await checkSchemaReadiness(readinessExecutor(60))).ready, true);
+  const old = await checkSchemaReadiness(readinessExecutor(59));
   assert.equal(old.ready, false);
-  assert.ok(old.missing.includes("migration:59"));
-  const future = await checkSchemaReadiness(readinessExecutor(60));
+  assert.ok(old.missing.includes("migration:60"));
+  const future = await checkSchemaReadiness(readinessExecutor(61));
   assert.equal(future.ready, false);
-  assert.ok(future.missing.includes("unsupported_schema_version:060"));
+  assert.ok(future.missing.includes("unsupported_schema_version:061"));
 });
 
 console.log("production preflight schema regression: PASS");
