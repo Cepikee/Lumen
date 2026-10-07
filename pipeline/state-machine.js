@@ -300,7 +300,7 @@ function createMysqlPipelineStore(pool) {
     },
     async completeArticle({ articleId, workerId, claimToken }) {
       const [result] = await pool.execute(
-        `UPDATE articles SET status='done', worker_id=NULL, claim_token=NULL, heartbeat_at=NULL,
+        `UPDATE articles SET status='done', processed=1, worker_id=NULL, claim_token=NULL, heartbeat_at=NULL,
           failed_step=NULL, last_processing_error=NULL
          WHERE id=? AND status='in_progress' AND worker_id=? AND claim_token=?`,
         [articleId, workerId, claimToken],

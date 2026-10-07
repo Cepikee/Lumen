@@ -2,7 +2,7 @@
 
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { REQUIRED_STEPS, createPipelineCoordinator } = require("../../pipeline/state-machine");
+const { REQUIRED_STEPS, createMysqlPipelineStore, createPipelineCoordinator } = require("../../pipeline/state-machine");
 
 function memoryStore(clock) {
   const articles = new Map([[1, { status: "pending", heartbeat: null, claimToken: null, workerId: null }]]);
@@ -83,6 +83,23 @@ function memoryStore(clock) {
     },
   };
 }
+
+test("completeArticle publishes the completed article and clears its claim state", async () => {
+  const calls = [];
+  const pool = {
+    async execute(sql, params) {
+      calls.push({ sql: sql.replace(/\s+/g, " ").trim(), params });
+      return [{ affectedRows: 1 }, []];
+    },
+  };
+  const store = createMysqlPipelineStore(pool);
+
+  await store.completeArticle({ articleId: 41, workerId: "worker-a", claimToken: "claim-a" });
+
+  assert.equal(calls.length, 1);
+  assert.match(calls[0].sql, /SET status='done', processed=1, worker_id=NULL, claim_token=NULL, heartbeat_at=NULL, failed_step=NULL, last_processing_error=NULL/);
+  assert.deepEqual(calls[0].params, [41, "worker-a", "claim-a"]);
+});
 
 test("two workers competing for one article produce exactly one winner", async () => {
   let time = new Date("2026-09-27T12:00:00Z");
