@@ -7,14 +7,14 @@ import Parser from "rss-parser";
 import * as cheerio from "cheerio";
 import { canonicalizeArticleUrl } from "@/lib/article-identity";
 import { ingestFeedArticle } from "@/lib/feed-ingestion";
-import { sourceIdentityFromUrl } from "@/lib/source-identity";
+import { SOURCES, sourceIdentityFromUrl, type SourceIdentity } from "@/lib/source-identity";
 import { blockedCapabilityResponse } from "@/lib/config/routeGuard";
 import { requireInternalWorker } from "@/lib/security/internal-worker";
 import { appendOperationalLog } from "@/lib/safe-log";
 import { fetchPinnedText } from "@/lib/safe-fetch";
 
 /** Logolás */
-function logError(source: string, err: any) {
+function logError(source: string, err: unknown) {
   const line = `[${new Date().toISOString()}] ${source}: ${
     err instanceof Error ? err.message : String(err)
   }\n`;
@@ -63,7 +63,6 @@ export async function POST(req: Request) {
   const blocked = blockedCapabilityResponse([
     "feedFetch",
     "databaseWrite",
-    "realAi",
   ]);
 
   if (blocked) return blocked;
@@ -97,8 +96,8 @@ export async function POST(req: Request) {
       database: process.env.DB_NAME || "utom_dev",
     });
     const activeConnection = connection;
-    const [activeRows] = await activeConnection.query<mysql.RowDataPacket[]>("SELECT id FROM sources WHERE is_active=1");
-    const activeSourceIds = new Set(activeRows.map((row) => Number(row.id)));
+    const [activeRows] = await activeConnection.query<mysql.RowDataPacket[]>("SELECT slug FROM sources WHERE is_active=1");
+    const activeSourceSlugs = new Set(activeRows.map((row) => String(row.slug)));
 
     let inserted = 0;
     let deduplicated = 0;
@@ -108,33 +107,22 @@ export async function POST(req: Request) {
 
     /** RSS feldolgozás */
     async function processRssFeed(
-      xmlOrUrl: string,
-      sourceName: string,
-      sourceId: number,
-      isXml = false
+      source: SourceIdentity,
     ) {
-      if (!activeSourceIds.has(sourceId)) return;
+      if (!activeSourceSlugs.has(source.key)) return;
       feedAttempts++;
       try {
-        let xml = "";
+        const result = await fetchPinnedText(source.feedUrl, {
+          timeoutMs: 20_000,
+          maxRedirects: 5,
+          maxBytes: 5 * 1024 * 1024,
+          headers: {
+            "User-Agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
+          },
+        });
 
-        if (isXml) {
-          xml = xmlOrUrl;
-        } else {
-          const result = await fetchPinnedText(xmlOrUrl, {
-            timeoutMs: 20_000,
-            maxRedirects: 5,
-            maxBytes: 5 * 1024 * 1024,
-            headers: {
-              "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
-            },
-          });
-
-          xml = result.text;
-        }
-
-        const feed = await parser.parseString(xml);
+        const feed = await parser.parseString(result.text);
 
         for (const item of feed.items) {
           const originalLink = item.link;
@@ -146,11 +134,11 @@ export async function POST(req: Request) {
 
             let content: string;
 
-            if (sourceIdentity.sourceId === 6) {
+            if (sourceIdentity.key === "444.hu") {
               // 444.hu → content:encoded-ben benne a teljes cikk
               content =
                 item["content:encoded"] || item.content || "";
-            } else if (sourceIdentity.sourceId === 7) {
+            } else if (sourceIdentity.key === "origo.hu") {
               // Origo → RSS-ben gyakorlatilag nincs rendes cikk
               content = "";
             } else {
@@ -163,7 +151,7 @@ export async function POST(req: Request) {
             }
 
             // Portfolio: ha az RSS-ből kevés jön, külön letöltjük
-            if (sourceIdentity.sourceId === 5 && content.length < 500) {
+            if (sourceIdentity.key === "portfolio.hu" && content.length < 500) {
               content = await fetchPortfolioArticle(link);
             }
 
@@ -172,7 +160,7 @@ export async function POST(req: Request) {
               title: item.title,
               originalUrl: originalLink,
               content,
-              source: sourceName,
+              source: source.displayName,
               publishedAt: item.isoDate || item.pubDate,
               externalId: item.guid,
               language: "hu",
@@ -181,55 +169,17 @@ export async function POST(req: Request) {
             else if (ingestion.outcome === "deduplicated") deduplicated++;
             else { malformed++; continue; }
 
-            feedStats[sourceName] =
-              (feedStats[sourceName] || 0) + 1;
+            feedStats[source.displayName] =
+              (feedStats[source.displayName] || 0) + 1;
 
         }
       } catch (err) {
         feedFailures++;
-        logError(sourceName, err);
+        logError(source.displayName, err);
       }
     }
 
-    // ---- FEED LISTA ----
-    await processRssFeed(
-      "https://telex.hu/rss",
-      "Telex", 1
-    );
-
-    await processRssFeed(
-      "https://hvg.hu/rss",
-      "HVG", 4
-    );
-
-    await processRssFeed(
-      "https://24.hu/feed",
-      "24.hu", 2
-    );
-
-    await processRssFeed(
-      "https://index.hu/24ora/rss/",
-      "Index", 3
-    );
-
-    await processRssFeed(
-      "https://www.portfolio.hu/rss/all.xml",
-      "Portfolio", 5
-    );
-
-    await processRssFeed(
-      "https://www.origo.hu/publicapi/hu/rss/origo/articles",
-      "Origo", 7
-    );
-
-    if (activeSourceIds.has(6)) {
-      const feed444 = await fetchPinnedText("https://royal-king-47c3.vashiri6562.workers.dev/", {
-        timeoutMs: 20_000,
-        maxRedirects: 5,
-        maxBytes: 5 * 1024 * 1024,
-      });
-      await processRssFeed(feed444.text, "444.hu", 6, true);
-    }
+    for (const source of SOURCES) await processRssFeed(source);
 
     if (feedAttempts > 0 && feedFailures === feedAttempts) {
       return NextResponse.json(

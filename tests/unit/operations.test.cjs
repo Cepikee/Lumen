@@ -44,6 +44,12 @@ test("production environment allows paid AI to remain disabled without a provide
   assert.throws(() => validateProductionEnvironment({ ...offlineAi, UTOM_PAID_AI_ENABLED: "true" }), /production_ai_provider_must_be_explicit/);
 });
 
+test("production web validation allows background jobs to remain disabled", () => {
+  const env = { DB_HOST: "db", DB_USER: "app", DB_PASSWORD: "secret", DB_NAME: "utom", UTOM_OFFLINE_MODE: "false", BACKGROUND_JOBS_ENABLED: "false", NODE_ENV: "production", APP_MODE: "production", UTOM_PAID_AI_ENABLED: "false", AI_PROVIDER: "mock", REAL_AI_ENABLED: "false", UTOM_INTERNAL_WORKER_TOKEN: "x".repeat(32), EMAIL_OUTBOX_ENCRYPTION_KEY: "ab".repeat(32) };
+  assert.equal(validateProductionEnvironment(env).mode, "production");
+  assert.throws(() => validateWorkerEnvironment(env), /background_jobs_not_explicitly_enabled/);
+});
+
 test("internal health authentication rejects anonymous and malformed credentials", () => {
   const token = "a".repeat(32);
   assert.equal(isValidInternalToken(null, token), false);
