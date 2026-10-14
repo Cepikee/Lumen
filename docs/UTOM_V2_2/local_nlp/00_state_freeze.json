@@ -1,0 +1,33 @@
+{
+  "frozenAt": "2026-10-06T11:38:18.5394250+02:00",
+  "branch": "develop/utom-recovery",
+  "localHead": "d145120c6e044b4f25d1d7b94e87846652ef80ba",
+  "remoteHead": "d145120c6e044b4f25d1d7b94e87846652ef80ba",
+  "workingTreeStatusSha256": "06EDA2B2905D0B968AFC73519D7B1BD9B12DE3E864883764F4E92B841BC119B5",
+  "intelligenceSha256": {
+    "lib/v2/deterministic-semantic.js": "456004DBE83ABBAD63523C08B8047BA849089C91142E40F38264B75764126C72",
+    "lib/v2/entity-extraction-provider.js": "88CAB2995E4EA5F3B01DB7CEAB59ED835C7ED24328E06D682750001EDD2AA14B",
+    "lib/v22/deterministic-text-provider.cjs": "DEDE26749235C61D62E6C89E8F7F9F3214672139E5839DDED120CDFE89793D4E"
+  },
+  "heldout": {
+    "path": "docs/UTOM_V2_2/local_nlp/01_new_heldout_corpus.json",
+    "sha256": "39AFB634B5B7232CE8B4B71F13DF1DA41DED735CAEA5473C054A7DFC368CD25B",
+    "cases": 10,
+    "developmentUse": false
+  },
+  "experimentalAdapterSha256": {
+    "scripts/experimental/local-nlp-adapter.py": "9716AE3B01B09EDA1C47907DD84FD4390E5AF20D3E2E9BA4C3FE06B9B3C1EB4D",
+    "scripts/experimental/local-nlp-baseline.cjs": "88639E72A28862FB2FFEA60B36D4F64941AC4FCF354136A4AD1A107A09E3C4A6",
+    "scripts/experimental/evaluate-local-nlp-bakeoff.cjs": "D20A782BFE1D6314C3200E5911C17E466991AB74A68E725912894DB561BA97A9"
+  },
+  "environment": {
+    "python": "3.12.3",
+    "huspacyLibrary": "0.12.1",
+    "huspacyModel": "hu_core_news_md 3.8.0",
+    "stanza": "1.15.0",
+    "torch": "2.14.1+cpu",
+    "cudaAvailable": false,
+    "stanzaHungarianPackage": "tokenize,pos,lemma,depparse,ner",
+    "productionIntegration": false
+  }
+}

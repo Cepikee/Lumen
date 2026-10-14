@@ -1,0 +1,24 @@
+{
+  "time": "2026-10-12T18:38:30.178Z",
+  "changedPreexistingFiles": [
+    "scripts/experimental/compound-rate-safety.cjs",
+    "scripts/experimental/numeric-scope-safety.cjs"
+  ],
+  "unexpectedChanges": [],
+  "freshFirstPassUnchanged": true,
+  "sourceInvariance": {
+    "changedSource": [],
+    "compared": "All 20 snippets: entities, attribution chains, nominal relations; every frame actor/action/polarity/source/recipient/claim-owner/source-evidence/contrast"
+  },
+  "postHash": "8ec0d03d84d437c22f7acd6679b553a3d54b974cedb98f54fdab32e3577fbdce",
+  "modifiedCodeHashes": {
+    "scripts/experimental/compound-rate-safety.cjs": "475139fd9453bb47b9700849c0e0adffc1274d20b9ca1dbf8562ff37ad9bbf0b",
+    "scripts/experimental/numeric-scope-safety.cjs": "f895ca53e4d191cef0e919962817c2aaca3568cdfbcb46e0b4fca167e99b624d"
+  },
+  "canonicalProjectionOff": true,
+  "testSummary": [
+    "# tests 477",
+    "# pass 477",
+    "# fail 0"
+  ]
+}

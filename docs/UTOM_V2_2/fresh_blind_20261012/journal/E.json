@@ -1,0 +1,1782 @@
+{
+  "id": "E",
+  "text": "A hálózatirányító tájékoztatása alapján a tartalék generátorok óránként 16 köbméter gázt fogyasztanak. Szélcsend esetén a tároló legfeljebb 11 órán keresztül biztosíthatja az ellátást. Az átvételi próbán a feszültség nem 230, hanem 228 volt volt.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 17,
+        "text": "hálózatirányító",
+        "lemma": "hálózatirányító",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 18
+      },
+      {
+        "start": 18,
+        "end": 31,
+        "text": "tájékoztatása",
+        "lemma": "tájékoztatás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nmod:att",
+        "headStart": 32
+      },
+      {
+        "start": 32,
+        "end": 39,
+        "text": "alapján",
+        "lemma": "alap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 89
+      },
+      {
+        "start": 40,
+        "end": 41,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 42
+      },
+      {
+        "start": 42,
+        "end": 50,
+        "text": "tartalék",
+        "lemma": "tartalék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 51
+      },
+      {
+        "start": 51,
+        "end": 62,
+        "text": "generátorok",
+        "lemma": "generátor",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur"
+        },
+        "dep": "nmod:att",
+        "headStart": 63
+      },
+      {
+        "start": 63,
+        "end": 71,
+        "text": "óránként",
+        "lemma": "óra",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dis",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 89
+      },
+      {
+        "start": 72,
+        "end": 74,
+        "text": "16",
+        "lemma": "16",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 75
+      },
+      {
+        "start": 75,
+        "end": 83,
+        "text": "köbméter",
+        "lemma": "köbméter",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 84
+      },
+      {
+        "start": 84,
+        "end": 88,
+        "text": "gázt",
+        "lemma": "gáz",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj:lvc",
+        "headStart": 89
+      },
+      {
+        "start": 89,
+        "end": 101,
+        "text": "fogyasztanak",
+        "lemma": "fogyaszt",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 89
+      },
+      {
+        "start": 101,
+        "end": 102,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 89
+      },
+      {
+        "start": 103,
+        "end": 112,
+        "text": "Szélcsend",
+        "lemma": "szélcsend",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 113
+      },
+      {
+        "start": 113,
+        "end": 119,
+        "text": "esetén",
+        "lemma": "eset",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 158
+      },
+      {
+        "start": 120,
+        "end": 121,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 122
+      },
+      {
+        "start": 122,
+        "end": 128,
+        "text": "tároló",
+        "lemma": "tároló",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 158
+      },
+      {
+        "start": 129,
+        "end": 139,
+        "text": "legfeljebb",
+        "lemma": "legfeljebb",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 143
+      },
+      {
+        "start": 140,
+        "end": 142,
+        "text": "11",
+        "lemma": "11",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 143
+      },
+      {
+        "start": 143,
+        "end": 147,
+        "text": "órán",
+        "lemma": "óra",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 158
+      },
+      {
+        "start": 148,
+        "end": 157,
+        "text": "keresztül",
+        "lemma": "keresztül",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 143
+      },
+      {
+        "start": 158,
+        "end": 171,
+        "text": "biztosíthatja",
+        "lemma": "biztosíthat",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 158
+      },
+      {
+        "start": 172,
+        "end": 174,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 175
+      },
+      {
+        "start": 175,
+        "end": 183,
+        "text": "ellátást",
+        "lemma": "ellátás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj:lvc",
+        "headStart": 158
+      },
+      {
+        "start": 183,
+        "end": 184,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 158
+      },
+      {
+        "start": 185,
+        "end": 187,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 197
+      },
+      {
+        "start": 188,
+        "end": 196,
+        "text": "átvételi",
+        "lemma": "átvételi",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 197
+      },
+      {
+        "start": 197,
+        "end": 203,
+        "text": "próbán",
+        "lemma": "próba",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing"
+        },
+        "dep": "nmod:obl",
+        "headStart": 221
+      },
+      {
+        "start": 204,
+        "end": 205,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 206
+      },
+      {
+        "start": 206,
+        "end": 216,
+        "text": "feszültség",
+        "lemma": "feszültség",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 221
+      },
+      {
+        "start": 217,
+        "end": 220,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 221
+      },
+      {
+        "start": 221,
+        "end": 224,
+        "text": "230",
+        "lemma": "230",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 221
+      },
+      {
+        "start": 224,
+        "end": 225,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 232
+      },
+      {
+        "start": 226,
+        "end": 231,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 232
+      },
+      {
+        "start": 232,
+        "end": 235,
+        "text": "228",
+        "lemma": "228",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 221
+      },
+      {
+        "start": 236,
+        "end": 240,
+        "text": "volt",
+        "lemma": "van",
+        "pos": "AUX",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "cop",
+        "headStart": 221
+      },
+      {
+        "start": 241,
+        "end": 245,
+        "text": "volt",
+        "lemma": "van",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "cop",
+        "headStart": 221
+      },
+      {
+        "start": 245,
+        "end": 246,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 221
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 102,
+        "text": "A hálózatirányító tájékoztatása alapján a tartalék generátorok óránként 16 köbméter gázt fogyasztanak."
+      },
+      {
+        "start": 103,
+        "end": 184,
+        "text": "Szélcsend esetén a tároló legfeljebb 11 órán keresztül biztosíthatja az ellátást."
+      },
+      {
+        "start": 185,
+        "end": 246,
+        "text": "Az átvételi próbán a feszültség nem 230, hanem 228 volt volt."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "alapján",
+            "normalized": "alap",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 32,
+            "end": 39,
+            "evidenceSpan": {
+              "start": 32,
+              "end": 39,
+              "textSpan": "alapján"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": {
+          "mention": "hálózatirányító",
+          "normalized": "hálózatirányító",
+          "start": 2,
+          "end": 17,
+          "type": "local_source",
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 17,
+            "textSpan": "hálózatirányító"
+          }
+        },
+        "source": {
+          "mention": "hálózatirányító",
+          "normalized": "hálózatirányító",
+          "start": 2,
+          "end": 17,
+          "type": "local_source",
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 17,
+            "textSpan": "hálózatirányító"
+          }
+        },
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 102,
+          "textSpan": "A hálózatirányító tájékoztatása alapján a tartalék generátorok óránként 16 köbméter gázt fogyasztanak."
+        },
+        "attribution": {
+          "label": "hálózatirányító",
+          "normalized": "hálózatirányító",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 17,
+            "textSpan": "hálózatirányító"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 102,
+            "textSpan": "A hálózatirányító tájékoztatása alapján a tartalék generátorok óránként 16 köbméter gázt fogyasztanak."
+          }
+        },
+        "action": "fogyaszt",
+        "actionSpan": {
+          "start": 89,
+          "end": 101,
+          "textSpan": "fogyasztanak"
+        },
+        "object": [
+          "gáz"
+        ],
+        "numericArguments": [
+          {
+            "value": 16,
+            "canonicalValue": 16,
+            "unit": {
+              "numerator": "köbméter",
+              "denominator": "hour"
+            },
+            "semanticKind": "compound_rate",
+            "start": 63,
+            "end": 83,
+            "raw": "óránként 16 köbméter",
+            "evidenceSpan": {
+              "start": 63,
+              "end": 83,
+              "textSpan": "óránként 16 köbméter"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven",
+              "compound_rate_projection_not_supported"
+            ],
+            "compound": {
+              "numerator": {
+                "value": 16,
+                "baseUnit": "köbméter",
+                "originalKind": "unknown",
+                "evidenceSpan": {
+                  "start": 72,
+                  "end": 74,
+                  "textSpan": "16"
+                }
+              },
+              "denominators": [
+                {
+                  "unit": "hour",
+                  "relation": "per",
+                  "form": "distributive",
+                  "evidenceSpan": {
+                    "start": 63,
+                    "end": 71,
+                    "textSpan": "óránként"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 63,
+                        "end": 71,
+                        "textSpan": "óránként"
+                      },
+                      "targetSpan": {
+                        "start": 89,
+                        "end": 101,
+                        "textSpan": "fogyasztanak"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "relation": "per",
+              "qualifiers": [],
+              "evidenceSpan": {
+                "start": 63,
+                "end": 83,
+                "textSpan": "óránként 16 köbméter"
+              },
+              "numeratorDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 72,
+                    "end": 74,
+                    "textSpan": "16"
+                  },
+                  "targetSpan": {
+                    "start": 75,
+                    "end": 83,
+                    "textSpan": "köbméter"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 75,
+                    "end": 83,
+                    "textSpan": "köbméter"
+                  },
+                  "targetSpan": {
+                    "start": 84,
+                    "end": 88,
+                    "textSpan": "gázt"
+                  }
+                },
+                {
+                  "relation": "obj:lvc",
+                  "sourceSpan": {
+                    "start": 84,
+                    "end": 88,
+                    "textSpan": "gázt"
+                  },
+                  "targetSpan": {
+                    "start": 89,
+                    "end": 101,
+                    "textSpan": "fogyasztanak"
+                  }
+                }
+              ],
+              "scopeStatus": "candidate_only",
+              "frameId": "dependency:0:102"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 72,
+                    "end": 74,
+                    "textSpan": "16"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:102",
+              "clauseSpan": {
+                "start": 0,
+                "end": 102,
+                "textSpan": "A hálózatirányító tájékoztatása alapján a tartalék generátorok óránként 16 köbméter gázt fogyasztanak."
+              },
+              "predicateSpan": {
+                "start": 89,
+                "end": 101,
+                "textSpan": "fogyasztanak"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 72,
+                    "end": 74,
+                    "textSpan": "16"
+                  },
+                  "targetSpan": {
+                    "start": 75,
+                    "end": 83,
+                    "textSpan": "köbméter"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 75,
+                    "end": 83,
+                    "textSpan": "köbméter"
+                  },
+                  "targetSpan": {
+                    "start": 84,
+                    "end": 88,
+                    "textSpan": "gázt"
+                  }
+                },
+                {
+                  "relation": "obj:lvc",
+                  "sourceSpan": {
+                    "start": 84,
+                    "end": 88,
+                    "textSpan": "gázt"
+                  },
+                  "targetSpan": {
+                    "start": 89,
+                    "end": 101,
+                    "textSpan": "fogyasztanak"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved",
+          "compound_rate_requires_lossless_resolution"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 102,
+          "textSpan": "A hálózatirányító tájékoztatása alapján a tartalék generátorok óránként 16 köbméter gázt fogyasztanak."
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 102,
+          "textSpan": "A hálózatirányító tájékoztatása alapján a tartalék generátorok óránként 16 köbméter gázt fogyasztanak."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:102",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "hálózatirányító",
+              "normalized": "hálózatirányító",
+              "start": 2,
+              "end": 17,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 17,
+                "textSpan": "hálózatirányító"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 2,
+                "end": 17,
+                "textSpan": "hálózatirányító"
+              },
+              "targetSpan": {
+                "start": 89,
+                "end": 101,
+                "textSpan": "fogyasztanak"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 17,
+                    "textSpan": "hálózatirányító"
+                  },
+                  "targetSpan": {
+                    "start": 18,
+                    "end": 31,
+                    "textSpan": "tájékoztatása"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 18,
+                    "end": 31,
+                    "textSpan": "tájékoztatása"
+                  },
+                  "targetSpan": {
+                    "start": 32,
+                    "end": 39,
+                    "textSpan": "alapján"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 32,
+                    "end": 39,
+                    "textSpan": "alapján"
+                  },
+                  "targetSpan": {
+                    "start": 89,
+                    "end": 101,
+                    "textSpan": "fogyasztanak"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:102",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "tájékoztatása",
+              "normalized": "tájékoztatás",
+              "start": 18,
+              "end": 31,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 18,
+                "end": 31,
+                "textSpan": "tájékoztatása"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 18,
+                "end": 31,
+                "textSpan": "tájékoztatása"
+              },
+              "targetSpan": {
+                "start": 89,
+                "end": 101,
+                "textSpan": "fogyasztanak"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 18,
+                    "end": 31,
+                    "textSpan": "tájékoztatása"
+                  },
+                  "targetSpan": {
+                    "start": 32,
+                    "end": 39,
+                    "textSpan": "alapján"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 32,
+                    "end": 39,
+                    "textSpan": "alapján"
+                  },
+                  "targetSpan": {
+                    "start": 89,
+                    "end": 101,
+                    "textSpan": "fogyasztanak"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:102",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "gázt",
+              "normalized": "gáz",
+              "start": 84,
+              "end": 88,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 84,
+                "end": 88,
+                "textSpan": "gázt"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 84,
+                "end": 88,
+                "textSpan": "gázt"
+              },
+              "targetSpan": {
+                "start": 89,
+                "end": 101,
+                "textSpan": "fogyasztanak"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj:lvc",
+                  "sourceSpan": {
+                    "start": 84,
+                    "end": 88,
+                    "textSpan": "gázt"
+                  },
+                  "targetSpan": {
+                    "start": 89,
+                    "end": 101,
+                    "textSpan": "fogyasztanak"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:102",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "sourceEvidence": {
+          "rule": "possessive_np_event_nominal_evidential_marker",
+          "sourceSpan": {
+            "start": 2,
+            "end": 17,
+            "textSpan": "hálózatirányító"
+          },
+          "reportingNominalSpan": {
+            "start": 18,
+            "end": 31,
+            "textSpan": "tájékoztatása"
+          },
+          "markerSpan": {
+            "start": 32,
+            "end": 39,
+            "textSpan": "alapján"
+          },
+          "dependencyPath": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 32,
+                "end": 39,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 89,
+                "end": 101,
+                "textSpan": "fogyasztanak"
+              }
+            },
+            {
+              "relation": "nmod:att",
+              "sourceSpan": {
+                "start": 2,
+                "end": 17,
+                "textSpan": "hálózatirányító"
+              },
+              "targetSpan": {
+                "start": 18,
+                "end": 31,
+                "textSpan": "tájékoztatása"
+              }
+            }
+          ],
+          "frameId": "dependency:0:102",
+          "resolutionStatus": "resolved"
+        },
+        "reportingNominalRelationId": "nominal-source:18"
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "órán",
+            "normalized": "óra",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 143,
+            "end": 147,
+            "evidenceSpan": {
+              "start": 143,
+              "end": 147,
+              "textSpan": "órán"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 103,
+          "end": 184,
+          "textSpan": "Szélcsend esetén a tároló legfeljebb 11 órán keresztül biztosíthatja az ellátást."
+        },
+        "attribution": null,
+        "action": "biztosíthat",
+        "actionSpan": {
+          "start": 158,
+          "end": 171,
+          "textSpan": "biztosíthatja"
+        },
+        "object": [
+          "ellátás"
+        ],
+        "numericArguments": [
+          {
+            "start": 140,
+            "end": 157,
+            "raw": "11 órán keresztül",
+            "value": 11,
+            "canonicalValue": 11,
+            "semanticKind": "duration",
+            "unit": "hour",
+            "property": "duration",
+            "temporalRole": "duration",
+            "evidenceSpan": {
+              "start": 140,
+              "end": 157,
+              "textSpan": "11 órán keresztül"
+            },
+            "binding": "resolved",
+            "ownerType": "semantic_argument",
+            "owner": {
+              "mention": "órán",
+              "evidenceSpan": {
+                "start": 143,
+                "end": 147,
+                "textSpan": "órán"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 140,
+                "end": 157,
+                "textSpan": "11 órán keresztül"
+              },
+              "targetSpan": {
+                "start": 158,
+                "end": 171,
+                "textSpan": "biztosíthatja"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 143,
+                    "end": 147,
+                    "textSpan": "órán"
+                  },
+                  "targetSpan": {
+                    "start": 158,
+                    "end": 171,
+                    "textSpan": "biztosíthatja"
+                  }
+                }
+              ],
+              "frameId": "dependency:103:184",
+              "semanticRole": "duration",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "less_or_equal",
+                  "evidenceSpan": {
+                    "start": 129,
+                    "end": 140,
+                    "textSpan": "legfeljebb "
+                  },
+                  "marker": "legfeljebb"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "finite_potential_wordform_candidate",
+                  "evidenceSpan": {
+                    "start": 158,
+                    "end": 171,
+                    "textSpan": "biztosíthatja"
+                  },
+                  "dependencyPath": []
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:103:184",
+              "clauseSpan": {
+                "start": 103,
+                "end": 184,
+                "textSpan": "Szélcsend esetén a tároló legfeljebb 11 órán keresztül biztosíthatja az ellátást."
+              },
+              "predicateSpan": {
+                "start": 158,
+                "end": 171,
+                "textSpan": "biztosíthatja"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 140,
+                    "end": 142,
+                    "textSpan": "11"
+                  },
+                  "targetSpan": {
+                    "start": 143,
+                    "end": 147,
+                    "textSpan": "órán"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 143,
+                    "end": 147,
+                    "textSpan": "órán"
+                  },
+                  "targetSpan": {
+                    "start": 158,
+                    "end": 171,
+                    "textSpan": "biztosíthatja"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "possible"
+        ],
+        "modality": "possible",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 103,
+          "end": 184,
+          "textSpan": "Szélcsend esetén a tároló legfeljebb 11 órán keresztül biztosíthatja az ellátást."
+        },
+        "propositionSpan": {
+          "start": 103,
+          "end": 184,
+          "textSpan": "Szélcsend esetén a tároló legfeljebb 11 órán keresztül biztosíthatja az ellátást."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:103:184",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "Szélcsend",
+              "normalized": "szélcsend",
+              "start": 103,
+              "end": 112,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 103,
+                "end": 112,
+                "textSpan": "Szélcsend"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 103,
+                "end": 112,
+                "textSpan": "Szélcsend"
+              },
+              "targetSpan": {
+                "start": 158,
+                "end": 171,
+                "textSpan": "biztosíthatja"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 103,
+                    "end": 112,
+                    "textSpan": "Szélcsend"
+                  },
+                  "targetSpan": {
+                    "start": 113,
+                    "end": 119,
+                    "textSpan": "esetén"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 113,
+                    "end": 119,
+                    "textSpan": "esetén"
+                  },
+                  "targetSpan": {
+                    "start": 158,
+                    "end": 171,
+                    "textSpan": "biztosíthatja"
+                  }
+                }
+              ],
+              "frameId": "dependency:103:184",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "ellátást",
+              "normalized": "ellátás",
+              "start": 175,
+              "end": 183,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 175,
+                "end": 183,
+                "textSpan": "ellátást"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 175,
+                "end": 183,
+                "textSpan": "ellátást"
+              },
+              "targetSpan": {
+                "start": 158,
+                "end": 171,
+                "textSpan": "biztosíthatja"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj:lvc",
+                  "sourceSpan": {
+                    "start": 175,
+                    "end": 183,
+                    "textSpan": "ellátást"
+                  },
+                  "targetSpan": {
+                    "start": 158,
+                    "end": 171,
+                    "textSpan": "biztosíthatja"
+                  }
+                }
+              ],
+              "frameId": "dependency:103:184",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "finite_potential_wordform_candidate",
+              "evidenceSpan": {
+                "start": 158,
+                "end": 171,
+                "textSpan": "biztosíthatja"
+              },
+              "dependencyPath": []
+            }
+          ],
+          "frameId": "dependency:103:184",
+          "clauseSpan": {
+            "start": 103,
+            "end": 184,
+            "textSpan": "Szélcsend esetén a tároló legfeljebb 11 órán keresztül biztosíthatja az ellátást."
+          },
+          "projectionAllowed": false
+        }
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "próbán",
+            "normalized": "próba",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 197,
+            "end": 203,
+            "evidenceSpan": {
+              "start": 197,
+              "end": 203,
+              "textSpan": "próbán"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 185,
+          "end": 224,
+          "textSpan": "Az átvételi próbán a feszültség nem 230"
+        },
+        "attribution": null,
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 230,
+            "canonicalValue": 230,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 221,
+            "end": 224,
+            "raw": "230",
+            "evidenceSpan": {
+              "start": 221,
+              "end": 224,
+              "textSpan": "230"
+            },
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "unsafe_proposition_scope",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {
+              "start": 185,
+              "end": 224,
+              "textSpan": "Az átvételi próbán a feszültség nem 230"
+            },
+            "subject": null,
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 221,
+                    "end": 224,
+                    "textSpan": "230"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "dependency:185:224",
+              "clauseSpan": {
+                "start": 185,
+                "end": 224,
+                "textSpan": "Az átvételi próbán a feszültség nem 230"
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 185,
+          "end": 224,
+          "textSpan": "Az átvételi próbán a feszültség nem 230"
+        },
+        "propositionSpan": {
+          "start": 185,
+          "end": 224,
+          "textSpan": "Az átvételi próbán a feszültség nem 230"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:185:224"
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 226,
+          "end": 246,
+          "textSpan": "hanem 228 volt volt."
+        },
+        "attribution": null,
+        "action": "van",
+        "actionSpan": {
+          "start": 241,
+          "end": 245,
+          "textSpan": "volt"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 228,
+            "canonicalValue": 228,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 232,
+            "end": 235,
+            "raw": "228",
+            "evidenceSpan": {
+              "start": 232,
+              "end": 235,
+              "textSpan": "228"
+            },
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {
+              "start": 226,
+              "end": 246,
+              "textSpan": "hanem 228 volt volt."
+            },
+            "subject": null,
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 232,
+                    "end": 235,
+                    "textSpan": "228"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "dependency:226:246",
+              "clauseSpan": {
+                "start": 226,
+                "end": 246,
+                "textSpan": "hanem 228 volt volt."
+              },
+              "predicateSpan": {
+                "start": 241,
+                "end": 245,
+                "textSpan": "volt"
+              },
+              "numericDependencyPath": [],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 226,
+          "end": 246,
+          "textSpan": "hanem 228 volt volt."
+        },
+        "propositionSpan": {
+          "start": 226,
+          "end": 246,
+          "textSpan": "hanem 228 volt volt."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:226:246"
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "evidenceSpan": {
+          "start": 185,
+          "end": 246,
+          "textSpan": "Az átvételi próbán a feszültség nem 230, hanem 228 volt volt."
+        },
+        "scope": {
+          "start": 185,
+          "end": 246
+        },
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": [
+      {
+        "id": "nominal-source:18",
+        "source": {
+          "mention": "hálózatirányító",
+          "normalized": "hálózatirányító",
+          "start": 2,
+          "end": 17,
+          "type": "local_source",
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 17,
+            "textSpan": "hálózatirányító"
+          }
+        },
+        "reportingNominal": {
+          "start": 18,
+          "end": 31,
+          "textSpan": "tájékoztatása"
+        },
+        "markerSpan": {
+          "start": 32,
+          "end": 39,
+          "textSpan": "alapján"
+        },
+        "predicateSpan": {
+          "start": 89,
+          "end": 101,
+          "textSpan": "fogyasztanak"
+        },
+        "binding": "resolved",
+        "rule": "possessive_np_event_nominal_evidential_marker",
+        "evidenceSpan": {
+          "start": 2,
+          "end": 39,
+          "textSpan": "hálózatirányító tájékoztatása alapján"
+        },
+        "dependencyEvidence": [
+          {
+            "relation": "obl",
+            "sourceSpan": {
+              "start": 32,
+              "end": 39,
+              "textSpan": "alapján"
+            },
+            "targetSpan": {
+              "start": 89,
+              "end": 101,
+              "textSpan": "fogyasztanak"
+            }
+          },
+          {
+            "relation": "nmod:att",
+            "sourceSpan": {
+              "start": 2,
+              "end": 17,
+              "textSpan": "hálózatirányító"
+            },
+            "targetSpan": {
+              "start": 18,
+              "end": 31,
+              "textSpan": "tájékoztatása"
+            }
+          }
+        ],
+        "unresolvedReasons": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "frozenAt": "2026-10-14T09:08:58.195Z",
+  "snippetCount": 25,
+  "authoredSentences": 75,
+  "domains": 25,
+  "totalDecisions": 150,
+  "unresolvedGold": 30,
+  "unresolvedShare": 0.2,
+  "adversarialDecisions": 118,
+  "authorshipLimitation": "Same assistant authors and adjudicates; independent of model inference, not independent human blind evaluation.",
+  "files": {
+    "corpus.json": "e12df03d14f2cd8d0f427548b4d8b12796800ad35133ecf014c77c2a14a3d1bc",
+    "expected.json": "bbf143108a7b3c6809f9069304feb2131af0b7ec7ac41a6629195215d202f5b3",
+    "selected_items.json": "a2735c21150cfce06dff88a8521073db1e3c0209950e0db849adf6cec89a44ee"
+  },
+  "snippets": [
+    {
+      "id": "A",
+      "sha256": "a28752533a2c350c4f83c4a1497727c5934cab5420ba2a524bbceeaaab4ee17b"
+    },
+    {
+      "id": "B",
+      "sha256": "3091caee376ba2f2224188311f4ae22baf3f66da8cff6734079d601f2f0e7a9f"
+    },
+    {
+      "id": "C",
+      "sha256": "12b7f24710e8e43e6112968dfc35474f9984589861e52fe9d4bf849a3afd2ece"
+    },
+    {
+      "id": "D",
+      "sha256": "b2e6233f009bbc8518279300bf63e88498e0b9bfe5691e4e0ccc1baf60a88e76"
+    },
+    {
+      "id": "E",
+      "sha256": "6bf5e9e58ecbf9e3ca1776bd8179cbbdf300ef5b5b72b3aa8444ac45173360e8"
+    },
+    {
+      "id": "F",
+      "sha256": "e654003338d6e5f129e449974942270c3a451ba0c221922c6d9e5207d9f13bb1"
+    },
+    {
+      "id": "G",
+      "sha256": "1d4172b2adf0853cb46e5caec185343c98172c7f1bb87f1f3de6d12ce8002f7b"
+    },
+    {
+      "id": "H",
+      "sha256": "bbcb217b6da80301948d18cecc42d08d9d42b7e364d086be7fce21886674f493"
+    },
+    {
+      "id": "I",
+      "sha256": "ab8451d3cf0bcb01858e13cb02e4c1c654a52eb3c3588d4368e7398e0e299ba3"
+    },
+    {
+      "id": "J",
+      "sha256": "b4ddcabd8271aff430ed72b31fe18791226b47e23805df6c11f7f54cc366945f"
+    },
+    {
+      "id": "K",
+      "sha256": "adf23e15c1073181344253fea727d23d05657e50b36d84014528bce767ebf404"
+    },
+    {
+      "id": "L",
+      "sha256": "3a26ed8d3a7acff15fae6155226d1e22ce10d023d6be1d6f087610a2f6845481"
+    },
+    {
+      "id": "M",
+      "sha256": "a54abd9a3edd324863311430b069719738299f51a3ebaa3c6d93431052fa6d2c"
+    },
+    {
+      "id": "N",
+      "sha256": "e0d1b6784111094c3539cf8238ff3f2661ba01c551f5002d2420101fa3049ca8"
+    },
+    {
+      "id": "O",
+      "sha256": "847f866eb51607b1655259f32a6dbfe8c96c997f18f08e7889e69589d6c8cdac"
+    },
+    {
+      "id": "P",
+      "sha256": "5021545cdfc0e21c6bb6b816689cb4c02a2d1efe24bdf249c1328b355e82e3b6"
+    },
+    {
+      "id": "Q",
+      "sha256": "64738d173b26918e3aa1c88fca326f1edcc503a24b5e42617e19cb8ccb35cdb7"
+    },
+    {
+      "id": "R",
+      "sha256": "1462e8234c9321379e93174c8d4b9a9f79b5cd819534fae703c7154c7dcfcc50"
+    },
+    {
+      "id": "S",
+      "sha256": "af340ed7fa41e39e6e10337ec5be1921955466e5b722b96ce24d4da683629f1f"
+    },
+    {
+      "id": "T",
+      "sha256": "4fbc74d6dddbd0afc8ee33729a9126e9416775e5b951d4a79f06d32be5761593"
+    },
+    {
+      "id": "U",
+      "sha256": "faf36df07ee3bcb4be41097677dfab8f58bd0e3e4c1f7c9c6fc98de4e6ba30d4"
+    },
+    {
+      "id": "V",
+      "sha256": "88e350e555c17a9dc12ecc2431cea1d3e710d260fc46012d72aef580635ad669"
+    },
+    {
+      "id": "W",
+      "sha256": "c267904273935435a733fa1715b2afaec39fe0ae027b8d63af00147e2ca36103"
+    },
+    {
+      "id": "X",
+      "sha256": "a9ec1e004b42760820066468ca1b7b75e5d0046e14070012bc4a8a23ca010038"
+    },
+    {
+      "id": "Y",
+      "sha256": "e887e9faf422aa0c64f3b523a5a35f3f89de678db35b9be4efdf2e74e276a857"
+    }
+  ],
+  "preInferenceCoverageReview": "Before NLP/inference: add explicit közlése alapján and percentage correction. Original draft preserved; same 150 decisions, 30 abstentions."
+}

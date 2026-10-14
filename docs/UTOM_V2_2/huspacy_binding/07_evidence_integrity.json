@@ -1,0 +1,33 @@
+{
+  "audits": [
+    {
+      "config": "A",
+      "total": 33,
+      "exact": 33,
+      "failures": 0,
+      "failureRows": []
+    },
+    {
+      "config": "B",
+      "total": 33,
+      "exact": 33,
+      "failures": 0,
+      "failureRows": []
+    },
+    {
+      "config": "C",
+      "total": 33,
+      "exact": 33,
+      "failures": 0,
+      "failureRows": []
+    },
+    {
+      "config": "D",
+      "total": 33,
+      "exact": 33,
+      "failures": 0,
+      "failureRows": []
+    }
+  ],
+  "allExact": true
+}

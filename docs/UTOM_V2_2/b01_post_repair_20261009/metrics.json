@@ -1,0 +1,24 @@
+{
+  "total": 39,
+  "counts": {
+    "CORRECT_RESOLVED": 25,
+    "MISSED_DEFENSIBLE_RESOLUTION": 12,
+    "CORRECT_UNRESOLVED": 2,
+    "WRONG_RESOLVED": 0
+  },
+  "resolvedPrecision": 1,
+  "resolutionRate": 0.6410256410256411,
+  "correctResolutionCoverage": 0.6410256410256411,
+  "wrongResolvedRate": 0,
+  "evidence": {
+    "spans": 302,
+    "exact": 302,
+    "failures": 0
+  },
+  "changedCases": [
+    "W"
+  ],
+  "unchangedHistoricalArtifacts": true,
+  "method": "same selected 39 decisions; W3 reclassified as missed, not correct unresolved",
+  "baseline": "266/266 PASS; original 243 unchanged"
+}

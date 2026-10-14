@@ -1,0 +1,1131 @@
+{
+  "id": "M",
+  "text": "A magashegyi állomás mérései alapján hajnalban mínusz 7 Celsius-fok volt a levegő hőmérséklete. A délutáni maximum várhatóan 2–4 fokkal marad el az ilyenkor szokásostól. A meteorológus hangsúlyozta, hogy nem havazásra, hanem ónos esőre kell számítani.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 13
+      },
+      {
+        "start": 2,
+        "end": 12,
+        "text": "magashegyi",
+        "lemma": "magashegyi",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 13
+      },
+      {
+        "start": 13,
+        "end": 20,
+        "text": "állomás",
+        "lemma": "állomás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 21
+      },
+      {
+        "start": 21,
+        "end": 28,
+        "text": "mérései",
+        "lemma": "mérés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nmod:att",
+        "headStart": 29
+      },
+      {
+        "start": 29,
+        "end": 36,
+        "text": "alapján",
+        "lemma": "alap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 56
+      },
+      {
+        "start": 37,
+        "end": 46,
+        "text": "hajnalban",
+        "lemma": "hajnal",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing"
+        },
+        "dep": "nmod:obl",
+        "headStart": 56
+      },
+      {
+        "start": 47,
+        "end": 53,
+        "text": "mínusz",
+        "lemma": "mínusz",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 56
+      },
+      {
+        "start": 54,
+        "end": 55,
+        "text": "7",
+        "lemma": "7",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 56
+      },
+      {
+        "start": 56,
+        "end": 67,
+        "text": "Celsius-fok",
+        "lemma": "Celsius-fok",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 56
+      },
+      {
+        "start": 68,
+        "end": 72,
+        "text": "volt",
+        "lemma": "van",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "cop",
+        "headStart": 56
+      },
+      {
+        "start": 73,
+        "end": 74,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 75
+      },
+      {
+        "start": 75,
+        "end": 81,
+        "text": "levegő",
+        "lemma": "levegő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 82
+      },
+      {
+        "start": 82,
+        "end": 94,
+        "text": "hőmérséklete",
+        "lemma": "hőmérséklet",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "conj",
+        "headStart": 56
+      },
+      {
+        "start": 94,
+        "end": 95,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 56
+      },
+      {
+        "start": 96,
+        "end": 97,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 107
+      },
+      {
+        "start": 98,
+        "end": 106,
+        "text": "délutáni",
+        "lemma": "délutáni",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 107
+      },
+      {
+        "start": 107,
+        "end": 114,
+        "text": "maximum",
+        "lemma": "maximum",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 136
+      },
+      {
+        "start": 115,
+        "end": 124,
+        "text": "várhatóan",
+        "lemma": "várható",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Ess",
+          "Number": "Sing",
+          "VerbForm": "PartPres"
+        },
+        "dep": "advmod:mode",
+        "headStart": 125
+      },
+      {
+        "start": 125,
+        "end": 128,
+        "text": "2–4",
+        "lemma": "2–4",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Abl",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 129
+      },
+      {
+        "start": 129,
+        "end": 135,
+        "text": "fokkal",
+        "lemma": "fok",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ins",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 136
+      },
+      {
+        "start": 136,
+        "end": 141,
+        "text": "marad",
+        "lemma": "marad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 136
+      },
+      {
+        "start": 142,
+        "end": 144,
+        "text": "el",
+        "lemma": "el",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 136
+      },
+      {
+        "start": 145,
+        "end": 147,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 157
+      },
+      {
+        "start": 148,
+        "end": 156,
+        "text": "ilyenkor",
+        "lemma": "ilyenkor",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Dem"
+        },
+        "dep": "nmod:obl",
+        "headStart": 157
+      },
+      {
+        "start": 157,
+        "end": 168,
+        "text": "szokásostól",
+        "lemma": "szokásos",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Abl",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 136
+      },
+      {
+        "start": 168,
+        "end": 169,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 136
+      },
+      {
+        "start": 170,
+        "end": 171,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 172
+      },
+      {
+        "start": 172,
+        "end": 184,
+        "text": "meteorológus",
+        "lemma": "meteorológus",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 185
+      },
+      {
+        "start": 185,
+        "end": 197,
+        "text": "hangsúlyozta",
+        "lemma": "hangsúlyoz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 185
+      },
+      {
+        "start": 197,
+        "end": 198,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 236
+      },
+      {
+        "start": 199,
+        "end": 203,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 236
+      },
+      {
+        "start": 204,
+        "end": 207,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 208
+      },
+      {
+        "start": 208,
+        "end": 217,
+        "text": "havazásra",
+        "lemma": "havazás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 241
+      },
+      {
+        "start": 217,
+        "end": 218,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 225
+      },
+      {
+        "start": 219,
+        "end": 224,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 225
+      },
+      {
+        "start": 225,
+        "end": 229,
+        "text": "ónos",
+        "lemma": "ónos",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 208
+      },
+      {
+        "start": 230,
+        "end": 235,
+        "text": "esőre",
+        "lemma": "eső",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 241
+      },
+      {
+        "start": 236,
+        "end": 240,
+        "text": "kell",
+        "lemma": "kell",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 185
+      },
+      {
+        "start": 241,
+        "end": 250,
+        "text": "számítani",
+        "lemma": "számít",
+        "pos": "VERB",
+        "morph": {
+          "VerbForm": "Inf",
+          "Voice": "Act"
+        },
+        "dep": "xcomp",
+        "headStart": 236
+      },
+      {
+        "start": 250,
+        "end": 251,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 185
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 95,
+        "text": "A magashegyi állomás mérései alapján hajnalban mínusz 7 Celsius-fok volt a levegő hőmérséklete."
+      },
+      {
+        "start": 96,
+        "end": 169,
+        "text": "A délutáni maximum várhatóan 2–4 fokkal marad el az ilyenkor szokásostól."
+      },
+      {
+        "start": 170,
+        "end": 251,
+        "text": "A meteorológus hangsúlyozta, hogy nem havazásra, hanem ónos esőre kell számítani."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "alapján",
+            "normalized": "alap",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 29,
+            "end": 36,
+            "evidenceSpan": {
+              "start": 29,
+              "end": 36,
+              "textSpan": "alapján"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          },
+          {
+            "mention": "hajnalban",
+            "normalized": "hajnal",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ine",
+            "start": 37,
+            "end": 46,
+            "evidenceSpan": {
+              "start": 37,
+              "end": 46,
+              "textSpan": "hajnalban"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 95,
+          "textSpan": "A magashegyi állomás mérései alapján hajnalban mínusz 7 Celsius-fok volt a levegő hőmérséklete."
+        },
+        "attribution": null,
+        "action": "van",
+        "actionSpan": {
+          "start": 68,
+          "end": 72,
+          "textSpan": "volt"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 7,
+            "canonicalValue": 7,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 54,
+            "end": 55,
+            "raw": "7",
+            "evidenceSpan": {
+              "start": 54,
+              "end": 55,
+              "textSpan": "7"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 54,
+                    "end": 55,
+                    "textSpan": "7"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:95",
+              "clauseSpan": {
+                "start": 0,
+                "end": 95,
+                "textSpan": "A magashegyi állomás mérései alapján hajnalban mínusz 7 Celsius-fok volt a levegő hőmérséklete."
+              },
+              "predicateSpan": {
+                "start": 68,
+                "end": 72,
+                "textSpan": "volt"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 54,
+                    "end": 55,
+                    "textSpan": "7"
+                  },
+                  "targetSpan": {
+                    "start": 56,
+                    "end": 67,
+                    "textSpan": "Celsius-fok"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 95,
+          "textSpan": "A magashegyi állomás mérései alapján hajnalban mínusz 7 Celsius-fok volt a levegő hőmérséklete."
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 95,
+          "textSpan": "A magashegyi állomás mérései alapján hajnalban mínusz 7 Celsius-fok volt a levegő hőmérséklete."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:95",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "állomás",
+              "normalized": "állomás",
+              "start": 13,
+              "end": 20,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 13,
+                "end": 20,
+                "textSpan": "állomás"
+              }
+            },
+            "binding": "unresolved",
+            "evidence": null
+          },
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "mérései",
+              "normalized": "mérés",
+              "start": 21,
+              "end": 28,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 21,
+                "end": 28,
+                "textSpan": "mérései"
+              }
+            },
+            "binding": "unresolved",
+            "evidence": null
+          },
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "levegő",
+              "normalized": "levegő",
+              "start": 75,
+              "end": 81,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 75,
+                "end": 81,
+                "textSpan": "levegő"
+              }
+            },
+            "binding": "unresolved",
+            "evidence": null
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 96,
+          "end": 169,
+          "textSpan": "A délutáni maximum várhatóan 2–4 fokkal marad el az ilyenkor szokásostól."
+        },
+        "attribution": null,
+        "action": "elmarad",
+        "actionSpan": {
+          "start": 136,
+          "end": 141,
+          "textSpan": "marad"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 125,
+            "end": 128,
+            "raw": "2–4",
+            "value": {
+              "lower": 2,
+              "upper": 4
+            },
+            "unit": null,
+            "semanticKind": "unknown",
+            "binding": "unresolved",
+            "owner": null,
+            "ownerType": "unresolved",
+            "unresolvedReasons": [
+              "range_target_unproven",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "evidenceSpan": {
+              "start": 125,
+              "end": 128,
+              "textSpan": "2–4"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "range",
+                  "value": {
+                    "lower": 2,
+                    "upper": 4
+                  },
+                  "validOrder": true,
+                  "evidenceSpan": {
+                    "start": 125,
+                    "end": 128,
+                    "textSpan": "2–4"
+                  }
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:96:169",
+              "clauseSpan": {
+                "start": 96,
+                "end": 169,
+                "textSpan": "A délutáni maximum várhatóan 2–4 fokkal marad el az ilyenkor szokásostól."
+              },
+              "predicateSpan": {
+                "start": 136,
+                "end": 141,
+                "textSpan": "marad"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 125,
+                    "end": 128,
+                    "textSpan": "2–4"
+                  },
+                  "targetSpan": {
+                    "start": 129,
+                    "end": 135,
+                    "textSpan": "fokkal"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 129,
+                    "end": 135,
+                    "textSpan": "fokkal"
+                  },
+                  "targetSpan": {
+                    "start": 136,
+                    "end": 141,
+                    "textSpan": "marad"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "expected"
+        ],
+        "modality": "expected",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 96,
+          "end": 169,
+          "textSpan": "A délutáni maximum várhatóan 2–4 fokkal marad el az ilyenkor szokásostól."
+        },
+        "propositionSpan": {
+          "start": 96,
+          "end": 169,
+          "textSpan": "A délutáni maximum várhatóan 2–4 fokkal marad el az ilyenkor szokásostól."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:96:169",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 170,
+          "end": 197,
+          "textSpan": "A meteorológus hangsúlyozta"
+        },
+        "attribution": null,
+        "action": "hangsúlyoz",
+        "actionSpan": {
+          "start": 185,
+          "end": 197,
+          "textSpan": "hangsúlyozta"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 170,
+          "end": 197,
+          "textSpan": "A meteorológus hangsúlyozta"
+        },
+        "propositionSpan": {
+          "start": 170,
+          "end": 197,
+          "textSpan": "A meteorológus hangsúlyozta"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:170:197"
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 199,
+          "end": 251,
+          "textSpan": "hogy nem havazásra, hanem ónos esőre kell számítani."
+        },
+        "attribution": null,
+        "action": "kell",
+        "actionSpan": {
+          "start": 236,
+          "end": 240,
+          "textSpan": "kell"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "required"
+        ],
+        "modality": "required",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 199,
+          "end": 251,
+          "textSpan": "hogy nem havazásra, hanem ónos esőre kell számítani."
+        },
+        "propositionSpan": {
+          "start": 199,
+          "end": 251,
+          "textSpan": "hogy nem havazásra, hanem ónos esőre kell számítani."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:199:251",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "required",
+              "rule": "governing_modal_with_local_complement",
+              "evidenceSpan": {
+                "start": 236,
+                "end": 240,
+                "textSpan": "kell"
+              },
+              "dependencyPath": []
+            }
+          ],
+          "frameId": "dependency:199:251",
+          "clauseSpan": {
+            "start": 199,
+            "end": 251,
+            "textSpan": "hogy nem havazásra, hanem ónos esőre kell számítani."
+          },
+          "projectionAllowed": false
+        }
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "evidenceSpan": {
+          "start": 170,
+          "end": 251,
+          "textSpan": "A meteorológus hangsúlyozta, hogy nem havazásra, hanem ónos esőre kell számítani."
+        },
+        "scope": {
+          "start": 170,
+          "end": 251
+        },
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": [
+      {
+        "id": "nominal-source:21",
+        "source": null,
+        "reportingNominal": {
+          "start": 21,
+          "end": 28,
+          "textSpan": "mérései"
+        },
+        "markerSpan": {
+          "start": 29,
+          "end": 36,
+          "textSpan": "alapján"
+        },
+        "predicateSpan": {
+          "start": 56,
+          "end": 67,
+          "textSpan": "Celsius-fok"
+        },
+        "binding": "unresolved",
+        "rule": "possessive_np_event_nominal_evidential_marker",
+        "evidenceSpan": {
+          "start": 21,
+          "end": 36,
+          "textSpan": "mérései alapján"
+        },
+        "dependencyEvidence": [
+          {
+            "relation": "obl",
+            "sourceSpan": {
+              "start": 29,
+              "end": 36,
+              "textSpan": "alapján"
+            },
+            "targetSpan": {
+              "start": 56,
+              "end": 67,
+              "textSpan": "Celsius-fok"
+            }
+          }
+        ],
+        "unresolvedReasons": [
+          "source_bearing_possessor_unproven"
+        ]
+      }
+    ]
+  }
+}

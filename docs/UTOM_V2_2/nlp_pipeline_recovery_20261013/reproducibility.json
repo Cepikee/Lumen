@@ -1,0 +1,16 @@
+{
+  "freshInput": "„Árvíztűrő tükörfúrógéppel írunk” – mondta Júlia 2026. október 13-án. A műhelyben 17% jelölés látszik. 😀",
+  "twoIndependentProcesses": true,
+  "exitCodes": [
+    0,
+    0
+  ],
+  "allAnnotationFieldsEqual": true,
+  "utf8Accents": true,
+  "exactOffsets": true,
+  "sentenceCount": 3,
+  "tokenCount": 19,
+  "goldenMatched": 4,
+  "goldenTotal": 4,
+  "modelHashDrift": 0
+}

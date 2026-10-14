@@ -1,0 +1,269 @@
+
+> projekt2025new@0.1.0 test:integration:mysql
+> node scripts/run-mysql-integration-suite.cjs
+
+﹣ real ffmpeg thumbnail production helper lifecycle (0.5416ms) # SKIP
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 64.9294
+✔ production HTTP session and reset/outbox lifecycle (7270.3045ms)
+ℹ real SMTP calls=0; session restart processes=3; reset consume processes=2
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7380.7438
+✔ legacy PIN upgrade and premium proxy production HTTP lifecycle (12517.1491ms)
+ℹ browser subprocesses=0 by current architecture; local upstream calls only; paid proxy calls=0
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13232.3768
+[dotenv@17.2.3] injecting env (0) from ..\..\var\www\utom\.env -- tip: ⚙️  override existing env vars with { override: true }
+▶ MySQL 8 recovery integration and concurrency suite
+  ✔ fresh MySQL 8 schema applies the complete migration chain without intervention (6619.5722ms)
+  ✔ existing 032 schema upgrades to the V2 latest without changing prior migration checksums (9577.8815ms)
+  ✔ migration schema and representative data are preserved (204.2968ms)
+  ✔ schema readiness fails closed for a missing critical constraint (355.2499ms)
+  ✔ worker health exposes ages and stale work without tokens or secrets (235.843ms)
+  ✔ recovery inspect is read-only, local retry is audited, and uncertain external work is protected (50.9956ms)
+  ✔ canonical ingestion deduplicates retries and concurrent processes without resetting state (244.8768ms)
+  ✔ two separate processes produce exactly one claim winner (1270.6491ms)
+  ✔ lease timestamps and stale decisions use database UTC across worker timezones (133.9394ms)
+  ✔ active lease, stale recovery, and zombie fencing use real InnoDB (894.0136ms)
+  ✔ external crash and DB-save failure remain uncertain without retry (124.4535ms)
+  ✔ step result and done state roll back atomically (35.0726ms)
+  ✔ domain projections and fenced completion commit or roll back together (230.721ms)
+  ✔ late AI result after claim loss cannot persist and remains recoverable (61.6429ms)
+  ✔ local failure is retryable and final-completion crash reuses all done steps (263.196ms)
+  ✔ concurrent feed, trend, and speed-history writes are idempotent (53.5257ms)
+  ✔ source aliases share one Speed Index identity (37.7694ms)
+  ✔ Speed Index dirty marks coalesce under a 100-event concurrent burst (763.1298ms)
+  ✔ two processes claim one generation only once (149.238ms)
+  ✔ an article retry reuses its completed scheduling step without advancing the generation (82.0268ms)
+  ✔ stale claims recover and dirty-during-processing is fenced by generation (96.4257ms)
+updateSpeedIndex error: Error: injected_after_score
+    at Object.afterScoreWrite (F:\Projekt2025\Lumen\tests\integration\mysql-pipeline-recovery.test.cjs:749:92)
+    at updateSpeedIndex (F:\Projekt2025\Lumen\pipeline\updateSpeedIndex.js:384:63)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async runPendingSpeedIndexBatch (F:\Projekt2025\Lumen\pipeline\speedIndexBatch.js:76:25)
+    at async waitForActual (node:assert:646:5)
+    at async strict.rejects (node:assert:769:25)
+    at async TestContext.<anonymous> (F:\Projekt2025\Lumen\tests\integration\mysql-pipeline-recovery.test.cjs:747:11)
+    at async Test.run (node:internal/test_runner/test:1389:7)
+    at async TestContext.<anonymous> (F:\Projekt2025\Lumen\tests\integration\mysql-pipeline-recovery.test.cjs:736:5)
+    at async Test.run (node:internal/test_runner/test:1389:7)
+updateSpeedIndex error: Error: injected_history
+    at Object.beforeHistoryWrite (F:\Projekt2025\Lumen\tests\integration\mysql-pipeline-recovery.test.cjs:750:77)
+    at updateSpeedIndex (F:\Projekt2025\Lumen\pipeline\updateSpeedIndex.js:391:68)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async runPendingSpeedIndexBatch (F:\Projekt2025\Lumen\pipeline\speedIndexBatch.js:76:25)
+    at async waitForActual (node:assert:646:5)
+    at async strict.rejects (node:assert:769:25)
+    at async TestContext.<anonymous> (F:\Projekt2025\Lumen\tests\integration\mysql-pipeline-recovery.test.cjs:747:11)
+    at async Test.run (node:internal/test_runner/test:1389:7)
+    at async TestContext.<anonymous> (F:\Projekt2025\Lumen\tests\integration\mysql-pipeline-recovery.test.cjs:736:5)
+    at async Test.run (node:internal/test_runner/test:1389:7)
+  ✔ score, history, and completion roll back atomically on injected faults (128.0529ms)
+  ✔ deferred execution is result-equivalent and history-idempotent (105.1919ms)
+  ✔ cluster advisory lock serializes two processes and releases cleanly (1603.1519ms)
+  ✔ complete canonical pipeline reaches done with mocked external services (2474.0634ms)
+  ✔ worker SIGTERM and SIGINT stop claiming, record shutdown, close pools, and release locks (1455.5012ms)
+  ✔ summary search pagination is stable across equal timestamps (380.5601ms)
+  ✔ MySQL session records commit, roll back, expire, reconnect, and release locks (39.1109ms)
+  ✔ shared rate limiter is atomic across processes, restart-persistent, expiring, and indexed (1804.7232ms)
+✔ MySQL 8 recovery integration and concurrency suite (45054.0254ms)
+ℹ Speed burst: legacy=100 full recalculations; deferred=1; cluster_scans=1; batch_runtime_ms=17
+ℹ Canonical runtimes: article_pipeline_ms=1798; speed_batch_ms=21
+ℹ LOCAL SYNTHETIC MEASUREMENT rate_limit_round=1 attempts=30 accepted=10 duration_ms=560.3598
+ℹ LOCAL SYNTHETIC MEASUREMENT rate_limit_round=2 attempts=30 accepted=10 duration_ms=596.9767
+ℹ LOCAL SYNTHETIC MEASUREMENT rate_limit_round=3 attempts=30 accepted=10 duration_ms=604.5731
+ℹ LOCAL SYNTHETIC MEASUREMENT rate_limit_single_ms=11.5514
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 45167.7048
+✔ MySQL raw-text retention lifecycle, rollback and duplicate workers (1114.8557ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1226.4323
+M12 MySQL AI cost router regression: PASS
+✔ M12 MySQL decision persistence is retry-safe and concurrent (75.9506ms)
+✔ M12 MySQL caller rollback removes decision (33.1598ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 232.8157
+M8 MySQL claim/evidence integration regression: PASS
+✔ M8 MySQL claim/evidence atomicity, attribution, retry and rollback (40.216ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 153.0952
+M11 MySQL conflict/confidence history regression: PASS
+✔ M11 MySQL conflict persistence is symmetric and retry-safe (53.4431ms)
+✔ M11 MySQL confidence history is append-only and duplicate operation is idempotent (50.3882ms)
+✔ M11 MySQL caller rollback removes conflict and confidence history (49.6801ms)
+✔ M11 MySQL concurrent workers keep one conflict and one confidence history row (57.8595ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 327.6228
+✔ M4 MySQL persistence, retry idempotency and rollback (57.688ms)
+✔ M5 MySQL exact canonical/alias lookup, accent collation and alias lifecycle (139.5181ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 311.2361
+✔ M6 MySQL bounded candidate, exact short-circuit and idempotent resolution audit (50.5598ms)
+✔ V21 provisional entity onboarding is evidence-bound, scoped and idempotent (179.7947ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 341.9918
+M9 MySQL event matching regression: PASS
+✔ M9 MySQL candidate event and membership retry are idempotent (46.3817ms)
+✔ M9 MySQL invalid entity FK rolls back event and concurrent workers keep one membership (100.8595ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 257.6957
+M13 HTTP runtime regression: PASS
+(node:9464) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ M13 HTTP runtime smoke validates feature OFF/ON and envelope (1806.3837ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1955.98
+M2 MySQL provenance persistence: PASS
+✔ M2 provenance persistence is idempotent, append-oriented and rollback-safe (17092.7579ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17204.7863
+M13 MySQL read model regression: PASS
+✔ M13 MySQL read models project entity/event/claim/source comparison without writes (114.5872ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 227.0025
+✔ M7 MySQL relation/evidence idempotency, multiple evidence and rollback (59.24ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 170.87
+✔ M1.4 MySQL schema matches the M1.3 fixture (20082.6352ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20197.8116
+M15 MySQL source comparison regression: PASS
+✔ M15 MySQL source comparison preserves coverage semantics, values and bounded reads (284.1495ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 404.5168
+M10 MySQL temporal graph regression: PASS
+✔ M10 MySQL timeline persistence is idempotent, as-of bounded and cursor stable (90.172ms)
+✔ M10 MySQL caller rollback removes timeline writes (22.1243ms)
+✔ M10 MySQL concurrent workers keep one timeline identity and item (65.7768ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 289.5157
+V21 canonical intelligence E2E acceptance: PASS
+✔ V2.1 canonical raw article -> knowledge graph acceptance gate (1421.6742ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1546.2024
+{"event":"large_v2_fixture","measurements":[{"size":10240,"durationMs":2,"memoryDelta":469688},{"size":51200,"durationMs":0,"memoryDelta":198312},{"size":102400,"durationMs":1,"memoryDelta":688456},{"size":256000,"durationMs":1,"memoryDelta":1099968}]}
+✔ isolated MySQL SLEEP fixture measures latency, timeout and connection recovery (2911.2551ms)
+✔ generated large article and V2 parser fixture stay bounded (8.7085ms)
+✔ operational snapshot is read-only and exposes bounded diagnostics (178.175ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3213.7131

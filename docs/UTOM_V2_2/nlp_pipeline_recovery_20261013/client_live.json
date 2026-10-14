@@ -1,0 +1,13 @@
+{
+  "annotationEqual": true,
+  "exit": {
+    "code": 0,
+    "signal": null
+  },
+  "ready": {
+    "type": "ready",
+    "model": "hu_core_news_md",
+    "version": "3.8.0",
+    "loadMs": 1104.9017550000003
+  }
+}

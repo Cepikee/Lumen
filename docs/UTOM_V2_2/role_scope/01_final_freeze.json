@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-06T20:53:54.367Z",
+  "rule": "no_binder_evaluator_gold_edits_after_first_pass",
+  "files": {
+    "scripts/experimental/role-scope-binder.cjs": "6d780e88967fb6cbdd7377b6860d8ebe33943b68fb70b494486aeeef19b1df6d",
+    "scripts/experimental/role-scope-evaluate.cjs": "ca80f9eee1881a795735021327e8abe5f98add671f155db4f9bc898153c07949",
+    "scripts/experimental/role-scope-heldout-run.cjs": "ebb44e904554b2439f76aa69c386d95856d5f132b6dbc792b6e0b39ade76e197",
+    "scripts/experimental/role-scope-heldout-prepare.cjs": "83fafb1c784073cb61807a8c4aad94b5940a1802ea197d301a3f4f56430f665f",
+    "scripts/experimental/morph-clause-binder.cjs": "278c3e29d9069005a3f2df9a7e06fa230d5092a8b834656a718a627928cd5320",
+    "scripts/experimental/morph-worker-client.cjs": "59be628511f3efe7c3c1a87b048420fbfe977ac1ac1e05d98be3baa0891dfeaa",
+    "scripts/experimental/morph-worker.py": "defab86b21be88d44ba5552e094e94eed930b447809331644b2bb7871da5ee02",
+    "docs/UTOM_V2_2/role_scope/heldout_inputs.json": "613d74c2abb736fc47f50b5c24702c4cd18dea227325787baa0b0db16ae556e9",
+    "docs/UTOM_V2_2/role_scope/heldout_gold.json": "cbab1e8ba896a6b879d09e45b054b1767618474d97d9eb1d646d45ddbb726a08"
+  }
+}

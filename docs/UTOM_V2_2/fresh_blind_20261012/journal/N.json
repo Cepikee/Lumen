@@ -1,0 +1,1051 @@
+{
+  "id": "N",
+  "text": "A mintát a kutatócsoport által felkért laboratóriumban elemezték. A mérési jelentés alapján a kristály tömege körülbelül 0,7 gramm, átmérője pedig 9 milliméter. A csoport vezetője nem állítja, hogy a lelet bizonyítaná az elméletet.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 8,
+        "text": "mintát",
+        "lemma": "minta",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 31
+      },
+      {
+        "start": 9,
+        "end": 10,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 11
+      },
+      {
+        "start": 11,
+        "end": 24,
+        "text": "kutatócsoport",
+        "lemma": "kutatócsoport",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 31
+      },
+      {
+        "start": 25,
+        "end": 30,
+        "text": "által",
+        "lemma": "által",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 11
+      },
+      {
+        "start": 31,
+        "end": 38,
+        "text": "felkért",
+        "lemma": "felkért",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "VerbForm": "PartPast"
+        },
+        "dep": "amod:att",
+        "headStart": 39
+      },
+      {
+        "start": 39,
+        "end": 54,
+        "text": "laboratóriumban",
+        "lemma": "laboratórium",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 55
+      },
+      {
+        "start": 55,
+        "end": 64,
+        "text": "elemezték",
+        "lemma": "elemez",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 55
+      },
+      {
+        "start": 64,
+        "end": 65,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 55
+      },
+      {
+        "start": 66,
+        "end": 67,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 75
+      },
+      {
+        "start": 68,
+        "end": 74,
+        "text": "mérési",
+        "lemma": "mérési",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 75
+      },
+      {
+        "start": 75,
+        "end": 83,
+        "text": "jelentés",
+        "lemma": "jelentés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 84
+      },
+      {
+        "start": 84,
+        "end": 91,
+        "text": "alapján",
+        "lemma": "alap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nmod:obl",
+        "headStart": 149
+      },
+      {
+        "start": 92,
+        "end": 93,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 94
+      },
+      {
+        "start": 94,
+        "end": 102,
+        "text": "kristály",
+        "lemma": "kristály",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 103
+      },
+      {
+        "start": 103,
+        "end": 109,
+        "text": "tömege",
+        "lemma": "tömeg",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 125
+      },
+      {
+        "start": 110,
+        "end": 120,
+        "text": "körülbelül",
+        "lemma": "körülbelül",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 125
+      },
+      {
+        "start": 121,
+        "end": 124,
+        "text": "0,7",
+        "lemma": "0,7",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Frac",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 125
+      },
+      {
+        "start": 125,
+        "end": 130,
+        "text": "gramm",
+        "lemma": "gramm",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 132
+      },
+      {
+        "start": 130,
+        "end": 131,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 125
+      },
+      {
+        "start": 132,
+        "end": 140,
+        "text": "átmérője",
+        "lemma": "átmérő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 149
+      },
+      {
+        "start": 141,
+        "end": 146,
+        "text": "pedig",
+        "lemma": "pedig",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 149
+      },
+      {
+        "start": 147,
+        "end": 148,
+        "text": "9",
+        "lemma": "9",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 149
+      },
+      {
+        "start": 149,
+        "end": 159,
+        "text": "milliméter",
+        "lemma": "milliméter",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 149
+      },
+      {
+        "start": 159,
+        "end": 160,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 149
+      },
+      {
+        "start": 161,
+        "end": 162,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 163
+      },
+      {
+        "start": 163,
+        "end": 170,
+        "text": "csoport",
+        "lemma": "csoport",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 171
+      },
+      {
+        "start": 171,
+        "end": 179,
+        "text": "vezetője",
+        "lemma": "vezető",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 184
+      },
+      {
+        "start": 180,
+        "end": 183,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 184
+      },
+      {
+        "start": 184,
+        "end": 191,
+        "text": "állítja",
+        "lemma": "állít",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 184
+      },
+      {
+        "start": 191,
+        "end": 192,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 206
+      },
+      {
+        "start": 193,
+        "end": 197,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 206
+      },
+      {
+        "start": 198,
+        "end": 199,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 200
+      },
+      {
+        "start": 200,
+        "end": 205,
+        "text": "lelet",
+        "lemma": "lelet",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 206
+      },
+      {
+        "start": 206,
+        "end": 217,
+        "text": "bizonyítaná",
+        "lemma": "bizonyít",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Cnd",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 184
+      },
+      {
+        "start": 218,
+        "end": 220,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 221
+      },
+      {
+        "start": 221,
+        "end": 230,
+        "text": "elméletet",
+        "lemma": "elmélet",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 206
+      },
+      {
+        "start": 230,
+        "end": 231,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 184
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 65,
+        "text": "A mintát a kutatócsoport által felkért laboratóriumban elemezték."
+      },
+      {
+        "start": 66,
+        "end": 160,
+        "text": "A mérési jelentés alapján a kristály tömege körülbelül 0,7 gramm, átmérője pedig 9 milliméter."
+      },
+      {
+        "start": 161,
+        "end": 231,
+        "text": "A csoport vezetője nem állítja, hogy a lelet bizonyítaná az elméletet."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "laboratóriumban",
+            "normalized": "laboratórium",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ine",
+            "start": 39,
+            "end": 54,
+            "evidenceSpan": {
+              "start": 39,
+              "end": 54,
+              "textSpan": "laboratóriumban"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 65,
+          "textSpan": "A mintát a kutatócsoport által felkért laboratóriumban elemezték."
+        },
+        "attribution": null,
+        "action": "elemez",
+        "actionSpan": {
+          "start": 55,
+          "end": 64,
+          "textSpan": "elemezték"
+        },
+        "object": [
+          "minta"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 65,
+          "textSpan": "A mintát a kutatócsoport által felkért laboratóriumban elemezték."
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 65,
+          "textSpan": "A mintát a kutatócsoport által felkért laboratóriumban elemezték."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:65",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "alapján",
+            "normalized": "alap",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 84,
+            "end": 91,
+            "evidenceSpan": {
+              "start": 84,
+              "end": 91,
+              "textSpan": "alapján"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 66,
+          "end": 130,
+          "textSpan": "A mérési jelentés alapján a kristály tömege körülbelül 0,7 gramm"
+        },
+        "attribution": null,
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 0.7,
+            "canonicalValue": 0.7,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 121,
+            "end": 130,
+            "raw": "0,7 gramm",
+            "evidenceSpan": {
+              "start": 121,
+              "end": 130,
+              "textSpan": "0,7 gramm"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "approximately",
+                  "evidenceSpan": {
+                    "start": 110,
+                    "end": 121,
+                    "textSpan": "körülbelül "
+                  },
+                  "marker": "körülbelül"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:66:130",
+              "clauseSpan": {
+                "start": 66,
+                "end": 130,
+                "textSpan": "A mérési jelentés alapján a kristály tömege körülbelül 0,7 gramm"
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 121,
+                    "end": 124,
+                    "textSpan": "0,7"
+                  },
+                  "targetSpan": {
+                    "start": 125,
+                    "end": 130,
+                    "textSpan": "gramm"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 66,
+          "end": 130,
+          "textSpan": "A mérési jelentés alapján a kristály tömege körülbelül 0,7 gramm"
+        },
+        "propositionSpan": {
+          "start": 66,
+          "end": 130,
+          "textSpan": "A mérési jelentés alapján a kristály tömege körülbelül 0,7 gramm"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:66:130",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 132,
+          "end": 160,
+          "textSpan": "átmérője pedig 9 milliméter."
+        },
+        "attribution": null,
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 9,
+            "canonicalValue": 9,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 147,
+            "end": 159,
+            "raw": "9 milliméter",
+            "evidenceSpan": {
+              "start": 147,
+              "end": 159,
+              "textSpan": "9 milliméter"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 147,
+                    "end": 159,
+                    "textSpan": "9 milliméter"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:132:160",
+              "clauseSpan": {
+                "start": 132,
+                "end": 160,
+                "textSpan": "átmérője pedig 9 milliméter."
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 147,
+                    "end": 148,
+                    "textSpan": "9"
+                  },
+                  "targetSpan": {
+                    "start": 149,
+                    "end": 159,
+                    "textSpan": "milliméter"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 132,
+          "end": 160,
+          "textSpan": "átmérője pedig 9 milliméter."
+        },
+        "propositionSpan": {
+          "start": 132,
+          "end": 160,
+          "textSpan": "átmérője pedig 9 milliméter."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:132:160",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "állít",
+        "content": {
+          "start": 197,
+          "end": 231,
+          "textSpan": " a lelet bizonyítaná az elméletet."
+        },
+        "attribution": null,
+        "action": "bizonyít",
+        "actionSpan": {
+          "start": 206,
+          "end": 217,
+          "textSpan": "bizonyítaná"
+        },
+        "object": [
+          "elmélet"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind",
+          "Cnd"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": true,
+        "modalities": [
+          "reported",
+          "hypothetical",
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "unresolved",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "negated_reporting_predicate",
+          "actor_unresolved",
+          "content_under_negated_report",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 161,
+          "end": 231,
+          "textSpan": "A csoport vezetője nem állítja, hogy a lelet bizonyítaná az elméletet."
+        },
+        "propositionSpan": {
+          "start": 161,
+          "end": 231,
+          "textSpan": "A csoport vezetője nem állítja, hogy a lelet bizonyítaná az elméletet."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:161:231",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "elméletet",
+              "normalized": "elmélet",
+              "start": 221,
+              "end": 230,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 221,
+                "end": 230,
+                "textSpan": "elméletet"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 221,
+                "end": 230,
+                "textSpan": "elméletet"
+              },
+              "targetSpan": {
+                "start": 206,
+                "end": 217,
+                "textSpan": "bizonyítaná"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 221,
+                    "end": 230,
+                    "textSpan": "elméletet"
+                  },
+                  "targetSpan": {
+                    "start": 206,
+                    "end": 217,
+                    "textSpan": "bizonyítaná"
+                  }
+                }
+              ],
+              "frameId": "dependency:161:231",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "conditional",
+              "rule": "governing_conditional_morphology",
+              "evidenceSpan": {
+                "start": 206,
+                "end": 217,
+                "textSpan": "bizonyítaná"
+              },
+              "dependencyPath": []
+            }
+          ],
+          "frameId": "dependency:161:231",
+          "clauseSpan": {
+            "start": 197,
+            "end": 231,
+            "textSpan": " a lelet bizonyítaná az elméletet."
+          },
+          "projectionAllowed": false
+        }
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": [
+      {
+        "id": "nominal-source:75",
+        "source": null,
+        "reportingNominal": {
+          "start": 75,
+          "end": 83,
+          "textSpan": "jelentés"
+        },
+        "markerSpan": {
+          "start": 84,
+          "end": 91,
+          "textSpan": "alapján"
+        },
+        "predicateSpan": {
+          "start": 149,
+          "end": 159,
+          "textSpan": "milliméter"
+        },
+        "binding": "unresolved",
+        "rule": "possessive_np_event_nominal_evidential_marker",
+        "evidenceSpan": {
+          "start": 75,
+          "end": 91,
+          "textSpan": "jelentés alapján"
+        },
+        "dependencyEvidence": [
+          {
+            "relation": "nmod:obl",
+            "sourceSpan": {
+              "start": 84,
+              "end": 91,
+              "textSpan": "alapján"
+            },
+            "targetSpan": {
+              "start": 149,
+              "end": 159,
+              "textSpan": "milliméter"
+            }
+          }
+        ],
+        "unresolvedReasons": [
+          "source_bearing_possessor_unproven"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1852 @@
+
+> projekt2025new@0.1.0 check
+> npm run typecheck && npm run lint && npm run check:imports && npm run test:offline && npm run build
+
+
+> projekt2025new@0.1.0 typecheck
+> tsc --noEmit
+
+
+> projekt2025new@0.1.0 lint
+> eslint .
+
+
+F:\Projekt2025\Lumen\app\api\auth\login\route.ts
+  13:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  32:23  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  54:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  57:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\auth\me\route.ts
+   6:27  warning  '_req' is defined but never used          @typescript-eslint/no-unused-vars
+  15:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\auth\register\route.ts
+   23:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   68:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   79:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   93:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  129:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\auth\request-password-reset\route.ts
+  10:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\auth\request-pin-reset\route.ts
+  10:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\auth\reset-password\route.ts
+  32:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  57:29  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\auth\reset-pin\route.ts
+  38:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  64:29  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  86:12  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+  86:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\auth\send-verification\route.ts
+   7:28  warning  'req' is defined but never used  @typescript-eslint/no-unused-vars
+  26:12  warning  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\app\api\auth\username-reset\route.ts
+   29:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   89:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  112:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  129:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  179:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\fetch-feed\route.ts
+  17:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\forecast-status\route.ts
+  33:26  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\hirado\can-watch\route.ts
+  19:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  19:48  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\hirado\read\[date]\route.ts
+  25:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  58:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\UtomDnsOsszkep\route.ts
+   50:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   87:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   97:23  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  107:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  118:26  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  155:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  163:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\category\[category]\route.ts
+   22:50  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   68:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  119:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  121:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  140:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  172:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  178:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  210:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  212:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  236:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  267:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\clickbait-ratio\route.ts
+  17:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  28:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\clickbait\route.ts
+    7:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   24:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   35:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   48:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   58:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   74:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   80:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   94:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  111:42  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\duplication\route.ts
+  22:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  45:56  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\forecast\route.ts
+  33:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  39:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\heatmap\route.ts
+   8:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  30:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  39:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  67:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\route.ts
+    6:31  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+    8:7   warning  't' is never reassigned. Use 'const' instead       prefer-const
+   14:27  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+   49:7   warning  'hours' is never reassigned. Use 'const' instead   prefer-const
+   93:19  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  122:19  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  187:39  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  190:11  warning  'cursor' is never reassigned. Use 'const' instead  prefer-const
+  257:19  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  262:16  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\sentiment\by-category\route.ts
+   7:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  28:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\sentiment\timeline\route.ts
+  16:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\sentiment\today\route.ts
+  16:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\source-activity\route.ts
+   7:23  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  26:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  43:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  54:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\source-category-distribution\route.ts
+    7:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   25:31  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   60:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   80:31  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  117:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\speedindex\leaderboard\route.ts
+   6:27  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  13:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  25:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  44:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  51:30  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  52:30  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  69:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  70:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\spike-detection\route.ts
+   7:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  44:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  79:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\timeseries\all\route.ts
+   7:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  50:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  61:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  67:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  73:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  88:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\timeseries\route.ts
+   7:31  warning  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   9:7   warning  't' is never reassigned. Use 'const' instead  prefer-const
+  63:19  warning  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\insights\trending-keywords\route.ts
+  27:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  53:17  warning  '_' is defined but never used             @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\app\api\sources\route.ts
+   7:27  warning  'req' is defined but never used           @typescript-eslint/no-unused-vars
+  12:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\trend-history\route.ts
+   52:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   66:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  109:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  129:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  147:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\trends\route.ts
+   29:9   warning  'intervalUnit' is never reassigned. Use 'const' instead  prefer-const
+   47:9   warning  'whereParts' is never reassigned. Use 'const' instead    prefer-const
+   48:19  warning  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+   62:43  warning  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  158:45  warning  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  179:17  warning  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\trends\stats\route.ts
+   20:48  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   31:46  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   52:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   72:50  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   78:48  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   83:50  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   89:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   99:54  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  123:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\trends\trend-sources\route.ts
+  43:9   warning  'params' is never reassigned. Use 'const' instead  prefer-const
+  43:17  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\user\change-password\route.ts
+  71:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\user\change-pin\route.ts
+  52:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\v2\articles\[id]\context\route.ts
+  15:21   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  22:26   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  30:53   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  41:37   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:19   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  43:23   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  44:110  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  47:101  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  47:171  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\v2\claims\[id]\route.ts
+  7:703  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\v2\entities\[id]\route.ts
+  11:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  12:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\v2\events\[id]\route.ts
+  7:703  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\v2\premium\intelligence\route.ts
+  20:21   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  22:16   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  27:24   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  28:18   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  31:30   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  33:133  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  34:19   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\v2\source-comparison\route.ts
+  7:1108  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\api\v2\timelines\[ownerType]\[ownerId]\route.ts
+  22:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\aszf\page.tsx
+  264:13  warning  Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+F:\Projekt2025\Lumen\app\cikk\[id]\page.tsx
+  27:36  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-explicit-any
+  30:42  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-explicit-any
+  32:10  warning  'relatedError' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+  51:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\app\cikk\[id]\page.tsx:51:5
+  49 |   // Cikk lekérése
+  50 |   useEffect(() => {
+> 51 |     setRelatedLoading(false);
+     |     ^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  52 |     setRelated([]);
+  53 |     setRelatedError(null);
+  54 |                                         react-hooks/set-state-in-effect
+  88:7   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\app\cikk\[id]\page.tsx:88:7
+  86 |   useEffect(() => {
+  87 |     if (!item || !Number.isSafeInteger(Number(item.id))) {
+> 88 |       setRelatedLoading(false);
+     |       ^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  89 |       setRelated([]);
+  90 |       return;
+  91 |     }  react-hooks/set-state-in-effect
+
+F:\Projekt2025\Lumen\app\hirado\page.tsx
+  52:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  66:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\impresszum\page.tsx
+  125:13  warning  Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+F:\Projekt2025\Lumen\app\insights\category\[category]\page.tsx
+   51:50  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  115:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  116:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  129:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  130:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  302:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  316:58  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\app\insights\page.tsx
+   27:17  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  136:17  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  184:9   warning  'isDark' is assigned a value but never used                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+  321:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+F:\Projekt2025\Lumen\app\kapcsolat\page.tsx
+  14:46  warning  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Projekt2025\Lumen\app\kapcsolat\page.tsx:14:46
+  12 |
+  13 |   const [honey, setHoney] = useState("");
+> 14 |   const [startTime, setStartTime] = useState(Date.now());
+     |                                              ^^^^^^^^^^ Cannot call impure function
+  15 |   const [sending, setSending] = useState(false);
+  16 |   const [cooldownUntil, setCooldownUntil] = useState<number | null>(null);
+  17 |  react-hooks/purity
+  51:5   warning  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/ban-ts-comment
+
+F:\Projekt2025\Lumen\app\landing\page.tsx
+  66:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+F:\Projekt2025\Lumen\app\layout.tsx
+  50:11  warning  Prefer `next/script` component when using the inline script for Google Analytics. See: https://nextjs.org/docs/messages/next-script-for-ga  @next/next/next-script-for-ga
+
+F:\Projekt2025\Lumen\app\middleware.ts
+  4:28  warning  '_req' is defined but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\app\page.tsx
+   25:9   warning  'router' is assigned a value but never used                                                                                                                                                                   @typescript-eslint/no-unused-vars
+  157:18  warning  'loadFilteredFirstPage' is defined but never used                                                                                                                                                             @typescript-eslint/no-unused-vars
+  226:6   warning  React Hook useEffect has missing dependencies: 'categoryFilters', 'feedQueryKey', 'fetchFilteredPage', 'fetchPageData', 'loadToday', and 'sourceFilters'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  272:6   warning  React Hook useEffect has missing dependencies: 'categoryFilters.length', 'feedQueryKey', 'fetchPageData', and 'sourceFilters.length'. Either include them or remove the dependency array                      react-hooks/exhaustive-deps
+  312:6   warning  React Hook useEffect has missing dependencies: 'categoryFilters', 'feedQueryKey', 'fetchFilteredPage', and 'sourceFilters'. Either include them or remove the dependency array                                react-hooks/exhaustive-deps
+  338:6   warning  React Hook useEffect has missing dependencies: 'categoryFilters.length' and 'sourceFilters.length'. Either include them or remove the dependency array                                                        react-hooks/exhaustive-deps
+
+F:\Projekt2025\Lumen\app\premium\page.tsx
+  10:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+F:\Projekt2025\Lumen\app\reset-pin\page.tsx
+  17:7   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\app\reset-pin\page.tsx:17:7
+  15 |   useEffect(() => {
+  16 |     if (!token) {
+> 17 |       setStatus("error");
+     |       ^^^^^^^^^ Avoid calling setState() directly within an effect
+  18 |       setError("Hiányzó vagy érvénytelen token.");
+  19 |     }
+  20 |   }, [token]);  react-hooks/set-state-in-effect
+  22:34  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-explicit-any
+  82:11  warning  Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @next/next/no-html-link-for-pages
+
+F:\Projekt2025\Lumen\app\verify-email\page.tsx
+  16:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\app\verify-email\page.tsx:16:7
+  14 |
+  15 |     if (!token) {
+> 16 |       setStatus("error");
+     |       ^^^^^^^^^ Avoid calling setState() directly within an effect
+  17 |       setMessage("Hiányzó token.");
+  18 |       return;
+  19 |     }  react-hooks/set-state-in-effect
+
+F:\Projekt2025\Lumen\components\AdatVedelmiNyilatkozat.tsx
+  169:13  warning  Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+F:\Projekt2025\Lumen\components\AvatarBase.tsx
+  14:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+F:\Projekt2025\Lumen\components\AvatarModal.tsx
+   56:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\components\AvatarModal.tsx:56:5
+  54 |   // 🔥 Gyors seed generálás minden lapozásnál és stílusváltásnál
+  55 |   useEffect(() => {
+> 56 |     setSeeds(generateSeeds(10, page, style));
+     |     ^^^^^^^^ Avoid calling setState() directly within an effect
+  57 |     setSelected(null);
+  58 |   }, [page, style]);
+  59 |  react-hooks/set-state-in-effect
+   63:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\components\AvatarModal.tsx:63:5
+  61 |   useEffect(() => {
+  62 |     if (!user) return;
+> 63 |     setSelected({
+     |     ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  64 |       style: user.avatar_style || "bottts",
+  65 |       seed: user.avatar_seed || user.nickname,
+  66 |       format: "svg",  react-hooks/set-state-in-effect
+  101:14  warning  'e' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+  212:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @next/next/no-img-element
+
+F:\Projekt2025\Lumen\components\AvatarPremium.tsx
+  15:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+F:\Projekt2025\Lumen\components\CookieConsent.tsx
+  11:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\components\CookieConsent.tsx:11:7
+   9 |     const accepted = localStorage.getItem("cookie-consent");
+  10 |     if (!accepted) {
+> 11 |       setVisible(true);
+     |       ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  12 |     }
+  13 |   }, []);
+  14 |  react-hooks/set-state-in-effect
+
+F:\Projekt2025\Lumen\components\FeedList.tsx
+  18:3  warning  'expandedId' is defined but never used     @typescript-eslint/no-unused-vars
+  19:3  warning  'setExpandedId' is defined but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\components\Felolvasas.tsx
+   28:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\components\Felolvasas.tsx:28:5
+  26 |     if (speechSupported) window.speechSynthesis.cancel();
+  27 |     utterRef.current = null;
+> 28 |     setIsReading(false);
+     |     ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  29 |
+  30 |     if (!videoId || videoId <= 0) {
+  31 |       setText("");  react-hooks/set-state-in-effect
+  135:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @next/next/no-img-element
+  135:9  warning  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           jsx-a11y/alt-text
+
+F:\Projekt2025\Lumen\components\FrameModal.tsx
+   59:14  warning  'e' is defined but never used                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+   85:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  115:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  115:17  warning  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images                                                                                                                                                                                jsx-a11y/alt-text
+
+F:\Projekt2025\Lumen\components\Header.tsx
+   15:9   warning  'loading' is assigned a value but never used      @typescript-eslint/no-unused-vars
+   23:20  warning  'setIsTyping' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  122:41  warning  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  127:46  warning  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\HiradoArchive.tsx
+   6:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  20:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\HiradoArchiveSlider.tsx
+   38:41  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  148:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+F:\Projekt2025\Lumen\components\HiradoClient.tsx
+  14:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  15:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\HiradoLayout2026.tsx
+  38:27  warning  React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render         react-hooks/rules-of-hooks
+  40:21  warning  React Hook "useRef" is called conditionally. React Hooks must be called in the exact same order in every component render           react-hooks/rules-of-hooks
+  41:19  warning  React Hook "useRef" is called conditionally. React Hooks must be called in the exact same order in every component render           react-hooks/rules-of-hooks
+  42:24  warning  React Hook "useRef" is called conditionally. React Hooks must be called in the exact same order in every component render           react-hooks/rules-of-hooks
+  43:55  warning  React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render         react-hooks/rules-of-hooks
+  44:37  warning  React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render         react-hooks/rules-of-hooks
+  46:3   warning  React Hook "useLayoutEffect" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
+  59:3   warning  React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render        react-hooks/rules-of-hooks
+
+F:\Projekt2025\Lumen\components\HiradoPlayer.tsx
+  125:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+F:\Projekt2025\Lumen\components\InsightSparkline.tsx
+  19:3  warning  'isDark' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\components\InsightsOverviewChart.tsx
+   59:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   97:4   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  115:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  118:53  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  145:56  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  152:43  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  207:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  251:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  255:43  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  267:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  267:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  267:46  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  283:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  289:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  311:26  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  325:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\LoginModal.tsx
+  46:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  64:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  86:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\ProfileMenu.tsx
+  53:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  77:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+F:\Projekt2025\Lumen\components\RegisterModal.tsx
+  44:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\SettingsView.tsx
+   13:29  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-explicit-any
+   37:25  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\components\SettingsView.tsx:37:25
+  35 |
+  36 |   useEffect(() => {
+> 37 |     if (user?.nickname) setNickname(user.nickname);
+     |                         ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  38 |   }, [user?.nickname]);
+  39 |
+  40 |   useEffect(() => {  react-hooks/set-state-in-effect
+   41:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\components\SettingsView.tsx:41:5
+  39 |
+  40 |   useEffect(() => {
+> 41 |     setBio(user?.bio ?? "");
+     |     ^^^^^^ Avoid calling setState() directly within an effect
+  42 |   }, [user?.bio]);
+  43 |
+  44 |   if (!user) return <div>Betöltés...</div>;                                react-hooks/set-state-in-effect
+   87:14  warning  'err' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  129:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @next/next/no-img-element
+  160:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @next/next/no-img-element
+  190:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @next/next/no-img-element
+  190:21  warning  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              jsx-a11y/alt-text
+
+F:\Projekt2025\Lumen\components\Sidebar.tsx
+  48:7  warning  'clean' is never reassigned. Use 'const' instead  prefer-const
+  63:5  warning  'viewMode' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  64:5  warning  'isTodayMode' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\components\SidebarWrapper.tsx
+  13:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\SparklineDetailed.tsx
+  32:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\components\SparklineDetailed.tsx:32:5
+  30 |
+  31 |   useEffect(() => {
+> 32 |     setLocalPeriod(period);
+     |     ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  33 |     setLocalStart(startDate || "");
+  34 |     setLocalEnd(endDate || "");
+  35 |   }, [period, startDate, endDate]);  react-hooks/set-state-in-effect
+
+F:\Projekt2025\Lumen\components\SparklineMini.tsx
+  169:13  warning  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+  172:13  warning  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+
+F:\Projekt2025\Lumen\components\SpikeBadge.tsx
+  27:65  warning  'period' is defined but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\components\SpikeModal.tsx
+  75:23  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                @typescript-eslint/no-explicit-any
+  83:6   warning  React Hook useEffect has a missing dependency: 'initialStats'. Either include it or remove the dependency array. If 'setStats' needs the current value of 'initialStats', you can also switch to useReducer instead of useState and read 'initialStats' in the reducer  react-hooks/exhaustive-deps
+
+F:\Projekt2025\Lumen\components\ThemeSwitch.tsx
+  20:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\components\ThemeSwitch.tsx:20:7
+  18 |   useEffect(() => {
+  19 |     if (theme) {
+> 20 |       setCurrent(theme);
+     |       ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  21 |     }
+  22 |   }, [theme]);
+  23 |  react-hooks/set-state-in-effect
+
+F:\Projekt2025\Lumen\components\ThemeToggle.tsx
+  12:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\components\ThemeToggle.tsx:12:5
+  10 |     const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  11 |     const initial = stored ?? (systemDark ? "dark" : "light");
+> 12 |     setTheme(initial);
+     |     ^^^^^^^^ Avoid calling setState() directly within an effect
+  13 |     document.documentElement.setAttribute("data-bs-theme", initial);
+  14 |   }, []);
+  15 |  react-hooks/set-state-in-effect
+
+F:\Projekt2025\Lumen\components\Tooltip.tsx
+  4:56  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\TrendsDebug.tsx
+  19:36  warning  Unexpected any. Specify a different type                                                                                                       @typescript-eslint/no-explicit-any
+  65:21  warning  Unexpected any. Specify a different type                                                                                                       @typescript-eslint/no-explicit-any
+  79:6   warning  React Hook useEffect has missing dependencies: 'filters.categories' and 'filters.sources'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  81:5   warning  React Hook useEffect has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked       react-hooks/exhaustive-deps
+  82:5   warning  React Hook useEffect has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked       react-hooks/exhaustive-deps
+
+F:\Projekt2025\Lumen\components\TrendsFilters.tsx
+  4:8  warning  'CategoryHeatMap' is defined but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\components\TrendsList.tsx
+   66:27  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-explicit-any
+   97:7   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\components\TrendsList.tsx:97:7
+   95 |       // for the initial render; otherwise the first render after prop change
+   96 |       // can dereference an invalid keyword/frequency before the second effect.
+>  97 |       setTrends(externalTrends.map(normalizeTrend).filter((trend): trend is Trend => trend !== null));
+      |       ^^^^^^^^^ Avoid calling setState() directly within an effect
+   98 |       setHistoryMap({});
+   99 |       return;
+  100 |     }  react-hooks/set-state-in-effect
+  183:7   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\components\TrendsList.tsx:183:7
+  181 |   useEffect(() => {
+  182 |     if (Array.isArray(externalTrends)) {
+> 183 |       setTrends(externalTrends.map(normalizeTrend).filter((trend): trend is Trend => trend !== null));
+      |       ^^^^^^^^^ Avoid calling setState() directly within an effect
+  184 |     }
+  185 |   }, [externalTrends]);
+  186 |                                                                                                                 react-hooks/set-state-in-effect
+
+F:\Projekt2025\Lumen\components\TrendsPanel.tsx
+  115:28  warning  Unexpected any. Specify a different type                                                                         @typescript-eslint/no-explicit-any
+  123:53  warning  Unexpected any. Specify a different type                                                                         @typescript-eslint/no-explicit-any
+  157:6   warning  React Hook useEffect has a missing dependency: 'makeCacheKey'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+F:\Projekt2025\Lumen\components\TrendsSection.tsx
+  7:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\UsernameChangeModal.tsx
+  33:30  warning  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+F:\Projekt2025\Lumen\components\UsernameChangeModal.tsx:33:30
+  31 |     : null;
+  32 |   const daysSince =
+> 33 |     lastChange ? Math.floor((Date.now() - lastChange.getTime()) / (1000 * 60 * 60 * 24)) : null;
+     |                              ^^^^^^^^^^ Cannot call impure function
+  34 |   const daysLeft = daysSince !== null ? Math.max(0, 30 - daysSince) : 0;
+  35 |
+  36 |   // Élő validáció  react-hooks/purity
+  65:6   warning  React Hook useEffect has a missing dependency: 'forbidden'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    react-hooks/exhaustive-deps
+
+F:\Projekt2025\Lumen\components\UtomDns.tsx
+  38:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\UtomDnsKategoria.tsx
+  27:29  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  40:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\UtomDnsOsszkep.tsx
+  10:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  23:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\V2ArticleIntegrationPanels.tsx
+  13:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\components\V2ArticleIntegrationPanels.tsx:13:5
+  11 |   useEffect(() => {
+  12 |     const events = context.data?.events || [];
+> 13 |     setSelectedEventId(events.length === 1 ? events[0].id : null);
+     |     ^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  14 |   }, [articleId, context.data?.events]);
+  15 |   const events = context.data?.events || [];
+  16 |   return <>  react-hooks/set-state-in-effect
+
+F:\Projekt2025\Lumen\components\V2DemoShowcase.tsx
+  74:74    warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  74:144   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  75:79    warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  76:73    warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  94:360   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  94:1108  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  94:1650  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  96:310   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  96:777   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  98:341   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  98:843   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\WSentimentByCategory.tsx
+  159:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+F:\Projekt2025\Lumen\components\WSentimentTimeline.tsx
+   45:39  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   49:42  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   53:42  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  125:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+F:\Projekt2025\Lumen\components\WSentimentToday.tsx
+  119:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+F:\Projekt2025\Lumen\components\WSourceCategoryDistribution.tsx
+   21:20  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   31:29  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  152:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  163:46  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  184:34  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\WSourceClickbait.tsx
+   50:14  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   54:15  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   54:23  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   60:9   warning  'avg' is assigned a value but never used                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+   62:41  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   91:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  161:38  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  168:38  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\WSourceClickbaitRatio.tsx
+   50:14  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   54:15  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   54:23  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   86:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  164:38  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  171:38  warning  Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\WSourceDuplication.tsx
+  167:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+F:\Projekt2025\Lumen\components\WSourceSpeedIndexLeaderboard.tsx
+   65:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\components\WSourceSpeedIndexLeaderboard.tsx:65:5
+  63 |     });
+  64 |     previousRanking.current = nextRanking;
+> 65 |     setRankingDeltas(nextDeltas);
+     |     ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  66 |   }, [items]);
+  67 |
+  68 |   if (isLoading) return <div className="p-12 text-center">Betöltés...</div>;  react-hooks/set-state-in-effect
+  120:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @next/next/no-img-element
+
+F:\Projekt2025\Lumen\components\WhatHappenedTodayHeatmap.tsx
+  132:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\WhatHappenedTodayKulcsszavak.tsx
+    6:8   warning  'Spinner' is defined but never used       @typescript-eslint/no-unused-vars
+  145:42  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  155:20  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  159:42  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  166:20  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  171:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  171:66  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  171:79  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  195:20  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  203:20  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  205:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  205:56  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  205:69  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  222:20  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  238:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\WhatHappenedTodaySourceActivity.tsx
+   21:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  138:31  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  145:20  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  147:31  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  154:20  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  156:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  156:55  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  156:68  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  174:20  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  180:20  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  182:26  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  182:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  182:58  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  197:20  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  211:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\components\WhatHappenedTodaySpikeDetection.tsx
+   28:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   29:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   35:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  106:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  107:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\hooks\useUser.ts
+  47:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\hooks\useV2ArticleContext.ts
+  15:95  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\hooks\useV2ArticleContext.ts:15:95
+  13 |   useEffect(() => {
+  14 |     const current = ++sequence.current;
+> 15 |     if (!enabled || articleId == null || !Number.isSafeInteger(articleId) || articleId < 1) { setState({ status: enabled ? "idle" : "disabled", data: null, error: null }); return undefined; }
+     |                                                                                               ^^^^^^^^ Avoid calling setState() directly within an effect
+  16 |     const controller = new AbortController(); setState({ status: "loading", data: null, error: null });
+  17 |     fetcher(`/api/v2/articles/${articleId}/context`, { cache: "no-store", signal: controller.signal }).then(async (response) => { const payload = await response.json().catch(() => null); if (!response.ok) throw new Error(payload?.errors?.[0]?.code || `v2_context_http_${response.status}`); return normalizeArticleContextResponse(payload); }).then((data) => { if (current !== sequence.current) return; const hasContent = Boolean(data.article.summary?.text) || data.timeline.items.length > 0; setState({ status: hasContent ? "ready" : "empty", data, error: null }); }).catch((error: unknown) => { if (controller.signal.aborted || current !== sequence.current) return; setState({ status: "error", data: null, error: error instanceof Error ? error.message : "v2_context_failed" }); });
+  18 |     return () => { controller.abort(); };  react-hooks/set-state-in-effect
+
+F:\Projekt2025\Lumen\hooks\useV2PremiumIntelligence.ts
+  12:89  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\hooks\useV2PremiumIntelligence.ts:12:89
+  10 |   useEffect(() => {
+  11 |     const current = ++sequence.current;
+> 12 |     if (!enabled || eventId == null || !Number.isSafeInteger(eventId) || eventId < 1) { setState({ status: enabled ? "idle" : "disabled", data: null, error: null, httpStatus: null }); return undefined; }
+     |                                                                                         ^^^^^^^^ Avoid calling setState() directly within an effect
+  13 |     const controller = new AbortController(); setState({ status: "loading", data: null, error: null, httpStatus: null });
+  14 |     fetcher(`/api/v2/premium/intelligence?eventId=${eventId}`, { cache: "no-store", signal: controller.signal }).then(async (response) => { const payload = await response.json().catch(() => null); if (!response.ok) { const error = new Error(payload?.errors?.[0]?.code || `v2_premium_http_${response.status}`) as Error & { status?: number }; error.status = response.status; throw error; } return normalizePremiumIntelligenceResponse(payload); }).then((data) => { if (current !== sequence.current) return; setState({ status: data.status === "ready" ? "ready" : "empty", data, error: null, httpStatus: 200 }); }).catch((error: unknown) => { if (controller.signal.aborted || current !== sequence.current) return; const typed = error as Error & { status?: number }; setState({ status: "error", data: null, error: typed?.message || "v2_premium_failed", httpStatus: typed?.status || null }); });
+  15 |     return () => controller.abort();  react-hooks/set-state-in-effect
+
+F:\Projekt2025\Lumen\hooks\useV2SourceComparison.ts
+  12:89  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Projekt2025\Lumen\hooks\useV2SourceComparison.ts:12:89
+  10 |   useEffect(() => {
+  11 |     const current = ++sequence.current;
+> 12 |     if (!enabled || eventId == null || !Number.isSafeInteger(eventId) || eventId < 1) { setState({ status: enabled ? "idle" : "disabled", data: null, error: null }); return undefined; }
+     |                                                                                         ^^^^^^^^ Avoid calling setState() directly within an effect
+  13 |     const controller = new AbortController(); setState({ status: "loading", data: null, error: null });
+  14 |     fetcher(`/api/v2/source-comparison?eventId=${eventId}&detail=claims`, { cache: "no-store", signal: controller.signal }).then(async (response) => { const payload = await response.json().catch(() => null); if (!response.ok) throw new Error(payload?.errors?.[0]?.code || `v2_source_comparison_http_${response.status}`); return normalizeSourceComparisonResponse(payload); }).then((data) => { if (current !== sequence.current) return; setState({ status: data.sources.length || data.claims.length ? "ready" : "empty", data, error: null }); }).catch((error: unknown) => { if (controller.signal.aborted || current !== sequence.current) return; setState({ status: "error", data: null, error: error instanceof Error ? error.message : "v2_source_comparison_failed" }); });
+  15 |     return () => controller.abort();  react-hooks/set-state-in-effect
+
+F:\Projekt2025\Lumen\lib\auth-session.ts
+  44:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\lib\cron.js
+  17:9   warning  'fixShortSummary' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  17:26  warning  'isValidShortSummary' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  18:9   warning  'categorizeArticle' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  20:7   warning  'path' is assigned a value but never used                 @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\lib\processArticle.js
+  103:9  warning  'plagiarismScore' is never reassigned. Use 'const' instead  prefer-const
+
+F:\Projekt2025\Lumen\lib\v22\dense-benchmark-dataset.cjs
+  118:45  warning  'itemIndex' is defined but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\lib\v2\ai-cost-router.js
+   5:25  warning  'createBudgetContext' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  13:10  warning  'integerLimit' is defined but never used                  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\lib\v2\deterministic-semantic.js
+   23:7   warning  'DOCUMENT_OBJECT' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   35:7   warning  'seenBody' is assigned a value but never used         @typescript-eslint/no-unused-vars
+  643:67  warning  '_end' is assigned a value but never used             @typescript-eslint/no-unused-vars
+  820:13  warning  'predicate' is never reassigned. Use 'const' instead  prefer-const
+
+F:\Projekt2025\Lumen\lib\v2\temporal-graph-repository.js
+  3:22  warning  'ITEM_TYPES' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\pipeline\clickbait_openai.js
+  80:11  warning  'title' is never reassigned. Use 'const' instead  prefer-const
+
+F:\Projekt2025\Lumen\pipeline\fillCategory.js
+  47:9  warning  'contentText' is never reassigned. Use 'const' instead   prefer-const
+  48:9  warning  'shortSummary' is never reassigned. Use 'const' instead  prefer-const
+
+F:\Projekt2025\Lumen\pipeline\sentiment.js
+  72:11  warning  'title' is never reassigned. Use 'const' instead  prefer-const
+
+F:\Projekt2025\Lumen\scripts\cleanCategories.js
+  21:11  warning  'db' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\scripts\dev-demo-bootstrap.cjs
+  28:9  warning  'amount' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\scripts\experimental\evaluate-huspacy-binding.cjs
+  10:119  warning  'ap' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\scripts\experimental\huspacy-binding-worker-harness.cjs
+  4:407  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\scripts\experimental\morph-clause-binder.cjs
+  41:125  warning  'value' is never reassigned. Use 'const' instead   prefer-const
+  68:141  warning  'action' is never reassigned. Use 'const' instead  prefer-const
+
+F:\Projekt2025\Lumen\scripts\experimental\morph-evaluate.cjs
+  15:317  warning  'objectTotal' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\scripts\experimental\role-scope-binder.cjs
+  26:29  warning  'rows' is never reassigned. Use 'const' instead   prefer-const
+  40:40  warning  'start' is never reassigned. Use 'const' instead  prefer-const
+
+F:\Projekt2025\Lumen\scripts\real-world-003-after-cross-domain-semantic-foundation.cjs
+  16:7  warning  'firstPass' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\store\useUserStore.ts
+  128:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+F:\Projekt2025\Lumen\tests\unit\pipeline-state-machine.test.cjs
+  88:7  warning  'time' is never reassigned. Use 'const' instead  prefer-const
+
+F:\Projekt2025\Lumen\tests\unit\v2-entity-extraction-runtime.test.cjs
+  24:69  warning  'input' is defined but never used  @typescript-eslint/no-unused-vars
+
+F:\Projekt2025\Lumen\types\three-examples.d.ts
+  3:60  warning  'Quaternion' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 412 problems (0 errors, 412 warnings)
+  0 errors and 15 warnings potentially fixable with the `--fix` option.
+
+
+> projekt2025new@0.1.0 check:imports
+> node scripts/check-local-imports.cjs
+
+Minden statikusan felismerhető helyi import feloldható.
+
+> projekt2025new@0.1.0 test:offline
+> node --test tests/unit/*.test.cjs
+
+✔ app/api/insights/sentiment/today/route.ts uses the Budapest business-day half-open window (1.1269ms)
+✔ app/api/insights/sentiment/by-category/route.ts uses the Budapest business-day half-open window (0.3226ms)
+✔ AI client cannot make a network request in offline mode (3.1832ms)
+analyze persistence error response regression: PASS
+✔ tests\unit\analyze-response-contract.test.cjs (172.9056ms)
+remaining insights API contract regression: PASS
+✔ tests\unit\api-insights-remaining-contract.test.cjs (188.0357ms)
+API numeric/domain input validation regression: PASS
+✔ tests\unit\api-numeric-inputs.test.cjs (191.3772ms)
+✔ feed URL identity removes transport and tracking differences deterministically (9.0097ms)
+✔ feed URL identity rejects non-http URLs (0.1567ms)
+✔ distinct real articles are not merged by equal titles (0.1919ms)
+✔ sequential and concurrent feed delivery retain one canonical identity (0.8978ms)
+✔ canonical URL normalization is idempotent and preserves meaningful query parameters (1.0163ms)
+✔ generic ref and source parameters remain part of article identity (0.1859ms)
+✔ related API keeps only the newest summary per article (1.0328ms)
+✔ related API excludes articles belonging to disabled canonical sources (0.155ms)
+✔ article detail validates IDs and HTTP response before rendering (0.2142ms)
+✔ article detail cannot leave related loading stuck on missing item or source (0.2268ms)
+✔ article detail guards nullable render fields (0.1669ms)
+✔ article detail deduplicates and excludes self-referential related rows (0.1338ms)
+✔ article detail uses the joined source consistently for related request and badge (0.1785ms)
+auth avatar contract regression: PASS
+✔ tests\unit\auth-avatar-contract.test.cjs (193.8407ms)
+auth email length validation regression: PASS
+✔ tests\unit\auth-email-length-contract.test.cjs (193.7695ms)
+✔ password policy is shared and bounded (1.0416ms)
+✔ PIN policy accepts exactly four digits (0.2404ms)
+auth response contract regression: PASS
+✔ tests\unit\auth-response-contract.test.cjs (197.6066ms)
+auth session UI contract regression: PASS
+✔ tests\unit\auth-session-ui-contract.test.cjs (201.3981ms)
+browser accessibility contract regression: PASS
+✔ browser acceptance keeps keyboard focus visible after the global outline reset (1.0989ms)
+✔ auth and profile controls expose keyboard and dialog semantics (0.1731ms)
+✔ article detail exposes a document heading (0.1483ms)
+browser product contract regression: PASS
+✔ article related route accepts every canonical source identity (1.0671ms)
+✔ category insights renders entitlement errors instead of a generic network failure (0.2104ms)
+✔ category insights API resolves Next dynamic params before reading category (0.1926ms)
+✔ mobile header wraps search instead of forcing horizontal overflow (0.2463ms)
+✔ header auth state uses the shared store loader without a duplicate auth probe (0.1653ms)
+✔ Europe/Budapest business day follows DST spring and fall transitions (22.523ms)
+✔ week and month business bounds are explicit and host-timezone independent (171.4977ms)
+✔ source timestamps remain absolute and local civil edge cases are deterministic (0.8512ms)
+category heatmap input regression: PASS
+✔ tests\unit\category-heatmap-input.test.cjs (171.622ms)
+category insight number/date safety: PASS
+✔ tests\unit\category-insight-number-safety.test.cjs (173.6058ms)
+category insight period upper-bound regression: PASS
+✔ tests\unit\category-insight-period-upper-bound.test.cjs (171.051ms)
+category insight query contract tests passed
+✔ tests\unit\category-insight-query-contract.test.cjs (171.8245ms)
+category insight trend relation regression: PASS
+✔ tests\unit\category-insight-trend-relation.test.cjs (172.2455ms)
+category page input contract regression: PASS
+✔ tests\unit\category-page-input-contract.test.cjs (171.9251ms)
+category period/sort validation regression: PASS
+✔ tests\unit\category-query-validation.test.cjs (171.7466ms)
+category response contract regression: PASS
+✔ tests\unit\category-response-contract.test.cjs (173.4805ms)
+clickbait numeric/null contract regression: PASS
+✔ tests\unit\clickbait-number-contract.test.cjs (183.2767ms)
+contact and disabled-maintenance UI response regression: PASS
+✔ tests\unit\contact-clear-ui-contract.test.cjs (183.4371ms)
+contact malformed input/provider error regression: PASS
+✔ tests\unit\contact-response-contract.test.cjs (181.5761ms)
+✔ upgraded Nodemailer creates an offline transport without SMTP activity (81.8632ms)
+DNS response/race regression: PASS
+✔ tests\unit\dns-response-race.test.cjs (166.4191ms)
+✔ premium entitlement requires the premium flag (0.9257ms)
+✔ premium entitlement rejects an expired subscription (0.1775ms)
+✔ premium entitlement accepts an active or non-expiring flagged subscription (0.1533ms)
+feed ai_clean numeric safety: PASS
+✔ tests\unit\feed-ai-clean-number.test.cjs (163.131ms)
+feed nested-link navigation regression: PASS
+✔ tests\unit\feed-card-navigation-contract.test.cjs (174.5776ms)
+feed card URL fallback: PASS
+✔ tests\unit\feed-card-url-fallback.test.cjs (178.492ms)
+feed filtered loading-state regression: PASS
+✔ tests\unit\feed-filter-loading.test.cjs (176.8104ms)
+feed HTTP error handling regression: PASS
+✔ tests\unit\feed-http-error.test.cjs (174.593ms)
+feed item null/date regression: PASS
+✔ tests\unit\feed-item-null-date.test.cjs (183.7953ms)
+✔ feed loading cleanup is guarded by the active request sequence (1.2386ms)
+feed response normalization contract: PASS
+✔ tests\unit\feed-response-normalization.test.cjs (179.0319ms)
+feed search error-state regression: PASS
+✔ tests\unit\feed-search-error-state.test.cjs (170.4895ms)
+feed search pagination race regression: PASS
+✔ tests\unit\feed-search-pagination-race.test.cjs (172.6391ms)
+✔ speech reader guards unsupported browser APIs (0.9721ms)
+✔ speech reader resets active playback when video changes or has no id (0.1926ms)
+fetch-feed total failure response regression: PASS
+✔ tests\unit\fetch-feed-failure-contract.test.cjs (162.3389ms)
+fetch-feed per-request stats regression: PASS
+✔ tests\unit\fetch-feed-stats-scope.test.cjs (171.0061ms)
+forecast response contract tests passed
+✔ tests\unit\forecast-response-contract.test.cjs (171.1759ms)
+forecast status connection cleanup regression: PASS
+✔ tests\unit\forecast-status-connection.test.cjs (174.9166ms)
+forecast invalid timestamp regression: PASS
+✔ tests\unit\forecast-status-invalid-date.test.cjs (173.4122ms)
+forecast status race regression: PASS
+✔ tests\unit\forecast-status-race.test.cjs (168.1669ms)
+frame modal user sync regression: PASS
+✔ tests\unit\frame-modal-user-sync.test.cjs (168.6737ms)
+frontend malformed chart/stale state regression: PASS
+✔ tests\unit\frontend-chart-stale-data.test.cjs (169.5951ms)
+frontend runtime safety batch regression: PASS
+✔ tests\unit\frontend-runtime-safety-batch.test.cjs (174.2097ms)
+header hooks order regression: PASS
+✔ tests\unit\header-hooks-order.test.cjs (176.7951ms)
+hirado archive fetch cancellation regression: PASS
+✔ tests\unit\hirado-archive-fetch-race.test.cjs (178.7436ms)
+hirado archive local-date regression: PASS
+✔ tests\unit\hirado-archive-local-date.test.cjs (176.1244ms)
+hirado archive response/order regression: PASS
+✔ tests\unit\hirado-archive-response.test.cjs (173.0909ms)
+hirado archive timezone regression: PASS
+✔ tests\unit\hirado-archive-timezone.test.cjs (170.0629ms)
+hirado malformed auth JSON loading regression: PASS
+✔ tests\unit\hirado-client-auth-json.test.cjs (170.3846ms)
+✔ HiradoClient does not keep anonymous users in an endless loading state (0.7599ms)
+hirado client fetch race regression: PASS
+✔ tests\unit\hirado-client-race.test.cjs (176.3067ms)
+hirado client response contract regression: PASS
+✔ tests\unit\hirado-client-response.test.cjs (178.477ms)
+hirado invalid calendar date regression: PASS
+✔ tests\unit\hirado-date-validation.test.cjs (176.8075ms)
+Híradó video ID validation regression: PASS
+✔ tests\unit\hirado-id-validation.test.cjs (180.9079ms)
+hirado layout local-date regression: PASS
+✔ tests\unit\hirado-layout-local-date.test.cjs (180.9355ms)
+hirado today selection and empty-state regression: PASS
+✔ tests\unit\hirado-page-today-selection.test.cjs (178.414ms)
+hirado player entitlement race regression: PASS
+✔ tests\unit\hirado-player-entitlement-race.test.cjs (179.0004ms)
+hirado player entitlement race regression: PASS
+✔ tests\unit\hirado-player-entitlement.test.cjs (173.2245ms)
+hirado date report ordering regression: PASS
+✔ tests\unit\hirado-read-date-order.test.cjs (169.784ms)
+hirado read video ID validation regression: PASS
+✔ tests\unit\hirado-read-id-validation.test.cjs (170.7317ms)
+Híradó read input validation regression: PASS
+✔ tests\unit\hirado-read-input-validation.test.cjs (172.1503ms)
+hirado report ordering regression: PASS
+✔ tests\unit\hirado-read-order.test.cjs (174.0449ms)
+Híradó read response regression: PASS
+✔ tests\unit\hirado-read-response.test.cjs (173.4673ms)
+hirado thumbnail fallback regression: PASS
+✔ tests\unit\hirado-thumbnail-fallback.test.cjs (177.1672ms)
+hourly DST aggregation regression: PASS
+✔ tests\unit\hourly-dst-aggregation.test.cjs (175.4615ms)
+insight canvas number regression: PASS
+✔ tests\unit\insight-canvas-number-contract.test.cjs (175.4273ms)
+insight card contract regression: PASS
+✔ tests\unit\insight-card-contract.test.cjs (173.5515ms)
+insight category bar input regression: PASS
+✔ tests\unit\insight-category-bar-input.test.cjs (170.3596ms)
+insight chart input contract regression: PASS
+✔ tests\unit\insight-chart-input-contract.test.cjs (169.526ms)
+insight list input regression: PASS
+✔ tests\unit\insight-list-input.test.cjs (172.5892ms)
+insights date-boundary and whitespace regressions: PASS
+✔ tests\unit\insights-boundary-and-whitespace.test.cjs (175.5054ms)
+insights category numeric safety: PASS
+✔ tests\unit\insights-category-number-safety.test.cjs (176.6431ms)
+insights chart number/date regression: PASS
+✔ tests\unit\insights-chart-number-contract.test.cjs (178.1661ms)
+insights/dns number safety contract: PASS
+✔ tests\unit\insights-dns-number-safety.test.cjs (178.4576ms)
+insights error rendering regression: PASS
+✔ tests\unit\insights-error-render.test.cjs (176.7105ms)
+insights forecast HTTP contract regression: PASS
+✔ tests\unit\insights-forecast-fetch.test.cjs (174.5343ms)
+insights hook response contract: PASS
+✔ tests\unit\insights-hook-response-contract.test.cjs (172.8089ms)
+insights null article link regression: PASS
+✔ tests\unit\insights-null-article-contract.test.cjs (172.5528ms)
+insights numeric response contract regression: PASS
+✔ tests\unit\insights-numeric-response-contract.test.cjs (168.9682ms)
+insights period host-timezone regression: PASS
+✔ tests\unit\insights-period-host-timezone.test.cjs (168.8901ms)
+insights period and sentiment timeline timezone regression: PASS
+✔ tests\unit\insights-period-timeline.test.cjs (172.3916ms)
+insights period upper-bound regression: PASS
+✔ tests\unit\insights-period-upper-bound.test.cjs (174.3134ms)
+insights sort contract regression: PASS
+✔ tests\unit\insights-sort-contract.test.cjs (176.4517ms)
+insights source canonical contract tests passed
+✔ tests\unit\insights-source-canonical-contract.test.cjs (176.9591ms)
+insights/statistics validation regression: PASS
+✔ tests\unit\insights-statistics-contract.test.cjs (176.5238ms)
+keyword chart numeric safety: PASS
+✔ tests\unit\keyword-chart-number-safety.test.cjs (176.8801ms)
+✔ legacy init endpoint is an explicit tombstone, not a false cron success (1.1709ms)
+✔ legacy scheduler fails fast and cannot start a second article pipeline (0.291ms)
+login rate-limit scope regression: PASS
+✔ login route applies the scoped attempt query (1.0983ms)
+✔ untrusted proxy fallback scopes login throttling per email (1.07ms)
+✔ trusted client IP keeps the shared per-IP login limit (0.1711ms)
+M14 article context client regression: PASS
+✔ M14 normalizes malformed/null context payloads into a safe stable shape (2.0067ms)
+M14 frontend config regression: PASS
+✔ M14 frontend flag uses explicit safe boolean semantics (0.9148ms)
+M15 source comparison projection regression: PASS
+✔ M15 descriptive projection preserves shared/source-only coverage and numeric values (12.1575ms)
+✔ M15 projection is stable, paginated and does not turn temporal non-overlap into conflict (1.1592ms)
+✔ M15 rejects invalid pagination instead of producing an unbounded query (0.6115ms)
+✔ M15 repository projection uses one bounded claim query and preserves missing source (0.7037ms)
+M16 premium intelligence contract regression: PASS
+✔ M16 validates exactly one bounded event/claim scope (2.0553ms)
+✔ M16 projection is redacted, evidence-backed and has no entitlement bypass fields (1.1864ms)
+✔ M16 empty projection is stable and does not fabricate intelligence (0.2108ms)
+M16 premium route contract regression: PASS
+✔ M16 route gates V2 before entitlement and maps anonymous/non-premium states (1.0524ms)
+✔ M16 route uses the canonical source comparison and timeline projections (0.192ms)
+M17 incremental backfill regression: v2.incremental_backfill PASS
+✔ M17 validates bounded cursor and batch input (1.1255ms)
+✔ M17 pauses and resumes with deterministic checksum (2.2582ms)
+✔ M17 duplicate run reuses completed step without processing twice (0.3581ms)
+✔ M17 busy claim does not advance cursor past unfinished item (0.3303ms)
+✔ M17 DB failure rolls back and cost ceiling prevents completion (1.4405ms)
+✔ M17 feature off is inert (0.8204ms)
+✔ M17 pool adapter owns one transaction connection and releases it (0.6366ms)
+M18 integration gate contract regression: PASS
+✔ M18 integration gate preserves feature and entitlement boundaries (0.7633ms)
+✔ M18 integration gate does not invent provider or payment behavior (0.1688ms)
+✔ M18 article integration exposes event choices and never selects a multi-event first item (0.1313ms)
+✔ M18 normalizers fail closed and preserve empty datasets (1.4436ms)
+✔ M18 premium panel renders entitlement states without payment CTA (0.1835ms)
+✔ M18 browser read routes allow only same-origin reads without exposing an API key (0.3734ms)
+✔ offline migration plan is deterministic and begins with sources (13.9968ms)
+✔ local migrations reject unsafe targets and missing explicit opt-in (0.4963ms)
+✔ first migration runs once and is idempotent with same checksum (6.8712ms)
+✔ checksum mismatch fails closed before running migration SQL (6.742ms)
+✔ failed DDL does not record successful migration (6.7246ms)
+✔ mock AI provides deterministic, visibly marked variants (0.9341ms)
+✔ malformed mock supports parser error paths (0.3423ms)
+✔ mysql wrapper leaves recovery-owned phased reset isolated (0.9023ms)
+observability contract regression: PASS
+✔ internal health exposes read-only operational diagnostics (1.2196ms)
+✔ public liveness response is minimal and does not touch the database (0.2702ms)
+✔ metric row normalization is numeric and deterministic (0.8687ms)
+database observability regression: PASS
+✔ database diagnostics record slow operation without logging SQL or parameters (25.801ms)
+✔ database diagnostics count failures and rethrow the original error (0.7886ms)
+✔ migration chain is contiguous and statically rollout-auditable (21.8051ms)
+✔ operational redaction removes credentials and bearer-like secrets (0.2882ms)
+✔ worker environment is fail-safe and offline mode does not require OpenAI (0.6397ms)
+✔ production environment requires explicit side effects and their secret categories (0.6639ms)
+✔ production environment allows paid AI to remain disabled without a provider key (0.2678ms)
+✔ internal health authentication rejects anonymous and malformed credentials (0.2381ms)
+✔ startup and health fail closed when the database is unavailable (0.7659ms)
+✔ pipeline batch routes claim heartbeat failures through article failure handling (1.767ms)
+[dotenv@17.2.3] injecting env (0) from ..\..\var\www\utom\.env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+✔ valid stored embedding is reusable while empty or malformed data is not (2.2573ms)
+✔ existing cluster assignment is stable and reusable (0.1969ms)
+✔ speed history event identity is deterministic (0.6339ms)
+✔ external operation identity is deterministic and input-sensitive (0.2629ms)
+✔ trend keywords count once per article regardless of case or whitespace (0.2ms)
+✔ cluster creation is serialized across concurrent workers (18.823ms)
+[SCRAPER] Indul: articleId=123, host=444.hu
+[SCRAPER] 🟢 444.hu → scraping kihagyva, RSS content:encoded használata.
+✔ 444 RSS short-content marker is preserved by the scraper (715.632ms)
+✔ canonical pipeline does not fail the explicit RSS-content skip (0.5026ms)
+✔ two workers competing for one article produce exactly one winner (2.0647ms)
+✔ active claim cannot be stolen, stale claim can be recovered (0.4787ms)
+✔ done step is reused and a later failure preserves its result (1.1598ms)
+✔ invalid or incomplete article cannot be marked done (2.6051ms)
+✔ optional step failure is recorded as skipped without failing the article (0.4827ms)
+✔ zombie worker is fenced from heartbeat, step update, and final commit (0.6689ms)
+✔ external operation failure becomes uncertain and cannot be reclaimed automatically (0.7803ms)
+✔ uncertain required step prevents article completion (0.3048ms)
+✔ pending required step prevents article done (0.4008ms)
+✔ in_progress required step prevents article done (0.3458ms)
+✔ failed required step prevents article done (0.1967ms)
+✔ uncertain required step prevents article done (0.1883ms)
+✔ external result save failure leaves the pre-call uncertain checkpoint (0.5549ms)
+✔ step result and done state are committed by one atomic store mutation (0.9857ms)
+✔ article becomes done only when every required step is done (0.7987ms)
+premium availability contract regression: PASS
+✔ tests\unit\premium-availability-contract.test.cjs (169.9688ms)
+premium entitlement UI regression: PASS
+✔ tests\unit\premium-entitlement-ui.test.cjs (169.3692ms)
+✔ premium insights proxy accepts only known endpoints and bounded categories (0.9455ms)
+✔ premium insights proxy rejects traversal and encoded separators (0.2342ms)
+premium proxy error contract regression: PASS
+✔ premium proxy keeps entitlement and rate-limit failures in its JSON error contract (0.7519ms)
+premium source empty-state regression: PASS
+✔ tests\unit\premium-source-empty-state.test.cjs (177.5726ms)
+premium statistics null/date contract regression: PASS
+✔ tests\unit\premium-statistics-null-contract.test.cjs (190.5474ms)
+premium tooltip API-label escaping regression: PASS
+✔ tests\unit\premium-tooltip-escaping.test.cjs (191.4608ms)
+production preflight schema regression: PASS
+✔ production preflight uses the canonical latest migration version (14.6614ms)
+✔ active CI workflows use the supported Node major (1.123ms)
+✔ schema 060 is ready while 059 and future 061 fail closed (704.8193ms)
+profile date contract regression: PASS
+✔ tests\unit\profile-date-contract.test.cjs (177.9586ms)
+raw text retention regression: PASS
+✔ successful article younger than 24 hours is retained (1.8568ms)
+✔ successful complete article older than 24 hours is eligible (0.2373ms)
+✔ pending raw step blocks a successful article (0.1885ms)
+✔ in-progress and stale claims remain protected (0.1554ms)
+✔ failed article inside seven days is retained (0.9734ms)
+✔ terminal failed article older than seven days is eligible (0.2387ms)
+✔ recoverable failed article is protected even after seven days (0.1849ms)
+✔ active retry and external uncertainty are protected (0.2461ms)
+✔ already purged article is a no-op (0.2247ms)
+✔ missing required output and incomplete V2 projection are fail-closed (0.4214ms)
+✔ evidence without persisted span blocks purge (0.1632ms)
+✔ policy configuration rejects zero, negative and fractional values (0.4915ms)
+✔ incremental backfill reports purged raw text explicitly and does not invoke processing (2.0184ms)
+✔ reprocess callers expose an explicit raw_text_unavailable guard (0.9039ms)
+✔ 060 migration is additive, auditable and single-statement (7.2124ms)
+receive-feed namespaced content regression: PASS
+✔ tests\unit\receive-feed-namespaced-content.test.cjs (457.7531ms)
+register modal async error handling regression: PASS
+✔ tests\unit\register-modal-async.test.cjs (147.4932ms)
+related API input contract regression: PASS
+✔ tests\unit\related-api-input-contract.test.cjs (164.494ms)
+✔ related source normalization is consistent (1.2563ms)
+✔ related news excludes self and duplicate articles and prioritizes cluster (1.4606ms)
+✔ related news applies a symmetric seven-day window (0.2064ms)
+✔ related API accepts the canonical normalized 24.hu source key (1.2917ms)
+related source SQL normalization regression: PASS
+✔ tests\unit\related-source-sql-normalization.test.cjs (151.2015ms)
+remaining fetch/error and spike race contracts regression: PASS
+✔ tests\unit\remaining-fetch-contracts.test.cjs (165.1943ms)
+✔ offline is the safe default and overrides opt-in flags (1.3057ms)
+✔ capabilities require both online mode and explicit opt-in (0.2969ms)
+✔ blocked capabilities fail closed with a stable error code (0.6089ms)
+✔ SSRF address policy blocks private IPv4, IPv6, mapped, link-local and mixed DNS (6.6456ms)
+✔ pinned runtime socket uses the validated address once and preserves Host (37.2492ms)
+✔ every redirect is revalidated and private redirect is blocked (2.2668ms)
+✔ public redirects are re-resolved and still use the pinned socket (9.5144ms)
+✔ pinned fetch aborts a slow response at the configured timeout (28.5391ms)
+✔ HTTPS keeps the original SNI and rejects an untrusted certificate (18.2784ms)
+✔ internet-controlled article and feed fetch paths use the pinned helper (0.9103ms)
+✔ operational logger remains non-throwing without or with an invalid file destination (3.6586ms)
+✔ operational logger writes to an explicitly configured directory (8.5661ms)
+schema readiness latest migration regression: PASS
+✔ schema readiness tracks the latest migration version (17.153ms)
+✔ sentiment today adds numeric DB counts instead of concatenating strings (1.5299ms)
+✔ sentiment by category normalizes grouping and numeric counts (0.473ms)
+✔ source category UI excludes both portfolio source spellings (0.3078ms)
+settings null-state regression: PASS
+✔ tests\unit\settings-null-state.test.cjs (126.1436ms)
+settings profile format safety: PASS
+✔ tests\unit\settings-profile-format.test.cjs (153.2667ms)
+source-category alias contract regression: PASS
+✔ tests\unit\source-category-alias-contract.test.cjs (152.4255ms)
+source-category domain contract tests passed
+✔ tests\unit\source-category-domain-contract.test.cjs (152.3181ms)
+source category numeric contract regression: PASS
+✔ tests\unit\source-category-numeric-contract.test.cjs (152.6175ms)
+source flow contract regression: PASS
+✔ tests\unit\source-flow-contract.test.cjs (154.7551ms)
+✔ source aliases resolve to one canonical internal identity (1.5215ms)
+✔ publication parser accepts explicit timezone formats and normalizes to UTC (1.5203ms)
+✔ ambiguous, invalid, null, and epoch-like publication values are rejected (0.1821ms)
+✔ publication resolution uses explicit feed time before safe ingestion fallback (0.2732ms)
+sparkline frequency null/number regression: PASS
+✔ tests\unit\sparkline-frequency-null.test.cjs (142.9258ms)
+speed index null/number contract regression: PASS
+✔ tests\unit\speedindex-null-contract.test.cjs (150.9247ms)
+spike detection timezone regression: PASS
+✔ tests\unit\spike-detection-timezone.test.cjs (148.9517ms)
+summaries pagination limit contract regression: PASS
+✔ tests\unit\summaries-pagination-limit-contract.test.cjs (147.0864ms)
+summaries today+filter contract regression: PASS
+✔ tests\unit\summaries-today-filter-contract.test.cjs (158.0186ms)
+theme switch race regression: PASS
+✔ tests\unit\theme-switch-race.test.cjs (155.3634ms)
+timeseries all category window regression: PASS
+✔ tests\unit\timeseries-all-window.test.cjs (156.0545ms)
+timeseries future-date upper-bound regression: PASS
+✔ tests\unit\timeseries-future-bound.test.cjs (156.0979ms)
+timeseries hook response contract: PASS
+✔ tests\unit\timeseries-hook-response-contract.test.cjs (155.4658ms)
+timeseries period validation regression: PASS
+✔ tests\unit\timeseries-validation.test.cjs (151.7472ms)
+trend history/source driver contract tests passed
+✔ tests\unit\trend-history-driver-contract.test.cjs (148.5871ms)
+trend-history future-date upper-bound regression: PASS
+✔ tests\unit\trend-history-future-bound.test.cjs (160.9168ms)
+Trend history input normalization regression: PASS
+✔ tests\unit\trend-history-input-normalization.test.cjs (162.7413ms)
+trend history source filter contract tests passed
+✔ tests\unit\trend-history-source-filter-contract.test.cjs (164.1156ms)
+trend runtime contract tests passed
+✔ tests\unit\trend-runtime-contract.test.cjs (163.4242ms)
+✔ trend source modal ignores stale responses and malformed payloads (0.9797ms)
+trend sources malformed/stale state regression: PASS
+✔ tests\unit\trend-sources-null-contract.test.cjs (164.2879ms)
+Trend sources deterministic ordering regression: PASS
+✔ tests\unit\trend-sources-ordering.test.cjs (163.3941ms)
+trending keywords per-article dedup regression: PASS
+✔ tests\unit\trending-keywords-dedup.test.cjs (164.3083ms)
+trends/related API validation regression: PASS
+✔ tests\unit\trends-api-validation.test.cjs (161.1599ms)
+trends calendar input contract tests passed
+✔ tests\unit\trends-calendar-input-contract.test.cjs (158.7973ms)
+trends custom date filter regression: PASS
+✔ tests\unit\trends-custom-date-filter.test.cjs (158.4792ms)
+trends debug/theme race regression: PASS
+✔ tests\unit\trends-debug-theme-race.test.cjs (153.7252ms)
+trends canonical filter contract tests passed
+✔ tests\unit\trends-filter-canonical-contract.test.cjs (168.5219ms)
+trends list category filter normalization regression: PASS
+✔ tests\unit\trends-list-category-filter.test.cjs (167.665ms)
+trends list HTTP handling regression: PASS
+✔ tests\unit\trends-list-http.test.cjs (169.3311ms)
+trends list malformed payload regression: PASS
+✔ tests\unit\trends-list-malformed-response.test.cjs (171.7565ms)
+trends stats error contract regression: PASS
+✔ tests\unit\trends-stats-error-contract.test.cjs (173.3099ms)
+user mutation contract regression: PASS
+✔ tests\unit\user-mutation-contract.test.cjs (176.4969ms)
+user mutation DB error response regression: PASS
+✔ tests\unit\user-mutation-db-error-contract.test.cjs (175.5593ms)
+user premium lookup error response regression: PASS
+✔ tests\unit\user-premium-lookup-error-contract.test.cjs (177.3166ms)
+username reset validation contract regression: PASS
+✔ tests\unit\username-reset-validation-contract.test.cjs (175.815ms)
+Utom DNS source/category contract regression: PASS
+✔ tests\unit\utom-dns-contract.test.cjs (178.9497ms)
+M12 AI cost router regression: PASS
+✔ M12 chooses deterministic and compatible cache before any model (1.683ms)
+✔ M12 enforces explicit budget, circuit and provider fallback (0.2539ms)
+✔ M12 escalates only when explicitly requested and preserves model route (0.7624ms)
+✔ M12 provider outcomes quarantine malformed output and bound retries (0.2375ms)
+✔ M12 feature OFF is side-effect free and ON returns an auditable decision (0.3367ms)
+✔ M12 decision repository is retry-safe and rejects nullable article identity (2.0356ms)
+✔ Q09 enforces projected hard caps and approved policy boundaries (0.2639ms)
+✔ Q09 keeps paid AI disabled outside explicit production opt-in (0.1094ms)
+M8 claim extraction contract regression: PASS
+✔ M8 validates atomic claims while preserving numeric, temporal and semantic qualifiers (2.2962ms)
+✔ M8 rejects unsupported claim shapes and keeps unresolved entity references explicit (0.4355ms)
+✔ M8 feature OFF performs no provider call and ON validates mock output (0.4685ms)
+✔ M8 persistence uses stable observation/evidence identity and caller-owned transaction (2.245ms)
+M11 conflict/confidence history regression: PASS
+✔ M11 detects same-context numeric contradiction and preserves both evidence/attribution (3.2716ms)
+✔ M11 avoids false conflicts for equal values, disjoint time, unit mismatch and different entities (0.5099ms)
+✔ M11 keeps plan and completed states separate even with the same predicate (0.1949ms)
+✔ M11 handles boolean and categorical contradictions without selecting a winner (0.3379ms)
+✔ M11 feature OFF is side-effect free and ON is deterministic (0.9043ms)
+✔ M11 repository is caller-transactional and confidence history is idempotent (2.7242ms)
+✔ M3 adapter preserves canonical article identity and retry dedup semantics (2.6905ms)
+✔ M3 adapter does not infer a duplicate from a different title or source (0.4339ms)
+✔ M3 adapter normalizes cluster membership and related IDs deterministically (1.3777ms)
+✔ M3 adapter rejects malformed identity and keeps unresolved states explicit (0.6886ms)
+✔ V2 demo is enabled only for explicit loopback utom_dev development (1.0907ms)
+✔ V2 demo user selector is allowlisted and production route stays guarded (0.7039ms)
+✔ demo claims stay attached to the three showcased articles (0.4528ms)
+✔ M4 has one feature-gated canonical pipeline handoff and no route/duplicate invocation (1.4972ms)
+✔ M4 extraction is optional and cannot make legacy completion a required V2 step (0.4025ms)
+✔ M4 repository persists audit and typed unresolved mention without raw provider output (2.7106ms)
+✔ M4 empty extraction is a successful audit with no mention insert (0.4369ms)
+✔ M4 feature OFF makes zero provider calls (2.7615ms)
+✔ M4 feature ON calls one mock provider and validates its structured output (0.9475ms)
+✔ M4 provider failure and malformed output are isolated as explicit outcomes (1.4998ms)
+✔ M4 article text is data and cannot alter the provider contract (1.2728ms)
+✔ M4 validates the canonical ingestion envelope and preserves Hungarian text (2.6721ms)
+✔ M4 rejects incompatible input envelope versions explicitly (1.1354ms)
+✔ M4 rejects non-canonical article text instead of stringifying arbitrary objects (0.3901ms)
+✔ M4 accepts an empty extraction as a valid result (0.6028ms)
+✔ M4 validates typed mention, confidence and exact evidence span (0.5622ms)
+✔ M4 rejects unknown types, bad confidence, hallucinated spans and extra fields (1.086ms)
+✔ M4 keeps repeated occurrences and same-name candidates separate (0.3026ms)
+✔ M5 preserves Hungarian accents, casing for display, and punctuation while normalizing lookup form (1.3122ms)
+✔ M5 normalization removes invisible characters and is deterministic (1.0611ms)
+✔ M5 keeps diacritic variants distinct instead of implying a merge (0.198ms)
+✔ M5 alias output keeps observed alias separate from canonical resolution (0.2113ms)
+✔ M5 rejects empty, non-string and malformed-language input (0.2087ms)
+M6 entity-resolution candidate, short-circuit and persistence regression: PASS
+✔ M6 same-name candidates remain ambiguous and type mismatch is excluded (2.4513ms)
+✔ M6 candidate scoring is bounded and deterministic (1.425ms)
+✔ M6 exact M5 resolution short-circuits candidate generation (0.6885ms)
+✔ M6 feature OFF performs no repository call (0.2511ms)
+✔ M6 feature ON runs the canonical M5-to-M6 chain once (0.3268ms)
+✔ M6 feature ON batch preserves the M4 extraction-to-resolution chain (0.5563ms)
+✔ M6 bounded semantic escalation validates candidate membership and stays review-only (0.5896ms)
+✔ M6 candidate repository enforces the canonical bound (1.0648ms)
+✔ M6 resolved persistence is idempotent and records a history boundary (0.9942ms)
+✔ M6 review candidates cannot be persisted as automatic entity links (0.3706ms)
+Q06 confidence policy regression: PASS
+✔ Q06 policy keeps one canonical source of truth and exact boundaries (1.949ms)
+✔ Q06 ambiguity always wins over confidence and no-match never creates an entity (0.2015ms)
+✔ Q06 feature OFF performs no lookup and no side effect (0.26ms)
+✔ Q06 invalid confidence remains rejected (0.6124ms)
+M5 exact lookup and collision boundary regression: PASS
+✔ M5 exact lookup reuses canonical normalization and does not fold diacritics (1.3793ms)
+✔ M5 exact alias lookup returns miss, one hit or explicit ambiguity without LIMIT 1 (1.2245ms)
+✔ M5 alias persistence requires a real observed mention and provenance boundary (0.8356ms)
+M9 event matching first-slice regression: PASS
+✔ M9 creates deterministic review-only event candidates (2.9882ms)
+✔ M9 rejects invalid intervals, confidence and unknown membership (0.2941ms)
+✔ M9 classifies touching and unknown intervals conservatively for review (0.4005ms)
+✔ M9 keeps merge authority review-only and separates disjoint temporal candidates (0.4454ms)
+✔ M9 event repository writes event, article membership and entity memberships without owning a transaction (1.1985ms)
+✔ M9 feature OFF is inert and ON returns a review-only candidate without AI (0.2582ms)
+M1.5 feature flag contract: PASS
+✔ V2 feature flag is canonical, narrow and fail-closed (1.327ms)
+✔ V2 flag remains independently testable in offline mode without enabling side effects (0.2253ms)
+✔ V2 disabled leaves existing offline capabilities unchanged (0.2107ms)
+✔ flag evaluation does not leak process environment between calls (0.2721ms)
+M2 ingestion provenance envelope: PASS
+✔ creates deterministic, canonical, immutable provenance envelope (3.9228ms)
+✔ keeps unknown provenance explicit and rejects malformed article input (0.3968ms)
+✔ has no database, network, or AI side effects (0.3459ms)
+✔ does not accept an unvalidated provenance identity (0.5267ms)
+M2 provenance schema contract: PASS
+✔ M2 provenance schema contract is additive, structured and audit-safe (1.8042ms)
+M2 runtime ingestion handoff: PASS
+✔ V2-enabled ingestion hands off the canonical envelope without a DB write (5.7963ms)
+✔ V2-disabled ingestion preserves the legacy result shape and semantics (1.2545ms)
+✔ malformed and unknown-source results remain legacy outcomes while V2 records explicit invalidity (1.5771ms)
+M1.4 static migration contract: 19 migrations; M2 extension: 1; M4 extension: 1, PASS
+✔ M1.4 has one ordered migration statement per fixture table (1.9108ms)
+✔ M1.4 migrations contain every fixture column and named constraint (2.1754ms)
+✔ V2.1 provisional identity scope migration is additive and bounded (0.2136ms)
+✔ M2 provenance migration is additive and uses the dedicated contract (0.1374ms)
+✔ M4 mention type migration is additive and preserves existing rows (0.1644ms)
+✔ M5 lookup migration makes normalized identity accent-sensitive and stores alias observations (0.184ms)
+✔ M10 temporal bounds migration is additive and preserves timeline rows (0.1887ms)
+M13 read model contract regression: PASS
+✔ M13 read model contract validates bounded IDs, asOf, cursor and limit (2.2908ms)
+✔ M13 projection redacts raw row fields and normalizes nullable dates (0.2877ms)
+M13 public read repository regression: PASS
+✔ M13 entity projection allowlists fields, deduplicates aliases and summarizes evidence (2.2743ms)
+✔ M13 event and claim projections keep public semantics (1.3969ms)
+✔ M13 source comparison uses one scoped, stable, non-ranking query (1.1294ms)
+✔ related projection preserves legacy ordering and canonical IDs (2.0247ms)
+✔ related projection falls back from an empty joined source label to the legacy source (0.2214ms)
+✔ related projection distinguishes unresolved, empty and malformed snapshots (1.2582ms)
+✔ related runtime projection is inert OFF and runs exactly once ON (0.2884ms)
+✔ related route invokes one projection after its single legacy query and keeps array response (0.3981ms)
+M7 relation/evidence contract regression: PASS
+✔ M7 uses only the frozen predicate vocabulary and validates evidence spans (1.5516ms)
+✔ M7 rejects malformed, unresolved-shaped and unsupported relation input (0.2062ms)
+✔ M7 feature OFF performs zero provider calls and ON validates mock output (0.9964ms)
+✔ M7 relation persistence has stable identity and evidence identity (1.1729ms)
+✔ M7 canonical relation cannot persist without two non-archived entities (0.6419ms)
+M1.6 V2 repository/import contract: PASS
+✔ repository contract freezes the M1.6 server boundary (1.5675ms)
+✔ V2 runtime graph has no fixture/test reverse dependency or cycle (16.4687ms)
+✔ V2 runtime modules are importable without DB, network or timer side effects (72.1934ms)
+M1.5 request context contract: PASS
+✔ context factory creates immutable metadata-only context (3.1801ms)
+✔ context keeps request and run identities distinct and accepts explicit request identity (0.338ms)
+✔ context rejects malformed IDs, dates and environments (1.201ms)
+✔ context creation has no database or AI side effect (0.3049ms)
+✔ M3 runtime handoff is completely inert when the V2 flag is off (1.1084ms)
+✔ M3 runtime handoff invokes the canonical adapter exactly once when enabled (0.2334ms)
+✔ M3 runtime adapter errors are isolated and observable (0.8824ms)
+✔ pipeline has one canonical, feature-gated M3 runtime handoff (0.6431ms)
+M1.3 schema contract fixture: 19 tables, PASS
+✔ M1.3 fixture freezes the complete additive V2 table scope (2.8332ms)
+✔ identity, duplicate and provenance constraints are explicit (0.9451ms)
+✔ controlled vocabulary and temporal/confidence contracts are machine-checkable (0.4636ms)
+✔ foreign keys declare delete and update policy (0.2983ms)
+M10 temporal graph regression: PASS
+✔ M10 validates UTC intervals and rejects inverted or equal bounds (3.009ms)
+✔ M10 reconstructs as-of state with exclusive upper bound and future exclusion (12.4822ms)
+✔ M10 keeps unknown-time items explicit and orders deterministically (0.9679ms)
+✔ M10 validates projection contract and feature OFF is side-effect free (0.6387ms)
+✔ M10 repository remains caller-transactional and uses stable cursor SQL (1.015ms)
+✔ V2.1 demo bootstrap csak explicit loopback utom_dev célponton engedélyezett (1.1817ms)
+✔ V2.1 demo bootstrap canonical latest migrationre és fizetős szolgáltatás nélküli seedre hivatkozik (0.8232ms)
+V2.1 final product contract regression: PASS
+✔ SEO metadata uses configured canonical base and an existing image (1.3889ms)
+✔ article SEO emits data-backed metadata and JSON-LD only (0.3739ms)
+✔ sitemap and robots exclude private operational routes (0.2386ms)
+✔ Premium page describes implemented value and keeps provider actions disabled (0.2102ms)
+V2.1 load harness contract regression: PASS
+✔ V2.1 load harness keeps the required concurrency ladder and stop condition (1.1038ms)
+✔ V2.1 load harness targets only local or explicitly supplied base URL (0.1891ms)
+✔ localhost layout nem tölt külső captcha vagy analitika scriptet explicit bekapcsolás nélkül (1.5049ms)
+✔ local demo captcha csak nem-production loopback utom_dev konfigurációban ad magas pontszámot (0.2852ms)
+✔ a kliens login és reset flow közös captcha adaptert használ (0.2359ms)
+✔ a localhost feed és related API a konfigurált MySQL portot használja (0.3562ms)
+✔ local demo session cookie HTTP-n is használható, productionben Secure marad (0.228ms)
+V2 article intelligence trace contract regression: PASS
+✔ V2 article context exposes stored claims/timeline and accepted organisation entities (1.2982ms)
+✔ legal proceeding is a generic frame, never a project-start claim (24.865ms)
+✔ media context and person/location boundaries are typed without name-specific rules (8.5991ms)
+✔ numeric arguments bind separately to nearby subjects and classify local semantics (6.8236ms)
+✔ admission, denial and conditional promise remain separate frames (1.5972ms)
+✔ historical judgment reference does not become a new court event (6.1622ms)
+✔ Round 2 splits multi-subject numeric propositions across unrelated domains (87.9664ms)
+✔ Round 2 keeps media and official source roles separate from entity identity (2.0296ms)
+✔ Round 2 attribution never promotes punctuation, clauses, or unresolved pronouns (3.3944ms)
+✔ Round 2 separates admission and denial propositions without duplicates (1.4786ms)
+✔ Round 2 enforces promise and conditional consistency (20.2811ms)
+✔ Round 2 conservatively resolves inflected names inside one article (1.6398ms)
+✔ Round 2 structural segmentation blocks byline and caption leakage (1.3019ms)
+✔ Round 2 entity precision/recall adversarial fixture meets the safety floor (0.9078ms)
+✔ Round 2 frame quality metrics meet the curated safety floor (4.1761ms)
+✔ deterministic provider extracts only text-grounded numeric and semantic markers (50.4782ms)
+✔ deterministic provider does not import or read gold/scenario logic (0.6085ms)
+✔ oracle provider boundary reaches perfect core semantics (124.0219ms)
+✔ mutation: lost negation and conditional modality are detected (107.1634ms)
+✔ mutation: wrong attribution and namesake identity are detected (70.0073ms)
+✔ mutation: false and missed conflicts are visible (53.1378ms)
+✔ mutation: temporal change and omission status errors are detected (54.3313ms)
+✔ V2.2 benchmark contains 20 mandatory Hungarian scenarios and 2-4 source variants (117.1492ms)
+✔ V2.2 gold manifest covers evidence-first dimensions without direct DB writes (98.615ms)
+✔ V2.2 baseline makes empty-provider gap explicit and reproducible (65.2806ms)
+✔ V2.2 dense tier contains five three-source scenarios with broad observations (13.9507ms)
+✔ morphology research uses the actual frozen deterministic baseline (47.015ms)
+✔ development annotations retain exact Unicode evidence and never project canonical facts (11.7372ms)
+✔ dependency labels cannot alter the research binder (14.0508ms)
+✔ subject and value permutations and three-way coordination preserve ownership (0.8279ms)
+✔ unit/verb ellipsis has separately anchored evidence (0.9854ms)
+✔ ordinal product cannot inherit first product identity and weather is not transport actor (0.622ms)
+✔ admission and denial remain separate scoped propositions (0.3327ms)
+✔ negation and condition do not leak into completed siblings (0.7516ms)
+✔ speaker role, promises and futures are explicit; nested source abstains (0.917ms)
+✔ namesakes, metadata and location/person substitution preserve boundaries (0.934ms)
+✔ corrupt raw evidence is rejected, never silently normalized (0.6149ms)
+✔ worker crash falls back; actual deterministic processing remains available (96.1834ms)
+✔ worker hang falls back; actual deterministic processing remains available (217.6303ms)
+✔ worker malformed falls back; actual deterministic processing remains available (50.9525ms)
+✔ worker bounded input, queue and out-of-order IDs (197.6704ms)
+✔ owner presentation maps canonical enums and typed values (25.7484ms)
+✔ showcase owner mode routes canonical fields through central presentation mapping (0.6134ms)
+✔ demo read model preserves structured values for the owner formatter (0.3496ms)
+✔ showcase exposes the required benchmark scenario selector (1.0768ms)
+✔ precision helper abstains on filler and survives thirty perturbed source variants (232.0877ms)
+✔ precision helper distinguishes namesake contexts and preserves semantic qualifiers (0.4405ms)
+✔ deterministic semantic providers satisfy canonical extraction contracts without gold input (11.1294ms)
+✔ explicit organization relation evidence keeps original article offsets (0.6758ms)
+✔ semantic helper has no benchmark gold dependency (0.6451ms)
+✔ direct-denial official attribution is source-derived and benchmark-grounded (456.9797ms)
+✔ scenario projection collapses repeated entity mentions but keeps namesake identities (236.1456ms)
+✔ cross-source projection emits only explicit temporal changes and omissions (233.1275ms)
+✔ dense temporal gold values are source-derived and projected deterministically (104.0382ms)
+✔ evaluator normalizes an omitted date unit to the canonical date semantic (53.4847ms)
+✔ assessment predicates require a local expert proposition (0.9726ms)
+✔ evidence-backed categorical claims count as semantically supported (0.1401ms)
+✔ round 3 recovers explicit relations, separate events, and validated conflicts (401.9169ms)
+✔ round 3 dense gold values remain source-derived and expose critical coverage (119.8815ms)
+✔ round 3 held-out role clauses resolve the longest organisation and preserve separate events (17.7698ms)
+✔ numeric predicates never emit null, undefined or non-finite values (18.6788ms)
+✔ generic metadata segmentation keeps bylines and photo credits out of entity mentions (15.799ms)
+✔ Hungarian numeric mention layer handles scales, currencies, spacing and ranges (4.4101ms)
+✔ ambiguous legal money claims abstain instead of using PROJECT_COST (7.0409ms)
+✔ attribution and uncertainty remain attached to a source-local numeric claim (2.8842ms)
+✔ role and product appositions generalize across transport and education copy (25.4294ms)
+✔ generic narrative events cover acquisition, court, repair and sport wording (17.0582ms)
+✔ REAL_WORLD_001 after-hardening path preserves first-pass artifacts and removes the null numeric claim (55.183ms)
+✔ delta values never become count predicates across unrelated domains (24.0174ms)
+✔ numeric qualifiers retain lower, upper, range and approximate semantics (1.0034ms)
+✔ local numeric scope keeps an exact observation separate from a later approximate delta (3.4002ms)
+✔ legal amount stays absolute while reference-class mileage and values stay comparative (13.0303ms)
+✔ broad interpersonal verbs do not create PARTNER_OF relations (2.2904ms)
+✔ acquisition event exposes only explicit article participants (29.4392ms)
+✔ duplicated headline is not emitted twice as downstream numeric data (5.8466ms)
+✔ evidence offsets remain sliceable after masking, trimming and Unicode edge cases (47.5544ms)
+✔ delta changes are additive and never projected as fake absolute properties (72.6764ms)
+✔ general scalar changes preserve from/to, unit, direction, time and evidence (5.8658ms)
+✔ generic conditional and background legal language does not create a concrete payment event (92.2387ms)
+✔ document edits are not vehicle repairs, while an explicit repair remains an event (21.0813ms)
+✔ scaled numeric mentions expose additive canonical values and delta/comparison semantics (2.86ms)
+✔ reported observation is kept separate from displayed, estimated and comparison values (4.2016ms)
+✔ month dates remain attached to the numeric observation in the same local sentence (1.2752ms)
+✔ explicit narrative relations require a verb and do not use sentence co-occurrence (0.7048ms)
+✔ multiple attributed speakers keep their own evidence spans (0.8138ms)
+✔ role evaluator: known correct case passes; resolved label alone is no proof (3.5317ms)
+✔ role evaluator: independent owner, sign, property, source, scope and condition errors fail (2.4134ms)
+✔ role evaluator: abstentions and omitted frames retain fixed gold denominators (0.2532ms)
+✔ role evaluator: duplicates cannot reuse a gold label and bad evidence fails (0.3943ms)
+✔ role/scope: ASCII, Unicode and word signs are preserved across domains (13.1079ms)
+✔ role/scope: signed delta is not an absolute temperature or stock observation (0.6803ms)
+✔ role/scope: signed transitions and ranges preserve distinct endpoints (1.9259ms)
+✔ role/scope: storage and treatment locations never become explicit actors (0.9026ms)
+✔ role/scope: recipient is not the reporting actor, unknown source abstains (2.2317ms)
+✔ role/scope: mixed nominative/dative name span is unresolved, never invented stem (0.7047ms)
+✔ role/scope: processing percentage is not a candidate score (0.9458ms)
+✔ role/scope: threshold, age, tariff, calendar and population have separate owners (1.0065ms)
+✔ role/scope: denial with Cnd mood is not a logical condition (0.5971ms)
+✔ role/scope: antecedent and consequent have scoped logical conditions (1.6462ms)
+✔ role/scope: quotation directions and punctuation preserve one content frame (1.0777ms)
+✔ role/scope: pronouns and unnamed generic institutions are not named entities (0.341ms)
+✔ role/scope: all raw spans exact, canonical outputs disabled, dependency labels irrelevant (14.0796ms)
+✔ first-view access is granted only when the unique view insert wins (1.1279ms)
+ℹ tests 522
+ℹ suites 0
+ℹ pass 522
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4685.3551
+
+> projekt2025new@0.1.0 build
+> next build
+
+▲ Next.js 16.3.6 (Turbopack)
+- Environments: .env.local
+✓ Running next.config.ts took 19ms
+- Experiments (use with caution):
+  · serverActions
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.2s
+  Running TypeScript ...
+  Finished TypeScript in 2.1s ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/75) ...
+  Generating static pages using 15 workers (18/75) 
+  Generating static pages using 15 workers (37/75) 
+  Generating static pages using 15 workers (56/75) 
+✓ Generating static pages using 15 workers (75/75) in 437ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /adatvedelem
+├ ƒ /api/ai-clean
+├ ƒ /api/analyze
+├ ƒ /api/auth/avatar
+├ ƒ /api/auth/login
+├ ƒ /api/auth/logout
+├ ƒ /api/auth/me
+├ ƒ /api/auth/register
+├ ƒ /api/auth/request-password-reset
+├ ƒ /api/auth/request-pin-reset
+├ ƒ /api/auth/reset-password
+├ ƒ /api/auth/reset-pin
+├ ƒ /api/auth/send-verification
+├ ƒ /api/auth/username-reset
+├ ƒ /api/auth/verify-email
+├ ƒ /api/clear-summaries
+├ ƒ /api/contact
+├ ƒ /api/dev/v2-demo
+├ ƒ /api/fetch-feed
+├ ƒ /api/forecast-status
+├ ƒ /api/health
+├ ƒ /api/hirado/archive
+├ ƒ /api/hirado/by-id
+├ ƒ /api/hirado/can-watch
+├ ƒ /api/hirado/generate-thumbnail
+├ ƒ /api/hirado/read/[date]
+├ ƒ /api/hirado/today
+├ ƒ /api/init
+├ ƒ /api/insights
+├ ƒ /api/insights/category/[category]
+├ ƒ /api/insights/clickbait
+├ ƒ /api/insights/clickbait-ratio
+├ ƒ /api/insights/duplication
+├ ƒ /api/insights/forecast
+├ ƒ /api/insights/heatmap
+├ ƒ /api/insights/sentiment/by-category
+├ ƒ /api/insights/sentiment/timeline
+├ ƒ /api/insights/sentiment/today
+├ ƒ /api/insights/source-activity
+├ ƒ /api/insights/source-category-distribution
+├ ƒ /api/insights/speedindex/leaderboard
+├ ƒ /api/insights/spike-detection
+├ ƒ /api/insights/timeseries
+├ ƒ /api/insights/timeseries/all
+├ ƒ /api/insights/trending-keywords
+├ ƒ /api/insights/UtomDnsOsszkep
+├ ƒ /api/internal/health
+├ ƒ /api/maintenance/clean
+├ ƒ /api/premium-insights/[[...path]]
+├ ƒ /api/receive-feed
+├ ƒ /api/related
+├ ƒ /api/sources
+├ ƒ /api/summaries
+├ ƒ /api/summarize
+├ ƒ /api/summarize-all
+├ ƒ /api/test-email
+├ ƒ /api/trend-history
+├ ƒ /api/trends
+├ ƒ /api/trends/stats
+├ ƒ /api/trends/trend-sources
+├ ƒ /api/user/avatar
+├ ƒ /api/user/change-password
+├ ƒ /api/user/change-pin
+├ ƒ /api/user/frame
+├ ƒ /api/user/update
+├ ƒ /api/v2/articles/[id]/context
+├ ƒ /api/v2/claims/[id]
+├ ƒ /api/v2/entities/[id]
+├ ƒ /api/v2/events/[id]
+├ ƒ /api/v2/premium/intelligence
+├ ƒ /api/v2/source-comparison
+├ ƒ /api/v2/timelines/[ownerType]/[ownerId]
+├ ○ /aszf
+├ ƒ /cikk/[id]
+├ ƒ /dev/v2-demo
+├ ○ /Dns
+├ ƒ /hirado
+├ ○ /impresszum
+├ ○ /insights
+├ ƒ /insights/category/[category]
+├ ○ /kapcsolat
+├ ○ /landing
+├ ○ /premium
+├ ○ /premium-faq
+├ ○ /reset-password
+├ ○ /reset-pin
+├ ○ /robots.txt
+├ ƒ /sitemap.xml
+├ ○ /trends
+└ ○ /verify-email
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

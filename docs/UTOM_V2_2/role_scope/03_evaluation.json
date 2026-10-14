@@ -1,0 +1,1543 @@
+{
+  "method": "fixed_gold_denominators; one_to_one_offset_matching; exact_role_surface; exact_scope; field_contract_not_formal_full_entailment; null_rate_if_no_resolved",
+  "metrics": {
+    "actorGoldCoverage": {
+      "correct": 11,
+      "total": 18,
+      "ratio": 0.6111111111111112
+    },
+    "sourceGoldCoverage": {
+      "correct": 9,
+      "total": 10,
+      "ratio": 0.9
+    },
+    "recipientGoldCoverage": {
+      "correct": 7,
+      "total": 7,
+      "ratio": 1
+    },
+    "propositionScope": {
+      "correct": 45,
+      "total": 45,
+      "ratio": 1
+    },
+    "logicalConditional": {
+      "correct": 45,
+      "total": 45,
+      "ratio": 1
+    },
+    "grammaticalCnd": {
+      "correct": 45,
+      "total": 45,
+      "ratio": 1
+    },
+    "polarity": {
+      "correct": 45,
+      "total": 45,
+      "ratio": 1
+    },
+    "numericValue": {
+      "correct": 30,
+      "total": 30,
+      "ratio": 1
+    },
+    "sign": {
+      "correct": 30,
+      "total": 30,
+      "ratio": 1
+    },
+    "numericOwner": {
+      "correct": 22,
+      "total": 30,
+      "ratio": 0.7333333333333333
+    },
+    "numericProperty": {
+      "correct": 22,
+      "total": 30,
+      "ratio": 0.7333333333333333
+    },
+    "valueKind": {
+      "correct": 30,
+      "total": 30,
+      "ratio": 1
+    }
+  },
+  "falseResolved": {
+    "frames": {
+      "falseCount": 0,
+      "total": 11,
+      "rate": 0
+    },
+    "numericBindings": {
+      "falseCount": 0,
+      "total": 22,
+      "rate": 0
+    },
+    "roleAssertions": {
+      "falseCount": 0,
+      "total": 27,
+      "rate": 0
+    },
+    "combined": {
+      "falseCount": 0,
+      "total": 60,
+      "rate": 0
+    },
+    "highDecisionCount": 0,
+    "affectedCases": 0
+  },
+  "entities": {
+    "correct": 26,
+    "predicted": 26,
+    "gold": 27,
+    "precision": 1,
+    "recall": 0.9629629629629629
+  },
+  "evidence": {
+    "total": 177,
+    "exact": 177,
+    "failures": 0
+  },
+  "cases": [
+    {
+      "id": "s01",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s02",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s03",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s04",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s05",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s06",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s07",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s08",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s09",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": false
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": false,
+          "correct": false,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": false,
+            "property": false,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s10",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": false
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": false,
+          "correct": false,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": false,
+            "property": false,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s11",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": true,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s12",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s13",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s14",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s15",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s16",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": true,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s17",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s18",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": false,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": false
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": true,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "resolved": false,
+          "correct": false,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": false,
+            "property": false,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        },
+        {
+          "predicted": 2,
+          "gold": 2,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s19",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "checks": {
+            "scope": true,
+            "actor": false,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": false
+        },
+        {
+          "predicted": 2,
+          "gold": 2,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": true,
+          "correct": true
+        },
+        {
+          "predicted": 3,
+          "gold": 3,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": true,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "resolved": false,
+          "correct": false,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": false,
+            "property": false,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        },
+        {
+          "predicted": 2,
+          "gold": 2,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        },
+        {
+          "predicted": 3,
+          "gold": 3,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s20",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": false,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": false
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": false,
+          "correct": false,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": false,
+            "property": false,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "resolved": false,
+          "correct": false,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": false,
+            "property": false,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s21",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": true,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s22",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": false,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": false
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "resolved": false,
+          "correct": false,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": false,
+            "property": false,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s23",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": false
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": false,
+          "correct": false,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": false,
+            "property": false,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s24",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": false,
+            "source": false,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": false
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s25",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": false,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": false
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s26",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": true,
+          "correct": true
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": true,
+          "correct": true
+        },
+        {
+          "predicted": 2,
+          "gold": 2,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": true,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s27",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": true,
+          "correct": true
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "checks": {
+            "scope": true,
+            "actor": false,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": false
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s28",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s29",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s30",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s31",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s32",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s33",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s34",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": true,
+          "correct": true
+        },
+        {
+          "predicted": 1,
+          "gold": 1,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s35",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    },
+    {
+      "id": "s36",
+      "frames": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "checks": {
+            "scope": true,
+            "actor": true,
+            "source": true,
+            "recipient": true,
+            "condition": true,
+            "mood": true,
+            "polarity": true
+          },
+          "resolved": false,
+          "correct": true
+        }
+      ],
+      "numeric": [
+        {
+          "predicted": 0,
+          "gold": 0,
+          "resolved": true,
+          "correct": true,
+          "checks": {
+            "value": true,
+            "sign": true,
+            "owner": true,
+            "property": true,
+            "valueKind": true,
+            "semanticKind": true
+          }
+        }
+      ],
+      "falseResolved": [],
+      "omitted": [],
+      "entityIssues": []
+    }
+  ],
+  "failures": [],
+  "canonical": "disabled; unsupported/conflict efficacy not measured"
+}

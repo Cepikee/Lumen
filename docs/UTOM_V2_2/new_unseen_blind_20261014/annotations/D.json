@@ -1,0 +1,671 @@
+{
+  "id": "D",
+  "raw": "A Pannon Takarék fiókhálózata július 6-tól szeptember 2-ig próbarendben fogadja az ügyfeleket. Nem a kamatot, hanem a számlavezetés díját csökkentenék, amennyiben legalább hatezer ügyfél választ elektronikus kivonatot. „Erről már döntöttek” – hallatszott a folyosón, de a beszélőt senki sem látta.",
+  "rawSha256": "b2e6233f009bbc8518279300bf63e88498e0b9bfe5691e4e0ccc1baf60a88e76",
+  "annotationSha256": "a6605fe5eb185a58aa1cc9dae9dcdf5fad18c6a8ea133a41e1bc19313a846d9e",
+  "sentenceCount": 3,
+  "tokenCount": 48,
+  "environmentFingerprint": "143242eddc17f94ea729a1b430c5eac9d5e47dd7d27b5ebdd29c7c6961882f47",
+  "model": {
+    "type": "ready",
+    "model": "hu_core_news_md",
+    "version": "3.8.0",
+    "loadMs": 1160.3809050000002
+  },
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 8,
+        "text": "Pannon",
+        "lemma": "Pannon",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 17
+      },
+      {
+        "start": 9,
+        "end": 16,
+        "text": "Takarék",
+        "lemma": "Takarék",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 2
+      },
+      {
+        "start": 17,
+        "end": 29,
+        "text": "fiókhálózata",
+        "lemma": "fiókhálózat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 72
+      },
+      {
+        "start": 30,
+        "end": 36,
+        "text": "július",
+        "lemma": "július",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 37
+      },
+      {
+        "start": 37,
+        "end": 42,
+        "text": "6-tól",
+        "lemma": "6.",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Abl",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 72
+      },
+      {
+        "start": 43,
+        "end": 53,
+        "text": "szeptember",
+        "lemma": "szeptember",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 54
+      },
+      {
+        "start": 54,
+        "end": 58,
+        "text": "2-ig",
+        "lemma": "2.",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ter",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 72
+      },
+      {
+        "start": 59,
+        "end": 71,
+        "text": "próbarendben",
+        "lemma": "próbarend",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 72
+      },
+      {
+        "start": 72,
+        "end": 79,
+        "text": "fogadja",
+        "lemma": "fogad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 72
+      },
+      {
+        "start": 80,
+        "end": 82,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 83
+      },
+      {
+        "start": 83,
+        "end": 93,
+        "text": "ügyfeleket",
+        "lemma": "ügyfél",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Plur"
+        },
+        "dep": "obj",
+        "headStart": 72
+      },
+      {
+        "start": 93,
+        "end": 94,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 72
+      },
+      {
+        "start": 95,
+        "end": 98,
+        "text": "Nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 138
+      },
+      {
+        "start": 99,
+        "end": 100,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 101
+      },
+      {
+        "start": 101,
+        "end": 108,
+        "text": "kamatot",
+        "lemma": "kamat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 138
+      },
+      {
+        "start": 108,
+        "end": 109,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 132
+      },
+      {
+        "start": 110,
+        "end": 115,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 132
+      },
+      {
+        "start": 116,
+        "end": 117,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 118
+      },
+      {
+        "start": 118,
+        "end": 131,
+        "text": "számlavezetés",
+        "lemma": "számlavezetés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 132
+      },
+      {
+        "start": 132,
+        "end": 137,
+        "text": "díját",
+        "lemma": "díj",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "conj",
+        "headStart": 101
+      },
+      {
+        "start": 138,
+        "end": 150,
+        "text": "csökkentenék",
+        "lemma": "csökkente",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Cnd",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 138
+      },
+      {
+        "start": 150,
+        "end": 151,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 208
+      },
+      {
+        "start": 152,
+        "end": 162,
+        "text": "amennyiben",
+        "lemma": "amennyiben",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 208
+      },
+      {
+        "start": 163,
+        "end": 171,
+        "text": "legalább",
+        "lemma": "legalább",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 172
+      },
+      {
+        "start": 172,
+        "end": 179,
+        "text": "hatezer",
+        "lemma": "hatezer",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 180
+      },
+      {
+        "start": 180,
+        "end": 186,
+        "text": "ügyfél",
+        "lemma": "ügyfél",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 187
+      },
+      {
+        "start": 187,
+        "end": 194,
+        "text": "választ",
+        "lemma": "válasz",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 195
+      },
+      {
+        "start": 195,
+        "end": 207,
+        "text": "elektronikus",
+        "lemma": "elektronikus",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 208
+      },
+      {
+        "start": 208,
+        "end": 217,
+        "text": "kivonatot",
+        "lemma": "kivonat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 138
+      },
+      {
+        "start": 217,
+        "end": 218,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 138
+      },
+      {
+        "start": 219,
+        "end": 220,
+        "text": "„",
+        "lemma": "„",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Imp",
+          "Number": "Plur",
+          "Person": "1",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "punct",
+        "headStart": 230
+      },
+      {
+        "start": 220,
+        "end": 225,
+        "text": "Erről",
+        "lemma": "ez",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Del",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "obl",
+        "headStart": 230
+      },
+      {
+        "start": 226,
+        "end": 229,
+        "text": "már",
+        "lemma": "már",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:tlocy",
+        "headStart": 230
+      },
+      {
+        "start": 230,
+        "end": 239,
+        "text": "döntöttek",
+        "lemma": "dönt",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 230
+      },
+      {
+        "start": 239,
+        "end": 240,
+        "text": "”",
+        "lemma": "”",
+        "pos": "X",
+        "morph": {},
+        "dep": "obj",
+        "headStart": 230
+      },
+      {
+        "start": 241,
+        "end": 242,
+        "text": "–",
+        "lemma": "–",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 243
+      },
+      {
+        "start": 243,
+        "end": 254,
+        "text": "hallatszott",
+        "lemma": "hallatszik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 230
+      },
+      {
+        "start": 255,
+        "end": 256,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 257
+      },
+      {
+        "start": 257,
+        "end": 265,
+        "text": "folyosón",
+        "lemma": "folyosó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 243
+      },
+      {
+        "start": 265,
+        "end": 266,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 291
+      },
+      {
+        "start": 267,
+        "end": 269,
+        "text": "de",
+        "lemma": "de",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 291
+      },
+      {
+        "start": 270,
+        "end": 271,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 272
+      },
+      {
+        "start": 272,
+        "end": 280,
+        "text": "beszélőt",
+        "lemma": "beszélő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 281
+      },
+      {
+        "start": 281,
+        "end": 286,
+        "text": "senki",
+        "lemma": "senki",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Tot"
+        },
+        "dep": "nsubj",
+        "headStart": 291
+      },
+      {
+        "start": 287,
+        "end": 290,
+        "text": "sem",
+        "lemma": "sem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 291
+      },
+      {
+        "start": 291,
+        "end": 296,
+        "text": "látta",
+        "lemma": "lát",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 243
+      },
+      {
+        "start": 296,
+        "end": 297,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 230
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 94,
+        "text": "A Pannon Takarék fiókhálózata július 6-tól szeptember 2-ig próbarendben fogadja az ügyfeleket."
+      },
+      {
+        "start": 95,
+        "end": 218,
+        "text": "Nem a kamatot, hanem a számlavezetés díját csökkentenék, amennyiben legalább hatezer ügyfél választ elektronikus kivonatot."
+      },
+      {
+        "start": 219,
+        "end": 297,
+        "text": "„Erről már döntöttek” – hallatszott a folyosón, de a beszélőt senki sem látta."
+      }
+    ],
+    "entities": [
+      {
+        "start": 2,
+        "end": 16,
+        "text": "Pannon Takarék",
+        "label": "ORG"
+      }
+    ]
+  }
+}

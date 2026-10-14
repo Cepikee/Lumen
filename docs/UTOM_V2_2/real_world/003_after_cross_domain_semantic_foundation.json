@@ -1,0 +1,1477 @@
+{
+  "testId": "REAL_WORLD_ARTICLE_003",
+  "pass": "after-cross-domain-semantic-foundation",
+  "generatedAt": "2026-10-05T23:16:26.563Z",
+  "input": {
+    "path": "docs/UTOM_V2_2/real_world/003_source_article.txt",
+    "sha256": "11541E921B4BE74139B7903D31BBAA2AB5995CBD0EAAA17FDC2281750FCBFD2E",
+    "sourceKey": "real-world-003",
+    "title": "Flávio Bolsonaro rácáfolt a felmérésekre a győzelmével, és ha elnökké választják, kegyelmet adna az apjának"
+  },
+  "firstPassRawSha256": "5041BED367359EE18D7E9576FC6F6383D962F2F7D2E2A72DF2D8A76B66FA96B6",
+  "evidenceAudit": {
+    "totalEvidenceSpans": 19,
+    "exactRawOffsetMatches": 19,
+    "failures": 0,
+    "checks": [
+      {
+        "kind": "semantic-frame",
+        "start": 536,
+        "end": 678,
+        "expected": "Az elítélt exelnök, Jair Bolsonaro szélsőjobboldali fia, Flávio Bolsonaro végzett az élen a brazil elnökválasztás vasárnapi első fordulójában.",
+        "actual": "Az elítélt exelnök, Jair Bolsonaro szélsőjobboldali fia, Flávio Bolsonaro végzett az élen a brazil elnökválasztás vasárnapi első fordulójában.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 999,
+        "end": 1122,
+        "expected": "A szavazatok 100 százalékának feldolgozása után Flávio Bolsonaro 47,3 százalékot, míg Lula elnök 45,16 százalékot szerzett.",
+        "actual": "A szavazatok 100 százalékának feldolgozása után Flávio Bolsonaro 47,3 százalékot, míg Lula elnök 45,16 százalékot szerzett.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 1488,
+        "end": 1694,
+        "expected": "Bolsonaro már nagyon magabiztosan nyilatkozott, és előzetesen is úgy tűnt, hogy neki van több tartaléka a kiesett jelöltek szavazói között, de Lula várhatóan mindent megpróbál majd a következő három hétben.",
+        "actual": "Bolsonaro már nagyon magabiztosan nyilatkozott, és előzetesen is úgy tűnt, hogy neki van több tartaléka a kiesett jelöltek szavazói között, de Lula várhatóan mindent megpróbál majd a következő három hétben.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 2047,
+        "end": 2183,
+        "expected": "Ez akkor is nagyon megnehezítené egy baloldali elnök, azaz a Munkáspártot vezető Lula kormányzását, ha mégis behúzza a második fordulót.",
+        "actual": "Ez akkor is nagyon megnehezítené egy baloldali elnök, azaz a Munkáspártot vezető Lula kormányzását, ha mégis behúzza a második fordulót.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 3329,
+        "end": 3467,
+        "expected": "A jobbos jelöltek között ott volt Ronaldo Caiado, aki a szavazatok 2,1 százalékát szerezte meg és Renan Santos, aki 2,2 százalékot kapott.",
+        "actual": "A jobbos jelöltek között ott volt Ronaldo Caiado, aki a szavazatok 2,1 százalékát szerezte meg és Renan Santos, aki 2,2 százalékot kapott.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 3536,
+        "end": 3703,
+        "expected": "A Guardian szerint Lulának az is intő jel lehet, hogy a korábbi elnök fia által vezetett párt a kongresszusi és kormányzói választáson is jobban teljesített a vártnál.",
+        "actual": "A Guardian szerint Lulának az is intő jel lehet, hogy a korábbi elnök fia által vezetett párt a kongresszusi és kormányzói választáson is jobban teljesített a vártnál.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 4228,
+        "end": 4345,
+        "expected": "” Szerinte a második forduló lesz az igazi megmérettetés, azt ígérte, hogy hétfőtől egy egészen új kampányt kezdenek.",
+        "actual": "” Szerinte a második forduló lesz az igazi megmérettetés, azt ígérte, hogy hétfőtől egy egészen új kampányt kezdenek.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 4696,
+        "end": 4835,
+        "expected": "A rendőrség szerint Flávio Bolsonaro pénzügyi támogatást kért a bank korábbi vezetőjétől a Jair Bolsonaróról készülő Sötét ló című filmhez.",
+        "actual": "A rendőrség szerint Flávio Bolsonaro pénzügyi támogatást kért a bank korábbi vezetőjétől a Jair Bolsonaróról készülő Sötét ló című filmhez.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 4836,
+        "end": 4961,
+        "expected": "Bolsonaro elismerte, hogy támogatást kért az egykori bankigazgatótól, de tagadta, hogy bármilyen jogsértést elkövetett volna.",
+        "actual": "Bolsonaro elismerte, hogy támogatást kért az egykori bankigazgatótól, de tagadta, hogy bármilyen jogsértést elkövetett volna.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 4836,
+        "end": 4961,
+        "expected": "Bolsonaro elismerte, hogy támogatást kért az egykori bankigazgatótól, de tagadta, hogy bármilyen jogsértést elkövetett volna.",
+        "actual": "Bolsonaro elismerte, hogy támogatást kért az egykori bankigazgatótól, de tagadta, hogy bármilyen jogsértést elkövetett volna.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 5759,
+        "end": 5975,
+        "expected": "Szerintük négy évvel ezelőtt a szélsőjobboldal okozott káoszt a fővárosban, Brazíliavárosban, miután Jair Bolsonaro hívei megpróbálták megpuccsolni a 2022-es választás eredményét és hatalomban tartani a volt elnököt.",
+        "actual": "Szerintük négy évvel ezelőtt a szélsőjobboldal okozott káoszt a fővárosban, Brazíliavárosban, miután Jair Bolsonaro hívei megpróbálták megpuccsolni a 2022-es választás eredményét és hatalomban tartani a volt elnököt.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 5977,
+        "end": 6165,
+        "expected": "Lulának most három hét alatt kellene leküzdenie az első fordulóban elszenvedett hátrányát, miközben a választók megélhetéssel és bűnözéssel kapcsolatos aggályaira is választ kellene adnia.",
+        "actual": "Lulának most három hét alatt kellene leküzdenie az első fordulóban elszenvedett hátrányát, miközben a választók megélhetéssel és bűnözéssel kapcsolatos aggályaira is választ kellene adnia.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 6166,
+        "end": 6332,
+        "expected": "Közben pedig a Guardian szerint a legfelsőbb bíróság bíráit érintő botrány annak ellenére árnyékot vetett Lula megítélésére is, hogy nincs köze az ügynek az elnökhöz.",
+        "actual": "Közben pedig a Guardian szerint a legfelsőbb bíróság bíráit érintő botrány annak ellenére árnyékot vetett Lula megítélésére is, hogy nincs köze az ügynek az elnökhöz.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 6520,
+        "end": 6602,
+        "expected": "Az ő reménysége a CNN szerint azokban lehet, akik vasárnap nem mentek el szavazni.",
+        "actual": "Az ő reménysége a CNN szerint azokban lehet, akik vasárnap nem mentek el szavazni.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 7657,
+        "end": 7785,
+        "expected": "Flávio Bolsonaro abban is reménykedik, hogy az elnöki poszt elnyerése lehetővé teszi, hogy kegyelemben részesítse elítélt apját.",
+        "actual": "Flávio Bolsonaro abban is reménykedik, hogy az elnöki poszt elnyerése lehetővé teszi, hogy kegyelemben részesítse elítélt apját.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 7787,
+        "end": 7948,
+        "expected": "Ezt meg is ígérte, ahogy azt is, hogy amnesztiát ajánl fel a 2023 elején a brazil kongresszus és a legfelsőbb bíróság épületébe is betörő Bolsonaro-támogatóknak.",
+        "actual": "Ezt meg is ígérte, ahogy azt is, hogy amnesztiát ajánl fel a 2023 elején a brazil kongresszus és a legfelsőbb bíróság épületébe is betörő Bolsonaro-támogatóknak.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 8276,
+        "end": 8416,
+        "expected": "Az ifjabb Bolsonaro egyébként nemcsak a leültetett apját mentené meg, hanem bosszút is állna a szerintük alaptalanul meghozott ítélet miatt.",
+        "actual": "Az ifjabb Bolsonaro egyébként nemcsak a leültetett apját mentené meg, hanem bosszút is állna a szerintük alaptalanul meghozott ítélet miatt.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 9656,
+        "end": 9798,
+        "expected": "A bűnözésre és a gazdaságra összpontosító kampányával négy százalékponttal többet szerzett, mint apjának sikerült 2022-ben az első fordulóban.",
+        "actual": "A bűnözésre és a gazdaságra összpontosító kampányával négy százalékponttal többet szerzett, mint apjának sikerült 2022-ben az első fordulóban.",
+        "ok": true
+      },
+      {
+        "kind": "semantic-frame",
+        "start": 14152,
+        "end": 14278,
+        "expected": "A CNN azt írta, hogy az első fordulót eldöntő csatatér az ország délkeleti része volt, ahol a választók közel 40 százaléka él.",
+        "actual": "A CNN azt írta, hogy az első fordulót eldöntő csatatér az ország délkeleti része volt, ahol a választók közel 40 százaléka él.",
+        "ok": true
+      }
+    ]
+  },
+  "prediction": {
+    "source": "real-world-003",
+    "entities": [
+      {
+        "mention": "Flávio Bolsonaro",
+        "normalized": "flávio bolsonaro",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Liberális Párt",
+        "normalized": "liberális párt",
+        "type": "organization",
+        "identity": "same"
+      },
+      {
+        "mention": "Szántó-Nagy Bálint\n       \n\n                 \nAz",
+        "normalized": "szántó-nagy bálint az",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Jair Bolsonaro",
+        "normalized": "jair bolsonaro",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Luiz Ináció Lula",
+        "normalized": "luiz ináció lula",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Munkáspártot",
+        "normalized": "munkáspártot",
+        "type": "organization",
+        "identity": "same"
+      },
+      {
+        "mention": "Flávio Bolsonaróhoz",
+        "normalized": "flávio bolsonaróhoz",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Ronaldo Caiado",
+        "normalized": "ronaldo caiado",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Renan Santos",
+        "normalized": "renan santos",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Freitast São Paulo",
+        "normalized": "freitast são paulo",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Ez Brazília",
+        "normalized": "ez brazília",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Banco Master",
+        "normalized": "banco master",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Jair Bolsonaróról",
+        "normalized": "jair bolsonaróról",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Viszont Lula",
+        "normalized": "viszont lula",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Luiz Inácio Lula",
+        "normalized": "luiz inácio lula",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Sebastiao Moreira",
+        "normalized": "sebastiao moreira",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "MTI\nLuiz Inácio Lula",
+        "normalized": "mti luiz inácio lula",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Lula Munkáspártja",
+        "normalized": "lula munkáspártja",
+        "type": "organization",
+        "identity": "same"
+      },
+      {
+        "mention": "Én Brazília",
+        "normalized": "én brazília",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Flávio Bolsonarónak",
+        "normalized": "flávio bolsonarónak",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "São Paulo",
+        "normalized": "são paulo",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Santa Bárbara",
+        "normalized": "santa bárbara",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "MTI\nFlávio Bolsonaro",
+        "normalized": "mti flávio bolsonaro",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Carlos Bolsonaro",
+        "normalized": "carlos bolsonaro",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Michelle Bolsonaro",
+        "normalized": "michelle bolsonaro",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Jair Renan",
+        "normalized": "jair renan",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Donald Trumppal",
+        "normalized": "donald trumppal",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Egyesült Államok Kínától",
+        "normalized": "egyesült államok kínától",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Marcelo Mac",
+        "normalized": "marcelo mac",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Jair Bolsonarónak",
+        "normalized": "jair bolsonarónak",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Italo Andrade",
+        "normalized": "italo andrade",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Rogerio Cunha",
+        "normalized": "rogerio cunha",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "São Paulót",
+        "normalized": "são paulót",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Minas Gerais-t",
+        "normalized": "minas gerais-t",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Minas Gerais-i",
+        "normalized": "minas gerais-i",
+        "type": "person",
+        "identity": "same"
+      },
+      {
+        "mention": "Guardian",
+        "normalized": "guardian",
+        "type": "organization",
+        "identity": "media"
+      },
+      {
+        "mention": "rendőrség",
+        "normalized": "rendőrség",
+        "type": "organization",
+        "identity": "media"
+      },
+      {
+        "mention": "ő reménysége a CNN",
+        "normalized": "ő reménysége a cnn",
+        "type": "organization",
+        "identity": "media"
+      },
+      {
+        "mention": "CNN",
+        "normalized": "cnn",
+        "type": "organization",
+        "identity": "media"
+      },
+      {
+        "mention": "Brazíliaváros",
+        "normalized": "brazíliaváros",
+        "type": "location",
+        "identity": "same"
+      }
+    ],
+    "numericMentions": [
+      {
+        "raw": "47,3 százalékot",
+        "value": 47.3,
+        "parsedValue": 47.3,
+        "multiplier": 1,
+        "canonicalValue": 47.3,
+        "unit": "%",
+        "canonicalUnit": "%",
+        "scale": null,
+        "valueKind": "absolute",
+        "semanticKind": "percentage_share",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 1064,
+        "end": 1079
+      },
+      {
+        "raw": "45,16 százalékot",
+        "value": 45.16,
+        "parsedValue": 45.16,
+        "multiplier": 1,
+        "canonicalValue": 45.16,
+        "unit": "%",
+        "canonicalUnit": "%",
+        "scale": null,
+        "valueKind": "absolute",
+        "semanticKind": "percentage_share",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 1096,
+        "end": 1112
+      },
+      {
+        "raw": "12 millió szavazót",
+        "value": 12000000,
+        "parsedValue": 12,
+        "multiplier": 1000000,
+        "canonicalValue": 12000000,
+        "unit": "person",
+        "canonicalUnit": "person",
+        "scale": "millió",
+        "valueKind": "lower_bound",
+        "semanticKind": "count",
+        "relationKind": null,
+        "qualifier": "lower_bound",
+        "start": 1250,
+        "end": 1268
+      },
+      {
+        "raw": "56,1 millió ember",
+        "value": 56100000,
+        "parsedValue": 56.1,
+        "multiplier": 1000000,
+        "canonicalValue": 56100000,
+        "unit": "person",
+        "canonicalUnit": "person",
+        "scale": "millió",
+        "valueKind": "absolute",
+        "semanticKind": "count",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 1299,
+        "end": 1316
+      },
+      {
+        "raw": "50 százalék",
+        "value": 50,
+        "parsedValue": 50,
+        "multiplier": 1,
+        "canonicalValue": 50,
+        "unit": "%",
+        "canonicalUnit": "%",
+        "scale": null,
+        "valueKind": "absolute",
+        "semanticKind": "threshold",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 1364,
+        "end": 1375
+      },
+      {
+        "raw": "45 éves",
+        "value": 45,
+        "parsedValue": 45,
+        "multiplier": 1,
+        "canonicalValue": 45,
+        "unit": "year",
+        "canonicalUnit": "year",
+        "scale": null,
+        "valueKind": "absolute",
+        "semanticKind": "age",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 1698,
+        "end": 1705
+      },
+      {
+        "raw": "2,1 százalékát",
+        "value": 2.1,
+        "parsedValue": 2.1,
+        "multiplier": 1,
+        "canonicalValue": 2.1,
+        "unit": "%",
+        "canonicalUnit": "%",
+        "scale": null,
+        "valueKind": "absolute",
+        "semanticKind": "percentage_share",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 3396,
+        "end": 3410
+      },
+      {
+        "raw": "2,2 százalékot",
+        "value": 2.2,
+        "parsedValue": 2.2,
+        "multiplier": 1,
+        "canonicalValue": 2.2,
+        "unit": "%",
+        "canonicalUnit": "%",
+        "scale": null,
+        "valueKind": "absolute",
+        "semanticKind": "percentage_share",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 3445,
+        "end": 3459
+      },
+      {
+        "raw": "5,3 millió szavazója",
+        "value": 5300000,
+        "parsedValue": 5.3,
+        "multiplier": 1000000,
+        "canonicalValue": 5300000,
+        "unit": "person",
+        "canonicalUnit": "person",
+        "scale": "millió",
+        "valueKind": "absolute",
+        "semanticKind": "count",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 3489,
+        "end": 3509
+      },
+      {
+        "raw": "21 százaléka",
+        "value": 21,
+        "parsedValue": 21,
+        "multiplier": 1,
+        "canonicalValue": 21,
+        "unit": "%",
+        "canonicalUnit": "%",
+        "scale": null,
+        "valueKind": "absolute",
+        "semanticKind": "percentage_share",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 6655,
+        "end": 6667
+      },
+      {
+        "raw": "27 éves",
+        "value": 27,
+        "parsedValue": 27,
+        "multiplier": 1,
+        "canonicalValue": 27,
+        "unit": "year",
+        "canonicalUnit": "year",
+        "scale": null,
+        "valueKind": "absolute",
+        "semanticKind": "age",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 7970,
+        "end": 7977
+      },
+      {
+        "raw": "45 éves",
+        "value": 45,
+        "parsedValue": 45,
+        "multiplier": 1,
+        "canonicalValue": 45,
+        "unit": "year",
+        "canonicalUnit": "year",
+        "scale": null,
+        "valueKind": "absolute",
+        "semanticKind": "age",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 8088,
+        "end": 8095
+      },
+      {
+        "raw": "159 millió brazil",
+        "value": 159000000,
+        "parsedValue": 159,
+        "multiplier": 1000000,
+        "canonicalValue": 159000000,
+        "unit": "person",
+        "canonicalUnit": "person",
+        "scale": "millió",
+        "valueKind": "absolute",
+        "semanticKind": "count",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 8425,
+        "end": 8442
+      },
+      {
+        "raw": "16 éves",
+        "value": 16,
+        "parsedValue": 16,
+        "multiplier": 1,
+        "canonicalValue": 16,
+        "unit": "year",
+        "canonicalUnit": "year",
+        "scale": null,
+        "valueKind": "absolute",
+        "semanticKind": "age",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 10995,
+        "end": 11002
+      },
+      {
+        "raw": "50 százalékos",
+        "value": 50,
+        "parsedValue": 50,
+        "multiplier": 1,
+        "canonicalValue": 50,
+        "unit": "%",
+        "canonicalUnit": "%",
+        "scale": null,
+        "valueKind": "absolute",
+        "semanticKind": "tariff_rate",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 11415,
+        "end": 11428
+      },
+      {
+        "raw": "31 éves",
+        "value": 31,
+        "parsedValue": 31,
+        "multiplier": 1,
+        "canonicalValue": 31,
+        "unit": "year",
+        "canonicalUnit": "year",
+        "scale": null,
+        "valueKind": "absolute",
+        "semanticKind": "age",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 13260,
+        "end": 13267
+      },
+      {
+        "raw": "40 százaléka",
+        "value": 40,
+        "parsedValue": 40,
+        "multiplier": 1,
+        "canonicalValue": 40,
+        "unit": "%",
+        "canonicalUnit": "%",
+        "scale": null,
+        "valueKind": "absolute",
+        "semanticKind": "percentage_share",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 14262,
+        "end": 14274
+      }
+    ],
+    "semanticFrames": [
+      {
+        "frameType": "decision/result",
+        "action": "election/result",
+        "actor": {
+          "mention": "Flávio Bolsonaro",
+          "normalized": "flávio bolsonaro",
+          "type": "person",
+          "identity": "same"
+        },
+        "subject": {
+          "mention": "Flávio Bolsonaro",
+          "normalized": "flávio bolsonaro",
+          "type": "person",
+          "identity": "same"
+        },
+        "object": null,
+        "target": null,
+        "role": "person",
+        "time": null,
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditionality": false,
+        "attribution": null,
+        "status": "observed",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "Az elítélt exelnök, Jair Bolsonaro szélsőjobboldali fia, Flávio Bolsonaro végzett az élen a brazil elnökválasztás vasárnapi első fordulójában.",
+        "evidenceSpan": {
+          "start": 536,
+          "end": 678,
+          "textSpan": "Az elítélt exelnök, Jair Bolsonaro szélsőjobboldali fia, Flávio Bolsonaro végzett az élen a brazil elnökválasztás vasárnapi első fordulójában."
+        }
+      },
+      {
+        "frameType": "decision/result",
+        "action": "election/result",
+        "actor": {
+          "mention": "Flávio Bolsonaro",
+          "normalized": "flávio bolsonaro",
+          "type": "person",
+          "identity": "same"
+        },
+        "subject": {
+          "mention": "Flávio Bolsonaro",
+          "normalized": "flávio bolsonaro",
+          "type": "person",
+          "identity": "same"
+        },
+        "object": null,
+        "target": null,
+        "role": "person",
+        "time": null,
+        "location": null,
+        "numericArguments": [
+          {
+            "raw": "47,3 százalékot",
+            "value": 47.3,
+            "parsedValue": 47.3,
+            "multiplier": 1,
+            "canonicalValue": 47.3,
+            "unit": "%",
+            "canonicalUnit": "%",
+            "scale": null,
+            "valueKind": "absolute",
+            "semanticKind": "percentage_share",
+            "relationKind": null,
+            "qualifier": null,
+            "start": 1064,
+            "end": 1079,
+            "subject": {
+              "mention": "Flávio Bolsonaro",
+              "normalized": "flávio bolsonaro",
+              "type": "person",
+              "identity": "same"
+            }
+          },
+          {
+            "raw": "45,16 százalékot",
+            "value": 45.16,
+            "parsedValue": 45.16,
+            "multiplier": 1,
+            "canonicalValue": 45.16,
+            "unit": "%",
+            "canonicalUnit": "%",
+            "scale": null,
+            "valueKind": "absolute",
+            "semanticKind": "percentage_share",
+            "relationKind": null,
+            "qualifier": null,
+            "start": 1096,
+            "end": 1112,
+            "subject": {
+              "mention": "Flávio Bolsonaro",
+              "normalized": "flávio bolsonaro",
+              "type": "person",
+              "identity": "same"
+            }
+          }
+        ],
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditionality": false,
+        "attribution": null,
+        "status": "observed",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "A szavazatok 100 százalékának feldolgozása után Flávio Bolsonaro 47,3 százalékot, míg Lula elnök 45,16 százalékot szerzett.",
+        "evidenceSpan": {
+          "start": 999,
+          "end": 1122,
+          "textSpan": "A szavazatok 100 százalékának feldolgozása után Flávio Bolsonaro 47,3 százalékot, míg Lula elnök 45,16 százalékot szerzett."
+        }
+      },
+      {
+        "frameType": "promise/plan",
+        "action": "promise/plan",
+        "actor": null,
+        "subject": null,
+        "object": null,
+        "target": null,
+        "role": null,
+        "time": null,
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditionality": false,
+        "attribution": null,
+        "status": "conditional",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "Bolsonaro már nagyon magabiztosan nyilatkozott, és előzetesen is úgy tűnt, hogy neki van több tartaléka a kiesett jelöltek szavazói között, de Lula várhatóan mindent megpróbál majd a következő három hétben.",
+        "evidenceSpan": {
+          "start": 1488,
+          "end": 1694,
+          "textSpan": "Bolsonaro már nagyon magabiztosan nyilatkozott, és előzetesen is úgy tűnt, hogy neki van több tartaléka a kiesett jelöltek szavazói között, de Lula várhatóan mindent megpróbál majd a következő három hétben."
+        }
+      },
+      {
+        "frameType": "decision/result",
+        "action": "election/result",
+        "actor": {
+          "mention": "Munkáspártot",
+          "normalized": "munkáspártot",
+          "type": "organization",
+          "identity": "same"
+        },
+        "subject": {
+          "mention": "Munkáspártot",
+          "normalized": "munkáspártot",
+          "type": "organization",
+          "identity": "same"
+        },
+        "object": null,
+        "target": null,
+        "role": "organization",
+        "time": null,
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "conditional",
+        "conditionality": true,
+        "attribution": null,
+        "status": "observed",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "Ez akkor is nagyon megnehezítené egy baloldali elnök, azaz a Munkáspártot vezető Lula kormányzását, ha mégis behúzza a második fordulót.",
+        "evidenceSpan": {
+          "start": 2047,
+          "end": 2183,
+          "textSpan": "Ez akkor is nagyon megnehezítené egy baloldali elnök, azaz a Munkáspártot vezető Lula kormányzását, ha mégis behúzza a második fordulót."
+        }
+      },
+      {
+        "frameType": "decision/result",
+        "action": "election/result",
+        "actor": {
+          "mention": "Renan Santos",
+          "normalized": "renan santos",
+          "type": "person",
+          "identity": "same"
+        },
+        "subject": {
+          "mention": "Renan Santos",
+          "normalized": "renan santos",
+          "type": "person",
+          "identity": "same"
+        },
+        "object": null,
+        "target": null,
+        "role": "person",
+        "time": null,
+        "location": null,
+        "numericArguments": [
+          {
+            "raw": "2,1 százalékát",
+            "value": 2.1,
+            "parsedValue": 2.1,
+            "multiplier": 1,
+            "canonicalValue": 2.1,
+            "unit": "%",
+            "canonicalUnit": "%",
+            "scale": null,
+            "valueKind": "absolute",
+            "semanticKind": "percentage_share",
+            "relationKind": null,
+            "qualifier": null,
+            "start": 3396,
+            "end": 3410,
+            "subject": {
+              "mention": "Ronaldo Caiado",
+              "normalized": "ronaldo caiado",
+              "type": "person",
+              "identity": "same"
+            }
+          },
+          {
+            "raw": "2,2 százalékot",
+            "value": 2.2,
+            "parsedValue": 2.2,
+            "multiplier": 1,
+            "canonicalValue": 2.2,
+            "unit": "%",
+            "canonicalUnit": "%",
+            "scale": null,
+            "valueKind": "absolute",
+            "semanticKind": "percentage_share",
+            "relationKind": null,
+            "qualifier": null,
+            "start": 3445,
+            "end": 3459,
+            "subject": {
+              "mention": "Renan Santos",
+              "normalized": "renan santos",
+              "type": "person",
+              "identity": "same"
+            }
+          }
+        ],
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditionality": false,
+        "attribution": null,
+        "status": "observed",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "A jobbos jelöltek között ott volt Ronaldo Caiado, aki a szavazatok 2,1 százalékát szerezte meg és Renan Santos, aki 2,2 százalékot kapott.",
+        "evidenceSpan": {
+          "start": 3329,
+          "end": 3467,
+          "textSpan": "A jobbos jelöltek között ott volt Ronaldo Caiado, aki a szavazatok 2,1 százalékát szerezte meg és Renan Santos, aki 2,2 százalékot kapott."
+        }
+      },
+      {
+        "frameType": "publication/report",
+        "action": "publication/report",
+        "actor": {
+          "mention": "Guardian",
+          "normalized": "guardian",
+          "type": "organization",
+          "identity": "media"
+        },
+        "subject": {
+          "mention": "Guardian",
+          "normalized": "guardian",
+          "type": "organization",
+          "identity": "media"
+        },
+        "object": null,
+        "target": null,
+        "role": "organization",
+        "time": null,
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditionality": false,
+        "attribution": {
+          "type": "reported",
+          "label": "Guardian"
+        },
+        "status": "reported",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "A Guardian szerint Lulának az is intő jel lehet, hogy a korábbi elnök fia által vezetett párt a kongresszusi és kormányzói választáson is jobban teljesített a vártnál.",
+        "evidenceSpan": {
+          "start": 3536,
+          "end": 3703,
+          "textSpan": "A Guardian szerint Lulának az is intő jel lehet, hogy a korábbi elnök fia által vezetett párt a kongresszusi és kormányzói választáson is jobban teljesített a vártnál."
+        }
+      },
+      {
+        "frameType": "promise/plan",
+        "action": "promise/plan",
+        "actor": null,
+        "subject": null,
+        "object": null,
+        "target": null,
+        "role": null,
+        "time": null,
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "quoted",
+        "conditionality": false,
+        "attribution": {
+          "type": "reported",
+          "label": "”"
+        },
+        "status": "conditional",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "” Szerinte a második forduló lesz az igazi megmérettetés, azt ígérte, hogy hétfőtől egy egészen új kampányt kezdenek.",
+        "evidenceSpan": {
+          "start": 4228,
+          "end": 4345,
+          "textSpan": "” Szerinte a második forduló lesz az igazi megmérettetés, azt ígérte, hogy hétfőtől egy egészen új kampányt kezdenek."
+        }
+      },
+      {
+        "frameType": "publication/report",
+        "action": "publication/report",
+        "actor": {
+          "mention": "rendőrség",
+          "normalized": "rendőrség",
+          "type": "organization",
+          "identity": "media"
+        },
+        "subject": {
+          "mention": "rendőrség",
+          "normalized": "rendőrség",
+          "type": "organization",
+          "identity": "media"
+        },
+        "object": {
+          "mention": "Flávio Bolsonaro",
+          "normalized": "flávio bolsonaro",
+          "type": "person",
+          "identity": "same"
+        },
+        "target": null,
+        "role": "organization",
+        "time": null,
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditionality": false,
+        "attribution": {
+          "type": "official",
+          "label": "rendőrség"
+        },
+        "status": "reported",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "A rendőrség szerint Flávio Bolsonaro pénzügyi támogatást kért a bank korábbi vezetőjétől a Jair Bolsonaróról készülő Sötét ló című filmhez.",
+        "evidenceSpan": {
+          "start": 4696,
+          "end": 4835,
+          "textSpan": "A rendőrség szerint Flávio Bolsonaro pénzügyi támogatást kért a bank korábbi vezetőjétől a Jair Bolsonaróról készülő Sötét ló című filmhez."
+        }
+      },
+      {
+        "frameType": "attribution/admission",
+        "action": "admission",
+        "actor": null,
+        "subject": null,
+        "object": null,
+        "target": null,
+        "role": null,
+        "time": null,
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditionality": false,
+        "attribution": null,
+        "status": "reported",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "Bolsonaro elismerte, hogy támogatást kért az egykori bankigazgatótól, de tagadta, hogy bármilyen jogsértést elkövetett volna.",
+        "evidenceSpan": {
+          "start": 4836,
+          "end": 4961,
+          "textSpan": "Bolsonaro elismerte, hogy támogatást kért az egykori bankigazgatótól, de tagadta, hogy bármilyen jogsértést elkövetett volna."
+        }
+      },
+      {
+        "frameType": "attribution/denial",
+        "action": "denial",
+        "actor": null,
+        "subject": null,
+        "object": null,
+        "target": null,
+        "role": null,
+        "time": null,
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditionality": false,
+        "attribution": null,
+        "status": "reported",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "Bolsonaro elismerte, hogy támogatást kért az egykori bankigazgatótól, de tagadta, hogy bármilyen jogsértést elkövetett volna.",
+        "evidenceSpan": {
+          "start": 4836,
+          "end": 4961,
+          "textSpan": "Bolsonaro elismerte, hogy támogatást kért az egykori bankigazgatótól, de tagadta, hogy bármilyen jogsértést elkövetett volna."
+        }
+      },
+      {
+        "frameType": "publication/report",
+        "action": "publication/report",
+        "actor": null,
+        "subject": null,
+        "object": {
+          "mention": "Brazíliaváros",
+          "normalized": "brazíliaváros",
+          "type": "location",
+          "identity": "same"
+        },
+        "target": null,
+        "role": null,
+        "time": {
+          "year": "2022",
+          "month": null,
+          "relative": null,
+          "sequence": null
+        },
+        "location": {
+          "mention": "Brazíliaváros",
+          "normalized": "brazíliaváros",
+          "type": "location",
+          "identity": "same"
+        },
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditionality": false,
+        "attribution": null,
+        "status": "reported",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "Szerintük négy évvel ezelőtt a szélsőjobboldal okozott káoszt a fővárosban, Brazíliavárosban, miután Jair Bolsonaro hívei megpróbálták megpuccsolni a 2022-es választás eredményét és hatalomban tartani a volt elnököt.",
+        "evidenceSpan": {
+          "start": 5759,
+          "end": 5975,
+          "textSpan": "Szerintük négy évvel ezelőtt a szélsőjobboldal okozott káoszt a fővárosban, Brazíliavárosban, miután Jair Bolsonaro hívei megpróbálták megpuccsolni a 2022-es választás eredményét és hatalomban tartani a volt elnököt."
+        }
+      },
+      {
+        "frameType": "promise/plan",
+        "action": "promise/plan",
+        "actor": null,
+        "subject": null,
+        "object": null,
+        "target": null,
+        "role": null,
+        "time": null,
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditionality": false,
+        "attribution": null,
+        "status": "conditional",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "Lulának most három hét alatt kellene leküzdenie az első fordulóban elszenvedett hátrányát, miközben a választók megélhetéssel és bűnözéssel kapcsolatos aggályaira is választ kellene adnia.",
+        "evidenceSpan": {
+          "start": 5977,
+          "end": 6165,
+          "textSpan": "Lulának most három hét alatt kellene leküzdenie az első fordulóban elszenvedett hátrányát, miközben a választók megélhetéssel és bűnözéssel kapcsolatos aggályaira is választ kellene adnia."
+        }
+      },
+      {
+        "frameType": "publication/report",
+        "action": "publication/report",
+        "actor": {
+          "mention": "Guardian",
+          "normalized": "guardian",
+          "type": "organization",
+          "identity": "media"
+        },
+        "subject": {
+          "mention": "Guardian",
+          "normalized": "guardian",
+          "type": "organization",
+          "identity": "media"
+        },
+        "object": null,
+        "target": {
+          "mention": "Guardian",
+          "normalized": "guardian",
+          "type": "organization",
+          "identity": "media"
+        },
+        "role": "organization",
+        "time": null,
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditionality": false,
+        "attribution": {
+          "type": "expert",
+          "label": "Guardian"
+        },
+        "status": "reported",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "Közben pedig a Guardian szerint a legfelsőbb bíróság bíráit érintő botrány annak ellenére árnyékot vetett Lula megítélésére is, hogy nincs köze az ügynek az elnökhöz.",
+        "evidenceSpan": {
+          "start": 6166,
+          "end": 6332,
+          "textSpan": "Közben pedig a Guardian szerint a legfelsőbb bíróság bíráit érintő botrány annak ellenére árnyékot vetett Lula megítélésére is, hogy nincs köze az ügynek az elnökhöz."
+        }
+      },
+      {
+        "frameType": "publication/report",
+        "action": "publication/report",
+        "actor": {
+          "mention": "CNN",
+          "normalized": "cnn",
+          "type": "organization",
+          "identity": "media"
+        },
+        "subject": {
+          "mention": "CNN",
+          "normalized": "cnn",
+          "type": "organization",
+          "identity": "media"
+        },
+        "object": null,
+        "target": null,
+        "role": "organization",
+        "time": null,
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditionality": false,
+        "attribution": {
+          "type": "reported",
+          "label": "CNN"
+        },
+        "status": "reported",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "Az ő reménysége a CNN szerint azokban lehet, akik vasárnap nem mentek el szavazni.",
+        "evidenceSpan": {
+          "start": 6520,
+          "end": 6602,
+          "textSpan": "Az ő reménysége a CNN szerint azokban lehet, akik vasárnap nem mentek el szavazni."
+        }
+      },
+      {
+        "frameType": "promise/plan",
+        "action": "promise/plan",
+        "actor": {
+          "mention": "Flávio Bolsonaro",
+          "normalized": "flávio bolsonaro",
+          "type": "person",
+          "identity": "same"
+        },
+        "subject": {
+          "mention": "Flávio Bolsonaro",
+          "normalized": "flávio bolsonaro",
+          "type": "person",
+          "identity": "same"
+        },
+        "object": null,
+        "target": null,
+        "role": "person",
+        "time": null,
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditionality": false,
+        "attribution": null,
+        "status": "conditional",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "Flávio Bolsonaro abban is reménykedik, hogy az elnöki poszt elnyerése lehetővé teszi, hogy kegyelemben részesítse elítélt apját.",
+        "evidenceSpan": {
+          "start": 7657,
+          "end": 7785,
+          "textSpan": "Flávio Bolsonaro abban is reménykedik, hogy az elnöki poszt elnyerése lehetővé teszi, hogy kegyelemben részesítse elítélt apját."
+        }
+      },
+      {
+        "frameType": "promise/plan",
+        "action": "promise/plan",
+        "actor": null,
+        "subject": null,
+        "object": null,
+        "target": null,
+        "role": null,
+        "time": {
+          "year": "2023",
+          "month": null,
+          "relative": null,
+          "sequence": null
+        },
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditionality": false,
+        "attribution": null,
+        "status": "conditional",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "Ezt meg is ígérte, ahogy azt is, hogy amnesztiát ajánl fel a 2023 elején a brazil kongresszus és a legfelsőbb bíróság épületébe is betörő Bolsonaro-támogatóknak.",
+        "evidenceSpan": {
+          "start": 7787,
+          "end": 7948,
+          "textSpan": "Ezt meg is ígérte, ahogy azt is, hogy amnesztiát ajánl fel a 2023 elején a brazil kongresszus és a legfelsőbb bíróság épületébe is betörő Bolsonaro-támogatóknak."
+        }
+      },
+      {
+        "frameType": "publication/report",
+        "action": "publication/report",
+        "actor": null,
+        "subject": null,
+        "object": null,
+        "target": null,
+        "role": null,
+        "time": null,
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "reported",
+        "conditionality": false,
+        "attribution": {
+          "type": "reported",
+          "label": "hanem bosszút is állna a"
+        },
+        "status": "reported",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "Az ifjabb Bolsonaro egyébként nemcsak a leültetett apját mentené meg, hanem bosszút is állna a szerintük alaptalanul meghozott ítélet miatt.",
+        "evidenceSpan": {
+          "start": 8276,
+          "end": 8416,
+          "textSpan": "Az ifjabb Bolsonaro egyébként nemcsak a leültetett apját mentené meg, hanem bosszút is állna a szerintük alaptalanul meghozott ítélet miatt."
+        }
+      },
+      {
+        "frameType": "decision/result",
+        "action": "election/result",
+        "actor": null,
+        "subject": null,
+        "object": null,
+        "target": null,
+        "role": null,
+        "time": {
+          "year": "2022",
+          "month": null,
+          "relative": null,
+          "sequence": null
+        },
+        "location": null,
+        "numericArguments": [],
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditionality": false,
+        "attribution": null,
+        "status": "observed",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "A bűnözésre és a gazdaságra összpontosító kampányával négy százalékponttal többet szerzett, mint apjának sikerült 2022-ben az első fordulóban.",
+        "evidenceSpan": {
+          "start": 9656,
+          "end": 9798,
+          "textSpan": "A bűnözésre és a gazdaságra összpontosító kampányával négy százalékponttal többet szerzett, mint apjának sikerült 2022-ben az első fordulóban."
+        }
+      },
+      {
+        "frameType": "publication/report",
+        "action": "publication/report",
+        "actor": {
+          "mention": "CNN",
+          "normalized": "cnn",
+          "type": "organization",
+          "identity": "media"
+        },
+        "subject": {
+          "mention": "CNN",
+          "normalized": "cnn",
+          "type": "organization",
+          "identity": "media"
+        },
+        "object": null,
+        "target": null,
+        "role": "organization",
+        "time": null,
+        "location": null,
+        "numericArguments": [
+          {
+            "raw": "40 százaléka",
+            "value": 40,
+            "parsedValue": 40,
+            "multiplier": 1,
+            "canonicalValue": 40,
+            "unit": "%",
+            "canonicalUnit": "%",
+            "scale": null,
+            "valueKind": "absolute",
+            "semanticKind": "percentage_share",
+            "relationKind": null,
+            "qualifier": null,
+            "start": 14262,
+            "end": 14274,
+            "subject": {
+              "mention": "CNN",
+              "normalized": "cnn",
+              "type": "organization",
+              "identity": "media"
+            }
+          }
+        ],
+        "polarity": "affirmed",
+        "modality": "asserted",
+        "conditionality": false,
+        "attribution": null,
+        "status": "reported",
+        "canonicalPredicate": null,
+        "routingConfidence": 0.72,
+        "confidencePurpose": "routing_only",
+        "semanticGrounding": "semantically_entailed",
+        "evidence": "A CNN azt írta, hogy az első fordulót eldöntő csatatér az ország délkeleti része volt, ahol a választók közel 40 százaléka él.",
+        "evidenceSpan": {
+          "start": 14152,
+          "end": 14278,
+          "textSpan": "A CNN azt írta, hogy az első fordulót eldöntő csatatér az ország délkeleti része volt, ahol a választók közel 40 százaléka él."
+        }
+      }
+    ],
+    "claims": [],
+    "relations": [],
+    "events": [],
+    "conflicts": [],
+    "changes": [],
+    "omissions": []
+  }
+}

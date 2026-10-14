@@ -1,0 +1,302 @@
+[
+  {
+    "id": "A",
+    "domain": "választási adminisztráció",
+    "sentences": [
+      "Boros Katalin a külképviseletek vezetőinek kiosztotta a lezárt szavazási csomagokat, majd személyesen ellenőrizte a pecséteket.",
+      "A választási iroda hirdetménye úgy rendelkezik, hogy igazolt akadályoztatás esetén minimum 48 órával meghosszabbítható az átvétel.",
+      "A végleges névsort 2032. április 9-én tették borítékba, az összeállító nevét azonban nem tüntették fel."
+    ],
+    "text": "Boros Katalin a külképviseletek vezetőinek kiosztotta a lezárt szavazási csomagokat, majd személyesen ellenőrizte a pecséteket. A választási iroda hirdetménye úgy rendelkezik, hogy igazolt akadályoztatás esetén minimum 48 órával meghosszabbítható az átvétel. A végleges névsort 2032. április 9-én tették borítékba, az összeállító nevét azonban nem tüntették fel.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "B",
+    "domain": "városüzemeltetés",
+    "sentences": [
+      "A tizenegyedik kerület gondnokai a közös udvar kulcsát a lakóközösség megbízottjának vitték vissza.",
+      "A költségvetési függelékben nem 9 millió, hanem 11 millió forintot különítettek el árnyékolókra; a bejegyzés szerzője ismeretlen.",
+      "A két névtelen ajánlat közül az egyiket sürgősnek jelölték, de az árát nem rendelték hozzá az ajánlat azonosítójához."
+    ],
+    "text": "A tizenegyedik kerület gondnokai a közös udvar kulcsát a lakóközösség megbízottjának vitték vissza. A költségvetési függelékben nem 9 millió, hanem 11 millió forintot különítettek el árnyékolókra; a bejegyzés szerzője ismeretlen. A két névtelen ajánlat közül az egyiket sürgősnek jelölték, de az árát nem rendelték hozzá az ajánlat azonosítójához.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "C",
+    "domain": "biztosítás",
+    "sentences": [
+      "Az ügyfélnek Varga Noémi kárszakértő magyarázta el: „Áradás után a pince biztosítása nem szűnik meg automatikusan.”",
+      "A biztosító feltétellapjából az olvasható ki, hogy beázáskor a térítés elérheti a 650 ezer forintot, de az önrész 12 százalék marad.",
+      "Egy kézzel odavetett „Hetedik” szó mellől hiányzik, hogy ügyfelet vagy szerződést soroltak-e be."
+    ],
+    "text": "Az ügyfélnek Varga Noémi kárszakértő magyarázta el: „Áradás után a pince biztosítása nem szűnik meg automatikusan.” A biztosító feltétellapjából az olvasható ki, hogy beázáskor a térítés elérheti a 650 ezer forintot, de az önrész 12 százalék marad. Egy kézzel odavetett „Hetedik” szó mellől hiányzik, hogy ügyfelet vagy szerződést soroltak-e be.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "D",
+    "domain": "banki szolgáltatások",
+    "sentences": [
+      "A Pannon Takarék fiókhálózata július 6-tól szeptember 2-ig próbarendben fogadja az ügyfeleket.",
+      "Nem a kamatot, hanem a számlavezetés díját csökkentenék, amennyiben legalább hatezer ügyfél választ elektronikus kivonatot.",
+      "„Erről már döntöttek” – hallatszott a folyosón, de a beszélőt senki sem látta."
+    ],
+    "text": "A Pannon Takarék fiókhálózata július 6-tól szeptember 2-ig próbarendben fogadja az ügyfeleket. Nem a kamatot, hanem a számlavezetés díját csökkentenék, amennyiben legalább hatezer ügyfél választ elektronikus kivonatot. „Erről már döntöttek” – hallatszott a folyosón, de a beszélőt senki sem látta.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "E",
+    "domain": "állásközvetítés",
+    "sentences": [
+      "A pályakezdők mentorának asszisztense tizenhárom önéletrajzot továbbított a szállodának.",
+      "A toborzási ügynökség helyesbített: nem 28, hanem 34 jelentkezőt hívtak be, közülük kilencen még tanulnak.",
+      "A visszautasító levelek szerda délig lettek kiküldve, a kiküldést végző munkatársat nem nevezték meg."
+    ],
+    "text": "A pályakezdők mentorának asszisztense tizenhárom önéletrajzot továbbított a szállodának. A toborzási ügynökség helyesbített: nem 28, hanem 34 jelentkezőt hívtak be, közülük kilencen még tanulnak. A visszautasító levelek szerda délig lettek kiküldve, a kiküldést végző munkatársat nem nevezték meg.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "F",
+    "domain": "távhő",
+    "sentences": [
+      "Hidegindításkor a kazán másodpercenként kevesebb mint fél kilogramm pelletet égethet el a gyártó üzemnaplója szerint.",
+      "A mérnök a felügyelőnek külön megjegyezte, hogy az égőt nem szabad kézzel újragyújtani.",
+      "A margón két szám, 14 és 19 áll egység és megnevezett alkatrész nélkül."
+    ],
+    "text": "Hidegindításkor a kazán másodpercenként kevesebb mint fél kilogramm pelletet égethet el a gyártó üzemnaplója szerint. A mérnök a felügyelőnek külön megjegyezte, hogy az égőt nem szabad kézzel újragyújtani. A margón két szám, 14 és 19 áll egység és megnevezett alkatrész nélkül.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "G",
+    "domain": "vasút",
+    "sentences": [
+      "A pályamester adatai szerint a síncsiszoló percenként 240 méternél többet nem haladhat a zajvédelmi szakaszon.",
+      "Rostás Lénárd diszpécser 04:25-kor engedélyezte a kihaladást, utána a menetíró elnémult.",
+      "A javítási lapon az szerepel, hogy kicserélték a biztosítékot, de szerelőt nem rögzítettek."
+    ],
+    "text": "A pályamester adatai szerint a síncsiszoló percenként 240 méternél többet nem haladhat a zajvédelmi szakaszon. Rostás Lénárd diszpécser 04:25-kor engedélyezte a kihaladást, utána a menetíró elnémult. A javítási lapon az szerepel, hogy kicserélték a biztosítékot, de szerelőt nem rögzítettek.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "H",
+    "domain": "katasztrófavédelem",
+    "sentences": [
+      "A tűzoltók az óvoda udvarából kimenekítették a kertész kutyáját, miközben a szomszédok az utat locsolták.",
+      "„A palack nem robbant fel” – közölte az ügyeletes a rádiós szerkesztővel, aki ezt azonnal beolvasta.",
+      "A beavatkozás a riasztást követő nyolcadik percben kezdődött; a riasztó személy kiléte nem derült ki."
+    ],
+    "text": "A tűzoltók az óvoda udvarából kimenekítették a kertész kutyáját, miközben a szomszédok az utat locsolták. „A palack nem robbant fel” – közölte az ügyeletes a rádiós szerkesztővel, aki ezt azonnal beolvasta. A beavatkozás a riasztást követő nyolcadik percben kezdődött; a riasztó személy kiléte nem derült ki.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "I",
+    "domain": "vívás",
+    "sentences": [
+      "Sallai Zsófia a negyedik asszóban fordított, az összesített listán viszont hatodik lett.",
+      "A zsűri pontozólapjából kiderül, hogy csapata nem bronzot, hanem ezüstöt kapott; az edző mégis óvást nyújtott be.",
+      "A juniorok lapján csak annyi olvasható: „Ötödik lett”, név és versenyszám nélkül."
+    ],
+    "text": "Sallai Zsófia a negyedik asszóban fordított, az összesített listán viszont hatodik lett. A zsűri pontozólapjából kiderül, hogy csapata nem bronzot, hanem ezüstöt kapott; az edző mégis óvást nyújtott be. A juniorok lapján csak annyi olvasható: „Ötödik lett”, név és versenyszám nélkül.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "J",
+    "domain": "gyógyszerellátás",
+    "sentences": [
+      "A gyógyszerész szerint a járási rendelő nem adhatja át a hűtést igénylő ampullákat futárnak.",
+      "Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad, a készítmény 36 óráig felhasználható lehet.",
+      "A lezáratlan címkén egyetlen aláírás sem szerepelt, így a csomagoló személyét nem lehetett megállapítani."
+    ],
+    "text": "A gyógyszerész szerint a járási rendelő nem adhatja át a hűtést igénylő ampullákat futárnak. Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad, a készítmény 36 óráig felhasználható lehet. A lezáratlan címkén egyetlen aláírás sem szerepelt, így a csomagoló személyét nem lehetett megállapítani.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "K",
+    "domain": "szakképzés",
+    "sentences": [
+      "Az iskola műhelymestere a tanoncoknak átadta a marógép kezelési útmutatóját, és felolvasta a biztonsági részt.",
+      "Az útmutató szerint felügyelet mellett maximum három munkadarabot lehet egyszerre befogni, de a kiadó neve lemaradt.",
+      "Az egyik értékelőlapon „Harmadik” áll; nincs jelölve, hogy vizsganapot vagy tanulói helyezést jelent."
+    ],
+    "text": "Az iskola műhelymestere a tanoncoknak átadta a marógép kezelési útmutatóját, és felolvasta a biztonsági részt. Az útmutató szerint felügyelet mellett maximum három munkadarabot lehet egyszerre befogni, de a kiadó neve lemaradt. Az egyik értékelőlapon „Harmadik” áll; nincs jelölve, hogy vizsganapot vagy tanulói helyezést jelent.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "L",
+    "domain": "űrkutatás",
+    "sentences": [
+      "A csillagvizsgáló műszerkönyvében a kutatók nem 0,8, hanem 1,1 milliméteres elmozdulást jegyeztek fel a tükörnél.",
+      "A programvezető levelét idézve a szóvivő kijelentette, hogy a pályakorrekciót még nem rendelték el.",
+      "A korábbi jeladó leválasztása után megszakadt a vétel, a leválasztó parancs kiadóját nem azonosították."
+    ],
+    "text": "A csillagvizsgáló műszerkönyvében a kutatók nem 0,8, hanem 1,1 milliméteres elmozdulást jegyeztek fel a tükörnél. A programvezető levelét idézve a szóvivő kijelentette, hogy a pályakorrekciót még nem rendelték el. A korábbi jeladó leválasztása után megszakadt a vétel, a leválasztó parancs kiadóját nem azonosították.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "M",
+    "domain": "szennyvízkezelés",
+    "sentences": [
+      "A telep üzemviteli kartonja a membrán négyzetméterére óránként 27 liter átfolyást ír elő, nem a teljes berendezésre.",
+      "Nyomáseséskor ez az érték legfeljebb 18 literre mérséklődhet ugyanilyen terület és idő mellett.",
+      "A szelepet estére lezárták, de a műszakátadásból nem derül ki, ki végezte a műveletet."
+    ],
+    "text": "A telep üzemviteli kartonja a membrán négyzetméterére óránként 27 liter átfolyást ír elő, nem a teljes berendezésre. Nyomáseséskor ez az érték legfeljebb 18 literre mérséklődhet ugyanilyen terület és idő mellett. A szelepet estére lezárták, de a műszakátadásból nem derül ki, ki végezte a műveletet.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "N",
+    "domain": "méhészet",
+    "sentences": [
+      "A méhészeti egyesület titkára szerint a vándoroltatók kaptáronként nagyjából 23 kilogramm mézet pergettek.",
+      "Kerekes Dénes a második pergetésből 16 üveget ajándékozott a falugondnoknak, a címkén június 12. szerepelt.",
+      "A maradékot valamikor később vitték el, de a napot nem jegyezték fel."
+    ],
+    "text": "A méhészeti egyesület titkára szerint a vándoroltatók kaptáronként nagyjából 23 kilogramm mézet pergettek. Kerekes Dénes a második pergetésből 16 üveget ajándékozott a falugondnoknak, a címkén június 12. szerepelt. A maradékot valamikor később vitték el, de a napot nem jegyezték fel.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "O",
+    "domain": "javítószolgáltatás",
+    "sentences": [
+      "A szerviz díjtáblázatából az derül ki, hogy a kiszállás megkezdett félóránként 7400 forintba kerülhet, ha hétvégén hívják a szerelőt.",
+      "Nem a tulajdonos, hanem a bérlő kérte a javítást, és a szerelőnek előleget adott.",
+      "A munkalap jobb felső sarkában 5200 szerepel, de nincs mellette pénznem vagy tételmegnevezés."
+    ],
+    "text": "A szerviz díjtáblázatából az derül ki, hogy a kiszállás megkezdett félóránként 7400 forintba kerülhet, ha hétvégén hívják a szerelőt. Nem a tulajdonos, hanem a bérlő kérte a javítást, és a szerelőnek előleget adott. A munkalap jobb felső sarkában 5200 szerepel, de nincs mellette pénznem vagy tételmegnevezés.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "P",
+    "domain": "színház",
+    "sentences": [
+      "A vendégrendező a főpróba harmadik napján cserélte fel a jelenetek sorrendjét, a súgó pedig új példányokat osztott szét.",
+      "„A szünet nem rövidül” – mondta a társulat ügyelője a büfésnek, majd a hangosbemondó is ezt ismételte.",
+      "Az öltözőben talált cetlin nem 7, hanem 10 állt, tárgy és mértékegység nélkül."
+    ],
+    "text": "A vendégrendező a főpróba harmadik napján cserélte fel a jelenetek sorrendjét, a súgó pedig új példányokat osztott szét. „A szünet nem rövidül” – mondta a társulat ügyelője a büfésnek, majd a hangosbemondó is ezt ismételte. Az öltözőben talált cetlin nem 7, hanem 10 állt, tárgy és mértékegység nélkül.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "Q",
+    "domain": "régészet",
+    "sentences": [
+      "A feltárás vezetőjének terepnaplója alapján a segítők az ötödik rétegből emelték ki a csatot.",
+      "A lelet nem ezüstből, hanem ónból készült, tömege a restaurátor szerint hozzávetőleg 42 gramm.",
+      "A mellette heverő másik tárgyat nem mérték meg, így ahhoz tömegadatot nem lehet rendelni."
+    ],
+    "text": "A feltárás vezetőjének terepnaplója alapján a segítők az ötödik rétegből emelték ki a csatot. A lelet nem ezüstből, hanem ónból készült, tömege a restaurátor szerint hozzávetőleg 42 gramm. A mellette heverő másik tárgyat nem mérték meg, így ahhoz tömegadatot nem lehet rendelni.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "R",
+    "domain": "vadgazdálkodás",
+    "sentences": [
+      "A vadőr a turistáknak azt felelte, hogy a kerítésen belül nem etethetik az állatokat.",
+      "A számlálási ív 67 szarvast sorol fel, de a természetvédelmi őr szerint közülük legalább nyolc ugyanaz az állat lehet kétszer rögzítve.",
+      "Az ív készítőjéről sem név, sem szervezet nem szerepel a lapon."
+    ],
+    "text": "A vadőr a turistáknak azt felelte, hogy a kerítésen belül nem etethetik az állatokat. A számlálási ív 67 szarvast sorol fel, de a természetvédelmi őr szerint közülük legalább nyolc ugyanaz az állat lehet kétszer rögzítve. Az ív készítőjéről sem név, sem szervezet nem szerepel a lapon.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "S",
+    "domain": "távközlés",
+    "sentences": [
+      "A hálózati kártya adatlapja 2,4 gigabitet ad meg másodpercenként, de ezt a labor munkatársai még nem igazolták.",
+      "A mérési felelős az ügyfélszolgálatnak azt írta, hogy csúcsidőben akár 35 százalékkal is visszaeshet az átvitel, nem pedig 35 százalékra.",
+      "Az adatlap gyártója nem azonosítható a hiányos fejlécből."
+    ],
+    "text": "A hálózati kártya adatlapja 2,4 gigabitet ad meg másodpercenként, de ezt a labor munkatársai még nem igazolták. A mérési felelős az ügyfélszolgálatnak azt írta, hogy csúcsidőben akár 35 százalékkal is visszaeshet az átvitel, nem pedig 35 százalékra. Az adatlap gyártója nem azonosítható a hiányos fejlécből.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "T",
+    "domain": "határigazgatás",
+    "sentences": [
+      "Bécs új feltételeket kért a közös ellenőrzéshez, de a táviratból nem látszik, melyik osztrák szerv fogalmazta meg őket.",
+      "A határőrség szóvivője a minisztérium levelére hivatkozva közölte, hogy nem január 15-én, hanem február 1-jén kezdődhet az összehangolás.",
+      "Az indulást a kétoldalú megállapodás aláírásához kötötték."
+    ],
+    "text": "Bécs új feltételeket kért a közös ellenőrzéshez, de a táviratból nem látszik, melyik osztrák szerv fogalmazta meg őket. A határőrség szóvivője a minisztérium levelére hivatkozva közölte, hogy nem január 15-én, hanem február 1-jén kezdődhet az összehangolás. Az indulást a kétoldalú megállapodás aláírásához kötötték.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "U",
+    "domain": "könyvkiadás",
+    "sentences": [
+      "A szerkesztőség hibajegyzéke szerint nem Sárközi Ilona, hanem Mészáros Hanna fordította a függeléket.",
+      "A harmadik kiadás előjegyzéséért 6800 forintot kérnek, miközben az első kiadásból megmaradt 22 példányt ingyen adják át az iskolának.",
+      "A névtelen ajánló a legjobbnak nevezi a kötetet, de nem derül ki, ki írta és milyen összehasonlításban."
+    ],
+    "text": "A szerkesztőség hibajegyzéke szerint nem Sárközi Ilona, hanem Mészáros Hanna fordította a függeléket. A harmadik kiadás előjegyzéséért 6800 forintot kérnek, miközben az első kiadásból megmaradt 22 példányt ingyen adják át az iskolának. A névtelen ajánló a legjobbnak nevezi a kötetet, de nem derül ki, ki írta és milyen összehasonlításban.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "V",
+    "domain": "zenei verseny",
+    "sentences": [
+      "A döntő eredménylapján Hegedűs Áron mögött Fodor Mira következik, akit a zsűri a második helyre sorolt.",
+      "A közönségszavazásban viszont Mira első, Áron harmadik; a két lista nem vonható össze.",
+      "A záróbeszédet nem a zsűri, hanem a műsorvezető olvasta fel, a szöveg íróját nem nevezték meg."
+    ],
+    "text": "A döntő eredménylapján Hegedűs Áron mögött Fodor Mira következik, akit a zsűri a második helyre sorolt. A közönségszavazásban viszont Mira első, Áron harmadik; a két lista nem vonható össze. A záróbeszédet nem a zsűri, hanem a műsorvezető olvasta fel, a szöveg íróját nem nevezték meg.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "W",
+    "domain": "hulladékgazdálkodás",
+    "sentences": [
+      "A szelektáló brigád a műszak első szakaszában 1,7 tonna papírt különített el, majd a műanyagokhoz vonult.",
+      "A vállalkozó fuvarlevele alapján a konténer tömege 600 kilogrammal lett kisebb, nem 600 kilogrammra csökkent.",
+      "Az elszállítás után valaki átírta a mérlegjegyet; az új érték mellett nincs aláírás."
+    ],
+    "text": "A szelektáló brigád a műszak első szakaszában 1,7 tonna papírt különített el, majd a műanyagokhoz vonult. A vállalkozó fuvarlevele alapján a konténer tömege 600 kilogrammal lett kisebb, nem 600 kilogrammra csökkent. Az elszállítás után valaki átírta a mérlegjegyet; az új érték mellett nincs aláírás.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "X",
+    "domain": "élelmiszerbiztonság",
+    "sentences": [
+      "A laboráns a pékség vezetőjének cáfolta, hogy a kovászban tiltott adalékot találtak volna.",
+      "A hatóság ellenőrzési lapja nem a tulajdonostól, hanem a műszakvezetőtől származó tájékoztatást idézi: a kemencét 2027-ben cserélhetik ki.",
+      "Az egyik mintát a másik mellé tették; a sorszámok hiányában nem állapítható meg, melyikből vették a második részmintát."
+    ],
+    "text": "A laboráns a pékség vezetőjének cáfolta, hogy a kovászban tiltott adalékot találtak volna. A hatóság ellenőrzési lapja nem a tulajdonostól, hanem a műszakvezetőtől származó tájékoztatást idézi: a kemencét 2027-ben cserélhetik ki. Az egyik mintát a másik mellé tették; a sorszámok hiányában nem állapítható meg, melyikből vették a második részmintát.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  },
+  {
+    "id": "Y",
+    "domain": "szálláshely-szolgáltatás",
+    "sentences": [
+      "A panzió vendégkönyvéből idézett a recepciós: „Ha visszatérnénk, legalább öt éjszakát maradnánk.”",
+      "A foglalási rendszer naplója 18 százalékról 26 százalékra emelkedő hétköznapi kihasználtságot jelez, a növekmény tehát nyolc százalékpont.",
+      "A bejegyzéshez nem tartozik név, a recepciós pedig nem tudta azonosítani az idézett vendéget."
+    ],
+    "text": "A panzió vendégkönyvéből idézett a recepciós: „Ha visszatérnénk, legalább öt éjszakát maradnánk.” A foglalási rendszer naplója 18 százalékról 26 százalékra emelkedő hétköznapi kihasználtságot jelez, a növekmény tehát nyolc százalékpont. A bejegyzéshez nem tartozik név, a recepciós pedig nem tudta azonosítani az idézett vendéget.",
+    "authoredSentenceCount": 3,
+    "origin": "new assistant-authored synthetic measurement text; not published news"
+  }
+]

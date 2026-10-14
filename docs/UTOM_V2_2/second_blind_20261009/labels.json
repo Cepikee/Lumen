@@ -1,0 +1,902 @@
+[
+  {
+    "id": "P1",
+    "snippet": "P",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "WRONG_RESOLVED",
+    "outputReference": "P.output.frames[0].source/sourceEvidence",
+    "reason": "értesülése is emitted as resolved attribution_source; publication possessor and inner spokesman chain are lost. A report noun is not the speaker.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "P2",
+    "snippet": "P",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "P.output.frames[1].actor",
+    "reason": "Cabinet actor missing; no positive substitute.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "P3",
+    "snippet": "P",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "P.output.frames[1].numericArguments[0]",
+    "reason": "December 3 year null, resolved date, dependency target tárgyalja.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "P4",
+    "snippet": "P",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "P.output.frames[2].contrasts[0]",
+    "reason": "Alternatives retained but contrast/actor unresolved; no resolved minister leak.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "P5",
+    "snippet": "P",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "P.output.frames[3].polarity",
+    "reason": "Denied support confined to opposition frame.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "P6",
+    "snippet": "P",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "P.output.entities[0]",
+    "reason": "Exact Reggeli Hír organization span, no person split.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "M1",
+    "snippet": "M",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "M.output.entities[0]",
+    "reason": "Kovács Ilona exact PER; title excluded from name.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "M2",
+    "snippet": "M",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "M.output.frames[0].source/recipient",
+    "reason": "Source is local polgármester and recipient képviselőknek; no structured link from title to named Kovács Ilona. Partial source recovery, not a different fabricated speaker.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "M3",
+    "snippet": "M",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "M.output.frames[0].numericArguments[1]",
+    "reason": "64 count owned by bérlakást, attached to felújít.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "M4",
+    "snippet": "M",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "M.output.frames[0].numericArguments[0]",
+    "reason": "2029 temporal year on renovation predicate.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "M5",
+    "snippet": "M",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "M.output.frames[1].numericArguments[0]",
+    "reason": "Ordinal 4 owned by kerületben, not ranking.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "M6",
+    "snippet": "M",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "M.output.frames[1].numericArguments[1]",
+    "reason": "July/end with null year/day, boundary and exact governing path.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "E1",
+    "snippet": "E",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "E.output.frames[0].actor",
+    "reason": "Delta Alap named actor, nsubj path to vásárolt.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "E2",
+    "snippet": "E",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "E.output.frames[0].numericArguments[0]",
+    "reason": "22 % property share owned by részesedést.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "E3",
+    "snippet": "E",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "E.output.frames[1].numericArguments[0]",
+    "reason": "8 % and esett predicate retained, but no change-magnitude/direction; property only percentage. Not explicitly share or another wrong quantity, so incomplete rather than categorical contradiction.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "E4",
+    "snippet": "E",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "E.output.frames[2].source",
+    "reason": "elemző local source with explicit szerint and exact source span; legacy evidence lacks a stored dependency proof.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "E5",
+    "snippet": "E",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "E.output.frames[2].contrasts[0]",
+    "reason": "Nominal predicate correction misclassified as actor candidate but unresolved; money also unresolved.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "E6",
+    "snippet": "E",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "E.output.entities[0]",
+    "reason": "Delta Alap exact organization span.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "C1",
+    "snippet": "C",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "C.output.frames[0..1]",
+    "reason": "Quote and hangsúlyozta reporting fragment separated; named person actor on reporting fragment does not establish quote-source edge.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "C2",
+    "snippet": "C",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "C.output.frames[0].polarity",
+    "reason": "lemond denied inside quote.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "C3",
+    "snippet": "C",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "C.output.frames[2].actor",
+    "reason": "gyár actor missing.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "C4",
+    "snippet": "C",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "C.output.frames[2].numericArguments[0..1]",
+    "reason": "Partial date October 8 and clock 06:45 separately resolved to same restart predicate.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "C5",
+    "snippet": "C",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "C.output.frames[2].numericArguments[2]",
+    "reason": "Ordinal 3 modifies gyártósort.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "C6",
+    "snippet": "C",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "C.output.frames[3].numericArguments[0]",
+    "reason": "31 person/headcount owned by dolgozó in shift clause.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "R1",
+    "snippet": "R",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "R.output.frames[0].source/recipient",
+    "reason": "kapitányság source, lapnak recipient, governed cáfol predicate.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "R2",
+    "snippet": "R",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "R.output.frames[0].numericArguments[0]",
+    "reason": "Age 52 candidate exists but no owner and unresolved.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "R3",
+    "snippet": "R",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "R.output.frames[0].numericArguments[1]",
+    "reason": "km/h denominator preserved and scope denied; candidate unresolved, so not a successfully resolved rate.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "R4",
+    "snippet": "R",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "R.output.frames[0].polarity/modalities",
+    "reason": "denied_claim with counterfactual, Cnd, hypotheticalContext true.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "R5",
+    "snippet": "R",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "R.output.frames[1].source",
+    "reason": "szakértő own chain/source for second quote, no inheritance from police.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "R6",
+    "snippet": "R",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "R.output.frames[1].polarity",
+    "reason": "Hitelesség proposition denied.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "B1",
+    "snippet": "B",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "B.output.frames[0].actor",
+    "reason": "Woman actor absent; ambulance not promoted.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "B2",
+    "snippet": "B",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "B.output.frames[0].numericArguments[0]",
+    "reason": "2 retained as unknown unresolved without child owner.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "B3",
+    "snippet": "B",
+    "dimension": "actor",
+    "expected": "CORRECT_UNRESOLVED",
+    "actual": "CORRECT_UNRESOLVED",
+    "outputReference": "B.output.frames[1].actor",
+    "reason": "No guessed treating actor; injured patients not actor.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "B4",
+    "snippet": "B",
+    "dimension": "actor",
+    "expected": "CORRECT_UNRESOLVED",
+    "actual": "CORRECT_UNRESOLVED",
+    "outputReference": "B.output.frames[2].actor",
+    "reason": "No resolution among driver or passenger.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "B5",
+    "snippet": "B",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "B.output.entities/frames[0].syntacticRoles",
+    "reason": "No false named entity, but no positive woman generic-human representation; negative half alone does not satisfy full expected bundle.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "B6",
+    "snippet": "B",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "B.output.frames[1..2].polarity",
+    "reason": "Both asserted polarity, no negation introduced by viszont.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "S1",
+    "snippet": "S",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "S.output.frames[0].numericArguments[0]",
+    "reason": "Ordinal 5 attaches to fordulójában.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "S2",
+    "snippet": "S",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "S.output.frames[0].numericArguments[1]",
+    "reason": "Rank 2 resolved, owner head Nagy lies in unique exact Nagy Emese entity; same frame full actor Nagy Emese and matching nsubj. Head-only stored rank owner is documented, not a different person.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "S3",
+    "snippet": "S",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "S.output.frames[1].numericArguments",
+    "reason": "No first-place argument emitted for Bence.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "S4",
+    "snippet": "S",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_UNRESOLVED",
+    "actual": "CORRECT_UNRESOLVED",
+    "outputReference": "S.output.frames[2].numericArguments[0]",
+    "reason": "Rank 3 unresolved with null owner for Bori or Noémi.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "S5",
+    "snippet": "S",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "S.output.frames[3..4]",
+    "reason": "fogalmazott reporter and quote separated; no source.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "S6",
+    "snippet": "S",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "S.output.entities[0]",
+    "reason": "Exact Nagy Emese PER span.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "W1",
+    "snippet": "W",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "W.output.frames[0].numericArguments[0]",
+    "reason": "Compound km/hour retained unresolved; threshold qualifier missing. Safety abstention, not resolved threshold.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "W2",
+    "snippet": "W",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "W.output.frames[1].conditionality/status",
+    "reason": "Suspension frame conditional and has antecedent trigger.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "W3",
+    "snippet": "W",
+    "dimension": "actor",
+    "expected": "CORRECT_UNRESOLVED",
+    "actual": "CORRECT_UNRESOLVED",
+    "outputReference": "W.output.frames[1].actor",
+    "reason": "No guessed suspension agent.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "W4",
+    "snippet": "W",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "WRONG_RESOLVED",
+    "outputReference": "W.output.frames[2].numericArguments[0]",
+    "reason": "4 emitted resolved count with unit count and owner fokhoz (lemma f); temperature reference/comparison lost.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "W5",
+    "snippet": "W",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "WRONG_RESOLVED",
+    "outputReference": "W.output.frames[2].numericArguments[1] and modalities",
+    "reason": "9 emitted resolved C measurement; modalities only reported, Mood Ind, hypothetical false. Potential mérhetnek not represented. Strict qualifier-safety error, not a claim that canonical DB facts were written.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "W6",
+    "snippet": "W",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "W.output.frames[2].source",
+    "reason": "meteorológus resolved szerint source and exact dependency path.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "T1",
+    "snippet": "T",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "T.output.frames[0].source/recipient",
+    "reason": "szolgáltató source and utasoknak recipient.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "T2",
+    "snippet": "T",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "T.output.frames[0].contrasts[0] and numericArguments[0]",
+    "reason": "Aug 6 rejected, Aug 9 accepted with year null, positive opening and only accepted resolved date.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "T3",
+    "snippet": "T",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "T.output.frames[1].numericArguments[0]",
+    "reason": "Second day ordinal, not rank.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "T4",
+    "snippet": "T",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "T.output.frames[1].numericArguments[1]",
+    "reason": "14 count owned by vonat on közlekedik.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "T5",
+    "snippet": "T",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "WRONG_RESOLVED",
+    "outputReference": "T.output.frames[2].numericArguments[1] and modalities",
+    "reason": "240 emitted as resolved bare count; no upper-bound qualifier, capacity role or possible modality. legfeljebb and vihet scope omitted.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "T6",
+    "snippet": "T",
+    "dimension": "actor",
+    "expected": "CORRECT_UNRESOLVED",
+    "actual": "CORRECT_UNRESOLVED",
+    "outputReference": "T.output.frames[0].actor",
+    "reason": "Opening actor remains null rather than source promoted to actor.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "I1",
+    "snippet": "I",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "I.output.frames[0].source and syntacticRoles",
+    "reason": "Szabó Dénes source recovered; organisation possessor/role relation absent, so selected composite only partially satisfied.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "I2",
+    "snippet": "I",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "I.output.frames[0].numericArguments[0]",
+    "reason": "800 csomag/second retained as unresolved compound candidate; not an absolute count, but no resolved rate.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "I3",
+    "snippet": "I",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "I.output.frames[1].actor",
+    "reason": "Tóth Éva full actor with predicate path.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "I4",
+    "snippet": "I",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "I.output.frames[1].contrasts[0]/object",
+    "reason": "szoftver rejected; érzékelő accepted; positive kicserél action.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "I5",
+    "snippet": "I",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "I.output.frames[2].numericArguments[0]",
+    "reason": "3 hour duration with át and local dependency proof.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "I6",
+    "snippet": "I",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "I.output.entities / frames[1].actor",
+    "reason": "Tóth Éva exact PER and actor, not source/object.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "H1",
+    "snippet": "H",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "H.output.frames[0].source and chain",
+    "reason": "klinika vezetője source phrase, governing head vezetője, not clinic alone.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "H2",
+    "snippet": "H",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "H.output.frames[0].contrasts[0]",
+    "reason": "90 rejected and 72 accepted, no resolved rejected numeric.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "H3",
+    "snippet": "H",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "H.output.frames[0].numericArguments[0]",
+    "reason": "72 count with accepted evidence főből, bound to áll in waiting-list proposition; owner is semantic slot not clinic.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "H4",
+    "snippet": "H",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "H.output.frames[1..2]",
+    "reason": "válaszolta attribution unsupported; no quote source or recipient edge.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "H5",
+    "snippet": "H",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "H.output.frames[1].polarity",
+    "reason": "Opening new practice denied.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "H6",
+    "snippet": "H",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "H.output.frames[0].source and chain structuralEvidence",
+    "reason": "Single possessive source phrase; structural head vezetője and separate nominal clinic token, no two named people invented.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "O1",
+    "snippet": "O",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "O.output.frames[0..1].actor",
+    "reason": "School actor not recovered across unresolved contrast.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "O2",
+    "snippet": "O",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "O.output.contrasts[0]",
+    "reason": "Omitted-target correction unresolved, neither alternative positively resolved.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "O3",
+    "snippet": "O",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "O.output.frames[1].numericArguments[0]",
+    "reason": "26 unknown unresolved; target not inherited.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "O4",
+    "snippet": "O",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "O.output.frames[2].numericArguments[0]",
+    "reason": "September 2 boundary with null year.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "O5",
+    "snippet": "O",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "O.output.frames[3].numericArguments[0]",
+    "reason": "Ordinal 3 owned by nap, not rank.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "O6",
+    "snippet": "O",
+    "dimension": "actor",
+    "expected": "CORRECT_UNRESOLVED",
+    "actual": "CORRECT_UNRESOLVED",
+    "outputReference": "O.output.frames[3].actor",
+    "reason": "Announcement actor remains null.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "N1",
+    "snippet": "N",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "N.output.frames[0].numericArguments[0]",
+    "reason": "Second stage ordinal attaches to szakaszában.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "N2",
+    "snippet": "N",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "N.output.entities[0]",
+    "reason": "Északi Energia Zrt. exact organization span.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "N3",
+    "snippet": "N",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "N.output.frames[0].numericArguments[1]",
+    "reason": "36 unknown unresolved; MW/capacity not structured.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "N4",
+    "snippet": "N",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "N.output.frames[0].actor",
+    "reason": "Északi Energia Zrt. actor with governing telepített evidence.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "N5",
+    "snippet": "N",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "N.output.frames[1..2]/contrasts[0]",
+    "reason": "Rate correction unresolved; accepted 5 candidate does not become resolved share.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "N6",
+    "snippet": "N",
+    "dimension": "actor",
+    "expected": "CORRECT_UNRESOLVED",
+    "actual": "CORRECT_UNRESOLVED",
+    "outputReference": "N.output.frames[3].actor",
+    "reason": "Chosen contractor not emitted as actor; no guessed active selector.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "K1",
+    "snippet": "K",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "K.output.attributionChains[0]",
+    "reason": "Resolved folyóirat -> labor szóvivője chain, parent edges retained.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "K2",
+    "snippet": "K",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "WRONG_RESOLVED",
+    "outputReference": "K.output.frames[0].numericArguments[0] and modalities",
+    "reason": "2030 year resolved but full selected expectation includes possible starting event: output modalities asserted/reported, no possible flag; uncertainty missing. Same scope failure as K3, two fixed selected dimensions, not two independent bugs.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "K3",
+    "snippet": "K",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "WRONG_RESOLVED",
+    "outputReference": "K.output.frames[0].modalities/hypotheticalContext",
+    "reason": "kezdődhet possibility absent; asserted/reported, Ind and false hypothetical. Strict qualified-proposition safety error.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "K4",
+    "snippet": "K",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "K.output.frames[1].numericArguments[0]",
+    "reason": "Ordinal 9 exists but unresolved.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "K5",
+    "snippet": "K",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "K.output.frames[1].source",
+    "reason": "Kiss Áron full speaker reference and exact report evidence; legacy evidence lacks explicit stored dependency proof.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "K6",
+    "snippet": "K",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "K.output.frames[2].numericArguments[0]",
+    "reason": "Only November partial candidate; day 11 missing and unresolved, promised modality retained.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "F1",
+    "snippet": "F",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "F.output.frames[0].numericArguments[0]/contrasts",
+    "reason": "580 HUF retained but unresolved; no full corrected price relation.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "F2",
+    "snippet": "F",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "F.output.frames[1].numericArguments[0]",
+    "reason": "40 unknown unresolved, not a structured price delta.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "F3",
+    "snippet": "F",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "F.output.frames[2..3].numericArguments",
+    "reason": "Age 67 disappears; 2 unknown unresolved; neither relation properly structured.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "F4",
+    "snippet": "F",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "F.output.frames[2].source",
+    "reason": "Buyer source cleared by unresolved attribution scope.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "F5",
+    "snippet": "F",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "MISSED_DEFENSIBLE_RESOLUTION",
+    "outputReference": "F.output.frames[3].polarity",
+    "reason": "Price report polarity unresolved instead of denied; no false 580 binding to package.",
+    "manualSemanticAudit": true
+  },
+  {
+    "id": "F6",
+    "snippet": "F",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "actual": "CORRECT_RESOLVED",
+    "outputReference": "F.output.entities[0]",
+    "reason": "Fenyő Piac exact organization, no Fenyő person.",
+    "manualSemanticAudit": true
+  }
+]

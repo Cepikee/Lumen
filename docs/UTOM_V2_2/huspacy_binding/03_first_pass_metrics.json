@@ -1,0 +1,142 @@
+{
+  "corpus": "utom-v22-huspacy-binding-heldout-1",
+  "evaluations": [
+    {
+      "config": "A",
+      "metrics": {
+        "entityPrecision": 1,
+        "entityRecall": 0.9473684210526315,
+        "entityTypingAccuracy": 0,
+        "entityBoundaryAccuracy": 0.9473684210526315,
+        "identityAccuracy": 0.7368421052631579,
+        "subjectBindingAccuracy": 0.7368421052631579,
+        "objectBindingAccuracy": 0.7894736842105263,
+        "numericSubjectBindingAccuracy": 0.7368421052631579,
+        "frameSemanticEntailment": 0.6842105263157895,
+        "attributionAccuracy": 0.8571428571428571,
+        "conditionalScopeAccuracy": 1,
+        "negationAccuracy": 0.3333333333333333,
+        "duplicateFrameRate": 0,
+        "unsupportedCanonicalCount": 0,
+        "evidenceAccuracy": 1
+      },
+      "counts": {
+        "goldEntities": 19,
+        "predictedEntities": 18,
+        "goldFrames": 19,
+        "predictedFrames": 15,
+        "evidence": 33
+      }
+    },
+    {
+      "config": "B",
+      "metrics": {
+        "entityPrecision": 1,
+        "entityRecall": 0.9473684210526315,
+        "entityTypingAccuracy": 0.9473684210526315,
+        "entityBoundaryAccuracy": 0.9473684210526315,
+        "identityAccuracy": 0.7368421052631579,
+        "subjectBindingAccuracy": 0.7368421052631579,
+        "objectBindingAccuracy": 0.7894736842105263,
+        "numericSubjectBindingAccuracy": 0.7368421052631579,
+        "frameSemanticEntailment": 0.6842105263157895,
+        "attributionAccuracy": 0.8571428571428571,
+        "conditionalScopeAccuracy": 1,
+        "negationAccuracy": 0.3333333333333333,
+        "duplicateFrameRate": 0,
+        "unsupportedCanonicalCount": 0,
+        "evidenceAccuracy": 1
+      },
+      "counts": {
+        "goldEntities": 19,
+        "predictedEntities": 18,
+        "goldFrames": 19,
+        "predictedFrames": 15,
+        "evidence": 33
+      }
+    },
+    {
+      "config": "C",
+      "metrics": {
+        "entityPrecision": 1,
+        "entityRecall": 0.9473684210526315,
+        "entityTypingAccuracy": 0.9473684210526315,
+        "entityBoundaryAccuracy": 0.9473684210526315,
+        "identityAccuracy": 0.9473684210526315,
+        "subjectBindingAccuracy": 0.7368421052631579,
+        "objectBindingAccuracy": 0.7894736842105263,
+        "numericSubjectBindingAccuracy": 0.7368421052631579,
+        "frameSemanticEntailment": 0.6842105263157895,
+        "attributionAccuracy": 0.8571428571428571,
+        "conditionalScopeAccuracy": 1,
+        "negationAccuracy": 0.3333333333333333,
+        "duplicateFrameRate": 0,
+        "unsupportedCanonicalCount": 0,
+        "evidenceAccuracy": 1
+      },
+      "counts": {
+        "goldEntities": 19,
+        "predictedEntities": 18,
+        "goldFrames": 19,
+        "predictedFrames": 15,
+        "evidence": 33
+      }
+    },
+    {
+      "config": "D",
+      "metrics": {
+        "entityPrecision": 1,
+        "entityRecall": 0.9473684210526315,
+        "entityTypingAccuracy": 0.9473684210526315,
+        "entityBoundaryAccuracy": 0.9473684210526315,
+        "identityAccuracy": 0.9473684210526315,
+        "subjectBindingAccuracy": 0.47368421052631576,
+        "objectBindingAccuracy": 0.5263157894736842,
+        "numericSubjectBindingAccuracy": 0.47368421052631576,
+        "frameSemanticEntailment": 0.47368421052631576,
+        "attributionAccuracy": 0.8571428571428571,
+        "conditionalScopeAccuracy": 1,
+        "negationAccuracy": 0.3333333333333333,
+        "duplicateFrameRate": 0,
+        "unsupportedCanonicalCount": 0,
+        "evidenceAccuracy": 1
+      },
+      "counts": {
+        "goldEntities": 19,
+        "predictedEntities": 18,
+        "goldFrames": 19,
+        "predictedFrames": 10,
+        "evidence": 28
+      }
+    }
+  ],
+  "performance": {
+    "A": {
+      "articles": 10,
+      "totalMs": 266.9493860012153,
+      "meanMsPerArticle": 26.69493860012153,
+      "tokensPerSecond": 659.3010107136892
+    },
+    "B": {
+      "articles": 10,
+      "totalMs": 269.23204700869974,
+      "meanMsPerArticle": 26.923204700869974,
+      "tokensPerSecond": 653.7111831798868
+    },
+    "C": {
+      "articles": 10,
+      "totalMs": 261.4242999989074,
+      "meanMsPerArticle": 26.142429999890737,
+      "tokensPerSecond": 673.2350435699191
+    },
+    "D": {
+      "articles": 10,
+      "totalMs": 264.29089400335215,
+      "meanMsPerArticle": 26.429089400335215,
+      "tokensPerSecond": 665.9328943726971
+    }
+  },
+  "modelLoadMs": 1267.17851999274,
+  "peakRssBytes": 636317696,
+  "canonicalWrites": 0
+}

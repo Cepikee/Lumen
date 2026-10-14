@@ -1,0 +1,122 @@
+[
+  {
+    "id": "h01",
+    "domain": "election",
+    "text": "Eszter 38 százalékot, Márton 34 százalékot, Judit 28 százalékot kapott."
+  },
+  {
+    "id": "h02",
+    "domain": "weather",
+    "text": "Debrecenben 26, Miskolcon 29 fokot mértek."
+  },
+  {
+    "id": "h03",
+    "domain": "health",
+    "text": "A rendelőben 84 beteget, a kórházban 126-ot vizsgáltak."
+  },
+  {
+    "id": "h04",
+    "domain": "energy",
+    "text": "A Rába Erőmű 18 megawattot termelt, a Mátra Erőmű 22 megawattot termelt."
+  },
+  {
+    "id": "h05",
+    "domain": "economy",
+    "text": "A Fenyő Zrt. bevétele 7 millió, a Tölgy Kft. bevétele 6 millió forint volt."
+  },
+  {
+    "id": "h06",
+    "domain": "sport",
+    "text": "A vendégcsapat négy gólt, a hazai csapat kettőt szerzett."
+  },
+  {
+    "id": "h07",
+    "domain": "education",
+    "text": "A gimnázium 28 diákot, az iskola 19 tanulót vett fel."
+  },
+  {
+    "id": "h08",
+    "domain": "technology",
+    "text": "Az olcsóbb készülék 86 ezer, a drágább 98 ezer forintba kerül."
+  },
+  {
+    "id": "h09",
+    "domain": "court",
+    "text": "Dóra elismerte, hogy iratot másolt, de tagadta, hogy pénzt lopott."
+  },
+  {
+    "id": "h10",
+    "domain": "police",
+    "text": "A rendőrség szerint a raktárban 9 iratot találtak."
+  },
+  {
+    "id": "h11",
+    "domain": "science",
+    "text": "A kutató szerint az oldat nem reagált, a labor viszont hibát jelentett."
+  },
+  {
+    "id": "h12",
+    "domain": "company",
+    "text": "A gyártó szerint a termelés nőtt, a minisztérium viszont ezt cáfolta."
+  },
+  {
+    "id": "h13",
+    "domain": "transport",
+    "text": "Ha Emese nyer, 4 buszt vásárol, Tamás viszont tegnap 2 buszt adott át."
+  },
+  {
+    "id": "h14",
+    "domain": "nested_source",
+    "text": "A CNN azt közölte, hogy a bíróság szerint az ítélet jogerős."
+  },
+  {
+    "id": "h15",
+    "domain": "namesake",
+    "text": "Nagy Emese és Nagy Tamás 14 pontot kapott. Szerinte ez vereség."
+  },
+  {
+    "id": "h16",
+    "domain": "promise",
+    "text": "Ilona azt ígérte, hogy jövőre 6 iskolát nyit."
+  },
+  {
+    "id": "h17",
+    "domain": "numeric_types",
+    "text": "Az intézet szerint a tarifa 15 százalék, a változás 3 százalékpont volt."
+  },
+  {
+    "id": "h18",
+    "domain": "comparison",
+    "text": "A korábbi referencia 17 százalék volt, Emese most 23 százalékot szerzett."
+  },
+  {
+    "id": "h19",
+    "domain": "unicode_metadata",
+    "text": "Fotó: Nagy Dóra / Archívum\n😀 Emese 62 százalékot, Tamás 38 százalékot kapott."
+  },
+  {
+    "id": "h20",
+    "domain": "identity",
+    "text": "Szabó Júliának írtak. Szabó Júliáról beszéltek. Szabó Péter 11 pontot kapott."
+  },
+  {
+    "id": "h21",
+    "domain": "lower_upper",
+    "text": "A kapacitás legalább 40 megawatt, a terhelés legfeljebb 32 megawatt lehet."
+  },
+  {
+    "id": "h22",
+    "domain": "future",
+    "text": "Miklós holnap 7 eszközt ad át, Zsófia tegnap 5 eszközt adott át."
+  },
+  {
+    "id": "h23",
+    "domain": "quoted_source",
+    "text": "„Nem nyitunk üzemet” – mondta Ilona, Péter viszont új gyárat ígért."
+  },
+  {
+    "id": "h24",
+    "domain": "negative_numbers",
+    "text": "Sopronban mínusz 4 fokot, Egerben 2 fokot mértek."
+  }
+]

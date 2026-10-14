@@ -29,7 +29,7 @@
     "predictedCounts": {
       "entities": 25,
       "relations": 2,
-      "claims": 42,
+      "claims": 43,
       "events": 2,
       "conflicts": 3,
       "changes": 1,
@@ -40,7 +40,7 @@
       "entityRecall": 0.9130434782608695,
       "relationPrecision": 1,
       "relationRecall": 1,
-      "claimPrecision": 0.6666666666666666,
+      "claimPrecision": 0.6511627906976745,
       "claimRecall": 0.6086956521739131,
       "eventMatchingAccuracy": 1,
       "conflictPrecision": 1,
@@ -50,8 +50,8 @@
       "sourceOmissionRecall": 0.6666666666666666,
       "temporalChangeRecall": 0.5,
       "identityAccuracy": 0.8571428571428571,
-      "unsupportedPredictionRate": 0.23376623376623376,
-      "attributionAccuracy": 0.8571428571428571,
+      "unsupportedPredictionRate": 0.24358974358974358,
+      "attributionAccuracy": 0.6785714285714286,
       "attributionEvaluated": 28,
       "evidenceAccuracy": 1,
       "evidenceEvaluated": 28,
@@ -59,21 +59,21 @@
       "temporalEvaluated": 28,
       "negationAccuracy": 1,
       "negationEvaluated": 28,
-      "modalityAccuracy": 0.8571428571428571,
+      "modalityAccuracy": 0.8214285714285714,
       "modalityEvaluated": 28,
-      "supportedClaimPrecision": 0.6666666666666666,
+      "supportedClaimPrecision": 0.6511627906976745,
       "supportedClaimRecall": 0.6086956521739131,
       "supportedClaimExpected": 46,
-      "supportedClaimPredicted": 42,
-      "predictionCount": 77,
-      "groundedPredictionCount": 77,
+      "supportedClaimPredicted": 43,
+      "predictionCount": 78,
+      "groundedPredictionCount": 78,
       "groundedPredictionRate": 1,
-      "semanticallySupportedPredictionCount": 77,
+      "semanticallySupportedPredictionCount": 78,
       "semanticallySupportedPredictionRate": 1,
       "goldMatchedPredictionCount": 59,
-      "goldCoveragePrecision": 0.7662337662337663,
-      "extraSupportedPredictionCount": 18,
-      "extraSupportedPredictionRate": 0.23376623376623376,
+      "goldCoveragePrecision": 0.7564102564102564,
+      "extraSupportedPredictionCount": 19,
+      "extraSupportedPredictionRate": 0.24358974358974358,
       "trulyUnsupportedPredictionCount": 0,
       "trulyUnsupportedPredictionRate": 0,
       "informationCoverageScore": 0.717948717948718,
@@ -101,22 +101,22 @@
       "claim": {
         "truePositive": 28,
         "expected": 46,
-        "predicted": 42,
-        "falsePositive": 14,
+        "predicted": 43,
+        "falsePositive": 15,
         "falseNegative": 18,
-        "precision": 0.6666666666666666,
+        "precision": 0.6511627906976745,
         "recall": 0.6086956521739131
       },
       "supportedClaims": {
         "truePositive": 28,
         "expected": 46,
-        "predicted": 42,
-        "falsePositive": 14,
+        "predicted": 43,
+        "falsePositive": 15,
         "falseNegative": 18,
-        "precision": 0.6666666666666666,
+        "precision": 0.6511627906976745,
         "recall": 0.6086956521739131,
         "supportedExpected": 46,
-        "supportedPredicted": 42
+        "supportedPredicted": 43
       },
       "event": {
         "truePositive": 2,
@@ -157,8 +157,8 @@
       "quality": {
         "attribution": {
           "evaluated": 28,
-          "correct": 24,
-          "accuracy": 0.8571428571428571
+          "correct": 19,
+          "accuracy": 0.6785714285714286
         },
         "evidence": {
           "evaluated": 28,
@@ -177,20 +177,20 @@
         },
         "modality": {
           "evaluated": 28,
-          "correct": 24,
-          "accuracy": 0.8571428571428571
+          "correct": 23,
+          "accuracy": 0.8214285714285714
         }
       },
       "integrity": {
-        "predictionCount": 77,
-        "groundedPredictionCount": 77,
+        "predictionCount": 78,
+        "groundedPredictionCount": 78,
         "groundedPredictionRate": 1,
-        "semanticallySupportedPredictionCount": 77,
+        "semanticallySupportedPredictionCount": 78,
         "semanticallySupportedPredictionRate": 1,
         "goldMatchedPredictionCount": 59,
-        "goldCoveragePrecision": 0.7662337662337663,
-        "extraSupportedPredictionCount": 18,
-        "extraSupportedPredictionRate": 0.23376623376623376,
+        "goldCoveragePrecision": 0.7564102564102564,
+        "extraSupportedPredictionCount": 19,
+        "extraSupportedPredictionRate": 0.24358974358974358,
         "trulyUnsupportedPredictionCount": 0,
         "trulyUnsupportedPredictionRate": 0
       },
@@ -1574,8 +1574,8 @@
             "claims": {
               "truePositive": 0,
               "expected": 4,
-              "predicted": 6,
-              "falsePositive": 6,
+              "predicted": 7,
+              "falsePositive": 7,
               "falseNegative": 4,
               "precision": 0,
               "recall": 0
@@ -1663,7 +1663,7 @@
     "predictedCounts": {
       "entities": 25,
       "relations": 5,
-      "claims": 85,
+      "claims": 95,
       "events": 7,
       "conflicts": 0,
       "changes": 5,
@@ -1674,8 +1674,8 @@
       "entityRecall": 0.95,
       "relationPrecision": 1,
       "relationRecall": 1,
-      "claimPrecision": 0.7176470588235294,
-      "claimRecall": 0.5083333333333333,
+      "claimPrecision": 0.6526315789473685,
+      "claimRecall": 0.5166666666666667,
       "eventMatchingAccuracy": 1,
       "conflictPrecision": null,
       "conflictRecall": null,
@@ -1684,8 +1684,8 @@
       "sourceOmissionRecall": 0.6,
       "temporalChangeRecall": 1,
       "identityAccuracy": 1,
-      "unsupportedPredictionRate": 0.24615384615384617,
-      "attributionAccuracy": 0.7538461538461538,
+      "unsupportedPredictionRate": 0.29285714285714287,
+      "attributionAccuracy": 0.6153846153846154,
       "attributionEvaluated": 65,
       "evidenceAccuracy": 1,
       "evidenceEvaluated": 65,
@@ -1695,19 +1695,19 @@
       "negationEvaluated": 65,
       "modalityAccuracy": 0.9384615384615385,
       "modalityEvaluated": 65,
-      "supportedClaimPrecision": 0.7176470588235294,
-      "supportedClaimRecall": 0.5083333333333333,
+      "supportedClaimPrecision": 0.6526315789473685,
+      "supportedClaimRecall": 0.5166666666666667,
       "supportedClaimExpected": 120,
-      "supportedClaimPredicted": 85,
-      "predictionCount": 130,
-      "groundedPredictionCount": 130,
+      "supportedClaimPredicted": 95,
+      "predictionCount": 140,
+      "groundedPredictionCount": 140,
       "groundedPredictionRate": 1,
-      "semanticallySupportedPredictionCount": 130,
+      "semanticallySupportedPredictionCount": 140,
       "semanticallySupportedPredictionRate": 1,
-      "goldMatchedPredictionCount": 98,
-      "goldCoveragePrecision": 0.7538461538461538,
-      "extraSupportedPredictionCount": 32,
-      "extraSupportedPredictionRate": 0.24615384615384617,
+      "goldMatchedPredictionCount": 99,
+      "goldCoveragePrecision": 0.7071428571428572,
+      "extraSupportedPredictionCount": 41,
+      "extraSupportedPredictionRate": 0.29285714285714287,
       "trulyUnsupportedPredictionCount": 0,
       "trulyUnsupportedPredictionRate": 0,
       "informationCoverageScore": 0.6375,
@@ -1733,24 +1733,24 @@
         "recall": 1
       },
       "claim": {
-        "truePositive": 61,
+        "truePositive": 62,
         "expected": 120,
-        "predicted": 85,
-        "falsePositive": 24,
-        "falseNegative": 59,
-        "precision": 0.7176470588235294,
-        "recall": 0.5083333333333333
+        "predicted": 95,
+        "falsePositive": 33,
+        "falseNegative": 58,
+        "precision": 0.6526315789473685,
+        "recall": 0.5166666666666667
       },
       "supportedClaims": {
-        "truePositive": 61,
+        "truePositive": 62,
         "expected": 120,
-        "predicted": 85,
-        "falsePositive": 24,
-        "falseNegative": 59,
-        "precision": 0.7176470588235294,
-        "recall": 0.5083333333333333,
+        "predicted": 95,
+        "falsePositive": 33,
+        "falseNegative": 58,
+        "precision": 0.6526315789473685,
+        "recall": 0.5166666666666667,
         "supportedExpected": 120,
-        "supportedPredicted": 85
+        "supportedPredicted": 95
       },
       "event": {
         "truePositive": 5,
@@ -1791,8 +1791,8 @@
       "quality": {
         "attribution": {
           "evaluated": 65,
-          "correct": 49,
-          "accuracy": 0.7538461538461538
+          "correct": 40,
+          "accuracy": 0.6153846153846154
         },
         "evidence": {
           "evaluated": 65,
@@ -1816,15 +1816,15 @@
         }
       },
       "integrity": {
-        "predictionCount": 130,
-        "groundedPredictionCount": 130,
+        "predictionCount": 140,
+        "groundedPredictionCount": 140,
         "groundedPredictionRate": 1,
-        "semanticallySupportedPredictionCount": 130,
+        "semanticallySupportedPredictionCount": 140,
         "semanticallySupportedPredictionRate": 1,
-        "goldMatchedPredictionCount": 98,
-        "goldCoveragePrecision": 0.7538461538461538,
-        "extraSupportedPredictionCount": 32,
-        "extraSupportedPredictionRate": 0.24615384615384617,
+        "goldMatchedPredictionCount": 99,
+        "goldCoveragePrecision": 0.7071428571428572,
+        "extraSupportedPredictionCount": 41,
+        "extraSupportedPredictionRate": 0.29285714285714287,
         "trulyUnsupportedPredictionCount": 0,
         "trulyUnsupportedPredictionRate": 0
       },
@@ -1916,10 +1916,10 @@
             "claims": {
               "truePositive": 17,
               "expected": 24,
-              "predicted": 23,
-              "falsePositive": 6,
+              "predicted": 26,
+              "falsePositive": 9,
               "falseNegative": 7,
-              "precision": 0.7391304347826086,
+              "precision": 0.6538461538461539,
               "recall": 0.7083333333333334
             },
             "events": {
@@ -1984,10 +1984,10 @@
             "claims": {
               "truePositive": 11,
               "expected": 24,
-              "predicted": 14,
-              "falsePositive": 3,
+              "predicted": 17,
+              "falsePositive": 6,
               "falseNegative": 13,
-              "precision": 0.7857142857142857,
+              "precision": 0.6470588235294118,
               "recall": 0.4583333333333333
             },
             "events": {
@@ -2050,13 +2050,13 @@
               "recall": 1
             },
             "claims": {
-              "truePositive": 11,
+              "truePositive": 12,
               "expected": 24,
-              "predicted": 16,
-              "falsePositive": 5,
-              "falseNegative": 13,
-              "precision": 0.6875,
-              "recall": 0.4583333333333333
+              "predicted": 20,
+              "falsePositive": 8,
+              "falseNegative": 12,
+              "precision": 0.6,
+              "recall": 0.5
             },
             "events": {
               "truePositive": 1,

@@ -1,0 +1,29 @@
+{
+  "total": 39,
+  "counts": {
+    "CORRECT_RESOLVED": 28,
+    "WRONG_RESOLVED": 0,
+    "CORRECT_UNRESOLVED": 2,
+    "MISSED_DEFENSIBLE_RESOLUTION": 9
+  },
+  "resolvedPrecision": 1,
+  "resolutionRate": 0.717948717948718,
+  "evidence": {
+    "spans": 343,
+    "exact": 343,
+    "failures": 0
+  },
+  "changedCases": [
+    "P",
+    "H"
+  ],
+  "changedSelectedDecisions": [
+    "P6",
+    "H1",
+    "H4"
+  ],
+  "method": "Same frozen seven synthetic texts and linguistic annotations, same selected 39 decisions; post-repair manual reassessment, not a fresh independent blind test.",
+  "B02": "PARTIAL",
+  "B03": "untouched",
+  "NEXT_REAL_WORLD_BLIND_TEST_READY": false
+}

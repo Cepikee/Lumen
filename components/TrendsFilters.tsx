@@ -3,7 +3,7 @@
 import React from "react";
 import CategoryHeatMap from "./CategoryHeatMap"; // 🔹 ha kell, használható
 
-import TrendsDebug from "./TrendsDebug";
+
 // 🔹 Exportáljuk az interface-t, hogy máshol is használható legyen
 export interface Filters {
   period: string;
@@ -129,7 +129,7 @@ export default function TrendsFilters({ filters, setFilters }: Props) {
             </div>
           );
         })}
-        <TrendsDebug filters={filters} />
+
       </div>
 
       {/* Rendezés */}

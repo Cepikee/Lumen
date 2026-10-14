@@ -1,0 +1,82 @@
+{
+  "totalDecisions": 120,
+  "CORRECT_RESOLVED": 40,
+  "WRONG_RESOLVED": 6,
+  "CORRECT_UNRESOLVED": 13,
+  "MISSED_DEFENSIBLE_RESOLUTION": 61,
+  "NOT_APPLICABLE": 0,
+  "resolved": 46,
+  "resolvedPrecision": 0.8695652173913043,
+  "resolutionRate": 0.38333333333333336,
+  "overallCorrectIncludingAbstention": 0.44166666666666665,
+  "wrongPerResolved": 0.13043478260869565,
+  "wrongPerTotal": 0.05,
+  "dimensions": {
+    "actor": {
+      "total": 16,
+      "CORRECT_RESOLVED": 3,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 6,
+      "MISSED_DEFENSIBLE_RESOLUTION": 7
+    },
+    "attribution": {
+      "total": 23,
+      "CORRECT_RESOLVED": 5,
+      "WRONG_RESOLVED": 1,
+      "CORRECT_UNRESOLVED": 2,
+      "MISSED_DEFENSIBLE_RESOLUTION": 15
+    },
+    "contrast/negation": {
+      "total": 21,
+      "CORRECT_RESOLVED": 8,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 1,
+      "MISSED_DEFENSIBLE_RESOLUTION": 12
+    },
+    "temporal": {
+      "total": 9,
+      "CORRECT_RESOLVED": 5,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 4
+    },
+    "modality/scope": {
+      "total": 11,
+      "CORRECT_RESOLVED": 6,
+      "WRONG_RESOLVED": 1,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 4
+    },
+    "entity boundary": {
+      "total": 7,
+      "CORRECT_RESOLVED": 4,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 1,
+      "MISSED_DEFENSIBLE_RESOLUTION": 2
+    },
+    "ordinal/rank": {
+      "total": 10,
+      "CORRECT_RESOLVED": 5,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 2,
+      "MISSED_DEFENSIBLE_RESOLUTION": 3
+    },
+    "numeric": {
+      "total": 23,
+      "CORRECT_RESOLVED": 4,
+      "WRONG_RESOLVED": 4,
+      "CORRECT_UNRESOLVED": 1,
+      "MISSED_DEFENSIBLE_RESOLUTION": 14
+    }
+  },
+  "evidence": {
+    "totalSpanOccurrences": 1684,
+    "exactRawOffsetMatches": 1684,
+    "failures": [],
+    "uniqueSpans": 473,
+    "uniqueExact": 473,
+    "accuracy": 1
+  },
+  "nlpSentenceCount": 64,
+  "canonicalProjection": "OFF"
+}

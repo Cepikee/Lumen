@@ -265,10 +265,25 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
   const [sources, setSources] = useState<Source[]>([]);
   const [activeSourcesKeyword, setActiveSourcesKeyword] = useState<string | null>(null);
   const sourcesRequestRef = useRef(0);
+  const [sourcesPeriod, setSourcesPeriod] = useState(filters.period);
+  const [sourcesLoading, setSourcesLoading] = useState(false);
+  const [sourcesError, setSourcesError] = useState(false);
+  useEffect(() => {
+    ++sourcesRequestRef.current;
+    setActiveSourcesKeyword(null);
+    return () => { ++sourcesRequestRef.current; };
+  }, [filters.period, filters.sources, filters.categories, filters.startDate, filters.endDate, filters.keyword]);
+  function closeSources() {
+    ++sourcesRequestRef.current;
+    setActiveSourcesKeyword(null);
+  }
 
   function handleShowSources(keyword: string, period: string = filters.period) {
     const requestId = ++sourcesRequestRef.current;
     setActiveSourcesKeyword(keyword);
+    setSourcesPeriod(period);
+    setSourcesLoading(true);
+    setSourcesError(false);
     // Do not keep the previous keyword's articles visible while this request
     // is in flight. Otherwise a slow response can make the modal look as if
     // the new keyword has already loaded the old result set.
@@ -281,12 +296,15 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
       })
       .then((data: unknown) => {
         if (requestId !== sourcesRequestRef.current) return;
-        setSources(Array.isArray(data) ? data as Source[] : []);
+        if (!Array.isArray(data)) throw new Error("invalid_trend_sources");
+        setSources(data as Source[]);
       })
       .catch(err => {
         if (requestId !== sourcesRequestRef.current) return;
-        console.error("Források betöltése sikertelen:", err);
+        setSourcesError(true);
         setSources([]);
+      }).finally(() => {
+        if (requestId === sourcesRequestRef.current) setSourcesLoading(false);
       });
   }
 
@@ -315,6 +333,16 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
 
   return (
     <>
+      <TrendSourcesModal
+        show={activeSourcesKeyword !== null}
+        onHide={closeSources}
+        keyword={activeSourcesKeyword ?? ""}
+        sources={sources}
+        defaultPeriod={sourcesPeriod}
+        loading={sourcesLoading}
+        error={sourcesError}
+        onPeriodChange={handleShowSources}
+      />
       <ul className="list-group mb-4">
         {visibleTrends.map((t, idx) => {
           const displayHistory = getDisplayHistory(t.keyword);
@@ -379,14 +407,7 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
                   >
                     Cikkek
                   </button>
-                  <TrendSourcesModal
-                    show={activeSourcesKeyword === t.keyword}
-                    onHide={() => setActiveSourcesKeyword(null)}
-                    keyword={t.keyword}
-                    sources={sources}
-                    defaultPeriod={filters.period}
-                    onPeriodChange={handleShowSources}
-                  />
+
 
                   <span className="badge bg-info">{t.frequency}×</span>
 

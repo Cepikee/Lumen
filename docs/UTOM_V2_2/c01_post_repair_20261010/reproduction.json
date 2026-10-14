@@ -1,0 +1,1051 @@
+{
+  "method": "Previous pipeline replay with only new final C01 gate disabled in process; no files altered",
+  "cases": [
+    {
+      "id": "upper",
+      "text": "A raktár legfeljebb 83 ládát tárol.",
+      "preGate": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 35,
+              "textSpan": "A raktár legfeljebb 83 ládát tárol."
+            },
+            "attribution": null,
+            "action": "tárol",
+            "actionSpan": {
+              "start": 29,
+              "end": 34,
+              "textSpan": "tárol"
+            },
+            "object": [
+              "láda"
+            ],
+            "numericArguments": [
+              {
+                "value": 83,
+                "canonicalValue": 83,
+                "unit": "count",
+                "semanticKind": "count",
+                "start": 20,
+                "end": 28,
+                "raw": "83 ládát",
+                "evidenceSpan": {
+                  "start": 20,
+                  "end": 28,
+                  "textSpan": "83 ládát"
+                },
+                "owner": {
+                  "mention": "ládát",
+                  "normalized": "láda",
+                  "start": 23,
+                  "end": 28,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 23,
+                    "end": 28,
+                    "textSpan": "ládát"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "count",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 20,
+                    "end": 22,
+                    "textSpan": "83"
+                  },
+                  "targetSpan": {
+                    "start": 23,
+                    "end": 28,
+                    "textSpan": "ládát"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nummod",
+                      "sourceSpan": {
+                        "start": 20,
+                        "end": 22,
+                        "textSpan": "83"
+                      },
+                      "targetSpan": {
+                        "start": 23,
+                        "end": 28,
+                        "textSpan": "ládát"
+                      }
+                    },
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 23,
+                        "end": 28,
+                        "textSpan": "ládát"
+                      },
+                      "targetSpan": {
+                        "start": 29,
+                        "end": 34,
+                        "textSpan": "tárol"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:35",
+                  "semanticRole": "count",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved",
+              "numeric_binding_unresolved",
+              "dependency_actor_ambiguous_or_implicit"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 35,
+              "textSpan": "A raktár legfeljebb 83 ládát tárol."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 35,
+              "textSpan": "A raktár legfeljebb 83 ládát tárol."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:35",
+            "syntacticRoles": [
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "ládát",
+                  "normalized": "láda",
+                  "start": 23,
+                  "end": 28,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 23,
+                    "end": 28,
+                    "textSpan": "ládát"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 23,
+                    "end": 28,
+                    "textSpan": "ládát"
+                  },
+                  "targetSpan": {
+                    "start": 29,
+                    "end": 34,
+                    "textSpan": "tárol"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 23,
+                        "end": 28,
+                        "textSpan": "ládát"
+                      },
+                      "targetSpan": {
+                        "start": 29,
+                        "end": 34,
+                        "textSpan": "tárol"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:35",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ]
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "range_words",
+      "text": "A raktár 70 és 83 közötti ládát tárol.",
+      "preGate": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 38,
+              "textSpan": "A raktár 70 és 83 közötti ládát tárol."
+            },
+            "attribution": null,
+            "action": "tárol",
+            "actionSpan": {
+              "start": 32,
+              "end": 37,
+              "textSpan": "tárol"
+            },
+            "object": [
+              "láda"
+            ],
+            "numericArguments": [
+              {
+                "value": 70,
+                "canonicalValue": 70,
+                "unit": "count",
+                "semanticKind": "count",
+                "start": 9,
+                "end": 31,
+                "raw": "70 és 83 közötti ládát",
+                "evidenceSpan": {
+                  "start": 9,
+                  "end": 31,
+                  "textSpan": "70 és 83 közötti ládát"
+                },
+                "owner": {
+                  "mention": "ládát",
+                  "normalized": "láda",
+                  "start": 26,
+                  "end": 31,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 26,
+                    "end": 31,
+                    "textSpan": "ládát"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "count",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 9,
+                    "end": 11,
+                    "textSpan": "70"
+                  },
+                  "targetSpan": {
+                    "start": 26,
+                    "end": 31,
+                    "textSpan": "ládát"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nummod",
+                      "sourceSpan": {
+                        "start": 9,
+                        "end": 11,
+                        "textSpan": "70"
+                      },
+                      "targetSpan": {
+                        "start": 26,
+                        "end": 31,
+                        "textSpan": "ládát"
+                      }
+                    },
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 26,
+                        "end": 31,
+                        "textSpan": "ládát"
+                      },
+                      "targetSpan": {
+                        "start": 32,
+                        "end": 37,
+                        "textSpan": "tárol"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:38",
+                  "semanticRole": "count",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "value": 83,
+                "canonicalValue": 83,
+                "unit": null,
+                "semanticKind": "unknown",
+                "start": 15,
+                "end": 17,
+                "raw": "83",
+                "evidenceSpan": {
+                  "start": 15,
+                  "end": 17,
+                  "textSpan": "83"
+                },
+                "owner": null,
+                "ownerType": "unresolved",
+                "subject": null,
+                "binding": "unresolved",
+                "unresolvedReasons": [
+                  "dependency_numeric_attachment_unproven"
+                ]
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved",
+              "numeric_binding_unresolved",
+              "dependency_actor_ambiguous_or_implicit",
+              "dependency_numeric_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 38,
+              "textSpan": "A raktár 70 és 83 közötti ládát tárol."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 38,
+              "textSpan": "A raktár 70 és 83 közötti ládát tárol."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:38",
+            "syntacticRoles": [
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "ládát",
+                  "normalized": "láda",
+                  "start": 26,
+                  "end": 31,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 26,
+                    "end": 31,
+                    "textSpan": "ládát"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 26,
+                    "end": 31,
+                    "textSpan": "ládát"
+                  },
+                  "targetSpan": {
+                    "start": 32,
+                    "end": 37,
+                    "textSpan": "tárol"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 26,
+                        "end": 31,
+                        "textSpan": "ládát"
+                      },
+                      "targetSpan": {
+                        "start": 32,
+                        "end": 37,
+                        "textSpan": "tárol"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:38",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ]
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "potential",
+      "text": "Az üzem 46 dolgozót alkalmazhat.",
+      "preGate": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "Az üzem 46 dolgozót alkalmazhat."
+            },
+            "attribution": null,
+            "action": "alkalmazhat",
+            "actionSpan": {
+              "start": 20,
+              "end": 31,
+              "textSpan": "alkalmazhat"
+            },
+            "object": [
+              "dolgozó"
+            ],
+            "numericArguments": [
+              {
+                "value": 46,
+                "canonicalValue": 46,
+                "unit": "person",
+                "semanticKind": "count",
+                "start": 8,
+                "end": 19,
+                "raw": "46 dolgozót",
+                "evidenceSpan": {
+                  "start": 8,
+                  "end": 19,
+                  "textSpan": "46 dolgozót"
+                },
+                "owner": {
+                  "mention": "dolgozót",
+                  "normalized": "dolgozó",
+                  "start": 11,
+                  "end": 19,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 11,
+                    "end": 19,
+                    "textSpan": "dolgozót"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "headcount",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 8,
+                    "end": 10,
+                    "textSpan": "46"
+                  },
+                  "targetSpan": {
+                    "start": 11,
+                    "end": 19,
+                    "textSpan": "dolgozót"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 8,
+                        "end": 10,
+                        "textSpan": "46"
+                      },
+                      "targetSpan": {
+                        "start": 11,
+                        "end": 19,
+                        "textSpan": "dolgozót"
+                      }
+                    },
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 11,
+                        "end": 19,
+                        "textSpan": "dolgozót"
+                      },
+                      "targetSpan": {
+                        "start": 20,
+                        "end": 31,
+                        "textSpan": "alkalmazhat"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:32",
+                  "semanticRole": "count",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Pot"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "possible"
+            ],
+            "modality": "possible",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved",
+              "numeric_binding_unresolved",
+              "dependency_actor_ambiguous_or_implicit"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "Az üzem 46 dolgozót alkalmazhat."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "Az üzem 46 dolgozót alkalmazhat."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:32",
+            "syntacticRoles": [
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "dolgozót",
+                  "normalized": "dolgozó",
+                  "start": 11,
+                  "end": 19,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 11,
+                    "end": 19,
+                    "textSpan": "dolgozót"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 11,
+                    "end": 19,
+                    "textSpan": "dolgozót"
+                  },
+                  "targetSpan": {
+                    "start": 20,
+                    "end": 31,
+                    "textSpan": "alkalmazhat"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 11,
+                        "end": 19,
+                        "textSpan": "dolgozót"
+                      },
+                      "targetSpan": {
+                        "start": 20,
+                        "end": 31,
+                        "textSpan": "alkalmazhat"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:32",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ]
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "negated",
+      "text": "Nem kerülhet többe 17 millió forintnál a felújítás.",
+      "preGate": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [
+              {
+                "mention": "forintnál",
+                "normalized": "forint",
+                "canonicalIdentity": null,
+                "type": "referent",
+                "named": false,
+                "case": "Ade",
+                "start": 29,
+                "end": 38,
+                "evidenceSpan": {
+                  "start": 29,
+                  "end": 38,
+                  "textSpan": "forintnál"
+                },
+                "sourceRole": "reported",
+                "pronoun": false,
+                "role": "location"
+              }
+            ],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 51,
+              "textSpan": "Nem kerülhet többe 17 millió forintnál a felújítás."
+            },
+            "attribution": null,
+            "action": "kerül",
+            "actionSpan": {
+              "start": 4,
+              "end": 12,
+              "textSpan": "kerülhet"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "value": 17000000,
+                "canonicalValue": 17000000,
+                "unit": "HUF",
+                "semanticKind": "money",
+                "start": 19,
+                "end": 38,
+                "raw": "17 millió forintnál",
+                "evidenceSpan": {
+                  "start": 19,
+                  "end": 38,
+                  "textSpan": "17 millió forintnál"
+                },
+                "owner": null,
+                "ownerType": "unresolved",
+                "subject": null,
+                "binding": "unresolved",
+                "unresolvedReasons": [
+                  "dependency_numeric_attachment_unproven"
+                ]
+              }
+            ],
+            "grammaticalMood": [
+              "Pot"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "possible"
+            ],
+            "modality": "possible",
+            "polarity": "denied",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved",
+              "numeric_binding_unresolved",
+              "dependency_actor_ambiguous_or_implicit",
+              "dependency_numeric_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 51,
+              "textSpan": "Nem kerülhet többe 17 millió forintnál a felújítás."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 51,
+              "textSpan": "Nem kerülhet többe 17 millió forintnál a felújítás."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:51",
+            "syntacticRoles": []
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "reference",
+      "text": "A reggeli 6 fokhoz képest este 13 fokot mérhetnek.",
+      "preGate": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [
+              {
+                "mention": "fokhoz",
+                "normalized": "f",
+                "canonicalIdentity": null,
+                "type": "referent",
+                "named": false,
+                "case": "All",
+                "start": 12,
+                "end": 18,
+                "evidenceSpan": {
+                  "start": 12,
+                  "end": 18,
+                  "textSpan": "fokhoz"
+                },
+                "sourceRole": "reported",
+                "pronoun": false,
+                "role": "location"
+              }
+            ],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 50,
+              "textSpan": "A reggeli 6 fokhoz képest este 13 fokot mérhetnek."
+            },
+            "attribution": null,
+            "action": "mérhet",
+            "actionSpan": {
+              "start": 40,
+              "end": 49,
+              "textSpan": "mérhetnek"
+            },
+            "object": [
+              "fok"
+            ],
+            "numericArguments": [
+              {
+                "value": 6,
+                "canonicalValue": 6,
+                "unit": "count",
+                "semanticKind": "count",
+                "start": 10,
+                "end": 18,
+                "raw": "6 fokhoz",
+                "evidenceSpan": {
+                  "start": 10,
+                  "end": 18,
+                  "textSpan": "6 fokhoz"
+                },
+                "owner": {
+                  "mention": "fokhoz",
+                  "normalized": "f",
+                  "start": 12,
+                  "end": 18,
+                  "type": "referent",
+                  "case": "All",
+                  "evidenceSpan": {
+                    "start": 12,
+                    "end": 18,
+                    "textSpan": "fokhoz"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "count",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 10,
+                    "end": 11,
+                    "textSpan": "6"
+                  },
+                  "targetSpan": {
+                    "start": 12,
+                    "end": 18,
+                    "textSpan": "fokhoz"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nummod",
+                      "sourceSpan": {
+                        "start": 10,
+                        "end": 11,
+                        "textSpan": "6"
+                      },
+                      "targetSpan": {
+                        "start": 12,
+                        "end": 18,
+                        "textSpan": "fokhoz"
+                      }
+                    },
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 12,
+                        "end": 18,
+                        "textSpan": "fokhoz"
+                      },
+                      "targetSpan": {
+                        "start": 40,
+                        "end": 49,
+                        "textSpan": "mérhetnek"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:50",
+                  "semanticRole": "count",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "value": 13,
+                "canonicalValue": 13,
+                "unit": "C",
+                "semanticKind": "measurement",
+                "start": 31,
+                "end": 39,
+                "raw": "13 fokot",
+                "evidenceSpan": {
+                  "start": 31,
+                  "end": 39,
+                  "textSpan": "13 fokot"
+                },
+                "owner": {
+                  "mention": "fokot",
+                  "normalized": "fok",
+                  "start": 34,
+                  "end": 39,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 34,
+                    "end": 39,
+                    "textSpan": "fokot"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "measurement",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 31,
+                    "end": 33,
+                    "textSpan": "13"
+                  },
+                  "targetSpan": {
+                    "start": 34,
+                    "end": 39,
+                    "textSpan": "fokot"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nummod",
+                      "sourceSpan": {
+                        "start": 31,
+                        "end": 33,
+                        "textSpan": "13"
+                      },
+                      "targetSpan": {
+                        "start": 34,
+                        "end": 39,
+                        "textSpan": "fokot"
+                      }
+                    },
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 34,
+                        "end": 39,
+                        "textSpan": "fokot"
+                      },
+                      "targetSpan": {
+                        "start": 40,
+                        "end": 49,
+                        "textSpan": "mérhetnek"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:50",
+                  "semanticRole": "measurement",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved",
+              "numeric_binding_unresolved",
+              "dependency_actor_ambiguous_or_implicit"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 50,
+              "textSpan": "A reggeli 6 fokhoz képest este 13 fokot mérhetnek."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 50,
+              "textSpan": "A reggeli 6 fokhoz képest este 13 fokot mérhetnek."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:50",
+            "syntacticRoles": [
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "fokot",
+                  "normalized": "fok",
+                  "start": 34,
+                  "end": 39,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 34,
+                    "end": 39,
+                    "textSpan": "fokot"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 34,
+                    "end": 39,
+                    "textSpan": "fokot"
+                  },
+                  "targetSpan": {
+                    "start": 40,
+                    "end": 49,
+                    "textSpan": "mérhetnek"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 34,
+                        "end": 39,
+                        "textSpan": "fokot"
+                      },
+                      "targetSpan": {
+                        "start": 40,
+                        "end": 49,
+                        "textSpan": "mérhetnek"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:50",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ]
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    }
+  ]
+}

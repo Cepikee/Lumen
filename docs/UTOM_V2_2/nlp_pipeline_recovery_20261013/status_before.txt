@@ -1,0 +1,69 @@
+ M docs/UTOM_V2_2/10_deterministic_baseline.json
+ M docs/UTOM_V2_2/15_heldout_after_generalization.json
+ M lib/v2/deterministic-semantic.js
+ M lib/v2/entity-extraction-provider.js
+ M lib/v22/deterministic-text-provider.cjs
+ M package-lock.json
+ M package.json
+ M tests/integration/mysql-v2-http-m13.test.cjs
+ M tests/unit/v22-real-world-semantic-hardening-round2.test.cjs
+?? AGENTS.md
+?? CLAUDE.md
+?? docs.zip
+?? docs/UTOM_V2_2/00_baseline.zip
+?? docs/UTOM_V2_2/CROSS_DOMAIN_SEMANTIC_ARCHITECTURE_AUDIT.md
+?? docs/UTOM_V2_2/b01_post_repair_20261009/
+?? docs/UTOM_V2_2/b02_post_repair_20261009/
+?? docs/UTOM_V2_2/b03_post_repair_20261009/
+?? docs/UTOM_V2_2/blind_readiness_20261009/
+?? docs/UTOM_V2_2/c01_post_repair_20261010/
+?? docs/UTOM_V2_2/c02_post_repair_20261012/
+?? docs/UTOM_V2_2/fb01_post_repair_20261012/
+?? docs/UTOM_V2_2/fb02_post_repair_20261013/
+?? docs/UTOM_V2_2/fresh_blind_20261012/
+?? docs/UTOM_V2_2/huspacy_binding/
+?? docs/UTOM_V2_2/local_nlp/
+?? docs/UTOM_V2_2/morph_clause/
+?? docs/UTOM_V2_2/nlp_pipeline_recovery_20261013/
+?? docs/UTOM_V2_2/real_text_round_a/
+?? docs/UTOM_V2_2/real_world/002_first_pass_human_report.md
+?? docs/UTOM_V2_2/real_world/002_first_pass_raw.json
+?? docs/UTOM_V2_2/real_world/002_source_article.txt
+?? docs/UTOM_V2_2/real_world/002_state_freeze.json
+?? docs/UTOM_V2_2/real_world/003_after_cross_domain_hardening_round2.json
+?? docs/UTOM_V2_2/real_world/003_after_cross_domain_hardening_round2_report.md
+?? docs/UTOM_V2_2/real_world/003_after_cross_domain_semantic_foundation.json
+?? docs/UTOM_V2_2/real_world/003_after_cross_domain_semantic_foundation_report.md
+?? docs/UTOM_V2_2/real_world/003_first_pass_human_report.md
+?? docs/UTOM_V2_2/real_world/003_first_pass_raw.json
+?? docs/UTOM_V2_2/real_world/003_source_article.txt
+?? docs/UTOM_V2_2/real_world/003_state_freeze.json
+?? docs/UTOM_V2_2/role_scope/
+?? docs/UTOM_V2_2/second_blind_20261009/
+?? scripts/agents/
+?? scripts/experimental/
+?? scripts/real-world-002-first-pass.cjs
+?? scripts/real-world-003-after-cross-domain-hardening-round2.cjs
+?? scripts/real-world-003-after-cross-domain-semantic-foundation.cjs
+?? scripts/real-world-003-first-pass.cjs
+?? tests/fixtures/morph-clause/
+?? tests/fixtures/real-text-a/
+?? tests/fixtures/role-scope/
+?? tests/unit/v22-attribution-chain.test.cjs
+?? tests/unit/v22-compound-rate-safety.test.cjs
+?? tests/unit/v22-conservative-recall.test.cjs
+?? tests/unit/v22-contrast-correction.test.cjs
+?? tests/unit/v22-cross-domain-semantic-foundation.test.cjs
+?? tests/unit/v22-cross-domain-semantic-hardening-round2.test.cjs
+?? tests/unit/v22-dependency-binding.test.cjs
+?? tests/unit/v22-elliptic-rank.test.cjs
+?? tests/unit/v22-fb01-numeric-bundle.test.cjs
+?? tests/unit/v22-fb02-source-artifact.test.cjs
+?? tests/unit/v22-morph-clause-research.test.cjs
+?? tests/unit/v22-numeric-scope-safety.test.cjs
+?? tests/unit/v22-real-text-a-research.test.cjs
+?? tests/unit/v22-role-scope-evaluator.test.cjs
+?? tests/unit/v22-role-scope-research.test.cjs
+?? tests/unit/v22-source-composition.test.cjs
+?? tests/unit/v22-source-scope-recovery.test.cjs
+?? tests/unit/v22-temporal-binding.test.cjs

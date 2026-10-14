@@ -1,0 +1,1097 @@
+{
+  "id": "F",
+  "text": "Hidegindításkor a kazán másodpercenként kevesebb mint fél kilogramm pelletet égethet el a gyártó üzemnaplója szerint. A mérnök a felügyelőnek külön megjegyezte, hogy az égőt nem szabad kézzel újragyújtani. A margón két szám, 14 és 19 áll egység és megnevezett alkatrész nélkül.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 15,
+        "text": "Hidegindításkor",
+        "lemma": "hidegindítás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Tem",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 77
+      },
+      {
+        "start": 16,
+        "end": 17,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 18
+      },
+      {
+        "start": 18,
+        "end": 23,
+        "text": "kazán",
+        "lemma": "kazán",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 77
+      },
+      {
+        "start": 24,
+        "end": 39,
+        "text": "másodpercenként",
+        "lemma": "másodperc",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dis",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 77
+      },
+      {
+        "start": 40,
+        "end": 48,
+        "text": "kevesebb",
+        "lemma": "kevesebb",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 68
+      },
+      {
+        "start": 49,
+        "end": 53,
+        "text": "mint",
+        "lemma": "mint",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 58
+      },
+      {
+        "start": 54,
+        "end": 57,
+        "text": "fél",
+        "lemma": "fél",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Frac",
+          "Number": "Sing"
+        },
+        "dep": "compound",
+        "headStart": 58
+      },
+      {
+        "start": 58,
+        "end": 67,
+        "text": "kilogramm",
+        "lemma": "kilogramm",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 40
+      },
+      {
+        "start": 68,
+        "end": 76,
+        "text": "pelletet",
+        "lemma": "pellet",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 77
+      },
+      {
+        "start": 77,
+        "end": 84,
+        "text": "égethet",
+        "lemma": "égethet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Pot",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 77
+      },
+      {
+        "start": 85,
+        "end": 87,
+        "text": "el",
+        "lemma": "el",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 77
+      },
+      {
+        "start": 88,
+        "end": 89,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 90
+      },
+      {
+        "start": 90,
+        "end": 96,
+        "text": "gyártó",
+        "lemma": "gyártó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 97
+      },
+      {
+        "start": 97,
+        "end": 108,
+        "text": "üzemnaplója",
+        "lemma": "üzemnapló",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 77
+      },
+      {
+        "start": 109,
+        "end": 116,
+        "text": "szerint",
+        "lemma": "szerint",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 97
+      },
+      {
+        "start": 116,
+        "end": 117,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 77
+      },
+      {
+        "start": 118,
+        "end": 119,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 120
+      },
+      {
+        "start": 120,
+        "end": 126,
+        "text": "mérnök",
+        "lemma": "mérnök",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 148
+      },
+      {
+        "start": 127,
+        "end": 128,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 129
+      },
+      {
+        "start": 129,
+        "end": 141,
+        "text": "felügyelőnek",
+        "lemma": "felügyelő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 148
+      },
+      {
+        "start": 142,
+        "end": 147,
+        "text": "külön",
+        "lemma": "külön",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 148
+      },
+      {
+        "start": 148,
+        "end": 159,
+        "text": "megjegyezte",
+        "lemma": "megjegyez",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 148
+      },
+      {
+        "start": 159,
+        "end": 160,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 192
+      },
+      {
+        "start": 161,
+        "end": 165,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 192
+      },
+      {
+        "start": 166,
+        "end": 168,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 169
+      },
+      {
+        "start": 169,
+        "end": 173,
+        "text": "égőt",
+        "lemma": "égő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 192
+      },
+      {
+        "start": 174,
+        "end": 177,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 178
+      },
+      {
+        "start": 178,
+        "end": 184,
+        "text": "szabad",
+        "lemma": "szabad",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 185
+      },
+      {
+        "start": 185,
+        "end": 191,
+        "text": "kézzel",
+        "lemma": "kéz",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ins",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 192
+      },
+      {
+        "start": 192,
+        "end": 204,
+        "text": "újragyújtani",
+        "lemma": "újragyújt",
+        "pos": "VERB",
+        "morph": {
+          "VerbForm": "Inf",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 148
+      },
+      {
+        "start": 204,
+        "end": 205,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 148
+      },
+      {
+        "start": 206,
+        "end": 207,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 219
+      },
+      {
+        "start": 208,
+        "end": 214,
+        "text": "margón",
+        "lemma": "margó",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Sup",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 219
+      },
+      {
+        "start": 215,
+        "end": 218,
+        "text": "két",
+        "lemma": "két",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 219
+      },
+      {
+        "start": 219,
+        "end": 223,
+        "text": "szám",
+        "lemma": "szám",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 219
+      },
+      {
+        "start": 223,
+        "end": 224,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 238
+      },
+      {
+        "start": 225,
+        "end": 227,
+        "text": "14",
+        "lemma": "14",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 234
+      },
+      {
+        "start": 228,
+        "end": 230,
+        "text": "és",
+        "lemma": "és",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 231
+      },
+      {
+        "start": 231,
+        "end": 233,
+        "text": "19",
+        "lemma": "19",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 225
+      },
+      {
+        "start": 234,
+        "end": 237,
+        "text": "áll",
+        "lemma": "áll",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "amod:att",
+        "headStart": 238
+      },
+      {
+        "start": 238,
+        "end": 244,
+        "text": "egység",
+        "lemma": "egység",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 219
+      },
+      {
+        "start": 245,
+        "end": 247,
+        "text": "és",
+        "lemma": "és",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 260
+      },
+      {
+        "start": 248,
+        "end": 259,
+        "text": "megnevezett",
+        "lemma": "megnevezett",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 260
+      },
+      {
+        "start": 260,
+        "end": 269,
+        "text": "alkatrész",
+        "lemma": "alkatrész",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 219
+      },
+      {
+        "start": 270,
+        "end": 276,
+        "text": "nélkül",
+        "lemma": "nélkül",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 219
+      },
+      {
+        "start": 276,
+        "end": 277,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 219
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 117,
+        "text": "Hidegindításkor a kazán másodpercenként kevesebb mint fél kilogramm pelletet égethet el a gyártó üzemnaplója szerint."
+      },
+      {
+        "start": 118,
+        "end": 205,
+        "text": "A mérnök a felügyelőnek külön megjegyezte, hogy az égőt nem szabad kézzel újragyújtani."
+      },
+      {
+        "start": 206,
+        "end": 277,
+        "text": "A margón két szám, 14 és 19 áll egység és megnevezett alkatrész nélkül."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "szerint",
+        "content": {
+          "start": 116,
+          "end": 117,
+          "textSpan": "."
+        },
+        "attribution": null,
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Pot"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported",
+          "possible"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "missing_action",
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 117,
+          "textSpan": "Hidegindításkor a kazán másodpercenként kevesebb mint fél kilogramm pelletet égethet el a gyártó üzemnaplója szerint."
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 117,
+          "textSpan": "Hidegindításkor a kazán másodpercenként kevesebb mint fél kilogramm pelletet égethet el a gyártó üzemnaplója szerint."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:117",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 118,
+          "end": 205,
+          "textSpan": "A mérnök a felügyelőnek külön megjegyezte, hogy az égőt nem szabad kézzel újragyújtani."
+        },
+        "attribution": null,
+        "action": "megjegyez",
+        "actionSpan": {
+          "start": 148,
+          "end": 159,
+          "textSpan": "megjegyezte"
+        },
+        "object": [
+          "égő"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 118,
+          "end": 205,
+          "textSpan": "A mérnök a felügyelőnek külön megjegyezte, hogy az égőt nem szabad kézzel újragyújtani."
+        },
+        "propositionSpan": {
+          "start": 118,
+          "end": 205,
+          "textSpan": "A mérnök a felügyelőnek külön megjegyezte, hogy az égőt nem szabad kézzel újragyújtani."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:118:205",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 206,
+          "end": 223,
+          "textSpan": "A margón két szám"
+        },
+        "attribution": null,
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 2,
+            "canonicalValue": 2,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 215,
+            "end": 223,
+            "raw": "két szám",
+            "evidenceSpan": {
+              "start": 215,
+              "end": 223,
+              "textSpan": "két szám"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 215,
+                    "end": 223,
+                    "textSpan": "két szám"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:206:223",
+              "clauseSpan": {
+                "start": 206,
+                "end": 223,
+                "textSpan": "A margón két szám"
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 215,
+                    "end": 218,
+                    "textSpan": "két"
+                  },
+                  "targetSpan": {
+                    "start": 219,
+                    "end": 223,
+                    "textSpan": "szám"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 206,
+          "end": 223,
+          "textSpan": "A margón két szám"
+        },
+        "propositionSpan": {
+          "start": 206,
+          "end": 223,
+          "textSpan": "A margón két szám"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:206:223",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 225,
+          "end": 277,
+          "textSpan": "14 és 19 áll egység és megnevezett alkatrész nélkül."
+        },
+        "attribution": null,
+        "action": "áll",
+        "actionSpan": {
+          "start": 234,
+          "end": 237,
+          "textSpan": "áll"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 14,
+            "canonicalValue": 14,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 225,
+            "end": 227,
+            "raw": "14",
+            "evidenceSpan": {
+              "start": 225,
+              "end": 227,
+              "textSpan": "14"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 225,
+                    "end": 227,
+                    "textSpan": "14"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:225:277",
+              "clauseSpan": {
+                "start": 225,
+                "end": 277,
+                "textSpan": "14 és 19 áll egység és megnevezett alkatrész nélkül."
+              },
+              "predicateSpan": {
+                "start": 234,
+                "end": 237,
+                "textSpan": "áll"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 225,
+                    "end": 227,
+                    "textSpan": "14"
+                  },
+                  "targetSpan": {
+                    "start": 234,
+                    "end": 237,
+                    "textSpan": "áll"
+                  }
+                },
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 234,
+                    "end": 237,
+                    "textSpan": "áll"
+                  },
+                  "targetSpan": {
+                    "start": 238,
+                    "end": 244,
+                    "textSpan": "egység"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "value": 19,
+            "canonicalValue": 19,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 231,
+            "end": 233,
+            "raw": "19",
+            "evidenceSpan": {
+              "start": 231,
+              "end": 233,
+              "textSpan": "19"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 231,
+                    "end": 233,
+                    "textSpan": "19"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:225:277",
+              "clauseSpan": {
+                "start": 225,
+                "end": 277,
+                "textSpan": "14 és 19 áll egység és megnevezett alkatrész nélkül."
+              },
+              "predicateSpan": {
+                "start": 234,
+                "end": 237,
+                "textSpan": "áll"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "conj",
+                  "sourceSpan": {
+                    "start": 231,
+                    "end": 233,
+                    "textSpan": "19"
+                  },
+                  "targetSpan": {
+                    "start": 225,
+                    "end": 227,
+                    "textSpan": "14"
+                  }
+                },
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 225,
+                    "end": 227,
+                    "textSpan": "14"
+                  },
+                  "targetSpan": {
+                    "start": 234,
+                    "end": 237,
+                    "textSpan": "áll"
+                  }
+                },
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 234,
+                    "end": 237,
+                    "textSpan": "áll"
+                  },
+                  "targetSpan": {
+                    "start": 238,
+                    "end": 244,
+                    "textSpan": "egység"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 225,
+          "end": 277,
+          "textSpan": "14 és 19 áll egység és megnevezett alkatrész nélkül."
+        },
+        "propositionSpan": {
+          "start": 225,
+          "end": 277,
+          "textSpan": "14 és 19 áll egység és megnevezett alkatrész nélkül."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:225:277",
+        "syntacticRoles": []
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

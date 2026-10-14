@@ -1,0 +1,11 @@
+
+F:\Projekt2025\Lumen\scripts\experimental\morph-clause-binder.cjs
+  41:125  warning  'value' is never reassigned. Use 'const' instead   prefer-const
+  68:141  warning  'action' is never reassigned. Use 'const' instead  prefer-const
+
+F:\Projekt2025\Lumen\scripts\experimental\morph-evaluate.cjs
+  15:317  warning  'objectTotal' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+  0 errors and 2 warnings potentially fixable with the `--fix` option.
+

@@ -1,0 +1,17 @@
+const fs=require('node:fs'),cp=require('node:child_process'),assert=require('node:assert/strict');
+const {WorkerClient,validAnnotation}=require('../../../scripts/experimental/morph-worker-client.cjs');
+const golden=require('../../../tests/fixtures/real-text-a/source-composition-annotations.json').filter(x=>['institution','nested','modal','nested_possessor'].includes(x.id));
+const fresh='„Árvíztűrő tükörfúrógéppel írunk” – mondta Júlia 2026. október 13-án. A műhelyben 17% jelölés látszik. 😀';
+const texts=[fresh,...golden.map(x=>x.text)];
+const batch=()=>{const w=new WorkerClient();const input=texts.map((text,i)=>JSON.stringify({id:i+1,text})).join('\n')+'\n';const r=cp.spawnSync(w.command,w.args,{input,encoding:'utf8',timeout:45000,maxBuffer:5e6});const result={command:w.command,args:w.args,exitCode:r.status,signal:r.signal,stderr:r.stderr,stdout:r.stdout};assert.equal(r.status,0,r.stderr);const lines=r.stdout.trim().split('\n').map(JSON.parse);assert.equal(lines[0].type,'ready');assert.equal(lines.length,texts.length+1);lines.slice(1).forEach((x,i)=>{assert.equal(x.id,i+1);assert.equal(x.ok,true);assert.ok(validAnnotation(texts[i],x.annotation));});return {...result,responses:lines.slice(1),ready:lines[0]};};
+const a=batch(),b=batch();
+fs.writeFileSync(__dirname+'/live_runs.json',JSON.stringify({texts,first:a,second:b},null,2),{flag:'wx'});
+const comparisons=golden.map((g,i)=>({id:g.id,equal:require('node:util').isDeepStrictEqual(g.annotation,a.responses[i+1].annotation),expected:g.annotation,actual:a.responses[i+1].annotation}));
+const old=require('../morph_clause/07_model_environment.json'),env=require('./environment.json').current;
+const modelDiff=Object.entries(old.modelFiles).filter(([p,h])=>env.modelHashes[p]!==h);
+fs.writeFileSync(__dirname+'/golden_comparison.json',JSON.stringify({modelDiff,packages:{old:old.packages,current:env.packages},comparisons},null,2),{flag:'wx'});
+const equal=a.responses.every((x,i)=>require('node:util').isDeepStrictEqual(x.annotation,b.responses[i].annotation));
+const result={freshInput:fresh,twoIndependentProcesses:true,exitCodes:[a.exitCode,b.exitCode],allAnnotationFieldsEqual:equal,utf8Accents:['á','é','í','ó','ö','ő','ú','ü','ű'].every(c=>fresh.toLocaleLowerCase('hu').includes(c)),exactOffsets:true,sentenceCount:a.responses[0].annotation.sentences.length,tokenCount:a.responses[0].annotation.tokens.length,goldenMatched:comparisons.filter(x=>x.equal).length,goldenTotal:golden.length,modelHashDrift:modelDiff.length};
+fs.writeFileSync(__dirname+'/reproducibility.json',JSON.stringify(result,null,2),{flag:'wx'});
+console.log(result);
+(async()=>{const w=new WorkerClient();try{const r=await w.request(fresh);assert.deepEqual(r.annotation,a.responses[0].annotation);const child=w.child;const ended=new Promise(resolve=>child.once('close',(code,signal)=>resolve({code,signal})));child.stdin.end();const exit=await ended;assert.equal(exit.code,0);fs.writeFileSync(__dirname+'/client_live.json',JSON.stringify({annotationEqual:true,exit,ready:w.load},null,2),{flag:'wx'});}finally{w.stop();}})().catch(e=>{console.error(e);process.exitCode=1;});

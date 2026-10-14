@@ -1,0 +1,1281 @@
+﻿import { Agent, run, tool } from "@openai/agents";
+import { z } from "zod";
+import fs from "node:fs/promises";
+import path from "node:path";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+
+const execFileAsync = promisify(execFile);
+
+if (!process.env.OPENAI_API_KEY) {
+  console.error("OPENAI_API_KEY HIANYZIK");
+  process.exit(1);
+}
+
+const ROOT = process.cwd();
+const MODEL = process.env.UTOM_AGENT_MODEL || "gpt-5.4-mini";
+const MAX_ROUNDS = Math.min(
+  Math.max(Number(process.env.UTOM_AGENT_ROUNDS || "2"), 1),
+  3
+);
+
+const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+const RUN_DIR = path.join(ROOT, "scripts", "agents", "runs", stamp);
+
+await fs.mkdir(RUN_DIR, { recursive: true });
+
+const READ_ROOTS = [
+  "scripts/experimental",
+  "tests/unit",
+  "tests/fixtures/real-text-a",
+  "docs/UTOM_V2_2",
+];
+
+const WRITE_ROOTS = [
+  "scripts/experimental",
+  "tests/unit",
+  "tests/fixtures/real-text-a",
+  "docs/UTOM_V2_2",
+];
+
+const TARGET_TESTS = [
+  "tests/unit/v22-dependency-actor-numeric.test.cjs",
+  "tests/unit/v22-contrast-correction.test.cjs",
+  "tests/unit/v22-attribution-chain.test.cjs",
+  "tests/unit/v22-real-text-a-research.test.cjs",
+];
+
+const changedFiles = new Set();
+const backedUpFiles = new Set();
+
+function rel(input) {
+  if (typeof input !== "string" || !input.trim()) {
+    throw new Error("Invalid path");
+  }
+
+  const p = input.replaceAll("\\", "/").replace(/^\.\/+/, "");
+
+  if (
+    p.startsWith("/") ||
+    /^[A-Za-z]:/.test(p) ||
+    p.split("/").includes("..")
+  ) {
+    throw new Error(`Unsafe path: ${input}`);
+  }
+
+  return p;
+}
+
+function underRoots(file, roots) {
+  return roots.some((root) => file === root || file.startsWith(root + "/"));
+}
+
+function absolute(file) {
+  return path.join(ROOT, ...rel(file).split("/"));
+}
+
+async function exists(file) {
+  try {
+    await fs.access(absolute(file));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function readSafe(file, limit = 90000) {
+  const p = rel(file);
+
+  if (!underRoots(p, READ_ROOTS)) {
+    throw new Error(`READ DENIED: ${p}`);
+  }
+
+  const text = await fs.readFile(absolute(p), "utf8");
+
+  if (text.length <= limit) return text;
+
+  return (
+    text.slice(0, limit) +
+    `\n\n[TRUNCATED: ${text.length - limit} characters omitted]\n`
+  );
+}
+
+async function backupBeforeWrite(file) {
+  const p = rel(file);
+
+  if (backedUpFiles.has(p)) return;
+  backedUpFiles.add(p);
+
+  if (!(await exists(p))) return;
+
+  const destination = path.join(
+    RUN_DIR,
+    "backup",
+    ...p.split("/")
+  );
+
+  await fs.mkdir(path.dirname(destination), { recursive: true });
+  await fs.copyFile(absolute(p), destination);
+}
+
+async function writeSafe(file, content) {
+  const p = rel(file);
+
+  if (!underRoots(p, WRITE_ROOTS)) {
+    throw new Error(`WRITE DENIED: ${p}`);
+  }
+
+  if (p.startsWith("tests/unit/")) {
+    const name = path.basename(p);
+
+    if (!name.startsWith("v22-")) {
+      throw new Error(
+        `WRITE DENIED: only V2.2 unit tests may be changed: ${p}`
+      );
+    }
+  }
+
+  if (typeof content !== "string") {
+    throw new Error("Content must be string");
+  }
+
+  if (content.length > 300000) {
+    throw new Error(`File too large to write safely: ${p}`);
+  }
+
+  await backupBeforeWrite(p);
+
+  const target = absolute(p);
+  await fs.mkdir(path.dirname(target), { recursive: true });
+  await fs.writeFile(target, content, "utf8");
+
+  changedFiles.add(p);
+
+  return `WROTE ${p} (${content.length} chars)`;
+}
+
+async function runTargetedTestsInternal() {
+  const available = [];
+
+  for (const test of TARGET_TESTS) {
+    if (await exists(test)) available.push(test);
+  }
+
+  if (!available.length) {
+    return {
+      ok: false,
+      output: "NO TARGETED V2.2 TEST FILES FOUND",
+      tests: [],
+    };
+  }
+
+  try {
+    const { stdout, stderr } = await execFileAsync(
+      process.execPath,
+      ["--test", ...available],
+      {
+        cwd: ROOT,
+        timeout: 180000,
+        maxBuffer: 12 * 1024 * 1024,
+      }
+    );
+
+    return {
+      ok: true,
+      tests: available,
+      output: `${stdout || ""}\n${stderr || ""}`.slice(-60000),
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      tests: available,
+      output: [
+        error.stdout || "",
+        error.stderr || "",
+        error.message || "",
+      ]
+        .join("\n")
+        .slice(-60000),
+    };
+  }
+}
+
+const readFileTool = tool({
+  name: "read_research_file",
+  description:
+    "Read an UTOM V2.2 research, fixture, documentation or V2.2 test file. Production application files are intentionally unavailable.",
+  parameters: z.object({
+    path: z.string(),
+  }),
+  async execute({ path }) {
+    try {
+      return await readSafe(path);
+    } catch (error) {
+      return `ERROR: ${error.message}`;
+    }
+  },
+});
+
+const writeFileTool = tool({
+  name: "write_research_file",
+  description:
+    "Create or update an UTOM V2.2 experimental, fixture, documentation or v22-* unit test file. A backup is automatically created before modifying an existing file.",
+  parameters: z.object({
+    path: z.string(),
+    content: z.string(),
+  }),
+  async execute({ path, content }) {
+    try {
+      return await writeSafe(path, content);
+    } catch (error) {
+      return `ERROR: ${error.message}`;
+    }
+  },
+});
+
+const runTestsTool = tool({
+  name: "run_targeted_v22_tests",
+  description:
+    "Run only the targeted UTOM V2.2 semantic regression tests. Never runs the complete test suite, build, production preflight or deployment.",
+  parameters: z.object({
+    reason: z.string().optional(),
+  }),
+  async execute() {
+    const result = await runTargetedTestsInternal();
+
+    return JSON.stringify(
+      {
+        ok: result.ok,
+        tests: result.tests,
+        output: result.output,
+      },
+      null,
+      2
+    );
+  },
+});
+
+async function walk(dir, out = []) {
+  let entries;
+
+  try {
+    entries = await fs.readdir(path.join(ROOT, dir), {
+      withFileTypes: true,
+    });
+  } catch {
+    return out;
+  }
+
+  for (const entry of entries) {
+    const child = `${dir}/${entry.name}`;
+
+    if (entry.isDirectory()) {
+      await walk(child, out);
+    } else {
+      out.push(child);
+    }
+  }
+
+  return out;
+}
+
+async function buildResearchContext() {
+  let files = [];
+
+  for (const root of READ_ROOTS) {
+    files.push(...(await walk(root)));
+  }
+
+  files = files
+    .filter((file) =>
+      /\.(cjs|mjs|js|json|md)$/i.test(file)
+    )
+    .filter((file) =>
+      /v22|real-text-a|contrast|attribution|dependency|numeric|actor|semantic|binder/i.test(
+        file
+      )
+    )
+    .sort();
+
+  const priority = [
+    "scripts/experimental/real-text-a-binder.cjs",
+    "scripts/experimental/contrast-correction.cjs",
+    "scripts/experimental/attribution-chain.cjs",
+    "tests/fixtures/real-text-a/contrast-annotations.json",
+    "tests/fixtures/real-text-a/attribution-annotations.json",
+    "tests/unit/v22-dependency-actor-numeric.test.cjs",
+    "tests/unit/v22-contrast-correction.test.cjs",
+    "tests/unit/v22-attribution-chain.test.cjs",
+    "tests/unit/v22-real-text-a-research.test.cjs",
+  ];
+
+  const ordered = [
+    ...priority.filter((f) => files.includes(f)),
+    ...files.filter((f) => !priority.includes(f)),
+  ].slice(0, 24);
+
+  let output = "";
+  const TOTAL_LIMIT = 85000;
+
+  for (const file of ordered) {
+    if (output.length >= TOTAL_LIMIT) break;
+
+    try {
+      const body = await readSafe(file, 14000);
+
+      output +=
+        `\n\n================ FILE: ${file} ================\n` +
+        body;
+    } catch {}
+  }
+
+  return output.slice(0, TOTAL_LIMIT);
+}
+
+async function save(name, text) {
+  await fs.writeFile(
+    path.join(RUN_DIR, name),
+    String(text ?? ""),
+    "utf8"
+  );
+}
+
+const MISSION = `
+UTOM V2.2 AUTONOMOUS SEMANTIC RESEARCH MISSION
+=============================================
+
+PRODUCT CONTEXT
+---------------
+UTOM is a Hungarian news-intelligence system.
+
+The semantic research subsystem must not merely summarize text.
+Its job is to construct conservative, evidence-backed semantic
+representations from real Hungarian news language.
+
+The fundamental safety rule is:
+
+    WRONG_RESOLVED is much worse than UNRESOLVED.
+
+If the system cannot positively justify a binding from syntax,
+morphology, dependency structure, explicit lexical relation,
+scope or another defensible sentence-local signal, it should
+prefer unresolved.
+
+Never invent semantic certainty from proximity alone.
+
+CURRENT VERIFIED RESEARCH
+-------------------------
+The system already has targeted research work around:
+
+1. Contrastive negation / correction:
+   "nem X, hanem Y"
+
+   Required behavior:
+   - rejected alternative must not survive as a positive fact
+   - accepted alternative remains positive
+   - event itself must not accidentally become negated
+   - rejected and accepted alternatives may bind actor, amount,
+     number, date/time, source or object
+   - ambiguous cases remain unresolved
+
+2. Nested attribution chains:
+
+   Example conceptual structure:
+
+      police -> witness -> proposition
+
+   The system must preserve:
+   - outer source
+   - intermediate source
+   - inner source
+   - claim owner
+   - event actor
+   - attribution verb
+   - parent/child attribution relation
+   - evidence
+   - denied/uncertain claims where relevant
+
+Do not regress either of these areas.
+
+CURRENT BLOCKER
+---------------
+DEPENDENCY-BACKED ACTOR AND NUMERIC ARGUMENT BINDING.
+
+The system needs a much stronger distinction between a nearby
+entity and an entity that is actually licensed by syntax or
+morphology to fill a semantic role.
+
+ACTOR REQUIREMENTS
+------------------
+Distinguish at minimum:
+
+- grammatical subject
+- semantic actor / agent
+- passive patient
+- explicit passive agent
+- object
+- recipient
+- possessive owner
+- attribution source
+- claim owner
+- event actor
+- implicit / omitted actor
+- unresolved actor
+
+Hungarian is especially important because word order is flexible.
+
+Do NOT assume:
+
+    nearest person/entity to predicate == actor
+
+Evidence may include:
+
+- case morphology
+- verbal agreement
+- subject-predicate construction
+- passive/periphrastic construction
+- possession markers
+- postpositions
+- explicit attribution verbs
+- dependency-like structural relation
+- clause boundary/scope
+- contrastive correction
+
+Example traps:
+
+"Kovács Péter cége 120 embert vett fel."
+
+Correct semantic distinction:
+- event actor = company
+- Kovács Péter = possessor/modifier
+- object/count target = people
+- 120 = count tied to hiring event/object
+- do not turn Kovács Péter himself into event actor
+
+"A vállalat szerint Kovács Péter 120 embert vett fel."
+
+Different structure:
+- source = company
+- event actor = Kovács Péter
+- 120 = count of hired persons
+
+NUMERIC REQUIREMENTS
+--------------------
+Numbers must be typed and attached to the correct semantic frame.
+
+At minimum distinguish:
+
+- count
+- money
+- percentage
+- age
+- duration
+- year
+- calendar date
+- clock time
+- measurement
+- ordinal/ranking where identifiable
+- unresolved numeric expression
+
+Examples:
+
+"38 millió forintos szerződés"
+    money/contract amount
+
+"38 éves férfi"
+    age
+
+"38 százalékkal nőtt"
+    percentage/change
+
+"38 embert vett fel"
+    count/event argument
+
+"2026-ban"
+    temporal year of appropriate event
+
+"2026 dolgozót alkalmaz"
+    count, NOT year
+
+"három évig"
+    duration
+
+"3 kilométerre"
+    measurement/distance
+
+Never classify only because the token looks like a four-digit year.
+Local syntax and lexical unit matter.
+
+OWNERSHIP / BINDING
+-------------------
+Numeric ownership means semantic attachment, not legal ownership.
+
+The system should be able to say things such as:
+
+- number belongs to event argument
+- amount belongs to contract
+- percentage belongs to change
+- age belongs to person
+- duration belongs to event/state
+- year belongs to event temporal frame
+
+Do not attach a number to an actor simply because the actor is nearby.
+
+EVIDENCE CONTRACT
+-----------------
+A resolved binding should expose enough information to explain why
+it was resolved.
+
+Where practical preserve:
+
+- value/text
+- semantic type
+- target entity/frame
+- role
+- evidence span or source fragment
+- rule/reason
+- confidence/resolution status
+
+If evidence is weak:
+    unresolved
+
+If two interpretations remain plausible:
+    unresolved or explicitly ambiguous
+
+Do not silently choose.
+
+RESEARCH QUALITY
+----------------
+Every change should answer:
+
+1. Which failure class does this fix?
+2. What positive evidence licenses the new resolution?
+3. Which counterexample prevents overgeneralization?
+4. Which existing behavior could regress?
+5. What targeted regression proves the fix?
+
+Do not optimize merely for test count.
+Do not create a brittle phrase dictionary that memorizes fixtures.
+
+Prefer reusable rules.
+
+REGRESSION EXPECTATIONS
+-----------------------
+Create or strengthen targeted regression cases covering at least:
+
+- possessive owner vs event actor
+- attribution source vs event actor
+- subject vs object with flexible Hungarian word order
+- person age vs nearby event number
+- money vs count
+- year vs count
+- percentage ownership
+- duration binding
+- measurement binding
+- nested attribution + numeric binding
+- contrastive correction + actor binding
+- ambiguous actor case that MUST remain unresolved
+
+PRESERVATION RULES
+------------------
+Must preserve the verified semantics of:
+
+- contrastive negation
+- attributionChains
+- rejected vs accepted alternatives
+- uncertain/unresolved representation
+- evidence spans
+- existing fixture behavior
+
+STRICT SCOPE
+------------
+This is RESEARCH ONLY.
+
+Allowed modification areas:
+- scripts/experimental/**
+- tests/unit/v22-*.test.cjs
+- tests/fixtures/real-text-a/**
+- docs/UTOM_V2_2/**
+
+Forbidden:
+- app/**
+- production pipeline
+- auth
+- database schema/migrations
+- RSS
+- billing
+- production configuration
+- package.json dependency changes
+- package-lock.json changes
+- build configuration
+
+Never:
+- npm install
+- npm audit fix
+- full test suite
+- Next.js build
+- production preflight
+- git commit
+- git push
+- deploy
+
+SUCCESS CRITERIA
+----------------
+The round is successful only when:
+
+A. targeted tests pass
+B. no obvious contrast regression exists
+C. no obvious attribution regression exists
+D. actor resolution uses positive structural evidence
+E. numeric attachment uses positive structural evidence
+F. ambiguous cases remain unresolved
+G. blind adversarial cases do not expose a high
+   WRONG_RESOLVED risk
+
+The goal is NOT maximum resolution.
+
+The goal is:
+
+    maximum defensible resolution
+    with minimum WRONG_RESOLVED.
+`;
+
+function specialist(name, instructions, effort = "medium") {
+  return new Agent({
+    name,
+    model: MODEL,
+    modelSettings: {
+      reasoning: { effort },
+      text: { verbosity: "medium" },
+      maxTokens: effort === "high" ? 60000 : 30000,
+    },
+    instructions,
+  });
+}
+
+const linguist = specialist(
+  "UTOM Hungarian Linguist",
+  `
+You are the Hungarian linguistics specialist for UTOM V2.2.
+
+Focus on actual Hungarian syntax, morphology, possession,
+case marking, flexible word order, clause structure and
+subject/object ambiguity.
+
+Do NOT write code.
+
+Find concrete failure classes in the supplied implementation
+and fixtures.
+
+For each finding provide:
+
+FAILURE_CLASS
+EXAMPLE
+CORRECT_SEMANTICS
+POSITIVE_EVIDENCE
+WRONG_HEURISTIC_TO_AVOID
+SUGGESTED_RULE
+REGRESSION_CASE
+
+Be conservative.
+Prefer unresolved over unsupported resolution.
+`
+);
+
+const dependencyAgent = specialist(
+  "UTOM Dependency Binder Researcher",
+  `
+You specialize in semantic/dependency binding.
+
+Inspect the supplied UTOM V2.2 research implementation.
+
+Determine where actor/object/source/possessor resolution is
+currently based on proximity, lexical coincidence or insufficient
+scope reasoning.
+
+Do NOT edit code.
+
+Produce:
+- current architecture assessment
+- exact weak rules
+- structural replacement strategy
+- compatibility requirements
+- edge cases
+- recommended data representation
+- targeted tests
+
+Preserve contrast correction and attribution chains.
+`
+);
+
+const numericAgent = specialist(
+  "UTOM Numeric Semantics Researcher",
+  `
+You specialize in numeric semantic ownership.
+
+Study how numbers should bind in Hungarian news text.
+
+Distinguish count, money, percentage, age, duration, year,
+calendar date, clock time, measurement and unresolved numeric
+expressions.
+
+Inspect the supplied implementation and identify:
+- false year detection risk
+- false actor ownership
+- proximity mistakes
+- unit interpretation errors
+- clause-scope mistakes
+
+Do NOT edit code.
+
+Give exact proposed rules and adversarial regressions.
+`
+);
+
+const redTeam = specialist(
+  "UTOM Semantic Red Team",
+  `
+You are hostile to overconfident semantic resolution.
+
+Your job is to break the proposed/current binder.
+
+Generate realistic Hungarian news sentences that defeat:
+- nearest-entity actor heuristics
+- nearest-number ownership heuristics
+- naive 4-digit year rules
+- possession handling
+- attribution handling
+- negation handling
+- clause-boundary handling
+
+Do NOT write implementation code.
+
+For each case specify:
+INPUT
+TRAP
+GOLD_SEMANTICS
+WHAT_MUST_REMAIN_UNRESOLVED
+LIKELY_BAD_BINDING
+
+WRONG_RESOLVED is the primary failure metric.
+`
+);
+
+const evidenceAgent = specialist(
+  "UTOM Evidence and Safety Auditor",
+  `
+You audit SENTENCE-LOCAL SEMANTIC EVIDENCE.
+
+Important:
+Do NOT demand an external web source.
+"EVIDENCE" here means evidence in the supplied sentence/text:
+tokens, spans, morphology, syntax, lexical units, clause scope
+and explicit relations.
+
+Audit whether resolved actor and numeric bindings can be justified
+by sentence-local evidence.
+
+Classify patterns as:
+SUPPORTED
+WEAK
+AMBIGUOUS
+UNSUPPORTED
+
+Give implementation constraints that prevent unsupported
+resolution.
+
+Do NOT edit code.
+`
+);
+
+const blindDesigner = specialist(
+  "UTOM Blind Benchmark Designer",
+  `
+You design a HELD-OUT Hungarian semantic benchmark.
+
+The implementer will NOT see your cases before modifying code.
+
+Generate 14 difficult, natural Hungarian news-style cases focused
+on actor and numeric argument binding.
+
+Mix:
+- possession
+- nested attribution
+- flexible word order
+- money
+- ages
+- percentages
+- years that look like counts
+- counts that look like years
+- durations
+- measurements
+- contrastive negation
+- genuine ambiguity
+
+For each case output:
+CASE_ID
+TEXT
+EXPECTED_ACTOR
+EXPECTED_NUMERIC_BINDINGS
+EXPECTED_SOURCE_CHAIN
+EXPECTED_UNRESOLVED
+FAIL_CONDITION
+
+Do not reuse exact fixture sentences from the supplied context.
+`
+);
+
+const implementer = new Agent({
+  name: "UTOM Binder Implementer",
+  model: MODEL,
+  modelSettings: {
+    reasoning: { effort: "high" },
+    text: { verbosity: "medium" },
+    maxTokens: 100000,
+    truncation: "auto", parallelToolCalls: false,
+  },
+  tools: [
+    readFileTool,
+    writeFileTool,
+    runTestsTool,
+  ],
+  instructions: `
+You are the implementation engineer for the UTOM V2.2
+semantic research system.
+
+You have controlled local tools.
+
+You MUST use the tools rather than pretending files were changed.
+
+Workflow:
+
+1. Read the exact relevant research implementation.
+2. Read relevant targeted tests.
+3. Understand the existing representation.
+4. Make the SMALLEST coherent research-only implementation
+   change that addresses the blocker.
+5. Add targeted regressions.
+6. Preserve contrast and attribution behavior.
+7. Run targeted V2.2 tests.
+8. If tests fail, inspect and repair.
+9. Stop when the targeted research state is coherent.
+
+Never access or modify production application code.
+
+Do not solve this by hardcoding complete fixture sentences.
+Do not weaken assertions merely to make tests pass.
+Do not convert ambiguous cases into false certainty.
+
+At the end report:
+
+IMPLEMENTATION_SUMMARY
+FILES_CHANGED
+NEW_RULES
+EVIDENCE_MODEL
+REGRESSIONS_ADDED
+TARGETED_TEST_RESULT
+KNOWN_LIMITATIONS
+WRONG_RESOLVED_RISKS
+`
+});
+
+const judge = specialist(
+  "UTOM Independent Semantic Judge",
+  `
+You are the independent acceptance judge.
+
+You did not implement the patch.
+
+Evaluate:
+- mission
+- research reports
+- implementation report
+- actual changed source
+- actual targeted test output
+- held-out adversarial cases
+
+Be skeptical.
+
+Tests passing is necessary but not sufficient.
+
+Reject overfitted solutions and unsupported semantic certainty.
+
+Return EXACTLY one leading verdict line:
+
+VERDICT: ACCEPT
+
+or
+
+VERDICT: NEEDS_ANOTHER_ROUND
+
+or
+
+VERDICT: REJECT
+
+Then provide:
+
+ACTOR_BINDING: PASS/PARTIAL/FAIL
+NUMERIC_BINDING: PASS/PARTIAL/FAIL
+CONTRAST_PRESERVATION: PASS/PARTIAL/FAIL
+ATTRIBUTION_PRESERVATION: PASS/PARTIAL/FAIL
+EVIDENCE_CONTRACT: PASS/PARTIAL/FAIL
+WRONG_RESOLVED_RISK: LOW/MEDIUM/HIGH
+BLIND_CASE_ASSESSMENT:
+REQUIRED_REPAIR:
+RATIONALE:
+
+Do not reward aggressive resolution.
+Unresolved is preferable to invented certainty.
+`,
+  "high"
+);
+
+console.log("\n==============================================");
+console.log(" UTOM BRAIN AUTONOMOUS RESEARCH NETWORK");
+console.log("==============================================");
+console.log("MODEL:", MODEL);
+console.log("MAX ROUNDS:", MAX_ROUNDS);
+console.log("RUN:", RUN_DIR);
+console.log("");
+
+console.log("[1] Research context betoltese...");
+const researchContext = await buildResearchContext();
+
+await save("00-mission.md", MISSION);
+await save("01-context-snapshot.txt", researchContext);
+
+console.log(
+  `[OK] Research context: ${researchContext.length} karakter`
+);
+
+console.log("\n[2] Baseline targeted tesztek...");
+const baseline = await runTargetedTestsInternal();
+
+console.log(
+  baseline.ok
+    ? "[OK] Baseline targeted tests PASS"
+    : "[WARN] Baseline targeted tests nem teljesen PASS"
+);
+
+await save(
+  "02-baseline-tests.txt",
+  JSON.stringify(baseline, null, 2)
+);
+
+const researchInput = `
+${MISSION}
+
+CURRENT RESEARCH SNAPSHOT
+=========================
+${researchContext}
+`;
+
+console.log("\n[3] 5 kutatoagent indul PARHUZAMOSAN...");
+
+async function runResearchAgentSafe(agent, label) {
+  try {
+    return await run(agent, researchInput, { maxTurns: 1 });
+  } catch (error) {
+    console.log(`[WARN] ${label} incomplete/hiba: ${error.message}`);
+    console.log(`[RETRY] ${label} ujraproba tomoritett kontextussal...`);
+
+    try {
+      const compactInput = `${MISSION}
+
+CURRENT RESEARCH SNAPSHOT - COMPACT
+===================================
+${researchContext.slice(0, 50000)}
+
+FONTOS:
+Koncentralj kizárólag a dependency-backed actor es numeric binding blockerre.
+Adj tomor, konkret kutatasi jelentest.
+`;
+
+      return await run(agent, compactInput, { maxTurns: 1 });
+    } catch (retryError) {
+      console.log(`[SKIP] ${label} masodik probalkozasa is sikertelen.`);
+      return {
+        finalOutput:
+          `AGENT_FAILED: ${label}\n${retryError.message}\nA tobbi agent eredmenye alapjan folytasd konzervativan.`
+      };
+    }
+  }
+}
+
+const [
+  linguistResult,
+  dependencyResult,
+  numericResult,
+  redTeamResult,
+  evidenceResult,
+] = await Promise.all([
+  runResearchAgentSafe(linguist, "LINGUIST"),
+  runResearchAgentSafe(dependencyAgent, "DEPENDENCY"),
+  runResearchAgentSafe(numericAgent, "NUMERIC"),
+  runResearchAgentSafe(redTeam, "RED_TEAM"),
+  runResearchAgentSafe(evidenceAgent, "EVIDENCE"),
+]);
+
+const reports = `
+================ LINGUIST ================
+${linguistResult.finalOutput}
+
+================ DEPENDENCY ================
+${dependencyResult.finalOutput}
+
+================ NUMERIC ================
+${numericResult.finalOutput}
+
+================ RED TEAM ================
+${redTeamResult.finalOutput}
+
+================ EVIDENCE ================
+${evidenceResult.finalOutput}
+`;
+
+await save("03-research-reports.md", reports);
+
+console.log("[OK] Research council befejezte.");
+
+let previousJudge = "Nincs elozo Judge feedback.";
+let finalVerdict = "";
+let accepted = false;
+
+for (let round = 1; round <= MAX_ROUNDS; round++) {
+  console.log(
+    `\n================ ROUND ${round}/${MAX_ROUNDS} ================`
+  );
+
+  console.log("[4] Titkos blind benchmark generalasa...");
+
+  const blind = await run(
+    blindDesigner,
+    `
+${MISSION}
+
+ROUND: ${round}
+RUN_ID: ${stamp}
+
+Create fresh held-out cases.
+
+REFERENCE CONTEXT:
+${researchContext}
+`,
+    { maxTurns: 1 }
+  );
+
+  await save(
+    `round-${round}-blind-benchmark.md`,
+    blind.finalOutput
+  );
+
+  console.log(
+    "[OK] Blind benchmark kesz. Implementer NEM kapta meg."
+  );
+
+  console.log("[5] Binder Implementer dolgozik...");
+
+  const implementation = await run(
+    implementer,
+    `
+${MISSION}
+
+RESEARCH COUNCIL REPORTS
+========================
+${reports}
+
+BASELINE TARGETED TESTS
+=======================
+${baseline.output}
+
+PREVIOUS JUDGE FEEDBACK
+=======================
+${previousJudge}
+
+ROUND
+=====
+${round}
+
+Start by reading the exact current research files with tools.
+
+Implement a dependency-backed actor and numeric binding improvement.
+
+You are REQUIRED to:
+- inspect current binder code
+- inspect relevant existing tests
+- add/strengthen regression tests
+- make actual research-only file changes if justified
+- run targeted tests using the provided tool
+- repair failures before finishing when possible
+
+The held-out blind benchmark is intentionally unavailable to you.
+`,
+    { maxTurns: 12 }
+  );
+
+  await save(
+    `round-${round}-implementer.md`,
+    implementation.finalOutput
+  );
+
+  console.log("[OK] Implementer kor befejezve.");
+
+  console.log("[6] Fuggetlen targeted teszt...");
+
+  const postTests = await runTargetedTestsInternal();
+
+  await save(
+    `round-${round}-tests.txt`,
+    JSON.stringify(postTests, null, 2)
+  );
+
+  console.log(
+    postTests.ok
+      ? "[OK] TARGETED TESTS PASS"
+      : "[FAIL] TARGETED TESTS FAIL"
+  );
+
+  let changedContext = "";
+
+  for (const file of [...changedFiles]) {
+    try {
+      changedContext +=
+        `\n\n================ CHANGED FILE: ${file} ================\n` +
+        (await readSafe(file, 50000));
+    } catch {}
+  }
+
+  changedContext = changedContext.slice(0, 150000);
+
+  console.log("[7] Independent Judge ertekel...");
+
+  const judgeResult = await run(
+    judge,
+    `
+${MISSION}
+
+ROUND
+=====
+${round}
+
+RESEARCH COUNCIL
+================
+${reports}
+
+IMPLEMENTER REPORT
+==================
+${implementation.finalOutput}
+
+ACTUAL CHANGED FILES
+====================
+${[...changedFiles].join("\n") || "NONE"}
+
+CURRENT CHANGED SOURCE
+======================
+${changedContext || "NO CHANGED SOURCE"}
+
+ACTUAL TARGETED TEST RESULT
+===========================
+PASS=${postTests.ok}
+
+${postTests.output}
+
+HELD-OUT BLIND BENCHMARK
+========================
+${blind.finalOutput}
+
+Judge the implementation against the mission and held-out cases.
+`,
+    { maxTurns: 1 }
+  );
+
+  finalVerdict = judgeResult.finalOutput;
+
+  await save(
+    `round-${round}-judge.md`,
+    finalVerdict
+  );
+
+  console.log("\n--------------- JUDGE ---------------");
+  console.log(finalVerdict);
+  console.log("-------------------------------------");
+
+  if (
+    /^VERDICT:\s*ACCEPT/im.test(finalVerdict) &&
+    postTests.ok
+  ) {
+    accepted = true;
+    console.log(
+      `\n[ACCEPTED] UTOM Brain research round ${round}.`
+    );
+    break;
+  }
+
+  if (/^VERDICT:\s*REJECT/im.test(finalVerdict)) {
+    console.log(
+      "\n[REJECTED] Judge szerint ezt nem szabad tovabb automatikusan eroltetni."
+    );
+    break;
+  }
+
+  previousJudge = finalVerdict;
+
+  if (round < MAX_ROUNDS) {
+    console.log(
+      "\n[REPAIR] Judge javitast kert. Kovetkezo autonom kor indul."
+    );
+  }
+}
+
+const finalTests = await runTargetedTestsInternal();
+
+const finalReport = `
+# UTOM Brain Agent Network Run
+
+Run: ${stamp}
+
+Model: ${MODEL}
+
+Rounds allowed: ${MAX_ROUNDS}
+
+Accepted: ${accepted}
+
+Changed files:
+
+${[...changedFiles].map((x) => `- ${x}`).join("\n") || "- none"}
+
+Final targeted tests:
+
+${finalTests.ok ? "PASS" : "FAIL"}
+
+Final Judge:
+
+${finalVerdict}
+`;
+
+await save("FINAL.md", finalReport);
+
+console.log("\n==============================================");
+console.log(" UTOM AGENT NETWORK COMPLETE");
+console.log("==============================================");
+console.log("ACCEPTED:", accepted ? "YES" : "NO");
+console.log(
+  "TARGETED TESTS:",
+  finalTests.ok ? "PASS" : "FAIL"
+);
+console.log("CHANGED FILES:");
+
+for (const file of changedFiles) {
+  console.log(" -", file);
+}
+
+console.log("\nREPORT:");
+console.log(path.join(RUN_DIR, "FINAL.md"));
+
+console.log(
+  "\nNincs commit, push, deploy, production build vagy full suite futtatva."
+);
+
+
+
+

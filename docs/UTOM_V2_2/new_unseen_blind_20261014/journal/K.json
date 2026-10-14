@@ -1,0 +1,1785 @@
+{
+  "id": "K",
+  "text": "Az iskola műhelymestere a tanoncoknak átadta a marógép kezelési útmutatóját, és felolvasta a biztonsági részt. Az útmutató szerint felügyelet mellett maximum három munkadarabot lehet egyszerre befogni, de a kiadó neve lemaradt. Az egyik értékelőlapon „Harmadik” áll; nincs jelölve, hogy vizsganapot vagy tanulói helyezést jelent.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 2,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 3
+      },
+      {
+        "start": 3,
+        "end": 9,
+        "text": "iskola",
+        "lemma": "iskola",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 10
+      },
+      {
+        "start": 10,
+        "end": 23,
+        "text": "műhelymestere",
+        "lemma": "műhelymester",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 38
+      },
+      {
+        "start": 24,
+        "end": 25,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 26
+      },
+      {
+        "start": 26,
+        "end": 37,
+        "text": "tanoncoknak",
+        "lemma": "tanonco",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Plur"
+        },
+        "dep": "obl",
+        "headStart": 38
+      },
+      {
+        "start": 38,
+        "end": 44,
+        "text": "átadta",
+        "lemma": "átad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 38
+      },
+      {
+        "start": 45,
+        "end": 46,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 47
+      },
+      {
+        "start": 47,
+        "end": 54,
+        "text": "marógép",
+        "lemma": "marógép",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 64
+      },
+      {
+        "start": 55,
+        "end": 63,
+        "text": "kezelési",
+        "lemma": "kezelési",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 64
+      },
+      {
+        "start": 64,
+        "end": 75,
+        "text": "útmutatóját",
+        "lemma": "útmutató",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obj",
+        "headStart": 38
+      },
+      {
+        "start": 75,
+        "end": 76,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 80
+      },
+      {
+        "start": 77,
+        "end": 79,
+        "text": "és",
+        "lemma": "és",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 80
+      },
+      {
+        "start": 80,
+        "end": 90,
+        "text": "felolvasta",
+        "lemma": "felolvas",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 38
+      },
+      {
+        "start": 91,
+        "end": 92,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 104
+      },
+      {
+        "start": 93,
+        "end": 103,
+        "text": "biztonsági",
+        "lemma": "biztonsági",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 104
+      },
+      {
+        "start": 104,
+        "end": 109,
+        "text": "részt",
+        "lemma": "rész",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 80
+      },
+      {
+        "start": 109,
+        "end": 110,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 38
+      },
+      {
+        "start": 111,
+        "end": 113,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 114
+      },
+      {
+        "start": 114,
+        "end": 122,
+        "text": "útmutató",
+        "lemma": "útmutató",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 177
+      },
+      {
+        "start": 123,
+        "end": 130,
+        "text": "szerint",
+        "lemma": "szerint",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 114
+      },
+      {
+        "start": 131,
+        "end": 141,
+        "text": "felügyelet",
+        "lemma": "felügyelet",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 177
+      },
+      {
+        "start": 142,
+        "end": 149,
+        "text": "mellett",
+        "lemma": "mellett",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 131
+      },
+      {
+        "start": 150,
+        "end": 157,
+        "text": "maximum",
+        "lemma": "maximum",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 164
+      },
+      {
+        "start": 158,
+        "end": 163,
+        "text": "három",
+        "lemma": "három",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 164
+      },
+      {
+        "start": 164,
+        "end": 176,
+        "text": "munkadarabot",
+        "lemma": "munkadarab",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 193
+      },
+      {
+        "start": 177,
+        "end": 182,
+        "text": "lehet",
+        "lemma": "lehet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 177
+      },
+      {
+        "start": 183,
+        "end": 192,
+        "text": "egyszerre",
+        "lemma": "egyszerre",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 193
+      },
+      {
+        "start": 193,
+        "end": 200,
+        "text": "befogni",
+        "lemma": "befog",
+        "pos": "VERB",
+        "morph": {
+          "VerbForm": "Inf",
+          "Voice": "Act"
+        },
+        "dep": "xcomp",
+        "headStart": 177
+      },
+      {
+        "start": 200,
+        "end": 201,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 218
+      },
+      {
+        "start": 202,
+        "end": 204,
+        "text": "de",
+        "lemma": "de",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 218
+      },
+      {
+        "start": 205,
+        "end": 206,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 207
+      },
+      {
+        "start": 207,
+        "end": 212,
+        "text": "kiadó",
+        "lemma": "kiadó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 213
+      },
+      {
+        "start": 213,
+        "end": 217,
+        "text": "neve",
+        "lemma": "név",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 218
+      },
+      {
+        "start": 218,
+        "end": 226,
+        "text": "lemaradt",
+        "lemma": "lemarad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 177
+      },
+      {
+        "start": 226,
+        "end": 227,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 177
+      },
+      {
+        "start": 228,
+        "end": 230,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 237
+      },
+      {
+        "start": 231,
+        "end": 236,
+        "text": "egyik",
+        "lemma": "egyik",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Ind"
+        },
+        "dep": "det",
+        "headStart": 237
+      },
+      {
+        "start": 237,
+        "end": 250,
+        "text": "értékelőlapon",
+        "lemma": "értékelőlap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 262
+      },
+      {
+        "start": 251,
+        "end": 252,
+        "text": "„",
+        "lemma": "„",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "conj",
+        "headStart": 237
+      },
+      {
+        "start": 252,
+        "end": 260,
+        "text": "Harmadik",
+        "lemma": "harmadik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 260
+      },
+      {
+        "start": 260,
+        "end": 261,
+        "text": "”",
+        "lemma": "”",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Int"
+        },
+        "dep": "obj",
+        "headStart": 262
+      },
+      {
+        "start": 262,
+        "end": 265,
+        "text": "áll",
+        "lemma": "áll",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "advcl",
+        "headStart": 267
+      },
+      {
+        "start": 265,
+        "end": 266,
+        "text": ";",
+        "lemma": ";",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 262
+      },
+      {
+        "start": 267,
+        "end": 272,
+        "text": "nincs",
+        "lemma": "nincs",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 267
+      },
+      {
+        "start": 273,
+        "end": 280,
+        "text": "jelölve",
+        "lemma": "jelölve",
+        "pos": "ADV",
+        "morph": {
+          "VerbForm": "Conv"
+        },
+        "dep": "advmod:mode",
+        "headStart": 267
+      },
+      {
+        "start": 280,
+        "end": 281,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 322
+      },
+      {
+        "start": 282,
+        "end": 286,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 322
+      },
+      {
+        "start": 287,
+        "end": 298,
+        "text": "vizsganapot",
+        "lemma": "vizsganap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 322
+      },
+      {
+        "start": 299,
+        "end": 303,
+        "text": "vagy",
+        "lemma": "vagy",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 304
+      },
+      {
+        "start": 304,
+        "end": 311,
+        "text": "tanulói",
+        "lemma": "tanulói",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 287
+      },
+      {
+        "start": 312,
+        "end": 321,
+        "text": "helyezést",
+        "lemma": "helyezés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 322
+      },
+      {
+        "start": 322,
+        "end": 328,
+        "text": "jelent",
+        "lemma": "jelent",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "csubj",
+        "headStart": 267
+      },
+      {
+        "start": 328,
+        "end": 329,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 267
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 110,
+        "text": "Az iskola műhelymestere a tanoncoknak átadta a marógép kezelési útmutatóját, és felolvasta a biztonsági részt."
+      },
+      {
+        "start": 111,
+        "end": 227,
+        "text": "Az útmutató szerint felügyelet mellett maximum három munkadarabot lehet egyszerre befogni, de a kiadó neve lemaradt."
+      },
+      {
+        "start": 228,
+        "end": 329,
+        "text": "Az egyik értékelőlapon „Harmadik” áll; nincs jelölve, hogy vizsganapot vagy tanulói helyezést jelent."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 75,
+          "textSpan": "Az iskola műhelymestere a tanoncoknak átadta a marógép kezelési útmutatóját"
+        },
+        "attribution": null,
+        "action": "átad",
+        "actionSpan": {
+          "start": 38,
+          "end": 44,
+          "textSpan": "átadta"
+        },
+        "object": [
+          "útmutató"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 75,
+          "textSpan": "Az iskola műhelymestere a tanoncoknak átadta a marógép kezelési útmutatóját"
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 75,
+          "textSpan": "Az iskola műhelymestere a tanoncoknak átadta a marógép kezelési útmutatóját"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:75",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "iskola",
+              "normalized": "iskola",
+              "start": 3,
+              "end": 9,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 3,
+                "end": 9,
+                "textSpan": "iskola"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 3,
+                "end": 9,
+                "textSpan": "iskola"
+              },
+              "targetSpan": {
+                "start": 38,
+                "end": 44,
+                "textSpan": "átadta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 3,
+                    "end": 9,
+                    "textSpan": "iskola"
+                  },
+                  "targetSpan": {
+                    "start": 10,
+                    "end": 23,
+                    "textSpan": "műhelymestere"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 10,
+                    "end": 23,
+                    "textSpan": "műhelymestere"
+                  },
+                  "targetSpan": {
+                    "start": 38,
+                    "end": 44,
+                    "textSpan": "átadta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:75",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "marógép",
+              "normalized": "marógép",
+              "start": 47,
+              "end": 54,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 47,
+                "end": 54,
+                "textSpan": "marógép"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 47,
+                "end": 54,
+                "textSpan": "marógép"
+              },
+              "targetSpan": {
+                "start": 38,
+                "end": 44,
+                "textSpan": "átadta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 47,
+                    "end": 54,
+                    "textSpan": "marógép"
+                  },
+                  "targetSpan": {
+                    "start": 64,
+                    "end": 75,
+                    "textSpan": "útmutatóját"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 64,
+                    "end": 75,
+                    "textSpan": "útmutatóját"
+                  },
+                  "targetSpan": {
+                    "start": 38,
+                    "end": 44,
+                    "textSpan": "átadta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:75",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "útmutatóját",
+              "normalized": "útmutató",
+              "start": 64,
+              "end": 75,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 64,
+                "end": 75,
+                "textSpan": "útmutatóját"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 64,
+                "end": 75,
+                "textSpan": "útmutatóját"
+              },
+              "targetSpan": {
+                "start": 38,
+                "end": 44,
+                "textSpan": "átadta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 64,
+                    "end": 75,
+                    "textSpan": "útmutatóját"
+                  },
+                  "targetSpan": {
+                    "start": 38,
+                    "end": 44,
+                    "textSpan": "átadta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:75",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 77,
+          "end": 110,
+          "textSpan": "és felolvasta a biztonsági részt."
+        },
+        "attribution": null,
+        "action": "felolvas",
+        "actionSpan": {
+          "start": 80,
+          "end": 90,
+          "textSpan": "felolvasta"
+        },
+        "object": [
+          "rész"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 77,
+          "end": 110,
+          "textSpan": "és felolvasta a biztonsági részt."
+        },
+        "propositionSpan": {
+          "start": 77,
+          "end": 110,
+          "textSpan": "és felolvasta a biztonsági részt."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:77:110",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "részt",
+              "normalized": "rész",
+              "start": 104,
+              "end": 109,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 104,
+                "end": 109,
+                "textSpan": "részt"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 104,
+                "end": 109,
+                "textSpan": "részt"
+              },
+              "targetSpan": {
+                "start": 80,
+                "end": 90,
+                "textSpan": "felolvasta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 104,
+                    "end": 109,
+                    "textSpan": "részt"
+                  },
+                  "targetSpan": {
+                    "start": 80,
+                    "end": 90,
+                    "textSpan": "felolvasta"
+                  }
+                }
+              ],
+              "frameId": "dependency:77:110",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": {
+          "mention": "útmutató",
+          "normalized": "útmutató",
+          "canonicalIdentity": null,
+          "type": "referent",
+          "named": false,
+          "case": "Nom",
+          "start": 114,
+          "end": 122,
+          "evidenceSpan": {
+            "start": 114,
+            "end": 122,
+            "textSpan": "útmutató"
+          },
+          "sourceRole": "reported",
+          "pronoun": false
+        },
+        "source": {
+          "mention": "útmutató",
+          "normalized": "útmutató",
+          "start": 114,
+          "end": 122,
+          "type": "referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 114,
+            "end": 122,
+            "textSpan": "útmutató"
+          }
+        },
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "szerint",
+        "content": {
+          "start": 130,
+          "end": 200,
+          "textSpan": " felügyelet mellett maximum három munkadarabot lehet egyszerre befogni"
+        },
+        "attribution": {
+          "label": "útmutató",
+          "normalized": "útmutató",
+          "sourceRole": "reported",
+          "evidenceSpan": {
+            "start": 114,
+            "end": 122,
+            "textSpan": "útmutató"
+          },
+          "propositionSpan": {
+            "start": 130,
+            "end": 200,
+            "textSpan": " felügyelet mellett maximum három munkadarabot lehet egyszerre befogni"
+          }
+        },
+        "action": "lehet",
+        "actionSpan": {
+          "start": 177,
+          "end": 182,
+          "textSpan": "lehet"
+        },
+        "object": [
+          "munkadarab"
+        ],
+        "numericArguments": [
+          {
+            "value": 3,
+            "canonicalValue": 3,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 158,
+            "end": 176,
+            "raw": "három munkadarabot",
+            "evidenceSpan": {
+              "start": 158,
+              "end": 176,
+              "textSpan": "három munkadarabot"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "maximum",
+                  "evidenceSpan": {
+                    "start": 150,
+                    "end": 158,
+                    "textSpan": "maximum "
+                  },
+                  "marker": "maximum"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "finite_potential_wordform_candidate",
+                  "evidenceSpan": {
+                    "start": 177,
+                    "end": 182,
+                    "textSpan": "lehet"
+                  },
+                  "dependencyPath": []
+                }
+              ],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:111:200",
+              "clauseSpan": {
+                "start": 130,
+                "end": 200,
+                "textSpan": " felügyelet mellett maximum három munkadarabot lehet egyszerre befogni"
+              },
+              "predicateSpan": {
+                "start": 177,
+                "end": 182,
+                "textSpan": "lehet"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 158,
+                    "end": 163,
+                    "textSpan": "három"
+                  },
+                  "targetSpan": {
+                    "start": 164,
+                    "end": 176,
+                    "textSpan": "munkadarabot"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 164,
+                    "end": 176,
+                    "textSpan": "munkadarabot"
+                  },
+                  "targetSpan": {
+                    "start": 193,
+                    "end": 200,
+                    "textSpan": "befogni"
+                  }
+                },
+                {
+                  "relation": "xcomp",
+                  "sourceSpan": {
+                    "start": 193,
+                    "end": 200,
+                    "textSpan": "befogni"
+                  },
+                  "targetSpan": {
+                    "start": 177,
+                    "end": 182,
+                    "textSpan": "lehet"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": true,
+        "modalities": [
+          "reported",
+          "possible"
+        ],
+        "modality": "possible",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 111,
+          "end": 200,
+          "textSpan": "Az útmutató szerint felügyelet mellett maximum három munkadarabot lehet egyszerre befogni"
+        },
+        "propositionSpan": {
+          "start": 111,
+          "end": 200,
+          "textSpan": "Az útmutató szerint felügyelet mellett maximum három munkadarabot lehet egyszerre befogni"
+        },
+        "canonicalProjectionAllowed": false,
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 114,
+            "end": 122,
+            "textSpan": "útmutató"
+          },
+          "targetSpan": {
+            "start": 177,
+            "end": 182,
+            "textSpan": "lehet"
+          },
+          "dependencyPath": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 114,
+                "end": 122,
+                "textSpan": "útmutató"
+              },
+              "targetSpan": {
+                "start": 177,
+                "end": 182,
+                "textSpan": "lehet"
+              }
+            }
+          ],
+          "frameId": "dependency:111:200",
+          "semanticRole": "attribution_source",
+          "resolutionStatus": "resolved",
+          "rule": "dependency_path_with_case_and_scope_checks"
+        },
+        "frameId": "dependency:111:200",
+        "syntacticRoles": [],
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "finite_potential_wordform_candidate",
+              "evidenceSpan": {
+                "start": 177,
+                "end": 182,
+                "textSpan": "lehet"
+              },
+              "dependencyPath": []
+            }
+          ],
+          "conditions": [],
+          "frameId": "dependency:111:200",
+          "clauseSpan": {
+            "start": 130,
+            "end": 200,
+            "textSpan": " felügyelet mellett maximum három munkadarabot lehet egyszerre befogni"
+          },
+          "projectionAllowed": false
+        }
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 202,
+          "end": 227,
+          "textSpan": "de a kiadó neve lemaradt."
+        },
+        "attribution": null,
+        "action": "lemarad",
+        "actionSpan": {
+          "start": 218,
+          "end": 226,
+          "textSpan": "lemaradt"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 202,
+          "end": 227,
+          "textSpan": "de a kiadó neve lemaradt."
+        },
+        "propositionSpan": {
+          "start": 202,
+          "end": 227,
+          "textSpan": "de a kiadó neve lemaradt."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:202:227",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "kiadó",
+              "normalized": "kiadó",
+              "start": 207,
+              "end": 212,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 207,
+                "end": 212,
+                "textSpan": "kiadó"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 207,
+                "end": 212,
+                "textSpan": "kiadó"
+              },
+              "targetSpan": {
+                "start": 218,
+                "end": 226,
+                "textSpan": "lemaradt"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 207,
+                    "end": 212,
+                    "textSpan": "kiadó"
+                  },
+                  "targetSpan": {
+                    "start": 213,
+                    "end": 217,
+                    "textSpan": "neve"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 213,
+                    "end": 217,
+                    "textSpan": "neve"
+                  },
+                  "targetSpan": {
+                    "start": 218,
+                    "end": 226,
+                    "textSpan": "lemaradt"
+                  }
+                }
+              ],
+              "frameId": "dependency:202:227",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 252,
+          "end": 260,
+          "textSpan": "Harmadik"
+        },
+        "attribution": null,
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 252,
+            "end": 261,
+            "raw": "Harmadik”",
+            "value": 3,
+            "canonicalValue": 3,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 252,
+              "end": 261,
+              "textSpan": "Harmadik”"
+            },
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "subject": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 252,
+                    "end": 261,
+                    "textSpan": "Harmadik”"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:228:261",
+              "clauseSpan": {
+                "start": 252,
+                "end": 260,
+                "textSpan": "Harmadik"
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 228,
+          "end": 261,
+          "textSpan": "Az egyik értékelőlapon „Harmadik”"
+        },
+        "propositionSpan": {
+          "start": 228,
+          "end": 261,
+          "textSpan": "Az egyik értékelőlapon „Harmadik”"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:228:261",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 262,
+          "end": 265,
+          "textSpan": "áll"
+        },
+        "attribution": null,
+        "action": "áll",
+        "actionSpan": {
+          "start": 262,
+          "end": 265,
+          "textSpan": "áll"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 262,
+          "end": 265,
+          "textSpan": "áll"
+        },
+        "propositionSpan": {
+          "start": 262,
+          "end": 265,
+          "textSpan": "áll"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:262:265",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 267,
+          "end": 280,
+          "textSpan": "nincs jelölve"
+        },
+        "attribution": null,
+        "action": "nincs",
+        "actionSpan": {
+          "start": 267,
+          "end": 272,
+          "textSpan": "nincs"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 267,
+          "end": 280,
+          "textSpan": "nincs jelölve"
+        },
+        "propositionSpan": {
+          "start": 267,
+          "end": 280,
+          "textSpan": "nincs jelölve"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:267:280",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 282,
+          "end": 329,
+          "textSpan": "hogy vizsganapot vagy tanulói helyezést jelent."
+        },
+        "attribution": null,
+        "action": "jelent",
+        "actionSpan": {
+          "start": 322,
+          "end": 328,
+          "textSpan": "jelent"
+        },
+        "object": [
+          "vizsganap",
+          "helyezés"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 282,
+          "end": 329,
+          "textSpan": "hogy vizsganapot vagy tanulói helyezést jelent."
+        },
+        "propositionSpan": {
+          "start": 282,
+          "end": 329,
+          "textSpan": "hogy vizsganapot vagy tanulói helyezést jelent."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:282:329",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "helyezést",
+              "normalized": "helyezés",
+              "start": 312,
+              "end": 321,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 312,
+                "end": 321,
+                "textSpan": "helyezést"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 312,
+                "end": 321,
+                "textSpan": "helyezést"
+              },
+              "targetSpan": {
+                "start": 322,
+                "end": 328,
+                "textSpan": "jelent"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 312,
+                    "end": 321,
+                    "textSpan": "helyezést"
+                  },
+                  "targetSpan": {
+                    "start": 322,
+                    "end": 328,
+                    "textSpan": "jelent"
+                  }
+                }
+              ],
+              "frameId": "dependency:282:329",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

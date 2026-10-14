@@ -1,0 +1,1419 @@
+{
+  "id": "T",
+  "domain": "közlekedés",
+  "text": "A szolgáltató az utasoknak jelezte, hogy nem augusztus 6-án, hanem augusztus 9-én nyitják meg az alagutat. A második napon 14 vonat közlekedik, egy szerelvény pedig legfeljebb 240 utast vihet.",
+  "started": "2026-10-09T21:35:42.965Z",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 13,
+        "text": "szolgáltató",
+        "lemma": "szolgáltató",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 27
+      },
+      {
+        "start": 14,
+        "end": 16,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 17
+      },
+      {
+        "start": 17,
+        "end": 26,
+        "text": "utasoknak",
+        "lemma": "utas",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Plur"
+        },
+        "dep": "obl",
+        "headStart": 27
+      },
+      {
+        "start": 27,
+        "end": 34,
+        "text": "jelezte",
+        "lemma": "jelez",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 27
+      },
+      {
+        "start": 34,
+        "end": 35,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 82
+      },
+      {
+        "start": 36,
+        "end": 40,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 82
+      },
+      {
+        "start": 41,
+        "end": 44,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 82
+      },
+      {
+        "start": 45,
+        "end": 54,
+        "text": "augusztus",
+        "lemma": "augusztus",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 55
+      },
+      {
+        "start": 55,
+        "end": 59,
+        "text": "6-án",
+        "lemma": "6.",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 82
+      },
+      {
+        "start": 59,
+        "end": 60,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 82
+      },
+      {
+        "start": 61,
+        "end": 66,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 82
+      },
+      {
+        "start": 67,
+        "end": 76,
+        "text": "augusztus",
+        "lemma": "augusztus",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 77
+      },
+      {
+        "start": 77,
+        "end": 81,
+        "text": "9-én",
+        "lemma": "9.",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 82
+      },
+      {
+        "start": 82,
+        "end": 89,
+        "text": "nyitják",
+        "lemma": "nyit",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 27
+      },
+      {
+        "start": 90,
+        "end": 93,
+        "text": "meg",
+        "lemma": "meg",
+        "pos": "PART",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 82
+      },
+      {
+        "start": 94,
+        "end": 96,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 97
+      },
+      {
+        "start": 97,
+        "end": 105,
+        "text": "alagutat",
+        "lemma": "alagút",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 82
+      },
+      {
+        "start": 105,
+        "end": 106,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 27
+      },
+      {
+        "start": 107,
+        "end": 108,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 117
+      },
+      {
+        "start": 109,
+        "end": 116,
+        "text": "második",
+        "lemma": "második",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 117
+      },
+      {
+        "start": 117,
+        "end": 122,
+        "text": "napon",
+        "lemma": "nap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 132
+      },
+      {
+        "start": 123,
+        "end": 125,
+        "text": "14",
+        "lemma": "14",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 126
+      },
+      {
+        "start": 126,
+        "end": 131,
+        "text": "vonat",
+        "lemma": "vonat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 132
+      },
+      {
+        "start": 132,
+        "end": 142,
+        "text": "közlekedik",
+        "lemma": "közlekedik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 132
+      },
+      {
+        "start": 142,
+        "end": 143,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 186
+      },
+      {
+        "start": 144,
+        "end": 147,
+        "text": "egy",
+        "lemma": "egy",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Ind",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 148
+      },
+      {
+        "start": 148,
+        "end": 158,
+        "text": "szerelvény",
+        "lemma": "szerelvény",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 186
+      },
+      {
+        "start": 159,
+        "end": 164,
+        "text": "pedig",
+        "lemma": "pedig",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 186
+      },
+      {
+        "start": 165,
+        "end": 175,
+        "text": "legfeljebb",
+        "lemma": "legfeljebb",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 180
+      },
+      {
+        "start": 176,
+        "end": 179,
+        "text": "240",
+        "lemma": "240",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 180
+      },
+      {
+        "start": 180,
+        "end": 185,
+        "text": "utast",
+        "lemma": "utas",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 186
+      },
+      {
+        "start": 186,
+        "end": 191,
+        "text": "vihet",
+        "lemma": "vihet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 132
+      },
+      {
+        "start": 191,
+        "end": 192,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 132
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 106,
+        "text": "A szolgáltató az utasoknak jelezte, hogy nem augusztus 6-án, hanem augusztus 9-én nyitják meg az alagutat."
+      },
+      {
+        "start": 107,
+        "end": 192,
+        "text": "A második napon 14 vonat közlekedik, egy szerelvény pedig legfeljebb 240 utast vihet."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "9-én",
+            "normalized": "9.",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 77,
+            "end": 81,
+            "evidenceSpan": {
+              "start": 77,
+              "end": 81,
+              "textSpan": "9-én"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": {
+          "mention": "szolgáltató",
+          "normalized": "szolgáltató",
+          "start": 2,
+          "end": 13,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 13,
+            "textSpan": "szolgáltató"
+          }
+        },
+        "source": {
+          "mention": "szolgáltató",
+          "normalized": "szolgáltató",
+          "start": 2,
+          "end": 13,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 13,
+            "textSpan": "szolgáltató"
+          }
+        },
+        "recipient": {
+          "mention": "utasoknak",
+          "role": "recipient",
+          "evidenceSpan": {
+            "start": 17,
+            "end": 26,
+            "textSpan": "utasoknak"
+          }
+        },
+        "recipientCandidates": [],
+        "reportingVerb": "jelez",
+        "content": {
+          "start": 67,
+          "end": 106,
+          "textSpan": "augusztus 9-én nyitják meg az alagutat."
+        },
+        "attribution": {
+          "label": "szolgáltató",
+          "normalized": "szolgáltató",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 13,
+            "textSpan": "szolgáltató"
+          },
+          "propositionSpan": {
+            "start": 40,
+            "end": 106,
+            "textSpan": " nem augusztus 6-án, hanem augusztus 9-én nyitják meg az alagutat."
+          }
+        },
+        "action": "megnyit",
+        "actionSpan": {
+          "start": 82,
+          "end": 89,
+          "textSpan": "nyitják"
+        },
+        "object": [
+          "alagút"
+        ],
+        "numericArguments": [
+          {
+            "value": {
+              "year": null,
+              "month": 8,
+              "day": 9,
+              "part": null
+            },
+            "canonicalValue": {
+              "year": null,
+              "month": 8,
+              "day": 9,
+              "part": null
+            },
+            "unit": "calendar",
+            "semanticKind": "calendar_date",
+            "status": "accepted",
+            "binding": "resolved",
+            "ownerType": "semantic_role",
+            "owner": {
+              "label": "date/time",
+              "evidenceSpan": {
+                "start": 67,
+                "end": 81,
+                "textSpan": "augusztus 9-én"
+              }
+            },
+            "subject": null,
+            "property": "date/time",
+            "unresolvedReasons": [],
+            "start": 67,
+            "end": 81,
+            "raw": "augusztus 9-én",
+            "evidenceSpan": {
+              "start": 67,
+              "end": 81,
+              "textSpan": "augusztus 9-én"
+            },
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 67,
+                "end": 76,
+                "textSpan": "augusztus"
+              },
+              "targetSpan": {
+                "start": 82,
+                "end": 89,
+                "textSpan": "nyitják"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 67,
+                    "end": 76,
+                    "textSpan": "augusztus"
+                  },
+                  "targetSpan": {
+                    "start": 77,
+                    "end": 81,
+                    "textSpan": "9-én"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 77,
+                    "end": 81,
+                    "textSpan": "9-én"
+                  },
+                  "targetSpan": {
+                    "start": 82,
+                    "end": 89,
+                    "textSpan": "nyitják"
+                  }
+                }
+              ],
+              "frameId": "recovered-source:27:proposition:0",
+              "semanticRole": "calendar_date",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks",
+              "syntacticReason": "parallel_alternatives_single_finite_predicate"
+            },
+            "contrastFrameId": "contrast:40:106",
+            "temporalRole": "date"
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "asserted",
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported_claim",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 67,
+          "end": 106,
+          "textSpan": "augusztus 9-én nyitják meg az alagutat."
+        },
+        "propositionSpan": {
+          "start": 67,
+          "end": 106,
+          "textSpan": "augusztus 9-én nyitják meg az alagutat."
+        },
+        "canonicalProjectionAllowed": false,
+        "contrasts": [
+          {
+            "binding": "resolved",
+            "rule": "parallel_alternatives_single_finite_predicate",
+            "slot": "date/time",
+            "evidenceSpan": {
+              "start": 40,
+              "end": 106,
+              "textSpan": " nem augusztus 6-án, hanem augusztus 9-én nyitják meg az alagutat."
+            },
+            "scope": {
+              "start": 40,
+              "end": 106
+            },
+            "rejected": {
+              "value": {
+                "year": null,
+                "month": 8,
+                "day": 6,
+                "part": null
+              },
+              "calendar": true,
+              "scale": 1,
+              "unit": "calendar",
+              "year": false,
+              "case": "Sup",
+              "status": "rejected",
+              "evidenceSpan": {
+                "start": 45,
+                "end": 59,
+                "textSpan": "augusztus 6-án"
+              },
+              "unitEvidence": {
+                "start": 67,
+                "end": 81,
+                "textSpan": "augusztus 9-én"
+              }
+            },
+            "accepted": {
+              "value": {
+                "year": null,
+                "month": 8,
+                "day": 9,
+                "part": null
+              },
+              "calendar": true,
+              "scale": 1,
+              "unit": "calendar",
+              "year": false,
+              "case": "Sup",
+              "status": "accepted",
+              "evidenceSpan": {
+                "start": 67,
+                "end": 81,
+                "textSpan": "augusztus 9-én"
+              }
+            },
+            "frameId": "contrast:40:106"
+          }
+        ],
+        "frameId": "recovered-source:27:proposition:0",
+        "attributionChainId": "recovered-source:27",
+        "claimOwner": {
+          "mention": "szolgáltató",
+          "normalized": "szolgáltató",
+          "start": 2,
+          "end": 13,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 13,
+            "textSpan": "szolgáltató"
+          }
+        },
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 2,
+            "end": 13,
+            "textSpan": "szolgáltató"
+          },
+          "reportingPredicateSpan": {
+            "start": 27,
+            "end": 34,
+            "textSpan": "jelezte"
+          },
+          "clauseSpan": {
+            "start": 40,
+            "end": 106,
+            "textSpan": " nem augusztus 6-án, hanem augusztus 9-én nyitják meg az alagutat."
+          },
+          "frameId": "recovered-source:27:proposition:0",
+          "parentAttributionId": "recovered-source:27:0",
+          "rule": "governing_np_reporting_scope"
+        },
+        "quoteSpan": null,
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "augusztus",
+              "normalized": "augusztus",
+              "start": 67,
+              "end": 76,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 67,
+                "end": 76,
+                "textSpan": "augusztus"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 67,
+                "end": 76,
+                "textSpan": "augusztus"
+              },
+              "targetSpan": {
+                "start": 82,
+                "end": 89,
+                "textSpan": "nyitják"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 67,
+                    "end": 76,
+                    "textSpan": "augusztus"
+                  },
+                  "targetSpan": {
+                    "start": 77,
+                    "end": 81,
+                    "textSpan": "9-én"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 77,
+                    "end": 81,
+                    "textSpan": "9-én"
+                  },
+                  "targetSpan": {
+                    "start": 82,
+                    "end": 89,
+                    "textSpan": "nyitják"
+                  }
+                }
+              ],
+              "frameId": "recovered-source:27:proposition:0",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "alagutat",
+              "normalized": "alagút",
+              "start": 97,
+              "end": 105,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 97,
+                "end": 105,
+                "textSpan": "alagutat"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 97,
+                "end": 105,
+                "textSpan": "alagutat"
+              },
+              "targetSpan": {
+                "start": 82,
+                "end": 89,
+                "textSpan": "nyitják"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 97,
+                    "end": 105,
+                    "textSpan": "alagutat"
+                  },
+                  "targetSpan": {
+                    "start": 82,
+                    "end": 89,
+                    "textSpan": "nyitják"
+                  }
+                }
+              ],
+              "frameId": "recovered-source:27:proposition:0",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "napon",
+            "normalized": "nap",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 117,
+            "end": 122,
+            "evidenceSpan": {
+              "start": 117,
+              "end": 122,
+              "textSpan": "napon"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 107,
+          "end": 142,
+          "textSpan": "A második napon 14 vonat közlekedik"
+        },
+        "attribution": null,
+        "action": "közlekedik",
+        "actionSpan": {
+          "start": 132,
+          "end": 142,
+          "textSpan": "közlekedik"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 109,
+            "end": 122,
+            "raw": "második napon",
+            "value": 2,
+            "canonicalValue": 2,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 109,
+              "end": 122,
+              "textSpan": "második napon"
+            },
+            "binding": "resolved",
+            "ownerType": "ordinal_target",
+            "owner": {
+              "mention": "napon",
+              "evidenceSpan": {
+                "start": 117,
+                "end": 122,
+                "textSpan": "napon"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 109,
+                "end": 122,
+                "textSpan": "második napon"
+              },
+              "targetSpan": {
+                "start": 132,
+                "end": 142,
+                "textSpan": "közlekedik"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 109,
+                    "end": 116,
+                    "textSpan": "második"
+                  },
+                  "targetSpan": {
+                    "start": 117,
+                    "end": 122,
+                    "textSpan": "napon"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 117,
+                    "end": 122,
+                    "textSpan": "napon"
+                  },
+                  "targetSpan": {
+                    "start": 132,
+                    "end": 142,
+                    "textSpan": "közlekedik"
+                  }
+                }
+              ],
+              "frameId": "dependency:107:142",
+              "semanticRole": "ordinal",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            }
+          },
+          {
+            "value": 14,
+            "canonicalValue": 14,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 123,
+            "end": 131,
+            "raw": "14 vonat",
+            "evidenceSpan": {
+              "start": 123,
+              "end": 131,
+              "textSpan": "14 vonat"
+            },
+            "owner": {
+              "mention": "vonat",
+              "normalized": "vonat",
+              "start": 126,
+              "end": 131,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 126,
+                "end": 131,
+                "textSpan": "vonat"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "count",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 123,
+                "end": 125,
+                "textSpan": "14"
+              },
+              "targetSpan": {
+                "start": 126,
+                "end": 131,
+                "textSpan": "vonat"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 123,
+                    "end": 125,
+                    "textSpan": "14"
+                  },
+                  "targetSpan": {
+                    "start": 126,
+                    "end": 131,
+                    "textSpan": "vonat"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 126,
+                    "end": 131,
+                    "textSpan": "vonat"
+                  },
+                  "targetSpan": {
+                    "start": 132,
+                    "end": 142,
+                    "textSpan": "közlekedik"
+                  }
+                }
+              ],
+              "frameId": "dependency:107:142",
+              "semanticRole": "count",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 107,
+          "end": 142,
+          "textSpan": "A második napon 14 vonat közlekedik"
+        },
+        "propositionSpan": {
+          "start": 107,
+          "end": 142,
+          "textSpan": "A második napon 14 vonat közlekedik"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:107:142",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 144,
+          "end": 192,
+          "textSpan": "egy szerelvény pedig legfeljebb 240 utast vihet."
+        },
+        "attribution": null,
+        "action": "vihet",
+        "actionSpan": {
+          "start": 186,
+          "end": 191,
+          "textSpan": "vihet"
+        },
+        "object": [
+          "utas"
+        ],
+        "numericArguments": [
+          {
+            "value": 1,
+            "canonicalValue": 1,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 144,
+            "end": 147,
+            "raw": "egy",
+            "evidenceSpan": {
+              "start": 144,
+              "end": 147,
+              "textSpan": "egy"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ]
+          },
+          {
+            "value": 240,
+            "canonicalValue": 240,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 176,
+            "end": 185,
+            "raw": "240 utast",
+            "evidenceSpan": {
+              "start": 176,
+              "end": 185,
+              "textSpan": "240 utast"
+            },
+            "owner": {
+              "mention": "utast",
+              "normalized": "utas",
+              "start": 180,
+              "end": 185,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 180,
+                "end": 185,
+                "textSpan": "utast"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "count",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 176,
+                "end": 179,
+                "textSpan": "240"
+              },
+              "targetSpan": {
+                "start": 180,
+                "end": 185,
+                "textSpan": "utast"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 176,
+                    "end": 179,
+                    "textSpan": "240"
+                  },
+                  "targetSpan": {
+                    "start": 180,
+                    "end": 185,
+                    "textSpan": "utast"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 180,
+                    "end": 185,
+                    "textSpan": "utast"
+                  },
+                  "targetSpan": {
+                    "start": 186,
+                    "end": 191,
+                    "textSpan": "vihet"
+                  }
+                }
+              ],
+              "frameId": "dependency:144:192",
+              "semanticRole": "count",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 144,
+          "end": 192,
+          "textSpan": "egy szerelvény pedig legfeljebb 240 utast vihet."
+        },
+        "propositionSpan": {
+          "start": 144,
+          "end": 192,
+          "textSpan": "egy szerelvény pedig legfeljebb 240 utast vihet."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:144:192",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "utast",
+              "normalized": "utas",
+              "start": 180,
+              "end": 185,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 180,
+                "end": 185,
+                "textSpan": "utast"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 180,
+                "end": 185,
+                "textSpan": "utast"
+              },
+              "targetSpan": {
+                "start": 186,
+                "end": 191,
+                "textSpan": "vihet"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 180,
+                    "end": 185,
+                    "textSpan": "utast"
+                  },
+                  "targetSpan": {
+                    "start": 186,
+                    "end": 191,
+                    "textSpan": "vihet"
+                  }
+                }
+              ],
+              "frameId": "dependency:144:192",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "evidenceSpan": {
+          "start": 0,
+          "end": 106,
+          "textSpan": "A szolgáltató az utasoknak jelezte, hogy nem augusztus 6-án, hanem augusztus 9-én nyitják meg az alagutat."
+        },
+        "scope": {
+          "start": 0,
+          "end": 106
+        },
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "attributionChains": [
+      {
+        "id": "recovered-source:27",
+        "binding": "resolved",
+        "rule": "dependency_source_and_explicit_complement_or_bounded_quote",
+        "unresolvedReasons": [],
+        "edges": [
+          {
+            "source": {
+              "mention": "szolgáltató",
+              "normalized": "szolgáltató",
+              "start": 2,
+              "end": 13,
+              "type": "local_source",
+              "entityId": null,
+              "identityStatus": "observed_local_referent",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 13,
+                "textSpan": "szolgáltató"
+              }
+            },
+            "verb": "jelez",
+            "verbSpan": {
+              "start": 27,
+              "end": 34,
+              "textSpan": "jelezte"
+            },
+            "propositionSpan": {
+              "start": 40,
+              "end": 106,
+              "textSpan": " nem augusztus 6-án, hanem augusztus 9-én nyitják meg az alagutat."
+            },
+            "recipient": {
+              "mention": "utasoknak",
+              "role": "recipient",
+              "evidenceSpan": {
+                "start": 17,
+                "end": 26,
+                "textSpan": "utasoknak"
+              }
+            },
+            "id": "recovered-source:27:0",
+            "depth": 0,
+            "parentAttributionId": null,
+            "targetId": "recovered-source:27:proposition:0",
+            "binding": "resolved",
+            "role": "claim_source",
+            "rule": "governing_np_reporting_scope",
+            "targetIds": [
+              "recovered-source:27:proposition:0"
+            ],
+            "structuralEvidence": {
+              "sourceSpan": {
+                "start": 2,
+                "end": 13,
+                "textSpan": "szolgáltató"
+              },
+              "targetSpan": {
+                "start": 27,
+                "end": 34,
+                "textSpan": "jelezte"
+              },
+              "relation": "nsubj",
+              "markerRelation": "ROOT",
+              "rule": "governing_source_np_and_reporting_scope"
+            }
+          }
+        ],
+        "propositionIds": [
+          "recovered-source:27:proposition:0"
+        ]
+      }
+    ],
+    "dependencyStatus": "available",
+    "dependencyVerified": true
+  }
+}

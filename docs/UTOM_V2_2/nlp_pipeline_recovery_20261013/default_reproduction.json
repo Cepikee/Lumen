@@ -1,0 +1,15 @@
+{
+  "command": "wsl.exe",
+  "args": [
+    "-d",
+    "Ubuntu-24.04",
+    "--",
+    "env",
+    "PYTHONPATH=/tmp/utom-morph-research",
+    "python3",
+    "/mnt/f/Projekt2025/Lumen/scripts/experimental/morph-worker.py"
+  ],
+  "exitCode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/mnt/f/Projekt2025/Lumen/scripts/experimental/morph-worker.py\", line 3, in <module>\n    import hu_core_news_md\nModuleNotFoundError: No module named 'hu_core_news_md'\n"
+}

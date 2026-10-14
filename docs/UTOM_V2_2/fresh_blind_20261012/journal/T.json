@@ -1,0 +1,1247 @@
+{
+  "id": "T",
+  "text": "Brüsszel válaszát várják a tárgyalók, de a közlemény nem azonosítja, melyik intézmény fog megszólalni. A szóvivő nem a tanács, hanem a küldöttség álláspontjaként ismertette a javaslatot. A támogatásról csak annyi hangzott el: nem 2, hanem később.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 8,
+        "text": "Brüsszel",
+        "lemma": "Brüsszel",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 9
+      },
+      {
+        "start": 9,
+        "end": 17,
+        "text": "válaszát",
+        "lemma": "válasz",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obj",
+        "headStart": 18
+      },
+      {
+        "start": 18,
+        "end": 24,
+        "text": "várják",
+        "lemma": "vár",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 18
+      },
+      {
+        "start": 25,
+        "end": 26,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 27
+      },
+      {
+        "start": 27,
+        "end": 36,
+        "text": "tárgyalók",
+        "lemma": "tárgyaló",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur"
+        },
+        "dep": "nsubj",
+        "headStart": 18
+      },
+      {
+        "start": 36,
+        "end": 37,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 57
+      },
+      {
+        "start": 38,
+        "end": 40,
+        "text": "de",
+        "lemma": "de",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 57
+      },
+      {
+        "start": 41,
+        "end": 42,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 43
+      },
+      {
+        "start": 43,
+        "end": 52,
+        "text": "közlemény",
+        "lemma": "közlemény",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 57
+      },
+      {
+        "start": 53,
+        "end": 56,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 57
+      },
+      {
+        "start": 57,
+        "end": 67,
+        "text": "azonosítja",
+        "lemma": "azonosít",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 18
+      },
+      {
+        "start": 67,
+        "end": 68,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 86
+      },
+      {
+        "start": 69,
+        "end": 75,
+        "text": "melyik",
+        "lemma": "melyik",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Int"
+        },
+        "dep": "det",
+        "headStart": 76
+      },
+      {
+        "start": 76,
+        "end": 85,
+        "text": "intézmény",
+        "lemma": "intézmény",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 86
+      },
+      {
+        "start": 86,
+        "end": 89,
+        "text": "fog",
+        "lemma": "fog",
+        "pos": "AUX",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "Voice": "Act"
+        },
+        "dep": "ccomp",
+        "headStart": 57
+      },
+      {
+        "start": 90,
+        "end": 101,
+        "text": "megszólalni",
+        "lemma": "megszólal",
+        "pos": "VERB",
+        "morph": {
+          "VerbForm": "Inf",
+          "Voice": "Act"
+        },
+        "dep": "xcomp",
+        "headStart": 86
+      },
+      {
+        "start": 101,
+        "end": 102,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 18
+      },
+      {
+        "start": 103,
+        "end": 104,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 105
+      },
+      {
+        "start": 105,
+        "end": 112,
+        "text": "szóvivő",
+        "lemma": "szóvivő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 119
+      },
+      {
+        "start": 113,
+        "end": 116,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 119
+      },
+      {
+        "start": 117,
+        "end": 118,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 119
+      },
+      {
+        "start": 119,
+        "end": 125,
+        "text": "tanács",
+        "lemma": "tanács",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 119
+      },
+      {
+        "start": 125,
+        "end": 126,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 162
+      },
+      {
+        "start": 127,
+        "end": 132,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 162
+      },
+      {
+        "start": 133,
+        "end": 134,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 135
+      },
+      {
+        "start": 135,
+        "end": 145,
+        "text": "küldöttség",
+        "lemma": "küldöttség",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 146
+      },
+      {
+        "start": 146,
+        "end": 161,
+        "text": "álláspontjaként",
+        "lemma": "álláspontj",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Abs",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 162
+      },
+      {
+        "start": 162,
+        "end": 172,
+        "text": "ismertette",
+        "lemma": "ismertet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 119
+      },
+      {
+        "start": 173,
+        "end": 174,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 175
+      },
+      {
+        "start": 175,
+        "end": 185,
+        "text": "javaslatot",
+        "lemma": "javaslat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 162
+      },
+      {
+        "start": 185,
+        "end": 186,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 119
+      },
+      {
+        "start": 187,
+        "end": 188,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 189
+      },
+      {
+        "start": 189,
+        "end": 201,
+        "text": "támogatásról",
+        "lemma": "támogatás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Del",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 213
+      },
+      {
+        "start": 202,
+        "end": 206,
+        "text": "csak",
+        "lemma": "csak",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 207
+      },
+      {
+        "start": 207,
+        "end": 212,
+        "text": "annyi",
+        "lemma": "annyi",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "nsubj",
+        "headStart": 213
+      },
+      {
+        "start": 213,
+        "end": 221,
+        "text": "hangzott",
+        "lemma": "hangzik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 213
+      },
+      {
+        "start": 222,
+        "end": 224,
+        "text": "el",
+        "lemma": "el",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 213
+      },
+      {
+        "start": 224,
+        "end": 225,
+        "text": ":",
+        "lemma": ":",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 230
+      },
+      {
+        "start": 226,
+        "end": 229,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 230
+      },
+      {
+        "start": 230,
+        "end": 231,
+        "text": "2",
+        "lemma": "2",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "advcl",
+        "headStart": 213
+      },
+      {
+        "start": 231,
+        "end": 232,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 239
+      },
+      {
+        "start": 233,
+        "end": 238,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 239
+      },
+      {
+        "start": 239,
+        "end": 245,
+        "text": "később",
+        "lemma": "későn",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 230
+      },
+      {
+        "start": 245,
+        "end": 246,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 213
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 102,
+        "text": "Brüsszel válaszát várják a tárgyalók, de a közlemény nem azonosítja, melyik intézmény fog megszólalni."
+      },
+      {
+        "start": 103,
+        "end": 186,
+        "text": "A szóvivő nem a tanács, hanem a küldöttség álláspontjaként ismertette a javaslatot."
+      },
+      {
+        "start": 187,
+        "end": 246,
+        "text": "A támogatásról csak annyi hangzott el: nem 2, hanem később."
+      }
+    ],
+    "entities": [
+      {
+        "start": 0,
+        "end": 8,
+        "text": "Brüsszel",
+        "label": "LOC"
+      }
+    ]
+  },
+  "output": {
+    "entities": [
+      {
+        "mention": "Brüsszel",
+        "normalized": "brüsszel",
+        "type": "location",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 0,
+        "end": 8,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 0,
+          "end": 8,
+          "textSpan": "Brüsszel"
+        },
+        "identityKey": "location|brüsszel",
+        "canonicalIdentity": "brüsszel",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "Brüsszel",
+            "normalized": "brüsszel",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 8,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 8,
+              "textSpan": "Brüsszel"
+            },
+            "identityKey": "location|brüsszel",
+            "canonicalIdentity": "brüsszel",
+            "identityStatus": "resolved",
+            "named": true,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 36,
+          "textSpan": "Brüsszel válaszát várják a tárgyalók"
+        },
+        "attribution": null,
+        "action": "vár",
+        "actionSpan": {
+          "start": 18,
+          "end": 24,
+          "textSpan": "várják"
+        },
+        "object": [
+          "válasz"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 36,
+          "textSpan": "Brüsszel válaszát várják a tárgyalók"
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 36,
+          "textSpan": "Brüsszel válaszát várják a tárgyalók"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:36",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "Brüsszel",
+              "normalized": "brüsszel",
+              "start": 0,
+              "end": 8,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 8,
+                "textSpan": "Brüsszel"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 0,
+                "end": 8,
+                "textSpan": "Brüsszel"
+              },
+              "targetSpan": {
+                "start": 18,
+                "end": 24,
+                "textSpan": "várják"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 8,
+                    "textSpan": "Brüsszel"
+                  },
+                  "targetSpan": {
+                    "start": 9,
+                    "end": 17,
+                    "textSpan": "válaszát"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 9,
+                    "end": 17,
+                    "textSpan": "válaszát"
+                  },
+                  "targetSpan": {
+                    "start": 18,
+                    "end": 24,
+                    "textSpan": "várják"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:36",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "válaszát",
+              "normalized": "válasz",
+              "start": 9,
+              "end": 17,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 9,
+                "end": 17,
+                "textSpan": "válaszát"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 9,
+                "end": 17,
+                "textSpan": "válaszát"
+              },
+              "targetSpan": {
+                "start": 18,
+                "end": 24,
+                "textSpan": "várják"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 9,
+                    "end": 17,
+                    "textSpan": "válaszát"
+                  },
+                  "targetSpan": {
+                    "start": 18,
+                    "end": 24,
+                    "textSpan": "várják"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:36",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 38,
+          "end": 67,
+          "textSpan": "de a közlemény nem azonosítja"
+        },
+        "attribution": null,
+        "action": "azonosít",
+        "actionSpan": {
+          "start": 57,
+          "end": 67,
+          "textSpan": "azonosítja"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 38,
+          "end": 67,
+          "textSpan": "de a közlemény nem azonosítja"
+        },
+        "propositionSpan": {
+          "start": 38,
+          "end": 67,
+          "textSpan": "de a közlemény nem azonosítja"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:38:67",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 69,
+          "end": 102,
+          "textSpan": "melyik intézmény fog megszólalni."
+        },
+        "attribution": null,
+        "action": "fog",
+        "actionSpan": {
+          "start": 86,
+          "end": 89,
+          "textSpan": "fog"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "future"
+        ],
+        "modality": "future",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 69,
+          "end": 102,
+          "textSpan": "melyik intézmény fog megszólalni."
+        },
+        "propositionSpan": {
+          "start": 69,
+          "end": 102,
+          "textSpan": "melyik intézmény fog megszólalni."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:69:102",
+        "syntacticRoles": [],
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "future",
+              "rule": "future_auxiliary_infinitive",
+              "evidenceSpan": {
+                "start": 86,
+                "end": 89,
+                "textSpan": "fog"
+              },
+              "dependencyPath": []
+            }
+          ],
+          "frameId": "dependency:69:102",
+          "clauseSpan": {
+            "start": 69,
+            "end": 102,
+            "textSpan": "melyik intézmény fog megszólalni."
+          },
+          "projectionAllowed": false
+        }
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 103,
+          "end": 186,
+          "textSpan": "A szóvivő nem a tanács, hanem a küldöttség álláspontjaként ismertette a javaslatot."
+        },
+        "attribution": null,
+        "action": "ismertet",
+        "actionSpan": {
+          "start": 162,
+          "end": 172,
+          "textSpan": "ismertette"
+        },
+        "object": [
+          "javaslat"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 103,
+          "end": 186,
+          "textSpan": "A szóvivő nem a tanács, hanem a küldöttség álláspontjaként ismertette a javaslatot."
+        },
+        "propositionSpan": {
+          "start": 103,
+          "end": 186,
+          "textSpan": "A szóvivő nem a tanács, hanem a küldöttség álláspontjaként ismertette a javaslatot."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:103:186"
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "támogatásról",
+            "normalized": "támogatás",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Del",
+            "start": 189,
+            "end": 201,
+            "evidenceSpan": {
+              "start": 189,
+              "end": 201,
+              "textSpan": "támogatásról"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 187,
+          "end": 224,
+          "textSpan": "A támogatásról csak annyi hangzott el"
+        },
+        "attribution": null,
+        "action": "hangzik",
+        "actionSpan": {
+          "start": 213,
+          "end": 221,
+          "textSpan": "hangzott"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 187,
+          "end": 224,
+          "textSpan": "A támogatásról csak annyi hangzott el"
+        },
+        "propositionSpan": {
+          "start": 187,
+          "end": 224,
+          "textSpan": "A támogatásról csak annyi hangzott el"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:187:224"
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 226,
+          "end": 246,
+          "textSpan": "nem 2, hanem később."
+        },
+        "attribution": null,
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 2,
+            "canonicalValue": 2,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 230,
+            "end": 231,
+            "raw": "2",
+            "evidenceSpan": {
+              "start": 230,
+              "end": 231,
+              "textSpan": "2"
+            },
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "unsafe_proposition_scope",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {
+              "start": 226,
+              "end": 246,
+              "textSpan": "nem 2, hanem később."
+            },
+            "subject": null,
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 230,
+                    "end": 231,
+                    "textSpan": "2"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "dependency:226:246",
+              "clauseSpan": {
+                "start": 226,
+                "end": 246,
+                "textSpan": "nem 2, hanem később."
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 226,
+          "end": 246,
+          "textSpan": "nem 2, hanem később."
+        },
+        "propositionSpan": {
+          "start": 226,
+          "end": 246,
+          "textSpan": "nem 2, hanem később."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:226:246"
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "evidenceSpan": {
+          "start": 103,
+          "end": 186,
+          "textSpan": "A szóvivő nem a tanács, hanem a küldöttség álláspontjaként ismertette a javaslatot."
+        },
+        "scope": {
+          "start": 103,
+          "end": 186
+        },
+        "rejected": null,
+        "accepted": null
+      },
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "evidenceSpan": {
+          "start": 187,
+          "end": 246,
+          "textSpan": "A támogatásról csak annyi hangzott el: nem 2, hanem később."
+        },
+        "scope": {
+          "start": 187,
+          "end": 246
+        },
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

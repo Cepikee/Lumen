@@ -1,0 +1,40 @@
+✔ morphology research uses the actual frozen deterministic baseline (24.4793ms)
+✔ development annotations retain exact Unicode evidence and never project canonical facts (8.2322ms)
+✔ dependency labels cannot alter the research binder (7.6183ms)
+✔ subject and value permutations and three-way coordination preserve ownership (0.5051ms)
+✔ unit/verb ellipsis has separately anchored evidence (0.6241ms)
+✔ ordinal product cannot inherit first product identity and weather is not transport actor (0.3406ms)
+✔ admission and denial remain separate scoped propositions (0.2121ms)
+✔ negation and condition do not leak into completed siblings (0.4142ms)
+✔ speaker role, promises and futures are explicit; nested source abstains (0.4016ms)
+✔ namesakes, metadata and location/person substitution preserve boundaries (0.5123ms)
+✔ corrupt raw evidence is rejected, never silently normalized (0.3525ms)
+✔ worker crash falls back; actual deterministic processing remains available (57.3454ms)
+✔ worker hang falls back; actual deterministic processing remains available (210.4986ms)
+✔ worker malformed falls back; actual deterministic processing remains available (50.6906ms)
+✔ worker bounded input, queue and out-of-order IDs (205.9816ms)
+✔ role evaluator: known correct case passes; resolved label alone is no proof (1.7093ms)
+✔ role evaluator: independent owner, sign, property, source, scope and condition errors fail (1.3683ms)
+✔ role evaluator: abstentions and omitted frames retain fixed gold denominators (0.1686ms)
+✔ role evaluator: duplicates cannot reuse a gold label and bad evidence fails (0.2287ms)
+✔ role/scope: ASCII, Unicode and word signs are preserved across domains (8.0795ms)
+✔ role/scope: signed delta is not an absolute temperature or stock observation (0.4315ms)
+✔ role/scope: signed transitions and ranges preserve distinct endpoints (1.1916ms)
+✔ role/scope: storage and treatment locations never become explicit actors (0.5884ms)
+✔ role/scope: recipient is not the reporting actor, unknown source abstains (1.0563ms)
+✔ role/scope: mixed nominative/dative name span is unresolved, never invented stem (0.2855ms)
+✔ role/scope: processing percentage is not a candidate score (0.5434ms)
+✔ role/scope: threshold, age, tariff, calendar and population have separate owners (0.6898ms)
+✔ role/scope: denial with Cnd mood is not a logical condition (0.3276ms)
+✔ role/scope: antecedent and consequent have scoped logical conditions (0.7134ms)
+✔ role/scope: quotation directions and punctuation preserve one content frame (0.6238ms)
+✔ role/scope: pronouns and unnamed generic institutions are not named entities (0.2207ms)
+✔ role/scope: all raw spans exact, canonical outputs disabled, dependency labels irrelevant (8.8375ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 642.0825

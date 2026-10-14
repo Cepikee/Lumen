@@ -1,0 +1,29 @@
+[
+  {
+    "test": "live_normal",
+    "pass": true
+  },
+  {
+    "test": "bounded_input",
+    "pass": true,
+    "reason": "invalid_input"
+  },
+  {
+    "test": "malformed_transport",
+    "pass": true,
+    "reason": "unexpected_response"
+  },
+  {
+    "test": "restart_after_malformed",
+    "pass": true
+  },
+  {
+    "test": "crash_deterministic_fallback",
+    "pass": true,
+    "reason": "worker_exit"
+  },
+  {
+    "test": "restart_after_crash",
+    "pass": true
+  }
+]

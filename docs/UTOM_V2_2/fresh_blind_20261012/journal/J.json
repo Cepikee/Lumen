@@ -1,0 +1,1375 @@
+{
+  "id": "J",
+  "text": "A Szabad Adathálózat Egyesület kutatója a felügyeletnek bemutatta a titkosítási protokollt. A labor jegyzőkönyve szerint a kapcsolat sebessége 1,8 gigabit másodpercenként, ami nem azonos a letöltött adatmennyiséggel. A hibajavítás után 12 és 18 milliszekundum között ingadozott a késleltetés.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 31
+      },
+      {
+        "start": 2,
+        "end": 8,
+        "text": "Szabad",
+        "lemma": "Szabad",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 31
+      },
+      {
+        "start": 9,
+        "end": 20,
+        "text": "Adathálózat",
+        "lemma": "Adathálózat",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 2
+      },
+      {
+        "start": 21,
+        "end": 30,
+        "text": "Egyesület",
+        "lemma": "Egyesület",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 2
+      },
+      {
+        "start": 31,
+        "end": 39,
+        "text": "kutatója",
+        "lemma": "kutató",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 56
+      },
+      {
+        "start": 40,
+        "end": 41,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 42
+      },
+      {
+        "start": 42,
+        "end": 55,
+        "text": "felügyeletnek",
+        "lemma": "felügyelet",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 56
+      },
+      {
+        "start": 56,
+        "end": 65,
+        "text": "bemutatta",
+        "lemma": "bemutat",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 56
+      },
+      {
+        "start": 66,
+        "end": 67,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 80
+      },
+      {
+        "start": 68,
+        "end": 79,
+        "text": "titkosítási",
+        "lemma": "titkosítási",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 80
+      },
+      {
+        "start": 80,
+        "end": 90,
+        "text": "protokollt",
+        "lemma": "protokoll",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 56
+      },
+      {
+        "start": 90,
+        "end": 91,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 56
+      },
+      {
+        "start": 92,
+        "end": 93,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 94
+      },
+      {
+        "start": 94,
+        "end": 99,
+        "text": "labor",
+        "lemma": "labor",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 100
+      },
+      {
+        "start": 100,
+        "end": 112,
+        "text": "jegyzőkönyve",
+        "lemma": "jegyzőkönyv",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "ROOT",
+        "headStart": 100
+      },
+      {
+        "start": 113,
+        "end": 120,
+        "text": "szerint",
+        "lemma": "szerint",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 100
+      },
+      {
+        "start": 121,
+        "end": 122,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 123
+      },
+      {
+        "start": 123,
+        "end": 132,
+        "text": "kapcsolat",
+        "lemma": "kapcsolat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 133
+      },
+      {
+        "start": 133,
+        "end": 142,
+        "text": "sebessége",
+        "lemma": "sebesség",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 155
+      },
+      {
+        "start": 143,
+        "end": 146,
+        "text": "1,8",
+        "lemma": "1,8",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Frac",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 147
+      },
+      {
+        "start": 147,
+        "end": 154,
+        "text": "gigabit",
+        "lemma": "gigabit",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 155
+      },
+      {
+        "start": 155,
+        "end": 170,
+        "text": "másodpercenként",
+        "lemma": "másodperc",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dis",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 100
+      },
+      {
+        "start": 170,
+        "end": 171,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 180
+      },
+      {
+        "start": 172,
+        "end": 175,
+        "text": "ami",
+        "lemma": "ami",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Rel"
+        },
+        "dep": "nsubj",
+        "headStart": 180
+      },
+      {
+        "start": 176,
+        "end": 179,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 180
+      },
+      {
+        "start": 180,
+        "end": 186,
+        "text": "azonos",
+        "lemma": "azonos",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "acl",
+        "headStart": 155
+      },
+      {
+        "start": 187,
+        "end": 188,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 199
+      },
+      {
+        "start": 189,
+        "end": 198,
+        "text": "letöltött",
+        "lemma": "letöltött",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 199
+      },
+      {
+        "start": 199,
+        "end": 215,
+        "text": "adatmennyiséggel",
+        "lemma": "adatmennyiség",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ins",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 180
+      },
+      {
+        "start": 215,
+        "end": 216,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 155
+      },
+      {
+        "start": 217,
+        "end": 218,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 219
+      },
+      {
+        "start": 219,
+        "end": 230,
+        "text": "hibajavítás",
+        "lemma": "hibajavítás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 267
+      },
+      {
+        "start": 231,
+        "end": 235,
+        "text": "után",
+        "lemma": "után",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 219
+      },
+      {
+        "start": 236,
+        "end": 238,
+        "text": "12",
+        "lemma": "12",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 245
+      },
+      {
+        "start": 239,
+        "end": 241,
+        "text": "és",
+        "lemma": "és",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 242
+      },
+      {
+        "start": 242,
+        "end": 244,
+        "text": "18",
+        "lemma": "18",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 236
+      },
+      {
+        "start": 245,
+        "end": 259,
+        "text": "milliszekundum",
+        "lemma": "milliszekundum",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 267
+      },
+      {
+        "start": 260,
+        "end": 266,
+        "text": "között",
+        "lemma": "között",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 245
+      },
+      {
+        "start": 267,
+        "end": 277,
+        "text": "ingadozott",
+        "lemma": "ingadozik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 267
+      },
+      {
+        "start": 278,
+        "end": 279,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 280
+      },
+      {
+        "start": 280,
+        "end": 291,
+        "text": "késleltetés",
+        "lemma": "késleltetés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 267
+      },
+      {
+        "start": 291,
+        "end": 292,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 267
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 91,
+        "text": "A Szabad Adathálózat Egyesület kutatója a felügyeletnek bemutatta a titkosítási protokollt."
+      },
+      {
+        "start": 92,
+        "end": 216,
+        "text": "A labor jegyzőkönyve szerint a kapcsolat sebessége 1,8 gigabit másodpercenként, ami nem azonos a letöltött adatmennyiséggel."
+      },
+      {
+        "start": 217,
+        "end": 292,
+        "text": "A hibajavítás után 12 és 18 milliszekundum között ingadozott a késleltetés."
+      }
+    ],
+    "entities": [
+      {
+        "start": 2,
+        "end": 30,
+        "text": "Szabad Adathálózat Egyesület",
+        "label": "ORG"
+      }
+    ]
+  },
+  "output": {
+    "entities": [
+      {
+        "mention": "Szabad Adathálózat Egyesület",
+        "normalized": "szabad adathálózat egyesület",
+        "type": "organization",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 2,
+        "end": 30,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 2,
+          "end": 30,
+          "textSpan": "Szabad Adathálózat Egyesület"
+        },
+        "identityKey": "organization|szabad adathálózat egyesület",
+        "canonicalIdentity": "szabad adathálózat egyesület",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": {
+          "mention": "kutatója",
+          "normalized": "kutató",
+          "start": 31,
+          "end": 39,
+          "type": "referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 31,
+            "end": 39,
+            "textSpan": "kutatója"
+          }
+        },
+        "actorStatus": "resolved",
+        "subject": {
+          "mention": "kutatója",
+          "normalized": "kutató",
+          "start": 31,
+          "end": 39,
+          "type": "referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 31,
+            "end": 39,
+            "textSpan": "kutatója"
+          }
+        },
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 91,
+          "textSpan": "A Szabad Adathálózat Egyesület kutatója a felügyeletnek bemutatta a titkosítási protokollt."
+        },
+        "attribution": null,
+        "action": "bemutat",
+        "actionSpan": {
+          "start": 56,
+          "end": 65,
+          "textSpan": "bemutatta"
+        },
+        "object": [
+          "protokoll"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "unsupported_local_actor"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 91,
+          "textSpan": "A Szabad Adathálózat Egyesület kutatója a felügyeletnek bemutatta a titkosítási protokollt."
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 91,
+          "textSpan": "A Szabad Adathálózat Egyesület kutatója a felügyeletnek bemutatta a titkosítási protokollt."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:91",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "Szabad Adathálózat Egyesület",
+              "normalized": "szabad adathálózat egyesület",
+              "start": 2,
+              "end": 30,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 30,
+                "textSpan": "Szabad Adathálózat Egyesület"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 2,
+                "end": 8,
+                "textSpan": "Szabad"
+              },
+              "targetSpan": {
+                "start": 56,
+                "end": 65,
+                "textSpan": "bemutatta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 8,
+                    "textSpan": "Szabad"
+                  },
+                  "targetSpan": {
+                    "start": 31,
+                    "end": 39,
+                    "textSpan": "kutatója"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 31,
+                    "end": 39,
+                    "textSpan": "kutatója"
+                  },
+                  "targetSpan": {
+                    "start": 56,
+                    "end": 65,
+                    "textSpan": "bemutatta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:91",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "actor",
+            "referent": {
+              "mention": "kutatója",
+              "normalized": "kutató",
+              "start": 31,
+              "end": 39,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 31,
+                "end": 39,
+                "textSpan": "kutatója"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 31,
+                "end": 39,
+                "textSpan": "kutatója"
+              },
+              "targetSpan": {
+                "start": 56,
+                "end": 65,
+                "textSpan": "bemutatta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 31,
+                    "end": 39,
+                    "textSpan": "kutatója"
+                  },
+                  "targetSpan": {
+                    "start": 56,
+                    "end": 65,
+                    "textSpan": "bemutatta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:91",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "protokollt",
+              "normalized": "protokoll",
+              "start": 80,
+              "end": 90,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 80,
+                "end": 90,
+                "textSpan": "protokollt"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 80,
+                "end": 90,
+                "textSpan": "protokollt"
+              },
+              "targetSpan": {
+                "start": 56,
+                "end": 65,
+                "textSpan": "bemutatta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 80,
+                    "end": 90,
+                    "textSpan": "protokollt"
+                  },
+                  "targetSpan": {
+                    "start": 56,
+                    "end": 65,
+                    "textSpan": "bemutatta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:91",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "actorEvidence": {
+          "sourceSpan": {
+            "start": 31,
+            "end": 39,
+            "textSpan": "kutatója"
+          },
+          "targetSpan": {
+            "start": 56,
+            "end": 65,
+            "textSpan": "bemutatta"
+          },
+          "dependencyPath": [
+            {
+              "relation": "nsubj",
+              "sourceSpan": {
+                "start": 31,
+                "end": 39,
+                "textSpan": "kutatója"
+              },
+              "targetSpan": {
+                "start": 56,
+                "end": 65,
+                "textSpan": "bemutatta"
+              }
+            }
+          ],
+          "frameId": "dependency:0:91",
+          "semanticRole": "actor",
+          "resolutionStatus": "resolved",
+          "rule": "dependency_path_with_case_and_scope_checks"
+        }
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "szerint",
+        "content": {
+          "start": 120,
+          "end": 216,
+          "textSpan": " a kapcsolat sebessége 1,8 gigabit másodpercenként, ami nem azonos a letöltött adatmennyiséggel."
+        },
+        "attribution": null,
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 1.8,
+            "canonicalValue": 1.8,
+            "unit": {
+              "numerator": "gigabit",
+              "denominator": "second"
+            },
+            "semanticKind": "compound_rate",
+            "start": 143,
+            "end": 170,
+            "raw": "1,8 gigabit másodpercenként",
+            "evidenceSpan": {
+              "start": 143,
+              "end": 170,
+              "textSpan": "1,8 gigabit másodpercenként"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven",
+              "compound_rate_projection_not_supported"
+            ],
+            "compound": {
+              "numerator": {
+                "value": 1.8,
+                "baseUnit": "gigabit",
+                "originalKind": "count",
+                "evidenceSpan": {
+                  "start": 143,
+                  "end": 154,
+                  "textSpan": "1,8 gigabit"
+                }
+              },
+              "denominators": [
+                {
+                  "unit": "second",
+                  "relation": "per",
+                  "form": "distributive",
+                  "evidenceSpan": {
+                    "start": 155,
+                    "end": 170,
+                    "textSpan": "másodpercenként"
+                  },
+                  "dependencyPath": []
+                }
+              ],
+              "relation": "per",
+              "qualifiers": [],
+              "evidenceSpan": {
+                "start": 143,
+                "end": 170,
+                "textSpan": "1,8 gigabit másodpercenként"
+              },
+              "numeratorDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 143,
+                    "end": 146,
+                    "textSpan": "1,8"
+                  },
+                  "targetSpan": {
+                    "start": 147,
+                    "end": 154,
+                    "textSpan": "gigabit"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 147,
+                    "end": 154,
+                    "textSpan": "gigabit"
+                  },
+                  "targetSpan": {
+                    "start": 155,
+                    "end": 170,
+                    "textSpan": "másodpercenként"
+                  }
+                }
+              ],
+              "scopeStatus": "candidate_only",
+              "frameId": "dependency:92:216"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 143,
+                    "end": 154,
+                    "textSpan": "1,8 gigabit"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:92:216",
+              "clauseSpan": {
+                "start": 120,
+                "end": 216,
+                "textSpan": " a kapcsolat sebessége 1,8 gigabit másodpercenként, ami nem azonos a letöltött adatmennyiséggel."
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 143,
+                    "end": 146,
+                    "textSpan": "1,8"
+                  },
+                  "targetSpan": {
+                    "start": 147,
+                    "end": 154,
+                    "textSpan": "gigabit"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 147,
+                    "end": 154,
+                    "textSpan": "gigabit"
+                  },
+                  "targetSpan": {
+                    "start": 155,
+                    "end": 170,
+                    "textSpan": "másodpercenként"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved",
+          "compound_rate_requires_lossless_resolution"
+        ],
+        "evidenceSpan": {
+          "start": 92,
+          "end": 216,
+          "textSpan": "A labor jegyzőkönyve szerint a kapcsolat sebessége 1,8 gigabit másodpercenként, ami nem azonos a letöltött adatmennyiséggel."
+        },
+        "propositionSpan": {
+          "start": 92,
+          "end": 216,
+          "textSpan": "A labor jegyzőkönyve szerint a kapcsolat sebessége 1,8 gigabit másodpercenként, ami nem azonos a letöltött adatmennyiséggel."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:92:216",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 217,
+          "end": 292,
+          "textSpan": "A hibajavítás után 12 és 18 milliszekundum között ingadozott a késleltetés."
+        },
+        "attribution": null,
+        "action": "ingadozik",
+        "actionSpan": {
+          "start": 267,
+          "end": 277,
+          "textSpan": "ingadozott"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 12,
+            "canonicalValue": 12,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 236,
+            "end": 259,
+            "raw": "12 és 18 milliszekundum",
+            "evidenceSpan": {
+              "start": 236,
+              "end": 259,
+              "textSpan": "12 és 18 milliszekundum"
+            },
+            "owner": {
+              "mention": "milliszekundum",
+              "normalized": "milliszekundum",
+              "start": 245,
+              "end": 259,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 245,
+                "end": 259,
+                "textSpan": "milliszekundum"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "count",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 236,
+                "end": 238,
+                "textSpan": "12"
+              },
+              "targetSpan": {
+                "start": 245,
+                "end": 259,
+                "textSpan": "milliszekundum"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 236,
+                    "end": 238,
+                    "textSpan": "12"
+                  },
+                  "targetSpan": {
+                    "start": 245,
+                    "end": 259,
+                    "textSpan": "milliszekundum"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 245,
+                    "end": 259,
+                    "textSpan": "milliszekundum"
+                  },
+                  "targetSpan": {
+                    "start": 267,
+                    "end": 277,
+                    "textSpan": "ingadozott"
+                  }
+                }
+              ],
+              "frameId": "dependency:217:292",
+              "semanticRole": "count",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 236,
+                    "end": 259,
+                    "textSpan": "12 és 18 milliszekundum"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:217:292",
+              "clauseSpan": {
+                "start": 217,
+                "end": 292,
+                "textSpan": "A hibajavítás után 12 és 18 milliszekundum között ingadozott a késleltetés."
+              },
+              "predicateSpan": {
+                "start": 267,
+                "end": 277,
+                "textSpan": "ingadozott"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 236,
+                    "end": 238,
+                    "textSpan": "12"
+                  },
+                  "targetSpan": {
+                    "start": 245,
+                    "end": 259,
+                    "textSpan": "milliszekundum"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 245,
+                    "end": 259,
+                    "textSpan": "milliszekundum"
+                  },
+                  "targetSpan": {
+                    "start": 267,
+                    "end": 277,
+                    "textSpan": "ingadozott"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "value": 18,
+            "canonicalValue": 18,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 242,
+            "end": 244,
+            "raw": "18",
+            "evidenceSpan": {
+              "start": 242,
+              "end": 244,
+              "textSpan": "18"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 242,
+                    "end": 244,
+                    "textSpan": "18"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:217:292",
+              "clauseSpan": {
+                "start": 217,
+                "end": 292,
+                "textSpan": "A hibajavítás után 12 és 18 milliszekundum között ingadozott a késleltetés."
+              },
+              "predicateSpan": {
+                "start": 267,
+                "end": 277,
+                "textSpan": "ingadozott"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "conj",
+                  "sourceSpan": {
+                    "start": 242,
+                    "end": 244,
+                    "textSpan": "18"
+                  },
+                  "targetSpan": {
+                    "start": 236,
+                    "end": 238,
+                    "textSpan": "12"
+                  }
+                },
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 236,
+                    "end": 238,
+                    "textSpan": "12"
+                  },
+                  "targetSpan": {
+                    "start": 245,
+                    "end": 259,
+                    "textSpan": "milliszekundum"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 245,
+                    "end": 259,
+                    "textSpan": "milliszekundum"
+                  },
+                  "targetSpan": {
+                    "start": 267,
+                    "end": 277,
+                    "textSpan": "ingadozott"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 217,
+          "end": 292,
+          "textSpan": "A hibajavítás után 12 és 18 milliszekundum között ingadozott a késleltetés."
+        },
+        "propositionSpan": {
+          "start": 217,
+          "end": 292,
+          "textSpan": "A hibajavítás után 12 és 18 milliszekundum között ingadozott a késleltetés."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:217:292",
+        "syntacticRoles": []
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

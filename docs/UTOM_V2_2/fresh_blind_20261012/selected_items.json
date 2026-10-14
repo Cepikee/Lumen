@@ -1,0 +1,602 @@
+[
+  {
+    "id": "A1",
+    "snippet": "A",
+    "dimension": "actor"
+  },
+  {
+    "id": "A2",
+    "snippet": "A",
+    "dimension": "attribution"
+  },
+  {
+    "id": "A3",
+    "snippet": "A",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "A4",
+    "snippet": "A",
+    "dimension": "attribution"
+  },
+  {
+    "id": "A5",
+    "snippet": "A",
+    "dimension": "temporal"
+  },
+  {
+    "id": "A6",
+    "snippet": "A",
+    "dimension": "modality/scope"
+  },
+  {
+    "id": "B1",
+    "snippet": "B",
+    "dimension": "actor"
+  },
+  {
+    "id": "B2",
+    "snippet": "B",
+    "dimension": "entity boundary"
+  },
+  {
+    "id": "B3",
+    "snippet": "B",
+    "dimension": "ordinal/rank"
+  },
+  {
+    "id": "B4",
+    "snippet": "B",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "B5",
+    "snippet": "B",
+    "dimension": "modality/scope"
+  },
+  {
+    "id": "B6",
+    "snippet": "B",
+    "dimension": "ordinal/rank"
+  },
+  {
+    "id": "C1",
+    "snippet": "C",
+    "dimension": "attribution"
+  },
+  {
+    "id": "C2",
+    "snippet": "C",
+    "dimension": "numeric"
+  },
+  {
+    "id": "C3",
+    "snippet": "C",
+    "dimension": "numeric"
+  },
+  {
+    "id": "C4",
+    "snippet": "C",
+    "dimension": "numeric"
+  },
+  {
+    "id": "C5",
+    "snippet": "C",
+    "dimension": "temporal"
+  },
+  {
+    "id": "C6",
+    "snippet": "C",
+    "dimension": "temporal"
+  },
+  {
+    "id": "D1",
+    "snippet": "D",
+    "dimension": "entity boundary"
+  },
+  {
+    "id": "D2",
+    "snippet": "D",
+    "dimension": "attribution"
+  },
+  {
+    "id": "D3",
+    "snippet": "D",
+    "dimension": "actor"
+  },
+  {
+    "id": "D4",
+    "snippet": "D",
+    "dimension": "attribution"
+  },
+  {
+    "id": "D5",
+    "snippet": "D",
+    "dimension": "numeric"
+  },
+  {
+    "id": "D6",
+    "snippet": "D",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "E1",
+    "snippet": "E",
+    "dimension": "attribution"
+  },
+  {
+    "id": "E2",
+    "snippet": "E",
+    "dimension": "numeric"
+  },
+  {
+    "id": "E3",
+    "snippet": "E",
+    "dimension": "numeric"
+  },
+  {
+    "id": "E4",
+    "snippet": "E",
+    "dimension": "modality/scope"
+  },
+  {
+    "id": "E5",
+    "snippet": "E",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "E6",
+    "snippet": "E",
+    "dimension": "actor"
+  },
+  {
+    "id": "F1",
+    "snippet": "F",
+    "dimension": "attribution"
+  },
+  {
+    "id": "F2",
+    "snippet": "F",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "F3",
+    "snippet": "F",
+    "dimension": "numeric"
+  },
+  {
+    "id": "F4",
+    "snippet": "F",
+    "dimension": "numeric"
+  },
+  {
+    "id": "F5",
+    "snippet": "F",
+    "dimension": "temporal"
+  },
+  {
+    "id": "F6",
+    "snippet": "F",
+    "dimension": "modality/scope"
+  },
+  {
+    "id": "G1",
+    "snippet": "G",
+    "dimension": "actor"
+  },
+  {
+    "id": "G2",
+    "snippet": "G",
+    "dimension": "numeric"
+  },
+  {
+    "id": "G3",
+    "snippet": "G",
+    "dimension": "attribution"
+  },
+  {
+    "id": "G4",
+    "snippet": "G",
+    "dimension": "entity boundary"
+  },
+  {
+    "id": "G5",
+    "snippet": "G",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "G6",
+    "snippet": "G",
+    "dimension": "attribution"
+  },
+  {
+    "id": "H1",
+    "snippet": "H",
+    "dimension": "actor"
+  },
+  {
+    "id": "H2",
+    "snippet": "H",
+    "dimension": "attribution"
+  },
+  {
+    "id": "H3",
+    "snippet": "H",
+    "dimension": "numeric"
+  },
+  {
+    "id": "H4",
+    "snippet": "H",
+    "dimension": "temporal"
+  },
+  {
+    "id": "H5",
+    "snippet": "H",
+    "dimension": "actor"
+  },
+  {
+    "id": "H6",
+    "snippet": "H",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "I1",
+    "snippet": "I",
+    "dimension": "ordinal/rank"
+  },
+  {
+    "id": "I2",
+    "snippet": "I",
+    "dimension": "ordinal/rank"
+  },
+  {
+    "id": "I3",
+    "snippet": "I",
+    "dimension": "ordinal/rank"
+  },
+  {
+    "id": "I4",
+    "snippet": "I",
+    "dimension": "ordinal/rank"
+  },
+  {
+    "id": "I5",
+    "snippet": "I",
+    "dimension": "actor"
+  },
+  {
+    "id": "I6",
+    "snippet": "I",
+    "dimension": "attribution"
+  },
+  {
+    "id": "J1",
+    "snippet": "J",
+    "dimension": "entity boundary"
+  },
+  {
+    "id": "J2",
+    "snippet": "J",
+    "dimension": "actor"
+  },
+  {
+    "id": "J3",
+    "snippet": "J",
+    "dimension": "attribution"
+  },
+  {
+    "id": "J4",
+    "snippet": "J",
+    "dimension": "numeric"
+  },
+  {
+    "id": "J5",
+    "snippet": "J",
+    "dimension": "numeric"
+  },
+  {
+    "id": "J6",
+    "snippet": "J",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "K1",
+    "snippet": "K",
+    "dimension": "attribution"
+  },
+  {
+    "id": "K2",
+    "snippet": "K",
+    "dimension": "numeric"
+  },
+  {
+    "id": "K3",
+    "snippet": "K",
+    "dimension": "modality/scope"
+  },
+  {
+    "id": "K4",
+    "snippet": "K",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "K5",
+    "snippet": "K",
+    "dimension": "actor"
+  },
+  {
+    "id": "K6",
+    "snippet": "K",
+    "dimension": "modality/scope"
+  },
+  {
+    "id": "L1",
+    "snippet": "L",
+    "dimension": "attribution"
+  },
+  {
+    "id": "L2",
+    "snippet": "L",
+    "dimension": "temporal"
+  },
+  {
+    "id": "L3",
+    "snippet": "L",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "L4",
+    "snippet": "L",
+    "dimension": "numeric"
+  },
+  {
+    "id": "L5",
+    "snippet": "L",
+    "dimension": "modality/scope"
+  },
+  {
+    "id": "L6",
+    "snippet": "L",
+    "dimension": "ordinal/rank"
+  },
+  {
+    "id": "M1",
+    "snippet": "M",
+    "dimension": "attribution"
+  },
+  {
+    "id": "M2",
+    "snippet": "M",
+    "dimension": "numeric"
+  },
+  {
+    "id": "M3",
+    "snippet": "M",
+    "dimension": "numeric"
+  },
+  {
+    "id": "M4",
+    "snippet": "M",
+    "dimension": "modality/scope"
+  },
+  {
+    "id": "M5",
+    "snippet": "M",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "M6",
+    "snippet": "M",
+    "dimension": "attribution"
+  },
+  {
+    "id": "N1",
+    "snippet": "N",
+    "dimension": "actor"
+  },
+  {
+    "id": "N2",
+    "snippet": "N",
+    "dimension": "attribution"
+  },
+  {
+    "id": "N3",
+    "snippet": "N",
+    "dimension": "numeric"
+  },
+  {
+    "id": "N4",
+    "snippet": "N",
+    "dimension": "numeric"
+  },
+  {
+    "id": "N5",
+    "snippet": "N",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "N6",
+    "snippet": "N",
+    "dimension": "entity boundary"
+  },
+  {
+    "id": "O1",
+    "snippet": "O",
+    "dimension": "attribution"
+  },
+  {
+    "id": "O2",
+    "snippet": "O",
+    "dimension": "numeric"
+  },
+  {
+    "id": "O3",
+    "snippet": "O",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "O4",
+    "snippet": "O",
+    "dimension": "modality/scope"
+  },
+  {
+    "id": "O5",
+    "snippet": "O",
+    "dimension": "numeric"
+  },
+  {
+    "id": "O6",
+    "snippet": "O",
+    "dimension": "actor"
+  },
+  {
+    "id": "P1",
+    "snippet": "P",
+    "dimension": "attribution"
+  },
+  {
+    "id": "P2",
+    "snippet": "P",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "P3",
+    "snippet": "P",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "P4",
+    "snippet": "P",
+    "dimension": "temporal"
+  },
+  {
+    "id": "P5",
+    "snippet": "P",
+    "dimension": "numeric"
+  },
+  {
+    "id": "P6",
+    "snippet": "P",
+    "dimension": "modality/scope"
+  },
+  {
+    "id": "Q1",
+    "snippet": "Q",
+    "dimension": "actor"
+  },
+  {
+    "id": "Q2",
+    "snippet": "Q",
+    "dimension": "actor"
+  },
+  {
+    "id": "Q3",
+    "snippet": "Q",
+    "dimension": "attribution"
+  },
+  {
+    "id": "Q4",
+    "snippet": "Q",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "Q5",
+    "snippet": "Q",
+    "dimension": "ordinal/rank"
+  },
+  {
+    "id": "Q6",
+    "snippet": "Q",
+    "dimension": "ordinal/rank"
+  },
+  {
+    "id": "R1",
+    "snippet": "R",
+    "dimension": "actor"
+  },
+  {
+    "id": "R2",
+    "snippet": "R",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "R3",
+    "snippet": "R",
+    "dimension": "attribution"
+  },
+  {
+    "id": "R4",
+    "snippet": "R",
+    "dimension": "entity boundary"
+  },
+  {
+    "id": "R5",
+    "snippet": "R",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "R6",
+    "snippet": "R",
+    "dimension": "temporal"
+  },
+  {
+    "id": "S1",
+    "snippet": "S",
+    "dimension": "attribution"
+  },
+  {
+    "id": "S2",
+    "snippet": "S",
+    "dimension": "numeric"
+  },
+  {
+    "id": "S3",
+    "snippet": "S",
+    "dimension": "temporal"
+  },
+  {
+    "id": "S4",
+    "snippet": "S",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "S5",
+    "snippet": "S",
+    "dimension": "modality/scope"
+  },
+  {
+    "id": "S6",
+    "snippet": "S",
+    "dimension": "ordinal/rank"
+  },
+  {
+    "id": "T1",
+    "snippet": "T",
+    "dimension": "actor"
+  },
+  {
+    "id": "T2",
+    "snippet": "T",
+    "dimension": "entity boundary"
+  },
+  {
+    "id": "T3",
+    "snippet": "T",
+    "dimension": "attribution"
+  },
+  {
+    "id": "T4",
+    "snippet": "T",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "T5",
+    "snippet": "T",
+    "dimension": "contrast/negation"
+  },
+  {
+    "id": "T6",
+    "snippet": "T",
+    "dimension": "numeric"
+  }
+]

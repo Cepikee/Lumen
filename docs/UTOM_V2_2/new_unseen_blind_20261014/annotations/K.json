@@ -1,0 +1,725 @@
+{
+  "id": "K",
+  "raw": "Az iskola műhelymestere a tanoncoknak átadta a marógép kezelési útmutatóját, és felolvasta a biztonsági részt. Az útmutató szerint felügyelet mellett maximum három munkadarabot lehet egyszerre befogni, de a kiadó neve lemaradt. Az egyik értékelőlapon „Harmadik” áll; nincs jelölve, hogy vizsganapot vagy tanulói helyezést jelent.",
+  "rawSha256": "adf23e15c1073181344253fea727d23d05657e50b36d84014528bce767ebf404",
+  "annotationSha256": "88a4cc429d3e9193f3e6a02ce22aa8d2f8ab2cc6ef6dba0ba900a72932349f92",
+  "sentenceCount": 3,
+  "tokenCount": 53,
+  "environmentFingerprint": "143242eddc17f94ea729a1b430c5eac9d5e47dd7d27b5ebdd29c7c6961882f47",
+  "model": {
+    "type": "ready",
+    "model": "hu_core_news_md",
+    "version": "3.8.0",
+    "loadMs": 1160.3809050000002
+  },
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 2,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 3
+      },
+      {
+        "start": 3,
+        "end": 9,
+        "text": "iskola",
+        "lemma": "iskola",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 10
+      },
+      {
+        "start": 10,
+        "end": 23,
+        "text": "műhelymestere",
+        "lemma": "műhelymester",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 38
+      },
+      {
+        "start": 24,
+        "end": 25,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 26
+      },
+      {
+        "start": 26,
+        "end": 37,
+        "text": "tanoncoknak",
+        "lemma": "tanonco",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Plur"
+        },
+        "dep": "obl",
+        "headStart": 38
+      },
+      {
+        "start": 38,
+        "end": 44,
+        "text": "átadta",
+        "lemma": "átad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 38
+      },
+      {
+        "start": 45,
+        "end": 46,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 47
+      },
+      {
+        "start": 47,
+        "end": 54,
+        "text": "marógép",
+        "lemma": "marógép",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 64
+      },
+      {
+        "start": 55,
+        "end": 63,
+        "text": "kezelési",
+        "lemma": "kezelési",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 64
+      },
+      {
+        "start": 64,
+        "end": 75,
+        "text": "útmutatóját",
+        "lemma": "útmutató",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obj",
+        "headStart": 38
+      },
+      {
+        "start": 75,
+        "end": 76,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 80
+      },
+      {
+        "start": 77,
+        "end": 79,
+        "text": "és",
+        "lemma": "és",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 80
+      },
+      {
+        "start": 80,
+        "end": 90,
+        "text": "felolvasta",
+        "lemma": "felolvas",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 38
+      },
+      {
+        "start": 91,
+        "end": 92,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 104
+      },
+      {
+        "start": 93,
+        "end": 103,
+        "text": "biztonsági",
+        "lemma": "biztonsági",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 104
+      },
+      {
+        "start": 104,
+        "end": 109,
+        "text": "részt",
+        "lemma": "rész",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 80
+      },
+      {
+        "start": 109,
+        "end": 110,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 38
+      },
+      {
+        "start": 111,
+        "end": 113,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 114
+      },
+      {
+        "start": 114,
+        "end": 122,
+        "text": "útmutató",
+        "lemma": "útmutató",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 177
+      },
+      {
+        "start": 123,
+        "end": 130,
+        "text": "szerint",
+        "lemma": "szerint",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 114
+      },
+      {
+        "start": 131,
+        "end": 141,
+        "text": "felügyelet",
+        "lemma": "felügyelet",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 177
+      },
+      {
+        "start": 142,
+        "end": 149,
+        "text": "mellett",
+        "lemma": "mellett",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 131
+      },
+      {
+        "start": 150,
+        "end": 157,
+        "text": "maximum",
+        "lemma": "maximum",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 164
+      },
+      {
+        "start": 158,
+        "end": 163,
+        "text": "három",
+        "lemma": "három",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 164
+      },
+      {
+        "start": 164,
+        "end": 176,
+        "text": "munkadarabot",
+        "lemma": "munkadarab",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 193
+      },
+      {
+        "start": 177,
+        "end": 182,
+        "text": "lehet",
+        "lemma": "lehet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 177
+      },
+      {
+        "start": 183,
+        "end": 192,
+        "text": "egyszerre",
+        "lemma": "egyszerre",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 193
+      },
+      {
+        "start": 193,
+        "end": 200,
+        "text": "befogni",
+        "lemma": "befog",
+        "pos": "VERB",
+        "morph": {
+          "VerbForm": "Inf",
+          "Voice": "Act"
+        },
+        "dep": "xcomp",
+        "headStart": 177
+      },
+      {
+        "start": 200,
+        "end": 201,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 218
+      },
+      {
+        "start": 202,
+        "end": 204,
+        "text": "de",
+        "lemma": "de",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 218
+      },
+      {
+        "start": 205,
+        "end": 206,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 207
+      },
+      {
+        "start": 207,
+        "end": 212,
+        "text": "kiadó",
+        "lemma": "kiadó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 213
+      },
+      {
+        "start": 213,
+        "end": 217,
+        "text": "neve",
+        "lemma": "név",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 218
+      },
+      {
+        "start": 218,
+        "end": 226,
+        "text": "lemaradt",
+        "lemma": "lemarad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 177
+      },
+      {
+        "start": 226,
+        "end": 227,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 177
+      },
+      {
+        "start": 228,
+        "end": 230,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 237
+      },
+      {
+        "start": 231,
+        "end": 236,
+        "text": "egyik",
+        "lemma": "egyik",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Ind"
+        },
+        "dep": "det",
+        "headStart": 237
+      },
+      {
+        "start": 237,
+        "end": 250,
+        "text": "értékelőlapon",
+        "lemma": "értékelőlap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 262
+      },
+      {
+        "start": 251,
+        "end": 252,
+        "text": "„",
+        "lemma": "„",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "conj",
+        "headStart": 237
+      },
+      {
+        "start": 252,
+        "end": 260,
+        "text": "Harmadik",
+        "lemma": "harmadik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 260
+      },
+      {
+        "start": 260,
+        "end": 261,
+        "text": "”",
+        "lemma": "”",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Int"
+        },
+        "dep": "obj",
+        "headStart": 262
+      },
+      {
+        "start": 262,
+        "end": 265,
+        "text": "áll",
+        "lemma": "áll",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "advcl",
+        "headStart": 267
+      },
+      {
+        "start": 265,
+        "end": 266,
+        "text": ";",
+        "lemma": ";",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 262
+      },
+      {
+        "start": 267,
+        "end": 272,
+        "text": "nincs",
+        "lemma": "nincs",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 267
+      },
+      {
+        "start": 273,
+        "end": 280,
+        "text": "jelölve",
+        "lemma": "jelölve",
+        "pos": "ADV",
+        "morph": {
+          "VerbForm": "Conv"
+        },
+        "dep": "advmod:mode",
+        "headStart": 267
+      },
+      {
+        "start": 280,
+        "end": 281,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 322
+      },
+      {
+        "start": 282,
+        "end": 286,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 322
+      },
+      {
+        "start": 287,
+        "end": 298,
+        "text": "vizsganapot",
+        "lemma": "vizsganap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 322
+      },
+      {
+        "start": 299,
+        "end": 303,
+        "text": "vagy",
+        "lemma": "vagy",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 304
+      },
+      {
+        "start": 304,
+        "end": 311,
+        "text": "tanulói",
+        "lemma": "tanulói",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 287
+      },
+      {
+        "start": 312,
+        "end": 321,
+        "text": "helyezést",
+        "lemma": "helyezés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 322
+      },
+      {
+        "start": 322,
+        "end": 328,
+        "text": "jelent",
+        "lemma": "jelent",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "csubj",
+        "headStart": 267
+      },
+      {
+        "start": 328,
+        "end": 329,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 267
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 110,
+        "text": "Az iskola műhelymestere a tanoncoknak átadta a marógép kezelési útmutatóját, és felolvasta a biztonsági részt."
+      },
+      {
+        "start": 111,
+        "end": 227,
+        "text": "Az útmutató szerint felügyelet mellett maximum három munkadarabot lehet egyszerre befogni, de a kiadó neve lemaradt."
+      },
+      {
+        "start": 228,
+        "end": 329,
+        "text": "Az egyik értékelőlapon „Harmadik” áll; nincs jelölve, hogy vizsganapot vagy tanulói helyezést jelent."
+      }
+    ],
+    "entities": []
+  }
+}

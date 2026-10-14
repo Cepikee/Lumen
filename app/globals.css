@@ -2360,3 +2360,12 @@ nav.header-legal.navbar .header-logo-img {
   filter: brightness(1.2);
 }
 
+
+/* Route-local Premium skin overrides either persisted/system theme. */
+html .header-nav.header-premium {
+  background: #0f172a !important;
+  color: #e2e8f0 !important;
+  border-bottom: 1px solid #24364f;
+}
+html .header-nav.header-premium .nav-link { color: #e2e8f0 !important; }
+html .header-nav.header-premium .nav-link:hover { color: #67e8f9 !important; }

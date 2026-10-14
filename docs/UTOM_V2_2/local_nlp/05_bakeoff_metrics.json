@@ -1,0 +1,361 @@
+{
+  "corpusVersion": "utom-v22-local-nlp-heldout-1",
+  "cases": 10,
+  "evaluations": [
+    {
+      "provider": "deterministic-only",
+      "candidateOnly": false,
+      "metrics": {
+        "entityPrecision": 0.7857142857142857,
+        "entityRecall": 0.5789473684210527,
+        "entityBoundaryAccuracy": 0.5789473684210527,
+        "entityTypingAccuracy": 0.5789473684210527,
+        "canonicalIdentityAccuracy": 0.5789473684210527,
+        "actorBindingPrecision": 0.6666666666666666,
+        "actorBindingRecall": 0.4,
+        "numericSubjectBindingAccuracy": 0.4,
+        "dependencyPrecision": 0,
+        "dependencyRecall": 0,
+        "attributionSourcePrecision": 0.5,
+        "attributionSourceRecall": 0.3333333333333333,
+        "conditionalScopeAccuracy": 1,
+        "negationAccuracy": 1
+      },
+      "performance": {
+        "modelLoadMs": 0,
+        "warmTotalMs": 69.9063,
+        "meanMsPerArticle": 6.99063
+      },
+      "rows": [
+        {
+          "id": "economy",
+          "entityCount": 2,
+          "bindingCount": 2,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "transport",
+          "entityCount": 1,
+          "bindingCount": 0,
+          "attributionCount": 1,
+          "conditional": false,
+          "negated": true
+        },
+        {
+          "id": "healthcare",
+          "entityCount": 2,
+          "bindingCount": 2,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "sport",
+          "entityCount": 2,
+          "bindingCount": 0,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "science",
+          "entityCount": 1,
+          "bindingCount": 0,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "energy",
+          "entityCount": 1,
+          "bindingCount": 2,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "court",
+          "entityCount": 1,
+          "bindingCount": 0,
+          "attributionCount": 2,
+          "conditional": false,
+          "negated": true
+        },
+        {
+          "id": "corporate",
+          "entityCount": 3,
+          "bindingCount": 0,
+          "attributionCount": 1,
+          "conditional": true,
+          "negated": false
+        },
+        {
+          "id": "weather",
+          "entityCount": 0,
+          "bindingCount": 0,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "politics",
+          "entityCount": 1,
+          "bindingCount": 0,
+          "attributionCount": 0,
+          "conditional": true,
+          "negated": true
+        }
+      ]
+    },
+    {
+      "provider": "huspacy",
+      "candidateOnly": true,
+      "metrics": {
+        "entityPrecision": 0.95,
+        "entityRecall": 1,
+        "entityBoundaryAccuracy": 1,
+        "entityTypingAccuracy": 1,
+        "canonicalIdentityAccuracy": 0.9473684210526315,
+        "actorBindingPrecision": 1,
+        "actorBindingRecall": 1,
+        "numericSubjectBindingAccuracy": 1,
+        "dependencyPrecision": 0.6,
+        "dependencyRecall": 0.5294117647058824,
+        "attributionSourcePrecision": 0.8571428571428571,
+        "attributionSourceRecall": 1,
+        "conditionalScopeAccuracy": 0.9,
+        "negationAccuracy": 1
+      },
+      "performance": {
+        "modelLoadMs": 2236.996060993988,
+        "warmTotalMs": 189.01612200716045,
+        "meanMsPerArticle": 18.89909080346115,
+        "articleTimesMs": [
+          21.90865900774952,
+          16.766837012255564,
+          19.150634005200118,
+          16.63447599275969,
+          16.80020199273713,
+          16.878295005881228,
+          18.99971000966616,
+          19.1728170029819,
+          16.335838998202235,
+          26.34343900717795
+        ],
+        "tokens": 150,
+        "tokensPerSecond": 793.5830997226659,
+        "peakRssBytes": 636661760,
+        "rssDeltaAfterLoadBytes": 622788608,
+        "modelDiskBytes": 152870542
+      },
+      "rows": [
+        {
+          "id": "economy",
+          "entityCount": 2,
+          "bindingCount": 2,
+          "attributionCount": 1,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "transport",
+          "entityCount": 3,
+          "bindingCount": 0,
+          "attributionCount": 1,
+          "conditional": false,
+          "negated": true
+        },
+        {
+          "id": "healthcare",
+          "entityCount": 2,
+          "bindingCount": 2,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "sport",
+          "entityCount": 2,
+          "bindingCount": 2,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "science",
+          "entityCount": 1,
+          "bindingCount": 0,
+          "attributionCount": 1,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "energy",
+          "entityCount": 2,
+          "bindingCount": 2,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "court",
+          "entityCount": 1,
+          "bindingCount": 0,
+          "attributionCount": 2,
+          "conditional": false,
+          "negated": true
+        },
+        {
+          "id": "corporate",
+          "entityCount": 2,
+          "bindingCount": 0,
+          "attributionCount": 2,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "weather",
+          "entityCount": 2,
+          "bindingCount": 2,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "politics",
+          "entityCount": 3,
+          "bindingCount": 0,
+          "attributionCount": 0,
+          "conditional": true,
+          "negated": true
+        }
+      ]
+    },
+    {
+      "provider": "stanza",
+      "candidateOnly": true,
+      "metrics": {
+        "entityPrecision": 0.95,
+        "entityRecall": 1,
+        "entityBoundaryAccuracy": 1,
+        "entityTypingAccuracy": 1,
+        "canonicalIdentityAccuracy": 0.6842105263157895,
+        "actorBindingPrecision": 1,
+        "actorBindingRecall": 1,
+        "numericSubjectBindingAccuracy": 1,
+        "dependencyPrecision": 0.5625,
+        "dependencyRecall": 0.5294117647058824,
+        "attributionSourcePrecision": 0.8571428571428571,
+        "attributionSourceRecall": 1,
+        "conditionalScopeAccuracy": 0.9,
+        "negationAccuracy": 1
+      },
+      "performance": {
+        "modelLoadMs": 4388.089025000227,
+        "warmTotalMs": 431.7793349910062,
+        "meanMsPerArticle": 43.1756106991088,
+        "articleTimesMs": [
+          50.59263399743941,
+          41.73824800818693,
+          44.30757800582796,
+          36.14611599186901,
+          38.36635600600857,
+          41.154923994326964,
+          46.02263600099832,
+          40.0183979945723,
+          36.755829001776874,
+          56.65338799008168
+        ],
+        "tokens": 150,
+        "tokensPerSecond": 347.39967350017906,
+        "peakRssBytes": 928428032,
+        "rssDeltaAfterLoadBytes": 823046144,
+        "modelDiskBytes": 524796883
+      },
+      "rows": [
+        {
+          "id": "economy",
+          "entityCount": 2,
+          "bindingCount": 2,
+          "attributionCount": 1,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "transport",
+          "entityCount": 3,
+          "bindingCount": 0,
+          "attributionCount": 1,
+          "conditional": false,
+          "negated": true
+        },
+        {
+          "id": "healthcare",
+          "entityCount": 2,
+          "bindingCount": 2,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "sport",
+          "entityCount": 2,
+          "bindingCount": 2,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "science",
+          "entityCount": 1,
+          "bindingCount": 0,
+          "attributionCount": 1,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "energy",
+          "entityCount": 2,
+          "bindingCount": 2,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "court",
+          "entityCount": 1,
+          "bindingCount": 0,
+          "attributionCount": 2,
+          "conditional": false,
+          "negated": true
+        },
+        {
+          "id": "corporate",
+          "entityCount": 2,
+          "bindingCount": 0,
+          "attributionCount": 2,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "weather",
+          "entityCount": 2,
+          "bindingCount": 2,
+          "attributionCount": 0,
+          "conditional": false,
+          "negated": false
+        },
+        {
+          "id": "politics",
+          "entityCount": 3,
+          "bindingCount": 0,
+          "attributionCount": 0,
+          "conditional": true,
+          "negated": true
+        }
+      ]
+    }
+  ]
+}

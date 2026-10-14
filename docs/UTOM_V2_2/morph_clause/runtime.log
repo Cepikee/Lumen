@@ -1,0 +1,6 @@
+batch 100: 100 complete
+batch 500: 100 complete
+batch 500: 200 complete
+batch 500: 300 complete
+batch 500: 400 complete
+batch 500: 500 complete

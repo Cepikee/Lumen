@@ -1,0 +1,80 @@
+{
+  "totalDecisions": 120,
+  "CORRECT_RESOLVED": 43,
+  "WRONG_RESOLVED": 1,
+  "CORRECT_UNRESOLVED": 13,
+  "MISSED_DEFENSIBLE_RESOLUTION": 63,
+  "NOT_APPLICABLE": 0,
+  "resolved": 44,
+  "resolvedPrecision": 0.9772727272727273,
+  "resolutionRate": 0.36666666666666664,
+  "overallCorrectIncludingAbstention": 0.4666666666666667,
+  "dimensions": {
+    "actor": {
+      "CORRECT_RESOLVED": 3,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 6,
+      "MISSED_DEFENSIBLE_RESOLUTION": 7,
+      "NOT_APPLICABLE": 0
+    },
+    "attribution": {
+      "CORRECT_RESOLVED": 5,
+      "WRONG_RESOLVED": 1,
+      "CORRECT_UNRESOLVED": 2,
+      "MISSED_DEFENSIBLE_RESOLUTION": 15,
+      "NOT_APPLICABLE": 0
+    },
+    "contrast/negation": {
+      "CORRECT_RESOLVED": 8,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 1,
+      "MISSED_DEFENSIBLE_RESOLUTION": 12,
+      "NOT_APPLICABLE": 0
+    },
+    "temporal": {
+      "CORRECT_RESOLVED": 5,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 4,
+      "NOT_APPLICABLE": 0
+    },
+    "modality/scope": {
+      "CORRECT_RESOLVED": 7,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 4,
+      "NOT_APPLICABLE": 0
+    },
+    "entity boundary": {
+      "CORRECT_RESOLVED": 4,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 1,
+      "MISSED_DEFENSIBLE_RESOLUTION": 2,
+      "NOT_APPLICABLE": 0
+    },
+    "ordinal/rank": {
+      "CORRECT_RESOLVED": 5,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 2,
+      "MISSED_DEFENSIBLE_RESOLUTION": 3,
+      "NOT_APPLICABLE": 0
+    },
+    "numeric": {
+      "CORRECT_RESOLVED": 6,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 1,
+      "MISSED_DEFENSIBLE_RESOLUTION": 16,
+      "NOT_APPLICABLE": 0
+    }
+  },
+  "evidence": {
+    "totalSpanOccurrences": 1731,
+    "exactRawOffsetMatches": 1731,
+    "failures": [],
+    "uniqueSpans": 478,
+    "uniqueExact": 478
+  },
+  "remainingWrongResolved": [
+    "O1"
+  ]
+}

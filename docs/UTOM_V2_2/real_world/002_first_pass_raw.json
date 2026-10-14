@@ -1,0 +1,52 @@
+{
+  "testId": "REAL_WORLD_ARTICLE_002",
+  "pass": "first-blind-pass",
+  "generatedAt": "2026-10-05T22:58:45.112Z",
+  "immutableCheckpoint": "d145120c6e044b4f25d1d7b94e87846652ef80ba",
+  "input": {
+    "path": "docs/UTOM_V2_2/real_world/002_source_article.txt",
+    "sha256": "2308BE1E678713E4C4653ADDECE99DB1AE588A426020BDA691E62D43CFC80845",
+    "sourceKey": "real-world-002",
+    "title": "[hvg360](https://cdn.hvg.hu/assets/hvghu/images/premium-article-header/320x64_web_hvg360_logo_2025.svg)"
+  },
+  "evidenceAudit": {
+    "totalEvidenceSpans": 0,
+    "exactRawOffsetMatches": 0,
+    "failures": 0,
+    "checks": []
+  },
+  "prediction": {
+    "source": "real-world-002",
+    "entities": [
+      {
+        "mention": "Kereste",
+        "normalized": "kereste",
+        "type": "organization",
+        "identity": "same"
+      }
+    ],
+    "numericMentions": [
+      {
+        "raw": "16 éves",
+        "value": 16,
+        "parsedValue": 16,
+        "multiplier": 1,
+        "canonicalValue": 16,
+        "unit": "year",
+        "canonicalUnit": "year",
+        "scale": null,
+        "valueKind": "absolute",
+        "relationKind": null,
+        "qualifier": null,
+        "start": 4152,
+        "end": 4159
+      }
+    ],
+    "claims": [],
+    "relations": [],
+    "events": [],
+    "conflicts": [],
+    "changes": [],
+    "omissions": []
+  }
+}

@@ -1,0 +1,2872 @@
+TAP version 13
+# Subtest: publisher ministry chain keeps source order and leaves implicit event actor unresolved
+ok 1 - publisher ministry chain keeps source order and leaves implicit event actor unresolved
+  ---
+  duration_ms: 21.1321
+  type: 'test'
+  ...
+# Subtest: police witness and person performing the action remain three separate roles
+ok 2 - police witness and person performing the action remain three separate roles
+  ---
+  duration_ms: 4.8652
+  type: 'test'
+  ...
+# Subtest: reported negation and denial do not become positive facts or resolved pronoun actors
+ok 3 - reported negation and denial do not become positive facts or resolved pronoun actors
+  ---
+  duration_ms: 2.867
+  type: 'test'
+  ...
+# Subtest: publication recipient never becomes claim source or quantity owner
+ok 4 - publication recipient never becomes claim source or quantity owner
+  ---
+  duration_ms: 3.2384
+  type: 'test'
+  ...
+# Subtest: publisher citation and possessive spokesperson form an ordered three-edge chain
+ok 5 - publisher citation and possessive spokesperson form an ordered three-edge chain
+  ---
+  duration_ms: 3.2306
+  type: 'test'
+  ...
+# Subtest: ambiguous, absent and negated reporting sources abstain without flattening
+ok 6 - ambiguous, absent and negated reporting sources abstain without flattening
+  ---
+  duration_ms: 2.6627
+  type: 'test'
+  ...
+# Subtest: every resolved edge links exact raw evidence, ordered parents and a real proposition frame
+ok 7 - every resolved edge links exact raw evidence, ordered parents and a real proposition frame
+  ---
+  duration_ms: 6.7461
+  type: 'test'
+  ...
+# Subtest: source chains and denial scope cannot leak into an adjacent sentence
+ok 8 - source chains and denial scope cannot leak into an adjacent sentence
+  ---
+  duration_ms: 1.756
+  type: 'test'
+  ...
+# Subtest: lossless unresolved compound candidate: speed
+ok 9 - lossless unresolved compound candidate: speed
+  ---
+  duration_ms: 55.2401
+  type: 'test'
+  ...
+# Subtest: lossless unresolved compound candidate: slash
+ok 10 - lossless unresolved compound candidate: slash
+  ---
+  duration_ms: 18.9851
+  type: 'test'
+  ...
+# Subtest: lossless unresolved compound candidate: meters
+ok 11 - lossless unresolved compound candidate: meters
+  ---
+  duration_ms: 5.3159
+  type: 'test'
+  ...
+# Subtest: lossless unresolved compound candidate: volume
+ok 12 - lossless unresolved compound candidate: volume
+  ---
+  duration_ms: 39.9773
+  type: 'test'
+  ...
+# Subtest: lossless unresolved compound candidate: count
+ok 13 - lossless unresolved compound candidate: count
+  ---
+  duration_ms: 1.5171
+  type: 'test'
+  ...
+# Subtest: lossless unresolved compound candidate: money
+ok 14 - lossless unresolved compound candidate: money
+  ---
+  duration_ms: 0.8742
+  type: 'test'
+  ...
+# Subtest: lossless unresolved compound candidate: monthly
+ok 15 - lossless unresolved compound candidate: monthly
+  ---
+  duration_ms: 0.9335
+  type: 'test'
+  ...
+# Subtest: lossless unresolved compound candidate: daily
+ok 16 - lossless unresolved compound candidate: daily
+  ---
+  duration_ms: 0.7556
+  type: 'test'
+  ...
+# Subtest: lossless unresolved compound candidate: area
+ok 17 - lossless unresolved compound candidate: area
+  ---
+  duration_ms: 0.6304
+  type: 'test'
+  ...
+# Subtest: lossless unresolved compound candidate: unknown
+ok 18 - lossless unresolved compound candidate: unknown
+  ---
+  duration_ms: 0.7431
+  type: 'test'
+  ...
+# Subtest: compound qualifier preserved: upper
+ok 19 - compound qualifier preserved: upper
+  ---
+  duration_ms: 1.2397
+  type: 'test'
+  ...
+# Subtest: compound qualifier preserved: lower
+ok 20 - compound qualifier preserved: lower
+  ---
+  duration_ms: 0.984
+  type: 'test'
+  ...
+# Subtest: compound qualifier preserved: below
+ok 21 - compound qualifier preserved: below
+  ---
+  duration_ms: 0.6474
+  type: 'test'
+  ...
+# Subtest: compound qualifier preserved: delta
+ok 22 - compound qualifier preserved: delta
+  ---
+  duration_ms: 0.6759
+  type: 'test'
+  ...
+# Subtest: compound qualifier preserved: deltaCount
+ok 23 - compound qualifier preserved: deltaCount
+  ---
+  duration_ms: 1.018
+  type: 'test'
+  ...
+# Subtest: non-rate negative control remains intact: simple
+ok 24 - non-rate negative control remains intact: simple
+  ---
+  duration_ms: 0.7925
+  type: 'test'
+  ...
+# Subtest: non-rate negative control remains intact: duration
+ok 25 - non-rate negative control remains intact: duration
+  ---
+  duration_ms: 1.197
+  type: 'test'
+  ...
+# Subtest: non-rate negative control remains intact: clock
+ok 26 - non-rate negative control remains intact: clock
+  ---
+  duration_ms: 0.477
+  type: 'test'
+  ...
+# Subtest: non-rate negative control remains intact: percent
+ok 27 - non-rate negative control remains intact: percent
+  ---
+  duration_ms: 1.2221
+  type: 'test'
+  ...
+# Subtest: source does not become owner of attributed compound rate
+ok 28 - source does not become owner of attributed compound rate
+  ---
+  duration_ms: 1.9831
+  type: 'test'
+  ...
+# Subtest: ambiguous correction cannot reactivate rejected numerator or lose accepted denominator
+ok 29 - ambiguous correction cannot reactivate rejected numerator or lose accepted denominator
+  ---
+  duration_ms: 2.3355
+  type: 'test'
+  ...
+# Subtest: all compound raw spans exact and no canonical facts emitted
+ok 30 - all compound raw spans exact and no canonical facts emitted
+  ---
+  duration_ms: 49.3397
+  type: 'test'
+  ...
+# Subtest: W3 loses unsafe simple resolution and retains speed denominator and threshold
+ok 31 - W3 loses unsafe simple resolution and retains speed denominator and threshold
+  ---
+  duration_ms: 7.8748
+  type: 'test'
+  ...
+# Subtest: B03 compatible generic active participant: organisation
+ok 32 - B03 compatible generic active participant: organisation
+  ---
+  duration_ms: 37.4011
+  type: 'test'
+  ...
+# Subtest: B03 compatible generic active participant: institutionActive
+ok 33 - B03 compatible generic active participant: institutionActive
+  ---
+  duration_ms: 15.045
+  type: 'test'
+  ...
+# Subtest: B03 compatible generic active participant: authority
+ok 34 - B03 compatible generic active participant: authority
+  ---
+  duration_ms: 2.0781
+  type: 'test'
+  ...
+# Subtest: B03 compatible generic active participant: committee
+ok 35 - B03 compatible generic active participant: committee
+  ---
+  duration_ms: 4.2519
+  type: 'test'
+  ...
+# Subtest: B03 compatible generic active participant: adjective
+ok 36 - B03 compatible generic active participant: adjective
+  ---
+  duration_ms: 0.7141
+  type: 'test'
+  ...
+# Subtest: B03 compatible generic active participant: human
+ok 37 - B03 compatible generic active participant: human
+  ---
+  duration_ms: 2.9497
+  type: 'test'
+  ...
+# Subtest: B03 compatible generic active participant: rescue
+ok 38 - B03 compatible generic active participant: rescue
+  ---
+  duration_ms: 0.638
+  type: 'test'
+  ...
+# Subtest: B03 insufficient or competing actor evidence abstains: ambiguous
+ok 39 - B03 insufficient or competing actor evidence abstains: ambiguous
+  ---
+  duration_ms: 0.4835
+  type: 'test'
+  ...
+# Subtest: B03 insufficient or competing actor evidence abstains: institution
+ok 40 - B03 insufficient or competing actor evidence abstains: institution
+  ---
+  duration_ms: 2.796
+  type: 'test'
+  ...
+# Subtest: B03 insufficient or competing actor evidence abstains: coordinated
+ok 41 - B03 insufficient or competing actor evidence abstains: coordinated
+  ---
+  duration_ms: 1.0079
+  type: 'test'
+  ...
+# Subtest: B03 insufficient or competing actor evidence abstains: passive
+ok 42 - B03 insufficient or competing actor evidence abstains: passive
+  ---
+  duration_ms: 1.5113
+  type: 'test'
+  ...
+# Subtest: B03 insufficient or competing actor evidence abstains: partialActor
+ok 43 - B03 insufficient or competing actor evidence abstains: partialActor
+  ---
+  duration_ms: 3.3244
+  type: 'test'
+  ...
+# Subtest: B03 possessor and event actor stay separate
+ok 44 - B03 possessor and event actor stay separate
+  ---
+  duration_ms: 0.5379
+  type: 'test'
+  ...
+# Subtest: B03 reporting source does not become generic actor
+ok 45 - B03 reporting source does not become generic actor
+  ---
+  duration_ms: 1.6143
+  type: 'test'
+  ...
+# Subtest: B03 accepted alternative has typed independent evidence: count
+ok 46 - B03 accepted alternative has typed independent evidence: count
+  ---
+  duration_ms: 1.6217
+  type: 'test'
+  ...
+# Subtest: B03 accepted alternative has typed independent evidence: money
+ok 47 - B03 accepted alternative has typed independent evidence: money
+  ---
+  duration_ms: 1.5043
+  type: 'test'
+  ...
+# Subtest: B03 accepted alternative has typed independent evidence: percentage
+ok 48 - B03 accepted alternative has typed independent evidence: percentage
+  ---
+  duration_ms: 0.8621
+  type: 'test'
+  ...
+# Subtest: B03 accepted alternative has typed independent evidence: date
+ok 49 - B03 accepted alternative has typed independent evidence: date
+  ---
+  duration_ms: 0.9414
+  type: 'test'
+  ...
+# Subtest: B03 accepted alternative has typed independent evidence: measurement
+ok 50 - B03 accepted alternative has typed independent evidence: measurement
+  ---
+  duration_ms: 1.2952
+  type: 'test'
+  ...
+# Subtest: B03 accepted alternative has typed independent evidence: parallelMoney
+ok 51 - B03 accepted alternative has typed independent evidence: parallelMoney
+  ---
+  duration_ms: 0.5817
+  type: 'test'
+  ...
+# Subtest: B03 no unsupported accepted-slot inference: boundary
+ok 52 - B03 no unsupported accepted-slot inference: boundary
+  ---
+  duration_ms: 1.6849
+  type: 'test'
+  ...
+# Subtest: B03 no unsupported accepted-slot inference: ellipsis
+ok 53 - B03 no unsupported accepted-slot inference: ellipsis
+  ---
+  duration_ms: 0.6776
+  type: 'test'
+  ...
+# Subtest: B03 no unsupported accepted-slot inference: rate
+ok 54 - B03 no unsupported accepted-slot inference: rate
+  ---
+  duration_ms: 1.0215
+  type: 'test'
+  ...
+# Subtest: B03 no unsupported accepted-slot inference: unknownDuration
+ok 55 - B03 no unsupported accepted-slot inference: unknownDuration
+  ---
+  duration_ms: 0.9295
+  type: 'test'
+  ...
+# Subtest: B03 explicit typed rank preserves ranked subject
+ok 56 - B03 explicit typed rank preserves ranked subject
+  ---
+  duration_ms: 4.1867
+  type: 'test'
+  ...
+# Subtest: B03 subject modifier ordinal is not rank: ordinal
+ok 57 - B03 subject modifier ordinal is not rank: ordinal
+  ---
+  duration_ms: 0.6977
+  type: 'test'
+  ...
+# Subtest: B03 subject modifier ordinal is not rank: district
+ok 58 - B03 subject modifier ordinal is not rank: district
+  ---
+  duration_ms: 0.6056
+  type: 'test'
+  ...
+# Subtest: B03 no guessed ranked subject: implicit
+ok 59 - B03 no guessed ranked subject: implicit
+  ---
+  duration_ms: 0.5713
+  type: 'test'
+  ...
+# Subtest: B03 no guessed ranked subject: genericRank
+ok 60 - B03 no guessed ranked subject: genericRank
+  ---
+  duration_ms: 0.3384
+  type: 'test'
+  ...
+# Subtest: B03 no guessed ranked subject: rankCoord
+ok 61 - B03 no guessed ranked subject: rankCoord
+  ---
+  duration_ms: 4.9968
+  type: 'test'
+  ...
+# Subtest: B03 no guessed ranked subject: rankDiscourse
+ok 62 - B03 no guessed ranked subject: rankDiscourse
+  ---
+  duration_ms: 1.0708
+  type: 'test'
+  ...
+# Subtest: B03 independent numeric edge survives unresolved actor
+ok 63 - B03 independent numeric edge survives unresolved actor
+  ---
+  duration_ms: 1.1765
+  type: 'test'
+  ...
+# Subtest: B03 proven actor survives malformed numeric dependency
+ok 64 - B03 proven actor survives malformed numeric dependency
+  ---
+  duration_ms: 2.7496
+  type: 'test'
+  ...
+# Subtest: B03 recipient cannot become generic actor
+ok 65 - B03 recipient cannot become generic actor
+  ---
+  duration_ms: 1.2183
+  type: 'test'
+  ...
+# Subtest: B03 multi-sentence state isolation: continuity
+ok 66 - B03 multi-sentence state isolation: continuity
+  ---
+  duration_ms: 3.5422
+  type: 'test'
+  ...
+# Subtest: B03 multi-sentence state isolation: afterCorrection
+ok 67 - B03 multi-sentence state isolation: afterCorrection
+  ---
+  duration_ms: 1.1066
+  type: 'test'
+  ...
+# Subtest: B03 no positive accepted quantity if its dependency path is broken
+ok 68 - B03 no positive accepted quantity if its dependency path is broken
+  ---
+  duration_ms: 1.2673
+  type: 'test'
+  ...
+# Subtest: B03 nominal subject alone does not license agency
+ok 69 - B03 nominal subject alone does not license agency
+  ---
+  duration_ms: 0.4409
+  type: 'test'
+  ...
+# Subtest: B03 passive morphology vetoes a compatible generic candidate
+ok 70 - B03 passive morphology vetoes a compatible generic candidate
+  ---
+  duration_ms: 0.4234
+  type: 'test'
+  ...
+# Subtest: B03 all evidence remains exact and canonical output stays off
+ok 71 - B03 all evidence remains exact and canonical output stays off
+  ---
+  duration_ms: 27.2267
+  type: 'test'
+  ...
+# Subtest: actor correction keeps only Anna positive and signing is not attribution
+ok 72 - actor correction keeps only Anna positive and signing is not attribution
+  ---
+  duration_ms: 30.8478
+  type: 'test'
+  ...
+# Subtest: quantity, amount and year corrections share a slot and reject the old value
+ok 73 - quantity, amount and year corrections share a slot and reject the old value
+  ---
+  duration_ms: 48.9716
+  type: 'test'
+  ...
+# Subtest: source correction and attributed numeric correction keep their distinct roles
+ok 74 - source correction and attributed numeric correction keep their distinct roles
+  ---
+  duration_ms: 3.0579
+  type: 'test'
+  ...
+# Subtest: accusative object correction removes the rejected object
+ok 75 - accusative object correction removes the rejected object
+  ---
+  duration_ms: 0.798
+  type: 'test'
+  ...
+# Subtest: incompatible alternatives, multiple predicates and repeated correction abstain
+ok 76 - incompatible alternatives, multiple predicates and repeated correction abstain
+  ---
+  duration_ms: 1.8163
+  type: 'test'
+  ...
+# Subtest: all contrast evidence slices original input and projection remains disabled
+ok 77 - all contrast evidence slices original input and projection remains disabled
+  ---
+  duration_ms: 6.227
+  type: 'test'
+  ...
+# Subtest: legal proceeding is a generic frame, never a project-start claim
+ok 78 - legal proceeding is a generic frame, never a project-start claim
+  ---
+  duration_ms: 66.3232
+  type: 'test'
+  ...
+# Subtest: media context and person/location boundaries are typed without name-specific rules
+ok 79 - media context and person/location boundaries are typed without name-specific rules
+  ---
+  duration_ms: 13.235
+  type: 'test'
+  ...
+# Subtest: numeric arguments bind separately to nearby subjects and classify local semantics
+ok 80 - numeric arguments bind separately to nearby subjects and classify local semantics
+  ---
+  duration_ms: 11.2275
+  type: 'test'
+  ...
+# Subtest: admission, denial and conditional promise remain separate frames
+ok 81 - admission, denial and conditional promise remain separate frames
+  ---
+  duration_ms: 4.4628
+  type: 'test'
+  ...
+# Subtest: historical judgment reference does not become a new court event
+ok 82 - historical judgment reference does not become a new court event
+  ---
+  duration_ms: 19.3327
+  type: 'test'
+  ...
+# Subtest: Round 2 splits multi-subject numeric propositions across unrelated domains
+ok 83 - Round 2 splits multi-subject numeric propositions across unrelated domains
+  ---
+  duration_ms: 184.5809
+  type: 'test'
+  ...
+# Subtest: Round 2 keeps media and official source roles separate from entity identity
+ok 84 - Round 2 keeps media and official source roles separate from entity identity
+  ---
+  duration_ms: 5.545
+  type: 'test'
+  ...
+# Subtest: Round 2 attribution never promotes punctuation, clauses, or unresolved pronouns
+ok 85 - Round 2 attribution never promotes punctuation, clauses, or unresolved pronouns
+  ---
+  duration_ms: 4.3186
+  type: 'test'
+  ...
+# Subtest: Round 2 separates admission and denial propositions without duplicates
+ok 86 - Round 2 separates admission and denial propositions without duplicates
+  ---
+  duration_ms: 2.2686
+  type: 'test'
+  ...
+# Subtest: Round 2 enforces promise and conditional consistency
+ok 87 - Round 2 enforces promise and conditional consistency
+  ---
+  duration_ms: 28.9286
+  type: 'test'
+  ...
+# Subtest: Round 2 conservatively resolves inflected names inside one article
+ok 88 - Round 2 conservatively resolves inflected names inside one article
+  ---
+  duration_ms: 4.0078
+  type: 'test'
+  ...
+# Subtest: Round 2 structural segmentation blocks byline and caption leakage
+ok 89 - Round 2 structural segmentation blocks byline and caption leakage
+  ---
+  duration_ms: 22.0322
+  type: 'test'
+  ...
+# Subtest: Round 2 entity precision/recall adversarial fixture meets the safety floor
+ok 90 - Round 2 entity precision/recall adversarial fixture meets the safety floor
+  ---
+  duration_ms: 1.1885
+  type: 'test'
+  ...
+# Subtest: Round 2 frame quality metrics meet the curated safety floor
+ok 91 - Round 2 frame quality metrics meet the curated safety floor
+  ---
+  duration_ms: 3.2158
+  type: 'test'
+  ...
+# Subtest: candidate review: possession is not positive actor evidence for an inanimate patient
+ok 92 - candidate review: possession is not positive actor evidence for an inanimate patient
+  ---
+  duration_ms: 48.2092
+  type: 'test'
+  ...
+# Subtest: candidate review: generic counted head is found through modifiers without noun whitelist
+ok 93 - candidate review: generic counted head is found through modifiers without noun whitelist
+  ---
+  duration_ms: 55.7368
+  type: 'test'
+  ...
+# Subtest: candidate review: accepted generic contrast count needs its own dependency route
+ok 94 - candidate review: accepted generic contrast count needs its own dependency route
+  ---
+  duration_ms: 15.2417
+  type: 'test'
+  ...
+# Subtest: candidate review: a malformed source governor does not become a resolved chain
+ok 95 - candidate review: a malformed source governor does not become a resolved chain
+  ---
+  duration_ms: 8.4891
+  type: 'test'
+  ...
+# Subtest: candidate review: real duration and percentage retain their distinct semantic kinds and exact evidence
+ok 96 - candidate review: real duration and percentage retain their distinct semantic kinds and exact evidence
+  ---
+  duration_ms: 12.9722
+  type: 'test'
+  ...
+# Subtest: dependency edges cannot revive bindings inside unresolved correction scope
+ok 97 - dependency edges cannot revive bindings inside unresolved correction scope
+  ---
+  duration_ms: 4.3198
+  type: 'test'
+  ...
+# Subtest: missing dependency metadata cannot silently retain heuristic positive bindings
+ok 98 - missing dependency metadata cannot silently retain heuristic positive bindings
+  ---
+  duration_ms: 2.1539
+  type: 'test'
+  ...
+# Subtest: live dependency annotations preserve accepted corrections and nested source chains
+ok 99 - live dependency annotations preserve accepted corrections and nested source chains
+  ---
+  duration_ms: 11.0947
+  type: 'test'
+  ...
+# Subtest: dependency-backed numerics keep adjectival money, percentage shares and measurements distinct
+ok 100 - dependency-backed numerics keep adjectival money, percentage shares and measurements distinct
+  ---
+  duration_ms: 4.0347
+  type: 'test'
+  ...
+# Subtest: dependency subjects resolve explicit actors, excluding possessors, recipients and attribution
+ok 101 - dependency subjects resolve explicit actors, excluding possessors, recipients and attribution
+  ---
+  duration_ms: 82.3603
+  type: 'test'
+  ...
+# Subtest: organisation actors, ambiguous subjects and possessive role heads obey structural licensing
+ok 102 - organisation actors, ambiguous subjects and possessive role heads obey structural licensing
+  ---
+  duration_ms: 2.2963
+  type: 'test'
+  ...
+# Subtest: generic count and year/count collision are structurally licensed
+ok 103 - generic count and year/count collision are structurally licensed
+  ---
+  duration_ms: 1.3091
+  type: 'test'
+  ...
+# Subtest: year, duration and percentage-change use distinct dependency-backed slots
+ok 104 - year, duration and percentage-change use distinct dependency-backed slots
+  ---
+  duration_ms: 1.3683
+  type: 'test'
+  ...
+# Subtest: duration week/day/hour and percentage-change stay distinct under local syntax
+ok 105 - duration week/day/hour and percentage-change stay distinct under local syntax
+  ---
+  duration_ms: 3.3651
+  type: 'test'
+  ...
+# Subtest: triple-nested attribution keeps the source chain and numeric claim separate
+ok 106 - triple-nested attribution keeps the source chain and numeric claim separate
+  ---
+  duration_ms: 3.2578
+  type: 'test'
+  ...
+# Subtest: broken count attachment does not collapse a licensed organisation actor
+ok 107 - broken count attachment does not collapse a licensed organisation actor
+  ---
+  duration_ms: 1.3156
+  type: 'test'
+  ...
+# Subtest: broken numeric attachment does not collapse a nested attribution source chain
+ok 108 - broken numeric attachment does not collapse a nested attribution source chain
+  ---
+  duration_ms: 1.0777
+  type: 'test'
+  ...
+# Subtest: age paths end at the described person while amount paths end at support or revenue
+ok 109 - age paths end at the described person while amount paths end at support or revenue
+  ---
+  duration_ms: 1.425
+  type: 'test'
+  ...
+# Subtest: age syntax alone does not prove an unclassified proper name is a person
+ok 110 - age syntax alone does not prove an unclassified proper name is a person
+  ---
+  duration_ms: 0.7972
+  type: 'test'
+  ...
+# Subtest: headcount belongs to the employment argument and never the company possessor
+ok 111 - headcount belongs to the employment argument and never the company possessor
+  ---
+  duration_ms: 0.3931
+  type: 'test'
+  ...
+# Subtest: conflicting subjects and disconnected numeric attachment abstain despite former heuristics
+ok 112 - conflicting subjects and disconnected numeric attachment abstain despite former heuristics
+  ---
+  duration_ms: 2.5142
+  type: 'test'
+  ...
+# Subtest: passive morphology and malformed graph cannot produce a resolved actor
+ok 113 - passive morphology and malformed graph cannot produce a resolved actor
+  ---
+  duration_ms: 1.3363
+  type: 'test'
+  ...
+# Subtest: resolved bindings contain raw structural evidence and canonical outputs stay disabled
+ok 114 - resolved bindings contain raw structural evidence and canonical outputs stay disabled
+  ---
+  duration_ms: 29.9422
+  type: 'test'
+  ...
+# Subtest: deterministic provider extracts only text-grounded numeric and semantic markers
+ok 115 - deterministic provider extracts only text-grounded numeric and semantic markers
+  ---
+  duration_ms: 83.6469
+  type: 'test'
+  ...
+# Subtest: deterministic provider does not import or read gold/scenario logic
+ok 116 - deterministic provider does not import or read gold/scenario logic
+  ---
+  duration_ms: 2.1333
+  type: 'test'
+  ...
+# Subtest: rank result and structural owner: simple
+ok 117 - rank result and structural owner: simple
+  ---
+  duration_ms: 73.7126
+  type: 'test'
+  ...
+# Subtest: rank result and structural owner: other
+ok 118 - rank result and structural owner: other
+  ---
+  duration_ms: 6.7257
+  type: 'test'
+  ...
+# Subtest: rank result and structural owner: explicit
+ok 119 - rank result and structural owner: explicit
+  ---
+  duration_ms: 2.9968
+  type: 'test'
+  ...
+# Subtest: rank result and structural owner: advance
+ok 120 - rank result and structural owner: advance
+  ---
+  duration_ms: 7.8189
+  type: 'test'
+  ...
+# Subtest: nominal modifier is not a placement: round
+ok 121 - nominal modifier is not a placement: round
+  ---
+  duration_ms: 1.2367
+  type: 'test'
+  ...
+# Subtest: nominal modifier is not a placement: occasion
+ok 122 - nominal modifier is not a placement: occasion
+  ---
+  duration_ms: 2.3566
+  type: 'test'
+  ...
+# Subtest: nominal modifier is not a placement: day
+ok 123 - nominal modifier is not a placement: day
+  ---
+  duration_ms: 0.9983
+  type: 'test'
+  ...
+# Subtest: nominal modifier is not a placement: district
+ok 124 - nominal modifier is not a placement: district
+  ---
+  duration_ms: 0.9029
+  type: 'test'
+  ...
+# Subtest: ordinal round and elliptic result have separate values and targets
+ok 125 - ordinal round and elliptic result have separate values and targets
+  ---
+  duration_ms: 1.6529
+  type: 'test'
+  ...
+# Subtest: attributing person is not the ranked subject
+ok 126 - attributing person is not the ranked subject
+  ---
+  duration_ms: 0.9138
+  type: 'test'
+  ...
+# Subtest: parser lacks subject edge: attribution is retained without inventing rank owner
+ok 127 - parser lacks subject edge: attribution is retained without inventing rank owner
+  ---
+  duration_ms: 0.9825
+  type: 'test'
+  ...
+# Subtest: rank correction resolves only accepted alternative with its owner
+ok 128 - rank correction resolves only accepted alternative with its owner
+  ---
+  duration_ms: 1.4889
+  type: 'test'
+  ...
+# Subtest: implicit owner contrast preserves alternatives but abstains on positive binding
+ok 129 - implicit owner contrast preserves alternatives but abstains on positive binding
+  ---
+  duration_ms: 8.0797
+  type: 'test'
+  ...
+# Subtest: predicative uncertainty abstains: ambiguous
+ok 130 - predicative uncertainty abstains: ambiguous
+  ---
+  duration_ms: 1.1538
+  type: 'test'
+  ...
+# Subtest: predicative uncertainty abstains: coordination
+ok 131 - predicative uncertainty abstains: coordination
+  ---
+  duration_ms: 1.1253
+  type: 'test'
+  ...
+# Subtest: adversarial calendar, ordinal and count are never recast as the elliptic ranking
+ok 132 - adversarial calendar, ordinal and count are never recast as the elliptic ranking
+  ---
+  duration_ms: 2.3979
+  type: 'test'
+  ...
+# Subtest: copula and subject evidence are both necessary
+ok 133 - copula and subject evidence are both necessary
+  ---
+  duration_ms: 5.4278
+  type: 'test'
+  ...
+# Subtest: all new rank evidence remains raw-source exact and canonical projection disabled
+ok 134 - all new rank evidence remains raw-source exact and canonical projection disabled
+  ---
+  duration_ms: 37.415
+  type: 'test'
+  ...
+# Subtest: FB01 simple equality survives: simple_money
+ok 135 - FB01 simple equality survives: simple_money
+  ---
+  duration_ms: 38.1859
+  type: 'test'
+  ...
+# Subtest: FB01 simple equality survives: simple_count
+ok 136 - FB01 simple equality survives: simple_count
+  ---
+  duration_ms: 4.1407
+  type: 'test'
+  ...
+# Subtest: FB01 simple equality survives: simple_measure
+ok 137 - FB01 simple equality survives: simple_measure
+  ---
+  duration_ms: 2.4794
+  type: 'test'
+  ...
+# Subtest: FB01 simple equality survives: simple_year
+ok 138 - FB01 simple equality survives: simple_year
+  ---
+  duration_ms: 3.1823
+  type: 'test'
+  ...
+# Subtest: FB01 simple equality survives: simple_date
+ok 139 - FB01 simple equality survives: simple_date
+  ---
+  duration_ms: 2.3108
+  type: 'test'
+  ...
+# Subtest: FB01 simple positive percentage/share survives
+ok 140 - FB01 simple positive percentage/share survives
+  ---
+  duration_ms: 1.3648
+  type: 'test'
+  ...
+# Subtest: FB01 missing copular share attachment is not invented
+ok 141 - FB01 missing copular share attachment is not invented
+  ---
+  duration_ms: 0.6912
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: per_kg
+ok 142 - FB01 compound dimension preserved without positive projection: per_kg
+  ---
+  duration_ms: 1.2806
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: per_liter
+ok 143 - FB01 compound dimension preserved without positive projection: per_liter
+  ---
+  duration_ms: 1.1683
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: per_kwh
+ok 144 - FB01 compound dimension preserved without positive projection: per_kwh
+  ---
+  duration_ms: 0.8499
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: per_tonne
+ok 145 - FB01 compound dimension preserved without positive projection: per_tonne
+  ---
+  duration_ms: 2.9749
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: physical
+ok 146 - FB01 compound dimension preserved without positive projection: physical
+  ---
+  duration_ms: 3.125
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: speed
+ok 147 - FB01 compound dimension preserved without positive projection: speed
+  ---
+  duration_ms: 0.7332
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: throughput
+ok 148 - FB01 compound dimension preserved without positive projection: throughput
+  ---
+  duration_ms: 0.9405
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: vehicle
+ok 149 - FB01 compound dimension preserved without positive projection: vehicle
+  ---
+  duration_ms: 7.9648
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: area
+ok 150 - FB01 compound dimension preserved without positive projection: area
+  ---
+  duration_ms: 1.6665
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: unknown_unit
+ok 151 - FB01 compound dimension preserved without positive projection: unknown_unit
+  ---
+  duration_ms: 0.7851
+  type: 'test'
+  ...
+# Subtest: FB01 scaled denominator retains 100 km
+ok 152 - FB01 scaled denominator retains 100 km
+  ---
+  duration_ms: 0.594
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: lower
+ok 153 - FB01 comparison and unit coexist: lower
+  ---
+  duration_ms: 0.9491
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: upper
+ok 154 - FB01 comparison and unit coexist: upper
+  ---
+  duration_ms: 0.5819
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: greater
+ok 155 - FB01 comparison and unit coexist: greater
+  ---
+  duration_ms: 0.7017
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: less
+ok 156 - FB01 comparison and unit coexist: less
+  ---
+  duration_ms: 0.467
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: approx
+ok 157 - FB01 comparison and unit coexist: approx
+  ---
+  duration_ms: 0.4219
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: per_kwh
+ok 158 - FB01 comparison and unit coexist: per_kwh
+  ---
+  duration_ms: 0.424
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: per_tonne
+ok 159 - FB01 comparison and unit coexist: per_tonne
+  ---
+  duration_ms: 0.728
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: physical
+ok 160 - FB01 comparison and unit coexist: physical
+  ---
+  duration_ms: 0.723
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: throughput
+ok 161 - FB01 comparison and unit coexist: throughput
+  ---
+  duration_ms: 1.1855
+  type: 'test'
+  ...
+# Subtest: FB01 range endpoints never become equality: range_words
+ok 162 - FB01 range endpoints never become equality: range_words
+  ---
+  duration_ms: 2.2987
+  type: 'test'
+  ...
+# Subtest: FB01 range endpoints never become equality: range_dash
+ok 163 - FB01 range endpoints never become equality: range_dash
+  ---
+  duration_ms: 1.262
+  type: 'test'
+  ...
+# Subtest: FB01 range endpoints never become equality: range_suffix
+ok 164 - FB01 range endpoints never become equality: range_suffix
+  ---
+  duration_ms: 1.5842
+  type: 'test'
+  ...
+# Subtest: FB01 range endpoints never become equality: range_bounds
+ok 165 - FB01 range endpoints never become equality: range_bounds
+  ---
+  duration_ms: 2.5334
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: condition_ha
+ok 166 - FB01 condition remains explicit: condition_ha
+  ---
+  duration_ms: 1.5286
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: condition_amennyiben
+ok 167 - FB01 condition remains explicit: condition_amennyiben
+  ---
+  duration_ms: 0.7002
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: condition_nominal
+ok 168 - FB01 condition remains explicit: condition_nominal
+  ---
+  duration_ms: 1.2068
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: condition_felteve
+ok 169 - FB01 condition remains explicit: condition_felteve
+  ---
+  duration_ms: 1.0801
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: condition_only
+ok 170 - FB01 condition remains explicit: condition_only
+  ---
+  duration_ms: 0.8397
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: condition_circumstances
+ok 171 - FB01 condition remains explicit: condition_circumstances
+  ---
+  duration_ms: 2.0855
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: conditional_rate
+ok 172 - FB01 condition remains explicit: conditional_rate
+  ---
+  duration_ms: 0.7055
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: source_condition
+ok 173 - FB01 condition remains explicit: source_condition
+  ---
+  duration_ms: 0.7326
+  type: 'test'
+  ...
+# Subtest: FB01 possibility + nominal condition + upper bound compose
+ok 174 - FB01 possibility + nominal condition + upper bound compose
+  ---
+  duration_ms: 4.493
+  type: 'test'
+  ...
+# Subtest: FB01 conditional throughput never flattens
+ok 175 - FB01 conditional throughput never flattens
+  ---
+  duration_ms: 8.117
+  type: 'test'
+  ...
+# Subtest: FB01 change magnitude differs from resulting level
+ok 176 - FB01 change magnitude differs from resulting level
+  ---
+  duration_ms: 16.8308
+  type: 'test'
+  ...
+# Subtest: FB01 negated governing comparison is not equality
+ok 177 - FB01 negated governing comparison is not equality
+  ---
+  duration_ms: 0.6622
+  type: 'test'
+  ...
+# Subtest: FB01 ambiguous bounded correction stays conservative
+ok 178 - FB01 ambiguous bounded correction stays conservative
+  ---
+  duration_ms: 1.7282
+  type: 'test'
+  ...
+# Subtest: FB01 source is not automatically numeric owner
+ok 179 - FB01 source is not automatically numeric owner
+  ---
+  duration_ms: 2.8416
+  type: 'test'
+  ...
+# Subtest: FB01 sibling equality has no condition or possibility leakage
+ok 180 - FB01 sibling equality has no condition or possibility leakage
+  ---
+  duration_ms: 6.1138
+  type: 'test'
+  ...
+# Subtest: FB01 separate numeric phrases do not acquire false rates
+ok 181 - FB01 separate numeric phrases do not acquire false rates
+  ---
+  duration_ms: 1.8852
+  type: 'test'
+  ...
+# Subtest: FB01 defective denominator lemma and POS cannot restore simple money
+ok 182 - FB01 defective denominator lemma and POS cannot restore simple money
+  ---
+  duration_ms: 38.751
+  type: 'test'
+  ...
+# Subtest: FB01 split slash parser defect cannot restore simple count
+ok 183 - FB01 split slash parser defect cannot restore simple count
+  ---
+  duration_ms: 6.4546
+  type: 'test'
+  ...
+# Subtest: FB01 broken numeric dependency remains unresolved
+ok 184 - FB01 broken numeric dependency remains unresolved
+  ---
+  duration_ms: 0.8525
+  type: 'test'
+  ...
+# Subtest: FB01 omitted denominator token cannot restore simple money
+ok 185 - FB01 omitted denominator token cannot restore simple money
+  ---
+  duration_ms: 0.8214
+  type: 'test'
+  ...
+# Subtest: FB01 instrumental comparison difference is not an absolute threshold
+ok 186 - FB01 instrumental comparison difference is not an absolute threshold
+  ---
+  duration_ms: 2.1612
+  type: 'test'
+  ...
+# Subtest: FB01 exact evidence for every qualifier, owner path and scope
+ok 187 - FB01 exact evidence for every qualifier, owner path and scope
+  ---
+  duration_ms: 32.5846
+  type: 'test'
+  ...
+# Subtest: oracle provider boundary reaches perfect core semantics
+ok 188 - oracle provider boundary reaches perfect core semantics
+  ---
+  duration_ms: 226.1563
+  type: 'test'
+  ...
+# Subtest: mutation: lost negation and conditional modality are detected
+ok 189 - mutation: lost negation and conditional modality are detected
+  ---
+  duration_ms: 192.4007
+  type: 'test'
+  ...
+# Subtest: mutation: wrong attribution and namesake identity are detected
+ok 190 - mutation: wrong attribution and namesake identity are detected
+  ---
+  duration_ms: 190.6604
+  type: 'test'
+  ...
+# Subtest: mutation: false and missed conflicts are visible
+ok 191 - mutation: false and missed conflicts are visible
+  ---
+  duration_ms: 140.2476
+  type: 'test'
+  ...
+# Subtest: mutation: temporal change and omission status errors are detected
+ok 192 - mutation: temporal change and omission status errors are detected
+  ---
+  duration_ms: 93.1209
+  type: 'test'
+  ...
+# Subtest: V2.2 benchmark contains 20 mandatory Hungarian scenarios and 2-4 source variants
+ok 193 - V2.2 benchmark contains 20 mandatory Hungarian scenarios and 2-4 source variants
+  ---
+  duration_ms: 211.2094
+  type: 'test'
+  ...
+# Subtest: V2.2 gold manifest covers evidence-first dimensions without direct DB writes
+ok 194 - V2.2 gold manifest covers evidence-first dimensions without direct DB writes
+  ---
+  duration_ms: 251.1877
+  type: 'test'
+  ...
+# Subtest: V2.2 baseline makes empty-provider gap explicit and reproducible
+ok 195 - V2.2 baseline makes empty-provider gap explicit and reproducible
+  ---
+  duration_ms: 192.6346
+  type: 'test'
+  ...
+# Subtest: V2.2 dense tier contains five three-source scenarios with broad observations
+ok 196 - V2.2 dense tier contains five three-source scenarios with broad observations
+  ---
+  duration_ms: 43.7056
+  type: 'test'
+  ...
+# Subtest: morphology research uses the actual frozen deterministic baseline
+ok 197 - morphology research uses the actual frozen deterministic baseline
+  ---
+  duration_ms: 68.2476
+  type: 'test'
+  ...
+# Subtest: development annotations retain exact Unicode evidence and never project canonical facts
+ok 198 - development annotations retain exact Unicode evidence and never project canonical facts
+  ---
+  duration_ms: 41.9707
+  type: 'test'
+  ...
+# Subtest: dependency labels cannot alter the research binder
+ok 199 - dependency labels cannot alter the research binder
+  ---
+  duration_ms: 22.3379
+  type: 'test'
+  ...
+# Subtest: subject and value permutations and three-way coordination preserve ownership
+ok 200 - subject and value permutations and three-way coordination preserve ownership
+  ---
+  duration_ms: 1.2184
+  type: 'test'
+  ...
+# Subtest: unit/verb ellipsis has separately anchored evidence
+ok 201 - unit/verb ellipsis has separately anchored evidence
+  ---
+  duration_ms: 0.8243
+  type: 'test'
+  ...
+# Subtest: ordinal product cannot inherit first product identity and weather is not transport actor
+ok 202 - ordinal product cannot inherit first product identity and weather is not transport actor
+  ---
+  duration_ms: 2.03
+  type: 'test'
+  ...
+# Subtest: admission and denial remain separate scoped propositions
+ok 203 - admission and denial remain separate scoped propositions
+  ---
+  duration_ms: 0.7155
+  type: 'test'
+  ...
+# Subtest: negation and condition do not leak into completed siblings
+ok 204 - negation and condition do not leak into completed siblings
+  ---
+  duration_ms: 0.8879
+  type: 'test'
+  ...
+# Subtest: speaker role, promises and futures are explicit; nested source abstains
+ok 205 - speaker role, promises and futures are explicit; nested source abstains
+  ---
+  duration_ms: 2.7413
+  type: 'test'
+  ...
+# Subtest: namesakes, metadata and location/person substitution preserve boundaries
+ok 206 - namesakes, metadata and location/person substitution preserve boundaries
+  ---
+  duration_ms: 1.6001
+  type: 'test'
+  ...
+# Subtest: corrupt raw evidence is rejected, never silently normalized
+ok 207 - corrupt raw evidence is rejected, never silently normalized
+  ---
+  duration_ms: 3.2042
+  type: 'test'
+  ...
+# Subtest: worker crash falls back; actual deterministic processing remains available
+ok 208 - worker crash falls back; actual deterministic processing remains available
+  ---
+  duration_ms: 375.7323
+  type: 'test'
+  ...
+# Subtest: worker hang falls back; actual deterministic processing remains available
+ok 209 - worker hang falls back; actual deterministic processing remains available
+  ---
+  duration_ms: 308.5962
+  type: 'test'
+  ...
+# Subtest: worker malformed falls back; actual deterministic processing remains available
+ok 210 - worker malformed falls back; actual deterministic processing remains available
+  ---
+  duration_ms: 77.9895
+  type: 'test'
+  ...
+# Subtest: worker bounded input, queue and out-of-order IDs
+ok 211 - worker bounded input, queue and out-of-order IDs
+  ---
+  duration_ms: 232.5646
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: upper
+ok 212 - C01 retains scoped operator: upper
+  ---
+  duration_ms: 62.256
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: maximum
+ok 213 - C01 retains scoped operator: maximum
+  ---
+  duration_ms: 6.5276
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: lower
+ok 214 - C01 retains scoped operator: lower
+  ---
+  duration_ms: 1.1277
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: minimum
+ok 215 - C01 retains scoped operator: minimum
+  ---
+  duration_ms: 1.1182
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: greater
+ok 216 - C01 retains scoped operator: greater
+  ---
+  duration_ms: 0.7768
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: less
+ok 217 - C01 retains scoped operator: less
+  ---
+  duration_ms: 1.3323
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: approx
+ok 218 - C01 retains scoped operator: approx
+  ---
+  duration_ms: 0.6277
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: about
+ok 219 - C01 retains scoped operator: about
+  ---
+  duration_ms: 0.5388
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: range_dash
+ok 220 - C01 retains scoped operator: range_dash
+  ---
+  duration_ms: 8.7573
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: range_words
+ok 221 - C01 retains scoped operator: range_words
+  ---
+  duration_ms: 1.341
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: money_bound
+ok 222 - C01 retains scoped operator: money_bound
+  ---
+  duration_ms: 0.9156
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: money_greater
+ok 223 - C01 retains scoped operator: money_greater
+  ---
+  duration_ms: 0.451
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: percent_upper
+ok 224 - C01 retains scoped operator: percent_upper
+  ---
+  duration_ms: 1.8861
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: percent_lower
+ok 225 - C01 retains scoped operator: percent_lower
+  ---
+  duration_ms: 0.5911
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: percent_greater
+ok 226 - C01 retains scoped operator: percent_greater
+  ---
+  duration_ms: 0.4383
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: rate_max
+ok 227 - C01 retains scoped operator: rate_max
+  ---
+  duration_ms: 1.741
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: rate_above
+ok 228 - C01 retains scoped operator: rate_above
+  ---
+  duration_ms: 0.7975
+  type: 'test'
+  ...
+# Subtest: C01 retains scoped operator: rate_below
+ok 229 - C01 retains scoped operator: rate_below
+  ---
+  duration_ms: 1.0235
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: potential
+ok 230 - C01 governing modality: potential
+  ---
+  duration_ms: 0.7203
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: capacity
+ok 231 - C01 governing modality: capacity
+  ---
+  duration_ms: 0.9928
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: conditional
+ok 232 - C01 governing modality: conditional
+  ---
+  duration_ms: 1.1082
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: future
+ok 233 - C01 governing modality: future
+  ---
+  duration_ms: 1.8881
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: bounded_possible
+ok 234 - C01 governing modality: bounded_possible
+  ---
+  duration_ms: 0.4856
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: lehet
+ok 235 - C01 governing modality: lehet
+  ---
+  duration_ms: 0.9766
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: lehetne
+ok 236 - C01 governing modality: lehetne
+  ---
+  duration_ms: 0.491
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: must
+ok 237 - C01 governing modality: must
+  ---
+  duration_ms: 0.3667
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: should
+ok 238 - C01 governing modality: should
+  ---
+  duration_ms: 1.3461
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: expected
+ok 239 - C01 governing modality: expected
+  ---
+  duration_ms: 0.5281
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: money_possible
+ok 240 - C01 governing modality: money_possible
+  ---
+  duration_ms: 2.7952
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: rate_possible
+ok 241 - C01 governing modality: rate_possible
+  ---
+  duration_ms: 0.6163
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: attributed
+ok 242 - C01 governing modality: attributed
+  ---
+  duration_ms: 1.0474
+  type: 'test'
+  ...
+# Subtest: C01 governing modality: year
+ok 243 - C01 governing modality: year
+  ---
+  duration_ms: 0.514
+  type: 'test'
+  ...
+# Subtest: C01 bare and explicit equalities retain previous attachment semantics
+ok 244 - C01 bare and explicit equalities retain previous attachment semantics
+  ---
+  duration_ms: 8.2634
+  type: 'test'
+  ...
+# Subtest: C01 percentage change and resulting level remain distinct
+ok 245 - C01 percentage change and resulting level remain distinct
+  ---
+  duration_ms: 2.0727
+  type: 'test'
+  ...
+# Subtest: C01 preserves negative comparison without reversing it into equality
+ok 246 - C01 preserves negative comparison without reversing it into equality
+  ---
+  duration_ms: 1.1633
+  type: 'test'
+  ...
+# Subtest: C01 ambiguous bounded correction keeps separate branch-local operators and abstains
+ok 247 - C01 ambiguous bounded correction keeps separate branch-local operators and abstains
+  ---
+  duration_ms: 3.1663
+  type: 'test'
+  ...
+# Subtest: C01 measurement reference cannot be a resolved count despite broken parser lemma
+ok 248 - C01 measurement reference cannot be a resolved count despite broken parser lemma
+  ---
+  duration_ms: 0.9348
+  type: 'test'
+  ...
+# Subtest: C01 sibling finite predicates do not inherit possibility or obligation
+ok 249 - C01 sibling finite predicates do not inherit possibility or obligation
+  ---
+  duration_ms: 1.4769
+  type: 'test'
+  ...
+# Subtest: C01 future assertion is not possibility
+ok 250 - C01 future assertion is not possibility
+  ---
+  duration_ms: 3.1293
+  type: 'test'
+  ...
+# Subtest: C01 source and quantity qualifiers remain independent
+ok 251 - C01 source and quantity qualifiers remain independent
+  ---
+  duration_ms: 0.8475
+  type: 'test'
+  ...
+# Subtest: C01 range endpoints are not independent positive counts
+ok 252 - C01 range endpoints are not independent positive counts
+  ---
+  duration_ms: 1.7251
+  type: 'test'
+  ...
+# Subtest: C01 B01 denominator remains lossless with simultaneous qualifiers
+ok 253 - C01 B01 denominator remains lossless with simultaneous qualifiers
+  ---
+  duration_ms: 2.3002
+  type: 'test'
+  ...
+# Subtest: C01 lower/upper bound coexist with morphology, not equality
+ok 254 - C01 lower/upper bound coexist with morphology, not equality
+  ---
+  duration_ms: 0.6015
+  type: 'test'
+  ...
+# Subtest: C01 finite morphology fallback works when parser incorrectly reports indicative
+ok 255 - C01 finite morphology fallback works when parser incorrectly reports indicative
+  ---
+  duration_ms: 0.5182
+  type: 'test'
+  ...
+# Subtest: C01 lexical non-modal control does not gain possibility
+ok 256 - C01 lexical non-modal control does not gain possibility
+  ---
+  duration_ms: 0.6165
+  type: 'test'
+  ...
+# Subtest: C01 reversed range remains an invalid unresolved candidate, never equality
+ok 257 - C01 reversed range remains an invalid unresolved candidate, never equality
+  ---
+  duration_ms: 1.0634
+  type: 'test'
+  ...
+# Subtest: C01 unresolved correction exposes scoped candidates without invented accepted role
+ok 258 - C01 unresolved correction exposes scoped candidates without invented accepted role
+  ---
+  duration_ms: 0.8515
+  type: 'test'
+  ...
+# Subtest: C01 source-side potential cannot leak across a reporting complement
+ok 259 - C01 source-side potential cannot leak across a reporting complement
+  ---
+  duration_ms: 0.5547
+  type: 'test'
+  ...
+# Subtest: C01 all semantic evidence includes exact raw spans, scope and no canonical projection
+ok 260 - C01 all semantic evidence includes exact raw spans, scope and no canonical projection
+  ---
+  duration_ms: 19.0271
+  type: 'test'
+  ...
+# Subtest: owner presentation maps canonical enums and typed values
+ok 261 - owner presentation maps canonical enums and typed values
+  ---
+  duration_ms: 64.5242
+  type: 'test'
+  ...
+# Subtest: showcase owner mode routes canonical fields through central presentation mapping
+ok 262 - showcase owner mode routes canonical fields through central presentation mapping
+  ---
+  duration_ms: 0.7822
+  type: 'test'
+  ...
+# Subtest: demo read model preserves structured values for the owner formatter
+ok 263 - demo read model preserves structured values for the owner formatter
+  ---
+  duration_ms: 0.5612
+  type: 'test'
+  ...
+# Subtest: showcase exposes the required benchmark scenario selector
+ok 264 - showcase exposes the required benchmark scenario selector
+  ---
+  duration_ms: 10.0343
+  type: 'test'
+  ...
+# Subtest: precision helper abstains on filler and survives thirty perturbed source variants
+ok 265 - precision helper abstains on filler and survives thirty perturbed source variants
+  ---
+  duration_ms: 522.767
+  type: 'test'
+  ...
+# Subtest: precision helper distinguishes namesake contexts and preserves semantic qualifiers
+ok 266 - precision helper distinguishes namesake contexts and preserves semantic qualifiers
+  ---
+  duration_ms: 0.7179
+  type: 'test'
+  ...
+# Subtest: deterministic semantic providers satisfy canonical extraction contracts without gold input
+ok 267 - deterministic semantic providers satisfy canonical extraction contracts without gold input
+  ---
+  duration_ms: 18.0457
+  type: 'test'
+  ...
+# Subtest: explicit organization relation evidence keeps original article offsets
+ok 268 - explicit organization relation evidence keeps original article offsets
+  ---
+  duration_ms: 1.3819
+  type: 'test'
+  ...
+# Subtest: semantic helper has no benchmark gold dependency
+ok 269 - semantic helper has no benchmark gold dependency
+  ---
+  duration_ms: 1.1596
+  type: 'test'
+  ...
+# Subtest: direct-denial official attribution is source-derived and benchmark-grounded
+ok 270 - direct-denial official attribution is source-derived and benchmark-grounded
+  ---
+  duration_ms: 676.0257
+  type: 'test'
+  ...
+# Subtest: scenario projection collapses repeated entity mentions but keeps namesake identities
+ok 271 - scenario projection collapses repeated entity mentions but keeps namesake identities
+  ---
+  duration_ms: 315.1175
+  type: 'test'
+  ...
+# Subtest: cross-source projection emits only explicit temporal changes and omissions
+ok 272 - cross-source projection emits only explicit temporal changes and omissions
+  ---
+  duration_ms: 311.1231
+  type: 'test'
+  ...
+# Subtest: dense temporal gold values are source-derived and projected deterministically
+ok 273 - dense temporal gold values are source-derived and projected deterministically
+  ---
+  duration_ms: 129.8486
+  type: 'test'
+  ...
+# Subtest: evaluator normalizes an omitted date unit to the canonical date semantic
+ok 274 - evaluator normalizes an omitted date unit to the canonical date semantic
+  ---
+  duration_ms: 74.2834
+  type: 'test'
+  ...
+# Subtest: assessment predicates require a local expert proposition
+ok 275 - assessment predicates require a local expert proposition
+  ---
+  duration_ms: 0.9866
+  type: 'test'
+  ...
+# Subtest: evidence-backed categorical claims count as semantically supported
+ok 276 - evidence-backed categorical claims count as semantically supported
+  ---
+  duration_ms: 0.137
+  type: 'test'
+  ...
+# Subtest: round 3 recovers explicit relations, separate events, and validated conflicts
+ok 277 - round 3 recovers explicit relations, separate events, and validated conflicts
+  ---
+  duration_ms: 514.6382
+  type: 'test'
+  ...
+# Subtest: round 3 dense gold values remain source-derived and expose critical coverage
+ok 278 - round 3 dense gold values remain source-derived and expose critical coverage
+  ---
+  duration_ms: 180.3407
+  type: 'test'
+  ...
+# Subtest: round 3 held-out role clauses resolve the longest organisation and preserve separate events
+ok 279 - round 3 held-out role clauses resolve the longest organisation and preserve separate events
+  ---
+  duration_ms: 28.3229
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: possessor
+ok 280 - real text A evidence and research boundary: possessor
+  ---
+  duration_ms: 19.1088
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: possessor_object
+ok 281 - real text A evidence and research boundary: possessor_object
+  ---
+  duration_ms: 3.5567
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: target
+ok 282 - real text A evidence and research boundary: target
+  ---
+  duration_ms: 0.4619
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: topic
+ok 283 - real text A evidence and research boundary: topic
+  ---
+  duration_ms: 1.3038
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: postposition
+ok 284 - real text A evidence and research boundary: postposition
+  ---
+  duration_ms: 1.1084
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: location
+ok 285 - real text A evidence and research boundary: location
+  ---
+  duration_ms: 6.2679
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: implicit
+ok 286 - real text A evidence and research boundary: implicit
+  ---
+  duration_ms: 0.3471
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: generic
+ok 287 - real text A evidence and research boundary: generic
+  ---
+  duration_ms: 3.8659
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: explicit
+ok 288 - real text A evidence and research boundary: explicit
+  ---
+  duration_ms: 0.6827
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: multiple
+ok 289 - real text A evidence and research boundary: multiple
+  ---
+  duration_ms: 0.473
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: recipient_not_actor
+ok 290 - real text A evidence and research boundary: recipient_not_actor
+  ---
+  duration_ms: 0.2951
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: title_subject
+ok 291 - real text A evidence and research boundary: title_subject
+  ---
+  duration_ms: 0.3975
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: report_dative
+ok 292 - real text A evidence and research boundary: report_dative
+  ---
+  duration_ms: 2.9083
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: report_according
+ok 293 - real text A evidence and research boundary: report_according
+  ---
+  duration_ms: 0.3999
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: report_conversation
+ok 294 - real text A evidence and research boundary: report_conversation
+  ---
+  duration_ms: 0.2936
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: report_ins
+ok 295 - real text A evidence and research boundary: report_ins
+  ---
+  duration_ms: 0.3082
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: report_ela
+ok 296 - real text A evidence and research boundary: report_ela
+  ---
+  duration_ms: 0.4357
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: report_apposition
+ok 297 - real text A evidence and research boundary: report_apposition
+  ---
+  duration_ms: 3.0595
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: report_pronoun
+ok 298 - real text A evidence and research boundary: report_pronoun
+  ---
+  duration_ms: 2.4053
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: report_target
+ok 299 - real text A evidence and research boundary: report_target
+  ---
+  duration_ms: 0.34
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: quote_leading
+ok 300 - real text A evidence and research boundary: quote_leading
+  ---
+  duration_ms: 2.5523
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: quote_boundary
+ok 301 - real text A evidence and research boundary: quote_boundary
+  ---
+  duration_ms: 2.092
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: quote_no_speaker
+ok 302 - real text A evidence and research boundary: quote_no_speaker
+  ---
+  duration_ms: 0.4171
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: quote_target
+ok 303 - real text A evidence and research boundary: quote_target
+  ---
+  duration_ms: 0.3383
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: duration
+ok 304 - real text A evidence and research boundary: duration
+  ---
+  duration_ms: 0.6136
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: age
+ok 305 - real text A evidence and research boundary: age
+  ---
+  duration_ms: 0.4408
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: duration_contract
+ok 306 - real text A evidence and research boundary: duration_contract
+  ---
+  duration_ms: 0.4733
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: year_tariff
+ok 307 - real text A evidence and research boundary: year_tariff
+  ---
+  duration_ms: 0.8803
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: year_tariff_words
+ok 308 - real text A evidence and research boundary: year_tariff_words
+  ---
+  duration_ms: 0.3622
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: age_duration
+ok 309 - real text A evidence and research boundary: age_duration
+  ---
+  duration_ms: 1.0214
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: money
+ok 310 - real text A evidence and research boundary: money
+  ---
+  duration_ms: 1.2767
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: measurement
+ok 311 - real text A evidence and research boundary: measurement
+  ---
+  duration_ms: 1.8132
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: threshold
+ok 312 - real text A evidence and research boundary: threshold
+  ---
+  duration_ms: 0.2944
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: count
+ok 313 - real text A evidence and research boundary: count
+  ---
+  duration_ms: 0.1914
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: share
+ok 314 - real text A evidence and research boundary: share
+  ---
+  duration_ms: 27.8917
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: negative_pair
+ok 315 - real text A evidence and research boundary: negative_pair
+  ---
+  duration_ms: 0.5644
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: report_negative
+ok 316 - real text A evidence and research boundary: report_negative
+  ---
+  duration_ms: 0.465
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: not_only
+ok 317 - real text A evidence and research boundary: not_only
+  ---
+  duration_ms: 0.4316
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: not_small
+ok 318 - real text A evidence and research boundary: not_small
+  ---
+  duration_ms: 0.2595
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: incidental
+ok 319 - real text A evidence and research boundary: incidental
+  ---
+  duration_ms: 0.4696
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: despite
+ok 320 - real text A evidence and research boundary: despite
+  ---
+  duration_ms: 0.3207
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: relative
+ok 321 - real text A evidence and research boundary: relative
+  ---
+  duration_ms: 0.8865
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: quote_negative
+ok 322 - real text A evidence and research boundary: quote_negative
+  ---
+  duration_ms: 0.4418
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: report_denied
+ok 323 - real text A evidence and research boundary: report_denied
+  ---
+  duration_ms: 0.2359
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: negative_existential
+ok 324 - real text A evidence and research boundary: negative_existential
+  ---
+  duration_ms: 0.1364
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: denial
+ok 325 - real text A evidence and research boundary: denial
+  ---
+  duration_ms: 0.443
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: not_hidden
+ok 326 - real text A evidence and research boundary: not_hidden
+  ---
+  duration_ms: 0.2073
+  type: 'test'
+  ...
+# Subtest: real text A evidence and research boundary: neither
+ok 327 - real text A evidence and research boundary: neither
+  ---
+  duration_ms: 0.1603
+  type: 'test'
+  ...
+# Subtest: dependency-backed numeric bindings stay attached to the correct nominal head
+ok 328 - dependency-backed numeric bindings stay attached to the correct nominal head
+  ---
+  duration_ms: 56.626
+  type: 'test'
+  ...
+# Subtest: reset research module state after dependency-backed numeric bindings
+ok 329 - reset research module state after dependency-backed numeric bindings
+  ---
+  duration_ms: 3.4596
+  type: 'test'
+  ...
+# Subtest: possessors, targets and implicit actors do not resolve as named actors
+ok 330 - possessors, targets and implicit actors do not resolve as named actors
+  ---
+  duration_ms: 5.6891
+  type: 'test'
+  ...
+# Subtest: recipient needs reporting valency and a personal referent
+ok 331 - recipient needs reporting valency and a personal referent
+  ---
+  duration_ms: 10.0514
+  type: 'test'
+  ...
+# Subtest: sentence duration, age and year/tariff stay distinct
+ok 332 - sentence duration, age and year/tariff stay distinct
+  ---
+  duration_ms: 2.6545
+  type: 'test'
+  ...
+# Subtest: negation belongs to its predicate rather than the whole sentence
+ok 333 - negation belongs to its predicate rather than the whole sentence
+  ---
+  duration_ms: 2.138
+  type: 'test'
+  ...
+# Subtest: age never inherits the payer when the age modifies a different referent
+ok 334 - age never inherits the payer when the age modifies a different referent
+  ---
+  duration_ms: 0.7264
+  type: 'test'
+  ...
+# Subtest: nested attribution is explicit while direct source and actor remain separate
+ok 335 - nested attribution is explicit while direct source and actor remain separate
+  ---
+  duration_ms: 3.2078
+  type: 'test'
+  ...
+# Subtest: nominal amounts and possessive company heads do not inherit a person owner
+ok 336 - nominal amounts and possessive company heads do not inherit a person owner
+  ---
+  duration_ms: 0.8901
+  type: 'test'
+  ...
+# Subtest: contrast and conditions remain local and ambiguous contrasts abstain
+ok 337 - contrast and conditions remain local and ambiguous contrasts abstain
+  ---
+  duration_ms: 3.5652
+  type: 'test'
+  ...
+# Subtest: title and organization boundaries remain distinct and all binding evidence is exact
+ok 338 - title and organization boundaries remain distinct and all binding evidence is exact
+  ---
+  duration_ms: 4.295
+  type: 'test'
+  ...
+# Subtest: passive subjects and overextended person names are not asserted as actors
+ok 339 - passive subjects and overextended person names are not asserted as actors
+  ---
+  duration_ms: 0.6497
+  type: 'test'
+  ...
+# Subtest: numeric predicates never emit null, undefined or non-finite values
+ok 340 - numeric predicates never emit null, undefined or non-finite values
+  ---
+  duration_ms: 25.4834
+  type: 'test'
+  ...
+# Subtest: generic metadata segmentation keeps bylines and photo credits out of entity mentions
+ok 341 - generic metadata segmentation keeps bylines and photo credits out of entity mentions
+  ---
+  duration_ms: 27.5644
+  type: 'test'
+  ...
+# Subtest: Hungarian numeric mention layer handles scales, currencies, spacing and ranges
+ok 342 - Hungarian numeric mention layer handles scales, currencies, spacing and ranges
+  ---
+  duration_ms: 5.9343
+  type: 'test'
+  ...
+# Subtest: ambiguous legal money claims abstain instead of using PROJECT_COST
+ok 343 - ambiguous legal money claims abstain instead of using PROJECT_COST
+  ---
+  duration_ms: 10.8374
+  type: 'test'
+  ...
+# Subtest: attribution and uncertainty remain attached to a source-local numeric claim
+ok 344 - attribution and uncertainty remain attached to a source-local numeric claim
+  ---
+  duration_ms: 6.4638
+  type: 'test'
+  ...
+# Subtest: role and product appositions generalize across transport and education copy
+ok 345 - role and product appositions generalize across transport and education copy
+  ---
+  duration_ms: 24.426
+  type: 'test'
+  ...
+# Subtest: generic narrative events cover acquisition, court, repair and sport wording
+ok 346 - generic narrative events cover acquisition, court, repair and sport wording
+  ---
+  duration_ms: 30.8477
+  type: 'test'
+  ...
+# Subtest: REAL_WORLD_001 after-hardening path preserves first-pass artifacts and removes the null numeric claim
+ok 347 - REAL_WORLD_001 after-hardening path preserves first-pass artifacts and removes the null numeric claim
+  ---
+  duration_ms: 105.2317
+  type: 'test'
+  ...
+# Subtest: delta values never become count predicates across unrelated domains
+ok 348 - delta values never become count predicates across unrelated domains
+  ---
+  duration_ms: 23.7374
+  type: 'test'
+  ...
+# Subtest: numeric qualifiers retain lower, upper, range and approximate semantics
+ok 349 - numeric qualifiers retain lower, upper, range and approximate semantics
+  ---
+  duration_ms: 1.6339
+  type: 'test'
+  ...
+# Subtest: local numeric scope keeps an exact observation separate from a later approximate delta
+ok 350 - local numeric scope keeps an exact observation separate from a later approximate delta
+  ---
+  duration_ms: 4.1467
+  type: 'test'
+  ...
+# Subtest: legal amount stays absolute while reference-class mileage and values stay comparative
+ok 351 - legal amount stays absolute while reference-class mileage and values stay comparative
+  ---
+  duration_ms: 16.4394
+  type: 'test'
+  ...
+# Subtest: broad interpersonal verbs do not create PARTNER_OF relations
+ok 352 - broad interpersonal verbs do not create PARTNER_OF relations
+  ---
+  duration_ms: 4.0586
+  type: 'test'
+  ...
+# Subtest: acquisition event exposes only explicit article participants
+ok 353 - acquisition event exposes only explicit article participants
+  ---
+  duration_ms: 79.1608
+  type: 'test'
+  ...
+# Subtest: duplicated headline is not emitted twice as downstream numeric data
+ok 354 - duplicated headline is not emitted twice as downstream numeric data
+  ---
+  duration_ms: 13.7879
+  type: 'test'
+  ...
+# Subtest: evidence offsets remain sliceable after masking, trimming and Unicode edge cases
+ok 355 - evidence offsets remain sliceable after masking, trimming and Unicode edge cases
+  ---
+  duration_ms: 74.8782
+  type: 'test'
+  ...
+# Subtest: delta changes are additive and never projected as fake absolute properties
+ok 356 - delta changes are additive and never projected as fake absolute properties
+  ---
+  duration_ms: 155.5598
+  type: 'test'
+  ...
+# Subtest: general scalar changes preserve from/to, unit, direction, time and evidence
+ok 357 - general scalar changes preserve from/to, unit, direction, time and evidence
+  ---
+  duration_ms: 7.6367
+  type: 'test'
+  ...
+# Subtest: generic conditional and background legal language does not create a concrete payment event
+ok 358 - generic conditional and background legal language does not create a concrete payment event
+  ---
+  duration_ms: 212.0012
+  type: 'test'
+  ...
+# Subtest: document edits are not vehicle repairs, while an explicit repair remains an event
+ok 359 - document edits are not vehicle repairs, while an explicit repair remains an event
+  ---
+  duration_ms: 43.8985
+  type: 'test'
+  ...
+# Subtest: scaled numeric mentions expose additive canonical values and delta/comparison semantics
+ok 360 - scaled numeric mentions expose additive canonical values and delta/comparison semantics
+  ---
+  duration_ms: 7.8644
+  type: 'test'
+  ...
+# Subtest: reported observation is kept separate from displayed, estimated and comparison values
+ok 361 - reported observation is kept separate from displayed, estimated and comparison values
+  ---
+  duration_ms: 10.0822
+  type: 'test'
+  ...
+# Subtest: month dates remain attached to the numeric observation in the same local sentence
+ok 362 - month dates remain attached to the numeric observation in the same local sentence
+  ---
+  duration_ms: 8.2817
+  type: 'test'
+  ...
+# Subtest: explicit narrative relations require a verb and do not use sentence co-occurrence
+ok 363 - explicit narrative relations require a verb and do not use sentence co-occurrence
+  ---
+  duration_ms: 1.6188
+  type: 'test'
+  ...
+# Subtest: multiple attributed speakers keep their own evidence spans
+ok 364 - multiple attributed speakers keep their own evidence spans
+  ---
+  duration_ms: 2.6179
+  type: 'test'
+  ...
+# Subtest: role evaluator: known correct case passes; resolved label alone is no proof
+ok 365 - role evaluator: known correct case passes; resolved label alone is no proof
+  ---
+  duration_ms: 3.068
+  type: 'test'
+  ...
+# Subtest: role evaluator: independent owner, sign, property, source, scope and condition errors fail
+ok 366 - role evaluator: independent owner, sign, property, source, scope and condition errors fail
+  ---
+  duration_ms: 6.6726
+  type: 'test'
+  ...
+# Subtest: role evaluator: abstentions and omitted frames retain fixed gold denominators
+ok 367 - role evaluator: abstentions and omitted frames retain fixed gold denominators
+  ---
+  duration_ms: 0.2717
+  type: 'test'
+  ...
+# Subtest: role evaluator: duplicates cannot reuse a gold label and bad evidence fails
+ok 368 - role evaluator: duplicates cannot reuse a gold label and bad evidence fails
+  ---
+  duration_ms: 0.4558
+  type: 'test'
+  ...
+# Subtest: role/scope: ASCII, Unicode and word signs are preserved across domains
+ok 369 - role/scope: ASCII, Unicode and word signs are preserved across domains
+  ---
+  duration_ms: 36.5335
+  type: 'test'
+  ...
+# Subtest: role/scope: signed delta is not an absolute temperature or stock observation
+ok 370 - role/scope: signed delta is not an absolute temperature or stock observation
+  ---
+  duration_ms: 1.0152
+  type: 'test'
+  ...
+# Subtest: role/scope: signed transitions and ranges preserve distinct endpoints
+ok 371 - role/scope: signed transitions and ranges preserve distinct endpoints
+  ---
+  duration_ms: 26.949
+  type: 'test'
+  ...
+# Subtest: role/scope: storage and treatment locations never become explicit actors
+ok 372 - role/scope: storage and treatment locations never become explicit actors
+  ---
+  duration_ms: 1.0951
+  type: 'test'
+  ...
+# Subtest: role/scope: recipient is not the reporting actor, unknown source abstains
+ok 373 - role/scope: recipient is not the reporting actor, unknown source abstains
+  ---
+  duration_ms: 2.0482
+  type: 'test'
+  ...
+# Subtest: role/scope: mixed nominative/dative name span is unresolved, never invented stem
+ok 374 - role/scope: mixed nominative/dative name span is unresolved, never invented stem
+  ---
+  duration_ms: 1.1443
+  type: 'test'
+  ...
+# Subtest: role/scope: processing percentage is not a candidate score
+ok 375 - role/scope: processing percentage is not a candidate score
+  ---
+  duration_ms: 2.1672
+  type: 'test'
+  ...
+# Subtest: role/scope: threshold, age, tariff, calendar and population have separate owners
+ok 376 - role/scope: threshold, age, tariff, calendar and population have separate owners
+  ---
+  duration_ms: 1.7456
+  type: 'test'
+  ...
+# Subtest: role/scope: denial with Cnd mood is not a logical condition
+ok 377 - role/scope: denial with Cnd mood is not a logical condition
+  ---
+  duration_ms: 6.7115
+  type: 'test'
+  ...
+# Subtest: role/scope: antecedent and consequent have scoped logical conditions
+ok 378 - role/scope: antecedent and consequent have scoped logical conditions
+  ---
+  duration_ms: 5.1765
+  type: 'test'
+  ...
+# Subtest: role/scope: quotation directions and punctuation preserve one content frame
+ok 379 - role/scope: quotation directions and punctuation preserve one content frame
+  ---
+  duration_ms: 3.2815
+  type: 'test'
+  ...
+# Subtest: role/scope: pronouns and unnamed generic institutions are not named entities
+ok 380 - role/scope: pronouns and unnamed generic institutions are not named entities
+  ---
+  duration_ms: 0.6041
+  type: 'test'
+  ...
+# Subtest: role/scope: all raw spans exact, canonical outputs disabled, dependency labels irrelevant
+ok 381 - role/scope: all raw spans exact, canonical outputs disabled, dependency labels irrelevant
+  ---
+  duration_ms: 32.1965
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: paper
+ok 382 - C02 structurally composed source: paper
+  ---
+  duration_ms: 30.465
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: institution
+ok 383 - C02 structurally composed source: institution
+  ---
+  duration_ms: 5.6764
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: police
+ok 384 - C02 structurally composed source: police
+  ---
+  duration_ms: 7.7764
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: person
+ok 385 - C02 structurally composed source: person
+  ---
+  duration_ms: 2.8322
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: company
+ok 386 - C02 structurally composed source: company
+  ---
+  duration_ms: 3.6407
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: nested
+ok 387 - C02 structurally composed source: nested
+  ---
+  duration_ms: 4.1659
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: recipient
+ok 388 - C02 structurally composed source: recipient
+  ---
+  duration_ms: 2.2336
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: actor
+ok 389 - C02 structurally composed source: actor
+  ---
+  duration_ms: 1.0636
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: numeric
+ok 390 - C02 structurally composed source: numeric
+  ---
+  duration_ms: 4.1086
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: negation
+ok 391 - C02 structurally composed source: negation
+  ---
+  duration_ms: 0.9293
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: modal
+ok 392 - C02 structurally composed source: modal
+  ---
+  duration_ms: 2.2569
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: money
+ok 393 - C02 structurally composed source: money
+  ---
+  duration_ms: 1.536
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: temporal
+ok 394 - C02 structurally composed source: temporal
+  ---
+  duration_ms: 1.8183
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: contrast
+ok 395 - C02 structurally composed source: contrast
+  ---
+  duration_ms: 2.7456
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: quote
+ok 396 - C02 structurally composed source: quote
+  ---
+  duration_ms: 3.0235
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: named
+ok 397 - C02 structurally composed source: named
+  ---
+  duration_ms: 0.537
+  type: 'test'
+  ...
+# Subtest: C02 structurally composed source: nested_possessor
+ok 398 - C02 structurally composed source: nested_possessor
+  ---
+  duration_ms: 0.7722
+  type: 'test'
+  ...
+# Subtest: C02 unsupported source identity abstains: bare_plural
+ok 399 - C02 unsupported source identity abstains: bare_plural
+  ---
+  duration_ms: 0.4674
+  type: 'test'
+  ...
+# Subtest: C02 unsupported source identity abstains: bare_report
+ok 400 - C02 unsupported source identity abstains: bare_report
+  ---
+  duration_ms: 0.688
+  type: 'test'
+  ...
+# Subtest: C02 unsupported source identity abstains: bare_statement
+ok 401 - C02 unsupported source identity abstains: bare_statement
+  ---
+  duration_ms: 0.4234
+  type: 'test'
+  ...
+# Subtest: C02 unsupported source identity abstains: multiple
+ok 402 - C02 unsupported source identity abstains: multiple
+  ---
+  duration_ms: 0.5485
+  type: 'test'
+  ...
+# Subtest: C02 unsupported source identity abstains: ambiguous
+ok 403 - C02 unsupported source identity abstains: ambiguous
+  ---
+  duration_ms: 0.461
+  type: 'test'
+  ...
+# Subtest: C02 unsupported source identity abstains: pronoun
+ok 404 - C02 unsupported source identity abstains: pronoun
+  ---
+  duration_ms: 0.4369
+  type: 'test'
+  ...
+# Subtest: C02 nested chain preserves source order and explicit inner proposition target
+ok 405 - C02 nested chain preserves source order and explicit inner proposition target
+  ---
+  duration_ms: 1.8256
+  type: 'test'
+  ...
+# Subtest: C02 recipient is never promoted to source
+ok 406 - C02 recipient is never promoted to source
+  ---
+  duration_ms: 1.8633
+  type: 'test'
+  ...
+# Subtest: C02 source does not replace actor or numeric owner
+ok 407 - C02 source does not replace actor or numeric owner
+  ---
+  duration_ms: 1.7011
+  type: 'test'
+  ...
+# Subtest: C02 preserves C01 modal money and temporal qualifiers
+ok 408 - C02 preserves C01 modal money and temporal qualifiers
+  ---
+  duration_ms: 0.9424
+  type: 'test'
+  ...
+# Subtest: C02 negative proposition remains denied
+ok 409 - C02 negative proposition remains denied
+  ---
+  duration_ms: 0.7159
+  type: 'test'
+  ...
+# Subtest: C02 non-reporting object use creates no attribution
+ok 410 - C02 non-reporting object use creates no attribution
+  ---
+  duration_ms: 0.4672
+  type: 'test'
+  ...
+# Subtest: C02 possessive person-role is not mistaken for an event nominal
+ok 411 - C02 possessive person-role is not mistaken for an event nominal
+  ---
+  duration_ms: 0.4309
+  type: 'test'
+  ...
+# Subtest: C02 independent sentences retain independent sources
+ok 412 - C02 independent sentences retain independent sources
+  ---
+  duration_ms: 0.8199
+  type: 'test'
+  ...
+# Subtest: C02 attribution does not cross sentence boundary
+ok 413 - C02 attribution does not cross sentence boundary
+  ---
+  duration_ms: 0.5272
+  type: 'test'
+  ...
+# Subtest: C02 detached possessor cannot resolve by surface adjacency
+ok 414 - C02 detached possessor cannot resolve by surface adjacency
+  ---
+  duration_ms: 0.4341
+  type: 'test'
+  ...
+# Subtest: C02 exact evidence, separate reporting nominal and canonical OFF
+ok 415 - C02 exact evidence, separate reporting nominal and canonical OFF
+  ---
+  duration_ms: 16.2594
+  type: 'test'
+  ...
+# Subtest: C02 negated reporting predicate never creates a positive resolved nested chain
+ok 416 - C02 negated reporting predicate never creates a positive resolved nested chain
+  ---
+  duration_ms: 2.8598
+  type: 'test'
+  ...
+# Subtest: C02 productive nominal derivation works beyond the original reporting examples
+ok 417 - C02 productive nominal derivation works beyond the original reporting examples
+  ---
+  duration_ms: 0.4504
+  type: 'test'
+  ...
+# Subtest: B02 governed source and bounded proposition: positive
+ok 418 - B02 governed source and bounded proposition: positive
+  ---
+  duration_ms: 58.7701
+  type: 'test'
+  ...
+# Subtest: B02 governed source and bounded proposition: negative
+ok 419 - B02 governed source and bounded proposition: negative
+  ---
+  duration_ms: 5.8106
+  type: 'test'
+  ...
+# Subtest: B02 governed source and bounded proposition: denial
+ok 420 - B02 governed source and bounded proposition: denial
+  ---
+  duration_ms: 1.7264
+  type: 'test'
+  ...
+# Subtest: B02 governed source and bounded proposition: leading
+ok 421 - B02 governed source and bounded proposition: leading
+  ---
+  duration_ms: 3.6689
+  type: 'test'
+  ...
+# Subtest: B02 governed source and bounded proposition: trailing
+ok 422 - B02 governed source and bounded proposition: trailing
+  ---
+  duration_ms: 2.4314
+  type: 'test'
+  ...
+# Subtest: B02 governed source and bounded proposition: colon
+ok 423 - B02 governed source and bounded proposition: colon
+  ---
+  duration_ms: 1.7254
+  type: 'test'
+  ...
+# Subtest: B02 governed source and bounded proposition: added
+ok 424 - B02 governed source and bounded proposition: added
+  ---
+  duration_ms: 2.8613
+  type: 'test'
+  ...
+# Subtest: B02 governed source and bounded proposition: reported
+ok 425 - B02 governed source and bounded proposition: reported
+  ---
+  duration_ms: 1.1603
+  type: 'test'
+  ...
+# Subtest: B02 addressee does not become source: recipient
+ok 426 - B02 addressee does not become source: recipient
+  ---
+  duration_ms: 2.3649
+  type: 'test'
+  ...
+# Subtest: B02 addressee does not become source: towards
+ok 427 - B02 addressee does not become source: towards
+  ---
+  duration_ms: 2.7005
+  type: 'test'
+  ...
+# Subtest: B02 addressee does not become source: with
+ok 428 - B02 addressee does not become source: with
+  ---
+  duration_ms: 2.046
+  type: 'test'
+  ...
+# Subtest: B02 subsequent independent sentence survives: deadline
+ok 429 - B02 subsequent independent sentence survives: deadline
+  ---
+  duration_ms: 5.1937
+  type: 'test'
+  ...
+# Subtest: B02 subsequent independent sentence survives: count
+ok 430 - B02 subsequent independent sentence survives: count
+  ---
+  duration_ms: 2.0325
+  type: 'test'
+  ...
+# Subtest: B02 subsequent independent sentence survives: money
+ok 431 - B02 subsequent independent sentence survives: money
+  ---
+  duration_ms: 1.5539
+  type: 'test'
+  ...
+# Subtest: B02 subsequent independent sentence survives: measurement
+ok 432 - B02 subsequent independent sentence survives: measurement
+  ---
+  duration_ms: 1.2228
+  type: 'test'
+  ...
+# Subtest: B02 nested quoted chain preserves outer publisher and inner owner
+ok 433 - B02 nested quoted chain preserves outer publisher and inner owner
+  ---
+  duration_ms: 2.3045
+  type: 'test'
+  ...
+# Subtest: B02 ambiguous dependency on possessive nested speaker abstains rather than flattening
+ok 434 - B02 ambiguous dependency on possessive nested speaker abstains rather than flattening
+  ---
+  duration_ms: 1.1546
+  type: 'test'
+  ...
+# Subtest: B02 attributed count belongs to counted argument, not source
+ok 435 - B02 attributed count belongs to counted argument, not source
+  ---
+  duration_ms: 3.079
+  type: 'test'
+  ...
+# Subtest: B02 temporal boundary is separate from source
+ok 436 - B02 temporal boundary is separate from source
+  ---
+  duration_ms: 1.537
+  type: 'test'
+  ...
+# Subtest: B02 denial preserves source and B01 unresolved compound safety
+ok 437 - B02 denial preserves source and B01 unresolved compound safety
+  ---
+  duration_ms: 2.1046
+  type: 'test'
+  ...
+# Subtest: B02 unsupported source/correction dependency remains conservative
+ok 438 - B02 unsupported source/correction dependency remains conservative
+  ---
+  duration_ms: 3.2964
+  type: 'test'
+  ...
+# Subtest: B02 missing quote speaker never inferred from quote actor
+ok 439 - B02 missing quote speaker never inferred from quote actor
+  ---
+  duration_ms: 1.9804
+  type: 'test'
+  ...
+# Subtest: B02 multiple speakers never merge or cross-attribute
+ok 440 - B02 multiple speakers never merge or cross-attribute
+  ---
+  duration_ms: 5.2552
+  type: 'test'
+  ...
+# Subtest: B02 unmatched quote does not erase following sentence or invent attribution
+ok 441 - B02 unmatched quote does not erase following sentence or invent attribution
+  ---
+  duration_ms: 1.8121
+  type: 'test'
+  ...
+# Subtest: B02 complement syntax alone does not license unknown reporting semantics
+ok 442 - B02 complement syntax alone does not license unknown reporting semantics
+  ---
+  duration_ms: 1.0872
+  type: 'test'
+  ...
+# Subtest: B02 missing source-subject dependency cannot be replaced by proximity
+ok 443 - B02 missing source-subject dependency cannot be replaced by proximity
+  ---
+  duration_ms: 4.2064
+  type: 'test'
+  ...
+# Subtest: B02 recovered source evidence is raw-exact and projection stays disabled
+ok 444 - B02 recovered source evidence is raw-exact and projection stays disabled
+  ---
+  duration_ms: 33.036
+  type: 'test'
+  ...
+# Subtest: B02 punctuation and sentence isolation: independentReport
+ok 445 - B02 punctuation and sentence isolation: independentReport
+  ---
+  duration_ms: 1.7128
+  type: 'test'
+  ...
+# Subtest: B02 punctuation and sentence isolation: priorReport
+ok 446 - B02 punctuation and sentence isolation: priorReport
+  ---
+  duration_ms: 0.4923
+  type: 'test'
+  ...
+# Subtest: B02 punctuation and sentence isolation: quoteHogy
+ok 447 - B02 punctuation and sentence isolation: quoteHogy
+  ---
+  duration_ms: 0.901
+  type: 'test'
+  ...
+# Subtest: B02 punctuation and sentence isolation: negatedReport
+ok 448 - B02 punctuation and sentence isolation: negatedReport
+  ---
+  duration_ms: 0.5056
+  type: 'test'
+  ...
+# Subtest: B02 punctuation and sentence isolation: afterActor
+ok 449 - B02 punctuation and sentence isolation: afterActor
+  ---
+  duration_ms: 0.7226
+  type: 'test'
+  ...
+# Subtest: B02 punctuation and sentence isolation: afterDate
+ok 450 - B02 punctuation and sentence isolation: afterDate
+  ---
+  duration_ms: 1.8785
+  type: 'test'
+  ...
+# Subtest: temporal date structure: full
+ok 451 - temporal date structure: full
+  ---
+  duration_ms: 53.4662
+  type: 'test'
+  ...
+# Subtest: temporal date structure: bare
+ok 452 - temporal date structure: bare
+  ---
+  duration_ms: 2.2639
+  type: 'test'
+  ...
+# Subtest: temporal date structure: partial
+ok 453 - temporal date structure: partial
+  ---
+  duration_ms: 1.446
+  type: 'test'
+  ...
+# Subtest: temporal date structure: month
+ok 454 - temporal date structure: month
+  ---
+  duration_ms: 2.2177
+  type: 'test'
+  ...
+# Subtest: temporal date structure: end
+ok 455 - temporal date structure: end
+  ---
+  duration_ms: 0.9084
+  type: 'test'
+  ...
+# Subtest: explicit clock: clock
+ok 456 - explicit clock: clock
+  ---
+  duration_ms: 1.6835
+  type: 'test'
+  ...
+# Subtest: explicit clock: colon
+ok 457 - explicit clock: colon
+  ---
+  duration_ms: 1.735
+  type: 'test'
+  ...
+# Subtest: calendar/clock boundary: deadline
+ok 458 - calendar/clock boundary: deadline
+  ---
+  duration_ms: 0.7821
+  type: 'test'
+  ...
+# Subtest: calendar/clock boundary: weekday
+ok 459 - calendar/clock boundary: weekday
+  ---
+  duration_ms: 0.511
+  type: 'test'
+  ...
+# Subtest: calendar/clock boundary: opening
+ok 460 - calendar/clock boundary: opening
+  ---
+  duration_ms: 0.7464
+  type: 'test'
+  ...
+# Subtest: duration attachment: weeks
+ok 461 - duration attachment: weeks
+  ---
+  duration_ms: 2.0924
+  type: 'test'
+  ...
+# Subtest: duration attachment: days
+ok 462 - duration attachment: days
+  ---
+  duration_ms: 0.6389
+  type: 'test'
+  ...
+# Subtest: duration attachment: hours
+ok 463 - duration attachment: hours
+  ---
+  duration_ms: 0.6609
+  type: 'test'
+  ...
+# Subtest: duration attachment: minutes
+ok 464 - duration attachment: minutes
+  ---
+  duration_ms: 0.4578
+  type: 'test'
+  ...
+# Subtest: terminative hour without disambiguating syntax abstains
+ok 465 - terminative hour without disambiguating syntax abstains
+  ---
+  duration_ms: 0.7652
+  type: 'test'
+  ...
+# Subtest: ordinal nominal is not count or ranking: ordinal
+ok 466 - ordinal nominal is not count or ranking: ordinal
+  ---
+  duration_ms: 20.8011
+  type: 'test'
+  ...
+# Subtest: ordinal nominal is not count or ranking: district
+ok 467 - ordinal nominal is not count or ranking: district
+  ---
+  duration_ms: 0.6553
+  type: 'test'
+  ...
+# Subtest: placement needs governing place and predicate: rank
+ok 468 - placement needs governing place and predicate: rank
+  ---
+  duration_ms: 0.6329
+  type: 'test'
+  ...
+# Subtest: placement needs governing place and predicate: rankobj
+ok 469 - placement needs governing place and predicate: rankobj
+  ---
+  duration_ms: 0.6081
+  type: 'test'
+  ...
+# Subtest: bare ordinal copula does not invent a ranking context
+ok 470 - bare ordinal copula does not invent a ranking context
+  ---
+  duration_ms: 0.6705
+  type: 'test'
+  ...
+# Subtest: calendar date, clock and compound duration retain three separate arguments
+ok 471 - calendar date, clock and compound duration retain three separate arguments
+  ---
+  duration_ms: 0.956
+  type: 'test'
+  ...
+# Subtest: temporal correction preserves only accepted date and a positive event
+ok 472 - temporal correction preserves only accepted date and a positive event
+  ---
+  duration_ms: 3.563
+  type: 'test'
+  ...
+# Subtest: nested reporting source remains distinct from temporal attachment
+ok 473 - nested reporting source remains distinct from temporal attachment
+  ---
+  duration_ms: 3.2136
+  type: 'test'
+  ...
+# Subtest: detached date head cannot stay resolved from surface proximity
+ok 474 - detached date head cannot stay resolved from surface proximity
+  ---
+  duration_ms: 2.2182
+  type: 'test'
+  ...
+# Subtest: out-of-range clock and impossible calendar day never resolve
+ok 475 - out-of-range clock and impossible calendar day never resolve
+  ---
+  duration_ms: 1.556
+  type: 'test'
+  ...
+# Subtest: temporal failure does not erase a separately proven actor
+ok 476 - temporal failure does not erase a separately proven actor
+  ---
+  duration_ms: 0.4835
+  type: 'test'
+  ...
+# Subtest: temporal evidence slices raw source and resolved values carry structural reasons
+ok 477 - temporal evidence slices raw source and resolved values carry structural reasons
+  ---
+  duration_ms: 12.2203
+  type: 'test'
+  ...
+1..477
+# tests 477
+# suites 0
+# pass 477
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3425.1194

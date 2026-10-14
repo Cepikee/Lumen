@@ -1,0 +1,41 @@
+{
+  "createdAt": "2026-10-13T12:55:07.306Z",
+  "changedPreexistingFiles": [
+    "scripts/experimental/source-composition-safety.cjs"
+  ],
+  "unexpectedChanges": [],
+  "originalFreshUnchanged": true,
+  "fb01Unchanged": true,
+  "protectedFilesUnchanged": true,
+  "postHash": "124aef9385ea75862764ccdc383d593b470221021918bd45a8843778198188e2",
+  "modifiedCodeHashes": {
+    "scripts/experimental/source-composition-safety.cjs": "028f9a7caff90a872e6865bd65c033c2b813376f6a65eb16828f335c15b31049"
+  },
+  "invariance": {
+    "comparedSnippets": 20,
+    "invariantFields": [
+      "frameId",
+      "actor",
+      "actorStatus",
+      "subject",
+      "action",
+      "actionSpan",
+      "object",
+      "numericArguments",
+      "polarity",
+      "semanticScope",
+      "modality",
+      "modalities",
+      "contrasts",
+      "conditionAntecedent",
+      "conditionality"
+    ],
+    "allEqual": true,
+    "canonicalProjectionOff": true
+  },
+  "tests": [
+    "# tests 533",
+    "# pass 533",
+    "# fail 0"
+  ]
+}

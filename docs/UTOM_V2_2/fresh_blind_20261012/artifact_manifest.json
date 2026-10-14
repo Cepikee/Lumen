@@ -1,0 +1,29 @@
+{
+  "createdAt": "2026-10-12T07:34:23.733Z",
+  "files": {
+    "FRESH_BLIND_BEFORE_REPAIR_raw.json": "061fbdcd504f1fcc9df5b8db6c5ce9a09773e0b1b5ada6862ab51f10efa3e0a2",
+    "REPORT.md": "7aadc0793b63780049ebf7db038ad2156d3d6ed18f15167464bbf094ac3abead",
+    "adjudicate.cjs": "f15dec27fd51309aa403a1473c03c3955595cc7bc9106dbfc18c76a74cedfd8c",
+    "baseline.json": "43164ed539004ff5dc48d2a424b297a32512b43046842adc264e026f95e3b9bc",
+    "corpus.json": "e613c0df3c4739fffbac0f9a0be522f8cc156b272bc6670722047ac0c8649a17",
+    "coverage_and_errata.md": "eae286f81ffd8a9e18d6af0d1d004306375f06aa411e27cfb9c7024b12a7536b",
+    "expected.json": "0d895e73051e43f2326e58a485d197f1befaa74932476e0f0d2c38c7cc7e9b65",
+    "failure_taxonomy.md": "4cc83301708e8e18d4931475544dc0054a1d048563e99fc2ade58c479db30fb8",
+    "freeze.json": "6e06ec13e2638f04970475fda778edb9d62ab247f29b93b616883328c7f0e55f",
+    "freeze_intelligence_supplement.json": "2e5f37cafd3046b0fe636219b4cf0cd4045a9510afc834ddd7b4df9c5ae87035",
+    "human_item_audit.md": "52a61f699c2d2582d989d699860a95dc81658bb0747ea928f2ce8756a96cd7c5",
+    "input_manifest.json": "41007c94eeebc40873d89017b037ea1a68fb87822bffd3deba6de935c4fd377f",
+    "labels.json": "9c810535dbf330622ca20866675ea9095308bca7e13815acd62be338b086b705",
+    "measure.cjs": "251bc65f72ec20f7b2e97df778d9ecf77ab0829778413c38bfa5b24adaecc404",
+    "metrics.json": "76e2b9d5d6eabb0d569a446dc662633c0fc1a8bca0b98039f233eb0cd6e5bd91",
+    "prepare.cjs": "7cc48227bdfea72fa33a055a73121c461c063c90db71a7e6eb7c2ecc341e585b",
+    "review_view.json": "b4420e9efb755057a9303278672e7f3ddd50c455650b54f7fe60dbf4afaf3f6e",
+    "selected_items.json": "c1bf14df9c744fe66bf42f6aaa4cf55b5754be43dc1e6b75de7b0680de921abe",
+    "tests_after.txt": "27ee50a15d940c044cd67b1f4241aa7fb71aca5af44f92dd5f2294b9739313d8",
+    "tests_before.txt": "75d2fb7a75685f84da8f407e42dd89d0f3394f2ff1e6b2df078fb80b605593b4",
+    "verification.json": "7b98b5d6d5da143646a622d4ae5f1b5d06c8796f162af77e72cf4718efc10833",
+    "verify.cjs": "168fd67a24fe628d31f47a747a91c6b34d7ae175ca31550cd0550012b735a580"
+  },
+  "reviewedItems": 120,
+  "validRawPointers": true
+}

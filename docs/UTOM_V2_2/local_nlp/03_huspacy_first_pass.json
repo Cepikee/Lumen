@@ -1,0 +1,2369 @@
+{
+  "provider": "huspacy",
+  "candidateOnly": true,
+  "canonicalProjectionAllowed": false,
+  "versions": {
+    "hu_core_news_md": "3.8.0"
+  },
+  "performance": {
+    "modelLoadMs": 2236.996060993988,
+    "warmTotalMs": 189.01612200716045,
+    "meanMsPerArticle": 18.89909080346115,
+    "articleTimesMs": [
+      21.90865900774952,
+      16.766837012255564,
+      19.150634005200118,
+      16.63447599275969,
+      16.80020199273713,
+      16.878295005881228,
+      18.99971000966616,
+      19.1728170029819,
+      16.335838998202235,
+      26.34343900717795
+    ],
+    "tokens": 150,
+    "tokensPerSecond": 793.5830997226659,
+    "peakRssBytes": 636661760,
+    "rssDeltaAfterLoadBytes": 622788608,
+    "modelDiskBytes": 152870542
+  },
+  "results": [
+    {
+      "id": "economy",
+      "text": "Az Alföldi Művek 18 milliárd forint bevételt ért el, míg a Dunamenti Gépgyár 12 milliárd forintot jelentett.",
+      "annotation": {
+        "sentences": [
+          {
+            "start": 0,
+            "end": 108,
+            "text": "Az Alföldi Művek 18 milliárd forint bevételt ért el, míg a Dunamenti Gépgyár 12 milliárd forintot jelentett."
+          }
+        ],
+        "tokens": [
+          {
+            "id": 1,
+            "text": "Az",
+            "start": 0,
+            "end": 2,
+            "lemma": "az",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 2,
+            "deprel": "det"
+          },
+          {
+            "id": 2,
+            "text": "Alföldi",
+            "start": 3,
+            "end": 10,
+            "lemma": "Alföldi",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 8,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 3,
+            "text": "Művek",
+            "start": 11,
+            "end": 16,
+            "lemma": "Művek",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 2,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 4,
+            "text": "18",
+            "start": 17,
+            "end": 19,
+            "lemma": "18",
+            "upos": "NUM",
+            "xpos": "NUM",
+            "morph": "Case=Nom|NumType=Card|Number=Sing",
+            "head": 5,
+            "deprel": "compound"
+          },
+          {
+            "id": 5,
+            "text": "milliárd",
+            "start": 20,
+            "end": 28,
+            "lemma": "milliárd",
+            "upos": "NUM",
+            "xpos": "NUM",
+            "morph": "Case=Nom|NumType=Card|Number=Sing",
+            "head": 6,
+            "deprel": "amod:att"
+          },
+          {
+            "id": 6,
+            "text": "forint",
+            "start": 29,
+            "end": 35,
+            "lemma": "forint",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 7,
+            "deprel": "nmod:att"
+          },
+          {
+            "id": 7,
+            "text": "bevételt",
+            "start": 36,
+            "end": 44,
+            "lemma": "bevétel",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 8,
+            "deprel": "obj"
+          },
+          {
+            "id": 8,
+            "text": "ért",
+            "start": 45,
+            "end": 48,
+            "lemma": "ér",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Ind|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 0,
+            "deprel": "ROOT"
+          },
+          {
+            "id": 9,
+            "text": "el",
+            "start": 49,
+            "end": 51,
+            "lemma": "el",
+            "upos": "ADV",
+            "xpos": "ADV",
+            "morph": "",
+            "head": 8,
+            "deprel": "compound:preverb"
+          },
+          {
+            "id": 10,
+            "text": ",",
+            "start": 51,
+            "end": 52,
+            "lemma": ",",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 18,
+            "deprel": "punct"
+          },
+          {
+            "id": 11,
+            "text": "míg",
+            "start": 53,
+            "end": 56,
+            "lemma": "míg",
+            "upos": "ADV",
+            "xpos": "ADV",
+            "morph": "PronType=Rel",
+            "head": 18,
+            "deprel": "advmod:mode"
+          },
+          {
+            "id": 12,
+            "text": "a",
+            "start": 57,
+            "end": 58,
+            "lemma": "a",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 13,
+            "deprel": "det"
+          },
+          {
+            "id": 13,
+            "text": "Dunamenti",
+            "start": 59,
+            "end": 68,
+            "lemma": "Dunamenti",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 17,
+            "deprel": "nmod:att"
+          },
+          {
+            "id": 14,
+            "text": "Gépgyár",
+            "start": 69,
+            "end": 76,
+            "lemma": "Gépgyár",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 13,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 15,
+            "text": "12",
+            "start": 77,
+            "end": 79,
+            "lemma": "12",
+            "upos": "NUM",
+            "xpos": "NUM",
+            "morph": "Case=Nom|NumType=Card|Number=Sing",
+            "head": 16,
+            "deprel": "compound"
+          },
+          {
+            "id": 16,
+            "text": "milliárd",
+            "start": 80,
+            "end": 88,
+            "lemma": "milliárd",
+            "upos": "NUM",
+            "xpos": "NUM",
+            "morph": "Case=Nom|NumType=Card|Number=Sing",
+            "head": 17,
+            "deprel": "nummod"
+          },
+          {
+            "id": 17,
+            "text": "forintot",
+            "start": 89,
+            "end": 97,
+            "lemma": "forint",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 18,
+            "deprel": "obj"
+          },
+          {
+            "id": 18,
+            "text": "jelentett",
+            "start": 98,
+            "end": 107,
+            "lemma": "jelent",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Ind|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 8,
+            "deprel": "advcl"
+          },
+          {
+            "id": 19,
+            "text": ".",
+            "start": 107,
+            "end": 108,
+            "lemma": ".",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 8,
+            "deprel": "punct"
+          }
+        ],
+        "entities": [
+          {
+            "text": "Alföldi Művek",
+            "start": 3,
+            "end": 16,
+            "rawType": "ORG",
+            "type": "organization",
+            "canonical": "alföldi művek"
+          },
+          {
+            "text": "Dunamenti Gépgyár",
+            "start": 59,
+            "end": 76,
+            "rawType": "ORG",
+            "type": "organization",
+            "canonical": "dunamenti gépgyár"
+          }
+        ],
+        "numericBindings": [
+          {
+            "numberText": "18 milliárd forint",
+            "subjectText": "Alföldi Művek"
+          },
+          {
+            "numberText": "12 milliárd forintot",
+            "subjectText": "Dunamenti Gépgyár"
+          }
+        ],
+        "dependencies": [
+          {
+            "subjectText": "Alföldi Művek",
+            "predicateLemma": "ér"
+          }
+        ],
+        "attributions": [
+          {
+            "sourceText": "Dunamenti Gépgyár",
+            "reportingLemma": "jelent"
+          }
+        ],
+        "conditional": false,
+        "negated": false
+      }
+    },
+    {
+      "id": "transport",
+      "text": "Kovács Mira szerint a Volánbusz jövőre nem indít új járatot Pécsett.",
+      "annotation": {
+        "sentences": [
+          {
+            "start": 0,
+            "end": 68,
+            "text": "Kovács Mira szerint a Volánbusz jövőre nem indít új járatot Pécsett."
+          }
+        ],
+        "tokens": [
+          {
+            "id": 1,
+            "text": "Kovács",
+            "start": 0,
+            "end": 6,
+            "lemma": "Kovács",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 8,
+            "deprel": "obl"
+          },
+          {
+            "id": 2,
+            "text": "Mira",
+            "start": 7,
+            "end": 11,
+            "lemma": "Mira",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 1,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 3,
+            "text": "szerint",
+            "start": 12,
+            "end": 19,
+            "lemma": "szerint",
+            "upos": "ADP",
+            "xpos": "ADP",
+            "morph": "",
+            "head": 1,
+            "deprel": "case"
+          },
+          {
+            "id": 4,
+            "text": "a",
+            "start": 20,
+            "end": 21,
+            "lemma": "a",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 5,
+            "deprel": "det"
+          },
+          {
+            "id": 5,
+            "text": "Volánbusz",
+            "start": 22,
+            "end": 31,
+            "lemma": "Volánbusz",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 8,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 6,
+            "text": "jövőre",
+            "start": 32,
+            "end": 38,
+            "lemma": "jövőre",
+            "upos": "ADV",
+            "xpos": "ADV",
+            "morph": "",
+            "head": 8,
+            "deprel": "advmod:tlocy"
+          },
+          {
+            "id": 7,
+            "text": "nem",
+            "start": 39,
+            "end": 42,
+            "lemma": "nem",
+            "upos": "ADV",
+            "xpos": "ADV",
+            "morph": "PronType=Neg",
+            "head": 8,
+            "deprel": "advmod"
+          },
+          {
+            "id": 8,
+            "text": "indít",
+            "start": 43,
+            "end": 48,
+            "lemma": "indít",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Ind|Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act",
+            "head": 0,
+            "deprel": "ROOT"
+          },
+          {
+            "id": 9,
+            "text": "új",
+            "start": 49,
+            "end": 51,
+            "lemma": "új",
+            "upos": "ADJ",
+            "xpos": "ADJ",
+            "morph": "Case=Nom|Degree=Pos|Number=Sing",
+            "head": 10,
+            "deprel": "amod:att"
+          },
+          {
+            "id": 10,
+            "text": "járatot",
+            "start": 52,
+            "end": 59,
+            "lemma": "járat",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 8,
+            "deprel": "obj"
+          },
+          {
+            "id": 11,
+            "text": "Pécsett",
+            "start": 60,
+            "end": 67,
+            "lemma": "Pécs",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Sup|Number=Sing",
+            "head": 8,
+            "deprel": "conj"
+          },
+          {
+            "id": 12,
+            "text": ".",
+            "start": 67,
+            "end": 68,
+            "lemma": ".",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 8,
+            "deprel": "punct"
+          }
+        ],
+        "entities": [
+          {
+            "text": "Kovács Mira",
+            "start": 0,
+            "end": 11,
+            "rawType": "PER",
+            "type": "person",
+            "canonical": "kovács mira"
+          },
+          {
+            "text": "Volánbusz",
+            "start": 22,
+            "end": 31,
+            "rawType": "ORG",
+            "type": "organization",
+            "canonical": "volánbusz"
+          },
+          {
+            "text": "Pécsett",
+            "start": 60,
+            "end": 67,
+            "rawType": "LOC",
+            "type": "location",
+            "canonical": "pécs"
+          }
+        ],
+        "numericBindings": [],
+        "dependencies": [
+          {
+            "subjectText": "Volánbusz",
+            "predicateLemma": "indít"
+          }
+        ],
+        "attributions": [
+          {
+            "sourceText": "Kovács Mira",
+            "reportingLemma": "szerint"
+          }
+        ],
+        "conditional": false,
+        "negated": true
+      }
+    },
+    {
+      "id": "healthcare",
+      "text": "A Duna Klinika 240 beteget kezelt, a Tisza Kórház pedig 180 beteget látott el.",
+      "annotation": {
+        "sentences": [
+          {
+            "start": 0,
+            "end": 78,
+            "text": "A Duna Klinika 240 beteget kezelt, a Tisza Kórház pedig 180 beteget látott el."
+          }
+        ],
+        "tokens": [
+          {
+            "id": 1,
+            "text": "A",
+            "start": 0,
+            "end": 1,
+            "lemma": "a",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 2,
+            "deprel": "det"
+          },
+          {
+            "id": 2,
+            "text": "Duna",
+            "start": 2,
+            "end": 6,
+            "lemma": "Duna",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 6,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 3,
+            "text": "Klinika",
+            "start": 7,
+            "end": 14,
+            "lemma": "Klinika",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 2,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 4,
+            "text": "240",
+            "start": 15,
+            "end": 18,
+            "lemma": "240",
+            "upos": "NUM",
+            "xpos": "NUM",
+            "morph": "Case=Nom|NumType=Card|Number=Sing",
+            "head": 5,
+            "deprel": "nummod"
+          },
+          {
+            "id": 5,
+            "text": "beteget",
+            "start": 19,
+            "end": 26,
+            "lemma": "beteg",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 6,
+            "deprel": "obj"
+          },
+          {
+            "id": 6,
+            "text": "kezelt",
+            "start": 27,
+            "end": 33,
+            "lemma": "kezel",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Ind|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 0,
+            "deprel": "ROOT"
+          },
+          {
+            "id": 7,
+            "text": ",",
+            "start": 33,
+            "end": 34,
+            "lemma": ",",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 14,
+            "deprel": "punct"
+          },
+          {
+            "id": 8,
+            "text": "a",
+            "start": 35,
+            "end": 36,
+            "lemma": "a",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 9,
+            "deprel": "det"
+          },
+          {
+            "id": 9,
+            "text": "Tisza",
+            "start": 37,
+            "end": 42,
+            "lemma": "Tisza",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 14,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 10,
+            "text": "Kórház",
+            "start": 43,
+            "end": 49,
+            "lemma": "Kórház",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 9,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 11,
+            "text": "pedig",
+            "start": 50,
+            "end": 55,
+            "lemma": "pedig",
+            "upos": "CCONJ",
+            "xpos": "CCONJ",
+            "morph": "",
+            "head": 14,
+            "deprel": "cc"
+          },
+          {
+            "id": 12,
+            "text": "180",
+            "start": 56,
+            "end": 59,
+            "lemma": "180",
+            "upos": "NUM",
+            "xpos": "NUM",
+            "morph": "Case=Nom|NumType=Card|Number=Sing",
+            "head": 13,
+            "deprel": "amod:att"
+          },
+          {
+            "id": 13,
+            "text": "beteget",
+            "start": 60,
+            "end": 67,
+            "lemma": "beteg",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 14,
+            "deprel": "obj"
+          },
+          {
+            "id": 14,
+            "text": "látott",
+            "start": 68,
+            "end": 74,
+            "lemma": "lát",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Ind|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 6,
+            "deprel": "conj"
+          },
+          {
+            "id": 15,
+            "text": "el",
+            "start": 75,
+            "end": 77,
+            "lemma": "el",
+            "upos": "ADV",
+            "xpos": "ADV",
+            "morph": "",
+            "head": 14,
+            "deprel": "compound:preverb"
+          },
+          {
+            "id": 16,
+            "text": ".",
+            "start": 77,
+            "end": 78,
+            "lemma": ".",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 6,
+            "deprel": "punct"
+          }
+        ],
+        "entities": [
+          {
+            "text": "Duna Klinika",
+            "start": 2,
+            "end": 14,
+            "rawType": "ORG",
+            "type": "organization",
+            "canonical": "duna klinika"
+          },
+          {
+            "text": "Tisza Kórház",
+            "start": 37,
+            "end": 49,
+            "rawType": "ORG",
+            "type": "organization",
+            "canonical": "tisza kórház"
+          }
+        ],
+        "numericBindings": [
+          {
+            "numberText": "240 beteget",
+            "subjectText": "Duna Klinika"
+          },
+          {
+            "numberText": "180 beteget",
+            "subjectText": "Tisza Kórház"
+          }
+        ],
+        "dependencies": [
+          {
+            "subjectText": "Duna Klinika",
+            "predicateLemma": "kezel"
+          },
+          {
+            "subjectText": "Tisza Kórház",
+            "predicateLemma": "lát"
+          }
+        ],
+        "attributions": [],
+        "conditional": false,
+        "negated": false
+      }
+    },
+    {
+      "id": "sport",
+      "text": "Nagy Emese 11,2 másodpercet, míg Szabó Lilla 11,5 másodpercet futott.",
+      "annotation": {
+        "sentences": [
+          {
+            "start": 0,
+            "end": 69,
+            "text": "Nagy Emese 11,2 másodpercet, míg Szabó Lilla 11,5 másodpercet futott."
+          }
+        ],
+        "tokens": [
+          {
+            "id": 1,
+            "text": "Nagy",
+            "start": 0,
+            "end": 4,
+            "lemma": "Nagy",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 0,
+            "deprel": "ROOT"
+          },
+          {
+            "id": 2,
+            "text": "Emese",
+            "start": 5,
+            "end": 10,
+            "lemma": "Emese",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 1,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 3,
+            "text": "11,2",
+            "start": 11,
+            "end": 15,
+            "lemma": "11,2",
+            "upos": "NUM",
+            "xpos": "NUM",
+            "morph": "Case=Nom|NumType=Frac|Number=Sing",
+            "head": 4,
+            "deprel": "nummod"
+          },
+          {
+            "id": 4,
+            "text": "másodpercet",
+            "start": 16,
+            "end": 27,
+            "lemma": "másodperc",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 1,
+            "deprel": "nmod:obl"
+          },
+          {
+            "id": 5,
+            "text": ",",
+            "start": 27,
+            "end": 28,
+            "lemma": ",",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 11,
+            "deprel": "punct"
+          },
+          {
+            "id": 6,
+            "text": "míg",
+            "start": 29,
+            "end": 32,
+            "lemma": "míg",
+            "upos": "ADV",
+            "xpos": "ADV",
+            "morph": "PronType=Rel",
+            "head": 11,
+            "deprel": "advmod:mode"
+          },
+          {
+            "id": 7,
+            "text": "Szabó",
+            "start": 33,
+            "end": 38,
+            "lemma": "Szabó",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 11,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 8,
+            "text": "Lilla",
+            "start": 39,
+            "end": 44,
+            "lemma": "Lilla",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 7,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 9,
+            "text": "11,5",
+            "start": 45,
+            "end": 49,
+            "lemma": "11,5",
+            "upos": "NUM",
+            "xpos": "NUM",
+            "morph": "Case=Nom|NumType=Frac|Number=Sing",
+            "head": 10,
+            "deprel": "nummod"
+          },
+          {
+            "id": 10,
+            "text": "másodpercet",
+            "start": 50,
+            "end": 61,
+            "lemma": "másodperc",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 11,
+            "deprel": "obj:lvc"
+          },
+          {
+            "id": 11,
+            "text": "futott",
+            "start": 62,
+            "end": 68,
+            "lemma": "fut",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Ind|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 4,
+            "deprel": "acl"
+          },
+          {
+            "id": 12,
+            "text": ".",
+            "start": 68,
+            "end": 69,
+            "lemma": ".",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 1,
+            "deprel": "punct"
+          }
+        ],
+        "entities": [
+          {
+            "text": "Nagy Emese",
+            "start": 0,
+            "end": 10,
+            "rawType": "PER",
+            "type": "person",
+            "canonical": "nagy emese"
+          },
+          {
+            "text": "Szabó Lilla",
+            "start": 33,
+            "end": 44,
+            "rawType": "PER",
+            "type": "person",
+            "canonical": "szabó lilla"
+          }
+        ],
+        "numericBindings": [
+          {
+            "numberText": "11,2 másodpercet",
+            "subjectText": "Nagy Emese"
+          },
+          {
+            "numberText": "11,5 másodpercet",
+            "subjectText": "Szabó Lilla"
+          }
+        ],
+        "dependencies": [
+          {
+            "subjectText": "Szabó Lilla",
+            "predicateLemma": "fut"
+          }
+        ],
+        "attributions": [],
+        "conditional": false,
+        "negated": false
+      }
+    },
+    {
+      "id": "science",
+      "text": "A Csillagászati Kutatóintézet közölte, hogy a mérés feltételes eredményt adott.",
+      "annotation": {
+        "sentences": [
+          {
+            "start": 0,
+            "end": 79,
+            "text": "A Csillagászati Kutatóintézet közölte, hogy a mérés feltételes eredményt adott."
+          }
+        ],
+        "tokens": [
+          {
+            "id": 1,
+            "text": "A",
+            "start": 0,
+            "end": 1,
+            "lemma": "a",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 2,
+            "deprel": "det"
+          },
+          {
+            "id": 2,
+            "text": "Csillagászati",
+            "start": 2,
+            "end": 15,
+            "lemma": "Csillagászati",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 4,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 3,
+            "text": "Kutatóintézet",
+            "start": 16,
+            "end": 29,
+            "lemma": "Kutatóintézet",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 2,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 4,
+            "text": "közölte",
+            "start": 30,
+            "end": 37,
+            "lemma": "közöl",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Def|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 0,
+            "deprel": "ROOT"
+          },
+          {
+            "id": 5,
+            "text": ",",
+            "start": 37,
+            "end": 38,
+            "lemma": ",",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 11,
+            "deprel": "punct"
+          },
+          {
+            "id": 6,
+            "text": "hogy",
+            "start": 39,
+            "end": 43,
+            "lemma": "hogy",
+            "upos": "SCONJ",
+            "xpos": "SCONJ",
+            "morph": "",
+            "head": 11,
+            "deprel": "mark"
+          },
+          {
+            "id": 7,
+            "text": "a",
+            "start": 44,
+            "end": 45,
+            "lemma": "a",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 8,
+            "deprel": "det"
+          },
+          {
+            "id": 8,
+            "text": "mérés",
+            "start": 46,
+            "end": 51,
+            "lemma": "mérés",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 11,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 9,
+            "text": "feltételes",
+            "start": 52,
+            "end": 62,
+            "lemma": "feltételes",
+            "upos": "ADJ",
+            "xpos": "ADJ",
+            "morph": "Case=Nom|Degree=Pos|Number=Sing",
+            "head": 10,
+            "deprel": "amod:att"
+          },
+          {
+            "id": 10,
+            "text": "eredményt",
+            "start": 63,
+            "end": 72,
+            "lemma": "eredmény",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 11,
+            "deprel": "obj"
+          },
+          {
+            "id": 11,
+            "text": "adott",
+            "start": 73,
+            "end": 78,
+            "lemma": "ad",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Ind|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 4,
+            "deprel": "ccomp:obj"
+          },
+          {
+            "id": 12,
+            "text": ".",
+            "start": 78,
+            "end": 79,
+            "lemma": ".",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 4,
+            "deprel": "punct"
+          }
+        ],
+        "entities": [
+          {
+            "text": "Csillagászati Kutatóintézet",
+            "start": 2,
+            "end": 29,
+            "rawType": "ORG",
+            "type": "organization",
+            "canonical": "csillagászati kutatóintézet"
+          }
+        ],
+        "numericBindings": [],
+        "dependencies": [
+          {
+            "subjectText": "Csillagászati Kutatóintézet",
+            "predicateLemma": "közöl"
+          },
+          {
+            "subjectText": "mérés",
+            "predicateLemma": "ad"
+          }
+        ],
+        "attributions": [
+          {
+            "sourceText": "Csillagászati Kutatóintézet",
+            "reportingLemma": "közöl"
+          }
+        ],
+        "conditional": false,
+        "negated": false
+      }
+    },
+    {
+      "id": "energy",
+      "text": "Magyarországon 42 euró, Ausztriában pedig 55 euró volt a tarifa.",
+      "annotation": {
+        "sentences": [
+          {
+            "start": 0,
+            "end": 64,
+            "text": "Magyarországon 42 euró, Ausztriában pedig 55 euró volt a tarifa."
+          }
+        ],
+        "tokens": [
+          {
+            "id": 1,
+            "text": "Magyarországon",
+            "start": 0,
+            "end": 14,
+            "lemma": "Magyarország",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Sup|Number=Sing",
+            "head": 3,
+            "deprel": "nmod:obl"
+          },
+          {
+            "id": 2,
+            "text": "42",
+            "start": 15,
+            "end": 17,
+            "lemma": "42",
+            "upos": "NUM",
+            "xpos": "NUM",
+            "morph": "Case=Nom|NumType=Card|Number=Sing",
+            "head": 3,
+            "deprel": "nummod"
+          },
+          {
+            "id": 3,
+            "text": "euró",
+            "start": 18,
+            "end": 22,
+            "lemma": "euró",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 0,
+            "deprel": "ROOT"
+          },
+          {
+            "id": 4,
+            "text": ",",
+            "start": 22,
+            "end": 23,
+            "lemma": ",",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 9,
+            "deprel": "punct"
+          },
+          {
+            "id": 5,
+            "text": "Ausztriában",
+            "start": 24,
+            "end": 35,
+            "lemma": "Ausztria",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Ine|Number=Sing",
+            "head": 9,
+            "deprel": "obl"
+          },
+          {
+            "id": 6,
+            "text": "pedig",
+            "start": 36,
+            "end": 41,
+            "lemma": "pedig",
+            "upos": "CCONJ",
+            "xpos": "CCONJ",
+            "morph": "",
+            "head": 9,
+            "deprel": "cc"
+          },
+          {
+            "id": 7,
+            "text": "55",
+            "start": 42,
+            "end": 44,
+            "lemma": "55",
+            "upos": "NUM",
+            "xpos": "NUM",
+            "morph": "Case=Nom|NumType=Card|Number=Sing",
+            "head": 8,
+            "deprel": "nummod"
+          },
+          {
+            "id": 8,
+            "text": "euró",
+            "start": 45,
+            "end": 49,
+            "lemma": "euró",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 9,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 9,
+            "text": "volt",
+            "start": 50,
+            "end": 54,
+            "lemma": "van",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Ind|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 3,
+            "deprel": "ccomp:pred"
+          },
+          {
+            "id": 10,
+            "text": "a",
+            "start": 55,
+            "end": 56,
+            "lemma": "a",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 11,
+            "deprel": "det"
+          },
+          {
+            "id": 11,
+            "text": "tarifa",
+            "start": 57,
+            "end": 63,
+            "lemma": "tarifa",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 9,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 12,
+            "text": ".",
+            "start": 63,
+            "end": 64,
+            "lemma": ".",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 3,
+            "deprel": "punct"
+          }
+        ],
+        "entities": [
+          {
+            "text": "Magyarországon",
+            "start": 0,
+            "end": 14,
+            "rawType": "LOC",
+            "type": "location",
+            "canonical": "magyarország"
+          },
+          {
+            "text": "Ausztriában",
+            "start": 24,
+            "end": 35,
+            "rawType": "LOC",
+            "type": "location",
+            "canonical": "ausztria"
+          }
+        ],
+        "numericBindings": [
+          {
+            "numberText": "42 euró",
+            "subjectText": "Magyarországon"
+          },
+          {
+            "numberText": "55 euró",
+            "subjectText": "Ausztriában"
+          }
+        ],
+        "dependencies": [
+          {
+            "subjectText": "euró",
+            "predicateLemma": "van"
+          },
+          {
+            "subjectText": "tarifa",
+            "predicateLemma": "van"
+          }
+        ],
+        "attributions": [],
+        "conditional": false,
+        "negated": false
+      }
+    },
+    {
+      "id": "court",
+      "text": "Barta Dénes elismerte a késést, de tagadta, hogy megszegte a szerződést.",
+      "annotation": {
+        "sentences": [
+          {
+            "start": 0,
+            "end": 72,
+            "text": "Barta Dénes elismerte a késést, de tagadta, hogy megszegte a szerződést."
+          }
+        ],
+        "tokens": [
+          {
+            "id": 1,
+            "text": "Barta",
+            "start": 0,
+            "end": 5,
+            "lemma": "Barta",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 3,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 2,
+            "text": "Dénes",
+            "start": 6,
+            "end": 11,
+            "lemma": "Dénes",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 1,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 3,
+            "text": "elismerte",
+            "start": 12,
+            "end": 21,
+            "lemma": "elismer",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Def|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 0,
+            "deprel": "ROOT"
+          },
+          {
+            "id": 4,
+            "text": "a",
+            "start": 22,
+            "end": 23,
+            "lemma": "a",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 5,
+            "deprel": "det"
+          },
+          {
+            "id": 5,
+            "text": "késést",
+            "start": 24,
+            "end": 30,
+            "lemma": "késés",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 3,
+            "deprel": "obj"
+          },
+          {
+            "id": 6,
+            "text": ",",
+            "start": 30,
+            "end": 31,
+            "lemma": ",",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 8,
+            "deprel": "punct"
+          },
+          {
+            "id": 7,
+            "text": "de",
+            "start": 32,
+            "end": 34,
+            "lemma": "de",
+            "upos": "CCONJ",
+            "xpos": "CCONJ",
+            "morph": "",
+            "head": 8,
+            "deprel": "cc"
+          },
+          {
+            "id": 8,
+            "text": "tagadta",
+            "start": 35,
+            "end": 42,
+            "lemma": "tagad",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Def|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 3,
+            "deprel": "conj"
+          },
+          {
+            "id": 9,
+            "text": ",",
+            "start": 42,
+            "end": 43,
+            "lemma": ",",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 11,
+            "deprel": "punct"
+          },
+          {
+            "id": 10,
+            "text": "hogy",
+            "start": 44,
+            "end": 48,
+            "lemma": "hogy",
+            "upos": "SCONJ",
+            "xpos": "SCONJ",
+            "morph": "",
+            "head": 11,
+            "deprel": "mark"
+          },
+          {
+            "id": 11,
+            "text": "megszegte",
+            "start": 49,
+            "end": 58,
+            "lemma": "megszeg",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Def|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 8,
+            "deprel": "ccomp"
+          },
+          {
+            "id": 12,
+            "text": "a",
+            "start": 59,
+            "end": 60,
+            "lemma": "a",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 13,
+            "deprel": "det"
+          },
+          {
+            "id": 13,
+            "text": "szerződést",
+            "start": 61,
+            "end": 71,
+            "lemma": "szerződés",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 11,
+            "deprel": "obj"
+          },
+          {
+            "id": 14,
+            "text": ".",
+            "start": 71,
+            "end": 72,
+            "lemma": ".",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 3,
+            "deprel": "punct"
+          }
+        ],
+        "entities": [
+          {
+            "text": "Barta Dénes",
+            "start": 0,
+            "end": 11,
+            "rawType": "PER",
+            "type": "person",
+            "canonical": "barta dénes"
+          }
+        ],
+        "numericBindings": [],
+        "dependencies": [
+          {
+            "subjectText": "Barta Dénes",
+            "predicateLemma": "elismer"
+          }
+        ],
+        "attributions": [
+          {
+            "sourceText": "Barta Dénes",
+            "reportingLemma": "elismer"
+          },
+          {
+            "sourceText": "Barta Dénes",
+            "reportingLemma": "tagad"
+          }
+        ],
+        "conditional": false,
+        "negated": true
+      }
+    },
+    {
+      "id": "corporate",
+      "text": "A Kék Hálózat szerint a beruházás 2027-ben indulhat, az Elemző Központ azonban ezt vitatja.",
+      "annotation": {
+        "sentences": [
+          {
+            "start": 0,
+            "end": 91,
+            "text": "A Kék Hálózat szerint a beruházás 2027-ben indulhat, az Elemző Központ azonban ezt vitatja."
+          }
+        ],
+        "tokens": [
+          {
+            "id": 1,
+            "text": "A",
+            "start": 0,
+            "end": 1,
+            "lemma": "a",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 2,
+            "deprel": "det"
+          },
+          {
+            "id": 2,
+            "text": "Kék",
+            "start": 2,
+            "end": 5,
+            "lemma": "Kék",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 8,
+            "deprel": "obl"
+          },
+          {
+            "id": 3,
+            "text": "Hálózat",
+            "start": 6,
+            "end": 13,
+            "lemma": "Hálózat",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 2,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 4,
+            "text": "szerint",
+            "start": 14,
+            "end": 21,
+            "lemma": "szerint",
+            "upos": "ADP",
+            "xpos": "ADP",
+            "morph": "",
+            "head": 2,
+            "deprel": "case"
+          },
+          {
+            "id": 5,
+            "text": "a",
+            "start": 22,
+            "end": 23,
+            "lemma": "a",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 6,
+            "deprel": "det"
+          },
+          {
+            "id": 6,
+            "text": "beruházás",
+            "start": 24,
+            "end": 33,
+            "lemma": "beruházás",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 8,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 7,
+            "text": "2027-ben",
+            "start": 34,
+            "end": 42,
+            "lemma": "2027",
+            "upos": "NUM",
+            "xpos": "NUM",
+            "morph": "Case=Ine|NumType=Card|Number=Sing",
+            "head": 8,
+            "deprel": "obl"
+          },
+          {
+            "id": 8,
+            "text": "indulhat",
+            "start": 43,
+            "end": 51,
+            "lemma": "indulhat",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Ind|Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act",
+            "head": 0,
+            "deprel": "ROOT"
+          },
+          {
+            "id": 9,
+            "text": ",",
+            "start": 51,
+            "end": 52,
+            "lemma": ",",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 15,
+            "deprel": "punct"
+          },
+          {
+            "id": 10,
+            "text": "az",
+            "start": 53,
+            "end": 55,
+            "lemma": "az",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 12,
+            "deprel": "det"
+          },
+          {
+            "id": 11,
+            "text": "Elemző",
+            "start": 56,
+            "end": 62,
+            "lemma": "Elemző",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 15,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 12,
+            "text": "Központ",
+            "start": 63,
+            "end": 70,
+            "lemma": "Központ",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 11,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 13,
+            "text": "azonban",
+            "start": 71,
+            "end": 78,
+            "lemma": "azonban",
+            "upos": "CCONJ",
+            "xpos": "CCONJ",
+            "morph": "",
+            "head": 15,
+            "deprel": "cc"
+          },
+          {
+            "id": 14,
+            "text": "ezt",
+            "start": 79,
+            "end": 82,
+            "lemma": "ez",
+            "upos": "PRON",
+            "xpos": "PRON",
+            "morph": "Case=Acc|Number=Sing|Person=3|PronType=Dem",
+            "head": 15,
+            "deprel": "obj"
+          },
+          {
+            "id": 15,
+            "text": "vitatja",
+            "start": 83,
+            "end": 90,
+            "lemma": "vitat",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Def|Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act",
+            "head": 8,
+            "deprel": "conj"
+          },
+          {
+            "id": 16,
+            "text": ".",
+            "start": 90,
+            "end": 91,
+            "lemma": ".",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 8,
+            "deprel": "punct"
+          }
+        ],
+        "entities": [
+          {
+            "text": "Kék Hálózat",
+            "start": 2,
+            "end": 13,
+            "rawType": "ORG",
+            "type": "organization",
+            "canonical": "kék hálózat"
+          },
+          {
+            "text": "Elemző Központ",
+            "start": 56,
+            "end": 70,
+            "rawType": "ORG",
+            "type": "organization",
+            "canonical": "elemző központ"
+          }
+        ],
+        "numericBindings": [],
+        "dependencies": [
+          {
+            "subjectText": "beruházás",
+            "predicateLemma": "indulhat"
+          },
+          {
+            "subjectText": "Elemző Központ",
+            "predicateLemma": "vitat"
+          }
+        ],
+        "attributions": [
+          {
+            "sourceText": "Kék Hálózat",
+            "reportingLemma": "szerint"
+          },
+          {
+            "sourceText": "Elemző Központ",
+            "reportingLemma": "vitat"
+          }
+        ],
+        "conditional": false,
+        "negated": false
+      }
+    },
+    {
+      "id": "weather",
+      "text": "Szegeden 18 fokot, Debrecenben pedig 14 fokot mértek.",
+      "annotation": {
+        "sentences": [
+          {
+            "start": 0,
+            "end": 53,
+            "text": "Szegeden 18 fokot, Debrecenben pedig 14 fokot mértek."
+          }
+        ],
+        "tokens": [
+          {
+            "id": 1,
+            "text": "Szegeden",
+            "start": 0,
+            "end": 8,
+            "lemma": "Szeged",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Sup|Number=Sing",
+            "head": 9,
+            "deprel": "obl"
+          },
+          {
+            "id": 2,
+            "text": "18",
+            "start": 9,
+            "end": 11,
+            "lemma": "18",
+            "upos": "NUM",
+            "xpos": "NUM",
+            "morph": "Case=Nom|NumType=Card|Number=Sing",
+            "head": 3,
+            "deprel": "nummod"
+          },
+          {
+            "id": 3,
+            "text": "fokot",
+            "start": 12,
+            "end": 17,
+            "lemma": "fok",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 9,
+            "deprel": "obj"
+          },
+          {
+            "id": 4,
+            "text": ",",
+            "start": 17,
+            "end": 18,
+            "lemma": ",",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 5,
+            "deprel": "punct"
+          },
+          {
+            "id": 5,
+            "text": "Debrecenben",
+            "start": 19,
+            "end": 30,
+            "lemma": "Debrecen",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Ine|Number=Sing",
+            "head": 3,
+            "deprel": "conj"
+          },
+          {
+            "id": 6,
+            "text": "pedig",
+            "start": 31,
+            "end": 36,
+            "lemma": "pedig",
+            "upos": "CCONJ",
+            "xpos": "CCONJ",
+            "morph": "",
+            "head": 9,
+            "deprel": "cc"
+          },
+          {
+            "id": 7,
+            "text": "14",
+            "start": 37,
+            "end": 39,
+            "lemma": "14",
+            "upos": "NUM",
+            "xpos": "NUM",
+            "morph": "Case=Nom|NumType=Card|Number=Sing",
+            "head": 8,
+            "deprel": "amod:att"
+          },
+          {
+            "id": 8,
+            "text": "fokot",
+            "start": 40,
+            "end": 45,
+            "lemma": "fok",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 9,
+            "deprel": "obj"
+          },
+          {
+            "id": 9,
+            "text": "mértek",
+            "start": 46,
+            "end": 52,
+            "lemma": "mér",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Ind|Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 0,
+            "deprel": "ROOT"
+          },
+          {
+            "id": 10,
+            "text": ".",
+            "start": 52,
+            "end": 53,
+            "lemma": ".",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 9,
+            "deprel": "punct"
+          }
+        ],
+        "entities": [
+          {
+            "text": "Szegeden",
+            "start": 0,
+            "end": 8,
+            "rawType": "LOC",
+            "type": "location",
+            "canonical": "szeged"
+          },
+          {
+            "text": "Debrecenben",
+            "start": 19,
+            "end": 30,
+            "rawType": "LOC",
+            "type": "location",
+            "canonical": "debrecen"
+          }
+        ],
+        "numericBindings": [
+          {
+            "numberText": "18 fokot",
+            "subjectText": "Szegeden"
+          },
+          {
+            "numberText": "14 fokot",
+            "subjectText": "Debrecenben"
+          }
+        ],
+        "dependencies": [],
+        "attributions": [],
+        "conditional": false,
+        "negated": false
+      }
+    },
+    {
+      "id": "politics",
+      "text": "Farkas Júlia nyilatkozott. Ha megválasztják, Farkas Júlia csökkentené az adót, de nem szüntetné meg a támogatást. Farkas Júliának később kérdést tettek fel.",
+      "annotation": {
+        "sentences": [
+          {
+            "start": 0,
+            "end": 26,
+            "text": "Farkas Júlia nyilatkozott."
+          },
+          {
+            "start": 27,
+            "end": 113,
+            "text": "Ha megválasztják, Farkas Júlia csökkentené az adót, de nem szüntetné meg a támogatást."
+          },
+          {
+            "start": 114,
+            "end": 156,
+            "text": "Farkas Júliának később kérdést tettek fel."
+          }
+        ],
+        "tokens": [
+          {
+            "id": 1,
+            "text": "Farkas",
+            "start": 0,
+            "end": 6,
+            "lemma": "Farkas",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 3,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 2,
+            "text": "Júlia",
+            "start": 7,
+            "end": 12,
+            "lemma": "Júlia",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 1,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 3,
+            "text": "nyilatkozott",
+            "start": 13,
+            "end": 25,
+            "lemma": "nyilatkozik",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Ind|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 0,
+            "deprel": "ROOT"
+          },
+          {
+            "id": 4,
+            "text": ".",
+            "start": 25,
+            "end": 26,
+            "lemma": ".",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 3,
+            "deprel": "punct"
+          },
+          {
+            "id": 5,
+            "text": "Ha",
+            "start": 27,
+            "end": 29,
+            "lemma": "ha",
+            "upos": "SCONJ",
+            "xpos": "SCONJ",
+            "morph": "",
+            "head": 6,
+            "deprel": "mark"
+          },
+          {
+            "id": 6,
+            "text": "megválasztják",
+            "start": 30,
+            "end": 43,
+            "lemma": "megválaszt",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Def|Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act",
+            "head": 10,
+            "deprel": "advcl"
+          },
+          {
+            "id": 7,
+            "text": ",",
+            "start": 43,
+            "end": 44,
+            "lemma": ",",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 8,
+            "deprel": "punct"
+          },
+          {
+            "id": 8,
+            "text": "Farkas",
+            "start": 45,
+            "end": 51,
+            "lemma": "Farkas",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 10,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 9,
+            "text": "Júlia",
+            "start": 52,
+            "end": 57,
+            "lemma": "Júlia",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 8,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 10,
+            "text": "csökkentené",
+            "start": 58,
+            "end": 69,
+            "lemma": "csökkent",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Def|Mood=Cnd|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act",
+            "head": 0,
+            "deprel": "ROOT"
+          },
+          {
+            "id": 11,
+            "text": "az",
+            "start": 70,
+            "end": 72,
+            "lemma": "az",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 12,
+            "deprel": "det"
+          },
+          {
+            "id": 12,
+            "text": "adót",
+            "start": 73,
+            "end": 77,
+            "lemma": "adó",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 10,
+            "deprel": "obj"
+          },
+          {
+            "id": 13,
+            "text": ",",
+            "start": 77,
+            "end": 78,
+            "lemma": ",",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 16,
+            "deprel": "punct"
+          },
+          {
+            "id": 14,
+            "text": "de",
+            "start": 79,
+            "end": 81,
+            "lemma": "de",
+            "upos": "CCONJ",
+            "xpos": "CCONJ",
+            "morph": "",
+            "head": 16,
+            "deprel": "cc"
+          },
+          {
+            "id": 15,
+            "text": "nem",
+            "start": 82,
+            "end": 85,
+            "lemma": "nem",
+            "upos": "ADV",
+            "xpos": "ADV",
+            "morph": "PronType=Neg",
+            "head": 16,
+            "deprel": "advmod"
+          },
+          {
+            "id": 16,
+            "text": "szüntetné",
+            "start": 86,
+            "end": 95,
+            "lemma": "szüntet",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Def|Mood=Cnd|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act",
+            "head": 10,
+            "deprel": "conj"
+          },
+          {
+            "id": 17,
+            "text": "meg",
+            "start": 96,
+            "end": 99,
+            "lemma": "meg",
+            "upos": "PART",
+            "xpos": "PART",
+            "morph": "",
+            "head": 16,
+            "deprel": "compound:preverb"
+          },
+          {
+            "id": 18,
+            "text": "a",
+            "start": 100,
+            "end": 101,
+            "lemma": "a",
+            "upos": "DET",
+            "xpos": "DET",
+            "morph": "Definite=Def|PronType=Art",
+            "head": 19,
+            "deprel": "det"
+          },
+          {
+            "id": 19,
+            "text": "támogatást",
+            "start": 102,
+            "end": 112,
+            "lemma": "támogatás",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 16,
+            "deprel": "obj"
+          },
+          {
+            "id": 20,
+            "text": ".",
+            "start": 112,
+            "end": 113,
+            "lemma": ".",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 10,
+            "deprel": "punct"
+          },
+          {
+            "id": 21,
+            "text": "Farkas",
+            "start": 114,
+            "end": 120,
+            "lemma": "Farkas",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Nom|Number=Sing",
+            "head": 25,
+            "deprel": "nsubj"
+          },
+          {
+            "id": 22,
+            "text": "Júliának",
+            "start": 121,
+            "end": 129,
+            "lemma": "Júliá",
+            "upos": "PROPN",
+            "xpos": "PROPN",
+            "morph": "Case=Dat|Number=Sing",
+            "head": 21,
+            "deprel": "flat:name"
+          },
+          {
+            "id": 23,
+            "text": "később",
+            "start": 130,
+            "end": 136,
+            "lemma": "későn",
+            "upos": "ADV",
+            "xpos": "ADV",
+            "morph": "",
+            "head": 25,
+            "deprel": "advmod:mode"
+          },
+          {
+            "id": 24,
+            "text": "kérdést",
+            "start": 137,
+            "end": 144,
+            "lemma": "kérdés",
+            "upos": "NOUN",
+            "xpos": "NOUN",
+            "morph": "Case=Acc|Number=Sing",
+            "head": 25,
+            "deprel": "obj"
+          },
+          {
+            "id": 25,
+            "text": "tettek",
+            "start": 145,
+            "end": 151,
+            "lemma": "tesz",
+            "upos": "VERB",
+            "xpos": "VERB",
+            "morph": "Definite=Ind|Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin|Voice=Act",
+            "head": 0,
+            "deprel": "ROOT"
+          },
+          {
+            "id": 26,
+            "text": "fel",
+            "start": 152,
+            "end": 155,
+            "lemma": "fel",
+            "upos": "ADV",
+            "xpos": "ADV",
+            "morph": "Degree=Pos",
+            "head": 25,
+            "deprel": "compound:preverb"
+          },
+          {
+            "id": 27,
+            "text": ".",
+            "start": 155,
+            "end": 156,
+            "lemma": ".",
+            "upos": "PUNCT",
+            "xpos": "PUNCT",
+            "morph": "",
+            "head": 25,
+            "deprel": "punct"
+          }
+        ],
+        "entities": [
+          {
+            "text": "Farkas Júlia",
+            "start": 0,
+            "end": 12,
+            "rawType": "PER",
+            "type": "person",
+            "canonical": "farkas júlia"
+          },
+          {
+            "text": "Farkas Júlia",
+            "start": 45,
+            "end": 57,
+            "rawType": "PER",
+            "type": "person",
+            "canonical": "farkas júlia"
+          },
+          {
+            "text": "Farkas Júliának",
+            "start": 114,
+            "end": 129,
+            "rawType": "PER",
+            "type": "person",
+            "canonical": "farkas júliá"
+          }
+        ],
+        "numericBindings": [],
+        "dependencies": [
+          {
+            "subjectText": "Farkas Júlia",
+            "predicateLemma": "nyilatkozik"
+          },
+          {
+            "subjectText": "Farkas Júlia",
+            "predicateLemma": "csökkent"
+          },
+          {
+            "subjectText": "Farkas Júliának",
+            "predicateLemma": "tesz"
+          }
+        ],
+        "attributions": [],
+        "conditional": true,
+        "negated": true
+      }
+    }
+  ]
+}

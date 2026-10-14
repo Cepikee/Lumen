@@ -1,0 +1,1799 @@
+{
+  "id": "N",
+  "text": "A méhészeti egyesület titkára szerint a vándoroltatók kaptáronként nagyjából 23 kilogramm mézet pergettek. Kerekes Dénes a második pergetésből 16 üveget ajándékozott a falugondnoknak, a címkén június 12. szerepelt. A maradékot valamikor később vitték el, de a napot nem jegyezték fel.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 12
+      },
+      {
+        "start": 2,
+        "end": 11,
+        "text": "méhészeti",
+        "lemma": "méhészeti",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 12
+      },
+      {
+        "start": 12,
+        "end": 21,
+        "text": "egyesület",
+        "lemma": "egyesület",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 22
+      },
+      {
+        "start": 22,
+        "end": 29,
+        "text": "titkára",
+        "lemma": "titkár",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 96
+      },
+      {
+        "start": 30,
+        "end": 37,
+        "text": "szerint",
+        "lemma": "szerint",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 22
+      },
+      {
+        "start": 38,
+        "end": 39,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 40
+      },
+      {
+        "start": 40,
+        "end": 53,
+        "text": "vándoroltatók",
+        "lemma": "vándoroltató",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur"
+        },
+        "dep": "nsubj",
+        "headStart": 96
+      },
+      {
+        "start": 54,
+        "end": 66,
+        "text": "kaptáronként",
+        "lemma": "kaptár",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dis",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 96
+      },
+      {
+        "start": 67,
+        "end": 76,
+        "text": "nagyjából",
+        "lemma": "nagyjából",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 96
+      },
+      {
+        "start": 77,
+        "end": 79,
+        "text": "23",
+        "lemma": "23",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 80
+      },
+      {
+        "start": 80,
+        "end": 89,
+        "text": "kilogramm",
+        "lemma": "kilogramm",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 90
+      },
+      {
+        "start": 90,
+        "end": 95,
+        "text": "mézet",
+        "lemma": "mézet",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 96
+      },
+      {
+        "start": 96,
+        "end": 105,
+        "text": "pergettek",
+        "lemma": "perget",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 96
+      },
+      {
+        "start": 105,
+        "end": 106,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 96
+      },
+      {
+        "start": 107,
+        "end": 114,
+        "text": "Kerekes",
+        "lemma": "Kerekes",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "advmod:mode",
+        "headStart": 153
+      },
+      {
+        "start": 115,
+        "end": 120,
+        "text": "Dénes",
+        "lemma": "Dénes",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 107
+      },
+      {
+        "start": 121,
+        "end": 122,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 131
+      },
+      {
+        "start": 123,
+        "end": 130,
+        "text": "második",
+        "lemma": "második",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 131
+      },
+      {
+        "start": 131,
+        "end": 142,
+        "text": "pergetésből",
+        "lemma": "pergetés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 153
+      },
+      {
+        "start": 143,
+        "end": 145,
+        "text": "16",
+        "lemma": "16",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 146
+      },
+      {
+        "start": 146,
+        "end": 152,
+        "text": "üveget",
+        "lemma": "üveg",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 153
+      },
+      {
+        "start": 153,
+        "end": 165,
+        "text": "ajándékozott",
+        "lemma": "ajándékoz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 153
+      },
+      {
+        "start": 166,
+        "end": 167,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 168
+      },
+      {
+        "start": 168,
+        "end": 182,
+        "text": "falugondnoknak",
+        "lemma": "falugondnok",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Sing"
+        },
+        "dep": "iobj",
+        "headStart": 153
+      },
+      {
+        "start": 182,
+        "end": 183,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 204
+      },
+      {
+        "start": 184,
+        "end": 185,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 186
+      },
+      {
+        "start": 186,
+        "end": 192,
+        "text": "címkén",
+        "lemma": "címke",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 204
+      },
+      {
+        "start": 193,
+        "end": 199,
+        "text": "június",
+        "lemma": "június",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 200
+      },
+      {
+        "start": 200,
+        "end": 203,
+        "text": "12.",
+        "lemma": "12.",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 204
+      },
+      {
+        "start": 204,
+        "end": 213,
+        "text": "szerepelt",
+        "lemma": "szerepel",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "advcl",
+        "headStart": 153
+      },
+      {
+        "start": 213,
+        "end": 214,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 153
+      },
+      {
+        "start": 215,
+        "end": 216,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 217
+      },
+      {
+        "start": 217,
+        "end": 226,
+        "text": "maradékot",
+        "lemma": "maradék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 244
+      },
+      {
+        "start": 227,
+        "end": 236,
+        "text": "valamikor",
+        "lemma": "valamikor",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Ind"
+        },
+        "dep": "advmod:tlocy",
+        "headStart": 244
+      },
+      {
+        "start": 237,
+        "end": 243,
+        "text": "később",
+        "lemma": "későn",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:tlocy",
+        "headStart": 244
+      },
+      {
+        "start": 244,
+        "end": 250,
+        "text": "vitték",
+        "lemma": "visz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 244
+      },
+      {
+        "start": 251,
+        "end": 253,
+        "text": "el",
+        "lemma": "el",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 244
+      },
+      {
+        "start": 253,
+        "end": 254,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 270
+      },
+      {
+        "start": 255,
+        "end": 257,
+        "text": "de",
+        "lemma": "de",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 270
+      },
+      {
+        "start": 258,
+        "end": 259,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 260
+      },
+      {
+        "start": 260,
+        "end": 265,
+        "text": "napot",
+        "lemma": "nap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 270
+      },
+      {
+        "start": 266,
+        "end": 269,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 270
+      },
+      {
+        "start": 270,
+        "end": 279,
+        "text": "jegyezték",
+        "lemma": "jegyez",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 244
+      },
+      {
+        "start": 280,
+        "end": 283,
+        "text": "fel",
+        "lemma": "fel",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 270
+      },
+      {
+        "start": 283,
+        "end": 284,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 244
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 106,
+        "text": "A méhészeti egyesület titkára szerint a vándoroltatók kaptáronként nagyjából 23 kilogramm mézet pergettek."
+      },
+      {
+        "start": 107,
+        "end": 214,
+        "text": "Kerekes Dénes a második pergetésből 16 üveget ajándékozott a falugondnoknak, a címkén június 12. szerepelt."
+      },
+      {
+        "start": 215,
+        "end": 284,
+        "text": "A maradékot valamikor később vitték el, de a napot nem jegyezték fel."
+      }
+    ],
+    "entities": [
+      {
+        "start": 107,
+        "end": 120,
+        "text": "Kerekes Dénes",
+        "label": "PER"
+      }
+    ]
+  },
+  "output": {
+    "entities": [
+      {
+        "mention": "Kerekes Dénes",
+        "normalized": "kerekes dénes",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 107,
+        "end": 120,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 107,
+          "end": 120,
+          "textSpan": "Kerekes Dénes"
+        },
+        "identityKey": "person|kerekes dénes",
+        "canonicalIdentity": "kerekes dénes",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": {
+          "mention": "titkára",
+          "normalized": "titkár",
+          "start": 22,
+          "end": 29,
+          "type": "referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 22,
+            "end": 29,
+            "textSpan": "titkára"
+          }
+        },
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "szerint",
+        "content": {
+          "start": 37,
+          "end": 106,
+          "textSpan": " a vándoroltatók kaptáronként nagyjából 23 kilogramm mézet pergettek."
+        },
+        "attribution": null,
+        "action": "perget",
+        "actionSpan": {
+          "start": 96,
+          "end": 105,
+          "textSpan": "pergettek"
+        },
+        "object": [
+          "mézet"
+        ],
+        "numericArguments": [
+          {
+            "value": 23,
+            "canonicalValue": 23,
+            "unit": {
+              "numerator": "kilogramm",
+              "denominator": "kaptár"
+            },
+            "semanticKind": "compound_rate",
+            "start": 54,
+            "end": 89,
+            "raw": "kaptáronként nagyjából 23 kilogramm",
+            "evidenceSpan": {
+              "start": 54,
+              "end": 89,
+              "textSpan": "kaptáronként nagyjából 23 kilogramm"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "compound_rate_projection_not_supported"
+            ],
+            "property": "count",
+            "compound": {
+              "numerator": {
+                "value": 23,
+                "baseUnit": "kilogramm",
+                "originalKind": "count",
+                "evidenceSpan": {
+                  "start": 77,
+                  "end": 89,
+                  "textSpan": "23 kilogramm"
+                }
+              },
+              "denominators": [
+                {
+                  "unit": "kaptár",
+                  "scale": 1,
+                  "relation": "per",
+                  "form": "distributive",
+                  "evidenceSpan": {
+                    "start": 54,
+                    "end": 66,
+                    "textSpan": "kaptáronként"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 54,
+                        "end": 66,
+                        "textSpan": "kaptáronként"
+                      },
+                      "targetSpan": {
+                        "start": 96,
+                        "end": 105,
+                        "textSpan": "pergettek"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "relation": "per",
+              "qualifiers": [],
+              "evidenceSpan": {
+                "start": 54,
+                "end": 89,
+                "textSpan": "kaptáronként nagyjából 23 kilogramm"
+              },
+              "numeratorDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 77,
+                    "end": 79,
+                    "textSpan": "23"
+                  },
+                  "targetSpan": {
+                    "start": 80,
+                    "end": 89,
+                    "textSpan": "kilogramm"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 80,
+                    "end": 89,
+                    "textSpan": "kilogramm"
+                  },
+                  "targetSpan": {
+                    "start": 90,
+                    "end": 95,
+                    "textSpan": "mézet"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 90,
+                    "end": 95,
+                    "textSpan": "mézet"
+                  },
+                  "targetSpan": {
+                    "start": 96,
+                    "end": 105,
+                    "textSpan": "pergettek"
+                  }
+                }
+              ],
+              "scopeStatus": "candidate_only",
+              "frameId": "dependency:0:106"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 77,
+                    "end": 89,
+                    "textSpan": "23 kilogramm"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:106",
+              "clauseSpan": {
+                "start": 37,
+                "end": 106,
+                "textSpan": " a vándoroltatók kaptáronként nagyjából 23 kilogramm mézet pergettek."
+              },
+              "predicateSpan": {
+                "start": 96,
+                "end": 105,
+                "textSpan": "pergettek"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 77,
+                    "end": 79,
+                    "textSpan": "23"
+                  },
+                  "targetSpan": {
+                    "start": 80,
+                    "end": 89,
+                    "textSpan": "kilogramm"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 80,
+                    "end": 89,
+                    "textSpan": "kilogramm"
+                  },
+                  "targetSpan": {
+                    "start": 90,
+                    "end": 95,
+                    "textSpan": "mézet"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 90,
+                    "end": 95,
+                    "textSpan": "mézet"
+                  },
+                  "targetSpan": {
+                    "start": 96,
+                    "end": 105,
+                    "textSpan": "pergettek"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "compound_rate_requires_lossless_resolution"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 106,
+          "textSpan": "A méhészeti egyesület titkára szerint a vándoroltatók kaptáronként nagyjából 23 kilogramm mézet pergettek."
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 106,
+          "textSpan": "A méhészeti egyesület titkára szerint a vándoroltatók kaptáronként nagyjából 23 kilogramm mézet pergettek."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:106",
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 22,
+            "end": 29,
+            "textSpan": "titkára"
+          },
+          "targetSpan": {
+            "start": 96,
+            "end": 105,
+            "textSpan": "pergettek"
+          },
+          "dependencyPath": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 22,
+                "end": 29,
+                "textSpan": "titkára"
+              },
+              "targetSpan": {
+                "start": 96,
+                "end": 105,
+                "textSpan": "pergettek"
+              }
+            }
+          ],
+          "frameId": "dependency:0:106",
+          "semanticRole": "attribution_source",
+          "resolutionStatus": "resolved",
+          "rule": "dependency_path_with_case_and_scope_checks"
+        },
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "pergetésből",
+            "normalized": "pergetés",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ela",
+            "start": 131,
+            "end": 142,
+            "evidenceSpan": {
+              "start": 131,
+              "end": 142,
+              "textSpan": "pergetésből"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 107,
+          "end": 182,
+          "textSpan": "Kerekes Dénes a második pergetésből 16 üveget ajándékozott a falugondnoknak"
+        },
+        "attribution": null,
+        "action": "ajándékoz",
+        "actionSpan": {
+          "start": 153,
+          "end": 165,
+          "textSpan": "ajándékozott"
+        },
+        "object": [
+          "üveg"
+        ],
+        "numericArguments": [
+          {
+            "start": 123,
+            "end": 142,
+            "raw": "második pergetésből",
+            "value": 2,
+            "canonicalValue": 2,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 123,
+              "end": 142,
+              "textSpan": "második pergetésből"
+            },
+            "binding": "resolved",
+            "ownerType": "ordinal_target",
+            "owner": {
+              "mention": "pergetésből",
+              "evidenceSpan": {
+                "start": 131,
+                "end": 142,
+                "textSpan": "pergetésből"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 123,
+                "end": 142,
+                "textSpan": "második pergetésből"
+              },
+              "targetSpan": {
+                "start": 153,
+                "end": 165,
+                "textSpan": "ajándékozott"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 123,
+                    "end": 130,
+                    "textSpan": "második"
+                  },
+                  "targetSpan": {
+                    "start": 131,
+                    "end": 142,
+                    "textSpan": "pergetésből"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 131,
+                    "end": 142,
+                    "textSpan": "pergetésből"
+                  },
+                  "targetSpan": {
+                    "start": 153,
+                    "end": 165,
+                    "textSpan": "ajándékozott"
+                  }
+                }
+              ],
+              "frameId": "dependency:107:182",
+              "semanticRole": "ordinal",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 123,
+                    "end": 142,
+                    "textSpan": "második pergetésből"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:107:182",
+              "clauseSpan": {
+                "start": 107,
+                "end": 182,
+                "textSpan": "Kerekes Dénes a második pergetésből 16 üveget ajándékozott a falugondnoknak"
+              },
+              "predicateSpan": {
+                "start": 153,
+                "end": 165,
+                "textSpan": "ajándékozott"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 123,
+                    "end": 130,
+                    "textSpan": "második"
+                  },
+                  "targetSpan": {
+                    "start": 131,
+                    "end": 142,
+                    "textSpan": "pergetésből"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 131,
+                    "end": 142,
+                    "textSpan": "pergetésből"
+                  },
+                  "targetSpan": {
+                    "start": 153,
+                    "end": 165,
+                    "textSpan": "ajándékozott"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "value": 16,
+            "canonicalValue": 16,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 143,
+            "end": 152,
+            "raw": "16 üveget",
+            "evidenceSpan": {
+              "start": 143,
+              "end": 152,
+              "textSpan": "16 üveget"
+            },
+            "owner": {
+              "mention": "üveget",
+              "normalized": "üveg",
+              "start": 146,
+              "end": 152,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 146,
+                "end": 152,
+                "textSpan": "üveget"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "count",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 143,
+                "end": 145,
+                "textSpan": "16"
+              },
+              "targetSpan": {
+                "start": 146,
+                "end": 152,
+                "textSpan": "üveget"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 143,
+                    "end": 145,
+                    "textSpan": "16"
+                  },
+                  "targetSpan": {
+                    "start": 146,
+                    "end": 152,
+                    "textSpan": "üveget"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 146,
+                    "end": 152,
+                    "textSpan": "üveget"
+                  },
+                  "targetSpan": {
+                    "start": 153,
+                    "end": 165,
+                    "textSpan": "ajándékozott"
+                  }
+                }
+              ],
+              "frameId": "dependency:107:182",
+              "semanticRole": "count",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 143,
+                    "end": 152,
+                    "textSpan": "16 üveget"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:107:182",
+              "clauseSpan": {
+                "start": 107,
+                "end": 182,
+                "textSpan": "Kerekes Dénes a második pergetésből 16 üveget ajándékozott a falugondnoknak"
+              },
+              "predicateSpan": {
+                "start": 153,
+                "end": 165,
+                "textSpan": "ajándékozott"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 143,
+                    "end": 145,
+                    "textSpan": "16"
+                  },
+                  "targetSpan": {
+                    "start": 146,
+                    "end": 152,
+                    "textSpan": "üveget"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 146,
+                    "end": 152,
+                    "textSpan": "üveget"
+                  },
+                  "targetSpan": {
+                    "start": 153,
+                    "end": 165,
+                    "textSpan": "ajándékozott"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 107,
+          "end": 182,
+          "textSpan": "Kerekes Dénes a második pergetésből 16 üveget ajándékozott a falugondnoknak"
+        },
+        "propositionSpan": {
+          "start": 107,
+          "end": 182,
+          "textSpan": "Kerekes Dénes a második pergetésből 16 üveget ajándékozott a falugondnoknak"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:107:182",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "üveget",
+              "normalized": "üveg",
+              "start": 146,
+              "end": 152,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 146,
+                "end": 152,
+                "textSpan": "üveget"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 146,
+                "end": 152,
+                "textSpan": "üveget"
+              },
+              "targetSpan": {
+                "start": 153,
+                "end": 165,
+                "textSpan": "ajándékozott"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 146,
+                    "end": 152,
+                    "textSpan": "üveget"
+                  },
+                  "targetSpan": {
+                    "start": 153,
+                    "end": 165,
+                    "textSpan": "ajándékozott"
+                  }
+                }
+              ],
+              "frameId": "dependency:107:182",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "címkén",
+            "normalized": "címke",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 186,
+            "end": 192,
+            "evidenceSpan": {
+              "start": 186,
+              "end": 192,
+              "textSpan": "címkén"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 184,
+          "end": 214,
+          "textSpan": "a címkén június 12. szerepelt."
+        },
+        "attribution": null,
+        "action": "szerepel",
+        "actionSpan": {
+          "start": 204,
+          "end": 213,
+          "textSpan": "szerepelt"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 193,
+            "end": 203,
+            "raw": "június 12.",
+            "value": {
+              "year": null,
+              "month": 6,
+              "day": 12,
+              "part": null
+            },
+            "canonicalValue": {
+              "year": null,
+              "month": 6,
+              "day": 12,
+              "part": null
+            },
+            "semanticKind": "calendar_date",
+            "unit": "calendar",
+            "property": "date",
+            "temporalRole": "date",
+            "evidenceSpan": {
+              "start": 193,
+              "end": 203,
+              "textSpan": "június 12."
+            },
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "subject": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 193,
+                    "end": 203,
+                    "textSpan": "június 12."
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:184:214",
+              "clauseSpan": {
+                "start": 184,
+                "end": 214,
+                "textSpan": "a címkén június 12. szerepelt."
+              },
+              "predicateSpan": {
+                "start": 204,
+                "end": 213,
+                "textSpan": "szerepelt"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 193,
+                    "end": 199,
+                    "textSpan": "június"
+                  },
+                  "targetSpan": {
+                    "start": 200,
+                    "end": 203,
+                    "textSpan": "12."
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 200,
+                    "end": 203,
+                    "textSpan": "12."
+                  },
+                  "targetSpan": {
+                    "start": 204,
+                    "end": 213,
+                    "textSpan": "szerepelt"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 184,
+          "end": 214,
+          "textSpan": "a címkén június 12. szerepelt."
+        },
+        "propositionSpan": {
+          "start": 184,
+          "end": 214,
+          "textSpan": "a címkén június 12. szerepelt."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:184:214",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "június",
+              "normalized": "június",
+              "start": 193,
+              "end": 199,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 193,
+                "end": 199,
+                "textSpan": "június"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 193,
+                "end": 199,
+                "textSpan": "június"
+              },
+              "targetSpan": {
+                "start": 204,
+                "end": 213,
+                "textSpan": "szerepelt"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 193,
+                    "end": 199,
+                    "textSpan": "június"
+                  },
+                  "targetSpan": {
+                    "start": 200,
+                    "end": 203,
+                    "textSpan": "12."
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 200,
+                    "end": 203,
+                    "textSpan": "12."
+                  },
+                  "targetSpan": {
+                    "start": 204,
+                    "end": 213,
+                    "textSpan": "szerepelt"
+                  }
+                }
+              ],
+              "frameId": "dependency:184:214",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 215,
+          "end": 253,
+          "textSpan": "A maradékot valamikor később vitték el"
+        },
+        "attribution": null,
+        "action": "elvisz",
+        "actionSpan": {
+          "start": 244,
+          "end": 250,
+          "textSpan": "vitték"
+        },
+        "object": [
+          "maradék"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 215,
+          "end": 253,
+          "textSpan": "A maradékot valamikor később vitték el"
+        },
+        "propositionSpan": {
+          "start": 215,
+          "end": 253,
+          "textSpan": "A maradékot valamikor később vitték el"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:215:253",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "maradékot",
+              "normalized": "maradék",
+              "start": 217,
+              "end": 226,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 217,
+                "end": 226,
+                "textSpan": "maradékot"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 217,
+                "end": 226,
+                "textSpan": "maradékot"
+              },
+              "targetSpan": {
+                "start": 244,
+                "end": 250,
+                "textSpan": "vitték"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 217,
+                    "end": 226,
+                    "textSpan": "maradékot"
+                  },
+                  "targetSpan": {
+                    "start": 244,
+                    "end": 250,
+                    "textSpan": "vitték"
+                  }
+                }
+              ],
+              "frameId": "dependency:215:253",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 255,
+          "end": 284,
+          "textSpan": "de a napot nem jegyezték fel."
+        },
+        "attribution": null,
+        "action": "feljegyez",
+        "actionSpan": {
+          "start": 270,
+          "end": 279,
+          "textSpan": "jegyezték"
+        },
+        "object": [
+          "nap"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 255,
+          "end": 284,
+          "textSpan": "de a napot nem jegyezték fel."
+        },
+        "propositionSpan": {
+          "start": 255,
+          "end": 284,
+          "textSpan": "de a napot nem jegyezték fel."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:255:284",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "napot",
+              "normalized": "nap",
+              "start": 260,
+              "end": 265,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 260,
+                "end": 265,
+                "textSpan": "napot"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 260,
+                "end": 265,
+                "textSpan": "napot"
+              },
+              "targetSpan": {
+                "start": 270,
+                "end": 279,
+                "textSpan": "jegyezték"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 260,
+                    "end": 265,
+                    "textSpan": "napot"
+                  },
+                  "targetSpan": {
+                    "start": 270,
+                    "end": 279,
+                    "textSpan": "jegyezték"
+                  }
+                }
+              ],
+              "frameId": "dependency:255:284",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

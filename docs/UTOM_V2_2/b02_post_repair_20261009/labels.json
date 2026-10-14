@@ -1,0 +1,197 @@
+[
+  [
+    "P1",
+    "CORRECT_RESOLVED",
+    "P.frames[0].actor = Dóra; explicit nsubj."
+  ],
+  [
+    "P2",
+    "CORRECT_RESOLVED",
+    "P.attributionChains[0]: hírügynökség → minisztérium; claimOwner minisztérium."
+  ],
+  [
+    "P3",
+    "CORRECT_RESOLVED",
+    "P.frames[0].numericArguments[0] calendar_date 2028-03-06."
+  ],
+  [
+    "P4",
+    "CORRECT_RESOLVED",
+    "P.frames[1].polarity denied; hypotheticalContext true. Count is scoped under denial."
+  ],
+  [
+    "P5",
+    "CORRECT_RESOLVED",
+    "P.frames[1].numericArguments[0]: 12 count, owner település."
+  ],
+  [
+    "P6",
+    "CORRECT_RESOLVED",
+    "P.frames[1]: szóvivő source and claimOwner; tagad predicate, denied proposition, exact separate evidence."
+  ],
+  [
+    "E1",
+    "CORRECT_RESOLVED",
+    "E.frames[0].actor vállalat."
+  ],
+  [
+    "E2",
+    "CORRECT_RESOLVED",
+    "E.frames[0].numericArguments[0]: year 2028."
+  ],
+  [
+    "E3",
+    "CORRECT_RESOLVED",
+    "E.frames[0].numericArguments[1]: count 28, owner gépsort."
+  ],
+  [
+    "E4",
+    "MISSED_DEFENSIBLE_RESOLUTION",
+    "E.frames[2]: money 24000000 felismerve, de binding unresolved és owner null."
+  ],
+  [
+    "E5",
+    "MISSED_DEFENSIBLE_RESOLUTION",
+    "E.contrasts[0] unresolved; rejected/accepted null. Nincs pozitív rejected leak, de a korrekció nem reprezentált."
+  ],
+  [
+    "E6",
+    "CORRECT_RESOLVED",
+    "E.frames[3]: percentage 35, property share, owner részesedést."
+  ],
+  [
+    "A1",
+    "CORRECT_RESOLVED",
+    "A.frames[0].source rendőrség."
+  ],
+  [
+    "A2",
+    "MISSED_DEFENSIBLE_RESOLUTION",
+    "A.frames[0].actor null; a szöveg egyértelműen a férfit jelöli."
+  ],
+  [
+    "A3",
+    "CORRECT_RESOLVED",
+    "A.frames[0].numericArguments[0]: age 46, owner férfi."
+  ],
+  [
+    "A4",
+    "CORRECT_RESOLVED",
+    "A.frames[0].numericArguments[1]: measurement 7 km, vezetett frame."
+  ],
+  [
+    "A5",
+    "MISSED_DEFENSIBLE_RESOLUTION",
+    "A.frames[1].actor null; mentők explicit alany a nyers szövegben."
+  ],
+  [
+    "A6",
+    "CORRECT_RESOLVED",
+    "A.frames[1]: duration 2 hour, át marker."
+  ],
+  [
+    "S1",
+    "MISSED_DEFENSIBLE_RESOLUTION",
+    "S.frames[0]: ordinal 4 címkézett, de binding unresolved."
+  ],
+  [
+    "S2",
+    "MISSED_DEFENSIBLE_RESOLUTION",
+    "S.frames[0]: 2 ordinal unresolved; nincs resolved rank owner."
+  ],
+  [
+    "S3",
+    "CORRECT_UNRESOLVED",
+    "S.frames[1]: disjunctive owner mellett nincs resolved rank."
+  ],
+  [
+    "W1",
+    "CORRECT_RESOLVED",
+    "W.frames[0].source szolgálat."
+  ],
+  [
+    "W2",
+    "CORRECT_RESOLVED",
+    "W.frames[0]: percentage 6, property change_magnitude, csökkent frame."
+  ],
+  [
+    "W3",
+    "MISSED_DEFENSIBLE_RESOLUTION",
+    "Compound candidate preserves km/hour and threshold, but unresolved; no positive speed assertion."
+  ],
+  [
+    "W4",
+    "CORRECT_RESOLVED",
+    "W.frames[2]: conditionality true, status conditional; az előzmény külön antecedent frame."
+  ],
+  [
+    "W5",
+    "CORRECT_UNRESOLVED",
+    "W.frames[2].actor null; híd nem actor."
+  ],
+  [
+    "T1",
+    "CORRECT_RESOLVED",
+    "T.frames[0].actor kutató."
+  ],
+  [
+    "T2",
+    "CORRECT_RESOLVED",
+    "T.frames[0]: clock_time 10:20, time role."
+  ],
+  [
+    "T3",
+    "MISSED_DEFENSIBLE_RESOLUTION",
+    "T.frames[1]: ordinal 3 unresolved, bár a harmadik teszt sorszáma egyértelmű."
+  ],
+  [
+    "T4",
+    "CORRECT_RESOLVED",
+    "T.frames[1]: duration 4 day, a harmadik teszt clause-a."
+  ],
+  [
+    "T5",
+    "CORRECT_RESOLVED",
+    "T.frames[2].polarity denied, T.frames[1] asserted; nincs átfolyó negáció."
+  ],
+  [
+    "H1",
+    "CORRECT_RESOLVED",
+    "H.frames[0]: igazgató source and claimOwner, bounded quoted content; clinic actor remains unresolved (H2 unchanged)."
+  ],
+  [
+    "H2",
+    "MISSED_DEFENSIBLE_RESOLUTION",
+    "H.frames[0].actor null; klinika alany kihagyva."
+  ],
+  [
+    "H3",
+    "CORRECT_RESOLVED",
+    "H.frames[0]: headcount 45, owner embert, vesz fel frame."
+  ],
+  [
+    "H4",
+    "CORRECT_RESOLVED",
+    "H.frames[1]: separate application boundary, month 10 day 17 year null, resolved; no inherited quote source."
+  ],
+  [
+    "P7",
+    "CORRECT_RESOLVED",
+    "Dóra exact person entity; a két forrás külön chain referens."
+  ],
+  [
+    "S4",
+    "CORRECT_RESOLVED",
+    "Réka és Gergő külön entity spanok, nincs összevont név."
+  ],
+  [
+    "W6",
+    "CORRECT_RESOLVED",
+    "W.frames[1].syntacticRoles possessor szél → sebessége; actor null."
+  ],
+  [
+    "A7",
+    "CORRECT_RESOLVED",
+    "Age owner férfi generikus referent, nincs kitalált személynév vagy identity."
+  ]
+]

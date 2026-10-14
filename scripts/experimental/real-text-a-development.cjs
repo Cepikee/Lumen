@@ -1,0 +1,57 @@
+"use strict";
+const fs=require('node:fs');
+const {WorkerClient}=require('./morph-worker-client.cjs');
+const cases=[
+ ['possessor','Márton támogatói megérkeztek.'],
+ ['possessor_object','A választók Márton javaslatát elfogadták.'],
+ ['target','Márton ellen eljárás indult.'],
+ ['topic','A nyomozók a Hárs Bank összeomlását vizsgálják.'],
+ ['postposition','Márton irányába elkötelezett jelöltek nyertek.'],
+ ['location','A műhelyben 62 alkatrészt találtak.'],
+ ['implicit','Márton tanácsadóját újraválasztották.'],
+ ['generic','A tanárok megérkeztek.'],
+ ['explicit','Márton megnyerte a versenyt.'],
+ ['multiple','Márton és Eszter megérkeztek.'],
+ ['recipient_not_actor','A választók Eszter elnöknek adtak esélyt.'],
+ ['title_subject','Eszter elnök megérkezett.'],
+ ['report_dative','Márton azt mondta Eszternek, hogy nőtt a forgalom.'],
+ ['report_according','Márton szerint nőtt a forgalom.'],
+ ['report_conversation','Márton beszélt Eszterrel.'],
+ ['report_ins','Márton megszakításokkal beszélt.'],
+ ['report_ela','Márton a forgalom szempontjából értékelte az adatokat.'],
+ ['report_apposition','„Nőtt a forgalom” – mondta Márton, a találkozóhelynek számító Tölgy klub vezetője.'],
+ ['report_pronoun','Márton közölte vele, hogy nőtt a forgalom.'],
+ ['report_target','Márton Eszterről beszélt.'],
+ ['quote_leading','Márton azt mondta: „Nőtt a forgalom”.'],
+ ['quote_boundary','Eszter bejelentette a nyitást. „Nőtt a forgalom” – mondta Márton.'],
+ ['quote_no_speaker','Eszter megérkezett. „Nőtt a forgalom.”'],
+ ['quote_target','„Nőtt a forgalom” – mondta a Márton családra utalva.'],
+ ['duration','Márton 19 éves büntetését tölti.'],
+ ['age','A 38 éves Márton megérkezett.'],
+ ['duration_contract','A 8 éves szerződés lejárt.'],
+ ['year_tariff','A 2022-ben bevezetett 17%-os vám megmaradt.'],
+ ['year_tariff_words','A 2021-ben bevezetett 13 százalékos vám megmaradt.'],
+ ['age_duration','A 38 éves Márton 19 éves büntetését tölti.'],
+ ['money','Márton 6400 forintot fizetett.'],
+ ['measurement','A hőmérséklet −12 fok volt.'],
+ ['threshold','A küszöb 9 százalék volt.'],
+ ['count','A munkások 62 dobozt vittek el.'],
+ ['share','Márton 34 százalékot szerzett.'],
+ ['negative_pair','Márton nem nyert, de Eszter bejutott.'],
+ ['report_negative','A cég szerint nem csökkent az ár, miközben nőtt a forgalom.'],
+ ['not_only','Márton nemcsak beszélt, hanem cselekedett is.'],
+ ['not_small','A forgalom nőtt, és nem is kicsit.'],
+ ['incidental','Márton a már nem annyira sejtelmes fenyegetés mellett dolgozott.'],
+ ['despite','Annak ellenére, hogy Márton nem nyert, Eszter bejutott.'],
+ ['relative','A bizottság, amely nem ülésezett, elfogadta a tervet.'],
+ ['quote_negative','„Nem csökkent az ár” – mondta Márton.'],
+ ['report_denied','Márton nem mondta, hogy csökkent az ár.'],
+ ['negative_existential','A raktárban nincs áru.'],
+ ['denial','Márton tagadta, hogy pénzt kért volna.'],
+ ['not_hidden','Márton nem titkolva dolgozott.'],
+ ['neither','Eszter sem nyert.']
+].map(([id,text])=>({id,text}));
+const workerOptions={args:['-d','Ubuntu-24.04','--','env','PYTHONPATH=/home/mark/.local/share/utom-morph-research','python3','/mnt/f/Projekt2025/Lumen/scripts/experimental/morph-worker.py']};
+async function main(){const w=new WorkerClient(workerOptions);const rows=[];try{for(const c of cases)rows.push({...c,annotation:(await w.request(c.text)).annotation});}finally{w.stop();}fs.mkdirSync('tests/fixtures/real-text-a',{recursive:true});fs.writeFileSync('tests/fixtures/real-text-a/development-annotations.json',JSON.stringify(rows,null,2),{flag:'wx'});console.log('Development annotations',rows.length);}
+if(require.main===module)main().catch(e=>{console.error(e);process.exitCode=1;});
+module.exports={cases,workerOptions};

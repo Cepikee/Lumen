@@ -1,0 +1,1060 @@
+{
+  "id": "O",
+  "domain": "oktatás",
+  "text": "Az iskola nem 18 tanulót, hanem 26-ot fogad a táborban. A jelentkezés szeptember 2-ig tart; a harmadik nap programját később hirdetik ki.",
+  "started": "2026-10-09T21:35:43.105Z",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 2,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 3
+      },
+      {
+        "start": 3,
+        "end": 9,
+        "text": "iskola",
+        "lemma": "iskola",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 38
+      },
+      {
+        "start": 10,
+        "end": 13,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 38
+      },
+      {
+        "start": 14,
+        "end": 16,
+        "text": "18",
+        "lemma": "18",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 17
+      },
+      {
+        "start": 17,
+        "end": 24,
+        "text": "tanulót",
+        "lemma": "tanuló",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 38
+      },
+      {
+        "start": 24,
+        "end": 25,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 38
+      },
+      {
+        "start": 26,
+        "end": 31,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 38
+      },
+      {
+        "start": 32,
+        "end": 37,
+        "text": "26-ot",
+        "lemma": "26",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Acc",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 38
+      },
+      {
+        "start": 38,
+        "end": 43,
+        "text": "fogad",
+        "lemma": "fogad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 38
+      },
+      {
+        "start": 44,
+        "end": 45,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 46
+      },
+      {
+        "start": 46,
+        "end": 54,
+        "text": "táborban",
+        "lemma": "tábor",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 38
+      },
+      {
+        "start": 54,
+        "end": 55,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 38
+      },
+      {
+        "start": 56,
+        "end": 57,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 58
+      },
+      {
+        "start": 58,
+        "end": 69,
+        "text": "jelentkezés",
+        "lemma": "jelentkezés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 86
+      },
+      {
+        "start": 70,
+        "end": 80,
+        "text": "szeptember",
+        "lemma": "szeptember",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 81
+      },
+      {
+        "start": 81,
+        "end": 85,
+        "text": "2-ig",
+        "lemma": "2.",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ter",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 86
+      },
+      {
+        "start": 86,
+        "end": 90,
+        "text": "tart",
+        "lemma": "tart",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 125
+      },
+      {
+        "start": 90,
+        "end": 91,
+        "text": ";",
+        "lemma": ";",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 86
+      },
+      {
+        "start": 92,
+        "end": 93,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 103
+      },
+      {
+        "start": 94,
+        "end": 102,
+        "text": "harmadik",
+        "lemma": "harmadik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 103
+      },
+      {
+        "start": 103,
+        "end": 106,
+        "text": "nap",
+        "lemma": "nap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 107
+      },
+      {
+        "start": 107,
+        "end": 117,
+        "text": "programját",
+        "lemma": "program",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obj",
+        "headStart": 125
+      },
+      {
+        "start": 118,
+        "end": 124,
+        "text": "később",
+        "lemma": "későn",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 125
+      },
+      {
+        "start": 125,
+        "end": 133,
+        "text": "hirdetik",
+        "lemma": "hirdet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 125
+      },
+      {
+        "start": 134,
+        "end": 136,
+        "text": "ki",
+        "lemma": "ki",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 125
+      },
+      {
+        "start": 136,
+        "end": 137,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 125
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 55,
+        "text": "Az iskola nem 18 tanulót, hanem 26-ot fogad a táborban."
+      },
+      {
+        "start": 56,
+        "end": 137,
+        "text": "A jelentkezés szeptember 2-ig tart; a harmadik nap programját később hirdetik ki."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 24,
+          "textSpan": "Az iskola nem 18 tanulót"
+        },
+        "attribution": null,
+        "action": null,
+        "actionSpan": null,
+        "object": [
+          "tanuló"
+        ],
+        "numericArguments": [
+          {
+            "value": 18,
+            "canonicalValue": 18,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": "tanuló",
+            "semanticKind": "count",
+            "start": 14,
+            "end": 24,
+            "raw": "18 tanulót",
+            "evidenceSpan": {
+              "start": 14,
+              "end": 24,
+              "textSpan": "18 tanulót"
+            },
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unsafe_proposition_scope",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {
+              "start": 0,
+              "end": 24,
+              "textSpan": "Az iskola nem 18 tanulót"
+            },
+            "subject": null
+          }
+        ],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 24,
+          "textSpan": "Az iskola nem 18 tanulót"
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 24,
+          "textSpan": "Az iskola nem 18 tanulót"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:24"
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "táborban",
+            "normalized": "tábor",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ine",
+            "start": 46,
+            "end": 54,
+            "evidenceSpan": {
+              "start": 46,
+              "end": 54,
+              "textSpan": "táborban"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 26,
+          "end": 55,
+          "textSpan": "hanem 26-ot fogad a táborban."
+        },
+        "attribution": null,
+        "action": "fogad",
+        "actionSpan": {
+          "start": 38,
+          "end": 43,
+          "textSpan": "fogad"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 26,
+            "canonicalValue": 26,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 32,
+            "end": 37,
+            "raw": "26-ot",
+            "evidenceSpan": {
+              "start": 32,
+              "end": 37,
+              "textSpan": "26-ot"
+            },
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {
+              "start": 26,
+              "end": 55,
+              "textSpan": "hanem 26-ot fogad a táborban."
+            },
+            "subject": null
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 26,
+          "end": 55,
+          "textSpan": "hanem 26-ot fogad a táborban."
+        },
+        "propositionSpan": {
+          "start": 26,
+          "end": 55,
+          "textSpan": "hanem 26-ot fogad a táborban."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:26:55"
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 56,
+          "end": 90,
+          "textSpan": "A jelentkezés szeptember 2-ig tart"
+        },
+        "attribution": null,
+        "action": "tart",
+        "actionSpan": {
+          "start": 86,
+          "end": 90,
+          "textSpan": "tart"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 70,
+            "end": 85,
+            "raw": "szeptember 2-ig",
+            "value": {
+              "year": null,
+              "month": 9,
+              "day": 2,
+              "part": null
+            },
+            "canonicalValue": {
+              "year": null,
+              "month": 9,
+              "day": 2,
+              "part": null
+            },
+            "semanticKind": "calendar_date",
+            "unit": "calendar",
+            "property": "boundary",
+            "temporalRole": "boundary",
+            "evidenceSpan": {
+              "start": 70,
+              "end": 85,
+              "textSpan": "szeptember 2-ig"
+            },
+            "binding": "resolved",
+            "ownerType": "semantic_argument",
+            "owner": {
+              "mention": "2-ig",
+              "evidenceSpan": {
+                "start": 81,
+                "end": 85,
+                "textSpan": "2-ig"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 70,
+                "end": 85,
+                "textSpan": "szeptember 2-ig"
+              },
+              "targetSpan": {
+                "start": 86,
+                "end": 90,
+                "textSpan": "tart"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 70,
+                    "end": 80,
+                    "textSpan": "szeptember"
+                  },
+                  "targetSpan": {
+                    "start": 81,
+                    "end": 85,
+                    "textSpan": "2-ig"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 81,
+                    "end": 85,
+                    "textSpan": "2-ig"
+                  },
+                  "targetSpan": {
+                    "start": 86,
+                    "end": 90,
+                    "textSpan": "tart"
+                  }
+                }
+              ],
+              "frameId": "dependency:56:90",
+              "semanticRole": "boundary",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 56,
+          "end": 90,
+          "textSpan": "A jelentkezés szeptember 2-ig tart"
+        },
+        "propositionSpan": {
+          "start": 56,
+          "end": 90,
+          "textSpan": "A jelentkezés szeptember 2-ig tart"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:56:90",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "szeptember",
+              "normalized": "szeptember",
+              "start": 70,
+              "end": 80,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 70,
+                "end": 80,
+                "textSpan": "szeptember"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 70,
+                "end": 80,
+                "textSpan": "szeptember"
+              },
+              "targetSpan": {
+                "start": 86,
+                "end": 90,
+                "textSpan": "tart"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 70,
+                    "end": 80,
+                    "textSpan": "szeptember"
+                  },
+                  "targetSpan": {
+                    "start": 81,
+                    "end": 85,
+                    "textSpan": "2-ig"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 81,
+                    "end": 85,
+                    "textSpan": "2-ig"
+                  },
+                  "targetSpan": {
+                    "start": 86,
+                    "end": 90,
+                    "textSpan": "tart"
+                  }
+                }
+              ],
+              "frameId": "dependency:56:90",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 92,
+          "end": 137,
+          "textSpan": "a harmadik nap programját később hirdetik ki."
+        },
+        "attribution": null,
+        "action": "kihirdet",
+        "actionSpan": {
+          "start": 125,
+          "end": 133,
+          "textSpan": "hirdetik"
+        },
+        "object": [
+          "program"
+        ],
+        "numericArguments": [
+          {
+            "start": 94,
+            "end": 106,
+            "raw": "harmadik nap",
+            "value": 3,
+            "canonicalValue": 3,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 94,
+              "end": 106,
+              "textSpan": "harmadik nap"
+            },
+            "binding": "resolved",
+            "ownerType": "ordinal_target",
+            "owner": {
+              "mention": "nap",
+              "evidenceSpan": {
+                "start": 103,
+                "end": 106,
+                "textSpan": "nap"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 94,
+                "end": 106,
+                "textSpan": "harmadik nap"
+              },
+              "targetSpan": {
+                "start": 125,
+                "end": 133,
+                "textSpan": "hirdetik"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 94,
+                    "end": 102,
+                    "textSpan": "harmadik"
+                  },
+                  "targetSpan": {
+                    "start": 103,
+                    "end": 106,
+                    "textSpan": "nap"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 103,
+                    "end": 106,
+                    "textSpan": "nap"
+                  },
+                  "targetSpan": {
+                    "start": 107,
+                    "end": 117,
+                    "textSpan": "programját"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 107,
+                    "end": 117,
+                    "textSpan": "programját"
+                  },
+                  "targetSpan": {
+                    "start": 125,
+                    "end": 133,
+                    "textSpan": "hirdetik"
+                  }
+                }
+              ],
+              "frameId": "dependency:92:137",
+              "semanticRole": "ordinal",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 92,
+          "end": 137,
+          "textSpan": "a harmadik nap programját később hirdetik ki."
+        },
+        "propositionSpan": {
+          "start": 92,
+          "end": 137,
+          "textSpan": "a harmadik nap programját később hirdetik ki."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:92:137",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "nap",
+              "normalized": "nap",
+              "start": 103,
+              "end": 106,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 103,
+                "end": 106,
+                "textSpan": "nap"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 103,
+                "end": 106,
+                "textSpan": "nap"
+              },
+              "targetSpan": {
+                "start": 125,
+                "end": 133,
+                "textSpan": "hirdetik"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 103,
+                    "end": 106,
+                    "textSpan": "nap"
+                  },
+                  "targetSpan": {
+                    "start": 107,
+                    "end": 117,
+                    "textSpan": "programját"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 107,
+                    "end": 117,
+                    "textSpan": "programját"
+                  },
+                  "targetSpan": {
+                    "start": 125,
+                    "end": 133,
+                    "textSpan": "hirdetik"
+                  }
+                }
+              ],
+              "frameId": "dependency:92:137",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "programját",
+              "normalized": "program",
+              "start": 107,
+              "end": 117,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 107,
+                "end": 117,
+                "textSpan": "programját"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 107,
+                "end": 117,
+                "textSpan": "programját"
+              },
+              "targetSpan": {
+                "start": 125,
+                "end": 133,
+                "textSpan": "hirdetik"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 107,
+                    "end": 117,
+                    "textSpan": "programját"
+                  },
+                  "targetSpan": {
+                    "start": 125,
+                    "end": 133,
+                    "textSpan": "hirdetik"
+                  }
+                }
+              ],
+              "frameId": "dependency:92:137",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "evidenceSpan": {
+          "start": 0,
+          "end": 55,
+          "textSpan": "Az iskola nem 18 tanulót, hanem 26-ot fogad a táborban."
+        },
+        "scope": {
+          "start": 0,
+          "end": 55
+        },
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true
+  }
+}

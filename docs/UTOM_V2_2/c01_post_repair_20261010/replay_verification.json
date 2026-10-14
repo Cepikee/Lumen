@@ -1,0 +1,72 @@
+{
+  "sourceSha256": "5999830f83c17cf9944d66418ab4caba6df1c610b9eb7b5cd78a236013fb923e",
+  "postSha256": "4574c4aab19829695d6d5e92b69a6c2c09898698b7967a91a304b4f45536ad01",
+  "evidence": {
+    "total": 1244,
+    "exact": 1244,
+    "failures": []
+  },
+  "stable": [
+    {
+      "id": "P",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "M",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "E",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "C",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "R",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "B",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "S",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "W",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "T",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "I",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "H",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "O",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "N",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "K",
+      "nonNumericRolesUnchanged": true
+    },
+    {
+      "id": "F",
+      "nonNumericRolesUnchanged": true
+    }
+  ],
+  "canonicalOutputsEmpty": true
+}

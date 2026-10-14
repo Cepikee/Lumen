@@ -1,0 +1,842 @@
+[
+  {
+    "id": "A1",
+    "snippet": "A",
+    "dimension": "actor",
+    "gold": "RESOLVE",
+    "expectation": "A halasztás indokolója Takács Réka, nem a frakciók."
+  },
+  {
+    "id": "A2",
+    "snippet": "A",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "Az idézet forrása Takács Réka; a frakciók címzettek."
+  },
+  {
+    "id": "A3",
+    "snippet": "A",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "A napirendre tűzés tagadott; az indokolás nem tagadott."
+  },
+  {
+    "id": "A4",
+    "snippet": "A",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "Az összefoglaló forrása a parlament sajtóirodája, nem az összefoglaló mint entitás."
+  },
+  {
+    "id": "A5",
+    "snippet": "A",
+    "dimension": "temporal",
+    "gold": "RESOLVE",
+    "expectation": "2028 tavasza a voksolás legkorábbi lehetséges ideje, nem megtörtént szavazás."
+  },
+  {
+    "id": "A6",
+    "snippet": "A",
+    "dimension": "modality/scope",
+    "gold": "RESOLVE",
+    "expectation": "Az amíg feltétel az idézett napirendre tűzésre korlátozódik."
+  },
+  {
+    "id": "B1",
+    "snippet": "B",
+    "dimension": "actor",
+    "gold": "RESOLVE",
+    "expectation": "Az átadó Barta Júlia; a jegyző címzett."
+  },
+  {
+    "id": "B2",
+    "snippet": "B",
+    "dimension": "entity boundary",
+    "gold": "RESOLVE",
+    "expectation": "Barta Júlia személy; főépítész szerep nem része a személynévnek."
+  },
+  {
+    "id": "B3",
+    "snippet": "B",
+    "dimension": "ordinal/rank",
+    "gold": "RESOLVE",
+    "expectation": "A kilencedik kerület közigazgatási azonosító, nem versenyhelyezés."
+  },
+  {
+    "id": "B4",
+    "snippet": "B",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "Az elhelyezés tárgya ivókutak; padok elvetett alternatíva."
+  },
+  {
+    "id": "B5",
+    "snippet": "B",
+    "dimension": "modality/scope",
+    "gold": "RESOLVE",
+    "expectation": "Az ivókutak elhelyezése feltételes, nem végrehajtott."
+  },
+  {
+    "id": "B6",
+    "snippet": "B",
+    "dimension": "ordinal/rank",
+    "gold": "RESOLVE",
+    "expectation": "Első ütem szakasz, nem a játszótér helyezése."
+  },
+  {
+    "id": "C1",
+    "snippet": "C",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "A mérlegelés forrása az exportőrök szövetsége."
+  },
+  {
+    "id": "C2",
+    "snippet": "C",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "8 milliárd euró a megrendelésérték lehetséges alsó küszöbe; nem egyenlőség."
+  },
+  {
+    "id": "C3",
+    "snippet": "C",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "31 százalék a hajógyártók részesedése, nem növekedési mérték."
+  },
+  {
+    "id": "C4",
+    "snippet": "C",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "6 százalék relatív exportnövekedés, nem abszolút exportérték."
+  },
+  {
+    "id": "C5",
+    "snippet": "C",
+    "dimension": "temporal",
+    "gold": "RESOLVE",
+    "expectation": "2027 február 18 a közzététel dátuma."
+  },
+  {
+    "id": "C6",
+    "snippet": "C",
+    "dimension": "temporal",
+    "gold": "RESOLVE",
+    "expectation": "14 óra ugyanennek a közzétételnek az időpontja."
+  },
+  {
+    "id": "D1",
+    "snippet": "D",
+    "dimension": "entity boundary",
+    "gold": "RESOLVE",
+    "expectation": "Borostyán Csomagoló Központ egy szervezetnév; üzemvezetője nem a cégnév része."
+  },
+  {
+    "id": "D2",
+    "snippet": "D",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "A jelzés forrása az üzemvezető, címzettjei a dolgozók."
+  },
+  {
+    "id": "D3",
+    "snippet": "D",
+    "dimension": "actor",
+    "gold": "UNRESOLVED",
+    "expectation": "A műszak megszüntetésének végrehajtója implicit, nem oldható fel név szerint."
+  },
+  {
+    "id": "D4",
+    "snippet": "D",
+    "dimension": "attribution",
+    "gold": "UNRESOLVED",
+    "expectation": "A feljegyzés szerzője nincs megadva; nem maga a feljegyzés a személyforrás."
+  },
+  {
+    "id": "D5",
+    "snippet": "D",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "73 érintett munkakör, nem 73 végrehajtott elbocsátás."
+  },
+  {
+    "id": "D6",
+    "snippet": "D",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "A tulajdonosi jóváhagyás tagadott, nem a 73 munkakör létezése."
+  },
+  {
+    "id": "E1",
+    "snippet": "E",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "A fogyasztási adat forrása a hálózatirányító, nem a tájékoztatás."
+  },
+  {
+    "id": "E2",
+    "snippet": "E",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "16 köbméter óránként fogyasztási ráta, generátorokhoz kötve."
+  },
+  {
+    "id": "E3",
+    "snippet": "E",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "11 óra felső időtartamkorlát és lehetőség, nem tényleges üzemidő."
+  },
+  {
+    "id": "E4",
+    "snippet": "E",
+    "dimension": "modality/scope",
+    "gold": "RESOLVE",
+    "expectation": "A tárolós ellátás feltétele szélcsend; nem vonatkozik a próbára."
+  },
+  {
+    "id": "E5",
+    "snippet": "E",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "A feszültség 228 V elfogadott, 230 V elvetett; mérés pozitív."
+  },
+  {
+    "id": "E6",
+    "snippet": "E",
+    "dimension": "actor",
+    "gold": "RESOLVE",
+    "expectation": "A fogyasztók a generátorok; nem a hálózatirányító."
+  },
+  {
+    "id": "F1",
+    "snippet": "F",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "Az idézett állítás eredeti forrása kikötőmester, közvetítője a révüzem szóvivője."
+  },
+  {
+    "id": "F2",
+    "snippet": "F",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "Az indulás tagadott, a szóvivő írása nem tagadott."
+  },
+  {
+    "id": "F3",
+    "snippet": "F",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "85 kerékpár befogadóképesség; nem aznap szállított darabszám."
+  },
+  {
+    "id": "F4",
+    "snippet": "F",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "19 bicikli a mai tényleges szállítmány."
+  },
+  {
+    "id": "F5",
+    "snippet": "F",
+    "dimension": "temporal",
+    "gold": "RESOLVE",
+    "expectation": "Október 22 06:40 a beszállás kezdete; év ismeretlen."
+  },
+  {
+    "id": "F6",
+    "snippet": "F",
+    "dimension": "modality/scope",
+    "gold": "RESOLVE",
+    "expectation": "Az indulási tilalom a köd feloszlásáig tart."
+  },
+  {
+    "id": "G1",
+    "snippet": "G",
+    "dimension": "actor",
+    "gold": "RESOLVE",
+    "expectation": "A csomagátvevők helyszínelők, a bérlő az átadó."
+  },
+  {
+    "id": "G2",
+    "snippet": "G",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "14 átvett csomag; nem a teljes készlet."
+  },
+  {
+    "id": "G3",
+    "snippet": "G",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "A tagadó idézet forrása Fekete Dóra, nem a kereskedő."
+  },
+  {
+    "id": "G4",
+    "snippet": "G",
+    "dimension": "entity boundary",
+    "gold": "RESOLVE",
+    "expectation": "Fekete Dóra személynév; rendőr őrnagy külön cím."
+  },
+  {
+    "id": "G5",
+    "snippet": "G",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "A kihallgatás tárgya alkalmazott; tulajdonos elvetett, nem tagadott a kihallgatás."
+  },
+  {
+    "id": "G6",
+    "snippet": "G",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "A cáfolat forrása ügyészség; nem a cáfolat névszói fej."
+  },
+  {
+    "id": "H1",
+    "snippet": "H",
+    "dimension": "actor",
+    "gold": "RESOLVE",
+    "expectation": "Az ajtónyitók a buszvezető segítői, nem a buszvezető."
+  },
+  {
+    "id": "H2",
+    "snippet": "H",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "A sérülésadat forrása mentésirányítás."
+  },
+  {
+    "id": "H3",
+    "snippet": "H",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "Legalább 5 sérült alsó korlát, nem pontos öt."
+  },
+  {
+    "id": "H4",
+    "snippet": "H",
+    "dimension": "temporal",
+    "gold": "RESOLVE",
+    "expectation": "40 perc a forgalomleállítás időtartama."
+  },
+  {
+    "id": "H5",
+    "snippet": "H",
+    "dimension": "actor",
+    "gold": "UNRESOLVED",
+    "expectation": "A forgalmat leállító szereplő nincs kimondva."
+  },
+  {
+    "id": "H6",
+    "snippet": "H",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "A helikopterkérés tagadott; a forgalomleállítás pozitív."
+  },
+  {
+    "id": "I1",
+    "snippet": "I",
+    "dimension": "ordinal/rank",
+    "gold": "RESOLVE",
+    "expectation": "Második forduló versenyszakasz, nem Lilla helyezése."
+  },
+  {
+    "id": "I2",
+    "snippet": "I",
+    "dimension": "ordinal/rank",
+    "gold": "RESOLVE",
+    "expectation": "Sipos Lilla harmadik befutó."
+  },
+  {
+    "id": "I3",
+    "snippet": "I",
+    "dimension": "ordinal/rank",
+    "gold": "RESOLVE",
+    "expectation": "Negyedik hely a váltó helyezése, nem ismert egyéni versenyzőé."
+  },
+  {
+    "id": "I4",
+    "snippet": "I",
+    "dimension": "ordinal/rank",
+    "gold": "UNRESOLVED",
+    "expectation": "A Második lett idézet alanya nem azonosítható biztosan."
+  },
+  {
+    "id": "I5",
+    "snippet": "I",
+    "dimension": "actor",
+    "gold": "RESOLVE",
+    "expectation": "A döntőbe jutó Sipos Lilla."
+  },
+  {
+    "id": "I6",
+    "snippet": "I",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "A záró idézet forrása csapatvezető."
+  },
+  {
+    "id": "J1",
+    "snippet": "J",
+    "dimension": "entity boundary",
+    "gold": "RESOLVE",
+    "expectation": "Szabad Adathálózat Egyesület egy szervezet, kutatója külön szerep."
+  },
+  {
+    "id": "J2",
+    "snippet": "J",
+    "dimension": "actor",
+    "gold": "RESOLVE",
+    "expectation": "A bemutató a kutató, nem a felügyelet."
+  },
+  {
+    "id": "J3",
+    "snippet": "J",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "A jegyzőkönyv forrása labor, nem jegyzőkönyve."
+  },
+  {
+    "id": "J4",
+    "snippet": "J",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "1,8 gigabit másodpercenként kapcsolati ráta, nem egyszerű adatmennyiség."
+  },
+  {
+    "id": "J5",
+    "snippet": "J",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "12–18 milliszekundum a késleltetés tartománya, nem két egyenlőségi mérés."
+  },
+  {
+    "id": "J6",
+    "snippet": "J",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "Az azonosság tagadott; a sebességérték nincs tagadva."
+  },
+  {
+    "id": "K1",
+    "snippet": "K",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "A felvételi előrejelzés forrása járványügyi központ."
+  },
+  {
+    "id": "K2",
+    "snippet": "K",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "46 beteg naponta feltételes lehetséges felvétel, nem megtörtént összes felvétel."
+  },
+  {
+    "id": "K3",
+    "snippet": "K",
+    "dimension": "modality/scope",
+    "gold": "RESOLVE",
+    "expectation": "A felvétel függ a fertőzésszám növekedésétől."
+  },
+  {
+    "id": "K4",
+    "snippet": "K",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "A bezárás visszautasított állítás; nem tényleges pozitív bezárás."
+  },
+  {
+    "id": "K5",
+    "snippet": "K",
+    "dimension": "actor",
+    "gold": "RESOLVE",
+    "expectation": "A vizsgálógépet kórház kapta meg."
+  },
+  {
+    "id": "K6",
+    "snippet": "K",
+    "dimension": "modality/scope",
+    "gold": "RESOLVE",
+    "expectation": "A keddi gépátvétel nem örökli az első mondat feltételességét."
+  },
+  {
+    "id": "L1",
+    "snippet": "L",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "A kérés forrása tankerület, a levél felolvasója igazgatóhelyettes."
+  },
+  {
+    "id": "L2",
+    "snippet": "L",
+    "dimension": "temporal",
+    "gold": "RESOLVE",
+    "expectation": "Péntek jelentkezési határidő, nem a kérés dátuma."
+  },
+  {
+    "id": "L3",
+    "snippet": "L",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "Ösztöndíj elfogadott 75 ezer forint/hó, elvetett 60 ezer; nem negatív ösztöndíj."
+  },
+  {
+    "id": "L4",
+    "snippet": "L",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "75 ezer forint havonta ismétlődő összeg, nem egyszeri teljes támogatás."
+  },
+  {
+    "id": "L5",
+    "snippet": "L",
+    "dimension": "modality/scope",
+    "gold": "RESOLVE",
+    "expectation": "A járandóság a jogosultság fennállásához kötött."
+  },
+  {
+    "id": "L6",
+    "snippet": "L",
+    "dimension": "ordinal/rank",
+    "gold": "RESOLVE",
+    "expectation": "Harmadik nap tanfolyami időbeli sorszám, nem helyezés."
+  },
+  {
+    "id": "M1",
+    "snippet": "M",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "A hajnali mérés forrása magashegyi állomás; mérései nem entitásforrás."
+  },
+  {
+    "id": "M2",
+    "snippet": "M",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "Mínusz 7 Celsius-fok a levegő hőmérséklete."
+  },
+  {
+    "id": "M3",
+    "snippet": "M",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "2–4 fok várható negatív referenciaeltérés, nem abszolút maximumhőmérséklet."
+  },
+  {
+    "id": "M4",
+    "snippet": "M",
+    "dimension": "modality/scope",
+    "gold": "RESOLVE",
+    "expectation": "A délutáni referenciaeltérés előrejelzés; nem megfigyelt érték."
+  },
+  {
+    "id": "M5",
+    "snippet": "M",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "Várt jelenség ónos eső, havazás elvetett; a várakozás pozitív."
+  },
+  {
+    "id": "M6",
+    "snippet": "M",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "A várakozás közlője meteorológus."
+  },
+  {
+    "id": "N1",
+    "snippet": "N",
+    "dimension": "actor",
+    "gold": "UNRESOLVED",
+    "expectation": "Az elemzést végző személy nem explicit; a laboratórium hely, a kutatócsoport megbízó."
+  },
+  {
+    "id": "N2",
+    "snippet": "N",
+    "dimension": "attribution",
+    "gold": "UNRESOLVED",
+    "expectation": "A mérési jelentés szerzője nincs megnevezve."
+  },
+  {
+    "id": "N3",
+    "snippet": "N",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "0,7 gramm közelítő kristálytömeg."
+  },
+  {
+    "id": "N4",
+    "snippet": "N",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "9 milliméter a kristály átmérője, nem tömege."
+  },
+  {
+    "id": "N5",
+    "snippet": "N",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "Az elmélet bizonyítása nem pozitívan állított tény: állítja tagadott."
+  },
+  {
+    "id": "N6",
+    "snippet": "N",
+    "dimension": "entity boundary",
+    "gold": "RESOLVE",
+    "expectation": "A csoport vezetője emberi szerep, nem a csoport szervezet neve."
+  },
+  {
+    "id": "O1",
+    "snippet": "O",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "Az ár forrása üzletlánc árjegyzéken keresztül; nem az árjegyzék mint beszélő."
+  },
+  {
+    "id": "O2",
+    "snippet": "O",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "412 forint/kg liszt egységár."
+  },
+  {
+    "id": "O3",
+    "snippet": "O",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "18 százalék kedvezmény elfogadott, 15 elvetett, feltételes lehetőség megmarad."
+  },
+  {
+    "id": "O4",
+    "snippet": "O",
+    "dimension": "modality/scope",
+    "gold": "RESOLVE",
+    "expectation": "Kedvezmény csak csomagolást visszahozóknak lehetséges."
+  },
+  {
+    "id": "O5",
+    "snippet": "O",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "3900 forint a kosárár alsó korlátja, nem pontos ára."
+  },
+  {
+    "id": "O6",
+    "snippet": "O",
+    "dimension": "actor",
+    "gold": "UNRESOLVED",
+    "expectation": "A kedvezményt adó nyelvtani alany implicit; személyt nem lehet megnevezni."
+  },
+  {
+    "id": "P1",
+    "snippet": "P",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "Külső közlő szakszervezeti elnök, hivatkozott ígéret forrása munkáltató."
+  },
+  {
+    "id": "P2",
+    "snippet": "P",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "Fizetés nélkül maradás tagadott; fizetés elmaradás nem pozitív tény."
+  },
+  {
+    "id": "P3",
+    "snippet": "P",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "Megszűnés éve 2031, elvetett 2029; megszűnés eseménye nem tagadott."
+  },
+  {
+    "id": "P4",
+    "snippet": "P",
+    "dimension": "temporal",
+    "gold": "RESOLVE",
+    "expectation": "2031 a hatály megszűnésének ideje."
+  },
+  {
+    "id": "P5",
+    "snippet": "P",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "Legalább 24 óra képzés belépőnként alsó korlátú kötelezettség, nem megtartott képzés."
+  },
+  {
+    "id": "P6",
+    "snippet": "P",
+    "dimension": "modality/scope",
+    "gold": "RESOLVE",
+    "expectation": "Kell szervezni kötelezettség, nem megtörtént szervezés."
+  },
+  {
+    "id": "Q1",
+    "snippet": "Q",
+    "dimension": "actor",
+    "gold": "UNRESOLVED",
+    "expectation": "A leemelés két koordinált aktora közül egyetlen kizárólagos aktor nem választható."
+  },
+  {
+    "id": "Q2",
+    "snippet": "Q",
+    "dimension": "actor",
+    "gold": "UNRESOLVED",
+    "expectation": "Az elszállítás implicit alanya nem egyetlen biztos név."
+  },
+  {
+    "id": "Q3",
+    "snippet": "Q",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "Az idézet forrása rendező, látogatók címzettek."
+  },
+  {
+    "id": "Q4",
+    "snippet": "Q",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "Keretválasztó gyűjtő, én elvetett; nem az egész választás tagadott."
+  },
+  {
+    "id": "Q5",
+    "snippet": "Q",
+    "dimension": "ordinal/rank",
+    "gold": "RESOLVE",
+    "expectation": "Harmadik terem helyazonosító, nem személy helyezése."
+  },
+  {
+    "id": "Q6",
+    "snippet": "Q",
+    "dimension": "ordinal/rank",
+    "gold": "UNRESOLVED",
+    "expectation": "A Második feliratból rang és rangsorolt alany nem állapítható meg."
+  },
+  {
+    "id": "R1",
+    "snippet": "R",
+    "dimension": "actor",
+    "gold": "RESOLVE",
+    "expectation": "Kötelező intézmény törvényszék."
+  },
+  {
+    "id": "R2",
+    "snippet": "R",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "Kötelezett szakértő elfogadott, vádlott elvetett."
+  },
+  {
+    "id": "R3",
+    "snippet": "R",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "A beszámoló forrása jogi képviselő; Szalai Emese címzett."
+  },
+  {
+    "id": "R4",
+    "snippet": "R",
+    "dimension": "entity boundary",
+    "gold": "RESOLVE",
+    "expectation": "Szalai Emesének inflektált személynév teljes span, nem beszámolóforrás."
+  },
+  {
+    "id": "R5",
+    "snippet": "R",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "Idézés tagadott, beszámoló nem tagadott."
+  },
+  {
+    "id": "R6",
+    "snippet": "R",
+    "dimension": "temporal",
+    "gold": "RESOLVE",
+    "expectation": "Szeptember 8–17 a pótlási lehetőség intervalluma, év ismeretlen."
+  },
+  {
+    "id": "S1",
+    "snippet": "S",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "Becslés forrása gazdaság agronómusa, nem becslése névszói fej."
+  },
+  {
+    "id": "S2",
+    "snippet": "S",
+    "dimension": "numeric",
+    "gold": "RESOLVE",
+    "expectation": "4,6 tonna/hektár becsült feltételes hozam, nem betakarított összmennyiség."
+  },
+  {
+    "id": "S3",
+    "snippet": "S",
+    "dimension": "temporal",
+    "gold": "RESOLVE",
+    "expectation": "Tervezett betakarítás július; június elvetett korábbi idő."
+  },
+  {
+    "id": "S4",
+    "snippet": "S",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "8 gép elfogadott, 6 elvetett, feltételes munkavégzés."
+  },
+  {
+    "id": "S5",
+    "snippet": "S",
+    "dimension": "modality/scope",
+    "gold": "RESOLVE",
+    "expectation": "Hozam feltétele eső kitartása, lehetőség nem tény."
+  },
+  {
+    "id": "S6",
+    "snippet": "S",
+    "dimension": "ordinal/rank",
+    "gold": "RESOLVE",
+    "expectation": "Második kör vizsgálati szakasz, nem rang."
+  },
+  {
+    "id": "T1",
+    "snippet": "T",
+    "dimension": "actor",
+    "gold": "RESOLVE",
+    "expectation": "A várakozók tárgyalók, nem Brüsszel."
+  },
+  {
+    "id": "T2",
+    "snippet": "T",
+    "dimension": "entity boundary",
+    "gold": "UNRESOLVED",
+    "expectation": "Brüsszel intézményi referense nem egyértelmű, konkrét szervezet nem nevezhető meg."
+  },
+  {
+    "id": "T3",
+    "snippet": "T",
+    "dimension": "attribution",
+    "gold": "RESOLVE",
+    "expectation": "Álláspont forrása küldöttség, tanács elvetett; közvetítő szóvivő."
+  },
+  {
+    "id": "T4",
+    "snippet": "T",
+    "dimension": "contrast/negation",
+    "gold": "RESOLVE",
+    "expectation": "A tanács és küldöttség forrásalternatívák; ismertetés nincs tagadva."
+  },
+  {
+    "id": "T5",
+    "snippet": "T",
+    "dimension": "contrast/negation",
+    "gold": "UNRESOLVED",
+    "expectation": "2 és később nem bizonyítottan azonos slot alternatívái; unresolved."
+  },
+  {
+    "id": "T6",
+    "snippet": "T",
+    "dimension": "numeric",
+    "gold": "UNRESOLVED",
+    "expectation": "A 2 tulajdonsága és mértékegysége hiányzik, pozitív támogatási összeg nem oldható fel."
+  }
+]

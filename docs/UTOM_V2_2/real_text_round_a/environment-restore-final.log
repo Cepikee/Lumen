@@ -1,0 +1,4 @@
+Looking in links: /tmp/utom-role-wheel-cache
+WARNING: Location '/tmp/utom-role-wheel-cache' is ignored: it is either a non-existing path or lacks a specific scheme.
+ERROR: Could not find a version that satisfies the requirement hu-core-news-md==3.8.0 (from versions: none)
+ERROR: No matching distribution found for hu-core-news-md==3.8.0

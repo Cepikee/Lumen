@@ -1,5 +1,6 @@
 "use client";
 
+import InsightsEmptyState from "./InsightsEmptyState";
 import useSWR from "swr";
 import { useUserStore } from "@/store/useUserStore";
 import { useState } from "react";
@@ -27,7 +28,7 @@ const fetcher = (url: string) =>
     return json;
   });
 
-export default function WSourceClickbaitPro() {
+export default function WSourceClickbaitPro({ period = "24h" }: { period?: string }) {
   const theme = useUserStore((s) => s.theme);
   const [openInfo, setOpenInfo] = useState(false);
 
@@ -38,7 +39,7 @@ export default function WSourceClickbaitPro() {
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const { data, error, isLoading } = useSWR(
-    "/api/premium-insights/clickbait",
+    `/api/premium-insights/clickbait?period=${encodeURIComponent(period)}`,
     fetcher,
     { refreshInterval: 60000 }
   );
@@ -54,7 +55,7 @@ export default function WSourceClickbaitPro() {
     .sort((a: any, b: any) => b.score - a.score);
 
   if (sources.length === 0) {
-    return <div className="p-12 text-center text-muted">Nincs elérhető clickbait adat.</div>;
+    return <InsightsEmptyState period={period} />;
   }
 
   const avg =
@@ -72,13 +73,13 @@ export default function WSourceClickbaitPro() {
   return (
     <>
       <div
-        className={`relative p-10 rounded-3xl overflow-hidden wsource-card--ghost ${
+        className={`relative p-2 rounded-xl overflow-hidden wsource-card--ghost ${
           isDark ? "text-white" : "text-slate-900"
         }`}
         style={{ background: "var(--bs-body-bg, #f8fafc)" }}
       >
         <div className="flex items-center justify-center gap-4 mb-6">
-          <h2 className="text-3xl font-semibold tracking-tight text-center">
+          <h2 className="text-lg font-semibold tracking-tight text-center">
             Források átlagos clickbait pontszáma
           </h2>
 
@@ -111,7 +112,7 @@ export default function WSourceClickbaitPro() {
         />
 
         {/* CHART */}
-        <div className="relative z-10 h-[440px]">
+        <div className="relative z-10" style={{ height: Math.min(300, Math.max(150, sources.length * 32 + 40)) }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               key={isDark ? "dark" : "light"}
@@ -121,7 +122,7 @@ export default function WSourceClickbaitPro() {
             >
               <XAxis
                 type="number"
-                domain={[0, 70]}
+                domain={[0, 100]}
                 stroke={isDark ? "#cbd5e1" : "#475569"}
                 tick={{ fill: isDark ? "#e2e8f0" : "#334155" }}
               />

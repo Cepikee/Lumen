@@ -279,7 +279,7 @@ export default function InsightFeedPage() {
         <WhatHappenedToday />
       </div>
       <div className="w-full flex flex-col gap-8">
-      <WSourceOsszehasonlitas />
+      <WSourceOsszehasonlitas period={period} />
     </div>
     </main>
   );

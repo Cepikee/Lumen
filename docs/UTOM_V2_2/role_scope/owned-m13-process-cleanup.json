@@ -1,0 +1,32 @@
+[
+  {
+    "ProcessId": 24544,
+    "CreationDate": "2026-10-06T22:59:35.75209+02:00",
+    "CommandLine": "\"F:\\\\node.exe\"  \"F:\\\\node_modules\\npm\\bin\\npm-cli.js\" run start -- -p 3305"
+  },
+  {
+    "ProcessId": 27064,
+    "CreationDate": "2026-10-06T22:59:35.86817+02:00",
+    "CommandLine": "C:\\Windows\\system32\\cmd.exe /d /s /c next start -p 3305"
+  },
+  {
+    "ProcessId": 11176,
+    "CreationDate": "2026-10-06T22:59:35.891998+02:00",
+    "CommandLine": "\"node\"   \"F:\\Projekt2025\\Lumen\\node_modules\\.bin\\\\..\\next\\dist\\bin\\next\" start -p 3305"
+  },
+  {
+    "ProcessId": 23724,
+    "CreationDate": "2026-10-06T22:59:36.597957+02:00",
+    "CommandLine": "\"F:\\\\node.exe\"  \"F:\\\\node_modules\\npm\\bin\\npm-cli.js\" run start -- -p 3306"
+  },
+  {
+    "ProcessId": 26716,
+    "CreationDate": "2026-10-06T22:59:36.716316+02:00",
+    "CommandLine": "C:\\Windows\\system32\\cmd.exe /d /s /c next start -p 3306"
+  },
+  {
+    "ProcessId": 18404,
+    "CreationDate": "2026-10-06T22:59:36.740557+02:00",
+    "CommandLine": "\"node\"   \"F:\\Projekt2025\\Lumen\\node_modules\\.bin\\\\..\\next\\dist\\bin\\next\" start -p 3306"
+  }
+]

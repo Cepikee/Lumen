@@ -1,0 +1,703 @@
+{
+  "id": "I",
+  "raw": "Sallai Zsófia a negyedik asszóban fordított, az összesített listán viszont hatodik lett. A zsűri pontozólapjából kiderül, hogy csapata nem bronzot, hanem ezüstöt kapott; az edző mégis óvást nyújtott be. A juniorok lapján csak annyi olvasható: „Ötödik lett”, név és versenyszám nélkül.",
+  "rawSha256": "ab8451d3cf0bcb01858e13cb02e4c1c654a52eb3c3588d4368e7398e0e299ba3",
+  "annotationSha256": "c34092f053faca753fa66761d2bd1174f098354346a7085e4fd917ed9264cb7d",
+  "sentenceCount": 3,
+  "tokenCount": 52,
+  "environmentFingerprint": "143242eddc17f94ea729a1b430c5eac9d5e47dd7d27b5ebdd29c7c6961882f47",
+  "model": {
+    "type": "ready",
+    "model": "hu_core_news_md",
+    "version": "3.8.0",
+    "loadMs": 1160.3809050000002
+  },
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 6,
+        "text": "Sallai",
+        "lemma": "Sallai",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "orphan",
+        "headStart": 75
+      },
+      {
+        "start": 7,
+        "end": 13,
+        "text": "Zsófia",
+        "lemma": "Zsófia",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 0
+      },
+      {
+        "start": 14,
+        "end": 15,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 25
+      },
+      {
+        "start": 16,
+        "end": 24,
+        "text": "negyedik",
+        "lemma": "negyedik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 25
+      },
+      {
+        "start": 25,
+        "end": 33,
+        "text": "asszóban",
+        "lemma": "asszó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 34
+      },
+      {
+        "start": 34,
+        "end": 43,
+        "text": "fordított",
+        "lemma": "fordított",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "VerbForm": "PartPast"
+        },
+        "dep": "amod:att",
+        "headStart": 0
+      },
+      {
+        "start": 43,
+        "end": 44,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 34
+      },
+      {
+        "start": 45,
+        "end": 47,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 60
+      },
+      {
+        "start": 48,
+        "end": 59,
+        "text": "összesített",
+        "lemma": "összesített",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 60
+      },
+      {
+        "start": 60,
+        "end": 66,
+        "text": "listán",
+        "lemma": "lista",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 75
+      },
+      {
+        "start": 67,
+        "end": 74,
+        "text": "viszont",
+        "lemma": "viszont",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 75
+      },
+      {
+        "start": 75,
+        "end": 82,
+        "text": "hatodik",
+        "lemma": "hatodik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 75
+      },
+      {
+        "start": 83,
+        "end": 87,
+        "text": "lett",
+        "lemma": "lesz",
+        "pos": "AUX",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "cop",
+        "headStart": 75
+      },
+      {
+        "start": 87,
+        "end": 88,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 75
+      },
+      {
+        "start": 89,
+        "end": 90,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 91
+      },
+      {
+        "start": 91,
+        "end": 96,
+        "text": "zsűri",
+        "lemma": "zsűri",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 97
+      },
+      {
+        "start": 97,
+        "end": 112,
+        "text": "pontozólapjából",
+        "lemma": "pontozólapj",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 113
+      },
+      {
+        "start": 113,
+        "end": 120,
+        "text": "kiderül",
+        "lemma": "kiderül",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 113
+      },
+      {
+        "start": 120,
+        "end": 121,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 139
+      },
+      {
+        "start": 122,
+        "end": 126,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 139
+      },
+      {
+        "start": 127,
+        "end": 134,
+        "text": "csapata",
+        "lemma": "csapat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 139
+      },
+      {
+        "start": 135,
+        "end": 138,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 139
+      },
+      {
+        "start": 139,
+        "end": 146,
+        "text": "bronzot",
+        "lemma": "bronz",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj:lvc",
+        "headStart": 162
+      },
+      {
+        "start": 146,
+        "end": 147,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 154
+      },
+      {
+        "start": 148,
+        "end": 153,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 154
+      },
+      {
+        "start": 154,
+        "end": 161,
+        "text": "ezüstöt",
+        "lemma": "ezüst",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 162
+      },
+      {
+        "start": 162,
+        "end": 168,
+        "text": "kapott",
+        "lemma": "kap",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 113
+      },
+      {
+        "start": 168,
+        "end": 169,
+        "text": ";",
+        "lemma": ";",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 162
+      },
+      {
+        "start": 170,
+        "end": 172,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 173
+      },
+      {
+        "start": 173,
+        "end": 177,
+        "text": "edző",
+        "lemma": "edző",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 190
+      },
+      {
+        "start": 178,
+        "end": 183,
+        "text": "mégis",
+        "lemma": "mégis",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 190
+      },
+      {
+        "start": 184,
+        "end": 189,
+        "text": "óvást",
+        "lemma": "óvás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 190
+      },
+      {
+        "start": 190,
+        "end": 198,
+        "text": "nyújtott",
+        "lemma": "nyújt",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 113
+      },
+      {
+        "start": 199,
+        "end": 201,
+        "text": "be",
+        "lemma": "be",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 190
+      },
+      {
+        "start": 201,
+        "end": 202,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 113
+      },
+      {
+        "start": 203,
+        "end": 204,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 205
+      },
+      {
+        "start": 205,
+        "end": 213,
+        "text": "juniorok",
+        "lemma": "junior",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur"
+        },
+        "dep": "nmod:att",
+        "headStart": 214
+      },
+      {
+        "start": 214,
+        "end": 220,
+        "text": "lapján",
+        "lemma": "lap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 232
+      },
+      {
+        "start": 221,
+        "end": 225,
+        "text": "csak",
+        "lemma": "csak",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 232
+      },
+      {
+        "start": 226,
+        "end": 231,
+        "text": "annyi",
+        "lemma": "annyi",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "nsubj",
+        "headStart": 232
+      },
+      {
+        "start": 232,
+        "end": 241,
+        "text": "olvasható",
+        "lemma": "olvasható",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 232
+      },
+      {
+        "start": 241,
+        "end": 242,
+        "text": ":",
+        "lemma": ":",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 243
+      },
+      {
+        "start": 243,
+        "end": 244,
+        "text": "„",
+        "lemma": "„",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "csubj",
+        "headStart": 232
+      },
+      {
+        "start": 244,
+        "end": 250,
+        "text": "Ötödik",
+        "lemma": "ötödik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 255
+      },
+      {
+        "start": 251,
+        "end": 255,
+        "text": "lett",
+        "lemma": "lesz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "cop",
+        "headStart": 244
+      },
+      {
+        "start": 255,
+        "end": 256,
+        "text": "”",
+        "lemma": "”",
+        "pos": "X",
+        "morph": {},
+        "dep": "obj",
+        "headStart": 243
+      },
+      {
+        "start": 256,
+        "end": 257,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 258
+      },
+      {
+        "start": 258,
+        "end": 261,
+        "text": "név",
+        "lemma": "név",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 255
+      },
+      {
+        "start": 262,
+        "end": 264,
+        "text": "és",
+        "lemma": "és",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 265
+      },
+      {
+        "start": 265,
+        "end": 276,
+        "text": "versenyszám",
+        "lemma": "versenyszám",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 258
+      },
+      {
+        "start": 277,
+        "end": 283,
+        "text": "nélkül",
+        "lemma": "nélkül",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 258
+      },
+      {
+        "start": 283,
+        "end": 284,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 232
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 88,
+        "text": "Sallai Zsófia a negyedik asszóban fordított, az összesített listán viszont hatodik lett."
+      },
+      {
+        "start": 89,
+        "end": 202,
+        "text": "A zsűri pontozólapjából kiderül, hogy csapata nem bronzot, hanem ezüstöt kapott; az edző mégis óvást nyújtott be."
+      },
+      {
+        "start": 203,
+        "end": 284,
+        "text": "A juniorok lapján csak annyi olvasható: „Ötödik lett”, név és versenyszám nélkül."
+      }
+    ],
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "text": "Sallai Zsófia",
+        "label": "PER"
+      }
+    ]
+  }
+}

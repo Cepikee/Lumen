@@ -1,0 +1,30 @@
+{
+  "total": 39,
+  "counts": {
+    "CORRECT_RESOLVED": 34,
+    "WRONG_RESOLVED": 0,
+    "CORRECT_UNRESOLVED": 2,
+    "MISSED_DEFENSIBLE_RESOLUTION": 3
+  },
+  "resolvedPrecision": 1,
+  "resolutionRate": 0.8717948717948718,
+  "evidence": {
+    "spans": 418,
+    "exact": 418,
+    "failures": 0
+  },
+  "changedSelectedDecisions": [
+    "A2",
+    "A5",
+    "H2",
+    "E4",
+    "E5",
+    "T3"
+  ],
+  "method": "Known seven synthetic texts, frozen annotation replay; manual selected-item reassessment, not independent blind validation.",
+  "B03": "PARTIAL",
+  "B01Regression": false,
+  "B02Regression": false,
+  "SECOND_BLIND_CORPUS_READY": true,
+  "NEXT_REAL_WORLD_BLIND_TEST_READY": false
+}

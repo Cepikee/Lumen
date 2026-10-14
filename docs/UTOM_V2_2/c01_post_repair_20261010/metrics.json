@@ -1,0 +1,72 @@
+{
+  "total": 90,
+  "CORRECT_RESOLVED": 51,
+  "WRONG_RESOLVED": 1,
+  "CORRECT_UNRESOLVED": 7,
+  "MISSED_DEFENSIBLE_RESOLUTION": 31,
+  "resolvedPrecision": 0.9807692307692307,
+  "resolutionRate": 0.5777777777777777,
+  "correctDecisionRate": 0.6444444444444445,
+  "byDimension": {
+    "attribution": {
+      "total": 15,
+      "CORRECT_RESOLVED": 8,
+      "WRONG_RESOLVED": 1,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 6
+    },
+    "actor": {
+      "total": 13,
+      "CORRECT_RESOLVED": 3,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 6,
+      "MISSED_DEFENSIBLE_RESOLUTION": 4
+    },
+    "temporal": {
+      "total": 8,
+      "CORRECT_RESOLVED": 7,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 1
+    },
+    "contrast/negation": {
+      "total": 16,
+      "CORRECT_RESOLVED": 11,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 5
+    },
+    "entity boundary": {
+      "total": 9,
+      "CORRECT_RESOLVED": 8,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 1
+    },
+    "numeric": {
+      "total": 19,
+      "CORRECT_RESOLVED": 7,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 12
+    },
+    "ordinal/rank": {
+      "total": 10,
+      "CORRECT_RESOLVED": 7,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 1,
+      "MISSED_DEFENSIBLE_RESOLUTION": 2
+    }
+  },
+  "evidenceOffset": {
+    "total": 1244,
+    "exact": 1244,
+    "failures": []
+  },
+  "c01RelatedWrongBefore": 5,
+  "c01RelatedWrongAfter": 0,
+  "untouchedAttributionWrong": 1,
+  "C01_STATUS": "PARTIAL-PASS",
+  "SECOND_BLIND_CORPUS_RESULT": "FAIL",
+  "NEXT_REAL_WORLD_BLIND_TEST_READY": false
+}

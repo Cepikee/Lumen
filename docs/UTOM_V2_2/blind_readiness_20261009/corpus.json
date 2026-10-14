@@ -1,0 +1,9 @@
+[
+ {"id":"P","domain":"politika","text":"A hírügynökség szerint a minisztérium közölte, hogy Dóra 2028. március 6-án írta alá a megállapodást. A szóvivő tagadta, hogy 12 település kimaradna a programból."},
+ {"id":"E","domain":"gazdaság","text":"A vállalat 2028-ban 28 új gépsort vásárolt. A cég nem 16, hanem 24 millió forint támogatást kapott. A befektető 35 százalékos részesedést szerzett."},
+ {"id":"A","domain":"rendőrségi hír","text":"A rendőrség szerint a 46 éves férfi 7 kilométert vezetett. A mentők két órán át dolgoztak a helyszínen."},
+ {"id":"S","domain":"sport","text":"Réka a negyedik fordulóban második lett. Réka vagy Gergő ötödik lett."},
+ {"id":"W","domain":"időjárás","text":"A szolgálat szerint a hőmérséklet 6 százalékkal csökkent. Ha a szél sebessége eléri a 60 kilométert óránként, a hidat lezárják."},
+ {"id":"T","domain":"technológia","text":"A kutató 10:20-kor mutatta be a prototípust. A harmadik teszt négy napig tartott, de az első mérés nem sikerült."},
+ {"id":"H","domain":"egészségügy","text":"Az igazgató közölte: „A klinika 45 embert vesz fel.” Október 17-ig lehet jelentkezni."}
+]

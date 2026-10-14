@@ -1,0 +1,1992 @@
+{
+  "id": "W",
+  "text": "A szelektáló brigád a műszak első szakaszában 1,7 tonna papírt különített el, majd a műanyagokhoz vonult. A vállalkozó fuvarlevele alapján a konténer tömege 600 kilogrammal lett kisebb, nem 600 kilogrammra csökkent. Az elszállítás után valaki átírta a mérlegjegyet; az új érték mellett nincs aláírás.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 13
+      },
+      {
+        "start": 2,
+        "end": 12,
+        "text": "szelektáló",
+        "lemma": "szelektáló",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 13
+      },
+      {
+        "start": 13,
+        "end": 19,
+        "text": "brigád",
+        "lemma": "brigád",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 63
+      },
+      {
+        "start": 20,
+        "end": 21,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 22
+      },
+      {
+        "start": 22,
+        "end": 28,
+        "text": "műszak",
+        "lemma": "műszak",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 34
+      },
+      {
+        "start": 29,
+        "end": 33,
+        "text": "első",
+        "lemma": "első",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 34
+      },
+      {
+        "start": 34,
+        "end": 45,
+        "text": "szakaszában",
+        "lemma": "szakasz",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 63
+      },
+      {
+        "start": 46,
+        "end": 49,
+        "text": "1,7",
+        "lemma": "1,7",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Frac",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 50
+      },
+      {
+        "start": 50,
+        "end": 55,
+        "text": "tonna",
+        "lemma": "tonna",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 56
+      },
+      {
+        "start": 56,
+        "end": 62,
+        "text": "papírt",
+        "lemma": "papír",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 63
+      },
+      {
+        "start": 63,
+        "end": 73,
+        "text": "különített",
+        "lemma": "különít",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 63
+      },
+      {
+        "start": 74,
+        "end": 76,
+        "text": "el",
+        "lemma": "el",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 63
+      },
+      {
+        "start": 76,
+        "end": 77,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 98
+      },
+      {
+        "start": 78,
+        "end": 82,
+        "text": "majd",
+        "lemma": "majd",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 98
+      },
+      {
+        "start": 83,
+        "end": 84,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 85
+      },
+      {
+        "start": 85,
+        "end": 97,
+        "text": "műanyagokhoz",
+        "lemma": "műanyag",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "All",
+          "Number": "Plur"
+        },
+        "dep": "obl",
+        "headStart": 98
+      },
+      {
+        "start": 98,
+        "end": 104,
+        "text": "vonult",
+        "lemma": "vonul",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 63
+      },
+      {
+        "start": 104,
+        "end": 105,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 63
+      },
+      {
+        "start": 106,
+        "end": 107,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 108
+      },
+      {
+        "start": 108,
+        "end": 118,
+        "text": "vállalkozó",
+        "lemma": "vállalkozó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 119
+      },
+      {
+        "start": 119,
+        "end": 130,
+        "text": "fuvarlevele",
+        "lemma": "fuvarlevel",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nmod:att",
+        "headStart": 131
+      },
+      {
+        "start": 131,
+        "end": 138,
+        "text": "alapján",
+        "lemma": "alap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 173
+      },
+      {
+        "start": 139,
+        "end": 140,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 141
+      },
+      {
+        "start": 141,
+        "end": 149,
+        "text": "konténer",
+        "lemma": "konténer",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 150
+      },
+      {
+        "start": 150,
+        "end": 156,
+        "text": "tömege",
+        "lemma": "tömeg",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 173
+      },
+      {
+        "start": 157,
+        "end": 160,
+        "text": "600",
+        "lemma": "600",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 161
+      },
+      {
+        "start": 161,
+        "end": 172,
+        "text": "kilogrammal",
+        "lemma": "kilogram",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ins",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 173
+      },
+      {
+        "start": 173,
+        "end": 177,
+        "text": "lett",
+        "lemma": "lesz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 173
+      },
+      {
+        "start": 178,
+        "end": 184,
+        "text": "kisebb",
+        "lemma": "kis",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Cmp",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 173
+      },
+      {
+        "start": 184,
+        "end": 185,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 206
+      },
+      {
+        "start": 186,
+        "end": 189,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod:mode",
+        "headStart": 206
+      },
+      {
+        "start": 190,
+        "end": 193,
+        "text": "600",
+        "lemma": "600",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 194
+      },
+      {
+        "start": 194,
+        "end": 205,
+        "text": "kilogrammra",
+        "lemma": "kilogramm",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 206
+      },
+      {
+        "start": 206,
+        "end": 214,
+        "text": "csökkent",
+        "lemma": "csökken",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 173
+      },
+      {
+        "start": 214,
+        "end": 215,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 173
+      },
+      {
+        "start": 216,
+        "end": 218,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 219
+      },
+      {
+        "start": 219,
+        "end": 230,
+        "text": "elszállítás",
+        "lemma": "elszállítás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 243
+      },
+      {
+        "start": 231,
+        "end": 235,
+        "text": "után",
+        "lemma": "után",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 219
+      },
+      {
+        "start": 236,
+        "end": 242,
+        "text": "valaki",
+        "lemma": "valaki",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Ind"
+        },
+        "dep": "nsubj",
+        "headStart": 243
+      },
+      {
+        "start": 243,
+        "end": 249,
+        "text": "átírta",
+        "lemma": "átír",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 243
+      },
+      {
+        "start": 250,
+        "end": 251,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 252
+      },
+      {
+        "start": 252,
+        "end": 264,
+        "text": "mérlegjegyet",
+        "lemma": "mérlegjegy",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 243
+      },
+      {
+        "start": 264,
+        "end": 265,
+        "text": ";",
+        "lemma": ";",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 286
+      },
+      {
+        "start": 266,
+        "end": 268,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 272
+      },
+      {
+        "start": 269,
+        "end": 271,
+        "text": "új",
+        "lemma": "új",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 272
+      },
+      {
+        "start": 272,
+        "end": 277,
+        "text": "érték",
+        "lemma": "érték",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 286
+      },
+      {
+        "start": 278,
+        "end": 285,
+        "text": "mellett",
+        "lemma": "mellett",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 272
+      },
+      {
+        "start": 286,
+        "end": 291,
+        "text": "nincs",
+        "lemma": "nincs",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 243
+      },
+      {
+        "start": 292,
+        "end": 299,
+        "text": "aláírás",
+        "lemma": "aláírás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 286
+      },
+      {
+        "start": 299,
+        "end": 300,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 243
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 105,
+        "text": "A szelektáló brigád a műszak első szakaszában 1,7 tonna papírt különített el, majd a műanyagokhoz vonult."
+      },
+      {
+        "start": 106,
+        "end": 215,
+        "text": "A vállalkozó fuvarlevele alapján a konténer tömege 600 kilogrammal lett kisebb, nem 600 kilogrammra csökkent."
+      },
+      {
+        "start": 216,
+        "end": 300,
+        "text": "Az elszállítás után valaki átírta a mérlegjegyet; az új érték mellett nincs aláírás."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "szakaszában",
+            "normalized": "szakasz",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ine",
+            "start": 34,
+            "end": 45,
+            "evidenceSpan": {
+              "start": 34,
+              "end": 45,
+              "textSpan": "szakaszában"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 76,
+          "textSpan": "A szelektáló brigád a műszak első szakaszában 1,7 tonna papírt különített el"
+        },
+        "attribution": null,
+        "action": "elkülönít",
+        "actionSpan": {
+          "start": 63,
+          "end": 73,
+          "textSpan": "különített"
+        },
+        "object": [
+          "papír"
+        ],
+        "numericArguments": [
+          {
+            "start": 29,
+            "end": 45,
+            "raw": "első szakaszában",
+            "value": 1,
+            "canonicalValue": 1,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 29,
+              "end": 45,
+              "textSpan": "első szakaszában"
+            },
+            "binding": "resolved",
+            "ownerType": "ordinal_target",
+            "owner": {
+              "mention": "szakaszában",
+              "evidenceSpan": {
+                "start": 34,
+                "end": 45,
+                "textSpan": "szakaszában"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 29,
+                "end": 45,
+                "textSpan": "első szakaszában"
+              },
+              "targetSpan": {
+                "start": 63,
+                "end": 73,
+                "textSpan": "különített"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 29,
+                    "end": 33,
+                    "textSpan": "első"
+                  },
+                  "targetSpan": {
+                    "start": 34,
+                    "end": 45,
+                    "textSpan": "szakaszában"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 34,
+                    "end": 45,
+                    "textSpan": "szakaszában"
+                  },
+                  "targetSpan": {
+                    "start": 63,
+                    "end": 73,
+                    "textSpan": "különített"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:76",
+              "semanticRole": "ordinal",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 29,
+                    "end": 45,
+                    "textSpan": "első szakaszában"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:76",
+              "clauseSpan": {
+                "start": 0,
+                "end": 76,
+                "textSpan": "A szelektáló brigád a műszak első szakaszában 1,7 tonna papírt különített el"
+              },
+              "predicateSpan": {
+                "start": 63,
+                "end": 73,
+                "textSpan": "különített"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 29,
+                    "end": 33,
+                    "textSpan": "első"
+                  },
+                  "targetSpan": {
+                    "start": 34,
+                    "end": 45,
+                    "textSpan": "szakaszában"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 34,
+                    "end": 45,
+                    "textSpan": "szakaszában"
+                  },
+                  "targetSpan": {
+                    "start": 63,
+                    "end": 73,
+                    "textSpan": "különített"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "value": 1.7,
+            "canonicalValue": 1.7,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 46,
+            "end": 55,
+            "raw": "1,7 tonna",
+            "evidenceSpan": {
+              "start": 46,
+              "end": 55,
+              "textSpan": "1,7 tonna"
+            },
+            "owner": {
+              "mention": "tonna",
+              "normalized": "tonna",
+              "start": 50,
+              "end": 55,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 50,
+                "end": 55,
+                "textSpan": "tonna"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "count",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 46,
+                "end": 49,
+                "textSpan": "1,7"
+              },
+              "targetSpan": {
+                "start": 50,
+                "end": 55,
+                "textSpan": "tonna"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 46,
+                    "end": 49,
+                    "textSpan": "1,7"
+                  },
+                  "targetSpan": {
+                    "start": 50,
+                    "end": 55,
+                    "textSpan": "tonna"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 50,
+                    "end": 55,
+                    "textSpan": "tonna"
+                  },
+                  "targetSpan": {
+                    "start": 56,
+                    "end": 62,
+                    "textSpan": "papírt"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 56,
+                    "end": 62,
+                    "textSpan": "papírt"
+                  },
+                  "targetSpan": {
+                    "start": 63,
+                    "end": 73,
+                    "textSpan": "különített"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:76",
+              "semanticRole": "count",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 46,
+                    "end": 55,
+                    "textSpan": "1,7 tonna"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:76",
+              "clauseSpan": {
+                "start": 0,
+                "end": 76,
+                "textSpan": "A szelektáló brigád a műszak első szakaszában 1,7 tonna papírt különített el"
+              },
+              "predicateSpan": {
+                "start": 63,
+                "end": 73,
+                "textSpan": "különített"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 46,
+                    "end": 49,
+                    "textSpan": "1,7"
+                  },
+                  "targetSpan": {
+                    "start": 50,
+                    "end": 55,
+                    "textSpan": "tonna"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 50,
+                    "end": 55,
+                    "textSpan": "tonna"
+                  },
+                  "targetSpan": {
+                    "start": 56,
+                    "end": 62,
+                    "textSpan": "papírt"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 56,
+                    "end": 62,
+                    "textSpan": "papírt"
+                  },
+                  "targetSpan": {
+                    "start": 63,
+                    "end": 73,
+                    "textSpan": "különített"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 76,
+          "textSpan": "A szelektáló brigád a műszak első szakaszában 1,7 tonna papírt különített el"
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 76,
+          "textSpan": "A szelektáló brigád a műszak első szakaszában 1,7 tonna papírt különített el"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:76",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "műszak",
+              "normalized": "műszak",
+              "start": 22,
+              "end": 28,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 22,
+                "end": 28,
+                "textSpan": "műszak"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 22,
+                "end": 28,
+                "textSpan": "műszak"
+              },
+              "targetSpan": {
+                "start": 63,
+                "end": 73,
+                "textSpan": "különített"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 22,
+                    "end": 28,
+                    "textSpan": "műszak"
+                  },
+                  "targetSpan": {
+                    "start": 34,
+                    "end": 45,
+                    "textSpan": "szakaszában"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 34,
+                    "end": 45,
+                    "textSpan": "szakaszában"
+                  },
+                  "targetSpan": {
+                    "start": 63,
+                    "end": 73,
+                    "textSpan": "különített"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:76",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "papírt",
+              "normalized": "papír",
+              "start": 56,
+              "end": 62,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 56,
+                "end": 62,
+                "textSpan": "papírt"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 56,
+                "end": 62,
+                "textSpan": "papírt"
+              },
+              "targetSpan": {
+                "start": 63,
+                "end": 73,
+                "textSpan": "különített"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 56,
+                    "end": 62,
+                    "textSpan": "papírt"
+                  },
+                  "targetSpan": {
+                    "start": 63,
+                    "end": 73,
+                    "textSpan": "különített"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:76",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "műanyagokhoz",
+            "normalized": "műanyag",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "All",
+            "start": 85,
+            "end": 97,
+            "evidenceSpan": {
+              "start": 85,
+              "end": 97,
+              "textSpan": "műanyagokhoz"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 78,
+          "end": 105,
+          "textSpan": "majd a műanyagokhoz vonult."
+        },
+        "attribution": null,
+        "action": "vonul",
+        "actionSpan": {
+          "start": 98,
+          "end": 104,
+          "textSpan": "vonult"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 78,
+          "end": 105,
+          "textSpan": "majd a műanyagokhoz vonult."
+        },
+        "propositionSpan": {
+          "start": 78,
+          "end": 105,
+          "textSpan": "majd a műanyagokhoz vonult."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:78:105",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "alapján",
+            "normalized": "alap",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 131,
+            "end": 138,
+            "evidenceSpan": {
+              "start": 131,
+              "end": 138,
+              "textSpan": "alapján"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 106,
+          "end": 184,
+          "textSpan": "A vállalkozó fuvarlevele alapján a konténer tömege 600 kilogrammal lett kisebb"
+        },
+        "attribution": null,
+        "action": "lesz",
+        "actionSpan": {
+          "start": 173,
+          "end": 177,
+          "textSpan": "lett"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 600,
+            "canonicalValue": 600,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 157,
+            "end": 160,
+            "raw": "600",
+            "evidenceSpan": {
+              "start": 157,
+              "end": 160,
+              "textSpan": "600"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 157,
+                    "end": 160,
+                    "textSpan": "600"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:106:184",
+              "clauseSpan": {
+                "start": 106,
+                "end": 184,
+                "textSpan": "A vállalkozó fuvarlevele alapján a konténer tömege 600 kilogrammal lett kisebb"
+              },
+              "predicateSpan": {
+                "start": 173,
+                "end": 177,
+                "textSpan": "lett"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 157,
+                    "end": 160,
+                    "textSpan": "600"
+                  },
+                  "targetSpan": {
+                    "start": 161,
+                    "end": 172,
+                    "textSpan": "kilogrammal"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 161,
+                    "end": 172,
+                    "textSpan": "kilogrammal"
+                  },
+                  "targetSpan": {
+                    "start": 173,
+                    "end": 177,
+                    "textSpan": "lett"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 106,
+          "end": 184,
+          "textSpan": "A vállalkozó fuvarlevele alapján a konténer tömege 600 kilogrammal lett kisebb"
+        },
+        "propositionSpan": {
+          "start": 106,
+          "end": 184,
+          "textSpan": "A vállalkozó fuvarlevele alapján a konténer tömege 600 kilogrammal lett kisebb"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:106:184",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "vállalkozó",
+              "normalized": "vállalkozó",
+              "start": 108,
+              "end": 118,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 108,
+                "end": 118,
+                "textSpan": "vállalkozó"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 108,
+                "end": 118,
+                "textSpan": "vállalkozó"
+              },
+              "targetSpan": {
+                "start": 173,
+                "end": 177,
+                "textSpan": "lett"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 108,
+                    "end": 118,
+                    "textSpan": "vállalkozó"
+                  },
+                  "targetSpan": {
+                    "start": 119,
+                    "end": 130,
+                    "textSpan": "fuvarlevele"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 119,
+                    "end": 130,
+                    "textSpan": "fuvarlevele"
+                  },
+                  "targetSpan": {
+                    "start": 131,
+                    "end": 138,
+                    "textSpan": "alapján"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 131,
+                    "end": 138,
+                    "textSpan": "alapján"
+                  },
+                  "targetSpan": {
+                    "start": 173,
+                    "end": 177,
+                    "textSpan": "lett"
+                  }
+                }
+              ],
+              "frameId": "dependency:106:184",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "fuvarlevele",
+              "normalized": "fuvarlevel",
+              "start": 119,
+              "end": 130,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 119,
+                "end": 130,
+                "textSpan": "fuvarlevele"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 119,
+                "end": 130,
+                "textSpan": "fuvarlevele"
+              },
+              "targetSpan": {
+                "start": 173,
+                "end": 177,
+                "textSpan": "lett"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 119,
+                    "end": 130,
+                    "textSpan": "fuvarlevele"
+                  },
+                  "targetSpan": {
+                    "start": 131,
+                    "end": 138,
+                    "textSpan": "alapján"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 131,
+                    "end": 138,
+                    "textSpan": "alapján"
+                  },
+                  "targetSpan": {
+                    "start": 173,
+                    "end": 177,
+                    "textSpan": "lett"
+                  }
+                }
+              ],
+              "frameId": "dependency:106:184",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "konténer",
+              "normalized": "konténer",
+              "start": 141,
+              "end": 149,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 141,
+                "end": 149,
+                "textSpan": "konténer"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 141,
+                "end": 149,
+                "textSpan": "konténer"
+              },
+              "targetSpan": {
+                "start": 173,
+                "end": 177,
+                "textSpan": "lett"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 141,
+                    "end": 149,
+                    "textSpan": "konténer"
+                  },
+                  "targetSpan": {
+                    "start": 150,
+                    "end": 156,
+                    "textSpan": "tömege"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 150,
+                    "end": 156,
+                    "textSpan": "tömege"
+                  },
+                  "targetSpan": {
+                    "start": 173,
+                    "end": 177,
+                    "textSpan": "lett"
+                  }
+                }
+              ],
+              "frameId": "dependency:106:184",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 186,
+          "end": 215,
+          "textSpan": "nem 600 kilogrammra csökkent."
+        },
+        "attribution": null,
+        "action": "csökken",
+        "actionSpan": {
+          "start": 206,
+          "end": 214,
+          "textSpan": "csökkent"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 600,
+            "canonicalValue": 600,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 190,
+            "end": 205,
+            "raw": "600 kilogrammra",
+            "evidenceSpan": {
+              "start": 190,
+              "end": 205,
+              "textSpan": "600 kilogrammra"
+            },
+            "owner": {
+              "mention": "kilogrammra",
+              "normalized": "kilogramm",
+              "start": 194,
+              "end": 205,
+              "type": "referent",
+              "case": "Sbl",
+              "evidenceSpan": {
+                "start": 194,
+                "end": 205,
+                "textSpan": "kilogrammra"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "count",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 190,
+                "end": 193,
+                "textSpan": "600"
+              },
+              "targetSpan": {
+                "start": 194,
+                "end": 205,
+                "textSpan": "kilogrammra"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 190,
+                    "end": 193,
+                    "textSpan": "600"
+                  },
+                  "targetSpan": {
+                    "start": 194,
+                    "end": 205,
+                    "textSpan": "kilogrammra"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 194,
+                    "end": 205,
+                    "textSpan": "kilogrammra"
+                  },
+                  "targetSpan": {
+                    "start": 206,
+                    "end": 214,
+                    "textSpan": "csökkent"
+                  }
+                }
+              ],
+              "frameId": "dependency:186:215",
+              "semanticRole": "count",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 190,
+                    "end": 205,
+                    "textSpan": "600 kilogrammra"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:186:215",
+              "clauseSpan": {
+                "start": 186,
+                "end": 215,
+                "textSpan": "nem 600 kilogrammra csökkent."
+              },
+              "predicateSpan": {
+                "start": 206,
+                "end": 214,
+                "textSpan": "csökkent"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 190,
+                    "end": 193,
+                    "textSpan": "600"
+                  },
+                  "targetSpan": {
+                    "start": 194,
+                    "end": 205,
+                    "textSpan": "kilogrammra"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 194,
+                    "end": 205,
+                    "textSpan": "kilogrammra"
+                  },
+                  "targetSpan": {
+                    "start": 206,
+                    "end": 214,
+                    "textSpan": "csökkent"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 186,
+          "end": 215,
+          "textSpan": "nem 600 kilogrammra csökkent."
+        },
+        "propositionSpan": {
+          "start": 186,
+          "end": 215,
+          "textSpan": "nem 600 kilogrammra csökkent."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:186:215",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 216,
+          "end": 264,
+          "textSpan": "Az elszállítás után valaki átírta a mérlegjegyet"
+        },
+        "attribution": null,
+        "action": "átír",
+        "actionSpan": {
+          "start": 243,
+          "end": 249,
+          "textSpan": "átírta"
+        },
+        "object": [
+          "mérlegjegy"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 216,
+          "end": 264,
+          "textSpan": "Az elszállítás után valaki átírta a mérlegjegyet"
+        },
+        "propositionSpan": {
+          "start": 216,
+          "end": 264,
+          "textSpan": "Az elszállítás után valaki átírta a mérlegjegyet"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:216:264",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "mérlegjegyet",
+              "normalized": "mérlegjegy",
+              "start": 252,
+              "end": 264,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 252,
+                "end": 264,
+                "textSpan": "mérlegjegyet"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 252,
+                "end": 264,
+                "textSpan": "mérlegjegyet"
+              },
+              "targetSpan": {
+                "start": 243,
+                "end": 249,
+                "textSpan": "átírta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 252,
+                    "end": 264,
+                    "textSpan": "mérlegjegyet"
+                  },
+                  "targetSpan": {
+                    "start": 243,
+                    "end": 249,
+                    "textSpan": "átírta"
+                  }
+                }
+              ],
+              "frameId": "dependency:216:264",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 266,
+          "end": 300,
+          "textSpan": "az új érték mellett nincs aláírás."
+        },
+        "attribution": null,
+        "action": "nincs",
+        "actionSpan": {
+          "start": 286,
+          "end": 291,
+          "textSpan": "nincs"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 266,
+          "end": 300,
+          "textSpan": "az új érték mellett nincs aláírás."
+        },
+        "propositionSpan": {
+          "start": 266,
+          "end": 300,
+          "textSpan": "az új érték mellett nincs aláírás."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:266:300",
+        "syntacticRoles": []
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

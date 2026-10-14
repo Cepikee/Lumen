@@ -1,0 +1,1143 @@
+{
+  "id": "M",
+  "domain": "önkormányzat",
+  "text": "Kovács Ilona polgármester a képviselőknek elmondta, hogy a város 2029-ben 64 bérlakást újít fel. A negyedik kerületben július végéig várják a pályázatokat.",
+  "started": "2026-10-09T21:35:42.626Z",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 6,
+        "text": "Kovács",
+        "lemma": "Kovács",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "appos",
+        "headStart": 13
+      },
+      {
+        "start": 7,
+        "end": 12,
+        "text": "Ilona",
+        "lemma": "Ilona",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 0
+      },
+      {
+        "start": 13,
+        "end": 25,
+        "text": "polgármester",
+        "lemma": "polgármester",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 42
+      },
+      {
+        "start": 26,
+        "end": 27,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 28
+      },
+      {
+        "start": 28,
+        "end": 41,
+        "text": "képviselőknek",
+        "lemma": "képviselő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Plur"
+        },
+        "dep": "obl",
+        "headStart": 42
+      },
+      {
+        "start": 42,
+        "end": 50,
+        "text": "elmondta",
+        "lemma": "elmond",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 42
+      },
+      {
+        "start": 50,
+        "end": 51,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 87
+      },
+      {
+        "start": 52,
+        "end": 56,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 87
+      },
+      {
+        "start": 57,
+        "end": 58,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 59
+      },
+      {
+        "start": 59,
+        "end": 64,
+        "text": "város",
+        "lemma": "város",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 87
+      },
+      {
+        "start": 65,
+        "end": 73,
+        "text": "2029-ben",
+        "lemma": "2029",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Ine",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 87
+      },
+      {
+        "start": 74,
+        "end": 76,
+        "text": "64",
+        "lemma": "64",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 77
+      },
+      {
+        "start": 77,
+        "end": 86,
+        "text": "bérlakást",
+        "lemma": "bérlakás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 87
+      },
+      {
+        "start": 87,
+        "end": 91,
+        "text": "újít",
+        "lemma": "újít",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 42
+      },
+      {
+        "start": 92,
+        "end": 95,
+        "text": "fel",
+        "lemma": "fel",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 87
+      },
+      {
+        "start": 95,
+        "end": 96,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 42
+      },
+      {
+        "start": 97,
+        "end": 98,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 108
+      },
+      {
+        "start": 99,
+        "end": 107,
+        "text": "negyedik",
+        "lemma": "negyedik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 108
+      },
+      {
+        "start": 108,
+        "end": 118,
+        "text": "kerületben",
+        "lemma": "kerület",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 133
+      },
+      {
+        "start": 119,
+        "end": 125,
+        "text": "július",
+        "lemma": "július",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 126
+      },
+      {
+        "start": 126,
+        "end": 132,
+        "text": "végéig",
+        "lemma": "vég",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ter",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 133
+      },
+      {
+        "start": 133,
+        "end": 139,
+        "text": "várják",
+        "lemma": "vár",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 133
+      },
+      {
+        "start": 140,
+        "end": 141,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 142
+      },
+      {
+        "start": 142,
+        "end": 154,
+        "text": "pályázatokat",
+        "lemma": "pályázat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Plur"
+        },
+        "dep": "obj",
+        "headStart": 133
+      },
+      {
+        "start": 154,
+        "end": 155,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 133
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 96,
+        "text": "Kovács Ilona polgármester a képviselőknek elmondta, hogy a város 2029-ben 64 bérlakást újít fel."
+      },
+      {
+        "start": 97,
+        "end": 155,
+        "text": "A negyedik kerületben július végéig várják a pályázatokat."
+      }
+    ],
+    "entities": [
+      {
+        "start": 0,
+        "end": 12,
+        "text": "Kovács Ilona",
+        "label": "PER"
+      }
+    ]
+  },
+  "output": {
+    "entities": [
+      {
+        "mention": "Kovács Ilona",
+        "normalized": "kovács ilona",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 0,
+        "end": 12,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 0,
+          "end": 12,
+          "textSpan": "Kovács Ilona"
+        },
+        "identityKey": "person|kovács ilona",
+        "canonicalIdentity": "kovács ilona",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": {
+          "mention": "polgármester",
+          "normalized": "polgármester",
+          "start": 13,
+          "end": 25,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 13,
+            "end": 25,
+            "textSpan": "polgármester"
+          }
+        },
+        "source": {
+          "mention": "polgármester",
+          "normalized": "polgármester",
+          "start": 13,
+          "end": 25,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 13,
+            "end": 25,
+            "textSpan": "polgármester"
+          }
+        },
+        "recipient": {
+          "mention": "képviselőknek",
+          "role": "recipient",
+          "evidenceSpan": {
+            "start": 28,
+            "end": 41,
+            "textSpan": "képviselőknek"
+          }
+        },
+        "recipientCandidates": [],
+        "reportingVerb": "elmond",
+        "content": {
+          "start": 57,
+          "end": 96,
+          "textSpan": "a város 2029-ben 64 bérlakást újít fel."
+        },
+        "attribution": {
+          "label": "polgármester",
+          "normalized": "polgármester",
+          "evidenceSpan": {
+            "start": 13,
+            "end": 25,
+            "textSpan": "polgármester"
+          },
+          "propositionSpan": {
+            "start": 56,
+            "end": 96,
+            "textSpan": " a város 2029-ben 64 bérlakást újít fel."
+          }
+        },
+        "action": "felújít",
+        "actionSpan": {
+          "start": 87,
+          "end": 91,
+          "textSpan": "újít"
+        },
+        "object": [
+          "bérlakás"
+        ],
+        "numericArguments": [
+          {
+            "value": 2029,
+            "canonicalValue": 2029,
+            "unit": "year",
+            "semanticKind": "year",
+            "start": 65,
+            "end": 73,
+            "raw": "2029-ben",
+            "evidenceSpan": {
+              "start": 65,
+              "end": 73,
+              "textSpan": "2029-ben"
+            },
+            "owner": {
+              "mention": "újít",
+              "normalized": "újít",
+              "start": 87,
+              "end": 91,
+              "type": "referent",
+              "evidenceSpan": {
+                "start": 87,
+                "end": 91,
+                "textSpan": "újít"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "year",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 65,
+                "end": 73,
+                "textSpan": "2029-ben"
+              },
+              "targetSpan": {
+                "start": 87,
+                "end": 91,
+                "textSpan": "újít"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 65,
+                    "end": 73,
+                    "textSpan": "2029-ben"
+                  },
+                  "targetSpan": {
+                    "start": 87,
+                    "end": 91,
+                    "textSpan": "újít"
+                  }
+                }
+              ],
+              "frameId": "recovered-source:42:proposition:0",
+              "semanticRole": "year",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "value": 64,
+            "canonicalValue": 64,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 74,
+            "end": 86,
+            "raw": "64 bérlakást",
+            "evidenceSpan": {
+              "start": 74,
+              "end": 86,
+              "textSpan": "64 bérlakást"
+            },
+            "owner": {
+              "mention": "bérlakást",
+              "normalized": "bérlakás",
+              "start": 77,
+              "end": 86,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 77,
+                "end": 86,
+                "textSpan": "bérlakást"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "count",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 74,
+                "end": 76,
+                "textSpan": "64"
+              },
+              "targetSpan": {
+                "start": 77,
+                "end": 86,
+                "textSpan": "bérlakást"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 74,
+                    "end": 76,
+                    "textSpan": "64"
+                  },
+                  "targetSpan": {
+                    "start": 77,
+                    "end": 86,
+                    "textSpan": "bérlakást"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 77,
+                    "end": 86,
+                    "textSpan": "bérlakást"
+                  },
+                  "targetSpan": {
+                    "start": 87,
+                    "end": 91,
+                    "textSpan": "újít"
+                  }
+                }
+              ],
+              "frameId": "recovered-source:42:proposition:0",
+              "semanticRole": "count",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "asserted",
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported_claim",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 57,
+          "end": 96,
+          "textSpan": "a város 2029-ben 64 bérlakást újít fel."
+        },
+        "propositionSpan": {
+          "start": 57,
+          "end": 96,
+          "textSpan": "a város 2029-ben 64 bérlakást újít fel."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "recovered-source:42:proposition:0",
+        "attributionChainId": "recovered-source:42",
+        "claimOwner": {
+          "mention": "polgármester",
+          "normalized": "polgármester",
+          "start": 13,
+          "end": 25,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 13,
+            "end": 25,
+            "textSpan": "polgármester"
+          }
+        },
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 13,
+            "end": 25,
+            "textSpan": "polgármester"
+          },
+          "reportingPredicateSpan": {
+            "start": 42,
+            "end": 50,
+            "textSpan": "elmondta"
+          },
+          "clauseSpan": {
+            "start": 56,
+            "end": 96,
+            "textSpan": " a város 2029-ben 64 bérlakást újít fel."
+          },
+          "frameId": "recovered-source:42:proposition:0",
+          "parentAttributionId": "recovered-source:42:0",
+          "rule": "governing_np_reporting_scope"
+        },
+        "quoteSpan": null,
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "bérlakást",
+              "normalized": "bérlakás",
+              "start": 77,
+              "end": 86,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 77,
+                "end": 86,
+                "textSpan": "bérlakást"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 77,
+                "end": 86,
+                "textSpan": "bérlakást"
+              },
+              "targetSpan": {
+                "start": 87,
+                "end": 91,
+                "textSpan": "újít"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 77,
+                    "end": 86,
+                    "textSpan": "bérlakást"
+                  },
+                  "targetSpan": {
+                    "start": 87,
+                    "end": 91,
+                    "textSpan": "újít"
+                  }
+                }
+              ],
+              "frameId": "recovered-source:42:proposition:0",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "kerületben",
+            "normalized": "kerület",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ine",
+            "start": 108,
+            "end": 118,
+            "evidenceSpan": {
+              "start": 108,
+              "end": 118,
+              "textSpan": "kerületben"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 97,
+          "end": 155,
+          "textSpan": "A negyedik kerületben július végéig várják a pályázatokat."
+        },
+        "attribution": null,
+        "action": "vár",
+        "actionSpan": {
+          "start": 133,
+          "end": 139,
+          "textSpan": "várják"
+        },
+        "object": [
+          "pályázat"
+        ],
+        "numericArguments": [
+          {
+            "start": 99,
+            "end": 118,
+            "raw": "negyedik kerületben",
+            "value": 4,
+            "canonicalValue": 4,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 99,
+              "end": 118,
+              "textSpan": "negyedik kerületben"
+            },
+            "binding": "resolved",
+            "ownerType": "ordinal_target",
+            "owner": {
+              "mention": "kerületben",
+              "evidenceSpan": {
+                "start": 108,
+                "end": 118,
+                "textSpan": "kerületben"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 99,
+                "end": 118,
+                "textSpan": "negyedik kerületben"
+              },
+              "targetSpan": {
+                "start": 133,
+                "end": 139,
+                "textSpan": "várják"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 99,
+                    "end": 107,
+                    "textSpan": "negyedik"
+                  },
+                  "targetSpan": {
+                    "start": 108,
+                    "end": 118,
+                    "textSpan": "kerületben"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 108,
+                    "end": 118,
+                    "textSpan": "kerületben"
+                  },
+                  "targetSpan": {
+                    "start": 133,
+                    "end": 139,
+                    "textSpan": "várják"
+                  }
+                }
+              ],
+              "frameId": "dependency:97:155",
+              "semanticRole": "ordinal",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            }
+          },
+          {
+            "start": 119,
+            "end": 132,
+            "raw": "július végéig",
+            "value": {
+              "year": null,
+              "month": 7,
+              "day": null,
+              "part": "end"
+            },
+            "canonicalValue": {
+              "year": null,
+              "month": 7,
+              "day": null,
+              "part": "end"
+            },
+            "semanticKind": "calendar_date",
+            "unit": "calendar",
+            "property": "boundary",
+            "temporalRole": "boundary",
+            "evidenceSpan": {
+              "start": 119,
+              "end": 132,
+              "textSpan": "július végéig"
+            },
+            "binding": "resolved",
+            "ownerType": "semantic_argument",
+            "owner": {
+              "mention": "végéig",
+              "evidenceSpan": {
+                "start": 126,
+                "end": 132,
+                "textSpan": "végéig"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 119,
+                "end": 132,
+                "textSpan": "július végéig"
+              },
+              "targetSpan": {
+                "start": 133,
+                "end": 139,
+                "textSpan": "várják"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 119,
+                    "end": 125,
+                    "textSpan": "július"
+                  },
+                  "targetSpan": {
+                    "start": 126,
+                    "end": 132,
+                    "textSpan": "végéig"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 126,
+                    "end": 132,
+                    "textSpan": "végéig"
+                  },
+                  "targetSpan": {
+                    "start": 133,
+                    "end": 139,
+                    "textSpan": "várják"
+                  }
+                }
+              ],
+              "frameId": "dependency:97:155",
+              "semanticRole": "boundary",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 97,
+          "end": 155,
+          "textSpan": "A negyedik kerületben július végéig várják a pályázatokat."
+        },
+        "propositionSpan": {
+          "start": 97,
+          "end": 155,
+          "textSpan": "A negyedik kerületben július végéig várják a pályázatokat."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:97:155",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "július",
+              "normalized": "július",
+              "start": 119,
+              "end": 125,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 119,
+                "end": 125,
+                "textSpan": "július"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 119,
+                "end": 125,
+                "textSpan": "július"
+              },
+              "targetSpan": {
+                "start": 133,
+                "end": 139,
+                "textSpan": "várják"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 119,
+                    "end": 125,
+                    "textSpan": "július"
+                  },
+                  "targetSpan": {
+                    "start": 126,
+                    "end": 132,
+                    "textSpan": "végéig"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 126,
+                    "end": 132,
+                    "textSpan": "végéig"
+                  },
+                  "targetSpan": {
+                    "start": 133,
+                    "end": 139,
+                    "textSpan": "várják"
+                  }
+                }
+              ],
+              "frameId": "dependency:97:155",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "pályázatokat",
+              "normalized": "pályázat",
+              "start": 142,
+              "end": 154,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 142,
+                "end": 154,
+                "textSpan": "pályázatokat"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 142,
+                "end": 154,
+                "textSpan": "pályázatokat"
+              },
+              "targetSpan": {
+                "start": 133,
+                "end": 139,
+                "textSpan": "várják"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 142,
+                    "end": 154,
+                    "textSpan": "pályázatokat"
+                  },
+                  "targetSpan": {
+                    "start": 133,
+                    "end": 139,
+                    "textSpan": "várják"
+                  }
+                }
+              ],
+              "frameId": "dependency:97:155",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [
+      {
+        "id": "recovered-source:42",
+        "binding": "resolved",
+        "rule": "dependency_source_and_explicit_complement_or_bounded_quote",
+        "unresolvedReasons": [],
+        "edges": [
+          {
+            "source": {
+              "mention": "polgármester",
+              "normalized": "polgármester",
+              "start": 13,
+              "end": 25,
+              "type": "local_source",
+              "entityId": null,
+              "identityStatus": "observed_local_referent",
+              "evidenceSpan": {
+                "start": 13,
+                "end": 25,
+                "textSpan": "polgármester"
+              }
+            },
+            "verb": "elmond",
+            "verbSpan": {
+              "start": 42,
+              "end": 50,
+              "textSpan": "elmondta"
+            },
+            "propositionSpan": {
+              "start": 56,
+              "end": 96,
+              "textSpan": " a város 2029-ben 64 bérlakást újít fel."
+            },
+            "recipient": {
+              "mention": "képviselőknek",
+              "role": "recipient",
+              "evidenceSpan": {
+                "start": 28,
+                "end": 41,
+                "textSpan": "képviselőknek"
+              }
+            },
+            "id": "recovered-source:42:0",
+            "depth": 0,
+            "parentAttributionId": null,
+            "targetId": "recovered-source:42:proposition:0",
+            "binding": "resolved",
+            "role": "claim_source",
+            "rule": "governing_np_reporting_scope",
+            "targetIds": [
+              "recovered-source:42:proposition:0"
+            ],
+            "structuralEvidence": {
+              "sourceSpan": {
+                "start": 13,
+                "end": 25,
+                "textSpan": "polgármester"
+              },
+              "targetSpan": {
+                "start": 42,
+                "end": 50,
+                "textSpan": "elmondta"
+              },
+              "relation": "nsubj",
+              "markerRelation": "ROOT",
+              "rule": "governing_source_np_and_reporting_scope"
+            }
+          }
+        ],
+        "propositionIds": [
+          "recovered-source:42:proposition:0"
+        ]
+      }
+    ],
+    "dependencyStatus": "available",
+    "dependencyVerified": true
+  }
+}

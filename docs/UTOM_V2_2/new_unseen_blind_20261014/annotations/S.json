@@ -1,0 +1,741 @@
+{
+  "id": "S",
+  "raw": "A hálózati kártya adatlapja 2,4 gigabitet ad meg másodpercenként, de ezt a labor munkatársai még nem igazolták. A mérési felelős az ügyfélszolgálatnak azt írta, hogy csúcsidőben nem 35, hanem akár 38 százalékkal is visszaeshet az átvitel, nem pedig 38 százalékra. Az adatlap gyártója nem azonosítható a hiányos fejlécből.",
+  "rawSha256": "af340ed7fa41e39e6e10337ec5be1921955466e5b722b96ce24d4da683629f1f",
+  "annotationSha256": "6f0d9139e3d8f7cf975b4cd66e588ddb94c5b779874f209575a4b65242be0a34",
+  "sentenceCount": 3,
+  "tokenCount": 55,
+  "environmentFingerprint": "143242eddc17f94ea729a1b430c5eac9d5e47dd7d27b5ebdd29c7c6961882f47",
+  "model": {
+    "type": "ready",
+    "model": "hu_core_news_md",
+    "version": "3.8.0",
+    "loadMs": 1160.3809050000002
+  },
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 11
+      },
+      {
+        "start": 2,
+        "end": 10,
+        "text": "hálózati",
+        "lemma": "hálózati",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 11
+      },
+      {
+        "start": 11,
+        "end": 17,
+        "text": "kártya",
+        "lemma": "kártya",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 18
+      },
+      {
+        "start": 18,
+        "end": 27,
+        "text": "adatlapja",
+        "lemma": "adatlap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 42
+      },
+      {
+        "start": 28,
+        "end": 31,
+        "text": "2,4",
+        "lemma": "2,4",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Frac",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 32
+      },
+      {
+        "start": 32,
+        "end": 41,
+        "text": "gigabitet",
+        "lemma": "gigabit",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 42
+      },
+      {
+        "start": 42,
+        "end": 44,
+        "text": "ad",
+        "lemma": "ad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 42
+      },
+      {
+        "start": 45,
+        "end": 48,
+        "text": "meg",
+        "lemma": "meg",
+        "pos": "PART",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 42
+      },
+      {
+        "start": 49,
+        "end": 64,
+        "text": "másodpercenként",
+        "lemma": "másodperc",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dis",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 42
+      },
+      {
+        "start": 64,
+        "end": 65,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 101
+      },
+      {
+        "start": 66,
+        "end": 68,
+        "text": "de",
+        "lemma": "de",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 101
+      },
+      {
+        "start": 69,
+        "end": 72,
+        "text": "ezt",
+        "lemma": "ez",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "obj",
+        "headStart": 101
+      },
+      {
+        "start": 73,
+        "end": 74,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 75
+      },
+      {
+        "start": 75,
+        "end": 80,
+        "text": "labor",
+        "lemma": "labor",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 81
+      },
+      {
+        "start": 81,
+        "end": 92,
+        "text": "munkatársai",
+        "lemma": "munkatárs",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 101
+      },
+      {
+        "start": 93,
+        "end": 96,
+        "text": "még",
+        "lemma": "még",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:tlocy",
+        "headStart": 101
+      },
+      {
+        "start": 97,
+        "end": 100,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 101
+      },
+      {
+        "start": 101,
+        "end": 110,
+        "text": "igazolták",
+        "lemma": "igazol",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 42
+      },
+      {
+        "start": 110,
+        "end": 111,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 42
+      },
+      {
+        "start": 112,
+        "end": 113,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 121
+      },
+      {
+        "start": 114,
+        "end": 120,
+        "text": "mérési",
+        "lemma": "mérési",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 121
+      },
+      {
+        "start": 121,
+        "end": 128,
+        "text": "felelős",
+        "lemma": "felelős",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 155
+      },
+      {
+        "start": 129,
+        "end": 131,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 132
+      },
+      {
+        "start": 132,
+        "end": 150,
+        "text": "ügyfélszolgálatnak",
+        "lemma": "ügyfélszolgálat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 155
+      },
+      {
+        "start": 151,
+        "end": 154,
+        "text": "azt",
+        "lemma": "az",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "obj",
+        "headStart": 155
+      },
+      {
+        "start": 155,
+        "end": 159,
+        "text": "írta",
+        "lemma": "ír",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 155
+      },
+      {
+        "start": 159,
+        "end": 160,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 215
+      },
+      {
+        "start": 161,
+        "end": 165,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 215
+      },
+      {
+        "start": 166,
+        "end": 177,
+        "text": "csúcsidőben",
+        "lemma": "csúcsidő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 215
+      },
+      {
+        "start": 178,
+        "end": 181,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 182
+      },
+      {
+        "start": 182,
+        "end": 184,
+        "text": "35",
+        "lemma": "35",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 200
+      },
+      {
+        "start": 184,
+        "end": 185,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 197
+      },
+      {
+        "start": 186,
+        "end": 191,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 197
+      },
+      {
+        "start": 192,
+        "end": 196,
+        "text": "akár",
+        "lemma": "akár",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 197
+      },
+      {
+        "start": 197,
+        "end": 199,
+        "text": "38",
+        "lemma": "38",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 182
+      },
+      {
+        "start": 200,
+        "end": 211,
+        "text": "százalékkal",
+        "lemma": "százalék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ins",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 215
+      },
+      {
+        "start": 212,
+        "end": 214,
+        "text": "is",
+        "lemma": "is",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 200
+      },
+      {
+        "start": 215,
+        "end": 226,
+        "text": "visszaeshet",
+        "lemma": "visszaeshet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Pot",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 155
+      },
+      {
+        "start": 227,
+        "end": 229,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 230
+      },
+      {
+        "start": 230,
+        "end": 237,
+        "text": "átvitel",
+        "lemma": "átvitel",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 215
+      },
+      {
+        "start": 237,
+        "end": 238,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 252
+      },
+      {
+        "start": 239,
+        "end": 242,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 252
+      },
+      {
+        "start": 243,
+        "end": 248,
+        "text": "pedig",
+        "lemma": "pedig",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 252
+      },
+      {
+        "start": 249,
+        "end": 251,
+        "text": "38",
+        "lemma": "38",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 252
+      },
+      {
+        "start": 252,
+        "end": 262,
+        "text": "százalékra",
+        "lemma": "százalék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 215
+      },
+      {
+        "start": 262,
+        "end": 263,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 155
+      },
+      {
+        "start": 264,
+        "end": 266,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 267
+      },
+      {
+        "start": 267,
+        "end": 274,
+        "text": "adatlap",
+        "lemma": "adatlap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 275
+      },
+      {
+        "start": 275,
+        "end": 283,
+        "text": "gyártója",
+        "lemma": "gyártó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 288
+      },
+      {
+        "start": 284,
+        "end": 287,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 288
+      },
+      {
+        "start": 288,
+        "end": 300,
+        "text": "azonosítható",
+        "lemma": "azonosítható",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 288
+      },
+      {
+        "start": 301,
+        "end": 302,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 311
+      },
+      {
+        "start": 303,
+        "end": 310,
+        "text": "hiányos",
+        "lemma": "hiányos",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 311
+      },
+      {
+        "start": 311,
+        "end": 320,
+        "text": "fejlécből",
+        "lemma": "fejléc",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 288
+      },
+      {
+        "start": 320,
+        "end": 321,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 288
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 111,
+        "text": "A hálózati kártya adatlapja 2,4 gigabitet ad meg másodpercenként, de ezt a labor munkatársai még nem igazolták."
+      },
+      {
+        "start": 112,
+        "end": 263,
+        "text": "A mérési felelős az ügyfélszolgálatnak azt írta, hogy csúcsidőben nem 35, hanem akár 38 százalékkal is visszaeshet az átvitel, nem pedig 38 százalékra."
+      },
+      {
+        "start": 264,
+        "end": 321,
+        "text": "Az adatlap gyártója nem azonosítható a hiányos fejlécből."
+      }
+    ],
+    "entities": []
+  }
+}

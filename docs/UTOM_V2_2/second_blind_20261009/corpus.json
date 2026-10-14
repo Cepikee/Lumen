@@ -1,0 +1,107 @@
+[
+  {
+    "id": "P",
+    "domain": "politika",
+    "text": "A Reggeli Hír értesülése szerint a kormányszóvivő bejelentette, hogy a kabinet december 3-án tárgyalja a csomagot. Nem a miniszter, hanem az államtitkár írta alá a levelet. Az ellenzék nem támogatja a javaslatot.",
+    "editorialSentenceCount": 3,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "M",
+    "domain": "önkormányzat",
+    "text": "Kovács Ilona polgármester a képviselőknek elmondta, hogy a város 2029-ben 64 bérlakást újít fel. A negyedik kerületben július végéig várják a pályázatokat.",
+    "editorialSentenceCount": 2,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "E",
+    "domain": "gazdaság",
+    "text": "A Delta Alap 22 százalékos részesedést vásárolt az üzemben, miközben a termelés 8 százalékkal esett. Az elemző szerint a tavalyi 40 millió forint nem bevétel, hanem veszteség volt.",
+    "editorialSentenceCount": 2,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "C",
+    "domain": "vállalati hír",
+    "text": "„A rendeléseket nem mondtuk le” – hangsúlyozta Fekete Márton, a gyár igazgatója. A gyár október 8-án 06:45-kor újraindította a harmadik gyártósort. Az új műszakban 31 dolgozó kapott helyet.",
+    "editorialSentenceCount": 3,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "R",
+    "domain": "rendőrség",
+    "text": "A kapitányság a lapnak cáfolta, hogy a 52 éves sofőr 110 km/h-val hajtott volna át a hídon. Később a szakértő azt közölte: „A mérés nem volt hiteles.”",
+    "editorialSentenceCount": 2,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "B",
+    "domain": "baleset",
+    "text": "A mentőautó mellett a nő két gyereket kísért a buszhoz. A sérülteket ellátták, a sofőr vagy az utas viszont még a helyszínen maradt.",
+    "editorialSentenceCount": 2,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "S",
+    "domain": "sport",
+    "text": "A selejtező ötödik fordulójában Nagy Emese a második helyen végzett. Bence lett az első, de a harmadik helyet Bori vagy Noémi szerezte meg. Az edző így fogalmazott: „Ennél többet reméltünk.”",
+    "editorialSentenceCount": 3,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "W",
+    "domain": "időjárás",
+    "text": "Ha a széllökések sebessége meghaladja a 75 kilométert óránként, felfüggesztik a kompjáratot. A meteorológus szerint az éjszakai 4 fokhoz képest délután 9 fokot mérhetnek.",
+    "editorialSentenceCount": 2,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "T",
+    "domain": "közlekedés",
+    "text": "A szolgáltató az utasoknak jelezte, hogy nem augusztus 6-án, hanem augusztus 9-én nyitják meg az alagutat. A második napon 14 vonat közlekedik, egy szerelvény pedig legfeljebb 240 utast vihet.",
+    "editorialSentenceCount": 2,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "I",
+    "domain": "technológia",
+    "text": "A kutatócsoport vezetője, Szabó Dénes szerint a rendszer másodpercenként 800 csomagot kezel. Nem a szoftvert, hanem az érzékelőt cserélte ki Tóth Éva. A próbát három órán át végezték.",
+    "editorialSentenceCount": 3,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "H",
+    "domain": "egészségügy",
+    "text": "A klinika vezetője közölte: „A várólista nem 90, hanem 72 főből áll.” „Új rendelőt egyelőre nem nyitunk” – válaszolta az igazgató a betegnek.",
+    "editorialSentenceCount": 2,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "O",
+    "domain": "oktatás",
+    "text": "Az iskola nem 18 tanulót, hanem 26-ot fogad a táborban. A jelentkezés szeptember 2-ig tart; a harmadik nap programját később hirdetik ki.",
+    "editorialSentenceCount": 2,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "N",
+    "domain": "energia",
+    "text": "A beruházás második szakaszában az Északi Energia Zrt. 36 megawatt kapacitást telepített. A hatóság nem 7, hanem 5 százalékos díjemelést engedélyezett. A bizottság által kiválasztott vállalkozó nincs megnevezve.",
+    "editorialSentenceCount": 3,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "K",
+    "domain": "tudomány",
+    "text": "A folyóirat azt írja, hogy a labor szóvivője szerint a kísérlet 2030-ban kezdődhet el. „A kilencedik mérés hibás volt” – mondta Kiss Áron; a javítást november 11-re ígérte.",
+    "editorialSentenceCount": 2,
+    "origin": "original synthetic news-like holdout; not a published article"
+  },
+  {
+    "id": "F",
+    "domain": "fogyasztói árhír",
+    "text": "A Fenyő Piac nem 620, hanem 580 forintért kínálja a kenyeret; ez 40 forintos csökkentés. Bár a 67 éves vásárló szerint olcsóbb lett, a 2 kilogrammos csomag árát nem közölték.",
+    "editorialSentenceCount": 2,
+    "origin": "original synthetic news-like holdout; not a published article"
+  }
+]

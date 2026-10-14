@@ -1,0 +1,13 @@
+"use strict";
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),cp=require('node:child_process');
+const dir=path.resolve('docs/UTOM_V2_2/morph_clause'); fs.mkdirSync(dir,{recursive:true});
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const files=['lib/v2/deterministic-semantic.js','lib/v2/entity-extraction-provider.js','lib/v22/deterministic-text-provider.cjs','package.json','package-lock.json','AGENTS.md','CLAUDE.md','docs.zip'];
+for(const root of ['docs/UTOM_V2_2/huspacy_binding','docs/UTOM_V2_2/local_nlp','scripts/experimental']) for(const file of fs.readdirSync(root)) if(fs.statSync(path.join(root,file)).isFile()) files.push(path.join(root,file));
+const git=(...args)=>cp.execFileSync('git',args,{encoding:'utf8'}).trim();
+const status=git('status','--porcelain=v1','-uall'); const diff=cp.execFileSync('git',['diff','--binary','HEAD']);
+const freeze={at:new Date().toISOString(),branch:git('branch','--show-current'),head:git('rev-parse','HEAD'),remoteTrackingHead:git('rev-parse','origin/develop/utom-recovery'),status,diffSha256:hash(diff),files:Object.fromEntries(files.map(p=>[p.replaceAll('\\','/'),hash(fs.readFileSync(p))]))};
+fs.writeFileSync(path.join(dir,'00_baseline_freeze.json'),JSON.stringify(freeze,null,2)+'\n',{flag:'wx'});
+const audit=cp.spawnSync('npm.cmd',['audit','--omit=dev','--json'],{shell:true,encoding:'utf8'});
+fs.writeFileSync(path.join(dir,'01_production_audit_baseline.json'),audit.stdout,{flag:'wx'});
+console.log({files:files.length,head:freeze.head,auditExit:audit.status});

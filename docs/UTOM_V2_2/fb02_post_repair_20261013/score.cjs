@@ -1,0 +1,23 @@
+const fs=require('node:fs'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+const d=__dirname,raw=require('./FB02_POST_REPAIR_raw.json'),prior=require('../fb01_post_repair_20261012/FB01_POST_REPAIR_raw.json');
+const before=require('../fb01_post_repair_20261012/labels.json');
+const sourceView=o=>({frames:o.frames.map(f=>({source:f.source,claimOwner:f.claimOwner,recipient:f.recipient,reportingActor:f.reportingActor,attribution:f.attribution})),chains:o.attributionChains});
+for(let i=0;i<raw.rows.length;i++)if(raw.rows[i].id!=='O')assert.deepEqual(sourceView(raw.rows[i].output),sourceView(prior.rows[i].output),raw.rows[i].id);
+const o=raw.rows.find(r=>r.id==='O').output;
+assert.equal(o.frames[0].source.mention,'üzletlánc');assert.equal(o.frames[0].sourceEvidence.resolutionStatus,'resolved');
+assert.equal(o.reportingNominalRelations[0].sourceArtifact.textSpan,'árjegyzéke');
+const labels=before.items.map(x=>({...x,beforeLabel:x.label,label:x.id==='O1'?'CORRECT_RESOLVED':x.label,reason:x.id==='O1'?'Possessor üzletlánc is the source entity; árjegyzéke retained as artifact; case/possessive/obl path links to the kerül claim. Numeric rate remains unchanged/unresolved.':x.reason,review:'FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.'}));
+const names=['CORRECT_RESOLVED','WRONG_RESOLVED','CORRECT_UNRESOLVED','MISSED_DEFENSIBLE_RESOLUTION','NOT_APPLICABLE'];
+const counts=xs=>Object.fromEntries(names.map(k=>[k,xs.filter(x=>x.label===k).length]));const c=counts(labels),resolved=c.CORRECT_RESOLVED+c.WRONG_RESOLVED;
+let total=0,exact=0;const unique=new Map(),failures=[];
+function walk(x,text,path,id){if(!x||typeof x!=='object')return;if(Number.isInteger(x.start)&&Number.isInteger(x.end)&&typeof x.textSpan==='string'){total++;const ok=x.start>=0&&x.end<=text.length&&text.slice(x.start,x.end)===x.textSpan;if(ok)exact++;else failures.push({id,path});unique.set(id+'|'+x.start+'|'+x.end+'|'+x.textSpan,ok);}for(const[k,v]of Object.entries(x))if(v&&typeof v==='object')walk(v,text,path+'/'+k,id);}
+raw.rows.forEach((r,i)=>walk(r.output,r.text,'/rows/'+i+'/output',r.id));
+const metrics={totalDecisions:120,...c,resolved,resolvedPrecision:c.CORRECT_RESOLVED/resolved,resolutionRate:resolved/120,dimensions:Object.fromEntries([...new Set(labels.map(x=>x.dimension))].map(k=>[k,counts(labels.filter(x=>x.dimension===k))])),evidence:{totalSpanOccurrences:total,exactRawOffsetMatches:exact,failures,uniqueSpans:unique.size,uniqueExact:[...unique.values()].filter(Boolean).length},remainingWrongResolved:labels.filter(x=>x.label==='WRONG_RESOLVED').map(x=>x.id)};
+fs.writeFileSync(d+'/labels.json',JSON.stringify({kind:'POST_REPAIR_NOT_BLIND',items:labels},null,2),{flag:'wx'});
+fs.writeFileSync(d+'/metrics.json',JSON.stringify(metrics,null,2),{flag:'wx'});
+fs.writeFileSync(d+'/human_item_audit.md','# FB02 same frozen 120 decisions\n\nAssistant adjudication, not independent human review. Original gold untouched. O1 alone changes label; all 63 misses retained. Non-O source identities/chains and all numeric/actor/scope outputs deep-equal. C/D/E/H/K/M/N/S changes add relation evidence/target metadata; J gains an unresolved artifact relation, no source identity. No correctness credit for unresolved J3. No new source asserted except O1.\n\n'+labels.map(x=>`## ${x.id}: ${x.beforeLabel} → ${x.label}\n\nGold: ${x.expectation}\n\nPOST: ${x.reason}\n\nReferences: ${x.rawRefs.join(', ')}\n`).join('\n'),{flag:'wx'});
+const freeze=require('./freeze.json'),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),changed=[];
+for(const[p,h]of Object.entries(freeze.hashes))if(!fs.existsSync(p)||sha(p)!==h)changed.push(p);
+const allowed=['scripts/experimental/source-composition-safety.cjs'];
+const verification={createdAt:new Date().toISOString(),changedPreexistingFiles:changed,unexpectedChanges:changed.filter(p=>!allowed.includes(p)),originalFreshUnchanged:!changed.some(p=>p.startsWith('docs/UTOM_V2_2/fresh_blind_20261012/')),fb01Unchanged:!changed.some(p=>p.startsWith('docs/UTOM_V2_2/fb01_post_repair_20261012/')),protectedFilesUnchanged:['AGENTS.md','CLAUDE.md','docs.zip'].every(p=>freeze.hashes[p]===sha(p)),postHash:sha(d+'/FB02_POST_REPAIR_raw.json'),modifiedCodeHashes:Object.fromEntries(allowed.map(p=>[p,sha(p)])),invariance:require('./invariance.json'),tests:fs.readFileSync(d+'/tests_after.txt','utf8').split('\n').filter(l=>/^# (tests|pass|fail) /.test(l))};
+fs.writeFileSync(d+'/verification.json',JSON.stringify(verification,null,2),{flag:'wx'});console.log(JSON.stringify({metrics,verification},null,2));

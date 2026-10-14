@@ -1,0 +1,5287 @@
+[
+  {
+    "id": "h01",
+    "output": {
+      "entities": [
+        {
+          "mention": "Eszter",
+          "normalized": "eszter",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 0,
+          "end": 6,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 6,
+            "textSpan": "Eszter"
+          },
+          "identityKey": "person|eszter"
+        },
+        {
+          "mention": "Márton",
+          "normalized": "márton",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 22,
+          "end": 28,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 22,
+            "end": 28,
+            "textSpan": "Márton"
+          },
+          "identityKey": "person|márton"
+        },
+        {
+          "mention": "Judit",
+          "normalized": "judit",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 44,
+          "end": 49,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 44,
+            "end": 49,
+            "textSpan": "Judit"
+          },
+          "identityKey": "person|judit"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter"
+          },
+          "actor": {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter"
+          },
+          "action": "kap",
+          "actionSpan": {
+            "start": 64,
+            "end": 70,
+            "textSpan": "kapott"
+          },
+          "object": "százalék",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 38,
+              "unit": "%",
+              "semanticKind": "percentage_share",
+              "property": "százalék",
+              "raw": "38 százalékot",
+              "start": 7,
+              "end": 20,
+              "evidenceSpan": {
+                "start": 7,
+                "end": 20,
+                "textSpan": "38 százalékot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Eszter",
+                "normalized": "eszter",
+                "type": "person",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 0,
+                "end": 6,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 0,
+                  "end": 6,
+                  "textSpan": "Eszter"
+                },
+                "identityKey": "person|eszter"
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 20,
+            "textSpan": "Eszter 38 százalékot"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 20,
+            "textSpan": "Eszter 38 százalékot"
+          },
+          "canonicalProjectionAllowed": false,
+          "actionInherited": true
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Márton",
+            "normalized": "márton",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 22,
+            "end": 28,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 22,
+              "end": 28,
+              "textSpan": "Márton"
+            },
+            "identityKey": "person|márton"
+          },
+          "actor": {
+            "mention": "Márton",
+            "normalized": "márton",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 22,
+            "end": 28,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 22,
+              "end": 28,
+              "textSpan": "Márton"
+            },
+            "identityKey": "person|márton"
+          },
+          "action": "kap",
+          "actionSpan": {
+            "start": 64,
+            "end": 70,
+            "textSpan": "kapott"
+          },
+          "object": "százalék",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 34,
+              "unit": "%",
+              "semanticKind": "percentage_share",
+              "property": "százalék",
+              "raw": "34 százalékot",
+              "start": 29,
+              "end": 42,
+              "evidenceSpan": {
+                "start": 29,
+                "end": 42,
+                "textSpan": "34 százalékot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Márton",
+                "normalized": "márton",
+                "type": "person",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 22,
+                "end": 28,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 22,
+                  "end": 28,
+                  "textSpan": "Márton"
+                },
+                "identityKey": "person|márton"
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 22,
+            "end": 42,
+            "textSpan": "Márton 34 százalékot"
+          },
+          "propositionSpan": {
+            "start": 22,
+            "end": 42,
+            "textSpan": "Márton 34 százalékot"
+          },
+          "canonicalProjectionAllowed": false,
+          "actionInherited": true
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Judit",
+            "normalized": "judit",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 44,
+            "end": 49,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 44,
+              "end": 49,
+              "textSpan": "Judit"
+            },
+            "identityKey": "person|judit"
+          },
+          "actor": {
+            "mention": "Judit",
+            "normalized": "judit",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 44,
+            "end": 49,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 44,
+              "end": 49,
+              "textSpan": "Judit"
+            },
+            "identityKey": "person|judit"
+          },
+          "action": "kap",
+          "actionSpan": {
+            "start": 64,
+            "end": 70,
+            "textSpan": "kapott"
+          },
+          "object": "százalék",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 28,
+              "unit": "%",
+              "semanticKind": "percentage_share",
+              "property": "százalék",
+              "raw": "28 százalékot",
+              "start": 50,
+              "end": 63,
+              "evidenceSpan": {
+                "start": 50,
+                "end": 63,
+                "textSpan": "28 százalékot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Judit",
+                "normalized": "judit",
+                "type": "person",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 44,
+                "end": 49,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 44,
+                  "end": 49,
+                  "textSpan": "Judit"
+                },
+                "identityKey": "person|judit"
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 44,
+            "end": 71,
+            "textSpan": "Judit 28 százalékot kapott."
+          },
+          "propositionSpan": {
+            "start": 44,
+            "end": 71,
+            "textSpan": "Judit 28 százalékot kapott."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h02",
+    "output": {
+      "entities": [
+        {
+          "mention": "Debrecenben",
+          "normalized": "debrecen",
+          "type": "location",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 0,
+          "end": 11,
+          "case": "Ine",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 11,
+            "textSpan": "Debrecenben"
+          },
+          "identityKey": "location|debrecen"
+        },
+        {
+          "mention": "Miskolcon",
+          "normalized": "miskolc",
+          "type": "location",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 16,
+          "end": 25,
+          "case": "Sup",
+          "evidenceSpan": {
+            "start": 16,
+            "end": 25,
+            "textSpan": "Miskolcon"
+          },
+          "identityKey": "location|miskolc"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Debrecenben",
+            "normalized": "debrecen",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 11,
+            "case": "Ine",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 11,
+              "textSpan": "Debrecenben"
+            },
+            "identityKey": "location|debrecen"
+          },
+          "actor": {
+            "mention": "Debrecenben",
+            "normalized": "debrecen",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 11,
+            "case": "Ine",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 11,
+              "textSpan": "Debrecenben"
+            },
+            "identityKey": "location|debrecen"
+          },
+          "action": "mér",
+          "actionSpan": {
+            "start": 35,
+            "end": 41,
+            "textSpan": "mértek"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 26,
+              "unit": "C",
+              "semanticKind": "temperature",
+              "property": "fok",
+              "raw": "26",
+              "start": 12,
+              "end": 14,
+              "evidenceSpan": {
+                "start": 12,
+                "end": 14,
+                "textSpan": "26"
+              },
+              "inheritedUnit": true,
+              "unitEvidence": {
+                "start": 26,
+                "end": 34,
+                "textSpan": "29 fokot"
+              },
+              "subject": {
+                "mention": "Debrecenben",
+                "normalized": "debrecen",
+                "type": "location",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 0,
+                "end": 11,
+                "case": "Ine",
+                "evidenceSpan": {
+                  "start": 0,
+                  "end": 11,
+                  "textSpan": "Debrecenben"
+                },
+                "identityKey": "location|debrecen"
+              }
+            }
+          ],
+          "time": [],
+          "location": {
+            "mention": "Debrecenben",
+            "normalized": "debrecen",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 11,
+            "case": "Ine",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 11,
+              "textSpan": "Debrecenben"
+            },
+            "identityKey": "location|debrecen"
+          },
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.65,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 14,
+            "textSpan": "Debrecenben 26"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 14,
+            "textSpan": "Debrecenben 26"
+          },
+          "canonicalProjectionAllowed": false,
+          "actionInherited": true
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Miskolcon",
+            "normalized": "miskolc",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 16,
+            "end": 25,
+            "case": "Sup",
+            "evidenceSpan": {
+              "start": 16,
+              "end": 25,
+              "textSpan": "Miskolcon"
+            },
+            "identityKey": "location|miskolc"
+          },
+          "actor": {
+            "mention": "Miskolcon",
+            "normalized": "miskolc",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 16,
+            "end": 25,
+            "case": "Sup",
+            "evidenceSpan": {
+              "start": 16,
+              "end": 25,
+              "textSpan": "Miskolcon"
+            },
+            "identityKey": "location|miskolc"
+          },
+          "action": "mér",
+          "actionSpan": {
+            "start": 35,
+            "end": 41,
+            "textSpan": "mértek"
+          },
+          "object": "fok",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 29,
+              "unit": "C",
+              "semanticKind": "temperature",
+              "property": "fok",
+              "raw": "29 fokot",
+              "start": 26,
+              "end": 34,
+              "evidenceSpan": {
+                "start": 26,
+                "end": 34,
+                "textSpan": "29 fokot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Miskolcon",
+                "normalized": "miskolc",
+                "type": "location",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 16,
+                "end": 25,
+                "case": "Sup",
+                "evidenceSpan": {
+                  "start": 16,
+                  "end": 25,
+                  "textSpan": "Miskolcon"
+                },
+                "identityKey": "location|miskolc"
+              }
+            }
+          ],
+          "time": [],
+          "location": {
+            "mention": "Miskolcon",
+            "normalized": "miskolc",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 16,
+            "end": 25,
+            "case": "Sup",
+            "evidenceSpan": {
+              "start": 16,
+              "end": 25,
+              "textSpan": "Miskolcon"
+            },
+            "identityKey": "location|miskolc"
+          },
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8500000000000001,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 16,
+            "end": 42,
+            "textSpan": "Miskolcon 29 fokot mértek."
+          },
+          "propositionSpan": {
+            "start": 16,
+            "end": 42,
+            "textSpan": "Miskolcon 29 fokot mértek."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h03",
+    "output": {
+      "entities": [
+        {
+          "mention": "kórházban",
+          "normalized": "kórház",
+          "type": "organization",
+          "subtype": "institution",
+          "sourceRole": "official",
+          "case": "Ine",
+          "start": 27,
+          "end": 36,
+          "evidenceSpan": {
+            "start": 27,
+            "end": 36,
+            "textSpan": "kórházban"
+          },
+          "identityKey": "organization|kórház"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "rendelőben",
+            "normalized": "rendelő",
+            "type": "referent",
+            "case": "Ine",
+            "start": 2,
+            "end": 12,
+            "identityKey": "local|rendelő",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 12,
+              "textSpan": "rendelőben"
+            }
+          },
+          "actor": {
+            "mention": "rendelőben",
+            "normalized": "rendelő",
+            "type": "referent",
+            "case": "Ine",
+            "start": 2,
+            "end": 12,
+            "identityKey": "local|rendelő",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 12,
+              "textSpan": "rendelőben"
+            }
+          },
+          "action": "vizsgál",
+          "actionSpan": {
+            "start": 44,
+            "end": 54,
+            "textSpan": "vizsgáltak"
+          },
+          "object": "beteg",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 84,
+              "unit": "beteg",
+              "semanticKind": "count",
+              "property": "beteg",
+              "raw": "84 beteget",
+              "start": 13,
+              "end": 23,
+              "evidenceSpan": {
+                "start": 13,
+                "end": 23,
+                "textSpan": "84 beteget"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "rendelőben",
+                "normalized": "rendelő",
+                "type": "referent",
+                "case": "Ine",
+                "start": 2,
+                "end": 12,
+                "identityKey": "local|rendelő",
+                "evidenceSpan": {
+                  "start": 2,
+                  "end": 12,
+                  "textSpan": "rendelőben"
+                }
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.65,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 23,
+            "textSpan": "A rendelőben 84 beteget"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 23,
+            "textSpan": "A rendelőben 84 beteget"
+          },
+          "canonicalProjectionAllowed": false,
+          "actionInherited": true
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "kórházban",
+            "normalized": "kórház",
+            "type": "organization",
+            "subtype": "institution",
+            "sourceRole": "official",
+            "case": "Ine",
+            "start": 27,
+            "end": 36,
+            "evidenceSpan": {
+              "start": 27,
+              "end": 36,
+              "textSpan": "kórházban"
+            },
+            "identityKey": "organization|kórház"
+          },
+          "actor": {
+            "mention": "kórházban",
+            "normalized": "kórház",
+            "type": "organization",
+            "subtype": "institution",
+            "sourceRole": "official",
+            "case": "Ine",
+            "start": 27,
+            "end": 36,
+            "evidenceSpan": {
+              "start": 27,
+              "end": 36,
+              "textSpan": "kórházban"
+            },
+            "identityKey": "organization|kórház"
+          },
+          "action": "vizsgál",
+          "actionSpan": {
+            "start": 44,
+            "end": 54,
+            "textSpan": "vizsgáltak"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 126,
+              "unit": "beteg",
+              "semanticKind": "count",
+              "property": "beteg",
+              "raw": "126-ot",
+              "start": 37,
+              "end": 43,
+              "evidenceSpan": {
+                "start": 37,
+                "end": 43,
+                "textSpan": "126-ot"
+              },
+              "inheritedUnit": true,
+              "unitEvidence": {
+                "start": 13,
+                "end": 23,
+                "textSpan": "84 beteget"
+              },
+              "subject": {
+                "mention": "kórházban",
+                "normalized": "kórház",
+                "type": "organization",
+                "subtype": "institution",
+                "sourceRole": "official",
+                "case": "Ine",
+                "start": 27,
+                "end": 36,
+                "evidenceSpan": {
+                  "start": 27,
+                  "end": 36,
+                  "textSpan": "kórházban"
+                },
+                "identityKey": "organization|kórház"
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.65,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 25,
+            "end": 55,
+            "textSpan": "a kórházban 126-ot vizsgáltak."
+          },
+          "propositionSpan": {
+            "start": 25,
+            "end": 55,
+            "textSpan": "a kórházban 126-ot vizsgáltak."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h04",
+    "output": {
+      "entities": [
+        {
+          "mention": "Rába Erőmű",
+          "normalized": "rába erőmű",
+          "type": "organization",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 2,
+          "end": 12,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 12,
+            "textSpan": "Rába Erőmű"
+          },
+          "identityKey": "organization|rába erőmű"
+        },
+        {
+          "mention": "Mátra Erőmű",
+          "normalized": "mátra erőmű",
+          "type": "organization",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 38,
+          "end": 49,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 38,
+            "end": 49,
+            "textSpan": "Mátra Erőmű"
+          },
+          "identityKey": "organization|mátra erőmű"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Rába Erőmű",
+            "normalized": "rába erőmű",
+            "type": "organization",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 2,
+            "end": 12,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 12,
+              "textSpan": "Rába Erőmű"
+            },
+            "identityKey": "organization|rába erőmű"
+          },
+          "actor": {
+            "mention": "Rába Erőmű",
+            "normalized": "rába erőmű",
+            "type": "organization",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 2,
+            "end": 12,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 12,
+              "textSpan": "Rába Erőmű"
+            },
+            "identityKey": "organization|rába erőmű"
+          },
+          "action": "termel",
+          "actionSpan": {
+            "start": 27,
+            "end": 34,
+            "textSpan": "termelt"
+          },
+          "object": "megawatt",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 18,
+              "unit": "MW",
+              "semanticKind": "count",
+              "property": "megawatt",
+              "raw": "18 megawattot",
+              "start": 13,
+              "end": 26,
+              "evidenceSpan": {
+                "start": 13,
+                "end": 26,
+                "textSpan": "18 megawattot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Rába Erőmű",
+                "normalized": "rába erőmű",
+                "type": "organization",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 2,
+                "end": 12,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 2,
+                  "end": 12,
+                  "textSpan": "Rába Erőmű"
+                },
+                "identityKey": "organization|rába erőmű"
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 34,
+            "textSpan": "A Rába Erőmű 18 megawattot termelt"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 34,
+            "textSpan": "A Rába Erőmű 18 megawattot termelt"
+          },
+          "canonicalProjectionAllowed": false
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Mátra Erőmű",
+            "normalized": "mátra erőmű",
+            "type": "organization",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 38,
+            "end": 49,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 38,
+              "end": 49,
+              "textSpan": "Mátra Erőmű"
+            },
+            "identityKey": "organization|mátra erőmű"
+          },
+          "actor": {
+            "mention": "Mátra Erőmű",
+            "normalized": "mátra erőmű",
+            "type": "organization",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 38,
+            "end": 49,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 38,
+              "end": 49,
+              "textSpan": "Mátra Erőmű"
+            },
+            "identityKey": "organization|mátra erőmű"
+          },
+          "action": "termel",
+          "actionSpan": {
+            "start": 64,
+            "end": 71,
+            "textSpan": "termelt"
+          },
+          "object": "megawatt",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 22,
+              "unit": "MW",
+              "semanticKind": "count",
+              "property": "megawatt",
+              "raw": "22 megawattot",
+              "start": 50,
+              "end": 63,
+              "evidenceSpan": {
+                "start": 50,
+                "end": 63,
+                "textSpan": "22 megawattot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Mátra Erőmű",
+                "normalized": "mátra erőmű",
+                "type": "organization",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 38,
+                "end": 49,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 38,
+                  "end": 49,
+                  "textSpan": "Mátra Erőmű"
+                },
+                "identityKey": "organization|mátra erőmű"
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 36,
+            "end": 72,
+            "textSpan": "a Mátra Erőmű 22 megawattot termelt."
+          },
+          "propositionSpan": {
+            "start": 36,
+            "end": 72,
+            "textSpan": "a Mátra Erőmű 22 megawattot termelt."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h05",
+    "output": {
+      "entities": [
+        {
+          "mention": "Fenyő Zrt.",
+          "normalized": "fenyő zrt.",
+          "type": "organization",
+          "subtype": "company",
+          "sourceRole": null,
+          "start": 2,
+          "end": 12,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 12,
+            "textSpan": "Fenyő Zrt."
+          },
+          "identityKey": "organization|fenyő zrt."
+        },
+        {
+          "mention": "Tölgy Kft.",
+          "normalized": "tölgy kft.",
+          "type": "organization",
+          "subtype": "company",
+          "sourceRole": null,
+          "start": 34,
+          "end": 44,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 34,
+            "end": 44,
+            "textSpan": "Tölgy Kft."
+          },
+          "identityKey": "organization|tölgy kft."
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Fenyő Zrt.",
+            "normalized": "fenyő zrt.",
+            "type": "organization",
+            "subtype": "company",
+            "sourceRole": null,
+            "start": 2,
+            "end": 12,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 12,
+              "textSpan": "Fenyő Zrt."
+            },
+            "identityKey": "organization|fenyő zrt."
+          },
+          "actor": {
+            "mention": "Fenyő Zrt.",
+            "normalized": "fenyő zrt.",
+            "type": "organization",
+            "subtype": "company",
+            "sourceRole": null,
+            "start": 2,
+            "end": 12,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 12,
+              "textSpan": "Fenyő Zrt."
+            },
+            "identityKey": "organization|fenyő zrt."
+          },
+          "action": "van",
+          "actionSpan": {
+            "start": 70,
+            "end": 74,
+            "textSpan": "volt"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 7000000,
+              "unit": "HUF",
+              "semanticKind": "money",
+              "property": "forint",
+              "raw": "7 millió",
+              "start": 22,
+              "end": 30,
+              "evidenceSpan": {
+                "start": 22,
+                "end": 30,
+                "textSpan": "7 millió"
+              },
+              "inheritedUnit": true,
+              "unitEvidence": {
+                "start": 54,
+                "end": 69,
+                "textSpan": "6 millió forint"
+              },
+              "subject": {
+                "mention": "Fenyő Zrt.",
+                "normalized": "fenyő zrt.",
+                "type": "organization",
+                "subtype": "company",
+                "sourceRole": null,
+                "start": 2,
+                "end": 12,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 2,
+                  "end": 12,
+                  "textSpan": "Fenyő Zrt."
+                },
+                "identityKey": "organization|fenyő zrt."
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 30,
+            "textSpan": "A Fenyő Zrt. bevétele 7 millió"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 30,
+            "textSpan": "A Fenyő Zrt. bevétele 7 millió"
+          },
+          "canonicalProjectionAllowed": false,
+          "actionInherited": true
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Tölgy Kft.",
+            "normalized": "tölgy kft.",
+            "type": "organization",
+            "subtype": "company",
+            "sourceRole": null,
+            "start": 34,
+            "end": 44,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 34,
+              "end": 44,
+              "textSpan": "Tölgy Kft."
+            },
+            "identityKey": "organization|tölgy kft."
+          },
+          "actor": {
+            "mention": "Tölgy Kft.",
+            "normalized": "tölgy kft.",
+            "type": "organization",
+            "subtype": "company",
+            "sourceRole": null,
+            "start": 34,
+            "end": 44,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 34,
+              "end": 44,
+              "textSpan": "Tölgy Kft."
+            },
+            "identityKey": "organization|tölgy kft."
+          },
+          "action": "van",
+          "actionSpan": {
+            "start": 70,
+            "end": 74,
+            "textSpan": "volt"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 6000000,
+              "unit": "HUF",
+              "semanticKind": "money",
+              "property": "forint",
+              "raw": "6 millió forint",
+              "start": 54,
+              "end": 69,
+              "evidenceSpan": {
+                "start": 54,
+                "end": 69,
+                "textSpan": "6 millió forint"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Tölgy Kft.",
+                "normalized": "tölgy kft.",
+                "type": "organization",
+                "subtype": "company",
+                "sourceRole": null,
+                "start": 34,
+                "end": 44,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 34,
+                  "end": 44,
+                  "textSpan": "Tölgy Kft."
+                },
+                "identityKey": "organization|tölgy kft."
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 32,
+            "end": 75,
+            "textSpan": "a Tölgy Kft. bevétele 6 millió forint volt."
+          },
+          "propositionSpan": {
+            "start": 32,
+            "end": 75,
+            "textSpan": "a Tölgy Kft. bevétele 6 millió forint volt."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h06",
+    "output": {
+      "entities": [],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "vendégcsapat",
+            "normalized": "vendégcsapat",
+            "type": "referent",
+            "case": "Nom",
+            "start": 2,
+            "end": 14,
+            "identityKey": "local|vendégcsapat",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 14,
+              "textSpan": "vendégcsapat"
+            }
+          },
+          "actor": {
+            "mention": "vendégcsapat",
+            "normalized": "vendégcsapat",
+            "type": "referent",
+            "case": "Nom",
+            "start": 2,
+            "end": 14,
+            "identityKey": "local|vendégcsapat",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 14,
+              "textSpan": "vendégcsapat"
+            }
+          },
+          "action": "szerez",
+          "actionSpan": {
+            "start": 48,
+            "end": 56,
+            "textSpan": "szerzett"
+          },
+          "object": "gól",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 4,
+              "unit": "gól",
+              "semanticKind": "count",
+              "property": "gól",
+              "raw": "négy gólt",
+              "start": 15,
+              "end": 24,
+              "evidenceSpan": {
+                "start": 15,
+                "end": 24,
+                "textSpan": "négy gólt"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "vendégcsapat",
+                "normalized": "vendégcsapat",
+                "type": "referent",
+                "case": "Nom",
+                "start": 2,
+                "end": 14,
+                "identityKey": "local|vendégcsapat",
+                "evidenceSpan": {
+                  "start": 2,
+                  "end": 14,
+                  "textSpan": "vendégcsapat"
+                }
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 24,
+            "textSpan": "A vendégcsapat négy gólt"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 24,
+            "textSpan": "A vendégcsapat négy gólt"
+          },
+          "canonicalProjectionAllowed": false,
+          "actionInherited": true
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "hazai csapat",
+            "normalized": "hazai csapat",
+            "type": "referent",
+            "case": "Nom",
+            "start": 28,
+            "end": 40,
+            "identityKey": "local|hazai csapat",
+            "evidenceSpan": {
+              "start": 28,
+              "end": 40,
+              "textSpan": "hazai csapat"
+            }
+          },
+          "actor": {
+            "mention": "hazai csapat",
+            "normalized": "hazai csapat",
+            "type": "referent",
+            "case": "Nom",
+            "start": 28,
+            "end": 40,
+            "identityKey": "local|hazai csapat",
+            "evidenceSpan": {
+              "start": 28,
+              "end": 40,
+              "textSpan": "hazai csapat"
+            }
+          },
+          "action": "szerez",
+          "actionSpan": {
+            "start": 48,
+            "end": 56,
+            "textSpan": "szerzett"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 2,
+              "unit": "gól",
+              "semanticKind": "count",
+              "property": "gól",
+              "raw": "kettőt",
+              "start": 41,
+              "end": 47,
+              "evidenceSpan": {
+                "start": 41,
+                "end": 47,
+                "textSpan": "kettőt"
+              },
+              "inheritedUnit": true,
+              "unitEvidence": {
+                "start": 15,
+                "end": 24,
+                "textSpan": "négy gólt"
+              },
+              "subject": {
+                "mention": "hazai csapat",
+                "normalized": "hazai csapat",
+                "type": "referent",
+                "case": "Nom",
+                "start": 28,
+                "end": 40,
+                "identityKey": "local|hazai csapat",
+                "evidenceSpan": {
+                  "start": 28,
+                  "end": 40,
+                  "textSpan": "hazai csapat"
+                }
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 26,
+            "end": 57,
+            "textSpan": "a hazai csapat kettőt szerzett."
+          },
+          "propositionSpan": {
+            "start": 26,
+            "end": 57,
+            "textSpan": "a hazai csapat kettőt szerzett."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h07",
+    "output": {
+      "entities": [
+        {
+          "mention": "iskola",
+          "normalized": "iskola",
+          "type": "organization",
+          "subtype": "institution",
+          "sourceRole": "official",
+          "case": "Nom",
+          "start": 26,
+          "end": 32,
+          "evidenceSpan": {
+            "start": 26,
+            "end": 32,
+            "textSpan": "iskola"
+          },
+          "identityKey": "organization|iskola"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "gimnázium",
+            "normalized": "gimnázium",
+            "type": "referent",
+            "case": "Nom",
+            "start": 2,
+            "end": 11,
+            "identityKey": "local|gimnázium",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 11,
+              "textSpan": "gimnázium"
+            }
+          },
+          "actor": {
+            "mention": "gimnázium",
+            "normalized": "gimnázium",
+            "type": "referent",
+            "case": "Nom",
+            "start": 2,
+            "end": 11,
+            "identityKey": "local|gimnázium",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 11,
+              "textSpan": "gimnázium"
+            }
+          },
+          "action": "vesz",
+          "actionSpan": {
+            "start": 44,
+            "end": 48,
+            "textSpan": "vett"
+          },
+          "object": "diák",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 28,
+              "unit": "diák",
+              "semanticKind": "count",
+              "property": "diák",
+              "raw": "28 diákot",
+              "start": 12,
+              "end": 21,
+              "evidenceSpan": {
+                "start": 12,
+                "end": 21,
+                "textSpan": "28 diákot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "gimnázium",
+                "normalized": "gimnázium",
+                "type": "referent",
+                "case": "Nom",
+                "start": 2,
+                "end": 11,
+                "identityKey": "local|gimnázium",
+                "evidenceSpan": {
+                  "start": 2,
+                  "end": 11,
+                  "textSpan": "gimnázium"
+                }
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 21,
+            "textSpan": "A gimnázium 28 diákot"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 21,
+            "textSpan": "A gimnázium 28 diákot"
+          },
+          "canonicalProjectionAllowed": false,
+          "actionInherited": true
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "iskola",
+            "normalized": "iskola",
+            "type": "organization",
+            "subtype": "institution",
+            "sourceRole": "official",
+            "case": "Nom",
+            "start": 26,
+            "end": 32,
+            "evidenceSpan": {
+              "start": 26,
+              "end": 32,
+              "textSpan": "iskola"
+            },
+            "identityKey": "organization|iskola"
+          },
+          "actor": {
+            "mention": "iskola",
+            "normalized": "iskola",
+            "type": "organization",
+            "subtype": "institution",
+            "sourceRole": "official",
+            "case": "Nom",
+            "start": 26,
+            "end": 32,
+            "evidenceSpan": {
+              "start": 26,
+              "end": 32,
+              "textSpan": "iskola"
+            },
+            "identityKey": "organization|iskola"
+          },
+          "action": "vesz",
+          "actionSpan": {
+            "start": 44,
+            "end": 48,
+            "textSpan": "vett"
+          },
+          "object": "tanuló",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 19,
+              "unit": "tanuló",
+              "semanticKind": "count",
+              "property": "tanuló",
+              "raw": "19 tanulót",
+              "start": 33,
+              "end": 43,
+              "evidenceSpan": {
+                "start": 33,
+                "end": 43,
+                "textSpan": "19 tanulót"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "iskola",
+                "normalized": "iskola",
+                "type": "organization",
+                "subtype": "institution",
+                "sourceRole": "official",
+                "case": "Nom",
+                "start": 26,
+                "end": 32,
+                "evidenceSpan": {
+                  "start": 26,
+                  "end": 32,
+                  "textSpan": "iskola"
+                },
+                "identityKey": "organization|iskola"
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 23,
+            "end": 53,
+            "textSpan": "az iskola 19 tanulót vett fel."
+          },
+          "propositionSpan": {
+            "start": 23,
+            "end": 53,
+            "textSpan": "az iskola 19 tanulót vett fel."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h08",
+    "output": {
+      "entities": [],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "olcsóbb készülék",
+            "normalized": "olcsó készülék",
+            "type": "referent",
+            "case": "Nom",
+            "start": 3,
+            "end": 19,
+            "identityKey": "local|olcsó készülék",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 19,
+              "textSpan": "olcsóbb készülék"
+            }
+          },
+          "actor": {
+            "mention": "olcsóbb készülék",
+            "normalized": "olcsó készülék",
+            "type": "referent",
+            "case": "Nom",
+            "start": 3,
+            "end": 19,
+            "identityKey": "local|olcsó készülék",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 19,
+              "textSpan": "olcsóbb készülék"
+            }
+          },
+          "action": "kerül",
+          "actionSpan": {
+            "start": 56,
+            "end": 61,
+            "textSpan": "kerül"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 86000,
+              "unit": "HUF",
+              "semanticKind": "money",
+              "property": "forint",
+              "raw": "86 ezer",
+              "start": 20,
+              "end": 27,
+              "evidenceSpan": {
+                "start": 20,
+                "end": 27,
+                "textSpan": "86 ezer"
+              },
+              "inheritedUnit": true,
+              "unitEvidence": {
+                "start": 39,
+                "end": 55,
+                "textSpan": "98 ezer forintba"
+              },
+              "subject": {
+                "mention": "olcsóbb készülék",
+                "normalized": "olcsó készülék",
+                "type": "referent",
+                "case": "Nom",
+                "start": 3,
+                "end": 19,
+                "identityKey": "local|olcsó készülék",
+                "evidenceSpan": {
+                  "start": 3,
+                  "end": 19,
+                  "textSpan": "olcsóbb készülék"
+                }
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 27,
+            "textSpan": "Az olcsóbb készülék 86 ezer"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 27,
+            "textSpan": "Az olcsóbb készülék 86 ezer"
+          },
+          "canonicalProjectionAllowed": false,
+          "actionInherited": true
+        },
+        {
+          "sentence": 0,
+          "subject": null,
+          "actor": null,
+          "action": "kerül",
+          "actionSpan": {
+            "start": 56,
+            "end": 61,
+            "textSpan": "kerül"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 98000,
+              "unit": "HUF",
+              "semanticKind": "money",
+              "property": "forint",
+              "raw": "98 ezer forintba",
+              "start": 39,
+              "end": 55,
+              "evidenceSpan": {
+                "start": 39,
+                "end": 55,
+                "textSpan": "98 ezer forintba"
+              },
+              "inheritedUnit": false,
+              "subject": null
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0,
+          "confidencePurpose": "routing_only",
+          "binding": "unresolved",
+          "bindingReason": "missing_subject",
+          "evidenceSpan": {
+            "start": 29,
+            "end": 62,
+            "textSpan": "a drágább 98 ezer forintba kerül."
+          },
+          "propositionSpan": {
+            "start": 29,
+            "end": 62,
+            "textSpan": "a drágább 98 ezer forintba kerül."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h09",
+    "output": {
+      "entities": [
+        {
+          "mention": "Dóra",
+          "normalized": "dóra",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 0,
+          "end": 4,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 4,
+            "textSpan": "Dóra"
+          },
+          "identityKey": "person|dóra"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Dóra",
+            "normalized": "dóra",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 4,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 4,
+              "textSpan": "Dóra"
+            },
+            "identityKey": "person|dóra"
+          },
+          "actor": {
+            "mention": "Dóra",
+            "normalized": "dóra",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 4,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 4,
+              "textSpan": "Dóra"
+            },
+            "identityKey": "person|dóra"
+          },
+          "action": "másol",
+          "actionSpan": {
+            "start": 28,
+            "end": 34,
+            "textSpan": "másolt"
+          },
+          "object": "irat",
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": {
+            "label": "Dóra",
+            "normalized": "dóra",
+            "sourceRole": "reported",
+            "reportingVerb": "elismer",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 14,
+              "textSpan": "Dóra elismerte"
+            },
+            "propositionSpan": {
+              "start": 20,
+              "end": 34,
+              "textSpan": " iratot másolt"
+            }
+          },
+          "polarity": "asserted",
+          "modality": "reported",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": "elismer",
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 34,
+            "textSpan": "Dóra elismerte, hogy iratot másolt"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 34,
+            "textSpan": "Dóra elismerte, hogy iratot másolt"
+          },
+          "canonicalProjectionAllowed": false
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Dóra",
+            "normalized": "dóra",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 4,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 4,
+              "textSpan": "Dóra"
+            },
+            "identityKey": "person|dóra"
+          },
+          "actor": {
+            "mention": "Dóra",
+            "normalized": "dóra",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 4,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 4,
+              "textSpan": "Dóra"
+            },
+            "identityKey": "person|dóra"
+          },
+          "action": "lop",
+          "actionSpan": {
+            "start": 59,
+            "end": 65,
+            "textSpan": "lopott"
+          },
+          "object": "pénz",
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": {
+            "label": "Dóra",
+            "normalized": "dóra",
+            "sourceRole": "reported",
+            "reportingVerb": "tagad",
+            "propositionSpan": {
+              "start": 52,
+              "end": 66,
+              "textSpan": " pénzt lopott."
+            }
+          },
+          "polarity": "denied",
+          "modality": "reported",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": "tagad",
+          "ambiguous": false,
+          "routingConfidence": 0.65,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "coordinated_subject_inheritance",
+          "evidenceSpan": {
+            "start": 36,
+            "end": 66,
+            "textSpan": "de tagadta, hogy pénzt lopott."
+          },
+          "propositionSpan": {
+            "start": 36,
+            "end": 66,
+            "textSpan": "de tagadta, hogy pénzt lopott."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h10",
+    "output": {
+      "entities": [
+        {
+          "mention": "rendőrség",
+          "normalized": "rendőrség",
+          "type": "organization",
+          "subtype": "authority",
+          "sourceRole": "official",
+          "case": "Nom",
+          "start": 2,
+          "end": 11,
+          "evidenceSpan": {
+            "start": 2,
+            "end": 11,
+            "textSpan": "rendőrség"
+          },
+          "identityKey": "organization|rendőrség"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "raktárban",
+            "normalized": "raktár",
+            "type": "referent",
+            "case": "Ine",
+            "start": 22,
+            "end": 31,
+            "identityKey": "local|raktár",
+            "evidenceSpan": {
+              "start": 22,
+              "end": 31,
+              "textSpan": "raktárban"
+            }
+          },
+          "actor": {
+            "mention": "raktárban",
+            "normalized": "raktár",
+            "type": "referent",
+            "case": "Ine",
+            "start": 22,
+            "end": 31,
+            "identityKey": "local|raktár",
+            "evidenceSpan": {
+              "start": 22,
+              "end": 31,
+              "textSpan": "raktárban"
+            }
+          },
+          "action": "talál",
+          "actionSpan": {
+            "start": 41,
+            "end": 49,
+            "textSpan": "találtak"
+          },
+          "object": "irat",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 9,
+              "unit": "irat",
+              "semanticKind": "count",
+              "property": "irat",
+              "raw": "9 iratot",
+              "start": 32,
+              "end": 40,
+              "evidenceSpan": {
+                "start": 32,
+                "end": 40,
+                "textSpan": "9 iratot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "raktárban",
+                "normalized": "raktár",
+                "type": "referent",
+                "case": "Ine",
+                "start": 22,
+                "end": 31,
+                "identityKey": "local|raktár",
+                "evidenceSpan": {
+                  "start": 22,
+                  "end": 31,
+                  "textSpan": "raktárban"
+                }
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": {
+            "label": "rendőrség",
+            "normalized": "rendőrség",
+            "sourceRole": "official",
+            "reportingVerb": "szerint",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 19,
+              "textSpan": "rendőrség szerint"
+            },
+            "propositionSpan": {
+              "start": 19,
+              "end": 50,
+              "textSpan": " a raktárban 9 iratot találtak."
+            }
+          },
+          "polarity": "asserted",
+          "modality": "reported",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.65,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 50,
+            "textSpan": "A rendőrség szerint a raktárban 9 iratot találtak."
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 50,
+            "textSpan": "A rendőrség szerint a raktárban 9 iratot találtak."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h11",
+    "output": {
+      "entities": [],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "oldat",
+            "normalized": "oldat",
+            "type": "referent",
+            "case": "Nom",
+            "start": 20,
+            "end": 25,
+            "identityKey": "local|oldat",
+            "evidenceSpan": {
+              "start": 20,
+              "end": 25,
+              "textSpan": "oldat"
+            }
+          },
+          "actor": {
+            "mention": "oldat",
+            "normalized": "oldat",
+            "type": "referent",
+            "case": "Nom",
+            "start": 20,
+            "end": 25,
+            "identityKey": "local|oldat",
+            "evidenceSpan": {
+              "start": 20,
+              "end": 25,
+              "textSpan": "oldat"
+            }
+          },
+          "action": "reagál",
+          "actionSpan": {
+            "start": 30,
+            "end": 37,
+            "textSpan": "reagált"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": {
+            "label": "kutató",
+            "normalized": "kutató",
+            "sourceRole": "reported",
+            "reportingVerb": "szerint",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 16,
+              "textSpan": "kutató szerint"
+            },
+            "propositionSpan": {
+              "start": 16,
+              "end": 37,
+              "textSpan": " az oldat nem reagált"
+            }
+          },
+          "polarity": "denied",
+          "modality": "reported",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 37,
+            "textSpan": "A kutató szerint az oldat nem reagált"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 37,
+            "textSpan": "A kutató szerint az oldat nem reagált"
+          },
+          "canonicalProjectionAllowed": false
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "labor",
+            "normalized": "labor",
+            "type": "referent",
+            "case": "Nom",
+            "start": 41,
+            "end": 46,
+            "identityKey": "local|labor",
+            "evidenceSpan": {
+              "start": 41,
+              "end": 46,
+              "textSpan": "labor"
+            }
+          },
+          "actor": {
+            "mention": "labor",
+            "normalized": "labor",
+            "type": "referent",
+            "case": "Nom",
+            "start": 41,
+            "end": 46,
+            "identityKey": "local|labor",
+            "evidenceSpan": {
+              "start": 41,
+              "end": 46,
+              "textSpan": "labor"
+            }
+          },
+          "action": "jelent",
+          "actionSpan": {
+            "start": 61,
+            "end": 70,
+            "textSpan": "jelentett"
+          },
+          "object": "hiba",
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 39,
+            "end": 71,
+            "textSpan": "a labor viszont hibát jelentett."
+          },
+          "propositionSpan": {
+            "start": 39,
+            "end": 71,
+            "textSpan": "a labor viszont hibát jelentett."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h12",
+    "output": {
+      "entities": [
+        {
+          "mention": "minisztérium",
+          "normalized": "minisztérium",
+          "type": "organization",
+          "subtype": "institution",
+          "sourceRole": "official",
+          "case": "Nom",
+          "start": 36,
+          "end": 48,
+          "evidenceSpan": {
+            "start": 36,
+            "end": 48,
+            "textSpan": "minisztérium"
+          },
+          "identityKey": "organization|minisztérium"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "termelés",
+            "normalized": "termelés",
+            "type": "referent",
+            "case": "Nom",
+            "start": 19,
+            "end": 27,
+            "identityKey": "local|termelés",
+            "evidenceSpan": {
+              "start": 19,
+              "end": 27,
+              "textSpan": "termelés"
+            }
+          },
+          "actor": {
+            "mention": "termelés",
+            "normalized": "termelés",
+            "type": "referent",
+            "case": "Nom",
+            "start": 19,
+            "end": 27,
+            "identityKey": "local|termelés",
+            "evidenceSpan": {
+              "start": 19,
+              "end": 27,
+              "textSpan": "termelés"
+            }
+          },
+          "action": "nő",
+          "actionSpan": {
+            "start": 28,
+            "end": 32,
+            "textSpan": "nőtt"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": {
+            "label": "gyártó",
+            "normalized": "gyártó",
+            "sourceRole": "reported",
+            "reportingVerb": "szerint",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 16,
+              "textSpan": "gyártó szerint"
+            },
+            "propositionSpan": {
+              "start": 16,
+              "end": 32,
+              "textSpan": " a termelés nőtt"
+            }
+          },
+          "polarity": "asserted",
+          "modality": "reported",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 32,
+            "textSpan": "A gyártó szerint a termelés nőtt"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 32,
+            "textSpan": "A gyártó szerint a termelés nőtt"
+          },
+          "canonicalProjectionAllowed": false
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "minisztérium",
+            "normalized": "minisztérium",
+            "type": "organization",
+            "subtype": "institution",
+            "sourceRole": "official",
+            "case": "Nom",
+            "start": 36,
+            "end": 48,
+            "evidenceSpan": {
+              "start": 36,
+              "end": 48,
+              "textSpan": "minisztérium"
+            },
+            "identityKey": "organization|minisztérium"
+          },
+          "actor": {
+            "mention": "minisztérium",
+            "normalized": "minisztérium",
+            "type": "organization",
+            "subtype": "institution",
+            "sourceRole": "official",
+            "case": "Nom",
+            "start": 36,
+            "end": 48,
+            "evidenceSpan": {
+              "start": 36,
+              "end": 48,
+              "textSpan": "minisztérium"
+            },
+            "identityKey": "organization|minisztérium"
+          },
+          "action": "cáfol",
+          "actionSpan": {
+            "start": 61,
+            "end": 68,
+            "textSpan": "cáfolta"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": {
+            "label": "minisztérium",
+            "normalized": "minisztérium",
+            "sourceRole": "official",
+            "reportingVerb": "cáfol",
+            "evidenceSpan": {
+              "start": 36,
+              "end": 68,
+              "textSpan": "minisztérium viszont ezt cáfolta"
+            },
+            "propositionSpan": {
+              "start": 68,
+              "end": 69,
+              "textSpan": "."
+            }
+          },
+          "polarity": "denied",
+          "modality": "reported",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": "cáfol",
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 34,
+            "end": 69,
+            "textSpan": "a minisztérium viszont ezt cáfolta."
+          },
+          "propositionSpan": {
+            "start": 34,
+            "end": 69,
+            "textSpan": "a minisztérium viszont ezt cáfolta."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h13",
+    "output": {
+      "entities": [
+        {
+          "mention": "Emese",
+          "normalized": "emese",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 3,
+          "end": 8,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 3,
+            "end": 8,
+            "textSpan": "Emese"
+          },
+          "identityKey": "person|emese"
+        },
+        {
+          "mention": "Tamás",
+          "normalized": "tamás",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 32,
+          "end": 37,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 32,
+            "end": 37,
+            "textSpan": "Tamás"
+          },
+          "identityKey": "person|tamás"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Emese",
+            "normalized": "emese",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 3,
+            "end": 8,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 8,
+              "textSpan": "Emese"
+            },
+            "identityKey": "person|emese"
+          },
+          "actor": {
+            "mention": "Emese",
+            "normalized": "emese",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 3,
+            "end": 8,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 8,
+              "textSpan": "Emese"
+            },
+            "identityKey": "person|emese"
+          },
+          "action": "nyer",
+          "actionSpan": {
+            "start": 9,
+            "end": 13,
+            "textSpan": "nyer"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "conditional",
+          "conditionality": true,
+          "status": "conditional",
+          "conditionClause": true,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 13,
+            "textSpan": "Ha Emese nyer"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 13,
+            "textSpan": "Ha Emese nyer"
+          },
+          "canonicalProjectionAllowed": false
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Emese",
+            "normalized": "emese",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 3,
+            "end": 8,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 8,
+              "textSpan": "Emese"
+            },
+            "identityKey": "person|emese"
+          },
+          "actor": {
+            "mention": "Emese",
+            "normalized": "emese",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 3,
+            "end": 8,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 8,
+              "textSpan": "Emese"
+            },
+            "identityKey": "person|emese"
+          },
+          "action": "vásárol",
+          "actionSpan": {
+            "start": 23,
+            "end": 30,
+            "textSpan": "vásárol"
+          },
+          "object": "busz",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 4,
+              "unit": "busz",
+              "semanticKind": "count",
+              "property": "busz",
+              "raw": "4 buszt",
+              "start": 15,
+              "end": 22,
+              "evidenceSpan": {
+                "start": 15,
+                "end": 22,
+                "textSpan": "4 buszt"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Emese",
+                "normalized": "emese",
+                "type": "person",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 3,
+                "end": 8,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 3,
+                  "end": 8,
+                  "textSpan": "Emese"
+                },
+                "identityKey": "person|emese"
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "conditional",
+          "conditionality": true,
+          "status": "conditional",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.65,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "coordinated_subject_inheritance",
+          "evidenceSpan": {
+            "start": 15,
+            "end": 30,
+            "textSpan": "4 buszt vásárol"
+          },
+          "propositionSpan": {
+            "start": 15,
+            "end": 30,
+            "textSpan": "4 buszt vásárol"
+          },
+          "canonicalProjectionAllowed": false
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Tamás",
+            "normalized": "tamás",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 32,
+            "end": 37,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 32,
+              "end": 37,
+              "textSpan": "Tamás"
+            },
+            "identityKey": "person|tamás"
+          },
+          "actor": {
+            "mention": "Tamás",
+            "normalized": "tamás",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 32,
+            "end": 37,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 32,
+              "end": 37,
+              "textSpan": "Tamás"
+            },
+            "identityKey": "person|tamás"
+          },
+          "action": "ad",
+          "actionSpan": {
+            "start": 61,
+            "end": 66,
+            "textSpan": "adott"
+          },
+          "object": "busz",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 2,
+              "unit": "busz",
+              "semanticKind": "count",
+              "property": "busz",
+              "raw": "2 buszt",
+              "start": 53,
+              "end": 60,
+              "evidenceSpan": {
+                "start": 53,
+                "end": 60,
+                "textSpan": "2 buszt"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Tamás",
+                "normalized": "tamás",
+                "type": "person",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 32,
+                "end": 37,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 32,
+                  "end": 37,
+                  "textSpan": "Tamás"
+                },
+                "identityKey": "person|tamás"
+              }
+            }
+          ],
+          "time": [
+            "tegnap"
+          ],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 32,
+            "end": 70,
+            "textSpan": "Tamás viszont tegnap 2 buszt adott át."
+          },
+          "propositionSpan": {
+            "start": 32,
+            "end": 70,
+            "textSpan": "Tamás viszont tegnap 2 buszt adott át."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h14",
+    "output": {
+      "entities": [
+        {
+          "mention": "CNN",
+          "normalized": "cnn",
+          "type": "organization",
+          "subtype": "media",
+          "sourceRole": "media",
+          "start": 2,
+          "end": 5,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 5,
+            "textSpan": "CNN"
+          },
+          "identityKey": "organization|cnn"
+        },
+        {
+          "mention": "bíróság",
+          "normalized": "bíróság",
+          "type": "organization",
+          "subtype": "court",
+          "sourceRole": "official",
+          "case": "Nom",
+          "start": 26,
+          "end": 33,
+          "evidenceSpan": {
+            "start": 26,
+            "end": 33,
+            "textSpan": "bíróság"
+          },
+          "identityKey": "organization|bíróság"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": null,
+          "actor": null,
+          "action": "közöl",
+          "actionSpan": {
+            "start": 10,
+            "end": 17,
+            "textSpan": "közölte"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "reported",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": "közöl",
+          "ambiguous": false,
+          "routingConfidence": 0,
+          "confidencePurpose": "routing_only",
+          "binding": "unresolved",
+          "bindingReason": "nested_attribution_unresolved",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 60,
+            "textSpan": "A CNN azt közölte, hogy a bíróság szerint az ítélet jogerős."
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 60,
+            "textSpan": "A CNN azt közölte, hogy a bíróság szerint az ítélet jogerős."
+          },
+          "canonicalProjectionAllowed": false,
+          "safetyBlocked": true,
+          "attributionCandidates": [
+            {
+              "mention": "CNN",
+              "normalized": "cnn",
+              "type": "organization",
+              "subtype": "media",
+              "sourceRole": "media",
+              "start": 2,
+              "end": 5,
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 5,
+                "textSpan": "CNN"
+              },
+              "identityKey": "organization|cnn"
+            },
+            {
+              "mention": "bíróság",
+              "normalized": "bíróság",
+              "type": "organization",
+              "subtype": "court",
+              "sourceRole": "official",
+              "case": "Nom",
+              "start": 26,
+              "end": 33,
+              "evidenceSpan": {
+                "start": 26,
+                "end": 33,
+                "textSpan": "bíróság"
+              },
+              "identityKey": "organization|bíróság"
+            }
+          ]
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h15",
+    "output": {
+      "entities": [
+        {
+          "mention": "Nagy Emese",
+          "normalized": "nagy emese",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 0,
+          "end": 10,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 10,
+            "textSpan": "Nagy Emese"
+          },
+          "identityKey": "person|nagy emese"
+        },
+        {
+          "mention": "Nagy Tamás",
+          "normalized": "nagy tamás",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 14,
+          "end": 24,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 14,
+            "end": 24,
+            "textSpan": "Nagy Tamás"
+          },
+          "identityKey": "person|nagy tamás"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": null,
+          "actor": null,
+          "action": "kap",
+          "actionSpan": {
+            "start": 35,
+            "end": 41,
+            "textSpan": "kapott"
+          },
+          "object": "pont",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 14,
+              "unit": "pont",
+              "semanticKind": "count",
+              "property": "pont",
+              "raw": "14 pontot",
+              "start": 25,
+              "end": 34,
+              "evidenceSpan": {
+                "start": 25,
+                "end": 34,
+                "textSpan": "14 pontot"
+              },
+              "inheritedUnit": false,
+              "subject": null
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": true,
+          "routingConfidence": 0,
+          "confidencePurpose": "routing_only",
+          "binding": "unresolved",
+          "bindingReason": "competing_candidates",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 42,
+            "textSpan": "Nagy Emese és Nagy Tamás 14 pontot kapott."
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 42,
+            "textSpan": "Nagy Emese és Nagy Tamás 14 pontot kapott."
+          },
+          "canonicalProjectionAllowed": false
+        },
+        {
+          "sentence": 1,
+          "subject": {
+            "mention": "vereség",
+            "normalized": "vereség",
+            "type": "referent",
+            "case": "Nom",
+            "start": 55,
+            "end": 62,
+            "identityKey": "local|vereség",
+            "evidenceSpan": {
+              "start": 55,
+              "end": 62,
+              "textSpan": "vereség"
+            }
+          },
+          "actor": {
+            "mention": "vereség",
+            "normalized": "vereség",
+            "type": "referent",
+            "case": "Nom",
+            "start": 55,
+            "end": 62,
+            "identityKey": "local|vereség",
+            "evidenceSpan": {
+              "start": 55,
+              "end": 62,
+              "textSpan": "vereség"
+            }
+          },
+          "action": null,
+          "actionSpan": null,
+          "object": null,
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "unresolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 43,
+            "end": 63,
+            "textSpan": "Szerinte ez vereség."
+          },
+          "propositionSpan": {
+            "start": 43,
+            "end": 63,
+            "textSpan": "Szerinte ez vereség."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h16",
+    "output": {
+      "entities": [
+        {
+          "mention": "Ilona",
+          "normalized": "ilona",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 0,
+          "end": 5,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 5,
+            "textSpan": "Ilona"
+          },
+          "identityKey": "person|ilona"
+        },
+        {
+          "mention": "iskolát",
+          "normalized": "iskola",
+          "type": "organization",
+          "subtype": "institution",
+          "sourceRole": "official",
+          "case": "Acc",
+          "start": 32,
+          "end": 39,
+          "evidenceSpan": {
+            "start": 32,
+            "end": 39,
+            "textSpan": "iskolát"
+          },
+          "identityKey": "organization|iskola"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": null,
+          "actor": null,
+          "action": "nyit",
+          "actionSpan": {
+            "start": 40,
+            "end": 44,
+            "textSpan": "nyit"
+          },
+          "object": "iskola",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 6,
+              "unit": null,
+              "semanticKind": null,
+              "property": null,
+              "raw": "6",
+              "start": 30,
+              "end": 31,
+              "evidenceSpan": {
+                "start": 30,
+                "end": 31,
+                "textSpan": "6"
+              },
+              "inheritedUnit": false,
+              "subject": null
+            }
+          ],
+          "time": [
+            "jövőre"
+          ],
+          "location": null,
+          "attribution": {
+            "label": "Ilona",
+            "normalized": "ilona",
+            "sourceRole": "reported",
+            "reportingVerb": "ígér",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 16,
+              "textSpan": "Ilona azt ígérte"
+            },
+            "propositionSpan": {
+              "start": 22,
+              "end": 45,
+              "textSpan": " jövőre 6 iskolát nyit."
+            }
+          },
+          "polarity": "asserted",
+          "modality": "promise",
+          "conditionality": false,
+          "status": "planned",
+          "conditionClause": false,
+          "reportingAction": "ígér",
+          "ambiguous": false,
+          "routingConfidence": 0,
+          "confidencePurpose": "routing_only",
+          "binding": "unresolved",
+          "bindingReason": "missing_subject",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 45,
+            "textSpan": "Ilona azt ígérte, hogy jövőre 6 iskolát nyit."
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 45,
+            "textSpan": "Ilona azt ígérte, hogy jövőre 6 iskolát nyit."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h17",
+    "output": {
+      "entities": [
+        {
+          "mention": "intézet",
+          "normalized": "intézet",
+          "type": "organization",
+          "subtype": "institution",
+          "sourceRole": "official",
+          "case": "Nom",
+          "start": 3,
+          "end": 10,
+          "evidenceSpan": {
+            "start": 3,
+            "end": 10,
+            "textSpan": "intézet"
+          },
+          "identityKey": "organization|intézet"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "tarifa",
+            "normalized": "tarifa",
+            "type": "referent",
+            "case": "Nom",
+            "start": 21,
+            "end": 27,
+            "identityKey": "local|tarifa",
+            "evidenceSpan": {
+              "start": 21,
+              "end": 27,
+              "textSpan": "tarifa"
+            }
+          },
+          "actor": {
+            "mention": "tarifa",
+            "normalized": "tarifa",
+            "type": "referent",
+            "case": "Nom",
+            "start": 21,
+            "end": 27,
+            "identityKey": "local|tarifa",
+            "evidenceSpan": {
+              "start": 21,
+              "end": 27,
+              "textSpan": "tarifa"
+            }
+          },
+          "action": null,
+          "actionSpan": null,
+          "object": null,
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 15,
+              "unit": "%",
+              "semanticKind": "percentage_share",
+              "property": "százalék",
+              "raw": "15 százalék",
+              "start": 28,
+              "end": 39,
+              "evidenceSpan": {
+                "start": 28,
+                "end": 39,
+                "textSpan": "15 százalék"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "tarifa",
+                "normalized": "tarifa",
+                "type": "referent",
+                "case": "Nom",
+                "start": 21,
+                "end": 27,
+                "identityKey": "local|tarifa",
+                "evidenceSpan": {
+                  "start": 21,
+                  "end": 27,
+                  "textSpan": "tarifa"
+                }
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": {
+            "label": "intézet",
+            "normalized": "intézet",
+            "sourceRole": "official",
+            "reportingVerb": "szerint",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 18,
+              "textSpan": "intézet szerint"
+            },
+            "propositionSpan": {
+              "start": 18,
+              "end": 39,
+              "textSpan": " a tarifa 15 százalék"
+            }
+          },
+          "polarity": "asserted",
+          "modality": "reported",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "unresolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 39,
+            "textSpan": "Az intézet szerint a tarifa 15 százalék"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 39,
+            "textSpan": "Az intézet szerint a tarifa 15 százalék"
+          },
+          "canonicalProjectionAllowed": false
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "változás",
+            "normalized": "változás",
+            "type": "referent",
+            "case": "Nom",
+            "start": 43,
+            "end": 51,
+            "identityKey": "local|változás",
+            "evidenceSpan": {
+              "start": 43,
+              "end": 51,
+              "textSpan": "változás"
+            }
+          },
+          "actor": {
+            "mention": "változás",
+            "normalized": "változás",
+            "type": "referent",
+            "case": "Nom",
+            "start": 43,
+            "end": 51,
+            "identityKey": "local|változás",
+            "evidenceSpan": {
+              "start": 43,
+              "end": 51,
+              "textSpan": "változás"
+            }
+          },
+          "action": "van",
+          "actionSpan": {
+            "start": 67,
+            "end": 71,
+            "textSpan": "volt"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 3,
+              "unit": "pp",
+              "semanticKind": "percentage_point_delta",
+              "property": "százalékpont",
+              "raw": "3 százalékpont",
+              "start": 52,
+              "end": 66,
+              "evidenceSpan": {
+                "start": 52,
+                "end": 66,
+                "textSpan": "3 százalékpont"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "változás",
+                "normalized": "változás",
+                "type": "referent",
+                "case": "Nom",
+                "start": 43,
+                "end": 51,
+                "identityKey": "local|változás",
+                "evidenceSpan": {
+                  "start": 43,
+                  "end": 51,
+                  "textSpan": "változás"
+                }
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 41,
+            "end": 72,
+            "textSpan": "a változás 3 százalékpont volt."
+          },
+          "propositionSpan": {
+            "start": 41,
+            "end": 72,
+            "textSpan": "a változás 3 százalékpont volt."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h18",
+    "output": {
+      "entities": [
+        {
+          "mention": "Emese",
+          "normalized": "emese",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 39,
+          "end": 44,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 39,
+            "end": 44,
+            "textSpan": "Emese"
+          },
+          "identityKey": "person|emese"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "korábbi referencia",
+            "normalized": "korábbi referencia",
+            "type": "referent",
+            "case": "Nom",
+            "start": 2,
+            "end": 20,
+            "identityKey": "local|korábbi referencia",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 20,
+              "textSpan": "korábbi referencia"
+            }
+          },
+          "actor": {
+            "mention": "korábbi referencia",
+            "normalized": "korábbi referencia",
+            "type": "referent",
+            "case": "Nom",
+            "start": 2,
+            "end": 20,
+            "identityKey": "local|korábbi referencia",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 20,
+              "textSpan": "korábbi referencia"
+            }
+          },
+          "action": "van",
+          "actionSpan": {
+            "start": 33,
+            "end": 37,
+            "textSpan": "volt"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 17,
+              "unit": "%",
+              "semanticKind": "comparison",
+              "property": "százalék",
+              "raw": "17 százalék",
+              "start": 21,
+              "end": 32,
+              "evidenceSpan": {
+                "start": 21,
+                "end": 32,
+                "textSpan": "17 százalék"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "korábbi referencia",
+                "normalized": "korábbi referencia",
+                "type": "referent",
+                "case": "Nom",
+                "start": 2,
+                "end": 20,
+                "identityKey": "local|korábbi referencia",
+                "evidenceSpan": {
+                  "start": 2,
+                  "end": 20,
+                  "textSpan": "korábbi referencia"
+                }
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 37,
+            "textSpan": "A korábbi referencia 17 százalék volt"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 37,
+            "textSpan": "A korábbi referencia 17 százalék volt"
+          },
+          "canonicalProjectionAllowed": false
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Emese",
+            "normalized": "emese",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 39,
+            "end": 44,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 39,
+              "end": 44,
+              "textSpan": "Emese"
+            },
+            "identityKey": "person|emese"
+          },
+          "actor": {
+            "mention": "Emese",
+            "normalized": "emese",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 39,
+            "end": 44,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 39,
+              "end": 44,
+              "textSpan": "Emese"
+            },
+            "identityKey": "person|emese"
+          },
+          "action": "szerez",
+          "actionSpan": {
+            "start": 64,
+            "end": 72,
+            "textSpan": "szerzett"
+          },
+          "object": "százalék",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 23,
+              "unit": "%",
+              "semanticKind": "percentage_share",
+              "property": "százalék",
+              "raw": "23 százalékot",
+              "start": 50,
+              "end": 63,
+              "evidenceSpan": {
+                "start": 50,
+                "end": 63,
+                "textSpan": "23 százalékot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Emese",
+                "normalized": "emese",
+                "type": "person",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 39,
+                "end": 44,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 39,
+                  "end": 44,
+                  "textSpan": "Emese"
+                },
+                "identityKey": "person|emese"
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 39,
+            "end": 73,
+            "textSpan": "Emese most 23 százalékot szerzett."
+          },
+          "propositionSpan": {
+            "start": 39,
+            "end": 73,
+            "textSpan": "Emese most 23 százalékot szerzett."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h19",
+    "output": {
+      "entities": [
+        {
+          "mention": "Emese",
+          "normalized": "emese",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 30,
+          "end": 35,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 30,
+            "end": 35,
+            "textSpan": "Emese"
+          },
+          "identityKey": "person|emese"
+        },
+        {
+          "mention": "Tamás",
+          "normalized": "tamás",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 51,
+          "end": 56,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 51,
+            "end": 56,
+            "textSpan": "Tamás"
+          },
+          "identityKey": "person|tamás"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Emese",
+            "normalized": "emese",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 30,
+            "end": 35,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 30,
+              "end": 35,
+              "textSpan": "Emese"
+            },
+            "identityKey": "person|emese"
+          },
+          "actor": {
+            "mention": "Emese",
+            "normalized": "emese",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 30,
+            "end": 35,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 30,
+              "end": 35,
+              "textSpan": "Emese"
+            },
+            "identityKey": "person|emese"
+          },
+          "action": "kap",
+          "actionSpan": {
+            "start": 71,
+            "end": 77,
+            "textSpan": "kapott"
+          },
+          "object": "százalék",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 62,
+              "unit": "%",
+              "semanticKind": "percentage_share",
+              "property": "százalék",
+              "raw": "62 százalékot",
+              "start": 36,
+              "end": 49,
+              "evidenceSpan": {
+                "start": 36,
+                "end": 49,
+                "textSpan": "62 százalékot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Emese",
+                "normalized": "emese",
+                "type": "person",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 30,
+                "end": 35,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 30,
+                  "end": 35,
+                  "textSpan": "Emese"
+                },
+                "identityKey": "person|emese"
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 27,
+            "end": 49,
+            "textSpan": "😀 Emese 62 százalékot"
+          },
+          "propositionSpan": {
+            "start": 27,
+            "end": 49,
+            "textSpan": "😀 Emese 62 százalékot"
+          },
+          "canonicalProjectionAllowed": false,
+          "actionInherited": true
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Tamás",
+            "normalized": "tamás",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 51,
+            "end": 56,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 51,
+              "end": 56,
+              "textSpan": "Tamás"
+            },
+            "identityKey": "person|tamás"
+          },
+          "actor": {
+            "mention": "Tamás",
+            "normalized": "tamás",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 51,
+            "end": 56,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 51,
+              "end": 56,
+              "textSpan": "Tamás"
+            },
+            "identityKey": "person|tamás"
+          },
+          "action": "kap",
+          "actionSpan": {
+            "start": 71,
+            "end": 77,
+            "textSpan": "kapott"
+          },
+          "object": "százalék",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 38,
+              "unit": "%",
+              "semanticKind": "percentage_share",
+              "property": "százalék",
+              "raw": "38 százalékot",
+              "start": 57,
+              "end": 70,
+              "evidenceSpan": {
+                "start": 57,
+                "end": 70,
+                "textSpan": "38 százalékot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Tamás",
+                "normalized": "tamás",
+                "type": "person",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 51,
+                "end": 56,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 51,
+                  "end": 56,
+                  "textSpan": "Tamás"
+                },
+                "identityKey": "person|tamás"
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 51,
+            "end": 78,
+            "textSpan": "Tamás 38 százalékot kapott."
+          },
+          "propositionSpan": {
+            "start": 51,
+            "end": 78,
+            "textSpan": "Tamás 38 százalékot kapott."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h20",
+    "output": {
+      "entities": [
+        {
+          "mention": "Szabó Júliának",
+          "normalized": "szabó júliá",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 0,
+          "end": 14,
+          "case": "Dat",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 14,
+            "textSpan": "Szabó Júliának"
+          },
+          "identityKey": "person|szabó júliá"
+        },
+        {
+          "mention": "Szabó Júliáról",
+          "normalized": "szabó júliá",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 22,
+          "end": 36,
+          "case": "Del",
+          "evidenceSpan": {
+            "start": 22,
+            "end": 36,
+            "textSpan": "Szabó Júliáról"
+          },
+          "identityKey": "person|szabó júliá"
+        },
+        {
+          "mention": "Szabó Péter",
+          "normalized": "szabó péter",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 48,
+          "end": 59,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 48,
+            "end": 59,
+            "textSpan": "Szabó Péter"
+          },
+          "identityKey": "person|szabó péter"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": null,
+          "actor": null,
+          "action": "ír",
+          "actionSpan": {
+            "start": 15,
+            "end": 20,
+            "textSpan": "írtak"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": {
+            "label": "Szabó Júliának",
+            "normalized": "szabó júliá",
+            "sourceRole": "reported",
+            "reportingVerb": "ír",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 20,
+              "textSpan": "Szabó Júliának írtak"
+            },
+            "propositionSpan": {
+              "start": 20,
+              "end": 21,
+              "textSpan": "."
+            }
+          },
+          "polarity": "asserted",
+          "modality": "reported",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": "ír",
+          "ambiguous": false,
+          "routingConfidence": 0,
+          "confidencePurpose": "routing_only",
+          "binding": "unresolved",
+          "bindingReason": "missing_subject",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 21,
+            "textSpan": "Szabó Júliának írtak."
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 21,
+            "textSpan": "Szabó Júliának írtak."
+          },
+          "canonicalProjectionAllowed": false
+        },
+        {
+          "sentence": 1,
+          "subject": null,
+          "actor": null,
+          "action": "beszél",
+          "actionSpan": {
+            "start": 37,
+            "end": 46,
+            "textSpan": "beszéltek"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0,
+          "confidencePurpose": "routing_only",
+          "binding": "unresolved",
+          "bindingReason": "missing_subject",
+          "evidenceSpan": {
+            "start": 22,
+            "end": 47,
+            "textSpan": "Szabó Júliáról beszéltek."
+          },
+          "propositionSpan": {
+            "start": 22,
+            "end": 47,
+            "textSpan": "Szabó Júliáról beszéltek."
+          },
+          "canonicalProjectionAllowed": false
+        },
+        {
+          "sentence": 2,
+          "subject": {
+            "mention": "Szabó Péter",
+            "normalized": "szabó péter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 48,
+            "end": 59,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 48,
+              "end": 59,
+              "textSpan": "Szabó Péter"
+            },
+            "identityKey": "person|szabó péter"
+          },
+          "actor": {
+            "mention": "Szabó Péter",
+            "normalized": "szabó péter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 48,
+            "end": 59,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 48,
+              "end": 59,
+              "textSpan": "Szabó Péter"
+            },
+            "identityKey": "person|szabó péter"
+          },
+          "action": "kap",
+          "actionSpan": {
+            "start": 70,
+            "end": 76,
+            "textSpan": "kapott"
+          },
+          "object": "pont",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 11,
+              "unit": "pont",
+              "semanticKind": "count",
+              "property": "pont",
+              "raw": "11 pontot",
+              "start": 60,
+              "end": 69,
+              "evidenceSpan": {
+                "start": 60,
+                "end": 69,
+                "textSpan": "11 pontot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Szabó Péter",
+                "normalized": "szabó péter",
+                "type": "person",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 48,
+                "end": 59,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 48,
+                  "end": 59,
+                  "textSpan": "Szabó Péter"
+                },
+                "identityKey": "person|szabó péter"
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 48,
+            "end": 77,
+            "textSpan": "Szabó Péter 11 pontot kapott."
+          },
+          "propositionSpan": {
+            "start": 48,
+            "end": 77,
+            "textSpan": "Szabó Péter 11 pontot kapott."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h21",
+    "output": {
+      "entities": [],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "kapacitás",
+            "normalized": "kapacitás",
+            "type": "referent",
+            "case": "Nom",
+            "start": 2,
+            "end": 11,
+            "identityKey": "local|kapacitás",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 11,
+              "textSpan": "kapacitás"
+            }
+          },
+          "actor": {
+            "mention": "kapacitás",
+            "normalized": "kapacitás",
+            "type": "referent",
+            "case": "Nom",
+            "start": 2,
+            "end": 11,
+            "identityKey": "local|kapacitás",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 11,
+              "textSpan": "kapacitás"
+            }
+          },
+          "action": "lesz",
+          "actionSpan": {
+            "start": 68,
+            "end": 73,
+            "textSpan": "lehet"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 40,
+              "unit": "MW",
+              "semanticKind": "lower_bound",
+              "property": "megawatt",
+              "raw": "40 megawatt",
+              "start": 21,
+              "end": 32,
+              "evidenceSpan": {
+                "start": 21,
+                "end": 32,
+                "textSpan": "40 megawatt"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "kapacitás",
+                "normalized": "kapacitás",
+                "type": "referent",
+                "case": "Nom",
+                "start": 2,
+                "end": 11,
+                "identityKey": "local|kapacitás",
+                "evidenceSpan": {
+                  "start": 2,
+                  "end": 11,
+                  "textSpan": "kapacitás"
+                }
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 32,
+            "textSpan": "A kapacitás legalább 40 megawatt"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 32,
+            "textSpan": "A kapacitás legalább 40 megawatt"
+          },
+          "canonicalProjectionAllowed": false,
+          "actionInherited": true
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "terhelés",
+            "normalized": "terhelés",
+            "type": "referent",
+            "case": "Nom",
+            "start": 36,
+            "end": 44,
+            "identityKey": "local|terhelés",
+            "evidenceSpan": {
+              "start": 36,
+              "end": 44,
+              "textSpan": "terhelés"
+            }
+          },
+          "actor": {
+            "mention": "terhelés",
+            "normalized": "terhelés",
+            "type": "referent",
+            "case": "Nom",
+            "start": 36,
+            "end": 44,
+            "identityKey": "local|terhelés",
+            "evidenceSpan": {
+              "start": 36,
+              "end": 44,
+              "textSpan": "terhelés"
+            }
+          },
+          "action": "lesz",
+          "actionSpan": {
+            "start": 68,
+            "end": 73,
+            "textSpan": "lehet"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 32,
+              "unit": "MW",
+              "semanticKind": "upper_bound",
+              "property": "megawatt",
+              "raw": "32 megawatt",
+              "start": 56,
+              "end": 67,
+              "evidenceSpan": {
+                "start": 56,
+                "end": 67,
+                "textSpan": "32 megawatt"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "terhelés",
+                "normalized": "terhelés",
+                "type": "referent",
+                "case": "Nom",
+                "start": 36,
+                "end": 44,
+                "identityKey": "local|terhelés",
+                "evidenceSpan": {
+                  "start": 36,
+                  "end": 44,
+                  "textSpan": "terhelés"
+                }
+              }
+            }
+          ],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "possible_future",
+          "conditionality": false,
+          "status": "planned",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 34,
+            "end": 74,
+            "textSpan": "a terhelés legfeljebb 32 megawatt lehet."
+          },
+          "propositionSpan": {
+            "start": 34,
+            "end": 74,
+            "textSpan": "a terhelés legfeljebb 32 megawatt lehet."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h22",
+    "output": {
+      "entities": [
+        {
+          "mention": "Miklós",
+          "normalized": "miklós",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 0,
+          "end": 6,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 6,
+            "textSpan": "Miklós"
+          },
+          "identityKey": "person|miklós"
+        },
+        {
+          "mention": "Zsófia",
+          "normalized": "zsófia",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 31,
+          "end": 37,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 31,
+            "end": 37,
+            "textSpan": "Zsófia"
+          },
+          "identityKey": "person|zsófia"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Miklós",
+            "normalized": "miklós",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Miklós"
+            },
+            "identityKey": "person|miklós"
+          },
+          "actor": {
+            "mention": "Miklós",
+            "normalized": "miklós",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Miklós"
+            },
+            "identityKey": "person|miklós"
+          },
+          "action": "ad",
+          "actionSpan": {
+            "start": 24,
+            "end": 26,
+            "textSpan": "ad"
+          },
+          "object": "eszköz",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 7,
+              "unit": "eszköz",
+              "semanticKind": "count",
+              "property": "eszköz",
+              "raw": "7 eszközt",
+              "start": 14,
+              "end": 23,
+              "evidenceSpan": {
+                "start": 14,
+                "end": 23,
+                "textSpan": "7 eszközt"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Miklós",
+                "normalized": "miklós",
+                "type": "person",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 0,
+                "end": 6,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 0,
+                  "end": 6,
+                  "textSpan": "Miklós"
+                },
+                "identityKey": "person|miklós"
+              }
+            }
+          ],
+          "time": [
+            "holnap"
+          ],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "possible_future",
+          "conditionality": false,
+          "status": "planned",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 29,
+            "textSpan": "Miklós holnap 7 eszközt ad át"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 29,
+            "textSpan": "Miklós holnap 7 eszközt ad át"
+          },
+          "canonicalProjectionAllowed": false
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Zsófia",
+            "normalized": "zsófia",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 31,
+            "end": 37,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 31,
+              "end": 37,
+              "textSpan": "Zsófia"
+            },
+            "identityKey": "person|zsófia"
+          },
+          "actor": {
+            "mention": "Zsófia",
+            "normalized": "zsófia",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 31,
+            "end": 37,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 31,
+              "end": 37,
+              "textSpan": "Zsófia"
+            },
+            "identityKey": "person|zsófia"
+          },
+          "action": "ad",
+          "actionSpan": {
+            "start": 55,
+            "end": 60,
+            "textSpan": "adott"
+          },
+          "object": "eszköz",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 5,
+              "unit": "eszköz",
+              "semanticKind": "count",
+              "property": "eszköz",
+              "raw": "5 eszközt",
+              "start": 45,
+              "end": 54,
+              "evidenceSpan": {
+                "start": 45,
+                "end": 54,
+                "textSpan": "5 eszközt"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Zsófia",
+                "normalized": "zsófia",
+                "type": "person",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 31,
+                "end": 37,
+                "case": "Nom",
+                "evidenceSpan": {
+                  "start": 31,
+                  "end": 37,
+                  "textSpan": "Zsófia"
+                },
+                "identityKey": "person|zsófia"
+              }
+            }
+          ],
+          "time": [
+            "tegnap"
+          ],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 31,
+            "end": 64,
+            "textSpan": "Zsófia tegnap 5 eszközt adott át."
+          },
+          "propositionSpan": {
+            "start": 31,
+            "end": 64,
+            "textSpan": "Zsófia tegnap 5 eszközt adott át."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h23",
+    "output": {
+      "entities": [
+        {
+          "mention": "Ilona",
+          "normalized": "ilona",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 30,
+          "end": 35,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 30,
+            "end": 35,
+            "textSpan": "Ilona"
+          },
+          "identityKey": "person|ilona"
+        },
+        {
+          "mention": "Péter",
+          "normalized": "péter",
+          "type": "person",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 37,
+          "end": 42,
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 37,
+            "end": 42,
+            "textSpan": "Péter"
+          },
+          "identityKey": "person|péter"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": null,
+          "actor": null,
+          "action": "nyit",
+          "actionSpan": {
+            "start": 5,
+            "end": 12,
+            "textSpan": "nyitunk"
+          },
+          "object": "üzem",
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "denied",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0,
+          "confidencePurpose": "routing_only",
+          "binding": "unresolved",
+          "bindingReason": "missing_subject",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 20,
+            "textSpan": "„Nem nyitunk üzemet”"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 20,
+            "textSpan": "„Nem nyitunk üzemet”"
+          },
+          "canonicalProjectionAllowed": false
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Ilona",
+            "normalized": "ilona",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 30,
+            "end": 35,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 30,
+              "end": 35,
+              "textSpan": "Ilona"
+            },
+            "identityKey": "person|ilona"
+          },
+          "actor": {
+            "mention": "Ilona",
+            "normalized": "ilona",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 30,
+            "end": 35,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 30,
+              "end": 35,
+              "textSpan": "Ilona"
+            },
+            "identityKey": "person|ilona"
+          },
+          "action": "mond",
+          "actionSpan": {
+            "start": 23,
+            "end": 29,
+            "textSpan": "mondta"
+          },
+          "object": null,
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": "mond",
+          "ambiguous": false,
+          "routingConfidence": 0.65,
+          "confidencePurpose": "routing_only",
+          "binding": "unresolved",
+          "bindingReason": "unresolved_attribution",
+          "evidenceSpan": {
+            "start": 23,
+            "end": 35,
+            "textSpan": "mondta Ilona"
+          },
+          "propositionSpan": {
+            "start": 23,
+            "end": 35,
+            "textSpan": "mondta Ilona"
+          },
+          "canonicalProjectionAllowed": false,
+          "safetyBlocked": true
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Péter",
+            "normalized": "péter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 37,
+            "end": 42,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 37,
+              "end": 42,
+              "textSpan": "Péter"
+            },
+            "identityKey": "person|péter"
+          },
+          "actor": {
+            "mention": "Péter",
+            "normalized": "péter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 37,
+            "end": 42,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 37,
+              "end": 42,
+              "textSpan": "Péter"
+            },
+            "identityKey": "person|péter"
+          },
+          "action": "ígér",
+          "actionSpan": {
+            "start": 61,
+            "end": 66,
+            "textSpan": "ígért"
+          },
+          "object": "gyár",
+          "target": null,
+          "numericArguments": [],
+          "time": [],
+          "location": null,
+          "attribution": {
+            "label": "Péter",
+            "normalized": "péter",
+            "sourceRole": "reported",
+            "reportingVerb": "ígér",
+            "evidenceSpan": {
+              "start": 37,
+              "end": 66,
+              "textSpan": "Péter viszont új gyárat ígért"
+            },
+            "propositionSpan": {
+              "start": 66,
+              "end": 67,
+              "textSpan": "."
+            }
+          },
+          "polarity": "asserted",
+          "modality": "promise",
+          "conditionality": false,
+          "status": "planned",
+          "conditionClause": false,
+          "reportingAction": "ígér",
+          "ambiguous": false,
+          "routingConfidence": 0.8,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 37,
+            "end": 67,
+            "textSpan": "Péter viszont új gyárat ígért."
+          },
+          "propositionSpan": {
+            "start": 37,
+            "end": 67,
+            "textSpan": "Péter viszont új gyárat ígért."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  },
+  {
+    "id": "h24",
+    "output": {
+      "entities": [
+        {
+          "mention": "Sopronban",
+          "normalized": "sopron",
+          "type": "location",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 0,
+          "end": 9,
+          "case": "Ine",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 9,
+            "textSpan": "Sopronban"
+          },
+          "identityKey": "location|sopron"
+        },
+        {
+          "mention": "Egerben",
+          "normalized": "eger",
+          "type": "location",
+          "subtype": null,
+          "sourceRole": null,
+          "start": 26,
+          "end": 33,
+          "case": "Ine",
+          "evidenceSpan": {
+            "start": 26,
+            "end": 33,
+            "textSpan": "Egerben"
+          },
+          "identityKey": "location|eger"
+        }
+      ],
+      "frames": [
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Sopronban",
+            "normalized": "sopron",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 9,
+            "case": "Ine",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 9,
+              "textSpan": "Sopronban"
+            },
+            "identityKey": "location|sopron"
+          },
+          "actor": {
+            "mention": "Sopronban",
+            "normalized": "sopron",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 9,
+            "case": "Ine",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 9,
+              "textSpan": "Sopronban"
+            },
+            "identityKey": "location|sopron"
+          },
+          "action": "mér",
+          "actionSpan": {
+            "start": 42,
+            "end": 48,
+            "textSpan": "mértek"
+          },
+          "object": "fok",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 4,
+              "unit": "C",
+              "semanticKind": "temperature",
+              "property": "fok",
+              "raw": "4 fokot",
+              "start": 17,
+              "end": 24,
+              "evidenceSpan": {
+                "start": 17,
+                "end": 24,
+                "textSpan": "4 fokot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Sopronban",
+                "normalized": "sopron",
+                "type": "location",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 0,
+                "end": 9,
+                "case": "Ine",
+                "evidenceSpan": {
+                  "start": 0,
+                  "end": 9,
+                  "textSpan": "Sopronban"
+                },
+                "identityKey": "location|sopron"
+              }
+            }
+          ],
+          "time": [],
+          "location": {
+            "mention": "Sopronban",
+            "normalized": "sopron",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 9,
+            "case": "Ine",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 9,
+              "textSpan": "Sopronban"
+            },
+            "identityKey": "location|sopron"
+          },
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8500000000000001,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 0,
+            "end": 24,
+            "textSpan": "Sopronban mínusz 4 fokot"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 24,
+            "textSpan": "Sopronban mínusz 4 fokot"
+          },
+          "canonicalProjectionAllowed": false,
+          "actionInherited": true
+        },
+        {
+          "sentence": 0,
+          "subject": {
+            "mention": "Egerben",
+            "normalized": "eger",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 26,
+            "end": 33,
+            "case": "Ine",
+            "evidenceSpan": {
+              "start": 26,
+              "end": 33,
+              "textSpan": "Egerben"
+            },
+            "identityKey": "location|eger"
+          },
+          "actor": {
+            "mention": "Egerben",
+            "normalized": "eger",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 26,
+            "end": 33,
+            "case": "Ine",
+            "evidenceSpan": {
+              "start": 26,
+              "end": 33,
+              "textSpan": "Egerben"
+            },
+            "identityKey": "location|eger"
+          },
+          "action": "mér",
+          "actionSpan": {
+            "start": 42,
+            "end": 48,
+            "textSpan": "mértek"
+          },
+          "object": "fok",
+          "target": null,
+          "numericArguments": [
+            {
+              "value": 2,
+              "unit": "C",
+              "semanticKind": "temperature",
+              "property": "fok",
+              "raw": "2 fokot",
+              "start": 34,
+              "end": 41,
+              "evidenceSpan": {
+                "start": 34,
+                "end": 41,
+                "textSpan": "2 fokot"
+              },
+              "inheritedUnit": false,
+              "subject": {
+                "mention": "Egerben",
+                "normalized": "eger",
+                "type": "location",
+                "subtype": null,
+                "sourceRole": null,
+                "start": 26,
+                "end": 33,
+                "case": "Ine",
+                "evidenceSpan": {
+                  "start": 26,
+                  "end": 33,
+                  "textSpan": "Egerben"
+                },
+                "identityKey": "location|eger"
+              }
+            }
+          ],
+          "time": [],
+          "location": {
+            "mention": "Egerben",
+            "normalized": "eger",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 26,
+            "end": 33,
+            "case": "Ine",
+            "evidenceSpan": {
+              "start": 26,
+              "end": 33,
+              "textSpan": "Egerben"
+            },
+            "identityKey": "location|eger"
+          },
+          "attribution": null,
+          "polarity": "asserted",
+          "modality": "asserted",
+          "conditionality": false,
+          "status": "reported",
+          "conditionClause": false,
+          "reportingAction": null,
+          "ambiguous": false,
+          "routingConfidence": 0.8500000000000001,
+          "confidencePurpose": "routing_only",
+          "binding": "resolved",
+          "bindingReason": "local_case_and_proposition",
+          "evidenceSpan": {
+            "start": 26,
+            "end": 49,
+            "textSpan": "Egerben 2 fokot mértek."
+          },
+          "propositionSpan": {
+            "start": 26,
+            "end": 49,
+            "textSpan": "Egerben 2 fokot mértek."
+          },
+          "canonicalProjectionAllowed": false
+        }
+      ],
+      "canonical": [],
+      "conflicts": [],
+      "projectionState": "disabled_research_only"
+    }
+  }
+]

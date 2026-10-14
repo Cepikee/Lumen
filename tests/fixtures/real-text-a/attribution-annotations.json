@@ -1,0 +1,1620 @@
+[
+  {
+    "id": "publisher_ministry",
+    "text": "A Telex szerint a minisztérium azt közölte, hogy 2027-ben emelik a támogatást.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 7,
+          "text": "Telex",
+          "lemma": "Telex",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 8,
+          "end": 15,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {}
+        },
+        {
+          "start": 16,
+          "end": 17,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 18,
+          "end": 30,
+          "text": "minisztérium",
+          "lemma": "minisztérium",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 31,
+          "end": 34,
+          "text": "azt",
+          "lemma": "az",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          }
+        },
+        {
+          "start": 35,
+          "end": 42,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 42,
+          "end": 43,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 44,
+          "end": 48,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 49,
+          "end": 57,
+          "text": "2027-ben",
+          "lemma": "2027",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Ine",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 58,
+          "end": 64,
+          "text": "emelik",
+          "lemma": "emel",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Plur",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 65,
+          "end": 66,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 67,
+          "end": 77,
+          "text": "támogatást",
+          "lemma": "támogatás",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 77,
+          "end": 78,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 78,
+          "text": "A Telex szerint a minisztérium azt közölte, hogy 2027-ben emelik a támogatást."
+        }
+      ],
+      "entities": [
+        {
+          "start": 2,
+          "end": 7,
+          "text": "Telex",
+          "label": "ORG"
+        }
+      ]
+    }
+  },
+  {
+    "id": "police_witness",
+    "text": "A rendőrség szerint a tanú azt mondta, hogy Kovács Péter elhagyta az épületet.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "rendőrség",
+          "lemma": "rendőrség",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 12,
+          "end": 19,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {}
+        },
+        {
+          "start": 20,
+          "end": 21,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 22,
+          "end": 26,
+          "text": "tanú",
+          "lemma": "tanú",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 27,
+          "end": 30,
+          "text": "azt",
+          "lemma": "az",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          }
+        },
+        {
+          "start": 31,
+          "end": 37,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 37,
+          "end": 38,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 39,
+          "end": 43,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 44,
+          "end": 50,
+          "text": "Kovács",
+          "lemma": "Kovács",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 51,
+          "end": 56,
+          "text": "Péter",
+          "lemma": "Péter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 57,
+          "end": 65,
+          "text": "elhagyta",
+          "lemma": "elhagy",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 66,
+          "end": 68,
+          "text": "az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 69,
+          "end": 77,
+          "text": "épületet",
+          "lemma": "épület",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 77,
+          "end": 78,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 78,
+          "text": "A rendőrség szerint a tanú azt mondta, hogy Kovács Péter elhagyta az épületet."
+        }
+      ],
+      "entities": [
+        {
+          "start": 44,
+          "end": 56,
+          "text": "Kovács Péter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "publisher_government",
+    "text": "Az RTL arról számolt be, hogy a kormány szerint nem lesz adóemelés.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 3,
+          "end": 6,
+          "text": "RTL",
+          "lemma": "RTL",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 7,
+          "end": 12,
+          "text": "arról",
+          "lemma": "az",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Del",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          }
+        },
+        {
+          "start": 13,
+          "end": 20,
+          "text": "számolt",
+          "lemma": "számol",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 21,
+          "end": 23,
+          "text": "be",
+          "lemma": "be",
+          "pos": "ADV",
+          "morph": {
+            "Degree": "Pos"
+          }
+        },
+        {
+          "start": 23,
+          "end": 24,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 25,
+          "end": 29,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 30,
+          "end": 31,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 32,
+          "end": 39,
+          "text": "kormány",
+          "lemma": "kormány",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 40,
+          "end": 47,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {}
+        },
+        {
+          "start": 48,
+          "end": 51,
+          "text": "nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          }
+        },
+        {
+          "start": 52,
+          "end": 56,
+          "text": "lesz",
+          "lemma": "lesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 57,
+          "end": 66,
+          "text": "adóemelés",
+          "lemma": "adóemelés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 66,
+          "end": 67,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 67,
+          "text": "Az RTL arról számolt be, hogy a kormány szerint nem lesz adóemelés."
+        }
+      ],
+      "entities": [
+        {
+          "start": 3,
+          "end": 6,
+          "text": "RTL",
+          "label": "ORG"
+        }
+      ]
+    }
+  },
+  {
+    "id": "recipient",
+    "text": "A miniszter a Népszavának azt mondta, hogy a vállalat 300 dolgozót vesz fel.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "miniszter",
+          "lemma": "miniszter",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 12,
+          "end": 13,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 14,
+          "end": 25,
+          "text": "Népszavának",
+          "lemma": "Népszavá",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Dat",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 26,
+          "end": 29,
+          "text": "azt",
+          "lemma": "az",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          }
+        },
+        {
+          "start": 30,
+          "end": 36,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 36,
+          "end": 37,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 38,
+          "end": 42,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 43,
+          "end": 44,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 45,
+          "end": 53,
+          "text": "vállalat",
+          "lemma": "vállalat",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 54,
+          "end": 57,
+          "text": "300",
+          "lemma": "300",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 58,
+          "end": 66,
+          "text": "dolgozót",
+          "lemma": "dolgozó",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 67,
+          "end": 71,
+          "text": "vesz",
+          "lemma": "vesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 72,
+          "end": 75,
+          "text": "fel",
+          "lemma": "fel",
+          "pos": "ADV",
+          "morph": {
+            "Degree": "Pos"
+          }
+        },
+        {
+          "start": 75,
+          "end": 76,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 76,
+          "text": "A miniszter a Népszavának azt mondta, hogy a vállalat 300 dolgozót vesz fel."
+        }
+      ],
+      "entities": [
+        {
+          "start": 14,
+          "end": 25,
+          "text": "Népszavának",
+          "label": "MISC"
+        }
+      ]
+    }
+  },
+  {
+    "id": "intermediate",
+    "text": "A Portfolio a Reutersre hivatkozva azt írta, hogy a cég szóvivője szerint 4,2 milliárd eurós üzlet készül.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "Portfolio",
+          "lemma": "Portfolio",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 12,
+          "end": 13,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 14,
+          "end": 23,
+          "text": "Reutersre",
+          "lemma": "Reuters",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Sbl",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 24,
+          "end": 34,
+          "text": "hivatkozva",
+          "lemma": "hivatkozva",
+          "pos": "ADV",
+          "morph": {
+            "VerbForm": "Conv"
+          }
+        },
+        {
+          "start": 35,
+          "end": 38,
+          "text": "azt",
+          "lemma": "az",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          }
+        },
+        {
+          "start": 39,
+          "end": 43,
+          "text": "írta",
+          "lemma": "ír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 43,
+          "end": 44,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 45,
+          "end": 49,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 50,
+          "end": 51,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 52,
+          "end": 55,
+          "text": "cég",
+          "lemma": "cég",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 56,
+          "end": 65,
+          "text": "szóvivője",
+          "lemma": "szóvivő",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          }
+        },
+        {
+          "start": 66,
+          "end": 73,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {}
+        },
+        {
+          "start": 74,
+          "end": 77,
+          "text": "4,2",
+          "lemma": "4,2",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Frac",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 78,
+          "end": 86,
+          "text": "milliárd",
+          "lemma": "milliárd",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 87,
+          "end": 92,
+          "text": "eurós",
+          "lemma": "eurós",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "Degree": "Pos",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 93,
+          "end": 98,
+          "text": "üzlet",
+          "lemma": "üzlet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 99,
+          "end": 105,
+          "text": "készül",
+          "lemma": "készül",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 105,
+          "end": 106,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 106,
+          "text": "A Portfolio a Reutersre hivatkozva azt írta, hogy a cég szóvivője szerint 4,2 milliárd eurós üzlet készül."
+        }
+      ],
+      "entities": [
+        {
+          "start": 2,
+          "end": 11,
+          "text": "Portfolio",
+          "label": "ORG"
+        },
+        {
+          "start": 14,
+          "end": 23,
+          "text": "Reutersre",
+          "label": "ORG"
+        }
+      ]
+    }
+  },
+  {
+    "id": "denial",
+    "text": "A lap szerint a politikus tagadta, hogy ő írta volna alá a szerződést.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 5,
+          "text": "lap",
+          "lemma": "lap",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 6,
+          "end": 13,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {}
+        },
+        {
+          "start": 14,
+          "end": 15,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 16,
+          "end": 25,
+          "text": "politikus",
+          "lemma": "politikus",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 26,
+          "end": 33,
+          "text": "tagadta",
+          "lemma": "tagad",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 33,
+          "end": 34,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 35,
+          "end": 39,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 40,
+          "end": 41,
+          "text": "ő",
+          "lemma": "ő",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Prs"
+          }
+        },
+        {
+          "start": 42,
+          "end": 46,
+          "text": "írta",
+          "lemma": "ír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 47,
+          "end": 52,
+          "text": "volna",
+          "lemma": "volna",
+          "pos": "AUX",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Cnd",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 53,
+          "end": 56,
+          "text": "alá",
+          "lemma": "alá",
+          "pos": "ADV",
+          "morph": {
+            "Degree": "Pos"
+          }
+        },
+        {
+          "start": 57,
+          "end": 58,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 59,
+          "end": 69,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 69,
+          "end": 70,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 70,
+          "text": "A lap szerint a politikus tagadta, hogy ő írta volna alá a szerződést."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "ambiguous",
+    "text": "A lap szerint Péter és Anna azt mondta, hogy Júlia távozott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 5,
+          "text": "lap",
+          "lemma": "lap",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 6,
+          "end": 13,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {}
+        },
+        {
+          "start": 14,
+          "end": 19,
+          "text": "Péter",
+          "lemma": "Péter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 20,
+          "end": 22,
+          "text": "és",
+          "lemma": "és",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 23,
+          "end": 27,
+          "text": "Anna",
+          "lemma": "Anna",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 28,
+          "end": 31,
+          "text": "azt",
+          "lemma": "az",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          }
+        },
+        {
+          "start": 32,
+          "end": 38,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 38,
+          "end": 39,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 40,
+          "end": 44,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 45,
+          "end": 50,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 51,
+          "end": 59,
+          "text": "távozott",
+          "lemma": "távozik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 59,
+          "end": 60,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 60,
+          "text": "A lap szerint Péter és Anna azt mondta, hogy Júlia távozott."
+        }
+      ],
+      "entities": [
+        {
+          "start": 14,
+          "end": 19,
+          "text": "Péter",
+          "label": "PER"
+        },
+        {
+          "start": 23,
+          "end": 27,
+          "text": "Anna",
+          "label": "PER"
+        },
+        {
+          "start": 45,
+          "end": 50,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "missing",
+    "text": "A lap szerint azt mondták, hogy Júlia távozott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 5,
+          "text": "lap",
+          "lemma": "lap",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 6,
+          "end": 13,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {}
+        },
+        {
+          "start": 14,
+          "end": 17,
+          "text": "azt",
+          "lemma": "az",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          }
+        },
+        {
+          "start": 18,
+          "end": 25,
+          "text": "mondták",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Plur",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 25,
+          "end": 26,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 27,
+          "end": 31,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 32,
+          "end": 37,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 38,
+          "end": 46,
+          "text": "távozott",
+          "lemma": "távozik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 46,
+          "end": 47,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 47,
+          "text": "A lap szerint azt mondták, hogy Júlia távozott."
+        }
+      ],
+      "entities": [
+        {
+          "start": 32,
+          "end": 37,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "negative_report",
+    "text": "A lap szerint a politikus nem mondta, hogy Júlia távozott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 5,
+          "text": "lap",
+          "lemma": "lap",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 6,
+          "end": 13,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {}
+        },
+        {
+          "start": 14,
+          "end": 15,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 16,
+          "end": 25,
+          "text": "politikus",
+          "lemma": "politikus",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 26,
+          "end": 29,
+          "text": "nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          }
+        },
+        {
+          "start": 30,
+          "end": 36,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 36,
+          "end": 37,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 38,
+          "end": 42,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 43,
+          "end": 48,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 49,
+          "end": 57,
+          "text": "távozott",
+          "lemma": "távozik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 57,
+          "end": 58,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 58,
+          "text": "A lap szerint a politikus nem mondta, hogy Júlia távozott."
+        }
+      ],
+      "entities": [
+        {
+          "start": 43,
+          "end": 48,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  }
+]

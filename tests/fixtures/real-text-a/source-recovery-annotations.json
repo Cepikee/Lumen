@@ -1,0 +1,4760 @@
+[
+  {
+    "id": "positive",
+    "text": "A szóvivő közölte, hogy Júlia aláírta a szerződést.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "szóvivő",
+          "lemma": "szóvivő",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 10
+        },
+        {
+          "start": 10,
+          "end": 17,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 10
+        },
+        {
+          "start": 17,
+          "end": 18,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 30
+        },
+        {
+          "start": 19,
+          "end": 23,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 30
+        },
+        {
+          "start": 24,
+          "end": 29,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 30
+        },
+        {
+          "start": 30,
+          "end": 37,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ccomp:obj",
+          "headStart": 10
+        },
+        {
+          "start": 38,
+          "end": 39,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 40
+        },
+        {
+          "start": 40,
+          "end": 50,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 30
+        },
+        {
+          "start": 50,
+          "end": 51,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 10
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 51,
+          "text": "A szóvivő közölte, hogy Júlia aláírta a szerződést."
+        }
+      ],
+      "entities": [
+        {
+          "start": 24,
+          "end": 29,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "negative",
+    "text": "A szóvivő szerint nem történt sérülés.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "szóvivő",
+          "lemma": "szóvivő",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 22
+        },
+        {
+          "start": 10,
+          "end": 17,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 2
+        },
+        {
+          "start": 18,
+          "end": 21,
+          "text": "nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          },
+          "dep": "advmod",
+          "headStart": 22
+        },
+        {
+          "start": 22,
+          "end": 29,
+          "text": "történt",
+          "lemma": "történik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 22
+        },
+        {
+          "start": 30,
+          "end": 37,
+          "text": "sérülés",
+          "lemma": "sérülés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 22
+        },
+        {
+          "start": 37,
+          "end": 38,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 22
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "text": "A szóvivő szerint nem történt sérülés."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "denial",
+    "text": "A rendőrség tagadta, hogy Péter ellopta az iratot.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "rendőrség",
+          "lemma": "rendőrség",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 12
+        },
+        {
+          "start": 12,
+          "end": 19,
+          "text": "tagadta",
+          "lemma": "tagad",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 12
+        },
+        {
+          "start": 19,
+          "end": 20,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 32
+        },
+        {
+          "start": 21,
+          "end": 25,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 32
+        },
+        {
+          "start": 26,
+          "end": 31,
+          "text": "Péter",
+          "lemma": "Péter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 32
+        },
+        {
+          "start": 32,
+          "end": 39,
+          "text": "ellopta",
+          "lemma": "ellop",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "conj",
+          "headStart": 12
+        },
+        {
+          "start": 40,
+          "end": 42,
+          "text": "az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 43
+        },
+        {
+          "start": 43,
+          "end": 49,
+          "text": "iratot",
+          "lemma": "irat",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 32
+        },
+        {
+          "start": 49,
+          "end": 50,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 12
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 50,
+          "text": "A rendőrség tagadta, hogy Péter ellopta az iratot."
+        }
+      ],
+      "entities": [
+        {
+          "start": 26,
+          "end": 31,
+          "text": "Péter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "leading",
+    "text": "„Júlia aláírta a szerződést.” – mondta az igazgató.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 7
+        },
+        {
+          "start": 1,
+          "end": 6,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "flat:name",
+          "headStart": 0
+        },
+        {
+          "start": 7,
+          "end": 14,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 7
+        },
+        {
+          "start": 15,
+          "end": 16,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 27,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 7
+        },
+        {
+          "start": 27,
+          "end": 28,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 7
+        },
+        {
+          "start": 28,
+          "end": 29,
+          "text": "”",
+          "lemma": "”",
+          "pos": "X",
+          "morph": {},
+          "dep": "obj",
+          "headStart": 32
+        },
+        {
+          "start": 30,
+          "end": 31,
+          "text": "–",
+          "lemma": "–",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Dem"
+          },
+          "dep": "advmod:mode",
+          "headStart": 32
+        },
+        {
+          "start": 32,
+          "end": 38,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 32
+        },
+        {
+          "start": 39,
+          "end": 41,
+          "text": "az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 42
+        },
+        {
+          "start": 42,
+          "end": 50,
+          "text": "igazgató",
+          "lemma": "igazgató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 32
+        },
+        {
+          "start": 50,
+          "end": 51,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 32
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 28,
+          "text": "„Júlia aláírta a szerződést."
+        },
+        {
+          "start": 28,
+          "end": 51,
+          "text": "” – mondta az igazgató."
+        }
+      ],
+      "entities": [
+        {
+          "start": 1,
+          "end": 6,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "trailing",
+    "text": "Az igazgató azt mondta: „Júlia aláírta a szerződést.”",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 3
+        },
+        {
+          "start": 3,
+          "end": 11,
+          "text": "igazgató",
+          "lemma": "igazgató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 16
+        },
+        {
+          "start": 12,
+          "end": 15,
+          "text": "azt",
+          "lemma": "az",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          },
+          "dep": "obj",
+          "headStart": 16
+        },
+        {
+          "start": 16,
+          "end": 22,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 16
+        },
+        {
+          "start": 22,
+          "end": 23,
+          "text": ":",
+          "lemma": ":",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 24
+        },
+        {
+          "start": 24,
+          "end": 25,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 31
+        },
+        {
+          "start": 25,
+          "end": 30,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 31
+        },
+        {
+          "start": 31,
+          "end": 38,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ccomp:obj",
+          "headStart": 16
+        },
+        {
+          "start": 39,
+          "end": 40,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 41
+        },
+        {
+          "start": 41,
+          "end": 51,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 31
+        },
+        {
+          "start": 51,
+          "end": 52,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 16
+        },
+        {
+          "start": 52,
+          "end": 53,
+          "text": "”",
+          "lemma": "”",
+          "pos": "X",
+          "morph": {},
+          "dep": "ROOT",
+          "headStart": 52
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 52,
+          "text": "Az igazgató azt mondta: „Júlia aláírta a szerződést."
+        },
+        {
+          "start": 52,
+          "end": 53,
+          "text": "”"
+        }
+      ],
+      "entities": [
+        {
+          "start": 25,
+          "end": 30,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "colon",
+    "text": "A szóvivő közölte: „Júlia aláírta a szerződést.”",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "szóvivő",
+          "lemma": "szóvivő",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 10
+        },
+        {
+          "start": 10,
+          "end": 17,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 10
+        },
+        {
+          "start": 17,
+          "end": 18,
+          "text": ":",
+          "lemma": ":",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 19
+        },
+        {
+          "start": 19,
+          "end": 20,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 26
+        },
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 26
+        },
+        {
+          "start": 26,
+          "end": 33,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "conj",
+          "headStart": 10
+        },
+        {
+          "start": 34,
+          "end": 35,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 36
+        },
+        {
+          "start": 36,
+          "end": 46,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 26
+        },
+        {
+          "start": 46,
+          "end": 47,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 10
+        },
+        {
+          "start": 47,
+          "end": 48,
+          "text": "”",
+          "lemma": "”",
+          "pos": "X",
+          "morph": {},
+          "dep": "ROOT",
+          "headStart": 47
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 47,
+          "text": "A szóvivő közölte: „Júlia aláírta a szerződést."
+        },
+        {
+          "start": 47,
+          "end": 48,
+          "text": "”"
+        }
+      ],
+      "entities": [
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "added",
+    "text": "„Júlia aláírta a szerződést.” – tette hozzá az igazgató.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 7
+        },
+        {
+          "start": 1,
+          "end": 6,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "flat:name",
+          "headStart": 0
+        },
+        {
+          "start": 7,
+          "end": 14,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 7
+        },
+        {
+          "start": 15,
+          "end": 16,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 27,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 7
+        },
+        {
+          "start": 27,
+          "end": 28,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 7
+        },
+        {
+          "start": 28,
+          "end": 29,
+          "text": "”",
+          "lemma": "”",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 32
+        },
+        {
+          "start": 30,
+          "end": 31,
+          "text": "–",
+          "lemma": "–",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Dem"
+          },
+          "dep": "advmod:mode",
+          "headStart": 32
+        },
+        {
+          "start": 32,
+          "end": 37,
+          "text": "tette",
+          "lemma": "tesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 32
+        },
+        {
+          "start": 38,
+          "end": 43,
+          "text": "hozzá",
+          "lemma": "ő",
+          "pos": "PRON",
+          "morph": {
+            "Case": "All",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Prs"
+          },
+          "dep": "compound:preverb",
+          "headStart": 32
+        },
+        {
+          "start": 44,
+          "end": 46,
+          "text": "az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 47
+        },
+        {
+          "start": 47,
+          "end": 55,
+          "text": "igazgató",
+          "lemma": "igazgató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 32
+        },
+        {
+          "start": 55,
+          "end": 56,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 32
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 28,
+          "text": "„Júlia aláírta a szerződést."
+        },
+        {
+          "start": 28,
+          "end": 56,
+          "text": "” – tette hozzá az igazgató."
+        }
+      ],
+      "entities": [
+        {
+          "start": 1,
+          "end": 6,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "nested",
+    "text": "A lap szerint a minisztérium szóvivője azt mondta, hogy Júlia aláírta a szerződést.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 5,
+          "text": "lap",
+          "lemma": "lap",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 43
+        },
+        {
+          "start": 6,
+          "end": 13,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 2
+        },
+        {
+          "start": 14,
+          "end": 15,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 16
+        },
+        {
+          "start": 16,
+          "end": 28,
+          "text": "minisztérium",
+          "lemma": "minisztérium",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 29
+        },
+        {
+          "start": 29,
+          "end": 38,
+          "text": "szóvivője",
+          "lemma": "szóvivő",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 43
+        },
+        {
+          "start": 39,
+          "end": 42,
+          "text": "azt",
+          "lemma": "az",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          },
+          "dep": "obj",
+          "headStart": 43
+        },
+        {
+          "start": 43,
+          "end": 49,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 43
+        },
+        {
+          "start": 49,
+          "end": 50,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 62
+        },
+        {
+          "start": 51,
+          "end": 55,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 62
+        },
+        {
+          "start": 56,
+          "end": 61,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 62
+        },
+        {
+          "start": 62,
+          "end": 69,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ccomp:obj",
+          "headStart": 43
+        },
+        {
+          "start": 70,
+          "end": 71,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 72
+        },
+        {
+          "start": 72,
+          "end": 82,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 62
+        },
+        {
+          "start": 82,
+          "end": 83,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 43
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 83,
+          "text": "A lap szerint a minisztérium szóvivője azt mondta, hogy Júlia aláírta a szerződést."
+        }
+      ],
+      "entities": [
+        {
+          "start": 56,
+          "end": 61,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "recipient",
+    "text": "Az igazgató azt mondta Péternek, hogy Júlia aláírta a szerződést.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 3
+        },
+        {
+          "start": 3,
+          "end": 11,
+          "text": "igazgató",
+          "lemma": "igazgató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 16
+        },
+        {
+          "start": 12,
+          "end": 15,
+          "text": "azt",
+          "lemma": "az",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          },
+          "dep": "obj",
+          "headStart": 16
+        },
+        {
+          "start": 16,
+          "end": 22,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 16
+        },
+        {
+          "start": 23,
+          "end": 31,
+          "text": "Péternek",
+          "lemma": "Péter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Dat",
+            "Number": "Sing"
+          },
+          "dep": "iobj",
+          "headStart": 16
+        },
+        {
+          "start": 31,
+          "end": 32,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 44
+        },
+        {
+          "start": 33,
+          "end": 37,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 44
+        },
+        {
+          "start": 38,
+          "end": 43,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 44
+        },
+        {
+          "start": 44,
+          "end": 51,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ccomp:obj",
+          "headStart": 16
+        },
+        {
+          "start": 52,
+          "end": 53,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 54
+        },
+        {
+          "start": 54,
+          "end": 64,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 44
+        },
+        {
+          "start": 64,
+          "end": 65,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 16
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 65,
+          "text": "Az igazgató azt mondta Péternek, hogy Júlia aláírta a szerződést."
+        }
+      ],
+      "entities": [
+        {
+          "start": 23,
+          "end": 31,
+          "text": "Péternek",
+          "label": "PER"
+        },
+        {
+          "start": 38,
+          "end": 43,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "towards",
+    "text": "Az igazgató jelezte Péter felé, hogy Júlia aláírta a szerződést.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 3
+        },
+        {
+          "start": 3,
+          "end": 11,
+          "text": "igazgató",
+          "lemma": "igazgató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 12
+        },
+        {
+          "start": 12,
+          "end": 19,
+          "text": "jelezte",
+          "lemma": "jelez",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 12
+        },
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Péter",
+          "lemma": "Péter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 12
+        },
+        {
+          "start": 26,
+          "end": 30,
+          "text": "felé",
+          "lemma": "felé",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 20
+        },
+        {
+          "start": 30,
+          "end": 31,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 43
+        },
+        {
+          "start": 32,
+          "end": 36,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 43
+        },
+        {
+          "start": 37,
+          "end": 42,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 43
+        },
+        {
+          "start": 43,
+          "end": 50,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "advcl",
+          "headStart": 12
+        },
+        {
+          "start": 51,
+          "end": 52,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 53
+        },
+        {
+          "start": 53,
+          "end": 63,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 43
+        },
+        {
+          "start": 63,
+          "end": 64,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 12
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 64,
+          "text": "Az igazgató jelezte Péter felé, hogy Júlia aláírta a szerződést."
+        }
+      ],
+      "entities": [
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Péter",
+          "label": "PER"
+        },
+        {
+          "start": 37,
+          "end": 42,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "with",
+    "text": "Az igazgató közölte Péterrel, hogy Júlia aláírta a szerződést.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 3
+        },
+        {
+          "start": 3,
+          "end": 11,
+          "text": "igazgató",
+          "lemma": "igazgató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 12
+        },
+        {
+          "start": 12,
+          "end": 19,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 12
+        },
+        {
+          "start": 20,
+          "end": 28,
+          "text": "Péterrel",
+          "lemma": "Péter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Ins",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 12
+        },
+        {
+          "start": 28,
+          "end": 29,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 41
+        },
+        {
+          "start": 30,
+          "end": 34,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 41
+        },
+        {
+          "start": 35,
+          "end": 40,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 41
+        },
+        {
+          "start": 41,
+          "end": 48,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ccomp:obj",
+          "headStart": 12
+        },
+        {
+          "start": 49,
+          "end": 50,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 51
+        },
+        {
+          "start": 51,
+          "end": 61,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 41
+        },
+        {
+          "start": 61,
+          "end": 62,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 12
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 62,
+          "text": "Az igazgató közölte Péterrel, hogy Júlia aláírta a szerződést."
+        }
+      ],
+      "entities": [
+        {
+          "start": 20,
+          "end": 28,
+          "text": "Péterrel",
+          "label": "PER"
+        },
+        {
+          "start": 35,
+          "end": 40,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "deadline",
+    "text": "A szóvivő közölte: „Júlia aláírta a szerződést.” November 18-ig lehet jelentkezni.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "szóvivő",
+          "lemma": "szóvivő",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 10
+        },
+        {
+          "start": 10,
+          "end": 17,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 10
+        },
+        {
+          "start": 17,
+          "end": 18,
+          "text": ":",
+          "lemma": ":",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 19
+        },
+        {
+          "start": 19,
+          "end": 20,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 26
+        },
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 26
+        },
+        {
+          "start": 26,
+          "end": 33,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "conj",
+          "headStart": 10
+        },
+        {
+          "start": 34,
+          "end": 35,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 36
+        },
+        {
+          "start": 36,
+          "end": 46,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 26
+        },
+        {
+          "start": 46,
+          "end": 47,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 10
+        },
+        {
+          "start": 47,
+          "end": 48,
+          "text": "”",
+          "lemma": "”",
+          "pos": "X",
+          "morph": {},
+          "dep": "nsubj",
+          "headStart": 64
+        },
+        {
+          "start": 49,
+          "end": 57,
+          "text": "November",
+          "lemma": "november",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 58
+        },
+        {
+          "start": 58,
+          "end": 63,
+          "text": "18-ig",
+          "lemma": "18",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Ter",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 70
+        },
+        {
+          "start": 64,
+          "end": 69,
+          "text": "lehet",
+          "lemma": "lesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Pot",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 64
+        },
+        {
+          "start": 70,
+          "end": 81,
+          "text": "jelentkezni",
+          "lemma": "jelentkezik",
+          "pos": "VERB",
+          "morph": {
+            "VerbForm": "Inf",
+            "Voice": "Act"
+          },
+          "dep": "xcomp",
+          "headStart": 64
+        },
+        {
+          "start": 81,
+          "end": 82,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 64
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 47,
+          "text": "A szóvivő közölte: „Júlia aláírta a szerződést."
+        },
+        {
+          "start": 47,
+          "end": 82,
+          "text": "” November 18-ig lehet jelentkezni."
+        }
+      ],
+      "entities": [
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "count",
+    "text": "A szóvivő közölte: „Júlia aláírta a szerződést.” A vállalat 18 embert alkalmaz.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "szóvivő",
+          "lemma": "szóvivő",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 10
+        },
+        {
+          "start": 10,
+          "end": 17,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 10
+        },
+        {
+          "start": 17,
+          "end": 18,
+          "text": ":",
+          "lemma": ":",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 19
+        },
+        {
+          "start": 19,
+          "end": 20,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 26
+        },
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 26
+        },
+        {
+          "start": 26,
+          "end": 33,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "conj",
+          "headStart": 10
+        },
+        {
+          "start": 34,
+          "end": 35,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 36
+        },
+        {
+          "start": 36,
+          "end": 46,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 26
+        },
+        {
+          "start": 46,
+          "end": 47,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 10
+        },
+        {
+          "start": 47,
+          "end": 48,
+          "text": "”",
+          "lemma": "”",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Prs"
+          },
+          "dep": "ROOT",
+          "headStart": 47
+        },
+        {
+          "start": 49,
+          "end": 50,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 51
+        },
+        {
+          "start": 51,
+          "end": 59,
+          "text": "vállalat",
+          "lemma": "vállalat",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 70
+        },
+        {
+          "start": 60,
+          "end": 62,
+          "text": "18",
+          "lemma": "18",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 63
+        },
+        {
+          "start": 63,
+          "end": 69,
+          "text": "embert",
+          "lemma": "ember",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 70
+        },
+        {
+          "start": 70,
+          "end": 78,
+          "text": "alkalmaz",
+          "lemma": "alkalmaz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 70
+        },
+        {
+          "start": 78,
+          "end": 79,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 70
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 47,
+          "text": "A szóvivő közölte: „Júlia aláírta a szerződést."
+        },
+        {
+          "start": 47,
+          "end": 48,
+          "text": "”"
+        },
+        {
+          "start": 49,
+          "end": 79,
+          "text": "A vállalat 18 embert alkalmaz."
+        }
+      ],
+      "entities": [
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "money",
+    "text": "A szóvivő közölte: „Júlia aláírta a szerződést.” A vállalat 32 forintot fizet.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "szóvivő",
+          "lemma": "szóvivő",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 10
+        },
+        {
+          "start": 10,
+          "end": 17,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 10
+        },
+        {
+          "start": 17,
+          "end": 18,
+          "text": ":",
+          "lemma": ":",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 19
+        },
+        {
+          "start": 19,
+          "end": 20,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 26
+        },
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 26
+        },
+        {
+          "start": 26,
+          "end": 33,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "conj",
+          "headStart": 10
+        },
+        {
+          "start": 34,
+          "end": 35,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 36
+        },
+        {
+          "start": 36,
+          "end": 46,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 26
+        },
+        {
+          "start": 46,
+          "end": 47,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 10
+        },
+        {
+          "start": 47,
+          "end": 48,
+          "text": "”",
+          "lemma": "”",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Prs"
+          },
+          "dep": "ROOT",
+          "headStart": 47
+        },
+        {
+          "start": 49,
+          "end": 50,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 51
+        },
+        {
+          "start": 51,
+          "end": 59,
+          "text": "vállalat",
+          "lemma": "vállalat",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 72
+        },
+        {
+          "start": 60,
+          "end": 62,
+          "text": "32",
+          "lemma": "32",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 63
+        },
+        {
+          "start": 63,
+          "end": 71,
+          "text": "forintot",
+          "lemma": "forint",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 72
+        },
+        {
+          "start": 72,
+          "end": 77,
+          "text": "fizet",
+          "lemma": "fizet",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 72
+        },
+        {
+          "start": 77,
+          "end": 78,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 72
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 47,
+          "text": "A szóvivő közölte: „Júlia aláírta a szerződést."
+        },
+        {
+          "start": 47,
+          "end": 48,
+          "text": "”"
+        },
+        {
+          "start": 49,
+          "end": 78,
+          "text": "A vállalat 32 forintot fizet."
+        }
+      ],
+      "entities": [
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "measurement",
+    "text": "A szóvivő közölte: „Júlia aláírta a szerződést.” Péter 8 kilométert futott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "szóvivő",
+          "lemma": "szóvivő",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 10
+        },
+        {
+          "start": 10,
+          "end": 17,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 10
+        },
+        {
+          "start": 17,
+          "end": 18,
+          "text": ":",
+          "lemma": ":",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 19
+        },
+        {
+          "start": 19,
+          "end": 20,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 26
+        },
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 26
+        },
+        {
+          "start": 26,
+          "end": 33,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "conj",
+          "headStart": 10
+        },
+        {
+          "start": 34,
+          "end": 35,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 36
+        },
+        {
+          "start": 36,
+          "end": 46,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 26
+        },
+        {
+          "start": 46,
+          "end": 47,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 10
+        },
+        {
+          "start": 47,
+          "end": 48,
+          "text": "”",
+          "lemma": "”",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 68
+        },
+        {
+          "start": 49,
+          "end": 54,
+          "text": "Péter",
+          "lemma": "Péter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 68
+        },
+        {
+          "start": 55,
+          "end": 56,
+          "text": "8",
+          "lemma": "8",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 57
+        },
+        {
+          "start": 57,
+          "end": 67,
+          "text": "kilométert",
+          "lemma": "kilométer",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 68
+        },
+        {
+          "start": 68,
+          "end": 74,
+          "text": "futott",
+          "lemma": "fut",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 68
+        },
+        {
+          "start": 74,
+          "end": 75,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 68
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 47,
+          "text": "A szóvivő közölte: „Júlia aláírta a szerződést."
+        },
+        {
+          "start": 47,
+          "end": 75,
+          "text": "” Péter 8 kilométert futott."
+        }
+      ],
+      "entities": [
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Júlia",
+          "label": "PER"
+        },
+        {
+          "start": 49,
+          "end": 54,
+          "text": "Péter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "sourceCount",
+    "text": "Az igazgató szerint a vállalat 18 embert alkalmaz.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 3
+        },
+        {
+          "start": 3,
+          "end": 11,
+          "text": "igazgató",
+          "lemma": "igazgató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 41
+        },
+        {
+          "start": 12,
+          "end": 19,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 3
+        },
+        {
+          "start": 20,
+          "end": 21,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 22
+        },
+        {
+          "start": 22,
+          "end": 30,
+          "text": "vállalat",
+          "lemma": "vállalat",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 41
+        },
+        {
+          "start": 31,
+          "end": 33,
+          "text": "18",
+          "lemma": "18",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 34
+        },
+        {
+          "start": 34,
+          "end": 40,
+          "text": "embert",
+          "lemma": "ember",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 41
+        },
+        {
+          "start": 41,
+          "end": 49,
+          "text": "alkalmaz",
+          "lemma": "alkalmaz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 41
+        },
+        {
+          "start": 49,
+          "end": 50,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 41
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 50,
+          "text": "Az igazgató szerint a vállalat 18 embert alkalmaz."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "sourceTime",
+    "text": "Az igazgató szerint november 18-ig lehet jelentkezni.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 3
+        },
+        {
+          "start": 3,
+          "end": 11,
+          "text": "igazgató",
+          "lemma": "igazgató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 35
+        },
+        {
+          "start": 12,
+          "end": 19,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 3
+        },
+        {
+          "start": 20,
+          "end": 28,
+          "text": "november",
+          "lemma": "november",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 29
+        },
+        {
+          "start": 29,
+          "end": 34,
+          "text": "18-ig",
+          "lemma": "18",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Ter",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 35
+        },
+        {
+          "start": 35,
+          "end": 40,
+          "text": "lehet",
+          "lemma": "lesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Pot",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 35
+        },
+        {
+          "start": 41,
+          "end": 52,
+          "text": "jelentkezni",
+          "lemma": "jelentkezik",
+          "pos": "VERB",
+          "morph": {
+            "VerbForm": "Inf",
+            "Voice": "Act"
+          },
+          "dep": "xcomp",
+          "headStart": 35
+        },
+        {
+          "start": 52,
+          "end": 53,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 35
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 53,
+          "text": "Az igazgató szerint november 18-ig lehet jelentkezni."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "rate",
+    "text": "A rendőrség tagadta, hogy a jármű 80 km/h-val haladt.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "rendőrség",
+          "lemma": "rendőrség",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 12
+        },
+        {
+          "start": 12,
+          "end": 19,
+          "text": "tagadta",
+          "lemma": "tagad",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 12
+        },
+        {
+          "start": 19,
+          "end": 20,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 46
+        },
+        {
+          "start": 21,
+          "end": 25,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 46
+        },
+        {
+          "start": 26,
+          "end": 27,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 28
+        },
+        {
+          "start": 28,
+          "end": 33,
+          "text": "jármű",
+          "lemma": "jármű",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 46
+        },
+        {
+          "start": 34,
+          "end": 36,
+          "text": "80",
+          "lemma": "80",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 37
+        },
+        {
+          "start": 37,
+          "end": 45,
+          "text": "km/h-val",
+          "lemma": "km/h-",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ins",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 46
+        },
+        {
+          "start": 46,
+          "end": 52,
+          "text": "haladt",
+          "lemma": "halad",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "conj",
+          "headStart": 12
+        },
+        {
+          "start": 52,
+          "end": 53,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 12
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 53,
+          "text": "A rendőrség tagadta, hogy a jármű 80 km/h-val haladt."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "contrast",
+    "text": "A minisztérium szerint nem 14, hanem 18 település kap támogatást.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 14,
+          "text": "minisztérium",
+          "lemma": "minisztérium",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod",
+          "headStart": 27
+        },
+        {
+          "start": 15,
+          "end": 22,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 2
+        },
+        {
+          "start": 23,
+          "end": 26,
+          "text": "nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          },
+          "dep": "advmod",
+          "headStart": 27
+        },
+        {
+          "start": 27,
+          "end": 29,
+          "text": "14",
+          "lemma": "14",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 27
+        },
+        {
+          "start": 29,
+          "end": 30,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 50
+        },
+        {
+          "start": 31,
+          "end": 36,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {},
+          "dep": "cc",
+          "headStart": 50
+        },
+        {
+          "start": 37,
+          "end": 39,
+          "text": "18",
+          "lemma": "18",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 40
+        },
+        {
+          "start": 40,
+          "end": 49,
+          "text": "település",
+          "lemma": "település",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 50
+        },
+        {
+          "start": 50,
+          "end": 53,
+          "text": "kap",
+          "lemma": "kap",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "conj",
+          "headStart": 27
+        },
+        {
+          "start": 54,
+          "end": 64,
+          "text": "támogatást",
+          "lemma": "támogatás",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 50
+        },
+        {
+          "start": 64,
+          "end": 65,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 27
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 65,
+          "text": "A minisztérium szerint nem 14, hanem 18 település kap támogatást."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "absent",
+    "text": "„Júlia aláírta a szerződést.” – mondták.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 7
+        },
+        {
+          "start": 1,
+          "end": 6,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "flat:name",
+          "headStart": 0
+        },
+        {
+          "start": 7,
+          "end": 14,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 7
+        },
+        {
+          "start": 15,
+          "end": 16,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 27,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 7
+        },
+        {
+          "start": 27,
+          "end": 28,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 7
+        },
+        {
+          "start": 28,
+          "end": 29,
+          "text": "”",
+          "lemma": "”",
+          "pos": "X",
+          "morph": {},
+          "dep": "obj",
+          "headStart": 32
+        },
+        {
+          "start": 30,
+          "end": 31,
+          "text": "–",
+          "lemma": "–",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 32
+        },
+        {
+          "start": 32,
+          "end": 39,
+          "text": "mondták",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Plur",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 32
+        },
+        {
+          "start": 39,
+          "end": 40,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 32
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 28,
+          "text": "„Júlia aláírta a szerződést."
+        },
+        {
+          "start": 28,
+          "end": 40,
+          "text": "” – mondták."
+        }
+      ],
+      "entities": [
+        {
+          "start": 1,
+          "end": 6,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "multiple",
+    "text": "„Júlia aláírta a szerződést.” – mondta Péter. „Anna elolvasta a levelet.” – közölte Dóra.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 7
+        },
+        {
+          "start": 1,
+          "end": 6,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "flat:name",
+          "headStart": 0
+        },
+        {
+          "start": 7,
+          "end": 14,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 7
+        },
+        {
+          "start": 15,
+          "end": 16,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 27,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 7
+        },
+        {
+          "start": 27,
+          "end": 28,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 7
+        },
+        {
+          "start": 28,
+          "end": 29,
+          "text": "”",
+          "lemma": "”",
+          "pos": "X",
+          "morph": {},
+          "dep": "obj",
+          "headStart": 32
+        },
+        {
+          "start": 30,
+          "end": 31,
+          "text": "–",
+          "lemma": "–",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Dem"
+          },
+          "dep": "advmod:mode",
+          "headStart": 32
+        },
+        {
+          "start": 32,
+          "end": 38,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 32
+        },
+        {
+          "start": 39,
+          "end": 44,
+          "text": "Péter",
+          "lemma": "Péter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 32
+        },
+        {
+          "start": 44,
+          "end": 45,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 32
+        },
+        {
+          "start": 46,
+          "end": 47,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 52
+        },
+        {
+          "start": 47,
+          "end": 51,
+          "text": "Anna",
+          "lemma": "Anna",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 52
+        },
+        {
+          "start": 52,
+          "end": 61,
+          "text": "elolvasta",
+          "lemma": "elolvas",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 52
+        },
+        {
+          "start": 62,
+          "end": 63,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 64
+        },
+        {
+          "start": 64,
+          "end": 71,
+          "text": "levelet",
+          "lemma": "levél",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 52
+        },
+        {
+          "start": 71,
+          "end": 72,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 52
+        },
+        {
+          "start": 72,
+          "end": 73,
+          "text": "”",
+          "lemma": "”",
+          "pos": "X",
+          "morph": {},
+          "dep": "obj",
+          "headStart": 76
+        },
+        {
+          "start": 74,
+          "end": 75,
+          "text": "–",
+          "lemma": "–",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 76
+        },
+        {
+          "start": 76,
+          "end": 83,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 76
+        },
+        {
+          "start": 84,
+          "end": 88,
+          "text": "Dóra",
+          "lemma": "Dóra",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 76
+        },
+        {
+          "start": 88,
+          "end": 89,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 76
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 28,
+          "text": "„Júlia aláírta a szerződést."
+        },
+        {
+          "start": 28,
+          "end": 45,
+          "text": "” – mondta Péter."
+        },
+        {
+          "start": 46,
+          "end": 72,
+          "text": "„Anna elolvasta a levelet."
+        },
+        {
+          "start": 72,
+          "end": 89,
+          "text": "” – közölte Dóra."
+        }
+      ],
+      "entities": [
+        {
+          "start": 1,
+          "end": 6,
+          "text": "Júlia",
+          "label": "PER"
+        },
+        {
+          "start": 39,
+          "end": 44,
+          "text": "Péter",
+          "label": "PER"
+        },
+        {
+          "start": 47,
+          "end": 51,
+          "text": "Anna",
+          "label": "PER"
+        },
+        {
+          "start": 84,
+          "end": 88,
+          "text": "Dóra",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "malformed",
+    "text": "A szóvivő közölte: „Júlia aláírta a szerződést. Péter elolvasta a levelet.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "szóvivő",
+          "lemma": "szóvivő",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 10
+        },
+        {
+          "start": 10,
+          "end": 17,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 10
+        },
+        {
+          "start": 17,
+          "end": 18,
+          "text": ":",
+          "lemma": ":",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 19
+        },
+        {
+          "start": 19,
+          "end": 20,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 26
+        },
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 26
+        },
+        {
+          "start": 26,
+          "end": 33,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "conj",
+          "headStart": 10
+        },
+        {
+          "start": 34,
+          "end": 35,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 36
+        },
+        {
+          "start": 36,
+          "end": 46,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 26
+        },
+        {
+          "start": 46,
+          "end": 47,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 10
+        },
+        {
+          "start": 48,
+          "end": 53,
+          "text": "Péter",
+          "lemma": "Péter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 54
+        },
+        {
+          "start": 54,
+          "end": 63,
+          "text": "elolvasta",
+          "lemma": "elolvas",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 54
+        },
+        {
+          "start": 64,
+          "end": 65,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 66
+        },
+        {
+          "start": 66,
+          "end": 73,
+          "text": "levelet",
+          "lemma": "levél",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 54
+        },
+        {
+          "start": 73,
+          "end": 74,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 54
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 47,
+          "text": "A szóvivő közölte: „Júlia aláírta a szerződést."
+        },
+        {
+          "start": 48,
+          "end": 74,
+          "text": "Péter elolvasta a levelet."
+        }
+      ],
+      "entities": [
+        {
+          "start": 20,
+          "end": 25,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "unknown",
+    "text": "Az igazgató gondolta, hogy Júlia aláírta a szerződést.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 3
+        },
+        {
+          "start": 3,
+          "end": 11,
+          "text": "igazgató",
+          "lemma": "igazgató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 12
+        },
+        {
+          "start": 12,
+          "end": 20,
+          "text": "gondolta",
+          "lemma": "gondol",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 12
+        },
+        {
+          "start": 20,
+          "end": 21,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 33
+        },
+        {
+          "start": 22,
+          "end": 26,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 33
+        },
+        {
+          "start": 27,
+          "end": 32,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 33
+        },
+        {
+          "start": 33,
+          "end": 40,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ccomp:obj",
+          "headStart": 12
+        },
+        {
+          "start": 41,
+          "end": 42,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 43
+        },
+        {
+          "start": 43,
+          "end": 53,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 33
+        },
+        {
+          "start": 53,
+          "end": 54,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 12
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 54,
+          "text": "Az igazgató gondolta, hogy Júlia aláírta a szerződést."
+        }
+      ],
+      "entities": [
+        {
+          "start": 27,
+          "end": 32,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "reported",
+    "text": "Az igazgató elmondta, hogy Júlia aláírta a szerződést.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 3
+        },
+        {
+          "start": 3,
+          "end": 11,
+          "text": "igazgató",
+          "lemma": "igazgató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 12
+        },
+        {
+          "start": 12,
+          "end": 20,
+          "text": "elmondta",
+          "lemma": "elmond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 12
+        },
+        {
+          "start": 20,
+          "end": 21,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 33
+        },
+        {
+          "start": 22,
+          "end": 26,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 33
+        },
+        {
+          "start": 27,
+          "end": 32,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 33
+        },
+        {
+          "start": 33,
+          "end": 40,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ccomp:obj",
+          "headStart": 12
+        },
+        {
+          "start": 41,
+          "end": 42,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 43
+        },
+        {
+          "start": 43,
+          "end": 53,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 33
+        },
+        {
+          "start": 53,
+          "end": 54,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 12
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 54,
+          "text": "Az igazgató elmondta, hogy Júlia aláírta a szerződést."
+        }
+      ],
+      "entities": [
+        {
+          "start": 27,
+          "end": 32,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "nestedQuote",
+    "text": "A lap szerint az igazgató közölte: „Júlia aláírta a szerződést.”",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 5,
+          "text": "lap",
+          "lemma": "lap",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 26
+        },
+        {
+          "start": 6,
+          "end": 13,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 2
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "text": "az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 25,
+          "text": "igazgató",
+          "lemma": "igazgató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 26
+        },
+        {
+          "start": 26,
+          "end": 33,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 26
+        },
+        {
+          "start": 33,
+          "end": 34,
+          "text": ":",
+          "lemma": ":",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 35
+        },
+        {
+          "start": 35,
+          "end": 36,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 42
+        },
+        {
+          "start": 36,
+          "end": 41,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 42
+        },
+        {
+          "start": 42,
+          "end": 49,
+          "text": "aláírta",
+          "lemma": "aláír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "conj",
+          "headStart": 26
+        },
+        {
+          "start": 50,
+          "end": 51,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 52
+        },
+        {
+          "start": 52,
+          "end": 62,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 42
+        },
+        {
+          "start": 62,
+          "end": 63,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 26
+        },
+        {
+          "start": 63,
+          "end": 64,
+          "text": "”",
+          "lemma": "”",
+          "pos": "X",
+          "morph": {},
+          "dep": "ROOT",
+          "headStart": 63
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 63,
+          "text": "A lap szerint az igazgató közölte: „Júlia aláírta a szerződést."
+        },
+        {
+          "start": 63,
+          "end": 64,
+          "text": "”"
+        }
+      ],
+      "entities": [
+        {
+          "start": 36,
+          "end": 41,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  }
+]

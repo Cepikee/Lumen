@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-06T11:11:19.067Z",
+  "branch": "develop/utom-recovery",
+  "localHead": "d145120c6e044b4f25d1d7b94e87846652ef80ba",
+  "remoteTrackingHead": "d145120c6e044b4f25d1d7b94e87846652ef80ba",
+  "liveRemote": "d145120c6e044b4f25d1d7b94e87846652ef80ba\trefs/heads/develop/utom-recovery",
+  "baselineIntegrity": {
+    "total": 38,
+    "mismatches": []
+  },
+  "finalFreezeIntegrity": {
+    "total": 68,
+    "mismatches": []
+  },
+  "trackedDiffSha256": "7266f0ea87a8370755d779272f47b64d6f32098ca0c7c761de84e511f6298169",
+  "gitStatus": "M docs/UTOM_V2_2/10_deterministic_baseline.json\n M docs/UTOM_V2_2/15_heldout_after_generalization.json\n M lib/v2/deterministic-semantic.js\n M lib/v2/entity-extraction-provider.js\n M lib/v22/deterministic-text-provider.cjs\n M package-lock.json\n M package.json\n M tests/unit/v22-real-world-semantic-hardening-round2.test.cjs\n?? AGENTS.md\n?? CLAUDE.md\n?? docs.zip\n?? docs/UTOM_V2_2/CROSS_DOMAIN_SEMANTIC_ARCHITECTURE_AUDIT.md\n?? docs/UTOM_V2_2/huspacy_binding/00_state_freeze.json\n?? docs/UTOM_V2_2/huspacy_binding/01_frozen_heldout.json\n?? docs/UTOM_V2_2/huspacy_binding/02_first_pass_all_configs.json\n?? docs/UTOM_V2_2/huspacy_binding/03_first_pass_metrics.json\n?? docs/UTOM_V2_2/huspacy_binding/04_real_world_003_diagnostic_input.json\n?? docs/UTOM_V2_2/huspacy_binding/05_real_world_003_diagnostic.json\n?? docs/UTOM_V2_2/huspacy_binding/06_worker_runtime.json\n?? docs/UTOM_V2_2/huspacy_binding/07_evidence_integrity.json\n?? docs/UTOM_V2_2/huspacy_binding/HUSPACY_ASSISTED_BINDING_RESEARCH_REPORT.md\n?? docs/UTOM_V2_2/local_nlp/00_state_freeze.json\n?? docs/UTOM_V2_2/local_nlp/01_new_heldout_corpus.json\n?? docs/UTOM_V2_2/local_nlp/02_deterministic_first_pass.json\n?? docs/UTOM_V2_2/local_nlp/03_huspacy_first_pass.json\n?? docs/UTOM_V2_2/local_nlp/04_stanza_first_pass.json\n?? docs/UTOM_V2_2/local_nlp/05_bakeoff_metrics.json\n?? docs/UTOM_V2_2/local_nlp/06_real_world_003_huspacy_diagnostic.json\n?? docs/UTOM_V2_2/local_nlp/07_real_world_003_stanza_diagnostic.json\n?? docs/UTOM_V2_2/local_nlp/08_evidence_integrity.json\n?? docs/UTOM_V2_2/local_nlp/09_worker_failure_results.json\n?? docs/UTOM_V2_2/local_nlp/LOCAL_NLP_FEASIBILITY_BAKEOFF_REPORT.md\n?? docs/UTOM_V2_2/morph_clause/00_baseline_freeze.json\n?? docs/UTOM_V2_2/morph_clause/01_production_audit_baseline.json\n?? docs/UTOM_V2_2/morph_clause/02_final_freeze.json\n?? docs/UTOM_V2_2/morph_clause/03_heldout_evaluation.json\n?? docs/UTOM_V2_2/morph_clause/04_article003_diagnostic.json\n?? docs/UTOM_V2_2/morph_clause/05_runtime.json\n?? docs/UTOM_V2_2/morph_clause/06_historical_regression.json\n?? docs/UTOM_V2_2/morph_clause/07_model_environment.json\n?? docs/UTOM_V2_2/morph_clause/08_production_audit.json\n?? docs/UTOM_V2_2/morph_clause/09_full_audit.json\n?? docs/UTOM_V2_2/morph_clause/10_live_worker_safety.json\n?? docs/UTOM_V2_2/morph_clause/A_first_pass_raw.json\n?? docs/UTOM_V2_2/morph_clause/B_first_pass_raw.json\n?? docs/UTOM_V2_2/morph_clause/E_first_pass_raw.json\n?? docs/UTOM_V2_2/morph_clause/RESEARCH_REPORT.md\n?? docs/UTOM_V2_2/morph_clause/development_latest.json\n?? docs/UTOM_V2_2/morph_clause/final-import.log\n?? docs/UTOM_V2_2/morph_clause/final-targeted-lint.log\n?? docs/UTOM_V2_2/morph_clause/first_pass_started.json\n?? docs/UTOM_V2_2/morph_clause/heldout_annotations.json\n?? docs/UTOM_V2_2/morph_clause/heldout_gold.json\n?? docs/UTOM_V2_2/morph_clause/heldout_inputs.json\n?? docs/UTOM_V2_2/morph_clause/mysql-full.log\n?? docs/UTOM_V2_2/morph_clause/quality-check.log\n?? docs/UTOM_V2_2/morph_clause/runtime.log\n?? docs/UTOM_V2_2/real_world/002_first_pass_human_report.md\n?? docs/UTOM_V2_2/real_world/002_first_pass_raw.json\n?? docs/UTOM_V2_2/real_world/002_source_article.txt\n?? docs/UTOM_V2_2/real_world/002_state_freeze.json\n?? docs/UTOM_V2_2/real_world/003_after_cross_domain_hardening_round2.json\n?? docs/UTOM_V2_2/real_world/003_after_cross_domain_hardening_round2_report.md\n?? docs/UTOM_V2_2/real_world/003_after_cross_domain_semantic_foundation.json\n?? docs/UTOM_V2_2/real_world/003_after_cross_domain_semantic_foundation_report.md\n?? docs/UTOM_V2_2/real_world/003_first_pass_human_report.md\n?? docs/UTOM_V2_2/real_world/003_first_pass_raw.json\n?? docs/UTOM_V2_2/real_world/003_source_article.txt\n?? docs/UTOM_V2_2/real_world/003_state_freeze.json\n?? scripts/experimental/__pycache__/huspacy-binding-research.cpython-312.pyc\n?? scripts/experimental/__pycache__/local-nlp-adapter.cpython-312.pyc\n?? scripts/experimental/__pycache__/local-nlp-worker.cpython-312.pyc\n?? scripts/experimental/evaluate-huspacy-binding.cjs\n?? scripts/experimental/evaluate-local-nlp-bakeoff.cjs\n?? scripts/experimental/huspacy-binding-research.py\n?? scripts/experimental/huspacy-binding-worker-harness.cjs\n?? scripts/experimental/huspacy-binding-worker.py\n?? scripts/experimental/local-nlp-adapter.py\n?? scripts/experimental/local-nlp-baseline.cjs\n?? scripts/experimental/local-nlp-worker-harness.cjs\n?? scripts/experimental/local-nlp-worker.py\n?? scripts/experimental/morph-clause-binder.cjs\n?? scripts/experimental/morph-close-evidence.cjs\n?? scripts/experimental/morph-development.cjs\n?? scripts/experimental/morph-environment.py\n?? scripts/experimental/morph-evaluate.cjs\n?? scripts/experimental/morph-freeze.cjs\n?? scripts/experimental/morph-heldout-prepare.cjs\n?? scripts/experimental/morph-heldout-run.cjs\n?? scripts/experimental/morph-historical-regression.cjs\n?? scripts/experimental/morph-live-worker-safety.cjs\n?? scripts/experimental/morph-measure.cjs\n?? scripts/experimental/morph-worker-client.cjs\n?? scripts/experimental/morph-worker.py\n?? scripts/real-world-002-first-pass.cjs\n?? scripts/real-world-003-after-cross-domain-hardening-round2.cjs\n?? scripts/real-world-003-after-cross-domain-semantic-foundation.cjs\n?? scripts/real-world-003-first-pass.cjs\n?? tests/fixtures/morph-clause/development-annotations.json\n?? tests/unit/v22-cross-domain-semantic-foundation.test.cjs\n?? tests/unit/v22-cross-domain-semantic-hardening-round2.test.cjs\n?? tests/unit/v22-morph-clause-research.test.cjs",
+  "checks": {
+    "offline": {
+      "tests": 505,
+      "pass": 505,
+      "fail": 0
+    },
+    "mysql": {
+      "tests": 60,
+      "pass": 59,
+      "fail": 0,
+      "skip": 1
+    },
+    "productionAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "fullAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 5,
+      "critical": 0,
+      "total": 5
+    }
+  },
+  "artifacts": {
+    "00_baseline_freeze.json": "027bd44d255a1ff9637afa31790713f15190efc748a705d9ed91f9aa6944f0eb",
+    "01_production_audit_baseline.json": "32c4a2262d8247d6608aa040545d66dde7eef598365b46878238c51bd631cefb",
+    "02_final_freeze.json": "83fb060982703e4bca0638670ba55f457e515bf7fe29673f1bda16484cb156e3",
+    "03_heldout_evaluation.json": "23bca43312d681b34f48a2e7f4a3cd5a9f0513277caffd39b64595a5072c0917",
+    "04_article003_diagnostic.json": "f95fc471de7b7b2276f1798b4c9fc98cc443230b720ec140e9822c31d209e9d4",
+    "05_runtime.json": "64da5921ac9b0d0e2b31cb36a059528779292df874e48d9b6a4ca49bfc5eaae4",
+    "06_historical_regression.json": "986e143a160cf203a6469c0af8fcfce152e7b60c73981c1922fe6a447e4ccbb3",
+    "07_model_environment.json": "b771eb84f3616cc71666b66aad619ec33a8ec70a1a816b9887bf5d7fe91688b7",
+    "08_production_audit.json": "caf4d4d80477132ce76d180129e948ad60f64d02e4fb10f685763736e06de8f6",
+    "09_full_audit.json": "79df349fa60102ec353083d3eaccf234a1baf57bd5515b6bd29ade47a183bc89",
+    "10_live_worker_safety.json": "938872ffea8db860fd145a91678ee2880603087262bfe9c50f463e2e2d1815ef",
+    "A_first_pass_raw.json": "71a443557c88ec05a589c50b66613298eb55958d4abed9c41c8d22080c6b75b1",
+    "B_first_pass_raw.json": "0f38062e8515b443190cce93d16156d6d8e60530c4a9fd7f84d38d3120fe0faf",
+    "development_latest.json": "61370aadf22c85acfc9f153b127664b264e6ffc7a2afc42f3534768c56c84949",
+    "E_first_pass_raw.json": "6f52ea5953b8fafffb5de18a2597a2cd8ae4027228a9b5c46bfaca2f95ae69c2",
+    "first_pass_started.json": "ceafa4d428f4cacc193b2f4a48ce37486d7c4f562ed45d13b74153b36cdad023",
+    "heldout_annotations.json": "e08e0db46b4ce25436c59effe38e97060e44011223c06be1cc443e32ad6dddfe",
+    "heldout_gold.json": "74f3b5d496a69f8d100ccd3474695d8c14e598bf437cee00f702241b8f39f641",
+    "heldout_inputs.json": "75283b1b878799cd1fda550be5d0bf566a15b53768dadede66b57e6ae5c35421"
+  },
+  "trackedDiffUnchanged": true
+}

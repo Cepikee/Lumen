@@ -24,6 +24,7 @@ export default function Header() {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const isLanding = pathname.startsWith("/landing");
+  const isPremiumRoute = pathname === "/premium" || pathname.startsWith("/premium/");
 
   const isLegalPage =
     pathname.startsWith("/aszf") ||
@@ -130,7 +131,7 @@ export default function Header() {
     }
   }, [theme]);
 
-  const logoSrc = isLegalPage || isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
+  const logoSrc = isLegalPage || isPremiumRoute || isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
 
   const menuLoggedOut = [
     { href: "/", label: "Főoldal" },
@@ -157,7 +158,7 @@ export default function Header() {
 
   return (
     <nav
-      className={`navbar navbar-expand-lg sticky-top header-nav ${isLegalPage ? "header-legal" : ""}`}
+      className={`navbar navbar-expand-lg sticky-top header-nav ${isLegalPage ? "header-legal" : ""} ${isPremiumRoute ? "header-premium" : ""}`}
     >
       <div className="container-fluid d-flex align-items-center justify-content-between">
         <Link href="/" className="navbar-brand d-flex align-items-center">

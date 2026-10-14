@@ -1,0 +1,6 @@
+{
+  "at": "2026-10-07T08:41:41.428Z",
+  "file": "tests/integration/mysql-v2-http-m13.test.cjs",
+  "sha256": "444d9f90c7100ffde76fdf5e9d393f71a8d085cd3d759aa5fe864d49fdc730d0",
+  "reason": "reproduced 3306 collision and stale OFF server response; test infrastructure only"
+}

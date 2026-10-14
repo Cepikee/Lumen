@@ -1,0 +1,41 @@
+{
+  "mode": "persistent_sequential_full_raw_articles_001_002_003_replayed_for_load_only",
+  "noSemanticTuning": true,
+  "model": {
+    "type": "ready",
+    "model": "hu_core_news_md",
+    "version": "3.8.0",
+    "loadMs": 1045.1819190056995
+  },
+  "coldArticle003Ms": 5941.5226,
+  "runs": [
+    {
+      "count": 100,
+      "elapsedMs": 143123.2445,
+      "articlesPerSecond": 0.6986985262201766,
+      "meanMs": 1431.232445,
+      "p50Ms": 1789.9906000000046,
+      "p95Ms": 1897.5289000000048,
+      "totalChars": 1178554,
+      "totalTokens": 192044
+    },
+    {
+      "count": 500,
+      "elapsedMs": 687831.0430000001,
+      "articlesPerSecond": 0.7269227015681524,
+      "meanMs": 1375.662086,
+      "p50Ms": 1729.242099999974,
+      "p95Ms": 1811.242900000012,
+      "totalChars": 5873256,
+      "totalTokens": 957150
+    }
+  ],
+  "peakRssBytes": 624168960,
+  "restartMs": 1444.813300000038,
+  "priorReported": {
+    "msPerArticle": 23,
+    "ramMB": 636,
+    "comparability": "not controlled; different input lengths/model environment/concurrent checks"
+  },
+  "at": "2026-10-06T11:10:57.625Z"
+}

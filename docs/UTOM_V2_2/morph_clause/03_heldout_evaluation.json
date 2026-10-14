@@ -1,0 +1,4362 @@
+{
+  "A": {
+    "method": "one_to_one_offsets; abstention_is_missing_not_correct; unmatched_predictions_are_false_positives; semanticContract_is_gold_field_proxy_not_formal_entailment",
+    "metrics": {
+      "propositionSegmentation": {
+        "correct": 5,
+        "predicted": 18,
+        "gold": 48,
+        "precision": 0.2777777777777778,
+        "recall": 0.10416666666666667
+      },
+      "subjectBinding": {
+        "correct": 3,
+        "predicted": 7,
+        "gold": 43,
+        "precision": 0.42857142857142855,
+        "recall": 0.06976744186046512
+      },
+      "actorActionBinding": {
+        "correct": 3,
+        "predicted": 7,
+        "gold": 43,
+        "precision": 0.42857142857142855,
+        "recall": 0.06976744186046512
+      },
+      "objectBinding": {
+        "correct": 0,
+        "total": 14,
+        "ratio": 0
+      },
+      "attributionSourceAccuracy": {
+        "correct": 15,
+        "total": 48,
+        "ratio": 0.3125
+      },
+      "attributionScopeAccuracy": {
+        "correct": 3,
+        "total": 48,
+        "ratio": 0.0625
+      },
+      "negationAccuracy": {
+        "correct": 16,
+        "total": 48,
+        "ratio": 0.3333333333333333
+      },
+      "conditionalScopeAccuracy": {
+        "correct": 16,
+        "total": 48,
+        "ratio": 0.3333333333333333
+      },
+      "resolvedSemanticContract": {
+        "correct": 1,
+        "predicted": 7,
+        "gold": 48,
+        "precision": 0.14285714285714285,
+        "recall": 0.020833333333333332
+      },
+      "numericSubjectCandidate": {
+        "correct": 1,
+        "predicted": 4,
+        "gold": 33,
+        "precision": 0.25,
+        "recall": 0.030303030303030304
+      },
+      "numericSubjectResolved": {
+        "correct": 1,
+        "predicted": 4,
+        "gold": 33,
+        "precision": 0.25,
+        "recall": 0.030303030303030304
+      },
+      "numericValue": {
+        "correct": 15,
+        "total": 35,
+        "ratio": 0.42857142857142855
+      },
+      "numericSemanticKind": {
+        "correct": 9,
+        "total": 35,
+        "ratio": 0.2571428571428571
+      },
+      "entityBoundary": {
+        "correct": 8,
+        "predicted": 10,
+        "gold": 34,
+        "precision": 0.8,
+        "recall": 0.23529411764705882
+      },
+      "entityTyped": {
+        "correct": 6,
+        "predicted": 10,
+        "gold": 34,
+        "precision": 0.6,
+        "recall": 0.17647058823529413
+      },
+      "entityTypingOnExactBoundaries": {
+        "correct": 6,
+        "total": 8,
+        "ratio": 0.75
+      },
+      "identityOnExactBoundaries": {
+        "correct": 8,
+        "total": 8,
+        "ratio": 1
+      },
+      "identityGoldCoverage": {
+        "correct": 8,
+        "total": 34,
+        "ratio": 0.23529411764705882
+      },
+      "explicitAttributionSource": {
+        "correct": 5,
+        "total": 7,
+        "ratio": 0.7142857142857143
+      },
+      "admissionDenialSeparation": {
+        "correct": 0,
+        "total": 1,
+        "ratio": 0
+      },
+      "explicitModality": {
+        "correct": 0,
+        "total": 1,
+        "ratio": 0
+      },
+      "explicitTime": {
+        "correct": 1,
+        "total": 1,
+        "ratio": 1
+      }
+    },
+    "evidence": {
+      "uniqueSpans": 18,
+      "exact": 18,
+      "failures": 0
+    },
+    "duplicates": 0,
+    "canonicalProjection": {
+      "count": 0,
+      "unsupportedCount": null,
+      "reason": "N/A: no canonical projector enabled; zero output is not efficacy evidence"
+    },
+    "falseConflict": {
+      "count": 0,
+      "rate": null,
+      "reason": "N/A: conflict inference not enabled"
+    },
+    "detail": [
+      {
+        "id": "h01",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 2,
+            "subject": "",
+            "expectedSubject": "judit",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "eszter",
+            "value": 38,
+            "expectedValue": 38,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": false
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": "márton",
+            "value": 34,
+            "expectedValue": 34,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": false
+          },
+          {
+            "predicted": 2,
+            "gold": 2,
+            "subject": "",
+            "expectedSubject": "judit",
+            "value": 28,
+            "expectedValue": 28,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": false
+          }
+        ]
+      },
+      {
+        "id": "h02",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": "miskolc",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": "miskolc",
+            "value": 29,
+            "expectedValue": 29,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": false,
+            "resolved": false
+          }
+        ]
+      },
+      {
+        "id": "h03",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": "kórház",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "rendelő",
+            "value": 84,
+            "expectedValue": 84,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": false
+          }
+        ]
+      },
+      {
+        "id": "h04",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 1,
+            "subject": "rába erőmű",
+            "expectedSubject": "mátra erőmű",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Rába Erőmű",
+            "normalized": "rába erőmű",
+            "expected": {
+              "mention": "Rába Erőmű",
+              "normalized": "rába erőmű",
+              "type": "organization",
+              "start": 2,
+              "end": 12
+            },
+            "typeOK": false,
+            "identityOK": true
+          },
+          {
+            "mention": "Mátra Erőmű",
+            "normalized": "mátra erőmű",
+            "expected": {
+              "mention": "Mátra Erőmű",
+              "normalized": "mátra erőmű",
+              "type": "organization",
+              "start": 38,
+              "end": 49
+            },
+            "typeOK": false,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h05",
+        "frames": [],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h06",
+        "frames": [],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h07",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": "iskola",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": "iskola",
+            "value": 19,
+            "expectedValue": 19,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": false
+          }
+        ]
+      },
+      {
+        "id": "h08",
+        "frames": [],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h09",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "dóra",
+            "expectedSubject": "dóra",
+            "source": "dóra",
+            "expectedSource": "dóra",
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": false,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "dóra",
+            "expectedSubject": "dóra",
+            "source": "dóra",
+            "expectedSource": "dóra",
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": false,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Dóra",
+            "normalized": "dóra",
+            "expected": {
+              "mention": "Dóra",
+              "normalized": "dóra",
+              "type": "person",
+              "start": 0,
+              "end": 4
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h10",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "rendőrség",
+            "expectedSubject": null,
+            "source": "rendőrség",
+            "expectedSource": "rendőrség",
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": false,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "rendőrség",
+            "normalized": "rendőrség",
+            "expected": {
+              "mention": "rendőrség",
+              "normalized": "rendőrség",
+              "type": "organization",
+              "start": 2,
+              "end": 11
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h11",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "oldat",
+            "source": "kutató",
+            "expectedSource": "kutató",
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": false,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h12",
+        "frames": [],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h13",
+        "frames": [],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h14",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "ítélet",
+            "source": "cnn azt",
+            "expectedSource": "bíróság",
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": false,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h15",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "nagy tamás",
+            "expectedSubject": null,
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Nagy Emese",
+            "normalized": "nagy emese",
+            "expected": {
+              "mention": "Nagy Emese",
+              "normalized": "nagy emese",
+              "type": "person",
+              "start": 0,
+              "end": 10
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Nagy Tamás",
+            "normalized": "nagy tamás",
+            "expected": {
+              "mention": "Nagy Tamás",
+              "normalized": "nagy tamás",
+              "type": "person",
+              "start": 14,
+              "end": 24
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "nagy tamás",
+            "expectedSubject": null,
+            "value": 14,
+            "expectedValue": 14,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": false,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h16",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "ilona",
+            "source": "",
+            "expectedSource": "ilona",
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": false,
+            "negOK": true,
+            "condOK": false,
+            "objectOK": false,
+            "modalityOK": false,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h17",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "intézet",
+            "expectedSubject": "tarifa",
+            "source": "intézet",
+            "expectedSource": "intézet",
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "intézet",
+            "normalized": "intézet",
+            "expected": {
+              "mention": "intézet",
+              "normalized": "intézet",
+              "type": "organization",
+              "start": 3,
+              "end": 10
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "intézet",
+            "expectedSubject": "változás",
+            "value": 3,
+            "expectedValue": 3,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": false,
+            "resolved": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "intézet",
+            "expectedSubject": "tarifa",
+            "value": 15,
+            "expectedValue": 15,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h18",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "korábbi referencia",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [],
+        "numeric": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": "emese",
+            "value": 23,
+            "expectedValue": 23,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": false
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "korábbi referencia",
+            "value": 17,
+            "expectedValue": 17,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": false,
+            "resolved": false
+          }
+        ]
+      },
+      {
+        "id": "h19",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": "tamás",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "emese",
+            "value": 62,
+            "expectedValue": 62,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": false
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": "tamás",
+            "value": 38,
+            "expectedValue": 38,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": false
+          }
+        ]
+      },
+      {
+        "id": "h20",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 2,
+            "subject": "szabó péter",
+            "expectedSubject": "szabó péter",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Szabó Péter",
+            "normalized": "szabó péter",
+            "expected": {
+              "mention": "Szabó Péter",
+              "normalized": "szabó péter",
+              "type": "person",
+              "start": 48,
+              "end": 59
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "szabó péter",
+            "expectedSubject": "szabó péter",
+            "value": 11,
+            "expectedValue": 11,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": false,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h21",
+        "frames": [],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h22",
+        "frames": [],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h23",
+        "frames": [],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h24",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "sopron",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "sopron",
+            "value": 4,
+            "expectedValue": -4,
+            "valueOK": false,
+            "subjectOK": false,
+            "kindOK": false,
+            "resolved": false
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": "eger",
+            "value": 2,
+            "expectedValue": 2,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": false,
+            "resolved": false
+          }
+        ]
+      }
+    ]
+  },
+  "B": {
+    "method": "one_to_one_offsets; abstention_is_missing_not_correct; unmatched_predictions_are_false_positives; semanticContract_is_gold_field_proxy_not_formal_entailment",
+    "metrics": {
+      "propositionSegmentation": {
+        "correct": 11,
+        "predicted": 22,
+        "gold": 48,
+        "precision": 0.5,
+        "recall": 0.22916666666666666
+      },
+      "subjectBinding": {
+        "correct": 13,
+        "predicted": 20,
+        "gold": 43,
+        "precision": 0.65,
+        "recall": 0.3023255813953488
+      },
+      "actorActionBinding": {
+        "correct": 13,
+        "predicted": 20,
+        "gold": 43,
+        "precision": 0.65,
+        "recall": 0.3023255813953488
+      },
+      "objectBinding": {
+        "correct": 1,
+        "total": 14,
+        "ratio": 0.07142857142857142
+      },
+      "attributionSourceAccuracy": {
+        "correct": 19,
+        "total": 48,
+        "ratio": 0.3958333333333333
+      },
+      "attributionScopeAccuracy": {
+        "correct": 9,
+        "total": 48,
+        "ratio": 0.1875
+      },
+      "negationAccuracy": {
+        "correct": 20,
+        "total": 48,
+        "ratio": 0.4166666666666667
+      },
+      "conditionalScopeAccuracy": {
+        "correct": 20,
+        "total": 48,
+        "ratio": 0.4166666666666667
+      },
+      "resolvedSemanticContract": {
+        "correct": 9,
+        "predicted": 20,
+        "gold": 48,
+        "precision": 0.45,
+        "recall": 0.1875
+      },
+      "numericSubjectCandidate": {
+        "correct": 10,
+        "predicted": 15,
+        "gold": 33,
+        "precision": 0.6666666666666666,
+        "recall": 0.30303030303030304
+      },
+      "numericSubjectResolved": {
+        "correct": 10,
+        "predicted": 15,
+        "gold": 33,
+        "precision": 0.6666666666666666,
+        "recall": 0.30303030303030304
+      },
+      "numericValue": {
+        "correct": 15,
+        "total": 35,
+        "ratio": 0.42857142857142855
+      },
+      "numericSemanticKind": {
+        "correct": 9,
+        "total": 35,
+        "ratio": 0.2571428571428571
+      },
+      "entityBoundary": {
+        "correct": 34,
+        "predicted": 35,
+        "gold": 34,
+        "precision": 0.9714285714285714,
+        "recall": 1
+      },
+      "entityTyped": {
+        "correct": 34,
+        "predicted": 35,
+        "gold": 34,
+        "precision": 0.9714285714285714,
+        "recall": 1
+      },
+      "entityTypingOnExactBoundaries": {
+        "correct": 34,
+        "total": 34,
+        "ratio": 1
+      },
+      "identityOnExactBoundaries": {
+        "correct": 32,
+        "total": 34,
+        "ratio": 0.9411764705882353
+      },
+      "identityGoldCoverage": {
+        "correct": 32,
+        "total": 34,
+        "ratio": 0.9411764705882353
+      },
+      "explicitAttributionSource": {
+        "correct": 5,
+        "total": 7,
+        "ratio": 0.7142857142857143
+      },
+      "admissionDenialSeparation": {
+        "correct": 0,
+        "total": 1,
+        "ratio": 0
+      },
+      "explicitModality": {
+        "correct": 0,
+        "total": 1,
+        "ratio": 0
+      },
+      "explicitTime": {
+        "correct": 1,
+        "total": 1,
+        "ratio": 1
+      }
+    },
+    "evidence": {
+      "uniqueSpans": 57,
+      "exact": 57,
+      "failures": 0
+    },
+    "duplicates": 0,
+    "canonicalProjection": {
+      "count": 0,
+      "unsupportedCount": null,
+      "reason": "N/A: no canonical projector enabled; zero output is not efficacy evidence"
+    },
+    "falseConflict": {
+      "count": 0,
+      "rate": null,
+      "reason": "N/A: conflict inference not enabled"
+    },
+    "detail": [
+      {
+        "id": "h01",
+        "frames": [
+          {
+            "predicted": 2,
+            "gold": 2,
+            "subject": "judit",
+            "expectedSubject": "judit",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "eszter",
+            "expectedSubject": "eszter",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "márton",
+            "expectedSubject": "márton",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "expected": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "type": "person",
+              "start": 0,
+              "end": 6
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Márton",
+            "normalized": "márton",
+            "expected": {
+              "mention": "Márton",
+              "normalized": "márton",
+              "type": "person",
+              "start": 22,
+              "end": 28
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Judit",
+            "normalized": "judit",
+            "expected": {
+              "mention": "Judit",
+              "normalized": "judit",
+              "type": "person",
+              "start": 44,
+              "end": 49
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "eszter",
+            "expectedSubject": "eszter",
+            "value": 38,
+            "expectedValue": 38,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "márton",
+            "expectedSubject": "márton",
+            "value": 34,
+            "expectedValue": 34,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 2,
+            "gold": 2,
+            "subject": "judit",
+            "expectedSubject": "judit",
+            "value": 28,
+            "expectedValue": 28,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h02",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 1,
+            "subject": "miskolc",
+            "expectedSubject": "miskolc",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Debrecenben",
+            "normalized": "debrecen",
+            "expected": {
+              "mention": "Debrecenben",
+              "normalized": "debrecen",
+              "type": "location",
+              "start": 0,
+              "end": 11
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Miskolcon",
+            "normalized": "miskolc",
+            "expected": {
+              "mention": "Miskolcon",
+              "normalized": "miskolc",
+              "type": "location",
+              "start": 16,
+              "end": 25
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 1,
+            "subject": "miskolc",
+            "expectedSubject": "miskolc",
+            "value": 29,
+            "expectedValue": 29,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": false,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h03",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": "kórház",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "kórházban",
+            "normalized": "kórház",
+            "expected": {
+              "mention": "kórházban",
+              "normalized": "kórház",
+              "type": "organization",
+              "start": 27,
+              "end": 36
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "rendelő",
+            "value": 84,
+            "expectedValue": 84,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": false
+          }
+        ]
+      },
+      {
+        "id": "h04",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 1,
+            "subject": "rába erőmű",
+            "expectedSubject": "mátra erőmű",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Rába Erőmű",
+            "normalized": "rába erőmű",
+            "expected": {
+              "mention": "Rába Erőmű",
+              "normalized": "rába erőmű",
+              "type": "organization",
+              "start": 2,
+              "end": 12
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Mátra Erőmű",
+            "normalized": "mátra erőmű",
+            "expected": {
+              "mention": "Mátra Erőmű",
+              "normalized": "mátra erőmű",
+              "type": "organization",
+              "start": 38,
+              "end": 49
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h05",
+        "frames": [],
+        "entities": [
+          {
+            "mention": "Fenyő Zrt.",
+            "normalized": "fenyő zrt.",
+            "expected": {
+              "mention": "Fenyő Zrt.",
+              "normalized": "fenyő zrt.",
+              "type": "organization",
+              "start": 2,
+              "end": 12
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Tölgy Kft.",
+            "normalized": "tölgy kft.",
+            "expected": {
+              "mention": "Tölgy Kft.",
+              "normalized": "tölgy kft.",
+              "type": "organization",
+              "start": 34,
+              "end": 44
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h06",
+        "frames": [],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h07",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 1,
+            "subject": "iskola",
+            "expectedSubject": "iskola",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "iskola",
+            "normalized": "iskola",
+            "expected": {
+              "mention": "iskola",
+              "normalized": "iskola",
+              "type": "organization",
+              "start": 26,
+              "end": 32
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 1,
+            "subject": "iskola",
+            "expectedSubject": "iskola",
+            "value": 19,
+            "expectedValue": 19,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h08",
+        "frames": [],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h09",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "dóra",
+            "expectedSubject": "dóra",
+            "source": "dóra",
+            "expectedSource": "dóra",
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": false,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "dóra",
+            "expectedSubject": "dóra",
+            "source": "dóra",
+            "expectedSource": "dóra",
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": false,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Dóra",
+            "normalized": "dóra",
+            "expected": {
+              "mention": "Dóra",
+              "normalized": "dóra",
+              "type": "person",
+              "start": 0,
+              "end": 4
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h10",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "rendőrség",
+            "expectedSubject": null,
+            "source": "rendőrség",
+            "expectedSource": "rendőrség",
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": false,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "rendőrség",
+            "normalized": "rendőrség",
+            "expected": {
+              "mention": "rendőrség",
+              "normalized": "rendőrség",
+              "type": "organization",
+              "start": 2,
+              "end": 11
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h11",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "oldat",
+            "source": "kutató",
+            "expectedSource": "kutató",
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": false,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h12",
+        "frames": [],
+        "entities": [
+          {
+            "mention": "minisztérium",
+            "normalized": "minisztérium",
+            "expected": {
+              "mention": "minisztérium",
+              "normalized": "minisztérium",
+              "type": "organization",
+              "start": 36,
+              "end": 48
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h13",
+        "frames": [],
+        "entities": [
+          {
+            "mention": "Emese",
+            "normalized": "emese",
+            "expected": {
+              "mention": "Emese",
+              "normalized": "emese",
+              "type": "person",
+              "start": 3,
+              "end": 8
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Tamás",
+            "normalized": "tamás",
+            "expected": {
+              "mention": "Tamás",
+              "normalized": "tamás",
+              "type": "person",
+              "start": 32,
+              "end": 37
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h14",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "bíróság",
+            "expectedSubject": "ítélet",
+            "source": "cnn azt",
+            "expectedSource": "bíróság",
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": false,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "CNN",
+            "normalized": "cnn",
+            "expected": {
+              "mention": "CNN",
+              "normalized": "cnn",
+              "type": "organization",
+              "start": 2,
+              "end": 5
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "bíróság",
+            "normalized": "bíróság",
+            "expected": {
+              "mention": "bíróság",
+              "normalized": "bíróság",
+              "type": "organization",
+              "start": 26,
+              "end": 33
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h15",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "nagy tamás",
+            "expectedSubject": null,
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Nagy Emese",
+            "normalized": "nagy emese",
+            "expected": {
+              "mention": "Nagy Emese",
+              "normalized": "nagy emese",
+              "type": "person",
+              "start": 0,
+              "end": 10
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Nagy Tamás",
+            "normalized": "nagy tamás",
+            "expected": {
+              "mention": "Nagy Tamás",
+              "normalized": "nagy tamás",
+              "type": "person",
+              "start": 14,
+              "end": 24
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "nagy tamás",
+            "expectedSubject": null,
+            "value": 14,
+            "expectedValue": 14,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": false,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h16",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "ilona",
+            "expectedSubject": "ilona",
+            "source": "",
+            "expectedSource": "ilona",
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": false,
+            "negOK": true,
+            "condOK": false,
+            "objectOK": true,
+            "modalityOK": false,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Ilona",
+            "normalized": "ilona",
+            "expected": {
+              "mention": "Ilona",
+              "normalized": "ilona",
+              "type": "person",
+              "start": 0,
+              "end": 5
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h17",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "intézet",
+            "expectedSubject": "tarifa",
+            "source": "intézet",
+            "expectedSource": "intézet",
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "intézet",
+            "normalized": "intézet",
+            "expected": {
+              "mention": "intézet",
+              "normalized": "intézet",
+              "type": "organization",
+              "start": 3,
+              "end": 10
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "intézet",
+            "expectedSubject": "változás",
+            "value": 3,
+            "expectedValue": 3,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": false,
+            "resolved": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "intézet",
+            "expectedSubject": "tarifa",
+            "value": 15,
+            "expectedValue": 15,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h18",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "emese",
+            "expectedSubject": "korábbi referencia",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Emese",
+            "normalized": "emese",
+            "expected": {
+              "mention": "Emese",
+              "normalized": "emese",
+              "type": "person",
+              "start": 39,
+              "end": 44
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "emese",
+            "expectedSubject": "emese",
+            "value": 23,
+            "expectedValue": 23,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "emese",
+            "expectedSubject": "korábbi referencia",
+            "value": 17,
+            "expectedValue": 17,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": false,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h19",
+        "frames": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "tamás",
+            "expectedSubject": "tamás",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "emese",
+            "expectedSubject": "emese",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Emese",
+            "normalized": "emese",
+            "expected": {
+              "mention": "Emese",
+              "normalized": "emese",
+              "type": "person",
+              "start": 30,
+              "end": 35
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Tamás",
+            "normalized": "tamás",
+            "expected": {
+              "mention": "Tamás",
+              "normalized": "tamás",
+              "type": "person",
+              "start": 51,
+              "end": 56
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "emese",
+            "expectedSubject": "emese",
+            "value": 62,
+            "expectedValue": 62,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "tamás",
+            "expectedSubject": "tamás",
+            "value": 38,
+            "expectedValue": 38,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h20",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 2,
+            "subject": "szabó péter",
+            "expectedSubject": "szabó péter",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Szabó Júliának",
+            "normalized": "szabó júliá",
+            "expected": {
+              "mention": "Szabó Júliának",
+              "normalized": "szabó júlia",
+              "type": "person",
+              "start": 0,
+              "end": 14
+            },
+            "typeOK": true,
+            "identityOK": false
+          },
+          {
+            "mention": "Szabó Júliáról",
+            "normalized": "szabó júliá",
+            "expected": {
+              "mention": "Szabó Júliáról",
+              "normalized": "szabó júlia",
+              "type": "person",
+              "start": 22,
+              "end": 36
+            },
+            "typeOK": true,
+            "identityOK": false
+          },
+          {
+            "mention": "Szabó Péter",
+            "normalized": "szabó péter",
+            "expected": {
+              "mention": "Szabó Péter",
+              "normalized": "szabó péter",
+              "type": "person",
+              "start": 48,
+              "end": 59
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "szabó péter",
+            "expectedSubject": "szabó péter",
+            "value": 11,
+            "expectedValue": 11,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": false,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h21",
+        "frames": [],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h22",
+        "frames": [],
+        "entities": [
+          {
+            "mention": "Miklós",
+            "normalized": "miklós",
+            "expected": {
+              "mention": "Miklós",
+              "normalized": "miklós",
+              "type": "person",
+              "start": 0,
+              "end": 6
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Zsófia",
+            "normalized": "zsófia",
+            "expected": {
+              "mention": "Zsófia",
+              "normalized": "zsófia",
+              "type": "person",
+              "start": 31,
+              "end": 37
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h23",
+        "frames": [],
+        "entities": [
+          {
+            "mention": "Ilona",
+            "normalized": "ilona",
+            "expected": {
+              "mention": "Ilona",
+              "normalized": "ilona",
+              "type": "person",
+              "start": 30,
+              "end": 35
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Péter",
+            "normalized": "péter",
+            "expected": {
+              "mention": "Péter",
+              "normalized": "péter",
+              "type": "person",
+              "start": 37,
+              "end": 42
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h24",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "sopron",
+            "expectedSubject": "sopron",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "eger",
+            "expectedSubject": "eger",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Sopronban",
+            "normalized": "sopron",
+            "expected": {
+              "mention": "Sopronban",
+              "normalized": "sopron",
+              "type": "location",
+              "start": 0,
+              "end": 9
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Egerben",
+            "normalized": "eger",
+            "expected": {
+              "mention": "Egerben",
+              "normalized": "eger",
+              "type": "location",
+              "start": 26,
+              "end": 33
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "sopron",
+            "expectedSubject": "sopron",
+            "value": 4,
+            "expectedValue": -4,
+            "valueOK": false,
+            "subjectOK": true,
+            "kindOK": false,
+            "resolved": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "eger",
+            "expectedSubject": "eger",
+            "value": 2,
+            "expectedValue": 2,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": false,
+            "resolved": true
+          }
+        ]
+      }
+    ]
+  },
+  "E": {
+    "method": "one_to_one_offsets; abstention_is_missing_not_correct; unmatched_predictions_are_false_positives; semanticContract_is_gold_field_proxy_not_formal_entailment",
+    "metrics": {
+      "propositionSegmentation": {
+        "correct": 47,
+        "predicted": 49,
+        "gold": 48,
+        "precision": 0.9591836734693877,
+        "recall": 0.9791666666666666
+      },
+      "subjectBinding": {
+        "correct": 38,
+        "predicted": 42,
+        "gold": 43,
+        "precision": 0.9047619047619048,
+        "recall": 0.8837209302325582
+      },
+      "actorActionBinding": {
+        "correct": 35,
+        "predicted": 40,
+        "gold": 43,
+        "precision": 0.875,
+        "recall": 0.813953488372093
+      },
+      "objectBinding": {
+        "correct": 11,
+        "total": 14,
+        "ratio": 0.7857142857142857
+      },
+      "attributionSourceAccuracy": {
+        "correct": 44,
+        "total": 49,
+        "ratio": 0.8979591836734694
+      },
+      "attributionScopeAccuracy": {
+        "correct": 44,
+        "total": 49,
+        "ratio": 0.8979591836734694
+      },
+      "negationAccuracy": {
+        "correct": 48,
+        "total": 49,
+        "ratio": 0.9795918367346939
+      },
+      "conditionalScopeAccuracy": {
+        "correct": 48,
+        "total": 49,
+        "ratio": 0.9795918367346939
+      },
+      "resolvedSemanticContract": {
+        "correct": 32,
+        "predicted": 39,
+        "gold": 48,
+        "precision": 0.8205128205128205,
+        "recall": 0.6666666666666666
+      },
+      "numericSubjectCandidate": {
+        "correct": 29,
+        "predicted": 32,
+        "gold": 33,
+        "precision": 0.90625,
+        "recall": 0.8787878787878788
+      },
+      "numericSubjectResolved": {
+        "correct": 28,
+        "predicted": 31,
+        "gold": 33,
+        "precision": 0.9032258064516129,
+        "recall": 0.8484848484848485
+      },
+      "numericValue": {
+        "correct": 34,
+        "total": 35,
+        "ratio": 0.9714285714285714
+      },
+      "numericSemanticKind": {
+        "correct": 33,
+        "total": 35,
+        "ratio": 0.9428571428571428
+      },
+      "entityBoundary": {
+        "correct": 34,
+        "predicted": 35,
+        "gold": 34,
+        "precision": 0.9714285714285714,
+        "recall": 1
+      },
+      "entityTyped": {
+        "correct": 34,
+        "predicted": 35,
+        "gold": 34,
+        "precision": 0.9714285714285714,
+        "recall": 1
+      },
+      "entityTypingOnExactBoundaries": {
+        "correct": 34,
+        "total": 34,
+        "ratio": 1
+      },
+      "identityOnExactBoundaries": {
+        "correct": 32,
+        "total": 34,
+        "ratio": 0.9411764705882353
+      },
+      "identityGoldCoverage": {
+        "correct": 32,
+        "total": 34,
+        "ratio": 0.9411764705882353
+      },
+      "explicitAttributionSource": {
+        "correct": 10,
+        "total": 13,
+        "ratio": 0.7692307692307693
+      },
+      "admissionDenialSeparation": {
+        "correct": 1,
+        "total": 1,
+        "ratio": 1
+      },
+      "explicitTime": {
+        "correct": 4,
+        "total": 4,
+        "ratio": 1
+      },
+      "explicitModality": {
+        "correct": 4,
+        "total": 5,
+        "ratio": 0.8
+      }
+    },
+    "evidence": {
+      "uniqueSpans": 189,
+      "exact": 189,
+      "failures": 0
+    },
+    "duplicates": 0,
+    "canonicalProjection": {
+      "count": 0,
+      "unsupportedCount": null,
+      "reason": "N/A: no canonical projector enabled; zero output is not efficacy evidence"
+    },
+    "falseConflict": {
+      "count": 0,
+      "rate": null,
+      "reason": "N/A: conflict inference not enabled"
+    },
+    "detail": [
+      {
+        "id": "h01",
+        "frames": [
+          {
+            "predicted": 2,
+            "gold": 2,
+            "subject": "judit",
+            "expectedSubject": "judit",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "eszter",
+            "expectedSubject": "eszter",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "márton",
+            "expectedSubject": "márton",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "expected": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "type": "person",
+              "start": 0,
+              "end": 6
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Márton",
+            "normalized": "márton",
+            "expected": {
+              "mention": "Márton",
+              "normalized": "márton",
+              "type": "person",
+              "start": 22,
+              "end": 28
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Judit",
+            "normalized": "judit",
+            "expected": {
+              "mention": "Judit",
+              "normalized": "judit",
+              "type": "person",
+              "start": 44,
+              "end": 49
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "eszter",
+            "expectedSubject": "eszter",
+            "value": 38,
+            "expectedValue": 38,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "márton",
+            "expectedSubject": "márton",
+            "value": 34,
+            "expectedValue": 34,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 2,
+            "gold": 2,
+            "subject": "judit",
+            "expectedSubject": "judit",
+            "value": 28,
+            "expectedValue": 28,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h02",
+        "frames": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "miskolc",
+            "expectedSubject": "miskolc",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "debrecen",
+            "expectedSubject": "debrecen",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Debrecenben",
+            "normalized": "debrecen",
+            "expected": {
+              "mention": "Debrecenben",
+              "normalized": "debrecen",
+              "type": "location",
+              "start": 0,
+              "end": 11
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Miskolcon",
+            "normalized": "miskolc",
+            "expected": {
+              "mention": "Miskolcon",
+              "normalized": "miskolc",
+              "type": "location",
+              "start": 16,
+              "end": 25
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "miskolc",
+            "expectedSubject": "miskolc",
+            "value": 29,
+            "expectedValue": 29,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "debrecen",
+            "expectedSubject": "debrecen",
+            "value": 26,
+            "expectedValue": 26,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h03",
+        "frames": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "kórház",
+            "expectedSubject": "kórház",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "rendelő",
+            "expectedSubject": "rendelő",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "kórházban",
+            "normalized": "kórház",
+            "expected": {
+              "mention": "kórházban",
+              "normalized": "kórház",
+              "type": "organization",
+              "start": 27,
+              "end": 36
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "rendelő",
+            "expectedSubject": "rendelő",
+            "value": 84,
+            "expectedValue": 84,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "kórház",
+            "expectedSubject": "kórház",
+            "value": 126,
+            "expectedValue": 126,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h04",
+        "frames": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "mátra erőmű",
+            "expectedSubject": "mátra erőmű",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "rába erőmű",
+            "expectedSubject": "rába erőmű",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Rába Erőmű",
+            "normalized": "rába erőmű",
+            "expected": {
+              "mention": "Rába Erőmű",
+              "normalized": "rába erőmű",
+              "type": "organization",
+              "start": 2,
+              "end": 12
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Mátra Erőmű",
+            "normalized": "mátra erőmű",
+            "expected": {
+              "mention": "Mátra Erőmű",
+              "normalized": "mátra erőmű",
+              "type": "organization",
+              "start": 38,
+              "end": 49
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "rába erőmű",
+            "expectedSubject": "rába erőmű",
+            "value": 18,
+            "expectedValue": 18,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "mátra erőmű",
+            "expectedSubject": "mátra erőmű",
+            "value": 22,
+            "expectedValue": 22,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h05",
+        "frames": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "tölgy kft",
+            "expectedSubject": "tölgy kft.",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "fenyő zrt",
+            "expectedSubject": "fenyő zrt.",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Fenyő Zrt.",
+            "normalized": "fenyő zrt.",
+            "expected": {
+              "mention": "Fenyő Zrt.",
+              "normalized": "fenyő zrt.",
+              "type": "organization",
+              "start": 2,
+              "end": 12
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Tölgy Kft.",
+            "normalized": "tölgy kft.",
+            "expected": {
+              "mention": "Tölgy Kft.",
+              "normalized": "tölgy kft.",
+              "type": "organization",
+              "start": 34,
+              "end": 44
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "tölgy kft",
+            "expectedSubject": "tölgy kft.",
+            "value": 6000000,
+            "expectedValue": 6000000,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "fenyő zrt",
+            "expectedSubject": "fenyő zrt.",
+            "value": 7000000,
+            "expectedValue": 7000000,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h06",
+        "frames": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "hazai csapat",
+            "expectedSubject": "hazai csapat",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "vendégcsapat",
+            "expectedSubject": "vendégcsapat",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "vendégcsapat",
+            "expectedSubject": "vendégcsapat",
+            "value": 4,
+            "expectedValue": 4,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "hazai csapat",
+            "expectedSubject": "hazai csapat",
+            "value": 2,
+            "expectedValue": 2,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h07",
+        "frames": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "iskola",
+            "expectedSubject": "iskola",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "gimnázium",
+            "expectedSubject": "gimnázium",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "iskola",
+            "normalized": "iskola",
+            "expected": {
+              "mention": "iskola",
+              "normalized": "iskola",
+              "type": "organization",
+              "start": 26,
+              "end": 32
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "iskola",
+            "expectedSubject": "iskola",
+            "value": 19,
+            "expectedValue": 19,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "gimnázium",
+            "expectedSubject": "gimnázium",
+            "value": 28,
+            "expectedValue": 28,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h08",
+        "frames": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": "drágább készülék",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "olcsó készülék",
+            "expectedSubject": "olcsóbb készülék",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [],
+        "numeric": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": "drágább készülék",
+            "value": 98000,
+            "expectedValue": 98000,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": false
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "olcsó készülék",
+            "expectedSubject": "olcsóbb készülék",
+            "value": 86000,
+            "expectedValue": 86000,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h09",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "dóra",
+            "expectedSubject": "dóra",
+            "source": "dóra",
+            "expectedSource": "dóra",
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "dóra",
+            "expectedSubject": "dóra",
+            "source": "dóra",
+            "expectedSource": "dóra",
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Dóra",
+            "normalized": "dóra",
+            "expected": {
+              "mention": "Dóra",
+              "normalized": "dóra",
+              "type": "person",
+              "start": 0,
+              "end": 4
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h10",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "raktár",
+            "expectedSubject": null,
+            "source": "rendőrség",
+            "expectedSource": "rendőrség",
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "rendőrség",
+            "normalized": "rendőrség",
+            "expected": {
+              "mention": "rendőrség",
+              "normalized": "rendőrség",
+              "type": "organization",
+              "start": 2,
+              "end": 11
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "raktár",
+            "expectedSubject": null,
+            "value": 9,
+            "expectedValue": 9,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h11",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "oldat",
+            "expectedSubject": "oldat",
+            "source": "kutató",
+            "expectedSource": "kutató",
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "labor",
+            "expectedSubject": "labor",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [],
+        "numeric": []
+      },
+      {
+        "id": "h12",
+        "frames": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "minisztérium",
+            "expectedSubject": "minisztérium",
+            "source": "minisztérium",
+            "expectedSource": "minisztérium",
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": false,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "termelés",
+            "expectedSubject": "termelés",
+            "source": "gyártó",
+            "expectedSource": "gyártó",
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "minisztérium",
+            "normalized": "minisztérium",
+            "expected": {
+              "mention": "minisztérium",
+              "normalized": "minisztérium",
+              "type": "organization",
+              "start": 36,
+              "end": 48
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h13",
+        "frames": [
+          {
+            "predicted": 2,
+            "gold": 2,
+            "subject": "tamás",
+            "expectedSubject": "tamás",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "emese",
+            "expectedSubject": "emese",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "emese",
+            "expectedSubject": "emese",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Emese",
+            "normalized": "emese",
+            "expected": {
+              "mention": "Emese",
+              "normalized": "emese",
+              "type": "person",
+              "start": 3,
+              "end": 8
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Tamás",
+            "normalized": "tamás",
+            "expected": {
+              "mention": "Tamás",
+              "normalized": "tamás",
+              "type": "person",
+              "start": 32,
+              "end": 37
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "emese",
+            "expectedSubject": "emese",
+            "value": 4,
+            "expectedValue": 4,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "tamás",
+            "expectedSubject": "tamás",
+            "value": 2,
+            "expectedValue": 2,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h14",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "ítélet",
+            "source": "",
+            "expectedSource": "bíróság",
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": false,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "CNN",
+            "normalized": "cnn",
+            "expected": {
+              "mention": "CNN",
+              "normalized": "cnn",
+              "type": "organization",
+              "start": 2,
+              "end": 5
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "bíróság",
+            "normalized": "bíróság",
+            "expected": {
+              "mention": "bíróság",
+              "normalized": "bíróság",
+              "type": "organization",
+              "start": 26,
+              "end": 33
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h15",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": null,
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "vereség",
+            "expectedSubject": null,
+            "source": "",
+            "expectedSource": "UNRESOLVED",
+            "subjectOK": false,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Nagy Emese",
+            "normalized": "nagy emese",
+            "expected": {
+              "mention": "Nagy Emese",
+              "normalized": "nagy emese",
+              "type": "person",
+              "start": 0,
+              "end": 10
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Nagy Tamás",
+            "normalized": "nagy tamás",
+            "expected": {
+              "mention": "Nagy Tamás",
+              "normalized": "nagy tamás",
+              "type": "person",
+              "start": 14,
+              "end": 24
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": null,
+            "value": 14,
+            "expectedValue": 14,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": true,
+            "resolved": false
+          }
+        ]
+      },
+      {
+        "id": "h16",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "ilona",
+            "source": "ilona",
+            "expectedSource": "ilona",
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Ilona",
+            "normalized": "ilona",
+            "expected": {
+              "mention": "Ilona",
+              "normalized": "ilona",
+              "type": "person",
+              "start": 0,
+              "end": 5
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "ilona",
+            "value": 6,
+            "expectedValue": 6,
+            "valueOK": true,
+            "subjectOK": false,
+            "kindOK": false,
+            "resolved": false
+          }
+        ]
+      },
+      {
+        "id": "h17",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "tarifa",
+            "expectedSubject": "tarifa",
+            "source": "intézet",
+            "expectedSource": "intézet",
+            "subjectOK": true,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "változás",
+            "expectedSubject": "változás",
+            "source": "",
+            "expectedSource": "intézet",
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": false,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "intézet",
+            "normalized": "intézet",
+            "expected": {
+              "mention": "intézet",
+              "normalized": "intézet",
+              "type": "organization",
+              "start": 3,
+              "end": 10
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "változás",
+            "expectedSubject": "változás",
+            "value": 3,
+            "expectedValue": 3,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "tarifa",
+            "expectedSubject": "tarifa",
+            "value": 15,
+            "expectedValue": 15,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": false,
+            "resolved": false
+          }
+        ]
+      },
+      {
+        "id": "h18",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "korábbi referencia",
+            "expectedSubject": "korábbi referencia",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "emese",
+            "expectedSubject": "emese",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Emese",
+            "normalized": "emese",
+            "expected": {
+              "mention": "Emese",
+              "normalized": "emese",
+              "type": "person",
+              "start": 39,
+              "end": 44
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "emese",
+            "expectedSubject": "emese",
+            "value": 23,
+            "expectedValue": 23,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "korábbi referencia",
+            "expectedSubject": "korábbi referencia",
+            "value": 17,
+            "expectedValue": 17,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h19",
+        "frames": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "tamás",
+            "expectedSubject": "tamás",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "emese",
+            "expectedSubject": "emese",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Emese",
+            "normalized": "emese",
+            "expected": {
+              "mention": "Emese",
+              "normalized": "emese",
+              "type": "person",
+              "start": 30,
+              "end": 35
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Tamás",
+            "normalized": "tamás",
+            "expected": {
+              "mention": "Tamás",
+              "normalized": "tamás",
+              "type": "person",
+              "start": 51,
+              "end": 56
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "emese",
+            "expectedSubject": "emese",
+            "value": 62,
+            "expectedValue": 62,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "tamás",
+            "expectedSubject": "tamás",
+            "value": 38,
+            "expectedValue": 38,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h20",
+        "frames": [
+          {
+            "predicted": 2,
+            "gold": 2,
+            "subject": "szabó péter",
+            "expectedSubject": "szabó péter",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "",
+            "expectedSubject": null,
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": false,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": null,
+            "source": "szabó júliá",
+            "expectedSource": null,
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": false,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": false,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Szabó Júliának",
+            "normalized": "szabó júliá",
+            "expected": {
+              "mention": "Szabó Júliának",
+              "normalized": "szabó júlia",
+              "type": "person",
+              "start": 0,
+              "end": 14
+            },
+            "typeOK": true,
+            "identityOK": false
+          },
+          {
+            "mention": "Szabó Júliáról",
+            "normalized": "szabó júliá",
+            "expected": {
+              "mention": "Szabó Júliáról",
+              "normalized": "szabó júlia",
+              "type": "person",
+              "start": 22,
+              "end": 36
+            },
+            "typeOK": true,
+            "identityOK": false
+          },
+          {
+            "mention": "Szabó Péter",
+            "normalized": "szabó péter",
+            "expected": {
+              "mention": "Szabó Péter",
+              "normalized": "szabó péter",
+              "type": "person",
+              "start": 48,
+              "end": 59
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "szabó péter",
+            "expectedSubject": "szabó péter",
+            "value": 11,
+            "expectedValue": 11,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h21",
+        "frames": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "terhelés",
+            "expectedSubject": "terhelés",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "kapacitás",
+            "expectedSubject": "kapacitás",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": false,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": false,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "kapacitás",
+            "expectedSubject": "kapacitás",
+            "value": 40,
+            "expectedValue": 40,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "terhelés",
+            "expectedSubject": "terhelés",
+            "value": 32,
+            "expectedValue": 32,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h22",
+        "frames": [
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "zsófia",
+            "expectedSubject": "zsófia",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "miklós",
+            "expectedSubject": "miklós",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Miklós",
+            "normalized": "miklós",
+            "expected": {
+              "mention": "Miklós",
+              "normalized": "miklós",
+              "type": "person",
+              "start": 0,
+              "end": 6
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Zsófia",
+            "normalized": "zsófia",
+            "expected": {
+              "mention": "Zsófia",
+              "normalized": "zsófia",
+              "type": "person",
+              "start": 31,
+              "end": 37
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "miklós",
+            "expectedSubject": "miklós",
+            "value": 7,
+            "expectedValue": 7,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "zsófia",
+            "expectedSubject": "zsófia",
+            "value": 5,
+            "expectedValue": 5,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      },
+      {
+        "id": "h23",
+        "frames": [
+          {
+            "predicted": 2,
+            "gold": 1,
+            "subject": "péter",
+            "expectedSubject": "péter",
+            "source": "péter",
+            "expectedSource": "péter",
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          },
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "",
+            "expectedSubject": "ilona",
+            "source": "",
+            "expectedSource": "ilona",
+            "subjectOK": false,
+            "actionOK": true,
+            "sourceOK": false,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": false,
+            "semanticContractOK": false
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Ilona",
+            "normalized": "ilona",
+            "expected": {
+              "mention": "Ilona",
+              "normalized": "ilona",
+              "type": "person",
+              "start": 30,
+              "end": 35
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Péter",
+            "normalized": "péter",
+            "expected": {
+              "mention": "Péter",
+              "normalized": "péter",
+              "type": "person",
+              "start": 37,
+              "end": 42
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": []
+      },
+      {
+        "id": "h24",
+        "frames": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "sopron",
+            "expectedSubject": "sopron",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": false
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "eger",
+            "expectedSubject": "eger",
+            "source": "",
+            "expectedSource": null,
+            "subjectOK": true,
+            "actionOK": true,
+            "sourceOK": true,
+            "negOK": true,
+            "condOK": true,
+            "objectOK": true,
+            "modalityOK": true,
+            "temporalOK": true,
+            "allowed": true,
+            "semanticContractOK": true
+          }
+        ],
+        "entities": [
+          {
+            "mention": "Sopronban",
+            "normalized": "sopron",
+            "expected": {
+              "mention": "Sopronban",
+              "normalized": "sopron",
+              "type": "location",
+              "start": 0,
+              "end": 9
+            },
+            "typeOK": true,
+            "identityOK": true
+          },
+          {
+            "mention": "Egerben",
+            "normalized": "eger",
+            "expected": {
+              "mention": "Egerben",
+              "normalized": "eger",
+              "type": "location",
+              "start": 26,
+              "end": 33
+            },
+            "typeOK": true,
+            "identityOK": true
+          }
+        ],
+        "numeric": [
+          {
+            "predicted": 0,
+            "gold": 0,
+            "subject": "sopron",
+            "expectedSubject": "sopron",
+            "value": 4,
+            "expectedValue": -4,
+            "valueOK": false,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          },
+          {
+            "predicted": 1,
+            "gold": 1,
+            "subject": "eger",
+            "expectedSubject": "eger",
+            "value": 2,
+            "expectedValue": 2,
+            "valueOK": true,
+            "subjectOK": true,
+            "kindOK": true,
+            "resolved": true
+          }
+        ]
+      }
+    ]
+  }
+}

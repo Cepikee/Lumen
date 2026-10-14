@@ -1,0 +1,157 @@
+{
+  "filesScanned": 311,
+  "uniquePriorStrings": 3278,
+  "normalization": "NFKC/lowercase/alphanumeric whitespace; JSON strings and JS quoted literals; lexical overlap is not proof of conceptual independence",
+  "matches": [
+    {
+      "id": "A",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "B",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "C",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "D",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "E",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "F",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "G",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "H",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "I",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "J",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "K",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "L",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "M",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "N",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "O",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "P",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "Q",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "R",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "S",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "T",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "U",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "V",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "W",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "X",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    },
+    {
+      "id": "Y",
+      "exactSnippetCollision": false,
+      "exactSentenceCollisions": [],
+      "top": []
+    }
+  ]
+}

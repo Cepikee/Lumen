@@ -1,0 +1,22 @@
+{
+  "comparedSnippets": 20,
+  "invariantFields": [
+    "frameId",
+    "actor",
+    "actorStatus",
+    "subject",
+    "action",
+    "actionSpan",
+    "object",
+    "numericArguments",
+    "polarity",
+    "semanticScope",
+    "modality",
+    "modalities",
+    "contrasts",
+    "conditionAntecedent",
+    "conditionality"
+  ],
+  "allEqual": true,
+  "canonicalProjectionOff": true
+}

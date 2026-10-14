@@ -1,0 +1,34 @@
+{
+  "modelLoadMs": 1025.0920260004932,
+  "batches": [
+    {
+      "count": 10,
+      "totalMs": 234.20100000000002,
+      "meanMsPerArticle": 23.4201,
+      "articlesPerSecond": 42.69836593353572
+    },
+    {
+      "count": 100,
+      "totalMs": 2285.9591,
+      "meanMsPerArticle": 22.859591,
+      "articlesPerSecond": 43.74531460339776
+    },
+    {
+      "count": 500,
+      "totalMs": 11500.181799999998,
+      "meanMsPerArticle": 23.000363599999996,
+      "articlesPerSecond": 43.477573545837345
+    }
+  ],
+  "malformedInputRejected": true,
+  "oversizedInputRejected": true,
+  "timeoutMs": 5000,
+  "crashDetected": true,
+  "restartSucceeded": true,
+  "fallback": {
+    "mode": "deterministic-only",
+    "abstainFromNlp": true,
+    "reason": "worker_crashed"
+  },
+  "canonicalWrites": 0
+}
