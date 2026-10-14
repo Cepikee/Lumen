@@ -26,8 +26,12 @@
 .kpi h2 { font-size: 14px; font-weight: 600; color: #c4dbf4; margin: 0; }
 .kpi strong { display: block; font-size: 29px; line-height: 1.35; letter-spacing: .01em; }
 .kpi p { font-size: 11px; margin: 4px 0 0; color: #93afcc; }
-.kpiIcon { width: 52px; height: 54px; border: 1px solid; border-radius: 14px; display: grid; place-items: center; background: #082443; flex-shrink: 0; }
+.kpiIcon { width: 52px; height: 54px; border: 1px solid; border-radius: 14px; display: grid; place-items: center; background: #082443; flex-shrink: 0; transition: color .25s ease, border-color .25s ease, box-shadow .25s ease, transform .25s ease; }
 .kpiIcon svg { width: 28px; height: 28px; }
+.kpiIcon[data-mood="positive"] { box-shadow: 0 0 16px rgba(33,217,155,.18); }
+.kpiIcon[data-mood="neutral"] { box-shadow: 0 0 16px rgba(244,195,92,.16); }
+.kpiIcon[data-mood="negative"] { box-shadow: 0 0 16px rgba(255,90,103,.18); }
+.moodFace { transition: color .25s ease, transform .25s ease; }
 .today { grid-column: span 8; min-height: 192px; }
 .today .cardHeader h2, .forecast .cardHeader h2 { font-size: 19px; }
 .todayColumns { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); }

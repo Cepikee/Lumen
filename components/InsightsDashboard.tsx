@@ -23,6 +23,32 @@ import styles from "./InsightsDashboard.module.css";
 type Period = "24h" | "7d" | "30d" | "90d";
 const colors = ["#0787ff", "#8b5cf6", "#ff7a32", "#21d99b", "#63d4ec", "#ee79ae", "#f4c35c", "#92a8cf"];
 
+type SentimentMood = "positive" | "neutral" | "negative" | "unknown";
+
+// TEMPORARY VISUAL TEST: while true, only the KPI face changes every second.
+// Set this to false after the visual check; then the real backend average drives the face.
+const SENTIMENT_FACE_TEST_MODE = true;
+
+function moodFromSentiment(value: number | null): SentimentMood {
+  if (value === null || !Number.isFinite(value)) return "unknown";
+  if (value >= 0.25) return "positive";
+  if (value <= -0.25) return "negative";
+  return "neutral";
+}
+
+function MoodFace({ mood }: { mood: SentimentMood }) {
+  const mouth = mood === "positive"
+    ? "M7.5 14c1.1 1.8 2.6 2.7 4.5 2.7s3.4-.9 4.5-2.7"
+    : mood === "negative"
+      ? "M7.5 17c1.1-1.8 2.6-2.7 4.5-2.7s3.4.9 4.5 2.7"
+      : "M8 15h8";
+
+  return <svg className={styles.moodFace} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" />
+    {mood === "unknown" ? <path d="M9.8 9.3a2.4 2.4 0 0 1 4.6.8c0 1.8-2.4 2-2.4 3.7M12 17.2h.01" /> : <><path d="M9 9.5h.01M15 9.5h.01" /><path d={mouth} /></>}
+  </svg>;
+}
+
 async function fetcher(url: string) {
   const response = await fetch(url, { cache: "no-store" });
   if (!response.ok) throw new Error(`insights_${response.status}`);
@@ -78,6 +104,18 @@ function DashboardContent() {
   const requestedPeriod = searchParams.get("period");
   const period: Period = requestedPeriod === "7d" || requestedPeriod === "30d" || requestedPeriod === "90d" ? requestedPeriod : "24h";
   const [sort, setSort] = useState("Legfrissebb");
+  const [testMood, setTestMood] = useState<SentimentMood>("positive");
+  useEffect(() => {
+    if (!SENTIMENT_FACE_TEST_MODE) return;
+    const testMoods: SentimentMood[] = ["positive", "neutral", "negative"];
+    const timer = window.setInterval(() => {
+      setTestMood(previous => {
+        const choices = testMoods.filter(mood => mood !== previous);
+        return choices[Math.floor(Math.random() * choices.length)];
+      });
+    }, 1000);
+    return () => window.clearInterval(timer);
+  }, []);
   useEffect(() => {
     if (requestedPeriod) return;
     const saved = window.localStorage.getItem("utom.insights.period");
@@ -121,6 +159,11 @@ function DashboardContent() {
     : forecastStatus.data?.status === "running" ? "running" : forecasts.length ? "ready" : "empty";
   const forecastLabel = { error: "Az előrejelzés jelenleg nem elérhető.", running: "Elemzés folyamatban", ready: "Előrejelzés elkészült", empty: "Még nincs elkészült előrejelzés" }[forecastState];
   const topActivity = [...activity].map(c=>({category:c.category,total:c.values.reduce((sum: number,v: {value:number})=>sum+v.value,0)})).sort((a,b)=>b.total-a.total);
+  const realSentimentMood = moodFromSentiment(sentimentData.average);
+  const sentimentMood = SENTIMENT_FACE_TEST_MODE ? testMood : realSentimentMood;
+  const sentimentMoodColor = sentimentMood === "positive" ? "#21d99b"
+    : sentimentMood === "neutral" ? "#f4c35c"
+      : sentimentMood === "negative" ? "#ff5a67" : "#8eaac5";
   const kpis = [
     { title: "Feldolgozott hírek", value: !insights.error && articles > 0 ? articles.toLocaleString("hu-HU") : "—", note: `${period} · feldolgozott összefoglalók`, loading: insights.loading, error: insights.error },
     { title: "Aktív források", value: !insights.error && sources.size ? String(sources.size) : "—", note: `${period} · egyedi források`, loading: insights.loading, error: insights.error },
@@ -133,7 +176,16 @@ function DashboardContent() {
       <div className={`${styles.pills} ${styles.sort}`} role="group" aria-label="Rendezés">{["Legfrissebb", "Növekvő", "Legtöbb forrás"].map(s => <button type="button" key={s} aria-pressed={sort === s} onClick={() => setSort(s)}>{s}</button>)}</div>
     </div></header>
     <div className={styles.grid} key={period}>
-      {kpis.map((k, i) => <section key={k.title} className={`${styles.card} ${styles.kpi}`}><span className={styles.kpiIcon} style={{ color: colors[i], borderColor: colors[i] }}><Glyph kind={i + 1} /></span><div><h2>{k.title}</h2><strong>{k.loading ? "…" : k.value}</strong><p>{k.error ? "Az adat jelenleg nem elérhető." : k.note}</p></div></section>)}
+      {kpis.map((k, i) => {
+        const isSentimentKpi = i === 3;
+        const iconColor = isSentimentKpi ? sentimentMoodColor : colors[i];
+        return <section key={k.title} className={`${styles.card} ${styles.kpi}`}>
+          <span className={styles.kpiIcon} data-mood={isSentimentKpi ? sentimentMood : undefined} style={{ color: iconColor, borderColor: iconColor }}>
+            {isSentimentKpi ? <MoodFace mood={sentimentMood} /> : <Glyph kind={i + 1} />}
+          </span>
+          <div><h2>{k.title}</h2><strong>{k.loading ? "…" : k.value}</strong><p>{k.error ? "Az adat jelenleg nem elérhető." : k.note}</p></div>
+        </section>;
+      })}
       <Card title="Mi történt ma valójában?" scope="Ma · Budapest" className={styles.today}>
         <div className={styles.todayColumns}>
           <div><span className={styles.miniIcon}><Glyph kind={1} /></span><h3>Kategóriák aktivitása</h3><State loading={heatmap.isLoading} error={heatmap.error} hasData={activity.length > 0} period="today"><ul>{topActivity.slice(0,3).map(c=><li key={c.category}><strong>{c.category}</strong> · {c.total} hír</li>)}</ul></State></div>
