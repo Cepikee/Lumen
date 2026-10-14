@@ -146,7 +146,7 @@ export default function WhatHappenedTodayHeatmap() {
     return (
       <div className="wht-heatmap" style={{ height: "350px" }}>
         <h5 className="mb-3">Kategóriák aktivitása óránként</h5>
-        <InsightsEmptyState />
+        <InsightsEmptyState period="24h" />
       </div>
     );
   }

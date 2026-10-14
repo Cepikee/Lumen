@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Modal, Form } from "react-bootstrap";
 
 interface Source {
@@ -60,9 +60,6 @@ const TrendSourcesModal: React.FC<TrendSourcesModalProps> = ({
 }) => {
   const [period, setPeriod] = useState(defaultPeriod);
 
-  useEffect(() => {
-    setPeriod(defaultPeriod);
-  }, [defaultPeriod, show, keyword]);
 
   function handlePeriodChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const newPeriod = e.target.value;

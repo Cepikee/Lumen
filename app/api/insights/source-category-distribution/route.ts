@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
-import { businessDayBounds, mysqlUtc } from "@/lib/business-time";
+import { mysqlUtc } from "@/lib/business-time";
+import { resolveInsightsWindow } from "@/lib/insights-period";
 import { normalizeSourceIdentity } from "@/lib/source-identity";
 
 function fixCat(s: any): string | null {
@@ -54,7 +55,7 @@ export async function GET(req: Request) {
     // this, aliases such as `24hu` and `24.hu` silently produce empty charts.
     const domain = normalizeSourceIdentity(rawDomain)?.key
       ?? (rawDomain === "portfolio" ? "portfolio.hu" : rawDomain);
-    const today = businessDayBounds(new Date());
+    const { start, end } = resolveInsightsWindow(searchParams.get("period"));
 
     // --- 1) Forrás + kategória lekérés ---
     const [rows]: any = await db.query(`
@@ -70,7 +71,7 @@ export async function GET(req: Request) {
         AND source <> ''
       GROUP BY LOWER(TRIM(source)), LOWER(TRIM(category))
       ORDER BY LOWER(TRIM(source)) ASC
-    `, [mysqlUtc(today.start), mysqlUtc(today.end)]);
+    `, [mysqlUtc(start), mysqlUtc(end)]);
 
     if (!rows || !rows.length) {
       return NextResponse.json({ success: true, items: [] });

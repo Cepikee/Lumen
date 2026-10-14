@@ -34,7 +34,7 @@ export default function WSourceOsszehasonlitas({ period = "24h" }: { period?: st
           color: isDark ? "#fff" : "#000",
         }}
       >
-        <WSourceCategoryDistribution />
+        <WSourceCategoryDistribution period={period} />
       </div>
 
       {/* --- 2) CLICKBAIT INDEX --- */}
@@ -56,7 +56,7 @@ export default function WSourceOsszehasonlitas({ period = "24h" }: { period?: st
           color: isDark ? "#fff" : "#000",
         }}
       >
-        <WSourceClickbaitRatio />
+        <WSourceClickbaitRatio period={period} />
       </div>
 
      {/* --- 4) SPEED INDEX BLOKK (javított) --- */}
@@ -81,7 +81,7 @@ export default function WSourceOsszehasonlitas({ period = "24h" }: { period?: st
         }}
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <WSourceDuplication />
+          <WSourceDuplication period={period} />
         </div>
       </div>
 

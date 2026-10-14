@@ -112,7 +112,7 @@ export default function WSourceClickbaitPro({ period = "24h" }: { period?: strin
         />
 
         {/* CHART */}
-        <div className="relative z-10" style={{ height: Math.min(300, Math.max(150, sources.length * 32 + 40)) }}>
+        <div className="relative z-10" style={{ height: Math.min(240, Math.max(140, sources.length * 28 + 32)) }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               key={isDark ? "dark" : "light"}

@@ -2,7 +2,8 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
-import { businessDayBounds, mysqlUtc } from "@/lib/business-time";
+import { mysqlUtc } from "@/lib/business-time";
+import { resolveInsightsWindow } from "@/lib/insights-period";
 
 interface DuplicationRow {
   source: string;
@@ -16,8 +17,10 @@ export async function GET(req: Request) {
     const sec = await securityCheck(req);
     if (sec) return sec;
 
-    const bounds = businessDayBounds(new Date());
-    const startStr = mysqlUtc(bounds.start);
+    const { searchParams } = new URL(req.url);
+    const { start, end } = resolveInsightsWindow(searchParams.get("period"));
+    const startStr = mysqlUtc(start);
+    const endStr = mysqlUtc(end);
 
     const [rows]: any = await db.query(
       `
@@ -32,7 +35,7 @@ export async function GET(req: Request) {
       WHERE c.first_published_at >= ? AND c.first_published_at < ?
       GROUP BY COALESCE(NULLIF(LOWER(TRIM(a.source)), ''), 'ismeretlen')
       `,
-      [startStr, mysqlUtc(bounds.end)]
+      [startStr, endStr]
     );
 
     if (!rows || rows.length === 0) {

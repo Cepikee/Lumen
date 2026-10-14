@@ -5,6 +5,7 @@ import useSWR from "swr";
 import { useMemo, useState, useEffect } from "react";
 import UtomModal from "@/components/UtomModal";
 import { useUserStore } from "@/store/useUserStore";
+import InsightsEmptyState from "./InsightsEmptyState";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -27,7 +28,7 @@ const fetcher = (url: string) =>
     return json;
   });
 
-export default function WSourceDuplication() {
+export default function WSourceDuplication({ period = "24h" }: { period?: string }) {
   const theme = useUserStore((s) => s.theme);
   const [openInfo, setOpenInfo] = useState(false);
 
@@ -45,7 +46,7 @@ export default function WSourceDuplication() {
   const { data, error, isLoading } = useSWR<{
     success: boolean;
     duplication: DuplicationItem[];
-  }>("/api/premium-insights/duplication", fetcher, {
+  >(`/api/premium-insights/duplication?period=${encodeURIComponent(period)}`, fetcher, {
     refreshInterval: 60000,
   });
 
@@ -71,7 +72,7 @@ export default function WSourceDuplication() {
     );
 
   if (items.length === 0) {
-    return <div className="p-12 text-center text-muted">Nincs elérhető másolási adat.</div>;
+    return <InsightsEmptyState period={period} />;
   }
 
   const series = [

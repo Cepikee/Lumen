@@ -40,6 +40,13 @@ interface Trend {
   history?: HistoryRow[];
 }
 
+function trendIdentity(trend: Pick<Trend, "keyword" | "category">): string {
+  const keyword = trend.keyword.trim().toLocaleLowerCase("hu-HU");
+  const category = (trend.category ?? "").trim().toLocaleLowerCase("hu-HU");
+
+  return `${keyword}::${category}`;
+}
+
 interface Source {
   title: string;
   url: string;
@@ -53,7 +60,7 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
   const [historyMap, setHistoryMap] = useState<Record<string, HistoryRow[]>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [showChart, setShowChart] = useState<string | null>(null);
+  const [showChart, setShowChart] = useState<Trend | null>(null);
 
   // Load more / visible count
   const MAX_VISIBLE = 50;
@@ -182,15 +189,22 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
     if (visibleForHistory.length === 0) return;
 
     visibleForHistory.forEach((t) => {
-      // ha a ref cache-ben van, ne kérj újra; ha state-ben még nincs, töltsd be onnan
-      if (historyCache.current[t.keyword]) {
-        setHistoryMap((prev) => (prev[t.keyword] ? prev : { ...prev, [t.keyword]: historyCache.current[t.keyword] }));
+      const historyKey = trendIdentity(t);
+
+      // Ugyanaz a kulcsszó külön kategóriában külön trend lehet,
+      // ezért nem használunk pusztán keyword alapú history cache-t.
+      if (historyCache.current[historyKey]) {
+        setHistoryMap((prev) => (
+          prev[historyKey]
+            ? prev
+            : { ...prev, [historyKey]: historyCache.current[historyKey] }
+        ));
         return;
       }
 
       if (Array.isArray(t.history) && t.history.length > 0) {
-        historyCache.current[t.keyword] = t.history as HistoryRow[];
-        setHistoryMap((prev) => ({ ...prev, [t.keyword]: t.history as HistoryRow[] }));
+        historyCache.current[historyKey] = t.history as HistoryRow[];
+        setHistoryMap((prev) => ({ ...prev, [historyKey]: t.history as HistoryRow[] }));
         return;
       }
 
@@ -211,8 +225,8 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
           if (!mounted) return;
           const arr = normalizeHistoryRows(Array.isArray(hist.history) ? hist.history : hist);
           if (arr.length) {
-            historyCache.current[t.keyword] = arr;
-            setHistoryMap((prev) => ({ ...prev, [t.keyword]: arr }));
+            historyCache.current[historyKey] = arr;
+            setHistoryMap((prev) => ({ ...prev, [historyKey]: arr }));
           }
         })
         .catch(() => {
@@ -242,8 +256,8 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
     });
   }
 
-  function getDisplayHistory(keyword: string): HistoryRow[] {
-    const base = historyMap[keyword] ?? [];
+  function getDisplayHistory(trend: Trend): HistoryRow[] {
+    const base = historyMap[trendIdentity(trend)] ?? [];
     if (filters.period === "custom") return filterByCustomPeriod(base);
     return base;
   }
@@ -334,6 +348,7 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
   return (
     <>
       <TrendSourcesModal
+        key={`${activeSourcesKeyword ?? "closed"}-${sourcesPeriod}`}
         show={activeSourcesKeyword !== null}
         onHide={closeSources}
         keyword={activeSourcesKeyword ?? ""}
@@ -345,7 +360,7 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
       />
       <ul className="list-group mb-4">
         {visibleTrends.map((t, idx) => {
-          const displayHistory = getDisplayHistory(t.keyword);
+          const displayHistory = getDisplayHistory(t);
           const hasHistory = displayHistory.length > 0;
 
           return (
@@ -373,11 +388,11 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
                         role="button"
                         aria-label="Részletes grafikon megnyitása"
                         tabIndex={0}
-                        onClick={() => setShowChart(t.keyword)}
+                        onClick={() => setShowChart(t)}
                         onKeyDown={(e) => {
                           if (e.key === "Enter" || e.key === " ") {
                             e.preventDefault();
-                            setShowChart(t.keyword);
+                            setShowChart(t);
                           }
                         }}
                         title="Kattints a részletes grafikonhoz"
@@ -401,7 +416,6 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
                   <button
                     className="btn btn-sm btn-outline-primary me-2"
                     onClick={() => {
-                      setActiveSourcesKeyword(t.keyword);
                       handleShowSources(t.keyword, filters.period);
                     }}
                   >
@@ -449,7 +463,7 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
 
       <Modal show={!!showChart} onHide={() => setShowChart(null)} size="lg" centered>
         <Modal.Header closeButton>
-          <Modal.Title>{showChart} – Részletes trend</Modal.Title>
+          <Modal.Title>{showChart?.keyword} – Részletes trend</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {showChart && getDisplayHistory(showChart).length === 0 ? (
@@ -458,7 +472,7 @@ export default function TrendsPanel({ filters }: { filters: Filters }) {
             showChart && (
               <div style={{ width: "100%", height: "400px" }}>
                 <SparklineDetailed
-                  key={`${showChart}-${filters.period}-${filters.startDate || ""}-${filters.endDate || ""}`}
+                  key={`${trendIdentity(showChart)}-${filters.period}-${filters.startDate || ""}-${filters.endDate || ""}`}
                   history={getDisplayHistory(showChart)}
                   period={filters.period}
                   startDate={filters.startDate}
