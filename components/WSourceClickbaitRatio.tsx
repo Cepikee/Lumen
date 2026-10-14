@@ -142,8 +142,8 @@ export default function WSourceClickbaitRatio({ period = "24h", dark = false, em
                   color: isDark ? "#ffffff" : "#000000",
                   fontWeight: 500,
                 }}
-                formatter={(value?: number, _name, item) => [
-                  `${(value ?? 0).toFixed(1)}% · ${item?.payload?.clickbait ?? 0}/${item?.payload?.total ?? 0} cikk`,
+                formatter={(value, _name, item) => [
+                  `${Number(value ?? 0).toFixed(1)}% · ${item?.payload?.clickbait ?? 0}/${item?.payload?.total ?? 0} cikk`,
                   "Clickbait arány",
                 ]}
               />

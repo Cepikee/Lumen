@@ -136,7 +136,7 @@ export default function WSourceClickbaitPro({ period = "24h", dark = false, embe
                   color: isDark ? "#ffffff" : "#000000",
                   fontWeight: 500,
                 }}
-                formatter={(value?: number, _name, item) => [`${(value ?? 0).toFixed(1)} / 100 · ${item?.payload?.articles ?? 0} cikk`, "Clickbait pontszám"]}
+                formatter={(value, _name, item) => [`${Number(value ?? 0).toFixed(1)} / 100 · ${item?.payload?.articles ?? 0} cikk`, "Clickbait pontszám"]}
               />
 
               <Bar dataKey="score" barSize={18} radius={[0, 8, 8, 0]} animationDuration={500}>
