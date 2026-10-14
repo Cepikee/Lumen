@@ -1,11 +1,7 @@
-const fs = require('fs');
-const page = fs.readFileSync('app/insights/page.tsx', 'utf8');
-const dns = fs.readFileSync('components/UtomDnsKategoria.tsx', 'utf8');
-
-if (!page.includes('Number.isNaN(date.getTime()) ? ""')) {
-  throw new Error('insights category cards must suppress invalid dates');
-}
-if (!dns.includes('Number.isFinite(value) && value >= 0 ? value : 0')) {
-  throw new Error('DNS category chart must normalize invalid numeric values');
-}
+const fs=require('node:fs'),assert=require('node:assert/strict'),vm=require('node:vm'),ts=require('typescript');
+const exportsObject={};
+vm.runInNewContext(ts.transpileModule(fs.readFileSync('lib/insights-dashboard.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText,{exports:exportsObject});
+for(const date of [null,undefined,'','not-a-date'])assert.equal(exportsObject.timestamp(date),null);
+const dns=fs.readFileSync('components/UtomDnsKategoria.tsx','utf8');
+assert.ok(dns.includes('Number.isFinite(value) && value >= 0 ? value : 0'));
 console.log('insights/dns number safety contract: PASS');

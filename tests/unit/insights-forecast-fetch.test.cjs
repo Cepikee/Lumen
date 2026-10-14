@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const page = fs.readFileSync(path.join(__dirname, '../../app/insights/page.tsx'), 'utf8');
+const page = fs.readFileSync(path.join(__dirname, '../../components/InsightsDashboard.tsx'), 'utf8');
 const hook = fs.readFileSync(path.join(__dirname, '../../hooks/useForecast.ts'), 'utf8');
 
 assert.match(page, /import \{ useForecast \} from ["']@\/hooks\/useForecast["'];/);

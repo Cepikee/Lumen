@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { resolveInsightsWindow } from "@/lib/insights-period";
 import { businessDayBounds, mysqlUtc } from "@/lib/business-time";
 
 function cleanKeyword(s: string): string {
@@ -20,7 +21,12 @@ export async function GET(req: Request) {
   if (sec) return sec;
 
   try {
-    const bounds = businessDayBounds(new Date());
+    const period = new URL(req.url).searchParams.get("period");
+    if (period !== null && !["24h", "7d", "30d", "90d"].includes(period)) {
+      return NextResponse.json({ success: false, error: "invalid_period" }, { status: 400 });
+    }
+    // No parameter keeps the existing Budapest calendar-day contract.
+    const bounds = period ? resolveInsightsWindow(period) : businessDayBounds(new Date());
     const todayStr = mysqlUtc(bounds.start);
     const tomorrowStr = mysqlUtc(bounds.end);
 
@@ -49,10 +55,10 @@ export async function GET(req: Request) {
       }
     }
 
-    const filtered = Object.entries(keywordCount)
+    const eligible = Object.entries(keywordCount)
       .filter(([_, count]) => count >= 3)
-      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "hu"))
-      .slice(0, 20);
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "hu"));
+    const filtered = eligible.slice(0, 20);
 
     const keywords = filtered.map(([kw, count]) => ({
       keyword: kw,
@@ -63,6 +69,7 @@ export async function GET(req: Request) {
     return NextResponse.json({
       success: true,
       keywords,
+      total: eligible.length,
     });
 
   } catch (err) {

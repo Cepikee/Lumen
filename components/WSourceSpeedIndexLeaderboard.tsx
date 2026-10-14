@@ -45,7 +45,7 @@ export default function WSourceSpeedIndexLeaderboard({ dark = false }: { dark?: 
 
   const items = useMemo(() => {
     if (!Array.isArray(data?.leaderboard)) return [];
-    return data.leaderboard.map((item) => ({
+    return data.leaderboard.filter(item => item && typeof item.source === "string" && item.source.trim()).map((item) => ({
       ...item,
       avgDelay: item.avgDelay == null || !Number.isFinite(Number(item.avgDelay)) ? null : Number(item.avgDelay),
       medianDelay: item.medianDelay == null || !Number.isFinite(Number(item.medianDelay)) ? null : Number(item.medianDelay),

@@ -41,6 +41,7 @@ export async function GET(req: Request) {
     for (const r of rows) {
       const cat = normalizeCategory(r.category);
       const date = normalizeDate(r.date);
+      if (r.predicted === null || r.predicted === undefined || String(r.predicted).trim() === "") continue;
       const predicted = Number(r.predicted);
       if (!date || !Number.isFinite(predicted) || predicted < 0) continue;
       if (!result[cat]) result[cat] = [];

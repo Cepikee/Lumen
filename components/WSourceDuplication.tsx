@@ -52,7 +52,7 @@ export default function WSourceDuplication({ period = "24h", dark = false }: { p
 
   const items = useMemo(() => {
     if (!Array.isArray(data?.duplication)) return [];
-    return data.duplication.map((item) => ({
+    return data.duplication.filter(item => item && typeof item.source === "string" && item.source.trim()).map((item) => ({
       ...item,
       original: Number.isFinite(Number(item.original)) ? Number(item.original) : 0,
       duplicate: Number.isFinite(Number(item.duplicate)) ? Number(item.duplicate) : 0,

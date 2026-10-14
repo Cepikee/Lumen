@@ -30,3 +30,27 @@ test("MySQL UTC timestamps retain their original instant", () => {
  const data=categorySeries([{category:"Sport",points:[{date:"2026-10-14 10:30:00",count:1}]}],"24h");
  assert.equal(data.points[0].time,Date.UTC(2026,9,14,10));
 });
+const { categorySentiments, sentimentSeries, timeLabel, forecastPoints } = moduleObject.exports;
+test("category charts select at most six meaningful series with stable activity order", () => {
+ const data=categorySeries(Array.from({length:8},(_,i)=>({category:"Category "+i,points:[{date:"2026-10-14T10:00:00Z",count:i+1}]})),"24h");
+ assert.equal(data.categories.length,6);assert.equal(data.categories[0],"Category 7");
+});
+test("Budapest days group across UTC midnight and DST repeated hours remain distinct", () => {
+ const data=categorySeries([{category:"Sport",points:[{date:"2026-10-14T22:30:00Z",count:2},{date:"2026-10-15T01:00:00Z",count:3}]}],"7d");
+ assert.equal(data.points.length,1); assert.equal(data.points[0].v0,5);
+ const timeline=sentimentSeries([{date:"2026-10-25T00:00:00Z",positive:2},{date:"2026-10-25T01:00:00Z",negative:3}],"24h");
+ assert.equal(timeline.length,2);assert.equal(timeline[0].score,1);assert.equal(timeline[1].score,-1);
+ assert.match(timeLabel(Date.parse("2026-10-14T10:00:00Z"),"24h"),/12:00/);
+});
+test("sentiment score is weighted by article counts and unmeasured points remain null", () => {
+ const data=sentimentSeries([{date:"2026-10-14T10:00:00Z",positive:2},{date:"2026-10-14T11:00:00Z",negative:6}],"7d");
+ assert.equal(data[0].score,-.5); assert.equal(data[0].total,8);
+ assert.equal(sentimentSeries([{date:"2026-10-14T10:00:00Z",positive:null}],"24h")[0].score,null);
+});
+test("negative category bars descend; malformed objects and forecasts stay empty", () => {
+ const data=categorySentiments({A:{positive:8,negative:2},B:{positive:1,negative:9},C:null});
+ assert.equal(data[0].category,"B");assert.equal(data.length,2);
+ assert.equal(categorySentiments([]).length,0);
+ assert.equal(forecastPoints({Sport:[null,{date:"2026-10-14",predicted:null},{date:"invalid",predicted:5}]}).length,0);
+ assert.equal(forecastPoints({Sport:[{date:"2026-10-14",predicted:0}]}).length,1);
+});

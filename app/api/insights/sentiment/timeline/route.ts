@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { resolveInsightsWindow } from "@/lib/insights-period";
 import { businessDayBounds, hourInZone, mysqlUtc } from "@/lib/business-time";
 
 export async function GET(req: Request) {
@@ -9,7 +10,12 @@ export async function GET(req: Request) {
     const sec = await securityCheck(req);
     if (sec) return sec;
 
-    const bounds = businessDayBounds(new Date());
+    const period = new URL(req.url).searchParams.get("period");
+    if (period !== null && !["24h", "7d", "30d", "90d"].includes(period)) {
+      return NextResponse.json({ success: false, error: "invalid_period" }, { status: 400 });
+    }
+    // No parameter keeps the existing Budapest calendar-day contract.
+    const bounds = period ? resolveInsightsWindow(period) : businessDayBounds(new Date());
     const start = mysqlUtc(bounds.start);
     const end = mysqlUtc(bounds.end);
 
@@ -28,6 +34,23 @@ export async function GET(req: Request) {
       [start, end]
     );
 
+    if (period) {
+      const buckets = new Map<string, { date: string; positive: number; neutral: number; negative: number }>();
+      for (const r of rows) {
+        const date = new Date(String(r.bucket).replace(" ", "T") + "Z");
+        const count = Number(r.c);
+        const sentiment = Number(r.sentiment);
+        if (!Number.isFinite(date.getTime()) || !Number.isFinite(count) || count < 0 || ![-1, 0, 1].includes(sentiment)) continue;
+        const key = date.toISOString();
+        const point = buckets.get(key) ?? { date: key, positive: 0, neutral: 0, negative: 0 };
+        if (sentiment === 1) point.positive += count;
+        else if (sentiment === -1) point.negative += count;
+        else point.neutral += count;
+        buckets.set(key, point);
+      }
+      return NextResponse.json({ success: true, period, timeline: [...buckets.values()] });
+    }
+
     const hours = Array.from({ length: 24 }, (_, i) => i);
     const timeline = hours.map(h => ({
       hour: h,
@@ -40,9 +63,11 @@ export async function GET(req: Request) {
       const hour = hourInZone(new Date(`${String(r.bucket).replace(" ", "T")}Z`));
       if (hour < 0 || hour > 23) continue;
 
-      if (r.sentiment === 1) timeline[hour].positive = r.c;
-      else if (r.sentiment === 0) timeline[hour].neutral = r.c;
-      else if (r.sentiment === -1) timeline[hour].negative = r.c;
+      const count = Number(r.c);
+      if (!Number.isFinite(count) || count < 0) continue;
+      if (Number(r.sentiment) === 1) timeline[hour].positive += count;
+      else if (Number(r.sentiment) === 0) timeline[hour].neutral += count;
+      else if (Number(r.sentiment) === -1) timeline[hour].negative += count;
     }
 
     return NextResponse.json({

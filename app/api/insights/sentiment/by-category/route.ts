@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { resolveInsightsWindow } from "@/lib/insights-period";
 import { businessDayBounds, mysqlUtc } from "@/lib/business-time";
 
 function fixCat(s: any): string | null {
@@ -20,7 +21,12 @@ export async function GET(req: Request) {
     if (sec) return sec;
 
     // 🔥 Mai nap meghatározása
-    const bounds = businessDayBounds(new Date());
+    const period = new URL(req.url).searchParams.get("period");
+    if (period !== null && !["24h", "7d", "30d", "90d"].includes(period)) {
+      return NextResponse.json({ success: false, error: "invalid_period" }, { status: 400 });
+    }
+    // No parameter keeps the existing Budapest calendar-day contract.
+    const bounds = period ? resolveInsightsWindow(period) : businessDayBounds(new Date());
     const start = mysqlUtc(bounds.start);
     const end = mysqlUtc(bounds.end);
 

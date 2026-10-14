@@ -1,9 +1,7 @@
-const fs = require('fs');
-const source = fs.readFileSync('app/insights/page.tsx', 'utf8');
-if (!source.includes('Number.isFinite(parsed) ? parsed : fallback')) {
-  throw new Error('insights category numbers must reject NaN and Infinity');
-}
-if (!source.includes('Math.max(0, finiteInsightNumber(it.articleCount))')) {
-  throw new Error('insights article counts must not be negative');
-}
+const assert = require('node:assert/strict');
+const fs = require('node:fs'),vm=require('node:vm'),ts=require('typescript');
+const exportsObject={};
+vm.runInNewContext(ts.transpileModule(fs.readFileSync('lib/insights-dashboard.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText,{exports:exportsObject});
+for(const value of [NaN,Infinity,-1,null,undefined,'bad',{},true])assert.equal(exportsObject.count(value),0);
+assert.equal(exportsObject.count('12'),12);
 console.log('insights category numeric safety: PASS');

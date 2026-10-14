@@ -48,6 +48,7 @@ export default function WSourceClickbaitPro({ period = "24h", dark = false }: { 
   if (error || !data?.success) return <div>Hiba történt.</div>;
 
   const sources = (Array.isArray(data.sources) ? data.sources : [])
+    .filter((s: any) => s && s.avg_clickbait != null && String(s.avg_clickbait).trim() !== "" && Number.isFinite(Number(s.avg_clickbait)) && Number(s.avg_clickbait) >= 0 && Number(s.avg_clickbait) <= 100)
     .map((s: any) => ({
       name: typeof s?.source === "string" && s.source.trim() ? s.source : "Ismeretlen forrás",
       score: Number.isFinite(Number(s?.avg_clickbait)) ? Number(s.avg_clickbait) : 0,

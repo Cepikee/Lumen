@@ -48,6 +48,7 @@ export default function WSourceClickbaitRatio({ period = "24h", dark = false }: 
   if (error || !data?.success) return <div>Hiba történt.</div>;
 
   const sources = (Array.isArray(data.sources) ? data.sources : [])
+    .filter((s: any) => s && s.ratio != null && String(s.ratio).trim() !== "" && Number.isFinite(Number(s.ratio)) && Number(s.ratio) >= 0 && Number(s.ratio) <= 1)
     .map((s: any) => ({
       name: typeof s?.source === "string" && s.source.trim() ? s.source : "Ismeretlen forrás",
       ratio: Number.isFinite(Number(s?.ratio)) ? Number(s.ratio) * 100 : 0,

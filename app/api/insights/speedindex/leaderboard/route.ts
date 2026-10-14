@@ -11,6 +11,7 @@ function normalizeDate(d: any): string | null {
 }
 
 function clampNumber(v: any, max = 1000): number | null {
+  if (v === null || v === undefined || (typeof v === "string" && !v.trim())) return null;
   const n = Number(v);
   if (!isFinite(n) || isNaN(n)) return null;
   if (n < 0) return null;

@@ -97,7 +97,7 @@ export default function WSourceCategoryDistribution({ period = "24h", dark = fal
   const items = Array.isArray(data.items)
     ? data.items.filter((i) => {
         const source = typeof i?.source === "string" ? i.source.trim().toLowerCase() : "";
-        return source !== "portfolio" && source !== "portfolio.hu";
+        return !!source && source !== "portfolio" && source !== "portfolio.hu";
       })
     : [];
 
