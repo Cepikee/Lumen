@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import dynamic from "next/dynamic";
 import useSWR from "swr";
@@ -62,12 +62,12 @@ export default function WSourceDuplication({ period = "24h", dark = false }: { p
     );
   }, [data]);
 
-  if (isLoading) return <div className="p-12 text-center">BetĂ¶ltĂ©s...</div>;
+  if (isLoading) return <div className="p-12 text-center">Betöltés...</div>;
 
   if (error || !data?.success)
     return (
       <div className="p-12 text-center text-red-500">
-        Hiba az adatok betĂ¶ltĂ©sekor
+        Hiba az adatok betöltésekor
       </div>
     );
 
@@ -77,7 +77,7 @@ export default function WSourceDuplication({ period = "24h", dark = false }: { p
 
   const series = [
     {
-      name: "MĂˇsolĂˇsi arĂˇny (%)",
+      name: "Másolási arány (%)",
       data: items.map((i) => i.duplicationScore),
     },
   ];
@@ -139,9 +139,9 @@ export default function WSourceDuplication({ period = "24h", dark = false }: { p
         formatter: (val, opts) => {
           const item = items[opts.dataPointIndex];
           const score = Number(val);
-          return `MĂˇsolĂˇsi arĂˇny: ${score.toFixed(1)}%
+          return `Másolási arány: ${score.toFixed(1)}%
 Eredeti: ${item.original}
-Ătvett: ${item.duplicate}`;
+Átvett: ${item.duplicate}`;
         },
       },
     },
@@ -156,12 +156,12 @@ Eredeti: ${item.original}
       >
         <div className="flex items-center justify-center gap-4 mb-6">
           <h2 className="text-3xl font-semibold tracking-tight text-center">
-            MĂˇsolĂˇsi arĂˇny forrĂˇsok szerint
+            Másolási arány források szerint
           </h2>
 
           <button
             onClick={() => setOpenInfo(true)}
-            aria-label="InformĂˇciĂł"
+            aria-label="Információ"
             type="button"
             className="w-[26px] h-[26px] p-0 m-0 flex items-center justify-center bg-transparent border-0"
           >
@@ -178,53 +178,53 @@ Eredeti: ${item.original}
         </div>
       </div>
 
-      {/* đź”Ą ĂšJ, FELTUNINGOLT UTOM MODAL */}
+      {/* 🔥 ÚJ, FELTUNINGOLT UTOM MODAL */}
       <UtomModal
         show={openInfo}
         onClose={() => setOpenInfo(false)}
-        title="Mi az a mĂˇsolĂˇsi arĂˇny?"
+        title="Mi az a másolási arány?"
       >
         <div className="text-sm leading-relaxed space-y-6">
 
-          {/* BevezetĹ‘ */}
+          {/* Bevezető */}
           <p className="text-base font-semibold text-center">
-            A <b>mĂˇsolĂˇsi arĂˇny</b> azt mutatja meg, hogy egy hĂ­rforrĂˇs
-            <span style={{ color: "#ef4444" }}> <b>milyen gyakran vesz Ăˇt</b></span>
-            mĂˇs forrĂˇsoktĂłl mĂˇr korĂˇbban megjelent tĂ©mĂˇkat.
+            A <b>másolási arány</b> azt mutatja meg, hogy egy hírforrás
+            <span style={{ color: "#ef4444" }}> <b>milyen gyakran vesz át</b></span>
+            más forrásoktól már korábban megjelent témákat.
           </p>
 
-          {/* Ikonos magyarĂˇzat */}
+          {/* Ikonos magyarázat */}
           <div className="space-y-5">
 
             <div className="flex items-start gap-4">
-              <div className="text-2xl">đź“°</div>
+              <div className="text-2xl">📰</div>
               <p>
-                <b>Megjelenik egy Ăşj tĂ©ma</b> a hĂ­rekben. A rendszer azonosĂ­tja,
-                melyik forrĂˇs Ă­r rĂłla <b>elsĹ‘kĂ©nt</b>.
+                <b>Megjelenik egy új téma</b> a hírekben. A rendszer azonosítja,
+                melyik forrás ír róla <b>elsőként</b>.
               </p>
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="text-2xl">đź”</div>
+              <div className="text-2xl">🔁</div>
               <p>
-                Ha egy mĂˇsik forrĂˇs <b>kĂ©sĹ‘bb</b> Ă­r ugyanerrĹ‘l a tĂ©mĂˇrĂłl,
-                akkor azt <b>Ăˇtvett tartalomnak</b> tekintjĂĽk.
+                Ha egy másik forrás <b>később</b> ír ugyanerről a témáról,
+                akkor azt <b>átvett tartalomnak</b> tekintjük.
               </p>
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="text-2xl">đź“Š</div>
+              <div className="text-2xl">📊</div>
               <p>
-                A rendszer minden forrĂˇsnĂˇl megszĂˇmolja, hĂˇnyszor volt
-                <b>eredeti</b> Ă©s hĂˇnyszor <b>Ăˇtvett</b> a megjelenĂ©s.
+                A rendszer minden forrásnál megszámolja, hányszor volt
+                <b>eredeti</b> és hányszor <b>átvett</b> a megjelenés.
               </p>
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="text-2xl">đź“‰</div>
+              <div className="text-2xl">📉</div>
               <p>
-                A <b>mĂˇsolĂˇsi arĂˇny</b> azt mutatja meg, hogy az Ă¶sszes
-                megjelenĂ©sbĹ‘l mekkora rĂ©sz volt Ăˇtvett tartalom.
+                A <b>másolási arány</b> azt mutatja meg, hogy az összes
+                megjelenésből mekkora rész volt átvett tartalom.
               </p>
             </div>
 
@@ -241,23 +241,23 @@ Eredeti: ${item.original}
             <p className="font-semibold mb-2 text-lg">Mit jelent ez a gyakorlatban?</p>
 
             <ul className="list-disc list-inside space-y-1 text-left inline-block text-sm">
-              <li><b>Alacsony arĂˇny</b> â†’ a forrĂˇs tĂ¶bbnyire sajĂˇt tĂ©mĂˇkat dolgoz fel.</li>
-              <li><b>Magas arĂˇny</b> â†’ a forrĂˇs gyakran vesz Ăˇt mĂˇsoktĂłl.</li>
-              <li>A mutatĂł <i>nem minĹ‘sĂ©gi Ă©rtĂ©kelĂ©s</i>, csak a megjelenĂ©sek eredetisĂ©gĂ©t mĂ©ri.</li>
+              <li><b>Alacsony arány</b> → a forrás többnyire saját témákat dolgoz fel.</li>
+              <li><b>Magas arány</b> → a forrás gyakran vesz át másoktól.</li>
+              <li>A mutató <i>nem minőségi értékelés</i>, csak a megjelenések eredetiségét méri.</li>
             </ul>
           </div>
 
-          {/* LezĂˇrĂˇs */}
+          {/* Lezárás */}
           <p className="text-center">
-            A cĂ©l, hogy ĂˇtlĂˇthatĂł legyen, mely forrĂˇsok mennyire tĂˇmaszkodnak
-            sajĂˇt tartalomra, Ă©s kik azok, akik inkĂˇbb mĂˇsok tĂ©mĂˇit dolgozzĂˇk fel.
+            A cél, hogy átlátható legyen, mely források mennyire támaszkodnak
+            saját tartalomra, és kik azok, akik inkább mások témáit dolgozzák fel.
           </p>
 
           <p
             className="text-xs italic text-center mt-6"
             style={{ color: isDark ? "#ffffff" : "#000000" }}
           >
-            A rangsor AI Ăˇltal kerĂĽlt meghatĂˇrozĂˇsra.
+            A rangsor AI által került meghatározásra.
           </p>
 
         </div>
