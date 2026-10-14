@@ -266,3 +266,4 @@ Eredeti: ${item.original}
   );
 }
 
+
