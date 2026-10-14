@@ -44,7 +44,7 @@ export default function WSourceDuplication({ period = "24h", dark = false }: { p
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const { data, error, isLoading } = useSWR<{
-    success: boolean;
+    success: boolean,
     duplication: DuplicationItem[];
   }>(`/api/premium-insights/duplication?period=${encodeURIComponent(period)}`, fetcher, {
     refreshInterval: 60000,
