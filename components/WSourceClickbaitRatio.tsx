@@ -28,7 +28,7 @@ const fetcher = (url: string) =>
     return json;
   });
 
-export default function WSourceClickbaitRatio({ period = "24h", dark = false }: { period?: string; dark?: boolean }) {
+export default function WSourceClickbaitRatio({ period = "24h", dark = false, embedded = false }: { period?: string; dark?: boolean; embedded?: boolean }) {
   const theme = useUserStore((s) => s.theme);
   const [openInfo, setOpenInfo] = useState(false);
 
@@ -52,6 +52,8 @@ export default function WSourceClickbaitRatio({ period = "24h", dark = false }: 
     .map((s: any) => ({
       name: typeof s?.source === "string" && s.source.trim() ? s.source : "Ismeretlen forrás",
       ratio: Number.isFinite(Number(s?.ratio)) ? Number(s.ratio) * 100 : 0,
+      clickbait: Number.isFinite(Number(s?.clickbait)) ? Math.max(0, Number(s.clickbait)) : 0,
+      total: Number.isFinite(Number(s?.total)) ? Math.max(0, Number(s.total)) : 0,
     }))
     .sort((a: any, b: any) => b.ratio - a.ratio);
 
@@ -69,29 +71,17 @@ export default function WSourceClickbaitRatio({ period = "24h", dark = false }: 
   return (
     <>
       <div
-        className={`relative p-10 rounded-3xl overflow-hidden wsource-card--ghost ${
+        className={`relative overflow-hidden ${embedded ? "p-0" : "p-2 rounded-xl wsource-card--ghost"} ${
           isDark ? "text-white" : "text-slate-900"
         }`}
-        style={{ background: "var(--bs-body-bg, #f8fafc)" }}
+        style={{ background: embedded ? "transparent" : "var(--bs-body-bg, #f8fafc)" }}
       >
-        <div className="flex items-center justify-center gap-4 mb-6">
-          <h2 className="text-3xl font-semibold tracking-tight text-center">
-            Források Clickbait Arányai
-          </h2>
-
-          <button
-            onClick={() => setOpenInfo(true)}
-            aria-label="Információ"
-            type="button"
-            className="w-[26px] h-[26px] flex items-center justify-center bg-transparent border-0"
-          >
-            <img
-              src="/icons/info-svg.svg"
-              alt="info"
-              className="w-[26px] h-[26px] object-contain pointer-events-none"
-            />
+        {!embedded && <div className="flex items-center justify-center gap-4 mb-4">
+          <h2 className="text-lg font-semibold tracking-tight text-center">Források clickbait arányai</h2>
+          <button onClick={() => setOpenInfo(true)} aria-label="Információ" type="button" className="w-[26px] h-[26px] flex items-center justify-center bg-transparent border-0">
+            <img src="/icons/info-svg.svg" alt="info" className="w-[26px] h-[26px] object-contain pointer-events-none" />
           </button>
-        </div>
+        </div>}
 
         {/* háttér glow */}
         <div
@@ -112,13 +102,13 @@ export default function WSourceClickbaitRatio({ period = "24h", dark = false }: 
         />
 
         {/* CHART */}
-        <div className="relative z-10 h-[440px]">
+        <div className="relative z-10" style={{ height: Math.min(280, Math.max(160, sources.length * 38 + 70)) }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               key={isDark ? "dark" : "light"}
               layout="vertical"
               data={sources}
-              margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
+              margin={{ top: 6, right: 42, left: 4, bottom: 6 }}
             >
               <XAxis
                 type="number"
@@ -131,7 +121,7 @@ export default function WSourceClickbaitRatio({ period = "24h", dark = false }: 
               <YAxis
                 type="category"
                 dataKey="name"
-                width={130}
+                width={100}
                 stroke={isDark ? "#e2e8f0" : "#334155"}
                 tick={{ fill: isDark ? "#e2e8f0" : "#334155" }}
               />
@@ -152,13 +142,13 @@ export default function WSourceClickbaitRatio({ period = "24h", dark = false }: 
                   color: isDark ? "#ffffff" : "#000000",
                   fontWeight: 500,
                 }}
-                formatter={(value?: number) => [
-                  `${(value ?? 0).toFixed(1)}%`,
+                formatter={(value?: number, _name, item) => [
+                  `${(value ?? 0).toFixed(1)}% · ${item?.payload?.clickbait ?? 0}/${item?.payload?.total ?? 0} cikk`,
                   "Clickbait arány",
                 ]}
               />
 
-              <Bar dataKey="ratio" radius={[0, 14, 14, 0]} animationDuration={900}>
+              <Bar dataKey="ratio" barSize={20} radius={[0, 8, 8, 0]} animationDuration={500}>
                 <LabelList
                   dataKey="ratio"
                   position="right"
@@ -184,8 +174,7 @@ export default function WSourceClickbaitRatio({ period = "24h", dark = false }: 
         </div>
       </div>
 
-      {/* 🔥 ÚJ, FELTUNINGOLT UTOM MODAL */}
-      <UtomModal
+      {!embedded && <UtomModal
         show={openInfo}
         onClose={() => setOpenInfo(false)}
         title="Mi az a clickbait arány?"
@@ -274,7 +263,7 @@ export default function WSourceClickbaitRatio({ period = "24h", dark = false }: 
           </p>
 
         </div>
-      </UtomModal>
+      </UtomModal>}
     </>
   );
 }

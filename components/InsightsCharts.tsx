@@ -5,6 +5,8 @@ import styles from "./InsightsDashboard.module.css";
 
 const colors = ["#0787ff", "#8b5cf6", "#ff7a32", "#21d99b", "#63d4ec", "#ee79ae"];
 const tip = { background: "#0c2034", border: "1px solid #295173", color: "#eef6ff", borderRadius: 8, fontSize: 12 };
+const tipLabel = { color: "#eef6ff", fontWeight: 600 };
+const tipItem = { color: "#eef6ff" };
 const tick = { fill: "#a8c1dc", fontSize: 10 };
 type Series = ReturnType<typeof categorySeries>;
 
@@ -15,7 +17,7 @@ export function CategoryTrendChart({ chart, period }: { chart: Series; period: s
         <CartesianGrid stroke="#183653" strokeDasharray="3 4" />
         <XAxis dataKey="time" tickFormatter={v => timeLabel(Number(v), period)} tick={tick} minTickGap={32} />
         <YAxis width={28} allowDecimals={false} tick={tick} />
-        <Tooltip contentStyle={tip} labelFormatter={v => timeLabel(Number(v), period, true)} formatter={(value, name) => [String(value) + " hír", name]} />
+        <Tooltip cursor={false} contentStyle={tip} labelStyle={tipLabel} itemStyle={tipItem} labelFormatter={v => timeLabel(Number(v), period, true)} formatter={(value, name) => [String(value) + " hír", name]} />
         {chart.categories.map((c, i) => <Line key={c} dataKey={`v${i}`} name={c} stroke={colors[i % colors.length]} strokeWidth={2} dot={chart.points.length === 1} isAnimationActive={false} />)}
       </LineChart>
     </ResponsiveContainer></div>
@@ -30,7 +32,7 @@ export function ClickbaitChart({ data }: { data: ReturnType<typeof clickbaitRows
       <BarChart data={data.slice(0,8)} layout="vertical" margin={{right:12}}>
         <XAxis type="number" domain={[0,100]} tick={tick} />
         <YAxis dataKey="name" type="category" width={80} tick={tick} />
-        <Tooltip contentStyle={tip} formatter={(value, name, item) => [`${Number(value).toFixed(1)} / 100 · ${item.payload.articles} cikk`, name]} />
+        <Tooltip cursor={false} contentStyle={tip} labelStyle={tipLabel} itemStyle={tipItem} formatter={(value, name, item) => [`${Number(value).toFixed(1)} / 100 · ${item.payload.articles} cikk`, name]} />
         <Bar barSize={16} dataKey="score" name="Clickbait pontszám" radius={[0,4,4,0]} isAnimationActive={false}>
           {data.slice(0,8).map(r=><Cell key={r.name} fill={r.score>=60?"#ff4d57":r.score>=45?"#ff7a32":"#348aff"} />)}
         </Bar>
@@ -47,11 +49,11 @@ export function SentimentDonut({ data }: { data: ReturnType<typeof sentimentCoun
       <ResponsiveContainer width="100%" height="100%"><PieChart>
         <Pie data={data.values.map((value,i)=>({value,name:labels[i]}))} dataKey="value" innerRadius="65%" outerRadius="95%" stroke="none" isAnimationActive={false}>
           {palette.map(c=><Cell key={c} fill={c} />)}
-        </Pie><Tooltip contentStyle={tip} />
+        </Pie><Tooltip cursor={false} contentStyle={tip} labelStyle={tipLabel} itemStyle={tipItem} />
       </PieChart></ResponsiveContainer>
       <div className={styles.donutLabel}><span>Átlag</span><strong>{data.average?.toFixed(2) ?? "—"}</strong></div>
     </div><div className={styles.donutLegend}>{labels.map((label,i)=><div key={label}><i style={{background:palette[i]}} />{label}<strong>{data.total ? (data.values[i]/data.total*100).toFixed(0):"—"}%</strong></div>)}</div></div>
-    <p className={styles.caption}>{data.total} hangulatelemzett cikk · skála: −1 … +1</p>
+    <p className={styles.caption}>{data.total} elemzett cikk alapján</p>
   </>;
 }
 
@@ -77,7 +79,7 @@ export function SentimentTimelineChart({ data, period }: { data: ReturnType<type
       <XAxis dataKey="time" tickFormatter={v=>timeLabel(Number(v),period)} tick={tick} minTickGap={32} />
       <YAxis width={32} domain={[-1,1]} ticks={[-1,-.5,0,.5,1]} tick={tick} />
       <ReferenceLine y={0} stroke="#91bde9" strokeDasharray="4 4" />
-      <Tooltip contentStyle={tip} labelFormatter={v=>timeLabel(Number(v),period,true)} formatter={(value,name,item)=>[value==null?"Nincs mérés":`${Number(value).toFixed(2)} · ${item.payload.total} cikk`,name]} />
+      <Tooltip cursor={false} contentStyle={tip} labelStyle={tipLabel} itemStyle={tipItem} labelFormatter={v=>timeLabel(Number(v),period,true)} formatter={(value,name,item)=>[value==null?"Nincs mérés":`${Number(value).toFixed(2)} · ${item.payload.total} cikk`,name]} />
       <Line dataKey="score" name="Átlagos hangulat" stroke="#1dd78a" strokeWidth={2} dot={data.length===1} connectNulls={false} isAnimationActive={false} />
     </LineChart>
   </ResponsiveContainer></div><p className={styles.caption}>−1 negatív · 0 semleges · +1 pozitív · Budapest</p></>;

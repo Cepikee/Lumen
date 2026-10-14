@@ -38,7 +38,8 @@ export default function CategoryPage() {
   const router = useRouter();
 
   const categoryRaw = params?.category ?? "";
-  const period = (search?.get("period") as string) || "7d";
+  const requestedPeriod = search?.get("period");
+  const period = requestedPeriod === "24h" || requestedPeriod === "30d" || requestedPeriod === "90d" ? requestedPeriod : "7d";
   const sort = (search?.get("sort") as string) || "latest";
   const parsedPage = Number(search?.get("page") || 1);
   const parsedLimit = Number(search?.get("limit") || 20);
@@ -231,6 +232,12 @@ export default function CategoryPage() {
             </div>
 
             <div className="btn-group" role="group" aria-label="Időszak">
+              <button
+                className={`btn btn-sm ${period === "24h" ? "btn-primary" : "btn-outline-secondary"}`}
+                onClick={() => setPeriod("24h")}
+              >
+                24 óra
+              </button>
               <button
                 className={`btn btn-sm ${period === "7d" ? "btn-primary" : "btn-outline-secondary"}`}
                 onClick={() => setPeriod("7d")}

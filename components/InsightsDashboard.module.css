@@ -18,6 +18,10 @@
 .cardHeader h2 { font-size: 15px; line-height: 1.35; font-weight: 650; margin: 0; }
 .scope { font-size: 10px; color: #8eabc7; margin-left: auto; flex-shrink: 0; }
 .info { border: 0; background: transparent; color: #91bde9; padding: 0 2px; font-size: 15px; }
+
+.infoText { margin: 0; color: inherit; font-size: 14px; line-height: 1.7; }
+.page :global(.recharts-default-tooltip) { color: #eef6ff !important; }
+.page :global(.recharts-tooltip-label), .page :global(.recharts-tooltip-item) { color: #eef6ff !important; }
 .kpi { grid-column: span 3; min-height: 116px; display: flex; align-items: center; gap: 22px; }
 .kpi h2 { font-size: 14px; font-weight: 600; color: #c4dbf4; margin: 0; }
 .kpi strong { display: block; font-size: 29px; line-height: 1.35; letter-spacing: .01em; }
