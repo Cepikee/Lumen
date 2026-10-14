@@ -1,0 +1,18 @@
+:global(html) nav.skin.skin { background: #071626 !important; border-bottom: 1px solid #173753; min-height: 54px; padding: 3px 28px; }
+.skin :global(.nav-link) { color: #b8cee7 !important; font-size: 13px; }
+.skin :global(.nav-link[aria-current="page"]) { color: #00c8ff !important; box-shadow: 0 2px #00c8ff; }
+.skin :global(.header-logo-img) { width: 40px; height: 40px; }
+.skin :global(.navbar-nav) { overflow-x: auto; white-space: nowrap; }
+.skin :global(.ms-auto) { min-width: 0; }
+.skin a:focus-visible { outline: 2px solid #00c8ff; outline-offset: 3px; }
+@media(max-width:767px) { :global(html) nav.skin.skin { padding: 3px 12px; } .skin :global(.navbar-brand) { margin-right: 8px; } .skin :global(.navbar-nav) { max-width: calc(100vw - 140px); gap: 12px !important; } }
+
+:global(html) nav.skin.skin :global(.nav-link) { color: #b8cee7 !important; }
+:global(html) nav.skin.skin :global(.nav-link[aria-current="page"]) { color: #00c8ff !important; }
+:global(html) nav.skin.skin :global(.navbar-nav) { display: flex !important; }
+.skin :global(.navbar-brand)::after { content: "UTOM"; color: #f5f9ff; font-weight: 700; font-size: 18px; margin-left: 6px; }
+@media(max-width:767px) { .skin :global(.navbar-brand)::after { display: none; } }
+
+:global(html) nav.skin.skin > :global(.container-fluid) { flex-wrap: nowrap; }
+.skin :global(.ms-auto) { flex: 1; justify-content: space-between; margin-left: 40px !important; }
+@media(max-width:767px) { .skin :global(.ms-auto) { margin-left: 0 !important; gap: 8px !important; } }

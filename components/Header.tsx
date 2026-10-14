@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import insightsSkin from "./InsightsHeader.module.css";
 import Image from "next/image";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -23,6 +24,7 @@ export default function Header() {
   const [isTyping, setIsTyping] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
+  const isInsights = pathname === "/insights";
   const isLanding = pathname.startsWith("/landing");
   const isPremiumRoute = pathname === "/premium" || pathname.startsWith("/premium/");
 
@@ -131,7 +133,7 @@ export default function Header() {
     }
   }, [theme]);
 
-  const logoSrc = isLegalPage || isPremiumRoute || isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
+  const logoSrc = isLegalPage || isPremiumRoute || isInsights || isDark ? "/web-app-manifest-512x512.png" : "/utom.png";
 
   const menuLoggedOut = [
     { href: "/", label: "Főoldal" },
@@ -158,7 +160,7 @@ export default function Header() {
 
   return (
     <nav
-      className={`navbar navbar-expand-lg sticky-top header-nav ${isLegalPage ? "header-legal" : ""} ${isPremiumRoute ? "header-premium" : ""}`}
+      className={`navbar navbar-expand-lg sticky-top header-nav ${isInsights ? insightsSkin.skin : ""} ${isLegalPage ? "header-legal" : ""} ${isPremiumRoute ? "header-premium" : ""}`}
     >
       <div className="container-fluid d-flex align-items-center justify-content-between">
         <Link href="/" className="navbar-brand d-flex align-items-center">
@@ -216,7 +218,7 @@ export default function Header() {
           <ul className="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
             {activeMenu.map((item) => (
               <li key={item.href} className="nav-item">
-                <Link href={item.href} className="nav-link">
+                <Link href={item.href} className="nav-link" aria-current={pathname === item.href ? "page" : undefined}>
                   {item.label}
                 </Link>
               </li>

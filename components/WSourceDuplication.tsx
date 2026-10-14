@@ -28,7 +28,7 @@ const fetcher = (url: string) =>
     return json;
   });
 
-export default function WSourceDuplication({ period = "24h" }: { period?: string }) {
+export default function WSourceDuplication({ period = "24h", dark = false }: { period?: string; dark?: boolean }) {
   const theme = useUserStore((s) => s.theme);
   const [openInfo, setOpenInfo] = useState(false);
 
@@ -37,7 +37,7 @@ export default function WSourceDuplication({ period = "24h" }: { period?: string
     return () => console.debug("WSourceDuplication unmounted");
   }, []);
 
-  const isDark =
+  const isDark = dark ||
     theme === "dark" ||
     (theme === "system" &&
       typeof window !== "undefined" &&
@@ -46,7 +46,7 @@ export default function WSourceDuplication({ period = "24h" }: { period?: string
   const { data, error, isLoading } = useSWR<{
     success: boolean;
     duplication: DuplicationItem[];
-  >(`/api/premium-insights/duplication?period=${encodeURIComponent(period)}`, fetcher, {
+  }>(`/api/premium-insights/duplication?period=${encodeURIComponent(period)}`, fetcher, {
     refreshInterval: 60000,
   });
 
