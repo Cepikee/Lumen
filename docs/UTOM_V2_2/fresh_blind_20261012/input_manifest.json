@@ -1,0 +1,45 @@
+{
+  "createdAt": "2026-10-12T07:25:37.653Z",
+  "phase": "BEFORE ANY FRESH INFERENCE",
+  "snippets": 20,
+  "editorialSentences": 60,
+  "domains": 20,
+  "decisions": 120,
+  "positive": 107,
+  "abstention": 13,
+  "origin": {
+    "unseenExistingRawMaterial": 0,
+    "newSyntheticMaterial": 20,
+    "externalIndependence": false,
+    "limitation": "Same assistant authors gold and audits outputs. New synthetic structural stress test; not an external blind sample. No old output was used to modify this gold."
+  },
+  "adversarialDecisions": [
+    "A2",
+    "A5",
+    "A6",
+    "C2",
+    "E3",
+    "F1",
+    "F3",
+    "G5",
+    "K2",
+    "L3",
+    "M3",
+    "O3",
+    "P5",
+    "S2",
+    "S4",
+    "T3"
+  ],
+  "files": {
+    "corpus.json": "e613c0df3c4739fffbac0f9a0be522f8cc156b272bc6670722047ac0c8649a17",
+    "expected.json": "0d895e73051e43f2326e58a485d197f1befaa74932476e0f0d2c38c7cc7e9b65",
+    "selected_items.json": "c1bf14df9c744fe66bf42f6aaa4cf55b5754be43dc1e6b75de7b0680de921abe"
+  },
+  "rules": {
+    "positive": "CR only when all semantic parts of item supported; explicit wrong resolved part => WR; absent or abstained correct positive => MISSED.",
+    "abstention": "CU only when no wrong positive binding in selected scope; wrong positive => WR.",
+    "duplicateSurface": "Equivalent duplicate frame outputs do not create extra decisions; contradictory positive frames fail item.",
+    "evidence": "Report recursively encountered span occurrences and distinct raw span triples separately."
+  }
+}

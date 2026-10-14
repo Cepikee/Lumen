@@ -1,0 +1,35 @@
+{
+  "total": 90,
+  "CORRECT_RESOLVED": 52,
+  "WRONG_RESOLVED": 0,
+  "CORRECT_UNRESOLVED": 7,
+  "MISSED_DEFENSIBLE_RESOLUTION": 31,
+  "resolvedPrecision": 1,
+  "resolutionRate": 0.5777777777777777,
+  "evidence": {
+    "total": 1268,
+    "exact": 1268,
+    "failures": []
+  },
+  "C01NumericAndScopeUnchanged": true,
+  "otherwiseUnchangedSnippets": [
+    "M",
+    "E",
+    "C",
+    "R",
+    "B",
+    "S",
+    "W",
+    "T",
+    "I",
+    "H",
+    "O",
+    "N",
+    "K",
+    "F"
+  ],
+  "C02": "PASS",
+  "SECOND_BLIND_CORPUS_RESULT": "PARTIAL",
+  "FRESH_BLIND_GENERALIZATION_READY": true,
+  "NEXT_REAL_WORLD_BLIND_TEST_READY": false
+}

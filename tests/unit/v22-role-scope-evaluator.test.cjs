@@ -1,0 +1,12 @@
+"use strict";
+const test=require('node:test'),assert=require('node:assert/strict');
+const {evaluate}=require('../../scripts/experimental/role-scope-evaluate.cjs');
+const text='Mira 2 pontot kapott.',span={start:0,end:text.length,textSpan:text};
+const num={start:5,end:13,value:2,ownerType:'entity',owner:{mention:'Mira'},property:'pont',valueKind:'absolute',binding:'resolved'};
+const frame={propositionSpan:span,content:span,evidenceSpan:span,actor:{mention:'Mira'},source:null,recipient:null,conditionality:false,grammaticalMood:['Ind'],polarity:'asserted',binding:'resolved',numericArguments:[num]};
+const gold={rows:[{id:'probe',text,entities:[],frames:[{text,start:0,end:text.length,content:text,actor:'Mira',source:null,recipient:null,conditional:false,cnd:false,polarity:'asserted',numbers:[{start:5,end:13,value:2,ownerType:'entity',owner:'Mira',property:'pont',valueKind:'absolute'}]}]}]};
+function score(frames){return evaluate([{id:'probe',text}],[{id:'probe',output:{frames,entities:[]}}],gold);}
+test('role evaluator: known correct case passes; resolved label alone is no proof',()=>{assert.equal(score([frame]).falseResolved.highDecisionCount,0);const wrong=structuredClone(frame);wrong.actor={mention:'Másik'};assert.ok(score([wrong]).falseResolved.highDecisionCount>0);});
+test('role evaluator: independent owner, sign, property, source, scope and condition errors fail',()=>{for(const alter of [f=>{f.source={mention:'Mira'};},f=>{f.recipient={mention:'Mira'};},f=>{f.numericArguments[0].value=-2;},f=>{f.numericArguments[0].ownerType='process';},f=>{f.numericArguments[0].property='age';},f=>{f.conditionality=true;},f=>{f.content={textSpan:'kapott'};},f=>{f.grammaticalMood=['Cnd'];}]){const f=structuredClone(frame);alter(f);assert.ok(score([f]).falseResolved.highDecisionCount>0);}});
+test('role evaluator: abstentions and omitted frames retain fixed gold denominators',()=>{const empty=score([]);assert.equal(empty.metrics.actorGoldCoverage.total,1);assert.equal(empty.metrics.actorGoldCoverage.correct,0);assert.equal(empty.metrics.numericOwner.total,1);assert.equal(empty.falseResolved.combined.rate,null);});
+test('role evaluator: duplicates cannot reuse a gold label and bad evidence fails',()=>{assert.ok(score([frame,frame]).falseResolved.highDecisionCount>0);const f=structuredClone(frame);f.evidenceSpan={start:1,end:text.length,textSpan:text};assert.equal(score([f]).evidence.failures,1);});

@@ -1,0 +1,9 @@
+{
+  "scripts/experimental/role-scope-binder.cjs": "c7d5a27c8ba77c0e0e2253c565f5d933b0638be63c0e62070d708f7388a903ea",
+  "scripts/experimental/real-text-a-binder.cjs": "06a9d38c9ae5b44e865913e79d3544ade8ae862e8e26b2aa9f75f392071910ef",
+  "scripts/experimental/source-scope-recovery.cjs": "a8dc06529f7a8b9a7e6045e66f4a09010251491d15cd4ab35a4745d93e3272c8",
+  "scripts/experimental/b02-post-repair-audit.cjs": "93b9726f1cbfe0590e8f0fcb96a3066b3fd0170a9e3bcd1e10a1d452939cfefb",
+  "tests/unit/v22-source-scope-recovery.test.cjs": "24d37e6d392bc549b9bb48e7849c62486cd8e30c20f84e1b628284882dad6d31",
+  "tests/fixtures/real-text-a/source-recovery-annotations.json": "5c2e2941c7a93ec9d921e712d46e74c10fbc0afbdbf15ebba6a8a20f9fae1273",
+  "tests/fixtures/real-text-a/source-recovery-boundaries.json": "61ef3aa6b9ed68386517ec1f8e5d1da9c716bfdf4f64a3aba55eded818340069"
+}

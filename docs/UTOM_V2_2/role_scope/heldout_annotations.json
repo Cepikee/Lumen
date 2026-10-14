@@ -1,0 +1,4224 @@
+[
+  {
+    "id": 1,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 13,
+          "text": "hőmérséklet",
+          "lemma": "hőmérséklet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 14,
+          "end": 17,
+          "text": "-11",
+          "lemma": "-11",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 18,
+          "end": 21,
+          "text": "fok",
+          "lemma": "fok",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 22,
+          "end": 26,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 26,
+          "end": 27,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "text": "A hőmérséklet -11 fok volt."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 15.86041999689769,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 2,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 3,
+          "end": 11,
+          "text": "egyenleg",
+          "lemma": "egyenleg",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 12,
+          "end": 15,
+          "text": "−17",
+          "lemma": "−17",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 16,
+          "end": 22,
+          "text": "millió",
+          "lemma": "millió",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 23,
+          "end": 29,
+          "text": "forint",
+          "lemma": "forint",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 30,
+          "end": 34,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 34,
+          "end": 35,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 35,
+          "text": "Az egyenleg −17 millió forint volt."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 14.988132999860682,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 3,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 14,
+          "text": "gólkülönbség",
+          "lemma": "gólkülönbség",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 15,
+          "end": 17,
+          "text": "–4",
+          "lemma": "–4",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "Degree": "Pos",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 18,
+          "end": 21,
+          "text": "gól",
+          "lemma": "gól",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 22,
+          "end": 26,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 26,
+          "end": 27,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "text": "A gólkülönbség –4 gól volt."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 15.014033997431397,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 4,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 13,
+          "text": "hőmérséklet",
+          "lemma": "hőmérséklet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 14,
+          "end": 20,
+          "text": "mínusz",
+          "lemma": "mínusz",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "Degree": "Pos",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 21,
+          "end": 23,
+          "text": "13",
+          "lemma": "13",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 24,
+          "end": 27,
+          "text": "fok",
+          "lemma": "fok",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 28,
+          "end": 32,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 32,
+          "end": 33,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 33,
+          "text": "A hőmérséklet mínusz 13 fok volt."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 14.710130999446847,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 5,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 15,
+          "text": "támogatottság",
+          "lemma": "támogatottság",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 16,
+          "end": 17,
+          "text": "7",
+          "lemma": "7",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 18,
+          "end": 33,
+          "text": "százalékponttal",
+          "lemma": "százalékpont",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ins",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 34,
+          "end": 42,
+          "text": "csökkent",
+          "lemma": "csökken",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 42,
+          "end": 43,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 43,
+          "text": "A támogatottság 7 százalékponttal csökkent."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 15.171806997386739,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 6,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "készlet",
+          "lemma": "készlet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 10,
+          "end": 12,
+          "text": "23",
+          "lemma": "23",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 13,
+          "end": 21,
+          "text": "darabbal",
+          "lemma": "darab",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ins",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 22,
+          "end": 30,
+          "text": "csökkent",
+          "lemma": "csökken",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 30,
+          "end": 31,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 31,
+          "text": "A készlet 23 darabbal csökkent."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 14.367322000907734,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 7,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 13,
+          "text": "hőmérséklet",
+          "lemma": "hőmérséklet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 14,
+          "end": 20,
+          "text": "12-ről",
+          "lemma": "12",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Del",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 21,
+          "end": 26,
+          "text": "−6-ra",
+          "lemma": "−6",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Sbl",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 27,
+          "end": 36,
+          "text": "változott",
+          "lemma": "változik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 36,
+          "end": 37,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 37,
+          "text": "A hőmérséklet 12-ről −6-ra változott."
+        }
+      ],
+      "entities": [
+        {
+          "start": 21,
+          "end": 26,
+          "text": "−6-ra",
+          "label": "LOC"
+        }
+      ]
+    },
+    "elapsedMs": 15.28267799585592,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 8,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 13,
+          "text": "hőmérséklet",
+          "lemma": "hőmérséklet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "text": "-9",
+          "lemma": "-9",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType[sem]": "Signed",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 17,
+          "end": 19,
+          "text": "és",
+          "lemma": "és",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 20,
+          "end": 22,
+          "text": "+4",
+          "lemma": "+4",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType[sem]": "Signed",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 23,
+          "end": 26,
+          "text": "fok",
+          "lemma": "fok",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 27,
+          "end": 33,
+          "text": "között",
+          "lemma": "között",
+          "pos": "ADP",
+          "morph": {}
+        },
+        {
+          "start": 34,
+          "end": 38,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 38,
+          "end": 39,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 39,
+          "text": "A hőmérséklet -9 és +4 fok között volt."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 17.16935400327202,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 9,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "raktárban",
+          "lemma": "raktár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ine",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 12,
+          "end": 14,
+          "text": "48",
+          "lemma": "48",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 15,
+          "end": 21,
+          "text": "dobozt",
+          "lemma": "doboz",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 22,
+          "end": 30,
+          "text": "találtak",
+          "lemma": "talál",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Plur",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 30,
+          "end": 31,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 31,
+          "text": "A raktárban 48 dobozt találtak."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 15.043005987536162,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 10,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 10,
+          "text": "klinikán",
+          "lemma": "klinika",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 11,
+          "end": 14,
+          "text": "143",
+          "lemma": "143",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 15,
+          "end": 22,
+          "text": "beteget",
+          "lemma": "beteg",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 23,
+          "end": 31,
+          "text": "kezeltek",
+          "lemma": "kezel",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Plur",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 31,
+          "end": 32,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 32,
+          "text": "A klinikán 143 beteget kezeltek."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 14.792078000027686,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 11,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "rendőrség",
+          "lemma": "rendőrség",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 12,
+          "end": 13,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 14,
+          "end": 23,
+          "text": "raktárban",
+          "lemma": "raktár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ine",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 24,
+          "end": 26,
+          "text": "48",
+          "lemma": "48",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 27,
+          "end": 33,
+          "text": "dobozt",
+          "lemma": "doboz",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 34,
+          "end": 40,
+          "text": "talált",
+          "lemma": "talál",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 40,
+          "end": 41,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 41,
+          "text": "A rendőrség a raktárban 48 dobozt talált."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 14.756488002603874,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 12,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Bence",
+          "lemma": "Bence",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 6,
+          "end": 9,
+          "text": "azt",
+          "lemma": "az",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          }
+        },
+        {
+          "start": 10,
+          "end": 16,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 17,
+          "end": 24,
+          "text": "Rékának",
+          "lemma": "Réka",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Dat",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 24,
+          "end": 25,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 26,
+          "end": 30,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 31,
+          "end": 42,
+          "text": "megérkezett",
+          "lemma": "megérkezik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 43,
+          "end": 44,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 45,
+          "end": 50,
+          "text": "levél",
+          "lemma": "levél",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 50,
+          "end": 51,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 51,
+          "text": "Bence azt mondta Rékának, hogy megérkezett a levél."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Bence",
+          "label": "PER"
+        },
+        {
+          "start": 17,
+          "end": 24,
+          "text": "Rékának",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 17.08322200283874,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 13,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 7,
+          "text": "Rékának",
+          "lemma": "Réka",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Dat",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "text": "azt",
+          "lemma": "az",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          }
+        },
+        {
+          "start": 12,
+          "end": 19,
+          "text": "mondták",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Plur",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 19,
+          "end": 20,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 21,
+          "end": 25,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 26,
+          "end": 37,
+          "text": "megérkezett",
+          "lemma": "megérkezik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 38,
+          "end": 39,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 40,
+          "end": 45,
+          "text": "levél",
+          "lemma": "levél",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 45,
+          "end": 46,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 46,
+          "text": "Rékának azt mondták, hogy megérkezett a levél."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 7,
+          "text": "Rékának",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 17.340924008749425,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 14,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Bence",
+          "lemma": "Bence",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 6,
+          "end": 13,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 14,
+          "end": 18,
+          "text": "vele",
+          "lemma": "vele",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Ins",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Prs"
+          }
+        },
+        {
+          "start": 18,
+          "end": 19,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 20,
+          "end": 24,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 25,
+          "end": 30,
+          "text": "bezár",
+          "lemma": "bezár",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 31,
+          "end": 32,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 33,
+          "end": 37,
+          "text": "bolt",
+          "lemma": "bolt",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 37,
+          "end": 38,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "text": "Bence közölte vele, hogy bezár a bolt."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Bence",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 16.638727000099607,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 15,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Bence",
+          "lemma": "Bence",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 6,
+          "end": 14,
+          "text": "kérdezte",
+          "lemma": "kérdez",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 15,
+          "end": 19,
+          "text": "tőle",
+          "lemma": "tőle",
+          "pos": "ADV",
+          "morph": {
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "PrsPron"
+          }
+        },
+        {
+          "start": 19,
+          "end": 20,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 21,
+          "end": 25,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 26,
+          "end": 33,
+          "text": "működik",
+          "lemma": "működik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 33,
+          "end": 35,
+          "text": "-e",
+          "lemma": "-e",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Int"
+          }
+        },
+        {
+          "start": 36,
+          "end": 37,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 38,
+          "end": 44,
+          "text": "műszer",
+          "lemma": "műszer",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 44,
+          "end": 45,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 45,
+          "text": "Bence kérdezte tőle, hogy működik-e a műszer."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Bence",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 16.779184006736614,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 16,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Bence",
+          "lemma": "Bence",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 6,
+          "end": 18,
+          "text": "tájékoztatta",
+          "lemma": "tájékoztat",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 19,
+          "end": 24,
+          "text": "Rékát",
+          "lemma": "Réka",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 24,
+          "end": 25,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 25,
+          "text": "Bence tájékoztatta Rékát."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Bence",
+          "label": "PER"
+        },
+        {
+          "start": 19,
+          "end": 24,
+          "text": "Rékát",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 11.795792990596965,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 17,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Bence",
+          "lemma": "Bence",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 6,
+          "end": 10,
+          "text": "írta",
+          "lemma": "ír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 11,
+          "end": 15,
+          "text": "neki",
+          "lemma": "neki",
+          "pos": "ADV",
+          "morph": {
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "PrsPron"
+          }
+        },
+        {
+          "start": 15,
+          "end": 16,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 17,
+          "end": 21,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 22,
+          "end": 30,
+          "text": "kezdődik",
+          "lemma": "kezdődik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 31,
+          "end": 33,
+          "text": "az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 34,
+          "end": 37,
+          "text": "óra",
+          "lemma": "óra",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 37,
+          "end": 38,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "text": "Bence írta neki, hogy kezdődik az óra."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Bence",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 16.416149999713525,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 18,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 14,
+          "text": "szavazólapok",
+          "lemma": "szavazólap",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Plur"
+          }
+        },
+        {
+          "start": 15,
+          "end": 17,
+          "text": "88",
+          "lemma": "88",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 18,
+          "end": 30,
+          "text": "százalékának",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Gen",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          }
+        },
+        {
+          "start": 31,
+          "end": 43,
+          "text": "feldolgozása",
+          "lemma": "feldolgozás",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          }
+        },
+        {
+          "start": 44,
+          "end": 48,
+          "text": "után",
+          "lemma": "után",
+          "pos": "ADP",
+          "morph": {}
+        },
+        {
+          "start": 49,
+          "end": 53,
+          "text": "Sára",
+          "lemma": "Sára",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Sbl",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 54,
+          "end": 56,
+          "text": "42",
+          "lemma": "42",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 57,
+          "end": 67,
+          "text": "százalékot",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 67,
+          "end": 68,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 69,
+          "end": 74,
+          "text": "Vince",
+          "lemma": "Vince",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 75,
+          "end": 77,
+          "text": "37",
+          "lemma": "37",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 78,
+          "end": 88,
+          "text": "százalékot",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 89,
+          "end": 95,
+          "text": "kapott",
+          "lemma": "kap",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 95,
+          "end": 96,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 96,
+          "text": "A szavazólapok 88 százalékának feldolgozása után Sára 42 százalékot, Vince 37 százalékot kapott."
+        }
+      ],
+      "entities": [
+        {
+          "start": 49,
+          "end": 53,
+          "text": "Sára",
+          "label": "PER"
+        },
+        {
+          "start": 69,
+          "end": 74,
+          "text": "Vince",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 19.647802007966675,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 19,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "küszöb",
+          "lemma": "küszöb",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 9,
+          "end": 11,
+          "text": "11",
+          "lemma": "11",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 12,
+          "end": 20,
+          "text": "százalék",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 20,
+          "end": 21,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 22,
+          "end": 26,
+          "text": "Sára",
+          "lemma": "Sára",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Sbl",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 27,
+          "end": 29,
+          "text": "31",
+          "lemma": "31",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 30,
+          "end": 40,
+          "text": "százalékot",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 40,
+          "end": 41,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 42,
+          "end": 47,
+          "text": "Vince",
+          "lemma": "Vince",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 48,
+          "end": 50,
+          "text": "29",
+          "lemma": "29",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 51,
+          "end": 61,
+          "text": "százalékot",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 61,
+          "end": 62,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 63,
+          "end": 67,
+          "text": "Zita",
+          "lemma": "Zita",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 68,
+          "end": 70,
+          "text": "22",
+          "lemma": "22",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 71,
+          "end": 81,
+          "text": "százalékot",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 82,
+          "end": 88,
+          "text": "kapott",
+          "lemma": "kap",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 88,
+          "end": 89,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 89,
+          "text": "A küszöb 11 százalék, Sára 31 százalékot, Vince 29 százalékot, Zita 22 százalékot kapott."
+        }
+      ],
+      "entities": [
+        {
+          "start": 22,
+          "end": 26,
+          "text": "Sára",
+          "label": "PER"
+        },
+        {
+          "start": 42,
+          "end": 47,
+          "text": "Vince",
+          "label": "PER"
+        },
+        {
+          "start": 63,
+          "end": 67,
+          "text": "Zita",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 21.800158996484242,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 20,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 4,
+          "text": "56",
+          "lemma": "56",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 5,
+          "end": 9,
+          "text": "éves",
+          "lemma": "éves",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "Degree": "Pos",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 10,
+          "end": 14,
+          "text": "Sára",
+          "lemma": "Sára",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Sbl",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 15,
+          "end": 17,
+          "text": "42",
+          "lemma": "42",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 18,
+          "end": 28,
+          "text": "százalékot",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 29,
+          "end": 35,
+          "text": "kapott",
+          "lemma": "kap",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 35,
+          "end": 36,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "text": "A 56 éves Sára 42 százalékot kapott."
+        }
+      ],
+      "entities": [
+        {
+          "start": 10,
+          "end": 14,
+          "text": "Sára",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 15.108410007087514,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 21,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "tarifa",
+          "lemma": "tarifa",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 9,
+          "end": 11,
+          "text": "14",
+          "lemma": "14",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 12,
+          "end": 20,
+          "text": "százalék",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 20,
+          "end": 21,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 22,
+          "end": 23,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 24,
+          "end": 30,
+          "text": "Cédrus",
+          "lemma": "Cédrus",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 31,
+          "end": 35,
+          "text": "Zrt.",
+          "lemma": "Zrt.",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 36,
+          "end": 47,
+          "text": "részesedése",
+          "lemma": "részesedés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          }
+        },
+        {
+          "start": 48,
+          "end": 50,
+          "text": "32",
+          "lemma": "32",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 51,
+          "end": 59,
+          "text": "százalék",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 60,
+          "end": 64,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 64,
+          "end": 65,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 65,
+          "text": "A tarifa 14 százalék, a Cédrus Zrt. részesedése 32 százalék volt."
+        }
+      ],
+      "entities": [
+        {
+          "start": 24,
+          "end": 35,
+          "text": "Cédrus Zrt.",
+          "label": "ORG"
+        }
+      ]
+    },
+    "elapsedMs": 19.457654998404905,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 22,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 4,
+          "text": "Sára",
+          "lemma": "Sa",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Sbl",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 5,
+          "end": 13,
+          "text": "2023-ban",
+          "lemma": "2023",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Ine",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "text": "42",
+          "lemma": "42",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 17,
+          "end": 27,
+          "text": "százalékot",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 28,
+          "end": 34,
+          "text": "kapott",
+          "lemma": "kap",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 34,
+          "end": 35,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 35,
+          "text": "Sára 2023-ban 42 százalékot kapott."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 4,
+          "text": "Sára",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 14.441442006500438,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 23,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 4,
+          "text": "96",
+          "lemma": "96",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 5,
+          "end": 10,
+          "text": "beteg",
+          "lemma": "beteg",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 11,
+          "end": 13,
+          "text": "18",
+          "lemma": "18",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 14,
+          "end": 23,
+          "text": "százaléka",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          }
+        },
+        {
+          "start": 24,
+          "end": 32,
+          "text": "távozott",
+          "lemma": "távozik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 32,
+          "end": 33,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 33,
+          "text": "A 96 beteg 18 százaléka távozott."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 14.563781005563214,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 24,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 4,
+          "text": "Sára",
+          "lemma": "Sára",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Sbl",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 5,
+          "end": 12,
+          "text": "tagadta",
+          "lemma": "tagad",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 12,
+          "end": 13,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 14,
+          "end": 18,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 19,
+          "end": 24,
+          "text": "pénzt",
+          "lemma": "pénz",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 25,
+          "end": 31,
+          "text": "lopott",
+          "lemma": "lop",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 32,
+          "end": 37,
+          "text": "volna",
+          "lemma": "volna",
+          "pos": "AUX",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Cnd",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 37,
+          "end": 38,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "text": "Sára tagadta, hogy pénzt lopott volna."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 4,
+          "text": "Sára",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 14.676206003059633,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 25,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 4,
+          "text": "Sára",
+          "lemma": "Sa",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Sbl",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 5,
+          "end": 13,
+          "text": "megvenné",
+          "lemma": "megvesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Cnd",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "text": "az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 17,
+          "end": 24,
+          "text": "eszközt",
+          "lemma": "eszköz",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 24,
+          "end": 25,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 25,
+          "text": "Sára megvenné az eszközt."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 4,
+          "text": "Sára",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 14.449597001657821,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 26,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 10,
+          "text": "Amennyiben",
+          "lemma": "amennyiben",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 11,
+          "end": 16,
+          "text": "Vince",
+          "lemma": "Vince",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 17,
+          "end": 21,
+          "text": "nyer",
+          "lemma": "nyer",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 21,
+          "end": 22,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 23,
+          "end": 32,
+          "text": "csökkenti",
+          "lemma": "csökkent",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 33,
+          "end": 35,
+          "text": "az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 36,
+          "end": 40,
+          "text": "árat",
+          "lemma": "ár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 40,
+          "end": 41,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 42,
+          "end": 46,
+          "text": "Zita",
+          "lemma": "Zita",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 47,
+          "end": 54,
+          "text": "viszont",
+          "lemma": "viszont",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 55,
+          "end": 61,
+          "text": "tegnap",
+          "lemma": "tegnap",
+          "pos": "ADV",
+          "morph": {}
+        },
+        {
+          "start": 62,
+          "end": 70,
+          "text": "fizetett",
+          "lemma": "fizet",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 70,
+          "end": 71,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 71,
+          "text": "Amennyiben Vince nyer, csökkenti az árat, Zita viszont tegnap fizetett."
+        }
+      ],
+      "entities": [
+        {
+          "start": 11,
+          "end": 16,
+          "text": "Vince",
+          "label": "PER"
+        },
+        {
+          "start": 42,
+          "end": 46,
+          "text": "Zita",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 20.576231996528804,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 27,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Vince",
+          "lemma": "Vince",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 6,
+          "end": 10,
+          "text": "csak",
+          "lemma": "csak",
+          "pos": "ADV",
+          "morph": {}
+        },
+        {
+          "start": 11,
+          "end": 16,
+          "text": "akkor",
+          "lemma": "akkor",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Dem"
+          }
+        },
+        {
+          "start": 17,
+          "end": 22,
+          "text": "fizet",
+          "lemma": "fizet",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 22,
+          "end": 23,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 24,
+          "end": 26,
+          "text": "ha",
+          "lemma": "ha",
+          "pos": "SCONJ",
+          "morph": {}
+        },
+        {
+          "start": 27,
+          "end": 35,
+          "text": "megkapja",
+          "lemma": "megkap",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 36,
+          "end": 37,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 38,
+          "end": 48,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 48,
+          "end": 49,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 49,
+          "text": "Vince csak akkor fizet, ha megkapja a szerződést."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Vince",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 18.0654650030192,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 28,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Ez",
+          "lemma": "ez",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          }
+        },
+        {
+          "start": 3,
+          "end": 15,
+          "text": "történhetett",
+          "lemma": "történhet",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 16,
+          "end": 21,
+          "text": "volna",
+          "lemma": "volna",
+          "pos": "AUX",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Cnd",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 21,
+          "end": 22,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "text": "Ez történhetett volna."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 12.202598998555914,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 29,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 1,
+          "end": 3,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 4,
+          "end": 12,
+          "text": "egyenleg",
+          "lemma": "egyenleg",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 13,
+          "end": 20,
+          "text": "javulni",
+          "lemma": "javul",
+          "pos": "VERB",
+          "morph": {
+            "VerbForm": "Inf",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 21,
+          "end": 24,
+          "text": "fog",
+          "lemma": "fog",
+          "pos": "AUX",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 24,
+          "end": 25,
+          "text": "”",
+          "lemma": "”",
+          "pos": "X",
+          "morph": {}
+        },
+        {
+          "start": 26,
+          "end": 27,
+          "text": "–",
+          "lemma": "–",
+          "pos": "ADV",
+          "morph": {}
+        },
+        {
+          "start": 28,
+          "end": 34,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 35,
+          "end": 40,
+          "text": "Bence",
+          "lemma": "Bence",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 40,
+          "end": 41,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "„"
+        },
+        {
+          "start": 1,
+          "end": 41,
+          "text": "Az egyenleg javulni fog” – mondta Bence."
+        }
+      ],
+      "entities": [
+        {
+          "start": 35,
+          "end": 40,
+          "text": "Bence",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 17.276009006309323,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 30,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Bence",
+          "lemma": "Bence",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 6,
+          "end": 9,
+          "text": "azt",
+          "lemma": "az",
+          "pos": "PRON",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing",
+            "Person": "3",
+            "PronType": "Dem"
+          }
+        },
+        {
+          "start": 10,
+          "end": 16,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 16,
+          "end": 17,
+          "text": ":",
+          "lemma": ":",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 18,
+          "end": 19,
+          "text": "„",
+          "lemma": "„",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 19,
+          "end": 21,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 22,
+          "end": 30,
+          "text": "egyenleg",
+          "lemma": "egyenleg",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 31,
+          "end": 38,
+          "text": "javulni",
+          "lemma": "javul",
+          "pos": "VERB",
+          "morph": {
+            "VerbForm": "Inf",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 39,
+          "end": 42,
+          "text": "fog",
+          "lemma": "fog",
+          "pos": "AUX",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 42,
+          "end": 43,
+          "text": "”",
+          "lemma": "”",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Acc",
+            "NumType": "Ord",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 43,
+          "end": 44,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 44,
+          "text": "Bence azt mondta: „Az egyenleg javulni fog”."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Bence",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 16.947302996413782,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 31,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "\"",
+          "lemma": "\"",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 1,
+          "end": 3,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 4,
+          "end": 12,
+          "text": "egyenleg",
+          "lemma": "egyenleg",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 13,
+          "end": 20,
+          "text": "javulni",
+          "lemma": "javul",
+          "pos": "VERB",
+          "morph": {
+            "VerbForm": "Inf",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 21,
+          "end": 24,
+          "text": "fog",
+          "lemma": "fog",
+          "pos": "AUX",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 24,
+          "end": 25,
+          "text": "\"",
+          "lemma": "\"",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 26,
+          "end": 27,
+          "text": "-",
+          "lemma": "-",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 28,
+          "end": 34,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 35,
+          "end": 40,
+          "text": "Bence",
+          "lemma": "Bence",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 40,
+          "end": 41,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 41,
+          "text": "\"Az egyenleg javulni fog\" - mondta Bence."
+        }
+      ],
+      "entities": [
+        {
+          "start": 35,
+          "end": 40,
+          "text": "Bence",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 16.57909700588789,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 32,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 3,
+          "end": 11,
+          "text": "egyenleg",
+          "lemma": "egyenleg",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 12,
+          "end": 19,
+          "text": "javulni",
+          "lemma": "javul",
+          "pos": "VERB",
+          "morph": {
+            "VerbForm": "Inf",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 20,
+          "end": 23,
+          "text": "fog",
+          "lemma": "fog",
+          "pos": "AUX",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 24,
+          "end": 25,
+          "text": "–",
+          "lemma": "–",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Abs",
+            "Degree": "Pos",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 26,
+          "end": 32,
+          "text": "mondta",
+          "lemma": "mond",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 33,
+          "end": 38,
+          "text": "Bence",
+          "lemma": "Bence",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 38,
+          "end": 39,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 39,
+          "text": "Az egyenleg javulni fog – mondta Bence."
+        }
+      ],
+      "entities": [
+        {
+          "start": 33,
+          "end": 38,
+          "text": "Bence",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 14.28346399916336,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 33,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 9,
+          "text": "Szerintük",
+          "lemma": "szerinte",
+          "pos": "ADV",
+          "morph": {
+            "Number": "Plur",
+            "Person": "3",
+            "PronType": "PrsPron"
+          }
+        },
+        {
+          "start": 10,
+          "end": 12,
+          "text": "az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 13,
+          "end": 19,
+          "text": "iskola",
+          "lemma": "iskola",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 20,
+          "end": 22,
+          "text": "és",
+          "lemma": "és",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 23,
+          "end": 24,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 25,
+          "end": 31,
+          "text": "kórház",
+          "lemma": "kórház",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 32,
+          "end": 34,
+          "text": "is",
+          "lemma": "is",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 35,
+          "end": 41,
+          "text": "nyitva",
+          "lemma": "nyitva",
+          "pos": "ADV",
+          "morph": {
+            "VerbForm": "Conv"
+          }
+        },
+        {
+          "start": 42,
+          "end": 45,
+          "text": "van",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 45,
+          "end": 46,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 46,
+          "text": "Szerintük az iskola és a kórház is nyitva van."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 16.410990996519104,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 34,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 4,
+          "text": "Réka",
+          "lemma": "Réka",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 5,
+          "end": 16,
+          "text": "megérkezett",
+          "lemma": "megérkezik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 16,
+          "end": 17,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 18,
+          "end": 25,
+          "text": "Rékának",
+          "lemma": "réka",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Dat",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 26,
+          "end": 31,
+          "text": "írtak",
+          "lemma": "ír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Plur",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 31,
+          "end": 32,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "text": "Réka megérkezett."
+        },
+        {
+          "start": 18,
+          "end": 32,
+          "text": "Rékának írtak."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 4,
+          "text": "Réka",
+          "label": "PER"
+        },
+        {
+          "start": 18,
+          "end": 25,
+          "text": "Rékának",
+          "label": "PER"
+        }
+      ]
+    },
+    "elapsedMs": 14.082446010434069,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 35,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 13,
+          "text": "hőmérséklet",
+          "lemma": "hőmérséklet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 14,
+          "end": 22,
+          "text": "legalább",
+          "lemma": "legalább",
+          "pos": "ADV",
+          "morph": {}
+        },
+        {
+          "start": 23,
+          "end": 26,
+          "text": "-15",
+          "lemma": "-15",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 27,
+          "end": 30,
+          "text": "fok",
+          "lemma": "fok",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 31,
+          "end": 35,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 35,
+          "end": 36,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "text": "A hőmérséklet legalább -15 fok volt."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 14.87502698728349,
+    "peakRssBytes": 447397888
+  },
+  {
+    "id": 36,
+    "ok": true,
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 13,
+          "text": "hőmérséklet",
+          "lemma": "hőmérséklet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 14,
+          "end": 24,
+          "text": "legfeljebb",
+          "lemma": "legfeljebb",
+          "pos": "ADV",
+          "morph": {}
+        },
+        {
+          "start": 25,
+          "end": 27,
+          "text": "+7",
+          "lemma": "+7",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType[sem]": "Signed",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 28,
+          "end": 31,
+          "text": "fok",
+          "lemma": "fok",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 32,
+          "end": 37,
+          "text": "lehet",
+          "lemma": "lesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Pot",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 37,
+          "end": 38,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "text": "A hőmérséklet legfeljebb +7 fok lehet."
+        }
+      ],
+      "entities": []
+    },
+    "elapsedMs": 15.074141003424302,
+    "peakRssBytes": 447397888
+  }
+]

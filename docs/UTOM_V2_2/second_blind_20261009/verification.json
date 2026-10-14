@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-09T21:38:43.831Z",
+  "engineAndExistingTestHashesUnchanged": true,
+  "verifiedFiles": 386,
+  "trackedDiffUnchanged": true,
+  "headUnchanged": true,
+  "inputHashesUnchanged": true,
+  "firstPassSha256": "5999830f83c17cf9944d66418ab4caba6df1c610b9eb7b5cd78a236013fb923e",
+  "firstPassEqualsPerSnippetJournal": true,
+  "preRunTests": "339/339 PASS",
+  "postRunTests": "339/339 PASS",
+  "firstPassInferenceCalls": 15,
+  "firstPassReruns": 0,
+  "paidProviderCalls": 0,
+  "canonicalProjection": "OFF",
+  "externalIndependence": false,
+  "rawInputOnly": true
+}

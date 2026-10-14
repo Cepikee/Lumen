@@ -1,0 +1,1825 @@
+{
+  "id": "T",
+  "text": "Bécs új feltételeket kért a közös ellenőrzéshez, de a táviratból nem látszik, melyik osztrák szerv fogalmazta meg őket. A határőrség szóvivője a minisztérium levelére hivatkozva közölte, hogy nem január 15-én, hanem február 1-jén kezdődhet az összehangolás. Az indulást a kétoldalú megállapodás aláírásához kötötték.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 4,
+        "text": "Bécs",
+        "lemma": "Bécs",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 21
+      },
+      {
+        "start": 5,
+        "end": 7,
+        "text": "új",
+        "lemma": "új",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 8
+      },
+      {
+        "start": 8,
+        "end": 20,
+        "text": "feltételeket",
+        "lemma": "feltétel",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Plur"
+        },
+        "dep": "obj",
+        "headStart": 21
+      },
+      {
+        "start": 21,
+        "end": 25,
+        "text": "kért",
+        "lemma": "kér",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 21
+      },
+      {
+        "start": 26,
+        "end": 27,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 34
+      },
+      {
+        "start": 28,
+        "end": 33,
+        "text": "közös",
+        "lemma": "közös",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 34
+      },
+      {
+        "start": 34,
+        "end": 47,
+        "text": "ellenőrzéshez",
+        "lemma": "ellenőrzés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "All",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 21
+      },
+      {
+        "start": 47,
+        "end": 48,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 69
+      },
+      {
+        "start": 49,
+        "end": 51,
+        "text": "de",
+        "lemma": "de",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 69
+      },
+      {
+        "start": 52,
+        "end": 53,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 54
+      },
+      {
+        "start": 54,
+        "end": 64,
+        "text": "táviratból",
+        "lemma": "távirat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 69
+      },
+      {
+        "start": 65,
+        "end": 68,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 69
+      },
+      {
+        "start": 69,
+        "end": 76,
+        "text": "látszik",
+        "lemma": "látszik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 21
+      },
+      {
+        "start": 76,
+        "end": 77,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 69
+      },
+      {
+        "start": 78,
+        "end": 84,
+        "text": "melyik",
+        "lemma": "melyik",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Int"
+        },
+        "dep": "det",
+        "headStart": 93
+      },
+      {
+        "start": 85,
+        "end": 92,
+        "text": "osztrák",
+        "lemma": "osztrák",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 93
+      },
+      {
+        "start": 93,
+        "end": 98,
+        "text": "szerv",
+        "lemma": "szerv",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 99
+      },
+      {
+        "start": 99,
+        "end": 109,
+        "text": "fogalmazta",
+        "lemma": "fogalmaz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 21
+      },
+      {
+        "start": 110,
+        "end": 113,
+        "text": "meg",
+        "lemma": "meg",
+        "pos": "PART",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 99
+      },
+      {
+        "start": 114,
+        "end": 118,
+        "text": "őket",
+        "lemma": "ők",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Plur",
+          "Person": "3",
+          "PronType": "Prs"
+        },
+        "dep": "obj",
+        "headStart": 99
+      },
+      {
+        "start": 118,
+        "end": 119,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 21
+      },
+      {
+        "start": 120,
+        "end": 121,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 122
+      },
+      {
+        "start": 122,
+        "end": 132,
+        "text": "határőrség",
+        "lemma": "határőrség",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 133
+      },
+      {
+        "start": 133,
+        "end": 142,
+        "text": "szóvivője",
+        "lemma": "szóvivő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 178
+      },
+      {
+        "start": 143,
+        "end": 144,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 145
+      },
+      {
+        "start": 145,
+        "end": 157,
+        "text": "minisztérium",
+        "lemma": "minisztérium",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 158
+      },
+      {
+        "start": 158,
+        "end": 166,
+        "text": "levelére",
+        "lemma": "level",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 167
+      },
+      {
+        "start": 167,
+        "end": 177,
+        "text": "hivatkozva",
+        "lemma": "hivatkozva",
+        "pos": "ADV",
+        "morph": {
+          "VerbForm": "Conv"
+        },
+        "dep": "advmod:mode",
+        "headStart": 178
+      },
+      {
+        "start": 178,
+        "end": 185,
+        "text": "közölte",
+        "lemma": "közöl",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 178
+      },
+      {
+        "start": 185,
+        "end": 186,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 230
+      },
+      {
+        "start": 187,
+        "end": 191,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 230
+      },
+      {
+        "start": 192,
+        "end": 195,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 230
+      },
+      {
+        "start": 196,
+        "end": 202,
+        "text": "január",
+        "lemma": "január",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 203
+      },
+      {
+        "start": 203,
+        "end": 208,
+        "text": "15-én",
+        "lemma": "15.",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 230
+      },
+      {
+        "start": 208,
+        "end": 209,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 230
+      },
+      {
+        "start": 210,
+        "end": 215,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 230
+      },
+      {
+        "start": 216,
+        "end": 223,
+        "text": "február",
+        "lemma": "február",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 224
+      },
+      {
+        "start": 224,
+        "end": 229,
+        "text": "1-jén",
+        "lemma": "1.",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 230
+      },
+      {
+        "start": 230,
+        "end": 239,
+        "text": "kezdődhet",
+        "lemma": "kezdődhet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 178
+      },
+      {
+        "start": 240,
+        "end": 242,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 243
+      },
+      {
+        "start": 243,
+        "end": 256,
+        "text": "összehangolás",
+        "lemma": "összehangolás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 230
+      },
+      {
+        "start": 256,
+        "end": 257,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 178
+      },
+      {
+        "start": 258,
+        "end": 260,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 261
+      },
+      {
+        "start": 261,
+        "end": 269,
+        "text": "indulást",
+        "lemma": "indulás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 307
+      },
+      {
+        "start": 270,
+        "end": 271,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 282
+      },
+      {
+        "start": 272,
+        "end": 281,
+        "text": "kétoldalú",
+        "lemma": "kétoldalú",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 282
+      },
+      {
+        "start": 282,
+        "end": 294,
+        "text": "megállapodás",
+        "lemma": "megállapodás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 295
+      },
+      {
+        "start": 295,
+        "end": 306,
+        "text": "aláírásához",
+        "lemma": "aláírás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "All",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 307
+      },
+      {
+        "start": 307,
+        "end": 315,
+        "text": "kötötték",
+        "lemma": "köt",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 307
+      },
+      {
+        "start": 315,
+        "end": 316,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 307
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 119,
+        "text": "Bécs új feltételeket kért a közös ellenőrzéshez, de a táviratból nem látszik, melyik osztrák szerv fogalmazta meg őket."
+      },
+      {
+        "start": 120,
+        "end": 257,
+        "text": "A határőrség szóvivője a minisztérium levelére hivatkozva közölte, hogy nem január 15-én, hanem február 1-jén kezdődhet az összehangolás."
+      },
+      {
+        "start": 258,
+        "end": 316,
+        "text": "Az indulást a kétoldalú megállapodás aláírásához kötötték."
+      }
+    ],
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "text": "Bécs",
+        "label": "LOC"
+      }
+    ]
+  },
+  "output": {
+    "entities": [
+      {
+        "mention": "Bécs",
+        "normalized": "bécs",
+        "type": "location",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 0,
+        "end": 4,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 0,
+          "end": 4,
+          "textSpan": "Bécs"
+        },
+        "identityKey": "location|bécs",
+        "canonicalIdentity": "bécs",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "Bécs",
+            "normalized": "bécs",
+            "type": "location",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 4,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 4,
+              "textSpan": "Bécs"
+            },
+            "identityKey": "location|bécs",
+            "canonicalIdentity": "bécs",
+            "identityStatus": "resolved",
+            "named": true,
+            "role": "location"
+          },
+          {
+            "mention": "ellenőrzéshez",
+            "normalized": "ellenőrzés",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "All",
+            "start": 34,
+            "end": 47,
+            "evidenceSpan": {
+              "start": 34,
+              "end": 47,
+              "textSpan": "ellenőrzéshez"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 47,
+          "textSpan": "Bécs új feltételeket kért a közös ellenőrzéshez"
+        },
+        "attribution": null,
+        "action": "kér",
+        "actionSpan": {
+          "start": 21,
+          "end": 25,
+          "textSpan": "kért"
+        },
+        "object": [
+          "feltétel"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 47,
+          "textSpan": "Bécs új feltételeket kért a közös ellenőrzéshez"
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 47,
+          "textSpan": "Bécs új feltételeket kért a közös ellenőrzéshez"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:47",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "feltételeket",
+              "normalized": "feltétel",
+              "start": 8,
+              "end": 20,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 8,
+                "end": 20,
+                "textSpan": "feltételeket"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 8,
+                "end": 20,
+                "textSpan": "feltételeket"
+              },
+              "targetSpan": {
+                "start": 21,
+                "end": 25,
+                "textSpan": "kért"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 8,
+                    "end": 20,
+                    "textSpan": "feltételeket"
+                  },
+                  "targetSpan": {
+                    "start": 21,
+                    "end": 25,
+                    "textSpan": "kért"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:47",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "táviratból",
+            "normalized": "távirat",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ela",
+            "start": 54,
+            "end": 64,
+            "evidenceSpan": {
+              "start": 54,
+              "end": 64,
+              "textSpan": "táviratból"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 49,
+          "end": 76,
+          "textSpan": "de a táviratból nem látszik"
+        },
+        "attribution": null,
+        "action": "látszik",
+        "actionSpan": {
+          "start": 69,
+          "end": 76,
+          "textSpan": "látszik"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 49,
+          "end": 76,
+          "textSpan": "de a táviratból nem látszik"
+        },
+        "propositionSpan": {
+          "start": 49,
+          "end": 76,
+          "textSpan": "de a táviratból nem látszik"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:49:76",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 78,
+          "end": 119,
+          "textSpan": "melyik osztrák szerv fogalmazta meg őket."
+        },
+        "attribution": null,
+        "action": "megfogalmaz",
+        "actionSpan": {
+          "start": 99,
+          "end": 109,
+          "textSpan": "fogalmazta"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 78,
+          "end": 119,
+          "textSpan": "melyik osztrák szerv fogalmazta meg őket."
+        },
+        "propositionSpan": {
+          "start": 78,
+          "end": 119,
+          "textSpan": "melyik osztrák szerv fogalmazta meg őket."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:78:119",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "őket",
+              "normalized": "ők",
+              "start": 114,
+              "end": 118,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 114,
+                "end": 118,
+                "textSpan": "őket"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 114,
+                "end": 118,
+                "textSpan": "őket"
+              },
+              "targetSpan": {
+                "start": 99,
+                "end": 109,
+                "textSpan": "fogalmazta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 114,
+                    "end": 118,
+                    "textSpan": "őket"
+                  },
+                  "targetSpan": {
+                    "start": 99,
+                    "end": 109,
+                    "textSpan": "fogalmazta"
+                  }
+                }
+              ],
+              "frameId": "dependency:78:119",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "15-én",
+            "normalized": "15.",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 203,
+            "end": 208,
+            "evidenceSpan": {
+              "start": 203,
+              "end": 208,
+              "textSpan": "15-én"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": {
+          "mention": "határőrség szóvivője",
+          "normalized": "határőrség szóvivő",
+          "start": 122,
+          "end": 142,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 122,
+            "end": 142,
+            "textSpan": "határőrség szóvivője"
+          }
+        },
+        "source": {
+          "mention": "határőrség szóvivője",
+          "normalized": "határőrség szóvivő",
+          "start": 122,
+          "end": 142,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 122,
+            "end": 142,
+            "textSpan": "határőrség szóvivője"
+          }
+        },
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "közöl",
+        "content": {
+          "start": 192,
+          "end": 208,
+          "textSpan": "nem január 15-én"
+        },
+        "attribution": {
+          "label": "határőrség szóvivője",
+          "normalized": "határőrség szóvivő",
+          "evidenceSpan": {
+            "start": 122,
+            "end": 142,
+            "textSpan": "határőrség szóvivője"
+          },
+          "propositionSpan": {
+            "start": 191,
+            "end": 257,
+            "textSpan": " nem január 15-én, hanem február 1-jén kezdődhet az összehangolás."
+          }
+        },
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 15,
+            "canonicalValue": 15,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 203,
+            "end": 205,
+            "raw": "15",
+            "evidenceSpan": {
+              "start": 203,
+              "end": 205,
+              "textSpan": "15"
+            },
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "unsafe_proposition_scope",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {
+              "start": 192,
+              "end": 208,
+              "textSpan": "nem január 15-én"
+            },
+            "subject": null,
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 203,
+                    "end": 205,
+                    "textSpan": "15"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "recovered-source:178:proposition:0",
+              "clauseSpan": {
+                "start": 192,
+                "end": 208,
+                "textSpan": "nem január 15-én"
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "asserted",
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "unresolved",
+        "status": "reported_claim",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 192,
+          "end": 208,
+          "textSpan": "nem január 15-én"
+        },
+        "propositionSpan": {
+          "start": 192,
+          "end": 208,
+          "textSpan": "nem január 15-én"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "recovered-source:178:proposition:0",
+        "attributionChainId": "recovered-source:178",
+        "claimOwner": {
+          "mention": "határőrség szóvivője",
+          "normalized": "határőrség szóvivő",
+          "start": 122,
+          "end": 142,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 122,
+            "end": 142,
+            "textSpan": "határőrség szóvivője"
+          }
+        },
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 122,
+            "end": 142,
+            "textSpan": "határőrség szóvivője"
+          },
+          "reportingPredicateSpan": {
+            "start": 178,
+            "end": 185,
+            "textSpan": "közölte"
+          },
+          "clauseSpan": {
+            "start": 191,
+            "end": 257,
+            "textSpan": " nem január 15-én, hanem február 1-jén kezdődhet az összehangolás."
+          },
+          "frameId": "recovered-source:178:proposition:0",
+          "parentAttributionId": "recovered-source:178:0",
+          "rule": "governing_np_reporting_scope"
+        },
+        "quoteSpan": null
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "1-jén",
+            "normalized": "1.",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 224,
+            "end": 229,
+            "evidenceSpan": {
+              "start": 224,
+              "end": 229,
+              "textSpan": "1-jén"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": {
+          "mention": "határőrség szóvivője",
+          "normalized": "határőrség szóvivő",
+          "start": 122,
+          "end": 142,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 122,
+            "end": 142,
+            "textSpan": "határőrség szóvivője"
+          }
+        },
+        "source": {
+          "mention": "határőrség szóvivője",
+          "normalized": "határőrség szóvivő",
+          "start": 122,
+          "end": 142,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 122,
+            "end": 142,
+            "textSpan": "határőrség szóvivője"
+          }
+        },
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "közöl",
+        "content": {
+          "start": 210,
+          "end": 257,
+          "textSpan": "hanem február 1-jén kezdődhet az összehangolás."
+        },
+        "attribution": {
+          "label": "határőrség szóvivője",
+          "normalized": "határőrség szóvivő",
+          "evidenceSpan": {
+            "start": 122,
+            "end": 142,
+            "textSpan": "határőrség szóvivője"
+          },
+          "propositionSpan": {
+            "start": 191,
+            "end": 257,
+            "textSpan": " nem január 15-én, hanem február 1-jén kezdődhet az összehangolás."
+          }
+        },
+        "action": "kezdődhet",
+        "actionSpan": {
+          "start": 230,
+          "end": 239,
+          "textSpan": "kezdődhet"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 1,
+            "canonicalValue": 1,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 224,
+            "end": 225,
+            "raw": "1",
+            "evidenceSpan": {
+              "start": 224,
+              "end": 225,
+              "textSpan": "1"
+            },
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {
+              "start": 210,
+              "end": 257,
+              "textSpan": "hanem február 1-jén kezdődhet az összehangolás."
+            },
+            "subject": null,
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 224,
+                    "end": 225,
+                    "textSpan": "1"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "finite_potential_wordform_candidate",
+                  "evidenceSpan": {
+                    "start": 230,
+                    "end": 239,
+                    "textSpan": "kezdődhet"
+                  },
+                  "dependencyPath": []
+                }
+              ],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "recovered-source:178:proposition:1",
+              "clauseSpan": {
+                "start": 210,
+                "end": 257,
+                "textSpan": "hanem február 1-jén kezdődhet az összehangolás."
+              },
+              "predicateSpan": {
+                "start": 230,
+                "end": 239,
+                "textSpan": "kezdődhet"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 224,
+                    "end": 229,
+                    "textSpan": "1-jén"
+                  },
+                  "targetSpan": {
+                    "start": 230,
+                    "end": 239,
+                    "textSpan": "kezdődhet"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": true,
+        "modalities": [
+          "reported",
+          "possible"
+        ],
+        "modality": "possible",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 210,
+          "end": 257,
+          "textSpan": "hanem február 1-jén kezdődhet az összehangolás."
+        },
+        "propositionSpan": {
+          "start": 210,
+          "end": 257,
+          "textSpan": "hanem február 1-jén kezdődhet az összehangolás."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "recovered-source:178:proposition:1",
+        "attributionChainId": "recovered-source:178",
+        "claimOwner": {
+          "mention": "határőrség szóvivője",
+          "normalized": "határőrség szóvivő",
+          "start": 122,
+          "end": 142,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 122,
+            "end": 142,
+            "textSpan": "határőrség szóvivője"
+          }
+        },
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 122,
+            "end": 142,
+            "textSpan": "határőrség szóvivője"
+          },
+          "reportingPredicateSpan": {
+            "start": 178,
+            "end": 185,
+            "textSpan": "közölte"
+          },
+          "clauseSpan": {
+            "start": 191,
+            "end": 257,
+            "textSpan": " nem január 15-én, hanem február 1-jén kezdődhet az összehangolás."
+          },
+          "frameId": "recovered-source:178:proposition:1",
+          "parentAttributionId": "recovered-source:178:0",
+          "rule": "governing_np_reporting_scope"
+        },
+        "quoteSpan": null,
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "finite_potential_wordform_candidate",
+              "evidenceSpan": {
+                "start": 230,
+                "end": 239,
+                "textSpan": "kezdődhet"
+              },
+              "dependencyPath": []
+            }
+          ],
+          "conditions": [],
+          "frameId": "recovered-source:178:proposition:1",
+          "clauseSpan": {
+            "start": 210,
+            "end": 257,
+            "textSpan": "hanem február 1-jén kezdődhet az összehangolás."
+          },
+          "projectionAllowed": false
+        }
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "aláírásához",
+            "normalized": "aláírás",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "All",
+            "start": 295,
+            "end": 306,
+            "evidenceSpan": {
+              "start": 295,
+              "end": 306,
+              "textSpan": "aláírásához"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 258,
+          "end": 316,
+          "textSpan": "Az indulást a kétoldalú megállapodás aláírásához kötötték."
+        },
+        "attribution": null,
+        "action": "köt",
+        "actionSpan": {
+          "start": 307,
+          "end": 315,
+          "textSpan": "kötötték"
+        },
+        "object": [
+          "indulás"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 258,
+          "end": 316,
+          "textSpan": "Az indulást a kétoldalú megállapodás aláírásához kötötték."
+        },
+        "propositionSpan": {
+          "start": 258,
+          "end": 316,
+          "textSpan": "Az indulást a kétoldalú megállapodás aláírásához kötötték."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:258:316",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "indulást",
+              "normalized": "indulás",
+              "start": 261,
+              "end": 269,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 261,
+                "end": 269,
+                "textSpan": "indulást"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 261,
+                "end": 269,
+                "textSpan": "indulást"
+              },
+              "targetSpan": {
+                "start": 307,
+                "end": 315,
+                "textSpan": "kötötték"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 261,
+                    "end": 269,
+                    "textSpan": "indulást"
+                  },
+                  "targetSpan": {
+                    "start": 307,
+                    "end": 315,
+                    "textSpan": "kötötték"
+                  }
+                }
+              ],
+              "frameId": "dependency:258:316",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "megállapodás",
+              "normalized": "megállapodás",
+              "start": 282,
+              "end": 294,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 282,
+                "end": 294,
+                "textSpan": "megállapodás"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 282,
+                "end": 294,
+                "textSpan": "megállapodás"
+              },
+              "targetSpan": {
+                "start": 307,
+                "end": 315,
+                "textSpan": "kötötték"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 282,
+                    "end": 294,
+                    "textSpan": "megállapodás"
+                  },
+                  "targetSpan": {
+                    "start": 295,
+                    "end": 306,
+                    "textSpan": "aláírásához"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 295,
+                    "end": 306,
+                    "textSpan": "aláírásához"
+                  },
+                  "targetSpan": {
+                    "start": 307,
+                    "end": 315,
+                    "textSpan": "kötötték"
+                  }
+                }
+              ],
+              "frameId": "dependency:258:316",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "evidenceSpan": {
+          "start": 120,
+          "end": 257,
+          "textSpan": "A határőrség szóvivője a minisztérium levelére hivatkozva közölte, hogy nem január 15-én, hanem február 1-jén kezdődhet az összehangolás."
+        },
+        "scope": {
+          "start": 120,
+          "end": 257
+        },
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "attributionChains": [
+      {
+        "id": "recovered-source:178",
+        "binding": "resolved",
+        "rule": "dependency_source_and_explicit_complement_or_bounded_quote",
+        "unresolvedReasons": [],
+        "edges": [
+          {
+            "source": {
+              "mention": "határőrség szóvivője",
+              "normalized": "határőrség szóvivő",
+              "start": 122,
+              "end": 142,
+              "type": "local_source",
+              "entityId": null,
+              "identityStatus": "observed_local_referent",
+              "evidenceSpan": {
+                "start": 122,
+                "end": 142,
+                "textSpan": "határőrség szóvivője"
+              }
+            },
+            "verb": "közöl",
+            "verbSpan": {
+              "start": 178,
+              "end": 185,
+              "textSpan": "közölte"
+            },
+            "propositionSpan": {
+              "start": 191,
+              "end": 257,
+              "textSpan": " nem január 15-én, hanem február 1-jén kezdődhet az összehangolás."
+            },
+            "recipient": null,
+            "id": "recovered-source:178:0",
+            "depth": 0,
+            "parentAttributionId": null,
+            "targetId": "recovered-source:178:proposition:0",
+            "binding": "resolved",
+            "role": "claim_source",
+            "rule": "governing_np_reporting_scope",
+            "targetIds": [
+              "recovered-source:178:proposition:0",
+              "recovered-source:178:proposition:1"
+            ],
+            "structuralEvidence": {
+              "sourceSpan": {
+                "start": 133,
+                "end": 142,
+                "textSpan": "szóvivője"
+              },
+              "targetSpan": {
+                "start": 178,
+                "end": 185,
+                "textSpan": "közölte"
+              },
+              "relation": "nsubj",
+              "markerRelation": "ROOT",
+              "rule": "governing_source_np_and_reporting_scope"
+            }
+          }
+        ],
+        "propositionIds": [
+          "recovered-source:178:proposition:0",
+          "recovered-source:178:proposition:1"
+        ]
+      }
+    ],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

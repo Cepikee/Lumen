@@ -1,0 +1,39 @@
+
+> projekt2025new@0.1.0 test:integration:mysql
+> node scripts/run-mysql-integration-suite.cjs
+
+﹣ real ffmpeg thumbnail production helper lifecycle (0.5745ms) # SKIP
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 68.8839
+✖ production HTTP session and reset/outbox lifecycle (1906.0658ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2117.8866
+
+✖ failing tests:
+
+test at tests\integration\http-auth-e2e.test.cjs:31:1
+✖ production HTTP session and reset/outbox lifecycle (1906.0658ms)
+  Error: app_exited:▲ Next.js 16.3.6
+  - Local:         http://127.0.0.1:51248
+  - Network:       http://127.0.0.1:51248
+  ✓ Ready in 1067ms
+  ✓ Running next.config.ts took 75ms
+  Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+      at ignore-listed frames
+  
+      at startApp (F:\Projekt2025\Lumen\tests\integration\http-auth-e2e.test.cjs:24:63)
+      at async TestContext.<anonymous> (F:\Projekt2025\Lumen\tests\integration\http-auth-e2e.test.cjs:36:70)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)

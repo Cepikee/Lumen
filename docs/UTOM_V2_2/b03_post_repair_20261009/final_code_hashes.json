@@ -1,0 +1,8 @@
+{
+  "scripts/experimental/actor-licensing.cjs": "72e2dcc6688dac1388ce349b4e00732ec13fcf6a4de3bfbf35c2e45721c3d62d",
+  "scripts/experimental/dependency-binding.cjs": "68f919814595703616836fe6fb0d86a048a70c65fec1633416101307593ef08c",
+  "scripts/experimental/contrast-correction.cjs": "de8071f8c73f12769fb9622731113d5cc9117d5a876a1bfae5f8b95eb7503332",
+  "scripts/experimental/temporal-binding.cjs": "0ce02083068042995a0aecef029244ce69c3e9d33735d51147d303af1f7a31d2",
+  "scripts/experimental/b03-post-repair-audit.cjs": "ab908445f696b1ce19bc794f2be5f5f4a21600a9311b7174b437cb1d5fed0bdb",
+  "tests/unit/v22-conservative-recall.test.cjs": "0cd6fa6afd1e48ffdac3f493f0bba7f9f4d11c6ac12af85574dd7f7995225563"
+}

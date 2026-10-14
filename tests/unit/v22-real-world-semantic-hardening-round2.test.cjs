@@ -42,7 +42,11 @@ test("month dates remain attached to the numeric observation in the same local s
   const claims = semantic.extractClaims("A szerviz 2018. december elején 227 ezer kilométert rögzített.", "round2.example");
   const claim = claims.find((item) => item.value === 227000);
   assert.ok(claim);
-  assert.deepEqual(claim.temporal, { year: "2018", month: "12", relative: null, sequence: null });
+  assert.equal(claim.temporal.year, "2018");
+  assert.equal(claim.temporal.month, "12");
+  assert.equal(claim.temporal.relative, null);
+  assert.equal(claim.temporal.sequence, null);
+  assert.ok(claim.temporal.raw.includes("december"));
 });
 
 test("explicit narrative relations require a verb and do not use sentence co-occurrence", () => {

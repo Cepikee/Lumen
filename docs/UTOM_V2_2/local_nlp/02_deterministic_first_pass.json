@@ -1,0 +1,1163 @@
+{
+  "provider": "deterministic-only",
+  "candidateOnly": false,
+  "canonicalProjectionAllowed": true,
+  "performance": {
+    "modelLoadMs": 0,
+    "warmTotalMs": 69.9063,
+    "meanMsPerArticle": 6.99063
+  },
+  "results": [
+    {
+      "id": "economy",
+      "text": "Az Alföldi Művek 18 milliárd forint bevételt ért el, míg a Dunamenti Gépgyár 12 milliárd forintot jelentett.",
+      "annotation": {
+        "entities": [
+          {
+            "text": "Alföldi Művek",
+            "type": "organization",
+            "canonical": "alföldi művek"
+          },
+          {
+            "text": "Dunamenti Gépgyár",
+            "type": "organization",
+            "canonical": "dunamenti gépgyár"
+          }
+        ],
+        "numericBindings": [
+          {
+            "numberText": "18 milliárd forint",
+            "subjectText": "Alföldi Művek"
+          },
+          {
+            "numberText": "12 milliárd forintot",
+            "subjectText": "Dunamenti Gépgyár"
+          }
+        ],
+        "dependencies": [
+          {
+            "subjectText": "Alföldi Művek",
+            "predicateLemma": "measurement/result"
+          },
+          {
+            "subjectText": "Dunamenti Gépgyár",
+            "predicateLemma": "measurement/result"
+          }
+        ],
+        "attributions": [],
+        "conditional": false,
+        "negated": false,
+        "frames": [
+          {
+            "frameType": "measurement/result",
+            "action": "measurement/result",
+            "actor": {
+              "mention": "Alföldi Művek",
+              "normalized": "alföldi művek",
+              "type": "organization",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Alföldi Művek"
+              ]
+            },
+            "subject": {
+              "mention": "Alföldi Művek",
+              "normalized": "alföldi művek",
+              "type": "organization",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Alföldi Művek"
+              ]
+            },
+            "object": {
+              "mention": "Dunamenti Gépgyár",
+              "normalized": "dunamenti gépgyár",
+              "type": "organization",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Dunamenti Gépgyár"
+              ]
+            },
+            "target": null,
+            "role": "organization",
+            "time": null,
+            "location": null,
+            "numericArguments": [
+              {
+                "raw": "18 milliárd forint",
+                "value": 18,
+                "parsedValue": 18,
+                "multiplier": 1000000000,
+                "canonicalValue": 18000000000,
+                "unit": "billion HUF",
+                "canonicalUnit": "HUF",
+                "scale": "milliárd",
+                "valueKind": "absolute",
+                "semanticKind": "money",
+                "relationKind": null,
+                "qualifier": null,
+                "start": 17,
+                "end": 35,
+                "subject": {
+                  "mention": "Alföldi Művek",
+                  "normalized": "alföldi művek",
+                  "type": "organization",
+                  "identity": "same",
+                  "sourceRole": null,
+                  "surfaceForms": [
+                    "Alföldi Művek"
+                  ]
+                }
+              }
+            ],
+            "polarity": "affirmed",
+            "modality": "asserted",
+            "conditionality": false,
+            "attribution": null,
+            "status": "observed",
+            "canonicalPredicate": null,
+            "routingConfidence": 0.72,
+            "confidencePurpose": "routing_only",
+            "semanticGrounding": "semantically_entailed",
+            "evidence": "Alföldi Művek 18 milliárd forint bevételt ért el",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 51,
+              "textSpan": "Alföldi Művek 18 milliárd forint bevételt ért el"
+            },
+            "proposition": "Alföldi Művek 18 milliárd forint bevételt ért el",
+            "propositionSpan": {
+              "start": 3,
+              "end": 51
+            }
+          },
+          {
+            "frameType": "measurement/result",
+            "action": "measurement/result",
+            "actor": {
+              "mention": "Dunamenti Gépgyár",
+              "normalized": "dunamenti gépgyár",
+              "type": "organization",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Dunamenti Gépgyár"
+              ]
+            },
+            "subject": {
+              "mention": "Dunamenti Gépgyár",
+              "normalized": "dunamenti gépgyár",
+              "type": "organization",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Dunamenti Gépgyár"
+              ]
+            },
+            "object": {
+              "mention": "Dunamenti Gépgyár",
+              "normalized": "dunamenti gépgyár",
+              "type": "organization",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Dunamenti Gépgyár"
+              ]
+            },
+            "target": null,
+            "role": "organization",
+            "time": null,
+            "location": null,
+            "numericArguments": [
+              {
+                "raw": "12 milliárd forintot",
+                "value": 12,
+                "parsedValue": 12,
+                "multiplier": 1000000000,
+                "canonicalValue": 12000000000,
+                "unit": "billion HUF",
+                "canonicalUnit": "HUF",
+                "scale": "milliárd",
+                "valueKind": "absolute",
+                "semanticKind": "money",
+                "relationKind": null,
+                "qualifier": null,
+                "start": 77,
+                "end": 97,
+                "subject": {
+                  "mention": "Dunamenti Gépgyár",
+                  "normalized": "dunamenti gépgyár",
+                  "type": "organization",
+                  "identity": "same",
+                  "sourceRole": null,
+                  "surfaceForms": [
+                    "Dunamenti Gépgyár"
+                  ]
+                }
+              }
+            ],
+            "polarity": "affirmed",
+            "modality": "asserted",
+            "conditionality": false,
+            "attribution": null,
+            "status": "observed",
+            "canonicalPredicate": null,
+            "routingConfidence": 0.72,
+            "confidencePurpose": "routing_only",
+            "semanticGrounding": "semantically_entailed",
+            "evidence": "Dunamenti Gépgyár 12 milliárd forintot jelentett.",
+            "evidenceSpan": {
+              "start": 59,
+              "end": 108,
+              "textSpan": "Dunamenti Gépgyár 12 milliárd forintot jelentett."
+            },
+            "proposition": "Dunamenti Gépgyár 12 milliárd forintot jelentett.",
+            "propositionSpan": {
+              "start": 59,
+              "end": 108
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "transport",
+      "text": "Kovács Mira szerint a Volánbusz jövőre nem indít új járatot Pécsett.",
+      "annotation": {
+        "entities": [
+          {
+            "text": "Mira",
+            "type": "person",
+            "canonical": "mira"
+          }
+        ],
+        "numericBindings": [],
+        "dependencies": [
+          {
+            "subjectText": "Mira",
+            "predicateLemma": "publication/report"
+          }
+        ],
+        "attributions": [
+          {
+            "sourceText": "Kovács Mira",
+            "reportingLemma": "szerint"
+          }
+        ],
+        "conditional": false,
+        "negated": true,
+        "frames": [
+          {
+            "frameType": "publication/report",
+            "action": "publication/report",
+            "actor": {
+              "mention": "Mira",
+              "normalized": "mira",
+              "type": "person",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Mira"
+              ]
+            },
+            "subject": {
+              "mention": "Mira",
+              "normalized": "mira",
+              "type": "person",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Mira"
+              ]
+            },
+            "object": null,
+            "target": null,
+            "role": "person",
+            "time": {
+              "year": null,
+              "month": null,
+              "relative": "jövőre",
+              "weekday": null,
+              "sequence": null,
+              "raw": [
+                "jövőre"
+              ],
+              "resolvedTime": null
+            },
+            "location": null,
+            "numericArguments": [],
+            "polarity": "affirmed",
+            "modality": "reported",
+            "conditionality": false,
+            "attribution": {
+              "type": "reported",
+              "label": "Kovács Mira",
+              "sourceRole": "reported_source",
+              "reportingVerb": "szerint"
+            },
+            "status": "reported",
+            "canonicalPredicate": null,
+            "routingConfidence": 0.72,
+            "confidencePurpose": "routing_only",
+            "semanticGrounding": "semantically_entailed",
+            "evidence": "Kovács Mira szerint a Volánbusz jövőre nem indít új járatot Pécsett.",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 68,
+              "textSpan": "Kovács Mira szerint a Volánbusz jövőre nem indít új járatot Pécsett."
+            },
+            "proposition": "Kovács Mira szerint a Volánbusz jövőre nem indít új járatot Pécsett.",
+            "propositionSpan": {
+              "start": 0,
+              "end": 68
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "healthcare",
+      "text": "A Duna Klinika 240 beteget kezelt, a Tisza Kórház pedig 180 beteget látott el.",
+      "annotation": {
+        "entities": [
+          {
+            "text": "Duna Klinika",
+            "type": "organization",
+            "canonical": "duna klinika"
+          },
+          {
+            "text": "Tisza Kórház",
+            "type": "organization",
+            "canonical": "tisza kórház"
+          }
+        ],
+        "numericBindings": [
+          {
+            "numberText": "240 beteget",
+            "subjectText": "Duna Klinika"
+          },
+          {
+            "numberText": "180 beteget",
+            "subjectText": "Tisza Kórház"
+          }
+        ],
+        "dependencies": [
+          {
+            "subjectText": "Duna Klinika",
+            "predicateLemma": "measurement/result"
+          },
+          {
+            "subjectText": "Tisza Kórház",
+            "predicateLemma": "measurement/result"
+          }
+        ],
+        "attributions": [],
+        "conditional": false,
+        "negated": false,
+        "frames": [
+          {
+            "frameType": "measurement/result",
+            "action": "measurement/result",
+            "actor": {
+              "mention": "Duna Klinika",
+              "normalized": "duna klinika",
+              "type": "organization",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Duna Klinika"
+              ]
+            },
+            "subject": {
+              "mention": "Duna Klinika",
+              "normalized": "duna klinika",
+              "type": "organization",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Duna Klinika"
+              ]
+            },
+            "object": {
+              "mention": "Tisza Kórház",
+              "normalized": "tisza kórház",
+              "type": "organization",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Tisza Kórház"
+              ]
+            },
+            "target": null,
+            "role": "organization",
+            "time": null,
+            "location": null,
+            "numericArguments": [
+              {
+                "raw": "240 beteget",
+                "value": 240,
+                "parsedValue": 240,
+                "multiplier": 1,
+                "canonicalValue": 240,
+                "unit": "person",
+                "canonicalUnit": "person",
+                "scale": null,
+                "valueKind": "absolute",
+                "semanticKind": "count",
+                "relationKind": null,
+                "qualifier": null,
+                "start": 15,
+                "end": 26,
+                "subject": {
+                  "mention": "Duna Klinika",
+                  "normalized": "duna klinika",
+                  "type": "organization",
+                  "identity": "same",
+                  "sourceRole": null,
+                  "surfaceForms": [
+                    "Duna Klinika"
+                  ]
+                }
+              }
+            ],
+            "polarity": "affirmed",
+            "modality": "asserted",
+            "conditionality": false,
+            "attribution": null,
+            "status": "observed",
+            "canonicalPredicate": null,
+            "routingConfidence": 0.72,
+            "confidencePurpose": "routing_only",
+            "semanticGrounding": "semantically_entailed",
+            "evidence": "Duna Klinika 240 beteget kezelt",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 33,
+              "textSpan": "Duna Klinika 240 beteget kezelt"
+            },
+            "proposition": "Duna Klinika 240 beteget kezelt",
+            "propositionSpan": {
+              "start": 2,
+              "end": 33
+            }
+          },
+          {
+            "frameType": "measurement/result",
+            "action": "measurement/result",
+            "actor": {
+              "mention": "Tisza Kórház",
+              "normalized": "tisza kórház",
+              "type": "organization",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Tisza Kórház"
+              ]
+            },
+            "subject": {
+              "mention": "Tisza Kórház",
+              "normalized": "tisza kórház",
+              "type": "organization",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Tisza Kórház"
+              ]
+            },
+            "object": {
+              "mention": "Tisza Kórház",
+              "normalized": "tisza kórház",
+              "type": "organization",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Tisza Kórház"
+              ]
+            },
+            "target": null,
+            "role": "organization",
+            "time": null,
+            "location": null,
+            "numericArguments": [
+              {
+                "raw": "180 beteget",
+                "value": 180,
+                "parsedValue": 180,
+                "multiplier": 1,
+                "canonicalValue": 180,
+                "unit": "person",
+                "canonicalUnit": "person",
+                "scale": null,
+                "valueKind": "absolute",
+                "semanticKind": "count",
+                "relationKind": null,
+                "qualifier": null,
+                "start": 56,
+                "end": 67,
+                "subject": {
+                  "mention": "Tisza Kórház",
+                  "normalized": "tisza kórház",
+                  "type": "organization",
+                  "identity": "same",
+                  "sourceRole": null,
+                  "surfaceForms": [
+                    "Tisza Kórház"
+                  ]
+                }
+              }
+            ],
+            "polarity": "affirmed",
+            "modality": "asserted",
+            "conditionality": false,
+            "attribution": null,
+            "status": "observed",
+            "canonicalPredicate": null,
+            "routingConfidence": 0.72,
+            "confidencePurpose": "routing_only",
+            "semanticGrounding": "semantically_entailed",
+            "evidence": "Tisza Kórház pedig 180 beteget látott el.",
+            "evidenceSpan": {
+              "start": 37,
+              "end": 78,
+              "textSpan": "Tisza Kórház pedig 180 beteget látott el."
+            },
+            "proposition": "Tisza Kórház pedig 180 beteget látott el.",
+            "propositionSpan": {
+              "start": 37,
+              "end": 78
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "sport",
+      "text": "Nagy Emese 11,2 másodpercet, míg Szabó Lilla 11,5 másodpercet futott.",
+      "annotation": {
+        "entities": [
+          {
+            "text": "Nagy Emese",
+            "type": "person",
+            "canonical": "nagy emese"
+          },
+          {
+            "text": "Szabó Lilla",
+            "type": "person",
+            "canonical": "szabó lilla"
+          }
+        ],
+        "numericBindings": [],
+        "dependencies": [],
+        "attributions": [],
+        "conditional": false,
+        "negated": false,
+        "frames": []
+      }
+    },
+    {
+      "id": "science",
+      "text": "A Csillagászati Kutatóintézet közölte, hogy a mérés feltételes eredményt adott.",
+      "annotation": {
+        "entities": [
+          {
+            "text": "Csillagászati Kutatóintézet",
+            "type": "organization",
+            "canonical": "csillagászati kutatóintézet"
+          }
+        ],
+        "numericBindings": [],
+        "dependencies": [],
+        "attributions": [],
+        "conditional": false,
+        "negated": false,
+        "frames": []
+      }
+    },
+    {
+      "id": "energy",
+      "text": "Magyarországon 42 euró, Ausztriában pedig 55 euró volt a tarifa.",
+      "annotation": {
+        "entities": [
+          {
+            "text": "Magyarország",
+            "type": "location",
+            "canonical": "magyarország"
+          }
+        ],
+        "numericBindings": [
+          {
+            "numberText": "42 euró",
+            "subjectText": "Magyarország"
+          },
+          {
+            "numberText": "55 euró",
+            "subjectText": "Magyarország"
+          }
+        ],
+        "dependencies": [
+          {
+            "subjectText": "Magyarország",
+            "predicateLemma": "measurement/result"
+          }
+        ],
+        "attributions": [],
+        "conditional": false,
+        "negated": false,
+        "frames": [
+          {
+            "frameType": "measurement/result",
+            "action": "measurement/result",
+            "actor": {
+              "mention": "Magyarország",
+              "normalized": "magyarország",
+              "type": "location",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Magyarország"
+              ]
+            },
+            "subject": {
+              "mention": "Magyarország",
+              "normalized": "magyarország",
+              "type": "location",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Magyarország"
+              ]
+            },
+            "object": null,
+            "target": null,
+            "role": "location",
+            "time": null,
+            "location": {
+              "mention": "Magyarország",
+              "normalized": "magyarország",
+              "type": "location",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Magyarország"
+              ]
+            },
+            "numericArguments": [
+              {
+                "raw": "42 euró",
+                "value": 42,
+                "parsedValue": 42,
+                "multiplier": 1,
+                "canonicalValue": 42,
+                "unit": "EUR",
+                "canonicalUnit": "EUR",
+                "scale": null,
+                "valueKind": "absolute",
+                "semanticKind": "money",
+                "relationKind": null,
+                "qualifier": null,
+                "start": 15,
+                "end": 22,
+                "subject": {
+                  "mention": "Magyarország",
+                  "normalized": "magyarország",
+                  "type": "location",
+                  "identity": "same",
+                  "sourceRole": null,
+                  "surfaceForms": [
+                    "Magyarország"
+                  ]
+                }
+              },
+              {
+                "raw": "55 euró",
+                "value": 55,
+                "parsedValue": 55,
+                "multiplier": 1,
+                "canonicalValue": 55,
+                "unit": "EUR",
+                "canonicalUnit": "EUR",
+                "scale": null,
+                "valueKind": "absolute",
+                "semanticKind": "money",
+                "relationKind": null,
+                "qualifier": null,
+                "start": 42,
+                "end": 49,
+                "subject": {
+                  "mention": "Magyarország",
+                  "normalized": "magyarország",
+                  "type": "location",
+                  "identity": "same",
+                  "sourceRole": null,
+                  "surfaceForms": [
+                    "Magyarország"
+                  ]
+                }
+              }
+            ],
+            "polarity": "affirmed",
+            "modality": "asserted",
+            "conditionality": false,
+            "attribution": null,
+            "status": "observed",
+            "canonicalPredicate": null,
+            "routingConfidence": 0.72,
+            "confidencePurpose": "routing_only",
+            "semanticGrounding": "semantically_entailed",
+            "evidence": "Magyarországon 42 euró, Ausztriában pedig 55 euró volt a tarifa.",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 64,
+              "textSpan": "Magyarországon 42 euró, Ausztriában pedig 55 euró volt a tarifa."
+            },
+            "proposition": "Magyarországon 42 euró, Ausztriában pedig 55 euró volt a tarifa.",
+            "propositionSpan": {
+              "start": 0,
+              "end": 64
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "court",
+      "text": "Barta Dénes elismerte a késést, de tagadta, hogy megszegte a szerződést.",
+      "annotation": {
+        "entities": [
+          {
+            "text": "Barta Dénes",
+            "type": "person",
+            "canonical": "barta dénes"
+          }
+        ],
+        "numericBindings": [],
+        "dependencies": [
+          {
+            "subjectText": "Barta Dénes",
+            "predicateLemma": "admission"
+          },
+          {
+            "subjectText": "Barta Dénes",
+            "predicateLemma": "denial"
+          }
+        ],
+        "attributions": [
+          {
+            "sourceText": "Barta Dénes",
+            "reportingLemma": "elismerte"
+          },
+          {
+            "sourceText": "Barta Dénes",
+            "reportingLemma": "tagadta"
+          }
+        ],
+        "conditional": false,
+        "negated": true,
+        "frames": [
+          {
+            "frameType": "attribution/admission",
+            "action": "admission",
+            "actor": {
+              "mention": "Barta Dénes",
+              "normalized": "barta dénes",
+              "type": "person",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Barta Dénes"
+              ]
+            },
+            "subject": {
+              "mention": "Barta Dénes",
+              "normalized": "barta dénes",
+              "type": "person",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Barta Dénes"
+              ]
+            },
+            "object": null,
+            "target": null,
+            "role": "person",
+            "time": null,
+            "location": null,
+            "numericArguments": [],
+            "polarity": "affirmed",
+            "modality": "asserted",
+            "conditionality": false,
+            "attribution": {
+              "type": "reported",
+              "label": "Barta Dénes",
+              "sourceRole": "reported_source",
+              "reportingVerb": "elismerte"
+            },
+            "status": "reported",
+            "canonicalPredicate": null,
+            "routingConfidence": 0.72,
+            "confidencePurpose": "routing_only",
+            "semanticGrounding": "semantically_entailed",
+            "evidence": "elismerte a késést",
+            "evidenceSpan": {
+              "start": 12,
+              "end": 30,
+              "textSpan": "elismerte a késést"
+            },
+            "proposition": "elismerte a késést",
+            "propositionSpan": {
+              "start": 12,
+              "end": 30
+            }
+          },
+          {
+            "frameType": "attribution/denial",
+            "action": "denial",
+            "actor": {
+              "mention": "Barta Dénes",
+              "normalized": "barta dénes",
+              "type": "person",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Barta Dénes"
+              ]
+            },
+            "subject": {
+              "mention": "Barta Dénes",
+              "normalized": "barta dénes",
+              "type": "person",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Barta Dénes"
+              ]
+            },
+            "object": null,
+            "target": null,
+            "role": "person",
+            "time": null,
+            "location": null,
+            "numericArguments": [],
+            "polarity": "denied",
+            "modality": "asserted",
+            "conditionality": false,
+            "attribution": {
+              "type": "reported",
+              "label": "Barta Dénes",
+              "sourceRole": "reported_source",
+              "reportingVerb": "tagadta"
+            },
+            "status": "reported",
+            "canonicalPredicate": null,
+            "routingConfidence": 0.72,
+            "confidencePurpose": "routing_only",
+            "semanticGrounding": "semantically_entailed",
+            "evidence": "tagadta, hogy megszegte a szerződést.",
+            "evidenceSpan": {
+              "start": 35,
+              "end": 72,
+              "textSpan": "tagadta, hogy megszegte a szerződést."
+            },
+            "proposition": "tagadta, hogy megszegte a szerződést.",
+            "propositionSpan": {
+              "start": 35,
+              "end": 72
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "corporate",
+      "text": "A Kék Hálózat szerint a beruházás 2027-ben indulhat, az Elemző Központ azonban ezt vitatja.",
+      "annotation": {
+        "entities": [
+          {
+            "text": "Elemző Központ",
+            "type": "organization",
+            "canonical": "elemző központ"
+          },
+          {
+            "text": "Kék Hálózat",
+            "type": "organization",
+            "canonical": "kék hálózat"
+          },
+          {
+            "text": "Hálózat",
+            "type": "person",
+            "canonical": "hálózat"
+          }
+        ],
+        "numericBindings": [],
+        "dependencies": [
+          {
+            "subjectText": "Hálózat",
+            "predicateLemma": "publication/report"
+          }
+        ],
+        "attributions": [
+          {
+            "sourceText": "Kék Hálózat",
+            "reportingLemma": "szerint"
+          }
+        ],
+        "conditional": true,
+        "negated": false,
+        "frames": [
+          {
+            "frameType": "publication/report",
+            "action": "publication/report",
+            "actor": {
+              "mention": "Hálózat",
+              "normalized": "hálózat",
+              "type": "person",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Hálózat"
+              ]
+            },
+            "subject": {
+              "mention": "Hálózat",
+              "normalized": "hálózat",
+              "type": "person",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Hálózat"
+              ]
+            },
+            "object": {
+              "mention": "Elemző Központ",
+              "normalized": "elemző központ",
+              "type": "organization",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Elemző Központ"
+              ]
+            },
+            "target": null,
+            "role": "person",
+            "time": {
+              "year": "2027",
+              "month": null,
+              "relative": null,
+              "weekday": null,
+              "sequence": null,
+              "raw": [],
+              "resolvedTime": null
+            },
+            "location": null,
+            "numericArguments": [],
+            "polarity": "affirmed",
+            "modality": "reported",
+            "conditionality": true,
+            "attribution": {
+              "type": "reported",
+              "label": "Kék Hálózat",
+              "sourceRole": "media_source",
+              "reportingVerb": "szerint"
+            },
+            "status": "reported",
+            "canonicalPredicate": null,
+            "routingConfidence": 0.72,
+            "confidencePurpose": "routing_only",
+            "semanticGrounding": "semantically_entailed",
+            "evidence": "A Kék Hálózat szerint a beruházás 2027-ben indulhat, az Elemző Központ azonban ezt vitatja.",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 91,
+              "textSpan": "A Kék Hálózat szerint a beruházás 2027-ben indulhat, az Elemző Központ azonban ezt vitatja."
+            },
+            "proposition": "A Kék Hálózat szerint a beruházás 2027-ben indulhat, az Elemző Központ azonban ezt vitatja.",
+            "propositionSpan": {
+              "start": 0,
+              "end": 91
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "weather",
+      "text": "Szegeden 18 fokot, Debrecenben pedig 14 fokot mértek.",
+      "annotation": {
+        "entities": [],
+        "numericBindings": [
+          {
+            "numberText": "18 fokot",
+            "subjectText": null
+          },
+          {
+            "numberText": "14 fokot",
+            "subjectText": null
+          }
+        ],
+        "dependencies": [],
+        "attributions": [],
+        "conditional": false,
+        "negated": false,
+        "frames": [
+          {
+            "frameType": "measurement/result",
+            "action": "measurement/result",
+            "actor": null,
+            "subject": null,
+            "object": null,
+            "target": null,
+            "role": null,
+            "time": null,
+            "location": null,
+            "numericArguments": [
+              {
+                "raw": "18 fokot",
+                "value": 18,
+                "parsedValue": 18,
+                "multiplier": 1,
+                "canonicalValue": 18,
+                "unit": "fokot",
+                "canonicalUnit": "fokot",
+                "scale": null,
+                "valueKind": "absolute",
+                "semanticKind": "measurement",
+                "relationKind": null,
+                "qualifier": null,
+                "start": 9,
+                "end": 17,
+                "subject": null
+              },
+              {
+                "raw": "14 fokot",
+                "value": 14,
+                "parsedValue": 14,
+                "multiplier": 1,
+                "canonicalValue": 14,
+                "unit": "fokot",
+                "canonicalUnit": "fokot",
+                "scale": null,
+                "valueKind": "absolute",
+                "semanticKind": "measurement",
+                "relationKind": null,
+                "qualifier": null,
+                "start": 37,
+                "end": 45,
+                "subject": null
+              }
+            ],
+            "polarity": "affirmed",
+            "modality": "asserted",
+            "conditionality": false,
+            "attribution": null,
+            "status": "observed",
+            "canonicalPredicate": null,
+            "routingConfidence": 0.72,
+            "confidencePurpose": "routing_only",
+            "semanticGrounding": "semantically_entailed",
+            "evidence": "Szegeden 18 fokot, Debrecenben pedig 14 fokot mértek.",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 53,
+              "textSpan": "Szegeden 18 fokot, Debrecenben pedig 14 fokot mértek."
+            },
+            "proposition": "Szegeden 18 fokot, Debrecenben pedig 14 fokot mértek.",
+            "propositionSpan": {
+              "start": 0,
+              "end": 53
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "politics",
+      "text": "Farkas Júlia nyilatkozott. Ha megválasztják, Farkas Júlia csökkentené az adót, de nem szüntetné meg a támogatást. Farkas Júliának később kérdést tettek fel.",
+      "annotation": {
+        "entities": [
+          {
+            "text": "Farkas Júlia",
+            "type": "person",
+            "canonical": "farkas júlia"
+          }
+        ],
+        "numericBindings": [],
+        "dependencies": [
+          {
+            "subjectText": "Farkas Júlia",
+            "predicateLemma": "promise/plan"
+          }
+        ],
+        "attributions": [],
+        "conditional": true,
+        "negated": true,
+        "frames": [
+          {
+            "frameType": "promise/plan",
+            "action": "promise/plan",
+            "actor": {
+              "mention": "Farkas Júlia",
+              "normalized": "farkas júlia",
+              "type": "person",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Farkas Júlia",
+                "Farkas Júliának"
+              ]
+            },
+            "subject": {
+              "mention": "Farkas Júlia",
+              "normalized": "farkas júlia",
+              "type": "person",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Farkas Júlia",
+                "Farkas Júliának"
+              ]
+            },
+            "object": {
+              "mention": "Farkas Júlia",
+              "normalized": "farkas júlia",
+              "type": "person",
+              "identity": "same",
+              "sourceRole": null,
+              "surfaceForms": [
+                "Farkas Júlia",
+                "Farkas Júliának"
+              ]
+            },
+            "target": null,
+            "role": "person",
+            "time": null,
+            "location": null,
+            "numericArguments": [],
+            "polarity": "affirmed",
+            "modality": "conditional",
+            "conditionality": true,
+            "attribution": null,
+            "status": "conditional",
+            "canonicalPredicate": null,
+            "routingConfidence": 0.72,
+            "confidencePurpose": "routing_only",
+            "semanticGrounding": "semantically_entailed",
+            "evidence": "Ha megválasztják, Farkas Júlia csökkentené az adót, de nem szüntetné meg a támogatást.",
+            "evidenceSpan": {
+              "start": 27,
+              "end": 113,
+              "textSpan": "Ha megválasztják, Farkas Júlia csökkentené az adót, de nem szüntetné meg a támogatást."
+            },
+            "proposition": "Ha megválasztják, Farkas Júlia csökkentené az adót, de nem szüntetné meg a támogatást.",
+            "propositionSpan": {
+              "start": 27,
+              "end": 113
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

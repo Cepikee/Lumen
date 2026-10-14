@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { useUserStore } from "@/store/useUserStore";
 import { useState } from "react";
 import UtomModal from "@/components/UtomModal";
+import InsightsEmptyState from "./InsightsEmptyState";
 import {
   BarChart,
   Bar,
@@ -27,18 +28,18 @@ const fetcher = (url: string) =>
     return json;
   });
 
-export default function WSourceClickbaitRatio() {
+export default function WSourceClickbaitRatio({ period = "24h", dark = false }: { period?: string; dark?: boolean }) {
   const theme = useUserStore((s) => s.theme);
   const [openInfo, setOpenInfo] = useState(false);
 
-  const isDark =
+  const isDark = dark ||
     theme === "dark" ||
     (theme === "system" &&
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const { data, error, isLoading } = useSWR(
-    "/api/premium-insights/clickbait-ratio",
+    `/api/premium-insights/clickbait-ratio?period=${encodeURIComponent(period)}`,
     fetcher,
     { refreshInterval: 60000 }
   );
@@ -54,7 +55,7 @@ export default function WSourceClickbaitRatio() {
     .sort((a: any, b: any) => b.ratio - a.ratio);
 
   if (sources.length === 0) {
-    return <div className="p-12 text-center text-muted">Nincs elérhető clickbait arány adat.</div>;
+    return <InsightsEmptyState period={period} />;
   }
 
   const getBarColor = (ratio: number) => {

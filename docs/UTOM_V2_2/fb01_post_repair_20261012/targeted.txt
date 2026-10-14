@@ -1,0 +1,316 @@
+TAP version 13
+# Subtest: FB01 simple equality survives: simple_money
+ok 1 - FB01 simple equality survives: simple_money
+  ---
+  duration_ms: 15.9732
+  type: 'test'
+  ...
+# Subtest: FB01 simple equality survives: simple_count
+ok 2 - FB01 simple equality survives: simple_count
+  ---
+  duration_ms: 2.0852
+  type: 'test'
+  ...
+# Subtest: FB01 simple equality survives: simple_measure
+ok 3 - FB01 simple equality survives: simple_measure
+  ---
+  duration_ms: 0.8558
+  type: 'test'
+  ...
+# Subtest: FB01 simple equality survives: simple_year
+ok 4 - FB01 simple equality survives: simple_year
+  ---
+  duration_ms: 0.5844
+  type: 'test'
+  ...
+# Subtest: FB01 simple equality survives: simple_date
+ok 5 - FB01 simple equality survives: simple_date
+  ---
+  duration_ms: 1.2184
+  type: 'test'
+  ...
+# Subtest: FB01 simple positive percentage/share survives
+ok 6 - FB01 simple positive percentage/share survives
+  ---
+  duration_ms: 1.3201
+  type: 'test'
+  ...
+# Subtest: FB01 missing copular share attachment is not invented
+ok 7 - FB01 missing copular share attachment is not invented
+  ---
+  duration_ms: 0.5342
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: per_kg
+ok 8 - FB01 compound dimension preserved without positive projection: per_kg
+  ---
+  duration_ms: 0.8095
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: per_liter
+ok 9 - FB01 compound dimension preserved without positive projection: per_liter
+  ---
+  duration_ms: 0.4983
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: per_kwh
+ok 10 - FB01 compound dimension preserved without positive projection: per_kwh
+  ---
+  duration_ms: 0.5899
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: per_tonne
+ok 11 - FB01 compound dimension preserved without positive projection: per_tonne
+  ---
+  duration_ms: 1.3709
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: physical
+ok 12 - FB01 compound dimension preserved without positive projection: physical
+  ---
+  duration_ms: 1.1201
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: speed
+ok 13 - FB01 compound dimension preserved without positive projection: speed
+  ---
+  duration_ms: 0.5869
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: throughput
+ok 14 - FB01 compound dimension preserved without positive projection: throughput
+  ---
+  duration_ms: 0.3782
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: vehicle
+ok 15 - FB01 compound dimension preserved without positive projection: vehicle
+  ---
+  duration_ms: 3.8161
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: area
+ok 16 - FB01 compound dimension preserved without positive projection: area
+  ---
+  duration_ms: 0.3974
+  type: 'test'
+  ...
+# Subtest: FB01 compound dimension preserved without positive projection: unknown_unit
+ok 17 - FB01 compound dimension preserved without positive projection: unknown_unit
+  ---
+  duration_ms: 0.4831
+  type: 'test'
+  ...
+# Subtest: FB01 scaled denominator retains 100 km
+ok 18 - FB01 scaled denominator retains 100 km
+  ---
+  duration_ms: 0.5272
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: lower
+ok 19 - FB01 comparison and unit coexist: lower
+  ---
+  duration_ms: 1.0686
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: upper
+ok 20 - FB01 comparison and unit coexist: upper
+  ---
+  duration_ms: 0.4664
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: greater
+ok 21 - FB01 comparison and unit coexist: greater
+  ---
+  duration_ms: 0.4832
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: less
+ok 22 - FB01 comparison and unit coexist: less
+  ---
+  duration_ms: 0.3137
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: approx
+ok 23 - FB01 comparison and unit coexist: approx
+  ---
+  duration_ms: 0.2621
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: per_kwh
+ok 24 - FB01 comparison and unit coexist: per_kwh
+  ---
+  duration_ms: 0.2827
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: per_tonne
+ok 25 - FB01 comparison and unit coexist: per_tonne
+  ---
+  duration_ms: 0.4645
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: physical
+ok 26 - FB01 comparison and unit coexist: physical
+  ---
+  duration_ms: 0.2824
+  type: 'test'
+  ...
+# Subtest: FB01 comparison and unit coexist: throughput
+ok 27 - FB01 comparison and unit coexist: throughput
+  ---
+  duration_ms: 0.6553
+  type: 'test'
+  ...
+# Subtest: FB01 range endpoints never become equality: range_words
+ok 28 - FB01 range endpoints never become equality: range_words
+  ---
+  duration_ms: 1.2684
+  type: 'test'
+  ...
+# Subtest: FB01 range endpoints never become equality: range_dash
+ok 29 - FB01 range endpoints never become equality: range_dash
+  ---
+  duration_ms: 0.6775
+  type: 'test'
+  ...
+# Subtest: FB01 range endpoints never become equality: range_suffix
+ok 30 - FB01 range endpoints never become equality: range_suffix
+  ---
+  duration_ms: 0.332
+  type: 'test'
+  ...
+# Subtest: FB01 range endpoints never become equality: range_bounds
+ok 31 - FB01 range endpoints never become equality: range_bounds
+  ---
+  duration_ms: 0.6629
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: condition_ha
+ok 32 - FB01 condition remains explicit: condition_ha
+  ---
+  duration_ms: 0.4912
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: condition_amennyiben
+ok 33 - FB01 condition remains explicit: condition_amennyiben
+  ---
+  duration_ms: 0.4156
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: condition_nominal
+ok 34 - FB01 condition remains explicit: condition_nominal
+  ---
+  duration_ms: 1.0633
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: condition_felteve
+ok 35 - FB01 condition remains explicit: condition_felteve
+  ---
+  duration_ms: 0.7905
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: condition_only
+ok 36 - FB01 condition remains explicit: condition_only
+  ---
+  duration_ms: 0.5167
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: condition_circumstances
+ok 37 - FB01 condition remains explicit: condition_circumstances
+  ---
+  duration_ms: 0.5604
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: conditional_rate
+ok 38 - FB01 condition remains explicit: conditional_rate
+  ---
+  duration_ms: 0.4108
+  type: 'test'
+  ...
+# Subtest: FB01 condition remains explicit: source_condition
+ok 39 - FB01 condition remains explicit: source_condition
+  ---
+  duration_ms: 0.6009
+  type: 'test'
+  ...
+# Subtest: FB01 possibility + nominal condition + upper bound compose
+ok 40 - FB01 possibility + nominal condition + upper bound compose
+  ---
+  duration_ms: 0.9458
+  type: 'test'
+  ...
+# Subtest: FB01 conditional throughput never flattens
+ok 41 - FB01 conditional throughput never flattens
+  ---
+  duration_ms: 0.8506
+  type: 'test'
+  ...
+# Subtest: FB01 change magnitude differs from resulting level
+ok 42 - FB01 change magnitude differs from resulting level
+  ---
+  duration_ms: 1.244
+  type: 'test'
+  ...
+# Subtest: FB01 negated governing comparison is not equality
+ok 43 - FB01 negated governing comparison is not equality
+  ---
+  duration_ms: 0.3655
+  type: 'test'
+  ...
+# Subtest: FB01 ambiguous bounded correction stays conservative
+ok 44 - FB01 ambiguous bounded correction stays conservative
+  ---
+  duration_ms: 0.9225
+  type: 'test'
+  ...
+# Subtest: FB01 source is not automatically numeric owner
+ok 45 - FB01 source is not automatically numeric owner
+  ---
+  duration_ms: 0.4829
+  type: 'test'
+  ...
+# Subtest: FB01 sibling equality has no condition or possibility leakage
+ok 46 - FB01 sibling equality has no condition or possibility leakage
+  ---
+  duration_ms: 1.1138
+  type: 'test'
+  ...
+# Subtest: FB01 separate numeric phrases do not acquire false rates
+ok 47 - FB01 separate numeric phrases do not acquire false rates
+  ---
+  duration_ms: 0.5447
+  type: 'test'
+  ...
+# Subtest: FB01 defective denominator lemma and POS cannot restore simple money
+ok 48 - FB01 defective denominator lemma and POS cannot restore simple money
+  ---
+  duration_ms: 0.5567
+  type: 'test'
+  ...
+# Subtest: FB01 split slash parser defect cannot restore simple count
+ok 49 - FB01 split slash parser defect cannot restore simple count
+  ---
+  duration_ms: 0.4339
+  type: 'test'
+  ...
+# Subtest: FB01 broken numeric dependency remains unresolved
+ok 50 - FB01 broken numeric dependency remains unresolved
+  ---
+  duration_ms: 0.2918
+  type: 'test'
+  ...
+# Subtest: FB01 exact evidence for every qualifier, owner path and scope
+ok 51 - FB01 exact evidence for every qualifier, owner path and scope
+  ---
+  duration_ms: 10.8659
+  type: 'test'
+  ...
+1..51
+# tests 51
+# suites 0
+# pass 51
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 153.8258

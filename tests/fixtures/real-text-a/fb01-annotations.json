@@ -1,0 +1,5249 @@
+[
+  {
+    "id": "simple_money",
+    "text": "A vásárló pontosan 9200 forintot fizetett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "vásárló",
+          "lemma": "vásárló",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 33
+        },
+        {
+          "start": 10,
+          "end": 18,
+          "text": "pontosan",
+          "lemma": "pontos",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Ess",
+            "Degree": "Pos",
+            "Number": "Sing"
+          },
+          "dep": "advmod:mode",
+          "headStart": 33
+        },
+        {
+          "start": 19,
+          "end": 23,
+          "text": "9200",
+          "lemma": "9200",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 24
+        },
+        {
+          "start": 24,
+          "end": 32,
+          "text": "forintot",
+          "lemma": "forint",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 33
+        },
+        {
+          "start": 33,
+          "end": 41,
+          "text": "fizetett",
+          "lemma": "fizet",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 33
+        },
+        {
+          "start": 41,
+          "end": 42,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 33
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 42,
+          "text": "A vásárló pontosan 9200 forintot fizetett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "simple_count",
+    "text": "A futár pontosan 28 csomagot szállított.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 7,
+          "text": "futár",
+          "lemma": "futár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 29
+        },
+        {
+          "start": 8,
+          "end": 16,
+          "text": "pontosan",
+          "lemma": "pontos",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Ess",
+            "Degree": "Pos",
+            "Number": "Sing"
+          },
+          "dep": "advmod:mode",
+          "headStart": 29
+        },
+        {
+          "start": 17,
+          "end": 19,
+          "text": "28",
+          "lemma": "28",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 20
+        },
+        {
+          "start": 20,
+          "end": 28,
+          "text": "csomagot",
+          "lemma": "csomag",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 29
+        },
+        {
+          "start": 29,
+          "end": 39,
+          "text": "szállított",
+          "lemma": "szállít",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 29
+        },
+        {
+          "start": 39,
+          "end": 40,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 29
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "text": "A futár pontosan 28 csomagot szállított."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "simple_share",
+    "text": "A részesedés 17 százalék volt.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 12,
+          "text": "részesedés",
+          "lemma": "részesedés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 16
+        },
+        {
+          "start": 13,
+          "end": 15,
+          "text": "17",
+          "lemma": "17",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 16
+        },
+        {
+          "start": 16,
+          "end": 24,
+          "text": "százalék",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 16
+        },
+        {
+          "start": 25,
+          "end": 29,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 16
+        },
+        {
+          "start": 29,
+          "end": 30,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 16
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 30,
+          "text": "A részesedés 17 százalék volt."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "simple_measure",
+    "text": "A busz 63 kilométert tett meg.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 6,
+          "text": "busz",
+          "lemma": "busz",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 21
+        },
+        {
+          "start": 7,
+          "end": 9,
+          "text": "63",
+          "lemma": "63",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 10
+        },
+        {
+          "start": 10,
+          "end": 20,
+          "text": "kilométert",
+          "lemma": "kilométer",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 21
+        },
+        {
+          "start": 21,
+          "end": 25,
+          "text": "tett",
+          "lemma": "tesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 21
+        },
+        {
+          "start": 26,
+          "end": 29,
+          "text": "meg",
+          "lemma": "meg",
+          "pos": "PART",
+          "morph": {},
+          "dep": "compound:preverb",
+          "headStart": 21
+        },
+        {
+          "start": 29,
+          "end": 30,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 21
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 30,
+          "text": "A busz 63 kilométert tett meg."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "simple_year",
+    "text": "A kiadó 2034-ben bemutatta a kötetet.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 7,
+          "text": "kiadó",
+          "lemma": "kiadó",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 17
+        },
+        {
+          "start": 8,
+          "end": 16,
+          "text": "2034-ben",
+          "lemma": "2034",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Ine",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 26,
+          "text": "bemutatta",
+          "lemma": "bemutat",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 17
+        },
+        {
+          "start": 27,
+          "end": 28,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 29
+        },
+        {
+          "start": 29,
+          "end": 36,
+          "text": "kötetet",
+          "lemma": "kötet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 17
+        },
+        {
+          "start": 36,
+          "end": 37,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 17
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 37,
+          "text": "A kiadó 2034-ben bemutatta a kötetet."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "simple_date",
+    "text": "A gyár 2033. május 19-én nyitott ki.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 6,
+          "text": "gyár",
+          "lemma": "gyár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 25
+        },
+        {
+          "start": 7,
+          "end": 12,
+          "text": "2033.",
+          "lemma": "2033.",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 13
+        },
+        {
+          "start": 13,
+          "end": 18,
+          "text": "május",
+          "lemma": "május",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 19
+        },
+        {
+          "start": 19,
+          "end": 24,
+          "text": "19-én",
+          "lemma": "19.",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 25
+        },
+        {
+          "start": 25,
+          "end": 32,
+          "text": "nyitott",
+          "lemma": "nyit",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 25
+        },
+        {
+          "start": 33,
+          "end": 35,
+          "text": "ki",
+          "lemma": "ki",
+          "pos": "ADV",
+          "morph": {
+            "Degree": "Pos"
+          },
+          "dep": "compound:preverb",
+          "headStart": 25
+        },
+        {
+          "start": 35,
+          "end": 36,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 25
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "text": "A gyár 2033. május 19-én nyitott ki."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "per_kg",
+    "text": "A méz 2800 forint kilogrammonként.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 5,
+          "text": "méz",
+          "lemma": "méz",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 11
+        },
+        {
+          "start": 6,
+          "end": 10,
+          "text": "2800",
+          "lemma": "2800",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 11
+        },
+        {
+          "start": 11,
+          "end": 17,
+          "text": "forint",
+          "lemma": "forint",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 33,
+          "text": "kilogrammonként",
+          "lemma": "kilogramm",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Dis",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 18
+        },
+        {
+          "start": 33,
+          "end": 34,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 18
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 34,
+          "text": "A méz 2800 forint kilogrammonként."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "per_liter",
+    "text": "Az oldat literenként 980 forintba kerül.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 3
+        },
+        {
+          "start": 3,
+          "end": 8,
+          "text": "oldat",
+          "lemma": "oldat",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 34
+        },
+        {
+          "start": 9,
+          "end": 20,
+          "text": "literenként",
+          "lemma": "liter",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Dis",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 34
+        },
+        {
+          "start": 21,
+          "end": 24,
+          "text": "980",
+          "lemma": "980",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 25
+        },
+        {
+          "start": 25,
+          "end": 33,
+          "text": "forintba",
+          "lemma": "forint",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ill",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 34
+        },
+        {
+          "start": 34,
+          "end": 39,
+          "text": "kerül",
+          "lemma": "kerül",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 34
+        },
+        {
+          "start": 39,
+          "end": 40,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 34
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "text": "Az oldat literenként 980 forintba kerül."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "per_kwh",
+    "text": "A tarifa több mint 82 Ft/kWh volt.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "tarifa",
+          "lemma": "tarifa",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 22
+        },
+        {
+          "start": 9,
+          "end": 13,
+          "text": "több",
+          "lemma": "több",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Ind",
+            "PronType": "Ind"
+          },
+          "dep": "det",
+          "headStart": 22
+        },
+        {
+          "start": 14,
+          "end": 18,
+          "text": "mint",
+          "lemma": "mint",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 19
+        },
+        {
+          "start": 19,
+          "end": 21,
+          "text": "82",
+          "lemma": "82",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "advcl",
+          "headStart": 9
+        },
+        {
+          "start": 22,
+          "end": 28,
+          "text": "Ft/kWh",
+          "lemma": "Ft/kWh",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 22
+        },
+        {
+          "start": 29,
+          "end": 33,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 22
+        },
+        {
+          "start": 33,
+          "end": 34,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 22
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 34,
+          "text": "A tarifa több mint 82 Ft/kWh volt."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "per_tonne",
+    "text": "A szállítás díja legfeljebb 210 EUR/tonna lehet.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "szállítás",
+          "lemma": "szállítás",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 12
+        },
+        {
+          "start": 12,
+          "end": 16,
+          "text": "díja",
+          "lemma": "díj",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "nsubj",
+          "headStart": 32
+        },
+        {
+          "start": 17,
+          "end": 27,
+          "text": "legfeljebb",
+          "lemma": "legfeljebb",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 32
+        },
+        {
+          "start": 28,
+          "end": 31,
+          "text": "210",
+          "lemma": "210",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "compound",
+          "headStart": 32
+        },
+        {
+          "start": 32,
+          "end": 41,
+          "text": "EUR/tonna",
+          "lemma": "EUR/tonna",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 42
+        },
+        {
+          "start": 42,
+          "end": 47,
+          "text": "lehet",
+          "lemma": "lesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Pot",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 42
+        },
+        {
+          "start": 47,
+          "end": 48,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 42
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 48,
+          "text": "A szállítás díja legfeljebb 210 EUR/tonna lehet."
+        }
+      ],
+      "entities": [
+        {
+          "start": 32,
+          "end": 41,
+          "text": "EUR/tonna",
+          "label": "ORG"
+        }
+      ]
+    }
+  },
+  {
+    "id": "physical",
+    "text": "A felhasználás 7 kg/hektár alatt maradt.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 14,
+          "text": "felhasználás",
+          "lemma": "felhasználás",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 33
+        },
+        {
+          "start": 15,
+          "end": 16,
+          "text": "7",
+          "lemma": "7",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 26,
+          "text": "kg/hektár",
+          "lemma": "kg/hektár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 33
+        },
+        {
+          "start": 27,
+          "end": 32,
+          "text": "alatt",
+          "lemma": "alatt",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 17
+        },
+        {
+          "start": 33,
+          "end": 39,
+          "text": "maradt",
+          "lemma": "marad",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 33
+        },
+        {
+          "start": 39,
+          "end": 40,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 33
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "text": "A felhasználás 7 kg/hektár alatt maradt."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "scaled",
+    "text": "A motor fogyasztása 6 liter/100 km volt.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 7,
+          "text": "motor",
+          "lemma": "motor",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 8
+        },
+        {
+          "start": 8,
+          "end": 19,
+          "text": "fogyasztása",
+          "lemma": "fogyasztás",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "nsubj",
+          "headStart": 22
+        },
+        {
+          "start": 20,
+          "end": 21,
+          "text": "6",
+          "lemma": "6",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 22
+        },
+        {
+          "start": 22,
+          "end": 31,
+          "text": "liter/100",
+          "lemma": "liter/100",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 22
+        },
+        {
+          "start": 32,
+          "end": 34,
+          "text": "km",
+          "lemma": "km",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "cop",
+          "headStart": 22
+        },
+        {
+          "start": 35,
+          "end": 39,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 32
+        },
+        {
+          "start": 39,
+          "end": 40,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 22
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "text": "A motor fogyasztása 6 liter/100 km volt."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "speed",
+    "text": "A kerékpáros legfeljebb 37 km/h sebességgel haladhat.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 12,
+          "text": "kerékpáros",
+          "lemma": "kerékpáros",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 44
+        },
+        {
+          "start": 13,
+          "end": 23,
+          "text": "legfeljebb",
+          "lemma": "legfeljebb",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 27
+        },
+        {
+          "start": 24,
+          "end": 26,
+          "text": "37",
+          "lemma": "37",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 27
+        },
+        {
+          "start": 27,
+          "end": 31,
+          "text": "km/h",
+          "lemma": "km/h",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 32
+        },
+        {
+          "start": 32,
+          "end": 43,
+          "text": "sebességgel",
+          "lemma": "sebesség",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ins",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 44
+        },
+        {
+          "start": 44,
+          "end": 52,
+          "text": "haladhat",
+          "lemma": "haladhat",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Pot",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 44
+        },
+        {
+          "start": 52,
+          "end": 53,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 44
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 53,
+          "text": "A kerékpáros legfeljebb 37 km/h sebességgel haladhat."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "throughput",
+    "text": "A kiszolgáló legalább 44 kérés/másodpercet fogad.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 12,
+          "text": "kiszolgáló",
+          "lemma": "kiszolgáló",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 43
+        },
+        {
+          "start": 13,
+          "end": 21,
+          "text": "legalább",
+          "lemma": "legalább",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 25
+        },
+        {
+          "start": 22,
+          "end": 24,
+          "text": "44",
+          "lemma": "44",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 25
+        },
+        {
+          "start": 25,
+          "end": 42,
+          "text": "kérés/másodpercet",
+          "lemma": "kérés/másodperc",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 43
+        },
+        {
+          "start": 43,
+          "end": 48,
+          "text": "fogad",
+          "lemma": "fogad",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 43
+        },
+        {
+          "start": 48,
+          "end": 49,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 43
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 49,
+          "text": "A kiszolgáló legalább 44 kérés/másodpercet fogad."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "vehicle",
+    "text": "A kapacitás 18 fő/jármű volt.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "kapacitás",
+          "lemma": "kapacitás",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 15
+        },
+        {
+          "start": 12,
+          "end": 14,
+          "text": "18",
+          "lemma": "18",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 15
+        },
+        {
+          "start": 15,
+          "end": 23,
+          "text": "fő/jármű",
+          "lemma": "fő/jármű",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 15
+        },
+        {
+          "start": 24,
+          "end": 28,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 15
+        },
+        {
+          "start": 28,
+          "end": 29,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 15
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 29,
+          "text": "A kapacitás 18 fő/jármű volt."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "area",
+    "text": "A terhelés 3 fő/négyzetméter volt.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 10,
+          "text": "terhelés",
+          "lemma": "terhelés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 13
+        },
+        {
+          "start": 11,
+          "end": 12,
+          "text": "3",
+          "lemma": "3",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 13
+        },
+        {
+          "start": 13,
+          "end": 28,
+          "text": "fő/négyzetméter",
+          "lemma": "fő/négyzetméter",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 13
+        },
+        {
+          "start": 29,
+          "end": 33,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 13
+        },
+        {
+          "start": 33,
+          "end": 34,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 13
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 34,
+          "text": "A terhelés 3 fő/négyzetméter volt."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "unknown_unit",
+    "text": "A szállító 95 tallér/fázis árat kért.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 10,
+          "text": "szállító",
+          "lemma": "szállító",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing",
+            "VerbForm": "PartPres"
+          },
+          "dep": "nsubj",
+          "headStart": 32
+        },
+        {
+          "start": 11,
+          "end": 13,
+          "text": "95",
+          "lemma": "95",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 14
+        },
+        {
+          "start": 14,
+          "end": 26,
+          "text": "tallér/fázis",
+          "lemma": "tallér/fázis",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 32
+        },
+        {
+          "start": 27,
+          "end": 31,
+          "text": "árat",
+          "lemma": "ár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 32
+        },
+        {
+          "start": 32,
+          "end": 36,
+          "text": "kért",
+          "lemma": "kér",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 32
+        },
+        {
+          "start": 36,
+          "end": 37,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 32
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 37,
+          "text": "A szállító 95 tallér/fázis árat kért."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "lower",
+    "text": "A zsűri legalább 41 nevezést értékelt.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 7,
+          "text": "zsűri",
+          "lemma": "zsűri",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 29
+        },
+        {
+          "start": 8,
+          "end": 16,
+          "text": "legalább",
+          "lemma": "legalább",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 20
+        },
+        {
+          "start": 17,
+          "end": 19,
+          "text": "41",
+          "lemma": "41",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 20
+        },
+        {
+          "start": 20,
+          "end": 28,
+          "text": "nevezést",
+          "lemma": "nevezés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 29
+        },
+        {
+          "start": 29,
+          "end": 37,
+          "text": "értékelt",
+          "lemma": "értékel",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 29
+        },
+        {
+          "start": 37,
+          "end": 38,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 29
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "text": "A zsűri legalább 41 nevezést értékelt."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "upper",
+    "text": "A műhely legfeljebb 29 lámpát készített.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "műhely",
+          "lemma": "műhely",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 30
+        },
+        {
+          "start": 9,
+          "end": 19,
+          "text": "legfeljebb",
+          "lemma": "legfeljebb",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 23
+        },
+        {
+          "start": 20,
+          "end": 22,
+          "text": "29",
+          "lemma": "29",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 23
+        },
+        {
+          "start": 23,
+          "end": 29,
+          "text": "lámpát",
+          "lemma": "lámpa",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 30
+        },
+        {
+          "start": 30,
+          "end": 39,
+          "text": "készített",
+          "lemma": "készít",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 30
+        },
+        {
+          "start": 39,
+          "end": 40,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 30
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "text": "A műhely legfeljebb 29 lámpát készített."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "greater",
+    "text": "A bevétel meghaladta a 720000 forintot.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "bevétel",
+          "lemma": "bevétel",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 10
+        },
+        {
+          "start": 10,
+          "end": 20,
+          "text": "meghaladta",
+          "lemma": "meghalad",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 10
+        },
+        {
+          "start": 21,
+          "end": 22,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 30
+        },
+        {
+          "start": 23,
+          "end": 29,
+          "text": "720000",
+          "lemma": "720000",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 30
+        },
+        {
+          "start": 30,
+          "end": 38,
+          "text": "forintot",
+          "lemma": "forint",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj:lvc",
+          "headStart": 10
+        },
+        {
+          "start": 38,
+          "end": 39,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 10
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 39,
+          "text": "A bevétel meghaladta a 720000 forintot."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "less",
+    "text": "A fizetés elmaradt a 310000 forinttól.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "fizetés",
+          "lemma": "fizetés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 10
+        },
+        {
+          "start": 10,
+          "end": 18,
+          "text": "elmaradt",
+          "lemma": "elmarad",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 10
+        },
+        {
+          "start": 19,
+          "end": 20,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 28
+        },
+        {
+          "start": 21,
+          "end": 27,
+          "text": "310000",
+          "lemma": "310000",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 28
+        },
+        {
+          "start": 28,
+          "end": 37,
+          "text": "forinttól",
+          "lemma": "forint",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Abl",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 10
+        },
+        {
+          "start": 37,
+          "end": 38,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 10
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "text": "A fizetés elmaradt a 310000 forinttól."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "approx",
+    "text": "A raktár közel 57 ládát tárolt.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "raktár",
+          "lemma": "raktár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 24
+        },
+        {
+          "start": 9,
+          "end": 14,
+          "text": "közel",
+          "lemma": "közel",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 24
+        },
+        {
+          "start": 15,
+          "end": 17,
+          "text": "57",
+          "lemma": "57",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 23,
+          "text": "ládát",
+          "lemma": "láda",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 24
+        },
+        {
+          "start": 24,
+          "end": 30,
+          "text": "tárolt",
+          "lemma": "tárol",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 24
+        },
+        {
+          "start": 30,
+          "end": 31,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 24
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 31,
+          "text": "A raktár közel 57 ládát tárolt."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "range_words",
+    "text": "A leolvasás 33 és 49 nanométer között ingadozott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "leolvasás",
+          "lemma": "leolvasás",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 38
+        },
+        {
+          "start": 12,
+          "end": 14,
+          "text": "33",
+          "lemma": "33",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 21
+        },
+        {
+          "start": 15,
+          "end": 17,
+          "text": "és",
+          "lemma": "és",
+          "pos": "CCONJ",
+          "morph": {},
+          "dep": "cc",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 20,
+          "text": "49",
+          "lemma": "49",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "conj",
+          "headStart": 12
+        },
+        {
+          "start": 21,
+          "end": 30,
+          "text": "nanométer",
+          "lemma": "nanométer",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 38
+        },
+        {
+          "start": 31,
+          "end": 37,
+          "text": "között",
+          "lemma": "között",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 21
+        },
+        {
+          "start": 38,
+          "end": 48,
+          "text": "ingadozott",
+          "lemma": "ingadozik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 38
+        },
+        {
+          "start": 48,
+          "end": 49,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 38
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 49,
+          "text": "A leolvasás 33 és 49 nanométer között ingadozott."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "range_dash",
+    "text": "A futár 22–27 csomagot szállíthat.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 7,
+          "text": "futár",
+          "lemma": "futár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 23
+        },
+        {
+          "start": 8,
+          "end": 13,
+          "text": "22–27",
+          "lemma": "22–27",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 14
+        },
+        {
+          "start": 14,
+          "end": 22,
+          "text": "csomagot",
+          "lemma": "csomag",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 23
+        },
+        {
+          "start": 23,
+          "end": 33,
+          "text": "szállíthat",
+          "lemma": "szállíthat",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 23
+        },
+        {
+          "start": 33,
+          "end": 34,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 23
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 34,
+          "text": "A futár 22–27 csomagot szállíthat."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "range_suffix",
+    "text": "A mérés 32-től 47-ig terjedt.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 7,
+          "text": "mérés",
+          "lemma": "mérés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 21
+        },
+        {
+          "start": 8,
+          "end": 14,
+          "text": "32-től",
+          "lemma": "32",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Abl",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nmod:obl",
+          "headStart": 15
+        },
+        {
+          "start": 15,
+          "end": 20,
+          "text": "47-ig",
+          "lemma": "47",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Ter",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 21
+        },
+        {
+          "start": 21,
+          "end": 28,
+          "text": "terjedt",
+          "lemma": "terjed",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 21
+        },
+        {
+          "start": 28,
+          "end": 29,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 21
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 29,
+          "text": "A mérés 32-től 47-ig terjedt."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "range_bounds",
+    "text": "A csomag legalább 21, legfeljebb 26 darabot tartalmaz.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "csomag",
+          "lemma": "csomag",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 44
+        },
+        {
+          "start": 9,
+          "end": 17,
+          "text": "legalább",
+          "lemma": "legalább",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 20,
+          "text": "21",
+          "lemma": "21",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "orphan",
+          "headStart": 44
+        },
+        {
+          "start": 20,
+          "end": 21,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 18
+        },
+        {
+          "start": 22,
+          "end": 32,
+          "text": "legfeljebb",
+          "lemma": "legfeljebb",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 33
+        },
+        {
+          "start": 33,
+          "end": 35,
+          "text": "26",
+          "lemma": "26",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 36
+        },
+        {
+          "start": 36,
+          "end": 43,
+          "text": "darabot",
+          "lemma": "darab",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 44
+        },
+        {
+          "start": 44,
+          "end": 53,
+          "text": "tartalmaz",
+          "lemma": "tartalmaz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 44
+        },
+        {
+          "start": 53,
+          "end": 54,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 44
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 54,
+          "text": "A csomag legalább 21, legfeljebb 26 darabot tartalmaz."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "condition_ha",
+    "text": "Ha beérkezik az alkatrész, a műhely 36 lámpát készít.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Ha",
+          "lemma": "ha",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 3
+        },
+        {
+          "start": 3,
+          "end": 12,
+          "text": "beérkezik",
+          "lemma": "beérkezik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 3
+        },
+        {
+          "start": 13,
+          "end": 15,
+          "text": "az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 16
+        },
+        {
+          "start": 16,
+          "end": 25,
+          "text": "alkatrész",
+          "lemma": "alkatrész",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 3
+        },
+        {
+          "start": 25,
+          "end": 26,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 46
+        },
+        {
+          "start": 27,
+          "end": 28,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 29
+        },
+        {
+          "start": 29,
+          "end": 35,
+          "text": "műhely",
+          "lemma": "műhely",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 46
+        },
+        {
+          "start": 36,
+          "end": 38,
+          "text": "36",
+          "lemma": "36",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 39
+        },
+        {
+          "start": 39,
+          "end": 45,
+          "text": "lámpát",
+          "lemma": "lámpa",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 46
+        },
+        {
+          "start": 46,
+          "end": 52,
+          "text": "készít",
+          "lemma": "készít",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "conj",
+          "headStart": 3
+        },
+        {
+          "start": 52,
+          "end": 53,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 3
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 53,
+          "text": "Ha beérkezik az alkatrész, a műhely 36 lámpát készít."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "condition_amennyiben",
+    "text": "Amennyiben felszabadul a csarnok, a raktár 48 ládát tárolhat.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 10,
+          "text": "Amennyiben",
+          "lemma": "amennyiben",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 11
+        },
+        {
+          "start": 11,
+          "end": 22,
+          "text": "felszabadul",
+          "lemma": "felszabadul",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "advcl",
+          "headStart": 52
+        },
+        {
+          "start": 23,
+          "end": 24,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 25
+        },
+        {
+          "start": 25,
+          "end": 32,
+          "text": "csarnok",
+          "lemma": "csarnok",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 11
+        },
+        {
+          "start": 32,
+          "end": 33,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 52
+        },
+        {
+          "start": 34,
+          "end": 35,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 36
+        },
+        {
+          "start": 36,
+          "end": 42,
+          "text": "raktár",
+          "lemma": "raktár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 52
+        },
+        {
+          "start": 43,
+          "end": 45,
+          "text": "48",
+          "lemma": "48",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 46
+        },
+        {
+          "start": 46,
+          "end": 51,
+          "text": "ládát",
+          "lemma": "láda",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 52
+        },
+        {
+          "start": 52,
+          "end": 60,
+          "text": "tárolhat",
+          "lemma": "tárolhat",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Pot",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 52
+        },
+        {
+          "start": 60,
+          "end": 61,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 52
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 61,
+          "text": "Amennyiben felszabadul a csarnok, a raktár 48 ládát tárolhat."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "condition_nominal",
+    "text": "Áramszünet esetén a tartalék egység legfeljebb 13 órán át működhet.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 10,
+          "text": "Áramszünet",
+          "lemma": "áramszünet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 11
+        },
+        {
+          "start": 11,
+          "end": 17,
+          "text": "esetén",
+          "lemma": "eset",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 58
+        },
+        {
+          "start": 18,
+          "end": 19,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 20
+        },
+        {
+          "start": 20,
+          "end": 28,
+          "text": "tartalék",
+          "lemma": "tartalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 29
+        },
+        {
+          "start": 29,
+          "end": 35,
+          "text": "egység",
+          "lemma": "egység",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 58
+        },
+        {
+          "start": 36,
+          "end": 46,
+          "text": "legfeljebb",
+          "lemma": "legfeljebb",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 50
+        },
+        {
+          "start": 47,
+          "end": 49,
+          "text": "13",
+          "lemma": "13",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 50
+        },
+        {
+          "start": 50,
+          "end": 54,
+          "text": "órán",
+          "lemma": "óra",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 58
+        },
+        {
+          "start": 55,
+          "end": 57,
+          "text": "át",
+          "lemma": "át",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 50
+        },
+        {
+          "start": 58,
+          "end": 66,
+          "text": "működhet",
+          "lemma": "működhet",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Pot",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 58
+        },
+        {
+          "start": 66,
+          "end": 67,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 58
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 67,
+          "text": "Áramszünet esetén a tartalék egység legfeljebb 13 órán át működhet."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "condition_felteve",
+    "text": "A raktár 61 ládát tárolhat, feltéve, hogy elkészül a polc.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "raktár",
+          "lemma": "raktár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 18
+        },
+        {
+          "start": 9,
+          "end": 11,
+          "text": "61",
+          "lemma": "61",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 12
+        },
+        {
+          "start": 12,
+          "end": 17,
+          "text": "ládát",
+          "lemma": "láda",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 26,
+          "text": "tárolhat",
+          "lemma": "tárolhat",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 18
+        },
+        {
+          "start": 26,
+          "end": 27,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 28
+        },
+        {
+          "start": 28,
+          "end": 35,
+          "text": "feltéve",
+          "lemma": "feltéve",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 18
+        },
+        {
+          "start": 35,
+          "end": 36,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 42
+        },
+        {
+          "start": 37,
+          "end": 41,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 42
+        },
+        {
+          "start": 42,
+          "end": 50,
+          "text": "elkészül",
+          "lemma": "elkészül",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "advcl",
+          "headStart": 18
+        },
+        {
+          "start": 51,
+          "end": 52,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 53
+        },
+        {
+          "start": 53,
+          "end": 57,
+          "text": "polc",
+          "lemma": "polc",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 42
+        },
+        {
+          "start": 57,
+          "end": 58,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 18
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 58,
+          "text": "A raktár 61 ládát tárolhat, feltéve, hogy elkészül a polc."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "condition_only",
+    "text": "A futár csak akkor szállít 38 csomagot, ha kinyitják a kaput.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 7,
+          "text": "futár",
+          "lemma": "futár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 19
+        },
+        {
+          "start": 8,
+          "end": 12,
+          "text": "csak",
+          "lemma": "csak",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 13
+        },
+        {
+          "start": 13,
+          "end": 18,
+          "text": "akkor",
+          "lemma": "akkor",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Dem"
+          },
+          "dep": "advmod:tlocy",
+          "headStart": 19
+        },
+        {
+          "start": 19,
+          "end": 26,
+          "text": "szállít",
+          "lemma": "szállít",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 19
+        },
+        {
+          "start": 27,
+          "end": 29,
+          "text": "38",
+          "lemma": "38",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 30
+        },
+        {
+          "start": 30,
+          "end": 38,
+          "text": "csomagot",
+          "lemma": "csomag",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 19
+        },
+        {
+          "start": 38,
+          "end": 39,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 43
+        },
+        {
+          "start": 40,
+          "end": 42,
+          "text": "ha",
+          "lemma": "ha",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 43
+        },
+        {
+          "start": 43,
+          "end": 52,
+          "text": "kinyitják",
+          "lemma": "kinyit",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Plur",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "advcl",
+          "headStart": 19
+        },
+        {
+          "start": 53,
+          "end": 54,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 55
+        },
+        {
+          "start": 55,
+          "end": 60,
+          "text": "kaput",
+          "lemma": "kapu",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 43
+        },
+        {
+          "start": 60,
+          "end": 61,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 19
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 61,
+          "text": "A futár csak akkor szállít 38 csomagot, ha kinyitják a kaput."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "condition_circumstances",
+    "text": "Megfelelő körülmények között a gép akár 67 alkatrészt is készíthet.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 9,
+          "text": "Megfelelő",
+          "lemma": "megfelelő",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "Degree": "Pos",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 10
+        },
+        {
+          "start": 10,
+          "end": 21,
+          "text": "körülmények",
+          "lemma": "körülmény",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Plur"
+          },
+          "dep": "obl",
+          "headStart": 57
+        },
+        {
+          "start": 22,
+          "end": 28,
+          "text": "között",
+          "lemma": "között",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 10
+        },
+        {
+          "start": 29,
+          "end": 30,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 31
+        },
+        {
+          "start": 31,
+          "end": 34,
+          "text": "gép",
+          "lemma": "gép",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 57
+        },
+        {
+          "start": 35,
+          "end": 39,
+          "text": "akár",
+          "lemma": "akár",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 57
+        },
+        {
+          "start": 40,
+          "end": 42,
+          "text": "67",
+          "lemma": "67",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 43
+        },
+        {
+          "start": 43,
+          "end": 53,
+          "text": "alkatrészt",
+          "lemma": "alkatrész",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 57
+        },
+        {
+          "start": 54,
+          "end": 56,
+          "text": "is",
+          "lemma": "is",
+          "pos": "CCONJ",
+          "morph": {},
+          "dep": "cc",
+          "headStart": 43
+        },
+        {
+          "start": 57,
+          "end": 66,
+          "text": "készíthet",
+          "lemma": "készíthet",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 57
+        },
+        {
+          "start": 66,
+          "end": 67,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 57
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 67,
+          "text": "Megfelelő körülmények között a gép akár 67 alkatrészt is készíthet."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "conditional_rate",
+    "text": "Nagy terhelés mellett a kiszolgáló akár 130 kérés/másodpercet feldolgozhat.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 4,
+          "text": "Nagy",
+          "lemma": "nagy",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "Degree": "Pos",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 5
+        },
+        {
+          "start": 5,
+          "end": 13,
+          "text": "terhelés",
+          "lemma": "terhelés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 62
+        },
+        {
+          "start": 14,
+          "end": 21,
+          "text": "mellett",
+          "lemma": "mellett",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 5
+        },
+        {
+          "start": 22,
+          "end": 23,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 24
+        },
+        {
+          "start": 24,
+          "end": 34,
+          "text": "kiszolgáló",
+          "lemma": "kiszolgáló",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 62
+        },
+        {
+          "start": 35,
+          "end": 39,
+          "text": "akár",
+          "lemma": "akár",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 44
+        },
+        {
+          "start": 40,
+          "end": 43,
+          "text": "130",
+          "lemma": "130",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 44
+        },
+        {
+          "start": 44,
+          "end": 61,
+          "text": "kérés/másodpercet",
+          "lemma": "kérés/másodperc",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 62
+        },
+        {
+          "start": 62,
+          "end": 74,
+          "text": "feldolgozhat",
+          "lemma": "feldolgozhat",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Pot",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 62
+        },
+        {
+          "start": 74,
+          "end": 75,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 62
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 75,
+          "text": "Nagy terhelés mellett a kiszolgáló akár 130 kérés/másodpercet feldolgozhat."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "delta",
+    "text": "A kereslet legalább 14 százalékkal gyarapodott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 10,
+          "text": "kereslet",
+          "lemma": "kereslet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 35
+        },
+        {
+          "start": 11,
+          "end": 19,
+          "text": "legalább",
+          "lemma": "legalább",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 23
+        },
+        {
+          "start": 20,
+          "end": 22,
+          "text": "14",
+          "lemma": "14",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 23
+        },
+        {
+          "start": 23,
+          "end": 34,
+          "text": "százalékkal",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ins",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 35
+        },
+        {
+          "start": 35,
+          "end": 46,
+          "text": "gyarapodott",
+          "lemma": "gyarapodik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 35
+        },
+        {
+          "start": 46,
+          "end": 47,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 35
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 47,
+          "text": "A kereslet legalább 14 százalékkal gyarapodott."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "level",
+    "text": "A részesedés 14 százalékra emelkedett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 12,
+          "text": "részesedés",
+          "lemma": "részesedés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 27
+        },
+        {
+          "start": 13,
+          "end": 15,
+          "text": "14",
+          "lemma": "14",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 16
+        },
+        {
+          "start": 16,
+          "end": 26,
+          "text": "százalékra",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sbl",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 27
+        },
+        {
+          "start": 27,
+          "end": 37,
+          "text": "emelkedett",
+          "lemma": "emelkedik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 27
+        },
+        {
+          "start": 37,
+          "end": 38,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 27
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "text": "A részesedés 14 százalékra emelkedett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "level_bound",
+    "text": "A részesedés 14 százalék fölé emelkedett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 12,
+          "text": "részesedés",
+          "lemma": "részesedés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 30
+        },
+        {
+          "start": 13,
+          "end": 15,
+          "text": "14",
+          "lemma": "14",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 16
+        },
+        {
+          "start": 16,
+          "end": 24,
+          "text": "százalék",
+          "lemma": "százalék",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 30
+        },
+        {
+          "start": 25,
+          "end": 29,
+          "text": "fölé",
+          "lemma": "fölé",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 16
+        },
+        {
+          "start": 30,
+          "end": 40,
+          "text": "emelkedett",
+          "lemma": "emelkedik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 30
+        },
+        {
+          "start": 40,
+          "end": 41,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 30
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 41,
+          "text": "A részesedés 14 százalék fölé emelkedett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "source_condition",
+    "text": "A társaság szerint havazás esetén 16 járatot törölhetnek.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 10,
+          "text": "társaság",
+          "lemma": "társaság",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 45
+        },
+        {
+          "start": 11,
+          "end": 18,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 2
+        },
+        {
+          "start": 19,
+          "end": 26,
+          "text": "havazás",
+          "lemma": "havazás",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 27
+        },
+        {
+          "start": 27,
+          "end": 33,
+          "text": "esetén",
+          "lemma": "eset",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 45
+        },
+        {
+          "start": 34,
+          "end": 36,
+          "text": "16",
+          "lemma": "16",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 37
+        },
+        {
+          "start": 37,
+          "end": 44,
+          "text": "járatot",
+          "lemma": "járat",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 45
+        },
+        {
+          "start": 45,
+          "end": 56,
+          "text": "törölhetnek",
+          "lemma": "törölhet",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Plur",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 45
+        },
+        {
+          "start": 56,
+          "end": 57,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 45
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 57,
+          "text": "A társaság szerint havazás esetén 16 járatot törölhetnek."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "negative",
+    "text": "A bevétel nem haladta meg a 680000 forintot.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "bevétel",
+          "lemma": "bevétel",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 14
+        },
+        {
+          "start": 10,
+          "end": 13,
+          "text": "nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          },
+          "dep": "advmod",
+          "headStart": 14
+        },
+        {
+          "start": 14,
+          "end": 21,
+          "text": "haladta",
+          "lemma": "halad",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 14
+        },
+        {
+          "start": 22,
+          "end": 25,
+          "text": "meg",
+          "lemma": "meg",
+          "pos": "PART",
+          "morph": {},
+          "dep": "compound:preverb",
+          "headStart": 14
+        },
+        {
+          "start": 26,
+          "end": 27,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 35
+        },
+        {
+          "start": 28,
+          "end": 34,
+          "text": "680000",
+          "lemma": "680000",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 35
+        },
+        {
+          "start": 35,
+          "end": 43,
+          "text": "forintot",
+          "lemma": "forint",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 14
+        },
+        {
+          "start": 43,
+          "end": 44,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 14
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 44,
+          "text": "A bevétel nem haladta meg a 680000 forintot."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "contrast",
+    "text": "A gyár nem legfeljebb 18, hanem legfeljebb 27 gépet rendelhet.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 6,
+          "text": "gyár",
+          "lemma": "gyár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 22
+        },
+        {
+          "start": 7,
+          "end": 10,
+          "text": "nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          },
+          "dep": "advmod",
+          "headStart": 11
+        },
+        {
+          "start": 11,
+          "end": 21,
+          "text": "legfeljebb",
+          "lemma": "legfeljebb",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "advmod:mode",
+          "headStart": 22
+        },
+        {
+          "start": 22,
+          "end": 24,
+          "text": "18",
+          "lemma": "18",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "compound",
+          "headStart": 43
+        },
+        {
+          "start": 24,
+          "end": 25,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 22
+        },
+        {
+          "start": 26,
+          "end": 31,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {},
+          "dep": "cc",
+          "headStart": 32
+        },
+        {
+          "start": 32,
+          "end": 42,
+          "text": "legfeljebb",
+          "lemma": "legfeljebb",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "conj",
+          "headStart": 22
+        },
+        {
+          "start": 43,
+          "end": 45,
+          "text": "27",
+          "lemma": "27",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 46
+        },
+        {
+          "start": 46,
+          "end": 51,
+          "text": "gépet",
+          "lemma": "gép",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 52
+        },
+        {
+          "start": 52,
+          "end": 61,
+          "text": "rendelhet",
+          "lemma": "rendelhet",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Pot",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 52
+        },
+        {
+          "start": 61,
+          "end": 62,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 52
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 62,
+          "text": "A gyár nem legfeljebb 18, hanem legfeljebb 27 gépet rendelhet."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "ambiguous_owner",
+    "text": "A szóvivő szerint 51 dobozt vittek el.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "text": "szóvivő",
+          "lemma": "szóvivő",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 28
+        },
+        {
+          "start": 10,
+          "end": 17,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 2
+        },
+        {
+          "start": 18,
+          "end": 20,
+          "text": "51",
+          "lemma": "51",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 21
+        },
+        {
+          "start": 21,
+          "end": 27,
+          "text": "dobozt",
+          "lemma": "doboz",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 28
+        },
+        {
+          "start": 28,
+          "end": 34,
+          "text": "vittek",
+          "lemma": "visz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Plur",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 28
+        },
+        {
+          "start": 35,
+          "end": 37,
+          "text": "el",
+          "lemma": "el",
+          "pos": "ADV",
+          "morph": {},
+          "dep": "compound:preverb",
+          "headStart": 28
+        },
+        {
+          "start": 37,
+          "end": 38,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 28
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "text": "A szóvivő szerint 51 dobozt vittek el."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "siblings",
+    "text": "Eső esetén a futár 43 csomagot szállíthat, de a bolt pontosan 52 ládát tárol.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 3,
+          "text": "Eső",
+          "lemma": "eső",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "Degree": "Pos",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 4
+        },
+        {
+          "start": 4,
+          "end": 10,
+          "text": "esetén",
+          "lemma": "eset",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 31
+        },
+        {
+          "start": 11,
+          "end": 12,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 13
+        },
+        {
+          "start": 13,
+          "end": 18,
+          "text": "futár",
+          "lemma": "futár",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 31
+        },
+        {
+          "start": 19,
+          "end": 21,
+          "text": "43",
+          "lemma": "43",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 22
+        },
+        {
+          "start": 22,
+          "end": 30,
+          "text": "csomagot",
+          "lemma": "csomag",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 31
+        },
+        {
+          "start": 31,
+          "end": 41,
+          "text": "szállíthat",
+          "lemma": "szállíthat",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 31
+        },
+        {
+          "start": 41,
+          "end": 42,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 71
+        },
+        {
+          "start": 43,
+          "end": 45,
+          "text": "de",
+          "lemma": "de",
+          "pos": "CCONJ",
+          "morph": {},
+          "dep": "cc",
+          "headStart": 71
+        },
+        {
+          "start": 46,
+          "end": 47,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 48
+        },
+        {
+          "start": 48,
+          "end": 52,
+          "text": "bolt",
+          "lemma": "bolt",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 71
+        },
+        {
+          "start": 53,
+          "end": 61,
+          "text": "pontosan",
+          "lemma": "pontos",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Ess",
+            "Degree": "Pos",
+            "Number": "Sing"
+          },
+          "dep": "advmod:mode",
+          "headStart": 71
+        },
+        {
+          "start": 62,
+          "end": 64,
+          "text": "52",
+          "lemma": "52",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 65
+        },
+        {
+          "start": 65,
+          "end": 70,
+          "text": "ládát",
+          "lemma": "láda",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 71
+        },
+        {
+          "start": 71,
+          "end": 76,
+          "text": "tárol",
+          "lemma": "tárol",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "conj",
+          "headStart": 31
+        },
+        {
+          "start": 76,
+          "end": 77,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 31
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 77,
+          "text": "Eső esetén a futár 43 csomagot szállíthat, de a bolt pontosan 52 ládát tárol."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "multiple",
+    "text": "A bolt 65 forintot és 24 eurót kapott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 6,
+          "text": "bolt",
+          "lemma": "bolt",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 31
+        },
+        {
+          "start": 7,
+          "end": 9,
+          "text": "65",
+          "lemma": "65",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 10
+        },
+        {
+          "start": 10,
+          "end": 18,
+          "text": "forintot",
+          "lemma": "forint",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 31
+        },
+        {
+          "start": 19,
+          "end": 21,
+          "text": "és",
+          "lemma": "és",
+          "pos": "CCONJ",
+          "morph": {},
+          "dep": "cc",
+          "headStart": 25
+        },
+        {
+          "start": 22,
+          "end": 24,
+          "text": "24",
+          "lemma": "24",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 25
+        },
+        {
+          "start": 25,
+          "end": 30,
+          "text": "eurót",
+          "lemma": "euró",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "conj",
+          "headStart": 10
+        },
+        {
+          "start": 31,
+          "end": 37,
+          "text": "kapott",
+          "lemma": "kap",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 31
+        },
+        {
+          "start": 37,
+          "end": 38,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 31
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "text": "A bolt 65 forintot és 24 eurót kapott."
+        }
+      ],
+      "entities": []
+    }
+  }
+]

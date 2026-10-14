@@ -1,0 +1,12 @@
+const fs=require('node:fs'),path=require('node:path');const corpus=require('./corpus.json');
+const norm=s=>s.normalize('NFKC').toLocaleLowerCase('hu').replace(/[^\p{L}\p{N}]+/gu,' ').trim();
+const prior=new Map(),files=[];const add=(s,p)=>{if(typeof s==='string'&&s.length>=25&&s.length<=20000){const n=norm(s);if(n.split(' ').length>=5&&!prior.has(n))prior.set(n,p);}};
+function visit(x,p){if(typeof x==='string')add(x,p);else if(x&&typeof x==='object')for(const v of Object.values(x))visit(v,p);}
+function scan(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const p=path.join(dir,e.name);if(p.includes('new_unseen_blind_20261014'))continue;if(e.isDirectory())scan(p);else if(e.name.endsWith('.json')){try{visit(JSON.parse(fs.readFileSync(p,'utf8')),p);files.push(p);}catch{}}else if(/\.cjs$/.test(p)){const s=fs.readFileSync(p,'utf8');for(const m of s.matchAll(/(['"])([^\r\n]*?)\1/g))add(m[2],p);files.push(p);}}}
+for(const p of ['docs/UTOM_V2_2','tests/fixtures','scripts/experimental'])scan(p);
+for(const p of fs.readdirSync('tests/unit').filter(x=>/^v22-.*\.test\.cjs$/.test(x))){const s=fs.readFileSync('tests/unit/'+p,'utf8');for(const m of s.matchAll(/(['"])([^\r\n]*?)\1/g))add(m[2],'tests/unit/'+p);files.push('tests/unit/'+p);}
+const grams=n=>{const t=n.split(' ');return new Set(t.slice(0,-4).map((_,i)=>t.slice(i,i+5).join(' ')));};
+const index=new Map();for(const[n,p]of prior)for(const g of grams(n)){if(!index.has(g))index.set(g,[]);index.get(g).push(n);}
+const matches=corpus.map(x=>{const n=norm(x.text),g=grams(n),counts=new Map();for(const k of g)for(const old of index.get(k)||[])counts.set(old,(counts.get(old)||0)+1);const top=[...counts].sort((a,b)=>b[1]-a[1]).slice(0,3).map(([text,count])=>({path:prior.get(text),shared5grams:count,shareOfNew:count/g.size,oldExcerpt:text.slice(0,260)}));return {id:x.id,exactSnippetCollision:prior.has(n),exactSentenceCollisions:x.sentences.filter(s=>prior.has(norm(s))),top};});
+fs.writeFileSync(__dirname+'/collision_report.json',JSON.stringify({filesScanned:files.length,uniquePriorStrings:prior.size,normalization:'NFKC/lowercase/alphanumeric whitespace; JSON strings and JS quoted literals; lexical overlap is not proof of conceptual independence',matches},null,2),{flag:'wx'});console.log(JSON.stringify(matches,null,2));
+if(matches.some(m=>m.exactSnippetCollision||m.exactSentenceCollisions.length))process.exitCode=1;

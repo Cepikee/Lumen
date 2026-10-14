@@ -1,0 +1,1372 @@
+{
+  "id": "I",
+  "text": "Sallai Zsófia a negyedik asszóban fordított, az összesített listán viszont hatodik lett. A zsűri pontozólapjából kiderül, hogy csapata nem bronzot, hanem ezüstöt kapott; az edző mégis óvást nyújtott be. A juniorok lapján csak annyi olvasható: „Ötödik lett”, név és versenyszám nélkül.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 6,
+        "text": "Sallai",
+        "lemma": "Sallai",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "orphan",
+        "headStart": 75
+      },
+      {
+        "start": 7,
+        "end": 13,
+        "text": "Zsófia",
+        "lemma": "Zsófia",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 0
+      },
+      {
+        "start": 14,
+        "end": 15,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 25
+      },
+      {
+        "start": 16,
+        "end": 24,
+        "text": "negyedik",
+        "lemma": "negyedik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 25
+      },
+      {
+        "start": 25,
+        "end": 33,
+        "text": "asszóban",
+        "lemma": "asszó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 34
+      },
+      {
+        "start": 34,
+        "end": 43,
+        "text": "fordított",
+        "lemma": "fordított",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "VerbForm": "PartPast"
+        },
+        "dep": "amod:att",
+        "headStart": 0
+      },
+      {
+        "start": 43,
+        "end": 44,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 34
+      },
+      {
+        "start": 45,
+        "end": 47,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 60
+      },
+      {
+        "start": 48,
+        "end": 59,
+        "text": "összesített",
+        "lemma": "összesített",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 60
+      },
+      {
+        "start": 60,
+        "end": 66,
+        "text": "listán",
+        "lemma": "lista",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 75
+      },
+      {
+        "start": 67,
+        "end": 74,
+        "text": "viszont",
+        "lemma": "viszont",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 75
+      },
+      {
+        "start": 75,
+        "end": 82,
+        "text": "hatodik",
+        "lemma": "hatodik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 75
+      },
+      {
+        "start": 83,
+        "end": 87,
+        "text": "lett",
+        "lemma": "lesz",
+        "pos": "AUX",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "cop",
+        "headStart": 75
+      },
+      {
+        "start": 87,
+        "end": 88,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 75
+      },
+      {
+        "start": 89,
+        "end": 90,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 91
+      },
+      {
+        "start": 91,
+        "end": 96,
+        "text": "zsűri",
+        "lemma": "zsűri",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 97
+      },
+      {
+        "start": 97,
+        "end": 112,
+        "text": "pontozólapjából",
+        "lemma": "pontozólapj",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 113
+      },
+      {
+        "start": 113,
+        "end": 120,
+        "text": "kiderül",
+        "lemma": "kiderül",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 113
+      },
+      {
+        "start": 120,
+        "end": 121,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 139
+      },
+      {
+        "start": 122,
+        "end": 126,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 139
+      },
+      {
+        "start": 127,
+        "end": 134,
+        "text": "csapata",
+        "lemma": "csapat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 139
+      },
+      {
+        "start": 135,
+        "end": 138,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 139
+      },
+      {
+        "start": 139,
+        "end": 146,
+        "text": "bronzot",
+        "lemma": "bronz",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj:lvc",
+        "headStart": 162
+      },
+      {
+        "start": 146,
+        "end": 147,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 154
+      },
+      {
+        "start": 148,
+        "end": 153,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 154
+      },
+      {
+        "start": 154,
+        "end": 161,
+        "text": "ezüstöt",
+        "lemma": "ezüst",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 162
+      },
+      {
+        "start": 162,
+        "end": 168,
+        "text": "kapott",
+        "lemma": "kap",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 113
+      },
+      {
+        "start": 168,
+        "end": 169,
+        "text": ";",
+        "lemma": ";",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 162
+      },
+      {
+        "start": 170,
+        "end": 172,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 173
+      },
+      {
+        "start": 173,
+        "end": 177,
+        "text": "edző",
+        "lemma": "edző",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 190
+      },
+      {
+        "start": 178,
+        "end": 183,
+        "text": "mégis",
+        "lemma": "mégis",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 190
+      },
+      {
+        "start": 184,
+        "end": 189,
+        "text": "óvást",
+        "lemma": "óvás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 190
+      },
+      {
+        "start": 190,
+        "end": 198,
+        "text": "nyújtott",
+        "lemma": "nyújt",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 113
+      },
+      {
+        "start": 199,
+        "end": 201,
+        "text": "be",
+        "lemma": "be",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 190
+      },
+      {
+        "start": 201,
+        "end": 202,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 113
+      },
+      {
+        "start": 203,
+        "end": 204,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 205
+      },
+      {
+        "start": 205,
+        "end": 213,
+        "text": "juniorok",
+        "lemma": "junior",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur"
+        },
+        "dep": "nmod:att",
+        "headStart": 214
+      },
+      {
+        "start": 214,
+        "end": 220,
+        "text": "lapján",
+        "lemma": "lap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 232
+      },
+      {
+        "start": 221,
+        "end": 225,
+        "text": "csak",
+        "lemma": "csak",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 232
+      },
+      {
+        "start": 226,
+        "end": 231,
+        "text": "annyi",
+        "lemma": "annyi",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "nsubj",
+        "headStart": 232
+      },
+      {
+        "start": 232,
+        "end": 241,
+        "text": "olvasható",
+        "lemma": "olvasható",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 232
+      },
+      {
+        "start": 241,
+        "end": 242,
+        "text": ":",
+        "lemma": ":",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 243
+      },
+      {
+        "start": 243,
+        "end": 244,
+        "text": "„",
+        "lemma": "„",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "csubj",
+        "headStart": 232
+      },
+      {
+        "start": 244,
+        "end": 250,
+        "text": "Ötödik",
+        "lemma": "ötödik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 255
+      },
+      {
+        "start": 251,
+        "end": 255,
+        "text": "lett",
+        "lemma": "lesz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "cop",
+        "headStart": 244
+      },
+      {
+        "start": 255,
+        "end": 256,
+        "text": "”",
+        "lemma": "”",
+        "pos": "X",
+        "morph": {},
+        "dep": "obj",
+        "headStart": 243
+      },
+      {
+        "start": 256,
+        "end": 257,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 258
+      },
+      {
+        "start": 258,
+        "end": 261,
+        "text": "név",
+        "lemma": "név",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 255
+      },
+      {
+        "start": 262,
+        "end": 264,
+        "text": "és",
+        "lemma": "és",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 265
+      },
+      {
+        "start": 265,
+        "end": 276,
+        "text": "versenyszám",
+        "lemma": "versenyszám",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 258
+      },
+      {
+        "start": 277,
+        "end": 283,
+        "text": "nélkül",
+        "lemma": "nélkül",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 258
+      },
+      {
+        "start": 283,
+        "end": 284,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 232
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 88,
+        "text": "Sallai Zsófia a negyedik asszóban fordított, az összesített listán viszont hatodik lett."
+      },
+      {
+        "start": 89,
+        "end": 202,
+        "text": "A zsűri pontozólapjából kiderül, hogy csapata nem bronzot, hanem ezüstöt kapott; az edző mégis óvást nyújtott be."
+      },
+      {
+        "start": 203,
+        "end": 284,
+        "text": "A juniorok lapján csak annyi olvasható: „Ötödik lett”, név és versenyszám nélkül."
+      }
+    ],
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "text": "Sallai Zsófia",
+        "label": "PER"
+      }
+    ]
+  },
+  "output": {
+    "entities": [
+      {
+        "mention": "Sallai Zsófia",
+        "normalized": "sallai zsófia",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 0,
+        "end": 13,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 0,
+          "end": 13,
+          "textSpan": "Sallai Zsófia"
+        },
+        "identityKey": "person|sallai zsófia",
+        "canonicalIdentity": "sallai zsófia",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "asszóban",
+            "normalized": "asszó",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ine",
+            "start": 25,
+            "end": 33,
+            "evidenceSpan": {
+              "start": 25,
+              "end": 33,
+              "textSpan": "asszóban"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          },
+          {
+            "mention": "listán",
+            "normalized": "lista",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 60,
+            "end": 66,
+            "evidenceSpan": {
+              "start": 60,
+              "end": 66,
+              "textSpan": "listán"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 88,
+          "textSpan": "Sallai Zsófia a negyedik asszóban fordított, az összesített listán viszont hatodik lett."
+        },
+        "attribution": null,
+        "action": "lesz",
+        "actionSpan": {
+          "start": 83,
+          "end": 87,
+          "textSpan": "lett"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 16,
+            "end": 33,
+            "raw": "negyedik asszóban",
+            "value": 4,
+            "canonicalValue": 4,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 16,
+              "end": 33,
+              "textSpan": "negyedik asszóban"
+            },
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "subject": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 16,
+                    "end": 33,
+                    "textSpan": "negyedik asszóban"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:88",
+              "clauseSpan": {
+                "start": 0,
+                "end": 88,
+                "textSpan": "Sallai Zsófia a negyedik asszóban fordított, az összesített listán viszont hatodik lett."
+              },
+              "predicateSpan": {
+                "start": 83,
+                "end": 87,
+                "textSpan": "lett"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 16,
+                    "end": 24,
+                    "textSpan": "negyedik"
+                  },
+                  "targetSpan": {
+                    "start": 25,
+                    "end": 33,
+                    "textSpan": "asszóban"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 25,
+                    "end": 33,
+                    "textSpan": "asszóban"
+                  },
+                  "targetSpan": {
+                    "start": 34,
+                    "end": 43,
+                    "textSpan": "fordított"
+                  }
+                },
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 34,
+                    "end": 43,
+                    "textSpan": "fordított"
+                  },
+                  "targetSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Sallai"
+                  }
+                },
+                {
+                  "relation": "orphan",
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Sallai"
+                  },
+                  "targetSpan": {
+                    "start": 75,
+                    "end": 82,
+                    "textSpan": "hatodik"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "start": 75,
+            "end": 82,
+            "raw": "hatodik",
+            "value": 6,
+            "canonicalValue": 6,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 75,
+              "end": 82,
+              "textSpan": "hatodik"
+            },
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "subject": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 75,
+                    "end": 82,
+                    "textSpan": "hatodik"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:88",
+              "clauseSpan": {
+                "start": 0,
+                "end": 88,
+                "textSpan": "Sallai Zsófia a negyedik asszóban fordított, az összesített listán viszont hatodik lett."
+              },
+              "predicateSpan": {
+                "start": 83,
+                "end": 87,
+                "textSpan": "lett"
+              },
+              "numericDependencyPath": [],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 88,
+          "textSpan": "Sallai Zsófia a negyedik asszóban fordított, az összesített listán viszont hatodik lett."
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 88,
+          "textSpan": "Sallai Zsófia a negyedik asszóban fordított, az összesített listán viszont hatodik lett."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:88",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "pontozólapjából",
+            "normalized": "pontozólapj",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ela",
+            "start": 97,
+            "end": 112,
+            "evidenceSpan": {
+              "start": 97,
+              "end": 112,
+              "textSpan": "pontozólapjából"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 89,
+          "end": 120,
+          "textSpan": "A zsűri pontozólapjából kiderül"
+        },
+        "attribution": null,
+        "action": "kiderül",
+        "actionSpan": {
+          "start": 113,
+          "end": 120,
+          "textSpan": "kiderül"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 89,
+          "end": 120,
+          "textSpan": "A zsűri pontozólapjából kiderül"
+        },
+        "propositionSpan": {
+          "start": 89,
+          "end": 120,
+          "textSpan": "A zsűri pontozólapjából kiderül"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:89:120"
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 122,
+          "end": 168,
+          "textSpan": "hogy csapata nem bronzot, hanem ezüstöt kapott"
+        },
+        "attribution": null,
+        "action": "kap",
+        "actionSpan": {
+          "start": 162,
+          "end": 168,
+          "textSpan": "kapott"
+        },
+        "object": [
+          "bronz",
+          "ezüst"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 122,
+          "end": 168,
+          "textSpan": "hogy csapata nem bronzot, hanem ezüstöt kapott"
+        },
+        "propositionSpan": {
+          "start": 122,
+          "end": 168,
+          "textSpan": "hogy csapata nem bronzot, hanem ezüstöt kapott"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:122:168"
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 170,
+          "end": 202,
+          "textSpan": "az edző mégis óvást nyújtott be."
+        },
+        "attribution": null,
+        "action": "nyújt",
+        "actionSpan": {
+          "start": 190,
+          "end": 198,
+          "textSpan": "nyújtott"
+        },
+        "object": [
+          "óvás"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 170,
+          "end": 202,
+          "textSpan": "az edző mégis óvást nyújtott be."
+        },
+        "propositionSpan": {
+          "start": 170,
+          "end": 202,
+          "textSpan": "az edző mégis óvást nyújtott be."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:170:202"
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 244,
+          "end": 255,
+          "textSpan": "Ötödik lett"
+        },
+        "attribution": null,
+        "action": "lesz",
+        "actionSpan": {
+          "start": 251,
+          "end": 255,
+          "textSpan": "lett"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 244,
+            "end": 256,
+            "raw": "Ötödik lett”",
+            "value": 5,
+            "canonicalValue": 5,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 244,
+              "end": 256,
+              "textSpan": "Ötödik lett”"
+            },
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "subject": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 244,
+                    "end": 256,
+                    "textSpan": "Ötödik lett”"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:203:256",
+              "clauseSpan": {
+                "start": 244,
+                "end": 255,
+                "textSpan": "Ötödik lett"
+              },
+              "predicateSpan": {
+                "start": 251,
+                "end": 255,
+                "textSpan": "lett"
+              },
+              "numericDependencyPath": [],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 203,
+          "end": 256,
+          "textSpan": "A juniorok lapján csak annyi olvasható: „Ötödik lett”"
+        },
+        "propositionSpan": {
+          "start": 203,
+          "end": 256,
+          "textSpan": "A juniorok lapján csak annyi olvasható: „Ötödik lett”"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:203:256",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 256,
+          "end": 284,
+          "textSpan": ", név és versenyszám nélkül."
+        },
+        "attribution": null,
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 256,
+          "end": 284,
+          "textSpan": ", név és versenyszám nélkül."
+        },
+        "propositionSpan": {
+          "start": 256,
+          "end": 284,
+          "textSpan": ", név és versenyszám nélkül."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:256:284",
+        "syntacticRoles": []
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "evidenceSpan": {
+          "start": 89,
+          "end": 202,
+          "textSpan": "A zsűri pontozólapjából kiderül, hogy csapata nem bronzot, hanem ezüstöt kapott; az edző mégis óvást nyújtott be."
+        },
+        "scope": {
+          "start": 89,
+          "end": 202
+        },
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

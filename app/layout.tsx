@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ClientLayout from "../components/ClientLayout";
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY?.trim();
 const analyticsEnabled = process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true";
 
 export const metadata = {
@@ -43,7 +42,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="manifest" href="/site.webmanifest" />
 
         {/* reCAPTCHA */}
-        {recaptchaSiteKey ? <script src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`} async defer /> : null}
 
         {/* Google Analytics */}
         {analyticsEnabled ? <>

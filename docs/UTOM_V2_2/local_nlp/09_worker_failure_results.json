@@ -1,0 +1,33 @@
+{
+  "executedAt": "2026-10-06",
+  "transport": "Windows Node.js to isolated WSL Python worker over JSONL stdio",
+  "results": [
+    {
+      "provider": "huspacy",
+      "persistentRequestsBeforeRestart": 2,
+      "invalidInputHandled": true,
+      "crashFallback": {
+        "mode": "deterministic-only",
+        "abstainFromNlp": true,
+        "reason": "worker_crashed"
+      },
+      "restartSucceeded": true,
+      "totalHarnessMs": 5442,
+      "canonicalWrites": 0
+    },
+    {
+      "provider": "stanza",
+      "persistentRequestsBeforeRestart": 2,
+      "invalidInputHandled": true,
+      "crashFallback": {
+        "mode": "deterministic-only",
+        "abstainFromNlp": true,
+        "reason": "worker_crashed"
+      },
+      "restartSucceeded": true,
+      "totalHarnessMs": 9916,
+      "canonicalWrites": 0
+    }
+  ],
+  "safetyConclusion": "Both workers keep NLP output candidate-only, reject malformed input, fall back to deterministic-only abstention after a crash, restart successfully, and perform no canonical writes."
+}

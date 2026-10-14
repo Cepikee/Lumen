@@ -1,0 +1,128 @@
+{
+  "snippets": 15,
+  "domains": 15,
+  "editorialSentences": 35,
+  "nlpSentences": 40,
+  "total": 90,
+  "CORRECT_RESOLVED": 47,
+  "WRONG_RESOLVED": 6,
+  "CORRECT_UNRESOLVED": 7,
+  "MISSED_DEFENSIBLE_RESOLUTION": 30,
+  "resolvedPrecision": 0.8867924528301887,
+  "resolutionRate": 0.5888888888888889,
+  "correctDecisionRate": 0.6,
+  "wrongResolvedPerResolved": 0.11320754716981132,
+  "wrongResolvedPerTotal": 0.06666666666666667,
+  "byDimension": {
+    "attribution": {
+      "total": 15,
+      "CORRECT_RESOLVED": 8,
+      "WRONG_RESOLVED": 1,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 6,
+      "resolvedPrecision": 0.8888888888888888,
+      "resolutionRate": 0.6,
+      "correctDecisionRate": 0.5333333333333333,
+      "wrongResolvedPerResolved": 0.1111111111111111,
+      "wrongResolvedPerTotal": 0.06666666666666667
+    },
+    "actor": {
+      "total": 13,
+      "CORRECT_RESOLVED": 3,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 6,
+      "MISSED_DEFENSIBLE_RESOLUTION": 4,
+      "resolvedPrecision": 1,
+      "resolutionRate": 0.23076923076923078,
+      "correctDecisionRate": 0.6923076923076923,
+      "wrongResolvedPerResolved": 0,
+      "wrongResolvedPerTotal": 0
+    },
+    "temporal": {
+      "total": 8,
+      "CORRECT_RESOLVED": 6,
+      "WRONG_RESOLVED": 1,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 1,
+      "resolvedPrecision": 0.8571428571428571,
+      "resolutionRate": 0.875,
+      "correctDecisionRate": 0.75,
+      "wrongResolvedPerResolved": 0.14285714285714285,
+      "wrongResolvedPerTotal": 0.125
+    },
+    "contrast/negation": {
+      "total": 16,
+      "CORRECT_RESOLVED": 10,
+      "WRONG_RESOLVED": 1,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 5,
+      "resolvedPrecision": 0.9090909090909091,
+      "resolutionRate": 0.6875,
+      "correctDecisionRate": 0.625,
+      "wrongResolvedPerResolved": 0.09090909090909091,
+      "wrongResolvedPerTotal": 0.0625
+    },
+    "entity boundary": {
+      "total": 9,
+      "CORRECT_RESOLVED": 8,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 1,
+      "resolvedPrecision": 1,
+      "resolutionRate": 0.8888888888888888,
+      "correctDecisionRate": 0.8888888888888888,
+      "wrongResolvedPerResolved": 0,
+      "wrongResolvedPerTotal": 0
+    },
+    "numeric": {
+      "total": 19,
+      "CORRECT_RESOLVED": 5,
+      "WRONG_RESOLVED": 3,
+      "CORRECT_UNRESOLVED": 0,
+      "MISSED_DEFENSIBLE_RESOLUTION": 11,
+      "resolvedPrecision": 0.625,
+      "resolutionRate": 0.42105263157894735,
+      "correctDecisionRate": 0.2631578947368421,
+      "wrongResolvedPerResolved": 0.375,
+      "wrongResolvedPerTotal": 0.15789473684210525
+    },
+    "ordinal/rank": {
+      "total": 10,
+      "CORRECT_RESOLVED": 7,
+      "WRONG_RESOLVED": 0,
+      "CORRECT_UNRESOLVED": 1,
+      "MISSED_DEFENSIBLE_RESOLUTION": 2,
+      "resolvedPrecision": 1,
+      "resolutionRate": 0.7,
+      "correctDecisionRate": 0.8,
+      "wrongResolvedPerResolved": 0,
+      "wrongResolvedPerTotal": 0
+    }
+  },
+  "evidenceOffset": {
+    "total": 903,
+    "exact": 903,
+    "failures": []
+  },
+  "semanticallySupportedResolution": {
+    "count": 47,
+    "selectedPositiveDecisions": 53,
+    "method": "Manual source/target/role/scope/evidence audit, separate from exact offsets"
+  },
+  "scopeAdjudication": {
+    "strictQualifierFailures": [
+      "W5",
+      "T5",
+      "K2",
+      "K3"
+    ],
+    "categoricalFailures": [
+      "P1",
+      "W4"
+    ],
+    "note": "K2/K3 overlap the same event but are separately preselected temporal/negation dimensions. Qualifier failures mean unsafe structured scope, not a claim of canonical fact persistence."
+  },
+  "SECOND_BLIND_CORPUS_RESULT": "FAIL",
+  "NEXT_REAL_WORLD_BLIND_TEST_READY": false,
+  "independence": "Text-disjoint synthetic holdout, same assistant author/evaluator; not externally independent."
+}

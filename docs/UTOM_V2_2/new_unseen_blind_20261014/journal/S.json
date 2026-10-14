@@ -1,0 +1,2258 @@
+{
+  "id": "S",
+  "text": "A hálózati kártya adatlapja 2,4 gigabitet ad meg másodpercenként, de ezt a labor munkatársai még nem igazolták. A mérési felelős az ügyfélszolgálatnak azt írta, hogy csúcsidőben nem 35, hanem akár 38 százalékkal is visszaeshet az átvitel, nem pedig 38 százalékra. Az adatlap gyártója nem azonosítható a hiányos fejlécből.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 11
+      },
+      {
+        "start": 2,
+        "end": 10,
+        "text": "hálózati",
+        "lemma": "hálózati",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 11
+      },
+      {
+        "start": 11,
+        "end": 17,
+        "text": "kártya",
+        "lemma": "kártya",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 18
+      },
+      {
+        "start": 18,
+        "end": 27,
+        "text": "adatlapja",
+        "lemma": "adatlap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 42
+      },
+      {
+        "start": 28,
+        "end": 31,
+        "text": "2,4",
+        "lemma": "2,4",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Frac",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 32
+      },
+      {
+        "start": 32,
+        "end": 41,
+        "text": "gigabitet",
+        "lemma": "gigabit",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 42
+      },
+      {
+        "start": 42,
+        "end": 44,
+        "text": "ad",
+        "lemma": "ad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 42
+      },
+      {
+        "start": 45,
+        "end": 48,
+        "text": "meg",
+        "lemma": "meg",
+        "pos": "PART",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 42
+      },
+      {
+        "start": 49,
+        "end": 64,
+        "text": "másodpercenként",
+        "lemma": "másodperc",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dis",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 42
+      },
+      {
+        "start": 64,
+        "end": 65,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 101
+      },
+      {
+        "start": 66,
+        "end": 68,
+        "text": "de",
+        "lemma": "de",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 101
+      },
+      {
+        "start": 69,
+        "end": 72,
+        "text": "ezt",
+        "lemma": "ez",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "obj",
+        "headStart": 101
+      },
+      {
+        "start": 73,
+        "end": 74,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 75
+      },
+      {
+        "start": 75,
+        "end": 80,
+        "text": "labor",
+        "lemma": "labor",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 81
+      },
+      {
+        "start": 81,
+        "end": 92,
+        "text": "munkatársai",
+        "lemma": "munkatárs",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 101
+      },
+      {
+        "start": 93,
+        "end": 96,
+        "text": "még",
+        "lemma": "még",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:tlocy",
+        "headStart": 101
+      },
+      {
+        "start": 97,
+        "end": 100,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 101
+      },
+      {
+        "start": 101,
+        "end": 110,
+        "text": "igazolták",
+        "lemma": "igazol",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 42
+      },
+      {
+        "start": 110,
+        "end": 111,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 42
+      },
+      {
+        "start": 112,
+        "end": 113,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 121
+      },
+      {
+        "start": 114,
+        "end": 120,
+        "text": "mérési",
+        "lemma": "mérési",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 121
+      },
+      {
+        "start": 121,
+        "end": 128,
+        "text": "felelős",
+        "lemma": "felelős",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 155
+      },
+      {
+        "start": 129,
+        "end": 131,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 132
+      },
+      {
+        "start": 132,
+        "end": 150,
+        "text": "ügyfélszolgálatnak",
+        "lemma": "ügyfélszolgálat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 155
+      },
+      {
+        "start": 151,
+        "end": 154,
+        "text": "azt",
+        "lemma": "az",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "obj",
+        "headStart": 155
+      },
+      {
+        "start": 155,
+        "end": 159,
+        "text": "írta",
+        "lemma": "ír",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 155
+      },
+      {
+        "start": 159,
+        "end": 160,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 215
+      },
+      {
+        "start": 161,
+        "end": 165,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 215
+      },
+      {
+        "start": 166,
+        "end": 177,
+        "text": "csúcsidőben",
+        "lemma": "csúcsidő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 215
+      },
+      {
+        "start": 178,
+        "end": 181,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 182
+      },
+      {
+        "start": 182,
+        "end": 184,
+        "text": "35",
+        "lemma": "35",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 200
+      },
+      {
+        "start": 184,
+        "end": 185,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 197
+      },
+      {
+        "start": 186,
+        "end": 191,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 197
+      },
+      {
+        "start": 192,
+        "end": 196,
+        "text": "akár",
+        "lemma": "akár",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 197
+      },
+      {
+        "start": 197,
+        "end": 199,
+        "text": "38",
+        "lemma": "38",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 182
+      },
+      {
+        "start": 200,
+        "end": 211,
+        "text": "százalékkal",
+        "lemma": "százalék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ins",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 215
+      },
+      {
+        "start": 212,
+        "end": 214,
+        "text": "is",
+        "lemma": "is",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 200
+      },
+      {
+        "start": 215,
+        "end": 226,
+        "text": "visszaeshet",
+        "lemma": "visszaeshet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Pot",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 155
+      },
+      {
+        "start": 227,
+        "end": 229,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 230
+      },
+      {
+        "start": 230,
+        "end": 237,
+        "text": "átvitel",
+        "lemma": "átvitel",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 215
+      },
+      {
+        "start": 237,
+        "end": 238,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 252
+      },
+      {
+        "start": 239,
+        "end": 242,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 252
+      },
+      {
+        "start": 243,
+        "end": 248,
+        "text": "pedig",
+        "lemma": "pedig",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 252
+      },
+      {
+        "start": 249,
+        "end": 251,
+        "text": "38",
+        "lemma": "38",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 252
+      },
+      {
+        "start": 252,
+        "end": 262,
+        "text": "százalékra",
+        "lemma": "százalék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 215
+      },
+      {
+        "start": 262,
+        "end": 263,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 155
+      },
+      {
+        "start": 264,
+        "end": 266,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 267
+      },
+      {
+        "start": 267,
+        "end": 274,
+        "text": "adatlap",
+        "lemma": "adatlap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 275
+      },
+      {
+        "start": 275,
+        "end": 283,
+        "text": "gyártója",
+        "lemma": "gyártó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 288
+      },
+      {
+        "start": 284,
+        "end": 287,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 288
+      },
+      {
+        "start": 288,
+        "end": 300,
+        "text": "azonosítható",
+        "lemma": "azonosítható",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 288
+      },
+      {
+        "start": 301,
+        "end": 302,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 311
+      },
+      {
+        "start": 303,
+        "end": 310,
+        "text": "hiányos",
+        "lemma": "hiányos",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 311
+      },
+      {
+        "start": 311,
+        "end": 320,
+        "text": "fejlécből",
+        "lemma": "fejléc",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 288
+      },
+      {
+        "start": 320,
+        "end": 321,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 288
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 111,
+        "text": "A hálózati kártya adatlapja 2,4 gigabitet ad meg másodpercenként, de ezt a labor munkatársai még nem igazolták."
+      },
+      {
+        "start": 112,
+        "end": 263,
+        "text": "A mérési felelős az ügyfélszolgálatnak azt írta, hogy csúcsidőben nem 35, hanem akár 38 százalékkal is visszaeshet az átvitel, nem pedig 38 százalékra."
+      },
+      {
+        "start": 264,
+        "end": 321,
+        "text": "Az adatlap gyártója nem azonosítható a hiányos fejlécből."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 64,
+          "textSpan": "A hálózati kártya adatlapja 2,4 gigabitet ad meg másodpercenként"
+        },
+        "attribution": null,
+        "action": "megad",
+        "actionSpan": {
+          "start": 42,
+          "end": 44,
+          "textSpan": "ad"
+        },
+        "object": [
+          "gigabit"
+        ],
+        "numericArguments": [
+          {
+            "value": 2.4,
+            "canonicalValue": 2.4,
+            "unit": {
+              "numerator": "gigabit",
+              "denominator": "second"
+            },
+            "semanticKind": "compound_rate",
+            "start": 28,
+            "end": 64,
+            "raw": "2,4 gigabitet ad meg másodpercenként",
+            "evidenceSpan": {
+              "start": 28,
+              "end": 64,
+              "textSpan": "2,4 gigabitet ad meg másodpercenként"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "compound_rate_projection_not_supported"
+            ],
+            "property": "count",
+            "compound": {
+              "numerator": {
+                "value": 2.4,
+                "baseUnit": "gigabit",
+                "originalKind": "count",
+                "evidenceSpan": {
+                  "start": 28,
+                  "end": 41,
+                  "textSpan": "2,4 gigabitet"
+                }
+              },
+              "denominators": [
+                {
+                  "unit": "second",
+                  "scale": 1,
+                  "relation": "per",
+                  "form": "distributive",
+                  "evidenceSpan": {
+                    "start": 49,
+                    "end": 64,
+                    "textSpan": "másodpercenként"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 49,
+                        "end": 64,
+                        "textSpan": "másodpercenként"
+                      },
+                      "targetSpan": {
+                        "start": 42,
+                        "end": 44,
+                        "textSpan": "ad"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "relation": "per",
+              "qualifiers": [],
+              "evidenceSpan": {
+                "start": 28,
+                "end": 64,
+                "textSpan": "2,4 gigabitet ad meg másodpercenként"
+              },
+              "numeratorDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 28,
+                    "end": 31,
+                    "textSpan": "2,4"
+                  },
+                  "targetSpan": {
+                    "start": 32,
+                    "end": 41,
+                    "textSpan": "gigabitet"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 32,
+                    "end": 41,
+                    "textSpan": "gigabitet"
+                  },
+                  "targetSpan": {
+                    "start": 42,
+                    "end": 44,
+                    "textSpan": "ad"
+                  }
+                }
+              ],
+              "scopeStatus": "candidate_only",
+              "frameId": "dependency:0:64"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 28,
+                    "end": 41,
+                    "textSpan": "2,4 gigabitet"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:64",
+              "clauseSpan": {
+                "start": 0,
+                "end": 64,
+                "textSpan": "A hálózati kártya adatlapja 2,4 gigabitet ad meg másodpercenként"
+              },
+              "predicateSpan": {
+                "start": 42,
+                "end": 44,
+                "textSpan": "ad"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 28,
+                    "end": 31,
+                    "textSpan": "2,4"
+                  },
+                  "targetSpan": {
+                    "start": 32,
+                    "end": 41,
+                    "textSpan": "gigabitet"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 32,
+                    "end": 41,
+                    "textSpan": "gigabitet"
+                  },
+                  "targetSpan": {
+                    "start": 42,
+                    "end": 44,
+                    "textSpan": "ad"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "compound_rate_requires_lossless_resolution"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 64,
+          "textSpan": "A hálózati kártya adatlapja 2,4 gigabitet ad meg másodpercenként"
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 64,
+          "textSpan": "A hálózati kártya adatlapja 2,4 gigabitet ad meg másodpercenként"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:64",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "kártya",
+              "normalized": "kártya",
+              "start": 11,
+              "end": 17,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 11,
+                "end": 17,
+                "textSpan": "kártya"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 11,
+                "end": 17,
+                "textSpan": "kártya"
+              },
+              "targetSpan": {
+                "start": 42,
+                "end": 44,
+                "textSpan": "ad"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 11,
+                    "end": 17,
+                    "textSpan": "kártya"
+                  },
+                  "targetSpan": {
+                    "start": 18,
+                    "end": 27,
+                    "textSpan": "adatlapja"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 18,
+                    "end": 27,
+                    "textSpan": "adatlapja"
+                  },
+                  "targetSpan": {
+                    "start": 42,
+                    "end": 44,
+                    "textSpan": "ad"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:64",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "gigabitet",
+              "normalized": "gigabit",
+              "start": 32,
+              "end": 41,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 32,
+                "end": 41,
+                "textSpan": "gigabitet"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 32,
+                "end": 41,
+                "textSpan": "gigabitet"
+              },
+              "targetSpan": {
+                "start": 42,
+                "end": 44,
+                "textSpan": "ad"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 32,
+                    "end": 41,
+                    "textSpan": "gigabitet"
+                  },
+                  "targetSpan": {
+                    "start": 42,
+                    "end": 44,
+                    "textSpan": "ad"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:64",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 66,
+          "end": 111,
+          "textSpan": "de ezt a labor munkatársai még nem igazolták."
+        },
+        "attribution": null,
+        "action": "igazol",
+        "actionSpan": {
+          "start": 101,
+          "end": 110,
+          "textSpan": "igazolták"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 66,
+          "end": 111,
+          "textSpan": "de ezt a labor munkatársai még nem igazolták."
+        },
+        "propositionSpan": {
+          "start": 66,
+          "end": 111,
+          "textSpan": "de ezt a labor munkatársai még nem igazolták."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:66:111",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "ezt",
+              "normalized": "ez",
+              "start": 69,
+              "end": 72,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 69,
+                "end": 72,
+                "textSpan": "ezt"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 69,
+                "end": 72,
+                "textSpan": "ezt"
+              },
+              "targetSpan": {
+                "start": 101,
+                "end": 110,
+                "textSpan": "igazolták"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 69,
+                    "end": 72,
+                    "textSpan": "ezt"
+                  },
+                  "targetSpan": {
+                    "start": 101,
+                    "end": 110,
+                    "textSpan": "igazolták"
+                  }
+                }
+              ],
+              "frameId": "dependency:66:111",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "labor",
+              "normalized": "labor",
+              "start": 75,
+              "end": 80,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 75,
+                "end": 80,
+                "textSpan": "labor"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 75,
+                "end": 80,
+                "textSpan": "labor"
+              },
+              "targetSpan": {
+                "start": 101,
+                "end": 110,
+                "textSpan": "igazolták"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 75,
+                    "end": 80,
+                    "textSpan": "labor"
+                  },
+                  "targetSpan": {
+                    "start": 81,
+                    "end": 92,
+                    "textSpan": "munkatársai"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 81,
+                    "end": 92,
+                    "textSpan": "munkatársai"
+                  },
+                  "targetSpan": {
+                    "start": 101,
+                    "end": 110,
+                    "textSpan": "igazolták"
+                  }
+                }
+              ],
+              "frameId": "dependency:66:111",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "csúcsidőben",
+            "normalized": "csúcsidő",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ine",
+            "start": 166,
+            "end": 177,
+            "evidenceSpan": {
+              "start": 166,
+              "end": 177,
+              "textSpan": "csúcsidőben"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": {
+          "mention": "felelős",
+          "normalized": "felelős",
+          "start": 121,
+          "end": 128,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          }
+        },
+        "source": {
+          "mention": "felelős",
+          "normalized": "felelős",
+          "start": 121,
+          "end": 128,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          }
+        },
+        "recipient": {
+          "mention": "ügyfélszolgálatnak",
+          "role": "recipient",
+          "evidenceSpan": {
+            "start": 132,
+            "end": 150,
+            "textSpan": "ügyfélszolgálatnak"
+          }
+        },
+        "recipientCandidates": [],
+        "reportingVerb": "ír",
+        "content": {
+          "start": 166,
+          "end": 184,
+          "textSpan": "csúcsidőben nem 35"
+        },
+        "attribution": {
+          "label": "felelős",
+          "normalized": "felelős",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          },
+          "propositionSpan": {
+            "start": 165,
+            "end": 263,
+            "textSpan": " csúcsidőben nem 35, hanem akár 38 százalékkal is visszaeshet az átvitel, nem pedig 38 százalékra."
+          }
+        },
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 35,
+            "canonicalValue": 35,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 182,
+            "end": 184,
+            "raw": "35",
+            "evidenceSpan": {
+              "start": 182,
+              "end": 184,
+              "textSpan": "35"
+            },
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "unsafe_proposition_scope",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {
+              "start": 166,
+              "end": 184,
+              "textSpan": "csúcsidőben nem 35"
+            },
+            "subject": null,
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 182,
+                    "end": 184,
+                    "textSpan": "35"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "recovered-source:155:proposition:0",
+              "clauseSpan": {
+                "start": 166,
+                "end": 184,
+                "textSpan": "csúcsidőben nem 35"
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "asserted",
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "unresolved",
+        "status": "reported_claim",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 166,
+          "end": 184,
+          "textSpan": "csúcsidőben nem 35"
+        },
+        "propositionSpan": {
+          "start": 166,
+          "end": 184,
+          "textSpan": "csúcsidőben nem 35"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "recovered-source:155:proposition:0",
+        "attributionChainId": "recovered-source:155",
+        "claimOwner": {
+          "mention": "felelős",
+          "normalized": "felelős",
+          "start": 121,
+          "end": 128,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          }
+        },
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          },
+          "reportingPredicateSpan": {
+            "start": 155,
+            "end": 159,
+            "textSpan": "írta"
+          },
+          "clauseSpan": {
+            "start": 165,
+            "end": 263,
+            "textSpan": " csúcsidőben nem 35, hanem akár 38 százalékkal is visszaeshet az átvitel, nem pedig 38 százalékra."
+          },
+          "frameId": "recovered-source:155:proposition:0",
+          "parentAttributionId": "recovered-source:155:0",
+          "rule": "governing_np_reporting_scope"
+        },
+        "quoteSpan": null
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": {
+          "mention": "felelős",
+          "normalized": "felelős",
+          "start": 121,
+          "end": 128,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          }
+        },
+        "source": {
+          "mention": "felelős",
+          "normalized": "felelős",
+          "start": 121,
+          "end": 128,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          }
+        },
+        "recipient": {
+          "mention": "ügyfélszolgálatnak",
+          "role": "recipient",
+          "evidenceSpan": {
+            "start": 132,
+            "end": 150,
+            "textSpan": "ügyfélszolgálatnak"
+          }
+        },
+        "recipientCandidates": [],
+        "reportingVerb": "ír",
+        "content": {
+          "start": 186,
+          "end": 237,
+          "textSpan": "hanem akár 38 százalékkal is visszaeshet az átvitel"
+        },
+        "attribution": {
+          "label": "felelős",
+          "normalized": "felelős",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          },
+          "propositionSpan": {
+            "start": 165,
+            "end": 263,
+            "textSpan": " csúcsidőben nem 35, hanem akár 38 százalékkal is visszaeshet az átvitel, nem pedig 38 százalékra."
+          }
+        },
+        "action": "visszaeshet",
+        "actionSpan": {
+          "start": 215,
+          "end": 226,
+          "textSpan": "visszaeshet"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 38,
+            "canonicalValue": 38,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": "%",
+            "semanticKind": "percentage_share",
+            "start": 197,
+            "end": 211,
+            "raw": "38 százalékkal",
+            "evidenceSpan": {
+              "start": 197,
+              "end": 211,
+              "textSpan": "38 százalékkal"
+            },
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {
+              "start": 186,
+              "end": 237,
+              "textSpan": "hanem akár 38 százalékkal is visszaeshet az átvitel"
+            },
+            "subject": null,
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "possible_extent",
+                  "evidenceSpan": {
+                    "start": 192,
+                    "end": 197,
+                    "textSpan": "akár "
+                  },
+                  "marker": "akár"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "potential_morphology",
+                  "evidenceSpan": {
+                    "start": 215,
+                    "end": 226,
+                    "textSpan": "visszaeshet"
+                  },
+                  "dependencyPath": []
+                }
+              ],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "recovered-source:155:proposition:1",
+              "clauseSpan": {
+                "start": 186,
+                "end": 237,
+                "textSpan": "hanem akár 38 százalékkal is visszaeshet az átvitel"
+              },
+              "predicateSpan": {
+                "start": 215,
+                "end": 226,
+                "textSpan": "visszaeshet"
+              },
+              "numericDependencyPath": [],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Pot"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": true,
+        "modalities": [
+          "possible",
+          "reported"
+        ],
+        "modality": "possible",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 186,
+          "end": 237,
+          "textSpan": "hanem akár 38 százalékkal is visszaeshet az átvitel"
+        },
+        "propositionSpan": {
+          "start": 186,
+          "end": 237,
+          "textSpan": "hanem akár 38 százalékkal is visszaeshet az átvitel"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "recovered-source:155:proposition:1",
+        "attributionChainId": "recovered-source:155",
+        "claimOwner": {
+          "mention": "felelős",
+          "normalized": "felelős",
+          "start": 121,
+          "end": 128,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          }
+        },
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          },
+          "reportingPredicateSpan": {
+            "start": 155,
+            "end": 159,
+            "textSpan": "írta"
+          },
+          "clauseSpan": {
+            "start": 165,
+            "end": 263,
+            "textSpan": " csúcsidőben nem 35, hanem akár 38 százalékkal is visszaeshet az átvitel, nem pedig 38 százalékra."
+          },
+          "frameId": "recovered-source:155:proposition:1",
+          "parentAttributionId": "recovered-source:155:0",
+          "rule": "governing_np_reporting_scope"
+        },
+        "quoteSpan": null,
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "potential_morphology",
+              "evidenceSpan": {
+                "start": 215,
+                "end": 226,
+                "textSpan": "visszaeshet"
+              },
+              "dependencyPath": []
+            }
+          ],
+          "conditions": [],
+          "frameId": "recovered-source:155:proposition:1",
+          "clauseSpan": {
+            "start": 186,
+            "end": 237,
+            "textSpan": "hanem akár 38 százalékkal is visszaeshet az átvitel"
+          },
+          "projectionAllowed": false
+        }
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": {
+          "mention": "felelős",
+          "normalized": "felelős",
+          "start": 121,
+          "end": 128,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          }
+        },
+        "source": {
+          "mention": "felelős",
+          "normalized": "felelős",
+          "start": 121,
+          "end": 128,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          }
+        },
+        "recipient": {
+          "mention": "ügyfélszolgálatnak",
+          "role": "recipient",
+          "evidenceSpan": {
+            "start": 132,
+            "end": 150,
+            "textSpan": "ügyfélszolgálatnak"
+          }
+        },
+        "recipientCandidates": [],
+        "reportingVerb": "ír",
+        "content": {
+          "start": 239,
+          "end": 263,
+          "textSpan": "nem pedig 38 százalékra."
+        },
+        "attribution": {
+          "label": "felelős",
+          "normalized": "felelős",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          },
+          "propositionSpan": {
+            "start": 165,
+            "end": 263,
+            "textSpan": " csúcsidőben nem 35, hanem akár 38 százalékkal is visszaeshet az átvitel, nem pedig 38 százalékra."
+          }
+        },
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 38,
+            "canonicalValue": 38,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": "%",
+            "semanticKind": "percentage_share",
+            "start": 249,
+            "end": 262,
+            "raw": "38 százalékra",
+            "evidenceSpan": {
+              "start": 249,
+              "end": 262,
+              "textSpan": "38 százalékra"
+            },
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unsafe_proposition_scope",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {
+              "start": 239,
+              "end": 263,
+              "textSpan": "nem pedig 38 százalékra."
+            },
+            "subject": null,
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 249,
+                    "end": 262,
+                    "textSpan": "38 százalékra"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "recovered-source:155:proposition:2",
+              "clauseSpan": {
+                "start": 239,
+                "end": 263,
+                "textSpan": "nem pedig 38 százalékra."
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 249,
+                    "end": 251,
+                    "textSpan": "38"
+                  },
+                  "targetSpan": {
+                    "start": 252,
+                    "end": 262,
+                    "textSpan": "százalékra"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "asserted",
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "unresolved",
+        "status": "reported_claim",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 239,
+          "end": 263,
+          "textSpan": "nem pedig 38 százalékra."
+        },
+        "propositionSpan": {
+          "start": 239,
+          "end": 263,
+          "textSpan": "nem pedig 38 százalékra."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "recovered-source:155:proposition:2",
+        "attributionChainId": "recovered-source:155",
+        "claimOwner": {
+          "mention": "felelős",
+          "normalized": "felelős",
+          "start": 121,
+          "end": 128,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          }
+        },
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 121,
+            "end": 128,
+            "textSpan": "felelős"
+          },
+          "reportingPredicateSpan": {
+            "start": 155,
+            "end": 159,
+            "textSpan": "írta"
+          },
+          "clauseSpan": {
+            "start": 165,
+            "end": 263,
+            "textSpan": " csúcsidőben nem 35, hanem akár 38 százalékkal is visszaeshet az átvitel, nem pedig 38 százalékra."
+          },
+          "frameId": "recovered-source:155:proposition:2",
+          "parentAttributionId": "recovered-source:155:0",
+          "rule": "governing_np_reporting_scope"
+        },
+        "quoteSpan": null
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "fejlécből",
+            "normalized": "fejléc",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ela",
+            "start": 311,
+            "end": 320,
+            "evidenceSpan": {
+              "start": 311,
+              "end": 320,
+              "textSpan": "fejlécből"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 264,
+          "end": 321,
+          "textSpan": "Az adatlap gyártója nem azonosítható a hiányos fejlécből."
+        },
+        "attribution": null,
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "unsupported_local_actor",
+          "negation_predicate_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 264,
+          "end": 321,
+          "textSpan": "Az adatlap gyártója nem azonosítható a hiányos fejlécből."
+        },
+        "propositionSpan": {
+          "start": 264,
+          "end": 321,
+          "textSpan": "Az adatlap gyártója nem azonosítható a hiányos fejlécből."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:264:321",
+        "syntacticRoles": []
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "evidenceSpan": {
+          "start": 112,
+          "end": 263,
+          "textSpan": "A mérési felelős az ügyfélszolgálatnak azt írta, hogy csúcsidőben nem 35, hanem akár 38 százalékkal is visszaeshet az átvitel, nem pedig 38 százalékra."
+        },
+        "scope": {
+          "start": 112,
+          "end": 263
+        },
+        "rejected": null,
+        "accepted": null,
+        "numericScopeCandidates": [
+          {
+            "value": 35,
+            "binding": "unresolved",
+            "evidenceSpan": {
+              "start": 182,
+              "end": 184,
+              "textSpan": "35"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 182,
+                    "end": 184,
+                    "textSpan": "35"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "recovered-source:155:proposition:0",
+              "clauseSpan": {
+                "start": 166,
+                "end": 184,
+                "textSpan": "csúcsidőben nem 35"
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "value": 38,
+            "binding": "unresolved",
+            "evidenceSpan": {
+              "start": 197,
+              "end": 211,
+              "textSpan": "38 százalékkal"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "possible_extent",
+                  "evidenceSpan": {
+                    "start": 192,
+                    "end": 197,
+                    "textSpan": "akár "
+                  },
+                  "marker": "akár"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "potential_morphology",
+                  "evidenceSpan": {
+                    "start": 215,
+                    "end": 226,
+                    "textSpan": "visszaeshet"
+                  },
+                  "dependencyPath": []
+                }
+              ],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "recovered-source:155:proposition:1",
+              "clauseSpan": {
+                "start": 186,
+                "end": 237,
+                "textSpan": "hanem akár 38 százalékkal is visszaeshet az átvitel"
+              },
+              "predicateSpan": {
+                "start": 215,
+                "end": 226,
+                "textSpan": "visszaeshet"
+              },
+              "numericDependencyPath": [],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "value": 38,
+            "binding": "unresolved",
+            "evidenceSpan": {
+              "start": 249,
+              "end": 262,
+              "textSpan": "38 százalékra"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 249,
+                    "end": 262,
+                    "textSpan": "38 százalékra"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "recovered-source:155:proposition:2",
+              "clauseSpan": {
+                "start": 239,
+                "end": 263,
+                "textSpan": "nem pedig 38 százalékra."
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 249,
+                    "end": 251,
+                    "textSpan": "38"
+                  },
+                  "targetSpan": {
+                    "start": 252,
+                    "end": 262,
+                    "textSpan": "százalékra"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ]
+      }
+    ],
+    "attributionChains": [
+      {
+        "id": "recovered-source:155",
+        "binding": "resolved",
+        "rule": "dependency_source_and_explicit_complement_or_bounded_quote",
+        "unresolvedReasons": [],
+        "edges": [
+          {
+            "source": {
+              "mention": "felelős",
+              "normalized": "felelős",
+              "start": 121,
+              "end": 128,
+              "type": "local_source",
+              "entityId": null,
+              "identityStatus": "observed_local_referent",
+              "evidenceSpan": {
+                "start": 121,
+                "end": 128,
+                "textSpan": "felelős"
+              }
+            },
+            "verb": "ír",
+            "verbSpan": {
+              "start": 155,
+              "end": 159,
+              "textSpan": "írta"
+            },
+            "propositionSpan": {
+              "start": 165,
+              "end": 263,
+              "textSpan": " csúcsidőben nem 35, hanem akár 38 százalékkal is visszaeshet az átvitel, nem pedig 38 százalékra."
+            },
+            "recipient": {
+              "mention": "ügyfélszolgálatnak",
+              "role": "recipient",
+              "evidenceSpan": {
+                "start": 132,
+                "end": 150,
+                "textSpan": "ügyfélszolgálatnak"
+              }
+            },
+            "id": "recovered-source:155:0",
+            "depth": 0,
+            "parentAttributionId": null,
+            "targetId": "recovered-source:155:proposition:0",
+            "binding": "resolved",
+            "role": "claim_source",
+            "rule": "governing_np_reporting_scope",
+            "targetIds": [
+              "recovered-source:155:proposition:0",
+              "recovered-source:155:proposition:1",
+              "recovered-source:155:proposition:2"
+            ],
+            "structuralEvidence": {
+              "sourceSpan": {
+                "start": 121,
+                "end": 128,
+                "textSpan": "felelős"
+              },
+              "targetSpan": {
+                "start": 155,
+                "end": 159,
+                "textSpan": "írta"
+              },
+              "relation": "nsubj",
+              "markerRelation": "ROOT",
+              "rule": "governing_source_np_and_reporting_scope"
+            }
+          }
+        ],
+        "propositionIds": [
+          "recovered-source:155:proposition:0",
+          "recovered-source:155:proposition:1",
+          "recovered-source:155:proposition:2"
+        ]
+      }
+    ],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

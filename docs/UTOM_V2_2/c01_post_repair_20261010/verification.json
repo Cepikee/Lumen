@@ -1,0 +1,32 @@
+{
+  "time": "2026-10-10T09:02:09.380Z",
+  "branch": "develop/utom-recovery",
+  "head": "d145120c6e044b4f25d1d7b94e87846652ef80ba",
+  "existingFrozenFiles": 177,
+  "existingChangedFiles": [
+    "scripts/experimental/real-text-a-binder.cjs"
+  ],
+  "secondBlindFilesVerified": 29,
+  "secondBlindUnchanged": true,
+  "userOwnedFilesUnchanged": true,
+  "oldV22TestsUnchanged": true,
+  "newRegressionTests": 49,
+  "targetedTests": {
+    "total": 388,
+    "pass": 388,
+    "fail": 0
+  },
+  "researchFiles": {
+    "scripts/experimental/real-text-a-binder.cjs": "cfc1dc5c59f9604b9a68b63663b5cd2abc5cd80b1f47ed3304123825fab56d80",
+    "scripts/experimental/numeric-scope-safety.cjs": "6d19eacfa4d3085170553b76a6a96571f6702a45762969689aeb06e53b5e6875",
+    "scripts/experimental/numeric-scope-development.cjs": "06389d865ffb84acfb54d307cec14e5806693e21318e08eda17a091cd0aedc65",
+    "scripts/experimental/c01-measurement.cjs": "56c8a92b8792a515d8d322aa06767d0ae8ab4e5bce0bc5a744d8017bae860bc0",
+    "tests/unit/v22-numeric-scope-safety.test.cjs": "a5ef18eddb95292c939ff09124ed929c034dfb677f46edc115342202f8ad2f54",
+    "tests/fixtures/real-text-a/numeric-scope-annotations.json": "b35990b972c3081ba5e8c744be406402fb48b7c2b5bab417f47f38d98db774a6"
+  },
+  "canonicalProjection": "OFF",
+  "productionChanges": 0,
+  "paidProviderCalls": 0,
+  "commit": false,
+  "push": false
+}

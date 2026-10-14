@@ -1,0 +1,1081 @@
+{
+  "id": "H",
+  "domain": "egészségügy",
+  "text": "A klinika vezetője közölte: „A várólista nem 90, hanem 72 főből áll.” „Új rendelőt egyelőre nem nyitunk” – válaszolta az igazgató a betegnek.",
+  "started": "2026-10-09T21:35:43.060Z",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 9,
+        "text": "klinika",
+        "lemma": "klinika",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 10
+      },
+      {
+        "start": 10,
+        "end": 18,
+        "text": "vezetője",
+        "lemma": "vezető",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 19
+      },
+      {
+        "start": 19,
+        "end": 26,
+        "text": "közölte",
+        "lemma": "közöl",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 19
+      },
+      {
+        "start": 26,
+        "end": 27,
+        "text": ":",
+        "lemma": ":",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 28
+      },
+      {
+        "start": 28,
+        "end": 29,
+        "text": "„",
+        "lemma": "„",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "ccomp:obj",
+        "headStart": 19
+      },
+      {
+        "start": 29,
+        "end": 30,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 31
+      },
+      {
+        "start": 31,
+        "end": 40,
+        "text": "várólista",
+        "lemma": "várólista",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 45
+      },
+      {
+        "start": 41,
+        "end": 44,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 45
+      },
+      {
+        "start": 45,
+        "end": 47,
+        "text": "90",
+        "lemma": "90",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 58
+      },
+      {
+        "start": 47,
+        "end": 48,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 55
+      },
+      {
+        "start": 49,
+        "end": 54,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 55
+      },
+      {
+        "start": 55,
+        "end": 57,
+        "text": "72",
+        "lemma": "72",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 45
+      },
+      {
+        "start": 58,
+        "end": 63,
+        "text": "főből",
+        "lemma": "fő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 64
+      },
+      {
+        "start": 64,
+        "end": 67,
+        "text": "áll",
+        "lemma": "áll",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 28
+      },
+      {
+        "start": 67,
+        "end": 68,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 19
+      },
+      {
+        "start": 68,
+        "end": 69,
+        "text": "”",
+        "lemma": "”",
+        "pos": "X",
+        "morph": {},
+        "dep": "obj",
+        "headStart": 70
+      },
+      {
+        "start": 70,
+        "end": 71,
+        "text": "„",
+        "lemma": "„",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "ROOT",
+        "headStart": 70
+      },
+      {
+        "start": 71,
+        "end": 73,
+        "text": "Új",
+        "lemma": "új",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 74
+      },
+      {
+        "start": 74,
+        "end": 82,
+        "text": "rendelőt",
+        "lemma": "rendelő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 96
+      },
+      {
+        "start": 83,
+        "end": 91,
+        "text": "egyelőre",
+        "lemma": "egyelőre",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:tlocy",
+        "headStart": 96
+      },
+      {
+        "start": 92,
+        "end": 95,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 96
+      },
+      {
+        "start": 96,
+        "end": 103,
+        "text": "nyitunk",
+        "lemma": "nyit",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "1",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 96
+      },
+      {
+        "start": 103,
+        "end": 104,
+        "text": "”",
+        "lemma": "”",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 96
+      },
+      {
+        "start": 105,
+        "end": 106,
+        "text": "–",
+        "lemma": "–",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 96
+      },
+      {
+        "start": 107,
+        "end": 117,
+        "text": "válaszolta",
+        "lemma": "válaszol",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "advcl",
+        "headStart": 96
+      },
+      {
+        "start": 118,
+        "end": 120,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 121
+      },
+      {
+        "start": 121,
+        "end": 129,
+        "text": "igazgató",
+        "lemma": "igazgató",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 107
+      },
+      {
+        "start": 130,
+        "end": 131,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 132
+      },
+      {
+        "start": 132,
+        "end": 140,
+        "text": "betegnek",
+        "lemma": "beteg",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Sing"
+        },
+        "dep": "iobj",
+        "headStart": 107
+      },
+      {
+        "start": 140,
+        "end": 141,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 96
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 68,
+        "text": "A klinika vezetője közölte: „A várólista nem 90, hanem 72 főből áll."
+      },
+      {
+        "start": 68,
+        "end": 71,
+        "text": "” „"
+      },
+      {
+        "start": 71,
+        "end": 141,
+        "text": "Új rendelőt egyelőre nem nyitunk” – válaszolta az igazgató a betegnek."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "főből",
+            "normalized": "fő",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ela",
+            "start": 58,
+            "end": 63,
+            "evidenceSpan": {
+              "start": 58,
+              "end": 63,
+              "textSpan": "főből"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": {
+          "mention": "klinika vezetője",
+          "normalized": "klinika vezető",
+          "start": 2,
+          "end": 18,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 18,
+            "textSpan": "klinika vezetője"
+          }
+        },
+        "source": {
+          "mention": "klinika vezetője",
+          "normalized": "klinika vezető",
+          "start": 2,
+          "end": 18,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 18,
+            "textSpan": "klinika vezetője"
+          }
+        },
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "közöl",
+        "content": {
+          "start": 29,
+          "end": 68,
+          "textSpan": "A várólista nem 90, hanem 72 főből áll."
+        },
+        "attribution": {
+          "label": "klinika vezetője",
+          "normalized": "klinika vezető",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 18,
+            "textSpan": "klinika vezetője"
+          },
+          "propositionSpan": {
+            "start": 29,
+            "end": 68,
+            "textSpan": "A várólista nem 90, hanem 72 főből áll."
+          }
+        },
+        "action": "áll",
+        "actionSpan": {
+          "start": 64,
+          "end": 67,
+          "textSpan": "áll"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 72,
+            "canonicalValue": 72,
+            "unit": "count",
+            "semanticKind": "count",
+            "status": "accepted",
+            "binding": "resolved",
+            "ownerType": "semantic_role",
+            "owner": {
+              "label": "number",
+              "evidenceSpan": {
+                "start": 55,
+                "end": 63,
+                "textSpan": "72 főből"
+              }
+            },
+            "subject": null,
+            "property": "number",
+            "unresolvedReasons": [],
+            "start": 55,
+            "end": 63,
+            "raw": "72 főből",
+            "evidenceSpan": {
+              "start": 55,
+              "end": 63,
+              "textSpan": "72 főből"
+            },
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 55,
+                "end": 57,
+                "textSpan": "72"
+              },
+              "targetSpan": {
+                "start": 64,
+                "end": 67,
+                "textSpan": "áll"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "conj",
+                  "sourceSpan": {
+                    "start": 55,
+                    "end": 57,
+                    "textSpan": "72"
+                  },
+                  "targetSpan": {
+                    "start": 45,
+                    "end": 47,
+                    "textSpan": "90"
+                  }
+                },
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 45,
+                    "end": 47,
+                    "textSpan": "90"
+                  },
+                  "targetSpan": {
+                    "start": 58,
+                    "end": 63,
+                    "textSpan": "főből"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 58,
+                    "end": 63,
+                    "textSpan": "főből"
+                  },
+                  "targetSpan": {
+                    "start": 64,
+                    "end": 67,
+                    "textSpan": "áll"
+                  }
+                }
+              ],
+              "frameId": "recovered-source:19:proposition:0",
+              "semanticRole": "count",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks",
+              "syntacticReason": "parallel_alternatives_single_finite_predicate"
+            },
+            "contrastFrameId": "contrast:29:68"
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "asserted",
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported_claim",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 29,
+          "end": 68,
+          "textSpan": "A várólista nem 90, hanem 72 főből áll."
+        },
+        "propositionSpan": {
+          "start": 29,
+          "end": 68,
+          "textSpan": "A várólista nem 90, hanem 72 főből áll."
+        },
+        "canonicalProjectionAllowed": false,
+        "contrasts": [
+          {
+            "binding": "resolved",
+            "rule": "parallel_alternatives_single_finite_predicate",
+            "slot": "number",
+            "evidenceSpan": {
+              "start": 29,
+              "end": 68,
+              "textSpan": "A várólista nem 90, hanem 72 főből áll."
+            },
+            "scope": {
+              "start": 29,
+              "end": 68
+            },
+            "rejected": {
+              "value": 90,
+              "scale": 1,
+              "unit": "count",
+              "year": false,
+              "case": "Nom",
+              "status": "rejected",
+              "evidenceSpan": {
+                "start": 45,
+                "end": 47,
+                "textSpan": "90"
+              },
+              "unitEvidence": {
+                "start": 55,
+                "end": 63,
+                "textSpan": "72 főből"
+              }
+            },
+            "accepted": {
+              "value": 72,
+              "scale": 1,
+              "unit": "count",
+              "year": false,
+              "case": "Ela",
+              "status": "accepted",
+              "evidenceSpan": {
+                "start": 55,
+                "end": 63,
+                "textSpan": "72 főből"
+              }
+            },
+            "frameId": "contrast:29:68"
+          }
+        ],
+        "frameId": "recovered-source:19:proposition:0",
+        "attributionChainId": "recovered-source:19",
+        "claimOwner": {
+          "mention": "klinika vezetője",
+          "normalized": "klinika vezető",
+          "start": 2,
+          "end": 18,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 18,
+            "textSpan": "klinika vezetője"
+          }
+        },
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 2,
+            "end": 18,
+            "textSpan": "klinika vezetője"
+          },
+          "reportingPredicateSpan": {
+            "start": 19,
+            "end": 26,
+            "textSpan": "közölte"
+          },
+          "clauseSpan": {
+            "start": 29,
+            "end": 68,
+            "textSpan": "A várólista nem 90, hanem 72 főből áll."
+          },
+          "frameId": "recovered-source:19:proposition:0",
+          "parentAttributionId": "recovered-source:19:0",
+          "rule": "governing_np_reporting_scope"
+        },
+        "quoteSpan": {
+          "start": 29,
+          "end": 68,
+          "textSpan": "A várólista nem 90, hanem 72 főből áll."
+        },
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 71,
+          "end": 103,
+          "textSpan": "Új rendelőt egyelőre nem nyitunk"
+        },
+        "attribution": null,
+        "action": "nyit",
+        "actionSpan": {
+          "start": 96,
+          "end": 103,
+          "textSpan": "nyitunk"
+        },
+        "object": [
+          "rendelő"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 70,
+          "end": 104,
+          "textSpan": "„Új rendelőt egyelőre nem nyitunk”"
+        },
+        "propositionSpan": {
+          "start": 70,
+          "end": 104,
+          "textSpan": "„Új rendelőt egyelőre nem nyitunk”"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:70:104",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "rendelőt",
+              "normalized": "rendelő",
+              "start": 74,
+              "end": 82,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 74,
+                "end": 82,
+                "textSpan": "rendelőt"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 74,
+                "end": 82,
+                "textSpan": "rendelőt"
+              },
+              "targetSpan": {
+                "start": 96,
+                "end": 103,
+                "textSpan": "nyitunk"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 74,
+                    "end": 82,
+                    "textSpan": "rendelőt"
+                  },
+                  "targetSpan": {
+                    "start": 96,
+                    "end": 103,
+                    "textSpan": "nyitunk"
+                  }
+                }
+              ],
+              "frameId": "dependency:70:104",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 2,
+        "actor": {
+          "mention": "igazgató",
+          "normalized": "igazgató",
+          "start": 121,
+          "end": 129,
+          "type": "referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 129,
+            "textSpan": "igazgató"
+          }
+        },
+        "actorStatus": "resolved",
+        "subject": {
+          "mention": "igazgató",
+          "normalized": "igazgató",
+          "start": 121,
+          "end": 129,
+          "type": "referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 121,
+            "end": 129,
+            "textSpan": "igazgató"
+          }
+        },
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 107,
+          "end": 141,
+          "textSpan": "válaszolta az igazgató a betegnek."
+        },
+        "attribution": null,
+        "action": "válaszol",
+        "actionSpan": {
+          "start": 107,
+          "end": 117,
+          "textSpan": "válaszolta"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 107,
+          "end": 141,
+          "textSpan": "válaszolta az igazgató a betegnek."
+        },
+        "propositionSpan": {
+          "start": 107,
+          "end": 141,
+          "textSpan": "válaszolta az igazgató a betegnek."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:107:141",
+        "syntacticRoles": [
+          {
+            "role": "actor",
+            "referent": {
+              "mention": "igazgató",
+              "normalized": "igazgató",
+              "start": 121,
+              "end": 129,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 121,
+                "end": 129,
+                "textSpan": "igazgató"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 121,
+                "end": 129,
+                "textSpan": "igazgató"
+              },
+              "targetSpan": {
+                "start": 107,
+                "end": 117,
+                "textSpan": "válaszolta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 121,
+                    "end": 129,
+                    "textSpan": "igazgató"
+                  },
+                  "targetSpan": {
+                    "start": 107,
+                    "end": 117,
+                    "textSpan": "válaszolta"
+                  }
+                }
+              ],
+              "frameId": "dependency:107:141",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "actorEvidence": {
+          "sourceSpan": {
+            "start": 121,
+            "end": 129,
+            "textSpan": "igazgató"
+          },
+          "targetSpan": {
+            "start": 107,
+            "end": 117,
+            "textSpan": "válaszolta"
+          },
+          "dependencyPath": [
+            {
+              "relation": "nsubj",
+              "sourceSpan": {
+                "start": 121,
+                "end": 129,
+                "textSpan": "igazgató"
+              },
+              "targetSpan": {
+                "start": 107,
+                "end": 117,
+                "textSpan": "válaszolta"
+              }
+            }
+          ],
+          "frameId": "dependency:107:141",
+          "semanticRole": "actor",
+          "resolutionStatus": "resolved",
+          "rule": "dependency_path_with_case_and_scope_checks"
+        }
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "evidenceSpan": {
+          "start": 0,
+          "end": 68,
+          "textSpan": "A klinika vezetője közölte: „A várólista nem 90, hanem 72 főből áll."
+        },
+        "scope": {
+          "start": 0,
+          "end": 68
+        },
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "attributionChains": [
+      {
+        "id": "recovered-source:19",
+        "binding": "resolved",
+        "rule": "dependency_source_and_explicit_complement_or_bounded_quote",
+        "unresolvedReasons": [],
+        "edges": [
+          {
+            "source": {
+              "mention": "klinika vezetője",
+              "normalized": "klinika vezető",
+              "start": 2,
+              "end": 18,
+              "type": "local_source",
+              "entityId": null,
+              "identityStatus": "observed_local_referent",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 18,
+                "textSpan": "klinika vezetője"
+              }
+            },
+            "verb": "közöl",
+            "verbSpan": {
+              "start": 19,
+              "end": 26,
+              "textSpan": "közölte"
+            },
+            "propositionSpan": {
+              "start": 29,
+              "end": 68,
+              "textSpan": "A várólista nem 90, hanem 72 főből áll."
+            },
+            "recipient": null,
+            "id": "recovered-source:19:0",
+            "depth": 0,
+            "parentAttributionId": null,
+            "targetId": "recovered-source:19:proposition:0",
+            "binding": "resolved",
+            "role": "claim_source",
+            "rule": "governing_np_reporting_scope",
+            "targetIds": [
+              "recovered-source:19:proposition:0"
+            ],
+            "structuralEvidence": {
+              "sourceSpan": {
+                "start": 10,
+                "end": 18,
+                "textSpan": "vezetője"
+              },
+              "targetSpan": {
+                "start": 19,
+                "end": 26,
+                "textSpan": "közölte"
+              },
+              "relation": "nsubj",
+              "markerRelation": "ROOT",
+              "rule": "governing_source_np_and_reporting_scope"
+            }
+          }
+        ],
+        "propositionIds": [
+          "recovered-source:19:proposition:0"
+        ]
+      }
+    ],
+    "dependencyStatus": "available",
+    "dependencyVerified": true
+  }
+}

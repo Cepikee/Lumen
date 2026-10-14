@@ -1,0 +1,46 @@
+[
+  {
+    "path": "docs/UTOM_V2_2/blind_readiness_20261009/BEFORE_REPAIR_raw.json",
+    "hash": "4508d6f5f62535fc09a1978f3540ebd18d760361624abb56e7278cdf98d18f35"
+  },
+  {
+    "path": "docs/UTOM_V2_2/blind_readiness_20261009/corpus.json",
+    "hash": "fbf64b8807fd43d9a5cf322d8b5c43d1ef1ec7bc232e01b91cdc61d1f302847c"
+  },
+  {
+    "path": "docs/UTOM_V2_2/blind_readiness_20261009/expected.json",
+    "hash": "8f247574785aca63f822ac3f81dfe5c687bdb9a1f9f1938b2c896d4883601858"
+  },
+  {
+    "path": "docs/UTOM_V2_2/blind_readiness_20261009/freeze.json",
+    "hash": "0e7e128eed7d48fab955c29cd023e7dd6a63656accfba016a9a2b4e9b49d5e42"
+  },
+  {
+    "path": "docs/UTOM_V2_2/blind_readiness_20261009/human_item_audit.md",
+    "hash": "335e214a4be2d6a1deb61fc08495e85ad36fef087311ef0b54a9ba05d5648fda"
+  },
+  {
+    "path": "docs/UTOM_V2_2/blind_readiness_20261009/input_manifest.json",
+    "hash": "60ac8367364e195c75923b8dc37861ec01e435cab8efb152f46a4196ece1c6e4"
+  },
+  {
+    "path": "docs/UTOM_V2_2/blind_readiness_20261009/labels.json",
+    "hash": "30e8253c9415e087b869bf0327b9db0ea072c274480d2d61a7bcbfea086a1268"
+  },
+  {
+    "path": "docs/UTOM_V2_2/blind_readiness_20261009/metrics.json",
+    "hash": "8d8f207d0f648c087c58df45c6f06a2f2300f18880420089a4c095c06b38def2"
+  },
+  {
+    "path": "docs/UTOM_V2_2/blind_readiness_20261009/REPORT.md",
+    "hash": "c1102fb2885c1e1a718fff2f9d729380e1f21083c85596dc69d11b555b1974c1"
+  },
+  {
+    "path": "docs/UTOM_V2_2/blind_readiness_20261009/targeted-tests.txt",
+    "hash": "81e137397b9289d3bbaff61f44e855ba1529d9fbf1a84e7da58e0b610935275d"
+  },
+  {
+    "path": "docs/UTOM_V2_2/blind_readiness_20261009/verification.json",
+    "hash": "e21994e5de44bfc15519735bdfd6b8a5bf88110304dba04ffaa1bb754ccb3fc2"
+  }
+]

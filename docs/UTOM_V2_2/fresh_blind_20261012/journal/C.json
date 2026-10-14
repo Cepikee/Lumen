@@ -1,0 +1,1896 @@
+{
+  "id": "C",
+  "text": "Az exportőrök szövetségének mérlegelése szerint a megrendelések értéke meghaladhatja a 8 milliárd eurót. Ebből a hajógyártókra jutó rész 31 százalék, az előző negyedévhez képest pedig 6 százalékkal bővült a kivitel. A közzététel 2027. február 18-án 14 órakor történt.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 2,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 3
+      },
+      {
+        "start": 3,
+        "end": 13,
+        "text": "exportőrök",
+        "lemma": "exportőr",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur"
+        },
+        "dep": "nmod:att",
+        "headStart": 14
+      },
+      {
+        "start": 14,
+        "end": 27,
+        "text": "szövetségének",
+        "lemma": "szövetség",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Gen",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nmod:att",
+        "headStart": 28
+      },
+      {
+        "start": 28,
+        "end": 39,
+        "text": "mérlegelése",
+        "lemma": "mérlegelés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 71
+      },
+      {
+        "start": 40,
+        "end": 47,
+        "text": "szerint",
+        "lemma": "szerint",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 28
+      },
+      {
+        "start": 48,
+        "end": 49,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 50
+      },
+      {
+        "start": 50,
+        "end": 63,
+        "text": "megrendelések",
+        "lemma": "megrendelés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur"
+        },
+        "dep": "nmod:att",
+        "headStart": 64
+      },
+      {
+        "start": 64,
+        "end": 70,
+        "text": "értéke",
+        "lemma": "érték",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 71
+      },
+      {
+        "start": 71,
+        "end": 84,
+        "text": "meghaladhatja",
+        "lemma": "meghaladhat",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 71
+      },
+      {
+        "start": 85,
+        "end": 86,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 98
+      },
+      {
+        "start": 87,
+        "end": 88,
+        "text": "8",
+        "lemma": "8",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "compound",
+        "headStart": 89
+      },
+      {
+        "start": 89,
+        "end": 97,
+        "text": "milliárd",
+        "lemma": "milliárd",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 98
+      },
+      {
+        "start": 98,
+        "end": 103,
+        "text": "eurót",
+        "lemma": "euró",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 71
+      },
+      {
+        "start": 103,
+        "end": 104,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 71
+      },
+      {
+        "start": 105,
+        "end": 110,
+        "text": "Ebből",
+        "lemma": "ez",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "nmod:obl",
+        "headStart": 140
+      },
+      {
+        "start": 111,
+        "end": 112,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 113
+      },
+      {
+        "start": 113,
+        "end": 126,
+        "text": "hajógyártókra",
+        "lemma": "hajógyártó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Plur"
+        },
+        "dep": "obl",
+        "headStart": 127
+      },
+      {
+        "start": 127,
+        "end": 131,
+        "text": "jutó",
+        "lemma": "jutó",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "VerbForm": "PartPres"
+        },
+        "dep": "amod:att",
+        "headStart": 132
+      },
+      {
+        "start": 132,
+        "end": 136,
+        "text": "rész",
+        "lemma": "rész",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 140
+      },
+      {
+        "start": 137,
+        "end": 139,
+        "text": "31",
+        "lemma": "31",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 140
+      },
+      {
+        "start": 140,
+        "end": 148,
+        "text": "százalék",
+        "lemma": "százalék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 140
+      },
+      {
+        "start": 148,
+        "end": 149,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 198
+      },
+      {
+        "start": 150,
+        "end": 152,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 159
+      },
+      {
+        "start": 153,
+        "end": 158,
+        "text": "előző",
+        "lemma": "előző",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 159
+      },
+      {
+        "start": 159,
+        "end": 170,
+        "text": "negyedévhez",
+        "lemma": "negyedév",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "All",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 198
+      },
+      {
+        "start": 171,
+        "end": 177,
+        "text": "képest",
+        "lemma": "képest",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 159
+      },
+      {
+        "start": 178,
+        "end": 183,
+        "text": "pedig",
+        "lemma": "pedig",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 198
+      },
+      {
+        "start": 184,
+        "end": 185,
+        "text": "6",
+        "lemma": "6",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 186
+      },
+      {
+        "start": 186,
+        "end": 197,
+        "text": "százalékkal",
+        "lemma": "százalék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ins",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 198
+      },
+      {
+        "start": 198,
+        "end": 204,
+        "text": "bővült",
+        "lemma": "bővül",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "csubj",
+        "headStart": 140
+      },
+      {
+        "start": 205,
+        "end": 206,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 207
+      },
+      {
+        "start": 207,
+        "end": 214,
+        "text": "kivitel",
+        "lemma": "kivitel",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 198
+      },
+      {
+        "start": 214,
+        "end": 215,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 140
+      },
+      {
+        "start": 216,
+        "end": 217,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 218
+      },
+      {
+        "start": 218,
+        "end": 228,
+        "text": "közzététel",
+        "lemma": "közzététel",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 259
+      },
+      {
+        "start": 229,
+        "end": 234,
+        "text": "2027.",
+        "lemma": "2027.",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 235
+      },
+      {
+        "start": 235,
+        "end": 242,
+        "text": "február",
+        "lemma": "február",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 243
+      },
+      {
+        "start": 243,
+        "end": 248,
+        "text": "18-án",
+        "lemma": "18.",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 259
+      },
+      {
+        "start": 249,
+        "end": 251,
+        "text": "14",
+        "lemma": "14",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 252
+      },
+      {
+        "start": 252,
+        "end": 258,
+        "text": "órakor",
+        "lemma": "óra",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Tem",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 259
+      },
+      {
+        "start": 259,
+        "end": 266,
+        "text": "történt",
+        "lemma": "történik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 259
+      },
+      {
+        "start": 266,
+        "end": 267,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 259
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 104,
+        "text": "Az exportőrök szövetségének mérlegelése szerint a megrendelések értéke meghaladhatja a 8 milliárd eurót."
+      },
+      {
+        "start": 105,
+        "end": 215,
+        "text": "Ebből a hajógyártókra jutó rész 31 százalék, az előző negyedévhez képest pedig 6 százalékkal bővült a kivitel."
+      },
+      {
+        "start": 216,
+        "end": 267,
+        "text": "A közzététel 2027. február 18-án 14 órakor történt."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": {
+          "mention": "exportőrök szövetségének",
+          "normalized": "exportőr szövetség",
+          "start": 3,
+          "end": 27,
+          "type": "local_source",
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 3,
+            "end": 27,
+            "textSpan": "exportőrök szövetségének"
+          }
+        },
+        "source": {
+          "mention": "exportőrök szövetségének",
+          "normalized": "exportőr szövetség",
+          "start": 3,
+          "end": 27,
+          "type": "local_source",
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 3,
+            "end": 27,
+            "textSpan": "exportőrök szövetségének"
+          }
+        },
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "szerint",
+        "content": {
+          "start": 47,
+          "end": 104,
+          "textSpan": " a megrendelések értéke meghaladhatja a 8 milliárd eurót."
+        },
+        "attribution": {
+          "label": "exportőrök szövetségének",
+          "normalized": "exportőr szövetség",
+          "evidenceSpan": {
+            "start": 3,
+            "end": 27,
+            "textSpan": "exportőrök szövetségének"
+          },
+          "propositionSpan": {
+            "start": 47,
+            "end": 104,
+            "textSpan": " a megrendelések értéke meghaladhatja a 8 milliárd eurót."
+          }
+        },
+        "action": "meghaladhat",
+        "actionSpan": {
+          "start": 71,
+          "end": 84,
+          "textSpan": "meghaladhatja"
+        },
+        "object": [
+          "euró"
+        ],
+        "numericArguments": [
+          {
+            "value": 8000000000,
+            "canonicalValue": 8000000000,
+            "unit": "EUR",
+            "semanticKind": "money",
+            "start": 87,
+            "end": 103,
+            "raw": "8 milliárd eurót",
+            "evidenceSpan": {
+              "start": 87,
+              "end": 103,
+              "textSpan": "8 milliárd eurót"
+            },
+            "owner": {
+              "mention": "eurót",
+              "normalized": "euró",
+              "start": 98,
+              "end": 103,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 98,
+                "end": 103,
+                "textSpan": "eurót"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "money",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 87,
+                "end": 88,
+                "textSpan": "8"
+              },
+              "targetSpan": {
+                "start": 98,
+                "end": 103,
+                "textSpan": "eurót"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "compound",
+                  "sourceSpan": {
+                    "start": 87,
+                    "end": 88,
+                    "textSpan": "8"
+                  },
+                  "targetSpan": {
+                    "start": 89,
+                    "end": 97,
+                    "textSpan": "milliárd"
+                  }
+                },
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 89,
+                    "end": 97,
+                    "textSpan": "milliárd"
+                  },
+                  "targetSpan": {
+                    "start": 98,
+                    "end": 103,
+                    "textSpan": "eurót"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 98,
+                    "end": 103,
+                    "textSpan": "eurót"
+                  },
+                  "targetSpan": {
+                    "start": 71,
+                    "end": 84,
+                    "textSpan": "meghaladhatja"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:104",
+              "semanticRole": "money",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 87,
+                    "end": 103,
+                    "textSpan": "8 milliárd eurót"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "finite_potential_wordform_candidate",
+                  "evidenceSpan": {
+                    "start": 71,
+                    "end": 84,
+                    "textSpan": "meghaladhatja"
+                  },
+                  "dependencyPath": []
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:104",
+              "clauseSpan": {
+                "start": 47,
+                "end": 104,
+                "textSpan": " a megrendelések értéke meghaladhatja a 8 milliárd eurót."
+              },
+              "predicateSpan": {
+                "start": 71,
+                "end": 84,
+                "textSpan": "meghaladhatja"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "compound",
+                  "sourceSpan": {
+                    "start": 87,
+                    "end": 88,
+                    "textSpan": "8"
+                  },
+                  "targetSpan": {
+                    "start": 89,
+                    "end": 97,
+                    "textSpan": "milliárd"
+                  }
+                },
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 89,
+                    "end": 97,
+                    "textSpan": "milliárd"
+                  },
+                  "targetSpan": {
+                    "start": 98,
+                    "end": 103,
+                    "textSpan": "eurót"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 98,
+                    "end": 103,
+                    "textSpan": "eurót"
+                  },
+                  "targetSpan": {
+                    "start": 71,
+                    "end": 84,
+                    "textSpan": "meghaladhatja"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": true,
+        "modalities": [
+          "reported",
+          "possible"
+        ],
+        "modality": "possible",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 104,
+          "textSpan": "Az exportőrök szövetségének mérlegelése szerint a megrendelések értéke meghaladhatja a 8 milliárd eurót."
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 104,
+          "textSpan": "Az exportőrök szövetségének mérlegelése szerint a megrendelések értéke meghaladhatja a 8 milliárd eurót."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:104",
+        "sourceEvidence": {
+          "rule": "possessive_np_event_nominal_evidential_marker",
+          "sourceSpan": {
+            "start": 3,
+            "end": 27,
+            "textSpan": "exportőrök szövetségének"
+          },
+          "reportingNominalSpan": {
+            "start": 28,
+            "end": 39,
+            "textSpan": "mérlegelése"
+          },
+          "markerSpan": {
+            "start": 40,
+            "end": 47,
+            "textSpan": "szerint"
+          },
+          "dependencyPath": [
+            {
+              "relation": "case",
+              "sourceSpan": {
+                "start": 40,
+                "end": 47,
+                "textSpan": "szerint"
+              },
+              "targetSpan": {
+                "start": 28,
+                "end": 39,
+                "textSpan": "mérlegelése"
+              }
+            },
+            {
+              "relation": "nmod:att",
+              "sourceSpan": {
+                "start": 3,
+                "end": 27,
+                "textSpan": "exportőrök szövetségének"
+              },
+              "targetSpan": {
+                "start": 28,
+                "end": 39,
+                "textSpan": "mérlegelése"
+              }
+            }
+          ],
+          "frameId": "dependency:0:104",
+          "resolutionStatus": "resolved"
+        },
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "megrendelések",
+              "normalized": "megrendelés",
+              "start": 50,
+              "end": 63,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 50,
+                "end": 63,
+                "textSpan": "megrendelések"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 50,
+                "end": 63,
+                "textSpan": "megrendelések"
+              },
+              "targetSpan": {
+                "start": 71,
+                "end": 84,
+                "textSpan": "meghaladhatja"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 50,
+                    "end": 63,
+                    "textSpan": "megrendelések"
+                  },
+                  "targetSpan": {
+                    "start": 64,
+                    "end": 70,
+                    "textSpan": "értéke"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 64,
+                    "end": 70,
+                    "textSpan": "értéke"
+                  },
+                  "targetSpan": {
+                    "start": 71,
+                    "end": 84,
+                    "textSpan": "meghaladhatja"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:104",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "eurót",
+              "normalized": "euró",
+              "start": 98,
+              "end": 103,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 98,
+                "end": 103,
+                "textSpan": "eurót"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 98,
+                "end": 103,
+                "textSpan": "eurót"
+              },
+              "targetSpan": {
+                "start": 71,
+                "end": 84,
+                "textSpan": "meghaladhatja"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 98,
+                    "end": 103,
+                    "textSpan": "eurót"
+                  },
+                  "targetSpan": {
+                    "start": 71,
+                    "end": 84,
+                    "textSpan": "meghaladhatja"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:104",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "finite_potential_wordform_candidate",
+              "evidenceSpan": {
+                "start": 71,
+                "end": 84,
+                "textSpan": "meghaladhatja"
+              },
+              "dependencyPath": []
+            }
+          ],
+          "frameId": "dependency:0:104",
+          "clauseSpan": {
+            "start": 47,
+            "end": 104,
+            "textSpan": " a megrendelések értéke meghaladhatja a 8 milliárd eurót."
+          },
+          "projectionAllowed": false
+        },
+        "reportingNominalRelationId": "nominal-source:28"
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 105,
+          "end": 148,
+          "textSpan": "Ebből a hajógyártókra jutó rész 31 százalék"
+        },
+        "attribution": null,
+        "action": "bővül",
+        "actionSpan": {
+          "start": 198,
+          "end": 204,
+          "textSpan": "bővült"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 31,
+            "canonicalValue": 31,
+            "unit": "%",
+            "semanticKind": "percentage",
+            "start": 137,
+            "end": 148,
+            "raw": "31 százalék",
+            "evidenceSpan": {
+              "start": 137,
+              "end": 148,
+              "textSpan": "31 százalék"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 137,
+                    "end": 148,
+                    "textSpan": "31 százalék"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:105:148",
+              "clauseSpan": {
+                "start": 105,
+                "end": 148,
+                "textSpan": "Ebből a hajógyártókra jutó rész 31 százalék"
+              },
+              "predicateSpan": {
+                "start": 198,
+                "end": 204,
+                "textSpan": "bővült"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 137,
+                    "end": 139,
+                    "textSpan": "31"
+                  },
+                  "targetSpan": {
+                    "start": 140,
+                    "end": 148,
+                    "textSpan": "százalék"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 105,
+          "end": 148,
+          "textSpan": "Ebből a hajógyártókra jutó rész 31 százalék"
+        },
+        "propositionSpan": {
+          "start": 105,
+          "end": 148,
+          "textSpan": "Ebből a hajógyártókra jutó rész 31 százalék"
+        },
+        "canonicalProjectionAllowed": false,
+        "actionInherited": true,
+        "frameId": "dependency:105:148",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "negyedévhez",
+            "normalized": "negyedév",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "All",
+            "start": 159,
+            "end": 170,
+            "evidenceSpan": {
+              "start": 159,
+              "end": 170,
+              "textSpan": "negyedévhez"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 150,
+          "end": 215,
+          "textSpan": "az előző negyedévhez képest pedig 6 százalékkal bővült a kivitel."
+        },
+        "attribution": null,
+        "action": "bővül",
+        "actionSpan": {
+          "start": 198,
+          "end": 204,
+          "textSpan": "bővült"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 6,
+            "canonicalValue": 6,
+            "unit": "%",
+            "semanticKind": "percentage",
+            "start": 184,
+            "end": 197,
+            "raw": "6 százalékkal",
+            "evidenceSpan": {
+              "start": 184,
+              "end": 197,
+              "textSpan": "6 százalékkal"
+            },
+            "owner": {
+              "mention": "százalékkal",
+              "normalized": "százalék",
+              "start": 186,
+              "end": 197,
+              "type": "referent",
+              "case": "Ins",
+              "evidenceSpan": {
+                "start": 186,
+                "end": 197,
+                "textSpan": "százalékkal"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "percentage",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 184,
+                "end": 185,
+                "textSpan": "6"
+              },
+              "targetSpan": {
+                "start": 186,
+                "end": 197,
+                "textSpan": "százalékkal"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 184,
+                    "end": 185,
+                    "textSpan": "6"
+                  },
+                  "targetSpan": {
+                    "start": 186,
+                    "end": 197,
+                    "textSpan": "százalékkal"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 186,
+                    "end": 197,
+                    "textSpan": "százalékkal"
+                  },
+                  "targetSpan": {
+                    "start": 198,
+                    "end": 204,
+                    "textSpan": "bővült"
+                  }
+                }
+              ],
+              "frameId": "dependency:150:215",
+              "semanticRole": "percentage",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 184,
+                    "end": 197,
+                    "textSpan": "6 százalékkal"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:150:215",
+              "clauseSpan": {
+                "start": 150,
+                "end": 215,
+                "textSpan": "az előző negyedévhez képest pedig 6 százalékkal bővült a kivitel."
+              },
+              "predicateSpan": {
+                "start": 198,
+                "end": 204,
+                "textSpan": "bővült"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 184,
+                    "end": 185,
+                    "textSpan": "6"
+                  },
+                  "targetSpan": {
+                    "start": 186,
+                    "end": 197,
+                    "textSpan": "százalékkal"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 186,
+                    "end": 197,
+                    "textSpan": "százalékkal"
+                  },
+                  "targetSpan": {
+                    "start": 198,
+                    "end": 204,
+                    "textSpan": "bővült"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 150,
+          "end": 215,
+          "textSpan": "az előző negyedévhez képest pedig 6 százalékkal bővült a kivitel."
+        },
+        "propositionSpan": {
+          "start": 150,
+          "end": 215,
+          "textSpan": "az előző negyedévhez képest pedig 6 százalékkal bővült a kivitel."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:150:215",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "18-án",
+            "normalized": "18.",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 243,
+            "end": 248,
+            "evidenceSpan": {
+              "start": 243,
+              "end": 248,
+              "textSpan": "18-án"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 216,
+          "end": 267,
+          "textSpan": "A közzététel 2027. február 18-án 14 órakor történt."
+        },
+        "attribution": null,
+        "action": "történik",
+        "actionSpan": {
+          "start": 259,
+          "end": 266,
+          "textSpan": "történt"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 229,
+            "end": 248,
+            "raw": "2027. február 18-án",
+            "value": {
+              "year": 2027,
+              "month": 2,
+              "day": 18,
+              "part": null
+            },
+            "canonicalValue": {
+              "year": 2027,
+              "month": 2,
+              "day": 18,
+              "part": null
+            },
+            "semanticKind": "calendar_date",
+            "unit": "calendar",
+            "property": "date",
+            "temporalRole": "date",
+            "evidenceSpan": {
+              "start": 229,
+              "end": 248,
+              "textSpan": "2027. február 18-án"
+            },
+            "binding": "resolved",
+            "ownerType": "semantic_argument",
+            "owner": {
+              "mention": "18-án",
+              "evidenceSpan": {
+                "start": 243,
+                "end": 248,
+                "textSpan": "18-án"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 229,
+                "end": 248,
+                "textSpan": "2027. február 18-án"
+              },
+              "targetSpan": {
+                "start": 259,
+                "end": 266,
+                "textSpan": "történt"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 235,
+                    "end": 242,
+                    "textSpan": "február"
+                  },
+                  "targetSpan": {
+                    "start": 243,
+                    "end": 248,
+                    "textSpan": "18-án"
+                  }
+                },
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 229,
+                    "end": 234,
+                    "textSpan": "2027."
+                  },
+                  "targetSpan": {
+                    "start": 235,
+                    "end": 242,
+                    "textSpan": "február"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 243,
+                    "end": 248,
+                    "textSpan": "18-án"
+                  },
+                  "targetSpan": {
+                    "start": 259,
+                    "end": 266,
+                    "textSpan": "történt"
+                  }
+                }
+              ],
+              "frameId": "dependency:216:267",
+              "semanticRole": "date",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 229,
+                    "end": 248,
+                    "textSpan": "2027. február 18-án"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:216:267",
+              "clauseSpan": {
+                "start": 216,
+                "end": 267,
+                "textSpan": "A közzététel 2027. február 18-án 14 órakor történt."
+              },
+              "predicateSpan": {
+                "start": 259,
+                "end": 266,
+                "textSpan": "történt"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 229,
+                    "end": 234,
+                    "textSpan": "2027."
+                  },
+                  "targetSpan": {
+                    "start": 235,
+                    "end": 242,
+                    "textSpan": "február"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 235,
+                    "end": 242,
+                    "textSpan": "február"
+                  },
+                  "targetSpan": {
+                    "start": 243,
+                    "end": 248,
+                    "textSpan": "18-án"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 243,
+                    "end": 248,
+                    "textSpan": "18-án"
+                  },
+                  "targetSpan": {
+                    "start": 259,
+                    "end": 266,
+                    "textSpan": "történt"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "start": 249,
+            "end": 258,
+            "raw": "14 órakor",
+            "value": {
+              "hour": 14,
+              "minute": 0
+            },
+            "canonicalValue": {
+              "hour": 14,
+              "minute": 0
+            },
+            "semanticKind": "clock_time",
+            "unit": "clock",
+            "property": "time",
+            "temporalRole": "time",
+            "evidenceSpan": {
+              "start": 249,
+              "end": 258,
+              "textSpan": "14 órakor"
+            },
+            "binding": "resolved",
+            "ownerType": "semantic_argument",
+            "owner": {
+              "mention": "órakor",
+              "evidenceSpan": {
+                "start": 252,
+                "end": 258,
+                "textSpan": "órakor"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 249,
+                "end": 258,
+                "textSpan": "14 órakor"
+              },
+              "targetSpan": {
+                "start": 259,
+                "end": 266,
+                "textSpan": "történt"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 252,
+                    "end": 258,
+                    "textSpan": "órakor"
+                  },
+                  "targetSpan": {
+                    "start": 259,
+                    "end": 266,
+                    "textSpan": "történt"
+                  }
+                }
+              ],
+              "frameId": "dependency:216:267",
+              "semanticRole": "time",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 249,
+                    "end": 258,
+                    "textSpan": "14 órakor"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:216:267",
+              "clauseSpan": {
+                "start": 216,
+                "end": 267,
+                "textSpan": "A közzététel 2027. február 18-án 14 órakor történt."
+              },
+              "predicateSpan": {
+                "start": 259,
+                "end": 266,
+                "textSpan": "történt"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 249,
+                    "end": 251,
+                    "textSpan": "14"
+                  },
+                  "targetSpan": {
+                    "start": 252,
+                    "end": 258,
+                    "textSpan": "órakor"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 252,
+                    "end": 258,
+                    "textSpan": "órakor"
+                  },
+                  "targetSpan": {
+                    "start": 259,
+                    "end": 266,
+                    "textSpan": "történt"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 216,
+          "end": 267,
+          "textSpan": "A közzététel 2027. február 18-án 14 órakor történt."
+        },
+        "propositionSpan": {
+          "start": 216,
+          "end": 267,
+          "textSpan": "A közzététel 2027. február 18-án 14 órakor történt."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:216:267",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "február",
+              "normalized": "február",
+              "start": 235,
+              "end": 242,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 235,
+                "end": 242,
+                "textSpan": "február"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 235,
+                "end": 242,
+                "textSpan": "február"
+              },
+              "targetSpan": {
+                "start": 259,
+                "end": 266,
+                "textSpan": "történt"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 235,
+                    "end": 242,
+                    "textSpan": "február"
+                  },
+                  "targetSpan": {
+                    "start": 243,
+                    "end": 248,
+                    "textSpan": "18-án"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 243,
+                    "end": 248,
+                    "textSpan": "18-án"
+                  },
+                  "targetSpan": {
+                    "start": 259,
+                    "end": 266,
+                    "textSpan": "történt"
+                  }
+                }
+              ],
+              "frameId": "dependency:216:267",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": [
+      {
+        "id": "nominal-source:28",
+        "source": {
+          "mention": "exportőrök szövetségének",
+          "normalized": "exportőr szövetség",
+          "start": 3,
+          "end": 27,
+          "type": "local_source",
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 3,
+            "end": 27,
+            "textSpan": "exportőrök szövetségének"
+          }
+        },
+        "reportingNominal": {
+          "start": 28,
+          "end": 39,
+          "textSpan": "mérlegelése"
+        },
+        "markerSpan": {
+          "start": 40,
+          "end": 47,
+          "textSpan": "szerint"
+        },
+        "predicateSpan": {
+          "start": 71,
+          "end": 84,
+          "textSpan": "meghaladhatja"
+        },
+        "binding": "resolved",
+        "rule": "possessive_np_event_nominal_evidential_marker",
+        "evidenceSpan": {
+          "start": 3,
+          "end": 47,
+          "textSpan": "exportőrök szövetségének mérlegelése szerint"
+        },
+        "dependencyEvidence": [
+          {
+            "relation": "case",
+            "sourceSpan": {
+              "start": 40,
+              "end": 47,
+              "textSpan": "szerint"
+            },
+            "targetSpan": {
+              "start": 28,
+              "end": 39,
+              "textSpan": "mérlegelése"
+            }
+          },
+          {
+            "relation": "nmod:att",
+            "sourceSpan": {
+              "start": 3,
+              "end": 27,
+              "textSpan": "exportőrök szövetségének"
+            },
+            "targetSpan": {
+              "start": 28,
+              "end": 39,
+              "textSpan": "mérlegelése"
+            }
+          }
+        ],
+        "unresolvedReasons": []
+      }
+    ]
+  }
+}

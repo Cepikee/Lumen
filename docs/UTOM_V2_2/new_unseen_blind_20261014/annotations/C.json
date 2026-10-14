@@ -1,0 +1,836 @@
+{
+  "id": "C",
+  "raw": "Az ügyfélnek Varga Noémi kárszakértő magyarázta el: „Áradás után a pince biztosítása nem szűnik meg automatikusan.” A biztosító feltétellapjából az olvasható ki, hogy beázáskor a térítés elérheti a 650 ezer forintot, de az önrész 12 százalék marad. Egy kézzel odavetett „Hetedik” szó mellől hiányzik, hogy ügyfelet vagy szerződést soroltak-e be.",
+  "rawSha256": "12b7f24710e8e43e6112968dfc35474f9984589861e52fe9d4bf849a3afd2ece",
+  "annotationSha256": "8906e62819adb32e090d78ab4ca175cffc90d1c987c028239bf579eaae11123d",
+  "sentenceCount": 3,
+  "tokenCount": 62,
+  "environmentFingerprint": "143242eddc17f94ea729a1b430c5eac9d5e47dd7d27b5ebdd29c7c6961882f47",
+  "model": {
+    "type": "ready",
+    "model": "hu_core_news_md",
+    "version": "3.8.0",
+    "loadMs": 1160.3809050000002
+  },
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 2,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 3
+      },
+      {
+        "start": 3,
+        "end": 12,
+        "text": "ügyfélnek",
+        "lemma": "ügyfél",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Sing"
+        },
+        "dep": "iobj",
+        "headStart": 37
+      },
+      {
+        "start": 13,
+        "end": 18,
+        "text": "Varga",
+        "lemma": "Varga",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 25
+      },
+      {
+        "start": 19,
+        "end": 24,
+        "text": "Noémi",
+        "lemma": "Noémi",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 13
+      },
+      {
+        "start": 25,
+        "end": 36,
+        "text": "kárszakértő",
+        "lemma": "kárszakértő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 37
+      },
+      {
+        "start": 37,
+        "end": 47,
+        "text": "magyarázta",
+        "lemma": "magyaráz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 37
+      },
+      {
+        "start": 48,
+        "end": 50,
+        "text": "el",
+        "lemma": "el",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 37
+      },
+      {
+        "start": 50,
+        "end": 51,
+        "text": ":",
+        "lemma": ":",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 89
+      },
+      {
+        "start": 52,
+        "end": 53,
+        "text": "„",
+        "lemma": "„",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 53
+      },
+      {
+        "start": 53,
+        "end": 59,
+        "text": "Áradás",
+        "lemma": "Áradás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 89
+      },
+      {
+        "start": 60,
+        "end": 64,
+        "text": "után",
+        "lemma": "után",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 53
+      },
+      {
+        "start": 65,
+        "end": 66,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 67
+      },
+      {
+        "start": 67,
+        "end": 72,
+        "text": "pince",
+        "lemma": "pince",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 73
+      },
+      {
+        "start": 73,
+        "end": 84,
+        "text": "biztosítása",
+        "lemma": "biztosítás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 89
+      },
+      {
+        "start": 85,
+        "end": 88,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 89
+      },
+      {
+        "start": 89,
+        "end": 95,
+        "text": "szűnik",
+        "lemma": "szűnik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 37
+      },
+      {
+        "start": 96,
+        "end": 99,
+        "text": "meg",
+        "lemma": "meg",
+        "pos": "PART",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 89
+      },
+      {
+        "start": 100,
+        "end": 113,
+        "text": "automatikusan",
+        "lemma": "automatikus",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Ess",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "advmod:mode",
+        "headStart": 89
+      },
+      {
+        "start": 113,
+        "end": 114,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 37
+      },
+      {
+        "start": 114,
+        "end": 115,
+        "text": "”",
+        "lemma": "”",
+        "pos": "X",
+        "morph": {},
+        "dep": "obj",
+        "headStart": 148
+      },
+      {
+        "start": 116,
+        "end": 117,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 118
+      },
+      {
+        "start": 118,
+        "end": 127,
+        "text": "biztosító",
+        "lemma": "biztosító",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 128
+      },
+      {
+        "start": 128,
+        "end": 144,
+        "text": "feltétellapjából",
+        "lemma": "feltétellapj",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 148
+      },
+      {
+        "start": 145,
+        "end": 147,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "nsubj",
+        "headStart": 148
+      },
+      {
+        "start": 148,
+        "end": 157,
+        "text": "olvasható",
+        "lemma": "olvasható",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "VerbForm": "PartPres"
+        },
+        "dep": "ROOT",
+        "headStart": 148
+      },
+      {
+        "start": 158,
+        "end": 160,
+        "text": "ki",
+        "lemma": "ki",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 148
+      },
+      {
+        "start": 160,
+        "end": 161,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 187
+      },
+      {
+        "start": 162,
+        "end": 166,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 187
+      },
+      {
+        "start": 167,
+        "end": 176,
+        "text": "beázáskor",
+        "lemma": "beázás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Tem",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 187
+      },
+      {
+        "start": 177,
+        "end": 178,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 179
+      },
+      {
+        "start": 179,
+        "end": 186,
+        "text": "térítés",
+        "lemma": "térítés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 187
+      },
+      {
+        "start": 187,
+        "end": 195,
+        "text": "elérheti",
+        "lemma": "elérhet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "advcl",
+        "headStart": 148
+      },
+      {
+        "start": 196,
+        "end": 197,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 207
+      },
+      {
+        "start": 198,
+        "end": 201,
+        "text": "650",
+        "lemma": "650",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "compound",
+        "headStart": 202
+      },
+      {
+        "start": 202,
+        "end": 206,
+        "text": "ezer",
+        "lemma": "ezer",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 207
+      },
+      {
+        "start": 207,
+        "end": 215,
+        "text": "forintot",
+        "lemma": "forint",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 187
+      },
+      {
+        "start": 215,
+        "end": 216,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 242
+      },
+      {
+        "start": 217,
+        "end": 219,
+        "text": "de",
+        "lemma": "de",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 242
+      },
+      {
+        "start": 220,
+        "end": 222,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 223
+      },
+      {
+        "start": 223,
+        "end": 229,
+        "text": "önrész",
+        "lemma": "önrész",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 233
+      },
+      {
+        "start": 230,
+        "end": 232,
+        "text": "12",
+        "lemma": "12",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 233
+      },
+      {
+        "start": 233,
+        "end": 241,
+        "text": "százalék",
+        "lemma": "százalék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 242
+      },
+      {
+        "start": 242,
+        "end": 247,
+        "text": "marad",
+        "lemma": "marad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 187
+      },
+      {
+        "start": 247,
+        "end": 248,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 148
+      },
+      {
+        "start": 249,
+        "end": 252,
+        "text": "Egy",
+        "lemma": "egy",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "det",
+        "headStart": 270
+      },
+      {
+        "start": 253,
+        "end": 259,
+        "text": "kézzel",
+        "lemma": "kéz",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ins",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 260
+      },
+      {
+        "start": 260,
+        "end": 269,
+        "text": "odavetett",
+        "lemma": "odavetett",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing",
+          "VerbForm": "PartPast"
+        },
+        "dep": "amod:att",
+        "headStart": 270
+      },
+      {
+        "start": 270,
+        "end": 271,
+        "text": "„",
+        "lemma": "„",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "nsubj",
+        "headStart": 291
+      },
+      {
+        "start": 271,
+        "end": 278,
+        "text": "Hetedik",
+        "lemma": "Hetedik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "orphan",
+        "headStart": 291
+      },
+      {
+        "start": 278,
+        "end": 279,
+        "text": "”",
+        "lemma": "”",
+        "pos": "X",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 271
+      },
+      {
+        "start": 280,
+        "end": 283,
+        "text": "szó",
+        "lemma": "szó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 291
+      },
+      {
+        "start": 284,
+        "end": 290,
+        "text": "mellől",
+        "lemma": "mellől",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 280
+      },
+      {
+        "start": 291,
+        "end": 299,
+        "text": "hiányzik",
+        "lemma": "hiányzik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 291
+      },
+      {
+        "start": 299,
+        "end": 300,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 331
+      },
+      {
+        "start": 301,
+        "end": 305,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 331
+      },
+      {
+        "start": 306,
+        "end": 314,
+        "text": "ügyfelet",
+        "lemma": "ügyfél",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 331
+      },
+      {
+        "start": 315,
+        "end": 319,
+        "text": "vagy",
+        "lemma": "vagy",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 320
+      },
+      {
+        "start": 320,
+        "end": 330,
+        "text": "szerződést",
+        "lemma": "szerződés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 306
+      },
+      {
+        "start": 331,
+        "end": 339,
+        "text": "soroltak",
+        "lemma": "sorol",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "csubj",
+        "headStart": 291
+      },
+      {
+        "start": 339,
+        "end": 341,
+        "text": "-e",
+        "lemma": "-e",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Int"
+        },
+        "dep": "advmod:que",
+        "headStart": 331
+      },
+      {
+        "start": 342,
+        "end": 344,
+        "text": "be",
+        "lemma": "be",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 331
+      },
+      {
+        "start": 344,
+        "end": 345,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 291
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 114,
+        "text": "Az ügyfélnek Varga Noémi kárszakértő magyarázta el: „Áradás után a pince biztosítása nem szűnik meg automatikusan."
+      },
+      {
+        "start": 114,
+        "end": 248,
+        "text": "” A biztosító feltétellapjából az olvasható ki, hogy beázáskor a térítés elérheti a 650 ezer forintot, de az önrész 12 százalék marad."
+      },
+      {
+        "start": 249,
+        "end": 345,
+        "text": "Egy kézzel odavetett „Hetedik” szó mellől hiányzik, hogy ügyfelet vagy szerződést soroltak-e be."
+      }
+    ],
+    "entities": [
+      {
+        "start": 13,
+        "end": 24,
+        "text": "Varga Noémi",
+        "label": "PER"
+      }
+    ]
+  }
+}

@@ -14,6 +14,7 @@ export default function ProfileMenu() {
   const [open, setOpen] = useState(false);
   const [modal, setModal] = useState<null | "profile" | "settings">(null);
   const [logoutError, setLogoutError] = useState(false);
+  const [failedAvatar, setFailedAvatar] = useState<string | null>(null);
 
   // 🔥 user után jöhet minden, ami user-t használ
   const currentFrame = PREMIUM_FRAMES.find((f) => f.id === user?.avatar_frame);
@@ -40,6 +41,7 @@ export default function ProfileMenu() {
         role="button"
         tabIndex={0}
         aria-label="Profil menü megnyitása"
+        aria-expanded={open}
         onClick={() => setOpen(!open)}
         onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") {
@@ -49,22 +51,19 @@ export default function ProfileMenu() {
         }}
       >
         <div className="avatar-inner">
-          {avatarUrl ? (
-            <img src={avatarUrl} alt="avatar" className="avatar-image" />
+          {avatarUrl && failedAvatar !== avatarUrl ? (
+            <img src={avatarUrl} alt="avatar" className="avatar-image" onError={() => setFailedAvatar(avatarUrl)} />
           ) : (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                background: "transparent",
-              }}
-            />
+            <svg className="avatar-fallback" viewBox="0 0 40 40" aria-hidden="true">
+              <circle cx="20" cy="15" r="7" fill="currentColor" />
+              <path d="M7 36a13 13 0 0 1 26 0" fill="currentColor" />
+            </svg>
           )}
         </div>
 
         {/* Prémium keret overlay */}
         {premiumActive && currentFrame && (
-          <>
+          <div className="profile-frame-overlay" aria-hidden="true">
             {currentFrame.type === "css" && (
   <div
     key={currentFrame.id}   // 🔥 EZ A FIX
@@ -80,7 +79,7 @@ export default function ProfileMenu() {
                 alt=""
               />
             )}
-          </>
+          </div>
         )}
       </div>
 

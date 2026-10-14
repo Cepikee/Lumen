@@ -1,0 +1,40 @@
+{
+  "createdAt": "2026-10-12T07:32:16.820Z",
+  "branch": "develop/utom-recovery",
+  "head": "d145120c6e044b4f25d1d7b94e87846652ef80ba",
+  "testsBefore": {
+    "exitCode": 0,
+    "tests": 424,
+    "pass": 424,
+    "fail": 0,
+    "testFiles": 25
+  },
+  "testsAfter": {
+    "tests": 424,
+    "pass": 424,
+    "fail": 0,
+    "exitCode": 0
+  },
+  "frozenFileCount": 168,
+  "changedFrozenFiles": [],
+  "trackedDiffSha256Before": "18d84da90199d39df00a2dbe10a9a5c94dab61cebcbfa97bddd144f1dfc6dc3c",
+  "trackedDiffSha256After": "18d84da90199d39df00a2dbe10a9a5c94dab61cebcbfa97bddd144f1dfc6dc3c",
+  "workingTreeOutsideMeasurementUnchanged": true,
+  "changedInputFiles": [],
+  "journalCount": 20,
+  "journalMismatch": [],
+  "firstPassRawSha256": "061fbdcd504f1fcc9df5b8db6c5ce9a09773e0b1b5ada6862ab51f10efa3e0a2",
+  "novelty": {
+    "previousTextRecordsChecked": 88,
+    "exactNormalizedSentenceCollisions": [],
+    "scope": "real-text-a fixture JSON and SECOND corpus; lexical screening is not proof of structural independence. New wording/combinations manually reviewed; standard linguistic constructions intentionally shared."
+  },
+  "canonicalProjectionOff": true,
+  "inferenceCalls": 20,
+  "replays": 0,
+  "engineEdits": 0,
+  "testEdits": 0,
+  "paidAiCalls": 0,
+  "externalProviderCalls": 0,
+  "measurementIntegrity": "PASS"
+}

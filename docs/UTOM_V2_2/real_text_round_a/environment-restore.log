@@ -1,0 +1,10 @@
+Looking in links: /tmp/utom-role-wheel-cache
+Processing /tmp/utom-role-wheel-cache/hu_core_news_md-3.8.0-py3-none-any.whl
+Processing /tmp/utom-role-wheel-cache/huspacy-0.12.1-py3-none-any.whl
+Processing /tmp/utom-role-wheel-cache/spacy-3.8.16-cp312-cp312-manylinux_2_24_x86_64.whl
+Processing /tmp/utom-role-wheel-cache/numpy-2.5.3-cp312-cp312-manylinux_2_27_x86_64.whl
+Processing /tmp/utom-role-wheel-cache/psutil-7.2.2-cp36-abi3-manylinux_2_12_x86_64.whl
+Processing /tmp/utom-role-wheel-cache/packaging-21.3-py3-none-any.whl (from huspacy==0.12.1)
+INFO: pip is looking at multiple versions of spacy to determine which version is compatible with other requirements. This could take a while.
+ERROR: Could not find a version that satisfies the requirement spacy-legacy<3.1.0,>=3.0.11 (from spacy) (from versions: none)
+ERROR: No matching distribution found for spacy-legacy<3.1.0,>=3.0.11

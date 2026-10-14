@@ -1,0 +1,5 @@
+
+> projekt2025new@0.1.0 check:imports
+> node scripts/check-local-imports.cjs
+
+Minden statikusan felismerhető helyi import feloldható.

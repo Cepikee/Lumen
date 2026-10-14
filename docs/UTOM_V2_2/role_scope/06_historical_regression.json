@@ -1,0 +1,3322 @@
+{
+  "core": {
+    "benchmarkVersion": "v22.benchmark.1",
+    "evaluatorVersion": "v22.evaluator.3",
+    "contractVersion": "v22.intelligence-quality-baseline.2",
+    "scenarioCount": 20,
+    "articleCount": 45,
+    "expectedCounts": {
+      "entities": 23,
+      "relations": 2,
+      "claims": 46,
+      "events": 2,
+      "conflicts": 3,
+      "changes": 2,
+      "omissions": 3
+    },
+    "predictedCounts": {
+      "entities": 25,
+      "relations": 2,
+      "claims": 43,
+      "events": 2,
+      "conflicts": 3,
+      "changes": 1,
+      "omissions": 2
+    },
+    "metrics": {
+      "entityPrecision": 0.84,
+      "entityRecall": 0.9130434782608695,
+      "relationPrecision": 1,
+      "relationRecall": 1,
+      "claimPrecision": 0.6511627906976745,
+      "claimRecall": 0.6086956521739131,
+      "eventMatchingAccuracy": 1,
+      "conflictPrecision": 1,
+      "conflictRecall": 1,
+      "falseConflictRate": 0,
+      "sourceOmissionPrecision": 1,
+      "sourceOmissionRecall": 0.6666666666666666,
+      "temporalChangeRecall": 0.5,
+      "identityAccuracy": 0.8571428571428571,
+      "unsupportedPredictionRate": 0.24358974358974358,
+      "attributionAccuracy": 0.6785714285714286,
+      "attributionEvaluated": 28,
+      "evidenceAccuracy": 1,
+      "evidenceEvaluated": 28,
+      "temporalAccuracy": 0.8214285714285714,
+      "temporalEvaluated": 28,
+      "negationAccuracy": 1,
+      "negationEvaluated": 28,
+      "modalityAccuracy": 0.8214285714285714,
+      "modalityEvaluated": 28,
+      "supportedClaimPrecision": 0.6511627906976745,
+      "supportedClaimRecall": 0.6086956521739131,
+      "supportedClaimExpected": 46,
+      "supportedClaimPredicted": 43,
+      "predictionCount": 78,
+      "groundedPredictionCount": 78,
+      "groundedPredictionRate": 1,
+      "semanticallySupportedPredictionCount": 78,
+      "semanticallySupportedPredictionRate": 1,
+      "goldMatchedPredictionCount": 59,
+      "goldCoveragePrecision": 0.7564102564102564,
+      "extraSupportedPredictionCount": 19,
+      "extraSupportedPredictionRate": 0.24358974358974358,
+      "trulyUnsupportedPredictionCount": 0,
+      "trulyUnsupportedPredictionRate": 0,
+      "informationCoverageScore": 0.717948717948718,
+      "criticalFactRecall": 0.775
+    },
+    "detail": {
+      "entity": {
+        "truePositive": 21,
+        "expected": 23,
+        "predicted": 25,
+        "falsePositive": 4,
+        "falseNegative": 2,
+        "precision": 0.84,
+        "recall": 0.9130434782608695
+      },
+      "relation": {
+        "truePositive": 2,
+        "expected": 2,
+        "predicted": 2,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 1,
+        "recall": 1
+      },
+      "claim": {
+        "truePositive": 28,
+        "expected": 46,
+        "predicted": 43,
+        "falsePositive": 15,
+        "falseNegative": 18,
+        "precision": 0.6511627906976745,
+        "recall": 0.6086956521739131
+      },
+      "supportedClaims": {
+        "truePositive": 28,
+        "expected": 46,
+        "predicted": 43,
+        "falsePositive": 15,
+        "falseNegative": 18,
+        "precision": 0.6511627906976745,
+        "recall": 0.6086956521739131,
+        "supportedExpected": 46,
+        "supportedPredicted": 43
+      },
+      "event": {
+        "truePositive": 2,
+        "expected": 2,
+        "predicted": 2,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 1,
+        "recall": 1
+      },
+      "conflict": {
+        "truePositive": 3,
+        "expected": 3,
+        "predicted": 3,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 1,
+        "recall": 1
+      },
+      "changes": {
+        "truePositive": 1,
+        "expected": 2,
+        "predicted": 1,
+        "falsePositive": 0,
+        "falseNegative": 1,
+        "precision": 1,
+        "recall": 0.5
+      },
+      "sourceOmission": {
+        "truePositive": 2,
+        "expected": 3,
+        "predicted": 2,
+        "falsePositive": 0,
+        "falseNegative": 1,
+        "precision": 1,
+        "recall": 0.6666666666666666
+      },
+      "quality": {
+        "attribution": {
+          "evaluated": 28,
+          "correct": 19,
+          "accuracy": 0.6785714285714286
+        },
+        "evidence": {
+          "evaluated": 28,
+          "correct": 28,
+          "accuracy": 1
+        },
+        "temporal": {
+          "evaluated": 28,
+          "correct": 23,
+          "accuracy": 0.8214285714285714
+        },
+        "negation": {
+          "evaluated": 28,
+          "correct": 28,
+          "accuracy": 1
+        },
+        "modality": {
+          "evaluated": 28,
+          "correct": 23,
+          "accuracy": 0.8214285714285714
+        }
+      },
+      "integrity": {
+        "predictionCount": 78,
+        "groundedPredictionCount": 78,
+        "groundedPredictionRate": 1,
+        "semanticallySupportedPredictionCount": 78,
+        "semanticallySupportedPredictionRate": 1,
+        "goldMatchedPredictionCount": 59,
+        "goldCoveragePrecision": 0.7564102564102564,
+        "extraSupportedPredictionCount": 19,
+        "extraSupportedPredictionRate": 0.24358974358974358,
+        "trulyUnsupportedPredictionCount": 0,
+        "trulyUnsupportedPredictionRate": 0
+      },
+      "informationCoverage": {
+        "score": 0.717948717948718,
+        "totalExpected": 78,
+        "totalMatched": 56,
+        "criticalExpected": 40,
+        "criticalMatched": 31,
+        "criticalRecall": 0.775,
+        "breakdown": {
+          "entities": {
+            "expected": 23,
+            "matched": 21,
+            "recall": 0.9130434782608695,
+            "criticalExpected": 13,
+            "criticalMatched": 13,
+            "criticalRecall": 1
+          },
+          "claims": {
+            "expected": 46,
+            "matched": 28,
+            "recall": 0.6086956521739131,
+            "criticalExpected": 18,
+            "criticalMatched": 11,
+            "criticalRecall": 0.6111111111111112
+          },
+          "relations": {
+            "expected": 2,
+            "matched": 2,
+            "recall": 1,
+            "criticalExpected": 2,
+            "criticalMatched": 2,
+            "criticalRecall": 1
+          },
+          "changes": {
+            "expected": 2,
+            "matched": 1,
+            "recall": 0.5,
+            "criticalExpected": 2,
+            "criticalMatched": 1,
+            "criticalRecall": 0.5
+          },
+          "omissions": {
+            "expected": 3,
+            "matched": 2,
+            "recall": 0.6666666666666666,
+            "criticalExpected": 3,
+            "criticalMatched": 2,
+            "criticalRecall": 0.6666666666666666
+          },
+          "events": {
+            "expected": 2,
+            "matched": 2,
+            "recall": 1,
+            "criticalExpected": 2,
+            "criticalMatched": 2,
+            "criticalRecall": 1
+          }
+        }
+      },
+      "identity": {
+        "evaluated": 21,
+        "correct": 18,
+        "accuracy": 0.8571428571428571
+      },
+      "scenarios": [
+        {
+          "id": "V22-S01",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            }
+          }
+        },
+        {
+          "id": "V22-S02",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S03",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 3,
+              "expected": 3,
+              "predicted": 3,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S04",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S05",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S06",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S07",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S08",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S09",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 0,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 2,
+              "falseNegative": 2,
+              "precision": 0,
+              "recall": 0
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S10",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S11",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 1,
+              "expected": 2,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": 1,
+              "recall": 0.5
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S12",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S13",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 1,
+              "expected": 2,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": 1,
+              "recall": 0.5
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S14",
+          "fields": {
+            "entities": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 3,
+              "falsePositive": 1,
+              "falseNegative": 0,
+              "precision": 0.6666666666666666,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "claims": {
+              "truePositive": 0,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 2,
+              "falseNegative": 2,
+              "precision": 0,
+              "recall": 0
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S15",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 2,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": 1,
+              "recall": 0.5
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 0,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 2,
+              "falseNegative": 2,
+              "precision": 0,
+              "recall": 0
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S16",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 3,
+              "expected": 3,
+              "predicted": 3,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S17",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            }
+          }
+        },
+        {
+          "id": "V22-S18",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 0,
+              "expected": 3,
+              "predicted": 2,
+              "falsePositive": 2,
+              "falseNegative": 3,
+              "precision": 0,
+              "recall": 0
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 1,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": null,
+              "recall": 0
+            }
+          }
+        },
+        {
+          "id": "V22-S19",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 0,
+              "expected": 3,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 3,
+              "precision": null,
+              "recall": 0
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 1,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": null,
+              "recall": 0
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "V22-S20",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 2,
+              "predicted": 4,
+              "falsePositive": 3,
+              "falseNegative": 1,
+              "precision": 0.25,
+              "recall": 0.5
+            },
+            "relations": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "claims": {
+              "truePositive": 0,
+              "expected": 4,
+              "predicted": 7,
+              "falsePositive": 7,
+              "falseNegative": 4,
+              "precision": 0,
+              "recall": 0
+            },
+            "events": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        }
+      ]
+    },
+    "falseConflictCount": 0,
+    "evaluatedScenarioIds": [
+      "V22-S01",
+      "V22-S02",
+      "V22-S03",
+      "V22-S04",
+      "V22-S05",
+      "V22-S06",
+      "V22-S07",
+      "V22-S08",
+      "V22-S09",
+      "V22-S10",
+      "V22-S11",
+      "V22-S12",
+      "V22-S13",
+      "V22-S14",
+      "V22-S15",
+      "V22-S16",
+      "V22-S17",
+      "V22-S18",
+      "V22-S19",
+      "V22-S20"
+    ],
+    "baselineNote": "A provider kimenetét a benchmark normalizációs határán értékeljük; a default mock szándékosan üres."
+  },
+  "dense": {
+    "benchmarkVersion": "v22.benchmark.1",
+    "evaluatorVersion": "v22.evaluator.3",
+    "contractVersion": "v22.intelligence-quality-baseline.2",
+    "scenarioCount": 5,
+    "articleCount": 15,
+    "expectedCounts": {
+      "entities": 20,
+      "relations": 5,
+      "claims": 120,
+      "events": 5,
+      "conflicts": 0,
+      "changes": 5,
+      "omissions": 5
+    },
+    "predictedCounts": {
+      "entities": 25,
+      "relations": 5,
+      "claims": 95,
+      "events": 7,
+      "conflicts": 0,
+      "changes": 5,
+      "omissions": 3
+    },
+    "metrics": {
+      "entityPrecision": 0.76,
+      "entityRecall": 0.95,
+      "relationPrecision": 1,
+      "relationRecall": 1,
+      "claimPrecision": 0.6526315789473685,
+      "claimRecall": 0.5166666666666667,
+      "eventMatchingAccuracy": 1,
+      "conflictPrecision": null,
+      "conflictRecall": null,
+      "falseConflictRate": null,
+      "sourceOmissionPrecision": 1,
+      "sourceOmissionRecall": 0.6,
+      "temporalChangeRecall": 1,
+      "identityAccuracy": 1,
+      "unsupportedPredictionRate": 0.29285714285714287,
+      "attributionAccuracy": 0.6153846153846154,
+      "attributionEvaluated": 65,
+      "evidenceAccuracy": 1,
+      "evidenceEvaluated": 65,
+      "temporalAccuracy": 0.7846153846153846,
+      "temporalEvaluated": 65,
+      "negationAccuracy": 1,
+      "negationEvaluated": 65,
+      "modalityAccuracy": 0.9384615384615385,
+      "modalityEvaluated": 65,
+      "supportedClaimPrecision": 0.6526315789473685,
+      "supportedClaimRecall": 0.5166666666666667,
+      "supportedClaimExpected": 120,
+      "supportedClaimPredicted": 95,
+      "predictionCount": 140,
+      "groundedPredictionCount": 140,
+      "groundedPredictionRate": 1,
+      "semanticallySupportedPredictionCount": 140,
+      "semanticallySupportedPredictionRate": 1,
+      "goldMatchedPredictionCount": 99,
+      "goldCoveragePrecision": 0.7071428571428572,
+      "extraSupportedPredictionCount": 41,
+      "extraSupportedPredictionRate": 0.29285714285714287,
+      "trulyUnsupportedPredictionCount": 0,
+      "trulyUnsupportedPredictionRate": 0,
+      "informationCoverageScore": 0.6375,
+      "criticalFactRecall": 0.6818181818181818
+    },
+    "detail": {
+      "entity": {
+        "truePositive": 19,
+        "expected": 20,
+        "predicted": 25,
+        "falsePositive": 6,
+        "falseNegative": 1,
+        "precision": 0.76,
+        "recall": 0.95
+      },
+      "relation": {
+        "truePositive": 5,
+        "expected": 5,
+        "predicted": 5,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 1,
+        "recall": 1
+      },
+      "claim": {
+        "truePositive": 62,
+        "expected": 120,
+        "predicted": 95,
+        "falsePositive": 33,
+        "falseNegative": 58,
+        "precision": 0.6526315789473685,
+        "recall": 0.5166666666666667
+      },
+      "supportedClaims": {
+        "truePositive": 62,
+        "expected": 120,
+        "predicted": 95,
+        "falsePositive": 33,
+        "falseNegative": 58,
+        "precision": 0.6526315789473685,
+        "recall": 0.5166666666666667,
+        "supportedExpected": 120,
+        "supportedPredicted": 95
+      },
+      "event": {
+        "truePositive": 5,
+        "expected": 5,
+        "predicted": 7,
+        "falsePositive": 2,
+        "falseNegative": 0,
+        "precision": 0.7142857142857143,
+        "recall": 1
+      },
+      "conflict": {
+        "truePositive": 0,
+        "expected": 0,
+        "predicted": 0,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": null,
+        "recall": null
+      },
+      "changes": {
+        "truePositive": 5,
+        "expected": 5,
+        "predicted": 5,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 1,
+        "recall": 1
+      },
+      "sourceOmission": {
+        "truePositive": 3,
+        "expected": 5,
+        "predicted": 3,
+        "falsePositive": 0,
+        "falseNegative": 2,
+        "precision": 1,
+        "recall": 0.6
+      },
+      "quality": {
+        "attribution": {
+          "evaluated": 65,
+          "correct": 40,
+          "accuracy": 0.6153846153846154
+        },
+        "evidence": {
+          "evaluated": 65,
+          "correct": 65,
+          "accuracy": 1
+        },
+        "temporal": {
+          "evaluated": 65,
+          "correct": 51,
+          "accuracy": 0.7846153846153846
+        },
+        "negation": {
+          "evaluated": 65,
+          "correct": 65,
+          "accuracy": 1
+        },
+        "modality": {
+          "evaluated": 65,
+          "correct": 61,
+          "accuracy": 0.9384615384615385
+        }
+      },
+      "integrity": {
+        "predictionCount": 140,
+        "groundedPredictionCount": 140,
+        "groundedPredictionRate": 1,
+        "semanticallySupportedPredictionCount": 140,
+        "semanticallySupportedPredictionRate": 1,
+        "goldMatchedPredictionCount": 99,
+        "goldCoveragePrecision": 0.7071428571428572,
+        "extraSupportedPredictionCount": 41,
+        "extraSupportedPredictionRate": 0.29285714285714287,
+        "trulyUnsupportedPredictionCount": 0,
+        "trulyUnsupportedPredictionRate": 0
+      },
+      "informationCoverage": {
+        "score": 0.6375,
+        "totalExpected": 160,
+        "totalMatched": 102,
+        "criticalExpected": 88,
+        "criticalMatched": 60,
+        "criticalRecall": 0.6818181818181818,
+        "breakdown": {
+          "entities": {
+            "expected": 20,
+            "matched": 19,
+            "recall": 0.95,
+            "criticalExpected": 15,
+            "criticalMatched": 14,
+            "criticalRecall": 0.9333333333333333
+          },
+          "claims": {
+            "expected": 120,
+            "matched": 65,
+            "recall": 0.5416666666666666,
+            "criticalExpected": 53,
+            "criticalMatched": 28,
+            "criticalRecall": 0.5283018867924528
+          },
+          "relations": {
+            "expected": 5,
+            "matched": 5,
+            "recall": 1,
+            "criticalExpected": 5,
+            "criticalMatched": 5,
+            "criticalRecall": 1
+          },
+          "changes": {
+            "expected": 5,
+            "matched": 5,
+            "recall": 1,
+            "criticalExpected": 5,
+            "criticalMatched": 5,
+            "criticalRecall": 1
+          },
+          "omissions": {
+            "expected": 5,
+            "matched": 3,
+            "recall": 0.6,
+            "criticalExpected": 5,
+            "criticalMatched": 3,
+            "criticalRecall": 0.6
+          },
+          "events": {
+            "expected": 5,
+            "matched": 5,
+            "recall": 1,
+            "criticalExpected": 5,
+            "criticalMatched": 5,
+            "criticalRecall": 1
+          }
+        }
+      },
+      "identity": {
+        "evaluated": 19,
+        "correct": 19,
+        "accuracy": 1
+      },
+      "scenarios": [
+        {
+          "id": "V22-D01",
+          "fields": {
+            "entities": {
+              "truePositive": 4,
+              "expected": 4,
+              "predicted": 5,
+              "falsePositive": 1,
+              "falseNegative": 0,
+              "precision": 0.8,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "claims": {
+              "truePositive": 17,
+              "expected": 24,
+              "predicted": 26,
+              "falsePositive": 9,
+              "falseNegative": 7,
+              "precision": 0.6538461538461539,
+              "recall": 0.7083333333333334
+            },
+            "events": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 2,
+              "falsePositive": 1,
+              "falseNegative": 0,
+              "precision": 0.5,
+              "recall": 1
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "omissions": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            }
+          }
+        },
+        {
+          "id": "V22-D02",
+          "fields": {
+            "entities": {
+              "truePositive": 4,
+              "expected": 4,
+              "predicted": 5,
+              "falsePositive": 1,
+              "falseNegative": 0,
+              "precision": 0.8,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "claims": {
+              "truePositive": 11,
+              "expected": 24,
+              "predicted": 17,
+              "falsePositive": 6,
+              "falseNegative": 13,
+              "precision": 0.6470588235294118,
+              "recall": 0.4583333333333333
+            },
+            "events": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "omissions": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            }
+          }
+        },
+        {
+          "id": "V22-D03",
+          "fields": {
+            "entities": {
+              "truePositive": 4,
+              "expected": 4,
+              "predicted": 4,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "claims": {
+              "truePositive": 12,
+              "expected": 24,
+              "predicted": 20,
+              "falsePositive": 8,
+              "falseNegative": 12,
+              "precision": 0.6,
+              "recall": 0.5
+            },
+            "events": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 2,
+              "falsePositive": 1,
+              "falseNegative": 0,
+              "precision": 0.5,
+              "recall": 1
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "omissions": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            }
+          }
+        },
+        {
+          "id": "V22-D04",
+          "fields": {
+            "entities": {
+              "truePositive": 3,
+              "expected": 4,
+              "predicted": 6,
+              "falsePositive": 3,
+              "falseNegative": 1,
+              "precision": 0.5,
+              "recall": 0.75
+            },
+            "relations": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "claims": {
+              "truePositive": 11,
+              "expected": 24,
+              "predicted": 17,
+              "falsePositive": 6,
+              "falseNegative": 13,
+              "precision": 0.6470588235294118,
+              "recall": 0.4583333333333333
+            },
+            "events": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 1,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": null,
+              "recall": 0
+            }
+          }
+        },
+        {
+          "id": "V22-D05",
+          "fields": {
+            "entities": {
+              "truePositive": 4,
+              "expected": 4,
+              "predicted": 5,
+              "falsePositive": 1,
+              "falseNegative": 0,
+              "precision": 0.8,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "claims": {
+              "truePositive": 11,
+              "expected": 24,
+              "predicted": 15,
+              "falsePositive": 4,
+              "falseNegative": 13,
+              "precision": 0.7333333333333333,
+              "recall": 0.4583333333333333
+            },
+            "events": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 1,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": null,
+              "recall": 0
+            }
+          }
+        }
+      ]
+    },
+    "falseConflictCount": 0,
+    "evaluatedScenarioIds": [
+      "V22-D01",
+      "V22-D02",
+      "V22-D03",
+      "V22-D04",
+      "V22-D05"
+    ],
+    "baselineNote": "A provider kimenetét a benchmark normalizációs határán értékeljük; a default mock szándékosan üres."
+  },
+  "heldout": {
+    "benchmarkVersion": "v22.heldout.1",
+    "evaluatorVersion": "v22.evaluator.3",
+    "contractVersion": "v22.intelligence-quality-baseline.2",
+    "scenarioCount": 12,
+    "articleCount": 26,
+    "expectedCounts": {
+      "entities": 37,
+      "relations": 2,
+      "claims": 39,
+      "events": 8,
+      "conflicts": 1,
+      "changes": 2,
+      "omissions": 2
+    },
+    "predictedCounts": {
+      "entities": 37,
+      "relations": 1,
+      "claims": 19,
+      "events": 6,
+      "conflicts": 1,
+      "changes": 0,
+      "omissions": 1
+    },
+    "metrics": {
+      "entityPrecision": 0.5405405405405406,
+      "entityRecall": 0.5405405405405406,
+      "relationPrecision": 1,
+      "relationRecall": 0.5,
+      "claimPrecision": 0.47368421052631576,
+      "claimRecall": 0.23076923076923078,
+      "eventMatchingAccuracy": 0.75,
+      "conflictPrecision": 1,
+      "conflictRecall": 1,
+      "falseConflictRate": 0,
+      "sourceOmissionPrecision": 1,
+      "sourceOmissionRecall": 0.5,
+      "temporalChangeRecall": 0,
+      "identityAccuracy": 0.95,
+      "unsupportedPredictionRate": 0.4153846153846154,
+      "attributionAccuracy": 0.7777777777777778,
+      "attributionEvaluated": 9,
+      "evidenceAccuracy": 1,
+      "evidenceEvaluated": 9,
+      "temporalAccuracy": 0.8888888888888888,
+      "temporalEvaluated": 9,
+      "negationAccuracy": 1,
+      "negationEvaluated": 9,
+      "modalityAccuracy": 0.6666666666666666,
+      "modalityEvaluated": 9,
+      "supportedClaimPrecision": 0.47368421052631576,
+      "supportedClaimRecall": 0.23076923076923078,
+      "supportedClaimExpected": 39,
+      "supportedClaimPredicted": 19,
+      "predictionCount": 65,
+      "groundedPredictionCount": 65,
+      "groundedPredictionRate": 1,
+      "semanticallySupportedPredictionCount": 65,
+      "semanticallySupportedPredictionRate": 1,
+      "goldMatchedPredictionCount": 39,
+      "goldCoveragePrecision": 0.6,
+      "extraSupportedPredictionCount": 26,
+      "extraSupportedPredictionRate": 0.4,
+      "trulyUnsupportedPredictionCount": 0,
+      "trulyUnsupportedPredictionRate": 0,
+      "informationCoverageScore": 0.4111111111111111,
+      "criticalFactRecall": 0.3815789473684211
+    },
+    "detail": {
+      "entity": {
+        "truePositive": 20,
+        "expected": 37,
+        "predicted": 37,
+        "falsePositive": 17,
+        "falseNegative": 17,
+        "precision": 0.5405405405405406,
+        "recall": 0.5405405405405406
+      },
+      "relation": {
+        "truePositive": 1,
+        "expected": 2,
+        "predicted": 1,
+        "falsePositive": 0,
+        "falseNegative": 1,
+        "precision": 1,
+        "recall": 0.5
+      },
+      "claim": {
+        "truePositive": 9,
+        "expected": 39,
+        "predicted": 19,
+        "falsePositive": 10,
+        "falseNegative": 30,
+        "precision": 0.47368421052631576,
+        "recall": 0.23076923076923078
+      },
+      "supportedClaims": {
+        "truePositive": 9,
+        "expected": 39,
+        "predicted": 19,
+        "falsePositive": 10,
+        "falseNegative": 30,
+        "precision": 0.47368421052631576,
+        "recall": 0.23076923076923078,
+        "supportedExpected": 39,
+        "supportedPredicted": 19
+      },
+      "event": {
+        "truePositive": 6,
+        "expected": 8,
+        "predicted": 6,
+        "falsePositive": 0,
+        "falseNegative": 2,
+        "precision": 1,
+        "recall": 0.75
+      },
+      "conflict": {
+        "truePositive": 1,
+        "expected": 1,
+        "predicted": 1,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 1,
+        "recall": 1
+      },
+      "changes": {
+        "truePositive": 0,
+        "expected": 2,
+        "predicted": 0,
+        "falsePositive": 0,
+        "falseNegative": 2,
+        "precision": null,
+        "recall": 0
+      },
+      "sourceOmission": {
+        "truePositive": 1,
+        "expected": 2,
+        "predicted": 1,
+        "falsePositive": 0,
+        "falseNegative": 1,
+        "precision": 1,
+        "recall": 0.5
+      },
+      "quality": {
+        "attribution": {
+          "evaluated": 9,
+          "correct": 7,
+          "accuracy": 0.7777777777777778
+        },
+        "evidence": {
+          "evaluated": 9,
+          "correct": 9,
+          "accuracy": 1
+        },
+        "temporal": {
+          "evaluated": 9,
+          "correct": 8,
+          "accuracy": 0.8888888888888888
+        },
+        "negation": {
+          "evaluated": 9,
+          "correct": 9,
+          "accuracy": 1
+        },
+        "modality": {
+          "evaluated": 9,
+          "correct": 6,
+          "accuracy": 0.6666666666666666
+        }
+      },
+      "integrity": {
+        "predictionCount": 65,
+        "groundedPredictionCount": 65,
+        "groundedPredictionRate": 1,
+        "semanticallySupportedPredictionCount": 65,
+        "semanticallySupportedPredictionRate": 1,
+        "goldMatchedPredictionCount": 39,
+        "goldCoveragePrecision": 0.6,
+        "extraSupportedPredictionCount": 26,
+        "extraSupportedPredictionRate": 0.4,
+        "trulyUnsupportedPredictionCount": 0,
+        "trulyUnsupportedPredictionRate": 0
+      },
+      "informationCoverage": {
+        "score": 0.4111111111111111,
+        "totalExpected": 90,
+        "totalMatched": 37,
+        "criticalExpected": 76,
+        "criticalMatched": 29,
+        "criticalRecall": 0.3815789473684211,
+        "breakdown": {
+          "entities": {
+            "expected": 37,
+            "matched": 20,
+            "recall": 0.5405405405405406,
+            "criticalExpected": 37,
+            "criticalMatched": 20,
+            "criticalRecall": 0.5405405405405406
+          },
+          "claims": {
+            "expected": 39,
+            "matched": 9,
+            "recall": 0.23076923076923078,
+            "criticalExpected": 39,
+            "criticalMatched": 9,
+            "criticalRecall": 0.23076923076923078
+          },
+          "relations": {
+            "expected": 2,
+            "matched": 1,
+            "recall": 0.5,
+            "criticalExpected": 0,
+            "criticalMatched": 0,
+            "criticalRecall": null
+          },
+          "changes": {
+            "expected": 2,
+            "matched": 0,
+            "recall": 0,
+            "criticalExpected": 0,
+            "criticalMatched": 0,
+            "criticalRecall": null
+          },
+          "omissions": {
+            "expected": 2,
+            "matched": 1,
+            "recall": 0.5,
+            "criticalExpected": 0,
+            "criticalMatched": 0,
+            "criticalRecall": null
+          },
+          "events": {
+            "expected": 8,
+            "matched": 6,
+            "recall": 0.75,
+            "criticalExpected": 0,
+            "criticalMatched": 0,
+            "criticalRecall": null
+          }
+        }
+      },
+      "identity": {
+        "evaluated": 20,
+        "correct": 19,
+        "accuracy": 0.95
+      },
+      "scenarios": [
+        {
+          "id": "H01",
+          "fields": {
+            "entities": {
+              "truePositive": 2,
+              "expected": 4,
+              "predicted": 5,
+              "falsePositive": 3,
+              "falseNegative": 2,
+              "precision": 0.4,
+              "recall": 0.5
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 1,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": null,
+              "recall": 0
+            },
+            "claims": {
+              "truePositive": 2,
+              "expected": 5,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 3,
+              "precision": 1,
+              "recall": 0.4
+            },
+            "events": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "H02",
+          "fields": {
+            "entities": {
+              "truePositive": 3,
+              "expected": 3,
+              "predicted": 4,
+              "falsePositive": 1,
+              "falseNegative": 0,
+              "precision": 0.75,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "claims": {
+              "truePositive": 2,
+              "expected": 3,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": 1,
+              "recall": 0.6666666666666666
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 1,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": null,
+              "recall": 0
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "H03",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 3,
+              "predicted": 3,
+              "falsePositive": 2,
+              "falseNegative": 2,
+              "precision": 0.3333333333333333,
+              "recall": 0.3333333333333333
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 1,
+              "expected": 3,
+              "predicted": 2,
+              "falsePositive": 1,
+              "falseNegative": 2,
+              "precision": 0.5,
+              "recall": 0.3333333333333333
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "H04",
+          "fields": {
+            "entities": {
+              "truePositive": 2,
+              "expected": 3,
+              "predicted": 3,
+              "falsePositive": 1,
+              "falseNegative": 1,
+              "precision": 0.6666666666666666,
+              "recall": 0.6666666666666666
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 0,
+              "expected": 4,
+              "predicted": 4,
+              "falsePositive": 4,
+              "falseNegative": 4,
+              "precision": 0,
+              "recall": 0
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 1,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": null,
+              "recall": 0
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "H05",
+          "fields": {
+            "entities": {
+              "truePositive": 2,
+              "expected": 5,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 3,
+              "precision": 1,
+              "recall": 0.4
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 0,
+              "expected": 1,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": null,
+              "recall": 0
+            },
+            "events": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "H06",
+          "fields": {
+            "entities": {
+              "truePositive": 2,
+              "expected": 4,
+              "predicted": 7,
+              "falsePositive": 5,
+              "falseNegative": 2,
+              "precision": 0.2857142857142857,
+              "recall": 0.5
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 0,
+              "expected": 2,
+              "predicted": 1,
+              "falsePositive": 1,
+              "falseNegative": 2,
+              "precision": 0,
+              "recall": 0
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "H07",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 2,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": 1,
+              "recall": 0.5
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 2,
+              "expected": 5,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 3,
+              "precision": 1,
+              "recall": 0.4
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            }
+          }
+        },
+        {
+          "id": "H08",
+          "fields": {
+            "entities": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 3,
+              "falsePositive": 1,
+              "falseNegative": 0,
+              "precision": 0.6666666666666666,
+              "recall": 1
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 1,
+              "expected": 5,
+              "predicted": 3,
+              "falsePositive": 2,
+              "falseNegative": 4,
+              "precision": 0.3333333333333333,
+              "recall": 0.2
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "H09",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 1,
+              "falseNegative": 1,
+              "precision": 0.5,
+              "recall": 0.5
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 0,
+              "expected": 2,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 2,
+              "precision": null,
+              "recall": 0
+            },
+            "events": {
+              "truePositive": 1,
+              "expected": 1,
+              "predicted": 1,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 1,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": null,
+              "recall": 0
+            }
+          }
+        },
+        {
+          "id": "H10",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 3,
+              "predicted": 2,
+              "falsePositive": 1,
+              "falseNegative": 2,
+              "precision": 0.5,
+              "recall": 0.3333333333333333
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 0,
+              "expected": 3,
+              "predicted": 1,
+              "falsePositive": 1,
+              "falseNegative": 3,
+              "precision": 0,
+              "recall": 0
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "H11",
+          "fields": {
+            "entities": {
+              "truePositive": 1,
+              "expected": 3,
+              "predicted": 2,
+              "falsePositive": 1,
+              "falseNegative": 2,
+              "precision": 0.5,
+              "recall": 0.3333333333333333
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 1,
+              "expected": 3,
+              "predicted": 2,
+              "falsePositive": 1,
+              "falseNegative": 2,
+              "precision": 0.5,
+              "recall": 0.3333333333333333
+            },
+            "events": {
+              "truePositive": 0,
+              "expected": 1,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": null,
+              "recall": 0
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        },
+        {
+          "id": "H12",
+          "fields": {
+            "entities": {
+              "truePositive": 2,
+              "expected": 3,
+              "predicted": 3,
+              "falsePositive": 1,
+              "falseNegative": 1,
+              "precision": 0.6666666666666666,
+              "recall": 0.6666666666666666
+            },
+            "relations": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "claims": {
+              "truePositive": 0,
+              "expected": 3,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 3,
+              "precision": null,
+              "recall": 0
+            },
+            "events": {
+              "truePositive": 2,
+              "expected": 2,
+              "predicted": 2,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "conflicts": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            },
+            "changes": {
+              "truePositive": 0,
+              "expected": 1,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 1,
+              "precision": null,
+              "recall": 0
+            },
+            "omissions": {
+              "truePositive": 0,
+              "expected": 0,
+              "predicted": 0,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "precision": null,
+              "recall": null
+            }
+          }
+        }
+      ]
+    },
+    "falseConflictCount": 0,
+    "evaluatedScenarioIds": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12"
+    ],
+    "baselineNote": "A provider kimenetét a benchmark normalizációs határán értékeljük; a default mock szándékosan üres."
+  },
+  "metricEquality": {
+    "core": true,
+    "dense": true,
+    "heldout": true
+  }
+}

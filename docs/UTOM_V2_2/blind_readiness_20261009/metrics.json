@@ -1,0 +1,79 @@
+{
+  "population": "39 pre-frozen selected semantic decisions, 7 synthetic news-style snippets; not all conceivable facts or population estimate",
+  "total": 39,
+  "counts": {
+    "CORRECT_RESOLVED": 25,
+    "MISSED_DEFENSIBLE_RESOLUTION": 11,
+    "CORRECT_UNRESOLVED": 2,
+    "WRONG_RESOLVED": 1
+  },
+  "precisionResolved": 0.9615384615384616,
+  "resolutionRate": 0.6666666666666666,
+  "correctResolutionCoverage": 0.6410256410256411,
+  "WRONG_RESOLVED_COUNT": 1,
+  "WRONG_RESOLVED_RATE": 0.038461538461538464,
+  "wrongResolvedPerEvaluatedItem": 0.02564102564102564,
+  "decisionAccuracyIncludingAbstention": 0.6923076923076923,
+  "exactEvidenceOffsets": {
+    "total": 299,
+    "exact": 299,
+    "failures": 0,
+    "accuracy": 1
+  },
+  "byDimension": {
+    "actor": {
+      "total": 8,
+      "correctResolved": 3,
+      "wrongResolved": 0,
+      "correctUnresolved": 2,
+      "missed": 3,
+      "accuracy": 0.625,
+      "resolvedPrecision": 1
+    },
+    "attribution": {
+      "total": 5,
+      "correctResolved": 3,
+      "wrongResolved": 0,
+      "correctUnresolved": 0,
+      "missed": 2,
+      "accuracy": 0.6,
+      "resolvedPrecision": 1
+    },
+    "temporal": {
+      "total": 6,
+      "correctResolved": 5,
+      "wrongResolved": 0,
+      "correctUnresolved": 0,
+      "missed": 1,
+      "accuracy": 0.8333333333333334,
+      "resolvedPrecision": 1
+    },
+    "contrast_negation": {
+      "total": 4,
+      "correctResolved": 3,
+      "wrongResolved": 0,
+      "correctUnresolved": 0,
+      "missed": 1,
+      "accuracy": 0.75,
+      "resolvedPrecision": 1
+    },
+    "numeric": {
+      "total": 12,
+      "correctResolved": 7,
+      "wrongResolved": 1,
+      "correctUnresolved": 0,
+      "missed": 4,
+      "accuracy": 0.5833333333333334,
+      "resolvedPrecision": 0.875
+    },
+    "entity_boundary": {
+      "total": 4,
+      "correctResolved": 4,
+      "wrongResolved": 0,
+      "correctUnresolved": 0,
+      "missed": 0,
+      "accuracy": 1,
+      "resolvedPrecision": 1
+    }
+  }
+}

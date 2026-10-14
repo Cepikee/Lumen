@@ -1,0 +1,182 @@
+[
+  {
+    "id": "s01",
+    "domain": "weather",
+    "text": "A hőmérséklet -11 fok volt."
+  },
+  {
+    "id": "s02",
+    "domain": "finance",
+    "text": "Az egyenleg −17 millió forint volt."
+  },
+  {
+    "id": "s03",
+    "domain": "sport",
+    "text": "A gólkülönbség –4 gól volt."
+  },
+  {
+    "id": "s04",
+    "domain": "energy",
+    "text": "A hőmérséklet mínusz 13 fok volt."
+  },
+  {
+    "id": "s05",
+    "domain": "politics",
+    "text": "A támogatottság 7 százalékponttal csökkent."
+  },
+  {
+    "id": "s06",
+    "domain": "company",
+    "text": "A készlet 23 darabbal csökkent."
+  },
+  {
+    "id": "s07",
+    "domain": "science",
+    "text": "A hőmérséklet 12-ről −6-ra változott."
+  },
+  {
+    "id": "s08",
+    "domain": "weather",
+    "text": "A hőmérséklet -9 és +4 fok között volt."
+  },
+  {
+    "id": "s09",
+    "domain": "transport",
+    "text": "A raktárban 48 dobozt találtak."
+  },
+  {
+    "id": "s10",
+    "domain": "health",
+    "text": "A klinikán 143 beteget kezeltek."
+  },
+  {
+    "id": "s11",
+    "domain": "police",
+    "text": "A rendőrség a raktárban 48 dobozt talált."
+  },
+  {
+    "id": "s12",
+    "domain": "court",
+    "text": "Bence azt mondta Rékának, hogy megérkezett a levél."
+  },
+  {
+    "id": "s13",
+    "domain": "court",
+    "text": "Rékának azt mondták, hogy megérkezett a levél."
+  },
+  {
+    "id": "s14",
+    "domain": "company",
+    "text": "Bence közölte vele, hogy bezár a bolt."
+  },
+  {
+    "id": "s15",
+    "domain": "science",
+    "text": "Bence kérdezte tőle, hogy működik-e a műszer."
+  },
+  {
+    "id": "s16",
+    "domain": "transport",
+    "text": "Bence tájékoztatta Rékát."
+  },
+  {
+    "id": "s17",
+    "domain": "education",
+    "text": "Bence írta neki, hogy kezdődik az óra."
+  },
+  {
+    "id": "s18",
+    "domain": "election",
+    "text": "A szavazólapok 88 százalékának feldolgozása után Sára 42 százalékot, Vince 37 százalékot kapott."
+  },
+  {
+    "id": "s19",
+    "domain": "politics",
+    "text": "A küszöb 11 százalék, Sára 31 százalékot, Vince 29 százalékot, Zita 22 százalékot kapott."
+  },
+  {
+    "id": "s20",
+    "domain": "election",
+    "text": "A 56 éves Sára 42 százalékot kapott."
+  },
+  {
+    "id": "s21",
+    "domain": "economy",
+    "text": "A tarifa 14 százalék, a Cédrus Zrt. részesedése 32 százalék volt."
+  },
+  {
+    "id": "s22",
+    "domain": "politics",
+    "text": "Sára 2023-ban 42 százalékot kapott."
+  },
+  {
+    "id": "s23",
+    "domain": "health",
+    "text": "A 96 beteg 18 százaléka távozott."
+  },
+  {
+    "id": "s24",
+    "domain": "court",
+    "text": "Sára tagadta, hogy pénzt lopott volna."
+  },
+  {
+    "id": "s25",
+    "domain": "company",
+    "text": "Sára megvenné az eszközt."
+  },
+  {
+    "id": "s26",
+    "domain": "energy",
+    "text": "Amennyiben Vince nyer, csökkenti az árat, Zita viszont tegnap fizetett."
+  },
+  {
+    "id": "s27",
+    "domain": "finance",
+    "text": "Vince csak akkor fizet, ha megkapja a szerződést."
+  },
+  {
+    "id": "s28",
+    "domain": "science",
+    "text": "Ez történhetett volna."
+  },
+  {
+    "id": "s29",
+    "domain": "economy",
+    "text": "„Az egyenleg javulni fog” – mondta Bence."
+  },
+  {
+    "id": "s30",
+    "domain": "company",
+    "text": "Bence azt mondta: „Az egyenleg javulni fog”."
+  },
+  {
+    "id": "s31",
+    "domain": "economy",
+    "text": "\"Az egyenleg javulni fog\" - mondta Bence."
+  },
+  {
+    "id": "s32",
+    "domain": "company",
+    "text": "Az egyenleg javulni fog – mondta Bence."
+  },
+  {
+    "id": "s33",
+    "domain": "institution",
+    "text": "Szerintük az iskola és a kórház is nyitva van."
+  },
+  {
+    "id": "s34",
+    "domain": "court",
+    "text": "Réka megérkezett. Rékának írtak."
+  },
+  {
+    "id": "s35",
+    "domain": "science",
+    "text": "A hőmérséklet legalább -15 fok volt."
+  },
+  {
+    "id": "s36",
+    "domain": "energy",
+    "text": "A hőmérséklet legfeljebb +7 fok lehet."
+  }
+]

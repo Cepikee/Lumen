@@ -1,0 +1,766 @@
+{
+  "id": "H",
+  "raw": "A tűzoltók az óvoda udvarából kimenekítették a kertész kutyáját, miközben a szomszédok az utat locsolták. „A palack nem robbant fel” – közölte az ügyeletes a rádiós szerkesztővel, aki ezt azonnal beolvasta. A beavatkozás a riasztást követő nyolcadik percben kezdődött; a riasztó személy kiléte nem derült ki.",
+  "rawSha256": "bbcb217b6da80301948d18cecc42d08d9d42b7e364d086be7fce21886674f493",
+  "annotationSha256": "85d1c02ab1695b16336b8bd2820527dfe80faf60813c8fc7c76f0a4f43554343",
+  "sentenceCount": 4,
+  "tokenCount": 54,
+  "environmentFingerprint": "143242eddc17f94ea729a1b430c5eac9d5e47dd7d27b5ebdd29c7c6961882f47",
+  "model": {
+    "type": "ready",
+    "model": "hu_core_news_md",
+    "version": "3.8.0",
+    "loadMs": 1160.3809050000002
+  },
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 10,
+        "text": "tűzoltók",
+        "lemma": "tűzoltó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur"
+        },
+        "dep": "nsubj",
+        "headStart": 30
+      },
+      {
+        "start": 11,
+        "end": 13,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 14
+      },
+      {
+        "start": 14,
+        "end": 19,
+        "text": "óvoda",
+        "lemma": "óvoda",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 20
+      },
+      {
+        "start": 20,
+        "end": 29,
+        "text": "udvarából",
+        "lemma": "udvar",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 30
+      },
+      {
+        "start": 30,
+        "end": 44,
+        "text": "kimenekítették",
+        "lemma": "kimenekít",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 30
+      },
+      {
+        "start": 45,
+        "end": 46,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 47
+      },
+      {
+        "start": 47,
+        "end": 54,
+        "text": "kertész",
+        "lemma": "kertész",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 55
+      },
+      {
+        "start": 55,
+        "end": 63,
+        "text": "kutyáját",
+        "lemma": "kutya",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obj",
+        "headStart": 30
+      },
+      {
+        "start": 63,
+        "end": 64,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 95
+      },
+      {
+        "start": 65,
+        "end": 73,
+        "text": "miközben",
+        "lemma": "miközben",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Rel"
+        },
+        "dep": "advmod:tlocy",
+        "headStart": 95
+      },
+      {
+        "start": 74,
+        "end": 75,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 76
+      },
+      {
+        "start": 76,
+        "end": 86,
+        "text": "szomszédok",
+        "lemma": "szomszéd",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur"
+        },
+        "dep": "nsubj",
+        "headStart": 95
+      },
+      {
+        "start": 87,
+        "end": 89,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 90
+      },
+      {
+        "start": 90,
+        "end": 94,
+        "text": "utat",
+        "lemma": "út",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 95
+      },
+      {
+        "start": 95,
+        "end": 104,
+        "text": "locsolták",
+        "lemma": "locsol",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "acl",
+        "headStart": 55
+      },
+      {
+        "start": 104,
+        "end": 105,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 30
+      },
+      {
+        "start": 106,
+        "end": 107,
+        "text": "„",
+        "lemma": "„",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Imp",
+          "Number": "Plur",
+          "Person": "1",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 106
+      },
+      {
+        "start": 107,
+        "end": 108,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 109
+      },
+      {
+        "start": 109,
+        "end": 115,
+        "text": "palack",
+        "lemma": "palack",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 120
+      },
+      {
+        "start": 116,
+        "end": 119,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 120
+      },
+      {
+        "start": 120,
+        "end": 127,
+        "text": "robbant",
+        "lemma": "robban",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 135
+      },
+      {
+        "start": 128,
+        "end": 131,
+        "text": "fel",
+        "lemma": "fel",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 120
+      },
+      {
+        "start": 131,
+        "end": 132,
+        "text": "”",
+        "lemma": "”",
+        "pos": "X",
+        "morph": {},
+        "dep": "obl",
+        "headStart": 120
+      },
+      {
+        "start": 133,
+        "end": 134,
+        "text": "–",
+        "lemma": "–",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 120
+      },
+      {
+        "start": 135,
+        "end": 142,
+        "text": "közölte",
+        "lemma": "közöl",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 135
+      },
+      {
+        "start": 143,
+        "end": 145,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 146
+      },
+      {
+        "start": 146,
+        "end": 155,
+        "text": "ügyeletes",
+        "lemma": "ügyeletes",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 135
+      },
+      {
+        "start": 156,
+        "end": 157,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 165
+      },
+      {
+        "start": 158,
+        "end": 164,
+        "text": "rádiós",
+        "lemma": "rádiós",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 165
+      },
+      {
+        "start": 165,
+        "end": 178,
+        "text": "szerkesztővel",
+        "lemma": "szerkesztő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ins",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 135
+      },
+      {
+        "start": 178,
+        "end": 179,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 196
+      },
+      {
+        "start": 180,
+        "end": 183,
+        "text": "aki",
+        "lemma": "aki",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Rel"
+        },
+        "dep": "nsubj",
+        "headStart": 196
+      },
+      {
+        "start": 184,
+        "end": 187,
+        "text": "ezt",
+        "lemma": "ez",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "obj",
+        "headStart": 196
+      },
+      {
+        "start": 188,
+        "end": 195,
+        "text": "azonnal",
+        "lemma": "azonnal",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 196
+      },
+      {
+        "start": 196,
+        "end": 205,
+        "text": "beolvasta",
+        "lemma": "beolvas",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "acl",
+        "headStart": 165
+      },
+      {
+        "start": 205,
+        "end": 206,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 135
+      },
+      {
+        "start": 207,
+        "end": 208,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 209
+      },
+      {
+        "start": 209,
+        "end": 220,
+        "text": "beavatkozás",
+        "lemma": "beavatkozás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 258
+      },
+      {
+        "start": 221,
+        "end": 222,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 223
+      },
+      {
+        "start": 223,
+        "end": 232,
+        "text": "riasztást",
+        "lemma": "riasztás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 233
+      },
+      {
+        "start": 233,
+        "end": 239,
+        "text": "követő",
+        "lemma": "követő",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "VerbForm": "PartPres"
+        },
+        "dep": "amod:att",
+        "headStart": 250
+      },
+      {
+        "start": 240,
+        "end": 249,
+        "text": "nyolcadik",
+        "lemma": "nyolcadik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 250
+      },
+      {
+        "start": 250,
+        "end": 257,
+        "text": "percben",
+        "lemma": "perc",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 258
+      },
+      {
+        "start": 258,
+        "end": 267,
+        "text": "kezdődött",
+        "lemma": "kezdődik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 258
+      },
+      {
+        "start": 267,
+        "end": 268,
+        "text": ";",
+        "lemma": ";",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 258
+      },
+      {
+        "start": 269,
+        "end": 270,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 279
+      },
+      {
+        "start": 271,
+        "end": 278,
+        "text": "riasztó",
+        "lemma": "riasztó",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 279
+      },
+      {
+        "start": 279,
+        "end": 286,
+        "text": "személy",
+        "lemma": "személy",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 287
+      },
+      {
+        "start": 287,
+        "end": 293,
+        "text": "kiléte",
+        "lemma": "kilét",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 298
+      },
+      {
+        "start": 294,
+        "end": 297,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 298
+      },
+      {
+        "start": 298,
+        "end": 304,
+        "text": "derült",
+        "lemma": "derül",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 258
+      },
+      {
+        "start": 305,
+        "end": 307,
+        "text": "ki",
+        "lemma": "ki",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 298
+      },
+      {
+        "start": 307,
+        "end": 308,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 258
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 105,
+        "text": "A tűzoltók az óvoda udvarából kimenekítették a kertész kutyáját, miközben a szomszédok az utat locsolták."
+      },
+      {
+        "start": 106,
+        "end": 107,
+        "text": "„"
+      },
+      {
+        "start": 107,
+        "end": 206,
+        "text": "A palack nem robbant fel” – közölte az ügyeletes a rádiós szerkesztővel, aki ezt azonnal beolvasta."
+      },
+      {
+        "start": 207,
+        "end": 308,
+        "text": "A beavatkozás a riasztást követő nyolcadik percben kezdődött; a riasztó személy kiléte nem derült ki."
+      }
+    ],
+    "entities": []
+  }
+}

@@ -1,0 +1,1159 @@
+{
+  "id": "E",
+  "domain": "gazdaság",
+  "text": "A Delta Alap 22 százalékos részesedést vásárolt az üzemben, miközben a termelés 8 százalékkal esett. Az elemző szerint a tavalyi 40 millió forint nem bevétel, hanem veszteség volt.",
+  "started": "2026-10-09T21:35:42.670Z",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 7,
+        "text": "Delta",
+        "lemma": "Delta",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 39
+      },
+      {
+        "start": 8,
+        "end": 12,
+        "text": "Alap",
+        "lemma": "Alap",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 2
+      },
+      {
+        "start": 13,
+        "end": 15,
+        "text": "22",
+        "lemma": "22",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 16
+      },
+      {
+        "start": 16,
+        "end": 26,
+        "text": "százalékos",
+        "lemma": "százalékos",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 27
+      },
+      {
+        "start": 27,
+        "end": 38,
+        "text": "részesedést",
+        "lemma": "részesedés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 39
+      },
+      {
+        "start": 39,
+        "end": 47,
+        "text": "vásárolt",
+        "lemma": "vásárol",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 39
+      },
+      {
+        "start": 48,
+        "end": 50,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 51
+      },
+      {
+        "start": 51,
+        "end": 58,
+        "text": "üzemben",
+        "lemma": "üzem",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 39
+      },
+      {
+        "start": 58,
+        "end": 59,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 94
+      },
+      {
+        "start": 60,
+        "end": 68,
+        "text": "miközben",
+        "lemma": "miközben",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Rel"
+        },
+        "dep": "advmod:tlocy",
+        "headStart": 94
+      },
+      {
+        "start": 69,
+        "end": 70,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 71
+      },
+      {
+        "start": 71,
+        "end": 79,
+        "text": "termelés",
+        "lemma": "termelés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 94
+      },
+      {
+        "start": 80,
+        "end": 81,
+        "text": "8",
+        "lemma": "8",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 82
+      },
+      {
+        "start": 82,
+        "end": 93,
+        "text": "százalékkal",
+        "lemma": "százalék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ins",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 94
+      },
+      {
+        "start": 94,
+        "end": 99,
+        "text": "esett",
+        "lemma": "esik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "advcl",
+        "headStart": 39
+      },
+      {
+        "start": 99,
+        "end": 100,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 39
+      },
+      {
+        "start": 101,
+        "end": 103,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 104
+      },
+      {
+        "start": 104,
+        "end": 110,
+        "text": "elemző",
+        "lemma": "elemző",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod",
+        "headStart": 150
+      },
+      {
+        "start": 111,
+        "end": 118,
+        "text": "szerint",
+        "lemma": "szerint",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 104
+      },
+      {
+        "start": 119,
+        "end": 120,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 139
+      },
+      {
+        "start": 121,
+        "end": 128,
+        "text": "tavalyi",
+        "lemma": "tavalyi",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 139
+      },
+      {
+        "start": 129,
+        "end": 131,
+        "text": "40",
+        "lemma": "40",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "compound",
+        "headStart": 132
+      },
+      {
+        "start": 132,
+        "end": 138,
+        "text": "millió",
+        "lemma": "millió",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 139
+      },
+      {
+        "start": 139,
+        "end": 145,
+        "text": "forint",
+        "lemma": "forint",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 150
+      },
+      {
+        "start": 146,
+        "end": 149,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 150
+      },
+      {
+        "start": 150,
+        "end": 157,
+        "text": "bevétel",
+        "lemma": "bevétel",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 150
+      },
+      {
+        "start": 157,
+        "end": 158,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 165
+      },
+      {
+        "start": 159,
+        "end": 164,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 165
+      },
+      {
+        "start": 165,
+        "end": 174,
+        "text": "veszteség",
+        "lemma": "veszteség",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 150
+      },
+      {
+        "start": 175,
+        "end": 179,
+        "text": "volt",
+        "lemma": "van",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "cop",
+        "headStart": 165
+      },
+      {
+        "start": 179,
+        "end": 180,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 150
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 100,
+        "text": "A Delta Alap 22 százalékos részesedést vásárolt az üzemben, miközben a termelés 8 százalékkal esett."
+      },
+      {
+        "start": 101,
+        "end": 180,
+        "text": "Az elemző szerint a tavalyi 40 millió forint nem bevétel, hanem veszteség volt."
+      }
+    ],
+    "entities": [
+      {
+        "start": 2,
+        "end": 12,
+        "text": "Delta Alap",
+        "label": "ORG"
+      }
+    ]
+  },
+  "output": {
+    "entities": [
+      {
+        "mention": "Delta Alap",
+        "normalized": "delta alap",
+        "type": "organization",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 2,
+        "end": 12,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 2,
+          "end": 12,
+          "textSpan": "Delta Alap"
+        },
+        "identityKey": "organization|delta alap",
+        "canonicalIdentity": "delta alap",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": {
+          "mention": "Delta Alap",
+          "normalized": "delta alap",
+          "start": 2,
+          "end": 12,
+          "type": "named_referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 12,
+            "textSpan": "Delta Alap"
+          }
+        },
+        "actorStatus": "resolved",
+        "subject": {
+          "mention": "Delta Alap",
+          "normalized": "delta alap",
+          "start": 2,
+          "end": 12,
+          "type": "named_referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 12,
+            "textSpan": "Delta Alap"
+          }
+        },
+        "location": [
+          {
+            "mention": "üzemben",
+            "normalized": "üzem",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ine",
+            "start": 51,
+            "end": 58,
+            "evidenceSpan": {
+              "start": 51,
+              "end": 58,
+              "textSpan": "üzemben"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 58,
+          "textSpan": "A Delta Alap 22 százalékos részesedést vásárolt az üzemben"
+        },
+        "attribution": null,
+        "action": "vásárol",
+        "actionSpan": {
+          "start": 39,
+          "end": 47,
+          "textSpan": "vásárolt"
+        },
+        "object": [
+          "részesedés"
+        ],
+        "numericArguments": [
+          {
+            "value": 22,
+            "canonicalValue": 22,
+            "unit": "%",
+            "semanticKind": "percentage",
+            "start": 13,
+            "end": 26,
+            "raw": "22 százalékos",
+            "evidenceSpan": {
+              "start": 13,
+              "end": 26,
+              "textSpan": "22 százalékos"
+            },
+            "owner": {
+              "mention": "részesedést",
+              "normalized": "részesedés",
+              "start": 27,
+              "end": 38,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 27,
+                "end": 38,
+                "textSpan": "részesedést"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "share",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 13,
+                "end": 15,
+                "textSpan": "22"
+              },
+              "targetSpan": {
+                "start": 27,
+                "end": 38,
+                "textSpan": "részesedést"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 13,
+                    "end": 15,
+                    "textSpan": "22"
+                  },
+                  "targetSpan": {
+                    "start": 16,
+                    "end": 26,
+                    "textSpan": "százalékos"
+                  }
+                },
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 16,
+                    "end": 26,
+                    "textSpan": "százalékos"
+                  },
+                  "targetSpan": {
+                    "start": 27,
+                    "end": 38,
+                    "textSpan": "részesedést"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 27,
+                    "end": 38,
+                    "textSpan": "részesedést"
+                  },
+                  "targetSpan": {
+                    "start": 39,
+                    "end": 47,
+                    "textSpan": "vásárolt"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:58",
+              "semanticRole": "percentage",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "numeric_binding_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 58,
+          "textSpan": "A Delta Alap 22 százalékos részesedést vásárolt az üzemben"
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 58,
+          "textSpan": "A Delta Alap 22 százalékos részesedést vásárolt az üzemben"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:58",
+        "syntacticRoles": [
+          {
+            "role": "actor",
+            "referent": {
+              "mention": "Delta Alap",
+              "normalized": "delta alap",
+              "start": 2,
+              "end": 12,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 12,
+                "textSpan": "Delta Alap"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 2,
+                "end": 7,
+                "textSpan": "Delta"
+              },
+              "targetSpan": {
+                "start": 39,
+                "end": 47,
+                "textSpan": "vásárolt"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 7,
+                    "textSpan": "Delta"
+                  },
+                  "targetSpan": {
+                    "start": 39,
+                    "end": 47,
+                    "textSpan": "vásárolt"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:58",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "részesedést",
+              "normalized": "részesedés",
+              "start": 27,
+              "end": 38,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 27,
+                "end": 38,
+                "textSpan": "részesedést"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 27,
+                "end": 38,
+                "textSpan": "részesedést"
+              },
+              "targetSpan": {
+                "start": 39,
+                "end": 47,
+                "textSpan": "vásárolt"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 27,
+                    "end": 38,
+                    "textSpan": "részesedést"
+                  },
+                  "targetSpan": {
+                    "start": 39,
+                    "end": 47,
+                    "textSpan": "vásárolt"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:58",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "actorEvidence": {
+          "sourceSpan": {
+            "start": 2,
+            "end": 7,
+            "textSpan": "Delta"
+          },
+          "targetSpan": {
+            "start": 39,
+            "end": 47,
+            "textSpan": "vásárolt"
+          },
+          "dependencyPath": [
+            {
+              "relation": "nsubj",
+              "sourceSpan": {
+                "start": 2,
+                "end": 7,
+                "textSpan": "Delta"
+              },
+              "targetSpan": {
+                "start": 39,
+                "end": 47,
+                "textSpan": "vásárolt"
+              }
+            }
+          ],
+          "frameId": "dependency:0:58",
+          "semanticRole": "actor",
+          "resolutionStatus": "resolved",
+          "rule": "dependency_path_with_case_and_scope_checks"
+        }
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 60,
+          "end": 100,
+          "textSpan": "miközben a termelés 8 százalékkal esett."
+        },
+        "attribution": null,
+        "action": "esik",
+        "actionSpan": {
+          "start": 94,
+          "end": 99,
+          "textSpan": "esett"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 8,
+            "canonicalValue": 8,
+            "unit": "%",
+            "semanticKind": "percentage",
+            "start": 80,
+            "end": 93,
+            "raw": "8 százalékkal",
+            "evidenceSpan": {
+              "start": 80,
+              "end": 93,
+              "textSpan": "8 százalékkal"
+            },
+            "owner": {
+              "mention": "százalékkal",
+              "normalized": "százalék",
+              "start": 82,
+              "end": 93,
+              "type": "referent",
+              "case": "Ins",
+              "evidenceSpan": {
+                "start": 82,
+                "end": 93,
+                "textSpan": "százalékkal"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "percentage",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 80,
+                "end": 81,
+                "textSpan": "8"
+              },
+              "targetSpan": {
+                "start": 82,
+                "end": 93,
+                "textSpan": "százalékkal"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 80,
+                    "end": 81,
+                    "textSpan": "8"
+                  },
+                  "targetSpan": {
+                    "start": 82,
+                    "end": 93,
+                    "textSpan": "százalékkal"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 82,
+                    "end": 93,
+                    "textSpan": "százalékkal"
+                  },
+                  "targetSpan": {
+                    "start": 94,
+                    "end": 99,
+                    "textSpan": "esett"
+                  }
+                }
+              ],
+              "frameId": "dependency:60:100",
+              "semanticRole": "percentage",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 60,
+          "end": 100,
+          "textSpan": "miközben a termelés 8 százalékkal esett."
+        },
+        "propositionSpan": {
+          "start": 60,
+          "end": 100,
+          "textSpan": "miközben a termelés 8 százalékkal esett."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:60:100",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": {
+          "mention": "elemző",
+          "normalized": "elemző",
+          "canonicalIdentity": null,
+          "type": "referent",
+          "named": false,
+          "case": "Nom",
+          "start": 104,
+          "end": 110,
+          "evidenceSpan": {
+            "start": 104,
+            "end": 110,
+            "textSpan": "elemző"
+          },
+          "sourceRole": "reported",
+          "pronoun": false
+        },
+        "source": {
+          "mention": "elemző",
+          "normalized": "elemző",
+          "canonicalIdentity": null,
+          "type": "referent",
+          "named": false,
+          "case": "Nom",
+          "start": 104,
+          "end": 110,
+          "evidenceSpan": {
+            "start": 104,
+            "end": 110,
+            "textSpan": "elemző"
+          },
+          "sourceRole": "reported",
+          "pronoun": false
+        },
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "szerint",
+        "content": {
+          "start": 118,
+          "end": 180,
+          "textSpan": " a tavalyi 40 millió forint nem bevétel, hanem veszteség volt."
+        },
+        "attribution": {
+          "label": "elemző",
+          "normalized": "elemző",
+          "sourceRole": "reported",
+          "evidenceSpan": {
+            "start": 104,
+            "end": 110,
+            "textSpan": "elemző"
+          },
+          "propositionSpan": {
+            "start": 118,
+            "end": 180,
+            "textSpan": " a tavalyi 40 millió forint nem bevétel, hanem veszteség volt."
+          }
+        },
+        "action": "van",
+        "actionSpan": {
+          "start": 175,
+          "end": 179,
+          "textSpan": "volt"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 40000000,
+            "canonicalValue": 40000000,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": "HUF",
+            "semanticKind": "money",
+            "start": 129,
+            "end": 145,
+            "raw": "40 millió forint",
+            "evidenceSpan": {
+              "start": 129,
+              "end": 145,
+              "textSpan": "40 millió forint"
+            },
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "dependency_blocked_by_ambiguous_contrast"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {
+              "start": 101,
+              "end": 180,
+              "textSpan": "Az elemző szerint a tavalyi 40 millió forint nem bevétel, hanem veszteség volt."
+            },
+            "subject": null
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "contrast_role_unresolved",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 101,
+          "end": 180,
+          "textSpan": "Az elemző szerint a tavalyi 40 millió forint nem bevétel, hanem veszteség volt."
+        },
+        "propositionSpan": {
+          "start": 101,
+          "end": 180,
+          "textSpan": "Az elemző szerint a tavalyi 40 millió forint nem bevétel, hanem veszteség volt."
+        },
+        "canonicalProjectionAllowed": false,
+        "sourceEvidence": {
+          "rule": "explicit_according_to",
+          "entitySpan": {
+            "start": 104,
+            "end": 110,
+            "textSpan": "elemző"
+          },
+          "clauseSpan": {
+            "start": 101,
+            "end": 180,
+            "textSpan": "Az elemző szerint a tavalyi 40 millió forint nem bevétel, hanem veszteség volt."
+          }
+        },
+        "contrasts": [
+          {
+            "binding": "unresolved",
+            "rule": "parallel_alternatives_single_finite_predicate",
+            "slot": "actor",
+            "evidenceSpan": {
+              "start": 101,
+              "end": 180,
+              "textSpan": "Az elemző szerint a tavalyi 40 millió forint nem bevétel, hanem veszteség volt."
+            },
+            "scope": {
+              "start": 101,
+              "end": 180
+            },
+            "rejected": {
+              "value": "bevétel",
+              "case": "Nom",
+              "status": "rejected",
+              "evidenceSpan": {
+                "start": 150,
+                "end": 157,
+                "textSpan": "bevétel"
+              }
+            },
+            "accepted": {
+              "value": "veszteség",
+              "case": "Nom",
+              "status": "accepted",
+              "evidenceSpan": {
+                "start": 165,
+                "end": 174,
+                "textSpan": "veszteség"
+              }
+            },
+            "frameId": "contrast:101:180"
+          }
+        ],
+        "frameId": "contrast:101:180"
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "parallel_alternatives_single_finite_predicate",
+        "slot": "actor",
+        "evidenceSpan": {
+          "start": 101,
+          "end": 180,
+          "textSpan": "Az elemző szerint a tavalyi 40 millió forint nem bevétel, hanem veszteség volt."
+        },
+        "scope": {
+          "start": 101,
+          "end": 180
+        },
+        "rejected": {
+          "value": "bevétel",
+          "case": "Nom",
+          "status": "rejected",
+          "evidenceSpan": {
+            "start": 150,
+            "end": 157,
+            "textSpan": "bevétel"
+          }
+        },
+        "accepted": {
+          "value": "veszteség",
+          "case": "Nom",
+          "status": "accepted",
+          "evidenceSpan": {
+            "start": 165,
+            "end": 174,
+            "textSpan": "veszteség"
+          }
+        },
+        "frameId": "contrast:101:180"
+      }
+    ],
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true
+  }
+}

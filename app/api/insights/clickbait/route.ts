@@ -21,16 +21,24 @@ export async function GET(req: Request) {
     const sec = await securityCheck(req);
     if (sec) return sec;
 
+    const period = new URL(req.url).searchParams.get("period") ?? "24h";
+    const days: Record<string, number> = { "24h": 1, "7d": 7, "30d": 30, "90d": 90 };
+    if (!Object.hasOwn(days, period)) return NextResponse.json({ success: false, error: "invalid_period" }, { status: 400 });
+    const now = new Date();
+    const endStr = mysqlUtc(now);
+    const startStr = mysqlUtc(new Date(now.getTime() - days[period] * 86400000));
+    const windowParams = [startStr, endStr];
+
     const [sourceRows]: any = await db.query(`
       SELECT 
         COALESCE(NULLIF(LOWER(TRIM(source)), ''), 'ismeretlen') AS source,
         AVG(final_clickbait) AS avg_clickbait,
         COUNT(*) AS count
       FROM summaries
-      WHERE final_clickbait IS NOT NULL
+      WHERE created_at >= ? AND created_at < ? AND final_clickbait IS NOT NULL
       GROUP BY COALESCE(NULLIF(LOWER(TRIM(source)), ''), 'ismeretlen')
       ORDER BY avg_clickbait DESC, source ASC
-    `);
+    `, windowParams);
 
     const [catRows]: any = await db.query(`
       SELECT 
@@ -38,22 +46,18 @@ export async function GET(req: Request) {
         AVG(final_clickbait) AS avg_clickbait,
         COUNT(*) AS count
       FROM summaries
-      WHERE final_clickbait IS NOT NULL
+      WHERE created_at >= ? AND created_at < ? AND final_clickbait IS NOT NULL
         AND category IS NOT NULL
         AND TRIM(category) <> ''
       GROUP BY LOWER(TRIM(category))
       ORDER BY avg_clickbait DESC
-    `);
+    `, windowParams);
 
     const categories = catRows.map((r: any) => ({
       category: fixCat(r.category),
       avg_clickbait: Number(r.avg_clickbait) || 0,
       count: Number(r.count) || 0
     }));
-
-    const now = new Date();
-    const endStr = mysqlUtc(now);
-    const startStr = mysqlUtc(new Date(now.getTime() - 24 * 60 * 60 * 1000));
 
     const [trendRows]: any = await db.query(
       `
@@ -86,10 +90,10 @@ export async function GET(req: Request) {
         final_clickbait,
         created_at
       FROM summaries
-      WHERE final_clickbait IS NOT NULL
+      WHERE created_at >= ? AND created_at < ? AND final_clickbait IS NOT NULL
       ORDER BY final_clickbait DESC
       LIMIT 20
-    `);
+    `, windowParams);
 
     const [statsRows]: any = await db.query(`
       SELECT 
@@ -98,8 +102,8 @@ export async function GET(req: Request) {
         MAX(final_clickbait) AS max_clickbait,
         COUNT(*) AS total
       FROM summaries
-      WHERE final_clickbait IS NOT NULL
-    `);
+      WHERE created_at >= ? AND created_at < ? AND final_clickbait IS NOT NULL
+    `, windowParams);
 
     const stats = {
       avg: Number(statsRows[0].avg_clickbait) || 0,
@@ -116,6 +120,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json({
       success: true,
+      period,
       sources,
       categories,
       trend,

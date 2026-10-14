@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Modal, Form } from "react-bootstrap";
 
 interface Source {
@@ -10,6 +10,8 @@ interface Source {
 }
 
 interface TrendSourcesModalProps {
+  loading?: boolean;
+  error?: boolean;
   show: boolean;
   onHide: () => void;
   keyword: string;
@@ -53,12 +55,11 @@ const TrendSourcesModal: React.FC<TrendSourcesModalProps> = ({
   sources,
   defaultPeriod,
   onPeriodChange,
+  loading = false,
+  error = false,
 }) => {
   const [period, setPeriod] = useState(defaultPeriod);
 
-  useEffect(() => {
-    setPeriod(defaultPeriod);
-  }, [defaultPeriod]);
 
   function handlePeriodChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const newPeriod = e.target.value;
@@ -82,13 +83,15 @@ const TrendSourcesModal: React.FC<TrendSourcesModalProps> = ({
         <Form.Group className="mb-3">
           <Form.Label>Időszak</Form.Label>
           <Form.Select value={period} onChange={handlePeriodChange}>
+            <option value="24h">Utolsó 24 óra</option>
+            <option value="90d">Utolsó 90 nap</option>
             <option value="7d">Utolsó 7 nap</option>
             <option value="30d">Utolsó 30 nap</option>
             <option value="all">Minden időszak</option>
           </Form.Select>
         </Form.Group>
 
-        {uniqueSources.length === 0 ? (
+        {loading ? <p role="status">Cikkek betöltése…</p> : error ? <p role="alert">A cikkeket nem sikerült betölteni. Próbáld újra.</p> : uniqueSources.length === 0 ? (
           <p>Nincs elérhető forrás ehhez a trendhez.</p>
         ) : (
           <ul className="list-unstyled">

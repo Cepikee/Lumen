@@ -1,0 +1,17 @@
+{
+  "command": "wsl.exe",
+  "args": [
+    "-d",
+    "Ubuntu-24.04",
+    "--",
+    "env",
+    "PYTHONPATH=/home/mark/.local/share/utom-morph-research",
+    "python3",
+    "/mnt/f/Projekt2025/Lumen/scripts/experimental/morph-worker.py"
+  ],
+  "cwd": "F:\\Projekt2025\\Lumen",
+  "exitCode": 0,
+  "signal": null,
+  "stdout": "{\"type\": \"ready\", \"model\": \"hu_core_news_md\", \"version\": \"3.8.0\", \"loadMs\": 1772.4936309999996}\n{\"id\": 1, \"ok\": true, \"annotation\": {\"tokens\": [{\"start\": 0, \"end\": 1, \"text\": \"A\", \"lemma\": \"a\", \"pos\": \"DET\", \"morph\": {\"Definite\": \"Def\", \"PronType\": \"Art\"}, \"dep\": \"det\", \"headStart\": 2}, {\"start\": 2, \"end\": 9, \"text\": \"kertben\", \"lemma\": \"kert\", \"pos\": \"NOUN\", \"morph\": {\"Case\": \"Ine\", \"Number\": \"Sing\"}, \"dep\": \"obl\", \"headStart\": 16}, {\"start\": 10, \"end\": 15, \"text\": \"virág\", \"lemma\": \"virág\", \"pos\": \"NOUN\", \"morph\": {\"Case\": \"Nom\", \"Number\": \"Sing\"}, \"dep\": \"nsubj\", \"headStart\": 16}, {\"start\": 16, \"end\": 22, \"text\": \"nyílik\", \"lemma\": \"nyílik\", \"pos\": \"VERB\", \"morph\": {\"Definite\": \"Ind\", \"Mood\": \"Ind\", \"Number\": \"Sing\", \"Person\": \"3\", \"Tense\": \"Pres\", \"VerbForm\": \"Fin\", \"Voice\": \"Act\"}, \"dep\": \"ROOT\", \"headStart\": 16}, {\"start\": 22, \"end\": 23, \"text\": \".\", \"lemma\": \".\", \"pos\": \"PUNCT\", \"morph\": {}, \"dep\": \"punct\", \"headStart\": 16}], \"sentences\": [{\"start\": 0, \"end\": 23, \"text\": \"A kertben virág nyílik.\"}], \"entities\": []}, \"elapsedMs\": 25.25231499999947, \"peakRssBytes\": 447406080}\n",
+  "stderr": ""
+}

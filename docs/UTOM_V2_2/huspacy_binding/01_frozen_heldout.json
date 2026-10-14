@@ -1,0 +1,77 @@
+{
+  "version": "utom-v22-huspacy-binding-heldout-1",
+  "frozen": true,
+  "developmentUse": false,
+  "cases": [
+    {
+      "id": "economy",
+      "text": "A Pannon Művek bevétele 14 milliárd forint, a Duna Holdingé pedig 9 milliárd forint volt.",
+      "entities": [["Pannon Művek", "organization", "pannon művek"], ["Duna Holdingé", "organization", "duna holding"]],
+      "frames": [["Pannon Művek", "van", "bevétel", "14 milliárd forint"], ["Duna Holdingé", "van", "bevétel", "9 milliárd forint"]],
+      "attributions": [], "conditionalFrames": 0, "negatedFrames": 0
+    },
+    {
+      "id": "election",
+      "text": "Kovács Anna 47,8 százalékot, Nagy Béla pedig 44,2 százalékot szerzett.",
+      "entities": [["Kovács Anna", "person", "kovács anna"], ["Nagy Béla", "person", "nagy béla"]],
+      "frames": [["Kovács Anna", "szerez", "százalék", "47,8 százalékot"], ["Nagy Béla", "szerez", "százalék", "44,2 százalékot"]],
+      "attributions": [], "conditionalFrames": 0, "negatedFrames": 0
+    },
+    {
+      "id": "sport",
+      "text": "A Vörös Sólymok 3 gólt, a Kék Farkasok 1 gólt lőttek, a döntetlen így elmaradt.",
+      "entities": [["Vörös Sólymok", "organization", "vörös sólymok"], ["Kék Farkasok", "organization", "kék farkasok"]],
+      "frames": [["Vörös Sólymok", "lő", "gól", "3 gólt"], ["Kék Farkasok", "lő", "gól", "1 gólt"]],
+      "attributions": [], "conditionalFrames": 0, "negatedFrames": 0
+    },
+    {
+      "id": "weather",
+      "text": "Győrben 29 fokot, Kecskeméten 32 fokot, Szolnokon pedig 34 fokot mértek.",
+      "entities": [["Győrben", "location", "győr"], ["Kecskeméten", "location", "kecskemét"], ["Szolnokon", "location", "szolnok"]],
+      "frames": [["Győrben", "mér", "fok", "29 fokot"], ["Kecskeméten", "mér", "fok", "32 fokot"], ["Szolnokon", "mér", "fok", "34 fokot"]],
+      "attributions": [], "conditionalFrames": 0, "negatedFrames": 0
+    },
+    {
+      "id": "energy",
+      "text": "A Napenergia Zrt. 61 megawattot, a Szélpark Kft. 38 megawattot termelt.",
+      "entities": [["Napenergia Zrt.", "organization", "napenergia zrt."], ["Szélpark Kft.", "organization", "szélpark kft."]],
+      "frames": [["Napenergia Zrt.", "termel", "megawatt", "61 megawattot"], ["Szélpark Kft.", "termel", "megawatt", "38 megawattot"]],
+      "attributions": [], "conditionalFrames": 0, "negatedFrames": 0
+    },
+    {
+      "id": "healthcare",
+      "text": "A minisztérium szerint a Szent Imre Kórház 320 beteget, a Bajcsy Kórház pedig 280 beteget látott el.",
+      "entities": [["minisztérium", "organization", "minisztérium"], ["Szent Imre Kórház", "organization", "szent imre kórház"], ["Bajcsy Kórház", "organization", "bajcsy kórház"]],
+      "frames": [["Szent Imre Kórház", "lát", "beteg", "320 beteget"], ["Bajcsy Kórház", "lát", "beteg", "280 beteget"]],
+      "attributions": [["minisztérium", "szerint"]], "conditionalFrames": 0, "negatedFrames": 0
+    },
+    {
+      "id": "court",
+      "text": "Tóth Júlia elismerte, hogy 6 szerződést aláírt, de tagadta, hogy 2 iratot meghamisított.",
+      "entities": [["Tóth Júlia", "person", "tóth júlia"]],
+      "frames": [["Tóth Júlia", "aláír", "szerződés", "6 szerződést"], ["Tóth Júlia", "meghamisít", "irat", "2 iratot"]],
+      "attributions": [["Tóth Júlia", "elismer"], ["Tóth Júlia", "tagad"]], "conditionalFrames": 0, "negatedFrames": 1
+    },
+    {
+      "id": "corporate",
+      "text": "A Hídépítő Nyrt. azt ígérte, hogy ha engedélyt kap, 2028-ban 4 üzemet nyit, miközben a régi telephelyet nem zárja be.",
+      "entities": [["Hídépítő Nyrt.", "organization", "hídépítő nyrt."]],
+      "frames": [["Hídépítő Nyrt.", "nyit", "üzem", "4 üzemet"]],
+      "attributions": [["Hídépítő Nyrt.", "ígér"]], "conditionalFrames": 1, "negatedFrames": 1
+    },
+    {
+      "id": "science",
+      "text": "A Kutatóközpont azt közölte, hogy Szabó Márton szerint a minta 17 százaléka reagált, bár az eredmény még nem végleges.",
+      "entities": [["Kutatóközpont", "organization", "kutatóközpont"], ["Szabó Márton", "person", "szabó márton"]],
+      "frames": [["minta", "reagál", "százalék", "17 százaléka"]],
+      "attributions": [["Kutatóközpont", "közöl"], ["Szabó Márton", "szerint"]], "conditionalFrames": 0, "negatedFrames": 1
+    },
+    {
+      "id": "transport",
+      "text": "A MÁV azt írta, hogy amennyiben a vihar erősödik, 12 járatot törölhetnek, de 5 pótlóbuszt biztosítanak.",
+      "entities": [["MÁV", "organization", "máv"]],
+      "frames": [["MÁV", "töröl", "járat", "12 járatot"], ["MÁV", "biztosít", "pótlóbusz", "5 pótlóbuszt"]],
+      "attributions": [["MÁV", "ír"]], "conditionalFrames": 1, "negatedFrames": 0
+    }
+  ]
+}

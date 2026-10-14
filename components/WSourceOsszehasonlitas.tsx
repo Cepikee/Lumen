@@ -14,7 +14,7 @@ import WSentimentTimeline from "./WSentimentTimeline";
 import WSentimentToday from "./WSentimentToday";
 import WSentimentByCategory from "./WSentimentByCategory";
 
-export default function WSourceOsszehasonlitas() {
+export default function WSourceOsszehasonlitas({ period = "24h" }: { period?: string }) {
   const theme = useUserStore((s) => s.theme);
 
   const isDark =
@@ -34,7 +34,7 @@ export default function WSourceOsszehasonlitas() {
           color: isDark ? "#fff" : "#000",
         }}
       >
-        <WSourceCategoryDistribution />
+        <WSourceCategoryDistribution period={period} />
       </div>
 
       {/* --- 2) CLICKBAIT INDEX --- */}
@@ -45,7 +45,7 @@ export default function WSourceOsszehasonlitas() {
           color: isDark ? "#fff" : "#000",
         }}
       >
-        <WSourceClickbait />
+        <WSourceClickbait period={period} />
       </div>
 
       {/* --- 3) CLICKBAIT ARÁNY --- */}
@@ -56,7 +56,7 @@ export default function WSourceOsszehasonlitas() {
           color: isDark ? "#fff" : "#000",
         }}
       >
-        <WSourceClickbaitRatio />
+        <WSourceClickbaitRatio period={period} />
       </div>
 
      {/* --- 4) SPEED INDEX BLOKK (javított) --- */}
@@ -81,7 +81,7 @@ export default function WSourceOsszehasonlitas() {
         }}
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <WSourceDuplication />
+          <WSourceDuplication period={period} />
         </div>
       </div>
 

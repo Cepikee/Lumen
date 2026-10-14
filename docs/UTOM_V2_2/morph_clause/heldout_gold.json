@@ -1,0 +1,1502 @@
+{
+  "kind": "synthetic_author_created_not_independent_blind",
+  "createdAt": "2026-10-06T10:54:49.094Z",
+  "rows": [
+    {
+      "id": "h01",
+      "domain": "election",
+      "text": "Eszter 38 százalékot, Márton 34 százalékot, Judit 28 százalékot kapott.",
+      "entities": [
+        {
+          "mention": "Eszter",
+          "normalized": "eszter",
+          "type": "person",
+          "start": 0,
+          "end": 6
+        },
+        {
+          "mention": "Márton",
+          "normalized": "márton",
+          "type": "person",
+          "start": 22,
+          "end": 28
+        },
+        {
+          "mention": "Judit",
+          "normalized": "judit",
+          "type": "person",
+          "start": 44,
+          "end": 49
+        }
+      ],
+      "frames": [
+        {
+          "text": "Eszter 38 százalékot",
+          "subject": "eszter",
+          "action": [
+            "kap",
+            "election/result"
+          ],
+          "numbers": [
+            {
+              "surface": "38 százalékot",
+              "value": 38,
+              "unit": "%",
+              "kind": "percentage_share",
+              "start": 7,
+              "end": 20
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 0,
+          "end": 20
+        },
+        {
+          "text": "Márton 34 százalékot",
+          "subject": "márton",
+          "action": [
+            "kap",
+            "election/result"
+          ],
+          "numbers": [
+            {
+              "surface": "34 százalékot",
+              "value": 34,
+              "unit": "%",
+              "kind": "percentage_share",
+              "start": 29,
+              "end": 42
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 22,
+          "end": 42
+        },
+        {
+          "text": "Judit 28 százalékot kapott.",
+          "subject": "judit",
+          "action": [
+            "kap",
+            "election/result"
+          ],
+          "numbers": [
+            {
+              "surface": "28 százalékot",
+              "value": 28,
+              "unit": "%",
+              "kind": "percentage_share",
+              "start": 50,
+              "end": 63
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 44,
+          "end": 71
+        }
+      ]
+    },
+    {
+      "id": "h02",
+      "domain": "weather",
+      "text": "Debrecenben 26, Miskolcon 29 fokot mértek.",
+      "entities": [
+        {
+          "mention": "Debrecenben",
+          "normalized": "debrecen",
+          "type": "location",
+          "start": 0,
+          "end": 11
+        },
+        {
+          "mention": "Miskolcon",
+          "normalized": "miskolc",
+          "type": "location",
+          "start": 16,
+          "end": 25
+        }
+      ],
+      "frames": [
+        {
+          "text": "Debrecenben 26",
+          "subject": "debrecen",
+          "action": [
+            "mér",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "26",
+              "value": 26,
+              "unit": "C",
+              "kind": "temperature",
+              "start": 12,
+              "end": 14
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 0,
+          "end": 14
+        },
+        {
+          "text": "Miskolcon 29 fokot mértek.",
+          "subject": "miskolc",
+          "action": [
+            "mér",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "29 fokot",
+              "value": 29,
+              "unit": "C",
+              "kind": "temperature",
+              "start": 26,
+              "end": 34
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 16,
+          "end": 42
+        }
+      ]
+    },
+    {
+      "id": "h03",
+      "domain": "health",
+      "text": "A rendelőben 84 beteget, a kórházban 126-ot vizsgáltak.",
+      "entities": [
+        {
+          "mention": "kórházban",
+          "normalized": "kórház",
+          "type": "organization",
+          "start": 27,
+          "end": 36
+        }
+      ],
+      "frames": [
+        {
+          "text": "A rendelőben 84 beteget",
+          "subject": "rendelő",
+          "action": [
+            "vizsgál",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "84 beteget",
+              "value": 84,
+              "unit": "beteg",
+              "kind": "count",
+              "start": 13,
+              "end": 23
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 0,
+          "end": 23
+        },
+        {
+          "text": "a kórházban 126-ot vizsgáltak.",
+          "subject": "kórház",
+          "action": [
+            "vizsgál",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "126-ot",
+              "value": 126,
+              "unit": "beteg",
+              "kind": "count",
+              "start": 37,
+              "end": 43
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 25,
+          "end": 55
+        }
+      ]
+    },
+    {
+      "id": "h04",
+      "domain": "energy",
+      "text": "A Rába Erőmű 18 megawattot termelt, a Mátra Erőmű 22 megawattot termelt.",
+      "entities": [
+        {
+          "mention": "Rába Erőmű",
+          "normalized": "rába erőmű",
+          "type": "organization",
+          "start": 2,
+          "end": 12
+        },
+        {
+          "mention": "Mátra Erőmű",
+          "normalized": "mátra erőmű",
+          "type": "organization",
+          "start": 38,
+          "end": 49
+        }
+      ],
+      "frames": [
+        {
+          "text": "A Rába Erőmű 18 megawattot termelt",
+          "subject": "rába erőmű",
+          "action": [
+            "termel",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "18 megawattot",
+              "value": 18,
+              "unit": "MW",
+              "kind": "count",
+              "start": 13,
+              "end": 26
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 0,
+          "end": 34
+        },
+        {
+          "text": "a Mátra Erőmű 22 megawattot termelt.",
+          "subject": "mátra erőmű",
+          "action": [
+            "termel",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "22 megawattot",
+              "value": 22,
+              "unit": "MW",
+              "kind": "count",
+              "start": 50,
+              "end": 63
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 36,
+          "end": 72
+        }
+      ]
+    },
+    {
+      "id": "h05",
+      "domain": "economy",
+      "text": "A Fenyő Zrt. bevétele 7 millió, a Tölgy Kft. bevétele 6 millió forint volt.",
+      "entities": [
+        {
+          "mention": "Fenyő Zrt.",
+          "normalized": "fenyő zrt.",
+          "type": "organization",
+          "start": 2,
+          "end": 12
+        },
+        {
+          "mention": "Tölgy Kft.",
+          "normalized": "tölgy kft.",
+          "type": "organization",
+          "start": 34,
+          "end": 44
+        }
+      ],
+      "frames": [
+        {
+          "text": "A Fenyő Zrt. bevétele 7 millió",
+          "subject": "fenyő zrt.",
+          "action": [
+            "van",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "7 millió",
+              "value": 7000000,
+              "unit": "HUF",
+              "kind": "money",
+              "start": 22,
+              "end": 30
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 0,
+          "end": 30
+        },
+        {
+          "text": "a Tölgy Kft. bevétele 6 millió forint volt.",
+          "subject": "tölgy kft.",
+          "action": [
+            "van",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "6 millió forint",
+              "value": 6000000,
+              "unit": "HUF",
+              "kind": "money",
+              "start": 54,
+              "end": 69
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 32,
+          "end": 75
+        }
+      ]
+    },
+    {
+      "id": "h06",
+      "domain": "sport",
+      "text": "A vendégcsapat négy gólt, a hazai csapat kettőt szerzett.",
+      "entities": [],
+      "frames": [
+        {
+          "text": "A vendégcsapat négy gólt",
+          "subject": "vendégcsapat",
+          "action": [
+            "szerez",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "négy gólt",
+              "value": 4,
+              "unit": "gól",
+              "kind": "count",
+              "start": 15,
+              "end": 24
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 0,
+          "end": 24
+        },
+        {
+          "text": "a hazai csapat kettőt szerzett.",
+          "subject": "hazai csapat",
+          "action": [
+            "szerez",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "kettőt",
+              "value": 2,
+              "unit": "gól",
+              "kind": "count",
+              "start": 41,
+              "end": 47
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 26,
+          "end": 57
+        }
+      ]
+    },
+    {
+      "id": "h07",
+      "domain": "education",
+      "text": "A gimnázium 28 diákot, az iskola 19 tanulót vett fel.",
+      "entities": [
+        {
+          "mention": "iskola",
+          "normalized": "iskola",
+          "type": "organization",
+          "start": 26,
+          "end": 32
+        }
+      ],
+      "frames": [
+        {
+          "text": "A gimnázium 28 diákot",
+          "subject": "gimnázium",
+          "action": [
+            "vesz",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "28 diákot",
+              "value": 28,
+              "unit": "diák",
+              "kind": "count",
+              "start": 12,
+              "end": 21
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 0,
+          "end": 21
+        },
+        {
+          "text": "az iskola 19 tanulót vett fel.",
+          "subject": "iskola",
+          "action": [
+            "vesz",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "19 tanulót",
+              "value": 19,
+              "unit": "tanuló",
+              "kind": "count",
+              "start": 33,
+              "end": 43
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 23,
+          "end": 53
+        }
+      ]
+    },
+    {
+      "id": "h08",
+      "domain": "technology",
+      "text": "Az olcsóbb készülék 86 ezer, a drágább 98 ezer forintba kerül.",
+      "entities": [],
+      "frames": [
+        {
+          "text": "Az olcsóbb készülék 86 ezer",
+          "subject": "olcsóbb készülék",
+          "action": [
+            "kerül",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "86 ezer",
+              "value": 86000,
+              "unit": "HUF",
+              "kind": "money",
+              "start": 20,
+              "end": 27
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 0,
+          "end": 27
+        },
+        {
+          "text": "a drágább 98 ezer forintba kerül.",
+          "subject": "drágább készülék",
+          "action": [
+            "kerül",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "98 ezer forintba",
+              "value": 98000,
+              "unit": "HUF",
+              "kind": "money",
+              "start": 39,
+              "end": 55
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 29,
+          "end": 62
+        }
+      ]
+    },
+    {
+      "id": "h09",
+      "domain": "court",
+      "text": "Dóra elismerte, hogy iratot másolt, de tagadta, hogy pénzt lopott.",
+      "entities": [
+        {
+          "mention": "Dóra",
+          "normalized": "dóra",
+          "type": "person",
+          "start": 0,
+          "end": 4
+        }
+      ],
+      "frames": [
+        {
+          "text": "Dóra elismerte, hogy iratot másolt",
+          "subject": "dóra",
+          "action": [
+            "másol",
+            "admission"
+          ],
+          "numbers": [],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": "dóra",
+          "object": "irat",
+          "reporting": "elismer",
+          "start": 0,
+          "end": 34
+        },
+        {
+          "text": "de tagadta, hogy pénzt lopott.",
+          "subject": "dóra",
+          "action": [
+            "lop",
+            "denial"
+          ],
+          "numbers": [],
+          "polarity": "denied",
+          "conditional": false,
+          "source": "dóra",
+          "object": "pénz",
+          "reporting": "tagad",
+          "start": 36,
+          "end": 66
+        }
+      ]
+    },
+    {
+      "id": "h10",
+      "domain": "police",
+      "text": "A rendőrség szerint a raktárban 9 iratot találtak.",
+      "entities": [
+        {
+          "mention": "rendőrség",
+          "normalized": "rendőrség",
+          "type": "organization",
+          "start": 2,
+          "end": 11
+        }
+      ],
+      "frames": [
+        {
+          "text": "A rendőrség szerint a raktárban 9 iratot találtak.",
+          "subject": null,
+          "action": [
+            "talál",
+            "attribution"
+          ],
+          "numbers": [
+            {
+              "surface": "9 iratot",
+              "value": 9,
+              "unit": "irat",
+              "kind": "count",
+              "start": 32,
+              "end": 40
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": "rendőrség",
+          "object": "irat",
+          "start": 0,
+          "end": 50
+        }
+      ]
+    },
+    {
+      "id": "h11",
+      "domain": "science",
+      "text": "A kutató szerint az oldat nem reagált, a labor viszont hibát jelentett.",
+      "entities": [],
+      "frames": [
+        {
+          "text": "A kutató szerint az oldat nem reagált",
+          "subject": "oldat",
+          "action": [
+            "reagál",
+            "attribution"
+          ],
+          "numbers": [],
+          "polarity": "denied",
+          "conditional": false,
+          "source": "kutató",
+          "object": null,
+          "start": 0,
+          "end": 37
+        },
+        {
+          "text": "a labor viszont hibát jelentett.",
+          "subject": "labor",
+          "action": [
+            "jelent",
+            "attribution"
+          ],
+          "numbers": [],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": "hiba",
+          "start": 39,
+          "end": 71
+        }
+      ]
+    },
+    {
+      "id": "h12",
+      "domain": "company",
+      "text": "A gyártó szerint a termelés nőtt, a minisztérium viszont ezt cáfolta.",
+      "entities": [
+        {
+          "mention": "minisztérium",
+          "normalized": "minisztérium",
+          "type": "organization",
+          "start": 36,
+          "end": 48
+        }
+      ],
+      "frames": [
+        {
+          "text": "A gyártó szerint a termelés nőtt",
+          "subject": "termelés",
+          "action": [
+            "nő",
+            "attribution"
+          ],
+          "numbers": [],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": "gyártó",
+          "object": null,
+          "start": 0,
+          "end": 32
+        },
+        {
+          "text": "a minisztérium viszont ezt cáfolta.",
+          "subject": "minisztérium",
+          "action": [
+            "cáfol",
+            "denial"
+          ],
+          "numbers": [],
+          "polarity": "denied",
+          "conditional": false,
+          "source": "minisztérium",
+          "object": "previous_proposition",
+          "reporting": "cáfol",
+          "start": 34,
+          "end": 69
+        }
+      ]
+    },
+    {
+      "id": "h13",
+      "domain": "transport",
+      "text": "Ha Emese nyer, 4 buszt vásárol, Tamás viszont tegnap 2 buszt adott át.",
+      "entities": [
+        {
+          "mention": "Emese",
+          "normalized": "emese",
+          "type": "person",
+          "start": 3,
+          "end": 8
+        },
+        {
+          "mention": "Tamás",
+          "normalized": "tamás",
+          "type": "person",
+          "start": 32,
+          "end": 37
+        }
+      ],
+      "frames": [
+        {
+          "text": "Ha Emese nyer",
+          "subject": "emese",
+          "action": [
+            "nyer",
+            "conditional"
+          ],
+          "numbers": [],
+          "polarity": "asserted",
+          "conditional": true,
+          "source": null,
+          "object": null,
+          "start": 0,
+          "end": 13
+        },
+        {
+          "text": "4 buszt vásárol",
+          "subject": "emese",
+          "action": [
+            "vásárol",
+            "conditional"
+          ],
+          "numbers": [
+            {
+              "surface": "4 buszt",
+              "value": 4,
+              "unit": "busz",
+              "kind": "count",
+              "start": 15,
+              "end": 22
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": true,
+          "source": null,
+          "object": "busz",
+          "start": 15,
+          "end": 30
+        },
+        {
+          "text": "Tamás viszont tegnap 2 buszt adott át.",
+          "subject": "tamás",
+          "action": [
+            "ad",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "2 buszt",
+              "value": 2,
+              "unit": "busz",
+              "kind": "count",
+              "start": 53,
+              "end": 60
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": "busz",
+          "time": "tegnap",
+          "start": 32,
+          "end": 70
+        }
+      ]
+    },
+    {
+      "id": "h14",
+      "domain": "nested_source",
+      "text": "A CNN azt közölte, hogy a bíróság szerint az ítélet jogerős.",
+      "entities": [
+        {
+          "mention": "CNN",
+          "normalized": "cnn",
+          "type": "organization",
+          "start": 2,
+          "end": 5
+        },
+        {
+          "mention": "bíróság",
+          "normalized": "bíróság",
+          "type": "organization",
+          "start": 26,
+          "end": 33
+        }
+      ],
+      "frames": [
+        {
+          "text": "A CNN azt közölte, hogy a bíróság szerint az ítélet jogerős.",
+          "subject": "ítélet",
+          "action": [
+            "copula"
+          ],
+          "numbers": [],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": "bíróság",
+          "object": null,
+          "outerSource": "cnn",
+          "start": 0,
+          "end": 60
+        }
+      ]
+    },
+    {
+      "id": "h15",
+      "domain": "namesake",
+      "text": "Nagy Emese és Nagy Tamás 14 pontot kapott. Szerinte ez vereség.",
+      "entities": [
+        {
+          "mention": "Nagy Emese",
+          "normalized": "nagy emese",
+          "type": "person",
+          "start": 0,
+          "end": 10
+        },
+        {
+          "mention": "Nagy Tamás",
+          "normalized": "nagy tamás",
+          "type": "person",
+          "start": 14,
+          "end": 24
+        }
+      ],
+      "frames": [
+        {
+          "text": "Nagy Emese és Nagy Tamás 14 pontot kapott.",
+          "subject": null,
+          "action": [
+            "kap",
+            "election/result"
+          ],
+          "numbers": [
+            {
+              "surface": "14 pontot",
+              "value": 14,
+              "unit": "pont",
+              "kind": "count",
+              "start": 25,
+              "end": 34
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 0,
+          "end": 42
+        },
+        {
+          "text": "Szerinte ez vereség.",
+          "subject": null,
+          "action": [
+            "copula"
+          ],
+          "numbers": [],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": "UNRESOLVED",
+          "object": null,
+          "start": 43,
+          "end": 63
+        }
+      ]
+    },
+    {
+      "id": "h16",
+      "domain": "promise",
+      "text": "Ilona azt ígérte, hogy jövőre 6 iskolát nyit.",
+      "entities": [
+        {
+          "mention": "Ilona",
+          "normalized": "ilona",
+          "type": "person",
+          "start": 0,
+          "end": 5
+        }
+      ],
+      "frames": [
+        {
+          "text": "Ilona azt ígérte, hogy jövőre 6 iskolát nyit.",
+          "subject": "ilona",
+          "action": [
+            "nyit",
+            "promise/plan"
+          ],
+          "numbers": [
+            {
+              "surface": "6 iskolát",
+              "value": 6,
+              "unit": "iskola",
+              "kind": "count",
+              "start": 30,
+              "end": 39
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": "ilona",
+          "object": "iskola",
+          "modality": "promise",
+          "time": "jövőre",
+          "start": 0,
+          "end": 45
+        }
+      ]
+    },
+    {
+      "id": "h17",
+      "domain": "numeric_types",
+      "text": "Az intézet szerint a tarifa 15 százalék, a változás 3 százalékpont volt.",
+      "entities": [
+        {
+          "mention": "intézet",
+          "normalized": "intézet",
+          "type": "organization",
+          "start": 3,
+          "end": 10
+        }
+      ],
+      "frames": [
+        {
+          "text": "Az intézet szerint a tarifa 15 százalék",
+          "subject": "tarifa",
+          "action": [
+            "van",
+            "attribution"
+          ],
+          "numbers": [
+            {
+              "surface": "15 százalék",
+              "value": 15,
+              "unit": "%",
+              "kind": "tariff_rate",
+              "start": 28,
+              "end": 39
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": "intézet",
+          "object": null,
+          "start": 0,
+          "end": 39
+        },
+        {
+          "text": "a változás 3 százalékpont volt.",
+          "subject": "változás",
+          "action": [
+            "van",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "3 százalékpont",
+              "value": 3,
+              "unit": "pp",
+              "kind": "percentage_point_delta",
+              "start": 52,
+              "end": 66
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": "intézet",
+          "object": null,
+          "start": 41,
+          "end": 72
+        }
+      ]
+    },
+    {
+      "id": "h18",
+      "domain": "comparison",
+      "text": "A korábbi referencia 17 százalék volt, Emese most 23 százalékot szerzett.",
+      "entities": [
+        {
+          "mention": "Emese",
+          "normalized": "emese",
+          "type": "person",
+          "start": 39,
+          "end": 44
+        }
+      ],
+      "frames": [
+        {
+          "text": "A korábbi referencia 17 százalék volt",
+          "subject": "korábbi referencia",
+          "action": [
+            "van",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "17 százalék",
+              "value": 17,
+              "unit": "%",
+              "kind": "comparison",
+              "start": 21,
+              "end": 32
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 0,
+          "end": 37
+        },
+        {
+          "text": "Emese most 23 százalékot szerzett.",
+          "subject": "emese",
+          "action": [
+            "szerez",
+            "election/result"
+          ],
+          "numbers": [
+            {
+              "surface": "23 százalékot",
+              "value": 23,
+              "unit": "%",
+              "kind": "percentage_share",
+              "start": 50,
+              "end": 63
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 39,
+          "end": 73
+        }
+      ]
+    },
+    {
+      "id": "h19",
+      "domain": "unicode_metadata",
+      "text": "Fotó: Nagy Dóra / Archívum\n😀 Emese 62 százalékot, Tamás 38 százalékot kapott.",
+      "entities": [
+        {
+          "mention": "Emese",
+          "normalized": "emese",
+          "type": "person",
+          "start": 30,
+          "end": 35
+        },
+        {
+          "mention": "Tamás",
+          "normalized": "tamás",
+          "type": "person",
+          "start": 51,
+          "end": 56
+        }
+      ],
+      "frames": [
+        {
+          "text": "😀 Emese 62 százalékot",
+          "subject": "emese",
+          "action": [
+            "kap",
+            "election/result"
+          ],
+          "numbers": [
+            {
+              "surface": "62 százalékot",
+              "value": 62,
+              "unit": "%",
+              "kind": "percentage_share",
+              "start": 36,
+              "end": 49
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 27,
+          "end": 49
+        },
+        {
+          "text": "Tamás 38 százalékot kapott.",
+          "subject": "tamás",
+          "action": [
+            "kap",
+            "election/result"
+          ],
+          "numbers": [
+            {
+              "surface": "38 százalékot",
+              "value": 38,
+              "unit": "%",
+              "kind": "percentage_share",
+              "start": 57,
+              "end": 70
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 51,
+          "end": 78
+        }
+      ]
+    },
+    {
+      "id": "h20",
+      "domain": "identity",
+      "text": "Szabó Júliának írtak. Szabó Júliáról beszéltek. Szabó Péter 11 pontot kapott.",
+      "entities": [
+        {
+          "mention": "Szabó Júliának",
+          "normalized": "szabó júlia",
+          "type": "person",
+          "start": 0,
+          "end": 14
+        },
+        {
+          "mention": "Szabó Júliáról",
+          "normalized": "szabó júlia",
+          "type": "person",
+          "start": 22,
+          "end": 36
+        },
+        {
+          "mention": "Szabó Péter",
+          "normalized": "szabó péter",
+          "type": "person",
+          "start": 48,
+          "end": 59
+        }
+      ],
+      "frames": [
+        {
+          "text": "Szabó Júliának írtak.",
+          "subject": null,
+          "action": [
+            "ír",
+            "attribution"
+          ],
+          "numbers": [],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": "szabó júlia",
+          "start": 0,
+          "end": 21
+        },
+        {
+          "text": "Szabó Júliáról beszéltek.",
+          "subject": null,
+          "action": [
+            "beszél",
+            "attribution"
+          ],
+          "numbers": [],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": "szabó júlia",
+          "start": 22,
+          "end": 47
+        },
+        {
+          "text": "Szabó Péter 11 pontot kapott.",
+          "subject": "szabó péter",
+          "action": [
+            "kap",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "11 pontot",
+              "value": 11,
+              "unit": "pont",
+              "kind": "count",
+              "start": 60,
+              "end": 69
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 48,
+          "end": 77
+        }
+      ]
+    },
+    {
+      "id": "h21",
+      "domain": "lower_upper",
+      "text": "A kapacitás legalább 40 megawatt, a terhelés legfeljebb 32 megawatt lehet.",
+      "entities": [],
+      "frames": [
+        {
+          "text": "A kapacitás legalább 40 megawatt",
+          "subject": "kapacitás",
+          "action": [
+            "lehet",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "40 megawatt",
+              "value": 40,
+              "unit": "MW",
+              "kind": "lower_bound",
+              "start": 21,
+              "end": 32
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "modality": "possible",
+          "start": 0,
+          "end": 32
+        },
+        {
+          "text": "a terhelés legfeljebb 32 megawatt lehet.",
+          "subject": "terhelés",
+          "action": [
+            "lehet",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "32 megawatt",
+              "value": 32,
+              "unit": "MW",
+              "kind": "upper_bound",
+              "start": 56,
+              "end": 67
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "modality": "possible",
+          "start": 34,
+          "end": 74
+        }
+      ]
+    },
+    {
+      "id": "h22",
+      "domain": "future",
+      "text": "Miklós holnap 7 eszközt ad át, Zsófia tegnap 5 eszközt adott át.",
+      "entities": [
+        {
+          "mention": "Miklós",
+          "normalized": "miklós",
+          "type": "person",
+          "start": 0,
+          "end": 6
+        },
+        {
+          "mention": "Zsófia",
+          "normalized": "zsófia",
+          "type": "person",
+          "start": 31,
+          "end": 37
+        }
+      ],
+      "frames": [
+        {
+          "text": "Miklós holnap 7 eszközt ad át",
+          "subject": "miklós",
+          "action": [
+            "ad",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "7 eszközt",
+              "value": 7,
+              "unit": "eszköz",
+              "kind": "count",
+              "start": 14,
+              "end": 23
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": "eszköz",
+          "modality": "future",
+          "time": "holnap",
+          "start": 0,
+          "end": 29
+        },
+        {
+          "text": "Zsófia tegnap 5 eszközt adott át.",
+          "subject": "zsófia",
+          "action": [
+            "ad",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "5 eszközt",
+              "value": 5,
+              "unit": "eszköz",
+              "kind": "count",
+              "start": 45,
+              "end": 54
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": "eszköz",
+          "time": "tegnap",
+          "start": 31,
+          "end": 64
+        }
+      ]
+    },
+    {
+      "id": "h23",
+      "domain": "quoted_source",
+      "text": "„Nem nyitunk üzemet” – mondta Ilona, Péter viszont új gyárat ígért.",
+      "entities": [
+        {
+          "mention": "Ilona",
+          "normalized": "ilona",
+          "type": "person",
+          "start": 30,
+          "end": 35
+        },
+        {
+          "mention": "Péter",
+          "normalized": "péter",
+          "type": "person",
+          "start": 37,
+          "end": 42
+        }
+      ],
+      "frames": [
+        {
+          "text": "„Nem nyitunk üzemet” – mondta Ilona",
+          "subject": "ilona",
+          "action": [
+            "nyit",
+            "attribution"
+          ],
+          "numbers": [],
+          "polarity": "denied",
+          "conditional": false,
+          "source": "ilona",
+          "object": "üzem",
+          "start": 0,
+          "end": 35
+        },
+        {
+          "text": "Péter viszont új gyárat ígért.",
+          "subject": "péter",
+          "action": [
+            "ígér",
+            "promise/plan"
+          ],
+          "numbers": [],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": "péter",
+          "object": "gyár",
+          "modality": "promise",
+          "start": 37,
+          "end": 67
+        }
+      ]
+    },
+    {
+      "id": "h24",
+      "domain": "negative_numbers",
+      "text": "Sopronban mínusz 4 fokot, Egerben 2 fokot mértek.",
+      "entities": [
+        {
+          "mention": "Sopronban",
+          "normalized": "sopron",
+          "type": "location",
+          "start": 0,
+          "end": 9
+        },
+        {
+          "mention": "Egerben",
+          "normalized": "eger",
+          "type": "location",
+          "start": 26,
+          "end": 33
+        }
+      ],
+      "frames": [
+        {
+          "text": "Sopronban mínusz 4 fokot",
+          "subject": "sopron",
+          "action": [
+            "mér",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "mínusz 4 fokot",
+              "value": -4,
+              "unit": "C",
+              "kind": "temperature",
+              "start": 10,
+              "end": 24
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 0,
+          "end": 24
+        },
+        {
+          "text": "Egerben 2 fokot mértek.",
+          "subject": "eger",
+          "action": [
+            "mér",
+            "measurement/result"
+          ],
+          "numbers": [
+            {
+              "surface": "2 fokot",
+              "value": 2,
+              "unit": "C",
+              "kind": "temperature",
+              "start": 34,
+              "end": 41
+            }
+          ],
+          "polarity": "asserted",
+          "conditional": false,
+          "source": null,
+          "object": null,
+          "start": 26,
+          "end": 49
+        }
+      ]
+    }
+  ]
+}

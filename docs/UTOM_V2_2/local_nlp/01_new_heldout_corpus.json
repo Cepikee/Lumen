@@ -1,0 +1,82 @@
+{
+  "version": "utom-v22-local-nlp-heldout-1",
+  "frozen": true,
+  "developmentUse": false,
+  "cases": [
+    {
+      "id": "economy",
+      "text": "Az Alföldi Művek 18 milliárd forint bevételt ért el, míg a Dunamenti Gépgyár 12 milliárd forintot jelentett.",
+      "entities": [["Alföldi Művek", "organization", "alföldi művek"], ["Dunamenti Gépgyár", "organization", "dunamenti gépgyár"]],
+      "numericBindings": [["18 milliárd forint", "Alföldi Művek"], ["12 milliárd forintot", "Dunamenti Gépgyár"]],
+      "dependencies": [["Alföldi Művek", "elér"], ["Dunamenti Gépgyár", "jelent"]],
+      "attributions": [], "conditional": false, "negated": false
+    },
+    {
+      "id": "transport",
+      "text": "Kovács Mira szerint a Volánbusz jövőre nem indít új járatot Pécsett.",
+      "entities": [["Kovács Mira", "person", "kovács mira"], ["Volánbusz", "organization", "volánbusz"], ["Pécsett", "location", "pécs"]],
+      "numericBindings": [], "dependencies": [["Volánbusz", "indít"]],
+      "attributions": [["Kovács Mira", "szerint"]], "conditional": false, "negated": true
+    },
+    {
+      "id": "healthcare",
+      "text": "A Duna Klinika 240 beteget kezelt, a Tisza Kórház pedig 180 beteget látott el.",
+      "entities": [["Duna Klinika", "organization", "duna klinika"], ["Tisza Kórház", "organization", "tisza kórház"]],
+      "numericBindings": [["240 beteget", "Duna Klinika"], ["180 beteget", "Tisza Kórház"]],
+      "dependencies": [["Duna Klinika", "kezel"], ["Tisza Kórház", "lát"]],
+      "attributions": [], "conditional": false, "negated": false
+    },
+    {
+      "id": "sport",
+      "text": "Nagy Emese 11,2 másodpercet, míg Szabó Lilla 11,5 másodpercet futott.",
+      "entities": [["Nagy Emese", "person", "nagy emese"], ["Szabó Lilla", "person", "szabó lilla"]],
+      "numericBindings": [["11,2 másodpercet", "Nagy Emese"], ["11,5 másodpercet", "Szabó Lilla"]],
+      "dependencies": [["Nagy Emese", "fut"], ["Szabó Lilla", "fut"]],
+      "attributions": [], "conditional": false, "negated": false
+    },
+    {
+      "id": "science",
+      "text": "A Csillagászati Kutatóintézet közölte, hogy a mérés feltételes eredményt adott.",
+      "entities": [["Csillagászati Kutatóintézet", "organization", "csillagászati kutatóintézet"]],
+      "numericBindings": [], "dependencies": [["Csillagászati Kutatóintézet", "közöl"]],
+      "attributions": [["Csillagászati Kutatóintézet", "közöl"]], "conditional": false, "negated": false
+    },
+    {
+      "id": "energy",
+      "text": "Magyarországon 42 euró, Ausztriában pedig 55 euró volt a tarifa.",
+      "entities": [["Magyarországon", "location", "magyarország"], ["Ausztriában", "location", "ausztria"]],
+      "numericBindings": [["42 euró", "Magyarországon"], ["55 euró", "Ausztriában"]],
+      "dependencies": [["tarifa", "van"]],
+      "attributions": [], "conditional": false, "negated": false
+    },
+    {
+      "id": "court",
+      "text": "Barta Dénes elismerte a késést, de tagadta, hogy megszegte a szerződést.",
+      "entities": [["Barta Dénes", "person", "barta dénes"]],
+      "numericBindings": [], "dependencies": [["Barta Dénes", "elismer"], ["Barta Dénes", "tagad"]],
+      "attributions": [["Barta Dénes", "elismer"], ["Barta Dénes", "tagad"]], "conditional": false, "negated": true
+    },
+    {
+      "id": "corporate",
+      "text": "A Kék Hálózat szerint a beruházás 2027-ben indulhat, az Elemző Központ azonban ezt vitatja.",
+      "entities": [["Kék Hálózat", "organization", "kék hálózat"], ["Elemző Központ", "organization", "elemző központ"]],
+      "numericBindings": [], "dependencies": [["beruházás", "indul"], ["Elemző Központ", "vitat"]],
+      "attributions": [["Kék Hálózat", "szerint"], ["Elemző Központ", "vitat"]], "conditional": true, "negated": false
+    },
+    {
+      "id": "weather",
+      "text": "Szegeden 18 fokot, Debrecenben pedig 14 fokot mértek.",
+      "entities": [["Szegeden", "location", "szeged"], ["Debrecenben", "location", "debrecen"]],
+      "numericBindings": [["18 fokot", "Szegeden"], ["14 fokot", "Debrecenben"]],
+      "dependencies": [["Szegeden", "mér"], ["Debrecenben", "mér"]],
+      "attributions": [], "conditional": false, "negated": false
+    },
+    {
+      "id": "politics",
+      "text": "Farkas Júlia nyilatkozott. Ha megválasztják, Farkas Júlia csökkentené az adót, de nem szüntetné meg a támogatást. Farkas Júliának később kérdést tettek fel.",
+      "entities": [["Farkas Júlia", "person", "farkas júlia"], ["Farkas Júliának", "person", "farkas júlia"]],
+      "numericBindings": [], "dependencies": [["Farkas Júlia", "csökkent"], ["Farkas Júlia", "szüntet"]],
+      "attributions": [], "conditional": true, "negated": true
+    }
+  ]
+}

@@ -1,0 +1,5935 @@
+{
+  "researchOnly": true,
+  "canonicalProjection": "OFF",
+  "inputHashes": [
+    {
+      "path": "tests/fixtures/real-text-a/dependency-annotations.json",
+      "sha256": "130d6ee0eb2462a24a636c2194ade5bc4462c891b8f63e7e51a5ea6d9dccc98c"
+    },
+    {
+      "path": "tests/fixtures/real-text-a/dependency-compatibility-annotations.json",
+      "sha256": "819cd8e1807381b90ef9f7c7f79a152265806f55e8b1b22d3fde02c618cc0d73"
+    },
+    {
+      "path": "tests/fixtures/real-text-a/dependency-ambiguous-annotations.json",
+      "sha256": "26963f393d110986f4ff00828fe9e0adbe8fd40ae4029264864b12ecb0240080"
+    }
+  ],
+  "evidence": {
+    "spans": 519,
+    "failures": 0
+  },
+  "rows": [
+    {
+      "id": "A",
+      "text": "Kovács Péter aláírta a szerződést.",
+      "result": {
+        "entities": [
+          {
+            "mention": "Kovács Péter",
+            "normalized": "kovács péter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 12,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 12,
+              "textSpan": "Kovács Péter"
+            },
+            "identityKey": "person|kovács péter",
+            "canonicalIdentity": "kovács péter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Kovács Péter",
+              "normalized": "kovács péter",
+              "start": 0,
+              "end": 12,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 12,
+                "textSpan": "Kovács Péter"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Kovács Péter",
+              "normalized": "kovács péter",
+              "start": 0,
+              "end": 12,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 12,
+                "textSpan": "Kovács Péter"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 34,
+              "textSpan": "Kovács Péter aláírta a szerződést."
+            },
+            "attribution": null,
+            "action": "aláír",
+            "actionSpan": {
+              "start": 13,
+              "end": 20,
+              "textSpan": "aláírta"
+            },
+            "object": [
+              "szerződés"
+            ],
+            "numericArguments": [],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 34,
+              "textSpan": "Kovács Péter aláírta a szerződést."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 34,
+              "textSpan": "Kovács Péter aláírta a szerződést."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:34",
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Kovács Péter",
+                  "normalized": "kovács péter",
+                  "start": 0,
+                  "end": 12,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 12,
+                    "textSpan": "Kovács Péter"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Kovács"
+                  },
+                  "targetSpan": {
+                    "start": 13,
+                    "end": 20,
+                    "textSpan": "aláírta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Kovács"
+                      },
+                      "targetSpan": {
+                        "start": 13,
+                        "end": 20,
+                        "textSpan": "aláírta"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:34",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "szerződést",
+                  "normalized": "szerződés",
+                  "start": 23,
+                  "end": 33,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 23,
+                    "end": 33,
+                    "textSpan": "szerződést"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 23,
+                    "end": 33,
+                    "textSpan": "szerződést"
+                  },
+                  "targetSpan": {
+                    "start": 13,
+                    "end": 20,
+                    "textSpan": "aláírta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 23,
+                        "end": 33,
+                        "textSpan": "szerződést"
+                      },
+                      "targetSpan": {
+                        "start": 13,
+                        "end": 20,
+                        "textSpan": "aláírta"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:34",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Kovács"
+              },
+              "targetSpan": {
+                "start": 13,
+                "end": 20,
+                "textSpan": "aláírta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Kovács"
+                  },
+                  "targetSpan": {
+                    "start": 13,
+                    "end": 20,
+                    "textSpan": "aláírta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:34",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "B",
+      "text": "Kovács Péter szerződését Nagy Anna írta alá.",
+      "result": {
+        "entities": [
+          {
+            "mention": "Kovács Péter",
+            "normalized": "kovács péter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 12,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 12,
+              "textSpan": "Kovács Péter"
+            },
+            "identityKey": "person|kovács péter",
+            "canonicalIdentity": "kovács péter",
+            "identityStatus": "resolved"
+          },
+          {
+            "mention": "Nagy Anna",
+            "normalized": "nagy anna",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 25,
+            "end": 34,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 25,
+              "end": 34,
+              "textSpan": "Nagy Anna"
+            },
+            "identityKey": "person|nagy anna",
+            "canonicalIdentity": "nagy anna",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "start": 25,
+              "end": 34,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 25,
+                "end": 34,
+                "textSpan": "Nagy Anna"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "start": 25,
+              "end": 34,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 25,
+                "end": 34,
+                "textSpan": "Nagy Anna"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": "ír",
+            "content": {
+              "start": 0,
+              "end": 44,
+              "textSpan": "Kovács Péter szerződését Nagy Anna írta alá."
+            },
+            "attribution": null,
+            "action": "aláír",
+            "actionSpan": {
+              "start": 35,
+              "end": 39,
+              "textSpan": "írta"
+            },
+            "object": [
+              "szerződés"
+            ],
+            "numericArguments": [],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": true,
+            "modalities": [
+              "reported"
+            ],
+            "modality": "reported",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "reporting_actor_unresolved",
+              "actor_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 44,
+              "textSpan": "Kovács Péter szerződését Nagy Anna írta alá."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 44,
+              "textSpan": "Kovács Péter szerződését Nagy Anna írta alá."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:44",
+            "syntacticRoles": [
+              {
+                "role": "possessor",
+                "referent": {
+                  "mention": "Kovács Péter",
+                  "normalized": "kovács péter",
+                  "start": 0,
+                  "end": 12,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 12,
+                    "textSpan": "Kovács Péter"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Kovács"
+                  },
+                  "targetSpan": {
+                    "start": 35,
+                    "end": 39,
+                    "textSpan": "írta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nmod:att",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Kovács"
+                      },
+                      "targetSpan": {
+                        "start": 13,
+                        "end": 24,
+                        "textSpan": "szerződését"
+                      }
+                    },
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 13,
+                        "end": 24,
+                        "textSpan": "szerződését"
+                      },
+                      "targetSpan": {
+                        "start": 35,
+                        "end": 39,
+                        "textSpan": "írta"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:44",
+                  "semanticRole": "possessor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "szerződését",
+                  "normalized": "szerződés",
+                  "start": 13,
+                  "end": 24,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 13,
+                    "end": 24,
+                    "textSpan": "szerződését"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 13,
+                    "end": 24,
+                    "textSpan": "szerződését"
+                  },
+                  "targetSpan": {
+                    "start": 35,
+                    "end": 39,
+                    "textSpan": "írta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 13,
+                        "end": 24,
+                        "textSpan": "szerződését"
+                      },
+                      "targetSpan": {
+                        "start": 35,
+                        "end": 39,
+                        "textSpan": "írta"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:44",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Nagy Anna",
+                  "normalized": "nagy anna",
+                  "start": 25,
+                  "end": 34,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 25,
+                    "end": 34,
+                    "textSpan": "Nagy Anna"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 25,
+                    "end": 29,
+                    "textSpan": "Nagy"
+                  },
+                  "targetSpan": {
+                    "start": 35,
+                    "end": 39,
+                    "textSpan": "írta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 25,
+                        "end": 29,
+                        "textSpan": "Nagy"
+                      },
+                      "targetSpan": {
+                        "start": 35,
+                        "end": 39,
+                        "textSpan": "írta"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:44",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 25,
+                "end": 29,
+                "textSpan": "Nagy"
+              },
+              "targetSpan": {
+                "start": 35,
+                "end": 39,
+                "textSpan": "írta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 25,
+                    "end": 29,
+                    "textSpan": "Nagy"
+                  },
+                  "targetSpan": {
+                    "start": 35,
+                    "end": 39,
+                    "textSpan": "írta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:44",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "C",
+      "text": "A szerződést Nagy Anna írta alá.",
+      "result": {
+        "entities": [
+          {
+            "mention": "Nagy Anna",
+            "normalized": "nagy anna",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 13,
+            "end": 22,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 13,
+              "end": 22,
+              "textSpan": "Nagy Anna"
+            },
+            "identityKey": "person|nagy anna",
+            "canonicalIdentity": "nagy anna",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "start": 13,
+              "end": 22,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 13,
+                "end": 22,
+                "textSpan": "Nagy Anna"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "start": 13,
+              "end": 22,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 13,
+                "end": 22,
+                "textSpan": "Nagy Anna"
+              }
+            },
+            "location": [],
+            "reportingActor": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "type": "person",
+              "subtype": null,
+              "sourceRole": null,
+              "start": 13,
+              "end": 22,
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 13,
+                "end": 22,
+                "textSpan": "Nagy Anna"
+              },
+              "identityKey": "person|nagy anna",
+              "canonicalIdentity": "nagy anna",
+              "identityStatus": "resolved",
+              "named": true
+            },
+            "source": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "type": "person",
+              "subtype": null,
+              "sourceRole": null,
+              "start": 13,
+              "end": 22,
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 13,
+                "end": 22,
+                "textSpan": "Nagy Anna"
+              },
+              "identityKey": "person|nagy anna",
+              "canonicalIdentity": "nagy anna",
+              "identityStatus": "resolved",
+              "named": true
+            },
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": "ír",
+            "content": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "A szerződést Nagy Anna írta alá."
+            },
+            "attribution": {
+              "label": "Nagy Anna",
+              "normalized": "nagy anna",
+              "sourceRole": "reported",
+              "evidenceSpan": {
+                "start": 13,
+                "end": 22,
+                "textSpan": "Nagy Anna"
+              },
+              "propositionSpan": {
+                "start": 0,
+                "end": 32,
+                "textSpan": "A szerződést Nagy Anna írta alá."
+              }
+            },
+            "action": "aláír",
+            "actionSpan": {
+              "start": 23,
+              "end": 27,
+              "textSpan": "írta"
+            },
+            "object": [
+              "szerződés"
+            ],
+            "numericArguments": [],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": true,
+            "modalities": [
+              "reported"
+            ],
+            "modality": "reported",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "A szerződést Nagy Anna írta alá."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "A szerződést Nagy Anna írta alá."
+            },
+            "canonicalProjectionAllowed": false,
+            "sourceEvidence": {
+              "rule": "local_reporting_subject",
+              "entitySpan": {
+                "start": 13,
+                "end": 22,
+                "textSpan": "Nagy Anna"
+              },
+              "clauseSpan": {
+                "start": 0,
+                "end": 32,
+                "textSpan": "A szerződést Nagy Anna írta alá."
+              }
+            },
+            "frameId": "dependency:0:32",
+            "syntacticRoles": [
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "szerződést",
+                  "normalized": "szerződés",
+                  "start": 2,
+                  "end": 12,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 2,
+                    "end": 12,
+                    "textSpan": "szerződést"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 12,
+                    "textSpan": "szerződést"
+                  },
+                  "targetSpan": {
+                    "start": 23,
+                    "end": 27,
+                    "textSpan": "írta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 2,
+                        "end": 12,
+                        "textSpan": "szerződést"
+                      },
+                      "targetSpan": {
+                        "start": 23,
+                        "end": 27,
+                        "textSpan": "írta"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:32",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Nagy Anna",
+                  "normalized": "nagy anna",
+                  "start": 13,
+                  "end": 22,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 13,
+                    "end": 22,
+                    "textSpan": "Nagy Anna"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 13,
+                    "end": 17,
+                    "textSpan": "Nagy"
+                  },
+                  "targetSpan": {
+                    "start": 23,
+                    "end": 27,
+                    "textSpan": "írta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 13,
+                        "end": 17,
+                        "textSpan": "Nagy"
+                      },
+                      "targetSpan": {
+                        "start": 23,
+                        "end": 27,
+                        "textSpan": "írta"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:32",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 13,
+                "end": 17,
+                "textSpan": "Nagy"
+              },
+              "targetSpan": {
+                "start": 23,
+                "end": 27,
+                "textSpan": "írta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 13,
+                    "end": 17,
+                    "textSpan": "Nagy"
+                  },
+                  "targetSpan": {
+                    "start": 23,
+                    "end": 27,
+                    "textSpan": "írta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:32",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "D",
+      "text": "A szerződést Nagy Anna írta alá Kovács Péter számára.",
+      "result": {
+        "entities": [
+          {
+            "mention": "Nagy Anna",
+            "normalized": "nagy anna",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 13,
+            "end": 22,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 13,
+              "end": 22,
+              "textSpan": "Nagy Anna"
+            },
+            "identityKey": "person|nagy anna",
+            "canonicalIdentity": "nagy anna",
+            "identityStatus": "resolved"
+          },
+          {
+            "mention": "Kovács Péter",
+            "normalized": "kovács péter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 32,
+            "end": 44,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 32,
+              "end": 44,
+              "textSpan": "Kovács Péter"
+            },
+            "identityKey": "person|kovács péter",
+            "canonicalIdentity": "kovács péter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "start": 13,
+              "end": 22,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 13,
+                "end": 22,
+                "textSpan": "Nagy Anna"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "start": 13,
+              "end": 22,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 13,
+                "end": 22,
+                "textSpan": "Nagy Anna"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": "ír",
+            "content": {
+              "start": 0,
+              "end": 53,
+              "textSpan": "A szerződést Nagy Anna írta alá Kovács Péter számára."
+            },
+            "attribution": null,
+            "action": "aláír",
+            "actionSpan": {
+              "start": 23,
+              "end": 27,
+              "textSpan": "írta"
+            },
+            "object": [
+              "szerződés"
+            ],
+            "numericArguments": [],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": true,
+            "modalities": [
+              "reported"
+            ],
+            "modality": "reported",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "reporting_actor_unresolved",
+              "actor_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 53,
+              "textSpan": "A szerződést Nagy Anna írta alá Kovács Péter számára."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 53,
+              "textSpan": "A szerződést Nagy Anna írta alá Kovács Péter számára."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:53",
+            "syntacticRoles": [
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "szerződést",
+                  "normalized": "szerződés",
+                  "start": 2,
+                  "end": 12,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 2,
+                    "end": 12,
+                    "textSpan": "szerződést"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 12,
+                    "textSpan": "szerződést"
+                  },
+                  "targetSpan": {
+                    "start": 23,
+                    "end": 27,
+                    "textSpan": "írta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 2,
+                        "end": 12,
+                        "textSpan": "szerződést"
+                      },
+                      "targetSpan": {
+                        "start": 23,
+                        "end": 27,
+                        "textSpan": "írta"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:53",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Nagy Anna",
+                  "normalized": "nagy anna",
+                  "start": 13,
+                  "end": 22,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 13,
+                    "end": 22,
+                    "textSpan": "Nagy Anna"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 13,
+                    "end": 17,
+                    "textSpan": "Nagy"
+                  },
+                  "targetSpan": {
+                    "start": 23,
+                    "end": 27,
+                    "textSpan": "írta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 13,
+                        "end": 17,
+                        "textSpan": "Nagy"
+                      },
+                      "targetSpan": {
+                        "start": 23,
+                        "end": 27,
+                        "textSpan": "írta"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:53",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "recipient",
+                "referent": {
+                  "mention": "Kovács Péter",
+                  "normalized": "kovács péter",
+                  "start": 32,
+                  "end": 44,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 32,
+                    "end": 44,
+                    "textSpan": "Kovács Péter"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 32,
+                    "end": 38,
+                    "textSpan": "Kovács"
+                  },
+                  "targetSpan": {
+                    "start": 23,
+                    "end": 27,
+                    "textSpan": "írta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 32,
+                        "end": 38,
+                        "textSpan": "Kovács"
+                      },
+                      "targetSpan": {
+                        "start": 23,
+                        "end": 27,
+                        "textSpan": "írta"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:53",
+                  "semanticRole": "recipient",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 13,
+                "end": 17,
+                "textSpan": "Nagy"
+              },
+              "targetSpan": {
+                "start": 23,
+                "end": 27,
+                "textSpan": "írta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 13,
+                    "end": 17,
+                    "textSpan": "Nagy"
+                  },
+                  "targetSpan": {
+                    "start": 23,
+                    "end": 27,
+                    "textSpan": "írta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:53",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "E",
+      "text": "A minisztérium szerint Nagy Anna írta alá a szerződést.",
+      "result": {
+        "entities": [
+          {
+            "mention": "Nagy Anna",
+            "normalized": "nagy anna",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 23,
+            "end": 32,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 23,
+              "end": 32,
+              "textSpan": "Nagy Anna"
+            },
+            "identityKey": "person|nagy anna",
+            "canonicalIdentity": "nagy anna",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "start": 23,
+              "end": 32,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 23,
+                "end": 32,
+                "textSpan": "Nagy Anna"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "start": 23,
+              "end": 32,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 23,
+                "end": 32,
+                "textSpan": "Nagy Anna"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": "ír",
+            "content": {
+              "start": 23,
+              "end": 55,
+              "textSpan": "Nagy Anna írta alá a szerződést."
+            },
+            "attribution": null,
+            "action": "aláír",
+            "actionSpan": {
+              "start": 33,
+              "end": 37,
+              "textSpan": "írta"
+            },
+            "object": [
+              "szerződés"
+            ],
+            "numericArguments": [],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": true,
+            "modalities": [
+              "reported"
+            ],
+            "modality": "reported",
+            "polarity": "asserted",
+            "status": "reported_claim",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "evidenceSpan": {
+              "start": 23,
+              "end": 55,
+              "textSpan": "Nagy Anna írta alá a szerződést."
+            },
+            "propositionSpan": {
+              "start": 23,
+              "end": 55,
+              "textSpan": "Nagy Anna írta alá a szerződést."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "attribution:0:55:proposition",
+            "attributionChainId": "attribution:0:55",
+            "claimOwner": {
+              "mention": "minisztérium",
+              "normalized": "minisztérium",
+              "entityId": null,
+              "identityStatus": "local_referent",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 14,
+                "textSpan": "minisztérium"
+              }
+            },
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Nagy Anna",
+                  "normalized": "nagy anna",
+                  "start": 23,
+                  "end": 32,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 23,
+                    "end": 32,
+                    "textSpan": "Nagy Anna"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 23,
+                    "end": 27,
+                    "textSpan": "Nagy"
+                  },
+                  "targetSpan": {
+                    "start": 33,
+                    "end": 37,
+                    "textSpan": "írta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 23,
+                        "end": 27,
+                        "textSpan": "Nagy"
+                      },
+                      "targetSpan": {
+                        "start": 33,
+                        "end": 37,
+                        "textSpan": "írta"
+                      }
+                    }
+                  ],
+                  "frameId": "attribution:0:55:proposition",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "szerződést",
+                  "normalized": "szerződés",
+                  "start": 44,
+                  "end": 54,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 44,
+                    "end": 54,
+                    "textSpan": "szerződést"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 44,
+                    "end": 54,
+                    "textSpan": "szerződést"
+                  },
+                  "targetSpan": {
+                    "start": 33,
+                    "end": 37,
+                    "textSpan": "írta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 44,
+                        "end": 54,
+                        "textSpan": "szerződést"
+                      },
+                      "targetSpan": {
+                        "start": 33,
+                        "end": 37,
+                        "textSpan": "írta"
+                      }
+                    }
+                  ],
+                  "frameId": "attribution:0:55:proposition",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 23,
+                "end": 27,
+                "textSpan": "Nagy"
+              },
+              "targetSpan": {
+                "start": 33,
+                "end": 37,
+                "textSpan": "írta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 23,
+                    "end": 27,
+                    "textSpan": "Nagy"
+                  },
+                  "targetSpan": {
+                    "start": 33,
+                    "end": 37,
+                    "textSpan": "írta"
+                  }
+                }
+              ],
+              "frameId": "attribution:0:55:proposition",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [
+          {
+            "id": "attribution:0:55",
+            "binding": "resolved",
+            "rule": "explicit_sentence_local_attribution_grammar",
+            "unresolvedReasons": [],
+            "narration": {
+              "kind": "journalist/publisher_narration",
+              "publisher": null,
+              "evidenceSpan": {
+                "start": 0,
+                "end": 55,
+                "textSpan": "A minisztérium szerint Nagy Anna írta alá a szerződést."
+              }
+            },
+            "edges": [
+              {
+                "source": {
+                  "mention": "minisztérium",
+                  "normalized": "minisztérium",
+                  "entityId": null,
+                  "identityStatus": "local_referent",
+                  "evidenceSpan": {
+                    "start": 2,
+                    "end": 14,
+                    "textSpan": "minisztérium"
+                  }
+                },
+                "verb": "szerint",
+                "verbSpan": {
+                  "start": 15,
+                  "end": 22,
+                  "textSpan": "szerint"
+                },
+                "recipient": null,
+                "propositionSpan": {
+                  "start": 23,
+                  "end": 55,
+                  "textSpan": "Nagy Anna írta alá a szerződést."
+                },
+                "id": "attribution:0:55:0",
+                "depth": 0,
+                "parentAttributionId": null,
+                "targetId": "attribution:0:55:proposition",
+                "binding": "resolved",
+                "rule": "explicit_source_marker_and_complement",
+                "role": "claim_source"
+              }
+            ],
+            "propositionIds": [
+              "attribution:0:55:proposition"
+            ]
+          }
+        ],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "F",
+      "text": "A szerződést aláírták.",
+      "result": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 22,
+              "textSpan": "A szerződést aláírták."
+            },
+            "attribution": null,
+            "action": "aláír",
+            "actionSpan": {
+              "start": 13,
+              "end": 21,
+              "textSpan": "aláírták"
+            },
+            "object": [
+              "szerződés"
+            ],
+            "numericArguments": [],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved",
+              "dependency_actor_ambiguous_or_implicit"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 22,
+              "textSpan": "A szerződést aláírták."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 22,
+              "textSpan": "A szerződést aláírták."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:22",
+            "syntacticRoles": [
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "szerződést",
+                  "normalized": "szerződés",
+                  "start": 2,
+                  "end": 12,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 2,
+                    "end": 12,
+                    "textSpan": "szerződést"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 12,
+                    "textSpan": "szerződést"
+                  },
+                  "targetSpan": {
+                    "start": 13,
+                    "end": 21,
+                    "textSpan": "aláírták"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 2,
+                        "end": 12,
+                        "textSpan": "szerződést"
+                      },
+                      "targetSpan": {
+                        "start": 13,
+                        "end": 21,
+                        "textSpan": "aláírták"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:22",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ]
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "G",
+      "text": "A 38 éves Nagy Anna 4,2 millió forint támogatást kapott.",
+      "result": {
+        "entities": [
+          {
+            "mention": "Nagy Anna",
+            "normalized": "nagy anna",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 10,
+            "end": 19,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 10,
+              "end": 19,
+              "textSpan": "Nagy Anna"
+            },
+            "identityKey": "person|nagy anna",
+            "canonicalIdentity": "nagy anna",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "start": 10,
+              "end": 19,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 10,
+                "end": 19,
+                "textSpan": "Nagy Anna"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "start": 10,
+              "end": 19,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 10,
+                "end": 19,
+                "textSpan": "Nagy Anna"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 56,
+              "textSpan": "A 38 éves Nagy Anna 4,2 millió forint támogatást kapott."
+            },
+            "attribution": null,
+            "action": "kap",
+            "actionSpan": {
+              "start": 49,
+              "end": 55,
+              "textSpan": "kapott"
+            },
+            "object": [
+              "támogatás"
+            ],
+            "numericArguments": [
+              {
+                "value": 38,
+                "canonicalValue": 38,
+                "unit": "year",
+                "semanticKind": "age",
+                "start": 2,
+                "end": 9,
+                "raw": "38 éves",
+                "evidenceSpan": {
+                  "start": 2,
+                  "end": 9,
+                  "textSpan": "38 éves"
+                },
+                "owner": {
+                  "mention": "Nagy Anna",
+                  "normalized": "nagy anna",
+                  "start": 10,
+                  "end": 19,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 10,
+                    "end": 19,
+                    "textSpan": "Nagy Anna"
+                  }
+                },
+                "ownerType": "entity",
+                "subject": {
+                  "mention": "Nagy Anna",
+                  "normalized": "nagy anna",
+                  "start": 10,
+                  "end": 19,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 10,
+                    "end": 19,
+                    "textSpan": "Nagy Anna"
+                  }
+                },
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "age",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 4,
+                    "textSpan": "38"
+                  },
+                  "targetSpan": {
+                    "start": 10,
+                    "end": 14,
+                    "textSpan": "Nagy"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nummod",
+                      "sourceSpan": {
+                        "start": 2,
+                        "end": 4,
+                        "textSpan": "38"
+                      },
+                      "targetSpan": {
+                        "start": 5,
+                        "end": 9,
+                        "textSpan": "éves"
+                      }
+                    },
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 5,
+                        "end": 9,
+                        "textSpan": "éves"
+                      },
+                      "targetSpan": {
+                        "start": 10,
+                        "end": 14,
+                        "textSpan": "Nagy"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:56",
+                  "semanticRole": "age",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "value": 4200000,
+                "canonicalValue": 4200000,
+                "unit": "HUF",
+                "semanticKind": "money",
+                "start": 20,
+                "end": 37,
+                "raw": "4,2 millió forint",
+                "evidenceSpan": {
+                  "start": 20,
+                  "end": 37,
+                  "textSpan": "4,2 millió forint"
+                },
+                "owner": {
+                  "mention": "támogatást",
+                  "normalized": "támogatás",
+                  "start": 38,
+                  "end": 48,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 38,
+                    "end": 48,
+                    "textSpan": "támogatást"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "money",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 20,
+                    "end": 23,
+                    "textSpan": "4,2"
+                  },
+                  "targetSpan": {
+                    "start": 38,
+                    "end": 48,
+                    "textSpan": "támogatást"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "compound",
+                      "sourceSpan": {
+                        "start": 20,
+                        "end": 23,
+                        "textSpan": "4,2"
+                      },
+                      "targetSpan": {
+                        "start": 24,
+                        "end": 30,
+                        "textSpan": "millió"
+                      }
+                    },
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 24,
+                        "end": 30,
+                        "textSpan": "millió"
+                      },
+                      "targetSpan": {
+                        "start": 31,
+                        "end": 37,
+                        "textSpan": "forint"
+                      }
+                    },
+                    {
+                      "relation": "nmod:att",
+                      "sourceSpan": {
+                        "start": 31,
+                        "end": 37,
+                        "textSpan": "forint"
+                      },
+                      "targetSpan": {
+                        "start": 38,
+                        "end": 48,
+                        "textSpan": "támogatást"
+                      }
+                    },
+                    {
+                      "relation": "obj:lvc",
+                      "sourceSpan": {
+                        "start": 38,
+                        "end": 48,
+                        "textSpan": "támogatást"
+                      },
+                      "targetSpan": {
+                        "start": 49,
+                        "end": 55,
+                        "textSpan": "kapott"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:56",
+                  "semanticRole": "money",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 56,
+              "textSpan": "A 38 éves Nagy Anna 4,2 millió forint támogatást kapott."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 56,
+              "textSpan": "A 38 éves Nagy Anna 4,2 millió forint támogatást kapott."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:56",
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Nagy Anna",
+                  "normalized": "nagy anna",
+                  "start": 10,
+                  "end": 19,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 10,
+                    "end": 19,
+                    "textSpan": "Nagy Anna"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 10,
+                    "end": 14,
+                    "textSpan": "Nagy"
+                  },
+                  "targetSpan": {
+                    "start": 49,
+                    "end": 55,
+                    "textSpan": "kapott"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 10,
+                        "end": 14,
+                        "textSpan": "Nagy"
+                      },
+                      "targetSpan": {
+                        "start": 49,
+                        "end": 55,
+                        "textSpan": "kapott"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:56",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "támogatást",
+                  "normalized": "támogatás",
+                  "start": 38,
+                  "end": 48,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 38,
+                    "end": 48,
+                    "textSpan": "támogatást"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 38,
+                    "end": 48,
+                    "textSpan": "támogatást"
+                  },
+                  "targetSpan": {
+                    "start": 49,
+                    "end": 55,
+                    "textSpan": "kapott"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj:lvc",
+                      "sourceSpan": {
+                        "start": 38,
+                        "end": 48,
+                        "textSpan": "támogatást"
+                      },
+                      "targetSpan": {
+                        "start": 49,
+                        "end": 55,
+                        "textSpan": "kapott"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:56",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 10,
+                "end": 14,
+                "textSpan": "Nagy"
+              },
+              "targetSpan": {
+                "start": 49,
+                "end": 55,
+                "textSpan": "kapott"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 10,
+                    "end": 14,
+                    "textSpan": "Nagy"
+                  },
+                  "targetSpan": {
+                    "start": 49,
+                    "end": 55,
+                    "textSpan": "kapott"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:56",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "H",
+      "text": "Nagy Anna cége 120 embert foglalkoztat.",
+      "result": {
+        "entities": [
+          {
+            "mention": "Nagy Anna",
+            "normalized": "nagy anna",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 9,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 9,
+              "textSpan": "Nagy Anna"
+            },
+            "identityKey": "person|nagy anna",
+            "canonicalIdentity": "nagy anna",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "cége",
+              "normalized": "cég",
+              "start": 10,
+              "end": 14,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 10,
+                "end": 14,
+                "textSpan": "cége"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "cége",
+              "normalized": "cég",
+              "start": 10,
+              "end": 14,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 10,
+                "end": 14,
+                "textSpan": "cége"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 39,
+              "textSpan": "Nagy Anna cége 120 embert foglalkoztat."
+            },
+            "attribution": null,
+            "action": "foglalkoztat",
+            "actionSpan": {
+              "start": 26,
+              "end": 38,
+              "textSpan": "foglalkoztat"
+            },
+            "object": [
+              "ember"
+            ],
+            "numericArguments": [
+              {
+                "value": 120,
+                "canonicalValue": 120,
+                "unit": "person",
+                "semanticKind": "count",
+                "start": 15,
+                "end": 25,
+                "raw": "120 embert",
+                "evidenceSpan": {
+                  "start": 15,
+                  "end": 25,
+                  "textSpan": "120 embert"
+                },
+                "owner": {
+                  "mention": "embert",
+                  "normalized": "ember",
+                  "start": 19,
+                  "end": 25,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 19,
+                    "end": 25,
+                    "textSpan": "embert"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "count",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 15,
+                    "end": 18,
+                    "textSpan": "120"
+                  },
+                  "targetSpan": {
+                    "start": 19,
+                    "end": 25,
+                    "textSpan": "embert"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nummod",
+                      "sourceSpan": {
+                        "start": 15,
+                        "end": 18,
+                        "textSpan": "120"
+                      },
+                      "targetSpan": {
+                        "start": 19,
+                        "end": 25,
+                        "textSpan": "embert"
+                      }
+                    },
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 19,
+                        "end": 25,
+                        "textSpan": "embert"
+                      },
+                      "targetSpan": {
+                        "start": 26,
+                        "end": 38,
+                        "textSpan": "foglalkoztat"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:39",
+                  "semanticRole": "count",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_binding_unresolved",
+              "unsupported_local_actor"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 39,
+              "textSpan": "Nagy Anna cége 120 embert foglalkoztat."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 39,
+              "textSpan": "Nagy Anna cége 120 embert foglalkoztat."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:39",
+            "syntacticRoles": [
+              {
+                "role": "possessor",
+                "referent": {
+                  "mention": "Nagy Anna",
+                  "normalized": "nagy anna",
+                  "start": 0,
+                  "end": 9,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 9,
+                    "textSpan": "Nagy Anna"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 4,
+                    "textSpan": "Nagy"
+                  },
+                  "targetSpan": {
+                    "start": 26,
+                    "end": 38,
+                    "textSpan": "foglalkoztat"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nmod:att",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 4,
+                        "textSpan": "Nagy"
+                      },
+                      "targetSpan": {
+                        "start": 10,
+                        "end": 14,
+                        "textSpan": "cége"
+                      }
+                    },
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 10,
+                        "end": 14,
+                        "textSpan": "cége"
+                      },
+                      "targetSpan": {
+                        "start": 26,
+                        "end": 38,
+                        "textSpan": "foglalkoztat"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:39",
+                  "semanticRole": "possessor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "cége",
+                  "normalized": "cég",
+                  "start": 10,
+                  "end": 14,
+                  "type": "referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 10,
+                    "end": 14,
+                    "textSpan": "cége"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 10,
+                    "end": 14,
+                    "textSpan": "cége"
+                  },
+                  "targetSpan": {
+                    "start": 26,
+                    "end": 38,
+                    "textSpan": "foglalkoztat"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 10,
+                        "end": 14,
+                        "textSpan": "cége"
+                      },
+                      "targetSpan": {
+                        "start": 26,
+                        "end": 38,
+                        "textSpan": "foglalkoztat"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:39",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "embert",
+                  "normalized": "ember",
+                  "start": 19,
+                  "end": 25,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 19,
+                    "end": 25,
+                    "textSpan": "embert"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 19,
+                    "end": 25,
+                    "textSpan": "embert"
+                  },
+                  "targetSpan": {
+                    "start": 26,
+                    "end": 38,
+                    "textSpan": "foglalkoztat"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 19,
+                        "end": 25,
+                        "textSpan": "embert"
+                      },
+                      "targetSpan": {
+                        "start": 26,
+                        "end": 38,
+                        "textSpan": "foglalkoztat"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:39",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 10,
+                "end": 14,
+                "textSpan": "cége"
+              },
+              "targetSpan": {
+                "start": 26,
+                "end": 38,
+                "textSpan": "foglalkoztat"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 10,
+                    "end": 14,
+                    "textSpan": "cége"
+                  },
+                  "targetSpan": {
+                    "start": 26,
+                    "end": 38,
+                    "textSpan": "foglalkoztat"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:39",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "I",
+      "text": "A vállalat 2025-ben 15 százalékkal növelte a béreket.",
+      "result": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "vállalat",
+              "normalized": "vállalat",
+              "start": 2,
+              "end": 10,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 10,
+                "textSpan": "vállalat"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "vállalat",
+              "normalized": "vállalat",
+              "start": 2,
+              "end": 10,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 10,
+                "textSpan": "vállalat"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 53,
+              "textSpan": "A vállalat 2025-ben 15 százalékkal növelte a béreket."
+            },
+            "attribution": null,
+            "action": "növel",
+            "actionSpan": {
+              "start": 35,
+              "end": 42,
+              "textSpan": "növelte"
+            },
+            "object": [
+              "bér"
+            ],
+            "numericArguments": [
+              {
+                "value": 2025,
+                "canonicalValue": 2025,
+                "unit": "year",
+                "semanticKind": "year",
+                "start": 11,
+                "end": 19,
+                "raw": "2025-ben",
+                "evidenceSpan": {
+                  "start": 11,
+                  "end": 19,
+                  "textSpan": "2025-ben"
+                },
+                "owner": {
+                  "mention": "növelte",
+                  "normalized": "növel",
+                  "start": 35,
+                  "end": 42,
+                  "type": "referent",
+                  "evidenceSpan": {
+                    "start": 35,
+                    "end": 42,
+                    "textSpan": "növelte"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "year",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 11,
+                    "end": 19,
+                    "textSpan": "2025-ben"
+                  },
+                  "targetSpan": {
+                    "start": 35,
+                    "end": 42,
+                    "textSpan": "növelte"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 11,
+                        "end": 19,
+                        "textSpan": "2025-ben"
+                      },
+                      "targetSpan": {
+                        "start": 35,
+                        "end": 42,
+                        "textSpan": "növelte"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:53",
+                  "semanticRole": "year",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "value": 15,
+                "canonicalValue": 15,
+                "unit": "%",
+                "semanticKind": "change_magnitude",
+                "start": 20,
+                "end": 34,
+                "raw": "15 százalékkal",
+                "evidenceSpan": {
+                  "start": 20,
+                  "end": 34,
+                  "textSpan": "15 százalékkal"
+                },
+                "owner": {
+                  "mention": "százalékkal",
+                  "normalized": "százalék",
+                  "start": 23,
+                  "end": 34,
+                  "type": "referent",
+                  "case": "Ins",
+                  "evidenceSpan": {
+                    "start": 23,
+                    "end": 34,
+                    "textSpan": "százalékkal"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "change_magnitude",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 20,
+                    "end": 22,
+                    "textSpan": "15"
+                  },
+                  "targetSpan": {
+                    "start": 23,
+                    "end": 34,
+                    "textSpan": "százalékkal"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 20,
+                        "end": 22,
+                        "textSpan": "15"
+                      },
+                      "targetSpan": {
+                        "start": 23,
+                        "end": 34,
+                        "textSpan": "százalékkal"
+                      }
+                    },
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 23,
+                        "end": 34,
+                        "textSpan": "százalékkal"
+                      },
+                      "targetSpan": {
+                        "start": 35,
+                        "end": 42,
+                        "textSpan": "növelte"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:53",
+                  "semanticRole": "change_magnitude",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 53,
+              "textSpan": "A vállalat 2025-ben 15 százalékkal növelte a béreket."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 53,
+              "textSpan": "A vállalat 2025-ben 15 százalékkal növelte a béreket."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:53",
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "vállalat",
+                  "normalized": "vállalat",
+                  "start": 2,
+                  "end": 10,
+                  "type": "referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 2,
+                    "end": 10,
+                    "textSpan": "vállalat"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 10,
+                    "textSpan": "vállalat"
+                  },
+                  "targetSpan": {
+                    "start": 35,
+                    "end": 42,
+                    "textSpan": "növelte"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 2,
+                        "end": 10,
+                        "textSpan": "vállalat"
+                      },
+                      "targetSpan": {
+                        "start": 35,
+                        "end": 42,
+                        "textSpan": "növelte"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:53",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "béreket",
+                  "normalized": "bér",
+                  "start": 45,
+                  "end": 52,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 45,
+                    "end": 52,
+                    "textSpan": "béreket"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 45,
+                    "end": 52,
+                    "textSpan": "béreket"
+                  },
+                  "targetSpan": {
+                    "start": 35,
+                    "end": 42,
+                    "textSpan": "növelte"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 45,
+                        "end": 52,
+                        "textSpan": "béreket"
+                      },
+                      "targetSpan": {
+                        "start": 35,
+                        "end": 42,
+                        "textSpan": "növelte"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:53",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 2,
+                "end": 10,
+                "textSpan": "vállalat"
+              },
+              "targetSpan": {
+                "start": 35,
+                "end": 42,
+                "textSpan": "növelte"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 10,
+                    "textSpan": "vállalat"
+                  },
+                  "targetSpan": {
+                    "start": 35,
+                    "end": 42,
+                    "textSpan": "növelte"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:53",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "J",
+      "text": "A 42 éves férfi cége 3 milliárd forint bevételt ért el.",
+      "result": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "cége",
+              "normalized": "cég",
+              "start": 16,
+              "end": 20,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 16,
+                "end": 20,
+                "textSpan": "cége"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "cége",
+              "normalized": "cég",
+              "start": 16,
+              "end": 20,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 16,
+                "end": 20,
+                "textSpan": "cége"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 55,
+              "textSpan": "A 42 éves férfi cége 3 milliárd forint bevételt ért el."
+            },
+            "attribution": null,
+            "action": "elér",
+            "actionSpan": {
+              "start": 48,
+              "end": 51,
+              "textSpan": "ért"
+            },
+            "object": [
+              "bevétel"
+            ],
+            "numericArguments": [
+              {
+                "value": 42,
+                "canonicalValue": 42,
+                "unit": "year",
+                "semanticKind": "age",
+                "start": 2,
+                "end": 9,
+                "raw": "42 éves",
+                "evidenceSpan": {
+                  "start": 2,
+                  "end": 9,
+                  "textSpan": "42 éves"
+                },
+                "owner": {
+                  "mention": "férfi",
+                  "normalized": "férfi",
+                  "start": 10,
+                  "end": 15,
+                  "type": "referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 10,
+                    "end": 15,
+                    "textSpan": "férfi"
+                  }
+                },
+                "ownerType": "entity",
+                "subject": {
+                  "mention": "férfi",
+                  "normalized": "férfi",
+                  "start": 10,
+                  "end": 15,
+                  "type": "referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 10,
+                    "end": 15,
+                    "textSpan": "férfi"
+                  }
+                },
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "age",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 4,
+                    "textSpan": "42"
+                  },
+                  "targetSpan": {
+                    "start": 10,
+                    "end": 15,
+                    "textSpan": "férfi"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nummod",
+                      "sourceSpan": {
+                        "start": 2,
+                        "end": 4,
+                        "textSpan": "42"
+                      },
+                      "targetSpan": {
+                        "start": 5,
+                        "end": 9,
+                        "textSpan": "éves"
+                      }
+                    },
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 5,
+                        "end": 9,
+                        "textSpan": "éves"
+                      },
+                      "targetSpan": {
+                        "start": 10,
+                        "end": 15,
+                        "textSpan": "férfi"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:55",
+                  "semanticRole": "age",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "value": 3000000000,
+                "canonicalValue": 3000000000,
+                "unit": "HUF",
+                "semanticKind": "money",
+                "start": 21,
+                "end": 38,
+                "raw": "3 milliárd forint",
+                "evidenceSpan": {
+                  "start": 21,
+                  "end": 38,
+                  "textSpan": "3 milliárd forint"
+                },
+                "owner": {
+                  "mention": "bevételt",
+                  "normalized": "bevétel",
+                  "start": 39,
+                  "end": 47,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 39,
+                    "end": 47,
+                    "textSpan": "bevételt"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "money",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 21,
+                    "end": 22,
+                    "textSpan": "3"
+                  },
+                  "targetSpan": {
+                    "start": 39,
+                    "end": 47,
+                    "textSpan": "bevételt"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "compound",
+                      "sourceSpan": {
+                        "start": 21,
+                        "end": 22,
+                        "textSpan": "3"
+                      },
+                      "targetSpan": {
+                        "start": 23,
+                        "end": 31,
+                        "textSpan": "milliárd"
+                      }
+                    },
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 23,
+                        "end": 31,
+                        "textSpan": "milliárd"
+                      },
+                      "targetSpan": {
+                        "start": 32,
+                        "end": 38,
+                        "textSpan": "forint"
+                      }
+                    },
+                    {
+                      "relation": "nmod:att",
+                      "sourceSpan": {
+                        "start": 32,
+                        "end": 38,
+                        "textSpan": "forint"
+                      },
+                      "targetSpan": {
+                        "start": 39,
+                        "end": 47,
+                        "textSpan": "bevételt"
+                      }
+                    },
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 39,
+                        "end": 47,
+                        "textSpan": "bevételt"
+                      },
+                      "targetSpan": {
+                        "start": 48,
+                        "end": 51,
+                        "textSpan": "ért"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:55",
+                  "semanticRole": "money",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved",
+              "numeric_binding_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 55,
+              "textSpan": "A 42 éves férfi cége 3 milliárd forint bevételt ért el."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 55,
+              "textSpan": "A 42 éves férfi cége 3 milliárd forint bevételt ért el."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:55",
+            "syntacticRoles": [
+              {
+                "role": "possessor",
+                "referent": {
+                  "mention": "férfi",
+                  "normalized": "férfi",
+                  "start": 10,
+                  "end": 15,
+                  "type": "referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 10,
+                    "end": 15,
+                    "textSpan": "férfi"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 10,
+                    "end": 15,
+                    "textSpan": "férfi"
+                  },
+                  "targetSpan": {
+                    "start": 48,
+                    "end": 51,
+                    "textSpan": "ért"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nmod:att",
+                      "sourceSpan": {
+                        "start": 10,
+                        "end": 15,
+                        "textSpan": "férfi"
+                      },
+                      "targetSpan": {
+                        "start": 16,
+                        "end": 20,
+                        "textSpan": "cége"
+                      }
+                    },
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 16,
+                        "end": 20,
+                        "textSpan": "cége"
+                      },
+                      "targetSpan": {
+                        "start": 48,
+                        "end": 51,
+                        "textSpan": "ért"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:55",
+                  "semanticRole": "possessor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "cége",
+                  "normalized": "cég",
+                  "start": 16,
+                  "end": 20,
+                  "type": "referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 16,
+                    "end": 20,
+                    "textSpan": "cége"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 16,
+                    "end": 20,
+                    "textSpan": "cége"
+                  },
+                  "targetSpan": {
+                    "start": 48,
+                    "end": 51,
+                    "textSpan": "ért"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 16,
+                        "end": 20,
+                        "textSpan": "cége"
+                      },
+                      "targetSpan": {
+                        "start": 48,
+                        "end": 51,
+                        "textSpan": "ért"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:55",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "bevételt",
+                  "normalized": "bevétel",
+                  "start": 39,
+                  "end": 47,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 39,
+                    "end": 47,
+                    "textSpan": "bevételt"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 39,
+                    "end": 47,
+                    "textSpan": "bevételt"
+                  },
+                  "targetSpan": {
+                    "start": 48,
+                    "end": 51,
+                    "textSpan": "ért"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 39,
+                        "end": 47,
+                        "textSpan": "bevételt"
+                      },
+                      "targetSpan": {
+                        "start": 48,
+                        "end": 51,
+                        "textSpan": "ért"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:55",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 16,
+                "end": 20,
+                "textSpan": "cége"
+              },
+              "targetSpan": {
+                "start": 48,
+                "end": 51,
+                "textSpan": "ért"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 16,
+                    "end": 20,
+                    "textSpan": "cége"
+                  },
+                  "targetSpan": {
+                    "start": 48,
+                    "end": 51,
+                    "textSpan": "ért"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:55",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "K",
+      "text": "A projekt három év alatt 27 százalékkal drágult.",
+      "result": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "projekt",
+              "normalized": "projekt",
+              "start": 2,
+              "end": 9,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 9,
+                "textSpan": "projekt"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "projekt",
+              "normalized": "projekt",
+              "start": 2,
+              "end": 9,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 9,
+                "textSpan": "projekt"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 48,
+              "textSpan": "A projekt három év alatt 27 százalékkal drágult."
+            },
+            "attribution": null,
+            "action": "drágul",
+            "actionSpan": {
+              "start": 40,
+              "end": 47,
+              "textSpan": "drágult"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "value": 3,
+                "canonicalValue": 3,
+                "unit": "year",
+                "semanticKind": "duration",
+                "start": 10,
+                "end": 18,
+                "raw": "három év",
+                "evidenceSpan": {
+                  "start": 10,
+                  "end": 18,
+                  "textSpan": "három év"
+                },
+                "owner": {
+                  "mention": "év",
+                  "normalized": "év",
+                  "start": 16,
+                  "end": 18,
+                  "type": "referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 16,
+                    "end": 18,
+                    "textSpan": "év"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "duration",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 10,
+                    "end": 15,
+                    "textSpan": "három"
+                  },
+                  "targetSpan": {
+                    "start": 16,
+                    "end": 18,
+                    "textSpan": "év"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nummod",
+                      "sourceSpan": {
+                        "start": 10,
+                        "end": 15,
+                        "textSpan": "három"
+                      },
+                      "targetSpan": {
+                        "start": 16,
+                        "end": 18,
+                        "textSpan": "év"
+                      }
+                    },
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 16,
+                        "end": 18,
+                        "textSpan": "év"
+                      },
+                      "targetSpan": {
+                        "start": 40,
+                        "end": 47,
+                        "textSpan": "drágult"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:48",
+                  "semanticRole": "duration",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "value": 27,
+                "canonicalValue": 27,
+                "unit": "%",
+                "semanticKind": "change_magnitude",
+                "start": 25,
+                "end": 39,
+                "raw": "27 százalékkal",
+                "evidenceSpan": {
+                  "start": 25,
+                  "end": 39,
+                  "textSpan": "27 százalékkal"
+                },
+                "owner": {
+                  "mention": "százalékkal",
+                  "normalized": "százalék",
+                  "start": 28,
+                  "end": 39,
+                  "type": "referent",
+                  "case": "Ins",
+                  "evidenceSpan": {
+                    "start": 28,
+                    "end": 39,
+                    "textSpan": "százalékkal"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "change_magnitude",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 25,
+                    "end": 27,
+                    "textSpan": "27"
+                  },
+                  "targetSpan": {
+                    "start": 28,
+                    "end": 39,
+                    "textSpan": "százalékkal"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 25,
+                        "end": 27,
+                        "textSpan": "27"
+                      },
+                      "targetSpan": {
+                        "start": 28,
+                        "end": 39,
+                        "textSpan": "százalékkal"
+                      }
+                    },
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 28,
+                        "end": 39,
+                        "textSpan": "százalékkal"
+                      },
+                      "targetSpan": {
+                        "start": 40,
+                        "end": 47,
+                        "textSpan": "drágult"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:48",
+                  "semanticRole": "change_magnitude",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved",
+              "numeric_binding_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 48,
+              "textSpan": "A projekt három év alatt 27 százalékkal drágult."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 48,
+              "textSpan": "A projekt három év alatt 27 százalékkal drágult."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:48",
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "projekt",
+                  "normalized": "projekt",
+                  "start": 2,
+                  "end": 9,
+                  "type": "referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 2,
+                    "end": 9,
+                    "textSpan": "projekt"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 9,
+                    "textSpan": "projekt"
+                  },
+                  "targetSpan": {
+                    "start": 40,
+                    "end": 47,
+                    "textSpan": "drágult"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 2,
+                        "end": 9,
+                        "textSpan": "projekt"
+                      },
+                      "targetSpan": {
+                        "start": 40,
+                        "end": 47,
+                        "textSpan": "drágult"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:48",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 2,
+                "end": 9,
+                "textSpan": "projekt"
+              },
+              "targetSpan": {
+                "start": 40,
+                "end": 47,
+                "textSpan": "drágult"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 9,
+                    "textSpan": "projekt"
+                  },
+                  "targetSpan": {
+                    "start": 40,
+                    "end": 47,
+                    "textSpan": "drágult"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:48",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "L",
+      "text": "A cég 120 embert vett fel 2026-ban.",
+      "result": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "cég",
+              "normalized": "cég",
+              "start": 2,
+              "end": 5,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 5,
+                "textSpan": "cég"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "cég",
+              "normalized": "cég",
+              "start": 2,
+              "end": 5,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 5,
+                "textSpan": "cég"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 35,
+              "textSpan": "A cég 120 embert vett fel 2026-ban."
+            },
+            "attribution": null,
+            "action": "felvesz",
+            "actionSpan": {
+              "start": 17,
+              "end": 21,
+              "textSpan": "vett"
+            },
+            "object": [
+              "ember"
+            ],
+            "numericArguments": [
+              {
+                "value": 120,
+                "canonicalValue": 120,
+                "unit": "person",
+                "semanticKind": "count",
+                "start": 6,
+                "end": 16,
+                "raw": "120 embert",
+                "evidenceSpan": {
+                  "start": 6,
+                  "end": 16,
+                  "textSpan": "120 embert"
+                },
+                "owner": {
+                  "mention": "embert",
+                  "normalized": "ember",
+                  "start": 10,
+                  "end": 16,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 10,
+                    "end": 16,
+                    "textSpan": "embert"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "count",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 6,
+                    "end": 9,
+                    "textSpan": "120"
+                  },
+                  "targetSpan": {
+                    "start": 10,
+                    "end": 16,
+                    "textSpan": "embert"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nummod",
+                      "sourceSpan": {
+                        "start": 6,
+                        "end": 9,
+                        "textSpan": "120"
+                      },
+                      "targetSpan": {
+                        "start": 10,
+                        "end": 16,
+                        "textSpan": "embert"
+                      }
+                    },
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 10,
+                        "end": 16,
+                        "textSpan": "embert"
+                      },
+                      "targetSpan": {
+                        "start": 17,
+                        "end": 21,
+                        "textSpan": "vett"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:35",
+                  "semanticRole": "count",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "value": 2026,
+                "canonicalValue": 2026,
+                "unit": "year",
+                "semanticKind": "year",
+                "start": 26,
+                "end": 34,
+                "raw": "2026-ban",
+                "evidenceSpan": {
+                  "start": 26,
+                  "end": 34,
+                  "textSpan": "2026-ban"
+                },
+                "owner": {
+                  "mention": "vett",
+                  "normalized": "vesz",
+                  "start": 17,
+                  "end": 21,
+                  "type": "referent",
+                  "evidenceSpan": {
+                    "start": 17,
+                    "end": 21,
+                    "textSpan": "vett"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "year",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 26,
+                    "end": 34,
+                    "textSpan": "2026-ban"
+                  },
+                  "targetSpan": {
+                    "start": 17,
+                    "end": 21,
+                    "textSpan": "vett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 26,
+                        "end": 34,
+                        "textSpan": "2026-ban"
+                      },
+                      "targetSpan": {
+                        "start": 17,
+                        "end": 21,
+                        "textSpan": "vett"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:35",
+                  "semanticRole": "year",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved",
+              "numeric_binding_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 35,
+              "textSpan": "A cég 120 embert vett fel 2026-ban."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 35,
+              "textSpan": "A cég 120 embert vett fel 2026-ban."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:35",
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "cég",
+                  "normalized": "cég",
+                  "start": 2,
+                  "end": 5,
+                  "type": "referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 2,
+                    "end": 5,
+                    "textSpan": "cég"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 5,
+                    "textSpan": "cég"
+                  },
+                  "targetSpan": {
+                    "start": 17,
+                    "end": 21,
+                    "textSpan": "vett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 2,
+                        "end": 5,
+                        "textSpan": "cég"
+                      },
+                      "targetSpan": {
+                        "start": 17,
+                        "end": 21,
+                        "textSpan": "vett"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:35",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "embert",
+                  "normalized": "ember",
+                  "start": 10,
+                  "end": 16,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 10,
+                    "end": 16,
+                    "textSpan": "embert"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 10,
+                    "end": 16,
+                    "textSpan": "embert"
+                  },
+                  "targetSpan": {
+                    "start": 17,
+                    "end": 21,
+                    "textSpan": "vett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 10,
+                        "end": 16,
+                        "textSpan": "embert"
+                      },
+                      "targetSpan": {
+                        "start": 17,
+                        "end": 21,
+                        "textSpan": "vett"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:35",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 2,
+                "end": 5,
+                "textSpan": "cég"
+              },
+              "targetSpan": {
+                "start": 17,
+                "end": 21,
+                "textSpan": "vett"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 5,
+                    "textSpan": "cég"
+                  },
+                  "targetSpan": {
+                    "start": 17,
+                    "end": 21,
+                    "textSpan": "vett"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:35",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": null,
+      "text": "Nem Péter, hanem Anna írta alá a szerződést.",
+      "result": {
+        "entities": [
+          {
+            "mention": "Anna",
+            "normalized": "anna",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 17,
+            "end": 21,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 17,
+              "end": 21,
+              "textSpan": "Anna"
+            },
+            "identityKey": "person|anna",
+            "canonicalIdentity": "anna",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Anna",
+              "normalized": "anna",
+              "start": 17,
+              "end": 21,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 17,
+                "end": 21,
+                "textSpan": "Anna"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Anna",
+              "normalized": "anna",
+              "start": 17,
+              "end": 21,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 17,
+                "end": 21,
+                "textSpan": "Anna"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 17,
+              "end": 44,
+              "textSpan": "Anna írta alá a szerződést."
+            },
+            "attribution": null,
+            "action": "aláír",
+            "actionSpan": {
+              "start": 22,
+              "end": 26,
+              "textSpan": "írta"
+            },
+            "object": [
+              "szerződés"
+            ],
+            "numericArguments": [],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "evidenceSpan": {
+              "start": 17,
+              "end": 44,
+              "textSpan": "Anna írta alá a szerződést."
+            },
+            "propositionSpan": {
+              "start": 17,
+              "end": 44,
+              "textSpan": "Anna írta alá a szerződést."
+            },
+            "canonicalProjectionAllowed": false,
+            "contrasts": [
+              {
+                "binding": "resolved",
+                "rule": "parallel_alternatives_single_finite_predicate",
+                "slot": "actor",
+                "evidenceSpan": {
+                  "start": 0,
+                  "end": 44,
+                  "textSpan": "Nem Péter, hanem Anna írta alá a szerződést."
+                },
+                "scope": {
+                  "start": 0,
+                  "end": 44
+                },
+                "rejected": {
+                  "value": "péter",
+                  "case": "Nom",
+                  "status": "rejected",
+                  "evidenceSpan": {
+                    "start": 4,
+                    "end": 9,
+                    "textSpan": "Péter"
+                  }
+                },
+                "accepted": {
+                  "value": "anna",
+                  "case": "Nom",
+                  "status": "accepted",
+                  "evidenceSpan": {
+                    "start": 17,
+                    "end": 21,
+                    "textSpan": "Anna"
+                  }
+                },
+                "frameId": "contrast:0:44"
+              }
+            ],
+            "frameId": "contrast:0:44",
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Anna",
+                  "normalized": "anna",
+                  "start": 17,
+                  "end": 21,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 17,
+                    "end": 21,
+                    "textSpan": "Anna"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 17,
+                    "end": 21,
+                    "textSpan": "Anna"
+                  },
+                  "targetSpan": {
+                    "start": 22,
+                    "end": 26,
+                    "textSpan": "írta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "conj",
+                      "sourceSpan": {
+                        "start": 17,
+                        "end": 21,
+                        "textSpan": "Anna"
+                      },
+                      "targetSpan": {
+                        "start": 4,
+                        "end": 9,
+                        "textSpan": "Péter"
+                      }
+                    },
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 4,
+                        "end": 9,
+                        "textSpan": "Péter"
+                      },
+                      "targetSpan": {
+                        "start": 22,
+                        "end": 26,
+                        "textSpan": "írta"
+                      }
+                    }
+                  ],
+                  "frameId": "contrast:0:44",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "szerződést",
+                  "normalized": "szerződés",
+                  "start": 33,
+                  "end": 43,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 33,
+                    "end": 43,
+                    "textSpan": "szerződést"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 33,
+                    "end": 43,
+                    "textSpan": "szerződést"
+                  },
+                  "targetSpan": {
+                    "start": 22,
+                    "end": 26,
+                    "textSpan": "írta"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 33,
+                        "end": 43,
+                        "textSpan": "szerződést"
+                      },
+                      "targetSpan": {
+                        "start": 22,
+                        "end": 26,
+                        "textSpan": "írta"
+                      }
+                    }
+                  ],
+                  "frameId": "contrast:0:44",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 17,
+                "end": 21,
+                "textSpan": "Anna"
+              },
+              "targetSpan": {
+                "start": 22,
+                "end": 26,
+                "textSpan": "írta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "conj",
+                  "sourceSpan": {
+                    "start": 17,
+                    "end": 21,
+                    "textSpan": "Anna"
+                  },
+                  "targetSpan": {
+                    "start": 4,
+                    "end": 9,
+                    "textSpan": "Péter"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 4,
+                    "end": 9,
+                    "textSpan": "Péter"
+                  },
+                  "targetSpan": {
+                    "start": 22,
+                    "end": 26,
+                    "textSpan": "írta"
+                  }
+                }
+              ],
+              "frameId": "contrast:0:44",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "contrasts": [
+          {
+            "binding": "resolved",
+            "rule": "parallel_alternatives_single_finite_predicate",
+            "slot": "actor",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 44,
+              "textSpan": "Nem Péter, hanem Anna írta alá a szerződést."
+            },
+            "scope": {
+              "start": 0,
+              "end": 44
+            },
+            "rejected": {
+              "value": "péter",
+              "case": "Nom",
+              "status": "rejected",
+              "evidenceSpan": {
+                "start": 4,
+                "end": 9,
+                "textSpan": "Péter"
+              }
+            },
+            "accepted": {
+              "value": "anna",
+              "case": "Nom",
+              "status": "accepted",
+              "evidenceSpan": {
+                "start": 17,
+                "end": 21,
+                "textSpan": "Anna"
+              }
+            },
+            "frameId": "contrast:0:44"
+          }
+        ],
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": null,
+      "text": "A cég nem 20, hanem 35 embert bocsát el.",
+      "result": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 40,
+              "textSpan": "A cég nem 20, hanem 35 embert bocsát el."
+            },
+            "attribution": null,
+            "action": "elbocsát",
+            "actionSpan": {
+              "start": 30,
+              "end": 36,
+              "textSpan": "bocsát"
+            },
+            "object": [
+              "ember"
+            ],
+            "numericArguments": [
+              {
+                "value": 35,
+                "canonicalValue": 35,
+                "unit": "person",
+                "semanticKind": "count",
+                "status": "accepted",
+                "binding": "resolved",
+                "ownerType": "semantic_role",
+                "owner": {
+                  "label": "number",
+                  "evidenceSpan": {
+                    "start": 20,
+                    "end": 29,
+                    "textSpan": "35 embert"
+                  }
+                },
+                "subject": null,
+                "property": "number",
+                "unresolvedReasons": [],
+                "start": 20,
+                "end": 29,
+                "raw": "35 embert",
+                "evidenceSpan": {
+                  "start": 20,
+                  "end": 29,
+                  "textSpan": "35 embert"
+                },
+                "bindingEvidence": {
+                  "rule": "parallel_alternatives_single_finite_predicate",
+                  "clauseSpan": {
+                    "start": 0,
+                    "end": 40,
+                    "textSpan": "A cég nem 20, hanem 35 embert bocsát el."
+                  },
+                  "predicateSpan": {
+                    "start": 30,
+                    "end": 36,
+                    "textSpan": "bocsát"
+                  },
+                  "ownerSpan": {
+                    "start": 20,
+                    "end": 29,
+                    "textSpan": "35 embert"
+                  },
+                  "sourceSpan": {
+                    "start": 20,
+                    "end": 29,
+                    "textSpan": "35 embert"
+                  },
+                  "targetSpan": {
+                    "start": 20,
+                    "end": 29,
+                    "textSpan": "35 embert"
+                  },
+                  "frameId": "contrast:0:40",
+                  "semanticRole": "count",
+                  "resolutionStatus": "resolved",
+                  "syntacticReason": "parallel_alternatives_single_finite_predicate"
+                },
+                "contrastFrameId": "contrast:0:40"
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved",
+              "dependency_actor_ambiguous_or_implicit"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 40,
+              "textSpan": "A cég nem 20, hanem 35 embert bocsát el."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 40,
+              "textSpan": "A cég nem 20, hanem 35 embert bocsát el."
+            },
+            "canonicalProjectionAllowed": false,
+            "contrasts": [
+              {
+                "binding": "resolved",
+                "rule": "parallel_alternatives_single_finite_predicate",
+                "slot": "number",
+                "evidenceSpan": {
+                  "start": 0,
+                  "end": 40,
+                  "textSpan": "A cég nem 20, hanem 35 embert bocsát el."
+                },
+                "scope": {
+                  "start": 0,
+                  "end": 40
+                },
+                "rejected": {
+                  "value": 20,
+                  "scale": 1,
+                  "unit": "person",
+                  "year": false,
+                  "case": "Nom",
+                  "status": "rejected",
+                  "evidenceSpan": {
+                    "start": 10,
+                    "end": 12,
+                    "textSpan": "20"
+                  },
+                  "unitEvidence": {
+                    "start": 20,
+                    "end": 29,
+                    "textSpan": "35 embert"
+                  }
+                },
+                "accepted": {
+                  "value": 35,
+                  "scale": 1,
+                  "unit": "person",
+                  "year": false,
+                  "case": "Acc",
+                  "status": "accepted",
+                  "evidenceSpan": {
+                    "start": 20,
+                    "end": 29,
+                    "textSpan": "35 embert"
+                  }
+                },
+                "frameId": "contrast:0:40"
+              }
+            ],
+            "frameId": "contrast:0:40",
+            "syntacticRoles": [
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "embert",
+                  "normalized": "ember",
+                  "start": 23,
+                  "end": 29,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 23,
+                    "end": 29,
+                    "textSpan": "embert"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 23,
+                    "end": 29,
+                    "textSpan": "embert"
+                  },
+                  "targetSpan": {
+                    "start": 30,
+                    "end": 36,
+                    "textSpan": "bocsát"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 23,
+                        "end": 29,
+                        "textSpan": "embert"
+                      },
+                      "targetSpan": {
+                        "start": 30,
+                        "end": 36,
+                        "textSpan": "bocsát"
+                      }
+                    }
+                  ],
+                  "frameId": "contrast:0:40",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ]
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "contrasts": [
+          {
+            "binding": "resolved",
+            "rule": "parallel_alternatives_single_finite_predicate",
+            "slot": "number",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 40,
+              "textSpan": "A cég nem 20, hanem 35 embert bocsát el."
+            },
+            "scope": {
+              "start": 0,
+              "end": 40
+            },
+            "rejected": {
+              "value": 20,
+              "scale": 1,
+              "unit": "person",
+              "year": false,
+              "case": "Nom",
+              "status": "rejected",
+              "evidenceSpan": {
+                "start": 10,
+                "end": 12,
+                "textSpan": "20"
+              },
+              "unitEvidence": {
+                "start": 20,
+                "end": 29,
+                "textSpan": "35 embert"
+              }
+            },
+            "accepted": {
+              "value": 35,
+              "scale": 1,
+              "unit": "person",
+              "year": false,
+              "case": "Acc",
+              "status": "accepted",
+              "evidenceSpan": {
+                "start": 20,
+                "end": 29,
+                "textSpan": "35 embert"
+              }
+            },
+            "frameId": "contrast:0:40"
+          }
+        ],
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": null,
+      "text": "A vállalat szerint nem 120, hanem 90 állás szűnik meg.",
+      "result": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "állás",
+              "normalized": "állás",
+              "start": 37,
+              "end": 42,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 37,
+                "end": 42,
+                "textSpan": "állás"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "állás",
+              "normalized": "állás",
+              "start": 37,
+              "end": 42,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 37,
+                "end": 42,
+                "textSpan": "állás"
+              }
+            },
+            "location": [],
+            "reportingActor": {
+              "mention": "vállalat",
+              "normalized": "vállalat",
+              "canonicalIdentity": null,
+              "type": "referent",
+              "named": false,
+              "case": "Nom",
+              "start": 2,
+              "end": 10,
+              "evidenceSpan": {
+                "start": 2,
+                "end": 10,
+                "textSpan": "vállalat"
+              },
+              "sourceRole": "reported",
+              "pronoun": false
+            },
+            "source": {
+              "mention": "vállalat",
+              "normalized": "vállalat",
+              "canonicalIdentity": null,
+              "type": "referent",
+              "named": false,
+              "case": "Nom",
+              "start": 2,
+              "end": 10,
+              "evidenceSpan": {
+                "start": 2,
+                "end": 10,
+                "textSpan": "vállalat"
+              },
+              "sourceRole": "reported",
+              "pronoun": false
+            },
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": "szerint",
+            "content": {
+              "start": 18,
+              "end": 54,
+              "textSpan": " nem 120, hanem 90 állás szűnik meg."
+            },
+            "attribution": {
+              "label": "vállalat",
+              "normalized": "vállalat",
+              "sourceRole": "reported",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 10,
+                "textSpan": "vállalat"
+              },
+              "propositionSpan": {
+                "start": 18,
+                "end": 54,
+                "textSpan": " nem 120, hanem 90 állás szűnik meg."
+              }
+            },
+            "action": "megszűnik",
+            "actionSpan": {
+              "start": 43,
+              "end": 49,
+              "textSpan": "szűnik"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "value": 90,
+                "canonicalValue": 90,
+                "unit": "job",
+                "semanticKind": "count",
+                "status": "accepted",
+                "binding": "resolved",
+                "ownerType": "semantic_role",
+                "owner": {
+                  "label": "number",
+                  "evidenceSpan": {
+                    "start": 34,
+                    "end": 42,
+                    "textSpan": "90 állás"
+                  }
+                },
+                "subject": null,
+                "property": "number",
+                "unresolvedReasons": [],
+                "start": 34,
+                "end": 42,
+                "raw": "90 állás",
+                "evidenceSpan": {
+                  "start": 34,
+                  "end": 42,
+                  "textSpan": "90 állás"
+                },
+                "bindingEvidence": {
+                  "rule": "parallel_alternatives_single_finite_predicate",
+                  "clauseSpan": {
+                    "start": 0,
+                    "end": 54,
+                    "textSpan": "A vállalat szerint nem 120, hanem 90 állás szűnik meg."
+                  },
+                  "predicateSpan": {
+                    "start": 43,
+                    "end": 49,
+                    "textSpan": "szűnik"
+                  },
+                  "ownerSpan": {
+                    "start": 34,
+                    "end": 42,
+                    "textSpan": "90 állás"
+                  },
+                  "sourceSpan": {
+                    "start": 34,
+                    "end": 42,
+                    "textSpan": "90 állás"
+                  },
+                  "targetSpan": {
+                    "start": 34,
+                    "end": 42,
+                    "textSpan": "90 állás"
+                  },
+                  "frameId": "contrast:0:54",
+                  "semanticRole": "count",
+                  "resolutionStatus": "resolved",
+                  "syntacticReason": "parallel_alternatives_single_finite_predicate"
+                },
+                "contrastFrameId": "contrast:0:54"
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": true,
+            "modalities": [
+              "reported"
+            ],
+            "modality": "reported",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 54,
+              "textSpan": "A vállalat szerint nem 120, hanem 90 állás szűnik meg."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 54,
+              "textSpan": "A vállalat szerint nem 120, hanem 90 állás szűnik meg."
+            },
+            "canonicalProjectionAllowed": false,
+            "sourceEvidence": {
+              "rule": "explicit_according_to",
+              "entitySpan": {
+                "start": 2,
+                "end": 10,
+                "textSpan": "vállalat"
+              },
+              "clauseSpan": {
+                "start": 0,
+                "end": 54,
+                "textSpan": "A vállalat szerint nem 120, hanem 90 állás szűnik meg."
+              }
+            },
+            "contrasts": [
+              {
+                "binding": "resolved",
+                "rule": "parallel_alternatives_single_finite_predicate",
+                "slot": "number",
+                "evidenceSpan": {
+                  "start": 0,
+                  "end": 54,
+                  "textSpan": "A vállalat szerint nem 120, hanem 90 állás szűnik meg."
+                },
+                "scope": {
+                  "start": 0,
+                  "end": 54
+                },
+                "rejected": {
+                  "value": 120,
+                  "scale": 1,
+                  "unit": "job",
+                  "year": false,
+                  "case": "Nom",
+                  "status": "rejected",
+                  "evidenceSpan": {
+                    "start": 23,
+                    "end": 26,
+                    "textSpan": "120"
+                  },
+                  "unitEvidence": {
+                    "start": 34,
+                    "end": 42,
+                    "textSpan": "90 állás"
+                  }
+                },
+                "accepted": {
+                  "value": 90,
+                  "scale": 1,
+                  "unit": "job",
+                  "year": false,
+                  "case": "Nom",
+                  "status": "accepted",
+                  "evidenceSpan": {
+                    "start": 34,
+                    "end": 42,
+                    "textSpan": "90 állás"
+                  }
+                },
+                "frameId": "contrast:0:54"
+              }
+            ],
+            "frameId": "contrast:0:54",
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "állás",
+                  "normalized": "állás",
+                  "start": 37,
+                  "end": 42,
+                  "type": "referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 37,
+                    "end": 42,
+                    "textSpan": "állás"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 37,
+                    "end": 42,
+                    "textSpan": "állás"
+                  },
+                  "targetSpan": {
+                    "start": 43,
+                    "end": 49,
+                    "textSpan": "szűnik"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 37,
+                        "end": 42,
+                        "textSpan": "állás"
+                      },
+                      "targetSpan": {
+                        "start": 43,
+                        "end": 49,
+                        "textSpan": "szűnik"
+                      }
+                    }
+                  ],
+                  "frameId": "contrast:0:54",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 37,
+                "end": 42,
+                "textSpan": "állás"
+              },
+              "targetSpan": {
+                "start": 43,
+                "end": 49,
+                "textSpan": "szűnik"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 37,
+                    "end": 42,
+                    "textSpan": "állás"
+                  },
+                  "targetSpan": {
+                    "start": 43,
+                    "end": 49,
+                    "textSpan": "szűnik"
+                  }
+                }
+              ],
+              "frameId": "contrast:0:54",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "contrasts": [
+          {
+            "binding": "resolved",
+            "rule": "parallel_alternatives_single_finite_predicate",
+            "slot": "number",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 54,
+              "textSpan": "A vállalat szerint nem 120, hanem 90 állás szűnik meg."
+            },
+            "scope": {
+              "start": 0,
+              "end": 54
+            },
+            "rejected": {
+              "value": 120,
+              "scale": 1,
+              "unit": "job",
+              "year": false,
+              "case": "Nom",
+              "status": "rejected",
+              "evidenceSpan": {
+                "start": 23,
+                "end": 26,
+                "textSpan": "120"
+              },
+              "unitEvidence": {
+                "start": 34,
+                "end": 42,
+                "textSpan": "90 állás"
+              }
+            },
+            "accepted": {
+              "value": 90,
+              "scale": 1,
+              "unit": "job",
+              "year": false,
+              "case": "Nom",
+              "status": "accepted",
+              "evidenceSpan": {
+                "start": 34,
+                "end": 42,
+                "textSpan": "90 állás"
+              }
+            },
+            "frameId": "contrast:0:54"
+          }
+        ],
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": null,
+      "text": "A minisztérium szerint a rendőrség közölte, hogy Nagy Anna 120 embert vett fel.",
+      "result": {
+        "entities": [
+          {
+            "mention": "Nagy Anna",
+            "normalized": "nagy anna",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 49,
+            "end": 58,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 49,
+              "end": 58,
+              "textSpan": "Nagy Anna"
+            },
+            "identityKey": "person|nagy anna",
+            "canonicalIdentity": "nagy anna",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "start": 49,
+              "end": 58,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 49,
+                "end": 58,
+                "textSpan": "Nagy Anna"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Nagy Anna",
+              "normalized": "nagy anna",
+              "start": 49,
+              "end": 58,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 49,
+                "end": 58,
+                "textSpan": "Nagy Anna"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 49,
+              "end": 79,
+              "textSpan": "Nagy Anna 120 embert vett fel."
+            },
+            "attribution": null,
+            "action": "felvesz",
+            "actionSpan": {
+              "start": 70,
+              "end": 74,
+              "textSpan": "vett"
+            },
+            "object": [
+              "ember"
+            ],
+            "numericArguments": [
+              {
+                "value": 120,
+                "canonicalValue": 120,
+                "unit": "person",
+                "semanticKind": "count",
+                "start": 59,
+                "end": 69,
+                "raw": "120 embert",
+                "evidenceSpan": {
+                  "start": 59,
+                  "end": 69,
+                  "textSpan": "120 embert"
+                },
+                "owner": {
+                  "mention": "embert",
+                  "normalized": "ember",
+                  "start": 63,
+                  "end": 69,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 63,
+                    "end": 69,
+                    "textSpan": "embert"
+                  }
+                },
+                "ownerType": "semantic_argument",
+                "subject": null,
+                "binding": "resolved",
+                "unresolvedReasons": [],
+                "property": "count",
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 59,
+                    "end": 62,
+                    "textSpan": "120"
+                  },
+                  "targetSpan": {
+                    "start": 63,
+                    "end": 69,
+                    "textSpan": "embert"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nummod",
+                      "sourceSpan": {
+                        "start": 59,
+                        "end": 62,
+                        "textSpan": "120"
+                      },
+                      "targetSpan": {
+                        "start": 63,
+                        "end": 69,
+                        "textSpan": "embert"
+                      }
+                    },
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 63,
+                        "end": 69,
+                        "textSpan": "embert"
+                      },
+                      "targetSpan": {
+                        "start": 70,
+                        "end": 74,
+                        "textSpan": "vett"
+                      }
+                    }
+                  ],
+                  "frameId": "attribution:0:79:proposition",
+                  "semanticRole": "count",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": true,
+            "modalities": [
+              "asserted",
+              "reported"
+            ],
+            "modality": "reported",
+            "polarity": "asserted",
+            "status": "reported_claim",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_binding_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 49,
+              "end": 79,
+              "textSpan": "Nagy Anna 120 embert vett fel."
+            },
+            "propositionSpan": {
+              "start": 49,
+              "end": 79,
+              "textSpan": "Nagy Anna 120 embert vett fel."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "attribution:0:79:proposition",
+            "attributionChainId": "attribution:0:79",
+            "claimOwner": {
+              "mention": "rendőrség",
+              "normalized": "rendőrség",
+              "entityId": null,
+              "identityStatus": "local_referent",
+              "evidenceSpan": {
+                "start": 25,
+                "end": 34,
+                "textSpan": "rendőrség"
+              }
+            },
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Nagy Anna",
+                  "normalized": "nagy anna",
+                  "start": 49,
+                  "end": 58,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 49,
+                    "end": 58,
+                    "textSpan": "Nagy Anna"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 49,
+                    "end": 53,
+                    "textSpan": "Nagy"
+                  },
+                  "targetSpan": {
+                    "start": 70,
+                    "end": 74,
+                    "textSpan": "vett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 49,
+                        "end": 53,
+                        "textSpan": "Nagy"
+                      },
+                      "targetSpan": {
+                        "start": 70,
+                        "end": 74,
+                        "textSpan": "vett"
+                      }
+                    }
+                  ],
+                  "frameId": "attribution:0:79:proposition",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              },
+              {
+                "role": "object",
+                "referent": {
+                  "mention": "embert",
+                  "normalized": "ember",
+                  "start": 63,
+                  "end": 69,
+                  "type": "referent",
+                  "case": "Acc",
+                  "evidenceSpan": {
+                    "start": 63,
+                    "end": 69,
+                    "textSpan": "embert"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 63,
+                    "end": 69,
+                    "textSpan": "embert"
+                  },
+                  "targetSpan": {
+                    "start": 70,
+                    "end": 74,
+                    "textSpan": "vett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obj",
+                      "sourceSpan": {
+                        "start": 63,
+                        "end": 69,
+                        "textSpan": "embert"
+                      },
+                      "targetSpan": {
+                        "start": 70,
+                        "end": 74,
+                        "textSpan": "vett"
+                      }
+                    }
+                  ],
+                  "frameId": "attribution:0:79:proposition",
+                  "semanticRole": "object",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 49,
+                "end": 53,
+                "textSpan": "Nagy"
+              },
+              "targetSpan": {
+                "start": 70,
+                "end": 74,
+                "textSpan": "vett"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 49,
+                    "end": 53,
+                    "textSpan": "Nagy"
+                  },
+                  "targetSpan": {
+                    "start": 70,
+                    "end": 74,
+                    "textSpan": "vett"
+                  }
+                }
+              ],
+              "frameId": "attribution:0:79:proposition",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [
+          {
+            "id": "attribution:0:79",
+            "binding": "resolved",
+            "rule": "explicit_sentence_local_attribution_grammar",
+            "unresolvedReasons": [],
+            "narration": {
+              "kind": "journalist/publisher_narration",
+              "publisher": null,
+              "evidenceSpan": {
+                "start": 0,
+                "end": 79,
+                "textSpan": "A minisztérium szerint a rendőrség közölte, hogy Nagy Anna 120 embert vett fel."
+              }
+            },
+            "edges": [
+              {
+                "source": {
+                  "mention": "minisztérium",
+                  "normalized": "minisztérium",
+                  "entityId": null,
+                  "identityStatus": "local_referent",
+                  "evidenceSpan": {
+                    "start": 2,
+                    "end": 14,
+                    "textSpan": "minisztérium"
+                  }
+                },
+                "verb": "szerint",
+                "verbSpan": {
+                  "start": 15,
+                  "end": 22,
+                  "textSpan": "szerint"
+                },
+                "recipient": null,
+                "propositionSpan": {
+                  "start": 23,
+                  "end": 79,
+                  "textSpan": "a rendőrség közölte, hogy Nagy Anna 120 embert vett fel."
+                },
+                "id": "attribution:0:79:0",
+                "depth": 0,
+                "parentAttributionId": null,
+                "targetId": "attribution:0:79:1",
+                "binding": "resolved",
+                "rule": "explicit_source_marker_and_complement",
+                "role": "outer_reporting_source"
+              },
+              {
+                "source": {
+                  "mention": "rendőrség",
+                  "normalized": "rendőrség",
+                  "entityId": null,
+                  "identityStatus": "local_referent",
+                  "evidenceSpan": {
+                    "start": 25,
+                    "end": 34,
+                    "textSpan": "rendőrség"
+                  }
+                },
+                "verb": "közöl",
+                "verbSpan": {
+                  "start": 35,
+                  "end": 42,
+                  "textSpan": "közölte"
+                },
+                "recipient": null,
+                "propositionSpan": {
+                  "start": 49,
+                  "end": 79,
+                  "textSpan": "Nagy Anna 120 embert vett fel."
+                },
+                "id": "attribution:0:79:1",
+                "depth": 1,
+                "parentAttributionId": "attribution:0:79:0",
+                "targetId": "attribution:0:79:proposition",
+                "binding": "resolved",
+                "rule": "explicit_source_marker_and_complement",
+                "role": "claim_source"
+              }
+            ],
+            "propositionIds": [
+              "attribution:0:79:proposition"
+            ]
+          }
+        ],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "mismatch",
+      "text": "Nem Péter, hanem 35 embert bocsát el.",
+      "result": {
+        "entities": [
+          {
+            "mention": "Péter",
+            "normalized": "péter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 4,
+            "end": 9,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 4,
+              "end": 9,
+              "textSpan": "Péter"
+            },
+            "identityKey": "person|péter",
+            "canonicalIdentity": "péter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 37,
+              "textSpan": "Nem Péter, hanem 35 embert bocsát el."
+            },
+            "attribution": null,
+            "action": "bocsát",
+            "actionSpan": {
+              "start": 27,
+              "end": 33,
+              "textSpan": "bocsát"
+            },
+            "object": [
+              "ember"
+            ],
+            "numericArguments": [
+              {
+                "value": 35,
+                "canonicalValue": 35,
+                "sign": 1,
+                "explicitSign": false,
+                "direction": null,
+                "valueKind": "absolute",
+                "transition": null,
+                "unit": null,
+                "semanticKind": "unknown",
+                "start": 17,
+                "end": 19,
+                "raw": "35",
+                "evidenceSpan": {
+                  "start": 17,
+                  "end": 19,
+                  "textSpan": "35"
+                },
+                "binding": "unresolved",
+                "unresolvedReasons": [
+                  "unit_unresolved",
+                  "numeric_predicate_attachment_unproven",
+                  "numeric_owner_unresolved",
+                  "ambiguous_contrast_scope",
+                  "dependency_blocked_by_ambiguous_contrast"
+                ],
+                "ownerType": "unresolved",
+                "owner": null,
+                "property": "unknown",
+                "proposition": {
+                  "start": 0,
+                  "end": 37,
+                  "textSpan": "Nem Péter, hanem 35 embert bocsát el."
+                },
+                "subject": null
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_binding_unresolved",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 37,
+              "textSpan": "Nem Péter, hanem 35 embert bocsát el."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 37,
+              "textSpan": "Nem Péter, hanem 35 embert bocsát el."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:37"
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "contrasts": [
+          {
+            "binding": "unresolved",
+            "rule": "ambiguous_contrast_scope",
+            "slot": null,
+            "evidenceSpan": {
+              "start": 0,
+              "end": 37,
+              "textSpan": "Nem Péter, hanem 35 embert bocsát el."
+            },
+            "scope": {
+              "start": 0,
+              "end": 37
+            },
+            "rejected": null,
+            "accepted": null
+          }
+        ],
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "two_actions",
+      "text": "Péter nem fizetett, hanem Anna távozott.",
+      "result": {
+        "entities": [
+          {
+            "mention": "Péter",
+            "normalized": "péter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 5,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 5,
+              "textSpan": "Péter"
+            },
+            "identityKey": "person|péter",
+            "canonicalIdentity": "péter",
+            "identityStatus": "resolved"
+          },
+          {
+            "mention": "Anna",
+            "normalized": "anna",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 26,
+            "end": 30,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 26,
+              "end": 30,
+              "textSpan": "Anna"
+            },
+            "identityKey": "person|anna",
+            "canonicalIdentity": "anna",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 18,
+              "textSpan": "Péter nem fizetett"
+            },
+            "attribution": null,
+            "action": "fizet",
+            "actionSpan": {
+              "start": 10,
+              "end": 18,
+              "textSpan": "fizetett"
+            },
+            "object": [],
+            "numericArguments": [],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "denied",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 18,
+              "textSpan": "Péter nem fizetett"
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 18,
+              "textSpan": "Péter nem fizetett"
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:18"
+          },
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 20,
+              "end": 40,
+              "textSpan": "hanem Anna távozott."
+            },
+            "attribution": null,
+            "action": "távozik",
+            "actionSpan": {
+              "start": 31,
+              "end": 39,
+              "textSpan": "távozott"
+            },
+            "object": [],
+            "numericArguments": [],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast"
+            ],
+            "evidenceSpan": {
+              "start": 20,
+              "end": 40,
+              "textSpan": "hanem Anna távozott."
+            },
+            "propositionSpan": {
+              "start": 20,
+              "end": 40,
+              "textSpan": "hanem Anna távozott."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:20:40"
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "contrasts": [
+          {
+            "binding": "unresolved",
+            "rule": "ambiguous_contrast_scope",
+            "slot": null,
+            "evidenceSpan": {
+              "start": 0,
+              "end": 40,
+              "textSpan": "Péter nem fizetett, hanem Anna távozott."
+            },
+            "scope": {
+              "start": 0,
+              "end": 40
+            },
+            "rejected": null,
+            "accepted": null
+          }
+        ],
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "double",
+      "text": "Nem Péter, hanem Anna, hanem Júlia írta alá.",
+      "result": {
+        "entities": [
+          {
+            "mention": "Péter",
+            "normalized": "péter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 4,
+            "end": 9,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 4,
+              "end": 9,
+              "textSpan": "Péter"
+            },
+            "identityKey": "person|péter",
+            "canonicalIdentity": "péter",
+            "identityStatus": "resolved"
+          },
+          {
+            "mention": "Anna",
+            "normalized": "anna",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 17,
+            "end": 21,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 17,
+              "end": 21,
+              "textSpan": "Anna"
+            },
+            "identityKey": "person|anna",
+            "canonicalIdentity": "anna",
+            "identityStatus": "resolved"
+          },
+          {
+            "mention": "Júlia",
+            "normalized": "júlia",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 29,
+            "end": 34,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 29,
+              "end": 34,
+              "textSpan": "Júlia"
+            },
+            "identityKey": "person|júlia",
+            "canonicalIdentity": "júlia",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": "ír",
+            "content": {
+              "start": 0,
+              "end": 44,
+              "textSpan": "Nem Péter, hanem Anna, hanem Júlia írta alá."
+            },
+            "attribution": null,
+            "action": "ír",
+            "actionSpan": {
+              "start": 35,
+              "end": 39,
+              "textSpan": "írta"
+            },
+            "object": [],
+            "numericArguments": [],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": true,
+            "modalities": [
+              "reported"
+            ],
+            "modality": "reported",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "reporting_actor_unresolved",
+              "actor_unresolved",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 44,
+              "textSpan": "Nem Péter, hanem Anna, hanem Júlia írta alá."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 44,
+              "textSpan": "Nem Péter, hanem Anna, hanem Júlia írta alá."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:44"
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "contrasts": [
+          {
+            "binding": "unresolved",
+            "rule": "ambiguous_contrast_scope",
+            "slot": null,
+            "evidenceSpan": {
+              "start": 0,
+              "end": 44,
+              "textSpan": "Nem Péter, hanem Anna, hanem Júlia írta alá."
+            },
+            "scope": {
+              "start": 0,
+              "end": 44
+            },
+            "rejected": null,
+            "accepted": null
+          }
+        ],
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    }
+  ]
+}

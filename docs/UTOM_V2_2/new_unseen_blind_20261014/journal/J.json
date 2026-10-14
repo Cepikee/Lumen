@@ -1,0 +1,2082 @@
+{
+  "id": "J",
+  "text": "A gyógyszerész közlése alapján a járási rendelő nem adhatja át a hűtést igénylő ampullákat futárnak. Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad, a készítmény 36 óráig felhasználható lehet. A lezáratlan címkén egyetlen aláírás sem szerepelt, így a csomagoló személyét nem lehetett megállapítani.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 14,
+        "text": "gyógyszerész",
+        "lemma": "gyógyszerész",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 15
+      },
+      {
+        "start": 15,
+        "end": 22,
+        "text": "közlése",
+        "lemma": "közlés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nmod:att",
+        "headStart": 23
+      },
+      {
+        "start": 23,
+        "end": 30,
+        "text": "alapján",
+        "lemma": "alap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 52
+      },
+      {
+        "start": 31,
+        "end": 32,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 40
+      },
+      {
+        "start": 33,
+        "end": 39,
+        "text": "járási",
+        "lemma": "járási",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 40
+      },
+      {
+        "start": 40,
+        "end": 47,
+        "text": "rendelő",
+        "lemma": "rendelő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 52
+      },
+      {
+        "start": 48,
+        "end": 51,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 52
+      },
+      {
+        "start": 52,
+        "end": 59,
+        "text": "adhatja",
+        "lemma": "adhat",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 52
+      },
+      {
+        "start": 60,
+        "end": 62,
+        "text": "át",
+        "lemma": "át",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 52
+      },
+      {
+        "start": 63,
+        "end": 64,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 65
+      },
+      {
+        "start": 65,
+        "end": 71,
+        "text": "hűtést",
+        "lemma": "hűtés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 72
+      },
+      {
+        "start": 72,
+        "end": 79,
+        "text": "igénylő",
+        "lemma": "igénylő",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "VerbForm": "PartPres"
+        },
+        "dep": "amod:att",
+        "headStart": 80
+      },
+      {
+        "start": 80,
+        "end": 90,
+        "text": "ampullákat",
+        "lemma": "ampullákat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Plur"
+        },
+        "dep": "obj",
+        "headStart": 91
+      },
+      {
+        "start": 91,
+        "end": 99,
+        "text": "futárnak",
+        "lemma": "futár",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 52
+      },
+      {
+        "start": 99,
+        "end": 100,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 52
+      },
+      {
+        "start": 101,
+        "end": 103,
+        "text": "Ha",
+        "lemma": "ha",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 166
+      },
+      {
+        "start": 104,
+        "end": 105,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 106
+      },
+      {
+        "start": 106,
+        "end": 119,
+        "text": "szállítódoboz",
+        "lemma": "szállítódoboz",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 129
+      },
+      {
+        "start": 120,
+        "end": 128,
+        "text": "legalább",
+        "lemma": "legalább",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 129
+      },
+      {
+        "start": 129,
+        "end": 130,
+        "text": "2",
+        "lemma": "2",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "compound",
+        "headStart": 145
+      },
+      {
+        "start": 131,
+        "end": 133,
+        "text": "és",
+        "lemma": "és",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 134
+      },
+      {
+        "start": 134,
+        "end": 144,
+        "text": "legfeljebb",
+        "lemma": "legfeljebb",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "conj",
+        "headStart": 129
+      },
+      {
+        "start": 145,
+        "end": 146,
+        "text": "6",
+        "lemma": "6",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 147
+      },
+      {
+        "start": 147,
+        "end": 158,
+        "text": "Celsius-fok",
+        "lemma": "Celsius-fok",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 166
+      },
+      {
+        "start": 159,
+        "end": 165,
+        "text": "között",
+        "lemma": "között",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 147
+      },
+      {
+        "start": 166,
+        "end": 171,
+        "text": "marad",
+        "lemma": "marad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "advcl",
+        "headStart": 195
+      },
+      {
+        "start": 171,
+        "end": 172,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 195
+      },
+      {
+        "start": 173,
+        "end": 174,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 175
+      },
+      {
+        "start": 175,
+        "end": 185,
+        "text": "készítmény",
+        "lemma": "készítmény",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 195
+      },
+      {
+        "start": 186,
+        "end": 188,
+        "text": "36",
+        "lemma": "36",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 189
+      },
+      {
+        "start": 189,
+        "end": 194,
+        "text": "óráig",
+        "lemma": "óra",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ter",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 195
+      },
+      {
+        "start": 195,
+        "end": 209,
+        "text": "felhasználható",
+        "lemma": "felhasználható",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 195
+      },
+      {
+        "start": 210,
+        "end": 215,
+        "text": "lehet",
+        "lemma": "lesz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Pot",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "cop",
+        "headStart": 195
+      },
+      {
+        "start": 215,
+        "end": 216,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 195
+      },
+      {
+        "start": 217,
+        "end": 218,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 230
+      },
+      {
+        "start": 219,
+        "end": 229,
+        "text": "lezáratlan",
+        "lemma": "lezáratlan",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 230
+      },
+      {
+        "start": 230,
+        "end": 236,
+        "text": "címkén",
+        "lemma": "címke",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 258
+      },
+      {
+        "start": 237,
+        "end": 245,
+        "text": "egyetlen",
+        "lemma": "egyetlen",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 246
+      },
+      {
+        "start": 246,
+        "end": 253,
+        "text": "aláírás",
+        "lemma": "aláírás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 258
+      },
+      {
+        "start": 254,
+        "end": 257,
+        "text": "sem",
+        "lemma": "sem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 258
+      },
+      {
+        "start": 258,
+        "end": 267,
+        "text": "szerepelt",
+        "lemma": "szerepel",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 258
+      },
+      {
+        "start": 267,
+        "end": 268,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 299
+      },
+      {
+        "start": 269,
+        "end": 272,
+        "text": "így",
+        "lemma": "így",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 299
+      },
+      {
+        "start": 273,
+        "end": 274,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 275
+      },
+      {
+        "start": 275,
+        "end": 284,
+        "text": "csomagoló",
+        "lemma": "csomagoló",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 285
+      },
+      {
+        "start": 285,
+        "end": 294,
+        "text": "személyét",
+        "lemma": "személy",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obj",
+        "headStart": 308
+      },
+      {
+        "start": 295,
+        "end": 298,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 299
+      },
+      {
+        "start": 299,
+        "end": 307,
+        "text": "lehetett",
+        "lemma": "lehet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 258
+      },
+      {
+        "start": 308,
+        "end": 321,
+        "text": "megállapítani",
+        "lemma": "megállapít",
+        "pos": "VERB",
+        "morph": {
+          "VerbForm": "Inf",
+          "Voice": "Act"
+        },
+        "dep": "xcomp",
+        "headStart": 299
+      },
+      {
+        "start": 321,
+        "end": 322,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 258
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 100,
+        "text": "A gyógyszerész közlése alapján a járási rendelő nem adhatja át a hűtést igénylő ampullákat futárnak."
+      },
+      {
+        "start": 101,
+        "end": 216,
+        "text": "Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad, a készítmény 36 óráig felhasználható lehet."
+      },
+      {
+        "start": 217,
+        "end": 322,
+        "text": "A lezáratlan címkén egyetlen aláírás sem szerepelt, így a csomagoló személyét nem lehetett megállapítani."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "alapján",
+            "normalized": "alap",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 23,
+            "end": 30,
+            "evidenceSpan": {
+              "start": 23,
+              "end": 30,
+              "textSpan": "alapján"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": {
+          "mention": "gyógyszerész",
+          "normalized": "gyógyszerész",
+          "start": 2,
+          "end": 14,
+          "type": "local_source",
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 14,
+            "textSpan": "gyógyszerész"
+          }
+        },
+        "source": {
+          "mention": "gyógyszerész",
+          "normalized": "gyógyszerész",
+          "start": 2,
+          "end": 14,
+          "type": "local_source",
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 14,
+            "textSpan": "gyógyszerész"
+          }
+        },
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 100,
+          "textSpan": "A gyógyszerész közlése alapján a járási rendelő nem adhatja át a hűtést igénylő ampullákat futárnak."
+        },
+        "attribution": {
+          "label": "gyógyszerész",
+          "normalized": "gyógyszerész",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 14,
+            "textSpan": "gyógyszerész"
+          },
+          "propositionSpan": {
+            "start": 0,
+            "end": 100,
+            "textSpan": "A gyógyszerész közlése alapján a járási rendelő nem adhatja át a hűtést igénylő ampullákat futárnak."
+          }
+        },
+        "action": "átadhat",
+        "actionSpan": {
+          "start": 52,
+          "end": 59,
+          "textSpan": "adhatja"
+        },
+        "object": [
+          "hűtés",
+          "ampullákat"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "possible"
+        ],
+        "modality": "possible",
+        "polarity": "denied",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 100,
+          "textSpan": "A gyógyszerész közlése alapján a járási rendelő nem adhatja át a hűtést igénylő ampullákat futárnak."
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 100,
+          "textSpan": "A gyógyszerész közlése alapján a járási rendelő nem adhatja át a hűtést igénylő ampullákat futárnak."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:100",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "gyógyszerész",
+              "normalized": "gyógyszerész",
+              "start": 2,
+              "end": 14,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 14,
+                "textSpan": "gyógyszerész"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 2,
+                "end": 14,
+                "textSpan": "gyógyszerész"
+              },
+              "targetSpan": {
+                "start": 52,
+                "end": 59,
+                "textSpan": "adhatja"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 14,
+                    "textSpan": "gyógyszerész"
+                  },
+                  "targetSpan": {
+                    "start": 15,
+                    "end": 22,
+                    "textSpan": "közlése"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 15,
+                    "end": 22,
+                    "textSpan": "közlése"
+                  },
+                  "targetSpan": {
+                    "start": 23,
+                    "end": 30,
+                    "textSpan": "alapján"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 23,
+                    "end": 30,
+                    "textSpan": "alapján"
+                  },
+                  "targetSpan": {
+                    "start": 52,
+                    "end": 59,
+                    "textSpan": "adhatja"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:100",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "közlése",
+              "normalized": "közlés",
+              "start": 15,
+              "end": 22,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 15,
+                "end": 22,
+                "textSpan": "közlése"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 15,
+                "end": 22,
+                "textSpan": "közlése"
+              },
+              "targetSpan": {
+                "start": 52,
+                "end": 59,
+                "textSpan": "adhatja"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 15,
+                    "end": 22,
+                    "textSpan": "közlése"
+                  },
+                  "targetSpan": {
+                    "start": 23,
+                    "end": 30,
+                    "textSpan": "alapján"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 23,
+                    "end": 30,
+                    "textSpan": "alapján"
+                  },
+                  "targetSpan": {
+                    "start": 52,
+                    "end": 59,
+                    "textSpan": "adhatja"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:100",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "futárnak",
+              "normalized": "futár",
+              "start": 91,
+              "end": 99,
+              "type": "referent",
+              "case": "Dat",
+              "evidenceSpan": {
+                "start": 91,
+                "end": 99,
+                "textSpan": "futárnak"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 91,
+                "end": 99,
+                "textSpan": "futárnak"
+              },
+              "targetSpan": {
+                "start": 52,
+                "end": 59,
+                "textSpan": "adhatja"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 91,
+                    "end": 99,
+                    "textSpan": "futárnak"
+                  },
+                  "targetSpan": {
+                    "start": 52,
+                    "end": 59,
+                    "textSpan": "adhatja"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:100",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "finite_potential_wordform_candidate",
+              "evidenceSpan": {
+                "start": 52,
+                "end": 59,
+                "textSpan": "adhatja"
+              },
+              "dependencyPath": []
+            }
+          ],
+          "conditions": [],
+          "frameId": "dependency:0:100",
+          "clauseSpan": {
+            "start": 0,
+            "end": 100,
+            "textSpan": "A gyógyszerész közlése alapján a járási rendelő nem adhatja át a hűtést igénylő ampullákat futárnak."
+          },
+          "projectionAllowed": false
+        },
+        "sourceEvidence": {
+          "rule": "possessive_information_artifact_evidential_claim_path",
+          "sourceSpan": {
+            "start": 2,
+            "end": 14,
+            "textSpan": "gyógyszerész"
+          },
+          "reportingNominalSpan": {
+            "start": 15,
+            "end": 22,
+            "textSpan": "közlése"
+          },
+          "markerSpan": {
+            "start": 23,
+            "end": 30,
+            "textSpan": "alapján"
+          },
+          "dependencyPath": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 23,
+                "end": 30,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 52,
+                "end": 59,
+                "textSpan": "adhatja"
+              }
+            },
+            {
+              "relation": "nmod:att",
+              "sourceSpan": {
+                "start": 2,
+                "end": 14,
+                "textSpan": "gyógyszerész"
+              },
+              "targetSpan": {
+                "start": 15,
+                "end": 22,
+                "textSpan": "közlése"
+              }
+            },
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 23,
+                "end": 30,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 52,
+                "end": 59,
+                "textSpan": "adhatja"
+              }
+            }
+          ],
+          "frameId": "dependency:0:100",
+          "resolutionStatus": "resolved"
+        },
+        "reportingNominalRelationId": "nominal-source:15"
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 101,
+          "end": 171,
+          "textSpan": "Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad"
+        },
+        "attribution": null,
+        "action": "marad",
+        "actionSpan": {
+          "start": 166,
+          "end": 171,
+          "textSpan": "marad"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 2,
+            "canonicalValue": 2,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 129,
+            "end": 130,
+            "raw": "2",
+            "evidenceSpan": {
+              "start": 129,
+              "end": 130,
+              "textSpan": "2"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "greater_or_equal",
+                  "evidenceSpan": {
+                    "start": 120,
+                    "end": 129,
+                    "textSpan": "legalább "
+                  },
+                  "marker": "legalább"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "conditional",
+                  "rule": "clause_condition_marker",
+                  "evidenceSpan": {
+                    "start": 101,
+                    "end": 103,
+                    "textSpan": "Ha"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "mark",
+                      "sourceSpan": {
+                        "start": 101,
+                        "end": 103,
+                        "textSpan": "Ha"
+                      },
+                      "targetSpan": {
+                        "start": 166,
+                        "end": 171,
+                        "textSpan": "marad"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "conditions": [
+                {
+                  "kind": "conditional",
+                  "rule": "inherited_bounded_clause_condition",
+                  "binding": "scoped",
+                  "evidenceSpan": {
+                    "start": 101,
+                    "end": 103,
+                    "textSpan": "Ha"
+                  },
+                  "antecedentSpan": {
+                    "start": 101,
+                    "end": 171,
+                    "textSpan": "Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad"
+                  }
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": true,
+              "conditionAntecedent": true,
+              "contrastBranch": null,
+              "frameId": "dependency:101:171",
+              "clauseSpan": {
+                "start": 101,
+                "end": 171,
+                "textSpan": "Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad"
+              },
+              "predicateSpan": {
+                "start": 166,
+                "end": 171,
+                "textSpan": "marad"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "compound",
+                  "sourceSpan": {
+                    "start": 129,
+                    "end": 130,
+                    "textSpan": "2"
+                  },
+                  "targetSpan": {
+                    "start": 145,
+                    "end": 146,
+                    "textSpan": "6"
+                  }
+                },
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 145,
+                    "end": 146,
+                    "textSpan": "6"
+                  },
+                  "targetSpan": {
+                    "start": 147,
+                    "end": 158,
+                    "textSpan": "Celsius-fok"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 147,
+                    "end": 158,
+                    "textSpan": "Celsius-fok"
+                  },
+                  "targetSpan": {
+                    "start": 166,
+                    "end": 171,
+                    "textSpan": "marad"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "value": 6,
+            "canonicalValue": 6,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 145,
+            "end": 158,
+            "raw": "6 Celsius-fok",
+            "evidenceSpan": {
+              "start": 145,
+              "end": 158,
+              "textSpan": "6 Celsius-fok"
+            },
+            "owner": {
+              "mention": "Celsius-fok",
+              "normalized": "celsius-fok",
+              "start": 147,
+              "end": 158,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 147,
+                "end": 158,
+                "textSpan": "Celsius-fok"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "count",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 145,
+                "end": 146,
+                "textSpan": "6"
+              },
+              "targetSpan": {
+                "start": 147,
+                "end": 158,
+                "textSpan": "Celsius-fok"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 145,
+                    "end": 146,
+                    "textSpan": "6"
+                  },
+                  "targetSpan": {
+                    "start": 147,
+                    "end": 158,
+                    "textSpan": "Celsius-fok"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 147,
+                    "end": 158,
+                    "textSpan": "Celsius-fok"
+                  },
+                  "targetSpan": {
+                    "start": 166,
+                    "end": 171,
+                    "textSpan": "marad"
+                  }
+                }
+              ],
+              "frameId": "dependency:101:171",
+              "semanticRole": "count",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "less_or_equal",
+                  "evidenceSpan": {
+                    "start": 134,
+                    "end": 145,
+                    "textSpan": "legfeljebb "
+                  },
+                  "marker": "legfeljebb"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "conditional",
+                  "rule": "clause_condition_marker",
+                  "evidenceSpan": {
+                    "start": 101,
+                    "end": 103,
+                    "textSpan": "Ha"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "mark",
+                      "sourceSpan": {
+                        "start": 101,
+                        "end": 103,
+                        "textSpan": "Ha"
+                      },
+                      "targetSpan": {
+                        "start": 166,
+                        "end": 171,
+                        "textSpan": "marad"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "conditions": [
+                {
+                  "kind": "conditional",
+                  "rule": "inherited_bounded_clause_condition",
+                  "binding": "scoped",
+                  "evidenceSpan": {
+                    "start": 101,
+                    "end": 103,
+                    "textSpan": "Ha"
+                  },
+                  "antecedentSpan": {
+                    "start": 101,
+                    "end": 171,
+                    "textSpan": "Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad"
+                  }
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": true,
+              "conditionAntecedent": true,
+              "contrastBranch": null,
+              "frameId": "dependency:101:171",
+              "clauseSpan": {
+                "start": 101,
+                "end": 171,
+                "textSpan": "Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad"
+              },
+              "predicateSpan": {
+                "start": 166,
+                "end": 171,
+                "textSpan": "marad"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 145,
+                    "end": 146,
+                    "textSpan": "6"
+                  },
+                  "targetSpan": {
+                    "start": 147,
+                    "end": 158,
+                    "textSpan": "Celsius-fok"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 147,
+                    "end": 158,
+                    "textSpan": "Celsius-fok"
+                  },
+                  "targetSpan": {
+                    "start": 166,
+                    "end": 171,
+                    "textSpan": "marad"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": true,
+        "conditionalTrigger": {
+          "start": 101,
+          "end": 103,
+          "textSpan": "Ha"
+        },
+        "conditionAntecedent": true,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 101,
+          "end": 171,
+          "textSpan": "Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad"
+        },
+        "propositionSpan": {
+          "start": 101,
+          "end": 171,
+          "textSpan": "Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:101:171",
+        "syntacticRoles": [],
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "conditional",
+              "rule": "clause_condition_marker",
+              "evidenceSpan": {
+                "start": 101,
+                "end": 103,
+                "textSpan": "Ha"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "mark",
+                  "sourceSpan": {
+                    "start": 101,
+                    "end": 103,
+                    "textSpan": "Ha"
+                  },
+                  "targetSpan": {
+                    "start": 166,
+                    "end": 171,
+                    "textSpan": "marad"
+                  }
+                }
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "kind": "conditional",
+              "rule": "inherited_bounded_clause_condition",
+              "binding": "scoped",
+              "evidenceSpan": {
+                "start": 101,
+                "end": 103,
+                "textSpan": "Ha"
+              },
+              "antecedentSpan": {
+                "start": 101,
+                "end": 171,
+                "textSpan": "Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad"
+              }
+            }
+          ],
+          "frameId": "dependency:101:171",
+          "clauseSpan": {
+            "start": 101,
+            "end": 171,
+            "textSpan": "Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad"
+          },
+          "projectionAllowed": false
+        }
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 173,
+          "end": 216,
+          "textSpan": "a készítmény 36 óráig felhasználható lehet."
+        },
+        "attribution": null,
+        "action": "lesz",
+        "actionSpan": {
+          "start": 210,
+          "end": 215,
+          "textSpan": "lehet"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 186,
+            "end": 194,
+            "raw": "36 óráig",
+            "value": 36,
+            "canonicalValue": 36,
+            "semanticKind": "duration",
+            "unit": "hour",
+            "property": "duration",
+            "temporalRole": "duration",
+            "evidenceSpan": {
+              "start": 186,
+              "end": 194,
+              "textSpan": "36 óráig"
+            },
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "subject": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 186,
+                    "end": 194,
+                    "textSpan": "36 óráig"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "potential_morphology",
+                  "evidenceSpan": {
+                    "start": 210,
+                    "end": 215,
+                    "textSpan": "lehet"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "cop",
+                      "sourceSpan": {
+                        "start": 210,
+                        "end": 215,
+                        "textSpan": "lehet"
+                      },
+                      "targetSpan": {
+                        "start": 195,
+                        "end": 209,
+                        "textSpan": "felhasználható"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "kind": "conditional",
+                  "rule": "inherited_bounded_clause_condition",
+                  "evidenceSpan": {
+                    "start": 101,
+                    "end": 103,
+                    "textSpan": "Ha"
+                  },
+                  "dependencyPath": []
+                }
+              ],
+              "conditions": [
+                {
+                  "kind": "conditional",
+                  "rule": "inherited_bounded_clause_condition",
+                  "binding": "scoped",
+                  "evidenceSpan": {
+                    "start": 101,
+                    "end": 103,
+                    "textSpan": "Ha"
+                  },
+                  "antecedentSpan": {
+                    "start": 101,
+                    "end": 171,
+                    "textSpan": "Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad"
+                  }
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": true,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:173:216",
+              "clauseSpan": {
+                "start": 173,
+                "end": 216,
+                "textSpan": "a készítmény 36 óráig felhasználható lehet."
+              },
+              "predicateSpan": {
+                "start": 210,
+                "end": 215,
+                "textSpan": "lehet"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 186,
+                    "end": 188,
+                    "textSpan": "36"
+                  },
+                  "targetSpan": {
+                    "start": 189,
+                    "end": 194,
+                    "textSpan": "óráig"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 189,
+                    "end": 194,
+                    "textSpan": "óráig"
+                  },
+                  "targetSpan": {
+                    "start": 195,
+                    "end": 209,
+                    "textSpan": "felhasználható"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Pot"
+        ],
+        "conditionality": true,
+        "conditionalTrigger": {
+          "start": 101,
+          "end": 103,
+          "textSpan": "Ha"
+        },
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "possible",
+          "conditional"
+        ],
+        "modality": "possible",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 173,
+          "end": 216,
+          "textSpan": "a készítmény 36 óráig felhasználható lehet."
+        },
+        "propositionSpan": {
+          "start": 173,
+          "end": 216,
+          "textSpan": "a készítmény 36 óráig felhasználható lehet."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:173:216",
+        "syntacticRoles": [],
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "potential_morphology",
+              "evidenceSpan": {
+                "start": 210,
+                "end": 215,
+                "textSpan": "lehet"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "cop",
+                  "sourceSpan": {
+                    "start": 210,
+                    "end": 215,
+                    "textSpan": "lehet"
+                  },
+                  "targetSpan": {
+                    "start": 195,
+                    "end": 209,
+                    "textSpan": "felhasználható"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "conditional",
+              "rule": "inherited_bounded_clause_condition",
+              "evidenceSpan": {
+                "start": 101,
+                "end": 103,
+                "textSpan": "Ha"
+              },
+              "dependencyPath": []
+            }
+          ],
+          "conditions": [
+            {
+              "kind": "conditional",
+              "rule": "inherited_bounded_clause_condition",
+              "binding": "scoped",
+              "evidenceSpan": {
+                "start": 101,
+                "end": 103,
+                "textSpan": "Ha"
+              },
+              "antecedentSpan": {
+                "start": 101,
+                "end": 171,
+                "textSpan": "Ha a szállítódoboz legalább 2 és legfeljebb 6 Celsius-fok között marad"
+              }
+            }
+          ],
+          "frameId": "dependency:173:216",
+          "clauseSpan": {
+            "start": 173,
+            "end": 216,
+            "textSpan": "a készítmény 36 óráig felhasználható lehet."
+          },
+          "projectionAllowed": false
+        }
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "címkén",
+            "normalized": "címke",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 230,
+            "end": 236,
+            "evidenceSpan": {
+              "start": 230,
+              "end": 236,
+              "textSpan": "címkén"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 217,
+          "end": 267,
+          "textSpan": "A lezáratlan címkén egyetlen aláírás sem szerepelt"
+        },
+        "attribution": null,
+        "action": "szerepel",
+        "actionSpan": {
+          "start": 258,
+          "end": 267,
+          "textSpan": "szerepelt"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 217,
+          "end": 267,
+          "textSpan": "A lezáratlan címkén egyetlen aláírás sem szerepelt"
+        },
+        "propositionSpan": {
+          "start": 217,
+          "end": 267,
+          "textSpan": "A lezáratlan címkén egyetlen aláírás sem szerepelt"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:217:267",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 269,
+          "end": 322,
+          "textSpan": "így a csomagoló személyét nem lehetett megállapítani."
+        },
+        "attribution": null,
+        "action": "lehet",
+        "actionSpan": {
+          "start": 299,
+          "end": 307,
+          "textSpan": "lehetett"
+        },
+        "object": [
+          "személy"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 269,
+          "end": 322,
+          "textSpan": "így a csomagoló személyét nem lehetett megállapítani."
+        },
+        "propositionSpan": {
+          "start": 269,
+          "end": 322,
+          "textSpan": "így a csomagoló személyét nem lehetett megállapítani."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:269:322",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "csomagoló",
+              "normalized": "csomagoló",
+              "start": 275,
+              "end": 284,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 275,
+                "end": 284,
+                "textSpan": "csomagoló"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 275,
+                "end": 284,
+                "textSpan": "csomagoló"
+              },
+              "targetSpan": {
+                "start": 299,
+                "end": 307,
+                "textSpan": "lehetett"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 275,
+                    "end": 284,
+                    "textSpan": "csomagoló"
+                  },
+                  "targetSpan": {
+                    "start": 285,
+                    "end": 294,
+                    "textSpan": "személyét"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 285,
+                    "end": 294,
+                    "textSpan": "személyét"
+                  },
+                  "targetSpan": {
+                    "start": 308,
+                    "end": 321,
+                    "textSpan": "megállapítani"
+                  }
+                },
+                {
+                  "relation": "xcomp",
+                  "sourceSpan": {
+                    "start": 308,
+                    "end": 321,
+                    "textSpan": "megállapítani"
+                  },
+                  "targetSpan": {
+                    "start": 299,
+                    "end": 307,
+                    "textSpan": "lehetett"
+                  }
+                }
+              ],
+              "frameId": "dependency:269:322",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": [
+      {
+        "id": "nominal-source:15",
+        "source": {
+          "mention": "gyógyszerész",
+          "normalized": "gyógyszerész",
+          "start": 2,
+          "end": 14,
+          "type": "local_source",
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 14,
+            "textSpan": "gyógyszerész"
+          }
+        },
+        "reportingNominal": {
+          "start": 15,
+          "end": 22,
+          "textSpan": "közlése"
+        },
+        "markerSpan": {
+          "start": 23,
+          "end": 30,
+          "textSpan": "alapján"
+        },
+        "predicateSpan": {
+          "start": 52,
+          "end": 59,
+          "textSpan": "adhatja"
+        },
+        "binding": "resolved",
+        "rule": "possessive_information_artifact_evidential_claim_path",
+        "evidenceSpan": {
+          "start": 2,
+          "end": 30,
+          "textSpan": "gyógyszerész közlése alapján"
+        },
+        "dependencyEvidence": [
+          {
+            "relation": "obl",
+            "sourceSpan": {
+              "start": 23,
+              "end": 30,
+              "textSpan": "alapján"
+            },
+            "targetSpan": {
+              "start": 52,
+              "end": 59,
+              "textSpan": "adhatja"
+            }
+          },
+          {
+            "relation": "nmod:att",
+            "sourceSpan": {
+              "start": 2,
+              "end": 14,
+              "textSpan": "gyógyszerész"
+            },
+            "targetSpan": {
+              "start": 15,
+              "end": 22,
+              "textSpan": "közlése"
+            }
+          },
+          {
+            "relation": "obl",
+            "sourceSpan": {
+              "start": 23,
+              "end": 30,
+              "textSpan": "alapján"
+            },
+            "targetSpan": {
+              "start": 52,
+              "end": 59,
+              "textSpan": "adhatja"
+            }
+          }
+        ],
+        "unresolvedReasons": [],
+        "sourceArtifact": {
+          "start": 15,
+          "end": 22,
+          "textSpan": "közlése"
+        },
+        "claimFrameIds": [
+          "dependency:0:100"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1542 @@
+{
+  "id": "V",
+  "text": "A döntő eredménylapján Hegedűs Áron mögött Fodor Mira következik, akit a zsűri a második helyre sorolt. A közönségszavazásban viszont Mira első, Áron harmadik; a két lista nem vonható össze. A záróbeszédet nem a zsűri, hanem a műsorvezető olvasta fel, a szöveg íróját nem nevezték meg.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 8
+      },
+      {
+        "start": 2,
+        "end": 7,
+        "text": "döntő",
+        "lemma": "döntő",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 8
+      },
+      {
+        "start": 8,
+        "end": 22,
+        "text": "eredménylapján",
+        "lemma": "eredménylap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 54
+      },
+      {
+        "start": 23,
+        "end": 30,
+        "text": "Hegedűs",
+        "lemma": "Hegedűs",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 8
+      },
+      {
+        "start": 31,
+        "end": 35,
+        "text": "Áron",
+        "lemma": "Áron",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 23
+      },
+      {
+        "start": 36,
+        "end": 42,
+        "text": "mögött",
+        "lemma": "mögött",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 23
+      },
+      {
+        "start": 43,
+        "end": 48,
+        "text": "Fodor",
+        "lemma": "Fodor",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 23
+      },
+      {
+        "start": 49,
+        "end": 53,
+        "text": "Mira",
+        "lemma": "Mira",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 23
+      },
+      {
+        "start": 54,
+        "end": 64,
+        "text": "következik",
+        "lemma": "következik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 54
+      },
+      {
+        "start": 64,
+        "end": 65,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 96
+      },
+      {
+        "start": 66,
+        "end": 70,
+        "text": "akit",
+        "lemma": "aki",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Rel"
+        },
+        "dep": "obj",
+        "headStart": 96
+      },
+      {
+        "start": 71,
+        "end": 72,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 73
+      },
+      {
+        "start": 73,
+        "end": 78,
+        "text": "zsűri",
+        "lemma": "zsűri",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 96
+      },
+      {
+        "start": 79,
+        "end": 80,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 89
+      },
+      {
+        "start": 81,
+        "end": 88,
+        "text": "második",
+        "lemma": "második",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 89
+      },
+      {
+        "start": 89,
+        "end": 95,
+        "text": "helyre",
+        "lemma": "hely",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 96
+      },
+      {
+        "start": 96,
+        "end": 102,
+        "text": "sorolt",
+        "lemma": "sorol",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 54
+      },
+      {
+        "start": 102,
+        "end": 103,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 54
+      },
+      {
+        "start": 104,
+        "end": 105,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 106
+      },
+      {
+        "start": 106,
+        "end": 125,
+        "text": "közönségszavazásban",
+        "lemma": "közönségszavazás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing"
+        },
+        "dep": "nmod:obl",
+        "headStart": 139
+      },
+      {
+        "start": 126,
+        "end": 133,
+        "text": "viszont",
+        "lemma": "viszont",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 134
+      },
+      {
+        "start": 134,
+        "end": 138,
+        "text": "Mira",
+        "lemma": "Mira",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 139
+      },
+      {
+        "start": 139,
+        "end": 143,
+        "text": "első",
+        "lemma": "első",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 139
+      },
+      {
+        "start": 143,
+        "end": 144,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 145
+      },
+      {
+        "start": 145,
+        "end": 149,
+        "text": "Áron",
+        "lemma": "Áron",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "appos",
+        "headStart": 139
+      },
+      {
+        "start": 150,
+        "end": 158,
+        "text": "harmadik",
+        "lemma": "harmadik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 139
+      },
+      {
+        "start": 158,
+        "end": 159,
+        "text": ";",
+        "lemma": ";",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 176
+      },
+      {
+        "start": 160,
+        "end": 161,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 166
+      },
+      {
+        "start": 162,
+        "end": 165,
+        "text": "két",
+        "lemma": "két",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 166
+      },
+      {
+        "start": 166,
+        "end": 171,
+        "text": "lista",
+        "lemma": "lista",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 176
+      },
+      {
+        "start": 172,
+        "end": 175,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 176
+      },
+      {
+        "start": 176,
+        "end": 183,
+        "text": "vonható",
+        "lemma": "vonható",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 139
+      },
+      {
+        "start": 184,
+        "end": 189,
+        "text": "össze",
+        "lemma": "össze",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 176
+      },
+      {
+        "start": 189,
+        "end": 190,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 139
+      },
+      {
+        "start": 191,
+        "end": 192,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 193
+      },
+      {
+        "start": 193,
+        "end": 205,
+        "text": "záróbeszédet",
+        "lemma": "záróbeszéd",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 239
+      },
+      {
+        "start": 206,
+        "end": 209,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 212
+      },
+      {
+        "start": 210,
+        "end": 211,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 212
+      },
+      {
+        "start": 212,
+        "end": 217,
+        "text": "zsűri",
+        "lemma": "zsűri",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 239
+      },
+      {
+        "start": 217,
+        "end": 218,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 227
+      },
+      {
+        "start": 219,
+        "end": 224,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 227
+      },
+      {
+        "start": 225,
+        "end": 226,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 227
+      },
+      {
+        "start": 227,
+        "end": 238,
+        "text": "műsorvezető",
+        "lemma": "műsorvezető",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 212
+      },
+      {
+        "start": 239,
+        "end": 246,
+        "text": "olvasta",
+        "lemma": "olvas",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 239
+      },
+      {
+        "start": 247,
+        "end": 250,
+        "text": "fel",
+        "lemma": "fel",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 239
+      },
+      {
+        "start": 250,
+        "end": 251,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 272
+      },
+      {
+        "start": 252,
+        "end": 253,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 254
+      },
+      {
+        "start": 254,
+        "end": 260,
+        "text": "szöveg",
+        "lemma": "szöveg",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 261
+      },
+      {
+        "start": 261,
+        "end": 267,
+        "text": "íróját",
+        "lemma": "író",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obj",
+        "headStart": 272
+      },
+      {
+        "start": 268,
+        "end": 271,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 272
+      },
+      {
+        "start": 272,
+        "end": 280,
+        "text": "nevezték",
+        "lemma": "nevez",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 239
+      },
+      {
+        "start": 281,
+        "end": 284,
+        "text": "meg",
+        "lemma": "meg",
+        "pos": "PART",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 272
+      },
+      {
+        "start": 284,
+        "end": 285,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 239
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 103,
+        "text": "A döntő eredménylapján Hegedűs Áron mögött Fodor Mira következik, akit a zsűri a második helyre sorolt."
+      },
+      {
+        "start": 104,
+        "end": 190,
+        "text": "A közönségszavazásban viszont Mira első, Áron harmadik; a két lista nem vonható össze."
+      },
+      {
+        "start": 191,
+        "end": 285,
+        "text": "A záróbeszédet nem a zsűri, hanem a műsorvezető olvasta fel, a szöveg íróját nem nevezték meg."
+      }
+    ],
+    "entities": [
+      {
+        "start": 23,
+        "end": 35,
+        "text": "Hegedűs Áron",
+        "label": "PER"
+      },
+      {
+        "start": 43,
+        "end": 53,
+        "text": "Fodor Mira",
+        "label": "PER"
+      },
+      {
+        "start": 134,
+        "end": 138,
+        "text": "Mira",
+        "label": "PER"
+      },
+      {
+        "start": 145,
+        "end": 149,
+        "text": "Áron",
+        "label": "PER"
+      }
+    ]
+  },
+  "output": {
+    "entities": [
+      {
+        "mention": "Hegedűs Áron",
+        "normalized": "hegedűs áron",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 23,
+        "end": 35,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 23,
+          "end": 35,
+          "textSpan": "Hegedűs Áron"
+        },
+        "identityKey": "person|hegedűs áron",
+        "canonicalIdentity": "hegedűs áron",
+        "identityStatus": "resolved"
+      },
+      {
+        "mention": "Mira",
+        "normalized": "mira",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 134,
+        "end": 138,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 134,
+          "end": 138,
+          "textSpan": "Mira"
+        },
+        "identityKey": "person|mira",
+        "canonicalIdentity": "mira",
+        "identityStatus": "resolved"
+      },
+      {
+        "mention": "Áron",
+        "normalized": "áron",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 145,
+        "end": 149,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 145,
+          "end": 149,
+          "textSpan": "Áron"
+        },
+        "identityKey": "person|áron",
+        "canonicalIdentity": "áron",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "eredménylapján",
+            "normalized": "eredménylap",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 8,
+            "end": 22,
+            "evidenceSpan": {
+              "start": 8,
+              "end": 22,
+              "textSpan": "eredménylapján"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 64,
+          "textSpan": "A döntő eredménylapján Hegedűs Áron mögött Fodor Mira következik"
+        },
+        "attribution": null,
+        "action": "következik",
+        "actionSpan": {
+          "start": 54,
+          "end": 64,
+          "textSpan": "következik"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "mixed_case_name_boundary",
+          "unsupported_local_actor",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 64,
+          "textSpan": "A döntő eredménylapján Hegedűs Áron mögött Fodor Mira következik"
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 64,
+          "textSpan": "A döntő eredménylapján Hegedűs Áron mögött Fodor Mira következik"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:64",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 66,
+          "end": 103,
+          "textSpan": "akit a zsűri a második helyre sorolt."
+        },
+        "attribution": null,
+        "action": "sorol",
+        "actionSpan": {
+          "start": 96,
+          "end": 102,
+          "textSpan": "sorolt"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 81,
+            "end": 95,
+            "raw": "második helyre",
+            "value": 2,
+            "canonicalValue": 2,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 81,
+              "end": 95,
+              "textSpan": "második helyre"
+            },
+            "binding": "resolved",
+            "ownerType": "ordinal_target",
+            "owner": {
+              "mention": "helyre",
+              "evidenceSpan": {
+                "start": 89,
+                "end": 95,
+                "textSpan": "helyre"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 81,
+                "end": 95,
+                "textSpan": "második helyre"
+              },
+              "targetSpan": {
+                "start": 96,
+                "end": 102,
+                "textSpan": "sorolt"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 81,
+                    "end": 88,
+                    "textSpan": "második"
+                  },
+                  "targetSpan": {
+                    "start": 89,
+                    "end": 95,
+                    "textSpan": "helyre"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 89,
+                    "end": 95,
+                    "textSpan": "helyre"
+                  },
+                  "targetSpan": {
+                    "start": 96,
+                    "end": 102,
+                    "textSpan": "sorolt"
+                  }
+                }
+              ],
+              "frameId": "dependency:66:103",
+              "semanticRole": "ordinal",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 81,
+                    "end": 95,
+                    "textSpan": "második helyre"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:66:103",
+              "clauseSpan": {
+                "start": 66,
+                "end": 103,
+                "textSpan": "akit a zsűri a második helyre sorolt."
+              },
+              "predicateSpan": {
+                "start": 96,
+                "end": 102,
+                "textSpan": "sorolt"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 81,
+                    "end": 88,
+                    "textSpan": "második"
+                  },
+                  "targetSpan": {
+                    "start": 89,
+                    "end": 95,
+                    "textSpan": "helyre"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 89,
+                    "end": 95,
+                    "textSpan": "helyre"
+                  },
+                  "targetSpan": {
+                    "start": 96,
+                    "end": 102,
+                    "textSpan": "sorolt"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 66,
+          "end": 103,
+          "textSpan": "akit a zsűri a második helyre sorolt."
+        },
+        "propositionSpan": {
+          "start": 66,
+          "end": 103,
+          "textSpan": "akit a zsűri a második helyre sorolt."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:66:103",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "akit",
+              "normalized": "aki",
+              "start": 66,
+              "end": 70,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 66,
+                "end": 70,
+                "textSpan": "akit"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 66,
+                "end": 70,
+                "textSpan": "akit"
+              },
+              "targetSpan": {
+                "start": 96,
+                "end": 102,
+                "textSpan": "sorolt"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 66,
+                    "end": 70,
+                    "textSpan": "akit"
+                  },
+                  "targetSpan": {
+                    "start": 96,
+                    "end": 102,
+                    "textSpan": "sorolt"
+                  }
+                }
+              ],
+              "frameId": "dependency:66:103",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "közönségszavazásban",
+            "normalized": "közönségszavazás",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ine",
+            "start": 106,
+            "end": 125,
+            "evidenceSpan": {
+              "start": 106,
+              "end": 125,
+              "textSpan": "közönségszavazásban"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 104,
+          "end": 190,
+          "textSpan": "A közönségszavazásban viszont Mira első, Áron harmadik; a két lista nem vonható össze."
+        },
+        "attribution": null,
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 139,
+            "end": 143,
+            "raw": "első",
+            "value": 1,
+            "canonicalValue": 1,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 139,
+              "end": 143,
+              "textSpan": "első"
+            },
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "subject": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 139,
+                    "end": 143,
+                    "textSpan": "első"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:104:190",
+              "clauseSpan": {
+                "start": 104,
+                "end": 190,
+                "textSpan": "A közönségszavazásban viszont Mira első, Áron harmadik; a két lista nem vonható össze."
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "start": 150,
+            "end": 158,
+            "raw": "harmadik",
+            "value": 3,
+            "canonicalValue": 3,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 150,
+              "end": 158,
+              "textSpan": "harmadik"
+            },
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "subject": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 150,
+                    "end": 158,
+                    "textSpan": "harmadik"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:104:190",
+              "clauseSpan": {
+                "start": 104,
+                "end": 190,
+                "textSpan": "A közönségszavazásban viszont Mira első, Áron harmadik; a két lista nem vonható össze."
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [
+                {
+                  "relation": "conj",
+                  "sourceSpan": {
+                    "start": 150,
+                    "end": 158,
+                    "textSpan": "harmadik"
+                  },
+                  "targetSpan": {
+                    "start": 139,
+                    "end": 143,
+                    "textSpan": "első"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "value": 2,
+            "canonicalValue": 2,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 162,
+            "end": 171,
+            "raw": "két lista",
+            "evidenceSpan": {
+              "start": 162,
+              "end": 171,
+              "textSpan": "két lista"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 162,
+                    "end": 171,
+                    "textSpan": "két lista"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:104:190",
+              "clauseSpan": {
+                "start": 104,
+                "end": 190,
+                "textSpan": "A közönségszavazásban viszont Mira első, Áron harmadik; a két lista nem vonható össze."
+              },
+              "predicateSpan": null,
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 162,
+                    "end": 165,
+                    "textSpan": "két"
+                  },
+                  "targetSpan": {
+                    "start": 166,
+                    "end": 171,
+                    "textSpan": "lista"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 166,
+                    "end": 171,
+                    "textSpan": "lista"
+                  },
+                  "targetSpan": {
+                    "start": 176,
+                    "end": 183,
+                    "textSpan": "vonható"
+                  }
+                },
+                {
+                  "relation": "conj",
+                  "sourceSpan": {
+                    "start": 176,
+                    "end": 183,
+                    "textSpan": "vonható"
+                  },
+                  "targetSpan": {
+                    "start": 139,
+                    "end": 143,
+                    "textSpan": "első"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "negation_predicate_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 104,
+          "end": 190,
+          "textSpan": "A közönségszavazásban viszont Mira első, Áron harmadik; a két lista nem vonható össze."
+        },
+        "propositionSpan": {
+          "start": 104,
+          "end": 190,
+          "textSpan": "A közönségszavazásban viszont Mira első, Áron harmadik; a két lista nem vonható össze."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:104:190",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 191,
+          "end": 250,
+          "textSpan": "A záróbeszédet nem a zsűri, hanem a műsorvezető olvasta fel"
+        },
+        "attribution": null,
+        "action": "olvas",
+        "actionSpan": {
+          "start": 239,
+          "end": 246,
+          "textSpan": "olvasta"
+        },
+        "object": [
+          "záróbeszéd"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 191,
+          "end": 250,
+          "textSpan": "A záróbeszédet nem a zsűri, hanem a műsorvezető olvasta fel"
+        },
+        "propositionSpan": {
+          "start": 191,
+          "end": 250,
+          "textSpan": "A záróbeszédet nem a zsűri, hanem a műsorvezető olvasta fel"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:191:250"
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 252,
+          "end": 285,
+          "textSpan": "a szöveg íróját nem nevezték meg."
+        },
+        "attribution": null,
+        "action": "nevez",
+        "actionSpan": {
+          "start": 272,
+          "end": 280,
+          "textSpan": "nevezték"
+        },
+        "object": [
+          "író"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 252,
+          "end": 285,
+          "textSpan": "a szöveg íróját nem nevezték meg."
+        },
+        "propositionSpan": {
+          "start": 252,
+          "end": 285,
+          "textSpan": "a szöveg íróját nem nevezték meg."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:252:285"
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "evidenceSpan": {
+          "start": 191,
+          "end": 285,
+          "textSpan": "A záróbeszédet nem a zsűri, hanem a műsorvezető olvasta fel, a szöveg íróját nem nevezték meg."
+        },
+        "scope": {
+          "start": 191,
+          "end": 285
+        },
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

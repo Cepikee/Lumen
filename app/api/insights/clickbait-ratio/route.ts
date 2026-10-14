@@ -2,12 +2,17 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
+import { mysqlUtc } from "@/lib/business-time";
+import { resolveInsightsWindow } from "@/lib/insights-period";
 
 export async function GET(req: Request) {
   try {
     // ⭐ SECURITY CHECK
     const sec = await securityCheck(req);
     if (sec) return sec;
+
+    const { searchParams } = new URL(req.url);
+    const { start, end } = resolveInsightsWindow(searchParams.get("period"));
 
     // ─────────────────────────────────────────────
     // 1) Forrásonkénti clickbait arány
@@ -21,9 +26,10 @@ export async function GET(req: Request) {
         COUNT(*) AS total_count
       FROM summaries
       WHERE final_clickbait IS NOT NULL
+        AND created_at >= ? AND created_at < ?
       GROUP BY COALESCE(NULLIF(LOWER(TRIM(source)), ''), 'ismeretlen')
       ORDER BY clickbait_count DESC
-    `);
+    `, [mysqlUtc(start), mysqlUtc(end)]);
 
     const sources = rows.map((r: any) => {
       const total = Number(r.total_count) || 0;

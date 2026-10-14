@@ -1,0 +1,6150 @@
+[
+  {
+    "id": "A",
+    "text": "A plenáris ülésen az elnöklő Takács Réka a frakcióknak így indokolta a halasztást: „Amíg az egyeztetés tart, nem tűzzük napirendre a módosítást.” A parlament sajtóirodájának összefoglalója alapján az alkotmányügyi bizottság kérte a szünetet. A voksolásra legkorábban 2028 tavaszán kerülhet sor.",
+    "entities": [
+      {
+        "mention": "Takács Réka",
+        "normalized": "takács réka",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "case": "Nom",
+        "identityKey": "person|takács réka",
+        "canonicalIdentity": "takács réka",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A plenáris ülésen az elnöklő Takács Réka a frakcióknak így indokolta a halasztást",
+        "sentence": 0,
+        "actor": {
+          "mention": "Takács Réka",
+          "normalized": "takács réka",
+          "type": "named_referent",
+          "case": "Nom"
+        },
+        "actorStatus": "resolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "indokol",
+        "object": [
+          "halasztás"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "resolved",
+        "unresolvedReasons": [],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:81"
+      },
+      {
+        "index": 1,
+        "text": "„Amíg az egyeztetés tart, nem tűzzük napirendre a módosítást.”",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "tart",
+        "object": [
+          "módosítás"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "multiple_content_predicates",
+          "actor_unresolved",
+          "nested_negation_scope",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:83:145"
+      },
+      {
+        "index": 2,
+        "text": "A parlament sajtóirodájának összefoglalója alapján az alkotmányügyi bizottság kérte a szünetet.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "kér",
+        "object": [
+          "szünet"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:146:241"
+      },
+      {
+        "index": 3,
+        "text": "A voksolásra legkorábban 2028 tavaszán kerülhet sor.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "kerül",
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 2028,
+            "canonicalValue": 2028,
+            "unit": null,
+            "semanticKind": "unknown",
+            "raw": "2028",
+            "owner": null,
+            "ownerType": "unresolved",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "potential_morphology"
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:242:294",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "possible"
+        ],
+        "modality": "possible",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:242:294",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "potential_morphology"
+            }
+          ],
+          "frameId": "dependency:242:294",
+          "projectionAllowed": false
+        }
+      }
+    ],
+    "chains": [],
+    "reportingNominalRelations": []
+  },
+  {
+    "id": "B",
+    "text": "A lakógyűlésről távozva Barta Júlia főépítész a kerület jegyzőjének adta át a tervrajzokat. A kilencedik kerület udvarain nem padokat, hanem ivókutakat helyeznének el, ha megszületik a lakók hozzájárulása. Az első ütem a játszótérre korlátozódik.",
+    "entities": [
+      {
+        "mention": "Barta Júlia",
+        "normalized": "barta júlia",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "case": "Nom",
+        "identityKey": "person|barta júlia",
+        "canonicalIdentity": "barta júlia",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A lakógyűlésről távozva Barta Júlia főépítész a kerület jegyzőjének adta át a tervrajzokat.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "átad",
+        "object": [
+          "tervrajz"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:91"
+      },
+      {
+        "index": 1,
+        "text": "A kilencedik kerület udvarain nem padokat, hanem ivókutakat helyeznének el",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "helyez",
+        "object": [
+          "pad",
+          "ivókuta"
+        ],
+        "numericArguments": [],
+        "conditionality": true,
+        "conditionalTrigger": {},
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "hypothetical",
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:92:166",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "conditional",
+              "rule": "governing_conditional_morphology"
+            }
+          ],
+          "frameId": "dependency:92:166",
+          "projectionAllowed": false
+        }
+      },
+      {
+        "index": 2,
+        "text": "ha megszületik a lakók hozzájárulása.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "megszületik",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": true,
+        "conditionalTrigger": {},
+        "conditionAntecedent": true,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:168:205",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "conditional",
+              "rule": "clause_condition_marker"
+            }
+          ],
+          "frameId": "dependency:168:205",
+          "projectionAllowed": false
+        }
+      },
+      {
+        "index": 3,
+        "text": "Az első ütem a játszótérre korlátozódik.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "korlátozódik",
+        "object": [],
+        "numericArguments": [
+          {
+            "raw": "első ütem",
+            "value": 1,
+            "canonicalValue": 1,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "binding": "resolved",
+            "ownerType": "ordinal_target",
+            "owner": {
+              "mention": "ütem"
+            },
+            "unresolvedReasons": [],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:206:246",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:206:246"
+      }
+    ],
+    "chains": [],
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "scope": {},
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "reportingNominalRelations": []
+  },
+  {
+    "id": "C",
+    "text": "Az exportőrök szövetségének mérlegelése szerint a megrendelések értéke meghaladhatja a 8 milliárd eurót. Ebből a hajógyártókra jutó rész 31 százalék, az előző negyedévhez képest pedig 6 százalékkal bővült a kivitel. A közzététel 2027. február 18-án 14 órakor történt.",
+    "entities": [],
+    "frames": [
+      {
+        "index": 0,
+        "text": "Az exportőrök szövetségének mérlegelése szerint a megrendelések értéke meghaladhatja a 8 milliárd eurót.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": {
+          "mention": "exportőrök szövetségének",
+          "normalized": "exportőr szövetség",
+          "type": "local_source",
+          "identityStatus": "observed_local_referent"
+        },
+        "source": {
+          "mention": "exportőrök szövetségének",
+          "normalized": "exportőr szövetség",
+          "type": "local_source",
+          "identityStatus": "observed_local_referent"
+        },
+        "recipient": null,
+        "reportingVerb": "szerint",
+        "attribution": {
+          "label": "exportőrök szövetségének",
+          "normalized": "exportőr szövetség"
+        },
+        "action": "meghaladhat",
+        "object": [
+          "euró"
+        ],
+        "numericArguments": [
+          {
+            "value": 8000000000,
+            "canonicalValue": 8000000000,
+            "unit": "EUR",
+            "semanticKind": "money",
+            "raw": "8 milliárd eurót",
+            "owner": {
+              "mention": "eurót",
+              "normalized": "euró",
+              "type": "referent",
+              "case": "Acc"
+            },
+            "ownerType": "semantic_argument",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "money",
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "finite_potential_wordform_candidate"
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:104",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": true,
+        "modalities": [
+          "reported",
+          "possible"
+        ],
+        "modality": "possible",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:104",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "finite_potential_wordform_candidate"
+            }
+          ],
+          "frameId": "dependency:0:104",
+          "projectionAllowed": false
+        },
+        "reportingNominalRelationId": "nominal-source:28"
+      },
+      {
+        "index": 1,
+        "text": "Ebből a hajógyártókra jutó rész 31 százalék",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "bővül",
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 31,
+            "canonicalValue": 31,
+            "unit": "%",
+            "semanticKind": "percentage",
+            "raw": "31 százalék",
+            "owner": null,
+            "ownerType": "unresolved",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:105:148",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "actionInherited": true,
+        "frameId": "dependency:105:148"
+      },
+      {
+        "index": 2,
+        "text": "az előző negyedévhez képest pedig 6 százalékkal bővült a kivitel.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "bővül",
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 6,
+            "canonicalValue": 6,
+            "unit": "%",
+            "semanticKind": "percentage",
+            "raw": "6 százalékkal",
+            "owner": {
+              "mention": "százalékkal",
+              "normalized": "százalék",
+              "type": "referent",
+              "case": "Ins"
+            },
+            "ownerType": "semantic_argument",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "percentage",
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:150:215",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:150:215"
+      },
+      {
+        "index": 3,
+        "text": "A közzététel 2027. február 18-án 14 órakor történt.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "történik",
+        "object": [],
+        "numericArguments": [
+          {
+            "raw": "2027. február 18-án",
+            "value": {
+              "year": 2027,
+              "month": 2,
+              "day": 18,
+              "part": null
+            },
+            "canonicalValue": {
+              "year": 2027,
+              "month": 2,
+              "day": 18,
+              "part": null
+            },
+            "semanticKind": "calendar_date",
+            "unit": "calendar",
+            "property": "date",
+            "temporalRole": "date",
+            "binding": "resolved",
+            "ownerType": "semantic_argument",
+            "owner": {
+              "mention": "18-án"
+            },
+            "unresolvedReasons": [],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:216:267",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "raw": "14 órakor",
+            "value": {
+              "hour": 14,
+              "minute": 0
+            },
+            "canonicalValue": {
+              "hour": 14,
+              "minute": 0
+            },
+            "semanticKind": "clock_time",
+            "unit": "clock",
+            "property": "time",
+            "temporalRole": "time",
+            "binding": "resolved",
+            "ownerType": "semantic_argument",
+            "owner": {
+              "mention": "órakor"
+            },
+            "unresolvedReasons": [],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:216:267",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:216:267"
+      }
+    ],
+    "chains": [],
+    "reportingNominalRelations": [
+      {
+        "id": "nominal-source:28",
+        "source": {
+          "mention": "exportőrök szövetségének",
+          "normalized": "exportőr szövetség",
+          "type": "local_source",
+          "identityStatus": "observed_local_referent"
+        },
+        "reportingNominal": {},
+        "binding": "resolved",
+        "rule": "possessive_np_event_nominal_evidential_marker",
+        "unresolvedReasons": []
+      }
+    ]
+  },
+  {
+    "id": "D",
+    "text": "A Borostyán Csomagoló Központ üzemvezetője a dolgozóknak jelezte, hogy az éjszakai műszakot megszüntetik. A feljegyzés szerint összesen 73 munkakör érintett, de a létszámleépítést a tulajdonos még nem hagyta jóvá. Az átállításért felelős vezetőt a közlemény nem nevezi meg.",
+    "entities": [
+      {
+        "mention": "Borostyán Csomagoló Központ",
+        "normalized": "borostyán csomagoló központ",
+        "type": "organization",
+        "subtype": null,
+        "sourceRole": null,
+        "case": "Nom",
+        "identityKey": "organization|borostyán csomagoló központ",
+        "canonicalIdentity": "borostyán csomagoló központ",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A Borostyán Csomagoló Központ üzemvezetője a dolgozóknak jelezte",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "jelez",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "unsupported_local_actor",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:64"
+      },
+      {
+        "index": 1,
+        "text": "hogy az éjszakai műszakot megszüntetik.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "megszüntet",
+        "object": [
+          "műszak"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:66:105"
+      },
+      {
+        "index": 2,
+        "text": "A feljegyzés szerint összesen 73 munkakör érintett",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": "szerint",
+        "attribution": null,
+        "action": "érint",
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 73,
+            "canonicalValue": 73,
+            "unit": "count",
+            "semanticKind": "count",
+            "raw": "73 munkakör",
+            "owner": {
+              "mention": "munkakör",
+              "normalized": "munkakör",
+              "type": "referent",
+              "case": "Nom"
+            },
+            "ownerType": "semantic_argument",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "count",
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:106:156",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "source_bearing_possessor_unproven"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:106:156",
+        "reportingNominalRelationId": "nominal-source:108"
+      },
+      {
+        "index": 3,
+        "text": "de a létszámleépítést a tulajdonos még nem hagyta jóvá.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "hagy",
+        "object": [
+          "létszámleépítés"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:158:213"
+      },
+      {
+        "index": 4,
+        "text": "Az átállításért felelős vezetőt a közlemény nem nevezi meg.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "megnevez",
+        "object": [
+          "vezető"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:214:273"
+      }
+    ],
+    "chains": [],
+    "reportingNominalRelations": [
+      {
+        "id": "nominal-source:108",
+        "source": null,
+        "reportingNominal": {},
+        "binding": "unresolved",
+        "rule": "possessive_np_event_nominal_evidential_marker",
+        "unresolvedReasons": [
+          "source_bearing_possessor_unproven"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "E",
+    "text": "A hálózatirányító tájékoztatása alapján a tartalék generátorok óránként 16 köbméter gázt fogyasztanak. Szélcsend esetén a tároló legfeljebb 11 órán keresztül biztosíthatja az ellátást. Az átvételi próbán a feszültség nem 230, hanem 228 volt volt.",
+    "entities": [],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A hálózatirányító tájékoztatása alapján a tartalék generátorok óránként 16 köbméter gázt fogyasztanak.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": {
+          "mention": "hálózatirányító",
+          "normalized": "hálózatirányító",
+          "type": "local_source",
+          "identityStatus": "observed_local_referent"
+        },
+        "source": {
+          "mention": "hálózatirányító",
+          "normalized": "hálózatirányító",
+          "type": "local_source",
+          "identityStatus": "observed_local_referent"
+        },
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": {
+          "label": "hálózatirányító",
+          "normalized": "hálózatirányító"
+        },
+        "action": "fogyaszt",
+        "object": [
+          "gáz"
+        ],
+        "numericArguments": [
+          {
+            "value": 16,
+            "canonicalValue": 16,
+            "unit": {
+              "numerator": "köbméter",
+              "denominator": "hour"
+            },
+            "semanticKind": "compound_rate",
+            "raw": "óránként 16 köbméter",
+            "owner": null,
+            "ownerType": "unresolved",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven",
+              "compound_rate_projection_not_supported"
+            ],
+            "compound": {
+              "numerator": {
+                "value": 16,
+                "baseUnit": "köbméter",
+                "originalKind": "unknown"
+              },
+              "denominators": [
+                {
+                  "unit": "hour",
+                  "relation": "per",
+                  "form": "distributive"
+                }
+              ],
+              "relation": "per",
+              "qualifiers": [],
+              "numeratorDependencyPath": [
+                {
+                  "relation": "amod:att"
+                },
+                {
+                  "relation": "nmod:att"
+                },
+                {
+                  "relation": "obj:lvc"
+                }
+              ],
+              "scopeStatus": "candidate_only",
+              "frameId": "dependency:0:102"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:102",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved",
+          "compound_rate_requires_lossless_resolution"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:102",
+        "reportingNominalRelationId": "nominal-source:18"
+      },
+      {
+        "index": 1,
+        "text": "Szélcsend esetén a tároló legfeljebb 11 órán keresztül biztosíthatja az ellátást.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "biztosíthat",
+        "object": [
+          "ellátás"
+        ],
+        "numericArguments": [
+          {
+            "raw": "11 órán keresztül",
+            "value": 11,
+            "canonicalValue": 11,
+            "semanticKind": "duration",
+            "unit": "hour",
+            "property": "duration",
+            "temporalRole": "duration",
+            "binding": "resolved",
+            "ownerType": "semantic_argument",
+            "owner": {
+              "mention": "órán"
+            },
+            "unresolvedReasons": [],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "less_or_equal",
+                  "marker": "legfeljebb"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "finite_potential_wordform_candidate"
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:103:184",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "possible"
+        ],
+        "modality": "possible",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:103:184",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "finite_potential_wordform_candidate"
+            }
+          ],
+          "frameId": "dependency:103:184",
+          "projectionAllowed": false
+        }
+      },
+      {
+        "index": 2,
+        "text": "Az átvételi próbán a feszültség nem 230",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 230,
+            "canonicalValue": 230,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "raw": "230",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "unsafe_proposition_scope",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {},
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "dependency:185:224",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:185:224"
+      },
+      {
+        "index": 3,
+        "text": "hanem 228 volt volt.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "van",
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 228,
+            "canonicalValue": 228,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "raw": "228",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {},
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "dependency:226:246",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:226:246"
+      }
+    ],
+    "chains": [],
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "scope": {},
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "reportingNominalRelations": [
+      {
+        "id": "nominal-source:18",
+        "source": {
+          "mention": "hálózatirányító",
+          "normalized": "hálózatirányító",
+          "type": "local_source",
+          "identityStatus": "observed_local_referent"
+        },
+        "reportingNominal": {},
+        "binding": "resolved",
+        "rule": "possessive_np_event_nominal_evidential_marker",
+        "unresolvedReasons": []
+      }
+    ]
+  },
+  {
+    "id": "F",
+    "text": "A kikötőmester üzenetét idézve a révüzem szóvivője azt írta: „A köd feloszlásáig egyetlen komp sem indul.” Az új hajó egyszerre 85 kerékpár befogadására alkalmas, de ma csak 19 biciklit szállított. A beszállást október 22-én 06:40-kor kezdték meg.",
+    "entities": [],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A köd feloszlásáig egyetlen komp sem indul.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": {
+          "mention": "révüzem szóvivője",
+          "normalized": "révüzem szóvivő",
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent"
+        },
+        "source": {
+          "mention": "révüzem szóvivője",
+          "normalized": "révüzem szóvivő",
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent"
+        },
+        "recipient": null,
+        "reportingVerb": "ír",
+        "attribution": {
+          "label": "révüzem szóvivője",
+          "normalized": "révüzem szóvivő"
+        },
+        "action": "indul",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "asserted",
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "denied",
+        "status": "reported_claim",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "recovered-source:55:proposition:0",
+        "attributionChainId": "recovered-source:55",
+        "claimOwner": {
+          "mention": "révüzem szóvivője",
+          "normalized": "révüzem szóvivő",
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent"
+        }
+      },
+      {
+        "index": 1,
+        "text": "Az új hajó egyszerre 85 kerékpár befogadására alkalmas",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "szállít",
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 85,
+            "canonicalValue": 85,
+            "unit": "count",
+            "semanticKind": "count",
+            "raw": "85 kerékpár",
+            "owner": null,
+            "ownerType": "unresolved",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:107:161",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "actionInherited": true,
+        "frameId": "dependency:107:161"
+      },
+      {
+        "index": 2,
+        "text": "de ma csak 19 biciklit szállított.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "szállít",
+        "object": [
+          "bicikli"
+        ],
+        "numericArguments": [
+          {
+            "value": 19,
+            "canonicalValue": 19,
+            "unit": "count",
+            "semanticKind": "count",
+            "raw": "19 biciklit",
+            "owner": {
+              "mention": "biciklit",
+              "normalized": "bicikli",
+              "type": "referent",
+              "case": "Acc"
+            },
+            "ownerType": "semantic_argument",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "count",
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:163:197",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:163:197"
+      },
+      {
+        "index": 3,
+        "text": "A beszállást október 22-én 06:40-kor kezdték meg.",
+        "sentence": 3,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "megkezd",
+        "object": [
+          "beszállás"
+        ],
+        "numericArguments": [
+          {
+            "raw": "október 22-én",
+            "value": {
+              "year": null,
+              "month": 10,
+              "day": 22,
+              "part": null
+            },
+            "canonicalValue": {
+              "year": null,
+              "month": 10,
+              "day": 22,
+              "part": null
+            },
+            "semanticKind": "calendar_date",
+            "unit": "calendar",
+            "property": "date",
+            "temporalRole": "date",
+            "binding": "resolved",
+            "ownerType": "semantic_argument",
+            "owner": {
+              "mention": "22-én"
+            },
+            "unresolvedReasons": [],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:198:247",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "raw": "06:40-kor",
+            "value": {
+              "hour": 6,
+              "minute": 40
+            },
+            "canonicalValue": {
+              "hour": 6,
+              "minute": 40
+            },
+            "semanticKind": "clock_time",
+            "unit": "clock",
+            "property": "time",
+            "temporalRole": "time",
+            "binding": "resolved",
+            "ownerType": "semantic_argument",
+            "owner": {
+              "mention": "06:40-kor"
+            },
+            "unresolvedReasons": [],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:198:247",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:198:247"
+      }
+    ],
+    "chains": [
+      {
+        "id": "recovered-source:55",
+        "binding": "resolved",
+        "rule": "dependency_source_and_explicit_complement_or_bounded_quote",
+        "unresolvedReasons": [],
+        "edges": [
+          {
+            "source": {
+              "mention": "révüzem szóvivője",
+              "normalized": "révüzem szóvivő",
+              "type": "local_source",
+              "entityId": null,
+              "identityStatus": "observed_local_referent"
+            },
+            "verb": "ír",
+            "recipient": null,
+            "id": "recovered-source:55:0",
+            "depth": 0,
+            "parentAttributionId": null,
+            "targetId": "recovered-source:55:proposition:0",
+            "binding": "resolved",
+            "role": "claim_source",
+            "rule": "governing_np_reporting_scope",
+            "targetIds": [
+              "recovered-source:55:proposition:0"
+            ]
+          }
+        ],
+        "propositionIds": [
+          "recovered-source:55:proposition:0"
+        ]
+      }
+    ],
+    "reportingNominalRelations": []
+  },
+  {
+    "id": "G",
+    "text": "A helyszínelők a raktár bérlőjétől 14 lezárt csomagot vettek át. „Nem foglaltuk le a teljes készletet” – pontosított Fekete Dóra rendőr őrnagy a kereskedő kérdésére. Az ügyészség cáfolata szerint nem a tulajdonost, hanem az alkalmazottját hallgatták ki.",
+    "entities": [
+      {
+        "mention": "Fekete Dóra",
+        "normalized": "fekete dóra",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "case": "Nom",
+        "identityKey": "person|fekete dóra",
+        "canonicalIdentity": "fekete dóra",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A helyszínelők a raktár bérlőjétől 14 lezárt csomagot vettek át.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "átvesz",
+        "object": [
+          "csomag"
+        ],
+        "numericArguments": [
+          {
+            "value": 14,
+            "canonicalValue": 14,
+            "unit": null,
+            "semanticKind": "unknown",
+            "raw": "14",
+            "owner": null,
+            "ownerType": "unresolved",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:64",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:64"
+      },
+      {
+        "index": 1,
+        "text": "„Nem foglaltuk le a teljes készletet”",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "lefoglal",
+        "object": [
+          "készlet"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:65:102"
+      },
+      {
+        "index": 2,
+        "text": "pontosított Fekete Dóra rendőr őrnagy a kereskedő kérdésére.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "pontosít",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:105:165"
+      },
+      {
+        "index": 3,
+        "text": "Az ügyészség cáfolata szerint nem a tulajdonost, hanem az alkalmazottját hallgatták ki.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": "szerint",
+        "attribution": null,
+        "action": "hallgat",
+        "object": [
+          "tulajdonos",
+          "alkalmazott"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:166:253"
+      }
+    ],
+    "chains": [],
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "scope": {},
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "reportingNominalRelations": []
+  },
+  {
+    "id": "H",
+    "text": "A buszvezető segítői a mentők érkezése előtt kinyitották a hátsó ajtót. A mentésirányítás közlése alapján legalább 5 utas könnyebben megsérült, két ember állapotát még vizsgálják. A forgalmat 40 percre leállították, a mentők azonban nem kértek helikoptert.",
+    "entities": [],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A buszvezető segítői a mentők érkezése előtt kinyitották a hátsó ajtót.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "kinyit",
+        "object": [
+          "ajtó"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:71"
+      },
+      {
+        "index": 1,
+        "text": "A mentésirányítás közlése alapján legalább 5 utas könnyebben megsérült",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "megsérül",
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 5,
+            "canonicalValue": 5,
+            "unit": "count",
+            "semanticKind": "count",
+            "raw": "5 utas",
+            "owner": {
+              "mention": "utas",
+              "normalized": "utas",
+              "type": "referent",
+              "case": "Nom"
+            },
+            "ownerType": "semantic_argument",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "count",
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "greater_or_equal",
+                  "marker": "legalább"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:72:142",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "source_bearing_possessor_unproven"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:72:142",
+        "reportingNominalRelationId": "nominal-source:90"
+      },
+      {
+        "index": 2,
+        "text": "két ember állapotát még vizsgálják.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "vizsgál",
+        "object": [
+          "állapot"
+        ],
+        "numericArguments": [
+          {
+            "value": 2,
+            "canonicalValue": 2,
+            "unit": "person",
+            "semanticKind": "count",
+            "raw": "két ember",
+            "owner": {
+              "mention": "állapotát",
+              "normalized": "állapot",
+              "type": "referent",
+              "case": "Acc"
+            },
+            "ownerType": "semantic_argument",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "headcount",
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:144:179",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:144:179"
+      },
+      {
+        "index": 3,
+        "text": "A forgalmat 40 percre leállították",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "leállít",
+        "object": [
+          "forgalom"
+        ],
+        "numericArguments": [
+          {
+            "raw": "40 percre",
+            "value": 40,
+            "canonicalValue": 40,
+            "semanticKind": "duration",
+            "unit": "minute",
+            "property": "duration",
+            "temporalRole": "duration",
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:180:214",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:180:214"
+      },
+      {
+        "index": 4,
+        "text": "a mentők azonban nem kértek helikoptert.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "kér",
+        "object": [
+          "helikopter"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:216:256"
+      }
+    ],
+    "chains": [],
+    "reportingNominalRelations": [
+      {
+        "id": "nominal-source:90",
+        "source": null,
+        "reportingNominal": {},
+        "binding": "unresolved",
+        "rule": "possessive_np_event_nominal_evidential_marker",
+        "unresolvedReasons": [
+          "source_bearing_possessor_unproven"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "I",
+    "text": "A selejtező második fordulójából jutott döntőbe Sipos Lilla, aki végül harmadikként ért célba. A váltóban a negyedik helyet szerezték meg; a befutó versenyző nevét nem közölték. A csapatvezető röviden annyit mondott: „Második lett, de erről később beszélünk.”",
+    "entities": [
+      {
+        "mention": "Sipos Lilla",
+        "normalized": "sipos lilla",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "case": "Nom",
+        "identityKey": "person|sipos lilla",
+        "canonicalIdentity": "sipos lilla",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A selejtező második fordulójából jutott döntőbe Sipos Lilla",
+        "sentence": 0,
+        "actor": {
+          "mention": "Sipos Lilla",
+          "normalized": "sipos lilla",
+          "type": "named_referent",
+          "case": "Nom"
+        },
+        "actorStatus": "resolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "jut",
+        "object": [],
+        "numericArguments": [
+          {
+            "raw": "második fordulójából",
+            "value": 2,
+            "canonicalValue": 2,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "binding": "resolved",
+            "ownerType": "ordinal_target",
+            "owner": {
+              "mention": "fordulójából"
+            },
+            "unresolvedReasons": [],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:59",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "resolved",
+        "unresolvedReasons": [],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:59"
+      },
+      {
+        "index": 1,
+        "text": "aki végül harmadikként ért célba.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "ér",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:61:94"
+      },
+      {
+        "index": 2,
+        "text": "A váltóban a negyedik helyet szerezték meg",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "megszerez",
+        "object": [
+          "hely"
+        ],
+        "numericArguments": [
+          {
+            "raw": "negyedik helyet",
+            "value": 4,
+            "canonicalValue": 4,
+            "semanticKind": "rank",
+            "unit": "position",
+            "property": "placement",
+            "temporalRole": "placement",
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "unresolvedReasons": [
+              "rank_owner_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:95:137",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:95:137"
+      },
+      {
+        "index": 3,
+        "text": "a befutó versenyző nevét nem közölték.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": "közöl",
+        "attribution": null,
+        "action": "közöl",
+        "object": [
+          "név"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "negated_reporting_predicate",
+          "actor_unresolved",
+          "content_under_negated_report",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:139:177"
+      },
+      {
+        "index": 4,
+        "text": "Második lett, de erről később beszélünk.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": {
+          "mention": "csapatvezető",
+          "normalized": "csapatvezető",
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent"
+        },
+        "source": {
+          "mention": "csapatvezető",
+          "normalized": "csapatvezető",
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent"
+        },
+        "recipient": null,
+        "reportingVerb": "mond",
+        "attribution": {
+          "label": "csapatvezető",
+          "normalized": "csapatvezető"
+        },
+        "action": "lesz",
+        "object": [],
+        "numericArguments": [
+          {
+            "raw": "Második",
+            "value": 2,
+            "canonicalValue": 2,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "recovered-source:208:proposition:0",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported_claim",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "recovered-source:208:proposition:0",
+        "attributionChainId": "recovered-source:208",
+        "claimOwner": {
+          "mention": "csapatvezető",
+          "normalized": "csapatvezető",
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent"
+        }
+      }
+    ],
+    "chains": [
+      {
+        "id": "recovered-source:208",
+        "binding": "resolved",
+        "rule": "dependency_source_and_explicit_complement_or_bounded_quote",
+        "unresolvedReasons": [],
+        "edges": [
+          {
+            "source": {
+              "mention": "csapatvezető",
+              "normalized": "csapatvezető",
+              "type": "local_source",
+              "entityId": null,
+              "identityStatus": "observed_local_referent"
+            },
+            "verb": "mond",
+            "recipient": null,
+            "id": "recovered-source:208:0",
+            "depth": 0,
+            "parentAttributionId": null,
+            "targetId": "recovered-source:208:proposition:0",
+            "binding": "resolved",
+            "role": "claim_source",
+            "rule": "governing_np_reporting_scope",
+            "targetIds": [
+              "recovered-source:208:proposition:0"
+            ]
+          }
+        ],
+        "propositionIds": [
+          "recovered-source:208:proposition:0"
+        ]
+      }
+    ],
+    "reportingNominalRelations": []
+  },
+  {
+    "id": "J",
+    "text": "A Szabad Adathálózat Egyesület kutatója a felügyeletnek bemutatta a titkosítási protokollt. A labor jegyzőkönyve szerint a kapcsolat sebessége 1,8 gigabit másodpercenként, ami nem azonos a letöltött adatmennyiséggel. A hibajavítás után 12 és 18 milliszekundum között ingadozott a késleltetés.",
+    "entities": [
+      {
+        "mention": "Szabad Adathálózat Egyesület",
+        "normalized": "szabad adathálózat egyesület",
+        "type": "organization",
+        "subtype": null,
+        "sourceRole": null,
+        "case": "Nom",
+        "identityKey": "organization|szabad adathálózat egyesület",
+        "canonicalIdentity": "szabad adathálózat egyesület",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A Szabad Adathálózat Egyesület kutatója a felügyeletnek bemutatta a titkosítási protokollt.",
+        "sentence": 0,
+        "actor": {
+          "mention": "kutatója",
+          "normalized": "kutató",
+          "type": "referent",
+          "case": "Nom"
+        },
+        "actorStatus": "resolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "bemutat",
+        "object": [
+          "protokoll"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "unsupported_local_actor"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:91"
+      },
+      {
+        "index": 1,
+        "text": "A labor jegyzőkönyve szerint a kapcsolat sebessége 1,8 gigabit másodpercenként, ami nem azonos a letöltött adatmennyiséggel.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": "szerint",
+        "attribution": null,
+        "action": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 1.8,
+            "canonicalValue": 1.8,
+            "unit": {
+              "numerator": "gigabit",
+              "denominator": "second"
+            },
+            "semanticKind": "compound_rate",
+            "raw": "1,8 gigabit másodpercenként",
+            "owner": null,
+            "ownerType": "unresolved",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven",
+              "compound_rate_projection_not_supported"
+            ],
+            "compound": {
+              "numerator": {
+                "value": 1.8,
+                "baseUnit": "gigabit",
+                "originalKind": "count"
+              },
+              "denominators": [
+                {
+                  "unit": "second",
+                  "relation": "per",
+                  "form": "distributive"
+                }
+              ],
+              "relation": "per",
+              "qualifiers": [],
+              "numeratorDependencyPath": [
+                {
+                  "relation": "nummod"
+                },
+                {
+                  "relation": "nmod:att"
+                }
+              ],
+              "scopeStatus": "candidate_only",
+              "frameId": "dependency:92:216"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:92:216",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved",
+          "compound_rate_requires_lossless_resolution"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:92:216"
+      },
+      {
+        "index": 2,
+        "text": "A hibajavítás után 12 és 18 milliszekundum között ingadozott a késleltetés.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "ingadozik",
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 12,
+            "canonicalValue": 12,
+            "unit": "count",
+            "semanticKind": "count",
+            "raw": "12 és 18 milliszekundum",
+            "owner": {
+              "mention": "milliszekundum",
+              "normalized": "milliszekundum",
+              "type": "referent",
+              "case": "Nom"
+            },
+            "ownerType": "semantic_argument",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "count",
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:217:292",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "value": 18,
+            "canonicalValue": 18,
+            "unit": null,
+            "semanticKind": "unknown",
+            "raw": "18",
+            "owner": null,
+            "ownerType": "unresolved",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:217:292",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:217:292"
+      }
+    ],
+    "chains": [],
+    "reportingNominalRelations": []
+  },
+  {
+    "id": "K",
+    "text": "A járványügyi központ előrejelzése szerint, ha nő a fertőzések száma, naponta akár 46 beteget is felvehet az osztály. A főorvos visszautasította, hogy már bezárták volna a rendelőt. A kórház kedden megkapta az új vizsgálógépet.",
+    "entities": [],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A járványügyi központ előrejelzése szerint, ha nő a fertőzések száma",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": {
+          "mention": "központ",
+          "normalized": "központ",
+          "type": "local_source",
+          "identityStatus": "observed_local_referent"
+        },
+        "source": {
+          "mention": "központ",
+          "normalized": "központ",
+          "type": "local_source",
+          "identityStatus": "observed_local_referent"
+        },
+        "recipient": null,
+        "reportingVerb": "szerint",
+        "attribution": {
+          "label": "központ",
+          "normalized": "központ"
+        },
+        "action": "nő",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": true,
+        "conditionalTrigger": {},
+        "conditionAntecedent": true,
+        "hypotheticalContext": true,
+        "reportingContext": true,
+        "modalities": [
+          "reported",
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:68",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "conditional",
+              "rule": "clause_condition_marker"
+            }
+          ],
+          "frameId": "dependency:0:68",
+          "projectionAllowed": false
+        },
+        "reportingNominalRelationId": "nominal-source:22"
+      },
+      {
+        "index": 1,
+        "text": "naponta akár 46 beteget is felvehet az osztály.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "felvehet",
+        "object": [
+          "beteg"
+        ],
+        "numericArguments": [
+          {
+            "value": 46,
+            "canonicalValue": 46,
+            "unit": {
+              "numerator": "beteg",
+              "denominator": "day"
+            },
+            "semanticKind": "compound_rate",
+            "raw": "naponta akár 46 beteget",
+            "owner": null,
+            "ownerType": "unresolved",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven",
+              "compound_rate_projection_not_supported"
+            ],
+            "compound": {
+              "numerator": {
+                "value": 46,
+                "baseUnit": "beteg",
+                "originalKind": "unknown"
+              },
+              "denominators": [
+                {
+                  "unit": "day",
+                  "relation": "per",
+                  "form": "periodic"
+                }
+              ],
+              "relation": "per",
+              "qualifiers": [],
+              "numeratorDependencyPath": [
+                {
+                  "relation": "amod:att"
+                },
+                {
+                  "relation": "obj"
+                }
+              ],
+              "scopeStatus": "candidate_only",
+              "frameId": "dependency:70:117"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "possible_extent",
+                  "marker": "akár"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "finite_potential_wordform_candidate"
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": true,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:70:117",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": true,
+        "conditionalTrigger": {},
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "conditional",
+          "possible"
+        ],
+        "modality": "possible",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved",
+          "compound_rate_requires_lossless_resolution"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:70:117",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "finite_potential_wordform_candidate"
+            }
+          ],
+          "frameId": "dependency:70:117",
+          "projectionAllowed": false
+        }
+      },
+      {
+        "index": 2,
+        "text": "A főorvos visszautasította",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "visszautasít",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:118:144"
+      },
+      {
+        "index": 3,
+        "text": "hogy már bezárták volna a rendelőt.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "bezár",
+        "object": [
+          "rendelő"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "counterfactual",
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:146:181",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "conditional",
+              "rule": "governing_conditional_morphology"
+            }
+          ],
+          "frameId": "dependency:146:181",
+          "projectionAllowed": false
+        }
+      },
+      {
+        "index": 4,
+        "text": "A kórház kedden megkapta az új vizsgálógépet.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "megkap",
+        "object": [
+          "vizsgálógép"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:182:227"
+      }
+    ],
+    "chains": [],
+    "reportingNominalRelations": [
+      {
+        "id": "nominal-source:22",
+        "source": {
+          "mention": "központ",
+          "normalized": "központ",
+          "type": "local_source",
+          "identityStatus": "observed_local_referent"
+        },
+        "reportingNominal": {},
+        "binding": "resolved",
+        "rule": "possessive_np_event_nominal_evidential_marker",
+        "unresolvedReasons": []
+      }
+    ]
+  },
+  {
+    "id": "L",
+    "text": "Az igazgatóhelyettes felolvasott levelében a tankerület azt kérte, hogy a diákok péntekig adják le a jelentkezést. Az ösztöndíj nem 60, hanem 75 ezer forint havonta, és csak a jogosultság fennállásáig jár. A tanfolyam harmadik napján műhelymunka következik.",
+    "entities": [],
+    "frames": [
+      {
+        "index": 0,
+        "text": "Az igazgatóhelyettes felolvasott levelében a tankerület azt kérte",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "kér",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:65"
+      },
+      {
+        "index": 1,
+        "text": "hogy a diákok péntekig adják le a jelentkezést.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "lead",
+        "object": [
+          "jelentkezés"
+        ],
+        "numericArguments": [
+          {
+            "raw": "péntekig",
+            "value": {
+              "weekday": "péntek"
+            },
+            "canonicalValue": {
+              "weekday": "péntek"
+            },
+            "semanticKind": "calendar_date",
+            "unit": "calendar",
+            "property": "boundary",
+            "temporalRole": "boundary",
+            "binding": "resolved",
+            "ownerType": "semantic_argument",
+            "owner": {
+              "mention": "péntekig"
+            },
+            "unresolvedReasons": [],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:67:114",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:67:114"
+      },
+      {
+        "index": 2,
+        "text": "Az ösztöndíj nem 60",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 60,
+            "canonicalValue": 60,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "raw": "60",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "unsafe_proposition_scope",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {},
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "dependency:115:134",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:115:134"
+      },
+      {
+        "index": 3,
+        "text": "hanem 75 ezer forint havonta",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 75000,
+            "canonicalValue": 75000,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": {
+              "numerator": "HUF",
+              "denominator": "month"
+            },
+            "semanticKind": "compound_rate",
+            "raw": "75 ezer forint havonta",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unsafe_proposition_scope",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "compound_rate_projection_not_supported",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {},
+            "compound": {
+              "numerator": {
+                "value": 75000,
+                "baseUnit": "HUF",
+                "originalKind": "money"
+              },
+              "denominators": [
+                {
+                  "unit": "month",
+                  "relation": "per",
+                  "form": "periodic"
+                }
+              ],
+              "relation": "per",
+              "qualifiers": [],
+              "numeratorDependencyPath": [
+                {
+                  "relation": "compound"
+                },
+                {
+                  "relation": "nummod"
+                }
+              ],
+              "scopeStatus": "candidate_only",
+              "frameId": "dependency:136:164"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "dependency:136:164",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "compound_rate_requires_lossless_resolution",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:136:164"
+      },
+      {
+        "index": 4,
+        "text": "és csak a jogosultság fennállásáig jár.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "jár",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:166:205"
+      },
+      {
+        "index": 5,
+        "text": "A tanfolyam harmadik napján műhelymunka következik.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "következik",
+        "object": [],
+        "numericArguments": [
+          {
+            "raw": "harmadik napján",
+            "value": 3,
+            "canonicalValue": 3,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "binding": "resolved",
+            "ownerType": "ordinal_target",
+            "owner": {
+              "mention": "napján"
+            },
+            "unresolvedReasons": [],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:206:257",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:206:257"
+      }
+    ],
+    "chains": [],
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "scope": {},
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "reportingNominalRelations": []
+  },
+  {
+    "id": "M",
+    "text": "A magashegyi állomás mérései alapján hajnalban mínusz 7 Celsius-fok volt a levegő hőmérséklete. A délutáni maximum várhatóan 2–4 fokkal marad el az ilyenkor szokásostól. A meteorológus hangsúlyozta, hogy nem havazásra, hanem ónos esőre kell számítani.",
+    "entities": [],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A magashegyi állomás mérései alapján hajnalban mínusz 7 Celsius-fok volt a levegő hőmérséklete.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "van",
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 7,
+            "canonicalValue": 7,
+            "unit": null,
+            "semanticKind": "unknown",
+            "raw": "7",
+            "owner": null,
+            "ownerType": "unresolved",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:95",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:95"
+      },
+      {
+        "index": 1,
+        "text": "A délutáni maximum várhatóan 2–4 fokkal marad el az ilyenkor szokásostól.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "elmarad",
+        "object": [],
+        "numericArguments": [
+          {
+            "raw": "2–4",
+            "value": {
+              "lower": 2,
+              "upper": 4
+            },
+            "unit": null,
+            "semanticKind": "unknown",
+            "binding": "unresolved",
+            "owner": null,
+            "ownerType": "unresolved",
+            "unresolvedReasons": [
+              "range_target_unproven",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "range",
+                  "value": {
+                    "lower": 2,
+                    "upper": 4
+                  },
+                  "validOrder": true
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:96:169",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "expected"
+        ],
+        "modality": "expected",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:96:169"
+      },
+      {
+        "index": 2,
+        "text": "A meteorológus hangsúlyozta",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "hangsúlyoz",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:170:197"
+      },
+      {
+        "index": 3,
+        "text": "hogy nem havazásra, hanem ónos esőre kell számítani.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "kell",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "required"
+        ],
+        "modality": "required",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:199:251",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "required",
+              "rule": "governing_modal_with_local_complement"
+            }
+          ],
+          "frameId": "dependency:199:251",
+          "projectionAllowed": false
+        }
+      }
+    ],
+    "chains": [],
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "scope": {},
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "reportingNominalRelations": [
+      {
+        "id": "nominal-source:21",
+        "source": null,
+        "reportingNominal": {},
+        "binding": "unresolved",
+        "rule": "possessive_np_event_nominal_evidential_marker",
+        "unresolvedReasons": [
+          "source_bearing_possessor_unproven"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "N",
+    "text": "A mintát a kutatócsoport által felkért laboratóriumban elemezték. A mérési jelentés alapján a kristály tömege körülbelül 0,7 gramm, átmérője pedig 9 milliméter. A csoport vezetője nem állítja, hogy a lelet bizonyítaná az elméletet.",
+    "entities": [],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A mintát a kutatócsoport által felkért laboratóriumban elemezték.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "elemez",
+        "object": [
+          "minta"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:65"
+      },
+      {
+        "index": 1,
+        "text": "A mérési jelentés alapján a kristály tömege körülbelül 0,7 gramm",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 0.7,
+            "canonicalValue": 0.7,
+            "unit": "count",
+            "semanticKind": "count",
+            "raw": "0,7 gramm",
+            "owner": null,
+            "ownerType": "unresolved",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "approximately",
+                  "marker": "körülbelül"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:66:130",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:66:130"
+      },
+      {
+        "index": 2,
+        "text": "átmérője pedig 9 milliméter.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 9,
+            "canonicalValue": 9,
+            "unit": "count",
+            "semanticKind": "count",
+            "raw": "9 milliméter",
+            "owner": null,
+            "ownerType": "unresolved",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:132:160",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:132:160"
+      },
+      {
+        "index": 3,
+        "text": "A csoport vezetője nem állítja, hogy a lelet bizonyítaná az elméletet.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": "állít",
+        "attribution": null,
+        "action": "bizonyít",
+        "object": [
+          "elmélet"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": true,
+        "modalities": [
+          "reported",
+          "hypothetical",
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "unresolved",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "negated_reporting_predicate",
+          "actor_unresolved",
+          "content_under_negated_report",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:161:231",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "conditional",
+              "rule": "governing_conditional_morphology"
+            }
+          ],
+          "frameId": "dependency:161:231",
+          "projectionAllowed": false
+        }
+      }
+    ],
+    "chains": [],
+    "reportingNominalRelations": [
+      {
+        "id": "nominal-source:75",
+        "source": null,
+        "reportingNominal": {},
+        "binding": "unresolved",
+        "rule": "possessive_np_event_nominal_evidential_marker",
+        "unresolvedReasons": [
+          "source_bearing_possessor_unproven"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "O",
+    "text": "Az üzletlánc árjegyzéke szerint a liszt kilónként 412 forintba kerül. Az akcióban nem 15, hanem 18 százalékos engedményt adhatnak azoknak, akik visszahozzák a csomagolást. A kosár ára így sem kevesebb 3900 forintnál.",
+    "entities": [],
+    "frames": [
+      {
+        "index": 0,
+        "text": "Az üzletlánc árjegyzéke szerint a liszt kilónként 412 forintba kerül.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": {
+          "mention": "árjegyzéke",
+          "normalized": "árjegyzék",
+          "type": "referent",
+          "case": "Nom"
+        },
+        "recipient": null,
+        "reportingVerb": "szerint",
+        "attribution": null,
+        "action": "kerül",
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 412,
+            "canonicalValue": 412,
+            "unit": "HUF",
+            "semanticKind": "money",
+            "raw": "412 forintba",
+            "owner": {
+              "mention": "forintba",
+              "normalized": "forint",
+              "type": "referent",
+              "case": "Ill"
+            },
+            "ownerType": "semantic_argument",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "money",
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:69",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:69"
+      },
+      {
+        "index": 1,
+        "text": "Az akcióban nem 15",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 15,
+            "canonicalValue": 15,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "raw": "15",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "unsafe_proposition_scope",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {},
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "dependency:70:88",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:70:88"
+      },
+      {
+        "index": 2,
+        "text": "hanem 18 százalékos engedményt adhatnak azoknak",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "adhat",
+        "object": [
+          "engedmény"
+        ],
+        "numericArguments": [
+          {
+            "value": 18,
+            "canonicalValue": 18,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": "%",
+            "semanticKind": "unknown",
+            "raw": "18 százalékos",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {},
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "finite_potential_wordform_candidate"
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "dependency:90:137",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "possible"
+        ],
+        "modality": "possible",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:90:137",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "finite_potential_wordform_candidate"
+            }
+          ],
+          "frameId": "dependency:90:137",
+          "projectionAllowed": false
+        }
+      },
+      {
+        "index": 3,
+        "text": "akik visszahozzák a csomagolást.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "visszahoz",
+        "object": [
+          "csomagolás"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:139:171"
+      },
+      {
+        "index": 4,
+        "text": "A kosár ára így sem kevesebb 3900 forintnál.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 3900,
+            "canonicalValue": 3900,
+            "unit": "HUF",
+            "semanticKind": "money",
+            "raw": "3900 forintnál",
+            "owner": null,
+            "ownerType": "unresolved",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:172:216",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:172:216"
+      }
+    ],
+    "chains": [],
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "scope": {},
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "reportingNominalRelations": []
+  },
+  {
+    "id": "P",
+    "text": "A szakszervezeti elnök a munkáltató ígéretére hivatkozva úgy fogalmazott, hogy a gyakornokok nem maradnak fizetés nélkül. A megállapodás hatálya nem 2029-ben, hanem 2031-ben szűnik meg. Új belépőnként legalább 24 óra képzést kell szervezni.",
+    "entities": [],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A szakszervezeti elnök a munkáltató ígéretére hivatkozva úgy fogalmazott",
+        "sentence": 0,
+        "actor": {
+          "mention": "elnök",
+          "normalized": "elnök",
+          "type": "referent",
+          "case": "Nom"
+        },
+        "actorStatus": "resolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "fogalmaz",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:72"
+      },
+      {
+        "index": 1,
+        "text": "hogy a gyakornokok nem maradnak fizetés nélkül.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "marad",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:74:121"
+      },
+      {
+        "index": 2,
+        "text": "A megállapodás hatálya nem 2029-ben, hanem 2031-ben szűnik meg.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "megszűnik",
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 2031,
+            "canonicalValue": 2031,
+            "unit": null,
+            "semanticKind": "year",
+            "status": "accepted",
+            "binding": "resolved",
+            "ownerType": "semantic_role",
+            "owner": {
+              "label": "date/time"
+            },
+            "property": "date/time",
+            "unresolvedReasons": [],
+            "raw": "2031-ben",
+            "contrastFrameId": "contrast:122:185",
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "accepted",
+              "frameId": "contrast:122:185",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "contrasts": [
+          {
+            "binding": "resolved",
+            "rule": "parallel_alternatives_single_finite_predicate",
+            "slot": "date/time",
+            "scope": {},
+            "rejected": {
+              "value": 2029,
+              "scale": 1,
+              "unit": null,
+              "year": true,
+              "case": "Ine",
+              "status": "rejected"
+            },
+            "accepted": {
+              "value": 2031,
+              "scale": 1,
+              "unit": null,
+              "year": true,
+              "case": "Ine",
+              "status": "accepted"
+            },
+            "frameId": "contrast:122:185"
+          }
+        ],
+        "frameId": "contrast:122:185"
+      },
+      {
+        "index": 3,
+        "text": "Új belépőnként legalább 24 óra képzést kell szervezni.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "kell",
+        "object": [
+          "képzés"
+        ],
+        "numericArguments": [
+          {
+            "raw": "24 óra",
+            "value": 24,
+            "canonicalValue": 24,
+            "semanticKind": "duration",
+            "unit": "hour",
+            "property": "duration",
+            "temporalRole": "duration",
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "greater_or_equal",
+                  "marker": "legalább"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "required",
+                  "rule": "governing_modal_with_local_complement"
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:186:240",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "required"
+        ],
+        "modality": "required",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:186:240",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "required",
+              "rule": "governing_modal_with_local_complement"
+            }
+          ],
+          "frameId": "dependency:186:240",
+          "projectionAllowed": false
+        }
+      }
+    ],
+    "chains": [],
+    "contrasts": [
+      {
+        "binding": "resolved",
+        "rule": "parallel_alternatives_single_finite_predicate",
+        "slot": "date/time",
+        "scope": {},
+        "rejected": {
+          "value": 2029,
+          "scale": 1,
+          "unit": null,
+          "year": true,
+          "case": "Ine",
+          "status": "rejected"
+        },
+        "accepted": {
+          "value": 2031,
+          "scale": 1,
+          "unit": null,
+          "year": true,
+          "case": "Ine",
+          "status": "accepted"
+        },
+        "frameId": "contrast:122:185"
+      }
+    ],
+    "reportingNominalRelations": []
+  },
+  {
+    "id": "Q",
+    "text": "A restaurátor és a kurátor együtt emelte le a képet, majd elszállították a műhelybe. A kiállítás rendezője a látogatóknak ezt mondta: „Nem én, hanem a gyűjtő választotta ki a keretet.” A harmadik terem ajtaján az állt: „Második.”",
+    "entities": [],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A restaurátor és a kurátor együtt emelte le a képet",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "leemel",
+        "object": [
+          "kép"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:51"
+      },
+      {
+        "index": 1,
+        "text": "majd elszállították a műhelybe.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "elszállít",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:53:84"
+      },
+      {
+        "index": 2,
+        "text": "Nem én, hanem a gyűjtő választotta ki a keretet.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": {
+          "mention": "kiállítás rendezője",
+          "normalized": "kiállítás rendező",
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent"
+        },
+        "source": {
+          "mention": "kiállítás rendezője",
+          "normalized": "kiállítás rendező",
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent"
+        },
+        "recipient": {
+          "mention": "látogatóknak",
+          "role": "recipient"
+        },
+        "reportingVerb": "mond",
+        "attribution": {
+          "label": "kiállítás rendezője",
+          "normalized": "kiállítás rendező"
+        },
+        "action": "választ",
+        "object": [
+          "keret"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "asserted",
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported_claim",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "recovered-source:126:proposition:0",
+        "attributionChainId": "recovered-source:126",
+        "claimOwner": {
+          "mention": "kiállítás rendezője",
+          "normalized": "kiállítás rendező",
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent"
+        }
+      },
+      {
+        "index": 3,
+        "text": "A harmadik terem ajtaján az állt",
+        "sentence": 3,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "áll",
+        "object": [],
+        "numericArguments": [
+          {
+            "raw": "harmadik terem",
+            "value": 3,
+            "canonicalValue": 3,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "binding": "resolved",
+            "ownerType": "ordinal_target",
+            "owner": {
+              "mention": "terem"
+            },
+            "unresolvedReasons": [],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:185:217",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:185:217"
+      },
+      {
+        "index": 4,
+        "text": "„Második.”",
+        "sentence": 3,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "raw": "Második",
+            "value": 2,
+            "canonicalValue": 2,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:219:229",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:219:229"
+      }
+    ],
+    "chains": [
+      {
+        "id": "recovered-source:126",
+        "binding": "resolved",
+        "rule": "dependency_source_and_explicit_complement_or_bounded_quote",
+        "unresolvedReasons": [],
+        "edges": [
+          {
+            "source": {
+              "mention": "kiállítás rendezője",
+              "normalized": "kiállítás rendező",
+              "type": "local_source",
+              "entityId": null,
+              "identityStatus": "observed_local_referent"
+            },
+            "verb": "mond",
+            "recipient": {
+              "mention": "látogatóknak",
+              "role": "recipient"
+            },
+            "id": "recovered-source:126:0",
+            "depth": 0,
+            "parentAttributionId": null,
+            "targetId": "recovered-source:126:proposition:0",
+            "binding": "resolved",
+            "role": "claim_source",
+            "rule": "governing_np_reporting_scope",
+            "targetIds": [
+              "recovered-source:126:proposition:0"
+            ]
+          }
+        ],
+        "propositionIds": [
+          "recovered-source:126:proposition:0"
+        ]
+      }
+    ],
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "scope": {},
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "reportingNominalRelations": []
+  },
+  {
+    "id": "R",
+    "text": "A törvényszék nem a vádlottat, hanem a szakértőt kötelezte az iratok pótlására. A végzésről Szalai Emesének a jogi képviselője számolt be, de a bíróság indokolását nem idézte. A pótlásra szeptember 8-tól szeptember 17-ig van lehetőség.",
+    "entities": [],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A törvényszék nem a vádlottat, hanem a szakértőt kötelezte az iratok pótlására.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "kötelez",
+        "object": [
+          "szakértő"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "contrasts": [
+          {
+            "binding": "resolved",
+            "rule": "parallel_alternatives_single_finite_predicate",
+            "slot": "object",
+            "scope": {},
+            "rejected": {
+              "value": "vádlott",
+              "case": "Acc",
+              "status": "rejected"
+            },
+            "accepted": {
+              "value": "szakértő",
+              "case": "Acc",
+              "status": "accepted"
+            },
+            "frameId": "contrast:0:79"
+          }
+        ],
+        "frameId": "contrast:0:79"
+      },
+      {
+        "index": 1,
+        "text": "A végzésről Szalai Emesének a jogi képviselője számolt be",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "beszámol",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "mixed_case_name_boundary",
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:80:137"
+      },
+      {
+        "index": 2,
+        "text": "de a bíróság indokolását nem idézte.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "idéz",
+        "object": [
+          "indokolás"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "unsupported_local_actor",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:139:175"
+      },
+      {
+        "index": 3,
+        "text": "A pótlásra szeptember 8-tól szeptember 17-ig van lehetőség.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "van",
+        "object": [],
+        "numericArguments": [
+          {
+            "raw": "szeptember",
+            "value": {
+              "year": null,
+              "month": 9,
+              "day": null,
+              "part": null
+            },
+            "canonicalValue": {
+              "year": null,
+              "month": 9,
+              "day": null,
+              "part": null
+            },
+            "semanticKind": "calendar_date",
+            "unit": "calendar",
+            "property": "date",
+            "temporalRole": "date",
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:176:235",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "raw": "szeptember 17-ig",
+            "value": {
+              "year": null,
+              "month": 9,
+              "day": 17,
+              "part": null
+            },
+            "canonicalValue": {
+              "year": null,
+              "month": 9,
+              "day": 17,
+              "part": null
+            },
+            "semanticKind": "calendar_date",
+            "unit": "calendar",
+            "property": "boundary",
+            "temporalRole": "boundary",
+            "binding": "resolved",
+            "ownerType": "semantic_argument",
+            "owner": {
+              "mention": "17-ig"
+            },
+            "unresolvedReasons": [],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:176:235",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:176:235"
+      }
+    ],
+    "chains": [],
+    "contrasts": [
+      {
+        "binding": "resolved",
+        "rule": "parallel_alternatives_single_finite_predicate",
+        "slot": "object",
+        "scope": {},
+        "rejected": {
+          "value": "vádlott",
+          "case": "Acc",
+          "status": "rejected"
+        },
+        "accepted": {
+          "value": "szakértő",
+          "case": "Acc",
+          "status": "accepted"
+        },
+        "frameId": "contrast:0:79"
+      }
+    ],
+    "reportingNominalRelations": []
+  },
+  {
+    "id": "S",
+    "text": "A gazdaság agronómusának becslése alapján hektáronként 4,6 tonna árpa teremhet, amennyiben kitart az eső. A betakarítást június helyett júliusra tervezik; nem 6, hanem 8 géppel dolgoznának. A második körben a talaj nedvességét vizsgálják.",
+    "entities": [],
+    "frames": [
+      {
+        "index": 0,
+        "text": "A gazdaság agronómusának becslése alapján hektáronként 4,6 tonna árpa teremhet",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": {
+          "mention": "gazdaság agronómusának",
+          "normalized": "gazdaság agronómus",
+          "type": "local_source",
+          "identityStatus": "observed_local_referent"
+        },
+        "source": {
+          "mention": "gazdaság agronómusának",
+          "normalized": "gazdaság agronómus",
+          "type": "local_source",
+          "identityStatus": "observed_local_referent"
+        },
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": {
+          "label": "gazdaság agronómusának",
+          "normalized": "gazdaság agronómus"
+        },
+        "action": "teremhet",
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 4.6,
+            "canonicalValue": 4.6,
+            "unit": {
+              "numerator": "tonna",
+              "denominator": "hektár"
+            },
+            "semanticKind": "compound_rate",
+            "raw": "hektáronként 4,6 tonna",
+            "owner": null,
+            "ownerType": "unresolved",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven",
+              "compound_rate_projection_not_supported"
+            ],
+            "compound": {
+              "numerator": {
+                "value": 4.6,
+                "baseUnit": "tonna",
+                "originalKind": "unknown"
+              },
+              "denominators": [
+                {
+                  "unit": "hektár",
+                  "relation": "per",
+                  "form": "distributive"
+                }
+              ],
+              "relation": "per",
+              "qualifiers": [],
+              "numeratorDependencyPath": [
+                {
+                  "relation": "compound"
+                },
+                {
+                  "relation": "nmod:att"
+                },
+                {
+                  "relation": "nsubj"
+                }
+              ],
+              "scopeStatus": "candidate_only",
+              "frameId": "dependency:0:78"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "potential_morphology"
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": true,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:78",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": true,
+        "conditionalTrigger": {},
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "possible",
+          "conditional"
+        ],
+        "modality": "possible",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved",
+          "compound_rate_requires_lossless_resolution"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:78",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "potential_morphology"
+            }
+          ],
+          "frameId": "dependency:0:78",
+          "projectionAllowed": false
+        },
+        "reportingNominalRelationId": "nominal-source:25"
+      },
+      {
+        "index": 1,
+        "text": "amennyiben kitart az eső.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "kitart",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": true,
+        "conditionalTrigger": {},
+        "conditionAntecedent": true,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "asserted",
+        "status": "conditional",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:80:105"
+      },
+      {
+        "index": 2,
+        "text": "A betakarítást június helyett júliusra tervezik",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "tervez",
+        "object": [
+          "betakarítás"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:106:153"
+      },
+      {
+        "index": 3,
+        "text": "nem 6",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 6,
+            "canonicalValue": 6,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "raw": "6",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "unsafe_proposition_scope",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {},
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "dependency:155:160",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:155:160"
+      },
+      {
+        "index": 4,
+        "text": "hanem 8 géppel dolgoznának.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "dolgoz",
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 8,
+            "canonicalValue": 8,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "raw": "8",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {},
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "conditional",
+                  "rule": "governing_conditional_morphology"
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "dependency:162:189",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "hypothetical",
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:162:189",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "conditional",
+              "rule": "governing_conditional_morphology"
+            }
+          ],
+          "frameId": "dependency:162:189",
+          "projectionAllowed": false
+        }
+      },
+      {
+        "index": 5,
+        "text": "A második körben a talaj nedvességét vizsgálják.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "vizsgál",
+        "object": [
+          "nedvesség"
+        ],
+        "numericArguments": [
+          {
+            "raw": "második körben",
+            "value": 2,
+            "canonicalValue": 2,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "binding": "resolved",
+            "ownerType": "ordinal_target",
+            "owner": {
+              "mention": "körben"
+            },
+            "unresolvedReasons": [],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:190:238",
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:190:238"
+      }
+    ],
+    "chains": [],
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "scope": {},
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "reportingNominalRelations": [
+      {
+        "id": "nominal-source:25",
+        "source": {
+          "mention": "gazdaság agronómusának",
+          "normalized": "gazdaság agronómus",
+          "type": "local_source",
+          "identityStatus": "observed_local_referent"
+        },
+        "reportingNominal": {},
+        "binding": "resolved",
+        "rule": "possessive_np_event_nominal_evidential_marker",
+        "unresolvedReasons": []
+      }
+    ]
+  },
+  {
+    "id": "T",
+    "text": "Brüsszel válaszát várják a tárgyalók, de a közlemény nem azonosítja, melyik intézmény fog megszólalni. A szóvivő nem a tanács, hanem a küldöttség álláspontjaként ismertette a javaslatot. A támogatásról csak annyi hangzott el: nem 2, hanem később.",
+    "entities": [
+      {
+        "mention": "Brüsszel",
+        "normalized": "brüsszel",
+        "type": "location",
+        "subtype": null,
+        "sourceRole": null,
+        "case": "Nom",
+        "identityKey": "location|brüsszel",
+        "canonicalIdentity": "brüsszel",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "index": 0,
+        "text": "Brüsszel válaszát várják a tárgyalók",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "vár",
+        "object": [
+          "válasz"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:36"
+      },
+      {
+        "index": 1,
+        "text": "de a közlemény nem azonosítja",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "azonosít",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:38:67"
+      },
+      {
+        "index": 2,
+        "text": "melyik intézmény fog megszólalni.",
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "fog",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "future"
+        ],
+        "modality": "future",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:69:102",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "future",
+              "rule": "future_auxiliary_infinitive"
+            }
+          ],
+          "frameId": "dependency:69:102",
+          "projectionAllowed": false
+        }
+      },
+      {
+        "index": 3,
+        "text": "A szóvivő nem a tanács, hanem a küldöttség álláspontjaként ismertette a javaslatot.",
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "ismertet",
+        "object": [
+          "javaslat"
+        ],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:103:186"
+      },
+      {
+        "index": 4,
+        "text": "A támogatásról csak annyi hangzott el",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": "hangzik",
+        "object": [],
+        "numericArguments": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:187:224"
+      },
+      {
+        "index": 5,
+        "text": "nem 2, hanem később.",
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "reportingVerb": null,
+        "attribution": null,
+        "action": null,
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 2,
+            "canonicalValue": 2,
+            "sign": 1,
+            "explicitSign": false,
+            "direction": null,
+            "valueKind": "absolute",
+            "transition": null,
+            "unit": null,
+            "semanticKind": "unknown",
+            "raw": "2",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "numeric_owner_unresolved",
+              "unit_unresolved",
+              "unsafe_proposition_scope",
+              "ambiguous_contrast_scope",
+              "dependency_blocked_by_ambiguous_contrast",
+              "numeric_semantic_scope_requires_qualified_resolution"
+            ],
+            "ownerType": "unresolved",
+            "owner": null,
+            "property": null,
+            "proposition": {},
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "unresolved",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": "unresolved",
+              "frameId": "dependency:226:246",
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "negation_predicate_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast",
+          "numeric_semantic_scope_unresolved"
+        ],
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:226:246"
+      }
+    ],
+    "chains": [],
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "scope": {},
+        "rejected": null,
+        "accepted": null
+      },
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "scope": {},
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "reportingNominalRelations": []
+  }
+]

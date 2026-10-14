@@ -1,0 +1,1797 @@
+{
+  "id": "I",
+  "text": "A selejtező második fordulójából jutott döntőbe Sipos Lilla, aki végül harmadikként ért célba. A váltóban a negyedik helyet szerezték meg; a befutó versenyző nevét nem közölték. A csapatvezető röviden annyit mondott: „Második lett, de erről később beszélünk.”",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 11,
+        "text": "selejtező",
+        "lemma": "selejtező",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 20
+      },
+      {
+        "start": 12,
+        "end": 19,
+        "text": "második",
+        "lemma": "második",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 20
+      },
+      {
+        "start": 20,
+        "end": 32,
+        "text": "fordulójából",
+        "lemma": "fordulój",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 33
+      },
+      {
+        "start": 33,
+        "end": 39,
+        "text": "jutott",
+        "lemma": "jut",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 33
+      },
+      {
+        "start": 40,
+        "end": 47,
+        "text": "döntőbe",
+        "lemma": "döntő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ill",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 33
+      },
+      {
+        "start": 48,
+        "end": 53,
+        "text": "Sipos",
+        "lemma": "Sipos",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 33
+      },
+      {
+        "start": 54,
+        "end": 59,
+        "text": "Lilla",
+        "lemma": "Lilla",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 48
+      },
+      {
+        "start": 59,
+        "end": 60,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 84
+      },
+      {
+        "start": 61,
+        "end": 64,
+        "text": "aki",
+        "lemma": "aki",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Rel"
+        },
+        "dep": "nsubj",
+        "headStart": 84
+      },
+      {
+        "start": 65,
+        "end": 70,
+        "text": "végül",
+        "lemma": "végül",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 84
+      },
+      {
+        "start": 71,
+        "end": 83,
+        "text": "harmadikként",
+        "lemma": "harmadik",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Abs",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 84
+      },
+      {
+        "start": 84,
+        "end": 87,
+        "text": "ért",
+        "lemma": "ér",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 33
+      },
+      {
+        "start": 88,
+        "end": 93,
+        "text": "célba",
+        "lemma": "cél",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ill",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 84
+      },
+      {
+        "start": 93,
+        "end": 94,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 33
+      },
+      {
+        "start": 95,
+        "end": 96,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 97
+      },
+      {
+        "start": 97,
+        "end": 105,
+        "text": "váltóban",
+        "lemma": "váltó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ine",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 124
+      },
+      {
+        "start": 106,
+        "end": 107,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 117
+      },
+      {
+        "start": 108,
+        "end": 116,
+        "text": "negyedik",
+        "lemma": "negyedik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 117
+      },
+      {
+        "start": 117,
+        "end": 123,
+        "text": "helyet",
+        "lemma": "hely",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 124
+      },
+      {
+        "start": 124,
+        "end": 133,
+        "text": "szerezték",
+        "lemma": "szerez",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 124
+      },
+      {
+        "start": 134,
+        "end": 137,
+        "text": "meg",
+        "lemma": "meg",
+        "pos": "PART",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 124
+      },
+      {
+        "start": 137,
+        "end": 138,
+        "text": ";",
+        "lemma": ";",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 168
+      },
+      {
+        "start": 139,
+        "end": 140,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 148
+      },
+      {
+        "start": 141,
+        "end": 147,
+        "text": "befutó",
+        "lemma": "befutó",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 148
+      },
+      {
+        "start": 148,
+        "end": 157,
+        "text": "versenyző",
+        "lemma": "versenyző",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 158
+      },
+      {
+        "start": 158,
+        "end": 163,
+        "text": "nevét",
+        "lemma": "név",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obj",
+        "headStart": 168
+      },
+      {
+        "start": 164,
+        "end": 167,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 168
+      },
+      {
+        "start": 168,
+        "end": 176,
+        "text": "közölték",
+        "lemma": "közöl",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 124
+      },
+      {
+        "start": 176,
+        "end": 177,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 124
+      },
+      {
+        "start": 178,
+        "end": 179,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 180
+      },
+      {
+        "start": 180,
+        "end": 192,
+        "text": "csapatvezető",
+        "lemma": "csapatvezető",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 208
+      },
+      {
+        "start": 193,
+        "end": 200,
+        "text": "röviden",
+        "lemma": "rövid",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Ess",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "advmod:mode",
+        "headStart": 208
+      },
+      {
+        "start": 201,
+        "end": 207,
+        "text": "annyit",
+        "lemma": "annyi",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "obj",
+        "headStart": 208
+      },
+      {
+        "start": 208,
+        "end": 215,
+        "text": "mondott",
+        "lemma": "mond",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 208
+      },
+      {
+        "start": 215,
+        "end": 216,
+        "text": ":",
+        "lemma": ":",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 217
+      },
+      {
+        "start": 217,
+        "end": 218,
+        "text": "„",
+        "lemma": "„",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "parataxis",
+        "headStart": 208
+      },
+      {
+        "start": 218,
+        "end": 225,
+        "text": "Második",
+        "lemma": "második",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 217
+      },
+      {
+        "start": 226,
+        "end": 230,
+        "text": "lett",
+        "lemma": "lesz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "cop",
+        "headStart": 218
+      },
+      {
+        "start": 230,
+        "end": 231,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 248
+      },
+      {
+        "start": 232,
+        "end": 234,
+        "text": "de",
+        "lemma": "de",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 248
+      },
+      {
+        "start": 235,
+        "end": 240,
+        "text": "erről",
+        "lemma": "ez",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Del",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "obl",
+        "headStart": 248
+      },
+      {
+        "start": 241,
+        "end": 247,
+        "text": "később",
+        "lemma": "későn",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 248
+      },
+      {
+        "start": 248,
+        "end": 257,
+        "text": "beszélünk",
+        "lemma": "beszél",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "1",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 218
+      },
+      {
+        "start": 257,
+        "end": 258,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 208
+      },
+      {
+        "start": 258,
+        "end": 259,
+        "text": "”",
+        "lemma": "”",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Prs"
+        },
+        "dep": "ROOT",
+        "headStart": 258
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 94,
+        "text": "A selejtező második fordulójából jutott döntőbe Sipos Lilla, aki végül harmadikként ért célba."
+      },
+      {
+        "start": 95,
+        "end": 177,
+        "text": "A váltóban a negyedik helyet szerezték meg; a befutó versenyző nevét nem közölték."
+      },
+      {
+        "start": 178,
+        "end": 258,
+        "text": "A csapatvezető röviden annyit mondott: „Második lett, de erről később beszélünk."
+      },
+      {
+        "start": 258,
+        "end": 259,
+        "text": "”"
+      }
+    ],
+    "entities": [
+      {
+        "start": 48,
+        "end": 59,
+        "text": "Sipos Lilla",
+        "label": "PER"
+      }
+    ]
+  },
+  "output": {
+    "entities": [
+      {
+        "mention": "Sipos Lilla",
+        "normalized": "sipos lilla",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 48,
+        "end": 59,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 48,
+          "end": 59,
+          "textSpan": "Sipos Lilla"
+        },
+        "identityKey": "person|sipos lilla",
+        "canonicalIdentity": "sipos lilla",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": {
+          "mention": "Sipos Lilla",
+          "normalized": "sipos lilla",
+          "start": 48,
+          "end": 59,
+          "type": "named_referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 48,
+            "end": 59,
+            "textSpan": "Sipos Lilla"
+          }
+        },
+        "actorStatus": "resolved",
+        "subject": {
+          "mention": "Sipos Lilla",
+          "normalized": "sipos lilla",
+          "start": 48,
+          "end": 59,
+          "type": "named_referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 48,
+            "end": 59,
+            "textSpan": "Sipos Lilla"
+          }
+        },
+        "location": [
+          {
+            "mention": "fordulójából",
+            "normalized": "fordulój",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ela",
+            "start": 20,
+            "end": 32,
+            "evidenceSpan": {
+              "start": 20,
+              "end": 32,
+              "textSpan": "fordulójából"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          },
+          {
+            "mention": "döntőbe",
+            "normalized": "döntő",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ill",
+            "start": 40,
+            "end": 47,
+            "evidenceSpan": {
+              "start": 40,
+              "end": 47,
+              "textSpan": "döntőbe"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 59,
+          "textSpan": "A selejtező második fordulójából jutott döntőbe Sipos Lilla"
+        },
+        "attribution": null,
+        "action": "jut",
+        "actionSpan": {
+          "start": 33,
+          "end": 39,
+          "textSpan": "jutott"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 12,
+            "end": 32,
+            "raw": "második fordulójából",
+            "value": 2,
+            "canonicalValue": 2,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 12,
+              "end": 32,
+              "textSpan": "második fordulójából"
+            },
+            "binding": "resolved",
+            "ownerType": "ordinal_target",
+            "owner": {
+              "mention": "fordulójából",
+              "evidenceSpan": {
+                "start": 20,
+                "end": 32,
+                "textSpan": "fordulójából"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 12,
+                "end": 32,
+                "textSpan": "második fordulójából"
+              },
+              "targetSpan": {
+                "start": 33,
+                "end": 39,
+                "textSpan": "jutott"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 12,
+                    "end": 19,
+                    "textSpan": "második"
+                  },
+                  "targetSpan": {
+                    "start": 20,
+                    "end": 32,
+                    "textSpan": "fordulójából"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 20,
+                    "end": 32,
+                    "textSpan": "fordulójából"
+                  },
+                  "targetSpan": {
+                    "start": 33,
+                    "end": 39,
+                    "textSpan": "jutott"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:59",
+              "semanticRole": "ordinal",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 12,
+                    "end": 32,
+                    "textSpan": "második fordulójából"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:0:59",
+              "clauseSpan": {
+                "start": 0,
+                "end": 59,
+                "textSpan": "A selejtező második fordulójából jutott döntőbe Sipos Lilla"
+              },
+              "predicateSpan": {
+                "start": 33,
+                "end": 39,
+                "textSpan": "jutott"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 12,
+                    "end": 19,
+                    "textSpan": "második"
+                  },
+                  "targetSpan": {
+                    "start": 20,
+                    "end": 32,
+                    "textSpan": "fordulójából"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 20,
+                    "end": 32,
+                    "textSpan": "fordulójából"
+                  },
+                  "targetSpan": {
+                    "start": 33,
+                    "end": 39,
+                    "textSpan": "jutott"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "resolved",
+        "unresolvedReasons": [],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 59,
+          "textSpan": "A selejtező második fordulójából jutott döntőbe Sipos Lilla"
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 59,
+          "textSpan": "A selejtező második fordulójából jutott döntőbe Sipos Lilla"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:59",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "selejtező",
+              "normalized": "selejtező",
+              "start": 2,
+              "end": 11,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 11,
+                "textSpan": "selejtező"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 2,
+                "end": 11,
+                "textSpan": "selejtező"
+              },
+              "targetSpan": {
+                "start": 33,
+                "end": 39,
+                "textSpan": "jutott"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 11,
+                    "textSpan": "selejtező"
+                  },
+                  "targetSpan": {
+                    "start": 20,
+                    "end": 32,
+                    "textSpan": "fordulójából"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 20,
+                    "end": 32,
+                    "textSpan": "fordulójából"
+                  },
+                  "targetSpan": {
+                    "start": 33,
+                    "end": 39,
+                    "textSpan": "jutott"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:59",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "actor",
+            "referent": {
+              "mention": "Sipos Lilla",
+              "normalized": "sipos lilla",
+              "start": 48,
+              "end": 59,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 48,
+                "end": 59,
+                "textSpan": "Sipos Lilla"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 48,
+                "end": 53,
+                "textSpan": "Sipos"
+              },
+              "targetSpan": {
+                "start": 33,
+                "end": 39,
+                "textSpan": "jutott"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 48,
+                    "end": 53,
+                    "textSpan": "Sipos"
+                  },
+                  "targetSpan": {
+                    "start": 33,
+                    "end": 39,
+                    "textSpan": "jutott"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:59",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "actorEvidence": {
+          "sourceSpan": {
+            "start": 48,
+            "end": 53,
+            "textSpan": "Sipos"
+          },
+          "targetSpan": {
+            "start": 33,
+            "end": 39,
+            "textSpan": "jutott"
+          },
+          "dependencyPath": [
+            {
+              "relation": "nsubj",
+              "sourceSpan": {
+                "start": 48,
+                "end": 53,
+                "textSpan": "Sipos"
+              },
+              "targetSpan": {
+                "start": 33,
+                "end": 39,
+                "textSpan": "jutott"
+              }
+            }
+          ],
+          "frameId": "dependency:0:59",
+          "semanticRole": "actor",
+          "resolutionStatus": "resolved",
+          "rule": "dependency_path_with_case_and_scope_checks"
+        }
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "célba",
+            "normalized": "cél",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ill",
+            "start": 88,
+            "end": 93,
+            "evidenceSpan": {
+              "start": 88,
+              "end": 93,
+              "textSpan": "célba"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 61,
+          "end": 94,
+          "textSpan": "aki végül harmadikként ért célba."
+        },
+        "attribution": null,
+        "action": "ér",
+        "actionSpan": {
+          "start": 84,
+          "end": 87,
+          "textSpan": "ért"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 61,
+          "end": 94,
+          "textSpan": "aki végül harmadikként ért célba."
+        },
+        "propositionSpan": {
+          "start": 61,
+          "end": 94,
+          "textSpan": "aki végül harmadikként ért célba."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:61:94",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "váltóban",
+            "normalized": "váltó",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ine",
+            "start": 97,
+            "end": 105,
+            "evidenceSpan": {
+              "start": 97,
+              "end": 105,
+              "textSpan": "váltóban"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 95,
+          "end": 137,
+          "textSpan": "A váltóban a negyedik helyet szerezték meg"
+        },
+        "attribution": null,
+        "action": "megszerez",
+        "actionSpan": {
+          "start": 124,
+          "end": 133,
+          "textSpan": "szerezték"
+        },
+        "object": [
+          "hely"
+        ],
+        "numericArguments": [
+          {
+            "start": 108,
+            "end": 123,
+            "raw": "negyedik helyet",
+            "value": 4,
+            "canonicalValue": 4,
+            "semanticKind": "rank",
+            "unit": "position",
+            "property": "placement",
+            "temporalRole": "placement",
+            "evidenceSpan": {
+              "start": 108,
+              "end": 123,
+              "textSpan": "negyedik helyet"
+            },
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "subject": null,
+            "unresolvedReasons": [
+              "rank_owner_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 108,
+                    "end": 123,
+                    "textSpan": "negyedik helyet"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:95:137",
+              "clauseSpan": {
+                "start": 95,
+                "end": 137,
+                "textSpan": "A váltóban a negyedik helyet szerezték meg"
+              },
+              "predicateSpan": {
+                "start": 124,
+                "end": 133,
+                "textSpan": "szerezték"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 108,
+                    "end": 116,
+                    "textSpan": "negyedik"
+                  },
+                  "targetSpan": {
+                    "start": 117,
+                    "end": 123,
+                    "textSpan": "helyet"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 117,
+                    "end": 123,
+                    "textSpan": "helyet"
+                  },
+                  "targetSpan": {
+                    "start": 124,
+                    "end": 133,
+                    "textSpan": "szerezték"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 95,
+          "end": 137,
+          "textSpan": "A váltóban a negyedik helyet szerezték meg"
+        },
+        "propositionSpan": {
+          "start": 95,
+          "end": 137,
+          "textSpan": "A váltóban a negyedik helyet szerezték meg"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:95:137",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "helyet",
+              "normalized": "hely",
+              "start": 117,
+              "end": 123,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 117,
+                "end": 123,
+                "textSpan": "helyet"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 117,
+                "end": 123,
+                "textSpan": "helyet"
+              },
+              "targetSpan": {
+                "start": 124,
+                "end": 133,
+                "textSpan": "szerezték"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 117,
+                    "end": 123,
+                    "textSpan": "helyet"
+                  },
+                  "targetSpan": {
+                    "start": 124,
+                    "end": 133,
+                    "textSpan": "szerezték"
+                  }
+                }
+              ],
+              "frameId": "dependency:95:137",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "közöl",
+        "content": {
+          "start": 139,
+          "end": 177,
+          "textSpan": "a befutó versenyző nevét nem közölték."
+        },
+        "attribution": null,
+        "action": "közöl",
+        "actionSpan": {
+          "start": 168,
+          "end": 176,
+          "textSpan": "közölték"
+        },
+        "object": [
+          "név"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "negated_reporting_predicate",
+          "actor_unresolved",
+          "content_under_negated_report",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 139,
+          "end": 177,
+          "textSpan": "a befutó versenyző nevét nem közölték."
+        },
+        "propositionSpan": {
+          "start": 139,
+          "end": 177,
+          "textSpan": "a befutó versenyző nevét nem közölték."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:139:177",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "versenyző",
+              "normalized": "versenyző",
+              "start": 148,
+              "end": 157,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 148,
+                "end": 157,
+                "textSpan": "versenyző"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 148,
+                "end": 157,
+                "textSpan": "versenyző"
+              },
+              "targetSpan": {
+                "start": 168,
+                "end": 176,
+                "textSpan": "közölték"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 148,
+                    "end": 157,
+                    "textSpan": "versenyző"
+                  },
+                  "targetSpan": {
+                    "start": 158,
+                    "end": 163,
+                    "textSpan": "nevét"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 158,
+                    "end": 163,
+                    "textSpan": "nevét"
+                  },
+                  "targetSpan": {
+                    "start": 168,
+                    "end": 176,
+                    "textSpan": "közölték"
+                  }
+                }
+              ],
+              "frameId": "dependency:139:177",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "nevét",
+              "normalized": "név",
+              "start": 158,
+              "end": 163,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 158,
+                "end": 163,
+                "textSpan": "nevét"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 158,
+                "end": 163,
+                "textSpan": "nevét"
+              },
+              "targetSpan": {
+                "start": 168,
+                "end": 176,
+                "textSpan": "közölték"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 158,
+                    "end": 163,
+                    "textSpan": "nevét"
+                  },
+                  "targetSpan": {
+                    "start": 168,
+                    "end": 176,
+                    "textSpan": "közölték"
+                  }
+                }
+              ],
+              "frameId": "dependency:139:177",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": {
+          "mention": "csapatvezető",
+          "normalized": "csapatvezető",
+          "start": 180,
+          "end": 192,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 180,
+            "end": 192,
+            "textSpan": "csapatvezető"
+          }
+        },
+        "source": {
+          "mention": "csapatvezető",
+          "normalized": "csapatvezető",
+          "start": 180,
+          "end": 192,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 180,
+            "end": 192,
+            "textSpan": "csapatvezető"
+          }
+        },
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "mond",
+        "content": {
+          "start": 218,
+          "end": 258,
+          "textSpan": "Második lett, de erről később beszélünk."
+        },
+        "attribution": {
+          "label": "csapatvezető",
+          "normalized": "csapatvezető",
+          "evidenceSpan": {
+            "start": 180,
+            "end": 192,
+            "textSpan": "csapatvezető"
+          },
+          "propositionSpan": {
+            "start": 218,
+            "end": 258,
+            "textSpan": "Második lett, de erről később beszélünk."
+          }
+        },
+        "action": "lesz",
+        "actionSpan": {
+          "start": 226,
+          "end": 230,
+          "textSpan": "lett"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 218,
+            "end": 225,
+            "raw": "Második",
+            "value": 2,
+            "canonicalValue": 2,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 218,
+              "end": 225,
+              "textSpan": "Második"
+            },
+            "binding": "unresolved",
+            "ownerType": "unresolved",
+            "owner": null,
+            "subject": null,
+            "unresolvedReasons": [
+              "temporal_role_or_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 218,
+                    "end": 225,
+                    "textSpan": "Második"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "recovered-source:208:proposition:0",
+              "clauseSpan": {
+                "start": 218,
+                "end": 258,
+                "textSpan": "Második lett, de erről később beszélünk."
+              },
+              "predicateSpan": {
+                "start": 226,
+                "end": 230,
+                "textSpan": "lett"
+              },
+              "numericDependencyPath": [],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported_claim",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 218,
+          "end": 258,
+          "textSpan": "Második lett, de erről később beszélünk."
+        },
+        "propositionSpan": {
+          "start": 218,
+          "end": 258,
+          "textSpan": "Második lett, de erről később beszélünk."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "recovered-source:208:proposition:0",
+        "attributionChainId": "recovered-source:208",
+        "claimOwner": {
+          "mention": "csapatvezető",
+          "normalized": "csapatvezető",
+          "start": 180,
+          "end": 192,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 180,
+            "end": 192,
+            "textSpan": "csapatvezető"
+          }
+        },
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 180,
+            "end": 192,
+            "textSpan": "csapatvezető"
+          },
+          "reportingPredicateSpan": {
+            "start": 208,
+            "end": 215,
+            "textSpan": "mondott"
+          },
+          "clauseSpan": {
+            "start": 218,
+            "end": 258,
+            "textSpan": "Második lett, de erről később beszélünk."
+          },
+          "frameId": "recovered-source:208:proposition:0",
+          "parentAttributionId": "recovered-source:208:0",
+          "rule": "governing_np_reporting_scope"
+        },
+        "quoteSpan": {
+          "start": 218,
+          "end": 258,
+          "textSpan": "Második lett, de erről később beszélünk."
+        },
+        "syntacticRoles": []
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [
+      {
+        "id": "recovered-source:208",
+        "binding": "resolved",
+        "rule": "dependency_source_and_explicit_complement_or_bounded_quote",
+        "unresolvedReasons": [],
+        "edges": [
+          {
+            "source": {
+              "mention": "csapatvezető",
+              "normalized": "csapatvezető",
+              "start": 180,
+              "end": 192,
+              "type": "local_source",
+              "entityId": null,
+              "identityStatus": "observed_local_referent",
+              "evidenceSpan": {
+                "start": 180,
+                "end": 192,
+                "textSpan": "csapatvezető"
+              }
+            },
+            "verb": "mond",
+            "verbSpan": {
+              "start": 208,
+              "end": 215,
+              "textSpan": "mondott"
+            },
+            "propositionSpan": {
+              "start": 218,
+              "end": 258,
+              "textSpan": "Második lett, de erről később beszélünk."
+            },
+            "recipient": null,
+            "id": "recovered-source:208:0",
+            "depth": 0,
+            "parentAttributionId": null,
+            "targetId": "recovered-source:208:proposition:0",
+            "binding": "resolved",
+            "role": "claim_source",
+            "rule": "governing_np_reporting_scope",
+            "targetIds": [
+              "recovered-source:208:proposition:0"
+            ],
+            "structuralEvidence": {
+              "sourceSpan": {
+                "start": 180,
+                "end": 192,
+                "textSpan": "csapatvezető"
+              },
+              "targetSpan": {
+                "start": 208,
+                "end": 215,
+                "textSpan": "mondott"
+              },
+              "relation": "nsubj",
+              "markerRelation": "ROOT",
+              "rule": "governing_source_np_and_reporting_scope"
+            }
+          }
+        ],
+        "propositionIds": [
+          "recovered-source:208:proposition:0"
+        ]
+      }
+    ],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

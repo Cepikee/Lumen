@@ -33,9 +33,9 @@ const fetcher = (url: string) =>
     return json;
   });
 
-export default function WhatHappenedTodaySourceActivity() {
+export default function WhatHappenedTodaySourceActivity({ dark = false }: { dark?: boolean }) {
   const theme = useUserStore((s) => s.theme);
-  const isDark =
+  const isDark = dark ||
     theme === "dark" ||
     (theme === "system" &&
       typeof window !== "undefined" &&

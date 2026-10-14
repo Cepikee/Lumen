@@ -1,0 +1,706 @@
+{
+  "id": "T",
+  "raw": "Bécs új feltételeket kért a közös ellenőrzéshez, de a táviratból nem látszik, melyik osztrák szerv fogalmazta meg őket. A határőrség szóvivője a minisztérium levelére hivatkozva közölte, hogy nem január 15-én, hanem február 1-jén kezdődhet az összehangolás. Az indulást a kétoldalú megállapodás aláírásához kötötték.",
+  "rawSha256": "4fbc74d6dddbd0afc8ee33729a9126e9416775e5b951d4a79f06d32be5761593",
+  "annotationSha256": "e1ed831d8b58c84f6873c790b164fd60d7658ebfad5a5fd450ecd980f378bca4",
+  "sentenceCount": 3,
+  "tokenCount": 50,
+  "environmentFingerprint": "143242eddc17f94ea729a1b430c5eac9d5e47dd7d27b5ebdd29c7c6961882f47",
+  "model": {
+    "type": "ready",
+    "model": "hu_core_news_md",
+    "version": "3.8.0",
+    "loadMs": 1160.3809050000002
+  },
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 4,
+        "text": "Bécs",
+        "lemma": "Bécs",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 21
+      },
+      {
+        "start": 5,
+        "end": 7,
+        "text": "új",
+        "lemma": "új",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 8
+      },
+      {
+        "start": 8,
+        "end": 20,
+        "text": "feltételeket",
+        "lemma": "feltétel",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Plur"
+        },
+        "dep": "obj",
+        "headStart": 21
+      },
+      {
+        "start": 21,
+        "end": 25,
+        "text": "kért",
+        "lemma": "kér",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 21
+      },
+      {
+        "start": 26,
+        "end": 27,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 34
+      },
+      {
+        "start": 28,
+        "end": 33,
+        "text": "közös",
+        "lemma": "közös",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 34
+      },
+      {
+        "start": 34,
+        "end": 47,
+        "text": "ellenőrzéshez",
+        "lemma": "ellenőrzés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "All",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 21
+      },
+      {
+        "start": 47,
+        "end": 48,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 69
+      },
+      {
+        "start": 49,
+        "end": 51,
+        "text": "de",
+        "lemma": "de",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 69
+      },
+      {
+        "start": 52,
+        "end": 53,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 54
+      },
+      {
+        "start": 54,
+        "end": 64,
+        "text": "táviratból",
+        "lemma": "távirat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 69
+      },
+      {
+        "start": 65,
+        "end": 68,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 69
+      },
+      {
+        "start": 69,
+        "end": 76,
+        "text": "látszik",
+        "lemma": "látszik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 21
+      },
+      {
+        "start": 76,
+        "end": 77,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 69
+      },
+      {
+        "start": 78,
+        "end": 84,
+        "text": "melyik",
+        "lemma": "melyik",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Int"
+        },
+        "dep": "det",
+        "headStart": 93
+      },
+      {
+        "start": 85,
+        "end": 92,
+        "text": "osztrák",
+        "lemma": "osztrák",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 93
+      },
+      {
+        "start": 93,
+        "end": 98,
+        "text": "szerv",
+        "lemma": "szerv",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 99
+      },
+      {
+        "start": 99,
+        "end": 109,
+        "text": "fogalmazta",
+        "lemma": "fogalmaz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 21
+      },
+      {
+        "start": 110,
+        "end": 113,
+        "text": "meg",
+        "lemma": "meg",
+        "pos": "PART",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 99
+      },
+      {
+        "start": 114,
+        "end": 118,
+        "text": "őket",
+        "lemma": "ők",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Plur",
+          "Person": "3",
+          "PronType": "Prs"
+        },
+        "dep": "obj",
+        "headStart": 99
+      },
+      {
+        "start": 118,
+        "end": 119,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 21
+      },
+      {
+        "start": 120,
+        "end": 121,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 122
+      },
+      {
+        "start": 122,
+        "end": 132,
+        "text": "határőrség",
+        "lemma": "határőrség",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 133
+      },
+      {
+        "start": 133,
+        "end": 142,
+        "text": "szóvivője",
+        "lemma": "szóvivő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 178
+      },
+      {
+        "start": 143,
+        "end": 144,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 145
+      },
+      {
+        "start": 145,
+        "end": 157,
+        "text": "minisztérium",
+        "lemma": "minisztérium",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 158
+      },
+      {
+        "start": 158,
+        "end": 166,
+        "text": "levelére",
+        "lemma": "level",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 167
+      },
+      {
+        "start": 167,
+        "end": 177,
+        "text": "hivatkozva",
+        "lemma": "hivatkozva",
+        "pos": "ADV",
+        "morph": {
+          "VerbForm": "Conv"
+        },
+        "dep": "advmod:mode",
+        "headStart": 178
+      },
+      {
+        "start": 178,
+        "end": 185,
+        "text": "közölte",
+        "lemma": "közöl",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 178
+      },
+      {
+        "start": 185,
+        "end": 186,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 230
+      },
+      {
+        "start": 187,
+        "end": 191,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 230
+      },
+      {
+        "start": 192,
+        "end": 195,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 230
+      },
+      {
+        "start": 196,
+        "end": 202,
+        "text": "január",
+        "lemma": "január",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 203
+      },
+      {
+        "start": 203,
+        "end": 208,
+        "text": "15-én",
+        "lemma": "15.",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 230
+      },
+      {
+        "start": 208,
+        "end": 209,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 230
+      },
+      {
+        "start": 210,
+        "end": 215,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 230
+      },
+      {
+        "start": 216,
+        "end": 223,
+        "text": "február",
+        "lemma": "február",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 224
+      },
+      {
+        "start": 224,
+        "end": 229,
+        "text": "1-jén",
+        "lemma": "1.",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 230
+      },
+      {
+        "start": 230,
+        "end": 239,
+        "text": "kezdődhet",
+        "lemma": "kezdődhet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 178
+      },
+      {
+        "start": 240,
+        "end": 242,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 243
+      },
+      {
+        "start": 243,
+        "end": 256,
+        "text": "összehangolás",
+        "lemma": "összehangolás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 230
+      },
+      {
+        "start": 256,
+        "end": 257,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 178
+      },
+      {
+        "start": 258,
+        "end": 260,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 261
+      },
+      {
+        "start": 261,
+        "end": 269,
+        "text": "indulást",
+        "lemma": "indulás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 307
+      },
+      {
+        "start": 270,
+        "end": 271,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 282
+      },
+      {
+        "start": 272,
+        "end": 281,
+        "text": "kétoldalú",
+        "lemma": "kétoldalú",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 282
+      },
+      {
+        "start": 282,
+        "end": 294,
+        "text": "megállapodás",
+        "lemma": "megállapodás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 295
+      },
+      {
+        "start": 295,
+        "end": 306,
+        "text": "aláírásához",
+        "lemma": "aláírás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "All",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 307
+      },
+      {
+        "start": 307,
+        "end": 315,
+        "text": "kötötték",
+        "lemma": "köt",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 307
+      },
+      {
+        "start": 315,
+        "end": 316,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 307
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 119,
+        "text": "Bécs új feltételeket kért a közös ellenőrzéshez, de a táviratból nem látszik, melyik osztrák szerv fogalmazta meg őket."
+      },
+      {
+        "start": 120,
+        "end": 257,
+        "text": "A határőrség szóvivője a minisztérium levelére hivatkozva közölte, hogy nem január 15-én, hanem február 1-jén kezdődhet az összehangolás."
+      },
+      {
+        "start": 258,
+        "end": 316,
+        "text": "Az indulást a kétoldalú megállapodás aláírásához kötötték."
+      }
+    ],
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "text": "Bécs",
+        "label": "LOC"
+      }
+    ]
+  }
+}

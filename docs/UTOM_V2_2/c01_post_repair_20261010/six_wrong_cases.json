@@ -1,0 +1,50 @@
+[
+  {
+    "id": "P1",
+    "expected": "A közlés külső forrása Reggeli Hír, belső forrása kormányszóvivő; nincs összevonás.",
+    "before": "értesülése is emitted as resolved attribution_source; publication possessor and inner spokesman chain are lost. A report noun is not the speaker.",
+    "c01Related": false,
+    "post": "WRONG_RESOLVED",
+    "assessment": "értesülése is emitted as resolved attribution_source; publication possessor and inner spokesman chain are lost. A report noun is not the speaker."
+  },
+  {
+    "id": "W4",
+    "expected": "4 fok az éjszakai összehasonlítási érték.",
+    "before": "4 emitted resolved count with unit count and owner fokhoz (lemma f); temperature reference/comparison lost.",
+    "c01Related": true,
+    "post": "MISSED_DEFENSIBLE_RESOLUTION",
+    "assessment": "Reference and dimension mismatch retained; original count edge and bindingEvidence downgraded to unresolved. No positive temperature resolution is claimed."
+  },
+  {
+    "id": "W5",
+    "expected": "9 fok délutáni lehetséges érték, nem már megmért tény.",
+    "before": "9 emitted resolved C measurement; modalities only reported, Mood Ind, hypothetical false. Potential mérhetnek not represented. Strict qualifier-safety error, not a claim that canonical DB facts were written.",
+    "c01Related": true,
+    "post": "CORRECT_RESOLVED",
+    "assessment": "9 C attachment retained with predicate-local possible modality from mérhetnek and exact clause evidence containing délután; unconditional equality disabled."
+  },
+  {
+    "id": "T5",
+    "expected": "240 utas felső kapacitáskorlát egy szerelvényre, nem tényleges utaslétszám.",
+    "before": "240 emitted as resolved bare count; no upper-bound qualifier, capacity role or possible modality. legfeljebb and vihet scope omitted.",
+    "c01Related": true,
+    "post": "MISSED_DEFENSIBLE_RESOLUTION",
+    "assessment": "less_or_equal and possible are retained with exact evidence. The quantity is a qualified attachment, not actual occupancy. Full selected bundle includes per-train capacity; no explicit capacity/per-carriage relation is established (the one-carriage numeric remains unresolved). Strict incomplete score."
+  },
+  {
+    "id": "K2",
+    "expected": "2030 a lehetséges kezdés éve, nem múltbeli megfigyelés.",
+    "before": "2030 year resolved but full selected expectation includes possible starting event: output modalities asserted/reported, no possible flag; uncertainty missing. Same scope failure as K3, two fixed selected dimensions, not two independent bugs.",
+    "c01Related": true,
+    "post": "CORRECT_RESOLVED",
+    "assessment": "2030 remains attached to beginning predicate, now qualified possible with exact kezdődhet evidence. No past occurrence or unconditional fact emitted."
+  },
+  {
+    "id": "K3",
+    "expected": "Kezdés lehetőség, nem bizonyos bekövetkezés.",
+    "before": "kezdődhet possibility absent; asserted/reported, Ind and false hypothetical. Strict qualified-proposition safety error.",
+    "c01Related": true,
+    "post": "CORRECT_RESOLVED",
+    "assessment": "The same beginning frame now explicitly carries possible modality and hypotheticalContext; correlated with K2, not an independent bug."
+  }
+]

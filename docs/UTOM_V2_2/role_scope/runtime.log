@@ -1,0 +1,8 @@
+Full-text runtime observations: 25
+Full-text runtime observations: 50
+Full-text runtime observations: 75
+Full-text runtime observations: 100
+{
+  diagnosticEvidence: { total: 605, exact: 605, failures: 0, bad: [] },
+  runtimeMs: 177121.5135
+}

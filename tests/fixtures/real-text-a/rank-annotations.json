@@ -1,0 +1,1747 @@
+[
+  {
+    "id": "simple",
+    "text": "Eszter negyedik lett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "lemma": "Eszter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 7
+        },
+        {
+          "start": 7,
+          "end": 15,
+          "text": "negyedik",
+          "lemma": "negyedik",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 7
+        },
+        {
+          "start": 16,
+          "end": 20,
+          "text": "lett",
+          "lemma": "lesz",
+          "pos": "AUX",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 7
+        },
+        {
+          "start": 20,
+          "end": 21,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 7
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 21,
+          "text": "Eszter negyedik lett."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "other",
+    "text": "Bálint második lett a körzetben.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Bálint",
+          "lemma": "Bálint",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 7
+        },
+        {
+          "start": 7,
+          "end": 14,
+          "text": "második",
+          "lemma": "második",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 7
+        },
+        {
+          "start": 15,
+          "end": 19,
+          "text": "lett",
+          "lemma": "lesz",
+          "pos": "AUX",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 7
+        },
+        {
+          "start": 20,
+          "end": 21,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 22
+        },
+        {
+          "start": 22,
+          "end": 31,
+          "text": "körzetben",
+          "lemma": "körzet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ine",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 7
+        },
+        {
+          "start": 31,
+          "end": 32,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 7
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 32,
+          "text": "Bálint második lett a körzetben."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Bálint",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "explicit",
+    "text": "Eszter az ötödik helyen végzett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "lemma": "Eszter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 24
+        },
+        {
+          "start": 7,
+          "end": 9,
+          "text": "az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 17
+        },
+        {
+          "start": 10,
+          "end": 16,
+          "text": "ötödik",
+          "lemma": "ötödik",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 23,
+          "text": "helyen",
+          "lemma": "hely",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 24
+        },
+        {
+          "start": 24,
+          "end": 31,
+          "text": "végzett",
+          "lemma": "végez",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 24
+        },
+        {
+          "start": 31,
+          "end": 32,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 24
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 32,
+          "text": "Eszter az ötödik helyen végzett."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "round",
+    "text": "Eszter a negyedik fordulóban kiesett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "lemma": "Eszter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 29
+        },
+        {
+          "start": 7,
+          "end": 8,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 18
+        },
+        {
+          "start": 9,
+          "end": 17,
+          "text": "negyedik",
+          "lemma": "negyedik",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 28,
+          "text": "fordulóban",
+          "lemma": "forduló",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ine",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 29
+        },
+        {
+          "start": 29,
+          "end": 36,
+          "text": "kiesett",
+          "lemma": "kiesik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 29
+        },
+        {
+          "start": 36,
+          "end": 37,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 29
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 37,
+          "text": "Eszter a negyedik fordulóban kiesett."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "occasion",
+    "text": "Eszter az ötödik alkalommal nyert.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "lemma": "Eszter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 28
+        },
+        {
+          "start": 7,
+          "end": 9,
+          "text": "az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 17
+        },
+        {
+          "start": 10,
+          "end": 16,
+          "text": "ötödik",
+          "lemma": "ötödik",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 27,
+          "text": "alkalommal",
+          "lemma": "alkalom",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ins",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 28
+        },
+        {
+          "start": 28,
+          "end": 33,
+          "text": "nyert",
+          "lemma": "nyer",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 28
+        },
+        {
+          "start": 33,
+          "end": 34,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 28
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 34,
+          "text": "Eszter az ötödik alkalommal nyert."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "day",
+    "text": "Eszter a második nap érkezett meg.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "lemma": "Eszter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 21
+        },
+        {
+          "start": 7,
+          "end": 8,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 17
+        },
+        {
+          "start": 9,
+          "end": 16,
+          "text": "második",
+          "lemma": "második",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 20,
+          "text": "nap",
+          "lemma": "nap",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "advmod:tlocy",
+          "headStart": 21
+        },
+        {
+          "start": 21,
+          "end": 29,
+          "text": "érkezett",
+          "lemma": "érkezik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 21
+        },
+        {
+          "start": 30,
+          "end": 33,
+          "text": "meg",
+          "lemma": "meg",
+          "pos": "PART",
+          "morph": {},
+          "dep": "compound:preverb",
+          "headStart": 21
+        },
+        {
+          "start": 33,
+          "end": 34,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 21
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 34,
+          "text": "Eszter a második nap érkezett meg."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "district",
+    "text": "Eszter a negyedik kerületben dolgozott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "lemma": "Eszter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 29
+        },
+        {
+          "start": 7,
+          "end": 8,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 18
+        },
+        {
+          "start": 9,
+          "end": 17,
+          "text": "negyedik",
+          "lemma": "negyedik",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 28,
+          "text": "kerületben",
+          "lemma": "kerület",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ine",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 29
+        },
+        {
+          "start": 29,
+          "end": 38,
+          "text": "dolgozott",
+          "lemma": "dolgozik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 29
+        },
+        {
+          "start": 38,
+          "end": 39,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 29
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 39,
+          "text": "Eszter a negyedik kerületben dolgozott."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "mixed",
+    "text": "Eszter a harmadik fordulóban második lett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "lemma": "Eszter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 29
+        },
+        {
+          "start": 7,
+          "end": 8,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 18
+        },
+        {
+          "start": 9,
+          "end": 17,
+          "text": "harmadik",
+          "lemma": "harmadik",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 28,
+          "text": "fordulóban",
+          "lemma": "forduló",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ine",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 29
+        },
+        {
+          "start": 29,
+          "end": 36,
+          "text": "második",
+          "lemma": "második",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 29
+        },
+        {
+          "start": 37,
+          "end": 41,
+          "text": "lett",
+          "lemma": "lesz",
+          "pos": "AUX",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 29
+        },
+        {
+          "start": 41,
+          "end": 42,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 29
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 42,
+          "text": "Eszter a harmadik fordulóban második lett."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "source",
+    "text": "A szövetség szerint Eszter negyedik lett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "szövetség",
+          "lemma": "szövetség",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod",
+          "headStart": 27
+        },
+        {
+          "start": 12,
+          "end": 19,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 2
+        },
+        {
+          "start": 20,
+          "end": 26,
+          "text": "Eszter",
+          "lemma": "Eszter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 27
+        },
+        {
+          "start": 27,
+          "end": 35,
+          "text": "negyedik",
+          "lemma": "negyedik",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 27
+        },
+        {
+          "start": 36,
+          "end": 40,
+          "text": "lett",
+          "lemma": "lesz",
+          "pos": "AUX",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 27
+        },
+        {
+          "start": 40,
+          "end": 41,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 27
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 41,
+          "text": "A szövetség szerint Eszter negyedik lett."
+        }
+      ],
+      "entities": [
+        {
+          "start": 20,
+          "end": 26,
+          "text": "Eszter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "contrast",
+    "text": "Eszter nem negyedik, hanem második lett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "lemma": "Eszter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 11
+        },
+        {
+          "start": 7,
+          "end": 10,
+          "text": "nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          },
+          "dep": "advmod",
+          "headStart": 11
+        },
+        {
+          "start": 11,
+          "end": 19,
+          "text": "negyedik",
+          "lemma": "negyedik",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 11
+        },
+        {
+          "start": 19,
+          "end": 20,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 27
+        },
+        {
+          "start": 21,
+          "end": 26,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {},
+          "dep": "cc",
+          "headStart": 27
+        },
+        {
+          "start": 27,
+          "end": 34,
+          "text": "második",
+          "lemma": "második",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "conj",
+          "headStart": 11
+        },
+        {
+          "start": 35,
+          "end": 39,
+          "text": "lett",
+          "lemma": "lesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 27
+        },
+        {
+          "start": 39,
+          "end": 40,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 11
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "text": "Eszter nem negyedik, hanem második lett."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "implicit",
+    "text": "Nem negyedik, hanem második lett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 3,
+          "text": "Nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          },
+          "dep": "advmod",
+          "headStart": 4
+        },
+        {
+          "start": 4,
+          "end": 12,
+          "text": "negyedik",
+          "lemma": "negyedik",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 4
+        },
+        {
+          "start": 12,
+          "end": 13,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 20
+        },
+        {
+          "start": 14,
+          "end": 19,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {},
+          "dep": "cc",
+          "headStart": 20
+        },
+        {
+          "start": 20,
+          "end": 27,
+          "text": "második",
+          "lemma": "második",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "conj",
+          "headStart": 4
+        },
+        {
+          "start": 28,
+          "end": 32,
+          "text": "lett",
+          "lemma": "lesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 20
+        },
+        {
+          "start": 32,
+          "end": 33,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 4
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 33,
+          "text": "Nem negyedik, hanem második lett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "multiple",
+    "text": "Bálint szerint Eszter ötödik lett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Bálint",
+          "lemma": "bálint",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod",
+          "headStart": 22
+        },
+        {
+          "start": 7,
+          "end": 14,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 0
+        },
+        {
+          "start": 15,
+          "end": 21,
+          "text": "Eszter",
+          "lemma": "Eszter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 22
+        },
+        {
+          "start": 22,
+          "end": 28,
+          "text": "ötödik",
+          "lemma": "ötödik",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 22
+        },
+        {
+          "start": 29,
+          "end": 33,
+          "text": "lett",
+          "lemma": "lesz",
+          "pos": "AUX",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 22
+        },
+        {
+          "start": 33,
+          "end": 34,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 22
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 34,
+          "text": "Bálint szerint Eszter ötödik lett."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Bálint",
+          "label": "PER"
+        },
+        {
+          "start": 15,
+          "end": 21,
+          "text": "Eszter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ambiguous",
+    "text": "Az épület második lett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 3
+        },
+        {
+          "start": 3,
+          "end": 9,
+          "text": "épület",
+          "lemma": "épület",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 18
+        },
+        {
+          "start": 10,
+          "end": 17,
+          "text": "második",
+          "lemma": "második",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 22,
+          "text": "lett",
+          "lemma": "lesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 18
+        },
+        {
+          "start": 22,
+          "end": 23,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 18
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 23,
+          "text": "Az épület második lett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "coordination",
+    "text": "Eszter vagy Bálint második lett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "lemma": "Eszter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 19
+        },
+        {
+          "start": 7,
+          "end": 11,
+          "text": "vagy",
+          "lemma": "vagy",
+          "pos": "CCONJ",
+          "morph": {},
+          "dep": "cc",
+          "headStart": 12
+        },
+        {
+          "start": 12,
+          "end": 18,
+          "text": "Bálint",
+          "lemma": "Bálint",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "flat:name",
+          "headStart": 0
+        },
+        {
+          "start": 19,
+          "end": 26,
+          "text": "második",
+          "lemma": "második",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 19
+        },
+        {
+          "start": 27,
+          "end": 31,
+          "text": "lett",
+          "lemma": "lesz",
+          "pos": "AUX",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 19
+        },
+        {
+          "start": 31,
+          "end": 32,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 19
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 32,
+          "text": "Eszter vagy Bálint második lett."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "label": "PER"
+        },
+        {
+          "start": 12,
+          "end": 18,
+          "text": "Bálint",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "advance",
+    "text": "Eszter a második helyre lépett előre.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "lemma": "Eszter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 24
+        },
+        {
+          "start": 7,
+          "end": 8,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 17
+        },
+        {
+          "start": 9,
+          "end": 16,
+          "text": "második",
+          "lemma": "második",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 23,
+          "text": "helyre",
+          "lemma": "hely",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sbl",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 24
+        },
+        {
+          "start": 24,
+          "end": 30,
+          "text": "lépett",
+          "lemma": "lép",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 24
+        },
+        {
+          "start": 31,
+          "end": 36,
+          "text": "előre",
+          "lemma": "előre",
+          "pos": "ADV",
+          "morph": {
+            "Degree": "Pos"
+          },
+          "dep": "compound:preverb",
+          "headStart": 24
+        },
+        {
+          "start": 36,
+          "end": 37,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 24
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 37,
+          "text": "Eszter a második helyre lépett előre."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "numbers",
+    "text": "Eszter 2027-ben a harmadik fordulóban 12 ponttal második lett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "lemma": "Eszter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 7
+        },
+        {
+          "start": 7,
+          "end": 15,
+          "text": "2027-ben",
+          "lemma": "2027",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Ine",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 49
+        },
+        {
+          "start": 16,
+          "end": 17,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 27
+        },
+        {
+          "start": 18,
+          "end": 26,
+          "text": "harmadik",
+          "lemma": "harmadik",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 27
+        },
+        {
+          "start": 27,
+          "end": 37,
+          "text": "fordulóban",
+          "lemma": "forduló",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ine",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 49
+        },
+        {
+          "start": 38,
+          "end": 40,
+          "text": "12",
+          "lemma": "12",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 41
+        },
+        {
+          "start": 41,
+          "end": 48,
+          "text": "ponttal",
+          "lemma": "pont",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ins",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 49
+        },
+        {
+          "start": 49,
+          "end": 56,
+          "text": "második",
+          "lemma": "második",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 49
+        },
+        {
+          "start": 57,
+          "end": 61,
+          "text": "lett",
+          "lemma": "lesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 49
+        },
+        {
+          "start": 61,
+          "end": 62,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 49
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 62,
+          "text": "Eszter 2027-ben a harmadik fordulóban 12 ponttal második lett."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "Eszter",
+          "label": "PER"
+        }
+      ]
+    }
+  }
+]

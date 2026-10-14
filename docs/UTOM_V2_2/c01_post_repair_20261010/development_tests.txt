@@ -1,0 +1,487 @@
+✔ publisher ministry chain keeps source order and leaves implicit event actor unresolved (15.1314ms)
+✔ police witness and person performing the action remain three separate roles (3.2027ms)
+✔ reported negation and denial do not become positive facts or resolved pronoun actors (1.8646ms)
+✔ publication recipient never becomes claim source or quantity owner (0.8887ms)
+✔ publisher citation and possessive spokesperson form an ordered three-edge chain (1.0527ms)
+✔ ambiguous, absent and negated reporting sources abstain without flattening (1.262ms)
+✔ every resolved edge links exact raw evidence, ordered parents and a real proposition frame (3.9005ms)
+✔ source chains and denial scope cannot leak into an adjacent sentence (1.1617ms)
+✔ lossless unresolved compound candidate: speed (21.6657ms)
+✔ lossless unresolved compound candidate: slash (2.5206ms)
+✔ lossless unresolved compound candidate: meters (1.803ms)
+✔ lossless unresolved compound candidate: volume (0.5318ms)
+✔ lossless unresolved compound candidate: count (0.6358ms)
+✔ lossless unresolved compound candidate: money (0.4251ms)
+✔ lossless unresolved compound candidate: monthly (0.6859ms)
+✔ lossless unresolved compound candidate: daily (0.6174ms)
+✔ lossless unresolved compound candidate: area (0.8115ms)
+✔ lossless unresolved compound candidate: unknown (0.8164ms)
+✔ compound qualifier preserved: upper (0.7946ms)
+✔ compound qualifier preserved: lower (0.5559ms)
+✔ compound qualifier preserved: below (0.3749ms)
+✔ compound qualifier preserved: delta (0.6517ms)
+✔ compound qualifier preserved: deltaCount (0.5229ms)
+✔ non-rate negative control remains intact: simple (1.2547ms)
+✔ non-rate negative control remains intact: duration (0.8713ms)
+✔ non-rate negative control remains intact: clock (0.5322ms)
+✖ non-rate negative control remains intact: percent (3.5889ms)
+✔ source does not become owner of attributed compound rate (1.0666ms)
+✔ ambiguous correction cannot reactivate rejected numerator or lose accepted denominator (1.5249ms)
+✔ all compound raw spans exact and no canonical facts emitted (8.7674ms)
+✔ W3 loses unsafe simple resolution and retains speed denominator and threshold (3.2495ms)
+✔ B03 compatible generic active participant: organisation (16.8486ms)
+✔ B03 compatible generic active participant: institutionActive (4.3459ms)
+✔ B03 compatible generic active participant: authority (1.4226ms)
+✔ B03 compatible generic active participant: committee (1.5514ms)
+✔ B03 compatible generic active participant: adjective (0.6252ms)
+✔ B03 compatible generic active participant: human (2.0354ms)
+✔ B03 compatible generic active participant: rescue (0.6845ms)
+✔ B03 insufficient or competing actor evidence abstains: ambiguous (0.5231ms)
+✔ B03 insufficient or competing actor evidence abstains: institution (1.1845ms)
+✔ B03 insufficient or competing actor evidence abstains: coordinated (0.6823ms)
+✔ B03 insufficient or competing actor evidence abstains: passive (0.3812ms)
+✔ B03 insufficient or competing actor evidence abstains: partialActor (0.9088ms)
+✔ B03 possessor and event actor stay separate (0.4383ms)
+✔ B03 reporting source does not become generic actor (0.9027ms)
+✔ B03 accepted alternative has typed independent evidence: count (1.5499ms)
+✔ B03 accepted alternative has typed independent evidence: money (0.5672ms)
+✔ B03 accepted alternative has typed independent evidence: percentage (0.9022ms)
+✔ B03 accepted alternative has typed independent evidence: date (0.6523ms)
+✔ B03 accepted alternative has typed independent evidence: measurement (0.6059ms)
+✔ B03 accepted alternative has typed independent evidence: parallelMoney (0.2981ms)
+✔ B03 no unsupported accepted-slot inference: boundary (1.729ms)
+✔ B03 no unsupported accepted-slot inference: ellipsis (0.6176ms)
+✔ B03 no unsupported accepted-slot inference: rate (0.8125ms)
+✔ B03 no unsupported accepted-slot inference: unknownDuration (0.516ms)
+✔ B03 explicit typed rank preserves ranked subject (1.2417ms)
+✔ B03 subject modifier ordinal is not rank: ordinal (0.5739ms)
+✔ B03 subject modifier ordinal is not rank: district (0.3477ms)
+✔ B03 no guessed ranked subject: implicit (0.3316ms)
+✔ B03 no guessed ranked subject: genericRank (0.3225ms)
+✔ B03 no guessed ranked subject: rankCoord (0.5975ms)
+✔ B03 no guessed ranked subject: rankDiscourse (0.4836ms)
+✔ B03 independent numeric edge survives unresolved actor (0.4584ms)
+✔ B03 proven actor survives malformed numeric dependency (2.8791ms)
+✔ B03 recipient cannot become generic actor (0.392ms)
+✔ B03 multi-sentence state isolation: continuity (2.1932ms)
+✔ B03 multi-sentence state isolation: afterCorrection (0.8428ms)
+✔ B03 no positive accepted quantity if its dependency path is broken (0.6594ms)
+✔ B03 nominal subject alone does not license agency (0.3509ms)
+✔ B03 passive morphology vetoes a compatible generic candidate (0.3113ms)
+✔ B03 all evidence remains exact and canonical output stays off (13.7564ms)
+✔ actor correction keeps only Anna positive and signing is not attribution (16.1036ms)
+✔ quantity, amount and year corrections share a slot and reject the old value (6.0312ms)
+✔ source correction and attributed numeric correction keep their distinct roles (1.7555ms)
+✔ accusative object correction removes the rejected object (0.8705ms)
+✔ incompatible alternatives, multiple predicates and repeated correction abstain (1.1342ms)
+✔ all contrast evidence slices original input and projection remains disabled (3.1172ms)
+✔ legal proceeding is a generic frame, never a project-start claim (30.0785ms)
+✔ media context and person/location boundaries are typed without name-specific rules (7.8765ms)
+✔ numeric arguments bind separately to nearby subjects and classify local semantics (7.0176ms)
+✔ admission, denial and conditional promise remain separate frames (1.5149ms)
+✔ historical judgment reference does not become a new court event (5.8679ms)
+✔ Round 2 splits multi-subject numeric propositions across unrelated domains (95.1718ms)
+✔ Round 2 keeps media and official source roles separate from entity identity (2.0987ms)
+✔ Round 2 attribution never promotes punctuation, clauses, or unresolved pronouns (4.0032ms)
+✔ Round 2 separates admission and denial propositions without duplicates (1.5801ms)
+✔ Round 2 enforces promise and conditional consistency (17.9622ms)
+✔ Round 2 conservatively resolves inflected names inside one article (1.3586ms)
+✔ Round 2 structural segmentation blocks byline and caption leakage (1.1399ms)
+✔ Round 2 entity precision/recall adversarial fixture meets the safety floor (0.8672ms)
+✔ Round 2 frame quality metrics meet the curated safety floor (1.9982ms)
+✔ candidate review: possession is not positive actor evidence for an inanimate patient (17.0979ms)
+✔ candidate review: generic counted head is found through modifiers without noun whitelist (6.1502ms)
+✔ candidate review: accepted generic contrast count needs its own dependency route (7.2332ms)
+✔ candidate review: a malformed source governor does not become a resolved chain (4.2585ms)
+✖ candidate review: real duration and percentage retain their distinct semantic kinds and exact evidence (5.1129ms)
+✔ dependency edges cannot revive bindings inside unresolved correction scope (2.7803ms)
+✔ missing dependency metadata cannot silently retain heuristic positive bindings (0.8352ms)
+✔ live dependency annotations preserve accepted corrections and nested source chains (3.6179ms)
+✔ dependency-backed numerics keep adjectival money, percentage shares and measurements distinct (2.0171ms)
+✔ dependency subjects resolve explicit actors, excluding possessors, recipients and attribution (4.5ms)
+✔ organisation actors, ambiguous subjects and possessive role heads obey structural licensing (1.5157ms)
+✔ generic count and year/count collision are structurally licensed (0.9355ms)
+✔ year, duration and percentage-change use distinct dependency-backed slots (1.1628ms)
+✔ duration week/day/hour and percentage-change stay distinct under local syntax (1.3898ms)
+✔ triple-nested attribution keeps the source chain and numeric claim separate (0.8614ms)
+✔ broken count attachment does not collapse a licensed organisation actor (1.1959ms)
+✔ broken numeric attachment does not collapse a nested attribution source chain (1.0615ms)
+✔ age paths end at the described person while amount paths end at support or revenue (1.2354ms)
+✔ age syntax alone does not prove an unclassified proper name is a person (0.6037ms)
+✔ headcount belongs to the employment argument and never the company possessor (0.3683ms)
+✔ conflicting subjects and disconnected numeric attachment abstain despite former heuristics (1.0919ms)
+✔ passive morphology and malformed graph cannot produce a resolved actor (0.7314ms)
+✔ resolved bindings contain raw structural evidence and canonical outputs stay disabled (10.0773ms)
+✔ deterministic provider extracts only text-grounded numeric and semantic markers (55.9321ms)
+✔ deterministic provider does not import or read gold/scenario logic (0.69ms)
+✔ rank result and structural owner: simple (18.9043ms)
+✔ rank result and structural owner: other (2.4051ms)
+✔ rank result and structural owner: explicit (1.3162ms)
+✔ rank result and structural owner: advance (3.0147ms)
+✔ nominal modifier is not a placement: round (0.5699ms)
+✔ nominal modifier is not a placement: occasion (0.4393ms)
+✔ nominal modifier is not a placement: day (0.4867ms)
+✔ nominal modifier is not a placement: district (0.43ms)
+✔ ordinal round and elliptic result have separate values and targets (1.4738ms)
+✔ attributing person is not the ranked subject (0.7922ms)
+✔ parser lacks subject edge: attribution is retained without inventing rank owner (0.7076ms)
+✔ rank correction resolves only accepted alternative with its owner (1.2902ms)
+✔ implicit owner contrast preserves alternatives but abstains on positive binding (1.2874ms)
+✔ predicative uncertainty abstains: ambiguous (0.8129ms)
+✔ predicative uncertainty abstains: coordination (0.6727ms)
+✔ adversarial calendar, ordinal and count are never recast as the elliptic ranking (2.0996ms)
+✔ copula and subject evidence are both necessary (0.9848ms)
+✔ all new rank evidence remains raw-source exact and canonical projection disabled (5.2585ms)
+✔ oracle provider boundary reaches perfect core semantics (119.671ms)
+✔ mutation: lost negation and conditional modality are detected (96.2701ms)
+✔ mutation: wrong attribution and namesake identity are detected (69.5502ms)
+✔ mutation: false and missed conflicts are visible (52.1139ms)
+✔ mutation: temporal change and omission status errors are detected (51.9491ms)
+✔ V2.2 benchmark contains 20 mandatory Hungarian scenarios and 2-4 source variants (105.3863ms)
+✔ V2.2 gold manifest covers evidence-first dimensions without direct DB writes (101.9156ms)
+✔ V2.2 baseline makes empty-provider gap explicit and reproducible (77.2869ms)
+✔ V2.2 dense tier contains five three-source scenarios with broad observations (13.8145ms)
+✔ morphology research uses the actual frozen deterministic baseline (41.7924ms)
+✔ development annotations retain exact Unicode evidence and never project canonical facts (12.0267ms)
+✔ dependency labels cannot alter the research binder (13.448ms)
+✔ subject and value permutations and three-way coordination preserve ownership (0.8758ms)
+✔ unit/verb ellipsis has separately anchored evidence (1.2571ms)
+✔ ordinal product cannot inherit first product identity and weather is not transport actor (0.5372ms)
+✔ admission and denial remain separate scoped propositions (0.282ms)
+✔ negation and condition do not leak into completed siblings (0.6005ms)
+✔ speaker role, promises and futures are explicit; nested source abstains (0.5916ms)
+✔ namesakes, metadata and location/person substitution preserve boundaries (0.6931ms)
+✔ corrupt raw evidence is rejected, never silently normalized (0.6062ms)
+✔ worker crash falls back; actual deterministic processing remains available (99.6295ms)
+✔ worker hang falls back; actual deterministic processing remains available (223.9884ms)
+✔ worker malformed falls back; actual deterministic processing remains available (52.6792ms)
+✔ worker bounded input, queue and out-of-order IDs (199.7074ms)
+✔ owner presentation maps canonical enums and typed values (111.6592ms)
+✔ showcase owner mode routes canonical fields through central presentation mapping (1.1984ms)
+✔ demo read model preserves structured values for the owner formatter (0.9976ms)
+✔ showcase exposes the required benchmark scenario selector (1.5317ms)
+✔ precision helper abstains on filler and survives thirty perturbed source variants (238.3308ms)
+✔ precision helper distinguishes namesake contexts and preserves semantic qualifiers (0.4261ms)
+✔ deterministic semantic providers satisfy canonical extraction contracts without gold input (12.0564ms)
+✔ explicit organization relation evidence keeps original article offsets (0.6797ms)
+✔ semantic helper has no benchmark gold dependency (0.6587ms)
+✔ direct-denial official attribution is source-derived and benchmark-grounded (434.2411ms)
+✔ scenario projection collapses repeated entity mentions but keeps namesake identities (223.9197ms)
+✔ cross-source projection emits only explicit temporal changes and omissions (223.6104ms)
+✔ dense temporal gold values are source-derived and projected deterministically (94.5796ms)
+✔ evaluator normalizes an omitted date unit to the canonical date semantic (52.4086ms)
+✔ assessment predicates require a local expert proposition (0.8342ms)
+✔ evidence-backed categorical claims count as semantically supported (0.1336ms)
+✔ round 3 recovers explicit relations, separate events, and validated conflicts (389.8713ms)
+✔ round 3 dense gold values remain source-derived and expose critical coverage (113.7637ms)
+✔ round 3 held-out role clauses resolve the longest organisation and preserve separate events (16.7193ms)
+✔ real text A evidence and research boundary: possessor (12.0672ms)
+✔ real text A evidence and research boundary: possessor_object (1.4439ms)
+✔ real text A evidence and research boundary: target (0.3854ms)
+✔ real text A evidence and research boundary: topic (0.4058ms)
+✔ real text A evidence and research boundary: postposition (0.4312ms)
+✔ real text A evidence and research boundary: location (3.7337ms)
+✔ real text A evidence and research boundary: implicit (0.4351ms)
+✔ real text A evidence and research boundary: generic (0.2464ms)
+✔ real text A evidence and research boundary: explicit (0.4546ms)
+✔ real text A evidence and research boundary: multiple (0.4937ms)
+✔ real text A evidence and research boundary: recipient_not_actor (0.2606ms)
+✔ real text A evidence and research boundary: title_subject (0.2064ms)
+✔ real text A evidence and research boundary: report_dative (1.8731ms)
+✔ real text A evidence and research boundary: report_according (0.2956ms)
+✔ real text A evidence and research boundary: report_conversation (0.327ms)
+✔ real text A evidence and research boundary: report_ins (0.2856ms)
+✔ real text A evidence and research boundary: report_ela (0.2108ms)
+✔ real text A evidence and research boundary: report_apposition (0.7959ms)
+✔ real text A evidence and research boundary: report_pronoun (0.9223ms)
+✔ real text A evidence and research boundary: report_target (0.2644ms)
+✔ real text A evidence and research boundary: quote_leading (0.5113ms)
+✔ real text A evidence and research boundary: quote_boundary (0.4469ms)
+✔ real text A evidence and research boundary: quote_no_speaker (0.3133ms)
+✔ real text A evidence and research boundary: quote_target (0.3204ms)
+✔ real text A evidence and research boundary: duration (0.5953ms)
+✔ real text A evidence and research boundary: age (0.3202ms)
+✔ real text A evidence and research boundary: duration_contract (0.3275ms)
+✔ real text A evidence and research boundary: year_tariff (0.3422ms)
+✔ real text A evidence and research boundary: year_tariff_words (0.3272ms)
+✔ real text A evidence and research boundary: age_duration (0.2759ms)
+✔ real text A evidence and research boundary: money (0.2596ms)
+✔ real text A evidence and research boundary: measurement (0.3843ms)
+✔ real text A evidence and research boundary: threshold (0.2644ms)
+✔ real text A evidence and research boundary: count (0.2085ms)
+✔ real text A evidence and research boundary: share (0.268ms)
+✔ real text A evidence and research boundary: negative_pair (0.3224ms)
+✔ real text A evidence and research boundary: report_negative (0.2721ms)
+✔ real text A evidence and research boundary: not_only (0.2527ms)
+✔ real text A evidence and research boundary: not_small (0.2089ms)
+✔ real text A evidence and research boundary: incidental (0.2568ms)
+✔ real text A evidence and research boundary: despite (0.8786ms)
+✔ real text A evidence and research boundary: relative (0.2124ms)
+✔ real text A evidence and research boundary: quote_negative (0.3466ms)
+✔ real text A evidence and research boundary: report_denied (0.2559ms)
+✔ real text A evidence and research boundary: negative_existential (0.1451ms)
+✔ real text A evidence and research boundary: denial (0.2674ms)
+✔ real text A evidence and research boundary: not_hidden (0.1956ms)
+✔ real text A evidence and research boundary: neither (0.1583ms)
+✔ dependency-backed numeric bindings stay attached to the correct nominal head (10.7521ms)
+✔ reset research module state after dependency-backed numeric bindings (1.3363ms)
+✔ possessors, targets and implicit actors do not resolve as named actors (2.8326ms)
+✔ recipient needs reporting valency and a personal referent (3.689ms)
+✔ sentence duration, age and year/tariff stay distinct (1.6934ms)
+✔ negation belongs to its predicate rather than the whole sentence (2.0565ms)
+✔ age never inherits the payer when the age modifies a different referent (0.6949ms)
+✔ nested attribution is explicit while direct source and actor remain separate (1.3068ms)
+✔ nominal amounts and possessive company heads do not inherit a person owner (0.4824ms)
+✔ contrast and conditions remain local and ambiguous contrasts abstain (2.2109ms)
+✔ title and organization boundaries remain distinct and all binding evidence is exact (2.7425ms)
+✔ passive subjects and overextended person names are not asserted as actors (0.5072ms)
+✔ numeric predicates never emit null, undefined or non-finite values (20.969ms)
+✔ generic metadata segmentation keeps bylines and photo credits out of entity mentions (19.4218ms)
+✔ Hungarian numeric mention layer handles scales, currencies, spacing and ranges (3.9738ms)
+✔ ambiguous legal money claims abstain instead of using PROJECT_COST (8.6323ms)
+✔ attribution and uncertainty remain attached to a source-local numeric claim (2.6949ms)
+✔ role and product appositions generalize across transport and education copy (22.1966ms)
+✔ generic narrative events cover acquisition, court, repair and sport wording (17.4599ms)
+✔ REAL_WORLD_001 after-hardening path preserves first-pass artifacts and removes the null numeric claim (59.9118ms)
+✔ delta values never become count predicates across unrelated domains (17.4202ms)
+✔ numeric qualifiers retain lower, upper, range and approximate semantics (0.8803ms)
+✔ local numeric scope keeps an exact observation separate from a later approximate delta (3.1538ms)
+✔ legal amount stays absolute while reference-class mileage and values stay comparative (11.4177ms)
+✔ broad interpersonal verbs do not create PARTNER_OF relations (2.4424ms)
+✔ acquisition event exposes only explicit article participants (28.8586ms)
+✔ duplicated headline is not emitted twice as downstream numeric data (5.7432ms)
+✔ evidence offsets remain sliceable after masking, trimming and Unicode edge cases (50.4918ms)
+✔ delta changes are additive and never projected as fake absolute properties (73.0904ms)
+✔ general scalar changes preserve from/to, unit, direction, time and evidence (5.3875ms)
+✔ generic conditional and background legal language does not create a concrete payment event (84.5286ms)
+✔ document edits are not vehicle repairs, while an explicit repair remains an event (20.2313ms)
+✔ scaled numeric mentions expose additive canonical values and delta/comparison semantics (3.3014ms)
+✔ reported observation is kept separate from displayed, estimated and comparison values (4.4243ms)
+✔ month dates remain attached to the numeric observation in the same local sentence (1.3366ms)
+✔ explicit narrative relations require a verb and do not use sentence co-occurrence (0.757ms)
+✔ multiple attributed speakers keep their own evidence spans (1.0677ms)
+✔ role evaluator: known correct case passes; resolved label alone is no proof (2.415ms)
+✔ role evaluator: independent owner, sign, property, source, scope and condition errors fail (1.9361ms)
+✔ role evaluator: abstentions and omitted frames retain fixed gold denominators (0.2103ms)
+✔ role evaluator: duplicates cannot reuse a gold label and bad evidence fails (0.3507ms)
+✔ role/scope: ASCII, Unicode and word signs are preserved across domains (13.5248ms)
+✔ role/scope: signed delta is not an absolute temperature or stock observation (0.7056ms)
+✔ role/scope: signed transitions and ranges preserve distinct endpoints (1.6645ms)
+✔ role/scope: storage and treatment locations never become explicit actors (0.8277ms)
+✔ role/scope: recipient is not the reporting actor, unknown source abstains (1.3246ms)
+✔ role/scope: mixed nominative/dative name span is unresolved, never invented stem (0.3697ms)
+✔ role/scope: processing percentage is not a candidate score (0.808ms)
+✔ role/scope: threshold, age, tariff, calendar and population have separate owners (1.0069ms)
+✔ role/scope: denial with Cnd mood is not a logical condition (0.4298ms)
+✔ role/scope: antecedent and consequent have scoped logical conditions (1.0026ms)
+✔ role/scope: quotation directions and punctuation preserve one content frame (1.3536ms)
+✔ role/scope: pronouns and unnamed generic institutions are not named entities (0.3602ms)
+✔ role/scope: all raw spans exact, canonical outputs disabled, dependency labels irrelevant (15.3884ms)
+✔ B02 governed source and bounded proposition: positive (18.2881ms)
+✔ B02 governed source and bounded proposition: negative (0.7893ms)
+✔ B02 governed source and bounded proposition: denial (1.0194ms)
+✔ B02 governed source and bounded proposition: leading (1.5243ms)
+✔ B02 governed source and bounded proposition: trailing (1.2053ms)
+✔ B02 governed source and bounded proposition: colon (1.5316ms)
+✔ B02 governed source and bounded proposition: added (1.2367ms)
+✔ B02 governed source and bounded proposition: reported (0.7294ms)
+✔ B02 addressee does not become source: recipient (1.2264ms)
+✔ B02 addressee does not become source: towards (1.2001ms)
+✔ B02 addressee does not become source: with (0.5459ms)
+✖ B02 subsequent independent sentence survives: deadline (3.6858ms)
+✔ B02 subsequent independent sentence survives: count (1.5204ms)
+✔ B02 subsequent independent sentence survives: money (1.0419ms)
+✔ B02 subsequent independent sentence survives: measurement (0.8126ms)
+✔ B02 nested quoted chain preserves outer publisher and inner owner (1.4472ms)
+✔ B02 ambiguous dependency on possessive nested speaker abstains rather than flattening (0.9497ms)
+✔ B02 attributed count belongs to counted argument, not source (1.4743ms)
+✖ B02 temporal boundary is separate from source (0.6311ms)
+✔ B02 denial preserves source and B01 unresolved compound safety (1.7242ms)
+✔ B02 unsupported source/correction dependency remains conservative (1.5505ms)
+✔ B02 missing quote speaker never inferred from quote actor (0.5064ms)
+✔ B02 multiple speakers never merge or cross-attribute (1.0903ms)
+✔ B02 unmatched quote does not erase following sentence or invent attribution (0.7931ms)
+✔ B02 complement syntax alone does not license unknown reporting semantics (0.4362ms)
+✔ B02 missing source-subject dependency cannot be replaced by proximity (0.9897ms)
+✔ B02 recovered source evidence is raw-exact and projection stays disabled (10.2591ms)
+✔ B02 punctuation and sentence isolation: independentReport (1.099ms)
+✔ B02 punctuation and sentence isolation: priorReport (0.4501ms)
+✔ B02 punctuation and sentence isolation: quoteHogy (0.4631ms)
+✔ B02 punctuation and sentence isolation: negatedReport (0.2909ms)
+✔ B02 punctuation and sentence isolation: afterActor (0.6066ms)
+✔ B02 punctuation and sentence isolation: afterDate (1.4684ms)
+✔ temporal date structure: full (20.6963ms)
+✔ temporal date structure: bare (1.4883ms)
+✔ temporal date structure: partial (0.968ms)
+✔ temporal date structure: month (0.7153ms)
+✔ temporal date structure: end (0.5396ms)
+✔ explicit clock: clock (1.1821ms)
+✔ explicit clock: colon (0.2791ms)
+✖ calendar/clock boundary: deadline (1.3915ms)
+✖ calendar/clock boundary: weekday (0.551ms)
+✔ calendar/clock boundary: opening (0.8941ms)
+✔ duration attachment: weeks (0.5145ms)
+✔ duration attachment: days (0.724ms)
+✔ duration attachment: hours (0.3087ms)
+✔ duration attachment: minutes (0.4057ms)
+✔ terminative hour without disambiguating syntax abstains (0.3721ms)
+✔ ordinal nominal is not count or ranking: ordinal (3.319ms)
+✔ ordinal nominal is not count or ranking: district (0.4051ms)
+✔ placement needs governing place and predicate: rank (0.4723ms)
+✔ placement needs governing place and predicate: rankobj (0.4566ms)
+✔ bare ordinal copula does not invent a ranking context (0.3593ms)
+✔ calendar date, clock and compound duration retain three separate arguments (0.9761ms)
+✔ temporal correction preserves only accepted date and a positive event (2.1748ms)
+✔ nested reporting source remains distinct from temporal attachment (2.1184ms)
+✔ detached date head cannot stay resolved from surface proximity (0.5241ms)
+✔ out-of-range clock and impossible calendar day never resolve (0.8166ms)
+✔ temporal failure does not erase a separately proven actor (0.3614ms)
+✔ temporal evidence slices raw source and resolved values carry structural reasons (7.8485ms)
+ℹ tests 339
+ℹ suites 0
+ℹ pass 333
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2063.6814
+
+✖ failing tests:
+
+test at tests\unit\v22-compound-rate-safety.test.cjs:12:123
+✖ non-rate negative control remains intact: percent (3.5889ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'unresolved'
+  - 'resolved'
+  
+      at TestContext.<anonymous> (F:\Projekt2025\Lumen\tests\unit\v22-compound-rate-safety.test.cjs:12:242)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'unresolved',
+    expected: 'resolved',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\unit\v22-dependency-binding.test.cjs:33:1
+✖ candidate review: real duration and percentage retain their distinct semantic kinds and exact evidence (5.1129ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'unresolved'
+  - 'resolved'
+  
+      at TestContext.<anonymous> (F:\Projekt2025\Lumen\tests\unit\v22-dependency-binding.test.cjs:35:256)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'unresolved',
+    expected: 'resolved',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\unit\v22-source-scope-recovery.test.cjs:13:139
+✖ B02 subsequent independent sentence survives: deadline (3.6858ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'unresolved'
+  - 'resolved'
+  
+      at TestContext.<anonymous> (F:\Projekt2025\Lumen\tests\unit\v22-source-scope-recovery.test.cjs:14:204)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'unresolved',
+    expected: 'resolved',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\unit\v22-source-scope-recovery.test.cjs:19:1
+✖ B02 temporal boundary is separate from source (0.6311ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'unresolved'
+  - 'resolved'
+  
+      at TestContext.<anonymous> (F:\Projekt2025\Lumen\tests\unit\v22-source-scope-recovery.test.cjs:19:168)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'unresolved',
+    expected: 'resolved',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\unit\v22-temporal-binding.test.cjs:14:50
+✖ calendar/clock boundary: deadline (1.3915ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'unresolved'
+  - 'resolved'
+  
+      at TestContext.<anonymous> (F:\Projekt2025\Lumen\tests\unit\v22-temporal-binding.test.cjs:14:120)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'unresolved',
+    expected: 'resolved',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\unit\v22-temporal-binding.test.cjs:14:50
+✖ calendar/clock boundary: weekday (0.551ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'unresolved'
+  - 'resolved'
+  
+      at TestContext.<anonymous> (F:\Projekt2025\Lumen\tests\unit\v22-temporal-binding.test.cjs:14:120)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'unresolved',
+    expected: 'resolved',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

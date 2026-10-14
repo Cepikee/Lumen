@@ -1,0 +1,8 @@
+
+F:\Projekt2025\Lumen\scripts\experimental\role-scope-binder.cjs
+  26:29  warning  'rows' is never reassigned. Use 'const' instead   prefer-const
+  40:40  warning  'start' is never reassigned. Use 'const' instead  prefer-const
+
+✖ 2 problems (0 errors, 2 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+

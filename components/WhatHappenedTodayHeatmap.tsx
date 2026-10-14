@@ -1,5 +1,6 @@
 "use client";
 
+import InsightsEmptyState from "./InsightsEmptyState";
 import useSWR from "swr";
 import Spinner from "react-bootstrap/Spinner";
 
@@ -86,7 +87,8 @@ export default function WhatHappenedTodayHeatmap() {
   const { categories = [], hours = [], matrix = {} } = data;
 
   const order = ["Politika", "Gazdaság", "Közélet", "Kultúra", "Egészségügy", "Oktatás"];
-  const orderedCategories = order.filter((c) => categories.includes(c));
+  const orderedCategories = [...order.filter((c) => categories.includes(c)), ...categories.filter((c) => !order.includes(c))]
+    .filter(c => hours.some(h => Number(matrix[c]?.[h]) > 0));
 
   const colors: Record<string, string> = {
     Politika: "#d81b60",
@@ -140,11 +142,11 @@ export default function WhatHappenedTodayHeatmap() {
 
   const stableKey = `${theme}-${hours?.length ?? 0}-${categories?.length ?? 0}`;
 
-  if (!chartData || !Array.isArray(chartData.datasets)) {
+  if (!chartData || !chartData.datasets.length) {
     return (
       <div className="wht-heatmap" style={{ height: "350px" }}>
         <h5 className="mb-3">Kategóriák aktivitása óránként</h5>
-        <div className="text-muted">Nincs megjeleníthető adat.</div>
+        <InsightsEmptyState period="24h" />
       </div>
     );
   }

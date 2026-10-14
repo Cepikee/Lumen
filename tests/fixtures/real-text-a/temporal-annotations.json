@@ -1,0 +1,2614 @@
+[
+  {
+    "id": "full",
+    "text": "A kutató 2027. november 9-én érkezett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 29
+        },
+        {
+          "start": 9,
+          "end": 14,
+          "text": "2027.",
+          "lemma": "2027.",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 15
+        },
+        {
+          "start": 15,
+          "end": 23,
+          "text": "november",
+          "lemma": "november",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 24
+        },
+        {
+          "start": 24,
+          "end": 28,
+          "text": "9-én",
+          "lemma": "9.",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 29
+        },
+        {
+          "start": 29,
+          "end": 37,
+          "text": "érkezett",
+          "lemma": "érkezik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 29
+        },
+        {
+          "start": 37,
+          "end": 38,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 29
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "text": "A kutató 2027. november 9-én érkezett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "bare",
+    "text": "A megnyitó dátuma 2027. november 9. volt.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 10,
+          "text": "megnyitó",
+          "lemma": "megnyitó",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 11
+        },
+        {
+          "start": 11,
+          "end": 17,
+          "text": "dátuma",
+          "lemma": "dátum",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "nsubj",
+          "headStart": 33
+        },
+        {
+          "start": 18,
+          "end": 23,
+          "text": "2027.",
+          "lemma": "2027.",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 24
+        },
+        {
+          "start": 24,
+          "end": 32,
+          "text": "november",
+          "lemma": "november",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 33
+        },
+        {
+          "start": 33,
+          "end": 35,
+          "text": "9.",
+          "lemma": "9.",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "ROOT",
+          "headStart": 33
+        },
+        {
+          "start": 36,
+          "end": 40,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 33
+        },
+        {
+          "start": 40,
+          "end": 41,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 33
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 41,
+          "text": "A megnyitó dátuma 2027. november 9. volt."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "partial",
+    "text": "A kutató november 9-én érkezett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 23
+        },
+        {
+          "start": 9,
+          "end": 17,
+          "text": "november",
+          "lemma": "november",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 22,
+          "text": "9-én",
+          "lemma": "9.",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 23
+        },
+        {
+          "start": 23,
+          "end": 31,
+          "text": "érkezett",
+          "lemma": "érkezik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 23
+        },
+        {
+          "start": 31,
+          "end": 32,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 23
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 32,
+          "text": "A kutató november 9-én érkezett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "month",
+    "text": "A kutató 2027 novemberében érkezett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 14
+        },
+        {
+          "start": 9,
+          "end": 13,
+          "text": "2027",
+          "lemma": "2027",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 14
+        },
+        {
+          "start": 14,
+          "end": 26,
+          "text": "novemberében",
+          "lemma": "november",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ine",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 27
+        },
+        {
+          "start": 27,
+          "end": 35,
+          "text": "érkezett",
+          "lemma": "érkezik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 27
+        },
+        {
+          "start": 35,
+          "end": 36,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 27
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "text": "A kutató 2027 novemberében érkezett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "end",
+    "text": "A kutató november végén érkezett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 24
+        },
+        {
+          "start": 9,
+          "end": 17,
+          "text": "november",
+          "lemma": "november",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 23,
+          "text": "végén",
+          "lemma": "vég",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 24
+        },
+        {
+          "start": 24,
+          "end": 32,
+          "text": "érkezett",
+          "lemma": "érkezik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 24
+        },
+        {
+          "start": 32,
+          "end": 33,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 24
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 33,
+          "text": "A kutató november végén érkezett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "clock",
+    "text": "A kutató 9 órakor érkezett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 18
+        },
+        {
+          "start": 9,
+          "end": 10,
+          "text": "9",
+          "lemma": "9",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 11
+        },
+        {
+          "start": 11,
+          "end": 17,
+          "text": "órakor",
+          "lemma": "óra",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Tem",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 26,
+          "text": "érkezett",
+          "lemma": "érkezik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 18
+        },
+        {
+          "start": 26,
+          "end": 27,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 18
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "text": "A kutató 9 órakor érkezett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "colon",
+    "text": "A kutató 9:45-kor érkezett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 18
+        },
+        {
+          "start": 9,
+          "end": 17,
+          "text": "9:45-kor",
+          "lemma": "9:45",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Tem",
+            "NumType[sem]": "Time",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 26,
+          "text": "érkezett",
+          "lemma": "érkezik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 18
+        },
+        {
+          "start": 26,
+          "end": 27,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 18
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "text": "A kutató 9:45-kor érkezett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "deadline",
+    "text": "November 14-ig lehet jelentkezni.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 8,
+          "text": "November",
+          "lemma": "november",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 9
+        },
+        {
+          "start": 9,
+          "end": 14,
+          "text": "14-ig",
+          "lemma": "14.",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ter",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 21
+        },
+        {
+          "start": 15,
+          "end": 20,
+          "text": "lehet",
+          "lemma": "lesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Pot",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 15
+        },
+        {
+          "start": 21,
+          "end": 32,
+          "text": "jelentkezni",
+          "lemma": "jelentkezik",
+          "pos": "VERB",
+          "morph": {
+            "VerbForm": "Inf",
+            "Voice": "Act"
+          },
+          "dep": "xcomp",
+          "headStart": 15
+        },
+        {
+          "start": 32,
+          "end": 33,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 15
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 33,
+          "text": "November 14-ig lehet jelentkezni."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "weekday",
+    "text": "Csütörtökig kell beadni a pályázatot.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 11,
+          "text": "Csütörtökig",
+          "lemma": "csütörtök",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ter",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 17
+        },
+        {
+          "start": 12,
+          "end": 16,
+          "text": "kell",
+          "lemma": "kell",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 12
+        },
+        {
+          "start": 17,
+          "end": 23,
+          "text": "beadni",
+          "lemma": "bead",
+          "pos": "VERB",
+          "morph": {
+            "VerbForm": "Inf",
+            "Voice": "Act"
+          },
+          "dep": "xcomp",
+          "headStart": 12
+        },
+        {
+          "start": 24,
+          "end": 25,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 26
+        },
+        {
+          "start": 26,
+          "end": 36,
+          "text": "pályázatot",
+          "lemma": "pályázat",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 17
+        },
+        {
+          "start": 36,
+          "end": 37,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 12
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 37,
+          "text": "Csütörtökig kell beadni a pályázatot."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "opening",
+    "text": "Az üzlet 19 óráig tart nyitva.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "Az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 3
+        },
+        {
+          "start": 3,
+          "end": 8,
+          "text": "üzlet",
+          "lemma": "üzlet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 18
+        },
+        {
+          "start": 9,
+          "end": 11,
+          "text": "19",
+          "lemma": "19",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 12
+        },
+        {
+          "start": 12,
+          "end": 17,
+          "text": "óráig",
+          "lemma": "óra",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ter",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 18
+        },
+        {
+          "start": 18,
+          "end": 22,
+          "text": "tart",
+          "lemma": "tart",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 18
+        },
+        {
+          "start": 23,
+          "end": 29,
+          "text": "nyitva",
+          "lemma": "nyitva",
+          "pos": "ADV",
+          "morph": {
+            "VerbForm": "Conv"
+          },
+          "dep": "advmod:mode",
+          "headStart": 18
+        },
+        {
+          "start": 29,
+          "end": 30,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 18
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 30,
+          "text": "Az üzlet 19 óráig tart nyitva."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "ambiguous",
+    "text": "A kutató 9 óráig dolgozott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 17
+        },
+        {
+          "start": 9,
+          "end": 10,
+          "text": "9",
+          "lemma": "9",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 11
+        },
+        {
+          "start": 11,
+          "end": 16,
+          "text": "óráig",
+          "lemma": "óra",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ter",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 26,
+          "text": "dolgozott",
+          "lemma": "dolgozik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 17
+        },
+        {
+          "start": 26,
+          "end": 27,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 17
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "text": "A kutató 9 óráig dolgozott."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "weeks",
+    "text": "A kutató négy héten át dolgozott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 23
+        },
+        {
+          "start": 9,
+          "end": 13,
+          "text": "négy",
+          "lemma": "négy",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 14
+        },
+        {
+          "start": 14,
+          "end": 19,
+          "text": "héten",
+          "lemma": "hét",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 23
+        },
+        {
+          "start": 20,
+          "end": 22,
+          "text": "át",
+          "lemma": "át",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 14
+        },
+        {
+          "start": 23,
+          "end": 32,
+          "text": "dolgozott",
+          "lemma": "dolgozik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 23
+        },
+        {
+          "start": 32,
+          "end": 33,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 23
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 33,
+          "text": "A kutató négy héten át dolgozott."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "days",
+    "text": "A kutató három napon keresztül dolgozott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 31
+        },
+        {
+          "start": 9,
+          "end": 14,
+          "text": "három",
+          "lemma": "három",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 15
+        },
+        {
+          "start": 15,
+          "end": 20,
+          "text": "napon",
+          "lemma": "nap",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 31
+        },
+        {
+          "start": 21,
+          "end": 30,
+          "text": "keresztül",
+          "lemma": "keresztül",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 15
+        },
+        {
+          "start": 31,
+          "end": 40,
+          "text": "dolgozott",
+          "lemma": "dolgozik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 31
+        },
+        {
+          "start": 40,
+          "end": 41,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 31
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 41,
+          "text": "A kutató három napon keresztül dolgozott."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "hours",
+    "text": "A kutató négy órán át dolgozott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 22
+        },
+        {
+          "start": 9,
+          "end": 13,
+          "text": "négy",
+          "lemma": "négy",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 14
+        },
+        {
+          "start": 14,
+          "end": 18,
+          "text": "órán",
+          "lemma": "óra",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 22
+        },
+        {
+          "start": 19,
+          "end": 21,
+          "text": "át",
+          "lemma": "át",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 14
+        },
+        {
+          "start": 22,
+          "end": 31,
+          "text": "dolgozott",
+          "lemma": "dolgozik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 22
+        },
+        {
+          "start": 31,
+          "end": 32,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 22
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 32,
+          "text": "A kutató négy órán át dolgozott."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "minutes",
+    "text": "A kutató 75 percig dolgozott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 19
+        },
+        {
+          "start": 9,
+          "end": 11,
+          "text": "75",
+          "lemma": "75",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 12
+        },
+        {
+          "start": 12,
+          "end": 18,
+          "text": "percig",
+          "lemma": "perc",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ter",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 19
+        },
+        {
+          "start": 19,
+          "end": 28,
+          "text": "dolgozott",
+          "lemma": "dolgozik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 19
+        },
+        {
+          "start": 28,
+          "end": 29,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 19
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 29,
+          "text": "A kutató 75 percig dolgozott."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "ordinal",
+    "text": "A versenyző a 4. fordulóban kiesett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "versenyző",
+          "lemma": "versenyző",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 28
+        },
+        {
+          "start": 12,
+          "end": 13,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 17
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "text": "4.",
+          "lemma": "4.",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 27,
+          "text": "fordulóban",
+          "lemma": "forduló",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ine",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 28
+        },
+        {
+          "start": 28,
+          "end": 35,
+          "text": "kiesett",
+          "lemma": "kiesik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 28
+        },
+        {
+          "start": 35,
+          "end": 36,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 28
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "text": "A versenyző a 4. fordulóban kiesett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "district",
+    "text": "A kutató a 3. kerületben dolgozott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 25
+        },
+        {
+          "start": 9,
+          "end": 10,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 14
+        },
+        {
+          "start": 11,
+          "end": 13,
+          "text": "3.",
+          "lemma": "3.",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 14
+        },
+        {
+          "start": 14,
+          "end": 24,
+          "text": "kerületben",
+          "lemma": "kerület",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ine",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 25
+        },
+        {
+          "start": 25,
+          "end": 34,
+          "text": "dolgozott",
+          "lemma": "dolgozik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 25
+        },
+        {
+          "start": 34,
+          "end": 35,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 25
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 35,
+          "text": "A kutató a 3. kerületben dolgozott."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "rank",
+    "text": "A versenyző negyedik helyen végzett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "versenyző",
+          "lemma": "versenyző",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 28
+        },
+        {
+          "start": 12,
+          "end": 20,
+          "text": "negyedik",
+          "lemma": "negyedik",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 21
+        },
+        {
+          "start": 21,
+          "end": 27,
+          "text": "helyen",
+          "lemma": "hely",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 28
+        },
+        {
+          "start": 28,
+          "end": 35,
+          "text": "végzett",
+          "lemma": "végez",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 28
+        },
+        {
+          "start": 35,
+          "end": 36,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 28
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "text": "A versenyző negyedik helyen végzett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "rankobj",
+    "text": "A versenyző a 4. helyet szerezte meg.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "versenyző",
+          "lemma": "versenyző",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 24
+        },
+        {
+          "start": 12,
+          "end": 13,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 17
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "text": "4.",
+          "lemma": "4.",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 17
+        },
+        {
+          "start": 17,
+          "end": 23,
+          "text": "helyet",
+          "lemma": "hely",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj",
+          "headStart": 24
+        },
+        {
+          "start": 24,
+          "end": 32,
+          "text": "szerezte",
+          "lemma": "szerez",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 24
+        },
+        {
+          "start": 33,
+          "end": 36,
+          "text": "meg",
+          "lemma": "meg",
+          "pos": "PART",
+          "morph": {},
+          "dep": "compound:preverb",
+          "headStart": 24
+        },
+        {
+          "start": 36,
+          "end": 37,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 24
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 37,
+          "text": "A versenyző a 4. helyet szerezte meg."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "became",
+    "text": "A versenyző harmadik lett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "versenyző",
+          "lemma": "versenyző",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 12
+        },
+        {
+          "start": 12,
+          "end": 20,
+          "text": "harmadik",
+          "lemma": "harmadik",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "ROOT",
+          "headStart": 12
+        },
+        {
+          "start": 21,
+          "end": 25,
+          "text": "lett",
+          "lemma": "lesz",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "cop",
+          "headStart": 12
+        },
+        {
+          "start": 25,
+          "end": 26,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 12
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 26,
+          "text": "A versenyző harmadik lett."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "mixed",
+    "text": "A kutató 2027. november 9-én 19 órakor háromórás ülést tartott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 55
+        },
+        {
+          "start": 9,
+          "end": 14,
+          "text": "2027.",
+          "lemma": "2027.",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Ord",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 15
+        },
+        {
+          "start": 15,
+          "end": 23,
+          "text": "november",
+          "lemma": "november",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 24
+        },
+        {
+          "start": 24,
+          "end": 28,
+          "text": "9-én",
+          "lemma": "9.",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 55
+        },
+        {
+          "start": 29,
+          "end": 31,
+          "text": "19",
+          "lemma": "19",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          },
+          "dep": "nummod",
+          "headStart": 32
+        },
+        {
+          "start": 32,
+          "end": 38,
+          "text": "órakor",
+          "lemma": "óra",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Tem",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 55
+        },
+        {
+          "start": 39,
+          "end": 48,
+          "text": "háromórás",
+          "lemma": "háromórás",
+          "pos": "ADJ",
+          "morph": {
+            "Case": "Nom",
+            "Degree": "Pos",
+            "Number": "Sing"
+          },
+          "dep": "amod:att",
+          "headStart": 49
+        },
+        {
+          "start": 49,
+          "end": 54,
+          "text": "ülést",
+          "lemma": "ülés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          },
+          "dep": "obj:lvc",
+          "headStart": 55
+        },
+        {
+          "start": 55,
+          "end": 62,
+          "text": "tartott",
+          "lemma": "tart",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 55
+        },
+        {
+          "start": 62,
+          "end": 63,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 55
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 63,
+          "text": "A kutató 2027. november 9-én 19 órakor háromórás ülést tartott."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "contrast",
+    "text": "A minisztérium szerint nem november 9-én, hanem november 11-én lép életbe a rendelet.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 14,
+          "text": "minisztérium",
+          "lemma": "minisztérium",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 63
+        },
+        {
+          "start": 15,
+          "end": 22,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 2
+        },
+        {
+          "start": 23,
+          "end": 26,
+          "text": "nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          },
+          "dep": "advmod",
+          "headStart": 63
+        },
+        {
+          "start": 27,
+          "end": 35,
+          "text": "november",
+          "lemma": "november",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 36
+        },
+        {
+          "start": 36,
+          "end": 40,
+          "text": "9-én",
+          "lemma": "9.",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 63
+        },
+        {
+          "start": 40,
+          "end": 41,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 63
+        },
+        {
+          "start": 42,
+          "end": 47,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {},
+          "dep": "cc",
+          "headStart": 63
+        },
+        {
+          "start": 48,
+          "end": 56,
+          "text": "november",
+          "lemma": "november",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 57
+        },
+        {
+          "start": 57,
+          "end": 62,
+          "text": "11-én",
+          "lemma": "11.",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 63
+        },
+        {
+          "start": 63,
+          "end": 66,
+          "text": "lép",
+          "lemma": "lép",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 63
+        },
+        {
+          "start": 67,
+          "end": 73,
+          "text": "életbe",
+          "lemma": "élet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ill",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 63
+        },
+        {
+          "start": 74,
+          "end": 75,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 76
+        },
+        {
+          "start": 76,
+          "end": 84,
+          "text": "rendelet",
+          "lemma": "rendelet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 63
+        },
+        {
+          "start": 84,
+          "end": 85,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 63
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 85,
+          "text": "A minisztérium szerint nem november 9-én, hanem november 11-én lép életbe a rendelet."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "attribution",
+    "text": "A lap szerint a minisztérium közölte, hogy a kutató november 9-én érkezett.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 2
+        },
+        {
+          "start": 2,
+          "end": 5,
+          "text": "lap",
+          "lemma": "lap",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "obl",
+          "headStart": 29
+        },
+        {
+          "start": 6,
+          "end": 13,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {},
+          "dep": "case",
+          "headStart": 2
+        },
+        {
+          "start": 14,
+          "end": 15,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 16
+        },
+        {
+          "start": 16,
+          "end": 28,
+          "text": "minisztérium",
+          "lemma": "minisztérium",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nsubj",
+          "headStart": 29
+        },
+        {
+          "start": 29,
+          "end": 36,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ROOT",
+          "headStart": 29
+        },
+        {
+          "start": 36,
+          "end": 37,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 66
+        },
+        {
+          "start": 38,
+          "end": 42,
+          "text": "hogy",
+          "lemma": "hogy",
+          "pos": "SCONJ",
+          "morph": {},
+          "dep": "mark",
+          "headStart": 66
+        },
+        {
+          "start": 43,
+          "end": 44,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          },
+          "dep": "det",
+          "headStart": 45
+        },
+        {
+          "start": 45,
+          "end": 51,
+          "text": "kutató",
+          "lemma": "kutató",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 61
+        },
+        {
+          "start": 52,
+          "end": 60,
+          "text": "november",
+          "lemma": "november",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          },
+          "dep": "nmod:att",
+          "headStart": 61
+        },
+        {
+          "start": 61,
+          "end": 65,
+          "text": "9-én",
+          "lemma": "9.",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Sup",
+            "Number": "Sing",
+            "Number[psor]": "Sing",
+            "Person[psor]": "3"
+          },
+          "dep": "obl",
+          "headStart": 66
+        },
+        {
+          "start": 66,
+          "end": 74,
+          "text": "érkezett",
+          "lemma": "érkezik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          },
+          "dep": "ccomp:obj",
+          "headStart": 29
+        },
+        {
+          "start": 74,
+          "end": 75,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {},
+          "dep": "punct",
+          "headStart": 29
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 75,
+          "text": "A lap szerint a minisztérium közölte, hogy a kutató november 9-én érkezett."
+        }
+      ],
+      "entities": []
+    }
+  }
+]

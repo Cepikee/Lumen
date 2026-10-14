@@ -1,0 +1,731 @@
+{
+  "id": "A",
+  "raw": "Boros Katalin a külképviseletek vezetőinek kiosztotta a lezárt szavazási csomagokat, majd személyesen ellenőrizte a pecséteket. A választási iroda hirdetménye úgy rendelkezik, hogy igazolt akadályoztatás esetén minimum 48 órával meghosszabbítható az átvétel. A végleges névsort 2032. április 9-én tették borítékba, az összeállító nevét azonban nem tüntették fel.",
+  "rawSha256": "a28752533a2c350c4f83c4a1497727c5934cab5420ba2a524bbceeaaab4ee17b",
+  "annotationSha256": "1fc000e6ed3f2913d9161723d507127a4dfb0b1e52f35454eb6827b3b9fda243",
+  "sentenceCount": 3,
+  "tokenCount": 52,
+  "environmentFingerprint": "143242eddc17f94ea729a1b430c5eac9d5e47dd7d27b5ebdd29c7c6961882f47",
+  "model": {
+    "type": "ready",
+    "model": "hu_core_news_md",
+    "version": "3.8.0",
+    "loadMs": 1160.3809050000002
+  },
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 5,
+        "text": "Boros",
+        "lemma": "Boros",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 43
+      },
+      {
+        "start": 6,
+        "end": 13,
+        "text": "Katalin",
+        "lemma": "Katalin",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 0
+      },
+      {
+        "start": 14,
+        "end": 15,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 16
+      },
+      {
+        "start": 16,
+        "end": 31,
+        "text": "külképviseletek",
+        "lemma": "külképviselet",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur"
+        },
+        "dep": "nmod:att",
+        "headStart": 32
+      },
+      {
+        "start": 32,
+        "end": 42,
+        "text": "vezetőinek",
+        "lemma": "vezető",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Plur",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obj:lvc",
+        "headStart": 43
+      },
+      {
+        "start": 43,
+        "end": 53,
+        "text": "kiosztotta",
+        "lemma": "kioszt",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 43
+      },
+      {
+        "start": 54,
+        "end": 55,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 73
+      },
+      {
+        "start": 56,
+        "end": 62,
+        "text": "lezárt",
+        "lemma": "lezárt",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 73
+      },
+      {
+        "start": 63,
+        "end": 72,
+        "text": "szavazási",
+        "lemma": "szavazási",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 73
+      },
+      {
+        "start": 73,
+        "end": 83,
+        "text": "csomagokat",
+        "lemma": "csomag",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Plur"
+        },
+        "dep": "obj",
+        "headStart": 43
+      },
+      {
+        "start": 83,
+        "end": 84,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 102
+      },
+      {
+        "start": 85,
+        "end": 89,
+        "text": "majd",
+        "lemma": "majd",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 102
+      },
+      {
+        "start": 90,
+        "end": 101,
+        "text": "személyesen",
+        "lemma": "személyes",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Ess",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "advmod:mode",
+        "headStart": 102
+      },
+      {
+        "start": 102,
+        "end": 113,
+        "text": "ellenőrizte",
+        "lemma": "ellenőriz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 43
+      },
+      {
+        "start": 114,
+        "end": 115,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 116
+      },
+      {
+        "start": 116,
+        "end": 126,
+        "text": "pecséteket",
+        "lemma": "pecsét",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Plur"
+        },
+        "dep": "obj",
+        "headStart": 102
+      },
+      {
+        "start": 126,
+        "end": 127,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 43
+      },
+      {
+        "start": 128,
+        "end": 129,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 141
+      },
+      {
+        "start": 130,
+        "end": 140,
+        "text": "választási",
+        "lemma": "választási",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 141
+      },
+      {
+        "start": 141,
+        "end": 146,
+        "text": "iroda",
+        "lemma": "iroda",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 147
+      },
+      {
+        "start": 147,
+        "end": 158,
+        "text": "hirdetménye",
+        "lemma": "hirdetmény",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 163
+      },
+      {
+        "start": 159,
+        "end": 162,
+        "text": "úgy",
+        "lemma": "úgy",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Dem"
+        },
+        "dep": "advmod:mode",
+        "headStart": 163
+      },
+      {
+        "start": 163,
+        "end": 174,
+        "text": "rendelkezik",
+        "lemma": "rendelkezik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 163
+      },
+      {
+        "start": 174,
+        "end": 175,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 229
+      },
+      {
+        "start": 176,
+        "end": 180,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 229
+      },
+      {
+        "start": 181,
+        "end": 188,
+        "text": "igazolt",
+        "lemma": "igazolt",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "VerbForm": "PartPast"
+        },
+        "dep": "amod:att",
+        "headStart": 189
+      },
+      {
+        "start": 189,
+        "end": 203,
+        "text": "akadályoztatás",
+        "lemma": "akadályoztatás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 204
+      },
+      {
+        "start": 204,
+        "end": 210,
+        "text": "esetén",
+        "lemma": "eset",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 229
+      },
+      {
+        "start": 211,
+        "end": 218,
+        "text": "minimum",
+        "lemma": "minimum",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 219
+      },
+      {
+        "start": 219,
+        "end": 221,
+        "text": "48",
+        "lemma": "48",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 222
+      },
+      {
+        "start": 222,
+        "end": 228,
+        "text": "órával",
+        "lemma": "óra",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ins",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 229
+      },
+      {
+        "start": 229,
+        "end": 246,
+        "text": "meghosszabbítható",
+        "lemma": "meghosszabbítható",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "advcl",
+        "headStart": 163
+      },
+      {
+        "start": 247,
+        "end": 249,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 250
+      },
+      {
+        "start": 250,
+        "end": 257,
+        "text": "átvétel",
+        "lemma": "átvétel",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 229
+      },
+      {
+        "start": 257,
+        "end": 258,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 163
+      },
+      {
+        "start": 259,
+        "end": 260,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 270
+      },
+      {
+        "start": 261,
+        "end": 269,
+        "text": "végleges",
+        "lemma": "végleges",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 270
+      },
+      {
+        "start": 270,
+        "end": 277,
+        "text": "névsort",
+        "lemma": "névsor",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 297
+      },
+      {
+        "start": 278,
+        "end": 283,
+        "text": "2032.",
+        "lemma": "2032.",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 292
+      },
+      {
+        "start": 284,
+        "end": 291,
+        "text": "április",
+        "lemma": "április",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 292
+      },
+      {
+        "start": 292,
+        "end": 296,
+        "text": "9-én",
+        "lemma": "9.",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 297
+      },
+      {
+        "start": 297,
+        "end": 303,
+        "text": "tették",
+        "lemma": "tesz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 297
+      },
+      {
+        "start": 304,
+        "end": 313,
+        "text": "borítékba",
+        "lemma": "boríték",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ill",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 297
+      },
+      {
+        "start": 313,
+        "end": 314,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 348
+      },
+      {
+        "start": 315,
+        "end": 317,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 318
+      },
+      {
+        "start": 318,
+        "end": 329,
+        "text": "összeállító",
+        "lemma": "összeállító",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 330
+      },
+      {
+        "start": 330,
+        "end": 335,
+        "text": "nevét",
+        "lemma": "név",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obj",
+        "headStart": 348
+      },
+      {
+        "start": 336,
+        "end": 343,
+        "text": "azonban",
+        "lemma": "azonban",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 348
+      },
+      {
+        "start": 344,
+        "end": 347,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 348
+      },
+      {
+        "start": 348,
+        "end": 357,
+        "text": "tüntették",
+        "lemma": "tüntet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 297
+      },
+      {
+        "start": 358,
+        "end": 361,
+        "text": "fel",
+        "lemma": "fel",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 348
+      },
+      {
+        "start": 361,
+        "end": 362,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 297
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 127,
+        "text": "Boros Katalin a külképviseletek vezetőinek kiosztotta a lezárt szavazási csomagokat, majd személyesen ellenőrizte a pecséteket."
+      },
+      {
+        "start": 128,
+        "end": 258,
+        "text": "A választási iroda hirdetménye úgy rendelkezik, hogy igazolt akadályoztatás esetén minimum 48 órával meghosszabbítható az átvétel."
+      },
+      {
+        "start": 259,
+        "end": 362,
+        "text": "A végleges névsort 2032. április 9-én tették borítékba, az összeállító nevét azonban nem tüntették fel."
+      }
+    ],
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "text": "Boros Katalin",
+        "label": "PER"
+      }
+    ]
+  }
+}

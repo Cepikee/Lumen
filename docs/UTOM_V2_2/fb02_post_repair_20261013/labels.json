@@ -1,0 +1,1825 @@
+{
+  "kind": "POST_REPAIR_NOT_BLIND",
+  "items": [
+    {
+      "id": "A1",
+      "snippet": "A",
+      "dimension": "actor",
+      "gold": "RESOLVE",
+      "expectation": "A halasztás indokolója Takács Réka, nem a frakciók.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "actorStatus resolved, actor Takács Réka, action indokol.",
+      "rawRefs": [
+        "/rows/0/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/0/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "A2",
+      "snippet": "A",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "Az idézet forrása Takács Réka; a frakciók címzettek.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "No attribution chain or source; the named actor does not establish the quote/source/recipient relationship.",
+      "rawRefs": [
+        "/rows/0/output/frames/0",
+        "/rows/0/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/0/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "A3",
+      "snippet": "A",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "A napirendre tűzés tagadott; az indokolás nem tagadott.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Multiple predicates collapsed into tart; polarity unresolved/nested_negation_scope, no separate negated tűz frame.",
+      "rawRefs": [
+        "/rows/0/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/0/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "A4",
+      "snippet": "A",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "Az összefoglaló forrása a parlament sajtóirodája, nem az összefoglaló mint entitás.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "source null, no nominal relation; possessor roles alone do not identify attribution.",
+      "rawRefs": [
+        "/rows/0/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/0/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "A5",
+      "snippet": "A",
+      "dimension": "temporal",
+      "gold": "RESOLVE",
+      "expectation": "2028 tavasza a voksolás legkorábbi lehetséges ideje, nem megtörtént szavazás.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "2028 unknown/unresolved; possible preserved but spring and earliest-time role absent.",
+      "rawRefs": [
+        "/rows/0/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/0/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "A6",
+      "snippet": "A",
+      "dimension": "modality/scope",
+      "gold": "RESOLVE",
+      "expectation": "Az amíg feltétel az idézett napirendre tűzésre korlátozódik.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "conditionality false; quoted frame unresolved and no amíg antecedent relation.",
+      "rawRefs": [
+        "/rows/0/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/0/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "B1",
+      "snippet": "B",
+      "dimension": "actor",
+      "gold": "RESOLVE",
+      "expectation": "Az átadó Barta Júlia; a jegyző címzett.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "átad actor unresolved despite PERSON entity; no recipient slot.",
+      "rawRefs": [
+        "/rows/1/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/1/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "B2",
+      "snippet": "B",
+      "dimension": "entity boundary",
+      "gold": "RESOLVE",
+      "expectation": "Barta Júlia személy; főépítész szerep nem része a személynévnek.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "entities contains exactly Barta Júlia as person, excludes főépítész.",
+      "rawRefs": [
+        "/rows/1/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/1/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "B3",
+      "snippet": "B",
+      "dimension": "ordinal/rank",
+      "gold": "RESOLVE",
+      "expectation": "A kilencedik kerület közigazgatási azonosító, nem versenyhelyezés.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "No kilencedik kerület numeric ordinal; ambiguous contrast suppresses branch.",
+      "rawRefs": [
+        "/rows/1/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/1/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "B4",
+      "snippet": "B",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "Az elhelyezés tárgya ivókutak; padok elvetett alternatíva.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "contrast unresolved; object candidates are not accepted/rejected resolved roles.",
+      "rawRefs": [
+        "/rows/1/output/frames/1",
+        "/rows/1/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/1/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "B5",
+      "snippet": "B",
+      "dimension": "modality/scope",
+      "gold": "RESOLVE",
+      "expectation": "Az ivókutak elhelyezése feltételes, nem végrehajtott.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "helyez conditional with a separate ha antecedent frame and trigger; no asserted execution.",
+      "rawRefs": [
+        "/rows/1/output/frames/1",
+        "/rows/1/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/1/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "B6",
+      "snippet": "B",
+      "dimension": "ordinal/rank",
+      "gold": "RESOLVE",
+      "expectation": "Első ütem szakasz, nem a játszótér helyezése.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "ordinal 1 owner ütem; not placement/person.",
+      "rawRefs": [
+        "/rows/1/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/1/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "C1",
+      "snippet": "C",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "A mérlegelés forrása az exportőrök szövetsége.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "nominal relation resolves exportőrök szövetségének as source distinct from mérlegelése.",
+      "rawRefs": [
+        "/rows/2/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/2/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "C2",
+      "snippet": "C",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "8 milliárd euró a megrendelésérték lehetséges alsó küszöbe; nem egyenlőség.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "greater_than from the connected governing predicate; possible retained, EUR value unchanged; unconditional equality forbidden.",
+      "rawRefs": [
+        "/rows/2/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/2/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "C3",
+      "snippet": "C",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "31 százalék a hajógyártók részesedése, nem növekedési mérték.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "31% unresolved without owner or share role.",
+      "rawRefs": [
+        "/rows/2/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/2/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "C4",
+      "snippet": "C",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "6 százalék relatív exportnövekedés, nem abszolút exportérték.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Instrumental percentage attached to bővül now carries change_magnitude/increase; not resulting level or equality.",
+      "rawRefs": [
+        "/rows/2/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/2/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "C5",
+      "snippet": "C",
+      "dimension": "temporal",
+      "gold": "RESOLVE",
+      "expectation": "2027 február 18 a közzététel dátuma.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "calendar_date {2027,2,18} resolved on történik publication frame.",
+      "rawRefs": [
+        "/rows/2/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/2/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "C6",
+      "snippet": "C",
+      "dimension": "temporal",
+      "gold": "RESOLVE",
+      "expectation": "14 óra ugyanennek a közzétételnek az időpontja.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "clock_time {14,0} resolved on same publication frame.",
+      "rawRefs": [
+        "/rows/2/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/2/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "D1",
+      "snippet": "D",
+      "dimension": "entity boundary",
+      "gold": "RESOLVE",
+      "expectation": "Borostyán Csomagoló Központ egy szervezetnév; üzemvezetője nem a cégnév része.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "organization entity full name excludes üzemvezetője.",
+      "rawRefs": [
+        "/rows/3/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/3/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "D2",
+      "snippet": "D",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "A jelzés forrása az üzemvezető, címzettjei a dolgozók.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "jelez not recognized as reporting; source and recipient null.",
+      "rawRefs": [
+        "/rows/3/output/frames/0",
+        "/rows/3/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/3/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "D3",
+      "snippet": "D",
+      "dimension": "actor",
+      "gold": "UNRESOLVED",
+      "expectation": "A műszak megszüntetésének végrehajtója implicit, nem oldható fel név szerint.",
+      "label": "CORRECT_UNRESOLVED",
+      "reason": "megszüntet actor null, no positive person recovery.",
+      "rawRefs": [
+        "/rows/3/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/3/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_UNRESOLVED"
+    },
+    {
+      "id": "D4",
+      "snippet": "D",
+      "dimension": "attribution",
+      "gold": "UNRESOLVED",
+      "expectation": "A feljegyzés szerzője nincs megadva; nem maga a feljegyzés a személyforrás.",
+      "label": "CORRECT_UNRESOLVED",
+      "reason": "bare feljegyzés source null with source_bearing_possessor_unproven.",
+      "rawRefs": [
+        "/rows/3/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/3/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_UNRESOLVED"
+    },
+    {
+      "id": "D5",
+      "snippet": "D",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "73 érintett munkakör, nem 73 végrehajtott elbocsátás.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "73 count owner munkakör on érint frame, not performed layoffs.",
+      "rawRefs": [
+        "/rows/3/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/3/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "D6",
+      "snippet": "D",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "A tulajdonosi jóváhagyás tagadott, nem a 73 munkakör létezése.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "hagy polarity denied; 73-count frame asserted separately.",
+      "rawRefs": [
+        "/rows/3/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/3/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "E1",
+      "snippet": "E",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "A fogyasztási adat forrása a hálózatirányító, nem a tájékoztatás.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "source hálózatirányító resolved with separate tájékoztatása nominal relation.",
+      "rawRefs": [
+        "/rows/4/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/4/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "E2",
+      "snippet": "E",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "16 köbméter óránként fogyasztási ráta, generátorokhoz kötve.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "compound köbméter/hour preserved but attachment unresolved; no generator owner.",
+      "rawRefs": [
+        "/rows/4/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/4/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "E3",
+      "snippet": "E",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "11 óra felső időtartamkorlát és lehetőség, nem tényleges üzemidő.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "duration 11 hour resolved, less_or_equal and possible; no unconditional equality.",
+      "rawRefs": [
+        "/rows/4/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/4/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "E4",
+      "snippet": "E",
+      "dimension": "modality/scope",
+      "gold": "RESOLVE",
+      "expectation": "A tárolós ellátás feltétele szélcsend; nem vonatkozik a próbára.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Szélcsend esetén retained as exact nominal-condition evidence; possible plus less_or_equal retained on same 11-hour argument.",
+      "rawRefs": [
+        "/rows/4/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/4/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "E5",
+      "snippet": "E",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "A feszültség 228 V elfogadott, 230 V elvetett; mérés pozitív.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "volt homograph/contrast unresolved, neither alternative resolved.",
+      "rawRefs": [
+        "/rows/4/output/frames/2",
+        "/rows/4/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/4/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "E6",
+      "snippet": "E",
+      "dimension": "actor",
+      "gold": "RESOLVE",
+      "expectation": "A fogyasztók a generátorok; nem a hálózatirányító.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "fogyaszt actor null; generators not recovered.",
+      "rawRefs": [
+        "/rows/4/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/4/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "F1",
+      "snippet": "F",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "Az idézett állítás eredeti forrása kikötőmester, közvetítője a révüzem szóvivője.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Quote source identifies intermediary révüzem szóvivője only; kikötőmester original-message layer missing.",
+      "rawRefs": [
+        "/rows/5/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/5/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "F2",
+      "snippet": "F",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "Az indulás tagadott, a szóvivő írása nem tagadott.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "indul denied; no negation on reporting verb ír.",
+      "rawRefs": [
+        "/rows/5/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/5/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "F3",
+      "snippet": "F",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "85 kerékpár befogadóképesség; nem aznap szállított darabszám.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "85 unresolved, no capacity role; no positive actual count promoted.",
+      "rawRefs": [
+        "/rows/5/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/5/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "F4",
+      "snippet": "F",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "19 bicikli a mai tényleges szállítmány.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "19 count owner biciklit resolved on ma/szállít frame.",
+      "rawRefs": [
+        "/rows/5/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/5/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "F5",
+      "snippet": "F",
+      "dimension": "temporal",
+      "gold": "RESOLVE",
+      "expectation": "Október 22 06:40 a beszállás kezdete; év ismeretlen.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Oct 22 year null and 06:40 resolved on megkezd/beszállás.",
+      "rawRefs": [
+        "/rows/5/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/5/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "F6",
+      "snippet": "F",
+      "dimension": "modality/scope",
+      "gold": "RESOLVE",
+      "expectation": "Az indulási tilalom a köd feloszlásáig tart.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Quoted text retained but no temporal boundary for fog clearing.",
+      "rawRefs": [
+        "/rows/5/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/5/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "G1",
+      "snippet": "G",
+      "dimension": "actor",
+      "gold": "RESOLVE",
+      "expectation": "A csomagátvevők helyszínelők, a bérlő az átadó.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "átvesz actor null; helyszínelők not bound.",
+      "rawRefs": [
+        "/rows/6/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/6/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "G2",
+      "snippet": "G",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "14 átvett csomag; nem a teljes készlet.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "14 isolated unknown/unresolved; intervening lezárt blocks unit attachment.",
+      "rawRefs": [
+        "/rows/6/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/6/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "G3",
+      "snippet": "G",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "A tagadó idézet forrása Fekete Dóra, nem a kereskedő.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "pontosít no reporting source/quote chain, Fekete Dóra entity alone insufficient.",
+      "rawRefs": [
+        "/rows/6/output/frames/1",
+        "/rows/6/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/6/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "G4",
+      "snippet": "G",
+      "dimension": "entity boundary",
+      "gold": "RESOLVE",
+      "expectation": "Fekete Dóra személynév; rendőr őrnagy külön cím.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Fekete Dóra one person span without title.",
+      "rawRefs": [
+        "/rows/6/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/6/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "G5",
+      "snippet": "G",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "A kihallgatás tárgya alkalmazott; tulajdonos elvetett, nem tagadott a kihallgatás.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "object contrast unresolved; no accepted employee or rejected owner representation.",
+      "rawRefs": [
+        "/rows/6/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/6/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "G6",
+      "snippet": "G",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "A cáfolat forrása ügyészség; nem a cáfolat névszói fej.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "No source or reporting nominal relation for cáfolata.",
+      "rawRefs": [
+        "/rows/6/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/6/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "H1",
+      "snippet": "H",
+      "dimension": "actor",
+      "gold": "RESOLVE",
+      "expectation": "Az ajtónyitók a buszvezető segítői, nem a buszvezető.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "kinyit actor null; neither helpers nor possessor falsely promoted.",
+      "rawRefs": [
+        "/rows/7/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/7/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "H2",
+      "snippet": "H",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "A sérülésadat forrása mentésirányítás.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "közlése relation exists but possessor unproven; source null.",
+      "rawRefs": [
+        "/rows/7/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/7/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "H3",
+      "snippet": "H",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "Legalább 5 sérült alsó korlát, nem pontos öt.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "5 utas resolved with greater_or_equal and unconditionalEqualityAllowed false.",
+      "rawRefs": [
+        "/rows/7/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/7/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "H4",
+      "snippet": "H",
+      "dimension": "temporal",
+      "gold": "RESOLVE",
+      "expectation": "40 perc a forgalomleállítás időtartama.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "40 minute duration typed but attachment unresolved.",
+      "rawRefs": [
+        "/rows/7/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/7/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "H5",
+      "snippet": "H",
+      "dimension": "actor",
+      "gold": "UNRESOLVED",
+      "expectation": "A forgalmat leállító szereplő nincs kimondva.",
+      "label": "CORRECT_UNRESOLVED",
+      "reason": "leállít actor null.",
+      "rawRefs": [
+        "/rows/7/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/7/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_UNRESOLVED"
+    },
+    {
+      "id": "H6",
+      "snippet": "H",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "A helikopterkérés tagadott; a forgalomleállítás pozitív.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "kér helikoptert denied; leállít polarity asserted.",
+      "rawRefs": [
+        "/rows/7/output/frames/3",
+        "/rows/7/output/frames/4"
+      ],
+      "snippetRawRef": "/rows/7/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "I1",
+      "snippet": "I",
+      "dimension": "ordinal/rank",
+      "gold": "RESOLVE",
+      "expectation": "Második forduló versenyszakasz, nem Lilla helyezése.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "2 ordinal owner fordulójából, not Sipos Lilla placement.",
+      "rawRefs": [
+        "/rows/8/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/8/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "I2",
+      "snippet": "I",
+      "dimension": "ordinal/rank",
+      "gold": "RESOLVE",
+      "expectation": "Sipos Lilla harmadik befutó.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "harmadikként not extracted, relative actor unresolved.",
+      "rawRefs": [
+        "/rows/8/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/8/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "I3",
+      "snippet": "I",
+      "dimension": "ordinal/rank",
+      "gold": "RESOLVE",
+      "expectation": "Negyedik hely a váltó helyezése, nem ismert egyéni versenyzőé.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "4 placement recognized but rank_owner_unproven.",
+      "rawRefs": [
+        "/rows/8/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/8/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "I4",
+      "snippet": "I",
+      "dimension": "ordinal/rank",
+      "gold": "UNRESOLVED",
+      "expectation": "A Második lett idézet alanya nem azonosítható biztosan.",
+      "label": "CORRECT_UNRESOLVED",
+      "reason": "Második ordinal unresolved, no inferred ranked person.",
+      "rawRefs": [
+        "/rows/8/output/frames/4"
+      ],
+      "snippetRawRef": "/rows/8/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_UNRESOLVED"
+    },
+    {
+      "id": "I5",
+      "snippet": "I",
+      "dimension": "actor",
+      "gold": "RESOLVE",
+      "expectation": "A döntőbe jutó Sipos Lilla.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Sipos Lilla resolved actor of jut.",
+      "rawRefs": [
+        "/rows/8/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/8/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "I6",
+      "snippet": "I",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "A záró idézet forrása csapatvezető.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "csapatvezető quote source in recovered chain.",
+      "rawRefs": [
+        "/rows/8/output/frames/4"
+      ],
+      "snippetRawRef": "/rows/8/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "J1",
+      "snippet": "J",
+      "dimension": "entity boundary",
+      "gold": "RESOLVE",
+      "expectation": "Szabad Adathálózat Egyesület egy szervezet, kutatója külön szerep.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Full organization entity; kutatója not included in entity name.",
+      "rawRefs": [
+        "/rows/9/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/9/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "J2",
+      "snippet": "J",
+      "dimension": "actor",
+      "gold": "RESOLVE",
+      "expectation": "A bemutató a kutató, nem a felügyelet.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "actorStatus resolved kutatója; felügyelet not actor. Frame-wide unresolved flag does not erase actor slot.",
+      "rawRefs": [
+        "/rows/9/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/9/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "J3",
+      "snippet": "J",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "A jegyzőkönyv forrása labor, nem jegyzőkönyve.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "jegyzőkönyve source null; no labor attribution.",
+      "rawRefs": [
+        "/rows/9/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/9/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "J4",
+      "snippet": "J",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "1,8 gigabit másodpercenként kapcsolati ráta, nem egyszerű adatmennyiség.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "compound gigabit/second preserved but binding unresolved.",
+      "rawRefs": [
+        "/rows/9/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/9/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "J5",
+      "snippet": "J",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "12–18 milliszekundum a késleltetés tartománya, nem két egyenlőségi mérés.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "12 and 18 now share range qualifier and both abstain. Safety repaired; complete resolved millisecond target remains missing.",
+      "rawRefs": [
+        "/rows/9/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/9/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "J6",
+      "snippet": "J",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "Az azonosság tagadott; a sebességérték nincs tagadva.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "No azonos proposition; polarity unresolved because predicate absent.",
+      "rawRefs": [
+        "/rows/9/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/9/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "K1",
+      "snippet": "K",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "A felvételi előrejelzés forrása járványügyi központ.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Nominal source központ attached to condition frame only; numeric admission proposition source null. Abbreviated source head alone is not counted as wrong identity.",
+      "rawRefs": [
+        "/rows/10/output/frames/0",
+        "/rows/10/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/10/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "K2",
+      "snippet": "K",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "46 beteg naponta feltételes lehetséges felvétel, nem megtörtént összes felvétel.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "per-day compound candidate retains possibility and condition, but attachment unresolved.",
+      "rawRefs": [
+        "/rows/10/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/10/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "K3",
+      "snippet": "K",
+      "dimension": "modality/scope",
+      "gold": "RESOLVE",
+      "expectation": "A felvétel függ a fertőzésszám növekedésétől.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "conditionAntecedent and conditionality link increased infections to admission clause.",
+      "rawRefs": [
+        "/rows/10/output/frames/0",
+        "/rows/10/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/10/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "K4",
+      "snippet": "K",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "A bezárás visszautasított állítás; nem tényleges pozitív bezárás.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Counterfactual volna retained, but no explicit rejected-report link from visszautasít to bezár. No fully resolved positive closure claim.",
+      "rawRefs": [
+        "/rows/10/output/frames/2",
+        "/rows/10/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/10/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "K5",
+      "snippet": "K",
+      "dimension": "actor",
+      "gold": "RESOLVE",
+      "expectation": "A vizsgálógépet kórház kapta meg.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "megkap actor null.",
+      "rawRefs": [
+        "/rows/10/output/frames/4"
+      ],
+      "snippetRawRef": "/rows/10/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "K6",
+      "snippet": "K",
+      "dimension": "modality/scope",
+      "gold": "RESOLVE",
+      "expectation": "A keddi gépátvétel nem örökli az első mondat feltételességét.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Independent receipt clause asserted/conditionality false, no leaked antecedent.",
+      "rawRefs": [
+        "/rows/10/output/frames/4"
+      ],
+      "snippetRawRef": "/rows/10/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "L1",
+      "snippet": "L",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "A kérés forrása tankerület, a levél felolvasója igazgatóhelyettes.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "No attribution source/chain for tankerület request; original gold wording ambiguity noted separately.",
+      "rawRefs": [
+        "/rows/11/output/frames/0",
+        "/rows/11/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/11/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "L2",
+      "snippet": "L",
+      "dimension": "temporal",
+      "gold": "RESOLVE",
+      "expectation": "Péntek jelentkezési határidő, nem a kérés dátuma.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "péntekig calendar boundary resolved on lead/jelentkezés.",
+      "rawRefs": [
+        "/rows/11/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/11/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "L3",
+      "snippet": "L",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "Ösztöndíj elfogadott 75 ezer forint/hó, elvetett 60 ezer; nem negatív ösztöndíj.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Contrast unresolved; rejected 60 and accepted 75000 not established.",
+      "rawRefs": [
+        "/rows/11/output/frames/2",
+        "/rows/11/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/11/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "L4",
+      "snippet": "L",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "75 ezer forint havonta ismétlődő összeg, nem egyszeri teljes támogatás.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "HUF/month compound preserved only as unresolved candidate.",
+      "rawRefs": [
+        "/rows/11/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/11/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "L5",
+      "snippet": "L",
+      "dimension": "modality/scope",
+      "gold": "RESOLVE",
+      "expectation": "A járandóság a jogosultság fennállásához kötött.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "No eligibility boundary/condition, frame unresolved.",
+      "rawRefs": [
+        "/rows/11/output/frames/4"
+      ],
+      "snippetRawRef": "/rows/11/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "L6",
+      "snippet": "L",
+      "dimension": "ordinal/rank",
+      "gold": "RESOLVE",
+      "expectation": "Harmadik nap tanfolyami időbeli sorszám, nem helyezés.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "3 ordinal owner napján, not rank.",
+      "rawRefs": [
+        "/rows/11/output/frames/5"
+      ],
+      "snippetRawRef": "/rows/11/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "M1",
+      "snippet": "M",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "A hajnali mérés forrása magashegyi állomás; mérései nem entitásforrás.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "mérései relation exists but source_bearing_possessor_unproven.",
+      "rawRefs": [
+        "/rows/12/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/12/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "M2",
+      "snippet": "M",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "Mínusz 7 Celsius-fok a levegő hőmérséklete.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "7 unknown/unresolved; lexical minus and Celsius not bound, no positive 7-degree measurement.",
+      "rawRefs": [
+        "/rows/12/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/12/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "M3",
+      "snippet": "M",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "2–4 fok várható negatív referenciaeltérés, nem abszolút maximumhőmérséklet.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "2–4 range unresolved with no dimension/reference; safe abstention, not a resolved absolute temperature.",
+      "rawRefs": [
+        "/rows/12/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/12/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "M4",
+      "snippet": "M",
+      "dimension": "modality/scope",
+      "gold": "RESOLVE",
+      "expectation": "A délutáni referenciaeltérés előrejelzés; nem megfigyelt érték.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Frame modalities expected; no resolved observed maximum.",
+      "rawRefs": [
+        "/rows/12/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/12/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "M5",
+      "snippet": "M",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "Várt jelenség ónos eső, havazás elvetett; a várakozás pozitív.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Object contrast unresolved; no accepted ónos eső versus rejected havazás.",
+      "rawRefs": [
+        "/rows/12/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/12/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "M6",
+      "snippet": "M",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "A várakozás közlője meteorológus.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "hangsúlyoz no source/chain.",
+      "rawRefs": [
+        "/rows/12/output/frames/2",
+        "/rows/12/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/12/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "N1",
+      "snippet": "N",
+      "dimension": "actor",
+      "gold": "UNRESOLVED",
+      "expectation": "Az elemzést végző személy nem explicit; a laboratórium hely, a kutatócsoport megbízó.",
+      "label": "CORRECT_UNRESOLVED",
+      "reason": "elemez actor null; laboratory location and commissioning group not promoted.",
+      "rawRefs": [
+        "/rows/13/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/13/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_UNRESOLVED"
+    },
+    {
+      "id": "N2",
+      "snippet": "N",
+      "dimension": "attribution",
+      "gold": "UNRESOLVED",
+      "expectation": "A mérési jelentés szerzője nincs megnevezve.",
+      "label": "CORRECT_UNRESOLVED",
+      "reason": "source null and nominal relation source_bearing_possessor_unproven.",
+      "rawRefs": [
+        "/rows/13/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/13/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_UNRESOLVED"
+    },
+    {
+      "id": "N3",
+      "snippet": "N",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "0,7 gramm közelítő kristálytömeg.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "0.7 approximately recognized but unresolved count, no mass measurement binding.",
+      "rawRefs": [
+        "/rows/13/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/13/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "N4",
+      "snippet": "N",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "9 milliméter a kristály átmérője, nem tömege.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "9 unresolved count; diameter measurement not resolved.",
+      "rawRefs": [
+        "/rows/13/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/13/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "N5",
+      "snippet": "N",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "Az elmélet bizonyítása nem pozitívan állított tény: állítja tagadott.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Explicit negated_reporting_predicate/content_under_negated_report block; polarity unresolved rather than positive proof. This safety decision is satisfied by explicit blocking evidence.",
+      "rawRefs": [
+        "/rows/13/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/13/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "N6",
+      "snippet": "N",
+      "dimension": "entity boundary",
+      "gold": "RESOLVE",
+      "expectation": "A csoport vezetője emberi szerep, nem a csoport szervezet neve.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "No leader entity/local role/source, only theory object.",
+      "rawRefs": [
+        "/rows/13/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/13/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "O1",
+      "snippet": "O",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "Az ár forrása üzletlánc árjegyzéken keresztül; nem az árjegyzék mint beszélő.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Possessor üzletlánc is the source entity; árjegyzéke retained as artifact; case/possessive/obl path links to the kerül claim. Numeric rate remains unchanged/unresolved.",
+      "rawRefs": [
+        "/rows/14/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/14/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "WRONG_RESOLVED"
+    },
+    {
+      "id": "O2",
+      "snippet": "O",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "412 forint/kg liszt egységár.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "412 HUF/kg retained as compound candidate, unresolved. No csonka money equality; resolved price/property target not added.",
+      "rawRefs": [
+        "/rows/14/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/14/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "O3",
+      "snippet": "O",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "18 százalék kedvezmény elfogadott, 15 elvetett, feltételes lehetőség megmarad.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Percent contrast unresolved; rejected value not positively resolved.",
+      "rawRefs": [
+        "/rows/14/output/frames/1",
+        "/rows/14/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/14/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "O4",
+      "snippet": "O",
+      "dimension": "modality/scope",
+      "gold": "RESOLVE",
+      "expectation": "Kedvezmény csak csomagolást visszahozóknak lehetséges.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Possible retained but eligibility relative clause not represented as condition. No resolved numeric claim.",
+      "rawRefs": [
+        "/rows/14/output/frames/2",
+        "/rows/14/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/14/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "O5",
+      "snippet": "O",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "3900 forint a kosárár alsó korlátja, nem pontos ára.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "3900 unresolved; negative comparison lower bound not structured.",
+      "rawRefs": [
+        "/rows/14/output/frames/4"
+      ],
+      "snippetRawRef": "/rows/14/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "O6",
+      "snippet": "O",
+      "dimension": "actor",
+      "gold": "UNRESOLVED",
+      "expectation": "A kedvezményt adó nyelvtani alany implicit; személyt nem lehet megnevezni.",
+      "label": "CORRECT_UNRESOLVED",
+      "reason": "adhat actor null, no person invented.",
+      "rawRefs": [
+        "/rows/14/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/14/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_UNRESOLVED"
+    },
+    {
+      "id": "P1",
+      "snippet": "P",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "Külső közlő szakszervezeti elnök, hivatkozott ígéret forrása munkáltató.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Actor elnök recovered but source/chain absent; employer promise not composed.",
+      "rawRefs": [
+        "/rows/15/output/frames/0",
+        "/rows/15/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/15/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "P2",
+      "snippet": "P",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "Fizetés nélkül maradás tagadott; fizetés elmaradás nem pozitív tény.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "marad fizetés nélkül polarity denied, no positive no-pay claim.",
+      "rawRefs": [
+        "/rows/15/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/15/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "P3",
+      "snippet": "P",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "Megszűnés éve 2031, elvetett 2029; megszűnés eseménye nem tagadott.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Date/time contrast resolved: 2029 rejected, 2031 accepted; event polarity asserted.",
+      "rawRefs": [
+        "/rows/15/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/15/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "P4",
+      "snippet": "P",
+      "dimension": "temporal",
+      "gold": "RESOLVE",
+      "expectation": "2031 a hatály megszűnésének ideje.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "2031 year accepted on megszűnik frame.",
+      "rawRefs": [
+        "/rows/15/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/15/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "P5",
+      "snippet": "P",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "Legalább 24 óra képzés belépőnként alsó korlátú kötelezettség, nem megtartott képzés.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "24 duration unresolved; minimum and required retained but per-entrant denominator absent.",
+      "rawRefs": [
+        "/rows/15/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/15/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "P6",
+      "snippet": "P",
+      "dimension": "modality/scope",
+      "gold": "RESOLVE",
+      "expectation": "Kell szervezni kötelezettség, nem megtörtént szervezés.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Required modality and governing-modal evidence on kell/szervezni.",
+      "rawRefs": [
+        "/rows/15/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/15/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "Q1",
+      "snippet": "Q",
+      "dimension": "actor",
+      "gold": "UNRESOLVED",
+      "expectation": "A leemelés két koordinált aktora közül egyetlen kizárólagos aktor nem választható.",
+      "label": "CORRECT_UNRESOLVED",
+      "reason": "Coordinated actor candidates not collapsed to single resolved actor.",
+      "rawRefs": [
+        "/rows/16/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/16/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_UNRESOLVED"
+    },
+    {
+      "id": "Q2",
+      "snippet": "Q",
+      "dimension": "actor",
+      "gold": "UNRESOLVED",
+      "expectation": "Az elszállítás implicit alanya nem egyetlen biztos név.",
+      "label": "CORRECT_UNRESOLVED",
+      "reason": "Implicit transport actor null.",
+      "rawRefs": [
+        "/rows/16/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/16/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_UNRESOLVED"
+    },
+    {
+      "id": "Q3",
+      "snippet": "Q",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "Az idézet forrása rendező, látogatók címzettek.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "kiállítás rendezője source, látogatóknak recipient, bounded quote chain.",
+      "rawRefs": [
+        "/rows/16/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/16/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "Q4",
+      "snippet": "Q",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "Keretválasztó gyűjtő, én elvetett; nem az egész választás tagadott.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Pronoun actor contrast unresolved; no accepted gyűjtő or rejected én binding.",
+      "rawRefs": [
+        "/rows/16/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/16/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "Q5",
+      "snippet": "Q",
+      "dimension": "ordinal/rank",
+      "gold": "RESOLVE",
+      "expectation": "Harmadik terem helyazonosító, nem személy helyezése.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "3 ordinal targets terem, not person rank.",
+      "rawRefs": [
+        "/rows/16/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/16/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "Q6",
+      "snippet": "Q",
+      "dimension": "ordinal/rank",
+      "gold": "UNRESOLVED",
+      "expectation": "A Második feliratból rang és rangsorolt alany nem állapítható meg.",
+      "label": "CORRECT_UNRESOLVED",
+      "reason": "Standalone Második ordinal unresolved, no ranked entity.",
+      "rawRefs": [
+        "/rows/16/output/frames/4"
+      ],
+      "snippetRawRef": "/rows/16/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_UNRESOLVED"
+    },
+    {
+      "id": "R1",
+      "snippet": "R",
+      "dimension": "actor",
+      "gold": "RESOLVE",
+      "expectation": "Kötelező intézmény törvényszék.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "kötelez actor null despite explicit institution.",
+      "rawRefs": [
+        "/rows/17/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/17/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "R2",
+      "snippet": "R",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "Kötelezett szakértő elfogadott, vádlott elvetett.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Object contrast resolved szakértő accepted/vádlott rejected, asserted event.",
+      "rawRefs": [
+        "/rows/17/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/17/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "R3",
+      "snippet": "R",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "A beszámoló forrása jogi képviselő; Szalai Emese címzett.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "beszámol source/recipient absent; original gold recipient ambiguity separately noted.",
+      "rawRefs": [
+        "/rows/17/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/17/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "R4",
+      "snippet": "R",
+      "dimension": "entity boundary",
+      "gold": "RESOLVE",
+      "expectation": "Szalai Emesének inflektált személynév teljes span, nem beszámolóforrás.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "No PER entity, mixed_case_name_boundary; full inflected name not recovered.",
+      "rawRefs": [
+        "/rows/17/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/17/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "R5",
+      "snippet": "R",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "Idézés tagadott, beszámoló nem tagadott.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "beszámol asserted, idéz denied in separate clause.",
+      "rawRefs": [
+        "/rows/17/output/frames/1",
+        "/rows/17/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/17/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "R6",
+      "snippet": "R",
+      "dimension": "temporal",
+      "gold": "RESOLVE",
+      "expectation": "Szeptember 8–17 a pótlási lehetőség intervalluma, év ismeretlen.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Sep17 end boundary resolved, Sep8 start omitted; interval not complete.",
+      "rawRefs": [
+        "/rows/17/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/17/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "S1",
+      "snippet": "S",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "Becslés forrása gazdaság agronómusa, nem becslése névszói fej.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "Nested possessive source gazdaság agronómusának recovered, becslése separated.",
+      "rawRefs": [
+        "/rows/18/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/18/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "S2",
+      "snippet": "S",
+      "dimension": "numeric",
+      "gold": "RESOLVE",
+      "expectation": "4,6 tonna/hektár becsült feltételes hozam, nem betakarított összmennyiség.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "tonna/hektár compound plus possible/conditional retained but attachment unresolved.",
+      "rawRefs": [
+        "/rows/18/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/18/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "S3",
+      "snippet": "S",
+      "dimension": "temporal",
+      "gold": "RESOLVE",
+      "expectation": "Tervezett betakarítás július; június elvetett korábbi idő.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "No June/July temporal arguments or replacement relation.",
+      "rawRefs": [
+        "/rows/18/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/18/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "S4",
+      "snippet": "S",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "8 gép elfogadott, 6 elvetett, feltételes munkavégzés.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Numeric correction unresolved; conditional morphology retained but no accepted8/rejected6.",
+      "rawRefs": [
+        "/rows/18/output/frames/3",
+        "/rows/18/output/frames/4"
+      ],
+      "snippetRawRef": "/rows/18/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "S5",
+      "snippet": "S",
+      "dimension": "modality/scope",
+      "gold": "RESOLVE",
+      "expectation": "Hozam feltétele eső kitartása, lehetőség nem tény.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "possible+conditional, amennyiben antecedent retained.",
+      "rawRefs": [
+        "/rows/18/output/frames/0",
+        "/rows/18/output/frames/1"
+      ],
+      "snippetRawRef": "/rows/18/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "S6",
+      "snippet": "S",
+      "dimension": "ordinal/rank",
+      "gold": "RESOLVE",
+      "expectation": "Második kör vizsgálati szakasz, nem rang.",
+      "label": "CORRECT_RESOLVED",
+      "reason": "2 ordinal owner körben, not placement.",
+      "rawRefs": [
+        "/rows/18/output/frames/5"
+      ],
+      "snippetRawRef": "/rows/18/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_RESOLVED"
+    },
+    {
+      "id": "T1",
+      "snippet": "T",
+      "dimension": "actor",
+      "gold": "RESOLVE",
+      "expectation": "A várakozók tárgyalók, nem Brüsszel.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "vár actor unresolved despite explicit tárgyalók.",
+      "rawRefs": [
+        "/rows/19/output/frames/0"
+      ],
+      "snippetRawRef": "/rows/19/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "T2",
+      "snippet": "T",
+      "dimension": "entity boundary",
+      "gold": "UNRESOLVED",
+      "expectation": "Brüsszel intézményi referense nem egyértelmű, konkrét szervezet nem nevezhető meg.",
+      "label": "CORRECT_UNRESOLVED",
+      "reason": "Brüsszel LOC entity only, no invented specific institution.",
+      "rawRefs": [
+        "/rows/19/output/frames/0",
+        "/rows/19/output/frames/2"
+      ],
+      "snippetRawRef": "/rows/19/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_UNRESOLVED"
+    },
+    {
+      "id": "T3",
+      "snippet": "T",
+      "dimension": "attribution",
+      "gold": "RESOLVE",
+      "expectation": "Álláspont forrása küldöttség, tanács elvetett; közvetítő szóvivő.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "Source contrast unresolved, no accepted küldöttség attribution.",
+      "rawRefs": [
+        "/rows/19/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/19/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "T4",
+      "snippet": "T",
+      "dimension": "contrast/negation",
+      "gold": "RESOLVE",
+      "expectation": "A tanács és küldöttség forrásalternatívák; ismertetés nincs tagadva.",
+      "label": "MISSED_DEFENSIBLE_RESOLUTION",
+      "reason": "asserted ismertet survives but alternatives not semantically bound.",
+      "rawRefs": [
+        "/rows/19/output/frames/3"
+      ],
+      "snippetRawRef": "/rows/19/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "MISSED_DEFENSIBLE_RESOLUTION"
+    },
+    {
+      "id": "T5",
+      "snippet": "T",
+      "dimension": "contrast/negation",
+      "gold": "UNRESOLVED",
+      "expectation": "2 és később nem bizonyítottan azonos slot alternatívái; unresolved.",
+      "label": "CORRECT_UNRESOLVED",
+      "reason": "ambiguous_contrast_scope with rejected/accepted null.",
+      "rawRefs": [
+        "/rows/19/output/frames/5"
+      ],
+      "snippetRawRef": "/rows/19/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_UNRESOLVED"
+    },
+    {
+      "id": "T6",
+      "snippet": "T",
+      "dimension": "numeric",
+      "gold": "UNRESOLVED",
+      "expectation": "A 2 tulajdonsága és mértékegysége hiányzik, pozitív támogatási összeg nem oldható fel.",
+      "label": "CORRECT_UNRESOLVED",
+      "reason": "2 unknown unresolved, no positive support amount.",
+      "rawRefs": [
+        "/rows/19/output/frames/5"
+      ],
+      "snippetRawRef": "/rows/19/output",
+      "review": "FB02 POST against unchanged gold; all non-source frame semantics deep-equal to FB01. Non-O source/claimOwner/recipient/reportingActor/attribution/chains deep-equal. Reporting relation metadata manually reviewed.",
+      "beforeLabel": "CORRECT_UNRESOLVED"
+    }
+  ]
+}

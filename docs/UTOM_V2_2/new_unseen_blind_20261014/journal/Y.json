@@ -1,0 +1,1887 @@
+{
+  "id": "Y",
+  "text": "A panzió vendégkönyvéből idézett a recepciós: „Ha visszatérnénk, legalább öt éjszakát maradnánk.” A foglalási rendszer naplója 18 százalékról 26 százalékra emelkedő hétköznapi kihasználtságot jelez, a növekmény tehát nyolc százalékpont. A bejegyzéshez nem tartozik név, a recepciós pedig nem tudta azonosítani az idézett vendéget.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 8,
+        "text": "panzió",
+        "lemma": "panzió",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 9
+      },
+      {
+        "start": 9,
+        "end": 24,
+        "text": "vendégkönyvéből",
+        "lemma": "vendégkönyv",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 25
+      },
+      {
+        "start": 25,
+        "end": 32,
+        "text": "idézett",
+        "lemma": "idéz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 25
+      },
+      {
+        "start": 33,
+        "end": 34,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 35
+      },
+      {
+        "start": 35,
+        "end": 44,
+        "text": "recepciós",
+        "lemma": "recepciós",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 25
+      },
+      {
+        "start": 44,
+        "end": 45,
+        "text": ":",
+        "lemma": ":",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 25
+      },
+      {
+        "start": 46,
+        "end": 47,
+        "text": "„",
+        "lemma": "„",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 50
+      },
+      {
+        "start": 47,
+        "end": 49,
+        "text": "Ha",
+        "lemma": "ha",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 50
+      },
+      {
+        "start": 50,
+        "end": 63,
+        "text": "visszatérnénk",
+        "lemma": "visszatér",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Cnd",
+          "Number": "Plur",
+          "Person": "1",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "parataxis",
+        "headStart": 25
+      },
+      {
+        "start": 63,
+        "end": 64,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 86
+      },
+      {
+        "start": 65,
+        "end": 73,
+        "text": "legalább",
+        "lemma": "legalább",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 77
+      },
+      {
+        "start": 74,
+        "end": 76,
+        "text": "öt",
+        "lemma": "öt",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 77
+      },
+      {
+        "start": 77,
+        "end": 85,
+        "text": "éjszakát",
+        "lemma": "éjszaka",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 86
+      },
+      {
+        "start": 86,
+        "end": 95,
+        "text": "maradnánk",
+        "lemma": "marad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Cnd",
+          "Number": "Plur",
+          "Person": "1",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 50
+      },
+      {
+        "start": 95,
+        "end": 96,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 25
+      },
+      {
+        "start": 96,
+        "end": 97,
+        "text": "”",
+        "lemma": "”",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Int"
+        },
+        "dep": "obj",
+        "headStart": 192
+      },
+      {
+        "start": 98,
+        "end": 99,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 110
+      },
+      {
+        "start": 100,
+        "end": 109,
+        "text": "foglalási",
+        "lemma": "foglalási",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 110
+      },
+      {
+        "start": 110,
+        "end": 118,
+        "text": "rendszer",
+        "lemma": "rendszer",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 119
+      },
+      {
+        "start": 119,
+        "end": 126,
+        "text": "naplója",
+        "lemma": "napló",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 192
+      },
+      {
+        "start": 127,
+        "end": 129,
+        "text": "18",
+        "lemma": "18",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 130
+      },
+      {
+        "start": 130,
+        "end": 141,
+        "text": "százalékról",
+        "lemma": "százalék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Del",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 156
+      },
+      {
+        "start": 142,
+        "end": 144,
+        "text": "26",
+        "lemma": "26",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 145
+      },
+      {
+        "start": 145,
+        "end": 155,
+        "text": "százalékra",
+        "lemma": "százalék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 156
+      },
+      {
+        "start": 156,
+        "end": 164,
+        "text": "emelkedő",
+        "lemma": "emelkedő",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "VerbForm": "PartPres"
+        },
+        "dep": "amod:att",
+        "headStart": 176
+      },
+      {
+        "start": 165,
+        "end": 175,
+        "text": "hétköznapi",
+        "lemma": "hétköznapi",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 176
+      },
+      {
+        "start": 176,
+        "end": 191,
+        "text": "kihasználtságot",
+        "lemma": "kihasználtság",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 192
+      },
+      {
+        "start": 192,
+        "end": 197,
+        "text": "jelez",
+        "lemma": "jelez",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 192
+      },
+      {
+        "start": 197,
+        "end": 198,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 223
+      },
+      {
+        "start": 199,
+        "end": 200,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 201
+      },
+      {
+        "start": 201,
+        "end": 210,
+        "text": "növekmény",
+        "lemma": "növekmény",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 223
+      },
+      {
+        "start": 211,
+        "end": 216,
+        "text": "tehát",
+        "lemma": "tehát",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 223
+      },
+      {
+        "start": 217,
+        "end": 222,
+        "text": "nyolc",
+        "lemma": "nyolc",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 223
+      },
+      {
+        "start": 223,
+        "end": 235,
+        "text": "százalékpont",
+        "lemma": "százalékpont",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 192
+      },
+      {
+        "start": 235,
+        "end": 236,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 192
+      },
+      {
+        "start": 237,
+        "end": 238,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 239
+      },
+      {
+        "start": 239,
+        "end": 251,
+        "text": "bejegyzéshez",
+        "lemma": "bejegyzés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "All",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 256
+      },
+      {
+        "start": 252,
+        "end": 255,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 256
+      },
+      {
+        "start": 256,
+        "end": 264,
+        "text": "tartozik",
+        "lemma": "tartozik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 256
+      },
+      {
+        "start": 265,
+        "end": 268,
+        "text": "név",
+        "lemma": "név",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 256
+      },
+      {
+        "start": 268,
+        "end": 269,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 292
+      },
+      {
+        "start": 270,
+        "end": 271,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 272
+      },
+      {
+        "start": 272,
+        "end": 281,
+        "text": "recepciós",
+        "lemma": "recepciós",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 292
+      },
+      {
+        "start": 282,
+        "end": 287,
+        "text": "pedig",
+        "lemma": "pedig",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 292
+      },
+      {
+        "start": 288,
+        "end": 291,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 292
+      },
+      {
+        "start": 292,
+        "end": 297,
+        "text": "tudta",
+        "lemma": "tud",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 256
+      },
+      {
+        "start": 298,
+        "end": 309,
+        "text": "azonosítani",
+        "lemma": "azonosít",
+        "pos": "VERB",
+        "morph": {
+          "VerbForm": "Inf",
+          "Voice": "Act"
+        },
+        "dep": "xcomp",
+        "headStart": 292
+      },
+      {
+        "start": 310,
+        "end": 312,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 321
+      },
+      {
+        "start": 313,
+        "end": 320,
+        "text": "idézett",
+        "lemma": "idézett",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "VerbForm": "PartPast"
+        },
+        "dep": "amod:att",
+        "headStart": 321
+      },
+      {
+        "start": 321,
+        "end": 329,
+        "text": "vendéget",
+        "lemma": "vendég",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 298
+      },
+      {
+        "start": 329,
+        "end": 330,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 256
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 96,
+        "text": "A panzió vendégkönyvéből idézett a recepciós: „Ha visszatérnénk, legalább öt éjszakát maradnánk."
+      },
+      {
+        "start": 96,
+        "end": 236,
+        "text": "” A foglalási rendszer naplója 18 százalékról 26 százalékra emelkedő hétköznapi kihasználtságot jelez, a növekmény tehát nyolc százalékpont."
+      },
+      {
+        "start": 237,
+        "end": 330,
+        "text": "A bejegyzéshez nem tartozik név, a recepciós pedig nem tudta azonosítani az idézett vendéget."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "vendégkönyvéből",
+            "normalized": "vendégkönyv",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Ela",
+            "start": 9,
+            "end": 24,
+            "evidenceSpan": {
+              "start": 9,
+              "end": 24,
+              "textSpan": "vendégkönyvéből"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 44,
+          "textSpan": "A panzió vendégkönyvéből idézett a recepciós"
+        },
+        "attribution": null,
+        "action": "idéz",
+        "actionSpan": {
+          "start": 25,
+          "end": 32,
+          "textSpan": "idézett"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": true,
+        "conditionalTrigger": {
+          "start": 47,
+          "end": 49,
+          "textSpan": "Ha"
+        },
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted",
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "asserted",
+        "status": "conditional",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 44,
+          "textSpan": "A panzió vendégkönyvéből idézett a recepciós"
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 44,
+          "textSpan": "A panzió vendégkönyvéből idézett a recepciós"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:44",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "panzió",
+              "normalized": "panzió",
+              "start": 2,
+              "end": 8,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 8,
+                "textSpan": "panzió"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 2,
+                "end": 8,
+                "textSpan": "panzió"
+              },
+              "targetSpan": {
+                "start": 25,
+                "end": 32,
+                "textSpan": "idézett"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 2,
+                    "end": 8,
+                    "textSpan": "panzió"
+                  },
+                  "targetSpan": {
+                    "start": 9,
+                    "end": 24,
+                    "textSpan": "vendégkönyvéből"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 9,
+                    "end": 24,
+                    "textSpan": "vendégkönyvéből"
+                  },
+                  "targetSpan": {
+                    "start": 25,
+                    "end": 32,
+                    "textSpan": "idézett"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:44",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 47,
+          "end": 96,
+          "textSpan": "Ha visszatérnénk, legalább öt éjszakát maradnánk."
+        },
+        "attribution": null,
+        "action": "visszatér",
+        "actionSpan": {
+          "start": 50,
+          "end": 63,
+          "textSpan": "visszatérnénk"
+        },
+        "object": [
+          "éjszaka"
+        ],
+        "numericArguments": [
+          {
+            "value": 5,
+            "canonicalValue": 5,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 74,
+            "end": 85,
+            "raw": "öt éjszakát",
+            "evidenceSpan": {
+              "start": 74,
+              "end": 85,
+              "textSpan": "öt éjszakát"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "greater_or_equal",
+                  "evidenceSpan": {
+                    "start": 65,
+                    "end": 74,
+                    "textSpan": "legalább "
+                  },
+                  "marker": "legalább"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "conditional",
+                  "rule": "governing_conditional_morphology",
+                  "evidenceSpan": {
+                    "start": 50,
+                    "end": 63,
+                    "textSpan": "visszatérnénk"
+                  },
+                  "dependencyPath": []
+                },
+                {
+                  "kind": "conditional",
+                  "rule": "clause_condition_marker",
+                  "evidenceSpan": {
+                    "start": 47,
+                    "end": 49,
+                    "textSpan": "Ha"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "mark",
+                      "sourceSpan": {
+                        "start": 47,
+                        "end": 49,
+                        "textSpan": "Ha"
+                      },
+                      "targetSpan": {
+                        "start": 50,
+                        "end": 63,
+                        "textSpan": "visszatérnénk"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "conditions": [
+                {
+                  "kind": "conditional",
+                  "rule": "inherited_bounded_clause_condition",
+                  "binding": "scoped",
+                  "evidenceSpan": {
+                    "start": 47,
+                    "end": 49,
+                    "textSpan": "Ha"
+                  },
+                  "antecedentSpan": {
+                    "start": 47,
+                    "end": 96,
+                    "textSpan": "Ha visszatérnénk, legalább öt éjszakát maradnánk."
+                  }
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": true,
+              "conditionAntecedent": true,
+              "contrastBranch": null,
+              "frameId": "dependency:46:97",
+              "clauseSpan": {
+                "start": 47,
+                "end": 96,
+                "textSpan": "Ha visszatérnénk, legalább öt éjszakát maradnánk."
+              },
+              "predicateSpan": {
+                "start": 50,
+                "end": 63,
+                "textSpan": "visszatérnénk"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 74,
+                    "end": 76,
+                    "textSpan": "öt"
+                  },
+                  "targetSpan": {
+                    "start": 77,
+                    "end": 85,
+                    "textSpan": "éjszakát"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 77,
+                    "end": 85,
+                    "textSpan": "éjszakát"
+                  },
+                  "targetSpan": {
+                    "start": 86,
+                    "end": 95,
+                    "textSpan": "maradnánk"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Cnd"
+        ],
+        "conditionality": true,
+        "conditionalTrigger": {
+          "start": 47,
+          "end": 49,
+          "textSpan": "Ha"
+        },
+        "conditionAntecedent": true,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "hypothetical",
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "multiple_content_predicates",
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 46,
+          "end": 97,
+          "textSpan": "„Ha visszatérnénk, legalább öt éjszakát maradnánk.”"
+        },
+        "propositionSpan": {
+          "start": 46,
+          "end": 97,
+          "textSpan": "„Ha visszatérnénk, legalább öt éjszakát maradnánk.”"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:46:97",
+        "syntacticRoles": [],
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "conditional",
+              "rule": "governing_conditional_morphology",
+              "evidenceSpan": {
+                "start": 50,
+                "end": 63,
+                "textSpan": "visszatérnénk"
+              },
+              "dependencyPath": []
+            },
+            {
+              "kind": "conditional",
+              "rule": "clause_condition_marker",
+              "evidenceSpan": {
+                "start": 47,
+                "end": 49,
+                "textSpan": "Ha"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "mark",
+                  "sourceSpan": {
+                    "start": 47,
+                    "end": 49,
+                    "textSpan": "Ha"
+                  },
+                  "targetSpan": {
+                    "start": 50,
+                    "end": 63,
+                    "textSpan": "visszatérnénk"
+                  }
+                }
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "kind": "conditional",
+              "rule": "inherited_bounded_clause_condition",
+              "binding": "scoped",
+              "evidenceSpan": {
+                "start": 47,
+                "end": 49,
+                "textSpan": "Ha"
+              },
+              "antecedentSpan": {
+                "start": 47,
+                "end": 96,
+                "textSpan": "Ha visszatérnénk, legalább öt éjszakát maradnánk."
+              }
+            }
+          ],
+          "frameId": "dependency:46:97",
+          "clauseSpan": {
+            "start": 47,
+            "end": 96,
+            "textSpan": "Ha visszatérnénk, legalább öt éjszakát maradnánk."
+          },
+          "projectionAllowed": false
+        }
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "százalékról",
+            "normalized": "százalék",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Del",
+            "start": 130,
+            "end": 141,
+            "evidenceSpan": {
+              "start": 130,
+              "end": 141,
+              "textSpan": "százalékról"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 98,
+          "end": 197,
+          "textSpan": "A foglalási rendszer naplója 18 százalékról 26 százalékra emelkedő hétköznapi kihasználtságot jelez"
+        },
+        "attribution": null,
+        "action": "jelez",
+        "actionSpan": {
+          "start": 192,
+          "end": 197,
+          "textSpan": "jelez"
+        },
+        "object": [
+          "kihasználtság"
+        ],
+        "numericArguments": [
+          {
+            "value": 18,
+            "canonicalValue": 18,
+            "unit": "%",
+            "semanticKind": "percentage",
+            "start": 127,
+            "end": 141,
+            "raw": "18 százalékról",
+            "evidenceSpan": {
+              "start": 127,
+              "end": 141,
+              "textSpan": "18 százalékról"
+            },
+            "owner": {
+              "mention": "százalékról",
+              "normalized": "százalék",
+              "start": 130,
+              "end": 141,
+              "type": "referent",
+              "case": "Del",
+              "evidenceSpan": {
+                "start": 130,
+                "end": 141,
+                "textSpan": "százalékról"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "percentage",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 127,
+                "end": 129,
+                "textSpan": "18"
+              },
+              "targetSpan": {
+                "start": 130,
+                "end": 141,
+                "textSpan": "százalékról"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 127,
+                    "end": 129,
+                    "textSpan": "18"
+                  },
+                  "targetSpan": {
+                    "start": 130,
+                    "end": 141,
+                    "textSpan": "százalékról"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 130,
+                    "end": 141,
+                    "textSpan": "százalékról"
+                  },
+                  "targetSpan": {
+                    "start": 156,
+                    "end": 164,
+                    "textSpan": "emelkedő"
+                  }
+                },
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 156,
+                    "end": 164,
+                    "textSpan": "emelkedő"
+                  },
+                  "targetSpan": {
+                    "start": 176,
+                    "end": 191,
+                    "textSpan": "kihasználtságot"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 176,
+                    "end": 191,
+                    "textSpan": "kihasználtságot"
+                  },
+                  "targetSpan": {
+                    "start": 192,
+                    "end": 197,
+                    "textSpan": "jelez"
+                  }
+                }
+              ],
+              "frameId": "dependency:98:197",
+              "semanticRole": "percentage",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 127,
+                    "end": 141,
+                    "textSpan": "18 százalékról"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:98:197",
+              "clauseSpan": {
+                "start": 98,
+                "end": 197,
+                "textSpan": "A foglalási rendszer naplója 18 százalékról 26 százalékra emelkedő hétköznapi kihasználtságot jelez"
+              },
+              "predicateSpan": {
+                "start": 192,
+                "end": 197,
+                "textSpan": "jelez"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 127,
+                    "end": 129,
+                    "textSpan": "18"
+                  },
+                  "targetSpan": {
+                    "start": 130,
+                    "end": 141,
+                    "textSpan": "százalékról"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 130,
+                    "end": 141,
+                    "textSpan": "százalékról"
+                  },
+                  "targetSpan": {
+                    "start": 156,
+                    "end": 164,
+                    "textSpan": "emelkedő"
+                  }
+                },
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 156,
+                    "end": 164,
+                    "textSpan": "emelkedő"
+                  },
+                  "targetSpan": {
+                    "start": 176,
+                    "end": 191,
+                    "textSpan": "kihasználtságot"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 176,
+                    "end": 191,
+                    "textSpan": "kihasználtságot"
+                  },
+                  "targetSpan": {
+                    "start": 192,
+                    "end": 197,
+                    "textSpan": "jelez"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          },
+          {
+            "value": 26,
+            "canonicalValue": 26,
+            "unit": "%",
+            "semanticKind": "percentage",
+            "start": 142,
+            "end": 155,
+            "raw": "26 százalékra",
+            "evidenceSpan": {
+              "start": 142,
+              "end": 155,
+              "textSpan": "26 százalékra"
+            },
+            "owner": {
+              "mention": "százalékra",
+              "normalized": "százalék",
+              "start": 145,
+              "end": 155,
+              "type": "referent",
+              "case": "Sbl",
+              "evidenceSpan": {
+                "start": 145,
+                "end": 155,
+                "textSpan": "százalékra"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "percentage",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 142,
+                "end": 144,
+                "textSpan": "26"
+              },
+              "targetSpan": {
+                "start": 145,
+                "end": 155,
+                "textSpan": "százalékra"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 142,
+                    "end": 144,
+                    "textSpan": "26"
+                  },
+                  "targetSpan": {
+                    "start": 145,
+                    "end": 155,
+                    "textSpan": "százalékra"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 145,
+                    "end": 155,
+                    "textSpan": "százalékra"
+                  },
+                  "targetSpan": {
+                    "start": 156,
+                    "end": 164,
+                    "textSpan": "emelkedő"
+                  }
+                },
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 156,
+                    "end": 164,
+                    "textSpan": "emelkedő"
+                  },
+                  "targetSpan": {
+                    "start": 176,
+                    "end": 191,
+                    "textSpan": "kihasználtságot"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 176,
+                    "end": 191,
+                    "textSpan": "kihasználtságot"
+                  },
+                  "targetSpan": {
+                    "start": 192,
+                    "end": 197,
+                    "textSpan": "jelez"
+                  }
+                }
+              ],
+              "frameId": "dependency:98:197",
+              "semanticRole": "percentage",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 142,
+                    "end": 155,
+                    "textSpan": "26 százalékra"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "conditions": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:98:197",
+              "clauseSpan": {
+                "start": 98,
+                "end": 197,
+                "textSpan": "A foglalási rendszer naplója 18 százalékról 26 százalékra emelkedő hétköznapi kihasználtságot jelez"
+              },
+              "predicateSpan": {
+                "start": 192,
+                "end": 197,
+                "textSpan": "jelez"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 142,
+                    "end": 144,
+                    "textSpan": "26"
+                  },
+                  "targetSpan": {
+                    "start": 145,
+                    "end": 155,
+                    "textSpan": "százalékra"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 145,
+                    "end": 155,
+                    "textSpan": "százalékra"
+                  },
+                  "targetSpan": {
+                    "start": 156,
+                    "end": 164,
+                    "textSpan": "emelkedő"
+                  }
+                },
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 156,
+                    "end": 164,
+                    "textSpan": "emelkedő"
+                  },
+                  "targetSpan": {
+                    "start": 176,
+                    "end": 191,
+                    "textSpan": "kihasználtságot"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 176,
+                    "end": 191,
+                    "textSpan": "kihasználtságot"
+                  },
+                  "targetSpan": {
+                    "start": 192,
+                    "end": 197,
+                    "textSpan": "jelez"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 98,
+          "end": 197,
+          "textSpan": "A foglalási rendszer naplója 18 százalékról 26 százalékra emelkedő hétköznapi kihasználtságot jelez"
+        },
+        "propositionSpan": {
+          "start": 98,
+          "end": 197,
+          "textSpan": "A foglalási rendszer naplója 18 százalékról 26 százalékra emelkedő hétköznapi kihasználtságot jelez"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:98:197",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "rendszer",
+              "normalized": "rendszer",
+              "start": 110,
+              "end": 118,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 110,
+                "end": 118,
+                "textSpan": "rendszer"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 110,
+                "end": 118,
+                "textSpan": "rendszer"
+              },
+              "targetSpan": {
+                "start": 192,
+                "end": 197,
+                "textSpan": "jelez"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 110,
+                    "end": 118,
+                    "textSpan": "rendszer"
+                  },
+                  "targetSpan": {
+                    "start": 119,
+                    "end": 126,
+                    "textSpan": "naplója"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 119,
+                    "end": 126,
+                    "textSpan": "naplója"
+                  },
+                  "targetSpan": {
+                    "start": 192,
+                    "end": 197,
+                    "textSpan": "jelez"
+                  }
+                }
+              ],
+              "frameId": "dependency:98:197",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "kihasználtságot",
+              "normalized": "kihasználtság",
+              "start": 176,
+              "end": 191,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 176,
+                "end": 191,
+                "textSpan": "kihasználtságot"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 176,
+                "end": 191,
+                "textSpan": "kihasználtságot"
+              },
+              "targetSpan": {
+                "start": 192,
+                "end": 197,
+                "textSpan": "jelez"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 176,
+                    "end": 191,
+                    "textSpan": "kihasználtságot"
+                  },
+                  "targetSpan": {
+                    "start": 192,
+                    "end": 197,
+                    "textSpan": "jelez"
+                  }
+                }
+              ],
+              "frameId": "dependency:98:197",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 199,
+          "end": 236,
+          "textSpan": "a növekmény tehát nyolc százalékpont."
+        },
+        "attribution": null,
+        "action": null,
+        "actionSpan": null,
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "missing_action",
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 199,
+          "end": 236,
+          "textSpan": "a növekmény tehát nyolc százalékpont."
+        },
+        "propositionSpan": {
+          "start": 199,
+          "end": 236,
+          "textSpan": "a növekmény tehát nyolc százalékpont."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:199:236",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "bejegyzéshez",
+            "normalized": "bejegyzés",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "All",
+            "start": 239,
+            "end": 251,
+            "evidenceSpan": {
+              "start": 239,
+              "end": 251,
+              "textSpan": "bejegyzéshez"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 237,
+          "end": 268,
+          "textSpan": "A bejegyzéshez nem tartozik név"
+        },
+        "attribution": null,
+        "action": "tartozik",
+        "actionSpan": {
+          "start": 256,
+          "end": 264,
+          "textSpan": "tartozik"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 237,
+          "end": 268,
+          "textSpan": "A bejegyzéshez nem tartozik név"
+        },
+        "propositionSpan": {
+          "start": 237,
+          "end": 268,
+          "textSpan": "A bejegyzéshez nem tartozik név"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:237:268",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 270,
+          "end": 330,
+          "textSpan": "a recepciós pedig nem tudta azonosítani az idézett vendéget."
+        },
+        "attribution": null,
+        "action": "tud",
+        "actionSpan": {
+          "start": 292,
+          "end": 297,
+          "textSpan": "tudta"
+        },
+        "object": [
+          "vendég"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "denied",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 270,
+          "end": 330,
+          "textSpan": "a recepciós pedig nem tudta azonosítani az idézett vendéget."
+        },
+        "propositionSpan": {
+          "start": 270,
+          "end": 330,
+          "textSpan": "a recepciós pedig nem tudta azonosítani az idézett vendéget."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:270:330",
+        "syntacticRoles": []
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

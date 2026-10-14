@@ -1,0 +1,620 @@
+{
+  "id": "F",
+  "raw": "Hidegindításkor a kazán másodpercenként kevesebb mint fél kilogramm pelletet égethet el a gyártó üzemnaplója szerint. A mérnök a felügyelőnek külön megjegyezte, hogy az égőt nem szabad kézzel újragyújtani. A margón két szám, 14 és 19 áll egység és megnevezett alkatrész nélkül.",
+  "rawSha256": "e654003338d6e5f129e449974942270c3a451ba0c221922c6d9e5207d9f13bb1",
+  "annotationSha256": "18141d62f0e0834410d23a6077f77364a62134cc807b7e4cdaa830f25b5c2ced",
+  "sentenceCount": 3,
+  "tokenCount": 46,
+  "environmentFingerprint": "143242eddc17f94ea729a1b430c5eac9d5e47dd7d27b5ebdd29c7c6961882f47",
+  "model": {
+    "type": "ready",
+    "model": "hu_core_news_md",
+    "version": "3.8.0",
+    "loadMs": 1160.3809050000002
+  },
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 15,
+        "text": "Hidegindításkor",
+        "lemma": "hidegindítás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Tem",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 77
+      },
+      {
+        "start": 16,
+        "end": 17,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 18
+      },
+      {
+        "start": 18,
+        "end": 23,
+        "text": "kazán",
+        "lemma": "kazán",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 77
+      },
+      {
+        "start": 24,
+        "end": 39,
+        "text": "másodpercenként",
+        "lemma": "másodperc",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dis",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 77
+      },
+      {
+        "start": 40,
+        "end": 48,
+        "text": "kevesebb",
+        "lemma": "kevesebb",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 68
+      },
+      {
+        "start": 49,
+        "end": 53,
+        "text": "mint",
+        "lemma": "mint",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 58
+      },
+      {
+        "start": 54,
+        "end": 57,
+        "text": "fél",
+        "lemma": "fél",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Frac",
+          "Number": "Sing"
+        },
+        "dep": "compound",
+        "headStart": 58
+      },
+      {
+        "start": 58,
+        "end": 67,
+        "text": "kilogramm",
+        "lemma": "kilogramm",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 40
+      },
+      {
+        "start": 68,
+        "end": 76,
+        "text": "pelletet",
+        "lemma": "pellet",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 77
+      },
+      {
+        "start": 77,
+        "end": 84,
+        "text": "égethet",
+        "lemma": "égethet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Pot",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 77
+      },
+      {
+        "start": 85,
+        "end": 87,
+        "text": "el",
+        "lemma": "el",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 77
+      },
+      {
+        "start": 88,
+        "end": 89,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 90
+      },
+      {
+        "start": 90,
+        "end": 96,
+        "text": "gyártó",
+        "lemma": "gyártó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 97
+      },
+      {
+        "start": 97,
+        "end": 108,
+        "text": "üzemnaplója",
+        "lemma": "üzemnapló",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 77
+      },
+      {
+        "start": 109,
+        "end": 116,
+        "text": "szerint",
+        "lemma": "szerint",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 97
+      },
+      {
+        "start": 116,
+        "end": 117,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 77
+      },
+      {
+        "start": 118,
+        "end": 119,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 120
+      },
+      {
+        "start": 120,
+        "end": 126,
+        "text": "mérnök",
+        "lemma": "mérnök",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 148
+      },
+      {
+        "start": 127,
+        "end": 128,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 129
+      },
+      {
+        "start": 129,
+        "end": 141,
+        "text": "felügyelőnek",
+        "lemma": "felügyelő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 148
+      },
+      {
+        "start": 142,
+        "end": 147,
+        "text": "külön",
+        "lemma": "külön",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 148
+      },
+      {
+        "start": 148,
+        "end": 159,
+        "text": "megjegyezte",
+        "lemma": "megjegyez",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 148
+      },
+      {
+        "start": 159,
+        "end": 160,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 192
+      },
+      {
+        "start": 161,
+        "end": 165,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 192
+      },
+      {
+        "start": 166,
+        "end": 168,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 169
+      },
+      {
+        "start": 169,
+        "end": 173,
+        "text": "égőt",
+        "lemma": "égő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 192
+      },
+      {
+        "start": 174,
+        "end": 177,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 178
+      },
+      {
+        "start": 178,
+        "end": 184,
+        "text": "szabad",
+        "lemma": "szabad",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 185
+      },
+      {
+        "start": 185,
+        "end": 191,
+        "text": "kézzel",
+        "lemma": "kéz",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ins",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 192
+      },
+      {
+        "start": 192,
+        "end": 204,
+        "text": "újragyújtani",
+        "lemma": "újragyújt",
+        "pos": "VERB",
+        "morph": {
+          "VerbForm": "Inf",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 148
+      },
+      {
+        "start": 204,
+        "end": 205,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 148
+      },
+      {
+        "start": 206,
+        "end": 207,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 219
+      },
+      {
+        "start": 208,
+        "end": 214,
+        "text": "margón",
+        "lemma": "margó",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Sup",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 219
+      },
+      {
+        "start": 215,
+        "end": 218,
+        "text": "két",
+        "lemma": "két",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 219
+      },
+      {
+        "start": 219,
+        "end": 223,
+        "text": "szám",
+        "lemma": "szám",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "ROOT",
+        "headStart": 219
+      },
+      {
+        "start": 223,
+        "end": 224,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 238
+      },
+      {
+        "start": 225,
+        "end": 227,
+        "text": "14",
+        "lemma": "14",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 234
+      },
+      {
+        "start": 228,
+        "end": 230,
+        "text": "és",
+        "lemma": "és",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 231
+      },
+      {
+        "start": 231,
+        "end": 233,
+        "text": "19",
+        "lemma": "19",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 225
+      },
+      {
+        "start": 234,
+        "end": 237,
+        "text": "áll",
+        "lemma": "áll",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "amod:att",
+        "headStart": 238
+      },
+      {
+        "start": 238,
+        "end": 244,
+        "text": "egység",
+        "lemma": "egység",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 219
+      },
+      {
+        "start": 245,
+        "end": 247,
+        "text": "és",
+        "lemma": "és",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 260
+      },
+      {
+        "start": 248,
+        "end": 259,
+        "text": "megnevezett",
+        "lemma": "megnevezett",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 260
+      },
+      {
+        "start": 260,
+        "end": 269,
+        "text": "alkatrész",
+        "lemma": "alkatrész",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 219
+      },
+      {
+        "start": 270,
+        "end": 276,
+        "text": "nélkül",
+        "lemma": "nélkül",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 219
+      },
+      {
+        "start": 276,
+        "end": 277,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 219
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 117,
+        "text": "Hidegindításkor a kazán másodpercenként kevesebb mint fél kilogramm pelletet égethet el a gyártó üzemnaplója szerint."
+      },
+      {
+        "start": 118,
+        "end": 205,
+        "text": "A mérnök a felügyelőnek külön megjegyezte, hogy az égőt nem szabad kézzel újragyújtani."
+      },
+      {
+        "start": 206,
+        "end": 277,
+        "text": "A margón két szám, 14 és 19 áll egység és megnevezett alkatrész nélkül."
+      }
+    ],
+    "entities": []
+  }
+}

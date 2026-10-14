@@ -1,0 +1,1856 @@
+[
+  {
+    "id": "C",
+    "before": {
+      "frames": [
+        {
+          "id": "dependency:0:104",
+          "source": {
+            "mention": "exportőrök szövetségének",
+            "normalized": "exportőr szövetség",
+            "start": 3,
+            "end": 27,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 27,
+              "textSpan": "exportőrök szövetségének"
+            }
+          }
+        },
+        {
+          "id": "dependency:105:148",
+          "source": null
+        },
+        {
+          "id": "dependency:150:215",
+          "source": null
+        },
+        {
+          "id": "dependency:216:267",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:28",
+          "source": {
+            "mention": "exportőrök szövetségének",
+            "normalized": "exportőr szövetség",
+            "start": 3,
+            "end": 27,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 27,
+              "textSpan": "exportőrök szövetségének"
+            }
+          },
+          "reportingNominal": {
+            "start": 28,
+            "end": 39,
+            "textSpan": "mérlegelése"
+          },
+          "markerSpan": {
+            "start": 40,
+            "end": 47,
+            "textSpan": "szerint"
+          },
+          "predicateSpan": {
+            "start": 71,
+            "end": 84,
+            "textSpan": "meghaladhatja"
+          },
+          "binding": "resolved",
+          "rule": "possessive_np_event_nominal_evidential_marker",
+          "evidenceSpan": {
+            "start": 3,
+            "end": 47,
+            "textSpan": "exportőrök szövetségének mérlegelése szerint"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "case",
+              "sourceSpan": {
+                "start": 40,
+                "end": 47,
+                "textSpan": "szerint"
+              },
+              "targetSpan": {
+                "start": 28,
+                "end": 39,
+                "textSpan": "mérlegelése"
+              }
+            },
+            {
+              "relation": "nmod:att",
+              "sourceSpan": {
+                "start": 3,
+                "end": 27,
+                "textSpan": "exportőrök szövetségének"
+              },
+              "targetSpan": {
+                "start": 28,
+                "end": 39,
+                "textSpan": "mérlegelése"
+              }
+            }
+          ],
+          "unresolvedReasons": []
+        }
+      ]
+    },
+    "after": {
+      "frames": [
+        {
+          "id": "dependency:0:104",
+          "source": {
+            "mention": "exportőrök szövetségének",
+            "normalized": "exportőr szövetség",
+            "start": 3,
+            "end": 27,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 27,
+              "textSpan": "exportőrök szövetségének"
+            }
+          }
+        },
+        {
+          "id": "dependency:105:148",
+          "source": null
+        },
+        {
+          "id": "dependency:150:215",
+          "source": null
+        },
+        {
+          "id": "dependency:216:267",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:28",
+          "source": {
+            "mention": "exportőrök szövetségének",
+            "normalized": "exportőr szövetség",
+            "start": 3,
+            "end": 27,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 27,
+              "textSpan": "exportőrök szövetségének"
+            }
+          },
+          "reportingNominal": {
+            "start": 28,
+            "end": 39,
+            "textSpan": "mérlegelése"
+          },
+          "markerSpan": {
+            "start": 40,
+            "end": 47,
+            "textSpan": "szerint"
+          },
+          "predicateSpan": {
+            "start": 71,
+            "end": 84,
+            "textSpan": "meghaladhatja"
+          },
+          "binding": "resolved",
+          "rule": "possessive_information_artifact_evidential_claim_path",
+          "evidenceSpan": {
+            "start": 3,
+            "end": 47,
+            "textSpan": "exportőrök szövetségének mérlegelése szerint"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "case",
+              "sourceSpan": {
+                "start": 40,
+                "end": 47,
+                "textSpan": "szerint"
+              },
+              "targetSpan": {
+                "start": 28,
+                "end": 39,
+                "textSpan": "mérlegelése"
+              }
+            },
+            {
+              "relation": "nmod:att",
+              "sourceSpan": {
+                "start": 3,
+                "end": 27,
+                "textSpan": "exportőrök szövetségének"
+              },
+              "targetSpan": {
+                "start": 28,
+                "end": 39,
+                "textSpan": "mérlegelése"
+              }
+            },
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 28,
+                "end": 39,
+                "textSpan": "mérlegelése"
+              },
+              "targetSpan": {
+                "start": 71,
+                "end": 84,
+                "textSpan": "meghaladhatja"
+              }
+            }
+          ],
+          "unresolvedReasons": [],
+          "sourceArtifact": {
+            "start": 28,
+            "end": 39,
+            "textSpan": "mérlegelése"
+          },
+          "claimFrameIds": [
+            "dependency:0:104"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "D",
+    "before": {
+      "frames": [
+        {
+          "id": "dependency:0:64",
+          "source": null
+        },
+        {
+          "id": "dependency:66:105",
+          "source": null
+        },
+        {
+          "id": "dependency:106:156",
+          "source": null
+        },
+        {
+          "id": "dependency:158:213",
+          "source": null
+        },
+        {
+          "id": "dependency:214:273",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:108",
+          "source": null,
+          "reportingNominal": {
+            "start": 108,
+            "end": 118,
+            "textSpan": "feljegyzés"
+          },
+          "markerSpan": {
+            "start": 119,
+            "end": 126,
+            "textSpan": "szerint"
+          },
+          "predicateSpan": {
+            "start": 148,
+            "end": 156,
+            "textSpan": "érintett"
+          },
+          "binding": "unresolved",
+          "rule": "possessive_np_event_nominal_evidential_marker",
+          "evidenceSpan": {
+            "start": 108,
+            "end": 126,
+            "textSpan": "feljegyzés szerint"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "case",
+              "sourceSpan": {
+                "start": 119,
+                "end": 126,
+                "textSpan": "szerint"
+              },
+              "targetSpan": {
+                "start": 108,
+                "end": 118,
+                "textSpan": "feljegyzés"
+              }
+            }
+          ],
+          "unresolvedReasons": [
+            "source_bearing_possessor_unproven"
+          ]
+        }
+      ]
+    },
+    "after": {
+      "frames": [
+        {
+          "id": "dependency:0:64",
+          "source": null
+        },
+        {
+          "id": "dependency:66:105",
+          "source": null
+        },
+        {
+          "id": "dependency:106:156",
+          "source": null
+        },
+        {
+          "id": "dependency:158:213",
+          "source": null
+        },
+        {
+          "id": "dependency:214:273",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:108",
+          "source": null,
+          "reportingNominal": {
+            "start": 108,
+            "end": 118,
+            "textSpan": "feljegyzés"
+          },
+          "markerSpan": {
+            "start": 119,
+            "end": 126,
+            "textSpan": "szerint"
+          },
+          "predicateSpan": {
+            "start": 148,
+            "end": 156,
+            "textSpan": "érintett"
+          },
+          "binding": "unresolved",
+          "rule": "possessive_information_artifact_evidential_claim_path",
+          "evidenceSpan": {
+            "start": 108,
+            "end": 126,
+            "textSpan": "feljegyzés szerint"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "case",
+              "sourceSpan": {
+                "start": 119,
+                "end": 126,
+                "textSpan": "szerint"
+              },
+              "targetSpan": {
+                "start": 108,
+                "end": 118,
+                "textSpan": "feljegyzés"
+              }
+            },
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 108,
+                "end": 118,
+                "textSpan": "feljegyzés"
+              },
+              "targetSpan": {
+                "start": 148,
+                "end": 156,
+                "textSpan": "érintett"
+              }
+            }
+          ],
+          "unresolvedReasons": [
+            "source_bearing_possessor_unproven"
+          ],
+          "sourceArtifact": {
+            "start": 108,
+            "end": 118,
+            "textSpan": "feljegyzés"
+          },
+          "claimFrameIds": [
+            "dependency:106:156"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "E",
+    "before": {
+      "frames": [
+        {
+          "id": "dependency:0:102",
+          "source": {
+            "mention": "hálózatirányító",
+            "normalized": "hálózatirányító",
+            "start": 2,
+            "end": 17,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 17,
+              "textSpan": "hálózatirányító"
+            }
+          }
+        },
+        {
+          "id": "dependency:103:184",
+          "source": null
+        },
+        {
+          "id": "dependency:185:224",
+          "source": null
+        },
+        {
+          "id": "dependency:226:246",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:18",
+          "source": {
+            "mention": "hálózatirányító",
+            "normalized": "hálózatirányító",
+            "start": 2,
+            "end": 17,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 17,
+              "textSpan": "hálózatirányító"
+            }
+          },
+          "reportingNominal": {
+            "start": 18,
+            "end": 31,
+            "textSpan": "tájékoztatása"
+          },
+          "markerSpan": {
+            "start": 32,
+            "end": 39,
+            "textSpan": "alapján"
+          },
+          "predicateSpan": {
+            "start": 89,
+            "end": 101,
+            "textSpan": "fogyasztanak"
+          },
+          "binding": "resolved",
+          "rule": "possessive_np_event_nominal_evidential_marker",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 39,
+            "textSpan": "hálózatirányító tájékoztatása alapján"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 32,
+                "end": 39,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 89,
+                "end": 101,
+                "textSpan": "fogyasztanak"
+              }
+            },
+            {
+              "relation": "nmod:att",
+              "sourceSpan": {
+                "start": 2,
+                "end": 17,
+                "textSpan": "hálózatirányító"
+              },
+              "targetSpan": {
+                "start": 18,
+                "end": 31,
+                "textSpan": "tájékoztatása"
+              }
+            }
+          ],
+          "unresolvedReasons": []
+        }
+      ]
+    },
+    "after": {
+      "frames": [
+        {
+          "id": "dependency:0:102",
+          "source": {
+            "mention": "hálózatirányító",
+            "normalized": "hálózatirányító",
+            "start": 2,
+            "end": 17,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 17,
+              "textSpan": "hálózatirányító"
+            }
+          }
+        },
+        {
+          "id": "dependency:103:184",
+          "source": null
+        },
+        {
+          "id": "dependency:185:224",
+          "source": null
+        },
+        {
+          "id": "dependency:226:246",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:18",
+          "source": {
+            "mention": "hálózatirányító",
+            "normalized": "hálózatirányító",
+            "start": 2,
+            "end": 17,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 17,
+              "textSpan": "hálózatirányító"
+            }
+          },
+          "reportingNominal": {
+            "start": 18,
+            "end": 31,
+            "textSpan": "tájékoztatása"
+          },
+          "markerSpan": {
+            "start": 32,
+            "end": 39,
+            "textSpan": "alapján"
+          },
+          "predicateSpan": {
+            "start": 89,
+            "end": 101,
+            "textSpan": "fogyasztanak"
+          },
+          "binding": "resolved",
+          "rule": "possessive_information_artifact_evidential_claim_path",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 39,
+            "textSpan": "hálózatirányító tájékoztatása alapján"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 32,
+                "end": 39,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 89,
+                "end": 101,
+                "textSpan": "fogyasztanak"
+              }
+            },
+            {
+              "relation": "nmod:att",
+              "sourceSpan": {
+                "start": 2,
+                "end": 17,
+                "textSpan": "hálózatirányító"
+              },
+              "targetSpan": {
+                "start": 18,
+                "end": 31,
+                "textSpan": "tájékoztatása"
+              }
+            },
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 32,
+                "end": 39,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 89,
+                "end": 101,
+                "textSpan": "fogyasztanak"
+              }
+            }
+          ],
+          "unresolvedReasons": [],
+          "sourceArtifact": {
+            "start": 18,
+            "end": 31,
+            "textSpan": "tájékoztatása"
+          },
+          "claimFrameIds": [
+            "dependency:0:102"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "H",
+    "before": {
+      "frames": [
+        {
+          "id": "dependency:0:71",
+          "source": null
+        },
+        {
+          "id": "dependency:72:142",
+          "source": null
+        },
+        {
+          "id": "dependency:144:179",
+          "source": null
+        },
+        {
+          "id": "dependency:180:214",
+          "source": null
+        },
+        {
+          "id": "dependency:216:256",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:90",
+          "source": null,
+          "reportingNominal": {
+            "start": 90,
+            "end": 97,
+            "textSpan": "közlése"
+          },
+          "markerSpan": {
+            "start": 98,
+            "end": 105,
+            "textSpan": "alapján"
+          },
+          "predicateSpan": {
+            "start": 133,
+            "end": 142,
+            "textSpan": "megsérült"
+          },
+          "binding": "unresolved",
+          "rule": "possessive_np_event_nominal_evidential_marker",
+          "evidenceSpan": {
+            "start": 90,
+            "end": 105,
+            "textSpan": "közlése alapján"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 98,
+                "end": 105,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 133,
+                "end": 142,
+                "textSpan": "megsérült"
+              }
+            }
+          ],
+          "unresolvedReasons": [
+            "source_bearing_possessor_unproven"
+          ]
+        }
+      ]
+    },
+    "after": {
+      "frames": [
+        {
+          "id": "dependency:0:71",
+          "source": null
+        },
+        {
+          "id": "dependency:72:142",
+          "source": null
+        },
+        {
+          "id": "dependency:144:179",
+          "source": null
+        },
+        {
+          "id": "dependency:180:214",
+          "source": null
+        },
+        {
+          "id": "dependency:216:256",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:90",
+          "source": null,
+          "reportingNominal": {
+            "start": 90,
+            "end": 97,
+            "textSpan": "közlése"
+          },
+          "markerSpan": {
+            "start": 98,
+            "end": 105,
+            "textSpan": "alapján"
+          },
+          "predicateSpan": {
+            "start": 133,
+            "end": 142,
+            "textSpan": "megsérült"
+          },
+          "binding": "unresolved",
+          "rule": "possessive_information_artifact_evidential_claim_path",
+          "evidenceSpan": {
+            "start": 90,
+            "end": 105,
+            "textSpan": "közlése alapján"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 98,
+                "end": 105,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 133,
+                "end": 142,
+                "textSpan": "megsérült"
+              }
+            },
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 98,
+                "end": 105,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 133,
+                "end": 142,
+                "textSpan": "megsérült"
+              }
+            }
+          ],
+          "unresolvedReasons": [
+            "source_bearing_possessor_unproven"
+          ],
+          "sourceArtifact": {
+            "start": 90,
+            "end": 97,
+            "textSpan": "közlése"
+          },
+          "claimFrameIds": [
+            "dependency:72:142"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "J",
+    "before": {
+      "frames": [
+        {
+          "id": "dependency:0:91",
+          "source": null
+        },
+        {
+          "id": "dependency:92:216",
+          "source": null
+        },
+        {
+          "id": "dependency:217:292",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": []
+    },
+    "after": {
+      "frames": [
+        {
+          "id": "dependency:0:91",
+          "source": null
+        },
+        {
+          "id": "dependency:92:216",
+          "source": null
+        },
+        {
+          "id": "dependency:217:292",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:100",
+          "source": null,
+          "reportingNominal": {
+            "start": 100,
+            "end": 112,
+            "textSpan": "jegyzőkönyve"
+          },
+          "markerSpan": {
+            "start": 113,
+            "end": 120,
+            "textSpan": "szerint"
+          },
+          "predicateSpan": {
+            "start": 100,
+            "end": 112,
+            "textSpan": "jegyzőkönyve"
+          },
+          "binding": "unresolved",
+          "rule": "possessive_information_artifact_evidential_claim_path",
+          "evidenceSpan": {
+            "start": 100,
+            "end": 120,
+            "textSpan": "jegyzőkönyve szerint"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "case",
+              "sourceSpan": {
+                "start": 113,
+                "end": 120,
+                "textSpan": "szerint"
+              },
+              "targetSpan": {
+                "start": 100,
+                "end": 112,
+                "textSpan": "jegyzőkönyve"
+              }
+            },
+            {
+              "relation": "ROOT",
+              "sourceSpan": {
+                "start": 100,
+                "end": 112,
+                "textSpan": "jegyzőkönyve"
+              },
+              "targetSpan": {
+                "start": 100,
+                "end": 112,
+                "textSpan": "jegyzőkönyve"
+              }
+            }
+          ],
+          "unresolvedReasons": [
+            "source_bearing_possessor_unproven",
+            "artifact_claim_target_unproven"
+          ],
+          "sourceArtifact": {
+            "start": 100,
+            "end": 112,
+            "textSpan": "jegyzőkönyve"
+          },
+          "claimFrameIds": []
+        }
+      ]
+    }
+  },
+  {
+    "id": "K",
+    "before": {
+      "frames": [
+        {
+          "id": "dependency:0:68",
+          "source": {
+            "mention": "központ",
+            "normalized": "központ",
+            "start": 14,
+            "end": 21,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 14,
+              "end": 21,
+              "textSpan": "központ"
+            }
+          }
+        },
+        {
+          "id": "dependency:70:117",
+          "source": null
+        },
+        {
+          "id": "dependency:118:144",
+          "source": null
+        },
+        {
+          "id": "dependency:146:181",
+          "source": null
+        },
+        {
+          "id": "dependency:182:227",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:22",
+          "source": {
+            "mention": "központ",
+            "normalized": "központ",
+            "start": 14,
+            "end": 21,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 14,
+              "end": 21,
+              "textSpan": "központ"
+            }
+          },
+          "reportingNominal": {
+            "start": 22,
+            "end": 34,
+            "textSpan": "előrejelzése"
+          },
+          "markerSpan": {
+            "start": 35,
+            "end": 42,
+            "textSpan": "szerint"
+          },
+          "predicateSpan": {
+            "start": 47,
+            "end": 49,
+            "textSpan": "nő"
+          },
+          "binding": "resolved",
+          "rule": "possessive_np_event_nominal_evidential_marker",
+          "evidenceSpan": {
+            "start": 14,
+            "end": 42,
+            "textSpan": "központ előrejelzése szerint"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "case",
+              "sourceSpan": {
+                "start": 35,
+                "end": 42,
+                "textSpan": "szerint"
+              },
+              "targetSpan": {
+                "start": 22,
+                "end": 34,
+                "textSpan": "előrejelzése"
+              }
+            },
+            {
+              "relation": "nmod:att",
+              "sourceSpan": {
+                "start": 14,
+                "end": 21,
+                "textSpan": "központ"
+              },
+              "targetSpan": {
+                "start": 22,
+                "end": 34,
+                "textSpan": "előrejelzése"
+              }
+            }
+          ],
+          "unresolvedReasons": []
+        }
+      ]
+    },
+    "after": {
+      "frames": [
+        {
+          "id": "dependency:0:68",
+          "source": {
+            "mention": "központ",
+            "normalized": "központ",
+            "start": 14,
+            "end": 21,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 14,
+              "end": 21,
+              "textSpan": "központ"
+            }
+          }
+        },
+        {
+          "id": "dependency:70:117",
+          "source": null
+        },
+        {
+          "id": "dependency:118:144",
+          "source": null
+        },
+        {
+          "id": "dependency:146:181",
+          "source": null
+        },
+        {
+          "id": "dependency:182:227",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:22",
+          "source": {
+            "mention": "központ",
+            "normalized": "központ",
+            "start": 14,
+            "end": 21,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 14,
+              "end": 21,
+              "textSpan": "központ"
+            }
+          },
+          "reportingNominal": {
+            "start": 22,
+            "end": 34,
+            "textSpan": "előrejelzése"
+          },
+          "markerSpan": {
+            "start": 35,
+            "end": 42,
+            "textSpan": "szerint"
+          },
+          "predicateSpan": {
+            "start": 47,
+            "end": 49,
+            "textSpan": "nő"
+          },
+          "binding": "resolved",
+          "rule": "possessive_information_artifact_evidential_claim_path",
+          "evidenceSpan": {
+            "start": 14,
+            "end": 42,
+            "textSpan": "központ előrejelzése szerint"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "case",
+              "sourceSpan": {
+                "start": 35,
+                "end": 42,
+                "textSpan": "szerint"
+              },
+              "targetSpan": {
+                "start": 22,
+                "end": 34,
+                "textSpan": "előrejelzése"
+              }
+            },
+            {
+              "relation": "nmod:att",
+              "sourceSpan": {
+                "start": 14,
+                "end": 21,
+                "textSpan": "központ"
+              },
+              "targetSpan": {
+                "start": 22,
+                "end": 34,
+                "textSpan": "előrejelzése"
+              }
+            },
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 22,
+                "end": 34,
+                "textSpan": "előrejelzése"
+              },
+              "targetSpan": {
+                "start": 47,
+                "end": 49,
+                "textSpan": "nő"
+              }
+            }
+          ],
+          "unresolvedReasons": [],
+          "sourceArtifact": {
+            "start": 22,
+            "end": 34,
+            "textSpan": "előrejelzése"
+          },
+          "claimFrameIds": [
+            "dependency:0:68"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "M",
+    "before": {
+      "frames": [
+        {
+          "id": "dependency:0:95",
+          "source": null
+        },
+        {
+          "id": "dependency:96:169",
+          "source": null
+        },
+        {
+          "id": "dependency:170:197",
+          "source": null
+        },
+        {
+          "id": "dependency:199:251",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:21",
+          "source": null,
+          "reportingNominal": {
+            "start": 21,
+            "end": 28,
+            "textSpan": "mérései"
+          },
+          "markerSpan": {
+            "start": 29,
+            "end": 36,
+            "textSpan": "alapján"
+          },
+          "predicateSpan": {
+            "start": 56,
+            "end": 67,
+            "textSpan": "Celsius-fok"
+          },
+          "binding": "unresolved",
+          "rule": "possessive_np_event_nominal_evidential_marker",
+          "evidenceSpan": {
+            "start": 21,
+            "end": 36,
+            "textSpan": "mérései alapján"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 29,
+                "end": 36,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 56,
+                "end": 67,
+                "textSpan": "Celsius-fok"
+              }
+            }
+          ],
+          "unresolvedReasons": [
+            "source_bearing_possessor_unproven"
+          ]
+        }
+      ]
+    },
+    "after": {
+      "frames": [
+        {
+          "id": "dependency:0:95",
+          "source": null
+        },
+        {
+          "id": "dependency:96:169",
+          "source": null
+        },
+        {
+          "id": "dependency:170:197",
+          "source": null
+        },
+        {
+          "id": "dependency:199:251",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:21",
+          "source": null,
+          "reportingNominal": {
+            "start": 21,
+            "end": 28,
+            "textSpan": "mérései"
+          },
+          "markerSpan": {
+            "start": 29,
+            "end": 36,
+            "textSpan": "alapján"
+          },
+          "predicateSpan": {
+            "start": 56,
+            "end": 67,
+            "textSpan": "Celsius-fok"
+          },
+          "binding": "unresolved",
+          "rule": "possessive_information_artifact_evidential_claim_path",
+          "evidenceSpan": {
+            "start": 21,
+            "end": 36,
+            "textSpan": "mérései alapján"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 29,
+                "end": 36,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 56,
+                "end": 67,
+                "textSpan": "Celsius-fok"
+              }
+            },
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 29,
+                "end": 36,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 56,
+                "end": 67,
+                "textSpan": "Celsius-fok"
+              }
+            }
+          ],
+          "unresolvedReasons": [
+            "source_bearing_possessor_unproven",
+            "artifact_claim_target_unproven"
+          ],
+          "sourceArtifact": {
+            "start": 21,
+            "end": 28,
+            "textSpan": "mérései"
+          },
+          "claimFrameIds": []
+        }
+      ]
+    }
+  },
+  {
+    "id": "N",
+    "before": {
+      "frames": [
+        {
+          "id": "dependency:0:65",
+          "source": null
+        },
+        {
+          "id": "dependency:66:130",
+          "source": null
+        },
+        {
+          "id": "dependency:132:160",
+          "source": null
+        },
+        {
+          "id": "dependency:161:231",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:75",
+          "source": null,
+          "reportingNominal": {
+            "start": 75,
+            "end": 83,
+            "textSpan": "jelentés"
+          },
+          "markerSpan": {
+            "start": 84,
+            "end": 91,
+            "textSpan": "alapján"
+          },
+          "predicateSpan": {
+            "start": 149,
+            "end": 159,
+            "textSpan": "milliméter"
+          },
+          "binding": "unresolved",
+          "rule": "possessive_np_event_nominal_evidential_marker",
+          "evidenceSpan": {
+            "start": 75,
+            "end": 91,
+            "textSpan": "jelentés alapján"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "nmod:obl",
+              "sourceSpan": {
+                "start": 84,
+                "end": 91,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 149,
+                "end": 159,
+                "textSpan": "milliméter"
+              }
+            }
+          ],
+          "unresolvedReasons": [
+            "source_bearing_possessor_unproven"
+          ]
+        }
+      ]
+    },
+    "after": {
+      "frames": [
+        {
+          "id": "dependency:0:65",
+          "source": null
+        },
+        {
+          "id": "dependency:66:130",
+          "source": null
+        },
+        {
+          "id": "dependency:132:160",
+          "source": null
+        },
+        {
+          "id": "dependency:161:231",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:75",
+          "source": null,
+          "reportingNominal": {
+            "start": 75,
+            "end": 83,
+            "textSpan": "jelentés"
+          },
+          "markerSpan": {
+            "start": 84,
+            "end": 91,
+            "textSpan": "alapján"
+          },
+          "predicateSpan": {
+            "start": 149,
+            "end": 159,
+            "textSpan": "milliméter"
+          },
+          "binding": "unresolved",
+          "rule": "possessive_information_artifact_evidential_claim_path",
+          "evidenceSpan": {
+            "start": 75,
+            "end": 91,
+            "textSpan": "jelentés alapján"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "nmod:obl",
+              "sourceSpan": {
+                "start": 84,
+                "end": 91,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 149,
+                "end": 159,
+                "textSpan": "milliméter"
+              }
+            },
+            {
+              "relation": "nmod:obl",
+              "sourceSpan": {
+                "start": 84,
+                "end": 91,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 149,
+                "end": 159,
+                "textSpan": "milliméter"
+              }
+            }
+          ],
+          "unresolvedReasons": [
+            "source_bearing_possessor_unproven",
+            "artifact_claim_target_unproven"
+          ],
+          "sourceArtifact": {
+            "start": 75,
+            "end": 83,
+            "textSpan": "jelentés"
+          },
+          "claimFrameIds": []
+        }
+      ]
+    }
+  },
+  {
+    "id": "O",
+    "before": {
+      "frames": [
+        {
+          "id": "dependency:0:69",
+          "source": {
+            "mention": "árjegyzéke",
+            "normalized": "árjegyzék",
+            "start": 13,
+            "end": 23,
+            "type": "referent",
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 13,
+              "end": 23,
+              "textSpan": "árjegyzéke"
+            }
+          }
+        },
+        {
+          "id": "dependency:70:88",
+          "source": null
+        },
+        {
+          "id": "dependency:90:137",
+          "source": null
+        },
+        {
+          "id": "dependency:139:171",
+          "source": null
+        },
+        {
+          "id": "dependency:172:216",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": []
+    },
+    "after": {
+      "frames": [
+        {
+          "id": "dependency:0:69",
+          "source": {
+            "mention": "üzletlánc",
+            "normalized": "üzletlánc",
+            "start": 3,
+            "end": 12,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 12,
+              "textSpan": "üzletlánc"
+            }
+          }
+        },
+        {
+          "id": "dependency:70:88",
+          "source": null
+        },
+        {
+          "id": "dependency:90:137",
+          "source": null
+        },
+        {
+          "id": "dependency:139:171",
+          "source": null
+        },
+        {
+          "id": "dependency:172:216",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:13",
+          "source": {
+            "mention": "üzletlánc",
+            "normalized": "üzletlánc",
+            "start": 3,
+            "end": 12,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 3,
+              "end": 12,
+              "textSpan": "üzletlánc"
+            }
+          },
+          "reportingNominal": {
+            "start": 13,
+            "end": 23,
+            "textSpan": "árjegyzéke"
+          },
+          "markerSpan": {
+            "start": 24,
+            "end": 31,
+            "textSpan": "szerint"
+          },
+          "predicateSpan": {
+            "start": 63,
+            "end": 68,
+            "textSpan": "kerül"
+          },
+          "binding": "resolved",
+          "rule": "possessive_information_artifact_evidential_claim_path",
+          "evidenceSpan": {
+            "start": 3,
+            "end": 31,
+            "textSpan": "üzletlánc árjegyzéke szerint"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "case",
+              "sourceSpan": {
+                "start": 24,
+                "end": 31,
+                "textSpan": "szerint"
+              },
+              "targetSpan": {
+                "start": 13,
+                "end": 23,
+                "textSpan": "árjegyzéke"
+              }
+            },
+            {
+              "relation": "nmod:att",
+              "sourceSpan": {
+                "start": 3,
+                "end": 12,
+                "textSpan": "üzletlánc"
+              },
+              "targetSpan": {
+                "start": 13,
+                "end": 23,
+                "textSpan": "árjegyzéke"
+              }
+            },
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 13,
+                "end": 23,
+                "textSpan": "árjegyzéke"
+              },
+              "targetSpan": {
+                "start": 63,
+                "end": 68,
+                "textSpan": "kerül"
+              }
+            }
+          ],
+          "unresolvedReasons": [],
+          "sourceArtifact": {
+            "start": 13,
+            "end": 23,
+            "textSpan": "árjegyzéke"
+          },
+          "claimFrameIds": [
+            "dependency:0:69"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "S",
+    "before": {
+      "frames": [
+        {
+          "id": "dependency:0:78",
+          "source": {
+            "mention": "gazdaság agronómusának",
+            "normalized": "gazdaság agronómus",
+            "start": 2,
+            "end": 24,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 24,
+              "textSpan": "gazdaság agronómusának"
+            }
+          }
+        },
+        {
+          "id": "dependency:80:105",
+          "source": null
+        },
+        {
+          "id": "dependency:106:153",
+          "source": null
+        },
+        {
+          "id": "dependency:155:160",
+          "source": null
+        },
+        {
+          "id": "dependency:162:189",
+          "source": null
+        },
+        {
+          "id": "dependency:190:238",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:25",
+          "source": {
+            "mention": "gazdaság agronómusának",
+            "normalized": "gazdaság agronómus",
+            "start": 2,
+            "end": 24,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 24,
+              "textSpan": "gazdaság agronómusának"
+            }
+          },
+          "reportingNominal": {
+            "start": 25,
+            "end": 33,
+            "textSpan": "becslése"
+          },
+          "markerSpan": {
+            "start": 34,
+            "end": 41,
+            "textSpan": "alapján"
+          },
+          "predicateSpan": {
+            "start": 70,
+            "end": 78,
+            "textSpan": "teremhet"
+          },
+          "binding": "resolved",
+          "rule": "possessive_np_event_nominal_evidential_marker",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 41,
+            "textSpan": "gazdaság agronómusának becslése alapján"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 34,
+                "end": 41,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 70,
+                "end": 78,
+                "textSpan": "teremhet"
+              }
+            },
+            {
+              "relation": "nmod:att",
+              "sourceSpan": {
+                "start": 2,
+                "end": 24,
+                "textSpan": "gazdaság agronómusának"
+              },
+              "targetSpan": {
+                "start": 25,
+                "end": 33,
+                "textSpan": "becslése"
+              }
+            }
+          ],
+          "unresolvedReasons": []
+        }
+      ]
+    },
+    "after": {
+      "frames": [
+        {
+          "id": "dependency:0:78",
+          "source": {
+            "mention": "gazdaság agronómusának",
+            "normalized": "gazdaság agronómus",
+            "start": 2,
+            "end": 24,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 24,
+              "textSpan": "gazdaság agronómusának"
+            }
+          }
+        },
+        {
+          "id": "dependency:80:105",
+          "source": null
+        },
+        {
+          "id": "dependency:106:153",
+          "source": null
+        },
+        {
+          "id": "dependency:155:160",
+          "source": null
+        },
+        {
+          "id": "dependency:162:189",
+          "source": null
+        },
+        {
+          "id": "dependency:190:238",
+          "source": null
+        }
+      ],
+      "chains": [],
+      "relations": [
+        {
+          "id": "nominal-source:25",
+          "source": {
+            "mention": "gazdaság agronómusának",
+            "normalized": "gazdaság agronómus",
+            "start": 2,
+            "end": 24,
+            "type": "local_source",
+            "identityStatus": "observed_local_referent",
+            "evidenceSpan": {
+              "start": 2,
+              "end": 24,
+              "textSpan": "gazdaság agronómusának"
+            }
+          },
+          "reportingNominal": {
+            "start": 25,
+            "end": 33,
+            "textSpan": "becslése"
+          },
+          "markerSpan": {
+            "start": 34,
+            "end": 41,
+            "textSpan": "alapján"
+          },
+          "predicateSpan": {
+            "start": 70,
+            "end": 78,
+            "textSpan": "teremhet"
+          },
+          "binding": "resolved",
+          "rule": "possessive_information_artifact_evidential_claim_path",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 41,
+            "textSpan": "gazdaság agronómusának becslése alapján"
+          },
+          "dependencyEvidence": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 34,
+                "end": 41,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 70,
+                "end": 78,
+                "textSpan": "teremhet"
+              }
+            },
+            {
+              "relation": "nmod:att",
+              "sourceSpan": {
+                "start": 2,
+                "end": 24,
+                "textSpan": "gazdaság agronómusának"
+              },
+              "targetSpan": {
+                "start": 25,
+                "end": 33,
+                "textSpan": "becslése"
+              }
+            },
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 34,
+                "end": 41,
+                "textSpan": "alapján"
+              },
+              "targetSpan": {
+                "start": 70,
+                "end": 78,
+                "textSpan": "teremhet"
+              }
+            }
+          ],
+          "unresolvedReasons": [],
+          "sourceArtifact": {
+            "start": 25,
+            "end": 33,
+            "textSpan": "becslése"
+          },
+          "claimFrameIds": [
+            "dependency:0:78"
+          ]
+        }
+      ]
+    }
+  }
+]

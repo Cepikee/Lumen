@@ -1,0 +1,719 @@
+{
+  "id": "Y",
+  "raw": "A panzió vendégkönyvéből idézett a recepciós: „Ha visszatérnénk, legalább öt éjszakát maradnánk.” A foglalási rendszer naplója 18 százalékról 26 százalékra emelkedő hétköznapi kihasználtságot jelez, a növekmény tehát nyolc százalékpont. A bejegyzéshez nem tartozik név, a recepciós pedig nem tudta azonosítani az idézett vendéget.",
+  "rawSha256": "e887e9faf422aa0c64f3b523a5a35f3f89de678db35b9be4efdf2e74e276a857",
+  "annotationSha256": "2442dca46c42e5388e72d952e6f8e6c79273a47e0c09491bc0f653e8b19b3191",
+  "sentenceCount": 3,
+  "tokenCount": 52,
+  "environmentFingerprint": "143242eddc17f94ea729a1b430c5eac9d5e47dd7d27b5ebdd29c7c6961882f47",
+  "model": {
+    "type": "ready",
+    "model": "hu_core_news_md",
+    "version": "3.8.0",
+    "loadMs": 1160.3809050000002
+  },
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 8,
+        "text": "panzió",
+        "lemma": "panzió",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 9
+      },
+      {
+        "start": 9,
+        "end": 24,
+        "text": "vendégkönyvéből",
+        "lemma": "vendégkönyv",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 25
+      },
+      {
+        "start": 25,
+        "end": 32,
+        "text": "idézett",
+        "lemma": "idéz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 25
+      },
+      {
+        "start": 33,
+        "end": 34,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 35
+      },
+      {
+        "start": 35,
+        "end": 44,
+        "text": "recepciós",
+        "lemma": "recepciós",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 25
+      },
+      {
+        "start": 44,
+        "end": 45,
+        "text": ":",
+        "lemma": ":",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 25
+      },
+      {
+        "start": 46,
+        "end": 47,
+        "text": "„",
+        "lemma": "„",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 50
+      },
+      {
+        "start": 47,
+        "end": 49,
+        "text": "Ha",
+        "lemma": "ha",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 50
+      },
+      {
+        "start": 50,
+        "end": 63,
+        "text": "visszatérnénk",
+        "lemma": "visszatér",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Cnd",
+          "Number": "Plur",
+          "Person": "1",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "parataxis",
+        "headStart": 25
+      },
+      {
+        "start": 63,
+        "end": 64,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 86
+      },
+      {
+        "start": 65,
+        "end": 73,
+        "text": "legalább",
+        "lemma": "legalább",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 77
+      },
+      {
+        "start": 74,
+        "end": 76,
+        "text": "öt",
+        "lemma": "öt",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 77
+      },
+      {
+        "start": 77,
+        "end": 85,
+        "text": "éjszakát",
+        "lemma": "éjszaka",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 86
+      },
+      {
+        "start": 86,
+        "end": 95,
+        "text": "maradnánk",
+        "lemma": "marad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Cnd",
+          "Number": "Plur",
+          "Person": "1",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 50
+      },
+      {
+        "start": 95,
+        "end": 96,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 25
+      },
+      {
+        "start": 96,
+        "end": 97,
+        "text": "”",
+        "lemma": "”",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Int"
+        },
+        "dep": "obj",
+        "headStart": 192
+      },
+      {
+        "start": 98,
+        "end": 99,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 110
+      },
+      {
+        "start": 100,
+        "end": 109,
+        "text": "foglalási",
+        "lemma": "foglalási",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 110
+      },
+      {
+        "start": 110,
+        "end": 118,
+        "text": "rendszer",
+        "lemma": "rendszer",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 119
+      },
+      {
+        "start": 119,
+        "end": 126,
+        "text": "naplója",
+        "lemma": "napló",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 192
+      },
+      {
+        "start": 127,
+        "end": 129,
+        "text": "18",
+        "lemma": "18",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 130
+      },
+      {
+        "start": 130,
+        "end": 141,
+        "text": "százalékról",
+        "lemma": "százalék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Del",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 156
+      },
+      {
+        "start": 142,
+        "end": 144,
+        "text": "26",
+        "lemma": "26",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 145
+      },
+      {
+        "start": 145,
+        "end": 155,
+        "text": "százalékra",
+        "lemma": "százalék",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 156
+      },
+      {
+        "start": 156,
+        "end": 164,
+        "text": "emelkedő",
+        "lemma": "emelkedő",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "VerbForm": "PartPres"
+        },
+        "dep": "amod:att",
+        "headStart": 176
+      },
+      {
+        "start": 165,
+        "end": 175,
+        "text": "hétköznapi",
+        "lemma": "hétköznapi",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 176
+      },
+      {
+        "start": 176,
+        "end": 191,
+        "text": "kihasználtságot",
+        "lemma": "kihasználtság",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 192
+      },
+      {
+        "start": 192,
+        "end": 197,
+        "text": "jelez",
+        "lemma": "jelez",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 192
+      },
+      {
+        "start": 197,
+        "end": 198,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 223
+      },
+      {
+        "start": 199,
+        "end": 200,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 201
+      },
+      {
+        "start": 201,
+        "end": 210,
+        "text": "növekmény",
+        "lemma": "növekmény",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 223
+      },
+      {
+        "start": 211,
+        "end": 216,
+        "text": "tehát",
+        "lemma": "tehát",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 223
+      },
+      {
+        "start": 217,
+        "end": 222,
+        "text": "nyolc",
+        "lemma": "nyolc",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 223
+      },
+      {
+        "start": 223,
+        "end": 235,
+        "text": "százalékpont",
+        "lemma": "százalékpont",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 192
+      },
+      {
+        "start": 235,
+        "end": 236,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 192
+      },
+      {
+        "start": 237,
+        "end": 238,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 239
+      },
+      {
+        "start": 239,
+        "end": 251,
+        "text": "bejegyzéshez",
+        "lemma": "bejegyzés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "All",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 256
+      },
+      {
+        "start": 252,
+        "end": 255,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 256
+      },
+      {
+        "start": 256,
+        "end": 264,
+        "text": "tartozik",
+        "lemma": "tartozik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 256
+      },
+      {
+        "start": 265,
+        "end": 268,
+        "text": "név",
+        "lemma": "név",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 256
+      },
+      {
+        "start": 268,
+        "end": 269,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 292
+      },
+      {
+        "start": 270,
+        "end": 271,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 272
+      },
+      {
+        "start": 272,
+        "end": 281,
+        "text": "recepciós",
+        "lemma": "recepciós",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 292
+      },
+      {
+        "start": 282,
+        "end": 287,
+        "text": "pedig",
+        "lemma": "pedig",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 292
+      },
+      {
+        "start": 288,
+        "end": 291,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 292
+      },
+      {
+        "start": 292,
+        "end": 297,
+        "text": "tudta",
+        "lemma": "tud",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 256
+      },
+      {
+        "start": 298,
+        "end": 309,
+        "text": "azonosítani",
+        "lemma": "azonosít",
+        "pos": "VERB",
+        "morph": {
+          "VerbForm": "Inf",
+          "Voice": "Act"
+        },
+        "dep": "xcomp",
+        "headStart": 292
+      },
+      {
+        "start": 310,
+        "end": 312,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 321
+      },
+      {
+        "start": 313,
+        "end": 320,
+        "text": "idézett",
+        "lemma": "idézett",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "VerbForm": "PartPast"
+        },
+        "dep": "amod:att",
+        "headStart": 321
+      },
+      {
+        "start": 321,
+        "end": 329,
+        "text": "vendéget",
+        "lemma": "vendég",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 298
+      },
+      {
+        "start": 329,
+        "end": 330,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 256
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 96,
+        "text": "A panzió vendégkönyvéből idézett a recepciós: „Ha visszatérnénk, legalább öt éjszakát maradnánk."
+      },
+      {
+        "start": 96,
+        "end": 236,
+        "text": "” A foglalási rendszer naplója 18 százalékról 26 százalékra emelkedő hétköznapi kihasználtságot jelez, a növekmény tehát nyolc százalékpont."
+      },
+      {
+        "start": 237,
+        "end": 330,
+        "text": "A bejegyzéshez nem tartozik név, a recepciós pedig nem tudta azonosítani az idézett vendéget."
+      }
+    ],
+    "entities": []
+  }
+}

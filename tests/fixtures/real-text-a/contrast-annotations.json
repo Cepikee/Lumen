@@ -1,0 +1,1287 @@
+[
+  {
+    "id": "actor",
+    "text": "Nem Péter, hanem Anna írta alá a szerződést.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 3,
+          "text": "Nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          }
+        },
+        {
+          "start": 4,
+          "end": 9,
+          "text": "Péter",
+          "lemma": "Péter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 9,
+          "end": 10,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 11,
+          "end": 16,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 17,
+          "end": 21,
+          "text": "Anna",
+          "lemma": "Anna",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 22,
+          "end": 26,
+          "text": "írta",
+          "lemma": "ír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 27,
+          "end": 30,
+          "text": "alá",
+          "lemma": "alá",
+          "pos": "ADV",
+          "morph": {
+            "Degree": "Pos"
+          }
+        },
+        {
+          "start": 31,
+          "end": 32,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 33,
+          "end": 43,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 43,
+          "end": 44,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 44,
+          "text": "Nem Péter, hanem Anna írta alá a szerződést."
+        }
+      ],
+      "entities": [
+        {
+          "start": 4,
+          "end": 9,
+          "text": "Péter",
+          "label": "PER"
+        },
+        {
+          "start": 17,
+          "end": 21,
+          "text": "Anna",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "number",
+    "text": "A cég nem 20, hanem 35 embert bocsát el.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 5,
+          "text": "cég",
+          "lemma": "cég",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 6,
+          "end": 9,
+          "text": "nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          }
+        },
+        {
+          "start": 10,
+          "end": 12,
+          "text": "20",
+          "lemma": "20",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 12,
+          "end": 13,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 14,
+          "end": 19,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 20,
+          "end": 22,
+          "text": "35",
+          "lemma": "35",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 23,
+          "end": 29,
+          "text": "embert",
+          "lemma": "ember",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 30,
+          "end": 36,
+          "text": "bocsát",
+          "lemma": "bocsát",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 37,
+          "end": 39,
+          "text": "el",
+          "lemma": "el",
+          "pos": "ADV",
+          "morph": {}
+        },
+        {
+          "start": 39,
+          "end": 40,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "text": "A cég nem 20, hanem 35 embert bocsát el."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "year",
+    "text": "Nem 2025-ben, hanem 2026-ban lép életbe.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 3,
+          "text": "Nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          }
+        },
+        {
+          "start": 4,
+          "end": 12,
+          "text": "2025-ben",
+          "lemma": "2025",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Ine",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 12,
+          "end": 13,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 14,
+          "end": 19,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 20,
+          "end": 28,
+          "text": "2026-ban",
+          "lemma": "2026",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Ine",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 29,
+          "end": 32,
+          "text": "lép",
+          "lemma": "lép",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 33,
+          "end": 39,
+          "text": "életbe",
+          "lemma": "élet",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Ill",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 39,
+          "end": 40,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "text": "Nem 2025-ben, hanem 2026-ban lép életbe."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "money",
+    "text": "A támogatás nem 3, hanem 4,2 milliárd forint volt.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 11,
+          "text": "támogatás",
+          "lemma": "támogatás",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 12,
+          "end": 15,
+          "text": "nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          }
+        },
+        {
+          "start": 16,
+          "end": 17,
+          "text": "3",
+          "lemma": "3",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 17,
+          "end": 18,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 19,
+          "end": 24,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 25,
+          "end": 28,
+          "text": "4,2",
+          "lemma": "4,2",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Frac",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 29,
+          "end": 37,
+          "text": "milliárd",
+          "lemma": "milliárd",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 38,
+          "end": 44,
+          "text": "forint",
+          "lemma": "forint",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 45,
+          "end": 49,
+          "text": "volt",
+          "lemma": "van",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 49,
+          "end": 50,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 50,
+          "text": "A támogatás nem 3, hanem 4,2 milliárd forint volt."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "source",
+    "text": "Nem a minisztérium, hanem a rendőrség közölte az adatot.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 3,
+          "text": "Nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          }
+        },
+        {
+          "start": 4,
+          "end": 5,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 6,
+          "end": 18,
+          "text": "minisztérium",
+          "lemma": "minisztérium",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 18,
+          "end": 19,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 20,
+          "end": 25,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 26,
+          "end": 27,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 28,
+          "end": 37,
+          "text": "rendőrség",
+          "lemma": "rendőrség",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 38,
+          "end": 45,
+          "text": "közölte",
+          "lemma": "közöl",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 46,
+          "end": 48,
+          "text": "az",
+          "lemma": "az",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 49,
+          "end": 55,
+          "text": "adatot",
+          "lemma": "adat",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 55,
+          "end": 56,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 56,
+          "text": "Nem a minisztérium, hanem a rendőrség közölte az adatot."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "reported",
+    "text": "A vállalat szerint nem 120, hanem 90 állás szűnik meg.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 1,
+          "text": "A",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 2,
+          "end": 10,
+          "text": "vállalat",
+          "lemma": "vállalat",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 11,
+          "end": 18,
+          "text": "szerint",
+          "lemma": "szerint",
+          "pos": "ADP",
+          "morph": {}
+        },
+        {
+          "start": 19,
+          "end": 22,
+          "text": "nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          }
+        },
+        {
+          "start": 23,
+          "end": 26,
+          "text": "120",
+          "lemma": "120",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 26,
+          "end": 27,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 28,
+          "end": 33,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 34,
+          "end": 36,
+          "text": "90",
+          "lemma": "90",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 37,
+          "end": 42,
+          "text": "állás",
+          "lemma": "állás",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 43,
+          "end": 49,
+          "text": "szűnik",
+          "lemma": "szűnik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 50,
+          "end": 53,
+          "text": "meg",
+          "lemma": "meg",
+          "pos": "PART",
+          "morph": {}
+        },
+        {
+          "start": 53,
+          "end": 54,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 54,
+          "text": "A vállalat szerint nem 120, hanem 90 állás szűnik meg."
+        }
+      ],
+      "entities": []
+    }
+  },
+  {
+    "id": "mismatch",
+    "text": "Nem Péter, hanem 35 embert bocsát el.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 3,
+          "text": "Nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          }
+        },
+        {
+          "start": 4,
+          "end": 9,
+          "text": "Péter",
+          "lemma": "Péter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 9,
+          "end": 10,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 11,
+          "end": 16,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 17,
+          "end": 19,
+          "text": "35",
+          "lemma": "35",
+          "pos": "NUM",
+          "morph": {
+            "Case": "Nom",
+            "NumType": "Card",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 20,
+          "end": 26,
+          "text": "embert",
+          "lemma": "ember",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 27,
+          "end": 33,
+          "text": "bocsát",
+          "lemma": "bocsát",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Pres",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 34,
+          "end": 36,
+          "text": "el",
+          "lemma": "el",
+          "pos": "ADV",
+          "morph": {}
+        },
+        {
+          "start": 36,
+          "end": 37,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 37,
+          "text": "Nem Péter, hanem 35 embert bocsát el."
+        }
+      ],
+      "entities": [
+        {
+          "start": 4,
+          "end": 9,
+          "text": "Péter",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "two_actions",
+    "text": "Péter nem fizetett, hanem Anna távozott.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Péter",
+          "lemma": "Péter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 6,
+          "end": 9,
+          "text": "nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          }
+        },
+        {
+          "start": 10,
+          "end": 18,
+          "text": "fizetett",
+          "lemma": "fizet",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 18,
+          "end": 19,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 20,
+          "end": 25,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 26,
+          "end": 30,
+          "text": "Anna",
+          "lemma": "Anna",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 31,
+          "end": 39,
+          "text": "távozott",
+          "lemma": "távozik",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Ind",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 39,
+          "end": 40,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "text": "Péter nem fizetett, hanem Anna távozott."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 5,
+          "text": "Péter",
+          "label": "PER"
+        },
+        {
+          "start": 26,
+          "end": 30,
+          "text": "Anna",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "double",
+    "text": "Nem Péter, hanem Anna, hanem Júlia írta alá.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 3,
+          "text": "Nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          }
+        },
+        {
+          "start": 4,
+          "end": 9,
+          "text": "Péter",
+          "lemma": "Péter",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 9,
+          "end": 10,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 11,
+          "end": 16,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 17,
+          "end": 21,
+          "text": "Anna",
+          "lemma": "Anna",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 21,
+          "end": 22,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 23,
+          "end": 28,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 29,
+          "end": 34,
+          "text": "Júlia",
+          "lemma": "Júlia",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 35,
+          "end": 39,
+          "text": "írta",
+          "lemma": "ír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 40,
+          "end": 43,
+          "text": "alá",
+          "lemma": "alá",
+          "pos": "ADV",
+          "morph": {
+            "Degree": "Pos"
+          }
+        },
+        {
+          "start": 43,
+          "end": 44,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 44,
+          "text": "Nem Péter, hanem Anna, hanem Júlia írta alá."
+        }
+      ],
+      "entities": [
+        {
+          "start": 4,
+          "end": 9,
+          "text": "Péter",
+          "label": "PER"
+        },
+        {
+          "start": 17,
+          "end": 21,
+          "text": "Anna",
+          "label": "PER"
+        },
+        {
+          "start": 29,
+          "end": 34,
+          "text": "Júlia",
+          "label": "PER"
+        }
+      ]
+    }
+  },
+  {
+    "id": "object",
+    "text": "Anna nem a levelet, hanem a szerződést írta alá.",
+    "annotation": {
+      "tokens": [
+        {
+          "start": 0,
+          "end": 4,
+          "text": "Anna",
+          "lemma": "Anna",
+          "pos": "PROPN",
+          "morph": {
+            "Case": "Nom",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 5,
+          "end": 8,
+          "text": "nem",
+          "lemma": "nem",
+          "pos": "ADV",
+          "morph": {
+            "PronType": "Neg"
+          }
+        },
+        {
+          "start": 9,
+          "end": 10,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 11,
+          "end": 18,
+          "text": "levelet",
+          "lemma": "levél",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 18,
+          "end": 19,
+          "text": ",",
+          "lemma": ",",
+          "pos": "PUNCT",
+          "morph": {}
+        },
+        {
+          "start": 20,
+          "end": 25,
+          "text": "hanem",
+          "lemma": "hanem",
+          "pos": "CCONJ",
+          "morph": {}
+        },
+        {
+          "start": 26,
+          "end": 27,
+          "text": "a",
+          "lemma": "a",
+          "pos": "DET",
+          "morph": {
+            "Definite": "Def",
+            "PronType": "Art"
+          }
+        },
+        {
+          "start": 28,
+          "end": 38,
+          "text": "szerződést",
+          "lemma": "szerződés",
+          "pos": "NOUN",
+          "morph": {
+            "Case": "Acc",
+            "Number": "Sing"
+          }
+        },
+        {
+          "start": 39,
+          "end": 43,
+          "text": "írta",
+          "lemma": "ír",
+          "pos": "VERB",
+          "morph": {
+            "Definite": "Def",
+            "Mood": "Ind",
+            "Number": "Sing",
+            "Person": "3",
+            "Tense": "Past",
+            "VerbForm": "Fin",
+            "Voice": "Act"
+          }
+        },
+        {
+          "start": 44,
+          "end": 47,
+          "text": "alá",
+          "lemma": "alá",
+          "pos": "ADV",
+          "morph": {
+            "Degree": "Pos"
+          }
+        },
+        {
+          "start": 47,
+          "end": 48,
+          "text": ".",
+          "lemma": ".",
+          "pos": "PUNCT",
+          "morph": {}
+        }
+      ],
+      "sentences": [
+        {
+          "start": 0,
+          "end": 48,
+          "text": "Anna nem a levelet, hanem a szerződést írta alá."
+        }
+      ],
+      "entities": [
+        {
+          "start": 0,
+          "end": 4,
+          "text": "Anna",
+          "label": "PER"
+        }
+      ]
+    }
+  }
+]

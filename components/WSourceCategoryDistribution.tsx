@@ -12,6 +12,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { useUserStore } from "@/store/useUserStore";
 import { useState } from "react";
 import UtomModal from "@/components/UtomModal";
+import InsightsEmptyState from "./InsightsEmptyState";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -65,18 +66,18 @@ const fetcher = (url: string) =>
     return data;
   });
 
-export default function WSourceCategoryDistribution() {
+export default function WSourceCategoryDistribution({ period = "24h", dark = false }: { period?: string; dark?: boolean }) {
   const theme = useUserStore((s) => s.theme);
   const [openInfo, setOpenInfo] = useState(false);
 
-  const isDark =
+  const isDark = dark ||
     theme === "dark" ||
     (theme === "system" &&
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const { data, error, isLoading } = useSWR<{ success: boolean; items: CategoryItem[] }>(
-    "/api/premium-insights/source-category-distribution",
+    `/api/premium-insights/source-category-distribution?period=${encodeURIComponent(period)}`,
     fetcher,
     { refreshInterval: 60000 }
   );
@@ -101,7 +102,7 @@ export default function WSourceCategoryDistribution() {
     : [];
 
   if (items.length === 0) {
-    return <div className="p-4 text-muted">Nincs elérhető forrás-kategória adat.</div>;
+    return <InsightsEmptyState period={period} />;
   }
 
   const categories = [

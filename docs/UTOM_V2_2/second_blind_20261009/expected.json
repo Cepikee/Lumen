@@ -1,0 +1,722 @@
+[
+  {
+    "id": "P1",
+    "snippet": "P",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A közlés külső forrása Reggeli Hír, belső forrása kormányszóvivő; nincs összevonás.",
+    "evidenceExcerpt": "A Reggeli Hír értesülése szerint a kormányszóvivő bejelentette"
+  },
+  {
+    "id": "P2",
+    "snippet": "P",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A tárgyalás szereplője a kabinet, nem a kormányszóvivő.",
+    "evidenceExcerpt": "a kabinet december 3-án tárgyalja"
+  },
+  {
+    "id": "P3",
+    "snippet": "P",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "December 3 a tárgyalás dátuma; év nem megadott.",
+    "evidenceExcerpt": "december 3-án"
+  },
+  {
+    "id": "P4",
+    "snippet": "P",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Az aláíró államtitkár; a miniszter rejected, az aláírás nem tagadott.",
+    "evidenceExcerpt": "Nem a miniszter, hanem az államtitkár írta alá"
+  },
+  {
+    "id": "P5",
+    "snippet": "P",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Csak az ellenzék támogatása tagadott.",
+    "evidenceExcerpt": "Az ellenzék nem támogatja"
+  },
+  {
+    "id": "P6",
+    "snippet": "P",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Reggeli Hír két szava egy kiadványnév, nem két személy.",
+    "evidenceExcerpt": "Reggeli Hír"
+  },
+  {
+    "id": "M1",
+    "snippet": "M",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Kovács Ilona egy személynév; polgármester külön szerep.",
+    "evidenceExcerpt": "Kovács Ilona polgármester"
+  },
+  {
+    "id": "M2",
+    "snippet": "M",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Az állítás forrása Kovács Ilona, a képviselők címzettek.",
+    "evidenceExcerpt": "Kovács Ilona polgármester a képviselőknek elmondta"
+  },
+  {
+    "id": "M3",
+    "snippet": "M",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "64 a felújítandó bérlakások száma, nem képviselőszám.",
+    "evidenceExcerpt": "64 bérlakást"
+  },
+  {
+    "id": "M4",
+    "snippet": "M",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "2029 a lakásfelújítás éve.",
+    "evidenceExcerpt": "2029-ben"
+  },
+  {
+    "id": "M5",
+    "snippet": "M",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Negyedik a kerület sorszáma, nem versenyhelyezés.",
+    "evidenceExcerpt": "negyedik kerületben"
+  },
+  {
+    "id": "M6",
+    "snippet": "M",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Július vége pályázati határidő, nincs pontos nap vagy év.",
+    "evidenceExcerpt": "július végéig"
+  },
+  {
+    "id": "E1",
+    "snippet": "E",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A részesedés vásárlója Delta Alap.",
+    "evidenceExcerpt": "A Delta Alap 22 százalékos részesedést vásárolt"
+  },
+  {
+    "id": "E2",
+    "snippet": "E",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "22 százalék tulajdoni arány, nem változás.",
+    "evidenceExcerpt": "22 százalékos részesedést"
+  },
+  {
+    "id": "E3",
+    "snippet": "E",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "8 százalék a termelés csökkenése, nem tulajdoni arány.",
+    "evidenceExcerpt": "a termelés 8 százalékkal esett"
+  },
+  {
+    "id": "E4",
+    "snippet": "E",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A veszteségre vonatkozó értelmezést az elemző állítja.",
+    "evidenceExcerpt": "Az elemző szerint"
+  },
+  {
+    "id": "E5",
+    "snippet": "E",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "40 millió forint veszteség; bevétel rejected; nem két összegről van szó.",
+    "evidenceExcerpt": "40 millió forint nem bevétel, hanem veszteség"
+  },
+  {
+    "id": "E6",
+    "snippet": "E",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Delta Alap többtokenes intézményi név, nem személy.",
+    "evidenceExcerpt": "Delta Alap"
+  },
+  {
+    "id": "C1",
+    "snippet": "C",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A tagadó idézet beszélője Fekete Márton.",
+    "evidenceExcerpt": "hangsúlyozta Fekete Márton"
+  },
+  {
+    "id": "C2",
+    "snippet": "C",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Az idézetben a rendelések lemondása tagadott.",
+    "evidenceExcerpt": "A rendeléseket nem mondtuk le"
+  },
+  {
+    "id": "C3",
+    "snippet": "C",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A gyártósor újraindításának intézményi szereplője a gyár.",
+    "evidenceExcerpt": "A gyár október 8-án 06:45-kor újraindította"
+  },
+  {
+    "id": "C4",
+    "snippet": "C",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Október 8 és 06:45 ugyanazon újraindítás dátuma/órája, év ismeretlen.",
+    "evidenceExcerpt": "október 8-án 06:45-kor"
+  },
+  {
+    "id": "C5",
+    "snippet": "C",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Harmadik a gyártósor sorszáma, nem rang.",
+    "evidenceExcerpt": "harmadik gyártósort"
+  },
+  {
+    "id": "C6",
+    "snippet": "C",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "31 dolgozó az új műszak létszáma.",
+    "evidenceExcerpt": "31 dolgozó"
+  },
+  {
+    "id": "R1",
+    "snippet": "R",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A sebességállítás cáfolója kapitányság; lap címzett.",
+    "evidenceExcerpt": "A kapitányság a lapnak cáfolta"
+  },
+  {
+    "id": "R2",
+    "snippet": "R",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "52 év a sofőr életkora, nem a kapitányságé.",
+    "evidenceExcerpt": "52 éves sofőr"
+  },
+  {
+    "id": "R3",
+    "snippet": "R",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "110 km/h compound sebesség a cáfolt állításon belül, nem 110 km távolság.",
+    "evidenceExcerpt": "110 km/h-val"
+  },
+  {
+    "id": "R4",
+    "snippet": "R",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A sebességállítás cáfolt és volna-módú, nem pozitív megfigyelés.",
+    "evidenceExcerpt": "cáfolta, hogy a 52 éves sofőr 110 km/h-val hajtott volna"
+  },
+  {
+    "id": "R5",
+    "snippet": "R",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A második idézet forrása szakértő, nem a kapitányság.",
+    "evidenceExcerpt": "a szakértő azt közölte"
+  },
+  {
+    "id": "R6",
+    "snippet": "R",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A második idézet a mérés hitelességét tagadja.",
+    "evidenceExcerpt": "A mérés nem volt hiteles"
+  },
+  {
+    "id": "B1",
+    "snippet": "B",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A kísérés aktora nő, a mentőautó nem actor.",
+    "evidenceExcerpt": "a nő két gyereket kísért"
+  },
+  {
+    "id": "B2",
+    "snippet": "B",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Két gyerek a kísért csoport mérete.",
+    "evidenceExcerpt": "két gyereket"
+  },
+  {
+    "id": "B3",
+    "snippet": "B",
+    "dimension": "actor",
+    "expected": "CORRECT_UNRESOLVED",
+    "expectation": "Az ellátás végrehajtója nincs megadva; sérültek patient, ne legyenek actor.",
+    "evidenceExcerpt": "A sérülteket ellátták"
+  },
+  {
+    "id": "B4",
+    "snippet": "B",
+    "dimension": "actor",
+    "expected": "CORRECT_UNRESOLVED",
+    "expectation": "A maradás alanya sofőr vagy utas; egyetlen biztos szereplő nem választható.",
+    "evidenceExcerpt": "a sofőr vagy az utas"
+  },
+  {
+    "id": "B5",
+    "snippet": "B",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Mentőautó nem személy; nő generikus ember, nem kitalált név.",
+    "evidenceExcerpt": "A mentőautó mellett a nő"
+  },
+  {
+    "id": "B6",
+    "snippet": "B",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Az ellátás és maradás nem tagadott; viszont nem logikai negáció.",
+    "evidenceExcerpt": "ellátták, a sofőr vagy az utas viszont még a helyszínen maradt"
+  },
+  {
+    "id": "S1",
+    "snippet": "S",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Ötödik forduló sorszám, nem Emese helyezése.",
+    "evidenceExcerpt": "ötödik fordulójában"
+  },
+  {
+    "id": "S2",
+    "snippet": "S",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Nagy Emese helyezése 2.",
+    "evidenceExcerpt": "Nagy Emese a második helyen végzett"
+  },
+  {
+    "id": "S3",
+    "snippet": "S",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Bence predikatív helyezése 1.",
+    "evidenceExcerpt": "Bence lett az első"
+  },
+  {
+    "id": "S4",
+    "snippet": "S",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_UNRESOLVED",
+    "expectation": "Bori vagy Noémi: harmadik helyhez egyetlen biztos tulajdonos nem választható.",
+    "evidenceExcerpt": "harmadik helyet Bori vagy Noémi"
+  },
+  {
+    "id": "S5",
+    "snippet": "S",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Az idézet beszélője edző.",
+    "evidenceExcerpt": "Az edző így fogalmazott"
+  },
+  {
+    "id": "S6",
+    "snippet": "S",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Nagy Emese egy kéttagú személynév, nem két szereplő.",
+    "evidenceExcerpt": "Nagy Emese"
+  },
+  {
+    "id": "W1",
+    "snippet": "W",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "75 kilométer/óra sebességküszöb, nem út vagy időtartam.",
+    "evidenceExcerpt": "75 kilométert óránként"
+  },
+  {
+    "id": "W2",
+    "snippet": "W",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A felfüggesztés feltételes; nem befejezett tény.",
+    "evidenceExcerpt": "Ha a széllökések sebessége meghaladja"
+  },
+  {
+    "id": "W3",
+    "snippet": "W",
+    "dimension": "actor",
+    "expected": "CORRECT_UNRESOLVED",
+    "expectation": "A felfüggesztést végző implicit; szél és komp nem agency.",
+    "evidenceExcerpt": "felfüggesztik a kompjáratot"
+  },
+  {
+    "id": "W4",
+    "snippet": "W",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "4 fok az éjszakai összehasonlítási érték.",
+    "evidenceExcerpt": "az éjszakai 4 fokhoz képest"
+  },
+  {
+    "id": "W5",
+    "snippet": "W",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "9 fok délutáni lehetséges érték, nem már megmért tény.",
+    "evidenceExcerpt": "délután 9 fokot mérhetnek"
+  },
+  {
+    "id": "W6",
+    "snippet": "W",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A hőmérsékleti összevetés forrása meteorológus.",
+    "evidenceExcerpt": "A meteorológus szerint"
+  },
+  {
+    "id": "T1",
+    "snippet": "T",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Szolgáltató source, utasok recipient.",
+    "evidenceExcerpt": "A szolgáltató az utasoknak jelezte"
+  },
+  {
+    "id": "T2",
+    "snippet": "T",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Nyitás augusztus 6 rejected, augusztus 9 accepted; év nem ismert.",
+    "evidenceExcerpt": "nem augusztus 6-án, hanem augusztus 9-én"
+  },
+  {
+    "id": "T3",
+    "snippet": "T",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Második nap ordinal, nem járműhelyezés.",
+    "evidenceExcerpt": "második napon"
+  },
+  {
+    "id": "T4",
+    "snippet": "T",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "14 a közlekedő vonatok száma.",
+    "evidenceExcerpt": "14 vonat"
+  },
+  {
+    "id": "T5",
+    "snippet": "T",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "240 utas felső kapacitáskorlát egy szerelvényre, nem tényleges utaslétszám.",
+    "evidenceExcerpt": "legfeljebb 240 utast vihet"
+  },
+  {
+    "id": "T6",
+    "snippet": "T",
+    "dimension": "actor",
+    "expected": "CORRECT_UNRESOLVED",
+    "expectation": "Alagút megnyitásának végrehajtója implicit; a szolgáltató nem automatikusan actor.",
+    "evidenceExcerpt": "nyitják meg az alagutat"
+  },
+  {
+    "id": "I1",
+    "snippet": "I",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Állítás forrása Szabó Dénes; kutatócsoport a szerep birtokosa.",
+    "evidenceExcerpt": "A kutatócsoport vezetője, Szabó Dénes szerint"
+  },
+  {
+    "id": "I2",
+    "snippet": "I",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "800 csomag/másodperc feldolgozási rate; nem 800 összes csomag.",
+    "evidenceExcerpt": "másodpercenként 800 csomagot"
+  },
+  {
+    "id": "I3",
+    "snippet": "I",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A csere szereplője Tóth Éva.",
+    "evidenceExcerpt": "cserélte ki Tóth Éva"
+  },
+  {
+    "id": "I4",
+    "snippet": "I",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Szoftver rejected object, érzékelő accepted object; csere pozitív.",
+    "evidenceExcerpt": "Nem a szoftvert, hanem az érzékelőt"
+  },
+  {
+    "id": "I5",
+    "snippet": "I",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A próba időtartama három óra.",
+    "evidenceExcerpt": "három órán át"
+  },
+  {
+    "id": "I6",
+    "snippet": "I",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Tóth Éva kéttagú személynév, nem object és nem új source.",
+    "evidenceExcerpt": "Tóth Éva"
+  },
+  {
+    "id": "H1",
+    "snippet": "H",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Első idézet source klinika vezetője; klinika possessor.",
+    "evidenceExcerpt": "A klinika vezetője közölte"
+  },
+  {
+    "id": "H2",
+    "snippet": "H",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "90 rejected, 72 accepted várólistalétszám.",
+    "evidenceExcerpt": "nem 90, hanem 72 főből"
+  },
+  {
+    "id": "H3",
+    "snippet": "H",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "72 fő a várólistán, nem a klinika dolgozói.",
+    "evidenceExcerpt": "72 főből áll"
+  },
+  {
+    "id": "H4",
+    "snippet": "H",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Második idézet source igazgató, beteg recipient.",
+    "evidenceExcerpt": "válaszolta az igazgató a betegnek"
+  },
+  {
+    "id": "H5",
+    "snippet": "H",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Új rendelő nyitása tagadott, nem pozitív tervezett nyitás.",
+    "evidenceExcerpt": "Új rendelőt egyelőre nem nyitunk"
+  },
+  {
+    "id": "H6",
+    "snippet": "H",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Klinika vezetője szerepfej és birtokos; nem két külön név.",
+    "evidenceExcerpt": "klinika vezetője"
+  },
+  {
+    "id": "O1",
+    "snippet": "O",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Iskola a tábori fogadás intézményi szereplője.",
+    "evidenceExcerpt": "Az iskola nem 18 tanulót, hanem 26-ot fogad"
+  },
+  {
+    "id": "O2",
+    "snippet": "O",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "18 tanuló rejected, 26 accepted; második ág elhagyott célja ugyanaz a tanulócsoport.",
+    "evidenceExcerpt": "nem 18 tanulót, hanem 26-ot"
+  },
+  {
+    "id": "O3",
+    "snippet": "O",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "26 a fogadandó tanulók száma.",
+    "evidenceExcerpt": "26-ot fogad"
+  },
+  {
+    "id": "O4",
+    "snippet": "O",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Szeptember 2 jelentkezési határidő, év nem ismert.",
+    "evidenceExcerpt": "szeptember 2-ig"
+  },
+  {
+    "id": "O5",
+    "snippet": "O",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Harmadik a program napjának sorszáma, nem iskolai rang.",
+    "evidenceExcerpt": "harmadik nap"
+  },
+  {
+    "id": "O6",
+    "snippet": "O",
+    "dimension": "actor",
+    "expected": "CORRECT_UNRESOLVED",
+    "expectation": "Program kihirdetője implicit, nem a program vagy a nap.",
+    "evidenceExcerpt": "később hirdetik ki"
+  },
+  {
+    "id": "N1",
+    "snippet": "N",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Második a beruházási szakasz ordinalja.",
+    "evidenceExcerpt": "második szakaszában"
+  },
+  {
+    "id": "N2",
+    "snippet": "N",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Északi Energia Zrt. egy intézményi név.",
+    "evidenceExcerpt": "Északi Energia Zrt."
+  },
+  {
+    "id": "N3",
+    "snippet": "N",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "36 megawatt telepített kapacitás, nem energy vagy pénz.",
+    "evidenceExcerpt": "36 megawatt kapacitást"
+  },
+  {
+    "id": "N4",
+    "snippet": "N",
+    "dimension": "actor",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Telepítő Északi Energia Zrt., nem a beruházás.",
+    "evidenceExcerpt": "az Északi Energia Zrt. 36 megawatt kapacitást telepített"
+  },
+  {
+    "id": "N5",
+    "snippet": "N",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "7 százalék rejected, 5 százalék accepted díjemelés; change, nem tulajdoni arány.",
+    "evidenceExcerpt": "nem 7, hanem 5 százalékos díjemelést"
+  },
+  {
+    "id": "N6",
+    "snippet": "N",
+    "dimension": "actor",
+    "expected": "CORRECT_UNRESOLVED",
+    "expectation": "Kiválasztott vállalkozó patient; nem tehető aktív kiválasztóvá.",
+    "evidenceExcerpt": "A bizottság által kiválasztott vállalkozó"
+  },
+  {
+    "id": "K1",
+    "snippet": "K",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Folyóirat → labor szóvivője forráslánc; nem kísérlet actorai.",
+    "evidenceExcerpt": "A folyóirat azt írja, hogy a labor szóvivője szerint"
+  },
+  {
+    "id": "K2",
+    "snippet": "K",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "2030 a lehetséges kezdés éve, nem múltbeli megfigyelés.",
+    "evidenceExcerpt": "2030-ban kezdődhet"
+  },
+  {
+    "id": "K3",
+    "snippet": "K",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Kezdés lehetőség, nem bizonyos bekövetkezés.",
+    "evidenceExcerpt": "kezdődhet el"
+  },
+  {
+    "id": "K4",
+    "snippet": "K",
+    "dimension": "ordinal/rank",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Kilencedik a mérés sorszáma.",
+    "evidenceExcerpt": "kilencedik mérés"
+  },
+  {
+    "id": "K5",
+    "snippet": "K",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "A mérés hibájáról szóló idézet beszélője Kiss Áron.",
+    "evidenceExcerpt": "mondta Kiss Áron"
+  },
+  {
+    "id": "K6",
+    "snippet": "K",
+    "dimension": "temporal",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "November 11 a megígért javítás célideje; év nem adott.",
+    "evidenceExcerpt": "november 11-re ígérte"
+  },
+  {
+    "id": "F1",
+    "snippet": "F",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "580 HUF a kenyér kínálati ára, 620 rejected.",
+    "evidenceExcerpt": "nem 620, hanem 580 forintért"
+  },
+  {
+    "id": "F2",
+    "snippet": "F",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "40 HUF árcsökkenési delta, nem második termékár.",
+    "evidenceExcerpt": "40 forintos csökkentés"
+  },
+  {
+    "id": "F3",
+    "snippet": "F",
+    "dimension": "numeric",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "67 a vásárló életkora; 2 kg a csomag tömege, nem kor vagy vásárló tulajdonsága.",
+    "evidenceExcerpt": "67 éves vásárló szerint olcsóbb lett, a 2 kilogrammos csomag"
+  },
+  {
+    "id": "F4",
+    "snippet": "F",
+    "dimension": "attribution",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Olcsóbb lett a vásárló véleménye.",
+    "evidenceExcerpt": "vásárló szerint olcsóbb lett"
+  },
+  {
+    "id": "F5",
+    "snippet": "F",
+    "dimension": "contrast/negation",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Csomagár közlése tagadott; ne kerüljön a 580 automatikusan a kétkilós csomagra.",
+    "evidenceExcerpt": "a 2 kilogrammos csomag árát nem közölték"
+  },
+  {
+    "id": "F6",
+    "snippet": "F",
+    "dimension": "entity boundary",
+    "expected": "CORRECT_RESOLVED",
+    "expectation": "Fenyő Piac név nem egy Fenyő nevű személy.",
+    "evidenceExcerpt": "Fenyő Piac"
+  }
+]

@@ -1,0 +1,1525 @@
+{
+  "id": "A",
+  "text": "A plenáris ülésen az elnöklő Takács Réka a frakcióknak így indokolta a halasztást: „Amíg az egyeztetés tart, nem tűzzük napirendre a módosítást.” A parlament sajtóirodájának összefoglalója alapján az alkotmányügyi bizottság kérte a szünetet. A voksolásra legkorábban 2028 tavaszán kerülhet sor.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 11
+      },
+      {
+        "start": 2,
+        "end": 10,
+        "text": "plenáris",
+        "lemma": "plenáris",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 11
+      },
+      {
+        "start": 11,
+        "end": 17,
+        "text": "ülésen",
+        "lemma": "ülés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 59
+      },
+      {
+        "start": 18,
+        "end": 20,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 36
+      },
+      {
+        "start": 21,
+        "end": 28,
+        "text": "elnöklő",
+        "lemma": "elnöklő",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "VerbForm": "PartPres"
+        },
+        "dep": "amod:att",
+        "headStart": 29
+      },
+      {
+        "start": 29,
+        "end": 35,
+        "text": "Takács",
+        "lemma": "Takács",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 59
+      },
+      {
+        "start": 36,
+        "end": 40,
+        "text": "Réka",
+        "lemma": "Réka",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 29
+      },
+      {
+        "start": 41,
+        "end": 42,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 43
+      },
+      {
+        "start": 43,
+        "end": 54,
+        "text": "frakcióknak",
+        "lemma": "frakció",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Plur"
+        },
+        "dep": "obl",
+        "headStart": 59
+      },
+      {
+        "start": 55,
+        "end": 58,
+        "text": "így",
+        "lemma": "így",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Dem"
+        },
+        "dep": "advmod:mode",
+        "headStart": 59
+      },
+      {
+        "start": 59,
+        "end": 68,
+        "text": "indokolta",
+        "lemma": "indokol",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 59
+      },
+      {
+        "start": 69,
+        "end": 70,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 71
+      },
+      {
+        "start": 71,
+        "end": 81,
+        "text": "halasztást",
+        "lemma": "halasztás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 59
+      },
+      {
+        "start": 81,
+        "end": 82,
+        "text": ":",
+        "lemma": ":",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 83
+      },
+      {
+        "start": 83,
+        "end": 84,
+        "text": "„",
+        "lemma": "„",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 113
+      },
+      {
+        "start": 84,
+        "end": 88,
+        "text": "Amíg",
+        "lemma": "amíg",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Rel"
+        },
+        "dep": "advmod:tlocy",
+        "headStart": 103
+      },
+      {
+        "start": 89,
+        "end": 91,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 92
+      },
+      {
+        "start": 92,
+        "end": 102,
+        "text": "egyeztetés",
+        "lemma": "egyeztetés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 103
+      },
+      {
+        "start": 103,
+        "end": 107,
+        "text": "tart",
+        "lemma": "tart",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "advcl",
+        "headStart": 113
+      },
+      {
+        "start": 107,
+        "end": 108,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 113
+      },
+      {
+        "start": 109,
+        "end": 112,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 113
+      },
+      {
+        "start": 113,
+        "end": 119,
+        "text": "tűzzük",
+        "lemma": "tűz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Imp",
+          "Number": "Plur",
+          "Person": "1",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 59
+      },
+      {
+        "start": 120,
+        "end": 130,
+        "text": "napirendre",
+        "lemma": "napirend",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 113
+      },
+      {
+        "start": 131,
+        "end": 132,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 133
+      },
+      {
+        "start": 133,
+        "end": 143,
+        "text": "módosítást",
+        "lemma": "módosítás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 113
+      },
+      {
+        "start": 143,
+        "end": 144,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 113
+      },
+      {
+        "start": 144,
+        "end": 145,
+        "text": "”",
+        "lemma": "”",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Prs"
+        },
+        "dep": "obj",
+        "headStart": 224
+      },
+      {
+        "start": 146,
+        "end": 147,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 148
+      },
+      {
+        "start": 148,
+        "end": 157,
+        "text": "parlament",
+        "lemma": "parlament",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 158
+      },
+      {
+        "start": 158,
+        "end": 173,
+        "text": "sajtóirodájának",
+        "lemma": "sajtóirodáj",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Gen",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nmod:att",
+        "headStart": 174
+      },
+      {
+        "start": 174,
+        "end": 188,
+        "text": "összefoglalója",
+        "lemma": "összefoglaló",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nmod:att",
+        "headStart": 189
+      },
+      {
+        "start": 189,
+        "end": 196,
+        "text": "alapján",
+        "lemma": "alap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 224
+      },
+      {
+        "start": 197,
+        "end": 199,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 214
+      },
+      {
+        "start": 200,
+        "end": 213,
+        "text": "alkotmányügyi",
+        "lemma": "alkotmányügyi",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 214
+      },
+      {
+        "start": 214,
+        "end": 223,
+        "text": "bizottság",
+        "lemma": "bizottság",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 224
+      },
+      {
+        "start": 224,
+        "end": 229,
+        "text": "kérte",
+        "lemma": "kér",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 224
+      },
+      {
+        "start": 230,
+        "end": 231,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 232
+      },
+      {
+        "start": 232,
+        "end": 240,
+        "text": "szünetet",
+        "lemma": "szünet",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 224
+      },
+      {
+        "start": 240,
+        "end": 241,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 224
+      },
+      {
+        "start": 242,
+        "end": 243,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 244
+      },
+      {
+        "start": 244,
+        "end": 254,
+        "text": "voksolásra",
+        "lemma": "voksolás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 281
+      },
+      {
+        "start": 255,
+        "end": 266,
+        "text": "legkorábban",
+        "lemma": "korán",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 281
+      },
+      {
+        "start": 267,
+        "end": 271,
+        "text": "2028",
+        "lemma": "2028",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 272
+      },
+      {
+        "start": 272,
+        "end": 280,
+        "text": "tavaszán",
+        "lemma": "tavasz",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 281
+      },
+      {
+        "start": 281,
+        "end": 289,
+        "text": "kerülhet",
+        "lemma": "kerül",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Pot",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 281
+      },
+      {
+        "start": 290,
+        "end": 293,
+        "text": "sor",
+        "lemma": "sor",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 281
+      },
+      {
+        "start": 293,
+        "end": 294,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 281
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 144,
+        "text": "A plenáris ülésen az elnöklő Takács Réka a frakcióknak így indokolta a halasztást: „Amíg az egyeztetés tart, nem tűzzük napirendre a módosítást."
+      },
+      {
+        "start": 144,
+        "end": 241,
+        "text": "” A parlament sajtóirodájának összefoglalója alapján az alkotmányügyi bizottság kérte a szünetet."
+      },
+      {
+        "start": 242,
+        "end": 294,
+        "text": "A voksolásra legkorábban 2028 tavaszán kerülhet sor."
+      }
+    ],
+    "entities": [
+      {
+        "start": 29,
+        "end": 40,
+        "text": "Takács Réka",
+        "label": "PER"
+      }
+    ]
+  },
+  "output": {
+    "entities": [
+      {
+        "mention": "Takács Réka",
+        "normalized": "takács réka",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 29,
+        "end": 40,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 29,
+          "end": 40,
+          "textSpan": "Takács Réka"
+        },
+        "identityKey": "person|takács réka",
+        "canonicalIdentity": "takács réka",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": {
+          "mention": "Takács Réka",
+          "normalized": "takács réka",
+          "start": 29,
+          "end": 40,
+          "type": "named_referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 29,
+            "end": 40,
+            "textSpan": "Takács Réka"
+          }
+        },
+        "actorStatus": "resolved",
+        "subject": {
+          "mention": "Takács Réka",
+          "normalized": "takács réka",
+          "start": 29,
+          "end": 40,
+          "type": "named_referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 29,
+            "end": 40,
+            "textSpan": "Takács Réka"
+          }
+        },
+        "location": [
+          {
+            "mention": "ülésen",
+            "normalized": "ülés",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 11,
+            "end": 17,
+            "evidenceSpan": {
+              "start": 11,
+              "end": 17,
+              "textSpan": "ülésen"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 81,
+          "textSpan": "A plenáris ülésen az elnöklő Takács Réka a frakcióknak így indokolta a halasztást"
+        },
+        "attribution": null,
+        "action": "indokol",
+        "actionSpan": {
+          "start": 59,
+          "end": 68,
+          "textSpan": "indokolta"
+        },
+        "object": [
+          "halasztás"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "resolved",
+        "unresolvedReasons": [],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 81,
+          "textSpan": "A plenáris ülésen az elnöklő Takács Réka a frakcióknak így indokolta a halasztást"
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 81,
+          "textSpan": "A plenáris ülésen az elnöklő Takács Réka a frakcióknak így indokolta a halasztást"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:81",
+        "syntacticRoles": [
+          {
+            "role": "actor",
+            "referent": {
+              "mention": "Takács Réka",
+              "normalized": "takács réka",
+              "start": 29,
+              "end": 40,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 29,
+                "end": 40,
+                "textSpan": "Takács Réka"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 29,
+                "end": 35,
+                "textSpan": "Takács"
+              },
+              "targetSpan": {
+                "start": 59,
+                "end": 68,
+                "textSpan": "indokolta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 29,
+                    "end": 35,
+                    "textSpan": "Takács"
+                  },
+                  "targetSpan": {
+                    "start": 59,
+                    "end": 68,
+                    "textSpan": "indokolta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:81",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "halasztást",
+              "normalized": "halasztás",
+              "start": 71,
+              "end": 81,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 71,
+                "end": 81,
+                "textSpan": "halasztást"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 71,
+                "end": 81,
+                "textSpan": "halasztást"
+              },
+              "targetSpan": {
+                "start": 59,
+                "end": 68,
+                "textSpan": "indokolta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 71,
+                    "end": 81,
+                    "textSpan": "halasztást"
+                  },
+                  "targetSpan": {
+                    "start": 59,
+                    "end": 68,
+                    "textSpan": "indokolta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:81",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "actorEvidence": {
+          "sourceSpan": {
+            "start": 29,
+            "end": 35,
+            "textSpan": "Takács"
+          },
+          "targetSpan": {
+            "start": 59,
+            "end": 68,
+            "textSpan": "indokolta"
+          },
+          "dependencyPath": [
+            {
+              "relation": "nsubj",
+              "sourceSpan": {
+                "start": 29,
+                "end": 35,
+                "textSpan": "Takács"
+              },
+              "targetSpan": {
+                "start": 59,
+                "end": 68,
+                "textSpan": "indokolta"
+              }
+            }
+          ],
+          "frameId": "dependency:0:81",
+          "semanticRole": "actor",
+          "resolutionStatus": "resolved",
+          "rule": "dependency_path_with_case_and_scope_checks"
+        }
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 84,
+          "end": 144,
+          "textSpan": "Amíg az egyeztetés tart, nem tűzzük napirendre a módosítást."
+        },
+        "attribution": null,
+        "action": "tart",
+        "actionSpan": {
+          "start": 103,
+          "end": 107,
+          "textSpan": "tart"
+        },
+        "object": [
+          "módosítás"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind",
+          "Imp"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "unresolved",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "multiple_content_predicates",
+          "actor_unresolved",
+          "nested_negation_scope",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 83,
+          "end": 145,
+          "textSpan": "„Amíg az egyeztetés tart, nem tűzzük napirendre a módosítást.”"
+        },
+        "propositionSpan": {
+          "start": 83,
+          "end": 145,
+          "textSpan": "„Amíg az egyeztetés tart, nem tűzzük napirendre a módosítást.”"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:83:145",
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "alapján",
+            "normalized": "alap",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 189,
+            "end": 196,
+            "evidenceSpan": {
+              "start": 189,
+              "end": 196,
+              "textSpan": "alapján"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 146,
+          "end": 241,
+          "textSpan": "A parlament sajtóirodájának összefoglalója alapján az alkotmányügyi bizottság kérte a szünetet."
+        },
+        "attribution": null,
+        "action": "kér",
+        "actionSpan": {
+          "start": 224,
+          "end": 229,
+          "textSpan": "kérte"
+        },
+        "object": [
+          "szünet"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 146,
+          "end": 241,
+          "textSpan": "A parlament sajtóirodájának összefoglalója alapján az alkotmányügyi bizottság kérte a szünetet."
+        },
+        "propositionSpan": {
+          "start": 146,
+          "end": 241,
+          "textSpan": "A parlament sajtóirodájának összefoglalója alapján az alkotmányügyi bizottság kérte a szünetet."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:146:241",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "parlament",
+              "normalized": "parlament",
+              "start": 148,
+              "end": 157,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 148,
+                "end": 157,
+                "textSpan": "parlament"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 148,
+                "end": 157,
+                "textSpan": "parlament"
+              },
+              "targetSpan": {
+                "start": 224,
+                "end": 229,
+                "textSpan": "kérte"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 148,
+                    "end": 157,
+                    "textSpan": "parlament"
+                  },
+                  "targetSpan": {
+                    "start": 158,
+                    "end": 173,
+                    "textSpan": "sajtóirodájának"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 158,
+                    "end": 173,
+                    "textSpan": "sajtóirodájának"
+                  },
+                  "targetSpan": {
+                    "start": 174,
+                    "end": 188,
+                    "textSpan": "összefoglalója"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 174,
+                    "end": 188,
+                    "textSpan": "összefoglalója"
+                  },
+                  "targetSpan": {
+                    "start": 189,
+                    "end": 196,
+                    "textSpan": "alapján"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 189,
+                    "end": 196,
+                    "textSpan": "alapján"
+                  },
+                  "targetSpan": {
+                    "start": 224,
+                    "end": 229,
+                    "textSpan": "kérte"
+                  }
+                }
+              ],
+              "frameId": "dependency:146:241",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "sajtóirodájának",
+              "normalized": "sajtóirodáj",
+              "start": 158,
+              "end": 173,
+              "type": "referent",
+              "case": "Gen",
+              "evidenceSpan": {
+                "start": 158,
+                "end": 173,
+                "textSpan": "sajtóirodájának"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 158,
+                "end": 173,
+                "textSpan": "sajtóirodájának"
+              },
+              "targetSpan": {
+                "start": 224,
+                "end": 229,
+                "textSpan": "kérte"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 158,
+                    "end": 173,
+                    "textSpan": "sajtóirodájának"
+                  },
+                  "targetSpan": {
+                    "start": 174,
+                    "end": 188,
+                    "textSpan": "összefoglalója"
+                  }
+                },
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 174,
+                    "end": 188,
+                    "textSpan": "összefoglalója"
+                  },
+                  "targetSpan": {
+                    "start": 189,
+                    "end": 196,
+                    "textSpan": "alapján"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 189,
+                    "end": 196,
+                    "textSpan": "alapján"
+                  },
+                  "targetSpan": {
+                    "start": 224,
+                    "end": 229,
+                    "textSpan": "kérte"
+                  }
+                }
+              ],
+              "frameId": "dependency:146:241",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "összefoglalója",
+              "normalized": "összefoglaló",
+              "start": 174,
+              "end": 188,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 174,
+                "end": 188,
+                "textSpan": "összefoglalója"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 174,
+                "end": 188,
+                "textSpan": "összefoglalója"
+              },
+              "targetSpan": {
+                "start": 224,
+                "end": 229,
+                "textSpan": "kérte"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 174,
+                    "end": 188,
+                    "textSpan": "összefoglalója"
+                  },
+                  "targetSpan": {
+                    "start": 189,
+                    "end": 196,
+                    "textSpan": "alapján"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 189,
+                    "end": 196,
+                    "textSpan": "alapján"
+                  },
+                  "targetSpan": {
+                    "start": 224,
+                    "end": 229,
+                    "textSpan": "kérte"
+                  }
+                }
+              ],
+              "frameId": "dependency:146:241",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "szünetet",
+              "normalized": "szünet",
+              "start": 232,
+              "end": 240,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 232,
+                "end": 240,
+                "textSpan": "szünetet"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 232,
+                "end": 240,
+                "textSpan": "szünetet"
+              },
+              "targetSpan": {
+                "start": 224,
+                "end": 229,
+                "textSpan": "kérte"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 232,
+                    "end": 240,
+                    "textSpan": "szünetet"
+                  },
+                  "targetSpan": {
+                    "start": 224,
+                    "end": 229,
+                    "textSpan": "kérte"
+                  }
+                }
+              ],
+              "frameId": "dependency:146:241",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "tavaszán",
+            "normalized": "tavasz",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 272,
+            "end": 280,
+            "evidenceSpan": {
+              "start": 272,
+              "end": 280,
+              "textSpan": "tavaszán"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 242,
+          "end": 294,
+          "textSpan": "A voksolásra legkorábban 2028 tavaszán kerülhet sor."
+        },
+        "attribution": null,
+        "action": "kerül",
+        "actionSpan": {
+          "start": 281,
+          "end": 289,
+          "textSpan": "kerülhet"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 2028,
+            "canonicalValue": 2028,
+            "unit": null,
+            "semanticKind": "unknown",
+            "start": 267,
+            "end": 271,
+            "raw": "2028",
+            "evidenceSpan": {
+              "start": 267,
+              "end": 271,
+              "textSpan": "2028"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ],
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 267,
+                    "end": 271,
+                    "textSpan": "2028"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [
+                {
+                  "kind": "possible",
+                  "rule": "potential_morphology",
+                  "evidenceSpan": {
+                    "start": 281,
+                    "end": 289,
+                    "textSpan": "kerülhet"
+                  },
+                  "dependencyPath": []
+                }
+              ],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:242:294",
+              "clauseSpan": {
+                "start": 242,
+                "end": 294,
+                "textSpan": "A voksolásra legkorábban 2028 tavaszán kerülhet sor."
+              },
+              "predicateSpan": {
+                "start": 281,
+                "end": 289,
+                "textSpan": "kerülhet"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 267,
+                    "end": 271,
+                    "textSpan": "2028"
+                  },
+                  "targetSpan": {
+                    "start": 272,
+                    "end": 280,
+                    "textSpan": "tavaszán"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 272,
+                    "end": 280,
+                    "textSpan": "tavaszán"
+                  },
+                  "targetSpan": {
+                    "start": 281,
+                    "end": 289,
+                    "textSpan": "kerülhet"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": false,
+              "assertionStatus": "qualified_only",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Pot"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "possible"
+        ],
+        "modality": "possible",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved"
+        ],
+        "evidenceSpan": {
+          "start": 242,
+          "end": 294,
+          "textSpan": "A voksolásra legkorábban 2028 tavaszán kerülhet sor."
+        },
+        "propositionSpan": {
+          "start": 242,
+          "end": 294,
+          "textSpan": "A voksolásra legkorábban 2028 tavaszán kerülhet sor."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:242:294",
+        "syntacticRoles": [],
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "possible",
+              "rule": "potential_morphology",
+              "evidenceSpan": {
+                "start": 281,
+                "end": 289,
+                "textSpan": "kerülhet"
+              },
+              "dependencyPath": []
+            }
+          ],
+          "frameId": "dependency:242:294",
+          "clauseSpan": {
+            "start": 242,
+            "end": 294,
+            "textSpan": "A voksolásra legkorábban 2028 tavaszán kerülhet sor."
+          },
+          "projectionAllowed": false
+        }
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

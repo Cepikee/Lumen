@@ -1,0 +1,1193 @@
+{
+  "id": "I",
+  "domain": "technológia",
+  "text": "A kutatócsoport vezetője, Szabó Dénes szerint a rendszer másodpercenként 800 csomagot kezel. Nem a szoftvert, hanem az érzékelőt cserélte ki Tóth Éva. A próbát három órán át végezték.",
+  "started": "2026-10-09T21:35:43.012Z",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 15,
+        "text": "kutatócsoport",
+        "lemma": "kutatócsoport",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 16
+      },
+      {
+        "start": 16,
+        "end": 24,
+        "text": "vezetője",
+        "lemma": "vezető",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "ROOT",
+        "headStart": 16
+      },
+      {
+        "start": 24,
+        "end": 25,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 86
+      },
+      {
+        "start": 26,
+        "end": 31,
+        "text": "Szabó",
+        "lemma": "Szabó",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 86
+      },
+      {
+        "start": 32,
+        "end": 37,
+        "text": "Dénes",
+        "lemma": "Dénes",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 26
+      },
+      {
+        "start": 38,
+        "end": 45,
+        "text": "szerint",
+        "lemma": "szerint",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 26
+      },
+      {
+        "start": 46,
+        "end": 47,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 48
+      },
+      {
+        "start": 48,
+        "end": 56,
+        "text": "rendszer",
+        "lemma": "rendszer",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 86
+      },
+      {
+        "start": 57,
+        "end": 72,
+        "text": "másodpercenként",
+        "lemma": "másodperc",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dis",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 86
+      },
+      {
+        "start": 73,
+        "end": 76,
+        "text": "800",
+        "lemma": "800",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 77
+      },
+      {
+        "start": 77,
+        "end": 85,
+        "text": "csomagot",
+        "lemma": "csomag",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 86
+      },
+      {
+        "start": 86,
+        "end": 91,
+        "text": "kezel",
+        "lemma": "kezel",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "acl",
+        "headStart": 16
+      },
+      {
+        "start": 91,
+        "end": 92,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 16
+      },
+      {
+        "start": 93,
+        "end": 96,
+        "text": "Nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 129
+      },
+      {
+        "start": 97,
+        "end": 98,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 99
+      },
+      {
+        "start": 99,
+        "end": 108,
+        "text": "szoftvert",
+        "lemma": "szoftver",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 129
+      },
+      {
+        "start": 108,
+        "end": 109,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 119
+      },
+      {
+        "start": 110,
+        "end": 115,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 119
+      },
+      {
+        "start": 116,
+        "end": 118,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 119
+      },
+      {
+        "start": 119,
+        "end": 128,
+        "text": "érzékelőt",
+        "lemma": "érzékelő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 99
+      },
+      {
+        "start": 129,
+        "end": 137,
+        "text": "cserélte",
+        "lemma": "cserél",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 129
+      },
+      {
+        "start": 138,
+        "end": 140,
+        "text": "ki",
+        "lemma": "ki",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 129
+      },
+      {
+        "start": 141,
+        "end": 145,
+        "text": "Tóth",
+        "lemma": "Tóth",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 129
+      },
+      {
+        "start": 146,
+        "end": 149,
+        "text": "Éva",
+        "lemma": "Éva",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 141
+      },
+      {
+        "start": 149,
+        "end": 150,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 129
+      },
+      {
+        "start": 151,
+        "end": 152,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 153
+      },
+      {
+        "start": 153,
+        "end": 159,
+        "text": "próbát",
+        "lemma": "próba",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 174
+      },
+      {
+        "start": 160,
+        "end": 165,
+        "text": "három",
+        "lemma": "három",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 166
+      },
+      {
+        "start": 166,
+        "end": 170,
+        "text": "órán",
+        "lemma": "óra",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 174
+      },
+      {
+        "start": 171,
+        "end": 173,
+        "text": "át",
+        "lemma": "át",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 166
+      },
+      {
+        "start": 174,
+        "end": 182,
+        "text": "végezték",
+        "lemma": "végez",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 174
+      },
+      {
+        "start": 182,
+        "end": 183,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 174
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 92,
+        "text": "A kutatócsoport vezetője, Szabó Dénes szerint a rendszer másodpercenként 800 csomagot kezel."
+      },
+      {
+        "start": 93,
+        "end": 150,
+        "text": "Nem a szoftvert, hanem az érzékelőt cserélte ki Tóth Éva."
+      },
+      {
+        "start": 151,
+        "end": 183,
+        "text": "A próbát három órán át végezték."
+      }
+    ],
+    "entities": [
+      {
+        "start": 26,
+        "end": 37,
+        "text": "Szabó Dénes",
+        "label": "PER"
+      },
+      {
+        "start": 141,
+        "end": 149,
+        "text": "Tóth Éva",
+        "label": "PER"
+      }
+    ]
+  },
+  "output": {
+    "entities": [
+      {
+        "mention": "Szabó Dénes",
+        "normalized": "szabó dénes",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 26,
+        "end": 37,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 26,
+          "end": 37,
+          "textSpan": "Szabó Dénes"
+        },
+        "identityKey": "person|szabó dénes",
+        "canonicalIdentity": "szabó dénes",
+        "identityStatus": "resolved"
+      },
+      {
+        "mention": "Tóth Éva",
+        "normalized": "tóth éva",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 141,
+        "end": 149,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 141,
+          "end": 149,
+          "textSpan": "Tóth Éva"
+        },
+        "identityKey": "person|tóth éva",
+        "canonicalIdentity": "tóth éva",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": {
+          "mention": "Szabó Dénes",
+          "normalized": "szabó dénes",
+          "start": 26,
+          "end": 37,
+          "type": "named_referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 26,
+            "end": 37,
+            "textSpan": "Szabó Dénes"
+          }
+        },
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "szerint",
+        "content": {
+          "start": 45,
+          "end": 92,
+          "textSpan": " a rendszer másodpercenként 800 csomagot kezel."
+        },
+        "attribution": null,
+        "action": "kezel",
+        "actionSpan": {
+          "start": 86,
+          "end": 91,
+          "textSpan": "kezel"
+        },
+        "object": [
+          "csomag"
+        ],
+        "numericArguments": [
+          {
+            "value": 800,
+            "canonicalValue": 800,
+            "unit": {
+              "numerator": "csomag",
+              "denominator": "second"
+            },
+            "semanticKind": "compound_rate",
+            "start": 57,
+            "end": 85,
+            "raw": "másodpercenként 800 csomagot",
+            "evidenceSpan": {
+              "start": 57,
+              "end": 85,
+              "textSpan": "másodpercenként 800 csomagot"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven",
+              "compound_rate_projection_not_supported"
+            ],
+            "compound": {
+              "numerator": {
+                "value": 800,
+                "baseUnit": "csomag",
+                "originalKind": "unknown",
+                "evidenceSpan": {
+                  "start": 73,
+                  "end": 76,
+                  "textSpan": "800"
+                }
+              },
+              "denominators": [
+                {
+                  "unit": "second",
+                  "relation": "per",
+                  "form": "distributive",
+                  "evidenceSpan": {
+                    "start": 57,
+                    "end": 72,
+                    "textSpan": "másodpercenként"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 57,
+                        "end": 72,
+                        "textSpan": "másodpercenként"
+                      },
+                      "targetSpan": {
+                        "start": 86,
+                        "end": 91,
+                        "textSpan": "kezel"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "relation": "per",
+              "qualifiers": [],
+              "evidenceSpan": {
+                "start": 57,
+                "end": 85,
+                "textSpan": "másodpercenként 800 csomagot"
+              },
+              "numeratorDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 73,
+                    "end": 76,
+                    "textSpan": "800"
+                  },
+                  "targetSpan": {
+                    "start": 77,
+                    "end": 85,
+                    "textSpan": "csomagot"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 77,
+                    "end": 85,
+                    "textSpan": "csomagot"
+                  },
+                  "targetSpan": {
+                    "start": 86,
+                    "end": 91,
+                    "textSpan": "kezel"
+                  }
+                }
+              ],
+              "scopeStatus": "candidate_only",
+              "frameId": "dependency:0:92"
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "reporting_actor_unresolved",
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved",
+          "compound_rate_requires_lossless_resolution"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 92,
+          "textSpan": "A kutatócsoport vezetője, Szabó Dénes szerint a rendszer másodpercenként 800 csomagot kezel."
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 92,
+          "textSpan": "A kutatócsoport vezetője, Szabó Dénes szerint a rendszer másodpercenként 800 csomagot kezel."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:92",
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 26,
+            "end": 31,
+            "textSpan": "Szabó"
+          },
+          "targetSpan": {
+            "start": 86,
+            "end": 91,
+            "textSpan": "kezel"
+          },
+          "dependencyPath": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 26,
+                "end": 31,
+                "textSpan": "Szabó"
+              },
+              "targetSpan": {
+                "start": 86,
+                "end": 91,
+                "textSpan": "kezel"
+              }
+            }
+          ],
+          "frameId": "dependency:0:92",
+          "semanticRole": "attribution_source",
+          "resolutionStatus": "resolved",
+          "rule": "dependency_path_with_case_and_scope_checks"
+        },
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "csomagot",
+              "normalized": "csomag",
+              "start": 77,
+              "end": 85,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 77,
+                "end": 85,
+                "textSpan": "csomagot"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 77,
+                "end": 85,
+                "textSpan": "csomagot"
+              },
+              "targetSpan": {
+                "start": 86,
+                "end": 91,
+                "textSpan": "kezel"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 77,
+                    "end": 85,
+                    "textSpan": "csomagot"
+                  },
+                  "targetSpan": {
+                    "start": 86,
+                    "end": 91,
+                    "textSpan": "kezel"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:92",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": {
+          "mention": "Tóth Éva",
+          "normalized": "tóth éva",
+          "start": 141,
+          "end": 149,
+          "type": "named_referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 141,
+            "end": 149,
+            "textSpan": "Tóth Éva"
+          }
+        },
+        "actorStatus": "resolved",
+        "subject": {
+          "mention": "Tóth Éva",
+          "normalized": "tóth éva",
+          "start": 141,
+          "end": 149,
+          "type": "named_referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 141,
+            "end": 149,
+            "textSpan": "Tóth Éva"
+          }
+        },
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 116,
+          "end": 150,
+          "textSpan": "az érzékelőt cserélte ki Tóth Éva."
+        },
+        "attribution": null,
+        "action": "kicserél",
+        "actionSpan": {
+          "start": 129,
+          "end": 137,
+          "textSpan": "cserélte"
+        },
+        "object": [
+          "érzékelő"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "resolved",
+        "unresolvedReasons": [],
+        "evidenceSpan": {
+          "start": 116,
+          "end": 150,
+          "textSpan": "az érzékelőt cserélte ki Tóth Éva."
+        },
+        "propositionSpan": {
+          "start": 116,
+          "end": 150,
+          "textSpan": "az érzékelőt cserélte ki Tóth Éva."
+        },
+        "canonicalProjectionAllowed": false,
+        "contrasts": [
+          {
+            "binding": "resolved",
+            "rule": "parallel_alternatives_single_finite_predicate",
+            "slot": "object",
+            "evidenceSpan": {
+              "start": 93,
+              "end": 150,
+              "textSpan": "Nem a szoftvert, hanem az érzékelőt cserélte ki Tóth Éva."
+            },
+            "scope": {
+              "start": 93,
+              "end": 150
+            },
+            "rejected": {
+              "value": "szoftver",
+              "case": "Acc",
+              "status": "rejected",
+              "evidenceSpan": {
+                "start": 97,
+                "end": 108,
+                "textSpan": "a szoftvert"
+              }
+            },
+            "accepted": {
+              "value": "érzékelő",
+              "case": "Acc",
+              "status": "accepted",
+              "evidenceSpan": {
+                "start": 116,
+                "end": 128,
+                "textSpan": "az érzékelőt"
+              }
+            },
+            "frameId": "contrast:93:150"
+          }
+        ],
+        "frameId": "contrast:93:150",
+        "syntacticRoles": [
+          {
+            "role": "actor",
+            "referent": {
+              "mention": "Tóth Éva",
+              "normalized": "tóth éva",
+              "start": 141,
+              "end": 149,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 141,
+                "end": 149,
+                "textSpan": "Tóth Éva"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 141,
+                "end": 145,
+                "textSpan": "Tóth"
+              },
+              "targetSpan": {
+                "start": 129,
+                "end": 137,
+                "textSpan": "cserélte"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 141,
+                    "end": 145,
+                    "textSpan": "Tóth"
+                  },
+                  "targetSpan": {
+                    "start": 129,
+                    "end": 137,
+                    "textSpan": "cserélte"
+                  }
+                }
+              ],
+              "frameId": "contrast:93:150",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "actorEvidence": {
+          "sourceSpan": {
+            "start": 141,
+            "end": 145,
+            "textSpan": "Tóth"
+          },
+          "targetSpan": {
+            "start": 129,
+            "end": 137,
+            "textSpan": "cserélte"
+          },
+          "dependencyPath": [
+            {
+              "relation": "nsubj",
+              "sourceSpan": {
+                "start": 141,
+                "end": 145,
+                "textSpan": "Tóth"
+              },
+              "targetSpan": {
+                "start": 129,
+                "end": 137,
+                "textSpan": "cserélte"
+              }
+            }
+          ],
+          "frameId": "contrast:93:150",
+          "semanticRole": "actor",
+          "resolutionStatus": "resolved",
+          "rule": "dependency_path_with_case_and_scope_checks"
+        }
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "órán",
+            "normalized": "óra",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 166,
+            "end": 170,
+            "evidenceSpan": {
+              "start": 166,
+              "end": 170,
+              "textSpan": "órán"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 151,
+          "end": 183,
+          "textSpan": "A próbát három órán át végezték."
+        },
+        "attribution": null,
+        "action": "végez",
+        "actionSpan": {
+          "start": 174,
+          "end": 182,
+          "textSpan": "végezték"
+        },
+        "object": [
+          "próba"
+        ],
+        "numericArguments": [
+          {
+            "start": 160,
+            "end": 173,
+            "raw": "három órán át",
+            "value": 3,
+            "canonicalValue": 3,
+            "semanticKind": "duration",
+            "unit": "hour",
+            "property": "duration",
+            "temporalRole": "duration",
+            "evidenceSpan": {
+              "start": 160,
+              "end": 173,
+              "textSpan": "három órán át"
+            },
+            "binding": "resolved",
+            "ownerType": "semantic_argument",
+            "owner": {
+              "mention": "órán",
+              "evidenceSpan": {
+                "start": 166,
+                "end": 170,
+                "textSpan": "órán"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 160,
+                "end": 173,
+                "textSpan": "három órán át"
+              },
+              "targetSpan": {
+                "start": 174,
+                "end": 182,
+                "textSpan": "végezték"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 166,
+                    "end": 170,
+                    "textSpan": "órán"
+                  },
+                  "targetSpan": {
+                    "start": 174,
+                    "end": 182,
+                    "textSpan": "végezték"
+                  }
+                }
+              ],
+              "frameId": "dependency:151:183",
+              "semanticRole": "duration",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 151,
+          "end": 183,
+          "textSpan": "A próbát három órán át végezték."
+        },
+        "propositionSpan": {
+          "start": 151,
+          "end": 183,
+          "textSpan": "A próbát három órán át végezték."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:151:183",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "próbát",
+              "normalized": "próba",
+              "start": 153,
+              "end": 159,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 153,
+                "end": 159,
+                "textSpan": "próbát"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 153,
+                "end": 159,
+                "textSpan": "próbát"
+              },
+              "targetSpan": {
+                "start": 174,
+                "end": 182,
+                "textSpan": "végezték"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 153,
+                    "end": 159,
+                    "textSpan": "próbát"
+                  },
+                  "targetSpan": {
+                    "start": 174,
+                    "end": 182,
+                    "textSpan": "végezték"
+                  }
+                }
+              ],
+              "frameId": "dependency:151:183",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "contrasts": [
+      {
+        "binding": "resolved",
+        "rule": "parallel_alternatives_single_finite_predicate",
+        "slot": "object",
+        "evidenceSpan": {
+          "start": 93,
+          "end": 150,
+          "textSpan": "Nem a szoftvert, hanem az érzékelőt cserélte ki Tóth Éva."
+        },
+        "scope": {
+          "start": 93,
+          "end": 150
+        },
+        "rejected": {
+          "value": "szoftver",
+          "case": "Acc",
+          "status": "rejected",
+          "evidenceSpan": {
+            "start": 97,
+            "end": 108,
+            "textSpan": "a szoftvert"
+          }
+        },
+        "accepted": {
+          "value": "érzékelő",
+          "case": "Acc",
+          "status": "accepted",
+          "evidenceSpan": {
+            "start": 116,
+            "end": 128,
+            "textSpan": "az érzékelőt"
+          }
+        },
+        "frameId": "contrast:93:150"
+      }
+    ],
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true
+  }
+}

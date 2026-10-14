@@ -1,0 +1,1038 @@
+{
+  "id": "R",
+  "domain": "rendőrség",
+  "text": "A kapitányság a lapnak cáfolta, hogy a 52 éves sofőr 110 km/h-val hajtott volna át a hídon. Később a szakértő azt közölte: „A mérés nem volt hiteles.”",
+  "started": "2026-10-09T21:35:42.768Z",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 13,
+        "text": "kapitányság",
+        "lemma": "kapitányság",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 23
+      },
+      {
+        "start": 14,
+        "end": 15,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 16
+      },
+      {
+        "start": 16,
+        "end": 22,
+        "text": "lapnak",
+        "lemma": "lap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 23
+      },
+      {
+        "start": 23,
+        "end": 30,
+        "text": "cáfolta",
+        "lemma": "cáfol",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 23
+      },
+      {
+        "start": 30,
+        "end": 31,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 66
+      },
+      {
+        "start": 32,
+        "end": 36,
+        "text": "hogy",
+        "lemma": "hogy",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 66
+      },
+      {
+        "start": 37,
+        "end": 38,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 47
+      },
+      {
+        "start": 39,
+        "end": 41,
+        "text": "52",
+        "lemma": "52",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 42
+      },
+      {
+        "start": 42,
+        "end": 46,
+        "text": "éves",
+        "lemma": "éves",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 47
+      },
+      {
+        "start": 47,
+        "end": 52,
+        "text": "sofőr",
+        "lemma": "sofőr",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 66
+      },
+      {
+        "start": 53,
+        "end": 56,
+        "text": "110",
+        "lemma": "110",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 57
+      },
+      {
+        "start": 57,
+        "end": 65,
+        "text": "km/h-val",
+        "lemma": "km/h-",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ins",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 66
+      },
+      {
+        "start": 66,
+        "end": 73,
+        "text": "hajtott",
+        "lemma": "hajt",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ccomp:obj",
+        "headStart": 23
+      },
+      {
+        "start": 74,
+        "end": 79,
+        "text": "volna",
+        "lemma": "volna",
+        "pos": "AUX",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Cnd",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "Voice": "Act"
+        },
+        "dep": "aux",
+        "headStart": 66
+      },
+      {
+        "start": 80,
+        "end": 82,
+        "text": "át",
+        "lemma": "át",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:mode",
+        "headStart": 66
+      },
+      {
+        "start": 83,
+        "end": 84,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 85
+      },
+      {
+        "start": 85,
+        "end": 90,
+        "text": "hídon",
+        "lemma": "híd",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 66
+      },
+      {
+        "start": 90,
+        "end": 91,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 23
+      },
+      {
+        "start": 92,
+        "end": 98,
+        "text": "Később",
+        "lemma": "későn",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:tlocy",
+        "headStart": 114
+      },
+      {
+        "start": 99,
+        "end": 100,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 101
+      },
+      {
+        "start": 101,
+        "end": 109,
+        "text": "szakértő",
+        "lemma": "szakértő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 114
+      },
+      {
+        "start": 110,
+        "end": 113,
+        "text": "azt",
+        "lemma": "az",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "obj",
+        "headStart": 114
+      },
+      {
+        "start": 114,
+        "end": 121,
+        "text": "közölte",
+        "lemma": "közöl",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 114
+      },
+      {
+        "start": 121,
+        "end": 122,
+        "text": ":",
+        "lemma": ":",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 123
+      },
+      {
+        "start": 123,
+        "end": 124,
+        "text": "„",
+        "lemma": "„",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "ccomp:obj",
+        "headStart": 114
+      },
+      {
+        "start": 124,
+        "end": 125,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 126
+      },
+      {
+        "start": 126,
+        "end": 131,
+        "text": "mérés",
+        "lemma": "mérés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 136
+      },
+      {
+        "start": 132,
+        "end": 135,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 136
+      },
+      {
+        "start": 136,
+        "end": 140,
+        "text": "volt",
+        "lemma": "van",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "cop",
+        "headStart": 141
+      },
+      {
+        "start": 141,
+        "end": 148,
+        "text": "hiteles",
+        "lemma": "hiteles",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 123
+      },
+      {
+        "start": 148,
+        "end": 149,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 114
+      },
+      {
+        "start": 149,
+        "end": 150,
+        "text": "”",
+        "lemma": "”",
+        "pos": "SYM",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Type": "o"
+        },
+        "dep": "ROOT",
+        "headStart": 149
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 91,
+        "text": "A kapitányság a lapnak cáfolta, hogy a 52 éves sofőr 110 km/h-val hajtott volna át a hídon."
+      },
+      {
+        "start": 92,
+        "end": 149,
+        "text": "Később a szakértő azt közölte: „A mérés nem volt hiteles."
+      },
+      {
+        "start": 149,
+        "end": 150,
+        "text": "”"
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "hídon",
+            "normalized": "híd",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 85,
+            "end": 90,
+            "evidenceSpan": {
+              "start": 85,
+              "end": 90,
+              "textSpan": "hídon"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": {
+          "mention": "kapitányság",
+          "normalized": "kapitányság",
+          "start": 2,
+          "end": 13,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 13,
+            "textSpan": "kapitányság"
+          }
+        },
+        "source": {
+          "mention": "kapitányság",
+          "normalized": "kapitányság",
+          "start": 2,
+          "end": 13,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 13,
+            "textSpan": "kapitányság"
+          }
+        },
+        "recipient": {
+          "mention": "lapnak",
+          "role": "recipient",
+          "evidenceSpan": {
+            "start": 16,
+            "end": 22,
+            "textSpan": "lapnak"
+          }
+        },
+        "recipientCandidates": [],
+        "reportingVerb": "cáfol",
+        "content": {
+          "start": 37,
+          "end": 91,
+          "textSpan": "a 52 éves sofőr 110 km/h-val hajtott volna át a hídon."
+        },
+        "attribution": {
+          "label": "kapitányság",
+          "normalized": "kapitányság",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 13,
+            "textSpan": "kapitányság"
+          },
+          "propositionSpan": {
+            "start": 36,
+            "end": 91,
+            "textSpan": " a 52 éves sofőr 110 km/h-val hajtott volna át a hídon."
+          }
+        },
+        "action": "hajt",
+        "actionSpan": {
+          "start": 66,
+          "end": 73,
+          "textSpan": "hajtott"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "value": 52,
+            "canonicalValue": 52,
+            "unit": "year",
+            "semanticKind": "age",
+            "start": 39,
+            "end": 46,
+            "raw": "52 éves",
+            "evidenceSpan": {
+              "start": 39,
+              "end": 46,
+              "textSpan": "52 éves"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven"
+            ]
+          },
+          {
+            "value": 110,
+            "canonicalValue": 110,
+            "unit": {
+              "numerator": "km",
+              "denominator": "h"
+            },
+            "semanticKind": "compound_rate",
+            "start": 53,
+            "end": 65,
+            "raw": "110 km/h-val",
+            "evidenceSpan": {
+              "start": 53,
+              "end": 65,
+              "textSpan": "110 km/h-val"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven",
+              "compound_rate_projection_not_supported"
+            ],
+            "compound": {
+              "numerator": {
+                "value": 110,
+                "baseUnit": "km",
+                "originalKind": "unknown",
+                "evidenceSpan": {
+                  "start": 53,
+                  "end": 56,
+                  "textSpan": "110"
+                }
+              },
+              "denominators": [
+                {
+                  "unit": "h",
+                  "relation": "per",
+                  "form": "slash",
+                  "evidenceSpan": {
+                    "start": 57,
+                    "end": 65,
+                    "textSpan": "km/h-val"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 57,
+                        "end": 65,
+                        "textSpan": "km/h-val"
+                      },
+                      "targetSpan": {
+                        "start": 66,
+                        "end": 73,
+                        "textSpan": "hajtott"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "relation": "per",
+              "qualifiers": [],
+              "evidenceSpan": {
+                "start": 53,
+                "end": 65,
+                "textSpan": "110 km/h-val"
+              },
+              "numeratorDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 53,
+                    "end": 56,
+                    "textSpan": "110"
+                  },
+                  "targetSpan": {
+                    "start": 57,
+                    "end": 65,
+                    "textSpan": "km/h-val"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 57,
+                    "end": 65,
+                    "textSpan": "km/h-val"
+                  },
+                  "targetSpan": {
+                    "start": 66,
+                    "end": 73,
+                    "textSpan": "hajtott"
+                  }
+                }
+              ],
+              "scopeStatus": "candidate_only",
+              "frameId": "recovered-source:23:proposition:0"
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind",
+          "Cnd"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": true,
+        "modalities": [
+          "counterfactual",
+          "reported"
+        ],
+        "modality": "denied_claim",
+        "polarity": "denied",
+        "status": "denied_claim",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved",
+          "compound_rate_requires_lossless_resolution"
+        ],
+        "evidenceSpan": {
+          "start": 37,
+          "end": 91,
+          "textSpan": "a 52 éves sofőr 110 km/h-val hajtott volna át a hídon."
+        },
+        "propositionSpan": {
+          "start": 37,
+          "end": 91,
+          "textSpan": "a 52 éves sofőr 110 km/h-val hajtott volna át a hídon."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "recovered-source:23:proposition:0",
+        "attributionChainId": "recovered-source:23",
+        "claimOwner": {
+          "mention": "kapitányság",
+          "normalized": "kapitányság",
+          "start": 2,
+          "end": 13,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 2,
+            "end": 13,
+            "textSpan": "kapitányság"
+          }
+        },
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 2,
+            "end": 13,
+            "textSpan": "kapitányság"
+          },
+          "reportingPredicateSpan": {
+            "start": 23,
+            "end": 30,
+            "textSpan": "cáfolta"
+          },
+          "clauseSpan": {
+            "start": 36,
+            "end": 91,
+            "textSpan": " a 52 éves sofőr 110 km/h-val hajtott volna át a hídon."
+          },
+          "frameId": "recovered-source:23:proposition:0",
+          "parentAttributionId": "recovered-source:23:0",
+          "rule": "governing_np_reporting_scope"
+        },
+        "quoteSpan": null,
+        "syntacticRoles": []
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": {
+          "mention": "szakértő",
+          "normalized": "szakértő",
+          "start": 101,
+          "end": 109,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 101,
+            "end": 109,
+            "textSpan": "szakértő"
+          }
+        },
+        "source": {
+          "mention": "szakértő",
+          "normalized": "szakértő",
+          "start": 101,
+          "end": 109,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 101,
+            "end": 109,
+            "textSpan": "szakértő"
+          }
+        },
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "közöl",
+        "content": {
+          "start": 124,
+          "end": 149,
+          "textSpan": "A mérés nem volt hiteles."
+        },
+        "attribution": {
+          "label": "szakértő",
+          "normalized": "szakértő",
+          "evidenceSpan": {
+            "start": 101,
+            "end": 109,
+            "textSpan": "szakértő"
+          },
+          "propositionSpan": {
+            "start": 124,
+            "end": 149,
+            "textSpan": "A mérés nem volt hiteles."
+          }
+        },
+        "action": "van",
+        "actionSpan": {
+          "start": 136,
+          "end": 140,
+          "textSpan": "volt"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "asserted",
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "denied",
+        "status": "reported_claim",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 124,
+          "end": 149,
+          "textSpan": "A mérés nem volt hiteles."
+        },
+        "propositionSpan": {
+          "start": 124,
+          "end": 149,
+          "textSpan": "A mérés nem volt hiteles."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "recovered-source:114:proposition:0",
+        "attributionChainId": "recovered-source:114",
+        "claimOwner": {
+          "mention": "szakértő",
+          "normalized": "szakértő",
+          "start": 101,
+          "end": 109,
+          "type": "local_source",
+          "entityId": null,
+          "identityStatus": "observed_local_referent",
+          "evidenceSpan": {
+            "start": 101,
+            "end": 109,
+            "textSpan": "szakértő"
+          }
+        },
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 101,
+            "end": 109,
+            "textSpan": "szakértő"
+          },
+          "reportingPredicateSpan": {
+            "start": 114,
+            "end": 121,
+            "textSpan": "közölte"
+          },
+          "clauseSpan": {
+            "start": 124,
+            "end": 149,
+            "textSpan": "A mérés nem volt hiteles."
+          },
+          "frameId": "recovered-source:114:proposition:0",
+          "parentAttributionId": "recovered-source:114:0",
+          "rule": "governing_np_reporting_scope"
+        },
+        "quoteSpan": {
+          "start": 124,
+          "end": 149,
+          "textSpan": "A mérés nem volt hiteles."
+        },
+        "syntacticRoles": []
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [
+      {
+        "id": "recovered-source:114",
+        "binding": "resolved",
+        "rule": "dependency_source_and_explicit_complement_or_bounded_quote",
+        "unresolvedReasons": [],
+        "edges": [
+          {
+            "source": {
+              "mention": "szakértő",
+              "normalized": "szakértő",
+              "start": 101,
+              "end": 109,
+              "type": "local_source",
+              "entityId": null,
+              "identityStatus": "observed_local_referent",
+              "evidenceSpan": {
+                "start": 101,
+                "end": 109,
+                "textSpan": "szakértő"
+              }
+            },
+            "verb": "közöl",
+            "verbSpan": {
+              "start": 114,
+              "end": 121,
+              "textSpan": "közölte"
+            },
+            "propositionSpan": {
+              "start": 124,
+              "end": 149,
+              "textSpan": "A mérés nem volt hiteles."
+            },
+            "recipient": null,
+            "id": "recovered-source:114:0",
+            "depth": 0,
+            "parentAttributionId": null,
+            "targetId": "recovered-source:114:proposition:0",
+            "binding": "resolved",
+            "role": "claim_source",
+            "rule": "governing_np_reporting_scope",
+            "targetIds": [
+              "recovered-source:114:proposition:0"
+            ],
+            "structuralEvidence": {
+              "sourceSpan": {
+                "start": 101,
+                "end": 109,
+                "textSpan": "szakértő"
+              },
+              "targetSpan": {
+                "start": 114,
+                "end": 121,
+                "textSpan": "közölte"
+              },
+              "relation": "nsubj",
+              "markerRelation": "ROOT",
+              "rule": "governing_source_np_and_reporting_scope"
+            }
+          }
+        ],
+        "propositionIds": [
+          "recovered-source:114:proposition:0"
+        ]
+      },
+      {
+        "id": "recovered-source:23",
+        "binding": "resolved",
+        "rule": "dependency_source_and_explicit_complement_or_bounded_quote",
+        "unresolvedReasons": [],
+        "edges": [
+          {
+            "source": {
+              "mention": "kapitányság",
+              "normalized": "kapitányság",
+              "start": 2,
+              "end": 13,
+              "type": "local_source",
+              "entityId": null,
+              "identityStatus": "observed_local_referent",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 13,
+                "textSpan": "kapitányság"
+              }
+            },
+            "verb": "cáfol",
+            "verbSpan": {
+              "start": 23,
+              "end": 30,
+              "textSpan": "cáfolta"
+            },
+            "propositionSpan": {
+              "start": 36,
+              "end": 91,
+              "textSpan": " a 52 éves sofőr 110 km/h-val hajtott volna át a hídon."
+            },
+            "recipient": {
+              "mention": "lapnak",
+              "role": "recipient",
+              "evidenceSpan": {
+                "start": 16,
+                "end": 22,
+                "textSpan": "lapnak"
+              }
+            },
+            "id": "recovered-source:23:0",
+            "depth": 0,
+            "parentAttributionId": null,
+            "targetId": "recovered-source:23:proposition:0",
+            "binding": "resolved",
+            "role": "claim_source",
+            "rule": "governing_np_reporting_scope",
+            "targetIds": [
+              "recovered-source:23:proposition:0"
+            ],
+            "structuralEvidence": {
+              "sourceSpan": {
+                "start": 2,
+                "end": 13,
+                "textSpan": "kapitányság"
+              },
+              "targetSpan": {
+                "start": 23,
+                "end": 30,
+                "textSpan": "cáfolta"
+              },
+              "relation": "nsubj",
+              "markerRelation": "ROOT",
+              "rule": "governing_source_np_and_reporting_scope"
+            }
+          }
+        ],
+        "propositionIds": [
+          "recovered-source:23:proposition:0"
+        ]
+      }
+    ],
+    "dependencyStatus": "available",
+    "dependencyVerified": true
+  }
+}

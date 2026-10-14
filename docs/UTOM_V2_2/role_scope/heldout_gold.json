@@ -1,0 +1,1542 @@
+{
+  "createdAt": "2026-10-06T20:53:54.366Z",
+  "independence": "separate authored labels, no prediction exposure; not independent external adjudication",
+  "rows": [
+    {
+      "id": "s01",
+      "domain": "weather",
+      "text": "A hőmérséklet -11 fok volt.",
+      "frames": [
+        {
+          "text": "A hőmérséklet -11 fok volt.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "-11 fok",
+              "value": -11,
+              "ownerType": "property",
+              "owner": "hőmérséklet",
+              "property": "hőmérséklet",
+              "valueKind": "signed_absolute",
+              "start": 14,
+              "end": 21
+            }
+          ],
+          "start": 0,
+          "end": 27,
+          "content": "A hőmérséklet -11 fok volt.",
+          "contentSpan": {
+            "start": 0,
+            "end": 27
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s02",
+      "domain": "finance",
+      "text": "Az egyenleg −17 millió forint volt.",
+      "frames": [
+        {
+          "text": "Az egyenleg −17 millió forint volt.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "−17 millió forint",
+              "value": -17000000,
+              "ownerType": "property",
+              "owner": "egyenleg",
+              "property": "egyenleg",
+              "valueKind": "signed_absolute",
+              "start": 12,
+              "end": 29
+            }
+          ],
+          "start": 0,
+          "end": 35,
+          "content": "Az egyenleg −17 millió forint volt.",
+          "contentSpan": {
+            "start": 0,
+            "end": 35
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s03",
+      "domain": "sport",
+      "text": "A gólkülönbség –4 gól volt.",
+      "frames": [
+        {
+          "text": "A gólkülönbség –4 gól volt.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "–4 gól",
+              "value": -4,
+              "ownerType": "property",
+              "owner": "gólkülönbség",
+              "property": "gólkülönbség",
+              "valueKind": "signed_absolute",
+              "start": 15,
+              "end": 21
+            }
+          ],
+          "start": 0,
+          "end": 27,
+          "content": "A gólkülönbség –4 gól volt.",
+          "contentSpan": {
+            "start": 0,
+            "end": 27
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s04",
+      "domain": "energy",
+      "text": "A hőmérséklet mínusz 13 fok volt.",
+      "frames": [
+        {
+          "text": "A hőmérséklet mínusz 13 fok volt.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "mínusz 13 fok",
+              "value": -13,
+              "ownerType": "property",
+              "owner": "hőmérséklet",
+              "property": "hőmérséklet",
+              "valueKind": "signed_absolute",
+              "start": 14,
+              "end": 27
+            }
+          ],
+          "start": 0,
+          "end": 33,
+          "content": "A hőmérséklet mínusz 13 fok volt.",
+          "contentSpan": {
+            "start": 0,
+            "end": 33
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s05",
+      "domain": "politics",
+      "text": "A támogatottság 7 százalékponttal csökkent.",
+      "frames": [
+        {
+          "text": "A támogatottság 7 százalékponttal csökkent.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "7 százalékponttal",
+              "value": -7,
+              "ownerType": "property",
+              "owner": "támogatottság",
+              "property": "támogatottság",
+              "valueKind": "delta",
+              "start": 16,
+              "end": 33
+            }
+          ],
+          "start": 0,
+          "end": 43,
+          "content": "A támogatottság 7 százalékponttal csökkent.",
+          "contentSpan": {
+            "start": 0,
+            "end": 43
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s06",
+      "domain": "company",
+      "text": "A készlet 23 darabbal csökkent.",
+      "frames": [
+        {
+          "text": "A készlet 23 darabbal csökkent.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "23 darabbal",
+              "value": -23,
+              "ownerType": "property",
+              "owner": "készlet",
+              "property": "készlet",
+              "valueKind": "delta",
+              "start": 10,
+              "end": 21
+            }
+          ],
+          "start": 0,
+          "end": 31,
+          "content": "A készlet 23 darabbal csökkent.",
+          "contentSpan": {
+            "start": 0,
+            "end": 31
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s07",
+      "domain": "science",
+      "text": "A hőmérséklet 12-ről −6-ra változott.",
+      "frames": [
+        {
+          "text": "A hőmérséklet 12-ről −6-ra változott.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "12-ről",
+              "value": 12,
+              "ownerType": "property",
+              "owner": "hőmérséklet",
+              "property": "hőmérséklet",
+              "valueKind": "from",
+              "start": 14,
+              "end": 20
+            },
+            {
+              "surface": "−6-ra",
+              "value": -6,
+              "ownerType": "property",
+              "owner": "hőmérséklet",
+              "property": "hőmérséklet",
+              "valueKind": "to",
+              "start": 21,
+              "end": 26
+            }
+          ],
+          "start": 0,
+          "end": 37,
+          "content": "A hőmérséklet 12-ről −6-ra változott.",
+          "contentSpan": {
+            "start": 0,
+            "end": 37
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s08",
+      "domain": "weather",
+      "text": "A hőmérséklet -9 és +4 fok között volt.",
+      "frames": [
+        {
+          "text": "A hőmérséklet -9 és +4 fok között volt.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "-9",
+              "value": -9,
+              "ownerType": "property",
+              "owner": "hőmérséklet",
+              "property": "hőmérséklet",
+              "valueKind": "range_endpoint",
+              "start": 14,
+              "end": 16
+            },
+            {
+              "surface": "+4 fok",
+              "value": 4,
+              "ownerType": "property",
+              "owner": "hőmérséklet",
+              "property": "hőmérséklet",
+              "valueKind": "range_endpoint",
+              "start": 20,
+              "end": 26
+            }
+          ],
+          "start": 0,
+          "end": 39,
+          "content": "A hőmérséklet -9 és +4 fok között volt.",
+          "contentSpan": {
+            "start": 0,
+            "end": 39
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s09",
+      "domain": "transport",
+      "text": "A raktárban 48 dobozt találtak.",
+      "frames": [
+        {
+          "text": "A raktárban 48 dobozt találtak.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "48 dobozt",
+              "value": 48,
+              "ownerType": "property",
+              "owner": "doboz",
+              "property": "found_count",
+              "valueKind": "absolute",
+              "start": 12,
+              "end": 21
+            }
+          ],
+          "start": 0,
+          "end": 31,
+          "content": "A raktárban 48 dobozt találtak.",
+          "contentSpan": {
+            "start": 0,
+            "end": 31
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s10",
+      "domain": "health",
+      "text": "A klinikán 143 beteget kezeltek.",
+      "frames": [
+        {
+          "text": "A klinikán 143 beteget kezeltek.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "143 beteget",
+              "value": 143,
+              "ownerType": "property",
+              "owner": "beteg",
+              "property": "treated_count",
+              "valueKind": "absolute",
+              "start": 11,
+              "end": 22
+            }
+          ],
+          "start": 0,
+          "end": 32,
+          "content": "A klinikán 143 beteget kezeltek.",
+          "contentSpan": {
+            "start": 0,
+            "end": 32
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s11",
+      "domain": "police",
+      "text": "A rendőrség a raktárban 48 dobozt talált.",
+      "frames": [
+        {
+          "text": "A rendőrség a raktárban 48 dobozt talált.",
+          "actor": "rendőrség",
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "48 dobozt",
+              "value": 48,
+              "ownerType": "entity",
+              "owner": "rendőrség",
+              "property": "doboz",
+              "valueKind": "absolute",
+              "start": 24,
+              "end": 33
+            }
+          ],
+          "start": 0,
+          "end": 41,
+          "content": "A rendőrség a raktárban 48 dobozt talált.",
+          "contentSpan": {
+            "start": 0,
+            "end": 41
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s12",
+      "domain": "court",
+      "text": "Bence azt mondta Rékának, hogy megérkezett a levél.",
+      "frames": [
+        {
+          "text": "Bence azt mondta Rékának, hogy megérkezett a levél.",
+          "actor": null,
+          "source": "Bence",
+          "recipient": "Rékának",
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "content": " megérkezett a levél.",
+          "start": 0,
+          "end": 51,
+          "contentSpan": {
+            "start": 30,
+            "end": 51
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Bence",
+          "start": 0,
+          "end": 5
+        },
+        {
+          "mention": "Rékának",
+          "start": 17,
+          "end": 24
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "domain": "court",
+      "text": "Rékának azt mondták, hogy megérkezett a levél.",
+      "frames": [
+        {
+          "text": "Rékának azt mondták, hogy megérkezett a levél.",
+          "actor": null,
+          "source": null,
+          "recipient": "Rékának",
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "content": " megérkezett a levél.",
+          "start": 0,
+          "end": 46,
+          "contentSpan": {
+            "start": 25,
+            "end": 46
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Rékának",
+          "start": 0,
+          "end": 7
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "domain": "company",
+      "text": "Bence közölte vele, hogy bezár a bolt.",
+      "frames": [
+        {
+          "text": "Bence közölte vele, hogy bezár a bolt.",
+          "actor": null,
+          "source": "Bence",
+          "recipient": "vele",
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "content": " bezár a bolt.",
+          "start": 0,
+          "end": 38,
+          "contentSpan": {
+            "start": 24,
+            "end": 38
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Bence",
+          "start": 0,
+          "end": 5
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "domain": "science",
+      "text": "Bence kérdezte tőle, hogy működik-e a műszer.",
+      "frames": [
+        {
+          "text": "Bence kérdezte tőle, hogy működik-e a műszer.",
+          "actor": null,
+          "source": "Bence",
+          "recipient": "tőle",
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "content": " működik-e a műszer.",
+          "start": 0,
+          "end": 45,
+          "contentSpan": {
+            "start": 25,
+            "end": 45
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Bence",
+          "start": 0,
+          "end": 5
+        }
+      ]
+    },
+    {
+      "id": "s16",
+      "domain": "transport",
+      "text": "Bence tájékoztatta Rékát.",
+      "frames": [
+        {
+          "text": "Bence tájékoztatta Rékát.",
+          "actor": "Bence",
+          "source": "Bence",
+          "recipient": "Rékát",
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "start": 0,
+          "end": 25,
+          "content": "Bence tájékoztatta Rékát.",
+          "contentSpan": {
+            "start": 0,
+            "end": 25
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Bence",
+          "start": 0,
+          "end": 5
+        },
+        {
+          "mention": "Rékát",
+          "start": 19,
+          "end": 24
+        }
+      ]
+    },
+    {
+      "id": "s17",
+      "domain": "education",
+      "text": "Bence írta neki, hogy kezdődik az óra.",
+      "frames": [
+        {
+          "text": "Bence írta neki, hogy kezdődik az óra.",
+          "actor": null,
+          "source": "Bence",
+          "recipient": "neki",
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "content": " kezdődik az óra.",
+          "start": 0,
+          "end": 38,
+          "contentSpan": {
+            "start": 21,
+            "end": 38
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Bence",
+          "start": 0,
+          "end": 5
+        }
+      ]
+    },
+    {
+      "id": "s18",
+      "domain": "election",
+      "text": "A szavazólapok 88 százalékának feldolgozása után Sára 42 százalékot, Vince 37 százalékot kapott.",
+      "frames": [
+        {
+          "text": "A szavazólapok 88 százalékának feldolgozása után Sára 42 százalékot",
+          "actor": "Sára",
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "88 százalékának",
+              "value": 88,
+              "ownerType": "process",
+              "owner": "feldolgozás",
+              "property": "completion",
+              "valueKind": "absolute",
+              "start": 15,
+              "end": 30
+            },
+            {
+              "surface": "42 százalékot",
+              "value": 42,
+              "ownerType": "entity",
+              "owner": "Sára",
+              "property": "share",
+              "valueKind": "absolute",
+              "start": 54,
+              "end": 67
+            }
+          ],
+          "start": 0,
+          "end": 67,
+          "content": "A szavazólapok 88 százalékának feldolgozása után Sára 42 százalékot",
+          "contentSpan": {
+            "start": 0,
+            "end": 67
+          }
+        },
+        {
+          "text": "Vince 37 százalékot kapott.",
+          "actor": "Vince",
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "37 százalékot",
+              "value": 37,
+              "ownerType": "entity",
+              "owner": "Vince",
+              "property": "share",
+              "valueKind": "absolute",
+              "start": 75,
+              "end": 88
+            }
+          ],
+          "start": 69,
+          "end": 96,
+          "content": "Vince 37 százalékot kapott.",
+          "contentSpan": {
+            "start": 69,
+            "end": 96
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Sára",
+          "start": 49,
+          "end": 53
+        },
+        {
+          "mention": "Vince",
+          "start": 69,
+          "end": 74
+        }
+      ]
+    },
+    {
+      "id": "s19",
+      "domain": "politics",
+      "text": "A küszöb 11 százalék, Sára 31 százalékot, Vince 29 százalékot, Zita 22 százalékot kapott.",
+      "frames": [
+        {
+          "text": "A küszöb 11 százalék",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "11 százalék",
+              "value": 11,
+              "ownerType": "threshold",
+              "owner": "küszöb",
+              "property": "threshold",
+              "valueKind": "absolute",
+              "start": 9,
+              "end": 20
+            }
+          ],
+          "start": 0,
+          "end": 20,
+          "content": "A küszöb 11 százalék",
+          "contentSpan": {
+            "start": 0,
+            "end": 20
+          }
+        },
+        {
+          "text": "Sára 31 százalékot",
+          "actor": "Sára",
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "31 százalékot",
+              "value": 31,
+              "ownerType": "entity",
+              "owner": "Sára",
+              "property": "share",
+              "valueKind": "absolute",
+              "start": 27,
+              "end": 40
+            }
+          ],
+          "start": 22,
+          "end": 40,
+          "content": "Sára 31 százalékot",
+          "contentSpan": {
+            "start": 22,
+            "end": 40
+          }
+        },
+        {
+          "text": "Vince 29 százalékot",
+          "actor": "Vince",
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "29 százalékot",
+              "value": 29,
+              "ownerType": "entity",
+              "owner": "Vince",
+              "property": "share",
+              "valueKind": "absolute",
+              "start": 48,
+              "end": 61
+            }
+          ],
+          "start": 42,
+          "end": 61,
+          "content": "Vince 29 százalékot",
+          "contentSpan": {
+            "start": 42,
+            "end": 61
+          }
+        },
+        {
+          "text": "Zita 22 százalékot kapott.",
+          "actor": "Zita",
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "22 százalékot",
+              "value": 22,
+              "ownerType": "entity",
+              "owner": "Zita",
+              "property": "share",
+              "valueKind": "absolute",
+              "start": 68,
+              "end": 81
+            }
+          ],
+          "start": 63,
+          "end": 89,
+          "content": "Zita 22 százalékot kapott.",
+          "contentSpan": {
+            "start": 63,
+            "end": 89
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Sára",
+          "start": 22,
+          "end": 26
+        },
+        {
+          "mention": "Vince",
+          "start": 42,
+          "end": 47
+        },
+        {
+          "mention": "Zita",
+          "start": 63,
+          "end": 67
+        }
+      ]
+    },
+    {
+      "id": "s20",
+      "domain": "election",
+      "text": "A 56 éves Sára 42 százalékot kapott.",
+      "frames": [
+        {
+          "text": "A 56 éves Sára 42 százalékot kapott.",
+          "actor": "Sára",
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "56 éves",
+              "value": 56,
+              "ownerType": "entity",
+              "owner": "Sára",
+              "property": "age",
+              "valueKind": "absolute",
+              "start": 2,
+              "end": 9
+            },
+            {
+              "surface": "42 százalékot",
+              "value": 42,
+              "ownerType": "entity",
+              "owner": "Sára",
+              "property": "share",
+              "valueKind": "absolute",
+              "start": 15,
+              "end": 28
+            }
+          ],
+          "start": 0,
+          "end": 36,
+          "content": "A 56 éves Sára 42 százalékot kapott.",
+          "contentSpan": {
+            "start": 0,
+            "end": 36
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Sára",
+          "start": 10,
+          "end": 14
+        }
+      ]
+    },
+    {
+      "id": "s21",
+      "domain": "economy",
+      "text": "A tarifa 14 százalék, a Cédrus Zrt. részesedése 32 százalék volt.",
+      "frames": [
+        {
+          "text": "A tarifa 14 százalék",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "14 százalék",
+              "value": 14,
+              "ownerType": "policy",
+              "owner": "tarifa",
+              "property": "tariff_rate",
+              "valueKind": "absolute",
+              "start": 9,
+              "end": 20
+            }
+          ],
+          "start": 0,
+          "end": 20,
+          "content": "A tarifa 14 százalék",
+          "contentSpan": {
+            "start": 0,
+            "end": 20
+          }
+        },
+        {
+          "text": "a Cédrus Zrt. részesedése 32 százalék volt.",
+          "actor": "Cédrus Zrt.",
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "32 százalék",
+              "value": 32,
+              "ownerType": "entity",
+              "owner": "Cédrus Zrt.",
+              "property": "share",
+              "valueKind": "absolute",
+              "start": 48,
+              "end": 59
+            }
+          ],
+          "start": 22,
+          "end": 65,
+          "content": "a Cédrus Zrt. részesedése 32 százalék volt.",
+          "contentSpan": {
+            "start": 22,
+            "end": 65
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Cédrus Zrt.",
+          "start": 24,
+          "end": 35
+        }
+      ]
+    },
+    {
+      "id": "s22",
+      "domain": "politics",
+      "text": "Sára 2023-ban 42 százalékot kapott.",
+      "frames": [
+        {
+          "text": "Sára 2023-ban 42 százalékot kapott.",
+          "actor": "Sára",
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "2023-ban",
+              "value": 2023,
+              "ownerType": "time",
+              "owner": "calendar_year",
+              "property": "year",
+              "valueKind": "absolute",
+              "start": 5,
+              "end": 13
+            },
+            {
+              "surface": "42 százalékot",
+              "value": 42,
+              "ownerType": "entity",
+              "owner": "Sára",
+              "property": "share",
+              "valueKind": "absolute",
+              "start": 14,
+              "end": 27
+            }
+          ],
+          "start": 0,
+          "end": 35,
+          "content": "Sára 2023-ban 42 százalékot kapott.",
+          "contentSpan": {
+            "start": 0,
+            "end": 35
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Sára",
+          "start": 0,
+          "end": 4
+        }
+      ]
+    },
+    {
+      "id": "s23",
+      "domain": "health",
+      "text": "A 96 beteg 18 százaléka távozott.",
+      "frames": [
+        {
+          "text": "A 96 beteg 18 százaléka távozott.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "96 beteg",
+              "value": 96,
+              "ownerType": "population",
+              "owner": "beteg",
+              "property": "population_count",
+              "valueKind": "absolute",
+              "start": 2,
+              "end": 10
+            },
+            {
+              "surface": "18 százaléka",
+              "value": 18,
+              "ownerType": "population",
+              "owner": "beteg",
+              "property": "share",
+              "valueKind": "absolute",
+              "start": 11,
+              "end": 23
+            }
+          ],
+          "start": 0,
+          "end": 33,
+          "content": "A 96 beteg 18 százaléka távozott.",
+          "contentSpan": {
+            "start": 0,
+            "end": 33
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s24",
+      "domain": "court",
+      "text": "Sára tagadta, hogy pénzt lopott volna.",
+      "frames": [
+        {
+          "text": "Sára tagadta, hogy pénzt lopott volna.",
+          "actor": "Sára",
+          "source": "Sára",
+          "recipient": null,
+          "conditional": false,
+          "cnd": true,
+          "polarity": "denied",
+          "numbers": [],
+          "content": " pénzt lopott volna.",
+          "start": 0,
+          "end": 38,
+          "contentSpan": {
+            "start": 18,
+            "end": 38
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Sára",
+          "start": 0,
+          "end": 4
+        }
+      ]
+    },
+    {
+      "id": "s25",
+      "domain": "company",
+      "text": "Sára megvenné az eszközt.",
+      "frames": [
+        {
+          "text": "Sára megvenné az eszközt.",
+          "actor": "Sára",
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": true,
+          "polarity": "asserted",
+          "numbers": [],
+          "start": 0,
+          "end": 25,
+          "content": "Sára megvenné az eszközt.",
+          "contentSpan": {
+            "start": 0,
+            "end": 25
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Sára",
+          "start": 0,
+          "end": 4
+        }
+      ]
+    },
+    {
+      "id": "s26",
+      "domain": "energy",
+      "text": "Amennyiben Vince nyer, csökkenti az árat, Zita viszont tegnap fizetett.",
+      "frames": [
+        {
+          "text": "Amennyiben Vince nyer",
+          "actor": "Vince",
+          "source": null,
+          "recipient": null,
+          "conditional": true,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "start": 0,
+          "end": 21,
+          "content": "Amennyiben Vince nyer",
+          "contentSpan": {
+            "start": 0,
+            "end": 21
+          }
+        },
+        {
+          "text": "csökkenti az árat",
+          "actor": "Vince",
+          "source": null,
+          "recipient": null,
+          "conditional": true,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "actorEvidence": "Vince",
+          "start": 23,
+          "end": 40,
+          "content": "csökkenti az árat",
+          "contentSpan": {
+            "start": 23,
+            "end": 40
+          }
+        },
+        {
+          "text": "Zita viszont tegnap fizetett.",
+          "actor": "Zita",
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "start": 42,
+          "end": 71,
+          "content": "Zita viszont tegnap fizetett.",
+          "contentSpan": {
+            "start": 42,
+            "end": 71
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Vince",
+          "start": 11,
+          "end": 16
+        },
+        {
+          "mention": "Zita",
+          "start": 42,
+          "end": 46
+        }
+      ]
+    },
+    {
+      "id": "s27",
+      "domain": "finance",
+      "text": "Vince csak akkor fizet, ha megkapja a szerződést.",
+      "frames": [
+        {
+          "text": "Vince csak akkor fizet",
+          "actor": "Vince",
+          "source": null,
+          "recipient": null,
+          "conditional": true,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "start": 0,
+          "end": 22,
+          "content": "Vince csak akkor fizet",
+          "contentSpan": {
+            "start": 0,
+            "end": 22
+          }
+        },
+        {
+          "text": "ha megkapja a szerződést.",
+          "actor": "Vince",
+          "source": null,
+          "recipient": null,
+          "conditional": true,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "actorEvidence": "Vince",
+          "start": 24,
+          "end": 49,
+          "content": "ha megkapja a szerződést.",
+          "contentSpan": {
+            "start": 24,
+            "end": 49
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Vince",
+          "start": 0,
+          "end": 5
+        }
+      ]
+    },
+    {
+      "id": "s28",
+      "domain": "science",
+      "text": "Ez történhetett volna.",
+      "frames": [
+        {
+          "text": "Ez történhetett volna.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": true,
+          "polarity": "asserted",
+          "numbers": [],
+          "start": 0,
+          "end": 22,
+          "content": "Ez történhetett volna.",
+          "contentSpan": {
+            "start": 0,
+            "end": 22
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s29",
+      "domain": "economy",
+      "text": "„Az egyenleg javulni fog” – mondta Bence.",
+      "frames": [
+        {
+          "text": "„Az egyenleg javulni fog” – mondta Bence.",
+          "actor": null,
+          "source": "Bence",
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "content": "Az egyenleg javulni fog",
+          "start": 0,
+          "end": 41,
+          "contentSpan": {
+            "start": 1,
+            "end": 24
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Bence",
+          "start": 35,
+          "end": 40
+        }
+      ]
+    },
+    {
+      "id": "s30",
+      "domain": "company",
+      "text": "Bence azt mondta: „Az egyenleg javulni fog”.",
+      "frames": [
+        {
+          "text": "Bence azt mondta: „Az egyenleg javulni fog”.",
+          "actor": null,
+          "source": "Bence",
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "content": "Az egyenleg javulni fog",
+          "start": 0,
+          "end": 44,
+          "contentSpan": {
+            "start": 19,
+            "end": 42
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Bence",
+          "start": 0,
+          "end": 5
+        }
+      ]
+    },
+    {
+      "id": "s31",
+      "domain": "economy",
+      "text": "\"Az egyenleg javulni fog\" - mondta Bence.",
+      "frames": [
+        {
+          "text": "\"Az egyenleg javulni fog\" - mondta Bence.",
+          "actor": null,
+          "source": "Bence",
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "content": "Az egyenleg javulni fog",
+          "start": 0,
+          "end": 41,
+          "contentSpan": {
+            "start": 1,
+            "end": 24
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Bence",
+          "start": 35,
+          "end": 40
+        }
+      ]
+    },
+    {
+      "id": "s32",
+      "domain": "company",
+      "text": "Az egyenleg javulni fog – mondta Bence.",
+      "frames": [
+        {
+          "text": "Az egyenleg javulni fog – mondta Bence.",
+          "actor": null,
+          "source": "Bence",
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "content": "Az egyenleg javulni fog",
+          "start": 0,
+          "end": 39,
+          "contentSpan": {
+            "start": 0,
+            "end": 23
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Bence",
+          "start": 33,
+          "end": 38
+        }
+      ]
+    },
+    {
+      "id": "s33",
+      "domain": "institution",
+      "text": "Szerintük az iskola és a kórház is nyitva van.",
+      "frames": [
+        {
+          "text": "Szerintük az iskola és a kórház is nyitva van.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "start": 0,
+          "end": 46,
+          "content": "Szerintük az iskola és a kórház is nyitva van.",
+          "contentSpan": {
+            "start": 0,
+            "end": 46
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s34",
+      "domain": "court",
+      "text": "Réka megérkezett. Rékának írtak.",
+      "frames": [
+        {
+          "text": "Réka megérkezett.",
+          "actor": "Réka",
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "start": 0,
+          "end": 17,
+          "content": "Réka megérkezett.",
+          "contentSpan": {
+            "start": 0,
+            "end": 17
+          }
+        },
+        {
+          "text": "Rékának írtak.",
+          "actor": null,
+          "source": null,
+          "recipient": "Rékának",
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [],
+          "start": 18,
+          "end": 32,
+          "content": "Rékának írtak.",
+          "contentSpan": {
+            "start": 18,
+            "end": 32
+          }
+        }
+      ],
+      "entities": [
+        {
+          "mention": "Réka",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "mention": "Rékának",
+          "start": 18,
+          "end": 25
+        }
+      ]
+    },
+    {
+      "id": "s35",
+      "domain": "science",
+      "text": "A hőmérséklet legalább -15 fok volt.",
+      "frames": [
+        {
+          "text": "A hőmérséklet legalább -15 fok volt.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "-15 fok",
+              "value": -15,
+              "ownerType": "property",
+              "owner": "hőmérséklet",
+              "property": "hőmérséklet",
+              "valueKind": "signed_absolute",
+              "semanticKind": "lower_bound",
+              "start": 23,
+              "end": 30
+            }
+          ],
+          "start": 0,
+          "end": 36,
+          "content": "A hőmérséklet legalább -15 fok volt.",
+          "contentSpan": {
+            "start": 0,
+            "end": 36
+          }
+        }
+      ],
+      "entities": []
+    },
+    {
+      "id": "s36",
+      "domain": "energy",
+      "text": "A hőmérséklet legfeljebb +7 fok lehet.",
+      "frames": [
+        {
+          "text": "A hőmérséklet legfeljebb +7 fok lehet.",
+          "actor": null,
+          "source": null,
+          "recipient": null,
+          "conditional": false,
+          "cnd": false,
+          "polarity": "asserted",
+          "numbers": [
+            {
+              "surface": "+7 fok",
+              "value": 7,
+              "ownerType": "property",
+              "owner": "hőmérséklet",
+              "property": "hőmérséklet",
+              "valueKind": "signed_absolute",
+              "semanticKind": "upper_bound",
+              "start": 25,
+              "end": 31
+            }
+          ],
+          "start": 0,
+          "end": 38,
+          "content": "A hőmérséklet legfeljebb +7 fok lehet.",
+          "contentSpan": {
+            "start": 0,
+            "end": 38
+          }
+        }
+      ],
+      "entities": []
+    }
+  ]
+}

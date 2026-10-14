@@ -1,0 +1,242 @@
+[
+  {
+    "id": "A",
+    "domain": "országos politika",
+    "text": "A plenáris ülésen az elnöklő Takács Réka a frakcióknak így indokolta a halasztást: „Amíg az egyeztetés tart, nem tűzzük napirendre a módosítást.” A parlament sajtóirodájának összefoglalója alapján az alkotmányügyi bizottság kérte a szünetet. A voksolásra legkorábban 2028 tavaszán kerülhet sor.",
+    "sentences": [
+      "A plenáris ülésen az elnöklő Takács Réka a frakcióknak így indokolta a halasztást: „Amíg az egyeztetés tart, nem tűzzük napirendre a módosítást.”",
+      "A parlament sajtóirodájának összefoglalója alapján az alkotmányügyi bizottság kérte a szünetet.",
+      "A voksolásra legkorábban 2028 tavaszán kerülhet sor."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "B",
+    "domain": "önkormányzat",
+    "text": "A lakógyűlésről távozva Barta Júlia főépítész a kerület jegyzőjének adta át a tervrajzokat. A kilencedik kerület udvarain nem padokat, hanem ivókutakat helyeznének el, ha megszületik a lakók hozzájárulása. Az első ütem a játszótérre korlátozódik.",
+    "sentences": [
+      "A lakógyűlésről távozva Barta Júlia főépítész a kerület jegyzőjének adta át a tervrajzokat.",
+      "A kilencedik kerület udvarain nem padokat, hanem ivókutakat helyeznének el, ha megszületik a lakók hozzájárulása.",
+      "Az első ütem a játszótérre korlátozódik."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "C",
+    "domain": "gazdaság",
+    "text": "Az exportőrök szövetségének mérlegelése szerint a megrendelések értéke meghaladhatja a 8 milliárd eurót. Ebből a hajógyártókra jutó rész 31 százalék, az előző negyedévhez képest pedig 6 százalékkal bővült a kivitel. A közzététel 2027. február 18-án 14 órakor történt.",
+    "sentences": [
+      "Az exportőrök szövetségének mérlegelése szerint a megrendelések értéke meghaladhatja a 8 milliárd eurót.",
+      "Ebből a hajógyártókra jutó rész 31 százalék, az előző negyedévhez képest pedig 6 százalékkal bővült a kivitel.",
+      "A közzététel 2027. február 18-án 14 órakor történt."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "D",
+    "domain": "vállalat",
+    "text": "A Borostyán Csomagoló Központ üzemvezetője a dolgozóknak jelezte, hogy az éjszakai műszakot megszüntetik. A feljegyzés szerint összesen 73 munkakör érintett, de a létszámleépítést a tulajdonos még nem hagyta jóvá. Az átállításért felelős vezetőt a közlemény nem nevezi meg.",
+    "sentences": [
+      "A Borostyán Csomagoló Központ üzemvezetője a dolgozóknak jelezte, hogy az éjszakai műszakot megszüntetik.",
+      "A feljegyzés szerint összesen 73 munkakör érintett, de a létszámleépítést a tulajdonos még nem hagyta jóvá.",
+      "Az átállításért felelős vezetőt a közlemény nem nevezi meg."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "E",
+    "domain": "energia",
+    "text": "A hálózatirányító tájékoztatása alapján a tartalék generátorok óránként 16 köbméter gázt fogyasztanak. Szélcsend esetén a tároló legfeljebb 11 órán keresztül biztosíthatja az ellátást. Az átvételi próbán a feszültség nem 230, hanem 228 volt volt.",
+    "sentences": [
+      "A hálózatirányító tájékoztatása alapján a tartalék generátorok óránként 16 köbméter gázt fogyasztanak.",
+      "Szélcsend esetén a tároló legfeljebb 11 órán keresztül biztosíthatja az ellátást.",
+      "Az átvételi próbán a feszültség nem 230, hanem 228 volt volt."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "F",
+    "domain": "közlekedés",
+    "text": "A kikötőmester üzenetét idézve a révüzem szóvivője azt írta: „A köd feloszlásáig egyetlen komp sem indul.” Az új hajó egyszerre 85 kerékpár befogadására alkalmas, de ma csak 19 biciklit szállított. A beszállást október 22-én 06:40-kor kezdték meg.",
+    "sentences": [
+      "A kikötőmester üzenetét idézve a révüzem szóvivője azt írta: „A köd feloszlásáig egyetlen komp sem indul.”",
+      "Az új hajó egyszerre 85 kerékpár befogadására alkalmas, de ma csak 19 biciklit szállított.",
+      "A beszállást október 22-én 06:40-kor kezdték meg."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "G",
+    "domain": "rendőrség",
+    "text": "A helyszínelők a raktár bérlőjétől 14 lezárt csomagot vettek át. „Nem foglaltuk le a teljes készletet” – pontosított Fekete Dóra rendőr őrnagy a kereskedő kérdésére. Az ügyészség cáfolata szerint nem a tulajdonost, hanem az alkalmazottját hallgatták ki.",
+    "sentences": [
+      "A helyszínelők a raktár bérlőjétől 14 lezárt csomagot vettek át.",
+      "„Nem foglaltuk le a teljes készletet” – pontosított Fekete Dóra rendőr őrnagy a kereskedő kérdésére.",
+      "Az ügyészség cáfolata szerint nem a tulajdonost, hanem az alkalmazottját hallgatták ki."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "H",
+    "domain": "baleset",
+    "text": "A buszvezető segítői a mentők érkezése előtt kinyitották a hátsó ajtót. A mentésirányítás közlése alapján legalább 5 utas könnyebben megsérült, két ember állapotát még vizsgálják. A forgalmat 40 percre leállították, a mentők azonban nem kértek helikoptert.",
+    "sentences": [
+      "A buszvezető segítői a mentők érkezése előtt kinyitották a hátsó ajtót.",
+      "A mentésirányítás közlése alapján legalább 5 utas könnyebben megsérült, két ember állapotát még vizsgálják.",
+      "A forgalmat 40 percre leállították, a mentők azonban nem kértek helikoptert."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "I",
+    "domain": "sport",
+    "text": "A selejtező második fordulójából jutott döntőbe Sipos Lilla, aki végül harmadikként ért célba. A váltóban a negyedik helyet szerezték meg; a befutó versenyző nevét nem közölték. A csapatvezető röviden annyit mondott: „Második lett, de erről később beszélünk.”",
+    "sentences": [
+      "A selejtező második fordulójából jutott döntőbe Sipos Lilla, aki végül harmadikként ért célba.",
+      "A váltóban a negyedik helyet szerezték meg; a befutó versenyző nevét nem közölték.",
+      "A csapatvezető röviden annyit mondott: „Második lett, de erről később beszélünk.”"
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "J",
+    "domain": "technológia",
+    "text": "A Szabad Adathálózat Egyesület kutatója a felügyeletnek bemutatta a titkosítási protokollt. A labor jegyzőkönyve szerint a kapcsolat sebessége 1,8 gigabit másodpercenként, ami nem azonos a letöltött adatmennyiséggel. A hibajavítás után 12 és 18 milliszekundum között ingadozott a késleltetés.",
+    "sentences": [
+      "A Szabad Adathálózat Egyesület kutatója a felügyeletnek bemutatta a titkosítási protokollt.",
+      "A labor jegyzőkönyve szerint a kapcsolat sebessége 1,8 gigabit másodpercenként, ami nem azonos a letöltött adatmennyiséggel.",
+      "A hibajavítás után 12 és 18 milliszekundum között ingadozott a késleltetés."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "K",
+    "domain": "egészségügy",
+    "text": "A járványügyi központ előrejelzése szerint, ha nő a fertőzések száma, naponta akár 46 beteget is felvehet az osztály. A főorvos visszautasította, hogy már bezárták volna a rendelőt. A kórház kedden megkapta az új vizsgálógépet.",
+    "sentences": [
+      "A járványügyi központ előrejelzése szerint, ha nő a fertőzések száma, naponta akár 46 beteget is felvehet az osztály.",
+      "A főorvos visszautasította, hogy már bezárták volna a rendelőt.",
+      "A kórház kedden megkapta az új vizsgálógépet."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "L",
+    "domain": "oktatás",
+    "text": "Az igazgatóhelyettes felolvasott levelében a tankerület azt kérte, hogy a diákok péntekig adják le a jelentkezést. Az ösztöndíj nem 60, hanem 75 ezer forint havonta, és csak a jogosultság fennállásáig jár. A tanfolyam harmadik napján műhelymunka következik.",
+    "sentences": [
+      "Az igazgatóhelyettes felolvasott levelében a tankerület azt kérte, hogy a diákok péntekig adják le a jelentkezést.",
+      "Az ösztöndíj nem 60, hanem 75 ezer forint havonta, és csak a jogosultság fennállásáig jár.",
+      "A tanfolyam harmadik napján műhelymunka következik."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "M",
+    "domain": "időjárás",
+    "text": "A magashegyi állomás mérései alapján hajnalban mínusz 7 Celsius-fok volt a levegő hőmérséklete. A délutáni maximum várhatóan 2–4 fokkal marad el az ilyenkor szokásostól. A meteorológus hangsúlyozta, hogy nem havazásra, hanem ónos esőre kell számítani.",
+    "sentences": [
+      "A magashegyi állomás mérései alapján hajnalban mínusz 7 Celsius-fok volt a levegő hőmérséklete.",
+      "A délutáni maximum várhatóan 2–4 fokkal marad el az ilyenkor szokásostól.",
+      "A meteorológus hangsúlyozta, hogy nem havazásra, hanem ónos esőre kell számítani."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "N",
+    "domain": "tudomány",
+    "text": "A mintát a kutatócsoport által felkért laboratóriumban elemezték. A mérési jelentés alapján a kristály tömege körülbelül 0,7 gramm, átmérője pedig 9 milliméter. A csoport vezetője nem állítja, hogy a lelet bizonyítaná az elméletet.",
+    "sentences": [
+      "A mintát a kutatócsoport által felkért laboratóriumban elemezték.",
+      "A mérési jelentés alapján a kristály tömege körülbelül 0,7 gramm, átmérője pedig 9 milliméter.",
+      "A csoport vezetője nem állítja, hogy a lelet bizonyítaná az elméletet."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "O",
+    "domain": "fogyasztói árak",
+    "text": "Az üzletlánc árjegyzéke szerint a liszt kilónként 412 forintba kerül. Az akcióban nem 15, hanem 18 százalékos engedményt adhatnak azoknak, akik visszahozzák a csomagolást. A kosár ára így sem kevesebb 3900 forintnál.",
+    "sentences": [
+      "Az üzletlánc árjegyzéke szerint a liszt kilónként 412 forintba kerül.",
+      "Az akcióban nem 15, hanem 18 százalékos engedményt adhatnak azoknak, akik visszahozzák a csomagolást.",
+      "A kosár ára így sem kevesebb 3900 forintnál."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "P",
+    "domain": "munkaerőpiac",
+    "text": "A szakszervezeti elnök a munkáltató ígéretére hivatkozva úgy fogalmazott, hogy a gyakornokok nem maradnak fizetés nélkül. A megállapodás hatálya nem 2029-ben, hanem 2031-ben szűnik meg. Új belépőnként legalább 24 óra képzést kell szervezni.",
+    "sentences": [
+      "A szakszervezeti elnök a munkáltató ígéretére hivatkozva úgy fogalmazott, hogy a gyakornokok nem maradnak fizetés nélkül.",
+      "A megállapodás hatálya nem 2029-ben, hanem 2031-ben szűnik meg.",
+      "Új belépőnként legalább 24 óra képzést kell szervezni."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "Q",
+    "domain": "kultúra",
+    "text": "A restaurátor és a kurátor együtt emelte le a képet, majd elszállították a műhelybe. A kiállítás rendezője a látogatóknak ezt mondta: „Nem én, hanem a gyűjtő választotta ki a keretet.” A harmadik terem ajtaján az állt: „Második.”",
+    "sentences": [
+      "A restaurátor és a kurátor együtt emelte le a képet, majd elszállították a műhelybe.",
+      "A kiállítás rendezője a látogatóknak ezt mondta: „Nem én, hanem a gyűjtő választotta ki a keretet.”",
+      "A harmadik terem ajtaján az állt: „Második.”"
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "R",
+    "domain": "igazságszolgáltatás",
+    "text": "A törvényszék nem a vádlottat, hanem a szakértőt kötelezte az iratok pótlására. A végzésről Szalai Emesének a jogi képviselője számolt be, de a bíróság indokolását nem idézte. A pótlásra szeptember 8-tól szeptember 17-ig van lehetőség.",
+    "sentences": [
+      "A törvényszék nem a vádlottat, hanem a szakértőt kötelezte az iratok pótlására.",
+      "A végzésről Szalai Emesének a jogi képviselője számolt be, de a bíróság indokolását nem idézte.",
+      "A pótlásra szeptember 8-tól szeptember 17-ig van lehetőség."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "S",
+    "domain": "mezőgazdaság",
+    "text": "A gazdaság agronómusának becslése alapján hektáronként 4,6 tonna árpa teremhet, amennyiben kitart az eső. A betakarítást június helyett júliusra tervezik; nem 6, hanem 8 géppel dolgoznának. A második körben a talaj nedvességét vizsgálják.",
+    "sentences": [
+      "A gazdaság agronómusának becslése alapján hektáronként 4,6 tonna árpa teremhet, amennyiben kitart az eső.",
+      "A betakarítást június helyett júliusra tervezik; nem 6, hanem 8 géppel dolgoznának.",
+      "A második körben a talaj nedvességét vizsgálják."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  },
+  {
+    "id": "T",
+    "domain": "külpolitika",
+    "text": "Brüsszel válaszát várják a tárgyalók, de a közlemény nem azonosítja, melyik intézmény fog megszólalni. A szóvivő nem a tanács, hanem a küldöttség álláspontjaként ismertette a javaslatot. A támogatásról csak annyi hangzott el: nem 2, hanem később.",
+    "sentences": [
+      "Brüsszel válaszát várják a tárgyalók, de a közlemény nem azonosítja, melyik intézmény fog megszólalni.",
+      "A szóvivő nem a tanács, hanem a küldöttség álláspontjaként ismertette a javaslatot.",
+      "A támogatásról csak annyi hangzott el: nem 2, hanem később."
+    ],
+    "editorialSentenceCount": 3,
+    "origin": "NEW SYNTHETIC MATERIAL"
+  }
+]

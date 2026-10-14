@@ -1,0 +1,18 @@
+{
+  "createdBeforeRun": "2026-10-09T09:22:11.064Z",
+  "origin": "New synthetic Hungarian news-style research snippets; not published articles; no internet; not externally independent",
+  "hashes": [
+    {
+      "path": "corpus.json",
+      "sha256": "fbf64b8807fd43d9a5cf322d8b5c43d1ef1ec7bc232e01b91cdc61d1f302847c"
+    },
+    {
+      "path": "expected.json",
+      "sha256": "8f247574785aca63f822ac3f81dfe5c687bdb9a1f9f1938b2c896d4883601858"
+    },
+    {
+      "path": "freeze.json",
+      "sha256": "0e7e128eed7d48fab955c29cd023e7dd6a63656accfba016a9a2b4e9b49d5e42"
+    }
+  ]
+}

@@ -1,146 +1,40 @@
-"use client";
+import Link from "next/link";
+
+const features = [
+  ["01", "Egy történet, több forrás", "Hasonlítsd össze a forrásokat, és lásd együtt a közös és eltérő állításokat."],
+  ["02", "Előzmények és idővonal", "Kövesd végig, hogyan alakult egy történet, és mi előzte meg a legfrissebb hírt."],
+  ["03", "Eltérések, bizonyítékokkal", "Tekintsd át a konfliktusokat, a kapcsolódó szereplőket és az állítások forrásait."],
+];
 export default function PremiumPage() {
-  return (
-    <main className="premium-wrapper">
-
-      {/* HERO */}
-      <section className="premium-hero text-center">
-        <div className="container">
-
-          <img src="/utomlogo.png" alt="Utom" height="52" className="mb-4 opacity-75" />
-
-          <h1 className="hero-title">
-            Lásd a hírek mögötti <span className="gradient-text">valódi szerkezetet</span>.
-          </h1>
-
-          <p className="hero-sub">
-            A hírek mögötti összefüggések, források és előzmények egy helyen.
-          </p>
-
-          <button className="premium-btn-lg mt-4" type="button" disabled aria-disabled="true" title="Az előfizetés jelenleg nem érhető el">
-            Prémium hozzáférés indítása
-          </button>
-
-          <p className="small text-muted mt-3">
-            Az előfizetés és a próbaidő jelenleg nem érhető el.
-          </p>
-        </div>
-      </section>
-
-      {/* PRICING */}
-      <section className="pricing-section">
-        <div className="container d-flex justify-content-center gap-4 flex-wrap">
-
-          {/* Havi */}
-          <div className="premium-card glass">
-            <div className="price">1000 Ft<span>/hó</span></div>
-            <ul>
-              <li>Források összehasonlítása</li>
-              <li>Előzmények és idővonalak</li>
-            </ul>
-            <button className="premium-btn w-100" type="button" disabled aria-disabled="true">Jelenleg nem elérhető</button>
-          </div>
-
-          {/* Éves */}
-          <div className="premium-card highlight glass">
-            <div className="badge-popular">Legjobb ár</div>
-            <div className="price">9000 Ft<span>/év</span></div>
-            <ul>
-              <li>Források összehasonlítása</li>
-              <li>Közös és eltérő állítások</li>
-              <li>Konfliktusok és kapcsolódó szereplők</li>
-            </ul>
-            <button className="premium-btn w-100" type="button" disabled aria-disabled="true">Jelenleg nem elérhető</button>
-          </div>
-
-          {/* Támogató */}
-          <div className="premium-card glass supporter">
-            <div className="price">Támogató</div>
-            <div className="desc">
-              Támogasd az Utom független hírelemző projektjét.
-            </div>
-             <input
-             type="number"
-             placeholder="Összeg (Ft)"
-             className="supporter-input"
-             disabled
-             aria-disabled="true"
-             title="A támogatás jelenleg nem érhető el"
-            />
-             <button className="premium-btn w-100 mt-3" type="button" disabled aria-disabled="true">Jelenleg nem elérhető</button>
-          </div>
-          {/* Céges */}
-          <div className="premium-card glass">
-            <div className="price">Cégeknek</div>
-            <p className="mt-5 text-sm opacity-80">A céges csomag részletei és az API-hozzáférés még nem érhető el.</p>
-            <button className="premium-btn w-100" type="button" disabled aria-disabled="true">Jelenleg nem elérhető</button>
-          </div>
-
-        </div>
-      </section>
-
-      {/* WHY PREMIUM */}
-<section className="why-premium-section text-center">
-  <div className="container">
-
-    <h2 className="section-title mb-3">
-      Miért legyél <span className="gradient-text">Prémium</span> tag?
-    </h2>
-
-    <p className="section-sub mb-5">
-      Ingyen: mi történt? Prémiumban: mi van mögötte?
-    </p>
-
-    {/* Top 4 highlight */}
-    <div className="why-grid mb-5">
-      <div className="why-card">
-        <div className="why-icon">🧭</div>
-        <h5>Előzmények és idővonal</h5>
+  return <div className="premium-product">
+    <section className="premium-intro" aria-labelledby="premium-title">
+      <div>
+        <p className="premium-eyebrow">UTOM / PRÉMIUM</p>
+        <h1 id="premium-title">A hír csak<br /><span>a történet kezdete.</span></h1>
+        <p className="premium-lead">Források, előzmények és összefüggések. Nézd meg, mi áll a hírek mögött — egy áttekinthető felületen.</p>
+        <a className="premium-link" href="#premium-plans">Csomagok összehasonlítása <span aria-hidden="true">↓</span></a>
       </div>
-
-      <div className="why-card">
-        <div className="why-icon">⚡</div>
-        <h5>Források összehasonlítása</h5>
+      <aside className="premium-value" aria-label="A Prémium értéke">
+        <p className="premium-eyebrow">TÖBB NÉZŐPONT. TÖBB KONTEXTUS.</p>
+        <h2>Mi történt?<br /><span>És mi van mögötte?</span></h2>
+        <div className="premium-value-line"><span>Források</span><strong>Egymás mellett</strong></div>
+        <div className="premium-value-line"><span>Előzmények</span><strong>Időrendben</strong></div>
+        <div className="premium-value-line"><span>Állítások</span><strong>Bizonyítékhoz kötve</strong></div>
+      </aside>
+    </section>
+    <section className="premium-features" aria-label="Prémium funkciók">
+      {features.map(([number, title, description]) => <article key={number}>
+        <span className="premium-eyebrow">{number}</span><h2>{title}</h2><p>{description}</p>
+      </article>)}
+    </section>
+    <section id="premium-plans" aria-labelledby="plans-title">
+      <div className="premium-section-heading"><div><p className="premium-eyebrow">HOZZÁFÉRÉS</p><h2 id="plans-title">Válaszd a saját ritmusod.</h2></div><p>Az előfizetés és a próbaidő jelenleg nem érhető el.</p></div>
+      <div className="premium-plans">
+        <article className="premium-plan"><h3>Havi Prémium</h3><p className="premium-price">1000 Ft <span>/ hó</span></p><p>Havi díjas hozzáférés a Prémium nézetekhez.</p><ul><li>Források összehasonlítása</li><li>Előzmények és idővonalak</li></ul><button type="button" disabled>Jelenleg nem elérhető</button></article>
+        <article className="premium-plan premium-plan-featured"><span className="premium-offer">Legjobb ár</span><h3>Éves Prémium</h3><p className="premium-price">9000 Ft <span>/ év</span></p><p>Havi 750 Ft-nak megfelelő éves díj.</p><ul><li>Források összehasonlítása és idővonalak</li><li>Közös és eltérő állítások</li><li>Konfliktusok és kapcsolódó szereplők</li></ul><button type="button" disabled>Jelenleg nem elérhető</button></article>
       </div>
-
-      <div className="why-card">
-        <div className="why-icon">🚫</div>
-        <h5>Közös és eltérő állítások</h5>
-      </div>
-
-      <div className="why-card">
-        <div className="why-icon">💬</div>
-        <h5>Konfliktusok és kapcsolódó szereplők</h5>
-      </div>
-    </div>
-
-    {/* Detailed Features */}
-    <div className="row row-cols-1 row-cols-md-2 g-4 text-start">
-
-      {[
-        { icon: "🧭", title: "Előzmények és idővonal", desc: "Lásd, hogyan alakult egy történet, és milyen korábbi állítások kapcsolódnak hozzá." },
-        { icon: "🧱", title: "Források összehasonlítása", desc: "Egy témáról több forrás nézete egy helyen, közös és eltérő állításokkal." },
-        { icon: "⚖️", title: "Konfliktusok", desc: "Az eltérő állítások külön jelennek meg, hogy könnyebb legyen összevetni őket." },
-        { icon: "🔗", title: "Kapcsolódó szereplők", desc: "Az eseményhez kapcsolódó szereplők és tények áttekinthető nézetben." },
-        { icon: "📊", title: "Forráseloszlás", desc: "Megmutatjuk, mely források és témák jelennek meg egy történetben." },
-        { icon: "📝", title: "Bizonyíték-alapú kontextus", desc: "A megjelenített összefüggésekhez a kapcsolódó forrás és időpont is megmarad." }
-      ].map((item, i) => (
-        <div key={i} className="col">
-          <div className="premium-feature-card d-flex gap-3">
-            <div className="fs-2">{item.icon}</div>
-            <div>
-              <h5 className="mb-1">{item.title}</h5>
-              <p className="mb-0">{item.desc}</p>
-            </div>
-          </div>
-        </div>
-      ))}
-
-    </div>
-
-  </div>
-</section>
-    </main>
-  );
+      <div className="premium-secondary"><article><h3>Támogató</h3><p>Támogasd az Utom független hírelemző projektjét.</p><button type="button" disabled>A támogatás jelenleg nem érhető el</button></article><article><h3>Cégeknek</h3><p>A céges csomag részletei és az API-hozzáférés még nem érhető el.</p><button type="button" disabled>Jelenleg nem elérhető</button></article></div>
+      <p className="premium-footnote">Kérdésed van? <Link href="/premium-faq">Prémium tudnivalók</Link></p>
+    </section>
+  </div>;
 }
-

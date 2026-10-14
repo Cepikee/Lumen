@@ -1,0 +1,24 @@
+{
+  "time": "2026-10-12T07:13:15.298Z",
+  "frozenFilesChecked": 1305,
+  "changedExistingFiles": [
+    "scripts/experimental/real-text-a-binder.cjs"
+  ],
+  "historicalArtifactsUnchanged": true,
+  "oldTestsUnchanged": true,
+  "newTests": 36,
+  "targeted": {
+    "tests": 424,
+    "pass": 424,
+    "fail": 0
+  },
+  "C01Unchanged": true,
+  "canonicalProjection": "OFF",
+  "postSha256": "d5e7a471354b0970302d1b034e476c22fc7d6d4f51f0b0af95c404b23c8a320f",
+  "codeHashes": {
+    "scripts/experimental/real-text-a-binder.cjs": "f57df38f3529f0c2713b0ee7fe8c6ba8ce0e780fde9100013762ae097cf27fc3",
+    "scripts/experimental/source-composition-safety.cjs": "a9b1ecbf0087eff3a4c5f0fa21c6201b81b214c89727bf65df34f263f3064d66",
+    "scripts/experimental/source-composition-development.cjs": "b49aa64d6b7a07ad571981c868691089cf077fcc147484aeb238139661e367a0",
+    "tests/unit/v22-source-composition.test.cjs": "24fb293cee2b1ed41f5a37a06114ddd6343de18040f9b787f3a94aca081ae907"
+  }
+}

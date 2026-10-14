@@ -1,0 +1,662 @@
+{
+  "id": "Q",
+  "raw": "A feltárás vezetőjének terepnaplója alapján a segítők az ötödik rétegből emelték ki a csatot. A lelet nem ezüstből, hanem ónból készült, tömege a restaurátor szerint hozzávetőleg 42 gramm. A mellette heverő másik tárgyat nem mérték meg, így ahhoz tömegadatot nem lehet rendelni.",
+  "rawSha256": "64738d173b26918e3aa1c88fca326f1edcc503a24b5e42617e19cb8ccb35cdb7",
+  "annotationSha256": "1b2716b628d5a6fd78f968cf3b02f19743fe7df810fb4ea9473a57424289f5cc",
+  "sentenceCount": 3,
+  "tokenCount": 48,
+  "environmentFingerprint": "143242eddc17f94ea729a1b430c5eac9d5e47dd7d27b5ebdd29c7c6961882f47",
+  "model": {
+    "type": "ready",
+    "model": "hu_core_news_md",
+    "version": "3.8.0",
+    "loadMs": 1160.3809050000002
+  },
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 10,
+        "text": "feltárás",
+        "lemma": "feltárás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 11
+      },
+      {
+        "start": 11,
+        "end": 22,
+        "text": "vezetőjének",
+        "lemma": "vezető",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Gen",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nmod:att",
+        "headStart": 23
+      },
+      {
+        "start": 23,
+        "end": 35,
+        "text": "terepnaplója",
+        "lemma": "terepnapló",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nmod:att",
+        "headStart": 36
+      },
+      {
+        "start": 36,
+        "end": 43,
+        "text": "alapján",
+        "lemma": "alap",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 73
+      },
+      {
+        "start": 44,
+        "end": 45,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 46
+      },
+      {
+        "start": 46,
+        "end": 53,
+        "text": "segítők",
+        "lemma": "segítő",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur"
+        },
+        "dep": "nsubj",
+        "headStart": 73
+      },
+      {
+        "start": 54,
+        "end": 56,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 64
+      },
+      {
+        "start": 57,
+        "end": 63,
+        "text": "ötödik",
+        "lemma": "ötödik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 64
+      },
+      {
+        "start": 64,
+        "end": 72,
+        "text": "rétegből",
+        "lemma": "réteg",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 73
+      },
+      {
+        "start": 73,
+        "end": 80,
+        "text": "emelték",
+        "lemma": "emel",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 73
+      },
+      {
+        "start": 81,
+        "end": 83,
+        "text": "ki",
+        "lemma": "ki",
+        "pos": "ADV",
+        "morph": {
+          "Degree": "Pos"
+        },
+        "dep": "compound:preverb",
+        "headStart": 73
+      },
+      {
+        "start": 84,
+        "end": 85,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 86
+      },
+      {
+        "start": 86,
+        "end": 92,
+        "text": "csatot",
+        "lemma": "csat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 73
+      },
+      {
+        "start": 92,
+        "end": 93,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 73
+      },
+      {
+        "start": 94,
+        "end": 95,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 96
+      },
+      {
+        "start": 96,
+        "end": 101,
+        "text": "lelet",
+        "lemma": "lelet",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 128
+      },
+      {
+        "start": 102,
+        "end": 105,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 106
+      },
+      {
+        "start": 106,
+        "end": 114,
+        "text": "ezüstből",
+        "lemma": "ezüst",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 128
+      },
+      {
+        "start": 114,
+        "end": 115,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 122
+      },
+      {
+        "start": 116,
+        "end": 121,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 122
+      },
+      {
+        "start": 122,
+        "end": 127,
+        "text": "ónból",
+        "lemma": "ón",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Ela",
+          "Number": "Sing"
+        },
+        "dep": "conj",
+        "headStart": 106
+      },
+      {
+        "start": 128,
+        "end": 135,
+        "text": "készült",
+        "lemma": "készül",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 128
+      },
+      {
+        "start": 135,
+        "end": 136,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 137
+      },
+      {
+        "start": 137,
+        "end": 143,
+        "text": "tömege",
+        "lemma": "tömeg",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 182
+      },
+      {
+        "start": 144,
+        "end": 145,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 146
+      },
+      {
+        "start": 146,
+        "end": 157,
+        "text": "restaurátor",
+        "lemma": "restaurátor",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod",
+        "headStart": 182
+      },
+      {
+        "start": 158,
+        "end": 165,
+        "text": "szerint",
+        "lemma": "szerint",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 146
+      },
+      {
+        "start": 166,
+        "end": 178,
+        "text": "hozzávetőleg",
+        "lemma": "hozzávetőleg",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Tot"
+        },
+        "dep": "advmod:mode",
+        "headStart": 182
+      },
+      {
+        "start": 179,
+        "end": 181,
+        "text": "42",
+        "lemma": "42",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 182
+      },
+      {
+        "start": 182,
+        "end": 187,
+        "text": "gramm",
+        "lemma": "gramm",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 128
+      },
+      {
+        "start": 187,
+        "end": 188,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 128
+      },
+      {
+        "start": 189,
+        "end": 190,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 213
+      },
+      {
+        "start": 191,
+        "end": 199,
+        "text": "mellette",
+        "lemma": "mellette",
+        "pos": "ADV",
+        "morph": {
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "PrsPron"
+        },
+        "dep": "advmod:mode",
+        "headStart": 200
+      },
+      {
+        "start": 200,
+        "end": 206,
+        "text": "heverő",
+        "lemma": "heverő",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 213
+      },
+      {
+        "start": 207,
+        "end": 212,
+        "text": "másik",
+        "lemma": "másik",
+        "pos": "PRON",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Ind"
+        },
+        "dep": "det",
+        "headStart": 213
+      },
+      {
+        "start": 213,
+        "end": 220,
+        "text": "tárgyat",
+        "lemma": "tárgy",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 225
+      },
+      {
+        "start": 221,
+        "end": 224,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 225
+      },
+      {
+        "start": 225,
+        "end": 231,
+        "text": "mérték",
+        "lemma": "mér",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 225
+      },
+      {
+        "start": 232,
+        "end": 235,
+        "text": "meg",
+        "lemma": "meg",
+        "pos": "PART",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 225
+      },
+      {
+        "start": 235,
+        "end": 236,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 263
+      },
+      {
+        "start": 237,
+        "end": 240,
+        "text": "így",
+        "lemma": "így",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 263
+      },
+      {
+        "start": 241,
+        "end": 246,
+        "text": "ahhoz",
+        "lemma": "az",
+        "pos": "PRON",
+        "morph": {
+          "Case": "All",
+          "Number": "Sing",
+          "Person": "3",
+          "PronType": "Dem"
+        },
+        "dep": "obl",
+        "headStart": 269
+      },
+      {
+        "start": 247,
+        "end": 258,
+        "text": "tömegadatot",
+        "lemma": "tömegadat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 269
+      },
+      {
+        "start": 259,
+        "end": 262,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 263
+      },
+      {
+        "start": 263,
+        "end": 268,
+        "text": "lehet",
+        "lemma": "lesz",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Pot",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "conj",
+        "headStart": 225
+      },
+      {
+        "start": 269,
+        "end": 277,
+        "text": "rendelni",
+        "lemma": "rendel",
+        "pos": "VERB",
+        "morph": {
+          "VerbForm": "Inf",
+          "Voice": "Act"
+        },
+        "dep": "xcomp",
+        "headStart": 263
+      },
+      {
+        "start": 277,
+        "end": 278,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 225
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 93,
+        "text": "A feltárás vezetőjének terepnaplója alapján a segítők az ötödik rétegből emelték ki a csatot."
+      },
+      {
+        "start": 94,
+        "end": 188,
+        "text": "A lelet nem ezüstből, hanem ónból készült, tömege a restaurátor szerint hozzávetőleg 42 gramm."
+      },
+      {
+        "start": 189,
+        "end": 278,
+        "text": "A mellette heverő másik tárgyat nem mérték meg, így ahhoz tömegadatot nem lehet rendelni."
+      }
+    ],
+    "entities": []
+  }
+}

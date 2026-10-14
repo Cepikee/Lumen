@@ -1,0 +1,33 @@
+{
+  "testId": "REAL_WORLD_ARTICLE_002",
+  "pass": "pre-first-pass-state-freeze",
+  "frozenAt": "2026-10-05T22:58:31.9075097Z",
+  "priorCheckpoint": "d145120c6e044b4f25d1d7b94e87846652ef80ba",
+  "branch": "develop/utom-recovery",
+  "localHead": "d145120c6e044b4f25d1d7b94e87846652ef80ba",
+  "remoteHead": "d145120c6e044b4f25d1d7b94e87846652ef80ba",
+  "worktreeStatusLines": [
+    "?? AGENTS.md",
+    "?? CLAUDE.md",
+    "?? docs.zip",
+    "?? docs/UTOM_V2_2/real_world/002_source_article.txt"
+  ],
+  "worktreeStatusSha256": "c59a3e43c36d267bd9226486229f4fa646cd89c592cddea0571b5a27cb405687",
+  "source": {
+    "path": "docs/UTOM_V2_2/real_world/002_source_article.txt",
+    "sha256": "2308BE1E678713E4C4653ADDECE99DB1AE588A426020BDA691E62D43CFC80845"
+  },
+  "relevantIntelligenceSha256": {
+    "lib/v2/deterministic-semantic.js": "20447C74BA03A082780851944DAF9824942B2901F658B18D07BD6EB402612597",
+    "lib/v22/deterministic-text-provider.cjs": "289232BC1BB748B310CEBD53A577CA5643FB477C5AA1C0F5F52182A792CB989C",
+    "lib/v22/benchmark-evaluator.cjs": "909151AEB8979A742CCBA19478A7827DB34771A85C50564BB01363964F6A0525",
+    "lib/v22/benchmark-integrity.cjs": "53B92AF5BAF944EDB453F4B72A19841F6595A3C715B37B795B917DEAFDF9E5EF",
+    "lib/v22/benchmark-dataset.cjs": "778F70E68ACF553D811FCBC058D309387D48ED797F2F29E3F0B78E89C64DF207",
+    "lib/v22/dense-benchmark-dataset.cjs": "757CB92743BFA770838BDE4F192D99A097321D9F49686867B84A932E0411953A"
+  },
+  "userOwnedUntouched": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "docs.zip"
+  ]
+}

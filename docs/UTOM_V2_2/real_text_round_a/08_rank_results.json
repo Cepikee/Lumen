@@ -1,0 +1,3668 @@
+{
+  "researchOnly": true,
+  "canonicalProjection": "OFF",
+  "fixtureSHA256": "1c9e2f8e8817ace35f0fbfd0c3962bc84bb115ba163b51a35d182aaafad5ca4b",
+  "evidence": {
+    "total": 298,
+    "failures": 0
+  },
+  "rows": [
+    {
+      "id": "simple",
+      "text": "Eszter negyedik lett.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter",
+            "canonicalIdentity": "eszter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 21,
+              "textSpan": "Eszter negyedik lett."
+            },
+            "attribution": null,
+            "action": "lesz",
+            "actionSpan": {
+              "start": 16,
+              "end": 20,
+              "textSpan": "lett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "start": 7,
+                "end": 15,
+                "raw": "negyedik",
+                "value": 4,
+                "canonicalValue": 4,
+                "semanticKind": "rank",
+                "unit": "position",
+                "property": "placement",
+                "temporalRole": "placement",
+                "evidenceSpan": {
+                  "start": 7,
+                  "end": 15,
+                  "textSpan": "negyedik"
+                },
+                "binding": "resolved",
+                "ownerType": "ranked_entity",
+                "owner": {
+                  "mention": "Eszter",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                },
+                "subject": null,
+                "unresolvedReasons": [],
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 7,
+                    "end": 15,
+                    "textSpan": "negyedik"
+                  },
+                  "targetSpan": {
+                    "start": 16,
+                    "end": 20,
+                    "textSpan": "lett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "cop:reverse",
+                      "sourceSpan": {
+                        "start": 7,
+                        "end": 15,
+                        "textSpan": "negyedik"
+                      },
+                      "targetSpan": {
+                        "start": 16,
+                        "end": 20,
+                        "textSpan": "lett"
+                      }
+                    },
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Eszter"
+                      },
+                      "targetSpan": {
+                        "start": 7,
+                        "end": 15,
+                        "textSpan": "negyedik"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:21",
+                  "semanticRole": "placement",
+                  "resolutionStatus": "resolved",
+                  "rule": "ordinal_predicate_copula_unique_typed_subject",
+                  "subjectSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_actor_ambiguous_or_implicit"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 21,
+              "textSpan": "Eszter negyedik lett."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 21,
+              "textSpan": "Eszter negyedik lett."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:21",
+            "syntacticRoles": []
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "other",
+      "text": "Bálint második lett a körzetben.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Bálint",
+            "normalized": "bálint",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Bálint"
+            },
+            "identityKey": "person|bálint",
+            "canonicalIdentity": "bálint",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [
+              {
+                "mention": "körzetben",
+                "normalized": "körzet",
+                "canonicalIdentity": null,
+                "type": "referent",
+                "named": false,
+                "case": "Ine",
+                "start": 22,
+                "end": 31,
+                "evidenceSpan": {
+                  "start": 22,
+                  "end": 31,
+                  "textSpan": "körzetben"
+                },
+                "sourceRole": "reported",
+                "pronoun": false,
+                "role": "location"
+              }
+            ],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "Bálint második lett a körzetben."
+            },
+            "attribution": null,
+            "action": "lesz",
+            "actionSpan": {
+              "start": 15,
+              "end": 19,
+              "textSpan": "lett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "start": 7,
+                "end": 14,
+                "raw": "második",
+                "value": 2,
+                "canonicalValue": 2,
+                "semanticKind": "rank",
+                "unit": "position",
+                "property": "placement",
+                "temporalRole": "placement",
+                "evidenceSpan": {
+                  "start": 7,
+                  "end": 14,
+                  "textSpan": "második"
+                },
+                "binding": "resolved",
+                "ownerType": "ranked_entity",
+                "owner": {
+                  "mention": "Bálint",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Bálint"
+                  }
+                },
+                "subject": null,
+                "unresolvedReasons": [],
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 7,
+                    "end": 14,
+                    "textSpan": "második"
+                  },
+                  "targetSpan": {
+                    "start": 15,
+                    "end": 19,
+                    "textSpan": "lett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "cop:reverse",
+                      "sourceSpan": {
+                        "start": 7,
+                        "end": 14,
+                        "textSpan": "második"
+                      },
+                      "targetSpan": {
+                        "start": 15,
+                        "end": 19,
+                        "textSpan": "lett"
+                      }
+                    },
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Bálint"
+                      },
+                      "targetSpan": {
+                        "start": 7,
+                        "end": 14,
+                        "textSpan": "második"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:32",
+                  "semanticRole": "placement",
+                  "resolutionStatus": "resolved",
+                  "rule": "ordinal_predicate_copula_unique_typed_subject",
+                  "subjectSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Bálint"
+                  }
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_actor_ambiguous_or_implicit"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "Bálint második lett a körzetben."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "Bálint második lett a körzetben."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:32",
+            "syntacticRoles": []
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "explicit",
+      "text": "Eszter az ötödik helyen végzett.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter",
+            "canonicalIdentity": "eszter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "start": 0,
+              "end": 6,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "start": 0,
+              "end": 6,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              }
+            },
+            "location": [
+              {
+                "mention": "helyen",
+                "normalized": "hely",
+                "canonicalIdentity": null,
+                "type": "referent",
+                "named": false,
+                "case": "Sup",
+                "start": 17,
+                "end": 23,
+                "evidenceSpan": {
+                  "start": 17,
+                  "end": 23,
+                  "textSpan": "helyen"
+                },
+                "sourceRole": "reported",
+                "pronoun": false,
+                "role": "location"
+              }
+            ],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "Eszter az ötödik helyen végzett."
+            },
+            "attribution": null,
+            "action": "végez",
+            "actionSpan": {
+              "start": 24,
+              "end": 31,
+              "textSpan": "végzett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "start": 10,
+                "end": 23,
+                "raw": "ötödik helyen",
+                "value": 5,
+                "canonicalValue": 5,
+                "semanticKind": "rank",
+                "unit": "position",
+                "property": "placement",
+                "temporalRole": "placement",
+                "evidenceSpan": {
+                  "start": 10,
+                  "end": 23,
+                  "textSpan": "ötödik helyen"
+                },
+                "binding": "resolved",
+                "ownerType": "ranked_entity",
+                "owner": {
+                  "mention": "Eszter",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                },
+                "subject": null,
+                "unresolvedReasons": [],
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 10,
+                    "end": 23,
+                    "textSpan": "ötödik helyen"
+                  },
+                  "targetSpan": {
+                    "start": 24,
+                    "end": 31,
+                    "textSpan": "végzett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 10,
+                        "end": 16,
+                        "textSpan": "ötödik"
+                      },
+                      "targetSpan": {
+                        "start": 17,
+                        "end": 23,
+                        "textSpan": "helyen"
+                      }
+                    },
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 17,
+                        "end": 23,
+                        "textSpan": "helyen"
+                      },
+                      "targetSpan": {
+                        "start": 24,
+                        "end": 31,
+                        "textSpan": "végzett"
+                      }
+                    },
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Eszter"
+                      },
+                      "targetSpan": {
+                        "start": 24,
+                        "end": 31,
+                        "textSpan": "végzett"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:32",
+                  "semanticRole": "placement",
+                  "resolutionStatus": "resolved",
+                  "rule": "explicit_placement_nominal_and_subject",
+                  "subjectSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "Eszter az ötödik helyen végzett."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "Eszter az ötödik helyen végzett."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:32",
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Eszter",
+                  "normalized": "eszter",
+                  "start": 0,
+                  "end": 6,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  },
+                  "targetSpan": {
+                    "start": 24,
+                    "end": 31,
+                    "textSpan": "végzett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Eszter"
+                      },
+                      "targetSpan": {
+                        "start": 24,
+                        "end": 31,
+                        "textSpan": "végzett"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:32",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              },
+              "targetSpan": {
+                "start": 24,
+                "end": 31,
+                "textSpan": "végzett"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  },
+                  "targetSpan": {
+                    "start": 24,
+                    "end": 31,
+                    "textSpan": "végzett"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:32",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "round",
+      "text": "Eszter a negyedik fordulóban kiesett.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter",
+            "canonicalIdentity": "eszter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "start": 0,
+              "end": 6,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "start": 0,
+              "end": 6,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              }
+            },
+            "location": [
+              {
+                "mention": "fordulóban",
+                "normalized": "forduló",
+                "canonicalIdentity": null,
+                "type": "referent",
+                "named": false,
+                "case": "Ine",
+                "start": 18,
+                "end": 28,
+                "evidenceSpan": {
+                  "start": 18,
+                  "end": 28,
+                  "textSpan": "fordulóban"
+                },
+                "sourceRole": "reported",
+                "pronoun": false,
+                "role": "location"
+              }
+            ],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 37,
+              "textSpan": "Eszter a negyedik fordulóban kiesett."
+            },
+            "attribution": null,
+            "action": "kiesik",
+            "actionSpan": {
+              "start": 29,
+              "end": 36,
+              "textSpan": "kiesett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "start": 9,
+                "end": 28,
+                "raw": "negyedik fordulóban",
+                "value": 4,
+                "canonicalValue": 4,
+                "semanticKind": "ordinal",
+                "unit": "position",
+                "property": "ordinal",
+                "temporalRole": "ordinal",
+                "evidenceSpan": {
+                  "start": 9,
+                  "end": 28,
+                  "textSpan": "negyedik fordulóban"
+                },
+                "binding": "resolved",
+                "ownerType": "ordinal_target",
+                "owner": {
+                  "mention": "fordulóban",
+                  "evidenceSpan": {
+                    "start": 18,
+                    "end": 28,
+                    "textSpan": "fordulóban"
+                  }
+                },
+                "subject": null,
+                "unresolvedReasons": [],
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 9,
+                    "end": 28,
+                    "textSpan": "negyedik fordulóban"
+                  },
+                  "targetSpan": {
+                    "start": 29,
+                    "end": 36,
+                    "textSpan": "kiesett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 9,
+                        "end": 17,
+                        "textSpan": "negyedik"
+                      },
+                      "targetSpan": {
+                        "start": 18,
+                        "end": 28,
+                        "textSpan": "fordulóban"
+                      }
+                    },
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 18,
+                        "end": 28,
+                        "textSpan": "fordulóban"
+                      },
+                      "targetSpan": {
+                        "start": 29,
+                        "end": 36,
+                        "textSpan": "kiesett"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:37",
+                  "semanticRole": "ordinal",
+                  "resolutionStatus": "resolved",
+                  "rule": "local_temporal_case_and_governing_structure"
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 37,
+              "textSpan": "Eszter a negyedik fordulóban kiesett."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 37,
+              "textSpan": "Eszter a negyedik fordulóban kiesett."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:37",
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Eszter",
+                  "normalized": "eszter",
+                  "start": 0,
+                  "end": 6,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  },
+                  "targetSpan": {
+                    "start": 29,
+                    "end": 36,
+                    "textSpan": "kiesett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Eszter"
+                      },
+                      "targetSpan": {
+                        "start": 29,
+                        "end": 36,
+                        "textSpan": "kiesett"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:37",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              },
+              "targetSpan": {
+                "start": 29,
+                "end": 36,
+                "textSpan": "kiesett"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  },
+                  "targetSpan": {
+                    "start": 29,
+                    "end": 36,
+                    "textSpan": "kiesett"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:37",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "occasion",
+      "text": "Eszter az ötödik alkalommal nyert.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter",
+            "canonicalIdentity": "eszter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "start": 0,
+              "end": 6,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "start": 0,
+              "end": 6,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 34,
+              "textSpan": "Eszter az ötödik alkalommal nyert."
+            },
+            "attribution": null,
+            "action": "nyer",
+            "actionSpan": {
+              "start": 28,
+              "end": 33,
+              "textSpan": "nyert"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "start": 10,
+                "end": 27,
+                "raw": "ötödik alkalommal",
+                "value": 5,
+                "canonicalValue": 5,
+                "semanticKind": "ordinal",
+                "unit": "position",
+                "property": "ordinal",
+                "temporalRole": "ordinal",
+                "evidenceSpan": {
+                  "start": 10,
+                  "end": 27,
+                  "textSpan": "ötödik alkalommal"
+                },
+                "binding": "resolved",
+                "ownerType": "ordinal_target",
+                "owner": {
+                  "mention": "alkalommal",
+                  "evidenceSpan": {
+                    "start": 17,
+                    "end": 27,
+                    "textSpan": "alkalommal"
+                  }
+                },
+                "subject": null,
+                "unresolvedReasons": [],
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 10,
+                    "end": 27,
+                    "textSpan": "ötödik alkalommal"
+                  },
+                  "targetSpan": {
+                    "start": 28,
+                    "end": 33,
+                    "textSpan": "nyert"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 10,
+                        "end": 16,
+                        "textSpan": "ötödik"
+                      },
+                      "targetSpan": {
+                        "start": 17,
+                        "end": 27,
+                        "textSpan": "alkalommal"
+                      }
+                    },
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 17,
+                        "end": 27,
+                        "textSpan": "alkalommal"
+                      },
+                      "targetSpan": {
+                        "start": 28,
+                        "end": 33,
+                        "textSpan": "nyert"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:34",
+                  "semanticRole": "ordinal",
+                  "resolutionStatus": "resolved",
+                  "rule": "local_temporal_case_and_governing_structure"
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 34,
+              "textSpan": "Eszter az ötödik alkalommal nyert."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 34,
+              "textSpan": "Eszter az ötödik alkalommal nyert."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:34",
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Eszter",
+                  "normalized": "eszter",
+                  "start": 0,
+                  "end": 6,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  },
+                  "targetSpan": {
+                    "start": 28,
+                    "end": 33,
+                    "textSpan": "nyert"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Eszter"
+                      },
+                      "targetSpan": {
+                        "start": 28,
+                        "end": 33,
+                        "textSpan": "nyert"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:34",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              },
+              "targetSpan": {
+                "start": 28,
+                "end": 33,
+                "textSpan": "nyert"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  },
+                  "targetSpan": {
+                    "start": 28,
+                    "end": 33,
+                    "textSpan": "nyert"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:34",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "day",
+      "text": "Eszter a második nap érkezett meg.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter",
+            "canonicalIdentity": "eszter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "start": 0,
+              "end": 6,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "start": 0,
+              "end": 6,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 34,
+              "textSpan": "Eszter a második nap érkezett meg."
+            },
+            "attribution": null,
+            "action": "megérkezik",
+            "actionSpan": {
+              "start": 21,
+              "end": 29,
+              "textSpan": "érkezett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "start": 9,
+                "end": 20,
+                "raw": "második nap",
+                "value": 2,
+                "canonicalValue": 2,
+                "semanticKind": "ordinal",
+                "unit": "position",
+                "property": "ordinal",
+                "temporalRole": "ordinal",
+                "evidenceSpan": {
+                  "start": 9,
+                  "end": 20,
+                  "textSpan": "második nap"
+                },
+                "binding": "unresolved",
+                "ownerType": "unresolved",
+                "owner": null,
+                "subject": null,
+                "unresolvedReasons": [
+                  "temporal_role_or_attachment_unproven"
+                ]
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 34,
+              "textSpan": "Eszter a második nap érkezett meg."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 34,
+              "textSpan": "Eszter a második nap érkezett meg."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:34",
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Eszter",
+                  "normalized": "eszter",
+                  "start": 0,
+                  "end": 6,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  },
+                  "targetSpan": {
+                    "start": 21,
+                    "end": 29,
+                    "textSpan": "érkezett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Eszter"
+                      },
+                      "targetSpan": {
+                        "start": 21,
+                        "end": 29,
+                        "textSpan": "érkezett"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:34",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              },
+              "targetSpan": {
+                "start": 21,
+                "end": 29,
+                "textSpan": "érkezett"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  },
+                  "targetSpan": {
+                    "start": 21,
+                    "end": 29,
+                    "textSpan": "érkezett"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:34",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "district",
+      "text": "Eszter a negyedik kerületben dolgozott.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter",
+            "canonicalIdentity": "eszter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "start": 0,
+              "end": 6,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "start": 0,
+              "end": 6,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              }
+            },
+            "location": [
+              {
+                "mention": "kerületben",
+                "normalized": "kerület",
+                "canonicalIdentity": null,
+                "type": "referent",
+                "named": false,
+                "case": "Ine",
+                "start": 18,
+                "end": 28,
+                "evidenceSpan": {
+                  "start": 18,
+                  "end": 28,
+                  "textSpan": "kerületben"
+                },
+                "sourceRole": "reported",
+                "pronoun": false,
+                "role": "location"
+              }
+            ],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 39,
+              "textSpan": "Eszter a negyedik kerületben dolgozott."
+            },
+            "attribution": null,
+            "action": "dolgozik",
+            "actionSpan": {
+              "start": 29,
+              "end": 38,
+              "textSpan": "dolgozott"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "start": 9,
+                "end": 28,
+                "raw": "negyedik kerületben",
+                "value": 4,
+                "canonicalValue": 4,
+                "semanticKind": "ordinal",
+                "unit": "position",
+                "property": "ordinal",
+                "temporalRole": "ordinal",
+                "evidenceSpan": {
+                  "start": 9,
+                  "end": 28,
+                  "textSpan": "negyedik kerületben"
+                },
+                "binding": "resolved",
+                "ownerType": "ordinal_target",
+                "owner": {
+                  "mention": "kerületben",
+                  "evidenceSpan": {
+                    "start": 18,
+                    "end": 28,
+                    "textSpan": "kerületben"
+                  }
+                },
+                "subject": null,
+                "unresolvedReasons": [],
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 9,
+                    "end": 28,
+                    "textSpan": "negyedik kerületben"
+                  },
+                  "targetSpan": {
+                    "start": 29,
+                    "end": 38,
+                    "textSpan": "dolgozott"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 9,
+                        "end": 17,
+                        "textSpan": "negyedik"
+                      },
+                      "targetSpan": {
+                        "start": 18,
+                        "end": 28,
+                        "textSpan": "kerületben"
+                      }
+                    },
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 18,
+                        "end": 28,
+                        "textSpan": "kerületben"
+                      },
+                      "targetSpan": {
+                        "start": 29,
+                        "end": 38,
+                        "textSpan": "dolgozott"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:39",
+                  "semanticRole": "ordinal",
+                  "resolutionStatus": "resolved",
+                  "rule": "local_temporal_case_and_governing_structure"
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 39,
+              "textSpan": "Eszter a negyedik kerületben dolgozott."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 39,
+              "textSpan": "Eszter a negyedik kerületben dolgozott."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:39",
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Eszter",
+                  "normalized": "eszter",
+                  "start": 0,
+                  "end": 6,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  },
+                  "targetSpan": {
+                    "start": 29,
+                    "end": 38,
+                    "textSpan": "dolgozott"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Eszter"
+                      },
+                      "targetSpan": {
+                        "start": 29,
+                        "end": 38,
+                        "textSpan": "dolgozott"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:39",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              },
+              "targetSpan": {
+                "start": 29,
+                "end": 38,
+                "textSpan": "dolgozott"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  },
+                  "targetSpan": {
+                    "start": 29,
+                    "end": 38,
+                    "textSpan": "dolgozott"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:39",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "mixed",
+      "text": "Eszter a harmadik fordulóban második lett.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter",
+            "canonicalIdentity": "eszter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [
+              {
+                "mention": "fordulóban",
+                "normalized": "forduló",
+                "canonicalIdentity": null,
+                "type": "referent",
+                "named": false,
+                "case": "Ine",
+                "start": 18,
+                "end": 28,
+                "evidenceSpan": {
+                  "start": 18,
+                  "end": 28,
+                  "textSpan": "fordulóban"
+                },
+                "sourceRole": "reported",
+                "pronoun": false,
+                "role": "location"
+              }
+            ],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 42,
+              "textSpan": "Eszter a harmadik fordulóban második lett."
+            },
+            "attribution": null,
+            "action": "lesz",
+            "actionSpan": {
+              "start": 37,
+              "end": 41,
+              "textSpan": "lett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "start": 9,
+                "end": 28,
+                "raw": "harmadik fordulóban",
+                "value": 3,
+                "canonicalValue": 3,
+                "semanticKind": "ordinal",
+                "unit": "position",
+                "property": "ordinal",
+                "temporalRole": "ordinal",
+                "evidenceSpan": {
+                  "start": 9,
+                  "end": 28,
+                  "textSpan": "harmadik fordulóban"
+                },
+                "binding": "resolved",
+                "ownerType": "ordinal_target",
+                "owner": {
+                  "mention": "fordulóban",
+                  "evidenceSpan": {
+                    "start": 18,
+                    "end": 28,
+                    "textSpan": "fordulóban"
+                  }
+                },
+                "subject": null,
+                "unresolvedReasons": [],
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 9,
+                    "end": 28,
+                    "textSpan": "harmadik fordulóban"
+                  },
+                  "targetSpan": {
+                    "start": 37,
+                    "end": 41,
+                    "textSpan": "lett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 9,
+                        "end": 17,
+                        "textSpan": "harmadik"
+                      },
+                      "targetSpan": {
+                        "start": 18,
+                        "end": 28,
+                        "textSpan": "fordulóban"
+                      }
+                    },
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 18,
+                        "end": 28,
+                        "textSpan": "fordulóban"
+                      },
+                      "targetSpan": {
+                        "start": 29,
+                        "end": 36,
+                        "textSpan": "második"
+                      }
+                    },
+                    {
+                      "relation": "cop:reverse",
+                      "sourceSpan": {
+                        "start": 29,
+                        "end": 36,
+                        "textSpan": "második"
+                      },
+                      "targetSpan": {
+                        "start": 37,
+                        "end": 41,
+                        "textSpan": "lett"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:42",
+                  "semanticRole": "ordinal",
+                  "resolutionStatus": "resolved",
+                  "rule": "local_temporal_case_and_governing_structure"
+                }
+              },
+              {
+                "start": 29,
+                "end": 36,
+                "raw": "második",
+                "value": 2,
+                "canonicalValue": 2,
+                "semanticKind": "rank",
+                "unit": "position",
+                "property": "placement",
+                "temporalRole": "placement",
+                "evidenceSpan": {
+                  "start": 29,
+                  "end": 36,
+                  "textSpan": "második"
+                },
+                "binding": "resolved",
+                "ownerType": "ranked_entity",
+                "owner": {
+                  "mention": "Eszter",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                },
+                "subject": null,
+                "unresolvedReasons": [],
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 29,
+                    "end": 36,
+                    "textSpan": "második"
+                  },
+                  "targetSpan": {
+                    "start": 37,
+                    "end": 41,
+                    "textSpan": "lett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "cop:reverse",
+                      "sourceSpan": {
+                        "start": 29,
+                        "end": 36,
+                        "textSpan": "második"
+                      },
+                      "targetSpan": {
+                        "start": 37,
+                        "end": 41,
+                        "textSpan": "lett"
+                      }
+                    },
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Eszter"
+                      },
+                      "targetSpan": {
+                        "start": 29,
+                        "end": 36,
+                        "textSpan": "második"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:42",
+                  "semanticRole": "placement",
+                  "resolutionStatus": "resolved",
+                  "rule": "ordinal_predicate_copula_unique_typed_subject",
+                  "subjectSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_actor_ambiguous_or_implicit"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 42,
+              "textSpan": "Eszter a harmadik fordulóban második lett."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 42,
+              "textSpan": "Eszter a harmadik fordulóban második lett."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:42",
+            "syntacticRoles": []
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "source",
+      "text": "A szövetség szerint Eszter negyedik lett.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 20,
+            "end": 26,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 20,
+              "end": 26,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter",
+            "canonicalIdentity": "eszter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": {
+              "mention": "szövetség",
+              "normalized": "szövetség",
+              "canonicalIdentity": null,
+              "type": "referent",
+              "named": false,
+              "case": "Nom",
+              "start": 2,
+              "end": 11,
+              "evidenceSpan": {
+                "start": 2,
+                "end": 11,
+                "textSpan": "szövetség"
+              },
+              "sourceRole": "reported",
+              "pronoun": false
+            },
+            "source": {
+              "mention": "szövetség",
+              "normalized": "szövetség",
+              "canonicalIdentity": null,
+              "type": "referent",
+              "named": false,
+              "case": "Nom",
+              "start": 2,
+              "end": 11,
+              "evidenceSpan": {
+                "start": 2,
+                "end": 11,
+                "textSpan": "szövetség"
+              },
+              "sourceRole": "reported",
+              "pronoun": false
+            },
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": "szerint",
+            "content": {
+              "start": 19,
+              "end": 41,
+              "textSpan": " Eszter negyedik lett."
+            },
+            "attribution": {
+              "label": "szövetség",
+              "normalized": "szövetség",
+              "sourceRole": "reported",
+              "evidenceSpan": {
+                "start": 2,
+                "end": 11,
+                "textSpan": "szövetség"
+              },
+              "propositionSpan": {
+                "start": 19,
+                "end": 41,
+                "textSpan": " Eszter negyedik lett."
+              }
+            },
+            "action": "lesz",
+            "actionSpan": {
+              "start": 36,
+              "end": 40,
+              "textSpan": "lett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "start": 27,
+                "end": 35,
+                "raw": "negyedik",
+                "value": 4,
+                "canonicalValue": 4,
+                "semanticKind": "ordinal",
+                "unit": "position",
+                "property": "ordinal",
+                "temporalRole": "ordinal",
+                "evidenceSpan": {
+                  "start": 27,
+                  "end": 35,
+                  "textSpan": "negyedik"
+                },
+                "binding": "unresolved",
+                "ownerType": "unresolved",
+                "owner": null,
+                "subject": null,
+                "unresolvedReasons": [
+                  "temporal_role_or_attachment_unproven"
+                ]
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": true,
+            "modalities": [
+              "reported"
+            ],
+            "modality": "reported",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_actor_ambiguous_or_implicit",
+              "dependency_numeric_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 41,
+              "textSpan": "A szövetség szerint Eszter negyedik lett."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 41,
+              "textSpan": "A szövetség szerint Eszter negyedik lett."
+            },
+            "canonicalProjectionAllowed": false,
+            "sourceEvidence": {
+              "rule": "explicit_according_to",
+              "entitySpan": {
+                "start": 2,
+                "end": 11,
+                "textSpan": "szövetség"
+              },
+              "clauseSpan": {
+                "start": 0,
+                "end": 41,
+                "textSpan": "A szövetség szerint Eszter negyedik lett."
+              }
+            },
+            "frameId": "dependency:0:41",
+            "syntacticRoles": []
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "contrast",
+      "text": "Eszter nem negyedik, hanem második lett.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter",
+            "canonicalIdentity": "eszter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 40,
+              "textSpan": "Eszter nem negyedik, hanem második lett."
+            },
+            "attribution": null,
+            "action": "lesz",
+            "actionSpan": {
+              "start": 35,
+              "end": 39,
+              "textSpan": "lett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "value": 2,
+                "canonicalValue": 2,
+                "unit": "position",
+                "semanticKind": "rank",
+                "status": "accepted",
+                "binding": "resolved",
+                "ownerType": "ranked_entity",
+                "owner": {
+                  "mention": "Eszter",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                },
+                "subject": null,
+                "property": "rank",
+                "unresolvedReasons": [],
+                "start": 27,
+                "end": 34,
+                "raw": "második",
+                "evidenceSpan": {
+                  "start": 27,
+                  "end": 34,
+                  "textSpan": "második"
+                },
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 27,
+                    "end": 34,
+                    "textSpan": "második"
+                  },
+                  "targetSpan": {
+                    "start": 35,
+                    "end": 39,
+                    "textSpan": "lett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "cop:reverse",
+                      "sourceSpan": {
+                        "start": 27,
+                        "end": 34,
+                        "textSpan": "második"
+                      },
+                      "targetSpan": {
+                        "start": 35,
+                        "end": 39,
+                        "textSpan": "lett"
+                      }
+                    },
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Eszter"
+                      },
+                      "targetSpan": {
+                        "start": 11,
+                        "end": 19,
+                        "textSpan": "negyedik"
+                      }
+                    }
+                  ],
+                  "frameId": "contrast:0:40",
+                  "semanticRole": "placement",
+                  "resolutionStatus": "resolved",
+                  "rule": "ordinal_predicate_copula_unique_typed_subject",
+                  "subjectSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                },
+                "contrastFrameId": "contrast:0:40",
+                "temporalRole": "placement"
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_actor_ambiguous_or_implicit"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 40,
+              "textSpan": "Eszter nem negyedik, hanem második lett."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 40,
+              "textSpan": "Eszter nem negyedik, hanem második lett."
+            },
+            "canonicalProjectionAllowed": false,
+            "contrasts": [
+              {
+                "binding": "resolved",
+                "rule": "parallel_alternatives_single_finite_predicate",
+                "slot": "rank",
+                "evidenceSpan": {
+                  "start": 0,
+                  "end": 40,
+                  "textSpan": "Eszter nem negyedik, hanem második lett."
+                },
+                "scope": {
+                  "start": 0,
+                  "end": 40
+                },
+                "rejected": {
+                  "value": 4,
+                  "ordinal": true,
+                  "scale": 1,
+                  "unit": "position",
+                  "year": false,
+                  "case": "Nom",
+                  "status": "rejected",
+                  "evidenceSpan": {
+                    "start": 11,
+                    "end": 19,
+                    "textSpan": "negyedik"
+                  },
+                  "unitEvidence": {
+                    "start": 27,
+                    "end": 34,
+                    "textSpan": "második"
+                  }
+                },
+                "accepted": {
+                  "value": 2,
+                  "ordinal": true,
+                  "scale": 1,
+                  "unit": "position",
+                  "year": false,
+                  "case": "Nom",
+                  "status": "accepted",
+                  "evidenceSpan": {
+                    "start": 27,
+                    "end": 34,
+                    "textSpan": "második"
+                  }
+                },
+                "frameId": "contrast:0:40"
+              }
+            ],
+            "frameId": "contrast:0:40",
+            "syntacticRoles": []
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "contrasts": [
+          {
+            "binding": "resolved",
+            "rule": "parallel_alternatives_single_finite_predicate",
+            "slot": "rank",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 40,
+              "textSpan": "Eszter nem negyedik, hanem második lett."
+            },
+            "scope": {
+              "start": 0,
+              "end": 40
+            },
+            "rejected": {
+              "value": 4,
+              "ordinal": true,
+              "scale": 1,
+              "unit": "position",
+              "year": false,
+              "case": "Nom",
+              "status": "rejected",
+              "evidenceSpan": {
+                "start": 11,
+                "end": 19,
+                "textSpan": "negyedik"
+              },
+              "unitEvidence": {
+                "start": 27,
+                "end": 34,
+                "textSpan": "második"
+              }
+            },
+            "accepted": {
+              "value": 2,
+              "ordinal": true,
+              "scale": 1,
+              "unit": "position",
+              "year": false,
+              "case": "Nom",
+              "status": "accepted",
+              "evidenceSpan": {
+                "start": 27,
+                "end": 34,
+                "textSpan": "második"
+              }
+            },
+            "frameId": "contrast:0:40"
+          }
+        ],
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "implicit",
+      "text": "Nem negyedik, hanem második lett.",
+      "output": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 20,
+              "end": 33,
+              "textSpan": "második lett."
+            },
+            "attribution": null,
+            "action": "lesz",
+            "actionSpan": {
+              "start": 28,
+              "end": 32,
+              "textSpan": "lett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "value": 2,
+                "canonicalValue": 2,
+                "unit": "position",
+                "semanticKind": "rank",
+                "status": "accepted",
+                "binding": "unresolved",
+                "ownerType": "unresolved",
+                "owner": null,
+                "subject": null,
+                "property": "rank",
+                "unresolvedReasons": [
+                  "accepted_contrast_dependency_unproven"
+                ],
+                "start": 20,
+                "end": 27,
+                "raw": "második",
+                "evidenceSpan": {
+                  "start": 20,
+                  "end": 27,
+                  "textSpan": "második"
+                },
+                "contrastFrameId": "contrast:0:33",
+                "temporalRole": "ordinal"
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved",
+              "dependency_actor_ambiguous_or_implicit",
+              "dependency_numeric_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 20,
+              "end": 33,
+              "textSpan": "második lett."
+            },
+            "propositionSpan": {
+              "start": 20,
+              "end": 33,
+              "textSpan": "második lett."
+            },
+            "canonicalProjectionAllowed": false,
+            "contrasts": [
+              {
+                "binding": "resolved",
+                "rule": "parallel_alternatives_single_finite_predicate",
+                "slot": "rank",
+                "evidenceSpan": {
+                  "start": 0,
+                  "end": 33,
+                  "textSpan": "Nem negyedik, hanem második lett."
+                },
+                "scope": {
+                  "start": 0,
+                  "end": 33
+                },
+                "rejected": {
+                  "value": 4,
+                  "ordinal": true,
+                  "scale": 1,
+                  "unit": "position",
+                  "year": false,
+                  "case": "Nom",
+                  "status": "rejected",
+                  "evidenceSpan": {
+                    "start": 4,
+                    "end": 12,
+                    "textSpan": "negyedik"
+                  },
+                  "unitEvidence": {
+                    "start": 20,
+                    "end": 27,
+                    "textSpan": "második"
+                  }
+                },
+                "accepted": {
+                  "value": 2,
+                  "ordinal": true,
+                  "scale": 1,
+                  "unit": "position",
+                  "year": false,
+                  "case": "Nom",
+                  "status": "accepted",
+                  "evidenceSpan": {
+                    "start": 20,
+                    "end": 27,
+                    "textSpan": "második"
+                  }
+                },
+                "frameId": "contrast:0:33"
+              }
+            ],
+            "frameId": "contrast:0:33",
+            "syntacticRoles": []
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "contrasts": [
+          {
+            "binding": "resolved",
+            "rule": "parallel_alternatives_single_finite_predicate",
+            "slot": "rank",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 33,
+              "textSpan": "Nem negyedik, hanem második lett."
+            },
+            "scope": {
+              "start": 0,
+              "end": 33
+            },
+            "rejected": {
+              "value": 4,
+              "ordinal": true,
+              "scale": 1,
+              "unit": "position",
+              "year": false,
+              "case": "Nom",
+              "status": "rejected",
+              "evidenceSpan": {
+                "start": 4,
+                "end": 12,
+                "textSpan": "negyedik"
+              },
+              "unitEvidence": {
+                "start": 20,
+                "end": 27,
+                "textSpan": "második"
+              }
+            },
+            "accepted": {
+              "value": 2,
+              "ordinal": true,
+              "scale": 1,
+              "unit": "position",
+              "year": false,
+              "case": "Nom",
+              "status": "accepted",
+              "evidenceSpan": {
+                "start": 20,
+                "end": 27,
+                "textSpan": "második"
+              }
+            },
+            "frameId": "contrast:0:33"
+          }
+        ],
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "multiple",
+      "text": "Bálint szerint Eszter ötödik lett.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 15,
+            "end": 21,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 15,
+              "end": 21,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter",
+            "canonicalIdentity": "eszter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": {
+              "mention": "Bálint",
+              "normalized": "bálint",
+              "canonicalIdentity": null,
+              "type": "referent",
+              "named": false,
+              "case": "Nom",
+              "start": 0,
+              "end": 6,
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Bálint"
+              },
+              "sourceRole": "reported",
+              "pronoun": false
+            },
+            "source": {
+              "mention": "Bálint",
+              "normalized": "bálint",
+              "canonicalIdentity": null,
+              "type": "referent",
+              "named": false,
+              "case": "Nom",
+              "start": 0,
+              "end": 6,
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Bálint"
+              },
+              "sourceRole": "reported",
+              "pronoun": false
+            },
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": "szerint",
+            "content": {
+              "start": 14,
+              "end": 34,
+              "textSpan": " Eszter ötödik lett."
+            },
+            "attribution": {
+              "label": "Bálint",
+              "normalized": "bálint",
+              "sourceRole": "reported",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Bálint"
+              },
+              "propositionSpan": {
+                "start": 14,
+                "end": 34,
+                "textSpan": " Eszter ötödik lett."
+              }
+            },
+            "action": "lesz",
+            "actionSpan": {
+              "start": 29,
+              "end": 33,
+              "textSpan": "lett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "start": 22,
+                "end": 28,
+                "raw": "ötödik",
+                "value": 5,
+                "canonicalValue": 5,
+                "semanticKind": "rank",
+                "unit": "position",
+                "property": "placement",
+                "temporalRole": "placement",
+                "evidenceSpan": {
+                  "start": 22,
+                  "end": 28,
+                  "textSpan": "ötödik"
+                },
+                "binding": "resolved",
+                "ownerType": "ranked_entity",
+                "owner": {
+                  "mention": "Eszter",
+                  "evidenceSpan": {
+                    "start": 15,
+                    "end": 21,
+                    "textSpan": "Eszter"
+                  }
+                },
+                "subject": null,
+                "unresolvedReasons": [],
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 22,
+                    "end": 28,
+                    "textSpan": "ötödik"
+                  },
+                  "targetSpan": {
+                    "start": 29,
+                    "end": 33,
+                    "textSpan": "lett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "cop:reverse",
+                      "sourceSpan": {
+                        "start": 22,
+                        "end": 28,
+                        "textSpan": "ötödik"
+                      },
+                      "targetSpan": {
+                        "start": 29,
+                        "end": 33,
+                        "textSpan": "lett"
+                      }
+                    },
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 15,
+                        "end": 21,
+                        "textSpan": "Eszter"
+                      },
+                      "targetSpan": {
+                        "start": 22,
+                        "end": 28,
+                        "textSpan": "ötödik"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:34",
+                  "semanticRole": "placement",
+                  "resolutionStatus": "resolved",
+                  "rule": "ordinal_predicate_copula_unique_typed_subject",
+                  "subjectSpan": {
+                    "start": 15,
+                    "end": 21,
+                    "textSpan": "Eszter"
+                  }
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": true,
+            "modalities": [
+              "reported"
+            ],
+            "modality": "reported",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_actor_ambiguous_or_implicit"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 34,
+              "textSpan": "Bálint szerint Eszter ötödik lett."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 34,
+              "textSpan": "Bálint szerint Eszter ötödik lett."
+            },
+            "canonicalProjectionAllowed": false,
+            "sourceEvidence": {
+              "rule": "explicit_according_to",
+              "entitySpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Bálint"
+              },
+              "clauseSpan": {
+                "start": 0,
+                "end": 34,
+                "textSpan": "Bálint szerint Eszter ötödik lett."
+              }
+            },
+            "frameId": "dependency:0:34",
+            "syntacticRoles": []
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "ambiguous",
+      "text": "Az épület második lett.",
+      "output": {
+        "entities": [],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 23,
+              "textSpan": "Az épület második lett."
+            },
+            "attribution": null,
+            "action": "lesz",
+            "actionSpan": {
+              "start": 18,
+              "end": 22,
+              "textSpan": "lett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "start": 10,
+                "end": 22,
+                "raw": "második lett",
+                "value": 2,
+                "canonicalValue": 2,
+                "semanticKind": "ordinal",
+                "unit": "position",
+                "property": "ordinal",
+                "temporalRole": "ordinal",
+                "evidenceSpan": {
+                  "start": 10,
+                  "end": 22,
+                  "textSpan": "második lett"
+                },
+                "binding": "unresolved",
+                "ownerType": "unresolved",
+                "owner": null,
+                "subject": null,
+                "unresolvedReasons": [
+                  "temporal_role_or_attachment_unproven"
+                ]
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved",
+              "dependency_actor_ambiguous_or_implicit",
+              "dependency_numeric_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 23,
+              "textSpan": "Az épület második lett."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 23,
+              "textSpan": "Az épület második lett."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:23",
+            "syntacticRoles": []
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "coordination",
+      "text": "Eszter vagy Bálint második lett.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter",
+            "canonicalIdentity": "eszter",
+            "identityStatus": "resolved"
+          },
+          {
+            "mention": "Bálint",
+            "normalized": "bálint",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 12,
+            "end": 18,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 12,
+              "end": 18,
+              "textSpan": "Bálint"
+            },
+            "identityKey": "person|bálint",
+            "canonicalIdentity": "bálint",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "Eszter vagy Bálint második lett."
+            },
+            "attribution": null,
+            "action": "lesz",
+            "actionSpan": {
+              "start": 27,
+              "end": 31,
+              "textSpan": "lett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "start": 19,
+                "end": 26,
+                "raw": "második",
+                "value": 2,
+                "canonicalValue": 2,
+                "semanticKind": "ordinal",
+                "unit": "position",
+                "property": "ordinal",
+                "temporalRole": "ordinal",
+                "evidenceSpan": {
+                  "start": 19,
+                  "end": 26,
+                  "textSpan": "második"
+                },
+                "binding": "unresolved",
+                "ownerType": "unresolved",
+                "owner": null,
+                "subject": null,
+                "unresolvedReasons": [
+                  "temporal_role_or_attachment_unproven"
+                ]
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "actor_unresolved",
+              "dependency_actor_ambiguous_or_implicit",
+              "dependency_numeric_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "Eszter vagy Bálint második lett."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 32,
+              "textSpan": "Eszter vagy Bálint második lett."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:32",
+            "syntacticRoles": []
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "advance",
+      "text": "Eszter a második helyre lépett előre.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter",
+            "canonicalIdentity": "eszter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "start": 0,
+              "end": 6,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              }
+            },
+            "actorStatus": "resolved",
+            "subject": {
+              "mention": "Eszter",
+              "normalized": "eszter",
+              "start": 0,
+              "end": 6,
+              "type": "named_referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              }
+            },
+            "location": [],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 37,
+              "textSpan": "Eszter a második helyre lépett előre."
+            },
+            "attribution": null,
+            "action": "előrelép",
+            "actionSpan": {
+              "start": 24,
+              "end": 30,
+              "textSpan": "lépett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "start": 9,
+                "end": 23,
+                "raw": "második helyre",
+                "value": 2,
+                "canonicalValue": 2,
+                "semanticKind": "rank",
+                "unit": "position",
+                "property": "placement",
+                "temporalRole": "placement",
+                "evidenceSpan": {
+                  "start": 9,
+                  "end": 23,
+                  "textSpan": "második helyre"
+                },
+                "binding": "resolved",
+                "ownerType": "ranked_entity",
+                "owner": {
+                  "mention": "Eszter",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                },
+                "subject": null,
+                "unresolvedReasons": [],
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 9,
+                    "end": 23,
+                    "textSpan": "második helyre"
+                  },
+                  "targetSpan": {
+                    "start": 24,
+                    "end": 30,
+                    "textSpan": "lépett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 9,
+                        "end": 16,
+                        "textSpan": "második"
+                      },
+                      "targetSpan": {
+                        "start": 17,
+                        "end": 23,
+                        "textSpan": "helyre"
+                      }
+                    },
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 17,
+                        "end": 23,
+                        "textSpan": "helyre"
+                      },
+                      "targetSpan": {
+                        "start": 24,
+                        "end": 30,
+                        "textSpan": "lépett"
+                      }
+                    },
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Eszter"
+                      },
+                      "targetSpan": {
+                        "start": 24,
+                        "end": 30,
+                        "textSpan": "lépett"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:37",
+                  "semanticRole": "placement",
+                  "resolutionStatus": "resolved",
+                  "rule": "explicit_placement_nominal_and_subject",
+                  "subjectSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                }
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 37,
+              "textSpan": "Eszter a második helyre lépett előre."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 37,
+              "textSpan": "Eszter a második helyre lépett előre."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:37",
+            "syntacticRoles": [
+              {
+                "role": "actor",
+                "referent": {
+                  "mention": "Eszter",
+                  "normalized": "eszter",
+                  "start": 0,
+                  "end": 6,
+                  "type": "named_referent",
+                  "case": "Nom",
+                  "evidenceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  }
+                },
+                "binding": "resolved",
+                "evidence": {
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  },
+                  "targetSpan": {
+                    "start": 24,
+                    "end": 30,
+                    "textSpan": "lépett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "nsubj",
+                      "sourceSpan": {
+                        "start": 0,
+                        "end": 6,
+                        "textSpan": "Eszter"
+                      },
+                      "targetSpan": {
+                        "start": 24,
+                        "end": 30,
+                        "textSpan": "lépett"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:37",
+                  "semanticRole": "actor",
+                  "resolutionStatus": "resolved",
+                  "rule": "dependency_path_with_case_and_scope_checks"
+                }
+              }
+            ],
+            "actorEvidence": {
+              "sourceSpan": {
+                "start": 0,
+                "end": 6,
+                "textSpan": "Eszter"
+              },
+              "targetSpan": {
+                "start": 24,
+                "end": 30,
+                "textSpan": "lépett"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 0,
+                    "end": 6,
+                    "textSpan": "Eszter"
+                  },
+                  "targetSpan": {
+                    "start": 24,
+                    "end": 30,
+                    "textSpan": "lépett"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:37",
+              "semanticRole": "actor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    },
+    {
+      "id": "numbers",
+      "text": "Eszter 2027-ben a harmadik fordulóban 12 ponttal második lett.",
+      "output": {
+        "entities": [
+          {
+            "mention": "Eszter",
+            "normalized": "eszter",
+            "type": "person",
+            "subtype": null,
+            "sourceRole": null,
+            "start": 0,
+            "end": 6,
+            "case": "Nom",
+            "evidenceSpan": {
+              "start": 0,
+              "end": 6,
+              "textSpan": "Eszter"
+            },
+            "identityKey": "person|eszter",
+            "canonicalIdentity": "eszter",
+            "identityStatus": "resolved"
+          }
+        ],
+        "frames": [
+          {
+            "sentence": 0,
+            "actor": null,
+            "actorStatus": "unresolved",
+            "subject": null,
+            "location": [
+              {
+                "mention": "fordulóban",
+                "normalized": "forduló",
+                "canonicalIdentity": null,
+                "type": "referent",
+                "named": false,
+                "case": "Ine",
+                "start": 27,
+                "end": 37,
+                "evidenceSpan": {
+                  "start": 27,
+                  "end": 37,
+                  "textSpan": "fordulóban"
+                },
+                "sourceRole": "reported",
+                "pronoun": false,
+                "role": "location"
+              }
+            ],
+            "reportingActor": null,
+            "source": null,
+            "recipient": null,
+            "recipientCandidates": [],
+            "reportingVerb": null,
+            "content": {
+              "start": 0,
+              "end": 62,
+              "textSpan": "Eszter 2027-ben a harmadik fordulóban 12 ponttal második lett."
+            },
+            "attribution": null,
+            "action": "lesz",
+            "actionSpan": {
+              "start": 57,
+              "end": 61,
+              "textSpan": "lett"
+            },
+            "object": [],
+            "numericArguments": [
+              {
+                "value": 2027,
+                "canonicalValue": 2027,
+                "unit": "year",
+                "semanticKind": "year",
+                "start": 7,
+                "end": 15,
+                "raw": "2027-ben",
+                "evidenceSpan": {
+                  "start": 7,
+                  "end": 15,
+                  "textSpan": "2027-ben"
+                },
+                "owner": null,
+                "ownerType": "unresolved",
+                "subject": null,
+                "binding": "unresolved",
+                "unresolvedReasons": [
+                  "dependency_numeric_attachment_unproven"
+                ]
+              },
+              {
+                "start": 18,
+                "end": 37,
+                "raw": "harmadik fordulóban",
+                "value": 3,
+                "canonicalValue": 3,
+                "semanticKind": "ordinal",
+                "unit": "position",
+                "property": "ordinal",
+                "temporalRole": "ordinal",
+                "evidenceSpan": {
+                  "start": 18,
+                  "end": 37,
+                  "textSpan": "harmadik fordulóban"
+                },
+                "binding": "resolved",
+                "ownerType": "ordinal_target",
+                "owner": {
+                  "mention": "fordulóban",
+                  "evidenceSpan": {
+                    "start": 27,
+                    "end": 37,
+                    "textSpan": "fordulóban"
+                  }
+                },
+                "subject": null,
+                "unresolvedReasons": [],
+                "bindingEvidence": {
+                  "sourceSpan": {
+                    "start": 18,
+                    "end": 37,
+                    "textSpan": "harmadik fordulóban"
+                  },
+                  "targetSpan": {
+                    "start": 57,
+                    "end": 61,
+                    "textSpan": "lett"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "amod:att",
+                      "sourceSpan": {
+                        "start": 18,
+                        "end": 26,
+                        "textSpan": "harmadik"
+                      },
+                      "targetSpan": {
+                        "start": 27,
+                        "end": 37,
+                        "textSpan": "fordulóban"
+                      }
+                    },
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 27,
+                        "end": 37,
+                        "textSpan": "fordulóban"
+                      },
+                      "targetSpan": {
+                        "start": 49,
+                        "end": 56,
+                        "textSpan": "második"
+                      }
+                    },
+                    {
+                      "relation": "cop:reverse",
+                      "sourceSpan": {
+                        "start": 49,
+                        "end": 56,
+                        "textSpan": "második"
+                      },
+                      "targetSpan": {
+                        "start": 57,
+                        "end": 61,
+                        "textSpan": "lett"
+                      }
+                    }
+                  ],
+                  "frameId": "dependency:0:62",
+                  "semanticRole": "ordinal",
+                  "resolutionStatus": "resolved",
+                  "rule": "local_temporal_case_and_governing_structure"
+                }
+              },
+              {
+                "value": 12,
+                "canonicalValue": 12,
+                "unit": null,
+                "semanticKind": "unknown",
+                "start": 38,
+                "end": 40,
+                "raw": "12",
+                "evidenceSpan": {
+                  "start": 38,
+                  "end": 40,
+                  "textSpan": "12"
+                },
+                "owner": null,
+                "ownerType": "unresolved",
+                "subject": null,
+                "binding": "unresolved",
+                "unresolvedReasons": [
+                  "dependency_numeric_attachment_unproven"
+                ]
+              },
+              {
+                "start": 49,
+                "end": 56,
+                "raw": "második",
+                "value": 2,
+                "canonicalValue": 2,
+                "semanticKind": "ordinal",
+                "unit": "position",
+                "property": "ordinal",
+                "temporalRole": "ordinal",
+                "evidenceSpan": {
+                  "start": 49,
+                  "end": 56,
+                  "textSpan": "második"
+                },
+                "binding": "unresolved",
+                "ownerType": "unresolved",
+                "owner": null,
+                "subject": null,
+                "unresolvedReasons": [
+                  "temporal_role_or_attachment_unproven"
+                ]
+              }
+            ],
+            "grammaticalMood": [
+              "Ind"
+            ],
+            "conditionality": false,
+            "conditionalTrigger": null,
+            "conditionAntecedent": false,
+            "hypotheticalContext": false,
+            "reportingContext": false,
+            "modalities": [
+              "asserted"
+            ],
+            "modality": "asserted",
+            "polarity": "asserted",
+            "status": "reported",
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_actor_ambiguous_or_implicit",
+              "dependency_numeric_unresolved"
+            ],
+            "evidenceSpan": {
+              "start": 0,
+              "end": 62,
+              "textSpan": "Eszter 2027-ben a harmadik fordulóban 12 ponttal második lett."
+            },
+            "propositionSpan": {
+              "start": 0,
+              "end": 62,
+              "textSpan": "Eszter 2027-ben a harmadik fordulóban 12 ponttal második lett."
+            },
+            "canonicalProjectionAllowed": false,
+            "frameId": "dependency:0:62",
+            "syntacticRoles": []
+          }
+        ],
+        "canonical": [],
+        "conflicts": [],
+        "projectionState": "disabled_research_only",
+        "version": "real-text-safety-a-1",
+        "attributionChains": [],
+        "dependencyStatus": "available",
+        "dependencyVerified": true
+      }
+    }
+  ]
+}

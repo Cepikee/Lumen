@@ -23,11 +23,11 @@ const fetcher = (url: string) =>
     return json;
   });
 
-export default function WSourceSpeedIndexLeaderboard() {
+export default function WSourceSpeedIndexLeaderboard({ dark = false }: { dark?: boolean }) {
   const theme = useUserStore((s) => s.theme);
   const [openInfo, setOpenInfo] = useState(false);
 
-  const isDark =
+  const isDark = dark ||
     theme === "dark" ||
     (theme === "system" &&
       typeof window !== "undefined" &&

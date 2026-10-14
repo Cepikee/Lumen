@@ -1,0 +1,1232 @@
+{
+  "id": "B",
+  "text": "A lakógyűlésről távozva Barta Júlia főépítész a kerület jegyzőjének adta át a tervrajzokat. A kilencedik kerület udvarain nem padokat, hanem ivókutakat helyeznének el, ha megszületik a lakók hozzájárulása. Az első ütem a játszótérre korlátozódik.",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 1,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 2
+      },
+      {
+        "start": 2,
+        "end": 15,
+        "text": "lakógyűlésről",
+        "lemma": "lakógyűlés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Del",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 68
+      },
+      {
+        "start": 16,
+        "end": 23,
+        "text": "távozva",
+        "lemma": "távozva",
+        "pos": "ADV",
+        "morph": {
+          "VerbForm": "Conv"
+        },
+        "dep": "advmod:mode",
+        "headStart": 68
+      },
+      {
+        "start": 24,
+        "end": 29,
+        "text": "Barta",
+        "lemma": "Barta",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "appos",
+        "headStart": 36
+      },
+      {
+        "start": 30,
+        "end": 35,
+        "text": "Júlia",
+        "lemma": "Júlia",
+        "pos": "PROPN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "flat:name",
+        "headStart": 24
+      },
+      {
+        "start": 36,
+        "end": 45,
+        "text": "főépítész",
+        "lemma": "főépítész",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 56
+      },
+      {
+        "start": 46,
+        "end": 47,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 48
+      },
+      {
+        "start": 48,
+        "end": 55,
+        "text": "kerület",
+        "lemma": "kerület",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 56
+      },
+      {
+        "start": 56,
+        "end": 67,
+        "text": "jegyzőjének",
+        "lemma": "jegyző",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dat",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 68
+      },
+      {
+        "start": 68,
+        "end": 72,
+        "text": "adta",
+        "lemma": "ad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Past",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 68
+      },
+      {
+        "start": 73,
+        "end": 75,
+        "text": "át",
+        "lemma": "át",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 68
+      },
+      {
+        "start": 76,
+        "end": 77,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 78
+      },
+      {
+        "start": 78,
+        "end": 90,
+        "text": "tervrajzokat",
+        "lemma": "tervrajz",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Plur"
+        },
+        "dep": "obj",
+        "headStart": 68
+      },
+      {
+        "start": 90,
+        "end": 91,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 68
+      },
+      {
+        "start": 92,
+        "end": 93,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 105
+      },
+      {
+        "start": 94,
+        "end": 104,
+        "text": "kilencedik",
+        "lemma": "kilencedik",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 105
+      },
+      {
+        "start": 105,
+        "end": 112,
+        "text": "kerület",
+        "lemma": "kerület",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nmod:att",
+        "headStart": 113
+      },
+      {
+        "start": 113,
+        "end": 121,
+        "text": "udvarain",
+        "lemma": "udvar",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sup",
+          "Number": "Plur",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "obl",
+        "headStart": 152
+      },
+      {
+        "start": 122,
+        "end": 125,
+        "text": "nem",
+        "lemma": "nem",
+        "pos": "ADV",
+        "morph": {
+          "PronType": "Neg"
+        },
+        "dep": "advmod",
+        "headStart": 126
+      },
+      {
+        "start": 126,
+        "end": 133,
+        "text": "padokat",
+        "lemma": "pad",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Plur"
+        },
+        "dep": "conj",
+        "headStart": 113
+      },
+      {
+        "start": 133,
+        "end": 134,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 152
+      },
+      {
+        "start": 135,
+        "end": 140,
+        "text": "hanem",
+        "lemma": "hanem",
+        "pos": "CCONJ",
+        "morph": {},
+        "dep": "cc",
+        "headStart": 152
+      },
+      {
+        "start": 141,
+        "end": 151,
+        "text": "ivókutakat",
+        "lemma": "ivókuta",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Plur"
+        },
+        "dep": "obj",
+        "headStart": 152
+      },
+      {
+        "start": 152,
+        "end": 163,
+        "text": "helyeznének",
+        "lemma": "helyez",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Cnd",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 152
+      },
+      {
+        "start": 164,
+        "end": 166,
+        "text": "el",
+        "lemma": "el",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "compound:preverb",
+        "headStart": 152
+      },
+      {
+        "start": 166,
+        "end": 167,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 171
+      },
+      {
+        "start": 168,
+        "end": 170,
+        "text": "ha",
+        "lemma": "ha",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 171
+      },
+      {
+        "start": 171,
+        "end": 182,
+        "text": "megszületik",
+        "lemma": "megszületik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "acl",
+        "headStart": 152
+      },
+      {
+        "start": 183,
+        "end": 184,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 185
+      },
+      {
+        "start": 185,
+        "end": 190,
+        "text": "lakók",
+        "lemma": "lakó",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur"
+        },
+        "dep": "nmod:att",
+        "headStart": 191
+      },
+      {
+        "start": 191,
+        "end": 204,
+        "text": "hozzájárulása",
+        "lemma": "hozzájárulás",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 171
+      },
+      {
+        "start": 204,
+        "end": 205,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 152
+      },
+      {
+        "start": 206,
+        "end": 208,
+        "text": "Az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 214
+      },
+      {
+        "start": 209,
+        "end": 213,
+        "text": "első",
+        "lemma": "első",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Ord",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 214
+      },
+      {
+        "start": 214,
+        "end": 218,
+        "text": "ütem",
+        "lemma": "ütem",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "nsubj",
+        "headStart": 233
+      },
+      {
+        "start": 219,
+        "end": 220,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 221
+      },
+      {
+        "start": 221,
+        "end": 232,
+        "text": "játszótérre",
+        "lemma": "játszótér",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Sbl",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 233
+      },
+      {
+        "start": 233,
+        "end": 245,
+        "text": "korlátozódik",
+        "lemma": "korlátozódik",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 233
+      },
+      {
+        "start": 245,
+        "end": 246,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 233
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 91,
+        "text": "A lakógyűlésről távozva Barta Júlia főépítész a kerület jegyzőjének adta át a tervrajzokat."
+      },
+      {
+        "start": 92,
+        "end": 205,
+        "text": "A kilencedik kerület udvarain nem padokat, hanem ivókutakat helyeznének el, ha megszületik a lakók hozzájárulása."
+      },
+      {
+        "start": 206,
+        "end": 246,
+        "text": "Az első ütem a játszótérre korlátozódik."
+      }
+    ],
+    "entities": [
+      {
+        "start": 24,
+        "end": 35,
+        "text": "Barta Júlia",
+        "label": "PER"
+      }
+    ]
+  },
+  "output": {
+    "entities": [
+      {
+        "mention": "Barta Júlia",
+        "normalized": "barta júlia",
+        "type": "person",
+        "subtype": null,
+        "sourceRole": null,
+        "start": 24,
+        "end": 35,
+        "case": "Nom",
+        "evidenceSpan": {
+          "start": 24,
+          "end": 35,
+          "textSpan": "Barta Júlia"
+        },
+        "identityKey": "person|barta júlia",
+        "canonicalIdentity": "barta júlia",
+        "identityStatus": "resolved"
+      }
+    ],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "lakógyűlésről",
+            "normalized": "lakógyűlés",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Del",
+            "start": 2,
+            "end": 15,
+            "evidenceSpan": {
+              "start": 2,
+              "end": 15,
+              "textSpan": "lakógyűlésről"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 91,
+          "textSpan": "A lakógyűlésről távozva Barta Júlia főépítész a kerület jegyzőjének adta át a tervrajzokat."
+        },
+        "attribution": null,
+        "action": "átad",
+        "actionSpan": {
+          "start": 68,
+          "end": 72,
+          "textSpan": "adta"
+        },
+        "object": [
+          "tervrajz"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 91,
+          "textSpan": "A lakógyűlésről távozva Barta Júlia főépítész a kerület jegyzőjének adta át a tervrajzokat."
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 91,
+          "textSpan": "A lakógyűlésről távozva Barta Júlia főépítész a kerület jegyzőjének adta át a tervrajzokat."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:91",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "főépítész",
+              "normalized": "főépítész",
+              "start": 36,
+              "end": 45,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 36,
+                "end": 45,
+                "textSpan": "főépítész"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 36,
+                "end": 45,
+                "textSpan": "főépítész"
+              },
+              "targetSpan": {
+                "start": 68,
+                "end": 72,
+                "textSpan": "adta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 36,
+                    "end": 45,
+                    "textSpan": "főépítész"
+                  },
+                  "targetSpan": {
+                    "start": 56,
+                    "end": 67,
+                    "textSpan": "jegyzőjének"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 56,
+                    "end": 67,
+                    "textSpan": "jegyzőjének"
+                  },
+                  "targetSpan": {
+                    "start": 68,
+                    "end": 72,
+                    "textSpan": "adta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:91",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "kerület",
+              "normalized": "kerület",
+              "start": 48,
+              "end": 55,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 48,
+                "end": 55,
+                "textSpan": "kerület"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 48,
+                "end": 55,
+                "textSpan": "kerület"
+              },
+              "targetSpan": {
+                "start": 68,
+                "end": 72,
+                "textSpan": "adta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 48,
+                    "end": 55,
+                    "textSpan": "kerület"
+                  },
+                  "targetSpan": {
+                    "start": 56,
+                    "end": 67,
+                    "textSpan": "jegyzőjének"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 56,
+                    "end": 67,
+                    "textSpan": "jegyzőjének"
+                  },
+                  "targetSpan": {
+                    "start": 68,
+                    "end": 72,
+                    "textSpan": "adta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:91",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "role": "object",
+            "referent": {
+              "mention": "tervrajzokat",
+              "normalized": "tervrajz",
+              "start": 78,
+              "end": 90,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 78,
+                "end": 90,
+                "textSpan": "tervrajzokat"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 78,
+                "end": 90,
+                "textSpan": "tervrajzokat"
+              },
+              "targetSpan": {
+                "start": 68,
+                "end": 72,
+                "textSpan": "adta"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 78,
+                    "end": 90,
+                    "textSpan": "tervrajzokat"
+                  },
+                  "targetSpan": {
+                    "start": 68,
+                    "end": 72,
+                    "textSpan": "adta"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:91",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "udvarain",
+            "normalized": "udvar",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "Sup",
+            "start": 113,
+            "end": 121,
+            "evidenceSpan": {
+              "start": 113,
+              "end": 121,
+              "textSpan": "udvarain"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 92,
+          "end": 166,
+          "textSpan": "A kilencedik kerület udvarain nem padokat, hanem ivókutakat helyeznének el"
+        },
+        "attribution": null,
+        "action": "helyez",
+        "actionSpan": {
+          "start": 152,
+          "end": 163,
+          "textSpan": "helyeznének"
+        },
+        "object": [
+          "pad",
+          "ivókuta"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Cnd"
+        ],
+        "conditionality": true,
+        "conditionalTrigger": {
+          "start": 168,
+          "end": 170,
+          "textSpan": "ha"
+        },
+        "conditionAntecedent": false,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "hypothetical",
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 92,
+          "end": 166,
+          "textSpan": "A kilencedik kerület udvarain nem padokat, hanem ivókutakat helyeznének el"
+        },
+        "propositionSpan": {
+          "start": 92,
+          "end": 166,
+          "textSpan": "A kilencedik kerület udvarain nem padokat, hanem ivókutakat helyeznének el"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:92:166",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "conditional",
+              "rule": "governing_conditional_morphology",
+              "evidenceSpan": {
+                "start": 152,
+                "end": 163,
+                "textSpan": "helyeznének"
+              },
+              "dependencyPath": []
+            }
+          ],
+          "frameId": "dependency:92:166",
+          "clauseSpan": {
+            "start": 92,
+            "end": 166,
+            "textSpan": "A kilencedik kerület udvarain nem padokat, hanem ivókutakat helyeznének el"
+          },
+          "projectionAllowed": false
+        }
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 168,
+          "end": 205,
+          "textSpan": "ha megszületik a lakók hozzájárulása."
+        },
+        "attribution": null,
+        "action": "megszületik",
+        "actionSpan": {
+          "start": 171,
+          "end": 182,
+          "textSpan": "megszületik"
+        },
+        "object": [],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": true,
+        "conditionalTrigger": {
+          "start": 168,
+          "end": 170,
+          "textSpan": "ha"
+        },
+        "conditionAntecedent": true,
+        "hypotheticalContext": true,
+        "reportingContext": false,
+        "modalities": [
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "asserted",
+        "status": "qualified_proposition",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "ambiguous_contrast_scope",
+          "dependency_blocked_by_ambiguous_contrast"
+        ],
+        "evidenceSpan": {
+          "start": 168,
+          "end": 205,
+          "textSpan": "ha megszületik a lakók hozzájárulása."
+        },
+        "propositionSpan": {
+          "start": 168,
+          "end": 205,
+          "textSpan": "ha megszületik a lakók hozzájárulása."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:168:205",
+        "semanticScope": {
+          "modalities": [
+            {
+              "kind": "conditional",
+              "rule": "clause_condition_marker",
+              "evidenceSpan": {
+                "start": 168,
+                "end": 170,
+                "textSpan": "ha"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "mark",
+                  "sourceSpan": {
+                    "start": 168,
+                    "end": 170,
+                    "textSpan": "ha"
+                  },
+                  "targetSpan": {
+                    "start": 171,
+                    "end": 182,
+                    "textSpan": "megszületik"
+                  }
+                }
+              ]
+            }
+          ],
+          "frameId": "dependency:168:205",
+          "clauseSpan": {
+            "start": 168,
+            "end": 205,
+            "textSpan": "ha megszületik a lakók hozzájárulása."
+          },
+          "projectionAllowed": false
+        }
+      },
+      {
+        "sentence": 2,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 206,
+          "end": 246,
+          "textSpan": "Az első ütem a játszótérre korlátozódik."
+        },
+        "attribution": null,
+        "action": "korlátozódik",
+        "actionSpan": {
+          "start": 233,
+          "end": 245,
+          "textSpan": "korlátozódik"
+        },
+        "object": [],
+        "numericArguments": [
+          {
+            "start": 209,
+            "end": 218,
+            "raw": "első ütem",
+            "value": 1,
+            "canonicalValue": 1,
+            "semanticKind": "ordinal",
+            "unit": "position",
+            "property": "ordinal",
+            "temporalRole": "ordinal",
+            "evidenceSpan": {
+              "start": 209,
+              "end": 218,
+              "textSpan": "első ütem"
+            },
+            "binding": "resolved",
+            "ownerType": "ordinal_target",
+            "owner": {
+              "mention": "ütem",
+              "evidenceSpan": {
+                "start": 214,
+                "end": 218,
+                "textSpan": "ütem"
+              }
+            },
+            "subject": null,
+            "unresolvedReasons": [],
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 209,
+                "end": 218,
+                "textSpan": "első ütem"
+              },
+              "targetSpan": {
+                "start": 233,
+                "end": 245,
+                "textSpan": "korlátozódik"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 209,
+                    "end": 213,
+                    "textSpan": "első"
+                  },
+                  "targetSpan": {
+                    "start": 214,
+                    "end": 218,
+                    "textSpan": "ütem"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 214,
+                    "end": 218,
+                    "textSpan": "ütem"
+                  },
+                  "targetSpan": {
+                    "start": 233,
+                    "end": 245,
+                    "textSpan": "korlátozódik"
+                  }
+                }
+              ],
+              "frameId": "dependency:206:246",
+              "semanticRole": "ordinal",
+              "resolutionStatus": "resolved",
+              "rule": "local_temporal_case_and_governing_structure"
+            },
+            "semanticScope": {
+              "comparison": [
+                {
+                  "operator": "equal",
+                  "evidenceSpan": {
+                    "start": 209,
+                    "end": 218,
+                    "textSpan": "első ütem"
+                  },
+                  "rule": "unqualified_numeric_candidate"
+                }
+              ],
+              "modalities": [],
+              "polarity": "asserted",
+              "conditionality": false,
+              "conditionAntecedent": false,
+              "contrastBranch": null,
+              "frameId": "dependency:206:246",
+              "clauseSpan": {
+                "start": 206,
+                "end": 246,
+                "textSpan": "Az első ütem a játszótérre korlátozódik."
+              },
+              "predicateSpan": {
+                "start": 233,
+                "end": 245,
+                "textSpan": "korlátozódik"
+              },
+              "numericDependencyPath": [
+                {
+                  "relation": "amod:att",
+                  "sourceSpan": {
+                    "start": 209,
+                    "end": 213,
+                    "textSpan": "első"
+                  },
+                  "targetSpan": {
+                    "start": 214,
+                    "end": 218,
+                    "textSpan": "ütem"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 214,
+                    "end": 218,
+                    "textSpan": "ütem"
+                  },
+                  "targetSpan": {
+                    "start": 233,
+                    "end": 245,
+                    "textSpan": "korlátozódik"
+                  }
+                }
+              ],
+              "unconditionalEqualityAllowed": true,
+              "assertionStatus": "unqualified_candidate",
+              "projectionAllowed": false
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "asserted"
+        ],
+        "modality": "asserted",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 206,
+          "end": 246,
+          "textSpan": "Az első ütem a játszótérre korlátozódik."
+        },
+        "propositionSpan": {
+          "start": 206,
+          "end": 246,
+          "textSpan": "Az első ütem a játszótérre korlátozódik."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:206:246",
+        "syntacticRoles": []
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "contrasts": [
+      {
+        "binding": "unresolved",
+        "rule": "ambiguous_contrast_scope",
+        "slot": null,
+        "evidenceSpan": {
+          "start": 92,
+          "end": 205,
+          "textSpan": "A kilencedik kerület udvarain nem padokat, hanem ivókutakat helyeznének el, ha megszületik a lakók hozzájárulása."
+        },
+        "scope": {
+          "start": 92,
+          "end": 205
+        },
+        "rejected": null,
+        "accepted": null
+      }
+    ],
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true,
+    "reportingNominalRelations": []
+  }
+}

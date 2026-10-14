@@ -1,0 +1,14 @@
+{
+  "frozenAt": "2026-10-09T21:35:16.385Z",
+  "snippets": 15,
+  "editorialSentences": 35,
+  "selectedDecisions": 90,
+  "expectedResolved": 83,
+  "expectedUnresolved": 7,
+  "sha256": {
+    "corpus.json": "1b0b3511644c5f57f7f14db04a57cbf914483dfa6f8baf7ba8bdc5df30f8ccbc",
+    "expected.json": "6a3100f7fe7af15bc541ff986da96bdcc108d9e10bfffc5fe937a5b1c4a58233"
+  },
+  "scoringPolicy": "Fixed 90 selected bundles. Entire selected proposition must be correctly bound and qualified with evidence for CORRECT_RESOLVED; any contradictory resolved assertion is WRONG_RESOLVED; otherwise missing/partial is MISSED_DEFENSIBLE_RESOLUTION. Expected abstentions require no positive guessed edge. Exact offsets measured separately. Ambiguous adjudications documented, denominator never changed.",
+  "independenceLimitation": "Same assistant authors corpus and evaluates outputs, with prior knowledge of engine. No external evaluator independence. Expected written before any NLP or binder inference."
+}

@@ -1,0 +1,37 @@
+{
+  "audits": [
+    {
+      "file": "03_huspacy_first_pass.json",
+      "provider": "huspacy",
+      "total": 182,
+      "exact": 182,
+      "failures": 0,
+      "failureRows": []
+    },
+    {
+      "file": "04_stanza_first_pass.json",
+      "provider": "stanza",
+      "total": 182,
+      "exact": 182,
+      "failures": 0,
+      "failureRows": []
+    },
+    {
+      "file": "06_real_world_003_huspacy_diagnostic.json",
+      "provider": "huspacy",
+      "total": 2713,
+      "exact": 2713,
+      "failures": 0,
+      "failureRows": []
+    },
+    {
+      "file": "07_real_world_003_stanza_diagnostic.json",
+      "provider": "stanza",
+      "total": 2640,
+      "exact": 2640,
+      "failures": 0,
+      "failureRows": []
+    }
+  ],
+  "allExact": true
+}

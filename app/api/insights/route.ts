@@ -68,7 +68,7 @@ export async function GET(req: Request) {
     start = new Date(now);
     // Keep the rolling period independent from the host timezone. The DB
     // timestamps and the end bound are handled as UTC values.
-    start.setUTCDate(start.getUTCDate() - (days - 1));
+    start.setUTCDate(start.getUTCDate() - days);
   }
 
   const startStr =
@@ -76,8 +76,8 @@ export async function GET(req: Request) {
     `${String(start.getUTCMonth() + 1).padStart(2, "0")}-` +
     `${String(start.getUTCDate()).padStart(2, "0")} ` +
     `${String(start.getUTCHours()).padStart(2, "0")}:` +
-    `${String(start.getMinutes()).padStart(2, "0")}:` +
-    `${String(start.getSeconds()).padStart(2, "0")}`;
+    `${String(start.getUTCMinutes()).padStart(2, "0")}:` +
+    `${String(start.getUTCSeconds()).padStart(2, "0")}`;
   const endStr =
     `${now.getUTCFullYear()}-` +
     `${String(now.getUTCMonth() + 1).padStart(2, "0")}-` +

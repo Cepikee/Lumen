@@ -1,0 +1,1085 @@
+{
+  "id": "W",
+  "domain": "időjárás",
+  "text": "Ha a széllökések sebessége meghaladja a 75 kilométert óránként, felfüggesztik a kompjáratot. A meteorológus szerint az éjszakai 4 fokhoz képest délután 9 fokot mérhetnek.",
+  "started": "2026-10-09T21:35:42.921Z",
+  "annotation": {
+    "tokens": [
+      {
+        "start": 0,
+        "end": 2,
+        "text": "Ha",
+        "lemma": "ha",
+        "pos": "SCONJ",
+        "morph": {},
+        "dep": "mark",
+        "headStart": 27
+      },
+      {
+        "start": 3,
+        "end": 4,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 5
+      },
+      {
+        "start": 5,
+        "end": 16,
+        "text": "széllökések",
+        "lemma": "széllökés",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Plur"
+        },
+        "dep": "nmod:att",
+        "headStart": 17
+      },
+      {
+        "start": 17,
+        "end": 26,
+        "text": "sebessége",
+        "lemma": "sebesség",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing",
+          "Number[psor]": "Sing",
+          "Person[psor]": "3"
+        },
+        "dep": "nsubj",
+        "headStart": 27
+      },
+      {
+        "start": 27,
+        "end": 37,
+        "text": "meghaladja",
+        "lemma": "meghalad",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Sing",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "advcl",
+        "headStart": 64
+      },
+      {
+        "start": 38,
+        "end": 39,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 43
+      },
+      {
+        "start": 40,
+        "end": 42,
+        "text": "75",
+        "lemma": "75",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 43
+      },
+      {
+        "start": 43,
+        "end": 53,
+        "text": "kilométert",
+        "lemma": "kilométer",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "dep",
+        "headStart": 27
+      },
+      {
+        "start": 54,
+        "end": 62,
+        "text": "óránként",
+        "lemma": "óra",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Dis",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 27
+      },
+      {
+        "start": 62,
+        "end": 63,
+        "text": ",",
+        "lemma": ",",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 64
+      },
+      {
+        "start": 64,
+        "end": 77,
+        "text": "felfüggesztik",
+        "lemma": "felfüggeszt",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Def",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 64
+      },
+      {
+        "start": 78,
+        "end": 79,
+        "text": "a",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 80
+      },
+      {
+        "start": 80,
+        "end": 91,
+        "text": "kompjáratot",
+        "lemma": "kompjárat",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 64
+      },
+      {
+        "start": 91,
+        "end": 92,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 64
+      },
+      {
+        "start": 93,
+        "end": 94,
+        "text": "A",
+        "lemma": "a",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 95
+      },
+      {
+        "start": 95,
+        "end": 107,
+        "text": "meteorológus",
+        "lemma": "meteorológus",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Nom",
+          "Number": "Sing"
+        },
+        "dep": "obl",
+        "headStart": 160
+      },
+      {
+        "start": 108,
+        "end": 115,
+        "text": "szerint",
+        "lemma": "szerint",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 95
+      },
+      {
+        "start": 116,
+        "end": 118,
+        "text": "az",
+        "lemma": "az",
+        "pos": "DET",
+        "morph": {
+          "Definite": "Def",
+          "PronType": "Art"
+        },
+        "dep": "det",
+        "headStart": 130
+      },
+      {
+        "start": 119,
+        "end": 127,
+        "text": "éjszakai",
+        "lemma": "éjszakai",
+        "pos": "ADJ",
+        "morph": {
+          "Case": "Nom",
+          "Degree": "Pos",
+          "Number": "Sing"
+        },
+        "dep": "amod:att",
+        "headStart": 130
+      },
+      {
+        "start": 128,
+        "end": 129,
+        "text": "4",
+        "lemma": "4",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 130
+      },
+      {
+        "start": 130,
+        "end": 136,
+        "text": "fokhoz",
+        "lemma": "f",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "All",
+          "Number": "Plur"
+        },
+        "dep": "obl",
+        "headStart": 160
+      },
+      {
+        "start": 137,
+        "end": 143,
+        "text": "képest",
+        "lemma": "képest",
+        "pos": "ADP",
+        "morph": {},
+        "dep": "case",
+        "headStart": 130
+      },
+      {
+        "start": 144,
+        "end": 151,
+        "text": "délután",
+        "lemma": "délután",
+        "pos": "ADV",
+        "morph": {},
+        "dep": "advmod:tlocy",
+        "headStart": 160
+      },
+      {
+        "start": 152,
+        "end": 153,
+        "text": "9",
+        "lemma": "9",
+        "pos": "NUM",
+        "morph": {
+          "Case": "Nom",
+          "NumType": "Card",
+          "Number": "Sing"
+        },
+        "dep": "nummod",
+        "headStart": 154
+      },
+      {
+        "start": 154,
+        "end": 159,
+        "text": "fokot",
+        "lemma": "fok",
+        "pos": "NOUN",
+        "morph": {
+          "Case": "Acc",
+          "Number": "Sing"
+        },
+        "dep": "obj",
+        "headStart": 160
+      },
+      {
+        "start": 160,
+        "end": 169,
+        "text": "mérhetnek",
+        "lemma": "mérhet",
+        "pos": "VERB",
+        "morph": {
+          "Definite": "Ind",
+          "Mood": "Ind",
+          "Number": "Plur",
+          "Person": "3",
+          "Tense": "Pres",
+          "VerbForm": "Fin",
+          "Voice": "Act"
+        },
+        "dep": "ROOT",
+        "headStart": 160
+      },
+      {
+        "start": 169,
+        "end": 170,
+        "text": ".",
+        "lemma": ".",
+        "pos": "PUNCT",
+        "morph": {},
+        "dep": "punct",
+        "headStart": 160
+      }
+    ],
+    "sentences": [
+      {
+        "start": 0,
+        "end": 92,
+        "text": "Ha a széllökések sebessége meghaladja a 75 kilométert óránként, felfüggesztik a kompjáratot."
+      },
+      {
+        "start": 93,
+        "end": 170,
+        "text": "A meteorológus szerint az éjszakai 4 fokhoz képest délután 9 fokot mérhetnek."
+      }
+    ],
+    "entities": []
+  },
+  "output": {
+    "entities": [],
+    "frames": [
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 0,
+          "end": 62,
+          "textSpan": "Ha a széllökések sebessége meghaladja a 75 kilométert óránként"
+        },
+        "attribution": null,
+        "action": "meghalad",
+        "actionSpan": {
+          "start": 27,
+          "end": 37,
+          "textSpan": "meghaladja"
+        },
+        "object": [
+          "kilométer"
+        ],
+        "numericArguments": [
+          {
+            "value": 75,
+            "canonicalValue": 75,
+            "unit": {
+              "numerator": "km",
+              "denominator": "hour"
+            },
+            "semanticKind": "compound_rate",
+            "start": 40,
+            "end": 62,
+            "raw": "75 kilométert óránként",
+            "evidenceSpan": {
+              "start": 40,
+              "end": 62,
+              "textSpan": "75 kilométert óránként"
+            },
+            "owner": null,
+            "ownerType": "unresolved",
+            "subject": null,
+            "binding": "unresolved",
+            "unresolvedReasons": [
+              "dependency_numeric_attachment_unproven",
+              "compound_rate_projection_not_supported"
+            ],
+            "compound": {
+              "numerator": {
+                "value": 75,
+                "baseUnit": "km",
+                "originalKind": "measurement",
+                "evidenceSpan": {
+                  "start": 40,
+                  "end": 53,
+                  "textSpan": "75 kilométert"
+                }
+              },
+              "denominators": [
+                {
+                  "unit": "hour",
+                  "relation": "per",
+                  "form": "distributive",
+                  "evidenceSpan": {
+                    "start": 54,
+                    "end": 62,
+                    "textSpan": "óránként"
+                  },
+                  "dependencyPath": [
+                    {
+                      "relation": "obl",
+                      "sourceSpan": {
+                        "start": 54,
+                        "end": 62,
+                        "textSpan": "óránként"
+                      },
+                      "targetSpan": {
+                        "start": 27,
+                        "end": 37,
+                        "textSpan": "meghaladja"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "relation": "per",
+              "qualifiers": [],
+              "evidenceSpan": {
+                "start": 40,
+                "end": 62,
+                "textSpan": "75 kilométert óránként"
+              },
+              "numeratorDependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 40,
+                    "end": 42,
+                    "textSpan": "75"
+                  },
+                  "targetSpan": {
+                    "start": 43,
+                    "end": 53,
+                    "textSpan": "kilométert"
+                  }
+                },
+                {
+                  "relation": "dep",
+                  "sourceSpan": {
+                    "start": 43,
+                    "end": 53,
+                    "textSpan": "kilométert"
+                  },
+                  "targetSpan": {
+                    "start": 27,
+                    "end": 37,
+                    "textSpan": "meghaladja"
+                  }
+                }
+              ],
+              "scopeStatus": "candidate_only",
+              "frameId": "dependency:0:62"
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": true,
+        "conditionalTrigger": {
+          "start": 0,
+          "end": 2,
+          "textSpan": "Ha"
+        },
+        "conditionAntecedent": true,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "asserted",
+        "status": "conditional",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit",
+          "dependency_numeric_unresolved",
+          "compound_rate_requires_lossless_resolution"
+        ],
+        "evidenceSpan": {
+          "start": 0,
+          "end": 62,
+          "textSpan": "Ha a széllökések sebessége meghaladja a 75 kilométert óránként"
+        },
+        "propositionSpan": {
+          "start": 0,
+          "end": 62,
+          "textSpan": "Ha a széllökések sebessége meghaladja a 75 kilométert óránként"
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:0:62",
+        "syntacticRoles": [
+          {
+            "role": "possessor",
+            "referent": {
+              "mention": "széllökések",
+              "normalized": "széllökés",
+              "start": 5,
+              "end": 16,
+              "type": "referent",
+              "case": "Nom",
+              "evidenceSpan": {
+                "start": 5,
+                "end": 16,
+                "textSpan": "széllökések"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 5,
+                "end": 16,
+                "textSpan": "széllökések"
+              },
+              "targetSpan": {
+                "start": 27,
+                "end": 37,
+                "textSpan": "meghaladja"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nmod:att",
+                  "sourceSpan": {
+                    "start": 5,
+                    "end": 16,
+                    "textSpan": "széllökések"
+                  },
+                  "targetSpan": {
+                    "start": 17,
+                    "end": 26,
+                    "textSpan": "sebessége"
+                  }
+                },
+                {
+                  "relation": "nsubj",
+                  "sourceSpan": {
+                    "start": 17,
+                    "end": 26,
+                    "textSpan": "sebessége"
+                  },
+                  "targetSpan": {
+                    "start": 27,
+                    "end": 37,
+                    "textSpan": "meghaladja"
+                  }
+                }
+              ],
+              "frameId": "dependency:0:62",
+              "semanticRole": "possessor",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 0,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [],
+        "reportingActor": null,
+        "source": null,
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": null,
+        "content": {
+          "start": 64,
+          "end": 92,
+          "textSpan": "felfüggesztik a kompjáratot."
+        },
+        "attribution": null,
+        "action": "felfüggeszt",
+        "actionSpan": {
+          "start": 64,
+          "end": 77,
+          "textSpan": "felfüggesztik"
+        },
+        "object": [
+          "kompjárat"
+        ],
+        "numericArguments": [],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": true,
+        "conditionalTrigger": {
+          "start": 0,
+          "end": 2,
+          "textSpan": "Ha"
+        },
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": false,
+        "modalities": [
+          "conditional"
+        ],
+        "modality": "conditional",
+        "polarity": "asserted",
+        "status": "conditional",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 64,
+          "end": 92,
+          "textSpan": "felfüggesztik a kompjáratot."
+        },
+        "propositionSpan": {
+          "start": 64,
+          "end": 92,
+          "textSpan": "felfüggesztik a kompjáratot."
+        },
+        "canonicalProjectionAllowed": false,
+        "frameId": "dependency:64:92",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "kompjáratot",
+              "normalized": "kompjárat",
+              "start": 80,
+              "end": 91,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 80,
+                "end": 91,
+                "textSpan": "kompjáratot"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 80,
+                "end": 91,
+                "textSpan": "kompjáratot"
+              },
+              "targetSpan": {
+                "start": 64,
+                "end": 77,
+                "textSpan": "felfüggesztik"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 80,
+                    "end": 91,
+                    "textSpan": "kompjáratot"
+                  },
+                  "targetSpan": {
+                    "start": 64,
+                    "end": 77,
+                    "textSpan": "felfüggesztik"
+                  }
+                }
+              ],
+              "frameId": "dependency:64:92",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      },
+      {
+        "sentence": 1,
+        "actor": null,
+        "actorStatus": "unresolved",
+        "subject": null,
+        "location": [
+          {
+            "mention": "fokhoz",
+            "normalized": "f",
+            "canonicalIdentity": null,
+            "type": "referent",
+            "named": false,
+            "case": "All",
+            "start": 130,
+            "end": 136,
+            "evidenceSpan": {
+              "start": 130,
+              "end": 136,
+              "textSpan": "fokhoz"
+            },
+            "sourceRole": "reported",
+            "pronoun": false,
+            "role": "location"
+          }
+        ],
+        "reportingActor": {
+          "mention": "meteorológus",
+          "normalized": "meteorológus",
+          "canonicalIdentity": null,
+          "type": "referent",
+          "named": false,
+          "case": "Nom",
+          "start": 95,
+          "end": 107,
+          "evidenceSpan": {
+            "start": 95,
+            "end": 107,
+            "textSpan": "meteorológus"
+          },
+          "sourceRole": "reported",
+          "pronoun": false
+        },
+        "source": {
+          "mention": "meteorológus",
+          "normalized": "meteorológus",
+          "start": 95,
+          "end": 107,
+          "type": "referent",
+          "case": "Nom",
+          "evidenceSpan": {
+            "start": 95,
+            "end": 107,
+            "textSpan": "meteorológus"
+          }
+        },
+        "recipient": null,
+        "recipientCandidates": [],
+        "reportingVerb": "szerint",
+        "content": {
+          "start": 115,
+          "end": 170,
+          "textSpan": " az éjszakai 4 fokhoz képest délután 9 fokot mérhetnek."
+        },
+        "attribution": {
+          "label": "meteorológus",
+          "normalized": "meteorológus",
+          "sourceRole": "reported",
+          "evidenceSpan": {
+            "start": 95,
+            "end": 107,
+            "textSpan": "meteorológus"
+          },
+          "propositionSpan": {
+            "start": 115,
+            "end": 170,
+            "textSpan": " az éjszakai 4 fokhoz képest délután 9 fokot mérhetnek."
+          }
+        },
+        "action": "mérhet",
+        "actionSpan": {
+          "start": 160,
+          "end": 169,
+          "textSpan": "mérhetnek"
+        },
+        "object": [
+          "fok"
+        ],
+        "numericArguments": [
+          {
+            "value": 4,
+            "canonicalValue": 4,
+            "unit": "count",
+            "semanticKind": "count",
+            "start": 128,
+            "end": 136,
+            "raw": "4 fokhoz",
+            "evidenceSpan": {
+              "start": 128,
+              "end": 136,
+              "textSpan": "4 fokhoz"
+            },
+            "owner": {
+              "mention": "fokhoz",
+              "normalized": "f",
+              "start": 130,
+              "end": 136,
+              "type": "referent",
+              "case": "All",
+              "evidenceSpan": {
+                "start": 130,
+                "end": 136,
+                "textSpan": "fokhoz"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "count",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 128,
+                "end": 129,
+                "textSpan": "4"
+              },
+              "targetSpan": {
+                "start": 130,
+                "end": 136,
+                "textSpan": "fokhoz"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 128,
+                    "end": 129,
+                    "textSpan": "4"
+                  },
+                  "targetSpan": {
+                    "start": 130,
+                    "end": 136,
+                    "textSpan": "fokhoz"
+                  }
+                },
+                {
+                  "relation": "obl",
+                  "sourceSpan": {
+                    "start": 130,
+                    "end": 136,
+                    "textSpan": "fokhoz"
+                  },
+                  "targetSpan": {
+                    "start": 160,
+                    "end": 169,
+                    "textSpan": "mérhetnek"
+                  }
+                }
+              ],
+              "frameId": "dependency:93:170",
+              "semanticRole": "count",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          },
+          {
+            "value": 9,
+            "canonicalValue": 9,
+            "unit": "C",
+            "semanticKind": "measurement",
+            "start": 152,
+            "end": 159,
+            "raw": "9 fokot",
+            "evidenceSpan": {
+              "start": 152,
+              "end": 159,
+              "textSpan": "9 fokot"
+            },
+            "owner": {
+              "mention": "fokot",
+              "normalized": "fok",
+              "start": 154,
+              "end": 159,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 154,
+                "end": 159,
+                "textSpan": "fokot"
+              }
+            },
+            "ownerType": "semantic_argument",
+            "subject": null,
+            "binding": "resolved",
+            "unresolvedReasons": [],
+            "property": "measurement",
+            "bindingEvidence": {
+              "sourceSpan": {
+                "start": 152,
+                "end": 153,
+                "textSpan": "9"
+              },
+              "targetSpan": {
+                "start": 154,
+                "end": 159,
+                "textSpan": "fokot"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "nummod",
+                  "sourceSpan": {
+                    "start": 152,
+                    "end": 153,
+                    "textSpan": "9"
+                  },
+                  "targetSpan": {
+                    "start": 154,
+                    "end": 159,
+                    "textSpan": "fokot"
+                  }
+                },
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 154,
+                    "end": 159,
+                    "textSpan": "fokot"
+                  },
+                  "targetSpan": {
+                    "start": 160,
+                    "end": 169,
+                    "textSpan": "mérhetnek"
+                  }
+                }
+              ],
+              "frameId": "dependency:93:170",
+              "semanticRole": "measurement",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ],
+        "grammaticalMood": [
+          "Ind"
+        ],
+        "conditionality": false,
+        "conditionalTrigger": null,
+        "conditionAntecedent": false,
+        "hypotheticalContext": false,
+        "reportingContext": true,
+        "modalities": [
+          "reported"
+        ],
+        "modality": "reported",
+        "polarity": "asserted",
+        "status": "reported",
+        "binding": "unresolved",
+        "unresolvedReasons": [
+          "actor_unresolved",
+          "numeric_binding_unresolved",
+          "dependency_actor_ambiguous_or_implicit"
+        ],
+        "evidenceSpan": {
+          "start": 93,
+          "end": 170,
+          "textSpan": "A meteorológus szerint az éjszakai 4 fokhoz képest délután 9 fokot mérhetnek."
+        },
+        "propositionSpan": {
+          "start": 93,
+          "end": 170,
+          "textSpan": "A meteorológus szerint az éjszakai 4 fokhoz képest délután 9 fokot mérhetnek."
+        },
+        "canonicalProjectionAllowed": false,
+        "sourceEvidence": {
+          "sourceSpan": {
+            "start": 95,
+            "end": 107,
+            "textSpan": "meteorológus"
+          },
+          "targetSpan": {
+            "start": 160,
+            "end": 169,
+            "textSpan": "mérhetnek"
+          },
+          "dependencyPath": [
+            {
+              "relation": "obl",
+              "sourceSpan": {
+                "start": 95,
+                "end": 107,
+                "textSpan": "meteorológus"
+              },
+              "targetSpan": {
+                "start": 160,
+                "end": 169,
+                "textSpan": "mérhetnek"
+              }
+            }
+          ],
+          "frameId": "dependency:93:170",
+          "semanticRole": "attribution_source",
+          "resolutionStatus": "resolved",
+          "rule": "dependency_path_with_case_and_scope_checks"
+        },
+        "frameId": "dependency:93:170",
+        "syntacticRoles": [
+          {
+            "role": "object",
+            "referent": {
+              "mention": "fokot",
+              "normalized": "fok",
+              "start": 154,
+              "end": 159,
+              "type": "referent",
+              "case": "Acc",
+              "evidenceSpan": {
+                "start": 154,
+                "end": 159,
+                "textSpan": "fokot"
+              }
+            },
+            "binding": "resolved",
+            "evidence": {
+              "sourceSpan": {
+                "start": 154,
+                "end": 159,
+                "textSpan": "fokot"
+              },
+              "targetSpan": {
+                "start": 160,
+                "end": 169,
+                "textSpan": "mérhetnek"
+              },
+              "dependencyPath": [
+                {
+                  "relation": "obj",
+                  "sourceSpan": {
+                    "start": 154,
+                    "end": 159,
+                    "textSpan": "fokot"
+                  },
+                  "targetSpan": {
+                    "start": 160,
+                    "end": 169,
+                    "textSpan": "mérhetnek"
+                  }
+                }
+              ],
+              "frameId": "dependency:93:170",
+              "semanticRole": "object",
+              "resolutionStatus": "resolved",
+              "rule": "dependency_path_with_case_and_scope_checks"
+            }
+          }
+        ]
+      }
+    ],
+    "canonical": [],
+    "conflicts": [],
+    "projectionState": "disabled_research_only",
+    "version": "real-text-safety-a-1",
+    "attributionChains": [],
+    "dependencyStatus": "available",
+    "dependencyVerified": true
+  }
+}
