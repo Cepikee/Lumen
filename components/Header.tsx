@@ -13,15 +13,12 @@ export default function Header() {
   const pathname = usePathname();
 
   const user = useUserStore((s) => s.user);
-  const loading = useUserStore((s) => s.loading);
-
   const searchTerm = useUserStore((s) => s.searchTerm);
   const setSearchTerm = useUserStore((s) => s.setSearchTerm);
   const theme = useUserStore((s) => s.theme);
   const setTheme = useUserStore((s) => s.setTheme);
 
   const [localSearch, setLocalSearch] = useState<string>(searchTerm);
-  const [isTyping, setIsTyping] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const isInsights = pathname === "/insights";
@@ -137,8 +134,11 @@ export default function Header() {
 
   const menuLoggedOut = [
     { href: "/", label: "Főoldal" },
+    { href: "/insights", label: "Insights" },
+    { href: "/trends", label: "Kulcsszavak" },
     { href: "/aszf", label: "ÁSZF" },
     { href: "/impresszum", label: "Impresszum" },
+    { href: "/adatvedelem", label: "Adatvédelem" },
     { href: "/kapcsolat", label: "Kapcsolat" },
   ];
 
@@ -210,7 +210,6 @@ export default function Header() {
                 </span>
               )}
             </div>
-            <div className="search-status">{isTyping ? "Keresés folyamatban…" : ""}</div>
           </div>
         )}
 
@@ -218,7 +217,7 @@ export default function Header() {
           <ul className="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
             {activeMenu.map((item) => (
               <li key={item.href} className="nav-item">
-                <Link href={item.href} className="nav-link" aria-current={pathname === item.href ? "page" : undefined}>
+                <Link href={item.href} className={`nav-link ${["/aszf","/impresszum","/adatvedelem","/kapcsolat"].includes(item.href)?"header-secondary-link":""}`} aria-current={pathname === item.href ? "page" : undefined}>
                   {item.label}
                 </Link>
               </li>

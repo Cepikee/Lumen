@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/navigation";
+import React, { Suspense, useEffect, useState, useRef } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FeedList from "@/components/FeedList";
 import type { FeedItem } from "@/components/FeedItemCard";
+import HomeFeedLayout from "@/components/HomeFeedLayout";
 import { useUserStore } from "@/store/useUserStore";
 
 function normalizeFeedItems(raw: unknown): FeedItem[] {
@@ -21,15 +22,34 @@ function normalizeFeedItems(raw: unknown): FeedItem[] {
     })) as FeedItem[];
 }
 
-export default function Page() {
+function HomePage() {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   // ⭐ Zustand state-ek
   const viewMode = useUserStore((s) => s.viewMode);
   const isTodayMode = useUserStore((s) => s.isTodayMode);
   const sourceFilters = useUserStore((s) => s.sourceFilters);
   const categoryFilters = useUserStore((s) => s.categoryFilters);
+  const setSourceFilters = useUserStore((s) => s.setSourceFilters);
+  const setCategoryFilters = useUserStore((s) => s.setCategoryFilters);
   const searchTerm = useUserStore((s) => s.searchTerm);
+  const urlSource = searchParams.get("source")?.trim() || "";
+  const urlCategory = searchParams.get("category")?.trim() || "";
+
+  useEffect(() => {
+    setSourceFilters(urlSource ? [urlSource] : []);
+    setCategoryFilters(urlCategory ? [urlCategory] : []);
+  }, [urlSource, urlCategory, setSourceFilters, setCategoryFilters]);
+
+  function updateUrlFilter(field: "source" | "category", value: string) {
+    const query = new URLSearchParams(searchParams.toString());
+    const normalized = value.trim();
+    if (normalized) query.set(field, normalized);
+    else query.delete(field);
+    router.push(query.size ? `${pathname}?${query}` : pathname, { scroll: false });
+  }
 
   // ⭐ Debounce-olt kereső
   const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
@@ -49,7 +69,6 @@ export default function Page() {
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [expandedId, setExpandedId] = useState<number | null>(null);
   const feedRequestRef = useRef(0);
   // When a search/filter changes while a later page is visible, the reset
   // effect and the pagination effect run in the same commit. Keep the
@@ -152,19 +171,6 @@ export default function Page() {
     } finally {
       if (!isCancelled()) setLoading(false);
     }
-  }
-
-  async function loadFilteredFirstPage() {
-    const firstPage = await fetchFilteredPage(1, sourceFilters, categoryFilters);
-    if (firstPage === null) return;
-    if (firstPage.length === 0) {
-      setItems([]);
-      setHasMore(false);
-      return;
-    }
-    setItems(firstPage);
-    setHasMore(firstPage.length === 10);
-    setSourcePage(1);
   }
 
   // --- FŐ USEEFFECT ---
@@ -338,11 +344,9 @@ export default function Page() {
   }, [hasMore, isTodayMode, depSources, depCategories]);
 
   return (
-    <>
+    <HomeFeedLayout items={items} category={urlCategory} source={urlSource} onCategory={value=>updateUrlFilter("category",value)} onSource={value=>updateUrlFilter("source",value)}>
       <FeedList
         items={items}
-        expandedId={expandedId}
-        setExpandedId={setExpandedId}
         viewMode={viewMode}
       />
 
@@ -354,6 +358,10 @@ export default function Page() {
       {!hasMore && !isTodayMode && (
         <p className="text-center text-muted mt-3">Nincs több hír.</p>
       )}
-    </>
+    </HomeFeedLayout>
   );
+}
+
+export default function Page() {
+  return <Suspense fallback={<main className="home-page-loading" aria-label="Hírfolyam betöltése" />}><HomePage /></Suspense>;
 }

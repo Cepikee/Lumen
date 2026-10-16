@@ -8,24 +8,18 @@ type FeedItemLocal = FeedItem;
 
 interface Props {
   items: FeedItemLocal[];
-  expandedId: number | null;
-  setExpandedId: (id: number | null) => void;
   viewMode: "card" | "compact";
 }
 
 export default function FeedList({
   items,
-  expandedId,
-  setExpandedId,
   viewMode,
 }: Props) {
   const safeItems = Array.isArray(items) ? items.filter((item) => item && typeof item === "object") : [];
-  if (safeItems.length === 0) return <p>Nincs még összefoglalás.</p>;
+  if (safeItems.length === 0) return <div className="home-feed-empty"><strong>Még nincs megjeleníthető hír.</strong><p>Próbálj másik kategóriát, forrást vagy keresést.</p></div>;
 
   return (
     <>
-      <h2 className="mb-4">📰 Friss hírek</h2>
-
       {safeItems.map((item) => (
         <FeedItemCard
           key={item.id}

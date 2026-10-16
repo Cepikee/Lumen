@@ -1,217 +1,28 @@
 "use client";
-
 import ReactMarkdown from "react-markdown";
-import { Inter } from "next/font/google";
 import { useRouter } from "next/navigation";
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
+import styles from "./NewsFeedCard.module.css";
 
 export interface FeedItem {
-  id: number;
-  url: string;
-  source_id: number;
-  content: string;
-  title: string;
-  detailed_content: string;
-  ai_clean: number;
-  created_at: string;
-  category?: string;
+  id:number; url:string; source_id:number; source_name?:string|null; source?:string|null;
+  content:string; title:string; detailed_content:string; ai_clean:number; created_at:string; category?:string|null;
 }
+function relative(value:string){const date=new Date(value);if(Number.isNaN(date.getTime()))return "ismeretlen időpont";const minutes=Math.max(0,Math.floor((Date.now()-date.getTime())/60000));if(minutes<1)return "most";if(minutes<60)return `${minutes} perce`;const hours=Math.floor(minutes/60);if(hours<24)return `${hours} órája`;return `${Math.floor(hours/24)} napja`;}
+function fullDate(value:string){const date=new Date(value);if(Number.isNaN(date.getTime()))return "Ismeretlen dátum";return date.toLocaleString("hu-HU",{timeZone:"Europe/Budapest",year:"numeric",month:"long",day:"numeric",hour:"2-digit",minute:"2-digit"});}
+function sourceKey(id:number){return ({1:"telex",2:"24hu",3:"index",4:"hvg",5:"portfolio",6:"444",7:"origo"} as Record<number,string>)[id]||"forrás";}
+function sourceLabel(item:FeedItem){return item.source_name?.trim()||item.source?.trim()||sourceKey(item.source_id);}
 
-function formatRelativeTime(dateString: string): string {
-  const now = new Date();
-  const date = new Date(dateString);
-  if (Number.isNaN(date.getTime())) return "ismeretlen időpont";
-  const diffMs = now.getTime() - date.getTime();
-  const diffMin = Math.floor(diffMs / 60000);
-  const diffHour = Math.floor(diffMin / 60);
-  const diffDay = Math.floor(diffHour / 24);
-
-  if (diffMin < 1) return "néhány másodperce érkezett";
-  if (diffMin < 60) return `${diffMin} perce érkezett`;
-  if (diffHour < 24) return `${diffHour} órája érkezett`;
-  return `${diffDay} napja érkezett`;
-}
-
-function formatFullDate(dateString: string): string {
-  const date = new Date(dateString);
-  if (Number.isNaN(date.getTime())) return "Ismeretlen dátum";
-  return date.toLocaleString("hu-HU", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    weekday: "long",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    timeZoneName: "short",
-  });
-}
-
-function getSourceColor(sourceId: number) {
-  switch (sourceId) {
-    case 1: return "#00AEEF";
-    case 2: return "#ff0000";
-    case 3: return "rgba(224,226,116,0.747)";
-    case 4: return "#ff7a00";
-    case 5: return "#ff6600";
-    case 6: return "#2d6126";
-    case 7: return "#0e008a";
-    default: return "#d1d5db";
-  }
-}
-
-function getSourceKey(sourceId: number) {
-  switch (sourceId) {
-    case 1: return "telex";
-    case 2: return "24hu";
-    case 3: return "index";
-    case 4: return "hvg";
-    case 5: return "portfolio";
-    case 6: return "444";
-    case 7: return "origo";
-    default: return "ismeretlen";
-  }
-}
-
-export default function FeedItemCard({
-  item,
-  viewMode,
-}: {
-  item: FeedItem;
-  viewMode: "card" | "compact";
-}) {
-  const router = useRouter();
-  const url = item.url || "";
-  const sourceKey = getSourceKey(item.source_id);
-  const sourceText = sourceKey.toUpperCase();
-  const borderColor = getSourceColor(item.source_id);
-
-  const wrapperFont = inter.className;
-
-  // CARD = eredeti
-  // COMPACT = fele méret
-  const isCompact = viewMode === "compact";
-
-  return (
-    <div className={`${wrapperFont}`}>
-      <div
-        className="block no-underline"
-        role="link"
-        tabIndex={0}
-        onClick={() => router.push(`/cikk/${item.id}`)}
-        onKeyDown={(event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            router.push(`/cikk/${item.id}`);
-          }
-        }}
-      >
-        <div
-          className={`
-            feed-card
-            rounded shadow-sm theme-card border-l-4 cursor-pointer
-            hover:shadow-lg transition-all duration-200
-            ${isCompact ? "p-2 mb-2 text-sm" : "p-4 mb-4 text-base"}
-          `}
-          data-source-text={sourceText}
-          style={{
-            backgroundColor: "var(--bs-body-bg)",
-            borderLeftColor: borderColor,
-          }}
-        >
-          <div className="card-body relative z-10">
-
-            {/* HEADER */}
-            <h5
-              className={`
-                card-title flex justify-between items-start m-0
-                ${isCompact ? "text-[0.9rem]" : "text-[1.15rem]"}
-              `}
-            >
-              <div className="flex items-center gap-3 max-w-[78%]">
-                <span className={`badge source-${sourceKey} ${isCompact ? "scale-75" : ""}`}>
-                  {sourceText}
-                </span>
-
-                {url.trim() ? (
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`
-                      line-clamp-2 !no-underline font-semibold text-[#4da3ff] hover:text-[#77b8ff]
-                      ${isCompact ? "text-[0.9rem]" : "text-[1.15rem]"}
-                    `}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {typeof item.title === "string" && item.title.trim() ? item.title : "Cím nélkül"}
-                  </a>
-                ) : (
-                  <span className={`line-clamp-2 font-semibold text-[#4da3ff] ${isCompact ? "text-[0.9rem]" : "text-[1.15rem]"}`}>
-                    {typeof item.title === "string" && item.title.trim() ? item.title : "Cím nélkül"}
-                  </span>
-                )}
-              </div>
-
-              {item.ai_clean === 1 && (
-                <span
-                  className={`badge source-${sourceKey} ${isCompact ? "scale-75" : ""}`}
-                  title="Ez a tartalom teljes egészében AI által lett megfogalmazva."
-                >
-                  AI‑fogalmazás
-                </span>
-              )}
-            </h5>
-
-            {/* SUMMARY */}
-            <div
-              className={`
-                mt-3 text-[var(--feed-text)]
-                ${isCompact ? "text-[0.8rem] leading-[1.3]" : "text-[1rem] leading-[1.6]"}
-              `}
-            >
-              <ReactMarkdown>{typeof item.content === "string" ? item.content : ""}</ReactMarkdown>
-            </div>
-
-            {/* FOOTER */}
-            <div
-              className={`
-                flex items-center justify-between mt-3
-                ${isCompact ? "text-[0.7rem]" : "text-[0.95rem]"}
-              `}
-            >
-              <p
-                className="mb-0"
-                title={formatFullDate(item.created_at)}
-                style={{ color: "var(--article-muted)" }}
-              >
-                {formatRelativeTime(item.created_at)}
-              </p>
-
-              <p
-                className={`
-                  opacity-50 tracking-wide text-sky-500 text-center flex-1 px-4 whitespace-nowrap overflow-hidden text-ellipsis
-                  ${isCompact ? "text-[0.55rem]" : "text-[0.65rem]"}
-                `}
-              >
-                Részletes elemzés megtekintéséhez kattintson a kártyára
-              </p>
-
-              {item.category && (
-                <span className={`uppercase ${isCompact ? "text-[0.6rem]" : ""}`}>
-                  {item.category}
-                </span>
-              )}
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+export default function FeedItemCard({item}:{item:FeedItem;viewMode:"card"|"compact"}){
+ const router=useRouter(), title=typeof item.title==="string"&&item.title.trim()?item.title.trim():"Cím nélkül";
+ const summary=typeof item.content==="string"?item.content:"";
+ const open=()=>router.push(`/cikk/${item.id}`);
+ return <article className={styles.card} role="link" tabIndex={0} onClick={open} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();open();}}}>
+  <div className={styles.thumbnail} aria-hidden="true"><span>U</span><small>UTOM</small></div>
+  <div className={styles.body}>
+   <div className={styles.meta}><span className={styles.source} data-source={sourceKey(item.source_id)}>{sourceLabel(item)}</span><span>·</span><time dateTime={item.created_at} title={fullDate(item.created_at)}>{relative(item.created_at)}</time></div>
+   <h2>{title}</h2>
+   <div className={styles.summary}>{summary?<ReactMarkdown>{summary}</ReactMarkdown>:<p>Ehhez a hírhez még nem érhető el rövid összefoglaló.</p>}</div>
+   <footer><div className={styles.badges}>{item.category?.trim()&&!["ismeretlen","unknown"].includes(item.category.trim().toLocaleLowerCase("hu-HU"))?<span>{item.category}</span>:null}{item.ai_clean===1?<span>AI-összefoglaló</span>:null}</div><div className={styles.actions}><button type="button" onClick={event=>{event.stopPropagation();open();}}>Részletek</button>{item.url?.trim()?<a href={item.url} target="_blank" rel="noopener noreferrer" onClick={event=>event.stopPropagation()}>Eredeti cikk ↗</a>:null}</div></footer>
+  </div>
+ </article>;
 }

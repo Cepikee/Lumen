@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Header from "./Header";
 import CookieConsent from "./CookieConsent";
-import SidebarWrapper from "./SidebarWrapper";
 import { useUserStore } from "@/store/useUserStore";
 
 interface ClientLayoutProps {
@@ -26,16 +25,6 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   const isImpresszum = pathname.includes("impresszum");
   const isInsights = pathname.includes("insights");
   const isDns = pathname.includes("Dns");
-
-  const shouldShowSidebar =
-    pathname === "/" &&
-    !isLanding &&
-    !isPremium &&
-    !isAdatvedelmi &&
-    !isASZF &&
-    !isImpresszum &&
-    !isInsights &&
-    !isDns;
 
   // THEME
   const theme = useUserStore((s) => s.theme);
@@ -80,60 +69,6 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     };
   }, [theme, pathname]);
 
-  // ⭐⭐⭐ FILTER STATE — ZUSTAND + LOKÁLIS
-  const viewMode = useUserStore((s) => s.viewMode);
-  const setViewMode = useUserStore((s) => s.setViewMode);
-
-  const isTodayMode = useUserStore((s) => s.isTodayMode);
-  const setTodayMode = useUserStore((s) => s.setTodayMode);
-
-  const searchTerm = useUserStore((s) => s.searchTerm);
-  const setSearchTerm = useUserStore((s) => s.setSearchTerm);
-
-  const sourceFilters = useUserStore((s) => s.sourceFilters);
-  const setSourceFilters = useUserStore((s) => s.setSourceFilters);
-
-  const categoryFilters = useUserStore((s) => s.categoryFilters);
-  const setCategoryFilters = useUserStore((s) => s.setCategoryFilters);
-
-  // ⭐ Ezek NEM a store részei → maradnak lokális state-ben
-  const [availableSources, setAvailableSources] = useState<
-    { id: number; name: string }[]
-  >([]);
-
-  const [availableCategories] = useState<string[]>([
-    "Egészségügy",
-    "Gazdaság",
-    "Közélet",
-    "Kultúra",
-    "Oktatás",
-    "Politika",
-    "Sport",
-    "Tech",
-  ]);
-
-  // Források betöltése
-  useEffect(() => {
-    let mounted = true;
-    (async () => {
-      try {
-        const res = await fetch("/api/sources", {
-  cache: "no-store",
-});
-        if (!res.ok) throw new Error(`sources_http_${res.status}`);
-const data = await res.json();
-
-if (mounted && data?.success && Array.isArray(data.sources)) {
-  setAvailableSources(data.sources);
-}
-
-      } catch {}
-    })();
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
   // LANDING OLDAL
   if (isLanding) {
     return (
@@ -169,39 +104,11 @@ if (mounted && data?.success && Array.isArray(data.sources)) {
     <>
       <Header />
 
-      {shouldShowSidebar && (
-        <SidebarWrapper
-          onViewModeChange={setViewMode}
-          onTodayFilter={() => setTodayMode(true)}
-          onReset={() => {
-            setTodayMode(false);
-            setSourceFilters([]);
-            setCategoryFilters([]);
-          }}
-          onSourceFilterChange={setSourceFilters}
-          onCategoryFilterChange={setCategoryFilters}
-          activeFilterState={{
-            viewMode,
-            isTodayMode,
-            sourceFilters,
-            availableSources,
-            categoryFilters,
-            availableCategories,
-            searchTerm,
-            setSearchTerm,
-          }}
-        />
-      )}
-
       <main
-        className="flex-grow-1 overflow-auto p-3"
+        className="flex-grow-1 overflow-auto p-0"
         tabIndex={-1}
         onMouseDown={preventMainFocus}
-        style={{
-          maxWidth: "1280px",
-          margin: "0 auto",
-          width: "100%",
-        }}
+        style={{ width: "100%" }}
       >
         {children}
       </main>
