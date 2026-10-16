@@ -14,7 +14,7 @@ export async function fetchSnapshot(url: string): Promise<IntelligenceSnapshot> 
     data?.intelligence?.keywordStates, data?.intelligence?.coverage, data?.v2Events?.items];
   const objects = [data?.window, data?.filters, data?.counts, data?.processing,
     data?.sentimentChange, data?.quality?.summary, data?.quality?.sentiment,
-    data?.quality?.clickbait, data?.intelligence?.velocity, data?.intelligence?.diversity];
+    data?.quality?.clickbait, data?.quality?.category, data?.intelligence?.velocity, data?.intelligence?.diversity];
   if(data?.success!==true || data.contractVersion!=='insights-publication-v1'
     || arrays.some(value=>!Array.isArray(value))
     || objects.some(value=>!value || typeof value!=='object' || Array.isArray(value)))throw new Error('invalid_insights_snapshot');

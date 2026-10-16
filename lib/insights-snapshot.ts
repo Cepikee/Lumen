@@ -42,6 +42,9 @@ export async function getInsightsSnapshot(params: URLSearchParams) {
   const inputHash=createHash('sha256').update(JSON.stringify({window:snapshot.window,filters:snapshot.filters,counts:snapshot.counts,highlights:snapshot.highlights})).digest('hex');
   return { ...snapshot, evidence: detail(rows, options),
     explanation:{kind:'deterministic_observation',modelVersion:'changes-rules-v1',inputHash,generatedAt:snapshot.window.end,
-      text:`${snapshot.counts.current} publikált cikk a megfigyelt mintában, az előző időszakban ${snapshot.counts.previous}. Ez leíró összevetés, nem okmagyarázat.`,evidenceReferences:['window','counts','highlights'],providerCalls:0},
+      text:snapshot.counts.baselineAvailable
+        ? `${snapshot.counts.current} publikált hír a megfigyelt időszakban, az előző azonos hosszúságú időszakban ${snapshot.counts.previous}.`
+        : `${snapshot.counts.current} publikált hír a megfigyelt időszakban. Nincs elegendő korábbi adat az összehasonlításhoz.`,
+      evidenceReferences:['window','counts','highlights'],providerCalls:0},
     v2Events:await insightsEvents(select(rows,options),options.start,options.end)};
 }

@@ -17,9 +17,15 @@ test('drill-down and summary use identical category/source/keyword filters and h
  const o=options('category=GAZDASÁG&source=telex.hu&keyword=infláció');
  assert.equal(I.buildSnapshot(rows,o).counts.current,I.detail(rows,o).total);assert.equal(I.detail(rows,o).total,1);
 });
-test('zero baseline is new, low samples are not highlights, backlog is not publication growth',()=>{
- const rows=I.normalizeRows([row(1),row(2,{publishedAt:new Date(end-2*I.DAY).toISOString()})]);
- const s=I.buildSnapshot(rows,options());assert.equal(s.highlights.length,0);assert.equal(s.processing.olderPublished,1);assert.equal(s.counts.current,1);assert.equal(I.delta(10,0).percent,null);
+test('missing historical baseline is not treated as zero growth and backlog is not publication growth',()=>{
+ const rows=I.normalizeRows([row(1)]);
+ const s=I.buildSnapshot(rows,options());assert.equal(s.highlights.length,0);assert.equal(s.movers.rising.length,0);assert.equal(s.counts.baselineAvailable,false);assert.equal(s.processing.olderPublished,0);assert.equal(s.counts.current,1);assert.equal(I.delta(10,0).percent,null);
+});
+test('unknown categories remain coverage gaps and never become chart categories',()=>{
+ const rows=I.normalizeRows([row(1,{category:'ismeretlen'}),row(2,{category:' Gazdaság '})]);
+ const s=I.buildSnapshot(rows,options());
+ assert.equal(s.quality.category.analyzed,1);assert.equal(s.quality.category.missing,1);
+ assert.deepEqual(Array.from(s.views.overview.categories,category=>category.category),['gazdaság']);
 });
 test('empty quality is none, invalid numbers do not become observations',()=>{
  const s=I.buildSnapshot(I.normalizeRows([row(1,{sentiment:'NaN',clickbait:Infinity})]),options());assert.equal(s.quality.sentiment.state,'none');assert.equal(s.sentimentChange.percentagePoints,null);
@@ -38,7 +44,7 @@ test('emergence requires a real cluster and several sources, not shared keywords
  assert.equal(I.buildSnapshot(I.normalizeRows(raw.map(r=>({...r,clusterId:null}))),options()).intelligence.emerging.length,0);
 });
 test('top movers distinguish new and falling with actual previous source counts',()=>{
- const rows=I.normalizeRows(Array.from({length:12},(_,i)=>row(i+1,{source:i%2?'hvg':'telex'})));
+ const rows=I.normalizeRows([...Array.from({length:12},(_,i)=>row(i+1,{source:i%2?'hvg':'telex'})),row(99,{keywords:'más',publishedAt:new Date(end-50*3600000).toISOString()})]);
  const s=I.buildSnapshot(rows,options());assert.equal(s.movers.rising[0].isNew,true);assert.equal(s.highlights.length<=3,true);
  const old=I.normalizeRows(Array.from({length:12},(_,i)=>row(i+1,{source:i%2?'hvg':'telex',publishedAt:new Date(end-25*3600000).toISOString()})));
  assert.equal(I.buildSnapshot(old,options()).movers.falling[0].previous,12);

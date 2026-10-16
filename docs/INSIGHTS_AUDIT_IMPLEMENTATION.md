@@ -363,3 +363,58 @@ A teljes, korábbi körökből fennmaradó implementáció fájljai a CONTINUATI
 - Branch: `develop/utom-recovery`. Commit/push/deploy: **nem történt**.
 
 READY_FOR_COMMIT: YES
+
+## PRODUCTION_SCREENSHOT_DATA_QUALITY_GATE — 2026-10-16
+
+### DATA_PROVENANCE_RESULT
+
+The screenshot-observed 30-day values (271 published articles, 7 sources, 269 uncategorized articles, 2 sentiment measurements and the sparse clickbait sample) cannot be attributed to a specific production pipeline generation from repository state alone. Production access was not used. A guarded, read-only diagnostic was added at `scripts/diagnose-insights-provenance.cjs`. It refuses to connect unless `UTOM_READONLY_DIAGNOSTICS=true`, starts a read-only transaction, reports publication/ingestion and summary time ranges, sources, category gaps, sentiment/clickbait coverage and processing states, then rolls the transaction back. Therefore the provenance result is: **UNVERIFIED UNTIL THE READ-ONLY SCRIPT IS RUN AGAINST THE INTENDED ENVIRONMENT**.
+
+### CENTRAL QUALITY POLICY
+
+The canonical UI policy lives in `lib/insights-quality.ts`:
+
+| Metric | Minimum analyzed | Minimum coverage | Additional condition |
+|---|---:|---:|---|
+| Sentiment | 20 | 20% | at least 2 sources; timeline needs 3 measured points |
+| Clickbait overall | 20 | 20% | at least 2 sources |
+| Clickbait by source | 5 | 20% | evaluated per source |
+| Category | 20 | 20% | at least 2 sources; unknown/empty is a coverage gap |
+| Category sentiment | 10 | 20% | evaluated per category |
+| Trend | — | — | at least 3 buckets |
+| Keyword lifecycle | 10 mentions | — | insufficient states hidden |
+| Propagation | 2 articles | — | a single article is not propagation |
+
+When a gate is not met, the UI shows the analyzed/eligible coverage and a neutral “nincs elég adat” state. It does not publish a score, percentage, rank, trend or propagation conclusion.
+
+### MISLEADING_METRICS_FIXED
+
+- Sentiment KPI, donut and timeline are suppressed for a 2/271 sample.
+- A 1/1 clickbait sample is not promoted into a source ranking; sample coverage remains visible.
+- `ismeretlen`, empty, `unknown` and `n/a` are category quality gaps, not chart categories.
+- Missing prior history no longer becomes a zero baseline, “new” mover or growth claim.
+- Sparse category, trend and lifecycle panels display an honest coverage state.
+- A one-article cluster no longer appears as a propagation pattern.
+- V2 evidence controls and internal disable reasons are absent when V2 is disabled.
+
+### LAYOUT_CHANGES
+
+- Header owns period and global filters.
+- Summary and movers use an 8/4 information row.
+- Four KPIs precede a stable 3×2 analytics grid.
+- Category sorting is local to the category section.
+- Forecast is compact and follows category detail.
+
+### ADVANCED_INTELLIGENCE
+
+The advanced section has six mutually exclusive tabs: Hírciklus, Források, Clickbait, Kulcsszavak, Események and Lefedettség. Only the selected panel renders. Source information is compact, lifecycle lists are capped at ten qualified items, and propagation excludes one-article clusters.
+
+### V2_UI
+
+When `v2Events.enabled` is false, the V2 evidence interface is not rendered. No environment variable name or internal feature-flag reason is exposed to the user.
+
+### KNOWN_LIMITATIONS
+
+- Production provenance remains unverified until the guarded diagnostic is intentionally run against that environment.
+- Browser screenshot acceptance could not be repeated in this turn because the available browser-control transport stopped before it could determine the active URL. No visual PASS is claimed.
+- Thresholds protect presentation integrity; they do not repair missing upstream analyses.
