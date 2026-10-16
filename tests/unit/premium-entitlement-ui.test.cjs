@@ -18,7 +18,7 @@ let state = {user:null,loading:true};
 const Dashboard = load('components/InsightsDashboard.tsx', {
  'next/navigation': {}, swr: () => { throw Error('unexpected request'); },
  './InsightsCharts': {}, '@/store/useUserStore': {useUserStore: select => select(state)},
- '@/hooks/useInsightsSnapshot': {}, './InsightsIntelligence': {}, './InsightsSourceIntelligence': {},
+ '@/hooks/useInsightsSnapshot': {}, './InsightsIntelligence': {}, './InsightsAdvancedSections': {},
  '@/hooks/useForecast': {}, './InsightsEmptyState': {}, '@/components/UtomModal': {}, '@/lib/insights-dashboard': {},
 }).default;
 assert.match(render(Dashboard), /Profil betöltése/);

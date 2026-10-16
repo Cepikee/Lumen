@@ -19,7 +19,7 @@ for (const [name, field] of cases) {
  for (const period of ['24h','7d','30d','90d']) {
   result = {data:{success:true,[field]:[]},isLoading:false};
   const html = render(Component,{period});
-  assert.match(html, name.includes('SpeedIndex') ? /Nincs elérhető Speed Index adat/ : /Nincs megjeleníthető adat/);
+  assert.match(html, name.includes('SpeedIndex') ? /Nincs elérhető Speed Index adat/ : /Nincs elég adat/);
   if (!name.includes('SpeedIndex')) {
    assert.ok(request.endsWith(`period=${period}`));
    assert.ok(html.includes(period === '24h' ? '24 órából' : `${parseInt(period)} napból`));
@@ -29,7 +29,7 @@ for (const [name, field] of cases) {
  assert.match(render(Component), /Betöltés/);
  result = {error:new Error('HTTP 503'),data:{success:true,[field]:[]},isLoading:false};
  assert.match(render(Component), /Hiba|Nem sikerült/);
- assert.doesNotMatch(render(Component), /Nincs megjeleníthető|Nincs elérhető/);
+ assert.doesNotMatch(render(Component), /Nincs elég adat|Nincs elérhető/);
  result = {data:{success:false},isLoading:false};
  assert.match(render(Component), /Hiba|Nem sikerült/);
 }

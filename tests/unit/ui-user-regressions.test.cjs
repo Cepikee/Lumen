@@ -69,7 +69,8 @@ test("insights 24h empty state and clickbait window are enforced", () => {
     /created_at\s*>=\s*\?\s*AND\s*created_at\s*<\s*\?/
   );
 
-  assert.match(empty, /Nincs megjeleníthető adat/);
+  assert.match(empty, /Nincs elég adat/);
+  assert.match(empty, /további feldolgozott hír szükséges/);
 });
 
 test("premium redesign and original prices remain intact", () => {

@@ -22,18 +22,30 @@ export default function InsightsIntelligence({data,error,loading}:{data?:Intelli
     if(field&&value)q.set(field,value);
     setEvidence(`/api/premium-insights/intelligence?${q}`);
   }
-  if(loading)return <p role="status">Összehasonlítható adatok betöltése…</p>;
-  if(error||!data)return <p role="alert">Az elemzés nem érhető el. A hiányzó adat nem jelent nulla aktivitást.</p>;
+  if(loading)return <div className={styles.summarySkeleton} role="status" aria-label="Összefoglaló betöltése" />;
+  if(error||!data)return <section className={`${styles.card} ${styles.heroSummary}`}><p role="alert" className={styles.empty}>Az összefoglaló jelenleg nem érhető el.</p></section>;
   const change=(m:{absolute:number;percent:number|null;isNew:boolean})=>m.isNew?'Új':`${m.absolute>0?'+':''}${m.absolute} cikk (${m.percent===null?'nincs előzmény':m.percent.toFixed(0)+'%'})`;
-  return <section className={styles.intelligence}>
-    <div className={styles.card}><h2>Mi változott?</h2><p className={styles.caption}>Publikálás alapján · Budapest · {date(data.window.start)} – {date(data.window.end)} · az előző azonos hosszúságú időszakhoz képest</p>
-      <div className={styles.filterRow}><label>Kategória <input aria-label="Kategóriaszűrő" defaultValue={search.get('category')||''} key={'c'+search.get('category')} onBlur={e=>filter('category',e.target.value.trim())} placeholder="pl. Gazdaság" /></label><label>Forrás <input aria-label="Forrásszűrő" defaultValue={search.get('source')||''} key={'s'+search.get('source')} onBlur={e=>filter('source',e.target.value.trim())} placeholder="pl. telex.hu" /></label>{Object.entries(data.filters).map(([k,v])=><button key={k} onClick={()=>filter(k,'')}>{String(v)} ×</button>)}</div>
-      {data.highlights.length ? <ul>{data.highlights.map(h=><li key={h.type+h.name}><button onClick={()=>inspect(h.type,h.name)}>{h.name}: {change(h)}</button> · {h.previous} → {h.current} cikk · {h.sources} forrás</li>)}</ul>:<p>Nincs megfelelő mintával alátámasztott kiemelkedő változás.</p>}
-      {data.sentimentChange.percentagePoints!==null && <p>Negatív hangulat: {data.sentimentChange.percentagePoints.toFixed(1)} százalékpont változás · {data.sentimentChange.previousSample} → {data.sentimentChange.currentSample} elemzett cikk</p>}
-      <Quality value={data.quality.summary}/><button onClick={()=>inspect()}>A {data.counts.current} cikk és a számítás megtekintése</button>
-      <p className={styles.caption}>Publikált: {data.processing.published} · feldolgozott: {data.processing.processed} · ebből korábban publikált: {data.processing.olderPublished}. A feldolgozási hullám nem hírfelfutás. A feldolgozási minta legfeljebb 180 napja megjelent cikkekre terjed ki.</p>
+  const lead=data.explanation.text || (data.highlights[0] ? `${data.highlights[0].name}: ${change(data.highlights[0])}.` : 'Nem látható kiugró változás a kiválasztott időszakban.');
+  return <section className={styles.summaryStack} aria-label="Időszakos összefoglaló">
+    <div className={`${styles.card} ${styles.heroSummary}`}>
+      <div className={styles.summaryHeading}><div><span className={styles.eyebrow}>IDŐSZAKOS ÖSSZKÉP</span><h2>Mi változott?</h2></div><span className={styles.scope}>{data.window.period}</span></div>
+      <p className={styles.heroLead}>{lead}</p>
+      <div className={styles.heroMeta}>
+        <span><strong>{data.counts.current}</strong> publikált hír</span>
+        <span><strong>{data.highlights.length}</strong> kiemelt változás</span>
+        {data.sentimentChange.percentagePoints!==null&&<span><strong>{data.sentimentChange.percentagePoints>0?'+':''}{data.sentimentChange.percentagePoints.toFixed(1)} pp</strong> negatív hangulat</span>}
+      </div>
+      <details className={styles.summaryDetails}><summary>Szűrés és mérési részletek</summary>
+        <div className={styles.filterRow}><label>Kategória <input aria-label="Kategóriaszűrő" defaultValue={search.get('category')||''} key={'c'+search.get('category')} onBlur={e=>filter('category',e.target.value.trim())} placeholder="pl. Gazdaság" /></label><label>Forrás <input aria-label="Forrásszűrő" defaultValue={search.get('source')||''} key={'s'+search.get('source')} onBlur={e=>filter('source',e.target.value.trim())} placeholder="pl. telex.hu" /></label>{Object.entries(data.filters).map(([k,v])=><button key={k} onClick={()=>filter(k,'')}>{String(v)} ×</button>)}</div>
+        <p className={styles.caption}>Publikálás alapján · Budapest · {date(data.window.start)} – {date(data.window.end)} · az előző azonos hosszúságú időszakhoz képest</p>
+        <Quality value={data.quality.summary}/><button onClick={()=>inspect()}>A {data.counts.current} cikk és a számítás megtekintése</button>
+        <p className={styles.caption}>Publikált: {data.processing.published} · feldolgozott: {data.processing.processed} · ebből korábban publikált: {data.processing.olderPublished}. A feldolgozási hullám nem hírfelfutás.</p>
+      </details>
     </div>
-    <div className={styles.detailsGrid}>{(['rising','falling'] as const).map(direction=><div className={styles.card} key={direction}><h2>{direction==='rising'?'Növekvő':'Visszaeső'} kulcsszavak</h2>{data.movers[direction].length?<ul>{data.movers[direction].slice(0,8).map(m=><li key={m.name}><button onClick={()=>inspect('keyword',m.name,direction==='falling'?'previous':'current')}>{m.name}</button> · {m.previous} → {m.current} · {change(m)} · {m.sources} jelenlegi forrás</li>)}</ul>:<p>Nincs megfelelő mintájú változás.</p>}</div>)}</div>
+    <div className={styles.moversGrid}>{(['rising','falling'] as const).map(direction=><div className={`${styles.card} ${styles.moverCard}`} key={direction}>
+      <div className={styles.moverTitle}><span aria-hidden="true">{direction==='rising'?'↗':'↘'}</span><h2>{direction==='rising'?'Növekvő':'Visszaeső'} kulcsszavak</h2></div>
+      {data.movers[direction].length?<div className={styles.moverList}>{data.movers[direction].slice(0,5).map(m=><button key={m.name} onClick={()=>inspect('keyword',m.name,direction==='falling'?'previous':'current')}><span>{m.name}</span><strong>{m.previous} → {m.current}</strong><small>{change(m)}</small></button>)}</div>:<p className={styles.compactEmpty}>Még nincs megjeleníthető trend.</p>}
+    </div>)}</div>
     <UtomModal show={!!evidence} onClose={()=>setEvidence(null)} title="A mérés mögötti cikkek">
       {details.isLoading?<p>Betöltés…</p>:details.error?<p role="alert">A bizonyítéklista nem érhető el.</p>:details.data&&<>
         <p>{date(new URL(evidence!,'http://local').searchParams.get('phase')==='previous'?details.data.window.previousStart:details.data.window.start)} – {date(new URL(evidence!,'http://local').searchParams.get('phase')==='previous'?details.data.window.start:details.data.window.end)} · publikálási idő · {new URL(evidence!,'http://local').searchParams.get('phase')==='previous'?'Előző időszak (a kezdőpont előtti azonos hosszúságú ablak)':'Jelenlegi időszak'}</p>

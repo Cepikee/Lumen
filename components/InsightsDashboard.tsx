@@ -7,7 +7,7 @@ import { CategoryTrendChart, ClickbaitChart, SentimentDonut, ActivityHeatmap, Ca
 import { useUserStore } from "@/store/useUserStore";
 import { useInsightsSnapshot } from "@/hooks/useInsightsSnapshot";
 import InsightsIntelligence, { Quality } from "./InsightsIntelligence";
-import InsightsSourceIntelligence from "./InsightsSourceIntelligence";
+import InsightsAdvancedSections from "./InsightsAdvancedSections";
 
 import { useForecast } from "@/hooks/useForecast";
 import InsightsEmptyState from "./InsightsEmptyState";
@@ -19,7 +19,7 @@ import UtomModal from "@/components/UtomModal";
 
 
 
-import { rows, count, sentimentCounts, activityRows, clickbaitRows, categorySeries, categorySentiments, sentimentSeries, forecastPoints, timeLabel, timestamp } from "@/lib/insights-dashboard";
+import { rows, count, sentimentCounts, clickbaitRows, categorySeries, categorySentiments, sentimentSeries, forecastPoints, timeLabel } from "@/lib/insights-dashboard";
 import styles from "./InsightsDashboard.module.css";
 
 type Period = "24h" | "7d" | "30d" | "90d";
@@ -62,7 +62,6 @@ async function fetcher(url: string) {
   if (path.endsWith("/by-category") && (!value.categories || typeof value.categories !== "object" || Array.isArray(value.categories))) throw new Error("invalid_insights_response");
   return value;
 }
-function useMetric(path: string) { return useSWR(`/api/premium-insights/${path}`, fetcher, { keepPreviousData: false, revalidateOnFocus: false, dedupingInterval: 60000 }); }
 function Glyph({ kind = 0 }: { kind?: number }) {
   const paths = ["M4 18l5-12 6 10 5-13M15 3h5v5", "M5 3h11l3 3v15H5zM8 8h6M8 12h8M8 16h5", "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M17 4a4 4 0 0 1 0 7M22 21v-2a4 4 0 0 0-3-4", "M3 3h8l10 10-8 8L3 11zM7 7h.01", "M8 14s1 3 4 3 4-3 4-3M8 9h.01M16 9h.01M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0"];
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={paths[kind % paths.length]} /></svg>;
@@ -158,7 +157,6 @@ function DashboardContent() {
   const forecastStatus = useSWR("/api/forecast-status", fetcher, { refreshInterval: 10000, revalidateOnFocus: false });
   const forecastState = forecast.error || forecastStatus.error || forecastStatus.data?.status === "error" ? "error"
     : forecastStatus.data?.status === "running" ? "running" : forecasts.length ? "ready" : "empty";
-  const forecastLabel = { error: "Az előrejelzés jelenleg nem elérhető.", running: "Elemzés folyamatban", ready: "Előrejelzés elkészült", empty: "Még nincs elkészült előrejelzés" }[forecastState];
   const realSentimentMood = moodFromSentiment(sentimentData.average);
   const sentimentMood = SENTIMENT_FACE_TEST_MODE ? testMood : realSentimentMood;
   const sentimentMoodColor = sentimentMood === "positive" ? "#21d99b"
@@ -187,19 +185,6 @@ function DashboardContent() {
           <div><h2>{k.title}</h2><strong>{k.loading ? "…" : k.value}</strong><p>{k.error ? "Az adat jelenleg nem elérhető." : k.note}</p></div>
         </section>;
       })}
-      <Card title="Mit mutat a megfigyelt hírminta?" scope={period} className={styles.today}>
-        <p>{snapshot.data?.explanation.text || "Nincs elérhető mérés."}</p><p className={styles.caption}>Publikálási idő szerinti megfigyelés. A forrás és kategória szűrése az összes analitikai modulra érvényes.</p>
-      </Card>
-      <Card title="Aktivitás-előrejelzés" scope="Statisztikai baseline" info="Azonos budapesti napszak korábbi aktivitásának mediánja. Ez statisztikai előrejelzés, nem LLM-magyarázat. A sáv korábbi visszamérési hibákból származik; nem AI-bizonyosság." className={styles.forecast}>
-        {searchParams.has('source')||searchParams.has('keyword')||searchParams.has('cluster') ? <p>Ehhez a szűréshez nincs előrejelzési modell. A szűrőt nem hagyjuk figyelmen kívül.</p> : <>
-          <p role="status">{forecast.isLoading?'Előrejelzés betöltése…':forecast.error?'Az előrejelzés nem elérhető.':forecast.data?.freshness==='expired'?'Az utolsó sikeres előrejelzés lejárt.':forecasts.length?'Elmentett statisztikai előrejelzés':'Nincs elegendő adat vagy sikeres futás.'}</p>
-          {!forecast.error && forecasts.slice(0,6).map((p,i)=><p key={i}>{p.category} · {timeLabel(p.time,'24h',true)} kezdetű órára {p.predicted.toLocaleString('hu-HU',{maximumFractionDigits:1})} cikk.</p>)}
-          {forecast.data?.generatedAt && <p className={styles.caption}>Elkészült: {new Date(forecast.data.generatedAt).toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})} · Érvényes: {new Date(forecast.data.validUntil).toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})}</p>}
-          <p className={styles.caption}>Legutóbbi futás: {forecastStatus.data?.status||'nem ismert'}. Csak teljesen sikeres futás válik aktuálissá.</p>
-          {forecast.data?.backtest && <p className={styles.caption}>Valós utólagos visszamérés: {forecast.data.backtest.samples} pont · átlagos abszolút hiba: {forecast.data.backtest.mae===null?'még nincs':Number(forecast.data.backtest.mae).toFixed(2)+' cikk'}</p>}
-          <details><summary>Becslési sávok és módszer</summary><p>A történeti 90. percentilis abszolút hibából számított sáv, legalább 30 visszamérési ponttal. Nem kalibrált eseményvalószínűség. Korábbi LLM-futással órás összevetés nem áll rendelkezésre; a legacy DATE tárolás nem őrizte meg az órát.</p>{Object.entries(forecast.data?.forecast||{}).flatMap(([category,points])=>Array.isArray(points)?points.map((p:any,i:number)=><p key={category+i}>{category} · {new Date(p.date).toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})} · {p.lower==null?'Nincs elegendő sávbecslési minta':`${p.lower}–${p.upper} cikk`} · {p.calibrationSamples} történeti pont</p>):[])}</details>
-        </>}
-      </Card>
       <Card title="Kategória trendek" scope={period} info="Megmutatja, hogyan változott a legaktívabb hírtémák aktivitása a kiválasztott időszakban. A magasabb érték azt jelenti, hogy az adott kategóriában több feldolgozott hír jelent meg." className={styles.third}><State loading={series.loading} error={series.error} hasData={chart.points.length>0} period={period}><CategoryTrendChart chart={chart} period={period} onCategory={value=>crossFilter("category",value)} /></State></Card>
       <Card title="Források átlagos clickbait pontszáma" scope={period} info="Az UTOM minden elemzett cikkhez 0–100 közötti clickbait pontszámot rendel. A grafikon forrásonként ezek átlagát mutatja; a magasabb érték erősebb figyelemfelkeltő címadást jelez. Ez nem minőségi rangsor." className={styles.third}><State loading={clickbait.isLoading} error={clickbait.error} hasData={clickbaitData.length>0} period={period}><ClickbaitChart data={clickbaitData} onSource={value=>crossFilter("source",value)} />{snapshot.data && <Quality value={snapshot.data.quality.clickbait} />}</State></Card>
       <Card title="Hangulatelemzés" scope={period} info="Az elemzett híreket az UTOM pozitív, semleges vagy negatív hangulatba sorolja. Az átlagos hangulat −1 és +1 közötti érték: −1 negatív, 0 semleges, +1 pozitív." className={styles.third}><State loading={sentiment.isLoading} error={sentiment.error} hasData={sentimentData.total>0} period={period}><SentimentDonut data={sentimentData} />{snapshot.data && <Quality value={snapshot.data.quality.sentiment} />}</State></Card>
@@ -218,7 +203,19 @@ function DashboardContent() {
         })}</div>
       </State>
     </section>
-    {snapshot.data && !snapshot.error && <PanelBoundary key={'sources'+searchParams.toString()+snapshot.data.window.end}><InsightsSourceIntelligence data={snapshot.data} /></PanelBoundary>}
+    <section className={styles.forecastSection} aria-labelledby="forecast-title">
+      <Card title="Aktivitás-előrejelzés" scope="Statisztikai baseline" info="Azonos budapesti napszak korábbi aktivitásának mediánja. Ez statisztikai előrejelzés, nem LLM-magyarázat. A sáv korábbi visszamérési hibákból származik; nem AI-bizonyosság." className={styles.forecast}>
+        <div className={styles.forecastContent}><span className={styles.orb} data-state={forecastState} aria-hidden="true"/><div>
+          {searchParams.has('source')||searchParams.has('keyword')||searchParams.has('cluster') ? <p>Ehhez a szűréshez nincs előrejelzési modell.</p> : <>
+            <strong>{forecast.isLoading?'Előrejelzés betöltése…':forecast.error?'Az előrejelzés nem elérhető.':forecast.data?.freshness==='expired'?'Az utolsó előrejelzés lejárt.':forecasts.length?'Következő aktivitási ablak':'Még nincs elkészült előrejelzés.'}</strong>
+            {!forecast.error && forecasts.slice(0,3).map((p,i)=><p key={i}>{p.category} · {timeLabel(p.time,'24h',true)} · {p.predicted.toLocaleString('hu-HU',{maximumFractionDigits:1})} cikk</p>)}
+            {forecast.data?.generatedAt && <p className={styles.caption}>Frissítve: {new Date(forecast.data.generatedAt).toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})}</p>}
+            <details><summary>Részletes módszer és becslési sávok</summary><p>Legutóbbi futás: {forecastStatus.data?.status||'nem ismert'}. Csak teljesen sikeres futás válik aktuálissá.</p>{forecast.data?.backtest&&<p>{forecast.data.backtest.samples} visszamérési pont · átlagos abszolút hiba: {forecast.data.backtest.mae===null?'még nincs':Number(forecast.data.backtest.mae).toFixed(2)+' cikk'}</p>}<p>A sáv a történeti 90. percentilis abszolút hibából készül legalább 30 visszamérési ponttal; nem eseményvalószínűség.</p>{Object.entries(forecast.data?.forecast||{}).flatMap(([category,points])=>Array.isArray(points)?points.map((p:any,i:number)=><p key={category+i}>{category} · {new Date(p.date).toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})} · {p.lower==null?'Nincs elegendő sávbecslési minta':`${p.lower}–${p.upper} cikk`} · {p.calibrationSamples} történeti pont</p>):[])}</details>
+          </>}
+        </div></div>
+      </Card>
+    </section>
+    {snapshot.data && !snapshot.error && <PanelBoundary key={'sources'+searchParams.toString()+snapshot.data.window.end}><InsightsAdvancedSections data={snapshot.data} /></PanelBoundary>}
   </div></div>;
 }
 

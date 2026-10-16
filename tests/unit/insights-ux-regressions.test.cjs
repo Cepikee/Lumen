@@ -40,6 +40,6 @@ test('information icons open explanations and forecast empty state is understand
   const dashboard = read('components/InsightsDashboard.tsx');
   assert.match(dashboard, /onClick=\{\(\) => setOpenInfo\(true\)\}/);
   assert.match(dashboard, /title=\{`\$\{title\} – mit mutat\?`\}/);
-  assert.match(dashboard, /Nincs elegendő adat vagy sikeres futás/);
+  assert.match(dashboard, /Még nincs elkészült előrejelzés/);
   assert.match(dashboard, /Statisztikai baseline/);
 });
