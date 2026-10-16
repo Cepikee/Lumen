@@ -1,0 +1,295 @@
+{
+  "version": "8.0.46-0ubuntu0.24.04.4",
+  "plans": [
+    {
+      "scope": "all periods and filters use shared 180-day snapshot",
+      "plan": [
+        {
+          "id": 1,
+          "select_type": "PRIMARY",
+          "table": "a",
+          "partitions": null,
+          "type": "ALL",
+          "possible_keys": "idx_articles_published",
+          "key": null,
+          "key_len": null,
+          "ref": null,
+          "rows": 840,
+          "filtered": 100,
+          "Extra": "Using where; Using filesort"
+        },
+        {
+          "id": 1,
+          "select_type": "PRIMARY",
+          "table": "c",
+          "partitions": null,
+          "type": "eq_ref",
+          "possible_keys": "PRIMARY",
+          "key": "PRIMARY",
+          "key_len": "8",
+          "ref": "utom_insights_20261015_test.a.cluster_id",
+          "rows": 1,
+          "filtered": 100,
+          "Extra": null
+        },
+        {
+          "id": 1,
+          "select_type": "PRIMARY",
+          "table": "s",
+          "partitions": null,
+          "type": "eq_ref",
+          "possible_keys": "PRIMARY",
+          "key": "PRIMARY",
+          "key_len": "8",
+          "ref": "func",
+          "rows": 1,
+          "filtered": 100,
+          "Extra": "Using where"
+        },
+        {
+          "id": 2,
+          "select_type": "DEPENDENT SUBQUERY",
+          "table": "s2",
+          "partitions": null,
+          "type": "eq_ref",
+          "possible_keys": "uq_summaries_article_id,idx_summaries_created",
+          "key": "uq_summaries_article_id",
+          "key_len": "9",
+          "ref": "utom_insights_20261015_test.a.id",
+          "rows": 1,
+          "filtered": 100,
+          "Extra": "Using where"
+        }
+      ],
+      "latencyMs": 8.609999999998763
+    },
+    {
+      "scope": "forecast history",
+      "plan": [
+        {
+          "id": 1,
+          "select_type": "SIMPLE",
+          "table": "articles",
+          "partitions": null,
+          "type": "ALL",
+          "possible_keys": "idx_articles_published",
+          "key": null,
+          "key_len": null,
+          "ref": null,
+          "rows": 840,
+          "filtered": 100,
+          "Extra": "Using where; Using temporary; Using filesort"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "articles": 840,
+    "members": 0,
+    "percent": 0,
+    "fixture": true
+  },
+  "schema": [
+    {
+      "TABLE_NAME": "insights_forecast_points",
+      "COLUMN_NAME": "run_id",
+      "DATA_TYPE": "bigint"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_points",
+      "COLUMN_NAME": "category",
+      "DATA_TYPE": "varchar"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_points",
+      "COLUMN_NAME": "target_at",
+      "DATA_TYPE": "datetime"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_points",
+      "COLUMN_NAME": "predicted",
+      "DATA_TYPE": "double"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_points",
+      "COLUMN_NAME": "lower_bound",
+      "DATA_TYPE": "double"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_points",
+      "COLUMN_NAME": "upper_bound",
+      "DATA_TYPE": "double"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_points",
+      "COLUMN_NAME": "calibration_samples",
+      "DATA_TYPE": "int"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_points",
+      "COLUMN_NAME": "actual",
+      "DATA_TYPE": "double"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_points",
+      "COLUMN_NAME": "absolute_error",
+      "DATA_TYPE": "double"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_points",
+      "COLUMN_NAME": "evaluated_at",
+      "DATA_TYPE": "datetime"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_runs",
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "bigint"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_runs",
+      "COLUMN_NAME": "model_version",
+      "DATA_TYPE": "varchar"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_runs",
+      "COLUMN_NAME": "status",
+      "DATA_TYPE": "varchar"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_runs",
+      "COLUMN_NAME": "generated_at",
+      "DATA_TYPE": "datetime"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_runs",
+      "COLUMN_NAME": "valid_until",
+      "DATA_TYPE": "datetime"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_runs",
+      "COLUMN_NAME": "finished_at",
+      "DATA_TYPE": "datetime"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_runs",
+      "COLUMN_NAME": "expected_categories",
+      "DATA_TYPE": "int"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_runs",
+      "COLUMN_NAME": "completed_categories",
+      "DATA_TYPE": "int"
+    },
+    {
+      "TABLE_NAME": "insights_forecast_runs",
+      "COLUMN_NAME": "error_code",
+      "DATA_TYPE": "varchar"
+    }
+  ],
+  "indexes": [
+    {
+      "Table": "insights_forecast_points",
+      "Non_unique": 0,
+      "Key_name": "PRIMARY",
+      "Seq_in_index": 1,
+      "Column_name": "run_id",
+      "Collation": "A",
+      "Cardinality": 0,
+      "Sub_part": null,
+      "Packed": null,
+      "Null": "",
+      "Index_type": "BTREE",
+      "Comment": "",
+      "Index_comment": "",
+      "Visible": "YES",
+      "Expression": null
+    },
+    {
+      "Table": "insights_forecast_points",
+      "Non_unique": 0,
+      "Key_name": "PRIMARY",
+      "Seq_in_index": 2,
+      "Column_name": "category",
+      "Collation": "A",
+      "Cardinality": 0,
+      "Sub_part": null,
+      "Packed": null,
+      "Null": "",
+      "Index_type": "BTREE",
+      "Comment": "",
+      "Index_comment": "",
+      "Visible": "YES",
+      "Expression": null
+    },
+    {
+      "Table": "insights_forecast_points",
+      "Non_unique": 0,
+      "Key_name": "PRIMARY",
+      "Seq_in_index": 3,
+      "Column_name": "target_at",
+      "Collation": "A",
+      "Cardinality": 0,
+      "Sub_part": null,
+      "Packed": null,
+      "Null": "",
+      "Index_type": "BTREE",
+      "Comment": "",
+      "Index_comment": "",
+      "Visible": "YES",
+      "Expression": null
+    }
+  ],
+  "forecast": {
+    "run": {
+      "id": 1,
+      "status": "succeeded",
+      "completed": 1,
+      "expected": 1,
+      "evaluationStatus": "succeeded"
+    },
+    "points": [
+      {
+        "date": "2026-10-16T08:00:00.000Z",
+        "predicted": 1,
+        "lower": 1,
+        "upper": 1,
+        "calibrationSamples": 168
+      },
+      {
+        "date": "2026-10-16T09:00:00.000Z",
+        "predicted": 1,
+        "lower": 1,
+        "upper": 1,
+        "calibrationSamples": 168
+      },
+      {
+        "date": "2026-10-16T10:00:00.000Z",
+        "predicted": 1,
+        "lower": 1,
+        "upper": 1,
+        "calibrationSamples": 168
+      },
+      {
+        "date": "2026-10-16T11:00:00.000Z",
+        "predicted": 1,
+        "lower": 1,
+        "upper": 1,
+        "calibrationSamples": 168
+      },
+      {
+        "date": "2026-10-16T12:00:00.000Z",
+        "predicted": 1,
+        "lower": 1,
+        "upper": 1,
+        "calibrationSamples": 168
+      },
+      {
+        "date": "2026-10-16T13:00:00.000Z",
+        "predicted": 1,
+        "lower": 1,
+        "upper": 1,
+        "calibrationSamples": 168
+      }
+    ]
+  }
+}

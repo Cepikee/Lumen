@@ -38,7 +38,10 @@ test("Premium page describes implemented value and keeps provider actions disabl
   assert.match(premiumPage, /Előzmények és idővonal/);
   assert.match(premiumPage, /Források összehasonlítása/);
   assert.match(premiumPage, /Közös és eltérő állítások/);
-  assert.match(premiumPage, /disabled aria-disabled="true"/);
+  const { load, nodes } = require('../helpers/render-ui.cjs');
+  const buttons = nodes(load('app/premium/page.tsx').default()).filter(n => n.type === 'button');
+  assert.equal(buttons.length, 4);
+  assert.ok(buttons.every(n => n.props.disabled === true && !n.props.onClick));
   for (const unsupported of ["Fake Detektor", "Prémium Chat Szoba", "Közösségi Vélemény", "Forrás DNS"]) {
     assert.doesNotMatch(premiumPage, new RegExp(unsupported));
   }

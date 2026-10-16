@@ -1,10 +1,6 @@
-const assert = require('node:assert/strict');
-const fs = require('node:fs');
-
-const source = fs.readFileSync('app/api/forecast-status/route.ts', 'utf8');
-
-assert.match(source, /new Date\(row\.finished_at\)/);
-assert.match(source, /Number\.isNaN\(lastRun\.getTime\(\)\)/);
-assert.match(source, /status: "unknown"[\s\S]*lastRun: null[\s\S]*nextRun: null/);
-
-console.log('forecast invalid timestamp regression: PASS');
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const load=require('../helpers/insights-loader.cjs');
+test('invalid run timestamps never create invalid JSON dates',async()=>{
+ const route=load('app/api/forecast-status/route.ts',{'@/lib/db':{db:{query:async()=>[[{status:'partial',finished_at:'broken'}]]}}});
+ const r=await route.GET();assert.equal(r.body.status,'partial');assert.equal(r.body.lastRun,null);assert.equal(r.body.nextRun,null);
+});

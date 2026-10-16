@@ -6,25 +6,25 @@ function buildForecastPrompt(category, points, futureHours, startHourIso) {
   return `
 KATEGÓRIA: ${category}
 
-AZ ELMÚLT 7 NAP ÓRÁS ADATAI (CET):
+A MEGADOTT IDŐABLAK ÓRÁS ADATAI (UTC):
 ${history}
 
 FELADAT:
 A fenti idősor alapján készíts előrejelzést a következő ${futureHours} órára.
-Az első előrejelzett időpont: ${startHourIso} (CET).
+Az első előrejelzett időpont: ${startHourIso} (UTC).
 
 SZABÁLYOK, AMIKET KÖTELEZŐ BETARTANI:
 
 1) IDŐZÓNA
-- minden dátum KÖZÉP-EURÓPAI IDŐ (CET)
+- minden dátum UTC (UTC)
 - ne módosítsd az időzónát
 - pontosan a megadott időponttól indulj
 
 2) MINTÁZATKÖVETÉS
-- az előrejelzésnek követnie kell az elmúlt 7 nap órás mintázatát
-- ha egy adott órában az elmúlt 7 napból legalább 6 napon 0 volt a cikkek száma,
+- az előrejelzésnek követnie kell a megadott történeti ablak órás mintázatát
+- ha egy adott órában a megadott történeti ablakból legalább 6 korábbi napon 0 volt a cikkek száma,
   akkor az előrejelzésben is 0-t adj meg arra az órára
-- ha egy adott órában az elmúlt 7 nap átlaga 0.5 alatt van, akkor kerekíts 0-ra
+- ha egy adott órában a megadott történeti ablak átlaga 0.5 alatt van, akkor kerekíts 0-ra
 - ne találj ki aktivitást olyan órákra, ahol a múltban tartósan nem volt aktivitás
 
 3) REALIZMUS

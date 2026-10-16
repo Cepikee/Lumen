@@ -20,8 +20,9 @@ assert.match(spikes, /a\.type\.localeCompare\(b\.type\)/);
 
 // Reject unsafe pagination values before they can produce an infinite OFFSET,
 // and malformed DB timestamps must not turn a valid response into HTTP 500.
-assert.match(category, /Number\.isSafeInteger\(requestedPage\)/);
-assert.match(category, /Number\.isSafeInteger\(requestedLimit\)/);
-assert.match(category, /Number\.isNaN\(date\.getTime\(\)\) \? null/);
+const core=read('lib/insights-intelligence.js');
+assert.match(core, /Number\.isSafeInteger\(page\)/);
+assert.match(category, /Number\.isSafeInteger\(limit\)/);
+assert.match(core, /published===null/);
 
 console.log('remaining insights API contract regression: PASS');

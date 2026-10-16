@@ -47,10 +47,9 @@ test('keyword total is not silently capped by the top 20 list',async()=>{
  const r=await route.GET({url:'http://localhost/api?period=7d'});
  assert.equal(r.body.total,25); assert.equal(r.body.keywords.length,20);
 });
-test('forecast missing prediction is not a zero prediction',async()=>{
- const route=load('app/api/insights/forecast/route.ts',async()=>[[{category:'Sport',date:'2026-10-26',predicted:null},{category:'Sport',date:'2026-10-27',predicted:0}]]);
- const r=await route.GET({url:'http://localhost/api'});
- assert.equal(r.body.forecast.Sport.length,1);assert.equal(r.body.forecast.Sport[0].predicted,0);
+test('forecast route refuses unsupported source filter before querying',async()=>{
+ const route=require('../helpers/insights-loader.cjs')('app/api/insights/forecast/route.ts',{'@/lib/db':{db:{}},'@/forecast/snapshot-repository':{read:async()=>{throw Error('must not query');}}});
+ const r=await route.GET({url:'http://localhost/api?source=telex.hu'});assert.equal(r.status,400);
 });
 test('Speed Index missing delay stays unknown',async()=>{
  const route=load('app/api/insights/speedindex/leaderboard/route.ts',async sql=>sql.includes('FROM speed_index_history')?[[]]:[[{source:'example.hu',avgDelay:null,medianDelay:'',updatedAt:null}]]);

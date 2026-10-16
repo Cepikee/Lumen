@@ -1,7 +1,11 @@
 import useSWR from "swr";
+import {useSearchParams} from "next/navigation";
 
 export function useForecast() {
-  return useSWR("/api/premium-insights/forecast", (url) =>
+  const search=useSearchParams();
+  const category=search.get("category");
+  const key=search.has("source")||search.has("keyword")||search.has("cluster")?null:`/api/premium-insights/forecast${category?"?category="+encodeURIComponent(category):""}`;
+  return useSWR(key, (url) =>
     fetch(url, {
       cache: "no-store",
       headers: {

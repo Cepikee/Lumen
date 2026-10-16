@@ -10,7 +10,7 @@ const tipItem = { color: "#eef6ff" };
 const tick = { fill: "#a8c1dc", fontSize: 10 };
 type Series = ReturnType<typeof categorySeries>;
 
-export function CategoryTrendChart({ chart, period }: { chart: Series; period: string }) {
+export function CategoryTrendChart({ chart, period, onCategory }: { chart: Series; period: string; onCategory?: (category:string)=>void }) {
   return <>
     <div className={styles.chart}><ResponsiveContainer width="100%" height="100%">
       <LineChart data={chart.points}>
@@ -21,12 +21,12 @@ export function CategoryTrendChart({ chart, period }: { chart: Series; period: s
         {chart.categories.map((c, i) => <Line key={c} dataKey={`v${i}`} name={c} stroke={colors[i % colors.length]} strokeWidth={2} dot={chart.points.length === 1} isAnimationActive={false} />)}
       </LineChart>
     </ResponsiveContainer></div>
-    <div className={styles.legend}>{chart.categories.map((c,i)=><span key={c}><i style={{background:colors[i % colors.length]}} />{c}</span>)}</div>
+    <div className={styles.legend}>{chart.categories.map((c,i)=><button type="button" key={c} onClick={()=>onCategory?.(c)}><i style={{background:colors[i % colors.length]}} />{c}</button>)}</div>
     <p className={styles.caption}>Legfeljebb 6 legaktívabb kategória · Budapest</p>
   </>;
 }
 
-export function ClickbaitChart({ data }: { data: ReturnType<typeof clickbaitRows> }) {
+export function ClickbaitChart({ data, onSource }: { data: ReturnType<typeof clickbaitRows>; onSource?: (source:string)=>void }) {
   return <>
     <div className={styles.chart}><ResponsiveContainer width="100%" height="100%">
       <BarChart data={data.slice(0,8)} layout="vertical" margin={{right:12}}>
@@ -38,7 +38,7 @@ export function ClickbaitChart({ data }: { data: ReturnType<typeof clickbaitRows
         </Bar>
       </BarChart>
     </ResponsiveContainer></div>
-    <details><summary>Források és mintanagyság ({data.length})</summary><ul className={styles.scrollList}>{data.map(r=><li key={r.name}>{r.name}: {r.score.toFixed(1)} / 100 · {r.articles} cikk</li>)}</ul></details>
+    <details><summary>Források és mintanagyság ({data.length})</summary><ul className={styles.scrollList}>{data.map(r=><li key={r.name}><button type="button" onClick={()=>onSource?.(r.name)}>{r.name}</button>: {r.score.toFixed(1)} / 100 · {r.articles} cikk</li>)}</ul></details>
   </>;
 }
 

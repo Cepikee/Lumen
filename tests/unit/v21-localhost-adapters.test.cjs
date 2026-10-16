@@ -7,10 +7,17 @@ const test = require("node:test");
 const read = (file) => fs.readFileSync(file, "utf8");
 
 test("localhost layout nem tölt külső captcha vagy analitika scriptet explicit bekapcsolás nélkül", () => {
-  const source = read("app/layout.tsx");
-  assert.match(source, /recaptchaSiteKey \?/);
-  assert.match(source, /analyticsEnabled \?/);
-  assert.match(source, /NEXT_PUBLIC_ANALYTICS_ENABLED/);
+  const { load, render } = require('../helpers/render-ui.cjs');
+  for (const flag of [undefined, 'false', 'true']) {
+    const Page = load('app/layout.tsx', { '../components/ClientLayout': ({children}) => children }, {
+      NEXT_PUBLIC_APP_URL: 'http://127.0.0.1:3099', NEXT_PUBLIC_ANALYTICS_ENABLED: flag,
+    }).default;
+    const html = render(Page, { children: 'local content' });
+    assert.doesNotMatch(html, /recaptcha.*<\/script>/i);
+    assert.equal(html.includes('googletagmanager.com/gtag/js'), flag === 'true');
+    assert.equal(html.includes("gtag('config'"), flag === 'true');
+    assert.match(html, /local content/);
+  }
 });
 
 test("local demo captcha csak nem-production loopback utom_dev konfigurációban ad magas pontszámot", () => {

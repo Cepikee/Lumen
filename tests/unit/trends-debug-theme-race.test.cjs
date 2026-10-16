@@ -7,7 +7,14 @@ const filters = read('TrendsFilters.tsx');
 const debug = read('TrendsDebug.tsx');
 const theme = read('ThemeSwitch.tsx');
 
-assert.equal((filters.match(/<TrendsDebug filters=\{filters\} \/>/g) || []).length, 1);
+// The public filter panel no longer mounts the diagnostic request consumer.
+assert.doesNotMatch(filters, /TrendsDebug|fetch\(/);
+const { load, render } = require('../helpers/render-ui.cjs');
+const Filters = load('components/TrendsFilters.tsx', {'./CategoryHeatMap': () => null}).default;
+const html = render(Filters, {filters: {period:'24h',sources:[],categories:[],sort:'freq',keyword:''}, setFilters:()=>{}});
+assert.match(html, /Kulcsszó kereső/);
+assert.match(html, /Időszak/);
+assert.doesNotMatch(html, /debug/i);
 assert.match(debug, /const requestSequence = useRef\(0\)/);
 assert.match(debug, /requestId !== requestSequence\.current/);
 assert.match(debug, /trends_debug_http_\$\{res\.status\}/);

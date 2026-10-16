@@ -137,3 +137,15 @@
 @media (max-width:767px) { .categoryGrid { grid-template-columns:1fr; } .scope { max-width:120px; white-space:normal; text-align:right; } }
 
 .todayColumns :global(.insights-empty small) { display: none; }
+
+.intelligence { display:grid; gap:14px; margin-bottom:18px; }
+.intelligence h2 { font-size:18px; }
+.intelligence button { background:#0c2943; color:#d6ecff; border:1px solid #315570; border-radius:6px; padding:5px 9px; cursor:pointer; }
+.intelligence li { margin:8px 0; font-size:13px; }
+.filterRow { display:flex; flex-wrap:wrap; gap:12px; margin:12px 0; }
+.filterRow input { background:#081b2d; color:#e7f3ff; border:1px solid #315570; border-radius:6px; padding:6px; max-width:180px; }
+
+.tableScroll { overflow-x:auto; }
+.tableScroll table { width:100%; font-size:12px; }
+.tableScroll td,.tableScroll th { padding:10px; border-bottom:1px solid #28445c; vertical-align:top; }
+.jsonEvidence { max-height:350px; overflow:auto; white-space:pre-wrap; font-size:12px; }

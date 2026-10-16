@@ -48,9 +48,8 @@ test("category insights renders entitlement errors instead of a generic network 
 });
 
 test("category insights API resolves Next dynamic params before reading category", () => {
-  assert.match(categoryRoute, /const resolvedParams = context\?\.params/);
   assert.match(categoryRoute, /await context\.params/);
-  assert.match(categoryRoute, /const rawFromContext = resolvedParams\?\.category/);
+  assert.match(categoryRoute, /\(await context\.params\)\.category/);
   assert.doesNotMatch(categoryRoute, /const rawFromContext = context\?\.params\?\.category/);
 });
 

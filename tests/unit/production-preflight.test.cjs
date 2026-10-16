@@ -55,14 +55,14 @@ test("active CI workflows use the supported Node major", () => {
   }
 });
 
-test("schema 060 is ready while 059 and future 061 fail closed", async () => {
-  assert.equal((await checkSchemaReadiness(readinessExecutor(60))).ready, true);
-  const old = await checkSchemaReadiness(readinessExecutor(59));
+test("schema 062 is ready while 061 and future 063 fail closed", async () => {
+  assert.equal((await checkSchemaReadiness(readinessExecutor(62))).ready, true);
+  const old = await checkSchemaReadiness(readinessExecutor(61));
   assert.equal(old.ready, false);
-  assert.ok(old.missing.includes("migration:60"));
-  const future = await checkSchemaReadiness(readinessExecutor(61));
+  assert.ok(old.missing.includes("migration:62"));
+  const future = await checkSchemaReadiness(readinessExecutor(63));
   assert.equal(future.ready, false);
-  assert.ok(future.missing.includes("unsupported_schema_version:061"));
+  assert.ok(future.missing.includes("unsupported_schema_version:063"));
 });
 
 console.log("production preflight schema regression: PASS");

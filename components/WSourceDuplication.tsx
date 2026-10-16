@@ -77,7 +77,7 @@ export default function WSourceDuplication({ period = "24h", dark = false }: { p
 
   const series = [
     {
-      name: "Másolási arány (%)",
+      name: "Témakövetési arány (%)",
       data: items.map((i) => i.duplicationScore),
     },
   ];
@@ -139,9 +139,9 @@ export default function WSourceDuplication({ period = "24h", dark = false }: { p
         formatter: (val, opts) => {
           const item = items[opts.dataPointIndex];
           const score = Number(val);
-          return `Másolási arány: ${score.toFixed(1)}%
-Eredeti: ${item.original}
-Átvett: ${item.duplicate}`;
+          return `Témakövetési arány: ${score.toFixed(1)}%
+Elsőként megfigyelt: ${item.original}
+Később megfigyelt: ${item.duplicate}`;
         },
       },
     },
@@ -156,7 +156,7 @@ Eredeti: ${item.original}
       >
         <div className="flex items-center justify-center gap-4 mb-6">
           <h2 className="text-3xl font-semibold tracking-tight text-center">
-            Másolási arány források szerint
+            Témakövetési arány források szerint
           </h2>
 
           <button
@@ -182,84 +182,12 @@ Eredeti: ${item.original}
       <UtomModal
         show={openInfo}
         onClose={() => setOpenInfo(false)}
-        title="Mi az a másolási arány?"
+        title="Mi az a témakövetési arány?"
       >
         <div className="text-sm leading-relaxed space-y-6">
-
-          {/* Bevezető */}
-          <p className="text-base font-semibold text-center">
-            A <b>másolási arány</b> azt mutatja meg, hogy egy hírforrás
-            <span style={{ color: "#ef4444" }}> <b>milyen gyakran vesz át</b></span>
-            más forrásoktól már korábban megjelent témákat.
-          </p>
-
-          {/* Ikonos magyarázat */}
-          <div className="space-y-5">
-
-            <div className="flex items-start gap-4">
-              <div className="text-2xl">📰</div>
-              <p>
-                <b>Megjelenik egy új téma</b> a hírekben. A rendszer azonosítja,
-                melyik forrás ír róla <b>elsőként</b>.
-              </p>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="text-2xl">🔁</div>
-              <p>
-                Ha egy másik forrás <b>később</b> ír ugyanerről a témáról,
-                akkor azt <b>átvett tartalomnak</b> tekintjük.
-              </p>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="text-2xl">📊</div>
-              <p>
-                A rendszer minden forrásnál megszámolja, hányszor volt
-                <b>eredeti</b> és hányszor <b>átvett</b> a megjelenés.
-              </p>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="text-2xl">📉</div>
-              <p>
-                A <b>másolási arány</b> azt mutatja meg, hogy az összes
-                megjelenésből mekkora rész volt átvett tartalom.
-              </p>
-            </div>
-
-          </div>
-
-          {/* Kiemelt doboz */}
-          <div
-            className="p-4 rounded-xl text-center"
-            style={{
-              background: "rgba(0,0,0,0.05)",
-              border: "1px solid rgba(0,0,0,0.1)",
-            }}
-          >
-            <p className="font-semibold mb-2 text-lg">Mit jelent ez a gyakorlatban?</p>
-
-            <ul className="list-disc list-inside space-y-1 text-left inline-block text-sm">
-              <li><b>Alacsony arány</b> → a forrás többnyire saját témákat dolgoz fel.</li>
-              <li><b>Magas arány</b> → a forrás gyakran vesz át másoktól.</li>
-              <li>A mutató <i>nem minőségi értékelés</i>, csak a megjelenések eredetiségét méri.</li>
-            </ul>
-          </div>
-
-          {/* Lezárás */}
-          <p className="text-center">
-            A cél, hogy átlátható legyen, mely források mennyire támaszkodnak
-            saját tartalomra, és kik azok, akik inkább mások témáit dolgozzák fel.
-          </p>
-
-          <p
-            className="text-xs italic text-center mt-6"
-            style={{ color: isDark ? "#ffffff" : "#000000" }}
-          >
-            A rangsor AI által került meghatározásra.
-          </p>
-
+          <p>Az UTOM által figyelt források között azt mutatja, milyen gyakran jelent meg egy forrás egy már korábban észlelt hírtémában.</p>
+          <p>A későbbi megjelenés témakövetés; nem bizonyít másolást, átvételt vagy plágiumot. Az elsőként megfigyelt forrás nem feltétlenül az eredeti forrás.</p>
+          <p>A százalék a későbbi megjelenések aránya a vizsgált megjelenések között. A tooltip a darabszámokat is megmutatja. Ez statisztikai megfigyelés, nem AI-minősítés.</p>
         </div>
       </UtomModal>
     </>

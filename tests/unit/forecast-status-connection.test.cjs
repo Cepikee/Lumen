@@ -1,6 +1,6 @@
-const fs = require('node:fs');
-const assert = require('node:assert/strict');
-const source = fs.readFileSync('app/api/forecast-status/route.ts', 'utf8');
-assert.match(source, /let conn: mysql\.Connection \| null = null/);
-assert.match(source, /finally \{[\s\S]*await conn\.end\(\)/);
-console.log('forecast status connection cleanup regression: PASS');
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const load=require('../helpers/insights-loader.cjs');
+test('forecast status uses pool and returns service error on DB failure',async()=>{
+ const route=load('app/api/forecast-status/route.ts',{'@/lib/db':{db:{query:async()=>{throw Error('offline');}}}});
+ const r=await route.GET();assert.equal(r.status,503);assert.equal(r.body.lastRun,null);
+});

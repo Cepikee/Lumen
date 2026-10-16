@@ -29,7 +29,7 @@ type ApiItem = {
   sources: number;
   score: number;
   excerpt?: string;
-  href: string;
+  href?: string;
 };
 
 export default function CategoryPage() {
@@ -45,6 +45,12 @@ export default function CategoryPage() {
   const parsedLimit = Number(search?.get("limit") || 20);
   const page = Number.isSafeInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
   const limit = Number.isSafeInteger(parsedLimit) && parsedLimit > 0 && parsedLimit <= 100 ? parsedLimit : 20;
+  const sharedFilters = new URLSearchParams();
+  for (const key of ['source', 'keyword', 'cluster', 'asOf']) {
+    const value = search.get(key);
+    if (value) sharedFilters.set(key, value);
+  }
+  const filterQuery = sharedFilters.toString();
 
   const [meta, setMeta] = useState<ApiMeta | null>(null);
   const [summary, setSummary] = useState<ApiSummary | null>(null);
@@ -52,6 +58,7 @@ export default function CategoryPage() {
   const [ringSources, setRingSources] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     let mounted = true;
@@ -62,18 +69,20 @@ export default function CategoryPage() {
       setSummary(null);
       setItems([]);
       setRingSources([]);
+      setTotal(0);
     };
 
     async function load() {
       setLoading(true);
       setError(null);
+      clearData();
 
       try {
         const url = `/api/premium-insights/category/${encodeURIComponent(
           categoryRaw
         )}?period=${encodeURIComponent(period)}&sort=${encodeURIComponent(
           sort
-        )}&page=${page}&limit=${limit}`;
+        )}&page=${page}&limit=${limit}&${filterQuery}`;
 
         const res = await fetch(url, {
           cache: "no-store",
@@ -103,6 +112,7 @@ export default function CategoryPage() {
         }
 
         setMeta(json.meta ?? null);
+        setTotal(Number.isSafeInteger(json.total) && json.total >= 0 ? json.total : 0);
         setSummary(
           json.summary ?? {
             trendSeries: [],
@@ -122,7 +132,7 @@ export default function CategoryPage() {
           sources: Number.isFinite(Number(it.sources)) ? Math.max(0, Number(it.sources)) : 0,
           score: Number.isFinite(Number(it.score)) ? Number(it.score) : 0,
           excerpt: it.excerpt ?? "",
-          href: it.href ?? `/insights/${it.id}`,
+          href: it.href ?? undefined,
         }));
 
         setItems(mapped);
@@ -153,13 +163,13 @@ export default function CategoryPage() {
       mounted = false;
       controller.abort();
     };
-  }, [categoryRaw, period, sort, page, limit]);
+  }, [categoryRaw, period, sort, page, limit, filterQuery]);
 
   function formatDate(iso?: string | null) {
     if (!iso) return "";
     try {
       const date = new Date(iso);
-      return Number.isNaN(date.getTime()) ? "" : date.toLocaleString();
+      return Number.isNaN(date.getTime()) ? "" : date.toLocaleString("hu-HU", { timeZone: "Europe/Budapest" });
     } catch {
       return iso;
     }
@@ -179,10 +189,16 @@ export default function CategoryPage() {
     router.push(`/insights/category/${encodeURIComponent(categoryRaw)}?${q.toString()}`);
   }
 
+  function setPage(next: number) {
+    const q = new URLSearchParams(search.toString());
+    q.set('page', String(next));
+    router.push(`/insights/category/${encodeURIComponent(categoryRaw)}?${q}`);
+  }
+
   return (
     <main className="container py-4">
       <header className="mb-4">
-        <h1 className="h3">{meta?.category ?? decodeURIComponent(categoryRaw)}</h1>
+        <h1 className="h3">{meta?.category ?? categoryRaw}</h1>
         <div className="d-flex gap-3 align-items-center text-muted small">
           <span>{meta ? `${meta.articleCount} cikk` : "— cikk"}</span>
           <span>•</span>
@@ -300,6 +316,13 @@ export default function CategoryPage() {
           ) : (
             <InsightList items={items.map(mapToInsightListItem)} loading={false} />
           )}
+          {!loading && !error && (total > limit || page > 1) && (
+            <nav className="d-flex gap-3 align-items-center mt-3" aria-label="Cikkek lapozása">
+              <button className="btn btn-outline-secondary" disabled={page <= 1} onClick={() => setPage(page - 1)}>Előző</button>
+              <span>{page}. oldal · {total} találat</span>
+              <button className="btn btn-outline-secondary" disabled={page * limit >= total} onClick={() => setPage(page + 1)}>Következő</button>
+            </nav>
+          )}
         </div>
       </section>
     </main>
@@ -314,7 +337,7 @@ function mapToInsightListItem(it: any) {
     score: Number.isFinite(Number(it.score)) ? Number(it.score) : 0,
     sources: Number.isFinite(Number(it.sources)) ? Math.max(0, Number(it.sources)) : 0,
     dominantSource: it.dominantSource || "",
-    timeAgo: publishedAt && !Number.isNaN(publishedAt.getTime()) ? publishedAt.toLocaleString() : "",
+    timeAgo: publishedAt && !Number.isNaN(publishedAt.getTime()) ? publishedAt.toLocaleString("hu-HU", { timeZone: "Europe/Budapest" }) : "",
     href: it.href,
   };
 }

@@ -5,18 +5,20 @@ import Link from "next/link";
 import useSWR from "swr";
 import { CategoryTrendChart, ClickbaitChart, SentimentDonut, ActivityHeatmap, CategorySentimentChart, SentimentTimelineChart } from "./InsightsCharts";
 import { useUserStore } from "@/store/useUserStore";
-import { useInsights } from "@/hooks/useInsights";
-import { useTimeseriesAll } from "@/hooks/useTimeseriesAll";
+import { useInsightsSnapshot } from "@/hooks/useInsightsSnapshot";
+import InsightsIntelligence, { Quality } from "./InsightsIntelligence";
+import InsightsSourceIntelligence from "./InsightsSourceIntelligence";
+
 import { useForecast } from "@/hooks/useForecast";
 import InsightsEmptyState from "./InsightsEmptyState";
 import UtomModal from "@/components/UtomModal";
 
-import WSourceCategoryDistribution from "./WSourceCategoryDistribution";
-import WSourceDuplication from "./WSourceDuplication";
-import WSourceSpeedIndexLeaderboard from "./WSourceSpeedIndexLeaderboard";
-import WSourceClickbait from "./WSourceClickbait";
-import WSourceClickbaitRatio from "./WSourceClickbaitRatio";
-import WhatHappenedTodaySourceActivity from "./WhatHappenedTodaySourceActivity";
+
+
+
+
+
+
 import { rows, count, sentimentCounts, activityRows, clickbaitRows, categorySeries, categorySentiments, sentimentSeries, forecastPoints, timeLabel, timestamp } from "@/lib/insights-dashboard";
 import styles from "./InsightsDashboard.module.css";
 
@@ -68,33 +70,33 @@ function Glyph({ kind = 0 }: { kind?: number }) {
 class PanelBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
-  render() { return this.state.failed ? <p role="alert" className={styles.empty}>Az adatok jelenleg nem Ă©rhetĹ‘k el.</p> : this.props.children; }
+  render() { return this.state.failed ? <p role="alert" className={styles.empty}>Az adatok jelenleg nem érhetők el.</p> : this.props.children; }
 }
 function Card({ title, info, scope, children, className = "" }: { title: string; info?: string; scope?: string; children: ReactNode; className?: string }) {
   const [openInfo, setOpenInfo] = useState(false);
   return <section className={`${styles.card} ${className}`}>
     <div className={styles.cardHeader}>
       <h2>{title}</h2>
-      {info && <button type="button" className={styles.info} aria-label={`${title} â€“ informĂˇciĂł`} title="MagyarĂˇzat" aria-expanded={openInfo} onClick={() => setOpenInfo(true)}>â“</button>}
+      {info && <button type="button" className={styles.info} aria-label={`${title} – információ`} title="Magyarázat" aria-expanded={openInfo} onClick={() => setOpenInfo(true)}>ⓘ</button>}
       {scope && <span className={styles.scope}>{scope}</span>}
     </div>
     <PanelBoundary>{children}</PanelBoundary>
-    {info && <UtomModal show={openInfo} onClose={() => setOpenInfo(false)} title={`${title} â€“ mit mutat?`}>
+    {info && <UtomModal show={openInfo} onClose={() => setOpenInfo(false)} title={`${title} – mit mutat?`}>
       <p className={styles.infoText}>{info}</p>
     </UtomModal>}
   </section>;
 }
 function State({ loading, error, hasData, period = "24h", children }: { loading?: boolean; error?: unknown; hasData: boolean; period?: string; children: ReactNode }) {
-  if (loading) return <div className={styles.skeleton} role="status" aria-label="Adatok betĂ¶ltĂ©se" />;
-  if (error) return <p role="alert" className={styles.empty}>Az adat jelenleg nem elĂ©rhetĹ‘.</p>;
+  if (loading) return <div className={styles.skeleton} role="status" aria-label="Adatok betöltése" />;
+  if (error) return <p role="alert" className={styles.empty}>Az adat jelenleg nem elérhető.</p>;
   if (!hasData) return <InsightsEmptyState period={period} />;
   return <>{children}</>;
 }
 export default function InsightsDashboard() {
   const user = useUserStore(s => s.user);
   const loading = useUserStore(s => s.loading);
-  if (loading) return <div className={styles.page}><div className={styles.shell}><div className={styles.skeleton} role="status">Profil betĂ¶ltĂ©seâ€¦</div></div></div>;
-  if (!user?.isPremium) return <div className={styles.page}><div className={styles.shell}><Card title="PrĂ©mium tartalom"><p>Az Insights elemzĂ©seihez PrĂ©mium hozzĂˇfĂ©rĂ©s szĂĽksĂ©ges.</p><Link href="/premium">PrĂ©mium tudnivalĂłk â†’</Link></Card></div></div>;
+  if (loading) return <div className={styles.page}><div className={styles.shell}><div className={styles.skeleton} role="status">Profil betöltése…</div></div></div>;
+  if (!user?.isPremium) return <div className={styles.page}><div className={styles.shell}><Card title="Prémium tartalom"><p>Az Insights elemzéseihez Prémium hozzáférés szükséges.</p><Link href="/premium">Prémium tudnivalók →</Link></Card></div></div>;
   return <DashboardContent />;
 }
 function DashboardContent() {
@@ -130,25 +132,24 @@ function DashboardContent() {
     query.set("period", nextPeriod);
     router.replace(`${pathname}?${query.toString()}`, { scroll: false });
   };
-  const insights = useInsights(period, sort);
-  const series = useTimeseriesAll(period);
-  const forecast = useForecast();
-  const heatmap = useMetric("heatmap");
-  const spikes = useMetric("spike-detection");
-  const todayKeywords = useMetric("trending-keywords");
-  const keywords = useMetric(`trending-keywords?period=${period}`);
-  const sentiment = useMetric(`sentiment/today?period=${period}`);
-  const categorySentiment = useMetric(`sentiment/by-category?period=${period}`);
-  const hourly = useMetric(`sentiment/timeline?period=${period}`);
-  const clickbait = useMetric(`clickbait?period=${period}`);
-  const categories = rows(insights.data?.categories);
+  const crossFilter=(field:string,value:string)=>{const q=new URLSearchParams(searchParams.toString());q.set(field,value);router.push(`${pathname}?${q}`,{scroll:false});};
+  const snapshot=useInsightsSnapshot();
+  const views=snapshot.data?.views;
+  const state={error:snapshot.error,loading:snapshot.isLoading,isLoading:snapshot.isLoading};
+  const insights={...state,data:views?.overview};
+  const series={...state,data:views?.timeseries};
+  const forecast=useForecast();
+  // Calendar-day modules remain explicitly labelled; the analytical cards share one snapshot.
+  const keywords={...state,data:views?.keywords};
+  const sentiment={...state,data:views?.sentiment};
+  const categorySentiment={...state,data:views?.categorySentiment};
+  const hourly={...state,data:views?.timeline};
+  const clickbait={...state,data:views?.clickbait};
+  const categories = rows(insights.data?.categories).sort((a,b)=>sort==="Cikkszám"?b.articleCount-a.articleCount:sort==="Legtöbb forrás"?b.sourceDiversity-a.sourceDiversity:String(b.lastArticleAt).localeCompare(String(a.lastArticleAt)));
   const articles = categories.reduce((total, c) => total + count(c.articleCount), 0);
   const sources = new Set(categories.flatMap(c => rows(c.ringSources).map(s => s.label).filter(v => typeof v === "string" && v && v !== "ismeretlen")));
-  const todayKeywordRows = rows(todayKeywords.data?.keywords).filter(k => typeof k.keyword === "string" && count(k.count) > 0);
   const keywordRows = rows(keywords.data?.keywords).filter(k => typeof k.keyword === "string" && count(k.count) > 0);
   const sentimentData = sentimentCounts(sentiment.data);
-  const activity = activityRows(heatmap.data);
-  const spikeRows = rows(spikes.data?.spikes).filter(s => typeof s.label === "string" && count(s.value) > 0);
   const chart = categorySeries(series.data?.categories, period);
   const clickbaitData = clickbaitRows(clickbait.data);
   const negativeRows = categorySentiments(categorySentiment.data?.categories);
@@ -157,24 +158,24 @@ function DashboardContent() {
   const forecastStatus = useSWR("/api/forecast-status", fetcher, { refreshInterval: 10000, revalidateOnFocus: false });
   const forecastState = forecast.error || forecastStatus.error || forecastStatus.data?.status === "error" ? "error"
     : forecastStatus.data?.status === "running" ? "running" : forecasts.length ? "ready" : "empty";
-  const forecastLabel = { error: "Az elĹ‘rejelzĂ©s jelenleg nem elĂ©rhetĹ‘.", running: "ElemzĂ©s folyamatban", ready: "ElĹ‘rejelzĂ©s elkĂ©szĂĽlt", empty: "MĂ©g nincs elkĂ©szĂĽlt elĹ‘rejelzĂ©s" }[forecastState];
-  const topActivity = [...activity].map(c=>({category:c.category,total:c.values.reduce((sum: number,v: {value:number})=>sum+v.value,0)})).sort((a,b)=>b.total-a.total);
+  const forecastLabel = { error: "Az előrejelzés jelenleg nem elérhető.", running: "Elemzés folyamatban", ready: "Előrejelzés elkészült", empty: "Még nincs elkészült előrejelzés" }[forecastState];
   const realSentimentMood = moodFromSentiment(sentimentData.average);
   const sentimentMood = SENTIMENT_FACE_TEST_MODE ? testMood : realSentimentMood;
   const sentimentMoodColor = sentimentMood === "positive" ? "#21d99b"
     : sentimentMood === "neutral" ? "#f4c35c"
       : sentimentMood === "negative" ? "#ff5a67" : "#8eaac5";
   const kpis = [
-    { title: "Feldolgozott hĂ­rek", value: !insights.error && articles > 0 ? articles.toLocaleString("hu-HU") : "â€”", note: `${period} Â· feldolgozott Ă¶sszefoglalĂłk`, loading: insights.loading, error: insights.error },
-    { title: "AktĂ­v forrĂˇsok", value: !insights.error && sources.size ? String(sources.size) : "â€”", note: `${period} Â· egyedi forrĂˇsok`, loading: insights.loading, error: insights.error },
-    { title: "Kiemelt kulcsszavak", value: !keywords.error && keywordRows.length ? String(count(keywords.data?.total ?? keywordRows.length)) : "â€”", note: `${period} Â· legalĂˇbb 3 emlĂ­tĂ©s`, loading: keywords.isLoading, error: keywords.error },
-    { title: "Ătlagos hangulat", value: !sentiment.error && sentimentData.average !== null ? sentimentData.average.toFixed(2) : "â€”", note: `${period} Â· â’1 Ă©s +1 kĂ¶zĂ¶tt`, loading: sentiment.isLoading, error: sentiment.error },
+    { title: "Publikált hírek", value: !insights.error && articles > 0 ? articles.toLocaleString("hu-HU") : "—", note: `${period} · publikált cikkek`, loading: insights.loading, error: insights.error },
+    { title: "Aktív források", value: !insights.error && sources.size ? String(sources.size) : "—", note: `${period} · egyedi források`, loading: insights.loading, error: insights.error },
+    { title: "Kiemelt kulcsszavak", value: !keywords.error && keywordRows.length ? String(count(keywords.data?.total ?? keywordRows.length)) : "—", note: `${period} · legalább 3 említés`, loading: keywords.isLoading, error: keywords.error },
+    { title: "Átlagos hangulat", value: !sentiment.error && sentimentData.average !== null ? sentimentData.average.toFixed(2) : "—", note: `${period} · −1 és +1 között`, loading: sentiment.isLoading, error: sentiment.error },
   ];
   return <div className={styles.page}><div className={styles.shell}>
-    <header className={styles.heading}><div className={styles.title}><span className={styles.pageIcon}><Glyph /></span><div><h1>Insights</h1><p>KategĂłria trendek, forrĂˇseloszlĂˇs Ă©s hangulatelemzĂ©s a magyar hĂ­rekben.</p></div></div><div className={styles.toolbar}>
-      <div className={styles.pills} role="group" aria-label="IdĹ‘szak">{(["24h", "7d", "30d", "90d"] as Period[]).map(p => <button type="button" key={p} aria-pressed={period === p} onClick={() => changePeriod(p)}>{p}</button>)}</div>
-      <div className={`${styles.pills} ${styles.sort}`} role="group" aria-label="RendezĂ©s">{["Legfrissebb", "NĂ¶vekvĹ‘", "LegtĂ¶bb forrĂˇs"].map(s => <button type="button" key={s} aria-pressed={sort === s} onClick={() => setSort(s)}>{s}</button>)}</div>
+    <header className={styles.heading}><div className={styles.title}><span className={styles.pageIcon}><Glyph /></span><div><h1>Insights</h1><p>Kategória trendek, forráseloszlás és hangulatelemzés a magyar hírekben.</p></div></div><div className={styles.toolbar}>
+      <div className={styles.pills} role="group" aria-label="Időszak">{(["24h", "7d", "30d", "90d"] as Period[]).map(p => <button type="button" key={p} aria-pressed={period === p} onClick={() => changePeriod(p)}>{p}</button>)}</div>
+      <div className={`${styles.pills} ${styles.sort}`} role="group" aria-label="Rendezés">{["Legfrissebb", "Cikkszám", "Legtöbb forrás"].map(s => <button type="button" key={s} aria-pressed={sort === s} onClick={() => setSort(s)}>{s}</button>)}</div>
     </div></header>
+    <PanelBoundary key={'intelligence'+searchParams.toString()+snapshot.data?.window.end}><InsightsIntelligence data={snapshot.data} error={snapshot.error} loading={snapshot.isLoading} /></PanelBoundary>
     <div className={styles.grid} key={period}>
       {kpis.map((k, i) => {
         const isSentimentKpi = i === 3;
@@ -183,48 +184,41 @@ function DashboardContent() {
           <span className={styles.kpiIcon} data-mood={isSentimentKpi ? sentimentMood : undefined} style={{ color: iconColor, borderColor: iconColor }}>
             {isSentimentKpi ? <MoodFace mood={sentimentMood} /> : <Glyph kind={i + 1} />}
           </span>
-          <div><h2>{k.title}</h2><strong>{k.loading ? "â€¦" : k.value}</strong><p>{k.error ? "Az adat jelenleg nem elĂ©rhetĹ‘." : k.note}</p></div>
+          <div><h2>{k.title}</h2><strong>{k.loading ? "…" : k.value}</strong><p>{k.error ? "Az adat jelenleg nem elérhető." : k.note}</p></div>
         </section>;
       })}
-      <Card title="Mi tĂ¶rtĂ©nt ma valĂłjĂˇban?" scope="Ma Â· Budapest" className={styles.today}>
-        <div className={styles.todayColumns}>
-          <div><span className={styles.miniIcon}><Glyph kind={1} /></span><h3>KategĂłriĂˇk aktivitĂˇsa</h3><State loading={heatmap.isLoading} error={heatmap.error} hasData={activity.length > 0} period="today"><ul>{topActivity.slice(0,3).map(c=><li key={c.category}><strong>{c.category}</strong> Â· {c.total} hĂ­r</li>)}</ul></State></div>
-          <div><span className={styles.miniIcon}><Glyph /></span><h3>KiemelkedĹ‘ esemĂ©ny</h3><State loading={spikes.isLoading} error={spikes.error} hasData={spikeRows.length > 0} period="today"><ul>{spikeRows.map((s, i) => <li key={i}>{s.label} Â· {s.value} hĂ­r ({s.hour}:00)</li>)}</ul></State></div>
-          <div><span className={styles.miniIcon}><Glyph kind={3} /></span><h3>Felkapott kulcsszavak</h3><State loading={todayKeywords.isLoading} error={todayKeywords.error} hasData={todayKeywordRows.length > 0} period="today"><div className={styles.tags}>{todayKeywordRows.slice(0,5).map(k => <Link key={k.keyword} href="/trends">{k.keyword} <small>{k.count}Ă—</small></Link>)}</div></State></div>
-        </div>
+      <Card title="Mit mutat a megfigyelt hírminta?" scope={period} className={styles.today}>
+        <p>{snapshot.data?.explanation.text || "Nincs elérhető mérés."}</p><p className={styles.caption}>Publikálási idő szerinti megfigyelés. A forrás és kategória szűrése az összes analitikai modulra érvényes.</p>
       </Card>
-      <Card title="AI elĹ‘rejelzĂ©s" scope="Automatikus trendbecslĂ©s" info="Az UTOM hĂˇttĂ©rben futĂł elĹ‘rejelzĹ‘ modellje a korĂˇbbi hĂ­raktivitĂˇs alapjĂˇn becsli a kĂ¶vetkezĹ‘ idĹ‘szak vĂˇrhatĂł kategĂłria-aktivitĂˇsĂˇt. Az oldal megnyitĂˇsa nem indĂ­t Ăşj AI-futtatĂˇst: mindig a legutĂłbb elmentett modellkimenetet jelenĂ­ti meg." className={styles.forecast}>
-        <div className={styles.forecastContent}><div className={styles.orb} data-state={forecastState} role="img" aria-label={forecastLabel} />
-          <div><strong role="status">{forecast.isLoading ? "ElĹ‘rejelzĂ©s betĂ¶ltĂ©seâ€¦" : forecastLabel}</strong>
-            {!forecast.error && forecasts.slice(0,2).map((p,i)=><p key={i}>{p.category}: {timeLabel(p.time,"7d",true)} napjĂˇra {p.predicted.toLocaleString("hu-HU",{maximumFractionDigits:1})} hĂ­rt jelez a modell.</p>)}
-            {(["lastRun","nextRun"] as const).map(key=>{
-              const time=timestamp(forecastStatus.data?.[key]);
-              return time===null ? null : <p className={styles.caption} key={key}>{key==="lastRun"?"UtolsĂł futĂˇs":"KĂ¶vetkezĹ‘ futĂˇs"}: {timeLabel(time,"7d",true)}</p>;
-            })}
-            <p className={styles.caption}>{forecasts.length ? "MegbĂ­zhatĂłsĂˇgi becslĂ©st az API jelenleg nem szolgĂˇltat." : "Az UTOM a kategĂłriĂˇk vĂˇrhatĂł hĂ­raktivitĂˇsĂˇt becsli. Amint elkĂ©szĂĽl Ă©s elmentĂ©sre kerĂĽl egy eredmĂ©ny, itt automatikusan megjelenik."}</p>
-          </div>
-        </div>
-        {!forecast.error && forecasts.length>0 && <details><summary>Ă–sszes mentett elĹ‘rejelzĂ©s ({forecasts.length})</summary><ul className={styles.scrollList}>{forecasts.map((p,i)=><li key={i}>{p.category} Â· {timeLabel(p.time,"7d",true)} Â· {p.predicted}</li>)}</ul></details>}
+      <Card title="Aktivitás-előrejelzés" scope="Statisztikai baseline" info="Azonos budapesti napszak korábbi aktivitásának mediánja. Ez statisztikai előrejelzés, nem LLM-magyarázat. A sáv korábbi visszamérési hibákból származik; nem AI-bizonyosság." className={styles.forecast}>
+        {searchParams.has('source')||searchParams.has('keyword')||searchParams.has('cluster') ? <p>Ehhez a szűréshez nincs előrejelzési modell. A szűrőt nem hagyjuk figyelmen kívül.</p> : <>
+          <p role="status">{forecast.isLoading?'Előrejelzés betöltése…':forecast.error?'Az előrejelzés nem elérhető.':forecast.data?.freshness==='expired'?'Az utolsó sikeres előrejelzés lejárt.':forecasts.length?'Elmentett statisztikai előrejelzés':'Nincs elegendő adat vagy sikeres futás.'}</p>
+          {!forecast.error && forecasts.slice(0,6).map((p,i)=><p key={i}>{p.category} · {timeLabel(p.time,'24h',true)} kezdetű órára {p.predicted.toLocaleString('hu-HU',{maximumFractionDigits:1})} cikk.</p>)}
+          {forecast.data?.generatedAt && <p className={styles.caption}>Elkészült: {new Date(forecast.data.generatedAt).toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})} · Érvényes: {new Date(forecast.data.validUntil).toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})}</p>}
+          <p className={styles.caption}>Legutóbbi futás: {forecastStatus.data?.status||'nem ismert'}. Csak teljesen sikeres futás válik aktuálissá.</p>
+          {forecast.data?.backtest && <p className={styles.caption}>Valós utólagos visszamérés: {forecast.data.backtest.samples} pont · átlagos abszolút hiba: {forecast.data.backtest.mae===null?'még nincs':Number(forecast.data.backtest.mae).toFixed(2)+' cikk'}</p>}
+          <details><summary>Becslési sávok és módszer</summary><p>A történeti 90. percentilis abszolút hibából számított sáv, legalább 30 visszamérési ponttal. Nem kalibrált eseményvalószínűség. Korábbi LLM-futással órás összevetés nem áll rendelkezésre; a legacy DATE tárolás nem őrizte meg az órát.</p>{Object.entries(forecast.data?.forecast||{}).flatMap(([category,points])=>Array.isArray(points)?points.map((p:any,i:number)=><p key={category+i}>{category} · {new Date(p.date).toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})} · {p.lower==null?'Nincs elegendő sávbecslési minta':`${p.lower}–${p.upper} cikk`} · {p.calibrationSamples} történeti pont</p>):[])}</details>
+        </>}
       </Card>
-      <Card title="KategĂłria trendek" scope={period} info="Megmutatja, hogyan vĂˇltozott a legaktĂ­vabb hĂ­rtĂ©mĂˇk aktivitĂˇsa a kivĂˇlasztott idĹ‘szakban. A magasabb Ă©rtĂ©k azt jelenti, hogy az adott kategĂłriĂˇban tĂ¶bb feldolgozott hĂ­r jelent meg." className={styles.third}><State loading={series.loading} error={series.error} hasData={chart.points.length>0} period={period}><CategoryTrendChart chart={chart} period={period} /></State></Card>
-      <Card title="ForrĂˇsok Ăˇtlagos clickbait pontszĂˇma" scope={period} info="Az UTOM minden elemzett cikkhez 0â€“100 kĂ¶zĂ¶tti clickbait pontszĂˇmot rendel. A grafikon forrĂˇsonkĂ©nt ezek ĂˇtlagĂˇt mutatja; a magasabb Ă©rtĂ©k erĹ‘sebb figyelemfelkeltĹ‘ cĂ­madĂˇst jelez. Ez nem minĹ‘sĂ©gi rangsor." className={styles.third}><State loading={clickbait.isLoading} error={clickbait.error} hasData={clickbaitData.length>0} period={period}><ClickbaitChart data={clickbaitData} /></State></Card>
-      <Card title="HangulatelemzĂ©s" scope={period} info="Az elemzett hĂ­reket az UTOM pozitĂ­v, semleges vagy negatĂ­v hangulatba sorolja. Az Ăˇtlagos hangulat â’1 Ă©s +1 kĂ¶zĂ¶tti Ă©rtĂ©k: â’1 negatĂ­v, 0 semleges, +1 pozitĂ­v." className={styles.third}><State loading={sentiment.isLoading} error={sentiment.error} hasData={sentimentData.total>0} period={period}><SentimentDonut data={sentimentData} /></State></Card>
-      <Card title={period==="24h"?"KategĂłriĂˇk aktivitĂˇsa ĂłrĂˇnkĂ©nt":"KategĂłriĂˇk aktivitĂˇsa naponta"} scope={period} info="Megmutatja, hogy a kivĂˇlasztott idĹ‘szak egyes ĂłrĂˇiban vagy napjain mely hĂ­rtĂ©mĂˇk voltak a legaktĂ­vabbak. MinĂ©l intenzĂ­vebb egy mezĹ‘, annĂˇl tĂ¶bb feldolgozott hĂ­r tartozik hozzĂˇ." className={styles.five}><State loading={series.loading} error={series.error} hasData={chart.points.length>0} period={period}><ActivityHeatmap chart={chart} period={period} /></State></Card>
-      <Card title="KategĂłriahangulat â€“ negatĂ­v arĂˇny" scope={period} info="Azt mutatja meg, hogy az adott kategĂłriĂˇban hangulatelemzett hĂ­rek mekkora rĂ©sze kapott negatĂ­v besorolĂˇst. A szĂˇzalĂ©k mindig az adott kategĂłria elemzett cikkeire vonatkozik." className={styles.three}><State loading={categorySentiment.isLoading} error={categorySentiment.error} hasData={negativeRows.length>0} period={period}><CategorySentimentChart data={negativeRows} /></State></Card>
-      <Card title="Hangulat idĹ‘beli alakulĂˇsa" scope={period} info="Az Ăˇtlagos hĂ­rsentiment vĂˇltozĂˇsĂˇt mutatja az idĹ‘ben. â’1 negatĂ­v, 0 semleges, +1 pozitĂ­v; a hiĂˇnyzĂł mĂ©rĂ©s nem szĂˇmĂ­t semleges hangulatnak." className={styles.third}><State loading={hourly.isLoading} error={hourly.error} hasData={hourlyRows.some(r=>r.total>0)} period={period}><SentimentTimelineChart data={hourlyRows} period={period} /></State></Card>
+      <Card title="Kategória trendek" scope={period} info="Megmutatja, hogyan változott a legaktívabb hírtémák aktivitása a kiválasztott időszakban. A magasabb érték azt jelenti, hogy az adott kategóriában több feldolgozott hír jelent meg." className={styles.third}><State loading={series.loading} error={series.error} hasData={chart.points.length>0} period={period}><CategoryTrendChart chart={chart} period={period} onCategory={value=>crossFilter("category",value)} /></State></Card>
+      <Card title="Források átlagos clickbait pontszáma" scope={period} info="Az UTOM minden elemzett cikkhez 0–100 közötti clickbait pontszámot rendel. A grafikon forrásonként ezek átlagát mutatja; a magasabb érték erősebb figyelemfelkeltő címadást jelez. Ez nem minőségi rangsor." className={styles.third}><State loading={clickbait.isLoading} error={clickbait.error} hasData={clickbaitData.length>0} period={period}><ClickbaitChart data={clickbaitData} onSource={value=>crossFilter("source",value)} />{snapshot.data && <Quality value={snapshot.data.quality.clickbait} />}</State></Card>
+      <Card title="Hangulatelemzés" scope={period} info="Az elemzett híreket az UTOM pozitív, semleges vagy negatív hangulatba sorolja. Az átlagos hangulat −1 és +1 közötti érték: −1 negatív, 0 semleges, +1 pozitív." className={styles.third}><State loading={sentiment.isLoading} error={sentiment.error} hasData={sentimentData.total>0} period={period}><SentimentDonut data={sentimentData} />{snapshot.data && <Quality value={snapshot.data.quality.sentiment} />}</State></Card>
+      <Card title={period==="24h"?"Kategóriák aktivitása óránként":"Kategóriák aktivitása naponta"} scope={period} info="Megmutatja, hogy a kiválasztott időszak egyes óráiban vagy napjain mely hírtémák voltak a legaktívabbak. Minél intenzívebb egy mező, annál több feldolgozott hír tartozik hozzá." className={styles.five}><State loading={series.loading} error={series.error} hasData={chart.points.length>0} period={period}><ActivityHeatmap chart={chart} period={period} /></State></Card>
+      <Card title="Kategóriahangulat – negatív arány" scope={period} info="Azt mutatja meg, hogy az adott kategóriában hangulatelemzett hírek mekkora része kapott negatív besorolást. A százalék mindig az adott kategória elemzett cikkeire vonatkozik." className={styles.three}><State loading={categorySentiment.isLoading} error={categorySentiment.error} hasData={negativeRows.length>0} period={period}><CategorySentimentChart data={negativeRows} /></State></Card>
+      <Card title="Hangulat időbeli alakulása" scope={period} info="Az átlagos hírsentiment változását mutatja az időben. −1 negatív, 0 semleges, +1 pozitív; a hiányzó mérés nem számít semleges hangulatnak." className={styles.third}><State loading={hourly.isLoading} error={hourly.error} hasData={hourlyRows.some(r=>r.total>0)} period={period}><SentimentTimelineChart data={hourlyRows} period={period} /></State></Card>
     </div>
-    <section className={styles.categoryLinks} aria-label="KategĂłriĂˇk rĂ©szletes elemzĂ©se"><h2>KategĂłriĂˇk rĂ©szletesen <small>{period}</small></h2>
+    <section className={styles.categoryLinks} aria-label="Kategóriák részletes elemzése"><h2>Kategóriák részletesen <small>{period}</small></h2>
       <State loading={insights.loading} error={insights.error} hasData={categories.some(c=>c.category && count(c.articleCount)>0)} period={period}>
         <div className={styles.categoryGrid}>{categories.filter(c=>typeof c.category==="string" && c.category.trim() && count(c.articleCount)>0).map(c=>{
           const mood=negativeRows.find(n=>n.category.toLocaleLowerCase("hu-HU")===c.category.toLocaleLowerCase("hu-HU"));
           return <Link className={styles.categoryCard} key={c.category} href={`/insights/category/${encodeURIComponent(c.category)}?period=${encodeURIComponent(period)}`}>
-            <h3>{c.category}<span aria-hidden="true">â†—</span></h3><strong>{count(c.articleCount).toLocaleString("hu-HU")} <small>hĂ­r</small></strong>
-            <p>{count(c.sourceDiversity)} forrĂˇs</p><p>Ătlagos hangulat: {categorySentiment.error ? "nem elĂ©rhetĹ‘" : mood?.average?.toFixed(2) ?? "nincs mĂ©rĂ©s"}</p>
+            <h3>{c.category}<span aria-hidden="true">↗</span></h3><strong>{count(c.articleCount).toLocaleString("hu-HU")} <small>hír</small></strong>
+            <p>{count(c.sourceDiversity)} forrás</p><p>Átlagos hangulat: {categorySentiment.error ? "nem elérhető" : mood?.average?.toFixed(2) ?? "nincs mérés"}</p>
           </Link>;
         })}</div>
       </State>
     </section>
-    <details className={styles.more}><summary>TovĂˇbbi forrĂˇsmetrikĂˇk Ă©s rĂ©szletes elemzĂ©sek</summary><div className={styles.detailsGrid}><Card title="ForrĂˇsok kategĂłriaeloszlĂˇsa" scope={period}><WSourceCategoryDistribution dark period={period} /></Card><Card title="DuplikĂˇciĂł" scope={period}><WSourceDuplication dark period={period} /></Card><Card title="ForrĂˇsok Ăˇtlagos clickbait pontszĂˇma" scope={period} info="ForrĂˇsonkĂ©nt a cikkek Ăˇtlagos 0â€“100-as clickbait pontszĂˇma. A tooltip Ă©s a lista a mintanagysĂˇgot is mutatja, ezĂ©rt kis elemszĂˇmnĂˇl az eredmĂ©ny Ăłvatosan Ă©rtelmezendĹ‘."><WSourceClickbait dark period={period} embedded /></Card><Card title="ForrĂˇsok clickbait arĂˇnya" scope={period} info="Azt mutatja, hogy az adott forrĂˇs kivĂˇlasztott idĹ‘szakban elemzett cikkeinek hĂˇny szĂˇzalĂ©ka Ă©rte el a clickbait kĂĽszĂ¶bĂ¶t. A mintanagysĂˇgot is megjelenĂ­tjĂĽk, mert 1â€“2 cikkbĹ‘l a 100% mĂ©g nem stabil minta."><WSourceClickbaitRatio dark period={period} embedded /></Card><Card title="Speed Index" scope="Teljes idĹ‘szak"><WSourceSpeedIndexLeaderboard dark /></Card><Card title="ForrĂˇsaktivitĂˇs" scope="Ma"><WhatHappenedTodaySourceActivity dark /></Card></div></details>
+    {snapshot.data && !snapshot.error && <PanelBoundary key={'sources'+searchParams.toString()+snapshot.data.window.end}><InsightsSourceIntelligence data={snapshot.data} /></PanelBoundary>}
   </div></div>;
 }
 

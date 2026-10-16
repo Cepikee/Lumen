@@ -1,14 +1,6 @@
-const fs = require('node:fs');
-const assert = require('node:assert/strict');
-const source = fs.readFileSync('app/api/insights/category/[category]/route.ts', 'utf8');
-assert.match(source, /error: "invalid_period"/);
-assert.match(source, /error: "invalid_sort"/);
-assert.match(source, /requestedPage <= 100_000/);
-assert.match(source, /\["latest", "popular"\]/);
-assert.match(source, /a\.published_at DESC, a\.id DESC/,
-  'latest category pagination must use a unique article tie-breaker');
-assert.match(source, /a\.score DESC, a\.published_at DESC, a\.id DESC/,
-  'popular category pagination must use a unique article tie-breaker');
-assert.match(source, /ORDER BY cnt DESC, source ASC/,
-  'source distribution ordering must be deterministic for tied counts');
-console.log('category period/sort validation regression: PASS');
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const load=require('../helpers/insights-loader.cjs'),I=require('../../lib/insights-intelligence');
+const now=Date.now();
+function route(rows=[]){return load('app/api/insights/category/[category]/route.ts',{'@/lib/insights-intelligence':I,'@/lib/insights-snapshot':{snapshotRows:async()=>I.normalizeRows(rows)}});}
+const context={params:Promise.resolve({category:'sport'})};
+test('category rejects unsafe query values and has stable sorting',async()=>{const r=route();for(const q of ['period=no','sort=no','page=Infinity','page=-1','page=1.2','limit=101'])assert.equal((await r.GET({url:'http://local/?'+q},context)).status,400,q);const rows=[1,2].map(id=>({id,category:'sport',publishedAt:new Date(now-3600000),score:5,summaryId:id}));for(const sort of ['latest','popular'])assert.deepEqual(Array.from((await route(rows).GET({url:'http://local/?sort='+sort},context)).body.items,i=>i.id),['2','1']);});
