@@ -3,11 +3,14 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { hashPin, verifyPin } from "@/lib/pin-security";
-import { getIp } from "@/lib/security";
+import { getIp, requireTrustedOrigin } from "@/lib/security";
 import { getLoginAttemptScope } from "@/lib/login-rate-limit";
 
 export async function POST(req: Request) {
   try {
+    const originDenied = requireTrustedOrigin(req);
+    if (originDenied) return originDenied;
+
     const ip = getIp(req);
 
     let body: any;
@@ -62,7 +65,7 @@ export async function POST(req: Request) {
       if (rows.length === 0) {
         await connection.query("INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 0)", [ip, email]);
         await connection.commit();
-        return NextResponse.json({ success: false, message: "Nincs ilyen felhasználó" }, { status: 401 });
+        return NextResponse.json({ success: false, message: "Hibás bejelentkezési adatok" }, { status: 401 });
       }
 
       user = rows[0];

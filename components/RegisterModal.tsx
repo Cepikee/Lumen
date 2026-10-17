@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { getRecaptchaToken } from "./recaptcha-client";
 
 export default function RegisterModal({ onClose }: { onClose: () => void }) {
   const [email, setEmail] = useState("");
@@ -23,6 +24,7 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
     setError("");
     setLoading(true);
     try {
+      const recaptchaToken = await getRecaptchaToken("register");
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -32,6 +34,7 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
           pin,
           nickname,
           bio,
+          recaptchaToken,
         }),
       });
 
@@ -59,8 +62,10 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
       } else {
         setError(data?.message || "Hiba történt.");
       }
-    } catch {
-      setError("A regisztrációs szolgáltatás jelenleg nem érhető el.");
+    } catch (error) {
+      setError(error instanceof Error && error.message.startsWith("recaptcha_")
+        ? "A botvédelem jelenleg nem érhető el. Próbáld újra."
+        : "A regisztrációs szolgáltatás jelenleg nem érhető el.");
     } finally {
       setLoading(false);
     }

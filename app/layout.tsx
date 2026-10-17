@@ -2,6 +2,7 @@ import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import ClientLayout from "../components/ClientLayout";
+import Analytics from "../components/Analytics";
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 const analyticsEnabled = process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true";
@@ -43,14 +44,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* reCAPTCHA */}
 
-        {/* Google Analytics */}
-        {analyticsEnabled ? <>
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-TZ5DTR2N2S" />
-          <script dangerouslySetInnerHTML={{ __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-TZ5DTR2N2S');` }} />
-        </> : null}
       </head>
 
       <body className="d-flex flex-column min-vh-100">
+        <Analytics enabled={analyticsEnabled} />
         <ClientLayout>{children}</ClientLayout>
 
         <script

@@ -1,10 +1,23 @@
 import type { NextConfig } from "next";
 
+const securityHeaders = [
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
+  { key: "Content-Security-Policy", value: "frame-ancestors 'self'" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+  { key: "X-DNS-Prefetch-Control", value: "off" },
+];
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   async headers() {
     return [
+      {
+        source: "/:path*",
+        headers: securityHeaders,
+      },
       {
         // Generated filenames contain a content fingerprint and are never
         // overwritten, so a year-long immutable cache is safe.
@@ -16,20 +29,17 @@ const nextConfig: NextConfig = {
 
   experimental: {
     serverActions: {
-      bodySizeLimit: "15mb",
-      allowedOrigins: ["*"], // ⭐ fontos!
+      bodySizeLimit: "1mb",
+      // Do not widen Server Actions to arbitrary origins. Next.js defaults to
+      // same-origin validation, which is the safe behavior if actions are added later.
     },
   },
 
-  // ⭐ ETag kikapcsolása → kevesebb verzióütközés
   generateEtags: false,
-
-  // ⭐ Dev-szerű viselkedés: ne cache-eljen agresszívan
   onDemandEntries: {
     maxInactiveAge: 0,
     pagesBufferLength: 0,
   },
-
   distDir: ".next",
 };
 

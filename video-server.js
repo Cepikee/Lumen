@@ -4,140 +4,156 @@ import path from "path";
 import url from "url";
 import crypto from "crypto";
 import { db } from "./lib/db-node.js";
+import entitlementsCore from "./lib/entitlements-core.js";
 
-// 🔐 Secret betöltése
+const { evaluatePremium } = entitlementsCore;
+
 function requireSecret(name, minLength = 32) {
   const value = process.env[name];
-
   if (!value || value.length < minLength) {
-    throw new Error(
-      `${name} nincs beállítva vagy túl rövid. Minimum ${minLength} karakter szükséges.`
-    );
+    throw new Error(`${name} nincs beállítva vagy túl rövid. Minimum ${minLength} karakter szükséges.`);
   }
-
   return value;
 }
 
-// 🔐 Kötelező videóaláíró titok.
-// Nincs beégetett fallback.
-const VIDEO_SIGN_SECRET = requireSecret(
-  "VIDEO_SIGN_SECRET",
-  32
-);
-
-// 🔐 Engedélyezett origin / referer
-const ALLOWED_ORIGINS = [
+const VIDEO_SIGN_SECRET = requireSecret("VIDEO_SIGN_SECRET", 32);
+const ALLOWED_ORIGINS = new Set([
   "https://utom.hu",
   "https://www.utom.hu",
   "http://localhost:3000",
-];
+]);
+const VIDEO_ROOT = "/var/www/utom/private/videos";
 
-// 🔐 IP kinyerése reverse proxy mögül is
-const getClientIp = (req) => {
+function getClientIp(req) {
+  if (process.env.UTOM_TRUST_PROXY_HEADERS !== "true") {
+    return req.socket.remoteAddress || "unknown";
+  }
+  const cf = req.headers["cf-connecting-ip"];
+  if (typeof cf === "string" && cf.trim()) return cf.trim();
+  const real = req.headers["x-real-ip"];
+  if (typeof real === "string" && real.trim()) return real.trim();
   const xf = req.headers["x-forwarded-for"];
-  if (xf) return xf.split(",")[0].trim();
-  return req.socket.remoteAddress || "";
-};
+  if (typeof xf === "string" && xf.trim()) return xf.split(",")[0].trim();
+  return req.socket.remoteAddress || "unknown";
+}
 
-// 🔐 Video access log helper
+function isAllowedSource(req) {
+  const candidate = req.headers.origin || req.headers.referer || "";
+  if (!candidate) return false;
+  try {
+    return ALLOWED_ORIGINS.has(new URL(candidate).origin);
+  } catch {
+    return false;
+  }
+}
+
 async function logVideoAccess(userId, videoId, ip, status) {
   try {
     await db.query(
       "INSERT INTO video_access_logs (user_id, video_id, ip, status) VALUES (?, ?, ?, ?)",
-      [userId || 0, videoId || 0, ip || "", status]
+      [userId || 0, videoId || 0, ip || "", status],
     );
   } catch (err) {
-    console.error("video_access_logs insert failed:", err);
+    console.error("video_access_logs insert failed:", err instanceof Error ? err.message : "unknown_error");
   }
 }
 
-// 🔐 Rate limiting bucket
 const rateBuckets = new Map();
-
-// 🔐 Token ellenőrzés — MOSTANTÓL TILT IS
-function verifyToken(query) {
-  const { v, u, e, s } = query || {};
-  console.log("Incoming token params:", query);
-
-  if (!v || !u || !e || !s) {
-    console.log("Missing token parts → DENY");
+function rateLimitAccepted(key, now = Date.now()) {
+  const windowMs = 5000;
+  const limit = 20;
+  let bucket = rateBuckets.get(key) || [];
+  bucket = bucket.filter((ts) => now - ts < windowMs);
+  if (bucket.length >= limit) {
+    if (bucket.length) rateBuckets.set(key, bucket);
     return false;
   }
-
-  const expires = parseInt(e, 10);
-  if (Number.isNaN(expires)) {
-    console.log("Invalid expires → DENY");
-    return false;
+  bucket.push(now);
+  rateBuckets.set(key, bucket);
+  if (rateBuckets.size > 10_000) {
+    for (const [bucketKey, timestamps] of rateBuckets) {
+      if (!timestamps.some((ts) => now - ts < windowMs)) rateBuckets.delete(bucketKey);
+    }
   }
-
-  const now = Math.floor(Date.now() / 1000);
-  if (now > expires) {
-    console.log("Token expired → DENY");
-    return false;
-  }
-
-  const payload = `${v}:${u}:${e}`;
-  const expected = crypto
-    .createHmac("sha256", VIDEO_SIGN_SECRET)
-    .update(payload)
-    .digest("hex");
-
-  if (expected !== s) {
-    console.log("Bad signature → DENY");
-    return false;
-  }
-
-  console.log("Token OK");
   return true;
 }
 
+function verifyToken(query) {
+  const { v, u, e, s } = query || {};
+  if (![v, u, e, s].every((value) => typeof value === "string" && value.length > 0)) return false;
+  if (!/^\d+$/.test(v) || !/^\d+$/.test(u) || !/^\d+$/.test(e) || !/^[a-f0-9]{64}$/.test(s)) return false;
+
+  const expires = Number(e);
+  if (!Number.isSafeInteger(expires)) return false;
+  const now = Math.floor(Date.now() / 1000);
+  if (expires < now || expires > now + 5 * 60) return false;
+
+  const expected = crypto.createHmac("sha256", VIDEO_SIGN_SECRET).update(`${v}:${u}:${e}`).digest("hex");
+  const expectedBuffer = Buffer.from(expected, "hex");
+  const suppliedBuffer = Buffer.from(s, "hex");
+  return expectedBuffer.length === suppliedBuffer.length && crypto.timingSafeEqual(expectedBuffer, suppliedBuffer);
+}
+
+function parseRange(range, fileSize) {
+  if (!range) return null;
+  const match = /^bytes=(\d*)-(\d*)$/.exec(range.trim());
+  if (!match) return false;
+
+  const [, startRaw, endRaw] = match;
+  if (!startRaw && !endRaw) return false;
+
+  let start;
+  let end;
+  if (!startRaw) {
+    const suffixLength = Number(endRaw);
+    if (!Number.isSafeInteger(suffixLength) || suffixLength <= 0) return false;
+    const length = Math.min(suffixLength, fileSize);
+    start = fileSize - length;
+    end = fileSize - 1;
+  } else {
+    start = Number(startRaw);
+    end = endRaw ? Number(endRaw) : fileSize - 1;
+  }
+
+  if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end)) return false;
+  if (start < 0 || end < start || start >= fileSize) return false;
+  end = Math.min(end, fileSize - 1);
+  return { start, end };
+}
+
 const server = http.createServer(async (req, res) => {
-  if (!req.url.startsWith("/api/secure/video/")) {
-    res.writeHead(404);
-    return res.end("Not found");
-  }
+  try {
+    if (!req.url || !req.url.startsWith("/api/secure/video/")) {
+      res.writeHead(404);
+      return res.end("Not found");
+    }
 
-  const ip = getClientIp(req);
-  let accessStatus = "denied";
-  let userIdForLog = null;
-  let videoIdForLog = null;
+    const ip = getClientIp(req);
+    let userIdForLog = null;
+    let videoIdForLog = null;
 
-  // 🔐 Anti-hotlinking – csak saját domainről
-  const referer = req.headers.referer || "";
-  const origin = req.headers.origin || "";
-  const source = origin || referer || "";
-  const allowedOrigin = ALLOWED_ORIGINS.some((base) =>
-    source.startsWith(base)
-  );
+    if (!isAllowedSource(req)) {
+      await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
+      res.writeHead(403);
+      return res.end("Forbidden (hotlink)");
+    }
 
-  if (!allowedOrigin) {
-    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
-    res.writeHead(403);
-    return res.end("Forbidden (hotlink)");
-  }
+    const parsedUrl = url.parse(req.url, true);
+    const id = req.url.split("/").pop().split("?")[0];
+    if (!/^\d+$/.test(id) || !Number.isSafeInteger(Number(id)) || Number(id) <= 0) {
+      res.writeHead(400);
+      return res.end("Invalid video id");
+    }
+    videoIdForLog = Number(id);
 
-  // 🔐 Token ellenőrzés
-  const parsedUrl = url.parse(req.url, true);
+    if (!verifyToken(parsedUrl.query)) {
+      await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
+      res.writeHead(403);
+      return res.end("Forbidden (invalid token)");
+    }
 
-  const id = req.url.split("/").pop().split("?")[0];
-  videoIdForLog = id;
-
-  // 🔧 FIX: ha undefined → legyen 0 (system value)
-  if (!videoIdForLog || videoIdForLog === "undefined") {
-    videoIdForLog = 0;
-  }
-
-  if (!verifyToken(parsedUrl.query)) {
-    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
-    res.writeHead(403);
-    return res.end("Forbidden (invalid token)");
-  }
-
-  let userId = null;
-
-  if (!userId) {
     const cookie = req.headers.cookie || "";
-    const match = cookie.match(/session_user=([^;]+)/);
+    const match = cookie.match(/(?:^|;\s*)session_user=([^;]+)/);
     if (!match) {
       await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
       res.writeHead(401);
@@ -152,112 +168,103 @@ const server = http.createServer(async (req, res) => {
     const [sessions] = await db.query(
       `SELECT s.user_id FROM user_sessions s INNER JOIN users u ON u.id = s.user_id
        WHERE s.token_hash = ? AND s.expires_at > UTC_TIMESTAMP() LIMIT 1`,
-      [tokenHash]
+      [tokenHash],
     );
     if (!sessions.length) {
       res.writeHead(401);
       return res.end("Unauthorized");
     }
-    userId = String(sessions[0].user_id);
+
+    const userId = String(sessions[0].user_id);
     if (String(parsedUrl.query.u) !== userId || String(parsedUrl.query.v) !== String(videoIdForLog)) {
       res.writeHead(403);
       return res.end("Forbidden");
     }
-  }
+    userIdForLog = userId;
 
-  userIdForLog = userId;
+    if (!rateLimitAccepted(`${userId}:${ip}`)) {
+      await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
+      res.writeHead(429);
+      return res.end("Too many requests");
+    }
 
-  // 🔐 RATE LIMITING (5 mp alatt max 20 kérés)
-  const key = `${userId}:${ip}`;
-  const now = Date.now();
-  const windowMs = 5000;
-  const limit = 20;
+    const [userRows] = await db.query(
+      "SELECT id, is_premium, premium_until, premium_tier, last_ip FROM users WHERE id = ? LIMIT 1",
+      [userId],
+    );
+    const user = userRows[0];
+    if (!user || !evaluatePremium(user).active) {
+      await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
+      res.writeHead(403);
+      return res.end("Forbidden");
+    }
 
-  let bucket = rateBuckets.get(key) || [];
-  bucket = bucket.filter((ts) => now - ts < windowMs);
-  bucket.push(now);
-  rateBuckets.set(key, bucket);
+    if (user.last_ip && user.last_ip !== ip) {
+      await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
+      res.writeHead(403);
+      return res.end("IP mismatch (session locked)");
+    }
 
-  if (bucket.length > limit) {
-    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
-    res.writeHead(429);
-    return res.end("Too many requests");
-  }
+    const [videoRows] = await db.query("SELECT id, file_url FROM videos WHERE id = ? LIMIT 1", [videoIdForLog]);
+    if (!videoRows.length) {
+      await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
+      res.writeHead(404);
+      return res.end("Not found");
+    }
 
-  const [userRows] = await db.query(
-    "SELECT id, is_premium, last_ip FROM users WHERE id = ? LIMIT 1",
-    [userId]
-  );
+    const filename = path.basename(String(videoRows[0].file_url || ""));
+    if (!filename || filename === "." || filename === "..") {
+      res.writeHead(404);
+      return res.end("Not found");
+    }
+    const filePath = path.join(VIDEO_ROOT, filename);
+    if (!fs.existsSync(filePath)) {
+      await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
+      res.writeHead(404);
+      return res.end("File missing");
+    }
 
-  if (!userRows.length || userRows[0].is_premium !== 1) {
-    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
-    res.writeHead(403);
-    return res.end("Forbidden");
-  }
+    const stat = fs.statSync(filePath);
+    if (!stat.isFile() || stat.size <= 0) {
+      res.writeHead(404);
+      return res.end("File missing");
+    }
+    const fileSize = stat.size;
+    const parsedRange = parseRange(req.headers.range, fileSize);
+    if (parsedRange === false) {
+      res.writeHead(416, { "Content-Range": `bytes */${fileSize}`, "Accept-Ranges": "bytes" });
+      return res.end();
+    }
 
-  // 🔐 IP + session kötés
-  const storedIp = userRows[0].last_ip;
+    await logVideoAccess(userIdForLog, videoIdForLog, ip, "allowed");
+    if (parsedRange) {
+      const { start, end } = parsedRange;
+      res.writeHead(206, {
+        "Content-Range": `bytes ${start}-${end}/${fileSize}`,
+        "Accept-Ranges": "bytes",
+        "Content-Length": end - start + 1,
+        "Content-Type": "video/mp4",
+        "X-Content-Type-Options": "nosniff",
+      });
+      return fs.createReadStream(filePath, { start, end }).pipe(res);
+    }
 
-  if (storedIp && storedIp !== ip) {
-    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
-    res.writeHead(403);
-    return res.end("IP mismatch (session locked)");
-  }
-
-  const [videoRows] = await db.query(
-    "SELECT id, file_url FROM videos WHERE id = ? LIMIT 1",
-    [id]
-  );
-
-  if (!videoRows.length) {
-    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
-    res.writeHead(404);
-    return res.end("Not found");
-  }
-
-  const filename = path.basename(videoRows[0].file_url);
-  const filePath = `/var/www/utom/private/videos/${filename}`;
-
-  if (!fs.existsSync(filePath)) {
-    await logVideoAccess(userIdForLog, videoIdForLog, ip, "denied");
-    res.writeHead(404);
-    return res.end("File missing");
-  }
-
-  const stat = fs.statSync(filePath);
-  const fileSize = stat.size;
-  const range = req.headers.range;
-
-  if (range) {
-    const [startStr, endStr] = range.replace("bytes=", "").split("-");
-    const start = Number(startStr);
-    const end = endStr ? Number(endStr) : fileSize - 1;
-
-    res.writeHead(206, {
-      "Content-Range": `bytes ${start}-${end}/${fileSize}`,
-      "Accept-Ranges": "bytes",
-      "Content-Length": end - start + 1,
+    res.writeHead(200, {
+      "Content-Length": fileSize,
       "Content-Type": "video/mp4",
+      "Accept-Ranges": "bytes",
+      "X-Content-Type-Options": "nosniff",
     });
-
-    accessStatus = "allowed";
-    await logVideoAccess(userIdForLog, videoIdForLog, ip, accessStatus);
-
-    fs.createReadStream(filePath, { start, end }).pipe(res);
-    return;
+    return fs.createReadStream(filePath).pipe(res);
+  } catch (error) {
+    console.error("video_server_request_failed", error instanceof Error ? error.message : "unknown_error");
+    if (!res.headersSent) res.writeHead(500);
+    return res.end("Server error");
   }
-
-  res.writeHead(200, {
-    "Content-Length": fileSize,
-    "Content-Type": "video/mp4",
-  });
-
-  accessStatus = "allowed";
-  await logVideoAccess(userIdForLog, videoIdForLog, ip, accessStatus);
-
-  fs.createReadStream(filePath).pipe(res);
 });
 
-server.listen(3001, () => {
-  console.log("Video server running on port 3001");
+const port = Number(process.env.VIDEO_SERVER_PORT || 3001);
+const host = process.env.VIDEO_SERVER_HOST || "127.0.0.1";
+server.listen(port, host, () => {
+  console.log(`Video server running on ${host}:${port}`);
 });

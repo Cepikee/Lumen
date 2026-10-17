@@ -2,16 +2,14 @@ import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { mailer } from "@/lib/mailer";
-
-// IP kinyerése reverse proxy mögül
-function getIp(req: Request) {
-  const fwd = req.headers.get("x-forwarded-for");
-  if (fwd) return fwd.split(",")[0].trim();
-  return "unknown";
-}
+import { getIp, requireTrustedOrigin } from "@/lib/security";
+import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
 
 export async function POST(req: Request) {
   try {
+    const originDenied = requireTrustedOrigin(req);
+    if (originDenied) return originDenied;
+
     const ip = getIp(req);
 
     // 🔐 1) User azonosítása cookie alapján
@@ -24,6 +22,15 @@ export async function POST(req: Request) {
       }, { status: 401 });
     }
 
+    const allowed = await consumeRateLimitFailClosed(db, {
+      scope: "username-change",
+      identity: `${userId}:${ip}`,
+      limit: 5,
+      windowMs: 60 * 60_000,
+    });
+    if (!allowed) {
+      return NextResponse.json({ success: false, message: "Túl sok kérés. Próbáld újra később." }, { status: 429 });
+    }
 
     // 🔥 2) Body beolvasása
     let body: any;
@@ -185,7 +192,7 @@ export async function POST(req: Request) {
     }
     return NextResponse.json({
       success: false,
-      message: err.message || "Váratlan hiba történt.",
+      message: "Váratlan hiba történt.",
     }, { status: 500 });
   }
 }

@@ -5,6 +5,9 @@ import bcrypt from "bcryptjs";
 import { validatePassword, validatePin } from "@/lib/auth-policy";
 import { hashPin } from "@/lib/pin-security";
 import { sendEmailVerification } from "@/lib/email-verification";
+import { verifyRecaptcha } from "@/lib/recaptcha";
+import { getIp, requireTrustedOrigin } from "@/lib/security";
+import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
 
 function generateRandomAvatar() {
   const styles = ["bottts", "adventurer", "micah"];
@@ -20,6 +23,14 @@ function generateRandomAvatar() {
 
 export async function POST(req: Request) {
   try {
+    const originDenied = requireTrustedOrigin(req);
+    if (originDenied) return originDenied;
+
+    const contentLength = Number(req.headers.get("content-length") || 0);
+    if (Number.isFinite(contentLength) && contentLength > 50_000) {
+      return NextResponse.json({ success: false, message: "Túl nagy kérés." }, { status: 413 });
+    }
+
     let body: any;
     try {
       body = await req.json();
@@ -29,11 +40,13 @@ export async function POST(req: Request) {
     if (!body || typeof body !== "object" || Array.isArray(body)) {
       return NextResponse.json({ success: false, message: "Érvénytelen kérés törzs." }, { status: 400 });
     }
+
     const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
     const password = typeof body?.password === "string" ? body.password : "";
     const pin = typeof body?.pin === "string" ? body.pin.trim() : "";
     const nickname = typeof body?.nickname === "string" ? body.nickname.trim() : "";
     const bio = typeof body?.bio === "string" ? body.bio.trim() : "";
+    const recaptchaToken = typeof body?.recaptchaToken === "string" ? body.recaptchaToken : "";
 
     if (!email || !password || !pin || !nickname) {
       return NextResponse.json({ success: false, message: "Minden mező kötelező." }, { status: 400 });
@@ -42,54 +55,45 @@ export async function POST(req: Request) {
     if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ success: false, message: "Érvénytelen email cím." }, { status: 400 });
     }
-
     if (!/^[a-zA-Z0-9_]{3,20}$/.test(nickname)) {
-      return NextResponse.json({
-        success: false,
-        message: "A felhasználónév 3-20 karakter, csak betű, szám és _ lehet.",
-      }, { status: 400 });
+      return NextResponse.json({ success: false, message: "A felhasználónév 3-20 karakter, csak betű, szám és _ lehet." }, { status: 400 });
     }
-
+    if (bio.length > 500) {
+      return NextResponse.json({ success: false, message: "A bemutatkozás túl hosszú." }, { status: 400 });
+    }
     if (!validatePin(pin)) {
-      return NextResponse.json({
-        success: false,
-        message: "A PIN 4 számjegyből álljon.",
-      }, { status: 400 });
+      return NextResponse.json({ success: false, message: "A PIN 4 számjegyből álljon." }, { status: 400 });
     }
-
     const passwordPolicy = validatePassword(password);
     if (!passwordPolicy.valid) {
-      return NextResponse.json({
-        success: false,
-        message: passwordPolicy.message,
-      }, { status: 400 });
+      return NextResponse.json({ success: false, message: passwordPolicy.message }, { status: 400 });
     }
 
-    const [emailCheck]: any = await db.query(
-      "SELECT id FROM users WHERE email = ? LIMIT 1",
-      [email]
-    );
+    const ip = getIp(req);
+    const [ipAllowed, emailAllowed] = await Promise.all([
+      consumeRateLimitFailClosed(db, { scope: "register-ip", identity: ip, limit: 8, windowMs: 60 * 60_000 }),
+      consumeRateLimitFailClosed(db, { scope: "register-email", identity: email, limit: 4, windowMs: 60 * 60_000 }),
+    ]);
+    if (!ipAllowed || !emailAllowed) {
+      return NextResponse.json({ success: false, message: "Túl sok regisztrációs próbálkozás. Próbáld újra később." }, { status: 429 });
+    }
+
+    const captchaScore = await verifyRecaptcha(recaptchaToken);
+    if (captchaScore < 0.5) {
+      return NextResponse.json({ success: false, message: "A botvédelem ellenőrzése sikertelen." }, { status: 400 });
+    }
+
+    const [emailCheck]: any = await db.query("SELECT id FROM users WHERE email = ? LIMIT 1", [email]);
     if (emailCheck.length > 0) {
-      return NextResponse.json({
-        success: false,
-        message: "Ez az email már regisztrálva van.",
-      }, { status: 409 });
+      return NextResponse.json({ success: false, message: "Ez az email már regisztrálva van." }, { status: 409 });
     }
-
-    const [nickCheck]: any = await db.query(
-      "SELECT id FROM users WHERE nickname = ? LIMIT 1",
-      [nickname]
-    );
+    const [nickCheck]: any = await db.query("SELECT id FROM users WHERE nickname = ? LIMIT 1", [nickname]);
     if (nickCheck.length > 0) {
-      return NextResponse.json({
-        success: false,
-        message: "Ez a felhasználónév már foglalt.",
-      }, { status: 409 });
+      return NextResponse.json({ success: false, message: "Ez a felhasználónév már foglalt." }, { status: 409 });
     }
 
     const password_hash = await bcrypt.hash(password, 10);
     const avatar = generateRandomAvatar();
-
     const [result]: any = await db.query("INSERT INTO users SET ?", {
       email,
       password_hash,
@@ -110,29 +114,20 @@ export async function POST(req: Request) {
       avatar_frame: null,
     });
 
-    const userId = result.insertId;
-
-    const response = NextResponse.json({
-      success: true,
-      message: "Sikeres regisztráció!",
-    });
-
-    await createSession(Number(userId), response, true);
+    const userId = Number(result.insertId);
+    const response = NextResponse.json({ success: true, message: "Sikeres regisztráció!" });
+    await createSession(userId, response, true);
 
     try {
-      await sendEmailVerification(Number(userId), email);
+      await sendEmailVerification(userId, email);
     } catch (error) {
-      console.error("Verification email could not be sent:", error);
+      console.error("Verification email could not be sent:", error instanceof Error ? error.message : "unknown_error");
     }
-
     return response;
   } catch (error: any) {
     if (error?.code === "ER_DUP_ENTRY") {
       return NextResponse.json({ success: false, message: "Az email vagy felhasználónév már foglalt." }, { status: 409 });
     }
-    return NextResponse.json({
-      success: false,
-      message: "Váratlan hiba történt.",
-    }, { status: 500 });
+    return NextResponse.json({ success: false, message: "Váratlan hiba történt." }, { status: 500 });
   }
 }

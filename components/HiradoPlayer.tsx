@@ -47,8 +47,11 @@ export default function HiradoPlayer({
       const controller = new AbortController();
       entitlementAbort.current = controller;
       try {
-        const res = await fetch(`/api/hirado/can-watch?videoId=${video.id}`, {
+        const res = await fetch("/api/hirado/can-watch", {
+          method: "POST",
           credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ videoId: video.id }),
           signal: controller.signal,
         });
         if (!res.ok) return;

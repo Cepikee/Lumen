@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { blockedCapabilityResponse } from "@/lib/config/routeGuard";
 import { db } from "@/lib/db";
 import { fetchPinnedText } from "@/lib/safe-fetch";
+import { requireInternalWorker } from "@/lib/security/internal-worker";
 
 export const runtime = "nodejs";
 const FETCH_TIMEOUT_MS = 20_000;
@@ -21,6 +22,9 @@ const OLLAMA_TIMEOUT_MS = 180_000;
 export async function POST(
   req: Request
 ) {
+  const denied = requireInternalWorker(req);
+  if (denied) return denied;
+
   const blocked =
     blockedCapabilityResponse([
       "feedFetch",

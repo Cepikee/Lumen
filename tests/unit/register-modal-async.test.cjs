@@ -7,8 +7,8 @@ const source = fs.readFileSync(
   'utf8',
 );
 
-assert.match(source, /try\s*\{[\s\S]*fetch\("\/api\/auth\/register"/);
-assert.match(source, /catch\s*\{[\s\S]*setError\("A regisztrációs szolgáltatás jelenleg nem érhető el\."\)/);
+assert.match(source, /try\s*\{[\s\S]*getRecaptchaToken\("register"\)[\s\S]*fetch\("\/api\/auth\/register"/);
+assert.match(source, /catch\s*\([^)]*\)\s*\{[\s\S]*A regisztrációs szolgáltatás jelenleg nem érhető el\./);
 assert.match(source, /finally\s*\{\s*setLoading\(false\);\s*\}/);
 assert.match(source, /res\.ok\s*&&\s*data\?\.success\s*===\s*true/);
 
