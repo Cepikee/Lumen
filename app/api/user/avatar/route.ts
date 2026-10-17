@@ -2,8 +2,16 @@ import { getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getPremiumEntitlement } from "@/lib/entitlements";
+import { requireTrustedOrigin } from "@/lib/security";
 
 export async function POST(req: Request) {
+  const originDenied = requireTrustedOrigin(req);
+  if (originDenied) return originDenied;
+
+  const contentLength = Number(req.headers.get("content-length") || 0);
+  if (Number.isFinite(contentLength) && contentLength > 8000) {
+    return NextResponse.json({ success: false, message: "Túl nagy kérés." }, { status: 413 });
+  }
   let body: unknown;
   try {
     body = await req.json();

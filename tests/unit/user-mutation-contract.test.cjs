@@ -17,12 +17,19 @@ assert.match(update, /updates\.theme !== undefined && !\["light", "dark", "syste
 assert.doesNotMatch(settings, /JSON\.stringify\(\{ nickname, bio \}\)/);
 assert.match(update, /status: 401/);
 assert.match(update, /Érvénytelen kérés/);
-assert.match(password, /logoutEverywhere !== undefined && typeof logoutEverywhere !== "boolean"/);
+assert.match(password, /requireTrustedOrigin\(req\)/);
+assert.match(password, /scope: "change-password-user"/);
+assert.match(password, /DELETE FROM user_sessions WHERE user_id = \?/);
+assert.match(password, /createSession\(userId, response, false\)/);
+assert.match(pin, /requireTrustedOrigin\(req\)/);
+assert.match(pin, /scope: "change-pin-user"/);
+assert.match(pin, /DELETE FROM user_sessions WHERE user_id = \?/);
 
 // Mutation routes must map malformed JSON to a client error rather than 500.
 for (const source of [password, pin, avatar, frame]) {
   assert.match(source, /req\.json\(\)/);
   assert.match(source, /status: 400/);
+  assert.match(source, /requireTrustedOrigin\(req\)/);
 }
 
 // Avatar input is bounded and restricted to the styles the UI can render.

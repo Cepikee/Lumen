@@ -1,12 +1,19 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { verifyRecaptcha } from "@/lib/recaptcha";
-import { getIp } from "@/lib/security";
+import { getIp, requireTrustedOrigin } from "@/lib/security";
 import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
 import { requestReset } from "@/lib/reset-service";
 
 export async function POST(req: Request) {
   try {
+    const originDenied = requireTrustedOrigin(req);
+    if (originDenied) return originDenied;
+
+    const contentLength = Number(req.headers.get("content-length") || 0);
+    if (Number.isFinite(contentLength) && contentLength > 16000) {
+      return NextResponse.json({ success: false, message: "Túl nagy kérés." }, { status: 413 });
+    }
     let body: any;
     try {
       body = await req.json();
@@ -18,7 +25,7 @@ export async function POST(req: Request) {
     }
     const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
     if (!email || email.length > 254) return NextResponse.json({ success: false, error: "Email is required" }, { status: 400 });
-    if (await verifyRecaptcha(body.recaptchaToken) < 0.5) return NextResponse.json({ success: true });
+    if (await verifyRecaptcha(body.recaptchaToken, { expectedAction: "forgot_password" }) < 0.5) return NextResponse.json({ success: true });
     const ip = getIp(req);
     const [ipAllowed, emailAllowed] = await Promise.all([
       consumeRateLimitFailClosed(db, { scope: "password-reset-ip", identity: ip, limit: 5, windowMs: 30 * 60_000 }),

@@ -16,7 +16,7 @@ test('registration and verification emails are origin, captcha and rate-limit pr
   const verify = read('app/api/auth/send-verification/route.ts');
   const client = read('components/RegisterModal.tsx');
   assert.match(register, /requireTrustedOrigin\(req\)/);
-  assert.match(register, /verifyRecaptcha\(recaptchaToken\)/);
+  assert.match(register, /verifyRecaptcha\(recaptchaToken, \{ expectedAction: "register" \}\)/);
   assert.match(register, /scope: "register-ip"/);
   assert.match(register, /scope: "register-email"/);
   assert.match(client, /getRecaptchaToken\("register"\)/);

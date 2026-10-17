@@ -12,7 +12,6 @@ export default function PasswordChangeModal({ show, onClose }: PasswordChangeMod
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [logoutEverywhere, setLogoutEverywhere] = useState(false);
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
 
@@ -42,18 +41,14 @@ export default function PasswordChangeModal({ show, onClose }: PasswordChangeMod
         body: JSON.stringify({
           currentPassword,
           newPassword,
-          logoutEverywhere,
         }),
       });
 
       const data = await res.json().catch(() => null);
 
       if (res.ok && data?.success === true) {
-        alert("Jelszó frissítve!");
+        alert("Jelszó frissítve! A többi korábbi munkamenet kijelentkeztetésre került.");
         onClose();
-        // logoutEverywhere revokes the current cookie too. Refresh the app so
-        // the local auth store cannot keep rendering the revoked session.
-        if (logoutEverywhere) window.location.reload();
       } else {
         setError(data?.message || "Hiba történt.");
       }
@@ -100,21 +95,8 @@ export default function PasswordChangeModal({ show, onClose }: PasswordChangeMod
           />
         </div>
 
-        {/* Kijelentkezés minden eszközről */}
-        <div className="form-check mb-3">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            checked={logoutEverywhere}
-            onChange={(e) => setLogoutEverywhere(e.target.checked)}
-            id="logoutEverywhere"
-          />
-          <label className="form-check-label" htmlFor="logoutEverywhere">
-            Kijelentkezés minden eszközről
-          </label>
-          <div className="text-muted small mt-1">
-            Ha bejelölöd, az összes böngészőből és appból kijelentkezel.
-          </div>
+        <div className="text-muted small mb-3">
+          Biztonsági okból jelszócsere után minden korábbi munkamenetet visszavonunk; ez a böngésző új munkamenetet kap.
         </div>
 
         {/* Hibaüzenet */}

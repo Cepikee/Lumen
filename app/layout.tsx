@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import ClientLayout from "../components/ClientLayout";
 import Analytics from "../components/Analytics";
+import BootstrapClient from "../components/BootstrapClient";
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 const analyticsEnabled = process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true";
@@ -48,12 +49,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
       <body className="d-flex flex-column min-vh-100">
         <Analytics enabled={analyticsEnabled} />
+        <BootstrapClient />
         <ClientLayout>{children}</ClientLayout>
-
-        <script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-          defer
-        ></script>
       </body>
     </html>
   );

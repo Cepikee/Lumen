@@ -67,6 +67,25 @@ export async function checkRateLimit(ip: string, limit = 60, windowMs = 10_000) 
   return accepted;
 }
 
+export async function checkPublicApiRateLimit(
+  req: Request,
+  scope: string,
+  limit = 120,
+  windowMs = 60_000,
+): Promise<boolean> {
+  const ip = getIp(req);
+  // Without a trusted reverse-proxy address every visitor would collapse into
+  // the same bucket ("direct"). In that deployment mode query-shape bounds
+  // still apply, but the shared IP limiter is intentionally skipped.
+  if (ip === "direct" || ip === "unknown") return true;
+  return consumeRateLimitFailClosed(db, {
+    scope: `public:${scope}`,
+    identity: ip,
+    limit,
+    windowMs,
+  });
+}
+
 // 🔐 Közös security wrapper
 export function isAllowedSameOriginRead(req: Request, options: { allowSameOriginRead?: boolean } = {}): boolean {
   // A browser read exception is deliberately narrow: GET only, an explicit

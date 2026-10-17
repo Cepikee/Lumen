@@ -1,20 +1,52 @@
-import { getSessionUserId } from "@/lib/auth-session";
+import { createSession, getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { validatePin } from "@/lib/auth-policy";
 import { hashPin, verifyPin } from "@/lib/pin-security";
+import { getIp, requireTrustedOrigin } from "@/lib/security";
+import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
 
 export async function POST(req: Request) {
   try {
-    const userId = await getSessionUserId();
+    const originDenied = requireTrustedOrigin(req);
+    if (originDenied) return originDenied;
 
+    const contentLength = Number(req.headers.get("content-length") || 0);
+    if (Number.isFinite(contentLength) && contentLength > 8000) {
+      return NextResponse.json({ success: false, message: "Túl nagy kérés." }, { status: 413 });
+    }
+
+    const userId = await getSessionUserId();
     if (!userId) {
       return NextResponse.json(
         { success: false, message: "Nincs bejelentkezve." },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
+    const ip = getIp(req);
+    const [userAllowed, ipAllowed] = await Promise.all([
+      consumeRateLimitFailClosed(db, {
+        scope: "change-pin-user",
+        identity: String(userId),
+        limit: 8,
+        windowMs: 15 * 60_000,
+      }),
+      (ip === "direct" || ip === "unknown")
+        ? Promise.resolve(true)
+        : consumeRateLimitFailClosed(db, {
+            scope: "change-pin-ip",
+            identity: ip,
+            limit: 24,
+            windowMs: 15 * 60_000,
+          }),
+    ]);
+    if (!userAllowed || !ipAllowed) {
+      return NextResponse.json(
+        { success: false, message: "Túl sok próbálkozás. Próbáld újra később." },
+        { status: 429 },
+      );
+    }
 
     let body: unknown;
     try {
@@ -22,67 +54,70 @@ export async function POST(req: Request) {
     } catch {
       return NextResponse.json(
         { success: false, message: "Érvénytelen kérés." },
-        { status: 400 }
+        { status: 400 },
       );
     }
     if (!body || typeof body !== "object" || Array.isArray(body)) {
       return NextResponse.json(
         { success: false, message: "Érvénytelen kérés." },
-        { status: 400 }
+        { status: 400 },
       );
     }
-    const { currentPin, newPin } = body as { currentPin?: unknown; newPin?: unknown };
 
-    // 1) Validáció
+    const { currentPin, newPin } = body as { currentPin?: unknown; newPin?: unknown };
     if (typeof currentPin !== "string" || typeof newPin !== "string" || !currentPin || !newPin) {
       return NextResponse.json(
         { success: false, message: "Minden mező kötelező." },
-        { status: 400 }
+        { status: 400 },
       );
     }
-
     if (!validatePin(newPin)) {
       return NextResponse.json(
         { success: false, message: "A PIN kódnak 4 számjegyből kell állnia." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    // 2) User lekérése
     const [rows]: any = await db.query(
       "SELECT id, pin_code FROM users WHERE id = ? LIMIT 1",
-      [userId]
+      [userId],
     );
-
     if (rows.length === 0) {
       return NextResponse.json(
         { success: false, message: "Felhasználó nem található." },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
-    const user = rows[0];
-
-    // 3) Jelenlegi PIN ellenőrzése
-    if (!(await verifyPin(currentPin, user.pin_code)).valid) {
+    if (!(await verifyPin(currentPin, rows[0].pin_code)).valid) {
       return NextResponse.json(
         { success: false, message: "Hibás jelenlegi PIN." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    // 4) Új PIN mentése
-    await db.query(
-      "UPDATE users SET pin_code = ? WHERE id = ?",
-      [await hashPin(newPin), userId]
-    );
+    const newHash = await hashPin(newPin);
+    const connection = await db.getConnection();
+    try {
+      await connection.beginTransaction();
+      await connection.query("UPDATE users SET pin_code = ? WHERE id = ?", [newHash, userId]);
+      await connection.query("DELETE FROM user_sessions WHERE user_id = ?", [userId]);
+      await connection.commit();
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
 
-    return NextResponse.json({ success: true });
+    const response = NextResponse.json({ success: true, sessionsRotated: true });
+    await createSession(userId, response, false);
+    return response;
   } catch (err) {
     console.error("PIN change error:", err);
     return NextResponse.json(
       { success: false, message: "Váratlan hiba történt." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

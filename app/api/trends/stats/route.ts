@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
+import { checkPublicApiRateLimit } from "@/lib/security";
 
 export async function GET(req: Request) {
   try {
+    if (!(await checkPublicApiRateLimit(req, "trend-stats", 60, 60_000))) {
+      return NextResponse.json({ error: "rate_limit" }, { status: 429 });
+    }
     const { searchParams } = new URL(req.url);
     const keyword = searchParams.get("keyword")?.trim();
-    if (!keyword || !keyword.trim()) {
-      return NextResponse.json({ error: "keyword paraméter hiányzik" }, { status: 400 });
+    if (!keyword || !keyword.trim() || keyword.length > 100) {
+      return NextResponse.json({ error: "Érvénytelen keyword paraméter." }, { status: 400 });
     }
 
     const connection = await mysql.createConnection({

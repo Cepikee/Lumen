@@ -2,32 +2,47 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop/utom-recovery ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop/utom-recovery ]
+
+permissions:
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: "npm"
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Run depcheck
-        run: npx depcheck
+      - name: Typecheck
+        run: npm run typecheck
 
-      - name: Run lint
+      - name: Lint
         run: npm run lint
 
-      - name: Run build
+      - name: Import check
+        run: npm run check:imports
+
+      - name: Offline tests
+        run: npm run test:offline
+
+      - name: Production dependency audit
+        run: npm audit --omit=dev
+
+      - name: Build
         run: npm run build

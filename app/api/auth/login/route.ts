@@ -5,11 +5,18 @@ import bcrypt from "bcryptjs";
 import { hashPin, verifyPin } from "@/lib/pin-security";
 import { getIp, requireTrustedOrigin } from "@/lib/security";
 import { getLoginAttemptScope } from "@/lib/login-rate-limit";
+import { verifyRecaptcha } from "@/lib/recaptcha";
+import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
 
 export async function POST(req: Request) {
   try {
     const originDenied = requireTrustedOrigin(req);
     if (originDenied) return originDenied;
+
+    const contentLength = Number(req.headers.get("content-length") || 0);
+    if (Number.isFinite(contentLength) && contentLength > 20000) {
+      return NextResponse.json({ success: false, message: "Túl nagy kérés." }, { status: 413 });
+    }
 
     const ip = getIp(req);
 
@@ -27,8 +34,53 @@ export async function POST(req: Request) {
     const password = typeof body?.password === "string" ? body.password : "";
     const pin = typeof body?.pin === "string" ? body.pin.trim() : "";
     const rememberMe = body?.rememberMe === true;
-    if (!email || !password || !pin) {
+    const recaptchaToken = typeof body?.recaptchaToken === "string" ? body.recaptchaToken : "";
+    if (!email || !password || !pin || email.length > 254) {
       return NextResponse.json({ success: false, message: "Érvénytelen bejelentkezési adatok." }, { status: 400 });
+    }
+
+    const accountGate = await consumeRateLimitFailClosed(db, {
+      scope: "login-account-request",
+      identity: email,
+      limit: 30,
+      windowMs: 15 * 60_000,
+    });
+    const ipGate = (ip === "direct" || ip === "unknown")
+      ? true
+      : await consumeRateLimitFailClosed(db, {
+          scope: "login-ip-request",
+          identity: ip,
+          limit: 60,
+          windowMs: 15 * 60_000,
+        });
+    if (!accountGate || !ipGate) {
+      return NextResponse.json({
+        success: false,
+        message: "Túl sok próbálkozás. Próbáld újra később.",
+      }, { status: 429 });
+    }
+
+    const captchaScore = await verifyRecaptcha(recaptchaToken, { expectedAction: "login" });
+    if (captchaScore < 0.5) {
+      return NextResponse.json({
+        success: false,
+        message: "A botvédelem ellenőrzése sikertelen.",
+      }, { status: 400 });
+    }
+
+    const [accountFailures]: any = await db.query(
+      `SELECT COUNT(*) AS cnt
+       FROM login_attempts
+       WHERE email = ?
+         AND success = 0
+         AND created_at > (NOW() - INTERVAL 30 MINUTE)`,
+      [email],
+    );
+    if (Number(accountFailures[0]?.cnt || 0) >= 15) {
+      return NextResponse.json({
+        success: false,
+        message: "Túl sok próbálkozás. Próbáld újra később.",
+      }, { status: 429 });
     }
 
     const attemptScope = getLoginAttemptScope(ip, email);

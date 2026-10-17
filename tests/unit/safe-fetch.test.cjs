@@ -9,7 +9,7 @@ const path = require("node:path");
 const { isBlockedAddress, resolvePinnedTarget, fetchPinnedText } = require("../../lib/safe-fetch");
 
 test("SSRF address policy blocks private IPv4, IPv6, mapped, link-local and mixed DNS", async () => {
-  for (const address of ["127.0.0.1", "10.0.0.1", "172.16.0.1", "192.168.1.1", "169.254.169.254", "::1", "fd00::1", "fe80::1", "::ffff:127.0.0.1"]) assert.equal(isBlockedAddress(address), true, address);
+  for (const address of ["127.0.0.1", "10.0.0.1", "172.16.0.1", "192.168.1.1", "169.254.169.254", "::1", "fd00::1", "fe80::1", "::ffff:127.0.0.1", "64:ff9b::7f00:1", "64:ff9b:1::7f00:1", "2002:7f00:1::1"]) assert.equal(isBlockedAddress(address), true, address);
   assert.equal(isBlockedAddress("93.184.216.34"), false);
   assert.equal((await resolvePinnedTarget("http://public.example/", { resolver: async () => [{ address: "93.184.216.34", family: 4 }] })).selected.address, "93.184.216.34");
   await assert.rejects(resolvePinnedTarget("http://localhost/"), /blocked/);

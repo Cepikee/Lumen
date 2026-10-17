@@ -78,7 +78,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, message: "Túl sok regisztrációs próbálkozás. Próbáld újra később." }, { status: 429 });
     }
 
-    const captchaScore = await verifyRecaptcha(recaptchaToken);
+    const captchaScore = await verifyRecaptcha(recaptchaToken, { expectedAction: "register" });
     if (captchaScore < 0.5) {
       return NextResponse.json({ success: false, message: "A botvédelem ellenőrzése sikertelen." }, { status: 400 });
     }

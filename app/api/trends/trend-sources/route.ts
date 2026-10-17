@@ -2,14 +2,18 @@ export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
+import { checkPublicApiRateLimit } from "@/lib/security";
 
 export async function GET(req: Request) {
+  if (!(await checkPublicApiRateLimit(req, "trend-sources", 60, 60_000))) {
+    return NextResponse.json({ error: "rate_limit" }, { status: 429 });
+  }
   const { searchParams } = new URL(req.url);
   const keyword = searchParams.get("keyword");
   const period = searchParams.get("period") || "7d";
 
-  if (!keyword || !keyword.trim()) {
-    return NextResponse.json({ error: "Keyword is required" }, { status: 400 });
+  if (!keyword || !keyword.trim() || keyword.trim().length > 100) {
+    return NextResponse.json({ error: "Invalid keyword" }, { status: 400 });
   }
   if (period !== "all" && !/^\d+d$/.test(period)) {
     return NextResponse.json({ error: "Invalid period" }, { status: 400 });
@@ -31,7 +35,7 @@ export async function GET(req: Request) {
       days = null;
     } else if (period.endsWith("d")) {
       const parsed = Number(period.slice(0, -1));
-      if (!Number.isSafeInteger(parsed) || parsed < 1 || parsed > 3650) {
+      if (!Number.isSafeInteger(parsed) || parsed < 1 || parsed > 365) {
         return NextResponse.json({ error: "Invalid period" }, { status: 400 });
       }
       days = parsed;

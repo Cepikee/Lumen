@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import mysql, { RowDataPacket } from "mysql2/promise";
 import { businessDayBounds, mysqlUtc } from "@/lib/business-time";
+import { checkPublicApiRateLimit } from "@/lib/security";
 
 export const dynamic = "force-dynamic";
 
@@ -159,6 +160,10 @@ function sourceIdFromFilter(rawValue: string): number | undefined {
 
 export async function GET(req: Request) {
   try {
+    if (!(await checkPublicApiRateLimit(req, "summaries", 240, 60_000))) {
+      return NextResponse.json({ error: "rate_limit" }, { status: 429 });
+    }
+
     const { searchParams } = new URL(req.url);
     const db = getPool();
 
@@ -269,7 +274,7 @@ export async function GET(req: Request) {
         searchParams.get("page"),
         1
       ),
-      100000
+      200
     );
 
     // Keep the documented pagination parameter meaningful for search/feed
@@ -277,7 +282,7 @@ export async function GET(req: Request) {
     // oversized result page.
     const limit = Math.min(
       parsePositiveInt(searchParams.get("limit"), 10),
-      100
+      50
     );
     const offset =
       (page - 1) * limit;
@@ -286,7 +291,7 @@ export async function GET(req: Request) {
       searchParams.get("q") ?? ""
     )
       .trim()
-      .slice(0, 250);
+      .slice(0, 120);
 
     const searchFilter =
       createSearchFilter(q);
@@ -296,7 +301,7 @@ export async function GET(req: Request) {
     // ---------------------------------------------------------
 
     const sourcesRaw =
-      searchParams.getAll("source");
+      searchParams.getAll("source").slice(0, 20);
 
     const sourceIds = [
       ...new Set(
@@ -331,7 +336,7 @@ export async function GET(req: Request) {
             category.trim()
           )
           .filter(Boolean)
-          .slice(0, 50)
+          .slice(0, 20)
       ),
     ];
 

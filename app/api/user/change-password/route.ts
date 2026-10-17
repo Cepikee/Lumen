@@ -1,22 +1,52 @@
-import { revokeAllUserSessions, clearSessionCookie } from "@/lib/auth-session";
-import { getSessionUserId } from "@/lib/auth-session";
+import { createSession, getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { validatePassword } from "@/lib/auth-policy";
+import { getIp, requireTrustedOrigin } from "@/lib/security";
+import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
 
 export async function POST(req: Request) {
   try {
+    const originDenied = requireTrustedOrigin(req);
+    if (originDenied) return originDenied;
+
+    const contentLength = Number(req.headers.get("content-length") || 0);
+    if (Number.isFinite(contentLength) && contentLength > 16000) {
+      return NextResponse.json({ success: false, message: "Túl nagy kérés." }, { status: 413 });
+    }
+
     const userId = await getSessionUserId();
-
-
     if (!userId) {
       return NextResponse.json(
         { success: false, message: "Nincs bejelentkezve." },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
+    const ip = getIp(req);
+    const [userAllowed, ipAllowed] = await Promise.all([
+      consumeRateLimitFailClosed(db, {
+        scope: "change-password-user",
+        identity: String(userId),
+        limit: 6,
+        windowMs: 15 * 60_000,
+      }),
+      (ip === "direct" || ip === "unknown")
+        ? Promise.resolve(true)
+        : consumeRateLimitFailClosed(db, {
+            scope: "change-password-ip",
+            identity: ip,
+            limit: 20,
+            windowMs: 15 * 60_000,
+          }),
+    ]);
+    if (!userAllowed || !ipAllowed) {
+      return NextResponse.json(
+        { success: false, message: "Túl sok próbálkozás. Próbáld újra később." },
+        { status: 429 },
+      );
+    }
 
     let body: unknown;
     try {
@@ -24,34 +54,23 @@ export async function POST(req: Request) {
     } catch {
       return NextResponse.json(
         { success: false, message: "Érvénytelen kérés." },
-        { status: 400 }
+        { status: 400 },
       );
     }
     if (!body || typeof body !== "object" || Array.isArray(body)) {
       return NextResponse.json(
         { success: false, message: "Érvénytelen kérés." },
-        { status: 400 }
+        { status: 400 },
       );
     }
-    const { currentPassword, newPassword, logoutEverywhere } = body as {
+
+    const { currentPassword, newPassword } = body as {
       currentPassword?: unknown;
       newPassword?: unknown;
-      logoutEverywhere?: unknown;
     };
-
-    // 1) Validáció
     if (typeof currentPassword !== "string" || typeof newPassword !== "string" || !currentPassword || !newPassword) {
       return NextResponse.json(
         { success: false, message: "Minden mező kötelező." },
-        { status: 400 }
-      );
-    }
-
-    // Do not coerce arbitrary truthy JSON values (for example the string
-    // "false") into the destructive logout-everywhere option.
-    if (logoutEverywhere !== undefined && typeof logoutEverywhere !== "boolean") {
-      return NextResponse.json(
-        { success: false, message: "Érvénytelen kijelentkezési beállítás." },
         { status: 400 },
       );
     }
@@ -59,63 +78,57 @@ export async function POST(req: Request) {
     const passwordPolicy = validatePassword(newPassword);
     if (!passwordPolicy.valid) {
       return NextResponse.json(
-        {
-          success: false,
-          message: passwordPolicy.message,
-        },
-        { status: 400 }
+        { success: false, message: passwordPolicy.message },
+        { status: 400 },
       );
     }
 
-    // 2) User lekérése
     const [rows]: any = await db.query(
       "SELECT id, password_hash FROM users WHERE id = ? LIMIT 1",
-      [userId]
+      [userId],
     );
-
     if (rows.length === 0) {
       return NextResponse.json(
         { success: false, message: "Felhasználó nem található." },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
-    const user = rows[0];
-
-    // 3) Jelenlegi jelszó ellenőrzése
-    const valid = await bcrypt.compare(currentPassword, user.password_hash);
-
+    const valid = await bcrypt.compare(currentPassword, rows[0].password_hash);
     if (!valid) {
       return NextResponse.json(
         { success: false, message: "Hibás jelenlegi jelszó." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    // 4) Új jelszó hash-elése
     const hashed = await bcrypt.hash(newPassword, 12);
-
-    // 5) Jelszó frissítése
-    await db.query(
-      "UPDATE users SET password_hash = ? WHERE id = ?",
-      [hashed, userId]
-    );
-
-    // 6) Kijelentkeztetés minden eszközről (opcionális)
-    if (logoutEverywhere) {
-      await revokeAllUserSessions(userId);
-      // Egyszerű megoldás: töröljük a session cookie-t
-      const response = NextResponse.json({ success: true });
-      clearSessionCookie(response);
-      return response;
+    const connection = await db.getConnection();
+    try {
+      await connection.beginTransaction();
+      await connection.query(
+        "UPDATE users SET password_hash = ? WHERE id = ?",
+        [hashed, userId],
+      );
+      await connection.query("DELETE FROM user_sessions WHERE user_id = ?", [userId]);
+      await connection.commit();
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
     }
 
-    return NextResponse.json({ success: true });
+    // All pre-existing sessions are invalidated after a credential change.
+    // Give the browser that performed the change a fresh short-lived session.
+    const response = NextResponse.json({ success: true, sessionsRotated: true });
+    await createSession(userId, response, false);
+    return response;
   } catch (err) {
     console.error("Password change error:", err);
     return NextResponse.json(
       { success: false, message: "Váratlan hiba történt." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
