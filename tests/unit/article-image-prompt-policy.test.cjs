@@ -19,10 +19,8 @@ test("editorial prompt is deterministic, sanitized and carries hard safety const
 test("policy distinguishes generation, fallback and skip", () => {
   assert.equal(imagePolicy({ title: "Kamatdöntés", short_summary: "Döntött a jegybank" }, { enabled: true }).action, "generate");
   assert.equal(imagePolicy({ title: "Szexuális erőszak ügye" }, { enabled: true }).action, "fallback_only");
-  assert.equal(imagePolicy({ title: "Hír", image_generation_disabled: true }, { enabled: true }).action, "skip");
   assert.equal(imagePolicy({ title: "Hír" }, { enabled: false }).action, "fallback_only");
   assert.equal(imagePolicy({ title: "Szexuális erőszak ügye" }, { enabled: true, force: true }).action, "fallback_only");
-  assert.equal(imagePolicy({ title: "Hír", image_generation_disabled: true }, { enabled: true, force: true }).action, "skip");
 });
 
 test("prompt cues stay factual across neutral, trend, political, crime, tech and clickbait inputs", () => {

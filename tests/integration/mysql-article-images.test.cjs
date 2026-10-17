@@ -12,6 +12,7 @@ const { createImageRepository } = require("../../lib/article-images/repository")
 const { createImageService } = require("../../lib/article-images/service");
 const { createImageStorage } = require("../../lib/article-images/storage");
 const { createCircuitBreaker } = require("../../lib/article-images/circuit-breaker");
+const { imagePolicy } = require("../../lib/article-images/policy");
 
 function configFromUrl() {
   const url = new URL(process.env.UTOM_TEST_MYSQL_URL || "");
@@ -65,7 +66,12 @@ test("MySQL 8 image migrations, fencing, budget concurrency and crash recovery",
     pool = mysql.createPool({ ...config, connectionLimit: 24 });
     const repository = createImageRepository(pool);
     assert.equal(await repository.enqueueCompleted(), 1);
-    const claimA = await repository.claim({ workerId: "worker-a", claimToken: "aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa", staleMs: 60_000, maxAttempts: 2 });
+    const smokeCandidates = await repository.listSmokeCandidates(100);
+    assert.equal(smokeCandidates.length, 1, "canonical schema must execute the production smoke selection query");
+    assert.equal(Number(smokeCandidates[0].id), Number(legacy.insertId));
+    assert.equal(imagePolicy(smokeCandidates[0], { enabled: true }).action, "generate");
+    await repository.resetForSmoke(legacy.insertId);
+    const claimA = await repository.claim({ workerId: "worker-a", claimToken: "aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa", staleMs: 60_000, maxAttempts: 2, articleId: legacy.insertId });
     assert.equal(Number(claimA.articleId), Number(legacy.insertId));
     await pool.execute("UPDATE article_images SET heartbeat_at=UTC_TIMESTAMP(6)-INTERVAL 2 MINUTE WHERE article_id=?", [legacy.insertId]);
     const claimB = await repository.claim({ workerId: "worker-b", claimToken: "bbbbbbbb-bbbb-4bbb-bbbb-bbbbbbbbbbbb", staleMs: 60_000, maxAttempts: 2 });

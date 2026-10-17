@@ -18,11 +18,13 @@ test("image job schema is unique per article and carries lease, fingerprint and 
 
 test("worker only queues completed published articles and all terminal writes are claim fenced", () => {
   const repository = fs.readFileSync("lib/article-images/repository.js", "utf8");
+  const policy = fs.readFileSync("lib/article-images/policy.js", "utf8");
   assert.match(repository, /status='done' AND processed=1/);
   assert.match(repository, /FOR UPDATE SKIP LOCKED/);
   assert.match(repository, /WHERE article_id=\? AND image_status='generating' AND worker_id=\? AND claim_token=\?/g);
   assert.match(repository, /image_generation_daily_usage[\s\S]*FOR UPDATE/);
   assert.match(repository, /reserved_neurons=reserved_neurons-\?[\s\S]*reserved_neurons>=\?/);
+  assert.doesNotMatch(`${repository}\n${policy}`, /image_generation_disabled/, "runtime image policy must use only canonical schema fields");
 });
 
 test("real provider smoke is double gated and normal worker is disabled by default", () => {
