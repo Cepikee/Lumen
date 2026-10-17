@@ -36,6 +36,7 @@
     "benchmark:v22:fp": "node scripts/analyze-v22-false-positives.cjs",
     "benchmark:v22:heldout": "node scripts/run-v22-heldout.cjs",
     "image:worker": "node pipeline/image-worker.js",
+    "image:worker:once": "node pipeline/image-worker.js --once",
     "image:smoke": "node scripts/cloudflare-image-smoke.cjs",
     "image:regenerate": "node scripts/regenerate-article-image.cjs"
   },

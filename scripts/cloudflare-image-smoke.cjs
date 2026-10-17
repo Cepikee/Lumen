@@ -51,7 +51,7 @@ async function runSmoke(dependencies = {}) {
     },
   };
   try {
-    await repository.enqueueCompleted(100);
+    await repository.enqueueCompleted(100, { backfillExisting: true });
     const candidates = await repository.listSmokeCandidates(100);
     const article = candidates.find((candidate) => imagePolicy(candidate, { enabled: true }).action === "generate");
     if (!article) throw new Error("no_eligible_non_ready_smoke_article");

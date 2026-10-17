@@ -10,13 +10,13 @@ const fixtures = require("../helpers/image-fixtures.cjs");
 
 test("worker and full ready path survive the production unsupported-CPU Sharp failure", async () => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), "utom-legacy-cpu-"));
-  const previous = Object.fromEntries(["IMAGE_GEN_ENABLED", "IMAGE_GEN_OPTIMIZE_WITH_SHARP", "IMAGE_GEN_STORAGE_ROOT", "CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_AI_API_TOKEN"].map((key) => [key, process.env[key]]));
+  const previous = Object.fromEntries(["IMAGE_GEN_ENABLED", "IMAGE_GEN_OPTIMIZE_WITH_SHARP", "IMAGE_GEN_STORAGE_ROOT", "IMAGE_GEN_MIN_ARTICLE_ID", "CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_AI_API_TOKEN"].map((key) => [key, process.env[key]]));
   const originalLoad = Module._load;
   const completed = [];
   let claimed = false;
   try {
     Object.assign(process.env, {
-      IMAGE_GEN_ENABLED: "true", IMAGE_GEN_OPTIMIZE_WITH_SHARP: "true", IMAGE_GEN_STORAGE_ROOT: root,
+      IMAGE_GEN_ENABLED: "true", IMAGE_GEN_OPTIMIZE_WITH_SHARP: "true", IMAGE_GEN_STORAGE_ROOT: root, IMAGE_GEN_MIN_ARTICLE_ID: "0",
       CLOUDFLARE_ACCOUNT_ID: "test-account", CLOUDFLARE_AI_API_TOKEN: "test-token",
     });
     Module._load = function patched(request, parent, isMain) {

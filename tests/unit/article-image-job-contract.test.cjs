@@ -19,7 +19,10 @@ test("image job schema is unique per article and carries lease, fingerprint and 
 test("worker only queues completed published articles and all terminal writes are claim fenced", () => {
   const repository = fs.readFileSync("lib/article-images/repository.js", "utf8");
   const policy = fs.readFileSync("lib/article-images/policy.js", "utf8");
-  assert.match(repository, /status='done' AND processed=1/);
+  assert.match(repository, /a\.status='done' AND a\.processed=1/);
+  assert.match(repository, /a\.id>\?/);
+  assert.match(repository, /a\.id>\? OR ai\.force_revision>0/);
+  assert.match(repository, /image_rollout_cutoff_required/);
   assert.match(repository, /FOR UPDATE SKIP LOCKED/);
   assert.match(repository, /WHERE article_id=\? AND image_status='generating' AND worker_id=\? AND claim_token=\?/g);
   assert.match(repository, /image_generation_daily_usage[\s\S]*FOR UPDATE/);
@@ -34,4 +37,17 @@ test("real provider smoke is double gated and normal worker is disabled by defau
   assert.match(smoke, /IMAGE_GEN_ENABLED !== "true"/);
   assert.match(env, /IMAGE_GEN_ENABLED=false/);
   assert.match(env, /RUN_CLOUDFLARE_IMAGE_SMOKE=0/);
+});
+
+test("continuous image work stays outside the canonical article completion path", () => {
+  const stateMachine = fs.readFileSync("pipeline/state-machine.js", "utf8");
+  const worker = fs.readFileSync("pipeline/image-worker.js", "utf8");
+  const smoke = fs.readFileSync("scripts/cloudflare-image-smoke.cjs", "utf8");
+  const packageJson = JSON.parse(fs.readFileSync("package.json", "utf8"));
+  assert.doesNotMatch(stateMachine, /article-images|image-worker|CloudflareImage/i);
+  assert.match(worker, /await runContinuous\(\)/);
+  assert.match(worker, /process\.argv\.includes\("--once"\)/);
+  assert.match(smoke, /runOnce\(/);
+  assert.equal(packageJson.scripts["image:worker"], "node pipeline/image-worker.js");
+  assert.equal(packageJson.scripts["image:worker:once"], "node pipeline/image-worker.js --once");
 });
