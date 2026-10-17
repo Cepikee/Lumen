@@ -41,11 +41,13 @@ test("feed card has safe fallbacks and compact content limits",()=>{
  assert.match(card,/role="link"/);
  assert.match(read("components/NewsFeedCard.module.css"),/-webkit-line-clamp:2/);
 });
-test("visual polish keeps an image-less compact feed and branded source metadata",()=>{
+test("visual polish keeps a stable illustration slot and branded source metadata",()=>{
  const cardCss=read("components/NewsFeedCard.module.css");
  const header=read("components/Header.tsx");
  const globalCss=read("app/globals.css");
- assert.match(card,/imageUrl\?<div className=\{styles\.thumbnail\}/);
+ assert.match(card,/className=\{styles\.thumbnail\}/);
+ assert.match(card,/loading="lazy"/);
+ assert.match(card,/AI illusztráció/);
  assert.match(card,/image_url\?:string\|null/);
  assert.match(card,/safeImage\(item\.image_url\)/);
  assert.match(card,/sourceBadge\(item\)/);

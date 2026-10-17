@@ -17,6 +17,12 @@ function mapSource(raw: unknown) {
   return "ismeretlen";
 }
 
+function safeArticleImage(raw: unknown) {
+  if (typeof raw !== "string") return null;
+  const value = raw.trim();
+  return /^\/article-images\/\d{4}\/\d{2}\/\d{2}\/[1-9]\d*-[a-f0-9]{12}\.webp$/.test(value) ? value : null;
+}
+
 export default function CikkOldal() {
   const params = useParams();
   const rawId = params?.id;
@@ -26,6 +32,7 @@ export default function CikkOldal() {
 
   const [item, setItem] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [imageFailed, setImageFailed] = useState(false);
 
   const [related, setRelated] = useState<any[]>([]);
   const [relatedLoading, setRelatedLoading] = useState(false);
@@ -62,6 +69,7 @@ export default function CikkOldal() {
 
     setLoading(true);
     setItem(null);
+    setImageFailed(false);
 
     fetch(`/api/summaries?id=${id}`, { cache: "no-store" })
       .then((res) => {
@@ -161,6 +169,10 @@ export default function CikkOldal() {
   const rawSource = item.source_name ?? item.source ?? "";
   const source = mapSource(rawSource);
   const sourceClass = `source-${source}`;
+  const imageUrl = safeArticleImage(item.image_url);
+  const categoryKey = typeof item.category === "string"
+    ? item.category.toLocaleLowerCase("hu-HU").replace(/[^a-z0-9áéíóöőúüű]+/g, "-")
+    : "altalanos";
 
   return (
     <div className={`article-container`}>
@@ -215,6 +227,21 @@ export default function CikkOldal() {
             </span>
           </div>
         </div>
+
+        <figure className="article-illustration" data-category={categoryKey}>
+          {imageUrl && !imageFailed ? (
+            <img
+              src={imageUrl}
+              width={1024}
+              height={576}
+              loading="eager"
+              decoding="async"
+              alt={`${typeof item.title === "string" && item.title.trim() ? item.title.trim() : "A cikk"} – szerkesztőségi illusztráció`}
+              onError={() => setImageFailed(true)}
+            />
+          ) : <span aria-hidden="true">U</span>}
+          {imageUrl && !imageFailed && ["generated", "cluster_reuse"].includes(item.image_source_type) ? <figcaption>AI illusztráció</figcaption> : null}
+        </figure>
 
         {/* RÖVID TARTALOM */}
         <p className="article-summary">{typeof item.content === "string" ? item.content : ""}</p>

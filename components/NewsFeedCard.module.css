@@ -1,6 +1,12 @@
 .card{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin-bottom:13px;padding:15px 18px 13px;border:1px solid rgba(35,78,108,.48);border-radius:15px;background:linear-gradient(145deg,rgba(9,30,49,.95),rgba(6,20,33,.97));color:#eaf5ff;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.018),0 8px 22px rgba(0,0,0,.075);transition:transform .15s ease,border-color .15s ease,background .15s ease,box-shadow .15s ease}
 .withImage{grid-template-columns:210px minmax(0,1fr)}
-.thumbnail{width:210px;height:135px;border-radius:11px;background-position:center;background-size:cover;background-repeat:no-repeat}
+.thumbnail{position:relative;width:210px;aspect-ratio:16/9;align-self:center;overflow:hidden;border-radius:11px;background:radial-gradient(circle at 72% 24%,rgba(32,183,255,.27),transparent 34%),linear-gradient(145deg,#103557,#071c30)}
+.thumbnail[data-category*="gazd"]{background:radial-gradient(circle at 25% 25%,rgba(42,211,177,.27),transparent 38%),linear-gradient(145deg,#123c3b,#071d2e)}
+.thumbnail[data-category*="polit"],.thumbnail[data-category*="köz"]{background:radial-gradient(circle at 70% 20%,rgba(145,90,255,.25),transparent 38%),linear-gradient(145deg,#222651,#0a1d34)}
+.thumbnail[data-category*="sport"]{background:radial-gradient(circle at 70% 25%,rgba(56,220,135,.26),transparent 38%),linear-gradient(145deg,#123e38,#071d2e)}
+.thumbnail img{display:block;width:100%;height:100%;object-fit:cover}
+.fallbackMark{position:absolute;inset:0;display:grid;place-items:center;color:rgba(127,214,255,.72);font-size:42px;font-weight:850;letter-spacing:-.08em;text-shadow:0 0 24px rgba(36,174,255,.42)}
+.illustrationBadge{position:absolute;right:7px;bottom:7px;border:1px solid rgba(116,205,255,.45);border-radius:999px;background:rgba(3,18,32,.82);color:#c7ecff;padding:3px 7px;font-size:8px;font-weight:750;backdrop-filter:blur(6px)}
 .card::before{content:"";position:absolute;inset:15px auto 15px 0;width:2px;border-radius:2px;background:linear-gradient(#139dff,#25d1ec);opacity:.3}
 .card:hover,.card:focus-visible{transform:translateY(-1px);border-color:rgba(48,126,174,.76);background:linear-gradient(145deg,rgba(11,36,57,.98),rgba(7,25,41,.98));box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 11px 28px rgba(0,0,0,.11);outline:none}
 .body{min-width:0}
@@ -23,5 +29,5 @@
 .actions button,.actions a{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:31px;border:0;border-radius:7px;background:transparent;color:#79c8fb;font-size:11.5px;font-weight:650;line-height:1;text-decoration:none;padding:7px 8px;transition:background .15s ease,color .15s ease}
 .actions svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .actions button:hover,.actions a:hover{background:rgba(31,128,188,.14);color:#d2f0ff}
-@media(max-width:640px){.card,.withImage{grid-template-columns:minmax(0,1fr);padding:13px 13px 11px}.thumbnail{width:100%;height:160px}.body h2{font-size:16px}.summary{-webkit-line-clamp:2;max-height:38px;font-size:13px}.body footer{align-items:flex-end}.actions button{display:none}.actions a{font-size:11px}.meta{font-size:11px}.domain{max-width:130px}}
+@media(max-width:640px){.card,.withImage{grid-template-columns:minmax(0,1fr);padding:13px 13px 11px}.thumbnail{width:100%;height:auto}.body h2{font-size:16px}.summary{-webkit-line-clamp:2;max-height:38px;font-size:13px}.body footer{align-items:flex-end}.actions button{display:none}.actions a{font-size:11px}.meta{font-size:11px}.domain{max-width:130px}}
 @media(max-width:420px){.card{padding-inline:12px}.body footer{display:block}.actions{margin-top:7px}.badges span:nth-child(n+2){display:none}}

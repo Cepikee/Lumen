@@ -12,6 +12,11 @@ function walk(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     if (ignored.has(entry.name)) continue;
     const fullPath = path.join(directory, entry.name);
+    // Agent-run snapshots are immutable diagnostic artifacts, not executable
+    // repository source. Their intentionally partial backups must not make the
+    // active-tree import gate fail.
+    const relative = path.relative(root, fullPath).replaceAll("\\", "/");
+    if (relative === "scripts/agents/runs" || relative.startsWith("scripts/agents/runs/")) continue;
     if (entry.isDirectory()) walk(fullPath);
     else if (extensions.includes(path.extname(entry.name))) inspect(fullPath);
   }

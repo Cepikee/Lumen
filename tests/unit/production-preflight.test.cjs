@@ -9,13 +9,14 @@ const { loadMigrations } = require("../../db/migration-core.cjs");
 
 function readinessExecutor(latest) {
   const tables = [
-    "articles", "article_processing_steps", "speed_index_recalculation_jobs", "speed_index_history",
+    "articles", "article_processing_steps", "article_images", "image_generation_daily_usage", "speed_index_recalculation_jobs", "speed_index_history",
     "v2_entity_mentions", "v2_entity_alias_observations", "v2_ingestion_provenance", "schema_migrations",
     "worker_runtime_health", "recovery_audit_log", "raw_text_retention_audit", "user_sessions", "shared_rate_limits", "email_outbox",
   ];
   const columns = new Map([
     ["articles", ["worker_id", "claim_token", "heartbeat_at", "processing_attempts", "failed_step", "last_processing_error", "original_url", "external_id", "publication_time_source", "url_identity"]],
     ["article_processing_steps", ["operation_key", "is_external", "external_started_at", "error_type", "retryable"]],
+    ["article_images", ["image_status", "prompt_status", "generation_status", "fingerprint", "storage_path", "claim_token", "force_revision"]],
     ["v2_entity_mentions", ["entity_type"]],
     ["v2_entity_alias_observations", ["alias_id", "mention_id", "normalization_version"]],
     ["speed_index_recalculation_jobs", ["generation", "completed_generation", "claimed_generation", "claim_token", "run_count"]],
@@ -23,6 +24,7 @@ function readinessExecutor(latest) {
   const indexes = new Map([
     ["articles", ["idx_articles_recovery", "uq_articles_url_identity"]],
     ["article_processing_steps", ["uq_processing_steps_operation_key"]],
+    ["article_images", ["idx_article_images_work", "idx_article_images_fingerprint"]],
     ["speed_index_history", ["uq_speed_history_event_key"]],
     ["v2_ingestion_provenance", ["uq_v2_ingestion_provenance_operation_key"]],
   ]);
@@ -55,14 +57,14 @@ test("active CI workflows use the supported Node major", () => {
   }
 });
 
-test("schema 062 is ready while 061 and future 063 fail closed", async () => {
-  assert.equal((await checkSchemaReadiness(readinessExecutor(62))).ready, true);
-  const old = await checkSchemaReadiness(readinessExecutor(61));
+test("schema 064 is ready while 063 and future 065 fail closed", async () => {
+  assert.equal((await checkSchemaReadiness(readinessExecutor(64))).ready, true);
+  const old = await checkSchemaReadiness(readinessExecutor(63));
   assert.equal(old.ready, false);
-  assert.ok(old.missing.includes("migration:62"));
-  const future = await checkSchemaReadiness(readinessExecutor(63));
+  assert.ok(old.missing.includes("migration:64"));
+  const future = await checkSchemaReadiness(readinessExecutor(65));
   assert.equal(future.ready, false);
-  assert.ok(future.missing.includes("unsupported_schema_version:063"));
+  assert.ok(future.missing.includes("unsupported_schema_version:065"));
 });
 
 console.log("production preflight schema regression: PASS");

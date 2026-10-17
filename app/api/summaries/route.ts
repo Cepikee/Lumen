@@ -60,6 +60,9 @@ type SummaryRow = RowDataPacket & {
   ai_clean: number | null;
   created_at: Date | string | null;
   trend_keywords?: string | null;
+  image_url?: string | null;
+  image_status?: string | null;
+  image_source_type?: string | null;
 };
 
 function fallbackTitle(row: SummaryRow): string {
@@ -208,12 +211,18 @@ export async function GET(req: Request) {
           s.plagiarism_score,
           s.ai_clean,
           s.created_at,
-          s.trend_keywords
+          s.trend_keywords,
+          CASE WHEN ai.image_status = 'ready' AND ai.storage_path REGEXP '^[0-9]{4}/[0-9]{2}/[0-9]{2}/[1-9][0-9]*-[a-f0-9]{12}[.]webp$'
+            THEN CONCAT('/article-images/', ai.storage_path) ELSE NULL END AS image_url,
+          ai.image_status,
+          ai.source_type AS image_source_type
         FROM summaries s
         LEFT JOIN articles a
           ON s.article_id = a.id
         LEFT JOIN sources src
           ON a.source_id = src.id
+        LEFT JOIN article_images ai
+          ON ai.article_id = a.id
         WHERE s.id = ?
         LIMIT 1
       `;
@@ -395,12 +404,18 @@ export async function GET(req: Request) {
           s.category,
           s.plagiarism_score,
           s.ai_clean,
-          s.created_at
+          s.created_at,
+          CASE WHEN ai.image_status = 'ready' AND ai.storage_path REGEXP '^[0-9]{4}/[0-9]{2}/[0-9]{2}/[1-9][0-9]*-[a-f0-9]{12}[.]webp$'
+            THEN CONCAT('/article-images/', ai.storage_path) ELSE NULL END AS image_url,
+          ai.image_status,
+          ai.source_type AS image_source_type
         FROM summaries s
         LEFT JOIN articles a
           ON s.article_id = a.id
         LEFT JOIN sources src
           ON a.source_id = src.id
+        LEFT JOIN article_images ai
+          ON ai.article_id = a.id
         ${whereClause}
         ${searchFilter.sql}
         ORDER BY s.created_at DESC, s.id DESC
@@ -448,12 +463,18 @@ export async function GET(req: Request) {
           s.category,
           s.plagiarism_score,
           s.ai_clean,
-          s.created_at
+          s.created_at,
+          CASE WHEN ai.image_status = 'ready' AND ai.storage_path REGEXP '^[0-9]{4}/[0-9]{2}/[0-9]{2}/[1-9][0-9]*-[a-f0-9]{12}[.]webp$'
+            THEN CONCAT('/article-images/', ai.storage_path) ELSE NULL END AS image_url,
+          ai.image_status,
+          ai.source_type AS image_source_type
         FROM summaries s
         LEFT JOIN articles a
           ON s.article_id = a.id
         LEFT JOIN sources src
           ON a.source_id = src.id
+        LEFT JOIN article_images ai
+          ON ai.article_id = a.id
         WHERE
           s.created_at >= ?
           AND s.created_at < ?
@@ -502,12 +523,18 @@ export async function GET(req: Request) {
         s.category,
         s.plagiarism_score,
         s.ai_clean,
-        s.created_at
+        s.created_at,
+        CASE WHEN ai.image_status = 'ready' AND ai.storage_path REGEXP '^[0-9]{4}/[0-9]{2}/[0-9]{2}/[1-9][0-9]*-[a-f0-9]{12}[.]webp$'
+          THEN CONCAT('/article-images/', ai.storage_path) ELSE NULL END AS image_url,
+        ai.image_status,
+        ai.source_type AS image_source_type
       FROM summaries s
       LEFT JOIN articles a
         ON s.article_id = a.id
       LEFT JOIN sources src
         ON a.source_id = src.id
+      LEFT JOIN article_images ai
+        ON ai.article_id = a.id
       WHERE 1 = 1
       ${searchFilter.sql}
       ORDER BY s.created_at DESC, s.id DESC
