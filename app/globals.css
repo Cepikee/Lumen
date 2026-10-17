@@ -1657,12 +1657,50 @@ html.theme-dark .nav-link {
 /* Homepage information links remain available without competing with product navigation. */
 .header-nav .header-secondary-link { color: color-mix(in srgb, var(--article-text, #e5e7eb) 65%, transparent) !important; font-size: .78rem; }
 .header-nav .header-secondary-link:hover { color: var(--article-text, #e5e7eb) !important; }
-.home-feed-empty { border: 1px dashed #285171; border-radius: 16px; background: #071b2d; color: #a6bfd6; padding: 36px 20px; text-align: center; }
+.home-feed-empty { border: 1px dashed #244b69; border-radius: 15px; background: #071927; color: #a6bfd6; padding: 25px 20px; text-align: center; }
 .home-feed-empty strong { color: #e7f4ff; }
 .home-feed-empty p { margin: 6px 0 0; font-size: .82rem; }
 .home-page-loading { min-height: calc(100vh - 64px); background: #050f1a; }
+.home-feed-loader { height: 28px; }
+.home-feed-message,.home-feed-end { margin: 9px 0 0; padding: 9px 12px; color: #7898b3; font-size: .78rem; text-align: center; }
+.home-feed-message-error { color: #ff7e8d; }
+.home-feed-end { border-top: 1px solid rgba(34,73,101,.65); }
+
+/* Homepage product header: one navy surface, centered navigation, search/profile on the right. */
+html .header-nav.header-home {
+  min-height: 66px;
+  background: rgba(5,15,26,.98) !important;
+  border-bottom: 1px solid #183a56;
+  box-shadow: 0 8px 24px rgba(0,0,0,.14);
+  color: #dcecff !important;
+}
+.header-home > .container-fluid { width: 100%; max-width: 1640px; margin: 0 auto; padding: 7px clamp(18px,2.5vw,44px); gap: clamp(18px,2vw,34px); }
+.header-home .navbar-brand { flex: 0 0 auto; margin: 0; color: #f2f8ff !important; text-decoration: none; overflow:hidden; }
+.header-home .header-logo-img { width: 112px; height: 42px; object-fit:cover; object-position:center; filter: drop-shadow(0 0 8px rgba(13,143,255,.18)); }
+.header-home .header-menu-list { flex: 1 1 auto; justify-content: flex-start; gap: clamp(10px,1.2vw,23px); margin-left:clamp(22px,3vw,54px); }
+.header-home .nav-link { position: relative; padding: 10px 2px !important; color: #a9bfd3 !important; font-size: 13px; white-space: nowrap; transition: color .15s ease; }
+.header-home .nav-link:hover,.header-home .nav-link[aria-current="page"] { color: #5bc5ff !important; }
+.header-home .nav-link[aria-current="page"]::after { content:""; position:absolute; right:1px; bottom:1px; left:1px; height:2px; border-radius:2px; background:#17a7ff; box-shadow:0 0 8px rgba(23,167,255,.45); }
+.header-home .header-actions { display:flex; flex:0 0 auto; align-items:center; gap:12px; }
+.header-home .search-wrapper { position:static; display:block; width:auto; margin:0!important; padding:0!important; transform:none; }
+.header-home .search-box { width:clamp(210px,16vw,285px); max-width:none; }
+.header-home .search-input { height:38px; border:1px solid #27475f; border-radius:10px; background:#091b2a; color:#e7f4ff; font-size:13px; transition:border-color .15s ease,background .15s ease,box-shadow .15s ease; }
+.header-home .search-input:focus { border-color:#288ac4; background:#0a2135; box-shadow:0 0 0 3px rgba(21,148,222,.1); }
+.header-home .search-input::placeholder,.header-home .search-icon,.header-home .search-clear { color:#6f8ba4; }
 @media (max-width: 1280px) {
   .header-nav .header-secondary-link { display: none; }
+}
+@media (max-width: 991.98px) {
+  .header-home > .container-fluid { flex-wrap:wrap; gap:5px 12px; padding:7px 10px 9px; }
+  .header-home .header-menu-list { display:none!important; }
+  .header-home .header-actions { flex:1 1 auto; justify-content:flex-end; min-width:0; }
+  .header-home .search-wrapper { order:0; flex:1 1 auto; width:auto; max-width:420px; margin:0!important; }
+  .header-home .search-box { width:100%; }
+}
+@media (max-width: 575.98px) {
+  .header-home .header-logo-img { width:96px; height:36px; }
+  .header-home .header-actions { flex:1 0 100%; order:3; }
+  .header-home .search-wrapper { max-width:none; }
 }
 
 /* WhatHappenedToday oldal stílusai */

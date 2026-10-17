@@ -15,7 +15,8 @@ test("home category and source filters are URL-backed",()=>{
  assert.match(page,/setSourceFilters\(urlSource \? \[urlSource\] : \[\]\)/);
 });
 test("desktop home is a sticky three-column feed and mobile removes side rails",()=>{
- assert.match(css,/grid-template-columns:220px minmax\(0,760px\) 300px/);
+ assert.match(css,/grid-template-columns:232px minmax\(0,1fr\) 320px/);
+ assert.match(css,/max-width:1640px/);
  assert.match(css,/position:sticky/);
  assert.match(css,/@media\(max-width:767px\)/);
  assert.match(css,/\.left,\.right\{display:none\}/);
@@ -23,7 +24,7 @@ test("desktop home is a sticky three-column feed and mobile removes side rails",
 test("rails use only loaded feed and existing keyword API data",()=>{
  assert.match(layout,/for\(const item of items\)/);
  assert.match(layout,/trending-keywords\?period=24h/);
- assert.match(layout,/A jelenleg betöltött hírekből/);
+ assert.match(layout,/sources\.map/);
  assert.doesNotMatch(layout,/comment|upvote|popularity|térkép/i);
 });
 test("feed card has safe fallbacks and compact content limits",()=>{
@@ -32,4 +33,18 @@ test("feed card has safe fallbacks and compact content limits",()=>{
  assert.match(card,/item\.url\?\.trim\(\)/);
  assert.match(card,/role="link"/);
  assert.match(read("components/NewsFeedCard.module.css"),/-webkit-line-clamp:2/);
+});
+test("visual polish keeps an image-less compact feed and branded source metadata",()=>{
+ const cardCss=read("components/NewsFeedCard.module.css");
+ const header=read("components/Header.tsx");
+ const globalCss=read("app/globals.css");
+ assert.match(card,/imageUrl\?<div className=\{styles\.thumbnail\}/);
+ assert.match(card,/image_url\?:string\|null/);
+ assert.match(card,/safeImage\(item\.image_url\)/);
+ assert.match(card,/sourceBadge\(item\)/);
+ assert.match(card,/sourceDomain\(item\)/);
+ assert.match(cardCss,/font-size:clamp\(17px,1\.25vw,19px\)/);
+ assert.doesNotMatch(header,/header-brand-word/);
+ assert.match(globalCss,/\.header-home \.header-logo-img \{ width: 112px; height: 42px; object-fit:cover/);
+ assert.match(globalCss,/\.header-home \.nav-link\[aria-current="page"\]::after/);
 });

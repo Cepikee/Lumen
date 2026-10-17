@@ -350,13 +350,13 @@ function HomePage() {
         viewMode={viewMode}
       />
 
-      {error && <p className="text-center text-danger mt-3">{error}</p>}
+      {error && <p className="home-feed-message home-feed-message-error">{error}</p>}
 
-      {!isTodayMode && <div ref={loaderRef} style={{ height: "50px" }} />}
+      {!isTodayMode && <div ref={loaderRef} className="home-feed-loader" />}
 
-      {loading && <p className="text-center text-muted mt-3">Betöltés...</p>}
+      {loading && <p className="home-feed-message">Betöltés...</p>}
       {!hasMore && !isTodayMode && (
-        <p className="text-center text-muted mt-3">Nincs több hír.</p>
+        <p className="home-feed-end">Elérted a jelenleg betöltött hírek végét.</p>
       )}
     </HomeFeedLayout>
   );

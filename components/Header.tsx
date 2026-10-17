@@ -160,7 +160,7 @@ export default function Header() {
 
   return (
     <nav
-      className={`navbar navbar-expand-lg sticky-top header-nav ${isInsights ? insightsSkin.skin : ""} ${isLegalPage ? "header-legal" : ""} ${isPremiumRoute ? "header-premium" : ""}`}
+      className={`navbar navbar-expand-lg sticky-top header-nav ${pathname === "/" ? "header-home" : ""} ${isInsights ? insightsSkin.skin : ""} ${isLegalPage ? "header-legal" : ""} ${isPremiumRoute ? "header-premium" : ""}`}
     >
       <div className="container-fluid d-flex align-items-center justify-content-between">
         <Link href="/" className="navbar-brand d-flex align-items-center">
@@ -172,12 +172,21 @@ export default function Header() {
             height={48}
             priority
             className="header-logo-img"
-            style={{ objectFit: "contain" }}
           />
         </Link>
 
-        {pathname === "/" && (
-          <div className="search-wrapper mx-auto">
+        <ul className="navbar-nav header-menu-list d-flex flex-row align-items-center mb-0">
+          {activeMenu.map((item) => (
+            <li key={item.href} className="nav-item">
+              <Link href={item.href} className={`nav-link ${["/aszf","/impresszum","/adatvedelem","/kapcsolat"].includes(item.href)?"header-secondary-link":""}`} aria-current={pathname === item.href ? "page" : undefined}>
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <div className="header-actions">
+          {pathname === "/" && <div className="search-wrapper">
             <div
               className="search-box"
               onClick={() => inputRef.current?.focus()}
@@ -210,20 +219,7 @@ export default function Header() {
                 </span>
               )}
             </div>
-          </div>
-        )}
-
-        <div className="d-flex align-items-center gap-3 ms-auto">
-          <ul className="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
-            {activeMenu.map((item) => (
-              <li key={item.href} className="nav-item">
-                <Link href={item.href} className={`nav-link ${["/aszf","/impresszum","/adatvedelem","/kapcsolat"].includes(item.href)?"header-secondary-link":""}`} aria-current={pathname === item.href ? "page" : undefined}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
+          </div>}
           <div className="d-flex align-items-center">
             {!user && <LoginModal />}
             {user && <ProfileMenu />}

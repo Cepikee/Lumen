@@ -1,11 +1,25 @@
-.card{display:grid;grid-template-columns:196px minmax(0,1fr);gap:17px;margin-bottom:13px;padding:14px;border:1px solid #1f4261;border-radius:16px;background:linear-gradient(145deg,#0b2136,#071725);color:#eaf5ff;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.12);transition:transform .16s ease,border-color .16s ease,background .16s ease}
-.card:hover,.card:focus-visible{transform:translateY(-1px);border-color:#2478b7;background:linear-gradient(145deg,#0c2943,#081b2c);outline:none}
-.thumbnail{height:126px;border:1px solid #1d4568;border-radius:12px;background:radial-gradient(circle at 30% 20%,rgba(0,143,255,.35),transparent 35%),linear-gradient(135deg,#092744,#061523);display:grid;place-content:center;text-align:center;color:#1fa7ff}
-.thumbnail span{font-size:34px;font-weight:900;line-height:1}.thumbnail small{font-size:9px;letter-spacing:.2em;color:#8acfff;margin-top:5px}
-.body{min-width:0}.meta{display:flex;align-items:center;gap:6px;color:#7896b2;font-size:11px;margin-bottom:6px}.source{color:#66c7ff;font-weight:750;text-transform:uppercase;letter-spacing:.04em}
-.body h2{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin:0 0 7px;color:#f1f8ff;font-size:18px;line-height:1.28;font-weight:720;letter-spacing:-.012em}
-.summary{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;color:#9fb7cd;font-size:13px;line-height:1.45;max-height:57px}.summary p{margin:0}.summary :is(h1,h2,h3){font:inherit;margin:0}
-.body footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px}.badges,.actions{display:flex;align-items:center;flex-wrap:wrap;gap:7px}.badges span{border:1px solid #28577d;border-radius:999px;background:#092943;color:#9ed8ff;padding:4px 7px;font-size:9px;text-transform:uppercase;letter-spacing:.04em}
-.actions button,.actions a{border:0;background:transparent;color:#6cbfff;font-size:11px;text-decoration:none;padding:5px}.actions button:hover,.actions a:hover{color:#bce7ff}
-@media(max-width:640px){.card{grid-template-columns:104px minmax(0,1fr);gap:11px;padding:10px}.thumbnail{height:92px}.body h2{font-size:15px}.summary{-webkit-line-clamp:2;max-height:39px;font-size:12px}.body footer{align-items:flex-end}.actions button{display:none}.actions a{font-size:10px}.meta{font-size:10px}}
-@media(max-width:420px){.card{grid-template-columns:84px minmax(0,1fr)}.thumbnail{height:80px}.badges span:nth-child(n+2){display:none}}
+.card{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin-bottom:12px;padding:15px 17px 13px;border:1px solid #183a56;border-radius:15px;background:linear-gradient(145deg,rgba(9,31,50,.98),rgba(6,21,35,.98));color:#eaf5ff;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.1);transition:transform .15s ease,border-color .15s ease,background .15s ease}
+.withImage{grid-template-columns:210px minmax(0,1fr)}
+.thumbnail{width:210px;height:135px;border-radius:11px;background-position:center;background-size:cover;background-repeat:no-repeat}
+.card::before{content:"";position:absolute;inset:13px auto 13px 0;width:2px;border-radius:2px;background:linear-gradient(#139dff,#25d1ec);opacity:.5}
+.card:hover,.card:focus-visible{transform:translateY(-1px);border-color:#286f9f;background:linear-gradient(145deg,#0b263d,#071a2b);outline:none}
+.body{min-width:0}
+.meta{display:flex;align-items:center;gap:7px;min-width:0;color:#809db7;font-size:12px;margin-bottom:7px}
+.source{display:inline-flex;align-items:center;min-height:23px;border:1px solid #23618b;border-radius:6px;background:#0b3150;color:#91dcff;padding:3px 7px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.055em}
+.source[data-source="hvg"]{border-color:#a53a46;background:#3a1720;color:#ff9ba6}.source[data-source="telex"]{border-color:#d66e1d;background:#3d2412;color:#ffb36f}.source[data-source="24hu"]{border-color:#3688cc;background:#102c45;color:#8dccff}.source[data-source="444"]{border-color:#417a45;background:#142f1b;color:#86d98c}.source[data-source="index"]{border-color:#b9841f;background:#372a10;color:#f5c65d}.source[data-source="origo"]{border-color:#4385be;background:#122c42;color:#90c9f5}
+.domain{max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#9ab2c8}
+.body h2{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin:0 0 7px;color:#f1f8ff;font-size:clamp(17px,1.25vw,19px);line-height:1.28;font-weight:730;letter-spacing:-.014em}
+.summary{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;color:#9eb6cb;font-size:14px;line-height:1.45;max-height:41px}
+.summary p{margin:0}.summary :is(h1,h2,h3){font:inherit;margin:0}
+.body footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:11px}
+.badges,.actions{display:flex;align-items:center;flex-wrap:wrap;gap:7px}
+.badges span{border:1px solid #28577d;border-radius:999px;background:#092943;color:#a9dcff;padding:4px 8px;font-size:10px;font-weight:650;letter-spacing:.015em}
+.badges span[data-category*="köz"],.badges span[data-category*="bel"]{border-color:#8a5727;background:#342213;color:#ffc178}
+.badges span[data-category*="polit"]{border-color:#6649a8;background:#251b46;color:#c9a7ff}
+.badges span[data-category*="gazd"]{border-color:#277f79;background:#123534;color:#75ddd3}
+.badges span[data-category*="tech"]{border-color:#26779b;background:#102f42;color:#7edcff}
+.badges span[data-category*="sport"]{border-color:#287957;background:#123426;color:#78dba9}
+.actions button,.actions a{display:inline-flex;align-items:center;gap:5px;border:0;border-radius:7px;background:transparent;color:#79c8fb;font-size:12px;font-weight:650;text-decoration:none;padding:6px 7px;transition:background .15s ease,color .15s ease}
+.actions button:hover,.actions a:hover{background:rgba(31,128,188,.14);color:#d2f0ff}
+@media(max-width:640px){.card,.withImage{grid-template-columns:minmax(0,1fr);padding:13px 13px 11px}.thumbnail{width:100%;height:160px}.body h2{font-size:16px}.summary{-webkit-line-clamp:2;max-height:38px;font-size:13px}.body footer{align-items:flex-end}.actions button{display:none}.actions a{font-size:11px}.meta{font-size:11px}.domain{max-width:130px}}
+@media(max-width:420px){.card{padding-inline:12px}.body footer{display:block}.actions{margin-top:7px}.badges span:nth-child(n+2){display:none}}
