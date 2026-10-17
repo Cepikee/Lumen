@@ -37,6 +37,14 @@ function HomePage() {
   const searchTerm = useUserStore((s) => s.searchTerm);
   const urlSource = searchParams.get("source")?.trim() || "";
   const urlCategory = searchParams.get("category")?.trim() || "";
+  const requestedView = searchParams.get("view");
+  const homeView = requestedView === "categories" || requestedView === "sources"
+    ? requestedView
+    : urlCategory
+      ? "categories"
+      : urlSource
+        ? "sources"
+        : "feed";
 
   useEffect(() => {
     setSourceFilters(urlSource ? [urlSource] : []);
@@ -46,8 +54,25 @@ function HomePage() {
   function updateUrlFilter(field: "source" | "category", value: string) {
     const query = new URLSearchParams(searchParams.toString());
     const normalized = value.trim();
-    if (normalized) query.set(field, normalized);
+    if (normalized) {
+      query.set(field, normalized);
+      query.set("view", field === "category" ? "categories" : "sources");
+      query.delete(field === "category" ? "source" : "category");
+    }
     else query.delete(field);
+    router.push(query.size ? `${pathname}?${query}` : pathname, { scroll: false });
+  }
+
+  function updateHomeView(view: "feed" | "categories" | "sources") {
+    const query = new URLSearchParams(searchParams.toString());
+    if (view === "feed") {
+      query.delete("view");
+      query.delete("category");
+      query.delete("source");
+    } else {
+      query.set("view", view);
+      query.delete(view === "categories" ? "source" : "category");
+    }
     router.push(query.size ? `${pathname}?${query}` : pathname, { scroll: false });
   }
 
@@ -344,7 +369,7 @@ function HomePage() {
   }, [hasMore, isTodayMode, depSources, depCategories]);
 
   return (
-    <HomeFeedLayout items={items} category={urlCategory} source={urlSource} onCategory={value=>updateUrlFilter("category",value)} onSource={value=>updateUrlFilter("source",value)}>
+    <HomeFeedLayout items={items} view={homeView} category={urlCategory} source={urlSource} onView={updateHomeView} onCategory={value=>updateUrlFilter("category",value)} onSource={value=>updateUrlFilter("source",value)}>
       <FeedList
         items={items}
         viewMode={viewMode}
