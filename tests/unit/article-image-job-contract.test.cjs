@@ -22,6 +22,7 @@ test("worker only queues completed published articles and all terminal writes ar
   assert.match(repository, /FOR UPDATE SKIP LOCKED/);
   assert.match(repository, /WHERE article_id=\? AND image_status='generating' AND worker_id=\? AND claim_token=\?/g);
   assert.match(repository, /image_generation_daily_usage[\s\S]*FOR UPDATE/);
+  assert.match(repository, /reserved_neurons=reserved_neurons-\?[\s\S]*reserved_neurons>=\?/);
 });
 
 test("real provider smoke is double gated and normal worker is disabled by default", () => {

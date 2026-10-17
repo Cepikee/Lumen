@@ -13,8 +13,8 @@ The feature is off by default (`IMAGE_GEN_ENABLED=false`). It has no public prom
 3. `image_prompt` applies `UTOM_EDITORIAL_V1`, records its fingerprint, and writes a durable audit row to `article_processing_steps`.
 4. Policy returns `generate`, `fallback_only`, or `skip`. Sensitive or context-free articles use a category fallback.
 5. A ready image from the same article cluster is reused only when provider, model and prompt version match. The source article is recorded explicitly.
-6. Before every external attempt the worker atomically reserves a conservative neuron estimate in `image_generation_daily_usage`. Unknown real usage never releases the reservation.
-7. Cloudflare Workers AI generates the image. The response is bounded, then a native-free metadata parser validates JPEG, PNG or WebP magic, declared MIME and the exact 1024×576 dimensions. The validated original raster is written atomically under `public/article-images/YYYY/MM/DD/`; its extension and database MIME follow the actual bytes.
+6. Before every external attempt the worker atomically reserves a conservative neuron estimate in `image_generation_daily_usage`. Unknown real usage never releases the reservation. A terminal HTTP 400 is the narrow exception: Cloudflare rejected the request contract before a successful inference, so the worker atomically releases that reservation while retaining the request counter. HTTP 400 is never retried automatically. Network errors, timeouts, 429 and 5xx keep their reservation because inference consumption is unknown, preserving the hard daily upper bound.
+7. Cloudflare Workers AI receives native `FormData` with only `prompt`, `width`, `height`, and the optional `seed`. The runtime supplies the multipart boundary; the application does not set `Content-Type`. The bounded response is then validated by a native-free metadata parser for JPEG, PNG or WebP magic, declared MIME and the exact 1024×576 dimensions. The validated original raster is written atomically under `public/article-images/YYYY/MM/DD/`; its extension and database MIME follow the actual bytes.
 8. `image_generate` records the terminal result. The feed API exposes a path only for `ready` rows.
 
 The fingerprint determines one bounded set of `.jpg`, `.png` and `.webp` recovery candidates. If the file is committed but the terminal database update is interrupted, a stale-claim retry finds and validates the matching raster, then repairs the database state without a second provider request or budget reservation. The database does not claim an extension before provider bytes have been validated.
@@ -56,7 +56,7 @@ npm run image:regenerate -- <articleId>
 
 The command increments the row revision and returns it to `pending`; the next worker run generates a new fingerprint. It does not call Cloudflare itself.
 
-A real provider smoke is intentionally opt-in and quota-bearing. It requires `RUN_CLOUDFLARE_IMAGE_SMOKE=1`, `IMAGE_GEN_ENABLED=true`, credentials, a migrated environment, and an eligible completed article:
+A real provider smoke is intentionally opt-in and quota-bearing. It requires `RUN_CLOUDFLARE_IMAGE_SMOKE=1`, `IMAGE_GEN_ENABLED=true`, credentials, a migrated environment, and an eligible completed article whose image is not already ready:
 
 ```text
 npm run image:smoke
@@ -64,7 +64,7 @@ npm run image:smoke
 
 Do not run the smoke against production as part of ordinary verification.
 
-After deploying this compatibility hotfix, the controlled production smoke may be repeated on the VPS with `IMAGE_GEN_OPTIMIZE_WITH_SHARP=false`. The smoke remains limited to one job by the existing script. Confirm a `ready` row whose `mime_type`, dimensions and extension match, then disable generation again if the rollout window requires it. Never place credentials in command history or repository files.
+After deploying this compatibility hotfix, the controlled production smoke may be repeated on the VPS with `IMAGE_GEN_OPTIMIZE_WITH_SHARP=false`. It resets only its selected non-ready image job, disables recovery and cluster reuse, disables retries, and enforces exactly one provider request. It exits non-zero for fallback, quota exhaustion, provider/storage/validation failure, missing DB readiness, or a missing/invalid file. Confirm its explicit `REAL CLOUDFLARE IMAGE SMOKE: PASS`, then disable generation again if the rollout window requires it. Never place credentials in command history or repository files.
 
 ## Frontend behavior
 

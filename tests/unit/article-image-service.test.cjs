@@ -6,13 +6,14 @@ const { createImageService } = require("../../lib/article-images/service");
 const { createCircuitBreaker } = require("../../lib/article-images/circuit-breaker");
 
 function harness(overrides = {}) {
-  const calls = { provider: 0, complete: [], budget: 0, prompt: 0, heartbeat: 0 };
+  const calls = { provider: 0, complete: [], budget: 0, releasedBudget: 0, prompt: 0, heartbeat: 0 };
   const article = overrides.article || { id: 9, title: "Kamatdöntés", short_summary: "A jegybank döntött.", category: "Gazdaság", force_revision: 0, image_created_at: "2026-10-17T00:00:00Z" };
   const repository = {
     load: async () => article,
     savePrompt: async () => { calls.prompt += 1; },
     findClusterReady: async () => overrides.cluster || null,
     reserveBudget: async () => { calls.budget += 1; return overrides.budget !== false; },
+    releaseRejectedBudget: async () => { calls.releasedBudget += 1; },
     heartbeat: async () => { calls.heartbeat += 1; },
     complete: async (_claim, details) => {
       if (overrides.completeError && calls.complete.length === 0) { calls.complete.push(details); throw overrides.completeError; }
@@ -55,6 +56,23 @@ test("provider retry is budgeted per attempt and article failure stays isolated"
   assert.equal(calls.provider, 3);
   assert.equal(calls.budget, 3);
   assert.equal(calls.complete.at(-1).imageStatus, "failed");
+});
+
+test("terminal HTTP 400 consumes one conservative reservation and is never retried", async () => {
+  const { service, calls, claim } = harness({ providerError: () => Object.assign(new Error("Image provider returned HTTP 400"), { code: "http_400", status: 400, retryable: false }) });
+  const result = await service.process(claim);
+  assert.equal(result.status, "failed");
+  assert.equal(calls.provider, 1);
+  assert.equal(calls.budget, 1);
+  assert.equal(calls.releasedBudget, 1);
+  assert.equal(calls.complete.at(-1).errorCode, "http_400");
+});
+
+test("unknown provider failures retain their conservative budget reservations", async () => {
+  const { service, calls, claim } = harness({ config: { maxRetries: 0 }, providerError: () => Object.assign(new Error("timeout"), { code: "timeout", retryable: true }) });
+  await service.process(claim);
+  assert.equal(calls.budget, 1);
+  assert.equal(calls.releasedBudget, 0);
 });
 
 test("disabled, sensitive and exhausted-budget jobs use fallback without provider traffic", async () => {

@@ -17,7 +17,28 @@ test("Cloudflare provider decodes a JSON base64 image without leaking auth", asy
   assert.deepEqual(output.bytes, bytes);
   assert.match(request.url, /accounts\/account\/ai\/run/);
   assert.equal(request.init.headers.Authorization, "Bearer secret-token");
+  assert.equal(request.init.headers["Content-Type"], undefined);
+  assert.ok(request.init.body instanceof FormData);
+  assert.deepEqual(Object.fromEntries(request.init.body.entries()), { prompt: "safe prompt", width: "1024", height: "576" });
   assert.doesNotMatch(JSON.stringify(output), /secret-token/);
+});
+
+test("Cloudflare provider sends optional seed only when configured and no unsupported fields", async () => {
+  const requests = [];
+  const bytes = Buffer.alloc(600, 7).toString("base64");
+  const fetch = async (_url, init) => { requests.push(init); return new Response(JSON.stringify({ result: { image: bytes } })); };
+  await createCloudflareImageProvider(config, { fetch }).generate("first");
+  await createCloudflareImageProvider({ ...config, seed: 42 }, { fetch }).generate("second");
+  const absent = Object.fromEntries(requests[0].body.entries());
+  const present = Object.fromEntries(requests[1].body.entries());
+  assert.equal(absent.seed, undefined);
+  assert.equal(present.seed, "42");
+  for (const fields of [absent, present]) {
+    assert.equal(fields.steps, undefined);
+    assert.equal(fields.num_inference_steps, undefined);
+    assert.equal(fields.output_format, undefined);
+    assert.equal(fields.negative_prompt, undefined);
+  }
 });
 
 test("Cloudflare provider classifies 429 and malformed responses", async () => {
@@ -25,6 +46,27 @@ test("Cloudflare provider classifies 429 and malformed responses", async () => {
   await assert.rejects(throttled.generate("x"), (error) => error.code === "http_429" && error.retryable && error.retryAfterMs === 2000);
   const malformed = createCloudflareImageProvider(config, { fetch: async () => new Response("{}", { status: 200, headers: { "content-type": "application/json" } }) });
   await assert.rejects(malformed.generate("x"), (error) => error.code === "malformed_response" && !error.retryable);
+});
+
+test("Cloudflare provider parses bounded 400 diagnostics without leaking credentials or prompt", async () => {
+  const prompt = "private editorial prompt";
+  const provider = createCloudflareImageProvider(config, { fetch: async () => new Response(JSON.stringify({
+    success: false, errors: [{ code: 10001, message: `invalid multipart for ${prompt} using secret-token` }],
+  }), { status: 400, headers: { "content-type": "application/json", "cf-ray": "request-ray" } }) });
+  await assert.rejects(provider.generate(prompt), (error) => {
+    assert.equal(error.code, "http_400");
+    assert.equal(error.retryable, false);
+    assert.equal(error.providerErrorCode, "10001");
+    assert.equal(error.requestId, "request-ray");
+    assert.match(error.providerErrorMessage, /\[redacted\]/);
+    assert.doesNotMatch(JSON.stringify(error), /secret-token|private editorial prompt/);
+    return true;
+  });
+});
+
+test("Cloudflare provider refuses to retain an oversized error body", async () => {
+  const provider = createCloudflareImageProvider(config, { fetch: async () => new Response(JSON.stringify({ errors: [{ code: "huge", message: "x".repeat(70 * 1024) }] }), { status: 400 }) });
+  await assert.rejects(provider.generate("safe"), (error) => error.code === "http_400" && error.providerErrorMessage === null);
 });
 
 test("Cloudflare provider maps aborted requests to retryable timeout", async () => {

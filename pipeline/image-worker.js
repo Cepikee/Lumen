@@ -10,11 +10,11 @@ const { createCircuitBreaker } = require("../lib/article-images/circuit-breaker"
 const { createImageRepository } = require("../lib/article-images/repository");
 const { createImageService } = require("../lib/article-images/service");
 
-const config = getImageConfig();
-const readiness = validateImageConfig(config);
 const logger = (entry) => console.log(JSON.stringify({ at: new Date().toISOString(), component: "article-image-worker", ...entry }));
 
 async function runOnce(dependencies = {}) {
+  const config = dependencies.config || getImageConfig();
+  const readiness = validateImageConfig(config);
   if (!readiness.ok) { logger({ event: "worker_disabled", reason: readiness.reason }); return { processed: 0, reason: readiness.reason }; }
   const pool = dependencies.pool || mysql.createPool({
     host: process.env.DB_HOST || "127.0.0.1", port: Number(process.env.DB_PORT || 3306), user: process.env.DB_USER || "utom_app",
@@ -27,6 +27,7 @@ async function runOnce(dependencies = {}) {
   const service = createImageService({ repository, provider, storage, circuitBreaker: breaker, config, logger });
   const workerId = process.env.IMAGE_GEN_WORKER_ID || `${process.pid}-${randomUUID()}`;
   let processed = 0;
+  const results = [];
   let claimed = 0;
   const maxJobs = Number.isSafeInteger(dependencies.maxJobs) && dependencies.maxJobs > 0 ? dependencies.maxJobs : Number.POSITIVE_INFINITY;
   try {
@@ -35,14 +36,15 @@ async function runOnce(dependencies = {}) {
       for (;;) {
         if (claimed >= maxJobs) break;
         claimed += 1;
-        const claim = await repository.claim({ workerId, claimToken: randomUUID(), staleMs: config.staleMs, maxAttempts: config.maxRetries });
+        const claim = await repository.claim({ workerId, claimToken: randomUUID(), staleMs: config.staleMs, maxAttempts: config.maxRetries, articleId: dependencies.articleId });
         if (!claim) { claimed -= 1; break; }
-        await service.process(claim);
+        const outcome = await service.process(claim, dependencies.processOptions);
+        results.push({ articleId: claim.articleId, ...outcome });
         processed += 1;
       }
     });
     await Promise.all(tasks);
-    return { processed };
+    return { processed, results };
   } finally {
     if (!dependencies.pool) await pool.end();
   }
