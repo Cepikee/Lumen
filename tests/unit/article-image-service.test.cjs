@@ -21,10 +21,14 @@ function harness(overrides = {}) {
   };
   const provider = { generate: async () => { calls.provider += 1; if (overrides.providerError) throw overrides.providerError(calls.provider); return { bytes: Buffer.alloc(700, 1) }; } };
   const storage = {
-    target: () => ({ storagePath: "2026/10/17/9-hashhashhash.webp" }),
+    findExisting: async () => overrides.recovered ? {
+      storagePath: `2026/10/17/9-hashhashhash.${overrides.recoveryFormat || "webp"}`,
+      mimeType: `image/${overrides.recoveryFormat === "jpg" ? "jpeg" : overrides.recoveryFormat || "webp"}`, width: 1024, height: 576, byteSize: 600,
+    } : null,
     inspect: async (storagePath) => {
-      if (overrides.recovered && storagePath.includes("hashhashhash")) return { storagePath, mimeType: "image/webp", width: 1024, height: 576, byteSize: 600 };
-      if (overrides.cluster && storagePath === overrides.cluster.storage_path && overrides.exists !== false) return { storagePath, mimeType: "image/webp", width: 1024, height: 576, byteSize: 700 };
+      if (overrides.cluster && storagePath === overrides.cluster.storage_path && overrides.exists !== false) return {
+        storagePath, mimeType: overrides.cluster.mime_type, width: 1024, height: 576, byteSize: 700,
+      };
       return null;
     },
     save: async () => ({ storagePath: "2026/10/17/9-hash.webp", mimeType: "image/webp", width: 1024, height: 576, byteSize: 600 }),
@@ -34,7 +38,7 @@ function harness(overrides = {}) {
   return { service, calls, claim: { articleId: 9, workerId: "w", claimToken: "t" } };
 }
 
-test("successful generation persists a ready WebP result", async () => {
+test("successful generation persists a ready validated raster result", async () => {
   const { service, calls, claim } = harness();
   const result = await service.process(claim);
   assert.equal(result.status, "ready");
@@ -79,6 +83,36 @@ test("an existing fingerprinted file recovers DB state without provider or budge
   assert.equal(calls.provider, 0);
   assert.equal(calls.budget, 0);
   assert.equal(calls.complete[0].imageStatus, "ready");
+});
+
+for (const format of ["jpg", "png", "webp"]) {
+  test(`${format} fingerprint crash recovery makes zero provider calls`, async () => {
+    const { service, calls, claim } = harness({ recovered: true, recoveryFormat: format });
+    const result = await service.process(claim);
+    assert.equal(result.recovered, true);
+    assert.match(result.storagePath, new RegExp(`\\.${format}$`));
+    assert.equal(calls.provider, 0);
+    assert.equal(calls.budget, 0);
+  });
+
+  test(`${format} cluster image is reused only after canonical storage inspection`, async () => {
+    const mime = format === "jpg" ? "image/jpeg" : `image/${format}`;
+    const cluster = { article_id: 8, storage_path: `2026/10/17/8-aaaaaaaaaaaa.${format}`, mime_type: mime, width: 1024, height: 576, byte_size: 700 };
+    const { service, calls, claim } = harness({ cluster });
+    const result = await service.process(claim);
+    assert.equal(result.reused, true);
+    assert.equal(calls.complete[0].mimeType, mime);
+    assert.equal(calls.provider, 0);
+  });
+}
+
+test("an invalid cluster file is not reused and generation continues", async () => {
+  const cluster = { article_id: 8, storage_path: "2026/10/17/8-aaaaaaaaaaaa.jpg", mime_type: "image/jpeg" };
+  const { service, calls, claim } = harness({ cluster, exists: false });
+  const result = await service.process(claim);
+  assert.equal(result.status, "ready");
+  assert.equal(calls.provider, 1);
+  assert.equal(calls.complete[0].sourceType, "generated");
 });
 
 test("terminal DB failure is propagated and does not overwrite the recoverable file with fallback", async () => {

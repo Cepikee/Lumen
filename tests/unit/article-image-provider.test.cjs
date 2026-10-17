@@ -45,3 +45,11 @@ test("Cloudflare provider bounds JSON bodies even when content-length is absent"
   const provider = createCloudflareImageProvider(config, { fetch: async () => new Response(oversized, { status: 200, headers: { "content-type": "application/json" } }) });
   await assert.rejects(provider.generate("x"), (error) => error.code === "image_too_large");
 });
+
+test("provider preserves declared MIME for direct and data-URL image responses", async () => {
+  const direct = createCloudflareImageProvider(config, { fetch: async () => new Response(Buffer.alloc(600), { status: 200, headers: { "content-type": "image/jpeg; charset=binary" } }) });
+  assert.equal((await direct.generate("x")).mimeType, "image/jpeg");
+  const encoded = Buffer.alloc(600, 3).toString("base64");
+  const json = createCloudflareImageProvider(config, { fetch: async () => new Response(JSON.stringify({ result: { image: `data:image/png;base64,${encoded}` } }), { status: 200, headers: { "content-type": "application/json" } }) });
+  assert.equal((await json.generate("x")).mimeType, "image/png");
+});

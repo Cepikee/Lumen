@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
       {
         // Generated filenames contain a content fingerprint and are never
         // overwritten, so a year-long immutable cache is safe.
-        source: "/article-images/:path*",
+        source: "/article-images/:year(\\d{4})/:month(\\d{2})/:day(\\d{2})/:file([1-9]\\d*-[a-f0-9]{12}\\.(?:jpe?g|png|webp))",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
     ];

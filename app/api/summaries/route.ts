@@ -212,7 +212,7 @@ export async function GET(req: Request) {
           s.ai_clean,
           s.created_at,
           s.trend_keywords,
-          CASE WHEN ai.image_status = 'ready' AND ai.storage_path REGEXP '^[0-9]{4}/[0-9]{2}/[0-9]{2}/[1-9][0-9]*-[a-f0-9]{12}[.]webp$'
+          CASE WHEN ai.image_status = 'ready' AND ai.storage_path REGEXP '^[0-9]{4}/[0-9]{2}/[0-9]{2}/[1-9][0-9]*-[a-f0-9]{12}[.](jpg|jpeg|png|webp)$'
             THEN CONCAT('/article-images/', ai.storage_path) ELSE NULL END AS image_url,
           ai.image_status,
           ai.source_type AS image_source_type
@@ -405,7 +405,7 @@ export async function GET(req: Request) {
           s.plagiarism_score,
           s.ai_clean,
           s.created_at,
-          CASE WHEN ai.image_status = 'ready' AND ai.storage_path REGEXP '^[0-9]{4}/[0-9]{2}/[0-9]{2}/[1-9][0-9]*-[a-f0-9]{12}[.]webp$'
+          CASE WHEN ai.image_status = 'ready' AND ai.storage_path REGEXP '^[0-9]{4}/[0-9]{2}/[0-9]{2}/[1-9][0-9]*-[a-f0-9]{12}[.](jpg|jpeg|png|webp)$'
             THEN CONCAT('/article-images/', ai.storage_path) ELSE NULL END AS image_url,
           ai.image_status,
           ai.source_type AS image_source_type
@@ -464,7 +464,7 @@ export async function GET(req: Request) {
           s.plagiarism_score,
           s.ai_clean,
           s.created_at,
-          CASE WHEN ai.image_status = 'ready' AND ai.storage_path REGEXP '^[0-9]{4}/[0-9]{2}/[0-9]{2}/[1-9][0-9]*-[a-f0-9]{12}[.]webp$'
+          CASE WHEN ai.image_status = 'ready' AND ai.storage_path REGEXP '^[0-9]{4}/[0-9]{2}/[0-9]{2}/[1-9][0-9]*-[a-f0-9]{12}[.](jpg|jpeg|png|webp)$'
             THEN CONCAT('/article-images/', ai.storage_path) ELSE NULL END AS image_url,
           ai.image_status,
           ai.source_type AS image_source_type
@@ -524,7 +524,7 @@ export async function GET(req: Request) {
         s.plagiarism_score,
         s.ai_clean,
         s.created_at,
-        CASE WHEN ai.image_status = 'ready' AND ai.storage_path REGEXP '^[0-9]{4}/[0-9]{2}/[0-9]{2}/[1-9][0-9]*-[a-f0-9]{12}[.]webp$'
+        CASE WHEN ai.image_status = 'ready' AND ai.storage_path REGEXP '^[0-9]{4}/[0-9]{2}/[0-9]{2}/[1-9][0-9]*-[a-f0-9]{12}[.](jpg|jpeg|png|webp)$'
           THEN CONCAT('/article-images/', ai.storage_path) ELSE NULL END AS image_url,
         ai.image_status,
         ai.source_type AS image_source_type

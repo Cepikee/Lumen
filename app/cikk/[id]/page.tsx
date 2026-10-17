@@ -20,7 +20,7 @@ function mapSource(raw: unknown) {
 function safeArticleImage(raw: unknown) {
   if (typeof raw !== "string") return null;
   const value = raw.trim();
-  return /^\/article-images\/\d{4}\/\d{2}\/\d{2}\/[1-9]\d*-[a-f0-9]{12}\.webp$/.test(value) ? value : null;
+  return /^\/article-images\/\d{4}\/\d{2}\/\d{2}\/[1-9]\d*-[a-f0-9]{12}\.(?:jpe?g|png|webp)$/.test(value) ? value : null;
 }
 
 export default function CikkOldal() {

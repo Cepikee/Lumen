@@ -14,10 +14,16 @@ The feature is off by default (`IMAGE_GEN_ENABLED=false`). It has no public prom
 4. Policy returns `generate`, `fallback_only`, or `skip`. Sensitive or context-free articles use a category fallback.
 5. A ready image from the same article cluster is reused only when provider, model and prompt version match. The source article is recorded explicitly.
 6. Before every external attempt the worker atomically reserves a conservative neuron estimate in `image_generation_daily_usage`. Unknown real usage never releases the reservation.
-7. Cloudflare Workers AI generates the image. The response is bounded and validated, Sharp decodes it and writes a 1024×576 WebP (quality 82) atomically under `public/article-images/YYYY/MM/DD/`.
+7. Cloudflare Workers AI generates the image. The response is bounded, then a native-free metadata parser validates JPEG, PNG or WebP magic, declared MIME and the exact 1024×576 dimensions. The validated original raster is written atomically under `public/article-images/YYYY/MM/DD/`; its extension and database MIME follow the actual bytes.
 8. `image_generate` records the terminal result. The feed API exposes a path only for `ready` rows.
 
-The fingerprinted target path is persisted before the provider call. If the file is committed but the terminal database update is interrupted, a stale-claim retry validates that exact WebP and repairs the database state without a second provider request or budget reservation.
+The fingerprint determines one bounded set of `.jpg`, `.png` and `.webp` recovery candidates. If the file is committed but the terminal database update is interrupted, a stale-claim retry finds and validates the matching raster, then repairs the database state without a second provider request or budget reservation. The database does not claim an extension before provider bytes have been validated.
+
+## Legacy CPU compatibility and optional optimization
+
+The supported production VPS uses `QEMU Virtual CPU version 2.5+` without SSE4.2. The image pipeline therefore has no mandatory native image dependency and does not require an x86-64-v2 CPU. Metadata validation reads only bounded headers/chunks and never fully decodes an image.
+
+Sharp is an optional dependency and optional optimization capability. `IMAGE_GEN_OPTIMIZE_WITH_SHARP=false` is the default and stores the validated original raster. When `IMAGE_GEN_OPTIMIZE_WITH_SHARP=true`, Sharp is loaded lazily; successful optimization is revalidated before storage. A missing module, unsupported CPU, or optimization error emits `article_image_optimizer_unavailable` once per process and safely falls back to the original raster. `IMAGE_GEN_WEBP_QUALITY` only affects this optional path.
 
 ## Prompt and content policy
 
@@ -34,7 +40,7 @@ The prompt uses the article title, summaries, category, keywords, and non-person
 - Daily budget: 8000 conservatively reserved neurons by default
 - Maximum response: 15 MiB
 
-Authentication failures are terminal for the job. HTTP 429, HTTP 5xx, network failures, and timeouts are retryable within the configured limit. Malformed JSON, invalid base64, undersized data, and undecodable images fail closed to the frontend fallback.
+Authentication failures are terminal for the job. HTTP 429, HTTP 5xx, network failures, and timeouts are retryable within the configured limit. Malformed JSON, invalid base64, undersized data, unsupported magic, MIME/magic disagreement, malformed metadata, excessive dimensions, and non-1024×576 images fail closed to the frontend fallback.
 
 The circuit breaker is process-local. This is appropriate for the current single-VPS worker deployment; multiple independent worker processes would each have their own failure counter and would require a shared breaker before horizontal scaling.
 
@@ -50,7 +56,7 @@ npm run image:regenerate -- <articleId>
 
 The command increments the row revision and returns it to `pending`; the next worker run generates a new fingerprint. It does not call Cloudflare itself.
 
-A real provider smoke is intentionally opt-in and quota-bearing. It requires `RUN_CLOUDFLARE_IMAGE_SMOKE=1`, `IMAGE_GEN_ENABLED=true`, credentials, a migrated non-production database, and an eligible completed article:
+A real provider smoke is intentionally opt-in and quota-bearing. It requires `RUN_CLOUDFLARE_IMAGE_SMOKE=1`, `IMAGE_GEN_ENABLED=true`, credentials, a migrated environment, and an eligible completed article:
 
 ```text
 npm run image:smoke
@@ -58,9 +64,11 @@ npm run image:smoke
 
 Do not run the smoke against production as part of ordinary verification.
 
+After deploying this compatibility hotfix, the controlled production smoke may be repeated on the VPS with `IMAGE_GEN_OPTIMIZE_WITH_SHARP=false`. The smoke remains limited to one job by the existing script. Confirm a `ready` row whose `mime_type`, dimensions and extension match, then disable generation again if the rollout window requires it. Never place credentials in command history or repository files.
+
 ## Frontend behavior
 
-The API returns `image_url`, `image_status`, and `image_source_type`. Only ready, fingerprinted paths matching `/article-images/YYYY/MM/DD/<article>-<hash>.webp` render. The API, filesystem layer and frontend consumers enforce the same shape, so absolute Windows paths and traversal segments cannot be projected. These content-addressed generated URLs receive a one-year immutable cache header; fallback assets are outside that route. Feed images are lazy-loaded with explicit dimensions; detail images reserve a 16:9 area. Missing or broken images use a category-tinted fallback without layout shift. Provider-generated images show `AI illusztráció`.
+The API returns `image_url`, `image_status`, and `image_source_type`. Only ready, fingerprinted paths matching `/article-images/YYYY/MM/DD/<article>-<hash>.(jpg|jpeg|png|webp)` render. The API, filesystem layer, cache-header route and frontend consumers enforce the same shape, so absolute paths and traversal segments cannot be projected. These content-addressed generated URLs receive a one-year immutable cache header; fallback assets are outside that route. File extensions let the static server emit the correct browser MIME. Feed images are lazy-loaded with explicit dimensions; detail images reserve a 16:9 area. Missing or broken images use a category-tinted fallback without layout shift. Provider-generated images show `AI illusztráció`.
 
 ## Structured events
 

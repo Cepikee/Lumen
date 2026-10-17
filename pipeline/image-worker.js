@@ -22,7 +22,7 @@ async function runOnce(dependencies = {}) {
   });
   const repository = dependencies.repository || createImageRepository(pool);
   const provider = dependencies.provider || createCloudflareImageProvider(config);
-  const storage = dependencies.storage || createImageStorage(config);
+  const storage = dependencies.storage || createImageStorage(config, { logger });
   const breaker = dependencies.circuitBreaker || createCircuitBreaker({ failureThreshold: config.circuitFailures, cooldownMs: config.circuitCooldownMs });
   const service = createImageService({ repository, provider, storage, circuitBreaker: breaker, config, logger });
   const workerId = process.env.IMAGE_GEN_WORKER_ID || `${process.pid}-${randomUUID()}`;

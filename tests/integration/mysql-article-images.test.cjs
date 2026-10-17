@@ -6,7 +6,7 @@ const fs = require("node:fs/promises");
 const os = require("node:os");
 const path = require("node:path");
 const mysql = require("mysql2/promise");
-const sharp = require("sharp");
+const fixtures = require("../helpers/image-fixtures.cjs");
 const { applyMigrations, loadMigrations } = require("../../db/migration-core.cjs");
 const { createImageRepository } = require("../../lib/article-images/repository");
 const { createImageService } = require("../../lib/article-images/service");
@@ -106,7 +106,7 @@ test("MySQL 8 image migrations, fencing, budget concurrency and crash recovery",
     assert.equal(Number(crashClaimA.articleId), Number(crashArticle.insertId));
     storageRoot = await fs.mkdtemp(path.join(os.tmpdir(), "utom-image-mysql-"));
     const storage = createImageStorage({ storageRoot, width: 1024, height: 576, quality: 82 });
-    const input = await sharp({ create: { width: 640, height: 360, channels: 3, background: "#126699" } }).png().toBuffer();
+    const input = fixtures.png();
     let providerCalls = 0;
     let failTerminalOnce = true;
     const crashRepository = { ...repository, complete: async (...args) => {
@@ -120,7 +120,9 @@ test("MySQL 8 image migrations, fencing, budget concurrency and crash recovery",
     assert.equal(providerCalls, 1);
     const [[interrupted]] = await pool.execute("SELECT image_status,storage_path FROM article_images WHERE article_id=?", [crashArticle.insertId]);
     assert.equal(interrupted.image_status, "generating");
-    assert.ok(await storage.exists(interrupted.storage_path));
+    assert.equal(interrupted.storage_path, null, "pre-terminal DB state must not claim a format before validated bytes exist");
+    const interruptedArticle = await repository.load(crashClaimA);
+    assert.ok(await storage.findExisting({ articleId: crashArticle.insertId, fingerprint: interruptedArticle.fingerprint, date: interruptedArticle.image_created_at }));
     await pool.execute("UPDATE article_images SET heartbeat_at=UTC_TIMESTAMP(6)-INTERVAL 2 MINUTE WHERE article_id=?", [crashArticle.insertId]);
     const crashClaimB = await repository.claim({ workerId: "crash-b", claimToken: "dddddddd-dddd-4ddd-dddd-dddddddddddd", staleMs: 60_000, maxAttempts: 2 });
     const recoveryService = createImageService({ repository, provider: { generate: async () => { providerCalls += 1; throw new Error("provider_must_not_run"); } }, storage,

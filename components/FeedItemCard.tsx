@@ -16,7 +16,7 @@ function sourceKey(id:number){return ({1:"telex",2:"24hu",3:"index",4:"hvg",5:"p
 function sourceDomain(item:FeedItem){return item.source?.trim()||({1:"telex.hu",2:"24.hu",3:"index.hu",4:"hvg.hu",5:"portfolio.hu",6:"444.hu",7:"origo.hu"} as Record<number,string>)[item.source_id]||item.source_name?.trim()||"Ismeretlen forrás";}
 function sourceLabel(item:FeedItem){return item.source_name?.trim()||item.source?.trim()||sourceKey(item.source_id);}
 function sourceBadge(item:FeedItem){return sourceLabel(item).replace(/^www\./i,"").split(".")[0].slice(0,8).toLocaleUpperCase("hu-HU");}
-function safeImage(value:string|null|undefined){if(!value)return null;const trimmed=value.trim();if(/^\/article-images\/\d{4}\/\d{2}\/\d{2}\/[1-9]\d*-[a-f0-9]{12}\.webp$/.test(trimmed))return trimmed;try{const parsed=new URL(trimmed);return ["http:","https:"].includes(parsed.protocol)?parsed.toString():null;}catch{return null;}}
+function safeImage(value:string|null|undefined){if(!value)return null;const trimmed=value.trim();if(/^\/article-images\/\d{4}\/\d{2}\/\d{2}\/[1-9]\d*-[a-f0-9]{12}\.(?:jpe?g|png|webp)$/.test(trimmed))return trimmed;try{const parsed=new URL(trimmed);return ["http:","https:"].includes(parsed.protocol)?parsed.toString():null;}catch{return null;}}
 
 export default function FeedItemCard({item}:{item:FeedItem;viewMode:"card"|"compact"}){
  const router=useRouter(), title=typeof item.title==="string"&&item.title.trim()?item.title.trim():"Cím nélkül";
