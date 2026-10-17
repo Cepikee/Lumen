@@ -70,6 +70,15 @@ test("homepage rail buttons change the rendered view instead of remaining inert"
   const button = (label) => [...document.querySelectorAll("button")].find((item) => item.textContent.trim() === label);
 
   assert.equal(button("Friss hírek").getAttribute("aria-pressed"), "true");
+
+  const rightRailSource = document.querySelector("#home-sources button");
+  assert.ok(rightRailSource, "right rail source filter must be interactive");
+  await act(async () => { rightRailSource.click(); });
+  const rightRailSelectedView = document.querySelector('[aria-label="Források nézet"]');
+  assert.ok(rightRailSelectedView, "right rail source click must open the source view");
+  assert.ok([...rightRailSelectedView.querySelectorAll("button")][0].className.includes("active"));
+  await act(async () => { button("Friss hírek").click(); });
+
   await act(async () => { button("Kategóriák").click(); });
   const categoryView = document.querySelector('[aria-label="Kategóriák nézet"]');
   assert.ok(categoryView);

@@ -23,6 +23,7 @@ const sourceKeys: Record<number, string> = { 1: "telex.hu", 2: "24.hu", 3: "inde
 const sourceKey = (id: number) => sourceKeys[id] || "Ismeretlen forrás";
 const sourceName = (item: FeedItem) => item.source_name?.trim() || item.source?.trim() || sourceKey(item.source_id);
 const sourceBadge = (name: string) => name.replace(/^www\./i, "").split(".")[0].slice(0, 6).toLocaleUpperCase("hu-HU");
+const sourceStyleKey = (name: string) => sourceBadge(name).toLocaleLowerCase("hu-HU").replace(/[^a-z0-9]/g, "");
 
 export function rankLoadedSources(items: FeedItem[]) {
   const counts = new Map<string, number>();
@@ -83,7 +84,7 @@ export default function HomeFeedLayout({ items, view, category, source, onView, 
   </ul>;
   const moreCategories = additional.length ? <details className={styles.more}><summary>További kategóriák</summary><ul className={styles.filterList}>{additional.map((name) => <li key={name}><button onClick={() => onCategory(name)}>{name}<small className={styles.count}>{categories.get(name)}</small></button></li>)}</ul></details> : null;
   const filterPanel = <div className={styles.panel}><h2>Népszerű kategóriák</h2>{categoryList}{moreCategories}</div>;
-  const sourceList = sources.length ? <ol className={styles.ranking}>{sources.map(([name, count], index) => <li key={name}><em>{index + 1}</em><button className={source === name ? styles.active : ""} onClick={() => onSource(name)}><b>{sourceBadge(name)}</b><span>{name}</span><small className={styles.count}>{count} hír</small></button></li>)}</ol> : <p className={styles.muted}>A forráslista a hírek betöltése után jelenik meg.</p>;
+  const sourceList = sources.length ? <ol className={styles.ranking}>{sources.map(([name, count], index) => <li key={name}><em>{index + 1}</em><button className={source === name ? styles.active : ""} onClick={() => onSource(name)}><b data-source={sourceStyleKey(name)}>{sourceBadge(name)}</b><span>{name}</span><small className={styles.count}>{count} hír</small><i className={styles.sourceChevron} aria-hidden="true">›</i></button></li>)}</ol> : <p className={styles.muted}>A forráslista a hírek betöltése után jelenik meg.</p>;
 
   return <main className={styles.page}><div className={styles.layout}>
     <aside className={styles.left} aria-label="Főoldali navigáció">
@@ -104,7 +105,7 @@ export default function HomeFeedLayout({ items, view, category, source, onView, 
 
     <aside className={styles.right} aria-label="Hírfolyam kontextusa">
       <section className={`${styles.panel} ${styles.sourcePanel}`} id="home-sources"><h2>Aktív források</h2>{sourceList}</section>
-      <section className={styles.panel}><h2>Aktív témák</h2>{topics.length ? <div className={styles.topics}>{topics.map((topic) => <Link href={`/trends?keyword=${encodeURIComponent(topic.keyword)}`} key={topic.keyword}><span>#{topic.keyword}</span><small>{topic.count}</small></Link>)}</div> : <p className={styles.muted}>Még nincs elég adat aktív témákhoz.</p>}</section>
+      <section className={styles.panel}><h2>Aktív témák</h2>{topics.length ? <div className={styles.topics}>{topics.map((topic) => <Link href={`/trends?keyword=${encodeURIComponent(topic.keyword)}`} key={topic.keyword}><i aria-hidden="true">#</i><span>{topic.keyword}</span><small>{topic.count}</small></Link>)}</div> : <p className={styles.muted}>Még nincs elég adat aktív témákhoz.</p>}</section>
       <section className={styles.panel}><h2>Híraktivitás</h2><div className={styles.activity}><div><span>Betöltött hírek</span><strong>{items.length}</strong></div><div><span>Aktív források</span><strong>{sources.length}</strong></div>{latestUpdate ? <div><span>Legfrissebb hír</span><strong>{latestUpdate}</strong></div> : null}</div></section>
     </aside>
   </div></main>;

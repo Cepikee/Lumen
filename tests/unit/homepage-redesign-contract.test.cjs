@@ -24,7 +24,7 @@ test("desktop home is a sticky three-column feed and mobile removes side rails",
  assert.match(css,/grid-template-columns:250px minmax\(0,1fr\) 360px/);
  assert.doesNotMatch(css,/max-width:1640px/);
  assert.match(css,/position:sticky/);
- assert.match(css,/border-right:1px solid rgba\(39,83,113,.58\)/);
+ assert.match(css,/border-right:1px solid rgba\(42,88,119,.66\)/);
  assert.match(css,/@media\(max-width:767px\)/);
  assert.match(css,/\.left,\.right\{display:none\}/);
 });
@@ -52,6 +52,6 @@ test("visual polish keeps an image-less compact feed and branded source metadata
  assert.match(card,/sourceDomain\(item\)/);
  assert.match(cardCss,/font-size:clamp\(17px,1\.25vw,19px\)/);
  assert.doesNotMatch(header,/header-brand-word/);
- assert.match(globalCss,/\.header-home \.header-logo-img \{ width: 112px; height: 42px; object-fit:cover/);
+ assert.match(globalCss,/\.header-home \.header-logo-img \{ width: 118px; height: 44px; object-fit:cover/);
  assert.match(globalCss,/\.header-home \.nav-link\[aria-current="page"\]::after/);
 });
