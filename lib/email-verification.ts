@@ -11,7 +11,7 @@ export async function sendEmailVerification(userId: number, email: string): Prom
   );
   const base = process.env.PUBLIC_APP_URL || "https://utom.hu";
   const verifyUrl = new URL("/verify-email", base);
-  verifyUrl.searchParams.set("token", token);
+  verifyUrl.hash = `token=${encodeURIComponent(token)}`;
   await mailer.sendMail({
     from: process.env.MAIL_FROM || '"Utom.hu" <noreply@utom.hu>',
     to: email,

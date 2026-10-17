@@ -1,29 +1,9 @@
+import { configuredPublicHostnames } from "@/lib/public-hostnames";
+
 type RecaptchaVerificationOptions = {
   expectedAction?: string;
 };
 
-function configuredHostnames(): Set<string> {
-  const values = [
-    process.env.RECAPTCHA_ALLOWED_HOSTNAMES,
-    process.env.NEXT_PUBLIC_APP_URL,
-    process.env.PUBLIC_APP_URL,
-    process.env.UTOM_ALLOWED_ORIGIN,
-  ].filter(Boolean).flatMap((value) => String(value).split(","));
-
-  const hosts = new Set<string>();
-  for (const raw of values) {
-    const value = raw.trim();
-    if (!value) continue;
-    try {
-      const url = value.includes("://") ? new URL(value) : new URL(`https://${value}`);
-      if (url.hostname) hosts.add(url.hostname.toLowerCase());
-    } catch {
-      // Invalid host configuration is ignored here. Production verification
-      // fails closed below when no valid hostname remains.
-    }
-  }
-  return hosts;
-}
 
 export async function verifyRecaptcha(token: unknown, options: RecaptchaVerificationOptions = {}) {
   if (
@@ -64,7 +44,7 @@ export async function verifyRecaptcha(token: unknown, options: RecaptchaVerifica
     if (options.expectedAction && data.action !== options.expectedAction) return 0;
 
     if (process.env.NODE_ENV === "production") {
-      const allowedHosts = configuredHostnames();
+      const allowedHosts = configuredPublicHostnames(process.env.RECAPTCHA_ALLOWED_HOSTNAMES);
       const hostname = typeof data.hostname === "string" ? data.hostname.trim().toLowerCase() : "";
       if (allowedHosts.size === 0 || !hostname || !allowedHosts.has(hostname)) return 0;
     }

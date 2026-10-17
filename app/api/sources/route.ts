@@ -1,10 +1,14 @@
 // app/api/sources/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { checkPublicApiRateLimit } from "@/lib/security";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
+  if (!(await checkPublicApiRateLimit(req, "sources", 120, 60_000))) {
+    return NextResponse.json({ success: false, error: "rate_limit" }, { status: 429 });
+  }
   try {
     // A forráslista nyilvános UI-adat; a canonical article→source FK-t
     // használjuk, hogy hiányzó/legacy summary.source mellett se vesszen el
@@ -20,10 +24,10 @@ export async function GET(req: Request) {
       `
     );
 
-    return NextResponse.json({
-      success: true,
-      sources: rows
-    });
+    return NextResponse.json(
+      { success: true, sources: rows },
+      { headers: { "Cache-Control": "public, max-age=60, stale-while-revalidate=300" } },
+    );
 
   } catch (err) {
     console.error("API /sources error:", err);

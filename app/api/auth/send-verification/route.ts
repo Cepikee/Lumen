@@ -17,7 +17,9 @@ export async function POST(req: Request) {
     const ip = getIp(req);
     const [userAllowed, ipAllowed] = await Promise.all([
       consumeRateLimitFailClosed(db, { scope: "email-verification-user", identity: String(userId), limit: 3, windowMs: 30 * 60_000 }),
-      consumeRateLimitFailClosed(db, { scope: "email-verification-ip", identity: ip, limit: 10, windowMs: 30 * 60_000 }),
+      (ip === "direct" || ip === "unknown")
+        ? Promise.resolve(true)
+        : consumeRateLimitFailClosed(db, { scope: "email-verification-ip", identity: ip, limit: 10, windowMs: 30 * 60_000 }),
     ]);
     if (!userAllowed || !ipAllowed) {
       return NextResponse.json({ success: false, message: "Túl sok kérés. Próbáld újra később." }, { status: 429 });

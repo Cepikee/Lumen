@@ -8,6 +8,7 @@ import mysql from "mysql2/promise";
 import * as cheerio from "cheerio";
 import { canonicalizeArticleUrl } from "@/lib/article-identity";
 import { ingestFeedArticle } from "@/lib/feed-ingestion";
+import { readTextBodyWithLimit } from "@/lib/request-body";
 
 /**
  * S-02 – külső RSS-fogadó végpont.
@@ -140,41 +141,14 @@ export async function POST(request: Request) {
     return denied;
   }
 
-  // Korlátozzuk a beküldött adatok méretét.
-  const declaredLength = request.headers.get("content-length");
-
-  if (declaredLength !== null) {
-    const length = Number(declaredLength);
-
-    if (
-      !Number.isSafeInteger(length) ||
-      length < 0 ||
-      length > MAX_BODY_BYTES
-    ) {
-      return NextResponse.json(
-        { error: "payload_too_large" },
-        { status: 413 }
-      );
-    }
-  }
-
-  let xml: string;
-
-  try {
-    xml = await request.text();
-  } catch {
+  const boundedBody = await readTextBodyWithLimit(request, MAX_BODY_BYTES);
+  if (!boundedBody.ok) {
     return NextResponse.json(
-      { error: "invalid_payload" },
-      { status: 400 }
+      { error: boundedBody.status === 413 ? "payload_too_large" : "invalid_payload" },
+      { status: boundedBody.status },
     );
   }
-
-  if (Buffer.byteLength(xml, "utf8") > MAX_BODY_BYTES) {
-    return NextResponse.json(
-      { error: "payload_too_large" },
-      { status: 413 }
-    );
-  }
+  const xml = boundedBody.value;
 
   if (!/<rss(?:\s|>)/i.test(xml)) {
     return NextResponse.json(

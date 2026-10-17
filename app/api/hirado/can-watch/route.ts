@@ -5,6 +5,7 @@ import type { RowDataPacket } from "mysql2";
 import { evaluatePremium } from "@/lib/entitlements";
 import { getIp, requireTrustedOrigin } from "@/lib/security";
 import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
+import { readJsonBodyWithLimit } from "@/lib/request-body";
 
 async function logAccess(userId: unknown, videoId: unknown, ip: string, status: string) {
   try {
@@ -36,12 +37,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ canWatch: false, reason: "RATE_LIMIT" }, { status: 429 });
     }
 
-    let body: unknown;
-    try {
-      body = await req.json();
-    } catch {
-      return NextResponse.json({ canWatch: false, error: "INVALID_REQUEST" }, { status: 400 });
+    const parsedBody = await readJsonBodyWithLimit(req, 8_000);
+    if (!parsedBody.ok) {
+      return NextResponse.json(
+        { canWatch: false, error: parsedBody.status === 413 ? "PAYLOAD_TOO_LARGE" : "INVALID_REQUEST" },
+        { status: parsedBody.status },
+      );
     }
+    const body = parsedBody.value;
     const rawVideoId = body && typeof body === "object" && "videoId" in body
       ? String((body as { videoId?: unknown }).videoId ?? "").trim()
       : "";

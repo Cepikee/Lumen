@@ -3,14 +3,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { readAndScrubOneTimeToken } from "@/lib/client-one-time-token";
 
 export default function VerifyEmailPage() {
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
+    const token = readAndScrubOneTimeToken();
 
     if (!token) {
       setStatus("error");

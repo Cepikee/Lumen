@@ -25,10 +25,11 @@ assert.match(pin, /requireTrustedOrigin\(req\)/);
 assert.match(pin, /scope: "change-pin-user"/);
 assert.match(pin, /DELETE FROM user_sessions WHERE user_id = \?/);
 
-// Mutation routes must map malformed JSON to a client error rather than 500.
+// Mutation routes must map malformed/oversized bodies to client errors via
+// the shared streaming-bounded parser rather than buffering req.json().
 for (const source of [password, pin, avatar, frame]) {
-  assert.match(source, /req\.json\(\)/);
-  assert.match(source, /status: 400/);
+  assert.match(source, /readJsonBodyWithLimit\(req,/);
+  assert.match(source, /status: parsedBody\.status/);
   assert.match(source, /requireTrustedOrigin\(req\)/);
 }
 

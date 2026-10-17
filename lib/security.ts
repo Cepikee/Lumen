@@ -1,20 +1,33 @@
 // lib/security.ts
 import { timingSafeEqual } from "node:crypto";
+import { isIP } from "node:net";
 import { NextResponse } from "next/server";
 import { db } from "./db";
 import { consumeRateLimitFailClosed } from "./shared-rate-limit";
 
-// 🔐 IP extraction (Cloudflare + Vercel + fallback)
+function normalizeIp(value: string | null): string | null {
+  const candidate = String(value || "").trim();
+  if (!candidate || candidate.length > 64) return null;
+  return isIP(candidate) ? candidate.toLowerCase() : null;
+}
+
+// 🔐 IP extraction (Cloudflare + reverse-proxy fallback). Proxy headers are
+// considered only when the deployment explicitly opts in, and malformed
+// caller-controlled values are never accepted as rate-limit identities.
 export function getIp(req: Request): string {
   if (process.env.UTOM_TRUST_PROXY_HEADERS !== "true") return "direct";
-  const cf = req.headers.get("cf-connecting-ip");
+
+  const cf = normalizeIp(req.headers.get("cf-connecting-ip"));
   if (cf) return cf;
 
-  const real = req.headers.get("x-real-ip");
+  const real = normalizeIp(req.headers.get("x-real-ip"));
   if (real) return real;
 
-  const fwd = req.headers.get("x-forwarded-for");
-  if (fwd) return fwd.split(",")[0].trim();
+  const forwarded = req.headers.get("x-forwarded-for");
+  if (forwarded) {
+    const first = normalizeIp(forwarded.split(",")[0]);
+    if (first) return first;
+  }
 
   return "unknown";
 }
@@ -143,16 +156,20 @@ export function isAllowedSameOriginRead(req: Request, options: { allowSameOrigin
 }
 
 export async function securityCheck(req: Request, options: { allowSameOriginRead?: boolean } = {}) {
-  // API key
+  const apiKeyAccepted = checkApiKey(req);
   const sameOriginRead = isAllowedSameOriginRead(req, options);
-  if (!checkApiKey(req) && !sameOriginRead) {
+
+  // `allowSameOriginRead` is an explicit public-browser read exception, not an
+  // authentication primitive. Browser metadata headers can be reproduced by a
+  // non-browser HTTP client, so confidential data must still have its own
+  // session/entitlement check in the route itself.
+  if (!apiKeyAccepted && !sameOriginRead) {
     return NextResponse.json(
       { success: false, error: "unauthorized" },
       { status: 401 }
     );
   }
 
-  // CORS
   if (!checkCors(req)) {
     return NextResponse.json(
       { success: false, error: "forbidden_origin" },
@@ -160,12 +177,20 @@ export async function securityCheck(req: Request, options: { allowSameOriginRead
     );
   }
 
-  // Rate limit
-  const internalRateKey = req.headers.get("x-utom-rate-key");
-  const ip = internalRateKey && /^premium-user-\d+$/.test(internalRateKey)
-    ? internalRateKey
-    : getIp(req);
-  const ok = await checkRateLimit(ip);
+  let ok: boolean;
+  if (apiKeyAccepted) {
+    // Caller-controlled rate identities are trusted only after the internal
+    // API key has authenticated the request. This prevents public callers from
+    // rotating x-utom-rate-key values to bypass throttling.
+    const internalRateKey = req.headers.get("x-utom-rate-key");
+    const identity = internalRateKey && /^premium-user-\d+$/.test(internalRateKey)
+      ? internalRateKey
+      : "internal-api-key";
+    ok = await checkRateLimit(identity);
+  } else {
+    ok = await checkPublicApiRateLimit(req, "v2-browser-read", 120, 60_000);
+  }
+
   if (!ok) {
     return NextResponse.json(
       { success: false, error: "rate_limit" },
@@ -173,5 +198,5 @@ export async function securityCheck(req: Request, options: { allowSameOriginRead
     );
   }
 
-  return null; // minden oké
+  return null;
 }

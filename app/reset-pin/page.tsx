@@ -1,23 +1,25 @@
 "use client";
 
 import { Suspense, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { readAndScrubOneTimeToken } from "@/lib/client-one-time-token";
 
 function ResetPinContent() {
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token");
-
+  const [token, setToken] = useState<string | null>(null);
+  const [tokenReady, setTokenReady] = useState(false);
   const [newPin, setNewPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!token) {
+    const value = readAndScrubOneTimeToken();
+    setToken(value);
+    setTokenReady(true);
+    if (!value) {
       setStatus("error");
       setError("Hiányzó vagy érvénytelen token.");
     }
-  }, [token]);
+  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -110,7 +112,7 @@ function ResetPinContent() {
           <button
             className="btn btn-primary w-100"
             type="submit"
-            disabled={status === "loading" || !token}
+            disabled={status === "loading" || !tokenReady || !token}
           >
             {status === "loading" ? "Mentés..." : "PIN frissítése"}
           </button>

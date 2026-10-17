@@ -4,22 +4,21 @@ import { verifyRecaptcha } from "@/lib/recaptcha";
 import { getIp, requireTrustedOrigin } from "@/lib/security";
 import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
 import { requestReset } from "@/lib/reset-service";
+import { readJsonBodyWithLimit } from "@/lib/request-body";
 
 export async function POST(req: Request) {
   try {
     const originDenied = requireTrustedOrigin(req);
     if (originDenied) return originDenied;
 
-    const contentLength = Number(req.headers.get("content-length") || 0);
-    if (Number.isFinite(contentLength) && contentLength > 16000) {
-      return NextResponse.json({ success: false, message: "Túl nagy kérés." }, { status: 413 });
+    const parsedBody = await readJsonBodyWithLimit(req, 16_000);
+    if (!parsedBody.ok) {
+      return NextResponse.json(
+        { success: false, error: parsedBody.status === 413 ? "Túl nagy kérés." : "Érvénytelen JSON kérés." },
+        { status: parsedBody.status },
+      );
     }
-    let body: any;
-    try {
-      body = await req.json();
-    } catch {
-      return NextResponse.json({ success: false, error: "Érvénytelen JSON kérés." }, { status: 400 });
-    }
+    const body: any = parsedBody.value;
     if (!body || typeof body !== "object" || Array.isArray(body)) {
       return NextResponse.json({ success: false, error: "Érvénytelen kérés törzs." }, { status: 400 });
     }
@@ -28,7 +27,9 @@ export async function POST(req: Request) {
     if (await verifyRecaptcha(body.recaptchaToken, { expectedAction: "forgot_pin" }) < 0.5) return NextResponse.json({ success: true });
     const ip = getIp(req);
     const [ipAllowed, emailAllowed] = await Promise.all([
-      consumeRateLimitFailClosed(db, { scope: "pin-reset-ip", identity: ip, limit: 5, windowMs: 30 * 60_000 }),
+      (ip === "direct" || ip === "unknown")
+        ? Promise.resolve(true)
+        : consumeRateLimitFailClosed(db, { scope: "pin-reset-ip", identity: ip, limit: 5, windowMs: 30 * 60_000 }),
       consumeRateLimitFailClosed(db, { scope: "pin-reset-email", identity: email, limit: 3, windowMs: 30 * 60_000 }),
     ]);
     if (!ipAllowed || !emailAllowed) return NextResponse.json({ success: true });

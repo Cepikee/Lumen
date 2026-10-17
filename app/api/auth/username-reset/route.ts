@@ -4,6 +4,17 @@ import { db } from "@/lib/db";
 import { mailer } from "@/lib/mailer";
 import { getIp, requireTrustedOrigin } from "@/lib/security";
 import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
+import { readJsonBodyWithLimit } from "@/lib/request-body";
+
+function escapeHtml(value: string): string {
+  return value.replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  }[char] || char));
+}
 
 export async function POST(req: Request) {
   try {
@@ -11,15 +22,9 @@ export async function POST(req: Request) {
     if (originDenied) return originDenied;
 
     const ip = getIp(req);
-
-    // 🔐 1) User azonosítása cookie alapján
     const userId = await getSessionUserId();
-
     if (!userId) {
-      return NextResponse.json({
-        success: false,
-        message: "Nem vagy bejelentkezve.",
-      }, { status: 401 });
+      return NextResponse.json({ success: false, message: "Nem vagy bejelentkezve." }, { status: 401 });
     }
 
     const allowed = await consumeRateLimitFailClosed(db, {
@@ -32,150 +37,120 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, message: "Túl sok kérés. Próbáld újra később." }, { status: 429 });
     }
 
-    // 🔥 2) Body beolvasása
-    let body: any;
-    try {
-      body = await req.json();
-    } catch {
-      return NextResponse.json({
-        success: false,
-        message: "Érvénytelen kérés.",
-      }, { status: 400 });
+    const parsedBody = await readJsonBodyWithLimit(req, 8_000);
+    if (!parsedBody.ok) {
+      return NextResponse.json(
+        { success: false, message: parsedBody.status === 413 ? "Túl nagy kérés." : "Érvénytelen kérés." },
+        { status: parsedBody.status },
+      );
     }
-
-    if (!body || typeof body !== "object" || Array.isArray(body)) {
+    if (!parsedBody.value || typeof parsedBody.value !== "object" || Array.isArray(parsedBody.value)) {
       return NextResponse.json({ success: false, message: "Érvénytelen kérés." }, { status: 400 });
     }
 
-    const { newUsername } = body;
-
-    if (!newUsername) {
-      return NextResponse.json({
-        success: false,
-        message: "Új felhasználónév megadása kötelező.",
-      }, { status: 400 });
+    const rawUsername = (parsedBody.value as { newUsername?: unknown }).newUsername;
+    if (typeof rawUsername !== "string") {
+      return NextResponse.json({ success: false, message: "Új felhasználónév megadása kötelező." }, { status: 400 });
     }
-
-    // 🔥 3) Validáció
-    const username = String(newUsername).trim();
-
+    const username = rawUsername.trim();
     if (username.length < 3 || username.length > 20) {
-      return NextResponse.json({
-        success: false,
-        message: "A felhasználónév 3–20 karakter között lehet.",
-      }, { status: 400 });
+      return NextResponse.json({ success: false, message: "A felhasználónév 3–20 karakter között lehet." }, { status: 400 });
     }
-
-    // Keep the update flow consistent with the documented username policy and
-    // registration: separators are valid, but whitespace and other symbols
-    // are not. The previous expression rejected every username containing
-    // `_`, `.`, or `-` while advertising those characters as supported.
     if (!/^[a-zA-Z0-9._-]+$/.test(username)) {
       return NextResponse.json({
         success: false,
-        message:
-          "A felhasználónév csak betűket, számokat, pontot, kötőjelet és aláhúzást tartalmazhat.",
+        message: "A felhasználónév csak betűket, számokat, pontot, kötőjelet és aláhúzást tartalmazhat.",
       }, { status: 400 });
     }
-
     if (/^[0-9]+$/.test(username)) {
-      return NextResponse.json({
-        success: false,
-        message: "A felhasználónév nem lehet csak szám.",
-      }, { status: 400 });
+      return NextResponse.json({ success: false, message: "A felhasználónév nem lehet csak szám." }, { status: 400 });
     }
-
     if (["admin", "moderator", "support", "utom", "system"].includes(username.toLowerCase())) {
-      return NextResponse.json({
-        success: false,
-        message: "Ez a felhasználónév nem használható.",
-      }, { status: 400 });
+      return NextResponse.json({ success: false, message: "Ez a felhasználónév nem használható." }, { status: 400 });
     }
 
-    // 🔥 4) Jelenlegi user lekérése
-    const [rows]: any = await db.query(
-      "SELECT email, nickname, username_changed_at FROM users WHERE id = ? LIMIT 1",
-      [userId]
-    );
-
-    if (rows.length === 0) {
-      return NextResponse.json({
-        success: false,
-        message: "Felhasználó nem található.",
-      }, { status: 404 });
-    }
-
-    const user = rows[0];
-
-    if (user.nickname === username) {
-      return NextResponse.json({
-        success: false,
-        message: "Ez már a jelenlegi felhasználóneved.",
-      }, { status: 400 });
-    }
-
-    // 🔥 5) 30 napos cooldown ellenőrzése
-    if (user.username_changed_at) {
-      const [cooldown]: any = await db.query(
-        `SELECT TIMESTAMPDIFF(DAY, username_changed_at, NOW()) AS days
-         FROM users WHERE id = ?`,
-        [userId]
+    const connection = await db.getConnection();
+    let oldNickname = "";
+    let userEmail = "";
+    try {
+      await connection.beginTransaction();
+      // Lock the account row so two parallel requests cannot both pass the
+      // 30-day cooldown check and update the username.
+      const [rows]: any = await connection.query(
+        `SELECT email, nickname, username_changed_at,
+                TIMESTAMPDIFF(DAY, username_changed_at, UTC_TIMESTAMP()) AS days_since_change
+         FROM users WHERE id = ? LIMIT 1 FOR UPDATE`,
+        [userId],
       );
+      if (!rows.length) {
+        await connection.rollback();
+        return NextResponse.json({ success: false, message: "Felhasználó nem található." }, { status: 404 });
+      }
 
-      if (cooldown[0].days < 30) {
+      const user = rows[0];
+      oldNickname = String(user.nickname || "");
+      userEmail = String(user.email || "");
+      if (oldNickname === username) {
+        await connection.rollback();
+        return NextResponse.json({ success: false, message: "Ez már a jelenlegi felhasználóneved." }, { status: 400 });
+      }
+
+      if (user.username_changed_at && Number(user.days_since_change) < 30) {
+        const remaining = Math.max(1, 30 - Number(user.days_since_change || 0));
+        await connection.rollback();
         return NextResponse.json({
           success: false,
-          message: `Felhasználónevet 30 naponta egyszer változtathatsz. Hátralévő napok: ${
-            30 - cooldown[0].days
-          }.`,
+          message: `Felhasználónevet 30 naponta egyszer változtathatsz. Hátralévő napok: ${remaining}.`,
         }, { status: 400 });
       }
+
+      const [exists]: any = await connection.query(
+        "SELECT id FROM users WHERE nickname = ? AND id <> ? LIMIT 1",
+        [username, userId],
+      );
+      if (exists.length > 0) {
+        await connection.rollback();
+        return NextResponse.json({ success: false, message: "Ez a felhasználónév már foglalt." }, { status: 409 });
+      }
+
+      await connection.query(
+        "UPDATE users SET nickname = ?, username_changed_at = UTC_TIMESTAMP() WHERE id = ?",
+        [username, userId],
+      );
+      try {
+        await connection.query(
+          "INSERT INTO username_change_log (user_id, old_name, new_name, ip) VALUES (?, ?, ?, ?)",
+          [userId, oldNickname, username, ip],
+        );
+      } catch {
+        // Audit logging is best-effort and must not roll back the account update.
+      }
+      await connection.commit();
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
     }
 
-    // 🔥 6) Foglaltság ellenőrzése
-    const [exists]: any = await db.query(
-      "SELECT id FROM users WHERE nickname = ? LIMIT 1",
-      [username]
-    );
-
-    if (exists.length > 0) {
-      return NextResponse.json({
-        success: false,
-        message: "Ez a felhasználónév már foglalt.",
-      }, { status: 409 });
-    }
-
-    // 🔥 7) Frissítés az adatbázisban
-    await db.query(
-      `UPDATE users 
-       SET nickname = ?, username_changed_at = NOW() 
-       WHERE id = ?`,
-      [username, userId]
-    );
-
-    // 🔥 8) Logolás (opcionális)
-    await db.query(
-      "INSERT INTO username_change_log (user_id, old_name, new_name, ip) VALUES (?, ?, ?, ?)",
-      [userId, user.nickname, username, ip]
-    ).catch(() => {});
-
-    // 🔥 9) Email értesítés
     try {
+      const safeOld = escapeHtml(oldNickname);
+      const safeNew = escapeHtml(username);
       await mailer.sendMail({
         from: `"Utom.hu" <noreply@utom.hu>`,
-        to: user.email,
+        to: userEmail,
         subject: "Felhasználónév módosítva",
         html: `
           <p>Szia!</p>
           <p>A felhasználóneved sikeresen megváltozott.</p>
-          <p><strong>Régi név:</strong> ${user.nickname}</p>
-          <p><strong>Új név:</strong> ${username}</p>
+          <p><strong>Régi név:</strong> ${safeOld}</p>
+          <p><strong>Új név:</strong> ${safeNew}</p>
           <p>Ha nem te kezdeményezted a módosítást, azonnal változtasd meg a jelszavadat és PIN kódodat!</p>
           <p>Üdv,<br>Utom.hu</p>
         `,
       });
-    } catch (err) {
-      console.error("Email küldési hiba:", err);
+    } catch (error) {
+      console.error("Username change notification failed:", error instanceof Error ? error.message : "unknown_error");
     }
 
     return NextResponse.json({
@@ -185,14 +160,8 @@ export async function POST(req: Request) {
     });
   } catch (err: any) {
     if (err?.code === "ER_DUP_ENTRY") {
-      return NextResponse.json(
-        { success: false, message: "Ez a felhasználónév már foglalt." },
-        { status: 409 }
-      );
+      return NextResponse.json({ success: false, message: "Ez a felhasználónév már foglalt." }, { status: 409 });
     }
-    return NextResponse.json({
-      success: false,
-      message: "Váratlan hiba történt.",
-    }, { status: 500 });
+    return NextResponse.json({ success: false, message: "Váratlan hiba történt." }, { status: 500 });
   }
 }

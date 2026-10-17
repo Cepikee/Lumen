@@ -1,15 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { readAndScrubOneTimeToken } from "@/lib/client-one-time-token";
 
 export default function ResetPasswordInner() {
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token");
-
+  const [token, setToken] = useState<string | null>(null);
+  const [tokenReady, setTokenReady] = useState(false);
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    setToken(readAndScrubOneTimeToken());
+    setTokenReady(true);
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -69,7 +73,7 @@ export default function ResetPasswordInner() {
 
           <button
             type="submit"
-            disabled={status === "loading" || !token}
+            disabled={status === "loading" || !tokenReady || !token}
             style={{ width: "100%", padding: 10 }}
           >
             {status === "loading" ? "Mentés..." : "Jelszó frissítése"}

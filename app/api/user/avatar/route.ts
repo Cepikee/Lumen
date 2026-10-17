@@ -3,21 +3,20 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getPremiumEntitlement } from "@/lib/entitlements";
 import { requireTrustedOrigin } from "@/lib/security";
+import { readJsonBodyWithLimit } from "@/lib/request-body";
 
 export async function POST(req: Request) {
   const originDenied = requireTrustedOrigin(req);
   if (originDenied) return originDenied;
 
-  const contentLength = Number(req.headers.get("content-length") || 0);
-  if (Number.isFinite(contentLength) && contentLength > 8000) {
-    return NextResponse.json({ success: false, message: "Túl nagy kérés." }, { status: 413 });
+  const parsedBody = await readJsonBodyWithLimit(req, 8_000);
+  if (!parsedBody.ok) {
+    return NextResponse.json(
+      { success: false, message: parsedBody.status === 413 ? "Túl nagy kérés." : "Érvénytelen kérés." },
+      { status: parsedBody.status },
+    );
   }
-  let body: unknown;
-  try {
-    body = await req.json();
-  } catch {
-    return NextResponse.json({ success: false, message: "Érvénytelen kérés." }, { status: 400 });
-  }
+  const body = parsedBody.value;
   if (!body || typeof body !== "object" || Array.isArray(body)) {
     return NextResponse.json({ success: false, message: "Érvénytelen kérés." }, { status: 400 });
   }

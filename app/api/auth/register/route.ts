@@ -8,6 +8,7 @@ import { sendEmailVerification } from "@/lib/email-verification";
 import { verifyRecaptcha } from "@/lib/recaptcha";
 import { getIp, requireTrustedOrigin } from "@/lib/security";
 import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
+import { readJsonBodyWithLimit } from "@/lib/request-body";
 
 function generateRandomAvatar() {
   const styles = ["bottts", "adventurer", "micah"];
@@ -26,17 +27,14 @@ export async function POST(req: Request) {
     const originDenied = requireTrustedOrigin(req);
     if (originDenied) return originDenied;
 
-    const contentLength = Number(req.headers.get("content-length") || 0);
-    if (Number.isFinite(contentLength) && contentLength > 50_000) {
-      return NextResponse.json({ success: false, message: "Túl nagy kérés." }, { status: 413 });
+    const parsedBody = await readJsonBodyWithLimit(req, 50_000);
+    if (!parsedBody.ok) {
+      return NextResponse.json(
+        { success: false, message: parsedBody.status === 413 ? "Túl nagy kérés." : "Érvénytelen JSON kérés." },
+        { status: parsedBody.status },
+      );
     }
-
-    let body: any;
-    try {
-      body = await req.json();
-    } catch {
-      return NextResponse.json({ success: false, message: "Érvénytelen JSON kérés." }, { status: 400 });
-    }
+    const body: any = parsedBody.value;
     if (!body || typeof body !== "object" || Array.isArray(body)) {
       return NextResponse.json({ success: false, message: "Érvénytelen kérés törzs." }, { status: 400 });
     }
@@ -70,17 +68,26 @@ export async function POST(req: Request) {
     }
 
     const ip = getIp(req);
-    const [ipAllowed, emailAllowed] = await Promise.all([
-      consumeRateLimitFailClosed(db, { scope: "register-ip", identity: ip, limit: 8, windowMs: 60 * 60_000 }),
-      consumeRateLimitFailClosed(db, { scope: "register-email", identity: email, limit: 4, windowMs: 60 * 60_000 }),
-    ]);
-    if (!ipAllowed || !emailAllowed) {
+    const ipAllowed = (ip === "direct" || ip === "unknown")
+      ? true
+      : await consumeRateLimitFailClosed(db, { scope: "register-ip", identity: ip, limit: 8, windowMs: 60 * 60_000 });
+    if (!ipAllowed) {
       return NextResponse.json({ success: false, message: "Túl sok regisztrációs próbálkozás. Próbáld újra később." }, { status: 429 });
     }
 
     const captchaScore = await verifyRecaptcha(recaptchaToken, { expectedAction: "register" });
     if (captchaScore < 0.5) {
       return NextResponse.json({ success: false, message: "A botvédelem ellenőrzése sikertelen." }, { status: 400 });
+    }
+
+    const emailAllowed = await consumeRateLimitFailClosed(db, {
+      scope: "register-email",
+      identity: email,
+      limit: 4,
+      windowMs: 60 * 60_000,
+    });
+    if (!emailAllowed) {
+      return NextResponse.json({ success: false, message: "Túl sok regisztrációs próbálkozás. Próbáld újra később." }, { status: 429 });
     }
 
     const [emailCheck]: any = await db.query("SELECT id FROM users WHERE email = ? LIMIT 1", [email]);

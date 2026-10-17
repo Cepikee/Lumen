@@ -3,6 +3,8 @@ import { mailer } from "@/lib/mailer";
 import { db } from "@/lib/db";
 import { getIp, requireTrustedOrigin } from "@/lib/security";
 import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
+import { configuredPublicHostnames } from "@/lib/public-hostnames";
+import { readTextBodyWithLimit } from "@/lib/request-body";
 
 const MAX_BODY = 10_000;
 const MAX_MESSAGE = 5_000;
@@ -24,24 +26,29 @@ export async function POST(req: Request) {
 
     const ip = getIp(req);
     const now = Date.now();
-    const ipAllowed = await consumeRateLimitFailClosed(db, {
-      scope: "contact-ip",
-      identity: ip,
-      limit: 5,
-      windowMs: 60_000,
-    });
+    const ipAllowed = (ip === "direct" || ip === "unknown")
+      ? true
+      : await consumeRateLimitFailClosed(db, {
+          scope: "contact-ip",
+          identity: ip,
+          limit: 5,
+          windowMs: 60_000,
+        });
     if (!ipAllowed) {
       return NextResponse.json({ success: false, error: "Túl sok kérés. Próbáld újra később." }, { status: 429 });
     }
 
-    const bodyText = await req.text();
-    if (bodyText.length > MAX_BODY) {
-      return NextResponse.json({ success: false, error: "Túl nagy kérés." }, { status: 413 });
+    const boundedBody = await readTextBodyWithLimit(req, MAX_BODY);
+    if (!boundedBody.ok) {
+      return NextResponse.json(
+        { success: false, error: boundedBody.status === 413 ? "Túl nagy kérés." : "Érvénytelen kérés." },
+        { status: boundedBody.status },
+      );
     }
 
     let parsed: unknown;
     try {
-      parsed = JSON.parse(bodyText);
+      parsed = JSON.parse(boundedBody.value);
     } catch {
       return NextResponse.json({ success: false, error: "Érvénytelen JSON." }, { status: 400 });
     }
@@ -79,16 +86,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: "Érvénytelen email cím." }, { status: 400 });
     }
 
-    const emailAllowed = await consumeRateLimitFailClosed(db, {
-      scope: "contact-email",
-      identity: normalizedEmail,
-      limit: 2,
-      windowMs: 30_000,
-    });
-    if (!emailAllowed) {
-      return NextResponse.json({ success: false, error: "Túl gyakori küldés erről az email címről." }, { status: 429 });
-    }
-
     if (typeof turnstileToken !== "string" || !turnstileToken.trim()) {
       return NextResponse.json({ success: false, error: "Hiányzó ellenőrző token." }, { status: 400 });
     }
@@ -116,6 +113,29 @@ export async function POST(req: Request) {
     }
     if (!cfData || typeof cfData !== "object" || (cfData as { success?: unknown }).success !== true) {
       return NextResponse.json({ success: false, error: "Ellenőrzés sikertelen." }, { status: 400 });
+    }
+    const turnstile = cfData as { action?: unknown; hostname?: unknown };
+    if (turnstile.action !== "contact") {
+      return NextResponse.json({ success: false, error: "Érvénytelen ellenőrzési művelet." }, { status: 400 });
+    }
+    if (process.env.NODE_ENV === "production") {
+      const allowedHosts = configuredPublicHostnames(process.env.TURNSTILE_ALLOWED_HOSTNAMES);
+      const hostname = typeof turnstile.hostname === "string" ? turnstile.hostname.trim().toLowerCase() : "";
+      if (allowedHosts.size === 0 || !hostname || !allowedHosts.has(hostname)) {
+        return NextResponse.json({ success: false, error: "Érvénytelen ellenőrzési host." }, { status: 400 });
+      }
+    }
+
+    // Email-specific quota is consumed only after a valid Turnstile challenge,
+    // preventing arbitrary third parties from locking out another address.
+    const emailAllowed = await consumeRateLimitFailClosed(db, {
+      scope: "contact-email",
+      identity: normalizedEmail,
+      limit: 2,
+      windowMs: 30_000,
+    });
+    if (!emailAllowed) {
+      return NextResponse.json({ success: false, error: "Túl gyakori küldés erről az email címről." }, { status: 429 });
     }
 
     const subjectKey = typeof subject === "string" ? subject : "support";

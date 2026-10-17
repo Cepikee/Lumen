@@ -5,16 +5,13 @@ import bcrypt from "bcryptjs";
 import { validatePassword } from "@/lib/auth-policy";
 import { getIp, requireTrustedOrigin } from "@/lib/security";
 import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
+import { readJsonBodyWithLimit } from "@/lib/request-body";
 
 export async function POST(req: Request) {
   try {
     const originDenied = requireTrustedOrigin(req);
     if (originDenied) return originDenied;
 
-    const contentLength = Number(req.headers.get("content-length") || 0);
-    if (Number.isFinite(contentLength) && contentLength > 16000) {
-      return NextResponse.json({ success: false, message: "Túl nagy kérés." }, { status: 413 });
-    }
 
     const userId = await getSessionUserId();
     if (!userId) {
@@ -48,15 +45,14 @@ export async function POST(req: Request) {
       );
     }
 
-    let body: unknown;
-    try {
-      body = await req.json();
-    } catch {
+    const parsedBody = await readJsonBodyWithLimit(req, 16_000);
+    if (!parsedBody.ok) {
       return NextResponse.json(
-        { success: false, message: "Érvénytelen kérés." },
-        { status: 400 },
+        { success: false, message: parsedBody.status === 413 ? "Túl nagy kérés." : "Érvénytelen kérés." },
+        { status: parsedBody.status },
       );
     }
+    const body = parsedBody.value;
     if (!body || typeof body !== "object" || Array.isArray(body)) {
       return NextResponse.json(
         { success: false, message: "Érvénytelen kérés." },

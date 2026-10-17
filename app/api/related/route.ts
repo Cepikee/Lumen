@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
 import { normalizeRelatedSource } from "@/lib/related-news";
 import { adaptOptionalRelatedProjection } from "@/lib/v2/runtime-related-news";
+import { checkPublicApiRateLimit } from "@/lib/security";
 
 let pool: mysql.Pool | null = null;
 
@@ -30,6 +31,9 @@ function getPool() {
 }
 
 export async function GET(req: Request) {
+  if (!(await checkPublicApiRateLimit(req, "related", 90, 60_000))) {
+    return NextResponse.json({ error: "rate_limit" }, { status: 429 });
+  }
   const { searchParams } = new URL(req.url);
 
   const source = normalizeRelatedSource(searchParams.get("source"));

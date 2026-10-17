@@ -7,28 +7,32 @@ import { getIp, requireTrustedOrigin } from "@/lib/security";
 import { getLoginAttemptScope } from "@/lib/login-rate-limit";
 import { verifyRecaptcha } from "@/lib/recaptcha";
 import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
+import { readJsonBodyWithLimit } from "@/lib/request-body";
+
+let dummyPasswordHashPromise: Promise<string> | null = null;
+
+function getDummyPasswordHash(): Promise<string> {
+  if (!dummyPasswordHashPromise) {
+    dummyPasswordHashPromise = bcrypt.hash("utom-login-timing-dummy-A1", 12);
+  }
+  return dummyPasswordHashPromise;
+}
 
 export async function POST(req: Request) {
   try {
     const originDenied = requireTrustedOrigin(req);
     if (originDenied) return originDenied;
 
-    const contentLength = Number(req.headers.get("content-length") || 0);
-    if (Number.isFinite(contentLength) && contentLength > 20000) {
-      return NextResponse.json({ success: false, message: "Túl nagy kérés." }, { status: 413 });
-    }
-
     const ip = getIp(req);
 
-    let body: any;
-    try {
-      body = await req.json();
-    } catch {
-      return NextResponse.json({
-        success: false,
-        message: "Érvénytelen kérés.",
-      }, { status: 400 });
+    const parsedBody = await readJsonBodyWithLimit(req, 20_000);
+    if (!parsedBody.ok) {
+      return NextResponse.json(
+        { success: false, message: parsedBody.status === 413 ? "Túl nagy kérés." : "Érvénytelen kérés." },
+        { status: parsedBody.status },
+      );
     }
+    const body: any = parsedBody.value;
 
     const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
     const password = typeof body?.password === "string" ? body.password : "";
@@ -39,12 +43,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, message: "Érvénytelen bejelentkezési adatok." }, { status: 400 });
     }
 
-    const accountGate = await consumeRateLimitFailClosed(db, {
-      scope: "login-account-request",
-      identity: email,
-      limit: 30,
-      windowMs: 15 * 60_000,
-    });
+    // A coarse trusted-IP gate may run before CAPTCHA to absorb floods without
+    // allowing an attacker to burn another user's account-specific quota.
     const ipGate = (ip === "direct" || ip === "unknown")
       ? true
       : await consumeRateLimitFailClosed(db, {
@@ -53,7 +53,7 @@ export async function POST(req: Request) {
           limit: 60,
           windowMs: 15 * 60_000,
         });
-    if (!accountGate || !ipGate) {
+    if (!ipGate) {
       return NextResponse.json({
         success: false,
         message: "Túl sok próbálkozás. Próbáld újra később.",
@@ -66,6 +66,19 @@ export async function POST(req: Request) {
         success: false,
         message: "A botvédelem ellenőrzése sikertelen.",
       }, { status: 400 });
+    }
+
+    const accountGate = await consumeRateLimitFailClosed(db, {
+      scope: "login-account-request",
+      identity: email,
+      limit: 30,
+      windowMs: 15 * 60_000,
+    });
+    if (!accountGate) {
+      return NextResponse.json({
+        success: false,
+        message: "Túl sok próbálkozás. Próbáld újra később.",
+      }, { status: 429 });
     }
 
     const [accountFailures]: any = await db.query(
@@ -115,6 +128,9 @@ export async function POST(req: Request) {
       );
 
       if (rows.length === 0) {
+        // Keep the missing-user path close to the normal password-check cost so
+        // account existence is not trivially exposed by response timing.
+        await bcrypt.compare(password, await getDummyPasswordHash());
         await connection.query("INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 0)", [ip, email]);
         await connection.commit();
         return NextResponse.json({ success: false, message: "Hibás bejelentkezési adatok" }, { status: 401 });

@@ -11,7 +11,9 @@ test("recaptcha verification binds token to action and production hostname", () 
   assert.match(source, /new URLSearchParams\(\{ secret, response: normalizedToken \}\)/);
   assert.match(source, /AbortSignal\.timeout\(10_000\)/);
   assert.match(source, /data\.action !== options\.expectedAction/);
-  assert.match(source, /RECAPTCHA_ALLOWED_HOSTNAMES/);
+  const hosts = read("lib/public-hostnames.ts");
+  assert.match(hosts, /providerSpecific/);
+  assert.match(source, /configuredPublicHostnames\(process\.env\.RECAPTCHA_ALLOWED_HOSTNAMES\)/);
   assert.match(source, /allowedHosts\.has\(hostname\)/);
 });
 

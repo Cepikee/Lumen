@@ -223,6 +223,7 @@ export default function KapcsolatPage() {
               className="cf-turnstile"
               data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY + ""}
               data-callback="onTurnstileSuccess"
+              data-action="contact"
               data-theme={theme === "light" ? "light" : "dark"}
               style={{ marginTop: 8, marginBottom: 8 }}
             ></div>

@@ -3,15 +3,18 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { hashOneTimeToken } from "@/lib/one-time-token";
+import { readJsonBodyWithLimit } from "@/lib/request-body";
 
 export async function POST(req: Request) {
   try {
-    let body: unknown;
-    try {
-      body = await req.json();
-    } catch {
-      return NextResponse.json({ success: false, message: "Érvénytelen JSON kérés." }, { status: 400 });
+    const parsedBody = await readJsonBodyWithLimit(req, 8_000);
+    if (!parsedBody.ok) {
+      return NextResponse.json(
+        { success: false, message: parsedBody.status === 413 ? "Túl nagy kérés." : "Érvénytelen JSON kérés." },
+        { status: parsedBody.status },
+      );
     }
+    const body = parsedBody.value;
     if (!body || typeof body !== "object" || Array.isArray(body)) {
       return NextResponse.json({ success: false, message: "Érvénytelen kérés törzs." }, { status: 400 });
     }

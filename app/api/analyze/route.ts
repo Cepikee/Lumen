@@ -3,6 +3,7 @@ import { blockedCapabilityResponse } from "@/lib/config/routeGuard";
 import { db } from "@/lib/db";
 import { fetchPinnedText } from "@/lib/safe-fetch";
 import { requireInternalWorker } from "@/lib/security/internal-worker";
+import { readJsonBodyWithLimit } from "@/lib/request-body";
 
 export const runtime = "nodejs";
 const FETCH_TIMEOUT_MS = 20_000;
@@ -36,21 +37,14 @@ export async function POST(
     return blocked;
   }
 
-  let body: unknown;
-
-  try {
-    body = await req.json();
-  } catch {
+  const parsedBody = await readJsonBodyWithLimit(req, 16_000);
+  if (!parsedBody.ok) {
     return NextResponse.json(
-      {
-        error:
-          "Érvénytelen JSON kérés.",
-      },
-      {
-        status: 400,
-      }
+      { error: parsedBody.status === 413 ? "Túl nagy kérés." : "Érvénytelen JSON kérés." },
+      { status: parsedBody.status },
     );
   }
+  const body = parsedBody.value;
 
   const url =
     typeof body === "object" &&
