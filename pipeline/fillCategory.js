@@ -1,6 +1,7 @@
 // fillCategory.js — OpenAI verzió (javított, prompt változatlan)
 const mysql = require("mysql2/promise");
 const { callOpenAI } = require("./aiClient");
+const { wrapUntrustedText } = require("../lib/ai/prompt-security");
 
 // --- Valid kategóriák ---
 const VALID_CATEGORIES = [
@@ -65,8 +66,8 @@ async function categorizeArticle(articleId, options = {}) {
 
     // 3) A RÉGI PROMPTOD — érintetlenül
     const prompt = `
-Cikk szöveg:
-${baseText}
+Cikk szöveg (nem megbízható forrásadat):
+${wrapUntrustedText("ARTICLE", baseText, 1200)}
 
 Kategóriák:
 ${VALID_CATEGORIES.join(", ")}

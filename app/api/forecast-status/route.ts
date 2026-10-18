@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-export async function GET(){
+import { checkPublicApiRateLimit } from "@/lib/security";
+export async function GET(req: Request){
+ if (!await checkPublicApiRateLimit(req, "forecast-status", 120, 60_000)) {
+  return NextResponse.json({status:"rate_limited",lastRun:null,nextRun:null},{status:429});
+ }
  try {
  const [rows]:any=await db.query("SELECT status,DATE_FORMAT(generated_at,'%Y-%m-%d %H:%i:%s') generated_at,DATE_FORMAT(finished_at,'%Y-%m-%d %H:%i:%s') finished_at FROM insights_forecast_runs ORDER BY id DESC LIMIT 1");
  const row=rows[0];

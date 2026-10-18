@@ -2,6 +2,7 @@
 require("dotenv").config({ path: "/var/www/utom/.env" });
 const mysql = require("mysql2/promise");
 const { callOpenAI } = require("./aiClient");   // <-- EZ A LÉNYEG
+const { wrapUntrustedText } = require("../lib/ai/prompt-security");
 
 // --- Validáció ---
 function isValidSummary(text) {
@@ -55,7 +56,7 @@ Csak az összefoglalót írd ki, bevezető mondat nélkül.
 Ne írj olyat, hogy "Itt a lényeg", "Íme az összefoglaló", "Röviden", vagy bármilyen bevezetőt.
 Csak magyarul válaszolj:
 
-${contentText}
+${wrapUntrustedText("ARTICLE", contentText, 100_000)}
     `.trim();
 
     // 3) OpenAI hívás (aiClient.js-ből)

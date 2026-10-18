@@ -1,8 +1,8 @@
 import { createSession } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import bcrypt from "bcryptjs";
 import { validatePassword, validatePin } from "@/lib/auth-policy";
+import { hashPassword } from "@/lib/password-security";
 import { hashPin } from "@/lib/pin-security";
 import { sendEmailVerification } from "@/lib/email-verification";
 import { verifyRecaptcha } from "@/lib/recaptcha";
@@ -99,7 +99,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, message: "Ez a felhasználónév már foglalt." }, { status: 409 });
     }
 
-    const password_hash = await bcrypt.hash(password, 10);
+    const password_hash = await hashPassword(password);
     const avatar = generateRandomAvatar();
     const [result]: any = await db.query("INSERT INTO users SET ?", {
       email,

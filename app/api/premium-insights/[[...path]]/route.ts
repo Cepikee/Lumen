@@ -109,7 +109,10 @@ export async function GET(
     const body = await readBoundedBody(upstream, boundedInteger(process.env.UTOM_INTERNAL_PROXY_MAX_BYTES, 2 * 1024 * 1024, 1024, 2 * 1024 * 1024));
     return new Response(body, {
       status: upstream.status,
-      headers: { "content-type": upstream.headers.get("content-type") || "application/json; charset=utf-8" },
+      headers: {
+        "content-type": upstream.headers.get("content-type") || "application/json; charset=utf-8",
+        "Cache-Control": "private, no-store, max-age=0",
+      },
     });
   } catch {
     return NextResponse.json({ success: false, error: "insights_upstream_unavailable" }, { status: 502 });

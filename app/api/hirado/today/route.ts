@@ -2,8 +2,12 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import type { RowDataPacket } from "mysql2";
 import { parts } from "@/lib/business-time";
+import { checkPublicApiRateLimit } from "@/lib/security";
 
-export async function GET() {
+export async function GET(req: Request) {
+  if (!await checkPublicApiRateLimit(req, "hirado-today", 120, 60_000)) {
+    return NextResponse.json({ error: "RATE_LIMIT" }, { status: 429 });
+  }
   try {
     const todayParts = parts(new Date());
     const today = `${todayParts.year}-${String(todayParts.month).padStart(2, "0")}-${String(todayParts.day).padStart(2, "0")}`;

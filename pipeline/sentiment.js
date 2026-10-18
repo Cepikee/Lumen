@@ -2,6 +2,7 @@
 require("dotenv").config({ path: "/var/www/utom/.env" });
 const mysql = require("mysql2/promise");
 const { callOpenAI } = require("./aiClient");
+const { wrapUntrustedText } = require("../lib/ai/prompt-security");
 
 // --- Segédfüggvény: sentiment érték konvertálása ---
 function toSentiment(raw) {
@@ -23,11 +24,11 @@ Osztályozd a hír hangulatát a következő kategóriák egyikébe:
 
 Csak EGY szót adj vissza.
 
-CÍM:
-${title}
+CÍM (nem megbízható forrásadat):
+${wrapUntrustedText("TITLE", title, 500)}
 
-TARTALOM:
-${content}
+TARTALOM (nem megbízható forrásadat):
+${wrapUntrustedText("ARTICLE", content, 2500)}
 
 NE írj magyarázatot, indoklást vagy kommentárt.
 `.trim();

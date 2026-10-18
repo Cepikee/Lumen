@@ -18,8 +18,8 @@ test("login CAPTCHA runs before account-specific quota and missing users get dum
   const captcha = source.indexOf('expectedAction: "login"');
   const account = source.indexOf('scope: "login-account-request"');
   assert.ok(captcha >= 0 && account > captcha);
-  assert.match(source, /getDummyPasswordHash/);
-  assert.match(source, /bcrypt\.compare\(password, await getDummyPasswordHash\(\)\)/);
+  assert.match(source, /verifyPasswordWithTimingPadding\(password, user\?\.password_hash\)/);
+  assert.match(source, /verifyPinWithTimingPadding\(pin, user\?\.pin_code\)/);
 });
 
 test("registration email quota is consumed only after valid CAPTCHA", () => {

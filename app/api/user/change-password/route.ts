@@ -1,8 +1,8 @@
 import { createSession, getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import bcrypt from "bcryptjs";
 import { validatePassword } from "@/lib/auth-policy";
+import { hashPassword } from "@/lib/password-security";
 import { getIp, requireTrustedOrigin } from "@/lib/security";
 import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
 import { readJsonBodyWithLimit } from "@/lib/request-body";
@@ -98,7 +98,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const hashed = await bcrypt.hash(newPassword, 12);
+    const hashed = await hashPassword(newPassword);
     const connection = await db.getConnection();
     try {
       await connection.beginTransaction();

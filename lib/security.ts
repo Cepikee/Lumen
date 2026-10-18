@@ -87,10 +87,13 @@ export async function checkPublicApiRateLimit(
   windowMs = 60_000,
 ): Promise<boolean> {
   const ip = getIp(req);
-  // Without a trusted reverse-proxy address every visitor would collapse into
-  // the same bucket ("direct"). In that deployment mode query-shape bounds
-  // still apply, but the shared IP limiter is intentionally skipped.
-  if (ip === "direct" || ip === "unknown") return true;
+  // Production public rate limits must never silently disable themselves. If
+  // proxy trust is not explicitly configured, fail closed instead of putting
+  // every visitor in a fake shared bucket or bypassing throttling. Development
+  // keeps the permissive behavior for direct localhost use.
+  if (ip === "direct" || ip === "unknown") {
+    return process.env.NODE_ENV !== "production" || process.env.UTOM_TEST_FIXTURE_MODE === "true";
+  }
   return consumeRateLimitFailClosed(db, {
     scope: `public:${scope}`,
     identity: ip,

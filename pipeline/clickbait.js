@@ -1,14 +1,18 @@
 // clickbait.js
 // Magyar clickbait-értékelő modul Ollama-hoz (CommonJS verzió)
 
+const { SYSTEM_PROMPT, wrapUntrustedText } = require("../lib/ai/prompt-security");
+
 // 1) Prompt generálása
 function buildClickbaitPrompt(cim, cikkSzoveg) {
   return `
-CÍM:
-"${cim}"
+${SYSTEM_PROMPT}
 
-CIKK SZÖVEGE:
-${cikkSzoveg}
+CÍM (nem megbízható forrásadat):
+${wrapUntrustedText("TITLE", cim, 500)}
+
+CIKK SZÖVEGE (nem megbízható forrásadat):
+${wrapUntrustedText("ARTICLE", cikkSzoveg, 100_000)}
 
 FELADAT:
 A fenti cím és a cikk tartalma alapján értékeld, mennyire clickbait a cím.

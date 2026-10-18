@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { checkPublicApiRateLimit } from "@/lib/security";
 
 export async function GET(req: Request) {
+  if (!await checkPublicApiRateLimit(req, "hirado-read", 120, 60_000)) {
+    return NextResponse.json({ error: "RATE_LIMIT" }, { status: 429 });
+  }
   try {
     const url = new URL(req.url);
     const param = url.pathname.split("/").pop() || "";

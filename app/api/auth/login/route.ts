@@ -1,22 +1,13 @@
 import { createSession } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import bcrypt from "bcryptjs";
-import { hashPin, verifyPin } from "@/lib/pin-security";
+import { hashPin, verifyPinWithTimingPadding } from "@/lib/pin-security";
+import { hashPassword, passwordNeedsRehash, verifyPasswordWithTimingPadding } from "@/lib/password-security";
 import { getIp, requireTrustedOrigin } from "@/lib/security";
 import { getLoginAttemptScope } from "@/lib/login-rate-limit";
 import { verifyRecaptcha } from "@/lib/recaptcha";
 import { consumeRateLimitFailClosed } from "@/lib/shared-rate-limit";
 import { readJsonBodyWithLimit } from "@/lib/request-body";
-
-let dummyPasswordHashPromise: Promise<string> | null = null;
-
-function getDummyPasswordHash(): Promise<string> {
-  if (!dummyPasswordHashPromise) {
-    dummyPasswordHashPromise = bcrypt.hash("utom-login-timing-dummy-A1", 12);
-  }
-  return dummyPasswordHashPromise;
-}
 
 export async function POST(req: Request) {
   try {
@@ -123,23 +114,20 @@ export async function POST(req: Request) {
     try {
       await connection.beginTransaction();
       const [rows]: any = await connection.query(
-        "SELECT * FROM users WHERE email = ? LIMIT 1 FOR UPDATE",
+        "SELECT * FROM users WHERE email = ? LIMIT 1",
         [email]
       );
 
-      if (rows.length === 0) {
-        // Keep the missing-user path close to the normal password-check cost so
-        // account existence is not trivially exposed by response timing.
-        await bcrypt.compare(password, await getDummyPasswordHash());
-        await connection.query("INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 0)", [ip, email]);
-        await connection.commit();
-        return NextResponse.json({ success: false, message: "Hibás bejelentkezési adatok" }, { status: 401 });
-      }
+      user = rows[0] || null;
 
-      user = rows[0];
-      const validPass = typeof password === "string" && await bcrypt.compare(password, user.password_hash);
-      const pinResult = validPass ? await verifyPin(pin, user.pin_code) : { valid: false, needsUpgrade: false };
-      if (!validPass || !pinResult.valid) {
+      // Always execute both credential stages. Missing accounts and the historic
+      // bcrypt cost-10/cost-12 password rows receive matching padding work, and
+      // PIN verification is never skipped after a wrong password. This removes
+      // the practical "password is already correct" timing oracle.
+      const validPass = await verifyPasswordWithTimingPadding(password, user?.password_hash);
+      const pinResult = await verifyPinWithTimingPadding(pin, user?.pin_code);
+
+      if (!user || !validPass || !pinResult.valid) {
         await connection.query("INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 0)", [ip, email]);
         await connection.commit();
         return NextResponse.json({ success: false, message: "Hibás bejelentkezési adatok" }, { status: 401 });
@@ -147,6 +135,9 @@ export async function POST(req: Request) {
 
       if (pinResult.needsUpgrade) {
         await connection.query("UPDATE users SET pin_code = ? WHERE id = ? AND pin_code = ?", [await hashPin(pin), user.id, user.pin_code]);
+      }
+      if (passwordNeedsRehash(user.password_hash)) {
+        await connection.query("UPDATE users SET password_hash = ? WHERE id = ? AND password_hash = ?", [await hashPassword(password), user.id, user.password_hash]);
       }
       await connection.query("INSERT INTO login_attempts (ip, email, success) VALUES (?, ?, 1)", [ip, email]);
       await connection.query("UPDATE users SET last_login = NOW(), last_ip = ? WHERE id = ?", [ip, user.id]);

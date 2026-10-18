@@ -4,9 +4,13 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { hashOneTimeToken } from "@/lib/one-time-token";
 import { readJsonBodyWithLimit } from "@/lib/request-body";
+import { checkPublicApiRateLimit } from "@/lib/security";
 
 export async function POST(req: Request) {
   try {
+    if (!await checkPublicApiRateLimit(req, "verify-email-token", 60, 60_000)) {
+      return NextResponse.json({ success: false, error: "rate_limit" }, { status: 429 });
+    }
     const parsedBody = await readJsonBodyWithLimit(req, 8_000);
     if (!parsedBody.ok) {
       return NextResponse.json(

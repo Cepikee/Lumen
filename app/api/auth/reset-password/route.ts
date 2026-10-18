@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import bcrypt from "bcryptjs";
 import { validatePassword } from "@/lib/auth-policy";
+import { hashPassword } from "@/lib/password-security";
 import { hashOneTimeToken } from "@/lib/one-time-token";
 import { readJsonBodyWithLimit } from "@/lib/request-body";
+import { checkPublicApiRateLimit } from "@/lib/security";
 
 export async function POST(req: Request) {
   try {
+    if (!await checkPublicApiRateLimit(req, "reset-password-token", 30, 60_000)) {
+      return NextResponse.json({ success: false, error: "rate_limit" }, { status: 429 });
+    }
     const parsedBody = await readJsonBodyWithLimit(req, 16_000);
     if (!parsedBody.ok) {
       return NextResponse.json(
@@ -54,7 +58,7 @@ export async function POST(req: Request) {
     const userId = resetToken.userId;
 
     // 3) Jelszó hashelése
-    const hashed = await bcrypt.hash(password, 12);
+    const hashed = await hashPassword(password);
 
     // 4) Jelszó frissítése a users táblában
       const [updateResult]: any = await connection.query("UPDATE users SET password_hash = ? WHERE id = ?", [hashed, userId]);

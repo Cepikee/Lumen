@@ -3,17 +3,20 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { evaluatePremium } from "@/lib/entitlements";
 
+const PRIVATE_NO_STORE = { "Cache-Control": "private, no-store, max-age=0" };
+
+function authJson(body: unknown, status = 200) {
+  return NextResponse.json(body, { status, headers: PRIVATE_NO_STORE });
+}
+
 export async function GET(_req: Request) {
   try {
     const userId = await getSessionUserId();
 
-    if (!userId) {
-      return NextResponse.json({ loggedIn: false });
-    }
-
+    if (!userId) return authJson({ loggedIn: false });
 
     const [rows]: any = await db.query(
-      `SELECT 
+      `SELECT
           id,
           email,
           nickname,
@@ -37,14 +40,11 @@ export async function GET(_req: Request) {
       [userId]
     );
 
-    if (rows.length === 0) {
-      return NextResponse.json({ loggedIn: false });
-    }
+    if (rows.length === 0) return authJson({ loggedIn: false });
 
     const user = rows[0];
-
     const entitlement = evaluatePremium(user);
-    return NextResponse.json({
+    return authJson({
       loggedIn: true,
       user: {
         ...user,
@@ -52,6 +52,6 @@ export async function GET(_req: Request) {
       },
     });
   } catch {
-    return NextResponse.json({ loggedIn: false, error: "auth_state_unavailable" }, { status: 500 });
+    return authJson({ loggedIn: false, error: "auth_state_unavailable" }, 500);
   }
 }

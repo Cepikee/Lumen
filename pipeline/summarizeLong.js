@@ -2,6 +2,7 @@
 require("dotenv").config({ path: "/var/www/utom/.env" });
 const mysql = require("mysql2/promise");
 const { callOpenAI } = require("./aiClient");   // <-- EZ A LÉNYEG
+const { wrapUntrustedText } = require("../lib/ai/prompt-security");
 
 // --- Validáció ---
 function isValidDetailed(text) {
@@ -88,11 +89,11 @@ async function summarizeLong(articleId, shortSummary, options = {}) {
 
     // 3) Tökéletes prompt
     const prompt = `
-Rövid összefoglaló:
-${shortSummary}
+Rövid összefoglaló (nem megbízható forrásadat):
+${wrapUntrustedText("SHORT_SUMMARY", shortSummary, 2000)}
 
-Cikk szövege:
-${contentText}
+Cikk szövege (nem megbízható forrásadat):
+${wrapUntrustedText("ARTICLE", contentText, 2000)}
 
 Feladat:
 Készíts részletes, 2-3 bekezdéses elemzést magyar nyelven, a fenti tartalom alapján.

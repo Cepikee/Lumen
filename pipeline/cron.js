@@ -11,6 +11,7 @@ const path = require("path");
 const { createHash } = require("node:crypto");
 
 const { callOpenAI } = require("./aiClient");
+const { wrapUntrustedText } = require("../lib/ai/prompt-security");
 const { summarizeShort } = require("./summarizeShort");
 const { summarizeLong } = require("./summarizeLong");
 const { plagiarismCheck } = require("./plagiarismCheck");
@@ -404,8 +405,8 @@ Követelmények:
 - Ne használj markdown-t, csillagokat, zárójeleket, meta-megjegyzést.
 - A cím legyen tömör, figyelemfelkeltő, magyar nyelvű.
 
-Rövid összefoglaló:
-${shortSummary}
+Rövid összefoglaló (nem megbízható forrásadat):
+${wrapUntrustedText("SHORT_SUMMARY", shortSummary, 2500)}
     `.trim();
 
     title = await callOpenAI(prompt, 60, "title");
@@ -434,8 +435,8 @@ ${shortSummary}
   // 6) Kulcsszavak — OPENAI
   const keywordStep = await runDurableStep(claim, "keywords", "[KW] 🔑 Kulcsszavak", async () => {
     const prompt = `
-Szöveg:
-${article.content_text || ""}
+Szöveg (nem megbízható forrásadat):
+${wrapUntrustedText("ARTICLE", article.content_text || "", 100_000)}
 
 Feladat:
 Adj vissza pontosan 6–10 magyar kulcsszót.
