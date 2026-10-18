@@ -24,7 +24,8 @@ test("desktop home is a sticky three-column feed and mobile removes side rails",
  assert.match(css,/grid-template-columns:250px minmax\(0,1fr\) 360px/);
  assert.doesNotMatch(css,/max-width:1640px/);
  assert.match(css,/position:sticky/);
- assert.match(css,/border-right:1px solid rgba\(42,88,119,.66\)/);
+ assert.match(css,/margin-left:calc\(-1 \* var\(--home-edge-gutter\)\)/);
+ assert.match(css,/border-right:1px solid rgba\(32,68,94,.34\)/);
  assert.match(css,/@media\(max-width:767px\)/);
  assert.match(css,/\.left,\.right\{display:none\}/);
 });
@@ -52,6 +53,12 @@ test("visual polish keeps a stable illustration slot and branded source metadata
  assert.match(card,/safeImage\(item\.image_url\)/);
  assert.match(card,/sourceBadge\(item\)/);
  assert.match(card,/sourceDomain\(item\)/);
+ assert.match(card,/AI-fogalmazás/);
+ assert.match(card,/aiBadgeToneBySource/);
+ assert.match(card,/hvg:"warm",telex:"blue"/);
+ assert.match(cardCss,/\.aiBadge\[data-tone="warm"\]/);
+ assert.match(cardCss,/\.aiBadge\[data-tone="blue"\]/);
+ assert.doesNotMatch(cardCss,/\.card::before/);
  assert.match(cardCss,/font-size:clamp\(17px,1\.25vw,19px\)/);
  assert.doesNotMatch(header,/header-brand-word/);
  assert.match(globalCss,/\.header-home \.header-logo-img \{ width: 118px; height: 44px; object-fit:cover/);

@@ -16,6 +16,8 @@ function sourceKey(id:number){return ({1:"telex",2:"24hu",3:"index",4:"hvg",5:"p
 function sourceDomain(item:FeedItem){return item.source?.trim()||({1:"telex.hu",2:"24.hu",3:"index.hu",4:"hvg.hu",5:"portfolio.hu",6:"444.hu",7:"origo.hu"} as Record<number,string>)[item.source_id]||item.source_name?.trim()||"Ismeretlen forrás";}
 function sourceLabel(item:FeedItem){return item.source_name?.trim()||item.source?.trim()||sourceKey(item.source_id);}
 function sourceBadge(item:FeedItem){return sourceLabel(item).replace(/^www\./i,"").split(".")[0].slice(0,8).toLocaleUpperCase("hu-HU");}
+const aiBadgeToneBySource:Record<string,"warm"|"blue">={hvg:"warm",telex:"blue"};
+function aiBadgeTone(item:FeedItem){return aiBadgeToneBySource[sourceKey(item.source_id)]||"default";}
 function safeImage(value:string|null|undefined){if(!value)return null;const trimmed=value.trim();if(/^\/article-images\/\d{4}\/\d{2}\/\d{2}\/[1-9]\d*-[a-f0-9]{12}\.(?:jpe?g|png|webp)$/.test(trimmed))return trimmed;try{const parsed=new URL(trimmed);return ["http:","https:"].includes(parsed.protocol)?parsed.toString():null;}catch{return null;}}
 
 export default function FeedItemCard({item}:{item:FeedItem;viewMode:"card"|"compact"}){
@@ -33,7 +35,7 @@ export default function FeedItemCard({item}:{item:FeedItem;viewMode:"card"|"comp
    {showImage&&["generated","cluster_reuse"].includes(item.image_source_type||"")?<span className={styles.illustrationBadge}>AI illusztráció</span>:null}
   </div>
   <div className={styles.body}>
-   <div className={styles.meta}><span className={styles.source} data-source={sourceKey(item.source_id)}>{sourceBadge(item)}</span><span className={styles.domain}>{sourceDomain(item)}</span><span aria-hidden="true">·</span><time dateTime={item.created_at} title={fullDate(item.created_at)}>{relative(item.created_at)}</time>{item.ai_clean===1?<span className={styles.aiBadge}>AI-összefoglaló</span>:null}</div>
+   <div className={styles.meta}><span className={styles.source} data-source={sourceKey(item.source_id)}>{sourceBadge(item)}</span><span className={styles.domain}>{sourceDomain(item)}</span><span aria-hidden="true">·</span><time dateTime={item.created_at} title={fullDate(item.created_at)}>{relative(item.created_at)}</time>{item.ai_clean===1?<span className={styles.aiBadge} data-tone={aiBadgeTone(item)}>AI-fogalmazás</span>:null}</div>
    <h2>{title}</h2>
    <div className={styles.summary}>{summary?<ReactMarkdown>{summary}</ReactMarkdown>:<p>Ehhez a hírhez még nem érhető el rövid összefoglaló.</p>}</div>
    <footer><div className={styles.badges}>{category&&!["ismeretlen","unknown"].includes(category.toLocaleLowerCase("hu-HU"))?<span data-category={category.toLocaleLowerCase("hu-HU")}>{category}</span>:null}</div><div className={styles.actions}><button type="button" onClick={event=>{event.stopPropagation();open();}}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Részletek</button>{item.url?.trim()?<a href={item.url} target="_blank" rel="noopener noreferrer" onClick={event=>event.stopPropagation()}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9"/><path d="M12 7H6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-6"/></svg>Eredeti cikk</a>:null}</div></footer>
