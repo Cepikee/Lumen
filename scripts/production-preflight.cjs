@@ -6,6 +6,7 @@ const path = require("node:path");
 const mysql = require("mysql2/promise");
 const { loadMigrations, auditMigrationChain, getMigrationStatus } = require("../db/migration-core.cjs");
 const { REQUIRED_SCHEMA, validateProductionEnvironment, checkSchemaReadiness, redact } = require("../lib/operations");
+const { getImageConfig, validateImageConfig, resolveImageRolloutPolicy } = require("../lib/article-images/config");
 
 async function main() {
   const checks = [];
@@ -13,6 +14,26 @@ async function main() {
   check("node_version", process.versions.node.split(".")[0] === "24", `major=${process.versions.node.split(".")[0]}`);
   try { validateProductionEnvironment(process.env); check("production_configuration", true, "required categories present"); }
   catch (error) { check("production_configuration", false, redact(error.message)); }
+  try {
+    if (String(process.env.BACKGROUND_JOBS_ENABLED || "").toLowerCase() !== "true") throw new Error("background_jobs_not_enabled");
+    if (String(process.env.FEED_FETCH_ENABLED || "").toLowerCase() !== "true") throw new Error("feed_fetch_not_enabled");
+    const internal = new URL(String(process.env.UTOM_INTERNAL_BASE_URL || ""));
+    if (!['127.0.0.1', 'localhost', '::1'].includes(internal.hostname) || !['http:', 'https:'].includes(internal.protocol)) {
+      throw new Error("internal_base_url_must_be_loopback");
+    }
+    check("pipeline_worker_configuration", true, `internal_origin=${internal.origin}`);
+  } catch (error) { check("pipeline_worker_configuration", false, redact(error.message)); }
+  try {
+    const image = getImageConfig(process.env);
+    const validation = validateImageConfig(image);
+    if (image.enabled) {
+      if (!validation.ok) throw new Error(`image_configuration_${validation.reason}`);
+      const rollout = resolveImageRolloutPolicy(image);
+      check("image_worker_configuration", true, `provider=${image.provider};rollout=${rollout.mode}`);
+    } else {
+      check("image_worker_configuration", true, "disabled");
+    }
+  } catch (error) { check("image_worker_configuration", false, redact(error.message)); }
   try {
     const stats = fs.statfsSync(process.cwd());
     const freeBytes = Number(stats.bavail) * Number(stats.bsize);
@@ -48,7 +69,7 @@ async function main() {
     check("database_connectivity", false, redact(error.message));
   } finally { if (connection) await connection.end(); }
   for (const item of checks) console.log(`${item.status} ${item.name} ${item.detail}`);
-  const ok = checks.length >= 9 && checks.every((item) => item.status === "PASS");
+  const ok = checks.length >= 11 && checks.every((item) => item.status === "PASS");
   console.log(ok ? "PRODUCTION_PREFLIGHT: PASS" : "PRODUCTION_PREFLIGHT: FAIL");
   if (!ok) process.exitCode = 1;
 }

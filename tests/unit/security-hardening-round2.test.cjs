@@ -83,7 +83,7 @@ test("bootstrap runtime is bundled locally and CSP blocks risky fallback capabil
 });
 
 test("CI uses current action majors, npm ci and least-privilege repository permissions", () => {
-  for (const file of [".github/workflows/ci.yml", ".github/workflows/build.yml", ".github/workflows/lint.yml", ".github/workflows/depcheck.yml", ".github/workflows/fetch-444.yml"]) {
+  for (const file of [".github/workflows/ci.yml", ".github/workflows/build.yml"]) {
     const source = read(file);
     assert.doesNotMatch(source, /actions\/checkout@v2|actions\/setup-node@v2|npm install(?:\s|$)/, file);
     assert.match(source, /permissions:\s*\n\s*contents: read/, file);

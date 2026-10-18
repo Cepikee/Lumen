@@ -1,0 +1,12 @@
+[Unit]
+Description=Run UTOM Email Outbox Processor Every Minute
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=1min
+AccuracySec=10s
+Persistent=true
+Unit=utom-email-outbox.service
+
+[Install]
+WantedBy=timers.target

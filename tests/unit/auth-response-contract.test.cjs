@@ -26,7 +26,7 @@ assert.match(username, /message: "Nem vagy bejelentkezve\."[\s\S]{0,80}status: 4
 assert.match(username, /ER_DUP_ENTRY/);
 assert.match(username, /\["admin", "moderator", "support", "utom", "system"\]/);
 assert.match(sendVerification, /User nem található.*status: 404/s);
-assert.match(me, /auth_state_unavailable.*status: 500/s);
+assert.match(me, /authJson\(\{ loggedIn: false, error: "auth_state_unavailable" \},\s*500\)/);
 for (const source of [register, requestPassword, requestPin]) {
   assert.match(source, /Érvénytelen JSON kérés/);
   assert.match(source, /Array\.isArray\(body\)/);

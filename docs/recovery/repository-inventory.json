@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-10-18",
+  "branch": "develop/utom-recovery",
+  "verifiedHead": "9b3161fd5aa8ccdeb8784f1c2366e40314426bcc",
+  "schema": "064",
+  "counts": {
+    "apiRoutes": 72,
+    "components": 97,
+    "libFiles": 150,
+    "pipelineFiles": 24,
+    "topLevelScripts": 40,
+    "unitTestFiles": 264,
+    "integrationTestFiles": 23,
+    "documentationFiles": 507,
+    "v2Modules": 57,
+    "v22Modules": 7
+  },
+  "subsystems": [
+    { "name": "Next.js web application", "paths": ["app/", "components/", "hooks/"], "category": "LIVE PRODUCTION", "entrypoint": "npm start" },
+    { "name": "Canonical RSS ingestion", "paths": ["app/api/fetch-feed/route.ts", "lib/feed-ingestion.js", "lib/source-identity.js"], "category": "LIVE PRODUCTION", "entrypoint": "authenticated POST /api/fetch-feed" },
+    { "name": "Canonical article pipeline", "paths": ["pipeline/cron.js", "pipeline/state-machine.js"], "category": "PRODUCTION-READY BUT NOT WIRED", "entrypoint": "npm run pipeline:worker" },
+    { "name": "Article image worker", "paths": ["pipeline/image-worker.js", "lib/article-images/"], "category": "LIVE PRODUCTION", "entrypoint": "npm run image:worker" },
+    { "name": "Email outbox", "paths": ["scripts/process-email-outbox.cjs", "lib/email-outbox.js"], "category": "OPERATIONS", "entrypoint": "utom-email-outbox.timer" },
+    { "name": "Database maintenance", "paths": ["scripts/maintenance.cjs", "lib/shared-rate-limit.js", "lib/raw-text-retention.js"], "category": "OPERATIONS", "entrypoint": "utom-maintenance.timer" },
+    { "name": "Migration runner", "paths": ["db/migrate.cjs", "db/migration-core.cjs", "db/migrations/"], "category": "RECOVERY", "entrypoint": "npm run db:plan|db:status|db:migrate:local" },
+    { "name": "V1 product core", "paths": ["app/", "pipeline/", "lib/article-images/", "lib/feed-ingestion.js"], "category": "LIVE PRODUCTION" },
+    { "name": "V2 entity extraction shadow step", "paths": ["lib/v2/runtime-entity-extraction.js", "lib/v2/entity-extraction-repository.js"], "category": "PRODUCTION-READY BUT NOT WIRED", "guard": "UTOM_V2_ENABLED" },
+    { "name": "V2 read APIs and UI panels", "paths": ["app/api/v2/", "components/V2ArticleIntegrationPanels.tsx", "hooks/useV2ArticleContext.ts"], "category": "PRODUCTION-READY BUT NOT WIRED", "guard": "UTOM_V2_ENABLED + NEXT_PUBLIC_UTOM_V2_ENABLED" },
+    { "name": "V2 downstream writers", "paths": ["lib/v2/runtime-claim-extraction.js", "lib/v2/runtime-relation-extraction.js", "lib/v2/runtime-event-matching.js", "lib/v2/runtime-temporal-graph.js", "lib/v2/runtime-conflict-history.js"], "category": "EXPERIMENTAL" },
+    { "name": "V2.2 deterministic semantic research", "paths": ["lib/v22/", "scripts/experimental/", "tests/fixtures/real-text-a/", "docs/UTOM_V2_2/"], "category": "RESEARCH" },
+    { "name": "V2.2 agent harnesses", "paths": ["scripts/agents/"], "category": "RESEARCH" },
+    { "name": "Local agent run outputs", "paths": ["scripts/agents/runs/"], "category": "RESEARCH", "tracked": false, "note": "locally excluded; preserve outside runtime releases" },
+    { "name": "Legacy cron entrypoints", "paths": ["lib/cron.js", "lib/cron.ts", "lib/trend-cron.js"], "category": "LEGACY", "note": "fail-closed / excluded from TypeScript runtime" },
+    { "name": "Legacy summarize/init routes", "paths": ["app/api/init/route.ts", "app/api/summarize/route.ts", "app/api/summarize-all/route.ts"], "category": "LEGACY", "note": "tombstones; intentionally reachable only to return disabled responses" },
+    { "name": "Legacy 444 external posting", "paths": ["archive/github-workflows/fetch-444.yml.disabled", "scripts/fetch-and-post-444.js"], "category": "LEGACY", "note": "workflow archived outside active workflows; helper retained for diagnosis" },
+    { "name": "Demo and staging fixtures", "paths": ["scripts/dev-demo-bootstrap.cjs", "scripts/staging-fixture.cjs", "app/dev/", "app/m14-acceptance/"], "category": "TEST ONLY" },
+    { "name": "Benchmarks and scale harnesses", "paths": ["scripts/run-v22-benchmark.cjs", "scripts/scale-fixture.cjs", "scripts/scale-audit.cjs"], "category": "TEST ONLY" },
+    { "name": "Recovery tooling", "paths": ["scripts/recovery.cjs", "docs/UTOM_PIPELINE_RECOVERY.md"], "category": "RECOVERY" },
+    { "name": "Historical audit documents", "paths": ["audit/", "docs/UTOM_PROGRESS.md", "docs/UTOM_APPLICATION_BUGFIX_MASTER.md"], "category": "LEGACY" },
+    { "name": "Root scratch artifacts", "paths": ["fejlesztesinaplo.md", "INSIGHTS_FIX_README.txt", "SECURITY_PATCH_README.txt", "S01_OLVASDEL.md", "valami.txt", "ollama-test.js", "test-444-feed.js"], "category": "DEAD/ORPHAN CANDIDATE" }
+  ]
+}

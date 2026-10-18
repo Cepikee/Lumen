@@ -47,14 +47,25 @@ test("production preflight uses the canonical latest migration version", () => {
   assert.match(source, /REQUIRED_SCHEMA\.latestVersion/);
   assert.doesNotMatch(source, /latestVersion === ["']033["']/);
   assert.equal(REQUIRED_SCHEMA.latestVersion, loadMigrations().at(-1).version);
+  assert.match(source, /image_worker_configuration/);
+  assert.match(source, /resolveImageRolloutPolicy/);
+  assert.match(source, /pipeline_worker_configuration/);
+  assert.match(source, /internal_base_url_must_be_loopback/);
 });
 
 test("active CI workflows use the supported Node major", () => {
-  for (const file of ["ci.yml", "lint.yml", "depcheck.yml", "fetch-444.yml"]) {
+  for (const file of ["ci.yml", "build.yml"]) {
     const source = fs.readFileSync(path.join(__dirname, "../../.github/workflows", file), "utf8");
     assert.doesNotMatch(source, /node-version:\s*['"]?(18|20)['"]?/);
     assert.match(source, /node-version:\s*['"]?24['"]?/);
   }
+});
+
+test("legacy 444 workflow cannot schedule or execute duplicate ingestion", () => {
+  const source = fs.readFileSync(path.join(__dirname, "../../archive/github-workflows/fetch-444.yml.disabled"), "utf8");
+  assert.doesNotMatch(source, /^\s+schedule:/m);
+  assert.match(source, /if:\s*\$\{\{ false \}\}/);
+  assert.match(source, /node scripts\/fetch-and-post-444\.js/);
 });
 
 test("schema 064 is ready while 063 and future 065 fail closed", async () => {

@@ -33,6 +33,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local, untracked V2.2 agent-run archives are evidence, not source input.
+    "scripts/agents/runs/**",
   ]),
 ]);
 

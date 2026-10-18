@@ -11,7 +11,7 @@ const timeseries = read('app/api/insights/timeseries/all/route.ts');
 
 assert.match(trends, /allowedPeriods = new Set/);
 assert.match(trends, /Érvénytelen időszak/);
-assert.match(trends, /Érvénytelen dátumtartomány/);
+assert.match(trends, /Érvénytelen vagy túl hosszú dátumtartomány/);
 assert.match(trends, /t2\.category <=> t\.category/);
 assert.match(trends, /historicalFilters/);
 assert.match(trends, /\.\.\.growthParams, \.\.\.growthParams/);
@@ -21,7 +21,7 @@ assert.match(sources, /SELECT DISTINCT/);
 assert.match(sources, /finally \{/);
 assert.match(sources, /connection\.end\(\)/);
 assert.match(history, /allowedPeriods = new Set\(\["24h", "7d", "30d", "custom"\]\)/);
-assert.match(history, /Érvénytelen dátumtartomány/);
+assert.match(history, /Érvénytelen vagy túl hosszú dátumtartomány/);
 assert.match(history, /finally \{/);
 assert.match(history, /DB close error/);
 assert.match(trends, /DB close error/);

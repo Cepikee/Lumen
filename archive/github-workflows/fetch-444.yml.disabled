@@ -1,14 +1,13 @@
-name: fetch-444-feed
+name: DISABLED legacy fetch-444-feed
 permissions:
   contents: read
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
   fetch:
+    if: ${{ false }} # Historical evidence only; canonical ingestion is pipeline/cron.js -> /api/fetch-feed.
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,4 +27,4 @@ jobs:
         env:
           TARGET_ENDPOINT: ${{ secrets.MY_SERVER_ENDPOINT }}
           TARGET_TOKEN: ${{ secrets.MY_SERVER_TOKEN }}
-        run: node ./Lumen/scripts/fetch-and-post-444.js
+        run: node scripts/fetch-and-post-444.js

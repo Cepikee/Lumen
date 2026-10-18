@@ -1,0 +1,21 @@
+[Unit]
+Description=UTOM Canonical Article Pipeline
+After=network-online.target mysql.service utom.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=utom
+Group=utom
+WorkingDirectory=/srv/utom/app
+EnvironmentFile=/etc/utom/production.env
+ExecStart=/usr/bin/npm run pipeline:worker
+Restart=always
+RestartSec=5
+TimeoutStopSec=180
+KillSignal=SIGTERM
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

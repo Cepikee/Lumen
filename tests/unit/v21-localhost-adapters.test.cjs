@@ -8,16 +8,25 @@ const read = (file) => fs.readFileSync(file, "utf8");
 
 test("localhost layout nem tölt külső captcha vagy analitika scriptet explicit bekapcsolás nélkül", () => {
   const { load, render } = require('../helpers/render-ui.cjs');
+  const analyticsSource = read('components/Analytics.tsx');
   for (const flag of [undefined, 'false', 'true']) {
-    const Page = load('app/layout.tsx', { '../components/ClientLayout': ({children}) => children }, {
+    const Page = load('app/layout.tsx', {
+      '../components/ClientLayout': ({children}) => children,
+      '../components/Analytics': ({enabled}) => enabled ? 'analytics-enabled' : null,
+      '../components/BootstrapClient': () => null,
+    }, {
       NEXT_PUBLIC_APP_URL: 'http://127.0.0.1:3099', NEXT_PUBLIC_ANALYTICS_ENABLED: flag,
     }).default;
     const html = render(Page, { children: 'local content' });
     assert.doesNotMatch(html, /recaptcha.*<\/script>/i);
-    assert.equal(html.includes('googletagmanager.com/gtag/js'), flag === 'true');
-    assert.equal(html.includes("gtag('config'"), flag === 'true');
+    // Analytics is now injected by the client component after hydration, so
+    // it must never leak into the server-rendered document.
+    assert.doesNotMatch(html, /googletagmanager\.com\/gtag\/js/);
     assert.match(html, /local content/);
   }
+  assert.match(analyticsSource, /if \(!enabled \|\| !pathname/);
+  assert.match(analyticsSource, /googletagmanager\.com\/gtag\/js/);
+  assert.match(analyticsSource, /page_location: `\$\{window\.location\.origin\}\$\{pathname\}`/);
 });
 
 test("local demo captcha csak nem-production loopback utom_dev konfigurációban ad magas pontszámot", () => {

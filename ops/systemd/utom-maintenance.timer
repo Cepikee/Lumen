@@ -1,0 +1,11 @@
+[Unit]
+Description=Run UTOM Database Maintenance Daily
+
+[Timer]
+OnCalendar=*-*-* 03:17:00 Europe/Budapest
+RandomizedDelaySec=10min
+Persistent=true
+Unit=utom-maintenance.service
+
+[Install]
+WantedBy=timers.target

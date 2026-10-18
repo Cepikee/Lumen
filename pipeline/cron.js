@@ -85,13 +85,17 @@ let workerLoopSettled = true;
 // ─────────────────────────────────────────────
 
 function cronLog(message) {
-  const p = "/var/www/utom/logs/cron.log";
   const line = `[${new Date().toISOString()}] ${message}\n`;
+  // stdout/stderr is the canonical production sink (journald under systemd).
+  // A file sink is optional for legacy installations and never hard-coded.
+  console.log(line.trim());
+  const p = String(process.env.UTOM_PIPELINE_LOG_FILE || "").trim();
+  if (!p) return;
   try {
     fs.mkdirSync(path.dirname(p), { recursive: true });
     fs.appendFileSync(p, line);
   } catch (err) {
-    console.error("[CRON LOG]", line.trim(), err.message);
+    console.error("[PIPELINE LOG]", line.trim(), redact(err.message));
   }
 }
 

@@ -1,4 +1,6 @@
-# Utom.hu – helyreállítási progress napló
+# HISTORICAL DOCUMENT — Utom.hu helyreállítási progress napló
+
+> This is an append-only historical record and is not the current production source of truth. See [`../UTOM_CURRENT_STATE.md`](../UTOM_CURRENT_STATE.md) for the canonical current architecture, services, schema and risks.
 
 ## HIST-027 + HIST-034 célzott lezárás – 2026-09-30
 

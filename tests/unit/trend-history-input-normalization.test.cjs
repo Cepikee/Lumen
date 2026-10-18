@@ -8,7 +8,7 @@ const file = fs.readFileSync(
 );
 
 assert.match(file, /searchParams\.get\("keyword"\)\?\.trim\(\)/);
-assert.match(file, /new Set\(sources\.split\(.*map\(\(s\) => s\.trim\(\)\)/s);
+assert.match(file, /new Set\(sources\.split\(.*map\(\(source\) => source\.trim\(\)\)/s);
 assert.match(file, /isRealIsoDate/);
 assert.match(file, /getUTCFullYear\(\) === year/);
 

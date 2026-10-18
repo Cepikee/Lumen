@@ -78,6 +78,7 @@ test("M18 browser read routes allow only same-origin reads without exposing an A
   ];
   assert.equal(optInRoutes.filter((route) => route.includes("allowSameOriginRead: true")).length, 3);
   assert.doesNotMatch(security, /allowSameOriginRead[^\n]*req\.method !== "GET"/);
-  assert.match(security, /if \(!checkApiKey\(req\) && !sameOriginRead\)/);
+  assert.match(security, /const apiKeyAccepted = checkApiKey\(req\)/);
+  assert.match(security, /if \(!apiKeyAccepted && !sameOriginRead\)/);
 });
 console.log("M18 integration gate contract regression: PASS");

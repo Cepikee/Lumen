@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const source = fs.readFileSync('app/api/contact/route.ts', 'utf8');
 
 // Malformed shapes and parser/provider failures must not be reported as success.
-assert.match(source, /JSON\.parse\(bodyText\)/);
+assert.match(source, /JSON\.parse\(boundedBody\.value\)/);
 assert.match(source, /Érvénytelen JSON/);
 assert.match(source, /typeof parsed !== "object" \|\| Array\.isArray\(parsed\)/);
 assert.match(source, /error: "Ismeretlen hiba\."[\s\S]*status: 500/);

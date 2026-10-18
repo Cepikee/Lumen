@@ -6,7 +6,7 @@ const sources = fs.readFileSync('app/api/trends/trend-sources/route.ts', 'utf8')
 
 // mysql2 commonly returns COUNT/HOUR expressions as strings. The 24h
 // response must still populate numeric buckets instead of returning 24 zeros.
-assert.match(history, /rows\.find\(r\s*=>\s*Number\(r\.hour\)\s*===\s*i\)/);
+assert.match(history, /rows\.find\(\(row\)\s*=>\s*Number\(row\.hour\)\s*===\s*hour\)/);
 assert.match(history, /Number\.isFinite\(Number\(found\?\.freq\)\)/);
 
 // Multiple summaries can exist for an article. The source endpoint must pick
