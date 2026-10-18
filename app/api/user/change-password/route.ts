@@ -1,6 +1,7 @@
 import { createSession, getSessionUserId } from "@/lib/auth-session";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import bcrypt from "bcryptjs";
 import { validatePassword } from "@/lib/auth-policy";
 import { hashPassword } from "@/lib/password-security";
 import { getIp, requireTrustedOrigin } from "@/lib/security";

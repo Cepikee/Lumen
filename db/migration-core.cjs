@@ -12,14 +12,14 @@ const METADATA_SQL = `CREATE TABLE IF NOT EXISTS schema_migrations (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci`;
 
 function loadMigrations(dir = path.join(__dirname, "migrations")) {
-  const filenames = fs.readdirSync(dir).filter((name) => /^\d{3}_[a-z0-9_-]+\.sql$/.test(name)).sort();
+  const filenames = fs.readdirSync(/* turbopackIgnore: true */ dir).filter((name) => /^\d{3}_[a-z0-9_-]+\.sql$/.test(name)).sort();
   if (!filenames.length) throw new Error("No migration files were found");
   const seen = new Set();
   return filenames.map((filename) => {
     const version = filename.slice(0, 3);
     if (seen.has(version)) throw new Error(`Duplicate migration version: ${version}`);
     seen.add(version);
-    const sql = fs.readFileSync(path.join(dir, filename), "utf8").trim();
+    const sql = fs.readFileSync(/* turbopackIgnore: true */ path.join(/* turbopackIgnore: true */ dir, filename), "utf8").trim();
     if (!sql) throw new Error(`Empty migration: ${filename}`);
     // Each file must contain one statement. Never split SQL on arbitrary semicolons.
     const noComments = sql.replace(/^\s*--[^\n]*$/gm, "").trim();
