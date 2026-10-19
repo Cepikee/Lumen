@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
 import { isV2Enabled } from "@/lib/v2/feature-flags";
-import { asOf, envelope, errorEnvelope, projectArticleContext, validateReadInput } from "@/lib/v2/read-model-contract";
+import { asOf, encodeCursor, envelope, errorEnvelope, projectArticleContext, validateReadInput } from "@/lib/v2/read-model-contract";
 import { getClaim } from "@/lib/v2/read-model-repository";
-import { readTimelineItems } from "@/lib/v2/temporal-graph-repository";
+import { readArticleTimelineItems } from "@/lib/v2/temporal-graph-repository";
 
 export async function GET(req: Request, context: { params: Promise<{ id: string }> | { id: string } }) {
   const security = await securityCheck(req, { allowSameOriginRead: true });
@@ -39,11 +39,8 @@ export async function GET(req: Request, context: { params: Promise<{ id: string 
       ORDER BY e.canonical_name ASC,e.id ASC
       LIMIT ?`, [input.id, input.id, input.limit]);
     const entities = (entityRows as any[]).map((entity) => ({ id: Number(entity.id), type: String(entity.entityType), name: String(entity.name || "") || null }));
-    let timeline: any[] = [];
-    if ((eventRows as any[]).length > 0) {
-      const timelineResult = await readTimelineItems(db, { ownerType: "event", ownerId: Number((eventRows as any[])[0].id), asOf: input.asOf, limit: input.limit, visibility: "public" });
-      timeline = timelineResult.items;
-    }
+    const timelineResult = await readArticleTimelineItems(db, { articleId: input.id, asOf: input.asOf, limit: input.limit, cursor: input.cursor, visibility: "public" });
+    const timeline = { items: timelineResult.items, nextCursor: encodeCursor(timelineResult.nextCursor) };
     const data = { article: projectArticleContext(row, { id: row.summary_id, text: summaryText } as any), asOf: asOf(input.asOf), entities, claims, events: (eventRows as any[]).map((event) => ({ id: Number(event.id), title: typeof event.title === "string" && event.title.trim() ? event.title.trim() : null })), timeline, partial: false };
     return NextResponse.json(envelope(data));
   } catch (error) {

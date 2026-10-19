@@ -54,7 +54,7 @@ function localProviders(calls = { entity: 0, claim: 0 }) {
 }
 
 function harness(overrides = {}) {
-  const state = { claimed: false, completed: false, failed: false, entities: [], resolutions: [], claims: [], events: [] };
+  const state = { claimed: false, completed: false, failed: false, entities: [], resolutions: [], claims: [], relations: [], events: [], timeline: [] };
   const currentArticle = overrides.article || article();
   const repository = {
     async loadCompletedArticle() { return currentArticle; },
@@ -82,9 +82,20 @@ function harness(overrides = {}) {
       state.claims = input.claims;
       return { count: input.claims.length, claims: input.claims.map((_, index) => ({ claimId: index + 41, evidenceId: index + 51 })) };
     },
+    async persistRelationWithEvidence(_connection, input) {
+      state.relations.push(input);
+      return { relationId: state.relations.length + 70, evidenceId: state.relations.length + 80, operationKey: input.operationKey };
+    },
     async persistEventCandidate(_connection, candidate) {
       state.events.push(candidate);
       return { eventId: state.events.length + 60, articleId: candidate.articleId, entityCount: candidate.entities.length, status: candidate.status, merged: false };
+    },
+    async persistTimelineItem(_connection, projection) {
+      const existing = state.timeline.find((row) => row.ownerId === projection.ownerId && row.item.itemId === projection.item.itemId && row.item.orderingKey === projection.item.orderingKey);
+      if (existing) return { timelineId: 91, itemId: existing.id, idempotent: true };
+      const row = { id: state.timeline.length + 101, ...projection };
+      state.timeline.push(row);
+      return { timelineId: 91, itemId: row.id, idempotent: false };
     },
     ...(overrides.dependencies || {}),
   };
@@ -115,15 +126,151 @@ test("enabled shadow extracts, resolves, and persists evidence-backed claims", a
   const providers = localProviders(calls);
   const flow = harness();
   const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...providers, repository: flow.repository, dependencies: flow.dependencies });
+  const retry = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...providers, repository: flow.repository, dependencies: flow.dependencies });
   assert.equal(result.status, "completed");
+  assert.equal(retry.reason, "already_completed");
   assert.equal(flow.state.completed, true);
   assert.equal(flow.state.entities.length, 1);
   assert.equal(flow.state.resolutions.length, 1);
   assert.equal(flow.state.claims.length, 1);
   assert.deepEqual(calls, { entity: 1, claim: 1 });
   assert.equal(result.metrics.externalProviderCalls, 0);
+  assert.equal(result.metrics.relationsFound, 0);
+  assert.equal(result.metrics.relationsPersisted, 0);
   assert.equal(result.metrics.eventPreparation, "skipped");
   assert.equal(result.metrics.eventsFound, 0);
+});
+
+test("supported evidence-backed relation is persisted before the event stage", async () => {
+  const textSpan = "Anna az Acme Kft. vezérigazgatója.";
+  const flow = harness({ article: article({ title: textSpan, contentText: "Részletek." }) });
+  const providers = localProviders();
+  providers.entityProvider = {
+    name: "deterministic-semantic",
+    model: "deterministic-semantic-entity-relation",
+    async extractEntities(input) {
+      return { entities: [
+        { mentionText: "Anna", normalizedCandidateName: "Anna", entityType: "person", confidence: 0.96, evidence: { start: input.text.indexOf("Anna"), end: input.text.indexOf("Anna") + 4 } },
+        { mentionText: "Acme Kft.", normalizedCandidateName: "Acme", entityType: "organization", confidence: 0.96, evidence: { start: input.text.indexOf("Acme Kft."), end: input.text.indexOf("Acme Kft.") + 9 } },
+      ] };
+    },
+  };
+  providers.claimProvider = {
+    name: "deterministic-semantic",
+    model: "deterministic-semantic-claim-relation",
+    async extractClaims(input) {
+      const start = input.text.indexOf(textSpan);
+      return { claims: [{ subjectEntityId: 31, predicate: "CEO_OF", objectEntityId: 32, claimType: "entity", confidence: 0.94, polarity: "affirmed", conditional: false, uncertainty: false, attributionType: "unknown", evidence: { start, end: start + textSpan.length, textSpan } }] };
+    },
+  };
+  const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...providers, repository: flow.repository, dependencies: flow.dependencies });
+  const retry = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...providers, repository: flow.repository, dependencies: flow.dependencies });
+  assert.equal(result.status, "completed");
+  assert.equal(retry.reason, "already_completed");
+  assert.equal(result.metrics.relationsFound, 1);
+  assert.equal(result.metrics.relationsPersisted, 1);
+  assert.equal(flow.state.relations.length, 1);
+  assert.equal(flow.state.relations[0].relation.predicate, "CEO_OF");
+  assert.equal(flow.state.relations[0].operationKey.length, 64);
+});
+
+test("relation/evidence transaction failure rolls back the candidate and preserves prior layers", async () => {
+  const flow = harness();
+  flow.repository.withTransaction = async (work) => {
+    const relationCount = flow.state.relations.length;
+    try { return await work({}); } catch (error) {
+      flow.state.relations.length = relationCount;
+      throw error;
+    }
+  };
+  flow.dependencies.buildEvidenceBackedRelationCandidates = () => ({
+    status: "completed",
+    providerCalls: 0,
+    skipped: [],
+    candidates: [{
+      relation: { subjectEntityId: 31, predicate: "CEO_OF", objectEntityId: 32, confidence: 0.9, supportType: "support", validFrom: null, validUntil: null, evidence: { start: 0, end: 4, textSpan: "Anna" } },
+      operationKey: "b".repeat(64),
+      semanticSource: { type: "validated_claim", claimId: 41, evidenceId: 51 },
+    }],
+  });
+  flow.dependencies.persistRelationWithEvidence = async (_connection, input) => {
+    flow.state.relations.push(input);
+    throw new Error("fixture_relation_evidence_write_failed");
+  };
+  const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...localProviders(), repository: flow.repository, dependencies: flow.dependencies });
+  assert.equal(result.status, "failed");
+  assert.match(result.error, /fixture_relation_evidence_write_failed/);
+  assert.equal(flow.state.relations.length, 0);
+  assert.equal(flow.state.entities.length, 1);
+  assert.equal(flow.state.claims.length, 1);
+  assert.equal(article().status, "done");
+});
+
+test("relation persistence is atomic at the shadow transaction boundary", async () => {
+  let transactionDepth = 0;
+  let persistedInsideTransaction = false;
+  const relationClaim = { ...localProviders().claimProvider };
+  relationClaim.extractClaims = async (input) => {
+    const textSpan = "Anna az Acme Kft. vezérigazgatója.";
+    const start = input.text.indexOf(textSpan);
+    return { claims: [{ subjectEntityId: 31, predicate: "CEO_OF", objectEntityId: 32, claimType: "entity", confidence: 0.94, evidence: { start, end: start + textSpan.length, textSpan } }] };
+  };
+  const flow = harness({ article: article({ title: "Anna az Acme Kft. vezérigazgatója.", contentText: "Részletek." }) });
+  flow.dependencies.runEntityResolutionBatch = async () => ({ status: "completed", providerCalls: 0, results: [{ result: { entityId: 31 } }, { result: { entityId: 32 } }] });
+  flow.dependencies.persistEntityExtraction = async () => ({ runId: 11, mentions: [{ id: 21 }, { id: 22 }] });
+  flow.repository.withTransaction = async (work) => {
+    transactionDepth += 1;
+    try { return await work({}); } finally { transactionDepth -= 1; }
+  };
+  flow.dependencies.persistRelationWithEvidence = async () => {
+    persistedInsideTransaction = transactionDepth === 1;
+    return { relationId: 71, evidenceId: 81 };
+  };
+  const entityProvider = {
+    name: "deterministic-semantic", model: "deterministic-semantic-entity-relation-atomic",
+    async extractEntities(input) { return { entities: [
+      { mentionText: "Anna", normalizedCandidateName: "Anna", entityType: "person", confidence: 0.96, evidence: { start: input.text.indexOf("Anna"), end: input.text.indexOf("Anna") + 4 } },
+      { mentionText: "Acme Kft.", normalizedCandidateName: "Acme", entityType: "organization", confidence: 0.96, evidence: { start: input.text.indexOf("Acme Kft."), end: input.text.indexOf("Acme Kft.") + 9 } },
+    ] }; },
+  };
+  const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, entityProvider, claimProvider: relationClaim, repository: flow.repository, dependencies: flow.dependencies });
+  assert.equal(result.status, "completed");
+  assert.equal(persistedInsideTransaction, true);
+});
+
+test("relation stage lifecycle is bounded and never logs article text", async () => {
+  const logs = [];
+  const flow = harness();
+  const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...localProviders(), repository: flow.repository, dependencies: flow.dependencies, logger(event) { logs.push(event); } });
+  assert.equal(result.status, "completed");
+  assert.ok(logs.some((event) => event.event === "v2_shadow_relation_started"));
+  assert.ok(logs.some((event) => event.event === "v2_shadow_relation_skipped"));
+  assert.equal(logs.some((event) => JSON.stringify(event).includes(article().contentText)), false);
+});
+
+test("relation stage failure preserves completed V1 and already persisted entity/claim state", async () => {
+  const flow = harness({ dependencies: { buildEvidenceBackedRelationCandidates() { throw new Error("fixture_relation_failed"); } } });
+  const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...localProviders(), repository: flow.repository, dependencies: flow.dependencies });
+  assert.equal(result.status, "failed");
+  assert.match(result.error, /v2_shadow_relation_failed:fixture_relation_failed/);
+  assert.equal(flow.state.entities.length, 1);
+  assert.equal(flow.state.claims.length, 1);
+  assert.equal(flow.state.events.length, 0);
+  assert.equal(flow.state.failed, true);
+  assert.equal(article().status, "done");
+  assert.equal(article().processed, 1);
+});
+
+test("malformed or provider-backed relation projection is rejected before relation write", async () => {
+  let writes = 0;
+  const flow = harness({ dependencies: {
+    buildEvidenceBackedRelationCandidates() { return { candidates: [{ relation: {} }], skipped: [], providerCalls: 1 }; },
+    async persistRelationWithEvidence() { writes += 1; },
+  } });
+  const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...localProviders(), repository: flow.repository, dependencies: flow.dependencies });
+  assert.equal(result.status, "failed");
+  assert.match(result.error, /v2_shadow_relation_malformed_projection/);
+  assert.equal(writes, 0);
 });
 
 test("supported evidence-backed event is persisted exactly once and rerun is reused", async () => {
@@ -152,8 +299,64 @@ test("supported evidence-backed event is persisted exactly once and rerun is reu
   assert.equal(first.metrics.eventsFound, 1);
   assert.equal(flow.state.events.length, 1);
   assert.equal(flow.state.events[0].evidenceId, 51);
+  assert.equal(first.metrics.timelineItemsFound, 1);
+  assert.equal(first.metrics.timelineItemsPersisted, 1);
+  assert.equal(first.metrics.timelineItemsUnknownTime, 1);
+  assert.equal(flow.state.timeline.length, 1);
   assert.equal(second.reason, "already_completed");
   assert.equal(flow.state.events.length, 1);
+  assert.equal(flow.state.timeline.length, 1);
+});
+
+test("timeline stage persists explicit event time after event persistence", async () => {
+  const textSpan = "Anna 1997-ben új buszokat vásárol.";
+  const providers = localProviders();
+  providers.claimProvider = {
+    name: "deterministic-semantic",
+    model: "deterministic-semantic-claim-timeline",
+    async extractClaims(input) {
+      const start = input.text.indexOf(textSpan);
+      return { claims: [{ subjectEntityId: 31, predicate: "BUS_PURCHASE", claimType: "text", value: "bus-purchase", confidence: 0.9, polarity: "affirmed", modality: "asserted", validFrom: "1997", evidence: { start, end: start + textSpan.length, textSpan } }] };
+    },
+  };
+  const flow = harness({ article: article({ title: textSpan, contentText: "Részletek.", publishedAt: "2026-10-19T10:00:00Z" }) });
+  const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...providers, repository: flow.repository, dependencies: flow.dependencies });
+  assert.equal(result.status, "completed");
+  assert.equal(flow.state.timeline.length, 1);
+  assert.equal(flow.state.timeline[0].timePrecision, "year");
+  assert.equal(flow.state.timeline[0].item.validAt, null);
+  assert.equal(flow.state.timeline[0].item.validFrom, "1997-01-01T00:00:00.000Z");
+});
+
+test("timeline failure preserves V1 and every previously persisted shadow layer", async () => {
+  const textSpan = "Anna új buszokat vásárol.";
+  const providers = localProviders();
+  providers.claimProvider = {
+    name: "deterministic-semantic", model: "deterministic-semantic-claim-timeline-failure",
+    async extractClaims(input) {
+      const start = input.text.indexOf(textSpan);
+      return { claims: [{ subjectEntityId: 31, predicate: "BUS_PURCHASE", claimType: "text", value: "bus-purchase", confidence: 0.9, evidence: { start, end: start + textSpan.length, textSpan } }] };
+    },
+  };
+  const flow = harness({ article: article({ title: textSpan, contentText: "Részletek." }), dependencies: { async persistTimelineItem() { throw new Error("fixture_timeline_write_failed"); } } });
+  const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...providers, repository: flow.repository, dependencies: flow.dependencies });
+  assert.equal(result.status, "failed");
+  assert.match(result.error, /v2_shadow_timeline_failed:fixture_timeline_write_failed/);
+  assert.equal(flow.state.entities.length, 1);
+  assert.equal(flow.state.claims.length, 1);
+  assert.equal(flow.state.events.length, 1);
+  assert.equal(article().status, "done");
+  assert.equal(article().processed, 1);
+});
+
+test("timeline stage emits bounded lifecycle logs without article text", async () => {
+  const logs = [];
+  const flow = harness();
+  const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...localProviders(), repository: flow.repository, dependencies: flow.dependencies, logger(event) { logs.push(event); } });
+  assert.equal(result.status, "completed");
+  assert.ok(logs.some((event) => event.event === "v2_shadow_timeline_started"));
+  assert.ok(logs.some((event) => event.event === "v2_shadow_timeline_skipped"));
+  assert.equal(logs.some((event) => JSON.stringify(event).includes(article().contentText)), false);
 });
 
 test("event and memberships are persisted through the shadow transaction boundary", async () => {

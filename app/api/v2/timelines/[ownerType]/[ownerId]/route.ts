@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
 import { isV2Enabled } from "@/lib/v2/feature-flags";
 import { encodeCursor, envelope, errorEnvelope } from "@/lib/v2/read-model-contract";
-import { readTimelineItems } from "@/lib/v2/temporal-graph-repository";
+import { readArticleTimelineItems, readTimelineItems } from "@/lib/v2/temporal-graph-repository";
 
 export async function GET(req: Request, context: { params: Promise<{ ownerType: string; ownerId: string }> | { ownerType: string; ownerId: string } }) {
   const security = await securityCheck(req);
@@ -17,8 +17,13 @@ export async function GET(req: Request, context: { params: Promise<{ ownerType: 
     try { cursor = JSON.parse(Buffer.from(String(url.searchParams.get("cursor")), "base64url").toString("utf8")); } catch { return NextResponse.json(errorEnvelope("invalid_input", "cursor_invalid"), { status: 422 }); }
   }
   try {
-    const result = await readTimelineItems(db, { ownerType: String(params?.ownerType || ""), ownerId: String(params?.ownerId || ""), asOf: url.searchParams.get("asOf") || new Date().toISOString(), limit, cursor, visibility: "public" });
-    return NextResponse.json(envelope({ items: result.items, nextCursor: encodeCursor(result.nextCursor) }, { asOf: url.searchParams.get("asOf") || new Date().toISOString(), limit }));
+    const ownerType = String(params?.ownerType || "");
+    const ownerId = String(params?.ownerId || "");
+    const asOf = url.searchParams.get("asOf") || new Date().toISOString();
+    const result = ownerType === "article"
+      ? await readArticleTimelineItems(db, { articleId: ownerId, asOf, limit, cursor, visibility: "public" })
+      : await readTimelineItems(db, { ownerType, ownerId, asOf, limit, cursor, visibility: "public" });
+    return NextResponse.json(envelope({ items: result.items, nextCursor: encodeCursor(result.nextCursor) }, { asOf, limit }));
   } catch (error: any) {
     const code = String(error?.message || "").endsWith("_invalid") ? "invalid_input" : "internal_error";
     return NextResponse.json(errorEnvelope(code, code === "invalid_input" ? error.message : "Unable to load timeline"), { status: code === "invalid_input" ? 422 : 500 });

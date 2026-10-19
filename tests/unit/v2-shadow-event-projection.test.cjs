@@ -110,6 +110,13 @@ test("publication time is never substituted for unknown event time", () => {
   assert.equal(result.candidates[0].endAt, null);
 });
 
+test("canonical deterministic event claims retain explicit safe year precision", async () => {
+  const text = "A város 2024-ben új buszokat vásárol.";
+  const result = await runClaimExtraction({ text, articleId: 7 }, {}, { enabled: true, provider: createDeterministicClaimProvider() });
+  const claim = result.result.claims.find((item) => item.predicate === "BUS_PURCHASE");
+  assert.equal(claim.validFrom, "2024");
+});
+
 test("rerun is deterministic while similar events from different articles never auto-merge", () => {
   const first = buildEvidenceBackedEventCandidates(fixture()).candidates[0];
   const retry = buildEvidenceBackedEventCandidates(fixture()).candidates[0];

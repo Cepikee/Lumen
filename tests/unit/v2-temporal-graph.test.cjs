@@ -3,7 +3,7 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const { validateTemporalInterval, validateTimelineItem, validateTemporalProjection, projectAsOf } = require("../../lib/v2/temporal-graph");
 const { runTemporalProjection } = require("../../lib/v2/runtime-temporal-graph");
-const { temporalSql, persistTimelineItem, readTimelineItems } = require("../../lib/v2/temporal-graph-repository");
+const { temporalSql, persistTimelineItem, readTimelineItems, readArticleTimelineItems } = require("../../lib/v2/temporal-graph-repository");
 
 const base = { itemType: "event", itemId: 2, validAt: "2026-01-02T00:00:00Z", orderingKey: "2026-01-02T00:00:00.000Z/000002" };
 
@@ -62,6 +62,25 @@ test("M10 repository remains caller-transactional and uses stable cursor SQL", a
   assert.match(calls.at(-1).sql, /valid_from IS NULL OR i\.valid_from <= \?/);
   assert.match(calls.at(-1).sql, /ordering_key > \? OR \(i\.ordering_key = \? AND i\.id > \?\)/);
   assert.equal(calls.some((call) => /COMMIT|ROLLBACK|START TRANSACTION/.test(call.sql)), false);
+});
+
+test("article-local timeline read returns a safe empty result and hides no-data as success", async () => {
+  const connection = { execute: async () => [[], []] };
+  const result = await readArticleTimelineItems(connection, { articleId: 7, asOf: "2026-10-19T00:00:00Z", limit: 10 });
+  assert.deepEqual(result, { items: [], nextCursor: null });
+});
+
+test("article-local timeline read exposes event provenance and preserved precision", async () => {
+  let call = 0;
+  const connection = { execute: async () => {
+    call += 1;
+    if (call === 1) return [[{ id: 5, eventId: 61, validAt: null, validFrom: "2024-01-01 00:00:00", validUntil: "2025-01-01 00:00:00", displayAt: null, confidence: "0.9000", visibility: "public", orderingKey: "0-known/2024-01-01T00:00:00.000Z/3/00000000000000000061", eventType: "bus_purchase", label: "Buszvásárlás", status: "candidate", articleId: 7, evidenceId: 51 }], []];
+    return [[{ eventId: 61, entityId: 31, role: "subject", confidence: "0.9000", evidenceId: 51 }], []];
+  } };
+  const result = await readArticleTimelineItems(connection, { articleId: 7, asOf: "2026-10-19T00:00:00Z", limit: 10 });
+  assert.equal(result.items[0].timePrecision, "year");
+  assert.deepEqual(result.items[0].evidence, { articleId: 7, evidenceId: 51 });
+  assert.deepEqual(result.items[0].participants[0], { entityId: 31, role: "subject", confidence: 0.9, evidenceId: 51 });
 });
 
 console.log("M10 temporal graph regression: PASS");
