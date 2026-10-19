@@ -13,8 +13,10 @@ test("M16 route gates V2 before entitlement and maps anonymous/non-premium state
 
 test("M16 route uses the canonical source comparison and timeline projections", () => {
   assert.match(source, /compareSourcesDetailed\(db/);
+  assert.match(source, /detectComparisonConflicts\(comparison\)/);
   assert.match(source, /readTimelineItems\(db/);
   assert.match(source, /projectPremiumIntelligence/);
+  assert.doesNotMatch(source, /SELECT id,conflict_type/);
   assert.doesNotMatch(source, /winnerSourceId|trustScore|biasScore/);
 });
 

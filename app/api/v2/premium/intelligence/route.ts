@@ -7,6 +7,9 @@ import { envelope, errorEnvelope } from "@/lib/v2/read-model-contract";
 import { compareSourcesDetailed, getClaim, getEvent } from "@/lib/v2/read-model-repository";
 import { readTimelineItems } from "@/lib/v2/temporal-graph-repository";
 import { projectPremiumIntelligence, validatePremiumInput } from "@/lib/v2/premium-intelligence";
+import { detectComparisonConflicts } from "@/lib/v2/conflict-history";
+
+function log(event: string, details: Record<string, unknown>) { console.info(JSON.stringify({ event, ...details })); }
 
 export async function GET(req: Request) {
   const security = await securityCheck(req, { allowSameOriginRead: true });
@@ -24,17 +27,21 @@ export async function GET(req: Request) {
     const comparison = await compareSourcesDetailed(db, input.scope, { page: input.page, limit: input.limit });
     const context = input.scope.type === "event" ? await getEvent(db, input.scope.id) : await getClaim(db, input.scope.id);
     if (!context) return NextResponse.json(errorEnvelope("not_found", "Premium intelligence scope not found"), { status: 404 });
-    const [conflicts]: any = await db.execute("SELECT id,conflict_type conflictType,state,severity,detected_at detectedAt FROM v2_conflicts WHERE scope_type=? AND scope_id=? ORDER BY detected_at DESC,id DESC LIMIT 100", [input.scope.type, input.scope.id]);
+    const conflictStartedAt = Date.now();
+    log("v2_conflict_detection_started", { scopeType: input.scope.type, scopeId: input.scope.id, externalProviderCalls: 0 });
+    const conflictDetection = detectComparisonConflicts(comparison);
+    log(conflictDetection.status === "ready" ? "v2_conflict_detection_completed" : "v2_conflict_detection_skipped", { scopeType: input.scope.type, scopeId: input.scope.id, ...conflictDetection.metrics, conflictDurationMs: Date.now() - conflictStartedAt, externalProviderCalls: 0 });
     let history: any[] = [];
     if (input.scope.type === "event") {
       const timeline = await readTimelineItems(db, { ownerType: "event", ownerId: input.scope.id, asOf: new Date().toISOString(), limit: input.limit, visibility: "premium" });
       history = (timeline as any).items;
     }
-    return NextResponse.json(envelope(projectPremiumIntelligence({ scope: input.scope, context, comparison, conflicts, history } as any)));
+    return NextResponse.json(envelope(projectPremiumIntelligence({ scope: input.scope, context, comparison, conflicts: conflictDetection.conflicts, conflictDetection, history } as any)));
   } catch (error: any) {
     const message = String(error?.message || "");
     if (message === "scope_not_found") return NextResponse.json(errorEnvelope("not_found", "Premium intelligence scope not found"), { status: 404 });
     if (message.endsWith("_invalid")) return NextResponse.json(errorEnvelope("invalid_input", message), { status: 422 });
+    log("v2_conflict_detection_failed", { scopeType: input.scope.type, scopeId: input.scope.id, code: "internal_error", externalProviderCalls: 0 });
     console.error("Premium intelligence read failed:", error);
     return NextResponse.json(errorEnvelope("internal_error", "Unable to load premium intelligence"), { status: 500 });
   }

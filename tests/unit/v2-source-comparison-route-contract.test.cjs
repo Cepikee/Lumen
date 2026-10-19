@@ -13,6 +13,7 @@ test("source comparison API returns HTTP 200 with an empty evidence-safe compari
     "@/lib/security": { securityCheck: async () => null },
     "@/lib/v2/feature-flags": { isV2Enabled: () => true },
     "@/lib/v2/read-model-contract": contract,
+    "@/lib/v2/conflict-history": { detectComparisonConflicts: () => ({ status: "empty", conflicts: [], metrics: { candidatesChecked: 0, conflictsFound: 0, numericConflicts: 0, polarityConflicts: 0, statusConflicts: 0, abstentions: 0 }, authority: { winner: null }, ai: { providerCalls: 0 } }) },
     "@/lib/v2/read-model-repository": {
       compareSources: async () => ({ scope: { type: "claim", id: 7 }, sources: [] }),
       compareSourcesDetailed: async () => ({ status: "empty", sources: [], claims: [], pagination: { page: 1, limit: 50, total: 0, pages: 0 }, metrics: { sourcesCompared: 0, claimsCompared: 0, sharedClaims: 0, sourceOnlyClaims: 0, unmatchedClaims: 0, observationsSkipped: 0 } }),
@@ -22,8 +23,8 @@ test("source comparison API returns HTTP 200 with an empty evidence-safe compari
   assert.equal(response.status, 200);
   assert.deepEqual(response.body.data.claims, []);
   assert.equal(response.body.data.status, "empty");
-  assert.deepEqual(events.map((entry) => entry.event), ["v2_source_comparison_started", "v2_source_comparison_skipped"]);
-  assert.equal(events[1].externalProviderCalls, 0);
+  assert.deepEqual(events.map((entry) => entry.event), ["v2_source_comparison_started", "v2_conflict_detection_started", "v2_conflict_detection_skipped", "v2_source_comparison_skipped"]);
+  assert.equal(events[2].externalProviderCalls, 0);
 });
 
 test("client excludes malformed observations and preserves explicit coverage states", () => {
@@ -49,6 +50,7 @@ test("comparison failure is isolated and external providers are absent", async (
     "@/lib/security": { securityCheck: async () => null },
     "@/lib/v2/feature-flags": { isV2Enabled: () => true },
     "@/lib/v2/read-model-contract": contract,
+    "@/lib/v2/conflict-history": { detectComparisonConflicts: () => { throw new Error("should_not_run"); } },
     "@/lib/v2/read-model-repository": { compareSources: async () => { throw new Error("db_failed"); }, compareSourcesDetailed: async () => { throw new Error("db_failed"); } },
   }, { Buffer, Promise, console: { info: (line) => events.push(JSON.parse(line)) } });
   const response = await route.GET({ url: "http://local/api/v2/source-comparison?eventId=8&detail=claims" });

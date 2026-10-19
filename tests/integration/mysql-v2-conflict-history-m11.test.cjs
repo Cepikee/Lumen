@@ -8,7 +8,7 @@ const { persistConflict, recordConfidenceChange } = require("../../lib/v2/confli
 
 const enabled = process.env.UTOM_MYSQL_TEST_OPT_IN === "true" && Boolean(process.env.UTOM_TEST_MYSQL_URL);
 function connect() { const url = new URL(process.env.UTOM_TEST_MYSQL_URL); return mysql.createConnection({ host: url.hostname, port: Number(url.port || 3306), user: decodeURIComponent(url.username), password: decodeURIComponent(url.password), database: url.pathname.slice(1) }); }
-function claim(id, value) { return { id, subjectEntityId: 1, predicate: "STATUS", claimType: "categorical", normalizedValue: value, validFrom: "2026-01-01T00:00:00Z", validUntil: "2026-02-01T00:00:00Z", evidence: [{ evidenceId: id + 100 }] }; }
+function claim(id, value) { const articleId = id + 1000; const sourceId = id + 2000; return { id, subjectEntityId: 1, predicate: "STATUS", claimType: "categorical", normalizedValue: value, validFrom: "2026-01-01T00:00:00Z", validUntil: "2026-02-01T00:00:00Z", articleId, sourceId, status: "reported", polarity: "affirmed", modality: "asserted", attribution: { type: "direct", entityId: null }, evidence: [{ id: id + 100, claimId: id, articleId, sourceId, textSpan: value }] }; }
 async function resetM11(connection) { await connection.execute("DELETE FROM v2_confidence_history"); await connection.execute("DELETE FROM v2_entity_graph_history"); await connection.execute("DELETE FROM v2_conflicts"); }
 
 test("M11 MySQL conflict persistence is symmetric and retry-safe", { skip: !enabled }, async () => {
