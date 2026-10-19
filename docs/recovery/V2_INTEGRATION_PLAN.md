@@ -6,7 +6,7 @@ V2 is additive and feature-flagged. This document is a plan, not authorization t
 |---|---|---|---|---|---|---|
 | V2-A | Entity extraction and normalization | Canonical post-V1 shadow caller implemented; default OFF and not deployed | Completed canonical article and schema 064 `v2_processing_steps` | Deterministic local provider only; bounded extraction; all failures contained | New articles only; disable `UTOM_V2_SHADOW_ENABLED` to stop writes | Exact evidence offsets, idempotent persistence, no V1 output change |
 | V2-B | Entity resolution, claims and claim evidence | Included in the same bounded shadow orchestrator; default OFF and not deployed | Persisted mentions, conservative resolver and validated deterministic claims | False-claim prevention first; no paid escalation; malformed output writes nothing | No historical backfill in this phase; additive V2 rows may remain | Entity/claim rerun safety, evidence integrity, provider calls zero |
-| V2-C | Relations, events, matching and timelines | Implemented and tested; read APIs exist, writers not wired | Resolved entities/claims; ordered post-processing worker | No V1 publication dependency; partial projection hidden | Feature flag per projection; rebuild derived rows from evidence | Stable matching, temporal boundaries, pagination and browser acceptance |
+| V2-C | Relations, events, matching and timelines | Conservative article-local event writer integrated; relations, cross-article matching and timelines remain deferred | Resolved participant, validated claim and persisted evidence | Unsupported, negated, conditional, uncertain and attributed claims abstain | New articles only; disable shadow flag; derived event rows are additive | Exact evidence, transactional membership, rerun safety, zero external calls |
 | V2-D | Source comparison, conflicts and confidence history | Implemented and tested; read API exists, writer chain not wired | Multi-source event membership and evidence | Winner remains null without explicit policy; no automatic truth claim | Enable read-only comparison first; rollback by disabling endpoints | False-conflict fixture, provenance and audit-history verification |
 | V2-E | Premium intelligence panels | UI/API implemented behind entitlement and frontend/backend flags | Stable V2 read models and premium session | No billing implied; errors must fall back without exposing data | Per-user feature flag; disable public flag to hide UI | Entitlement E2E, malformed-response and real-browser acceptance |
 
@@ -20,7 +20,7 @@ V2 is additive and feature-flagged. This document is a plan, not authorization t
 | entity resolution | yes | yes | post-completion shadow orchestrator, OFF | conservative exact/provisional resolution |
 | claims/evidence | yes | yes | post-completion shadow orchestrator, OFF | persist only validated evidence-backed output |
 | relations | yes | yes | no | V2-C |
-| events/event matching | yes | yes | no | V2-C |
+| events/event matching | yes | yes | post-completion shadow, article-local only and OFF | review article-local candidates before cross-article matching |
 | timeline/temporal graph | yes | yes | read API only | V2-C |
 | conflicts/confidence | yes | yes | read API only | V2-D |
 | source comparison | yes | yes | API/UI behind flags | V2-D read-only first |
@@ -48,6 +48,9 @@ pipeline/cron.js
      -> conservative entity-resolution batch
      -> deterministic claim extraction + exact evidence validation
      -> claim-extraction-repository
+     -> evidence-based claim-to-event projection
+     -> event-matching validation (article-local; no merge)
+     -> event + article/entity memberships in one transaction
      -> completed/failed shadow state + structured metrics
 ```
 
@@ -60,16 +63,32 @@ The orchestrator imports no OpenAI, Cloudflare, V2.2, relation, temporal or conf
 - Idempotence: `v2_processing_steps` owns a content fingerprint and claim token; completed fingerprints are reused. Existing entity-run, mention, resolution-history, claim and evidence identities remain the persistence-level duplicate guards.
 - Failure: invalid envelope/output, timeout, DB failure or lost claim becomes `v2_shadow_failed`; the orchestrator resolves a failed result and the pipeline wrapper catches any unexpected escape. V1 is never marked failed or recovery-required by this path.
 - Cost: the cost router must select `deterministic`; entity and claim providers must identify as local `deterministic-semantic`. Any other provider is rejected before invocation. There is no paid fallback.
-- Events: no safe deterministic text-to-event candidate extractor exists in the stable V2 layer. The result records `deferred_no_safe_candidate_extractor`; no event row is fabricated.
+- Events: only `BUS_PURCHASE`, completed `EVENT_STATUS=pilot-start` and completed `OPENING_EVENT=true` from the existing claim vocabulary are eligible. A persisted evidence row and exactly one explicit or uniquely evidence-contained resolved participant are mandatory. Every output is a review-only `candidate`.
+- Event safety: negated, conditional, uncertain, non-observed, attributed or unsupported claims abstain. Unknown event time stays null; article publication time is never substituted. Article-local evidence identity prevents automatic cross-article merging.
 - Backfill: none is started or exposed by this change. The existing bounded incremental backfill remains separate and is not a shadow activation mechanism.
 
 ## Structured events and metrics
 
-Events are `v2_shadow_started`, `v2_shadow_completed`, `v2_shadow_failed`, `v2_shadow_skipped` and `v2_shadow_paid_ai_blocked`. Completion includes processed/succeeded/failed/skipped counts, entity/claim/event counts, duration, deterministic cost route and `externalProviderCalls: 0`. Logs contain IDs, statuses and bounded errors, never article bodies or credentials.
+Events are `v2_shadow_started`, `v2_shadow_completed`, `v2_shadow_failed`, `v2_shadow_skipped`, `v2_shadow_paid_ai_blocked`, `v2_shadow_event_started`, `v2_shadow_event_completed`, `v2_shadow_event_skipped` and `v2_shadow_event_failed`. Completion includes processed/succeeded/failed/skipped counts, entity/claim/event counts, event duration, deterministic cost route and `externalProviderCalls: 0`. Logs contain IDs, statuses and bounded errors, never article bodies or credentials.
 
 ## Source comparison readiness
 
-The current read model can compare evidence for an individual claim and can compare claims across an event. This shadow phase creates article/source-backed claims, but it deliberately does not create event membership, cross-article canonical claim groups for unresolved subjects, relations, timelines or conflicts. Therefore source comparison stays read-only and feature-flagged; useful multi-source event comparison still requires the deferred event writer and reviewed cross-article resolution policy.
+The current read model can compare evidence for an individual claim and can compare claims across an event. This shadow phase now creates evidence-backed article and participant memberships for conservative article-local candidates. It deliberately does not merge events across articles or create cross-article canonical claim groups, relations, timelines or conflicts. Therefore useful multi-source event comparison still requires a separately reviewed cross-article matching policy.
+
+## Existing event architecture audit
+
+| Module | Input | Output / persistence | Current callers | Idempotence | External dependency / limitation |
+|---|---|---|---|---|---|
+| `event-matching.js` | already structured event candidate | validated review candidate and deterministic key | runtime wrapper, tests, shadow event projection | normalized key | no extraction; permissive type syntax |
+| `runtime-event-matching.js` | structured candidate and V2 gate | candidate or invalid/disabled result | canonical E2E, tests, shadow orchestrator | read/write free | zero provider calls |
+| `event-matching-repository.js` | validated candidate plus evidence IDs | `v2_events`, `v2_event_articles`, `v2_event_entities` | canonical E2E, MySQL tests, shadow orchestrator | event key, article unique key and locked entity upsert | caller owns transaction |
+| `shadow-event-projection.js` | validated claims, persisted claim evidence, resolved mentions | conservative article-local candidates or structured skips | shadow orchestrator | article + semantic role + exact evidence key | three safe predicates only; no paid or V2.2 dependency |
+| `temporal-graph*` | existing event/entity owner and explicit temporal item | timelines and items | tests/read paths only | repository keys | not called by shadow |
+| event read APIs | persisted event memberships | event/context/source-comparison views | authenticated/flagged API readers | read-only | cross-article comparison remains sparse until matching is approved |
+
+The schema already provides event, article membership and participant membership tables with claim-evidence foreign keys. No migration is needed. The existing matcher can suggest review merges, but it is not invoked for cross-article mutation in this phase because shared entity, generic predicate and nearby time are insufficient proof of event identity.
+
+Later timeline work needs explicit event time or safely unknown time, stable event identity, article membership, participant roles and evidence provenance. This phase supplies all except reviewed cross-article identity and does not create timeline rows.
 
 ## Rollout and rollback
 

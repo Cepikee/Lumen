@@ -54,7 +54,7 @@ function localProviders(calls = { entity: 0, claim: 0 }) {
 }
 
 function harness(overrides = {}) {
-  const state = { claimed: false, completed: false, failed: false, entities: [], resolutions: [], claims: [] };
+  const state = { claimed: false, completed: false, failed: false, entities: [], resolutions: [], claims: [], events: [] };
   const currentArticle = overrides.article || article();
   const repository = {
     async loadCompletedArticle() { return currentArticle; },
@@ -80,7 +80,11 @@ function harness(overrides = {}) {
     },
     async persistClaimsWithEvidence(_connection, input) {
       state.claims = input.claims;
-      return { count: input.claims.length, claims: input.claims.map((_, index) => ({ claimId: index + 41 })) };
+      return { count: input.claims.length, claims: input.claims.map((_, index) => ({ claimId: index + 41, evidenceId: index + 51 })) };
+    },
+    async persistEventCandidate(_connection, candidate) {
+      state.events.push(candidate);
+      return { eventId: state.events.length + 60, articleId: candidate.articleId, entityCount: candidate.entities.length, status: candidate.status, merged: false };
     },
     ...(overrides.dependencies || {}),
   };
@@ -118,7 +122,120 @@ test("enabled shadow extracts, resolves, and persists evidence-backed claims", a
   assert.equal(flow.state.claims.length, 1);
   assert.deepEqual(calls, { entity: 1, claim: 1 });
   assert.equal(result.metrics.externalProviderCalls, 0);
-  assert.equal(result.metrics.eventPreparation, "deferred_no_safe_candidate_extractor");
+  assert.equal(result.metrics.eventPreparation, "skipped");
+  assert.equal(result.metrics.eventsFound, 0);
+});
+
+test("supported evidence-backed event is persisted exactly once and rerun is reused", async () => {
+  const textSpan = "Anna új buszokat vásárol.";
+  const providers = localProviders();
+  providers.entityProvider = {
+    name: "deterministic-semantic",
+    model: "deterministic-semantic-entity-event",
+    async extractEntities(input) {
+      const start = input.text.indexOf("Anna");
+      return { entities: [{ mentionText: "Anna", normalizedCandidateName: "Anna", entityType: "person", confidence: 0.95, evidence: { start, end: start + 4 } }] };
+    },
+  };
+  providers.claimProvider = {
+    name: "deterministic-semantic",
+    model: "deterministic-semantic-claim-event",
+    async extractClaims(input) {
+      const start = input.text.indexOf(textSpan);
+      return { claims: [{ predicate: "BUS_PURCHASE", claimType: "text", value: "bus-purchase", confidence: 0.9, polarity: "affirmed", conditional: false, uncertainty: false, modality: "asserted", evidence: { start, end: start + textSpan.length, textSpan } }] };
+    },
+  };
+  const flow = harness({ article: article({ title: textSpan, contentText: "Részletek." }) });
+  const first = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...providers, repository: flow.repository, dependencies: flow.dependencies });
+  const second = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...providers, repository: flow.repository, dependencies: flow.dependencies });
+  assert.equal(first.status, "completed");
+  assert.equal(first.metrics.eventsFound, 1);
+  assert.equal(flow.state.events.length, 1);
+  assert.equal(flow.state.events[0].evidenceId, 51);
+  assert.equal(second.reason, "already_completed");
+  assert.equal(flow.state.events.length, 1);
+});
+
+test("event and memberships are persisted through the shadow transaction boundary", async () => {
+  const textSpan = "Anna új buszokat vásárol.";
+  const providers = localProviders();
+  providers.claimProvider = {
+    name: "deterministic-semantic",
+    model: "deterministic-semantic-claim-atomic",
+    async extractClaims(input) {
+      const start = input.text.indexOf(textSpan);
+      return { claims: [{ subjectEntityId: 31, predicate: "BUS_PURCHASE", claimType: "text", value: "bus-purchase", confidence: 0.9, evidence: { start, end: start + textSpan.length, textSpan } }] };
+    },
+  };
+  let transactionDepth = 0;
+  let persistedInsideTransaction = false;
+  const flow = harness({ article: article({ title: textSpan, contentText: "Részletek." }) });
+  flow.repository.withTransaction = async (work) => {
+    transactionDepth += 1;
+    try { return await work({}); } finally { transactionDepth -= 1; }
+  };
+  flow.dependencies.persistEventCandidate = async (_connection, candidate) => {
+    persistedInsideTransaction = transactionDepth === 1;
+    flow.state.events.push(candidate);
+    return { eventId: 61, articleId: candidate.articleId, entityCount: 1, status: "candidate", merged: false };
+  };
+  const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...providers, repository: flow.repository, dependencies: flow.dependencies });
+  assert.equal(result.status, "completed");
+  assert.equal(persistedInsideTransaction, true);
+});
+
+test("event stage emits bounded structured lifecycle events without article text", async () => {
+  const logs = [];
+  const providers = localProviders();
+  const flow = harness();
+  const result = await runV2ShadowIntelligence(null, 7, {
+    env: ENABLED,
+    ...providers,
+    repository: flow.repository,
+    dependencies: flow.dependencies,
+    logger(event) { logs.push(event); },
+  });
+  assert.equal(result.status, "completed");
+  assert.ok(logs.some((event) => event.event === "v2_shadow_event_started"));
+  assert.ok(logs.some((event) => event.event === "v2_shadow_event_skipped" && event.reason === "deferred_insufficient_evidence"));
+  assert.equal(logs.some((event) => JSON.stringify(event).includes(article().contentText)), false);
+});
+
+test("event persistence failure preserves prior entity and claim output while shadow fails", async () => {
+  const textSpan = "Anna új buszokat vásárol.";
+  const providers = localProviders();
+  providers.claimProvider = {
+    name: "deterministic-semantic",
+    model: "deterministic-semantic-claim-event-failure",
+    async extractClaims(input) {
+      const start = input.text.indexOf(textSpan);
+      return { claims: [{ subjectEntityId: 31, predicate: "BUS_PURCHASE", claimType: "text", value: "bus-purchase", confidence: 0.9, polarity: "affirmed", evidence: { start, end: start + textSpan.length, textSpan } }] };
+    },
+  };
+  const flow = harness({
+    article: article({ title: textSpan, contentText: "Részletek." }),
+    dependencies: { async persistEventCandidate() { throw new Error("fixture_event_write_failed"); } },
+  });
+  const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...providers, repository: flow.repository, dependencies: flow.dependencies });
+  assert.equal(result.status, "failed");
+  assert.match(result.error, /v2_shadow_event_failed:fixture_event_write_failed/);
+  assert.equal(flow.state.entities.length, 1);
+  assert.equal(flow.state.claims.length, 1);
+  assert.equal(flow.state.failed, true);
+  assert.equal(flow.state.completed, false);
+});
+
+test("malformed event projection fails before event persistence", async () => {
+  let eventWrites = 0;
+  const providers = localProviders();
+  const flow = harness({ dependencies: {
+    buildEvidenceBackedEventCandidates() { return { status: "completed", candidates: [{ broken: true }], skipped: [] }; },
+    async persistEventCandidate() { eventWrites += 1; },
+  } });
+  const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...providers, repository: flow.repository, dependencies: flow.dependencies });
+  assert.equal(result.status, "failed");
+  assert.match(result.error, /v2_shadow_event_invalid_candidate/);
+  assert.equal(eventWrites, 0);
 });
 
 test("shadow persistence failure is contained and marks only shadow state failed", async () => {
