@@ -155,10 +155,8 @@ test("V2.1 canonical raw article -> knowledge graph acceptance gate", { skip: !e
     const comparison = await compareSources(connection, { type: "event", id: eventId });
     assert.deepEqual(comparison.sources.map((source) => source.name).sort(), sources.slice().sort());
     const detailed = await compareSourcesDetailed(connection, { type: "event", id: eventId });
-    assert.equal(detailed.claims.length, 4);
-    assert.ok(detailed.claims.some((claim) => claim.coverage === "shared"));
-    const numericComparison = detailed.claims.find((claim) => claim.predicate === "INVESTMENT_AMOUNT");
-    assert.equal(numericComparison.observations.length, 2);
+    assert.equal(detailed.status, "empty");
+    assert.deepEqual(detailed.claims, [], "event memberships without claim evidence must not expose article claims");
     const firstClaim = articles[0].claims[0];
     assert.ok(await getClaim(connection, firstClaim.claimId));
     const conflictAttempt = runConflictDetection({ left: { id: articles[0].claims[0].claimId, subjectEntityId: articles[0].anchorId, predicate: "INVESTMENT_AMOUNT", claimType: "numeric", value: { value: 120, unit: "HUF" }, normalizedValue: "120" }, right: { id: articles[1].claims[0].claimId, subjectEntityId: articles[1].anchorId, predicate: "INVESTMENT_AMOUNT", claimType: "numeric", value: { value: 150, unit: "HUF" }, normalizedValue: "150" } }, { enabled: true });

@@ -1,6 +1,6 @@
 # UTOM current state
 
-Canonical as of **2026-10-19**, based on local commit `9029552fe54df1f9569ed4d41fdeb206fd4d09a6` plus the current reviewable relation/event/timeline shadow working-tree change on `develop/utom-recovery`. This file supersedes historical progress and milestone documents for current operational decisions.
+Canonical as of **2026-10-19**, based on local commit `8ce7ac19a287a77ff889750a9cc1faf3436e6fc8` plus the current reviewable source-comparison shadow working-tree change on `develop/utom-recovery`. This file supersedes historical progress and milestone documents for current operational decisions.
 
 ## Project
 
@@ -72,6 +72,8 @@ The production core includes article ingestion and publication, AI summaries, ca
 - Relations are projected only from validated claims that already carry a canonical relation predicate, two explicit resolved entity IDs and persisted evidence. Negated, conditional, uncertain, attributed, unsupported, ambiguous or evidence-free claims abstain. Relation and relation-evidence writes use the existing V2 tables in one transaction and an article/evidence-scoped shadow identity.
 - Event, article membership and participant membership writes use the existing V2 event tables in one transaction. Timeline rows are then written in a separate caller-owned transaction only for those persisted evidence-backed events. The article-local timeline preserves exact/date/month/year/range precision, retains unknown time, never substitutes publication time and excludes planned events. Conflicts and V2.2 research remain unwired.
 - The timeline read path verifies the persisted event → article membership → claim evidence → article chain before returning an item. Empty timelines return a normal empty collection; malformed or incomplete provenance is hidden rather than presented as ready intelligence.
+- Source comparison is a read-time composition over canonical source IDs and evidence-backed atomic claims. `shared` now requires identical resolved subject/object, predicate, value/unit, temporal scope, attribution, qualifiers and public status across at least two distinct sources. Different values remain neutral source-only observations, missing coverage is `not_covered`, and neither state is classified as a conflict.
+- Event-scoped comparison reads only the claim referenced by each event membership evidence row; it no longer treats every claim in a member article as event evidence. Claims with missing evidence, noncanonical sources or unresolved subject/object identities abstain. Same-source articles collapse to one source observation while retaining article and evidence references.
 - V2 read APIs and article/source/premium panels exist behind server and browser flags; they depend on populated V2 read models.
 - Email, maintenance and pipeline unit templates exist in the repository but are not proof of host installation.
 
@@ -119,13 +121,13 @@ V2.2 deterministic NLP, HuSpaCy/Stanza/local-worker experiments, semantic roles,
 1. Review/install `utom-pipeline.service` in a controlled deployment window and verify one healthy worker plus stale-lease recovery.
 2. Verify schema 064 and run production preflight against the intended host without exposing secrets.
 3. Install email and maintenance timers, then monitor first activations and reconcile any uncertain email rows.
-4. Review the evidence-based shadow relation/event/timeline working-tree change and, in a separate controlled deployment decision, decide whether to enable both server flags for new articles. Keep historical backfill disabled.
+4. Review the evidence-based shadow relation/event/timeline and source-comparison working-tree change. Source comparison is read-only and remains behind the existing server/browser gates; do not activate its UI until cross-article event membership is independently accepted. Keep historical backfill disabled.
 5. Create a checksummed external archive for local V2.2 agent runs and historical root scratch files.
 
 ## Last verified
 
 - Date: 2026-10-19 (Europe/Budapest)
 - Branch: `develop/utom-recovery`
-- Base commit: `9029552fe54df1f9569ed4d41fdeb206fd4d09a6`
+- Base commit: `8ce7ac19a287a77ff889750a9cc1faf3436e6fc8`
 - Inventory: `docs/recovery/repository-inventory.json`
 - Validation results: `docs/recovery/VALIDATION_REPORT.md`; production was not deployed.

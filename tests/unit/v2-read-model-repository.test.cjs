@@ -13,7 +13,7 @@ function connection() {
     if (/FROM v2_event_articles/.test(sql) && /SELECT DISTINCT a/.test(sql)) return [[{ id: 8, source: " 24.hu ", sourceId: 3, publishedAt: "2026-01-02T00:00:00.000Z" }], []];
     if (/FROM v2_claims/.test(sql)) return [[{ id: 4, claimType: "numeric", valueJson: '{"value":5,"unit":"kg"}', status: "observed", validFrom: null, validUntil: null, subjectId: 1, subjectName: "Ada" }], []];
     if (/FROM v2_claim_evidence/.test(sql)) return [[{ articleId: 8, sourceId: 3, source: "24.hu", publishedAt: "2026-01-02T00:00:00.000Z", excerpt: "validated span" }], []];
-    if (/FROM v2_event_articles ea JOIN articles/.test(sql)) return [[{ sourceId: 3, source: "24.hu", articleCount: "2", firstPublishedAt: "2026-01-01T00:00:00.000Z", lastPublishedAt: "2026-01-02T00:00:00.000Z" }], []];
+    if (/FROM v2_event_articles ea JOIN articles/.test(sql)) return [[{ sourceId: 3, sourceKey: "24.hu", source: "24.hu", articleCount: "2", firstPublishedAt: "2026-01-01T00:00:00.000Z", lastPublishedAt: "2026-01-02T00:00:00.000Z" }], []];
     throw new Error(`unexpected_sql:${sql}`);
   } };
 }
@@ -38,7 +38,7 @@ test("M13 event and claim projections keep public semantics", async () => {
 test("M13 source comparison uses one scoped, stable, non-ranking query", async () => {
   const result = await compareSources(connection(), { type: "event", id: 2 });
   assert.deepEqual(result.scope, { type: "event", id: 2 });
-  assert.deepEqual(result.sources[0], { id: 3, name: "24.hu", articleCount: 2, firstPublishedAt: "2026-01-01T00:00:00.000Z", lastPublishedAt: "2026-01-02T00:00:00.000Z" });
+  assert.deepEqual(result.sources[0], { id: 3, key: "24.hu", name: "24.hu", articleCount: 2, firstPublishedAt: "2026-01-01T00:00:00.000Z", lastPublishedAt: "2026-01-02T00:00:00.000Z" });
   await assert.rejects(() => compareSources(connection(), { type: "other", id: 2 }), /scope_type_invalid/);
 });
 
