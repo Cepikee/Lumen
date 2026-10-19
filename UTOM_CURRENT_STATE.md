@@ -1,6 +1,6 @@
 # UTOM current state
 
-Canonical as of **2026-10-18**, verified against local commit `9b3161fd5aa8ccdeb8784f1c2366e40314426bcc` on `develop/utom-recovery`. This file supersedes historical progress and milestone documents for current operational decisions.
+Canonical as of **2026-10-19**, based on local commit `bb72af91c8ad1ae1b230ed573c084ab268b4c9b3` plus the current reviewable V2 shadow working-tree change on `develop/utom-recovery`. This file supersedes historical progress and milestone documents for current operational decisions.
 
 ## Project
 
@@ -46,6 +46,7 @@ Values are deliberately omitted.
 | `DB_WRITE_ENABLED` | permits guarded database mutation paths |
 | `UTOM_PAID_AI_ENABLED`, `REAL_AI_ENABLED`, `AI_PROVIDER` | paid AI/provider gates |
 | `UTOM_V2_ENABLED` | server-side V2 shadow/read capability |
+| `UTOM_V2_SHADOW_ENABLED` | explicit server-side post-completion V2 shadow writer opt-in; also requires `UTOM_V2_ENABLED` |
 | `NEXT_PUBLIC_UTOM_V2_ENABLED` | browser V2 panels; must not exceed server authorization |
 | `IMAGE_GEN_ENABLED`, `IMAGE_GEN_MIN_ARTICLE_ID`, `IMAGE_GEN_BACKFILL_EXISTING` | illustration worker and safe rollout |
 | `EMAIL_SEND_ENABLED` | email transport side effect |
@@ -60,10 +61,14 @@ Secret-bearing environment variable names are documented in `.env.example`; secr
 
 The production core includes article ingestion and publication, AI summaries, categories, sentiment, keywords, trends, clickbait scoring, clustering/related news, Speed Index, generated illustrations, homepage/feed, article detail, Insights, authentication/session/reset flows and premium entitlement enforcement.
 
-## Implemented but not fully wired
+## Implemented but disabled V2 shadow path
 
-- V2 entity extraction is available as an optional shadow pipeline step.
-- V2 entity resolution, claims/evidence, relations, events/matching, temporal graph, conflicts/confidence and AI cost routing are implemented and tested but lack a complete canonical production writer chain.
+- The canonical pipeline now has one post-completion V2 shadow orchestrator. It runs only after V1 has durably set `status='done'` and `processed=1` and has a second no-throw boundary in the worker.
+- `UTOM_V2_ENABLED=true` and `UTOM_V2_SHADOW_ENABLED=true` are both required. The default remains OFF. No deployment or production configuration change was made.
+- The first shadow chain uses only the local deterministic cost route and providers: canonical envelope, entity extraction/normalization, idempotent mention persistence, conservative entity resolution, validated claim extraction and exact evidence persistence.
+- The shadow state reuses schema 064 `v2_processing_steps`; no migration was needed. A content fingerprint and claim token fence concurrent runs, completed reruns are reused, and failures remain retryable without altering V1.
+- Paid/unknown providers fail closed before a DB read or provider invocation. OpenAI and Cloudflare are not imported by the orchestrator; external provider calls remain zero.
+- Event preparation currently returns the explicit diagnostic `deferred_no_safe_candidate_extractor`. Relations, event graph writes, timelines, conflicts and V2.2 research are not wired by this change.
 - V2 read APIs and article/source/premium panels exist behind server and browser flags; they depend on populated V2 read models.
 - Email, maintenance and pipeline unit templates exist in the repository but are not proof of host installation.
 
@@ -111,13 +116,13 @@ V2.2 deterministic NLP, HuSpaCy/Stanza/local-worker experiments, semantic roles,
 1. Review/install `utom-pipeline.service` in a controlled deployment window and verify one healthy worker plus stale-lease recovery.
 2. Verify schema 064 and run production preflight against the intended host without exposing secrets.
 3. Install email and maintenance timers, then monitor first activations and reconcile any uncertain email rows.
-4. Decide whether to start V2-A shadow extraction using the staged acceptance plan.
+4. Review the V2 shadow working-tree change and, in a separate controlled deployment decision, decide whether to enable both server flags for new articles. Keep historical backfill disabled.
 5. Create a checksummed external archive for local V2.2 agent runs and historical root scratch files.
 
 ## Last verified
 
-- Date: 2026-10-18 (Europe/Budapest)
+- Date: 2026-10-19 (Europe/Budapest)
 - Branch: `develop/utom-recovery`
-- Base commit: `9b3161fd5aa8ccdeb8784f1c2366e40314426bcc`
+- Base commit: `bb72af91c8ad1ae1b230ed573c084ab268b4c9b3`
 - Inventory: `docs/recovery/repository-inventory.json`
 - Validation results: `docs/recovery/VALIDATION_REPORT.md`; production was not deployed.

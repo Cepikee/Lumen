@@ -27,10 +27,7 @@ const { validateWorkerEnvironment, assertSchemaReadiness, registerWorker, heartb
 const { getRuntimeConfig } = require("../lib/config/runtime");
 const { adaptOptionalDedupClusterSnapshot } = require("../lib/v2/runtime-dedup-cluster");
 const { isV2Enabled } = require("../lib/v2/feature-flags");
-const { createV2RequestContext } = require("../lib/v2/request-context");
-const { createIngestionEnvelope } = require("../lib/v2/ingestion-envelope");
-const { runEntityExtraction } = require("../lib/v2/runtime-entity-extraction");
-const { persistEntityExtraction } = require("../lib/v2/entity-extraction-repository");
+const { runV2ShadowIntelligence } = require("../lib/v2/shadow-intelligence");
 
 // ANSI színek
 const RESET = "\x1b[0m";
@@ -273,31 +270,6 @@ async function processArticlePipeline(article, claim) {
       reusedContent: true,
       contentLength: article.content_text.length,
     }));
-  }
-
-  // M4 is an additive, optional shadow step. It consumes the canonical M2
-  // envelope once the article text is stable and never changes legacy state.
-  if (isV2Enabled()) {
-    const entityContext = createV2RequestContext({ articleId });
-    const entityEnvelope = createIngestionEnvelope({
-      originalUrl: article.url_canonical,
-      title: article.title,
-      content: article.content_text,
-      source: article.source,
-      observedAt: new Date().toISOString(),
-    }, { context: entityContext });
-    if (entityEnvelope.outcome === "normalized") {
-      await runDurableStep(claim, "entity_extraction", "[ENTITY] 🧩 Entitások", async () => {
-        const outcome = await runEntityExtraction(entityEnvelope.envelope, entityContext, { enabled: true });
-        return { ...outcome, envelopeVersion: entityEnvelope.envelope.envelopeVersion };
-      }, { optional: true, project: (connection, result) => persistEntityExtraction(connection, {
-        articleId,
-        envelope: entityEnvelope.envelope,
-        outcome: result,
-      }) });
-    } else {
-      cronLog(JSON.stringify({ event: "m4_entity_extraction_skipped", articleId, reason: entityEnvelope.reason }));
-    }
   }
 
   // 1) Rövid összefoglaló
@@ -584,6 +556,24 @@ Korlátozások:
   return v2DedupCluster ? { v2: { dedupCluster: v2DedupCluster } } : undefined;
 }
 
+async function runPostCompletionShadow(articleId) {
+  try {
+    return await runV2ShadowIntelligence(pool, articleId, {
+      logger(event) { cronLog(JSON.stringify(event)); },
+    });
+  } catch (error) {
+    // A shadow boundary is deliberately duplicated here: even an unexpected
+    // orchestrator programming error cannot flow back into V1 failure state.
+    cronLog(JSON.stringify({
+      event: "v2_shadow_failed",
+      articleId: Number(articleId),
+      error: redact(error?.message || error),
+      boundary: "post_completion",
+    }));
+    return { status: "failed", articleId: Number(articleId), error: "shadow_boundary_failure" };
+  }
+}
+
 // ─────────────────────────────────────────────
 //  BATCH FELDOLGOZÁS — 3 concurrency
 // ─────────────────────────────────────────────
@@ -604,6 +594,7 @@ async function processBatch(batch) {
       await processArticlePipeline(article, claim);
       await pipelineState.finishArticle(claim);
       await heartbeatWorker(pool, WORKER_ID, "completion");
+      await runPostCompletionShadow(article.id);
     } catch (err) {
       console.error(
         `❌ ${RED}Hiba (${article.id}): ${err.message}${RESET}`
@@ -781,4 +772,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { processArticlePipeline, runPipelineWorker, shutdownPipelineResources, runPendingSpeedIndexBatch: (options) => runPendingSpeedIndexBatch(pool, options) };
+module.exports = { processArticlePipeline, runPostCompletionShadow, runPipelineWorker, shutdownPipelineResources, runPendingSpeedIndexBatch: (options) => runPendingSpeedIndexBatch(pool, options) };

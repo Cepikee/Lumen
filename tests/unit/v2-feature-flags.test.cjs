@@ -2,7 +2,7 @@
 
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { CANONICAL_V2_FLAG, isV2Enabled } = require("../../lib/v2/feature-flags");
+const { CANONICAL_V2_FLAG, V2_SHADOW_FLAG, isV2Enabled, isV2ShadowEnabled } = require("../../lib/v2/feature-flags");
 const { getRuntimeConfig } = require("../../lib/config/runtime");
 
 test("V2 feature flag is canonical, narrow and fail-closed", () => {
@@ -13,6 +13,13 @@ test("V2 feature flag is canonical, narrow and fail-closed", () => {
   for (const value of ["true", "TRUE", "1", "yes", "on"]) {
     assert.equal(isV2Enabled({ UTOM_OFFLINE_MODE: "false", UTOM_V2_ENABLED: value }), true, value);
   }
+});
+
+test("V2 shadow requires both the canonical V2 gate and its explicit opt-in", () => {
+  assert.equal(V2_SHADOW_FLAG, "UTOM_V2_SHADOW_ENABLED");
+  assert.equal(isV2ShadowEnabled({ UTOM_V2_ENABLED: "false", UTOM_V2_SHADOW_ENABLED: "true" }), false);
+  assert.equal(isV2ShadowEnabled({ UTOM_V2_ENABLED: "true", UTOM_V2_SHADOW_ENABLED: "false" }), false);
+  assert.equal(isV2ShadowEnabled({ UTOM_V2_ENABLED: "true", UTOM_V2_SHADOW_ENABLED: "true" }), true);
 });
 
 test("V2 flag remains independently testable in offline mode without enabling side effects", () => {
