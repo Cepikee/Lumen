@@ -57,4 +57,40 @@ test("M8 persistence uses stable observation/evidence identity and caller-owned 
   assert.equal(calls.some((call) => /START TRANSACTION|COMMIT|ROLLBACK/.test(call.sql)), false);
 });
 
+test("M8 persistence converts every DATETIME input to MySQL UTC syntax", async () => {
+  const calls = [];
+  const connection = { execute: async (sql, params) => {
+    calls.push({ sql, params });
+    if (/v2_claim_groups/.test(sql)) return [{ insertId: 41, affectedRows: 1 }];
+    if (/v2_claims/.test(sql)) return [{ insertId: 42, affectedRows: 1 }];
+    if (/v2_claim_evidence/.test(sql)) return [{ insertId: 43, affectedRows: 1 }];
+    throw new Error("unexpected_sql");
+  } };
+  const claim = validateClaimResult(input, { claims: [{
+    ...rawClaim,
+    validFrom: "2026-10-20T10:00:00.000Z",
+    validUntil: "2026-10-21T11:30:00.000Z",
+  }] }).result.claims[0];
+  await persistClaimsWithEvidence(connection, {
+    claims: [claim],
+    articleId: 11,
+    sourceId: 4,
+    extractionRunId: 8,
+    observedAt: "2026-10-20T12:00:00.000Z",
+    publicationTime: "2026-10-20T10:00:00.000Z",
+  });
+  const claimParams = calls.find((call) => /INSERT INTO v2_claims/.test(call.sql)).params;
+  assert.deepEqual(claimParams.slice(8, 12), [
+    "2026-10-20 10:00:00.000",
+    "2026-10-21 11:30:00.000",
+    "2026-10-20 12:00:00.000",
+    "2026-10-20 10:00:00.000",
+  ]);
+  const evidenceParams = calls.find((call) => /INSERT INTO v2_claim_evidence/.test(call.sql)).params;
+  assert.equal(evidenceParams.at(-1), "2026-10-20 10:00:00.000");
+  for (const value of [...claimParams.slice(8, 12), evidenceParams.at(-1)]) {
+    assert.doesNotMatch(value, /[TZ]/u);
+  }
+});
+
 console.log("M8 claim extraction contract regression: PASS");

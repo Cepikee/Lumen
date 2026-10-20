@@ -9,15 +9,12 @@ const { execFileSync } = require("node:child_process");
 const mysql = require("mysql2/promise");
 const { applyMigrations, auditMigrationChain, loadMigrations } = require("../db/migration-core.cjs");
 const { runV2ShadowIntelligence } = require("../lib/v2/shadow-intelligence.js");
-const { runEventMatching } = require("../lib/v2/runtime-event-matching.js");
-const { persistEventCandidate, resolveCrossArticleEventGroup } = require("../lib/v2/event-matching-repository.js");
-const { persistClaimsWithEvidence } = require("../lib/v2/claim-extraction-repository.js");
-const { persistTimelineItem } = require("../lib/v2/temporal-graph-repository.js");
+const { resolveCrossArticleEventGroup } = require("../lib/v2/event-matching-repository.js");
 const { compareSourcesDetailed } = require("../lib/v2/read-model-repository.js");
 const { runConflictDetection } = require("../lib/v2/runtime-conflict-history.js");
 const {
   SYNTHETIC_POSITIVE_FIXTURES, assertAcceptanceOptIn, assertAcceptanceProvider, buildRunId,
-  classifyAcceptanceResult, createAcceptanceDatabaseController, createProductionReadAdapter,
+  classifyAcceptanceResult, createAcceptanceDatabaseController, createProductionReadAdapter, hasSyntheticSemanticCoverage,
   parseAcceptanceMode, parseArticleIds, validateArticleFixtures,
 } = require("../lib/acceptance/v2-vps-harness.js");
 
@@ -74,7 +71,7 @@ async function createSyntheticFixtures(connection) {
       [fixture.sourceSlug, fixture.sourceName, `https://${fixture.sourceSlug}.invalid`, `https://${fixture.sourceSlug}.invalid/feed`],
     );
     const sourceId = Number(sourceInsert.insertId);
-    const urlCanonical = `https://${fixture.sourceSlug}.invalid/alpha-debrecen-${index + 1}`;
+    const urlCanonical = `https://${fixture.sourceSlug}.invalid/zold-busz-${index + 1}`;
     const [articleInsert] = await connection.execute(
       `INSERT INTO articles (title,url_canonical,original_url,content_text,published_at,publication_time_source,
           language,source_id,source,content_hash,processed,status,created_at,updated_at)
@@ -87,9 +84,8 @@ async function createSyntheticFixtures(connection) {
 }
 async function createSyntheticReferenceEntities(connection) {
   const definitions = [
-    ["company", "Alpha Kft.", "alpha kft"],
-    ["project", "Alpha debreceni gyárberuházás", "alpha debreceni gyarberuhazas"],
-    ["location", "Debrecen", "debrecen"],
+    ["organization", "BKK Zrt.", "bkk"],
+    ["project", "Zöld Busz Program", "zöld busz program"],
   ];
   const ids = [];
   for (const [type, canonical, normalized] of definitions) {
@@ -100,68 +96,7 @@ async function createSyntheticReferenceEntities(connection) {
     );
     ids.push(Number(insert.insertId));
   }
-  return { subjectId: ids[0], objectId: ids[1], locationId: ids[2] };
-}
-function exactSpan(text, excerpt) {
-  const start = text.indexOf(excerpt);
-  if (start < 0) throw new Error("synthetic_evidence_missing");
-  return { start, end: start + excerpt.length, textSpan: excerpt };
-}
-async function runSyntheticCanonicalFixture(connection, fixtures, entities) {
-  const eventIds = [];
-  for (const [index, article] of fixtures.entries()) {
-    const persisted = await persistClaimsWithEvidence(connection, {
-      articleId: article.id,
-      sourceId: article.sourceId,
-      publicationTime: article.publishedAt,
-      observedAt: new Date(article.publishedAt),
-      actor: "v2.acceptance.synthetic",
-      operationKeyPrefix: "v2-acceptance-synthetic-positive",
-      claims: [{
-        subjectEntityId: entities.subjectId,
-        objectEntityId: entities.objectId,
-        predicate: "OPENING_EVENT",
-        value: true,
-        normalizedValue: "true",
-        claimText: article.evidence,
-        claimType: "boolean",
-        status: "observed",
-        confidence: 0.95,
-        supportType: "support",
-        attributionType: "direct",
-        polarity: "affirmed",
-        uncertainty: false,
-        conditional: false,
-        modality: "completed",
-        validFrom: "2026-10-20T10:00:00.000Z",
-        validUntil: null,
-        evidence: exactSpan(article.text, article.evidence),
-      }],
-    });
-    const evidenceId = persisted.claims[0].evidenceId;
-    const result = runEventMatching({
-      eventType: "facility_announcement",
-      canonicalTitle: `${article.sourceSlug}: Alpha debreceni gyárberuházás`,
-      normalizedKey: `acceptance-alpha-debrecen-${index + 1}`,
-      articleId: article.id,
-      startAt: "2026-10-20T10:00:00.000Z",
-      endAt: "2026-10-20T10:00:00.000Z",
-      confidence: 0.95,
-      status: "active",
-      membershipType: "primary",
-      evidenceId,
-      entities: [
-        { entityId: entities.subjectId, role: "subject", confidence: 1, evidenceId },
-        { entityId: entities.objectId, role: "project", confidence: 1, evidenceId },
-        { entityId: entities.locationId, role: "location", confidence: 1, evidenceId },
-      ],
-    }, { enabled: true });
-    if (result.status !== "candidate") throw new Error(`synthetic_event_invalid:${result.errors?.join(",") || result.status}`);
-    const event = await persistEventCandidate(connection, result.candidate);
-    eventIds.push(event.eventId);
-    await persistTimelineItem(connection, { ownerType: "article", ownerId: article.id, item: { itemType: "event", itemId: event.eventId, validAt: "2026-10-20T10:00:00.000Z", displayAt: article.publishedAt, confidence: 0.95, visibility: "public", orderingKey: `0-known/2026-10-20T10:00:00.000Z/0/${String(index + 1).padStart(4, "0")}` } });
-  }
-  return { eventIds, entities, providerCalls: 0 };
+  return { subjectId: ids[0], objectId: ids[1] };
 }
 async function tableCounts(connection) {
   const tables = ["v2_entities", "v2_entity_mentions", "v2_claims", "v2_claim_evidence", "v2_entity_relations", "v2_events", "v2_event_articles", "v2_timelines", "v2_timeline_items", "v2_conflicts"];
@@ -262,18 +197,13 @@ async function main() {
     log("acceptance_fixture_created", { database: acceptanceDb, articleCount: fixtures.length, sourceCount: new Set(fixtures.map((row) => row.sourceId)).size });
 
     const runtimeEnv = { ...process.env, UTOM_V2_ENABLED: "true", UTOM_V2_SHADOW_ENABLED: "true", UTOM_OFFLINE_MODE: "true", UTOM_PAID_AI_ENABLED: "false", REAL_AI_ENABLED: "false", AI_PROVIDER: assertAcceptanceProvider("deterministic-semantic"), DB_WRITE_ENABLED: "false" };
-    let syntheticProjection = null;
-    const syntheticEntities = mode === "synthetic-positive" ? await bounded("synthetic_reference_entities", () => createSyntheticReferenceEntities(acceptancePool), 30_000) : null;
+    if (mode === "synthetic-positive") await bounded("synthetic_reference_entities", () => createSyntheticReferenceEntities(acceptancePool), 30_000);
     for (const articleId of report.articleIds) {
       const result = await bounded(`article_${articleId}`, () => runV2ShadowIntelligence(acceptancePool, articleId, { env: runtimeEnv, logger: (entry) => log("acceptance_v2_trace", entry) }), 120_000);
       report.articles.push(result); report.safety.externalProviderCalls += Number(result.externalProviderCalls || result.metrics?.externalProviderCalls || 0);
       log("acceptance_article_processed", { articleId, status: result.status, metrics: result.metrics || null, error: result.error || null });
     }
-    if (mode === "synthetic-positive") {
-      syntheticProjection = await bounded("synthetic_canonical_projection", () => runSyntheticCanonicalFixture(acceptancePool, fixtures, syntheticEntities), 120_000);
-    }
-
-    const eventIds = syntheticProjection?.eventIds || await eventIdsForArticles(acceptancePool, report.articleIds);
+    const eventIds = await eventIdsForArticles(acceptancePool, report.articleIds);
     const matchResults = [];
     for (const eventId of eventIds) matchResults.push(await bounded(`match_${eventId}`, () => resolveCrossArticleEventGroup(acceptancePool, eventId), 30_000));
     report.match = matchResults.sort((a, b) => Number(b.metrics?.matchesAccepted || 0) - Number(a.metrics?.matchesAccepted || 0))[0] || null;
@@ -316,7 +246,10 @@ async function main() {
     fs.writeFileSync(path.join(outputDir, "report.md"), reportMarkdown(jsonSafe(report)));
     log(report.result.verdict === "FAIL" ? "acceptance_failed" : "acceptance_completed", { verdict: report.result.verdict, category: report.result.category, reportDirectory: outputDir });
     const negative = report.mode === "production-negative";
-    process.stdout.write(`\n========================================\nUTOM V2 VPS ACCEPTANCE\n========================================\nMode: ${report.mode}\nProduction DB writes: ${report.safety.productionWritesExecuted || 0}\nAcceptance DB: ${acceptanceDb}\nArticles: ${report.articleIds.length}\nSources: ${new Set((report.inputArticles || []).map((row) => row.sourceId)).size}\n\nArticle-local V2: ${report.articles.every((row) => row.status === "completed") ? "PASS" : "FAIL"}\nExpected cross-article result: ${negative ? "NO MATCH" : "MATCH"}\nActual result: ${String(report.match?.status || "no_group").toUpperCase()}\n${negative ? `False merge prevention: ${report.match?.status === "matched" ? "FAIL" : "PASS"}` : `Provenance: ${report.provenance?.valid ? "PASS" : "FAIL"}`}\nTimeline: ${report.timeline?.valid && (!negative || !report.timeline.combined) ? "PASS" : "FAIL"}\nSource comparison: ${report.comparison?.status || "missing"}\nCross-event conflicts: ${report.conflicts.length}\nConflict safety: ${report.safety.conflictValid ? "PASS" : "FAIL"}\n\nOpenAI calls: 0\nExternal AI calls: ${report.safety.externalProviderCalls || 0}\n\nFINAL: ${report.result.verdict}\n\nReport:\n ${outputDir}\n========================================\n`);
+    const articleLocalPass = negative
+      ? report.articles.every((row) => row.status === "completed")
+      : report.articles.every(hasSyntheticSemanticCoverage);
+    process.stdout.write(`\n========================================\nUTOM V2 VPS ACCEPTANCE\n========================================\nMode: ${report.mode}\nProduction DB writes: ${report.safety.productionWritesExecuted || 0}\nAcceptance DB: ${acceptanceDb}\nArticles: ${report.articleIds.length}\nSources: ${new Set((report.inputArticles || []).map((row) => row.sourceId)).size}\n\nArticle-local V2: ${articleLocalPass ? "PASS" : "FAIL"}\nExpected cross-article result: ${negative ? "NO MATCH" : "MATCH"}\nActual result: ${String(report.match?.status || "no_group").toUpperCase()}\n${negative ? `False merge prevention: ${report.match?.status === "matched" ? "FAIL" : "PASS"}` : `Provenance: ${report.provenance?.valid ? "PASS" : "FAIL"}`}\nTimeline: ${report.timeline?.valid && (!negative || !report.timeline.combined) ? "PASS" : "FAIL"}\nSource comparison: ${report.comparison?.status || "missing"}\nCross-event conflicts: ${report.conflicts.length}\nConflict safety: ${report.safety.conflictValid ? "PASS" : "FAIL"}\n\nOpenAI calls: 0\nExternal AI calls: ${report.safety.externalProviderCalls || 0}\n\nFINAL: ${report.result.verdict}\n\nReport:\n ${outputDir}\n========================================\n`);
   }
   if (report.result.verdict !== "PASS") process.exitCode = 1;
 }

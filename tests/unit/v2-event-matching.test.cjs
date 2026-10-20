@@ -68,6 +68,31 @@ test("M9 event repository writes event, article membership and entity membership
   assert.match(calls.find((call) => /UPDATE v2_event_entities/.test(call.sql)).sql, /COALESCE\(evidence_id,\?\)/);
 });
 
+test("M9 event repository binds event and membership intervals in MySQL UTC syntax", async () => {
+  const calls = [];
+  const connection = { execute: async (sql, params) => {
+    calls.push({ sql, params });
+    if (/INSERT INTO v2_events/.test(sql)) return [{ insertId: 30, affectedRows: 1 }];
+    if (/INSERT INTO v2_event_articles/.test(sql)) return [{ insertId: 31, affectedRows: 1 }];
+    if (/GET_LOCK/.test(sql)) return [[{ acquired: 1 }]];
+    if (/RELEASE_LOCK/.test(sql)) return [[{ released: 1 }]];
+    if (/UPDATE v2_event_entities/.test(sql)) return [{ affectedRows: 1 }];
+    throw new Error("unexpected_sql");
+  } };
+  const candidate = validateEventCandidate({
+    ...input,
+    endAt: "2026-10-02T12:30:00.000Z",
+    entities: [{ entityId: 3, role: "buyer", validFrom: "2026-10-01T00:00:00.000Z", validUntil: "2026-11-01T00:00:00.000Z" }],
+  }).result;
+  await persistEventCandidate(connection, candidate);
+  const eventParams = calls.find((call) => /INSERT INTO v2_events/.test(call.sql)).params;
+  assert.deepEqual(eventParams.slice(4, 6), ["2026-10-01 00:00:00.000", "2026-10-02 12:30:00.000"]);
+  const entityParams = calls.find((call) => /UPDATE v2_event_entities/.test(call.sql)).params;
+  assert.equal(entityParams[1], "2026-11-01 00:00:00.000");
+  assert.equal(entityParams.at(-1), "2026-10-01 00:00:00.000");
+  for (const value of [...eventParams.slice(4, 6), entityParams[1], entityParams.at(-1)]) assert.doesNotMatch(value, /[TZ]/u);
+});
+
 test("M9 feature OFF is inert and ON returns a review-only candidate without AI", () => {
   const off = runEventMatching(input, { enabled: false });
   assert.deepEqual([off.status, off.providerCalls, off.reads, off.writes], ["disabled", 0, 0, 0]);

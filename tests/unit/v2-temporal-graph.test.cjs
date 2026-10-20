@@ -64,6 +64,31 @@ test("M10 repository remains caller-transactional and uses stable cursor SQL", a
   assert.equal(calls.some((call) => /COMMIT|ROLLBACK|START TRANSACTION/.test(call.sql)), false);
 });
 
+test("M10 timeline persistence binds every temporal field in MySQL UTC syntax", async () => {
+  const calls = [];
+  const connection = { execute: async (sql, params) => {
+    calls.push({ sql, params });
+    if (/INSERT INTO v2_timelines/.test(sql)) return [{ insertId: 21, affectedRows: 1 }];
+    if (/SELECT valid_at/.test(sql)) return [[], []];
+    if (/INSERT INTO v2_timeline_items/.test(sql)) return [{ insertId: 22, affectedRows: 1 }];
+    throw new Error("unexpected_sql");
+  } };
+  await persistTimelineItem(connection, {
+    ownerType: "article",
+    ownerId: 7,
+    item: {
+      ...base,
+      validAt: null,
+      validFrom: "2026-10-01T00:00:00.000Z",
+      validUntil: "2026-11-01T00:00:00.000Z",
+      displayAt: "2026-10-20T10:00:00.000Z",
+    },
+  });
+  const params = calls.find((call) => /INSERT INTO v2_timeline_items/.test(call.sql)).params;
+  assert.deepEqual(params.slice(3, 7), [null, "2026-10-01 00:00:00.000", "2026-11-01 00:00:00.000", "2026-10-20 10:00:00.000"]);
+  for (const value of params.slice(3, 7).filter(Boolean)) assert.doesNotMatch(value, /[TZ]/u);
+});
+
 test("article-local timeline read returns a safe empty result and hides no-data as success", async () => {
   const connection = { execute: async () => [[], []] };
   const result = await readArticleTimelineItems(connection, { articleId: 7, asOf: "2026-10-19T00:00:00Z", limit: 10 });

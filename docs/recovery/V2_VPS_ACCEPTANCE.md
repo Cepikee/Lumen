@@ -11,7 +11,7 @@ Az egyetlen harness két, egymást kiegészítő tulajdonságot ellenőriz. A `p
 - A production adapter csak `SELECT`, `SHOW`, `DESCRIBE` és `EXPLAIN` utasítást enged. Stacked statement, lock, server-side file write és minden mutáció még a driver előtt hibát dob.
 - A `synthetic-positive` mód production adatbázis-kapcsolatot sem nyit.
 - Productionből user, session, reset, payment, email és V2-derived adat nem kerül másolásra.
-- A synthetic fixture forrásai és cikkei kizárólag a friss acceptance adatbázisban jönnek létre. Mindhárom nyers cikken lefut a kanonikus `runV2ShadowIntelligence` determinisztikus útvonal. A közös subject/project/location referenciaidentitás kontrollált acceptance-előfeltétel; a pozitív claim, evidence, event, source-comparison és timeline a kanonikus V2 repository/runtime API-kon halad át.
+- A synthetic fixture forrásai és cikkei kizárólag a friss acceptance adatbázisban jönnek létre. Mindhárom nyers cikken lefut a kanonikus `runV2ShadowIntelligence` determinisztikus útvonal. A közös, elfogadott BKK/Zöld Busz Program referenciaidentitás kontrollált acceptance-előfeltétel; a claimet, evidence-et, eventet és timeline-t kizárólag a nyers magyar szövegből induló shadow lánc hozhatja létre. A harness nem szúr be kézzel claimet, eventet vagy timeline-elemet, és nem készít közvetlen matcher-inputot.
 - Csak a `deterministic-semantic` provider engedélyezett. OpenAI, Cloudflare V2 és más külső AI hívás tiltott.
 
 ## Production-negative
@@ -36,7 +36,7 @@ set +a
 UTOM_ACCEPTANCE_RUN=true npm run v2:acceptance:vps -- --mode=synthetic-positive
 ```
 
-Ez a mód nem használ `--article-ids` paramétert, és nem olvas production cikket. Friss `utom_acceptance_*` adatbázist migrál, létrehozza az `acceptance-hvg`, `acceptance-telex` és `acceptance-24hu` forrásokat, majd három külön magyar megfogalmazásból ugyanazt az Alpha Kft./debreceni gyár/2026. október 20. strukturált eseményt vezeti végig. PASS feltétel: három completed article-local eredmény, `MATCHED`, valid provenance, `ready` source comparison, valid timeline és konfliktusbiztonság.
+Ez a mód nem használ `--article-ids` paramétert, és nem olvas production cikket. Friss `utom_acceptance_*` adatbázist migrál, létrehozza az `acceptance-hvg`, `acceptance-telex` és `acceptance-24hu` forrásokat, majd három külön magyar megfogalmazásból ugyanazt a BKK/Zöld Busz Program/2026. októberi buszbeszerzést vezeti végig. Minden cikk esetén kötelező az entity, validált claim, persisted evidence, evidence-backed event és timeline item. Bármelyik hiánya `semantic_coverage_gap` FAIL; a completed feldolgozási státusz önmagában nem elég. Teljes PASS feltétel ezen felül: `MATCHED`, valid provenance, `ready` source comparison és konfliktusbiztonság.
 
 ## Riport és cleanup
 
@@ -55,4 +55,4 @@ Siker után az acceptance adatbázis alapból törlődik. FAIL/PARTIAL esetén m
 - `synthetic-positive`: három same-event synthetic article → MATCHED → PASS.
 - Bármely production write, külső providerhívás, provenance/timeline hiba vagy automatikus konfliktusgyőztes FAIL.
 
-Ez a dokumentum és a lokális regresszió nem bizonyít VPS futást. A státusz a kézi SSH futtatásig: `VPS ACCEPTANCE: NOT EXECUTED`.
+A korábbi valódi VPS `production-negative` futás két production cikkel PASS volt, production írás nélkül. Az ezt követő `synthetic-positive` futás feltárta a MySQL DATETIME és a nulla semantic coverage hibát; a javított positive láncot ezen lokális változtatásokkal még nem futtattuk újra VPS-en. Aktuális státusz: `VPS SYNTHETIC-POSITIVE RE-EXECUTION: PENDING`.

@@ -2,9 +2,17 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const { buildCrossArticleEventGroup } = require("../../lib/v2/event-matching.js");
+const { createDeterministicEntityProvider } = require("../../lib/v2/entity-extraction-provider.js");
+const { createDeterministicClaimProvider } = require("../../lib/v2/claim-extraction-provider.js");
+const { validateClaimResult } = require("../../lib/v2/claim-extraction.js");
+const { bindResolvedClaimEntities } = require("../../lib/v2/shadow-claim-binding.js");
+const { buildEvidenceBackedEventCandidates } = require("../../lib/v2/shadow-event-projection.js");
+const { buildArticleTimelineProjection } = require("../../lib/v2/shadow-timeline-projection.js");
+const { runEventMatching } = require("../../lib/v2/runtime-event-matching.js");
+const { buildSourceComparison } = require("../../lib/v2/source-comparison.js");
 const {
   SYNTHETIC_POSITIVE_FIXTURES, assertAcceptanceDatabaseName, assertAcceptanceOptIn, assertAcceptanceProvider, assertProductionReadSql,
-  classifyAcceptanceResult, createAcceptanceDatabaseController, createProductionReadAdapter,
+  classifyAcceptanceResult, createAcceptanceDatabaseController, createProductionReadAdapter, hasSyntheticSemanticCoverage,
   parseAcceptanceMode, parseArticleIds, validateArticleFixtures,
 } = require("../../lib/acceptance/v2-vps-harness.js");
 
@@ -68,40 +76,72 @@ test("synthetic-positive fixture has three sources, distinct wording and shared 
   assert.equal(new Set(SYNTHETIC_POSITIVE_FIXTURES.map((item) => item.sourceSlug)).size, 3);
   assert.equal(new Set(SYNTHETIC_POSITIVE_FIXTURES.map((item) => item.text)).size, 3);
   for (const item of SYNTHETIC_POSITIVE_FIXTURES) {
-    assert.match(item.text, /Alpha Kft\./u); assert.match(item.text, /Debrecen/iu); assert.match(item.text, /2026\. október 20/iu);
-    assert.ok(item.text.includes(item.evidence));
+    assert.match(item.text, /BKK Zrt\./u); assert.match(item.text, /Zöld Busz Program/u); assert.match(item.text, /2026\. október 20/iu);
+    assert.match(item.text, /új buszokat vásárol/iu);
   }
 });
-test("synthetic-positive structured fixture matches across all three differently worded sources", () => {
-  const events = SYNTHETIC_POSITIVE_FIXTURES.map((fixture, index) => ({
-    eventId: index + 1,
-    eventType: "facility_announcement",
-    status: "active",
-    startAt: "2026-10-20T10:00:00.000Z",
-    endAt: "2026-10-20T10:00:00.000Z",
-    predicate: "OPENING_EVENT",
-    claimStatus: "observed",
-    modality: "completed",
-    conditional: false,
-    uncertainty: false,
-    polarity: "affirmed",
-    evidence: [{ evidenceId: index + 10, articleId: index + 20, sourceId: index + 30, sourceKey: fixture.sourceSlug }],
-    entities: [
-      { entityId: 101, canonicalEntityId: 101, role: "subject", status: "accepted" },
-      { entityId: 102, canonicalEntityId: 102, role: "project", status: "accepted" },
-      { entityId: 103, canonicalEntityId: 103, role: "location", status: "accepted" },
-    ],
-  }));
+test("synthetic-positive raw text produces canonical claims, evidence, events, timeline and a cross-source match", async () => {
+  const entityProvider = createDeterministicEntityProvider();
+  const claimProvider = createDeterministicClaimProvider();
+  const events = [];
+  const comparisonRows = [];
+  for (const [index, fixture] of SYNTHETIC_POSITIVE_FIXTURES.entries()) {
+    const articleId = index + 20; const sourceId = index + 30; const evidenceId = index + 10;
+    const entityRaw = await entityProvider.extractEntities({ text: fixture.text });
+    const claimRaw = await claimProvider.extractClaims({ text: fixture.text });
+    const claims = validateClaimResult({ articleId, sourceId, text: fixture.text }, claimRaw).result.claims;
+    assert.ok(claims.length > 0);
+    const resolutions = entityRaw.entities.map((entity) => ({ result: { entityId: entity.entityType === "project" ? 102 : 101 } }));
+    const bound = bindResolvedClaimEntities({ claims, entities: entityRaw.entities, resolutions });
+    assert.deepEqual([bound[0].subjectEntityId, bound[0].objectEntityId], [101, 102]);
+    assert.equal(fixture.text.slice(bound[0].evidence.start, bound[0].evidence.end), bound[0].evidence.textSpan);
+    const projection = buildEvidenceBackedEventCandidates({
+      articleId,
+      claims: bound,
+      persistedClaims: bound.map((_claim, claimIndex) => ({ claimId: 200 + index * 10 + claimIndex, evidenceId })),
+      entities: entityRaw.entities,
+      resolutions,
+    });
+    assert.equal(projection.candidates.length, 1);
+    const candidate = runEventMatching(projection.candidates[0], { enabled: true }).candidate;
+    const timeline = buildArticleTimelineProjection({ articleId, eventCandidates: [candidate], persistedEvents: [{ eventId: index + 1, articleId }] });
+    assert.equal(timeline.items.length, 1);
+    events.push({
+      ...candidate,
+      eventId: index + 1,
+      predicate: bound[0].predicate,
+      claimStatus: bound[0].status,
+      conditional: bound[0].conditional,
+      uncertainty: bound[0].uncertainty,
+      polarity: bound[0].polarity,
+      evidence: [{ evidenceId, articleId, sourceId, sourceKey: fixture.sourceSlug }],
+      entities: candidate.entities.map((entity) => ({ ...entity, canonicalEntityId: entity.entityId, status: "accepted" })),
+    });
+    comparisonRows.push({
+      claimId: 200 + index * 10, articleId, sourceId, sourceKey: fixture.sourceSlug, source: fixture.sourceName,
+      subjectEntityId: 101, subjectCanonicalId: 101, subjectEntityStatus: "accepted",
+      objectEntityId: 102, objectCanonicalId: 102, objectEntityStatus: "accepted",
+      predicate: bound[0].predicate, claimType: bound[0].claimType,
+      valueJson: JSON.stringify({ value: bound[0].value, polarity: bound[0].polarity, uncertainty: false, conditional: false, modality: bound[0].modality, attributionType: bound[0].attributionType }),
+      normalizedValue: bound[0].normalizedValue, validFrom: bound[0].validFrom, validUntil: null, status: "observed",
+      publishedAt: "2026-10-20T10:00:00.000Z",
+      evidenceJson: JSON.stringify([{ id: evidenceId, articleId, sourceId, textSpan: bound[0].evidence.textSpan, supportType: "support" }]),
+    });
+  }
   const match = buildCrossArticleEventGroup(events, 1);
   assert.equal(match.status, "matched");
   assert.equal(match.metrics.crossSourceMatches, 2);
   assert.deepEqual(match.articleIds, [20, 21, 22]);
   assert.deepEqual(match.sourceIds, [30, 31, 32]);
+  const comparison = buildSourceComparison(comparisonRows);
+  assert.equal(comparison.status, "ready");
+  assert.equal(comparison.metrics.sharedClaims, 1);
 });
 test("synthetic-positive result passes only with matched provenance-safe local execution", () => {
+  const metrics = { entitiesFound: 2, claimsFound: 1, claimsWithEvidence: 1, eventsFound: 1, timelineItemsFound: 1 };
   const result = classifyAcceptanceResult({
     mode: "synthetic-positive",
-    articles: [1, 2, 3].map((articleId) => ({ articleId, status: "completed" })),
+    articles: [1, 2, 3].map((articleId) => ({ articleId, status: "completed", metrics })),
     match: { status: "matched", metrics: { crossSourceMatches: 2 } },
     comparison: { status: "ready" },
     conflicts: [],
@@ -114,7 +154,8 @@ test("acceptance provider gate blocks paid or external providers", () => {
   for (const provider of ["openai", "cloudflare", "mock", "external"]) assert.throws(() => assertAcceptanceProvider(provider), /external_provider_blocked/);
 });
 test("synthetic-positive verdict is fail-closed for provider use, runtime failure, rejection and incomplete coverage", () => {
-  const completed = [1, 2, 3].map((articleId) => ({ articleId, status: "completed" }));
+  const metrics = { entitiesFound: 2, claimsFound: 1, claimsWithEvidence: 1, eventsFound: 1, timelineItemsFound: 1 };
+  const completed = [1, 2, 3].map((articleId) => ({ articleId, status: "completed", metrics }));
   const matched = { status: "matched", metrics: { crossSourceMatches: 2 } };
   const ready = { status: "ready" };
   assert.equal(classifyAcceptanceResult({ mode: "synthetic-positive", articles: completed, match: matched, comparison: ready, safety: { externalProviderCalls: 1 } }).verdict, "FAIL");
@@ -122,6 +163,15 @@ test("synthetic-positive verdict is fail-closed for provider use, runtime failur
   assert.equal(classifyAcceptanceResult({ articles: completed, match: { status: "single", metrics: { matchesRejected: 1 } }, safety: {} }).category, "MATCH REJECTION");
   assert.equal(classifyAcceptanceResult({ articles: completed, match: { status: "candidate", metrics: {} }, safety: {} }).verdict, "PARTIAL");
   assert.equal(classifyAcceptanceResult({ articles: completed, match: matched, comparison: ready, safety: {} }).verdict, "PASS");
+});
+test("synthetic-positive rejects completed articles with zero claims, evidence, events, or timeline", () => {
+  const complete = { entitiesFound: 2, claimsFound: 1, claimsWithEvidence: 1, eventsFound: 1, timelineItemsFound: 1 };
+  for (const missing of ["claimsFound", "claimsWithEvidence", "eventsFound", "timelineItemsFound"]) {
+    const articles = [1, 2, 3].map((articleId) => ({ articleId, status: "completed", metrics: { ...complete } }));
+    articles[1].metrics[missing] = 0;
+    assert.equal(hasSyntheticSemanticCoverage(articles[1]), false);
+    assert.deepEqual(classifyAcceptanceResult({ mode: "synthetic-positive", articles, safety: {} }), { verdict: "FAIL", category: "COVERAGE GAP", reason: "semantic_coverage_gap" });
+  }
 });
 test("cleanup policy defaults to drop on success and keep on failure unless explicitly overridden", () => {
   function keep({ success, keepDb = false, dropOnFailure = false }) { return keepDb || (!success && !dropOnFailure); }
