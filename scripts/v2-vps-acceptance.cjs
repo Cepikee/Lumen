@@ -9,12 +9,16 @@ const { execFileSync } = require("node:child_process");
 const mysql = require("mysql2/promise");
 const { applyMigrations, auditMigrationChain, loadMigrations } = require("../db/migration-core.cjs");
 const { runV2ShadowIntelligence } = require("../lib/v2/shadow-intelligence.js");
-const { resolveCrossArticleEventGroup } = require("../lib/v2/event-matching-repository.js");
+const { runEventMatching } = require("../lib/v2/runtime-event-matching.js");
+const { persistEventCandidate, resolveCrossArticleEventGroup } = require("../lib/v2/event-matching-repository.js");
+const { persistClaimsWithEvidence } = require("../lib/v2/claim-extraction-repository.js");
+const { persistTimelineItem } = require("../lib/v2/temporal-graph-repository.js");
 const { compareSourcesDetailed } = require("../lib/v2/read-model-repository.js");
 const { runConflictDetection } = require("../lib/v2/runtime-conflict-history.js");
 const {
-  assertAcceptanceOptIn, buildRunId, classifyAcceptanceResult, createAcceptanceDatabaseController,
-  createProductionReadAdapter, parseArticleIds, validateArticleFixtures,
+  SYNTHETIC_POSITIVE_FIXTURES, assertAcceptanceOptIn, assertAcceptanceProvider, buildRunId,
+  classifyAcceptanceResult, createAcceptanceDatabaseController, createProductionReadAdapter,
+  parseAcceptanceMode, parseArticleIds, validateArticleFixtures,
 } = require("../lib/acceptance/v2-vps-harness.js");
 
 function log(event, data = {}) { process.stdout.write(`${JSON.stringify({ event, at: new Date().toISOString(), ...data })}\n`); }
@@ -62,6 +66,103 @@ async function copyFixtures(connection, articles) {
     );
   }
 }
+async function createSyntheticFixtures(connection) {
+  const articles = [];
+  for (const [index, fixture] of SYNTHETIC_POSITIVE_FIXTURES.entries()) {
+    const [sourceInsert] = await connection.execute(
+      "INSERT INTO sources (slug,name,homepage_url,feed_url,is_active) VALUES (?,?,?,?,0)",
+      [fixture.sourceSlug, fixture.sourceName, `https://${fixture.sourceSlug}.invalid`, `https://${fixture.sourceSlug}.invalid/feed`],
+    );
+    const sourceId = Number(sourceInsert.insertId);
+    const urlCanonical = `https://${fixture.sourceSlug}.invalid/alpha-debrecen-${index + 1}`;
+    const [articleInsert] = await connection.execute(
+      `INSERT INTO articles (title,url_canonical,original_url,content_text,published_at,publication_time_source,
+          language,source_id,source,content_hash,processed,status,created_at,updated_at)
+       VALUES (?,?,?,?,?,'feed','hu',?,?,?,1,'done',UTC_TIMESTAMP(),UTC_TIMESTAMP())`,
+      [fixture.title, urlCanonical, urlCanonical, fixture.text, "2026-10-20 10:00:00", sourceId, fixture.sourceName, crypto.createHash("sha256").update(fixture.text).digest("hex")],
+    );
+    articles.push({ ...fixture, id: Number(articleInsert.insertId), sourceId, urlCanonical, publishedAt: "2026-10-20T10:00:00.000Z" });
+  }
+  return articles;
+}
+async function createSyntheticReferenceEntities(connection) {
+  const definitions = [
+    ["company", "Alpha Kft.", "alpha kft"],
+    ["project", "Alpha debreceni gyárberuházás", "alpha debreceni gyarberuhazas"],
+    ["location", "Debrecen", "debrecen"],
+  ];
+  const ids = [];
+  for (const [type, canonical, normalized] of definitions) {
+    const [insert] = await connection.execute(
+      `INSERT INTO v2_entities (entity_type,canonical_name,normalized_name,language,status,confidence_current,first_observed_at,last_observed_at,created_at,updated_at)
+       VALUES (?,?,?,'hu','accepted',1,UTC_TIMESTAMP(6),UTC_TIMESTAMP(6),UTC_TIMESTAMP(6),UTC_TIMESTAMP(6))`,
+      [type, canonical, normalized],
+    );
+    ids.push(Number(insert.insertId));
+  }
+  return { subjectId: ids[0], objectId: ids[1], locationId: ids[2] };
+}
+function exactSpan(text, excerpt) {
+  const start = text.indexOf(excerpt);
+  if (start < 0) throw new Error("synthetic_evidence_missing");
+  return { start, end: start + excerpt.length, textSpan: excerpt };
+}
+async function runSyntheticCanonicalFixture(connection, fixtures, entities) {
+  const eventIds = [];
+  for (const [index, article] of fixtures.entries()) {
+    const persisted = await persistClaimsWithEvidence(connection, {
+      articleId: article.id,
+      sourceId: article.sourceId,
+      publicationTime: article.publishedAt,
+      observedAt: new Date(article.publishedAt),
+      actor: "v2.acceptance.synthetic",
+      operationKeyPrefix: "v2-acceptance-synthetic-positive",
+      claims: [{
+        subjectEntityId: entities.subjectId,
+        objectEntityId: entities.objectId,
+        predicate: "OPENING_EVENT",
+        value: true,
+        normalizedValue: "true",
+        claimText: article.evidence,
+        claimType: "boolean",
+        status: "observed",
+        confidence: 0.95,
+        supportType: "support",
+        attributionType: "direct",
+        polarity: "affirmed",
+        uncertainty: false,
+        conditional: false,
+        modality: "completed",
+        validFrom: "2026-10-20T10:00:00.000Z",
+        validUntil: null,
+        evidence: exactSpan(article.text, article.evidence),
+      }],
+    });
+    const evidenceId = persisted.claims[0].evidenceId;
+    const result = runEventMatching({
+      eventType: "facility_announcement",
+      canonicalTitle: `${article.sourceSlug}: Alpha debreceni gyárberuházás`,
+      normalizedKey: `acceptance-alpha-debrecen-${index + 1}`,
+      articleId: article.id,
+      startAt: "2026-10-20T10:00:00.000Z",
+      endAt: "2026-10-20T10:00:00.000Z",
+      confidence: 0.95,
+      status: "active",
+      membershipType: "primary",
+      evidenceId,
+      entities: [
+        { entityId: entities.subjectId, role: "subject", confidence: 1, evidenceId },
+        { entityId: entities.objectId, role: "project", confidence: 1, evidenceId },
+        { entityId: entities.locationId, role: "location", confidence: 1, evidenceId },
+      ],
+    }, { enabled: true });
+    if (result.status !== "candidate") throw new Error(`synthetic_event_invalid:${result.errors?.join(",") || result.status}`);
+    const event = await persistEventCandidate(connection, result.candidate);
+    eventIds.push(event.eventId);
+    await persistTimelineItem(connection, { ownerType: "article", ownerId: article.id, item: { itemType: "event", itemId: event.eventId, validAt: "2026-10-20T10:00:00.000Z", displayAt: article.publishedAt, confidence: 0.95, visibility: "public", orderingKey: `0-known/2026-10-20T10:00:00.000Z/0/${String(index + 1).padStart(4, "0")}` } });
+  }
+  return { eventIds, entities, providerCalls: 0 };
+}
 async function tableCounts(connection) {
   const tables = ["v2_entities", "v2_entity_mentions", "v2_claims", "v2_claim_evidence", "v2_entity_relations", "v2_events", "v2_event_articles", "v2_timelines", "v2_timeline_items", "v2_conflicts"];
   const result = {};
@@ -105,12 +206,15 @@ function conflictCandidates(comparison) {
 }
 function reportMarkdown(report) {
   const inputRows = (report.inputArticles || []).map((row) => `| ${row.id} | ${row.sourceSlug} | ${row.urlCanonical} | ${row.publishedAt} |`).join("\n");
-  return `# UTOM VPS V2 ACCEPTANCE REPORT\n\n## Environment\n\n\`\`\`json\n${JSON.stringify(report.environment, null, 2)}\n\`\`\`\n\n## Input Articles\n\n| Article | Source | URL | Published |\n|---:|---|---|---|\n${inputRows}\n\n## Production Safety\n\n- Production writes: ${report.safety.productionWritesExecuted}\n- Mutating query attempts: ${report.safety.productionMutatingQueryAttempts}\n- Production fingerprint before: \`${report.productionFingerprint?.before || "unavailable"}\`\n- Production fingerprint after: \`${report.productionFingerprint?.after || "unavailable"}\`\n- Production fingerprint unchanged: ${report.safety.productionFingerprintUnchanged}\n- Acceptance DB: \`${report.cleanup.database}\`\n- Acceptance migrated/fixture/V2 records: ${report.safety.acceptanceWrites}\n\n## Article-local processing\n\n\`\`\`json\n${JSON.stringify(report.articles, null, 2)}\n\`\`\`\n\n## Cross-Article Match\n\n\`\`\`json\n${JSON.stringify(report.match, null, 2)}\n\`\`\`\n\n## Provenance\n\n\`\`\`json\n${JSON.stringify(report.provenance, null, 2)}\n\`\`\`\n\n## Timeline\n\n\`\`\`json\n${JSON.stringify(report.timeline, null, 2)}\n\`\`\`\n\n## Source Comparison\n\n\`\`\`json\n${JSON.stringify(report.comparison, null, 2)}\n\`\`\`\n\n## Conflicts\n\n- Count: ${report.conflicts.length}\n- Winner selection: none\n\n## Paid API Proof\n\n- OpenAI: 0\n- Paid AI: ${report.safety.paidAiCalls}\n- Cloudflare V2: 0\n- Other external AI: ${report.safety.externalProviderCalls}\n\n## Acceptance Verdict\n\n**${report.result.verdict}** — ${report.result.category}: ${report.result.reason}\n`;
+  return `# UTOM VPS V2 ACCEPTANCE REPORT\n\n- Mode: \`${report.mode}\`\n- Expected cross-article result: ${report.mode === "production-negative" ? "NO MATCH" : "MATCH"}\n\n## Environment\n\n\`\`\`json\n${JSON.stringify(report.environment, null, 2)}\n\`\`\`\n\n## Input Articles\n\n| Article | Source | URL | Published |\n|---:|---|---|---|\n${inputRows}\n\n## Production Safety\n\n- Production writes: ${report.safety.productionWritesExecuted}\n- Mutating query attempts: ${report.safety.productionMutatingQueryAttempts}\n- Production fingerprint before: \`${report.productionFingerprint?.before || "unavailable"}\`\n- Production fingerprint after: \`${report.productionFingerprint?.after || "unavailable"}\`\n- Production fingerprint unchanged: ${report.safety.productionFingerprintUnchanged}\n- Acceptance DB: \`${report.cleanup.database}\`\n- Acceptance migrated/fixture/V2 records: ${report.safety.acceptanceWrites}\n\n## Article-local processing\n\n\`\`\`json\n${JSON.stringify(report.articles, null, 2)}\n\`\`\`\n\n## Cross-Article Match\n\n\`\`\`json\n${JSON.stringify(report.match, null, 2)}\n\`\`\`\n\n## Provenance\n\n\`\`\`json\n${JSON.stringify(report.provenance, null, 2)}\n\`\`\`\n\n## Timeline\n\n\`\`\`json\n${JSON.stringify(report.timeline, null, 2)}\n\`\`\`\n\n## Source Comparison\n\n\`\`\`json\n${JSON.stringify(report.comparison, null, 2)}\n\`\`\`\n\n## Conflicts\n\n- Count: ${report.conflicts.length}\n- Winner selection: none\n\n## Paid API Proof\n\n- OpenAI: 0\n- Paid AI: ${report.safety.paidAiCalls}\n- Cloudflare V2: 0\n- Other external AI: ${report.safety.externalProviderCalls}\n\n## Acceptance Verdict\n\n**${report.result.verdict}** — ${report.result.category}: ${report.result.reason}\n`;
 }
 
 async function main() {
   const runId = buildRunId();
-  const articleIds = parseArticleIds(arg("article-ids"));
+  const mode = parseAcceptanceMode(arg("mode"));
+  const articleArgument = arg("article-ids");
+  const articleIds = mode === "production-negative" ? parseArticleIds(articleArgument, { minimum: 2 }) : [];
+  if (mode === "synthetic-positive" && articleArgument != null) throw new Error("synthetic_positive_rejects_production_article_ids");
   const acceptanceDb = `utom_acceptance_${runId}`;
   assertAcceptanceOptIn(process.env, acceptanceDb);
   const keepDb = flag("keep-db");
@@ -118,22 +222,27 @@ async function main() {
   const outputDir = path.join(process.env.TMPDIR || "/tmp", `utom-v2-acceptance-${runId}`);
   fs.mkdirSync(outputDir, { recursive: true });
   const counters = { productionReadAttempts: 0, productionReadsExecuted: 0, productionWritesExecuted: 0 };
-  const report = { runId, articleIds, startedAt: new Date().toISOString(), outputDir, articles: [], match: null, comparison: null, conflicts: [], safety: { productionWritesExecuted: 0, externalProviderCalls: 0, paidAiCalls: 0 }, cleanup: { kept: true, database: acceptanceDb } };
+  const report = { runId, mode, articleIds, startedAt: new Date().toISOString(), outputDir, articles: [], match: null, comparison: null, conflicts: [], safety: { productionWritesExecuted: 0, externalProviderCalls: 0, paidAiCalls: 0 }, cleanup: { kept: true, database: acceptanceDb } };
   let admin; let productionRaw; let acceptancePool; let succeeded = false;
   const adapterCounters = { attempted: 0, executed: 0, mutatingAttempts: 0 };
-  log("acceptance_started", { runId, articleIds, acceptanceDatabase: acceptanceDb });
+  log("acceptance_started", { runId, mode, articleIds, acceptanceDatabase: acceptanceDb });
   try {
     const prodName = String(process.env.DB_NAME || "");
-    if (!prodName || prodName === acceptanceDb) throw new Error("production_database_invalid");
-    productionRaw = await mysql.createConnection(dbConfig(prodName));
-    const production = createProductionReadAdapter(productionRaw, adapterCounters);
-    const [[mysqlVersion]] = await production.query("SELECT VERSION() version");
-    report.environment = { hostname: os.hostname(), node: process.version, next: require("next/package.json").version, mysql: mysqlVersion.version, gitCommit: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(), schemaVersion: "064" };
-    const before = await bounded("production_fingerprint_before", () => fingerprint(production, articleIds), 30_000);
-    report.productionFingerprint = { before: digest(before), after: null, unchanged: false };
-    const fixtures = await bounded("production_fixture_read", () => loadFixtures(production, articleIds), 30_000);
-    report.inputArticles = fixtures.map((row) => ({ id: Number(row.id), sourceId: Number(row.sourceId), sourceSlug: row.sourceSlug, urlCanonical: row.urlCanonical, publishedAt: row.publishedAt instanceof Date ? row.publishedAt.toISOString() : String(row.publishedAt) }));
-    log("acceptance_production_read", { articleCount: fixtures.length, sourceCount: new Set(fixtures.map((row) => row.sourceId)).size });
+    let production = null; let before = null; let fixtures = null;
+    if (mode === "production-negative") {
+      if (!prodName || prodName === acceptanceDb) throw new Error("production_database_invalid");
+      productionRaw = await mysql.createConnection(dbConfig(prodName));
+      production = createProductionReadAdapter(productionRaw, adapterCounters);
+      const [[mysqlVersion]] = await production.query("SELECT VERSION() version");
+      report.environment = { hostname: os.hostname(), node: process.version, next: require("next/package.json").version, mysql: mysqlVersion.version, gitCommit: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(), schemaVersion: "064" };
+      before = await bounded("production_fingerprint_before", () => fingerprint(production, articleIds), 30_000);
+      report.productionFingerprint = { before: digest(before), after: null, unchanged: false };
+      fixtures = await bounded("production_fixture_read", () => loadFixtures(production, articleIds), 30_000);
+      log("acceptance_production_read", { articleCount: fixtures.length, sourceCount: new Set(fixtures.map((row) => row.sourceId)).size });
+    } else {
+      report.environment = { hostname: os.hostname(), node: process.version, next: require("next/package.json").version, mysql: "local-acceptance", gitCommit: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(), schemaVersion: "064" };
+      report.productionFingerprint = { before: null, after: null, unchanged: true, status: "NOT_ACCESSED" };
+    }
 
     admin = await mysql.createConnection({ ...dbConfig(undefined), database: undefined });
     const controller = createAcceptanceDatabaseController(admin, { env: process.env, databaseName: acceptanceDb });
@@ -146,33 +255,46 @@ async function main() {
     try { report.schema = { latestVersion: schemaAudit.latestVersion, applied: await bounded("migration", () => applyMigrations(migrationConnection, migrations), 180_000) }; } finally { migrationConnection.release(); }
     const [[acceptanceIdentity]] = await acceptancePool.query("SELECT DATABASE() databaseName");
     assertAcceptanceOptIn(process.env, acceptanceIdentity.databaseName);
-    await bounded("fixture_copy", () => copyFixtures(acceptancePool, fixtures), 30_000);
+    if (mode === "production-negative") await bounded("fixture_copy", () => copyFixtures(acceptancePool, fixtures), 30_000);
+    else fixtures = await bounded("fixture_create", () => createSyntheticFixtures(acceptancePool), 30_000);
+    report.articleIds = fixtures.map((row) => Number(row.id));
+    report.inputArticles = fixtures.map((row) => ({ id: Number(row.id), sourceId: Number(row.sourceId), sourceSlug: row.sourceSlug, urlCanonical: row.urlCanonical, publishedAt: row.publishedAt instanceof Date ? row.publishedAt.toISOString() : String(row.publishedAt) }));
     log("acceptance_fixture_created", { database: acceptanceDb, articleCount: fixtures.length, sourceCount: new Set(fixtures.map((row) => row.sourceId)).size });
 
-    const runtimeEnv = { ...process.env, UTOM_V2_ENABLED: "true", UTOM_V2_SHADOW_ENABLED: "true", UTOM_OFFLINE_MODE: "true", UTOM_PAID_AI_ENABLED: "false", REAL_AI_ENABLED: "false", AI_PROVIDER: "mock", DB_WRITE_ENABLED: "false" };
-    for (const articleId of articleIds) {
+    const runtimeEnv = { ...process.env, UTOM_V2_ENABLED: "true", UTOM_V2_SHADOW_ENABLED: "true", UTOM_OFFLINE_MODE: "true", UTOM_PAID_AI_ENABLED: "false", REAL_AI_ENABLED: "false", AI_PROVIDER: assertAcceptanceProvider("deterministic-semantic"), DB_WRITE_ENABLED: "false" };
+    let syntheticProjection = null;
+    const syntheticEntities = mode === "synthetic-positive" ? await bounded("synthetic_reference_entities", () => createSyntheticReferenceEntities(acceptancePool), 30_000) : null;
+    for (const articleId of report.articleIds) {
       const result = await bounded(`article_${articleId}`, () => runV2ShadowIntelligence(acceptancePool, articleId, { env: runtimeEnv, logger: (entry) => log("acceptance_v2_trace", entry) }), 120_000);
       report.articles.push(result); report.safety.externalProviderCalls += Number(result.externalProviderCalls || result.metrics?.externalProviderCalls || 0);
       log("acceptance_article_processed", { articleId, status: result.status, metrics: result.metrics || null, error: result.error || null });
     }
+    if (mode === "synthetic-positive") {
+      syntheticProjection = await bounded("synthetic_canonical_projection", () => runSyntheticCanonicalFixture(acceptancePool, fixtures, syntheticEntities), 120_000);
+    }
 
-    const eventIds = await eventIdsForArticles(acceptancePool, articleIds);
+    const eventIds = syntheticProjection?.eventIds || await eventIdsForArticles(acceptancePool, report.articleIds);
     const matchResults = [];
     for (const eventId of eventIds) matchResults.push(await bounded(`match_${eventId}`, () => resolveCrossArticleEventGroup(acceptancePool, eventId), 30_000));
     report.match = matchResults.sort((a, b) => Number(b.metrics?.matchesAccepted || 0) - Number(a.metrics?.matchesAccepted || 0))[0] || null;
     log("acceptance_match_completed", { status: report.match?.status || "missing", metrics: report.match?.metrics || null });
-    if (report.match) report.comparison = await bounded("source_comparison", () => compareSourcesDetailed(acceptancePool, { type: "event", id: report.match.anchorEventId }, { eventIds: report.match.eventIds }), 30_000);
+    if (report.match?.status === "matched") report.comparison = await bounded("source_comparison", () => compareSourcesDetailed(acceptancePool, { type: "event", id: report.match.anchorEventId }, { eventIds: report.match.eventIds }), 30_000);
+    else report.comparison = { status: "SKIPPED_NO_SHARED_EVENT", reason: "no_shared_event" };
     log("acceptance_comparison_completed", { status: report.comparison?.status || "missing", metrics: report.comparison?.metrics || null });
     report.conflicts = conflictCandidates(report.comparison);
     log("acceptance_conflict_completed", { count: report.conflicts.length, automaticWinners: report.conflicts.filter((item) => item.automaticWinner != null).length });
     report.counts = await tableCounts(acceptancePool);
-    report.provenance = await validateProvenance(acceptancePool, articleIds, report.match);
-    report.timeline = await timelineAudit(acceptancePool, articleIds);
-    const after = await bounded("production_fingerprint_after", () => fingerprint(production, articleIds), 30_000);
-    if (JSON.stringify(before) !== JSON.stringify(after)) throw new Error("production_fingerprint_changed");
-    report.productionFingerprint.after = digest(after); report.productionFingerprint.unchanged = true;
+    report.provenance = await validateProvenance(acceptancePool, report.articleIds, report.match);
+    report.timeline = await timelineAudit(acceptancePool, report.articleIds);
+    report.timeline.combined = report.match?.status === "matched";
+    report.timeline.canonical = report.match?.status === "matched" ? report.match.canonicalTimeline : null;
+    if (mode === "production-negative") {
+      const after = await bounded("production_fingerprint_after", () => fingerprint(production, report.articleIds), 30_000);
+      if (JSON.stringify(before) !== JSON.stringify(after)) throw new Error("production_fingerprint_changed");
+      report.productionFingerprint.after = digest(after); report.productionFingerprint.unchanged = true;
+    }
     counters.productionReadAttempts = adapterCounters.attempted; counters.productionReadsExecuted = adapterCounters.executed;
-    report.safety = { ...report.safety, ...counters, productionMutatingQueryAttempts: adapterCounters.mutatingAttempts, productionFingerprintUnchanged: true, acceptanceWrites: Object.values(report.counts).reduce((sum, value) => sum + value, 0), provenanceValid: report.provenance.valid, timelineValid: report.timeline.valid, conflictValid: report.conflicts.every((item) => item.automaticWinner == null) };
+    report.safety = { ...report.safety, ...counters, productionMutatingQueryAttempts: adapterCounters.mutatingAttempts, productionFingerprintUnchanged: true, acceptanceWrites: Object.values(report.counts).reduce((sum, value) => sum + value, 0), provenanceValid: report.provenance.valid, timelineValid: report.timeline.valid, conflictValid: mode === "production-negative" ? report.conflicts.length === 0 : report.conflicts.every((item) => item.automaticWinner == null) };
     report.result = classifyAcceptanceResult(report);
     succeeded = report.result.verdict === "PASS";
   } catch (error) {
@@ -193,7 +315,8 @@ async function main() {
     fs.writeFileSync(path.join(outputDir, "report.json"), `${JSON.stringify(jsonSafe(report), null, 2)}\n`);
     fs.writeFileSync(path.join(outputDir, "report.md"), reportMarkdown(jsonSafe(report)));
     log(report.result.verdict === "FAIL" ? "acceptance_failed" : "acceptance_completed", { verdict: report.result.verdict, category: report.result.category, reportDirectory: outputDir });
-    process.stdout.write(`\n========================================\nUTOM V2 VPS ACCEPTANCE\n========================================\nProduction DB writes: ${report.safety.productionWritesExecuted || 0}\nAcceptance DB: ${acceptanceDb}\nArticles: ${articleIds.length}\nSources: ${new Set((report.inputArticles || []).map((row) => row.sourceId)).size}\n\nArticle-local V2: ${report.articles.every((row) => row.status === "completed") ? "PASS" : "FAIL"}\nCross-article matching: ${report.match?.status === "matched" ? "PASS" : report.match ? "PARTIAL" : "FAIL"}\nTimeline: ${report.timeline?.valid ? "PASS" : "FAIL"}\nSource comparison: ${report.comparison?.status === "ready" ? "PASS" : "PARTIAL"}\nConflict safety: ${report.safety.conflictValid ? "PASS" : "FAIL"}\n\nOpenAI calls: 0\nExternal AI calls: ${report.safety.externalProviderCalls || 0}\n\nFINAL: ${report.result.verdict}\n\nReport:\n ${outputDir}\n========================================\n`);
+    const negative = report.mode === "production-negative";
+    process.stdout.write(`\n========================================\nUTOM V2 VPS ACCEPTANCE\n========================================\nMode: ${report.mode}\nProduction DB writes: ${report.safety.productionWritesExecuted || 0}\nAcceptance DB: ${acceptanceDb}\nArticles: ${report.articleIds.length}\nSources: ${new Set((report.inputArticles || []).map((row) => row.sourceId)).size}\n\nArticle-local V2: ${report.articles.every((row) => row.status === "completed") ? "PASS" : "FAIL"}\nExpected cross-article result: ${negative ? "NO MATCH" : "MATCH"}\nActual result: ${String(report.match?.status || "no_group").toUpperCase()}\n${negative ? `False merge prevention: ${report.match?.status === "matched" ? "FAIL" : "PASS"}` : `Provenance: ${report.provenance?.valid ? "PASS" : "FAIL"}`}\nTimeline: ${report.timeline?.valid && (!negative || !report.timeline.combined) ? "PASS" : "FAIL"}\nSource comparison: ${report.comparison?.status || "missing"}\nCross-event conflicts: ${report.conflicts.length}\nConflict safety: ${report.safety.conflictValid ? "PASS" : "FAIL"}\n\nOpenAI calls: 0\nExternal AI calls: ${report.safety.externalProviderCalls || 0}\n\nFINAL: ${report.result.verdict}\n\nReport:\n ${outputDir}\n========================================\n`);
   }
   if (report.result.verdict !== "PASS") process.exitCode = 1;
 }
