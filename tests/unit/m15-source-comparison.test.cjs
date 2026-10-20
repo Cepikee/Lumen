@@ -116,6 +116,22 @@ test("repository event scope reads only membership evidence claims and preserves
   assert.doesNotMatch(calls.at(-1), /JOIN v2_claims c ON c\.article_id=a\.id/);
 });
 
+test("repository event scope can read an internally validated cross-article event group", async () => {
+  const calls = [];
+  const connection = { execute: async (sql, params) => {
+    calls.push({ sql, params });
+    if (/SELECT id FROM v2_events/.test(sql)) return [[{ id: 5 }], []];
+    if (/FROM v2_event_articles/.test(sql)) return [[row(), row({ claimId: 2, articleId: 200, sourceId: 2, sourceKey: "beta.hu", source: "Beta" })], []];
+    throw new Error(`unexpected_sql:${sql}`);
+  } };
+  const result = await compareSourcesDetailed(connection, { type: "event", id: 5 }, { eventIds: [8, 5], page: 1, limit: 10 });
+  assert.equal(result.status, "ready");
+  assert.equal(result.sources.length, 2);
+  assert.match(calls.at(-1).sql, /ea\.event_id IN \(\?,\?\)/);
+  assert.deepEqual(calls.at(-1).params, [5, 8]);
+  await assert.rejects(() => compareSourcesDetailed(connection, { type: "event", id: 5 }, { eventIds: [8] }), /event_ids_invalid/);
+});
+
 test("repository claim scope requires canonical sources, resolved entities and exact evidence", async () => {
   const calls = [];
   const connection = { execute: async (sql) => {

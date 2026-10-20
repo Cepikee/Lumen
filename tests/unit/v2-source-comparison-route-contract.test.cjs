@@ -14,6 +14,7 @@ test("source comparison API returns HTTP 200 with an empty evidence-safe compari
     "@/lib/v2/feature-flags": { isV2Enabled: () => true },
     "@/lib/v2/read-model-contract": contract,
     "@/lib/v2/conflict-history": { detectComparisonConflicts: () => ({ status: "empty", conflicts: [], metrics: { candidatesChecked: 0, conflictsFound: 0, numericConflicts: 0, polarityConflicts: 0, statusConflicts: 0, abstentions: 0 }, authority: { winner: null }, ai: { providerCalls: 0 } }) },
+    "@/lib/v2/event-matching-repository": { resolveCrossArticleEventGroup: async () => { throw new Error("should_not_run"); } },
     "@/lib/v2/read-model-repository": {
       compareSources: async () => ({ scope: { type: "claim", id: 7 }, sources: [] }),
       compareSourcesDetailed: async () => ({ status: "empty", sources: [], claims: [], pagination: { page: 1, limit: 50, total: 0, pages: 0 }, metrics: { sourcesCompared: 0, claimsCompared: 0, sharedClaims: 0, sourceOnlyClaims: 0, unmatchedClaims: 0, observationsSkipped: 0 } }),
@@ -51,6 +52,7 @@ test("comparison failure is isolated and external providers are absent", async (
     "@/lib/v2/feature-flags": { isV2Enabled: () => true },
     "@/lib/v2/read-model-contract": contract,
     "@/lib/v2/conflict-history": { detectComparisonConflicts: () => { throw new Error("should_not_run"); } },
+    "@/lib/v2/event-matching-repository": { resolveCrossArticleEventGroup: async () => ({ eventIds: [8], candidates: [], rejected: [], metrics: { eventsCompared: 0, matchesAccepted: 0, candidatesCreated: 0, matchesRejected: 0, abstentions: 0, crossSourceMatches: 0, sameSourceMatches: 0, externalProviderCalls: 0 } }) },
     "@/lib/v2/read-model-repository": { compareSources: async () => { throw new Error("db_failed"); }, compareSourcesDetailed: async () => { throw new Error("db_failed"); } },
   }, { Buffer, Promise, console: { info: (line) => events.push(JSON.parse(line)) } });
   const response = await route.GET({ url: "http://local/api/v2/source-comparison?eventId=8&detail=claims" });
@@ -60,4 +62,27 @@ test("comparison failure is isolated and external providers are absent", async (
   const repository = fs.readFileSync("lib/v2/read-model-repository.js", "utf8");
   assert.doesNotMatch(engine, /fetch\(|openai|cloudflare|require\([^)]*provider/i);
   assert.doesNotMatch(repository, /\b(?:INSERT|UPDATE|DELETE)\b/i);
+});
+
+test("event scope expands only to evidence-matched events before comparison and conflict detection", async () => {
+  const events = []; let receivedOptions;
+  const route = load("app/api/v2/source-comparison/route.ts", {
+    "@/lib/db": { db: {} },
+    "@/lib/security": { securityCheck: async () => null },
+    "@/lib/v2/feature-flags": { isV2Enabled: () => true },
+    "@/lib/v2/read-model-contract": contract,
+    "@/lib/v2/event-matching-repository": { resolveCrossArticleEventGroup: async () => ({ status: "matched", eventIds: [8, 9], candidates: [{ eventId: 10, reason: "temporal_unknown" }], rejected: [{ eventId: 11, reason: "object_mismatch" }], metrics: { eventsCompared: 3, matchesAccepted: 1, candidatesCreated: 1, matchesRejected: 1, abstentions: 0, crossSourceMatches: 1, sameSourceMatches: 0, externalProviderCalls: 0 } }) },
+    "@/lib/v2/conflict-history": { detectComparisonConflicts: () => ({ status: "empty", conflicts: [], metrics: {}, authority: { winner: null }, ai: { providerCalls: 0 } }) },
+    "@/lib/v2/read-model-repository": {
+      compareSources: async () => { throw new Error("should_not_run"); },
+      compareSourcesDetailed: async (_db, _scope, options) => { receivedOptions = options; return { status: "ready", sources: [], claims: [], pagination: { page: 1, limit: 50, total: 0, pages: 0 }, metrics: {} }; },
+    },
+  }, { Buffer, Promise, console: { info: (line) => events.push(JSON.parse(line)) } });
+  const response = await route.GET({ url: "http://local/api/v2/source-comparison?eventId=8&detail=claims" });
+  assert.equal(response.status, 200);
+  assert.deepEqual(receivedOptions.eventIds, [8, 9]);
+  assert.deepEqual(response.body.data.eventMatching.eventIds, [8, 9]);
+  assert.equal(events.some((entry) => entry.event === "v2_event_match_candidate"), true);
+  assert.equal(events.some((entry) => entry.event === "v2_event_match_rejected"), true);
+  assert.equal(events.find((entry) => entry.event === "v2_event_match_completed").externalProviderCalls, 0);
 });

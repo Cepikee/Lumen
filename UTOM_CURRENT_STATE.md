@@ -1,6 +1,6 @@
 # UTOM current state
 
-Canonical as of **2026-10-19**, based on local commit `ee266995ed17b36fa0e3e308e94fd1da5e667bc5` plus the current reviewable source-comparison and conflict-detection working-tree change on `develop/utom-recovery`. This file supersedes historical progress and milestone documents for current operational decisions.
+Canonical as of **2026-10-20**, based on local commit `af754faa7e30c7a84834d9ff65a0b64826eb7a3f` plus the current reviewable cross-article event-matching working-tree change on `develop/utom-recovery`. This file supersedes historical progress and milestone documents for current operational decisions.
 
 ## Project
 
@@ -68,13 +68,15 @@ The production core includes article ingestion and publication, AI summaries, ca
 - The shadow chain uses only the local deterministic cost route and providers: canonical envelope, entity extraction/normalization, idempotent mention persistence, conservative entity resolution, validated claim extraction, exact evidence persistence, claim-backed relations, conservative article-local event candidates and an article-local temporal projection.
 - The shadow state reuses schema 064 `v2_processing_steps`; no migration was needed. A content fingerprint and claim token fence concurrent runs, completed reruns are reused, and failures remain retryable without altering V1.
 - Paid/unknown providers fail closed before a DB read or provider invocation. OpenAI and Cloudflare are not imported by the orchestrator; external provider calls remain zero.
-- Events are projected only from a small allowlist of existing claim predicates with persisted claim evidence and one unambiguous resolved participant. Negated, conditional, uncertain, attributed, unsupported or evidence-free claims are skipped. Every event remains `candidate`; cross-article matching is deferred, so the normalized identity includes the article and exact evidence span.
+- Events are projected only from a small allowlist of existing claim predicates with persisted claim evidence and an unambiguous resolved subject; an explicit claim object is retained as an event role. Negated, conditional, uncertain, attributed, unsupported or evidence-free claims are skipped. Every persisted event remains article-local `candidate`; cross-article identity is now a non-destructive read-time projection.
 - Relations are projected only from validated claims that already carry a canonical relation predicate, two explicit resolved entity IDs and persisted evidence. Negated, conditional, uncertain, attributed, unsupported, ambiguous or evidence-free claims abstain. Relation and relation-evidence writes use the existing V2 tables in one transaction and an article/evidence-scoped shadow identity.
 - Event, article membership and participant membership writes use the existing V2 event tables in one transaction. Timeline rows are then written in a separate caller-owned transaction only for those persisted evidence-backed events. The article-local timeline preserves exact/date/month/year/range precision, retains unknown time, never substitutes publication time and excludes planned events. V2.2 research remains unwired.
 - The timeline read path verifies the persisted event → article membership → claim evidence → article chain before returning an item. Empty timelines return a normal empty collection; malformed or incomplete provenance is hidden rather than presented as ready intelligence.
 - Source comparison is a read-time composition over canonical source IDs and evidence-backed atomic claims. `shared` requires identical resolved subject/object, predicate, value/unit, temporal scope, attribution, qualifiers and public status across at least two distinct sources. Different values remain `different_observation` comparison candidates and missing coverage remains `not_covered`.
 - Conflict detection is an additive read-time projection over bidirectional `different_observation` candidates. It emits only evidence-backed, source-distinct numeric/range, explicit polarity or status conflicts with equal entity, object, temporal, attribution, modality and unit semantics. Conditional, uncertain, unresolved, differently attributed, temporally mismatched or unit-incompatible observations abstain. It never ranks sources, treats majority as truth or selects a winner.
 - Event-scoped comparison reads only the claim referenced by each event membership evidence row; it no longer treats every claim in a member article as event evidence. Claims with missing evidence, noncanonical sources or unresolved subject/object identities abstain. Same-source articles collapse to one source observation while retaining article and evidence references.
+- Cross-article event matching reads bounded article-local events of the same type and accepts a group only when persisted evidence, resolved subject, explicit object/target/project/product, exact known temporal bounds, compatible resolved location, predicate and claim state all agree. Titles, keywords, categories and publication time are not inputs. Unknown time, missing discriminators and incomplete location proof remain candidates; hard semantic mismatches are rejected. No event row is merged or deleted.
+- Matched event IDs feed the existing source-comparison and conflict projections at read time. The returned canonical timeline descriptor represents one anchor event with multiple article observations, while preserving every article-local event and evidence chain. Same-source observations remain one source identity and are never labelled independent confirmation.
 - V2 read APIs and article/source/premium panels exist behind server and browser flags; they depend on populated V2 read models.
 - Email, maintenance and pipeline unit templates exist in the repository but are not proof of host installation.
 
@@ -122,13 +124,13 @@ V2.2 deterministic NLP, HuSpaCy/Stanza/local-worker experiments, semantic roles,
 1. Review/install `utom-pipeline.service` in a controlled deployment window and verify one healthy worker plus stale-lease recovery.
 2. Verify schema 064 and run production preflight against the intended host without exposing secrets.
 3. Install email and maintenance timers, then monitor first activations and reconcile any uncertain email rows.
-4. Review the evidence-based shadow relation/event/timeline plus source-comparison/conflict working-tree change. Comparison and conflict detection are read-only and remain behind the existing server/browser gates; do not activate their UI until cross-article event membership is independently accepted. Keep historical backfill disabled.
+4. Review the evidence-based shadow relation/event/timeline plus read-time cross-article matching/source-comparison/conflict working-tree change. Keep the UI and historical backfill disabled until a controlled VPS multi-source acceptance run proves real persisted object/location/temporal coverage.
 5. Create a checksummed external archive for local V2.2 agent runs and historical root scratch files.
 
 ## Last verified
 
-- Date: 2026-10-19 (Europe/Budapest)
+- Date: 2026-10-20 (Europe/Budapest)
 - Branch: `develop/utom-recovery`
-- Base commit: `ee266995ed17b36fa0e3e308e94fd1da5e667bc5`
+- Base commit: `af754faa7e30c7a84834d9ff65a0b64826eb7a3f`
 - Inventory: `docs/recovery/repository-inventory.json`
 - Validation results: `docs/recovery/VALIDATION_REPORT.md`; production was not deployed.

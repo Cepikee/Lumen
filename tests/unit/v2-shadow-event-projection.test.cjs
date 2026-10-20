@@ -48,6 +48,15 @@ test("supported claim with persisted exact evidence creates one article-local ca
   assert.deepEqual(result.candidates[0].entities.map(({ entityId, role, evidenceId }) => ({ entityId, role, evidenceId })), [{ entityId: 31, role: "subject", evidenceId: 51 }]);
 });
 
+test("an explicit claim object is retained as an event identity role", () => {
+  const input = fixture({ claims: [{ ...fixture().claims[0], objectEntityId: 44 }] });
+  const result = buildEvidenceBackedEventCandidates(input);
+  assert.deepEqual(result.candidates[0].entities.map(({ entityId, role }) => ({ entityId, role })), [
+    { entityId: 31, role: "subject" },
+    { entityId: 44, role: "object" },
+  ]);
+});
+
 test("current deterministic providers produce a supported evidence-backed event without research code", async () => {
   const envelope = createIngestionEnvelope({
     originalUrl: "https://example.test/event",
