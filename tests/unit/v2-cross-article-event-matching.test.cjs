@@ -30,6 +30,7 @@ test("three canonical sources with the same structured event form one determinis
   assert.deepEqual(result.eventIds, [1, 2, 3]);
   assert.deepEqual(result.sourceIds, [1, 2, 3]);
   assert.equal(result.metrics.crossSourceMatches, 2);
+  assert.equal(result.authority.independentConfirmation, true);
   assert.equal(result.metrics.externalProviderCalls, 0);
   assert.deepEqual(result, buildCrossArticleEventGroup([...events].reverse(), 1));
   assert.deepEqual(result, buildCrossArticleEventGroup(events, 1));
@@ -92,6 +93,11 @@ test("evidence-free and unresolved events fail closed", () => {
   assert.equal(classifyCrossArticleEventMatch(event(1), unresolved).status, "abstain");
   const archived = event(2, { entities: event(2).entities.map((x) => x.role === "subject" ? { ...x, status: "archived" } : x) });
   assert.equal(classifyCrossArticleEventMatch(event(1), archived).status, "abstain");
+  const unresolvedAnchor = event(1, { entities: event(1).entities.map((x) => x.role === "subject" ? { ...x, status: "unresolved" } : x) });
+  const group = buildCrossArticleEventGroup([unresolvedAnchor, event(2)], 1);
+  assert.equal(group.status, "abstain");
+  assert.equal(group.authority.independentConfirmation, false);
+  assert.ok(group.abstained.some((item) => item.eventId === 1 && item.reason === "subject_unresolved"));
 });
 
 test("two article-local events from the same article cannot merge", () => {

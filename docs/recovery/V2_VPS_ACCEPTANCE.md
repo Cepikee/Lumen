@@ -36,7 +36,7 @@ set +a
 UTOM_ACCEPTANCE_RUN=true npm run v2:acceptance:vps -- --mode=synthetic-positive
 ```
 
-Ez a mód nem használ `--article-ids` paramétert, és nem olvas production cikket. Friss `utom_acceptance_*` adatbázist migrál, létrehozza az `acceptance-hvg`, `acceptance-telex` és `acceptance-24hu` forrásokat, majd három külön magyar megfogalmazásból ugyanazt a BKK/Zöld Busz Program/2026. októberi buszbeszerzést vezeti végig. Minden cikk esetén kötelező az entity, validált claim, persisted evidence, evidence-backed event és timeline item. Bármelyik hiánya `semantic_coverage_gap` FAIL; a completed feldolgozási státusz önmagában nem elég. Teljes PASS feltétel ezen felül: `MATCHED`, valid provenance, `ready` source comparison és konfliktusbiztonság.
+Ez a mód nem használ `--article-ids` paramétert, és nem olvas production cikket. Friss `utom_acceptance_*` adatbázist migrál, létrehozza az `acceptance-hvg`, `acceptance-telex` és `acceptance-24hu` forrásokat, majd három külön magyar megfogalmazásból ugyanazt a BKK/Zöld Busz Program/2026. októberi buszbeszerzést vezeti végig. Az elfogadott BKK és Zöld Busz Program reference identityket a normál exact-canonical resolver használja; a cikkenkénti provisional ID nem számít canonical feloldásnak. Minden cikk esetén kötelező a canonically resolved subject és object, validált claim, persisted evidence, evidence-backed event és timeline item. Hiányos canonical binding `canonical_entity_resolution_incomplete`, más hiányzó szemantikai réteg `semantic_coverage_gap` FAIL; a completed feldolgozási státusz önmagában nem elég. Teljes PASS feltétel ezen felül: `MATCHED`, independent confirmation, valid provenance, `ready` source comparison és konfliktusbiztonság.
 
 ## Riport és cleanup
 

@@ -28,7 +28,7 @@ function fixture(overrides = {}) {
     }],
     persistedClaims: [{ claimId: 41, evidenceId: 51 }],
     entities: [{ entityType: "person" }, { entityType: "organization" }],
-    resolutions: [{ result: { entityId: 31 } }, { result: { entityId: 32 } }],
+    resolutions: [{ result: { entityId: 31, resolutionStatus: "resolved_exact", entityStatus: "accepted", provisional: false } }, { result: { entityId: 32, resolutionStatus: "resolved_exact", entityStatus: "accepted", provisional: false } }],
     ...overrides,
   };
 }
@@ -56,7 +56,7 @@ test("rerun is deterministic but an otherwise identical second article remains a
 
 test("missing evidence and unresolved endpoints abstain", () => {
   const missingEvidence = fixture({ persistedClaims: [{ claimId: 41, evidenceId: null }] });
-  const unresolvedSubject = fixture({ resolutions: [{ result: { entityId: null } }, { result: { entityId: 32 } }] });
+  const unresolvedSubject = fixture({ resolutions: [{ result: { entityId: null, resolutionStatus: "unresolved", entityStatus: "unresolved", provisional: true } }, { result: { entityId: 32, resolutionStatus: "resolved_exact", entityStatus: "accepted", provisional: false } }] });
   const unresolvedObject = fixture({ claims: [{ ...fixture().claims[0], objectEntityId: null }] });
   for (const input of [missingEvidence, unresolvedSubject, unresolvedObject]) {
     assert.equal(buildEvidenceBackedRelationCandidates(input).candidates.length, 0);
@@ -77,7 +77,7 @@ test("negation, conditionality, uncertainty and attribution never create a posit
 });
 
 test("ambiguous or malformed subject/object semantics abstain without proximity inference", () => {
-  const ambiguous = fixture({ claims: [{ ...fixture().claims[0], objectEntityId: null }], entities: [{}, {}, {}], resolutions: [{ result: { entityId: 31 } }, { result: { entityId: 32 } }, { result: { entityId: 33 } }] });
+  const ambiguous = fixture({ claims: [{ ...fixture().claims[0], objectEntityId: null }], entities: [{}, {}, {}], resolutions: [{ result: { entityId: 31, resolutionStatus: "resolved_exact", entityStatus: "accepted", provisional: false } }, { result: { entityId: 32, resolutionStatus: "resolved_exact", entityStatus: "accepted", provisional: false } }, { result: { entityId: 33, resolutionStatus: "resolved_exact", entityStatus: "accepted", provisional: false } }] });
   const sameEndpoint = fixture({ claims: [{ ...fixture().claims[0], objectEntityId: 31 }] });
   const unsupported = fixture({ claims: [{ ...fixture().claims[0], predicate: "ANNOUNCED" }] });
   for (const input of [ambiguous, sameEndpoint, unsupported]) {

@@ -75,7 +75,7 @@ test("current deterministic providers produce a supported evidence-backed event 
     claims: claims.result.claims,
     persistedClaims: [{ claimId: 41, evidenceId: 51 }],
     entities: entities.result.entities,
-    resolutions: [{ result: { entityId: 31 } }],
+    resolutions: [{ result: { entityId: 31, resolutionStatus: "resolved_exact", entityStatus: "accepted", provisional: false } }],
   });
   assert.equal(result.candidates.length, 1);
   assert.equal(result.candidates[0].entities[0].entityId, 31);
@@ -100,13 +100,13 @@ test("a unique resolved mention inside evidence may be the subject but ambiguous
   const base = fixture({
     claims: [{ ...fixture().claims[0], subjectEntityId: null }],
     entities: [{ entityType: "organization", evidence: { start: 3, end: 7 } }],
-    resolutions: [{ result: { entityId: 31 } }],
+    resolutions: [{ result: { entityId: 31, resolutionStatus: "resolved_exact", entityStatus: "accepted", provisional: false } }],
   });
   assert.equal(buildEvidenceBackedEventCandidates(base).candidates[0].entities[0].entityId, 31);
   const ambiguous = {
     ...base,
     entities: [...base.entities, { entityType: "person", evidence: { start: 8, end: 12 } }],
-    resolutions: [...base.resolutions, { result: { entityId: 32 } }],
+    resolutions: [...base.resolutions, { result: { entityId: 32, resolutionStatus: "resolved_exact", entityStatus: "accepted", provisional: false } }],
   };
   const result = buildEvidenceBackedEventCandidates(ambiguous);
   assert.equal(result.candidates.length, 0);

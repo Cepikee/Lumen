@@ -75,7 +75,7 @@ function harness(overrides = {}) {
       return { runId: 11, mentions: state.entities.map((entity, index) => ({ id: index + 21, ...entity })) };
     },
     async runEntityResolutionBatch(_connection, extraction) {
-      state.resolutions = extraction.result.entities.map((entity, index) => ({ mentionText: entity.mentionText, result: { entityId: index + 31 } }));
+      state.resolutions = extraction.result.entities.map((entity, index) => ({ mentionText: entity.mentionText, result: { entityId: index + 31, resolutionStatus: "resolved_exact", entityStatus: "accepted", provisional: false } }));
       return { status: "completed", providerCalls: 0, results: state.resolutions };
     },
     async persistClaimsWithEvidence(_connection, input) {
@@ -134,11 +134,32 @@ test("enabled shadow extracts, resolves, and persists evidence-backed claims", a
   assert.equal(flow.state.resolutions.length, 1);
   assert.equal(flow.state.claims.length, 1);
   assert.deepEqual(calls, { entity: 1, claim: 1 });
+  assert.deepEqual({
+    extracted: result.metrics.entitiesExtracted,
+    persisted: result.metrics.entitiesPersisted,
+    resolved: result.metrics.entitiesResolved,
+    canonical: result.metrics.entitiesCanonicallyResolved,
+  }, { extracted: 1, persisted: 1, resolved: 1, canonical: 1 });
   assert.equal(result.metrics.externalProviderCalls, 0);
   assert.equal(result.metrics.relationsFound, 0);
   assert.equal(result.metrics.relationsPersisted, 0);
   assert.equal(result.metrics.eventPreparation, "skipped");
   assert.equal(result.metrics.eventsFound, 0);
+});
+
+test("entity metrics do not report a provisional anchor as canonically resolved", async () => {
+  const flow = harness();
+  flow.dependencies.runEntityResolutionBatch = async () => ({
+    status: "completed",
+    providerCalls: 0,
+    results: [{ result: { entityId: 31, resolutionStatus: "unresolved", entityStatus: "unresolved", provisional: true } }],
+  });
+  const result = await runV2ShadowIntelligence(null, 7, { env: ENABLED, ...localProviders(), repository: flow.repository, dependencies: flow.dependencies });
+  assert.equal(result.status, "completed");
+  assert.equal(result.metrics.entitiesExtracted, 1);
+  assert.equal(result.metrics.entitiesPersisted, 1);
+  assert.equal(result.metrics.entitiesResolved, 0);
+  assert.equal(result.metrics.entitiesCanonicallyResolved, 0);
 });
 
 test("supported evidence-backed relation is persisted before the event stage", async () => {
@@ -216,7 +237,7 @@ test("relation persistence is atomic at the shadow transaction boundary", async 
     return { claims: [{ subjectEntityId: 31, predicate: "CEO_OF", objectEntityId: 32, claimType: "entity", confidence: 0.94, evidence: { start, end: start + textSpan.length, textSpan } }] };
   };
   const flow = harness({ article: article({ title: "Anna az Acme Kft. vezérigazgatója.", contentText: "Részletek." }) });
-  flow.dependencies.runEntityResolutionBatch = async () => ({ status: "completed", providerCalls: 0, results: [{ result: { entityId: 31 } }, { result: { entityId: 32 } }] });
+  flow.dependencies.runEntityResolutionBatch = async () => ({ status: "completed", providerCalls: 0, results: [{ result: { entityId: 31, resolutionStatus: "resolved_exact", entityStatus: "accepted", provisional: false } }, { result: { entityId: 32, resolutionStatus: "resolved_exact", entityStatus: "accepted", provisional: false } }] });
   flow.dependencies.persistEntityExtraction = async () => ({ runId: 11, mentions: [{ id: 21 }, { id: 22 }] });
   flow.repository.withTransaction = async (work) => {
     transactionDepth += 1;
