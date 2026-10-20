@@ -1,6 +1,6 @@
 # UTOM current state
 
-Canonical as of **2026-10-20**, based on local commit `af754faa7e30c7a84834d9ff65a0b64826eb7a3f` plus the current reviewable cross-article event-matching working-tree change on `develop/utom-recovery`. This file supersedes historical progress and milestone documents for current operational decisions.
+Canonical as of **2026-10-20**, based on local commit `2831e8737df9e0af8e02c8020950d5435a8f94bc` plus the current reviewable VPS acceptance harness working-tree change on `develop/utom-recovery`. This file supersedes historical progress and milestone documents for current operational decisions.
 
 ## Project
 
@@ -77,6 +77,7 @@ The production core includes article ingestion and publication, AI summaries, ca
 - Event-scoped comparison reads only the claim referenced by each event membership evidence row; it no longer treats every claim in a member article as event evidence. Claims with missing evidence, noncanonical sources or unresolved subject/object identities abstain. Same-source articles collapse to one source observation while retaining article and evidence references.
 - Cross-article event matching reads bounded article-local events of the same type and accepts a group only when persisted evidence, resolved subject, explicit object/target/project/product, exact known temporal bounds, compatible resolved location, predicate and claim state all agree. Titles, keywords, categories and publication time are not inputs. Unknown time, missing discriminators and incomplete location proof remain candidates; hard semantic mismatches are rejected. No event row is merged or deleted.
 - Matched event IDs feed the existing source-comparison and conflict projections at read time. The returned canonical timeline descriptor represents one anchor event with multiple article observations, while preserving every article-local event and evidence chain. Same-source observations remain one source identity and are never labelled independent confirmation.
+- A standalone, fail-closed VPS acceptance harness is available through `npm run v2:acceptance:vps -- --article-ids=...`. It reads selected production inputs through a SQL allowlist, writes only to a guarded `utom_acceptance_*` database, runs fresh migrations and the canonical deterministic chain, and produces reports under `/tmp`. This has not yet been executed on the VPS and does not enable V2 globally.
 - V2 read APIs and article/source/premium panels exist behind server and browser flags; they depend on populated V2 read models.
 - Email, maintenance and pipeline unit templates exist in the repository but are not proof of host installation.
 
@@ -124,13 +125,13 @@ V2.2 deterministic NLP, HuSpaCy/Stanza/local-worker experiments, semantic roles,
 1. Review/install `utom-pipeline.service` in a controlled deployment window and verify one healthy worker plus stale-lease recovery.
 2. Verify schema 064 and run production preflight against the intended host without exposing secrets.
 3. Install email and maintenance timers, then monitor first activations and reconcile any uncertain email rows.
-4. Review the evidence-based shadow relation/event/timeline plus read-time cross-article matching/source-comparison/conflict working-tree change. Keep the UI and historical backfill disabled until a controlled VPS multi-source acceptance run proves real persisted object/location/temporal coverage.
+4. Run the documented bounded multi-source acceptance command on the VPS with three owner-reviewed production article IDs. Keep the UI and historical backfill disabled until that run proves real persisted object/location/temporal coverage.
 5. Create a checksummed external archive for local V2.2 agent runs and historical root scratch files.
 
 ## Last verified
 
 - Date: 2026-10-20 (Europe/Budapest)
 - Branch: `develop/utom-recovery`
-- Base commit: `af754faa7e30c7a84834d9ff65a0b64826eb7a3f`
+- Base commit: `2831e8737df9e0af8e02c8020950d5435a8f94bc`
 - Inventory: `docs/recovery/repository-inventory.json`
 - Validation results: `docs/recovery/VALIDATION_REPORT.md`; production was not deployed.

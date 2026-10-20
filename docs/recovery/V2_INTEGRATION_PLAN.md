@@ -142,3 +142,7 @@ Schema 064 has sufficient nullable point/bound columns and stable ordering keys,
 3. Watch the structured completion/failure/skip counts, duration, entity/claim volume and evidence failures. Do not enable browser V2 panels from this signal alone.
 4. Roll back instantly by setting `UTOM_V2_SHADOW_ENABLED=false` and restarting the worker. Existing additive V2 rows may remain; V1 needs no data rollback.
 5. Historical backfill, event graph activation, user-visible rollout and production enablement each require a separate approval and acceptance gate.
+
+## VPS production-shaped acceptance gate
+
+Before any V2 UI or historical backfill activation, run the standalone harness documented in `docs/recovery/V2_VPS_ACCEPTANCE.md` with three owner-reviewed production article IDs from three canonical sources. The production connection is SQL read-only; all migrations and V2 writes target a disposable `utom_acceptance_*` database. A local unit pass is only harness readiness. The gate remains open until the command is executed on the VPS and its report proves production writes zero, provider calls zero, valid provenance, safe timeline/conflict behavior, and an honest PASS/PARTIAL/FAIL match result.
