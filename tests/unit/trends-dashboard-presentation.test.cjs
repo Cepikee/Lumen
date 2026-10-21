@@ -19,7 +19,7 @@ test("trends route owns the reference dashboard shell", () => {
   assert.match(styles, /grid-template-columns:\s*180px minmax\(0, 1fr\)/);
   assert.match(globe, /globeArtwork/);
   assert.match(globe, /trends-land-dots/);
-  assert.match(globe, /rx="278"/);
+  assert.match(globe, /inside\(lon, lat, p\)/);
 });
 
 test("trends redesign keeps real endpoints, fail-safe states and honest fallbacks", () => {
@@ -30,7 +30,7 @@ test("trends redesign keeps real endpoints, fail-safe states and honest fallback
   assert.match(dashboard, /data-state="preview"/);
   assert.match(dashboard, /A trendadatok most nem érhetők el/);
   assert.match(dashboard, /Array\.from\(\{ length: 8 \}/);
-  assert.match(dashboard, /nem ad forrásonkénti darabszámot/);
+  assert.match(dashboard, /user \? <ProfileMenu \/> : <LoginModal \/>/);
   assert.doesNotMatch(dashboard, /Telex[^\n]*38%|Index[^\n]*28%|444[^\n]*22%/);
 });
 

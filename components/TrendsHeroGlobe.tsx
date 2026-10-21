@@ -1,61 +1,46 @@
 import styles from "./TrendsDashboard.module.css";
 
+// Coarse geographic silhouettes, projected onto a sphere rather than a flat pattern.
+const land = [
+  [[-17,36],[10,37],[35,31],[51,11],[40,-12],[19,-35],[10,-24],[-1,5],[-17,15]],
+  [[-10,36],[-9,58],[10,71],[33,70],[44,48],[29,38],[18,43],[5,43]],
+  [[30,72],[80,76],[140,60],[160,48],[130,18],[105,-5],[70,10],[44,32]],
+  [[-80,12],[-55,7],[-35,-8],[-50,-35],[-68,-55],[-77,-16]],
+  [[-160,70],[-60,72],[-52,48],[-82,10],[-105,20],[-130,50]],
+];
+function inside(x: number, y: number, polygon: number[][]) {
+  let result = false;
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    const [xi, yi] = polygon[i]; const [xj, yj] = polygon[j];
+    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) result = !result;
+  }
+  return result;
+}
+const dots: { x: number; y: number; z: number; land: boolean }[] = [];
+for (let lat = -86; lat < 86; lat += 2.6) {
+  for (let lon = -180; lon < 180; lon += 2.6 / Math.max(.2, Math.cos(lat * Math.PI / 180))) {
+    const a = lat * Math.PI / 180, b = (lon - 16) * Math.PI / 180;
+    const z = Math.cos(a) * Math.cos(b);
+    if (z <= 0) continue;
+    const x = Math.cos(a) * Math.sin(b), y = -Math.sin(a);
+    dots.push({ x: 310 + 119 * (x * .94 + y * .34), y: 150 + 119 * (y * .94 - x * .34), z, land: land.some(p => inside(lon, lat, p)) });
+  }
+}
 export default function TrendsHeroGlobe() {
-  return (
-    <div className={styles.globeScene} aria-hidden="true">
-      <svg className={styles.globeArtwork} viewBox="0 0 620 190" role="presentation">
-        <defs>
-          <radialGradient id="trends-haze" cx="50%" cy="58%" r="58%">
-            <stop offset="0" stopColor="#167dff" stopOpacity=".36" />
-            <stop offset=".52" stopColor="#183aaf" stopOpacity=".14" />
-            <stop offset="1" stopColor="#020b16" stopOpacity="0" />
-          </radialGradient>
-          <radialGradient id="trends-globe" cx="36%" cy="25%" r="78%">
-            <stop offset="0" stopColor="#26d9ff" stopOpacity=".92" />
-            <stop offset=".25" stopColor="#116ee8" stopOpacity=".94" />
-            <stop offset=".58" stopColor="#4424a8" stopOpacity=".88" />
-            <stop offset="1" stopColor="#03122d" stopOpacity=".96" />
-          </radialGradient>
-          <linearGradient id="trends-orbit" x1="0" x2="1">
-            <stop offset="0" stopColor="#176cff" stopOpacity="0" />
-            <stop offset=".24" stopColor="#1dbaff" stopOpacity=".65" />
-            <stop offset=".72" stopColor="#8957ff" stopOpacity=".72" />
-            <stop offset="1" stopColor="#b83cff" stopOpacity="0" />
-          </linearGradient>
-          <pattern id="trends-dots" width="8" height="8" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="1.45" fill="#58ddff" />
-          </pattern>
-          <pattern id="trends-land-dots" width="6" height="6" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="1.55" fill="#c35cff" />
-          </pattern>
-          <clipPath id="trends-sphere-clip"><ellipse cx="315" cy="111" rx="105" ry="101" /></clipPath>
-          <filter id="trends-glow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        </defs>
-
-        <ellipse cx="315" cy="115" rx="292" ry="105" fill="url(#trends-haze)" />
-        <g className={styles.particleField}>
-          {[[48,82],[73,131],[112,42],[149,104],[181,29],[455,35],[492,96],[539,49],[575,123],[524,153],[93,160],[417,159]].map(([cx, cy], index) => <circle key={index} cx={cx} cy={cy} r={index % 3 === 0 ? 2 : 1.2} />)}
-        </g>
-
-        <g fill="none" stroke="url(#trends-orbit)" strokeWidth="1.15">
-          <ellipse cx="315" cy="105" rx="278" ry="67" transform="rotate(-8 315 105)" />
-          <ellipse cx="315" cy="105" rx="230" ry="91" transform="rotate(11 315 105)" />
-          <ellipse cx="315" cy="106" rx="166" ry="104" transform="rotate(-31 315 106)" />
-          <ellipse cx="315" cy="105" rx="119" ry="111" transform="rotate(58 315 105)" opacity=".55" />
-        </g>
-
-        <ellipse cx="315" cy="111" rx="106" ry="102" fill="url(#trends-globe)" stroke="#2ab7ff" strokeOpacity=".62" />
-        <g clipPath="url(#trends-sphere-clip)">
-          <rect x="203" y="4" width="224" height="214" fill="url(#trends-dots)" opacity=".77" />
-          <path d="M260 36l31-15 28 13 13 20 31 12 12 24-26 6-9 21-21 9-2 29-17 22-20-9-5-31-22-20-18-28 10-23z" fill="url(#trends-land-dots)" opacity=".96" />
-          <path d="M356 121l22-7 22 16-4 24-19 25-17-9-10-23z" fill="url(#trends-land-dots)" opacity=".82" />
-          <path d="M215 89h201M220 61h191M220 139h192M244 31c-18 47-16 111 3 154M277 13c-12 54-12 139 0 187M354 10c13 62 13 143 0 195M391 26c20 51 18 112-2 166" fill="none" stroke="#6d8cff" strokeOpacity=".22" strokeWidth=".8" />
-        </g>
-
-        <g className={styles.globeNodes} filter="url(#trends-glow)">
-          <circle cx="82" cy="85" r="4"/><circle cx="150" cy="49" r="3"/><circle cx="208" cy="129" r="3.4"/><circle cx="252" cy="52" r="3.4"/><circle cx="331" cy="22" r="3.2"/><circle cx="410" cy="74" r="3.8"/><circle cx="479" cy="49" r="3.1"/><circle cx="543" cy="116" r="4"/>
-        </g>
-      </svg>
-    </div>
-  );
+  return <div className={styles.globeScene} aria-hidden="true"><svg className={styles.globeArtwork} viewBox="0 0 620 270">
+    <defs>
+      <radialGradient id="trends-haze"><stop stopColor="#1467ff" stopOpacity=".36"/><stop offset="1" stopColor="#1467ff" stopOpacity="0"/></radialGradient>
+      <radialGradient id="trends-earth" cx="30%" cy="20%"><stop stopColor="#103d8d"/><stop offset="1" stopColor="#030c20"/></radialGradient>
+      <linearGradient id="trends-orbit"><stop stopColor="#008cff" stopOpacity=".08"/><stop offset=".5" stopColor="#238cff" stopOpacity=".7"/><stop offset="1" stopColor="#9548ff" stopOpacity=".4"/></linearGradient>
+      <filter id="trends-node-glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <ellipse cx="310" cy="150" rx="290" ry="160" fill="url(#trends-haze)"/>
+    {Array.from({length: 65}, (_, i) => <circle key={i} cx={(i * 137.5) % 610} cy={(i * 47.3) % 265} r={i % 4 === 0 ? 1.1 : .6} fill="#1b8fff" opacity=".5"/>)}
+    <circle cx="310" cy="150" r="120" fill="url(#trends-earth)" stroke="#167eff" strokeOpacity=".45"/>
+    <g id="trends-land-dots">{dots.map((d,i) => <circle key={i} cx={d.x} cy={d.y} r={d.land ? .75 + d.z * .55 : .5} fill={d.land ? (d.x > 325 ? '#9152ff' : '#20a9ff') : '#16388c'} opacity={d.land ? .55 + d.z * .45 : .5}/>)}</g>
+    <g fill="none" stroke="url(#trends-orbit)" strokeWidth=".65">
+      {[[-22,278,79],[-30,240,90],[-40,205,106],[-14,260,64],[18,225,100],[55,155,112]].map(([angle,rx,ry],i)=><ellipse key={i} cx="310" cy="150" rx={rx} ry={ry} transform={`rotate(${angle} 310 150)`}/>)}
+    </g>
+    <g filter="url(#trends-node-glow)">{[[88,165],[174,76],[235,38],[424,60],[503,113],[410,203],[316,244],[126,220]].map(([x,y],i)=><circle key={i} cx={x} cy={y} r={i%3===0?3.2:2} fill={i%2?'#845dff':'#20d6ff'}/>)}</g>
+  </svg></div>;
 }
