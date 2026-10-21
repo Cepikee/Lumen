@@ -342,3 +342,190 @@
 
 /* The reference globe artwork replaces the old geometric globe visually while retaining the SVG as a fallback. */
 .globeArtwork { opacity:0; }
+
+/* 2026-10-21: screenshot-fidelity / functional charts repair.
+   Keep all changes scoped to the Trends page. */
+.sidebar { padding: 7px 9px 24px; }
+.brand { height: 46px; padding: 0 5px; background:transparent; border:0; box-shadow:none; }
+.brand img,.brandCrop img { filter:none!important; text-shadow:none!important; box-shadow:none!important; }
+.brandCrop { width:113px; height:43px; overflow:hidden; }
+.brandCrop img { width:155px; height:155px; left:-23px; top:-52px; }
+.nav { margin-top:6px; gap:1px; }
+.nav a,.nav .navParent,.nav .navActive,.nav .navCurrent,.nav a:hover {
+  border:0; background:transparent; box-shadow:none; text-shadow:none;
+  margin:0 2px; padding:7px 9px; min-height:32px;
+}
+.nav a { color:#b1c7dd; }
+.nav a:hover,.nav .navCurrent:hover { color:#eaf6ff; background:rgba(30,89,144,.11); }
+.nav .navCurrent { color:#d8ebff; font-weight:700; }
+.nav .navCurrent svg { color:#6fc5ff; }
+.nav a svg { width:17px; height:17px; }
+.filterDivider { margin-top:14px; }
+.filterLabel { display:flex; align-items:center; gap:5px; }
+.filterLabel svg { width:13px; height:13px; color:#42aaff; }
+.filters { padding:0 10px; }
+.filters > label, .filters fieldset { gap:6px; margin-bottom:14px; }
+.filters legend.filterLabel { margin-bottom:8px; }
+/* Category filters use identifiable icons, never squares pretending to be icons. */
+.categoryFilter { position:relative; display:flex; align-items:center; gap:9px; min-height:22px;
+  border-radius:6px; padding:2px 3px; color:#bad1e2; font-size:11px; cursor:pointer; }
+.categoryFilter:hover,.categoryFilterSelected { color:#fff; background:rgba(39,96,151,.15); }
+.categoryFilter input { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+.categoryFilter:focus-within { outline:1px solid #4bbaff; outline-offset:2px; }
+.categoryFilterIcon { display:flex; width:18px; height:18px; align-items:center; justify-content:center;
+  color:var(--category-color,#26c6ff); filter:drop-shadow(0 0 3px color-mix(in srgb,var(--category-color,#26c6ff),transparent 55%)); }
+.categoryFilterIcon svg { width:15px; height:15px; stroke-width:2; }
+.categoryFilterSelected .categoryFilterIcon { filter:drop-shadow(0 0 6px var(--category-color,#27c9ff)); }
+.filters input[type="search"] { padding-left:10px; font-size:11px; }
+/* Real interactive date range picker; the native white select popup is no longer used. */
+.topbar { position:relative; z-index:25; }
+.topActions { align-items:center; gap:15px; }
+.datePicker,.notificationBox { position:relative; }
+.dateTrigger { display:flex; align-items:center; gap:11px; min-width:228px; height:36px;
+  border:1px solid #284a68!important; border-radius:8px; padding:0 12px!important;
+  color:#e7f3ff!important; background:#091b30!important; cursor:pointer; font-size:11px!important; }
+.dateTrigger span { flex:1; text-align:left; white-space:nowrap; }
+.dateTrigger svg { width:17px; height:17px; }
+.dateTrigger svg:last-child { width:13px; height:13px; }
+.dateTrigger:hover,.dateTrigger[aria-expanded="true"] { border-color:#357bb3!important; background:#0c2641!important; }
+.datePopover { position:absolute; z-index:100; top:calc(100% + 12px); right:0; width:318px;
+  padding:15px; color:#deefff; background:#081b30; border:1px solid #296399; border-radius:12px;
+  box-shadow:0 18px 60px #000c, 0 0 28px #1453a222; font-size:12px; }
+.dateQuick { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:5px; margin-bottom:14px; }
+.dateQuick button { cursor:pointer; border:1px solid #294c71!important; border-radius:7px;
+  padding:8px 3px!important; background:#0c2946!important; color:#b6d4eb!important; font-size:11px!important; }
+.dateQuick .dateQuickActive,.dateQuick button:hover { background:#1451a7!important; color:#fff!important; border-color:#168cf8!important; }
+.calendarHeading { margin:0 0 7px; font-size:12px; font-weight:700; }
+.calendarHeading small { display:block; margin-top:4px; color:#8ba9c5; font-size:11px; font-weight:400; }
+.calendarMonth { display:flex; align-items:center; justify-content:space-between; margin:7px 0 9px; }
+.calendarMonth strong { color:#f0f7ff; font-size:13px; text-transform:capitalize; }
+.calendarMonth button { display:grid; place-items:center; width:27px; height:27px; border:1px solid #24496b!important; border-radius:7px; background:#112d49!important; color:#cae8ff!important; cursor:pointer; font-size:21px!important; }
+.calendarMonth button:disabled { opacity:.3; cursor:not-allowed; }
+.calendarGrid { display:grid; grid-template-columns:repeat(7,1fr); gap:3px; }
+.calendarGrid .calendarWeekday { display:grid; place-items:center; height:27px; color:#85abc9; font-size:11px; }
+.calendarGrid button { height:34px; border:1px solid transparent!important; border-radius:7px;
+  background:#0c223b!important; color:#cfdfef!important; cursor:pointer; font-size:12px!important; }
+.calendarGrid button:hover:not(:disabled) { border-color:#40b6ff!important; background:#133c62!important; }
+.calendarGrid button.calendarSelected { border-color:#139fff!important; color:white!important; background:#1756c0!important; }
+.calendarGrid button.calendarInRange { color:#b8e9ff!important; background:#164c70!important; }
+.calendarGrid button:disabled { color:#36516a!important; background:transparent!important; cursor:not-allowed; }
+.dateHelp { margin:10px 0 0; color:#7395ad; font-size:10px; }
+.notificationTrigger { display:grid; place-items:center; width:30px; height:32px; border:0!important;
+  background:transparent!important; color:#b6cfe9!important; cursor:pointer; }
+.notificationTrigger svg { width:19px; height:19px; }
+.notificationTrigger:hover { color:#30c5ff!important; }
+.notificationPanel { position:absolute; z-index:95; right:-45px; top:calc(100% + 15px); width:270px;
+  background:#081b30; border:1px solid #29557b; border-radius:10px; padding:15px;
+  box-shadow:0 15px 40px #0009; }
+.notificationPanel strong { font-size:13px; }
+.notificationPanel p { margin:9px 0; color:#a0bdd3; font-size:11px; line-height:1.5; }
+.notificationPanel button { margin-top:4px; color:#5fc5ff!important; font-size:11px!important; cursor:pointer; }
+.profile { display:flex; align-items:center; }
+/* KPI icons */
+.stats article:nth-child(3) .iconTile { color:#1fcaff; }
+.stats article:nth-child(4) .iconTile { color:#ba70ff; background:linear-gradient(145deg,#16317b,#251452); }
+.stats article:nth-child(4) .iconTile svg { filter:drop-shadow(0 0 5px #a64aff); stroke-width:2.15; }
+.stats .iconTile svg { width:27px; height:27px; }
+/* Rich trend row layout: rank | keyword+badges+sources | real series | hits | strength | expand */
+.trendCard,.previewTrendCard { grid-template-columns:52px minmax(0,1fr) 143px 135px 142px 34px!important;
+  gap:7px!important; min-height:80px; padding:8px 12px!important; }
+.trendInfo { min-width:0; }
+.trendHeading { display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0; }
+.nameAndSources { min-width:125px; flex:1; }
+.keywordRow h3 { font-size:16px; max-width:none; }
+.sourceTags { margin-top:4px; }
+.sourceTags span,.sourceTags button { color:#ccdff0; border-radius:15px; font-size:10px; padding:2px 7px; }
+.rowMeta { display:flex; flex:1; justify-content:flex-start; align-items:center; flex-wrap:wrap;
+  gap:5px; max-width:49%; min-width:0; }
+.category { display:inline-flex; align-items:center; gap:4px; padding:4px 7px; border-radius:12px;
+  color:var(--category-color,#51b7ff); border-color:color-mix(in srgb,var(--category-color,#51b7ff),transparent 55%);
+  background:color-mix(in srgb,var(--category-color,#51b7ff),transparent 90%); white-space:nowrap; }
+.category svg { width:14px; height:14px; stroke-width:2; }
+.newBadge { display:inline-flex; align-items:center; gap:4px; border-radius:10px; font-size:10px; padding:4px 7px;
+  color:#42e9e8; background:rgba(9,156,164,.22); border-color:rgba(8,231,213,.32); }
+.newBadge svg { width:13px; height:13px; }
+.hotBadge { display:inline-flex; align-items:center; border:1px solid #055c45; border-radius:10px; padding:4px 7px;
+  color:#0ee9a7; font-weight:700; font-size:10px; white-space:nowrap; background:rgba(0,92,65,.2); }
+.freshness { display:inline-flex; align-items:center; gap:4px; white-space:nowrap; color:#acbfd4; font-size:10px; }
+.freshness svg { width:13px; height:13px; }
+.trendInfo p { max-width:100%; font-size:10px; }
+.sparkButton,.sparkline { width:140px; }
+.sparkButton { display:flex; align-items:center; }
+.hitStat { min-width:0; }
+.hitStat span,.strength > span { font-size:10px; }
+.hitNumbers { display:flex; align-items:center; justify-content:space-between; gap:7px; margin-top:4px; }
+.hitNumbers strong { margin:0; font-size:17px; }
+.hitNumbers b { white-space:nowrap; }
+.strength > div { gap:2px; }
+.strength i { width:9px; height:10px; }
+/* Source distribution uses server-provided real values, never invented percentages. */
+.sourceEmpty { display:flex; align-items:center; gap:13px; padding:14px 13px; }
+.emptyDonut { flex:0 0 118px; width:118px; height:118px; }
+.emptyDonut::after { inset:17px; }
+.emptyDonut span { color:#dff4ff; font-size:13px; font-weight:800; }
+.donutLegend { display:grid; gap:9px; min-width:0; flex:1; }
+.donutLegend > div { display:flex; align-items:center; gap:7px; min-width:0; color:#9cb8cf; font-size:10px; }
+.donutLegend > div > i { flex:0 0 8px; width:8px; height:8px; border-radius:2px; background:#25445f; }
+.donutLegend > div > span { flex:1; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+.donutLegend > div > b { color:#dcefff; font-size:10px; }
+.newTopicsList li em,.sidePreview li em { width:24px; height:23px; border-radius:8px;
+  background:linear-gradient(145deg,#02c8f5,#006dc6); color:#eaffff; font-size:9px; font-weight:800; box-shadow:0 0 8px #00a8fb44; }
+.activityBars { height:125px; gap:3px; border-bottom:1px solid #144777; }
+.activityBars i { min-height:0; }
+/* Smaller desktops: keep sparkline and numeric columns without crushing title badges. */
+@media(max-width:1700px) and (min-width:1081px) {
+  .trendCard,.previewTrendCard { grid-template-columns:45px minmax(0,1fr) 117px 112px 125px 32px!important;
+    gap:5px!important; padding:7px 10px!important; }
+  .sparkButton,.sparkline { width:115px; }
+  .rowMeta { max-width:52%; }
+  .category { font-size:9px; }
+  .strength i { width:7px; }
+  .hitNumbers strong { font-size:16px; }
+  .hitNumbers b { font-size:10px; }
+  .sourceTags span,.sourceTags button { font-size:9px; }
+}
+@media(max-width:1250px) and (min-width:821px) {
+  .trendCard,.previewTrendCard { grid-template-columns:42px minmax(0,1fr) 105px 98px 31px!important; }
+  .strength { display:none; }
+  .rowMeta { max-width:45%; }
+  .sparkButton,.sparkline { width:102px; }
+}
+@media(max-width:1080px) {
+  .content { grid-template-columns:1fr; }
+  .rightRail { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:820px) {
+  .nav { margin-top:6px; }
+  .trendCard,.previewTrendCard { grid-template-columns:40px minmax(0,1fr) 102px 30px!important; }
+  .sparkButton,.sparkline { width:99px; }
+  .rowMeta { max-width:55%; }
+  .hitStat,.strength { display:none; }
+  .datePicker { display:none; }
+}
+@media(max-width:560px) {
+  .trendCard,.previewTrendCard { grid-template-columns:39px minmax(0,1fr) 30px!important; }
+  .sparkButton { display:none; }
+  .trendHeading { align-items:flex-start; }
+  .rowMeta { max-width:48%; }
+  .keywordRow h3 { font-size:14px; }
+  .rightRail { grid-template-columns:1fr; }
+  .topActions { justify-content:flex-end; }
+}
+
+/* If the reference PNG is missing or blocked, the SVG globe remains visible. */
+.globeArtwork { opacity:1; }
+.globeReferenceArtwork { opacity:1; }
+
+.activeBadge { display:inline-flex; align-items:center; border:1px solid rgba(12,180,154,.3);
+  border-radius:10px; padding:4px 7px; color:#13deb4; background:rgba(6,107,100,.15);
+  font-size:10px; font-weight:700; white-space:nowrap; }
+@media(max-width:820px) { .datePicker { display:block; } .dateTrigger { min-width:145px; max-width:205px; } }
+@media(max-width:560px) { .datePopover { right:-70px; width:min(318px,96vw); } }
+
+/* Image-load-gated globe: an absent file can no longer blank the header. */
+.globeReferenceArtwork { object-fit:fill; background-image:none; transition:opacity .2s ease; }
+.globeArtwork { transition:opacity .2s ease; }
+
+/* The manifest logo contains transparent padding: crop to the actual artwork, with no halo. */
+.brandCrop img { width:103px!important; height:103px!important; left:-12px!important; top:-23px!important; }
+.dataDonut { box-shadow: 0 0 16px rgba(21,130,247,.16); }

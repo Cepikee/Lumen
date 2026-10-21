@@ -93,7 +93,8 @@ export async function GET(req: Request) {
            COUNT(*) AS freq,
            MIN(k.created_at) AS first_seen,
            MAX(k.created_at) AS last_seen,
-           NULL AS growth
+           NULL AS growth,
+           GROUP_CONCAT(DISTINCT NULLIF(TRIM(a.source), '') SEPARATOR '|') AS sources
          FROM keywords k
          JOIN articles a ON a.id = k.article_id
          WHERE ${realtimeWhere.join(" AND ")}
@@ -102,7 +103,23 @@ export async function GET(req: Request) {
          LIMIT ${MAX_TRENDS_RESULTS}`,
         realtimeParams,
       );
-      return NextResponse.json({ status: "ok", trends: rows });
+      // These are actual records within the selected one-day interval, not demo data.
+      const [sourceRows] = await connection.execute<any[]>(
+        `SELECT COALESCE(NULLIF(TRIM(a.source), ''), 'Ismeretlen forrás') AS source, COUNT(*) AS count
+         FROM keywords k JOIN articles a ON a.id = k.article_id
+         WHERE ${realtimeWhere.join(" AND ")}
+         GROUP BY COALESCE(NULLIF(TRIM(a.source), ''), 'Ismeretlen forrás') ORDER BY count DESC LIMIT 20`, realtimeParams,
+      );
+      const [activityRows] = await connection.execute<any[]>(
+        `SELECT HOUR(k.created_at) AS hour, COUNT(*) AS count
+         FROM keywords k JOIN articles a ON a.id = k.article_id
+         WHERE ${realtimeWhere.join(" AND ")}
+         GROUP BY hour ORDER BY hour`, realtimeParams,
+      );
+      const activity = Array.from({ length: 24 }, (_, hour) => ({
+        label: `${hour}:00`, count: Number(activityRows.find((entry) => Number(entry.hour) === hour)?.count ?? 0),
+      }));
+      return NextResponse.json({ status: "ok", trends: rows, sourceBreakdown: sourceRows, activity });
     }
 
     const whereParts: string[] = [];
@@ -165,7 +182,8 @@ export async function GET(req: Request) {
          COUNT(*) AS freq,
          MIN(t.created_at) AS first_seen,
          MAX(t.created_at) AS last_seen,
-         ${growthSql}
+         ${growthSql},
+         GROUP_CONCAT(DISTINCT NULLIF(TRIM(t.source), '') SEPARATOR '|') AS sources
        FROM trends t
        ${whereClause}
        GROUP BY t.keyword, t.category
@@ -174,7 +192,34 @@ export async function GET(req: Request) {
       [...growthParams, ...growthParams, ...params],
     );
 
-    return NextResponse.json({ status: "ok", trends: rows });
+    // Reuse exactly the same period/source/category filters for the dashboard charts.
+    const [sourceRows] = await connection.execute<any[]>(
+      `SELECT COALESCE(NULLIF(TRIM(t.source), ''), 'Ismeretlen forrás') AS source, COUNT(*) AS count
+       FROM trends t ${whereClause}
+       GROUP BY COALESCE(NULLIF(TRIM(t.source), ''), 'Ismeretlen forrás') ORDER BY count DESC LIMIT 20`, params,
+    );
+    const [activityRows] = await connection.execute<any[]>(
+      `SELECT DATE_FORMAT(t.created_at, '%Y-%m-%d') AS label, COUNT(*) AS count
+       FROM trends t ${whereClause}
+       GROUP BY label ORDER BY label DESC LIMIT 366`, params,
+    );
+    // Fill zero-activity days explicitly. Zero means no matching records,
+    // not a fabricated measurement. The chart shows at most the last 30 days.
+    const counts = new Map<string, number>(activityRows.map((row) => [String(row.label), Number(row.count)]));
+    const today = new Date();
+    const utcToday = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
+    const end = period === "custom" && endDate
+      ? Math.min(Date.parse(`${endDate}T00:00:00Z`), utcToday)
+      : utcToday;
+    const start = period === "custom" && startDate
+      ? Date.parse(`${startDate}T00:00:00Z`)
+      : end - (period === "7d" ? 6 : period === "365d" ? 364 : 29) * 86_400_000;
+    const days = Math.min(30, Math.max(0, Math.floor((end - start) / 86_400_000) + 1));
+    const activity = Array.from({ length: days }, (_, index) => {
+      const label = new Date(end - (days - index - 1) * 86_400_000).toISOString().slice(0, 10);
+      return { label, count: counts.get(label) ?? 0 };
+    });
+    return NextResponse.json({ status: "ok", trends: rows, sourceBreakdown: sourceRows, activity });
   } catch (err: any) {
     console.error("API /trends hiba:", err?.message ?? err);
     return NextResponse.json({ error: "trends_query_failed" }, { status: 500 });

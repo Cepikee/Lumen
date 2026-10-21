@@ -1,3 +1,7 @@
+"use client";
+
+import Image from "next/image";
+import { useState } from "react";
 import styles from "./TrendsDashboard.module.css";
 
 // Coarse geographic silhouettes, projected onto a sphere rather than a flat pattern.
@@ -27,7 +31,8 @@ for (let lat = -86; lat < 86; lat += 2.6) {
   }
 }
 export default function TrendsHeroGlobe() {
-  return <div className={styles.globeScene} aria-hidden="true"><svg className={styles.globeArtwork} viewBox="0 0 620 270">
+  const [imageReady, setImageReady] = useState(false);
+  return <div className={styles.globeScene} aria-hidden="true"><svg className={styles.globeArtwork} viewBox="0 0 620 270" style={{ opacity: imageReady ? 0 : 1 }}>
     <defs>
       <radialGradient id="trends-haze"><stop stopColor="#1467ff" stopOpacity=".36"/><stop offset="1" stopColor="#1467ff" stopOpacity="0"/></radialGradient>
       <radialGradient id="trends-earth" cx="30%" cy="20%"><stop stopColor="#103d8d"/><stop offset="1" stopColor="#030c20"/></radialGradient>
@@ -42,5 +47,7 @@ export default function TrendsHeroGlobe() {
       {[[-22,278,79],[-30,240,90],[-40,205,106],[-14,260,64],[18,225,100],[55,155,112]].map(([angle,rx,ry],i)=><ellipse key={i} cx="310" cy="150" rx={rx} ry={ry} transform={`rotate(${angle} 310 150)`}/>)}
     </g>
     <g filter="url(#trends-node-glow)">{[[88,165],[174,76],[235,38],[424,60],[503,113],[410,203],[316,244],[126,220]].map(([x,y],i)=><circle key={i} cx={x} cy={y} r={i%3===0?3.2:2} fill={i%2?'#845dff':'#20d6ff'}/>)}</g>
-  </svg><div className={styles.globeReferenceArtwork} /></div>;
+  </svg><Image src="/trends-reference-globe.png" unoptimized width={520} height={118}
+    className={styles.globeReferenceArtwork} alt="" style={{ opacity: imageReady ? 1 : 0 }}
+    onLoad={() => setImageReady(true)} onError={() => setImageReady(false)} /></div>;
 }
