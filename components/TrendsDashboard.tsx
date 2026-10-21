@@ -110,7 +110,7 @@ function Icon({ children }: { children: React.ReactNode }) {
 
 function Sparkline({ points, tone = "blue" }: { points: HistoryPoint[]; tone?: "blue" | "purple" }) {
   const values = points.map((point) => point.frequency);
-  if (values.length < 2) return <div className={styles.sparkEmpty}><span aria-hidden="true" />Nincs idősor</div>;
+  if (values.length < 2) return <div className={styles.sparkEmpty} aria-label="Ehhez a témához nincs elérhető idősor"><span className={styles.sparkEmptyLine} aria-hidden="true" /><small>Idősor nélkül</small></div>;
   const min = Math.min(...values);
   const max = Math.max(...values);
   const span = Math.max(1, max - min);
@@ -258,6 +258,13 @@ export default function TrendsDashboard() {
   const totalHits = filteredTrends.reduce((sum, trend) => sum + trend.frequency, 0);
   const growing = filteredTrends.filter((trend) => finiteNumber(trend.growth) > 0).sort((a, b) => finiteNumber(b.growth) - finiteNumber(a.growth)).slice(0, 5);
   const maxFrequency = Math.max(0, ...filteredTrends.map((trend) => trend.frequency));
+  const recentlySeen = [...filteredTrends]
+    .filter((trend) => trend.firstSeen || trend.lastSeen)
+    .sort((a, b) => Date.parse(b.lastSeen || b.firstSeen || "") - Date.parse(a.lastSeen || a.firstSeen || ""))
+    .slice(0, 5);
+  const lastWeek = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  const newlySeen = recentlySeen.filter((trend) => trend.firstSeen && Date.parse(trend.firstSeen) >= lastWeek);
+  const topicSidebarRows = newlySeen.length ? newlySeen : recentlySeen;
   const activityByTime = new Map<string, number>();
   Object.values(history).forEach((points) => points.forEach((point) => activityByTime.set(point.label, (activityByTime.get(point.label) ?? 0) + point.frequency)));
   const activityPoints = [...activityByTime].sort(([a], [b]) => a.localeCompare(b, "hu", { numeric: true })).slice(-24);
@@ -359,7 +366,7 @@ export default function TrendsDashboard() {
                 const isOpen = expanded === trend.keyword;
                 return <article key={`${trend.keyword}-${trend.category}`} className={`${styles.trendCard} ${index === 0 ? styles.trendCardFeatured : ""}`}>
                   <span className={styles.rank}>{index + 1}</span>
-                  <div className={styles.trendInfo}><div className={styles.keywordRow}><h3>{trend.keyword}</h3></div><div className={styles.sourceTags}>{(filters.sources.length ? filters.sources : ["Minden forrás"]).map((source) => <span key={source}>{source}</span>)}<button type="button" onClick={() => openSources(trend.keyword)}>Cikkek</button></div><p>{trend.frequency.toLocaleString("hu-HU")} említés · {trend.category} · {filters.period === "custom" ? "egyedi időszak" : filters.period}</p></div>
+                  <div className={styles.trendInfo}><div className={styles.keywordRow}><h3>{trend.keyword}</h3></div><div className={styles.sourceTags}>{(filters.sources.length ? filters.sources : ["Minden forrás"]).map((source) => <span key={source}>{source}</span>)}<button type="button" onClick={() => openSources(trend.keyword)}>Cikkek</button></div><p><span className={styles.topicDescription}>{trend.keyword} említéseinek alakulása a kiválasztott magyar online hírforrásokban.</span><span className={styles.topicSummary}>{trend.frequency.toLocaleString("hu-HU")} említés · {filters.period === "custom" ? "egyedi időszak" : filters.period}</span></p></div>
                   <div className={styles.rowMeta}><span className={styles.category}>{trend.category}</span>{trend.lastSeen && <span className={styles.freshness}><TrendsIcon name="clock" />{relativeTime(trend.lastSeen)}</span>}</div>
                   <button type="button" className={styles.sparkButton} onClick={() => setExpanded(isOpen ? null : trend.keyword)} aria-expanded={isOpen} aria-label={`${trend.keyword} grafikon részletei`}><Sparkline points={points} tone={index % 2 ? "purple" : "blue"} /></button>
                   <div className={styles.hitStat}><span>Összes találat</span><strong>{trend.frequency.toLocaleString("hu-HU")}</strong><b className={growth !== null && growth < 0 ? styles.negative : ""}>{growth === null ? "—" : `${growth >= 0 ? "+" : ""}${growth}%`}</b></div>
@@ -373,7 +380,7 @@ export default function TrendsDashboard() {
 
           <aside className={styles.rightRail}>
             <section className={`${styles.sideCard} ${styles.growingCard}`}><header><TrendsIcon name="↗" /><div><h2>Top növekvő témák</h2><p>Az aktuális időszakban</p></div></header>{growing.length ? <ol>{growing.map((trend, index) => <li key={trend.keyword}><i>{index + 1}</i><button type="button" onClick={() => updateFilter("keyword", trend.keyword)}>{trend.keyword}</button><b>↑ +{Math.round(finiteNumber(trend.growth) * 100)}%</b></li>)}</ol> : <ol className={styles.sidePreview} data-state="preview">{Array.from({ length: 5 }, (_, index) => <li key={index}><i>{index + 1}</i><span /><b>—</b></li>)}</ol>}</section>
-            <section className={`${styles.sideCard} ${styles.newTopicsCard}`}><header><TrendsIcon name="spark" /><div><h2>Új témák</h2><p>Frissen megjelent kulcsszavak</p></div></header><ul className={styles.sidePreview} data-state="preview">{Array.from({ length: 5 }, (_, index) => <li key={index}><em>Új</em><span /><time>—</time></li>)}</ul><p className={styles.compactFallback}>Az új témák adatai még nem érhetők el.</p></section>
+            <section className={`${styles.sideCard} ${styles.newTopicsCard}`}><header><TrendsIcon name="spark" /><div><h2>Új témák</h2><p>{newlySeen.length ? "Frissen megjelent kulcsszavak" : "Legutóbb észlelt témák"}</p></div></header>{topicSidebarRows.length ? <ul className={styles.newTopicsList}>{topicSidebarRows.map((trend) => <li key={trend.keyword}><em>{newlySeen.length ? "Új" : "•"}</em><button type="button" onClick={() => updateFilter("keyword", trend.keyword)}>{trend.keyword}</button><time>{relativeTime(newlySeen.length ? trend.firstSeen : trend.lastSeen || trend.firstSeen)}</time></li>)}</ul> : <ul className={styles.sidePreview} data-state="preview">{Array.from({ length: 5 }, (_, index) => <li key={index}><em>•</em><span /><time>—</time></li>)}</ul>}{!topicSidebarRows.length && <p className={styles.compactFallback}>Még nincs megjeleníthető téma.</p>}</section>
             <section className={styles.sideCard}><header><TrendsIcon name="◎" /><div><h2>Források megoszlása</h2><p>Hiteles aggregált adatra vár</p></div></header><div className={styles.sourceEmpty}><div className={styles.emptyDonut}><span>—</span></div><div className={styles.donutLegend} aria-label="Forrásmegoszlás: nincs adat">{Array.from({ length: 4 }, (_, i) => <div key={i}><i /><span />—</div>)}</div></div></section>
             <section className={styles.sideCard}><header><TrendsIcon name="↗" /><div><h2>Trend aktivitás</h2><p>A megjelenített témák aktivitása</p></div></header>{activity.length ? <div className={styles.activityBars}>{activity.map((value, index) => <i key={index} style={{ height: `${value / Math.max(1, ...activity) * 100}%` }} />)}</div> : <div className={`${styles.activityBars} ${styles.activityPreview}`} data-state="preview">{Array.from({ length: 24 }, (_, index) => <i key={index} />)}</div>}<p className={styles.compactFallback}>{activityPoints.length ? `${activityPoints[0][0]} – ${activityPoints.at(-1)![0]}` : "Idősor nem érhető el"}</p></section>
           </aside>

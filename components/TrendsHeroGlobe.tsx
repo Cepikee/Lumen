@@ -42,5 +42,5 @@ export default function TrendsHeroGlobe() {
       {[[-22,278,79],[-30,240,90],[-40,205,106],[-14,260,64],[18,225,100],[55,155,112]].map(([angle,rx,ry],i)=><ellipse key={i} cx="310" cy="150" rx={rx} ry={ry} transform={`rotate(${angle} 310 150)`}/>)}
     </g>
     <g filter="url(#trends-node-glow)">{[[88,165],[174,76],[235,38],[424,60],[503,113],[410,203],[316,244],[126,220]].map(([x,y],i)=><circle key={i} cx={x} cy={y} r={i%3===0?3.2:2} fill={i%2?'#845dff':'#20d6ff'}/>)}</g>
-  </svg></div>;
+  </svg><div className={styles.globeReferenceArtwork} /></div>;
 }
