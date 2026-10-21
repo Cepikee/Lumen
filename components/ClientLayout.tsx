@@ -24,6 +24,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   const isASZF = pathname.includes("aszf");
   const isImpresszum = pathname.includes("impresszum");
   const isInsights = pathname.includes("insights");
+  const isTrends = pathname === "/trends";
   const isDns = pathname.includes("Dns");
 
   // THEME
@@ -79,6 +80,24 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       >
         {children}
       </main>
+    );
+  }
+
+  // The trends workspace owns its complete dashboard shell (brand rail,
+  // filters and top toolbar), so rendering the global header as well would
+  // duplicate navigation and break the reference layout.
+  if (isTrends) {
+    return (
+      <>
+        <main
+          className="flex-grow-1 overflow-auto p-0"
+          tabIndex={-1}
+          onMouseDown={preventMainFocus}
+        >
+          {children}
+        </main>
+        <CookieConsent />
+      </>
     );
   }
 
