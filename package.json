@@ -46,7 +46,7 @@
     "image:regenerate": "node scripts/regenerate-article-image.cjs"
   },
   "engines": {
-    "node": ">=24 <25"
+    "node": ">=24.22.1 <25"
   },
   "overrides": {
     "source-map-js": "1.2.2"

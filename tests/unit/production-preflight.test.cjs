@@ -57,8 +57,15 @@ test("active CI workflows use the supported Node major", () => {
   for (const file of ["ci.yml", "build.yml"]) {
     const source = fs.readFileSync(path.join(__dirname, "../../.github/workflows", file), "utf8");
     assert.doesNotMatch(source, /node-version:\s*['"]?(18|20)['"]?/);
-    assert.match(source, /node-version:\s*['"]?24['"]?/);
+    assert.match(source, /node-version:\s*['"]?24\.22\.1['"]?/);
   }
+});
+
+test("production preflight rejects Node versions older than the security baseline", () => {
+  const source = fs.readFileSync(path.join(__dirname, "../../scripts/production-preflight.cjs"), "utf8");
+  assert.match(source, /isSupportedNodeVersion\(process\.versions\.node\)/);
+  assert.match(source, /MINIMUM_NODE_VERSION/);
+  assert.doesNotMatch(source, /split\(["']\.["']\)\[0\]\s*===\s*["']24["']/);
 });
 
 test("legacy 444 workflow cannot schedule or execute duplicate ingestion", () => {

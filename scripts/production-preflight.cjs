@@ -7,11 +7,12 @@ const mysql = require("mysql2/promise");
 const { loadMigrations, auditMigrationChain, getMigrationStatus } = require("../db/migration-core.cjs");
 const { REQUIRED_SCHEMA, validateProductionEnvironment, checkSchemaReadiness, redact } = require("../lib/operations");
 const { getImageConfig, validateImageConfig, resolveImageRolloutPolicy } = require("../lib/article-images/config");
+const { MINIMUM_NODE_VERSION, isSupportedNodeVersion } = require("../lib/runtime-version.cjs");
 
 async function main() {
   const checks = [];
   const check = (name, ok, detail) => checks.push({ name, status: ok ? "PASS" : "FAIL", detail });
-  check("node_version", process.versions.node.split(".")[0] === "24", `major=${process.versions.node.split(".")[0]}`);
+  check("node_version", isSupportedNodeVersion(process.versions.node), `actual=${process.versions.node};minimum=${MINIMUM_NODE_VERSION};major=24`);
   try { validateProductionEnvironment(process.env); check("production_configuration", true, "required categories present"); }
   catch (error) { check("production_configuration", false, redact(error.message)); }
   try {
