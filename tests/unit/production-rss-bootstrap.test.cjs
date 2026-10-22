@@ -19,6 +19,10 @@ test("fetch-feed keeps worker auth and only requires feed plus database write", 
   assert.match(route, /blockedCapabilityResponse\(\[\s*"feedFetch",\s*"databaseWrite",?\s*\]\)/);
   assert.doesNotMatch(route, /blockedCapabilityResponse\(\[[\s\S]*?"realAi"/);
   assert.doesNotMatch(route, /openai|ai-client|processArticle/i);
+  assert.match(route, /FROM sources[\s\S]*is_active=1[\s\S]*feed_url IS NOT NULL/);
+  assert.match(route, /for \(const source of activeSources\)/);
+  assert.doesNotMatch(route, /for \(const source of SOURCES\)/);
+  assert.doesNotMatch(route, /assertFeedProcessingAllowed|assertDirectArticleFetchAllowed/);
   assert.match(route, /export async function GET\(\)[\s\S]*status: 405/);
 
   const safe = getRuntimeConfig({ UTOM_OFFLINE_MODE: "false", FEED_FETCH_ENABLED: "true", DB_WRITE_ENABLED: "true", AI_PROVIDER: "mock", REAL_AI_ENABLED: "false" });
@@ -108,6 +112,30 @@ test("same URL deduplicates, new articles stay pending and V2 remains off", asyn
     assert.equal("v2" in first, false);
     const insert = db.calls.find((call) => /INSERT IGNORE INTO articles/.test(call.sql));
     assert.match(insert.sql, /'pending'/);
+  } finally {
+    if (previous === undefined) delete process.env.UTOM_V2_ENABLED; else process.env.UTOM_V2_ENABLED = previous;
+  }
+});
+
+test("a registered unlisted RSS source is ingested and keeps URL deduplication", async () => {
+  const previous = process.env.UTOM_V2_ENABLED;
+  process.env.UTOM_V2_ENABLED = "false";
+  try {
+    const db = ingestionDb();
+    const item = {
+      title: "Új nyilvános RSS forrás",
+      originalUrl: "https://www.example-news.hu/cikk/1?utm_source=rss",
+      content: "Tartalom",
+      source: "example-news.hu",
+      publishedAt: "2026-10-22T10:00:00Z",
+    };
+    const first = await ingestFeedArticle(db, item);
+    const second = await ingestFeedArticle(db, item);
+    assert.equal(first.outcome, "inserted");
+    assert.equal(second.outcome, "deduplicated");
+    assert.equal(first.source, "example-news.hu");
+    const lookup = db.calls.find((call) => /SELECT id, is_active FROM sources/.test(call.sql));
+    assert.deepEqual(lookup.params, ["example-news.hu"]);
   } finally {
     if (previous === undefined) delete process.env.UTOM_V2_ENABLED; else process.env.UTOM_V2_ENABLED = previous;
   }

@@ -102,6 +102,10 @@ Fontos szabályok:
 - Ne ismételd meg szó szerint a rövid összefoglalót.
 - Ne írj új információt, csak azt használd, ami a cikkben szerepel.
 - Ne írj újságcikket, csak elemző összefoglalót.
+- Használj önálló mondatszerkezetet; ne vegyél át mondatot vagy hosszabb szókapcsolatot szó szerint.
+- Közvetlen idézet csak kivételesen, röviden és egyértelmű attribúcióval szerepelhet.
+- Őrizd meg a forrásban jelzett attribúciót, tagadást, feltételességet és bizonytalanságot.
+- Az elemzés ne tegye szükségtelenné az eredeti cikk megnyitását.
 - Ne ismételd önmagad.
 - Ne sorold fel többször ugyanazt.
 - Ne írj listát, csak folyamatos szöveget.

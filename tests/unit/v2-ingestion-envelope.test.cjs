@@ -37,7 +37,7 @@ test("creates deterministic, canonical, immutable provenance envelope", () => {
   assert.equal(JSON.stringify(first.envelope).includes("password"), false);
 });
 
-test("keeps unknown provenance explicit and rejects malformed article input", () => {
+test("derives provenance for a valid unlisted source and rejects malformed article input", () => {
   const result = createIngestionEnvelope({
     originalUrl: "https://unknown.example/news",
     title: "  ",
@@ -46,7 +46,11 @@ test("keeps unknown provenance explicit and rejects malformed article input", ()
     observedAt: "also-invalid",
   });
   assert.equal(result.outcome, "normalized");
-  assert.equal(result.envelope.source, null);
+  assert.deepEqual(result.envelope.source, {
+    sourceId: null,
+    key: "unknown.example",
+    displayName: "unknown.example",
+  });
   assert.equal(result.envelope.publication.occurredAt, null);
   assert.equal(result.envelope.publication.source, null);
   assert.equal(result.envelope.observedAt, null);

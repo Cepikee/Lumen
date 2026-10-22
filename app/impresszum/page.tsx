@@ -39,9 +39,8 @@ export default function Impresszum(): JSX.Element {
           <p>
             Az <strong>Utom.hu</strong> egy automatizált, mesterséges intelligencia által működtetett hírszolgáltató és összefoglaló platform. A rendszer nyilvános forrásokból gyűjt információkat, rendszerezi és AI‑alapú eljárásokkal rövid, áttekintő tartalmakat készít.
           </p>
-          <p>
-            Minden közzétett anyag AI‑generáltként van jelölve, és a cikkekben a források mindig fel vannak tüntetve (a címben kattintható link formájában).
-          </p>
+          <p>A nyilvános összefoglaló nézetek AI‑jelölést, forrásnevet és az eredeti cikkre mutató hivatkozást tartalmaznak.</p>
+          <p>A szolgáltatás sajtóterméki és szerkesztői jogi besorolása szakértői ellenőrzésre vár.</p>
         </section>
 
         <section>
@@ -57,10 +56,10 @@ export default function Impresszum(): JSX.Element {
         <section>
           <h2>Adatvédelem és sütik</h2>
           <p>
-            Az adatkezelés részletes szabályait az <a href="/adatvedelem">Adatvédelmi Tájékoztató</a> tartalmazza. A weboldal Google Analytics szolgáltatást használ analitika céljából; ahol lehetséges, az analitika anonimizálásra és rövidebb adatmegőrzési időre van konfigurálva.
+            Az adatkezelés technikai leírását az <a href="/adatvedelem">Adatvédelmi Tájékoztató</a> tartalmazza. A Google Analytics csak akkor töltődik be, ha az analitika környezeti kapcsolója aktív és a látogató azt engedélyezte.
           </p>
           <p>
-            A személyes adatok kezelése során a Szolgáltató a vonatkozó adatvédelmi jogszabályokat (GDPR) betartja. Az érzékeny adatok védelme érdekében az adatbázisban tárolt adatok titkosítva vannak.
+            A jelszavak egyirányú hash formájában, a munkamenet-tokenek hash-elve, az e-mail outbox érzékeny mezői pedig alkalmazásszintű titkosítással tárolódnak. A teljes adatbázis titkosítására a repository nem ad bizonyítékot.
           </p>
         </section>
 
@@ -70,14 +69,14 @@ export default function Impresszum(): JSX.Element {
             Minden publikált szöveg AI‑alapú generálással készül. A Szolgáltató belső ellenőrzési folyamatokat alkalmaz (plágiumellenőrzés és egyéb minőségellenőrzési lépések), hogy csökkentse a jogi kockázatokat és a nyilvánosságra hozott tartalmak pontatlanságát.
           </p>
           <p>
-            A Szolgáltató DPIA (Adatvédelmi Hatásvizsgálat) elkészítését megkezdte; a DPIA összefoglalója és a kapcsolódó dokumentáció kérésre rendelkezésre áll.
+            Az AI-feldolgozások DPIA-kötelezettségét és az esetleges dokumentum státuszát adatvédelmi szakértőnek és a szolgáltatónak kell igazolnia.
           </p>
         </section>
 
         <section>
           <h2>Szellemi tulajdon</h2>
           <p>
-            A weboldalon megjelenő tartalmak szerzői jogi védelem alatt állhatnak. A tartalmak jogosulatlan tömeges másolása, terjesztése vagy kereskedelmi felhasználása tilos. A források és a szerzői jogi státusz minden cikknél jelölve van.
+            A weboldalon megjelenő tartalmak szerzői jogi védelem alatt állhatnak. A tartalmak jogosulatlan tömeges másolása, terjesztése vagy kereskedelmi felhasználása tilos. A nyilvános összefoglalóknál forrás és eredeti hivatkozás látható; ez önmagában nem rendez felhasználási jogot.
           </p>
         </section>
 
@@ -92,7 +91,7 @@ export default function Impresszum(): JSX.Element {
           <h2>Panaszkezelés és ügyfélszolgálat</h2>
           <p>
             Panaszok és jogérvényesítési igények bejelentésére: <strong><a href="mailto:support@utom.hu">support@utom.hu</a></strong>.
-            A Szolgáltató a bejelentésekre törekszik 14 napon belül válaszolni.
+            A bejelentéseket a kapcsolatfelvételi rendszer fogadja; a válaszidő az ügy jellegétől és a szükséges ellenőrzéstől függ.
           </p>
         </section>
 

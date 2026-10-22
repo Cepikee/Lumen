@@ -7,11 +7,18 @@ import Parser from "rss-parser";
 import * as cheerio from "cheerio";
 import { canonicalizeArticleUrl } from "@/lib/article-identity";
 import { ingestFeedArticle } from "@/lib/feed-ingestion";
-import { SOURCES, sourceIdentityFromUrl, type SourceIdentity } from "@/lib/source-identity";
+import { canonicalSourceKey } from "@/lib/source-identity";
 import { blockedCapabilityResponse } from "@/lib/config/routeGuard";
 import { requireInternalWorker } from "@/lib/security/internal-worker";
 import { appendOperationalLog } from "@/lib/safe-log";
 import { fetchPinnedText } from "@/lib/safe-fetch";
+
+type FeedSource = {
+  key: string;
+  displayName: string;
+  homepageUrl: string;
+  feedUrl: string;
+};
 
 /** Logolás */
 function logError(source: string, err: unknown) {
@@ -71,15 +78,7 @@ export async function POST(req: Request) {
   try {
     // A statisztika egy feldolgozási futás eredménye. Modul-szintű mutable
     // objektum esetén a következő kérés az előző futás számait is visszaadná.
-    const feedStats: Record<string, number> = {
-      Telex: 0,
-      HVG: 0,
-      "24.hu": 0,
-      Index: 0,
-      Portfolio: 0,
-      "444.hu": 0,
-      Origo: 0,
-    };
+    const feedStats: Record<string, number> = {};
 
     const parser = new Parser({
       headers: {
@@ -96,8 +95,23 @@ export async function POST(req: Request) {
       database: process.env.DB_NAME || "utom_dev",
     });
     const activeConnection = connection;
-    const [activeRows] = await activeConnection.query<mysql.RowDataPacket[]>("SELECT slug FROM sources WHERE is_active=1");
-    const activeSourceSlugs = new Set(activeRows.map((row) => String(row.slug)));
+    const [activeRows] = await activeConnection.query<mysql.RowDataPacket[]>(
+      `SELECT slug,name,homepage_url homepageUrl,feed_url feedUrl
+       FROM sources
+       WHERE is_active=1 AND feed_url IS NOT NULL AND feed_url<>''
+       ORDER BY id`,
+    );
+    const activeSources: FeedSource[] = activeRows.flatMap((row) => {
+      const key = canonicalSourceKey(row.slug) || canonicalSourceKey(row.homepageUrl);
+      const feedUrl = String(row.feedUrl || "").trim();
+      if (!key || !feedUrl) return [];
+      return [{
+        key,
+        displayName: String(row.name || key),
+        homepageUrl: String(row.homepageUrl || `https://${key}`),
+        feedUrl,
+      }];
+    });
 
     let inserted = 0;
     let deduplicated = 0;
@@ -107,9 +121,8 @@ export async function POST(req: Request) {
 
     /** RSS feldolgozás */
     async function processRssFeed(
-      source: SourceIdentity,
+      source: FeedSource,
     ) {
-      if (!activeSourceSlugs.has(source.key)) return;
       feedAttempts++;
       try {
         const result = await fetchPinnedText(source.feedUrl, {
@@ -129,16 +142,13 @@ export async function POST(req: Request) {
           const link = canonicalizeArticleUrl(originalLink);
           if (!link) continue;
 
-            const sourceIdentity = sourceIdentityFromUrl(link);
-            if (!sourceIdentity) continue;
-
             let content: string;
 
-            if (sourceIdentity.key === "444.hu") {
+            if (source.key === "444.hu") {
               // 444.hu → content:encoded-ben benne a teljes cikk
               content =
                 item["content:encoded"] || item.content || "";
-            } else if (sourceIdentity.key === "origo.hu") {
+            } else if (source.key === "origo.hu") {
               // Origo → RSS-ben gyakorlatilag nincs rendes cikk
               content = "";
             } else {
@@ -151,7 +161,7 @@ export async function POST(req: Request) {
             }
 
             // Portfolio: ha az RSS-ből kevés jön, külön letöltjük
-            if (sourceIdentity.key === "portfolio.hu" && content.length < 500) {
+            if (source.key === "portfolio.hu" && content.length < 500) {
               content = await fetchPortfolioArticle(link);
             }
 
@@ -160,7 +170,7 @@ export async function POST(req: Request) {
               title: item.title,
               originalUrl: originalLink,
               content,
-              source: source.displayName,
+              source: source.key,
               publishedAt: item.isoDate || item.pubDate,
               externalId: item.guid,
               language: "hu",
@@ -179,7 +189,7 @@ export async function POST(req: Request) {
       }
     }
 
-    for (const source of SOURCES) await processRssFeed(source);
+    for (const source of activeSources) await processRssFeed(source);
 
     if (feedAttempts > 0 && feedFailures === feedAttempts) {
       return NextResponse.json(

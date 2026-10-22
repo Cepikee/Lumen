@@ -2,6 +2,7 @@
 const mysql = require("mysql2/promise");
 const { cleanArticle } = require("./cleanArticle");
 const { fetchPinnedText } = require("../lib/safe-fetch");
+const { canonicalSourceKeyFromUrl } = require("../lib/source-identity");
 
 // --- HTTP letöltés (közvetlen) ---
 async function fetchHtml(url) {
@@ -20,11 +21,6 @@ async function fetchHtml(url) {
   return result.text;
 }
 
-// --- 444.hu felismerés ---
-function is444(url) {
-  return url.includes("444.hu");
-}
-
 async function scrapeArticle(articleId, url, claim, options = {}) {
   let destination = "invalid";
   try { destination = new URL(url).hostname; } catch {}
@@ -41,10 +37,8 @@ async function scrapeArticle(articleId, url, claim, options = {}) {
 
   try {
 
-    // 🔥 1) 444.hu → NEM scrapelünk, mert RSS-ből jön a teljes cikk
-    if (is444(url)) {
+    if (canonicalSourceKeyFromUrl(url) === "444.hu") {
       console.log(`[SCRAPER] 🟢 444.hu → scraping kihagyva, RSS content:encoded használata.`);
-
       return { ok: true, skipped: true, reason: "rss_content_used" };
     }
 

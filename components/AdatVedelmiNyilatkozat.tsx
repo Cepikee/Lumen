@@ -72,12 +72,7 @@ export default function AdatvedelmiNyilatkozat(): JSX.Element {
 
         <section className="legal-section" id="adatmegorzes">
           <h2>4. Adatmegőrzési idő</h2>
-          <ul>
-            <li>Fiókadatok: a felhasználó törléséig, majd további 30 nap biztonsági mentés céljából.</li>
-            <li>Naplófájlok (technikai): 30 nap, kivéve ha jogi vagy biztonsági okok indokolják a hosszabb megőrzést.</li>
-            <li>Használati/analitikai adatok: 180 nap (összesített, anonimizált adatok hosszabb ideig megőrizhetők).</li>
-            <li>Számlázási adatok: 8 év (adójogszabályoknak megfelelően).</li>
-          </ul>
+          <p>A repository nem bizonyít egységes, valamennyi adattípusra végrehajtott megőrzési ütemtervet. A fiók-, napló-, analitikai, biztonsági mentési és esetleges számlázási adatok pontos időtartamát a tényleges üzemeltetési konfiguráció, a szolgáltatói szerződések és jogi jóváhagyás alapján kell közzétenni. A forráscikkek nyers szövegének törlőfolyamata külön, alapértelmezetten száraz futású és végrehajtás előtt kifejezett policy-jóváhagyást igényel.</p>
         </section>
 
         <section className="legal-section" id="adatvedelmi-jogok">
@@ -102,7 +97,7 @@ export default function AdatvedelmiNyilatkozat(): JSX.Element {
           </p>
           <ul>
             <li>Tárhely és infrastruktúra: külső felhőszolgáltató (a pontos szolgáltató a jogi státusz frissítésekor kerül közzétételre).</li>
-            <li>Analitika: Google Analytics (az analitika anonimizálásra és adatmegőrzési korlátozásra van konfigurálva).</li>
+            <li>Analitika: Google Analytics, kizárólag aktív környezeti kapcsoló és elfogadott látogatói hozzájárulás mellett. A szolgáltatói adatmegőrzési beállítást külön kell igazolni.</li>
             <li>Fizetési szolgáltatók: a fizetési adatok kezelése a választott szolgáltatón keresztül történik (pl. Stripe, Barion — ha bevezetésre kerülnek).</li>
           </ul>
           <p className="legal-note">Az adatokat nem értékesítjük harmadik félnek. Minden adatfeldolgozóval adatfeldolgozási szerződés (DPA) kerül megkötésre, ahol az szükséges.</p>
@@ -113,7 +108,7 @@ export default function AdatvedelmiNyilatkozat(): JSX.Element {
           <p>A Szolgáltató technikai és szervezeti intézkedéseket alkalmaz az adatok védelmére:</p>
           <ul>
             <li>HTTPS minden forgalomhoz.</li>
-            <li>Adatbázis‑szintű titkosítás érzékeny adatoknál.</li>
+            <li>Hash‑elt jelszavak és munkamenet-tokenek, valamint alkalmazásszinten titkosított e-mail outbox mezők.</li>
             <li>Hash‑elt és sózott jelszótárolás.</li>
             <li>Hozzáférés‑kontroll és jogosultságkezelés.</li>
             <li>Rendszeres biztonsági mentések és naplózás.</li>
@@ -124,30 +119,30 @@ export default function AdatvedelmiNyilatkozat(): JSX.Element {
         <section className="legal-section" id="sutik">
           <h2>8. Sütik (Cookie‑k)</h2>
           <p>
-            A weboldal működéséhez szükséges sütik automatikusan aktiválódnak. Analitikai és marketing sütik
-            csak a felhasználó hozzájárulása esetén kerülnek aktiválásra. A sütik kezeléséről és a hozzájárulás
-            visszavonásáról részletes információ a <a href="/adatvedelem">részletes Adatvédelmi Tájékoztatóban</a> található.
+            A weboldal működéséhez szükséges technikai tárolás automatikusan használható. A Google Analytics
+            csak az „Analitika engedélyezése” választás után töltődik be; a „Csak szükséges” választás blokkolja.
+            A döntés a böngésző helyi tárhelyének <code>cookie-consent</code> bejegyzésében tárolódik.
           </p>
         </section>
 
         <section className="legal-section" id="ai-feldolgozas">
           <h2>9. AI‑feldolgozás, átláthatóság és DPIA</h2>
           <p>
-            Az Utom.hu AI‑algoritmusokat használ nyilvános források feldolgozására, tartalmak rendszerezésére és AI‑generált összefoglalók előállítására. Minden AI‑generált tartalom egyértelműen jelölve van.
+            Az Utom.hu AI‑algoritmusokat használ nyilvános források feldolgozására, tartalmak rendszerezésére és AI‑generált összefoglalók előállítására. A támogatott nyilvános összefoglaló nézetek AI‑jelölést tartalmaznak.
           </p>
           <p>
             A Szolgáltató belső minőségellenőrzési lépéseket alkalmaz (plágiumellenőrzés, forrásellenőrzés), hogy csökkentse a pontatlanság és jogi kockázat lehetőségét.
           </p>
           <p>
-            A Szolgáltató DPIA (Adatvédelmi Hatásvizsgálat) elkészítését megkezdte az AI‑feldolgozásokra vonatkozóan. A DPIA összefoglalója a Szolgáltató rendelkezésére áll, és kérésre tájékoztatást adunk a releváns intézkedésekről.
+            A DPIA szükségességét és esetleges dokumentumának státuszát adatvédelmi szakértőnek és a szolgáltatónak kell igazolnia; a repository önmagában lezárt hatásvizsgálatot nem bizonyít.
           </p>
         </section>
 
         <section className="legal-section" id="panasz">
           <h2>10. Panaszkezelés és kapcsolattartás</h2>
           <p>
-            Panaszok és adatvédelmi kérelmek benyújtása: <a href="mailto:support@utom.hu">support@utom.hu</a> vagy <a href="mailto:support@utom.hu">support@utom.hu</a>.
-            A Szolgáltató törekszik arra, hogy a bejelentésekre 14 napon belül válaszoljon.
+            Panaszok és adatvédelmi kérelmek benyújtása: <a href="mailto:support@utom.hu">support@utom.hu</a> vagy a kapcsolatfelvételi űrlap.
+            A válaszidő az ügy jellegétől és a szükséges ellenőrzéstől függ.
           </p>
           <p>
             Ha az érintett úgy ítéli meg, hogy jogai sérültek, panaszt tehet a magyar adatvédelmi hatóságnál (NAIH).

@@ -10,12 +10,20 @@ function databaseConfig() {
   return { host: process.env.DB_HOST, port: Number(process.env.DB_PORT || 3306), user: process.env.DB_USER, password: process.env.DB_PASSWORD, database: process.env.DB_NAME, connectionLimit: 2 };
 }
 
+function assertRetentionExecutionApproved(env) {
+  if (env.UTOM_RETENTION_EXECUTE !== "true") throw new Error("retention_execute_requires_UTOM_RETENTION_EXECUTE_true");
+  if (env.UTOM_RAW_TEXT_POLICY_APPROVED !== "true") throw new Error("retention_execute_requires_approved_policy");
+  for (const name of ["UTOM_RAW_TEXT_SUCCESS_HOURS", "UTOM_RAW_TEXT_FAILED_DAYS"]) {
+    if (!String(env[name] || "").trim()) throw new Error(`retention_execute_requires_explicit_${name}`);
+  }
+}
+
 async function main() {
   const args = new Set(process.argv.slice(2));
   if (args.has("--help") || [...args].some((arg) => !["--dry-run", "--execute", "--help"].includes(arg))) throw new Error("usage: raw-text-retention.cjs [--dry-run|--execute]");
   if (args.has("--dry-run") && args.has("--execute")) throw new Error("retention_modes_are_mutually_exclusive");
   const execute = args.has("--execute");
-  if (execute && process.env.UTOM_RETENTION_EXECUTE !== "true") throw new Error("retention_execute_requires_UTOM_RETENTION_EXECUTE_true");
+  if (execute) assertRetentionExecutionApproved(process.env);
   validateWorkerEnvironment(process.env);
   const pool = mysql.createPool(databaseConfig());
   try {
@@ -26,3 +34,5 @@ async function main() {
 }
 
 main().catch((error) => { console.error(redact(error instanceof Error ? error.message : error)); process.exitCode = 1; });
+
+module.exports = { assertRetentionExecutionApproved };

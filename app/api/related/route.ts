@@ -70,6 +70,8 @@ export async function GET(req: Request) {
       INNER JOIN summaries current_s ON current_s.id = ?
       LEFT JOIN articles current_a ON current_s.article_id = current_a.id
       WHERE s.id != current_s.id
+        AND current_s.ai_clean = 1
+        AND s.ai_clean = 1
         AND s.article_id IS NOT NULL
         -- A disabled canonical source must not leak back into related news.
         -- Keep orphaned/source-less rows eligible because legacy summaries
@@ -80,6 +82,7 @@ export async function GET(req: Request) {
           SELECT 1
           FROM summaries newer_s
           WHERE newer_s.article_id = s.article_id
+            AND newer_s.ai_clean = 1
             AND (
               newer_s.created_at > s.created_at
               OR (newer_s.created_at = s.created_at AND newer_s.id > s.id)

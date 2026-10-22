@@ -19,7 +19,7 @@ export async function GET(req: Request) {
       FROM sources s
       JOIN articles a ON a.source_id = s.id
       JOIN summaries su ON su.article_id = a.id
-      WHERE s.is_active = 1
+      WHERE s.is_active = 1 AND su.ai_clean = 1
       ORDER BY s.name ASC
       `
     );

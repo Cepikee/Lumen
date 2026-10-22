@@ -17,7 +17,7 @@ export async function GET(req: Request, context: { params: Promise<{ id: string 
   const input = validation.result;
   try {
     const [rows] = await db.query(`SELECT a.id,a.title,a.source,a.category,a.published_at,s.id summary_id,s.summary_text,s.content
-      FROM articles a LEFT JOIN summaries s ON s.article_id=a.id AND NOT EXISTS (SELECT 1 FROM summaries newer WHERE newer.article_id=s.article_id AND (newer.created_at>s.created_at OR (newer.created_at=s.created_at AND newer.id>s.id)))
+      FROM articles a LEFT JOIN summaries s ON s.article_id=a.id AND s.ai_clean=1 AND NOT EXISTS (SELECT 1 FROM summaries newer WHERE newer.article_id=s.article_id AND newer.ai_clean=1 AND (newer.created_at>s.created_at OR (newer.created_at=s.created_at AND newer.id>s.id)))
       WHERE a.id=? LIMIT 1`, [input.id]);
     const row = (rows as any[])[0];
     if (!row) return NextResponse.json(errorEnvelope("not_found", "Article not found"), { status: 404 });

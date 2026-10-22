@@ -67,10 +67,12 @@ export async function GET(req: Request) {
        LEFT JOIN sources s ON a.source_id = s.id
        LEFT JOIN summaries SUMM
          ON a.id = SUMM.article_id
+        AND SUMM.ai_clean = 1
         AND NOT EXISTS (
           SELECT 1
           FROM summaries newer_summ
           WHERE newer_summ.article_id = SUMM.article_id
+            AND newer_summ.ai_clean = 1
             AND (
               newer_summ.created_at > SUMM.created_at
               OR (newer_summ.created_at = SUMM.created_at AND newer_summ.id > SUMM.id)

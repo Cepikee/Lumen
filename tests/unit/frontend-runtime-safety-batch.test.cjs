@@ -13,8 +13,9 @@ const overview = read("components/InsightsOverviewChart.tsx");
 const dnsOverview = read("components/UtomDnsOsszkep.tsx");
 
 assert.match(sparkline, /const safeHistory = \(Array\.isArray\(history\) \? history : \[\]\)/);
-assert.match(detailed, /function filterByPeriod\(history: HistoryPoint\[\], period: string, lastDate: Date, startDate\?: string, endDate\?: string\)/);
-assert.match(detailed, /if \(period === "custom"\)/);
+assert.match(detailed, /Array\.isArray\(history\)\?history:\[\]/);
+assert.match(detailed, /Number\.isFinite\(p\.freq\) && p\.freq>=0/);
+assert.match(detailed, /pointLabel\(p\.timestamp,period==="24h"\)/);
 assert.match(feed, /const safeItems = Array\.isArray\(items\)/);
 assert.match(dns, /Array\.isArray\(data\?\.items\)/);
 assert.match(overview, /Array\.isArray\(data\) \? data : \[\]/);

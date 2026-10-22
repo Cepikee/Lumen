@@ -33,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
   try {
     const [rows] = await pool.query<SitemapRow[]>(
-      "SELECT id, updated_at FROM summaries WHERE id > 0 ORDER BY id DESC LIMIT 50000",
+      "SELECT id, updated_at FROM summaries WHERE id > 0 AND ai_clean = 1 ORDER BY id DESC LIMIT 50000",
     );
     const articles = rows.map((row) => {
       const date = row.updated_at ? new Date(row.updated_at) : null;

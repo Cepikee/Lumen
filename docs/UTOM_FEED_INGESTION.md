@@ -26,7 +26,11 @@ Az eredeti feed URL változatlanul az `original_url` mezőbe kerül audit/debug 
 
 ## Source identity
 
-A kanonikus belső kulcs domain alakú: `telex.hu`, `24.hu`, `index.hu`, `hvg.hu`, `portfolio.hu`, `444.hu`, `origo.hu`. A közös helper kezeli a történeti megjelenítési és domain aliasokat; például `24hu`, `24.hu` és `www.24.hu` mind `source_id=2`, `source='24.hu'` értékre kerül. Ismeretlen source nem kerül automatikusan összevonásra, az ingestion `unknown_source` eredményt ad.
+A kanonikus belső kulcs domain alakú. A közös helper kezeli a történeti megjelenítési és domain aliasokat; például `24hu`, `24.hu` és `www.24.hu` ugyanarra a `24.hu` kulcsra kerül. A registryben nem szereplő nyilvános forrás hostname-ja is stabil kanonikus kulcsot kap (`www.` nélkül, kisbetűsen).
+
+Az RSS futás az aktív, nem üres `feed_url` mezővel rendelkező `sources` rekordokat olvassa. Új forrást ezért kanonikus domain alakú `slug`, megjelenítési név, publikus `homepage_url`, publikus `feed_url` és `is_active=1` értékekkel kell regisztrálni. Az ingestion csak létező aktív adatbázisrekordhoz ír cikket; pusztán egy ismeretlen URL nem hoz létre automatikusan forrást. Ez megőrzi a forrásazonosságot anélkül, hogy a hét történeti forrás jogi registryje technikai allowlistként működne.
+
+A hálózati kérés minden forrásnál a közös `safe-fetch` rétegen halad át. Az SSRF-, privát/loopback cím-, DNS-rebinding-, redirect-, port-, content-type-, válaszméret- és timeout-védelem változatlan. A rendszer nem kerül meg hitelesítést, fizetőfalat vagy más hozzáférési korlátozást.
 
 Ugyanez a helper működik a feed ingestionben, related-news összevetésben és a Speed Index számításában. A UI megjelenítési címkéi ettől külön maradhatnak.
 

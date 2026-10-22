@@ -228,7 +228,7 @@ export async function GET(req: Request) {
           ON a.source_id = src.id
         LEFT JOIN article_images ai
           ON ai.article_id = a.id
-        WHERE s.id = ?
+        WHERE s.id = ? AND s.ai_clean = 1
         LIMIT 1
       `;
 
@@ -351,8 +351,7 @@ export async function GET(req: Request) {
       sourceIds.length > 0 ||
       categories.length > 0
     ) {
-      const whereParts: string[] =
-        [];
+      const whereParts: string[] = ["s.ai_clean = 1"];
 
       const params: Array<
         string | number
@@ -481,6 +480,8 @@ export async function GET(req: Request) {
         LEFT JOIN article_images ai
           ON ai.article_id = a.id
         WHERE
+          s.ai_clean = 1
+          AND
           s.created_at >= ?
           AND s.created_at < ?
         ${searchFilter.sql}
@@ -540,7 +541,7 @@ export async function GET(req: Request) {
         ON a.source_id = src.id
       LEFT JOIN article_images ai
         ON ai.article_id = a.id
-      WHERE 1 = 1
+      WHERE s.ai_clean = 1
       ${searchFilter.sql}
       ORDER BY s.created_at DESC, s.id DESC
       LIMIT ? OFFSET ?

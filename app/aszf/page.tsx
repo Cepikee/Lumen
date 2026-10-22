@@ -108,8 +108,8 @@ export default function ASZF(): JSX.Element {
         <section id="tartalom">
           <h2>6. Tartalomkezelés, forrásmegjelölés és szerzői jog</h2>
           <p>
-            A Szolgáltatás a forrásokat minden esetben megjelöli: a cikk címében vagy metaadatában
-            hivatkozott forrásra mutató link található. Az AI‑tartalom automatikus jelölése biztosított.
+            A támogatott nyilvános összefoglaló nézetekben forrásnév, eredeti cikkre mutató link és
+            AI‑jelölés jelenik meg. A megjelölés önmagában nem keletkeztet felhasználási engedélyt.
           </p>
           <p>
             A Szolgáltató nem vállal felelősséget a külső források tartalmáért; a külső oldalak
@@ -140,25 +140,18 @@ export default function ASZF(): JSX.Element {
         </section>
 
         <section id="dpia">
-          <h2>8. Adatvédelmi hatásvizsgálat (DPIA) és AI‑átláthatóság</h2>
-          <p>
-            A Szolgáltató az AI‑alapú feldolgozások (tartalomgyűjtés, AI‑generálás, plágiumellenőrzés)
-            adatvédelmi kockázatait felméri és csökkenti. A Szolgáltatás működéséhez kapcsolódó DPIA
-            (Adatvédelmi Hatásvizsgálat) elkészítése folyamatban van, és a DPIA összefoglalója a
-            Szolgáltató kérésre rendelkezésre áll.
-          </p>
-          <p><strong>DPIA összefoglaló (rövid):</strong></p>
+          <h2>8. AI‑átláthatóság és adatvédelmi felülvizsgálat</h2>
+          <p>A repository technikai kontrollokat tartalmaz, de nem bizonyítja lezárt DPIA meglétét vagy annak jogi megfelelőségét. A DPIA szükségességét, tartalmát és státuszát adatvédelmi szakértőnek kell ellenőriznie.</p>
+          <p><strong>Technikailag azonosított feldolgozási területek:</strong></p>
           <ul>
             <li><strong>Feldolgozás célja:</strong> nyilvános hírek gyűjtése, rendszerezése, AI‑alapú összefoglalók készítése, plágiumellenőrzés.</li>
             <li><strong>Adattípusok:</strong> nyilvános forrásokból származó tartalom, metaadatok, technikai naplók, cookie‑adatok (Google Analytics).</li>
-            <li><strong>Jogalap:</strong> jogos érdek a szolgáltatás nyújtásához és a weboldal működtetéséhez; analitika esetén megfelelő tájékoztatás és hozzájárulás kezelése.</li>
-            <li><strong>Műszaki intézkedések:</strong> adatbázis‑titkosítás, hozzáférés‑kontroll, naplózás, Google Analytics anonimizálás beállítása.</li>
+            <li><strong>Jogalap:</strong> jogi szakértői és tulajdonosi döntést igényel; a kód nem állapít meg jogalapot.</li>
+            <li><strong>Műszaki intézkedések:</strong> hozzáférés‑kontroll, naplózás, hash-elt hitelesítési adatok és hozzájáruláshoz kötött analitika.</li>
             <li><strong>Szervezeti intézkedések:</strong> belső adatvédelmi szabályok, hozzáférési jogosultságok korlátozása, incidenskezelési eljárás.</li>
             <li><strong>Maradék kockázat:</strong> rendszeres felülvizsgálat és modell‑audit javasolt; ha a maradék kockázat nem elfogadható, további technikai intézkedések bevezetendők.</li>
           </ul>
-          <p>
-            A teljes DPIA dokumentum a Szolgáltató rendelkezésére áll, és kérésre a Felhasználó vagy az illetékes hatóság számára betekintésre vagy összefoglaló átadására kerülhet.
-          </p>
+          <p>A DPIA-ra vonatkozó nyilvános állítás csak igazolt dokumentum és jogi felülvizsgálat után tehető.</p>
         </section>
 
         <section id="felelosseg">
@@ -184,7 +177,7 @@ export default function ASZF(): JSX.Element {
           <h2>10. Szavatosság és panaszkezelés</h2>
           <p>
             Hibák, hiányosságok vagy panasz esetén a Felhasználó a <strong>support@utom.hu</strong> címen
-            tehet bejelentést. A Szolgáltató a bejelentést nyilvántartja és 14 napon belül válaszol.
+            tehet bejelentést. A kapcsolatfelvételi rendszer fogadja a kérelmet; a válaszidő az ügytől és a szükséges ellenőrzéstől függ.
           </p>
         </section>
 
@@ -192,9 +185,8 @@ export default function ASZF(): JSX.Element {
           <h2>11. Adatvédelem és sütik</h2>
           <p>
             A Szolgáltató az adatkezelést részletesen az Adatvédelmi Tájékoztatóban szabályozza,
-            amely a <a href="/adatvedelem">/adatvedelem</a> oldalon érhető el. A weboldal Google Analytics
-            szolgáltatást használ; az analitika beállításai anonimizálásra és adatmegőrzési korlátozásra
-            vannak konfigurálva, ahol lehetséges.
+            amely a <a href="/adatvedelem">/adatvedelem</a> oldalon érhető el. A Google Analytics csak
+            aktív környezeti beállítás és a látogató kifejezett engedélye mellett töltődik be.
           </p>
           <p>
             A Felhasználó a Szolgáltatás használatával elfogadja az Adatvédelmi Tájékoztatóban foglaltakat.

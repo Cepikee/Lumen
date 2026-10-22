@@ -2,7 +2,7 @@
 
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { normalizeSourceIdentity, sourceIdentityFromUrl } = require("../../lib/source-identity");
+const { canonicalSourceKey, canonicalSourceKeyFromUrl, normalizeSourceIdentity, sourceIdentityFromUrl } = require("../../lib/source-identity");
 const { parsePublicationTime, resolvePublicationTime, toMysqlUtc } = require("../../lib/publication-time");
 
 test("source aliases resolve to one canonical internal identity", () => {
@@ -12,6 +12,13 @@ test("source aliases resolve to one canonical internal identity", () => {
   }
   assert.equal(sourceIdentityFromUrl("https://www.24.hu/story")?.key, "24.hu");
   assert.equal(normalizeSourceIdentity("unknown.example"), null);
+});
+
+test("unlisted public source domains receive a stable canonical key", () => {
+  assert.equal(canonicalSourceKey("WWW.Example-News.HU."), "example-news.hu");
+  assert.equal(canonicalSourceKeyFromUrl("https://www.example-news.hu/feed?format=rss"), "example-news.hu");
+  assert.equal(canonicalSourceKey("localhost"), null);
+  assert.equal(canonicalSourceKey("not a host"), null);
 });
 
 test("publication parser accepts explicit timezone formats and normalizes to UTC", () => {

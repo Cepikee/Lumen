@@ -39,7 +39,7 @@ async function loadArticle(id: string): Promise<ArticleSeoRow | null> {
   });
   try {
     const [rows] = await pool.query<ArticleSeoRow[]>(
-      "SELECT id,title,content,url,created_at,updated_at FROM summaries WHERE id=? LIMIT 1",
+      "SELECT id,title,content,url,created_at,updated_at FROM summaries WHERE id=? AND ai_clean=1 LIMIT 1",
       [Number(id)],
     );
     return rows[0] || null;

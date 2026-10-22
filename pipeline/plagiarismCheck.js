@@ -1,30 +1,6 @@
 // plagiarismCheck.js — AI nélküli, stabil, gyors verzió
 const mysql = require("mysql2/promise");
-
-// --- Normalizálás ---
-function normalize(text) {
-  return text
-    .toLowerCase()
-    .replace(/[^a-záéíóöőúüű0-9 ]/gi, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-// --- Tokenizálás ---
-function tokenize(text) {
-  return new Set(normalize(text).split(" "));
-}
-
-// --- Jaccard similarity ---
-function jaccard(a, b) {
-  const setA = tokenize(a);
-  const setB = tokenize(b);
-
-  const intersection = new Set([...setA].filter(x => setB.has(x)));
-  const union = new Set([...setA, ...setB]);
-
-  return union.size === 0 ? 0 : intersection.size / union.size;
-}
+const { assessContentOverlap } = require("../lib/content-overlap");
 
 // --- Plágium ellenőrzés ---
 async function plagiarismCheck(articleId, shortSummary, longSummary, options = {}) {
@@ -51,11 +27,13 @@ async function plagiarismCheck(articleId, shortSummary, longSummary, options = {
     }
 
     // 2) Similarity számítás
-    const scoreShort = jaccard(original, shortSummary);
-    const scoreLong = jaccard(original, longSummary);
+    const shortAssessment = assessContentOverlap(original, shortSummary);
+    const longAssessment = assessContentOverlap(original, longSummary);
 
     // 3) A kettő közül a magasabb a plágiumScore
-    const plagiarismScore = Math.max(scoreShort, scoreLong);
+    const plagiarismScore = Math.max(shortAssessment.jaccard, longAssessment.jaccard);
+    const reviewReasons = [...new Set([...shortAssessment.reasons, ...longAssessment.reasons])];
+    const reviewRequired = shortAssessment.reviewRequired || longAssessment.reviewRequired;
 
     // 4) Mentés
     if (options.persist !== false) await conn.execute(
@@ -70,6 +48,9 @@ async function plagiarismCheck(articleId, shortSummary, longSummary, options = {
     return {
       ok: true,
       plagiarismScore,
+      reviewRequired,
+      reviewReasons,
+      assessments: { short: shortAssessment, long: longAssessment },
     };
   } catch (err) {
     return { ok: false, error: err?.message ?? String(err) };

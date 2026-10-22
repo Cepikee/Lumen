@@ -24,7 +24,8 @@ test("localhost layout nem tölt külső captcha vagy analitika scriptet explici
     assert.doesNotMatch(html, /googletagmanager\.com\/gtag\/js/);
     assert.match(html, /local content/);
   }
-  assert.match(analyticsSource, /if \(!enabled \|\| !pathname/);
+  assert.match(analyticsSource, /if \(!enabled \|\| !consented \|\| !pathname/);
+  assert.match(analyticsSource, /localStorage\.getItem\(CONSENT_KEY\) === "accepted"/);
   assert.match(analyticsSource, /googletagmanager\.com\/gtag\/js/);
   assert.match(analyticsSource, /page_location: `\$\{window\.location\.origin\}\$\{pathname\}`/);
 });

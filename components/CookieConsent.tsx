@@ -6,14 +6,15 @@ export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const accepted = localStorage.getItem("cookie-consent");
-    if (!accepted) {
+    const decision = localStorage.getItem("cookie-consent");
+    if (decision !== "accepted" && decision !== "rejected") {
       setVisible(true);
     }
   }, []);
 
-  const accept = () => {
-    localStorage.setItem("cookie-consent", "accepted");
+  const decide = (value: "accepted" | "rejected") => {
+    localStorage.setItem("cookie-consent", value);
+    window.dispatchEvent(new Event("utom:cookie-consent"));
     setVisible(false);
   };
 
@@ -30,11 +31,18 @@ export default function CookieConsent() {
       }}
     >
       <div className="container d-flex flex-column flex-md-row justify-content-between align-items-start gap-3">
-        <p className="mb-0 small text-muted"> Az Utom.hu sütiket használ a működéshez és az élmény javításához. A használattal elfogadod az{" "} 
-          <a href="/adatvedelem" className="text-decoration-underline"> adatvédelmi irányelveket </a>. </p>
-        <button className="btn btn-primary btn-sm" onClick={accept}>
-          Elfogadom
-        </button>
+        <p className="mb-0 small text-muted">
+          A működéshez szükséges technikai tárolás mellett, hozzájárulásod esetén analitikát használunk. Részletek az{" "}
+          <a href="/adatvedelem" className="text-decoration-underline">adatvédelmi tájékoztatóban</a>.
+        </p>
+        <div className="d-flex gap-2">
+          <button className="btn btn-outline-secondary btn-sm" onClick={() => decide("rejected")}>
+            Csak szükséges
+          </button>
+          <button className="btn btn-primary btn-sm" onClick={() => decide("accepted")}>
+            Analitika engedélyezése
+          </button>
+        </div>
       </div>
     </div>
   );

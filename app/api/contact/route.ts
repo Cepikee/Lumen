@@ -147,6 +147,8 @@ export async function POST(req: Request) {
       feature: "Funkciókérés",
       business: "Üzleti megkeresés",
       legal: "Jogi / felhasználási kérdés",
+      correction: "Helyesbítési kérelem",
+      copyright: "Szerzői jogi kifogás",
       feedback: "Visszajelzés",
       account: "Fiók / hozzáférés",
       data: "Adatkezelés",
@@ -188,7 +190,7 @@ export async function POST(req: Request) {
         <p><strong>Kategória:</strong> ${safeSubject}</p>
         <h3>Az általad küldött üzenet:</h3>
         <p>${safeMessage}</p>
-        <p>Általában 24 órán belül válaszolunk, de a forgalomtól függően ez változhat.</p>
+        <p>A megkeresést felülvizsgáljuk; a válaszidő az ügy jellegétől és a szükséges ellenőrzéstől függ.</p>
         <hr>
         <p style="font-size:12px;opacity:0.6;">Ez egy automatikus visszaigazoló üzenet. Kérjük, ne válaszolj rá.</p>
       `,

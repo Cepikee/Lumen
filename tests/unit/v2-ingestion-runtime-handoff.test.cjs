@@ -25,6 +25,17 @@ function connectionFor(...results) {
   };
 }
 
+function connectionWithoutRegisteredSource(...results) {
+  let index = 0;
+  return {
+    async execute(sql) {
+      if (/SELECT id, is_active FROM sources/.test(sql)) return [[]];
+      assert.match(sql, /INSERT(?: IGNORE)? INTO v2_ingestion_provenance|SELECT id FROM v2_ingestion_provenance/);
+      return [results[index++]];
+    },
+  };
+}
+
 test("V2-enabled ingestion hands off the canonical envelope without a DB write", async () => {
   const previous = {
     offline: process.env.UTOM_OFFLINE_MODE,
@@ -101,10 +112,17 @@ test("malformed and unknown-source results remain legacy outcomes while V2 recor
     assert.equal(malformed.outcome, "malformed_url");
     assert.equal(malformed.v2.envelope.outcome, "invalid");
     assert.equal(malformed.v2.persistence.outcome, "persisted");
-    const unknown = await ingestFeedArticle(connectionFor(), { ...baseItem, originalUrl: "https://unknown.example/cikk", source: "unknown.example" });
+    const unknown = await ingestFeedArticle(
+      connectionWithoutRegisteredSource({ insertId: 9, affectedRows: 1 }),
+      { ...baseItem, originalUrl: "https://unknown.example/cikk", source: "unknown.example" },
+    );
     assert.equal(unknown.outcome, "unknown_source");
     assert.equal(unknown.v2.envelope.outcome, "normalized");
-    assert.equal(unknown.v2.envelope.envelope.source, null);
+    assert.deepEqual(unknown.v2.envelope.envelope.source, {
+      sourceId: null,
+      key: "unknown.example",
+      displayName: "unknown.example",
+    });
     const missing = await ingestFeedArticle(connectionFor(), null);
     assert.equal(missing.outcome, "invalid_article");
     assert.equal(missing.v2.persistence.outcome, "skipped");

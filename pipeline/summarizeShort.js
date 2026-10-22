@@ -54,6 +54,10 @@ async function summarizeShort(articleId, options = {}) {
 Foglaljad össze a következő szöveget röviden, maximum 4 mondatban magyarul.
 Csak az összefoglalót írd ki, bevezető mondat nélkül.
 Ne írj olyat, hogy "Itt a lényeg", "Íme az összefoglaló", "Röviden", vagy bármilyen bevezetőt.
+Önálló mondatszerkezetet és megfogalmazást használj; ne másolj át mondatot vagy hosszabb szókapcsolatot a forrásból.
+Közvetlen idézetet csak akkor használj, ha a pontos szóhasználat maga a hír tárgya; ilyenkor legyen rövid és egyértelműen attribútált.
+Őrizd meg, hogy ki mit állít, továbbá a tagadást, feltételességet és bizonytalanságot.
+Ne adj hozzá a forrásban nem szereplő tényt, és ne készíts az eredeti cikket helyettesítő részletességű szöveget.
 Csak magyarul válaszolj:
 
 ${wrapUntrustedText("ARTICLE", contentText, 100_000)}

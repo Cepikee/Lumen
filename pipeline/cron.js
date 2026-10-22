@@ -214,6 +214,8 @@ async function processArticlePipeline(article, claim) {
   let shortSummary = String(article.short_summary || "").trim();
   let longSummary = String(article.long_summary || "").trim();
   let plagiarismScore = 0;
+  let publicationReviewRequired = false;
+  let publicationReviewReasons = [];
   let trendKeywords = "";
   let source = "";
   let keywords = [];
@@ -334,11 +336,22 @@ async function processArticlePipeline(article, claim) {
     plagiarismScore = res.plagiarismScore ?? 0;
     console.log(`🧪 PlágiumScore: ${plagiarismScore.toFixed(2)}`);
 
-    return { plagiarismScore };
+    return {
+      plagiarismScore,
+      reviewRequired: res.reviewRequired === true,
+      reviewReasons: Array.isArray(res.reviewReasons) ? res.reviewReasons : [],
+    };
   }, { project: (connection, result) => connection.execute(
     "UPDATE summaries SET plagiarism_score=? WHERE article_id=?", [result.plagiarismScore, articleId]
   ) });
   plagiarismScore = plagiarismStep.result?.plagiarismScore ?? plagiarismScore;
+  publicationReviewRequired = plagiarismStep.result?.reviewRequired === true;
+  publicationReviewReasons = Array.isArray(plagiarismStep.result?.reviewReasons)
+    ? plagiarismStep.result.reviewReasons
+    : [];
+  if (publicationReviewRequired) {
+    console.warn(`[PLAG] Publikációs ellenőrzés szükséges: ${publicationReviewReasons.join(",")}`);
+  }
 
   // 4) Kategorizálás
   const categoryStep = await runDurableStep(claim, "category", "[CAT] 🏷️ Kategorizálás", async () => {
@@ -484,10 +497,15 @@ Korlátozások:
     trendKeywords,
     source,
     category: article.category,
+    publicationReviewRequired,
+    publicationReviewReasons,
   }), { project: async (connection, payload) => {
     const res = await saveSummary(payload, { connection });
     if (!res?.ok) throw new Error(res?.error || "saveSummary sikertelen");
-    await connection.execute("UPDATE summaries SET ai_clean=1,created_at=UTC_TIMESTAMP() WHERE article_id=?", [articleId]);
+    await connection.execute(
+      "UPDATE summaries SET ai_clean=?,created_at=UTC_TIMESTAMP() WHERE article_id=?",
+      [payload.publicationReviewRequired ? 0 : 1, articleId],
+    );
   } });
 
   // 9) CLICKBAIT — OpenAI

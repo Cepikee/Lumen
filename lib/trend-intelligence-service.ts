@@ -15,6 +15,7 @@ export function observationSql(q: TrendQuery) {
     SELECT k.article_id, TRIM(k.keyword) AS keyword, ${CATEGORY} AS category, ${SOURCE} AS source,
       MIN(k.created_at) AS observed_at
     FROM keywords k JOIN articles a ON a.id = k.article_id
+      JOIN summaries published ON published.article_id = a.id AND published.ai_clean = 1
     WHERE ${where.join(" AND ")}
     GROUP BY k.article_id, TRIM(k.keyword), ${CATEGORY}, ${SOURCE}
   )`, values };
@@ -37,7 +38,7 @@ export async function readTrendIntelligence(db: Reader, q: TrendQuery, mode: "li
     }
     const [rows] = await db.execute(`${base.sql} ${HINT}
       a.id, a.title, a.url_canonical AS url, o.source, a.published_at AS date, o.observed_at,
-      (SELECT s.content FROM summaries s WHERE s.article_id = a.id ORDER BY s.created_at DESC, s.id DESC LIMIT 1) AS summary
+      (SELECT s.content FROM summaries s WHERE s.article_id = a.id AND s.ai_clean = 1 ORDER BY s.created_at DESC, s.id DESC LIMIT 1) AS summary
       FROM observations o JOIN articles a ON a.id = o.article_id
       WHERE o.observed_at >= ? AND o.observed_at < ?
       ORDER BY o.observed_at DESC, a.id DESC LIMIT 51 OFFSET ?`, [...base.values,sqlTime(from),sqlTime(to),q.offset]);

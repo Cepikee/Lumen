@@ -8,19 +8,21 @@ export default function TermsAndDisclosure() {
       <section>
         <h2>1. Az oldal jellege</h2>
         <p>
-          Ez az oldal <strong>nem hírportál</strong>, nem újságírói termék, és nem
-          elsődleges információforrás. A szolgáltatás célja nyilvánosan elérhető
-          hírtartalmak elemzése, strukturált összefoglalása és értelmezésük
-          megkönnyítése.
+          A szolgáltatás automatizált hírgyűjtő és elemző funkciókat működtet,
+          valamint saját összefoglalókat és strukturált nézeteket készít. A
+          szolgáltatás jogi besorolása külön szakértői vizsgálat tárgya; a
+          technikai automatizálás önmagában nem dönti el ezt a kérdést.
         </p>
       </section>
 
       <section>
         <h2>2. Források és tartalomeredet</h2>
         <p>
-          A rendszer kizárólag nyilvánosan elérhető RSS-forrásokból dolgozik. Az
-          eredeti cikkek teljes szövege nem kerül újraközlésre. Minden esetben
-          megjelenítésre kerül az eredeti forrás és hivatkozás.
+          A rendszer RSS-metaadatokat és RSS-tartalmat dolgoz fel, továbbá egyes,
+          előre nyilvántartott forrásoknál közvetlen cikkletöltést is használhat.
+          Az eredeti teljes szöveget nem közli újra a nyilvános hírnézetben; a
+          feldolgozás során azonban ideiglenes forrásadatként tárolhatja. A
+          nyilvános összefoglalók mellett forrásnév és eredeti hivatkozás jelenik meg.
         </p>
       </section>
 
@@ -38,8 +40,9 @@ export default function TermsAndDisclosure() {
         <p>
           A rendszer technikai plágiumellenőrzést alkalmaz. Amennyiben a
           generált szöveg hasonlósága egy előre meghatározott küszöbértéket
-          meghalad, az összefoglaló automatikusan újragenerálásra kerül. Ez a
-          folyamat a szándékos szövegátvétel megelőzését szolgálja.
+          meghalad, vagy hosszabb szó szerinti egyezés észlelhető, az összefoglaló
+          publikációs ellenőrzési állapotba kerül. Ez technikai kockázatjelzés,
+          nem jogi megfelelőségi minősítés.
         </p>
       </section>
 
@@ -55,8 +58,8 @@ export default function TermsAndDisclosure() {
       <section>
         <h2>6. Kockázatjelzés és átláthatóság</h2>
         <p>
-          A rendszer minden esetben jelzi az összefoglalók korlátait, valamint azt,
-          hogy az adott tartalom milyen célra használható. A szolgáltatás nem
+          A rendszer AI-jelölést, forrásmegjelölést és eredeti cikkre mutató
+          hivatkozást alkalmaz a támogatott nyilvános nézetekben. A szolgáltatás nem
           garantálja a teljességet vagy a hibátlan értelmezést.
         </p>
       </section>
@@ -64,20 +67,19 @@ export default function TermsAndDisclosure() {
       <section>
         <h2>7. Jóhiszemű működés</h2>
         <p>
-          A fejlesztő a rendszer kialakítása során ésszerűen elvárható technikai,
-          jogi és etikai kockázatcsökkentő intézkedéseket alkalmazott annak
-          érdekében, hogy a szolgáltatás megfeleljen a jóhiszemű és felelős
-          felhasználás elvének.
+          A rendszer technikai kockázatcsökkentő kontrollokat alkalmaz. Ezek nem
+          helyettesítik a forrásonkénti engedélyek, felhasználási feltételek és a
+          szolgáltatás jogi besorolásának szakértői ellenőrzését.
         </p>
       </section>
 
       <section>
         <h2>8. Befektetői összefoglaló</h2>
         <p>
-          A platform nem helyettesíti a hírforrásokat, hanem értéknövelt elemző
-          réteget biztosít. A működés transzparens, jogilag óvatos, és nem
-          tartalomhelyettesítő modellre épül, ezáltal minimalizálja a
-          szerzői jogi és reputációs kockázatokat.
+          A platform célja értéknövelt elemző réteg biztosítása. A működés
+          forrásmegjelölésre, önálló összefoglalókra és az eredeti cikk
+          megnyitására épül. A fennmaradó szerzői jogi és reputációs kockázatokat
+          forrásonként és jogi szakértővel kell értékelni.
         </p>
       </section>
 

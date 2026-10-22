@@ -193,6 +193,8 @@ export default function KapcsolatPage() {
               <option value="feature">Funkciókérés</option>
               <option value="business">Üzleti megkeresés</option>
               <option value="legal">Jogi / felhasználási kérdés</option>
+              <option value="correction">Helyesbítési kérelem</option>
+              <option value="copyright">Szerzői jogi kifogás</option>
               <option value="feedback">Visszajelzés</option>
               <option value="account">Fiók / hozzáférés</option>
               <option value="data">Adatkezelés</option>
