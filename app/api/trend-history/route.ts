@@ -1,3 +1,4 @@
+import { trendIntelligenceResponse } from "@/lib/trend-intelligence-http";
 import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
 import { mysqlUtc } from "@/lib/business-time";
@@ -29,6 +30,7 @@ export async function GET(req: Request) {
   }
 
   const { searchParams } = new URL(req.url);
+  if (searchParams.get("contract") === "v2") return trendIntelligenceResponse(req, "history");
   const keyword = searchParams.get("keyword")?.trim() || "";
   const period = searchParams.get("period");
   const sources = searchParams.get("sources");

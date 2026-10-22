@@ -1,3 +1,4 @@
+import { trendIntelligenceResponse } from "@/lib/trend-intelligence-http";
 export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
@@ -9,6 +10,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "rate_limit" }, { status: 429 });
   }
   const { searchParams } = new URL(req.url);
+  if (searchParams.get("contract") === "v2") return trendIntelligenceResponse(req, "articles");
   const keyword = searchParams.get("keyword");
   const period = searchParams.get("period") || "7d";
 

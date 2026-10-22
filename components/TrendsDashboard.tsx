@@ -7,7 +7,10 @@ import ProfileMenu from "./ProfileMenu";
 import LoginModal from "./LoginModal";
 import { useUserStore } from "@/store/useUserStore";
 import TrendsIcon from "./TrendsIcon";
-import TrendSourcesModal from "./TrendSourcesModal";
+import SparklineMini from "./SparklineMini";
+import TrendIntelligencePanel from "./TrendIntelligencePanel";
+import { trendIdentity, TREND_UNIT, type TrendHistory } from "@/lib/trend-intelligence";
+import { intelligenceParams, loadTrendHistory, loadVisibleHistories } from "@/lib/trend-intelligence-client";
 import TrendsHeroGlobe from "./TrendsHeroGlobe";
 import styles from "./TrendsDashboard.module.css";
 
@@ -29,12 +32,11 @@ type Trend = {
   firstSeen?: string;
   lastSeen?: string;
   sources: string[];
+  status: string;
 };
 
-type HistoryPoint = { label: string; frequency: number };
 type SourceShare = { source: string; count: number };
 type ActivityPoint = { label: string; count: number };
-type SourceArticle = { title: string; url: string; source: string; date: string; summary?: string };
 
 const SOURCES = ["Telex", "444", "Index"];
 const CATEGORIES = ["Politika", "Sport", "Gazdaság", "Tech", "Kultúra", "Egészségügy", "Oktatás", "Közélet"];
@@ -66,31 +68,11 @@ function normalizeTrend(value: unknown): Trend | null {
     frequency,
     category: typeof row.category === "string" && row.category.trim() ? row.category.trim() : "Egyéb",
     growth: Number.isFinite(rawGrowth) ? rawGrowth : null,
+    status: typeof row.status === "string" ? row.status : "Nincs összehasonlítható adat",
     firstSeen: typeof row.first_seen === "string" ? row.first_seen : undefined,
     lastSeen: typeof row.last_seen === "string" ? row.last_seen : undefined,
     sources: typeof row.sources === "string" ? row.sources.split("|").map((item) => item.trim()).filter(Boolean).slice(0, 5) : [],
   };
-}
-
-function normalizeHistory(value: unknown): HistoryPoint[] {
-  if (!Array.isArray(value)) return [];
-  return value.flatMap((entry) => {
-    if (!entry || typeof entry !== "object") return [];
-    const row = entry as Record<string, unknown>;
-    const frequency = finiteNumber(row.freq, -1);
-    if (frequency < 0) return [];
-    const hour = finiteNumber(row.hour, -1);
-    const label = typeof row.day === "string" && row.day
-      ? row.day
-      : Number.isInteger(hour) && hour >= 0 && hour <= 23 ? `${hour}:00` : "";
-    return label ? [{ label, frequency }] : [];
-  });
-}
-
-function growthPercent(trend: Trend, history: HistoryPoint[]): number | null {
-  if (trend.growth !== null) return Math.round(trend.growth * 100);
-  if (history.length < 2 || history[0].frequency <= 0) return null;
-  return Math.round(((history.at(-1)!.frequency - history[0].frequency) / history[0].frequency) * 100);
 }
 
 function relativeTime(value?: string): string {
@@ -144,7 +126,7 @@ function DateRangePicker({ period, startDate, endDate, onPreset, onRange }: {
   const daysInMonth = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
   const label = period === "custom" && startDate && endDate
     ? `${startDate.replaceAll("-", ".")} – ${endDate.replaceAll("-", ".")}`
-    : ({ "24h": "Utolsó 24 óra", "7d": "Utolsó 7 nap", "30d": "Utolsó 30 nap", "365d": "Utolsó 365 nap" } as Record<string,string>)[period] ?? "Időszak";
+    : ({ "24h": "Utolsó 24 óra", "7d": "Utolsó 7 nap", "30d": "Utolsó 30 nap", "90d": "Utolsó 90 nap", "365d": "Utolsó 365 nap" } as Record<string,string>)[period] ?? "Időszak";
   function chooseDay(key: string) {
     if (!selection || key < selection) { setSelection(key); return; }
     if ((Date.parse(`${key}T00:00:00Z`) - Date.parse(`${selection}T00:00:00Z`)) > 366 * 86_400_000) {
@@ -155,7 +137,7 @@ function DateRangePicker({ period, startDate, endDate, onPreset, onRange }: {
   return <div className={styles.datePicker} ref={root}>
     <button type="button" className={styles.dateTrigger} aria-haspopup="dialog" aria-expanded={open} onClick={() => setOpen(!open)}><TrendsIcon name="calendar" /><span>{label}</span><TrendsIcon name="chevron" /></button>
     {open && <div className={styles.datePopover} role="dialog" aria-label="Időszak kiválasztása">
-      <div className={styles.dateQuick}>{[["24h", "24 óra"], ["7d", "7 nap"], ["30d", "30 nap"], ["365d", "365 nap"]].map(([id, text]) => <button className={id === period ? styles.dateQuickActive : ""} type="button" key={id} onClick={() => { onPreset(id); setSelection(null); setOpen(false); }}>{text}</button>)}</div>
+      <div className={styles.dateQuick}>{[["24h", "24 óra"], ["7d", "7 nap"], ["30d", "30 nap"], ["90d", "90 nap"], ["365d", "365 nap"]].map(([id, text]) => <button className={id === period ? styles.dateQuickActive : ""} type="button" key={id} onClick={() => { onPreset(id); setSelection(null); setOpen(false); }}>{text}</button>)}</div>
       <p className={styles.calendarHeading}>Egyedi időszak <small>{selection ? "Válaszd ki a zárónapot" : "Válaszd ki a kezdőnapot"}</small></p>
       <div className={styles.calendarMonth}><button type="button" aria-label="Előző hónap" onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() - 1, 1))}>‹</button><strong>{month.toLocaleDateString("hu-HU", { year: "numeric", month: "long" })}</strong><button type="button" aria-label="Következő hónap" disabled={month.getFullYear() === new Date().getFullYear() && month.getMonth() === new Date().getMonth()} onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() + 1, 1))}>›</button></div>
       <div className={styles.calendarGrid}>{["H", "K", "Sze", "Cs", "P", "Szo", "V"].map((name) => <span className={styles.calendarWeekday} key={name}>{name}</span>)}{Array.from({length: firstWeekday}, (_, i) => <span key={`empty-${i}`} />)}{Array.from({length: daysInMonth}, (_, i) => { const day = i+1; const key = dateKey(new Date(month.getFullYear(), month.getMonth(), day)); return <button type="button" key={key} disabled={key > today} className={[selection === key || (period === "custom" && (startDate === key || endDate === key)) ? styles.calendarSelected : "", period === "custom" && startDate && endDate && key > startDate && key < endDate ? styles.calendarInRange : ""].join(" ")} aria-label={key} onClick={() => chooseDay(key)}>{day}</button>; })}</div>
@@ -166,25 +148,6 @@ function DateRangePicker({ period, startDate, endDate, onPreset, onRange }: {
 
 function Icon({ children }: { children: React.ReactNode }) {
   return <span className={styles.iconTile} aria-hidden="true"><TrendsIcon name={String(children)} /></span>;
-}
-
-function Sparkline({ points, tone = "blue" }: { points: HistoryPoint[]; tone?: "blue" | "purple" }) {
-  const values = points.map((point) => point.frequency);
-  if (values.length < 2) return <svg className={styles.sparkline} viewBox="0 0 150 44" role="img" aria-label={values.length ? "Egyetlen valódi adatpont, trendvonal nem áll rendelkezésre" : "Nincs elérhető idősor"}><g stroke="#133d65" strokeWidth=".7" strokeDasharray="2 5"><path d="M0 11H150 M0 22H150 M0 33H150" /></g>{values.length === 1 && <><circle cx="75" cy="22" r="3" fill="#21c9ff" /><circle cx="75" cy="22" r="7" fill="#21c9ff" opacity=".12" /></>}</svg>;
-  const min = Math.min(...values);
-  const max = Math.max(...values);
-  const span = Math.max(1, max - min);
-  const path = values.map((value, index) => {
-    const x = (index / (values.length - 1)) * 150;
-    const y = 39 - ((value - min) / span) * 31;
-    return `${index === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`;
-  }).join(" ");
-  return (
-    <svg className={`${styles.sparkline} ${tone === "purple" ? styles.sparkPurple : ""}`} viewBox="0 0 150 44" role="img" aria-label="Trend idősor">
-      <path className={styles.sparkArea} d={`${path} L150 44 L0 44 Z`} />
-      <path className={styles.sparkPath} d={path} />
-    </svg>
-  );
 }
 
 function TrendListPreview({ reason }: { reason: "loading" | "error" | "empty" }) {
@@ -205,7 +168,7 @@ function TrendListPreview({ reason }: { reason: "loading" | "error" | "empty" })
             <div><i /><i /><i /></div>
             <i className={styles.previewDescription} />
           </div>
-          <div className={styles.previewMeta}><i /><i /></div><div className={styles.previewSparkline}><i /><i /><i /><i /><i /><i /><i /></div>
+          <div className={styles.previewSparkline}><i /><i /><i /><i /><i /><i /><i /></div>
           <div className={styles.previewMetric}><i /><strong /></div>
           <div className={styles.previewStrength}><i /><div>{Array.from({ length: 10 }, (_, bar) => <b key={bar} className={bar < 6 - (index % 3) ? styles.previewStrengthOn : ""} />)}</div></div>
           <span className={styles.previewExpand}>⌄</span>
@@ -220,18 +183,18 @@ export default function TrendsDashboard() {
   useEffect(() => { useUserStore.getState().loadUser?.(); }, []);
   const [filters, setFilters] = useState<Filters>({ period: "30d", sources: [], categories: [], sort: "freq", keyword: "" });
   const [trends, setTrends] = useState<Trend[]>([]);
-  const [history, setHistory] = useState<Record<string, HistoryPoint[]>>({});
+  const [history, setHistory] = useState<Record<string, TrendHistory>>({});
+  const [historyErrors,setHistoryErrors] = useState<Record<string,boolean>>({});
+  const [loadedScope,setLoadedScope] = useState("");
+  const [asOf,setAsOf] = useState<string>();
+  const scopeKey = JSON.stringify([filters.period,filters.sources,filters.categories,filters.startDate,filters.endDate]);
   const [sourceBreakdown, setSourceBreakdown] = useState<SourceShare[]>([]);
   const [activitySeries, setActivitySeries] = useState<ActivityPoint[]>([]);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [visibleCount,setVisibleCount] = useState(12);
   const [expanded, setExpanded] = useState<string | null>(null);
-  const [sourceKeyword, setSourceKeyword] = useState<string | null>(null);
-  const [sourceArticles, setSourceArticles] = useState<SourceArticle[]>([]);
-  const [sourceLoading, setSourceLoading] = useState(false);
-  const [sourceError, setSourceError] = useState(false);
-  const sourceRequest = useRef(0);
   const topSearchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -255,7 +218,7 @@ export default function TrendsDashboard() {
     const controller = new AbortController();
     let active = true;
     let rejectTimeout: number | undefined;
-    const query = new URLSearchParams({ period: filters.period });
+    const query = intelligenceParams({period:filters.period,sources:filters.sources,categories:filters.categories,startDate:filters.startDate,endDate:filters.endDate});
     if (filters.sources.length) query.set("sources", filters.sources.join(","));
     if (filters.categories.length) query.set("categories", filters.categories.join(","));
     if (filters.period === "custom" && filters.startDate) query.set("startDate", filters.startDate);
@@ -265,6 +228,9 @@ export default function TrendsDashboard() {
       setLoading(true);
       setError(null);
       setHistory({});
+      setHistoryErrors({});
+      setExpanded(null);
+      setVisibleCount(12);
     });
     const request = fetch(`/api/trends?${query}`, { cache: "no-store", signal: controller.signal });
     const timeout = new Promise<Response>((_, reject) => {
@@ -275,9 +241,12 @@ export default function TrendsDashboard() {
         if (!response.ok) throw new Error(`trends_http_${response.status}`);
         const payload: unknown = await response.json();
         if (!payload || typeof payload !== "object") throw new Error("trends_invalid_response");
-        const object = payload as { trends?: unknown; sourceBreakdown?: unknown; activity?: unknown };
+        const object = payload as { version?:number; unit?:string; window?:{asOf:string}; trends?: unknown; sourceBreakdown?: unknown; activity?: unknown };
+        if(object.version!==2 || object.unit!==TREND_UNIT || !object.window?.asOf || !Array.isArray(object.trends)) throw new Error("trends_invalid_contract");
         const rows = Array.isArray(object.trends) ? object.trends : Array.isArray(payload) ? payload : [];
         if (!active) return;
+        setLoadedScope(scopeKey);
+        setAsOf(object.window.asOf);
         setTrends(rows.map(normalizeTrend).filter((trend): trend is Trend => trend !== null));
         setSourceBreakdown(Array.isArray(object.sourceBreakdown) ? object.sourceBreakdown.flatMap((entry): SourceShare[] => {
           if (!entry || typeof entry !== "object") return [];
@@ -301,7 +270,7 @@ export default function TrendsDashboard() {
       })
       .finally(() => { if (active) setLoading(false); });
     return () => { active = false; if (rejectTimeout !== undefined) window.clearTimeout(rejectTimeout); controller.abort(); };
-  }, [filters.period, filters.sources, filters.categories, filters.startDate, filters.endDate]);
+  }, [filters.period, filters.sources, filters.categories, filters.startDate, filters.endDate, scopeKey]);
 
   const filteredTrends = useMemo(() => {
     const needle = filters.keyword.trim().toLocaleLowerCase("hu-HU");
@@ -313,35 +282,28 @@ export default function TrendsDashboard() {
     });
   }, [trends, filters.keyword, filters.sort]);
 
-  const visibleTrends = filteredTrends.slice(0, 12);
-  const historyKey = JSON.stringify(visibleTrends.map((trend) => trend.keyword));
+  const visibleTrends = loadedScope === scopeKey ? filteredTrends.slice(0, visibleCount) : [];
+  const historyKey = JSON.stringify(visibleTrends.map(({keyword,category}) => ({keyword,category})));
   useEffect(() => {
-    const keywords = JSON.parse(historyKey) as string[];
-    if (keywords.length === 0 || filters.period === "365d") return;
+    const identities = JSON.parse(historyKey) as {keyword:string;category:string}[];
     const controller = new AbortController();
-    Promise.all(keywords.map(async (keyword) => {
-      const query = new URLSearchParams({ keyword, period: filters.period });
-      if (filters.sources.length) query.set("sources", filters.sources.join(","));
-      if (filters.startDate) query.set("startDate", filters.startDate);
-      if (filters.endDate) query.set("endDate", filters.endDate);
-      const response = await fetch(`/api/trend-history?${query}`, { cache: "no-store", signal: controller.signal });
-      if (!response.ok) return [keyword, []] as const;
-      const payload = await response.json() as { history?: unknown };
-      return [keyword, normalizeHistory(payload.history)] as const;
-    })).then((entries) => { if (!controller.signal.aborted) setHistory(Object.fromEntries(entries)); }).catch(() => undefined);
-    return () => controller.abort();
-  }, [historyKey, filters.period, filters.sources, filters.startDate, filters.endDate]);
+    const scope = {period:filters.period,sources:filters.sources,categories:filters.categories,startDate:filters.startDate,endDate:filters.endDate,asOf};
+    void loadVisibleHistories(identities,controller.signal,async ({keyword,category}) => {
+      const key = trendIdentity(keyword,category);
+      try {
+        const data = await loadTrendHistory(scope,keyword,category,controller.signal);
+        if(!controller.signal.aborted) setHistory(prev=>({...prev,[key]:data}));
+      } catch { if(!controller.signal.aborted) setHistoryErrors(prev=>({...prev,[key]:true})); }
+    });
+    return ()=>controller.abort();
+  }, [historyKey,filters.period,filters.sources,filters.categories,filters.startDate,filters.endDate,asOf]);
 
   const totalHits = filteredTrends.reduce((sum, trend) => sum + trend.frequency, 0);
   const growing = filteredTrends.filter((trend) => finiteNumber(trend.growth) > 0).sort((a, b) => finiteNumber(b.growth) - finiteNumber(a.growth)).slice(0, 5);
   const maxFrequency = Math.max(0, ...filteredTrends.map((trend) => trend.frequency));
-  const recentlySeen = [...filteredTrends]
-    .filter((trend) => trend.firstSeen || trend.lastSeen)
-    .sort((a, b) => Date.parse(b.lastSeen || b.firstSeen || "") - Date.parse(a.lastSeen || a.firstSeen || ""))
-    .slice(0, 5);
-  const lastWeek = Date.now() - 7 * 24 * 60 * 60 * 1000;
-  const newlySeen = recentlySeen.filter((trend) => trend.firstSeen && Date.parse(trend.firstSeen) >= lastWeek);
-  const topicSidebarRows = newlySeen.length ? newlySeen : recentlySeen;
+  const lastWeek = Date.parse(asOf ?? "") - 7 * 24 * 60 * 60 * 1000;
+  const newlySeen = filteredTrends.filter((trend) => trend.firstSeen && Date.parse(trend.firstSeen) >= lastWeek);
+  const topicSidebarRows = newlySeen.slice(0,5);
   const activityPoints = activitySeries.slice(-30);
   const activity = activityPoints.map((point) => point.count);
   const sourceTotal = sourceBreakdown.reduce((sum, entry) => sum + entry.count, 0);
@@ -364,29 +326,6 @@ export default function TrendsDashboard() {
     }));
   }
 
-  function openSources(keyword: string, period = filters.period) {
-    const requestId = ++sourceRequest.current;
-    const safePeriod = period === "custom" ? "all" : period === "24h" ? "1d" : period;
-    setSourceKeyword(keyword);
-    setSourceArticles([]);
-    setSourceLoading(true);
-    setSourceError(false);
-    fetch(`/api/trends/trend-sources?keyword=${encodeURIComponent(keyword)}&period=${encodeURIComponent(safePeriod)}`)
-      .then(async (response) => {
-        if (!response.ok) throw new Error(`trend_sources_${response.status}`);
-        const payload: unknown = await response.json();
-        if (!Array.isArray(payload)) throw new Error("trend_sources_invalid_response");
-        if (requestId === sourceRequest.current) setSourceArticles(payload as SourceArticle[]);
-      })
-      .catch(() => { if (requestId === sourceRequest.current) setSourceError(true); })
-      .finally(() => { if (requestId === sourceRequest.current) setSourceLoading(false); });
-  }
-
-  function closeSources() {
-    ++sourceRequest.current;
-    setSourceKeyword(null);
-  }
-
   return (
     <div className={styles.dashboard}>
       <aside className={styles.sidebar}>
@@ -403,7 +342,7 @@ export default function TrendsDashboard() {
         <div className={styles.filterDivider} />
         <div className={styles.filters} aria-label="Trendszűrők">
           <h2>Szűrés</h2>
-          <label><span className={styles.filterLabel}><TrendsIcon name="calendar" /> Időszak</span><select value={filters.period} onChange={(event) => event.target.value === "custom" ? document.querySelector<HTMLButtonElement>("[data-trends-date-trigger] button")?.click() : updateFilter("period", event.target.value)}><option value="24h">24 óra</option><option value="7d">7 nap</option><option value="30d">30 nap</option><option value="365d">365 nap</option><option value="custom">Egyedi</option></select></label>
+          <label><span className={styles.filterLabel}><TrendsIcon name="calendar" /> Időszak</span><select value={filters.period} onChange={(event) => event.target.value === "custom" ? document.querySelector<HTMLButtonElement>("[data-trends-date-trigger] button")?.click() : updateFilter("period", event.target.value)}><option value="24h">24 óra</option><option value="7d">7 nap</option><option value="30d">30 nap</option><option value="90d">90 nap</option><option value="365d">365 nap</option><option value="custom">Egyedi</option></select></label>
           {filters.period === "custom" && <div className={styles.dateInputs}><input aria-label="Kezdődátum" type="date" value={filters.startDate || ""} onChange={(event) => updateFilter("startDate", event.target.value)} /><input aria-label="Záródátum" type="date" value={filters.endDate || ""} onChange={(event) => updateFilter("endDate", event.target.value)} /></div>}
           <fieldset><legend className={styles.filterLabel}><TrendsIcon name="source-users" /> Források</legend><label className={styles.check}><input type="checkbox" checked={filters.sources.length === 0} onChange={() => updateFilter("sources", [])} />Mind</label>{SOURCES.map((source) => <label className={styles.check} key={source}><input type="checkbox" checked={filters.sources.includes(source)} onChange={() => toggleFilter("sources", source)} />{source}</label>)}</fieldset>
           <fieldset><legend className={styles.filterLabel}><TrendsIcon name="categories" /> Kategóriák</legend>{CATEGORIES.map((category) => <label className={`${styles.categoryFilter} ${filters.categories.includes(category) ? styles.categoryFilterSelected : ""}`} key={category} style={{ "--category-color": CATEGORY_COLOR[category] } as React.CSSProperties}><input type="checkbox" checked={filters.categories.includes(category)} onChange={() => toggleFilter("categories", category)} /><span className={styles.categoryFilterIcon}><CategoryIcon category={category} /></span>{category}</label>)}</fieldset>
@@ -431,14 +370,14 @@ export default function TrendsDashboard() {
             </section>
 
             <section className={styles.stats} aria-label="Trendstatisztikák">
-              <article><Icon>▤</Icon><div><span>Összes találat</span><strong>{loading || error ? "—" : totalHits.toLocaleString("hu-HU")}</strong><small>az aktuális időszakban</small></div></article>
+              <article><Icon>▤</Icon><div><span>Cikk–kulcsszó kapcsolat</span><strong>{loading || error ? "—" : totalHits.toLocaleString("hu-HU")}</strong><small>az aktuális időszakban</small></div></article>
               <article><Icon>↗</Icon><div><span>Aktív kulcsszavak</span><strong>{loading || error ? "—" : filteredTrends.length.toLocaleString("hu-HU")}</strong><small>megfigyelt témák száma</small></div></article>
               <article><Icon>source-users</Icon><div><span>Források</span><strong>{loading || error || !sourceTotal ? "—" : sourceBreakdown.length}</strong><small>{sourceTotal ? sourceBreakdown.slice(0, 3).map((item) => item.source).join(", ") : "nincs összesített forrásadat"}</small></div></article>
               <article><Icon>ϟ</Icon><div><span>Új trendek</span><strong>{loading || error ? "—" : newlySeen.length}</strong><small>első észlelés az elmúlt 7 napban</small></div></article>
             </section>
 
             <div className={styles.topicToolbar}>
-              <div className={styles.chips}><button className={styles.chipActive} type="button" onClick={() => updateFilter("keyword", "")}>Összes téma</button>{filteredTrends.slice(0, 7).map((trend) => <button type="button" key={trend.keyword} onClick={() => updateFilter("keyword", trend.keyword)}>{trend.keyword}<b>{trend.frequency}</b></button>)}</div>
+              <div className={styles.chips}><button className={styles.chipActive} type="button" onClick={() => updateFilter("keyword", "")}>Összes téma</button>{filteredTrends.slice(0, 7).map((trend) => <button type="button" key={trendIdentity(trend.keyword,trend.category)} onClick={() => updateFilter("keyword", trend.keyword)}>{trend.keyword}<b>{trend.frequency}</b></button>)}</div>
               <select aria-label="Trendek rendezése" value={filters.sort} onChange={(event) => updateFilter("sort", event.target.value)}><option value="freq">Rendezés: Népszerűség</option><option value="growth">Rendezés: Növekedés</option><option value="relevance">Rendezés: Relevancia</option></select>
             </div>
 
@@ -447,33 +386,36 @@ export default function TrendsDashboard() {
               {!loading && error && <TrendListPreview reason="error" />}
               {!loading && !error && visibleTrends.length === 0 && <TrendListPreview reason="empty" />}
               {!loading && !error && visibleTrends.map((trend, index) => {
-                const points = history[trend.keyword] || [];
-                const growth = growthPercent(trend, points);
+                const identity = trendIdentity(trend.keyword,trend.category);
+                const historical = history[identity];
+                const points = historical?.history ?? [];
+                const growth = trend.growth === null ? null : Math.round(trend.growth*100);
                 const strength = trendStrength(trend, maxFrequency);
-                const isOpen = expanded === trend.keyword;
+                const isOpen = expanded === identity;
                 return <article key={`${trend.keyword}-${trend.category}`} className={`${styles.trendCard} ${index === 0 ? styles.trendCardFeatured : ""}`}>
                   <span className={styles.rank}>{index + 1}</span>
-                  <div className={styles.trendInfo}><div className={styles.trendHeading}><div className={styles.nameAndSources}><div className={styles.keywordRow}><h3>{trend.keyword}</h3></div><div className={styles.sourceTags}>{(trend.sources.length ? trend.sources : filters.sources.length ? filters.sources : ["Forrás nem ismert"]).map((source) => <span key={source}>{source}</span>)}<button type="button" onClick={() => openSources(trend.keyword)}>Cikkek</button></div></div><div className={styles.rowMeta}><span className={styles.category} style={{ "--category-color": CATEGORY_COLOR[trend.category] ?? "#4da9ff" } as React.CSSProperties}><CategoryIcon category={trend.category} />{trend.category}</span>{trend.firstSeen && Date.now() - Date.parse(trend.firstSeen) <= 7 * 86_400_000 && <span className={styles.newBadge}><TrendsIcon name="spark" /> Új</span>}{growth !== null && growth >= 30 && trend.frequency >= 2 ? <span className={styles.hotBadge}>Most felkapott</span> : <span className={styles.activeBadge}>Aktív</span>}{trend.lastSeen && <span className={styles.freshness}><TrendsIcon name="clock" />{relativeTime(trend.lastSeen)}</span>}</div></div><p><span className={styles.topicDescription}>{trend.keyword} említéseinek alakulása a kiválasztott magyar online hírforrásokban.</span><span className={styles.topicSummary}>{trend.frequency.toLocaleString("hu-HU")} említés · {filters.period === "custom" ? "egyedi időszak" : filters.period}</span></p></div>
-                  <button type="button" className={styles.sparkButton} onClick={() => setExpanded(isOpen ? null : trend.keyword)} aria-expanded={isOpen} aria-label={`${trend.keyword} grafikon részletei`}><Sparkline points={points} tone={index % 2 ? "purple" : "blue"} /></button>
-                  <div className={styles.hitStat}><span>Összes találat</span><div className={styles.hitNumbers}><strong>{trend.frequency.toLocaleString("hu-HU")}</strong><b className={growth !== null && growth < 0 ? styles.negative : ""}>{growth === null ? "—" : `${growth >= 0 ? "+" : ""}${growth}%`}</b></div></div>
-                  <div className={styles.strength}><span>Trend erősség</span><div>{Array.from({ length: 10 }, (_, bar) => <i key={bar} className={bar < Math.ceil(strength / 10) ? styles.strengthOn : ""} />)}<b>{strength}</b></div></div>
-                  <button type="button" className={styles.expandButton} onClick={() => setExpanded(isOpen ? null : trend.keyword)} aria-expanded={isOpen} aria-label={`${trend.keyword} részletei`}><TrendsIcon name="chevron" /></button>
-                  {isOpen && <div className={styles.expandedRow}><span>Első észlelés: {trend.firstSeen ? new Date(trend.firstSeen).toLocaleString("hu-HU") : "nincs adat"}</span><span>Legutóbbi aktivitás: {relativeTime(trend.lastSeen)}</span><button type="button" onClick={() => openSources(trend.keyword)}>Kapcsolódó cikkek megnyitása →</button></div>}
+                  <div className={styles.trendInfo}><div className={styles.trendHeading}><div className={styles.nameAndSources}><div className={styles.keywordRow}><h3>{trend.keyword}</h3></div><div className={styles.sourceTags}>{(trend.sources.length ? trend.sources : filters.sources.length ? filters.sources : ["Forrás nem ismert"]).map((source) => <span key={source}>{source}</span>)}<button type="button" onClick={() => setExpanded(identity)}>Elemzés</button></div></div><div className={styles.rowMeta}><span className={styles.category} style={{ "--category-color": CATEGORY_COLOR[trend.category] ?? "#4da9ff" } as React.CSSProperties}><CategoryIcon category={trend.category} />{trend.category}</span>{trend.firstSeen && Date.parse(asOf ?? "") - Date.parse(trend.firstSeen) <= 7 * 86_400_000 && <span className={styles.newBadge}><TrendsIcon name="spark" /> Új</span>}{trend.status === "Most felkapott" ? <span className={styles.hotBadge}>Most felkapott</span> : <span className={styles.activeBadge}>{trend.status}</span>}{trend.lastSeen && <span className={styles.freshness}><TrendsIcon name="clock" />{relativeTime(trend.lastSeen)}</span>}</div></div><p><span className={styles.topicDescription}>{trend.keyword} említéseinek alakulása a kiválasztott magyar online hírforrásokban.</span><span className={styles.topicSummary}>{trend.frequency.toLocaleString("hu-HU")} kapcsolat · {filters.period === "custom" ? "egyedi időszak" : filters.period}</span></p></div>
+                  <button type="button" className={styles.sparkButton} onClick={() => setExpanded(isOpen ? null : identity)} aria-expanded={isOpen} aria-label={`${trend.keyword} grafikon részletei`}>{historical ? <SparklineMini history={historical.firstSeen === null ? [] : points} period={filters.period} tone={index % 2 ? "purple" : "blue"} /> : <span className={styles.sparkEmpty}>{historyErrors[identity] ? "Idősor nem elérhető" : "Idősor betöltése…"}</span>}</button>
+                  <div className={styles.hitStat}><span>Cikk–kulcsszó kapcsolat</span><div className={styles.hitNumbers}><strong>{trend.frequency.toLocaleString("hu-HU")}</strong><b className={growth !== null && growth < 0 ? styles.negative : ""}>{growth === null ? trend.status : `${growth >= 0 ? "+" : ""}${growth}%`}</b></div></div>
+                  <div className={styles.strength}><span>Relatív index (0–100)</span><div>{Array.from({ length: 10 }, (_, bar) => <i key={bar} className={bar < Math.ceil(strength / 10) ? styles.strengthOn : ""} />)}<b>{strength}</b></div></div>
+                  <button type="button" className={styles.expandButton} onClick={() => setExpanded(isOpen ? null : identity)} aria-expanded={isOpen} aria-label={`${trend.keyword} részletei`}><TrendsIcon name="chevron" /></button>
+                  {isOpen && <TrendIntelligencePanel key={`${identity}-${scopeKey}`} keyword={trend.keyword} category={trend.category} scope={{...filters,asOf}} onClose={()=>setExpanded(null)}/>}
                 </article>;
               })}
             </section>
+            {!loading && !error && visibleCount < filteredTrends.length && <button type="button" className={styles.moreTrends} onClick={()=>setVisibleCount(n=>n+12)}>További 12 trend</button>}
           </main>
 
           <aside className={styles.rightRail}>
-            <section className={`${styles.sideCard} ${styles.growingCard}`}><header><TrendsIcon name="↗" /><div><h2>Top növekvő témák</h2><p>Az aktuális időszakban</p></div></header>{growing.length ? <ol>{growing.map((trend, index) => <li key={trend.keyword}><i>{index + 1}</i><button type="button" onClick={() => updateFilter("keyword", trend.keyword)}>{trend.keyword}</button><b>↑ +{Math.round(finiteNumber(trend.growth) * 100)}%</b></li>)}</ol> : <ol className={styles.sidePreview} data-state="preview">{Array.from({ length: 5 }, (_, index) => <li key={index}><i>{index + 1}</i><span /><b>—</b></li>)}</ol>}</section>
-            <section className={`${styles.sideCard} ${styles.newTopicsCard}`}><header><TrendsIcon name="spark" /><div><h2>Új témák</h2><p>{newlySeen.length ? "Frissen észlelt kulcsszavak" : "A kiválasztott időszak témái"}</p></div></header>{topicSidebarRows.length ? <ul className={styles.newTopicsList}>{topicSidebarRows.map((trend) => <li key={trend.keyword}><em>ÚJ</em><button type="button" onClick={() => updateFilter("keyword", trend.keyword)}>{trend.keyword}</button><time>{relativeTime(newlySeen.length ? trend.firstSeen : trend.lastSeen || trend.firstSeen)}</time></li>)}</ul> : <ul className={styles.sidePreview} data-state="preview">{Array.from({ length: 5 }, (_, index) => <li key={index}><em>ÚJ</em><span /><time>—</time></li>)}</ul>}{!topicSidebarRows.length && <p className={styles.compactFallback}>Még nincs megjeleníthető téma.</p>}</section>
+            <section className={`${styles.sideCard} ${styles.growingCard}`}><header><TrendsIcon name="↗" /><div><h2>Top növekvő témák</h2><p>Az aktuális időszakban</p></div></header>{growing.length ? <ol>{growing.map((trend, index) => <li key={trendIdentity(trend.keyword,trend.category)}><i>{index + 1}</i><button type="button" onClick={() => updateFilter("keyword", trend.keyword)}>{trend.keyword}</button><b>↑ +{Math.round(finiteNumber(trend.growth) * 100)}%</b></li>)}</ol> : <ol className={styles.sidePreview} data-state="preview">{Array.from({ length: 5 }, (_, index) => <li key={index}><i>{index + 1}</i><span /><b>—</b></li>)}</ol>}</section>
+            <section className={`${styles.sideCard} ${styles.newTopicsCard}`}><header><TrendsIcon name="spark" /><div><h2>Új témák</h2><p>{newlySeen.length ? "Frissen észlelt kulcsszavak" : "A kiválasztott időszak témái"}</p></div></header>{topicSidebarRows.length ? <ul className={styles.newTopicsList}>{topicSidebarRows.map((trend) => <li key={trendIdentity(trend.keyword,trend.category)}><em>ÚJ</em><button type="button" onClick={() => updateFilter("keyword", trend.keyword)}>{trend.keyword}</button><time>{relativeTime(newlySeen.length ? trend.firstSeen : trend.lastSeen || trend.firstSeen)}</time></li>)}</ul> : <ul className={styles.sidePreview} data-state="preview">{Array.from({ length: 5 }, (_, index) => <li key={index}><em>ÚJ</em><span /><time>—</time></li>)}</ul>}{!topicSidebarRows.length && <p className={styles.compactFallback}>Még nincs megjeleníthető téma.</p>}</section>
             <section className={styles.sideCard}><header><TrendsIcon name="category-other" /><div><h2>Források megoszlása</h2><p>{sourceTotal ? "A kiválasztott időszakban" : "Hiteles aggregált adatra vár"}</p></div></header><div className={styles.sourceEmpty}><div className={`${styles.emptyDonut} ${sourceTotal ? styles.dataDonut : ""}`} style={sourceTotal ? { background: `conic-gradient(${sourceGradient})` } : undefined}><span>{sourceTotal ? sourceTotal.toLocaleString("hu-HU") : "—"}</span></div><div className={styles.donutLegend} aria-label={sourceTotal ? "Források megoszlása" : "Nincs forrásmegoszlási adat"}>{sourceTotal ? sourceBreakdown.slice(0, 5).map((item, i) => <div key={item.source}><i style={{ background: sourcePalette[i % sourcePalette.length] }} /><span title={item.source}>{item.source}</span><b>{Math.round(item.count / sourceTotal * 100)}%</b></div>) : Array.from({ length: 4 }, (_, i) => <div key={i}><i /><span />—</div>)}</div></div></section>
             <section className={styles.sideCard}><header><TrendsIcon name="↗" /><div><h2>Trend aktivitás</h2><p>A megjelenített témák aktivitása</p></div></header>{activity.some((item) => item > 0) ? <div className={styles.activityBars}>{activity.map((value, index) => <i key={index} style={{ height: `${value / Math.max(1, ...activity) * 100}%` }} />)}</div> : <div className={`${styles.activityBars} ${styles.activityPreview}`} data-state="preview">{Array.from({ length: 24 }, (_, index) => <i key={index} />)}</div>}<p className={styles.compactFallback}>{activityPoints.length ? `${activityPoints[0].label} – ${activityPoints.at(-1)!.label}` : "Idősor nem érhető el"}</p></section>
           </aside>
         </div>
       </section>
 
-      <TrendSourcesModal key={`${sourceKeyword ?? "closed"}-${filters.period}`} show={sourceKeyword !== null} onHide={closeSources} keyword={sourceKeyword || ""} sources={sourceArticles} defaultPeriod={filters.period === "custom" ? "all" : filters.period} onPeriodChange={openSources} loading={sourceLoading} error={sourceError} />
+
     </div>
   );
 }

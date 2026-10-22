@@ -24,8 +24,8 @@ test("trends route owns the reference dashboard shell", () => {
 
 test("trends redesign keeps real endpoints, fail-safe states and honest fallbacks", () => {
   assert.match(dashboard, /fetch\(`\/api\/trends\?\$\{query\}`/);
-  assert.match(dashboard, /fetch\(`\/api\/trend-history\?\$\{query\}`/);
-  assert.match(dashboard, /\/api\/trends\/trend-sources\?keyword=/);
+  assert.match(fs.readFileSync(path.join(root,"lib/trend-intelligence-client.ts"),"utf8"), /\/api\/trend-history\?/);
+  assert.match(fs.readFileSync(path.join(root,"components/TrendIntelligencePanel.tsx"),"utf8"), /\/api\/trends\/trend-sources\?/);
   assert.match(dashboard, /trends_invalid_response/);
   assert.match(dashboard, /data-state="preview"/);
   assert.match(dashboard, /A trendadatok most nem érhetők el/);
