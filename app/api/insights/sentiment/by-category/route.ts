@@ -22,7 +22,7 @@ export async function GET(req: Request) {
 
     // 🔥 Mai nap meghatározása
     const period = new URL(req.url).searchParams.get("period");
-    if (period !== null && !["24h", "7d", "30d", "90d"].includes(period)) {
+    if (period !== null && !["today", "24h", "7d", "30d", "90d"].includes(period)) {
       return NextResponse.json({ success: false, error: "invalid_period" }, { status: 400 });
     }
     // No parameter keeps the existing Budapest calendar-day contract.

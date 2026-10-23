@@ -34,6 +34,7 @@ assert.doesNotMatch(read('app/api/fetch-feed/route.ts'), /\{ error: String\(err\
 assert.match(related, /related_query_failed/);
 assert.match(related, /status: 500/);
 assert.match(timeseries, /invalid_period/);
-assert.match(timeseries, /\["24h", "7d", "30d", "90d"\]/);
+assert.match(timeseries, /\["today", "24h", "7d", "30d", "90d"\]/);
+assert.match(timeseries, /resolveInsightsWindow\(period\)/);
 
 console.log('trends/related API validation regression: PASS');

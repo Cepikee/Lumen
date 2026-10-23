@@ -30,7 +30,7 @@ export function timestamp(value: unknown): number | null {
   return Number.isFinite(time) ? time : null;
 }
 export function bucketTime(time: number, period: string) {
-  if (period === "24h") return Math.floor(time / 3600000) * 3600000;
+  if (period === "24h" || period === "today") return Math.floor(time / 3600000) * 3600000;
   const day = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Budapest", year: "numeric", month: "2-digit", day: "2-digit" }).format(time);
   // Noon is a stable label anchor; grouping itself uses the Budapest date.
   return Date.parse(day + "T12:00:00Z");
@@ -38,8 +38,8 @@ export function bucketTime(time: number, period: string) {
 export function timeLabel(value: number, period: string, detailed = false) {
   return new Intl.DateTimeFormat("hu-HU", { timeZone: "Europe/Budapest",
     ...(detailed ? { year: "numeric" as const } : {}),
-    ...(period === "24h" && !detailed ? {} : { month: "short" as const, day: "numeric" as const }),
-    ...(period === "24h" || detailed ? { hour: "2-digit" as const, minute: "2-digit" as const } : {}),
+    ...((period === "24h" || period === "today") && !detailed ? {} : { month: "short" as const, day: "numeric" as const }),
+    ...(period === "24h" || period === "today" || detailed ? { hour: "2-digit" as const, minute: "2-digit" as const } : {}),
   }).format(value);
 }
 export function categorySeries(data: unknown, period: string, limit = 6) {
@@ -56,7 +56,7 @@ export function categorySeries(data: unknown, period: string, limit = 6) {
     points.set(time, row);
   }));
   const times = [...points.keys()].sort((a,b)=>a-b);
-  const step = period === "24h" ? 3600000 : 86400000;
+  const step = period === "24h" || period === "today" ? 3600000 : 86400000;
   if (times.length && times[times.length-1]-times[0] <= 92*86400000) {
     for (let time=times[0];time<=times[times.length-1];time+=step) {
       if (!points.has(time)) points.set(time,{time});
@@ -83,7 +83,7 @@ export function sentimentSeries(value: unknown, period: string) {
     point.positive += count(row.positive); point.neutral += count(row.neutral); point.negative += count(row.negative);
     points.set(time,point);
   }
-  const times=[...points.keys()].sort((a,b)=>a-b), step=period==="24h"?3600000:86400000;
+  const times=[...points.keys()].sort((a,b)=>a-b), step=period==="24h"||period==="today"?3600000:86400000;
   if (times.length && times[times.length-1]-times[0] <= 92*86400000) {
     for(let time=times[0];time<=times[times.length-1];time+=step) {
       if(!points.has(time)) points.set(time,{time,positive:0,neutral:0,negative:0});

@@ -112,6 +112,7 @@
 .trendInfo { min-width: 0; }
 .keywordRow { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .keywordRow h3 { max-width: 220px; overflow: hidden; margin: 0; color: #f1f7fd; font-size: 14px; font-weight: 760; text-overflow: ellipsis; white-space: nowrap; }
+.relatedTopic { max-width:180px; overflow:hidden; border:1px solid rgba(63,129,185,.6); border-radius:999px; padding:2px 7px; color:#85cfff; font-size:9px; text-overflow:ellipsis; white-space:nowrap; }
 .category, .newBadge { padding: 4px 8px; border: 1px solid rgba(34, 156, 236, .55); border-radius: 10px; color: #27c5ff; background: rgba(13, 83, 146, .28); font-size: 9px; }
 .newBadge { border-color: rgba(26, 221, 169, .45); color: #24e6ae; background: rgba(9, 114, 91, .26); }
 .sourceTags { display: flex; align-items: center; gap: 5px; margin-top: 4px; }
@@ -290,6 +291,8 @@
 .strength > div { gap:3px; }
 .sideCard { border-color:#1a5b94; border-radius:10px; background:radial-gradient(ellipse at 100% 0%,rgba(56,45,191,.23),transparent 60%),linear-gradient(130deg,#0a1e36,#071528); }
 .rightRail { gap:12px; }
+.rightRail{position:sticky;top:70px;align-self:start}
+.emptyDonut span small{display:block;margin-top:2px;color:#7291aa;font-size:8px;font-weight:500}
 .sideCard header { padding:13px 15px 10px; }
 .sideCard h2 { font-size:14px; }
 .sideCard header p { font-size:10px; }
@@ -532,6 +535,8 @@
 /* The manifest logo contains transparent padding: crop to the actual artwork, with no halo. */
 .brandCrop img { width:103px!important; height:103px!important; left:-12px!important; top:-23px!important; }
 .dataDonut { box-shadow: 0 0 16px rgba(21,130,247,.16); }
+.dataDonut { background:transparent; }
+.donutSvg { position:absolute; inset:0; z-index:0; width:100%; height:100%; overflow:visible; filter:drop-shadow(0 0 5px rgba(37,145,255,.25)); }
 /* Intelligence panel shares the row grid without changing the dashboard shell. */
 .moreTrends { display:block; margin:16px auto; border:1px solid #20527a; border-radius:8px; background:#0a2035; color:#d8e8f7; padding:10px 20px; }
 .hitNumbers { flex-wrap:wrap; }.hitNumbers b { max-width:100%; overflow-wrap:break-word; font-size:10px; }
@@ -556,3 +561,5 @@
  .stats div > span { font-size:11px; overflow-wrap:anywhere; }
  .stats strong { font-size:22px; }
 }
+
+@media(max-width:1080px){.rightRail{position:static}}

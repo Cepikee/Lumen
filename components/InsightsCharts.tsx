@@ -64,7 +64,7 @@ export function ActivityHeatmap({ chart, period }: { chart: Series; period: stri
       {chart.points.map(p=><i key={p.time} tabIndex={0} role="img" aria-label={`${category}, ${timeLabel(p.time,period,true)}: ${p[`v${i}`]} hír`} title={`${category} · ${timeLabel(p.time,period,true)} · ${p[`v${i}`]} hír`} style={{background:p[`v${i}`] ? `rgba(0,153,255,${.25+.75*p[`v${i}`]/max})`:"#122b47"}} />)}
     </div></div>)}
     <div className={styles.heatTicks}><span>{chart.points[0] && timeLabel(chart.points[0].time,period)}</span><span>{chart.points.length>1 && timeLabel(chart.points[chart.points.length-1].time,period)}</span></div>
-  </div><p className={styles.caption}>{period==="24h"?"Óránként":"Budapesti naponként"} · közös színskála: 0–{max} hír · 6 legaktívabb kategória</p></>;
+  </div><div className={styles.heatScale} aria-label={`Aktivitási színskála: nulla és ${max} hír között`}><span>0 hír</span><i /><i /><i /><i /><i /><span>{max} hír</span></div><p className={styles.caption}>{period==="24h"||period==="today"?"Budapesti helyi idő, óránként":"Budapesti naponként"} · a sötét cella nulla megfigyelt hírt jelent; teljesen hiányzó adatsor helyett külön üres állapot jelenik meg</p></>;
 }
 
 export function CategorySentimentChart({ data }: { data: ReturnType<typeof categorySentiments> }) {

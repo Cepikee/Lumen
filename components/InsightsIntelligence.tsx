@@ -25,7 +25,7 @@ export default function InsightsIntelligence({data,error,loading}:{data?:Intelli
   const lead=data.explanation.text || (data.highlights[0] ? `${data.highlights[0].name}: ${change(data.highlights[0])}.` : 'Nem látható kiugró változás a kiválasztott időszakban.');
   return <section className={styles.summaryStack} aria-label="Időszakos összefoglaló">
     <div className={`${styles.card} ${styles.heroSummary}`}>
-      <div className={styles.summaryHeading}><div><span className={styles.eyebrow}>IDŐSZAKOS ÖSSZKÉP</span><h2>Mi változott?</h2></div><span className={styles.scope}>{data.window.period}</span></div>
+      <div className={styles.summaryHeading}><div><span className={styles.eyebrow}>IDŐSZAKOS ÖSSZKÉP</span><h2>Mi változott?</h2></div><span className={styles.scope}>{data.window.period==='today'?'Ma':data.window.period==='24h'?'Elmúlt 24 óra':data.window.period}</span></div>
       <p className={styles.heroLead}>{lead}</p>
       <div className={styles.heroMeta}>
         <span><strong>{data.counts.current}</strong> publikált hír</span>
@@ -33,9 +33,9 @@ export default function InsightsIntelligence({data,error,loading}:{data?:Intelli
         {data.sentimentChange.percentagePoints!==null&&<span><strong>{data.sentimentChange.percentagePoints>0?'+':''}{data.sentimentChange.percentagePoints.toFixed(1)} pp</strong> negatív hangulat</span>}
       </div>
       <details className={styles.summaryDetails}><summary>Mérési részletek</summary>
-        <p className={styles.caption}>Publikálás alapján · Budapest · {date(data.window.start)} – {date(data.window.end)} · az előző azonos hosszúságú időszakhoz képest</p>
+        <p className={styles.caption}>{data.window.semantics} · RSS publikálási idő alapján · Europe/Budapest · {date(data.window.start)} – {date(data.window.end)} · az előző azonos hosszúságú időszakhoz képest</p>
         <Quality value={data.quality.summary}/><button onClick={()=>inspect()}>A {data.counts.current} cikk és a számítás megtekintése</button>
-        <p className={styles.caption}>Publikált: {data.processing.published} · feldolgozott: {data.processing.processed} · ebből korábban publikált: {data.processing.olderPublished}. A feldolgozási hullám nem hírfelfutás.</p>
+        <p className={styles.caption}>Publikált: {data.processing.published} · feldolgozott: {data.processing.processed} · ebből korábban publikált: {data.processing.olderPublished}. A főoldal ettől eltérően csak a publikálható AI-összefoglalókat mutatja; a feldolgozási hullám nem hírfelfutás.</p>
       </details>
     </div>
     <div className={styles.moversGrid}>{data.counts.baselineAvailable?(['rising','falling'] as const).map(direction=><div className={`${styles.card} ${styles.moverCard}`} key={direction}>

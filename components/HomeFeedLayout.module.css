@@ -58,7 +58,8 @@
 .activity div:last-child{grid-column:1/-1;min-height:58px}
 .activity strong{font-size:20px;line-height:1;color:#e8f7ff}.activity span{font-size:10px;color:#809cb5}
 .muted{color:#7895af;font-size:11px;line-height:1.5;margin:0}
-.right{top:24px;align-self:start;gap:12px;margin-top:0}
+.metricDefinition{margin:9px 1px 0;color:#6888a3;font-size:10px;line-height:1.45}
+.right{top:66px;align-self:start;gap:12px;margin-top:0}
 .right .panel{box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 12px 32px rgba(0,0,0,.08)}
 .right .panel h2{color:#e0edf8;font-size:16px;letter-spacing:.015em;text-transform:none;margin-bottom:12px}
 .drawer{display:none}

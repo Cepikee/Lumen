@@ -8,6 +8,7 @@ import styles from "./HomeFeedLayout.module.css";
 type HomeView = "feed" | "categories" | "sources";
 type Props = {
   items: FeedItem[];
+  facets?: FeedFacets | null;
   view: HomeView;
   category: string;
   source: string;
@@ -17,6 +18,14 @@ type Props = {
   children: ReactNode;
 };
 
+export type FeedFacets = {
+  contract: "public-feed-v1";
+  definition: string;
+  total: number;
+  categories: Array<{ name: string; count: number }>;
+  sources: Array<{ id: number; slug: string; name: string; count: number }>;
+};
+
 const primary = ["Közélet", "Politika", "Gazdaság", "Tech", "Sport"];
 const categoryColors = ["#168eff", "#8b5cf6", "#ff8a3d", "#20c8e8", "#28c58b"];
 const sourceKeys: Record<number, string> = { 1: "telex.hu", 2: "24.hu", 3: "index.hu", 4: "hvg.hu", 5: "portfolio.hu", 6: "444.hu", 7: "origo.hu" };
@@ -24,6 +33,7 @@ const sourceKey = (id: number) => sourceKeys[id] || "Ismeretlen forrás";
 const sourceName = (item: FeedItem) => item.source_name?.trim() || item.source?.trim() || sourceKey(item.source_id);
 const sourceBadge = (name: string) => name.replace(/^www\./i, "").split(".")[0].slice(0, 6).toLocaleUpperCase("hu-HU");
 const sourceStyleKey = (name: string) => sourceBadge(name).toLocaleLowerCase("hu-HU").replace(/[^a-z0-9]/g, "");
+const comparableSource = (value: string) => value.trim().toLocaleLowerCase("hu-HU").replace(/^www\./, "").replace(/\.hu$/, "");
 
 export function rankLoadedSources(items: FeedItem[]) {
   const counts = new Map<string, number>();
@@ -40,7 +50,7 @@ function NavIcon({ type }: { type: HomeView }) {
   return <svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM15 4v4h4M8 11h8M8 15h8M8 18h5" /></svg>;
 }
 
-export default function HomeFeedLayout({ items, view, category, source, onView, onCategory, onSource, children }: Props) {
+export default function HomeFeedLayout({ items, facets, view, category, source, onView, onCategory, onSource, children }: Props) {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [topics, setTopics] = useState<Array<{ keyword: string; count: number }>>([]);
 
@@ -60,7 +70,7 @@ export default function HomeFeedLayout({ items, view, category, source, onView, 
     return () => { active = false; };
   }, []);
 
-  const categories = useMemo(() => {
+  const loadedCategories = useMemo(() => {
     const map = new Map<string, number>();
     for (const item of items) {
       const value = item.category?.trim();
@@ -69,7 +79,13 @@ export default function HomeFeedLayout({ items, view, category, source, onView, 
     return map;
   }, [items]);
 
-  const sources = useMemo(() => rankLoadedSources(items), [items]);
+  const categories = useMemo(() => {
+    if (facets?.categories) return new Map(facets.categories.map((item) => [item.name, item.count]));
+    return loadedCategories;
+  }, [facets, loadedCategories]);
+  const sources = useMemo(() => facets?.sources?.length
+    ? facets.sources
+    : rankLoadedSources(items).map(([name, count], index) => ({ id: index + 1, slug: name, name, count })), [facets, items]);
 
   const latestUpdate = useMemo(() => {
     const timestamps = items.map((item) => new Date(item.created_at).getTime()).filter(Number.isFinite);
@@ -78,13 +94,14 @@ export default function HomeFeedLayout({ items, view, category, source, onView, 
   }, [items]);
 
   const additional = [...categories.keys()].filter((value) => !primary.some((name) => name.toLocaleLowerCase("hu-HU") === value.toLocaleLowerCase("hu-HU")));
+  if (category && ![...categories.keys()].some((value) => value.toLocaleLowerCase("hu-HU") === category.toLocaleLowerCase("hu-HU")) && !primary.some((value) => value.toLocaleLowerCase("hu-HU") === category.toLocaleLowerCase("hu-HU"))) additional.unshift(category);
   const categoryList = <ul className={styles.filterList}>
     <li><button className={!category ? styles.active : ""} onClick={() => onCategory("")}><i className={styles.dot} /><span>Összes hír</span>{items.length ? <small className={styles.count}>{items.length}</small> : null}</button></li>
     {primary.map((name, index) => <li key={name}><button className={category.toLocaleLowerCase("hu-HU") === name.toLocaleLowerCase("hu-HU") ? styles.active : ""} onClick={() => onCategory(name)}><i className={styles.dot} style={{ "--dot": categoryColors[index] } as React.CSSProperties} /><span>{name}</span>{categories.get(name) ? <small className={styles.count}>{categories.get(name)}</small> : null}</button></li>)}
   </ul>;
-  const moreCategories = additional.length ? <details className={styles.more}><summary>További kategóriák</summary><ul className={styles.filterList}>{additional.map((name) => <li key={name}><button onClick={() => onCategory(name)}>{name}<small className={styles.count}>{categories.get(name)}</small></button></li>)}</ul></details> : null;
+  const moreCategories = additional.length ? <details className={styles.more} open={Boolean(category && additional.some((name) => name.toLocaleLowerCase("hu-HU") === category.toLocaleLowerCase("hu-HU")))}><summary>További kategóriák</summary><ul className={styles.filterList}>{additional.map((name) => <li key={name}><button className={category.toLocaleLowerCase("hu-HU") === name.toLocaleLowerCase("hu-HU") ? styles.active : ""} onClick={() => onCategory(name)}>{name}<small className={styles.count}>{categories.get(name) ?? 0}</small></button></li>)}</ul></details> : null;
   const filterPanel = <div className={styles.panel}><h2>Népszerű kategóriák</h2>{categoryList}{moreCategories}</div>;
-  const sourceList = sources.length ? <ol className={styles.ranking}>{sources.map(([name, count], index) => <li key={name}><em>{index + 1}</em><button className={source === name ? styles.active : ""} onClick={() => onSource(name)}><b data-source={sourceStyleKey(name)}>{sourceBadge(name)}</b><span>{name}</span><small className={styles.count}>{count} hír</small><i className={styles.sourceChevron} aria-hidden="true">›</i></button></li>)}</ol> : <p className={styles.muted}>A forráslista a hírek betöltése után jelenik meg.</p>;
+  const sourceList = sources.length ? <ol className={styles.ranking}>{sources.map((item, index) => <li key={item.slug || item.name}><em>{index + 1}</em><button className={comparableSource(source) === comparableSource(item.slug) || comparableSource(source) === comparableSource(item.name) ? styles.active : ""} onClick={() => onSource(item.slug)}><b data-source={sourceStyleKey(item.slug || item.name)}>{sourceBadge(item.slug || item.name)}</b><span>{item.name}</span><small className={styles.count}>{item.count} hír</small><i className={styles.sourceChevron} aria-hidden="true">›</i></button></li>)}</ol> : <p className={styles.muted}>Még nincs publikálható hírforrás.</p>;
 
   return <main className={styles.page}><div className={styles.layout}>
     <aside className={styles.left} aria-label="Főoldali navigáció">
@@ -106,7 +123,7 @@ export default function HomeFeedLayout({ items, view, category, source, onView, 
     <aside className={styles.right} aria-label="Hírfolyam kontextusa">
       <section className={`${styles.panel} ${styles.sourcePanel}`} id="home-sources"><h2>Aktív források</h2>{sourceList}</section>
       <section className={styles.panel}><h2>Aktív témák</h2>{topics.length ? <div className={styles.topics}>{topics.map((topic) => <Link href={`/trends?keyword=${encodeURIComponent(topic.keyword)}`} key={topic.keyword}><i aria-hidden="true">#</i><span>{topic.keyword}</span><small>{topic.count}</small></Link>)}</div> : <p className={styles.muted}>Még nincs elég adat aktív témákhoz.</p>}</section>
-      <section className={styles.panel}><h2>Híraktivitás</h2><div className={styles.activity}><div><span>Betöltött hírek</span><strong>{items.length}</strong></div><div><span>Aktív források</span><strong>{sources.length}</strong></div>{latestUpdate ? <div><span>Legfrissebb hír</span><strong>{latestUpdate}</strong></div> : null}</div></section>
+      <section className={styles.panel}><h2>Híraktivitás</h2><div className={styles.activity}><div title={facets?.definition}><span>Megjelenítve</span><strong>{items.length} / {facets?.total ?? items.length}</strong></div><div><span>Publikáló források</span><strong>{sources.length}</strong></div>{latestUpdate ? <div><span>Legfrissebb hír</span><strong>{latestUpdate}</strong></div> : null}</div><p className={styles.metricDefinition}>{facets?.definition ?? "A jelenleg betöltött hírek"}</p></section>
     </aside>
   </div></main>;
 }

@@ -36,7 +36,7 @@ export function parseTrendQuery(params: URLSearchParams, now = new Date()): Tren
   const anchor = Math.floor(requested / 60000) * 60000;
   let end = anchor;
   let start: number;
-  if (period === "24h") { end = Math.floor(anchor / 3600000) * 3600000; start = end - DAY; }
+  if (period === "24h") { end = anchor; start = end - DAY; }
   else if (period === "custom") {
     start = calendar(params.get("startDate"));
     const requestedEnd = calendar(params.get("endDate")) + DAY;
@@ -54,6 +54,24 @@ export function comparison(total: number, previous: number) {
   const growth = previous > 0 ? (total - previous) / previous : null;
   const status = previous === 0 ? (total > 0 ? "Új aktivitás" : "Nincs aktivitás") : total >= 10 && growth! >= 1 ? "Most felkapott" : growth! > .1 ? "Erősödik" : growth! < -.1 ? "Csökken" : "Stabil";
   return { growth, status };
+}
+export function relatedTopicAliases(rows: Array<{keyword:string;category:string;articleIds:number[]}>) {
+  const related = new Map<string,string[]>();
+  const identity = (row: {keyword:string;category:string}) => trendIdentity(row.keyword,row.category);
+  for (let leftIndex=0; leftIndex<rows.length; leftIndex++) for (let rightIndex=leftIndex+1; rightIndex<rows.length; rightIndex++) {
+    const left=rows[leftIndex], right=rows[rightIndex];
+    if (left.category.trim().toLocaleLowerCase("hu-HU") !== right.category.trim().toLocaleLowerCase("hu-HU")) continue;
+    const year = /^\d{4}$/.test(left.keyword.trim()) ? left.keyword.trim() : /^\d{4}$/.test(right.keyword.trim()) ? right.keyword.trim() : null;
+    if (!year) continue;
+    const phrase = left.keyword.trim() === year ? right.keyword.trim() : left.keyword.trim();
+    if (!new RegExp(`^${year}-(?:os|es|as|ös)\\s+forradalom$`, "iu").test(phrase)) continue;
+    if (!left.articleIds.length || !right.articleIds.length) continue;
+    const rightIds=new Set(right.articleIds), overlap=left.articleIds.filter(id=>rightIds.has(id)).length;
+    if (overlap/Math.min(left.articleIds.length,right.articleIds.length) < .8) continue;
+    related.set(identity(left),[...(related.get(identity(left))||[]),right.keyword]);
+    related.set(identity(right),[...(related.get(identity(right))||[]),left.keyword]);
+  }
+  return related;
 }
 export function makePoints(window: TrendWindow, rows: {timestamp: string; source: string; count: number}[]): TrendPoint[] {
   const step = window.resolution === "hour" ? 3600000 : DAY;

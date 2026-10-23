@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { securityCheck } from "@/lib/security";
 import { mysqlUtc } from "@/lib/business-time";
+import { resolveInsightsWindow } from "@/lib/insights-period";
 
 function fixCat(s: any): string | null {
   if (!s) return null;
@@ -20,31 +21,27 @@ export async function GET(req: Request) {
 
   const url = new URL(req.url);
   const period = url.searchParams.get("period") || "24h";
-  if (!["24h", "7d", "30d", "90d"].includes(period)) {
+  if (!["today", "24h", "7d", "30d", "90d"].includes(period)) {
     return NextResponse.json({ success: false, error: "invalid_period" }, { status: 400 });
   }
 
-  let minutesBack = 24 * 60;
   let sqlBucket = "%Y-%m-%d %H:%i:00";
 
   if (period === "7d") {
-    minutesBack = 7 * 24 * 60;
     sqlBucket = "%Y-%m-%d %H:00:00";
   }
 
   if (period === "30d") {
-    minutesBack = 30 * 24 * 60;
     sqlBucket = "%Y-%m-%d %H:00:00";
   }
 
   if (period === "90d") {
-    minutesBack = 90 * 24 * 60;
     sqlBucket = "%Y-%m-%d %H:00:00";
   }
 
-  const now = new Date();
-  const endStr = mysqlUtc(now);
-  const startStr = mysqlUtc(new Date(now.getTime() - minutesBack * 60 * 1000));
+  const { start, end } = resolveInsightsWindow(period);
+  const endStr = mysqlUtc(end);
+  const startStr = mysqlUtc(start);
 
   try {
     const [cats]: any = await db.query(`

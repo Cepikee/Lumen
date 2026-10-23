@@ -10,7 +10,7 @@ export default function TrendIntelligencePanel({keyword,category,scope,onClose}:
   const [local,setLocal]=useState(scope);
   const queryKey=JSON.stringify(local);
   return <section className={styles.panel} aria-label={`${keyword} – Trendelemzés`}>
-    <header><div><h3>{keyword} — Trendelemzés</h3><p>{category} · Egyedi cikk–kulcsszó kapcsolatok; az észlelés ideje szerint.</p></div><button type="button" onClick={onClose} aria-label="Trendelemzés bezárása">Bezárás ×</button></header>
+    <header><div><h3>{keyword} — Trendelemzés</h3><p>{category} · Egyedi cikk–kulcsszó kapcsolatok; az észlelés ideje szerint.</p></div><button type="button" onClick={(event)=>{event.stopPropagation();onClose();}} aria-label="Trendelemzés bezárása">Bezárás ×</button></header>
     <div className={styles.controls}><label>Elemzés időszaka<select value={local.period} onChange={e=>setLocal({...local,period:e.target.value,asOf:undefined})}>{PERIODS.map(p=><option key={p} value={p}>{p==="custom"?"Egyedi":p==="24h"?"24 óra":`${p.slice(0,-1)} nap`}</option>)}</select></label>{local.period==="custom" && <><label>Kezdőnap (UTC)<input type="date" value={local.startDate??""} onChange={e=>setLocal({...local,startDate:e.target.value,asOf:undefined})}/></label><label>Zárónap (UTC)<input type="date" value={local.endDate??""} onChange={e=>setLocal({...local,endDate:e.target.value,asOf:undefined})}/></label></>}</div>
     <PanelData key={queryKey} keyword={keyword} category={category} scope={local}/>
   </section>;
@@ -31,7 +31,7 @@ function PanelData({keyword,category,scope}:{keyword:string;category:string;scop
     {data.total===0&&<p role="status">Nincs rögzített kapcsolat ebben az időablakban. A nullák a sikeresen lekérdezett tárolt adatokat jelentik.</p>}
     <SparklineDetailed history={data.firstSeen === null ? [] : data.history} period={data.window.period} series={series} onPointSelect={setSelected}/>
     <p className={styles.note}>A jelmagyarázat kapcsolja a forrásvonalakat. Kattints egy pontra a cikkekhez. Napi összesítés: UTC-nap; órás időpontok: Europe/Budapest, időzóna-jelöléssel.</p>
-    <label className={styles.pointSelect}>Adatpont kiválasztása billentyűzettel<select value={selected??""} onChange={e=>setSelected(e.target.value===""?null:Number(e.target.value))}><option value="">Válassz időpontot…</option>{data.history.map((p,i)=><option key={p.timestamp} value={i}>{pointLabel(p.timestamp,data.window.resolution==="hour")} — {p.freq} kapcsolat</option>)}</select></label>
+    <label className={styles.pointSelect}>Időpont részletei<select value={selected??""} onChange={e=>setSelected(e.target.value===""?null:Number(e.target.value))}><option value="">Válassz időpontot…</option>{data.history.map((p,i)=><option key={p.timestamp} value={i}>{pointLabel(p.timestamp,data.window.resolution==="hour")} — {p.freq} kapcsolat</option>)}</select></label>
     {selected!==null&&data.history[selected]&&<PointArticles key={data.history[selected].timestamp} keyword={keyword} category={category} scope={{...scope,asOf:data.window.asOf}} bucket={data.history[selected].timestamp} count={data.history[selected].freq}/>}
   </>;
 }

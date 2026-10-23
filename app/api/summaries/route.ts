@@ -24,28 +24,6 @@ function getPool() {
   return pool;
 }
 
-const ID_TO_SOURCE_NAME: Record<string, string> = {
-  "1": "telex",
-  "2": "24hu",
-  "3": "index",
-  "4": "hvg",
-  "5": "portfolio",
-  "6": "444",
-  "7": "origo",
-};
-
-const SOURCE_NAME_TO_ID: Record<string, number> = {
-  telex: 1,
-  "24hu": 2,
-  "24": 2,
-  index: 3,
-  hvg: 4,
-  portfolio: 5,
-  "444": 6,
-  "444hu": 6,
-  origo: 7,
-};
-
 type SummaryRow = RowDataPacket & {
   id: number;
   url: string | null;
@@ -132,30 +110,25 @@ function createSearchFilter(q: string): {
   };
 }
 
-function sourceIdFromFilter(rawValue: string): number | undefined {
+function numericSourceId(rawValue: string): number | undefined {
   const raw = rawValue.trim();
+  if (!/^\d+$/.test(raw)) return undefined;
+  const id = Number(raw);
+  return Number.isSafeInteger(id) && id > 0 ? id : undefined;
+}
 
-  if (/^\d+$/.test(raw)) {
-    const id = Number(raw);
-    return Number.isSafeInteger(id) && id > 0 ? id : undefined;
-  }
-
-  const normalized = raw.toLowerCase().replace(/\s+/g, "");
-  const withoutTld = normalized.endsWith(".hu")
-    ? normalized.slice(0, -3)
-    : normalized;
-  const candidates = [
-    normalized,
-    withoutTld,
-    normalized.replace(/\./g, ""),
+function sourceLookupValues(rawValue: string): string[] {
+  const normalized = rawValue.trim().toLowerCase().replace(/^www\./, "");
+  if (!normalized || /^\d+$/.test(normalized)) return [];
+  const withoutTld = normalized.endsWith(".hu") ? normalized.slice(0, -3) : normalized;
+  return [
+    ...new Set([
+      normalized,
+      withoutTld,
+      normalized.replace(/\./g, ""),
+      `${withoutTld}.hu`,
+    ]),
   ];
-
-  for (const candidate of candidates) {
-    const id = SOURCE_NAME_TO_ID[candidate];
-    if (id !== undefined) return id;
-  }
-
-  return undefined;
 }
 
 export async function GET(req: Request) {
@@ -303,21 +276,35 @@ export async function GET(req: Request) {
     const sourcesRaw =
       searchParams.getAll("source").slice(0, 20);
 
+    // Numeric filters remain valid for existing links. Human-readable source
+    // names and slugs are always resolved against the canonical registry so a
+    // fresh database or a newly registered RSS source never depends on legacy
+    // auto-increment IDs.
     const sourceIds = [
       ...new Set(
-        sourcesRaw.map((raw) => {
-            const trimmed = raw.trim();
-            if (/^\d+$/.test(trimmed)) {
-              const id = Number(trimmed);
-              return Number.isSafeInteger(id) && id > 0 ? id : undefined;
-            }
-            return sourceIdFromFilter(
-              ID_TO_SOURCE_NAME[trimmed] ?? trimmed
-            );
-          })
+        sourcesRaw
+          .map(numericSourceId)
           .filter((id): id is number => id !== undefined)
       ),
     ];
+
+    const unresolvedSourceValues = sourcesRaw
+      .filter((raw) => numericSourceId(raw) === undefined)
+      .flatMap(sourceLookupValues);
+    if (unresolvedSourceValues.length > 0) {
+      const placeholders = unresolvedSourceValues.map(() => "?").join(",");
+      const [resolvedRows] = await db.query<Array<RowDataPacket & { id: number }>>(
+        `SELECT id FROM sources
+         WHERE is_active = 1
+           AND (LOWER(TRIM(slug)) IN (${placeholders})
+             OR LOWER(TRIM(name)) IN (${placeholders}))`,
+        [...unresolvedSourceValues, ...unresolvedSourceValues]
+      );
+      for (const row of resolvedRows) {
+        const id = Number(row.id);
+        if (Number.isSafeInteger(id) && id > 0 && !sourceIds.includes(id)) sourceIds.push(id);
+      }
+    }
 
     // Ismeretlen forrásfilter ne essen vissza véletlenül szűretlen feedre.
     if (sourcesRaw.length > 0 && sourceIds.length === 0) {

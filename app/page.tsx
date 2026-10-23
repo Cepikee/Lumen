@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FeedList from "@/components/FeedList";
 import type { FeedItem } from "@/components/FeedItemCard";
 import HomeFeedLayout from "@/components/HomeFeedLayout";
+import type { FeedFacets } from "@/components/HomeFeedLayout";
 import { useUserStore } from "@/store/useUserStore";
 
 function normalizeFeedItems(raw: unknown): FeedItem[] {
@@ -94,6 +95,7 @@ function HomePage() {
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [facets, setFacets] = useState<FeedFacets | null>(null);
   const feedRequestRef = useRef(0);
   // When a search/filter changes while a later page is visible, the reset
   // effect and the pagination effect run in the same commit. Keep the
@@ -107,6 +109,30 @@ function HomePage() {
   const depCategories = JSON.stringify(categoryFilters ?? []);
   const depSearch = debouncedSearch ?? "";
   const feedQueryKey = `${depSearch}|${depSources}|${depCategories}|${isTodayMode}`;
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const query = new URLSearchParams();
+    if (debouncedSearch) query.set("q", debouncedSearch);
+    if (urlSource) query.set("source", urlSource);
+    if (urlCategory) query.set("category", urlCategory);
+    if (isTodayMode) query.set("today", "true");
+    fetch(`/api/feed-facets?${query}`, { cache: "no-store", signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`feed_facets_http_${response.status}`);
+        return response.json();
+      })
+      .then((payload: unknown) => {
+        if (!payload || typeof payload !== "object") throw new Error("feed_facets_invalid");
+        const value = payload as Partial<FeedFacets>;
+        if (value.contract !== "public-feed-v1" || !Array.isArray(value.sources) || !Array.isArray(value.categories) || !Number.isFinite(Number(value.total))) throw new Error("feed_facets_invalid");
+        setFacets(value as FeedFacets);
+      })
+      .catch((reason: unknown) => {
+        if ((reason as { name?: string })?.name !== "AbortError") setFacets(null);
+      });
+    return () => controller.abort();
+  }, [debouncedSearch, urlSource, urlCategory, isTodayMode]);
 
   // --- Szűrt fetch ---
   async function fetchFilteredPage(
@@ -369,7 +395,7 @@ function HomePage() {
   }, [hasMore, isTodayMode, depSources, depCategories]);
 
   return (
-    <HomeFeedLayout items={items} view={homeView} category={urlCategory} source={urlSource} onView={updateHomeView} onCategory={value=>updateUrlFilter("category",value)} onSource={value=>updateUrlFilter("source",value)}>
+    <HomeFeedLayout items={items} facets={facets} view={homeView} category={urlCategory} source={urlSource} onView={updateHomeView} onCategory={value=>updateUrlFilter("category",value)} onSource={value=>updateUrlFilter("source",value)}>
       <FeedList
         items={items}
         viewMode={viewMode}

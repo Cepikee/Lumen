@@ -1,6 +1,9 @@
-export type InsightsPeriod = "24h" | "7d" | "30d" | "90d";
+import { businessDayBounds } from "@/lib/business-time";
+
+export type InsightsPeriod = "today" | "24h" | "7d" | "30d" | "90d";
 
 const PERIOD_MS: Record<InsightsPeriod, number> = {
+  "today": 0,
   "24h": 24 * 60 * 60 * 1000,
   "7d": 7 * 24 * 60 * 60 * 1000,
   "30d": 30 * 24 * 60 * 60 * 1000,
@@ -9,7 +12,7 @@ const PERIOD_MS: Record<InsightsPeriod, number> = {
 
 export function normalizeInsightsPeriod(value: string | null | undefined): InsightsPeriod {
   if (
-    value === "24h" ||
+    value === "today" || value === "24h" ||
     value === "7d" ||
     value === "30d" ||
     value === "90d"
@@ -26,11 +29,13 @@ export function resolveInsightsWindow(
 ) {
   const period = normalizeInsightsPeriod(value);
   const end = new Date(now);
-  const start = new Date(end.getTime() - PERIOD_MS[period]);
+  const start = period === "today" ? businessDayBounds(end).start : new Date(end.getTime() - PERIOD_MS[period]);
 
   return {
     period,
     start,
     end,
+    timezone: "Europe/Budapest" as const,
+    semantics: period === "today" ? "Budapesti naptári nap 00:00-tól mostanáig" : period === "24h" ? "Gördülő 24 óra" : "Gördülő időablak",
   };
 }

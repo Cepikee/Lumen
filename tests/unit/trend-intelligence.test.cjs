@@ -5,11 +5,12 @@ const core=load('lib/trend-intelligence.ts');
 const svc=load('lib/trend-intelligence-service.ts',{'./trend-intelligence':core});
 const now=new Date('2026-10-25T12:34:00Z');
 const q=(extra='')=>core.parseTrendQuery(new URLSearchParams('period=7d&keyword=alma&category=Tech&'+extra),now);
-test('24 hours are chronological absolute UTC buckets across midnight and DST',()=>{
+test('rolling 24 hours include the current partial UTC hour across midnight and DST',()=>{
  for(const anchor of ['2026-03-29T10:30:00Z','2026-10-25T10:30:00Z','2026-01-01T01:30:00Z']){
   const query=core.parseTrendQuery(new URLSearchParams('period=24h'),new Date(anchor));const points=core.makePoints(query.window,[]);
-  assert.equal(points.length,24);assert.equal(Date.parse(query.window.end)-Date.parse(query.window.start),86400000);
-  for(let i=1;i<24;i++)assert.equal(Date.parse(points[i].timestamp)-Date.parse(points[i-1].timestamp),3600000);
+  assert.equal(points.length,25);assert.equal(Date.parse(query.window.end)-Date.parse(query.window.start),86400000);
+  assert.ok(Date.parse(points[0].timestamp)<=Date.parse(query.window.start));assert.ok(Date.parse(points.at(-1).timestamp)<Date.parse(query.window.end));
+  for(let i=1;i<points.length;i++)assert.equal(Date.parse(points[i].timestamp)-Date.parse(points[i-1].timestamp),3600000);
  }
 });
 test('supported daily periods and custom leap-day window use UTC and an equal-length previous window',()=>{
@@ -22,6 +23,19 @@ test('invalid dates, unbounded ranges, filters and future anchors are rejected',
 });
 test('growth compares equal periods without fabricated 100% or single-hit hot status',()=>{
  assert.equal(core.comparison(15,10).growth,.5);assert.equal(core.comparison(1,0).growth,null);assert.equal(core.comparison(1,0).status,'Új aktivitás');assert.equal(core.comparison(0,10).growth,-1);assert.equal(core.comparison(10,10).status,'Stabil');assert.equal(core.comparison(12,5).status,'Most felkapott');
+});
+test('year shorthand is only related to a qualified event phrase with matching category and article evidence',()=>{
+ const rows=[
+  {keyword:'1956',category:'Közélet',articleIds:[1,2,3]},
+  {keyword:'1956-os forradalom',category:'Közélet',articleIds:[1,2,3]},
+  {keyword:'1956-os forradalom',category:'Kultúra',articleIds:[1,2,3]},
+  {keyword:'1956-os forradalom',category:'Közélet',articleIds:[8,9]},
+  {keyword:'1956-os év',category:'Közélet',articleIds:[1,2,3]},
+ ];
+ const related=core.relatedTopicAliases(rows);
+ assert.equal([...related.get(core.trendIdentity('1956','Közélet'))].join('|'),'1956-os forradalom');
+ assert.equal(related.has(core.trendIdentity('1956-os forradalom','Kultúra')),false);
+ assert.equal(related.has(core.trendIdentity('1956-os év','Közélet')),false);
 });
 test('zero fill, unknown sources and exact per-bucket reconciliation',()=>{
  const w=q().window;const timestamp=core.makePoints(w,[])[0].timestamp;

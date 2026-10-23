@@ -27,7 +27,12 @@ for (let lat = -86; lat < 86; lat += 2.6) {
     const z = Math.cos(a) * Math.cos(b);
     if (z <= 0) continue;
     const x = Math.cos(a) * Math.sin(b), y = -Math.sin(a);
-    dots.push({ x: 310 + 119 * (x * .94 + y * .34), y: 150 + 119 * (y * .94 - x * .34), z, land: land.some(p => inside(lon, lat, p)) });
+    dots.push({
+      x: Number((310 + 119 * (x * .94 + y * .34)).toFixed(3)),
+      y: Number((150 + 119 * (y * .94 - x * .34)).toFixed(3)),
+      z: Number(z.toFixed(3)),
+      land: land.some(p => inside(lon, lat, p)),
+    });
   }
 }
 export default function TrendsHeroGlobe() {
@@ -48,6 +53,6 @@ export default function TrendsHeroGlobe() {
     </g>
     <g filter="url(#trends-node-glow)">{[[88,165],[174,76],[235,38],[424,60],[503,113],[410,203],[316,244],[126,220]].map(([x,y],i)=><circle key={i} cx={x} cy={y} r={i%3===0?3.2:2} fill={i%2?'#845dff':'#20d6ff'}/>)}</g>
   </svg><Image src="/trends-reference-globe.png" unoptimized width={520} height={118}
-    className={styles.globeReferenceArtwork} alt="" style={{ opacity: imageReady ? 1 : 0 }}
+    className={styles.globeReferenceArtwork} alt="" style={{ opacity: imageReady ? 1 : 0, height: "auto" }}
     onLoad={() => setImageReady(true)} onError={() => setImageReady(false)} /></div>;
 }

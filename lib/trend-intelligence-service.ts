@@ -1,5 +1,5 @@
 import type { RowDataPacket } from "mysql2/promise";
-import { comparison, isoTime, makePoints, sqlTime, TREND_UNIT, type TrendQuery } from "./trend-intelligence";
+import { comparison, isoTime, makePoints, relatedTopicAliases, sqlTime, trendIdentity, TREND_UNIT, type TrendQuery } from "./trend-intelligence";
 export type Reader = { execute: (sql: string, values: (string | number)[]) => Promise<[RowDataPacket[], unknown]> };
 const SOURCE = "COALESCE(NULLIF(LOWER(TRIM(a.source)), ''), 'ismeretlen forrás')";
 const CATEGORY = "COALESCE(NULLIF(TRIM(k.category), ''), NULLIF(TRIM(a.category), ''), 'Egyéb')";
@@ -48,13 +48,20 @@ export async function readTrendIntelligence(db: Reader, q: TrendQuery, mode: "li
     SUM(observed_at >= ? AND observed_at < ?) AS freq,
     SUM(observed_at >= ? AND observed_at < ?) AS previous_total,
     MIN(observed_at) AS first_seen, MAX(observed_at) AS last_seen,
-    GROUP_CONCAT(DISTINCT CASE WHEN observed_at >= ? THEN source END SEPARATOR '|') AS sources
+    GROUP_CONCAT(DISTINCT CASE WHEN observed_at >= ? THEN source END SEPARATOR '|') AS sources,
+    GROUP_CONCAT(DISTINCT CASE WHEN observed_at >= ? AND observed_at < ? THEN article_id END ORDER BY article_id SEPARATOR ',') AS article_ids
     FROM observations GROUP BY keyword, category
     ${mode === "list" ? "HAVING freq > 0" : ""}
-    ORDER BY freq DESC, keyword ASC, category ASC LIMIT 501`, [...base.values,start,end,previous,start,start]);
+    ORDER BY freq DESC, keyword ASC, category ASC LIMIT 501`, [...base.values,start,end,previous,start,start,start,end]);
   if (mode === "history" && totals.length > 1) throw new Error("ambiguous_category");
-  const trends = totals.slice(0,500).map(r => ({keyword:String(r.keyword),category:String(r.category),freq:count(r.freq),previous_total:count(r.previous_total),
-    ...comparison(count(r.freq),count(r.previous_total)),first_seen:isoTime(r.first_seen),last_seen:isoTime(r.last_seen),sources:r.sources ?? ""}));
+  const internalTrends = totals.slice(0,500).map(r => ({keyword:String(r.keyword),category:String(r.category),freq:count(r.freq),previous_total:count(r.previous_total),
+    ...comparison(count(r.freq),count(r.previous_total)),first_seen:isoTime(r.first_seen),last_seen:isoTime(r.last_seen),sources:r.sources ?? "",
+    articleIds:String(r.article_ids??"").split(",").map(Number).filter(id=>Number.isSafeInteger(id)&&id>0)}));
+  const aliases=relatedTopicAliases(internalTrends.filter(trend=>trend.articleIds.length===trend.freq));
+  const trends=internalTrends.map(({articleIds,...trend})=>{
+    void articleIds;
+    return {...trend,relatedTopics:aliases.get(trendIdentity(trend.keyword,trend.category))??[]};
+  });
   const [buckets] = await db.execute(`${base.sql} ${HINT} DATE_FORMAT(observed_at, '${dateFormat}') AS timestamp,
     source, COUNT(*) AS count FROM observations WHERE observed_at >= ? AND observed_at < ?
     GROUP BY timestamp, source ORDER BY timestamp, source LIMIT 20001`, [...base.values,start,end]);
