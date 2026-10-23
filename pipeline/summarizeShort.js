@@ -64,7 +64,7 @@ ${wrapUntrustedText("ARTICLE", contentText, 100_000)}
     `.trim();
 
     // 3) OpenAI hívás (aiClient.js-ből)
-    const summary = await callOpenAI(prompt, 190, "short_summary");
+    const summary = await callOpenAI(prompt, 190, "short_summary", options.costContext);
 
     // 4) Validálás + újrapróbálás
     if (!isValidSummary(summary)) {

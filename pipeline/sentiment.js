@@ -82,7 +82,7 @@ async function processSentiment(articleId, options = {}) {
     const prompt = buildSentimentPrompt(title, content_text.slice(0, 2000));
 
     // 3) OpenAI hívás
-    const raw = await callOpenAI(prompt, 50, "sentiment");
+    const raw = await callOpenAI(prompt, 50, "sentiment", options.costContext);
     console.log("[SENTIMENT] Nyers válasz:", raw);
 
     // 4) Parsolás

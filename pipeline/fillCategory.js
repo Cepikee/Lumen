@@ -77,7 +77,7 @@ Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kate
     `.trim();
 
     // 4) OpenAI hívás
-    const rawCategory = await callOpenAI(prompt, 40, "category");
+    const rawCategory = await callOpenAI(prompt, 40, "category", options.costContext);
     const category = rawCategory.trim();
 
     // 5) Validáció
@@ -101,7 +101,7 @@ Válaszd ki a cikkhez legjobban illő kategóriát a listából, és csak a kate
 
   } catch (err) {
     console.error(`[CAT] ❌ Hiba:`, err);
-    return { ok: false };
+    return { ok: false, error: err?.message ?? String(err) };
   } finally {
     if (ownsConnection) await conn.end();
   }

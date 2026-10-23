@@ -52,6 +52,7 @@ function createPipelineCoordinator(store, options = {}) {
     }
     if (!state.claimed) throw new Error(`step_claim_unavailable:${stepName}`);
     let heartbeatError = null;
+    let externalStarted = false;
     const heartbeatTimer = setInterval(() => {
       heartbeat(claim).catch((error) => { heartbeatError = error; });
     }, Math.max(10_000, Math.floor(staleMs / 3)));
@@ -60,7 +61,9 @@ function createPipelineCoordinator(store, options = {}) {
       await heartbeat(claim);
       if (optionsForStep.external) {
         if (!optionsForStep.operationKey) throw new Error(`external_operation_key_missing:${stepName}`);
+        await optionsForStep.prepareExternal?.();
         await store.beginExternalStep({ ...claim, stepName, operationKey: optionsForStep.operationKey });
+        externalStarted = true;
       }
       const result = await handler();
       await heartbeat(claim);
@@ -84,7 +87,23 @@ function createPipelineCoordinator(store, options = {}) {
         log({ event: "claim_lost", articleId: claim.articleId, step: stepName, workerId, claim: tokenRef(claim) });
         throw error;
       }
-      if (optionsForStep.external && !message.includes("claim_lost")) {
+      if (error?.code === "AI_BUDGET_EXHAUSTED" && optionsForStep.external && !externalStarted) {
+        await store.deferForBudget({ ...claim, stepName, error: message });
+        log({ event: "ai_budget_exhausted", articleId: claim.articleId, step: stepName, scope: error.scope, workerId, claim: tokenRef(claim) });
+        throw error;
+      }
+      if (error?.code === "AI_OPERATION_NOT_RETRYABLE" && optionsForStep.external && !externalStarted) {
+        await store.markExternalUncertain({
+          ...claim,
+          stepName,
+          operationKey: optionsForStep.operationKey,
+          error: message,
+          errorType: "cost_operation_not_retryable",
+        });
+        log({ event: "external_operation_recovery_required", articleId: claim.articleId, step: stepName, operationStatus: error.status, workerId, claim: tokenRef(claim) });
+        throw new Error(`external_operation_uncertain:${stepName}`);
+      }
+      if (optionsForStep.external && externalStarted && !message.includes("claim_lost")) {
         await store.markExternalUncertain({
           ...claim,
           stepName,
@@ -197,6 +216,33 @@ function createMysqlPipelineStore(pool) {
         [operationKey, articleId, stepName, workerId, claimToken, articleId, workerId, claimToken],
       );
       if (result.affectedRows !== 1) throw new Error(`step_claim_lost:${stepName}`);
+    },
+    async deferForBudget({ articleId, stepName, workerId, claimToken, error }) {
+      const connection = await pool.getConnection();
+      try {
+        await connection.beginTransaction();
+        const [stepResult] = await connection.execute(
+          `UPDATE article_processing_steps SET status='pending', worker_id=NULL, claim_token=NULL,
+            started_at=NULL, heartbeat_at=NULL, last_error=?, is_external=0, operation_key=NULL,
+            external_started_at=NULL, error_type=NULL, retryable=1
+           WHERE article_id=? AND step_name=? AND status='in_progress' AND worker_id=? AND claim_token=?`,
+          [error, articleId, stepName, workerId, claimToken],
+        );
+        if (stepResult.affectedRows !== 1) throw new Error(`step_claim_lost:${stepName}`);
+        const [articleResult] = await connection.execute(
+          `UPDATE articles SET status='pending', worker_id=NULL, claim_token=NULL, claimed_at=NULL,
+            heartbeat_at=NULL, failed_step=NULL, last_processing_error=?
+           WHERE id=? AND status='in_progress' AND worker_id=? AND claim_token=?`,
+          [error, articleId, workerId, claimToken],
+        );
+        if (articleResult.affectedRows !== 1) throw new Error("article_claim_lost");
+        await connection.commit();
+      } catch (budgetError) {
+        await connection.rollback();
+        throw budgetError;
+      } finally {
+        connection.release();
+      }
     },
     async completeStep({ articleId, stepName, workerId, claimToken, status, result }) {
       const [dbResult] = await pool.execute(

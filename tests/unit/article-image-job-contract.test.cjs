@@ -13,7 +13,7 @@ test("image job schema is unique per article and carries lease, fingerprint and 
   assert.match(imageMigration, /fingerprint CHAR\(64\)/);
   assert.match(imageMigration, /FOREIGN KEY \(article_id\) REFERENCES articles\(id\) ON DELETE CASCADE/);
   assert.match(budgetMigration, /PRIMARY KEY \(usage_date, provider\)/);
-  assert.equal(loadMigrations().at(-1).version, "064");
+  assert.equal(loadMigrations().at(-1).version, "066");
 });
 
 test("worker only queues completed published articles and all terminal writes are claim fenced", () => {

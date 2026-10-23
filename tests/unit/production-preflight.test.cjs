@@ -12,6 +12,7 @@ function readinessExecutor(latest) {
     "articles", "article_processing_steps", "article_images", "image_generation_daily_usage", "speed_index_recalculation_jobs", "speed_index_history",
     "v2_entity_mentions", "v2_entity_alias_observations", "v2_ingestion_provenance", "schema_migrations",
     "worker_runtime_health", "recovery_audit_log", "raw_text_retention_audit", "user_sessions", "shared_rate_limits", "email_outbox",
+    "ai_cost_budget_scopes", "ai_cost_operations",
   ];
   const columns = new Map([
     ["articles", ["worker_id", "claim_token", "heartbeat_at", "processing_attempts", "failed_step", "last_processing_error", "original_url", "external_id", "publication_time_source", "url_identity"]],
@@ -20,6 +21,8 @@ function readinessExecutor(latest) {
     ["v2_entity_mentions", ["entity_type"]],
     ["v2_entity_alias_observations", ["alias_id", "mention_id", "normalization_version"]],
     ["speed_index_recalculation_jobs", ["generation", "completed_generation", "claimed_generation", "claim_token", "run_count"]],
+    ["ai_cost_budget_scopes", ["limit_micros", "reserved_micros", "actual_micros", "request_count"]],
+    ["ai_cost_operations", ["operation_key", "pilot_id", "status", "reserved_cost_micros", "actual_cost_micros"]],
   ]);
   const indexes = new Map([
     ["articles", ["idx_articles_recovery", "uq_articles_url_identity"]],
@@ -27,6 +30,7 @@ function readinessExecutor(latest) {
     ["article_images", ["idx_article_images_work", "idx_article_images_fingerprint"]],
     ["speed_index_history", ["uq_speed_history_event_key"]],
     ["v2_ingestion_provenance", ["uq_v2_ingestion_provenance_operation_key"]],
+    ["ai_cost_operations", ["idx_ai_cost_operations_pilot", "idx_ai_cost_operations_article"]],
   ]);
   return {
     async query(sql) {
@@ -75,14 +79,14 @@ test("legacy 444 workflow cannot schedule or execute duplicate ingestion", () =>
   assert.match(source, /node scripts\/fetch-and-post-444\.js/);
 });
 
-test("schema 064 is ready while 063 and future 065 fail closed", async () => {
-  assert.equal((await checkSchemaReadiness(readinessExecutor(64))).ready, true);
-  const old = await checkSchemaReadiness(readinessExecutor(63));
+test("schema 066 is ready while 065 and future 067 fail closed", async () => {
+  assert.equal((await checkSchemaReadiness(readinessExecutor(66))).ready, true);
+  const old = await checkSchemaReadiness(readinessExecutor(65));
   assert.equal(old.ready, false);
-  assert.ok(old.missing.includes("migration:64"));
-  const future = await checkSchemaReadiness(readinessExecutor(65));
+  assert.ok(old.missing.includes("migration:66"));
+  const future = await checkSchemaReadiness(readinessExecutor(67));
   assert.equal(future.ready, false);
-  assert.ok(future.missing.includes("unsupported_schema_version:065"));
+  assert.ok(future.missing.includes("unsupported_schema_version:067"));
 });
 
 console.log("production preflight schema regression: PASS");

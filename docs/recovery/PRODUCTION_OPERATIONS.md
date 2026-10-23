@@ -48,6 +48,7 @@ Do not run a one-shot image or feed operation concurrently with its continuous w
 - External AI steps become `uncertain` across ambiguous crash windows and are not blindly replayed.
 - SIGTERM/SIGINT stops new work, waits for the current loop, records the worker stop and closes the MySQL pool.
 - stdout/stderr is the canonical journal. `UTOM_PIPELINE_LOG_FILE` is an optional legacy file sink.
+- Paid V1 AI calls require the atomic daily/monthly/pilot ledger described in `V1_AI_COST_PILOT.md`; missing pricing or limits fail closed, and ambiguous calls retain their reservation.
 
 ## Maintenance behavior
 
@@ -59,5 +60,5 @@ The daily job deletes at most `MAINTENANCE_BATCH_SIZE` rows from each expiry tab
 2. Deploy a reviewed commit to a new release directory and run `npm ci` plus `npm run build` there.
 3. Run the migration plan, database status and production preflight against the intended target.
 4. Install/review units, then `daemon-reload`; enable timers and workers one at a time.
-5. Verify startup events, schema 064, healthy worker heartbeat, bounded backlogs and no duplicate writer.
+5. Verify startup events, schema 066, healthy worker heartbeat, bounded backlogs and no duplicate writer.
 6. Roll back by stopping new units and switching the web release; do not reverse applied schema migrations without a reviewed database restore plan.

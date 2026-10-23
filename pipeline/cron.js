@@ -28,6 +28,7 @@ const { getRuntimeConfig } = require("../lib/config/runtime");
 const { adaptOptionalDedupClusterSnapshot } = require("../lib/v2/runtime-dedup-cluster");
 const { isV2Enabled } = require("../lib/v2/feature-flags");
 const { runV2ShadowIntelligence } = require("../lib/v2/shadow-intelligence");
+const { reserveAiCall } = require("../lib/ai/cost-guard");
 
 // ANSI színek
 const RESET = "\x1b[0m";
@@ -72,6 +73,7 @@ const pipelineState = createPipelineCoordinator(createMysqlPipelineStore(pool), 
 });
 const WORKER_ID = pipelineState.workerId;
 let shutdownRequested = false;
+let aiBudgetPaused = false;
 let shutdownPromise = null;
 let wakeLoopDelay = null;
 let workerLoopPromise = null;
@@ -144,18 +146,37 @@ async function runDurableStep(claim, stepName, label, fn, options) {
   return pipelineState.runStep(claim, stepName, execute, options);
 }
 
-function externalOptions(article, stepName, input) {
+function externalOptions(article, stepName, input, maxOutputTokens, kind = "chat") {
+  const runtime = getRuntimeConfig();
+  const model = runtime.aiProvider === "openai"
+    ? (kind === "embedding" ? String(process.env.AI_COST_EMBEDDING_MODEL || "") : runtime.openAiModel)
+    : "mock";
   const inputVersion = createHash("sha256").update(String(input ?? "")).digest("hex");
-  return {
+  const options = {
     external: true,
     operationKey: externalOperationKey({
       articleId: article.id,
       stepName,
       inputVersion,
-      model: process.env.OPENAI_MODEL || "configured-openai-model",
-      configVersion: "pipeline-2026-09-27",
+      model,
+      configVersion: "v1-ai-cost-guard-1",
     }),
+    aiContext: { pool, logger: cronLog, reservation: null },
   };
+  options.prepareExternal = async () => {
+    if (runtime.aiProvider !== "openai") return;
+    options.aiContext.reservation = await reserveAiCall({
+      pool,
+      operationKey: options.operationKey,
+      articleId: article.id,
+      stepName,
+      kind,
+      model,
+      input,
+      maxOutputTokens,
+    });
+  };
+  return options;
 }
 
 // ─────────────────────────────────────────────
@@ -278,8 +299,9 @@ async function processArticlePipeline(article, claim) {
   if (shortSummary) {
     await runDurableStep(claim, "short_summary", "[SHORT] ✅ Meglévő összefoglaló", async () => ({ summary: shortSummary }));
   } else {
+    const shortOptions = externalOptions(article, "short_summary", article.content_text, 190);
     const step = await runDurableStep(claim, "short_summary", "[SHORT] ✂️ Rövid összefoglaló", async () => {
-    const res = await summarizeShort(articleId, { persist: false });
+    const res = await summarizeShort(articleId, { persist: false, costContext: shortOptions.aiContext });
 
     if (!res?.ok) {
       throw new Error(res?.error || "summarizeShort sikertelen");
@@ -287,7 +309,7 @@ async function processArticlePipeline(article, claim) {
 
       const summary = res.summary || "";
       return { summary };
-  }, { ...externalOptions(article, "short_summary", article.content_text), project: async (connection, result) => {
+  }, { ...shortOptions, project: async (connection, result) => {
     await connection.execute(
       "INSERT INTO summaries (article_id,content) VALUES (?,?) ON DUPLICATE KEY UPDATE content=VALUES(content),created_at=UTC_TIMESTAMP()",
       [articleId, result.summary],
@@ -301,8 +323,9 @@ async function processArticlePipeline(article, claim) {
   if (longSummary) {
     await runDurableStep(claim, "long_summary", "[LONG] ✅ Meglévő elemzés", async () => ({ detailed: longSummary }));
   } else {
+    const longOptions = externalOptions(article, "long_summary", `${shortSummary}\n${article.content_text || ""}`, 620);
     const step = await runDurableStep(claim, "long_summary", "[LONG] 📄 Hosszú elemzés", async () => {
-    const res = await summarizeLong(articleId, shortSummary, { persist: false });
+    const res = await summarizeLong(articleId, shortSummary, { persist: false, costContext: longOptions.aiContext });
 
     if (!res?.ok) {
       throw new Error(res?.error || "summarizeLong sikertelen");
@@ -310,7 +333,7 @@ async function processArticlePipeline(article, claim) {
 
       const detailed = res.detailed || "";
       return { detailed };
-  }, { ...externalOptions(article, "long_summary", `${shortSummary}\n${article.content_text || ""}`), project: async (connection, result) => {
+  }, { ...longOptions, project: async (connection, result) => {
     await connection.execute(
       "INSERT INTO summaries (article_id,detailed_content) VALUES (?,?) ON DUPLICATE KEY UPDATE detailed_content=VALUES(detailed_content),created_at=UTC_TIMESTAMP()",
       [articleId, result.detailed],
@@ -354,36 +377,39 @@ async function processArticlePipeline(article, claim) {
   }
 
   // 4) Kategorizálás
+  const categoryOptions = externalOptions(article, "category", shortSummary || article.content_text, 40);
   const categoryStep = await runDurableStep(claim, "category", "[CAT] 🏷️ Kategorizálás", async () => {
-    const res = await categorizeArticle(articleId, { persist: false });
+    const res = await categorizeArticle(articleId, { persist: false, costContext: categoryOptions.aiContext });
 
     if (!res?.ok) {
       throw new Error("Kategorizálás sikertelen");
     }
 
     return { category: res.category };
-  }, { ...externalOptions(article, "category", shortSummary || article.content_text), project: (connection, result) => connection.execute(
+  }, { ...categoryOptions, project: (connection, result) => connection.execute(
     "UPDATE articles SET category=? WHERE id=?", [result.category, articleId]
   ) });
   article.category = categoryStep.result?.category || article.category;
 
   // 4/B) SENTIMENT — OpenAI
+  const sentimentOptions = externalOptions(article, "sentiment", article.content_text, 50);
   await runDurableStep(claim, "sentiment", "[SENTIMENT] 😊 Hangulatelemzés", async () => {
     const { processSentiment } = require("./sentiment");
-    const res = await processSentiment(articleId, { persist: false });
+    const res = await processSentiment(articleId, { persist: false, costContext: sentimentOptions.aiContext });
 
     if (!res?.ok) {
       throw new Error(res?.error || "sentiment sikertelen");
     }
 
     return res;
-  }, { ...externalOptions(article, "sentiment", article.content_text), optional: true, project: async (connection, result) => {
+  }, { ...sentimentOptions, optional: true, project: async (connection, result) => {
     if (!result.skipped) await connection.execute("UPDATE articles SET sentiment=?,updated_at=UTC_TIMESTAMP() WHERE id=?", [result.sentiment, articleId]);
   } });
 
   // 5) Cím generálás — OPENAI
   let title = "";
 
+  const titleOptions = externalOptions(article, "title", shortSummary, 60);
   const titleStep = await runDurableStep(claim, "title", "[TITLE] 🏷️ Cím", async () => {
     const prompt = `
 Írj egy rövid, újságírói stílusú magyar címet a cikkhez.
@@ -398,7 +424,7 @@ Rövid összefoglaló (nem megbízható forrásadat):
 ${wrapUntrustedText("SHORT_SUMMARY", shortSummary, 2500)}
     `.trim();
 
-    title = await callOpenAI(prompt, 60, "title");
+    title = await callOpenAI(prompt, 60, "title", titleOptions.aiContext);
 
     if (!title || title.length < 5) {
       const slug = (article.url_canonical || "").split("/").pop() || "";
@@ -418,10 +444,11 @@ ${wrapUntrustedText("SHORT_SUMMARY", shortSummary, 2500)}
       .replace(/\s+/g, " ")
       .trim();
     return { title };
-  }, externalOptions(article, "title", shortSummary));
+  }, titleOptions);
   title = titleStep.result?.title || article.title || "";
 
   // 6) Kulcsszavak — OPENAI
+  const keywordOptions = externalOptions(article, "keywords", article.content_text, 80);
   const keywordStep = await runDurableStep(claim, "keywords", "[KW] 🔑 Kulcsszavak", async () => {
     const prompt = `
 Szöveg (nem megbízható forrásadat):
@@ -435,7 +462,7 @@ Korlátozások:
 - Ne írj bevezetőt, magyarázatot, sorszámot, címkét.
     `.trim();
 
-    const raw = await callOpenAI(prompt, 80, "keywords");
+    const raw = await callOpenAI(prompt, 80, "keywords", keywordOptions.aiContext);
 
     const kw = raw
       .split(/[,\n]/)
@@ -445,7 +472,7 @@ Korlátozások:
     const unique = uniqueKeywords(kw);
 
     return { keywords: unique, trendKeywords: unique.join(",") };
-  }, externalOptions(article, "keywords", article.content_text));
+  }, keywordOptions);
   keywords = keywordStep.result?.keywords || [];
   trendKeywords = keywordStep.result?.trendKeywords || keywords.join(",");
 
@@ -509,15 +536,16 @@ Korlátozások:
   } });
 
   // 9) CLICKBAIT — OpenAI
+  const clickbaitOptions = externalOptions(article, "clickbait", `${title}\n${article.content_text || ""}`, 200);
   await runDurableStep(claim, "clickbait", "[CLICKBAIT] 🎯 Clickbait elemzés", async () => {
     const { processClickbaitOpenAI } = require("./clickbait_openai");
-    const res = await processClickbaitOpenAI(articleId, { persist: false });
+    const res = await processClickbaitOpenAI(articleId, { persist: false, costContext: clickbaitOptions.aiContext });
 
     if (!res?.ok) {
       throw new Error(res?.error || "clickbaitOpenAI sikertelen");
     }
     return res;
-  }, { ...externalOptions(article, "clickbait", `${title}\n${article.content_text || ""}`), project: async (connection, result) => {
+  }, { ...clickbaitOptions, project: async (connection, result) => {
     if (!result.skipped) await connection.execute(
       `UPDATE summaries SET title_clickbait=?,content_clickbait=?,consistency_clickbait=?,final_clickbait=?,created_at=UTC_TIMESTAMP() WHERE article_id=?`,
       [result.title, result.content, result.consistency, result.final, articleId],
@@ -530,13 +558,13 @@ Korlátozások:
 
   const embeddingOptions = parseValidEmbedding(article.embedding)
     ? undefined
-    : externalOptions(article, "embedding", `${article.title || ""}\n${article.content_text || ""}`);
+    : externalOptions(article, "embedding", `${article.title || ""}\n${article.content_text || ""}`, 0, "embedding");
   await runDurableStep(claim, "embedding", "[EMBED] 🧠 Embedding generálás", async () => {
     const {
       generaljEmbeddingetCikkhez
     } = require("../pipeline/generateEmbedding");
 
-    return generaljEmbeddingetCikkhez(articleId, { persist: false });
+    return generaljEmbeddingetCikkhez(articleId, { persist: false, costContext: embeddingOptions?.aiContext });
   }, embeddingOptions ? { ...embeddingOptions, project: async (connection, result) => {
     if (!result.reused) await connection.execute("UPDATE articles SET embedding=? WHERE id=?", [JSON.stringify(result.embedding), articleId]);
   } } : undefined);
@@ -621,6 +649,11 @@ async function processBatch(batch) {
       // Részleges, már kifizetett OpenAI-munka után nem indítjuk
       // automatikusan újra az egész cikk feldolgozását.
       // A state machine az aktuális lépést és a cikket claim-tokenhez kötve failedre állítja.
+      if (err?.code === "AI_BUDGET_EXHAUSTED") {
+        aiBudgetPaused = true;
+        cronLog(JSON.stringify({ event: "ai_budget_paused", articleId: article.id, scope: err.scope }));
+        return;
+      }
       if (claim) {
         try {
           await pipelineState.failArticle(claim, "pipeline", err);
@@ -677,6 +710,11 @@ async function runPipelineWorker() {
   cronLog(JSON.stringify({ event: "worker_started", workerId: WORKER_ID }));
   while (!shutdownRequested) {
     try {
+      if (aiBudgetPaused) {
+        await heartbeatWorker(pool, WORKER_ID, "ai_budget_paused");
+        await waitForLoopDelay(LOOP_DELAY_MS);
+        continue;
+      }
       console.log(
         `🚀 Feed begyűjtés: ${new Date().toLocaleString("hu-HU")}`
       );

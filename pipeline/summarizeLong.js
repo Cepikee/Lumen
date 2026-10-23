@@ -113,7 +113,7 @@ Fontos szabályok:
     `.trim();
 
     // 4) OpenAI hívás (aiClient.js-ből)
-    let detailed = await callOpenAI(prompt, 620, "long_summary");
+    let detailed = await callOpenAI(prompt, 620, "long_summary", options.costContext);
 
     // 5) Validáció — fizetős hívást nem próbálunk automatikusan újra
     if (!isValidDetailed(detailed)) {

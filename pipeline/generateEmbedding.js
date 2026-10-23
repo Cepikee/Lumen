@@ -28,7 +28,7 @@ async function generaljEmbeddingetCikkhez(cikkId, options = {}) {
       throw new Error(`A cikk eredeti szövege túl rövid: ${cikkId}`);
     }
 
-    const response = await generateEmbedding(`${title}\n\n${content_text}`.slice(0, 8000), "text-embedding-3-small");
+    const response = await generateEmbedding(`${title}\n\n${content_text}`.slice(0, 8000), "text-embedding-3-small", options.costContext);
     const embedding = response.embedding;
     if (options.persist !== false) {
       await conn.execute("UPDATE articles SET embedding = ? WHERE id = ?", [JSON.stringify(embedding), cikkId]);

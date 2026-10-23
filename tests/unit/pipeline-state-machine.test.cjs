@@ -52,6 +52,10 @@ function memoryStore(clock) {
       if (!article || article.workerId !== workerId || article.claimToken !== claimToken || step?.claimToken !== claimToken) throw new Error("step_claim_lost");
       Object.assign(step, { status: "uncertain", operationKey, external: true });
     },
+    async deferForBudget({ articleId, stepName, error }) {
+      Object.assign(steps.get(key(articleId, stepName)), { status: "pending", workerId: null, claimToken: null, error });
+      Object.assign(articles.get(articleId), { status: "pending", workerId: null, claimToken: null, error });
+    },
     async completeStep({ articleId, stepName, workerId, claimToken, status, result }) {
       const article = articles.get(articleId);
       const step = steps.get(key(articleId, stepName));
@@ -192,6 +196,26 @@ test("external operation failure becomes uncertain and cannot be reclaimed autom
   assert.equal(store.articles.get(1).status, "needs_recovery");
   time = new Date(time.getTime() + 60_001);
   assert.equal(await b.claimArticle(1), null);
+});
+
+test("budget exhaustion before provider start defers the article without making the external outcome uncertain", async () => {
+  const time = new Date("2026-09-27T12:00:00Z");
+  const store = memoryStore(() => time);
+  const machine = createPipelineCoordinator(store, { workerId: "a", now: () => time });
+  const claim = await machine.claimArticle(1);
+  let providerCalls = 0;
+  const exhausted = Object.assign(new Error("ai_budget_exhausted:pilot"), { code: "AI_BUDGET_EXHAUSTED", scope: "pilot" });
+  await assert.rejects(
+    machine.runStep(claim, "short_summary", async () => { providerCalls += 1; }, {
+      external: true,
+      operationKey: "op-budget",
+      prepareExternal: async () => { throw exhausted; },
+    }),
+    /ai_budget_exhausted/,
+  );
+  assert.equal(providerCalls, 0);
+  assert.equal(store.steps.get("1:short_summary").status, "pending");
+  assert.equal(store.articles.get(1).status, "pending");
 });
 
 test("uncertain required step prevents article completion", async () => {
