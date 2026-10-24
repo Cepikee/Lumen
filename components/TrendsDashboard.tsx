@@ -40,7 +40,15 @@ type SourceShare = { source: string; count: number };
 type ActivityPoint = { label: string; count: number };
 const SOURCE_PALETTE = ["#188bff", "#9650ff", "#22c4f5", "#f12fbb", "#586f9a"];
 
-const SOURCES = ["Telex", "444", "Index"];
+const SOURCE_OPTIONS = [
+  { value: "telex.hu", label: "Telex" },
+  { value: "24.hu", label: "24.hu" },
+  { value: "index.hu", label: "Index" },
+  { value: "hvg.hu", label: "HVG" },
+  { value: "portfolio.hu", label: "Portfolio" },
+  { value: "444.hu", label: "444.hu" },
+  { value: "origo.hu", label: "Origo" },
+] as const;
 const CATEGORIES = ["Politika", "Sport", "Gazdaság", "Tech", "Kultúra", "Egészségügy", "Oktatás", "Közélet"];
 const NAVIGATION = [
   ["⌂", "Főoldal", "/"],
@@ -215,17 +223,42 @@ export default function TrendsDashboard() {
   const [sourceBreakdown, setSourceBreakdown] = useState<SourceShare[]>([]);
   const [activitySeries, setActivitySeries] = useState<ActivityPoint[]>([]);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [visibleCount,setVisibleCount] = useState(12);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [urlReady, setUrlReady] = useState(false);
   const topSearchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
-    const keyword = query.get("keyword")?.trim();
-    if (keyword) window.queueMicrotask(() => setFilters((current) => ({ ...current, keyword })));
+    const keyword = query.get("keyword")?.trim() ?? "";
+    const period = ["24h", "7d", "30d", "90d", "365d", "custom"].includes(query.get("period") ?? "") ? query.get("period")! : "30d";
+    const sort = ["freq", "growth", "relevance"].includes(query.get("sort") ?? "") ? query.get("sort")! : "freq";
+    const knownSources = new Set(SOURCE_OPTIONS.map((item) => item.value));
+    const sources = (query.get("sources") ?? "").split(",").map((item) => item.trim().toLocaleLowerCase("hu-HU")).filter((item) => knownSources.has(item as (typeof SOURCE_OPTIONS)[number]["value"]));
+    const knownCategories = new Set(CATEGORIES.map((item) => item.toLocaleLowerCase("hu-HU")));
+    const categories = (query.get("categories") ?? "").split(",").map((item) => item.trim()).filter((item) => knownCategories.has(item.toLocaleLowerCase("hu-HU")));
+    window.queueMicrotask(() => {
+      setFilters({ period, sort, keyword, sources: [...new Set(sources)], categories: [...new Set(categories)], startDate: query.get("startDate") ?? undefined, endDate: query.get("endDate") ?? undefined });
+      setUrlReady(true);
+    });
   }, []);
+
+  useEffect(() => {
+    if (!urlReady) return;
+    const query = new URLSearchParams();
+    if (filters.period !== "30d") query.set("period", filters.period);
+    if (filters.sources.length) query.set("sources", filters.sources.join(","));
+    if (filters.categories.length) query.set("categories", filters.categories.join(","));
+    if (filters.sort !== "freq") query.set("sort", filters.sort);
+    if (filters.keyword.trim()) query.set("keyword", filters.keyword.trim());
+    if (filters.period === "custom" && filters.startDate) query.set("startDate", filters.startDate);
+    if (filters.period === "custom" && filters.endDate) query.set("endDate", filters.endDate);
+    const href = `${window.location.pathname}${query.size ? `?${query}` : ""}`;
+    window.history.replaceState(window.history.state, "", href);
+  }, [filters, urlReady]);
 
   useEffect(() => {
     const handleShortcut = (event: KeyboardEvent) => {
@@ -330,6 +363,7 @@ export default function TrendsDashboard() {
   const topicSidebarRows = newlySeen.slice(0,5);
   const activityPoints = activitySeries.slice(-30);
   const activity = activityPoints.map((point) => point.count);
+  const nonZeroActivityBuckets = activity.filter((count) => count > 0).length;
   const sourceTotal = sourceBreakdown.reduce((sum, entry) => sum + entry.count, 0);
 
   function updateFilter<K extends keyof Filters>(key: K, value: Filters[K]) {
@@ -361,7 +395,7 @@ export default function TrendsDashboard() {
           <h2>Szűrés</h2>
           <label><span className={styles.filterLabel}><TrendsIcon name="calendar" /> Időszak</span><select value={filters.period} onChange={(event) => event.target.value === "custom" ? document.querySelector<HTMLButtonElement>("[data-trends-date-trigger] button")?.click() : updateFilter("period", event.target.value)}><option value="24h">24 óra</option><option value="7d">7 nap</option><option value="30d">30 nap</option><option value="90d">90 nap</option><option value="365d">365 nap</option><option value="custom">Egyedi</option></select></label>
           {filters.period === "custom" && <div className={styles.dateInputs}><input aria-label="Kezdődátum" type="date" value={filters.startDate || ""} onChange={(event) => updateFilter("startDate", event.target.value)} /><input aria-label="Záródátum" type="date" value={filters.endDate || ""} onChange={(event) => updateFilter("endDate", event.target.value)} /></div>}
-          <fieldset><legend className={styles.filterLabel}><TrendsIcon name="source-users" /> Források</legend><label className={styles.check}><input type="checkbox" checked={filters.sources.length === 0} onChange={() => updateFilter("sources", [])} />Mind</label>{SOURCES.map((source) => <label className={styles.check} key={source}><input type="checkbox" checked={filters.sources.includes(source)} onChange={() => toggleFilter("sources", source)} />{source}</label>)}</fieldset>
+          <fieldset><legend className={styles.filterLabel}><TrendsIcon name="source-users" /> Források</legend><label className={styles.check}><input type="checkbox" checked={filters.sources.length === 0} onChange={() => updateFilter("sources", [])} />Mind</label>{SOURCE_OPTIONS.map((source) => <label className={styles.check} key={source.value}><input type="checkbox" checked={filters.sources.includes(source.value)} onChange={() => toggleFilter("sources", source.value)} />{source.label}</label>)}</fieldset>
           <fieldset><legend className={styles.filterLabel}><TrendsIcon name="categories" /> Kategóriák</legend>{CATEGORIES.map((category) => <label className={`${styles.categoryFilter} ${filters.categories.includes(category) ? styles.categoryFilterSelected : ""}`} key={category} style={{ "--category-color": CATEGORY_COLOR[category] } as React.CSSProperties}><input type="checkbox" checked={filters.categories.includes(category)} onChange={() => toggleFilter("categories", category)} /><span className={styles.categoryFilterIcon}><CategoryIcon category={category} /></span>{category}</label>)}</fieldset>
           <label><span className={styles.filterLabel}><TrendsIcon name="sort" /> Rendezés</span><select value={filters.sort} onChange={(event) => updateFilter("sort", event.target.value)}><option value="freq">Gyakoriság</option><option value="growth">Növekedés</option><option value="relevance">Relevancia</option></select></label>
           <label><span className={styles.filterLabel}><TrendsIcon name="search" /> Kulcsszó kereső</span><input type="search" value={filters.keyword} onChange={(event) => updateFilter("keyword", event.target.value)} placeholder="Írj be egy kulcsszót..." /></label>
@@ -372,11 +406,19 @@ export default function TrendsDashboard() {
         <header className={styles.topbar}>
           <label className={styles.globalSearch}><TrendsIcon name="search" /><input ref={topSearchRef} aria-label="Kulcsszó, téma vagy forrás keresése" value={filters.keyword} onChange={(event) => updateFilter("keyword", event.target.value)} placeholder="Kulcsszó, téma vagy forrás keresése..." /><kbd>Ctrl + K</kbd></label>
           <div className={styles.topActions}>
+            <button type="button" className={styles.mobileFilterTrigger} aria-expanded={mobileFiltersOpen} onClick={() => setMobileFiltersOpen((open) => !open)}><TrendsIcon name="filter" /> Szűrők</button>
             <div data-trends-date-trigger><DateRangePicker period={filters.period} startDate={filters.startDate} endDate={filters.endDate} onPreset={(period) => setFilters((prev) => ({ ...prev, period, startDate: undefined, endDate: undefined }))} onRange={(startDate, endDate) => setFilters((prev) => ({ ...prev, period: "custom", startDate, endDate }))} /></div>
             <div className={styles.notificationBox}><button type="button" className={styles.notificationTrigger} onClick={() => setNotificationsOpen(!notificationsOpen)} aria-label="Értesítések" aria-haspopup="dialog" aria-expanded={notificationsOpen}><TrendsIcon name="bell" /></button>{notificationsOpen && <div className={styles.notificationPanel} role="dialog" aria-label="Értesítések"><strong>Értesítések</strong><p>Jelenleg nincs új rendszerértesítés.</p><button type="button" onClick={() => setNotificationsOpen(false)}>Bezárás</button></div>}</div>
             <div className={styles.profile}>{user ? <ProfileMenu /> : <LoginModal />}</div>
           </div>
         </header>
+
+        {mobileFiltersOpen && <section className={styles.mobileFilterPanel} aria-label="Mobil trendszűrők">
+          <label>Időszak<select value={filters.period} onChange={(event) => updateFilter("period", event.target.value)}><option value="24h">24 óra</option><option value="7d">7 nap</option><option value="30d">30 nap</option><option value="90d">90 nap</option><option value="365d">365 nap</option></select></label>
+          <fieldset><legend>Források</legend><label className={styles.check}><input type="checkbox" checked={filters.sources.length === 0} onChange={() => updateFilter("sources", [])}/>Mind</label>{SOURCE_OPTIONS.map((source) => <label className={styles.check} key={source.value}><input type="checkbox" checked={filters.sources.includes(source.value)} onChange={() => toggleFilter("sources", source.value)}/>{source.label}</label>)}</fieldset>
+          <fieldset><legend>Kategóriák</legend>{CATEGORIES.map((category) => <label className={styles.check} key={category}><input type="checkbox" checked={filters.categories.includes(category)} onChange={() => toggleFilter("categories", category)}/>{category}</label>)}</fieldset>
+          <button type="button" onClick={() => setMobileFiltersOpen(false)}>Szűrők bezárása</button>
+        </section>}
 
         <div className={styles.content}>
           <main className={styles.mainColumn}>
@@ -414,7 +456,7 @@ export default function TrendsDashboard() {
                   setExpanded((current) => current === identity ? null : identity);
                 }}>
                   <span className={styles.rank}>{index + 1}</span>
-                  <div className={styles.trendInfo}><div className={styles.trendHeading}><div className={styles.nameAndSources}><div className={styles.keywordRow}><h3>{trend.keyword}</h3>{trend.relatedTopics.length>0&&<span className={styles.relatedTopic} title={`Kapcsolódó téma: ${trend.relatedTopics.join(", ")}`}>kapcsolódik: {trend.relatedTopics.join(", ")}</span>}</div><div className={styles.sourceTags}>{(trend.sources.length ? trend.sources : filters.sources.length ? filters.sources : ["Forrás nem ismert"]).map((source) => <span key={source}>{source}</span>)}<button type="button" onClick={() => setExpanded(identity)}>Elemzés</button></div></div><div className={styles.rowMeta}><span className={styles.category} style={{ "--category-color": CATEGORY_COLOR[trend.category] ?? "#4da9ff" } as React.CSSProperties}><CategoryIcon category={trend.category} />{trend.category}</span>{trend.firstSeen && Date.parse(asOf ?? "") - Date.parse(trend.firstSeen) <= 7 * 86_400_000 && <span className={styles.newBadge}><TrendsIcon name="spark" /> Új</span>}{trend.status === "Most felkapott" ? <span className={styles.hotBadge}>Most felkapott</span> : <span className={styles.activeBadge}>{trend.status}</span>}{trend.lastSeen && <span className={styles.freshness}><TrendsIcon name="clock" />{relativeTime(trend.lastSeen)}</span>}</div></div><p><span className={styles.topicDescription}>{trend.keyword} említéseinek alakulása a kiválasztott magyar online hírforrásokban.</span><span className={styles.topicSummary}>{trend.frequency.toLocaleString("hu-HU")} kapcsolat · {filters.period === "custom" ? "egyedi időszak" : filters.period}</span></p></div>
+                  <div className={styles.trendInfo}><div className={styles.trendHeading}><div className={styles.nameAndSources}><div className={styles.keywordRow}><h3>{trend.keyword}</h3>{trend.relatedTopics.length>0&&<span className={styles.relatedTopic} title={`Kapcsolódó témák, külön mérve: ${trend.relatedTopics.join(", ")}`}>Kapcsolódik: {trend.relatedTopics.join(", ")}</span>}</div><div className={styles.sourceTags}>{(trend.sources.length ? trend.sources : filters.sources.length ? filters.sources : ["Forrás nem ismert"]).slice(0,3).map((source) => <span key={source}>{source}</span>)}{trend.sources.length > 3 && <span>+{trend.sources.length - 3}</span>}<button type="button" onClick={() => setExpanded(identity)}>Elemzés</button></div></div><div className={styles.rowMeta}><span className={styles.category} style={{ "--category-color": CATEGORY_COLOR[trend.category] ?? "#4da9ff" } as React.CSSProperties}><CategoryIcon category={trend.category} />{trend.category}</span>{trend.firstSeen && Date.parse(asOf ?? "") - Date.parse(trend.firstSeen) <= 7 * 86_400_000 && <span className={styles.newBadge} title="Az UTOM adatbázisában ekkor jelent meg először; nem a téma történeti keletkezését jelenti."><TrendsIcon name="spark" /> Első észlelés</span>}{trend.status === "Most felkapott" ? <span className={styles.hotBadge}>Most felkapott</span> : trend.status !== "Új aktivitás" && <span className={styles.activeBadge}>{trend.status}</span>}{trend.lastSeen && <span className={styles.freshness}><TrendsIcon name="clock" />{relativeTime(trend.lastSeen)}</span>}</div></div><p><span className={styles.topicDescription}>{trend.keyword} említéseinek alakulása a kiválasztott magyar online hírforrásokban.</span><span className={styles.topicSummary}>{trend.frequency.toLocaleString("hu-HU")} kapcsolat · {filters.period === "custom" ? "egyedi időszak" : filters.period}</span></p></div>
                   <button type="button" className={styles.sparkButton} onClick={() => setExpanded(isOpen ? null : identity)} aria-expanded={isOpen} aria-label={`${trend.keyword} grafikon részletei`}>{historical ? <SparklineMini history={historical.firstSeen === null ? [] : points} period={filters.period} tone={index % 2 ? "purple" : "blue"} /> : <span className={styles.sparkEmpty}>{historyErrors[identity] ? "Idősor nem elérhető" : "Idősor betöltése…"}</span>}</button>
                   <div className={styles.hitStat}><span>Cikk–kulcsszó kapcsolat</span><div className={styles.hitNumbers}><strong>{trend.frequency.toLocaleString("hu-HU")}</strong><b className={growth !== null && growth < 0 ? styles.negative : ""}>{growth === null ? trend.status : `${growth >= 0 ? "+" : ""}${growth}%`}</b></div></div>
                   <div className={styles.strength}><span>Relatív index (0–100)</span><div>{Array.from({ length: 10 }, (_, bar) => <i key={bar} className={bar < Math.ceil(strength / 10) ? styles.strengthOn : ""} />)}<b>{strength}</b></div></div>
@@ -429,8 +471,8 @@ export default function TrendsDashboard() {
           <aside className={styles.rightRail}>
             <section className={`${styles.sideCard} ${styles.growingCard}`}><header><TrendsIcon name="↗" /><div><h2>Top növekvő témák</h2><p>Az aktuális időszakban</p></div></header>{growing.length ? <ol>{growing.map((trend, index) => <li key={trendIdentity(trend.keyword,trend.category)}><i>{index + 1}</i><button type="button" onClick={() => updateFilter("keyword", trend.keyword)}>{trend.keyword}</button><b>↑ +{Math.round(finiteNumber(trend.growth) * 100)}%</b></li>)}</ol> : <><ol className={styles.sidePreview} data-state="preview">{Array.from({ length: 5 }, (_, index) => <li key={index}><i>{index + 1}</i><span /><b>—</b></li>)}</ol><p className={styles.compactFallback}>Az előző azonos hosszúságú időszak nélkül növekedési rangsor még nem számítható.</p></>}</section>
             <section className={`${styles.sideCard} ${styles.newTopicsCard}`}><header><TrendsIcon name="spark" /><div><h2>Új témák</h2><p>{newlySeen.length ? "Frissen észlelt kulcsszavak" : "A kiválasztott időszak témái"}</p></div></header>{topicSidebarRows.length ? <ul className={styles.newTopicsList}>{topicSidebarRows.map((trend) => <li key={trendIdentity(trend.keyword,trend.category)}><em>ÚJ</em><button type="button" onClick={() => updateFilter("keyword", trend.keyword)}>{trend.keyword}</button><time>{relativeTime(newlySeen.length ? trend.firstSeen : trend.lastSeen || trend.firstSeen)}</time></li>)}</ul> : <ul className={styles.sidePreview} data-state="preview">{Array.from({ length: 5 }, (_, index) => <li key={index}><em>ÚJ</em><span /><time>—</time></li>)}</ul>}{!topicSidebarRows.length && <p className={styles.compactFallback}>Még nincs megjeleníthető téma.</p>}</section>
-            <section className={styles.sideCard}><header><TrendsIcon name="category-other" /><div><h2>Források megoszlása</h2><p>{sourceTotal ? "A kiválasztott időszakban" : "Hiteles aggregált adatra vár"}</p></div></header><div className={styles.sourceEmpty}><div className={`${styles.emptyDonut} ${sourceTotal ? styles.dataDonut : ""}`}>{sourceTotal ? <SourceDonut rows={sourceBreakdown} total={sourceTotal} /> : null}<span>{sourceTotal ? sourceTotal.toLocaleString("hu-HU") : "—"}<small>{sourceTotal ? "kapcsolat" : "nincs adat"}</small></span></div><div className={styles.donutLegend} aria-label={sourceTotal ? "Források megoszlása" : "Nincs forrásmegoszlási adat"}>{sourceTotal ? sourceBreakdown.slice(0, 5).map((item, i) => <div key={item.source} title={`${item.source}: ${item.count.toLocaleString("hu-HU")} kapcsolat, ${Math.round(item.count/sourceTotal*100)}%`}><i style={{ background: SOURCE_PALETTE[i % SOURCE_PALETTE.length] }} /><span>{item.source}</span><b>{Math.round(item.count / sourceTotal * 100)}%</b></div>) : Array.from({ length: 4 }, (_, i) => <div key={i}><i /><span />—</div>)}</div></div></section>
-            <section className={styles.sideCard}><header><TrendsIcon name="↗" /><div><h2>Trend aktivitás</h2><p>A megjelenített témák aktivitása</p></div></header>{activity.some((item) => item > 0) ? <div className={styles.activityBars}>{activity.map((value, index) => <i key={activityPoints[index].label} title={`${pointLabel(activityPoints[index].label, filters.period==="24h")}: ${value.toLocaleString("hu-HU")} kapcsolat`} style={{ height: `${value / Math.max(1, ...activity) * 100}%` }} />)}</div> : <div className={`${styles.activityBars} ${styles.activityPreview}`} data-state="preview">{Array.from({ length: 24 }, (_, index) => <i key={index} />)}</div>}<p className={styles.compactFallback}>{activityRangeLabel(activityPoints, filters.period)}</p></section>
+            <section className={styles.sideCard}><header><TrendsIcon name="category-other" /><div><h2>Források megoszlása</h2><p>{sourceTotal ? "Cikk–kulcsszó kapcsolatok forrásonként" : "Hiteles aggregált adatra vár"}</p></div></header><div className={styles.sourceEmpty}><div className={`${styles.emptyDonut} ${sourceTotal ? styles.dataDonut : ""}`}>{sourceTotal ? <SourceDonut rows={sourceBreakdown} total={sourceTotal} /> : null}<span>{sourceTotal ? sourceTotal.toLocaleString("hu-HU") : "—"}<small>{sourceTotal ? "kapcsolat" : "nincs adat"}</small></span></div><div className={styles.donutLegend} aria-label={sourceTotal ? "Források megoszlása" : "Nincs forrásmegoszlási adat"}>{sourceTotal ? sourceBreakdown.map((item, i) => <div key={item.source} title={`${item.source}: ${item.count.toLocaleString("hu-HU")} kapcsolat, ${Math.round(item.count/sourceTotal*100)}%`}><i style={{ background: SOURCE_PALETTE[i % SOURCE_PALETTE.length] }} /><span>{item.source}</span><small>{item.count.toLocaleString("hu-HU")}</small><b>{Math.round(item.count / sourceTotal * 100)}%</b></div>) : Array.from({ length: 4 }, (_, i) => <div key={i}><i /><span />—</div>)}</div></div></section>
+            <section className={styles.sideCard}><header><TrendsIcon name="↗" /><div><h2>Trend aktivitás</h2><p>A megjelenített témák aktivitása</p></div></header>{activity.some((item) => item > 0) ? <div className={styles.activityBars}>{activity.map((value, index) => <i key={activityPoints[index].label} title={`${pointLabel(activityPoints[index].label, filters.period==="24h")}: ${value.toLocaleString("hu-HU")} kapcsolat`} style={{ height: `${value / Math.max(1, ...activity) * 100}%` }} />)}</div> : <div className={`${styles.activityBars} ${styles.activityPreview}`} data-state="preview">{Array.from({ length: 24 }, (_, index) => <i key={index} />)}</div>}<p className={styles.compactFallback}>{nonZeroActivityBuckets === 1 ? "Az adatgyűjtés jelenleg csak egy időbucketben tartalmaz aktivitást. 24 órás nézetben óránként vizsgálható." : activityRangeLabel(activityPoints, filters.period)}</p></section>
           </aside>
         </div>
       </section>

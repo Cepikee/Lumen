@@ -1,0 +1,156 @@
+{
+  "sticky": {
+    "scrollY": 900,
+    "scroller": {
+      "tag": "HTML",
+      "cls": "dark theme-dark",
+      "scrollTop": 900,
+      "clientHeight": 1000,
+      "scrollHeight": 3643
+    },
+    "primaryCategories": [
+      "Friss hírek",
+      "Kategóriák",
+      "Források",
+      "Összes hír20",
+      "Közélet64",
+      "Politika59",
+      "Gazdaság54",
+      "Tech49",
+      "Sport44",
+      "Kultúra39",
+      "Egészségügy34",
+      "Oktatás29"
+    ],
+    "left": {
+      "top": 66,
+      "bottom": 750,
+      "position": "sticky",
+      "styleTop": "66px",
+      "overflow": "auto",
+      "ancestors": [
+        {
+          "tag": "DIV",
+          "cls": "HomeFeedLayout-module__v9ZU8G__layout",
+          "overflow": "visible",
+          "transform": "none"
+        },
+        {
+          "tag": "MAIN",
+          "cls": "HomeFeedLayout-module__v9ZU8G__page",
+          "overflow": "visible",
+          "transform": "none"
+        },
+        {
+          "tag": "MAIN",
+          "cls": "flex-grow-1 p-0",
+          "overflow": "visible",
+          "transform": "none"
+        },
+        {
+          "tag": "BODY",
+          "cls": "d-flex flex-column min-vh-100",
+          "overflow": "visible",
+          "transform": "none"
+        },
+        {
+          "tag": "HTML",
+          "cls": "dark theme-dark",
+          "overflow": "visible",
+          "transform": "none"
+        }
+      ]
+    },
+    "right": {
+      "top": 66,
+      "bottom": 937,
+      "position": "sticky",
+      "styleTop": "66px",
+      "overflow": "auto",
+      "ancestors": [
+        {
+          "tag": "DIV",
+          "cls": "HomeFeedLayout-module__v9ZU8G__layout",
+          "overflow": "visible",
+          "transform": "none"
+        },
+        {
+          "tag": "MAIN",
+          "cls": "HomeFeedLayout-module__v9ZU8G__page",
+          "overflow": "visible",
+          "transform": "none"
+        },
+        {
+          "tag": "MAIN",
+          "cls": "flex-grow-1 p-0",
+          "overflow": "visible",
+          "transform": "none"
+        },
+        {
+          "tag": "BODY",
+          "cls": "d-flex flex-column min-vh-100",
+          "overflow": "visible",
+          "transform": "none"
+        },
+        {
+          "tag": "HTML",
+          "cls": "dark theme-dark",
+          "overflow": "visible",
+          "transform": "none"
+        }
+      ]
+    }
+  },
+  "trend": {
+    "sourceOptions": 7,
+    "sources": [
+      {
+        "name": "Telex",
+        "checked": true,
+        "url": "http://localhost:3013/trends?sources=telex.hu"
+      },
+      {
+        "name": "24.hu",
+        "checked": true,
+        "url": "http://localhost:3013/trends?sources=24.hu"
+      },
+      {
+        "name": "Index",
+        "checked": true,
+        "url": "http://localhost:3013/trends?sources=index.hu"
+      },
+      {
+        "name": "HVG",
+        "checked": true,
+        "url": "http://localhost:3013/trends?sources=hvg.hu"
+      },
+      {
+        "name": "Portfolio",
+        "checked": true,
+        "url": "http://localhost:3013/trends?sources=portfolio.hu"
+      },
+      {
+        "name": "444.hu",
+        "checked": true,
+        "url": "http://localhost:3013/trends?sources=444.hu"
+      },
+      {
+        "name": "Origo",
+        "checked": true,
+        "url": "http://localhost:3013/trends?sources=origo.hu"
+      }
+    ],
+    "sourceUrl": "http://localhost:3013/trends?sources=telex.hu",
+    "opened": "true",
+    "closed": "false",
+    "reopened": "true",
+    "secondOpened": "true",
+    "scrollY": 500,
+    "leftTop": 0,
+    "rightTop": 70
+  },
+  "persisted": {
+    "url": "http://localhost:3013/trends?sources=telex.hu",
+    "telexChecked": true
+  }
+}

@@ -1,0 +1,1839 @@
+[
+  {
+    "name": "home-desktop",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "scrollWidth": 1905,
+    "scrollHeight": 3673,
+    "bodyWidth": 1905,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "dark theme-dark",
+        "clientHeight": 1080,
+        "scrollHeight": 3673
+      }
+    ],
+    "charts": [],
+    "overflows": []
+  },
+  {
+    "name": "home-wide",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "scrollWidth": 1425,
+    "scrollHeight": 3643,
+    "bodyWidth": 1425,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "dark theme-dark",
+        "clientHeight": 1000,
+        "scrollHeight": 3643
+      }
+    ],
+    "charts": [],
+    "overflows": []
+  },
+  {
+    "name": "home-laptop",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/",
+    "viewport": [
+      1024,
+      900
+    ],
+    "scrollWidth": 1009,
+    "scrollHeight": 4547,
+    "bodyWidth": 1009,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "dark theme-dark",
+        "clientHeight": 900,
+        "scrollHeight": 4547
+      }
+    ],
+    "charts": [],
+    "overflows": []
+  },
+  {
+    "name": "home-mobile",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/",
+    "viewport": [
+      390,
+      844
+    ],
+    "scrollWidth": 390,
+    "scrollHeight": 4484,
+    "bodyWidth": 390,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "dark theme-dark",
+        "clientHeight": 844,
+        "scrollHeight": 4484
+      }
+    ],
+    "charts": [],
+    "overflows": []
+  },
+  {
+    "name": "home-mobile-narrow",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/",
+    "viewport": [
+      320,
+      780
+    ],
+    "scrollWidth": 320,
+    "scrollHeight": 4109,
+    "bodyWidth": 320,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "dark theme-dark",
+        "clientHeight": 780,
+        "scrollHeight": 4109
+      }
+    ],
+    "charts": [],
+    "overflows": []
+  },
+  {
+    "name": "insights-desktop",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/insights?period=24h",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "scrollWidth": 1905,
+    "scrollHeight": 2536,
+    "bodyWidth": 1905,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "dark theme-dark",
+        "clientHeight": 1080,
+        "scrollHeight": 2536
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 230
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 252
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 180
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 230
+      }
+    ],
+    "charts": [
+      {
+        "cls": "recharts-responsive-container",
+        "width": 481,
+        "height": 230,
+        "svg": 1,
+        "paths": 6
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 481,
+        "height": 230,
+        "svg": 1,
+        "paths": 6
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 481,
+        "height": 252,
+        "svg": 1,
+        "paths": 7
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 481,
+        "height": 252,
+        "svg": 1,
+        "paths": 7
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 180,
+        "height": 180,
+        "svg": 1,
+        "paths": 3
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 180,
+        "height": 180,
+        "svg": 1,
+        "paths": 3
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 481,
+        "height": 230,
+        "svg": 1,
+        "paths": 1
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 481,
+        "height": 230,
+        "svg": 1,
+        "paths": 1
+      }
+    ],
+    "overflows": []
+  },
+  {
+    "name": "insights-wide",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/insights?period=24h",
+    "viewport": [
+      1440,
+      1200
+    ],
+    "scrollWidth": 1425,
+    "scrollHeight": 2596,
+    "bodyWidth": 1425,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "dark theme-dark",
+        "clientHeight": 1200,
+        "scrollHeight": 2596
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 230
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 252
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 180
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 230
+      }
+    ],
+    "charts": [
+      {
+        "cls": "recharts-responsive-container",
+        "width": 409,
+        "height": 230,
+        "svg": 1,
+        "paths": 6
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 409,
+        "height": 230,
+        "svg": 1,
+        "paths": 6
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 409,
+        "height": 252,
+        "svg": 1,
+        "paths": 7
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 409,
+        "height": 252,
+        "svg": 1,
+        "paths": 7
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 180,
+        "height": 180,
+        "svg": 1,
+        "paths": 3
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 180,
+        "height": 180,
+        "svg": 1,
+        "paths": 3
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 409,
+        "height": 230,
+        "svg": 1,
+        "paths": 1
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 409,
+        "height": 230,
+        "svg": 1,
+        "paths": 1
+      }
+    ],
+    "overflows": []
+  },
+  {
+    "name": "insights-laptop",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/insights?period=24h",
+    "viewport": [
+      1280,
+      900
+    ],
+    "scrollWidth": 1265,
+    "scrollHeight": 2618,
+    "bodyWidth": 1265,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "dark theme-dark",
+        "clientHeight": 900,
+        "scrollHeight": 2618
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 230
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 252
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 180
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 230
+      }
+    ],
+    "charts": [
+      {
+        "cls": "recharts-responsive-container",
+        "width": 356,
+        "height": 230,
+        "svg": 1,
+        "paths": 6
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 356,
+        "height": 230,
+        "svg": 1,
+        "paths": 6
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 356,
+        "height": 252,
+        "svg": 1,
+        "paths": 7
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 356,
+        "height": 252,
+        "svg": 1,
+        "paths": 7
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 180,
+        "height": 180,
+        "svg": 1,
+        "paths": 3
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 180,
+        "height": 180,
+        "svg": 1,
+        "paths": 3
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 356,
+        "height": 230,
+        "svg": 1,
+        "paths": 1
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 356,
+        "height": 230,
+        "svg": 1,
+        "paths": 1
+      }
+    ],
+    "overflows": []
+  },
+  {
+    "name": "insights-tablet",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/insights?period=24h",
+    "viewport": [
+      768,
+      1100
+    ],
+    "scrollWidth": 753,
+    "scrollHeight": 3350,
+    "bodyWidth": 753,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "dark theme-dark",
+        "clientHeight": 1100,
+        "scrollHeight": 3350
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 230
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 252
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 180
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 230
+      }
+    ],
+    "charts": [
+      {
+        "cls": "recharts-responsive-container",
+        "width": 304,
+        "height": 230,
+        "svg": 1,
+        "paths": 6
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 304,
+        "height": 230,
+        "svg": 1,
+        "paths": 6
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 304,
+        "height": 252,
+        "svg": 1,
+        "paths": 7
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 304,
+        "height": 252,
+        "svg": 1,
+        "paths": 7
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 180,
+        "height": 180,
+        "svg": 1,
+        "paths": 3
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 180,
+        "height": 180,
+        "svg": 1,
+        "paths": 3
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 304,
+        "height": 230,
+        "svg": 1,
+        "paths": 1
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 304,
+        "height": 230,
+        "svg": 1,
+        "paths": 1
+      }
+    ],
+    "overflows": [
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 833,
+        "left": 533
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 772,
+        "left": 763
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 784,
+        "left": 775
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 796,
+        "left": 787
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 808,
+        "left": 799
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 820,
+        "left": 811
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 832,
+        "left": 823
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 833,
+        "left": 533
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 772,
+        "left": 763
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 784,
+        "left": 775
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 796,
+        "left": 787
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 808,
+        "left": 799
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 820,
+        "left": 811
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 832,
+        "left": 823
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 833,
+        "left": 533
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 772,
+        "left": 763
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 784,
+        "left": 775
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 796,
+        "left": 787
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 808,
+        "left": 799
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 820,
+        "left": 811
+      }
+    ]
+  },
+  {
+    "name": "insights-mobile",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/insights?period=24h",
+    "viewport": [
+      390,
+      844
+    ],
+    "scrollWidth": 390,
+    "scrollHeight": 4869,
+    "bodyWidth": 390,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "dark theme-dark",
+        "clientHeight": 844,
+        "scrollHeight": 4869
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 180
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 252
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 160
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 180
+      }
+    ],
+    "charts": [
+      {
+        "cls": "recharts-responsive-container",
+        "width": 328,
+        "height": 180,
+        "svg": 1,
+        "paths": 6
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 328,
+        "height": 180,
+        "svg": 1,
+        "paths": 6
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 328,
+        "height": 252,
+        "svg": 1,
+        "paths": 7
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 328,
+        "height": 252,
+        "svg": 1,
+        "paths": 7
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 180,
+        "height": 160,
+        "svg": 1,
+        "paths": 3
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 180,
+        "height": 160,
+        "svg": 1,
+        "paths": 3
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 328,
+        "height": 180,
+        "svg": 1,
+        "paths": 1
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 328,
+        "height": 180,
+        "svg": 1,
+        "paths": 1
+      }
+    ],
+    "overflows": [
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 461,
+        "left": 161
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 400,
+        "left": 391
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 413,
+        "left": 403
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 425,
+        "left": 416
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 437,
+        "left": 428
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 449,
+        "left": 440
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 461,
+        "left": 452
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 461,
+        "left": 161
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 400,
+        "left": 391
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 413,
+        "left": 403
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 425,
+        "left": 416
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 437,
+        "left": 428
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 449,
+        "left": 440
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 461,
+        "left": 452
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 461,
+        "left": 161
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 400,
+        "left": 391
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 413,
+        "left": 403
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 425,
+        "left": 416
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 437,
+        "left": 428
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 449,
+        "left": 440
+      }
+    ]
+  },
+  {
+    "name": "insights-mobile-narrow",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/insights?period=24h",
+    "viewport": [
+      320,
+      780
+    ],
+    "scrollWidth": 320,
+    "scrollHeight": 5149,
+    "bodyWidth": 320,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "dark theme-dark",
+        "clientHeight": 780,
+        "scrollHeight": 5149
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 180
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 252
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 160
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "clientHeight": 0,
+        "scrollHeight": 180
+      }
+    ],
+    "charts": [
+      {
+        "cls": "recharts-responsive-container",
+        "width": 258,
+        "height": 180,
+        "svg": 1,
+        "paths": 6
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 258,
+        "height": 180,
+        "svg": 1,
+        "paths": 6
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 258,
+        "height": 252,
+        "svg": 1,
+        "paths": 7
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 258,
+        "height": 252,
+        "svg": 1,
+        "paths": 7
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 180,
+        "height": 160,
+        "svg": 1,
+        "paths": 3
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 180,
+        "height": 160,
+        "svg": 1,
+        "paths": 3
+      },
+      {
+        "cls": "recharts-responsive-container",
+        "width": 258,
+        "height": 180,
+        "svg": 1,
+        "paths": 1
+      },
+      {
+        "cls": "recharts-wrapper",
+        "width": 258,
+        "height": 180,
+        "svg": 1,
+        "paths": 1
+      }
+    ],
+    "overflows": [
+      {
+        "tag": "DIV",
+        "cls": "InsightsDashboard-module__yZrZSa__pills",
+        "right": 376,
+        "left": 14
+      },
+      {
+        "tag": "BUTTON",
+        "cls": "",
+        "right": 375,
+        "left": 306
+      },
+      {
+        "tag": "BUTTON",
+        "cls": "InsightsDashboard-module__yZrZSa__filterToggle",
+        "right": 376,
+        "left": 14
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 461,
+        "left": 161
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 328,
+        "left": 319
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 340,
+        "left": 331
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 352,
+        "left": 343
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 364,
+        "left": 355
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 376,
+        "left": 367
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 388,
+        "left": 379
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 400,
+        "left": 391
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 413,
+        "left": 403
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 425,
+        "left": 416
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 437,
+        "left": 428
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 449,
+        "left": 440
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 461,
+        "left": 452
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 461,
+        "left": 161
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 328,
+        "left": 319
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 340,
+        "left": 331
+      },
+      {
+        "tag": "I",
+        "cls": "",
+        "right": 352,
+        "left": 343
+      }
+    ]
+  },
+  {
+    "name": "trends-desktop",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/trends",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "scrollWidth": 1905,
+    "scrollHeight": 1331,
+    "bodyWidth": 1905,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "theme-dark dark",
+        "clientHeight": 1080,
+        "scrollHeight": 1331
+      },
+      {
+        "tag": "ASIDE",
+        "cls": "TrendsDashboard-module__uLiQja__sidebar",
+        "clientHeight": 1080,
+        "scrollHeight": 1158
+      },
+      {
+        "tag": "SPAN",
+        "cls": "TrendsDashboard-module__uLiQja__brandCrop",
+        "clientHeight": 43,
+        "scrollHeight": 80
+      },
+      {
+        "tag": "SECTION",
+        "cls": "TrendsDashboard-module__uLiQja__hero",
+        "clientHeight": 112,
+        "scrollHeight": 227
+      },
+      {
+        "tag": "H1",
+        "cls": "",
+        "clientHeight": 36,
+        "scrollHeight": 42
+      },
+      {
+        "tag": "DIV",
+        "cls": "TrendsDashboard-module__uLiQja__globeScene",
+        "clientHeight": 112,
+        "scrollHeight": 227
+      },
+      {
+        "tag": "ASIDE",
+        "cls": "TrendsDashboard-module__uLiQja__rightRail",
+        "clientHeight": 996,
+        "scrollHeight": 1156
+      }
+    ],
+    "charts": [],
+    "overflows": []
+  },
+  {
+    "name": "trends-wide",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/trends",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "scrollWidth": 1425,
+    "scrollHeight": 1318,
+    "bodyWidth": 1425,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "theme-dark dark",
+        "clientHeight": 1000,
+        "scrollHeight": 1318
+      },
+      {
+        "tag": "ASIDE",
+        "cls": "TrendsDashboard-module__uLiQja__sidebar",
+        "clientHeight": 1000,
+        "scrollHeight": 1158
+      },
+      {
+        "tag": "SPAN",
+        "cls": "TrendsDashboard-module__uLiQja__brandCrop",
+        "clientHeight": 43,
+        "scrollHeight": 80
+      },
+      {
+        "tag": "SECTION",
+        "cls": "TrendsDashboard-module__uLiQja__hero",
+        "clientHeight": 112,
+        "scrollHeight": 227
+      },
+      {
+        "tag": "DIV",
+        "cls": "TrendsDashboard-module__uLiQja__globeScene",
+        "clientHeight": 112,
+        "scrollHeight": 227
+      },
+      {
+        "tag": "ASIDE",
+        "cls": "TrendsDashboard-module__uLiQja__rightRail",
+        "clientHeight": 916,
+        "scrollHeight": 1156
+      }
+    ],
+    "charts": [],
+    "overflows": []
+  },
+  {
+    "name": "trends-laptop",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/trends",
+    "viewport": [
+      1280,
+      900
+    ],
+    "scrollWidth": 1265,
+    "scrollHeight": 1318,
+    "bodyWidth": 1265,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "theme-dark dark",
+        "clientHeight": 900,
+        "scrollHeight": 1318
+      },
+      {
+        "tag": "ASIDE",
+        "cls": "TrendsDashboard-module__uLiQja__sidebar",
+        "clientHeight": 900,
+        "scrollHeight": 1158
+      },
+      {
+        "tag": "SPAN",
+        "cls": "TrendsDashboard-module__uLiQja__brandCrop",
+        "clientHeight": 43,
+        "scrollHeight": 80
+      },
+      {
+        "tag": "SECTION",
+        "cls": "TrendsDashboard-module__uLiQja__hero",
+        "clientHeight": 112,
+        "scrollHeight": 227
+      },
+      {
+        "tag": "DIV",
+        "cls": "TrendsDashboard-module__uLiQja__globeScene",
+        "clientHeight": 112,
+        "scrollHeight": 227
+      },
+      {
+        "tag": "ASIDE",
+        "cls": "TrendsDashboard-module__uLiQja__rightRail",
+        "clientHeight": 816,
+        "scrollHeight": 1156
+      }
+    ],
+    "charts": [],
+    "overflows": []
+  },
+  {
+    "name": "trends-compact",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/trends",
+    "viewport": [
+      1024,
+      900
+    ],
+    "scrollWidth": 1009,
+    "scrollHeight": 2144,
+    "bodyWidth": 1009,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "theme-dark dark",
+        "clientHeight": 900,
+        "scrollHeight": 2144
+      },
+      {
+        "tag": "ASIDE",
+        "cls": "TrendsDashboard-module__uLiQja__sidebar",
+        "clientHeight": 900,
+        "scrollHeight": 1158
+      },
+      {
+        "tag": "SPAN",
+        "cls": "TrendsDashboard-module__uLiQja__brandCrop",
+        "clientHeight": 43,
+        "scrollHeight": 80
+      },
+      {
+        "tag": "SECTION",
+        "cls": "TrendsDashboard-module__uLiQja__hero",
+        "clientHeight": 112,
+        "scrollHeight": 227
+      },
+      {
+        "tag": "H1",
+        "cls": "",
+        "clientHeight": 36,
+        "scrollHeight": 42
+      },
+      {
+        "tag": "DIV",
+        "cls": "TrendsDashboard-module__uLiQja__globeScene",
+        "clientHeight": 112,
+        "scrollHeight": 227
+      }
+    ],
+    "charts": [],
+    "overflows": [
+      {
+        "tag": "BUTTON",
+        "cls": "",
+        "right": 1165,
+        "left": 1024
+      },
+      {
+        "tag": "B",
+        "cls": "",
+        "right": 1155,
+        "left": 1142
+      }
+    ]
+  },
+  {
+    "name": "trends-tablet",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/trends",
+    "viewport": [
+      768,
+      1100
+    ],
+    "scrollWidth": 753,
+    "scrollHeight": 2292,
+    "bodyWidth": 753,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "theme-dark dark",
+        "clientHeight": 1100,
+        "scrollHeight": 2292
+      },
+      {
+        "tag": "SPAN",
+        "cls": "TrendsDashboard-module__uLiQja__brandCrop",
+        "clientHeight": 43,
+        "scrollHeight": 80
+      },
+      {
+        "tag": "SECTION",
+        "cls": "TrendsDashboard-module__uLiQja__hero",
+        "clientHeight": 112,
+        "scrollHeight": 193
+      },
+      {
+        "tag": "H1",
+        "cls": "",
+        "clientHeight": 36,
+        "scrollHeight": 42
+      },
+      {
+        "tag": "DIV",
+        "cls": "TrendsDashboard-module__uLiQja__globeScene",
+        "clientHeight": 112,
+        "scrollHeight": 227
+      }
+    ],
+    "charts": [],
+    "overflows": [
+      {
+        "tag": "A",
+        "cls": "",
+        "right": 845,
+        "left": 744
+      },
+      {
+        "tag": "svg",
+        "cls": "",
+        "right": 770,
+        "left": 753
+      },
+      {
+        "tag": "svg",
+        "cls": "",
+        "right": 857,
+        "left": 369
+      },
+      {
+        "tag": "ellipse",
+        "cls": "",
+        "right": 842,
+        "left": 385
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 803,
+        "left": 801
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 817,
+        "left": 816
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 830,
+        "left": 829
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 783,
+        "left": 782
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 844,
+        "left": 843
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 797,
+        "left": 796
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 811,
+        "left": 809
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 824,
+        "left": 823
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 777,
+        "left": 776
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 838,
+        "left": 837
+      },
+      {
+        "tag": "g",
+        "cls": "",
+        "right": 840,
+        "left": 387
+      },
+      {
+        "tag": "ellipse",
+        "cls": "",
+        "right": 840,
+        "left": 387
+      },
+      {
+        "tag": "ellipse",
+        "cls": "",
+        "right": 812,
+        "left": 414
+      },
+      {
+        "tag": "ellipse",
+        "cls": "",
+        "right": 791,
+        "left": 436
+      },
+      {
+        "tag": "ellipse",
+        "cls": "",
+        "right": 824,
+        "left": 403
+      },
+      {
+        "tag": "ellipse",
+        "cls": "",
+        "right": 806,
+        "left": 421
+      }
+    ]
+  },
+  {
+    "name": "trends-mobile",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/trends",
+    "viewport": [
+      390,
+      844
+    ],
+    "scrollWidth": 390,
+    "scrollHeight": 3611,
+    "bodyWidth": 390,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "theme-dark dark",
+        "clientHeight": 844,
+        "scrollHeight": 3611
+      },
+      {
+        "tag": "SPAN",
+        "cls": "TrendsDashboard-module__uLiQja__brandCrop",
+        "clientHeight": 43,
+        "scrollHeight": 80
+      },
+      {
+        "tag": "SECTION",
+        "cls": "TrendsDashboard-module__uLiQja__hero",
+        "clientHeight": 112,
+        "scrollHeight": 289
+      },
+      {
+        "tag": "H1",
+        "cls": "",
+        "clientHeight": 36,
+        "scrollHeight": 42
+      },
+      {
+        "tag": "DIV",
+        "cls": "TrendsDashboard-module__uLiQja__globeScene",
+        "clientHeight": 5,
+        "scrollHeight": 227
+      }
+    ],
+    "charts": [],
+    "overflows": [
+      {
+        "tag": "svg",
+        "cls": "",
+        "right": 421,
+        "left": -67
+      },
+      {
+        "tag": "ellipse",
+        "cls": "",
+        "right": 405,
+        "left": -51
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -66,
+        "left": -68
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -6,
+        "left": -6
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -53,
+        "left": -54
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -39,
+        "left": -40
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 394,
+        "left": 393
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -25,
+        "left": -26
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 408,
+        "left": 407
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -11,
+        "left": -13
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -58,
+        "left": -60
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -45,
+        "left": -46
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -31,
+        "left": -32
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 402,
+        "left": 401
+      },
+      {
+        "tag": "g",
+        "cls": "",
+        "right": 403,
+        "left": -49
+      },
+      {
+        "tag": "ellipse",
+        "cls": "",
+        "right": 403,
+        "left": -49
+      },
+      {
+        "tag": "ellipse",
+        "cls": "",
+        "right": 376,
+        "left": -22
+      },
+      {
+        "tag": "ellipse",
+        "cls": "",
+        "right": 388,
+        "left": -34
+      },
+      {
+        "tag": "ellipse",
+        "cls": "",
+        "right": 370,
+        "left": -16
+      },
+      {
+        "tag": "BUTTON",
+        "cls": "",
+        "right": 528,
+        "left": 368
+      }
+    ]
+  },
+  {
+    "name": "trends-mobile-narrow",
+    "title": "Utom.hu – AI‑alapú automatikus hírgyártó és híradó platform",
+    "url": "http://localhost:3013/trends",
+    "viewport": [
+      320,
+      780
+    ],
+    "scrollWidth": 320,
+    "scrollHeight": 3671,
+    "bodyWidth": 320,
+    "horizontalOverflow": false,
+    "scrollables": [
+      {
+        "tag": "HTML",
+        "cls": "theme-dark dark",
+        "clientHeight": 780,
+        "scrollHeight": 3671
+      },
+      {
+        "tag": "SPAN",
+        "cls": "TrendsDashboard-module__uLiQja__brandCrop",
+        "clientHeight": 43,
+        "scrollHeight": 80
+      },
+      {
+        "tag": "SECTION",
+        "cls": "TrendsDashboard-module__uLiQja__hero",
+        "clientHeight": 112,
+        "scrollHeight": 289
+      },
+      {
+        "tag": "H1",
+        "cls": "",
+        "clientHeight": 36,
+        "scrollHeight": 42
+      },
+      {
+        "tag": "DIV",
+        "cls": "TrendsDashboard-module__uLiQja__globeScene",
+        "clientHeight": 5,
+        "scrollHeight": 227
+      }
+    ],
+    "charts": [],
+    "overflows": [
+      {
+        "tag": "svg",
+        "cls": "",
+        "right": 421,
+        "left": -67
+      },
+      {
+        "tag": "ellipse",
+        "cls": "",
+        "right": 405,
+        "left": -51
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -66,
+        "left": -68
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 367,
+        "left": 365
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -6,
+        "left": -6
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -53,
+        "left": -54
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 380,
+        "left": 379
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 333,
+        "left": 332
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -39,
+        "left": -40
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 394,
+        "left": 393
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 347,
+        "left": 346
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -25,
+        "left": -26
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 408,
+        "left": 407
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 360,
+        "left": 360
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -11,
+        "left": -13
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -58,
+        "left": -60
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 375,
+        "left": 373
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 327,
+        "left": 326
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": -45,
+        "left": -46
+      },
+      {
+        "tag": "circle",
+        "cls": "",
+        "right": 388,
+        "left": 387
+      }
+    ]
+  }
+]

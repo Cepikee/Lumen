@@ -29,6 +29,7 @@ const paths: Record<string, string> = {
   chevron: 'm6 9 6 6 6-6',
   clock: 'M12 7v5l3 2M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0',
   spark: 'm9 2 2 6 6 2-6 2-2 6-2-6-6-2 6-2zM19 14l1 3 3 1-3 1-1 3-1-3-3-1 3-1z',
+  filter: 'M4 5h16M7 12h10M10 19h4',
 };
 
 export default function TrendsIcon({ name }: { name: string }) {

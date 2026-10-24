@@ -31,7 +31,7 @@ export default function FeedItemCard({item}:{item:FeedItem;viewMode:"card"|"comp
  const categoryKey=(category||"altalanos").toLocaleLowerCase("hu-HU").replace(/[^a-z0-9áéíóöőúüű]+/g,"-");
  return <article className={`${styles.card} ${styles.withImage}`} role="link" tabIndex={0} onClick={open} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();open();}}}>
   <div className={styles.thumbnail} data-category={categoryKey}>
-   {showImage?<img src={imageUrl!} width={1024} height={576} loading="lazy" decoding="async" alt="" onError={()=>setImageFailed(true)}/>:<span className={styles.fallbackMark} aria-hidden="true">U</span>}
+   {showImage?<img src={imageUrl!} width={1024} height={576} loading="lazy" decoding="async" alt="" onError={()=>setImageFailed(true)}/>:<span className={styles.fallbackMark} aria-label="Nincs elérhető illusztráció"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="11" y="13" width="42" height="38" rx="5"/><path d="M18 22h18M18 29h28M18 36h18M40 19h6v7h-6zM40 34h6M40 40h6M18 43h18"/></svg><small>Nincs illusztráció</small></span>}
    {showImage&&["generated","cluster_reuse"].includes(item.image_source_type||"")?<span className={styles.illustrationBadge}>AI illusztráció</span>:null}
   </div>
   <div className={styles.body}>

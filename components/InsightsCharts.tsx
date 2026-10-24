@@ -1,5 +1,6 @@
 "use client";
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, BarChart, Bar, Cell, PieChart, Pie, ReferenceLine } from "recharts";
+import { useMemo, useState } from "react";
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, BarChart, Bar, Cell, LabelList, PieChart, Pie, ReferenceLine } from "recharts";
 import { categorySeries, categorySentiments, clickbaitRows, sentimentCounts, sentimentSeries, timeLabel } from "@/lib/insights-dashboard";
 import styles from "./InsightsDashboard.module.css";
 
@@ -11,6 +12,11 @@ const tick = { fill: "#a8c1dc", fontSize: 10 };
 type Series = ReturnType<typeof categorySeries>;
 
 export function CategoryTrendChart({ chart, period, onCategory }: { chart: Series; period: string; onCategory?: (category:string)=>void }) {
+  const [hidden, setHidden] = useState<string[]>([]);
+  const visible = useMemo(() => chart.categories.filter((category) => !hidden.includes(category)), [chart.categories, hidden]);
+  const toggle = (category: string) => setHidden((current) => current.includes(category)
+    ? current.filter((item) => item !== category)
+    : visible.length > 1 ? [...current, category] : current);
   return <>
     <div className={styles.chart}><ResponsiveContainer width="100%" height="100%">
       <LineChart data={chart.points}>
@@ -18,26 +24,30 @@ export function CategoryTrendChart({ chart, period, onCategory }: { chart: Serie
         <XAxis dataKey="time" tickFormatter={v => timeLabel(Number(v), period)} tick={tick} minTickGap={32} />
         <YAxis width={28} allowDecimals={false} tick={tick} />
         <Tooltip cursor={false} contentStyle={tip} labelStyle={tipLabel} itemStyle={tipItem} labelFormatter={v => timeLabel(Number(v), period, true)} formatter={(value, name) => [String(value) + " hír", name]} />
-        {chart.categories.map((c, i) => <Line key={c} dataKey={`v${i}`} name={c} stroke={colors[i % colors.length]} strokeWidth={2} dot={chart.points.length === 1} isAnimationActive={false} />)}
+        {chart.categories.map((c, i) => hidden.includes(c) ? null : <Line key={c} dataKey={`v${i}`} name={c} stroke={colors[i % colors.length]} strokeWidth={2.4} dot={chart.points.length === 1} activeDot={{r:4}} isAnimationActive={false} />)}
       </LineChart>
     </ResponsiveContainer></div>
-    <div className={styles.legend}>{chart.categories.map((c,i)=><button type="button" key={c} onClick={()=>onCategory?.(c)}><i style={{background:colors[i % colors.length]}} />{c}</button>)}</div>
+    <div className={styles.legend}>{chart.categories.map((c,i)=><span key={c}><button type="button" aria-pressed={!hidden.includes(c)} title={`${c} adatsor ki- vagy bekapcsolása`} onClick={()=>toggle(c)}><i style={{background:colors[i % colors.length]}} />{c}</button>{onCategory&&<button type="button" className={styles.legendDrilldown} aria-label={`${c} részletes elemzése`} onClick={()=>onCategory(c)}>↗</button>}</span>)}</div>
     <p className={styles.caption}>Legfeljebb 6 legaktívabb kategória · Budapest</p>
   </>;
 }
 
-export function ClickbaitChart({ data, onSource }: { data: ReturnType<typeof clickbaitRows>; onSource?: (source:string)=>void }) {
+export function ClickbaitChart({ data, unavailable = [], onSource }: { data: ReturnType<typeof clickbaitRows>; unavailable?: string[]; onSource?: (source:string)=>void }) {
+  const visibleRows = data.slice(0,8);
+  const axisWidth = Math.min(132, Math.max(82, ...visibleRows.map((row) => row.name.length * 7 + 18)));
   return <>
-    <div className={styles.chart}><ResponsiveContainer width="100%" height="100%">
-      <BarChart data={data.slice(0,8)} layout="vertical" margin={{right:12}}>
+    <div className={styles.chart} style={{height:Math.max(220,visibleRows.length*36)}}><ResponsiveContainer width="100%" height="100%">
+      <BarChart data={visibleRows} layout="vertical" margin={{right:38,left:4,top:4,bottom:4}}>
         <XAxis type="number" domain={[0,100]} tick={tick} />
-        <YAxis dataKey="name" type="category" width={80} tick={tick} />
+        <YAxis dataKey="name" type="category" width={axisWidth} tick={tick} interval={0} />
         <Tooltip cursor={false} contentStyle={tip} labelStyle={tipLabel} itemStyle={tipItem} formatter={(value, name, item) => [`${Number(value).toFixed(1)} / 100 · ${item.payload.articles} cikk`, name]} />
         <Bar barSize={16} dataKey="score" name="Clickbait pontszám" radius={[0,4,4,0]} isAnimationActive={false}>
-          {data.slice(0,8).map(r=><Cell key={r.name} fill={r.score>=60?"#ff4d57":r.score>=45?"#ff7a32":"#348aff"} />)}
+          {visibleRows.map(r=><Cell key={r.name} fill={r.score>=60?"#ff4d57":r.score>=45?"#ff7a32":"#348aff"} />)}
+          <LabelList dataKey="score" position="right" formatter={(value: unknown)=>Number(value).toFixed(1)} fill="#dcefff" fontSize={10}/>
         </Bar>
       </BarChart>
     </ResponsiveContainer></div>
+    {unavailable.length>0&&<p className={styles.chartNotice}>Nincs elég minta: {unavailable.join(", ")}.</p>}
     <details><summary>Források és mintanagyság ({data.length})</summary><ul className={styles.scrollList}>{data.map(r=><li key={r.name}><button type="button" onClick={()=>onSource?.(r.name)}>{r.name}</button>: {r.score.toFixed(1)} / 100 · {r.articles} cikk</li>)}</ul></details>
   </>;
 }

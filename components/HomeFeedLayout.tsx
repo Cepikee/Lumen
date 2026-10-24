@@ -26,8 +26,8 @@ export type FeedFacets = {
   sources: Array<{ id: number; slug: string; name: string; count: number }>;
 };
 
-const primary = ["Közélet", "Politika", "Gazdaság", "Tech", "Sport"];
-const categoryColors = ["#168eff", "#8b5cf6", "#ff8a3d", "#20c8e8", "#28c58b"];
+const primary = ["Közélet", "Politika", "Gazdaság", "Tech", "Sport", "Kultúra", "Egészségügy", "Oktatás"];
+const categoryColors = ["#168eff", "#8b5cf6", "#ff8a3d", "#20c8e8", "#28c58b", "#f5c451", "#27d9a0", "#55a8ff"];
 const sourceKeys: Record<number, string> = { 1: "telex.hu", 2: "24.hu", 3: "index.hu", 4: "hvg.hu", 5: "portfolio.hu", 6: "444.hu", 7: "origo.hu" };
 const sourceKey = (id: number) => sourceKeys[id] || "Ismeretlen forrás";
 const sourceName = (item: FeedItem) => item.source_name?.trim() || item.source?.trim() || sourceKey(item.source_id);

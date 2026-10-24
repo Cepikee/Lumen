@@ -90,7 +90,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     return (
       <>
         <main
-          className="flex-grow-1 overflow-auto p-0"
+          className="flex-grow-1 p-0"
           tabIndex={-1}
           onMouseDown={preventMainFocus}
         >
@@ -124,7 +124,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       <Header />
 
       <main
-        className="flex-grow-1 overflow-auto p-0"
+        className="flex-grow-1 p-0"
         tabIndex={-1}
         onMouseDown={preventMainFocus}
         style={{ width: "100%" }}
